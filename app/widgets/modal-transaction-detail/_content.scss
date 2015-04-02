@@ -1,0 +1,73 @@
+
+.transaction__detail {
+  padding: 20px;
+  min-width: 280px;
+  max-width: 350px;
+
+  @include breakpoint(portrait) {
+    padding: 40px;
+    max-width: 520px;
+  }
+
+  font-size: 18px;
+  @extend .jigsaw-light;
+
+  ._amount {
+    text-align: center;
+    font-size: 32px;
+
+    @include breakpoint(portrait) {
+      font-size: 44px;
+    }
+
+    &.red {
+      color: $red;
+    }
+    &.green {
+      color: $green;
+    }
+  }
+
+  ._time {
+    text-align: center;
+    color: $grey;
+    @include breakpoint(portrait) {
+      font-size: 24px;
+    }
+  }
+}
+
+.detail__strings {
+  @include wrapdat;
+  padding-top: 20px;
+  ._title {
+    margin-top: 10px;
+  }
+  ._value {
+    @include textselect;
+
+    background-color: $grey--light;
+    box-shadow: inset 0 2px 2px 1px rgba(000,000,000,0.2);
+    padding: 10px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    display: block;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 1.8;
+    overflow: hidden;
+
+    ._address {
+      float: left;
+    }
+    ._number {
+      float: right;
+    }
+  }
+}
+
+.litecoin {
+  .transaction__detail {
+    color: darken($silver, 30%);
+  }
+}

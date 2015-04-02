@@ -1,0 +1,87 @@
+
+#tabs {
+  background-color: #298553;
+}
+
+.litecoin {
+  #tabs {
+    background-color: darken($silver, 20%);
+  }
+}
+
+#tabs .tabs {
+  display: flex;
+  justify-content: space-between;
+}
+
+#tabs .tabs .tab {
+  @include clickbtn;
+  display: block;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  width: 100%;
+
+  text-align: center;
+
+  color: white;
+
+  @include breakpoint(portrait) {
+    padding-bottom: 30px;
+    padding-top: 30px;
+  }
+
+  &:hover {
+    .tab__icon, .tab__text {
+      opacity: 0.4;
+    }
+  }
+
+  &.active {
+      border-bottom: 4px solid #1a5a37;
+    .tab__icon, .tab__text {
+      opacity: 1.0;
+    }
+  }
+}
+
+.litecoin {
+  #tabs .tabs .tab {
+    &.active {
+        border-bottom: 4px solid lighten($silver, 10%);
+    }
+  }
+}
+
+#tabs .tabs .tab__icon {
+  width: 28px;
+  height: 28px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 2px;
+  margin-bottom: 5px;
+  opacity: 0.3;
+
+  @include breakpoint(portrait) {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+.tab__text {
+  display: block;
+  @extend .jigsaw-light;
+  font-size: 14px;
+  opacity: 0.3;
+
+  @include breakpoint(portrait) {
+    font-size: 18px;
+  }
+}
+
+.hide--portrait {
+  display: inline-block;
+  padding-left: 10px;
+  @include breakpoint(portrait) {
+    display: none;
+  }
+}

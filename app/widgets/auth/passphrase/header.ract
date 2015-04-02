@@ -1,0 +1,5 @@
+{{#opening}}
+  <div class="loading__spinner">
+    {{>svg_refresh}}
+  </div>
+{{/opening}}

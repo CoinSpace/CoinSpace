@@ -1,0 +1,107 @@
+.support {
+  padding: 20px;
+  min-width: 280px;
+  max-width: 450px;
+
+  text-align: center;
+
+  @include breakpoint(portrait) {
+    width: 450px;
+    padding: 40px;
+    padding-bottom: 20px;
+  }
+
+  ._info {
+    position: relative;
+    @extend .jigsaw-medium;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    font-size: 18px;
+    text-align: center;
+    border-bottom: 1px solid $grey;
+
+    @include breakpoint(portrait) {
+      font-size: 24px;
+    }
+  }
+
+  ._icon {
+    @include clickbtn;
+    display: block;
+    position: absolute;
+    right: -6px;
+    top: -2px;
+    width: 28px;
+    height: 28px;
+    padding: 4px;
+
+    @include breakpoint(portrait) {
+      padding: 10px;
+      width: 50px;
+      height: 50px;
+      top: -8px;
+    }
+  }
+
+  .svg-close {
+    fill: $grey;
+  }
+
+
+  ._btn {
+    @extend .csbtn;
+    margin-top: 20px;
+    @include breakpoint(portrait) {
+      font-size: 24px;
+    }
+  }
+}
+
+.support__field {
+
+  margin-top: 20px;
+
+  ._label {
+    @include noselect;
+    text-align: left;
+    cursor: pointer;
+    display: block;
+
+    @include breakpoint(portrait) {
+      font-size: 18px;
+    }
+  }
+  ._input, ._textarea {
+    @extend .generic_box;
+    @extend .jigsaw-light;
+    margin-top: 5px;
+    padding-left: 10px;
+    border-radius: 2px;
+
+    height: auto;
+
+    @include breakpoint(portrait) {
+      font-size: 24px;
+      margin-top: 0;
+    }
+
+    &:active, &:focus {
+      outline: 0;
+      border: 1px solid #999;
+    }
+  }
+
+}
+
+.support__close {
+  @include clickbtn;
+  margin-top: 20px;
+  display: inline-block;
+  padding: 8px;
+  color: $grey;
+
+  @include breakpoint(portrait) {
+    font-size: 24px;
+  }
+
+}

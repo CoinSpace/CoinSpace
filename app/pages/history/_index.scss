@@ -1,0 +1,112 @@
+
+#history {
+
+  .green {
+    color: $green;
+  }
+
+  .red {
+    color: $red;
+  }
+}
+
+.transactions {
+ ._title {
+  padding-bottom: 5px;
+
+  @include breakpoint(portrait) {
+    font-size: 20px;
+  }
+ }
+}
+
+.transactions__item {
+  @include clear;
+  @include clickbtn;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid darken($grey--light, 10%);
+
+  @include breakpoint(portrait) {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  ._avatar {
+    @include icon(55px, 55px, block, '../img/avatar_1.png');
+    margin-top: 10px;
+    width: 55px;
+    float: left;
+    margin-right: 10px;
+
+    @include breakpoint(portrait) {
+      @include icon(80px, 80px, block, '../img/avatar_1.png');
+    }
+  }
+
+  ._address {
+    @include ellipsis();
+    @include media-obj;
+    @extend .jigsaw-light;
+    padding-top: 13px;
+    font-size: 21px;
+
+    @include breakpoint(portrait) {
+      padding-top: 18px;
+      font-size: 26px;
+    }
+  }
+
+  ._expandBtn {
+    @include clickbtn;
+    font-size: 16px;
+    opacity: 0.4;
+  }
+
+  ._detail {
+    float: right;
+    text-align: right;
+    margin-left: 10px;
+  }
+
+  ._amount {
+    @extend .jigsaw-light;
+    font-size: 24px;
+
+    @include breakpoint(portrait) {
+      font-size: 32px;
+    }
+  }
+
+  ._time {
+    display: block;
+    font-size: 14px;
+    margin-top: -5px;
+    color: $grey;
+    @include breakpoint(portrait) {
+      font-size: 16px;
+    }
+  }
+
+}
+
+.transactions__message {
+  padding: 40px;
+  color: $grey;
+  text-align: center;
+
+  ._icon {
+    @include icon(80px, 80px, block);
+    margin: 0 auto;
+    margin-bottom: 20px;
+    .svg-help {
+      fill: $grey;
+    }
+  }
+
+  ._message {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+}

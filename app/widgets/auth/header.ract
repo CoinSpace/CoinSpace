@@ -1,0 +1,3 @@
+<div class="_img">
+  {{>svg_logo_stack}}
+</div>

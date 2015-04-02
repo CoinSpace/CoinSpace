@@ -1,0 +1,48 @@
+
+{{#transaction}}
+<div class="modal _cancel">
+  <div class="modal__content transaction__detail _cancel">
+    <span class="modal__cancel" on-click="close">
+      {{>svg_close}}
+    </span>
+
+    <div class="_amount {{amount > 0 ? 'green' : 'red'}}">
+      {{amount > 0 ? '+' : ''}} {{satoshiToBtc(amount)}}
+    </div>
+
+    {{#confirmations}}
+      <div class='_time'>{{formatTimestamp(timestamp)}}</div>
+    {{/confirmations}}
+
+    {{^confirmations}}
+      <div class='_time'>{{translate("pending confirmation")}}</div>
+    {{/confirmations}}
+
+    <div class="detail__strings">
+
+      <h3 class="_title">{{translate("Transaction Id:")}}</h3>
+      <code class="_value">{{id}}</code>
+
+      <h3 class="_title">{{translate("Transaction Fee:")}}</h3>
+      <code class="_value">{{satoshiToBtc(fee)}}</code>
+
+      <h3 class="_title">{{translate("Inputs:")}}</h3>
+      <code class="_value">
+        {{#ins}}
+          <span class="_address">{{address}}</span>
+          <span class="_number">{{satoshiToBtc(amount)}}</span>
+        {{/ins}}
+      </code>
+
+      <h3 class="_title">{{translate("Outputs:")}}</h3>
+      <code class="_value">
+        {{#outs}}
+          <span class="_address">{{address}}</span>
+          <span class="_number">{{satoshiToBtc(amount)}}</span>
+        {{/outs}}
+      </code>
+    </div>
+
+  </div>
+</div>
+{{/transaction}}

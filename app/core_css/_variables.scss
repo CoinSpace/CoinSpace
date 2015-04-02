@@ -1,0 +1,51 @@
+
+
+
+// Global style variables
+// ------------------------------------------------------------------------------------
+
+
+// font family - update these when external fonts are setup
+
+$sans:   'Jigsaw', sans-serif;
+$serif:  serif;
+
+
+// font weights should be descriptive
+
+
+
+
+// font sizes generally used on the html element and some mixins
+
+$base_font_size: 16px;
+$base_line_height: 1.5;
+
+
+// Brand colours
+
+$grey--light: #FAFAFA;
+$grey: #CCCDC8;
+
+$blue: #58A1FF;
+$yellow: #FBC12C;
+$dark-blue: #102E42;
+
+$green: #9AD25C;
+$red: #FC8276;
+
+$purple: #2E2B44;
+$purple--light: #464368;
+$purple--highlight: #858DF0;
+
+$silver: #949da1;
+
+
+// Sometimes abstract terms are useful:
+
+$foreground:          $purple;
+$background:          #FDFDFD;
+
+$focus_color:         #4fa1fd;
+$alert_color:         #fd9833;
+

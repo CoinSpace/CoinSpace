@@ -1,0 +1,10 @@
+{
+  "name": "cs-loader",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "license": "GPL-2.0+",
+  "browserify": {
+    "transform": [ "envify" ]
+  }
+}

@@ -1,0 +1,42 @@
+// http://codepen.io/katydecorah/full/uIEFy
+
+$shadow: $foreground;
+
+#loader {
+  color: white;
+  text-align: center;
+  margin: 0 auto;
+}
+
+
+#logo_animation {
+  position: relative;
+  width: 171px;
+  height: 96px;
+  margin: 0 auto;
+}
+
+#loader-message {
+  padding-top: 40px;
+  max-width: 220px;
+  margin: 0 auto;
+  height: 90px;
+  color: white;
+  text-align: center;
+}
+
+#logo_icon {
+  width: 171px;
+  height: 96px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#logo_label {
+  width: 171px;
+  height: 96px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

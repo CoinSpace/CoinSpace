@@ -1,0 +1,13 @@
+<div class="modal _cancel">
+  <div class="modal__content tooltip">
+    <span class="modal__cancel" on-click="close">
+      {{>svg_close}}
+    </span>
+    <p class="tooltip__message">{{translate(message)}}</p>
+    {{#link}}
+    <p class="tooltip__link">
+      <a href="{{link.url}}" target="_blank">{{translate(link.text)}}</a>
+    </p>
+    {{/link}}
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div id="auth_content" class="auth">
+  <div id="landing_el" class="current">
+    <div class="auth__header">
+      {{>header}}
+    </div>
+
+    <div class="auth__btngroup">
+      {{>content}}
+      {{>actions}}
+    </div>
+
+    <div class="auth__footer">
+      {{>footer}}
+    </div>
+  </div>
+</div>
+

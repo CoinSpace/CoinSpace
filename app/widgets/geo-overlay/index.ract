@@ -1,0 +1,62 @@
+<div class="overlay--geo js__fadeEl">
+
+    <div class="geo__header">
+
+    {{^searching}}
+      <div class='_refresh' on-click="search-again">
+        <span id="refresh_el" class="_icon">
+          {{>svg_refresh}}
+        </span>
+      </div>
+    {{/searching}}
+
+    <h3 class="_title">{{translate("Mecto")}}</h3>
+
+    {{^searching}}
+      <div class="_cancel" on-click="close-geo">
+        {{>svg_close}}
+      </div>
+    {{/searching}}
+
+    </div>
+
+    {{#searching}}
+      <div id="searching_container" class="geo__searching" on-click="close-geo">
+        <span id="geo-pulse" class="_oval"></span>
+        <p class="_text">{{translate(search_message)}}</p>
+        <div id="geo-pin" class="geo__pindrop">
+          <span class="_pin">
+            {{>svg_mecto}}
+          </span>
+        </div>
+      </div>
+    {{/searching}}
+
+    {{^searching}}
+
+    {{#nearbys}}
+    <div class="geo__results">
+      <div class="_item" on-click="select"
+        data-wallet={{address}}
+        data-name={{name}}
+        data-email={{email}}>
+        <img class="_avatar" src="{{getAvatar(email, avatarIndex)}}" />
+        <h3 class="_name">{{name}}</h3>
+      </div>
+    </div>
+    {{/nearbys}}
+
+    {{^nearbys}}
+    <div class="geo__noresults {{#searchingAgain}}is_searching{{/searchingAgain}}">
+      <div class="_icon">{{>svg_mecto}}</div>
+      <p class="_message">{{translate("No Coin Space users found nearby")}}</p>
+      <div class="_btn" on-click="search-again">
+        {{#searchingAgain}}{{translate("Searching...")}}{{/searchingAgain}}
+        {{^searchingAgain}}{{translate("Search Again")}}{{/searchingAgain}}
+      </div>
+    </div>
+    {{/nearbys}}
+
+    {{/searching}}
+
+</div>

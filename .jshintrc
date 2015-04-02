@@ -1,0 +1,20 @@
+{
+  "asi": true,
+  "camelcase": false,
+  "freeze": true,
+  "immed": true,
+  "indent": 2,
+  "latedef": "nofunc",
+  "maxcomplexity": 10,
+  "maxlen": 120,
+  "noarg": true,
+  "noempty": true,
+  "nonbsp": true,
+  "node": true,
+  "nonew": true,
+  "undef": true,
+  "unused": true,
+  "strict": false,
+  "trailing": true,
+  "sub": true
+}

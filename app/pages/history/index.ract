@@ -1,0 +1,37 @@
+
+<div class="transactions">
+  {{#transactions.length}}
+    <h3 class="_title">{{translate("Your transaction history")}}</h3>
+  {{/transactions.length}}
+  {{#transactions:index}}
+    <div class="transactions__item" title="{{id}}" data-index="{{index}}" on-click="show-detail">
+
+      <div class="_detail">
+
+        <div class="_amount {{amount > 0 ? 'green' : 'red'}}">
+          {{amount > 0 ? '+' : ''}} {{satoshiToBtc(amount)}}
+        </div>
+
+        {{#confirmations}}
+          <span class='_time'>{{formatTimestamp(timestamp)}}</span>
+        {{/confirmations}}
+
+        {{^confirmations}}
+          <span class='_time'>{{translate("pending confirmation")}}</span>
+        {{/confirmations}}
+
+      </div>
+
+      <div class="_address">{{amount > 0 ? translate('Received') : outs[0].address}}</div>
+
+    </div>
+  {{/transactions}}
+  {{^transactions}}
+    <div class="transactions__message">
+      <div class="_icon">
+        {{>svg_help}}
+      </div>
+      <div class="_message">{{translate("You do not have any transactions yet")}}</div>
+    </div>
+  {{/transactions}}
+</div>

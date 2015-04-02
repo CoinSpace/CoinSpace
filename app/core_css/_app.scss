@@ -1,0 +1,17 @@
+
+// structural style for the app
+
+#app {
+  display: none;
+  height: 100%;
+  &.current {
+    display: block;
+  }
+}
+
+.preload {
+  opacity: 0;
+  height: 0;
+  width: 0;
+  line-height: 0;
+}

@@ -1,0 +1,61 @@
+
+
+.flash {
+  text-align: center;
+  width: 300px;
+
+  @include breakpoint(portrait) {
+    width: 400px;
+  }
+}
+
+.flash__header {
+  @include clickbtn;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.flash__icon {
+  width: 120px;
+  height: 120px;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+
+  @include breakpoint(portrait) {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.flash__title {
+  @extend .jigsaw-bold;
+  font-size: 24px;
+  padding-bottom: 10px;
+
+  @include breakpoint(portrait) {
+    font-size: 32px;
+  }
+
+  &.error {
+    color: $red;
+  }
+
+  &.info {
+    color: $yellow;
+  }
+}
+
+.flash__message {
+  color: #a8a7a9;
+  font-size: 18px;
+  max-width: 200px;
+  margin: 0 auto;
+
+  @include breakpoint(portrait) {
+    max-width: 280px;
+    font-size: 24px;
+    line-height: 1.4;
+  }
+}
+

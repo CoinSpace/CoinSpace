@@ -1,0 +1,9 @@
+{{^opening}}
+<div class="auth__btn--existing" on-click="open-wallet-with-passphrase">{{translate("Open wallet")}}</div>
+{{/opening}}
+
+{{#opening}}
+  <div class="auth__btn--loading">
+    <span class="_text">{{translate(progress)}}...</span>
+  </div>
+{{/opening}}

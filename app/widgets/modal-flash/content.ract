@@ -1,0 +1,23 @@
+
+<div class="modal _cancel">
+  <div class="modal__content flash">
+    <div class="flash__header" on-click="close">
+      <span class="modal__cancel">
+        {{>svg_close}}
+      </span>
+      <div class="flash__icon">
+        {{#error}}
+          {{>svg_cancel}}
+        {{/error}}
+        {{#warning}}
+          {{>svg_warning}}
+        {{/warning}}
+      </div>
+      <h2 class="flash__title {{type}}">{{translate(title)}}</h2>
+    </div>
+    <p class="flash__message">{{translate(message, interpolations)}}</p>
+    {{#href}}
+      <p class="flash__link"><a href="{{href}}" target="_blank">{{translate(linkText)}}</a></p>
+    {{/href}}
+  </div>
+</div>

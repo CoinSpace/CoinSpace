@@ -1,0 +1,52 @@
+
+
+
+// Breakpoint Mixin
+// ---------------------------------------------------------------------------------------
+
+
+$mquery: false !default;
+
+$iphone5: 29em;
+
+$portrait: 48em;    // based on ipad ~ 768px
+$portrait-height: 56em;
+$landscape: 64em;   // based on ipad ~ 1024px
+
+@mixin breakpoint($point) {
+
+  @if $point == portrait {
+
+    $width: $portrait;
+    $maxwidth: $landscape;
+    $height: $portrait-height;
+
+    @media (min-width: $width) and (min-height: $height) and (max-width: $maxwidth) {
+      $mquery: true;
+      @content;
+      $mquery: false;
+    }
+  }
+
+  @if $point == iphone5 {
+
+    $height: $iphone5;
+
+    @media (min-height: $height) {
+      $mquery: true;
+      @content;
+      $mquery: false;
+    }
+  }
+
+  @if $point == landscape {
+
+    $width: $landscape;
+
+    @media (min-width: $width) {
+      $mquery: true;
+      @content;
+      $mquery: false;
+    }
+  }
+}

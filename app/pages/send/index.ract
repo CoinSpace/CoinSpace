@@ -1,0 +1,87 @@
+
+  <div class="send__form">
+    <form>
+
+      <div class="send__address">
+        <label class="_label" for="to">{{translate("Wallet address")}}
+          <div class="input__container">
+            <input id="to" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{to}}" />
+            {{#toEntered}}
+              <div class="close__input" on-click="clearTo">
+                <span class="_icon">{{> svg_close}}</span>
+              </div>
+            {{/toEntered}}
+          </div>
+        </label>
+
+        {{#isPhonegap}}
+          <div class="_btn _btn-qr" on-click="open-qr">
+            <span class="_icon">
+              {{>svg_qr}}
+            </span>
+          </div>
+        {{/isPhonegap}}
+
+        <div class="_btn" on-click="open-geo">
+          <span class="_icon">
+            {{>svg_mecto}}
+          </span>
+        </div>
+      </div>
+
+      <div class="send__amount">
+
+        <label class="_label" for="bitcoin">{{translate("Amount")}}</label>
+
+          <div class="_input-group">
+            <input id="bitcoin" class="_input" type="number" min="0" value="{{value}}" on-keyup="bitcoin-to-fiat" on-enter="open-send" on-focus="focusAmountInput" on-blur="blurAmountInput">
+            <span class="_currency">{{denomination}}</span>
+          </div>
+
+          {{^exchangeRateUnavailable}}
+          <div class="_input-group">
+            <input id="fiat" class="_input" type="number" min="0" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin" on-focus="focusAmountInput" on-blur="blurAmountInput">
+            <span class="_currency dropdown">
+              <select value="{{selectedFiat}}">
+                {{#currencies}}
+                  <option value="{{.}}">{{.}}</option>
+                {{/currencies}}
+              </select>
+            </span>
+          </div>
+          {{/exchangeRateUnavailable}}
+
+          {{#exchangeRateUnavailable}}
+          <div class="_input-group">
+            <input id="fiat" class="_input _error" type="number" min="0" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin" on-focus="focusAmountInput" on-blur="blurAmountInput">
+            <span class="_currency--error dropdown">
+              <select value="{{selectedFiat}}">
+                {{#currencies}}
+                  <option value="{{.}}">{{.}}</option>
+                {{/currencies}}
+              </select>
+            </span>
+          </div>
+          <div class="_input-error__message">
+            <span>{{translate("Exchange rate unavailable for the selected currency")}}</span>
+          </div>
+          {{/exchangeRateUnavailable}}
+
+      </div>
+
+    </form>
+  </div>
+
+  <div class="send__buttons">
+    {{^validating}}
+      <div on-click="open-send" class="send__btn">{{translate("Confirm")}}</div>
+    {{/validating}}
+    {{#validating}}
+      <div class="send__btn--validating">
+        <span class="_icon">
+          {{>svg_refresh}}
+        </span>
+      </div>
+    {{/validating}}
+  </div>
+

@@ -1,0 +1,28 @@
+<div class="modal _cancel">
+  <div class="modal__content support">
+    <div class="_info">
+      {{translate("Having problems?")}}
+      <span class="_icon svg-close" on-click="close">
+        {{>svg_close}}
+      </span>
+    </div>
+
+    <div class="support__field">
+      <label class="_label" for="support_details">{{translate("Description")}}</label>
+      <textarea class="_textarea" id="support_details" rows="6" value="{{description}}">{{description}}</textarea>
+    </div>
+
+    <div class="support__field">
+      <label class="_label" for="support_name">{{translate("Your username")}}</label>
+      <input class="_input" id="support_name" type="text" value="{{name}}" />
+    </div>
+
+    <div class="support__field">
+      <label class="_label" for="support_email">{{translate("Your email address")}}</label>
+      <input class="_input" id="support_email" type="text" value="{{email}}"/>
+    </div>
+
+    <div class="_btn" on-click="submit-details">{{translate("Submit")}}</div>
+    <div class="support__close" on-click="close">{{translate("Nevermind")}}</div>
+  </div>
+</div>

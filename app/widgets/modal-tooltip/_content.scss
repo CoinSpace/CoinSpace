@@ -1,0 +1,62 @@
+
+.tooltip {
+  font-size: 18px;
+  min-width: 280px;
+  max-width: 350px;
+  @include breakpoint(portrait) {
+    max-width: 450px;
+  }
+}
+
+.tooltip__cancel {
+  @include clickbtn;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 45px;
+  height: 45px;
+  padding: 10px;
+  z-index: 1000;
+
+  .svg-close {
+    fill: $grey;
+  }
+}
+
+.tooltip__message {
+  @extend .jigsaw-regular;
+
+  @include breakpoint(portrait) {
+    font-size: 24px;
+  }
+}
+
+.tooltip__link {
+  padding-top: 20px;
+
+  @include breakpoint(portrait) {
+    font-size: 24px;
+  }
+
+  a {
+
+    color: $purple--highlight;
+    &:hover {
+      color: $purple--highlight;
+    }
+    &:active {
+      text-decoration: underline;
+    }
+  }
+}
+
+.litecoin {
+  .tooltip__link {
+    a {
+      color: $silver;
+      &:hover {
+        color: $silver;
+      }
+    }
+  }
+}

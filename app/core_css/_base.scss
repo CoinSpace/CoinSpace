@@ -1,0 +1,134 @@
+
+
+
+// Base style globally applied to elements on this project
+// ------------------------------------------------------------------------------------
+
+
+
+body,
+h1,h2,h3,h4,h5,h6,
+p,blockquote,pre,
+dl,dd,ol,ul,
+form,fieldset,legend,
+table,th,td,caption,
+figure,
+hr {
+  @extend .jigsaw-medium;
+  margin:0;
+  padding:0;
+}
+
+pre {
+  overflow: auto;
+}
+
+audio, video, summary {
+  &:focus {
+    @include box-shadow(none);
+    @include tabfocus();
+  }
+}
+
+article,aside,details,figcaption,figure,footer,
+header,hgroup,menu,nav,section{
+  display:block;
+}
+
+
+strong,b,mark {
+  @extend .jigsaw-medium;
+}
+
+em,i,cite,q,address,dfn,var {
+  font-style: italic;
+  font-weight: inherit;
+}
+
+abbr[title],dfn[title] {
+  cursor:help;
+  border-bottom-width: 1px;
+  border-bottom-style: dotted;
+}
+
+ins {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
+a,u,ins {
+  text-decoration:none;
+}
+
+del,s {
+  text-decoration:line-through;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+html {
+  @extend .jigsaw-regular;
+
+  width: 100%;
+  height: 100%;
+
+  font-size: $base_font_size;
+  line-height: $base_line_height;
+
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+
+  color: #333;
+  background-color: #fff;
+
+  overflow-y: scroll;
+
+  -webkit-overflow-scrolling: touch;
+
+  &.litecoin {
+    color: darken($silver, 20%);
+    background-color: $silver;
+  }
+  &.prevent_scroll {
+    overflow-y: hidden;
+  }
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}
+
+img {
+  border:none;
+  font-style:italic;
+  max-width: 100%;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-size: $base_font_size;
+}
+
+ul {
+  padding-left: 18px;
+}
+
+ol {
+  padding-left: 20px;
+}
+
+a {
+  color: lighten($foreground, 10%);
+
+  &:hover {
+    color: darken($foreground, 10%);
+  }
+}

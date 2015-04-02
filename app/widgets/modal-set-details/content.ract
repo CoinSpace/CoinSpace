@@ -1,0 +1,23 @@
+<div class="modal _cancel">
+  <div class="modal__content set-details">
+    <span class="modal__cancel" on-click="close">
+        {{>svg_close}}
+    </span>
+    <div class="_info">
+      {{translate("Before you start using Mecto, you need to enter a name that will help others identify you.")}}
+    </div>
+    <div class="set-details__field">
+      <label class="_label">
+        {{translate("Your username")}}
+        <input id="set-details-name" class="_input" type="text" maxlength="63" value="{{name}}" on-enter='submit-details' />
+      </label>
+    </div>
+
+    {{^submitting}}
+      <div class="_btn" on-click="submit-details">{{translate("Save")}}</div>
+    {{/submitting}}
+    {{#submitting}}
+      <div class="_btn--loading">{{translate("Save")}}...</div>
+    {{/submitting}}
+  </div>
+</div>

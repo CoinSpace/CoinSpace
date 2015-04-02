@@ -1,0 +1,45 @@
+
+.generic_box {
+  border: 1px solid $grey;
+  background-color: $grey--light;
+  border-radius: 3px;
+  padding: 10px 10px;
+}
+
+.hexagon {
+  width: 55px;
+  height: 32px;
+  background: $purple;
+  position: relative;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.hexagon:before {
+  content: "";
+  position: absolute;
+  top: -16px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 27px solid transparent;
+  border-right: 27px solid transparent;
+  border-bottom: 16px solid $purple;
+}
+.hexagon:after {
+  content: "";
+  position: absolute;
+  bottom: -16px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 27px solid transparent;
+  border-right: 27px solid transparent;
+  border-top: 16px solid $purple;
+}
+
+.oval {
+  width: 100px;
+  height: 50px;
+  background: darken($blue, 10%);
+  border-radius: 50px / 25px;
+}

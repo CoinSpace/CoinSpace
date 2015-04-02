@@ -1,0 +1,20 @@
+{
+  "name": "cs-wallet-js",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "GPL-2.0+",
+  "browserify": {
+    "transform": [ "envify" ]
+  },
+  "dependencies": {
+    "b39": "git://github.com/skyjam/B39.git",
+    "cs-wallet": "git://github.com/skyjam/cs-wallet.git",
+    "webworkify": "^1.0.0",
+    "querystring": "^0.2.0"
+  },
+  "devDependencies": {
+    "sinon": "^1.10.3"
+  }
+}

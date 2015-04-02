@@ -1,0 +1,36 @@
+<div class="auth__pin">
+  <div class="auth__input-group">
+    {{^opening}}
+      <label class="_label pin">
+        {{#userExists}}
+          {{translate("Enter your PIN")}}:
+        {{/userExists}}
+        {{^userExists}}
+          {{translate("Set a PIN for quick access")}}:
+        {{/userExists}}
+        <div class="pinfield {{#pinfocused}}is_focused{{/pinfocused}}">
+          {{#boxes}}
+            <div class="_box">
+              {{#visible(.)}}
+                {{#userExists}}
+                  <span class="_dot"></span>
+                {{/userExists}}
+                {{^userExists}}
+                  <span class="_text">{{.}}</span>
+                {{/userExists}}
+              {{/visible(.)}}
+            </div>
+          {{/boxes}}
+        </div>
+        <input id="setPin" class="_input" type="tel" maxlength="4" pattern="[0-9]*" value="{{pin}}" on-focus="focus-pin" on-blur="blur-pin"/>
+      </label>
+    {{/opening}}
+
+    {{#opening}}
+      <div class="auth__btn--loading">
+        <span class="_text">{{translate(progress)}}...</span>
+      </div>
+    {{/opening}}
+
+  </div>
+</div>

@@ -1,0 +1,27 @@
+
+
+@keyframes infinite-spinning {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes infinite-pulsing {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.animate__pulseFade {
+  animation:  infinite-pulsing 2s linear infinite;
+}

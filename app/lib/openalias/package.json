@@ -1,0 +1,15 @@
+{
+  "name": "cs-openalias",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "GPL-2.0+",
+  "browserify": {
+    "transform": [ "envify" ]
+  },
+  "dependencies": {
+    "retry": "^0.6.1",
+    "cloudflare": "0.0.8"
+  }
+}

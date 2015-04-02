@@ -1,0 +1,26 @@
+<div class="tabs">
+  <a id="send_tab" data-tab='send' class="tab" on-click="select">
+    <span class="tab__icon">
+      {{>svg_send}}
+    </span>
+    <span class="tab__text">{{translate("Send")}}</span>
+  </a>
+  <a data-tab='receive' class="tab" on-click="select">
+    <span class="tab__icon">
+      {{>svg_receive}}
+    </span>
+    <span class="tab__text">{{translate("Receive")}}</span>
+  </a>
+  <a data-tab='history' class="tab" on-click="select">
+    <span class="tab__icon">
+      {{>svg_history}}
+    </span>
+    <span class="tab__text">{{translate("History")}}</span>
+  </a>
+  <a data-tab='tokens' class="tab" on-click="select">
+    <span class="tab__icon">
+      {{>svg_token}}
+    </span>
+    <span class="tab__text">{{translate("Tokens")}}</span>
+  </a>
+</div>

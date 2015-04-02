@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: ${EXECUTABLE_NAME} ${SKETCH_TOOL_VERSION} (101) - http://www.bohemiancoding.com/sketch -->
+    <title>arrow</title>
+    <description>Created with ${EXECUTABLE_NAME}.</description>
+    <defs></defs>
+    <g id="interface" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="arrow" sketch:type="MSArtboardGroup" fill="#FFFFFF">
+            <path d="M25.9108805,12.0358805 L15.3692138,22.5775471 C15.1485337,22.7982272 14.9278569,22.7982272 14.7071768,22.5775471 L4.16551009,12.0358805 C3.94482997,11.8152003 3.94482997,11.5945235 4.16551009,11.3738434 L7.37384342,8.16551009 C7.59452354,7.94482997 7.81520034,7.94482997 8.03588046,8.16551009 L15.0381953,15.1932879 L22.0405101,8.16551009 C22.2611902,7.94482997 22.481867,7.94482997 22.7025471,8.16551009 L25.9108805,11.3738434 C25.9957574,11.4926712 26.0381953,11.6030096 26.0381953,11.7048619 C26.0381953,11.8067143 25.9957574,11.9170527 25.9108805,12.0358805 Z" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

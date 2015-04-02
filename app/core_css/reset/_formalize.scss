@@ -1,0 +1,403 @@
+
+
+
+// Form reset is a derivitive of Nathan Smith's Formalize http://formalize.me/
+// Sets up some sensible overides for basic form elements (so we can actually style them).
+// ---------------------------------------------------------------------------------------
+
+
+// from the reset
+
+input,
+select,option,optgroup,
+textarea{
+  font:inherit;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+// Give form elements some cursor interactions...
+
+input,
+textarea,
+button,
+select,
+option{
+  cursor:pointer;
+}
+
+.text-input:active,
+.text-input:focus,
+textarea:active,
+textarea:focus{
+  cursor:text;
+  outline:none;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+input[type="search"]::-webkit-search-decoration {
+  display: none;
+}
+
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+// Use divs around fieldsets or spans inside legends for styling.
+
+fieldset {
+  border: none;
+}
+
+
+// Suppress red glow that Firefox adds to form fields by default.
+
+input,
+button,
+select,
+textarea {
+
+  &:invalid {
+    @include box-shadow(none);
+  }
+
+  &:focus {
+    @include box-shadow(none);
+    z-index: 1; // for Opera
+  }
+}
+
+
+// Check, Radio & File Upload Buttons
+
+input[type="radio"],
+input[type="checkbox"] {
+  &:focus,
+  &:active {
+    @include box-shadow(none);
+  }
+}
+
+input[type="file"] {
+  width: 100%;
+  &:focus,
+  &:active {
+    @include box-shadow(none);
+    @include tabfocus();
+  }
+}
+
+
+// Generic Buttons
+
+input[type="image"] {
+  &:focus,
+  &:active {
+    @include box-shadow(none);
+    @include tabfocus();
+  }
+}
+
+input[type="color"] {
+  &:focus,
+  &:active {
+    @include box-shadow(none);
+    @include tabfocus();
+  }
+}
+
+button,
+input[type="reset"],
+input[type="submit"],
+input[type="button"] {
+  @include background-clip(padding-box);
+  @include background-image(none);
+  @include border-radius(none);
+
+  display: inline-block;
+  cursor: pointer;
+  -webkit-appearance: none;
+
+  outline: 0;
+  overflow: visible;
+  margin: 0;
+  padding: 0;
+  text-shadow: none;
+  text-decoration: none;
+  vertical-align: top;
+  width: auto;
+
+  border: none;
+  background: none;
+
+  font-family: "Helvetica Neue", Arial, "Liberation Sans", FreeSans, sans-serif;
+  font-weight: normal;
+  font-size: $base_font_size;
+  line-height: $base_line_height;
+
+  color: #333;
+
+  &:hover {
+    @include background-image(none);
+    text-decoration: none;
+  }
+
+  &:active, &:focus {
+    @include background-image(none);
+    @include box-shadow(none);
+    border-color: none;
+
+    // @include tabfocus();
+  }
+}
+
+
+// tables
+
+table {
+  border-collapse:collapse;
+  border-spacing:0;
+}
+
+
+// Text Areas
+
+textarea,
+select,
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"] {
+  @include background-clip(padding-box);
+  @include border-radius(0);
+
+  -webkit-appearance: none;
+  height: 2em;
+  width: 100%;
+  vertical-align: top;
+  outline: 0;
+  margin: 0;
+  padding: 2px 3px;
+
+  background-color: white;
+  border: 1px solid lighten(#333, 50%);
+  color: #333;
+
+  text-align: left;
+  font-size: $base_font_size;
+
+  font-family: Arial, "Liberation Sans", FreeSans, sans-serif;
+
+  &:active, &:focus {
+    border: 1px solid white;
+    @include tabfocus();
+  }
+}
+
+
+// Disabled elements
+
+button[disabled],
+input[disabled],
+select[disabled],
+select[disabled] option,
+select[disabled] optgroup,
+textarea[disabled] {
+  @include box-shadow(none);
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+  color: lighten($foreground, 50%);
+  cursor: default;
+}
+
+
+// Placeholders (separate cross-browser rules)
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: lighten(#333, 50%);;
+}
+
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+  color: lighten(#333, 50%);;
+}
+
+input.placeholder_text,
+textarea.placeholder_text {
+  color: lighten(#333, 50%);;
+}
+
+.litecoin {
+  input::-webkit-input-placeholder,
+  textarea::-webkit-input-placeholder {
+    color: lighten($silver, 50%);;
+  }
+
+  input:-moz-placeholder,
+  textarea:-moz-placeholder {
+    color: lighten($silver, 50%);;
+  }
+
+  input.placeholder_text,
+  textarea.placeholder_text {
+    color: lighten($silver, 50%);;
+  }
+}
+
+
+// Big Text Areas
+
+textarea,
+select[size],
+select[multiple] {
+  height: auto;
+}
+
+
+// Set height back to normal for Opera, WebKit, and IE.
+select[size="0"],
+select[size="1"] {
+  height: 2em;
+}
+
+
+// Tweaks for Safari + Chrome
+
+@media (-webkit-min-device-pixel-ratio: 0) {
+
+  select[size],
+  select[multiple],
+  select[multiple][size] {
+    background-image: none;
+    padding-right: 3px;
+  }
+
+  select,
+  select[size="0"],
+  select[size="1"] {
+    // consistent select arrow
+    background-image: url(data:image/png;base64,R0lGODlhDQAEAIAAAAAAAP8A/yH5BAEHAAEALAAAAAANAAQAAAILhA+hG5jMDpxvhgIAOw==);
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding-right: 20px;
+  }
+
+  ::-webkit-validation-bubble-message {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #666666), color-stop(1, black));
+    border: 0;
+    color: white;
+    font: 13px / 17px "Lucida Grande", Arial, "Liberation Sans", FreeSans, sans-serif;
+    overflow: hidden;
+    padding: 15px 15px 17px;
+    text-shadow: black 0 0 1px;
+    min-height: 16px;
+  }
+
+  ::-webkit-validation-bubble-arrow,
+  ::-webkit-validation-bubble-top-outer-arrow,
+  ::-webkit-validation-bubble-top-inner-arrow {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: #666666;
+    border-color: #666666;
+  }
+}
+
+textarea {
+  min-height: 40px;
+  overflow: auto;
+  resize: vertical;
+  width: 100%;
+}
+
+
+// Font family repeated, for Firefox.
+// Also kill phantom spacing and dotted border that appears.
+
+optgroup {
+  color: black;
+  font-style: normal;
+  font-weight: normal;
+
+  font-family: Arial, "Liberation Sans", FreeSans, sans-serif;
+
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+
+
+// Sensible Table Styles
+
+.table-wrap {
+  overflow-x: scroll;
+}
+
+table {
+overflow: scroll; /* Scrollbar are always visible */
+overflow: auto;   /* Scrollbar is displayed as it's needed */
+}
+
+caption {
+  border-bottom: 1px solid $grey--light;
+  text-align: left;
+}
+
+tbody, tfoot {
+  border-top: 1px solid darken($grey, 10%);
+}
+
+th {
+  @extend .jigsaw-bold;
+  text-align: left;
+
+  padding-right: 10px;
+
+  & + th {
+    padding-left: 10px;
+  }
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
+td {
+  padding-right: 10px;
+
+  & + td {
+    padding-left: 10px;
+  }
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
+

@@ -1,0 +1,34 @@
+<h2 class="_subtitle">{{translate("Your passphrase")}}</h2>
+<p class="_passphrase">{{passphrase}}</p>
+
+
+<p class="passphrase__warning">{{translate("Your passphrase will not be shown again.")}}<br />
+  {{translate("Without it you will lose access to your wallet.")}}</p>
+<div class="passphrase__accept">
+  <div id="check" class="_checkbox" on-click="toggle-check">
+    {{#checked}}
+      <div id="check" class="_check"></div>
+    {{/checked}}
+  </div>
+
+  <p class="_checktext">{{translate("I have written down or otherwise securely stored my passphrase")}}</p>
+</div>
+<div class="phone__group">
+  <div id="phoneCheck" class="_checkbox" on-click="toggle-phone-check">
+    {{#phoneChecked}}
+      <div id="phoneCheck" class="_check"></div>
+    {{/phoneChecked}}
+  </div>
+
+  <p class="_checktext">{{translate("Send this Passphrase to my phone")}}</p>
+</div>
+
+{{#phoneChecked}}
+<div class="phone__group auth__input-group">
+  <label class="_label">{{translate("Enter mobile number")}}:
+    <div class="input__container">
+      <input id="phoneField" class="_input" type="tel" placeholder="+" autocorrect="off" value="{{phone}}" autocapitalize="off"/>
+    </div>
+  </label>
+</div>
+{{/phoneChecked}}

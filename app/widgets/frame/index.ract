@@ -1,0 +1,17 @@
+<div class="frame">
+
+  <div id="sidebar" class="animate_in"></div>
+
+  <div id="main" class="animate_in">
+
+    <div id="header"></div>
+    <div id="tabs"></div>
+
+    <div id="send" class="content"></div>
+    <div id="receive" class="content"></div>
+    <div id="history" class="content"></div>
+    <div id="tokens" class="content"></div>
+
+  </div>
+
+</div>

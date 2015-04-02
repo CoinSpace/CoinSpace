@@ -1,0 +1,14 @@
+<div class="auth__passphrase">
+  <div class="auth__input-group">
+    <label class="_label">{{translate("Enter Passphrase")}}:
+      <div class="input__container">
+        <input id="passphraseField" class="_input" type="text" placeholder="12-word passphrase" autocorrect="on" autocapitalize="off" value="{{passphrase}}" on-enter="open-wallet-with-passphrase" />
+        {{#passphraseEntered}}
+          <div class="close__input" on-click="clearPassphrase">
+            <span class="_icon">{{> svg_close}}</span>
+          </div>
+        {{/passphraseEntered}}
+      </div>
+    </label>
+  </div>
+</div>

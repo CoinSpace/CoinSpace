@@ -1,0 +1,3 @@
+{{^isPhonegap}}
+<a class="_link" href="http://www.coinspace.ch">{{translate("Back to coin.space")}}</a>
+{{/isPhonegap}}

@@ -1,0 +1,295 @@
+
+.send__address {
+
+  display: flex;
+  margin-bottom: 20px;
+
+  .input__container {
+    position: relative;
+    margin-top: 5px;
+  }
+
+  .close__input {
+    ._icon{
+      .svg-close {
+        fill: #969594;
+      }
+    }
+  }
+
+  ._label {
+    @include noselect;
+    cursor: pointer;
+    display: block;
+    flex: 1;
+    margin-right: 10px;
+
+    @include breakpoint(portrait) {
+      font-size: 20px;
+    }
+  }
+
+  ._btn {
+    @extend .csbtn;
+    margin-top: 29px;
+    padding: 0;
+    width: 42px;
+    height: 42px;
+    position: relative;
+
+    @include breakpoint(portrait) {
+      margin-top: 35px;
+      width: 59px;
+      height: 59px;
+    }
+
+    ._icon {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -15px;
+      margin-left: -15px;
+
+      @include breakpoint(portrait) {
+        width: 44px;
+        height: 44px;
+        margin-top: -22px;
+        margin-left: -22px;
+      }
+    }
+  }
+
+  ._btn-qr {
+    margin-right: 10px;
+  }
+
+  ._input {
+    @extend .generic_box;
+    @extend .jigsaw-light;
+    padding-left: 10px;
+    padding-right: 38px;
+    border-radius: 2px;
+
+    height: auto;
+
+    &:active, &:focus {
+      outline: 0;
+      border: 1px solid #298553;
+    }
+
+    @include breakpoint(portrait) {
+      font-size: 26px;
+      border-radius: 3px;
+      padding-right: 58px;
+    }
+  }
+}
+
+.litecoin {
+  .send__address {
+    ._input {
+      &:active, &:focus {
+        border: 1px solid #999;
+      }
+    }
+  }
+}
+
+.send__amount {
+
+  position: relative;
+
+  ._label {
+    @include noselect;
+    cursor: pointer;
+    display: block;
+
+    @include breakpoint(portrait) {
+      font-size: 20px;
+      margin-top: 40px;
+    }
+  }
+
+  ._currency {
+    @include noselect;
+    @extend .jigsaw-light;
+    position: absolute;
+    z-index: 500;
+    cursor: pointer;
+    display: block;
+    text-align: right;
+    font-size: 18px;
+    right: 10px;
+    top: 11px;
+    opacity: 0.4;
+
+    @include breakpoint(portrait) {
+      top: 14px;
+    }
+
+    select {
+      @extend .jigsaw-light;
+      padding-right: 20px;
+      font-size: 18px;
+      border: none;
+      background-color: transparent;
+
+      &:focus {
+        outline: none;
+      }
+
+      @include breakpoint(portrait) {
+        font-size: 24px;
+      }
+    }
+
+    &.dropdown {
+      top: 5px;
+      right: 3px;
+      @include breakpoint(portrait) {
+        top: 7px;
+      }
+    }
+
+    @include breakpoint(portrait) {
+      font-size: 24px;
+    }
+  }
+
+  ._currency--error {
+    @include noselect;
+    @extend .jigsaw-light;
+    position: absolute;
+    z-index: 500;
+    cursor: pointer;
+    display: block;
+    text-align: right;
+    font-size: 18px;
+    right: 10px;
+    top: 9px;
+    opacity: 0.4;
+
+    select {
+      @extend .jigsaw-light;
+      padding-right: 20px;
+      font-size: 18px;
+      border: none;
+      background-color: transparent;
+
+      &:focus {
+        outline: none;
+      }
+
+    }
+
+    &.dropdown {
+      top: 4px;
+      right: 3px;
+    }
+  }
+
+
+  ._input {
+    @extend .generic_box;
+    @extend .jigsaw-light;
+    padding-left: 10px;
+    height: auto;
+    margin: 0;
+    border-radius: 0;
+    border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+    position: relative;
+    z-index: 200;
+
+    &:active, &:focus {
+      outline: 0;
+      border: 1px solid #298553;
+    }
+
+    @include breakpoint(portrait) {
+      font-size: 26px;
+      border-radius: 3px;
+    }
+  }
+
+  ._error {
+    background-color: lighten(red, 40%);
+    border: 1px solid red;
+  }
+
+}
+
+.litecoin {
+  .send__amount {
+    ._input {
+      &:active, &:focus {
+        border: 1px solid #999;
+      }
+    }
+  }
+}
+
+
+._input-group {
+  position: relative;
+  margin-top: 5px;
+
+  & + ._input-group {
+    margin-top: 0;
+    ._input {
+      margin-top: -1px;
+      border-radius: 2px;
+      border-top-right-radius: 0;
+      border-top-left-radius: 0;
+      z-index: 300;
+      &:focus {
+        z-index: 300;
+      }
+    }
+  }
+}
+
+.send__buttons {
+  margin-top: 20px;
+  @include breakpoint(portrait) {
+    margin-top: 40px;
+  }
+}
+
+.send__btn {
+  @extend .csbtn;
+
+  @include breakpoint(portrait) {
+    font-size: 26px;
+    border-radius: 3px;
+  }
+}
+
+.send__btn--validating {
+  @extend .csbtn;
+  position: relative;
+  margin-left: 5px;
+  color: darken($grey, 20%);
+  background-color: $grey;
+  transform: translate(0px, 3px);
+  box-shadow: 0 0px 0 0;
+  &:hover {
+    color: darken($grey, 20%);
+  }
+  ._icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -15px;
+    margin-left: -15px;
+    width: 30px;
+    height: 30px;
+    display: inline;
+    animation:  infinite-spinning 1s linear infinite;
+    .svg-refresh {
+      fill: darken($grey, 20%);
+    }
+  }
+}

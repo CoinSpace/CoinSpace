@@ -1,0 +1,13 @@
+{
+  "name": "cs-zendesk",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "license": "GPL-2.0+",
+  "dependencies": {
+    "xhr": "~1.7.0"
+  },
+  "browserify": {
+    "transform": ["envify"]
+  }
+}

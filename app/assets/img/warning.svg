@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="85px" height="85px"
+	 viewBox="0 0 85 85" enable-background="new 0 0 85 85" xml:space="preserve">
+<title>warning</title>
+<desc>Created with Sketch Beta.</desc>
+<g id="interface" sketch:type="MSPage">
+	<g id="warning" sketch:type="MSArtboardGroup">
+		<circle fill="#F8CF57" cx="42.439" cy="43.189" r="29.939"/>
+		<g id="exclamation" transform="translate(39.000000, 27.000000)" sketch:type="MSLayerGroup">
+			<path id="rectangle" sketch:type="MSShapeGroup" fill="#FFFFFF" d="M0.5,0h6C6.776,0,7,0.224,7,0.5v21C7,21.776,6.776,22,6.5,22
+				h-6C0.224,22,0,21.776,0,21.5v-21C0,0.224,0.224,0,0.5,0z"/>
+			<circle id="oval" sketch:type="MSShapeGroup" fill="#FFFFFF" cx="3.5" cy="29.5" r="3.5">
+			</circle>
+		</g>
+	</g>
+</g>
+</svg>

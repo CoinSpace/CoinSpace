@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="85px" height="85px"
+	 viewBox="0 0 85 85" enable-background="new 0 0 85 85" xml:space="preserve">
+<title>success</title>
+<desc>Created with Sketch Beta.</desc>
+<g id="interface" sketch:type="MSPage">
+	<g id="success" sketch:type="MSArtboardGroup">
+		<circle fill="#9AD25C" cx="42.5" cy="42.544" r="29.878"/>
+		<path id="tick" sketch:type="MSShapeGroup" fill="#FFFFFF" d="M58.188,35.615L40.232,53.569c-0.161,0.114-0.31,0.172-0.447,0.172
+			s-0.287-0.058-0.447-0.172L28.813,43.045c-0.298-0.299-0.298-0.597,0-0.895l4.334-4.334c0.298-0.298,0.596-0.298,0.894,0
+			l5.744,5.779l13.174-13.208c0.298-0.298,0.596-0.298,0.895,0l4.334,4.333C58.485,35.019,58.485,35.316,58.188,35.615
+			L58.188,35.615z"/>
+	</g>
+</g>
+</svg>

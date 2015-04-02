@@ -1,0 +1,23 @@
+
+<div class="sidebar__header">
+
+  <div class="sidebar__logo">
+    {{>svg_logo}}
+  </div>
+  <span class="sidebar__version">v0.1.5</span>
+
+</div>
+
+<div id="settings">
+  <div id="account-details"></div>
+</div>
+
+<div class="settings__footer">
+  <div class="sidebar__logout" on-click="logout">
+    <span class="_text">{{translate("Logout")}}</span>
+  </div>
+
+  <div class="sidebar__support" on-click="open-support">
+    <span class="_text">{{translate("Support")}}</span>
+  </div>
+</div>

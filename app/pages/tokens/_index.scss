@@ -1,0 +1,90 @@
+#tokens {
+
+  &.content {
+    padding: 0px;
+  }
+
+  ._title {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+
+    @include breakpoint(portrait) {
+      font-size: 20px;
+      padding-left: 40px;
+    }
+  }
+}
+.tokens {
+  display: block;
+}
+
+.token__item {
+  @include clear;
+  @include clickbtn;
+  padding: 15px;
+
+  @include breakpoint(portrait) {
+    padding: 30px;
+  }
+
+  ._icon {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    float: left;
+    border: 2px solid white;
+    margin-right: 20px;
+
+    @include breakpoint(portrait) {
+      width: 80px;
+      height: 80px;
+    }
+  }
+
+  ._name {
+    @include media-obj;
+    font-size: 18px;
+    padding-top: 13px;
+
+    @include breakpoint(portrait) {
+      font-size: 26px;
+      padding-top: 22px;
+    }
+  }
+
+  ._arrow {
+    opacity: 0.6;
+    float: right;
+    width: 25px;
+    height: 25px;
+    margin-top: 13px;
+    transform: rotate(270deg);
+
+    @include breakpoint(portrait) {
+      width: 40px;
+      height: 40px;
+      margin-top: 22px;
+    }
+  }
+
+  &.current {
+    display: none;
+  }
+}
+
+
+.token--bitcoin {
+  background-color: #1a5a37;
+  ._name {
+    color: white;
+  }
+}
+
+.token--litecoin {
+  background-color: #b1b1b1;
+  ._name {
+    color: white;
+  }
+}
