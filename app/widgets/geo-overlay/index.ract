@@ -23,7 +23,11 @@
     {{#searching}}
       <div id="searching_container" class="geo__searching" on-click="close-geo">
         <span id="geo-pulse" class="_oval"></span>
-        <p class="_text">{{translate(search_message)}}</p>
+        <div class="_text">
+          <p class="_max-width">
+            {{translate(search_message)}}
+          </p>
+        </div>
         <div id="geo-pin" class="geo__pindrop">
           <span class="_pin">
             {{>svg_mecto}}

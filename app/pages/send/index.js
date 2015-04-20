@@ -20,7 +20,7 @@ module.exports = function(el){
     data: {
       currencies: currencies,
       exchangeRates: {},
-      isPhonegap: window.buildType === 'phonegap'
+      qrScannerAvailable: window.buildType === 'phonegap' && window.buildPlatform !== 'windows'
     }
   })
 
@@ -35,12 +35,14 @@ module.exports = function(el){
   })
 
   ractive.on('open-qr', function(){
-    cordova.plugins.barcodeScanner.scan(function(result) {
+    if (ractive.get('qrScannerAvailable')) {
+      cordova.plugins.barcodeScanner.scan(function(result) {
         if (result.text) {
           var address = result.text.split(':').pop()
           emitter.emit('prefill-wallet', address)
         }
       });
+    }
   })
 
   ractive.on('open-geo', function(){

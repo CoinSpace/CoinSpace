@@ -5,6 +5,7 @@ var loader = require('./loader')
 var test = require('./test')
 var scripts = require('./scripts')
 var images = require('./images')
+var fonts = require('./fonts')
 var html = require('./html')
 var lrserver = require('tiny-lr')()
 
@@ -23,6 +24,7 @@ function watcher(callback) {
     test()
   })
   watch(['app/assets/img/*'], images)
+  watch(['app/assets/fonts/*'], fonts)
   watch('app/index.html', html)
   watch(['app/**/test/*.js', '!app/**/node_modules/**/*'], test)
   watch('build/**/*', function(event){

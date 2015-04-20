@@ -11,4 +11,5 @@
     <access origin="*" />
     <access origin="mailto:*" launch-external="yes"/>
     <preference name="android-minSdkVersion" value="19" />
+    <preference name="windows-target-version" value="8.1" />
 </widget>

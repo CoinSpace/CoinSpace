@@ -3,6 +3,7 @@ var async = require('async')
 var tasks = {
   serve: require('./serve'),
   images: require('./images'),
+  fonts: require('./fonts'),
   html: require('./html'),
   styles: require('./styles'),
   scripts: require('./scripts'),
@@ -17,7 +18,7 @@ var tasks = {
 }
 
 tasks.dev = function(){
-  async.parallel([ tasks.scripts, tasks.loader, tasks.html, tasks.styles, tasks.images ], function(){
+  async.parallel([ tasks.scripts, tasks.loader, tasks.html, tasks.styles, tasks.images, tasks.fonts ], function(){
     tasks.watch()
     tasks.serve()
     tasks.test()

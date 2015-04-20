@@ -17,6 +17,39 @@
 //   font-stretch: normal;
 // }
 
+@font-face {
+  font-family: "Jigsaw Light";
+  src: url("../fonts/WF-018717-007225-000029-1403764055.eot");
+  src: url("../fonts/WF-018717-007225-000029-1403764055.eot?#iefix") format("embedded-opentype"), url("../fonts/WF-018717-007225-000029-1403764055.woff") format("woff"), url("../fonts/WF-018717-007225-000029-1403764055.svg#typotheque_webfonts_service") format("svg");
+  font-style: normal;
+  font-weight: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: "Jigsaw Regular";
+  src: url("../fonts/WF-018717-007225-000031-1403764055.eot");
+  src: url("../fonts/WF-018717-007225-000031-1403764055.eot?#iefix") format("embedded-opentype"), url("../fonts/WF-018717-007225-000031-1403764055.woff") format("woff"), url("../fonts/WF-018717-007225-000031-1403764055.svg#typotheque_webfonts_service") format("svg");
+  font-style: normal;
+  font-weight: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: "Jigsaw Medium";
+  src: url("../fonts/WF-018717-007225-000033-1403764055.eot");
+  src: url("../fonts/WF-018717-007225-000033-1403764055.eot?#iefix") format("embedded-opentype"), url("../fonts/WF-018717-007225-000033-1403764055.woff") format("woff"), url("../fonts/WF-018717-007225-000033-1403764055.svg#typotheque_webfonts_service") format("svg");
+  font-style: normal;
+  font-weight: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: "Jigsaw Bold";
+  src: url("../fonts/WF-018717-007225-000035-1403764055.eot");
+  src: url("../fonts/WF-018717-007225-000035-1403764055.eot?#iefix") format("embedded-opentype"), url("../fonts/WF-018717-007225-000035-1403764055.woff") format("woff"), url("../fonts/WF-018717-007225-000035-1403764055.svg#typotheque_webfonts_service") format("svg");
+  font-style: normal;
+  font-weight: normal;
+  font-stretch: normal;
+}
+
 .jigsaw-light {
   font-family: "Jigsaw Light";
   font-style: normal;

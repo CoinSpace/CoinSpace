@@ -14,13 +14,13 @@
           </div>
         </label>
 
-        {{#isPhonegap}}
+        {{#qrScannerAvailable}}
           <div class="_btn _btn-qr" on-click="open-qr">
             <span class="_icon">
               {{>svg_qr}}
             </span>
           </div>
-        {{/isPhonegap}}
+        {{/qrScannerAvailable}}
 
         <div class="_btn" on-click="open-geo">
           <span class="_icon">

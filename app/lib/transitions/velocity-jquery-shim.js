@@ -154,7 +154,7 @@
         }
 
         return typeof obj === "object" || typeof obj === "function" ?
-            class2type[toString.call(obj)] || "object" :
+            class2type[Object.prototype.toString.call(obj)] || "object" :
             typeof obj;
     };
     $.isArray = Array.isArray || function (obj) {

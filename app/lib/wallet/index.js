@@ -1,7 +1,7 @@
 'use strict';
 
 var work = require('webworkify')
-var worker = work(require('./worker.js'))
+var worker = window.isIE ? require('./ie-worker.js') : work(require('./worker.js'))
 var auth = require('./auth')
 var db = require('./db')
 var emitter = require('cs-emitter')
@@ -27,8 +27,6 @@ function createWallet(passphrase, network, callback) {
    data.entropy = rng(128 / 8).toString('hex')
   }
 
-  worker.postMessage(data)
-
   worker.addEventListener('message', function(e) {
     assignSeedAndId(e.data.seed)
 
@@ -43,6 +41,8 @@ function createWallet(passphrase, network, callback) {
   worker.addEventListener('error', function(e) {
     return callback({message: e.message.replace("Uncaught Error: ", '')})
   })
+
+  worker.postMessage(data)
 }
 
 function setPin(pin, phone, network, callback) {

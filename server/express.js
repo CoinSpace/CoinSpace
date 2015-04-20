@@ -184,11 +184,6 @@ module.exports = function (){
     res.status(200).send()
   })
 
-  app.use(function(err, req, res, next){
-    console.error(err.stack);
-    res.status(500).send('Oops! something went wrong.');
-  })
-
   app.post('/purge', function(req, res){
     if (req.query.token === process.env.CLOUDFLARE_TOKEN) {
       cloudflare.createClient({
@@ -201,6 +196,11 @@ module.exports = function (){
     } else {
       return res.status(400).json({error: 'Bad request'})
     }
+  })
+
+  app.use(function(err, req, res, next){
+    console.error(err.stack);
+    res.status(500).send('Oops! something went wrong.');
   })
 
   function validateAuthParams(allowMissingPin) {

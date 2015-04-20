@@ -415,7 +415,7 @@
   text-align: center;
 
   ._link {
-    color: white;
+    color: #333;
     font-size: 14px;
     display: inline-block;
     padding: 5px;
@@ -436,7 +436,7 @@
 
 .auth__footer {
   padding-bottom: 40px;
-  color: white;
+  color: #333;
   text-align: center;
 
   ._link {
@@ -458,6 +458,7 @@
 
 .litecoin {
   .auth__footer {
+    color: white;
     ._link {
       color: white;
     }

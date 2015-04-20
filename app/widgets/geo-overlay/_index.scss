@@ -74,12 +74,13 @@
     color: white;
     position: absolute;
     top: 55%;
-    max-width: 160px;
-    margin: 0 auto;
     left: 0;
     right: 0;
-
     z-index: 300;
+    ._max-width {
+      margin: 0 auto;
+      max-width: 160px;
+    }
   }
   ._oval {
     @extend .oval;
