@@ -58,7 +58,7 @@ gulp.task('copy-android-images', ['platform-add-android'], function() {
 gulp.task('platform-add-android', ['copy-config', 'copy-build'], shell.task([
   'cordova platform add android',
   'cordova plugin add org.apache.cordova.geolocation',
-  'cordova plugin add com.phonegap.plugins.barcodescanner'
+  'cordova plugin add https://github.com/skyjam/CS-barcodescanner.git'
 ], {cwd: paths.build}));
 
 /* Windows tasks */
