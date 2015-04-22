@@ -38,7 +38,7 @@ function collectTasks() {
   delete process.env.LANGUAGE
 
   var others = cp.fork('./tasks')
-  tasks.push([others, ['html', 'styles', 'images', 'loaderIndex']])
+  tasks.push([others, ['html', 'styles', 'images', 'fonts', 'loaderIndex']])
 
   return tasks;
 }
