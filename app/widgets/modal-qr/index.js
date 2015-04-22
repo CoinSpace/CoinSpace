@@ -27,9 +27,9 @@ module.exports = function showTooltip(data){
 
   function mailto(){
     if(data.isBitcoin && data.alias) {
-      return 'mailto:?body='+data.address+'%0A%0AAlias%20address%20-%20'+data.alias+'%0A%0ASent%20from%20Coin%20Space%20Wallet%0Awww.coin.space'
+      return 'mailto:?body='+data.address+'%0A%0AAlias%20address%20-%20'+data.alias+'%0A%0ASent%20from%20Coin%20Space%20Wallet%0Ahttps%3A%2F%2Fcoin.space'
     } else {
-      return 'mailto:?body='+data.address+'%0A%0ASent%20from%20Coin%20Space%20Wallet%0Awww.coin.space'
+      return 'mailto:?body='+data.address+'%0A%0ASent%20from%20Coin%20Space%20Wallet%0Ahttps%3A%2F%2Fcoin.space'
     }
   }
 
