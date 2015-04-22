@@ -30,7 +30,7 @@ module.exports = function (){
         'btc.blockr.io', 'tbtc.blockr.io', 'ltc.blockr.io', // blockchain APIs
         process.env.DB_HOST, proxyHost
       ],
-      'font-src': ['s3.amazonaws.com'],
+      'font-src': ['coin.space'],
       'img-src': ["'self'", 'data:', 'www.gravatar.com'],
       'style-src': ["'self'", 's3.amazonaws.com'],
       'script-src': ["'self'", 'blob:', "'unsafe-eval'"], // http://lists.w3.org/Archives/Public/public-webappsec/2014Apr/0021.html, https://github.com/ractivejs/ractive/issues/285
