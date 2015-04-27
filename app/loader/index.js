@@ -9,21 +9,14 @@ require('browsernizr/test/blob')
 require('browsernizr/test/crypto/getrandomvalues')
 
 var token = require('cs-network')()
-var animateLogo = require('cs-transitions/loader.js').in
 var fadeOut = require('cs-transitions/loader.js').out
 var Modernizr = require('browsernizr')
 var languages = require('cs-i18n').languages
 
 document.getElementsByTagName('html')[0].classList.add(token)
 
-var elems =  {
-  label: document.getElementById('logo_label')
-}
-
 var containerEl = document.getElementById('loader')
 var goodToGo;
-
-animateLogo(elems)
 
 Modernizr.on('indexeddb', function(hasIndexedDB){
   var supportsPouchDB = hasIndexedDB || Modernizr.websqldatabase
@@ -40,7 +33,7 @@ Modernizr.on('indexeddb', function(hasIndexedDB){
       if(goodToGo) {
         setTimeout(function(){
           fadeOut(containerEl)
-        }, 1000)
+        }, 4500)
       }
     }
   })

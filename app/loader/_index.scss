@@ -5,14 +5,13 @@ $shadow: $foreground;
 #loader {
   color: white;
   text-align: center;
-  margin: 0 auto;
+  width: 100%;
 }
 
 
 #logo_animation {
   position: relative;
-  width: 171px;
-  height: 96px;
+  height: 180px;
   margin: 0 auto;
 }
 
@@ -23,20 +22,4 @@ $shadow: $foreground;
   height: 90px;
   color: #333;
   text-align: center;
-}
-
-#logo_icon {
-  width: 171px;
-  height: 96px;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-#logo_label {
-  width: 171px;
-  height: 96px;
-  position: absolute;
-  top: 0;
-  left: 0;
 }
