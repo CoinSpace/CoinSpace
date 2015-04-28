@@ -7,16 +7,25 @@ require('browsernizr/test/indexedDB')
 require('browsernizr/test/workers/webworkers')
 require('browsernizr/test/blob')
 require('browsernizr/test/crypto/getrandomvalues')
+require('browsernizr/test/svg/smil')
 
 var token = require('cs-network')()
+var animateLogo = require('cs-transitions/loader.js').animateLogo
 var fadeOut = require('cs-transitions/loader.js').out
 var Modernizr = require('browsernizr')
 var languages = require('cs-i18n').languages
 
 document.getElementsByTagName('html')[0].classList.add(token)
 
+var elems =  {
+  body: document.getElementById('logo_svg_body'),
+  border: document.getElementById('logo_svg_border'),
+}
+
 var containerEl = document.getElementById('loader')
 var goodToGo;
+
+animateLogo(elems, document.getElementsByTagName('html')[0].classList.contains('no-smil'))
 
 Modernizr.on('indexeddb', function(hasIndexedDB){
   var supportsPouchDB = hasIndexedDB || Modernizr.websqldatabase

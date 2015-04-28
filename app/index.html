@@ -28,20 +28,22 @@
             <filter id="filterLight" x="0" y="0">
               <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
             </filter>
-            <animateTransform xlink:href="#logo_svg_body" attributeType="XML"
-              attributeName="transform" type="scale" fill="freeze" additive="sum"
-              from="0" to="1" values="0; 1; 1.1; 1" keyTimes="0; 0.6; 0.9; 1" begin="200ms" dur="480ms"/>
-            <animateTransform xlink:href="#logo_svg_body" attributeType="XML"
-              attributeName="transform" type="translate" fill="freeze" additive="sum"
-              from="-80 -55" to="-80 -55" begin="200ms" dur="480ms"/>
-            <set xlink:href="#logo_svg_body" attributeType="CSS" attributeName="opacity" to="1" begin="200ms"/>
-            <animateTransform xlink:href="#logo_svg_border" attributeType="XML"
-              attributeName="transform" type="scale" fill="freeze" additive="sum"
-              from="0" to="1" values="0; 1; 1.1; 1" keyTimes="0; 0.6; 0.9; 1" begin="0ms" dur="520ms"/>
-            <animateTransform xlink:href="#logo_svg_border" attributeType="XML"
-              attributeName="transform" type="translate" fill="freeze" additive="sum"
-              from="-80 -55" to="-80 -55" begin="0ms" dur="520ms"/>
-            <set xlink:href="#logo_svg_border" attributeType="CSS" attributeName="opacity" to="1" begin="0ms"/>
+            <g id="logo_svg_icon">
+              <animateTransform xlink:href="#logo_svg_body" attributeType="XML"
+                attributeName="transform" type="scale" fill="freeze" additive="sum"
+                from="0" to="1" values="0; 1; 1.1; 1" keyTimes="0; 0.6; 0.9; 1" begin="200ms" dur="480ms"/>
+              <animateTransform xlink:href="#logo_svg_body" attributeType="XML"
+                attributeName="transform" type="translate" fill="freeze" additive="sum"
+                from="-80 -55" to="-80 -55" begin="200ms" dur="480ms"/>
+              <set xlink:href="#logo_svg_body" attributeType="CSS" attributeName="opacity" to="1" begin="200ms"/>
+              <animateTransform xlink:href="#logo_svg_border" attributeType="XML"
+                attributeName="transform" type="scale" fill="freeze" additive="sum"
+                from="0" to="1" values="0; 1; 1.1; 1" keyTimes="0; 0.6; 0.9; 1" begin="0ms" dur="520ms"/>
+              <animateTransform xlink:href="#logo_svg_border" attributeType="XML"
+                attributeName="transform" type="translate" fill="freeze" additive="sum"
+                from="-80 -55" to="-80 -55" begin="0ms" dur="520ms"/>
+              <set xlink:href="#logo_svg_border" attributeType="CSS" attributeName="opacity" to="1" begin="0ms"/>
+            </g>
             <animateTransform xlink:href="#logo_svg_coin" attributeType="XML"
               attributeName="transform" type="translate" fill="freeze"
               from="-200 0" to="0 0" values="-200 0; 35 0; -8 0; 0 0;" keyTimes="0; 0.6; 0.8; 1" begin="840ms" dur="960ms"/>

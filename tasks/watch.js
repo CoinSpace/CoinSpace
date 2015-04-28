@@ -1,7 +1,7 @@
 var watch = require('glob-watcher')
 var request = require('request')
 var styles = require('./styles')
-var loader = require('./loader')
+var loader = require('./loader').loader
 var test = require('./test')
 var scripts = require('./scripts')
 var images = require('./images')
@@ -15,11 +15,8 @@ function watcher(callback) {
   lrserver.listen(livereloadport)
 
   watch(['app/**/*.scss'], styles)
-  watch(['app/**/*.js', 'app/**/*.json', 'app/**/*.ract', '!app/**/node_modules/**/*', '!app/loader/**'], function(event){
+  watch(['app/**/*.js', 'app/**/*.json', 'app/**/*.ract', '!app/**/node_modules/**/*'], function(event){
     scripts()
-    test()
-  })
-  watch(['app/loader/**/*.js'], function(){
     loader()
     test()
   })
