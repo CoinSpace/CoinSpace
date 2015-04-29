@@ -20,13 +20,15 @@ document.getElementsByTagName('html')[0].classList.add(token)
 var elems =  {
   body: document.getElementById('logo_svg_body'),
   border: document.getElementById('logo_svg_border'),
+  coin: document.getElementById('logo_svg_coin'),
+  space: document.getElementById('logo_svg_space'),
+  dot: document.getElementById('logo_svg_dot')
 }
 
 var containerEl = document.getElementById('loader')
 var goodToGo;
 
-animateLogo(elems, document.getElementsByTagName('html')[0].classList.contains('no-smil'))
-
+var delay = animateLogo(elems, document.getElementsByTagName('html')[0].classList.contains('no-smil'))
 Modernizr.on('indexeddb', function(hasIndexedDB){
   var supportsPouchDB = hasIndexedDB || Modernizr.websqldatabase
   var language = findTranslation()
@@ -42,7 +44,7 @@ Modernizr.on('indexeddb', function(hasIndexedDB){
       if(goodToGo) {
         setTimeout(function(){
           fadeOut(containerEl)
-        }, 4500)
+        }, delay)
       }
     }
   })
