@@ -203,6 +203,10 @@ module.exports = function (){
     res.status(500).send('Oops! something went wrong.');
   })
 
+  app.use(function(req, res, next) {
+    res.status(404).send('Oops! page not found.');
+  })
+
   function validateAuthParams(allowMissingPin) {
     return function (req, res, next) {
       if (!req.body.wallet_id || !validatePin(req.body.pin, allowMissingPin)) {
