@@ -4,6 +4,7 @@ var Velocity = require('./index.js')
 var fadeOut = require('./fade.js').fadeOut
 
 function animateLogo(elems, noSmil) {
+  if (window.buildType === 'phonegap') return 0;
   if (!noSmil) return 4500;
   // remove transform attribute
   for (var prop in elems) {

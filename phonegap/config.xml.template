@@ -4,12 +4,33 @@
     <description>
         Coin Space application.
     </description>
-    <author email="support@coin.space" href="http://www.coinspace.ch">
+    <author email="support@coin.space" href="https://www.coinspace.ch">
         Coin Space Team
     </author>
     <content src="index.html" />
     <access origin="*" />
-    <access origin="mailto:*" launch-external="yes"/>
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+        <icon src="../images/android/icons/36.png" density="ldpi"/>
+        <icon src="../images/android/icons/48.png" density="mdpi"/>
+        <icon src="../images/android/icons/72.png" density="hdpi"/>
+        <icon src="../images/android/icons/96.png" density="xhdpi"/>
+        <splash src="../images/android/screens/ldpi-land.png" density="land-ldpi"/>
+        <splash src="../images/android/screens/mdpi-land.png" density="land-mdpi"/>
+        <splash src="../images/android/screens/hdpi-land.png" density="land-hdpi"/>
+        <splash src="../images/android/screens/xhdpi-land.png" density="land-xhdpi"/>
+        <splash src="../images/android/screens/ldpi-port.png" density="port-ldpi"/>
+        <splash src="../images/android/screens/mdpi-port.png" density="port-mdpi"/>
+        <splash src="../images/android/screens/hdpi-port.png" density="port-hdpi"/>
+        <splash src="../images/android/screens/xhdpi-port.png" density="port-xhdpi"/>
+    </platform>
+    <preference name="SplashScreenDelay" value="3000"/>
     <preference name="android-minSdkVersion" value="19" />
     <preference name="windows-target-version" value="8.1" />
 </widget>

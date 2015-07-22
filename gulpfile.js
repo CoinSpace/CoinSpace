@@ -17,7 +17,7 @@ var isRelease = minimist(process.argv.slice(2)).release;
 
 /* Android tasks */
 
-gulp.task('build-android', ['copy-android-images'], function() {
+gulp.task('build-android', ['platform-add-android'], function() {
   return gulp.src('')
     .pipe(gulpif(isRelease,
       shell('cordova build android --release', {cwd: paths.build}),
@@ -31,33 +31,11 @@ gulp.task('build-android', ['copy-android-images'], function() {
 
 gulp.task('run-android', shell.task('cordova run android', {cwd: paths.build}));
 
-gulp.task('copy-android-images', ['platform-add-android'], function() {
-  var mapping = {
-    'drawable-ldpi/icon.png': 'icons/36.png',
-    'drawable-mdpi/icon.png': 'icons/48.png',
-    'drawable-hdpi/icon.png': 'icons/72.png',
-    'drawable-xhdpi/icon.png': 'icons/96.png',
-    'drawable/icon.png': 'icons/96.png',
-    'drawable-land-xhdpi/screen.png': 'screens/xhdpi-land.9.png',
-    'drawable-port-xhdpi/screen.png': 'screens/xhdpi-port.9.png',
-    'drawable-land-mdpi/screen.png': 'screens/mdpi-land.9.png',
-    'drawable-port-mdpi/screen.png': 'screens/mdpi-port.9.png',
-    'drawable-land-hdpi/screen.png': 'screens/hdpi-land.9.png',
-    'drawable-port-hdpi/screen.png': 'screens/hdpi-port.9.png',
-    'drawable-land-ldpi/screen.png': 'screens/ldpi-land.9.png',
-    'drawable-port-ldpi/screen.png': 'screens/ldpi-port.9.png'
-  };
-  var tasks = _.map(mapping, function(src, dst) {
-    return gulp.src('phonegap/images/android/' + src)
-      .pipe(rename(dst))
-      .pipe(gulp.dest(paths.build + '/platforms/android/res'))
-  });
-  return merge(tasks);
-});
-
 gulp.task('platform-add-android', ['copy-config', 'copy-build'], shell.task([
   'cordova platform add android',
-  'cordova plugin add org.apache.cordova.geolocation',
+  'cordova plugin add cordova-plugin-geolocation',
+  'cordova plugin add cordova-plugin-whitelist',
+  'cordova plugin add cordova-plugin-splashscreen',
   'cordova plugin add https://github.com/skyjam/CS-barcodescanner.git'
 ], {cwd: paths.build}));
 
@@ -79,7 +57,9 @@ gulp.task('platform-add-windows', ['platform-config-windows'], function() {
   return gulp.src('')
     .pipe(shell([
       '<%= ssh("y: && cd phonegap/build && cordova platform add windows")%>',
-      '<%= ssh("y: && cd phonegap/build && cordova plugin add org.apache.cordova.geolocation")%>',
+      '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-geolocation")%>',
+      '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-whitelist")%>',
+      '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-splashscreen")%>',
       '<%= ssh("y: && cd phonegap/build && cordova plugin add com.msopentech.indexeddb@0.1.1")%>',
       '<%= bom("phonegap/build/platforms/windows/www/**/*.js")%>',
       '<%= ssh("y: && cd phonegap && copy images//windows//icons//* build//platforms//windows//images")%>',
@@ -115,6 +95,7 @@ gulp.task('copy-build', ['clean', 'build-js'], function() {
   var html = gulp.src('build/index.html')
     .pipe(replace('<!-- CORDOVA.JS -->', '<script src="cordova.js"></script>'))
     .pipe(replace('<!-- CONFIG -->', '<script>window.buildType = "phonegap";</script>'))
+    .pipe(replace('<div id="logo_animation">', '<div id="logo_animation" style="display: none;">'))
     .pipe(replace('<script src="assets/js/loader.js"></script>','<script src="assets/js/deviceready.js"></script>'))
     .pipe(gulp.dest(paths.build + '/www'));
   return merge(files, deviceready, html);
