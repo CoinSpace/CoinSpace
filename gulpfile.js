@@ -60,7 +60,7 @@ gulp.task('platform-add-windows', ['platform-config-windows'], function() {
       '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-geolocation")%>',
       '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-whitelist")%>',
       '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-splashscreen")%>',
-      '<%= ssh("y: && cd phonegap/build && cordova plugin add com.msopentech.indexeddb@0.1.1")%>',
+      '<%= ssh("y: && cd phonegap/build && cordova plugin add com.msopentech.websql@0.0.7")%>',
       '<%= bom("phonegap/build/platforms/windows/www/**/*.js")%>',
       '<%= ssh("y: && cd phonegap && copy images//windows//icons//* build//platforms//windows//images")%>',
       '<%= ssh("y: && cd phonegap && copy images//windows//screens//* build//platforms//windows//images")%>',
