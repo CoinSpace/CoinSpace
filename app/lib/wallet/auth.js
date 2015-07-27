@@ -8,7 +8,12 @@ if(window.buildType === 'phonegap') {
 }
 
 function register(wallet_id, pin, phone, passphrase, callback) {
-  postCredentials('register', { wallet_id: wallet_id, pin: pin, phone: phone, passphrase: passphrase }, callback)
+  var data = { wallet_id: wallet_id, pin: pin }
+  if (phone) {
+    data.phone = phone;
+    data.passphrase = passphrase;
+  }
+  postCredentials('register', data, callback)
 }
 
 function login(wallet_id, pin, callback) {
