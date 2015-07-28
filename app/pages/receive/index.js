@@ -29,6 +29,10 @@ module.exports = function(el){
     }
   })
 
+  emitter.on('balance-ready', function(){
+    ractive.set('address', getAddress())
+  })
+
   emitter.on('wallet-ready', function(){
     ractive.set('address', getAddress())
   })

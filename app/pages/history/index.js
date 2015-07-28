@@ -23,12 +23,12 @@ module.exports = function(el){
     }
   })
 
-  emitter.on('transactions-loaded', function(newTxs){
+  emitter.on('append-transactions', function(newTxs){
     Array.prototype.unshift.apply(transactions, newTxs)
     ractive.set('transactions', transactions)
   })
 
-  emitter.on('update-transactions', function(newTxs) {
+  emitter.on('set-transactions', function(newTxs) {
     ractive.set('transactions', newTxs)
   })
 

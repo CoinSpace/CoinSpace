@@ -49,7 +49,7 @@ var Auth = Ractive.extend({
 
       window.scrollTo( 0, 0 )
       emitter.emit('wallet-ready')
-      emitter.emit('transactions-loaded', transactions)
+      emitter.emit('set-transactions', transactions)
     }
 
     function onBalanceDone(err, balance) {

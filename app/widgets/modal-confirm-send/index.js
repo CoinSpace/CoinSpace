@@ -46,7 +46,7 @@ function open(data){
 
       // update balance & tx history
       emitter.emit('wallet-ready')
-      emitter.emit('transactions-loaded', [parseTx(wallet, tx)])
+      emitter.emit('append-transactions', [parseTx(wallet, tx)])
     })
   })
 
