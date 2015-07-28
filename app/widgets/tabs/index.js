@@ -19,7 +19,7 @@ module.exports = function(el){
     active = node
   }
 
-  emitter.on('wallet-ready', function() {
+  emitter.on('balance-ready', function() {
     highlightTab(ractive.nodes.send_tab);
   });
 
