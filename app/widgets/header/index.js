@@ -33,19 +33,21 @@ module.exports = function(el){
     }
   })
 
-  emitter.on('wallet-ready', function(){
-    var wallet = getWallet();
-    ractive.set('bitcoinBalance', wallet.getBalance())
-    ractive.set('denomination', wallet.denomination)
+  emitter.on('balance-ready', function(balance) {
+    ractive.set('bitcoinBalance', balance)
+    ractive.set('denomination', getWallet().denomination)
     db.get('systemInfo', function(err, info){
       if(err) return console.error(err);
       ractive.set('fiatCurrency', info.preferredCurrency)
     })
   })
 
+  emitter.on('wallet-ready', function(){
+    ractive.set('bitcoinBalance', getWallet().getBalance())
+  })
+
   emitter.on('update-balance', function() {
-    var wallet = getWallet();
-    ractive.set('bitcoinBalance', wallet.getBalance())
+    ractive.set('bitcoinBalance', getWallet().getBalance())
   })
 
   ractive.on('toggle', function(){

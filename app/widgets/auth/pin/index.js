@@ -101,11 +101,13 @@ module.exports = function(prevPage, data){
   }
 
   function openWithPin(){
-    CS.openWalletWithPin(getPin(), ractive.getNetwork(), ractive.onSyncDone)
+    CS.openWalletWithPin(getPin(), ractive.getNetwork(),
+                         ractive.onSyncDone, null, ractive.onBalanceDone)
   }
 
   function setPin(){
-    CS.setPin(getPin(), phone, ractive.getNetwork(), ractive.onSyncDone)
+    CS.setPin(getPin(), phone, ractive.getNetwork(),
+              ractive.onSyncDone, null, ractive.onBalanceDone)
   }
 
   return ractive

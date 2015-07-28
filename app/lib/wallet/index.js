@@ -45,18 +45,26 @@ function createWallet(passphrase, network, callback) {
   worker.postMessage(data)
 }
 
-function setPin(pin, phone, network, callback) {
+function callbackError(err, callbacks) {
+  callbacks.forEach(function (fn) {
+    if (fn != null) fn(err)
+  })
+}
+
+function setPin(pin, phone, network, done, unspentsDone, balanceDone) {
+  var callbacks = [done, unspentsDone, balanceDone]
   auth.register(id, pin, phone, mnemonic, function(err, token){
-    if(err) return callback(err.error);
+    if(err) return callbackError(err.error, callbacks);
 
     emitter.emit('wallet-auth', {token: token, pin: pin})
 
     var encrypted = AES.encrypt(seed, token)
     db.saveEncrypedSeed(id, encrypted, function(err){
-      if(err) return callback(err);
+      if(err) return callbackError(err.error, callbacks);
 
       var accounts = getAccountsFromSeed(network)
-      initWallet(accounts.externalAccount, accounts.internalAccount, network, callback)
+      initWallet(accounts.externalAccount, accounts.internalAccount, network,
+                 done, unspentsDone, balanceDone)
     })
   })
 }
@@ -65,9 +73,10 @@ function disablePin(pin, callback) {
   auth.disablePin(id, pin, callback)
 }
 
-function openWalletWithPin(pin, network, syncDone) {
+function openWalletWithPin(pin, network, done, unspentsDone, balanceDone) {
+  var callbacks = [done, unspentsDone, balanceDone]
   db.getCredentials(function(err, credentials){
-    if(err) return syncDone(err);
+    if(err) return callbackError(err, callbacks);
 
     var id = credentials.id
     var encryptedSeed = credentials.seed
@@ -75,17 +84,18 @@ function openWalletWithPin(pin, network, syncDone) {
       if(err){
         if(err.error === 'user_deleted') {
           return db.deleteCredentials(credentials, function(){
-            syncDone(err.error);
+            callbackError(err.error, callbacks);
           })
         }
-        return syncDone(err.error)
+        return callbackError(err.error, callbacks);
       }
 
       assignSeedAndId(AES.decrypt(encryptedSeed, token))
       emitter.emit('wallet-auth', {token: token, pin: pin})
 
       var accounts = getAccountsFromSeed(network)
-      initWallet(accounts.externalAccount, accounts.internalAccount, network, syncDone)
+      initWallet(accounts.externalAccount, accounts.internalAccount, network,
+                 done, unspentsDone, balanceDone)
     })
   })
 }
@@ -108,19 +118,19 @@ function getAccountsFromSeed(networkName, done) {
   }
 }
 
-function initWallet(externalAccount, internalAccount, networkName, done){
+function initWallet(externalAccount, internalAccount, networkName, done, unspentsDone, balanceDone){
   var network = bitcoin.networks[networkName]
-  new Wallet(externalAccount, internalAccount, networkName, function(err, w) {
-    if(err) return done(err)
 
-    wallet = w
-    wallet.denomination = denominations[networkName].default
+  wallet = new Wallet(externalAccount, internalAccount, networkName, function(err, w) {
+    if(err) return done(err)
 
     var txObjs = wallet.getTransactionHistory()
     done(null, txObjs.map(function(tx) {
       return parseTx(wallet, tx)
     }))
-  })
+  }, unspentsDone, balanceDone)
+
+  wallet.denomination = denominations[networkName].default
 }
 
 function parseTx(wallet, tx) {
