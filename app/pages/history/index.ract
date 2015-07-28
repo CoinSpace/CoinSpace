@@ -1,5 +1,10 @@
 
 <div class="transactions">
+  {{#loadingTx}}
+    <div class="transactions__message">
+      <div class="_message">{{translate("Loading transactions...")}}</div>
+    </div>
+  {{/loadingTx}}
   {{#transactions.length}}
     <h3 class="_title">{{translate("Your transaction history")}}</h3>
   {{/transactions.length}}
@@ -27,11 +32,13 @@
     </div>
   {{/transactions}}
   {{^transactions}}
-    <div class="transactions__message">
-      <div class="_icon">
-        {{>svg_help}}
+    {{^loadingTx}}
+      <div class="transactions__message">
+        <div class="_icon">
+          {{>svg_help}}
+        </div>
+        <div class="_message">{{translate("You do not have any transactions yet")}}</div>
       </div>
-      <div class="_message">{{translate("You do not have any transactions yet")}}</div>
-    </div>
+    {{/loadingTx}}
   {{/transactions}}
 </div>

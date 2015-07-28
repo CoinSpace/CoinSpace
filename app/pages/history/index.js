@@ -19,17 +19,20 @@ module.exports = function(el){
         var date = new Date(timestamp)
         return strftime('%b %d %l:%M %p', date)
       },
-      satoshiToBtc: satoshiToBtc
+      satoshiToBtc: satoshiToBtc,
+      loadingTx: true
     }
   })
 
   emitter.on('append-transactions', function(newTxs){
     Array.prototype.unshift.apply(transactions, newTxs)
     ractive.set('transactions', transactions)
+    ractive.set('loadingTx', false)
   })
 
   emitter.on('set-transactions', function(newTxs) {
     ractive.set('transactions', newTxs)
+    ractive.set('loadingTx', false)
   })
 
   ractive.on('show-detail', function(event) {
