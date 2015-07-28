@@ -37,6 +37,10 @@ module.exports = function(el){
     ractive.set('address', getAddress())
   })
 
+  emitter.on('update-balance', function() {
+    ractive.set('address', getAddress())
+  })
+
   emitter.on('db-ready', function(){
     db.get(function(err, doc){
       if(err) return console.error(err);
