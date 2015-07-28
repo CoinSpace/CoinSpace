@@ -133,11 +133,11 @@ module.exports = function(el){
     ractive.set('fiatValue', fiat)
   })
 
-  ractive.observe('to', function() {
-    if(ractive.nodes.to.value.length === 0) {
-      ractive.set('toEntered', false)
-    } else {
+  ractive.observe('to', function(newValue) {
+    if(newValue) {
       ractive.set('toEntered', true)
+    } else {
+      ractive.set('toEntered', false)
     }
   })
 
