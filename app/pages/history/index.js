@@ -25,13 +25,15 @@ module.exports = function(el){
   })
 
   emitter.on('append-transactions', function(newTxs){
-    Array.prototype.unshift.apply(transactions, newTxs)
-    ractive.set('transactions', transactions)
+    newTxs.forEach(function(tx) {
+      transactions.unshift(tx)
+    })
     ractive.set('loadingTx', false)
   })
 
   emitter.on('set-transactions', function(newTxs) {
-    ractive.set('transactions', newTxs)
+    transactions = newTxs
+    ractive.set('transactions', transactions)
     ractive.set('loadingTx', false)
   })
 
