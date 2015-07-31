@@ -38,8 +38,8 @@
     </select>
   </div>
 
-  <div class='header__refresh' on-click="sync">
-    <span id="refresh_el" class="_icon">
+  <div class="header__refresh" on-click="sync">
+    <span id="refresh_el" class="_icon loading">
       {{>svg_refresh}}
     </span>
   </div>

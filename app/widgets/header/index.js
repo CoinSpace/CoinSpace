@@ -9,7 +9,6 @@ var toFixedFloor = require('cs-convert').toFixedFloor
 var Big = require('big.js')
 var showError = require('cs-modal-flash').showError
 var db = require('cs-db')
-var spinner = require('cs-transitions/spinner.js')
 var currencies = require('cs-ticker-api').currencies
 
 module.exports = function(el){
@@ -17,6 +16,7 @@ module.exports = function(el){
     el: el,
     template: require('./index.ract').template,
     data: {
+      updating_transactions: true,
       satoshiToBtc: satoshiToBtc,
       menuOpen: false,
       exchangeRates: {},
@@ -63,21 +63,29 @@ module.exports = function(el){
 
   function cancelSpinner() {
     ractive.set('updating_transactions', false)
-    spinner.stop(refreshEl)
+    refreshEl.classList.remove('loading')
+    // IE fix
+    var clone = refreshEl.cloneNode(true)
+    refreshEl.parentNode.replaceChild(clone, refreshEl)
+    refreshEl = clone
   }
+
+  emitter.on('set-transactions', function() {
+    cancelSpinner();
+  })
 
   ractive.on('sync', function(event){
     event.original.preventDefault();
     if(!ractive.get('updating_transactions')) {
       ractive.set('updating_transactions', true)
-      spinner.spin(refreshEl)
-      setTimeout(cancelSpinner, 30000)
-      sync(function(err, txs){
-        if(err) return showError(err)
-        cancelSpinner()
-        emitter.emit('update-balance')
-        emitter.emit('set-transactions', txs)
-      })
+      refreshEl.classList.add('loading');
+      setTimeout(function() {
+        sync(function(err, txs){
+          if(err) return showError(err)
+          emitter.emit('update-balance')
+          emitter.emit('set-transactions', txs)
+        })
+      }, 0)
     }
   })
 

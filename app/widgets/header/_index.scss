@@ -108,17 +108,16 @@
     display: block;
     margin: 0 auto;
 
+    &.loading {
+      animation: infinite-spinning 1s linear infinite;
+    }
+
     @include breakpoint(portrait) {
       width: 35px;
       height: 35px;
     }
   }
 
-  &.is_updating {
-    ._icon {
-      animation:  infinite-spinning 1s linear infinite;
-    }
-  }
   .svg-refresh {
     fill: white;
   }

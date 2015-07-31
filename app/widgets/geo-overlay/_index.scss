@@ -34,11 +34,8 @@
       width: 38px;
       height: 38px;
       padding: 4px;
-    }
-
-    &.is_updating {
-      ._icon {
-        animation:  infinite-spinning 1s linear infinite;
+      &.loading {
+        animation: infinite-spinning 1s linear infinite;
       }
     }
 

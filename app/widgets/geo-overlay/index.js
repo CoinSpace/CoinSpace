@@ -9,7 +9,6 @@ var fadeIn = require('cs-transitions/fade.js').fadeIn
 var fadeOut = require('cs-transitions/fade.js').fadeOut
 var animatePin = require('cs-transitions/pinDrop.js').drop
 var resetPin = require('cs-transitions/pinDrop.js').reset
-var spinner = require('cs-transitions/spinner.js')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -51,7 +50,7 @@ module.exports = function(el){
 
   ractive.on('search-again', function() {
     ractive.set('searchingAgain', true)
-    spinner.spin(ractive.nodes.refresh_el)
+    ractive.nodes.refresh_el.classList.add('loading')
     lookupGeo()
   })
 
@@ -75,11 +74,12 @@ module.exports = function(el){
         // wait for spinner to spin down
         setTimeout(function(){
           ractive.set('searchingAgain', false)
+          cancelSpinner();
         }, 1000)
       }
 
       if(err) {
-        spinner.stop(ractive.nodes.refresh_el)
+        cancelSpinner();
         return showError({
           message: err.message,
           onDismiss: function(){
@@ -98,7 +98,6 @@ module.exports = function(el){
         }, 1500)
       } else {
         setNearbys(results)
-        spinner.stop(ractive.nodes.refresh_el)
       }
     })
   }
@@ -115,6 +114,14 @@ module.exports = function(el){
     }
 
     ractive.set('nearbys', nearbys)
+  }
+
+  function cancelSpinner() {
+    ractive.nodes.refresh_el.classList.remove('loading')
+    // IE fix
+    var clone = ractive.nodes.refresh_el.cloneNode(true)
+    ractive.nodes.refresh_el.parentNode.replaceChild(clone, ractive.nodes.refresh_el)
+    ractive.nodes.refresh_el = clone
   }
 
   return ractive
