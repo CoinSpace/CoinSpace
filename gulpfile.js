@@ -57,7 +57,7 @@ gulp.task('platform-add-windows', ['platform-config-windows'], function() {
 
   var bom = function (files) {
     console.log('adding bom: ' + files)
-    return 'node tasks/bom-add.js ' + files;
+    return 'node tasks/bom-add.js "' + files + '"';
   };
 
   return gulp.src('')
