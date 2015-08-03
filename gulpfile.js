@@ -17,19 +17,25 @@ var isRelease = minimist(process.argv.slice(2)).release;
 
 /* Android tasks */
 
-gulp.task('build-android', ['platform-add-android'], function() {
+gulp.task('build-android', ['platform-add-android', 'cradle-fix'], function() {
   return gulp.src('')
     .pipe(gulpif(isRelease,
       shell('cordova build android --release', {cwd: paths.build}),
       shell('cordova build android', {cwd: paths.build})))
     .pipe(gulpif(isRelease, shell([
       'jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ../release.keystore '+
-      '-storepass coinspace platforms/android/ant-build/*-release-unsigned.apk coinspace',
-      'zipalign -f -v 4 platforms/android/ant-build/*-release-unsigned.apk ../deploy/coinspace-release.apk'
+      '-storepass coinspace platforms/android/build/outputs/apk/*-release-unsigned.apk coinspace',
+      'zipalign -f -v 4 platforms/android/build/outputs/apk/*-release-unsigned.apk ../deploy/coinspace-release.apk'
     ], {cwd: paths.build})));
 });
 
 gulp.task('run-android', shell.task('cordova run android', {cwd: paths.build}));
+
+gulp.task('cradle-fix', ['platform-add-android'], function() {
+  return gulp.src(paths.build + '/platforms/android/build.gradle')
+    .pipe(replace('android {', 'android {\n    lintOptions { checkReleaseBuilds false }'))
+    .pipe(gulp.dest(paths.build + '/platforms/android/'));
+});
 
 gulp.task('platform-add-android', ['copy-config', 'copy-build'], shell.task([
   'cordova platform add android',
