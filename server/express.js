@@ -23,9 +23,9 @@ module.exports = function (){
     app.set('trust proxy', true)
     var proxyHost = process.env.PROXY_URL.replace("https://", '').replace('?url=', '')
     app.use(helmet.csp({
-      'default-src': ["'self'"],
+      'default-src': ["'self'", 'blob:'],
       'connect-src': [
-        "'self'", "blob:",
+        "'self'", 'blob:',
         'api.bitcoinaverage.com', 'chain.so', // tickers
         'btc.blockr.io', 'tbtc.blockr.io', 'ltc.blockr.io', // blockchain APIs
         process.env.DB_HOST, proxyHost
