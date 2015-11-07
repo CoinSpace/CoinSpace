@@ -95,9 +95,9 @@ gulp.task('copy-config', ['clean'], function() {
 
 gulp.task('copy-build', ['clean', 'build-js'], function() {
   var csp = {
-    'default-src': ["'self'"],
+    'default-src': ["'self'", 'blob:'],
     'connect-src': [
-      "'self'", "blob:",
+      "'self'", 'blob:',
       'https://api.bitcoinaverage.com', 'https://chain.so',
       'https://btc.blockr.io', 'https://tbtc.blockr.io', 'https://ltc.blockr.io',
       'https://' + env.DB_HOST, env.PROXY_URL.split('?')[0], env.PHONEGAP_URL
