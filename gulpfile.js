@@ -29,6 +29,21 @@ gulp.task('build-android', ['platform-add-android', 'cradle-fix'], function() {
     ], {cwd: paths.build})));
 });
 
+gulp.task('build-ios', ['platform-add-ios'], function() {
+    return gulp.src('')
+        .pipe(gulpif(isRelease,
+            shell('cordova build ios --release', {cwd: paths.build}),
+            shell('cordova build ios', {cwd: paths.build})));
+});
+
+gulp.task('platform-add-ios', ['copy-config', 'copy-build'], shell.task([
+    'cordova platform add ios',
+    'cordova plugin add cordova-plugin-geolocation',
+    'cordova plugin add cordova-plugin-whitelist',
+    'cordova plugin add cordova-plugin-splashscreen',
+    'cordova plugin add https://github.com/skyjam/CS-barcodescanner.git'
+], {cwd: paths.build}));
+
 gulp.task('run-android', shell.task('cordova run android', {cwd: paths.build}));
 
 gulp.task('cradle-fix', ['platform-add-android'], function() {
@@ -95,7 +110,7 @@ gulp.task('copy-config', ['clean'], function() {
 
 gulp.task('copy-build', ['clean', 'build-js'], function() {
   var csp = {
-    'default-src': ["'self'", 'blob:'],
+    'default-src': ["'self'", 'gap:'],
     'connect-src': [
       "'self'", 'blob:',
       'https://api.bitcoinaverage.com', 'https://chain.so',
