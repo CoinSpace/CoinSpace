@@ -70,6 +70,11 @@ function getLocation(callback){
   }
 
   var error = function(){
+      navigator.notification.alert(
+          'Access to the geolocation has been prohibited; please enable it in the Settings app to continue',
+          function(){},
+          'Coin Space'
+      )
     callback(new Error('Unable to retrieve your location'))
   }
 

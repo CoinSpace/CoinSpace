@@ -65,6 +65,7 @@
     "geomodel": "~0.1.2",
     "glob": "^3.2.9",
     "glob-watcher": "0.0.6",
+    "hammerjs": "^2.0.4",
     "helmet": "^0.3.2",
     "minimatch": "^1.0.0",
     "mkdirp": "^0.5.0",
