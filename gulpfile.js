@@ -42,7 +42,8 @@ gulp.task('platform-add-ios', ['copy-config', 'copy-build'], shell.task([
     'cordova plugin add cordova-plugin-whitelist',
     'cordova plugin add cordova-plugin-splashscreen',
     'cordova plugin add https://github.com/skyjam/CS-barcodescanner.git',
-    'cordova plugin add cordova-plugin-dialogs'
+    'cordova plugin add cordova-plugin-dialogs',
+    'cordova plugin add cordova-plugin-apple-watch'
 ], {cwd: paths.build}));
 
 gulp.task('run-android', shell.task('cordova run android', {cwd: paths.build}));
