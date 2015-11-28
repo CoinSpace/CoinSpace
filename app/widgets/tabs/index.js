@@ -29,28 +29,32 @@ module.exports = function(el){
   });
 
     Hammer(document.getElementById('main'), {velocity: 0.1}).on("swipeleft", function() {
-        if($("#send_tab").hasClass('active')){
-            emitter.emit('swipe-tab', document.getElementById('receive_tab'))
-            emitter.emit('change-tab', 'receive')
-        } else if($("#receive_tab").hasClass('active')){
-            emitter.emit('swipe-tab', document.getElementById('history_tab'))
-            emitter.emit('change-tab', 'history')
-        } else if($("#history_tab").hasClass('active')){
-            emitter.emit('swipe-tab', document.getElementById('tokens_tab'))
-            emitter.emit('change-tab', 'tokens')
+        if(window.buildType === 'phonegap'){
+            if($("#send_tab").hasClass('active')){
+                emitter.emit('swipe-tab', document.getElementById('receive_tab'))
+                emitter.emit('change-tab', 'receive')
+            } else if($("#receive_tab").hasClass('active')){
+                emitter.emit('swipe-tab', document.getElementById('history_tab'))
+                emitter.emit('change-tab', 'history')
+            } else if($("#history_tab").hasClass('active')){
+                emitter.emit('swipe-tab', document.getElementById('tokens_tab'))
+                emitter.emit('change-tab', 'tokens')
+            }
         }
     })
 
     Hammer(document.getElementById('main'), {velocity: 0.1}).on("swiperight", function() {
-        if($("#receive_tab").hasClass('active')){
-            emitter.emit('swipe-tab', document.getElementById('send_tab'))
-            emitter.emit('change-tab', 'send')
-        } else if($("#history_tab").hasClass('active')){
-            emitter.emit('swipe-tab', document.getElementById('receive_tab'))
-            emitter.emit('change-tab', 'receive')
-        } else if($("#tokens_tab").hasClass('active')){
-            emitter.emit('swipe-tab', document.getElementById('history_tab'))
-            emitter.emit('change-tab', 'history')
+        if(window.buildType === 'phonegap'){
+            if($("#receive_tab").hasClass('active')){
+                emitter.emit('swipe-tab', document.getElementById('send_tab'))
+                emitter.emit('change-tab', 'send')
+            } else if($("#history_tab").hasClass('active')){
+                emitter.emit('swipe-tab', document.getElementById('receive_tab'))
+                emitter.emit('change-tab', 'receive')
+            } else if($("#tokens_tab").hasClass('active')){
+                emitter.emit('swipe-tab', document.getElementById('history_tab'))
+                emitter.emit('change-tab', 'history')
+            }
         }
     })
 

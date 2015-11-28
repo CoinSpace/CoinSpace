@@ -12,6 +12,7 @@ var showSetDetails = require('cs-modal-set-details')
 var fadeIn = require('cs-transitions/fade.js').fadeIn
 var fadeOut = require('cs-transitions/fade.js').fadeOut
 var getNetwork = require('cs-network')
+var qrcode = require('cs-qrcode')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -31,6 +32,7 @@ module.exports = function(el){
 
   emitter.on('balance-ready', function(){
     ractive.set('address', getAddress())
+    showQRcode()
   })
 
   emitter.on('wallet-ready', function(){
@@ -72,6 +74,14 @@ module.exports = function(el){
     }
   })
 
+  function showQRcode(){
+      if(window.buildType === 'phonegap'){
+          var canvas = document.getElementById("qr_canvas")
+          var qr = qrcode(getNetwork() + ':' + getAddress())
+          canvas.appendChild(qr)
+      }
+  }
+
   function mectoOff(){
     ractive.set('broadcasting', false)
     ractive.set('btn_message', 'Turn Mecto on')
@@ -100,10 +110,14 @@ module.exports = function(el){
   }, false)
 
   ractive.on('show-qr', function(){
-    showQr({
-      address: ractive.get('address'),
-      alias: ractive.get('alias')
-    })
+      if(window.buildType === 'phonegap' && window.buildPlatform !== 'windows'){
+          window.plugins.socialsharing.share(ractive.get('address'))
+      } else {
+          showQr({
+              address: ractive.get('address'),
+              alias: ractive.get('alias')
+          })
+      }
   })
 
   ractive.on('help-alias', function() {
