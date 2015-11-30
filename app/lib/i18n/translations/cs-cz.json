@@ -110,5 +110,7 @@
     "Current Bitcoin Price": "Aktuální cena Bitcoin",
     "Your Alias address": "Vaše adresa aliasu",
     "Username not available": "Uživatelské jméno není k dispozici.",
-    "Allow for payments with OpenAlias addresses. Supported wallets only.": "Povolit platby s OpenAlias adresy. Pouze podporované peněženky."
+    "Allow for payments with OpenAlias addresses. Supported wallets only.": "Povolit platby s OpenAlias adresy. Pouze podporované peněženky.",
+    "Enter PIN": "Zadejte kód PIN",
+    "Scan your fingerprint please": "Skenování otisku prstu, prosím"
 }

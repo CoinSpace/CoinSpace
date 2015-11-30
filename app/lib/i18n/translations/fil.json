@@ -110,5 +110,7 @@
     "Current Bitcoin Price": "Current Bitcoin Price",
     "Your Alias address": "Your Alias address",
     "Username not available": "Username not available",
-    "Allow for payments with OpenAlias addresses. Supported wallets only.": "Allow for payments with OpenAlias addresses. Supported wallets only."
+    "Allow for payments with OpenAlias addresses. Supported wallets only.": "Allow for payments with OpenAlias addresses. Supported wallets only.",
+    "Enter PIN": "Ipasok ang PIN",
+    "Scan your fingerprint please": "I-scan ang iyong fingerprint mangyaring"
 }
