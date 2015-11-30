@@ -110,5 +110,7 @@
     "Current Bitcoin Price": "Текущая цена Bitcoin",
     "Your Alias address": "Ваш адрес псевдонима",
     "Username not available": "Имя пользователя не доступно",
-    "Allow for payments with OpenAlias addresses. Supported wallets only.": "Доступны платежи с OpenAlias адресов. Только поддерживаемые кошельки."
+    "Allow for payments with OpenAlias addresses. Supported wallets only.": "Доступны платежи с OpenAlias адресов. Только поддерживаемые кошельки.",
+    "Scan your fingerprint please": "Приложите палец, чтобы войти в приложение",
+    "Enter PIN": "Ввести 4-значный код"
 }

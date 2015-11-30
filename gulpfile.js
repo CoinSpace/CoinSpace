@@ -36,7 +36,7 @@ gulp.task('build-ios', ['platform-add-ios'], function() {
             shell('cordova build ios', {cwd: paths.build})));
 });
 
-gulp.task('platform-add-ios', ['copy-config', 'copy-build'], shell.task([
+gulp.task('platform-add-ios', ['platform-config-ios'], shell.task([
     'cordova platform add ios',
     'cordova plugin add cordova-plugin-geolocation',
     'cordova plugin add cordova-plugin-whitelist',
@@ -45,7 +45,8 @@ gulp.task('platform-add-ios', ['copy-config', 'copy-build'], shell.task([
     'cordova plugin add cordova-plugin-dialogs',
     'cordova plugin add cordova-plugin-apple-watch',
     'cordova plugin add org.apache.cordova.statusbar',
-    'cordova plugin add cordova-plugin-x-socialsharing'
+    'cordova plugin add cordova-plugin-x-socialsharing',
+    'cordova plugin add cordova-plugin-touch-id'
 ], {cwd: paths.build}));
 
 gulp.task('run-android', shell.task('cordova run android', {cwd: paths.build}));
@@ -102,6 +103,12 @@ gulp.task('platform-config-windows', ['copy-config', 'copy-build'], function() {
   return gulp.src(paths.build + '/www/index.html')
     .pipe(replace('<!-- CONFIG-PLATFORM -->', '<script>window.buildPlatform = "windows";</script>'))
     .pipe(gulp.dest(paths.build + '/www'));
+});
+
+gulp.task('platform-config-ios', ['copy-config', 'copy-build'], function() {
+    return gulp.src(paths.build + '/www/index.html')
+        .pipe(replace('<!-- CONFIG-PLATFORM -->', '<script>window.buildPlatform = "ios";</script>'))
+        .pipe(gulp.dest(paths.build + '/www'));
 });
 
 /* Common tasks */

@@ -5,6 +5,7 @@ var CS = require('cs-wallet-js')
 var emitter = require('cs-emitter')
 var validatePin = require('cs-pin-validator')
 var showError = require('cs-modal-flash').showError
+var translate = require('cs-i18n').translate
 
 module.exports = function(prevPage, data){
   data = data || {}
@@ -34,6 +35,31 @@ module.exports = function(prevPage, data){
   ractive.on('blur-pin', function(){
     ractive.set('pinfocused', false)
   })
+
+  if(window.buildType === 'phonegap' && window.buildPlatform === 'ios'){
+      window.plugins.touchid.isAvailable(function() {
+          CS.setAvailableTouchId()
+
+          CS.walletExists(function(walletExists){
+              if(CS.getPin() && walletExists && userExists) {
+                  window.plugins.touchid.verifyFingerprintWithCustomPasswordFallbackAndEnterPasswordLabel(
+                      translate("Scan your fingerprint please"),
+                      translate("Enter PIN"),
+                      function() {
+                          ractive.set('pin', CS.getPin())
+                          var pin = CS.getPin()
+                          var boxes = pin.split('')
+                          for(var i=boxes.length; i<4; i++) {
+                              boxes[i] = null
+                          }
+                          ractive.set('boxes', boxes)
+                          ractive.fire('enter-pin')
+                      }
+                  )
+              }
+          })
+      })
+  }
 
   ractive.observe('pin', function(){
     var pin = ractive.nodes['setPin'].value
@@ -86,6 +112,7 @@ module.exports = function(prevPage, data){
 
   ractive.on('clear-credentials', function(){
     CS.reset(function(){
+      CS.resetPin()
       location.reload(false);
     })
   })
