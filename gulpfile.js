@@ -69,7 +69,7 @@ gulp.task('platform-add-android', ['copy-config', 'copy-build'], shell.task([
 
 /* Windows tasks */
 
-gulp.task('platform-add-windows', function() {
+gulp.task('platform-add-windows', ['platform-config-windows'], function() {
   var ssh = function (cmd) {
     cmd = cmd.replace(/\/\//g, '\\');
     var fullCmdLine = 'ssh win8 \'' + 'c:\\pstools\\PsExec.exe -i cmd /c "' + cmd + '"\'';

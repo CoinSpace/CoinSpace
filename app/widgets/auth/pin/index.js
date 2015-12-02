@@ -6,6 +6,7 @@ var emitter = require('cs-emitter')
 var validatePin = require('cs-pin-validator')
 var showError = require('cs-modal-flash').showError
 var translate = require('cs-i18n').translate
+var pincode = ''
 
 module.exports = function(prevPage, data){
   data = data || {}
@@ -61,14 +62,32 @@ module.exports = function(prevPage, data){
       })
   }
 
+  function pinCode(pin) {
+      return function(){
+          var pinParts = pin.split('')
+          var pinString = ''
+          for(var i=0; i<pinParts.length; i++) {
+              if((parseInt(pinParts[i]) || parseInt(pinParts[i]) === 0) && typeof parseInt(pinParts[i]) === 'number') {
+                  pinString += pinParts[i]
+              }
+          }
+          pincode = pinString
+          return pincode
+      }
+  }
+
   ractive.observe('pin', function(){
     var pin = ractive.nodes['setPin'].value
-
-    var boxes = pin.split('')
+    var p = pinCode(pin)
+    var boxes = p().split('')
 
     if(boxes.length === 4) {
       ractive.nodes.setPin.blur()
       ractive.fire('enter-pin')
+    } else {
+      setTimeout(function(){
+        ractive.set('pin', pincode)
+      }, 1)
     }
 
     for(var i=boxes.length; i<4; i++) {
@@ -123,7 +142,7 @@ module.exports = function(prevPage, data){
   })
 
   function getPin(){
-    var pin = ractive.get('pin')
+    var pin = pincode || ractive.get('pin')
     return pin ? pin.toString() : ''
   }
 
