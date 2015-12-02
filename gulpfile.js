@@ -63,12 +63,14 @@ gulp.task('platform-add-android', ['copy-config', 'copy-build'], shell.task([
   'cordova plugin add cordova-plugin-geolocation',
   'cordova plugin add cordova-plugin-whitelist',
   'cordova plugin add cordova-plugin-splashscreen',
-  'cordova plugin add https://github.com/skyjam/CS-barcodescanner.git'
+  'cordova plugin add https://github.com/skyjam/CS-barcodescanner.git',
+  'cordova plugin add cordova-plugin-dialogs',
+  'cordova plugin add cordova-plugin-x-socialsharing'
 ], {cwd: paths.build}));
 
 /* Windows tasks */
 
-gulp.task('platform-add-windows', ['platform-config-windows'], function() {
+gulp.task('platform-add-windows', function() {
   var ssh = function (cmd) {
     cmd = cmd.replace(/\/\//g, '\\');
     var fullCmdLine = 'ssh win8 \'' + 'c:\\pstools\\PsExec.exe -i cmd /c "' + cmd + '"\'';
@@ -87,6 +89,8 @@ gulp.task('platform-add-windows', ['platform-config-windows'], function() {
       '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-geolocation")%>',
       '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-whitelist")%>',
       '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-splashscreen")%>',
+      '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-dialogs")%>',
+      '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-x-socialsharing")%>',
       '<%= ssh("y: && cd phonegap/build && cordova plugin add com.msopentech.websql@0.0.7")%>',
       '<%= bom("phonegap/build/platforms/windows/www/**/*.js")%>',
       '<%= ssh("y: && cd phonegap && copy images//windows//icons//* build//platforms//windows//images")%>',
