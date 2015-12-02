@@ -46,7 +46,8 @@ gulp.task('platform-add-ios', ['platform-config-ios'], shell.task([
     'cordova plugin add cordova-plugin-apple-watch',
     'cordova plugin add org.apache.cordova.statusbar',
     'cordova plugin add cordova-plugin-x-socialsharing',
-    'cordova plugin add cordova-plugin-touch-id'
+    'cordova plugin add cordova-plugin-touch-id',
+    'cordova plugin add cordova-plugin-console'
 ], {cwd: paths.build}));
 
 gulp.task('run-android', shell.task('cordova run android', {cwd: paths.build}));
