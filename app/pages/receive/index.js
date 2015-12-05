@@ -110,7 +110,7 @@ module.exports = function(el){
   }, false)
 
   ractive.on('show-qr', function(){
-      if(window.buildType === 'phonegap'){
+      if(window.buildType === 'phonegap' && window.buildPlatform != 'windows'){
           window.plugins.socialsharing.share(ractive.get('address'))
       } else {
           showQr({
