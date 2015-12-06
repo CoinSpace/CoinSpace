@@ -90,7 +90,6 @@ gulp.task('platform-add-windows', ['platform-config-windows'], function() {
       '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-whitelist")%>',
       '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-splashscreen")%>',
       '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-dialogs")%>',
-      '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-x-socialsharing")%>',
       '<%= ssh("y: && cd phonegap/build && cordova plugin add com.msopentech.websql@0.0.7")%>',
       '<%= bom("phonegap/build/platforms/windows/www/**/*.js")%>',
       '<%= ssh("y: && cd phonegap && copy images//windows//icons//* build//platforms//windows//images")%>',
@@ -110,7 +109,7 @@ gulp.task('platform-config-windows', ['copy-config', 'copy-build'], function() {
     .pipe(gulp.dest(paths.build + '/www'));
 });
 
-gulp.task('platform-config-ios', ['copy-config', 'copy-build'], function() {
+gulp.task('platform-config-ios', ['copy-config', 'copy-build-ios'], function() {
     return gulp.src(paths.build + '/www/index.html')
         .pipe(replace('<!-- CONFIG-PLATFORM -->', '<script>window.buildPlatform = "ios";</script>'))
         .pipe(gulp.dest(paths.build + '/www'));
@@ -126,7 +125,7 @@ gulp.task('copy-config', ['clean'], function() {
 
 gulp.task('copy-build', ['clean', 'build-js'], function() {
   var csp = {
-    'default-src': ["'self'", 'gap:'],
+    'default-src': ["'self'", 'blob:'],
     'connect-src': [
       "'self'", 'blob:',
       'https://api.bitcoinaverage.com', 'https://chain.so',
@@ -156,6 +155,40 @@ gulp.task('copy-build', ['clean', 'build-js'], function() {
     .pipe(replace('<script src="assets/js/loader.js"></script>','<script src="assets/js/deviceready.js"></script>'))
     .pipe(gulp.dest(paths.build + '/www'));
   return merge(files, deviceready, html);
+});
+
+gulp.task('copy-build-ios', ['clean', 'build-js'], function() {
+    var csp = {
+        'default-src': ["'self'", 'gap:'],
+        'connect-src': [
+            "'self'", 'blob:',
+            'https://api.bitcoinaverage.com', 'https://chain.so',
+            'https://btc.blockr.io', 'https://tbtc.blockr.io', 'https://ltc.blockr.io',
+            'https://' + env.DB_HOST, env.PROXY_URL.split('?')[0], env.PHONEGAP_URL
+        ],
+        'font-src': ["'self'"],
+        'img-src': ["'self'", 'data:', 'https://www.gravatar.com'],
+        'style-src': ["'self'", "'unsafe-inline'"],
+        'script-src': ["'self'", 'blob:', "'unsafe-eval'", "'unsafe-inline'"]
+    };
+
+    var cspString = '';
+    _.forIn(csp, function(value, key) {
+        cspString += key + ' ' + value.join(' ') + ';';
+    });
+
+    var files = gulp.src(['build/**', '!build/index.html'])
+        .pipe(gulp.dest(paths.build + '/www'))
+    var deviceready = gulp.src(['phonegap/deviceready.js'])
+        .pipe(gulp.dest(paths.build + '/www/assets/js'))
+    var html = gulp.src('build/index.html')
+        .pipe(replace('<!-- CORDOVA.JS -->', '<script src="cordova.js"></script>'))
+        .pipe(replace('<!-- CONFIG -->', '<script>window.buildType = "phonegap";</script>'))
+        .pipe(replace('<!-- CORDOVA-WHITELIST-CSP -->', '<meta http-equiv="Content-Security-Policy" content="' + cspString + '">'))
+        .pipe(replace('<div id="logo_animation">', '<div id="logo_animation" style="display: none;">'))
+        .pipe(replace('<script src="assets/js/loader.js"></script>','<script src="assets/js/deviceready.js"></script>'))
+        .pipe(gulp.dest(paths.build + '/www'));
+    return merge(files, deviceready, html);
 });
 
 gulp.task('build-js', shell.task('npm run build', {env: env}))
