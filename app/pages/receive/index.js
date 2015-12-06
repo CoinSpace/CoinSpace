@@ -61,6 +61,35 @@ module.exports = function(el){
     }
   })
 
+  emitter.on('turn-on-mecto-watch', function() {
+    console.log('on turn on mecto')
+    
+    db.get(function(error, doc) {
+      console.log('after db.get at emitter.on(turn-on-mecto-watch)')
+      if (error) {
+        console.log('error mecto: ' + error)
+      } else {
+        if (doc.userInfo.firstName) {
+          geo.save(function(err) {
+            if (err) {
+              applewatch.sendMessage(err, 'mectoErrorQueue')
+            } else {
+              console.log('successful init mecto, name = ' + doc.userInfo.firstName)
+            }
+          })
+        } else {
+          console.log('firstName not setted: ' + doc.userInfo.firstName)
+          applewatch.sendMessage('User name not setted. Please set user name at iPhone app.', 'mectoErrorQueue')
+        }
+      }
+    })
+  })
+  
+  emitter.on('turn-off-mecto-watch', function() {
+    console.log('on turn off mecto')
+    geo.remove(true)
+  })
+
   ractive.on('toggle-broadcast', function(){
     if(ractive.get('connecting')) return;
 
