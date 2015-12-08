@@ -1,0 +1,6 @@
+<div class="terms__header">
+
+  <a href="#" onclick="window.open('https://www.coinspace.ch/coinspaceprivacypolicy.html', '_system');">Terms</a>
+  <span on-click="back">Back</span>
+
+</div>

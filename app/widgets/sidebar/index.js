@@ -23,6 +23,10 @@ module.exports = function(el){
     window.location.reload()
   })
 
+  ractive.on('about', function(e){
+      emitter.emit('open-terms')
+  })
+
   emitter.on('toggle-menu', function(open) {
     var classes = ractive.el.classList
     if(open) {
