@@ -1,0 +1,19 @@
+.terms__header {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-bottom: 19px;
+
+  background-color: white;
+
+  @include breakpoint(iphone5) {
+    padding-top: 29px;
+    padding-bottom: 30px;
+  }
+
+  @include breakpoint(portrait) {
+    padding-top: 48px;
+    padding-bottom: 49px;
+  }
+}
