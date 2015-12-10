@@ -61,6 +61,29 @@ module.exports = function(el){
     }
   })
 
+  emitter.on('turn-on-mecto-watch', function() {
+    console.log('on turn on mecto')
+    
+    db.get(function(error, doc) {
+      console.log('after db.get at emitter.on(turn-on-mecto-watch)')
+      if (error) {
+        console.log('error mecto: ' + error)
+      } else {
+        if (doc.userInfo.firstName) {
+          mectoOn()
+        } else {
+          console.log('firstName not setted: ' + doc.userInfo.firstName)
+          applewatch.sendMessage('User name not setted. Please set user name at iPhone app.', 'mectoErrorQueue')
+        }
+      }
+    })
+  })
+  
+  emitter.on('turn-off-mecto-watch', function() {
+    console.log('on turn off mecto')
+    mectoOff()
+  })
+
   ractive.on('toggle-broadcast', function(){
     if(ractive.get('connecting')) return;
 
@@ -86,16 +109,31 @@ module.exports = function(el){
     ractive.set('broadcasting', false)
     ractive.set('btn_message', 'Turn Mecto on')
     geo.remove(true)
+    
+    if (window.buildPlatform === 'ios') {
+      applewatch.sendMessage('off', 'mectoStatusQueue')
+    }
   }
 
   function mectoOn(){
     ractive.set('connecting', true)
     ractive.set('btn_message', 'Checking your location')
     geo.save(function(err){
-      if(err) return handleMectoError(err)
+      if(err) {
+        console.log('error on mecto = ' + err)
+        applewatch.sendMessage(err, 'mectoErrorQueue')
+        return handleMectoError(err)
+      } 
       ractive.set('connecting', false)
       ractive.set('broadcasting', true)
       ractive.set('btn_message', 'Turn Mecto off')
+      
+      if (window.buildPlatform === 'ios') {
+        console.log('successful init mecto, name = ' + doc.userInfo.firstName)
+        applewatch.sendMessage('on', 'mectoStatusQueue')
+      } else {
+        console.log('not ios platform')
+      }
     })
   }
 

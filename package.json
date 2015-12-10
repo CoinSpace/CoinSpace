@@ -79,7 +79,8 @@
     "tiny-lr": "0.0.7",
     "uglifyify": "^2.5.0",
     "uniqueify": "~1.0.0",
-    "velocity-animate": "git://github.com/skyjam/velocity.git"
+    "velocity-animate": "git://github.com/skyjam/velocity.git",
+    "yaqrcode": "^0.2.1"
   },
   "aperture": {
     "sources": [
