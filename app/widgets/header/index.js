@@ -34,12 +34,20 @@ module.exports = function(el){
   })
 
   emitter.on('balance-ready', function(balance) {
+    console.log('on balance-ready event')
     ractive.set('bitcoinBalance', balance)
     ractive.set('denomination', getWallet().denomination)
     db.get('systemInfo', function(err, info){
       if(err) return console.error(err);
       ractive.set('fiatCurrency', info.preferredCurrency)
     })
+    if (window.buildPlatform === 'ios') {
+      var balanceMessage = {}
+      balanceMessage.balance = balance
+      balanceMessage.denomination = getWallet().denomination
+      console.log('result balance-ready for sendMessage = ' + balanceMessage)
+      applewatch.sendMessage(balanceMessage, 'balanceQueue')
+    }
   })
 
   emitter.on('wallet-ready', function(){
@@ -48,6 +56,13 @@ module.exports = function(el){
 
   emitter.on('update-balance', function() {
     ractive.set('bitcoinBalance', getWallet().getBalance())
+    if (window.buildPlatform === 'ios') {
+      var balanceMessage = {}
+      balanceMessage.balance = getWallet().getBalance()
+      balanceMessage.denomination = getWallet().denomination;
+      console.log('result update-balance for sendMessage = ' + balanceMessage)
+      applewatch.sendMessage(balanceMessage, 'balanceQueue')
+    }
   })
 
   ractive.on('toggle', function(){
@@ -101,6 +116,9 @@ module.exports = function(el){
 
   emitter.on('preferred-currency-changed', function(currency){
     ractive.set('fiatCurrency', currency)
+    if (window.buildPlatform === 'ios') {
+      applewatch.sendMessage(currency, 'defaultCurrencyChangedQueue')
+    }
   })
 
   emitter.on('ticker', function(rates){

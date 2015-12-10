@@ -10,6 +10,11 @@ window.initCSApp = function() {
   var $ = require('browserify-zepto')
   var getNetwork = require('cs-network')
   var fadeIn = require('cs-transitions/fade.js').fadeIn
+  var sync = require('cs-wallet-js').sync
+  
+  var CS = require('cs-wallet-js')
+  var getNetwork = require('cs-network')
+  var yaqrcode = require('yaqrcode')
 
   var appEl = document.getElementById('app')
   var frame = initFrame(appEl)
@@ -19,6 +24,38 @@ window.initCSApp = function() {
   fastclick(document.body)
 
   initGeoOverlay(document.getElementById('geo-overlay'))
+
+  if (window.buildPlatform === 'ios') {
+    applewatch.init(onSuccessInitAppleWatch, onErrorInitAppleWatch, 'group.com.coinspace.wallet.dev')
+  
+    applewatch.addListener('requestCommandQueue', function(message) {
+      
+      console.log('receive command: ' + message)
+      
+      if (message === 'updateBalance') {
+        console.log('receive request balanceUdpate');
+        sync(function(err, txs) {
+          if(err) return showError(err)
+          emitter.emit('update-balance')
+        })
+      } else if (message == 'showQrCode') {
+        console.log('receive request qr code')
+        var address = CS.getWallet().getNextAddress()
+        var qr = yaqrcode(getNetwork() + ':' + address)
+    
+        console.log(address)
+        console.log(getNetwork)
+    
+        applewatch.sendMessage(qr, 'qrQueue')
+      } else if (message == 'turnMectoOff') {
+        console.log('turn off mecto')
+        emitter.emit('turn-off-mecto-watch')
+      } else if (message == 'turnMectoOn') {
+        console.log('turn on mnecto')
+        emitter.emit('turn-on-mecto-watch')
+      }
+    });
+  }
 
   walletExists(function(exists){
     auth = exists ? initAuth.pin(null, { userExists: true }) : initAuth.choose()
@@ -48,9 +85,30 @@ window.initCSApp = function() {
     var ticker = new Ticker(getNetwork())
 
     ticker.getExchangeRates(function(err, rates){
-      if(rates) emitter.emit('ticker', rates)
+      if (rates) {
+        if (window.buildPlatform === 'ios') {
+          applewatch.sendMessage(rates, 'ratesQueue');
+        }
+        emitter.emit('ticker', rates);
+      }
       window.setTimeout(updateExchangeRates, tickerUpdateInterval)
     })
+  }
+  
+  function onSuccessInitAppleWatch(appGroupId) {
+    console.log('success init with ' + appGroupId);
+  }
+  
+  function onErrorInitAppleWatch() {
+    console.log('failed init apple watch module');
+  }
+  
+  function onSuccessUserDefaults() {
+    console.log('success on user defaults')
+  }
+  
+  function onErrorUserDefaults() {
+    console.log('error on user defaults')
   }
 
   updateExchangeRates()
