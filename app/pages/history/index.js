@@ -36,7 +36,10 @@ module.exports = function(el){
     ractive.set('transactions', transactions)
     ractive.set('loadingTx', false)
     if (window.buildPlatform === 'ios') {
-      applewatch.sendMessage(newTxs, 'transactionHistoryQueue')
+      var response = {}
+      response.command = 'transactionMessage'
+      response.transactions = newTxs
+      applewatch.sendMessage(response, 'comandAnswerQueue')
     }
   })
 

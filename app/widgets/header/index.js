@@ -42,11 +42,12 @@ module.exports = function(el){
       ractive.set('fiatCurrency', info.preferredCurrency)
     })
     if (window.buildPlatform === 'ios') {
-      var balanceMessage = {}
-      balanceMessage.balance = balance
-      balanceMessage.denomination = getWallet().denomination
-      console.log('result balance-ready for sendMessage = ' + balanceMessage)
-      applewatch.sendMessage(balanceMessage, 'balanceQueue')
+      var response = {}
+      response.command = 'balanceMessage'
+      response.balance = balance
+      response.denomination = getWallet().denomination
+      response.walletId = getWallet().getNextAddress()
+      applewatch.sendMessage(response, 'comandAnswerQueue')
     }
   })
 
@@ -57,11 +58,12 @@ module.exports = function(el){
   emitter.on('update-balance', function() {
     ractive.set('bitcoinBalance', getWallet().getBalance())
     if (window.buildPlatform === 'ios') {
-      var balanceMessage = {}
-      balanceMessage.balance = getWallet().getBalance()
-      balanceMessage.denomination = getWallet().denomination;
-      console.log('result update-balance for sendMessage = ' + balanceMessage)
-      applewatch.sendMessage(balanceMessage, 'balanceQueue')
+      var response = {}
+      response.command = 'balanceMessage'
+      response.balance = getWallet().getBalance()
+      response.denomination = getWallet().denomination
+      response.walletId = getWallet().getNextAddress()
+      applewatch.sendMessage(response, 'comandAnswerQueue')
     }
   })
 
@@ -117,7 +119,10 @@ module.exports = function(el){
   emitter.on('preferred-currency-changed', function(currency){
     ractive.set('fiatCurrency', currency)
     if (window.buildPlatform === 'ios') {
-      applewatch.sendMessage(currency, 'defaultCurrencyChangedQueue')
+      var response = {}
+      response.command = 'defaultCurrencyMessage'
+      response.defaultCurrency = currency
+      applewatch.sendMessage(response, 'comandAnswerQueue')
     }
   })
 
