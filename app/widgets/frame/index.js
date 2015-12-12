@@ -40,8 +40,8 @@ module.exports = function(el){
   })
 
   emitter.on('open-terms', function(tab) {
-    $("#main").hide();
-    $("#terms").show();
+    $("#main").addClass('terms-open');
+    $("#terms").addClass('terms-open');
 
     var classes = ractive.find("#sidebar").classList
     classes.add('animating')

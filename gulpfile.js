@@ -92,6 +92,7 @@ gulp.task('platform-add-windows', ['platform-config-windows'], function() {
       '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-whitelist")%>',
       '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-splashscreen")%>',
       '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-dialogs")%>',
+      '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-x-socialsharing")%>',
       '<%= ssh("y: && cd phonegap/build && cordova plugin add org.apache.cordova.inappbrowser")%>',
       '<%= ssh("y: && cd phonegap/build && cordova plugin add com.msopentech.websql@0.0.7")%>',
       '<%= bom("phonegap/build/platforms/windows/www/**/*.js")%>',

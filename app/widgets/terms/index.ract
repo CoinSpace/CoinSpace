@@ -1,6 +1,20 @@
-<div class="terms__header">
+<div class="about__header">
+  <a href="#" class="about__back" on-click="back"><span class="about__back-icon"></span> Back</a>
+  <span class="about__title">About</span>
+</div>
+<div class="about">
+  <div class="about__section">
+	  <div class="about__sectiontitle">Release information</div>
+	  <div class="about__listitem">
+	  	<div class="about__listitem-title">Version</div>
+	  	<div class="about__listitem-value">v1.6.0</div>
+	  </div>
+  </div>
 
-  <a href="#" onclick="window.open('https://www.coinspace.ch/coinspaceprivacypolicy.html', '_system');">Terms</a>
-  <span on-click="back">Back</span>
-
+  <div class="about__section">
+	  <a class="about__listitem" onclick="window.open('https://www.coinspace.ch/coinspaceprivacypolicy.html', '_system');" href="#">
+	  	<div class="about__listitem-title">Terms of Use</div>
+	  	<div class="about__listitem-value"><span class="about-arrowright"></span></div>
+	  </a>
+  </div>
 </div>

@@ -14,12 +14,9 @@ module.exports = function(el){
         setTimeout(function(){
             $("#terms").addClass('closed')
             $("#sidebar").addClass('open')
+            $("#main").removeClass('terms-open');
+            $("#terms").removeClass('terms-open');
         }, 0)
-
-        setTimeout(function(){
-            $("#terms").hide()
-            $("#main").show()
-        }, 300)
     })
 
     return ractive
