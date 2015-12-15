@@ -26,7 +26,7 @@ window.initCSApp = function() {
   initGeoOverlay(document.getElementById('geo-overlay'))
 
   if (window.buildPlatform === 'ios') {
-    applewatch.init(onSuccessInitAppleWatch, onErrorInitAppleWatch, 'group.com.coinspace.wallet.dev')
+    applewatch.init(onSuccessInitAppleWatch, onErrorInitAppleWatch, 'group.com.coinspace.wallet')
   
     applewatch.addListener('requestCommandQueue', function(message) {
       
@@ -38,21 +38,26 @@ window.initCSApp = function() {
           if(err) return showError(err)
           emitter.emit('update-balance')
         })
-      } else if (message == 'showQrCode') {
+      } else if (message === 'showQrCode') {
         console.log('receive request qr code')
         var address = CS.getWallet().getNextAddress()
         var qr = yaqrcode(getNetwork() + ':' + address)
     
-        console.log(address)
-        console.log(getNetwork)
+        var response = {}
+        response.command = 'qrMessage'
+        response.qr = qr
+        response.address = address
     
-        applewatch.sendMessage(qr, 'qrQueue')
+        applewatch.sendMessage(response, 'comandAnswerQueue')
       } else if (message == 'turnMectoOff') {
         console.log('turn off mecto')
         emitter.emit('turn-off-mecto-watch')
-      } else if (message == 'turnMectoOn') {
+      } else if (message === 'turnMectoOn') {
         console.log('turn on mnecto')
         emitter.emit('turn-on-mecto-watch')
+      } else if (message === 'getMectoStatus') {
+        console.log('on getMectoStatus')
+        emitter.emit('getMectoStatus')
       }
     });
   }
@@ -87,7 +92,10 @@ window.initCSApp = function() {
     ticker.getExchangeRates(function(err, rates){
       if (rates) {
         if (window.buildPlatform === 'ios') {
-          applewatch.sendMessage(rates, 'ratesQueue');
+          var respone = {}
+          respone.command = 'currencyMessage'
+          respone.currency = rates;
+          applewatch.sendMessage(respone, 'comandAnswerQueue');
         }
         emitter.emit('ticker', rates);
       }
