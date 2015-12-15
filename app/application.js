@@ -26,7 +26,7 @@ window.initCSApp = function() {
   initGeoOverlay(document.getElementById('geo-overlay'))
 
   if (window.buildPlatform === 'ios') {
-    applewatch.init(onSuccessInitAppleWatch, onErrorInitAppleWatch, 'group.com.coinspace.wallet.dev')
+    applewatch.init(onSuccessInitAppleWatch, onErrorInitAppleWatch, 'group.com.coinspace.wallet')
   
     applewatch.addListener('requestCommandQueue', function(message) {
       
