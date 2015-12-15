@@ -98,7 +98,7 @@ module.exports = function(el){
   })
 
   function showQRcode(){
-      if(window.buildType === 'phonegap'){
+      if(window.buildType === 'phonegap' && window.buildPlatform != 'windows'){
           var canvas = document.getElementById("qr_canvas")
           var qr = qrcode(getNetwork() + ':' + getAddress())
           canvas.appendChild(qr)
@@ -148,7 +148,7 @@ module.exports = function(el){
   }, false)
 
   ractive.on('show-qr', function(){
-      if(window.buildType === 'phonegap'){
+      if(window.buildType === 'phonegap' && window.buildPlatform != 'windows'){
           window.plugins.socialsharing.share(ractive.get('address'))
       } else {
           showQr({
