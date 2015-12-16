@@ -9,9 +9,9 @@
     "transform": [ "envify" ]
   },
   "dependencies": {
-    "b39": "git://github.com/skyjam/B39.git",
+    "b39": "git://github.com/CoinSpace/B39.git",
     "bitcoinjs-lib": "^1.5.7",
-    "cs-wallet": "git://github.com/skyjam/cs-wallet.git",
+    "cs-wallet": "git://github.com/CoinSpace/cs-wallet.git",
     "webworkify": "^1.0.0",
     "querystring": "^0.2.0"
   },
