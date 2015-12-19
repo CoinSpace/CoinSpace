@@ -14,6 +14,8 @@ var fadeOut = require('cs-transitions/fade.js').fadeOut
 var getNetwork = require('cs-network')
 var qrcode = require('cs-qrcode')
 
+var WatchModule = require('cs-watch-module')
+
 module.exports = function(el){
   var ractive = new Ractive({
     el: el,
@@ -75,7 +77,7 @@ module.exports = function(el){
           var response = {}
           response.command = 'mectoError'
           response.errorString = 'User name not setted. Please set user name at iPhone app.'
-          applewatch.sendMessage(response, 'comandAnswerQueue')
+          WatchModule.sendMessage(response, 'comandAnswerQueue')
         }
       }
     })
@@ -135,7 +137,7 @@ module.exports = function(el){
         var response = {}
         response.command = 'mectoError'
         response.errorString = err
-        applewatch.sendMessage(response, 'comandAnswerQueue')
+        WatchModule.sendMessage(response, 'comandAnswerQueue')
         return handleMectoError(err)
       } 
       ractive.set('connecting', false)
@@ -200,7 +202,7 @@ module.exports = function(el){
         var response = {}
         response.command = 'mectoStatus'
         response.status = mectoStatus
-        applewatch.sendMessage(response, 'comandAnswerQueue')
+        WatchModule.sendMessage(response, 'comandAnswerQueue')
       } else {
         console.log('not ios platform')
       }

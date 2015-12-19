@@ -7,6 +7,8 @@ var satoshiToBtc = require('cs-convert').satoshiToBtc
 var strftime = require('strftime')
 var showTransactionDetail = require('cs-modal-transaction-detail')
 
+var WatchModule = require('cs-watch-module')
+
 module.exports = function(el){
   var transactions = []
   var ractive = new Ractive({
@@ -39,7 +41,7 @@ module.exports = function(el){
       var response = {}
       response.command = 'transactionMessage'
       response.transactions = newTxs
-      applewatch.sendMessage(response, 'comandAnswerQueue')
+      WatchModule.sendMessage(response, 'comandAnswerQueue')
     }
   })
 
