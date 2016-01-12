@@ -11,6 +11,8 @@ var showError = require('cs-modal-flash').showError
 var db = require('cs-db')
 var currencies = require('cs-ticker-api').currencies
 
+var WatchModule = require('cs-watch-module')
+
 module.exports = function(el){
   var ractive = new Ractive({
     el: el,
@@ -47,7 +49,8 @@ module.exports = function(el){
       response.balance = balance
       response.denomination = getWallet().denomination
       response.walletId = getWallet().getNextAddress()
-      applewatch.sendMessage(response, 'comandAnswerQueue')
+      
+      WatchModule.sendMessage(response, 'comandAnswerQueue')
     }
   })
 
@@ -63,7 +66,8 @@ module.exports = function(el){
       response.balance = getWallet().getBalance()
       response.denomination = getWallet().denomination
       response.walletId = getWallet().getNextAddress()
-      applewatch.sendMessage(response, 'comandAnswerQueue')
+      
+      WatchModule.sendMessage(response, 'comandAnswerQueue')
     }
   })
 
@@ -122,7 +126,7 @@ module.exports = function(el){
       var response = {}
       response.command = 'defaultCurrencyMessage'
       response.defaultCurrency = currency
-      applewatch.sendMessage(response, 'comandAnswerQueue')
+      WatchModule.sendMessage(response, 'comandAnswerQueue')
     }
   })
 
