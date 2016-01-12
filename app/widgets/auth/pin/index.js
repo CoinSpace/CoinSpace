@@ -87,7 +87,7 @@ module.exports = function(prevPage, data){
     } else {
       setTimeout(function(){
         ractive.set('pin', pincode)
-      }, 1)
+      }, 0)
     }
 
     for(var i=boxes.length; i<4; i++) {

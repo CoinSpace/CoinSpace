@@ -112,5 +112,7 @@
     "Username not available": "ไม่มีชื่อผู้ใช้",
     "Allow for payments with OpenAlias addresses. Supported wallets only.": "อนุญาตให้ชำระเงินกับ OpenAlias ที่อยู่ กระเป๋าที่ได้รับการสนับสนุนเท่านั้น",
     "Enter PIN": "ป้อน PIN",
-    "Scan your fingerprint please": "สแกนลายนิ้วมือของคุณโปรด"
+    "Scan your fingerprint please": "สแกนลายนิ้วมือของคุณโปรด",
+    "I Agree To The Terms & Conditions": "I Agree To The Terms & Conditions",
+    "Terms of Use": "Terms of Use"
 }

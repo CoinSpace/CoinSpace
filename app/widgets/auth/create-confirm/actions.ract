@@ -1,6 +1,6 @@
-{{^checked}}
+{{^setPin}}
 <div class="auth__btn--inactive" >{{translate("Set your PIN")}}</div>
-{{/checked}}
-{{#checked}}
+{{/setPin}}
+{{#setPin}}
 <div class="auth__btn" on-click="create-pin">{{translate("Set your PIN")}}</div>
-{{/checked}}
+{{/setPin}}

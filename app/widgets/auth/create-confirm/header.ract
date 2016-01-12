@@ -23,6 +23,16 @@
   <p class="_checktext">{{translate("Send this Passphrase to my phone")}}</p>
 </div>
 
+<div class="passphrase__accept">
+  <div id="check" class="_checkbox" on-click="toggle-terms-check">
+    {{#termsChecked}}
+      <div id="check" class="_check"></div>
+    {{/termsChecked}}
+  </div>
+
+  <p class="_checktext">{{translate("I Agree To The Terms & Conditions")}}</p>
+</div>
+
 {{#phoneChecked}}
 <div class="phone__group auth__input-group">
   <label class="_label">{{translate("Enter mobile number")}}:
@@ -32,3 +42,9 @@
   </label>
 </div>
 {{/phoneChecked}}
+
+<div class="about__section">
+  <a class="about__listitem" onclick="window.open('https://www.coinspace.ch/coinspaceprivacypolicy.html', '_system');" href="#">
+    <div class="about__listitem-title">{{translate("Terms of Use")}}</div>
+  </a>
+</div>

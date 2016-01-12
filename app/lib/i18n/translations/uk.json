@@ -112,5 +112,7 @@
     "Username not available": "Ім'я користувача не доступний",
     "Allow for payments with OpenAlias addresses. Supported wallets only.": "Дозволити для платежів з OpenAlias адреси. Підтримувані гаманці.",
     "Enter PIN": "Введіть PIN",
-    "Scan your fingerprint please": "Сканування відбитків пальців, будь ласка"
+    "Scan your fingerprint please": "Сканування відбитків пальців, будь ласка",
+    "I Agree To The Terms & Conditions": "I Agree To The Terms & Conditions",
+    "Terms of Use": "Terms of Use"
 }

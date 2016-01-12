@@ -112,5 +112,7 @@
     "Username not available": "Nama pengguna tidak tersedia",
     "Allow for payments with OpenAlias addresses. Supported wallets only.": "Memungkinkan untuk pembayaran dengan alamat OpenAlias. Dompet didukung.",
     "Enter PIN": "Masukkan PIN",
-    "Scan your fingerprint please": "Memindai sidik jari Anda silakan"
+    "Scan your fingerprint please": "Memindai sidik jari Anda silakan",
+    "I Agree To The Terms & Conditions": "I Agree To The Terms & Conditions",
+    "Terms of Use": "Terms of Use"
 }

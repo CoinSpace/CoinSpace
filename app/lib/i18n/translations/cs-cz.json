@@ -112,5 +112,7 @@
     "Username not available": "Uživatelské jméno není k dispozici.",
     "Allow for payments with OpenAlias addresses. Supported wallets only.": "Povolit platby s OpenAlias adresy. Pouze podporované peněženky.",
     "Enter PIN": "Zadejte kód PIN",
-    "Scan your fingerprint please": "Skenování otisku prstu, prosím"
+    "Scan your fingerprint please": "Skenování otisku prstu, prosím",
+    "I Agree To The Terms & Conditions": "I Agree To The Terms & Conditions",
+    "Terms of Use": "Terms of Use"
 }

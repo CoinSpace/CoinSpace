@@ -112,5 +112,7 @@
     "Username not available": "没有可供选择的用户名",
     "Allow for payments with OpenAlias addresses. Supported wallets only.": "允许使用 OpenAlias 地址付款。只有受支持的钱包。",
     "Enter PIN": "输入PIN码",
-    "Scan your fingerprint please": "扫描指纹，请"
+    "Scan your fingerprint please": "扫描指纹，请",
+    "I Agree To The Terms & Conditions": "I Agree To The Terms & Conditions",
+    "Terms of Use": "Terms of Use"
 }

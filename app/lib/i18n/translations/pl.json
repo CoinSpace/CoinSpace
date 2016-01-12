@@ -112,5 +112,7 @@
     "Username not available": "Nazwa użytkownika nie jest dostępny",
     "Allow for payments with OpenAlias addresses. Supported wallets only.": "Pozwala na płatności z OpenAlias adresów. Obsługiwane tylko portfele.",
     "Enter PIN": "Wprowadź kod PIN",
-    "Scan your fingerprint please": "Skanowanie odcisku palca należy"
+    "Scan your fingerprint please": "Skanowanie odcisku palca należy",
+    "I Agree To The Terms & Conditions": "I Agree To The Terms & Conditions",
+    "Terms of Use": "Terms of Use"
 }
