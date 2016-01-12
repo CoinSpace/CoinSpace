@@ -117,6 +117,9 @@ module.exports = function(el){
   function showQRcode(){
       if(window.buildType === 'phonegap' && window.buildPlatform != 'windows'){
           var canvas = document.getElementById("qr_canvas")
+          while (canvas.hasChildNodes()) {
+              canvas.removeChild(canvas.firstChild)
+          }
           var qr = qrcode(getNetwork() + ':' + getAddress())
           canvas.appendChild(qr)
       }

@@ -58,6 +58,9 @@ window.initCSApp = function() {
           var respone = {}
           respone.command = 'currencyMessage'
           respone.currency = rates;
+          
+          WatchModule.setRates(rates)
+          
           WatchModule.sendMessage(respone, 'comandAnswerQueue')
         }
         emitter.emit('ticker', rates);
