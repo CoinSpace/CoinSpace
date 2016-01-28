@@ -54,7 +54,6 @@ module.exports = function(prevPage, data){
                               boxes[i] = null
                           }
                           ractive.set('boxes', boxes)
-                          ractive.fire('enter-pin')
                       }
                   )
               }
