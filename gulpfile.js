@@ -126,7 +126,7 @@ gulp.task('copy-build-ios', ['clean', 'build-js'], function() {
         'connect-src': [
             "'self'", 'blob:',
             'https://api.bitcoinaverage.com', 'https://chain.so',
-            'https://btc.blockr.io', 'https://tbtc.blockr.io', 'https://ltc.blockr.io',
+            'https://btc.blockr.io', 'https://tbtc.blockr.io', 'https://ltc.blockr.io', 'insight.bitpay.com', 'live.coin.space',
             'https://' + env.DB_HOST, env.PROXY_URL.split('?')[0], env.PHONEGAP_URL
         ],
         'font-src': ["'self'"],
