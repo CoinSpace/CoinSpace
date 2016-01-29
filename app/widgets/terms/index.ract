@@ -12,7 +12,7 @@
   </div>
 
   <div class="about__section">
-	  <a class="about__listitem" onclick="window.open('https://www.coinspace.ch/coinspaceprivacypolicy.html', '_system');" href="#">
+	  <a class="about__listitem" onclick="window.open('https://www.coin.space/coinspaceprivacypolicy.html', '_system');" href="#">
 	  	<div class="about__listitem-title">Terms of Use</div>
 	  	<div class="about__listitem-value"><span class="about-arrowright"></span></div>
 	  </a>
