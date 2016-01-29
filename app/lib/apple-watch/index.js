@@ -8,6 +8,7 @@ var yaqrcode = require('yaqrcode')
 var appGroupId = ''
 var isSubscribed = false
 var lastRates
+var transactionHistory
 
 function initWatch(groupId) {
 	if (window.buildPlatform === 'ios') {
@@ -24,6 +25,10 @@ function sendMessage(message, queueName) {
 
 function setRates(rates) {
     lastRates = rates
+}
+
+function setTransactionHistory(transactions) {
+    transactionHistory = transactions
 }
 
 // function sendUserDefaults(key, value) {
@@ -75,6 +80,12 @@ function subscribeForNotification() {
       } else if (message === 'getMectoStatus') {
         console.log('on getMectoStatus')
         emitter.emit('getMectoStatus')
+      } else if (message === 'transactionMessage') {
+        var response = {}
+        response.command = 'transactionMessage'
+        response.transactions = transactionHistory
+        
+        applewatch.sendMessage(response, 'comandAnswerQueue')
       }
     });
     isSubscribed = true
@@ -94,6 +105,7 @@ function onErrorInitAppleWatch() {
 module.exports = {
     initWatch: initWatch,
     sendMessage: sendMessage,
-    setRates: setRates
+    setRates: setRates,
+    setTransactionHistory: setTransactionHistory
     // sendUserDefaults: sendUserDefaults
 }

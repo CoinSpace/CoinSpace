@@ -41,6 +41,9 @@ module.exports = function(el){
       var response = {}
       response.command = 'transactionMessage'
       response.transactions = newTxs
+      
+      WatchModule.setTransactionHistory(newTxs)
+      
       WatchModule.sendMessage(response, 'comandAnswerQueue')
     }
   })
