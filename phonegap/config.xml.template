@@ -4,7 +4,7 @@
     <description>
         Coin Space application.
     </description>
-    <author email="support@coin.space" href="https://www.coinspace.ch">
+    <author email="support@coin.space" href="https://www.coin.space">
         Coin Space Team
     </author>
     <content src="index.html" />
