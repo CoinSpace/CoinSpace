@@ -1,0 +1,74 @@
+{
+  "name": "CoinSpace",
+  "scripts": {
+  },
+  "env": {
+    "API_WRAPPER": {
+      "required": true
+    },
+    "API_WRAPPER_URL": {
+      "required": true
+    },
+    "BUILDPACK_URL": {
+      "required": true
+    },
+    "CLOUDFLARE_DOMAIN": {
+      "required": true
+    },
+    "CLOUDFLARE_EMAIL": {
+      "required": true
+    },
+    "CLOUDFLARE_TOKEN": {
+      "required": true
+    },
+    "COOKIE_SALT": {
+      "required": true
+    },
+    "DB_HOST": {
+      "required": true
+    },
+    "DB_PASSWORD": {
+      "required": true
+    },
+    "DB_PORT": {
+      "required": true
+    },
+    "DB_USER": {
+      "required": true
+    },
+    "DNS_SALT": {
+      "required": true
+    },
+    "NODE_ENV": {
+      "required": true
+    },
+    "PHONE_TOKEN": {
+      "required": true
+    },
+    "PHONEGAP_URL": {
+      "required": true
+    },
+    "PROXY_URL": {
+      "required": true
+    },
+    "SMS_API_ID": {
+      "required": true
+    },
+    "SMS_FROM": {
+      "required": true
+    },
+    "SMS_MO": {
+      "required": true
+    },
+    "SMS_PASSWORD": {
+      "required": true
+    },
+    "SMS_USER": {
+      "required": true
+    }
+  },
+  "addons": [
+    "papertrail",
+    "librato"
+  ]
+}
