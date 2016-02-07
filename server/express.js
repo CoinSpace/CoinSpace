@@ -21,15 +21,18 @@ module.exports = function (){
 
   if(isProduction()){
     app.set('trust proxy', true)
-    var proxyHost = process.env.PROXY_URL.replace("https://", '').replace('?url=', '')
+    var proxyHost = process.env.PROXY_URL && process.env.PROXY_URL.replace("https://", '').replace('?url=', '');
+    var connectSrc = [
+      "'self'", 'blob:',
+      'api.bitcoinaverage.com', 'chain.so', // tickers
+      'btc.blockr.io', 'tbtc.blockr.io', 'ltc.blockr.io', 'insight.bitpay.com', 'live.coin.space', // blockchain APIs
+      process.env.DB_HOST
+    ]
+
+    proxyHost && connectSrc.push(proxyHost)
     app.use(helmet.csp({
       'default-src': ["'self'", 'blob:'],
-      'connect-src': [
-        "'self'", 'blob:',
-        'api.bitcoinaverage.com', 'chain.so', // tickers
-        'btc.blockr.io', 'tbtc.blockr.io', 'ltc.blockr.io', 'insight.bitpay.com', 'live.coin.space', // blockchain APIs
-        process.env.DB_HOST, proxyHost
-      ],
+      'connect-src': connectSrc,
       'font-src': ['coin.space'],
       'img-src': ["'self'", 'data:', 'www.gravatar.com'],
       'style-src': ["'self'", "'unsafe-inline'"],
