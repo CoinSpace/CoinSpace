@@ -110,5 +110,9 @@
     "Current Bitcoin Price": "Huidige Bitcoin prijs",
     "Your Alias address": "Uw Alias adres",
     "Username not available": "Gebruikersnaam niet beschikbaar",
-    "Allow for payments with OpenAlias addresses. Supported wallets only.": "Voor betalingen met OpenAlias adressen toestaan. Alleen ondersteunde portefeuilles."
+    "Allow for payments with OpenAlias addresses. Supported wallets only.": "Voor betalingen met OpenAlias adressen toestaan. Alleen ondersteunde portefeuilles.",
+    "Enter PIN": "Voer PIN",
+    "Scan your fingerprint please": "Scan uw vingerafdruk aub",
+    "I Agree To The Terms & Conditions": "I Agree To The Terms & Conditions",
+    "Terms of Use": "Terms of Use"
 }

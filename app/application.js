@@ -10,6 +10,9 @@ window.initCSApp = function() {
   var $ = require('browserify-zepto')
   var getNetwork = require('cs-network')
   var fadeIn = require('cs-transitions/fade.js').fadeIn
+  var sync = require('cs-wallet-js').sync
+
+  var WatchModule = require('cs-watch-module')
 
   var appEl = document.getElementById('app')
   var frame = initFrame(appEl)
@@ -19,6 +22,8 @@ window.initCSApp = function() {
   fastclick(document.body)
 
   initGeoOverlay(document.getElementById('geo-overlay'))
+  
+  WatchModule.initWatch('group.com.coinspace.wallet')
 
   walletExists(function(exists){
     auth = exists ? initAuth.pin(null, { userExists: true }) : initAuth.choose()
@@ -48,7 +53,18 @@ window.initCSApp = function() {
     var ticker = new Ticker(getNetwork())
 
     ticker.getExchangeRates(function(err, rates){
-      if(rates) emitter.emit('ticker', rates)
+      if (rates) {
+        if (window.buildPlatform === 'ios') {
+          var respone = {}
+          respone.command = 'currencyMessage'
+          respone.currency = rates;
+          
+          WatchModule.setRates(rates)
+          
+          WatchModule.sendMessage(respone, 'comandAnswerQueue')
+        }
+        emitter.emit('ticker', rates);
+      }
       window.setTimeout(updateExchangeRates, tickerUpdateInterval)
     })
   }

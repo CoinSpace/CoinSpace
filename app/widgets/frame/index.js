@@ -5,10 +5,12 @@ var emitter = require('cs-emitter')
 var initHeader = require('cs-header')
 var initTabs = require('cs-tabs')
 var initSidebar = require('cs-sidebar')
+var initTerms = require('cs-terms')
 var initSend = require('cs-send')
 var initReceive = require('cs-receive')
 var initHistory = require('cs-history')
 var initTokens = require('cs-tokens')
+var $ = require('browserify-zepto')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -20,6 +22,7 @@ module.exports = function(el){
   var header = initHeader(ractive.nodes['header'])
   initTabs(ractive.nodes['tabs'])
   initSidebar(ractive.nodes['sidebar'])
+  initTerms(ractive.nodes['terms'])
 
   // tabs
   var tabs = {
@@ -34,6 +37,22 @@ module.exports = function(el){
 
   emitter.on('change-tab', function(tab) {
     showPage(tabs[tab])
+  })
+
+  emitter.on('open-terms', function(tab) {
+    $("#main").addClass('terms-open');
+    $("#terms").addClass('terms-open');
+
+    var classes = ractive.find("#sidebar").classList
+    classes.add('animating')
+    classes.remove('open')
+
+    setTimeout(function(){
+      $("#terms").removeClass('closed')
+    }, 0)
+    setTimeout(function(){
+      classes.remove('animating')
+    }, 300)
   })
 
   function showPage(page){

@@ -110,5 +110,9 @@
     "Current Bitcoin Price": "Jelenlegi Bitcoin ár",
     "Your Alias address": "Az Alias-címét",
     "Username not available": "Felhasználóneved nem érhető el",
-    "Allow for payments with OpenAlias addresses. Supported wallets only.": "Lehetővé teszi a kifizetések OpenAlias címmel. Csak a támogatott pénztárca."
+    "Allow for payments with OpenAlias addresses. Supported wallets only.": "Lehetővé teszi a kifizetések OpenAlias címmel. Csak a támogatott pénztárca.",
+    "Enter PIN": "PIN-kód megadása",
+    "Scan your fingerprint please": "Olvassa be az ujjlenyomat kérjük",
+    "I Agree To The Terms & Conditions": "I Agree To The Terms & Conditions",
+    "Terms of Use": "Terms of Use"
 }

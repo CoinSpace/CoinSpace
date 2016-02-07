@@ -14,12 +14,21 @@ function confirm(data){
     }
   })
 
+  function isChecked(){
+    if(ractive.get('termsChecked') && ractive.get('checked')) {
+        ractive.set('setPin', true)
+    } else {
+        ractive.set('setPin', false)
+    }
+  }
+
   ractive.on('toggle-check', function(){
     if(ractive.get('checked')) {
       ractive.set('checked', false)
     } else {
       ractive.set('checked', true)
     }
+    isChecked()
   })
 
   ractive.on('toggle-phone-check', function(){
@@ -28,6 +37,15 @@ function confirm(data){
     } else {
       ractive.set('phoneChecked', true)
     }
+  })
+
+  ractive.on('toggle-terms-check', function(){
+    if(ractive.get('termsChecked')) {
+        ractive.set('termsChecked', false)
+    } else {
+        ractive.set('termsChecked', true)
+    }
+    isChecked()
   })
 
   ractive.on('create-pin', function() {

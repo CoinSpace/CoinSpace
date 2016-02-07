@@ -110,5 +110,9 @@
     "Current Bitcoin Price": "Precio actual de Bitcoin",
     "Your Alias address": "Su dirección de Alias",
     "Username not available": "Nombre de usuario no está disponible",
-    "Allow for payments with OpenAlias addresses. Supported wallets only.": "Permitir pagos con direcciones OpenAlias. Carteras soportados solamente."
+    "Allow for payments with OpenAlias addresses. Supported wallets only.": "Permitir pagos con direcciones OpenAlias. Carteras soportados solamente.",
+    "Enter PIN": "Introduzca PIN",
+    "Scan your fingerprint please": "Analice su huella digital por favor",
+    "I Agree To The Terms & Conditions": "I Agree To The Terms & Conditions",
+    "Terms of Use": "Terms of Use"
 }

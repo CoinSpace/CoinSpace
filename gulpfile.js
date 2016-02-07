@@ -41,8 +41,11 @@ gulp.task('platform-add-android', ['copy-config', 'copy-build'], shell.task([
   'cordova platform add android',
   'cordova plugin add cordova-plugin-geolocation',
   'cordova plugin add cordova-plugin-whitelist',
+  'cordova plugin add org.apache.cordova.inappbrowser',
   'cordova plugin add cordova-plugin-splashscreen',
-  'cordova plugin add https://github.com/skyjam/CS-barcodescanner.git'
+  'cordova plugin add https://github.com/skyjam/CS-barcodescanner.git',
+  'cordova plugin add cordova-plugin-dialogs',
+  'cordova plugin add cordova-plugin-x-socialsharing'
 ], {cwd: paths.build}));
 
 /* Windows tasks */
@@ -66,6 +69,8 @@ gulp.task('platform-add-windows', ['platform-config-windows'], function() {
       '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-geolocation")%>',
       '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-whitelist")%>',
       '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-splashscreen")%>',
+      '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-dialogs")%>',
+      '<%= ssh("y: && cd phonegap/build && cordova plugin add org.apache.cordova.inappbrowser")%>',
       '<%= ssh("y: && cd phonegap/build && cordova plugin add com.msopentech.websql@0.0.7")%>',
       '<%= bom("phonegap/build/platforms/windows/www/**/*.js")%>',
       '<%= ssh("y: && cd phonegap && copy images//windows//icons//* build//platforms//windows//images")%>',
@@ -85,6 +90,70 @@ gulp.task('platform-config-windows', ['copy-config', 'copy-build'], function() {
     .pipe(gulp.dest(paths.build + '/www'));
 });
 
+/* iOS tasks */
+
+gulp.task('platform-add-ios', ['platform-config-ios'], shell.task([
+    'cordova platform add ios',
+    'cordova plugin add cordova-plugin-geolocation',
+    'cordova plugin add cordova-plugin-whitelist',
+    'cordova plugin add cordova-plugin-splashscreen',
+    'cordova plugin add https://github.com/skyjam/CS-barcodescanner.git',
+    'cordova plugin add cordova-plugin-dialogs',
+    'cordova plugin add org.apache.cordova.inappbrowser',
+    'cordova plugin add cordova-plugin-apple-watch',
+    'cordova plugin add org.apache.cordova.statusbar',
+    'cordova plugin add cordova-plugin-x-socialsharing',
+    'cordova plugin add cordova-plugin-touch-id',
+    'cordova plugin add cordova-plugin-console'
+], {cwd: paths.build}));
+
+gulp.task('platform-config-ios', ['copy-config', 'copy-build-ios'], function() {
+    return gulp.src(paths.build + '/www/index.html')
+        .pipe(replace('<!-- CONFIG-PLATFORM -->', '<script>window.buildPlatform = "ios";</script>'))
+        .pipe(gulp.dest(paths.build + '/www'));
+});
+
+gulp.task('build-ios', ['platform-add-ios'], function() {
+    return gulp.src('')
+        .pipe(gulpif(isRelease,
+            shell('cordova build ios --release', {cwd: paths.build}),
+            shell('cordova build ios', {cwd: paths.build})));
+});
+
+gulp.task('copy-build-ios', ['clean', 'build-js'], function() {
+    var csp = {
+        'default-src': ["'self'", 'gap:'],
+        'connect-src': [
+            "'self'", 'blob:',
+            'https://api.bitcoinaverage.com', 'https://chain.so',
+            'https://btc.blockr.io', 'https://tbtc.blockr.io', 'https://ltc.blockr.io', 'insight.bitpay.com', 'live.coin.space',
+            'https://' + env.DB_HOST, env.PROXY_URL.split('?')[0], env.PHONEGAP_URL
+        ],
+        'font-src': ["'self'"],
+        'img-src': ["'self'", 'data:', 'https://www.gravatar.com'],
+        'style-src': ["'self'", "'unsafe-inline'"],
+        'script-src': ["'self'", 'blob:', "'unsafe-eval'", "'unsafe-inline'"]
+    };
+
+    var cspString = '';
+    _.forIn(csp, function(value, key) {
+        cspString += key + ' ' + value.join(' ') + ';';
+    });
+
+    var files = gulp.src(['build/**', '!build/index.html'])
+        .pipe(gulp.dest(paths.build + '/www'))
+    var deviceready = gulp.src(['phonegap/deviceready.js'])
+        .pipe(gulp.dest(paths.build + '/www/assets/js'))
+    var html = gulp.src('build/index.html')
+        .pipe(replace('<!-- CORDOVA.JS -->', '<script src="cordova.js"></script>'))
+        .pipe(replace('<!-- CONFIG -->', '<script>window.buildType = "phonegap";</script>'))
+        .pipe(replace('<!-- CORDOVA-WHITELIST-CSP -->', '<meta http-equiv="Content-Security-Policy" content="' + cspString + '">'))
+        .pipe(replace('<div id="logo_animation">', '<div id="logo_animation" style="display: none;">'))
+        .pipe(replace('<script src="assets/js/loader.js"></script>','<script src="assets/js/deviceready.js"></script>'))
+        .pipe(gulp.dest(paths.build + '/www'));
+    return merge(files, deviceready, html);
+});
+
 /* Common tasks */
 
 gulp.task('copy-config', ['clean'], function() {
@@ -95,9 +164,9 @@ gulp.task('copy-config', ['clean'], function() {
 
 gulp.task('copy-build', ['clean', 'build-js'], function() {
   var csp = {
-    'default-src': ["'self'"],
+    'default-src': ["'self'", 'blob:'],
     'connect-src': [
-      "'self'", "blob:",
+      "'self'", 'blob:',
       'https://api.bitcoinaverage.com', 'https://chain.so',
       'https://btc.blockr.io', 'https://tbtc.blockr.io', 'https://ltc.blockr.io',
       'https://' + env.DB_HOST, env.PROXY_URL.split('?')[0], env.PHONEGAP_URL
