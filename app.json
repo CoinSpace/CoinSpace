@@ -48,9 +48,6 @@
     "PHONEGAP_URL": {
       "required": true
     },
-    "PROXY_URL": {
-      "required": true
-    },
     "SMS_API_ID": {
       "required": true
     },
