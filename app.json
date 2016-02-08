@@ -67,5 +67,10 @@
   "addons": [
     "papertrail",
     "librato"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/CoinSpace/cs-heroku-buildpack-nodejs"
+    }
   ]
 }
