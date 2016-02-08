@@ -1,7 +1,7 @@
 {
   "name": "coinspace",
   "version": "0.1.6",
-  "description": "",
+  "description": "Digital currency wallet",
   "main": "index.js",
   "scripts": {
     "build": "aperture link && node ./build.js build",
