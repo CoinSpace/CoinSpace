@@ -12,6 +12,9 @@ var showSetDetails = require('cs-modal-set-details')
 var fadeIn = require('cs-transitions/fade.js').fadeIn
 var fadeOut = require('cs-transitions/fade.js').fadeOut
 var getNetwork = require('cs-network')
+var qrcode = require('cs-qrcode')
+
+var WatchModule = require('cs-watch-module')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -31,6 +34,7 @@ module.exports = function(el){
 
   emitter.on('balance-ready', function(){
     ractive.set('address', getAddress())
+    showQRcode()
   })
 
   emitter.on('wallet-ready', function(){
@@ -59,18 +63,67 @@ module.exports = function(el){
     }
   })
 
+  emitter.on('turn-on-mecto-watch', function() {
+    console.log('on turn on mecto')
+    
+    db.get(function(error, doc) {
+      if (error) {
+        console.log('error mecto: ' + error)
+      } else {
+        if (doc.userInfo.firstName) {
+          mectoOn()
+        } else {
+          console.log('firstName not setted: ' + doc.userInfo.firstName)
+          var response = {}
+          response.command = 'mectoError'
+          response.errorString = 'User name not setted. Please set user name at iPhone app.'
+          WatchModule.sendMessage(response, 'comandAnswerQueue')
+        }
+      }
+    })
+  })
+  
+  emitter.on('getMectoStatus', function() {
+    if (ractive.get('broadcasting')) {
+      sendMectoStatus('on')
+    } else {
+      sendMectoStatus('off')
+    }
+  })
+  
+  emitter.on('turn-off-mecto-watch', function() {
+    console.log('on turn off mecto')
+    mectoOff()
+  })
+
   ractive.on('toggle-broadcast', function(){
     if(ractive.get('connecting')) return;
 
     if(ractive.get('broadcasting')) {
       mectoOff()
+      sendMectoStatus('off')
     } else {
       showSetDetails(function(err){
-        if(err) return showError({message: 'Could not save your details'})
+        if (err) {
+          sendMectoStatus('off')
+          return showError({message: 'Could not save your details'})
+        }
         mectoOn()
+        sendMectoStatus('on')
       })
     }
   })
+
+  function showQRcode(){
+      if(window.buildType === 'phonegap' && window.buildPlatform != 'windows'){
+          var canvas = document.getElementById("qr_canvas")
+          while (canvas.hasChildNodes()) {
+              canvas.removeChild(canvas.firstChild)
+          }
+          var qr = qrcode(getNetwork() + ':' + getAddress())
+          canvas.appendChild(qr)
+      }
+  }
 
   function mectoOff(){
     ractive.set('broadcasting', false)
@@ -82,7 +135,14 @@ module.exports = function(el){
     ractive.set('connecting', true)
     ractive.set('btn_message', 'Checking your location')
     geo.save(function(err){
-      if(err) return handleMectoError(err)
+      if(err) {
+        console.log('error on mecto = ' + err)
+        var response = {}
+        response.command = 'mectoError'
+        response.errorString = err
+        WatchModule.sendMessage(response, 'comandAnswerQueue')
+        return handleMectoError(err)
+      } 
       ractive.set('connecting', false)
       ractive.set('broadcasting', true)
       ractive.set('btn_message', 'Turn Mecto off')
@@ -100,10 +160,14 @@ module.exports = function(el){
   }, false)
 
   ractive.on('show-qr', function(){
-    showQr({
-      address: ractive.get('address'),
-      alias: ractive.get('alias')
-    })
+      if(window.buildType === 'phonegap' && window.buildPlatform != 'windows'){
+          window.plugins.socialsharing.share(ractive.get('address'))
+      } else {
+          showQr({
+              address: ractive.get('address'),
+              alias: ractive.get('alias')
+          })
+      }
   })
 
   ractive.on('help-alias', function() {
@@ -134,6 +198,18 @@ module.exports = function(el){
     ractive.set('connecting', false)
     ractive.set('broadcasting', false)
     ractive.set('btn_message', 'Turn Mecto on')
+  }
+  
+  function sendMectoStatus(mectoStatus) {
+    if (window.buildPlatform === 'ios') {
+        var response = {}
+        response.command = 'mectoStatus'
+        response.status = mectoStatus
+        WatchModule.sendMessage(response, 'comandAnswerQueue')
+      } else {
+        console.log('not ios platform')
+      }
+
   }
 
   return ractive

@@ -1,7 +1,7 @@
 {
   "name": "coinspace",
   "version": "0.1.6",
-  "description": "",
+  "description": "Digital currency wallet",
   "main": "index.js",
   "scripts": {
     "build": "aperture link && node ./build.js build",
@@ -65,6 +65,7 @@
     "geomodel": "~0.1.2",
     "glob": "^3.2.9",
     "glob-watcher": "0.0.6",
+    "hammerjs": "^2.0.4",
     "helmet": "^0.3.2",
     "minimatch": "^1.0.0",
     "mkdirp": "^0.5.0",
@@ -78,7 +79,8 @@
     "tiny-lr": "0.0.7",
     "uglifyify": "^2.5.0",
     "uniqueify": "~1.0.0",
-    "velocity-animate": "git://github.com/skyjam/velocity.git"
+    "velocity-animate": "git://github.com/skyjam/velocity.git",
+    "yaqrcode": "^0.2.1"
   },
   "aperture": {
     "sources": [
@@ -88,7 +90,7 @@
     ]
   },
   "engines": {
-    "node": "~0.10.26",
+    "node": "~0.12.9",
     "npm": "^2.1.0"
   }
 }

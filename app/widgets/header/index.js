@@ -11,6 +11,8 @@ var showError = require('cs-modal-flash').showError
 var db = require('cs-db')
 var currencies = require('cs-ticker-api').currencies
 
+var WatchModule = require('cs-watch-module')
+
 module.exports = function(el){
   var ractive = new Ractive({
     el: el,
@@ -34,12 +36,22 @@ module.exports = function(el){
   })
 
   emitter.on('balance-ready', function(balance) {
+    console.log('on balance-ready event')
     ractive.set('bitcoinBalance', balance)
     ractive.set('denomination', getWallet().denomination)
     db.get('systemInfo', function(err, info){
       if(err) return console.error(err);
       ractive.set('fiatCurrency', info.preferredCurrency)
     })
+    if (window.buildPlatform === 'ios') {
+      var response = {}
+      response.command = 'balanceMessage'
+      response.balance = balance
+      response.denomination = getWallet().denomination
+      response.walletId = getWallet().getNextAddress()
+      
+      WatchModule.sendMessage(response, 'comandAnswerQueue')
+    }
   })
 
   emitter.on('wallet-ready', function(){
@@ -48,6 +60,15 @@ module.exports = function(el){
 
   emitter.on('update-balance', function() {
     ractive.set('bitcoinBalance', getWallet().getBalance())
+    if (window.buildPlatform === 'ios') {
+      var response = {}
+      response.command = 'balanceMessage'
+      response.balance = getWallet().getBalance()
+      response.denomination = getWallet().denomination
+      response.walletId = getWallet().getNextAddress()
+      
+      WatchModule.sendMessage(response, 'comandAnswerQueue')
+    }
   })
 
   ractive.on('toggle', function(){
@@ -101,6 +122,12 @@ module.exports = function(el){
 
   emitter.on('preferred-currency-changed', function(currency){
     ractive.set('fiatCurrency', currency)
+    if (window.buildPlatform === 'ios') {
+      var response = {}
+      response.command = 'defaultCurrencyMessage'
+      response.defaultCurrency = currency
+      WatchModule.sendMessage(response, 'comandAnswerQueue')
+    }
   })
 
   emitter.on('ticker', function(rates){

@@ -13,9 +13,14 @@
   background-color: $background;
   flex: 1; // take up full width
 
-  transition: transform .3s ease;
+  transition: transform .3s, opacity 0.3s, margin 0s;
   transform: translateX(0);
   box-shadow: -5px 0px 15px 0px rgba(25,25,25,0.3);
+  -webkit-transition-delay: 0s, 0s, 0s;
+     -moz-transition-delay: 0s, 0s, 0s;
+      -ms-transition-delay: 0s, 0s, 0s;
+       -o-transition-delay: 0s, 0s, 0s;
+          transition-delay: 0s, 0s, 0s;
 
   &.closed {
     position: fixed;
@@ -25,6 +30,14 @@
     right: 0;
     transform: translateX(273px);
     overflow: hidden;
+  }
+
+  &.terms-open {transform: translateX(0); opacity: 0; margin-left: 10000px;
+    -webkit-transition-delay: 0s, 0s, 0.3s;
+       -moz-transition-delay: 0s, 0s, 0.3s;
+        -ms-transition-delay: 0s, 0s, 0.3s;
+         -o-transition-delay: 0s, 0s, 0.3s;
+            transition-delay: 0s, 0s, 0.3s;
   }
 
   .content {
@@ -82,6 +95,35 @@
   }
 }
 
+#terms {
+  @include clear;
+  position: relative;
+  background-color: $background;
+  flex: 1; // take up full width
+  transition: transform .3s, opacity 0.3s, margin 0s;
+  transform: translateX(0);
+  box-shadow: -5px 0px 15px 0px rgba(25,25,25,0.3);
+  margin-top: -10000px;
+  opacity: 0;
+
+  &.closed {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateX(273px);
+    overflow: hidden;
+  }
+
+  &.terms-open {margin-top: 0; opacity: 1;}
+
+  @include breakpoint(portrait) {
+    &.closed {
+      transform: translateX(320px);
+    }
+  }
+}
 
 .litecoin {
   #sidebar {

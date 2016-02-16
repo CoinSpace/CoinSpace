@@ -23,6 +23,8 @@
   {{/alias}}
 {{/isBitcoin}}
 
+<div class="qr-code" id="qr_canvas"></div>
+
 {{#mecto}}
 <div class="receive__label">
 {{^broadcasting}}

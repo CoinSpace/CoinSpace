@@ -17,6 +17,7 @@ var wallet = null
 var seed = null
 var mnemonic = null
 var id = null
+var availableTouchId = false
 
 function createWallet(passphrase, network, callback) {
   var message = passphrase ? 'Decoding seed phrase' : 'Generating'
@@ -58,6 +59,8 @@ function setPin(pin, phone, network, done, unspentsDone, balanceDone) {
 
     emitter.emit('wallet-auth', {token: token, pin: pin})
 
+    savePin(pin)
+
     var encrypted = AES.encrypt(seed, token)
     db.saveEncrypedSeed(id, encrypted, function(err){
       if(err) return callbackError(err.error, callbacks);
@@ -90,6 +93,8 @@ function openWalletWithPin(pin, network, done, unspentsDone, balanceDone) {
         return callbackError(err.error, callbacks);
       }
 
+      savePin(pin)
+
       assignSeedAndId(AES.decrypt(encryptedSeed, token))
       emitter.emit('wallet-auth', {token: token, pin: pin})
 
@@ -98,6 +103,23 @@ function openWalletWithPin(pin, network, done, unspentsDone, balanceDone) {
                  done, unspentsDone, balanceDone)
     })
   })
+}
+
+function savePin(pin){
+    if(availableTouchId) window.localStorage.setItem('_pin_cs', AES.encrypt(pin, 'pinCoinSpace'))
+}
+
+function setAvailableTouchId(){
+    availableTouchId = true
+}
+
+function getPin(){
+    var pin = window.localStorage.getItem('_pin_cs')
+    return pin ? AES.decrypt(pin, 'pinCoinSpace') : null
+}
+
+function resetPin(){
+    window.localStorage.removeItem('_pin_cs')
 }
 
 function assignSeedAndId(s) {
@@ -210,5 +232,8 @@ module.exports = {
   reset: reset,
   sync: sync,
   validateSend: validateSend,
-  parseTx: parseTx
+  parseTx: parseTx,
+  getPin: getPin,
+  resetPin: resetPin,
+  setAvailableTouchId: setAvailableTouchId
 }

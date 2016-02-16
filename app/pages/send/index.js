@@ -36,12 +36,20 @@ module.exports = function(el){
 
   ractive.on('open-qr', function(){
     if (ractive.get('qrScannerAvailable')) {
-      cordova.plugins.barcodeScanner.scan(function(result) {
-        if (result.text) {
-          var address = result.text.split(':').pop()
-          emitter.emit('prefill-wallet', address)
-        }
-      });
+      cordova.plugins.barcodeScanner.scan(
+        function(result) {
+            if (result.text) {
+              var address = result.text.split(':').pop()
+              emitter.emit('prefill-wallet', address)
+            }
+        },
+        function (error) {
+            navigator.notification.alert(
+                'Access to the camera has been prohibited; please enable it in the Settings app to continue',
+                function(){},
+                'Coin Space'
+            )
+        })
     }
   })
 

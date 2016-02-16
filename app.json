@@ -48,9 +48,6 @@
     "PHONEGAP_URL": {
       "required": true
     },
-    "PROXY_URL": {
-      "required": true
-    },
     "SMS_API_ID": {
       "required": true
     },
@@ -70,5 +67,10 @@
   "addons": [
     "papertrail",
     "librato"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/CoinSpace/cs-heroku-buildpack-nodejs"
+    }
   ]
 }

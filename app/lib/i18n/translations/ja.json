@@ -110,5 +110,9 @@
     "Current Bitcoin Price": "現在の Bitcoin 価格",
     "Your Alias address": "エイリアス アドレス",
     "Username not available": "ユーザー名は使用できません。",
-    "Allow for payments with OpenAlias addresses. Supported wallets only.": "OpenAlias アドレスでのお支払いできるように。サポートされている財布のみ。"
+    "Allow for payments with OpenAlias addresses. Supported wallets only.": "OpenAlias アドレスでのお支払いできるように。サポートされている財布のみ。",
+    "Enter PIN": "PINを入力してください",
+    "Scan your fingerprint please": "あなたの指紋をスキャンしてください",
+    "I Agree To The Terms & Conditions": "I Agree To The Terms & Conditions",
+    "Terms of Use": "Terms of Use"
 }

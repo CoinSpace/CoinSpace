@@ -21,16 +21,19 @@ module.exports = function (){
 
   if(isProduction()){
     app.set('trust proxy', true)
-    var proxyHost = process.env.PROXY_URL.replace("https://", '').replace('?url=', '')
+    var proxyHost = process.env.PROXY_URL && process.env.PROXY_URL.replace("https://", '').replace('?url=', '');
+    var connectSrc = [
+      "'self'", 'blob:',
+      'api.bitcoinaverage.com', 'chain.so', // tickers
+      'btc.blockr.io', 'tbtc.blockr.io', 'ltc.blockr.io', 'insight.bitpay.com', 'live.coin.space', // blockchain APIs
+      process.env.DB_HOST
+    ]
+
+    proxyHost && connectSrc.push(proxyHost)
     app.use(helmet.csp({
       'default-src': ["'self'", 'blob:'],
-      'connect-src': [
-        "'self'", 'blob:',
-        'api.bitcoinaverage.com', 'chain.so', // tickers
-        'btc.blockr.io', 'tbtc.blockr.io', 'ltc.blockr.io', 'insight.bitpay.com', 'live.coin.space', // blockchain APIs
-        process.env.DB_HOST, proxyHost
-      ],
-      'font-src': ['coin.space'],
+      'connect-src': connectSrc,
+      'font-src': ["'self'", 'coin.space'],
       'img-src': ["'self'", 'data:', 'www.gravatar.com'],
       'style-src': ["'self'", "'unsafe-inline'"],
       'script-src': ["'self'", 'blob:', "'unsafe-eval'"], // http://lists.w3.org/Archives/Public/public-webappsec/2014Apr/0021.html, https://github.com/ractivejs/ractive/issues/285
