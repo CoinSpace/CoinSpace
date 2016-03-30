@@ -1,1 +1,1 @@
-web: aperture link && npm start
+web: npm start

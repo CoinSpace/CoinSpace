@@ -8,3 +8,4 @@ provisioners
 .idea
 /phonegap/env.json
 /phonegap/release.keystore
+/.env*

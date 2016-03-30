@@ -72,5 +72,6 @@
     {
       "url": "https://github.com/CoinSpace/cs-heroku-buildpack-nodejs"
     }
-  ]
+  ],
+  "image": "heroku/cedar:14"
 }
