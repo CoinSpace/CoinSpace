@@ -10,25 +10,15 @@ require('browsernizr/test/crypto/getrandomvalues')
 require('browsernizr/test/svg/smil')
 
 var token = require('cs-network')()
-var animateLogo = require('cs-transitions/loader.js').animateLogo
 var fadeOut = require('cs-transitions/loader.js').out
 var Modernizr = require('browsernizr')
 var languages = require('cs-i18n').languages
 
 document.getElementsByTagName('html')[0].classList.add(token)
 
-var elems =  {
-  body: document.getElementById('logo_svg_body'),
-  border: document.getElementById('logo_svg_border'),
-  coin: document.getElementById('logo_svg_coin'),
-  space: document.getElementById('logo_svg_space'),
-  dot: document.getElementById('logo_svg_dot')
-}
-
 var containerEl = document.getElementById('loader')
 var goodToGo;
 
-var delay = animateLogo(elems, document.getElementsByTagName('html')[0].classList.contains('no-smil'))
 Modernizr.on('indexeddb', function(hasIndexedDB){
   var supportsPouchDB = hasIndexedDB || Modernizr.websqldatabase
   var language = findTranslation()
@@ -42,9 +32,7 @@ Modernizr.on('indexeddb', function(hasIndexedDB){
     },
     complete: function() {
       if(goodToGo) {
-        setTimeout(function(){
-          fadeOut(containerEl)
-        }, delay)
+        fadeOut(containerEl)
       }
     }
   })
