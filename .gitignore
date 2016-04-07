@@ -8,4 +8,6 @@ provisioners
 .idea
 /phonegap/env.json
 /phonegap/release.keystore
-/.env*
+/.env.*
+docker-compose.dev.yml
+docker-compose.prod.yml
