@@ -20,7 +20,7 @@ function resolve(hostname, callback) {
       if(err) return callback(operation.mainError());
 
       for (var i = 0; i < addresses.length; i++){
-        var data = addresses[i]
+        var data = addresses[i][0]
 
         if(!data.match('^oa1:' + prefix)) continue;
 
