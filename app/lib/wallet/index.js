@@ -52,9 +52,9 @@ function callbackError(err, callbacks) {
   })
 }
 
-function setPin(pin, phone, network, done, unspentsDone, balanceDone) {
+function setPin(pin, network, done, unspentsDone, balanceDone) {
   var callbacks = [done, unspentsDone, balanceDone]
-  auth.register(id, pin, phone, mnemonic, function(err, token){
+  auth.register(id, pin, function(err, token){
     if(err) return callbackError(err.error, callbacks);
 
     emitter.emit('wallet-auth', {token: token, pin: pin})

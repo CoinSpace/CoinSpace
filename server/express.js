@@ -70,7 +70,7 @@ module.exports = function (){
 
   app.post('/register', validateAuthParams(false), function(req, res) {
     var name = req.body.wallet_id
-    auth.register(name, req.body.pin, req.body.phone, req.body.passphrase, function(err, token){
+    auth.register(name, req.body.pin, function(err, token){
       if(err) {
         console.error('error', err)
         return res.status(400).send(err)

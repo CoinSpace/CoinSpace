@@ -47,21 +47,6 @@
     },
     "PHONEGAP_URL": {
       "required": true
-    },
-    "SMS_API_ID": {
-      "required": true
-    },
-    "SMS_FROM": {
-      "required": true
-    },
-    "SMS_MO": {
-      "required": true
-    },
-    "SMS_PASSWORD": {
-      "required": true
-    },
-    "SMS_USER": {
-      "required": true
     }
   },
   "addons": [

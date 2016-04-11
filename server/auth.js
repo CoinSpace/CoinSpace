@@ -4,7 +4,6 @@ var db = require('./db')
 var userDB = db('_users')
 var crypto = require('crypto')
 var AES = require('cs-aes')
-var sms = require('cs-sms-service')
 var openalias = require('cs-openalias')
 
 var userPrefix = "org.couchdb.user:"
@@ -22,18 +21,17 @@ function exist(name, callback) {
   })
 }
 
-function register(name, pin, phone, passphrase, callback){
+function register(name, pin, callback){
   exist(name, function(err, userExist){
     if(err) return callback(err)
 
     if(!userExist) {
-      createUser(name, pin, phone, function(err, token){
+      createUser(name, pin, function(err, token){
         if(err) return callback(err);
         createDatabase(name, function(err){
           if(err) return callback(err);
-          sendPassphraseSMS(phone, passphrase, function(err) {
-            callback(null, token)
-          })
+
+          callback(null, token)
         })
       })
     } else {
@@ -82,14 +80,13 @@ function disablePin(name, pin, callback){
   })
 }
 
-function createUser(name, pin, phone, callback){
+function createUser(name, pin, callback){
   var token = generateToken()
   var password = token + pin
   var hashAndSalt = generatePasswordHash(password)
 
   userDB.save(userPrefix + name, {
     name: name,
-    phone: AES.encrypt(phone, process.env.PHONE_TOKEN + token),
     password_sha: hashAndSalt[0],
     salt: hashAndSalt[1],
     password_scheme: 'simple',
@@ -179,11 +176,6 @@ function setOpenAlias(user, username, address, callback) {
       })
     })
   }
-}
-
-function sendPassphraseSMS(phone, passphrase, callback) {
-  if (!phone) return callback(null)
-  sms.sendPassphrase(phone, passphrase, callback)
 }
 
 function generateToken(){

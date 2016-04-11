@@ -13,15 +13,6 @@
 
   <p class="_checktext">{{translate("I have written down or otherwise securely stored my passphrase")}}</p>
 </div>
-<div class="phone__group">
-  <div id="phoneCheck" class="_checkbox" on-click="toggle-phone-check">
-    {{#phoneChecked}}
-      <div id="phoneCheck" class="_check"></div>
-    {{/phoneChecked}}
-  </div>
-
-  <p class="_checktext">{{translate("Send this Passphrase to my phone")}}</p>
-</div>
 
 <div class="passphrase__accept">
   <div id="check" class="_checkbox" on-click="toggle-terms-check">
@@ -32,16 +23,6 @@
 
   <p class="_checktext">{{translate("I Agree To The Terms & Conditions")}}</p>
 </div>
-
-{{#phoneChecked}}
-<div class="phone__group auth__input-group">
-  <label class="_label">{{translate("Enter mobile number")}}:
-    <div class="input__container">
-      <input id="phoneField" class="_input" type="tel" placeholder="+" autocorrect="off" value="{{phone}}" autocapitalize="off"/>
-    </div>
-  </label>
-</div>
-{{/phoneChecked}}
 
 <div class="about__section">
   <a class="about__listitem" onclick="window.open('https://www.coin.space/coinspaceprivacypolicy.html', '_system');" href="#">

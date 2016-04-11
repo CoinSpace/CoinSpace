@@ -11,7 +11,6 @@ var pincode = ''
 module.exports = function(prevPage, data){
   data = data || {}
   var userExists = data.userExists
-  var phone = data.phone
 
   var ractive = new Ractive({
     partials: {
@@ -151,7 +150,7 @@ module.exports = function(prevPage, data){
   }
 
   function setPin(){
-    CS.setPin(getPin(), phone, ractive.getNetwork(),
+    CS.setPin(getPin(), ractive.getNetwork(),
               ractive.onSyncDone, null, ractive.onBalanceDone)
   }
 
