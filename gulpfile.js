@@ -17,7 +17,7 @@ var isRelease = minimist(process.argv.slice(2)).release;
 
 /* Android tasks */
 
-gulp.task('build-android', ['platform-add-android', 'cradle-fix'], function() {
+gulp.task('build-android', ['platform-add-android'], function() {
   return gulp.src('')
     .pipe(gulpif(isRelease,
       shell('cordova build android --release', {cwd: paths.build}),
@@ -41,7 +41,7 @@ gulp.task('platform-add-android', ['copy-config', 'copy-build'], shell.task([
   'cordova platform add android',
   'cordova plugin add cordova-plugin-geolocation',
   'cordova plugin add cordova-plugin-whitelist',
-  'cordova plugin add org.apache.cordova.inappbrowser',
+  'cordova plugin add cordova-plugin-inappbrowser',
   'cordova plugin add cordova-plugin-splashscreen',
   'cordova plugin add https://github.com/skyjam/CS-barcodescanner.git',
   'cordova plugin add cordova-plugin-dialogs',

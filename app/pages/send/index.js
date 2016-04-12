@@ -34,21 +34,31 @@ module.exports = function(el){
     ractive.set('to', address)
   })
 
+  emitter.on('prefill-value', function(value) {
+    ractive.set('value', value)
+    ractive.fire('bitcoin-to-fiat')
+  })
+
   ractive.on('open-qr', function(){
     if (ractive.get('qrScannerAvailable')) {
       cordova.plugins.barcodeScanner.scan(
         function(result) {
-            if (result.text) {
-              var address = result.text.split(':').pop()
-              emitter.emit('prefill-wallet', address)
+          if (result.text) {
+            var address = result.text.split('?')[0].split(':').pop()
+            emitter.emit('prefill-wallet', address)
+
+            var match = result.text.match(/amount=([0-9.]+)/)
+            if (match && match[1]) {
+              emitter.emit('prefill-value', match[1])
             }
+          }
         },
         function (error) {
-            navigator.notification.alert(
-                'Access to the camera has been prohibited; please enable it in the Settings app to continue',
-                function(){},
-                'Coin Space'
-            )
+          navigator.notification.alert(
+            'Access to the camera has been prohibited; please enable it in the Settings app to continue',
+            function(){},
+            'Coin Space'
+          )
         })
     }
   })
