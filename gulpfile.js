@@ -31,12 +31,6 @@ gulp.task('build-android', ['platform-add-android'], function() {
 
 gulp.task('run-android', shell.task('cordova run android', {cwd: paths.build}));
 
-gulp.task('cradle-fix', ['platform-add-android'], function() {
-  return gulp.src(paths.build + '/platforms/android/build.gradle')
-    .pipe(replace('android {', 'android {\n    lintOptions { checkReleaseBuilds false }'))
-    .pipe(gulp.dest(paths.build + '/platforms/android/'));
-});
-
 gulp.task('platform-add-android', ['copy-config', 'copy-build'], shell.task([
   'cordova platform add android',
   'cordova plugin add cordova-plugin-geolocation',
