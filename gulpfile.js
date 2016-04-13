@@ -86,32 +86,38 @@ gulp.task('platform-config-windows', ['copy-config', 'copy-build'], function() {
 
 /* iOS tasks */
 
-gulp.task('platform-add-ios', ['platform-config-ios'], shell.task([
-    'cordova platform add ios',
-    'cordova plugin add cordova-plugin-geolocation',
-    'cordova plugin add cordova-plugin-whitelist',
-    'cordova plugin add cordova-plugin-splashscreen',
-    'cordova plugin add https://github.com/skyjam/CS-barcodescanner.git',
-    'cordova plugin add cordova-plugin-dialogs',
-    'cordova plugin add cordova-plugin-inappbrowser',
-    'cordova plugin add cordova-plugin-apple-watch',
-    'cordova plugin add cordova-plugin-statusbar',
-    'cordova plugin add cordova-plugin-x-socialsharing',
-    'cordova plugin add cordova-plugin-touch-id',
-    'cordova plugin add cordova-plugin-console'
-], {cwd: paths.build}));
-
-gulp.task('platform-config-ios', ['copy-config', 'copy-build'], function() {
-    return gulp.src(paths.build + '/www/index.html')
-        .pipe(replace('<!-- CONFIG-PLATFORM -->', '<script>window.buildPlatform = "ios";</script>'))
-        .pipe(gulp.dest(paths.build + '/www'));
+gulp.task('build-ios', ['platform-add-ios'], function () {
+  return gulp.src('')
+    .pipe(gulpif(isRelease,
+      shell('cordova build ios --release', {cwd: paths.build}),
+      shell('cordova build ios', {cwd: paths.build})));
 });
 
-gulp.task('build-ios', ['platform-add-ios'], function() {
-    return gulp.src('')
-        .pipe(gulpif(isRelease,
-            shell('cordova build ios --release', {cwd: paths.build}),
-            shell('cordova build ios', {cwd: paths.build})));
+gulp.task('platform-add-ios', ['platform-config-ios'], shell.task([
+  'cordova platform add ios',
+  'cordova plugin add cordova-plugin-geolocation',
+  'cordova plugin add cordova-plugin-whitelist',
+  'cordova plugin add cordova-plugin-splashscreen',
+  'cordova plugin add https://github.com/skyjam/CS-barcodescanner.git',
+  'cordova plugin add cordova-plugin-dialogs',
+  'cordova plugin add cordova-plugin-inappbrowser',
+  'cordova plugin add cordova-plugin-apple-watch',
+  'cordova plugin add cordova-plugin-statusbar',
+  'cordova plugin add cordova-plugin-x-socialsharing',
+  'cordova plugin add cordova-plugin-touch-id',
+  'cordova plugin add cordova-plugin-console'
+], {cwd: paths.build}));
+
+gulp.task('platform-config-ios', ['copy-config', 'copy-build'], function () {
+  var index =  gulp.src(paths.build + '/www/index.html')
+    .pipe(replace('<!-- CONFIG-PLATFORM -->', '<script>window.buildPlatform = "ios";</script>'))
+    .pipe(gulp.dest(paths.build + '/www'));
+
+  var config =  gulp.src(paths.build + '/config.xml')
+    .pipe(replace('id="com.coinspace.app"', 'id="com.coinspace.wallet"'))
+    .pipe(gulp.dest(paths.build));
+
+  return merge(index, config);
 });
 
 /* Common tasks */
