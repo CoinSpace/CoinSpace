@@ -25,7 +25,7 @@
 </div>
 
 <div class="about__section">
-  <a class="about__listitem" onclick="window.open('https://www.coin.space/coinspaceprivacypolicy.html', '_system');" href="#">
+  <a class="about__listitem" onclick="window.open('https://www.coin.space/coinspaceprivacypolicy.html', '_system'); return false;" href="">
     <div class="about__listitem-title">{{translate("Terms of Use")}}</div>
   </a>
 </div>
