@@ -42,9 +42,6 @@
     "NODE_ENV": {
       "required": true
     },
-    "PHONE_TOKEN": {
-      "required": true
-    },
     "PHONEGAP_URL": {
       "required": true
     }
