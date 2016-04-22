@@ -46,7 +46,7 @@ gulp.task('platform-add-android', ['copy-config', 'copy-build'], shell.task([
 
 gulp.task('platform-add-windows', ['platform-config-windows'], function() {
   var ssh = function (cmd) {
-    cmd = cmd.replace(/\/\//g, '\\');
+    cmd = cmd.replace(/\/\/\//g, '\\');
     var fullCmdLine = 'ssh win8 \'' + 'c:\\pstools\\PsExec.exe -i cmd /c "' + cmd + '"\'';
     console.log('executing ssh: ' + fullCmdLine);
     return fullCmdLine
@@ -63,15 +63,19 @@ gulp.task('platform-add-windows', ['platform-config-windows'], function() {
       '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-geolocation")%>',
       '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-whitelist")%>',
       '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-splashscreen")%>',
+      '<%= ssh("y: && cd phonegap/build && cordova plugin add phonegap-plugin-barcodescanner")%>',
       '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-dialogs")%>',
-      '<%= ssh("y: && cd phonegap/build && cordova plugin add org.apache.cordova.inappbrowser")%>',
-      '<%= ssh("y: && cd phonegap/build && cordova plugin add com.msopentech.websql@0.0.7")%>',
+      '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-inappbrowser")%>',
+      '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-x-socialsharing")%>',
+      '<%= ssh("y: && cd phonegap/build && cordova plugin add cordova-plugin-websql")%>',
       '<%= bom("phonegap/build/platforms/windows/www/**/*.js")%>',
-      '<%= ssh("y: && cd phonegap && copy images//windows//icons//* build//platforms//windows//images")%>',
-      '<%= ssh("y: && cd phonegap && copy images//windows//screens//* build//platforms//windows//images")%>',
-      '<%= ssh("if exist c://coinspace rmdir c://coinspace /s /q")%>',
-      '<%= ssh("xcopy y://phonegap//build//platforms//windows//* c://coinspace /s /e /i")%>',
-      '<%= ssh("c://coinspace//CordovaApp.sln")%>',
+      '<%= bom("phonegap/build/platforms/windows/www/index.html")%>',
+      '<%= bom("phonegap/build/platforms/windows/www/assets/css/*.css")%>',
+      '<%= ssh("y: && cd phonegap && copy images///windows///icons///* build///platforms///windows///images")%>',
+      '<%= ssh("y: && cd phonegap && copy images///windows///screens///* build///platforms///windows///images")%>',
+      '<%= ssh("if exist c:///coinspace rmdir c:///coinspace /s /q")%>',
+      '<%= ssh("xcopy y:///phonegap///build///* c:///coinspace /s /e /i")%>',
+      '<%= ssh("c:///coinspace///platforms///windows///CordovaApp.sln")%>',
     ], {
       templateData: {ssh: ssh, bom: bom},
       quiet: true

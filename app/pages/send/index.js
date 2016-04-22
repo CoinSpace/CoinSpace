@@ -20,7 +20,7 @@ module.exports = function(el){
     data: {
       currencies: currencies,
       exchangeRates: {},
-      qrScannerAvailable: window.buildType === 'phonegap' && window.buildPlatform !== 'windows'
+      qrScannerAvailable: window.buildType === 'phonegap'
     }
   })
 

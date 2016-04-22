@@ -28,7 +28,8 @@ module.exports = function(el){
       connecting: false,
       broadcasting: false,
       isBitcoin: getNetwork() == 'bitcoin',
-      mecto: false
+      mecto: false,
+      isSocialSharing: window.buildType === 'phonegap' && window.plugins && window.plugins.socialsharing
     }
   })
 
@@ -115,7 +116,7 @@ module.exports = function(el){
   })
 
   function showQRcode(){
-      if(window.buildType === 'phonegap' && window.buildPlatform != 'windows'){
+      if(ractive.get('isSocialSharing')){
           var canvas = document.getElementById("qr_canvas")
           while (canvas.hasChildNodes()) {
               canvas.removeChild(canvas.firstChild)
@@ -160,7 +161,7 @@ module.exports = function(el){
   }, false)
 
   ractive.on('show-qr', function(){
-      if(window.buildType === 'phonegap' && window.buildPlatform != 'windows'){
+      if(ractive.get('isSocialSharing')){
           window.plugins.socialsharing.share(ractive.get('address'))
       } else {
           showQr({
