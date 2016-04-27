@@ -33,7 +33,7 @@
     {{bitcoinPrice(exchangeRates[fiatCurrency])}} {{fiatCurrency}}
     <select value="{{selectedFiat}}">
       {{#currencies}}
-        <option value="{{.}}">{{.}}</option>
+        <option value="{{.}}" selected="{{fiatCurrency == . ? 'selected' : ''}}">{{.}}</option>
       {{/currencies}}
     </select>
   </div>
