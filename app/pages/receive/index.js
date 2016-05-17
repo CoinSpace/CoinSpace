@@ -33,13 +33,9 @@ module.exports = function(el){
     }
   })
 
-  emitter.on('balance-ready', function(){
-    ractive.set('address', getAddress())
-    showQRcode()
-  })
-
   emitter.on('wallet-ready', function(){
     ractive.set('address', getAddress())
+    showQRcode()
   })
 
   emitter.on('update-balance', function() {

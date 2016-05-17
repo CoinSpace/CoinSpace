@@ -43,7 +43,7 @@ window.initCSApp = function() {
     _html.removeClass('prevent_scroll')
   })
 
-  emitter.on('balance-ready', function(){
+  emitter.on('wallet-ready', function(){
     auth.hide()
     frame.show()
   })

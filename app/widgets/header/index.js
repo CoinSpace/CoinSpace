@@ -35,8 +35,9 @@ module.exports = function(el){
     }
   })
 
-  emitter.on('balance-ready', function(balance) {
-    console.log('on balance-ready event')
+  emitter.on('wallet-ready', function(){
+    console.log('on wallet-ready event')
+    var balance = getWallet().getBalance()
     ractive.set('bitcoinBalance', balance)
     ractive.set('denomination', getWallet().denomination)
     db.get('systemInfo', function(err, info){
@@ -49,13 +50,9 @@ module.exports = function(el){
       response.balance = balance
       response.denomination = getWallet().denomination
       response.walletId = getWallet().getNextAddress()
-      
+
       WatchModule.sendMessage(response, 'comandAnswerQueue')
     }
-  })
-
-  emitter.on('wallet-ready', function(){
-    ractive.set('bitcoinBalance', getWallet().getBalance())
   })
 
   emitter.on('update-balance', function() {

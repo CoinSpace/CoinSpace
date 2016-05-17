@@ -52,18 +52,7 @@ var Auth = Ractive.extend({
       emitter.emit('set-transactions', transactions)
     }
 
-    function onBalanceDone(err, balance) {
-      self.set('opening', false)
-      if(err) {
-        return onDoneError(err)
-      }
-
-      window.scrollTo( 0, 0 )
-      emitter.emit('balance-ready', balance)
-    }
-
     this.onSyncDone = onSyncDone
-    this.onBalanceDone = onBalanceDone
     this.getNetwork = getNetwork
   }
 })

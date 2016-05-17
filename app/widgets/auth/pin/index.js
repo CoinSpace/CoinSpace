@@ -27,13 +27,7 @@ module.exports = function(prevPage, data){
       }
     },
     complete: function() {
-      if(window.buildType === 'phonegap' && window.buildPlatform === 'ios') {
-        window.plugins.touchid.isAvailable(function() {}, function() {
-          ractive.nodes['setPin'].focus();
-        })
-      } else {
-        ractive.nodes['setPin'].focus();
-      }
+      ractive.nodes['setPin'].focus();
     }
   })
 
@@ -155,12 +149,12 @@ module.exports = function(prevPage, data){
 
   function openWithPin(){
     CS.openWalletWithPin(getPin(), ractive.getNetwork(),
-                         ractive.onSyncDone, null, ractive.onBalanceDone)
+                         ractive.onSyncDone, null, null)
   }
 
   function setPin(){
     CS.setPin(getPin(), ractive.getNetwork(),
-              ractive.onSyncDone, null, ractive.onBalanceDone)
+              ractive.onSyncDone, null, null)
   }
 
   return ractive
