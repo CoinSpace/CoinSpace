@@ -106,7 +106,7 @@ module.exports = function(el){
           emitter.emit('update-balance')
           emitter.emit('set-transactions', txs)
         })
-      }, 0)
+      }, 200)
     }
   })
 

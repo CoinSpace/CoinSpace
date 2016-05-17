@@ -25,6 +25,15 @@ module.exports = function(prevPage, data){
       visible: function(number){
         return number != null
       }
+    },
+    complete: function() {
+      if(window.buildType === 'phonegap' && window.buildPlatform === 'ios') {
+        window.plugins.touchid.isAvailable(function() {}, function() {
+          ractive.nodes['setPin'].focus();
+        })
+      } else {
+        ractive.nodes['setPin'].focus();
+      }
     }
   })
 

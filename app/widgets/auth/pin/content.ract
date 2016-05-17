@@ -22,7 +22,7 @@
             </div>
           {{/boxes}}
         </div>
-        <input id="setPin" class="_input" type="tel" maxlength="4" pattern="[0-9]*" value="{{pin}}" on-focus="focus-pin" on-blur="blur-pin" autofocus/>
+        <input id="setPin" class="_input" type="tel" maxlength="4" pattern="[0-9]*" value="{{pin}}" on-focus="focus-pin" on-blur="blur-pin"/>
       </label>
     {{/opening}}
 

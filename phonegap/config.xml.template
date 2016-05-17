@@ -62,4 +62,5 @@
     <preference name="SplashScreenDelay" value="2000"/>
     <preference name="android-minSdkVersion" value="19" />
     <preference name="windows-target-version" value="8.1" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
 </widget>
