@@ -1,6 +1,6 @@
 {
   "name": "coinspace",
-  "version": "2.1.1",
+  "version": "2.1.3",
   "description": "Digital currency wallet",
   "main": "index.js",
   "scripts": {
@@ -50,11 +50,11 @@
     "body-parser": "^1.6.2",
     "browserify": "^6.3.2",
     "browserify-zepto": "~1.1.2",
-    "browsernizr": "git://github.com/skyjam/browsernizr.git",
+    "browsernizr": "git://github.com/CoinSpace/browsernizr.git#v1.0.3",
     "cloudflare": "0.0.8",
     "compression": "^1.0.10",
     "cookie-parser": "^1.3.2",
-    "cookie-session": "git://github.com/skyjam/cookie-session.git",
+    "cookie-session": "git://github.com/CoinSpace/cookie-session.git#v1.0.2",
     "cpr": "^0.3.2",
     "cradle": "~0.6.7",
     "envify": "^3.0.0",
@@ -79,7 +79,7 @@
     "tiny-lr": "0.0.7",
     "uglifyify": "^2.5.0",
     "uniqueify": "~1.0.0",
-    "velocity-animate": "git://github.com/skyjam/velocity.git",
+    "velocity-animate": "git://github.com/CoinSpace/velocity.git#v0.0.22",
     "yaqrcode": "^0.2.1"
   },
   "aperture": {
