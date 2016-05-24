@@ -71,6 +71,7 @@ gulp.task('platform-add-windows', ['platform-config-windows'], function() {
       '<%= bom("phonegap/build/platforms/windows/www/**/*.js")%>',
       '<%= bom("phonegap/build/platforms/windows/www/index.html")%>',
       '<%= bom("phonegap/build/platforms/windows/www/assets/css/*.css")%>',
+      '<%= bom("phonegap/build/platforms/windows/www/css/*.css")%>',
       '<%= ssh("y: && cd phonegap && copy images///windows///icons///* build///platforms///windows///images")%>',
       '<%= ssh("y: && cd phonegap && copy images///windows///screens///* build///platforms///windows///images")%>',
       '<%= ssh("if exist c:///coinspace rmdir c:///coinspace /s /q")%>',
