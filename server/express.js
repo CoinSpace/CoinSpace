@@ -183,8 +183,10 @@ module.exports = function (){
   }
 
   app.delete('/location', function(req, res) {
-    geo.remove(req.session.tmpSessionID)
-    res.status(200).send()
+    geo.getById(req.session.tmpSessionID, function(err, doc) {
+      if (doc) geo.remove(doc);
+      res.status(200).send();
+    });
   })
 
   app.post('/purge', function(req, res){

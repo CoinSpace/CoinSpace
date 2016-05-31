@@ -43,6 +43,13 @@ function getIdsOlderThan(age, callback) {
   });
 }
 
+function getById(id, callback) {
+  mectoDB.get(id, function(err, doc) {
+    if (err) return callback(err);
+    callback(null, doc);
+  })
+}
+
 function search(lat, lon, userInfo, callback) {
   if (userInfo.network !== 'bitcoin' && userInfo.network !== 'litecoin') {
     return callback({error: 'unsupported_network'})
@@ -61,12 +68,12 @@ function search(lat, lon, userInfo, callback) {
   mectoDB.connection.request({method: 'GET', path: path, query: query}, function(err, results) {
     if (err) return callback(err);
     callback(null, results.map(function(item) {
-      return {
+      return [{
         address: item.address,
         name: item.name,
         email: item.email,
         avatarIndex: item.avatarIndex
-      }
+      }]
     }));
   });
 }
@@ -76,5 +83,6 @@ module.exports = {
   save: save,
   search: search,
   remove: remove,
-  getIdsOlderThan: getIdsOlderThan
+  getIdsOlderThan: getIdsOlderThan,
+  getById: getById
 }
