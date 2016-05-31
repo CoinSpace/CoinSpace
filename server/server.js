@@ -9,10 +9,12 @@ server.listen(process.env.PORT || 9009, function() {
   console.info('server listening on http://localhost:' + server.address().port)
 })
 
-var interval = 4 * 60 * 60 * 1000 // 4 hours
+var interval = 60 * 60 * 1000 // 1 hour
 setInterval(function(){
-  var oldEntries = geo.getIdsOlderThan(interval)
-  console.info('removing' + oldEntries)
-  oldEntries.forEach(geo.remove)
+  geo.getIdsOlderThan(interval, function(err, docs) {
+    if (err) return console.error(err);
+    console.info('removing old geo docs: ' + docs.length);
+    docs.forEach(geo.remove);
+  });
 }, interval)
 

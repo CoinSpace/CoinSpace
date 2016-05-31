@@ -1,81 +1,78 @@
-var geomodel = require('geomodel').create_geomodel()
+var db = require('./db')
+var mectoDB = db('mecto')
 
 var SEARCH_RADIUS = 1000
-var records = {}
-
-function all(){
-  return Object.keys(records).map(function(key){
-    return records[key]
-  })
-}
-
-function reset(){
-  records = {}
-}
 
 function save(lat, lon, userInfo, callback) {
-  try {
-    var user = cloneObject(userInfo)
-    user.location = geomodel.create_point(lat, lon)
-    user.geocells = geomodel.generate_geocells(user.location)
-    user.timestamp = new Date().getTime()
-
-    records[user.id] = user
-
-    callback()
-  } catch(e) {
-    callback(e)
-  }
-}
-
-function remove(id) {
-  delete records[id]
-}
-
-function getIdsOlderThan(age) {
-  var now = new Date().getTime()
-  return all().filter(function(e){
-    return now - e.timestamp > age
-  }).map(function(e){
-    return e.id
-  })
-}
-
-function search(lat, lon, userInfo, callback){
-  try {
-    var location = geomodel.create_point(lat, lon)
-    var id = userInfo.id
-    var network = userInfo.network
-
-    var onGeocells = function(geocells, finderCallback) {
-      var candidates = all().filter(function(record){
-        var recordQualifies = (record.id !== id && haveIntersection(record.geocells, geocells))
-        return recordQualifies && (network == null || record.network == network)
-      })
-      finderCallback(null, candidates)
+  mectoDB.save(userInfo.id, {
+    name: userInfo.name,
+    email: userInfo.email,
+    avatarIndex: userInfo.avatarIndex,
+    address: userInfo.address,
+    network: userInfo.network,
+    timestamp: new Date().getTime(),
+    geometry: {
+      coordinates: [lon, lat],
+      type: 'Point'
     }
+  }, function(err) {
+    if (err) return callback(err);
+    callback()
+  });
+}
 
-    geomodel.proximity_fetch(location, 10, SEARCH_RADIUS, onGeocells, callback)
-  } catch(e) {
-    callback(e)
+function remove(doc) {
+  mectoDB.remove(doc._id, doc._rev, function(err) {
+    if (err) console.error('FATAL: failed to delete mecto doc')
+  });
+}
+
+function getIdsOlderThan(age, callback) {
+  var now = new Date().getTime();
+  query = {
+    selector: {
+      _id: { $gt: 0 },
+      timestamp: { $lt: now - age }
+    },
+    fields: [ '_id', '_rev' ],
+    limit: 100
+  };
+  mectoDB.connection.request({method: 'POST', path: '/mecto/_find', body: query}, function(err, result) {
+    if (err) return callback(err);
+    callback(null, result.docs);
+  });
+}
+
+function search(lat, lon, userInfo, callback) {
+  if (userInfo.network !== 'bitcoin' && userInfo.network !== 'litecoin') {
+    return callback({error: 'unsupported_network'})
   }
-}
 
+  var path = '/mecto/_design/geoDoc/_geo/' + userInfo.network + 'GeoIndex';
+  var query = {
+    lat: lat,
+    lon: lon,
+    radius: SEARCH_RADIUS,
+    limit: 10,
+    relation: 'contains',
+    include_docs: true
+  };
 
-function haveIntersection(a1, a2){
-  return a1.some(function(e){
-    return a2.indexOf(e) > -1
-  })
-}
-
-function cloneObject(obj){
-  return JSON.parse(JSON.stringify(obj))
+  mectoDB.connection.request({method: 'GET', path: path, query: query}, function(err, results) {
+    if (err) return callback(err);
+    callback(null, results.map(function(item) {
+      return {
+        address: item.address,
+        name: item.name,
+        email: item.email,
+        avatarIndex: item.avatarIndex
+      }
+    }));
+  });
 }
 
 module.exports = {
   SEARCH_RADIUS: SEARCH_RADIUS,
-  all: all,
-  reset: reset,
   save: save,
   search: search,
   remove: remove,
