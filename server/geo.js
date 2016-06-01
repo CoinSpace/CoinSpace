@@ -44,6 +44,7 @@ function getIdsOlderThan(age, callback) {
 }
 
 function getById(id, callback) {
+  if (!id) return callback();
   mectoDB.get(id, function(err, doc) {
     if (err) return callback(err);
     callback(null, doc);
