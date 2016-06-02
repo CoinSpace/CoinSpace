@@ -61,21 +61,26 @@ function search(lat, lon, userInfo, callback) {
     lat: lat,
     lon: lon,
     radius: SEARCH_RADIUS,
-    limit: 10,
+    limit: 15,
     relation: 'contains',
     include_docs: true
   };
 
   mectoDB.connection.request({method: 'GET', path: path, query: query}, function(err, results) {
     if (err) return callback(err);
-    callback(null, results.map(function(item) {
+
+    results = results.filter(function(item) {
+      return item.id !== userInfo.id;
+    }).map(function(item) {
       return [{
-        address: item.address,
-        name: item.name,
-        email: item.email,
-        avatarIndex: item.avatarIndex
+        address: item.doc.address,
+        name: item.doc.name,
+        email: item.doc.email,
+        avatarIndex: item.doc.avatarIndex
       }]
-    }));
+    });
+
+    callback(null, results);
   });
 }
 
