@@ -51,7 +51,7 @@
     "browserify": "^6.3.2",
     "browserify-zepto": "~1.1.2",
     "browsernizr": "git://github.com/CoinSpace/browsernizr.git#v1.0.3",
-    "cloudflare": "0.0.8",
+    "cloudflare4": "^0.2.3",
     "compression": "^1.0.10",
     "cookie-parser": "^1.3.2",
     "cookie-session": "git://github.com/CoinSpace/cookie-session.git#v1.0.2",

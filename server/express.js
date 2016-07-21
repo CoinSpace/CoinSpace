@@ -12,7 +12,7 @@ var validatePin = require('cs-pin-validator')
 var crypto = require('crypto')
 var helmet = require('helmet')
 var openalias = require('cs-openalias')
-var cloudflare = require('cloudflare')
+var CloudFlareAPI = require('cloudflare4')
 
 module.exports = function (){
   var app = express()
@@ -191,13 +191,15 @@ module.exports = function (){
 
   app.post('/purge', function(req, res){
     if (req.query.token === process.env.CLOUDFLARE_TOKEN) {
-      cloudflare.createClient({
+      var api = new CloudFlareAPI({
         email: process.env.CLOUDFLARE_EMAIL,
-        token: process.env.CLOUDFLARE_TOKEN
-      }).clearCache(process.env.CLOUDFLARE_DOMAIN, '1', function(err) {
-        if(err) return res.status(400).send(err)
-        res.status(200).send()
+        key: process.env.CLOUDFLARE_TOKEN
       })
+      api.zonePurgeCache(process.env.CLOUDFLARE_ZONE_ID).then(function() {
+        res.status(200).send();
+      }).catch(function(err) {
+        res.status(400).send(err);
+      });
     } else {
       return res.status(400).json({error: 'Bad request'})
     }

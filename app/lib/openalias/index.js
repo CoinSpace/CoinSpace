@@ -1,6 +1,6 @@
 var dns = require('dns')
 var retry = require('retry')
-var cloudflare = require('cloudflare')
+var CloudFlareAPI = require('cloudflare4')
 
 function resolve(hostname, callback) {
   var prefix = 'btc'
@@ -39,9 +39,9 @@ function resolve(hostname, callback) {
 }
 
 function createClient() {
-  return cloudflare.createClient({
+  return new CloudFlareAPI({
     email: process.env.CLOUDFLARE_EMAIL,
-    token: process.env.CLOUDFLARE_TOKEN
+    key: process.env.CLOUDFLARE_TOKEN
   });
 }
 
@@ -50,15 +50,16 @@ function add(username, address, callback) {
   var name = username + '.' + process.env.CLOUDFLARE_DOMAIN
   var content = 'oa1:btc recipient_address=' + address + '; recipient_name=' + username + ';'
 
-  cloudflare.addDomainRecord(process.env.CLOUDFLARE_DOMAIN, {
+  cloudflare.zoneDNSRecordNew(process.env.CLOUDFLARE_ZONE_ID, {
     type: 'TXT',
     name: name,
     content: content,
     ttl: 1
-  }, function(err, data) {
-    if (err) return callback(err);
-    return callback(null, data.name.replace('.', '@'), data.rec_id)
-  })
+  }).then(function(data) {
+    callback(null, data.name.replace('.', '@'), data.id)
+  }).catch(function(err) {
+    callback(err);
+  });
 }
 
 function edit(dnsRecordId, username, address, callback) {
@@ -66,16 +67,16 @@ function edit(dnsRecordId, username, address, callback) {
   var name = username + '.' + process.env.CLOUDFLARE_DOMAIN
   var content = 'oa1:btc recipient_address=' + address + '; recipient_name=' + username + ';'
 
-  cloudflare.editDomainRecord(process.env.CLOUDFLARE_DOMAIN, dnsRecordId, {
+  cloudflare.zoneDNSRecordUpdate(process.env.CLOUDFLARE_ZONE_ID, dnsRecordId, {
     type: 'TXT',
     name: name,
     content: content,
     ttl: 1
-  }, function(err, data) {
-    if (err) return callback(err);
-    data = data.rec.obj;
-    return callback(null, data.name.replace('.', '@'), data.rec_id)
-  })
+  }).then(function(data) {
+    callback(null, data.name.replace('.', '@'), data.id)
+  }).catch(function(err) {
+    callback(err);
+  });
 }
 
 module.exports = {
