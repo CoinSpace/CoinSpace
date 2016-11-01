@@ -3,8 +3,6 @@
 var db = require('./db')
 var userDB = db('_users')
 var crypto = require('crypto')
-var AES = require('cs-aes')
-var openalias = require('cs-openalias')
 
 var userPrefix = "org.couchdb.user:"
 
@@ -125,7 +123,7 @@ function createDatabase(name, callback) {
   }
 }
 
-function setUsername(name, username, address, callback) {
+function setUsername(name, username, callback) {
   var error = {error: 'set_username_failed'}
   name = userPrefix + name
   userDB.get(name, function (err, user) {
@@ -135,7 +133,15 @@ function setUsername(name, username, address, callback) {
     } else {
       validateUsername(username, function(err, username) {
         if(err) return callback(err);
-        setOpenAlias(user, username, address, callback)
+
+        var username_sha = generateUsernameHash(username)
+        userDB.merge(user._id, {username_sha: username_sha}, function(err, res) {
+          if(err) {
+            console.error('FATAL: failed to update username_sha')
+            return callback(error)
+          }
+          callback(null, username)
+        })
       })
     }
   })
@@ -156,28 +162,6 @@ function validateUsername(username, callback) {
   });
 }
 
-function setOpenAlias(user, username, address, callback) {
-  var error = {error: 'set_openalias_failed'}
-  if (user.dns_record_id) {
-    var dnsRecordId = AES.decrypt(user.dns_record_id, process.env.DNS_SALT)
-    openalias.edit(dnsRecordId, username, address, function(err, alias, dnsRecordId) {
-      if (err) return callback(error)
-      saveOpenAlias(user, username, dnsRecordId, function(err) {
-        if (err) return callback(err)
-        callback(null, alias, username)
-      })
-    })
-  } else {
-    openalias.add(username, address, function(err, alias, dnsRecordId) {
-      if (err) return callback(error)
-      saveOpenAlias(user, username, dnsRecordId, function(err) {
-        if (err) return callback(err)
-        callback(null, alias, username)
-      })
-    })
-  }
-}
-
 function generateToken(){
   return crypto.randomBytes(64).toString('hex')
 }
@@ -191,7 +175,7 @@ function generatePasswordHash(password){
 
 function generateUsernameHash(username) {
   var hash = crypto.createHash('sha1')
-  hash.update(username + process.env.DNS_SALT)
+  hash.update(username + process.env.USERNAME_SALT)
   return hash.digest('hex')
 }
 
@@ -211,18 +195,6 @@ function verifyPin(user, name, pin, callback) {
     updateFailCount(user._id, counter)
     callback({error: 'auth_failed'})
   }
-}
-
-function saveOpenAlias(user, username, dnsRecordId, callback) {
-  dnsRecordId = AES.encrypt(dnsRecordId, process.env.DNS_SALT)
-  username = generateUsernameHash(username)
-  userDB.merge(user._id, { dns_record_id: dnsRecordId, username_sha: username }, function(err, res){
-    if(err) {
-      console.error('FATAL: failed to update username_sha with dns_record_id')
-      return callback({error: 'openalias_failed'})
-    }
-    callback()
-  })
 }
 
 // ignores db op outcome

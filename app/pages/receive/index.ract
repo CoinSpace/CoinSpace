@@ -9,23 +9,8 @@
   </div>
 </div>
 
-{{#isBitcoin}}
-  {{#alias}}
-  <div class="receive__label">
-    <h3 class="_title">{{translate("Your Alias address")}}</h3>
-    <span class="_help" on-click="help-alias">
-      {{>svg_help}}
-    </span>
-  </div>
-  <div class="address__box">
-    <span class="_address">{{alias}}</span>
-  </div>
-  {{/alias}}
-{{/isBitcoin}}
-
 <div class="qr-code" id="qr_canvas"></div>
 
-{{#mecto}}
 <div class="receive__label">
 {{^broadcasting}}
   <h3 class="_title">{{translate("Mecto")}}</h3>
@@ -40,4 +25,3 @@
 <div class="geo__box">
   <span class="_btn {{#broadcasting}}is_broadcasting{{/broadcasting}}{{#connecting}}is_connecting{{/connecting}}" on-click="toggle-broadcast">{{translate(btn_message)}}</span>
 </div>
-{{/mecto}}

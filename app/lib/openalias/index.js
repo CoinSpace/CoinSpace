@@ -1,6 +1,5 @@
 var dns = require('dns')
 var retry = require('retry')
-var CloudFlareAPI = require('cloudflare4')
 
 function resolve(hostname, callback) {
   var prefix = 'btc'
@@ -38,49 +37,6 @@ function resolve(hostname, callback) {
   });
 }
 
-function createClient() {
-  return new CloudFlareAPI({
-    email: process.env.CLOUDFLARE_EMAIL,
-    key: process.env.CLOUDFLARE_TOKEN
-  });
-}
-
-function add(username, address, callback) {
-  var cloudflare = createClient()
-  var name = username + '.' + process.env.CLOUDFLARE_DOMAIN
-  var content = 'oa1:btc recipient_address=' + address + '; recipient_name=' + username + ';'
-
-  cloudflare.zoneDNSRecordNew(process.env.CLOUDFLARE_ZONE_ID, {
-    type: 'TXT',
-    name: name,
-    content: content,
-    ttl: 1
-  }).then(function(data) {
-    callback(null, data.name.replace('.', '@'), data.id)
-  }).catch(function(err) {
-    callback(err);
-  });
-}
-
-function edit(dnsRecordId, username, address, callback) {
-  var cloudflare = createClient()
-  var name = username + '.' + process.env.CLOUDFLARE_DOMAIN
-  var content = 'oa1:btc recipient_address=' + address + '; recipient_name=' + username + ';'
-
-  cloudflare.zoneDNSRecordUpdate(process.env.CLOUDFLARE_ZONE_ID, dnsRecordId, {
-    type: 'TXT',
-    name: name,
-    content: content,
-    ttl: 1
-  }).then(function(data) {
-    callback(null, data.name.replace('.', '@'), data.id)
-  }).catch(function(err) {
-    callback(err);
-  });
-}
-
 module.exports = {
-  resolve: resolve,
-  add: add,
-  edit: edit
+  resolve: resolve
 }

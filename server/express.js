@@ -124,12 +124,11 @@ module.exports = function (){
   app.post('/username', restrict, function(req, res) {
     var id = req.body.id
     var username = req.body.username
-    var address = req.body.address
-    if (!username || !address) return res.status(400).json({error: 'Bad request'});
+    if (!username) return res.status(400).json({error: 'Bad request'});
 
-    auth.setUsername(id, username, address, function(err, alias, username) {
+    auth.setUsername(id, username, function(err, username) {
       if(err) return res.status(400).send(err)
-      res.status(200).send({alias: alias, username: username})
+      res.status(200).send({username: username})
     })
   })
 
@@ -187,22 +186,6 @@ module.exports = function (){
       if (doc) geo.remove(doc);
       res.status(200).send();
     });
-  })
-
-  app.post('/purge', function(req, res){
-    if (req.query.token === process.env.CLOUDFLARE_TOKEN) {
-      var api = new CloudFlareAPI({
-        email: process.env.CLOUDFLARE_EMAIL,
-        key: process.env.CLOUDFLARE_TOKEN
-      })
-      api.zonePurgeCache(process.env.CLOUDFLARE_ZONE_ID).then(function() {
-        res.status(200).send();
-      }).catch(function(err) {
-        res.status(400).send(err);
-      });
-    } else {
-      return res.status(400).json({error: 'Bad request'})
-    }
   })
 
   app.use(function(err, req, res, next){

@@ -4,7 +4,7 @@ var Ractive = require('cs-modal')
 var db = require('cs-db')
 var emitter = require('cs-emitter')
 var showError = require('cs-modal-flash').showError
-var setUsername = require('cs-openalias/xhr.js').setUsername
+var setUsername = require('cs-wallet-js/auth.js').setUsername
 
 function fetchDetails(callback){
   db.get(function(err, doc){
@@ -17,7 +17,6 @@ function fetchDetails(callback){
 
     openModal({
       name: name,
-      alias: doc.userInfo.alias,
       email: doc.userInfo.email,
       callback: callback
     })
@@ -49,24 +48,22 @@ function openModal(data){
   ractive.on('submit-details', function(){
     var details = {
       firstName: ractive.get('name') + '',
-      email: ractive.get('email'),
-      alias: ractive.get('alias')
+      email: ractive.get('email')
     }
 
     if(!details.firstName || details.firstName.trim() === 'undefined') {
-      return showError({message: "Without a name, the payer would not be able to identify you on mecto."})
+      return showError({message: "Without a name, the payer would not be able to identify you on Mecto."})
     }
 
     ractive.set('submitting', true)
 
-    setUsername(details.firstName, function(err, alias, username){
+    setUsername(details.firstName, function(err, username){
       if(err) {
         ractive.set('submitting', false)
         if(err.error === 'username_exists') return showError({message: "Username not available"})
         return console.error(err);
       }
 
-      details.alias = alias
       details.firstName = username
 
       db.set('userInfo', details, function(err){

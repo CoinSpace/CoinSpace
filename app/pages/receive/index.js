@@ -22,13 +22,10 @@ module.exports = function(el){
     template: require('./index.ract').template,
     data: {
       address: '',
-      alias: '',
       qrVisible: false,
       btn_message: 'Turn Mecto on',
       connecting: false,
       broadcasting: false,
-      isBitcoin: getNetwork() == 'bitcoin',
-      mecto: false,
       isSocialSharing: window.buildType === 'phonegap' && window.plugins && window.plugins.socialsharing
     }
   })
@@ -40,24 +37,6 @@ module.exports = function(el){
 
   emitter.on('update-balance', function() {
     ractive.set('address', getAddress())
-  })
-
-  emitter.on('db-ready', function(){
-    db.get(function(err, doc){
-      if(err) return console.error(err);
-
-      ractive.set('alias', doc.userInfo.alias)
-      if(doc.userInfo.firstName || ractive.get('isBitcoin')){
-        ractive.set('mecto', true)
-      }
-    })
-  })
-
-  emitter.on('details-updated', function(details){
-    ractive.set('alias', details.alias)
-    if(details.firstName || ractive.get('isBitcoin')){
-      ractive.set('mecto', true)
-    }
   })
 
   emitter.on('turn-on-mecto-watch', function() {
@@ -161,16 +140,9 @@ module.exports = function(el){
           window.plugins.socialsharing.share(ractive.get('address'))
       } else {
           showQr({
-              address: ractive.get('address'),
-              alias: ractive.get('alias')
+              address: ractive.get('address')
           })
       }
-  })
-
-  ractive.on('help-alias', function() {
-    showTooltip({
-      message: 'Allow for payments with OpenAlias addresses. Supported wallets only.'
-    })
   })
 
   ractive.on('help-mecto', function() {

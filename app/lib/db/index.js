@@ -123,7 +123,6 @@ function initializeRecord(){
     userInfo: {
       firstName: '',
       lastName: '',
-      alias: '',
       email: '',
       avatarIndex: randAvatarIndex()
     }

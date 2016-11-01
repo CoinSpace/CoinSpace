@@ -2,10 +2,7 @@
 <div id="details-preview">
   <div class="settings__avatar"></div>
   <h3 class="settings__name">{{user.firstName}}</h3>
-  <span class="settings__alias">{{user.alias}}</span>
-  {{#isBitcoin}}
   <span class="settings__editBtn" on-click="edit-details">{{translate("Change your details")}}</span>
-  {{/isBitcoin}}
 </div>
 
 <div id="details-edit">

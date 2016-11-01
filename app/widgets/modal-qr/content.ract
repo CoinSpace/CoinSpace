@@ -8,12 +8,6 @@
     <div class="detail__strings">
       <h3 class="_title">{{translate("Your wallet address")}}:</h3>
       <code class="_value">{{address}}</code>
-      {{#isBitcoin}}
-        {{#alias}}
-          <h3 class="_title">{{translate("Your Alias address")}}:</h3>
-          <code class="_value">{{alias}}</code>
-        {{/alias}}
-      {{/isBitcoin}}
       <div class="_actions">
       <a class="_btn" href="{{mailto()}}">
         <span class="_icon">

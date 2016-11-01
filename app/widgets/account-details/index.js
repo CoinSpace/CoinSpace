@@ -7,7 +7,7 @@ var showError = require('cs-modal-flash').showError
 var emitter = require('cs-emitter')
 var Avatar = require('cs-avatar')
 var db = require('cs-db')
-var setUsername = require('cs-openalias/xhr.js').setUsername
+var setUsername = require('cs-wallet-js/auth.js').setUsername
 var getNetwork = require('cs-network')
 
 module.exports = function init(el) {
@@ -19,13 +19,11 @@ module.exports = function init(el) {
       start_open: true,
       user: {
         firstName: '',
-        alias: '',
         email: ''
       },
       editingName: false,
       editingEmail: false,
-      animating: false,
-      isBitcoin: getNetwork() == 'bitcoin'
+      animating: false
     }
   })
 
@@ -96,14 +94,13 @@ module.exports = function init(el) {
 
     ractive.set('submitting', true)
 
-    setUsername(details.firstName, function(err, alias, username){
+    setUsername(details.firstName, function(err, username){
       if(err) {
         ractive.set('submitting', false)
         if(err.error === 'username_exists') return showError({message: "Username not available"})
         return console.error(err);
       }
 
-      details.alias = alias
       details.firstName = username
 
       db.set('userInfo', details, function(err, response){

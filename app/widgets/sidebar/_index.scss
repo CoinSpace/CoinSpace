@@ -140,17 +140,6 @@
   }
 }
 
-.settings__alias {
-  display: block;
-  text-align: center;
-}
-
-.litecoin {
-  .settings__alias {
-    display: none;
-  }
-}
-
 .settings__toggle {
   @include clickbtn;
   display: flex;
