@@ -12,7 +12,6 @@ var validatePin = require('cs-pin-validator')
 var crypto = require('crypto')
 var helmet = require('helmet')
 var openalias = require('cs-openalias')
-var CloudFlareAPI = require('cloudflare4')
 
 module.exports = function (){
   var app = express()
