@@ -19,6 +19,7 @@
 
         {{#confirmations}}
           <span class='_time'>{{formatTimestamp(timestamp)}}</span>
+          <span class='_time'>{{formatConfirmations(confirmations)}}</span>
         {{/confirmations}}
 
         {{^confirmations}}

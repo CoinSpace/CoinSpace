@@ -21,6 +21,13 @@ module.exports = function(el){
         var date = new Date(timestamp)
         return strftime('%b %d %l:%M %p', date)
       },
+      formatConfirmations: function(number){
+        if (number === 1) {
+          return number + ' confirmation'
+        } else {
+          return number + ' confirmations'
+        }
+      },
       satoshiToBtc: satoshiToBtc,
       loadingTx: true
     }

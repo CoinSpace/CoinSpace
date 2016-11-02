@@ -12,6 +12,7 @@
 
     {{#confirmations}}
       <div class='_time'>{{formatTimestamp(timestamp)}}</div>
+      <div class='_time'>{{formatConfirmations(confirmations)}}</div>
     {{/confirmations}}
 
     {{^confirmations}}
