@@ -37,9 +37,10 @@ gulp.task('platform-add-android', ['copy-config', 'copy-build'], shell.task([
   'cordova plugin add cordova-plugin-whitelist',
   'cordova plugin add cordova-plugin-inappbrowser',
   'cordova plugin add cordova-plugin-splashscreen',
-  'cordova plugin add https://github.com/skyjam/CS-barcodescanner.git',
+  'cordova plugin add https://github.com/CoinSpace/CS-barcodescanner.git',
   'cordova plugin add cordova-plugin-dialogs',
-  'cordova plugin add cordova-plugin-x-socialsharing'
+  'cordova plugin add cordova-plugin-x-socialsharing',
+  'cordova plugin add cordova-plugin-facebookads'
 ], {cwd: paths.build}));
 
 /* Windows tasks */
@@ -103,14 +104,15 @@ gulp.task('platform-add-ios', ['platform-config-ios'], shell.task([
   'cordova plugin add cordova-plugin-geolocation',
   'cordova plugin add cordova-plugin-whitelist',
   'cordova plugin add cordova-plugin-splashscreen',
-  'cordova plugin add https://github.com/skyjam/CS-barcodescanner.git',
+  'cordova plugin add https://github.com/CoinSpace/CS-barcodescanner.git',
   'cordova plugin add cordova-plugin-dialogs',
   'cordova plugin add cordova-plugin-inappbrowser',
   'cordova plugin add cordova-plugin-apple-watch',
   'cordova plugin add cordova-plugin-statusbar',
   'cordova plugin add cordova-plugin-x-socialsharing',
   'cordova plugin add cordova-plugin-touch-id',
-  'cordova plugin add cordova-plugin-console'
+  'cordova plugin add cordova-plugin-console',
+  'cordova plugin add cordova-plugin-facebookads'
 ], {cwd: paths.build}));
 
 gulp.task('platform-config-ios', ['copy-config', 'copy-build'], function () {

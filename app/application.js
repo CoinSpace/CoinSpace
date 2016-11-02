@@ -25,6 +25,21 @@ window.initCSApp = function() {
   
   WatchModule.initWatch('group.com.coinspace.wallet')
 
+
+  if (window.FacebookAds) {
+    var ad_units = {
+      ios : {banner: '196605347445795_200305920409071'},
+      android : {banner: '196605347445795_200306843742312'}
+    }
+
+    var adid = (/(android)/i.test(navigator.userAgent)) ? ad_units.android : ad_units.ios;
+    window.FacebookAds.createBanner({
+      adId: adid.banner,
+      position: window.FacebookAds.AD_POSITION.BOTTOM_CENTER,
+      autoShow: true
+    });
+  }
+
   walletExists(function(exists){
     auth = exists ? initAuth.pin(null, { userExists: true }) : initAuth.choose()
     var authContentEl = document.getElementById('auth_content')
