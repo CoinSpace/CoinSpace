@@ -12,6 +12,7 @@ var validatePin = require('cs-pin-validator')
 var crypto = require('crypto')
 var helmet = require('helmet')
 var openalias = require('cs-openalias')
+var fee = require('./fee')
 
 module.exports = function (){
   var app = express()
@@ -138,6 +139,13 @@ module.exports = function (){
     auth.disablePin(id, pin, function(err){
       if(err) return res.status(400).send(err)
       res.status(200).send()
+    })
+  })
+
+  app.get('/fees', function(req, res) {
+    fee.getFromCache(function(err, doc) {
+      if(err) return res.status(400).send(err);
+      res.status(200).send({hour: doc.hour, fastest: doc.fastest})
     })
   })
 

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "aperture link && node ./build.js build",
-    "start": "node server/server.js",
+    "start": "node --expose-gc server/server.js",
     "dev": "aperture link && node ./build.js",
     "test": "npm run test-server; npm run test-client",
     "test-client": "karma start --single-run",
