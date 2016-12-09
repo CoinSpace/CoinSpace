@@ -84,6 +84,19 @@
     }
   }
 
+  ._dynamic-fee {
+    select {
+      opacity: 0;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      margin-top: -25px;
+    }
+    ._fee {
+      text-decoration: underline;
+    }
+  }
+
   ._icon {
     display: inline-block;
     width: 25px;

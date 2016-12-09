@@ -12,12 +12,19 @@ var Wallet = require('cs-wallet')
 var validateSend = require('./validator')
 var rng = require('secure-random').randomBuffer
 var bitcoin = require('bitcoinjs-lib')
+var xhr = require('cs-xhr')
+var cache = require('memory-cache')
 
 var wallet = null
 var seed = null
 var mnemonic = null
 var id = null
 var availableTouchId = false
+
+var uriRoot = window.location.origin
+if(window.buildType === 'phonegap') {
+  uriRoot = process.env.PHONEGAP_URL
+}
 
 function createWallet(passphrase, network, callback) {
   var message = passphrase ? 'Decoding seed phrase' : 'Generating'
@@ -222,6 +229,33 @@ function reset(callback){
   })
 }
 
+function updateBitcoinFees(callback) {
+  var fees = cache.get('bitcoinFees')
+
+  if (fees) {
+    bitcoin.networks['bitcoin'].hourFeePerKb = fees.hour * 1000
+    bitcoin.networks['bitcoin'].fastestFeePerKb = fees.fastest * 1000
+    bitcoin.networks['bitcoin'].feePerKb = bitcoin.networks['bitcoin'].hourFeePerKb
+    return callback()
+  }
+
+  xhr({
+    uri: uriRoot + '/fees',
+    method: 'GET'
+  }, function(err, resp, body){
+    if(resp.statusCode !== 200) {
+      console.error(body)
+      return callback()
+    }
+    var data = JSON.parse(body)
+    bitcoin.networks['bitcoin'].hourFeePerKb = data.hour * 1000
+    bitcoin.networks['bitcoin'].fastestFeePerKb = data.fastest * 1000
+    bitcoin.networks['bitcoin'].feePerKb = bitcoin.networks['bitcoin'].hourFeePerKb
+    cache.put('bitcoinFees', {hour: data.hour, fastest: data.fastest}, 10 * 60 * 1000)
+    callback()
+  })
+}
+
 module.exports = {
   openWalletWithPin: openWalletWithPin,
   createWallet: createWallet,
@@ -235,5 +269,6 @@ module.exports = {
   parseTx: parseTx,
   getPin: getPin,
   resetPin: resetPin,
-  setAvailableTouchId: setAvailableTouchId
+  setAvailableTouchId: setAvailableTouchId,
+  updateBitcoinFees: updateBitcoinFees
 }

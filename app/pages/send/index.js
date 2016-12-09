@@ -11,7 +11,9 @@ var showError = require('cs-modal-flash').showError
 var showInfo = require('cs-modal-flash').showInfo
 var showConfirmation = require('cs-modal-confirm-send')
 var validateSend = require('cs-wallet-js').validateSend
+var updateBitcoinFees = require('cs-wallet-js').updateBitcoinFees
 var resolveTo = require('cs-openalias/xhr.js').resolveTo
+var getNetwork = require('cs-network')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -86,24 +88,13 @@ module.exports = function(el){
       var alias = data.alias
       var amount = ractive.get('value')
 
-      validateSend(getWallet(), to, amount, function(err, fee){
-        if(err) {
-          var interpolations = err.interpolations
-          if(err.message.match(/trying to empty your wallet/)){
-            ractive.set('value', interpolations.sendableBalance)
-            return showInfo({message: err.message, interpolations: interpolations})
-          }
-          return showError({title: 'Uh Oh...', message: err.message, href: err.href, linkText: err.linkText, interpolations: interpolations})
-        }
-
-        showConfirmation({
-          to: to,
-          alias: alias,
-          amount: ractive.get('value'), // don't change this to amount. 'value' could be modified above
-          denomination: ractive.get('denomination'),
-          fee: fee
+      if(getNetwork() === 'bitcoin') {
+        updateBitcoinFees(function() {
+          validateAndShowConfirm(to, amount, alias)
         })
-      })
+      } else {
+        validateAndShowConfirm(to, amount, alias)
+      }
     })
   })
 
@@ -173,6 +164,27 @@ module.exports = function(el){
   ractive.on('blurAmountInput', function(event) {
     event.node.parentNode.style.zIndex = ''
   })
+
+  function validateAndShowConfirm(to, amount, alias) {
+    validateSend(getWallet(), to, amount, function(err, fee){
+      if(err) {
+        var interpolations = err.interpolations
+        if(err.message.match(/trying to empty your wallet/)){
+          ractive.set('value', interpolations.sendableBalance)
+          return showInfo({message: err.message, interpolations: interpolations})
+        }
+        return showError({title: 'Uh Oh...', message: err.message, href: err.href, linkText: err.linkText, interpolations: interpolations})
+      }
+
+      showConfirmation({
+        to: to,
+        alias: alias,
+        amount: ractive.get('value'), // don't change this to amount. 'value' could be modified above
+        denomination: ractive.get('denomination'),
+        fee: fee
+      })
+    })
+  }
 
   function getExchangeRate(){
     var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')]

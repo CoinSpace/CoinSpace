@@ -113,5 +113,8 @@
     "Enter PIN": "Inserire il PIN",
     "Scan your fingerprint please": "Eseguire la scansione delle impronte digitali per favore la tua",
     "I Agree To The Terms & Conditions": "I Agree To The Terms & Conditions",
-    "Terms of Use": "Terms of Use"
+    "Terms of Use": "Terms of Use",
+    "Please choose lower fee.": "Please choose lower fee.",
+    "default": "default",
+    "fastest": "fastest"
 }

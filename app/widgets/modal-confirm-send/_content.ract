@@ -12,7 +12,20 @@
         <span class="_currency">{{denomination}}</span>
       </div>
 
-      <span class="_fee">+{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
+      {{#isBitcoin}}
+      	<div class="_dynamic-fee">
+      		<span class="_fee">+{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
+					<select value="{{fee}}">
+						<option value="{{feeHour}}" selected>+{{feeHour}} {{denomination}} - {{translate("default")}}</option>
+						<option value="{{feeFastest}}">+{{feeFastest}} {{denomination}} - {{translate("fastest")}}</option>
+					</select>
+      	</div>
+      {{/isBitcoin}}
+
+      {{^isBitcoin}}
+				<span class="_fee">+{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
+			{{/isBitcoin}}
+
       <span class="_icon">
         {{>svg_sendto}}
       </span>

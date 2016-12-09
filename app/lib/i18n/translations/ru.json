@@ -113,5 +113,8 @@
     "Scan your fingerprint please": "Приложите палец, чтобы войти в приложение",
     "Enter PIN": "Ввести 4-значный код",
     "I Agree To The Terms & Conditions": "Я принимаю условия соглашения",
-    "Terms of Use": "Условия соглашения"
+    "Terms of Use": "Условия соглашения",
+    "Please choose lower fee.": "Выберите комиссию меньшего размера.",
+    "default": "по умолчанию",
+    "fastest": "самый быстрый"
 }

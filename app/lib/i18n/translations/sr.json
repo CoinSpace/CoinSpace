@@ -113,5 +113,8 @@
     "Enter PIN": "Unesite PIN",
     "Scan your fingerprint please": "Skenirajte svoj otisak prsta molimo",
     "I Agree To The Terms & Conditions": "I Agree To The Terms & Conditions",
-    "Terms of Use": "Terms of Use"
+    "Terms of Use": "Terms of Use",
+    "Please choose lower fee.": "Please choose lower fee.",
+    "default": "default",
+    "fastest": "fastest"
 }
