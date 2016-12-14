@@ -1,6 +1,6 @@
 {
   "name": "coinspace",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Digital currency wallet",
   "main": "index.js",
   "scripts": {
