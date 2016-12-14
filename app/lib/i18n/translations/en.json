@@ -116,5 +116,6 @@
   "Terms of Use": "Terms of Use",
   "Please choose lower fee.": "Please choose lower fee.",
   "default": "default",
-  "fastest": "fastest"
+  "fastest": "fastest",
+  "minimum": "minimum"
 }

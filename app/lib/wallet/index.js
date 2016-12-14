@@ -235,7 +235,6 @@ function updateBitcoinFees(callback) {
   if (fees) {
     bitcoin.networks['bitcoin'].hourFeePerKb = fees.hour * 1000
     bitcoin.networks['bitcoin'].fastestFeePerKb = fees.fastest * 1000
-    bitcoin.networks['bitcoin'].feePerKb = bitcoin.networks['bitcoin'].hourFeePerKb
     return callback()
   }
 
@@ -250,7 +249,6 @@ function updateBitcoinFees(callback) {
     var data = JSON.parse(body)
     bitcoin.networks['bitcoin'].hourFeePerKb = data.hour * 1000
     bitcoin.networks['bitcoin'].fastestFeePerKb = data.fastest * 1000
-    bitcoin.networks['bitcoin'].feePerKb = bitcoin.networks['bitcoin'].hourFeePerKb
     cache.put('bitcoinFees', {hour: data.hour, fastest: data.fastest}, 10 * 60 * 1000)
     callback()
   })

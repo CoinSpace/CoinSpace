@@ -16,6 +16,7 @@
       	<div class="_dynamic-fee">
       		<span class="_fee">+{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
 					<select value="{{fee}}">
+						<option value="{{feeMinimum}}">+{{feeMinimum}} {{denomination}} - {{translate("minimum")}}</option>
 						<option value="{{feeHour}}" selected>+{{feeHour}} {{denomination}} - {{translate("default")}}</option>
 						<option value="{{feeFastest}}">+{{feeFastest}} {{denomination}} - {{translate("fastest")}}</option>
 					</select>

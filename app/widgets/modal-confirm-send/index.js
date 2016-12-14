@@ -17,8 +17,10 @@ function open(data){
   data.isBitcoin = getNetwork() === 'bitcoin'
 
   if (data.isBitcoin) {
+    data.feeMinimum = satoshiToBtc(bitcoin.networks['bitcoin'].feePerKb)
     data.feeHour = satoshiToBtc(bitcoin.networks['bitcoin'].hourFeePerKb)
     data.feeFastest = satoshiToBtc(bitcoin.networks['bitcoin'].fastestFeePerKb)
+    data.fee = data.feeHour
   }
 
   var ractive = new Ractive({
