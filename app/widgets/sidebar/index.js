@@ -2,7 +2,6 @@
 
 var Ractive = require('cs-ractive')
 var emitter = require('cs-emitter')
-var openSupportModal = require('cs-modal-support')
 var Dropdown = require('cs-transitions/dropdown.js')
 var initAccount = require('cs-account-details')
 
@@ -13,10 +12,6 @@ module.exports = function(el){
   })
 
   initAccount(ractive.nodes['account-details'])
-
-  ractive.on('open-support', function(){
-    openSupportModal()
-  })
 
   ractive.on('logout', function(event){
     event.original.preventDefault()

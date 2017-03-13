@@ -56,9 +56,11 @@
   padding-top: 12px;
   text-align: center;
   color: white;
+  outline: none;
 
   &:hover {
     background-color: darken(#298553, 3%);
+    color: white;
   }
 
   ._icon {
