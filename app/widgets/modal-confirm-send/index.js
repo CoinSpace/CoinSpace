@@ -17,9 +17,19 @@ function open(data){
   data.isBitcoin = getNetwork() === 'bitcoin'
 
   if (data.isBitcoin) {
-    data.feeMinimum = satoshiToBtc(bitcoin.networks['bitcoin'].feePerKb)
-    data.feeHour = satoshiToBtc(bitcoin.networks['bitcoin'].hourFeePerKb)
-    data.feeFastest = satoshiToBtc(bitcoin.networks['bitcoin'].fastestFeePerKb)
+    var wallet = getWallet()
+    var defaultFeePerKb = bitcoin.networks['bitcoin'].feePerKb
+
+    var feeRates = [
+      defaultFeePerKb,
+      data.dynamicFees.hourFeePerKb ? data.dynamicFees.hourFeePerKb : defaultFeePerKb,
+      data.dynamicFees.fastestFeePerKb ? data.dynamicFees.fastestFeePerKb : defaultFeePerKb
+    ];
+    var fees = wallet.estimateFees(data.to, btcToSatoshi(data.amount), feeRates)
+
+    data.feeMinimum = satoshiToBtc(fees[0])
+    data.feeHour = satoshiToBtc(fees[1])
+    data.feeFastest = satoshiToBtc(fees[2])
     data.fee = data.feeHour
   }
 

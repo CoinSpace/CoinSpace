@@ -11,3 +11,4 @@ provisioners
 /.env.*
 docker-compose.dev.yml
 docker-compose.prod.yml
+.vscode/

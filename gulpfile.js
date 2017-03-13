@@ -142,7 +142,7 @@ gulp.task('copy-build', ['clean', 'build-js'], function() {
       "'self'", 'blob:',
       'https://api.bitcoinaverage.com', 'https://chain.so',
       'https://btc.blockr.io', 'https://tbtc.blockr.io', 'https://ltc.blockr.io', 'insight.bitpay.com', 'live.coin.space',
-      'https://' + env.DB_HOST, env.PROXY_URL.split('?')[0], env.PHONEGAP_URL
+      'https://' + env.DB_HOST, 'https://proxy.coin.space', env.PHONEGAP_URL
     ],
     'font-src': ["'self'"],
     'img-src': ["'self'", 'data:', 'https://www.gravatar.com'],

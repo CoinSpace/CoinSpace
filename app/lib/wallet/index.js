@@ -229,13 +229,11 @@ function reset(callback){
   })
 }
 
-function updateBitcoinFees(callback) {
+function getDynamicFees(callback) {
   var fees = cache.get('bitcoinFees')
 
   if (fees) {
-    bitcoin.networks['bitcoin'].hourFeePerKb = fees.hour * 1000
-    bitcoin.networks['bitcoin'].fastestFeePerKb = fees.fastest * 1000
-    return callback()
+    return callback({hourFeePerKb: fees.hour * 1000, fastestFeePerKb: fees.fastest * 1000})
   }
 
   xhr({
@@ -244,13 +242,11 @@ function updateBitcoinFees(callback) {
   }, function(err, resp, body){
     if(resp.statusCode !== 200) {
       console.error(body)
-      return callback()
+      return callback({})
     }
     var data = JSON.parse(body)
-    bitcoin.networks['bitcoin'].hourFeePerKb = data.hour * 1000
-    bitcoin.networks['bitcoin'].fastestFeePerKb = data.fastest * 1000
     cache.put('bitcoinFees', {hour: data.hour, fastest: data.fastest}, 10 * 60 * 1000)
-    callback()
+    callback({hourFeePerKb: data.hour * 1000, fastestFeePerKb: data.fastest * 1000})
   })
 }
 
@@ -268,5 +264,5 @@ module.exports = {
   getPin: getPin,
   resetPin: resetPin,
   setAvailableTouchId: setAvailableTouchId,
-  updateBitcoinFees: updateBitcoinFees
+  getDynamicFees: getDynamicFees
 }

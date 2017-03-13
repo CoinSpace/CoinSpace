@@ -12,3 +12,4 @@ provisioning/
 .idea/
 phonegap/
 .env.*
+.vscode/

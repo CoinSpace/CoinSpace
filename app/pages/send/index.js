@@ -11,7 +11,7 @@ var showError = require('cs-modal-flash').showError
 var showInfo = require('cs-modal-flash').showInfo
 var showConfirmation = require('cs-modal-confirm-send')
 var validateSend = require('cs-wallet-js').validateSend
-var updateBitcoinFees = require('cs-wallet-js').updateBitcoinFees
+var getDynamicFees = require('cs-wallet-js').getDynamicFees
 var resolveTo = require('cs-openalias/xhr.js').resolveTo
 var getNetwork = require('cs-network')
 
@@ -89,8 +89,8 @@ module.exports = function(el){
       var amount = ractive.get('value')
 
       if(getNetwork() === 'bitcoin') {
-        updateBitcoinFees(function() {
-          validateAndShowConfirm(to, amount, alias)
+        getDynamicFees(function(dynamicFees) {
+          validateAndShowConfirm(to, amount, alias, dynamicFees)
         })
       } else {
         validateAndShowConfirm(to, amount, alias)
@@ -165,7 +165,7 @@ module.exports = function(el){
     event.node.parentNode.style.zIndex = ''
   })
 
-  function validateAndShowConfirm(to, amount, alias) {
+  function validateAndShowConfirm(to, amount, alias, dynamicFees) {
     validateSend(getWallet(), to, amount, function(err, fee){
       if(err) {
         var interpolations = err.interpolations
@@ -181,7 +181,8 @@ module.exports = function(el){
         alias: alias,
         amount: ractive.get('value'), // don't change this to amount. 'value' could be modified above
         denomination: ractive.get('denomination'),
-        fee: fee
+        fee: fee,
+        dynamicFees: dynamicFees
       })
     })
   }
