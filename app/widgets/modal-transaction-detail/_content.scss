@@ -43,6 +43,9 @@
   ._title {
     margin-top: 10px;
   }
+  a._value {
+    text-decoration: underline;
+  }
   ._value {
     @include textselect;
 
