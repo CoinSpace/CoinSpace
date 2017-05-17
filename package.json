@@ -48,7 +48,7 @@
     "autoprefixer": "^2.2.0",
     "big.js": "^2.5.0",
     "body-parser": "^1.6.2",
-    "browserify": "^6.3.2",
+    "browserify": "13.0.1",
     "browserify-zepto": "~1.1.2",
     "browsernizr": "git://github.com/CoinSpace/browsernizr.git#v1.0.3",
     "compression": "^1.0.10",

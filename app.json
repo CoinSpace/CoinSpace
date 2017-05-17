@@ -3,10 +3,10 @@
   "scripts": {
   },
   "env": {
-    "API_WRAPPER": {
+    "API_BTC_URL": {
       "required": true
     },
-    "API_WRAPPER_URL": {
+    "API_LTC_URL": {
       "required": true
     },
     "BUILDPACK_URL": {
