@@ -24,7 +24,7 @@ module.exports = function (){
     var connectSrc = [
       "'self'", 'blob:',
       'api.bitcoinaverage.com', 'chain.so', // tickers
-      'btc.blockr.io', 'tbtc.blockr.io', 'ltc.blockr.io', 'insight.bitpay.com', 'live.coin.space', // blockchain APIs
+      'btc.blockr.io', 'tbtc.blockr.io', 'ltc.blockr.io', 'insight.bitpay.com', 'live.coin.space', 'ltc.coin.space', // blockchain APIs
       'proxy.coin.space', // proxy
       process.env.DB_HOST
     ]

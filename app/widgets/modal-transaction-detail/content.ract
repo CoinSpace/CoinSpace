@@ -27,7 +27,7 @@
       {{/isBitcoin}}
 
       {{#isLitecoin}}
-      <a href="" onclick="window.open('https://ltc.blockr.io/tx/info/{{id}}', '_system'); return false;" class="_value">{{id}}</a>				
+      <a href="" onclick="window.open('https://ltc.coin.space/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>				
 			{{/isLitecoin}}      
 
       <h3 class="_title">{{translate("Transaction Fee:")}}</h3>
