@@ -32,15 +32,16 @@ gulp.task('build-android', ['platform-add-android'], function() {
 gulp.task('run-android', shell.task('cordova run android', {cwd: paths.build}));
 
 gulp.task('platform-add-android', ['copy-config', 'copy-build'], shell.task([
-  'cordova platform add android',
-  'cordova plugin add cordova-plugin-geolocation',
-  'cordova plugin add cordova-plugin-whitelist',
-  'cordova plugin add cordova-plugin-inappbrowser',
-  'cordova plugin add cordova-plugin-splashscreen',
+  'cordova platform add android@6.1.0',
+  'cordova plugin add cordova-plugin-geolocation@2.4.3',
+  'cordova plugin add cordova-plugin-whitelist@1.3.2',
+  'cordova plugin add cordova-plugin-inappbrowser@1.7.1',
+  'cordova plugin add cordova-plugin-splashscreen@4.0.3',
   'cordova plugin add https://github.com/CoinSpace/CS-barcodescanner.git',
-  'cordova plugin add cordova-plugin-dialogs',
-  'cordova plugin add cordova-plugin-x-socialsharing',
-  'cordova plugin add cordova-plugin-facebookads'
+  'cordova plugin add cordova-plugin-dialogs@1.3.3',
+  'cordova plugin add cordova-plugin-x-socialsharing@5.1.8',
+  'cordova plugin add cordova-facebook-audnet-sdk@4.22.2',
+  'cordova plugin add cordova-plugin-facebookads@4.22.2'  
 ], {cwd: paths.build}));
 
 /* Windows tasks */
@@ -100,19 +101,20 @@ gulp.task('build-ios', ['platform-add-ios'], function () {
 });
 
 gulp.task('platform-add-ios', ['platform-config-ios'], shell.task([
-  'cordova platform add ios',
-  'cordova plugin add cordova-plugin-geolocation',
-  'cordova plugin add cordova-plugin-whitelist',
-  'cordova plugin add cordova-plugin-splashscreen',
+  'cordova platform add ios@4.3.1',
+  'cordova plugin add cordova-plugin-geolocation@2.4.3',
+  'cordova plugin add cordova-plugin-whitelist@1.3.2',
+  'cordova plugin add cordova-plugin-splashscreen@4.0.3',
   'cordova plugin add https://github.com/CoinSpace/CS-barcodescanner.git',
-  'cordova plugin add cordova-plugin-dialogs',
-  'cordova plugin add cordova-plugin-inappbrowser',
-  'cordova plugin add cordova-plugin-apple-watch',
-  'cordova plugin add cordova-plugin-statusbar',
-  'cordova plugin add cordova-plugin-x-socialsharing',
-  'cordova plugin add cordova-plugin-touch-id',
-  'cordova plugin add cordova-plugin-console',
-  'cordova plugin add cordova-plugin-facebookads'
+  'cordova plugin add cordova-plugin-dialogs@1.3.3',
+  'cordova plugin add cordova-plugin-inappbrowser@1.7.1',
+  'cordova plugin add cordova-plugin-apple-watch@0.11.5',
+  'cordova plugin add cordova-plugin-statusbar@2.2.3',
+  'cordova plugin add cordova-plugin-x-socialsharing@5.1.8',
+  'cordova plugin add cordova-plugin-touch-id@3.2.0',
+  'cordova plugin add cordova-plugin-console@1.0.7',
+  'cordova plugin add cordova-facebook-audnet-sdk@4.22.2',
+  'cordova plugin add cordova-plugin-facebookads@4.22.2'
 ], {cwd: paths.build}));
 
 gulp.task('platform-config-ios', ['copy-config', 'copy-build'], function () {
