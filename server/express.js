@@ -23,7 +23,7 @@ module.exports = function (){
     app.set('trust proxy', true)
     var connectSrc = [
       "'self'", 'blob:',
-      'api.bitcoinaverage.com', 'chain.so', // tickers
+      'apiv2.bitcoinaverage.com', // ticker
       'btc.blockr.io', 'tbtc.blockr.io', 'ltc.blockr.io', 'insight.bitpay.com', 'live.coin.space', 'ltc.coin.space', // blockchain APIs
       'proxy.coin.space', // proxy
       process.env.DB_HOST

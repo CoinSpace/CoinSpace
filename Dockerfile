@@ -1,10 +1,9 @@
-FROM node:0.12
+FROM node:0.12.18
 
 WORKDIR /app/user
 COPY package.json /app/user/package.json
 RUN npm version && \
-  npm install --unsafe-perm --ignore-scripts && \
-  npm rebuild && \
+  npm install --production && \
   npm cache clean
 
 COPY . /app/user/

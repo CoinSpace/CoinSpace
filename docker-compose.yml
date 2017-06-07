@@ -1,6 +1,6 @@
 web:
   build: .
-  command: 'bash -c ''npm start'''
+  command: npm start
   working_dir: /app/user
   environment:
     VIRTUAL_PORT: 8080

@@ -13,3 +13,4 @@ provisioning/
 phonegap/
 .env.*
 .vscode/
+certs/

@@ -1,2 +1,12 @@
 web:
   env_file: .env.loc
+
+nginx-proxy:
+  container_name: cs-nginx-proxy
+  image: jwilder/nginx-proxy
+  ports:
+    - '80:80'
+    - '443:443'
+  volumes:
+    - /var/run/docker.sock:/tmp/docker.sock:ro
+    - ./certs:/etc/nginx/certs:ro
