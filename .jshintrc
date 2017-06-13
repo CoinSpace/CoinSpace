@@ -16,5 +16,6 @@
   "unused": true,
   "strict": false,
   "trailing": true,
-  "sub": true
+  "sub": true,
+  "browser": true
 }

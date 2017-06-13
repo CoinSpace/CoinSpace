@@ -9,8 +9,10 @@ var tickers = {
   litecoin: 'LTC'
 }
 
-function BitcoinAverage(network){
-  this.network = network
+var network = null
+
+function BitcoinAverage(n){
+  network = n
   if(!tickers[network]) {
     throw new Error(network + " price ticker is not supported")
   }
@@ -18,7 +20,7 @@ function BitcoinAverage(network){
 BitcoinAverage.apiRoot = "https://apiv2.bitcoinaverage.com/indices/global/ticker/short?crypto="
 
 function getExchangeRates(callback){
-  var ticker = tickers[this.network]
+  var ticker = tickers[network]
   var uri = BitcoinAverage.apiRoot + ticker
   xhr({
     uri: uri,

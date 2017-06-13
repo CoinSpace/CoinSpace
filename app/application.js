@@ -22,7 +22,7 @@ window.initCSApp = function() {
   fastclick(document.body)
 
   initGeoOverlay(document.getElementById('geo-overlay'))
-  
+
   WatchModule.initWatch('group.com.coinspace.wallet')
 
 
@@ -73,9 +73,9 @@ window.initCSApp = function() {
           var respone = {}
           respone.command = 'currencyMessage'
           respone.currency = rates;
-          
+
           WatchModule.setRates(rates)
-          
+
           WatchModule.sendMessage(respone, 'comandAnswerQueue')
         }
         emitter.emit('ticker', rates);
