@@ -41,7 +41,7 @@ var Auth = Ractive.extend({
       return showError({ message: err.message })
     }
 
-    function onSyncDone(err, transactions) {
+   function onSyncDone(err) {
       self.set('opening', false)
       if(err) {
         return onDoneError(err)
@@ -49,10 +49,18 @@ var Auth = Ractive.extend({
 
       window.scrollTo( 0, 0 )
       emitter.emit('wallet-ready')
+    }
+
+    function onTxSyncDone(err, transactions) {
+      if(err) {
+        emitter.emit('set-transactions', [])
+        return onDoneError(err)
+      }
       emitter.emit('set-transactions', transactions)
     }
 
     this.onSyncDone = onSyncDone
+    this.onTxSyncDone = onTxSyncDone
     this.getNetwork = getNetwork
   }
 })

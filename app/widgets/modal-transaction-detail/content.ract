@@ -27,8 +27,8 @@
       {{/isBitcoin}}
 
       {{#isLitecoin}}
-      <a href="" onclick="window.open('https://ltc.coin.space/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>				
-			{{/isLitecoin}}      
+      <a href="" onclick="window.open('https://ltc.coin.space/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
+			{{/isLitecoin}}
 
       <h3 class="_title">{{translate("Transaction Fee:")}}</h3>
       <code class="_value">{{satoshiToBtc(fee)}}</code>
@@ -36,7 +36,7 @@
       <h3 class="_title">{{translate("Inputs:")}}</h3>
       <code class="_value">
         {{#ins}}
-          <span class="_address">{{address}}</span>
+          <span class="_address">{{address ? address : translate("Unparsed address")}}</span>
           <span class="_number">{{satoshiToBtc(amount)}}</span>
         {{/ins}}
       </code>

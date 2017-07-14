@@ -117,5 +117,6 @@
     "Please choose lower fee.": "Please choose lower fee.",
     "default": "default",
     "fastest": "fastest",
-    "minimum": "minimum"
+    "minimum": "minimum",
+    "Unparsed address": "Unparsed address"
 }

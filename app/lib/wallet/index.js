@@ -59,8 +59,8 @@ function callbackError(err, callbacks) {
   })
 }
 
-function setPin(pin, network, done, unspentsDone, balanceDone) {
-  var callbacks = [done, unspentsDone, balanceDone]
+function setPin(pin, network, done, txSyncDone) {
+  var callbacks = [done, txSyncDone]
   auth.register(id, pin, function(err, token){
     if(err) return callbackError(err.error, callbacks);
 
@@ -74,7 +74,7 @@ function setPin(pin, network, done, unspentsDone, balanceDone) {
 
       var accounts = getAccountsFromSeed(network)
       initWallet(accounts.externalAccount, accounts.internalAccount, network,
-                 done, unspentsDone, balanceDone)
+                 done, txSyncDone)
     })
   })
 }
@@ -83,8 +83,8 @@ function disablePin(pin, callback) {
   auth.disablePin(id, pin, callback)
 }
 
-function openWalletWithPin(pin, network, done, unspentsDone, balanceDone) {
-  var callbacks = [done, unspentsDone, balanceDone]
+function openWalletWithPin(pin, network, done, txSyncDone) {
+  var callbacks = [done, txSyncDone]
   db.getCredentials(function(err, credentials){
     if(err) return callbackError(err, callbacks);
 
@@ -107,7 +107,7 @@ function openWalletWithPin(pin, network, done, unspentsDone, balanceDone) {
 
       var accounts = getAccountsFromSeed(network)
       initWallet(accounts.externalAccount, accounts.internalAccount, network,
-                 done, unspentsDone, balanceDone)
+                 done, txSyncDone)
     })
   })
 }
@@ -147,65 +147,51 @@ function getAccountsFromSeed(networkName, done) {
   }
 }
 
-function initWallet(externalAccount, internalAccount, networkName, done, unspentsDone, balanceDone){
-  var network = bitcoin.networks[networkName]
-
-  wallet = new Wallet(externalAccount, internalAccount, networkName, function(err, w) {
-    if(err) return done(err)
+function initWallet(externalAccount, internalAccount, networkName, done, txDone){
+  wallet = new Wallet(externalAccount, internalAccount, networkName, done, function(err) {
+    if(err) return txDone(err)
 
     var txObjs = wallet.getTransactionHistory()
-    done(null, txObjs.map(function(tx) {
-      return parseTx(wallet, tx)
+    txDone(null, txObjs.map(function(tx) {
+      return parseHistoryTx(tx)
     }))
-  }, unspentsDone, balanceDone)
+  })
 
   wallet.denomination = denominations[networkName].default
 }
 
-function parseTx(wallet, tx) {
-  var id = tx.getId()
-  var metadata = wallet.txMetadata[id]
-  var network = bitcoin.networks[wallet.networkName]
-
-  var timestamp = metadata.timestamp
-  timestamp = timestamp ? timestamp * 1000 : new Date().getTime()
-
-  var node = wallet.txGraph.findNodeById(id)
-  var prevOutputs = node.prevNodes.reduce(function(inputs, n) {
-    inputs[n.id] = n.tx.outs
-    return inputs
-  }, {})
-
-  var inputs = tx.ins.map(function(input) {
-    var buffer = new Buffer(input.hash)
-    Array.prototype.reverse.call(buffer)
-    var inputTxId = buffer.toString('hex')
-
-    return prevOutputs[inputTxId][input.index]
-  })
-
+function parseHistoryTx(tx) {
   return {
-    id: id,
-    amount: metadata.value,
-    timestamp: timestamp,
-    confirmations: metadata.confirmations,
-    fee: metadata.fee,
-    ins: parseOutputs(inputs, network),
-    outs: parseOutputs(tx.outs, network)
+    id: tx.txId,
+    amount: tx.amount,
+    timestamp: tx.timestamp * 1000,
+    confirmations: tx.confirmations,
+    fee: tx.fees,
+    ins: parseInputs(tx.vin),
+    outs: parseOutputs(tx.vout)
   }
 
-  function parseOutputs(outputs, network) {
+  function parseInputs(inputs) {
+    return inputs.map(function(input){
+      return {
+        address: input.addr,
+        amount: input.valueSat
+      }
+    })
+  }
+
+  function parseOutputs(outputs) {
     return outputs.map(function(output){
       return {
-        address: bitcoin.Address.fromOutputScript(output.script, network).toString(),
-        amount: output.value
+        address: output.scriptPubKey.addresses[0],
+        amount: output.valueSat
       }
     })
   }
 }
 
-function sync(done) {
-  initWallet(wallet.externalAccount, wallet.internalAccount, wallet.networkName, done)
+function sync(done, txDone) {
+  initWallet(wallet.externalAccount, wallet.internalAccount, wallet.networkName, done, txDone)
 }
 
 function getWallet(){
@@ -260,7 +246,7 @@ module.exports = {
   reset: reset,
   sync: sync,
   validateSend: validateSend,
-  parseTx: parseTx,
+  parseHistoryTx: parseHistoryTx,
   getPin: getPin,
   resetPin: resetPin,
   setAvailableTouchId: setAvailableTouchId,

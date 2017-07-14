@@ -117,6 +117,8 @@ module.exports = function(el){
   }
 
   function cancelSpinner() {
+    if (!ractive.nodes.refresh_el) return ractive;
+
     ractive.nodes.refresh_el.classList.remove('loading')
     // IE fix
     var clone = ractive.nodes.refresh_el.cloneNode(true)

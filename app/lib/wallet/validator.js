@@ -44,7 +44,7 @@ function validateSend(wallet, to, btcValue, callback){
     return new callback(e)
   }
 
-  callback(null, satoshiToBtc(wallet.txGraph.calculateFee(tx)))
+  callback(null)
 
 }
 

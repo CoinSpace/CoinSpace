@@ -102,19 +102,18 @@ module.exports = function(el){
     ractive.set('denomination', getWallet().denomination)
   })
 
-  emitter.on('db-ready', function(){
+  emitter.once('db-ready', function(){
     db.get(function(err, doc){
       if(err) return console.error(err);
 
       ractive.set('selectedFiat', doc.systemInfo.preferredCurrency)
+      ractive.observe('selectedFiat', setPreferredCurrency)
     })
   })
 
   emitter.on('ticker', function(rates){
     ractive.set('exchangeRates', rates)
   })
-
-  ractive.observe('selectedFiat', setPreferredCurrency)
 
   ractive.on('fiat-to-bitcoin', function(){
     var fiat = ractive.nodes.fiat.value
@@ -166,7 +165,7 @@ module.exports = function(el){
   })
 
   function validateAndShowConfirm(to, amount, alias, dynamicFees) {
-    validateSend(getWallet(), to, amount, function(err, fee){
+    validateSend(getWallet(), to, amount, function(err){
       if(err) {
         var interpolations = err.interpolations
         if(err.message.match(/trying to empty your wallet/)){
@@ -181,7 +180,6 @@ module.exports = function(el){
         alias: alias,
         amount: ractive.get('value'), // don't change this to amount. 'value' could be modified above
         denomination: ractive.get('denomination'),
-        fee: fee,
         dynamicFees: dynamicFees
       })
     })
@@ -196,12 +194,8 @@ module.exports = function(el){
   function setPreferredCurrency(currency, old){
     if(old == undefined) return; //when loading wallet
 
-    db.set('systemInfo', {preferredCurrency: currency}, function(err, response){
-      if(err) return console.error(response);
-
-      emitter.emit('preferred-currency-changed', currency)
-      ractive.fire('bitcoin-to-fiat')
-    })
+    emitter.emit('preferred-currency-changed', currency)
+    ractive.fire('bitcoin-to-fiat')
   }
 
   return ractive

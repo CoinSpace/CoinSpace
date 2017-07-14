@@ -40,10 +40,6 @@ module.exports = function(el){
     var balance = getWallet().getBalance()
     ractive.set('bitcoinBalance', balance)
     ractive.set('denomination', getWallet().denomination)
-    db.get('systemInfo', function(err, info){
-      if(err) return console.error(err);
-      ractive.set('fiatCurrency', info.preferredCurrency)
-    })
     if (window.buildPlatform === 'ios') {
       var response = {}
       response.command = 'balanceMessage'
@@ -55,6 +51,15 @@ module.exports = function(el){
     }
   })
 
+  emitter.once('db-ready', function(){
+    db.get('systemInfo', function(err, info){
+      if(err) return console.error(err);
+      ractive.set('fiatCurrency', info.preferredCurrency)
+      sendIosCurrency(info.preferredCurrency)
+      ractive.observe('selectedFiat', setPreferredCurrency)
+    })
+  })
+
   emitter.on('update-balance', function() {
     ractive.set('bitcoinBalance', getWallet().getBalance())
     if (window.buildPlatform === 'ios') {
@@ -63,7 +68,7 @@ module.exports = function(el){
       response.balance = getWallet().getBalance()
       response.denomination = getWallet().denomination
       response.walletId = getWallet().getNextAddress()
-      
+
       WatchModule.sendMessage(response, 'comandAnswerQueue')
     }
   })
@@ -96,11 +101,17 @@ module.exports = function(el){
     event.original.preventDefault();
     if(!ractive.get('updating_transactions')) {
       ractive.set('updating_transactions', true)
+      emitter.emit('sync-click')
       refreshEl.classList.add('loading');
       setTimeout(function() {
-        sync(function(err, txs){
-          if(err) return showError(err)
+        sync(function(err){
+          if(err) return showError({message: err.message})
           emitter.emit('update-balance')
+        }, function(err, txs) {
+          if(err) {
+            emitter.emit('set-transactions', [])
+            return showError({message: err.message})
+          }
           emitter.emit('set-transactions', txs)
         })
       }, 200)
@@ -115,16 +126,8 @@ module.exports = function(el){
     }
   })
 
-  ractive.observe('selectedFiat', setPreferredCurrency)
-
   emitter.on('preferred-currency-changed', function(currency){
     ractive.set('fiatCurrency', currency)
-    if (window.buildPlatform === 'ios') {
-      var response = {}
-      response.command = 'defaultCurrencyMessage'
-      response.defaultCurrency = currency
-      WatchModule.sendMessage(response, 'comandAnswerQueue')
-    }
   })
 
   emitter.on('ticker', function(rates){
@@ -145,12 +148,21 @@ module.exports = function(el){
   function setPreferredCurrency(currency, old){
     if(old == undefined) return; //when loading wallet
 
+    emitter.emit('price-currency-changed', currency)
+    sendIosCurrency(currency)
+
     db.set('systemInfo', {preferredCurrency: currency}, function(err, response){
       if(err) return console.error(response);
-
-      emitter.emit('preferred-currency-changed', currency)
-      emitter.emit('price-currency-changed', currency)
     })
+  }
+
+  function sendIosCurrency(currency) {
+    if (window.buildPlatform === 'ios') {
+      WatchModule.sendMessage({
+        command: 'defaultCurrencyMessage',
+        defaultCurrency: currency
+      }, 'comandAnswerQueue')
+    }
   }
 
   ractive.toggleIcon = toggleIcon

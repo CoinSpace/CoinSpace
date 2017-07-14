@@ -15,7 +15,6 @@ module.exports = function(el){
     el: el,
     template: require('./index.ract').template,
     data: {
-      updating_transactions: false,
       transactions: transactions,
       formatTimestamp: function(timestamp){
         var date = new Date(timestamp)
@@ -48,11 +47,17 @@ module.exports = function(el){
       var response = {}
       response.command = 'transactionMessage'
       response.transactions = newTxs
-      
+
       WatchModule.setTransactionHistory(newTxs)
-      
+
       WatchModule.sendMessage(response, 'comandAnswerQueue')
     }
+  })
+
+  emitter.on('sync-click', function() {
+    transactions = []
+    ractive.set('transactions', transactions)
+    ractive.set('loadingTx', true)
   })
 
   ractive.on('show-detail', function(event) {
