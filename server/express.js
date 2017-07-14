@@ -13,6 +13,7 @@ var crypto = require('crypto')
 var helmet = require('helmet')
 var openalias = require('cs-openalias')
 var fee = require('./fee')
+var ticker = require('./ticker')
 
 module.exports = function (){
   var app = express()
@@ -24,7 +25,7 @@ module.exports = function (){
     var connectSrc = [
       "'self'", 'blob:',
       'apiv2.bitcoinaverage.com', // ticker
-      'btc.blockr.io', 'tbtc.blockr.io', 'ltc.blockr.io', 'insight.bitpay.com', 'live.coin.space', 'ltc.coin.space', // blockchain APIs
+      'btc.blockr.io', 'tbtc.blockr.io', 'ltc.blockr.io', 'insight.bitpay.com', 'live.coin.space', 'btc.coin.space', 'ltc.coin.space', // blockchain APIs
       'proxy.coin.space', // proxy
       process.env.DB_HOST
     ]
@@ -145,6 +146,16 @@ module.exports = function (){
     fee.getFromCache(function(err, doc) {
       if(err) return res.status(400).send(err);
       res.status(200).send({hour: doc.hour, fastest: doc.fastest})
+    })
+  })
+
+  app.get('/ticker', function(req, res) {
+    var crypto = req.query.crypto
+    if (!crypto) return res.status(400).json({error: 'Bad request'});
+
+    ticker.getFromCache(crypto, function(err, data) {
+      if(err) return res.status(400).send(err);
+      res.status(200).send(data)
     })
   })
 

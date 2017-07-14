@@ -64,7 +64,7 @@ window.initCSApp = function() {
   })
 
   function updateExchangeRates(){
-    var tickerUpdateInterval = 1000 * 60 * 2
+    var tickerUpdateInterval = 1000 * 60 * 10
     var ticker = new Ticker(getNetwork())
 
     ticker.getExchangeRates(function(err, rates){

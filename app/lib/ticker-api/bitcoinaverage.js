@@ -1,7 +1,6 @@
 'use strict';
 
 var xhr = require('xhr')
-var currencies = require('./currencies')
 
 var tickers = {
   bitcoin: 'BTC',
@@ -10,6 +9,10 @@ var tickers = {
 }
 
 var network = null
+var uriRoot = window.location.origin
+if(window.buildType === 'phonegap') {
+  uriRoot = process.env.PHONEGAP_URL
+}
 
 function BitcoinAverage(n){
   network = n
@@ -17,11 +20,10 @@ function BitcoinAverage(n){
     throw new Error(network + " price ticker is not supported")
   }
 }
-BitcoinAverage.apiRoot = "https://apiv2.bitcoinaverage.com/indices/global/ticker/short?crypto="
 
-function getExchangeRates(callback){
+BitcoinAverage.prototype.getExchangeRates = function(callback){
   var ticker = tickers[network]
-  var uri = BitcoinAverage.apiRoot + ticker
+  var uri = uriRoot + '/ticker?crypto=' + ticker
   xhr({
     uri: uri,
     timeout: 10000,
@@ -32,17 +34,8 @@ function getExchangeRates(callback){
       return callback(err)
     }
 
-    callback(null, toRates(JSON.parse(body), ticker))
+    callback(null, JSON.parse(body))
   })
 }
 
-function toRates(apiRates, ticker){
-  var rates = {}
-  currencies.forEach(function(currency){
-    rates[currency] = apiRates[ticker + currency].last
-  })
-  return rates
-}
-
-BitcoinAverage.prototype.getExchangeRates = getExchangeRates
 module.exports = BitcoinAverage

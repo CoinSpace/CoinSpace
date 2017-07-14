@@ -1,6 +1,9 @@
 web:
   env_file: .env.loc
 
+web_master:
+  env_file: .env.loc
+
 nginx-proxy:
   container_name: cs-nginx-proxy
   image: jwilder/nginx-proxy

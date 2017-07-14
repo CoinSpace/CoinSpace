@@ -41,7 +41,7 @@ gulp.task('platform-add-android', ['copy-config', 'copy-build'], shell.task([
   'cordova plugin add cordova-plugin-dialogs@1.3.3',
   'cordova plugin add cordova-plugin-x-socialsharing@5.1.8',
   'cordova plugin add cordova-facebook-audnet-sdk@4.22.2',
-  'cordova plugin add cordova-plugin-facebookads@4.22.2'  
+  'cordova plugin add cordova-plugin-facebookads@4.22.2'
 ], {cwd: paths.build}));
 
 /* Windows tasks */
@@ -143,7 +143,7 @@ gulp.task('copy-build', ['clean', 'build-js'], function() {
     'connect-src': [
       "'self'", 'blob:',
       'https://apiv2.bitcoinaverage.com',
-      'https://btc.blockr.io', 'https://tbtc.blockr.io', 'https://ltc.blockr.io', 'https://insight.bitpay.com', 'https://live.coin.space', 'https://ltc.coin.space',
+      'https://btc.blockr.io', 'https://tbtc.blockr.io', 'https://ltc.blockr.io', 'https://insight.bitpay.com', 'https://btc.coin.space', 'https://ltc.coin.space',
       'https://' + env.DB_HOST, 'https://proxy.coin.space', env.PHONEGAP_URL
     ],
     'font-src': ["'self'"],

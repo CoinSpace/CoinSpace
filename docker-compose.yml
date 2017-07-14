@@ -6,3 +6,8 @@ web:
     VIRTUAL_PORT: 8080
   expose:
     - '8080'
+
+web_master:
+  extends: web
+  environment:
+    MASTER: 1

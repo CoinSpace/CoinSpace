@@ -23,7 +23,7 @@
 
       <h3 class="_title">{{translate("Transaction Id:")}}</h3>
       {{#isBitcoin}}
-      <a href="" onclick="window.open('https://live.coin.space/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
+      <a href="" onclick="window.open('https://btc.coin.space/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
       {{/isBitcoin}}
 
       {{#isLitecoin}}
