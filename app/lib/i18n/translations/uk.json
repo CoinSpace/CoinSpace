@@ -35,7 +35,7 @@
     "We could not connect you to Mecto, please check your internet connection.": "Ми не змогли приєднати вас до Mecto, будь ласка, перевірте ваше Інтернет-з'єднання.",
     "Please enter a valid address to send to": "Будь ласка, введіть коректний адрес отримувача ",
     "Please enter an amount above": "Будь ласка, введіть суму, більш за %(dust)s",
-    "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first (this should not take more than a few minutes).": "Частнина коштів тимчасово недоступна. Щоб послати цю транзакцію, Вам необхідно зачекати підтверждення щойно відправленних транзакцій (зазвичай, не більше кількох хвилин)",
+    "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.": "Частнина коштів тимчасово недоступна. Щоб послати цю транзакцію, Вам необхідно зачекати підтверждення щойно відправленних транзакцій",
     "What does this mean?": "Що це означає?",
     "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you": "Здається, Ви намагаєтесь спорожнити Ваш гаманець. Враховуючи оплату за транзакцію, ми оцінили максимальну суму яку Ви можете послати у %(sendableBalance)s. Ми скоректували поле \"Сума\".",
     "You do not have enough funds in your wallet": "Недостатньо грошей у Вашому гаманцю",

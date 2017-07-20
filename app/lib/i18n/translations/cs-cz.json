@@ -35,7 +35,7 @@
     "We could not connect you to Mecto, please check your internet connection.": "Nemohli jsme Vás připojit k Vašemu Mecto, prosím zkontrolujte své internetové připojení.",
     "Please enter a valid address to send to": "Prosím zadejte platnou adresu k zaslání",
     "Please enter an amount above": "Prosím výše zadejte množství %(dust)s",
-    "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first (this should not take more than a few minutes).": "Některé prostředky jsou dočasně nedostupné. K odeslání této transakce musíte nejprve počkat na potvrzení příchozích transakcí (toto by nemělo trvat více než několik minut).",
+    "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.": "Některé prostředky jsou dočasně nedostupné. K odeslání této transakce musíte nejprve počkat na potvrzení příchozích transakcí.",
     "What does this mean?": "Co to znamená?",
     "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you": "Vypadá to, že se snažíte použít vyprázdnit svou peněženku. Po  započtení transakcí, odhadujeme maximální možné množství k odeslání %(sendableBalance)s. Nastavili jsme pro Vás toto množství ve formuláři.",
     "You do not have enough funds in your wallet": "Nemáte dostatek prostředků ve Vaší peněžence.",

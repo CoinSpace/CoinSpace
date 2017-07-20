@@ -35,7 +35,7 @@
     "We could not connect you to Mecto, please check your internet connection.": "Hindi namin ikaw maikunekta sa Mecto, maari lamang na i-check ang kuneksyon ng iyong internet.",
     "Please enter a valid address to send to": "Maari lamang na i-enter ang wastong address na papadalhan",
     "Please enter an amount above": "Mangyari lamang na i-enter ang halagang mas tataas sa %(dust)s",
-    "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first (this should not take more than a few minutes).": "Ang ilang pondo ay pansamantalang hindi magagamit. Upang magpadala ng transaksyon, kinakailangan mong mag-antay muna para sa pagkumpirma ng iyong transaksyon na pending (hindi ito dapat magtatagal nang higit ng ilang minuto).",
+    "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.": "Ang ilang pondo ay pansamantalang hindi magagamit. Upang magpadala ng transaksyon, kinakailangan mong mag-antay muna para sa pagkumpirma ng iyong transaksyon na pending.",
     "What does this mean?": "Ano ibig sabihin nito?",
     "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you": "Mukhang nais mong limasin ang iyong wallet. Kung bibigyang-halaga ang transaction fee, tinatantya namin na ang max amount na maari mong maipadala ay %(sendableBalance)s. Na-amendya na namin ang halaga sa amount field para sa iyo.",
     "You do not have enough funds in your wallet": "Wala kang sapat na pondo sa iyong wallet",

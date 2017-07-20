@@ -35,7 +35,7 @@
     "We could not connect you to Mecto, please check your internet connection.": "We konden geen verbinding maken met Mecto, controleer alstublieft uw internetverbinding.",
     "Please enter a valid address to send to": "Vul alsjeblieft een geldig adres in om iets naar te versturen",
     "Please enter an amount above": "Vul een bedrag in boven %(dust)s",
-    "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first (this should not take more than a few minutes).": "Een gedeelte van uw geld is tijdelijk niet beschikbaar. Om deze transactie te versturen, moet u eerst wachten totdat de nog niet bevestigde transacties bevestigd zijn (dit zou niet meer dan een paar minuten mogen duren).",
+    "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.": "Een gedeelte van uw geld is tijdelijk niet beschikbaar. Om deze transactie te versturen, moet u eerst wachten totdat de nog niet bevestigde transacties bevestigd zijn.",
     "What does this mean?": "Wat betekent dit?",
     "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you": "Het lijkt erop dat u een portemonnee probeert leeg te maken. Als men rekening houdt met de transactiekosten, schatten we dat het maximale bedrag dat u kunt versturen %(sendableBalance)s is. We hebben deze waarde voor u ingesteld.",
     "You do not have enough funds in your wallet": "U hebt niet genoeg geld in uw portemonnee",

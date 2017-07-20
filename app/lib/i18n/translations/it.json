@@ -35,7 +35,7 @@
     "We could not connect you to Mecto, please check your internet connection.": "Non è stato possibile collegarti a Mecto, verifica la tua connessione internet.",
     "Please enter a valid address to send to": "Inserisci un indirizzo valido per l'invio",
     "Please enter an amount above": "Inserisci un importo superiore a %(dust)s",
-    "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first (this should not take more than a few minutes).": "Parte dei tuoi fondi non sono disponibili. Per inviare questa transazione, devi aspettare che le tue transazioni pendenti siano confermate (ci vorrà qualche minuto).",
+    "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.": "Parte dei tuoi fondi non sono disponibili. Per inviare questa transazione, devi aspettare che le tue transazioni pendenti siano confermate.",
     "What does this mean?": "Che significa?",
     "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you": "Sembra che tu voglia svuotare il tuo portafoglio. Considerando la commissioni per la transazione, abbiamo calcolato che l'importo massimo che puoi inviare è %(sendableBalance)s. Abbiamo corretto l'importo per te.",
     "You do not have enough funds in your wallet": "Non hai fondi sufficienti nel tuo portafoglio.",

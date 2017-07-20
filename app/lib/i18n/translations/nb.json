@@ -35,7 +35,7 @@
     "We could not connect you to Mecto, please check your internet connection.": "Vi kunne ikke forbinde deg til Mecto, vennligst sjekk din Internettforbindelse.",
     "Please enter a valid address to send to": "Vennligst skriv inn en gyldig adresse å sende til",
     "Please enter an amount above": "Vennglist legg in mengde høyere enn %(dust)s",
-    "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first (this should not take more than a few minutes).": "Noen midler er midlertidlig utilgjengelige. For å sende denne transaksjonen må du først vente til dine ventende midler er bekreftet (dette burde ikke ta mer enn noen få minutter).",
+    "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.": "Noen midler er midlertidlig utilgjengelige. For å sende denne transaksjonen må du først vente til dine ventende midler er bekreftet.",
     "What does this mean?": "Hva betyr dette?",
     "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you": "Det virker som du prøver å tømme din lommebok. Inkludert transaksjonsavgift så har vi beregnet at den største mengden du kan sende er %(sendableBalance)s. Vi har endret verdien i mengde-feltet for deg.",
     "You do not have enough funds in your wallet": "Du har ikke nok midler i din lommebok.",

@@ -35,7 +35,7 @@
     "We could not connect you to Mecto, please check your internet connection.": "Kami tidak dapat menyambungkan anda ke Mecto, silahkan periksa koneksi internet anda",
     "Please enter a valid address to send to": "Tolong masukkan alamat yang valid untuk dikirim ",
     "Please enter an amount above": "Tolong masukkan sejumlah angka diatas %(dust)s",
-    "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first (this should not take more than a few minutes).": "Beberapa dana sementara tidak tersedia. Untuk mengirim transaksi ini, anda harus menunggu konfirmasi transaksi yang sedang tertunda terlebih dahulu (hal ini tidak akan lebih dari beberapa menit)",
+    "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.": "Beberapa dana sementara tidak tersedia. Untuk mengirim transaksi ini, anda harus menunggu konfirmasi transaksi yang sedang tertunda terlebih dahulu",
     "What does this mean?": "Apa artinya ini?",
     "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you": "Sepertinya anda mencoba untuk mengosongkan dompet anda. Mengambil biaya transaksi dari akun anda, estimasi kami bahwa total maksimal  yang dapat anda kirim adalah %(sendableBalance)s. Kami telah merubah nilai dalam kolom untuk anda",
     "You do not have enough funds in your wallet": "Anda tidak memiliki jumlah dana yang cukup di dompet anda",

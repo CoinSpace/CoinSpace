@@ -35,7 +35,7 @@
   "We could not connect you to Mecto, please check your internet connection.": "We couldn't connect you to Mecto, please check your internet connection.",
   "Please enter a valid address to send to": "Please enter a valid address to send to",
   "Please enter an amount above": "Please enter an amount above %(dust)s",
-  "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first (this should not take more than a few minutes).": "Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first (this shouldn't take more than a few minutes).",
+  "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.": "Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.",
   "What does this mean?": "What does this mean?",
   "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you": "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.",
   "You do not have enough funds in your wallet": "You don't have enough funds in your wallet",

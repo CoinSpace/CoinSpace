@@ -86,7 +86,7 @@ describe('validate', function(){
         error.details = "Additional funds confirmation pending"
         sinon.stub(Wallet.prototype, "createTx").throws(error)
       })
-      var fundsUnavailableMessage = "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first (this should not take more than a few minutes)."
+      var fundsUnavailableMessage = "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first."
 
       it('produces an appropriate error message', function(done){
         validateSend(wallet, to, amount, function(err){

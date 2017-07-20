@@ -35,7 +35,7 @@
     "We could not connect you to Mecto, please check your internet connection.": "Nije bilo moguce konektovati vas na Mecto, molim proverite svoju internet konekciju.",
     "Please enter a valid address to send to": "Unesite validnu adresu za slanje",
     "Please enter an amount above": "Molimo unesite iznos %(procenata)",
-    "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first (this should not take more than a few minutes).": "Neki fondovi su trenutno nedostupni. Da posaljete ovu transakciju, moracete da sacekate da vase neresene transakcije budu potvrdjene (ovo ne bi trebalo da traje duze od par minuta).",
+    "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.": "Neki fondovi su trenutno nedostupni. Da posaljete ovu transakciju, moracete da sacekate da vase neresene transakcije budu potvrdjene.",
     "What does this mean?": "Sta ovo znaci?",
     "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you": "Ispraznjen vam je novcanik. Uzimajuci u obzir naknadu transakcije, procenili smo da je maksimalni iznos slanja %(odobreno za potrosnju). Izmenili smo polje iznosa umesto vas.",
     "You do not have enough funds in your wallet": "Nemate dovoljno sredstava u novcaniku",

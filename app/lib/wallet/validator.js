@@ -22,7 +22,7 @@ function validateSend(wallet, to, btcValue, callback){
       var error
 
       if(e.details && e.details.match(/Additional funds confirmation pending/)){
-        error = new Error("Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first (this should not take more than a few minutes).")
+        error = new Error("Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.")
         return callback(error)
       } else if(attemptToEmptyWallet(wallet.getBalance(), amount, network)){
         var message = [

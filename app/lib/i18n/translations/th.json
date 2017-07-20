@@ -35,7 +35,7 @@
     "We could not connect you to Mecto, please check your internet connection.": "เราไม่สามารถเชื่อมต่อคุณกับ Mecto ได้  โปรดเช็คการเชื่อมต่ออินเทอร์เน็ตของคุณ",
     "Please enter a valid address to send to": "กรุณากรอกที่อยู่ซึ่งสามารถติดต่อได้",
     "Please enter an amount above": "กรุณากรอกยอดเงินรวมข้างบน %(dust)s",
-    "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first (this should not take more than a few minutes).": "เงินทุนสำรองนั้นไม่สามารถใช้ได้ชั่วคราว  หากจะทำธุรกรรม คุณจำเป็นต้องรอการยืนยันคำขอการทำธุรกรรมเสียก่อน (ใช้เวลาไม่เกินสองหรือสามนาที)",
+    "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.": "เงินทุนสำรองนั้นไม่สามารถใช้ได้ชั่วคราว  หากจะทำธุรกรรม คุณจำเป็นต้องรอการยืนยันคำขอการทำธุรกรรมเสียก่อน",
     "What does this mean?": "นี่หมายความว่าอะไร?",
     "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you": "ดูเหมือนว่าคุณกำลังพยายามใช้เงินในกระเป๋าจนหมด เพราะต้องจ่ายภาษีธุรกรรม จากที่เราคำนวณ ยอดเงินสูงสุดที่คุณสามารถส่งได้คือ %(sendableBalance)s เราได้ทำการแก้ไขมูลค่ารวมให้คุณแล้ว",
     "You do not have enough funds in your wallet": "คุณมีเงินในกระเป๋าไม่พอ",
