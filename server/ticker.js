@@ -22,7 +22,9 @@ function getFromAPI(cryptoTicker, callback) {
       fiat: currencies.join()
     },
   }, function(error, response, body) {
-    if (error || response.statusCode !== 200) return callback({error: error, status: response.statusCode});
+    if (error || !response || response.statusCode !== 200) {
+      return callback({error: error, status: response ? response.statusCode : 'empty response'})
+    }
     callback(null, toRates(body, cryptoTicker));
   })
 }

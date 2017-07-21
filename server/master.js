@@ -6,7 +6,6 @@ function cleanGeo(interval) {
   setInterval(function intervalFunction(){
     geo.getIdsOlderThan(interval, function(err, docs) {
       if (err) return console.error(err);
-      console.info('removing old geo docs: ' + docs.length);
       docs.forEach(geo.remove);
     });
     return intervalFunction;

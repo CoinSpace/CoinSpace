@@ -14,7 +14,9 @@ function getFromAPI(callback) {
     uri: 'https://bitcoinfees.21.co/api/v1/fees/recommended',
     json: true
   }, function(error, response, body) {
-    if (error || response.statusCode !== 200) return callback({error: error, status: response.statusCode});
+    if (error || !response || response.statusCode !== 200) {
+      return callback({error: error, status: response ? response.statusCode : 'empty response'})
+    }
     callback(null, body);
   })
 }
