@@ -9,5 +9,6 @@ web:
 
 web_master:
   extends: web
+  image: coinspace_web
   environment:
     MASTER: 1
