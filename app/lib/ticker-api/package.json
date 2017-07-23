@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "",
   "license": "GPL-2.0+",
+  "browserify": {
+    "transform": [ "envify" ]
+  },
   "dependencies": {
     "xhr": "^1.4.1"
   }

@@ -96,8 +96,8 @@ gulp.task('platform-config-windows', ['copy-config', 'copy-build'], function() {
 gulp.task('build-ios', ['platform-add-ios'], function () {
   return gulp.src('')
     .pipe(gulpif(isRelease,
-      shell('cordova build ios --release', {cwd: paths.build}),
-      shell('cordova build ios', {cwd: paths.build})));
+      shell('cordova build ios --buildConfig=../build.json --release', {cwd: paths.build}),
+      shell('cordova build ios --buildConfig=../build.json', {cwd: paths.build})));
 });
 
 gulp.task('platform-add-ios', ['platform-config-ios'], shell.task([
