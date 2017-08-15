@@ -2,8 +2,9 @@
 
 var Ractive = require('cs-ractive')
 var emitter = require('cs-emitter')
-var toFixedFloor = require('cs-convert').toFixedFloor
-var satoshiToBtc = require('cs-convert').satoshiToBtc
+var toUnitString = require('cs-convert').toUnitString
+var getNetwork = require('cs-network')
+var getWallet = require('cs-wallet-js').getWallet
 var strftime = require('strftime')
 var showTransactionDetail = require('cs-modal-transaction-detail')
 
@@ -11,6 +12,7 @@ var WatchModule = require('cs-watch-module')
 
 module.exports = function(el){
   var transactions = []
+  var network = getNetwork();
   var ractive = new Ractive({
     el: el,
     template: require('./index.ract').template,
@@ -27,8 +29,28 @@ module.exports = function(el){
           return number + ' confirmations'
         }
       },
-      satoshiToBtc: satoshiToBtc,
-      loadingTx: true
+      getToAddress: function(tx) {
+        if (network === 'ethereum') {
+          return tx.to;
+        } else if (network === 'bitcoin' || network === 'litecoin' || network === 'testnet') {
+          return tx.outs[0].address;
+        }
+      },
+      isReceived: function(tx) {
+        if (network === 'ethereum') {
+          return tx.to === getWallet().addressString;
+        } else if (network === 'bitcoin' || network === 'litecoin' || network === 'testnet') {
+          return tx.amount > 0;
+        }
+      },
+      isConfirmed: function(confirmations) {
+        return confirmations >= getWallet().minConf;
+      },
+      toUnitString: toUnitString,
+      isEthereum: network === 'ethereum',
+      isBitcoin: network === 'bitcoin' || network === 'testnet',
+      isLitecoin: network === 'litecoin',
+      loadingTx: true,
     }
   })
 

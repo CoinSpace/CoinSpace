@@ -2,14 +2,33 @@
 
 var Big = require('big.js')
 
-function btcToSatoshi(btc) {
-  if(btc == undefined || btc === '') return;
-  return parseInt(new Big(btc).times(100000000), 10)
+var getNetwork = require('cs-network')
+var networkName = getNetwork();
+
+var unitMap = {
+  bitcoin: '100000000',
+  litecoin: '100000000',
+  testnet: '100000000',
+  ethereum: '1000000000000000000'
 }
 
-function satoshiToBtc(satoshi) {
-  if(satoshi == undefined || satoshi === '') return;
-  return parseFloat(new Big(satoshi).div(100000000))
+function toAtom(number) {
+  if(number == undefined || number === '') return;
+  if (networkName === 'ethereum') {
+    return new Big(number).times(unitMap[networkName], 10).toFixed();
+  } else {
+    return parseInt(new Big(number).times(unitMap[networkName], 10).toFixed())
+  }
+}
+
+function toUnit(number) {
+  if(number == undefined || number === '') return;
+  return parseFloat(new Big(number).div(unitMap[networkName]))
+}
+
+function toUnitString(number) {
+  if(number == undefined || number === '') return;
+  return new Big(number).div(unitMap[networkName]).toFixed()
 }
 
 function toFixedFloor(x, decimal){
@@ -19,7 +38,8 @@ function toFixedFloor(x, decimal){
 }
 
 module.exports = {
-  btcToSatoshi: btcToSatoshi,
-  satoshiToBtc: satoshiToBtc,
+  toAtom: toAtom,
+  toUnit: toUnit,
+  toUnitString: toUnitString,
   toFixedFloor: toFixedFloor
 }

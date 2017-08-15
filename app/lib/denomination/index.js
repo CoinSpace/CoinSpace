@@ -9,5 +9,8 @@ module.exports = {
   testnet: bitcoin,
   litecoin: {
     default: 'LTC'
+  },
+  ethereum: {
+    default: 'ETH'
   }
 }

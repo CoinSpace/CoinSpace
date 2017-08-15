@@ -13,22 +13,21 @@
 
       <div class="_detail">
 
-        <div class="_amount {{amount > 0 ? 'green' : 'red'}}">
-          {{amount > 0 ? '+' : ''}} {{satoshiToBtc(amount)}}
+        <div class="_amount {{isReceived(this) ? 'green' : 'red'}}">
+          {{isReceived(this) ? '+' : ''}} {{toUnitString(amount)}}
         </div>
 
-        {{#confirmations}}
+        {{#isConfirmed(confirmations)}}
           <span class='_time'>{{formatTimestamp(timestamp)}}</span>
           <span class='_time'>{{formatConfirmations(confirmations)}}</span>
-        {{/confirmations}}
+        {{/isConfirmed}}
 
-        {{^confirmations}}
+        {{^isConfirmed(confirmations)}}
           <span class='_time'>{{translate("pending confirmation")}}</span>
-        {{/confirmations}}
+        {{/isConfirmed}}
 
       </div>
-
-      <div class="_address">{{amount > 0 ? translate('Received') : outs[0].address}}</div>
+      <div class="_address">{{isReceived(this) ? translate('Received') : getToAddress(this)}}</div>
 
     </div>
   {{/transactions}}

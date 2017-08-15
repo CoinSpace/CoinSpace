@@ -52,7 +52,7 @@ function getById(id, callback) {
 }
 
 function search(lat, lon, userInfo, callback) {
-  if (['bitcoin', 'litecoin', 'testnet'].indexOf(userInfo.network) === -1) {
+  if (['bitcoin', 'litecoin', 'testnet', 'ethereum'].indexOf(userInfo.network) === -1) {
     return callback({error: 'unsupported_network'})
   }
 

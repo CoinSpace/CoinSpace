@@ -74,3 +74,14 @@
     color: darken($silver, 30%);
   }
 }
+
+.ethereum {
+  .detail__strings {
+    padding-top: 5px;
+  }
+  .transaction__detail {
+    ._amount {
+      font-size: 24px;
+    }
+  }
+}

@@ -23,9 +23,13 @@
       	</div>
       {{/isBitcoin}}
 
-      {{^isBitcoin}}
+      {{#isLitecoin}}
 				<span class="_fee">+{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
-			{{/isBitcoin}}
+			{{/isLitecoin}}
+
+      {{#isEthereum}}
+				<span class="_fee">+{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
+			{{/isEthereum}}
 
       <span class="_icon">
         {{>svg_sendto}}

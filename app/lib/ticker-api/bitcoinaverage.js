@@ -5,7 +5,8 @@ var xhr = require('xhr')
 var tickers = {
   bitcoin: 'BTC',
   testnet: 'BTC',
-  litecoin: 'LTC'
+  litecoin: 'LTC',
+  ethereum: 'ETH'
 }
 
 var network = null

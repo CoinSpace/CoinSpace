@@ -1,4 +1,3 @@
-
 {{#transaction}}
 <div class="modal _cancel">
   <div class="modal__content transaction__detail _cancel">
@@ -6,18 +5,18 @@
       {{>svg_close}}
     </span>
 
-    <div class="_amount {{amount > 0 ? 'green' : 'red'}}">
-      {{amount > 0 ? '+' : ''}} {{satoshiToBtc(amount)}}
+    <div class="_amount {{isReceived(this) ? 'green' : 'red'}}">
+      {{isReceived(this) ? '+' : ''}} {{toUnitString(amount)}}
     </div>
 
-    {{#confirmations}}
+    {{#isConfirmed(confirmations)}}
       <div class='_time'>{{formatTimestamp(timestamp)}}</div>
       <div class='_time'>{{formatConfirmations(confirmations)}}</div>
-    {{/confirmations}}
+    {{/isConfirmed}}
 
-    {{^confirmations}}
+    {{^isConfirmed(confirmations)}}
       <div class='_time'>{{translate("pending confirmation")}}</div>
-    {{/confirmations}}
+    {{/isConfirmed}}
 
     <div class="detail__strings">
 
@@ -31,13 +30,13 @@
 			{{/isLitecoin}}
 
       <h3 class="_title">{{translate("Transaction Fee:")}}</h3>
-      <code class="_value">{{satoshiToBtc(fee)}}</code>
+      <code class="_value">{{toUnitString(fee)}}</code>
 
       <h3 class="_title">{{translate("Inputs:")}}</h3>
       <code class="_value">
         {{#ins}}
           <span class="_address">{{address ? address : translate("Unparsed address")}}</span>
-          <span class="_number">{{satoshiToBtc(amount)}}</span>
+          <span class="_number">{{toUnitString(amount)}}</span>
         {{/ins}}
       </code>
 
@@ -45,7 +44,7 @@
       <code class="_value">
         {{#outs}}
           <span class="_address">{{address}}</span>
-          <span class="_number">{{satoshiToBtc(amount)}}</span>
+          <span class="_number">{{toUnitString(amount)}}</span>
         {{/outs}}
       </code>
     </div>

@@ -7,6 +7,7 @@ var db = require('cs-db')
 var getWallet = require('cs-wallet-js').getWallet
 var currencies = require('cs-ticker-api').currencies
 var toFixedFloor = require('cs-convert').toFixedFloor
+var toUnitString = require('cs-convert').toUnitString
 var showError = require('cs-modal-flash').showError
 var showInfo = require('cs-modal-flash').showInfo
 var showConfirmation = require('cs-modal-confirm-send')
@@ -22,7 +23,9 @@ module.exports = function(el){
     data: {
       currencies: currencies,
       exchangeRates: {},
-      qrScannerAvailable: window.buildType === 'phonegap'
+      qrScannerAvailable: window.buildType === 'phonegap',
+      toUnitString: toUnitString,
+      isBitcoin: getNetwork() === 'bitcoin' || getNetwork() === 'testnet'
     }
   })
 
@@ -88,7 +91,7 @@ module.exports = function(el){
       var alias = data.alias
       var amount = ractive.get('value')
 
-      if(getNetwork() === 'bitcoin') {
+      if(ractive.get('isBitcoin')) {
         getDynamicFees(function(dynamicFees) {
           validateAndShowConfirm(to, amount, alias, dynamicFees)
         })
