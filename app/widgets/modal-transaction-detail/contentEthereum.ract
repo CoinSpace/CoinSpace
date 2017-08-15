@@ -1,0 +1,47 @@
+{{#transaction}}
+<div class="modal _cancel">
+  <div class="modal__content transaction__detail _cancel">
+    <span class="modal__cancel" on-click="close">
+      {{>svg_close}}
+    </span>
+
+    <div class="_amount {{isReceived(this) ? 'green' : 'red'}}">
+      {{isReceived(this) ? '+' : ''}} {{toUnitString(amount)}}
+    </div>
+
+    {{#isConfirmed(confirmations)}}
+      <div class='_time'>{{formatTimestamp(timestamp)}}</div>
+      <div class='_time'>{{formatConfirmations(confirmations)}}</div>
+    {{/isConfirmed}}
+
+    {{^isConfirmed(confirmations)}}
+      <div class='_time'>{{translate("pending confirmation")}}</div>
+    {{/isConfirmed}}
+
+    <div class="detail__strings">
+
+      <h3 class="_title">{{translate("Transaction Id:")}}</h3>
+      <a href="" onclick="window.open('https://etherscan.io/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
+
+      <h3 class="_title">{{translate("Transaction Fee:")}}</h3>
+      {{#isPendingFee}}
+        <code class="_value">{{translate("pending confirmation")}}</code>
+      {{/isPendingFee}}
+      {{^isPendingFee}}
+        <code class="_value">{{toUnitString(fee)}}</code>
+      {{/isPendingFee}}
+
+      <h3 class="_title">{{translate("From:")}}</h3>
+      <code class="_value">
+        <span class="_address">{{from}}</span>
+      </code>
+
+      <h3 class="_title">{{translate("To:")}}</h3>
+      <code class="_value">
+        <span class="_address">{{to}}</span>
+      </code>
+    </div>
+
+  </div>
+</div>
+{{/transaction}}

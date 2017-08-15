@@ -26,7 +26,7 @@ function cacheFees(interval) {
 
 function cacheTicker(interval) {
   setInterval(function intervalFunction() {
-    ['BTC', 'LTC'].forEach(function(cryptoTicker) {
+    ['BTC', 'LTC', 'ETH'].forEach(function(cryptoTicker) {
       ticker.getFromAPI(cryptoTicker, function(err, data) {
         if (err) return console.error(err);
         if (!data) return console.error('Bad ticker response', data);

@@ -4,7 +4,8 @@ var Ractive = require('cs-ractive')
 var emitter = require('cs-emitter')
 var sync = require('cs-wallet-js').sync
 var getWallet = require('cs-wallet-js').getWallet
-var satoshiToBtc = require('cs-convert').satoshiToBtc
+var toUnit = require('cs-convert').toUnit
+var toUnitString = require('cs-convert').toUnitString
 var toFixedFloor = require('cs-convert').toFixedFloor
 var Big = require('big.js')
 var showError = require('cs-modal-flash').showError
@@ -19,7 +20,7 @@ module.exports = function(el){
     template: require('./index.ract').template,
     data: {
       updating_transactions: true,
-      satoshiToBtc: satoshiToBtc,
+      toUnitString: toUnitString,
       menuOpen: false,
       exchangeRates: {},
       currencies: currencies,
@@ -137,7 +138,7 @@ module.exports = function(el){
   function bitcoinToFiat(amount, exchangeRate) {
     if(amount == undefined || exchangeRate == undefined) return "N/A";
 
-    var btc = satoshiToBtc(amount)
+    var btc = toUnit(amount)
     return new Big(exchangeRate).times(btc).toFixed(2)
   }
 

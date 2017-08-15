@@ -4,8 +4,8 @@ var Ractive = require('cs-modal')
 var emitter = require('cs-emitter')
 var getWallet = require('cs-wallet-js').getWallet
 var parseHistoryTx = require('cs-wallet-js').parseHistoryTx
-var btcToSatoshi = require('cs-convert').btcToSatoshi
-var satoshiToBtc = require('cs-convert').satoshiToBtc
+var toAtom = require('cs-convert').toAtom
+var toUnitString = require('cs-convert').toUnitString
 var openSupportModal = require('cs-modal-support')
 var bitcoin = require('bitcoinjs-lib')
 var showInfo = require('cs-modal-flash').showInfo
@@ -14,7 +14,10 @@ var getNetwork = require('cs-network')
 function open(data){
 
   data.confirmation = true
-  data.isBitcoin = getNetwork() === 'bitcoin'
+
+  data.isEthereum = getNetwork() === 'ethereum';
+  data.isBitcoin = getNetwork() === 'bitcoin' || getNetwork() === 'testnet';
+  data.isLitecoin = getNetwork() === 'litecoin';
 
   var wallet = getWallet()
   var feeRates = null
@@ -28,17 +31,20 @@ function open(data){
       data.dynamicFees.hourFeePerKb ? data.dynamicFees.hourFeePerKb : defaultFeePerKb,
       data.dynamicFees.fastestFeePerKb ? data.dynamicFees.fastestFeePerKb : defaultFeePerKb
     ];
-    fees = wallet.estimateFees(data.to, btcToSatoshi(data.amount), feeRates)
+    fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates)
 
-    data.feeMinimum = satoshiToBtc(fees[0])
-    data.feeHour = satoshiToBtc(fees[1])
-    data.feeFastest = satoshiToBtc(fees[2])
+    data.feeMinimum = toUnitString(fees[0])
+    data.feeHour = toUnitString(fees[1])
+    data.feeFastest = toUnitString(fees[2])
     data.fee = data.feeHour
-  } else {
-    feeRates = [bitcoin.networks[getNetwork()].feePerKb]
-    fees = wallet.estimateFees(data.to, btcToSatoshi(data.amount), feeRates)
 
-    data.fee = satoshiToBtc(fees[0])
+  } else if (data.isLitecoin) {
+    feeRates = [bitcoin.networks['litecoin'].feePerKb]
+    fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates)
+    data.fee = toUnitString(fees[0])
+
+  } else if (data.isEthereum) {
+    data.fee = toUnitString(wallet.getDefaultFee())
   }
 
   var ractive = new Ractive({
@@ -58,19 +64,18 @@ function open(data){
   ractive.on('send', function(){
     ractive.set('sending', true)
     var to = ractive.get('to')
-    var fee = btcToSatoshi(ractive.get('fee'))
-    var value = btcToSatoshi(ractive.get('amount'))
+    var fee = toAtom(ractive.get('fee'))
+    var value = toAtom(ractive.get('amount'))
     var wallet = getWallet()
     var tx = null
-
-    if(feeIsTooBig(wallet.getBalance(), value, fee)) {
-      ractive.set('sending', false)
-      return showInfo({message: 'Please choose lower fee.'})
-    }
 
     try {
       tx = wallet.createTx(to, value, fee)
     } catch(err) {
+      if (err.message.match(/Insufficient funds/)) {
+        ractive.set('sending', false)
+        return showInfo({message: 'Please choose lower fee.'})
+      }
       return handleTransactionError()
     }
 
@@ -96,10 +101,6 @@ function open(data){
   function handleTransactionError(err) {
     ractive.set('confirmation', false)
     ractive.set('error', err.message)
-  }
-
-  function feeIsTooBig(balance, amount, fee){
-    return balance - fee < amount && amount <= balance
   }
 
   return ractive

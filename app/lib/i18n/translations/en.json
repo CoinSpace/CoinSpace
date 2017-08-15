@@ -118,5 +118,7 @@
   "default": "default",
   "fastest": "fastest",
   "minimum": "minimum",
-  "Unparsed address": "Unparsed address"
+  "Unparsed address": "Unparsed address",
+  "From:": "From:",
+  "To:": "To:"
 }

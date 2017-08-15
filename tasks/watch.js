@@ -8,6 +8,7 @@ var images = require('./images')
 var fonts = require('./fonts')
 var html = require('./html')
 var lrserver = require('tiny-lr')()
+var async = require('async')
 
 var livereloadport = 35729
 
@@ -15,17 +16,15 @@ function watcher(callback) {
   lrserver.listen(livereloadport)
 
   watch(['app/**/*.scss'], styles)
-  watch(['app/**/*.js', 'app/**/*.json', 'app/**/*.ract', '!app/**/node_modules/**/*'], function(event){
-    scripts()
-    loader()
-    test()
+  watch(['app/**/*.js', 'app/**/*.json', 'app/**/*.ract', '!app/**/node_modules/**/*'], function(done){
+    async.parallel([scripts, loader, test], done);
   })
   watch(['app/assets/img/*'], images)
   watch(['app/assets/fonts/*'], fonts)
   watch('app/index.html', html)
   watch(['app/**/test/*.js', '!app/**/node_modules/**/*'], test)
-  watch('build/**/*', function(event){
-    refresh(event.path.replace(process.cwd() + '/build', ''))
+  watch('build/**/*').on('change', function(path){
+    refresh(path.replace(process.cwd() + '/build', ''))
   })
 }
 

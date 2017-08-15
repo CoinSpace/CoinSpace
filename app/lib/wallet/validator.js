@@ -1,12 +1,10 @@
 'use strict';
 
-var networks = require('bitcoinjs-lib').networks
-var btcToSatoshi = require('cs-convert').btcToSatoshi
-var satoshiToBtc = require('cs-convert').satoshiToBtc
+var toAtom = require('cs-convert').toAtom
+var toUnitString = require('cs-convert').toUnitString
 
-function validateSend(wallet, to, btcValue, callback){
-  var amount = btcToSatoshi(btcValue)
-  var network = networks[wallet.networkName]
+function validateSend(wallet, to, unitValue, callback){
+  var amount = toAtom(unitValue)
   var tx = null
 
   try {
@@ -16,7 +14,7 @@ function validateSend(wallet, to, btcValue, callback){
       return callback(new Error('Please enter a valid address to send to'))
     } else if(e.message.match(/Invalid value/)) {
       var error = new Error('Please enter an amount above')
-      error.interpolations = { dust: satoshiToBtc(e.dustThreshold) }
+      error.interpolations = { dust: toUnitString(e.dustThreshold) }
       return new callback(error)
     } else if(e.message.match(/Insufficient funds/)) {
       var error
@@ -24,16 +22,14 @@ function validateSend(wallet, to, btcValue, callback){
       if(e.details && e.details.match(/Additional funds confirmation pending/)){
         error = new Error("Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.")
         return callback(error)
-      } else if(attemptToEmptyWallet(wallet.getBalance(), amount, network)){
+      } else if(e.details && e.details.match(/Attempt to empty wallet/)){
         var message = [
           "It seems like you are trying to empty your wallet",
           "Taking transaction fee into account, we estimated that the max amount you can send is",
           "We have amended the value in the amount field for you"
         ].join('. ')
         error = new Error(message)
-
-        var sendableBalance = satoshiToBtc(amount - (e.needed - e.has))
-        error.interpolations = { sendableBalance: sendableBalance }
+        error.interpolations = { sendableBalance: toUnitString(e.sendableBalance) }
 
         return new callback(error)
       } else {
@@ -45,11 +41,6 @@ function validateSend(wallet, to, btcValue, callback){
   }
 
   callback(null)
-
-}
-
-function attemptToEmptyWallet(balance, amount, network){
-  return balance - network.feePerKb < amount && amount <= balance
 }
 
 module.exports = validateSend

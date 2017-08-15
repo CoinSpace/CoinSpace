@@ -3,23 +3,32 @@
 var work = require('webworkify')
 var worker = window.isIE ? require('./ie-worker.js') : work(require('./worker.js'))
 var auth = require('./auth')
+var utils = require('./utils')
 var db = require('./db')
 var emitter = require('cs-emitter')
 var crypto = require('crypto')
 var AES = require('cs-aes')
 var denominations = require('cs-denomination')
-var Wallet = require('cs-wallet')
+var BtcLtcWallet = require('cs-wallet')
 var validateSend = require('./validator')
 var rng = require('secure-random').randomBuffer
 var bitcoin = require('bitcoinjs-lib')
 var xhr = require('cs-xhr')
 var cache = require('memory-cache')
+var EthereumWallet = require('cs-ethereum-wallet');
 
 var wallet = null
 var seed = null
 var mnemonic = null
 var id = null
 var availableTouchId = false
+
+var Wallet = {
+  bitcoin: BtcLtcWallet,
+  litecoin: BtcLtcWallet,
+  testnet: BtcLtcWallet,
+  ethereum: EthereumWallet
+}
 
 var uriRoot = window.location.origin
 if(window.buildType === 'phonegap') {
@@ -72,9 +81,8 @@ function setPin(pin, network, done, txSyncDone) {
     db.saveEncrypedSeed(id, encrypted, function(err){
       if(err) return callbackError(err.error, callbacks);
 
-      var accounts = getAccountsFromSeed(network)
-      initWallet(accounts.externalAccount, accounts.internalAccount, network,
-                 done, txSyncDone)
+      emitter.emit('wallet-opening', 'Synchronizing Wallet')
+      initWallet(network, done, txSyncDone)
     })
   })
 }
@@ -104,10 +112,9 @@ function openWalletWithPin(pin, network, done, txSyncDone) {
 
       assignSeedAndId(AES.decrypt(encryptedSeed, token))
       emitter.emit('wallet-auth', {token: token, pin: pin})
+      emitter.emit('wallet-opening', 'Synchronizing Wallet')
 
-      var accounts = getAccountsFromSeed(network)
-      initWallet(accounts.externalAccount, accounts.internalAccount, network,
-                 done, txSyncDone)
+      initWallet(network, done, txSyncDone)
     })
   })
 }
@@ -135,63 +142,57 @@ function assignSeedAndId(s) {
   emitter.emit('wallet-init', {seed: seed, id: id})
 }
 
-function getAccountsFromSeed(networkName, done) {
-  emitter.emit('wallet-opening', 'Synchronizing Wallet')
+function initWallet(networkName, done, txDone) {
+  var options = {
+    networkName: networkName,
+    done: done,
+    txDone: function(err) {
+      if(err) return txDone(err)
+      var txObjs = wallet.getTransactionHistory()
+      txDone(null, txObjs.map(function(tx) {
+        return parseHistoryTx(tx)
+      }))
+    }
+  }
 
+  if (networkName === 'ethereum') {
+    options.seed = seed;
+  } else if (networkName === 'bitcoin' || networkName === 'litecoin' || networkName === 'testnet') {
+    var accounts = getDerivedAccounts(networkName)
+    options.externalAccount = accounts.externalAccount
+    options.internalAccount = accounts.internalAccount
+  }
+
+  wallet = new Wallet[networkName](options)
+  wallet.denomination = denominations[networkName].default
+}
+
+function getDerivedAccounts(networkName) {
+  if (wallet && wallet.externalAccount && wallet.internalAccount) {
+    return {
+      externalAccount: wallet.externalAccount,
+      internalAccount: wallet.internalAccount
+    }
+  }
   var network = bitcoin.networks[networkName]
   var accountZero = bitcoin.HDNode.fromSeedHex(seed, network).deriveHardened(0)
-
   return {
     externalAccount: accountZero.derive(0),
     internalAccount: accountZero.derive(1)
   }
 }
 
-function initWallet(externalAccount, internalAccount, networkName, done, txDone){
-  wallet = new Wallet(externalAccount, internalAccount, networkName, done, function(err) {
-    if(err) return txDone(err)
-
-    var txObjs = wallet.getTransactionHistory()
-    txDone(null, txObjs.map(function(tx) {
-      return parseHistoryTx(tx)
-    }))
-  })
-
-  wallet.denomination = denominations[networkName].default
-}
-
 function parseHistoryTx(tx) {
-  return {
-    id: tx.txId,
-    amount: tx.amount,
-    timestamp: tx.timestamp * 1000,
-    confirmations: tx.confirmations,
-    fee: tx.fees,
-    ins: parseInputs(tx.vin),
-    outs: parseOutputs(tx.vout)
-  }
-
-  function parseInputs(inputs) {
-    return inputs.map(function(input){
-      return {
-        address: input.addr,
-        amount: input.valueSat
-      }
-    })
-  }
-
-  function parseOutputs(outputs) {
-    return outputs.map(function(output){
-      return {
-        address: output.scriptPubKey.addresses[0],
-        amount: output.valueSat
-      }
-    })
+  var networkName = wallet.networkName
+  if (networkName === 'ethereum') {
+    return utils.parseEthereumTx(tx)
+  } else if (networkName === 'bitcoin' || networkName === 'litecoin' || networkName === 'testnet') {
+    return utils.parseBtcLtcTx(tx)
   }
 }
 
 function sync(done, txDone) {
-  initWallet(wallet.externalAccount, wallet.internalAccount, wallet.networkName, done, txDone)
+  initWallet(wallet.networkName, done, txDone)
 }
 
 function getWallet(){

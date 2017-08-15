@@ -17,7 +17,7 @@
 
   {{^showFiat}}
     <div class="header__balance" on-click="toggle-currencies">
-      <span class="_amount">{{cropBalance(satoshiToBtc(bitcoinBalance))}}</span>
+      <span class="_amount">{{cropBalance(toUnitString(bitcoinBalance))}}</span>
       <span class="_currency">{{denomination}}</span>
     </div>
   {{/showFiat}}

@@ -65,6 +65,7 @@ partials.svg_settings = require('cs-svg/settings.ract').template
 partials.svg_success = require('cs-svg/success.ract').template
 partials.svg_token_bitcoin = require('cs-svg/token_bitcoin.ract').template
 partials.svg_token_litecoin = require('cs-svg/token_litecoin.ract').template
+partials.svg_token_ethereum = require('cs-svg/token_ethereum.ract').template
 partials.svg_token = require('cs-svg/token.ract').template
 partials.svg_user = require('cs-svg/user.ract').template
 partials.svg_mecto = require('cs-svg/mecto.ract').template
