@@ -5,6 +5,7 @@ README.md
 docker-compose*
 Dockerfile
 node_modules
+app/**/node_modules
 npm-debug.log
 .DS_Store
 .vagrant/
@@ -14,3 +15,4 @@ phonegap/
 .env.*
 .vscode/
 certs/
+package.json
