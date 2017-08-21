@@ -39,11 +39,7 @@
   }
 
   a {
-
-    color: $purple--highlight;
-    &:hover {
-      color: $purple--highlight;
-    }
+    color: $brand-green;
     &:active {
       text-decoration: underline;
     }
@@ -54,9 +50,13 @@
   .tooltip__link {
     a {
       color: $silver;
-      &:hover {
-        color: $silver;
-      }
+    }
+  }
+}
+.ethereum {
+  .tooltip__link {
+    a {
+      color: $ethereal;
     }
   }
 }

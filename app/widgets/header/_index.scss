@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   padding-top: 5px;
-  background-color: #1a5a37;
+  background-color: darken($brand-green, 30%);
   color: white;
   padding-top: 12px;
   padding-bottom: 12px;
@@ -21,6 +21,11 @@
 .litecoin {
   .header {
     background-color: darken($silver, 30%);
+  }
+}
+.ethereum {
+  .header {
+    background-color: darken($ethereal, 30%);
   }
 }
 

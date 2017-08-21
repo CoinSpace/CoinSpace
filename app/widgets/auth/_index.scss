@@ -128,15 +128,6 @@
   }
 }
 
-.litecoin {
-  .auth__header {
-    color: white;
-    ._passphrase {
-      background-color: darken($silver, 40%);
-    }
-  }
-}
-
 .passphrase__accept {
   display: flex;
   padding-top: 20px;
@@ -184,17 +175,6 @@
   }
 }
 
-.litecoin {
-  .passphrase__accept {
-    ._checkbox {
-      background-color: darken($silver, 20%);
-    }
-    ._check {
-      background-color: #575757;
-    }
-  }
-}
-
 .passphrase__warning {
   font-size: 13px;
   background-color: $yellow;
@@ -227,13 +207,6 @@
   }
 }
 
-.litecoin {
-  .auth__btngroup {
-    background-color: darken($silver, 20%);
-  }
-}
-
-
 .auth__btn {
   @extend .csbtn;
   margin-bottom: 5px;
@@ -258,17 +231,26 @@
   border-radius: 2px;
 
   color: rgba(255,255,255, 0.3);
-  background-color: #999;
-  box-shadow:inset 0 1px 1px 1px darken(#999, 20%);
+  background-color: $brand-green;
+  box-shadow: inset 0 1px 1px 1px darken($brand-green, 20%);
   transform: translate(0px, 3px);
 
   @include breakpoint(portrait) {
     font-size: 20px;
     padding: 22px 30px 20px 30px;
   }
+}
 
-  &:hover {
-    color: rgba(255,255,255, 0.3);
+.litecoin {
+  .auth__btn--inactive {
+    background-color: $silver;
+    box-shadow:inset 0 1px 1px 1px darken($silver, 20%);
+  }
+}
+.ethereum {
+  .auth__btn--inactive {
+    background-color: $ethereal;
+    box-shadow:inset 0 1px 1px 1px darken($ethereal, 20%);
   }
 }
 
@@ -286,8 +268,8 @@
   @extend .csbtn;
   position: relative;
   color: rgba(255,255,255, 0.3);
-  background-color: #999;
-  box-shadow:inset 0 1px 1px 1px darken(#999, 20%);
+  background-color: $brand-green;
+  box-shadow:inset 0 1px 1px 1px darken($brand-green, 20%);
   transform: translate(0px, 3px);
   margin-bottom: 5px;
   display: flex;
@@ -301,7 +283,7 @@
   }
 
   &:active {
-    box-shadow:inset 0 1px 1px 1px darken(#999, 20%);
+    box-shadow:inset 0 1px 1px 1px darken($brand-green, 20%);
     transform: translate(0px, 3px);
   }
 
@@ -313,10 +295,13 @@
 .litecoin {
   .auth__btn--loading {
     background-color: $silver;
-    box-shadow:inset 0 1px 1px 1px darken($silver, 30%);
-    &:active {
-      box-shadow:inset 0 1px 1px 1px darken($silver, 30%);
-    }
+    box-shadow:inset 0 1px 1px 1px darken($silver, 20%);
+  }
+}
+.ethereum {
+  .auth__btn--loading {
+    background-color: $ethereal;
+    box-shadow:inset 0 1px 1px 1px darken($ethereal, 20%);
   }
 }
 
@@ -351,12 +336,6 @@
 
   label {
     @include clickbtn;
-  }
-}
-
-.litecoin {
-  .auth__pin {
-    color: white;
   }
 }
 
@@ -457,15 +436,6 @@
   }
 }
 
-.litecoin {
-  .auth__footer {
-    color: white;
-    ._link {
-      color: white;
-    }
-  }
-}
-
 .auth__input-group {
 
   ._label {
@@ -515,25 +485,6 @@
     &:active, &:focus {
       outline: 0;
       border: 1px solid #999;
-    }
-  }
-}
-
-.litecoin {
-  .auth__input-group {
-    ._input {
-      background-color: darken($silver, 25%);
-      border: 1px solid $silver;
-
-      &:active, &:focus {
-        border: 1px solid $silver;
-      }
-    }
-    ._label {
-      color: white;
-    }
-    ._input {
-      color: white;
     }
   }
 }
@@ -619,22 +570,6 @@
   }
 }
 
-.litecoin {
-  .pinfield {
-    ._box {
-      background-color: darken($silver, 30%);
-    }
-    ._dot {
-      background-color: white;
-    }
-    &.is_focused {
-      ._box {
-        border: 1px solid lighten($silver, 10%);
-      }
-    }
-  }
-}
-
 .ios__link__container {
   padding-top: 20px;
 }
@@ -704,13 +639,5 @@
   @include breakpoint(portrait) {
     width: 45px;
     height: 45px;
-  }
-}
-
-.litecoin {
-  .loading__spinner {
-    .svg-refresh {
-      fill: white;
-    }
   }
 }

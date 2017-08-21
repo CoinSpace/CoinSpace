@@ -25,12 +25,12 @@
   }
 
   ._btn--loading {
-    @extend .csbtn;
+    @extend .csbtn-base;
     margin-top: 20px;
     position: relative;
     color: rgba(255,255,255, 0.3);
-    background-color: #999;
-    box-shadow:inset 0 1px 1px 1px darken(#999, 20%);
+    background-color: $brand-green;
+    box-shadow:inset 0 1px 1px 1px darken($brand-green, 20%);
     transform: translate(0px, 3px);
     display: flex;
     justify-content: center;
@@ -42,12 +42,29 @@
     }
 
     &:active {
-      box-shadow:inset 0 1px 1px 1px darken(#999, 20%);
+      box-shadow:inset 0 1px 1px 1px darken($brand-green, 20%);
       transform: translate(0px, 3px);
     }
 
     &:hover {
       color: rgba(255,255,255, 0.3);
+    }
+  }
+}
+
+.litecoin {
+  .set-details {
+    ._btn--loading {
+      background-color: $silver;
+      box-shadow:inset 0 1px 1px 1px darken($silver, 20%);
+    }
+  }
+}
+.ethereum {
+  .set-details {
+    ._btn--loading {
+      background-color: $ethereal;
+      box-shadow:inset 0 1px 1px 1px darken($ethereal, 20%);
     }
   }
 }
@@ -65,7 +82,7 @@
 
   ._input {
     @extend .jigsaw-light;
-    border: 1px solid $purple--light;
+    border: 1px solid #ccc;
     margin-top: 5px;
     height: 50px;
     padding-left: 10px;
@@ -77,7 +94,7 @@
 
     &:active, &:focus {
       outline: 0;
-      border: 1px solid $purple;
+      border: 1px solid #999;
     }
   }
 }

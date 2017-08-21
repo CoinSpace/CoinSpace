@@ -238,36 +238,18 @@ textarea[disabled] {
 
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
-  color: lighten(#333, 50%);;
+  color: lighten(#333, 50%);
 }
 
 input:-moz-placeholder,
 textarea:-moz-placeholder {
-  color: lighten(#333, 50%);;
+  color: lighten(#333, 50%);
 }
 
 input.placeholder_text,
 textarea.placeholder_text {
-  color: lighten(#333, 50%);;
+  color: lighten(#333, 50%);
 }
-
-.litecoin {
-  input::-webkit-input-placeholder,
-  textarea::-webkit-input-placeholder {
-    color: lighten($silver, 50%);;
-  }
-
-  input:-moz-placeholder,
-  textarea:-moz-placeholder {
-    color: lighten($silver, 50%);;
-  }
-
-  input.placeholder_text,
-  textarea.placeholder_text {
-    color: lighten($silver, 50%);;
-  }
-}
-
 
 // Big Text Areas
 

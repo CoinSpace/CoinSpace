@@ -76,21 +76,21 @@
 
 
 .token--bitcoin {
-  background-color: #1a5a37;
+  background-color: $brand-green;
   ._name {
     color: white;
   }
 }
 
 .token--litecoin {
-  background-color: #b1b1b1;
+  background-color: $silver;
   ._name {
     color: white;
   }
 }
 
 .token--ethereum {
-  background-color: #102026;
+  background-color: $ethereal;
   ._name {
     color: white;
   }
