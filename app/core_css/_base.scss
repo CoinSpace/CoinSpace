@@ -93,10 +93,6 @@ html {
 
   -webkit-overflow-scrolling: touch;
 
-  &.litecoin {
-    color: darken($silver, 20%);
-    background-color: $silver;
-  }
   &.prevent_scroll {
     overflow-y: hidden;
   }

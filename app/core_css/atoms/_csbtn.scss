@@ -1,6 +1,5 @@
 // main btn style
-
-.csbtn {
+.csbtn-base {
   @include clickbtn;
   display: block;
   width: 100%;
@@ -14,8 +13,8 @@
   color: white;
   text-align: center;
   font-size: 18px;
-  background-color: #575757;
-  box-shadow: 0 2px 0 0 darken(#575757, 10%);
+  background-color: $brand-green;
+  box-shadow: 0 2px 0 0 darken($brand-green, 10%);
 
   transition: none;
   position: relative;
@@ -39,15 +38,33 @@
   }
 }
 
+.csbtn {
+  @extend .csbtn-base;
+}
+
+.ethereum {
+  .csbtn {
+    background-color: $ethereal;
+    box-shadow: 0 2px 0 0 darken($ethereal, 10%);
+  }
+}
+
+.litecoin {
+  .csbtn {
+    background-color: $silver;
+    box-shadow: 0 2px 0 0 darken($silver, 10%);
+  }
+}
+
 .csbtn--red {
-  @extend .csbtn;
+  @extend .csbtn-base;
 
   background-color: #da553e;
   box-shadow: 0 3px 0 0 darken(#da553e, 10%);
 }
 
 .csbtn--yellow {
-  @extend .csbtn;
+  @extend .csbtn-base;
 
   background-color: $yellow;
   box-shadow: 0 3px 0 0 darken($yellow, 10%);

@@ -76,23 +76,13 @@
 
     &:active, &:focus {
       outline: 0;
-      border: 1px solid #298553;
+      border: 1px solid #999;
     }
 
     @include breakpoint(portrait) {
       font-size: 26px;
       border-radius: 3px;
       padding-right: 58px;
-    }
-  }
-}
-
-.litecoin {
-  .send__address {
-    ._input {
-      &:active, &:focus {
-        border: 1px solid #999;
-      }
     }
   }
 }
@@ -205,7 +195,7 @@
 
     &:active, &:focus {
       outline: 0;
-      border: 1px solid #298553;
+      border: 1px solid #999;
     }
 
     @include breakpoint(portrait) {
@@ -220,17 +210,6 @@
   }
 
 }
-
-.litecoin {
-  .send__amount {
-    ._input {
-      &:active, &:focus {
-        border: 1px solid #999;
-      }
-    }
-  }
-}
-
 
 ._input-group {
   position: relative;
@@ -268,7 +247,7 @@
 }
 
 .send__btn--validating {
-  @extend .csbtn;
+  @extend .csbtn-base;
   position: relative;
   margin-left: 5px;
   color: darken($grey, 20%);

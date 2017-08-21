@@ -1,11 +1,16 @@
 
 #tabs {
-  background-color: #298553;
+  background-color: darken($brand-green, 20%);
 }
 
 .litecoin {
   #tabs {
     background-color: darken($silver, 20%);
+  }
+}
+.ethereum {
+  #tabs {
+    background-color: darken($ethereal, 20%);
   }
 }
 
@@ -37,7 +42,7 @@
   }
 
   &.active {
-      border-bottom: 4px solid #1a5a37;
+    border-bottom: 4px solid darken($brand-green, 30%);
     .tab__icon, .tab__text {
       opacity: 1.0;
     }
@@ -47,7 +52,14 @@
 .litecoin {
   #tabs .tabs .tab {
     &.active {
-        border-bottom: 4px solid lighten($silver, 10%);
+        border-bottom: 4px solid darken($silver, 30%);
+    }
+  }
+}
+.ethereum {
+  #tabs .tabs .tab {
+    &.active {
+        border-bottom: 4px solid darken($ethereal, 30%);
     }
   }
 }

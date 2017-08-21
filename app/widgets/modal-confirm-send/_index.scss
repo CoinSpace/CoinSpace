@@ -131,7 +131,7 @@
   display: flex;
 
   ._cancel {
-    @extend .csbtn;
+    @extend .csbtn-base;
     margin-right: 5px;
 
     color: darken($grey, 20%);
@@ -166,7 +166,7 @@
   }
 
   ._send--sending {
-    @extend .csbtn;
+    @extend .csbtn-base;
     position: relative;
     margin-left: 5px;
     color: darken($grey, 20%);
