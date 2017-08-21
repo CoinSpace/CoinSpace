@@ -323,6 +323,13 @@
     @include clickbtn;
     color: #333;
   }
+  .close__input {
+    ._icon{
+      .svg-close {
+        fill: #969594;
+      }
+    }
+  }
 }
 
 .auth__pin {
