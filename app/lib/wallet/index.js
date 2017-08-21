@@ -1,7 +1,8 @@
 'use strict';
 
 var work = require('webworkify')
-var worker = window.isIE ? require('./ie-worker.js') : work(require('./worker.js'))
+var IeWorker = require('./ie-worker.js');
+var worker = window.isIE ? new IeWorker() : work(require('./worker.js'))
 var auth = require('./auth')
 var utils = require('./utils')
 var db = require('./db')
@@ -44,7 +45,7 @@ function createWallet(passphrase, network, callback) {
    data.entropy = rng(128 / 8).toString('hex')
   }
 
-  worker.addEventListener('message', function(e) {
+  worker.onmessage = function(e) {
     assignSeedAndId(e.data.seed)
 
     mnemonic = e.data.mnemonic
@@ -53,11 +54,11 @@ function createWallet(passphrase, network, callback) {
 
       callback(null, {userExists: userExists, mnemonic: mnemonic})
     })
-  }, false)
+  }
 
-  worker.addEventListener('error', function(e) {
+  worker.onerror = function(e) {
     return callback({message: e.message.replace("Uncaught Error: ", '')})
-  })
+  }
 
   worker.postMessage(data)
 }
