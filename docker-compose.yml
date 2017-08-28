@@ -1,14 +1,16 @@
-web:
-  build: .
-  command: npm start
-  working_dir: /app/user
-  environment:
-    VIRTUAL_PORT: 8080
-  expose:
-    - '8080'
+version: '2.2'
+services:
+  web:
+    build: .
+    command: npm start
+    working_dir: /app/user
+    environment:
+      VIRTUAL_PORT: 8080
+    expose:
+      - '8080'
 
-web_master:
-  extends: web
-  image: coinspace_web
-  environment:
-    MASTER: 1
+  web_master:
+    extends: web
+    image: coinspace_web
+    environment:
+      MASTER: 1
