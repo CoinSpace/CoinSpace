@@ -16,6 +16,7 @@
   "license": "GPL-2.0+",
   "devDependencies": {
     "del": "^1.1.1",
+    "dotenv": "^4.0.0",
     "glob": "^3.2.11",
     "gulp": "^3.8.11",
     "gulp-if": "^1.2.5",

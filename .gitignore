@@ -6,7 +6,6 @@ build/
 .vagrant
 provisioners
 .idea
-/phonegap/env.json
 /phonegap/build.json
 /phonegap/release.keystore
 /.env.*

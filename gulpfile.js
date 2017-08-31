@@ -7,7 +7,7 @@ var _ = require('lodash');
 var merge = require('merge-stream');
 var minimist = require('minimist');
 var gulpif = require('gulp-if');
-var env = require('./phonegap/env.json');
+require('dotenv').config({path: '.env.prod'});
 
 var paths = {
   build: 'phonegap/build'
@@ -145,7 +145,7 @@ gulp.task('copy-build', ['clean', 'build-js'], function() {
       'https://apiv2.bitcoinaverage.com',
       'https://btc.blockr.io', 'https://tbtc.blockr.io', 'https://ltc.blockr.io', 'https://insight.bitpay.com',
       'https://btc.coin.space', 'https://ltc.coin.space', 'https://eth.coin.space',
-      'https://' + env.DB_HOST, 'https://proxy.coin.space', env.PHONEGAP_URL
+      'https://' + process.env.DB_HOST, 'https://proxy.coin.space', process.env.PHONEGAP_URL
     ],
     'font-src': ["'self'"],
     'img-src': ["'self'", 'data:', 'https://www.gravatar.com'],
@@ -172,7 +172,7 @@ gulp.task('copy-build', ['clean', 'build-js'], function() {
   return merge(files, deviceready, html);
 });
 
-gulp.task('build-js', shell.task('npm run build', {env: env}))
+gulp.task('build-js', shell.task('npm run build'))
 
 gulp.task('clean', function(cb) {
   del(paths.build, cb)
