@@ -82,22 +82,18 @@ emitter.on('wallet-auth', function(data){
     PouchDB.replicate(db, remote, {
       complete: function(){
         emitter.emit('db-ready')
-        setupPulling()
       }
     })
   })
 })
 
 function getRemote(data){
-  var scheme = (process.env.NODE_ENV === "production") ? "https" : "https"
+  var scheme = 'https'
   var url = [
     scheme, "://",
     id, ":", data.token, data.pin,
     "@", process.env.DB_HOST
   ]
-  //if(process.env.NODE_ENV !== "production"){
-  //  url = url.concat([":", process.env.DB_PORT])
-  //}
   url = url.concat(["/cs", id]).join('')
   return new PouchDB(url)
 }
@@ -137,15 +133,6 @@ function initializeRecord(){
     if(err) return console.error(err);
 
     emitter.emit('db-ready')
-  })
-}
-
-function setupPulling(){
-  PouchDB.replicate(remote, db, {
-    live: true,
-    onChange: function() {
-      emitter.emit('db-ready')
-    }
   })
 }
 
