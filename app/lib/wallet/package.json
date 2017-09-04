@@ -12,7 +12,7 @@
     "b39": "git://github.com/CoinSpace/B39.git#v2.1.2",
     "bitcoinjs-lib": "^1.5.7",
     "cs-wallet": "git://github.com/CoinSpace/cs-wallet.git#v0.13.0",
-    "cs-ethereum-wallet": "git://github.com/CoinSpace/cs-ethereum-wallet.git#v1.0.0",
+    "cs-ethereum-wallet": "git://github.com/CoinSpace/cs-ethereum-wallet.git#v1.0.1",
     "webworkify": "^1.0.0",
     "querystring": "^0.2.0"
   },

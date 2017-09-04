@@ -40,8 +40,8 @@ gulp.task('platform-add-android', ['copy-config', 'copy-build'], shell.task([
   'cordova plugin add https://github.com/CoinSpace/CS-barcodescanner.git',
   'cordova plugin add cordova-plugin-dialogs@1.3.3',
   'cordova plugin add cordova-plugin-x-socialsharing@5.1.8',
-  'cordova plugin add cordova-facebook-audnet-sdk@4.22.2',
-  'cordova plugin add cordova-plugin-facebookads@4.22.2'
+  'cordova plugin add cordova-facebook-audnet-sdk@4.23.0',
+  'cordova plugin add cordova-plugin-facebookads@4.23.2'
 ], {cwd: paths.build}));
 
 /* Windows tasks */
@@ -113,8 +113,8 @@ gulp.task('platform-add-ios', ['platform-config-ios'], shell.task([
   'cordova plugin add cordova-plugin-x-socialsharing@5.1.8',
   'cordova plugin add cordova-plugin-touch-id@3.2.0',
   'cordova plugin add cordova-plugin-console@1.0.7',
-  'cordova plugin add cordova-facebook-audnet-sdk@4.22.2',
-  'cordova plugin add cordova-plugin-facebookads@4.22.2'
+  'cordova plugin add cordova-facebook-audnet-sdk@4.23.0',
+  'cordova plugin add cordova-plugin-facebookads@4.23.2'
 ], {cwd: paths.build}));
 
 gulp.task('platform-config-ios', ['copy-config', 'copy-build'], function () {
