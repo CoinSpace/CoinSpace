@@ -41,7 +41,7 @@ module.exports = function(el){
 
   emitter.on('turn-on-mecto-watch', function() {
     console.log('on turn on mecto')
-    
+
     db.get(function(error, doc) {
       if (error) {
         console.log('error mecto: ' + error)
@@ -58,7 +58,7 @@ module.exports = function(el){
       }
     })
   })
-  
+
   emitter.on('getMectoStatus', function() {
     if (ractive.get('broadcasting')) {
       sendMectoStatus('on')
@@ -66,7 +66,7 @@ module.exports = function(el){
       sendMectoStatus('off')
     }
   })
-  
+
   emitter.on('turn-off-mecto-watch', function() {
     console.log('on turn off mecto')
     mectoOff()
@@ -118,7 +118,7 @@ module.exports = function(el){
         response.errorString = err
         WatchModule.sendMessage(response, 'comandAnswerQueue')
         return handleMectoError(err)
-      } 
+      }
       ractive.set('connecting', false)
       ractive.set('broadcasting', true)
       ractive.set('btn_message', 'Turn Mecto off')
@@ -137,11 +137,17 @@ module.exports = function(el){
 
   ractive.on('show-qr', function(){
       if(ractive.get('isSocialSharing')){
-          window.plugins.socialsharing.share(ractive.get('address'))
+        window.plugins.socialsharing.shareWithOptions({
+          message: ractive.get('address')
+        }, function() {
+          if (window.FacebookAds && window.FacebookAds.fixBanner) {
+            window.FacebookAds.fixBanner();
+          }
+        });
       } else {
-          showQr({
-              address: ractive.get('address')
-          })
+        showQr({
+          address: ractive.get('address')
+        })
       }
   })
 
@@ -168,7 +174,7 @@ module.exports = function(el){
     ractive.set('broadcasting', false)
     ractive.set('btn_message', 'Turn Mecto on')
   }
-  
+
   function sendMectoStatus(mectoStatus) {
     if (window.buildPlatform === 'ios') {
         var response = {}

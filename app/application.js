@@ -31,12 +31,17 @@ window.initCSApp = function() {
       ios : {banner: '196605347445795_200305920409071'},
       android : {banner: '196605347445795_200306843742312'}
     }
+    var position = window.FacebookAds.AD_POSITION.BOTTOM_CENTER;
 
     var adid = (/(android)/i.test(navigator.userAgent)) ? ad_units.android : ad_units.ios;
     window.FacebookAds.createBanner({
       adId: adid.banner,
-      position: window.FacebookAds.AD_POSITION.BOTTOM_CENTER,
+      position: position,
       autoShow: true
+    }, function() {
+      window.FacebookAds.fixBanner = function() {
+        window.FacebookAds.showBanner(position);
+      }
     });
   }
 
