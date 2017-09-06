@@ -25,7 +25,8 @@ module.exports = function(el){
       exchangeRates: {},
       qrScannerAvailable: window.buildType === 'phonegap',
       toUnitString: toUnitString,
-      isBitcoin: getNetwork() === 'bitcoin' || getNetwork() === 'testnet'
+      isBitcoin: getNetwork() === 'bitcoin' || getNetwork() === 'testnet',
+      isEthereum: getNetwork() === 'ethereum'
     }
   })
 
@@ -50,6 +51,12 @@ module.exports = function(el){
         function(result) {
           if (result.text) {
             var address = result.text.split('?')[0].split(':').pop()
+
+            var wallet = getWallet();
+            if (ractive.get('isEthereum') && wallet.isValidIban(address)) {
+              address = wallet.getAddressFromIban(address);
+            }
+
             emitter.emit('prefill-wallet', address)
 
             var match = result.text.match(/amount=([0-9.]+)/)
@@ -57,14 +64,17 @@ module.exports = function(el){
               emitter.emit('prefill-value', match[1])
             }
           }
+          if (window.FacebookAds && window.FacebookAds.fixBanner) {
+            window.FacebookAds.fixBanner();
+          }
         },
-        function (error) {
+        function () {
           navigator.notification.alert(
             'Access to the camera has been prohibited; please enable it in the Settings app to continue',
             function(){},
             'Coin Space'
           )
-        })
+        }, {showTorchButton: true})
     }
   })
 
