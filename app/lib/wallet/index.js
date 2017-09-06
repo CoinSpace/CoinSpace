@@ -158,6 +158,7 @@ function initWallet(networkName, done, txDone) {
 
   if (networkName === 'ethereum') {
     options.seed = seed;
+    options.minConf = 12;
   } else if (networkName === 'bitcoin' || networkName === 'litecoin' || networkName === 'testnet') {
     var accounts = getDerivedAccounts(networkName)
     options.externalAccount = accounts.externalAccount
