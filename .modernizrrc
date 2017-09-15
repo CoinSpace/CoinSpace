@@ -1,0 +1,14 @@
+{
+  "minify": false,
+  "options": [
+    "setClasses"
+  ],
+  "feature-detects": [
+    "indexeddb",
+    "storage/websqldatabase",
+    "storage/localstorage",
+    "workers/webworkers",
+    "blob",
+    "crypto/getrandomvalues"
+  ]
+}
