@@ -5,7 +5,7 @@ var http = require('http')
 var master = require('./master')
 
 var server = http.createServer(app)
-server.listen(process.env.PORT || 9009, function() {
+server.listen(process.env.PORT || 8080, function() {
   console.info('server listening on http://localhost:' + server.address().port)
 })
 

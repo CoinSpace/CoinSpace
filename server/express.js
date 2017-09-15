@@ -5,12 +5,14 @@ var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 var cookieSession = require('cookie-session')
 var compress = require('compression')
+var cors = require('cors')
 var path = require('path')
 var auth = require('./auth')
 var geo = require('./geo')
 var validatePin = require('cs-pin-validator')
 var crypto = require('crypto')
 var helmet = require('helmet')
+var csp = require('helmet-csp')
 var openalias = require('cs-openalias')
 var fee = require('./fee')
 var ticker = require('./ticker')
@@ -32,26 +34,29 @@ module.exports = function (){
       process.env.DB_HOST
     ]
 
-    app.use(helmet.csp({
-      'default-src': ["'self'", 'blob:'],
-      'connect-src': connectSrc,
-      'font-src': ["'self'", 'coin.space'],
-      'img-src': ["'self'", 'data:', 'www.gravatar.com'],
-      'style-src': ["'self'", "'unsafe-inline'"],
-      'script-src': ["'self'", 'blob:', "'unsafe-eval'", "'unsafe-inline'"], // http://lists.w3.org/Archives/Public/public-webappsec/2014Apr/0021.html, https://github.com/ractivejs/ractive/issues/285
+    app.use(csp({
+      directives: {
+        'default-src': ["'self'", 'blob:'],
+        'connect-src': connectSrc,
+        'font-src': ["'self'", 'coin.space'],
+        'img-src': ["'self'", 'data:', 'www.gravatar.com'],
+        'style-src': ["'self'", "'unsafe-inline'"],
+        'script-src': ["'self'", 'blob:', "'unsafe-eval'", "'unsafe-inline'"],
+      },
       reportOnly: false,
-      setAllHeaders: false,
-      safari5: true
+      setAllHeaders: false
     }))
     app.use(helmet.xssFilter())
-    app.use(helmet.nosniff())
-    app.use(helmet.xframe('sameorigin'))
+    app.use(helmet.noSniff())
+    app.use(helmet.frameguard({action: 'sameorigin'}))
 
     var hundredEightyDaysInMilliseconds = 180 * 24 * 60 * 60 * 1000
     app.use(helmet.hsts({
       maxAge: hundredEightyDaysInMilliseconds,
       includeSubdomains: true
     }))
+  } else {
+    app.use(cors());
   }
 
   var anHour = 1000*60*60
