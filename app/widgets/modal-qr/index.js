@@ -1,9 +1,9 @@
 'use strict';
 
-var Ractive = require('cs-modal')
-var emitter = require('cs-emitter')
-var qrcode = require('cs-qrcode')
-var getNetwork = require('cs-network')
+var Ractive = require('widgets/modal')
+var emitter = require('lib/emitter')
+var qrcode = require('lib/qrcode')
+var getNetwork = require('lib/network')
 
 module.exports = function showTooltip(data){
   data.mailto = mailto
@@ -11,12 +11,12 @@ module.exports = function showTooltip(data){
   var ractive = new Ractive({
     el: document.getElementById('tooltip'),
     partials: {
-      content: require('./content.ract').template,
+      content: require('./content.ract'),
     },
     data: data
   })
 
-  var canvas = ractive.nodes['qr-canvas']
+  var canvas = ractive.find('#qr-canvas')
   var qr = qrcode(getNetwork() + ':' + ractive.get('address'))
   canvas.appendChild(qr)
 

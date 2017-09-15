@@ -1,13 +1,10 @@
 'use strict';
 
-var xhr = require('cs-xhr')
-var db = require('cs-db')
-var getWallet = require('cs-wallet-js').getWallet
-var getNetwork = require('cs-network')
-var uriRoot = window.location.origin
-if(window.buildType === 'phonegap') {
-  uriRoot = process.env.PHONEGAP_URL
-}
+var xhr = require('lib/xhr')
+var db = require('lib/db')
+var getWallet = require('lib/wallet').getWallet
+var getNetwork = require('lib/network')
+var uriRoot = process.env.SITE_URL
 var userInfo = {}
 
 function fetchUserInfo(callback){

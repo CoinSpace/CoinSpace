@@ -33,14 +33,14 @@
   }
 
   ._avatar {
-    @include icon(55px, 55px, block, '../img/avatar_1.png');
+    @include icon(55px, 55px, block, './assets/img/avatar_1.png');
     margin-top: 10px;
     width: 55px;
     float: left;
     margin-right: 10px;
 
     @include breakpoint(portrait) {
-      @include icon(80px, 80px, block, '../img/avatar_1.png');
+      @include icon(80px, 80px, block, './assets/img/avatar_1.png');
     }
   }
 

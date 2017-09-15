@@ -1,12 +1,12 @@
 'use strict';
 
-var Ractive = require('cs-ractive')
-var getNetwork = require('cs-network')
+var Ractive = require('lib/ractive')
+var getNetwork = require('lib/network')
 
 module.exports = function(el){
   var ractive = new Ractive({
     el: el,
-    template: require('./index.ract').template,
+    template: require('./index.ract'),
     data: {
       title: 'Available Tokens',
       id: 'token_dropdown',

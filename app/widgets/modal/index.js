@@ -1,16 +1,16 @@
 'use strict';
 
-var Ractive = require('cs-ractive')
-var fadeIn = require('cs-transitions/fade.js').fadeIn
-var fadeOut = require('cs-transitions/fade.js').fadeOut
+var Ractive = require('lib/ractive')
+var fadeIn = require('lib/transitions/fade.js').fadeIn
+var fadeOut = require('lib/transitions/fade.js').fadeOut
 
 var Modal = Ractive.extend({
   el: document.getElementById('general-purpose-overlay'),
-  template: require('./index.ract').template,
+  template: require('./index.ract'),
   partials: {
-    content: require('./content.ract').template,
+    content: require('./content.ract'),
   },
-  init: function(){
+  oninit: function(){
 
     var self = this
     var fadeEl = self.find('.js__fadeEl')

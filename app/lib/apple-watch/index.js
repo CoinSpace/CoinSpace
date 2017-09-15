@@ -1,8 +1,8 @@
 'use strict';
 
-var emitter = require('cs-emitter')
-var CS = require('cs-wallet-js')
-var getNetwork = require('cs-network')
+var emitter = require('lib/emitter')
+var CS = require('lib/wallet')
+var getNetwork = require('lib/network')
 var yaqrcode = require('yaqrcode')
 
 var appGroupId = ''
@@ -11,14 +11,14 @@ var lastRates
 var transactionHistory
 
 function initWatch(groupId) {
-	if (window.buildPlatform === 'ios') {
+	if (process.env.BUILD_PLATFORM === 'ios') {
 		appGroupId = groupId
         applewatch.init(onSuccessInitAppleWatch, onErrorInitAppleWatch, groupId)
 	}
 }
 
 function sendMessage(message, queueName) {
-    if (window.buildPlatform === 'ios') {
+    if (process.env.BUILD_PLATFORM === 'ios') {
         applewatch.sendMessage(message, queueName)
     }
 }
@@ -44,7 +44,7 @@ function setTransactionHistory(transactions) {
 function subscribeForNotification() {
     applewatch.addListener('requestCommandQueue', function(message) {
       console.log('receive command: ' + message)
-      
+
       if (message === 'updateBalance') {
         console.log('receive request balanceUdpate');
         var response = {}
@@ -52,24 +52,24 @@ function subscribeForNotification() {
         response.balance = CS.getWallet().getBalance()
         response.denomination = CS.getWallet().denomination
         response.walletId = CS.getWallet().getNextAddress()
-      
+
         applewatch.sendMessage(response, 'comandAnswerQueue')
-        
+
         var responseRates = {}
         responseRates.command = 'currencyMessage'
         responseRates.currency = lastRates
-        
+
         applewatch.sendMessage(responseRates, 'comandAnswerQueue')
       } else if (message === 'getQrCode') {
         console.log('receive request qr code')
         var address = CS.getWallet().getNextAddress()
         var qr = yaqrcode(getNetwork() + ':' + address)
-    
+
         var response = {}
         response.command = 'qrMessage'
         response.qr = qr
         response.address = address
-    
+
         applewatch.sendMessage(response, 'comandAnswerQueue')
       } else if (message == 'turnMectoOff') {
         console.log('turn off mecto')
@@ -84,7 +84,7 @@ function subscribeForNotification() {
         var response = {}
         response.command = 'transactionMessage'
         response.transactions = transactionHistory
-        
+
         applewatch.sendMessage(response, 'comandAnswerQueue')
       }
     });
@@ -97,11 +97,11 @@ function onSuccessInitAppleWatch(groupId) {
         subscribeForNotification()
     }
 }
-  
+
 function onErrorInitAppleWatch() {
     console.log('failed init apple watch module');
 }
-  
+
 module.exports = {
     initWatch: initWatch,
     sendMessage: sendMessage,

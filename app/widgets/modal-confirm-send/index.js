@@ -1,15 +1,15 @@
 'use strict';
 
-var Ractive = require('cs-modal')
-var emitter = require('cs-emitter')
-var getWallet = require('cs-wallet-js').getWallet
-var parseHistoryTx = require('cs-wallet-js').parseHistoryTx
-var toAtom = require('cs-convert').toAtom
-var toUnitString = require('cs-convert').toUnitString
-var openSupportModal = require('cs-modal-support')
+var Ractive = require('widgets/modal')
+var emitter = require('lib/emitter')
+var getWallet = require('lib/wallet').getWallet
+var parseHistoryTx = require('lib/wallet').parseHistoryTx
+var toAtom = require('lib/convert').toAtom
+var toUnitString = require('lib/convert').toUnitString
+var openSupportModal = require('widgets/modal-support')
 var bitcoin = require('bitcoinjs-lib')
-var showInfo = require('cs-modal-flash').showInfo
-var getNetwork = require('cs-network')
+var showInfo = require('widgets/modal-flash').showInfo
+var getNetwork = require('lib/network')
 
 function open(data){
 
@@ -49,7 +49,7 @@ function open(data){
 
   var ractive = new Ractive({
     partials: {
-      content: require('./_content.ract').template
+      content: require('./_content.ract')
     },
     data: data
   })

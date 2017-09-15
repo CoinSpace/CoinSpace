@@ -1,6 +1,6 @@
 'use strict';
 
-var Ractive = require('cs-modal')
+var Ractive = require('widgets/modal')
 
 var defaults = {
   error: {
@@ -23,7 +23,7 @@ function openModal(type, data){
   var ractive = new Ractive({
     el: document.getElementById('flash-modal'),
     partials: {
-      content: require('./content.ract').template
+      content: require('./content.ract')
     },
     data: data
   })

@@ -1,21 +1,21 @@
 'use strict';
 
-var Ractive = require('cs-ractive')
-var emitter = require('cs-emitter')
-var toUnitString = require('cs-convert').toUnitString
-var getNetwork = require('cs-network')
-var getWallet = require('cs-wallet-js').getWallet
+var Ractive = require('lib/ractive')
+var emitter = require('lib/emitter')
+var toUnitString = require('lib/convert').toUnitString
+var getNetwork = require('lib/network')
+var getWallet = require('lib/wallet').getWallet
 var strftime = require('strftime')
-var showTransactionDetail = require('cs-modal-transaction-detail')
+var showTransactionDetail = require('widgets/modal-transaction-detail')
 
-var WatchModule = require('cs-watch-module')
+var WatchModule = require('lib/apple-watch')
 
 module.exports = function(el){
   var transactions = []
   var network = getNetwork();
   var ractive = new Ractive({
     el: el,
-    template: require('./index.ract').template,
+    template: require('./index.ract'),
     data: {
       transactions: transactions,
       formatTimestamp: function(timestamp){
@@ -65,7 +65,7 @@ module.exports = function(el){
     transactions = newTxs
     ractive.set('transactions', transactions)
     ractive.set('loadingTx', false)
-    if (window.buildPlatform === 'ios') {
+    if (process.env.BUILD_PLATFORM === 'ios') {
       var response = {}
       response.command = 'transactionMessage'
       response.transactions = newTxs

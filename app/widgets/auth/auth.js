@@ -1,20 +1,20 @@
 'use strict';
 
-var Ractive = require('cs-ractive')
-var emitter = require('cs-emitter')
-var showError = require('cs-modal-flash').showError
-var getNetwork = require('cs-network')
+var Ractive = require('lib/ractive')
+var emitter = require('lib/emitter')
+var showError = require('widgets/modal-flash').showError
+var getNetwork = require('lib/network')
 
 var Auth = Ractive.extend({
   el: document.getElementById("auth"),
-  template: require('./index.ract').template,
+  template: require('./index.ract'),
   partials: {
-    header: require('./header.ract').template,
-    actions: require('./actions.ract').template,
-    content: require('./content.ract').template,
-    footer: require('./footer.ract').template
+    header: require('./header.ract'),
+    actions: require('./actions.ract'),
+    content: require('./content.ract'),
+    footer: require('./footer.ract')
   },
-  init: function(){
+  oninit: function(){
     var self = this
     this.set('opening', false)
 

@@ -1,17 +1,17 @@
 'use strict';
 
-var Ractive = require('cs-modal')
+var Ractive = require('widgets/modal')
 
 module.exports = function showTooltip(data){
 
-  if (window.buildType === 'phonegap') {
+  if (process.env.BUILD_TYPE === 'phonegap') {
     data.link = false
   }
 
   var ractive = new Ractive({
     el: document.getElementById('tooltip'),
     partials: {
-      content: require('./content.ract').template,
+      content: require('./content.ract'),
     },
     data: data
   })

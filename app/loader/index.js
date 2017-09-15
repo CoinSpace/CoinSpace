@@ -1,41 +1,32 @@
 'use strict';
 
-require('browsernizr/lib/load')
-require('browsernizr/test/storage/localstorage')
-require('browsernizr/test/storage/websqldatabase')
-require('browsernizr/test/indexedDB')
-require('browsernizr/test/workers/webworkers')
-require('browsernizr/test/blob')
-require('browsernizr/test/crypto/getrandomvalues')
-require('browsernizr/test/svg/smil')
+require('../application.scss');
 
-var token = require('cs-network')()
-var fadeOut = require('cs-transitions/loader.js').out
-var Modernizr = require('browsernizr')
-var languages = require('cs-i18n').languages
+var token = require('lib/network')()
+var fadeOut = require('lib/transitions/loader').out
+var Modernizr = require('modernizr')
+var languages = require('lib/i18n').languages
+var load = require('little-loader')
 
 document.getElementsByTagName('html')[0].classList.add(token)
-
 var containerEl = document.getElementById('loader')
-var goodToGo;
 
 Modernizr.on('indexeddb', function(hasIndexedDB){
   var supportsPouchDB = hasIndexedDB || Modernizr.websqldatabase
   var language = findTranslation()
 
-  Modernizr.load({
-    test: supportsPouchDB && (Modernizr.localstorage && Modernizr.webworkers && Modernizr.blobconstructor && Modernizr.getrandomvalues),
-    yep: 'assets/js/application-' + language + '.js',
-    nope: 'assets/js/nope-' + language + '.js',
-    callback: function(testResult, key) {
-      goodToGo = key
-    },
-    complete: function() {
-      if(goodToGo) {
-        fadeOut(containerEl)
-      }
-    }
-  })
+  var callback = function(error) {
+    if (error) return console.log(error);
+    fadeOut(containerEl)
+  }
+
+  if (supportsPouchDB && Modernizr.localstorage && Modernizr.webworkers && Modernizr.blobconstructor && Modernizr.getrandomvalues) {
+    // load('assets/js/application-' + language + '.js', callback);
+    load('assets/js/application.' + __webpack_hash__ + '.js', callback);
+  } else {
+    // load('assets/js/nope-' + language + '.js', callback);
+    load('assets/js/nope.' + __webpack_hash__ + '.js', callback);
+  }
 })
 
 function findTranslation(){
@@ -44,11 +35,3 @@ function findTranslation(){
     return language === l || language.substr(0, 2) === l
   })[0] || 'en'
 }
-
-//monkey patch URL for safari 6
-window.URL = window.URL || window.webkitURL
-//fix for ie
-if (!window.location.origin) {
-  window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '')
-}
-window.isIE = !!document.documentMode

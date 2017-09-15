@@ -1,32 +1,32 @@
 'use strict';
 
-var Ractive = require('cs-ractive')
-var emitter = require('cs-emitter')
-var db = require('cs-db')
-var CS = require('cs-wallet-js')
-var showTooltip = require('cs-modal-tooltip')
-var showQr = require('cs-modal-qr')
-var geo = require('cs-geo')
-var showError = require('cs-modal-flash').showError
-var showSetDetails = require('cs-modal-set-details')
-var fadeIn = require('cs-transitions/fade.js').fadeIn
-var fadeOut = require('cs-transitions/fade.js').fadeOut
-var getNetwork = require('cs-network')
-var qrcode = require('cs-qrcode')
+var Ractive = require('lib/ractive')
+var emitter = require('lib/emitter')
+var db = require('lib/db')
+var CS = require('lib/wallet')
+var showTooltip = require('widgets/modal-tooltip')
+var showQr = require('widgets/modal-qr')
+var geo = require('lib/geo')
+var showError = require('widgets/modal-flash').showError
+var showSetDetails = require('widgets/modal-set-details')
+var fadeIn = require('lib/transitions/fade.js').fadeIn
+var fadeOut = require('lib/transitions/fade.js').fadeOut
+var getNetwork = require('lib/network')
+var qrcode = require('lib/qrcode')
 
-var WatchModule = require('cs-watch-module')
+var WatchModule = require('lib/apple-watch')
 
 module.exports = function(el){
   var ractive = new Ractive({
     el: el,
-    template: require('./index.ract').template,
+    template: require('./index.ract'),
     data: {
       address: '',
       qrVisible: false,
       btn_message: 'Turn Mecto on',
       connecting: false,
       broadcasting: false,
-      isSocialSharing: window.buildType === 'phonegap' && window.plugins && window.plugins.socialsharing
+      isSocialSharing: process.env.BUILD_TYPE === 'phonegap' && window.plugins && window.plugins.socialsharing
     }
   })
 
@@ -176,7 +176,7 @@ module.exports = function(el){
   }
 
   function sendMectoStatus(mectoStatus) {
-    if (window.buildPlatform === 'ios') {
+    if (process.env.BUILD_PLATFORM === 'ios') {
         var response = {}
         response.command = 'mectoStatus'
         response.status = mectoStatus

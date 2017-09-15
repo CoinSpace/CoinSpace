@@ -1,29 +1,29 @@
 'use strict';
 
-var Ractive = require('cs-ractive')
+var Ractive = require('lib/ractive')
 var Big = require('big.js')
-var emitter = require('cs-emitter')
-var db = require('cs-db')
-var getWallet = require('cs-wallet-js').getWallet
-var currencies = require('cs-ticker-api').currencies
-var toFixedFloor = require('cs-convert').toFixedFloor
-var toUnitString = require('cs-convert').toUnitString
-var showError = require('cs-modal-flash').showError
-var showInfo = require('cs-modal-flash').showInfo
-var showConfirmation = require('cs-modal-confirm-send')
-var validateSend = require('cs-wallet-js').validateSend
-var getDynamicFees = require('cs-wallet-js').getDynamicFees
-var resolveTo = require('cs-openalias/xhr.js').resolveTo
-var getNetwork = require('cs-network')
+var emitter = require('lib/emitter')
+var db = require('lib/db')
+var getWallet = require('lib/wallet').getWallet
+var currencies = require('lib/ticker-api').currencies
+var toFixedFloor = require('lib/convert').toFixedFloor
+var toUnitString = require('lib/convert').toUnitString
+var showError = require('widgets/modal-flash').showError
+var showInfo = require('widgets/modal-flash').showInfo
+var showConfirmation = require('widgets/modal-confirm-send')
+var validateSend = require('lib/wallet').validateSend
+var getDynamicFees = require('lib/wallet').getDynamicFees
+var resolveTo = require('lib/openalias/xhr.js').resolveTo
+var getNetwork = require('lib/network')
 
 module.exports = function(el){
   var ractive = new Ractive({
     el: el,
-    template: require('./index.ract').template,
+    template: require('./index.ract'),
     data: {
       currencies: currencies,
       exchangeRates: {},
-      qrScannerAvailable: window.buildType === 'phonegap',
+      qrScannerAvailable: process.env.BUILD_TYPE === 'phonegap',
       toUnitString: toUnitString,
       isBitcoin: getNetwork() === 'bitcoin' || getNetwork() === 'testnet',
       isEthereum: getNetwork() === 'ethereum'
@@ -129,7 +129,7 @@ module.exports = function(el){
   })
 
   ractive.on('fiat-to-bitcoin', function(){
-    var fiat = ractive.nodes.fiat.value
+    var fiat = ractive.find('#fiat').value
     if(fiat == undefined || fiat === '') return;
 
     var exchangeRate = getExchangeRate()
@@ -141,7 +141,7 @@ module.exports = function(el){
   })
 
   ractive.on('bitcoin-to-fiat', function(){
-    var bitcoin = ractive.nodes.bitcoin.value
+    var bitcoin = ractive.find('#bitcoin').value
     if(bitcoin == undefined || bitcoin === '') return;
 
 
@@ -163,7 +163,7 @@ module.exports = function(el){
   })
 
   ractive.on('clearTo', function(){
-    var passfield = ractive.nodes.to
+    var passfield = ractive.find('#to')
     ractive.set('to', '')
     ractive.set('toEntered', false)
     passfield.focus()

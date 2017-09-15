@@ -1,20 +1,20 @@
 'use strict';
 
-var work = require('webworkify')
-var IeWorker = require('./ie-worker.js');
-var worker = window.isIE ? new IeWorker() : work(require('./worker.js'))
+var Worker = require('worker-loader?inline&fallback=false!./worker.js');
+var worker = new Worker()
+
 var auth = require('./auth')
 var utils = require('./utils')
 var db = require('./db')
-var emitter = require('cs-emitter')
+var emitter = require('lib/emitter')
 var crypto = require('crypto')
-var AES = require('cs-aes')
-var denominations = require('cs-denomination')
+var AES = require('lib/aes')
+var denominations = require('lib/denomination')
 var BtcLtcWallet = require('cs-wallet')
 var validateSend = require('./validator')
 var rng = require('secure-random').randomBuffer
 var bitcoin = require('bitcoinjs-lib')
-var xhr = require('cs-xhr')
+var xhr = require('lib/xhr')
 var cache = require('memory-cache')
 var EthereumWallet = require('cs-ethereum-wallet');
 
@@ -31,10 +31,7 @@ var Wallet = {
   ethereum: EthereumWallet
 }
 
-var uriRoot = window.location.origin
-if(window.buildType === 'phonegap') {
-  uriRoot = process.env.PHONEGAP_URL
-}
+var uriRoot = process.env.SITE_URL
 
 function createWallet(passphrase, network, callback) {
   var message = passphrase ? 'Decoding seed phrase' : 'Generating'

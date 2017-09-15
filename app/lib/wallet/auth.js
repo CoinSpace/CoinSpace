@@ -1,12 +1,9 @@
 'use strict';
 
-var xhr = require('cs-xhr')
-var db = require('cs-db')
+var xhr = require('lib/xhr')
+var db = require('lib/db')
 var querystring = require('querystring')
-var uriRoot = window.location.origin
-if(window.buildType === 'phonegap') {
-  uriRoot = process.env.PHONEGAP_URL
-}
+var uriRoot = process.env.SITE_URL
 
 function register(wallet_id, pin, callback) {
   postCredentials('register', { wallet_id: wallet_id, pin: pin }, callback)

@@ -7,22 +7,20 @@ var createIntroPage = require('../create-intro')
 module.exports = function choose(){
   var ractive = new Ractive({
     partials: {
-      actions: require('./actions.ract').template,
-      footer: require('./footer.ract').template
+      actions: require('./actions.ract'),
+      footer: require('./footer.ract')
     },
     data: {
-      isPhonegap: window.buildType === 'phonegap'
+      isPhonegap: process.env.BUILD_TYPE === 'phonegap'
     }
   })
 
   ractive.on('create-new-wallet', function(){
     createIntroPage(choose)
-    ractive.teardown()
   })
 
   ractive.on('reveal-passphrase-input', function(){
     passphrasePage(choose)
-    ractive.teardown()
   })
 
   return ractive

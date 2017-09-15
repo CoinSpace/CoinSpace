@@ -1,6 +1,9 @@
 'use strict';
-var Ractive = require('ractive/build/ractive.runtime')
-var translate = require('cs-i18n').translate
+var Ractive = require('ractive/runtime.js')
+if (process.env.NODE_ENV === 'production') {
+  Ractive.DEBUG = false;
+}
+var translate = require('lib/i18n').translate
 
 // extracted from https://github.com/RactiveJS/Ractive-events-keys
 var makeKeyDefinition = function ( code ) {
@@ -42,37 +45,37 @@ events.uparrow = makeKeyDefinition(38);
 
 var partials = Ractive.partials
 
-partials.svg_arrow = require('cs-svg/arrow.ract').template
-partials.svg_cancel = require('cs-svg/cancel.ract').template
-partials.svg_caret = require('cs-svg/caret.ract').template
-partials.svg_close = require('cs-svg/close.ract').template
-partials.svg_exit = require('cs-svg/exit.ract').template
-partials.svg_help = require('cs-svg/help.ract').template
-partials.svg_hex_large = require('cs-svg/hex_large.ract').template
-partials.svg_history = require('cs-svg/history.ract').template
-partials.svg_lock = require('cs-svg/lock.ract').template
-partials.svg_logo_key = require('cs-svg/logo_key.ract').template
-partials.svg_logo_stack = require('cs-svg/logo_stack.ract').template
-partials.svg_logo = require('cs-svg/logo.ract').template
-partials.svg_qr = require('cs-svg/qr.ract').template
-partials.svg_expand = require('cs-svg/expand.ract').template
-partials.svg_email = require('cs-svg/email.ract').template
-partials.svg_receive = require('cs-svg/receive.ract').template
-partials.svg_refresh = require('cs-svg/refresh.ract').template
-partials.svg_send = require('cs-svg/send.ract').template
-partials.svg_sendto = require('cs-svg/sendto.ract').template
-partials.svg_settings = require('cs-svg/settings.ract').template
-partials.svg_success = require('cs-svg/success.ract').template
-partials.svg_token_bitcoin = require('cs-svg/token_bitcoin.ract').template
-partials.svg_token_litecoin = require('cs-svg/token_litecoin.ract').template
-partials.svg_token_ethereum = require('cs-svg/token_ethereum.ract').template
-partials.svg_token = require('cs-svg/token.ract').template
-partials.svg_user = require('cs-svg/user.ract').template
-partials.svg_mecto = require('cs-svg/mecto.ract').template
-partials.svg_warning = require('cs-svg/warning.ract').template
-partials.svg_mecto_not_found = require('cs-svg/mecto_not_found.ract').template
-partials.svg_error = require('cs-svg/error.ract').template
-partials.svg_appstore = require('cs-svg/appstore.ract').template
+partials.svg_arrow = require('lib/svg/arrow.ract')
+partials.svg_cancel = require('lib/svg/cancel.ract')
+partials.svg_caret = require('lib/svg/caret.ract')
+partials.svg_close = require('lib/svg/close.ract')
+partials.svg_exit = require('lib/svg/exit.ract')
+partials.svg_help = require('lib/svg/help.ract')
+partials.svg_hex_large = require('lib/svg/hex_large.ract')
+partials.svg_history = require('lib/svg/history.ract')
+partials.svg_lock = require('lib/svg/lock.ract')
+partials.svg_logo_key = require('lib/svg/logo_key.ract')
+partials.svg_logo_stack = require('lib/svg/logo_stack.ract')
+partials.svg_logo = require('lib/svg/logo.ract')
+partials.svg_qr = require('lib/svg/qr.ract')
+partials.svg_expand = require('lib/svg/expand.ract')
+partials.svg_email = require('lib/svg/email.ract')
+partials.svg_receive = require('lib/svg/receive.ract')
+partials.svg_refresh = require('lib/svg/refresh.ract')
+partials.svg_send = require('lib/svg/send.ract')
+partials.svg_sendto = require('lib/svg/sendto.ract')
+partials.svg_settings = require('lib/svg/settings.ract')
+partials.svg_success = require('lib/svg/success.ract')
+partials.svg_token_bitcoin = require('lib/svg/token_bitcoin.ract')
+partials.svg_token_litecoin = require('lib/svg/token_litecoin.ract')
+partials.svg_token_ethereum = require('lib/svg/token_ethereum.ract')
+partials.svg_token = require('lib/svg/token.ract')
+partials.svg_user = require('lib/svg/user.ract')
+partials.svg_mecto = require('lib/svg/mecto.ract')
+partials.svg_warning = require('lib/svg/warning.ract')
+partials.svg_mecto_not_found = require('lib/svg/mecto_not_found.ract')
+partials.svg_error = require('lib/svg/error.ract')
+partials.svg_appstore = require('lib/svg/appstore.ract')
 
 Ractive.prototype.hide = function(){
   this.fire('before-hide')
@@ -84,6 +87,7 @@ Ractive.prototype.show = function(){
   this.el.classList.add('current')
 }
 
-Ractive.data = { translate: translate }
+// Ractive.data = { translate: translate }
+Ractive.defaults.data = { translate: translate }
 
 module.exports = Ractive

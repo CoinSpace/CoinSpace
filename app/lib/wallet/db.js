@@ -1,6 +1,6 @@
 'use strict';
 
-var PouchDB = require('pouchdb')
+var PouchDB = require('pouchdb').default
 var db = new PouchDB('cs-local')
 
 var credentials = "credentials"

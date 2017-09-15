@@ -1,6 +1,6 @@
 'use strict';
 
-var Velocity = require('./index.js')
+var Velocity = require('velocity-animate')
 
 function animateDropdown(el, icon, props, options) {
 

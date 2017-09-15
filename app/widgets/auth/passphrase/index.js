@@ -1,23 +1,22 @@
 'use strict';
 
-var CS = require('cs-wallet-js')
+var CS = require('lib/wallet')
 var Ractive = require('../auth')
 var pinPage = require('../pin')
-var showError = require('cs-modal-flash').showError
+var showError = require('widgets/modal-flash').showError
 
 function enterPassphrase(prevPage){
   var ractive = new Ractive({
     partials: {
-      header: require('./header.ract').template,
-      content: require('./content.ract').template,
-      actions: require('./actions.ract').template,
-      footer: require('./footer.ract').template
+      header: require('./header.ract'),
+      content: require('./content.ract'),
+      actions: require('./actions.ract'),
+      footer: require('./footer.ract')
     }
   })
 
   ractive.on('back', function(){
     prevPage()
-    ractive.teardown()
   })
 
   ractive.on('open-wallet-with-passphrase', function() {
@@ -31,7 +30,7 @@ function enterPassphrase(prevPage){
   })
 
   ractive.observe('passphrase', function() {
-    if(ractive.nodes.passphraseField.value.length === 0) {
+    if(ractive.find('#passphraseField').value.length === 0) {
       ractive.set('passphraseEntered', false)
     } else {
       ractive.set('passphraseEntered', true)
@@ -39,7 +38,7 @@ function enterPassphrase(prevPage){
   })
 
   ractive.on('clearPassphrase', function(){
-    var passfield = ractive.nodes.passphraseField
+    var passfield = ractive.find('#passphraseField')
     ractive.set('passphrase', '')
     ractive.set('passphraseEntered', false)
     passfield.focus()

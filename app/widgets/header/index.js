@@ -1,23 +1,23 @@
 'use strict';
 
-var Ractive = require('cs-ractive')
-var emitter = require('cs-emitter')
-var sync = require('cs-wallet-js').sync
-var getWallet = require('cs-wallet-js').getWallet
-var toUnit = require('cs-convert').toUnit
-var toUnitString = require('cs-convert').toUnitString
-var toFixedFloor = require('cs-convert').toFixedFloor
+var Ractive = require('lib/ractive')
+var emitter = require('lib/emitter')
+var sync = require('lib/wallet').sync
+var getWallet = require('lib/wallet').getWallet
+var toUnit = require('lib/convert').toUnit
+var toUnitString = require('lib/convert').toUnitString
+var toFixedFloor = require('lib/convert').toFixedFloor
 var Big = require('big.js')
-var showError = require('cs-modal-flash').showError
-var db = require('cs-db')
-var currencies = require('cs-ticker-api').currencies
+var showError = require('widgets/modal-flash').showError
+var db = require('lib/db')
+var currencies = require('lib/ticker-api').currencies
 
-var WatchModule = require('cs-watch-module')
+var WatchModule = require('lib/apple-watch')
 
 module.exports = function(el){
   var ractive = new Ractive({
     el: el,
-    template: require('./index.ract').template,
+    template: require('./index.ract'),
     data: {
       updating_transactions: true,
       toUnitString: toUnitString,
@@ -41,7 +41,7 @@ module.exports = function(el){
     var balance = getWallet().getBalance()
     ractive.set('bitcoinBalance', balance)
     ractive.set('denomination', getWallet().denomination)
-    if (window.buildPlatform === 'ios') {
+    if (process.env.BUILD_PLATFORM === 'ios') {
       var response = {}
       response.command = 'balanceMessage'
       response.balance = balance
@@ -63,7 +63,7 @@ module.exports = function(el){
 
   emitter.on('update-balance', function() {
     ractive.set('bitcoinBalance', getWallet().getBalance())
-    if (window.buildPlatform === 'ios') {
+    if (process.env.BUILD_PLATFORM === 'ios') {
       var response = {}
       response.command = 'balanceMessage'
       response.balance = getWallet().getBalance()
@@ -83,7 +83,7 @@ module.exports = function(el){
     ractive.set('menuOpen', open)
   }
 
-  var refreshEl = ractive.nodes.refresh_el
+  var refreshEl = ractive.find('#refresh_el')
 
   function cancelSpinner() {
     ractive.set('updating_transactions', false)
@@ -143,6 +143,7 @@ module.exports = function(el){
   }
 
   function bitcoinPrice(exchangeRate) {
+    if (!exchangeRate) return '';
     return new Big(exchangeRate).times(1).toFixed(2)
   }
 
@@ -158,7 +159,7 @@ module.exports = function(el){
   }
 
   function sendIosCurrency(currency) {
-    if (window.buildPlatform === 'ios') {
+    if (process.env.BUILD_PLATFORM === 'ios') {
       WatchModule.sendMessage({
         command: 'defaultCurrencyMessage',
         defaultCurrency: currency

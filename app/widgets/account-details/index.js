@@ -1,20 +1,20 @@
 'use strict';
 
-var Ractive = require('cs-ractive')
-var Profile = require('cs-transitions/profileAnimation.js')
-var showTooltip = require('cs-modal-tooltip')
-var showError = require('cs-modal-flash').showError
-var emitter = require('cs-emitter')
-var Avatar = require('cs-avatar')
-var db = require('cs-db')
-var setUsername = require('cs-wallet-js/auth.js').setUsername
-var getNetwork = require('cs-network')
+var Ractive = require('lib/ractive')
+var Profile = require('lib/transitions/profileAnimation.js')
+var showTooltip = require('widgets/modal-tooltip')
+var showError = require('widgets/modal-flash').showError
+var emitter = require('lib/emitter')
+var Avatar = require('lib/avatar')
+var db = require('lib/db')
+var setUsername = require('lib/wallet/auth.js').setUsername
+var getNetwork = require('lib/network')
 
 module.exports = function init(el) {
 
   var ractive = new Ractive({
     el: el,
-    template: require('./index.ract').template,
+    template: require('./index.ract'),
     data: {
       start_open: true,
       user: {
@@ -27,9 +27,9 @@ module.exports = function init(el) {
     }
   })
 
-  var $previewEl = ractive.nodes['details-preview']
-  var $editEl = ractive.nodes['details-edit']
-  var $nameEl = ractive.nodes['details-name']
+  var $previewEl = ractive.find('#details-preview')
+  var $editEl = ractive.find('#details-edit')
+  var $nameEl = ractive.find('#details-name')
 
   $nameEl.onkeypress = function(e) {
     e = e || window.event;
@@ -116,7 +116,7 @@ module.exports = function init(el) {
   function setAvatar(){
     var avatar = Avatar.getAvatar(ractive.get('user.email'),
                                   ractive.get('user.avatarIndex'))
-    var avatarEl = ractive.nodes['details-preview'].querySelector('.settings__avatar')
+    var avatarEl = ractive.find('#details-preview').querySelector('.settings__avatar')
     avatarEl.style.setProperty('background-image', "url('" + avatar + "')")
   }
 

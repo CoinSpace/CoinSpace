@@ -1,7 +1,7 @@
 'use strict';
 
 var xhr = require('xhr')
-var showError = require('cs-modal-flash').showError
+var showError = require('widgets/modal-flash').showError
 
 function makeRequest(params, callback){
   if(params && !params.timeout) {

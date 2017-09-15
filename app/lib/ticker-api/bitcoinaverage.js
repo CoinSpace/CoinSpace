@@ -10,10 +10,7 @@ var tickers = {
 }
 
 var network = null
-var uriRoot = window.location.origin
-if(window.buildType === 'phonegap') {
-  uriRoot = process.env.PHONEGAP_URL
-}
+var uriRoot = process.env.SITE_URL
 
 function BitcoinAverage(n){
   network = n

@@ -1,6 +1,6 @@
 'use strict';
 
-var xhr = require('cs-xhr')
+var xhr = require('lib/xhr')
 
 function sendRequest(paramsObj, callback) {
   // Coin Space version := Coin Space

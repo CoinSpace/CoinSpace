@@ -2,7 +2,7 @@
 
 var Big = require('big.js')
 
-var getNetwork = require('cs-network')
+var getNetwork = require('lib/network')
 var networkName = getNetwork();
 
 var unitMap = {

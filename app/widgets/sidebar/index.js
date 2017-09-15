@@ -1,17 +1,17 @@
 'use strict';
 
-var Ractive = require('cs-ractive')
-var emitter = require('cs-emitter')
-var Dropdown = require('cs-transitions/dropdown.js')
-var initAccount = require('cs-account-details')
+var Ractive = require('lib/ractive')
+var emitter = require('lib/emitter')
+var Dropdown = require('lib/transitions/dropdown.js')
+var initAccount = require('widgets/account-details')
 
 module.exports = function(el){
   var ractive = new Ractive({
     el: el,
-    template: require('./index.ract').template
+    template: require('./index.ract')
   })
 
-  initAccount(ractive.nodes['account-details'])
+  initAccount(ractive.find('#account-details'))
 
   ractive.on('logout', function(event){
     event.original.preventDefault()

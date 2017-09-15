@@ -1,5 +1,5 @@
 'use strict';
-var translate = require('cs-i18n').translate
+var translate = require('lib/i18n').translate
 
 var message = translate("Sorry, Coin Space Wallet did not load.") +
   "<br/><br/>" +

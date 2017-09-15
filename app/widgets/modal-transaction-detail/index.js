@@ -1,15 +1,15 @@
 'use strict';
 
-var Ractive = require('cs-modal')
+var Ractive = require('widgets/modal')
 
 module.exports = function showTooltip(data){
 
   var content = null;
   if (data.isEthereum) {
     data.isPendingFee = data.transaction.fee === -1;
-    content = require('./contentEthereum.ract').template
+    content = require('./contentEthereum.ract')
   } else {
-    content = require('./contentBtcLtc.ract').template
+    content = require('./contentBtcLtc.ract')
   }
 
   var ractive = new Ractive({

@@ -126,7 +126,7 @@
 
   ._avatar {
     @include icon(120px, 120px, block);
-    -webkit-mask-image: url(../img/hex-large.svg);
+    -webkit-mask-image: url('./assets/img/hex-large.svg');
     -webkit-mask-size: 120px 120px;
     margin: 0 auto;
   }

@@ -1,35 +1,35 @@
 'use strict';
 
-var Ractive = require('cs-ractive')
-var emitter = require('cs-emitter')
-var initHeader = require('cs-header')
-var initTabs = require('cs-tabs')
-var initSidebar = require('cs-sidebar')
-var initTerms = require('cs-terms')
-var initSend = require('cs-send')
-var initReceive = require('cs-receive')
-var initHistory = require('cs-history')
-var initTokens = require('cs-tokens')
+var Ractive = require('lib/ractive')
+var emitter = require('lib/emitter')
+var initHeader = require('widgets/header')
+var initTabs = require('widgets/tabs')
+var initSidebar = require('widgets/sidebar')
+var initTerms = require('widgets/terms')
+var initSend = require('pages/send')
+var initReceive = require('pages/receive')
+var initHistory = require('pages/history')
+var initTokens = require('pages/tokens')
 var $ = require('browserify-zepto')
 
 module.exports = function(el){
   var ractive = new Ractive({
     el: el,
-    template: require('./index.ract').template
+    template: require('./index.ract')
   })
 
   // widgets
-  var header = initHeader(ractive.nodes['header'])
-  initTabs(ractive.nodes['tabs'])
-  initSidebar(ractive.nodes['sidebar'])
-  initTerms(ractive.nodes['terms'])
+  var header = initHeader(ractive.find('#header'))
+  initTabs(ractive.find('#tabs'))
+  initSidebar(ractive.find('#sidebar'))
+  initTerms(ractive.find('#terms'))
 
   // tabs
   var tabs = {
-    send: initSend(ractive.nodes['send']),
-    receive: initReceive(ractive.nodes['receive']),
-    history: initHistory(ractive.nodes['history']),
-    tokens: initTokens(ractive.nodes['tokens'])
+    send: initSend(ractive.find('#send')),
+    receive: initReceive(ractive.find('#receive')),
+    history: initHistory(ractive.find('#history')),
+    tokens: initTokens(ractive.find('#tokens'))
   }
 
   var currentPage = tabs.send
@@ -43,7 +43,7 @@ module.exports = function(el){
     $("#main").addClass('terms-open');
     $("#terms").addClass('terms-open');
 
-    var classes = ractive.find("#sidebar").classList
+    var classes = ractive.find('#sidebar').classList
     classes.add('animating')
     classes.remove('open')
 
@@ -63,7 +63,7 @@ module.exports = function(el){
 
   // menu toggle
   emitter.on('toggle-menu', function(open) {
-    var classes = ractive.find("#main").classList
+    var classes = ractive.find('#main').classList
     if(open) {
       ractive.set('sidebar_open', true)
       classes.add('closed')

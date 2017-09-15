@@ -2,12 +2,12 @@
 
 var Ractive = require('../auth')
 var pinPage = require('../pin')
-var animateCheckbox = require('cs-transitions/highlight.js')
+var animateCheckbox = require('lib/transitions/highlight.js')
 function confirm(data){
   var ractive = new Ractive({
     partials: {
-      header: require('./header.ract').template,
-      actions: require('./actions.ract').template
+      header: require('./header.ract'),
+      actions: require('./actions.ract')
     },
     data: {
       passphrase: data.mnemonic
@@ -41,7 +41,7 @@ function confirm(data){
   })
 
   ractive.on('create-pin', function() {
-    if(!ractive.get('checked')) return animateCheckbox(ractive.nodes.check);
+    if(!ractive.get('checked')) return animateCheckbox(ractive.find('#check'));
 
     pinPage(confirm, data)
     ractive.teardown()

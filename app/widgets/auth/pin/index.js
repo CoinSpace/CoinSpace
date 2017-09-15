@@ -1,11 +1,11 @@
 'use strict';
 
 var Ractive = require('../auth')
-var CS = require('cs-wallet-js')
-var emitter = require('cs-emitter')
-var validatePin = require('cs-pin-validator')
-var showError = require('cs-modal-flash').showError
-var translate = require('cs-i18n').translate
+var CS = require('lib/wallet')
+var emitter = require('lib/emitter')
+var validatePin = require('lib/pin-validator')
+var showError = require('widgets/modal-flash').showError
+var translate = require('lib/i18n').translate
 var pincode = ''
 
 module.exports = function(prevPage, data){
@@ -14,9 +14,9 @@ module.exports = function(prevPage, data){
 
   var ractive = new Ractive({
     partials: {
-      header: require('./header.ract').template,
-      content: require('./content.ract').template,
-      footer: require('./footer.ract').template
+      header: require('./header.ract'),
+      content: require('./content.ract'),
+      footer: require('./footer.ract')
     },
     data: {
       userExists: userExists,
@@ -27,7 +27,7 @@ module.exports = function(prevPage, data){
       }
     },
     complete: function() {
-      ractive.nodes['setPin'].focus();
+      ractive.find('#setPin').focus();
     }
   })
 
@@ -39,7 +39,7 @@ module.exports = function(prevPage, data){
     ractive.set('pinfocused', false)
   })
 
-  if(window.buildType === 'phonegap' && window.buildPlatform === 'ios'){
+  if(process.env.BUILD_PLATFORM === 'ios'){
       window.plugins.touchid.isAvailable(function() {
           CS.setAvailableTouchId()
 
@@ -78,12 +78,12 @@ module.exports = function(prevPage, data){
   }
 
   ractive.observe('pin', function(){
-    var pin = ractive.nodes['setPin'].value
+    var pin = ractive.find('#setPin').value
     var p = pinCode(pin)
     var boxes = p().split('')
 
     if(boxes.length === 4) {
-      ractive.nodes.setPin.blur()
+      ractive.find('#setPin').blur()
       ractive.fire('enter-pin')
     } else {
       setTimeout(function(){
@@ -125,7 +125,7 @@ module.exports = function(prevPage, data){
   })
 
   emitter.on('clear-pin', function() {
-    ractive.nodes['setPin'].value = ''
+    ractive.find('#setPin').value = ''
     ractive.set('pin', '')
     ractive.set('boxes', [null, null, null, null])
   })

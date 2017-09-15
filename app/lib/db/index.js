@@ -1,10 +1,10 @@
 'use strict';
 
-var emitter = require('cs-emitter')
-var PouchDB = require('pouchdb')
+var emitter = require('lib/emitter')
+var PouchDB = require('pouchdb').default
 var $ = require('browserify-zepto')
-var AES = require('cs-aes')
-var randAvatarIndex = require('cs-avatar').randAvatarIndex
+var AES = require('lib/aes')
+var randAvatarIndex = require('lib/avatar').randAvatarIndex
 var encrypt = AES.encrypt
 var decrypt = AES.decrypt
 

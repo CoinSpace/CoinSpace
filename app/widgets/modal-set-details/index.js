@@ -1,10 +1,10 @@
 'use strict';
 
-var Ractive = require('cs-modal')
-var db = require('cs-db')
-var emitter = require('cs-emitter')
-var showError = require('cs-modal-flash').showError
-var setUsername = require('cs-wallet-js/auth.js').setUsername
+var Ractive = require('widgets/modal')
+var db = require('lib/db')
+var emitter = require('lib/emitter')
+var showError = require('widgets/modal-flash').showError
+var setUsername = require('lib/wallet/auth.js').setUsername
 
 function fetchDetails(callback){
   db.get(function(err, doc){
@@ -26,11 +26,11 @@ function fetchDetails(callback){
 function openModal(data){
   var ractive = new Ractive({
     partials: {
-      content: require('./content.ract').template
+      content: require('./content.ract')
     }
   })
 
-  var $nameEl = ractive.nodes['set-details-name']
+  var $nameEl = ractive.find('#set-details-name')
 
   $nameEl.onkeypress = function(e) {
     e = e || window.event;

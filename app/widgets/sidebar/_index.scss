@@ -118,7 +118,7 @@
 .settings__avatar {
   @include icon(120px, 120px, block);
   width: 109px;
-  -webkit-mask-image: url(../img/hex-large.svg);
+  -webkit-mask-image: url('./assets/img/hex-large.svg');
   margin: 0 auto;
   margin-bottom: 10px;
 }

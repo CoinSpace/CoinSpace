@@ -1,10 +1,10 @@
 'use strict';
 
-var Ractive = require('cs-modal')
-var db = require('cs-db')
-var showError = require('cs-modal-flash').showError
-var sendRequest = require('cs-zendesk')
-var getNetwork = require('cs-network')
+var Ractive = require('widgets/modal')
+var db = require('lib/db')
+var showError = require('widgets/modal-flash').showError
+var sendRequest = require('lib/zendesk')
+var getNetwork = require('lib/network')
 
 function fetchDetails(data){
   db.get(function(err, doc){
@@ -20,7 +20,7 @@ function fetchDetails(data){
 function openModal(data){
   var ractive = new Ractive({
     partials: {
-      content: require('./content.ract').template
+      content: require('./content.ract')
     },
     data: data
   })

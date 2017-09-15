@@ -1,19 +1,19 @@
 'use strict';
 
-var Ractive = require('cs-ractive')
-var getAvatar = require('cs-avatar').getAvatar
-var emitter = require('cs-emitter')
-var geo = require('cs-geo')
-var showError = require('cs-modal-flash').showError
-var fadeIn = require('cs-transitions/fade.js').fadeIn
-var fadeOut = require('cs-transitions/fade.js').fadeOut
-var animatePin = require('cs-transitions/pinDrop.js').drop
-var resetPin = require('cs-transitions/pinDrop.js').reset
+var Ractive = require('lib/ractive')
+var getAvatar = require('lib/avatar').getAvatar
+var emitter = require('lib/emitter')
+var geo = require('lib/geo')
+var showError = require('widgets/modal-flash').showError
+var fadeIn = require('lib/transitions/fade.js').fadeIn
+var fadeOut = require('lib/transitions/fade.js').fadeOut
+var animatePin = require('lib/transitions/pinDrop.js').drop
+var resetPin = require('lib/transitions/pinDrop.js').reset
 
 module.exports = function(el){
   var ractive = new Ractive({
     el: el,
-    template: require('./index.ract').template,
+    template: require('./index.ract'),
     data: {
       exchangeRates: {},
       nearbys: [],
@@ -40,8 +40,8 @@ module.exports = function(el){
   })
 
   ractive.on('search-nearby', function(){
-    var pinEl = ractive.nodes['geo-pin']
-    var pulseEl = ractive.nodes['geo-pulse']
+    var pinEl = ractive.find('#geo-pin')
+    var pulseEl = ractive.find('#geo-pulse')
     resetPin(pinEl, function() {
       animatePin(pinEl, pulseEl)
     })
@@ -50,14 +50,14 @@ module.exports = function(el){
 
   ractive.on('search-again', function() {
     ractive.set('searchingAgain', true)
-    ractive.nodes.refresh_el.classList.add('loading')
+    ractive.find('#refresh_el').classList.add('loading')
     lookupGeo()
   })
 
   ractive.on('close-geo', function(){
     fadeOut(ractive.find('.js__fadeEl'), function(){
       if(ractive.get('searching')) {
-        var pinEl = ractive.nodes['geo-pin']
+        var pinEl = ractive.find('#geo-pin')
         resetPin(pinEl)
       }
       ractive.set('nearbys', [])
@@ -92,7 +92,7 @@ module.exports = function(el){
         // set a brief timeout so it "feels" like we're searching
         setTimeout(function(){
           setNearbys(results)
-          var pinEl = ractive.nodes['geo-pin']
+          var pinEl = ractive.find('#geo-pin')
           resetPin(pinEl)
           ractive.set('searching', false)
         }, 1500)
@@ -117,13 +117,13 @@ module.exports = function(el){
   }
 
   function cancelSpinner() {
-    if (!ractive.nodes.refresh_el) return ractive;
-
-    ractive.nodes.refresh_el.classList.remove('loading')
+    if (!ractive.find('#refresh_el')) return ractive;
+    var refresh_el = ractive.find('#refresh_el');
+    refresh_el.classList.remove('loading')
     // IE fix
-    var clone = ractive.nodes.refresh_el.cloneNode(true)
-    ractive.nodes.refresh_el.parentNode.replaceChild(clone, ractive.nodes.refresh_el)
-    ractive.nodes.refresh_el = clone
+    var clone = refresh_el.cloneNode(true)
+    refresh_el.parentNode.replaceChild(clone, refresh_el)
+    refresh_el = clone
   }
 
   return ractive

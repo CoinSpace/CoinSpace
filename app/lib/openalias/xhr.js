@@ -1,9 +1,6 @@
-var xhr = require('cs-xhr')
-var uriRoot = window.location.origin
-if(window.buildType === 'phonegap') {
-  uriRoot = process.env.PHONEGAP_URL
-}
-var getNetwork = require('cs-network')
+var xhr = require('lib/xhr')
+var uriRoot = process.env.SITE_URL
+var getNetwork = require('lib/network')
 
 function resolveTo(to, callback){
   if(getNetwork() != 'bitcoin') return callback({to: to})

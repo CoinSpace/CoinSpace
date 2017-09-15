@@ -1,7 +1,7 @@
 'use strict';
 
-var toAtom = require('cs-convert').toAtom
-var toUnitString = require('cs-convert').toUnitString
+var toAtom = require('lib/convert').toAtom
+var toUnitString = require('lib/convert').toUnitString
 
 function validateSend(wallet, to, unitValue, callback){
   var amount = toAtom(unitValue)

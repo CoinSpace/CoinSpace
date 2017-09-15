@@ -1,22 +1,21 @@
 'use strict';
 
 var Ractive = require('../auth')
-var CS = require('cs-wallet-js')
+var CS = require('lib/wallet')
 var confirmPassphrasePage = require('../create-confirm')
-var showError = require('cs-modal-flash').showError
+var showError = require('widgets/modal-flash').showError
 
 module.exports = function(prevPage){
   var ractive = new Ractive({
     partials: {
-      header: require('./header.ract').template,
-      actions: require('./actions.ract').template,
-      footer: require('./footer.ract').template
+      header: require('./header.ract'),
+      actions: require('./actions.ract'),
+      footer: require('./footer.ract')
     }
   })
 
   ractive.on('back', function(){
     prevPage()
-    ractive.teardown()
   })
 
   ractive.on('generate-phrase', function(){
