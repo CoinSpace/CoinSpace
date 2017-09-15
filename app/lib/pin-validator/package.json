@@ -1,8 +1,5 @@
 {
   "name": "cs-pin-validator",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
-  "style": "index.css",
-  "license": "GPL-2.0+"
+  "main": "index.js"
 }

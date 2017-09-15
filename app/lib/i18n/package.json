@@ -1,17 +1,5 @@
 {
   "name": "cs-i18n",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
-  "license": "GPL-2.0+",
-  "dependencies": {
-    "brfs": "^1.2.0",
-    "counterpart": "^0.16.0"
-  },
-  "browserify": {
-    "transform": [
-      "envify",
-      "brfs"
-    ]
-  }
+  "main": "index.js"
 }

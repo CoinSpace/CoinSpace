@@ -14,13 +14,15 @@
   "scripts": {
     "client": "webpack --config webpack.prod.js",
     "client:watch": "webpack-dev-server --config webpack.dev.js",
-    "dev:link": "linklocal -lr && linklocal -r --list | bulk -c 'npm install --production'",
+    "dev:link": "linklocal -lr",
     "server": "NODE_ENV=production node --expose-gc ./server/server.js",
     "server:watch": "nodemon -w .env.loc -w ./server -x 'node -r dotenv/config ./server/server.js dotenv_config_path=.env.loc'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "ajv": "^5.2.2",
     "b39": "git://github.com/CoinSpace/B39.git#v2.1.2",
+    "bitcoinjs-lib": "^1.5.7",
     "body-parser": "^1.18.1",
     "browserify-zepto": "^1.1.4",
     "clean-webpack-plugin": "^0.1.16",
@@ -34,7 +36,7 @@
     "cs-openalias": "file:./app/lib/openalias",
     "cs-pin-validator": "file:./app/lib/pin-validator",
     "cs-ticker-api": "file:./app/lib/ticker-api",
-    "cs-wallet": "git://github.com/CoinSpace/cs-wallet.git#v0.13.0",
+    "cs-wallet": "git://github.com/CoinSpace/cs-wallet.git#v0.13.1",
     "css-loader": "^0.28.7",
     "dotenv-webpack": "^1.5.4",
     "ejs-loader": "^0.3.0",
@@ -54,8 +56,10 @@
     "node-sass": "^4.5.3",
     "pouchdb": "^6.3.4",
     "qr.js": "0.0.0",
+    "querystring": "^0.2.0",
     "ractive": "^0.9.3",
     "ractive-loader": "^0.5.6",
+    "retry": "^0.10.1",
     "sass-loader": "^6.0.6",
     "secure-random": "^1.1.1",
     "strftime": "^0.10.0",
@@ -65,13 +69,14 @@
     "webpack": "^3.5.6",
     "webpack-merge": "^4.1.0",
     "worker-loader": "^0.8.1",
+    "xhr": "^2.4.0",
     "yaqrcode": "^0.2.1"
   },
   "devDependencies": {
-    "bulk": "^2.0.1",
     "cors": "^2.8.4",
     "linklocal": "^2.8.1",
     "nodemon": "^1.12.0",
+    "sinon": "^3.2.1",
     "webpack-dev-server": "^2.8.1"
   },
   "engines": {

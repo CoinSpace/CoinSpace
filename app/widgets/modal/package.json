@@ -1,10 +1,5 @@
 {
   "name": "cs-modal",
   "version": "0.0.0",
-  "main": "index.js",
-  "style": "index.css",
-  "license": "GPL-2.0+",
-  "browserify": {
-    "transform": ["ractify"]
-  }
+  "main": "index.js"
 }
