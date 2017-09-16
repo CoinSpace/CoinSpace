@@ -24,7 +24,6 @@ module.exports = function(prevPage){
     CS.createWallet(null, this.getNetwork(), function(err, data){
       if(err) return showError(err);
       confirmPassphrasePage(data)
-      ractive.teardown()
     })
   })
 

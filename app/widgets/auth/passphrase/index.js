@@ -56,7 +56,6 @@ function enterPassphrase(prevPage){
     }
 
     pinPage(enterPassphrase, data)
-    ractive.teardown()
   }
 
   return ractive

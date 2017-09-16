@@ -44,7 +44,6 @@ function confirm(data){
     if(!ractive.get('checked')) return animateCheckbox(ractive.find('#check'));
 
     pinPage(confirm, data)
-    ractive.teardown()
   })
 
   return ractive
