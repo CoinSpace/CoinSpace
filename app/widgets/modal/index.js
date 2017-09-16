@@ -10,7 +10,7 @@ var Modal = Ractive.extend({
   partials: {
     content: require('./content.ract'),
   },
-  oninit: function(){
+  onrender: function(){
 
     var self = this
     var fadeEl = self.find('.js__fadeEl')
@@ -19,19 +19,13 @@ var Modal = Ractive.extend({
       fadeEl.focus()
     })
 
-    self.on('cancel', function(event){
-      if(!event) return dismissModal();
-      var originalElement = event.original.srcElement || event.original.originalTarget;
+    self.on('cancel', function(context){
+      if(!context.node) return dismissModal();
+      var originalElement = context.original.srcElement || context.original.originalTarget;
       if(originalElement.classList && originalElement.classList.contains('_cancel')) {
         dismissModal()
       }
     })
-
-    document.addEventListener('keydown', keydownHandler)
-
-    self.on('teardown', function () {
-      window.removeEventListener('keydown', keydownHandler)
-    }, false)
 
     function dismissModal(){
       var onDismiss = self.get('onDismiss')
@@ -39,12 +33,6 @@ var Modal = Ractive.extend({
       fadeOut(fadeEl, function() {
         self.teardown()
       })
-    }
-
-    function keydownHandler(event) {
-      if(event.keyCode === 27){ //esc
-        dismissModal()
-      }
     }
   }
 })

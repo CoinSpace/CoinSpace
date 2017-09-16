@@ -35,8 +35,8 @@ module.exports = function(el){
     }
   })
 
-  ractive.on('switch-token', function(event) {
-    var token = event.node.id
+  ractive.on('switch-token', function(context) {
+    var token = context.node.id
     if(token === getNetwork()) return;
 
     var url = window.location.href.replace(/\?network=\w+/, '') + '?network=' + token

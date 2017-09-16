@@ -13,13 +13,13 @@ module.exports = function(el){
 
   initAccount(ractive.find('#account-details'))
 
-  ractive.on('logout', function(event){
-    event.original.preventDefault()
+  ractive.on('logout', function(context){
+    context.original.preventDefault()
     window.location.reload()
   })
 
-  ractive.on('about', function(e){
-      emitter.emit('open-terms')
+  ractive.on('about', function(){
+    emitter.emit('open-terms')
   })
 
   emitter.on('toggle-menu', function(open) {

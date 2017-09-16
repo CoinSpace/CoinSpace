@@ -98,8 +98,8 @@ module.exports = function(el){
     cancelSpinner();
   })
 
-  ractive.on('sync', function(event){
-    event.original.preventDefault();
+  ractive.on('sync', function(context){
+    context.original.preventDefault();
     if(!ractive.get('updating_transactions')) {
       ractive.set('updating_transactions', true)
       emitter.emit('sync-click')

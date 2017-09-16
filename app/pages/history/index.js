@@ -82,8 +82,8 @@ module.exports = function(el){
     ractive.set('loadingTx', true)
   })
 
-  ractive.on('show-detail', function(event) {
-    var index = event.node.getAttribute('data-index')
+  ractive.on('show-detail', function(context) {
+    var index = context.node.getAttribute('data-index')
     var data = ractive.data
     data.transaction = ractive.get('transactions')[index]
     showTransactionDetail(data)

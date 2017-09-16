@@ -169,12 +169,12 @@ module.exports = function(el){
     passfield.focus()
   })
 
-  ractive.on('focusAmountInput', function(event) {
-    event.node.parentNode.style.zIndex = 5000
+  ractive.on('focusAmountInput', function(context) {
+    context.node.parentNode.style.zIndex = 5000
   })
 
-  ractive.on('blurAmountInput', function(event) {
-    event.node.parentNode.style.zIndex = ''
+  ractive.on('blurAmountInput', function(context) {
+    context.node.parentNode.style.zIndex = ''
   })
 
   function validateAndShowConfirm(to, amount, alias, dynamicFees) {

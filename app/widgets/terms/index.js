@@ -1,7 +1,6 @@
 'use strict';
 
 var Ractive = require('lib/ractive')
-var emitter = require('lib/emitter')
 var $ = require('browserify-zepto')
 
 module.exports = function (el) {
@@ -10,8 +9,8 @@ module.exports = function (el) {
     template: require('./index.ract')
   })
 
-  ractive.on('back', function (e) {
-    e.original.preventDefault()
+  ractive.on('back', function (context) {
+    context.original.preventDefault()
     setTimeout(function () {
       $('#terms').addClass('closed')
       $('#sidebar').addClass('open')

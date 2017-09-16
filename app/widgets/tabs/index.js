@@ -67,10 +67,10 @@ module.exports = function(el){
     }
   })
 
-  ractive.on('select', function(event){
-    event.original.preventDefault();
-    emitter.emit('change-tab', event.node.dataset.tab)
-    highlightTab(event.node);
+  ractive.on('select', function(context){
+    context.original.preventDefault();
+    emitter.emit('change-tab', context.node.dataset.tab)
+    highlightTab(context.node);
   })
 
   return ractive

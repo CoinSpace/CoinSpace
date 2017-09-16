@@ -32,9 +32,9 @@ module.exports = function(el){
     }
   })
 
-  ractive.on('select', function(event){
-    event.original.preventDefault()
-    var address = event.node.getAttribute( 'data-wallet' )
+  ractive.on('select', function(context){
+    context.original.preventDefault()
+    var address = context.node.getAttribute( 'data-wallet' )
     emitter.emit('prefill-wallet', address)
     ractive.fire('close-geo')
   })
