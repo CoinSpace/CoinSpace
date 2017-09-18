@@ -32,18 +32,6 @@
     padding-bottom: 30px;
   }
 
-  ._avatar {
-    @include icon(55px, 55px, block, './assets/img/avatar_1.png');
-    margin-top: 10px;
-    width: 55px;
-    float: left;
-    margin-right: 10px;
-
-    @include breakpoint(portrait) {
-      @include icon(80px, 80px, block, './assets/img/avatar_1.png');
-    }
-  }
-
   ._address {
     @include ellipsis();
     @include media-obj;

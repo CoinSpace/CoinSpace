@@ -1,6 +1,18 @@
 'use strict';
 
 var crypto = require('crypto')
+var avatars = [
+  require('../../assets/img/avatar_0.png'),
+  require('../../assets/img/avatar_1.png'),
+  require('../../assets/img/avatar_2.png'),
+  require('../../assets/img/avatar_3.png'),
+  require('../../assets/img/avatar_4.png'),
+  require('../../assets/img/avatar_5.png'),
+  require('../../assets/img/avatar_6.png'),
+  require('../../assets/img/avatar_7.png'),
+  require('../../assets/img/avatar_8.png'),
+  require('../../assets/img/avatar_9.png')
+]
 
 function formatEmail(email){
   return email.trim().toLowerCase()
@@ -21,7 +33,7 @@ function randAvatarIndex(){
 }
 
 function getAvatarByIndex(index) {
-  return "assets/img/avatar_" + index + ".png"
+  return avatars[index]
 }
 
 function getAvatar(email, avatarIndex){
