@@ -79,8 +79,9 @@ emitter.on('wallet-auth', function(data){
       return console.error(err)
     }
 
-    PouchDB.replicate(db, remote).on('complete', function() {
-      emitter.emit('db-ready')
+    emitter.emit('db-ready')
+    PouchDB.replicate(db, remote).on('error', function(error) {
+      console.error('failed to replicate changes to server', error)
     })
   })
 })
