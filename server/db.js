@@ -10,7 +10,7 @@ cradle.setup({
 })
 
 var conn = new (cradle.Connection)({
-  secure: (process.env.NODE_ENV === "production"),
+  secure: true,
   auth: {
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD
