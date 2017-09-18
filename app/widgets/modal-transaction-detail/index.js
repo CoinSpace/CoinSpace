@@ -2,8 +2,7 @@
 
 var Ractive = require('widgets/modal')
 
-module.exports = function showTooltip(data){
-
+module.exports = function(data) {
   var content = null;
   if (data.isEthereum) {
     data.isPendingFee = data.transaction.fee === -1;

@@ -40,7 +40,7 @@
     </div>
 
     <div class="confirm__inputs">
-      <div class="_cancel" on-click="test-error">{{translate("Cancel")}}</div>
+      <div class="_cancel">{{translate("Cancel")}}</div>
       {{^sending}}
         <div class="_send" on-click="send">{{translate("Send")}}</div>
       {{/sending}}
@@ -82,8 +82,10 @@
     <p class="confirm__responseMsg">{{translate("Please make sure you are connected to the internet.")}}</p>
 
     <div class="confirm__inputs">
-      <div class="_report" on-click="open-support">{{translate("Report")}}</div>
-      <div class="_cancel" on-click="cancel">{{translate("Close")}}</div>
+      <a class="_report" onclick="window.open('https://coinspace.zendesk.com/hc/en-us', '_system'); return false;" href="">
+        <span class="_text">{{translate("Support")}}</span>
+      </a>
+      <div class="_cancel">{{translate("Close")}}</div>
     </div>
   {{/error}}
 

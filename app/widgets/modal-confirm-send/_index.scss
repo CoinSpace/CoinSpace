@@ -148,7 +148,7 @@
   }
 
   ._report {
-    @extend .csbtn;
+    @extend .csbtn--red;
     margin-right: 5px;
 
     @include breakpoint(portrait) {
@@ -199,6 +199,7 @@
   width: 120px;
   height: 120px;
   display: block;
+  text-align: center;
 }
 
 .confirm__responseTitle {

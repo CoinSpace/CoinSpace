@@ -84,8 +84,17 @@ module.exports = function(el){
 
   ractive.on('show-detail', function(context) {
     var index = context.node.getAttribute('data-index')
-    var data = ractive.data
-    data.transaction = ractive.get('transactions')[index]
+    var data = {
+      transaction: ractive.get('transactions')[index],
+      formatTimestamp: ractive.get('formatTimestamp'),
+      formatConfirmations: ractive.get('formatConfirmations'),
+      isReceived: ractive.get('isReceived'),
+      isConfirmed: ractive.get('isConfirmed'),
+      toUnitString: ractive.get('toUnitString'),
+      isEthereum: ractive.get('isEthereum'),
+      isBitcoin: ractive.get('isBitcoin'),
+      isLitecoin: ractive.get('isLitecoin'),
+    }
     showTransactionDetail(data)
   })
 

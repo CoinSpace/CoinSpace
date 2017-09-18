@@ -6,7 +6,6 @@ var getWallet = require('lib/wallet').getWallet
 var parseHistoryTx = require('lib/wallet').parseHistoryTx
 var toAtom = require('lib/convert').toAtom
 var toUnitString = require('lib/convert').toUnitString
-var openSupportModal = require('widgets/modal-support')
 var bitcoin = require('bitcoinjs-lib')
 var showInfo = require('widgets/modal-flash').showInfo
 var getNetwork = require('lib/network')
@@ -57,7 +56,6 @@ function open(data){
   emitter.emit('send-confirm-open')
 
   ractive.on('clear', function() {
-    ractive.fire('cancel')
     emitter.emit('clear-send-form')
   })
 
@@ -76,7 +74,7 @@ function open(data){
         ractive.set('sending', false)
         return showInfo({message: 'Please choose lower fee.'})
       }
-      return handleTransactionError()
+      return handleTransactionError(err)
     }
 
     wallet.sendTx(tx, function (err, historyTx){
@@ -90,13 +88,6 @@ function open(data){
       emitter.emit('append-transactions', [parseHistoryTx(historyTx)])
     })
   })
-
-  ractive.on('open-support', function(){
-    ractive.fire('cancel')
-    var message = ractive.data.translate("Please describe what happened above. Below are network error logs that could help us identify your issue.")
-    openSupportModal({description: "\n----\n" + message + "\n\n" + ractive.get('error')})
-  })
-
 
   function handleTransactionError(err) {
     ractive.set('confirmation', false)

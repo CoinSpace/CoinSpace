@@ -30,9 +30,7 @@ var Modal = Ractive.extend({
     function dismissModal(){
       var onDismiss = self.get('onDismiss')
       if(onDismiss) onDismiss();
-      fadeOut(fadeEl, function() {
-        self.teardown()
-      })
+      fadeOut(fadeEl)
     }
   }
 })
