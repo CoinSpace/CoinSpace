@@ -34,13 +34,13 @@
         <label class="_label" for="bitcoin">{{translate("Amount")}}</label>
 
           <div class="_input-group">
-            <input id="bitcoin" class="_input" type="number" min="0" value="{{value}}" on-keyup="bitcoin-to-fiat" on-enter="open-send" on-focus="focusAmountInput" on-blur="blurAmountInput">
+            <input id="bitcoin" class="_input" type="number" min="0" step="any" value="{{value}}" on-keyup="bitcoin-to-fiat" on-enter="open-send" on-focus="focusAmountInput" on-blur="blurAmountInput">
             <span class="_currency">{{denomination}}</span>
           </div>
 
           {{^exchangeRateUnavailable}}
           <div class="_input-group">
-            <input id="fiat" class="_input" type="number" min="0" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin" on-focus="focusAmountInput" on-blur="blurAmountInput">
+            <input id="fiat" class="_input" type="number" min="0" step="any" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin" on-focus="focusAmountInput" on-blur="blurAmountInput">
             <span class="_currency dropdown">
               <select value="{{selectedFiat}}">
                 {{#currencies}}
@@ -53,7 +53,7 @@
 
           {{#exchangeRateUnavailable}}
           <div class="_input-group">
-            <input id="fiat" class="_input _error" type="number" min="0" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin" on-focus="focusAmountInput" on-blur="blurAmountInput">
+            <input id="fiat" class="_input _error" type="number" min="0" step="any" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin" on-focus="focusAmountInput" on-blur="blurAmountInput">
             <span class="_currency--error dropdown">
               <select value="{{selectedFiat}}">
                 {{#currencies}}

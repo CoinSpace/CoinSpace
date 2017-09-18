@@ -37,8 +37,8 @@ function updateDoc(callback, processData) {
     doc.data = encrypt(JSON.stringify(data), sercret)
     db.put(doc, callback)
 
-    PouchDB.replicate(db, remote, function(err){
-      if(err) console.error("failed to replicate changes to server", err)
+    PouchDB.replicate(db, remote).on('error', function(error) {
+      console.error('failed to replicate changes to server', error)
     })
   })
 }
@@ -79,10 +79,8 @@ emitter.on('wallet-auth', function(data){
       return console.error(err)
     }
 
-    PouchDB.replicate(db, remote, {
-      complete: function(){
-        emitter.emit('db-ready')
-      }
+    PouchDB.replicate(db, remote).on('complete', function() {
+      emitter.emit('db-ready')
     })
   })
 })
@@ -99,17 +97,14 @@ function getRemote(data){
 }
 
 function firstTimePull() {
-  PouchDB.replicate(remote, db, {
-    complete: function(){
-      db.get(id, function(err){
-        if(err) {
-          if(err.status === 404) return initializeRecord();
-          return console.error(err)
-        }
-
-        emitter.emit('db-ready')
-      })
-    }
+  PouchDB.replicate(remote, db).on('complete', function() {
+    db.get(id, function(err){
+      if(err) {
+        if(err.status === 404) return initializeRecord();
+        return console.error(err)
+      }
+      emitter.emit('db-ready')
+    })
   })
 }
 

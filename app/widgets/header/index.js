@@ -26,6 +26,7 @@ module.exports = function(el){
       currencies: currencies,
       bitcoinToFiat: bitcoinToFiat,
       bitcoinPrice: bitcoinPrice,
+      selectedFiat: '',
       cropBalance: function(amount) {
         if(amount > 0.0001) {
           return toFixedFloor(amount, 4)
@@ -55,7 +56,7 @@ module.exports = function(el){
   emitter.once('db-ready', function(){
     db.get('systemInfo', function(err, info){
       if(err) return console.error(err);
-      ractive.set('fiatCurrency', info.preferredCurrency)
+      ractive.set('selectedFiat', info.preferredCurrency)
       sendIosCurrency(info.preferredCurrency)
       ractive.observe('selectedFiat', setPreferredCurrency)
     })
@@ -127,8 +128,8 @@ module.exports = function(el){
     }
   })
 
-  emitter.on('preferred-currency-changed', function(currency){
-    ractive.set('fiatCurrency', currency)
+  emitter.on('send-fiat-changed', function(currency){
+    ractive.set('selectedFiat', currency)
   })
 
   emitter.on('ticker', function(rates){
@@ -148,9 +149,9 @@ module.exports = function(el){
   }
 
   function setPreferredCurrency(currency, old){
-    if(old == undefined) return; //when loading wallet
+    if (old == undefined) return; // when loading wallet
 
-    emitter.emit('price-currency-changed', currency)
+    emitter.emit('header-fiat-changed', currency)
     sendIosCurrency(currency)
 
     db.set('systemInfo', {preferredCurrency: currency}, function(err, response){

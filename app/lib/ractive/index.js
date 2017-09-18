@@ -87,7 +87,6 @@ Ractive.prototype.show = function(){
   this.el.classList.add('current')
 }
 
-// Ractive.data = { translate: translate }
 Ractive.defaults.data = { translate: translate }
 
 module.exports = Ractive

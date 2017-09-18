@@ -22,6 +22,7 @@ module.exports = function(el){
     template: require('./index.ract'),
     data: {
       currencies: currencies,
+      selectedFiat: '',
       exchangeRates: {},
       qrScannerAvailable: process.env.BUILD_TYPE === 'phonegap',
       toUnitString: toUnitString,
@@ -90,7 +91,7 @@ module.exports = function(el){
     ractive.set('validating', false)
   })
 
-  emitter.on('price-currency-changed', function(currency) {
+  emitter.on('header-fiat-changed', function(currency) {
     ractive.set('selectedFiat', currency)
   })
 
@@ -205,9 +206,9 @@ module.exports = function(el){
   }
 
   function setPreferredCurrency(currency, old){
-    if(old == undefined) return; //when loading wallet
+    if (old == undefined) return; // when loading wallet
 
-    emitter.emit('preferred-currency-changed', currency)
+    emitter.emit('send-fiat-changed', currency)
     ractive.fire('bitcoin-to-fiat')
   }
 

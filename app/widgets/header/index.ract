@@ -24,16 +24,16 @@
 
   {{#showFiat}}
     <div class="header__balance" on-click="toggle-currencies">
-      <span class="_amount">{{bitcoinToFiat(bitcoinBalance, exchangeRates[fiatCurrency])}}</span>
-      <span class="_currency">{{fiatCurrency}}</span>
+      <span class="_amount">{{bitcoinToFiat(bitcoinBalance, exchangeRates[selectedFiat])}}</span>
+      <span class="_currency">{{selectedFiat}}</span>
     </div>
   {{/showFiat}}
 
   <div class="header__currency" title="{{translate("Current Bitcoin Price")}}">
-    {{bitcoinPrice(exchangeRates[fiatCurrency])}} {{fiatCurrency}}
+    {{bitcoinPrice(exchangeRates[selectedFiat])}} {{selectedFiat}}
     <select value="{{selectedFiat}}">
       {{#currencies}}
-        <option value="{{.}}" selected="{{fiatCurrency == . ? 'selected' : ''}}">{{.}}</option>
+        <option value="{{.}}">{{.}}</option>
       {{/currencies}}
     </select>
   </div>
