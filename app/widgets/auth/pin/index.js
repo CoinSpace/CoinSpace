@@ -26,7 +26,7 @@ module.exports = function(prevPage, data){
         return number != null
       }
     },
-    complete: function() {
+    oncomplete: function() {
       ractive.find('#setPin').focus();
     }
   })
