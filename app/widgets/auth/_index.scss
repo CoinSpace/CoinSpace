@@ -133,6 +133,7 @@
   padding-top: 20px;
   max-width: 240px;
   margin: 0 auto;
+  cursor: pointer;
 
   @include breakpoint(portrait) {
     padding-top: 40px;

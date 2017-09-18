@@ -4,8 +4,8 @@
 
 <p class="passphrase__warning">{{translate("Your passphrase will not be shown again.")}}<br />
   {{translate("Without it you will lose access to your wallet.")}}</p>
-<div class="passphrase__accept">
-  <div id="check" class="_checkbox" on-click="toggle-check">
+<div class="passphrase__accept" on-click="toggle-check">
+  <div id="check" class="_checkbox">
     {{#checked}}
       <div id="check" class="_check"></div>
     {{/checked}}
@@ -14,8 +14,8 @@
   <p class="_checktext">{{translate("I have written down or otherwise securely stored my passphrase")}}</p>
 </div>
 
-<div class="passphrase__accept">
-  <div id="check" class="_checkbox" on-click="toggle-terms-check">
+<div class="passphrase__accept" on-click="toggle-terms-check">
+  <div id="check" class="_checkbox">
     {{#termsChecked}}
       <div id="check" class="_check"></div>
     {{/termsChecked}}
