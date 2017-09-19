@@ -1,7 +1,7 @@
 'use strict';
 
 var Ractive = require('lib/ractive')
-var $ = require('browserify-zepto')
+var emitter = require('lib/emitter')
 
 module.exports = function (el) {
   var ractive = new Ractive({
@@ -11,12 +11,18 @@ module.exports = function (el) {
 
   ractive.on('back', function (context) {
     context.original.preventDefault()
-    setTimeout(function () {
-      $('#terms').addClass('closed')
-      $('#sidebar').addClass('open')
-      $('#main').removeClass('terms-open')
-      $('#terms').removeClass('terms-open')
-    }, 0)
+    emitter.emit('toggle-terms', false)
+    emitter.emit('toggle-menu', true)
+  })
+
+  emitter.on('toggle-terms', function(open) {
+    ractive.el.classList.add('terms-open')
+    if (open) {
+      ractive.el.classList.remove('closed')
+    } else {
+      ractive.el.classList.add('closed')
+      ractive.el.classList.remove('terms-open')
+    }
   })
 
   return ractive

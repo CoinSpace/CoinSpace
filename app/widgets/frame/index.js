@@ -10,7 +10,7 @@ var initSend = require('pages/send')
 var initReceive = require('pages/receive')
 var initHistory = require('pages/history')
 var initTokens = require('pages/tokens')
-var $ = require('browserify-zepto')
+var Hammer = require('hammerjs')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -35,24 +35,41 @@ module.exports = function(el){
   var currentPage = tabs.send
   showPage(tabs.send)
 
+  if (process.env.BUILD_TYPE === 'phonegap') {
+    Hammer(ractive.find('#main'), {velocity: 0.1}).on('swipeleft', function() {
+      if (currentPage === tabs.send) {
+        emitter.emit('change-tab', 'receive')
+      } else if (currentPage === tabs.receive) {
+        emitter.emit('change-tab', 'history')
+      } else if (currentPage === tabs.history) {
+        emitter.emit('change-tab', 'tokens')
+      }
+    })
+
+    Hammer(ractive.find('#main'), {velocity: 0.1}).on('swiperight', function() {
+      if (currentPage === tabs.tokens) {
+        emitter.emit('change-tab', 'history')
+      } else if (currentPage === tabs.history) {
+        emitter.emit('change-tab', 'receive')
+      } else if (currentPage === tabs.receive) {
+        emitter.emit('change-tab', 'send')
+      }
+    })
+  }
+
   emitter.on('change-tab', function(tab) {
     showPage(tabs[tab])
   })
 
-  emitter.on('open-terms', function(tab) {
-    $("#main").addClass('terms-open');
-    $("#terms").addClass('terms-open');
-
-    var classes = ractive.find('#sidebar').classList
-    classes.add('animating')
-    classes.remove('open')
-
-    setTimeout(function(){
-      $("#terms").removeClass('closed')
-    }, 0)
-    setTimeout(function(){
-      classes.remove('animating')
-    }, 300)
+  emitter.on('toggle-terms', function(open) {
+    var classes = ractive.find('#main').classList
+    if (open) {
+      classes.add('terms-open')
+      classes.add('closed')
+    } else {
+      classes.remove('terms-open')
+      classes.remove('closed')
+    }
   })
 
   function showPage(page){

@@ -2,7 +2,7 @@
 
 var emitter = require('lib/emitter')
 var PouchDB = require('pouchdb').default
-var $ = require('browserify-zepto')
+var merge = require('lodash.merge');
 var AES = require('lib/aes')
 var randAvatarIndex = require('lib/avatar').randAvatarIndex
 var encrypt = AES.encrypt
@@ -20,7 +20,7 @@ function userID(){
 function set(key, value, callback) {
   updateDoc(callback, function(data){
     if(data[key] && value != undefined) {
-      $.extend(true, data[key], value)
+      merge(data[key], value)
     } else {
       data[key] = value
     }

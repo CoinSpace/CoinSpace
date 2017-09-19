@@ -8,18 +8,15 @@ window.initCSApp = function() {
   var initFrame = require('widgets/frame')
   var initAuth = require('widgets/auth')
   var initGeoOverlay = require('widgets/geo-overlay')
-  var $ = require('browserify-zepto')
   var getNetwork = require('lib/network')
   var fadeIn = require('lib/transitions/fade.js').fadeIn
-  var sync = require('lib/wallet').sync
 
   var WatchModule = require('lib/apple-watch')
 
   var appEl = document.getElementById('app')
+  var htmlEl = document.documentElement
   var frame = initFrame(appEl)
   var auth = null
-  var _html = $('html')
-  var _app = $(appEl)
   fastclick.attach(document.body)
 
   initGeoOverlay(document.getElementById('geo-overlay'))
@@ -55,13 +52,13 @@ window.initCSApp = function() {
   })
 
   emitter.on('open-overlay', function(){
-    _app.addClass('is_hidden')
-    _html.addClass('prevent_scroll')
+    appEl.classList.add('is_hidden')
+    htmlEl.classList.add('prevent_scroll')
   })
 
   emitter.on('close-overlay', function(){
-    _app.removeClass('is_hidden')
-    _html.removeClass('prevent_scroll')
+    appEl.classList.remove('is_hidden')
+    htmlEl.classList.remove('prevent_scroll')
   })
 
   emitter.on('wallet-ready', function(){

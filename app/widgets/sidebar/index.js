@@ -2,7 +2,6 @@
 
 var Ractive = require('lib/ractive')
 var emitter = require('lib/emitter')
-var Dropdown = require('lib/transitions/dropdown.js')
 var initAccount = require('widgets/account-details')
 
 module.exports = function(el){
@@ -19,12 +18,13 @@ module.exports = function(el){
   })
 
   ractive.on('about', function(){
-    emitter.emit('open-terms')
+    emitter.emit('toggle-menu', false)
+    emitter.emit('toggle-terms', true)
   })
 
   emitter.on('toggle-menu', function(open) {
     var classes = ractive.el.classList
-    if(open) {
+    if (open) {
       classes.add('open')
     } else {
       classes.add('animating')
