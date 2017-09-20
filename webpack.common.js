@@ -1,14 +1,14 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   entry: {
     loader: './app/loader/index.js',
-    application: './app/application.js',
-    nope: './app/loader/nope.js'
   },
   output: {
     filename: 'assets/js/[name].[hash].js',
+    chunkFilename: 'assets/js/[name].[hash].js',
     path: path.resolve(__dirname, 'build'),
   },
   resolve: {
@@ -44,5 +44,8 @@ module.exports = {
       chunks: ['loader'],
       template: 'app/index.ejs'
     }),
+    new webpack.ProvidePlugin({
+      'Promise': 'es6-promise'
+    })
   ]
 };
