@@ -18,7 +18,7 @@ module.exports = merge(common, {
     port: 8000,
     proxy: {
       '/api': {
-        target: 'http://localhost:' + dotEnv.definitions['process.env.PORT'],
+        target: 'http://localhost:' + JSON.parse(dotEnv.definitions['process.env.PORT']),
         pathRewrite: {'^/api' : ''}
       }
     }
