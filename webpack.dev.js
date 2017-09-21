@@ -3,6 +3,11 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 
+const dotEnv = new Dotenv({
+  path: '.env.loc',
+  safe: true
+});
+
 module.exports = merge(common, {
   output: {
     publicPath: '/'
@@ -11,6 +16,12 @@ module.exports = merge(common, {
     contentBase: false,
     hot: true,
     port: 8000,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:' + dotEnv.definitions['process.env.PORT'],
+        pathRewrite: {'^/api' : ''}
+      }
+    }
   },
   module: {
     rules: [
@@ -33,9 +44,6 @@ module.exports = merge(common, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new Dotenv({
-      path: '.env.loc',
-      safe: true
-    }),
+    dotEnv
   ]
 });

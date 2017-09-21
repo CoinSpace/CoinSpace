@@ -24,7 +24,6 @@
     "compression": "^1.7.0",
     "cookie-parser": "^1.4.3",
     "cookie-session": "^1.3.1",
-    "cors": "^2.8.4",
     "cradle": "^0.7.1",
     "cs-openalias": "file:./app/lib/openalias",
     "cs-pin-validator": "file:./app/lib/pin-validator",

@@ -5,7 +5,6 @@ var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 var cookieSession = require('cookie-session')
 var compress = require('compression')
-var cors = require('cors')
 var path = require('path')
 var auth = require('./auth')
 var geo = require('./geo')
@@ -55,8 +54,6 @@ module.exports = function (){
       maxAge: hundredEightyDaysInMilliseconds,
       includeSubdomains: true
     }))
-  } else {
-    app.use(cors());
   }
 
   var anHour = 1000*60*60
