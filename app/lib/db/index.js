@@ -87,13 +87,16 @@ emitter.on('wallet-auth', function(data){
 })
 
 function getRemote(data){
-  var scheme = 'https'
+  var scheme = process.env.DB_PORT === '443' ? 'https' : 'http'
   var url = [
-    scheme, "://",
-    id, ":", data.token, data.pin,
-    "@", process.env.DB_HOST
+    scheme, '://',
+    id, ':', data.token, data.pin,
+    '@', process.env.DB_HOST
   ]
-  url = url.concat(["/cs", id]).join('')
+  if (process.env.DB_PORT !== '443') {
+   url = url.concat([':', process.env.DB_PORT])
+  }
+  url = url.concat(['/cs', id]).join('')
   return new PouchDB(url)
 }
 

@@ -8,11 +8,7 @@ node_modules
 app/**/node_modules
 npm-debug.log
 .DS_Store
-.vagrant/
-provisioning/
 .idea/
 phonegap/
 .env.*
 .vscode/
-certs/
-package.json

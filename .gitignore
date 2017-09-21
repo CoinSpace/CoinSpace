@@ -3,13 +3,12 @@ npm-debug.log
 bundle.*
 build/
 .DS_Store
-.vagrant
-provisioners
 .idea
 /phonegap/build.json
 /phonegap/release.keystore
 /.env.*
+!.env.example
 docker-compose.dev.yml
 docker-compose.prod.yml
 .vscode/
-certs/
+build_old

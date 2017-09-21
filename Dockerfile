@@ -1,11 +1,14 @@
-FROM node:0.12.18
+FROM node:6.11.3
 
-WORKDIR /app/user
-COPY package.server.json /app/user/package.json
+WORKDIR /coinspace
+COPY package.json ./package.json
+
+COPY ./app/lib/openalias ./app/lib/openalias
+COPY ./app/lib/pin-validator ./app/lib/pin-validator
+COPY ./app/lib/ticker-api ./app/lib/ticker-api
+
 RUN npm version && \
   npm install --production && \
   npm cache clean
 
-COPY . /app/user/
-ENV PATH ./node_modules/.bin:$PATH
-RUN aperture open
+COPY . ./

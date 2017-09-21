@@ -35,6 +35,7 @@ module.exports = merge(common, {
     new webpack.NamedModulesPlugin(),
     new Dotenv({
       path: '.env.loc',
+      safe: true
     }),
   ]
 });
