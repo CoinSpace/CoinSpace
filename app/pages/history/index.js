@@ -56,7 +56,7 @@ module.exports = function(el){
 
   emitter.on('append-transactions', function(newTxs){
     newTxs.forEach(function(tx) {
-      transactions.unshift(tx)
+      ractive.unshift('transactions', tx);
     })
     ractive.set('loadingTx', false)
   })

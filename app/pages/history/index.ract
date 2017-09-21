@@ -8,7 +8,7 @@
   {{#transactions.length}}
     <h3 class="_title">{{translate("Your transaction history")}}</h3>
   {{/transactions.length}}
-  {{#transactions:index}}
+  {{#each transactions: index}}
     <div class="transactions__item" title="{{id}}" data-index="{{index}}" on-click="show-detail">
 
       <div class="_detail">
@@ -30,7 +30,7 @@
       <div class="_address">{{isReceived(this) ? translate('Received') : getToAddress(this)}}</div>
 
     </div>
-  {{/transactions}}
+  {{/each}}
   {{^transactions}}
     {{^loadingTx}}
       <div class="transactions__message">
