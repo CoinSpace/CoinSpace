@@ -9,6 +9,7 @@ var webpack = require('webpack');
 program
   .name('build-web.js')
   .option('-e, --env <env>', 'environment', 'dev')
+  .option('--scale <number>', 'scale web containers')
   .option('--no-deploy', 'no deploy')
   .parse(process.argv);
 
@@ -34,12 +35,10 @@ prompt.get(utils.prompts.yesno, function (err, result) {
 
     utils.shell('docker-compose build web');
 
-    if (program.env == 'loc') {
-      utils.shell('docker-compose up -d');
-    } else {
-      utils.shell(`docker-compose -f docker-compose.${program.env}.yml up -d`);
-    }
+    var config = program.env !== 'loc' ? `-f docker-compose.${program.env}.yml` : '';
+    var scale = program.scale ? `--scale web=${program.scale}` : '';
 
+    utils.shell(`docker-compose ${config} up -d ${scale}`);
     console.log('Done!');
   });
 });
