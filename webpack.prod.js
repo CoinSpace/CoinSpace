@@ -1,15 +1,16 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 const Dotenv = require('dotenv-webpack');
-const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 
 const envFile = process.env.ENV_FILE ? process.env.ENV_FILE : '.env.prod';
 
-module.exports = merge(common, {
+var config = merge(common, {
   output: {
     publicPath: '/'
   },
@@ -20,13 +21,25 @@ module.exports = merge(common, {
         use: ExtractTextPlugin.extract({
           use: [
             {
-              loader: 'css-loader'
+              loader: 'css-loader',
+              options: {
+                minimize: true
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: [
+                  autoprefixer
+                ]
+              }
             },
             {
               loader: 'sass-loader'
             }
           ],
-          fallback: 'style-loader'
+          fallback: 'style-loader',
+          publicPath: '../../'
         })
       },
     ]
@@ -38,14 +51,9 @@ module.exports = merge(common, {
       path: envFile,
       safe: true
     }),
-    // # use it later
-    // new webpack.DefinePlugin({
-      // 'process.env.BUILD_TYPE': JSON.stringify('phonegap'),
-      // 'process.env.BUILD_PLATFORM': JSON.stringify('ios')
-    // }),
     new UglifyJSPlugin({
       mangle: {
-        except: ['Array','BigInteger','Boolean','Buffer','ECPair','Function','Number','Point']
+        except: ['Array','BigInteger','Boolean','Buffer','ECPair','Function','Number','Point','Script']
       }
     }),
     new ExtractTextPlugin({
@@ -54,3 +62,17 @@ module.exports = merge(common, {
     })
   ]
 });
+
+if (process.env.BUILD_TYPE === 'phonegap') {
+  var htmlPlugin = config.plugins.find(function(plugin) {
+    return plugin instanceof HtmlWebpackPlugin;
+  });
+  htmlPlugin.options.chunks = ['deviceready'];
+
+  config.entry['deviceready'] = './phonegap/deviceready.js';
+  delete config.entry['loader'];
+
+  config.output.publicPath = '';
+}
+
+module.exports = config;

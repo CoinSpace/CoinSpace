@@ -2,6 +2,9 @@
 
 var execSync = require('child_process').execSync;
 var chalk = require('chalk');
+var path = require('path');
+var cordovaPath = path.resolve(__dirname, '../node_modules/.bin/', 'cordova');
+var mobileBuildPath = 'phonegap/build';
 
 var yesno = {
   name: 'yesno',
@@ -11,14 +14,20 @@ var yesno = {
   default: 'no'
 };
 
-function shell(command) {
+function shell(command, options) {
   console.log(`Executing: ${chalk.green(command)}`);
-  execSync(command, {stdio: [0,1,2]});
+  var defaultOptions = {stdio: [0,1,2]};
+  execSync(command, Object.assign(defaultOptions, options));
+}
+
+function cordova(command) {
+  shell(`${cordovaPath} ${command}`, {cwd: mobileBuildPath});
 }
 
 module.exports = {
   prompts: {
     yesno: yesno
   },
-  shell: shell
+  shell: shell,
+  cordova: cordova,
 };

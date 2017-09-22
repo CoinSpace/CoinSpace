@@ -6,8 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1 user-scalable=0">
   <meta name="description" content="Coin.Space Wallet is a free online bitcoin &amp;amp; litecoin wallet which you can use to make worldwide payments for free. We make paying with bitcoins easy and secure">
   <meta name="keywords" content="Secure, shared wallet, bitcoin, litecoin, web wallet, coin space">
-  <!-- CORDOVA-WHITELIST-CSP -->
-
+  <% if (process.env.BUILD_TYPE === 'phonegap') { %>
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self' blob: gap:;
+    connect-src 'self' blob:
+    <%= process.env.API_BTC_URL %>
+    <%= process.env.API_LTC_URL %>
+    <%= process.env.API_ETH_URL %>
+    <%= process.env.SITE_URL %>
+    https://<%= process.env.DB_HOST %>;
+    font-src 'self';
+    img-src 'self' data: https://www.gravatar.com;
+    style-src 'self' 'unsafe-inline';
+    script-src 'self' blob: 'unsafe-eval' 'unsafe-inline';">
+  <% } %>
   <link rel="apple-touch-icon" sizes="57x57" href="<%= require('./assets/icons/apple-touch-icon-57x57.png') %>">
   <link rel="apple-touch-icon" sizes="60x60" href="<%= require('./assets/icons/apple-touch-icon-60x60.png') %>">
   <link rel="apple-touch-icon" sizes="72x72" href="<%= require('./assets/icons/apple-touch-icon-72x72.png') %>">
@@ -34,6 +46,7 @@
   <div id="app"></div>
   <div id="auth" class="auth__modal current">
     <div id="loader">
+      <% if (process.env.BUILD_TYPE !== 'phonegap') { %>
       <div id="logo_animation">
         <svg version="1.1" x="0px" y="0px" width="100%" height="180px" viewBox="0 0 156 38" style="enable-background:new 0 0 156 38;">
           <path fill="#367D40" d="M63.4,20.9c-1.1-1.2-2.2-1.5-3.2-1.5c-3.1,0-5.2,2.4-5.2,5.5c0,3.3,2.1,5.7,5.2,5.7c1.2,0,2.4-0.6,3.4-1.9
@@ -75,6 +88,7 @@
           <path fill="#367D40" d="M23.6,12h0.6v1h0.4v-1h0.6v1h3.4c-0.8-1.4-2.4-2.4-4.1-2.4c-1.7,0-3.2,1-3.9,2.4h3V12z"/>
         </svg>
       </div>
+      <% } %>
       <div id="loader-message"></div>
       <div class="preload jigsaw-light">a</div>
       <div class="preload jigsaw-regular">a</div>
@@ -82,9 +96,10 @@
       <div class="preload jigsaw-bold">a</div>
     </div>
   </div>
-  <!-- CORDOVA.JS -->
-  <!-- CONFIG -->
-  <!-- CONFIG-PLATFORM -->
+
+  <% if (process.env.BUILD_TYPE === 'phonegap') { %>
+  <script src="cordova.js"></script>
+  <% } %>
 </body>
 </html>
 

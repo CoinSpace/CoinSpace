@@ -7,8 +7,8 @@ module.exports = {
     loader: './app/loader/index.js',
   },
   output: {
-    filename: 'assets/js/[name].[hash].js',
-    chunkFilename: 'assets/js/[name].[hash].js',
+    filename: 'assets/js/[name].[hash:8].js',
+    chunkFilename: 'assets/js/[name].[hash:8].js',
     path: path.resolve(__dirname, 'build'),
   },
   resolve: {

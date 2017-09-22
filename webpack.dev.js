@@ -1,6 +1,7 @@
 const Dotenv = require('dotenv-webpack');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const autoprefixer = require('autoprefixer');
 const common = require('./webpack.common.js');
 
 const dotEnv = new Dotenv({
@@ -33,6 +34,14 @@ module.exports = merge(common, {
           },
           {
             loader: 'css-loader'
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [
+                autoprefixer
+              ]
+            }
           },
           {
             loader: 'sass-loader'
