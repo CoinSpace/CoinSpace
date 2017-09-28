@@ -50,6 +50,7 @@ webpack(webpackConfig, function(error, stats) {
   utils.cordova('plugin add cordova-plugin-x-socialsharing@5.2.0');
   utils.cordova('plugin add cordova-facebook-audnet-sdk@4.23.0');
   utils.cordova('plugin add cordova-plugin-facebookads@4.23.2');
+  utils.cordova('plugin add cordova-plugin-android-fingerprint-auth@1.4.0');
 
   if (program.release) {
     utils.cordova('build android --release');

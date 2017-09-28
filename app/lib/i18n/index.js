@@ -36,5 +36,6 @@ function getLanguage(){
 
 module.exports = {
   loadTranslation: loadTranslation,
-  translate: safeTranslate
+  translate: safeTranslate,
+  getLanguage: getLanguage
 }

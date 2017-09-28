@@ -6,6 +6,7 @@ var emitter = require('lib/emitter')
 var validatePin = require('lib/pin-validator')
 var showError = require('widgets/modal-flash').showError
 var translate = require('lib/i18n').translate
+var getLanguage = require('lib/i18n').getLanguage
 var pincode = ''
 
 module.exports = function(prevPage, data){
@@ -31,6 +32,8 @@ module.exports = function(prevPage, data){
     }
   })
 
+  initFingerprintAuth();
+
   ractive.on('focus-pin', function(){
     ractive.set('pinfocused', true)
   })
@@ -38,30 +41,6 @@ module.exports = function(prevPage, data){
   ractive.on('blur-pin', function(){
     ractive.set('pinfocused', false)
   })
-
-  if(process.env.BUILD_PLATFORM === 'ios'){
-      window.plugins.touchid.isAvailable(function() {
-          CS.setAvailableTouchId()
-
-          CS.walletExists(function(walletExists){
-              if(CS.getPin() && walletExists && userExists) {
-                  window.plugins.touchid.verifyFingerprintWithCustomPasswordFallbackAndEnterPasswordLabel(
-                      translate("Scan your fingerprint please"),
-                      translate("Enter PIN"),
-                      function() {
-                          ractive.set('pin', CS.getPin())
-                          var pin = CS.getPin()
-                          var boxes = pin.split('')
-                          for(var i=boxes.length; i<4; i++) {
-                              boxes[i] = null
-                          }
-                          ractive.set('boxes', boxes)
-                      }
-                  )
-              }
-          })
-      })
-  }
 
   function pinCode(pin) {
       return function(){
@@ -91,11 +70,7 @@ module.exports = function(prevPage, data){
       }, 0)
     }
 
-    for(var i=boxes.length; i<4; i++) {
-      boxes[i] = null
-    }
-    ractive.set('boxes', boxes)
-
+    setBoxes(boxes);
   })
 
   ractive.on('enter-pin', function(){
@@ -127,7 +102,7 @@ module.exports = function(prevPage, data){
   emitter.on('clear-pin', function() {
     ractive.find('#setPin').value = ''
     ractive.set('pin', '')
-    ractive.set('boxes', [null, null, null, null])
+    setBoxes([]);
   })
 
   ractive.on('clear-credentials', function(){
@@ -146,6 +121,13 @@ module.exports = function(prevPage, data){
     return pin ? pin.toString() : ''
   }
 
+  function setBoxes(boxes) {
+    for (var i = boxes.length; i < 4; i++) {
+      boxes[i] = null
+    }
+    ractive.set('boxes', boxes);
+  }
+
   function openWithPin(){
     CS.openWalletWithPin(getPin(), ractive.getNetwork(),
                          ractive.onSyncDone, ractive.onTxSyncDone)
@@ -154,6 +136,47 @@ module.exports = function(prevPage, data){
   function setPin(){
     CS.setPin(getPin(), ractive.getNetwork(),
               ractive.onSyncDone, ractive.onTxSyncDone)
+  }
+
+  function initFingerprintAuth() {
+    if (process.env.BUILD_PLATFORM === 'ios') {
+      window.plugins.touchid.isAvailable(function() {
+        CS.setAvailableTouchId()
+        CS.walletExists(function(walletExists) {
+          var pin = CS.getPin()
+          if (pin && walletExists && userExists) {
+            window.plugins.touchid.verifyFingerprintWithCustomPasswordFallbackAndEnterPasswordLabel(
+              translate('Scan your fingerprint please'),
+              translate('Enter PIN'),
+              function() {
+                ractive.set('pin', pin)
+                var boxes = pin.split('')
+                setBoxes(boxes);
+              }
+            )
+          }
+        })
+      })
+    }
+
+    if (process.env.BUILD_PLATFORM === 'android') {
+      var FingerprintAuth = window.FingerprintAuth;
+      FingerprintAuth.isAvailable(function(result) {
+        if (!result.isAvailable) return false;
+        CS.setAvailableTouchId()
+        CS.walletExists(function(walletExists) {
+          var pin = CS.getPin()
+          if (pin && walletExists && userExists) {
+            var config = {clientId: 'coinspace', locale: getLanguage()};
+            FingerprintAuth.encrypt(config, function() {
+              ractive.set('pin', pin)
+              var boxes = pin.split('')
+              setBoxes(boxes);
+            });
+          }
+        })
+      });
+    }
   }
 
   return ractive
