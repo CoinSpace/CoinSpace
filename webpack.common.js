@@ -49,6 +49,11 @@ module.exports = {
       template: 'app/apple-app-site-association.ejs',
       filename: 'apple-app-site-association'
     }),
+    new HtmlWebpackPlugin({
+      inject: false,
+      template: 'app/apple-app-site-association.ejs',
+      filename: '.well-known/apple-app-site-association'
+    }),
     new webpack.ProvidePlugin({
       'Promise': 'es6-promise'
     })
