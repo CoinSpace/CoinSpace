@@ -1,0 +1,13 @@
+<div class="exchange__frame">
+
+  {{#isLoading}}
+    <div class="loader__message">{{translate("Loading...")}}</div>
+  {{/isLoading}}
+
+  <div id="exchange_create" class="step"></div>
+  <div id="exchange_awaiting_deposit" class="step"></div>
+  <div id="exchange_awaiting" class="step"></div>
+  <div id="exchange_complete" class="step"></div>
+  <div id="exchange_error" class="step"></div>
+
+</div>

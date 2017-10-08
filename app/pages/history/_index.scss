@@ -95,6 +95,9 @@
   ._message {
     font-size: 24px;
     line-height: 1.2;
+    @include breakpoint(portrait) {
+      font-size: 32px;
+    }
   }
 
 }
@@ -103,6 +106,9 @@
   .transactions__item {
     ._amount {
       font-size: 18px;
+      @include breakpoint(portrait) {
+        font-size: 24px;
+      }
     }
   }
 }

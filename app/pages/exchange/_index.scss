@@ -1,0 +1,20 @@
+.exchange__frame {
+  .step {
+    display: none;
+    &.current {
+      display: block;
+    }
+  }
+  .loader__message {
+    padding: 40px;
+    color: $grey;
+    text-align: center;
+    font-size: 24px;
+    @include breakpoint(portrait) {
+      font-size: 32px;
+    }
+  }
+}
+
+@import "./create/_index";
+@import "./awaiting-deposit/_index";

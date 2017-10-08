@@ -74,6 +74,7 @@ partials.svg_user = require('lib/svg/user.ract')
 partials.svg_mecto = require('lib/svg/mecto.ract')
 partials.svg_warning = require('lib/svg/warning.ract')
 partials.svg_mecto_not_found = require('lib/svg/mecto_not_found.ract')
+partials.svg_exchange = require('lib/svg/exchange.ract')
 partials.svg_error = require('lib/svg/error.ract')
 partials.svg_appstore = require('lib/svg/appstore.ract')
 

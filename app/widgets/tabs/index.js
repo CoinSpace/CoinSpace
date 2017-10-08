@@ -12,6 +12,7 @@ module.exports = function(el){
   var tabElements = {
     send: '#send_tab',
     receive: '#receive_tab',
+    exchange: '#exchange_tab',
     history: '#history_tab',
     tokens: '#tokens_tab'
   }

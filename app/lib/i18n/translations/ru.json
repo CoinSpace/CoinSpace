@@ -75,7 +75,7 @@
     "Received": "Получено",
     "You do not have any transactions yet": "У вас пока нет транзакций",
     "Transaction Id:": "Код транзакции:",
-    "Transaction Fee:": "Transaction Fee:",
+    "Transaction Fee:": "Комиссия транзакции:",
     "Inputs:": "Inputs:",
     "Outputs:": "Outputs:",
     "Sent to:": "Отправить:",
@@ -119,6 +119,9 @@
     "fastest": "самый быстрый",
     "minimum": "минимальный",
     "Unparsed address": "Неизвестный адрес",
-    "From:": "От кого:",
-    "To:": "Кому:"
+    "From:": "Откуда:",
+    "To:": "Куда:",
+    "Exchange": "Обменять",
+    "From": "Откуда",
+    "To": "Куда"
 }

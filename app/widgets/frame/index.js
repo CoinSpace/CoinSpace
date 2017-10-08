@@ -8,6 +8,7 @@ var initSidebar = require('widgets/sidebar')
 var initTerms = require('widgets/terms')
 var initSend = require('pages/send')
 var initReceive = require('pages/receive')
+var initExchange = require('pages/exchange')
 var initHistory = require('pages/history')
 var initTokens = require('pages/tokens')
 var Hammer = require('hammerjs')
@@ -28,6 +29,7 @@ module.exports = function(el){
   var tabs = {
     send: initSend(ractive.find('#send')),
     receive: initReceive(ractive.find('#receive')),
+    exchange: initExchange(ractive.find('#exchange')),
     history: initHistory(ractive.find('#history')),
     tokens: initTokens(ractive.find('#tokens'))
   }
@@ -40,6 +42,8 @@ module.exports = function(el){
       if (currentPage === tabs.send) {
         emitter.emit('change-tab', 'receive')
       } else if (currentPage === tabs.receive) {
+        emitter.emit('change-tab', 'exchange')
+      } else if (currentPage === tabs.exchange) {
         emitter.emit('change-tab', 'history')
       } else if (currentPage === tabs.history) {
         emitter.emit('change-tab', 'tokens')
@@ -50,6 +54,8 @@ module.exports = function(el){
       if (currentPage === tabs.tokens) {
         emitter.emit('change-tab', 'history')
       } else if (currentPage === tabs.history) {
+        emitter.emit('change-tab', 'exchange')
+      } else if (currentPage === tabs.exchange) {
         emitter.emit('change-tab', 'receive')
       } else if (currentPage === tabs.receive) {
         emitter.emit('change-tab', 'send')

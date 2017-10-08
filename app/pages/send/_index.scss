@@ -248,13 +248,12 @@
 .send__btn--validating {
   @extend .csbtn-base;
   position: relative;
-  margin-left: 5px;
-  color: darken($grey, 20%);
   background-color: $grey;
   transform: translate(0px, 3px);
   box-shadow: 0 0px 0 0;
-  &:hover {
-    color: darken($grey, 20%);
+  height: 60px;
+  @include breakpoint(portrait) {
+    height: 72px;
   }
   ._icon {
     position: absolute;
@@ -264,8 +263,13 @@
     margin-left: -15px;
     width: 30px;
     height: 30px;
-    display: inline;
-    animation:  infinite-spinning 1s linear infinite;
+    animation: infinite-spinning 1s linear infinite;
+    @include breakpoint(portrait) {
+      margin-top: -18px;
+      margin-left: -18px;
+      width: 36px;
+      height: 36px;
+    }
     .svg-refresh {
       fill: darken($grey, 20%);
     }

@@ -11,6 +11,12 @@
     </span>
     <span class="tab__text">{{translate("Receive")}}</span>
   </a>
+  <a id="exchange_tab" data-tab='exchange' class="tab" on-click="select">
+    <span class="tab__icon">
+      {{>svg_exchange}}
+    </span>
+    <span class="tab__text">{{translate("Exchange")}}</span>
+  </a>
   <a id="history_tab" data-tab='history' class="tab" on-click="select">
     <span class="tab__icon">
       {{>svg_history}}

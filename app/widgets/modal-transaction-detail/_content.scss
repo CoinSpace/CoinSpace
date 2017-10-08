@@ -76,6 +76,9 @@
   .transaction__detail {
     ._amount {
       font-size: 24px;
+      @include breakpoint(portrait) {
+        font-size: 32px;
+      }
     }
   }
 }
