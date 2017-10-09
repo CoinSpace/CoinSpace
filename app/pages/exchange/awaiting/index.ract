@@ -1,0 +1,9 @@
+<div class="exchange_awaiting">
+
+  <h2 class="_subtitle">Deposit has been received <br> Awaiting exchange...</h2>
+
+  <span class="_loading_icon">
+    {{>svg_refresh}}
+  </span>
+
+</div>
