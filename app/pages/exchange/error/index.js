@@ -8,9 +8,7 @@ module.exports = function(el) {
     el: el,
     template: require('./index.ract'),
     data: {
-      toSymbol: '',
-      toAddress: '',
-      amount: ''
+      message: '',
     }
   });
 
@@ -19,12 +17,8 @@ module.exports = function(el) {
     emitter.emit('change-exchange-step', 'create');
   });
 
-  emitter.on('set-exchange-complete', function(data) {
-    ractive.set({
-      toSymbol: data.toSymbol,
-      toAddress: data.toAddress,
-      amount: data.amount
-    });
+  emitter.on('set-exchange-error', function(error) {
+    ractive.set('message', error);
   });
 
   return ractive;

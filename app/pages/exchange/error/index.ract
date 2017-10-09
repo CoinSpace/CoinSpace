@@ -1,0 +1,18 @@
+<div class="exchange_error">
+
+      <div class="exchange_header">
+        <div class="_back" on-click="back">
+          <span class="_icon"></span> Close
+        </div>
+        <h2 class="_subtitle">{{translate("Whoops!")}}</h2>
+      </div>
+
+      <div class="_error_icon">
+        {{>svg_error}}
+      </div>
+
+      <div class="_message">
+        {{message}}
+      </div>
+
+    </div>
