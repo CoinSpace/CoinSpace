@@ -130,5 +130,6 @@
   "Address (optional)": "Address (optional)",
   "Deposit address": "Deposit address (%(symbol)s)",
   "Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress": "Send up to %(depositMax)s %(depositSymbol)s to deposit address.\nIt will be converted into %(toSymbol)s, and sent to\n %(toAddress)s",
-  "Deposit Minimum": "Deposit Minimum"
+  "Deposit Minimum": "Deposit Minimum",
+  "amount :toSymbol have been delivered to :toAddress": "%(amount)s %(toSymbol)s have been delivered to\n %(toAddress)s"
 }

@@ -1,0 +1,22 @@
+<div class="exchange_complete">
+
+  <div class="exchange_header">
+    <div class="_back" on-click="back">
+      <span class="_icon"></span> Done
+    </div>
+    <h2 class="_subtitle">Exchange complete!</h2>
+  </div>
+
+  <div class="_complete_icon">
+    {{>svg_success}}
+  </div>
+
+  <div class="_message">
+    {{translate("amount :toSymbol have been delivered to :toAddress", {
+      amount: amount,
+      toSymbol: toSymbol,
+      toAddress: toAddress
+    })}}
+  </div>
+
+</div>

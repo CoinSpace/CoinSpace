@@ -5,6 +5,7 @@ var emitter = require('lib/emitter');
 var initCreate = require('./create');
 var initAwaitingDeposit = require('./awaiting-deposit');
 var initAwaiting = require('./awaiting');
+var initComplete = require('./complete');
 
 module.exports = function(el) {
   var ractive = new Ractive({
@@ -18,7 +19,8 @@ module.exports = function(el) {
   var steps = {
     create: initCreate(ractive.find('#exchange_create')),
     awaitingDeposit: initAwaitingDeposit(ractive.find('#exchange_awaiting_deposit')),
-    awaiting: initAwaiting(ractive.find('#exchange_awaiting'))
+    awaiting: initAwaiting(ractive.find('#exchange_awaiting')),
+    complete: initComplete(ractive.find('#exchange_complete'))
   };
   var currentStep = steps.create;
 
@@ -36,7 +38,14 @@ module.exports = function(el) {
     // });
     // showStep(steps.awaitingDeposit);
 
-    showStep(steps.awaiting);
+    // showStep(steps.awaiting);
+
+    emitter.emit('set-exchange-complete', {
+      amount: '0.01318363',
+      toSymbol: '',
+      toAddress: '18GgXVrcQhnB3QhLpq3np7eVLzDwCrgQQx'
+    });
+    showStep(steps.complete);
   }, 300);
 
   emitter.on('change-exchange-step', function(step) {

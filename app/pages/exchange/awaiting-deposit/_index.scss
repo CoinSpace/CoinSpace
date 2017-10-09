@@ -8,6 +8,7 @@
       color: #999;
       display: inline-block;
       margin-left: -10px;
+      margin-bottom: 5px;
       @include breakpoint(portrait) {
         font-size: 20px;
       }
