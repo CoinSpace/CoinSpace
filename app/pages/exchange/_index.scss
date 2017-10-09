@@ -1,5 +1,6 @@
 .exchange__frame {
   .step {
+    margin-bottom: 25px;
     display: none;
     &.current {
       display: block;
@@ -14,6 +15,23 @@
       font-size: 32px;
     }
   }
+  ._powered_by {
+    @extend .jigsaw-regular;
+    text-align: center;
+    @include breakpoint(portrait) {
+      font-size: 20px;
+    }
+    ._icon {
+      background: url('./assets/img/shapeshift.png') no-repeat;
+      background-size: 32px 32px;
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      margin-top: -8px;
+      vertical-align: top;
+    }
+  }
+
 }
 
 @import "./create/_index";
