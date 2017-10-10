@@ -127,7 +127,7 @@
     "Exchange rate": "Обменный курс",
     "Loading...": "Загрузка...",
     "Address": "Адрес",
-    "Address (optional)": "Адрес (необязательно)",
+    "Return address (optional)": "Обратный адрес (необязательно)",
     "Deposit address": "Депозитный адрес (%(symbol)s)",
     "Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress": "Отправьте до %(depositMax)s %(depositSymbol)s на депозитный адрес.\nЭто будет конвертировано в %(toSymbol)s, и отправлено на\n %(toAddress)s",
     "Deposit Minimum": "Минимальный депозит",

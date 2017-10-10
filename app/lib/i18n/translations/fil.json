@@ -127,7 +127,7 @@
     "Exchange rate": "Exchange rate",
     "Loading...": "Loading...",
     "Address": "Address",
-    "Address (optional)": "Address (optional)",
+    "Return address (optional)": "Return address (optional)",
     "Deposit address": "Deposit address (%(symbol)s)",
     "Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress": "Send up to %(depositMax)s %(depositSymbol)s to deposit address.\nIt will be converted into %(toSymbol)s, and sent to\n %(toAddress)s",
     "Deposit Minimum": "Deposit Minimum",
