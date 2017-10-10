@@ -2,9 +2,9 @@
 
   <div class="exchange_header">
     <div class="_back" on-click="back">
-      <span class="_icon"></span> Done
+      <span class="_icon"></span> {{translate("Done")}}
     </div>
-    <h2 class="_subtitle">Exchange complete!</h2>
+    <h2 class="_subtitle">{{translate("Exchange complete!")}}</h2>
   </div>
 
   <div class="_complete_icon">

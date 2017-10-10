@@ -2,9 +2,9 @@
 
   <div class="exchange_header">
     <div class="_back" on-click="back">
-      <span class="_icon"></span> Back
+      <span class="_icon"></span> {{translate("Back")}}
     </div>
-    <h2 class="_subtitle">Awaiting deposit...</h2>
+    <h2 class="_subtitle">{{translate("Awaiting deposit...")}}</h2>
   </div>
 
   <div class="instructions">
