@@ -1,6 +1,6 @@
 'use strict';
 
-var xhr = require('xhr')
+var request = require('lib/request')
 
 var tickers = {
   bitcoin: 'BTC',
@@ -10,7 +10,7 @@ var tickers = {
 }
 
 var network = null
-var uriRoot = process.env.SITE_URL
+var urlRoot = process.env.SITE_URL
 
 function BitcoinAverage(n){
   network = n
@@ -21,19 +21,10 @@ function BitcoinAverage(n){
 
 BitcoinAverage.prototype.getExchangeRates = function(callback){
   var ticker = tickers[network]
-  var uri = uriRoot + '/ticker?crypto=' + ticker
-  xhr({
-    uri: uri,
-    timeout: 10000,
-    method: 'GET'
-  }, function(err, resp, body){
-    if(resp.statusCode !== 200) {
-      console.error(body)
-      return callback(err)
-    }
-
-    callback(null, JSON.parse(body))
-  })
+  var url = urlRoot + '/ticker?crypto=' + ticker
+  request({url: url}).then(function(data) {
+    callback(null, data);
+  }).catch(callback);
 }
 
 module.exports = BitcoinAverage

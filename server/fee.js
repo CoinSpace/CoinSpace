@@ -1,4 +1,4 @@
-var request = require('request')
+var axios = require('axios')
 var db = require('./db')
 var feeDB = db('fee')
 var cacheId = 'bitcoinfees.21.co'
@@ -10,15 +10,9 @@ function save(data) {
 }
 
 function getFromAPI(callback) {
-  request({
-    uri: 'https://bitcoinfees.21.co/api/v1/fees/recommended',
-    json: true
-  }, function(error, response, body) {
-    if (error || !response || response.statusCode !== 200) {
-      return callback({error: error, status: response ? response.statusCode : 'empty response'})
-    }
-    callback(null, body);
-  })
+  axios.get('https://bitcoinfees.21.co/api/v1/fees/recommended').then(function(response) {
+    callback(null, response.data)
+  }).catch(callback)
 }
 
 function getFromCache(callback) {

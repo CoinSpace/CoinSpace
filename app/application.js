@@ -73,13 +73,13 @@ window.initCSApp = function() {
     ticker.getExchangeRates(function(err, rates){
       if (rates) {
         if (process.env.BUILD_PLATFORM === 'ios') {
-          var respone = {}
-          respone.command = 'currencyMessage'
-          respone.currency = rates;
+          var message = {}
+          message.command = 'currencyMessage'
+          message.currency = rates;
 
           WatchModule.setRates(rates)
 
-          WatchModule.sendMessage(respone, 'comandAnswerQueue')
+          WatchModule.sendMessage(message, 'comandAnswerQueue')
         }
         emitter.emit('ticker', rates);
       }

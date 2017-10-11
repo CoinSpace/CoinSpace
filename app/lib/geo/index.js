@@ -1,10 +1,10 @@
 'use strict';
 
-var xhr = require('lib/xhr')
+var request = require('lib/request')
 var db = require('lib/db')
 var getWallet = require('lib/wallet').getWallet
 var getNetwork = require('lib/network')
-var uriRoot = process.env.SITE_URL
+var urlRoot = process.env.SITE_URL
 var userInfo = {}
 var networks = {
   BTC: 'bitcoin',
@@ -28,37 +28,17 @@ function fetchUserInfo(network, callback){
 }
 
 function save(callback){
-  requestLocationEndpoint(false, 'POST', function(err, resp, body){
-    if(!resp || resp.statusCode !== 201) {
-      console.error(body)
-      return callback(body)
-    }
-    callback(null)
-  })
+  requestLocationEndpoint(false, 'POST', callback)
 }
 
 function search(network, callback) {
-  requestLocationEndpoint(network, 'PUT', function(err, resp, body){
-    if(!resp || resp.statusCode !== 200) {
-      console.error(body)
-      return callback(body)
-    }
-    callback(null, JSON.parse(body))
-  })
+  requestLocationEndpoint(network, 'PUT', callback)
 }
 
-function remove(sync){
-  xhr({
-    uri: uriRoot + "/location",
-    headers: { "Content-Type": "application/json" },
-    method: 'DELETE',
-    sync: sync
-  }, function(err, resp, body){
-    if(!resp || resp.statusCode !== 200) {
-      console.error(body)
-    } else {
-      console.log('location data removed')
-    }
+function remove() {
+  request({
+    url: urlRoot + '/location',
+    method: 'delete'
   })
 }
 
@@ -96,12 +76,13 @@ function requestLocationEndpoint(network, method, callback){
       userInfo.lat = lat
       userInfo.lon = lon
 
-      xhr({
-        uri: uriRoot + "/location",
-        headers: { "Content-Type": "application/json" },
+      request({
+        url: urlRoot + '/location',
         method: method,
-        body: JSON.stringify(userInfo)
-      }, callback)
+        data: userInfo
+      }).then(function(data) {
+        callback(null, data)
+      }).catch(callback)
     })
   })
 }

@@ -37,8 +37,7 @@ module.exports = function(el) {
   });
 
   ractive.on('before-show', function() {
-    shapeshift.getCoins(function(err, coins) {
-      if (err) return console.error(err);
+    shapeshift.getCoins().then(function(coins) {
       ractive.set('isLoading', false);
       ractive.set('coins', coins);
 
@@ -49,6 +48,8 @@ module.exports = function(el) {
       } else {
         getRate();
       }
+    }).catch(function(err) {
+      console.error(err);
     });
   });
 
@@ -131,6 +132,7 @@ module.exports = function(el) {
     console.log('to', ractive.get('toSymbol'));
 
     ractive.set('isValidating', true);
+    // shapeshift.validateAddress()
     setTimeout(function() {
     //   emitter.emit('set-exchange-awaiting-deposit', {
     //     depositAddress: 'LfmssDyX6iZvbVqHv6t9P6JWXia2JG7mdb',
@@ -171,10 +173,11 @@ module.exports = function(el) {
 
   function getRate() {
     ractive.set('isLoadingRate', true);
-    shapeshift.getRate(ractive.get('fromSymbol'), ractive.get('toSymbol'), function(err, rate) {
-      if (err) return console.error(err);
+    shapeshift.getRate(ractive.get('fromSymbol'), ractive.get('toSymbol')).then(function(rate) {
       ractive.set('isLoadingRate', false);
       ractive.set('rate', rate);
+    }).catch(function(err) {
+      console.error(err);
     });
   }
 

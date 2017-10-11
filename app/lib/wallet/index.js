@@ -14,7 +14,7 @@ var BtcLtcWallet = require('cs-wallet')
 var validateSend = require('./validator')
 var rng = require('secure-random').randomBuffer
 var bitcoin = require('bitcoinjs-lib')
-var xhr = require('lib/xhr')
+var request = require('lib/request')
 var cache = require('memory-cache')
 var EthereumWallet = require('cs-ethereum-wallet');
 
@@ -31,7 +31,7 @@ var Wallet = {
   ethereum: EthereumWallet
 }
 
-var uriRoot = process.env.SITE_URL
+var urlRoot = process.env.SITE_URL
 
 function createWallet(passphrase, network, callback) {
   var message = passphrase ? 'Decoding seed phrase' : 'Generating'
@@ -222,17 +222,13 @@ function getDynamicFees(callback) {
     return callback({hourFeePerKb: fees.hour * 1000, fastestFeePerKb: fees.fastest * 1000})
   }
 
-  xhr({
-    uri: uriRoot + '/fees',
-    method: 'GET'
-  }, function(err, resp, body){
-    if(resp.statusCode !== 200) {
-      console.error(body)
-      return callback({})
-    }
-    var data = JSON.parse(body)
+  request({
+    url: urlRoot + '/fees'
+  }).then(function(data) {
     cache.put('bitcoinFees', {hour: data.hour, fastest: data.fastest}, 10 * 60 * 1000)
     callback({hourFeePerKb: data.hour * 1000, fastestFeePerKb: data.fastest * 1000})
+  }).catch(function() {
+    callback({})
   })
 }
 

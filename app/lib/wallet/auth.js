@@ -1,9 +1,8 @@
 'use strict';
 
-var xhr = require('lib/xhr')
+var request = require('lib/request')
 var db = require('lib/db')
-var querystring = require('querystring')
-var uriRoot = process.env.SITE_URL
+var urlRoot = process.env.SITE_URL
 
 function register(wallet_id, pin, callback) {
   postCredentials('register', { wallet_id: wallet_id, pin: pin }, callback)
@@ -14,31 +13,24 @@ function login(wallet_id, pin, callback) {
 }
 
 function exist(wallet_id, callback) {
-  xhr({
-    uri: uriRoot + "/exist?wallet_id=" + wallet_id,
-    method: 'GET'
-  }, function(err, resp, body){
-    if(resp.statusCode !== 200) {
-      console.error(body)
-      return callback(JSON.parse(body))
-    }
-    callback(null, body === 'true')
-  })
+  request({
+    url: urlRoot + '/exist?wallet_id=' + wallet_id
+  }).then(function(data) {
+    callback(null, data)
+  }).catch(callback)
 }
 
 function disablePin(wallet_id, pin, callback) {
-  xhr({
-    uri: uriRoot + "/pin",
-    headers: { "Content-Type": "application/json" },
-    method: 'DELETE',
-    body: JSON.stringify({id: wallet_id, pin: pin})
-  }, function(err, resp, body){
-    if(resp.statusCode !== 200) {
-      console.error(body)
-      return callback(JSON.parse(body))
+  request({
+    url: urlRoot + '/pin',
+    method: 'delete',
+    data: {
+      id: wallet_id,
+      pin: pin
     }
-    callback()
-  })
+  }).then(function(data) {
+    callback(null, data)
+  }).catch(callback)
 }
 
 function setUsername(firstName, callback) {
@@ -50,34 +42,27 @@ function setUsername(firstName, callback) {
 
     if(username == oldUsername) return callback(null, doc.userInfo.firstName);
 
-    xhr({
-      uri: uriRoot + "/username",
-      headers: { "Content-Type": "application/json" },
-      method: 'POST',
-      body: JSON.stringify({id: db.userID(), username: username})
-    }, function(err, resp, body){
-      if(resp.statusCode !== 200) {
-        return callback(JSON.parse(body))
+    request({
+      url: urlRoot + '/username',
+      method: 'post',
+      data: {
+        id: db.userID(),
+        username: username
       }
-      var data = JSON.parse(body)
+    }).then(function(data) {
       callback(null, data.username)
-    })
+    }).catch(callback);
   })
 }
 
 function postCredentials(endpoint, data, callback) {
-  xhr({
-    uri: uriRoot + "/" +  endpoint,
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    method: 'POST',
-    body: querystring.stringify(data)
-  }, function(err, resp, body){
-    if(resp.statusCode !== 200) {
-      console.error(body)
-      return callback(JSON.parse(body))
-    }
-    callback(null, body)
-  })
+  request({
+    url: urlRoot + '/' +  endpoint,
+    method: 'post',
+    data: data
+  }).then(function(data) {
+    callback(null, data)
+  }).catch(callback)
 }
 
 module.exports = {

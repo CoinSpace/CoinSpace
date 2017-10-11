@@ -1,4 +1,4 @@
-var request = require('request')
+var axios = require('axios')
 var db = require('./db')
 var tickerDB = db('ticker')
 var crypto = require('crypto')
@@ -13,20 +13,16 @@ function save(cacheId, data) {
 }
 
 function getFromAPI(cryptoTicker, callback) {
-  request({
-    uri: tickerUrl,
+  axios({
+    url: tickerUrl,
     headers: {'X-Signature': getSignature()},
-    json: true,
-    qs: {
+    params: {
       crypto: cryptoTicker,
       fiat: currencies.join()
-    },
-  }, function(error, response, body) {
-    if (error || !response || response.statusCode !== 200) {
-      return callback({error: error, status: response ? response.statusCode : 'empty response'})
     }
-    callback(null, toRates(body, cryptoTicker));
-  })
+  }).then(function(response) {
+    return callback(null, toRates(response.data, cryptoTicker));
+  }).catch(callback)
 }
 
 function getFromCache(cacheId, callback) {

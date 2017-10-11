@@ -1,35 +1,31 @@
 'use strict';
 
-var xhr = require('lib/xhr');
-var uriRoot = 'https://shapeshift.io';
+var request = require('lib/request');
+var urlRoot = 'https://shapeshift.io';
 var prioritySymbols = ['BTC', 'LTC', 'ETH'];
 
-function getCoins(callback) {
-  xhr({
-    uri: uriRoot + '/getcoins',
-    method: 'GET'
-  }, function(err, resp, body){
-    if (resp.statusCode !== 200) {
-      console.error(body);
-      return callback(JSON.parse(body));
-    }
-    var coins = JSON.parse(body);
-    callback(null, getCoinsArray(coins));
+function getCoins() {
+  return request({
+    url: urlRoot + '/getcoins'
+  }).then(function(coins) {
+    return getCoinsArray(coins);
   });
 }
 
-function getRate(fromSymbol, toSymbol, callback) {
+function getRate(fromSymbol, toSymbol) {
   var pair = (fromSymbol + '_' + toSymbol).toLowerCase();
-  xhr({
-    uri: uriRoot + '/rate/' + pair,
-    method: 'GET'
-  }, function(err, resp, body){
-    if (resp.statusCode !== 200) {
-      console.error(body);
-      return callback(JSON.parse(body));
-    }
-    var data = JSON.parse(body);
-    callback(null, data.rate);
+  return request({
+    url: urlRoot + '/rate/' + pair,
+  }).then(function(data) {
+    return data.rate
+  });
+}
+
+function validateAddress(address, symbol) {
+  return request({
+    url: urlRoot + '/validateAddress/' + address + '/' + symbol,
+  }).then(function(data) {
+    return data.isValid;
   });
 }
 
@@ -57,5 +53,6 @@ function getCoinsArray(coins) {
 
 module.exports = {
   getCoins: getCoins,
-  getRate: getRate
+  getRate: getRate,
+  validateAddress: validateAddress
 };
