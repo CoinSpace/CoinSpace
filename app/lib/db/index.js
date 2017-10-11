@@ -12,6 +12,7 @@ var db = new PouchDB('cs')
 var remote = null
 var id = null
 var sercret = null
+var isReady = false
 
 function userID(){
   return id
@@ -79,6 +80,7 @@ emitter.on('wallet-auth', function(data){
       return console.error(err)
     }
 
+    isReady = true
     emitter.emit('db-ready')
     PouchDB.replicate(db, remote, {doc_ids: [id]}).on('error', function(error) {
       console.error('failed to replicate changes to server', error)
@@ -107,6 +109,7 @@ function firstTimePull() {
         if(err.status === 404) return initializeRecord();
         return console.error(err)
       }
+      isReady = true
       emitter.emit('db-ready')
     })
   })
@@ -131,6 +134,7 @@ function initializeRecord(){
   db.put(doc, function(err){
     if(err) return console.error(err);
 
+    isReady = true
     emitter.emit('db-ready')
   })
 }
@@ -138,6 +142,9 @@ function initializeRecord(){
 module.exports = {
   userID: userID,
   get: get,
-  set: set
+  set: set,
+  isReady: function() {
+    return isReady;
+  }
 }
 

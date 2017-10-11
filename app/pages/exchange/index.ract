@@ -1,7 +1,7 @@
 <div class="exchange__frame">
 
   {{#isLoading}}
-    <div class="loader__message">{{translate("Loading...")}}</div>
+    {{>loader}}
   {{/isLoading}}
 
   <div id="exchange_create" class="step"></div>
@@ -9,9 +9,5 @@
   <div id="exchange_awaiting" class="step"></div>
   <div id="exchange_complete" class="step"></div>
   <div id="exchange_error" class="step"></div>
-
-  <div class="_powered_by">
-    Powered by <a href="https://shapeshift.io/">ShapeShift <span class="_icon"></span></a>
-  </div>
 
 </div>

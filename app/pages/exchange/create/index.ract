@@ -1,24 +1,27 @@
+{{#if isLoading}}
+  {{>loader}}
+{{else}}
 <div class="exchange_create">
   <form>
 
     <div class="exchange__address from">
       <div class="_exchange_group">
-        <label for="exchange_from" class="_label">{{translate("From")}}
+        <label for="exchange_return_address" class="_label">{{translate("From")}}
           <div class="_select_container">
-            LTC
-            <select value="ltc">
-              <option value="btc">Bitcoin</option>
-              <option value="ltc">Litecoin</option>
-              <option value="eth">Ethereum</option>
+            {{fromSymbol}}
+            <select class="js-from-symbol-select" value="{{fromSymbol}}">
+              {{#coins}}
+                <option value="{{symbol}}" {{#disabled}}disabled{{/disabled}}>{{symbol}} - {{name}}</option>
+              {{/coins}}
             </select>
           </div>
           <div class="input__container">
-            <input id="exchange_from" class="_input" type="text" placeholder="{{translate("Address (optional)")}}" autocorrect="off" autocapitalize="off" value="{{from}}" />
-            {{#fromEntered}}
-              <div class="close__input" on-click="clearFrom">
+            <input id="exchange_return_address" class="_input" type="text" placeholder="{{translate("Return address (optional)")}}" autocorrect="off" autocapitalize="off" value="{{returnAddress}}" />
+            {{#returnAddress}}
+              <div class="close__input" on-click="clearAddress" data-context="exchange-return-address">
                 <span class="_icon">{{> svg_close}}</span>
               </div>
-            {{/fromEntered}}
+            {{/returnAddress}}
           </div>
         </label>
         <span class="_help" on-click="help">
@@ -27,18 +30,27 @@
       </div>
 
       {{#qrScannerAvailable}}
-        <div class="_btn _btn-qr" on-click="open-qr">
+        <div class="_btn _btn-qr" on-click="open-qr" data-context="exchange-return-address">
           <span class="_icon">
             {{>svg_qr}}
           </span>
         </div>
       {{/qrScannerAvailable}}
 
-      <div class="_btn" on-click="open-geo">
-        <span class="_icon">
-          {{>svg_mecto}}
-        </span>
-      </div>
+      {{#if isGeoEnabled(fromSymbol)}}
+        <div class="_btn" on-click="open-geo" data-context="exchange-return-address">
+          <span class="_icon">
+            {{>svg_mecto}}
+          </span>
+        </div>
+      {{else}}
+        <div class="_btn _disabled">
+          <span class="_icon">
+            {{>svg_mecto}}
+          </span>
+        </div>
+      {{/if}}
+
     </div>
 
     <div class="swap__button" on-click="swap">
@@ -48,42 +60,56 @@
     </div>
 
     <div class="exchange__address">
-      <label for="exchange_to" class="_label">{{translate("To")}}
+      <label for="exchange_to_address" class="_label">{{translate("To")}}
         <div class="_select_container">
-          BTC
-          <select value="btc">
-            <option value="btc">Bitcoin</option>
-            <option value="ltc">Litecoin</option>
-            <option value="eth">Ethereum</option>
+          {{toSymbol}}
+          <select class="js-to-symbol-select" value="{{toSymbol}}">
+            {{#coins}}
+              <option value="{{symbol}}" {{#disabled}}disabled{{/disabled}}>{{symbol}} - {{name}}</option>
+            {{/coins}}
           </select>
         </div>
         <div class="input__container">
-          <input id="exchange_to" class="_input" type="text" placeholder="{{translate("Address")}}" autocorrect="off" autocapitalize="off" value="{{to}}" />
-          {{#toEntered}}
-            <div class="close__input" on-click="clearTo">
+          <input id="exchange_to_address" class="_input" type="text" placeholder="{{translate("Address")}}" autocorrect="off" autocapitalize="off" value="{{toAddress}}" />
+          {{#toAddress}}
+            <div class="close__input" on-click="clearAddress" data-context="exchange-to-address">
               <span class="_icon">{{> svg_close}}</span>
             </div>
-          {{/toEntered}}
+          {{/toAddress}}
         </div>
       </label>
 
       {{#qrScannerAvailable}}
-        <div class="_btn _btn-qr" on-click="open-qr">
+        <div class="_btn _btn-qr" on-click="open-qr" data-context="exchange-to-address">
           <span class="_icon">
             {{>svg_qr}}
           </span>
         </div>
       {{/qrScannerAvailable}}
 
-      <div class="_btn" on-click="open-geo">
+      {{#if isGeoEnabled(toSymbol)}}
+      <div class="_btn" on-click="open-geo" data-context="exchange-to-address">
         <span class="_icon">
           {{>svg_mecto}}
         </span>
       </div>
+      {{else}}
+        <div class="_btn _disabled">
+          <span class="_icon">
+            {{>svg_mecto}}
+          </span>
+        </div>
+      {{/if}}
     </div>
 
     <h3 class="_title">{{translate("Exchange rate")}}</h3>
-    <div class="exchange__rate">1 LTC = 0.08859920 BTC</div>
+    <div class="exchange__rate">
+      {{#if isLoadingRate}}
+        {{translate("Loading...")}}
+      {{else}}
+        1 {{fromSymbol}} = {{rate}} {{toSymbol}}
+      {{/if}}
+    </div>
 
   </form>
 
@@ -100,3 +126,6 @@
   </div>
 
 </div>
+{{>footer}}
+
+{{/if}}

@@ -29,7 +29,7 @@ function remove(doc) {
 
 function getIdsOlderThan(age, callback) {
   var now = new Date().getTime();
-  query = {
+  var query = {
     selector: {
       _id: { $gt: 0 },
       timestamp: { $lt: now - age }

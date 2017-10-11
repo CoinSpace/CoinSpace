@@ -18,15 +18,21 @@ module.exports = function(el){
       exchangeRates: {},
       nearbys: [],
       searching: true,
-      getAvatar: getAvatar
+      getAvatar: getAvatar,
+      context: '',
+      network: null
     }
   })
 
-  emitter.on('open-overlay', function(data){
+  emitter.on('open-overlay', function(data) {
     if(data.overlay === 'geo') {
       ractive.set('searching', true)
       fadeIn(ractive.find('.js__fadeEl'), function() {
-        ractive.set('search_message', 'Searching your area for other Coin Space users')
+        ractive.set({
+          context: data.context,
+          network: data.network,
+          search_message: 'Searching your area for other Coin Space users'
+        });
         ractive.fire('search-nearby')
       })
     }
@@ -35,7 +41,7 @@ module.exports = function(el){
   ractive.on('select', function(context){
     context.original.preventDefault()
     var address = context.node.getAttribute( 'data-wallet' )
-    emitter.emit('prefill-wallet', address)
+    emitter.emit('prefill-wallet', address, ractive.get('context'))
     ractive.fire('close-geo')
   })
 
@@ -49,6 +55,7 @@ module.exports = function(el){
   })
 
   ractive.on('search-again', function() {
+    if (ractive.get('searchingAgain')) return false;
     ractive.set('searchingAgain', true)
     ractive.find('#refresh_el').classList.add('loading')
     lookupGeo()
@@ -63,12 +70,11 @@ module.exports = function(el){
       ractive.set('nearbys', [])
       ractive.set('searching', false)
       emitter.emit('close-overlay')
-      geo.remove()
     })
   })
 
   function lookupGeo(context) {
-    geo.search(function(err, results){
+    geo.search(ractive.get('network'), function(err, results){
 
       if(ractive.get('searchingAgain')) {
         // wait for spinner to spin down
@@ -120,10 +126,6 @@ module.exports = function(el){
     if (!ractive.find('#refresh_el')) return ractive;
     var refresh_el = ractive.find('#refresh_el');
     refresh_el.classList.remove('loading')
-    // IE fix
-    var clone = refresh_el.cloneNode(true)
-    refresh_el.parentNode.replaceChild(clone, refresh_el)
-    refresh_el = clone
   }
 
   return ractive

@@ -6,11 +6,11 @@
         <label class="_label" for="to">{{translate("Wallet address")}}
           <div class="input__container">
             <input id="to" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{to}}" />
-            {{#toEntered}}
+            {{#to}}
               <div class="close__input" on-click="clearTo">
                 <span class="_icon">{{> svg_close}}</span>
               </div>
-            {{/toEntered}}
+            {{/to}}
           </div>
         </label>
 

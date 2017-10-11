@@ -15,6 +15,7 @@ var validateSend = require('lib/wallet').validateSend
 var getDynamicFees = require('lib/wallet').getDynamicFees
 var resolveTo = require('lib/openalias/xhr.js').resolveTo
 var getNetwork = require('lib/network')
+var qrcode = require('lib/qrcode')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -24,7 +25,7 @@ module.exports = function(el){
       currencies: currencies,
       selectedFiat: '',
       exchangeRates: {},
-      qrScannerAvailable: process.env.BUILD_TYPE === 'phonegap',
+      qrScannerAvailable: qrcode.isScanAvailable,
       toUnitString: toUnitString,
       isBitcoin: getNetwork() === 'bitcoin' || getNetwork() === 'testnet',
       isEthereum: getNetwork() === 'ethereum'
@@ -37,46 +38,19 @@ module.exports = function(el){
     ractive.set('fiatValue', '')
   })
 
-  emitter.on('prefill-wallet', function(address) {
+  emitter.on('prefill-wallet', function(address, context) {
+    if (context !== 'send') return;
     ractive.set('to', address)
   })
 
-  emitter.on('prefill-value', function(value) {
+  emitter.on('prefill-value', function(value, context) {
+    if (context !== 'send') return;
     ractive.set('value', value)
     ractive.fire('bitcoin-to-fiat')
   })
 
   ractive.on('open-qr', function(){
-    if (ractive.get('qrScannerAvailable')) {
-      cordova.plugins.barcodeScanner.scan(
-        function(result) {
-          if (result.text) {
-            var address = result.text.split('?')[0].split(':').pop()
-
-            var wallet = getWallet();
-            if (ractive.get('isEthereum') && wallet.isValidIban(address)) {
-              address = wallet.getAddressFromIban(address);
-            }
-
-            emitter.emit('prefill-wallet', address)
-
-            var match = result.text.match(/amount=([0-9.]+)/)
-            if (match && match[1]) {
-              emitter.emit('prefill-value', match[1])
-            }
-          }
-          if (window.FacebookAds && window.FacebookAds.fixBanner) {
-            window.FacebookAds.fixBanner();
-          }
-        },
-        function () {
-          navigator.notification.alert(
-            'Access to the camera has been prohibited; please enable it in the Settings app to continue',
-            function(){},
-            'Coin Space'
-          )
-        }, {showTorchButton: true})
-    }
+    qrcode.scan({context: 'send', isEthereum: ractive.get('isEthereum')});
   })
 
   ractive.on('open-geo', function(){
@@ -155,18 +129,9 @@ module.exports = function(el){
     ractive.set('fiatValue', fiat)
   })
 
-  ractive.observe('to', function(newValue) {
-    if(newValue) {
-      ractive.set('toEntered', true)
-    } else {
-      ractive.set('toEntered', false)
-    }
-  })
-
   ractive.on('clearTo', function(){
     var passfield = ractive.find('#to')
     ractive.set('to', '')
-    ractive.set('toEntered', false)
     passfield.focus()
   })
 

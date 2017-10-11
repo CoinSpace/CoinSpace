@@ -17,7 +17,7 @@ module.exports = function showTooltip(data){
   })
 
   var canvas = ractive.find('#qr-canvas')
-  var qr = qrcode(getNetwork() + ':' + ractive.get('address'))
+  var qr = qrcode.encode(getNetwork() + ':' + ractive.get('address'))
   canvas.appendChild(qr)
 
   ractive.on('close', function(){

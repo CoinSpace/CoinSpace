@@ -1,3 +1,6 @@
+{{#if isLoading}}
+  {{>loader}}
+{{else}}
 <div class="exchange_awaiting_deposit">
 
   <div class="exchange_header">
@@ -34,3 +37,7 @@
   <div class="_min_deposit">{{depositMin}}</div>
 
 </div>
+{{>footer}}
+
+{{/if}}
+

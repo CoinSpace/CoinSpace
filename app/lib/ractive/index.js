@@ -83,8 +83,8 @@ Ractive.prototype.hide = function(){
   this.el.classList.remove('current')
 }
 
-Ractive.prototype.show = function(){
-  this.fire('before-show')
+Ractive.prototype.show = function(context){
+  this.fire('before-show', context)
   this.el.classList.add('current')
 }
 

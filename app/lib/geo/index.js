@@ -6,8 +6,13 @@ var getWallet = require('lib/wallet').getWallet
 var getNetwork = require('lib/network')
 var uriRoot = process.env.SITE_URL
 var userInfo = {}
+var networks = {
+  BTC: 'bitcoin',
+  LTC: 'litecoin',
+  ETH: 'ethereum'
+}
 
-function fetchUserInfo(callback){
+function fetchUserInfo(network, callback){
   db.get(function(err, doc){
     if(err) return callback(err);
 
@@ -16,14 +21,14 @@ function fetchUserInfo(callback){
     userInfo.email = doc.userInfo.email
     userInfo.avatarIndex = doc.userInfo.avatarIndex
     userInfo.address = getWallet().getNextAddress()
-    userInfo.network = getNetwork()
+    userInfo.network = network || getNetwork()
 
     callback()
   })
 }
 
 function save(callback){
-  requestLocationEndpoint('POST', function(err, resp, body){
+  requestLocationEndpoint(false, 'POST', function(err, resp, body){
     if(!resp || resp.statusCode !== 201) {
       console.error(body)
       return callback(body)
@@ -32,8 +37,8 @@ function save(callback){
   })
 }
 
-function search(callback){
-  requestLocationEndpoint('PUT', function(err, resp, body){
+function search(network, callback) {
+  requestLocationEndpoint(network, 'PUT', function(err, resp, body){
     if(!resp || resp.statusCode !== 200) {
       console.error(body)
       return callback(body)
@@ -78,11 +83,11 @@ function getLocation(callback){
   window.navigator.geolocation.getCurrentPosition(success, error)
 }
 
-function requestLocationEndpoint(method, callback){
+function requestLocationEndpoint(network, method, callback){
   getLocation(function(err, lat, lon){
     if(err) return callback(err);
 
-    fetchUserInfo(function(err){
+    fetchUserInfo(network, function(err){
       if(err) {
         console.error(err)
         //proceed with an earlier version of userInfo
@@ -104,5 +109,6 @@ function requestLocationEndpoint(method, callback){
 module.exports = {
   search: search,
   save: save,
-  remove: remove
+  remove: remove,
+  networks: networks
 }

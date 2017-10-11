@@ -96,7 +96,7 @@ module.exports = function(el){
           while (canvas.hasChildNodes()) {
               canvas.removeChild(canvas.firstChild)
           }
-          var qr = qrcode(getNetwork() + ':' + getAddress())
+          var qr = qrcode.encode(getNetwork() + ':' + getAddress())
           canvas.appendChild(qr)
       }
   }
@@ -104,7 +104,7 @@ module.exports = function(el){
   function mectoOff(){
     ractive.set('broadcasting', false)
     ractive.set('btn_message', 'Turn Mecto on')
-    geo.remove(true)
+    geo.remove()
   }
 
   function mectoOn(){
@@ -125,30 +125,20 @@ module.exports = function(el){
     })
   }
 
-  window.addEventListener('beforeunload', removeGeoData)
-
-  function removeGeoData() {
-    geo.remove(true)
-  }
-
-  ractive.on('teardown', function(){
-    window.removeEventListener('beforeunload', removeGeoData)
-  }, false)
-
   ractive.on('show-qr', function(){
-      if(ractive.get('isSocialSharing')){
-        window.plugins.socialsharing.shareWithOptions({
-          message: ractive.get('address')
-        }, function() {
-          if (window.FacebookAds && window.FacebookAds.fixBanner) {
-            window.FacebookAds.fixBanner();
-          }
-        });
-      } else {
-        showQr({
-          address: ractive.get('address')
-        })
-      }
+    if(ractive.get('isSocialSharing')){
+      window.plugins.socialsharing.shareWithOptions({
+        message: ractive.get('address')
+      }, function() {
+        if (window.FacebookAds && window.FacebookAds.fixBanner) {
+          window.FacebookAds.fixBanner();
+        }
+      });
+    } else {
+      showQr({
+        address: ractive.get('address')
+      })
+    }
   })
 
   ractive.on('help-mecto', function() {
