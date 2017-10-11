@@ -38,6 +38,7 @@
   "devDependencies": {
     "ajv": "^5.2.2",
     "autoprefixer": "^7.1.4",
+    "axios": "^0.16.2",
     "b39": "git://github.com/CoinSpace/B39.git#v2.1.2",
     "bitcoinjs-lib": "^1.5.7",
     "chalk": "^2.1.0",
@@ -46,8 +47,8 @@
     "cordova": "6.5.0",
     "counterpart": "^0.18.2",
     "crypto-js": "^3.1.9-1",
-    "cs-ethereum-wallet": "git://github.com/CoinSpace/cs-ethereum-wallet.git#v1.0.2",
-    "cs-wallet": "git://github.com/CoinSpace/cs-wallet.git#v0.13.1",
+    "cs-ethereum-wallet": "git://github.com/CoinSpace/cs-ethereum-wallet.git#v1.0.3",
+    "cs-wallet": "git://github.com/CoinSpace/cs-wallet.git#v0.13.2",
     "css-loader": "^0.28.7",
     "dotenv-webpack": "^1.5.4",
     "ejs-loader": "^0.3.0",
