@@ -22,7 +22,7 @@ function getFromAPI(cryptoTicker, callback) {
     }
   }).then(function(response) {
     return callback(null, toRates(response.data, cryptoTicker));
-  }).catch(callback)
+  }, callback)
 }
 
 function getFromCache(cacheId, callback) {

@@ -211,11 +211,11 @@ module.exports = function (){
 
   app.use(function(err, req, res, next){
     console.error(err.stack);
-    res.status(500).send('Oops! something went wrong.');
+    res.status(500).send({error: 'Oops! something went wrong.'});
   })
 
   app.use(function(req, res, next) {
-    res.status(404).send('Oops! page not found.');
+    res.status(404).send({error: 'Oops! page not found.'});
   })
 
   function validateAuthParams(allowMissingPin) {

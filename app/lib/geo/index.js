@@ -80,9 +80,7 @@ function requestLocationEndpoint(network, method, callback){
         url: urlRoot + '/location',
         method: method,
         data: userInfo
-      }).then(function(data) {
-        callback(null, data)
-      }).catch(callback)
+      }, callback)
     })
   })
 }

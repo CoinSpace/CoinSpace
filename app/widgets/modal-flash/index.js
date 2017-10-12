@@ -13,7 +13,11 @@ var defaults = {
   }
 }
 
-function openModal(type, data){
+var isOpen = false;
+
+function openModal(type, data) {
+  if (isOpen) return;
+  isOpen = true
   data = data || {}
   data.error = defaults[type].error
   data.warning = defaults[type].warning
@@ -30,6 +34,10 @@ function openModal(type, data){
 
   ractive.on('close', function(){
     ractive.fire('cancel')
+  })
+
+  ractive.on('cancel', function() {
+    isOpen = false;
   })
 
   return ractive

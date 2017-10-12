@@ -61,15 +61,17 @@ function createWallet(passphrase, network, callback) {
 }
 
 function callbackError(err, callbacks) {
-  callbacks.forEach(function (fn) {
-    if (fn != null) fn(err)
-  })
+  callbacks.forEach(function (callback) {
+    if (!callback) return;
+    if (err instanceof Error) return callback(err);
+    callback(err.error);
+  });
 }
 
 function setPin(pin, network, done, txSyncDone) {
   var callbacks = [done, txSyncDone]
   auth.register(id, pin, function(err, token){
-    if(err) return callbackError(err.error, callbacks);
+    if(err) return callbackError(err, callbacks);
 
     emitter.emit('wallet-auth', {token: token, pin: pin})
 
@@ -77,7 +79,7 @@ function setPin(pin, network, done, txSyncDone) {
 
     var encrypted = AES.encrypt(seed, token)
     db.saveEncrypedSeed(id, encrypted, function(err){
-      if(err) return callbackError(err.error, callbacks);
+      if(err) return callbackError(err, callbacks);
 
       emitter.emit('wallet-opening', 'Synchronizing Wallet')
       initWallet(network, done, txSyncDone)
@@ -97,13 +99,13 @@ function openWalletWithPin(pin, network, done, txSyncDone) {
     var id = credentials.id
     var encryptedSeed = credentials.seed
     auth.login(id, pin, function(err, token){
-      if(err){
-        if(err.error === 'user_deleted') {
+      if (err) {
+        if (err.error === 'user_deleted') {
           return db.deleteCredentials(credentials, function(){
-            callbackError(err.error, callbacks);
+            callbackError(err, callbacks);
           })
         }
-        return callbackError(err.error, callbacks);
+        return callbackError(err, callbacks);
       }
 
       savePin(pin)
@@ -224,12 +226,11 @@ function getDynamicFees(callback) {
 
   request({
     url: urlRoot + '/fees'
-  }).then(function(data) {
+  }, function(err, data) {
+    if (err) return callback({});
     cache.put('bitcoinFees', {hour: data.hour, fastest: data.fastest}, 10 * 60 * 1000)
     callback({hourFeePerKb: data.hour * 1000, fastestFeePerKb: data.fastest * 1000})
-  }).catch(function() {
-    callback({})
-  })
+  });
 }
 
 module.exports = {

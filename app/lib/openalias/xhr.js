@@ -10,11 +10,10 @@ function resolveTo(to, callback){
   if (!hostname.match(/\./)) return callback({to: to});
   request({
     url: urlRoot + '/openalias?hostname=' + hostname,
-  }).then(function(data) {
-    callback({to: data.address, alias: to})
-  }).catch(function() {
-    callback({to: to})
-  })
+  }, function(err, data) {
+    if (err) return callback({to: to});
+    return callback({to: data.address, alias: to});
+  });
 }
 
 module.exports = {

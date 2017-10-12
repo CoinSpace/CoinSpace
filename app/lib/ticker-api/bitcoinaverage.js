@@ -22,9 +22,7 @@ function BitcoinAverage(n){
 BitcoinAverage.prototype.getExchangeRates = function(callback){
   var ticker = tickers[network]
   var url = urlRoot + '/ticker?crypto=' + ticker
-  request({url: url}).then(function(data) {
-    callback(null, data);
-  }).catch(callback);
+  request({url: url}, callback);
 }
 
 module.exports = BitcoinAverage

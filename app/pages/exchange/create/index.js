@@ -46,7 +46,7 @@ module.exports = function(el) {
         var symbol = getFirstEnabledSymbol(coins, fromSymbol);
         ractive.set('toSymbol', symbol);
       } else {
-        getRate();
+        return getRate();
       }
     }).catch(function(err) {
       console.error(err);
@@ -173,11 +173,9 @@ module.exports = function(el) {
 
   function getRate() {
     ractive.set('isLoadingRate', true);
-    shapeshift.getRate(ractive.get('fromSymbol'), ractive.get('toSymbol')).then(function(rate) {
+    return shapeshift.getRate(ractive.get('fromSymbol'), ractive.get('toSymbol')).then(function(rate) {
       ractive.set('isLoadingRate', false);
       ractive.set('rate', rate);
-    }).catch(function(err) {
-      console.error(err);
     });
   }
 

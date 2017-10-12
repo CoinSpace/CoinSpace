@@ -12,7 +12,7 @@ function save(data) {
 function getFromAPI(callback) {
   axios.get('https://bitcoinfees.21.co/api/v1/fees/recommended').then(function(response) {
     callback(null, response.data)
-  }).catch(callback)
+  }, callback)
 }
 
 function getFromCache(callback) {

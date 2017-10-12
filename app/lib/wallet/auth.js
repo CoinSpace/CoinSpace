@@ -15,9 +15,7 @@ function login(wallet_id, pin, callback) {
 function exist(wallet_id, callback) {
   request({
     url: urlRoot + '/exist?wallet_id=' + wallet_id
-  }).then(function(data) {
-    callback(null, data)
-  }).catch(callback)
+  }, callback)
 }
 
 function disablePin(wallet_id, pin, callback) {
@@ -28,9 +26,7 @@ function disablePin(wallet_id, pin, callback) {
       id: wallet_id,
       pin: pin
     }
-  }).then(function(data) {
-    callback(null, data)
-  }).catch(callback)
+  }, callback)
 }
 
 function setUsername(firstName, callback) {
@@ -49,9 +45,10 @@ function setUsername(firstName, callback) {
         id: db.userID(),
         username: username
       }
-    }).then(function(data) {
-      callback(null, data.username)
-    }).catch(callback);
+    }, function(err, data) {
+      if (err) return callback(err);
+      return callback(null, data.username);
+    })
   })
 }
 
@@ -60,9 +57,7 @@ function postCredentials(endpoint, data, callback) {
     url: urlRoot + '/' +  endpoint,
     method: 'post',
     data: data
-  }).then(function(data) {
-    callback(null, data)
-  }).catch(callback)
+  }, callback)
 }
 
 module.exports = {
