@@ -10,6 +10,7 @@ var qrcode = require('lib/qrcode');
 var geo = require('lib/geo');
 var showTooltip = require('widgets/modal-tooltip');
 var isEthereum = getNetwork() === 'ethereum';
+var showError = require('widgets/modal-flash').showError;
 
 module.exports = function(el) {
   var ractive = new Ractive({
@@ -55,7 +56,6 @@ module.exports = function(el) {
 
   ractive.observe('fromSymbol', function(symbol, old) {
     if (!old) return;
-    console.log('fromSymbol', symbol, old, ractive.get('coins').length);
     if (symbol === ractive.get('toSymbol')) {
       return ractive.set('toSymbol', old);
     }
@@ -64,7 +64,6 @@ module.exports = function(el) {
 
   ractive.observe('toSymbol', function(symbol, old) {
     if (!old) return;
-    console.log('toSymbol', symbol, old, ractive.get('coins').length);
     if (symbol === ractive.get('fromSymbol')) {
       return ractive.set('fromSymbol', old);
     }
@@ -126,33 +125,56 @@ module.exports = function(el) {
   });
 
   ractive.on('confirm', function() {
-    console.log('confirm');
+    var options = {
+      fromSymbol: ractive.get('fromSymbol'),
+      returnAddress: ractive.get('returnAddress'),
+      toAddress: ractive.get('toAddress'),
+      toSymbol: ractive.get('toSymbol')
+    };
+    return validateAddresses(options).then(function() {
+      return shapeshift.shift(options).then(function(data) {
+        ractive.set('isValidating', false);
+        console.log('data', data);
 
-    console.log('from', ractive.get('fromSymbol'));
-    console.log('to', ractive.get('toSymbol'));
+        // save to local db and replicate it
 
-    ractive.set('isValidating', true);
-    // shapeshift.validateAddress()
-    setTimeout(function() {
-    //   emitter.emit('set-exchange-awaiting-deposit', {
-    //     depositAddress: 'LfmssDyX6iZvbVqHv6t9P6JWXia2JG7mdb',
-    //     depositSymbol: 'LTC',
-    //     depositMax: '13.4868',
-    //     depositMin: '0.02299247 LTC',
-    //     toSymbol: 'BTC',
-    //     toAddress: '1N4h6WwnUaVgoDSh1X4cAcq294N1sKnwm1',
-    //   });
-      ractive.set('isValidating', false);
-      emitter.emit('change-exchange-step', 'awaitingDeposit', {
-        depositAddress: 'LfmssDyX6iZvbVqHv6t9P6JWXia2JG7mdb',
-        depositSymbol: 'LTC',
-        depositMax: '13.4868',
-        depositMin: '0.02299247 LTC',
-        toSymbol: 'BTC',
-        toAddress: '1N4h6WwnUaVgoDSh1X4cAcq294N1sKnwm1',
+        // go to next page
+        // emitter.emit('change-exchange-step', 'awaitingDeposit', {
+        //   depositAddress: 'LfmssDyX6iZvbVqHv6t9P6JWXia2JG7mdb',
+        //   depositSymbol: 'LTC',
+        //   depositMax: '13.4868',
+        //   depositMin: '0.02299247 LTC',
+        //   toSymbol: 'BTC',
+        //   toAddress: '1N4h6WwnUaVgoDSh1X4cAcq294N1sKnwm1',
+        // });
       });
-    }, 300);
+    }).catch(function(err) {
+      ractive.set('isValidating', false);
+      if (err.message === 'invalid_return_address') {
+        return showError({message: 'Please enter a valid return address'});
+      }
+      if (err.message === 'invalid_to_address') {
+        return showError({message: 'Please enter a valid address to send to'});
+      }
+      console.error(err);
+    });
   });
+
+  function validateAddresses(options) {
+    ractive.set('isValidating', true);
+    var promises = [];
+    if (options.returnAddress) {
+      promises.push(shapeshift.validateAddress(options.returnAddress, options.fromSymbol));
+    } else {
+      promises.push(Promise.resolve(true));
+    }
+    promises.push(shapeshift.validateAddress(options.toAddress, options.toSymbol));
+
+    return Promise.all(promises).then(function(results) {
+      if (!results[0]) throw new Error('invalid_return_address');
+      if (!results[1]) throw new Error('invalid_to_address');
+    });
+  }
 
   emitter.on('wallet-ready', function(){
     if (ractive.get('fromSymbol') === getWallet().denomination) {

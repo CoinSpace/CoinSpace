@@ -137,5 +137,6 @@
     "Deposit has been received": "Deposit has been received",
     "Awaiting exchange...": "Awaiting exchange...",
     "Exchange complete!": "Exchange complete!",
-    "Done": "Done"
+    "Done": "Done",
+    "Please enter a valid return address": "Please enter a valid return address"
 }

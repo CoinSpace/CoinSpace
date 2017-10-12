@@ -17,15 +17,41 @@ function getRate(fromSymbol, toSymbol) {
   return request({
     url: urlRoot + '/rate/' + pair,
   }).then(function(data) {
-    return data.rate
+    return data.rate;
   });
 }
 
 function validateAddress(address, symbol) {
+  if (!address) return Promise.resolve(false);
+  if (!symbol) return Promise.resolve(false);
   return request({
     url: urlRoot + '/validateAddress/' + address + '/' + symbol,
   }).then(function(data) {
-    return data.isValid;
+    return !!data.isvalid;
+  });
+}
+
+function shift(options) {
+  var data = {
+    withdrawal: options.toAddress,
+    pair: (options.fromSymbol + '_' + options.toSymbol).toLowerCase(),
+    apiKey: process.env.SHAPESHIFT_API_KEY
+  };
+  if (options.returnAddress) {
+    data.returnAddress = options.returnAddress;
+  }
+  return request({
+    url: urlRoot + '/shift',
+    method: 'post',
+    data: data
+  }).then(function(data) {
+    console.log('pre data', data);
+    return {
+      depositAddress: data.deposit,
+      depositSymbol: data.depositType,
+      toAddress: data.withdrawal,
+      toSymbol: data.withdrawalType
+    };
   });
 }
 
@@ -54,5 +80,6 @@ function getCoinsArray(coins) {
 module.exports = {
   getCoins: getCoins,
   getRate: getRate,
-  validateAddress: validateAddress
+  validateAddress: validateAddress,
+  shift: shift
 };

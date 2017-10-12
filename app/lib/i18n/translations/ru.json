@@ -137,5 +137,6 @@
     "Deposit has been received": "Депозит был получен",
     "Awaiting exchange...": "Ожидание обмена...",
     "Exchange complete!": "Обмен завершен!",
-    "Done": "Done"
+    "Done": "Done",
+    "Please enter a valid return address": "Пожалуйста, введите правильный адрес возврата"
 }
