@@ -44,6 +44,9 @@ function openModal(type, data) {
 }
 
 function showError(data) {
+  if (data.message === 'Network Error') {
+    data.message = 'Request timeout. Please check your internet connection.'
+  }
   return openModal('error', data)
 }
 
