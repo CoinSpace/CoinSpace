@@ -97,7 +97,7 @@ module.exports = function init(el) {
     setUsername(details.firstName, function(err, username){
       if(err) {
         ractive.set('submitting', false)
-        if(err.error === 'username_exists') return showError({message: "Username not available"})
+        if(err.message === 'username_exists') return showError({message: "Username not available"})
         return console.error(err);
       }
 

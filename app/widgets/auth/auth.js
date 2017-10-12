@@ -27,13 +27,13 @@ var Auth = Ractive.extend({
     })
 
     function onDoneError(err) {
-      if(err === 'user_deleted') {
+      if(err.message === 'user_deleted') {
         return location.reload(false);
       }
 
       emitter.emit('clear-pin')
 
-      if(err === 'auth_failed') {
+      if(err.message === 'auth_failed') {
         return showError({ message: 'Your PIN is incorrect' })
       }
 

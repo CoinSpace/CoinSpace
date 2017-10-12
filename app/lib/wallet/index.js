@@ -63,8 +63,7 @@ function createWallet(passphrase, network, callback) {
 function callbackError(err, callbacks) {
   callbacks.forEach(function (callback) {
     if (!callback) return;
-    if (err instanceof Error) return callback(err);
-    callback(err.error);
+    return callback(err);
   });
 }
 
@@ -100,7 +99,7 @@ function openWalletWithPin(pin, network, done, txSyncDone) {
     var encryptedSeed = credentials.seed
     auth.login(id, pin, function(err, token){
       if (err) {
-        if (err.error === 'user_deleted') {
+        if (err.message === 'user_deleted') {
           return db.deleteCredentials(credentials, function(){
             callbackError(err, callbacks);
           })
