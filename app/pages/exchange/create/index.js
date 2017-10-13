@@ -51,6 +51,7 @@ module.exports = function(el) {
       }
     }).catch(function(err) {
       console.error(err);
+      return showError({message: err.message});
     });
   });
 
@@ -156,7 +157,8 @@ module.exports = function(el) {
       if (err.message === 'invalid_to_address') {
         return showError({message: 'Please enter a valid address to send to'});
       }
-      console.error(err);
+      console.error(err.message);
+      return showError({message: err.message});
     });
   });
 
@@ -198,6 +200,11 @@ module.exports = function(el) {
     return shapeshift.getRate(ractive.get('fromSymbol'), ractive.get('toSymbol')).then(function(rate) {
       ractive.set('isLoadingRate', false);
       ractive.set('rate', rate);
+    }).catch(function(err) {
+      ractive.set('isLoadingRate', false);
+      ractive.set('rate', '?');
+      console.error(err);
+      return showError({message: err.message});
     });
   }
 

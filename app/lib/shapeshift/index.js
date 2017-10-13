@@ -17,6 +17,7 @@ function getRate(fromSymbol, toSymbol) {
   return request({
     url: urlRoot + '/rate/' + pair,
   }).then(function(data) {
+    if (data.error) return Promise.reject(new Error(data.error));
     return data.rate;
   });
 }
@@ -45,7 +46,7 @@ function shift(options) {
     method: 'post',
     data: data
   }).then(function(data) {
-    console.log('pre data', data);
+    if (data.error) return Promise.reject(new Error(data.error));
     return {
       depositAddress: data.deposit,
       depositSymbol: data.depositType,
