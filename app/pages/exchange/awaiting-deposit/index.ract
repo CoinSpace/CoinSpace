@@ -1,6 +1,3 @@
-{{#if isLoading}}
-  {{>loader}}
-{{else}}
 <div class="exchange_awaiting_deposit">
 
   <div class="exchange_header">
@@ -34,10 +31,13 @@
   {{/isSocialSharing}}
 
   <h3 class="_title">{{translate("Deposit Minimum")}}</h3>
-  <div class="_min_deposit">{{depositMin}}</div>
+  <div class="_min_deposit">
+    {{#if isLoadingMarketInfo}}
+      {{translate("Loading...")}}
+    {{else}}
+      {{depositMin}} {{depositSymbol}}
+    {{/if}}
+  </div>
 
 </div>
 {{>footer}}
-
-{{/if}}
-

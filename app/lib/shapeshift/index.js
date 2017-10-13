@@ -65,6 +65,16 @@ function txStat(depositAddress) {
   });
 }
 
+function marketInfo(fromSymbol, toSymbol) {
+  var pair = (fromSymbol + '_' + toSymbol).toLowerCase();
+  return request({
+    url: urlRoot + '/marketinfo/' + pair
+  }).then(function(data) {
+    if (data.error) throw new Error(data.error);
+    return data;
+  });
+}
+
 function getCoinsArray(coins) {
   prioritySymbols = prioritySymbols.filter(function(symbol) {
     return coins[symbol];
@@ -92,5 +102,6 @@ module.exports = {
   getRate: getRate,
   validateAddress: validateAddress,
   shift: shift,
-  txStat: txStat
+  txStat: txStat,
+  marketInfo: marketInfo
 };

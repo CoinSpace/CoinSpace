@@ -1,13 +1,13 @@
 'use strict';
 
 var Ractive = require('widgets/modal')
-var emitter = require('lib/emitter')
+var translate = require('lib/i18n').translate
 var qrcode = require('lib/qrcode')
 var getNetwork = require('lib/network')
 
 module.exports = function showTooltip(data){
   data.mailto = mailto
-
+  data.title = data.title || translate('Your wallet address')
   var ractive = new Ractive({
     el: document.getElementById('tooltip'),
     partials: {
@@ -17,7 +17,8 @@ module.exports = function showTooltip(data){
   })
 
   var canvas = ractive.find('#qr-canvas')
-  var qr = qrcode.encode(getNetwork() + ':' + ractive.get('address'))
+  var name = data.name || getNetwork();
+  var qr = qrcode.encode(name + ':' + data.address)
   canvas.appendChild(qr)
 
   ractive.on('close', function(){

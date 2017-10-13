@@ -30,30 +30,34 @@ module.exports = function(el) {
     complete: initComplete(ractive.find('#exchange_complete')),
     error: initError(ractive.find('#exchange_error'))
   };
+  var initOnDbReady = true;
   var currentStep = steps.create;
 
   ractive.on('before-show', function() {
     if (!db.isReady()) return;
+    initOnDbReady = false;
     ractive.fire('init-shapeshift');
   });
 
   emitter.once('db-ready', function() {
-    if (ractive.el.classList.contains('current')) {
+    if (ractive.el.classList.contains('current') && initOnDbReady) {
       ractive.fire('init-shapeshift');
     }
   });
 
-  ractive.once('init-shapeshift', function() {
+  ractive.on('init-shapeshift', function() {
+    ractive.set('isLoading', true);
+    currentStep.hide();
+
     db.get('exchangeInfo', function(err, exchangeInfo) {
       if (err) return console.error(err);
-      ractive.set('isLoading', false);
-      console.log('exchangeInfo', exchangeInfo);
       if (!exchangeInfo) {
+        ractive.set('isLoading', false);
         return showStep(steps.create);
       }
 
       shapeshift.txStat(exchangeInfo.depositAddress).then(function(data) {
-        console.log('data', data);
+        ractive.set('isLoading', false);
         if (data.status === 'no_deposits') {
           showStep(steps.awaitingDeposit, exchangeInfo);
         } else if (data.status === 'received') {
@@ -65,6 +69,7 @@ module.exports = function(el) {
         }
       }).catch(function(err) {
         console.error(err);
+        ractive.set('isLoading', false);
         return showError({message: err.message});
       });
     });
@@ -102,9 +107,11 @@ module.exports = function(el) {
   })
 
   function showStep(step, data) {
-    currentStep.hide();
-    step.show(data);
-    currentStep = step;
+    setTimeout(function() {
+      currentStep.hide();
+      step.show(data);
+      currentStep = step;
+    });
   }
 
   return ractive;

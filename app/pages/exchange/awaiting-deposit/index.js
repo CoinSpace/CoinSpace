@@ -5,22 +5,24 @@ var emitter = require('lib/emitter');
 var showQr = require('widgets/modal-qr');
 var qrcode = require('lib/qrcode');
 var db = require('lib/db');
+var shapeshift = require('lib/shapeshift');
+var showError = require('widgets/modal-flash').showError;
+var translate = require('lib/i18n').translate;
 
 module.exports = function(el) {
   var ractive = new Ractive({
     el: el,
     template: require('./index.ract'),
     data: {
-      isLoading: true,
       depositAddress: '-',
       depositSymbol: '',
+      depositCoinName: '',
       depositMax: '',
       depositMin: '',
       toSymbol: '',
       toAddress: '',
-
+      isLoadingMarketInfo: true,
       isSocialSharing: process.env.BUILD_TYPE === 'phonegap' && window.plugins && window.plugins.socialsharing,
-      // isSocialSharing: true
     },
     partials: {
       loader: require('../loader.ract'),
@@ -29,41 +31,32 @@ module.exports = function(el) {
   });
 
   ractive.on('before-show', function(context) {
-    setTimeout(function() {
-      ractive.set('isLoading', false);
-      ractive.set({
-        depositAddress: context.depositAddress,
-        depositSymbol: context.depositSymbol,
-        // depositMax: context.depositMax,
-        // depositMin: context.depositMin,
-        toSymbol: context.toSymbol,
-        toAddress: context.toAddress
-      });
-      if (context.depositAddress) {
-        showQRcode();
-      }
-    }, 500);
-  });
-
-  ractive.on('before-hide', function() {
-    ractive.set('isLoading', true);
-  });
-
-  ractive.on('cancel', function() {
-    console.log('cancel');
-    ractive.set('isLoading', true);
-
-    db.set('exchangeInfo', null, function(err, response) {
-      ractive.set('isLoading', false);
-      if (err) return console.error(response);
-      console.log('cancelled ok!');
-      emitter.emit('change-exchange-step', 'create');
+    ractive.set({
+      depositAddress: context.depositAddress,
+      depositSymbol: context.depositSymbol,
+      depositCoinName: context.depositCoinName,
+      toSymbol: context.toSymbol,
+      toAddress: context.toAddress,
+      isLoadingMarketInfo: true
+    });
+    showQRcode();
+    shapeshift.marketInfo(context.depositSymbol, context.toSymbol).then(function(data) {
+      ractive.set('isLoadingMarketInfo', false);
+      ractive.set('depositMax', data.limit);
+      ractive.set('depositMin', data.minimum);
+    }).catch(function(err) {
+      ractive.set('isLoadingMarketInfo', false);
+      console.error(err.message);
+      return showError({message: err.message});
     });
   });
 
-  // emitter.on('set-exchange-awaiting-deposit', function(data) {
-
-  // });
+  ractive.on('cancel', function() {
+    db.set('exchangeInfo', null, function(err) {
+      if (err) return console.error(err);
+      emitter.emit('change-exchange-step', 'create');
+    });
+  });
 
   ractive.on('show-qr', function(){
     if (ractive.get('isSocialSharing')) {
@@ -76,19 +69,21 @@ module.exports = function(el) {
       });
     } else {
       showQr({
-        address: ractive.get('depositAddress')
+        address: ractive.get('depositAddress'),
+        name: ractive.get('depositCoinName').toLowerCase(),
+        title: translate('Deposit address', {symbol: ractive.get('depositSymbol')})
       });
     }
   })
 
   function showQRcode() {
-    console.log('showQRcode');
     if (ractive.get('isSocialSharing')) {
       var canvas = ractive.find('#deposit_qr_canvas');
       while (canvas.hasChildNodes()) {
         canvas.removeChild(canvas.firstChild);
       }
-      var qr = qrcode.encode('litcoin:' + ractive.get('depositAddress')); // TODO: update currency
+      var name = ractive.get('depositCoinName').toLowerCase();
+      var qr = qrcode.encode(name + ':' + ractive.get('depositAddress'));
       canvas.appendChild(qr);
     }
   }

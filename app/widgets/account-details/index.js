@@ -103,7 +103,7 @@ module.exports = function init(el) {
 
       details.firstName = username
 
-      db.set('userInfo', details, function(err, response){
+      db.set('userInfo', details, function(err){
         if(err) return handleUserError()
 
         ractive.set('submitting', false)

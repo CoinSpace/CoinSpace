@@ -154,8 +154,8 @@ module.exports = function(el){
     emitter.emit('header-fiat-changed', currency)
     sendIosCurrency(currency)
 
-    db.set('systemInfo', {preferredCurrency: currency}, function(err, response){
-      if(err) return console.error(response);
+    db.set('systemInfo', {preferredCurrency: currency}, function(err){
+      if(err) return console.error(err);
     })
   }
 

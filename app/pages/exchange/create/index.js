@@ -11,6 +11,7 @@ var geo = require('lib/geo');
 var showTooltip = require('widgets/modal-tooltip');
 var isEthereum = getNetwork() === 'ethereum';
 var showError = require('widgets/modal-flash').showError;
+var find = require('lodash.find');
 var db = require('lib/db');
 
 module.exports = function(el) {
@@ -54,6 +55,10 @@ module.exports = function(el) {
       console.error(err);
       return showError({message: err.message});
     });
+  });
+
+  ractive.on('before-hide', function() {
+    ractive.set('isLoading', true);
   });
 
   ractive.observe('fromSymbol', function(symbol, old) {
@@ -133,14 +138,15 @@ module.exports = function(el) {
       toAddress: ractive.get('toAddress'),
       toSymbol: ractive.get('toSymbol')
     };
+    var fromCoin = find(ractive.get('coins'), function(item) {
+      return item.symbol === options.fromSymbol;
+    });
     return validateAddresses(options).then(function() {
       return shapeshift.shift(options).then(function(data) {
-        ractive.set('isValidating', false);
-        console.log('data', data);
-
-        db.set('exchangeInfo', data, function(err, response) {
-          if (err) return console.error(response);
-          console.log('saved ok!');
+        data.depositCoinName = fromCoin ? fromCoin.name : '';
+        db.set('exchangeInfo', data, function(err) {
+          ractive.set('isValidating', false);
+          if (err) return console.error(err);
           emitter.emit('change-exchange-step', 'awaitingDeposit', data);
         });
       });
