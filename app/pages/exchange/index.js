@@ -8,6 +8,8 @@ var initAwaiting = require('./awaiting');
 var initComplete = require('./complete');
 var initError = require('./error');
 var db = require('lib/db');
+var shapeshift = require('lib/shapeshift');
+var showError = require('widgets/modal-flash').showError;
 
 module.exports = function(el) {
   var ractive = new Ractive({
@@ -42,24 +44,29 @@ module.exports = function(el) {
   });
 
   ractive.once('init-shapeshift', function() {
-    db.get(function(err, doc) {
+    db.get('exchangeInfo', function(err, exchangeInfo) {
       if (err) return console.error(err);
       ractive.set('isLoading', false);
-
-      if (!doc.exchangeInfo) {
-      // if (doc.exchangeInfo) {
-        showStep(steps.create);
+      console.log('exchangeInfo', exchangeInfo);
+      if (!exchangeInfo) {
+        return showStep(steps.create);
       }
-      // } else {
-      //   showStep(steps.awaitingDeposit, {
-      //     depositAddress: 'LfmssDyX6iZvbVqHv6t9P6JWXia2JG7mdb',
-      //     depositSymbol: 'LTC',
-      //     depositMax: '13.4868',
-      //     depositMin: '0.02299247 LTC',
-      //     toSymbol: 'BTC',
-      //     toAddress: '1N4h6WwnUaVgoDSh1X4cAcq294N1sKnwm1',
-      //   });
-      // }
+
+      shapeshift.txStat(exchangeInfo.depositAddress).then(function(data) {
+        console.log('data', data);
+        if (data.status === 'no_deposits') {
+          showStep(steps.awaitingDeposit, exchangeInfo);
+        } else if (data.status === 'received') {
+          showStep(steps.awaiting, exchangeInfo);
+        } else if (data.status === 'complete') {
+          showStep(steps.complete, exchangeInfo);
+        } else {
+          showStep(steps.error, exchangeInfo);
+        }
+      }).catch(function(err) {
+        console.error(err);
+        return showError({message: err.message});
+      });
     });
   });
 

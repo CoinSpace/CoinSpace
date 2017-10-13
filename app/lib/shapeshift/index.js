@@ -17,7 +17,7 @@ function getRate(fromSymbol, toSymbol) {
   return request({
     url: urlRoot + '/rate/' + pair,
   }).then(function(data) {
-    if (data.error) return Promise.reject(new Error(data.error));
+    if (data.error) throw new Error(data.error);
     return data.rate;
   });
 }
@@ -46,13 +46,22 @@ function shift(options) {
     method: 'post',
     data: data
   }).then(function(data) {
-    if (data.error) return Promise.reject(new Error(data.error));
+    if (data.error) throw new Error(data.error);
     return {
       depositAddress: data.deposit,
       depositSymbol: data.depositType,
       toAddress: data.withdrawal,
       toSymbol: data.withdrawalType
     };
+  });
+}
+
+function txStat(depositAddress) {
+  return request({
+    url: urlRoot + '/txStat/' + depositAddress
+  }).then(function(data) {
+    if (data.error) throw new Error(data.error);
+    return data;
   });
 }
 
@@ -82,5 +91,6 @@ module.exports = {
   getCoins: getCoins,
   getRate: getRate,
   validateAddress: validateAddress,
-  shift: shift
+  shift: shift,
+  txStat: txStat
 };

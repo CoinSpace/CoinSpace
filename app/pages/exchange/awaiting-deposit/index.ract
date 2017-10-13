@@ -4,8 +4,8 @@
 <div class="exchange_awaiting_deposit">
 
   <div class="exchange_header">
-    <div class="_back" on-click="back">
-      <span class="_icon"></span> {{translate("Back")}}
+    <div class="_back" on-click="cancel">
+      <span class="_icon"></span> {{translate("Cancel")}}
     </div>
     <h2 class="_subtitle">{{translate("Awaiting deposit...")}}</h2>
   </div>

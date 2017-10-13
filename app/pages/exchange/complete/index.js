@@ -14,8 +14,8 @@ module.exports = function(el) {
     }
   });
 
-  ractive.on('back', function() {
-    console.log('back');
+  ractive.on('done', function() {
+    console.log('done');
     emitter.emit('change-exchange-step', 'create');
   });
 

@@ -11,6 +11,7 @@ var geo = require('lib/geo');
 var showTooltip = require('widgets/modal-tooltip');
 var isEthereum = getNetwork() === 'ethereum';
 var showError = require('widgets/modal-flash').showError;
+var db = require('lib/db');
 
 module.exports = function(el) {
   var ractive = new Ractive({
@@ -137,17 +138,11 @@ module.exports = function(el) {
         ractive.set('isValidating', false);
         console.log('data', data);
 
-        // save to local db and replicate it
-
-        // go to next page
-        // emitter.emit('change-exchange-step', 'awaitingDeposit', {
-        //   depositAddress: 'LfmssDyX6iZvbVqHv6t9P6JWXia2JG7mdb',
-        //   depositSymbol: 'LTC',
-        //   depositMax: '13.4868',
-        //   depositMin: '0.02299247 LTC',
-        //   toSymbol: 'BTC',
-        //   toAddress: '1N4h6WwnUaVgoDSh1X4cAcq294N1sKnwm1',
-        // });
+        db.set('exchangeInfo', data, function(err, response) {
+          if (err) return console.error(response);
+          console.log('saved ok!');
+          emitter.emit('change-exchange-step', 'awaitingDeposit', data);
+        });
       });
     }).catch(function(err) {
       ractive.set('isValidating', false);

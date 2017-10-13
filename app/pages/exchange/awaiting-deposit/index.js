@@ -4,6 +4,7 @@ var Ractive = require('lib/ractive');
 var emitter = require('lib/emitter');
 var showQr = require('widgets/modal-qr');
 var qrcode = require('lib/qrcode');
+var db = require('lib/db');
 
 module.exports = function(el) {
   var ractive = new Ractive({
@@ -33,8 +34,8 @@ module.exports = function(el) {
       ractive.set({
         depositAddress: context.depositAddress,
         depositSymbol: context.depositSymbol,
-        depositMax: context.depositMax,
-        depositMin: context.depositMin,
+        // depositMax: context.depositMax,
+        // depositMin: context.depositMin,
         toSymbol: context.toSymbol,
         toAddress: context.toAddress
       });
@@ -48,9 +49,16 @@ module.exports = function(el) {
     ractive.set('isLoading', true);
   });
 
-  ractive.on('back', function() {
-    console.log('back');
-    emitter.emit('change-exchange-step', 'create');
+  ractive.on('cancel', function() {
+    console.log('cancel');
+    ractive.set('isLoading', true);
+
+    db.set('exchangeInfo', null, function(err, response) {
+      ractive.set('isLoading', false);
+      if (err) return console.error(response);
+      console.log('cancelled ok!');
+      emitter.emit('change-exchange-step', 'create');
+    });
   });
 
   // emitter.on('set-exchange-awaiting-deposit', function(data) {
