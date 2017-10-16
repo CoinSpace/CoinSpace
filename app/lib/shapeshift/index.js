@@ -60,7 +60,7 @@ function txStat(depositAddress) {
   return request({
     url: urlRoot + '/txStat/' + depositAddress
   }).then(function(data) {
-    if (data.error) throw new Error(data.error);
+    if (data.error && data.status !== 'failed') throw new Error(data.error);
     return data;
   });
 }

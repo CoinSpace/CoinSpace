@@ -67,7 +67,7 @@ module.exports = function(el) {
         } else if (data.status === 'complete') {
           showStep(steps.complete, data);
         } else {
-          showStep(steps.error, exchangeInfo);
+          showStep(steps.error, {message: data.error});
         }
       }).catch(function(err) {
         console.error(err);
@@ -76,12 +76,6 @@ module.exports = function(el) {
       });
     });
   });
-
-  setTimeout(function() {
-
-    // emitter.emit('set-exchange-error', 'Error message');
-    // showStep(steps.error);
-  }, 300);
 
   emitter.on('change-exchange-step', function(step, data) {
     showStep(steps[step], data);
