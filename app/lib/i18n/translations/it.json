@@ -139,5 +139,6 @@
     "Exchange complete!": "Exchange complete!",
     "Done": "Done",
     "Please enter a valid return address": "Please enter a valid return address",
-    "Miner fee": "Miner fee"
+    "Miner fee": "Miner fee",
+    "Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.": "Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction."
 }

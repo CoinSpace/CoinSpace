@@ -139,5 +139,6 @@
     "Exchange complete!": "Обмен завершен!",
     "Done": "Done",
     "Please enter a valid return address": "Пожалуйста, введите правильный адрес возврата",
-    "Miner fee": "Комиссия майнера"
+    "Miner fee": "Комиссия майнера",
+    "Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.": "Обратный адрес должен принадлежать вам, чтобы в случае сбоя депозит был возвращен на этот адрес."
 }

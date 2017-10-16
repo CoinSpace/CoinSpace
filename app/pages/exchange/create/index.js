@@ -120,7 +120,8 @@ module.exports = function(el) {
 
   ractive.on('help', function() {
     showTooltip({
-      message: 'Text here'
+      message: 'Return address should be an address controlled by you where ' +
+      'deposit will be returned in the event of a failed transaction.'
     });
   });
 
