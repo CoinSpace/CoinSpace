@@ -21,11 +21,12 @@ module.exports = function(el) {
       depositMin: '',
       toSymbol: '',
       toAddress: '',
+      rate: '',
+      minerFee: '',
       isLoadingMarketInfo: true,
       isSocialSharing: process.env.BUILD_TYPE === 'phonegap' && window.plugins && window.plugins.socialsharing,
     },
     partials: {
-      loader: require('../loader.ract'),
       footer: require('../footer.ract')
     }
   });
@@ -44,6 +45,8 @@ module.exports = function(el) {
       ractive.set('isLoadingMarketInfo', false);
       ractive.set('depositMax', data.limit);
       ractive.set('depositMin', data.minimum);
+      ractive.set('rate', data.rate);
+      ractive.set('minerFee', data.minerFee);
     }).catch(function(err) {
       ractive.set('isLoadingMarketInfo', false);
       console.error(err.message);

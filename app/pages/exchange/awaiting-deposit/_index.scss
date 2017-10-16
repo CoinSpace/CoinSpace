@@ -127,10 +127,12 @@
     margin-bottom: 15px;
   }
 
-  ._min_deposit {
+  ._market_info {
     @extend .jigsaw-regular;
+    margin-bottom: 5px;
     @include breakpoint(portrait) {
       font-size: 20px;
+      margin-bottom: 10px;
     }
   }
 }

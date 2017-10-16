@@ -36,19 +36,21 @@ module.exports = function(el) {
   ractive.on('before-show', function() {
     if (!db.isReady()) return;
     initOnDbReady = false;
-    ractive.fire('init-shapeshift');
+    emitter.emit('shapeshift');
+  });
+
+  ractive.on('before-hide', function() {
+    ractive.set('isLoading', true);
+    currentStep.hide();
   });
 
   emitter.once('db-ready', function() {
     if (ractive.el.classList.contains('current') && initOnDbReady) {
-      ractive.fire('init-shapeshift');
+      emitter.emit('shapeshift');
     }
   });
 
-  ractive.on('init-shapeshift', function() {
-    ractive.set('isLoading', true);
-    currentStep.hide();
-
+  emitter.on('shapeshift', function() {
     db.get('exchangeInfo', function(err, exchangeInfo) {
       if (err) return console.error(err);
       if (!exchangeInfo) {
@@ -63,7 +65,7 @@ module.exports = function(el) {
         } else if (data.status === 'received') {
           showStep(steps.awaiting, exchangeInfo);
         } else if (data.status === 'complete') {
-          showStep(steps.complete, exchangeInfo);
+          showStep(steps.complete, data);
         } else {
           showStep(steps.error, exchangeInfo);
         }
@@ -76,27 +78,6 @@ module.exports = function(el) {
   });
 
   setTimeout(function() {
-    // ractive.set('isLoading', false);
-    // showStep(steps.create);
-
-    // emitter.emit('set-exchange-awaiting-deposit', {
-    //   depositAddress: 'LfmssDyX6iZvbVqHv6t9P6JWXia2JG7mdb',
-    //   depositSymbol: 'LTC',
-    //   depositMax: '13.4868',
-    //   depositMin: '0.02299247 LTC',
-    //   toSymbol: 'BTC',
-    //   toAddress: '1N4h6WwnUaVgoDSh1X4cAcq294N1sKnwm1',
-    // });
-    // showStep(steps.awaitingDeposit);
-
-    // showStep(steps.awaiting);
-
-    // emitter.emit('set-exchange-complete', {
-    //   amount: '0.01318363',
-    //   toSymbol: '',
-    //   toAddress: '18GgXVrcQhnB3QhLpq3np7eVLzDwCrgQQx'
-    // });
-    // showStep(steps.complete);
 
     // emitter.emit('set-exchange-error', 'Error message');
     // showStep(steps.error);

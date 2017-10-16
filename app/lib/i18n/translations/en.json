@@ -130,7 +130,7 @@
   "Return address (optional)": "Return address (optional)",
   "Deposit address": "Deposit address (%(symbol)s)",
   "Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress": "Send up to %(depositMax)s %(depositSymbol)s to deposit address.\nIt will be converted into %(toSymbol)s, and sent to\n %(toAddress)s",
-  "Deposit Minimum": "Deposit Minimum",
+  "Deposit minimum": "Deposit minimum",
   "amount :toSymbol have been delivered to :toAddress": "%(amount)s %(toSymbol)s have been delivered to\n %(toAddress)s",
   "Back": "Back",
   "Awaiting deposit...": "Awaiting deposit...",
@@ -138,5 +138,6 @@
   "Awaiting exchange...": "Awaiting exchange...",
   "Exchange complete!": "Exchange complete!",
   "Done": "Done",
-  "Please enter a valid return address": "Please enter a valid return address"
+  "Please enter a valid return address": "Please enter a valid return address",
+  "Miner fee": "Miner fee"
 }

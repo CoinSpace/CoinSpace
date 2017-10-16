@@ -130,7 +130,7 @@
     "Return address (optional)": "Обратный адрес (необязательно)",
     "Deposit address": "Депозитный адрес (%(symbol)s)",
     "Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress": "Отправьте до %(depositMax)s %(depositSymbol)s на депозитный адрес.\nЭто будет конвертировано в %(toSymbol)s, и отправлено на\n %(toAddress)s",
-    "Deposit Minimum": "Минимальный депозит",
+    "Deposit minimum": "Минимальный депозит",
     "amount :toSymbol have been delivered to :toAddress": "%(amount)s %(toSymbol)s было доставлено на\n %(toAddress)s",
     "Back": "Назад",
     "Awaiting deposit...": "Ожидание депозита...",
@@ -138,5 +138,6 @@
     "Awaiting exchange...": "Ожидание обмена...",
     "Exchange complete!": "Обмен завершен!",
     "Done": "Done",
-    "Please enter a valid return address": "Пожалуйста, введите правильный адрес возврата"
+    "Please enter a valid return address": "Пожалуйста, введите правильный адрес возврата",
+    "Miner fee": "Комиссия майнера"
 }

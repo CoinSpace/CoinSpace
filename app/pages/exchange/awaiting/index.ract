@@ -7,3 +7,4 @@
   </span>
 
 </div>
+{{>footer}}

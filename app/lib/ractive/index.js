@@ -78,8 +78,8 @@ partials.svg_exchange = require('lib/svg/exchange.ract')
 partials.svg_error = require('lib/svg/error.ract')
 partials.svg_appstore = require('lib/svg/appstore.ract')
 
-Ractive.prototype.hide = function(){
-  this.fire('before-hide')
+Ractive.prototype.hide = function(context){
+  this.fire('before-hide', context)
   this.el.classList.remove('current')
 }
 

@@ -30,12 +30,30 @@
   <div class="qr-code" id="deposit_qr_canvas"></div>
   {{/isSocialSharing}}
 
-  <h3 class="_title">{{translate("Deposit Minimum")}}</h3>
-  <div class="_min_deposit">
+  <h3 class="_title">{{translate("Deposit minimum")}}</h3>
+  <div class="_market_info">
     {{#if isLoadingMarketInfo}}
       {{translate("Loading...")}}
     {{else}}
       {{depositMin}} {{depositSymbol}}
+    {{/if}}
+  </div>
+
+  <h3 class="_title">{{translate("Exchange rate")}}</h3>
+  <div class="_market_info">
+    {{#if isLoadingMarketInfo}}
+      {{translate("Loading...")}}
+    {{else}}
+      1 {{depositSymbol}} = {{rate}} {{toSymbol}}
+    {{/if}}
+  </div>
+
+  <h3 class="_title">{{translate("Miner fee")}}</h3>
+  <div class="_market_info">
+    {{#if isLoadingMarketInfo}}
+      {{translate("Loading...")}}
+    {{else}}
+      {{minerFee}} {{toSymbol}}
     {{/if}}
   </div>
 
