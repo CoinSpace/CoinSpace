@@ -130,6 +130,14 @@ module.exports = function(el) {
     var returnAddress = ractive.get('returnAddress');
     ractive.set('returnAddress', ractive.get('toAddress'));
     ractive.set('toAddress', returnAddress);
+
+    // Fix safari placeholder bug
+    var returnAddressEl = ractive.find('#exchange_return_address');
+    returnAddressEl.focus();
+    returnAddressEl.blur();
+    var toAddressEl = ractive.find('#exchange_to_address');
+    toAddressEl.focus();
+    toAddressEl.blur();
   });
 
   ractive.on('confirm', function() {

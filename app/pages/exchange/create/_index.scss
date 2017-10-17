@@ -15,8 +15,13 @@
     }
 
     ._exchange_group {
+      @include noselect;
       position: relative;
       flex: 1;
+      margin-right: 10px;
+      @include breakpoint(portrait) {
+        font-size: 20px;
+      }
     }
 
     .input__container {
@@ -49,15 +54,8 @@
     }
 
     ._label {
-      @include noselect;
       cursor: pointer;
-      display: block;
       flex: 1;
-      margin-right: 10px;
-
-      @include breakpoint(portrait) {
-        font-size: 20px;
-      }
     }
 
     ._btn {
@@ -132,7 +130,7 @@
       @include clickbtn;
       position: absolute;
       top: 0px;
-      right: 5px;
+      right: -5px;
       font-size: 12px;
       width: 26px;
       height: 26px;
