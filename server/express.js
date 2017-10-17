@@ -26,6 +26,7 @@ module.exports = function (){
     var connectSrc = [
       "'self'", 'blob:',
       'apiv2.bitcoinaverage.com', // ticker
+      'shapeshift.io',
       'btc.blockr.io', 'tbtc.blockr.io', 'ltc.blockr.io', 'insight.bitpay.com',
       'live.coin.space', 'btc.coin.space', 'ltc.coin.space',
       'eth.coin.space', 'dev.eth.coin.space',
