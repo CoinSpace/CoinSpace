@@ -26,7 +26,7 @@ module.exports = function(el){
       btn_message: 'Turn Mecto on',
       connecting: false,
       broadcasting: false,
-      isSocialSharing: process.env.BUILD_TYPE === 'phonegap' && window.plugins && window.plugins.socialsharing
+      isPhonegap: process.env.BUILD_TYPE === 'phonegap'
     }
   })
 
@@ -91,7 +91,7 @@ module.exports = function(el){
   })
 
   function showQRcode(){
-      if(ractive.get('isSocialSharing')){
+      if(ractive.get('isPhonegap')){
           var canvas = document.getElementById("qr_canvas")
           while (canvas.hasChildNodes()) {
               canvas.removeChild(canvas.firstChild)
@@ -126,13 +126,9 @@ module.exports = function(el){
   }
 
   ractive.on('show-qr', function(){
-    if(ractive.get('isSocialSharing')){
+    if(ractive.get('isPhonegap')){
       window.plugins.socialsharing.shareWithOptions({
         message: ractive.get('address')
-      }, function() {
-        if (window.FacebookAds && window.FacebookAds.fixBanner) {
-          window.FacebookAds.fixBanner();
-        }
       });
     } else {
       showQr({

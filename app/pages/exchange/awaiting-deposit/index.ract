@@ -26,9 +26,9 @@
     </div>
   </div>
 
-  {{#isSocialSharing}}
+  {{#isPhonegap}}
   <div class="qr-code" id="deposit_qr_canvas"></div>
-  {{/isSocialSharing}}
+  {{/isPhonegap}}
 
   <h3 class="_title">{{translate("Deposit minimum")}}</h3>
   <div class="_market_info">

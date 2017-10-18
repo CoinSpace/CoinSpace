@@ -37,9 +37,14 @@ window.initCSApp = function() {
       position: position,
       autoShow: true
     }, function() {
-      window.FacebookAds.fixBanner = function() {
-        window.FacebookAds.showBanner(position);
-      }
+      var timeout = false;
+      window.addEventListener('resize', function() {
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+          window.FacebookAds.showBanner(position);
+        }, 300);
+      });
+      window.FacebookAds.showBanner(position);
     });
   }
 

@@ -24,7 +24,7 @@ module.exports = function(el) {
       rate: '',
       minerFee: '',
       isLoadingMarketInfo: true,
-      isSocialSharing: process.env.BUILD_TYPE === 'phonegap' && window.plugins && window.plugins.socialsharing,
+      isPhonegap: process.env.BUILD_TYPE === 'phonegap',
     },
     partials: {
       footer: require('../footer.ract')
@@ -62,13 +62,9 @@ module.exports = function(el) {
   });
 
   ractive.on('show-qr', function(){
-    if (ractive.get('isSocialSharing')) {
+    if (ractive.get('isPhonegap')) {
       window.plugins.socialsharing.shareWithOptions({
         message: ractive.get('depositAddress')
-      }, function() {
-        if (window.FacebookAds && window.FacebookAds.fixBanner) {
-          window.FacebookAds.fixBanner();
-        }
       });
     } else {
       showQr({
@@ -80,7 +76,7 @@ module.exports = function(el) {
   })
 
   function showQRcode() {
-    if (ractive.get('isSocialSharing')) {
+    if (ractive.get('isPhonegap')) {
       var canvas = ractive.find('#deposit_qr_canvas');
       while (canvas.hasChildNodes()) {
         canvas.removeChild(canvas.firstChild);

@@ -57,9 +57,9 @@ webpack(webpackConfig, function(error, stats) {
   utils.cordova('plugin add cordova-plugin-facebookads@4.23.2');
 
   if (program.release) {
-    utils.cordova('build ios --buildConfig=../build.json --release');
+    utils.cordova('build ios --emulator --buildConfig=../build.json --release');
   } else {
-    utils.cordova('build ios --buildConfig=../build.json');
+    utils.cordova('build ios --emulator --buildConfig=../build.json');
   }
 
   console.log('Done!');

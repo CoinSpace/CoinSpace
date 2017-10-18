@@ -55,9 +55,6 @@ function scan(data) {
           emitter.emit('prefill-value', match[1], data.context)
         }
       }
-      if (window.FacebookAds && window.FacebookAds.fixBanner) {
-        window.FacebookAds.fixBanner();
-      }
     },
     function () {
       navigator.notification.alert(
