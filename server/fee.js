@@ -9,10 +9,12 @@ function save(data) {
   });
 }
 
-function getFromAPI(callback) {
-  axios.get('https://bitcoinfees.21.co/api/v1/fees/recommended').then(function(response) {
-    callback(null, response.data)
-  }, callback)
+function getFromAPI() {
+  return axios.get('https://bitcoinfees.21.co/api/v1/fees/recommended').then(function(response) {
+    var data = response.data;
+    if (!data.hourFee || !data.fastestFee) throw new Error('Bad fee response');
+    return response.data;
+  })
 }
 
 function getFromCache(callback) {

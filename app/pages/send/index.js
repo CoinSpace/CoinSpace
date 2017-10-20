@@ -5,7 +5,8 @@ var Big = require('big.js')
 var emitter = require('lib/emitter')
 var db = require('lib/db')
 var getWallet = require('lib/wallet').getWallet
-var currencies = require('lib/ticker-api').currencies
+var getNetwork = require('lib/network')
+var currencies = require('lib/ticker-api').currencies(getNetwork())
 var toFixedFloor = require('lib/convert').toFixedFloor
 var toUnitString = require('lib/convert').toUnitString
 var showError = require('widgets/modal-flash').showError
@@ -14,7 +15,6 @@ var showConfirmation = require('widgets/modal-confirm-send')
 var validateSend = require('lib/wallet').validateSend
 var getDynamicFees = require('lib/wallet').getDynamicFees
 var resolveTo = require('lib/openalias/xhr.js').resolveTo
-var getNetwork = require('lib/network')
 var qrcode = require('lib/qrcode')
 
 module.exports = function(el){
@@ -91,10 +91,13 @@ module.exports = function(el){
   })
 
   emitter.once('db-ready', function(){
-    db.get(function(err, doc){
+    db.get('systemInfo', function(err, info) {
       if(err) return console.error(err);
-
-      ractive.set('selectedFiat', doc.systemInfo.preferredCurrency)
+      var preferredCurrency = info.preferredCurrency;
+      if (currencies.indexOf(preferredCurrency) === -1) {
+        preferredCurrency = 'USD';
+      }
+      ractive.set('selectedFiat', preferredCurrency)
       ractive.observe('selectedFiat', setPreferredCurrency)
     })
   })

@@ -14,8 +14,8 @@ var urlRoot = process.env.SITE_URL
 
 function BitcoinAverage(n){
   network = n
-  if(!tickers[network]) {
-    throw new Error(network + " price ticker is not supported")
+  if (!tickers[network]) {
+    throw new Error(network + ' price ticker is not supported');
   }
 }
 

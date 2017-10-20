@@ -1,10 +1,15 @@
-var axios = require('axios')
-var db = require('./db')
-var tickerDB = db('ticker')
-var crypto = require('crypto')
-var currencies = require('cs-ticker-api/currencies')
+var axios = require('axios');
+var db = require('./db');
+var tickerDB = db('ticker');
+var crypto = require('crypto');
+var currencies = require('cs-ticker-api/currencies');
 
-var tickerUrl = 'https://apiv2.bitcoinaverage.com/indices/global/ticker/short'
+var tickerUrl = 'https://apiv2.bitcoinaverage.com/indices/global/ticker/short';
+var networks = {
+  BTC: 'bitcoin',
+  LTC: 'litecoin',
+  ETH: 'ethereum'
+};
 
 function save(cacheId, data) {
   tickerDB.save(cacheId, {data: data}, function(err) {
@@ -12,17 +17,18 @@ function save(cacheId, data) {
   });
 }
 
-function getFromAPI(cryptoTicker, callback) {
-  axios({
+function getFromAPI(cryptoTicker) {
+  return axios({
     url: tickerUrl,
     headers: {'X-Signature': getSignature()},
     params: {
       crypto: cryptoTicker,
-      fiat: currencies.join()
+      fiat: getCurrencies(cryptoTicker).join()
     }
   }).then(function(response) {
-    return callback(null, toRates(response.data, cryptoTicker));
-  }, callback)
+    if (!response.data) throw new Error('Bad ticker response');
+    return toRates(response.data, cryptoTicker);
+  });
 }
 
 function getFromCache(cacheId, callback) {
@@ -33,11 +39,17 @@ function getFromCache(cacheId, callback) {
 }
 
 function toRates(apiRates, cryptoTicker){
-  var rates = {}
-  currencies.forEach(function(currency){
+  var rates = {};
+  var ignored = ['mBTC', 'μBTC'];
+  getCurrencies(cryptoTicker).forEach(function(currency){
+    if (ignored.indexOf(currency) !== -1) return;
     rates[currency] = apiRates[cryptoTicker + currency].last
-  })
-  return rates
+  });
+  if (cryptoTicker === 'BTC') {
+    rates['mBTC'] = 1000;
+    rates['μBTC'] = 1000000;
+  }
+  return rates;
 }
 
 function getSignature() {
@@ -49,8 +61,15 @@ function getSignature() {
   return payload + '.' + hexHash
 }
 
+function getCurrencies(cryptoTicker) {
+  if (!networks[cryptoTicker]) {
+    throw new Error(cryptoTicker + ' currency ticker is not supported');
+  }
+  return currencies(networks[cryptoTicker]);
+}
+
 module.exports = {
   save: save,
   getFromAPI: getFromAPI,
   getFromCache: getFromCache
-}
+};

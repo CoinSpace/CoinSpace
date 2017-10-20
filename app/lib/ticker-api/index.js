@@ -1,5 +1,7 @@
-var BitcoinAverage = require('./bitcoinaverage')
-var currencies = require('./currencies')
+'use strict';
+
+var BitcoinAverage = require('./bitcoinaverage');
+var currencies = require('./currencies');
 
 module.exports = {
   BitcoinAverage: BitcoinAverage,

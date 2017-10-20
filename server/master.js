@@ -14,11 +14,11 @@ function cleanGeo(interval) {
 
 function cacheFees(interval) {
   setInterval(function intervalFunction() {
-    fee.getFromAPI(function(err, data) {
-      if (err) return console.error(err);
-      if (!data.hourFee || !data.fastestFee) return console.error('Bad fee response', data);
+    fee.getFromAPI().then(function(data) {
       fee.save({hour: data.hourFee, fastest: data.fastestFee})
       if (global.gc) global.gc();
+    }).catch(function(err) {
+      console.error(err);
     });
     return intervalFunction;
   }(), interval);
@@ -27,11 +27,11 @@ function cacheFees(interval) {
 function cacheTicker(interval) {
   setInterval(function intervalFunction() {
     ['BTC', 'LTC', 'ETH'].forEach(function(cryptoTicker) {
-      ticker.getFromAPI(cryptoTicker, function(err, data) {
-        if (err) return console.error(err);
-        if (!data) return console.error('Bad ticker response', data);
+      ticker.getFromAPI(cryptoTicker).then(function(data) {
         ticker.save(cryptoTicker, data)
         if (global.gc) global.gc();
+      }).catch(function(err) {
+        console.error(err);
       });
     })
 

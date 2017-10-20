@@ -10,7 +10,8 @@ var toFixedFloor = require('lib/convert').toFixedFloor
 var Big = require('big.js')
 var showError = require('widgets/modal-flash').showError
 var db = require('lib/db')
-var currencies = require('lib/ticker-api').currencies
+var getNetwork = require('lib/network')
+var currencies = require('lib/ticker-api').currencies(getNetwork())
 
 var WatchModule = require('lib/apple-watch')
 
@@ -54,10 +55,14 @@ module.exports = function(el){
   })
 
   emitter.once('db-ready', function(){
-    db.get('systemInfo', function(err, info){
+    db.get('systemInfo', function(err, info) {
       if(err) return console.error(err);
-      ractive.set('selectedFiat', info.preferredCurrency)
-      sendIosCurrency(info.preferredCurrency)
+      var preferredCurrency = info.preferredCurrency;
+      if (currencies.indexOf(preferredCurrency) === -1) {
+        preferredCurrency = 'USD';
+      }
+      ractive.set('selectedFiat', preferredCurrency)
+      sendIosCurrency(preferredCurrency)
       ractive.observe('selectedFiat', setPreferredCurrency)
     })
   })
