@@ -8,7 +8,6 @@ var emitter = require('lib/emitter')
 var Avatar = require('lib/avatar')
 var db = require('lib/db')
 var setUsername = require('lib/wallet/auth.js').setUsername
-var getNetwork = require('lib/network')
 
 module.exports = function init(el) {
 
@@ -47,7 +46,7 @@ module.exports = function init(el) {
       ractive.set('user', doc.userInfo)
       setAvatar()
 
-      if(ractive.get('user.firstName') || getNetwork() != 'bitcoin') {
+      if (ractive.get('user.firstName')) {
         Profile.hide($editEl, ractive)
       } else {
         Profile.hide($previewEl, ractive)
