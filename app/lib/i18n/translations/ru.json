@@ -140,5 +140,10 @@
     "Done": "Done",
     "Please enter a valid return address": "Пожалуйста, введите правильный адрес возврата",
     "Miner fee": "Комиссия майнера",
-    "Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.": "Обратный адрес должен принадлежать вам, чтобы в случае сбоя депозит был возвращен на этот адрес."
+    "Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.": "Обратный адрес должен принадлежать вам, чтобы в случае сбоя депозит был возвращен на этот адрес.",
+    "Remove account": "Удалить аккаунт",
+    "Remove": "Удалить",
+    "Are you sure?": "Вы уверены?",
+    "Account has been successfully removed": "Аккаунт успешно удален",
+    "This page will be reloaded shortly.": "Эта страница будет перезагружена в ближайшее время."
 }

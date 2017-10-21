@@ -27,4 +27,7 @@
   {{#submitting}}
     <div class="settings__btn--loading">{{translate("Submit")}}...</div>
   {{/submitting}}
+
+  <div class="remove__btn" on-click="remove-account">{{translate("Remove account")}}</div>
+
 </div>

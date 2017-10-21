@@ -1,0 +1,150 @@
+.confirm__remove {
+  padding: 0;
+  padding-top: 20px;
+  background-color: white;
+  min-width: 280px;
+  max-width: 450px;
+
+  @include breakpoint(portrait) {
+    width: 450px;
+    padding-top: 30px;
+  }
+
+  &._success {
+    background-color: $green;
+    ._inputs {
+      background-color: white;
+      display: flex;
+      ._cancel {
+        max-width: 140px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  ._header {
+    font-size: 21px;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $grey;
+
+    @include breakpoint(portrait) {
+      font-size: 24px;
+      padding-bottom: 20px;
+    }
+  }
+
+  ._content {
+    @extend .jigsaw-light;
+    text-align: center;
+    padding: 20px 20px 0;
+    font-size: 32px;
+    @include breakpoint(portrait) {
+      font-size: 48px;
+    }
+  }
+
+  ._inputs {
+    padding: 20px;
+    background-color: white;
+    border-radius: 3px;
+
+    display: flex;
+
+    ._cancel {
+      @extend .csbtn-base;
+      margin-right: 5px;
+
+      color: darken($grey, 20%);
+      background-color: $grey;
+      box-shadow: 0 2px 0 0 darken($grey, 20%);
+
+      @include breakpoint(portrait) {
+        font-size: 24px;
+      }
+
+      &:hover {
+        color: darken($grey, 20%);
+      }
+    }
+
+    ._report {
+      @extend .csbtn--red;
+      margin-right: 5px;
+
+      @include breakpoint(portrait) {
+        font-size: 24px;
+      }
+    }
+
+    ._remove {
+      @extend .csbtn--red;
+      margin-left: 5px;
+
+      @include breakpoint(portrait) {
+        font-size: 24px;
+      }
+    }
+
+    ._remove--processing {
+      @extend .csbtn-base;
+      position: relative;
+      margin-left: 5px;
+      color: darken($grey, 20%);
+      background-color: $grey;
+      transform: translate(0px, 3px);
+      box-shadow: 0 0px 0 0;
+      &:hover {
+        color: darken($grey, 20%);
+      }
+      ._icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -15px;
+        margin-left: -15px;
+        width: 30px;
+        height: 30px;
+        display: inline;
+        animation:  infinite-spinning 1s linear infinite;
+        .svg-refresh {
+          fill: darken($grey, 20%);
+        }
+      }
+    }
+  }
+
+  ._responseIcon {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+  }
+
+  ._responseTitle {
+    color: white;
+    font-size: 21px;
+    text-align: center;
+    padding-bottom: 10px;
+    max-width: 240px;
+    margin: 0 auto;
+
+    @include breakpoint(portrait) {
+      font-size: 28px;
+    }
+  }
+
+  ._responseMsg {
+    color: white;
+    text-align: center;
+    max-width: 180px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    line-height: 1.3;
+    font-size: 13px;
+
+    @include breakpoint(portrait) {
+      font-size: 18px;
+      max-width: 250px;
+    }
+  }
+}

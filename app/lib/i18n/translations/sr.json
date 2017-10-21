@@ -140,5 +140,10 @@
     "Done": "Done",
     "Please enter a valid return address": "Please enter a valid return address",
     "Miner fee": "Miner fee",
-    "Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.": "Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction."
+    "Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.": "Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.",
+    "Remove account": "Remove account",
+    "Remove": "Remove",
+    "Are you sure?": "Are you sure?",
+    "Account has been successfully removed": "Account has been successfully removed",
+    "This page will be reloaded shortly.": "This page will be reloaded shortly."
 }
