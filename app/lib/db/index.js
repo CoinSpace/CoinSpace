@@ -14,10 +14,6 @@ var id = null
 var sercret = null
 var isReady = false
 
-function userID(){
-  return id
-}
-
 function set(key, value, callback) {
   updateDoc(callback, function(data){
     if(data[key] && value != undefined) {
@@ -147,7 +143,6 @@ function initializeRecord(){
 }
 
 module.exports = {
-  userID: userID,
   get: get,
   set: set,
   remove: remove,

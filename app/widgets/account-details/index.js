@@ -7,7 +7,7 @@ var showError = require('widgets/modal-flash').showError
 var emitter = require('lib/emitter')
 var Avatar = require('lib/avatar')
 var db = require('lib/db')
-var setUsername = require('lib/wallet/auth.js').setUsername
+var setUsername = require('lib/wallet').setUsername
 var showRemoveConfirmation = require('widgets/modal-confirm-remove')
 
 module.exports = function init(el) {

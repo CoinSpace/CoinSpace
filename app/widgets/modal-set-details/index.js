@@ -4,7 +4,7 @@ var Ractive = require('widgets/modal')
 var db = require('lib/db')
 var emitter = require('lib/emitter')
 var showError = require('widgets/modal-flash').showError
-var setUsername = require('lib/wallet/auth.js').setUsername
+var setUsername = require('lib/wallet').setUsername
 
 function fetchDetails(callback){
   db.get(function(err, doc){

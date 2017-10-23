@@ -90,6 +90,10 @@ function removeAccount(callback) {
   auth.remove(id, callback);
 }
 
+function setUsername(username, callback) {
+  auth.setUsername(id, username, callback);
+}
+
 function openWalletWithPin(pin, network, done, txSyncDone) {
   var callbacks = [done, txSyncDone]
   db.getCredentials(function(err, credentials){
@@ -237,6 +241,7 @@ module.exports = {
   createWallet: createWallet,
   setPin: setPin,
   removeAccount: removeAccount,
+  setUsername: setUsername,
   getWallet: getWallet,
   walletExists: walletExists,
   reset: reset,
