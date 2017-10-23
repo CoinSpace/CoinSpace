@@ -114,8 +114,7 @@ module.exports = function init(el) {
   })
 
   ractive.on('remove-account', function() {
-    console.log('remove account');
-    showRemoveConfirmation({});
+    showRemoveConfirmation();
   });
 
   function setAvatar(){

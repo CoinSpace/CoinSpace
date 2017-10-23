@@ -64,6 +64,13 @@ function get(key, callback) {
   })
 }
 
+function remove(callback) {
+  db.get(id, function(err, doc) {
+    if (err) return console.error(err);
+    db.remove(doc, callback);
+  });
+}
+
 emitter.on('wallet-init', function(data){
   sercret = data.seed
   id = data.id
@@ -143,6 +150,7 @@ module.exports = {
   userID: userID,
   get: get,
   set: set,
+  remove: remove,
   isReady: function() {
     return isReady;
   }

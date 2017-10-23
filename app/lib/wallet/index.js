@@ -86,8 +86,8 @@ function setPin(pin, network, done, txSyncDone) {
   })
 }
 
-function disablePin(pin, callback) {
-  auth.disablePin(id, pin, callback)
+function removeAccount(callback) {
+  auth.remove(id, callback);
 }
 
 function openWalletWithPin(pin, network, done, txSyncDone) {
@@ -236,7 +236,7 @@ module.exports = {
   openWalletWithPin: openWalletWithPin,
   createWallet: createWallet,
   setPin: setPin,
-  disablePin: disablePin,
+  removeAccount: removeAccount,
   getWallet: getWallet,
   walletExists: walletExists,
   reset: reset,

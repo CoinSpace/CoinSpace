@@ -137,12 +137,10 @@ module.exports = function (){
     })
   })
 
-  app.delete('/pin', restrict, function(req, res) {
+  app.delete('/account', restrict, function(req, res) {
     var id = req.body.id
-    var pin = req.body.pin
-
-    auth.disablePin(id, pin, function(err){
-      if(err) return res.status(400).send(err)
+    auth.remove(id, function(err){
+      if (err) return res.status(400).send(err);
       res.status(200).send()
     })
   })

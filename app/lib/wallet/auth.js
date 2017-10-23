@@ -18,13 +18,12 @@ function exist(wallet_id, callback) {
   }, callback)
 }
 
-function disablePin(wallet_id, pin, callback) {
+function remove(wallet_id, callback) {
   request({
-    url: urlRoot + '/pin',
+    url: urlRoot + '/account',
     method: 'delete',
     data: {
-      id: wallet_id,
-      pin: pin
+      id: wallet_id
     }
   }, callback)
 }
@@ -64,6 +63,6 @@ module.exports = {
   register: register,
   login: login,
   exist: exist,
-  disablePin: disablePin,
+  remove: remove,
   setUsername: setUsername
 }

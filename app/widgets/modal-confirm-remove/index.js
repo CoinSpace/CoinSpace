@@ -1,35 +1,50 @@
 'use strict';
 
 var Ractive = require('widgets/modal');
-var emitter = require('lib/emitter');
 var showError = require('widgets/modal-flash').showError;
+var CS = require('lib/wallet');
+var db = require('lib/db');
 
-function open(data) {
-
-  data.confirmation = true;
+function open() {
 
   var ractive = new Ractive({
     partials: {
       content: require('./_content.ract')
     },
-    data: data
+    data: {
+      confirmation: true,
+      success: false,
+      removing: false
+    }
   });
 
-  ractive.on('remove', function(){
+  ractive.on('remove', function() {
     ractive.set('removing', true);
-
-    // error
-    // showError({message: 'some error'});
-    // ractive.set('removing', false);
-
-    // success
-    ractive.set('confirmation', false);
-    ractive.set('success', true);
+    CS.removeAccount(function(err) {
+      if (err) return handleError(err);
+      db.remove(function(err) {
+        if (err) return handleError(err);
+        CS.reset(function(err) {
+          if (err) return handleError(err);
+          CS.resetPin();
+          ractive.set('confirmation', false);
+          ractive.set('success', true);
+          setTimeout(function() {
+            location.reload();
+          }, 3000);
+        });
+      });
+    });
   });
 
   ractive.on('reload', function() {
-    console.log('reload');
+    location.reload();
   });
+
+  function handleError(err) {
+    ractive.set('removing', false);
+    showError({message: err.message});
+  }
 
   return ractive;
 }

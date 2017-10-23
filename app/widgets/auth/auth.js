@@ -28,7 +28,7 @@ var Auth = Ractive.extend({
 
     function onDoneError(err) {
       if(err.message === 'user_deleted') {
-        return location.reload(false);
+        return location.reload();
       }
 
       emitter.emit('clear-pin')

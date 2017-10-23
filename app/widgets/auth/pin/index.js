@@ -108,7 +108,7 @@ module.exports = function(prevPage, data){
   ractive.on('clear-credentials', function(){
     CS.reset(function(){
       CS.resetPin()
-      location.reload(false);
+      location.reload();
     })
   })
 

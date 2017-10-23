@@ -50,34 +50,6 @@ function login(name, pin, callback) {
   })
 }
 
-function disablePin(name, pin, callback){
-  var error = {error: 'disable_pin_failed'}
-
-  name = userPrefix + name
-  userDB.get(name, function (err, user) {
-    if(err){
-      console.error('error getting user on disable pin', err)
-      return callback(error)
-    }
-
-    verifyPin(user, name, pin, function(err, token){
-      if(err) return callback(error)
-
-      var hashAndSalt = generatePasswordHash(token)
-      var credentials = {
-        password_sha: hashAndSalt[0],
-        salt: hashAndSalt[1]
-      }
-
-      userDB.merge(user._id, credentials, function(err, res){
-        if(err) return callback(error);
-
-        callback()
-      })
-    })
-  })
-}
-
 function createUser(name, pin, callback){
   var token = generateToken()
   var password = token + pin
@@ -124,27 +96,26 @@ function createDatabase(name, callback) {
 }
 
 function setUsername(name, username, callback) {
-  var error = {error: 'set_username_failed'}
-  name = userPrefix + name
+  var error = {error: 'set_username_failed'};
+  name = userPrefix + name;
   userDB.get(name, function (err, user) {
-    if(err){
-      console.error('error getting doc', err)
-      callback(error)
-    } else {
-      validateUsername(username, function(err, username) {
-        if(err) return callback(err);
-
-        var username_sha = generateUsernameHash(username)
-        userDB.merge(user._id, {username_sha: username_sha}, function(err, res) {
-          if(err) {
-            console.error('FATAL: failed to update username_sha')
-            return callback(error)
-          }
-          callback(null, username)
-        })
-      })
+    if (err) {
+      console.error('error getting doc', err);
+      return callback(error);
     }
-  })
+
+    validateUsername(username, function(err, username) {
+      if (err) return callback(err);
+      var username_sha = generateUsernameHash(username);
+      userDB.merge(user._id, {username_sha: username_sha}, function(err, res) {
+        if (err) {
+          console.error('FATAL: failed to update username_sha');
+          return callback(error);
+        }
+        callback(null, username);
+      });
+    });
+  });
 }
 
 function validateUsername(username, callback) {
@@ -159,6 +130,24 @@ function validateUsername(username, callback) {
     } else {
       callback({error: 'username_exists'});
     }
+  });
+}
+
+function remove(name, callback) {
+  var error = {error: 'delete_account_failed'};
+  userDB.get(userPrefix + name, function (err, user) {
+    if (err) {
+      console.error('error getting doc', err);
+      return callback(error);
+    }
+    userDB.remove(user._id, user._rev, function(err) {
+      if (err) {
+        console.error('FATAL: failed to remove user', err);
+        return callback(error);
+      }
+      var csDB = db('cs' + name);
+      csDB.destroy(callback);
+    });
   });
 }
 
@@ -221,6 +210,6 @@ module.exports = {
   register: register,
   login: login,
   exist: exist,
-  disablePin: disablePin,
+  remove: remove,
   setUsername: setUsername
 }
