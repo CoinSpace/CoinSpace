@@ -11,6 +11,7 @@
 	  </div>
   </div>
 
+  {{#isPhonegap}}
   <div class="about__section">
     {{#if isAdFree}}
       <div class="about__listitem">
@@ -23,6 +24,7 @@
       </a>
     {{/if}}
   </div>
+  {{/isPhonegap}}
 
   <div class="about__section">
 	  <a class="about__listitem" onclick="window.open('https://www.coin.space/coinspaceprivacypolicy.html', '_system'); return false;" href="">

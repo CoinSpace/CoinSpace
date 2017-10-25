@@ -9,7 +9,8 @@ module.exports = function (el) {
     el: el,
     template: require('./index.ract'),
     data: {
-      isAdFree: false
+      isAdFree: false,
+      isPhonegap: process.env.BUILD_TYPE === 'phonegap'
     }
   });
 
