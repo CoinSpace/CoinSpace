@@ -5,6 +5,7 @@ var fse = require('fs-extra');
 var path = require('path');
 var utils = require('./utils');
 var webpack = require('webpack');
+var dotenv = require('dotenv');
 var mobileBuildPath = 'phonegap/build';
 
 program
@@ -21,6 +22,7 @@ if (program.run) {
 console.log('Start building (webpack)...');
 
 var envFile = `.env.${program.env}`;
+dotenv.config({path: envFile});
 process.env['ENV_FILE'] = envFile;
 process.env['BUILD_TYPE'] = 'phonegap';
 var webpackConfig = require('../webpack.prod');
@@ -51,6 +53,7 @@ webpack(webpackConfig, function(error, stats) {
   utils.cordova('plugin add cordova-facebook-audnet-sdk@4.23.0');
   utils.cordova('plugin add cordova-plugin-facebookads@4.23.2');
   utils.cordova('plugin add cordova-plugin-android-fingerprint-auth@1.4.0');
+  utils.cordova(`plugin add cc.fovea.cordova.purchase@7.0.2 --variable BILLING_KEY="${process.env['ANDROID_BILLING_KEY']}"`);
 
   if (program.release) {
     utils.cordova('build android --release');

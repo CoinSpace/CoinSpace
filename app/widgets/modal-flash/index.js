@@ -23,6 +23,9 @@ function openModal(type, data) {
   data.warning = defaults[type].warning
   data.title = data.title || defaults[type].title
   data.type = type
+  data.onDismiss = function() {
+    isOpen = false;
+  }
 
   var ractive = new Ractive({
     el: document.getElementById('flash-modal'),
@@ -34,10 +37,6 @@ function openModal(type, data) {
 
   ractive.on('close', function(){
     ractive.fire('cancel')
-  })
-
-  ractive.on('cancel', function() {
-    isOpen = false;
   })
 
   return ractive

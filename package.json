@@ -48,6 +48,7 @@
     "cs-ethereum-wallet": "git://github.com/CoinSpace/cs-ethereum-wallet.git#v1.0.4",
     "cs-wallet": "git://github.com/CoinSpace/cs-wallet.git#v0.13.2",
     "css-loader": "^0.28.7",
+    "dotenv": "^4.0.0",
     "dotenv-webpack": "^1.5.4",
     "ejs-loader": "^0.3.0",
     "es6-promise": "^4.1.1",

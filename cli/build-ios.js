@@ -55,6 +55,7 @@ webpack(webpackConfig, function(error, stats) {
   utils.cordova('plugin add cordova-plugin-console@1.0.7');
   utils.cordova('plugin add cordova-facebook-audnet-sdk@4.23.0');
   utils.cordova('plugin add cordova-plugin-facebookads@4.23.2');
+  utils.cordova('plugin add cc.fovea.cordova.purchase@7.0.2');
 
   if (program.release) {
     utils.cordova('build ios --emulator --buildConfig=../build.json --release');

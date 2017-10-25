@@ -10,6 +10,7 @@ window.initCSApp = function() {
   var initGeoOverlay = require('widgets/geo-overlay')
   var getNetwork = require('lib/network')
   var fadeIn = require('lib/transitions/fade.js').fadeIn
+  var ads = require('lib/ads');
 
   var WatchModule = require('lib/apple-watch')
 
@@ -23,29 +24,11 @@ window.initCSApp = function() {
 
   WatchModule.initWatch('group.com.coinspace.wallet')
 
-
-  if (window.FacebookAds) {
-    var ad_units = {
-      ios : {banner: '196605347445795_200305920409071'},
-      android : {banner: '196605347445795_200306843742312'}
+  if (process.env.BUILD_TYPE === 'phonegap') {
+    ads.init();
+    if (window.store) {
+      window.store.refresh();
     }
-    var position = window.FacebookAds.AD_POSITION.BOTTOM_CENTER;
-
-    var adid = (/(android)/i.test(navigator.userAgent)) ? ad_units.android : ad_units.ios;
-    window.FacebookAds.createBanner({
-      adId: adid.banner,
-      position: position,
-      autoShow: true
-    }, function() {
-      var timeout = false;
-      window.addEventListener('resize', function() {
-        clearTimeout(timeout);
-        timeout = setTimeout(function() {
-          window.FacebookAds.showBanner(position);
-        }, 300);
-      });
-      window.FacebookAds.showBanner(position);
-    });
   }
 
   walletExists(function(exists){

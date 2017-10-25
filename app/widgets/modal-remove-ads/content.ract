@@ -1,0 +1,28 @@
+
+<div class="modal _cancel">
+  <div class="modal__content remove_ads">
+    <div class="_header" on-click="close">
+      <span class="modal__cancel">
+        {{>svg_close}}
+      </span>
+      <div class="_icon">
+        {{>svg_warning}}
+      </div>
+      <h2 class="_title">{{translate("Remove Ads")}}</h2>
+    </div>
+    <p class="_message">{{price}}</p>
+
+    <div class="confirm__buttons">
+      {{#if isLoading}}
+        <div class="_buy_btn--loading">
+          <span class="_icon">
+            {{>svg_refresh}}
+          </span>
+        </div>
+      {{else}}
+        <div class="_buy_btn" on-click="buy">{{translate("buy")}}</div>
+      {{/if}}
+    </div>
+
+  </div>
+</div>
