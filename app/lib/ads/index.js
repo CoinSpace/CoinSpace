@@ -9,7 +9,7 @@ var ad_units = {
 }
 var resizeHandler = null;
 var storeIsReady = false;
-var adFreeId = 'AdFree';
+var adFreeId = 'adfree';
 var adFreePrice = '';
 
 function init() {
