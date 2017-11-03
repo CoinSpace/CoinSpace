@@ -1,11 +1,11 @@
 'use strict';
 
-var Velocity = require('velocity-animate')
+var Velocity = require('velocity-animate');
 
 function fadeAnimation(el, props, options, callback) {
   Velocity.animate(el, props, {
     easing: 'ease',
-    duration: 300,
+    duration: options.duration,
     display: options.display,
     complete: function() {
       if(callback !== undefined) {
@@ -16,12 +16,17 @@ function fadeAnimation(el, props, options, callback) {
 }
 
 module.exports = {
-  fadeIn: function(el, callback) {
-    var props = {
-      opacity: 1.0
+  fadeIn: function(el, duration, callback) {
+    if (typeof duration === 'function') {
+      callback = duration;
+      duration = false;
     }
     var options = {
-      display: 'block'
+      display: 'block',
+      duration: typeof duration === 'number' ? duration : 300
+    }
+    var props = {
+      opacity: 1.0
     }
     fadeAnimation(el, props, options, callback)
   },
@@ -31,7 +36,8 @@ module.exports = {
       opacity: 0
     }
     var options = {
-      display: 'none'
+      display: 'none',
+      duration: 300
     }
     fadeAnimation(el, props, options, callback)
   }
