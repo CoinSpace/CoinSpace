@@ -25,7 +25,7 @@ module.exports = function(el){
     active = node
   }
 
-  emitter.on('wallet-ready', function() {
+  emitter.once('wallet-ready', function() {
     highlightTab(ractive.find(tabElements.send));
   });
 
