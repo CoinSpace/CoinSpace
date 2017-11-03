@@ -221,6 +221,7 @@ function reset(callback){
 }
 
 function getDynamicFees(callback) {
+  if (wallet.networkName !== 'bitcoin') return callback();
   var fees = cache.get('bitcoinFees')
 
   if (fees) {

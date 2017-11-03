@@ -107,8 +107,16 @@
 }
 
 .settings__footer {
-  display: flex;
-  flex-direction: row;
+  ._btn_group {
+    display: flex;
+    flex-direction: row;
+  }
+  ._link_group {
+    padding-bottom: 15px;
+    .settings__link {
+      padding: 5px 0;
+    }
+  }
 }
 
 #settings {
@@ -128,13 +136,12 @@
   font-size: 24px;
 }
 
-.settings__editBtn {
+.settings__link {
   display: block;
   cursor: pointer;
   text-align: center;
   padding-top: 10px;
-  color: #333;
-  opacity: 0.4;
+  color: #999;
 
   &:hover {
     text-decoration: underline;

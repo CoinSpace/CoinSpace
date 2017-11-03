@@ -1,0 +1,181 @@
+.import_private_key {
+  padding: 0;
+  padding-top: 20px;
+  background-color: white;
+  min-width: 280px;
+  max-width: 450px;
+
+  @include breakpoint(portrait) {
+    width: 450px;
+    padding-top: 30px;
+  }
+
+  ._header {
+    font-size: 21px;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $grey;
+
+    @include breakpoint(portrait) {
+      font-size: 24px;
+      padding-bottom: 20px;
+    }
+  }
+
+  ._content {
+    padding: 20px 20px 0;
+    ._private_key_group {
+      display: flex;
+      margin-bottom: 20px;
+
+      .input__container {
+        position: relative;
+        margin-top: 5px;
+      }
+
+      .close__input {
+        ._icon{
+          .svg-close {
+            fill: #969594;
+          }
+        }
+      }
+
+      ._label {
+        @include noselect;
+        cursor: pointer;
+        display: block;
+        flex: 1;
+
+        @include breakpoint(portrait) {
+          font-size: 20px;
+        }
+      }
+
+      ._btn {
+        @extend .csbtn;
+        margin-top: 29px;
+        padding: 0;
+        width: 42px;
+        height: 42px;
+        position: relative;
+
+        @include breakpoint(portrait) {
+          margin-top: 35px;
+          width: 59px;
+          height: 59px;
+        }
+
+        ._icon {
+          width: 30px;
+          height: 30px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          margin-top: -15px;
+          margin-left: -15px;
+
+          @include breakpoint(portrait) {
+            width: 44px;
+            height: 44px;
+            margin-top: -22px;
+            margin-left: -22px;
+          }
+        }
+      }
+
+      ._btn-qr {
+        margin-left: 10px;
+      }
+
+      ._input {
+        @extend .generic_box;
+        @extend .jigsaw-light;
+        padding-left: 10px;
+        padding-right: 38px;
+        border-radius: 2px;
+
+        height: auto;
+
+        &:active, &:focus {
+          outline: 0;
+          border: 1px solid #999;
+        }
+
+        @include breakpoint(portrait) {
+          font-size: 26px;
+          border-radius: 3px;
+          padding-right: 58px;
+        }
+      }
+    }
+    ._description {
+      @extend .jigsaw-regular;
+      @include breakpoint(portrait) {
+        font-size: 20px;
+      }
+    }
+  }
+
+  ._inputs {
+    padding: 20px;
+    background-color: white;
+    border-radius: 3px;
+
+    display: flex;
+
+    ._cancel {
+      @extend .csbtn-base;
+      margin-right: 5px;
+
+      color: darken($grey, 20%);
+      background-color: $grey;
+      box-shadow: 0 2px 0 0 darken($grey, 20%);
+
+      @include breakpoint(portrait) {
+        font-size: 24px;
+      }
+
+      &:hover {
+        color: darken($grey, 20%);
+      }
+    }
+
+    ._transfer {
+      @extend .csbtn;
+      margin-left: 5px;
+
+      @include breakpoint(portrait) {
+        font-size: 24px;
+      }
+    }
+
+    ._transfer--processing {
+      @extend .csbtn-base;
+      position: relative;
+      margin-left: 5px;
+      color: darken($grey, 20%);
+      background-color: $grey;
+      transform: translate(0px, 3px);
+      box-shadow: 0 0px 0 0;
+      &:hover {
+        color: darken($grey, 20%);
+      }
+      ._icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -15px;
+        margin-left: -15px;
+        width: 30px;
+        height: 30px;
+        display: inline;
+        animation:  infinite-spinning 1s linear infinite;
+        .svg-refresh {
+          fill: darken($grey, 20%);
+        }
+      }
+    }
+  }
+
+}

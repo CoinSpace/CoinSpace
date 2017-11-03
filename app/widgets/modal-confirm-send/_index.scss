@@ -120,6 +120,10 @@
       font-size: 18px;
     }
   }
+  ._info_medium {
+    @extend ._address;
+    @extend .jigsaw-medium;
+  }
 }
 
 .confirm__inputs {

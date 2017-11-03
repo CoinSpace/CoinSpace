@@ -1,0 +1,47 @@
+<div class="modal _cancel">
+  <div class="modal__content import_private_key">
+
+    <h3 class="_header">{{translate("Transfer private key")}}</h3>
+
+    <div class="_content">
+      <div class="_private_key_group">
+        <label class="_label" for="private_key">{{translate("Private key")}}
+          <div class="input__container">
+            <input id="private_key" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{privateKey}}" />
+            {{#privateKey}}
+              <div class="close__input" on-click="clearPrivateKey">
+                <span class="_icon">{{> svg_close}}</span>
+              </div>
+            {{/privateKey}}
+          </div>
+        </label>
+
+        {{#qrScannerAvailable}}
+          <div class="_btn _btn-qr" on-click="open-qr">
+            <span class="_icon">
+              {{>svg_qr}}
+            </span>
+          </div>
+        {{/qrScannerAvailable}}
+      </div>
+
+      <div class="_description">
+        {{translate("This will transfer all coins from the paper wallet address to your wallet.")}}
+      </div>
+    </div>
+
+    <div class="_inputs">
+      <div class="_cancel">{{translate("Cancel")}}</div>
+      {{#if isLoading}}
+        <div class="_transfer--processing">
+          <span class="_icon">
+            {{>svg_refresh}}
+          </span>
+        </div>
+      {{else}}
+        <div class="_transfer" on-click="transfer">{{translate("Transfer")}}</div>
+      {{/if}}
+    </div>
+
+  </div>
+</div>

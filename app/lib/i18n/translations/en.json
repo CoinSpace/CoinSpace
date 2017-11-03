@@ -151,5 +151,14 @@
   "Version": "Version",
   "Remove Ads": "Remove Ads",
   "Ad free": "Ad free",
-  "buy": "buy"
+  "buy": "buy",
+  "Transfer paper wallet / private key": "Transfer paper wallet / private key",
+  "Export private keys": "Export private keys",
+  "Transfer private key": "Transfer private key",
+  "Transfer": "Transfer",
+  "Private key": "Private key",
+  "This will transfer all coins from the paper wallet address to your wallet.": "This will transfer all coins from the paper wallet address to your wallet.",
+  "This private key has no coins for transfer.": "This private key has no coins for transfer.",
+  "Invalid private key": "Invalid private key",
+  "Insufficient funds": "Insufficient funds"
 }

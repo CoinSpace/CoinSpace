@@ -14,28 +14,31 @@
 
       {{#isBitcoin}}
       	<div class="_dynamic-fee">
-      		<span class="_fee">+{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
+      		<span class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
 					<select value="{{fee}}">
-						<option value="{{feeMinimum}}">+{{feeMinimum}} {{denomination}} - {{translate("minimum")}}</option>
-						<option value="{{feeHour}}" selected>+{{feeHour}} {{denomination}} - {{translate("default")}}</option>
-						<option value="{{feeFastest}}">+{{feeFastest}} {{denomination}} - {{translate("fastest")}}</option>
+						<option value="{{feeMinimum}}">{{feeSign}}{{feeMinimum}} {{denomination}} - {{translate("minimum")}}</option>
+						<option value="{{feeHour}}" selected>{{feeSign}}{{feeHour}} {{denomination}} - {{translate("default")}}</option>
+						<option value="{{feeFastest}}">{{feeSign}}{{feeFastest}} {{denomination}} - {{translate("fastest")}}</option>
 					</select>
       	</div>
       {{/isBitcoin}}
 
       {{#isLitecoin}}
-				<span class="_fee">+{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
+				<span class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
 			{{/isLitecoin}}
 
       {{#isEthereum}}
-				<span class="_fee">+{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
+				<span class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
 			{{/isEthereum}}
 
       <span class="_icon">
         {{>svg_sendto}}
       </span>
+      {{#importTxOptions}}
+      <span class="_info_medium">{{translate("Your wallet address")}}</span>
+      {{/importTxOptions}}
       <span class="_address">{{to}}</span>
-      <span class="_alias">{{alias}}</span>
+      <span class="_info_medium">{{alias}}</span>
 
     </div>
 
@@ -66,7 +69,7 @@
 
     <p class="confirm__responseMsg">{{translate("Your transaction will appear in your history tab shortly.")}}</p>
     <div class="confirm__inputs">
-      <div class="_cancel" on-click="clear">{{translate("Close")}}</div>
+      <div class="_cancel">{{translate("Close")}}</div>
     </div>
   {{/success}}
 

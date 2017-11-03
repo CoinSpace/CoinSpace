@@ -28,14 +28,9 @@ module.exports = function(el){
       qrScannerAvailable: qrcode.isScanAvailable,
       toUnitString: toUnitString,
       isBitcoin: getNetwork() === 'bitcoin' || getNetwork() === 'testnet',
-      isEthereum: getNetwork() === 'ethereum'
+      isEthereum: getNetwork() === 'ethereum',
+      validating: false
     }
-  })
-
-  emitter.on('clear-send-form', function(){
-    ractive.set('to', '')
-    ractive.set('value', '')
-    ractive.set('fiatValue', '')
   })
 
   emitter.on('prefill-wallet', function(address, context) {
@@ -61,28 +56,21 @@ module.exports = function(el){
     emitter.emit('open-overlay', data)
   })
 
-  emitter.on('send-confirm-open', function() {
-    ractive.set('validating', false)
-  })
-
   emitter.on('header-fiat-changed', function(currency) {
     ractive.set('selectedFiat', currency)
   })
 
   ractive.on('open-send', function(){
+    ractive.set('validating', true);
     var to = ractive.get('to')
     resolveTo(to, function(data){
       to = data.to
       var alias = data.alias
       var amount = ractive.get('value')
 
-      if(ractive.get('isBitcoin')) {
-        getDynamicFees(function(dynamicFees) {
-          validateAndShowConfirm(to, amount, alias, dynamicFees)
-        })
-      } else {
-        validateAndShowConfirm(to, amount, alias)
-      }
+      getDynamicFees(function(dynamicFees) {
+        validateAndShowConfirm(to, amount, alias, dynamicFees)
+      });
     })
   })
 
@@ -148,6 +136,7 @@ module.exports = function(el){
 
   function validateAndShowConfirm(to, amount, alias, dynamicFees) {
     validateSend(getWallet(), to, amount, function(err){
+      ractive.set('validating', false);
       if(err) {
         var interpolations = err.interpolations
         if(err.message.match(/trying to empty your wallet/)){
@@ -162,7 +151,10 @@ module.exports = function(el){
         alias: alias,
         amount: ractive.get('value'), // don't change this to amount. 'value' could be modified above
         denomination: ractive.get('denomination'),
-        dynamicFees: dynamicFees
+        dynamicFees: dynamicFees,
+        onSuccessDismiss: function() {
+          ractive.set({to: '', value: '', fiatValue: ''});
+        }
       })
     })
   }

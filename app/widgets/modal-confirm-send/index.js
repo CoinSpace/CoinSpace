@@ -17,10 +17,12 @@ function open(data){
   data.isEthereum = getNetwork() === 'ethereum';
   data.isBitcoin = getNetwork() === 'bitcoin' || getNetwork() === 'testnet';
   data.isLitecoin = getNetwork() === 'litecoin';
+  data.feeSign = data.importTxOptions ? '-' : '+';
 
   var wallet = getWallet()
   var feeRates = null
   var fees = null
+  var unspents = data.importTxOptions ? data.importTxOptions.unspents : null;
 
   if (data.isBitcoin) {
     var defaultFeePerKb = bitcoin.networks['bitcoin'].feePerKb
@@ -30,7 +32,7 @@ function open(data){
       data.dynamicFees.hourFeePerKb ? data.dynamicFees.hourFeePerKb : defaultFeePerKb,
       data.dynamicFees.fastestFeePerKb ? data.dynamicFees.fastestFeePerKb : defaultFeePerKb
     ];
-    fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates)
+    fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents)
 
     data.feeMinimum = toUnitString(fees[0])
     data.feeHour = toUnitString(fees[1])
@@ -39,7 +41,7 @@ function open(data){
 
   } else if (data.isLitecoin) {
     feeRates = [bitcoin.networks['litecoin'].feePerKb]
-    fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates)
+    fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents)
     data.fee = toUnitString(fees[0])
 
   } else if (data.isEthereum) {
@@ -53,43 +55,45 @@ function open(data){
     data: data
   })
 
-  emitter.emit('send-confirm-open')
-
-  ractive.on('clear', function() {
-    emitter.emit('clear-send-form')
-  })
-
   ractive.on('send', function(){
-    ractive.set('sending', true)
-    var to = ractive.get('to')
-    var fee = toAtom(ractive.get('fee'))
-    var value = toAtom(ractive.get('amount'))
-    var wallet = getWallet()
-    var tx = null
+    ractive.set('sending', true);
+    var to = ractive.get('to');
+    var fee = toAtom(ractive.get('fee'));
+    var value = toAtom(ractive.get('amount'));
+    var wallet = getWallet();
+    var tx = null;
+    var importTxOptions = ractive.get('importTxOptions');
 
     try {
-      tx = wallet.createTx(to, value, fee)
+      if (importTxOptions) {
+        importTxOptions.fee = fee;
+        tx = wallet.createImportTx(importTxOptions);
+      } else {
+        tx = wallet.createTx(to, value, fee);
+      }
     } catch(err) {
       if (err.message.match(/Insufficient funds/)) {
-        ractive.set('sending', false)
-        return showInfo({message: 'Please choose lower fee.'})
+        ractive.set('sending', false);
+        return showInfo({message: 'Please choose lower fee.', title: 'Insufficient funds'});
       }
-      return handleTransactionError(err)
+      return handleTransactionError(err);
     }
 
-    wallet.sendTx(tx, function (err, historyTx){
-      if(err) return handleTransactionError(err);
+    wallet.sendTx(tx, function (err, historyTx) {
+      if (err) return handleTransactionError(err);
 
-      ractive.set('confirmation', false)
-      ractive.set('success', true)
+      ractive.set('confirmation', false);
+      ractive.set('success', true);
+      ractive.set('onDismiss', ractive.get('onSuccessDismiss'));
 
       // update balance & tx history
-      emitter.emit('wallet-ready')
-      emitter.emit('append-transactions', [parseHistoryTx(historyTx)])
-    })
-  })
+      emitter.emit('wallet-ready');
+      emitter.emit('append-transactions', [parseHistoryTx(historyTx)]);
+    });
+  });
 
   function handleTransactionError(err) {
+    console.error(err);
     ractive.set('confirmation', false)
     ractive.set('error', err.message)
   }
