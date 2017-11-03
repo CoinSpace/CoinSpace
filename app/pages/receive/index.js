@@ -9,8 +9,6 @@ var showQr = require('widgets/modal-qr')
 var geo = require('lib/geo')
 var showError = require('widgets/modal-flash').showError
 var showSetDetails = require('widgets/modal-set-details')
-var fadeIn = require('lib/transitions/fade.js').fadeIn
-var fadeOut = require('lib/transitions/fade.js').fadeOut
 var getNetwork = require('lib/network')
 var qrcode = require('lib/qrcode')
 

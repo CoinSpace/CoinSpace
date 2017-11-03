@@ -68,15 +68,6 @@
       }
     }
 
-    ._report {
-      @extend .csbtn--red;
-      margin-right: 5px;
-
-      @include breakpoint(portrait) {
-        font-size: 24px;
-      }
-    }
-
     ._remove {
       @extend .csbtn--red;
       margin-left: 5px;
