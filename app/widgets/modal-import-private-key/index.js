@@ -3,6 +3,7 @@
 var Ractive = require('widgets/modal');
 var showError = require('widgets/modal-flash').showError;
 var qrcode = require('lib/qrcode');
+var emitter = require('lib/emitter');
 var showConfirmation = require('widgets/modal-confirm-send');
 var showInfo = require('widgets/modal-flash').showInfo;
 var getWallet = require('lib/wallet').getWallet;
@@ -38,7 +39,7 @@ function open() {
       return handleError(new Error('Invalid private key'));
     }
     wallet.getImportTxOptions(privateKey).then(function(importTxOptions) {
-      if (importTxOptions.amount === 0) {
+      if (parseInt(importTxOptions.amount) === 0) {
         ractive.set('isLoading', false);
         return showInfo({message: 'This private key has no coins for transfer.'});
       }
@@ -55,6 +56,15 @@ function open() {
       });
 
     }).catch(handleError);
+  });
+
+  ractive.on('open-qr', function() {
+    qrcode.scan({context: 'import-private-key'});
+  });
+
+  emitter.on('prefill-wallet', function(privateKey, context) {
+    if (context !== 'import-private-key') return;
+    ractive.set('privateKey', privateKey);
   });
 
   function handleError(err) {
