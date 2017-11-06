@@ -151,5 +151,14 @@
     "Version": "Версия",
     "Remove Ads": "Убрать рекламу",
     "Ad free": "Без рекламы",
-    "buy": "купить"
+    "buy": "купить",
+    "Transfer paper wallet / private key": "Перенести бумажный кошелек / приватный ключ",
+    "Export private keys": "Экспорт приватных ключей",
+    "Transfer private key": "Перенести приватный ключ",
+    "Transfer": "Перенести",
+    "Private key": "Приватный ключ",
+    "This will transfer all coins from the paper wallet address to your wallet.": "Это переведет все монеты с бумажного кошелька на ваш кошелек.",
+    "This private key has no coins for transfer.": "У этого приватного ключа нет монет для передачи.",
+    "Invalid private key": "Неверный приватный ключ",
+    "Insufficient funds": "Недостаточно средств"
 }
