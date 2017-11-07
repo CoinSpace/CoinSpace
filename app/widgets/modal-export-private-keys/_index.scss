@@ -47,7 +47,9 @@
       border-radius: 5px;
       font-size: 14px;
       line-height: 1.8;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      max-height: 300px;
       @include breakpoint(portrait) {
         font-size: 18px;
       }

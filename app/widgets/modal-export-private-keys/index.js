@@ -1,7 +1,8 @@
 'use strict';
 
 var Ractive = require('widgets/modal');
-var emitter = require('lib/emitter');
+var getWallet = require('lib/wallet').getWallet;
+var showInfo = require('widgets/modal-flash').showInfo;
 var isOpen = false;
 
 function open() {
@@ -16,6 +17,7 @@ function open() {
     data: {
       isShown: false,
       privateKeys: '',
+      isPhonegap: process.env.BUILD_TYPE === 'phonegap',
       onDismiss: function() {
         isOpen = false;
       },
@@ -27,12 +29,22 @@ function open() {
   });
 
   ractive.on('show-keys', function() {
-    console.log('show keys');
+    var privateKeys = getWallet().exportPrivateKeys();
+    if (privateKeys.length === 0) {
+      ractive.fire('cancel');
+      return showInfo({
+        message: 'Your wallet has no private keys with coins for export.',
+        fadeInDuration: 0
+      });
+    }
+    ractive.set('privateKeys', privateKeys);
     ractive.set('isShown', true);
   });
 
   ractive.on('export-keys', function() {
-    console.log('export-keys');
+    window.plugins.socialsharing.shareWithOptions({
+      message: ractive.get('privateKeys')
+    });
   });
 
   return ractive;

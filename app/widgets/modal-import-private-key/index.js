@@ -18,7 +18,7 @@ function open() {
     },
     data: {
       isLoading: false,
-      qrScannerAvailable: qrcode.isScanAvailable
+      qrScannerAvailable: qrcode.isScanAvailable,
     }
   });
 

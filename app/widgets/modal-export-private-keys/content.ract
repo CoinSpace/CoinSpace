@@ -13,13 +13,14 @@
         <code class="_keys">{{privateKeys}}</code>
       </div>
 
-      <div class="confirm__buttons">
-        <div class="_export_btn" on-click="export-keys">
-          <span class="_icon">
-            {{>svg_expand}}
-          </span>
-        </div>
+      {{#isPhonegap}}
+      <div class="_export_btn" on-click="export-keys">
+        <span class="_icon">
+          {{>svg_expand}}
+        </span>
       </div>
+      {{/isPhonegap}}
+
     {{else}}
       <div class="_content">
         <div class="_label">{{translate("Warning!")}}</div>
