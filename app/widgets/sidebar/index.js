@@ -4,6 +4,7 @@ var Ractive = require('lib/ractive');
 var emitter = require('lib/emitter');
 var initAccount = require('widgets/account-details');
 var importPrivateKey = require('widgets/modal-import-private-key');
+var exportPrivateKeys = require('widgets/modal-export-private-keys');
 
 module.exports = function(el) {
   var ractive = new Ractive({
@@ -28,7 +29,7 @@ module.exports = function(el) {
   });
 
   ractive.on('export-private-keys', function() {
-    console.log('export-private-keys');
+    exportPrivateKeys();
   });
 
   emitter.on('toggle-menu', function(open) {

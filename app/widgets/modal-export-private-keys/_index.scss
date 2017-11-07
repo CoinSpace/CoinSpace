@@ -1,0 +1,92 @@
+.export_private_keys {
+  text-align: center;
+  min-width: 280px;
+  max-width: 350px;
+  padding: 20px;
+
+  @include breakpoint(portrait) {
+    max-width: 520px;
+    padding: 40px;
+  }
+
+  ._header {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 20px;
+    @include breakpoint(portrait) {
+      margin-bottom: 40px;
+    }
+  }
+
+  ._title {
+    font-size: 24px;
+    @include breakpoint(portrait) {
+      font-size: 32px;
+    }
+  }
+
+  ._content {
+    text-align: left;
+    margin-bottom: 20px;
+    ._description {
+      @extend .jigsaw-regular;
+    }
+    @include breakpoint(portrait) {
+      font-size: 20px;
+      margin-bottom: 40px;
+    }
+    ._keys {
+      @include textselect;
+      @include wrapdat;
+      background-color: $grey--light;
+      box-shadow: inset 0 2px 2px 1px rgba(000,000,000,0.2);
+      padding: 10px;
+      padding-top: 14px;
+      padding-bottom: 14px;
+      display: block;
+      border-radius: 5px;
+      font-size: 14px;
+      line-height: 1.8;
+      overflow: hidden;
+      @include breakpoint(portrait) {
+        font-size: 18px;
+      }
+    }
+  }
+
+  ._show_btn {
+    @extend .csbtn;
+    @include breakpoint(portrait) {
+      font-size: 26px;
+      border-radius: 3px;
+    }
+  }
+
+  ._export_btn {
+    @extend .csbtn;
+    height: 60px;
+    position: relative;
+
+    @include breakpoint(portrait) {
+      height: 69px;
+      border-radius: 3px;
+    }
+
+    ._icon {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -15px;
+      margin-left: -15px;
+
+      @include breakpoint(portrait) {
+        width: 44px;
+        height: 44px;
+        margin-top: -22px;
+        margin-left: -22px;
+      }
+    }
+  }
+}

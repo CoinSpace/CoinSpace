@@ -1,0 +1,37 @@
+<div class="modal _cancel">
+  <div class="modal__content export_private_keys">
+    <div class="_header">
+      <span class="modal__cancel" on-click="close">
+        {{>svg_close}}
+      </span>
+      <h2 class="_title">{{translate("Export private keys")}}</h2>
+    </div>
+
+    {{#if isShown}}
+      <div class="_content">
+        <div class="_label">{{translate("Comma-separated list")}}</div>
+        <code class="_keys">{{privateKeys}}</code>
+      </div>
+
+      <div class="confirm__buttons">
+        <div class="_export_btn" on-click="export-keys">
+          <span class="_icon">
+            {{>svg_expand}}
+          </span>
+        </div>
+      </div>
+    {{else}}
+      <div class="_content">
+        <div class="_label">{{translate("Warning!")}}</div>
+        <p class="_description">
+          {{translate("Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you'd like them to have access to your funds.")}}
+        </p>
+      </div>
+
+      <div class="confirm__buttons">
+        <div class="_show_btn" on-click="show-keys">{{translate("Show")}}</div>
+      </div>
+    {{/if}}
+
+  </div>
+</div>
