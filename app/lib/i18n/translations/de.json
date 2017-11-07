@@ -160,5 +160,9 @@
     "This will transfer all coins from the paper wallet address to your wallet.": "This will transfer all coins from the paper wallet address to your wallet.",
     "This private key has no coins for transfer.": "This private key has no coins for transfer.",
     "Invalid private key": "Invalid private key",
-    "Insufficient funds": "Insufficient funds"
+    "Insufficient funds": "Insufficient funds",
+    "Warning!": "Warning!",
+    "Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you'd like them to have access to your funds.": "Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you'd like them to have access to your funds.",
+    "Show": "Show",
+    "Comma-separated list": "Comma-separated list"
 }

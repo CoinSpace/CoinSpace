@@ -160,5 +160,9 @@
     "This will transfer all coins from the paper wallet address to your wallet.": "Это переведет все монеты с бумажного кошелька на ваш кошелек.",
     "This private key has no coins for transfer.": "У этого приватного ключа нет монет для передачи.",
     "Invalid private key": "Неверный приватный ключ",
-    "Insufficient funds": "Недостаточно средств"
+    "Insufficient funds": "Недостаточно средств",
+    "Warning!": "Предупреждение!",
+    "Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you'd like them to have access to your funds.": "Ваши приватные ключи являются ключами к вашим средствам, поэтому НЕ ДЕЛИТЕСЬ их с кем-либо, если вы не хотите, чтобы они имели доступ к вашим средствам.",
+    "Show": "Показать",
+    "Comma-separated list": "Список, разделенный запятыми"
 }
