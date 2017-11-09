@@ -3,6 +3,14 @@
 var Velocity = require('velocity-animate');
 
 function fadeAnimation(el, props, options, callback) {
+  if (options.duration === 0) {
+    el.style.display = 'block';
+    el.style.opacity = 1.0;
+    if(callback !== undefined) {
+      callback()
+    }
+    return true;
+  }
   Velocity.animate(el, props, {
     easing: 'ease',
     duration: options.duration,

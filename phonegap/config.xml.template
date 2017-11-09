@@ -31,34 +31,31 @@
         <splash src="../images/android/screens/xhdpi-port.png" density="port-xhdpi"/>
     </platform>
     <platform name="ios">
-     <icon src="../images/ios/icons/icon-60@3x.png" width="180" height="180" />
-     <icon src="../images/ios/icons/icon-60.png" width="60" height="60" />
-     <icon src="../images/ios/icons/icon-60@2x.png" width="120" height="120" />
-     <icon src="../images/ios/icons/icon-76.png" width="76" height="76" />
-     <icon src="../images/ios/icons/icon-76@2x.png" width="152" height="152" />
-     <icon src="../images/ios/icons/icon-40.png" width="40" height="40" />
-     <icon src="../images/ios/icons/icon-40@2x.png" width="80" height="80" />
-     <icon src="../images/ios/icons/icon.png" width="57" height="57" />
-     <icon src="../images/ios/icons/icon@2x.png" width="114" height="114" />
-     <icon src="../images/ios/icons/icon-72.png" width="72" height="72" />
-     <icon src="../images/ios/icons/icon-72@2x.png" width="144" height="144" />
-     <icon src="../images/ios/icons/icon-small.png" width="29" height="29" />
-     <icon src="../images/ios/icons/icon-small@2x.png" width="58" height="58" />
-     <icon src="../images/ios/icons/icon-50.png" width="50" height="50" />
-     <icon src="../images/ios/icons/icon-50@2x.png" width="100" height="100" />
-     <icon src="../images/ios/icons/icon-83.5@2x.png" width="167" height="167" />
-     <icon src="../images/ios/icons/icon-small@3x.png" width="87" height="87" />
-
-       <splash src="../images/ios/screens/Default~iphone.png" width="320" height="480"/>
-       <splash src="../images/ios/screens/Default@2x~iphone.png" width="640" height="960"/>
-       <splash src="../images/ios/screens/Default-Portrait~ipad.png" width="768" height="1024"/>
-       <splash src="../images/ios/screens/Default-Portrait@2x~ipad.png" width="1536" height="2048"/>
-       <splash src="../images/ios/screens/Default-Landscape~ipad.png" width="1024" height="768"/>
-       <splash src="../images/ios/screens/Default-Landscape@2x~ipad.png" width="2048" height="1536"/>
-       <splash src="../images/ios/screens/Default-568h@2x~iphone.png" width="640" height="1136"/>
-       <splash src="../images/ios/screens/Default-667h.png" width="750" height="1334"/>
-       <splash src="../images/ios/screens/Default-736h.png" width="1242" height="2208"/>
-       <splash src="../images/ios/screens/Default-Landscape-736h.png" width="2208" height="1242"/>
+        <icon src="../images/ios/icons/icon-60@3x.png" width="180" height="180" />
+        <icon src="../images/ios/icons/icon-60.png" width="60" height="60" />
+        <icon src="../images/ios/icons/icon-60@2x.png" width="120" height="120" />
+        <icon src="../images/ios/icons/icon-76.png" width="76" height="76" />
+        <icon src="../images/ios/icons/icon-76@2x.png" width="152" height="152" />
+        <icon src="../images/ios/icons/icon-40.png" width="40" height="40" />
+        <icon src="../images/ios/icons/icon-40@2x.png" width="80" height="80" />
+        <icon src="../images/ios/icons/icon.png" width="57" height="57" />
+        <icon src="../images/ios/icons/icon@2x.png" width="114" height="114" />
+        <icon src="../images/ios/icons/icon-72.png" width="72" height="72" />
+        <icon src="../images/ios/icons/icon-72@2x.png" width="144" height="144" />
+        <icon src="../images/ios/icons/icon-small.png" width="29" height="29" />
+        <icon src="../images/ios/icons/icon-small@2x.png" width="58" height="58" />
+        <icon src="../images/ios/icons/icon-50.png" width="50" height="50" />
+        <icon src="../images/ios/icons/icon-50@2x.png" width="100" height="100" />
+        <icon src="../images/ios/icons/icon-83.5@2x.png" width="167" height="167" />
+        <icon src="../images/ios/icons/icon-small@3x.png" width="87" height="87" />
+        <splash src="../images/ios/screens/Default@2x~iphone~anyany.png" />
+        <splash src="../images/ios/screens/Default@2x~iphone~comany.png" />
+        <splash src="../images/ios/screens/Default@2x~iphone~comcom.png" />
+        <splash src="../images/ios/screens/Default@3x~iphone~anyany.png" />
+        <splash src="../images/ios/screens/Default@3x~iphone~anycom.png" />
+        <splash src="../images/ios/screens/Default@3x~iphone~comany.png" />
+        <splash src="../images/ios/screens/Default@2x~ipad~anyany.png" />
+        <splash src="../images/ios/screens/Default@2x~ipad~comany.png" />
     </platform>
     <preference name="StatusBarBackgroundColor" value="#FFFFFF" />
     <preference name="SplashScreenDelay" value="2000"/>
