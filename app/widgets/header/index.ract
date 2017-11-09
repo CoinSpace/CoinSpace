@@ -1,8 +1,8 @@
-<div class="header">
+{{#menuOpen}}
+<div class="toggle_overlay" on-click="toggle"></div>
+{{/menuOpen}}
 
-  {{#menuOpen}}
-    <div class="toggle_overlay" on-click="toggle"></div>
-  {{/menuOpen}}
+<div class="header">
 
   <div id="menu_btn" class="header__toggle {{#menuOpen}}is_open{{/menuOpen}}" on-click="toggle">
     <span class="_icon">
