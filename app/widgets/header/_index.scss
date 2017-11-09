@@ -6,6 +6,7 @@
   color: white;
   padding-top: 12px;
   padding-bottom: 12px;
+  position: relative;
 
   @include breakpoint(iphone5) {
     padding-top: 22px;

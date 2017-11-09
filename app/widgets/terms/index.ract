@@ -1,3 +1,5 @@
+<div class="about__iphone_x"></div>
+
 <div class="about__header">
   <a href="" class="about__back" on-click="back"><span class="about__back-icon"></span> {{translate("Back")}}</a>
   <span class="about__title">{{translate("About")}}</span>

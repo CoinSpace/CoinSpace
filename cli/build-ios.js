@@ -41,7 +41,7 @@ webpack(webpackConfig, function(error, stats) {
   });
   fse.copySync('build', path.resolve(mobileBuildPath, 'www'));
 
-  utils.cordova('platform add ios@4.3.1');
+  utils.cordova('platform add ios@4.5.3');
   utils.cordova('plugin add cordova-plugin-geolocation@2.4.3');
   utils.cordova('plugin add cordova-plugin-whitelist@1.3.2');
   utils.cordova('plugin add cordova-plugin-splashscreen@4.0.3');
@@ -52,7 +52,6 @@ webpack(webpackConfig, function(error, stats) {
   utils.cordova('plugin add cordova-plugin-statusbar@2.2.3');
   utils.cordova('plugin add cordova-plugin-x-socialsharing@5.2.0');
   utils.cordova('plugin add cordova-plugin-touch-id@3.2.0');
-  utils.cordova('plugin add cordova-plugin-console@1.0.7');
   utils.cordova('plugin add cordova-facebook-audnet-sdk@4.23.0');
   utils.cordova('plugin add cordova-plugin-facebookads@4.23.2');
   utils.cordova('plugin add cc.fovea.cordova.purchase@7.0.2');

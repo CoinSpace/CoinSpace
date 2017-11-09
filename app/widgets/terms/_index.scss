@@ -1,14 +1,77 @@
-.about {background: #f2f2f2; min-height: 100%; position: absolute; top: 0; left: 0; right: 0; bottom: 0; padding-top: 60px;}
-.about__header {background: #fff; padding: 12px 10px; position: absolute; top: 0; left: 0; right: 0; z-index: 2;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    }
-.about__back {position: absolute; top: 12px; left: 10px; color: #999; white-space: nowrap; line-height: 25px;}
-.about__back-icon {width: 25px; height: 25px; display: inline-block; vertical-align: top; background: url('./assets/img/arrow-left.svg'); background-size: 25px 25px; opacity: 0.6;}
-.about__title {font-size: 1.2em; font-weight: normal; margin: 0 70px; text-align: center; color: #34a2ff; display: block; line-height: 25px;}
+.about {
+  min-height: 100%;
+}
+.about__header {
+  background: #fff;
+  padding: 12px 10px;
+  margin-bottom: 35px;
+  position: relative;
+  border-bottom: #e2e2e2 1px solid;
+}
+.about__iphone_x {
+  @include iphone-x-top;
+  background: #fff;
+}
+.about__back {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  color: #999;
+  white-space: nowrap;
+  line-height: 25px;
+}
+.about__back-icon {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  vertical-align: top;
+  background: url('./assets/img/arrow-left.svg');
+  background-size: 25px 25px;
+  opacity: 0.6;
+}
+.about__title {
+  font-size: 1.2em;
+  font-weight: normal;
+  margin: 0 70px;
+  text-align: center;
+  color: #34a2ff;
+  display: block;
+  line-height: 25px;
+}
 
-.about__section {margin: 20px 0; outline: 0;}
-.about__sectiontitle {padding: 0 10px; text-transform: uppercase; margin-bottom: 0.1em; letter-spacing: 1px; font-size: 0.9em; color: #555; outline: 0;}
-.about__listitem {display: block; background: #fff; border-bottom: #e2e2e2 1px solid; padding: 10px; line-height: 25px; position: relative; outline: 0;}
-.about__listitem-value {position: absolute; right: 10px; top: 12px; color: #999;}
-.about-arrowright {width: 20px; height: 20px; background: url('./assets/img/arrow-right.svg'); background-size: 20px 20px; opacity: 0.6; display: block;}
+.about__section {
+  margin: 20px 0;
+  outline: 0;
+}
+.about__sectiontitle {
+  padding: 0 10px;
+  text-transform: uppercase;
+  margin-bottom: 0.1em;
+  letter-spacing: 1px;
+  font-size: 0.9em;
+  color: #555;
+  outline: 0;
+}
+.about__listitem {
+  display: block;
+  background: #fff;
+  border-bottom: #e2e2e2 1px solid;
+  padding: 10px;
+  line-height: 25px;
+  position: relative;
+  outline: 0;
+}
+.about__listitem-value {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  color: #999;
+}
+.about-arrowright {
+  width: 20px;
+  height: 20px;
+  background: url('./assets/img/arrow-right.svg');
+  background-size: 20px 20px;
+  opacity: 0.6;
+  display: block;
+}

@@ -5,6 +5,8 @@
 
   <div id="main" class="animate_in">
 
+    <div class="main__iphone_x"></div>
+
     <div id="header"></div>
     <div id="tabs"></div>
 

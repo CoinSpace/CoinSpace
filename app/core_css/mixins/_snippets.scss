@@ -93,4 +93,7 @@
   outline: 2px solid $focus_color;
 }
 
-
+@mixin iphone-x-top() {
+  height: env(safe-area-inset-top); // fallback
+  height: constant(safe-area-inset-top);
+}

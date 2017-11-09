@@ -32,6 +32,10 @@
   }
 }
 
+.sidebar__iphone_x {
+  @include iphone-x-top;
+}
+
 .sidebar__version {
   padding-top: 7px;
   padding-right: 20px;
