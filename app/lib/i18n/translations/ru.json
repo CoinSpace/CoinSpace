@@ -106,7 +106,7 @@
     "Sorry, Coin Space Wallet did not load.": "Извините, кошелек Coin Space не загрузился.",
     "Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.": "Попробуйте обновить свой браузер, или изменить его режим конфиденциальности. Если ничего не получается, попробуйте браузер Chrome.",
     "Enter mobile number": "Введите номер мобильного телефона",
-    "Current Bitcoin Price": "Текущая цена Bitcoin",
+    "Current coin price": "Текущая цена монеты",
     "Your Alias address": "Ваш адрес псевдонима",
     "Username not available": "Имя пользователя не доступно",
     "Allow for payments with OpenAlias addresses. Supported wallets only.": "Доступны платежи с OpenAlias адресов. Только поддерживаемые кошельки.",

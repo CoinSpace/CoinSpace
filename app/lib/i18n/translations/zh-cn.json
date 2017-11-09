@@ -106,7 +106,7 @@
     "Sorry, Coin Space Wallet did not load.": "对不起，Coin Space钱包加载失败。",
     "Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.": "尝试更新您的浏览器，或退出匿名浏览模式。如果仍然不能加载，请下载Chrome浏览器。",
     "Enter mobile number": "输入移动电话号码",
-    "Current Bitcoin Price": "目前的比特币价格",
+    "Current coin price": "Current coin price",
     "Your Alias address": "您的别名地址",
     "Username not available": "没有可供选择的用户名",
     "Allow for payments with OpenAlias addresses. Supported wallets only.": "允许使用 OpenAlias 地址付款。只有受支持的钱包。",

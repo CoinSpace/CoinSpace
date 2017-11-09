@@ -106,7 +106,7 @@
     "Sorry, Coin Space Wallet did not load.": "A Coin Space tárca nem tudott betöltődni",
     "Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.": "Próbáld meg frissíteni a böngésződ vagy lépj ki a privát böngésző módból. Ha ez sem működik töltsd le a Chrome-ot a készülékedre.",
     "Enter mobile number": "Adja meg a mobilszámát",
-    "Current Bitcoin Price": "Jelenlegi Bitcoin ár",
+    "Current coin price": "Current coin price",
     "Your Alias address": "Az Alias-címét",
     "Username not available": "Felhasználóneved nem érhető el",
     "Allow for payments with OpenAlias addresses. Supported wallets only.": "Lehetővé teszi a kifizetések OpenAlias címmel. Csak a támogatott pénztárca.",

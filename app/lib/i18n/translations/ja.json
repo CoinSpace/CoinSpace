@@ -106,7 +106,7 @@
     "Sorry, Coin Space Wallet did not load.": "Coin Spaceウォレットが読み込めませんでした",
     "Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.": "ブラウザをアップデートする、もしくはプライベートモードを通常モードに切り替えて下さい。問題が続くようであればChromeブラウザーをオススメしております。",
     "Enter mobile number": "携帯電話の番号を入力してください。",
-    "Current Bitcoin Price": "現在の Bitcoin 価格",
+    "Current coin price": "Current coin price",
     "Your Alias address": "エイリアス アドレス",
     "Username not available": "ユーザー名は使用できません。",
     "Allow for payments with OpenAlias addresses. Supported wallets only.": "OpenAlias アドレスでのお支払いできるように。サポートされている財布のみ。",

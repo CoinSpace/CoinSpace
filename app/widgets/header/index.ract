@@ -29,7 +29,7 @@
     </div>
   {{/showFiat}}
 
-  <div class="header__currency" title="{{translate("Current Bitcoin Price")}}">
+  <div class="header__currency" title="{{translate("Current coin price")}}">
     {{bitcoinPrice(exchangeRates[selectedFiat])}} {{selectedFiat}}
     <select value="{{selectedFiat}}">
       {{#currencies}}
