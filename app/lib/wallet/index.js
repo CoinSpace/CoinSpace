@@ -165,6 +165,7 @@ function initWallet(networkName, done, txDone) {
     var accounts = getDerivedAccounts(networkName)
     options.externalAccount = accounts.externalAccount
     options.internalAccount = accounts.internalAccount
+    options.minConf = 4;
   }
 
   wallet = new Wallet[networkName](options)
