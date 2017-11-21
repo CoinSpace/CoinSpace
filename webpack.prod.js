@@ -17,6 +17,18 @@ var config = merge(common, {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        include: [
+          /node_modules\/bech32/,
+        ],
+        use: {
+          loader: 'babel-loader', // special for UglifyJSPlugin
+          options: {
+            presets: ['es2015'],
+          }
+        }
+      },
+      {
         test: /\.(sass|scss)$/,
         use: ExtractTextPlugin.extract({
           use: [
@@ -53,7 +65,7 @@ var config = merge(common, {
     }),
     new UglifyJSPlugin({
       mangle: {
-        except: ['Array','BigInteger','Boolean','Buffer','ECPair','Function','Number','Point','Script']
+        except: ['BigInteger','ECPair','Point']
       }
     }),
     new ExtractTextPlugin({
