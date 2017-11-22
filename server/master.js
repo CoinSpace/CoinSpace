@@ -26,7 +26,7 @@ function cacheFees(interval) {
 
 function cacheTicker(interval) {
   setInterval(function intervalFunction() {
-    ['BTC', 'LTC', 'ETH'].forEach(function(cryptoTicker) {
+    ['BTC', 'BCH', 'LTC', 'ETH'].forEach(function(cryptoTicker) {
       ticker.getFromAPI(cryptoTicker).then(function(data) {
         ticker.save(cryptoTicker, data)
         if (global.gc) global.gc();

@@ -16,6 +16,7 @@ function open(data){
 
   data.isEthereum = getNetwork() === 'ethereum';
   data.isBitcoin = getNetwork() === 'bitcoin' || getNetwork() === 'testnet';
+  data.isBitcoinCash = getNetwork() === 'bitcoincash';
   data.isLitecoin = getNetwork() === 'litecoin';
   data.feeSign = data.importTxOptions ? '-' : '+';
 
@@ -38,6 +39,11 @@ function open(data){
     data.feeHour = toUnitString(fees[1])
     data.feeFastest = toUnitString(fees[2])
     data.fee = data.feeHour
+
+  } else if (data.isBitcoinCash) {
+    feeRates = [bitcoin.networks['bitcoincash'].feePerKb]
+    fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents)
+    data.fee = toUnitString(fees[0])
 
   } else if (data.isLitecoin) {
     feeRates = [bitcoin.networks['litecoin'].feePerKb]

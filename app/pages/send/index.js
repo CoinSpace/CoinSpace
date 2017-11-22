@@ -8,7 +8,6 @@ var getWallet = require('lib/wallet').getWallet
 var getNetwork = require('lib/network')
 var currencies = require('lib/ticker-api').currencies(getNetwork())
 var toFixedFloor = require('lib/convert').toFixedFloor
-var toUnitString = require('lib/convert').toUnitString
 var showError = require('widgets/modal-flash').showError
 var showInfo = require('widgets/modal-flash').showInfo
 var showConfirmation = require('widgets/modal-confirm-send')
@@ -26,8 +25,6 @@ module.exports = function(el){
       selectedFiat: '',
       exchangeRates: {},
       qrScannerAvailable: qrcode.isScanAvailable,
-      toUnitString: toUnitString,
-      isBitcoin: getNetwork() === 'bitcoin' || getNetwork() === 'testnet',
       isEthereum: getNetwork() === 'ethereum',
       validating: false
     }

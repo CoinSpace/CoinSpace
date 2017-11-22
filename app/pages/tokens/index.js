@@ -13,14 +13,22 @@ module.exports = function(el){
       tokens: [
         {
           token: 'bitcoin',
+          name: 'Bitcoin',
           bitcoin: true
         },
         {
+          token: 'bitcoincash',
+          name: 'Bitcoin Cash',
+          bitcoincash: true
+        },
+        {
           token: 'litecoin',
+          name: 'Litecoin',
           litecoin: true
         },
         {
           token: 'ethereum',
+          name: 'Ethereum',
           ethereum: true
         }
       ],

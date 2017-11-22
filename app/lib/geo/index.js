@@ -8,6 +8,7 @@ var urlRoot = process.env.SITE_URL
 var userInfo = {}
 var networks = {
   BTC: 'bitcoin',
+  BCH: 'bitcoincash',
   LTC: 'litecoin',
   ETH: 'ethereum'
 }

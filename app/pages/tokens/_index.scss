@@ -82,6 +82,13 @@
   }
 }
 
+.token--bitcoincash {
+  background-color: $bitcoincash;
+  ._name {
+    color: white;
+  }
+}
+
 .token--litecoin {
   background-color: $silver;
   ._name {

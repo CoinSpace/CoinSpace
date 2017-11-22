@@ -25,6 +25,10 @@
       <a href="" onclick="window.open('https://btc.coin.space/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
       {{/isBitcoin}}
 
+      {{#isBitcoinCash}}
+      <a href="" onclick="window.open('https://bch.coin.space/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
+      {{/isBitcoinCash}}
+
       {{#isLitecoin}}
       <a href="" onclick="window.open('https://ltc.coin.space/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
 			{{/isLitecoin}}

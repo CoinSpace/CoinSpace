@@ -8,6 +8,9 @@
         {{#bitcoin}}
           {{>svg_token_bitcoin}}
         {{/bitcoin}}
+        {{#bitcoincash}}
+          {{>svg_token_bitcoincash}}
+        {{/bitcoincash}}
         {{#litecoin}}
           {{>svg_token_litecoin}}
         {{/litecoin}}
@@ -15,7 +18,7 @@
           {{>svg_token_ethereum}}
         {{/ethereum}}
       </span>
-      <h3 class="_name">{{capitalize(token)}}</h3>
+      <h3 class="_name">{{name}}</h3>
     </div>
   {{/tokens}}
 </div>

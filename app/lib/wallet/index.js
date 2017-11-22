@@ -10,7 +10,7 @@ var emitter = require('lib/emitter')
 var crypto = require('crypto')
 var AES = require('lib/aes')
 var denominations = require('lib/denomination')
-var BtcLtcWallet = require('cs-wallet')
+var CsWallet = require('cs-wallet')
 var validateSend = require('./validator')
 var rng = require('secure-random').randomBuffer
 var bitcoin = require('bitcoinjs-lib')
@@ -25,9 +25,10 @@ var id = null
 var availableTouchId = false
 
 var Wallet = {
-  bitcoin: BtcLtcWallet,
-  litecoin: BtcLtcWallet,
-  testnet: BtcLtcWallet,
+  bitcoin: CsWallet,
+  bitcoincash: CsWallet,
+  litecoin: CsWallet,
+  testnet: CsWallet,
   ethereum: EthereumWallet
 }
 
@@ -161,7 +162,7 @@ function initWallet(networkName, done, txDone) {
   if (networkName === 'ethereum') {
     options.seed = seed;
     options.minConf = 12;
-  } else if (networkName === 'bitcoin' || networkName === 'litecoin' || networkName === 'testnet') {
+  } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(networkName) !== -1) {
     var accounts = getDerivedAccounts(networkName)
     options.externalAccount = accounts.externalAccount
     options.internalAccount = accounts.internalAccount
@@ -191,7 +192,7 @@ function parseHistoryTx(tx) {
   var networkName = wallet.networkName
   if (networkName === 'ethereum') {
     return utils.parseEthereumTx(tx)
-  } else if (networkName === 'bitcoin' || networkName === 'litecoin' || networkName === 'testnet') {
+  } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(networkName) !== -1) {
     return utils.parseBtcLtcTx(tx)
   }
 }

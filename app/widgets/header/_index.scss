@@ -29,6 +29,11 @@
     background-color: darken($ethereal, 30%);
   }
 }
+.bitcoincash {
+  .header {
+    background-color: darken($bitcoincash, 30%);
+  }
+}
 
 .header__balance {
   @include clickbtn;

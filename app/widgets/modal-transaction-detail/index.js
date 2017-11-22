@@ -8,7 +8,7 @@ module.exports = function(data) {
     data.isPendingFee = data.transaction.fee === -1;
     content = require('./contentEthereum.ract')
   } else {
-    content = require('./contentBtcLtc.ract')
+    content = require('./contentBtcBchLtc.ract')
   }
 
   var ractive = new Ractive({

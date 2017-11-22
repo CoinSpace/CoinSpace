@@ -23,6 +23,10 @@
       	</div>
       {{/isBitcoin}}
 
+      {{#isBitcoinCash}}
+				<span class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
+			{{/isBitcoinCash}}
+
       {{#isLitecoin}}
 				<span class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
 			{{/isLitecoin}}

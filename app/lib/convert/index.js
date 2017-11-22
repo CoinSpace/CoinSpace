@@ -7,6 +7,7 @@ var networkName = getNetwork();
 
 var unitMap = {
   bitcoin: '100000000',
+  bitcoincash: '100000000',
   litecoin: '100000000',
   testnet: '100000000',
   ethereum: '1000000000000000000'

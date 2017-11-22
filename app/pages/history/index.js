@@ -32,14 +32,14 @@ module.exports = function(el){
       getToAddress: function(tx) {
         if (network === 'ethereum') {
           return tx.to;
-        } else if (network === 'bitcoin' || network === 'litecoin' || network === 'testnet') {
+        } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(network) !== -1) {
           return tx.outs[0].address;
         }
       },
       isReceived: function(tx) {
         if (network === 'ethereum') {
           return tx.to === getWallet().addressString;
-        } else if (network === 'bitcoin' || network === 'litecoin' || network === 'testnet') {
+        } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(network) !== -1) {
           return tx.amount > 0;
         }
       },
@@ -49,6 +49,7 @@ module.exports = function(el){
       toUnitString: toUnitString,
       isEthereum: network === 'ethereum',
       isBitcoin: network === 'bitcoin' || network === 'testnet',
+      isBitcoinCash: network === 'bitcoincash',
       isLitecoin: network === 'litecoin',
       loadingTx: true,
     }
@@ -93,6 +94,7 @@ module.exports = function(el){
       toUnitString: ractive.get('toUnitString'),
       isEthereum: ractive.get('isEthereum'),
       isBitcoin: ractive.get('isBitcoin'),
+      isBitcoinCash: ractive.get('isBitcoinCash'),
       isLitecoin: ractive.get('isLitecoin'),
     }
     showTransactionDetail(data)

@@ -2,7 +2,7 @@
 
 var request = require('lib/request');
 var urlRoot = 'https://shapeshift.io';
-var prioritySymbols = ['BTC', 'LTC', 'ETH'];
+var prioritySymbols = ['BTC', 'BCH', 'LTC', 'ETH'];
 
 function getCoins() {
   return request({

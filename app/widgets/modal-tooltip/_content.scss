@@ -60,3 +60,10 @@
     }
   }
 }
+.bitcoincash {
+  .tooltip__link {
+    a {
+      color: $bitcoincash;
+    }
+  }
+}

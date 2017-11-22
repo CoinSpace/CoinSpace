@@ -75,6 +75,11 @@
     background-color: darken($ethereal, 30%);
   }
 }
+.bitcoincash {
+  .main__iphone_x {
+    background-color: darken($bitcoincash, 30%);
+  }
+}
 
 #sidebar {
   display: flex;

@@ -4,6 +4,7 @@ var request = require('lib/request')
 
 var tickers = {
   bitcoin: 'BTC',
+  bitcoincash: 'BCH',
   testnet: 'BTC',
   litecoin: 'LTC',
   ethereum: 'ETH'

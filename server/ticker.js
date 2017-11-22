@@ -7,6 +7,7 @@ var currencies = require('cs-ticker-api/currencies');
 var tickerUrl = 'https://apiv2.bitcoinaverage.com/indices/global/ticker/short';
 var networks = {
   BTC: 'bitcoin',
+  BCH: 'bitcoincash',
   LTC: 'litecoin',
   ETH: 'ethereum'
 };
@@ -40,7 +41,7 @@ function getFromCache(cacheId, callback) {
 
 function toRates(apiRates, cryptoTicker){
   var rates = {};
-  var ignored = ['mBTC', 'μBTC'];
+  var ignored = ['mBTC', 'μBTC', 'mBCH', 'μBCH'];
   getCurrencies(cryptoTicker).forEach(function(currency){
     if (ignored.indexOf(currency) !== -1) return;
     rates[currency] = apiRates[cryptoTicker + currency].last
@@ -48,6 +49,9 @@ function toRates(apiRates, cryptoTicker){
   if (cryptoTicker === 'BTC') {
     rates['mBTC'] = 1000;
     rates['μBTC'] = 1000000;
+  } else if (cryptoTicker === 'BCH') {
+    rates['mBCH'] = 1000;
+    rates['μBCH'] = 1000000;
   }
   return rates;
 }

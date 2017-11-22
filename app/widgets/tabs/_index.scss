@@ -13,6 +13,11 @@
     background-color: darken($ethereal, 20%);
   }
 }
+.bitcoincash {
+  #tabs {
+    background-color: darken($bitcoincash, 20%);
+  }
+}
 
 #tabs .tabs {
   display: flex;
@@ -60,6 +65,13 @@
   #tabs .tabs .tab {
     &.active {
         border-bottom: 4px solid darken($ethereal, 30%);
+    }
+  }
+}
+.bitcoincash {
+  #tabs .tabs .tab {
+    &.active {
+        border-bottom: 4px solid darken($bitcoincash, 30%);
     }
   }
 }

@@ -1,11 +1,13 @@
 'use strict';
 
 var bitcoin = require('./bitcoin.json');
+var bitcoincash = require('./bitcoincash.json');
 var litecoin = require('./litecoin.json');
 var ethereum = require('./ethereum.json');
 
 var currencies = {
   bitcoin: bitcoin,
+  bitcoincash: bitcoincash,
   testnet: bitcoin,
   litecoin: litecoin,
   ethereum: ethereum
