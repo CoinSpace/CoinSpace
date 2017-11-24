@@ -1,6 +1,7 @@
 'use strict';
 
 require('../application.scss');
+require('typedarray-methods'); // fix for old browsers
 
 var token = require('lib/network')('')
 var fadeOut = require('lib/transitions/loader').out

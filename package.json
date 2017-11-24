@@ -83,6 +83,7 @@
     "sinon": "^3.2.1",
     "strftime": "^0.10.0",
     "style-loader": "^0.18.2",
+    "typedarray-methods": "^1.0.1",
     "uglifyjs-webpack-plugin": "^0.4.6",
     "velocity-animate": "^1.5.0",
     "webpack": "^3.5.6",
