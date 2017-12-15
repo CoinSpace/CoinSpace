@@ -223,6 +223,7 @@ function reset(callback){
 }
 
 function getDynamicFees(callback) {
+  if (wallet.networkName === 'ethereum') return callback();
   var fees = cache.get('fees')
 
   if (fees) {
