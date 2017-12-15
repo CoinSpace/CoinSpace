@@ -26,12 +26,12 @@ function open(data){
   var unspents = data.importTxOptions ? data.importTxOptions.unspents : null;
 
   if (data.isBitcoin) {
-    var defaultFeePerKb = bitcoin.networks['bitcoin'].feePerKb
+    var defaultFeePerKb = data.dynamicFees.minimum * 1000 || bitcoin.networks['bitcoin'].feePerKb
 
     feeRates = [
       defaultFeePerKb,
-      data.dynamicFees.hourFeePerKb ? data.dynamicFees.hourFeePerKb : defaultFeePerKb,
-      data.dynamicFees.fastestFeePerKb ? data.dynamicFees.fastestFeePerKb : defaultFeePerKb
+      data.dynamicFees.hour * 1000 || defaultFeePerKb,
+      data.dynamicFees.fastest * 1000 || defaultFeePerKb
     ];
     fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents)
 
@@ -41,12 +41,12 @@ function open(data){
     data.fee = data.feeHour
 
   } else if (data.isBitcoinCash) {
-    feeRates = [bitcoin.networks['bitcoincash'].feePerKb]
+    feeRates = [data.dynamicFees.minimum * 1000 || bitcoin.networks['bitcoincash'].feePerKb]
     fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents)
     data.fee = toUnitString(fees[0])
 
   } else if (data.isLitecoin) {
-    feeRates = [bitcoin.networks['litecoin'].feePerKb]
+    feeRates = [data.dynamicFees.minimum * 1000 || bitcoin.networks['litecoin'].feePerKb]
     fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents)
     data.fee = toUnitString(fees[0])
 

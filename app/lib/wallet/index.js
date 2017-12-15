@@ -223,19 +223,21 @@ function reset(callback){
 }
 
 function getDynamicFees(callback) {
-  if (wallet.networkName !== 'bitcoin') return callback();
-  var fees = cache.get('bitcoinFees')
+  var fees = cache.get('fees')
 
   if (fees) {
-    return callback({hourFeePerKb: fees.hour * 1000, fastestFeePerKb: fees.fastest * 1000})
+    return callback(fees)
   }
 
   request({
-    url: urlRoot + '/fees'
+    url: urlRoot + '/fees',
+    params: {
+      network: wallet.networkName
+    },
   }, function(err, data) {
     if (err) return callback({});
-    cache.put('bitcoinFees', {hour: data.hour, fastest: data.fastest}, 10 * 60 * 1000)
-    callback({hourFeePerKb: data.hour * 1000, fastestFeePerKb: data.fastest * 1000})
+    cache.put('fees', data, 10 * 60 * 1000)
+    callback(data)
   });
 }
 

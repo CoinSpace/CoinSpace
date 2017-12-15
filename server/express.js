@@ -146,9 +146,10 @@ module.exports = function (){
   })
 
   app.get('/fees', function(req, res) {
-    fee.getFromCache(function(err, doc) {
+    var network = req.query.network || 'bitcoin'
+    fee.getFromCache(network, function(err, fees) {
       if(err) return res.status(400).send(err);
-      res.status(200).send({hour: doc.hour, fastest: doc.fastest})
+      res.status(200).send(fees)
     })
   })
 
