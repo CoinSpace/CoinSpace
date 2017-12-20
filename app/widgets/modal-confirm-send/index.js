@@ -40,6 +40,10 @@ function open(data){
     data.feeFastest = toUnitString(fees[2])
     data.fee = data.feeHour
 
+    data.onFocus = function() {
+      this.find('.js-fee-dropdown').selectedIndex = 1; // fix issue when values are the same
+    }
+
   } else if (data.isBitcoinCash) {
     feeRates = [data.dynamicFees.minimum * 1000 || bitcoin.networks['bitcoincash'].feePerKb]
     fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents)
@@ -59,7 +63,7 @@ function open(data){
       content: require('./_content.ract')
     },
     data: data
-  })
+  });
 
   ractive.on('send', function(){
     ractive.set('sending', true);

@@ -38,7 +38,7 @@
     "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.": "Een gedeelte van uw geld is tijdelijk niet beschikbaar. Om deze transactie te versturen, moet u eerst wachten totdat de nog niet bevestigde transacties bevestigd zijn.",
     "What does this mean?": "Wat betekent dit?",
     "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you": "Het lijkt erop dat u een portemonnee probeert leeg te maken. Als men rekening houdt met de transactiekosten, schatten we dat het maximale bedrag dat u kunt versturen %(sendableBalance)s is. We hebben deze waarde voor u ingesteld.",
-    "You do not have enough funds in your wallet": "U hebt niet genoeg geld in uw portemonnee",
+    "You do not have enough funds in your wallet (incl. fee)": "U hebt niet genoeg geld in uw portemonnee (incl. fee)",
     "A name is required to set your profile on Coin Space": "Een naam is vereist om uw profiel in te stellen op Coin Space",
     "Uh Oh...": "Uh Oh...",
     "Whoops!": "Oeps!",

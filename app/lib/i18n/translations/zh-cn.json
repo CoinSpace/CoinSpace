@@ -38,7 +38,7 @@
     "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.": "部分资金暂时不可用，发送款项后您需要等待比特币网络确认交易信息。",
     "What does this mean?": "这是什么意思？",
     "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you": "貌似您想要清空您的钱包。减去估算的交易手续费，我们已将金额修改为您可以最大发送的金额%(sendableBalance)s，请确认。",
-    "You do not have enough funds in your wallet": "您的钱包没有足够的资金",
+    "You do not have enough funds in your wallet (incl. fee)": "您的钱包没有足够的资金 (incl. fee)",
     "A name is required to set your profile on Coin Space": "用户名是必填项",
     "Uh Oh...": "呃哦...",
     "Whoops!": "哎呦！",

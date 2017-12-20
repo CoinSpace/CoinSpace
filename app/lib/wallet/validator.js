@@ -3,12 +3,16 @@
 var toAtom = require('lib/convert').toAtom
 var toUnitString = require('lib/convert').toUnitString
 
-function validateSend(wallet, to, unitValue, callback){
+function validateSend(wallet, to, unitValue, dynamicFees, callback){
   var amount = toAtom(unitValue)
   var tx = null
+  var fee;
+  if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(wallet.networkName) !== -1) {
+    fee = wallet.estimateFees(to, amount, [dynamicFees.minimum * 1000])[0];
+  }
 
   try {
-    tx = wallet.createTx(to, amount)
+    tx = wallet.createTx(to, amount, fee)
   } catch(e) {
     if(e.message.match(/Invalid address/)) {
       return callback(new Error('Please enter a valid address to send to'))
@@ -22,7 +26,7 @@ function validateSend(wallet, to, unitValue, callback){
       if(e.details && e.details.match(/Additional funds confirmation pending/)){
         error = new Error("Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.")
         return callback(error)
-      } else if(e.details && e.details.match(/Attempt to empty wallet/)){
+      } else if(e.details && e.details.match(/Attempt to empty wallet/) && wallet.networkName === 'ethereum'){
         var message = [
           "It seems like you are trying to empty your wallet",
           "Taking transaction fee into account, we estimated that the max amount you can send is",
@@ -33,7 +37,7 @@ function validateSend(wallet, to, unitValue, callback){
 
         return new callback(error)
       } else {
-        return callback(new Error("You do not have enough funds in your wallet"))
+        return callback(new Error("You do not have enough funds in your wallet (incl. fee)"))
       }
     }
 

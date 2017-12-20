@@ -15,7 +15,7 @@
       {{#isBitcoin}}
       	<div class="_dynamic-fee">
       		<span class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
-					<select value="{{fee}}">
+					<select class="js-fee-dropdown" value="{{fee}}">
 						<option value="{{feeMinimum}}">{{feeSign}}{{feeMinimum}} {{denomination}} - {{translate("minimum")}}</option>
 						<option value="{{feeHour}}" selected>{{feeSign}}{{feeHour}} {{denomination}} - {{translate("default")}}</option>
 						<option value="{{feeFastest}}">{{feeSign}}{{feeFastest}} {{denomination}} - {{translate("fastest")}}</option>

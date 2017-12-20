@@ -17,6 +17,8 @@ var Modal = Ractive.extend({
 
     fadeIn(fadeEl, self.get('fadeInDuration'), function() {
       fadeEl.focus()
+      var onFocus = self.get('onFocus')
+      if(onFocus) onFocus();
     })
 
     self.on('cancel', function(context){

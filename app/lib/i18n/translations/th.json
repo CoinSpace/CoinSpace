@@ -38,7 +38,7 @@
     "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.": "เงินทุนสำรองนั้นไม่สามารถใช้ได้ชั่วคราว  หากจะทำธุรกรรม คุณจำเป็นต้องรอการยืนยันคำขอการทำธุรกรรมเสียก่อน",
     "What does this mean?": "นี่หมายความว่าอะไร?",
     "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you": "ดูเหมือนว่าคุณกำลังพยายามใช้เงินในกระเป๋าจนหมด เพราะต้องจ่ายภาษีธุรกรรม จากที่เราคำนวณ ยอดเงินสูงสุดที่คุณสามารถส่งได้คือ %(sendableBalance)s เราได้ทำการแก้ไขมูลค่ารวมให้คุณแล้ว",
-    "You do not have enough funds in your wallet": "คุณมีเงินในกระเป๋าไม่พอ",
+    "You do not have enough funds in your wallet (incl. fee)": "คุณมีเงินในกระเป๋าไม่พอ (incl น ค่าจ้าง)",
     "A name is required to set your profile on Coin Space": "คุณจำเป็นต้องกรอกชื่อของคุณเพื่อตั้งค่าโปร์ไฟล์ Coin Space ",
     "Uh Oh...": "โอ๊ะ โอ...",
     "Whoops!": "อุปส์!",

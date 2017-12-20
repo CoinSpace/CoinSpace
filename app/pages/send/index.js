@@ -132,7 +132,7 @@ module.exports = function(el){
   })
 
   function validateAndShowConfirm(to, amount, alias, dynamicFees) {
-    validateSend(getWallet(), to, amount, function(err){
+    validateSend(getWallet(), to, amount, dynamicFees, function(err){
       ractive.set('validating', false);
       if(err) {
         var interpolations = err.interpolations

@@ -54,7 +54,7 @@ describe('validate', function(){
 
       it('produces an appropriate error message', function(done){
         validateSend(wallet, to, amount, function(err){
-          expect(err.message).toEqual('You do not have enough funds in your wallet')
+          expect(err.message).toEqual('You do not have enough funds in your wallet (incl. fee)')
           done()
         })
       })

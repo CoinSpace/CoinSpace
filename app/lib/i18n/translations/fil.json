@@ -38,7 +38,7 @@
     "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.": "Ang ilang pondo ay pansamantalang hindi magagamit. Upang magpadala ng transaksyon, kinakailangan mong mag-antay muna para sa pagkumpirma ng iyong transaksyon na pending.",
     "What does this mean?": "Ano ibig sabihin nito?",
     "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you": "Mukhang nais mong limasin ang iyong wallet. Kung bibigyang-halaga ang transaction fee, tinatantya namin na ang max amount na maari mong maipadala ay %(sendableBalance)s. Na-amendya na namin ang halaga sa amount field para sa iyo.",
-    "You do not have enough funds in your wallet": "Wala kang sapat na pondo sa iyong wallet",
+    "You do not have enough funds in your wallet (incl. fee)": "Wala kang sapat na pondo sa iyong wallet (incl. fee)",
     "A name is required to set your profile on Coin Space": "Kinakailangan ng pangalan upang mai-set ang iyong profile sa Coin Space",
     "Uh Oh...": "Uh Oh...",
     "Whoops!": "Oops!",

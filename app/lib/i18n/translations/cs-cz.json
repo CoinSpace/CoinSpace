@@ -38,7 +38,7 @@
     "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.": "Některé prostředky jsou dočasně nedostupné. K odeslání této transakce musíte nejprve počkat na potvrzení příchozích transakcí.",
     "What does this mean?": "Co to znamená?",
     "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you": "Vypadá to, že se snažíte použít vyprázdnit svou peněženku. Po  započtení transakcí, odhadujeme maximální možné množství k odeslání %(sendableBalance)s. Nastavili jsme pro Vás toto množství ve formuláři.",
-    "You do not have enough funds in your wallet": "Nemáte dostatek prostředků ve Vaší peněžence.",
+    "You do not have enough funds in your wallet (incl. fee)": "Nemáte dostatek prostředků ve Vaší peněžence (vč. poplatek).",
     "A name is required to set your profile on Coin Space": "Jméno je vyžadováno k založení profilu na Coin Space",
     "Uh Oh...": "Jejda...",
     "Whoops!": "Hups...",

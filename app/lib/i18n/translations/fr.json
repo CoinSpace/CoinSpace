@@ -38,7 +38,7 @@
     "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.": "Certains de vos fonds sont indisponibles pour le moment. Pour envoyer cette transaction, vous allez d'abord devoir attendre que vos transactions en attente soient confirmées.",
     "What does this mean?": "Qu'est-ce que cela signifie?",
     "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you": "Il semble que vous essayiez de vider votre porte-monnaie. En tenant compte des frais de transaction, nous avons estimé que le montant maximum que vous pouvez envoyer est de% (montant restant ) . Nous avons modifié la valeur dans le champ du montant pour vous.",
-    "You do not have enough funds in your wallet": "Vous n'avez pas suffisamment de fonds dans votre portefeuille",
+    "You do not have enough funds in your wallet (incl. fee)": "Vous n'avez pas suffisamment de fonds dans votre portefeuille (incl. frais)",
     "A name is required to set your profile on Coin Space": "Un nom est requis pour définir votre profil sur Coin Space",
     "Uh Oh...": "Uh Oh...",
     "Whoops!": "Oooops!",

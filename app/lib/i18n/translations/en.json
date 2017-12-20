@@ -38,7 +38,7 @@
   "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.": "Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.",
   "What does this mean?": "What does this mean?",
   "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you": "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.",
-  "You do not have enough funds in your wallet": "You don't have enough funds in your wallet",
+  "You do not have enough funds in your wallet (incl. fee)": "You don't have enough funds in your wallet (incl. fee)",
   "A name is required to set your profile on Coin Space": "A name is required to set your profile on Coin Space",
   "Uh Oh...": "Uh Oh...",
   "Whoops!": "Whoops!",
