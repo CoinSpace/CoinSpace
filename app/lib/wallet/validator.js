@@ -7,11 +7,11 @@ function validateSend(wallet, to, unitValue, dynamicFees, callback){
   var amount = toAtom(unitValue)
   var tx = null
   var fee;
-  if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(wallet.networkName) !== -1) {
-    fee = wallet.estimateFees(to, amount, [dynamicFees.minimum * 1000])[0];
-  }
 
   try {
+    if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(wallet.networkName) !== -1) {
+      fee = wallet.estimateFees(to, amount, [dynamicFees.minimum * 1000])[0];
+    }
     tx = wallet.createTx(to, amount, fee)
   } catch(e) {
     if(e.message.match(/Invalid address/)) {
