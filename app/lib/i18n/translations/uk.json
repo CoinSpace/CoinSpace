@@ -101,6 +101,7 @@
     "Close": "Закрити",
     "Report": "Report",
     "Transaction Failed": "Транзакція не пройшла",
+    "Failed": "Не пройшла",
     "Please make sure you are connected to the internet.": "Будь ласка, перевірте чи приєдані ви до Інтернету.",
     "Please describe what happened above. Below are network error logs that could help us identify your issue.": "Please describe what happened above. Below are network error logs that could help us identify your issue.",
     "Sorry, Coin Space Wallet did not load.": "Вибачаємося, Coin Space Wallet не завантажився.",

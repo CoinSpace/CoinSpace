@@ -101,6 +101,7 @@
     "Close": "ปิด",
     "Report": "Report",
     "Transaction Failed": "การทำธุรกรรมผิดพลาด",
+    "Failed": "ล้มเหลว",
     "Please make sure you are connected to the internet.": "แน่ใจแล้วนะว่าคุณกำลังเชื่อมต่อกับอินเทอร์เน็ตอยู่ ",
     "Please describe what happened above. Below are network error logs that could help us identify your issue.": "Please describe what happened above. Below are network error logs that could help us identify your issue.",
     "Sorry, Coin Space Wallet did not load.": "ขอโทษที Coin Space Wallet ไม่โหลดเลย",

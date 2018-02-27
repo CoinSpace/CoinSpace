@@ -101,6 +101,7 @@
     "Close": "关闭",
     "Report": "报错",
     "Transaction Failed": "交易失败",
+    "Failed": "失败",
     "Please make sure you are connected to the internet.": "请确认您已连接到互联网。",
     "Please describe what happened above. Below are network error logs that could help us identify your issue.": "请在线上描述错误发生经过。下面是网络错误日志，可以帮助我们识别您的问题。",
     "Sorry, Coin Space Wallet did not load.": "对不起，Coin Space钱包加载失败。",

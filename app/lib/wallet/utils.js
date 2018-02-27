@@ -29,6 +29,7 @@ function parseEthereumTx(tx) {
     timestamp: tx.timestamp * 1000,
     confirmations: tx.confirmations,
     fee: tx.fee,
+    status: tx.status,
     from: tx.from,
     to: tx.to
   }

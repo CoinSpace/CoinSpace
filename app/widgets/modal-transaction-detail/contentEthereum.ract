@@ -5,6 +5,10 @@
       {{>svg_close}}
     </span>
 
+    {{#isFailed(this)}}
+      <div class="_status">{{translate("Failed")}}</div>
+    {{/isFailed}}
+
     <div class="_amount {{isReceived(this) ? 'green' : 'red'}}">
       {{isReceived(this) ? '+' : ''}} {{toUnitString(amount)}}
     </div>

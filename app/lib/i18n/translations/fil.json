@@ -101,6 +101,7 @@
     "Close": "Isara",
     "Report": "I-report",
     "Transaction Failed": "Ang Transaksyon ay Nabigo",
+    "Failed": "Nabigo",
     "Please make sure you are connected to the internet.": "Maari lamang na siguraduhin na ikaw ay nakakunekta sa internet.",
     "Please describe what happened above. Below are network error logs that could help us identify your issue.": "Maari lamang na ilarawan ang pangyayari sa itaas. Sa ilalim naman ay mga network log na maaring makatulong sa amin upang malaman ang iyong isyu.",
     "Sorry, Coin Space Wallet did not load.": "Patawad, ang Coin Space Wallet ay hindi na-load.",

@@ -35,6 +35,12 @@
       font-size: 24px;
     }
   }
+  ._status {
+    text-align: center;
+    @include breakpoint(portrait) {
+      font-size: 24px;
+    }
+  }
 }
 
 .detail__strings {

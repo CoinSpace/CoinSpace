@@ -101,6 +101,7 @@
     "Close": "Закрыть",
     "Report": "Сообщить",
     "Transaction Failed": "Транзакция неуспешна",
+    "Failed": "Неуспешна",
     "Please make sure you are connected to the internet.": "Убедитесь, что вы подключены к Интернету",
     "Please describe what happened above. Below are network error logs that could help us identify your issue.": "Пожалуйста, опишите что случилось. Ниже логи сетевых ошибок, которые помогут нам найти проблему.",
     "Sorry, Coin Space Wallet did not load.": "Извините, кошелек Coin Space не загрузился.",

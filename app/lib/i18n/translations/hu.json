@@ -101,6 +101,7 @@
     "Close": "Bezár",
     "Report": "Jelentés",
     "Transaction Failed": "Tranzakció hiba",
+    "Failed": "Hiba",
     "Please make sure you are connected to the internet.": "Győződj meg róla, hogy csatlakozol-e az internethez",
     "Please describe what happened above. Below are network error logs that could help us identify your issue.": "Kérjük írja le, hogy mi történt. Alább található a hálózati hiba napló ami segít beazonosítani a problémát.",
     "Sorry, Coin Space Wallet did not load.": "A Coin Space tárca nem tudott betöltődni",

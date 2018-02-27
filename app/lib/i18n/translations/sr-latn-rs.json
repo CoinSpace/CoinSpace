@@ -101,6 +101,7 @@
     "Close": "Zatvori",
     "Report": "Report",
     "Transaction Failed": "Transakcija nije uspela",
+    "Failed": "Nije uspela",
     "Please make sure you are connected to the internet.": "Molim proverite svoju internet konekciju.",
     "Please describe what happened above. Below are network error logs that could help us identify your issue.": "Please describe what happened above. Below are network error logs that could help us identify your issue.",
     "Sorry, Coin Space Wallet did not load.": "Izvinite, Coin Space novčanik se nije učitao.",

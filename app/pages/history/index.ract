@@ -27,7 +27,11 @@
         {{/isConfirmed}}
 
       </div>
-      <div class="_address">{{isReceived(this) ? translate('Received') : getToAddress(this)}}</div>
+      {{#if isFailed(this)}}
+        <div class="_address">{{translate("Failed")}}</div>
+      {{else}}
+        <div class="_address">{{isReceived(this) ? translate('Received') : getToAddress(this)}}</div>
+      {{/if}}
 
     </div>
   {{/each}}

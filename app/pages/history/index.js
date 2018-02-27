@@ -46,6 +46,13 @@ module.exports = function(el){
       isConfirmed: function(confirmations) {
         return confirmations >= getWallet().minConf;
       },
+      isFailed: function(tx) {
+        if (network === 'ethereum') {
+          return tx.status === false;
+        } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(network) !== -1) {
+          return false;
+        }
+      },
       toUnitString: toUnitString,
       isEthereum: network === 'ethereum',
       isBitcoin: network === 'bitcoin' || network === 'testnet',
@@ -90,6 +97,7 @@ module.exports = function(el){
       formatTimestamp: ractive.get('formatTimestamp'),
       formatConfirmations: ractive.get('formatConfirmations'),
       isReceived: ractive.get('isReceived'),
+      isFailed: ractive.get('isFailed'),
       isConfirmed: ractive.get('isConfirmed'),
       toUnitString: ractive.get('toUnitString'),
       isEthereum: ractive.get('isEthereum'),

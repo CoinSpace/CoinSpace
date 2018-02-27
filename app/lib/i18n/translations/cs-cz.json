@@ -101,6 +101,7 @@
     "Close": "Zavřít",
     "Report": "Nahlásit",
     "Transaction Failed": "Transakce selhala",
+    "Failed": "Selhala",
     "Please make sure you are connected to the internet.": "Prosím zkontrolujte své připojení k internetu.",
     "Please describe what happened above. Below are network error logs that could help us identify your issue.": "Prosím výše uveďte co se přesně stalo. Níže jsou uvedeny záznamy, které nám pomohou identifikovat problém.",
     "Sorry, Coin Space Wallet did not load.": "Omlouváme se, Coin Space peněžěnka se nenačetla.",

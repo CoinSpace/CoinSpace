@@ -101,6 +101,7 @@
     "Close": "閉じる",
     "Report": "レポートする",
     "Transaction Failed": "取引に失敗しました",
+    "Failed": "失敗",
     "Please make sure you are connected to the internet.": "端末の接続状況をご確認ください。",
     "Please describe what happened above. Below are network error logs that could help us identify your issue.": "問題発生時の状況をなるべく詳しく上記にご記入下さい。問題解決に役立つネットワークのエラーログがその下に出力されています",
     "Sorry, Coin Space Wallet did not load.": "Coin Spaceウォレットが読み込めませんでした",

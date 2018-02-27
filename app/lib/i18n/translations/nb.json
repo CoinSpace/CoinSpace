@@ -101,6 +101,7 @@
     "Close": "Lukk",
     "Report": "Rapporter",
     "Transaction Failed": "Transaksjon Feilet",
+    "Failed": "Feilet",
     "Please make sure you are connected to the internet.": "Vennligst sørg for at du er forbundet til Internett.",
     "Please describe what happened above. Below are network error logs that could help us identify your issue.": "Vennligst beskriv over hva som skjedde (kun engelsk). Nedenfor er noen logger over nettverksfeil som kan hjelpe oss med å finne ut hva som gikk galt. ",
     "Sorry, Coin Space Wallet did not load.": "Beklager, Coin Space Lommebok lastet ikke.",

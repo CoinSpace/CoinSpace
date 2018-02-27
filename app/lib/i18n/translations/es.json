@@ -101,6 +101,7 @@
     "Close": "Cerrar",
     "Report": "Reportar",
     "Transaction Failed": "Transacción fallida",
+    "Failed": "Fallida",
     "Please make sure you are connected to the internet.": "Por favor comprueba tu conexión a internet",
     "Please describe what happened above. Below are network error logs that could help us identify your issue.": "Por favor describe lo que paso en la parte de arriba. Abajo hay registros de errores que pueden ayudarnos a identificar tu problema.",
     "Sorry, Coin Space Wallet did not load.": "Perdón, Coin Space Wallet no carga",
