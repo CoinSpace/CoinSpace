@@ -1,6 +1,5 @@
 var axios = require('axios');
 var db = require('./db');
-var tickerDB = db('ticker');
 var crypto = require('crypto');
 var currencies = require('cs-ticker-api/currencies');
 
@@ -13,8 +12,9 @@ var networks = {
 };
 
 function save(cacheId, data) {
-  tickerDB.save(cacheId, {data: data}, function(err) {
-    if (err) return console.error('FATAL: failed to save ticker doc');
+  var collection = db().collection('ticker');
+  return collection.replaceOne({_id: cacheId}, {data: data}, {upsert: true}).catch(function() {
+    console.error('FATAL: failed to save ticker doc');
   });
 }
 
@@ -32,11 +32,15 @@ function getFromAPI(cryptoTicker) {
   });
 }
 
-function getFromCache(cacheId, callback) {
-  tickerDB.get(cacheId, function(err, doc) {
-    if (err) return callback(err);
-    callback(null, doc.data);
-  })
+function getFromCache(cacheId) {
+  var collection = db().collection('ticker');
+  return collection
+    .find({_id: cacheId})
+    .limit(1)
+    .next()
+    .then(function(doc) {
+      return doc.data;
+    });
 }
 
 function toRates(apiRates, cryptoTicker){

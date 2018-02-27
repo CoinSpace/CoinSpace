@@ -158,11 +158,11 @@ module.exports = function (){
   app.get('/ticker', function(req, res) {
     var crypto = req.query.crypto
     if (!crypto) return res.status(400).json({error: 'Bad request'});
-
-    ticker.getFromCache(crypto, function(err, data) {
-      if(err) return res.status(400).send(err);
-      res.status(200).send(data)
-    })
+    ticker.getFromCache(crypto).then(function(data) {
+      res.status(200).send(data);
+    }).catch(function(err) {
+      res.status(400).send(err);
+    });
   })
 
   app.post('/location', function(req, res) {
