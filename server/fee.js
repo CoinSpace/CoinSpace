@@ -1,18 +1,17 @@
 var axios = require('axios')
 var db = require('./db')
-var feeDB = db('fee')
 var networks = [
   'bitcoin',
   'bitcoincash',
   'litecoin',
-  'ethereum',
   'testnet'
 ];
 
 function save(network, data) {
   if (network !== 'bitcoin') throw new Error(network + ' currency fee is not supported');
-  feeDB.save(network, data, function(err) {
-    if (err) return console.error('FATAL: failed to save fee doc');
+  var collection = db().collection('fee');
+  return collection.replaceOne({_id: network}, data, {upsert: true}).catch(function() {
+    console.error('FATAL: failed to save fee doc');
   });
 }
 
@@ -26,16 +25,15 @@ function getFromAPI(network) {
   })
 }
 
-function getFromCache(network, callback) {
+function getFromCache(network) {
   if (networks.indexOf(network) === -1) {
-    return callback({error: 'Currency fee is not supported'});
+    return Promise.reject({error: 'Currency fee is not supported'});
   }
-  feeDB.get(network, function(err, doc) {
-    if (err) return callback(err);
-    delete doc._id;
-    delete doc._rev;
-    callback(null, doc);
-  })
+  var collection = db().collection('fee');
+  return collection
+    .find({_id: network})
+    .limit(1)
+    .next();
 }
 
 module.exports = {

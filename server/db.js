@@ -1,22 +1,13 @@
 "use strict"
 
-var cradle = require('cradle')
+var MongoClient = require('mongodb').MongoClient;
+var db;
 
-cradle.setup({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  cache: false,
-  timeout: 5000
-})
+module.exports = function() {
+  if (db) { return db; }
 
-var conn = new (cradle.Connection)({
-  secure: true,
-  auth: {
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD
-  }
-})
-
-module.exports = function(dbname){
-  return conn.database(dbname)
-}
+  return MongoClient.connect(process.env.DB_CONNECT)
+    .then(function(client) {
+      db = client.db(process.env.DB_NAME);
+    });
+};

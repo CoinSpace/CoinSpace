@@ -2,13 +2,22 @@ version: '2.2'
 services:
   web:
     build: .
-    command: npm run server
     env_file: .env.loc
+    links:
+      - mongo
 
   web_master:
-    extends: web
     image: coinspace_web
+    env_file: .env.loc
+    links:
+      - mongo
     ports:
       - '${PORT:-8080}:${PORT:-8080}'
     environment:
       MASTER: 1
+
+  mongo:
+    image: mongo:3.6
+    command: mongod -wiredTigerEngineConfigString="cache_size=250M"
+    ports:
+      - '27017:27017'

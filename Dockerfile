@@ -12,3 +12,5 @@ RUN npm version && \
   npm cache clean
 
 COPY . ./
+
+CMD npm run server

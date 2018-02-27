@@ -147,10 +147,12 @@ module.exports = function (){
 
   app.get('/fees', function(req, res) {
     var network = req.query.network || 'bitcoin'
-    fee.getFromCache(network, function(err, fees) {
-      if(err) return res.status(400).send(err);
-      res.status(200).send(fees)
-    })
+    fee.getFromCache(network).then(function(fees) {
+      delete fees._id;
+      res.status(200).send(fees);
+    }).catch(function(err) {
+      res.status(400).send(err);
+    });
   })
 
   app.get('/ticker', function(req, res) {
