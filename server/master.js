@@ -4,10 +4,7 @@ var ticker = require('./ticker')
 
 function cleanGeo(interval) {
   setInterval(function intervalFunction(){
-    geo.getIdsOlderThan(interval, function(err, docs) {
-      if (err) return console.error(err);
-      docs.forEach(geo.remove);
-    });
+    geo.removeOlderThan(interval).catch(console.error);
     return intervalFunction;
   }(), interval)
 }
@@ -15,15 +12,13 @@ function cleanGeo(interval) {
 function cacheFees(interval) {
   setInterval(function intervalFunction() {
     fee.getFromAPI('bitcoin').then(function(data) {
-      fee.save('bitcoin', {
+      if (global.gc) global.gc();
+      return fee.save('bitcoin', {
         minimum: data.minimum,
         hour: data.hourFee,
         fastest: data.fastestFee
       });
-      if (global.gc) global.gc();
-    }).catch(function(err) {
-      console.error(err);
-    });
+    }).catch(console.error);
     return intervalFunction;
   }(), interval);
 }
@@ -32,11 +27,9 @@ function cacheTicker(interval) {
   setInterval(function intervalFunction() {
     ['BTC', 'BCH', 'LTC', 'ETH'].forEach(function(cryptoTicker) {
       ticker.getFromAPI(cryptoTicker).then(function(data) {
-        ticker.save(cryptoTicker, data)
         if (global.gc) global.gc();
-      }).catch(function(err) {
-        console.error(err);
-      });
+        return ticker.save(cryptoTicker, data)
+      }).catch(console.error);
     })
 
     return intervalFunction;

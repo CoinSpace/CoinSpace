@@ -13,9 +13,7 @@ var networks = {
 
 function save(cacheId, data) {
   var collection = db().collection('ticker');
-  return collection.replaceOne({_id: cacheId}, {data: data}, {upsert: true}).catch(function() {
-    console.error('FATAL: failed to save ticker doc');
-  });
+  return collection.replaceOne({_id: cacheId}, {data: data}, {upsert: true});
 }
 
 function getFromAPI(cryptoTicker) {

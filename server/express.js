@@ -166,27 +166,24 @@ module.exports = function (){
   })
 
   app.post('/location', function(req, res) {
-    var args = prepareGeoData(req, res)
-
-    args.push(function(err) {
-      if(err) return res.status(400).json(err);
-      res.status(201).send()
-    })
-
-    geo.save.apply(null, args)
+    var args = prepareGeoData(req)
+    geo.save(args.lat, args.lon, args.data).then(function() {
+      res.status(201).send();
+    }).catch(function(err) {
+      res.status(400).json(err);
+    });
   })
 
   app.put('/location', function(req, res) {
-    var args = prepareGeoData(req, res)
-    args.push(function(err, results) {
-      if(err) return res.status(400).json(err)
-      res.status(200).json(results)
-    })
-
-    geo.search.apply(null, args)
+    var args = prepareGeoData(req)
+    geo.search(args.lat, args.lon, args.data).then(function(results) {
+      res.status(200).json(results);
+    }).catch(function(err) {
+      res.status(400).json(err);
+    });
   })
 
-  function prepareGeoData(req, res){
+  function prepareGeoData(req) {
     var data = req.body
 
     var lat = data.lat
@@ -201,14 +198,12 @@ module.exports = function (){
     }
     data.id = id
 
-    return [lat, lon, data]
+    return {lat: lat, lon: lon, data: data}
   }
 
   app.delete('/location', function(req, res) {
-    geo.getById(req.session.tmpSessionID, function(err, doc) {
-      if (doc) geo.remove(doc);
-      res.status(200).send();
-    });
+    geo.remove(req.session.tmpSessionID).catch(console.error);
+    res.status(200).send();
   })
 
   app.use(function(err, req, res, next){

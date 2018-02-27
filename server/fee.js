@@ -10,9 +10,7 @@ var networks = [
 function save(network, data) {
   if (network !== 'bitcoin') throw new Error(network + ' currency fee is not supported');
   var collection = db().collection('fee');
-  return collection.replaceOne({_id: network}, data, {upsert: true}).catch(function() {
-    console.error('FATAL: failed to save fee doc');
-  });
+  return collection.replaceOne({_id: network}, data, {upsert: true});
 }
 
 function getFromAPI(network) {

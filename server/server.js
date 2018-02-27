@@ -10,12 +10,12 @@ db().then(function() {
     console.info('server listening on http://localhost:' + server.address().port)
     server.timeout = 30000; // 30 sec
   });
+
+  if (process.env.MASTER) {
+    master.cleanGeo(60 * 60 * 1000) // 1 hour
+    master.cacheFees(60 * 60 * 1000) // 1 hour
+    master.cacheTicker(60 * 60 * 1000) // 1 hour
+  }
 }).catch(function(error) {
   console.log('error', error);
 });
-
-if (process.env.MASTER) {
-  master.cleanGeo(60 * 60 * 1000) // 1 hour
-  master.cacheFees(60 * 60 * 1000) // 1 hour
-  master.cacheTicker(60 * 60 * 1000) // 1 hour
-}
