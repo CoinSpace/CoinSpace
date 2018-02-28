@@ -1,6 +1,6 @@
-var geo = require('./geo')
-var fee = require('./fee')
-var ticker = require('./ticker')
+var geo = require('./geo');
+var fee = require('./fee');
+var ticker = require('./ticker');
 
 function cleanGeo(interval) {
   setInterval(function intervalFunction(){

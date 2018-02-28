@@ -34,6 +34,17 @@ function getFromCache(network) {
     .next();
 }
 
+function getFromCache(network) {
+  if (networks.indexOf(network) === -1) {
+    return Promise.reject({error: 'Currency fee is not supported'});
+  }
+  var collection = db().collection('fee');
+  return collection
+    .find({_id: network})
+    .limit(1)
+    .next();
+}
+
 module.exports = {
   save: save,
   getFromAPI: getFromAPI,

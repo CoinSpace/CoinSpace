@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var execSync = require('child_process').execSync;
 var chalk = require('chalk');

@@ -1,4 +1,4 @@
-"use strict"
+'use strict';
 
 var MongoClient = require('mongodb').MongoClient;
 var db;
