@@ -13,6 +13,9 @@ module.exports = function() {
         db.collection('mecto').createIndexes([
           {key: {geometry: '2dsphere'}, background: true},
           {key: {network: 1}, background: true},
+        ]),
+        db.collection('users').createIndexes([
+          {key: {username_sha: 1}, background: true, unique: true, sparse: true},
         ])
       ]);
     });

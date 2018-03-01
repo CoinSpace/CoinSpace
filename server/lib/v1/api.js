@@ -3,9 +3,9 @@
 var express = require('express');
 
 var auth = require('./auth');
+var account = require('./account');
 var geo = require('./geo');
 var validatePin = require('cs-pin-validator');
-var crypto = require('crypto');
 var openalias = require('cs-openalias');
 var fee = require('./fee');
 var ticker = require('./ticker');
@@ -41,7 +41,7 @@ router.post('/login', validateAuthParams(true), function(req, res) {
 router.get('/exist', function(req, res) {
   var walletId = req.query.wallet_id;
   if (!walletId) return res.status(400).json({error: 'Bad request'});
-  auth.exist(walletId).then(function(userExist) {
+  account.isExist(walletId).then(function(userExist) {
     res.status(200).send(userExist);
   }).catch(function(err) {
     console.error('error', err);
@@ -58,21 +58,37 @@ router.get('/openalias', function(req, res) {
   })
 });
 
-// router.put('/account', restrict, function(req, res) {
-router.post('/username', restrict, function(req, res) {
-  var id = req.body.id
-  var username = req.body.username
+router.put('/username', restrict, function(req, res) {
+  var id = req.body.id;
+  var username = req.body.username;
   if (!username) return res.status(400).json({error: 'Bad request'});
+  account.setUsername(id, username).then(function(username) {
+    res.status(200).send({username: username});
+  }).catch(function(err) {
+    res.status(400).send(err);
+  });
+});
 
-  auth.setUsername(id, username, function(err, username) {
-    if(err) return res.status(400).send(err)
-    res.status(200).send({username: username})
-  })
+router.get('/details', restrict, function(req, res) {
+  account.getDetails(req.query.id).then(function(details) {
+    res.status(200).json(details);
+  }).catch(function(err) {
+    res.status(400).send(err);
+  });
+});
+
+router.put('/details', restrict, function(req, res) {
+  if (!req.body.data) return res.status(400).json({error: 'Bad request'});
+  account.saveDetails(req.body.id, req.body.data).then(function(details) {
+    res.status(200).json(details);
+  }).catch(function(err) {
+    res.status(400).send(err);
+  });
 });
 
 router.delete('/account', restrict, function(req, res) {
   var id = req.body.id;
-  auth.remove(id).then(function() {
+  account.remove(id).then(function() {
     res.status(200).send()
   }).catch(function(err) {
     res.status(400).send(err);
@@ -99,44 +115,26 @@ router.get('/ticker', function(req, res) {
   });
 });
 
-router.post('/location', function(req, res) {
-  var args = prepareGeoData(req)
-  geo.save(args.lat, args.lon, args.data).then(function() {
+router.post('/location', restrict, function(req, res) {
+  var data = req.body;
+  geo.save(data.lat, data.lon, data).then(function() {
     res.status(201).send();
   }).catch(function(err) {
     res.status(400).json(err);
   });
 });
 
-router.put('/location', function(req, res) {
-  var args = prepareGeoData(req)
-  geo.search(args.lat, args.lon, args.data).then(function(results) {
+router.put('/location', restrict, function(req, res) {
+  var data = req.body;
+  geo.search(data.lat, data.lon, data).then(function(results) {
     res.status(200).json(results);
   }).catch(function(err) {
     res.status(400).json(err);
   });
 });
 
-function prepareGeoData(req) {
-  var data = req.body
-
-  var lat = data.lat
-  var lon = data.lon
-  delete data.lat
-  delete data.lon
-
-  var id = req.session.tmpSessionID
-  if(!id) {
-    id = crypto.randomBytes(16).toString('base64')
-    req.session.tmpSessionID = id
-  }
-  data.id = id
-
-  return {lat: lat, lon: lon, data: data}
-}
-
-router.delete('/location', function(req, res) {
-  geo.remove(req.session.tmpSessionID).catch(console.error);
+router.delete('/location', restrict, function(req, res) {
+  geo.remove(req.body.id).catch(console.error);
   res.status(200).send();
 });
 
@@ -159,8 +157,9 @@ function validateAuthParams(allowMissingPin) {
 }
 
 function restrict(req, res, next) {
+  var id = req.method === 'GET' ? req.query.id : req.body.id;
   var session_id = req.session.wallet_id;
-  if (session_id && session_id === req.body.id) {
+  if (session_id && session_id === id) {
     next();
   } else {
     return res.status(401).send();

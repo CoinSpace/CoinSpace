@@ -1,32 +1,18 @@
 'use strict';
 
-var request = require('lib/request')
-var db = require('lib/db')
-var getWallet = require('lib/wallet').getWallet
-var getNetwork = require('lib/network')
-var urlRoot = process.env.SITE_URL
-var userInfo = {}
+var request = require('lib/request');
+var db = require('lib/db');
+var getWallet = require('lib/wallet').getWallet;
+var getId = require('lib/wallet').getId;
+var getNetwork = require('lib/network');
+var urlRoot = process.env.SITE_URL;
+var userInfo = {};
 var networks = {
   BTC: 'bitcoin',
   BCH: 'bitcoincash',
   LTC: 'litecoin',
   ETH: 'ethereum'
-}
-
-function fetchUserInfo(network, callback){
-  db.get(function(err, doc){
-    if(err) return callback(err);
-
-    userInfo = {}
-    userInfo.name = doc.userInfo.firstName
-    userInfo.email = doc.userInfo.email
-    userInfo.avatarIndex = doc.userInfo.avatarIndex
-    userInfo.address = getWallet().getNextAddress()
-    userInfo.network = network || getNetwork()
-
-    callback()
-  })
-}
+};
 
 function save(callback){
   requestLocationEndpoint(false, 'POST', callback)
@@ -39,7 +25,10 @@ function search(network, callback) {
 function remove() {
   request({
     url: urlRoot + '/location',
-    method: 'delete'
+    method: 'delete',
+    data: {
+      id: getId()
+    }
   })
 }
 
@@ -68,21 +57,22 @@ function requestLocationEndpoint(network, method, callback){
   getLocation(function(err, lat, lon){
     if(err) return callback(err);
 
-    fetchUserInfo(network, function(err){
-      if(err) {
-        console.error(err)
-        //proceed with an earlier version of userInfo
-      }
+    var doc = db.get();
+    userInfo = {};
+    userInfo.id = getId();
+    userInfo.name = doc.userInfo.firstName;
+    userInfo.email = doc.userInfo.email;
+    userInfo.avatarIndex = doc.userInfo.avatarIndex;
+    userInfo.address = getWallet().getNextAddress();
+    userInfo.network = network || getNetwork();
+    userInfo.lat = lat;
+    userInfo.lon = lon;
 
-      userInfo.lat = lat
-      userInfo.lon = lon
-
-      request({
-        url: urlRoot + '/location',
-        method: method,
-        data: userInfo
-      }, callback)
-    })
+    request({
+      url: urlRoot + '/location',
+      method: method,
+      data: userInfo
+    }, callback);
   })
 }
 

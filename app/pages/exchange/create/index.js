@@ -153,10 +153,12 @@ module.exports = function(el) {
     return validateAddresses(options).then(function() {
       return shapeshift.shift(options).then(function(data) {
         data.depositCoinName = fromCoin ? fromCoin.name : '';
-        db.set('exchangeInfo', data, function(err) {
+        db.set('exchangeInfo', data).then(function() {
           ractive.set('isValidating', false);
-          if (err) return console.error(err);
           emitter.emit('change-exchange-step', 'awaitingDeposit', data);
+        }).catch(function(err) {
+          ractive.set('isValidating', false);
+          console.error(err);
         });
       });
     }).catch(function(err) {

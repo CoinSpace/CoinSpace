@@ -84,12 +84,10 @@ module.exports = function(prevPage, data){
 
       ractive.set('opening', true)
 
-      if(userExists) {
+      if (userExists) {
         ractive.set('progress', 'Verifying PIN')
-        return CS.walletExists(function(walletExists){
-          if(walletExists) { return openWithPin() }
-          setPin()
-        })
+        if (CS.walletExists()) { return openWithPin() }
+        return setPin();
       }
       ractive.set('progress', 'Setting PIN')
       ractive.set('userExists', true)
@@ -106,10 +104,9 @@ module.exports = function(prevPage, data){
   })
 
   ractive.on('clear-credentials', function(){
-    CS.reset(function(){
-      CS.resetPin()
-      location.reload();
-    })
+    CS.reset();
+    CS.resetPin();
+    location.reload();
   })
 
   ractive.on('back', function(){
@@ -141,21 +138,19 @@ module.exports = function(prevPage, data){
   function initFingerprintAuth() {
     if (process.env.BUILD_PLATFORM === 'ios') {
       window.plugins.touchid.isAvailable(function() {
-        CS.setAvailableTouchId()
-        CS.walletExists(function(walletExists) {
-          var pin = CS.getPin()
-          if (pin && walletExists && userExists) {
-            window.plugins.touchid.verifyFingerprintWithCustomPasswordFallbackAndEnterPasswordLabel(
-              translate('Scan your fingerprint please'),
-              translate('Enter PIN'),
-              function() {
-                ractive.set('pin', pin)
-                var boxes = pin.split('')
-                setBoxes(boxes);
-              }
-            )
-          }
-        })
+        CS.setAvailableTouchId();
+        var pin = CS.getPin();
+        if (pin && CS.walletExists() && userExists) {
+          window.plugins.touchid.verifyFingerprintWithCustomPasswordFallbackAndEnterPasswordLabel(
+            translate('Scan your fingerprint please'),
+            translate('Enter PIN'),
+            function() {
+              ractive.set('pin', pin)
+              var boxes = pin.split('')
+              setBoxes(boxes);
+            }
+          )
+        }
       })
     }
 
@@ -163,18 +158,16 @@ module.exports = function(prevPage, data){
       var FingerprintAuth = window.FingerprintAuth;
       FingerprintAuth.isAvailable(function(result) {
         if (!result.isAvailable) return false;
-        CS.setAvailableTouchId()
-        CS.walletExists(function(walletExists) {
-          var pin = CS.getPin()
-          if (pin && walletExists && userExists) {
-            var config = {clientId: 'coinspace', locale: getLanguage()};
-            FingerprintAuth.encrypt(config, function() {
-              ractive.set('pin', pin)
-              var boxes = pin.split('')
-              setBoxes(boxes);
-            });
-          }
-        })
+        CS.setAvailableTouchId();
+        var pin = CS.getPin();
+        if (pin && CS.walletExists() && userExists) {
+          var config = {clientId: 'coinspace', locale: getLanguage()};
+          FingerprintAuth.encrypt(config, function() {
+            ractive.set('pin', pin)
+            var boxes = pin.split('')
+            setBoxes(boxes);
+          });
+        }
       });
     }
   }

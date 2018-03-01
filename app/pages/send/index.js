@@ -76,15 +76,13 @@ module.exports = function(el){
   })
 
   emitter.once('db-ready', function(){
-    db.get('systemInfo', function(err, info) {
-      if(err) return console.error(err);
-      var preferredCurrency = info.preferredCurrency;
-      if (currencies.indexOf(preferredCurrency) === -1) {
-        preferredCurrency = 'USD';
-      }
-      ractive.set('selectedFiat', preferredCurrency)
-      ractive.observe('selectedFiat', setPreferredCurrency)
-    })
+    var systemInfo = db.get('systemInfo');
+    var preferredCurrency = systemInfo.preferredCurrency;
+    if (currencies.indexOf(preferredCurrency) === -1) {
+      preferredCurrency = 'USD';
+    }
+    ractive.set('selectedFiat', preferredCurrency)
+    ractive.observe('selectedFiat', setPreferredCurrency)
   })
 
   emitter.on('ticker', function(rates){

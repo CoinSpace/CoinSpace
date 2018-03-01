@@ -29,25 +29,22 @@ function remove(wallet_id, callback) {
 }
 
 function setUsername(wallet_id, username, callback) {
-  db.get('userInfo', function(err, userInfo) {
-    if(err) return callback(err);
+  var userInfo = db.get('userInfo');
+  var oldUsername = (userInfo.firstName || '').toLowerCase().replace(/[^a-z0-9-]/g, '')
+  username = (username || '').toLowerCase().replace(/[^a-z0-9-]/g, '')
 
-    var oldUsername = (userInfo.firstName || '').toLowerCase().replace(/[^a-z0-9-]/g, '')
-    username = (username || '').toLowerCase().replace(/[^a-z0-9-]/g, '')
+  if(username == oldUsername) return callback(null, userInfo.firstName);
 
-    if(username == oldUsername) return callback(null, userInfo.firstName);
-
-    request({
-      url: urlRoot + '/username',
-      method: 'post',
-      data: {
-        id: wallet_id,
-        username: username
-      }
-    }, function(err, data) {
-      if (err) return callback(err);
-      return callback(null, data.username);
-    })
+  request({
+    url: urlRoot + '/username',
+    method: 'put',
+    data: {
+      id: wallet_id,
+      username: username
+    }
+  }, function(err, data) {
+    if (err) return callback(err);
+    return callback(null, data.username);
   })
 }
 

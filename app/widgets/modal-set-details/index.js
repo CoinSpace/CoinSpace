@@ -7,19 +7,16 @@ var showError = require('widgets/modal-flash').showError
 var setUsername = require('lib/wallet').setUsername
 
 function fetchDetails(callback){
-  db.get(function(err, doc){
-    if(err) return callback(err);
+  var userInfo = db.get('userInfo');
+  var name = userInfo.firstName
+  if(name && name !== '') {
+    return callback()
+  }
 
-    var name = doc.userInfo.firstName
-    if(name && name !== '') {
-      return callback()
-    }
-
-    openModal({
-      name: name,
-      email: doc.userInfo.email,
-      callback: callback
-    })
+  openModal({
+    name: name,
+    email: userInfo.email,
+    callback: callback
   })
 }
 
@@ -66,14 +63,14 @@ function openModal(data){
 
       details.firstName = username
 
-      db.set('userInfo', details, function(err){
-        if(err) return data.callback(err);
-
-        ractive.fire('cancel', undefined)
-        ractive.set('submitting', false)
-        emitter.emit('details-updated', details)
-        data.callback()
-      })
+      db.set('userInfo', details).then(function() {
+        ractive.fire('cancel', undefined);
+        ractive.set('submitting', false);
+        emitter.emit('details-updated', details);
+        data.callback();
+      }).catch(function(err) {
+        data.callback(err);
+      });
     })
   })
 

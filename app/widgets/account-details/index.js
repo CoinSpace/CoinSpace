@@ -41,18 +41,15 @@ module.exports = function init(el) {
   };
 
   emitter.once('db-ready', function(){
-    db.get(function(err, doc){
-      if(err) return console.error(err);
+    var userInfo = db.get('userInfo');
+    ractive.set('user', userInfo);
+    setAvatar()
 
-      ractive.set('user', doc.userInfo)
-      setAvatar()
-
-      if (ractive.get('user.firstName')) {
-        Profile.hide($editEl, ractive)
-      } else {
-        Profile.hide($previewEl, ractive)
-      }
-    })
+    if (ractive.get('user.firstName')) {
+      Profile.hide($editEl, ractive)
+    } else {
+      Profile.hide($previewEl, ractive)
+    }
   })
 
   ractive.on('edit-details', function(){
@@ -103,13 +100,14 @@ module.exports = function init(el) {
 
       details.firstName = username
 
-      db.set('userInfo', details, function(err){
-        if(err) return handleUserError()
+      db.set('userInfo', details).then(function() {
+        ractive.set('submitting', false);
+        emitter.emit('details-updated', details);
+        setAvatar();
+      }).catch(function() {
+        handleUserError();
+      });
 
-        ractive.set('submitting', false)
-        emitter.emit('details-updated', details)
-        setAvatar()
-      })
     })
   })
 

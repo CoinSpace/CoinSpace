@@ -22,18 +22,13 @@ function open() {
     ractive.set('removing', true);
     CS.removeAccount(function(err) {
       if (err) return handleError(err);
-      db.remove(function(err) {
-        if (err) return handleError(err);
-        CS.reset(function(err) {
-          if (err) return handleError(err);
-          CS.resetPin();
-          ractive.set('confirmation', false);
-          ractive.set('success', true);
-          setTimeout(function() {
-            location.reload();
-          }, 3000);
-        });
-      });
+      CS.reset();
+      CS.resetPin();
+      ractive.set('confirmation', false);
+      ractive.set('success', true);
+      setTimeout(function() {
+        location.reload();
+      }, 3000);
     });
   });
 

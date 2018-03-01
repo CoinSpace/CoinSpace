@@ -55,10 +55,11 @@ module.exports = function(el) {
   });
 
   ractive.on('cancel', function() {
-    db.set('exchangeInfo', null, function(err) {
-      if (err) return console.error(err);
+    db.set('exchangeInfo', null).then(function() {
       emitter.emit('change-exchange-step', 'create');
-    });
+    }).catch(function(err) {
+      console.error(err);
+    })
   });
 
   ractive.on('show-qr', function(){

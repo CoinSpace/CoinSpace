@@ -14,24 +14,20 @@ function init() {
   document.getElementsByTagName('html')[0].classList.add(token)
   var containerEl = document.getElementById('loader')
 
-  Modernizr.on('indexeddb', function(hasIndexedDB){
-    var supportsPouchDB = hasIndexedDB || Modernizr.websqldatabase
-
-    i18n.loadTranslation().then(function() {
-      if (supportsPouchDB && Modernizr.localstorage && Modernizr.webworkers && Modernizr.blobconstructor && Modernizr.getrandomvalues) {
-        return import(
-          /* webpackChunkName: 'application' */
-          '../application'
-        ).then(function() {
-          fadeOut(containerEl)
-        });
-      } else {
-        return import(
-          /* webpackChunkName: 'nope' */
-          './nope'
-        );
-      }
-    })
+  i18n.loadTranslation().then(function() {
+    if (Modernizr.localstorage && Modernizr.webworkers && Modernizr.blobconstructor && Modernizr.getrandomvalues) {
+      return import(
+        /* webpackChunkName: 'application' */
+        '../application'
+      ).then(function() {
+        fadeOut(containerEl)
+      });
+    } else {
+      return import(
+        /* webpackChunkName: 'nope' */
+        './nope'
+      );
+    }
   })
 }
 

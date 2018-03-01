@@ -31,13 +31,11 @@ window.initCSApp = function() {
     }
   }
 
-  walletExists(function(exists){
-    auth = exists ? initAuth.pin(null, { userExists: true }) : initAuth.choose()
-    var authContentEl = document.getElementById('auth_content')
-    authContentEl.style.opacity = 0;
-    fadeIn(authContentEl)
-    auth.show()
-  })
+  auth = walletExists() ? initAuth.pin(null, { userExists: true }) : initAuth.choose()
+  var authContentEl = document.getElementById('auth_content')
+  authContentEl.style.opacity = 0;
+  fadeIn(authContentEl)
+  auth.show()
 
   emitter.on('open-overlay', function(){
     appEl.classList.add('is_hidden')

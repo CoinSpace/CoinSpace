@@ -1,24 +1,11 @@
 'use strict';
 
 var db = require('./db');
-var userDB = db('_users');
+var account = require('./account');
 var crypto = require('crypto');
 
-var userPrefix = "org.couchdb.user:"
-
-function exist(walletId) {
-  var collection = db().collection('users');
-  return collection
-    .find({_id: walletId})
-    .limit(1)
-    .next().then(function(user) {
-      if (!user) return false;
-      return true;
-    });
-}
-
 function register(walletId, pin) {
-  return exist(walletId).then(function(userExist) {
+  return account.isExist(walletId).then(function(userExist) {
     if (!userExist) {
       return createUser(walletId, pin);
     }
@@ -32,7 +19,7 @@ function login(walletId, pin) {
     .find({_id: walletId})
     .limit(1)
     .next().then(function(user) {
-      if (!user) return Promise.reject({error: 'auth_failed'});
+      if (!user) return Promise.reject({error: 'user_deleted'});
       return verifyPin(user, pin);
     });
 }
@@ -47,54 +34,10 @@ function createUser(walletId, pin) {
     password_sha: hashAndSalt[0],
     salt: hashAndSalt[1],
     token: token,
-    failed_attempts: 0,
-    username_sha: ''
+    failed_attempts: 0
   }).then(function() {
     return token;
   });
-}
-
-function setUsername(name, username, callback) {
-  var error = {error: 'set_username_failed'};
-  name = userPrefix + name;
-  userDB.get(name, function (err, user) {
-    if (err) {
-      console.error('error getting doc', err);
-      return callback(error);
-    }
-
-    validateUsername(username, function(err, username) {
-      if (err) return callback(err);
-      var username_sha = generateUsernameHash(username);
-      userDB.merge(user._id, {username_sha: username_sha}, function(err, res) {
-        if (err) {
-          console.error('FATAL: failed to update username_sha');
-          return callback(error);
-        }
-        callback(null, username);
-      });
-    });
-  });
-}
-
-function validateUsername(username, callback) {
-  username = username.toLowerCase().replace(/[^a-z0-9-]/g, '')
-  if (!username) return callback({'error': 'Username is invalid'})
-
-  userDB.view('users/username_sha', { key: generateUsernameHash(username)}, function (err, res) {
-    if(err) return callback({error: 'users view error'});
-
-    if(res.length == 0) {
-      callback(null, username);
-    } else {
-      callback({error: 'username_exists'});
-    }
-  });
-}
-
-function remove(id) {
-  var collection = db().collection('users');
-  return collection.removeOne({_id: id});
 }
 
 function generateToken() {
@@ -106,12 +49,6 @@ function generatePasswordHash(password) {
   var hash = crypto.createHash('sha1');
   hash.update(password + salt);
   return [hash.digest('hex'), salt];
-}
-
-function generateUsernameHash(username) {
-  var hash = crypto.createHash('sha1');
-  hash.update(username + process.env.USERNAME_SALT);
-  return hash.digest('hex');
 }
 
 function verifyPin(user, pin) {
@@ -146,8 +83,5 @@ function deleteUser(id) {
 
 module.exports = {
   register: register,
-  login: login,
-  exist: exist,
-  remove: remove,
-  setUsername: setUsername
+  login: login
 }

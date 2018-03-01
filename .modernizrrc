@@ -4,8 +4,6 @@
     "setClasses"
   ],
   "feature-detects": [
-    "indexeddb",
-    "storage/websqldatabase",
     "storage/localstorage",
     "workers/webworkers",
     "blob",

@@ -55,16 +55,14 @@ module.exports = function(el){
   })
 
   emitter.once('db-ready', function(){
-    db.get('systemInfo', function(err, info) {
-      if(err) return console.error(err);
-      var preferredCurrency = info.preferredCurrency;
-      if (currencies.indexOf(preferredCurrency) === -1) {
-        preferredCurrency = 'USD';
-      }
-      ractive.set('selectedFiat', preferredCurrency)
-      sendIosCurrency(preferredCurrency)
-      ractive.observe('selectedFiat', setPreferredCurrency)
-    })
+    var systemInfo = db.get('systemInfo');
+    var preferredCurrency = systemInfo.preferredCurrency;
+    if (currencies.indexOf(preferredCurrency) === -1) {
+      preferredCurrency = 'USD';
+    }
+    ractive.set('selectedFiat', preferredCurrency)
+    sendIosCurrency(preferredCurrency)
+    ractive.observe('selectedFiat', setPreferredCurrency)
   })
 
   emitter.on('update-balance', function() {
@@ -159,9 +157,10 @@ module.exports = function(el){
     emitter.emit('header-fiat-changed', currency)
     sendIosCurrency(currency)
 
-    db.set('systemInfo', {preferredCurrency: currency}, function(err){
-      if(err) return console.error(err);
-    })
+    db.set('systemInfo', {preferredCurrency: currency}).catch(function(err) {
+      console.error(err);
+    });
+
   }
 
   function sendIosCurrency(currency) {

@@ -39,22 +39,16 @@ module.exports = function(el){
 
   emitter.on('turn-on-mecto-watch', function() {
     console.log('on turn on mecto')
-
-    db.get(function(error, doc) {
-      if (error) {
-        console.log('error mecto: ' + error)
-      } else {
-        if (doc.userInfo.firstName) {
-          mectoOn()
-        } else {
-          console.log('firstName not setted: ' + doc.userInfo.firstName)
-          var response = {}
-          response.command = 'mectoError'
-          response.errorString = 'User name not setted. Please set user name at iPhone app.'
-          WatchModule.sendMessage(response, 'comandAnswerQueue')
-        }
-      }
-    })
+    var userInfo = db.get('userInfo');
+    if (userInfo.firstName) {
+      mectoOn()
+    } else {
+      console.log('firstName not setted: ' + userInfo.firstName)
+      var response = {}
+      response.command = 'mectoError'
+      response.errorString = 'User name not setted. Please set user name at iPhone app.'
+      WatchModule.sendMessage(response, 'comandAnswerQueue')
+    }
   })
 
   emitter.on('getMectoStatus', function() {

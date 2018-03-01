@@ -78,12 +78,9 @@ function setPin(pin, network, done, txSyncDone) {
     savePin(pin)
 
     var encrypted = AES.encrypt(seed, token)
-    db.saveEncrypedSeed(id, encrypted, function(err){
-      if(err) return callbackError(err, callbacks);
-
-      emitter.emit('wallet-opening', 'Synchronizing Wallet')
-      initWallet(network, done, txSyncDone)
-    })
+    db.saveEncrypedSeed(id, encrypted);
+    emitter.emit('wallet-opening', 'Synchronizing Wallet');
+    initWallet(network, done, txSyncDone);
   })
 }
 
@@ -97,29 +94,24 @@ function setUsername(username, callback) {
 
 function openWalletWithPin(pin, network, done, txSyncDone) {
   var callbacks = [done, txSyncDone]
-  db.getCredentials(function(err, credentials){
-    if(err) return callbackError(err, callbacks);
-
-    var id = credentials.id
-    var encryptedSeed = credentials.seed
-    auth.login(id, pin, function(err, token){
-      if (err) {
-        if (err.message === 'user_deleted') {
-          return db.deleteCredentials(credentials, function(){
-            callbackError(err, callbacks);
-          })
-        }
-        return callbackError(err, callbacks);
+  var credentials = db.getCredentials();
+  var id = credentials.id
+  var encryptedSeed = credentials.seed
+  auth.login(id, pin, function(err, token){
+    if (err) {
+      if (err.message === 'user_deleted') {
+        db.deleteCredentials();
       }
+      return callbackError(err, callbacks);
+    }
 
-      savePin(pin)
+    savePin(pin)
 
-      assignSeedAndId(AES.decrypt(encryptedSeed, token))
-      emitter.emit('wallet-auth', {token: token, pin: pin})
-      emitter.emit('wallet-opening', 'Synchronizing Wallet')
+    assignSeedAndId(AES.decrypt(encryptedSeed, token))
+    emitter.emit('wallet-auth', {token: token, pin: pin})
+    emitter.emit('wallet-opening', 'Synchronizing Wallet')
 
-      initWallet(network, done, txSyncDone)
-    })
+    initWallet(network, done, txSyncDone)
   })
 }
 
@@ -201,25 +193,20 @@ function sync(done, txDone) {
   initWallet(wallet.networkName, done, txDone)
 }
 
-function getWallet(){
-  return wallet
+function getWallet() {
+  return wallet;
 }
 
-function walletExists(callback) {
-  db.getCredentials(function(err, doc){
-    if(doc) return callback(true);
-    return callback(false)
-  })
+function getId() {
+  return id;
 }
 
-function reset(callback){
-  db.getCredentials(function(err, credentials){
-    if(err) return callback(err);
+function walletExists() {
+  return !!db.getCredentials();
+}
 
-    db.deleteCredentials(credentials, function(deleteError){
-      callback(deleteError)
-    })
-  })
+function reset() {
+  db.deleteCredentials();
 }
 
 function getDynamicFees(callback) {
@@ -249,6 +236,7 @@ module.exports = {
   removeAccount: removeAccount,
   setUsername: setUsername,
   getWallet: getWallet,
+  getId: getId,
   walletExists: walletExists,
   reset: reset,
   sync: sync,

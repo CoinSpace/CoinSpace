@@ -1,20 +1,30 @@
 var db = require('./db');
+var crypto = require('crypto');
 var SEARCH_RADIUS = 1000;
 
 function save(lat, lon, userInfo) {
-  var collection = db().collection('mecto');
-  return collection.replaceOne({_id: userInfo.id}, {
-    name: userInfo.name,
-    email: userInfo.email,
-    avatarIndex: userInfo.avatarIndex,
-    address: userInfo.address,
-    network: userInfo.network,
-    timestamp: new Date(),
-    geometry: {
-      type: 'Point',
-      coordinates: [lon, lat]
-    }
-  }, {upsert: true});
+  return db().collection('users')
+    .find({_id: userInfo.id}, {projection: {username_sha: 1}})
+    .limit(1)
+    .next().then(function(user) {
+      if (!user) return Promise.reject({error: 'user_not_found'});
+      var hash = crypto.createHash('sha1').update(userInfo.name + process.env.USERNAME_SALT).digest('hex');
+      if (hash !== user.username_sha) {
+        return Promise.reject({error: 'invalid_name'});
+      }
+      return db().collection('mecto').replaceOne({_id: userInfo.id}, {
+        name: userInfo.name,
+        email: userInfo.email,
+        avatarIndex: userInfo.avatarIndex,
+        address: userInfo.address,
+        network: userInfo.network,
+        timestamp: new Date(),
+        geometry: {
+          type: 'Point',
+          coordinates: [lon, lat]
+        }
+      }, {upsert: true});
+    });
 }
 
 function remove(id) {

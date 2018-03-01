@@ -1,124 +1,34 @@
 'use strict';
 
-var emitter = require('lib/emitter')
-var PouchDB = require('pouchdb').default
+var emitter = require('lib/emitter');
 var merge = require('lodash.merge');
-var AES = require('lib/aes')
-var randAvatarIndex = require('lib/avatar').randAvatarIndex
-var encrypt = AES.encrypt
-var decrypt = AES.decrypt
+var AES = require('lib/aes');
+var randAvatarIndex = require('lib/avatar').randAvatarIndex;
+var encrypt = AES.encrypt;
+var decrypt = AES.decrypt;
 
-var db = new PouchDB('cs')
-var remote = null
-var id = null
-var sercret = null
-var isReady = false
+var request = require('lib/request');
+var urlRoot = process.env.SITE_URL;
 
-function set(key, value, callback) {
-  updateDoc(callback, function(data){
-    if(data[key] && value != undefined) {
-      merge(data[key], value)
-    } else {
-      data[key] = value
-    }
-  })
-}
+var id = null;
+var secret = null;
+var details = null;
+var isReady = false;
 
-function updateDoc(callback, processData) {
-  if(id == null) return callback(new Error('wallet not ready'));
-
-  db.get(id, function(err, doc){
-    var data = JSON.parse(decrypt(doc.data, sercret))
-    processData(data)
-
-    doc.data = encrypt(JSON.stringify(data), sercret)
-    db.put(doc, callback)
-
-    PouchDB.replicate(db, remote, {doc_ids: [id]}).on('error', function(error) {
-      console.error('failed to replicate changes to server', error)
-    })
-  })
-}
-
-function get(key, callback) {
-  if(id == null) return callback(new Error('wallet not ready'));
-
-  if(key instanceof Function){
-    callback = key
-    key = null
+function set(key, value) {
+  if (id === null) return Promise.reject(new Error('wallet not ready'));
+  var data = JSON.parse(decrypt(details.data, secret));
+  if(data[key] && value && typeof value === 'object' && value.constructor === Object) {
+    merge(data[key], value);
+  } else {
+    data[key] = value;
   }
-
-  db.get(id, function(err, doc){
-    if(err) return callback(err)
-
-    var data = JSON.parse(decrypt(doc.data, sercret))
-    var value = data[key]
-    if(!key){
-      value = data
-    }
-    callback(null, value)
-  })
-}
-
-function remove(callback) {
-  db.get(id, function(err, doc) {
-    if (err) return console.error(err);
-    db.remove(doc, callback);
+  return save(data).then(function(doc) {
+    details = doc;
   });
 }
 
-emitter.on('wallet-init', function(data){
-  sercret = data.seed
-  id = data.id
-})
-
-emitter.on('wallet-auth', function(data){
-  remote = getRemote(data)
-
-  db.get(id, function(err){
-    if(err) {
-      if(err.status === 404) {
-        return firstTimePull()
-      }
-      return console.error(err)
-    }
-
-    isReady = true
-    emitter.emit('db-ready')
-    PouchDB.replicate(db, remote, {doc_ids: [id]}).on('error', function(error) {
-      console.error('failed to replicate changes to server', error)
-    })
-  })
-})
-
-function getRemote(data){
-  var scheme = process.env.DB_PORT === '443' ? 'https' : 'http'
-  var url = [
-    scheme, '://',
-    id, ':', data.token, data.pin,
-    '@', process.env.DB_HOST
-  ]
-  if (process.env.DB_PORT !== '443') {
-   url = url.concat([':', process.env.DB_PORT])
-  }
-  url = url.concat(['/cs', id]).join('')
-  return new PouchDB(url)
-}
-
-function firstTimePull() {
-  PouchDB.replicate(remote, db, {doc_ids: [id]}).on('complete', function() {
-    db.get(id, function(err){
-      if(err) {
-        if(err.status === 404) return initializeRecord();
-        return console.error(err)
-      }
-      isReady = true
-      emitter.emit('db-ready')
-    })
-  })
-}
-
-function initializeRecord(){
+function initDetails() {
   var defaultValue = {
     systemInfo: { preferredCurrency: 'USD' },
     userInfo: {
@@ -128,26 +38,55 @@ function initializeRecord(){
       avatarIndex: randAvatarIndex()
     }
   }
+  return save(defaultValue);
+}
 
-  var doc = {
-    _id: id,
-    data: encrypt(JSON.stringify(defaultValue), sercret)
-  }
-
-  db.put(doc, function(err){
-    if(err) return console.error(err);
-
-    isReady = true
-    emitter.emit('db-ready')
+function save(data) {
+  return request({
+    url: urlRoot + '/details',
+    method: 'put',
+    data: {
+      id: id,
+      data: encrypt(JSON.stringify(data), secret)
+    }
   })
 }
+
+function get(key) {
+  if (id === null) return console.error('wallet not ready');
+  var data = JSON.parse(decrypt(details.data, secret));
+  if (!key) {
+    return data;
+  }
+  return data[key];
+}
+
+emitter.on('wallet-init', function(data) {
+  secret = data.seed;
+  id = data.id;
+})
+
+emitter.on('wallet-auth', function() {
+  request({
+    url: urlRoot + '/details?id=' + id
+  }).then(function(doc) {
+    if (!doc) {
+      return initDetails();
+    }
+    return doc;
+  }).then(function(doc) {
+    details = doc;
+    isReady = true;
+    emitter.emit('db-ready');
+  }).catch(function(err) {
+    console.error(err);
+  });
+});
 
 module.exports = {
   get: get,
   set: set,
-  remove: remove,
   isReady: function() {
     return isReady;
   }
 }
-
