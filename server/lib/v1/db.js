@@ -14,7 +14,7 @@ module.exports = function() {
           {key: {geometry: '2dsphere'}, background: true},
           {key: {network: 1}, background: true},
         ]),
-        db.collection('users').createIndexes([
+        db.collection('details').createIndexes([
           {key: {username_sha: 1}, background: true, unique: true, sparse: true},
         ])
       ]);

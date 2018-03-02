@@ -17,7 +17,7 @@ var isReady = false;
 
 function set(key, value) {
   if (id === null) return Promise.reject(new Error('wallet not ready'));
-  var data = JSON.parse(decrypt(details.data, secret));
+  var data = JSON.parse(decrypt(details, secret));
   if(data[key] && value && typeof value === 'object' && value.constructor === Object) {
     merge(data[key], value);
   } else {
@@ -54,7 +54,7 @@ function save(data) {
 
 function get(key) {
   if (id === null) return console.error('wallet not ready');
-  var data = JSON.parse(decrypt(details.data, secret));
+  var data = JSON.parse(decrypt(details, secret));
   if (!key) {
     return data;
   }

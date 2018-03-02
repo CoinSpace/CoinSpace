@@ -3,16 +3,16 @@ var crypto = require('crypto');
 var SEARCH_RADIUS = 1000;
 
 function save(lat, lon, userInfo) {
-  return db().collection('users')
+  return db().collection('details')
     .find({_id: userInfo.id}, {projection: {username_sha: 1}})
     .limit(1)
-    .next().then(function(user) {
-      if (!user) return Promise.reject({error: 'user_not_found'});
+    .next().then(function(details) {
+      if (!details) return Promise.reject({error: 'details_not_found'});
       var hash = crypto.createHash('sha1').update(userInfo.name + process.env.USERNAME_SALT).digest('hex');
-      if (hash !== user.username_sha) {
+      if (hash !== details.username_sha) {
         return Promise.reject({error: 'invalid_name'});
       }
-      return db().collection('mecto').replaceOne({_id: userInfo.id}, {
+      return db().collection('mecto').updateOne({_id: userInfo.id}, {$set: {
         name: userInfo.name,
         email: userInfo.email,
         avatarIndex: userInfo.avatarIndex,
@@ -22,7 +22,7 @@ function save(lat, lon, userInfo) {
         geometry: {
           type: 'Point',
           coordinates: [lon, lat]
-        }
+        }}
       }, {upsert: true});
     });
 }

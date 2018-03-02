@@ -26,18 +26,16 @@ function getDetails(walletId) {
   return collection
     .find({_id: walletId})
     .limit(1)
-    .next().then(function(data) {
-      return data;
+    .next().then(function(doc) {
+      if (!doc) return doc;
+      return doc.data;
     });
 }
 
 function saveDetails(walletId, data) {
   var collection = db().collection('details');
-  return collection.replaceOne({_id: walletId}, {data: data}, {upsert: true}).then(function() {
-    return {
-      _id: walletId,
-      data: data
-    }
+  return collection.updateOne({_id: walletId}, {$set: {data: data}}, {upsert: true}).then(function() {
+    return data;
   });
 }
 
@@ -51,7 +49,9 @@ function setUsername(walletId, username) {
 
       username = username.toLowerCase().replace(/[^a-z0-9-]/g, '');
       var username_sha = crypto.createHash('sha1').update(username + process.env.USERNAME_SALT).digest('hex');
-      return collection.updateOne({_id: user._id}, {$set: {username_sha: username_sha}}).then(function() {
+      return db().collection('details').updateOne({_id: user._id}, {$set: {
+        username_sha: username_sha
+      }}, {upsert: true}).then(function() {
         return username;
       }).catch(function(error) {
         if (error && error.message && error.message.match(/E11000 duplicate key error/)) {

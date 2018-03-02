@@ -13,7 +13,7 @@ var networks = {
 
 function save(cacheId, data) {
   var collection = db().collection('ticker');
-  return collection.replaceOne({_id: cacheId}, {data: data}, {upsert: true});
+  return collection.updateOne({_id: cacheId}, {$set: {data: data}}, {upsert: true});
 }
 
 function getFromAPI(cryptoTicker) {
