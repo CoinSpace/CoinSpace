@@ -43,7 +43,7 @@ function initDetails() {
 
 function save(data) {
   return request({
-    url: urlRoot + '/details',
+    url: urlRoot + 'details',
     method: 'put',
     data: {
       id: id,
@@ -68,7 +68,7 @@ emitter.on('wallet-init', function(data) {
 
 emitter.on('wallet-auth', function() {
   request({
-    url: urlRoot + '/details?id=' + id
+    url: urlRoot + 'details?id=' + id
   }).then(function(doc) {
     if (!doc) {
       return initDetails();

@@ -218,7 +218,7 @@ function getDynamicFees(callback) {
   }
 
   request({
-    url: urlRoot + '/fees',
+    url: urlRoot + 'fees',
     params: {
       network: wallet.networkName
     },

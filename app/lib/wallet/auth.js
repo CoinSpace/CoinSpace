@@ -14,13 +14,13 @@ function login(wallet_id, pin, callback) {
 
 function exist(wallet_id, callback) {
   request({
-    url: urlRoot + '/exist?wallet_id=' + wallet_id
+    url: urlRoot + 'exist?wallet_id=' + wallet_id
   }, callback)
 }
 
 function remove(wallet_id, callback) {
   request({
-    url: urlRoot + '/account',
+    url: urlRoot + 'account',
     method: 'delete',
     data: {
       id: wallet_id
@@ -36,7 +36,7 @@ function setUsername(wallet_id, username, callback) {
   if(username == oldUsername) return callback(null, userInfo.firstName);
 
   request({
-    url: urlRoot + '/username',
+    url: urlRoot + 'username',
     method: 'put',
     data: {
       id: wallet_id,
@@ -50,7 +50,7 @@ function setUsername(wallet_id, username, callback) {
 
 function postCredentials(endpoint, data, callback) {
   request({
-    url: urlRoot + '/' +  endpoint,
+    url: urlRoot + endpoint,
     method: 'post',
     data: data
   }, callback)
