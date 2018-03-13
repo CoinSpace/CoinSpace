@@ -1,0 +1,24 @@
+<div class="modal _cancel">
+  <div class="modal__content confirm__remove_token">
+
+    <h3 class="_header">{{translate("Remove")}} {{name}}</h3>
+
+    <div class="_content">
+      {{translate("Are you sure?")}}
+    </div>
+
+    <div class="_inputs">
+      <div class="_cancel">{{translate("Cancel")}}</div>
+      {{#if removing}}
+        <div class="_remove--processing">
+          <span class="_icon">
+            {{>svg_refresh}}
+          </span>
+        </div>
+      {{else}}
+        <div class="_remove" on-click="remove">{{translate("Remove")}}</div>
+      {{/if}}
+    </div>
+
+  </div>
+</div>

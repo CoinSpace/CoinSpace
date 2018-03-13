@@ -2,37 +2,29 @@
 
 var Ractive = require('widgets/modal');
 var showError = require('widgets/modal-flash').showError;
-var CS = require('lib/wallet');
 
-function open() {
+function open(token, callback) {
 
   var ractive = new Ractive({
     partials: {
       content: require('./_content.ract')
     },
     data: {
-      confirmation: true,
-      success: false,
-      removing: false
+      removing: false,
+      name: token.name
     }
   });
 
   ractive.on('remove', function() {
     ractive.set('removing', true);
-    CS.removeAccount(function(err) {
-      if (err) return handleError(err);
-      CS.reset();
-      CS.resetPin();
-      ractive.set('confirmation', false);
-      ractive.set('success', true);
-      setTimeout(function() {
-        location.reload();
-      }, 3000);
-    });
-  });
-
-  ractive.on('reload', function() {
-    location.reload();
+    setTimeout(function() {
+      // if (err) return handleError(err);
+      // Remove from db
+      // tokens.indexOf(token) and splice;
+      console.log('removed', token);
+      callback();
+      ractive.fire('cancel');
+    }, 1000);
   });
 
   function handleError(err) {
