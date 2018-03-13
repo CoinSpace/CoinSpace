@@ -8,7 +8,7 @@ var emitter = require('lib/emitter')
 var Avatar = require('lib/avatar')
 var db = require('lib/db')
 var setUsername = require('lib/wallet').setUsername
-var showRemoveConfirmation = require('widgets/modal-confirm-remove')
+var showRemoveConfirmation = require('widgets/modal-confirm-remove-account')
 
 module.exports = function init(el) {
 

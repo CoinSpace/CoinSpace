@@ -1,5 +1,5 @@
 <div class="modal _cancel">
-  <div class="modal__content confirm__remove {{#success}}_success{{/success}}">
+  <div class="modal__content confirm__remove_account {{#success}}_success{{/success}}">
 
   {{#confirmation}}
     <h3 class="_header">{{translate("Remove account")}}</h3>
