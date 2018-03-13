@@ -166,5 +166,6 @@
   "Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you'd like them to have access to your funds.": "Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you'd like them to have access to your funds.",
   "Show": "Show",
   "Comma-separated list": "Comma-separated list",
-  "Your wallet has no private keys with coins for export.": "Your wallet has no private keys with coins for export."
+  "Your wallet has no private keys with coins for export.": "Your wallet has no private keys with coins for export.",
+  "Add Token": "Add Token"
 }

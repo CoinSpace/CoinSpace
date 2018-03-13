@@ -1,55 +1,52 @@
 'use strict';
 
-var Ractive = require('lib/ractive')
-var getNetwork = require('lib/network')
+var Ractive = require('lib/ractive');
+var getNetwork = require('lib/network');
 
-module.exports = function(el){
+module.exports = function(el) {
   var ractive = new Ractive({
     el: el,
     template: require('./index.ract'),
     data: {
       title: 'Available Tokens',
       id: 'token_dropdown',
-      tokens: [
-        {
-          token: 'bitcoin',
-          name: 'Bitcoin',
-          bitcoin: true
-        },
-        {
-          token: 'bitcoincash',
-          name: 'Bitcoin Cash',
-          bitcoincash: true
-        },
-        {
-          token: 'litecoin',
-          name: 'Litecoin',
-          litecoin: true
-        },
-        {
-          token: 'ethereum',
-          name: 'Ethereum',
-          ethereum: true
-        }
+      ethereumTokens: [
+        {address: '0x00000', name: 'EOS', symbol: 'EOS', decimals: 18, network: 'ethereum'},
+        {address: '0x00001', name: 'Reputation', symbol: 'REP', decimals: 18, network: 'ethereum'}
       ],
-      capitalize: function(str){
-        return str.replace(/^.|\s\S/g, function(a) {
-         return a.toUpperCase()
-        })
-      },
-      getNetworkClass: function(elId){
-        return getNetwork() === elId ? "current" : ""
-      }
+      isCurrentToken: isCurrentToken
     }
   })
 
-  ractive.on('switch-token', function(context) {
-    var token = context.node.id
-    if(token === getNetwork()) return;
+  function isCurrentToken(network, token) {
+    // currentToken should belong to currentNetwork or be undefined;
+    // var currentToken = {address: '0x00000', name: 'EOS', symbol: 'EOS', decimals: 18, network: 'ethereum'};
+    var currentToken;
+    var currentNetwork = getNetwork();
+    if (currentNetwork !== network) return false;
+    if (network === 'ethereum' && currentToken) {
+      return token === currentToken.address;
+    }
+    return currentToken === token;
+  }
 
-    var url = window.location.href.replace(/\?network=\w+/, '') + '?network=' + token
-    window.location.assign(url);
-  })
+  ractive.on('switch', function(context) {
+    var network = context.node.dataset.network;
+    var token = context.node.dataset.token;
+    if (isCurrentToken(network, token)) return;
+    console.log('Switch to network:' + network + ' token: ' + token);
+    // var url = window.location.href.replace(/\?network=\w+/, '') + '?network=' + token
+    // window.location.assign(url);
+  });
+
+  ractive.on('add-ethereum-token', function() {
+    console.log('add-ethereum-token');
+  });
+  ractive.on('remove-ethereum-token', function(context) {
+    var token = context.node.dataset.token;
+    console.log('remove-ethereum-token', token);
+    return false;
+  });
 
   return ractive
 }

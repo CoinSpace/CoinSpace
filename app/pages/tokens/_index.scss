@@ -55,12 +55,10 @@
   }
 
   ._arrow {
-    opacity: 0.6;
     float: right;
     width: 25px;
     height: 25px;
     margin-top: 13px;
-    transform: rotate(270deg);
 
     @include breakpoint(portrait) {
       width: 40px;
@@ -68,12 +66,7 @@
       margin-top: 22px;
     }
   }
-
-  &.current {
-    display: none;
-  }
 }
-
 
 .token--bitcoin {
   background-color: $brand-green;
@@ -100,5 +93,32 @@
   background-color: $ethereal;
   ._name {
     color: white;
+  }
+}
+
+.ethereum_tokens {
+  .token__item {
+    background-color: $ethereal;
+    border-top: 1px solid white;
+    color: white;
+    ._remove {
+      padding: 13px;
+      width: 50px;
+      height: 50px;
+      float: right;
+      margin-right: -13px;
+
+      @include breakpoint(portrait) {
+        width: 80px;
+        height: 80px;
+        padding: 20px;
+        margin-right: -20px;
+      }
+    }
+  }
+  .add_btn {
+    @include breakpoint(portrait) {
+      font-size: 26px;
+    }
   }
 }
