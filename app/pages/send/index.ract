@@ -42,7 +42,7 @@
           <div class="_input-group">
             <input id="fiat" class="_input" type="number" min="0" step="any" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin" on-focus="focusAmountInput" on-blur="blurAmountInput">
             <span class="_currency dropdown">
-              <select value="{{selectedFiat}}">
+              <select value="{{selectedFiat}}" tabindex="-1">
                 {{#currencies}}
                   <option value="{{.}}">{{.}}</option>
                 {{/currencies}}
@@ -55,7 +55,7 @@
           <div class="_input-group">
             <input id="fiat" class="_input _error" type="number" min="0" step="any" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin" on-focus="focusAmountInput" on-blur="blurAmountInput">
             <span class="_currency--error dropdown">
-              <select value="{{selectedFiat}}">
+              <select value="{{selectedFiat}}" tabindex="-1">
                 {{#currencies}}
                   <option value="{{.}}">{{.}}</option>
                 {{/currencies}}
@@ -68,6 +68,19 @@
           {{/exchangeRateUnavailable}}
 
       </div>
+
+      {{#isEthereum}}
+      <div class="send__gas-limit">
+          <label class="_label" for="gas-limit">{{translate("Gas limit")}}
+            <div class="input__container">
+              <input id="gas-limit" class="_input" type="number" min="0" step="1" value="{{gasLimit}}" on-enter="open-send" />
+            </div>
+          </label>
+        <span class="_help" on-click="help-gas-limit">
+          {{>svg_help}}
+        </span>
+      </div>
+      {{/isEthereum}}
 
     </form>
   </div>

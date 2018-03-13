@@ -167,5 +167,7 @@
     "Show": "Показать",
     "Comma-separated list": "Список, разделенный запятыми",
     "Your wallet has no private keys with coins for export.": "У вашего кошелька нет приватных ключей с монетами для экспорта.",
-    "Add Token": "Добавить токен"
+    "Add Token": "Добавить токен",
+    "Gas limit": "Лимит газа",
+    "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.": "Лимит газа — это максимальная сумма газа, используемая для транзакции. Увеличение этой суммы не ускорит подтверждение вашей транзакции. Отправка ETH равна 21000. Отправка Токенов равна около 200000."
 }

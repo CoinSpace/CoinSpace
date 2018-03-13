@@ -91,6 +91,11 @@
 
   position: relative;
 
+  margin-bottom: 20px;
+  @include breakpoint(portrait) {
+    margin-bottom: 40px;
+  }
+
   ._label {
     @include noselect;
     cursor: pointer;
@@ -179,7 +184,6 @@
     }
   }
 
-
   ._input {
     @extend .generic_box;
     @extend .jigsaw-light;
@@ -210,6 +214,70 @@
 
 }
 
+.send__gas-limit {
+
+  position: relative;
+  margin-bottom: 20px;
+  @include breakpoint(portrait) {
+    margin-bottom: 40px;
+  }
+
+  ._label {
+    @include noselect;
+    cursor: pointer;
+    display: block;
+    @include breakpoint(portrait) {
+      font-size: 20px;
+    }
+  }
+
+  ._input {
+    @extend .generic_box;
+    @extend .jigsaw-light;
+    padding-left: 10px;
+    padding-right: 38px;
+    border-radius: 2px;
+
+    height: auto;
+
+    &:active, &:focus {
+      outline: 0;
+      border: 1px solid #999;
+    }
+
+    @include breakpoint(portrait) {
+      font-size: 26px;
+      border-radius: 3px;
+      padding-right: 58px;
+    }
+  }
+  ._help {
+    @include clickbtn;
+    position: absolute;
+    top: 0;
+    right: -5px;
+    font-size: 12px;
+    text-align: center;
+    width: 26px;
+    height: 26px;
+    padding: 4px;
+    opacity: 0.4;
+
+    @include breakpoint(portrait) {
+      width: 32px;
+      height: 32px;
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    .svg-help {
+      fill: #333;
+    }
+  }
+}
+
 ._input-group {
   position: relative;
   margin-top: 5px;
@@ -226,13 +294,6 @@
         z-index: 300;
       }
     }
-  }
-}
-
-.send__buttons {
-  margin-top: 20px;
-  @include breakpoint(portrait) {
-    margin-top: 40px;
   }
 }
 

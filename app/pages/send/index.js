@@ -11,6 +11,7 @@ var toFixedFloor = require('lib/convert').toFixedFloor
 var showError = require('widgets/modal-flash').showError
 var showInfo = require('widgets/modal-flash').showInfo
 var showConfirmation = require('widgets/modal-confirm-send')
+var showTooltip = require('widgets/modal-tooltip')
 var validateSend = require('lib/wallet').validateSend
 var getDynamicFees = require('lib/wallet').getDynamicFees
 var resolveTo = require('lib/openalias/xhr.js').resolveTo
@@ -26,7 +27,8 @@ module.exports = function(el){
       exchangeRates: {},
       qrScannerAvailable: qrcode.isScanAvailable,
       isEthereum: getNetwork() === 'ethereum',
-      validating: false
+      validating: false,
+      gasLimit: 21000
     }
   })
 
@@ -64,6 +66,7 @@ module.exports = function(el){
       to = data.to
       var alias = data.alias
       var amount = ractive.get('value')
+      // var gasLimit = ractive.get('gasLimit') // TODO: use it
 
       getDynamicFees(function(dynamicFees) {
         validateAndShowConfirm(to, amount, alias, dynamicFees)
@@ -127,6 +130,14 @@ module.exports = function(el){
 
   ractive.on('blurAmountInput', function(context) {
     context.node.parentNode.style.zIndex = ''
+  })
+
+  ractive.on('help-gas-limit', function() {
+    showTooltip({
+      message: 'Gas limit is the amount of gas to send with your transaction. ' +
+      'Increasing this number will not get your transaction confirmed faster. ' +
+      'Sending ETH is equal 21000. Sending Tokens is equal around 200000.'
+    })
   })
 
   function validateAndShowConfirm(to, amount, alias, dynamicFees) {
