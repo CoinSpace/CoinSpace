@@ -30,7 +30,7 @@ module.exports = function(el) {
     var currentToken;
     var currentNetwork = getNetwork();
     if (currentNetwork !== network) return false;
-    if (network === 'ethereum' && currentToken) {
+    if (currentNetwork === 'ethereum' && currentToken) {
       return tokenId === currentToken.address;
     }
     return tokenId === undefined;
@@ -55,7 +55,7 @@ module.exports = function(el) {
       return item.address === context.node.dataset.tokenId;
     })[0];
     var index = ethereumTokens.indexOf(token);
-    showRemoveConfirmation(token, function() {
+    showRemoveConfirmation(token, tokens, function() {
       ractive.splice('ethereumTokens', index, 1);
     });
     return false;

@@ -3,7 +3,7 @@
 var Ractive = require('widgets/modal');
 var showError = require('widgets/modal-flash').showError;
 
-function open(token, callback) {
+function open(token, tokens, callback) {
 
   var ractive = new Ractive({
     partials: {
@@ -19,8 +19,9 @@ function open(token, callback) {
     ractive.set('removing', true);
     setTimeout(function() {
       // if (err) return handleError(err);
-      // Remove from db
-      // tokens.indexOf(token) and splice;
+      var index = tokens.indexOf(token);
+      tokens.splice(index, 1);
+      // Save to db
       console.log('removed', token);
       callback();
       ractive.fire('cancel');
