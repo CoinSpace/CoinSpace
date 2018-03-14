@@ -3,6 +3,7 @@
 var Ractive = require('lib/ractive');
 var getNetwork = require('lib/network');
 var showRemoveConfirmation = require('widgets/modals/confirm-remove-token');
+var addEthereumToken = require('widgets/modals/add-ethereum-token');
 
 module.exports = function(el) {
 
@@ -47,6 +48,7 @@ module.exports = function(el) {
 
   ractive.on('add-ethereum-token', function() {
     console.log('add-ethereum-token');
+    addEthereumToken();
   });
 
   ractive.on('remove-ethereum-token', function(context) {

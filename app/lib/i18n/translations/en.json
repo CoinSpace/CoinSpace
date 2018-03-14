@@ -169,5 +169,11 @@
   "Your wallet has no private keys with coins for export.": "Your wallet has no private keys with coins for export.",
   "Add Token": "Add Token",
   "Gas limit": "Gas limit",
-  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.": "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000."
+  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.": "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.",
+  "Contract address": "Contract address",
+  "Add": "Add",
+  "Symbol": "Symbol",
+  "Decimals": "Decimals",
+  "Token": "Token",
+  "Custom token": "Custom token"
 }
