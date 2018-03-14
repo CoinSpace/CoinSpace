@@ -2,7 +2,7 @@
 
 var Ractive = require('lib/ractive');
 var getNetwork = require('lib/network');
-var showRemoveConfirmation = require('widgets/modal-confirm-remove-token');
+var showRemoveConfirmation = require('widgets/modals/confirm-remove-token');
 
 module.exports = function(el) {
 

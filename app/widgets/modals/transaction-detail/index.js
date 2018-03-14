@@ -1,6 +1,6 @@
 'use strict';
 
-var Ractive = require('widgets/modal')
+var Ractive = require('widgets/modals/base')
 
 module.exports = function(data) {
   var content = null;

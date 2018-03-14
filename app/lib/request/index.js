@@ -1,7 +1,7 @@
 'use strict';
 
 var axios = require('axios');
-var showError = require('widgets/modal-flash').showError;
+var showError = require('widgets/modals/flash').showError;
 
 function makeRequest(config, callback) {
   config.timeout = config.timeout || 30 * 1000;

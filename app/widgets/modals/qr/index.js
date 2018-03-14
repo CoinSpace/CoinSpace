@@ -1,6 +1,6 @@
 'use strict';
 
-var Ractive = require('widgets/modal')
+var Ractive = require('widgets/modals/base')
 var translate = require('lib/i18n').translate
 var qrcode = require('lib/qrcode')
 var getNetwork = require('lib/network')

@@ -3,8 +3,8 @@
 var Ractive = require('lib/ractive');
 var emitter = require('lib/emitter');
 var initAccount = require('widgets/account-details');
-var importPrivateKey = require('widgets/modal-import-private-key');
-var exportPrivateKeys = require('widgets/modal-export-private-keys');
+var importPrivateKey = require('widgets/modals/import-private-key');
+var exportPrivateKeys = require('widgets/modals/export-private-keys');
 
 module.exports = function(el) {
   var ractive = new Ractive({

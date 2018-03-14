@@ -1,6 +1,6 @@
 'use strict';
 
-var Ractive = require('widgets/modal');
+var Ractive = require('widgets/modals/base');
 var emitter = require('lib/emitter');
 var isOpen = false;
 

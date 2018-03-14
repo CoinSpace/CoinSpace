@@ -8,9 +8,9 @@ var getNetwork = require('lib/network');
 var shapeshift = require('lib/shapeshift');
 var qrcode = require('lib/qrcode');
 var geo = require('lib/geo');
-var showTooltip = require('widgets/modal-tooltip');
+var showTooltip = require('widgets/modals/tooltip');
 var isEthereum = getNetwork() === 'ethereum';
-var showError = require('widgets/modal-flash').showError;
+var showError = require('widgets/modals/flash').showError;
 var find = require('lodash.find');
 var db = require('lib/db');
 

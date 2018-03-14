@@ -2,7 +2,7 @@
 
 var Ractive = require('lib/ractive')
 var emitter = require('lib/emitter')
-var showError = require('widgets/modal-flash').showError
+var showError = require('widgets/modals/flash').showError
 var getNetwork = require('lib/network')
 
 var Auth = Ractive.extend({

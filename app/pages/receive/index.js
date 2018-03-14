@@ -4,11 +4,11 @@ var Ractive = require('lib/ractive')
 var emitter = require('lib/emitter')
 var db = require('lib/db')
 var CS = require('lib/wallet')
-var showTooltip = require('widgets/modal-tooltip')
-var showQr = require('widgets/modal-qr')
+var showTooltip = require('widgets/modals/tooltip')
+var showQr = require('widgets/modals/qr')
 var geo = require('lib/geo')
-var showError = require('widgets/modal-flash').showError
-var showSetDetails = require('widgets/modal-set-details')
+var showError = require('widgets/modals/flash').showError
+var showSetDetails = require('widgets/modals/set-details')
 var getNetwork = require('lib/network')
 var qrcode = require('lib/qrcode')
 

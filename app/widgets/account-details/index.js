@@ -2,13 +2,13 @@
 
 var Ractive = require('lib/ractive')
 var Profile = require('lib/transitions/profileAnimation.js')
-var showTooltip = require('widgets/modal-tooltip')
-var showError = require('widgets/modal-flash').showError
+var showTooltip = require('widgets/modals/tooltip')
+var showError = require('widgets/modals/flash').showError
 var emitter = require('lib/emitter')
 var Avatar = require('lib/avatar')
 var db = require('lib/db')
 var setUsername = require('lib/wallet').setUsername
-var showRemoveConfirmation = require('widgets/modal-confirm-remove-account')
+var showRemoveConfirmation = require('widgets/modals/confirm-remove-account')
 
 module.exports = function init(el) {
 

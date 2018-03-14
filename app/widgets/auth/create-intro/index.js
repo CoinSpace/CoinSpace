@@ -3,7 +3,7 @@
 var Ractive = require('../auth')
 var CS = require('lib/wallet')
 var confirmPassphrasePage = require('../create-confirm')
-var showError = require('widgets/modal-flash').showError
+var showError = require('widgets/modals/flash').showError
 
 module.exports = function(prevPage){
   var ractive = new Ractive({

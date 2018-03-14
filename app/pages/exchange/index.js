@@ -9,7 +9,7 @@ var initComplete = require('./complete');
 var initError = require('./error');
 var db = require('lib/db');
 var shapeshift = require('lib/shapeshift');
-var showError = require('widgets/modal-flash').showError;
+var showError = require('widgets/modals/flash').showError;
 
 module.exports = function(el) {
   var ractive = new Ractive({

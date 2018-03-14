@@ -1,7 +1,7 @@
 'use strict';
 
-var Ractive = require('widgets/modal');
-var showError = require('widgets/modal-flash').showError;
+var Ractive = require('widgets/modals/base');
+var showError = require('widgets/modals/flash').showError;
 var CS = require('lib/wallet');
 
 function open() {

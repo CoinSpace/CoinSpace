@@ -3,7 +3,7 @@
 var CS = require('lib/wallet')
 var Ractive = require('../auth')
 var pinPage = require('../pin')
-var showError = require('widgets/modal-flash').showError
+var showError = require('widgets/modals/flash').showError
 
 function enterPassphrase(prevPage){
   var ractive = new Ractive({

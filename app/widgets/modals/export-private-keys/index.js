@@ -1,8 +1,8 @@
 'use strict';
 
-var Ractive = require('widgets/modal');
+var Ractive = require('widgets/modals/base');
 var getWallet = require('lib/wallet').getWallet;
-var showInfo = require('widgets/modal-flash').showInfo;
+var showInfo = require('widgets/modals/flash').showInfo;
 var isOpen = false;
 
 function open() {

@@ -6,7 +6,7 @@ var toUnitString = require('lib/convert').toUnitString
 var getNetwork = require('lib/network')
 var getWallet = require('lib/wallet').getWallet
 var strftime = require('strftime')
-var showTransactionDetail = require('widgets/modal-transaction-detail')
+var showTransactionDetail = require('widgets/modals/transaction-detail')
 
 var WatchModule = require('lib/apple-watch')
 

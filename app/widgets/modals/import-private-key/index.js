@@ -1,11 +1,11 @@
 'use strict';
 
-var Ractive = require('widgets/modal');
-var showError = require('widgets/modal-flash').showError;
+var Ractive = require('widgets/modals/base');
+var showError = require('widgets/modals/flash').showError;
 var qrcode = require('lib/qrcode');
 var emitter = require('lib/emitter');
-var showConfirmation = require('widgets/modal-confirm-send');
-var showInfo = require('widgets/modal-flash').showInfo;
+var showConfirmation = require('widgets/modals/confirm-send');
+var showInfo = require('widgets/modals/flash').showInfo;
 var getWallet = require('lib/wallet').getWallet;
 var getDynamicFees = require('lib/wallet').getDynamicFees;
 var toUnitString = require('lib/convert').toUnitString;

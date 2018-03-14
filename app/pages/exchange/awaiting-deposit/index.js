@@ -2,11 +2,11 @@
 
 var Ractive = require('lib/ractive');
 var emitter = require('lib/emitter');
-var showQr = require('widgets/modal-qr');
+var showQr = require('widgets/modals/qr');
 var qrcode = require('lib/qrcode');
 var db = require('lib/db');
 var shapeshift = require('lib/shapeshift');
-var showError = require('widgets/modal-flash').showError;
+var showError = require('widgets/modals/flash').showError;
 var translate = require('lib/i18n').translate;
 
 module.exports = function(el) {

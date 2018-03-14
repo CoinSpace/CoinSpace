@@ -1,6 +1,6 @@
 'use strict';
 
-var modalRemoveAds = require('widgets/modal-remove-ads');
+var modalRemoveAds = require('widgets/modals/remove-ads');
 var emitter = require('lib/emitter');
 
 var ad_units = {
