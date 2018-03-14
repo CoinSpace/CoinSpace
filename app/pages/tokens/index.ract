@@ -1,7 +1,7 @@
 
 <div class="tokens">
 
-  <div data-network="bitcoin" on-click="switch" class="token__item token--bitcoin">
+  <div on-click="switchToken('bitcoin')" class="token__item token--bitcoin">
     {{#if isCurrentToken('bitcoin')}}
     <span class="_arrow">{{>svg_arrow}}</span>
     {{/if}}
@@ -11,7 +11,7 @@
     <h3 class="_name">Bitcoin</h3>
   </div>
 
-  <div data-network="bitcoincash" on-click="switch" class="token__item token--bitcoincash">
+  <div on-click="switchToken('bitcoincash')" class="token__item token--bitcoincash">
     {{#if isCurrentToken('bitcoincash')}}
     <span class="_arrow">{{>svg_arrow}}</span>
     {{/if}}
@@ -21,7 +21,7 @@
     <h3 class="_name">Bitcoin Cash</h3>
   </div>
 
-  <div data-network="ethereum" on-click="switch" class="token__item token--ethereum">
+  <div on-click="switchToken('ethereum')" class="token__item token--ethereum">
     {{#if isCurrentToken('ethereum')}}
     <span class="_arrow">{{>svg_arrow}}</span>
     {{/if}}
@@ -32,11 +32,11 @@
   </div>
   <div class="ethereum_tokens">
     {{#each ethereumTokens}}
-    <div data-network="ethereum" data-token-id="{{address}}" class="token__item" on-click="switch">
-      {{#if isCurrentToken('ethereum', address)}}
+    <div class="token__item" on-click="switchToken(this)">
+      {{#if isCurrentToken(this)}}
       <span class="_arrow">{{>svg_arrow}}</span>
       {{else}}
-      <span class="_remove" data-token-id="{{address}}" on-click="remove-ethereum-token">{{> svg_close}}</span>
+      <span class="_remove" on-click="removeEthereumToken(this)">{{> svg_close}}</span>
       {{/if}}
       <span class="_icon">
           {{>svg_letter_t}}
@@ -49,7 +49,7 @@
     </div>
   </div>
 
-  <div data-network="litecoin" on-click="switch" class="token__item token--litecoin">
+  <div on-click="switchToken('litecoin')" class="token__item token--litecoin">
     {{#if isCurrentToken('litecoin')}}
     <span class="_arrow">{{>svg_arrow}}</span>
     {{/if}}
