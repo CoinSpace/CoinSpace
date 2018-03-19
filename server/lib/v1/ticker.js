@@ -66,7 +66,7 @@ function getFromCache(symbol) {
     });
   }
 
-  var tokens = db().collection('ehtereum_tokens');
+  var tokens = db().collection('ethereum_tokens');
   return Promise.all([
     tokens.find({symbol: symbol}).limit(1).next(),
     ticker.find({_id: 'USD'}).limit(1).next()

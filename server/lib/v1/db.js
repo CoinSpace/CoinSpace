@@ -14,7 +14,7 @@ module.exports = function() {
           {key: {geometry: '2dsphere'}, background: true},
           {key: {network: 1}, background: true},
         ]),
-        db.collection('ehtereum_tokens').createIndexes([
+        db.collection('ethereum_tokens').createIndexes([
           {key: {symbol: 1}, background: true},
         ]),
         db.collection('details').createIndexes([

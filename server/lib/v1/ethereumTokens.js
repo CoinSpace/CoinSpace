@@ -7,7 +7,7 @@ function save(tokens) {
     return {replaceOne: {filter: {_id: token._id}, replacement: token, upsert: true}};
   });
 
-  var collection = db().collection('ehtereum_tokens');
+  var collection = db().collection('ethereum_tokens');
   return collection.bulkWrite(operations)
     .then(function() {
       return true;
@@ -40,7 +40,7 @@ function getFromAPI() {
 }
 
 function getAllFromCache() {
-  var collection = db().collection('ehtereum_tokens');
+  var collection = db().collection('ethereum_tokens');
   return collection
     .find()
     .sort({_id: 1})
