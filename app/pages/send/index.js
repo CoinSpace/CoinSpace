@@ -48,8 +48,8 @@ module.exports = function(el){
     ractive.set('isEthereum', getTokenNetwork() === 'ethereum');
   });
 
-  ractive.on('open-qr', function(){
-    qrcode.scan({context: 'send', isEthereum: ractive.get('isEthereum')});
+  ractive.on('open-qr', function() {
+    qrcode.scan({context: 'send'});
   })
 
   ractive.on('open-geo', function(){

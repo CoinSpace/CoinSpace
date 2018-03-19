@@ -7,13 +7,12 @@ var setToken = require('lib/token').setToken;
 var getToken = require('lib/token').getToken;
 var initWallet = require('lib/wallet').initWallet;
 var emitter = require('lib/emitter');
+var db = require('lib/db');
+var isMatch = require('lodash.ismatch');
+
+var walletTokens = [];
 
 module.exports = function(el) {
-
-  var tokens = [
-    {address: '0x00000', name: 'EOS', symbol: 'EOS', decimals: 18, network: 'ethereum'},
-    {address: '0x00001', name: 'Reputation', symbol: 'REP', decimals: 18, network: 'ethereum'}
-  ];
 
   var ractive = new Ractive({
     el: el,
@@ -23,15 +22,15 @@ module.exports = function(el) {
       id: 'token_dropdown',
       currentToken: getToken(), // string or object
       isCurrentToken: function(token) {
-        return this.get('currentToken') === token;
+        return isMatch(token, this.get('currentToken'));
       },
       switchToken: switchToken,
       removeEthereumToken: removeEthereumToken,
-      ethereumTokens: tokens.filter(function(token) {
-        return token.network === 'ethereum'
-      }),
+      ethereumTokens: [],
     }
   })
+
+  ractive.on('before-show', setWalletTokens);
 
   function switchToken(token) {
     if (token === ractive.get('currentToken')) return;
@@ -71,15 +70,25 @@ module.exports = function(el) {
 
   function removeEthereumToken(token) {
     var index = ractive.get('ethereumTokens').indexOf(token);
-    showRemoveConfirmation(token, tokens, function() {
+    showRemoveConfirmation(token, walletTokens, function() {
       ractive.splice('ethereumTokens', index, 1);
     });
     return false;
   }
 
   ractive.on('add-ethereum-token', function() {
-    addEthereumToken();
+    addEthereumToken(walletTokens, function(token) {
+      ractive.push('ethereumTokens', token);
+    });
   });
+
+  function setWalletTokens() {
+    walletTokens = db.get('walletTokens') || [];
+    var ethereumTokens = walletTokens.filter(function(token) {
+      return token.network === 'ethereum'
+    });
+    ractive.set('ethereumTokens', ethereumTokens)
+  }
 
   return ractive
 }

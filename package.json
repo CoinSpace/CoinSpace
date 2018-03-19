@@ -65,6 +65,7 @@
     "json-loader": "^0.5.7",
     "linklocal": "^2.8.1",
     "lodash.find": "^4.6.0",
+    "lodash.ismatch": "^4.4.0",
     "lodash.merge": "^4.6.0",
     "memory-cache": "^0.2.0",
     "modernizr": "^3.5.0",

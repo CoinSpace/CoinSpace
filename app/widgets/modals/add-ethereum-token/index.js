@@ -4,13 +4,13 @@ var Ractive = require('widgets/modals/base');
 var showError = require('widgets/modals/flash').showError;
 var qrcode = require('lib/qrcode');
 var emitter = require('lib/emitter');
+var request = require('lib/request');
+var urlRoot = process.env.SITE_URL;
+var db = require('lib/db');
 
-function open() {
+var tokens = [];
 
-  var tokens = [
-    {address: '0x00000', name: 'EOS', symbol: 'EOS', decimals: 18, network: 'ethereum'},
-    {address: '0x00001', name: 'Reputation', symbol: 'REP', decimals: 18, network: 'ethereum'},
-  ];
+function open(walletTokens, callback) {
 
   var ractive = new Ractive({
     partials: {
@@ -22,10 +22,24 @@ function open() {
       contractAddress: '',
       symbol: '',
       decimals: '',
-      token: tokens[0],
       tokens: tokens,
+      token: tokens[0],
+      isInited: tokens.length !== 0
     }
   });
+
+  if (tokens.length === 0) {
+    request({
+      url: urlRoot + 'ethereum/tokens'
+    }).then(function(data) {
+      tokens = data;
+      ractive.set({
+        tokens: tokens,
+        token: tokens[0],
+        isInited: true
+      });
+    }).catch(console.error);
+  }
 
   ractive.on('clearContractAddress', function() {
     var input = ractive.find('#contract_address');
@@ -34,18 +48,30 @@ function open() {
   });
 
   ractive.on('add', function() {
-    // ractive.set('isLoading', true);
+    ractive.set('isLoading', true);
 
     var token = ractive.get('token');
-    if (!token) {
-      token = {
-        address: ractive.get('contractAddress'),
-        symbol: ractive.get('symbol'),
-        decimals: ractive.get('decimals')
-      }
+    var data = {
+      address: token.address || ractive.get('contractAddress'),
+      symbol: token.symbol || ractive.get('symbol'),
+      name: token.name || ractive.get('symbol'),
+      decimals: token.decimals || ractive.get('decimals'),
+      network: 'ethereum'
     }
-    // validate token here
-    console.log('add token', token);
+
+    if (!data.address || !data.symbol || typeof data.decimals !== 'number') {
+      return handleError(new Error('Please fill out all fields.'));
+    }
+
+    walletTokens.push(data);
+
+    db.set('walletTokens', walletTokens).then(function() {
+      callback(data);
+      ractive.fire('cancel');
+    }).catch(function(err) {
+      console.error(err);
+      ractive.fire('cancel');
+    });
   });
 
   ractive.on('open-qr', function() {

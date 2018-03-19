@@ -10,6 +10,16 @@
     padding-top: 30px;
   }
 
+  ._loading {
+    padding: 20px;
+    color: $grey;
+    font-size: 21px;
+    text-align: center;
+    @include breakpoint(portrait) {
+      font-size: 24px;
+    }
+  }
+
   ._header {
     font-size: 21px;
     text-align: center;
@@ -34,6 +44,9 @@
       margin-bottom: 20px;
       @include noselect;
       @include ellipsis;
+      @include breakpoint(portrait) {
+        font-size: 20px;
+      }
     }
 
     ._select_container {

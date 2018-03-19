@@ -31,9 +31,9 @@ function getFromAPI() {
         _id: rank++,
         address: item.address,
         name: item.name,
-        decimals: item.decimals,
+        decimals: parseInt(item.decimals),
         symbol: item.symbol,
-        price: item.price ? parseFloat(item.price.rate) : 0.0
+        price: item.price ? parseFloat(item.price.rate) : 0.0,
       }
     });
   });
@@ -42,8 +42,8 @@ function getFromAPI() {
 function getAllFromCache() {
   var collection = db().collection('ethereum_tokens');
   return collection
-    .find()
-    .sort({_id: 1})
+    .find({}, {projection: {_id: 0}})
+    .sort({symbol: 1})
     .limit(limit)
     .toArray();
 }

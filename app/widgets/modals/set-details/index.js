@@ -64,7 +64,7 @@ function openModal(data){
       details.firstName = username
 
       db.set('userInfo', details).then(function() {
-        ractive.fire('cancel', undefined);
+        ractive.fire('cancel');
         ractive.set('submitting', false);
         emitter.emit('details-updated', details);
         data.callback();

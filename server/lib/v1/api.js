@@ -9,6 +9,7 @@ var validatePin = require('cs-pin-validator');
 var openalias = require('cs-openalias');
 var fee = require('./fee');
 var ticker = require('./ticker');
+var ethereumTokens = require('./ethereumTokens');
 
 var router = express.Router();
 
@@ -109,6 +110,14 @@ router.get('/ticker', function(req, res) {
   var crypto = req.query.crypto
   if (!crypto) return res.status(400).json({error: 'Bad request'});
   ticker.getFromCache(crypto).then(function(data) {
+    res.status(200).send(data);
+  }).catch(function(err) {
+    res.status(400).send(err);
+  });
+});
+
+router.get('/ethereum/tokens', function(req, res) {
+  ethereumTokens.getAllFromCache().then(function(data) {
     res.status(200).send(data);
   }).catch(function(err) {
     res.status(400).send(err);

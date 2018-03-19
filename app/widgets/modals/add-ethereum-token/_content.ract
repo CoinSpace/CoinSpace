@@ -3,6 +3,7 @@
 
     <h3 class="_header">{{translate("Add Token")}}</h3>
 
+    {{#if isInited}}
     <div class="_content">
       <div class="_token_container">
         {{translate("Token")}}
@@ -70,6 +71,10 @@
         <div class="_add" on-click="add">{{translate("Add")}}</div>
       {{/if}}
     </div>
+
+    {{else}}
+    <div class="_loading">{{translate("Loading...")}}</div>
+    {{/if}}
 
   </div>
 </div>

@@ -2,8 +2,10 @@
 
 // https://github.com/defunctzombie/qr.js/blob/515790fad4682b2d38008f229dbd814b0d2633e4/example/index.js
 var qr = require('qr.js')
-var getWallet = require('lib/wallet').getWallet
 var emitter = require('lib/emitter')
+var EthereumWallet = require('cs-ethereum-wallet');
+var isValidIban = EthereumWallet.prototype.isValidIban;
+var getAddressFromIban = EthereumWallet.prototype.getAddressFromIban;
 var isScanAvailable = process.env.BUILD_TYPE === 'phonegap'
 
 function encode(string, options) {
@@ -43,9 +45,8 @@ function scan(data) {
       if (result.text) {
         var address = result.text.split('?')[0].split(':').pop()
 
-        var wallet = getWallet();
-        if (data.isEthereum && wallet.isValidIban(address)) {
-          address = wallet.getAddressFromIban(address);
+        if (isValidIban(address)) {
+          address = getAddressFromIban(address);
         }
 
         emitter.emit('prefill-wallet', address, data.context)

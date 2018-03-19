@@ -1,9 +1,9 @@
 'use strict';
 
 var Ractive = require('widgets/modals/base');
-var showError = require('widgets/modals/flash').showError;
+var db = require('lib/db');
 
-function open(token, tokens, callback) {
+function open(token, walletTokens, callback) {
 
   var ractive = new Ractive({
     partials: {
@@ -17,21 +17,19 @@ function open(token, tokens, callback) {
 
   ractive.on('remove', function() {
     ractive.set('removing', true);
-    setTimeout(function() {
-      // if (err) return handleError(err);
-      var index = tokens.indexOf(token);
-      tokens.splice(index, 1);
-      // Save to db
-      console.log('removed', token);
+    var index = walletTokens.indexOf(token);
+    if (index === -1) return ractive.fire('cancel');
+
+    walletTokens.splice(index, 1);
+
+    db.set('walletTokens', walletTokens).then(function() {
       callback();
       ractive.fire('cancel');
-    }, 1000);
+    }).catch(function(err) {
+      console.error(err);
+      ractive.fire('cancel');
+    });
   });
-
-  function handleError(err) {
-    ractive.set('removing', false);
-    showError({message: err.message});
-  }
 
   return ractive;
 }
