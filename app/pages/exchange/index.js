@@ -30,24 +30,15 @@ module.exports = function(el) {
     complete: initComplete(ractive.find('#exchange_complete')),
     error: initError(ractive.find('#exchange_error'))
   };
-  var initOnDbReady = true;
   var currentStep = steps.create;
 
   ractive.on('before-show', function() {
-    if (!db.isReady()) return;
-    initOnDbReady = false;
     emitter.emit('shapeshift');
   });
 
   ractive.on('before-hide', function() {
     ractive.set('isLoading', true);
     currentStep.hide();
-  });
-
-  emitter.once('db-ready', function() {
-    if (ractive.el.classList.contains('current') && initOnDbReady) {
-      emitter.emit('shapeshift');
-    }
   });
 
   emitter.on('shapeshift', function() {

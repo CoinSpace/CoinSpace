@@ -4,7 +4,7 @@ var Ractive = require('widgets/modals/base')
 
 module.exports = function(data) {
   var content = null;
-  if (data.isEthereum) {
+  if (data.isNetwork('ethereum')) {
     data.isPendingFee = data.transaction.fee === -1;
     content = require('./contentEthereum.ract')
   } else {

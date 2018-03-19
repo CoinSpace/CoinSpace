@@ -1,77 +1,87 @@
 var axios = require('axios');
 var db = require('./db');
-var crypto = require('crypto');
-var currencies = require('cs-ticker-api/currencies');
 
-var tickerUrl = 'https://apiv2.bitcoinaverage.com/indices/global/ticker/short';
-var networks = {
-  BTC: 'bitcoin',
-  BCH: 'bitcoincash',
-  LTC: 'litecoin',
-  ETH: 'ethereum'
-};
+var fsyms = [
+  'BTC',
+  'BCH',
+  'LTC',
+  'ETH',
+  'USD'
+]
 
-function save(cacheId, data) {
+var tsyms = [
+  'AUD', 'BRL', 'CAD', 'CHF', 'CNY',
+  'DKK', 'EUR', 'GBP', 'IDR', 'ILS',
+  'JPY', 'MXN', 'NOK', 'NZD', 'PLN',
+  'RUB', 'SEK', 'SGD', 'TRY', 'UAH',
+  'USD', 'ZAR'
+]
+
+function save(tickers) {
+  var operations = tickers.map(function(ticker) {
+    return {updateOne: {filter: {_id: ticker._id}, update: {$set: {data: ticker.data}}, upsert: true}};
+  });
+
   var collection = db().collection('ticker');
-  return collection.updateOne({_id: cacheId}, {$set: {data: data}}, {upsert: true});
+  return collection.bulkWrite(operations)
+    .then(function() {
+      return true;
+    });
 }
 
-function getFromAPI(cryptoTicker) {
+function getFromAPI() {
   return axios({
-    url: tickerUrl,
-    headers: {'X-Signature': getSignature()},
+    url: 'https://min-api.cryptocompare.com/data/pricemulti',
     params: {
-      crypto: cryptoTicker,
-      fiat: getCurrencies(cryptoTicker).join()
+      fsyms: fsyms.join(),
+      tsyms: tsyms.join()
     }
   }).then(function(response) {
     if (!response.data) throw new Error('Bad ticker response');
-    return toRates(response.data, cryptoTicker);
+    return Object.keys(response.data).map(function(key) {
+      if (key === 'BTC') {
+        response.data[key]['mBTC'] = 1000;
+        response.data[key]['μBTC'] = 1000000;
+      } else if (key === 'BCH') {
+        response.data[key]['mBCH'] = 1000;
+        response.data[key]['μBCH'] = 1000000;
+      }
+      return {
+        _id: key,
+        data: response.data[key]
+      }
+    })
   });
 }
 
-function getFromCache(cacheId) {
-  var collection = db().collection('ticker');
-  return collection
-    .find({_id: cacheId})
+function getFromCache(symbol) {
+  var ticker = db().collection('ticker');
+  if (fsyms.includes(symbol)) {
+    return ticker
+    .find({_id: symbol})
     .limit(1)
     .next()
     .then(function(doc) {
       return doc.data;
     });
-}
+  }
 
-function toRates(apiRates, cryptoTicker){
-  var rates = {};
-  var ignored = ['mBTC', 'μBTC', 'mBCH', 'μBCH'];
-  getCurrencies(cryptoTicker).forEach(function(currency){
-    if (ignored.indexOf(currency) !== -1) return;
-    rates[currency] = apiRates[cryptoTicker + currency].last
+  var tokens = db().collection('ehtereum_tokens');
+  return Promise.all([
+    tokens.find({symbol: symbol}).limit(1).next(),
+    ticker.find({_id: 'USD'}).limit(1).next()
+  ]).then(function(results) {
+    var token = results[0];
+    var ticker = results[1];
+    var data = {};
+    tsyms.forEach(function(key) {
+      if (!token) {
+        return (data[key] = 0);
+      }
+      data[key] = parseFloat((ticker.data[key] * token.price).toFixed(6));
+    });
+    return data
   });
-  if (cryptoTicker === 'BTC') {
-    rates['mBTC'] = 1000;
-    rates['μBTC'] = 1000000;
-  } else if (cryptoTicker === 'BCH') {
-    rates['mBCH'] = 1000;
-    rates['μBCH'] = 1000000;
-  }
-  return rates;
-}
-
-function getSignature() {
-  var publicKey = process.env.BITCOINAVERAGE_API_KEY
-  var secretKey = process.env.BITCOINAVERAGE_API_SECRET
-  var timestamp = Math.floor(Date.now() / 1000)
-  var payload = timestamp + '.' + publicKey
-  var hexHash = crypto.createHmac('sha256', secretKey).update(payload).digest('hex')
-  return payload + '.' + hexHash
-}
-
-function getCurrencies(cryptoTicker) {
-  if (!networks[cryptoTicker]) {
-    throw new Error(cryptoTicker + ' currency ticker is not supported');
-  }
-  return currencies(networks[cryptoTicker]);
 }
 
 module.exports = {

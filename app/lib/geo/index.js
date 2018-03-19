@@ -4,7 +4,7 @@ var request = require('lib/request');
 var db = require('lib/db');
 var getWallet = require('lib/wallet').getWallet;
 var getId = require('lib/wallet').getId;
-var getNetwork = require('lib/network');
+var getTokenNetwork = require('lib/token').getTokenNetwork;
 var urlRoot = process.env.SITE_URL;
 var userInfo = {};
 var networks = {
@@ -64,7 +64,7 @@ function requestLocationEndpoint(network, method, callback){
     userInfo.email = doc.userInfo.email;
     userInfo.avatarIndex = doc.userInfo.avatarIndex;
     userInfo.address = getWallet().getNextAddress();
-    userInfo.network = network || getNetwork();
+    userInfo.network = network || getTokenNetwork();
     userInfo.lat = lat;
     userInfo.lon = lon;
 

@@ -1,9 +1,9 @@
 var request = require('lib/request')
 var urlRoot = process.env.SITE_URL
-var getNetwork = require('lib/network')
+var getTokenNetwork = require('lib/token').getTokenNetwork;
 
 function resolveTo(to, callback){
-  if (getNetwork() != 'bitcoin') return callback({to: to});
+  if (getTokenNetwork() !== 'bitcoin') return callback({to: to});
 
   to = to || ''
   var hostname = to.replace('@', '.')

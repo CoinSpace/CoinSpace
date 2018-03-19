@@ -36,6 +36,7 @@ db().then(function() {
     master.cleanGeo(60 * 60 * 1000) // 1 hour
     master.cacheFees(60 * 60 * 1000) // 1 hour
     master.cacheTicker(60 * 60 * 1000) // 1 hour
+    master.cacheEthereumTokens(24 * 60 * 60 * 1000) // 24 hours
   }
 }).catch(function(error) {
   console.log('error', error);

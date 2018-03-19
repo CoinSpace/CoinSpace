@@ -13,7 +13,6 @@ var urlRoot = process.env.SITE_URL;
 var id = null;
 var secret = null;
 var details = null;
-var isReady = false;
 
 function set(key, value) {
   if (id === null) return Promise.reject(new Error('wallet not ready'));
@@ -61,12 +60,12 @@ function get(key) {
   return data[key];
 }
 
-emitter.on('wallet-init', function(data) {
+emitter.once('wallet-init', function(data) {
   secret = data.seed;
   id = data.id;
 })
 
-emitter.on('wallet-auth', function() {
+emitter.once('db-init', function() {
   request({
     url: urlRoot + 'details?id=' + id
   }).then(function(doc) {
@@ -76,17 +75,14 @@ emitter.on('wallet-auth', function() {
     return doc;
   }).then(function(doc) {
     details = doc;
-    isReady = true;
     emitter.emit('db-ready');
   }).catch(function(err) {
     console.error(err);
+    emitter.emit('db-ready', err);
   });
 });
 
 module.exports = {
   get: get,
-  set: set,
-  isReady: function() {
-    return isReady;
-  }
+  set: set
 }

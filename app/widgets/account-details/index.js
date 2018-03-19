@@ -40,7 +40,7 @@ module.exports = function init(el) {
     }
   };
 
-  emitter.once('db-ready', function(){
+  emitter.once('wallet-ready', function() {
     var userInfo = db.get('userInfo');
     ractive.set('user', userInfo);
     setAvatar()

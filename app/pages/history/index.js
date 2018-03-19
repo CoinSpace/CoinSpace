@@ -3,7 +3,7 @@
 var Ractive = require('lib/ractive')
 var emitter = require('lib/emitter')
 var toUnitString = require('lib/convert').toUnitString
-var getNetwork = require('lib/network')
+var getTokenNetwork = require('lib/token').getTokenNetwork;
 var getWallet = require('lib/wallet').getWallet
 var strftime = require('strftime')
 var showTransactionDetail = require('widgets/modals/transaction-detail')
@@ -11,13 +11,12 @@ var showTransactionDetail = require('widgets/modals/transaction-detail')
 var WatchModule = require('lib/apple-watch')
 
 module.exports = function(el){
-  var transactions = []
-  var network = getNetwork();
+  var network = getTokenNetwork();
   var ractive = new Ractive({
     el: el,
     template: require('./index.ract'),
     data: {
-      transactions: transactions,
+      transactions: [],
       formatTimestamp: function(timestamp){
         var date = new Date(timestamp)
         return strftime('%b %d %l:%M %p', date)
@@ -54,10 +53,6 @@ module.exports = function(el){
         }
       },
       toUnitString: toUnitString,
-      isEthereum: network === 'ethereum',
-      isBitcoin: network === 'bitcoin' || network === 'testnet',
-      isBitcoinCash: network === 'bitcoincash',
-      isLitecoin: network === 'litecoin',
       loadingTx: true,
     }
   })
@@ -69,24 +64,21 @@ module.exports = function(el){
     ractive.set('loadingTx', false)
   })
 
-  emitter.on('set-transactions', function(newTxs) {
-    transactions = newTxs
-    ractive.set('transactions', transactions)
+  emitter.on('set-transactions', function(txs) {
+    network = getTokenNetwork();
+    ractive.set('transactions', txs)
     ractive.set('loadingTx', false)
     if (process.env.BUILD_PLATFORM === 'ios') {
       var response = {}
       response.command = 'transactionMessage'
-      response.transactions = newTxs
-
-      WatchModule.setTransactionHistory(newTxs)
-
+      response.transactions = txs
+      WatchModule.setTransactionHistory(txs)
       WatchModule.sendMessage(response, 'comandAnswerQueue')
     }
   })
 
-  emitter.on('sync-click', function() {
-    transactions = []
-    ractive.set('transactions', transactions)
+  emitter.on('sync', function() {
+    ractive.set('transactions', [])
     ractive.set('loadingTx', true)
   })
 
@@ -100,10 +92,9 @@ module.exports = function(el){
       isFailed: ractive.get('isFailed'),
       isConfirmed: ractive.get('isConfirmed'),
       toUnitString: ractive.get('toUnitString'),
-      isEthereum: ractive.get('isEthereum'),
-      isBitcoin: ractive.get('isBitcoin'),
-      isBitcoinCash: ractive.get('isBitcoinCash'),
-      isLitecoin: ractive.get('isLitecoin'),
+      isNetwork: function(str) {
+        return str === network
+      }
     }
     showTransactionDetail(data)
   })

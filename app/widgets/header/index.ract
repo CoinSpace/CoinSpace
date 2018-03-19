@@ -15,19 +15,23 @@
     </span>
   </div>
 
-  {{^showFiat}}
-    <div class="header__balance" on-click="toggle-currencies">
-      <span class="_amount">{{cropBalance(toUnitString(bitcoinBalance))}}</span>
-      <span class="_currency">{{denomination}}</span>
+  {{#if isSyncing}}
+    <div class="header__balance">
+      <span class="_amount">...</span>
     </div>
-  {{/showFiat}}
-
-  {{#showFiat}}
+  {{else}}
+    {{#if showFiat}}
     <div class="header__balance" on-click="toggle-currencies">
       <span class="_amount">{{bitcoinToFiat(bitcoinBalance, exchangeRates[selectedFiat])}}</span>
       <span class="_currency">{{selectedFiat}}</span>
     </div>
-  {{/showFiat}}
+    {{else}}
+    <div class="header__balance" on-click="toggle-currencies">
+      <span class="_amount">{{cropBalance(toUnitString(bitcoinBalance))}}</span>
+      <span class="_currency">{{denomination}}</span>
+    </div>
+    {{/if}}
+  {{/if}}
 
   <div class="header__currency" title="{{translate("Current coin price")}}">
     {{bitcoinPrice(exchangeRates[selectedFiat])}} {{selectedFiat}}
@@ -38,7 +42,7 @@
     </select>
   </div>
 
-  <div class="header__refresh" on-click="sync">
+  <div class="header__refresh" on-click="sync-click">
     <span id="refresh_el" class="_icon loading">
       {{>svg_refresh}}
     </span>

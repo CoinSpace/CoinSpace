@@ -3,19 +3,19 @@
 require('../application.scss');
 require('typedarray-methods'); // fix for old browsers
 
-var token = require('lib/network')('')
+var token = require('lib/token');
 var fadeOut = require('lib/transitions/loader').out
 var Modernizr = require('modernizr')
 var i18n = require('lib/i18n')
 
 function init() {
-  if (redirectEmptyToken()) return;
-
-  document.getElementsByTagName('html')[0].classList.add(token)
-  var containerEl = document.getElementById('loader')
-
   i18n.loadTranslation().then(function() {
     if (Modernizr.localstorage && Modernizr.webworkers && Modernizr.blobconstructor && Modernizr.getrandomvalues) {
+      setupNetwork();
+
+      document.getElementsByTagName('html')[0].classList.add(token.getTokenNetwork())
+      var containerEl = document.getElementById('loader')
+
       return import(
         /* webpackChunkName: 'application' */
         '../application'
@@ -31,22 +31,31 @@ function init() {
   })
 }
 
-function redirectEmptyToken() {
-  if (!Modernizr.localstorage) return false;
+function setupNetwork() {
+  var networks = ['bitcoin', 'bitcoincash', 'litecoin', 'ethereum', 'testnet'];
+  var defaultNetwork = networks[0];
+  var lastNetwork = token.getTokenNetwork();
 
-  var lastToken = window.localStorage.getItem('_cs_token');
-  window.localStorage.setItem('_cs_token', token);
-
-  if (!token) {
-    var baseUrl = window.location.href.split('?')[0];
-    var url = baseUrl + '?network=' + lastToken;
-    if (!lastToken) {
-      url = baseUrl + '?network=bitcoin';
-    }
-    window.location.assign(url);
-    return true;
+  if (networks.indexOf(lastNetwork) === -1) {
+    lastNetwork = defaultNetwork;
+    token.setToken(lastNetwork);
   }
-  return false;
+
+  var regex = /^network=/
+  var networkParam = window.location.search.substr(1).split('&').filter(function(e) {
+    return e.match(regex)
+  })[0];
+  var queryNetwork = networkParam ? networkParam.replace(regex, '') : null;
+
+  if (networks.indexOf(queryNetwork) === -1) {
+    var baseUrl = window.location.href.split('?')[0];
+    var url = baseUrl + '?network=' + lastNetwork;
+    return window.history.replaceState(null, null, url);
+  }
+
+  if (queryNetwork !== lastNetwork) {
+    return token.setToken(queryNetwork);
+  }
 }
 
 init();

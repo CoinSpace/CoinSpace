@@ -3,7 +3,7 @@
 var Ractive = require('widgets/modals/base')
 var translate = require('lib/i18n').translate
 var qrcode = require('lib/qrcode')
-var getNetwork = require('lib/network')
+var getTokenNetwork = require('lib/token').getTokenNetwork;
 
 module.exports = function showTooltip(data){
   data.mailto = mailto
@@ -17,7 +17,7 @@ module.exports = function showTooltip(data){
   })
 
   var canvas = ractive.find('#qr-canvas')
-  var name = data.name || getNetwork();
+  var name = data.name || getTokenNetwork();
   var qr = qrcode.encode(name + ':' + data.address)
   canvas.appendChild(qr)
 

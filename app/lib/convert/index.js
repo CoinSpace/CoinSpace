@@ -2,45 +2,32 @@
 
 var Big = require('big.js')
 
-var getNetwork = require('lib/network')
-var networkName = getNetwork();
-
-var unitMap = {
-  bitcoin: '100000000',
-  bitcoincash: '100000000',
-  litecoin: '100000000',
-  testnet: '100000000',
-  ethereum: '1000000000000000000'
-}
+var decimals;
+var factor;
 
 function toAtom(number) {
-  if(number == undefined || number === '') return;
-  if (networkName === 'ethereum') {
-    return new Big(number).times(unitMap[networkName], 10).toFixed();
-  } else {
-    return parseInt(new Big(number).times(unitMap[networkName], 10).toFixed())
-  }
+  if (!number) return '0';
+  return new Big(number).times(factor).toFixed();
 }
 
 function toUnit(number) {
-  if(number == undefined || number === '') return;
-  return parseFloat(new Big(number).div(unitMap[networkName]))
+  if (!number) return new Big(0);
+  return new Big(number).div(factor)
 }
 
 function toUnitString(number) {
-  if(number == undefined || number === '') return;
-  return new Big(number).div(unitMap[networkName]).toFixed()
+  if (!number) return '0';
+  return new Big(number).div(factor).toFixed()
 }
 
-function toFixedFloor(x, decimal){
-  var factor = Math.pow(10, decimal)
-  var y = parseInt(new Big(x).times(factor))
-  return (y / factor).toFixed(decimal)
+function setDecimals(d) {
+  decimals = d;
+  factor = new Big(10).pow(decimals);
 }
 
 module.exports = {
   toAtom: toAtom,
   toUnit: toUnit,
   toUnitString: toUnitString,
-  toFixedFloor: toFixedFloor
+  setDecimals: setDecimals
 }

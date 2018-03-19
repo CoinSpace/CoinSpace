@@ -4,12 +4,11 @@ var Ractive = require('lib/ractive');
 var emitter = require('lib/emitter');
 var getWallet = require('lib/wallet').getWallet;
 var denominations = require('lib/denomination');
-var getNetwork = require('lib/network');
+var getTokenNetwork = require('lib/token').getTokenNetwork;
 var shapeshift = require('lib/shapeshift');
 var qrcode = require('lib/qrcode');
 var geo = require('lib/geo');
 var showTooltip = require('widgets/modals/tooltip');
-var isEthereum = getNetwork() === 'ethereum';
 var showError = require('widgets/modals/flash').showError;
 var find = require('lodash.find');
 var db = require('lib/db');
@@ -23,7 +22,7 @@ module.exports = function(el) {
       isLoadingRate: true,
       qrScannerAvailable: qrcode.isScanAvailable,
       isValidating: false,
-      fromSymbol: denominations[getNetwork()].default,
+      fromSymbol: '',
       returnAddress: '',
       toAddress: '',
       toSymbol: '',
@@ -39,7 +38,27 @@ module.exports = function(el) {
     }
   });
 
+  var fromSymbolObserver = ractive.observe('fromSymbol', function(symbol, old) {
+    if (!old) return;
+    if (symbol === ractive.get('toSymbol')) {
+      return ractive.set('toSymbol', old);
+    }
+    return getRate();
+  });
+
+  ractive.observe('toSymbol', function(symbol, old) {
+    if (!old) return;
+    if (symbol === ractive.get('fromSymbol')) {
+      return ractive.set('fromSymbol', old);
+    }
+    return getRate();
+  });
+
   ractive.on('before-show', function() {
+    fromSymbolObserver.silence();
+    ractive.set('fromSymbol', denominations[getTokenNetwork()].default);
+    fromSymbolObserver.resume();
+
     shapeshift.getCoins().then(function(coins) {
       ractive.set('isLoading', false);
       ractive.set('coins', coins);
@@ -59,22 +78,6 @@ module.exports = function(el) {
 
   ractive.on('before-hide', function() {
     ractive.set('isLoading', true);
-  });
-
-  ractive.observe('fromSymbol', function(symbol, old) {
-    if (!old) return;
-    if (symbol === ractive.get('toSymbol')) {
-      return ractive.set('toSymbol', old);
-    }
-    return getRate();
-  });
-
-  ractive.observe('toSymbol', function(symbol, old) {
-    if (!old) return;
-    if (symbol === ractive.get('fromSymbol')) {
-      return ractive.set('fromSymbol', old);
-    }
-    return getRate();
   });
 
   ractive.on('clearAddress', function(context) {
@@ -106,7 +109,7 @@ module.exports = function(el) {
   ractive.on('open-qr', function(context) {
     qrcode.scan({
       context: context.node.getAttribute('data-context'),
-      isEthereum: isEthereum
+      isEthereum: getTokenNetwork() === 'ethereum'
     });
   });
 
@@ -190,7 +193,10 @@ module.exports = function(el) {
     });
   }
 
-  emitter.on('wallet-ready', function(){
+  emitter.on('wallet-ready', function() {
+    if (!ractive.el.classList.contains('current')) {
+      return ractive.set('returnAddress', getWallet().getNextAddress());
+    }
     if (ractive.get('fromSymbol') === getWallet().denomination) {
       ractive.set('returnAddress', getWallet().getNextAddress());
     }

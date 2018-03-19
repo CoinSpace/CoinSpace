@@ -2,7 +2,7 @@
 
 var emitter = require('lib/emitter')
 var CS = require('lib/wallet')
-var getNetwork = require('lib/network')
+var getTokenNetwork = require('lib/token').getTokenNetwork;
 var yaqrcode = require('yaqrcode')
 
 var appGroupId = ''
@@ -63,7 +63,7 @@ function subscribeForNotification() {
       } else if (message === 'getQrCode') {
         console.log('receive request qr code')
         var address = CS.getWallet().getNextAddress()
-        var qr = yaqrcode(getNetwork() + ':' + address)
+        var qr = yaqrcode(getTokenNetwork() + ':' + address)
 
         var response = {}
         response.command = 'qrMessage'

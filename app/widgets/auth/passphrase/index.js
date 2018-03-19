@@ -23,7 +23,7 @@ function enterPassphrase(prevPage){
     var passphrase = getPassphrase()
 
     if (passphrase !== '') {
-      CS.createWallet(passphrase, ractive.getNetwork(), onWalletCreated)
+      CS.createWallet(passphrase, ractive.getTokenNetwork(), onWalletCreated)
       ractive.set('opening', true)
       ractive.set('progress', 'Checking passphrase')
     }

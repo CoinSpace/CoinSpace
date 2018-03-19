@@ -8,7 +8,8 @@ window.initCSApp = function() {
   var initFrame = require('widgets/frame')
   var initAuth = require('widgets/auth')
   var initGeoOverlay = require('widgets/geo-overlay')
-  var getNetwork = require('lib/network')
+  var getTokenNetwork = require('lib/token').getTokenNetwork;
+
   var fadeIn = require('lib/transitions/fade.js').fadeIn
   var ads = require('lib/ads');
 
@@ -47,31 +48,28 @@ window.initCSApp = function() {
     htmlEl.classList.remove('prevent_scroll')
   })
 
-  emitter.on('wallet-ready', function(){
-    auth.hide()
-    frame.show()
-  })
+  emitter.once('wallet-ready', function() {
+    updateExchangeRates();
+    auth.hide();
+    frame.show();
+  });
 
-  function updateExchangeRates(){
-    var tickerUpdateInterval = 1000 * 60 * 10
-    var ticker = new Ticker(getNetwork())
+  emitter.on('sync', function() {
+    updateExchangeRates();
+  });
 
-    ticker.getExchangeRates(function(err, rates){
-      if (rates) {
-        if (process.env.BUILD_PLATFORM === 'ios') {
-          var message = {}
-          message.command = 'currencyMessage'
-          message.currency = rates;
-
-          WatchModule.setRates(rates)
-
-          WatchModule.sendMessage(message, 'comandAnswerQueue')
-        }
-        emitter.emit('ticker', rates);
+  function updateExchangeRates() {
+    var ticker = new Ticker(getTokenNetwork());
+    ticker.getExchangeRates(function(err, rates) {
+      if (!rates) return;
+      if (process.env.BUILD_PLATFORM === 'ios') {
+        WatchModule.setRates(rates)
+        WatchModule.sendMessage({
+          command: 'currencyMessage',
+          currency: rates
+        }, 'comandAnswerQueue')
       }
-      window.setTimeout(updateExchangeRates, tickerUpdateInterval)
+      emitter.emit('ticker', rates);
     })
   }
-
-  updateExchangeRates()
 }

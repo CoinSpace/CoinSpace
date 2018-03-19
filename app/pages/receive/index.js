@@ -9,7 +9,7 @@ var showQr = require('widgets/modals/qr')
 var geo = require('lib/geo')
 var showError = require('widgets/modals/flash').showError
 var showSetDetails = require('widgets/modals/set-details')
-var getNetwork = require('lib/network')
+var getTokenNetwork = require('lib/token').getTokenNetwork;
 var qrcode = require('lib/qrcode')
 
 var WatchModule = require('lib/apple-watch')
@@ -88,7 +88,7 @@ module.exports = function(el){
           while (canvas.hasChildNodes()) {
               canvas.removeChild(canvas.firstChild)
           }
-          var qr = qrcode.encode(getNetwork() + ':' + getAddress())
+          var qr = qrcode.encode(getTokenNetwork() + ':' + getAddress())
           canvas.appendChild(qr)
       }
   }

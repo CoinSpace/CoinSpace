@@ -17,6 +17,7 @@ var bitcoin = require('bitcoinjs-lib')
 var request = require('lib/request')
 var cache = require('memory-cache')
 var EthereumWallet = require('cs-ethereum-wallet');
+var convert = require('lib/convert');
 
 var wallet = null
 var seed = null
@@ -70,17 +71,19 @@ function callbackError(err, callbacks) {
 
 function setPin(pin, network, done, txSyncDone) {
   var callbacks = [done, txSyncDone]
-  auth.register(id, pin, function(err, token){
-    if(err) return callbackError(err, callbacks);
+  auth.register(id, pin, function(err, token) {
+    if (err) return callbackError(err, callbacks);
 
-    emitter.emit('wallet-auth', {token: token, pin: pin})
+    savePin(pin);
+    db.saveEncrypedSeed(id, AES.encrypt(seed, token));
 
-    savePin(pin)
-
-    var encrypted = AES.encrypt(seed, token)
-    db.saveEncrypedSeed(id, encrypted);
     emitter.emit('wallet-opening', 'Synchronizing Wallet');
-    initWallet(network, done, txSyncDone);
+    emitter.emit('db-init');
+
+    emitter.once('db-ready', function(err) {
+      if (err) return callbackError(err, callbacks);
+      initWallet(network, done, txSyncDone);
+    });
   })
 }
 
@@ -97,7 +100,7 @@ function openWalletWithPin(pin, network, done, txSyncDone) {
   var credentials = db.getCredentials();
   var id = credentials.id
   var encryptedSeed = credentials.seed
-  auth.login(id, pin, function(err, token){
+  auth.login(id, pin, function(err, token) {
     if (err) {
       if (err.message === 'user_deleted') {
         db.deleteCredentials();
@@ -106,17 +109,20 @@ function openWalletWithPin(pin, network, done, txSyncDone) {
     }
 
     savePin(pin)
+    assignSeedAndId(AES.decrypt(encryptedSeed, token));
 
-    assignSeedAndId(AES.decrypt(encryptedSeed, token))
-    emitter.emit('wallet-auth', {token: token, pin: pin})
-    emitter.emit('wallet-opening', 'Synchronizing Wallet')
+    emitter.emit('wallet-opening', 'Synchronizing Wallet');
+    emitter.emit('db-init');
 
-    initWallet(network, done, txSyncDone)
+    emitter.once('db-ready', function(err) {
+      if (err) return callbackError(err, callbacks);
+      initWallet(network, done, txSyncDone);
+    });
   })
 }
 
 function savePin(pin){
-    if(availableTouchId) window.localStorage.setItem('_pin_cs', AES.encrypt(pin, 'pinCoinSpace'))
+    if (availableTouchId) window.localStorage.setItem('_pin_cs', AES.encrypt(pin, 'pinCoinSpace'));
 }
 
 function setAvailableTouchId(){
@@ -154,11 +160,13 @@ function initWallet(networkName, done, txDone) {
   if (networkName === 'ethereum') {
     options.seed = seed;
     options.minConf = 12;
+    convert.setDecimals(18); // TODO: replace 18 with token value
   } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(networkName) !== -1) {
     var accounts = getDerivedAccounts(networkName)
     options.externalAccount = accounts.externalAccount
     options.internalAccount = accounts.internalAccount
     options.minConf = 4;
+    convert.setDecimals(8);
   }
 
   wallet = new Wallet[networkName](options)
@@ -166,7 +174,7 @@ function initWallet(networkName, done, txDone) {
 }
 
 function getDerivedAccounts(networkName) {
-  if (wallet && wallet.externalAccount && wallet.internalAccount) {
+  if (wallet && wallet.networkName === networkName && wallet.externalAccount && wallet.internalAccount) {
     return {
       externalAccount: wallet.externalAccount,
       internalAccount: wallet.internalAccount
@@ -240,6 +248,7 @@ module.exports = {
   walletExists: walletExists,
   reset: reset,
   sync: sync,
+  initWallet: initWallet,
   validateSend: validateSend,
   parseHistoryTx: parseHistoryTx,
   getPin: getPin,

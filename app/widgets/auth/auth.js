@@ -3,7 +3,7 @@
 var Ractive = require('lib/ractive')
 var emitter = require('lib/emitter')
 var showError = require('widgets/modals/flash').showError
-var getNetwork = require('lib/network')
+var getTokenNetwork = require('lib/token').getTokenNetwork;
 
 var Auth = Ractive.extend({
   el: document.getElementById("auth"),
@@ -43,16 +43,16 @@ var Auth = Ractive.extend({
 
    function onSyncDone(err) {
       self.set('opening', false)
-      if(err) {
+      if (err) {
         return onDoneError(err)
       }
 
-      window.scrollTo( 0, 0 )
+      window.scrollTo(0, 0)
       emitter.emit('wallet-ready')
     }
 
     function onTxSyncDone(err, transactions) {
-      if(err) {
+      if (err) {
         emitter.emit('set-transactions', [])
         return onDoneError(err)
       }
@@ -61,7 +61,7 @@ var Auth = Ractive.extend({
 
     this.onSyncDone = onSyncDone
     this.onTxSyncDone = onTxSyncDone
-    this.getNetwork = getNetwork
+    this.getTokenNetwork = getTokenNetwork
   }
 })
 

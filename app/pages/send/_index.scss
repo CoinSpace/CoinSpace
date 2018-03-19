@@ -188,6 +188,7 @@
     @extend .generic_box;
     @extend .jigsaw-light;
     padding-left: 10px;
+    padding-right: 50px;
     height: auto;
     margin: 0;
     border-radius: 0;
@@ -200,10 +201,17 @@
       outline: 0;
       border: 1px solid #999;
     }
+    &.fiat {
+      padding-right: 70px;
+    }
 
     @include breakpoint(portrait) {
       font-size: 26px;
       border-radius: 3px;
+      padding-right: 60px;
+      &.fiat {
+        padding-right: 90px;
+      }
     }
   }
 

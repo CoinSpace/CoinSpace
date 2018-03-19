@@ -3,6 +3,10 @@
 var Ractive = require('lib/ractive');
 var showRemoveConfirmation = require('widgets/modals/confirm-remove-token');
 var addEthereumToken = require('widgets/modals/add-ethereum-token');
+var setToken = require('lib/token').setToken;
+var getToken = require('lib/token').getToken;
+var initWallet = require('lib/wallet').initWallet;
+var emitter = require('lib/emitter');
 
 module.exports = function(el) {
 
@@ -17,7 +21,7 @@ module.exports = function(el) {
     data: {
       title: 'Available Tokens',
       id: 'token_dropdown',
-      currentToken: 'ethereum', // string or object
+      currentToken: getToken(), // string or object
       isCurrentToken: function(token) {
         return this.get('currentToken') === token;
       },
@@ -31,7 +35,38 @@ module.exports = function(el) {
 
   function switchToken(token) {
     if (token === ractive.get('currentToken')) return;
+    var currentToken = ractive.get('currentToken');
+    var currentTokenNetwork = currentToken.network || currentToken;
     ractive.set('currentToken', token);
+    setToken(token);
+
+    var network = token.network || token;
+    var baseUrl = window.location.href.split('?')[0];
+    var url = baseUrl + '?network=' + network;
+    window.history.replaceState(null, null, url);
+
+    document.getElementsByTagName('html')[0].classList.replace(currentTokenNetwork, network);
+
+    emitter.emit('sync');
+
+    setTimeout(function() {
+      initWallet(network, onSyncDone, onTxSyncDone);
+    }, 200);
+
+    function onSyncDone(err) {
+      if (err) {
+        return console.error(err);
+      }
+      window.scrollTo(0, 0);
+      emitter.emit('wallet-ready');
+    }
+    function onTxSyncDone(err, transactions) {
+      if (err) {
+        emitter.emit('set-transactions', []);
+        return console.error(err);
+      }
+      emitter.emit('set-transactions', transactions);
+    }
   }
 
   function removeEthereumToken(token) {

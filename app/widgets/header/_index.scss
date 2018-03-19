@@ -47,6 +47,7 @@
 
   ._amount {
     font-size: 32px;
+    line-height: 48px;
   }
   ._currency {
     @extend .jigsaw-medium;
@@ -67,18 +68,15 @@
   .header__balance {
     ._amount {
       font-size: 26px;
-      line-height: 50px;
     }
     @include breakpoint(portrait) {
       ._amount {
         font-size: 43px;
-        line-height: 48px;
       }
     }
     @include breakpoint(landscape) {
       ._amount {
         font-size: 32px;
-        line-height: 48px;
       }
     }
   }

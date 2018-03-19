@@ -1,6 +1,7 @@
 var geo = require('./geo');
 var fee = require('./fee');
 var ticker = require('./ticker');
+var ethereumTokens = require('./ethereumTokens');
 
 function cleanGeo(interval) {
   setInterval(function intervalFunction(){
@@ -25,13 +26,20 @@ function cacheFees(interval) {
 
 function cacheTicker(interval) {
   setInterval(function intervalFunction() {
-    ['BTC', 'BCH', 'LTC', 'ETH'].forEach(function(cryptoTicker) {
-      ticker.getFromAPI(cryptoTicker).then(function(data) {
-        if (global.gc) global.gc();
-        return ticker.save(cryptoTicker, data)
-      }).catch(console.error);
-    })
+    ticker.getFromAPI().then(function(data) {
+      if (global.gc) global.gc();
+      return ticker.save(data)
+    }).catch(console.error);
+    return intervalFunction;
+  }(), interval);
+}
 
+function cacheEthereumTokens(interval) {
+  setInterval(function intervalFunction() {
+    ethereumTokens.getFromAPI().then(function(data) {
+      if (global.gc) global.gc();
+      return ethereumTokens.save(data)
+    }).catch(console.error);
     return intervalFunction;
   }(), interval);
 }
@@ -39,5 +47,6 @@ function cacheTicker(interval) {
 module.exports = {
   cleanGeo: cleanGeo,
   cacheFees: cacheFees,
-  cacheTicker: cacheTicker
+  cacheTicker: cacheTicker,
+  cacheEthereumTokens: cacheEthereumTokens
 }

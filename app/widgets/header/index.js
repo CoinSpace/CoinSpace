@@ -6,31 +6,31 @@ var sync = require('lib/wallet').sync
 var getWallet = require('lib/wallet').getWallet
 var toUnit = require('lib/convert').toUnit
 var toUnitString = require('lib/convert').toUnitString
-var toFixedFloor = require('lib/convert').toFixedFloor
 var Big = require('big.js')
 var showError = require('widgets/modals/flash').showError
 var db = require('lib/db')
-var getNetwork = require('lib/network')
-var currencies = require('lib/ticker-api').currencies(getNetwork())
 
 var WatchModule = require('lib/apple-watch')
 
-module.exports = function(el){
+module.exports = function(el) {
+  var selectedFiat = '';
+  var defaultFiat = 'USD';
+
   var ractive = new Ractive({
     el: el,
     template: require('./index.ract'),
     data: {
-      updating_transactions: true,
       toUnitString: toUnitString,
       menuOpen: false,
+      isSyncing: true,
       exchangeRates: {},
-      currencies: currencies,
+      currencies: [],
       bitcoinToFiat: bitcoinToFiat,
       bitcoinPrice: bitcoinPrice,
-      selectedFiat: '',
+      selectedFiat: defaultFiat,
       cropBalance: function(amount) {
         if(amount > 0.0001) {
-          return toFixedFloor(amount, 4)
+          return new Big(amount).toFixed(4)
         } else {
           return amount
         }
@@ -52,17 +52,6 @@ module.exports = function(el){
 
       WatchModule.sendMessage(response, 'comandAnswerQueue')
     }
-  })
-
-  emitter.once('db-ready', function(){
-    var systemInfo = db.get('systemInfo');
-    var preferredCurrency = systemInfo.preferredCurrency;
-    if (currencies.indexOf(preferredCurrency) === -1) {
-      preferredCurrency = 'USD';
-    }
-    ractive.set('selectedFiat', preferredCurrency)
-    sendIosCurrency(preferredCurrency)
-    ractive.observe('selectedFiat', setPreferredCurrency)
   })
 
   emitter.on('update-balance', function() {
@@ -89,31 +78,25 @@ module.exports = function(el){
 
   var refreshEl = ractive.find('#refresh_el')
 
-  function cancelSpinner() {
-    ractive.set('updating_transactions', false)
+  emitter.on('set-transactions', function() {
+    ractive.set('isSyncing', false);
     refreshEl.classList.remove('loading')
     // IE fix
     var clone = refreshEl.cloneNode(true)
     refreshEl.parentNode.replaceChild(clone, refreshEl)
     refreshEl = clone
-  }
-
-  emitter.on('set-transactions', function() {
-    cancelSpinner();
   })
 
-  ractive.on('sync', function(context){
+  ractive.on('sync-click', function(context) {
     context.original.preventDefault();
-    if(!ractive.get('updating_transactions')) {
-      ractive.set('updating_transactions', true)
-      emitter.emit('sync-click')
-      refreshEl.classList.add('loading');
+    if (!ractive.get('isSyncing')) {
+      emitter.emit('sync')
       setTimeout(function() {
         sync(function(err){
-          if(err) return showError({message: err.message})
+          if (err) return showError({message: err.message})
           emitter.emit('update-balance')
         }, function(err, txs) {
-          if(err) {
+          if (err) {
             emitter.emit('set-transactions', [])
             return showError({message: err.message})
           }
@@ -121,6 +104,11 @@ module.exports = function(el){
         })
       }, 200)
     }
+  })
+
+  emitter.on('sync', function() {
+    ractive.set('isSyncing', true);
+    refreshEl.classList.add('loading');
   })
 
   ractive.on('toggle-currencies', function(){
@@ -135,9 +123,33 @@ module.exports = function(el){
     ractive.set('selectedFiat', currency)
   })
 
-  emitter.on('ticker', function(rates){
-    ractive.set('exchangeRates', rates)
+  emitter.once('ticker', function(rates) {
+    var currencies = Object.keys(rates);
+    initPreferredCurrency(currencies);
+    ractive.set('currencies', currencies);
+    ractive.set('exchangeRates', rates);
+
+    emitter.on('ticker', function(rates) {
+      var currencies = Object.keys(rates);
+      if (currencies.indexOf(selectedFiat) === -1) {
+        selectedFiat = defaultFiat;
+        ractive.set('selectedFiat', selectedFiat);
+      }
+      ractive.set('currencies', currencies);
+      ractive.set('exchangeRates', rates);
+    })
   })
+
+  function initPreferredCurrency(currencies) {
+    var systemInfo = db.get('systemInfo');
+    selectedFiat = systemInfo.preferredCurrency;
+    if (currencies.indexOf(selectedFiat) === -1) {
+      selectedFiat = defaultFiat;
+    }
+    ractive.set('selectedFiat', selectedFiat);
+    sendIosCurrency(selectedFiat)
+    ractive.observe('selectedFiat', setPreferredCurrency)
+  }
 
   function bitcoinToFiat(amount, exchangeRate) {
     if(amount == undefined || exchangeRate == undefined) return "N/A";
@@ -147,20 +159,20 @@ module.exports = function(el){
   }
 
   function bitcoinPrice(exchangeRate) {
-    if (!exchangeRate) return '';
+    if (typeof exchangeRate !== 'number') return '';
     return new Big(exchangeRate).times(1).toFixed(2)
   }
 
-  function setPreferredCurrency(currency, old){
-    if (old == undefined) return; // when loading wallet
+  function setPreferredCurrency(currency, old) {
+    if (old === undefined) return; // when loading wallet
 
-    emitter.emit('header-fiat-changed', currency)
-    sendIosCurrency(currency)
+    selectedFiat = currency;
+    emitter.emit('header-fiat-changed', selectedFiat)
+    sendIosCurrency(selectedFiat)
 
-    db.set('systemInfo', {preferredCurrency: currency}).catch(function(err) {
+    db.set('systemInfo', {preferredCurrency: selectedFiat}).catch(function(err) {
       console.error(err);
     });
-
   }
 
   function sendIosCurrency(currency) {

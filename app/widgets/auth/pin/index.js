@@ -126,12 +126,12 @@ module.exports = function(prevPage, data){
   }
 
   function openWithPin(){
-    CS.openWalletWithPin(getPin(), ractive.getNetwork(),
+    CS.openWalletWithPin(getPin(), ractive.getTokenNetwork(),
                          ractive.onSyncDone, ractive.onTxSyncDone)
   }
 
   function setPin(){
-    CS.setPin(getPin(), ractive.getNetwork(),
+    CS.setPin(getPin(), ractive.getTokenNetwork(),
               ractive.onSyncDone, ractive.onTxSyncDone)
   }
 
