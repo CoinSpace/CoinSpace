@@ -1,9 +1,13 @@
 'use strict';
 
-var BitcoinAverage = require('./bitcoinaverage');
-var currencies = require('./currencies');
+var request = require('lib/request');
+var urlRoot = process.env.SITE_URL;
+
+function getExchangeRates(crypto) {
+  var url = urlRoot + 'ticker?crypto=' + crypto;
+  return request({url: url});
+}
 
 module.exports = {
-  BitcoinAverage: BitcoinAverage,
-  currencies: currencies
+  getExchangeRates: getExchangeRates
 }

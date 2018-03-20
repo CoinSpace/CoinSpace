@@ -1,19 +1,16 @@
 'use strict';
 
-var bitcoin = {
-  default: 'BTC'
+var symbols = {
+  bitcoin: 'BTC',
+  testnet: 'BTC',
+  bitcoincash: 'BCH',
+  litecoin: 'LTC',
+  ethereum: 'ETH'
 }
 
-module.exports = {
-  bitcoin: bitcoin,
-  testnet: bitcoin,
-  bitcoincash: {
-    default: 'BCH'
-  },
-  litecoin: {
-    default: 'LTC'
-  },
-  ethereum: {
-    default: 'ETH'
-  }
+function getDenomination(token) {
+  if (typeof token === 'string') return symbols[token];
+  return token.symbol;
 }
+
+module.exports = getDenomination;

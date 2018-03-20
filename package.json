@@ -28,7 +28,6 @@
     "cradle": "^0.7.1",
     "cs-openalias": "file:./app/lib/openalias",
     "cs-pin-validator": "file:./app/lib/pin-validator",
-    "cs-ticker-api": "file:./app/lib/ticker-api",
     "express": "^4.15.4",
     "helmet": "^3.8.1",
     "helmet-csp": "^2.5.1",

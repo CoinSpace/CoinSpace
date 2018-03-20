@@ -1,14 +1,15 @@
 'use strict';
 
 window.initCSApp = function() {
-  var Ticker = require('lib/ticker-api').BitcoinAverage
+  var ticker = require('lib/ticker-api')
   var emitter = require('lib/emitter')
   var walletExists = require('lib/wallet').walletExists
   var fastclick = require('fastclick')
   var initFrame = require('widgets/frame')
   var initAuth = require('widgets/auth')
   var initGeoOverlay = require('widgets/geo-overlay')
-  var getTokenNetwork = require('lib/token').getTokenNetwork;
+  var getToken = require('lib/token').getToken;
+  var denomination = require('lib/denomination');
 
   var fadeIn = require('lib/transitions/fade.js').fadeIn
   var ads = require('lib/ads');
@@ -59,9 +60,7 @@ window.initCSApp = function() {
   });
 
   function updateExchangeRates() {
-    var ticker = new Ticker(getTokenNetwork());
-    ticker.getExchangeRates(function(err, rates) {
-      if (!rates) return;
+    ticker.getExchangeRates(denomination(getToken())).then(function(rates) {
       if (process.env.BUILD_PLATFORM === 'ios') {
         WatchModule.setRates(rates)
         WatchModule.sendMessage({
@@ -70,6 +69,6 @@ window.initCSApp = function() {
         }, 'comandAnswerQueue')
       }
       emitter.emit('ticker', rates);
-    })
+    }).catch(console.error);
   }
 }

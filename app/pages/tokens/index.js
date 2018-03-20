@@ -21,7 +21,7 @@ module.exports = function(el) {
     data: {
       title: 'Available Tokens',
       id: 'token_dropdown',
-      currentToken: getToken(), // string or object
+      currentToken: '',
       isCurrentToken: function(token) {
         return isEqual(token, this.get('currentToken'));
       },
@@ -39,7 +39,14 @@ module.exports = function(el) {
     isEnabled = true;
   });
 
-  ractive.on('before-show', setWalletTokens);
+  ractive.on('before-show', function() {
+    walletTokens = db.get('walletTokens') || [];
+    var ethereumTokens = walletTokens.filter(function(token) {
+      return token.network === 'ethereum';
+    });
+    ractive.set('ethereumTokens', ethereumTokens);
+    ractive.set('currentToken', getToken());
+  });
 
   function switchToken(token) {
     if (token === ractive.get('currentToken')) return;
@@ -92,13 +99,5 @@ module.exports = function(el) {
     });
   });
 
-  function setWalletTokens() {
-    walletTokens = db.get('walletTokens') || [];
-    var ethereumTokens = walletTokens.filter(function(token) {
-      return token.network === 'ethereum'
-    });
-    ractive.set('ethereumTokens', ethereumTokens)
-  }
-
-  return ractive
+  return ractive;
 }

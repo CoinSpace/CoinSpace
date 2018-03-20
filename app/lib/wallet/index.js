@@ -5,11 +5,11 @@ var worker = new Worker()
 
 var auth = require('./auth')
 var utils = require('./utils')
-var db = require('./db')
+var walletDb = require('./db')
 var emitter = require('lib/emitter')
 var crypto = require('crypto')
 var AES = require('lib/aes')
-var denominations = require('lib/denomination')
+var denomination = require('lib/denomination')
 var CsWallet = require('cs-wallet')
 var validateSend = require('./validator')
 var rng = require('secure-random').randomBuffer
@@ -18,6 +18,11 @@ var request = require('lib/request')
 var cache = require('memory-cache')
 var EthereumWallet = require('cs-ethereum-wallet');
 var convert = require('lib/convert');
+var getToken = require('lib/token').getToken;
+var setToken = require('lib/token').setToken;
+var db = require('lib/db');
+var find = require('lodash.find');
+var isEqual = require('lodash.isequal');
 
 var wallet = null
 var seed = null
@@ -75,7 +80,7 @@ function setPin(pin, network, done, txSyncDone) {
     if (err) return callbackError(err, callbacks);
 
     savePin(pin);
-    db.saveEncrypedSeed(id, AES.encrypt(seed, token));
+    walletDb.saveEncrypedSeed(id, AES.encrypt(seed, token));
 
     emitter.emit('wallet-opening', 'Synchronizing Wallet');
     emitter.emit('db-init');
@@ -97,13 +102,13 @@ function setUsername(username, callback) {
 
 function openWalletWithPin(pin, network, done, txSyncDone) {
   var callbacks = [done, txSyncDone]
-  var credentials = db.getCredentials();
+  var credentials = walletDb.getCredentials();
   var id = credentials.id
   var encryptedSeed = credentials.seed
   auth.login(id, pin, function(err, token) {
     if (err) {
       if (err.message === 'user_deleted') {
-        db.deleteCredentials();
+        walletDb.deleteCredentials();
       }
       return callbackError(err, callbacks);
     }
@@ -145,6 +150,12 @@ function assignSeedAndId(s) {
 }
 
 function initWallet(networkName, done, txDone) {
+  var token = getToken();
+  if (!isValidWalletToken(token)) {
+    setToken(networkName);
+    token = false;
+  }
+
   var options = {
     networkName: networkName,
     done: done,
@@ -160,17 +171,26 @@ function initWallet(networkName, done, txDone) {
   if (networkName === 'ethereum') {
     options.seed = seed;
     options.minConf = 12;
-    convert.setDecimals(18); // TODO: replace 18 with token value
+    options.token = token;
+    convert.setDecimals(token ? token.decimals : 18);
   } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(networkName) !== -1) {
-    var accounts = getDerivedAccounts(networkName)
-    options.externalAccount = accounts.externalAccount
-    options.internalAccount = accounts.internalAccount
+    var accounts = getDerivedAccounts(networkName);
+    options.externalAccount = accounts.externalAccount;
+    options.internalAccount = accounts.internalAccount;
     options.minConf = 4;
     convert.setDecimals(8);
   }
 
-  wallet = new Wallet[networkName](options)
-  wallet.denomination = denominations[networkName].default
+  wallet = new Wallet[networkName](options);
+  wallet.denomination = token ? denomination(token) : denomination(networkName);
+}
+
+function isValidWalletToken(token) {
+  var walletTokens = db.get('walletTokens') || [];
+  var isFound = find(walletTokens, function(item) {
+    return isEqual(token, item);
+  });
+  return !!isFound;
 }
 
 function getDerivedAccounts(networkName) {
@@ -210,11 +230,11 @@ function getId() {
 }
 
 function walletExists() {
-  return !!db.getCredentials();
+  return !!walletDb.getCredentials();
 }
 
 function reset() {
-  db.deleteCredentials();
+  walletDb.deleteCredentials();
 }
 
 function getDynamicFees(callback) {

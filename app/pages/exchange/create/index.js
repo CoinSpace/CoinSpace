@@ -3,7 +3,7 @@
 var Ractive = require('lib/ractive');
 var emitter = require('lib/emitter');
 var getWallet = require('lib/wallet').getWallet;
-var denominations = require('lib/denomination');
+var denomination = require('lib/denomination');
 var getTokenNetwork = require('lib/token').getTokenNetwork;
 var shapeshift = require('lib/shapeshift');
 var qrcode = require('lib/qrcode');
@@ -56,7 +56,7 @@ module.exports = function(el) {
 
   ractive.on('before-show', function() {
     fromSymbolObserver.silence();
-    ractive.set('fromSymbol', denominations[getTokenNetwork()].default);
+    ractive.set('fromSymbol', denomination(getTokenNetwork()));
     fromSymbolObserver.resume();
 
     shapeshift.getCoins().then(function(coins) {
