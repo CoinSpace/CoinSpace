@@ -11,6 +11,7 @@ var db = require('lib/db');
 var isEqual = require('lodash.isequal');
 
 var walletTokens = [];
+var isEnabled = false;
 
 module.exports = function(el) {
 
@@ -30,10 +31,19 @@ module.exports = function(el) {
     }
   })
 
+  emitter.on('sync', function() {
+    isEnabled = false;
+  });
+
+  emitter.on('set-transactions', function() {
+    isEnabled = true;
+  });
+
   ractive.on('before-show', setWalletTokens);
 
   function switchToken(token) {
     if (token === ractive.get('currentToken')) return;
+    if (!isEnabled) return;
     var currentToken = ractive.get('currentToken');
     var currentTokenNetwork = currentToken.network || currentToken;
     ractive.set('currentToken', token);
