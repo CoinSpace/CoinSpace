@@ -29,10 +29,13 @@ module.exports = function(el) {
       bitcoinPrice: bitcoinPrice,
       selectedFiat: defaultFiat,
       cropBalance: function(amount) {
-        if(amount > 0.0001) {
-          return new Big(amount).toFixed(4)
+        if (amount > 0.0001) {
+          var dotIndex = amount.indexOf('.');
+          if (dotIndex !== -1) {
+            return amount.substring(0, dotIndex + 5);
+          }
         } else {
-          return amount
+          return amount;
         }
       }
     }
