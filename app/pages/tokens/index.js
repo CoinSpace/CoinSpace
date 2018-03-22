@@ -9,6 +9,7 @@ var initWallet = require('lib/wallet').initWallet;
 var emitter = require('lib/emitter');
 var db = require('lib/db');
 var isEqual = require('lodash.isequal');
+var showError = require('widgets/modals/flash').showError;
 
 var walletTokens = [];
 var isEnabled = false;
@@ -53,14 +54,15 @@ module.exports = function(el) {
     if (!isEnabled) return;
     var currentToken = ractive.get('currentToken');
     var currentTokenNetwork = currentToken.network || currentToken;
-    ractive.set('currentToken', token);
-    setToken(token);
 
     var network = token.network || token;
     var baseUrl = window.location.href.split('?')[0];
     var url = baseUrl + '?network=' + network;
-    window.history.replaceState(null, null, url);
 
+    ractive.set('currentToken', token);
+    setToken(token);
+
+    window.history.replaceState(null, null, url);
     document.getElementsByTagName('html')[0].classList.replace(currentTokenNetwork, network);
 
     emitter.emit('sync');
@@ -71,7 +73,8 @@ module.exports = function(el) {
 
     function onSyncDone(err) {
       if (err) {
-        return console.error(err);
+        console.error(err);
+        return showError({message: err.message});
       }
       window.scrollTo(0, 0);
       emitter.emit('wallet-ready');
@@ -79,7 +82,8 @@ module.exports = function(el) {
     function onTxSyncDone(err, transactions) {
       if (err) {
         emitter.emit('set-transactions', []);
-        return console.error(err);
+        console.error(err);
+        return showError({message: err.message});
       }
       emitter.emit('set-transactions', transactions);
     }

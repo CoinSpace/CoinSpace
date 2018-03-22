@@ -4,6 +4,7 @@ var Ractive = require('lib/ractive')
 var emitter = require('lib/emitter')
 var showError = require('widgets/modals/flash').showError
 var getTokenNetwork = require('lib/token').getTokenNetwork;
+var setToken = require('lib/token').setToken;
 
 var Auth = Ractive.extend({
   el: document.getElementById("auth"),
@@ -44,6 +45,7 @@ var Auth = Ractive.extend({
    function onSyncDone(err) {
       self.set('opening', false)
       if (err) {
+        setToken(getTokenNetwork()); // fix wrong tokens
         return onDoneError(err)
       }
 

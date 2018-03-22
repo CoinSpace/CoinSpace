@@ -29,7 +29,7 @@ module.exports = function(el){
       qrScannerAvailable: qrcode.isScanAvailable,
       isEthereum: false,
       validating: false,
-      gasLimit: 21000
+      gasLimit: ''
     }
   })
 
@@ -70,18 +70,16 @@ module.exports = function(el){
     resolveTo(to, function(data){
       to = data.to
       var alias = data.alias
-      var amount = ractive.find('#bitcoin').value
-      // var gasLimit = ractive.find('#gas-limit').value // TODO: use it
-
       getDynamicFees(function(dynamicFees) {
-        validateAndShowConfirm(to, amount, alias, dynamicFees)
+        validateAndShowConfirm(to, alias, dynamicFees)
       });
     })
   })
 
-  emitter.on('wallet-ready', function(){
-    ractive.set('denomination', getWallet().denomination)
-  })
+  emitter.on('wallet-ready', function() {
+    ractive.set('denomination', getWallet().denomination);
+    ractive.set('gasLimit', getWallet().gasLimit);
+  });
 
   emitter.once('ticker', function(rates) {
     var currencies = Object.keys(rates);
@@ -157,8 +155,13 @@ module.exports = function(el){
     })
   })
 
-  function validateAndShowConfirm(to, amount, alias, dynamicFees) {
-    validateSend(getWallet(), to, amount, dynamicFees, function(err){
+  function validateAndShowConfirm(to, alias, dynamicFees) {
+    var amount = ractive.find('#bitcoin').value;
+    var wallet = getWallet();
+    if (wallet.networkName === 'ethereum') {
+      wallet.gasLimit = ractive.find('#gas-limit').value;
+    }
+    validateSend(wallet, to, amount, dynamicFees, function(err) {
       ractive.set('validating', false);
       if(err) {
         var interpolations = err.interpolations

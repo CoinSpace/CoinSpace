@@ -176,5 +176,6 @@
     "Decimals": "Дробность (число)",
     "Token": "Токен",
     "Custom token": "Свой токен",
-    "Please fill out all fields.": "Пожалуйста, заполните все поля."
+    "Please fill out all fields.": "Пожалуйста, заполните все поля.",
+    "Please enter Gas Limit greater than zero": "Пожалуйста, введите Лимит Газа больше нуля"
 }

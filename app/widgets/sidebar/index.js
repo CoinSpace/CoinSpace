@@ -5,11 +5,15 @@ var emitter = require('lib/emitter');
 var initAccount = require('widgets/account-details');
 var importPrivateKey = require('widgets/modals/import-private-key');
 var exportPrivateKeys = require('widgets/modals/export-private-keys');
+var getWallet = require('lib/wallet').getWallet;
 
 module.exports = function(el) {
   var ractive = new Ractive({
     el: el,
-    template: require('./index.ract')
+    template: require('./index.ract'),
+    data: {
+      isEnabledImportExport: true
+    }
   });
 
   initAccount(ractive.find('#account-details'));
@@ -30,6 +34,15 @@ module.exports = function(el) {
 
   ractive.on('export-private-keys', function() {
     exportPrivateKeys();
+  });
+
+  emitter.on('wallet-ready', function() {
+    var wallet = getWallet();
+    if (wallet.networkName === 'ethereum' && wallet.token) {
+      ractive.set('isEnabledImportExport', false);
+    } else {
+      ractive.set('isEnabledImportExport', true);
+    }
   });
 
   emitter.on('toggle-menu', function(open) {

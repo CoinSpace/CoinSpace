@@ -60,12 +60,12 @@ function get(key) {
   return data[key];
 }
 
-emitter.once('wallet-init', function(data) {
+emitter.on('wallet-init', function(data) {
   secret = data.seed;
   id = data.id;
 })
 
-emitter.once('db-init', function() {
+emitter.on('db-init', function() {
   request({
     url: urlRoot + 'details?id=' + id
   }).then(function(doc) {

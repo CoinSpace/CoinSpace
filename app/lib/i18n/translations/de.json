@@ -176,5 +176,6 @@
     "Decimals": "Decimals",
     "Token": "Token",
     "Custom token": "Custom token",
-    "Please fill out all fields.": "Please fill out all fields."
+    "Please fill out all fields.": "Please fill out all fields.",
+    "Please enter Gas Limit greater than zero": "Please enter Gas Limit above zero"
 }
