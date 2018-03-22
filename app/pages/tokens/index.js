@@ -8,7 +8,7 @@ var getToken = require('lib/token').getToken;
 var initWallet = require('lib/wallet').initWallet;
 var emitter = require('lib/emitter');
 var db = require('lib/db');
-var isEqual = require('lodash.isequal');
+var _ = require('lodash');
 var showError = require('widgets/modals/flash').showError;
 
 var walletTokens = [];
@@ -24,7 +24,7 @@ module.exports = function(el) {
       id: 'token_dropdown',
       currentToken: '',
       isCurrentToken: function(token) {
-        return isEqual(token, this.get('currentToken'));
+        return _.isEqual(token, this.get('currentToken'));
       },
       switchToken: switchToken,
       removeEthereumToken: removeEthereumToken,

@@ -10,7 +10,7 @@ var qrcode = require('lib/qrcode');
 var geo = require('lib/geo');
 var showTooltip = require('widgets/modals/tooltip');
 var showError = require('widgets/modals/flash').showError;
-var find = require('lodash.find');
+var _ = require('lodash');
 var db = require('lib/db');
 
 module.exports = function(el) {
@@ -150,7 +150,7 @@ module.exports = function(el) {
       toAddress: ractive.get('toAddress'),
       toSymbol: ractive.get('toSymbol')
     };
-    var fromCoin = find(ractive.get('coins'), function(item) {
+    var fromCoin = _.find(ractive.get('coins'), function(item) {
       return item.symbol === options.fromSymbol;
     });
     return validateAddresses(options).then(function() {

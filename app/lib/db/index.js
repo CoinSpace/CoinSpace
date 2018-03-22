@@ -1,7 +1,7 @@
 'use strict';
 
 var emitter = require('lib/emitter');
-var merge = require('lodash.merge');
+var _ = require('lodash');
 var AES = require('lib/aes');
 var randAvatarIndex = require('lib/avatar').randAvatarIndex;
 var encrypt = AES.encrypt;
@@ -18,7 +18,7 @@ function set(key, value) {
   if (id === null) return Promise.reject(new Error('wallet not ready'));
   var data = JSON.parse(decrypt(details, secret));
   if(data[key] && value && typeof value === 'object' && value.constructor === Object) {
-    merge(data[key], value);
+    _.merge(data[key], value);
   } else {
     data[key] = value;
   }

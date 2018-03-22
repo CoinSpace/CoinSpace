@@ -21,8 +21,7 @@ var convert = require('lib/convert');
 var getToken = require('lib/token').getToken;
 var setToken = require('lib/token').setToken;
 var db = require('lib/db');
-var find = require('lodash.find');
-var isEqual = require('lodash.isequal');
+var _ = require('lodash');
 
 var wallet = null
 var seed = null
@@ -187,8 +186,8 @@ function initWallet(networkName, done, txDone) {
 
 function isValidWalletToken(token) {
   var walletTokens = db.get('walletTokens') || [];
-  var isFound = find(walletTokens, function(item) {
-    return isEqual(token, item);
+  var isFound = _.find(walletTokens, function(item) {
+    return _.isEqual(token, item);
   });
   return !!isFound;
 }
