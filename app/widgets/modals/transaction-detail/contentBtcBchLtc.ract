@@ -9,27 +9,21 @@
       {{isReceived(this) ? '+' : ''}} {{toUnitString(amount)}}
     </div>
 
-    {{#isConfirmed(confirmations)}}
+    {{#if isConfirmed(confirmations)}}
       <div class='_time'>{{formatTimestamp(timestamp)}}</div>
       <div class='_time'>{{formatConfirmations(confirmations)}}</div>
-    {{/isConfirmed}}
-
-    {{^isConfirmed(confirmations)}}
+    {{else}}
       <div class='_time'>{{translate("pending confirmation")}}</div>
-    {{/isConfirmed}}
+    {{/if}}
 
     <div class="detail__strings">
 
       <h3 class="_title">{{translate("Transaction Id:")}}</h3>
       {{#if isNetwork('bitcoin')}}
       <a href="" onclick="window.open('https://btc.coin.space/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
-      {{/if}}
-
-      {{#if isNetwork('bitcoincash')}}
+      {{elseif isNetwork('bitcoincash')}}
       <a href="" onclick="window.open('https://bch.coin.space/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
-      {{/if}}
-
-      {{#if isNetwork('litecoin')}}
+      {{elseif isNetwork('litecoin')}}
       <a href="" onclick="window.open('https://ltc.coin.space/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
 			{{/if}}
 

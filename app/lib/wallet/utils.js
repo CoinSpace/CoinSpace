@@ -24,14 +24,15 @@ function parseBtcLtcTx(tx) {
 
 function parseEthereumTx(tx) {
   return {
-    id: tx._id,
+    id: tx.token ? tx.txId : tx._id,
     amount: tx.value,
     timestamp: tx.timestamp * 1000,
     confirmations: tx.confirmations,
     fee: tx.fee,
     status: tx.status,
     from: tx.from,
-    to: tx.to
+    to: tx.to,
+    token: tx.token
   }
 }
 
