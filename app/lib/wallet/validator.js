@@ -39,6 +39,10 @@ function validateSend(wallet, to, unitValue, dynamicFees, callback) {
       } else {
         return callback(new Error('You do not have enough funds in your wallet (incl. fee)'))
       }
+    } else if (e.message.match(/Insufficient ethereum funds for token transaction/)) {
+      error = new Error('You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).');
+      error.interpolations = { ethereumRequired: toUnitString(e.ethereumRequired) };
+      return callback(error);
     }
 
     return callback(e);

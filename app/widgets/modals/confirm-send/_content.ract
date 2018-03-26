@@ -12,7 +12,7 @@
         <span class="_currency">{{denomination}}</span>
       </div>
 
-      {{#isBitcoin}}
+      {{#if isBitcoin}}
       	<div class="_dynamic-fee">
       		<span class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
 					<select class="js-fee-dropdown" value="{{fee}}">
@@ -21,19 +21,13 @@
 						<option value="{{feeFastest}}">{{feeSign}}{{feeFastest}} {{denomination}} - {{translate("fastest")}}</option>
 					</select>
       	</div>
-      {{/isBitcoin}}
-
-      {{#isBitcoinCash}}
+      {{elseif isBitcoinCash}}
 				<span class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
-			{{/isBitcoinCash}}
-
-      {{#isLitecoin}}
+      {{elseif isLitecoin}}
 				<span class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
-			{{/isLitecoin}}
-
-      {{#isEthereum}}
-				<span class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
-			{{/isEthereum}}
+      {{elseif isEthereum}}
+				<span class="_fee">{{feeSign}}{{fee}} {{feeDenomination}} {{translate("transaction fee")}}</span>
+			{{/if}}
 
       <span class="_icon">
         {{>svg_sendto}}
@@ -48,16 +42,15 @@
 
     <div class="confirm__inputs">
       <div class="_cancel">{{translate("Cancel")}}</div>
-      {{^sending}}
-        <div class="_send" on-click="send">{{translate("Send")}}</div>
-      {{/sending}}
-      {{#sending}}
+      {{#if sending}}
         <div class="_send--sending">
           <span class="_icon">
             {{>svg_refresh}}
           </span>
         </div>
-      {{/sending}}
+      {{else}}
+        <div class="_send" on-click="send">{{translate("Send")}}</div>
+      {{/if}}
     </div>
 
   {{/confirmation}}

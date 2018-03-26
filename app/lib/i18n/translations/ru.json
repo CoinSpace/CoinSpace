@@ -177,5 +177,6 @@
     "Token": "Токен",
     "Custom token": "Свой токен",
     "Please fill out all fields.": "Пожалуйста, заполните все поля.",
-    "Please enter Gas Limit greater than zero": "Пожалуйста, введите Лимит Газа больше нуля"
+    "Please enter Gas Limit greater than zero": "Пожалуйста, введите Лимит Газа больше нуля",
+    "You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).": "У вас недостаточно средств Ethereum для оплаты транзакции (%(ethereumRequired)s ETH)."
 }

@@ -15,9 +15,10 @@ function toUnit(number) {
   return new Big(number).div(factor)
 }
 
-function toUnitString(number) {
+function toUnitString(number, d) {
   if (!number) return '0';
-  return new Big(number).div(factor).toFixed()
+  if (!d) return new Big(number).div(factor).toFixed();
+  return new Big(number).div(new Big(10).pow(d)).toFixed();
 }
 
 function setDecimals(d) {

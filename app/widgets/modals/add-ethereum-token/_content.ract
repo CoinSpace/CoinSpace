@@ -26,7 +26,7 @@
       <div class="_contract_address_group">
         <label class="_label" for="contract_address">{{translate("Contract address")}}
           <div class="input__container">
-            <input id="contract_address" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{contractAddress}}" />
+            <input id="contract_address" class="_input" type="text" on-enter="add" autocorrect="off" autocapitalize="off" value="{{contractAddress}}" />
             {{#contractAddress}}
               <div class="close__input" on-click="clearContractAddress">
                 <span class="_icon">{{> svg_close}}</span>
@@ -46,13 +46,13 @@
 
       <label class="_label" for="token_symbol">{{translate("Symbol")}}
         <div class="input__container">
-          <input id="token_symbol" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{symbol}}" />
+          <input id="token_symbol" class="_input" type="text" on-enter="add" autocorrect="off" autocapitalize="off" value="{{symbol}}" />
         </div>
       </label>
 
       <label class="_label" for="token_decimals">{{translate("Decimals")}}
         <div class="input__container">
-          <input id="token_decimals" class="_input" type="number" min="0" step="1" autocorrect="off" autocapitalize="off" value="{{decimals}}" />
+          <input id="token_decimals" class="_input" type="number" on-enter="add" min="0" step="1" autocorrect="off" autocapitalize="off" value="{{decimals}}" />
         </div>
       </label>
       {{/token}}

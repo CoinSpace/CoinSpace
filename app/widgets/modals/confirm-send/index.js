@@ -52,7 +52,9 @@ function open(data) {
 
       // update balance & tx history
       emitter.emit('wallet-ready');
-      emitter.emit('append-transactions', [parseHistoryTx(historyTx)]);
+      if (historyTx) {
+        emitter.emit('append-transactions', [parseHistoryTx(historyTx)]);
+      }
     });
   });
 
@@ -69,7 +71,7 @@ function extendData(data) {
 
   var network = getTokenNetwork();
 
-  data.confirmation = true
+  data.confirmation = true;
   data.isEthereum = network === 'ethereum';
   data.isBitcoin = network === 'bitcoin' || network === 'testnet';
   data.isBitcoinCash = network === 'bitcoincash';
@@ -82,36 +84,37 @@ function extendData(data) {
   var unspents = data.importTxOptions ? data.importTxOptions.unspents : null;
 
   if (data.isBitcoin) {
-    var defaultFeePerKb = data.dynamicFees.minimum * 1000 || bitcoin.networks['bitcoin'].feePerKb
+    var defaultFeePerKb = data.dynamicFees.minimum * 1000 || bitcoin.networks['bitcoin'].feePerKb;
 
     feeRates = [
       defaultFeePerKb,
       data.dynamicFees.hour * 1000 || defaultFeePerKb,
       data.dynamicFees.fastest * 1000 || defaultFeePerKb
     ];
-    fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents)
+    fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents);
 
-    data.feeMinimum = toUnitString(fees[0])
-    data.feeHour = toUnitString(fees[1])
-    data.feeFastest = toUnitString(fees[2])
-    data.fee = data.feeHour
+    data.feeMinimum = toUnitString(fees[0]);
+    data.feeHour = toUnitString(fees[1]);
+    data.feeFastest = toUnitString(fees[2]);
+    data.fee = data.feeHour;
 
     data.onFocus = function() {
       this.find('.js-fee-dropdown').selectedIndex = 1; // fix issue when values are the same
     }
 
   } else if (data.isBitcoinCash) {
-    feeRates = [data.dynamicFees.minimum * 1000 || bitcoin.networks['bitcoincash'].feePerKb]
-    fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents)
-    data.fee = toUnitString(fees[0])
+    feeRates = [data.dynamicFees.minimum * 1000 || bitcoin.networks['bitcoincash'].feePerKb];
+    fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents);
+    data.fee = toUnitString(fees[0]);
 
   } else if (data.isLitecoin) {
-    feeRates = [data.dynamicFees.minimum * 1000 || bitcoin.networks['litecoin'].feePerKb]
-    fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents)
-    data.fee = toUnitString(fees[0])
+    feeRates = [data.dynamicFees.minimum * 1000 || bitcoin.networks['litecoin'].feePerKb];
+    fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents);
+    data.fee = toUnitString(fees[0]);
 
   } else if (data.isEthereum) {
-    data.fee = toUnitString(wallet.getDefaultFee())
+    data.fee = toUnitString(wallet.getDefaultFee(), 18);
+    data.feeDenomination = 'ETH';
   }
 
   return data;

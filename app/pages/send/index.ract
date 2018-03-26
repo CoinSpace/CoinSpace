@@ -39,7 +39,7 @@
           </div>
 
           <div class="_input-group">
-            <input id="fiat" class="_input fiat" type="number" min="0" step="any" on-keyup="fiat-to-bitcoin" on-focus="focusAmountInput" on-blur="blurAmountInput">
+            <input id="fiat" class="_input fiat" type="number" min="0" step="any" on-keyup="fiat-to-bitcoin" on-enter="open-send" on-focus="focusAmountInput" on-blur="blurAmountInput">
             <span class="_currency dropdown">
               <select value="{{selectedFiat}}" tabindex="-1">
                 {{#currencies}}
