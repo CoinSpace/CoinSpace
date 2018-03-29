@@ -61,7 +61,7 @@ function scan(data) {
       navigator.notification.alert(
         'Access to the camera has been prohibited; please enable it in the Settings app to continue',
         function(){},
-        'Coin Space'
+        'Coin.Space'
       )
     },
     {

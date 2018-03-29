@@ -31,7 +31,7 @@ module.exports = function(el){
         ractive.set({
           context: data.context,
           network: data.network,
-          search_message: 'Searching your area for other Coin Space users'
+          search_message: 'Searching your area for other Coin.Space users'
         });
         ractive.fire('search-nearby')
       })
