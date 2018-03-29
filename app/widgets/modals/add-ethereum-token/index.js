@@ -52,10 +52,10 @@ function open(walletTokens, callback) {
 
     var token = ractive.get('token');
     var data = {
-      address: token.address || ractive.get('contractAddress'),
-      symbol: token.symbol || ractive.get('symbol'),
-      name: token.name || ractive.get('symbol'),
-      decimals: token.decimals || ractive.get('decimals'),
+      address: token ? token.address : ractive.get('contractAddress'),
+      symbol: token ? token.symbol : ractive.get('symbol'),
+      name: token ? token.name : ractive.get('symbol'),
+      decimals: token ? token.decimals : ractive.get('decimals'),
       network: 'ethereum'
     }
 
