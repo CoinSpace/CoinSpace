@@ -24,7 +24,8 @@ function open(walletTokens, callback) {
       decimals: '',
       tokens: tokens,
       token: tokens[0],
-      isInited: tokens.length !== 0
+      isInited: tokens.length !== 0,
+      isSelected: false
     }
   });
 
@@ -45,6 +46,10 @@ function open(walletTokens, callback) {
     var input = ractive.find('#contract_address');
     ractive.set('contractAddress', '');
     input.focus();
+  });
+
+  ractive.on('select-click', function() {
+    ractive.set('isSelected', true);
   });
 
   ractive.on('add', function() {

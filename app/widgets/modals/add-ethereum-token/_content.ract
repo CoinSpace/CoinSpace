@@ -7,13 +7,17 @@
     <div class="_content">
       <div class="_token_container">
         {{translate("Token")}}
-        <div class="_select_container">
-          {{#if token}}
-            {{token.name}}
+        <div class="_select_container" on-click="select-click">
+          {{#if isSelected}}
+            {{#if token}}
+              {{token.name}}
+            {{else}}
+              {{translate("Custom token")}}
+            {{/if}}
           {{else}}
-            {{translate("Custom token")}}
+            {{translate("Click to Select")}}
           {{/if}}
-          <select class="js-token" value="{{token}}">
+          <select class="js-token" value="{{token}}" tabindex="-1">
             {{#tokens}}
             <option value="{{this}}">{{symbol}} - {{name}}</option>
             {{/tokens}}
@@ -68,7 +72,11 @@
           </span>
         </div>
       {{else}}
+        {{#if isSelected}}
         <div class="_add" on-click="add">{{translate("Add")}}</div>
+        {{else}}
+        <div class="_add _disabled">{{translate("Add")}}</div>
+        {{/if}}
       {{/if}}
     </div>
 
