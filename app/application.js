@@ -4,7 +4,7 @@ window.initCSApp = function() {
   var ticker = require('lib/ticker-api')
   var emitter = require('lib/emitter')
   var walletExists = require('lib/wallet').walletExists
-  var fastclick = require('fastclick')
+  var FastClick = require('fastclick')
   var initFrame = require('widgets/frame')
   var initAuth = require('widgets/auth')
   var initGeoOverlay = require('widgets/geo-overlay')
@@ -20,7 +20,9 @@ window.initCSApp = function() {
   var htmlEl = document.documentElement
   var frame = initFrame(appEl)
   var auth = null
-  fastclick.attach(document.body)
+
+  fixFastClick();
+  FastClick.attach(document.body)
 
   initGeoOverlay(document.getElementById('geo-overlay'))
 
@@ -70,5 +72,16 @@ window.initCSApp = function() {
       }
       emitter.emit('ticker', rates);
     }).catch(console.error);
+  }
+
+  function fixFastClick() {
+    var originOnTouchStart = FastClick.prototype.onTouchStart;
+    FastClick.prototype.onTouchStart = function(event) {
+      var targetElement = this.getTargetElementFromEventTarget(event.target);
+      if (targetElement.nodeName.toLowerCase() === 'select') {
+        return false;
+      }
+      originOnTouchStart.apply(this, arguments);
+    }
   }
 }

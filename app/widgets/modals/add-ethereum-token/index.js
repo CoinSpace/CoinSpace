@@ -23,9 +23,8 @@ function open(walletTokens, callback) {
       symbol: '',
       decimals: '',
       tokens: tokens,
-      token: tokens[0],
-      isInited: tokens.length !== 0,
-      isSelected: false
+      token: '-1',
+      isInited: tokens.length !== 0
     }
   });
 
@@ -36,7 +35,6 @@ function open(walletTokens, callback) {
       tokens = data;
       ractive.set({
         tokens: tokens,
-        token: tokens[0],
         isInited: true
       });
     }).catch(console.error);
@@ -46,10 +44,6 @@ function open(walletTokens, callback) {
     var input = ractive.find('#contract_address');
     ractive.set('contractAddress', '');
     input.focus();
-  });
-
-  ractive.on('select-click', function() {
-    ractive.set('isSelected', true);
   });
 
   ractive.on('add', function() {
