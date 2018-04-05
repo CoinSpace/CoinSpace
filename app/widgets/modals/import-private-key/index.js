@@ -10,9 +10,11 @@ var getWallet = require('lib/wallet').getWallet;
 var getDynamicFees = require('lib/wallet').getDynamicFees;
 var toUnitString = require('lib/convert').toUnitString;
 
+var ractive;
+
 function open() {
 
-  var ractive = new Ractive({
+  ractive = new Ractive({
     partials: {
       content: require('./_content.ract')
     },
@@ -62,11 +64,6 @@ function open() {
     qrcode.scan({context: 'import-private-key'});
   });
 
-  emitter.on('prefill-wallet', function(privateKey, context) {
-    if (context !== 'import-private-key') return;
-    ractive.set('privateKey', privateKey);
-  });
-
   function handleError(err) {
     ractive.set('isLoading', false);
     showError({message: err.message});
@@ -74,5 +71,10 @@ function open() {
 
   return ractive;
 }
+
+emitter.on('prefill-wallet', function(privateKey, context) {
+  if (context !== 'import-private-key' || !ractive) return;
+  ractive.set('privateKey', privateKey);
+});
 
 module.exports = open

@@ -9,10 +9,11 @@ var urlRoot = process.env.SITE_URL;
 var db = require('lib/db');
 
 var tokens = [];
+var ractive;
 
 function open(walletTokens, callback) {
 
-  var ractive = new Ractive({
+  ractive = new Ractive({
     partials: {
       content: require('./_content.ract')
     },
@@ -77,11 +78,6 @@ function open(walletTokens, callback) {
     qrcode.scan({context: 'ethereum-contract-address'});
   });
 
-  emitter.on('prefill-wallet', function(contractAddress, context) {
-    if (context !== 'ethereum-contract-address') return;
-    ractive.set('contractAddress', contractAddress);
-  });
-
   function handleError(err) {
     ractive.set('isLoading', false);
     showError({message: err.message});
@@ -89,5 +85,10 @@ function open(walletTokens, callback) {
 
   return ractive;
 }
+
+emitter.on('prefill-wallet', function(contractAddress, context) {
+  if (context !== 'ethereum-contract-address' || !ractive) return;
+  ractive.set('contractAddress', contractAddress);
+});
 
 module.exports = open
