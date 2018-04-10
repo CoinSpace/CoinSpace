@@ -41,7 +41,7 @@
       <h3 class="_title">{{translate("Outputs:")}}</h3>
       <code class="_value">
         {{#outs}}
-          <span class="_address">{{address}}</span>
+          <span class="_address">{{address ? address : translate("Unparsed address")}}</span>
           <span class="_number">{{toUnitString(amount)}}</span>
         {{/outs}}
       </code>
