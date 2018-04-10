@@ -22,6 +22,8 @@ var getToken = require('lib/token').getToken;
 var setToken = require('lib/token').setToken;
 var db = require('lib/db');
 var _ = require('lodash');
+var HDKey = require('hdkey');
+var Buffer = require('safe-buffer').Buffer;
 
 var wallet = null
 var seed = null
@@ -200,10 +202,10 @@ function getDerivedAccounts(networkName) {
     }
   }
   var network = bitcoin.networks[networkName]
-  var accountZero = bitcoin.HDNode.fromSeedHex(seed, network).deriveHardened(0)
+  var accountZero = HDKey.fromMasterSeed(new Buffer(seed, 'hex'), network.bip32).deriveChild(HDKey.HARDENED_OFFSET)
   return {
-    externalAccount: accountZero.derive(0),
-    internalAccount: accountZero.derive(1)
+    externalAccount: accountZero.deriveChild(0),
+    internalAccount: accountZero.deriveChild(1)
   }
 }
 
