@@ -1,13 +1,13 @@
 'use strict';
 
-var Ractive = require('widgets/modals/base')
-var emitter = require('lib/emitter')
-var getWallet = require('lib/wallet').getWallet
-var parseHistoryTx = require('lib/wallet').parseHistoryTx
-var toAtom = require('lib/convert').toAtom
-var toUnitString = require('lib/convert').toUnitString
-var bitcoin = require('cs-wallet').bitcoin
-var showInfo = require('widgets/modals/flash').showInfo
+var Ractive = require('widgets/modals/base');
+var emitter = require('lib/emitter');
+var getWallet = require('lib/wallet').getWallet;
+var parseHistoryTx = require('lib/wallet').parseHistoryTx;
+var toAtom = require('lib/convert').toAtom;
+var toUnitString = require('lib/convert').toUnitString;
+var bitcoin = require('cs-wallet').bitcoin;
+var showInfo = require('widgets/modals/flash').showInfo;
 var getTokenNetwork = require('lib/token').getTokenNetwork;
 
 function open(data) {

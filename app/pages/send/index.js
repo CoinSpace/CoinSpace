@@ -1,19 +1,20 @@
 'use strict';
 
-var Ractive = require('lib/ractive')
-var Big = require('big.js')
-var emitter = require('lib/emitter')
-var db = require('lib/db')
-var getWallet = require('lib/wallet').getWallet
-var getTokenNetwork = require('lib/token').getTokenNetwork
-var showError = require('widgets/modals/flash').showError
-var showInfo = require('widgets/modals/flash').showInfo
-var showConfirmation = require('widgets/modals/confirm-send')
-var showTooltip = require('widgets/modals/tooltip')
-var validateSend = require('lib/wallet').validateSend
-var getDynamicFees = require('lib/wallet').getDynamicFees
-var resolveTo = require('lib/openalias/xhr.js').resolveTo
-var qrcode = require('lib/qrcode')
+var Ractive = require('lib/ractive');
+var Big = require('big.js');
+var emitter = require('lib/emitter');
+var db = require('lib/db');
+var getWallet = require('lib/wallet').getWallet;
+var getTokenNetwork = require('lib/token').getTokenNetwork;
+var showError = require('widgets/modals/flash').showError;
+var showInfo = require('widgets/modals/flash').showInfo;
+var showConfirmation = require('widgets/modals/confirm-send');
+var showTooltip = require('widgets/modals/tooltip');
+var validateSend = require('lib/wallet').validateSend;
+var getDynamicFees = require('lib/wallet').getDynamicFees;
+var resolveTo = require('lib/openalias/xhr.js').resolveTo;
+var qrcode = require('lib/qrcode');
+var bchaddr = require('bchaddrjs');
 
 module.exports = function(el){
   var selectedFiat = '';
@@ -66,12 +67,11 @@ module.exports = function(el){
 
   ractive.on('open-send', function(){
     ractive.set('validating', true);
-    var to = ractive.get('to')
-    resolveTo(to, function(data){
-      to = data.to
-      var alias = data.alias
+    var to = ractive.get('to');
+    resolveTo(to, function(data) {
+      fixBitcoinCashAddress(data);
       getDynamicFees(function(dynamicFees) {
-        validateAndShowConfirm(to, alias, dynamicFees)
+        validateAndShowConfirm(data.to, data.alias, dynamicFees);
       });
     })
   })
@@ -192,6 +192,17 @@ module.exports = function(el){
 
     emitter.emit('send-fiat-changed', currency)
     ractive.fire('bitcoin-to-fiat')
+  }
+
+  function fixBitcoinCashAddress(data) {
+    if (getTokenNetwork() !== 'bitcoincash') return;
+    try {
+      var legacy = bchaddr.toLegacyAddress(data.to);
+      if (legacy !== data.to) {
+        data.alias = data.to;
+        data.to = legacy;
+      }
+    } catch (e) {}
   }
 
   return ractive
