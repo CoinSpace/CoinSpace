@@ -1,3 +1,5 @@
+'use strict';
+
 var db = require('./db');
 var crypto = require('crypto');
 var SEARCH_RADIUS = 1000;

@@ -1,3 +1,5 @@
+'use strict';
+
 var axios = require('axios');
 var db = require('./db');
 var limit = 100;

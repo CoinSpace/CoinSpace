@@ -1,3 +1,5 @@
+'use strict';
+
 var geo = require('./geo');
 var fee = require('./fee');
 var ticker = require('./ticker');
