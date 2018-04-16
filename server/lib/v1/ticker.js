@@ -86,8 +86,23 @@ function getFromCache(symbol) {
   });
 }
 
+function getFromCacheForAppleWatch() {
+  var ticker = db().collection('ticker');
+  var tickers = ['BTC','BCH','LTC','ETH'];
+  return ticker
+    .find({_id: {$in: tickers}})
+    .toArray()
+    .then(function(docs) {
+      return docs.reduce(function(result, doc) {
+        result[doc._id] = doc.data;
+        return result;
+      }, {});
+    });
+}
+
 module.exports = {
   save: save,
   getFromAPI: getFromAPI,
-  getFromCache: getFromCache
+  getFromCache: getFromCache,
+  getFromCacheForAppleWatch: getFromCacheForAppleWatch
 };

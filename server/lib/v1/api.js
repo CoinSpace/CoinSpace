@@ -116,6 +116,14 @@ router.get('/ticker', function(req, res) {
   });
 });
 
+router.get('/ticker/applewatch', function(req, res) {
+  ticker.getFromCacheForAppleWatch().then(function(data) {
+    res.status(200).send(data);
+  }).catch(function(err) {
+    res.status(400).send(err);
+  });
+});
+
 router.get('/ethereum/tokens', function(req, res) {
   ethereumTokens.getAllFromCache().then(function(data) {
     res.status(200).send(data);
