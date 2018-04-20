@@ -35,8 +35,8 @@ db().then(function() {
   if (process.env.MASTER) {
     master.cleanGeo(60 * 60 * 1000) // 1 hour
     master.cacheFees(60 * 60 * 1000) // 1 hour
-    master.cacheTicker(60 * 60 * 1000) // 1 hour
-    master.cacheEthereumTokens(24 * 60 * 60 * 1000) // 24 hours
+    master.cacheTicker(1 * 60 * 1000) // 1 minute
+    master.cacheEthereumTokens(1 * 60 * 1000) // 1 minute
   }
 }).catch(function(error) {
   console.log('error', error);
