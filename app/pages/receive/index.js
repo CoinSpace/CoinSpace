@@ -12,8 +12,6 @@ var showSetDetails = require('widgets/modals/set-details')
 var getTokenNetwork = require('lib/token').getTokenNetwork;
 var qrcode = require('lib/qrcode')
 
-var WatchModule = require('lib/apple-watch')
-
 module.exports = function(el){
   var ractive = new Ractive({
     el: el,
@@ -37,47 +35,17 @@ module.exports = function(el){
     ractive.set('address', getAddress())
   })
 
-  emitter.on('turn-on-mecto-watch', function() {
-    console.log('on turn on mecto')
-    var userInfo = db.get('userInfo');
-    if (userInfo.firstName) {
-      mectoOn()
-    } else {
-      console.log('firstName not setted: ' + userInfo.firstName)
-      var response = {}
-      response.command = 'mectoError'
-      response.errorString = 'User name not setted. Please set user name at iPhone app.'
-      WatchModule.sendMessage(response, 'comandAnswerQueue')
-    }
-  })
+  ractive.on('toggle-broadcast', function() {
+    if (ractive.get('connecting')) return;
 
-  emitter.on('getMectoStatus', function() {
     if (ractive.get('broadcasting')) {
-      sendMectoStatus('on')
-    } else {
-      sendMectoStatus('off')
-    }
-  })
-
-  emitter.on('turn-off-mecto-watch', function() {
-    console.log('on turn off mecto')
-    mectoOff()
-  })
-
-  ractive.on('toggle-broadcast', function(){
-    if(ractive.get('connecting')) return;
-
-    if(ractive.get('broadcasting')) {
       mectoOff()
-      sendMectoStatus('off')
     } else {
-      showSetDetails(function(err){
+      showSetDetails(function(err) {
         if (err) {
-          sendMectoStatus('off')
           return showError({message: 'Could not save your details'})
         }
         mectoOn()
-        sendMectoStatus('on')
       })
     }
   })
@@ -102,13 +70,8 @@ module.exports = function(el){
   function mectoOn(){
     ractive.set('connecting', true)
     ractive.set('btn_message', 'Checking your location')
-    geo.save(function(err){
-      if(err) {
-        console.log('error on mecto = ' + err)
-        var response = {}
-        response.command = 'mectoError'
-        response.errorString = err
-        WatchModule.sendMessage(response, 'comandAnswerQueue')
+    geo.save(function(err) {
+      if (err) {
         return handleMectoError(err)
       }
       ractive.set('connecting', false)
@@ -151,18 +114,6 @@ module.exports = function(el){
     ractive.set('connecting', false)
     ractive.set('broadcasting', false)
     ractive.set('btn_message', 'Turn Mecto on')
-  }
-
-  function sendMectoStatus(mectoStatus) {
-    if (process.env.BUILD_PLATFORM === 'ios') {
-        var response = {}
-        response.command = 'mectoStatus'
-        response.status = mectoStatus
-        WatchModule.sendMessage(response, 'comandAnswerQueue')
-      } else {
-        console.log('not ios platform')
-      }
-
   }
 
   return ractive

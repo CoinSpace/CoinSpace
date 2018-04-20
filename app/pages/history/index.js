@@ -8,8 +8,6 @@ var getWallet = require('lib/wallet').getWallet
 var strftime = require('strftime')
 var showTransactionDetail = require('widgets/modals/transaction-detail')
 
-var WatchModule = require('lib/apple-watch')
-
 module.exports = function(el){
   var network = getTokenNetwork();
   var ractive = new Ractive({
@@ -68,13 +66,6 @@ module.exports = function(el){
     network = getTokenNetwork();
     ractive.set('transactions', txs)
     ractive.set('loadingTx', false)
-    if (process.env.BUILD_PLATFORM === 'ios') {
-      var response = {}
-      response.command = 'transactionMessage'
-      response.transactions = txs
-      WatchModule.setTransactionHistory(txs)
-      WatchModule.sendMessage(response, 'comandAnswerQueue')
-    }
   })
 
   emitter.on('sync', function() {

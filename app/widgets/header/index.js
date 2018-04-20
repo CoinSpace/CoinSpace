@@ -10,8 +10,6 @@ var Big = require('big.js')
 var showError = require('widgets/modals/flash').showError
 var db = require('lib/db')
 
-var WatchModule = require('lib/apple-watch')
-
 module.exports = function(el) {
   var selectedFiat = '';
   var defaultFiat = 'USD';
@@ -44,28 +42,10 @@ module.exports = function(el) {
     var balance = getWallet().getBalance()
     ractive.set('bitcoinBalance', balance)
     ractive.set('denomination', getWallet().denomination)
-    if (process.env.BUILD_PLATFORM === 'ios') {
-      var response = {}
-      response.command = 'balanceMessage'
-      response.balance = balance
-      response.denomination = getWallet().denomination
-      response.walletId = getWallet().getNextAddress()
-
-      WatchModule.sendMessage(response, 'comandAnswerQueue')
-    }
   })
 
   emitter.on('update-balance', function() {
     ractive.set('bitcoinBalance', getWallet().getBalance())
-    if (process.env.BUILD_PLATFORM === 'ios') {
-      var response = {}
-      response.command = 'balanceMessage'
-      response.balance = getWallet().getBalance()
-      response.denomination = getWallet().denomination
-      response.walletId = getWallet().getNextAddress()
-
-      WatchModule.sendMessage(response, 'comandAnswerQueue')
-    }
   })
 
   ractive.on('toggle', function(){
@@ -148,7 +128,6 @@ module.exports = function(el) {
       selectedFiat = defaultFiat;
     }
     ractive.set('selectedFiat', selectedFiat);
-    sendIosCurrency(selectedFiat)
     ractive.observe('selectedFiat', setPreferredCurrency)
   }
 
@@ -169,20 +148,10 @@ module.exports = function(el) {
 
     selectedFiat = currency;
     emitter.emit('header-fiat-changed', selectedFiat)
-    sendIosCurrency(selectedFiat)
 
     db.set('systemInfo', {preferredCurrency: selectedFiat}).catch(function(err) {
       console.error(err);
     });
-  }
-
-  function sendIosCurrency(currency) {
-    if (process.env.BUILD_PLATFORM === 'ios') {
-      WatchModule.sendMessage({
-        command: 'defaultCurrencyMessage',
-        defaultCurrency: currency
-      }, 'comandAnswerQueue')
-    }
   }
 
   ractive.toggleIcon = toggleIcon

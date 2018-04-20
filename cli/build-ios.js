@@ -48,7 +48,6 @@ webpack(webpackConfig, function(error, stats) {
   utils.cordova('plugin add phonegap-plugin-barcodescanner@6.0.8');
   utils.cordova('plugin add cordova-plugin-dialogs@1.3.3');
   utils.cordova('plugin add cordova-plugin-inappbrowser@1.7.1');
-  utils.cordova('plugin add cordova-plugin-apple-watch@0.11.5');
   utils.cordova('plugin add cordova-plugin-statusbar@2.3.0');
   utils.cordova('plugin add cordova-plugin-x-socialsharing@5.2.0');
   utils.cordova('plugin add cordova-plugin-touch-id@3.2.0');

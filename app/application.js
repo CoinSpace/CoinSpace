@@ -14,8 +14,6 @@ window.initCSApp = function() {
   var fadeIn = require('lib/transitions/fade.js').fadeIn
   var ads = require('lib/ads');
 
-  var WatchModule = require('lib/apple-watch')
-
   var appEl = document.getElementById('app')
   var htmlEl = document.documentElement
   var frame = initFrame(appEl)
@@ -25,8 +23,6 @@ window.initCSApp = function() {
   FastClick.attach(document.body)
 
   initGeoOverlay(document.getElementById('geo-overlay'))
-
-  WatchModule.initWatch('group.com.coinspace.wallet')
 
   if (process.env.BUILD_TYPE === 'phonegap') {
     ads.init();
@@ -63,13 +59,6 @@ window.initCSApp = function() {
 
   function updateExchangeRates() {
     ticker.getExchangeRates(denomination(getToken())).then(function(rates) {
-      if (process.env.BUILD_PLATFORM === 'ios') {
-        WatchModule.setRates(rates)
-        WatchModule.sendMessage({
-          command: 'currencyMessage',
-          currency: rates
-        }, 'comandAnswerQueue')
-      }
       emitter.emit('ticker', rates);
     }).catch(console.error);
   }
