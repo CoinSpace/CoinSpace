@@ -65,13 +65,18 @@ function verifyPin(user, pin) {
 
   var counter = user.failed_attempts + 1;
   if (counter >= 5) return deleteUser(user._id);
-  updateFailCount(user._id, counter);
+  incrementFailCount(user._id);
   return Promise.reject({error: 'auth_failed'});
 }
 
 function updateFailCount(id, counter) {
   var collection = db().collection('users');
   return collection.updateOne({_id: id}, {$set: {failed_attempts: counter}});
+}
+
+function incrementFailCount(id) {
+  var collection = db().collection('users');
+  return collection.updateOne({_id: id}, {$inc: {failed_attempts: 1}});
 }
 
 function deleteUser(id) {
