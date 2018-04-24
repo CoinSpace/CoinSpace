@@ -4,7 +4,6 @@ var express = require('express');
 var middleware = require('./middleware');
 
 var api = require('./lib/v1/api');
-var legacyApi = require('./lib/legacy/api');
 var app = express();
 
 var master = require('./lib/v1/master');
@@ -13,7 +12,6 @@ var db = require('./lib/v1/db');
 middleware.init(app);
 
 // API routes
-app.use('', legacyApi);
 app.use('/api/v1', api);
 
 app.use(function(err, req, res, next) {
