@@ -2,7 +2,7 @@
 
 var axios = require('axios');
 var db = require('./db');
-var limit = 100;
+var limit = 50;
 
 function save(tokens) {
   var operations = tokens.map(function(token) {
