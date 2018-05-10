@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.coinspace.app" android-versionCode="2140" version="2.6.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>CoinSpace</name>
+    <name>Coin</name>
     <description>
-        Coin.Space application.
+        Coin application.
     </description>
     <author email="support@coin.space" href="https://www.coin.space">
-        Coin.Space Team
+        Coin Team
     </author>
     <content src="index.html" />
     <access origin="*" />

@@ -1,6 +1,6 @@
 FROM node:6.11.5
 
-WORKDIR /coinspace
+WORKDIR /coin
 COPY package.json ./package.json
 
 COPY ./app/lib/openalias ./app/lib/openalias

@@ -29,7 +29,7 @@
   {{/isPhonegap}}
 
   <div class="about__section">
-	  <a class="about__listitem" onclick="window.open('https://www.coin.space/coinspaceprivacypolicy.html', '_system'); return false;" href="">
+	  <a class="about__listitem" onclick="window.open('https://www.coin.space/coinprivacypolicy.html', '_system'); return false;" href="">
 	  	<div class="about__listitem-title">{{translate("Terms of Use")}}</div>
 	  	<div class="about__listitem-value"><span class="about-arrowright"></span></div>
 	  </a>

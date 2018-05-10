@@ -25,6 +25,9 @@
   width: 100px;
   height: 38px;
   display: block;
+  svg {
+    height: 30px;
+  }
 
   @include breakpoint(portrait) {
     width: 150px;

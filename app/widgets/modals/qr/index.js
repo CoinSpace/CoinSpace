@@ -26,7 +26,7 @@ module.exports = function showTooltip(data){
   })
 
   function mailto(){
-    return 'mailto:?body='+data.address+'%0A%0ASent%20from%20Coin%20Space%20Wallet%0Ahttps%3A%2F%2Fcoin.space'
+    return 'mailto:?body='+data.address+'%0A%0ASent%20from%20Coin%20Wallet%0Ahttps%3A%2F%2Fcoin.space'
   }
 
   return ractive

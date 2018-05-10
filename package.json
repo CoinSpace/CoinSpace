@@ -1,7 +1,7 @@
 {
-  "name": "coinspace",
+  "name": "coin",
   "version": "2.6.3",
-  "description": "Coin.Space Digital currency wallet",
+  "description": "Coin Digital currency wallet",
   "bugs": {
     "url": "https://github.com/CoinSpace/CoinSpace/issues"
   },

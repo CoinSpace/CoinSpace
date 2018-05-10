@@ -52,14 +52,17 @@
 
   ._img {
     width: 168px;
-    height: 92px;
+    height: 90px;
     display: block;
     margin: 0 auto;
     margin-bottom: 10px;
+    svg {
+      height: 100%;
+    }
 
     @include breakpoint(portrait) {
       width: 148px;
-      height: 140px;
+      height: 120px;
       margin-bottom: 20px;
     }
   }

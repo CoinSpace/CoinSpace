@@ -94,7 +94,7 @@ module.exports = function(el){
 
   ractive.on('help-mecto', function() {
     showTooltip({
-      message: 'Mecto lets you broadcast your wallet address to other nearby Coin.Space users by comparing GPS data. This data is deleted once you turn Mecto off.'
+      message: 'Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.'
     })
   })
 

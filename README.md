@@ -1,4 +1,4 @@
-# CoinSpace
-Coin.Space Digital currency wallet
+# Coin
+Coin Digital currency wallet
 
- CoinSpace - A human-friendly digital currency wallet for multiple platforms | Bitcoin Wallet | Litecoin Wallet | Ethereum Wallet
+Coin - A human-friendly digital currency wallet for multiple platforms | Bitcoin Wallet | Litecoin Wallet | Ethereum Wallet
