@@ -179,5 +179,7 @@
     "Please fill out all fields.": "Please fill out all fields.",
     "Please enter Gas Limit greater than zero": "Please enter Gas Limit above zero",
     "You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).": "You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).",
-    "Click to Select": "Click to Select"
+    "Click to Select": "Click to Select",
+    "Copy to Clipboard": "Copy to Clipboard",
+    "Copied!": "Copied!"
 }

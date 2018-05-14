@@ -116,6 +116,7 @@
   ._passphrase {
     @include textselect;
     font-family: monospace;
+    cursor: pointer;
     padding: 20px;
     overflow: auto;
     font-size: 16px;
@@ -125,8 +126,12 @@
     border-top-right-radius: 3px;
     box-shadow: inset 0px 1px 3px 0px rgba(0,0,0,0.25);
 
-    code {
-
+    ._copy {
+      font-size: 13px;
+      border-top: 1px solid #ccc;
+      margin-top: 10px;
+      margin-bottom: -8px;
+      padding-top: 10px;
     }
   }
 }

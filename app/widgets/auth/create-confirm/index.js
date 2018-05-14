@@ -2,6 +2,7 @@
 
 var Ractive = require('../auth')
 var pinPage = require('../pin')
+var Clipboard = require('clipboard')
 var animateCheckbox = require('lib/transitions/highlight.js')
 function confirm(data){
   var ractive = new Ractive({
@@ -10,9 +11,19 @@ function confirm(data){
       actions: require('./actions.ract')
     },
     data: {
-      passphrase: data.mnemonic
+      passphrase: data.mnemonic,
+      isCopied: false,
+      isClipboardEnabled: Clipboard.isSupported()
     }
   })
+
+  var clipboard = new Clipboard(ractive.find('#js-passphrase'));
+  clipboard.on('success', function() {
+      ractive.set('isCopied', true);
+      setTimeout(function() {
+        ractive.set('isCopied', false);
+      }, 1000)
+  });
 
   function isChecked() {
     if (ractive.get('termsChecked') && ractive.get('checked')) {

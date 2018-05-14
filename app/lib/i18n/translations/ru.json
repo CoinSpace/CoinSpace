@@ -179,5 +179,7 @@
     "Please fill out all fields.": "Пожалуйста, заполните все поля.",
     "Please enter Gas Limit greater than zero": "Пожалуйста, введите Лимит Газа больше нуля",
     "You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).": "У вас недостаточно средств Ethereum для оплаты транзакции (%(ethereumRequired)s ETH).",
-    "Click to Select": "Нажмите, чтобы выбрать"
+    "Click to Select": "Нажмите, чтобы выбрать",
+    "Copy to Clipboard": "Скопировать в буфер обмена",
+    "Copied!": "Скопировано!"
 }

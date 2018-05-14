@@ -1,6 +1,16 @@
 <h2 class="_subtitle">{{translate("Your passphrase")}}</h2>
-<p class="_passphrase">{{passphrase}}</p>
-
+<div id="js-passphrase" data-clipboard-text="{{passphrase}}" class="_passphrase">
+  <span>{{passphrase}}</span>
+  {{#if isClipboardEnabled}}
+    <div class="_copy">
+    {{#if isCopied}}
+      {{translate("Copied!")}}
+    {{else}}
+      {{translate("Copy to Clipboard")}}
+    {{/if}}
+    </div>
+  {{/if}}
+</div>
 
 <div class="passphrase__warning" class-alert="checked">
   <div class="_bold">{{translate("Warning!")}}</div>
