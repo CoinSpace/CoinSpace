@@ -180,13 +180,19 @@
 }
 
 .passphrase__warning {
-  font-size: 13px;
+  font-size: 15px;
   background-color: $yellow;
   color: darken($yellow, 25%);
   padding: 10px;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
-
+  ._bold {
+    font-weight: bold;
+  }
+  &.alert {
+    background-color: #ff0000;
+    color: #fff;
+  }
   @include breakpoint(portrait) {
     font-size: 16px;
   }

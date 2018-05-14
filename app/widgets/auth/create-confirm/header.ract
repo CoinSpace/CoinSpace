@@ -2,8 +2,10 @@
 <p class="_passphrase">{{passphrase}}</p>
 
 
-<p class="passphrase__warning">{{translate("Your passphrase will not be shown again.")}}<br />
-  {{translate("Without it you will lose access to your wallet.")}}</p>
+<div class="passphrase__warning" class-alert="checked">
+  <div class="_bold">{{translate("Warning!")}}</div>
+  {{translate("Your passphrase will not be shown again.")}}<br />
+  {{translate("Without it you will lose access to your wallet.")}}</div>
 <div class="passphrase__accept" on-click="toggle-check">
   <div id="check" class="_checkbox">
     {{#checked}}

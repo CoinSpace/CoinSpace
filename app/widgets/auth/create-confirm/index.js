@@ -14,16 +14,16 @@ function confirm(data){
     }
   })
 
-  function isChecked(){
-    if(ractive.get('termsChecked') && ractive.get('checked')) {
+  function isChecked() {
+    if (ractive.get('termsChecked') && ractive.get('checked')) {
         ractive.set('setPin', true)
     } else {
         ractive.set('setPin', false)
     }
   }
 
-  ractive.on('toggle-check', function(){
-    if(ractive.get('checked')) {
+  ractive.on('toggle-check', function() {
+    if (ractive.get('checked')) {
       ractive.set('checked', false)
     } else {
       ractive.set('checked', true)
@@ -31,8 +31,8 @@ function confirm(data){
     isChecked()
   })
 
-  ractive.on('toggle-terms-check', function(){
-    if(ractive.get('termsChecked')) {
+  ractive.on('toggle-terms-check', function() {
+    if (ractive.get('termsChecked')) {
         ractive.set('termsChecked', false)
     } else {
         ractive.set('termsChecked', true)
@@ -41,8 +41,7 @@ function confirm(data){
   })
 
   ractive.on('create-pin', function() {
-    if(!ractive.get('checked')) return animateCheckbox(ractive.find('#check'));
-
+    if (!ractive.get('checked')) return animateCheckbox(ractive.find('#check'));
     pinPage(confirm, data)
   })
 
