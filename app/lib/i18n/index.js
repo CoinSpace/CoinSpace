@@ -11,6 +11,11 @@ var languages = [
 
 translate.setSeparator('*')
 
+translate.setMissingEntryGenerator(function(key) {
+  console.error('Missing translation: ' + key);
+  return key;
+});
+
 function loadTranslation() {
   var language = getLanguage()
   return import(

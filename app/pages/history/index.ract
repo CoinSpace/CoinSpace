@@ -17,14 +17,12 @@
           {{isReceived(this) ? '+' : ''}} {{toUnitString(amount)}}
         </div>
 
-        {{#isConfirmed(confirmations)}}
+        {{#if isConfirmed(confirmations)}}
           <span class='_time'>{{formatTimestamp(timestamp)}}</span>
           <span class='_time'>{{formatConfirmations(confirmations)}}</span>
-        {{/isConfirmed}}
-
-        {{^isConfirmed(confirmations)}}
+        {{else}}
           <span class='_time'>{{translate("pending confirmation")}}</span>
-        {{/isConfirmed}}
+        {{/if}}
 
       </div>
       {{#if isFailed(this)}}
@@ -35,6 +33,19 @@
 
     </div>
   {{/each}}
+  {{#if (hasMore && !loadingTx)}}
+    <div class="loadmore__buttons">
+      {{#if loadingMore}}
+        <div class="send__btn--validating">
+          <span class="_icon">
+            {{>svg_refresh}}
+          </span>
+        </div>
+      {{else}}
+      <div on-click="load-more" class="loadmore__btn">{{translate("Load more")}}</div>
+      {{/if}}
+    </div>
+  {{/if}}
   {{^transactions}}
     {{^loadingTx}}
       <div class="transactions__message">

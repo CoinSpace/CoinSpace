@@ -25,8 +25,8 @@ module.exports = function showTooltip(data){
     ractive.fire('cancel')
   })
 
-  function mailto(){
-    return 'mailto:?body='+data.address+'%0A%0ASent%20from%20Coin%20Wallet%0Ahttps%3A%2F%2Fcoin.space'
+  function mailto() {
+    return 'mailto:?body=' + encodeURIComponent(data.address + '\n\nSent from Coin Wallet\nhttps://coin.space')
   }
 
   return ractive

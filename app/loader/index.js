@@ -32,7 +32,7 @@ function init() {
 }
 
 function setupNetwork() {
-  var networks = ['bitcoin', 'bitcoincash', 'litecoin', 'ethereum', 'testnet'];
+  var networks = ['bitcoin', 'bitcoincash', 'litecoin', 'testnet', 'ethereum', 'ripple'];
   var defaultNetwork = networks[0];
   var lastNetwork = token.getTokenNetwork();
 

@@ -19,7 +19,8 @@ function init(app) {
       "'self'", 'blob:',
       'shapeshift.io',
       'live.coin.space', 'btc.coin.space', 'bch.coin.space', 'ltc.coin.space',
-      'eth.coin.space', 'dev.eth.coin.space'
+      'eth.coin.space', 'dev.eth.coin.space',
+      'xrp.coin.space'
     ]
 
     app.use(csp({

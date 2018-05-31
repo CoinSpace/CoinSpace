@@ -222,10 +222,13 @@
 
 }
 
-.send__gas-limit {
+.send__optional {
 
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  &.last {
+    margin-bottom: 20px;
+  }
   @include breakpoint(portrait) {
     margin-bottom: 40px;
   }

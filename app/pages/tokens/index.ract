@@ -59,4 +59,14 @@
     <h3 class="_name">Litecoin</h3>
   </div>
 
+  <div on-click="switchToken('ripple')" class="token__item token--ripple">
+    {{#if isCurrentToken('ripple')}}
+    <span class="_arrow">{{>svg_arrow}}</span>
+    {{/if}}
+    <span class="_icon">
+      {{>svg_token_ripple}}
+    </span>
+    <h3 class="_name">Ripple</h3>
+  </div>
+
 </div>

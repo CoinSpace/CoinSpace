@@ -51,13 +51,37 @@
 
       </div>
 
+      {{#isRipple}}
+      <div class="send__optional">
+        <label class="_label" for="destination-tag">{{translate("Destination tag")}}
+          <div class="input__container">
+            <input id="destination-tag" class="_input" placeholder="{{translate("(optional)")}}" type="number" twoway="false" min="0" max="4294967295" step="1"  value="{{destinationTag}}" on-enter="open-send" />
+          </div>
+        </label>
+        <span class="_help" on-click="help-destination-tag">
+          {{>svg_help}}
+        </span>
+      </div>
+
+      <div class="send__optional last">
+        <label class="_label" for="invoice-id">{{translate("Invoice ID")}}
+          <div class="input__container">
+            <input id="invoice-id" class="_input" placeholder="{{translate("(optional)")}}" type="text" twoway="false" value="{{invoiceId}}" on-enter="open-send" />
+          </div>
+        </label>
+        <span class="_help" on-click="help-invoice-id">
+          {{>svg_help}}
+        </span>
+      </div>
+      {{/isRipple}}
+
       {{#isEthereum}}
-      <div class="send__gas-limit">
-          <label class="_label" for="gas-limit">{{translate("Gas limit")}}
-            <div class="input__container">
-              <input id="gas-limit" class="_input" type="number" twoway="false" min="0" step="1" value="{{gasLimit}}" on-enter="open-send" />
-            </div>
-          </label>
+      <div class="send__optional last">
+        <label class="_label" for="gas-limit">{{translate("Gas limit")}}
+          <div class="input__container">
+            <input id="gas-limit" class="_input" type="number" twoway="false" min="0" step="1" value="{{gasLimit}}" on-enter="open-send" />
+          </div>
+        </label>
         <span class="_help" on-click="help-gas-limit">
           {{>svg_help}}
         </span>

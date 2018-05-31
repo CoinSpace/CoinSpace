@@ -29,6 +29,11 @@
     background-color: darken($ethereal, 30%);
   }
 }
+.ripple {
+  .header {
+    background-color: darken($ripple, 30%);
+  }
+}
 .bitcoincash {
   .header {
     background-color: darken($bitcoincash, 30%);
@@ -64,7 +69,7 @@
   }
 }
 
-.ethereum {
+.ethereum, .ripple {
   .header__balance {
     ._amount {
       font-size: 26px;

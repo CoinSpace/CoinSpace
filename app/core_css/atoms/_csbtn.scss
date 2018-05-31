@@ -49,6 +49,13 @@
   }
 }
 
+.ripple {
+  .csbtn {
+    background-color: $ripple;
+    box-shadow: 0 2px 0 0 darken($ripple, 10%);
+  }
+}
+
 .bitcoincash {
   .csbtn {
     background-color: $bitcoincash;

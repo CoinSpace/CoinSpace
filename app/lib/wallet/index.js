@@ -17,6 +17,7 @@ var bitcoin = CsWallet.bitcoin
 var request = require('lib/request')
 var cache = require('memory-cache')
 var EthereumWallet = require('cs-ethereum-wallet');
+var RippleWallet = require('cs-ripple-wallet');
 var convert = require('lib/convert');
 var getToken = require('lib/token').getToken;
 var setToken = require('lib/token').setToken;
@@ -36,7 +37,8 @@ var Wallet = {
   bitcoincash: CsWallet,
   litecoin: CsWallet,
   testnet: CsWallet,
-  ethereum: EthereumWallet
+  ethereum: EthereumWallet,
+  ripple: RippleWallet
 }
 
 var urlRoot = process.env.SITE_URL
@@ -180,6 +182,10 @@ function initWallet(networkName, done, txDone) {
     options.internalAccount = accounts.internalAccount;
     options.minConf = 4;
     convert.setDecimals(8);
+  } else if (networkName === 'ripple') {
+    options.seed = seed;
+    options.txsPerPage = 20;
+    convert.setDecimals(0);
   }
 
   wallet = new Wallet[networkName](options);
@@ -210,11 +216,13 @@ function getDerivedAccounts(networkName) {
 }
 
 function parseHistoryTx(tx) {
-  var networkName = wallet.networkName
+  var networkName = wallet.networkName;
   if (networkName === 'ethereum') {
-    return utils.parseEthereumTx(tx)
+    return utils.parseEthereumTx(tx);
+  } else if (networkName === 'ripple') {
+    return tx;
   } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(networkName) !== -1) {
-    return utils.parseBtcLtcTx(tx)
+    return utils.parseBtcLtcTx(tx);
   }
 }
 
@@ -239,7 +247,7 @@ function reset() {
 }
 
 function getDynamicFees(callback) {
-  if (wallet.networkName === 'ethereum') return callback();
+  if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(wallet.networkName) === -1) return callback();
   var fees = cache.get('fees')
 
   if (fees) {

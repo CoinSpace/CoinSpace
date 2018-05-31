@@ -19,7 +19,7 @@
     <div class="detail__strings">
 
       <h3 class="_title">{{translate("Transaction Id:")}}</h3>
-      {{#if isNetwork('bitcoin')}}
+      {{#if isNetwork('bitcoin') || isNetwork('testnet')}}
       <a href="" onclick="window.open('https://btc.coin.space/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
       {{elseif isNetwork('bitcoincash')}}
       <a href="" onclick="window.open('https://bch.coin.space/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>

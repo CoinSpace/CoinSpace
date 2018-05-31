@@ -66,7 +66,10 @@ function open() {
 
   function handleError(err) {
     ractive.set('isLoading', false);
-    showError({message: err.message});
+    if (/^Private key equal wallet private key/.test(err.message)) {
+      return showError({message: 'Please enter a private key other than your wallet private key'});
+    }
+    return showError({message: err.message});
   }
 
   return ractive;

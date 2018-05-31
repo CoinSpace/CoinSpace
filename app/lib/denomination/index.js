@@ -5,7 +5,8 @@ var symbols = {
   testnet: 'BTC',
   bitcoincash: 'BCH',
   litecoin: 'LTC',
-  ethereum: 'ETH'
+  ethereum: 'ETH',
+  ripple: 'XRP'
 }
 
 function getDenomination(token) {

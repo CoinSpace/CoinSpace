@@ -172,6 +172,9 @@ module.exports = function(el) {
       if (err.message === 'invalid_to_address') {
         return showError({message: 'Please enter a valid address to send to'});
       }
+      if (/Please use the precise/.test(err.message)) {
+        return showError({message: 'Exchange is currently unavailable for this pair'});
+      }
       console.error(err.message);
       return showError({message: err.message});
     });

@@ -60,6 +60,13 @@
     }
   }
 }
+.ripple {
+  .tooltip__link {
+    a {
+      color: $ripple;
+    }
+  }
+}
 .bitcoincash {
   .tooltip__link {
     a {

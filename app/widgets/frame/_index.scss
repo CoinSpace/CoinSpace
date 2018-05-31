@@ -75,6 +75,11 @@
     background-color: darken($ethereal, 30%);
   }
 }
+.ripple {
+  .main__iphone_x {
+    background-color: darken($ripple, 30%);
+  }
+}
 .bitcoincash {
   .main__iphone_x {
     background-color: darken($bitcoincash, 30%);

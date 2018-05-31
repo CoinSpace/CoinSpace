@@ -1,0 +1,52 @@
+<div class="modal _cancel">
+  <div class="modal__content confirm {{#success}}_success{{/success}} {{#error}}_error{{/error}}">
+
+  {{#confirmation}}
+
+    <h3 class="confirm__header">{{translate("Confirm transaction")}}</h3>
+
+    <div class="confirm__transaction">
+
+      <div class="_amount">
+        <span class="_value">{{amount}}</span>
+        <span class="_currency">{{denomination}}</span>
+      </div>
+
+      <span class="_fee">{{feeSign}}{{fee}} {{feeDenomination}} {{translate("transaction fee")}}</span>
+
+      <span class="_icon">
+        {{>svg_sendto}}
+      </span>
+      {{#importTxOptions}}
+      <span class="_info_medium">{{translate("Your wallet address")}}</span>
+      {{/importTxOptions}}
+      <span class="_address">{{to}}</span>
+      <span class="_info_medium">{{alias}}</span>
+
+    </div>
+
+    <div class="confirm__inputs">
+      <div class="_cancel">{{translate("Cancel")}}</div>
+      {{#if sending}}
+        <div class="_send--sending">
+          <span class="_icon">
+            {{>svg_refresh}}
+          </span>
+        </div>
+      {{else}}
+        <div class="_send" on-click="send">{{translate("Send")}}</div>
+      {{/if}}
+    </div>
+
+  {{/confirmation}}
+
+  {{#success}}
+    {{>success}}
+  {{/success}}
+
+  {{#error}}
+    {{>error}}
+  {{/error}}
+
+  </div>
+</div>

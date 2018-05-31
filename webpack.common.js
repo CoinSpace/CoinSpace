@@ -11,6 +11,10 @@ module.exports = {
     chunkFilename: 'assets/js/[name].[hash:8].js',
     path: path.resolve(__dirname, 'build'),
   },
+  node: {
+    net: 'empty',
+    tls: 'empty'
+  },
   resolve: {
     alias: {
       lib: path.resolve(__dirname, 'app/lib'),

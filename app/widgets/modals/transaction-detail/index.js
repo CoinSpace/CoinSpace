@@ -7,6 +7,8 @@ module.exports = function(data) {
   if (data.isNetwork('ethereum')) {
     data.isPendingFee = data.transaction.fee === -1;
     content = require('./contentEthereum.ract')
+  } else if (data.isNetwork('ripple')) {
+    content = require('./contentRipple.ract')
   } else {
     content = require('./contentBtcBchLtc.ract')
   }

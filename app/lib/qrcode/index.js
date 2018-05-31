@@ -51,9 +51,14 @@ function scan(data) {
 
         emitter.emit('prefill-wallet', address, data.context)
 
-        var match = result.text.match(/amount=([0-9.]+)/)
+        var match;
+        match = result.text.match(/amount=([0-9.]+)/)
         if (match && match[1]) {
           emitter.emit('prefill-value', match[1], data.context)
+        }
+        match = result.text.match(/dt=(\d+)/)
+        if (match && match[1]) {
+          emitter.emit('prefill-destination-tag', match[1], data.context)
         }
       }
     },

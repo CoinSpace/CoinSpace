@@ -2,7 +2,7 @@
 
 var request = require('lib/request');
 var urlRoot = 'https://shapeshift.io';
-var prioritySymbols = ['BTC', 'BCH', 'LTC', 'ETH'];
+var prioritySymbols = ['BTC', 'BCH', 'ETH', 'LTC', 'XRP'];
 
 function getCoins() {
   return request({
@@ -58,7 +58,7 @@ function shift(options) {
 
 function txStat(depositAddress) {
   return request({
-    url: urlRoot + '/txStat/' + depositAddress
+    url: urlRoot + '/txStat/' + encodeURIComponent(depositAddress)
   }).then(function(data) {
     if (data.error && data.status !== 'failed') throw new Error(data.error);
     return data;

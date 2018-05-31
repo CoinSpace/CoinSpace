@@ -64,8 +64,15 @@ var config = merge(common, {
       safe: true
     }),
     new UglifyJSPlugin({
-      mangle: {
-        except: ['BigInteger','ECPair','Point']
+      uglifyOptions: {
+        mangle: {
+          reserved: ['BigInteger','ECPair','Point', '_', 'RippleError', 'RippledError', 'UnexpectedError',
+            'LedgerVersionError', 'ConnectionError', 'NotConnectedError',
+            'DisconnectedError', 'TimeoutError', 'ResponseFormatError',
+            'ValidationError', 'NotFoundError', 'MissingLedgerHistoryError',
+            'PendingLedgerVersionError'
+          ]
+        }
       }
     }),
     new ExtractTextPlugin({

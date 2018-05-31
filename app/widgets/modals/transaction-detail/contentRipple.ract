@@ -1,0 +1,49 @@
+{{#transaction}}
+<div class="modal _cancel">
+  <div class="modal__content transaction__detail _cancel">
+    <span class="modal__cancel" on-click="close">
+      {{>svg_close}}
+    </span>
+
+    {{#if isFailed(this)}}
+      <div class="_status">{{translate("Failed")}}</div>
+    {{/if}}
+
+    <div class="_amount {{isReceived(this) ? 'green' : 'red'}}">
+      {{isReceived(this) ? '+' : ''}} {{toUnitString(amount)}}
+    </div>
+
+    <div class='_time'>{{formatTimestamp(timestamp)}}</div>
+
+    <div class="detail__strings">
+
+      <h3 class="_title">{{translate("Transaction Id:")}}</h3>
+      <a href="" onclick="window.open('https://xrpcharts.ripple.com/#/transactions/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
+
+      <h3 class="_title">{{translate("Transaction Fee:")}}</h3>
+      <code class="_value">{{toUnitString(fee)}}</code>
+
+      <h3 class="_title">{{translate("From:")}}</h3>
+      <code class="_value">
+        <span class="_address">{{from}}</span>
+      </code>
+
+      <h3 class="_title">{{translate("To:")}}</h3>
+      <code class="_value">
+        <span class="_address">{{to}}</span>
+      </code>
+
+      {{#if destinationTag !== undefined}}
+      <h3 class="_title">{{translate("Destination tag:")}}</h3>
+      <code class="_value">{{destinationTag}}</code>
+      {{/if}}
+
+      {{#if invoiceId}}
+      <h3 class="_title">{{translate("Invoice ID:")}}</h3>
+      <code class="_value">{{invoiceId}}</code>
+      {{/if}}
+    </div>
+
+  </div>
+</div>
+{{/transaction}}

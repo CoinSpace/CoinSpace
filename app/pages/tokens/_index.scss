@@ -89,6 +89,13 @@
   }
 }
 
+.token--ripple {
+  background-color: $ripple;
+  ._name {
+    color: white;
+  }
+}
+
 .token--ethereum {
   background-color: $ethereal;
   ._name {

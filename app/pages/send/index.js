@@ -29,8 +29,11 @@ module.exports = function(el){
       exchangeRates: {},
       qrScannerAvailable: qrcode.isScanAvailable,
       isEthereum: false,
+      isRipple: false,
       validating: false,
-      gasLimit: ''
+      gasLimit: '',
+      destinationTag: '',
+      invoiceId: '',
     }
   })
 
@@ -45,8 +48,18 @@ module.exports = function(el){
     ractive.fire('bitcoin-to-fiat')
   })
 
+  emitter.on('prefill-destination-tag', function(tag, context) {
+    if (context !== 'send') return;
+    var $tag = ractive.find('#destination-tag');
+    if ($tag) {
+      $tag.value = tag;
+    }
+  })
+
   ractive.on('before-show', function() {
-    ractive.set('isEthereum', getTokenNetwork() === 'ethereum');
+    var network = getTokenNetwork();
+    ractive.set('isEthereum', network === 'ethereum');
+    ractive.set('isRipple', network === 'ripple');
   });
 
   ractive.on('open-qr', function() {
@@ -155,18 +168,40 @@ module.exports = function(el){
     })
   })
 
+  ractive.on('help-destination-tag', function() {
+    showTooltip({
+      message: 'An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.'
+    })
+  })
+
+  ractive.on('help-invoice-id', function() {
+    showTooltip({
+      message: 'A 256-bit hash that can be used to identify a particular payment.'
+    })
+  })
+
   function validateAndShowConfirm(to, alias, dynamicFees) {
     var amount = ractive.find('#bitcoin').value;
     var wallet = getWallet();
+    var options = {
+      wallet: wallet,
+      to: to,
+      amount: amount,
+      dynamicFees: dynamicFees
+    }
     if (wallet.networkName === 'ethereum') {
       wallet.gasLimit = ractive.find('#gas-limit').value;
+    } else if (wallet.networkName === 'ripple') {
+      options.tag = ractive.find('#destination-tag').value;
+      options.invoiceId = ractive.find('#invoice-id').value;
     }
-    validateSend(wallet, to, amount, dynamicFees, function(err) {
+    validateSend(options, function(err) {
       ractive.set('validating', false);
-      if(err) {
+      if (err) {
         var interpolations = err.interpolations
-        if(err.message.match(/trying to empty your wallet/)){
+        if (/trying to empty your wallet/.test(err.message)) {
           ractive.find('#bitcoin').value = interpolations.sendableBalance;
+          ractive.fire('bitcoin-to-fiat');
           return showInfo({message: err.message, interpolations: interpolations})
         }
         return showError({title: 'Uh Oh...', message: err.message, href: err.href, linkText: err.linkText, interpolations: interpolations})
@@ -178,10 +213,16 @@ module.exports = function(el){
         amount: ractive.find('#bitcoin').value, // don't change this to amount. 'value' could be modified above
         denomination: ractive.get('denomination'),
         dynamicFees: dynamicFees,
+        tag: options.tag,
+        invoiceId: options.invoiceId,
         onSuccessDismiss: function() {
           ractive.set({to: ''});
           ractive.find('#bitcoin').value = '';
           ractive.find('#fiat').value = '';
+          if (wallet.networkName === 'ripple') {
+            ractive.find('#destination-tag').value = '';
+            ractive.find('#invoice-id').value = '';
+          }
         }
       })
     })

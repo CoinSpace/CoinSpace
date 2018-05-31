@@ -13,6 +13,11 @@
     background-color: darken($ethereal, 20%);
   }
 }
+.ripple {
+  #tabs {
+    background-color: darken($ripple, 20%);
+  }
+}
 .bitcoincash {
   #tabs {
     background-color: darken($bitcoincash, 20%);
@@ -65,6 +70,13 @@
   #tabs .tabs .tab {
     &.active {
         border-bottom: 4px solid darken($ethereal, 30%);
+    }
+  }
+}
+.ripple {
+  #tabs .tabs .tab {
+    &.active {
+        border-bottom: 4px solid darken($ripple, 30%);
     }
   }
 }

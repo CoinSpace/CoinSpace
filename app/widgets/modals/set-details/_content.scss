@@ -68,6 +68,14 @@
     }
   }
 }
+.ripple {
+  .set-details {
+    ._btn--loading {
+      background-color: $ripple;
+      box-shadow:inset 0 1px 1px 1px darken($ripple, 20%);
+    }
+  }
+}
 .bitcoincash {
   .set-details {
     ._btn--loading {
