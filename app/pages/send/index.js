@@ -123,9 +123,9 @@ module.exports = function(el){
     ractive.observe('selectedFiat', setPreferredCurrency)
   }
 
-  ractive.on('fiat-to-bitcoin', function() {
+  ractive.on('fiat-to-bitcoin', function(context) {
     var fiat = ractive.find('#fiat').value;
-    if (!fiat) return;
+    if (!fiat || context.event.code === 'Tab') return;
 
     var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')];
     var bitcoin = '0';
@@ -194,6 +194,7 @@ module.exports = function(el){
     } else if (wallet.networkName === 'ripple') {
       options.tag = ractive.find('#destination-tag').value;
       options.invoiceId = ractive.find('#invoice-id').value;
+      options.amount = new Big(options.amount).toFixed(6).replace(/0+$/, '').replace(/\.+$/, '');
     }
     validateSend(options, function(err) {
       ractive.set('validating', false);
@@ -210,7 +211,7 @@ module.exports = function(el){
       showConfirmation({
         to: to,
         alias: alias,
-        amount: ractive.find('#bitcoin').value, // don't change this to amount. 'value' could be modified above
+        amount: options.amount,
         denomination: ractive.get('denomination'),
         dynamicFees: dynamicFees,
         tag: options.tag,
