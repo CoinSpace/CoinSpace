@@ -57,15 +57,23 @@ function init(app) {
     httpOnly: true,
     secure: isProduction()
   }))
+  app.use(cookieOnion)
   app.use(compress())
 
   var cacheControl = isProduction() ? { maxAge: anHour } : null
   app.use(express.static(path.join(__dirname, '..', 'build'), cacheControl))
 }
 
+function cookieOnion(req, res, next) {
+  if (isOnionDomain(req)) {
+    req.sessionOptions.secure = false;
+  }
+  next();
+}
+
 function requireHTTPS(req, res, next) {
   var herokuForwardedFromHTTPS = req.headers['x-forwarded-proto'] === 'https';
-  if (!herokuForwardedFromHTTPS && isProduction()) {
+  if (!herokuForwardedFromHTTPS && !isOnionDomain(req) && isProduction()) {
     return res.redirect('https://' + req.get('host') + req.url);
   }
   next();
@@ -73,6 +81,10 @@ function requireHTTPS(req, res, next) {
 
 function isProduction() {
   return process.env.NODE_ENV === 'production';
+}
+
+function isOnionDomain(req) {
+  return req.hostname === process.env.DOMAIN_ONION;
 }
 
 module.exports = {
