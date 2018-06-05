@@ -41,7 +41,7 @@ var Wallet = {
   ripple: RippleWallet
 }
 
-var urlRoot = process.env.SITE_URL
+var urlRoot = window.urlRoot
 
 function createWallet(passphrase, network, callback) {
   var message = passphrase ? 'Decoding seed phrase' : 'Generating'

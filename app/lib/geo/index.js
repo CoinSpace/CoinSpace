@@ -5,7 +5,7 @@ var db = require('lib/db');
 var getWallet = require('lib/wallet').getWallet;
 var getId = require('lib/wallet').getId;
 var getTokenNetwork = require('lib/token').getTokenNetwork;
-var urlRoot = process.env.SITE_URL;
+var urlRoot = window.urlRoot;
 var userInfo = {};
 var networks = {
   BTC: 'bitcoin',

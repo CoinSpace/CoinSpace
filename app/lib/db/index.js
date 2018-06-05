@@ -8,7 +8,7 @@ var encrypt = AES.encrypt;
 var decrypt = AES.decrypt;
 
 var request = require('lib/request');
-var urlRoot = process.env.SITE_URL;
+var urlRoot = window.urlRoot;
 
 var id = null;
 var secret = null;

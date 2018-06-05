@@ -1,5 +1,10 @@
 'use strict';
 
+window.urlRoot = process.env.SITE_URL;
+if (process.env.BUILD_TYPE !== 'phonegap') {
+  window.urlRoot = '/' + window.urlRoot.split('/').slice(3).join('/')
+}
+
 window.initCSApp = function() {
   var ticker = require('lib/ticker-api')
   var emitter = require('lib/emitter')

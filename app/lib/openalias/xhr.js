@@ -1,5 +1,5 @@
 var request = require('lib/request')
-var urlRoot = process.env.SITE_URL
+var urlRoot = window.urlRoot;
 var getTokenNetwork = require('lib/token').getTokenNetwork;
 
 function resolveTo(to, callback){

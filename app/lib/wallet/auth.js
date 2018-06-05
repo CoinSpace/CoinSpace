@@ -2,7 +2,7 @@
 
 var request = require('lib/request')
 var db = require('lib/db')
-var urlRoot = process.env.SITE_URL
+var urlRoot = window.urlRoot
 
 function register(wallet_id, pin, callback) {
   postCredentials('register', { wallet_id: wallet_id, pin: pin }, callback)

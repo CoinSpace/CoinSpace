@@ -5,7 +5,7 @@ var showError = require('widgets/modals/flash').showError;
 var qrcode = require('lib/qrcode');
 var emitter = require('lib/emitter');
 var request = require('lib/request');
-var urlRoot = process.env.SITE_URL;
+var urlRoot = window.urlRoot;
 var db = require('lib/db');
 
 var tokens = [];

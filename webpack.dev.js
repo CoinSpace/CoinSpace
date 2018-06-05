@@ -14,6 +14,7 @@ module.exports = merge(common, {
     publicPath: '/'
   },
   devServer: {
+    disableHostCheck: true,
     contentBase: false,
     hot: true,
     port: 8000,
