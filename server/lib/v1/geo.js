@@ -43,7 +43,7 @@ function removeOlderThan(age) {
 }
 
 function search(lat, lon, userInfo) {
-  if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet', 'ethereum', 'ripple'].indexOf(userInfo.network) === -1) {
+  if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet', 'ethereum', 'ripple', 'stellar'].indexOf(userInfo.network) === -1) {
     return Promise.reject({error: 'unsupported_network'});
   }
   var collection = db().collection('mecto');

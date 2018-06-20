@@ -12,6 +12,7 @@ var showConfirmation = require('widgets/modals/confirm-send');
 var showTooltip = require('widgets/modals/tooltip');
 var validateSend = require('lib/wallet').validateSend;
 var getDynamicFees = require('lib/wallet').getDynamicFees;
+var getDestinationInfo = require('lib/wallet').getDestinationInfo;
 var resolveTo = require('lib/openalias/xhr.js').resolveTo;
 var qrcode = require('lib/qrcode');
 var bchaddr = require('bchaddrjs');
@@ -30,10 +31,12 @@ module.exports = function(el){
       qrScannerAvailable: qrcode.isScanAvailable,
       isEthereum: false,
       isRipple: false,
+      isStellar: false,
       validating: false,
       gasLimit: '',
       destinationTag: '',
       invoiceId: '',
+      memo: ''
     }
   })
 
@@ -60,6 +63,7 @@ module.exports = function(el){
     var network = getTokenNetwork();
     ractive.set('isEthereum', network === 'ethereum');
     ractive.set('isRipple', network === 'ripple');
+    ractive.set('isStellar', network === 'stellar');
   });
 
   ractive.on('open-qr', function() {
@@ -81,11 +85,59 @@ module.exports = function(el){
   ractive.on('open-send', function(){
     ractive.set('validating', true);
     var to = ractive.get('to');
-    resolveTo(to, function(data) {
+
+    Promise.all([
+      resolveTo(to),
+      getDynamicFees(),
+      getDestinationInfo(to)
+    ]).then(function(results) {
+
+      var data = results[0];
       fixBitcoinCashAddress(data);
-      getDynamicFees(function(dynamicFees) {
-        validateAndShowConfirm(data.to, data.alias, dynamicFees);
-      });
+
+      var dynamicFees = results[1];
+      var destinationInfo = results[2];
+
+      var wallet = getWallet();
+
+      var options = {
+        wallet: wallet,
+        to: data.to,
+        alias: data.alias,
+        dynamicFees: dynamicFees,
+        destinationInfo: destinationInfo,
+        amount: ractive.find('#bitcoin').value,
+        denomination: ractive.get('denomination'),
+        onSuccessDismiss: function() {
+          ractive.set({to: ''});
+          ractive.find('#bitcoin').value = '';
+          ractive.find('#fiat').value = '';
+          if (wallet.networkName === 'ripple') {
+            ractive.find('#destination-tag').value = '';
+            ractive.find('#invoice-id').value = '';
+          } else if (wallet.networkName === 'stellar') {
+            ractive.find('#memo').value = '';
+          }
+        }
+      }
+
+      if (wallet.networkName === 'ethereum') {
+        wallet.gasLimit = ractive.find('#gas-limit').value;
+      } else if (wallet.networkName === 'ripple') {
+        options.tag = ractive.find('#destination-tag').value;
+        options.invoiceId = ractive.find('#invoice-id').value;
+        options.amount = new Big(options.amount || '0').toFixed(6).replace(/0+$/, '').replace(/\.+$/, '');
+      } else if (wallet.networkName === 'stellar') {
+        options.amount = new Big(options.amount || '0').toFixed(7).replace(/0+$/, '').replace(/\.+$/, '');
+        options.memo = ractive.find('#memo').value;
+      }
+
+      validateAndShowConfirm(options);
+    }).catch(function(e) {
+      ractive.set('validating', false);
+      if (/is not a valid address/.test(e.message)) {
+        return showError({title: 'Uh Oh...', message: 'Please enter a valid address to send to'})
+      }
     })
   })
 
@@ -180,53 +232,27 @@ module.exports = function(el){
     })
   })
 
-  function validateAndShowConfirm(to, alias, dynamicFees) {
-    var amount = ractive.find('#bitcoin').value;
-    var wallet = getWallet();
-    var options = {
-      wallet: wallet,
-      to: to,
-      amount: amount,
-      dynamicFees: dynamicFees
-    }
-    if (wallet.networkName === 'ethereum') {
-      wallet.gasLimit = ractive.find('#gas-limit').value;
-    } else if (wallet.networkName === 'ripple') {
-      options.tag = ractive.find('#destination-tag').value;
-      options.invoiceId = ractive.find('#invoice-id').value;
-      options.amount = new Big(options.amount).toFixed(6).replace(/0+$/, '').replace(/\.+$/, '');
-    }
-    validateSend(options, function(err) {
-      ractive.set('validating', false);
-      if (err) {
-        var interpolations = err.interpolations
-        if (/trying to empty your wallet/.test(err.message)) {
-          ractive.find('#bitcoin').value = interpolations.sendableBalance;
-          ractive.fire('bitcoin-to-fiat');
-          return showInfo({message: err.message, interpolations: interpolations})
-        }
-        return showError({title: 'Uh Oh...', message: err.message, href: err.href, linkText: err.linkText, interpolations: interpolations})
-      }
-
-      showConfirmation({
-        to: to,
-        alias: alias,
-        amount: options.amount,
-        denomination: ractive.get('denomination'),
-        dynamicFees: dynamicFees,
-        tag: options.tag,
-        invoiceId: options.invoiceId,
-        onSuccessDismiss: function() {
-          ractive.set({to: ''});
-          ractive.find('#bitcoin').value = '';
-          ractive.find('#fiat').value = '';
-          if (wallet.networkName === 'ripple') {
-            ractive.find('#destination-tag').value = '';
-            ractive.find('#invoice-id').value = '';
-          }
-        }
-      })
+  ractive.on('help-memo', function() {
+    showTooltip({
+      message: 'The memo contains optional extra information. A string up to 28-bytes long.'
     })
+  })
+
+  function validateAndShowConfirm(options) {
+    try {
+      validateSend(options);
+      ractive.set('validating', false);
+      showConfirmation(options);
+    } catch (err) {
+      ractive.set('validating', false);
+      var interpolations = err.interpolations
+      if (/trying to empty your wallet/.test(err.message)) {
+        ractive.find('#bitcoin').value = interpolations.sendableBalance;
+        ractive.fire('bitcoin-to-fiat');
+        return showInfo({message: err.message, interpolations: interpolations})
+      }
+      return showError({title: 'Uh Oh...', message: err.message, href: err.href, linkText: err.linkText, interpolations: interpolations})
+    }
   }
 
   function setPreferredCurrency(currency, old){

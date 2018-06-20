@@ -51,25 +51,16 @@ function open(data) {
     if (data.importTxOptions) {
       tx = wallet.createImportTx(data.importTxOptions);
     } else {
-      tx = wallet.createTx(data.to, toAtom(data.amount), data.tag, data.invoiceId, !data.destinationInfo.isActive)
+      tx = wallet.createTx(data.to, toAtom(data.amount), data.memo, !data.destinationInfo.isActive)
     }
+
     return tx;
   }
 
   function handleTransactionError(err) {
     console.error(err);
     ractive.set('confirmation', false)
-    var wallet = getWallet();
-    var hasResponseData = err.response && err.response.data;
-    if (hasResponseData && err.response.data.resultCode === 'tecNO_DST_INSUF_XRP') {
-      ractive.set('interpolations', {
-        minReserve: wallet.minReserve,
-        denomination: wallet.denomination
-      });
-      ractive.set('error', "Recipient's wallet isn't activated. You can send only amount greater than :minReserve :denomination.");
-    } else {
-      ractive.set('error', err.message)
-    }
+    ractive.set('error', err.message)
   }
 
   return ractive

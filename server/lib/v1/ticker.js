@@ -9,6 +9,7 @@ var fsyms = [
   'LTC',
   'ETH',
   'XRP',
+  'XLM',
   'USD'
 ]
 

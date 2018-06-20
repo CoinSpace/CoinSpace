@@ -75,6 +75,19 @@
       </div>
       {{/isRipple}}
 
+      {{#isStellar}}
+      <div class="send__optional last">
+        <label class="_label" for="memo">{{translate("Memo")}}
+          <div class="input__container">
+            <input id="memo" class="_input" placeholder="{{translate("(optional)")}}" type="text" twoway="false" maxlength="28" value="{{memo}}" on-enter="open-send" />
+          </div>
+        </label>
+        <span class="_help" on-click="help-memo">
+          {{>svg_help}}
+        </span>
+      </div>
+      {{/isStellar}}
+
       {{#isEthereum}}
       <div class="send__optional last">
         <label class="_label" for="gas-limit">{{translate("Gas limit")}}

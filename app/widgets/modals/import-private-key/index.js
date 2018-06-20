@@ -46,7 +46,7 @@ function open() {
         return showInfo({message: 'This private key has no coins for transfer.'});
       }
       importTxOptions.to = to;
-      getDynamicFees(function(dynamicFees) {
+      return getDynamicFees().then(function(dynamicFees) {
         showConfirmation({
           to: importTxOptions.to,
           amount: toUnitString(importTxOptions.amount),

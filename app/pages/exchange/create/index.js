@@ -26,7 +26,7 @@ module.exports = function(el) {
       returnAddress: '',
       toAddress: '',
       toSymbol: '',
-      rate: '',
+      rate: '?',
       coins: [],
       isGeoEnabled: function(symbol) {
         return Object.keys(geo.networks).indexOf(symbol) !== -1;
@@ -55,13 +55,13 @@ module.exports = function(el) {
   });
 
   ractive.on('before-show', function() {
-    fromSymbolObserver.silence();
-    ractive.set('fromSymbol', denomination(getTokenNetwork()));
-    fromSymbolObserver.resume();
-
     shapeshift.getCoins().then(function(coins) {
       ractive.set('isLoading', false);
       ractive.set('coins', coins);
+
+      fromSymbolObserver.silence();
+      ractive.set('fromSymbol', denomination(getTokenNetwork()));
+      fromSymbolObserver.resume();
 
       var fromSymbol = ractive.get('fromSymbol');
       if (fromSymbol === ractive.get('toSymbol')) {
@@ -144,6 +144,7 @@ module.exports = function(el) {
   });
 
   ractive.on('confirm', function() {
+    if (ractive.get('rate') === '?') return showError({message: 'Exchange is currently unavailable for this pair'});
     var options = {
       fromSymbol: ractive.get('fromSymbol'),
       returnAddress: ractive.get('returnAddress'),
@@ -224,6 +225,7 @@ module.exports = function(el) {
     }).catch(function(err) {
       ractive.set('isLoadingRate', false);
       ractive.set('rate', '?');
+      if (/Pair (.+) is currently unavailable/.test(err.message)) return // silence
       console.error(err);
       return showError({message: err.message});
     });

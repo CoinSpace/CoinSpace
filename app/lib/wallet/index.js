@@ -18,6 +18,7 @@ var request = require('lib/request')
 var cache = require('memory-cache')
 var EthereumWallet = require('cs-ethereum-wallet');
 var RippleWallet = require('cs-ripple-wallet');
+var StellarWallet = require('cs-stellar-wallet');
 var convert = require('lib/convert');
 var getToken = require('lib/token').getToken;
 var setToken = require('lib/token').setToken;
@@ -38,7 +39,8 @@ var Wallet = {
   litecoin: CsWallet,
   testnet: CsWallet,
   ethereum: EthereumWallet,
-  ripple: RippleWallet
+  ripple: RippleWallet,
+  stellar: StellarWallet
 }
 
 var urlRoot = window.urlRoot
@@ -186,6 +188,10 @@ function initWallet(networkName, done, txDone) {
     options.seed = seed;
     options.txsPerPage = 20;
     convert.setDecimals(0);
+  } else if (networkName === 'stellar') {
+    options.seed = seed;
+    options.txsPerPage = 20;
+    convert.setDecimals(0);
   }
 
   wallet = new Wallet[networkName](options);
@@ -221,6 +227,8 @@ function parseHistoryTx(tx) {
     return utils.parseEthereumTx(tx);
   } else if (networkName === 'ripple') {
     return tx;
+  } else if (networkName === 'stellar') {
+    return tx;
   } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(networkName) !== -1) {
     return utils.parseBtcLtcTx(tx);
   }
@@ -246,24 +254,33 @@ function reset() {
   walletDb.deleteCredentials();
 }
 
-function getDynamicFees(callback) {
-  if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(wallet.networkName) === -1) return callback();
+function getDynamicFees() {
+  if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(wallet.networkName) === -1) return Promise.resolve();
   var fees = cache.get('fees')
 
   if (fees) {
-    return callback(fees)
+    return Promise.resolve(fees)
   }
 
-  request({
+  return request({
     url: urlRoot + 'fees',
     params: {
       network: wallet.networkName
     },
-  }, function(err, data) {
-    if (err) return callback({});
+  }).then(function(data) {
     cache.put('fees', data, 10 * 60 * 1000)
-    callback(data)
+    return data;
+  }).catch(function() {
+    return {};
   });
+}
+
+function getDestinationInfo(to) {
+  if (wallet.networkName === 'ripple' || wallet.networkName === 'stellar') {
+    return wallet.getDestinationInfo(to)
+  } else {
+    return Promise.resolve()
+  }
 }
 
 module.exports = {
@@ -283,5 +300,6 @@ module.exports = {
   getPin: getPin,
   resetPin: resetPin,
   setAvailableTouchId: setAvailableTouchId,
-  getDynamicFees: getDynamicFees
+  getDynamicFees: getDynamicFees,
+  getDestinationInfo: getDestinationInfo
 }

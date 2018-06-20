@@ -22,6 +22,7 @@ module.exports = function(el) {
       },
       formatConfirmations: function(number) {
         if (network === 'ripple') return '';
+        if (network === 'stellar') return '';
         if (number === 1) {
           return number + ' confirmation';
         } else {
@@ -31,6 +32,8 @@ module.exports = function(el) {
       getToAddress: function(tx) {
         if (network === 'ethereum' || network === 'ripple') {
           return tx.to;
+        } else if (network === 'stellar') {
+          return tx.operations[0] && tx.operations[0].destination;
         } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(network) !== -1) {
           return tx.outs[0].address;
         }
@@ -38,18 +41,19 @@ module.exports = function(el) {
       isReceived: function(tx) {
         if (network === 'ethereum' || network === 'ripple') {
           return tx.to === getWallet().addressString;
-        } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(network) !== -1) {
+        } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet', 'stellar'].indexOf(network) !== -1) {
           return tx.amount > 0;
         }
       },
       isConfirmed: function(confirmations) {
         if (network === 'ripple') return true;
+        if (network === 'stellar') return true;
         return confirmations >= getWallet().minConf;
       },
       isFailed: function(tx) {
         if (network === 'ethereum' || network === 'ripple') {
           return tx.status === false;
-        } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(network) !== -1) {
+        } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet', 'stellar'].indexOf(network) !== -1) {
           return false;
         }
       },
@@ -60,7 +64,7 @@ module.exports = function(el) {
     }
   })
 
-  emitter.on('append-transactions', function(newTxs){
+  emitter.on('append-transactions', function(newTxs) {
     newTxs.forEach(function(tx) {
       ractive.unshift('transactions', tx);
     })
@@ -100,10 +104,15 @@ module.exports = function(el) {
   ractive.on('load-more', function() {
     ractive.set('loadingMore', true);
     var transactions = ractive.get('transactions');
-    var start = transactions[transactions.length - 1].id;
     var wallet = getWallet();
+    var cursor;
+    if (wallet.networkName === 'ripple') {
+      cursor = transactions[transactions.length - 1].id;
+    } else if (wallet.networkName === 'stellar') {
+      cursor = transactions[transactions.length - 1].cursor;
+    }
 
-    wallet.loadTxs(wallet.addressString, start).then(function(result) {
+    wallet.loadTxs(wallet.addressString, cursor).then(function(result) {
       ractive.set('loadingMore', false);
       ractive.set('hasMore', result.hasMoreTxs)
       result.txs.forEach(function(tx) {

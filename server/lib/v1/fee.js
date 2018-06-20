@@ -13,9 +13,9 @@ function save(network, data) {
   if (network !== 'bitcoin') throw new Error(network + ' currency fee is not supported');
   var collection = db().collection('fee');
   return collection.updateOne({_id: network}, {$set: {
+    minimum: data.minimum,
     hour: data.hour,
-    fastest: data.fastest,
-    minimum: data.minimum
+    fastest: data.fastest
   }}, {upsert: true});
 }
 
@@ -24,7 +24,10 @@ function getFromAPI(network) {
   return axios.get('https://bitcoinfees.earn.com/api/v1/fees/recommended').then(function(response) {
     var data = response.data;
     if (!data.fastestFee || !data.hourFee) throw new Error('Bad fee response');
-    response.data.minimum = Math.max(Math.ceil(response.data.hourFee / 2), 10)
+    var min = 10;
+    response.data.minimum = Math.max(Math.ceil(response.data.hourFee / 2), min)
+    response.data.hourFee = Math.max(response.data.hourFee, min)
+    response.data.fastestFee = Math.max(response.data.fastestFee, min)
     return response.data;
   })
 }

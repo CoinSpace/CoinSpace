@@ -9,6 +9,8 @@ module.exports = function(data) {
     content = require('./contentEthereum.ract')
   } else if (data.isNetwork('ripple')) {
     content = require('./contentRipple.ract')
+  } else if (data.isNetwork('stellar')) {
+    content = require('./contentStellar.ract')
   } else {
     content = require('./contentBtcBchLtc.ract')
   }

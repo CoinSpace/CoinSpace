@@ -12,7 +12,8 @@ var networks = {
   BCH: 'bitcoincash',
   LTC: 'litecoin',
   ETH: 'ethereum',
-  XRP: 'ripple'
+  XRP: 'ripple',
+  XLM: 'stellar'
 };
 
 function save(callback){

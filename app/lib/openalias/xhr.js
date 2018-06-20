@@ -2,17 +2,18 @@ var request = require('lib/request')
 var urlRoot = window.urlRoot;
 var getTokenNetwork = require('lib/token').getTokenNetwork;
 
-function resolveTo(to, callback){
-  if (getTokenNetwork() !== 'bitcoin') return callback({to: to});
+function resolveTo(to) {
+  if (getTokenNetwork() !== 'bitcoin') return Promise.resolve({to: to});
 
   to = to || ''
   var hostname = to.replace('@', '.')
-  if (!hostname.match(/\./)) return callback({to: to});
-  request({
+  if (!hostname.match(/\./)) return Promise.resolve({to: to});
+  return request({
     url: urlRoot + 'openalias?hostname=' + hostname,
-  }, function(err, data) {
-    if (err) return callback({to: to});
-    return callback({to: data.address, alias: to});
+  }).then(function(data) {
+    return {to: data.address, alias: to};
+  }).catch(function() {
+    return {to: to};
   });
 }
 

@@ -69,7 +69,7 @@ module.exports = function init(el) {
   ractive.on('help', function() {
     showTooltip({
       message: 'Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.',
-      link: {
+      bottomLink: {
         text: 'Create a gravatar',
         url: 'https://gravatar.com/'
       }
