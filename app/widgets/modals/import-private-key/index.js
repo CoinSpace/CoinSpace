@@ -41,7 +41,7 @@ function open() {
       return handleError(new Error('Invalid private key'));
     }
     wallet.getImportTxOptions(privateKey).then(function(importTxOptions) {
-      if (parseInt(importTxOptions.amount) === 0) {
+      if (parseFloat(importTxOptions.amount) === 0) {
         ractive.set('isLoading', false);
         return showInfo({message: 'This private key has no coins for transfer.'});
       }

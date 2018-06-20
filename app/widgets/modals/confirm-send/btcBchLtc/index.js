@@ -29,10 +29,8 @@ function open(data) {
     try {
       tx = createTx();
     } catch(err) {
-      if (err.message.match(/Insufficient funds/)) {
-        ractive.set('sending', false);
-        return showInfo({message: 'Please choose lower fee.', title: 'Insufficient funds'});
-      }
+      ractive.set('sending', false);
+      if (/Insufficient funds/.test(err.message)) return showInfo({title: 'Insufficient funds'});
       return handleTransactionError(err);
     }
 

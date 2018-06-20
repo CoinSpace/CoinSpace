@@ -26,9 +26,14 @@ function open(data) {
     try {
       tx = createTx();
     } catch(err) {
-      if (err.message.match(/Insufficient funds/)) {
-        ractive.set('sending', false);
-        return showInfo({title: 'Insufficient funds'});
+      ractive.set('sending', false);
+      if (/Insufficient funds/.test(err.message)) return showInfo({title: 'Insufficient funds'});
+      if (data.importTxOptions && /Less than minimum reserve/.test(err.message)) {
+        return showInfo({
+          title: 'Insufficient funds',
+          message: "Your wallet isn't activated. You can receive only amount greater than :minReserve :denomination.",
+          interpolations: {minReserve: wallet.minReserve, denomination: wallet.denomination}
+        });
       }
       return handleTransactionError(err);
     }
