@@ -18,6 +18,11 @@
     background-color: darken($ripple, 20%);
   }
 }
+.stellar {
+  #tabs {
+    background-color: darken($stellar, 20%);
+  }
+}
 .bitcoincash {
   #tabs {
     background-color: darken($bitcoincash, 20%);
@@ -77,6 +82,13 @@
   #tabs .tabs .tab {
     &.active {
         border-bottom: 4px solid darken($ripple, 30%);
+    }
+  }
+}
+.stellar {
+  #tabs .tabs .tab {
+    &.active {
+        border-bottom: 4px solid darken($stellar, 30%);
     }
   }
 }

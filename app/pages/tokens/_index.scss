@@ -96,6 +96,13 @@
   }
 }
 
+.token--stellar {
+  background-color: $stellar;
+  ._name {
+    color: white;
+  }
+}
+
 .token--ethereum {
   background-color: $ethereal;
   ._name {

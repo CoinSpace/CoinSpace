@@ -80,6 +80,11 @@
     background-color: darken($ripple, 30%);
   }
 }
+.stellar {
+  .main__iphone_x {
+    background-color: darken($stellar, 30%);
+  }
+}
 .bitcoincash {
   .main__iphone_x {
     background-color: darken($bitcoincash, 30%);

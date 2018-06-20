@@ -76,6 +76,14 @@
     }
   }
 }
+.stellar {
+  .set-details {
+    ._btn--loading {
+      background-color: $stellar;
+      box-shadow:inset 0 1px 1px 1px darken($stellar, 20%);
+    }
+  }
+}
 .bitcoincash {
   .set-details {
     ._btn--loading {

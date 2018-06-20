@@ -67,6 +67,13 @@
     }
   }
 }
+.stellar {
+  .tooltip__link {
+    a {
+      color: $stellar;
+    }
+  }
+}
 .bitcoincash {
   .tooltip__link {
     a {
