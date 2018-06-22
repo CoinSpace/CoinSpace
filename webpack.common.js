@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -57,9 +56,6 @@ module.exports = {
       inject: false,
       template: 'app/apple-app-site-association.ejs',
       filename: '.well-known/apple-app-site-association'
-    }),
-    new webpack.ProvidePlugin({
-      'Promise': 'es6-promise'
     })
   ]
 };

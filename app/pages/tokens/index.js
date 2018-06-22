@@ -63,7 +63,8 @@ module.exports = function(el) {
     setToken(token);
 
     window.history.replaceState(null, null, url);
-    document.getElementsByTagName('html')[0].classList.replace(currentTokenNetwork, network);
+    document.getElementsByTagName('html')[0].classList.remove(currentTokenNetwork);
+    document.getElementsByTagName('html')[0].classList.add(network);
 
     emitter.emit('sync');
 

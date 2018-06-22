@@ -20,6 +20,8 @@ var config = merge(common, {
         test: /\.js$/,
         include: [
           /node_modules\/bech32/,
+          /node_modules\/ripple-lib/,
+          /node_modules\/agent-base/
         ],
         use: {
           loader: 'babel-loader', // special for UglifyJSPlugin
