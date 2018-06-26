@@ -15,27 +15,6 @@ function init(app) {
 
   if (isProduction()) {
     app.set('trust proxy', true)
-    var connectSrc = [
-      "'self'", 'blob:',
-      'shapeshift.io',
-      'live.coin.space', 'btc.coin.space', 'bch.coin.space', 'ltc.coin.space',
-      'eth.coin.space', 'dev.eth.coin.space',
-      'xrp.coin.space',
-      'xlm.coin.space'
-    ]
-
-    app.use(csp({
-      directives: {
-        'default-src': ["'self'", 'blob:'],
-        'connect-src': connectSrc,
-        'font-src': ["'self'", 'coin.space'],
-        'img-src': ["'self'", 'data:', 'www.gravatar.com'],
-        'style-src': ["'self'", "'unsafe-inline'"],
-        'script-src': ["'self'", 'blob:', "'unsafe-eval'", "'unsafe-inline'"],
-      },
-      reportOnly: false,
-      setAllHeaders: false
-    }))
     app.use(helmet.xssFilter())
     app.use(helmet.noSniff())
     app.use(helmet.frameguard({action: 'sameorigin'}))
