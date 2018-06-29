@@ -3,13 +3,13 @@
   "version": "2.6.4",
   "description": "Coin Digital currency wallet",
   "bugs": {
-    "url": "https://github.com/CoinSpace/CoinSpace/issues"
+    "url": "https://github.com/harriorri/CoinSpace/issues"
   },
   "license": "GPL-2.0+",
   "author": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CoinSpace/CoinSpace.git"
+    "url": "git+https://github.com/harriorri/CoinSpace.git"
   },
   "scripts": {
     "client": "webpack --config webpack.prod.js",
@@ -32,6 +32,8 @@
     "helmet": "^3.8.1",
     "helmet-csp": "^2.5.1",
     "mongodb": "^3.0.3",
+    "node-gyp": "^3.6.2",
+    "rebuild": "^0.1.2",
     "retry": "^0.10.1"
   },
   "devDependencies": {
@@ -49,7 +51,7 @@
     "counterpart": "^0.18.2",
     "crypto-js": "^3.1.9-1",
     "cs-ethereum-wallet": "git://github.com/CoinSpace/cs-ethereum-wallet.git#v1.0.8",
-    "cs-wallet": "git://github.com/CoinSpace/cs-wallet.git#v0.15.0",
+    "cs-wallet": "git://github.com/harriorri/cs-wallet.git",
     "css-loader": "^0.28.7",
     "dotenv": "^4.0.0",
     "dotenv-webpack": "^1.5.4",

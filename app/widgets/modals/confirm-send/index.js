@@ -10,6 +10,9 @@ var bitcoin = require('cs-wallet').bitcoin;
 var showInfo = require('widgets/modals/flash').showInfo;
 var getTokenNetwork = require('lib/token').getTokenNetwork;
 
+var minTransactionFee = 100000000;
+var minFeePerByte = 100000;
+
 function open(data) {
 
   var ractive = new Ractive({
@@ -76,6 +79,7 @@ function extendData(data) {
   data.isBitcoin = network === 'bitcoin' || network === 'testnet';
   data.isBitcoinCash = network === 'bitcoincash';
   data.isLitecoin = network === 'litecoin';
+  data.isSmileycoin = network === 'smileycoin';
   data.feeSign = data.importTxOptions ? '-' : '+';
 
   var wallet = getWallet();
@@ -111,6 +115,12 @@ function extendData(data) {
     feeRates = [data.dynamicFees.minimum * 1000 || bitcoin.networks['litecoin'].feePerKb];
     fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents);
     data.fee = toUnitString(fees[0]);
+
+  } else if (data.isSmileycoin) {
+    feeRates = [bitcoin.networks['smileycoin'].feePerKb || 100000];
+    fees = Math.max(100000000, wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents));
+    // fees=100000000;
+    data.fee = toUnitString(fees);
 
   } else if (data.isEthereum) {
     data.fee = toUnitString(wallet.getDefaultFee(), 18);

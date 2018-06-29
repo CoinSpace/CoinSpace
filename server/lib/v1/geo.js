@@ -10,7 +10,7 @@ function save(lat, lon, userInfo) {
     .limit(1)
     .next().then(function(details) {
       if (!details) return Promise.reject({error: 'details_not_found'});
-      var hash = crypto.createHash('sha1').update(userInfo.name + process.env.USERNAME_SALT).digest('hex');
+      var hash = crypto.createHash('sha1').update(userInfo.name).digest('hex');
       if (hash !== details.username_sha) {
         return Promise.reject({error: 'invalid_name'});
       }
@@ -43,7 +43,7 @@ function removeOlderThan(age) {
 }
 
 function search(lat, lon, userInfo) {
-  if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet', 'ethereum'].indexOf(userInfo.network) === -1) {
+  if (['bitcoin', 'bitcoincash', 'litecoin', 'smileycoin', 'testnet', 'ethereum'].indexOf(userInfo.network) === -1) {
     return Promise.reject({error: 'unsupported_network'});
   }
   var collection = db().collection('mecto');

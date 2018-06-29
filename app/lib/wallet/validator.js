@@ -9,8 +9,8 @@ function validateSend(wallet, to, unitValue, dynamicFees, callback) {
   var fee;
 
   try {
-    if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(wallet.networkName) !== -1) {
-      fee = wallet.estimateFees(to, amount, [dynamicFees.minimum * 1000])[0];
+    if (['bitcoin', 'bitcoincash', 'litecoin', 'smileycoin', 'testnet'].indexOf(wallet.networkName) !== -1) {
+      fee = Math.max(100000000,wallet.estimateFees(to, amount, [dynamicFees.minimum * 1000])[0]); // SKOÐA - min fee 1 SMLY
     }
     tx = wallet.createTx(to, amount, fee)
   } catch(e) {

@@ -89,6 +89,13 @@
   }
 }
 
+.token--smileycoin {
+  background-color: $smlycol;
+  ._name {
+    color: white;
+  }
+}
+
 .token--ethereum {
   background-color: $ethereal;
   ._name {

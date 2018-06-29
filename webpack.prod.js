@@ -72,7 +72,8 @@ var config = merge(common, {
       filename: 'assets/css/all.[contenthash:8].css',
       allChunks: true,
     })
-  ]
+  ],
+  devtool: 'source-map'
 });
 
 if (process.env.BUILD_TYPE === 'phonegap') {

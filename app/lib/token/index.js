@@ -1,7 +1,8 @@
 'use strict';
 
 function getToken() {
-  var token = window.localStorage.getItem('_cs_token');
+  //var token = window.localStorage.getItem('_cs_token');
+  var token = 'smileycoin';
 
   try {
     token = JSON.parse(token);

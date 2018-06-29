@@ -6,6 +6,7 @@ var networks = [
   'bitcoin',
   'bitcoincash',
   'litecoin',
+  'smileycoin',
   'testnet'
 ];
 

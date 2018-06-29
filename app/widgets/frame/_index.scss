@@ -80,6 +80,11 @@
     background-color: darken($bitcoincash, 30%);
   }
 }
+.smileycoin {
+  .main__iphone_x {
+    background-color: darken($smlycol, 30%);
+  }
+}
 
 #sidebar {
   display: flex;

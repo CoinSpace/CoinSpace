@@ -39,12 +39,33 @@ router.post('/login', validateAuthParams(true), function(req, res) {
   });
 });
 
+router.use(function (req, res, next) {
+  console.info('in router');
+  next();
+})
+
+
+router.get('/api/exist', function(req, res, next) {
+  console.info('ayee')
+  next();
+})
+
+router.get('/exist', function(req, res, next) {
+  console.info('ayee2')
+  next();
+})
+
 router.get('/exist', function(req, res) {
+  console.info('Checking');
   var walletId = req.query.wallet_id;
+  console.info(walletId)
   if (!walletId) return res.status(400).json({error: 'Bad request'});
   account.isExist(walletId).then(function(userExist) {
-    res.status(200).send(userExist);
+    console.info(111)
+    console.info(userExist)
+    res.status(200).send(           );
   }).catch(function(err) {
+    console.info(222)
     console.error('error', err);
     return res.status(400).send(err);
   });
@@ -161,7 +182,7 @@ router.use(function(err, req, res, next) {
 });
 
 router.use(function(req, res, next) {
-  res.status(404).send({error: 'Oops! page not found.'});
+  res.status(404).send({error: 'Oops! page not found :P.'});
 });
 
 function validateAuthParams(allowMissingPin) {

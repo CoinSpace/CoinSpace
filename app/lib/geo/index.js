@@ -11,7 +11,8 @@ var networks = {
   BTC: 'bitcoin',
   BCH: 'bitcoincash',
   LTC: 'litecoin',
-  ETH: 'ethereum'
+  ETH: 'ethereum',
+  SMLY: 'smileycoin'
 };
 
 function save(callback){

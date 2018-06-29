@@ -19,7 +19,7 @@ function init(app) {
       "'self'", 'blob:',
       'shapeshift.io',
       'live.coin.space', 'btc.coin.space', 'bch.coin.space', 'ltc.coin.space',
-      'eth.coin.space', 'dev.eth.coin.space'
+      'eth.coin.space', 'dev.eth.coin.space', 'blocks.harri.is'
     ]
 
     app.use(csp({
@@ -48,7 +48,7 @@ function init(app) {
   var anHour = 1000 * 60 * 60
   app.use(bodyParser.urlencoded({extended: true}))
   app.use(bodyParser.json())
-  app.use(cookieParser(process.env.COOKIE_SALT))
+  app.use(cookieParser())
   app.use(cookieSession({
     signed: false,
     overwrite: false,

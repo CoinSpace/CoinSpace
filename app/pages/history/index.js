@@ -29,14 +29,14 @@ module.exports = function(el){
       getToAddress: function(tx) {
         if (network === 'ethereum') {
           return tx.to;
-        } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(network) !== -1) {
+        } else if (['bitcoin', 'bitcoincash', 'litecoin', 'smileycoin', 'testnet'].indexOf(network) !== -1) {
           return tx.outs[0].address;
         }
       },
       isReceived: function(tx) {
         if (network === 'ethereum') {
           return tx.to === getWallet().addressString;
-        } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(network) !== -1) {
+        } else if (['bitcoin', 'bitcoincash', 'litecoin', 'smileycoin', 'testnet'].indexOf(network) !== -1) {
           return tx.amount > 0;
         }
       },
@@ -46,7 +46,7 @@ module.exports = function(el){
       isFailed: function(tx) {
         if (network === 'ethereum') {
           return tx.status === false;
-        } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(network) !== -1) {
+        } else if (['bitcoin', 'bitcoincash', 'litecoin', 'smileycoin', 'testnet'].indexOf(network) !== -1) {
           return false;
         }
       },

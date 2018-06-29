@@ -48,7 +48,7 @@ function setUsername(walletId, username) {
       if (!user) return Promise.reject({error: 'error getting doc'});
 
       username = username.toLowerCase().replace(/[^a-z0-9-]/g, '');
-      var username_sha = crypto.createHash('sha1').update(username + process.env.USERNAME_SALT).digest('hex');
+      var username_sha = crypto.createHash('sha1').update(username).digest('hex');
       return db().collection('details').updateOne({_id: user._id}, {$set: {
         username_sha: username_sha
       }}, {upsert: true}).then(function() {

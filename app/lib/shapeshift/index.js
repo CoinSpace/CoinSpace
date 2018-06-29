@@ -2,7 +2,7 @@
 
 var request = require('lib/request');
 var urlRoot = 'https://shapeshift.io';
-var prioritySymbols = ['BTC', 'BCH', 'LTC', 'ETH'];
+var prioritySymbols = ['BTC', 'BCH', 'LTC', 'ETH', 'SMLY'];
 
 function getCoins() {
   return request({
@@ -35,8 +35,7 @@ function validateAddress(address, symbol) {
 function shift(options) {
   var data = {
     withdrawal: options.toAddress,
-    pair: (options.fromSymbol + '_' + options.toSymbol).toLowerCase(),
-    apiKey: process.env.SHAPESHIFT_API_KEY
+    pair: (options.fromSymbol + '_' + options.toSymbol).toLowerCase()
   };
   if (options.returnAddress) {
     data.returnAddress = options.returnAddress;

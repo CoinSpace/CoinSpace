@@ -56,6 +56,13 @@
   }
 }
 
+.smileycoin {
+  .csbtn {
+    background-color: $smlycol;
+    box-shadow: 0 2px 0 0 darken($smlycol, 10%);
+  }
+}
+
 .litecoin {
   .csbtn {
     background-color: $silver;

@@ -1,6 +1,6 @@
 
 <div class="tokens">
-
+  <!--
   <div on-click="switchToken('bitcoin')" class="token__item token--bitcoin">
     {{#if isCurrentToken('bitcoin')}}
     <span class="_arrow">{{>svg_arrow}}</span>
@@ -57,6 +57,16 @@
       {{>svg_token_litecoin}}
     </span>
     <h3 class="_name">Litecoin</h3>
+  </div>
+  -->
+  <div on-click="switchToken('smileycoin')" class="token__item token--smileycoin">
+    {{#if isCurrentToken('smileycoin')}}
+    <span class="_arrow">{{>svg_arrow}}</span>
+    {{/if}}
+    <span class="_icon">
+      {{>svg_token_smileycoin}}
+    </span>
+    <h3 class="_name">Smileycoin</h3>
   </div>
 
 </div>

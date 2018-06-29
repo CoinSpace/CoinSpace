@@ -12,7 +12,6 @@ function init() {
   i18n.loadTranslation().then(function() {
     if (Modernizr.localstorage && Modernizr.webworkers && Modernizr.blobconstructor && Modernizr.getrandomvalues) {
       setupNetwork();
-
       document.getElementsByTagName('html')[0].classList.add(token.getTokenNetwork())
       var containerEl = document.getElementById('loader')
 
@@ -32,8 +31,9 @@ function init() {
 }
 
 function setupNetwork() {
-  var networks = ['bitcoin', 'bitcoincash', 'litecoin', 'ethereum', 'testnet'];
-  var defaultNetwork = networks[0];
+  //var networks = ['bitcoin', 'bitcoincash', 'litecoin', 'smileycoin', 'ethereum', 'testnet'];
+  var networks = ['smileycoin']; // SKOÐA
+  var defaultNetwork = networks[3];
   var lastNetwork = token.getTokenNetwork();
 
   if (networks.indexOf(lastNetwork) === -1) {

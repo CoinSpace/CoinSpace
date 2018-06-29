@@ -57,5 +57,6 @@ module.exports = merge(common, {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     dotEnv
-  ]
+  ],
+  devtool: 'eval-source-map'
 });

@@ -25,6 +25,8 @@
 				<span class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
       {{elseif isLitecoin}}
 				<span class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
+      {{elseif isSmileycoin}}
+				<span class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
       {{elseif isEthereum}}
 				<span class="_fee">{{feeSign}}{{fee}} {{feeDenomination}} {{translate("transaction fee")}}</span>
 			{{/if}}

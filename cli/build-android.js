@@ -53,7 +53,6 @@ webpack(webpackConfig, function(error, stats) {
   utils.cordova('plugin add cordova-facebook-audnet-sdk@4.23.0');
   utils.cordova('plugin add cordova-plugin-facebookads@4.23.2');
   utils.cordova('plugin add cordova-plugin-android-fingerprint-auth@1.4.0');
-  utils.cordova(`plugin add cc.fovea.cordova.purchase@7.0.2 --variable BILLING_KEY="${process.env['ANDROID_BILLING_KEY']}"`);
 
   if (program.release) {
     utils.cordova('build android --release');

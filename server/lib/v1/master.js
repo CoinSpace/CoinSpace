@@ -14,9 +14,9 @@ function cleanGeo(interval) {
 
 function cacheFees(interval) {
   setInterval(function intervalFunction() {
-    fee.getFromAPI('bitcoin').then(function(data) {
+    fee.getFromAPI('smileycoin').then(function(data) {
       if (global.gc) global.gc();
-      return fee.save('bitcoin', {
+      return fee.save('smileycoin', {
         minimum: data.minimum,
         hour: data.hourFee,
         fastest: data.fastestFee

@@ -7,6 +7,7 @@ var fsyms = [
   'BTC',
   'BCH',
   'LTC',
+  'SMLY',
   'ETH',
   'USD'
 ]
@@ -88,7 +89,7 @@ function getFromCache(symbol) {
 
 function getFromCacheForAppleWatch() {
   var ticker = db().collection('ticker');
-  var tickers = ['BTC','BCH','LTC','ETH'];
+  var tickers = ['BTC','BCH','LTC', 'SMLY','ETH'];
   return ticker
     .find({_id: {$in: tickers}})
     .toArray()

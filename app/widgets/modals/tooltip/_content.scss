@@ -53,6 +53,13 @@
     }
   }
 }
+.smileycoin {
+  .tooltip__link {
+    a {
+      color: $smlycol;
+    }
+  }
+}
 .ethereum {
   .tooltip__link {
     a {

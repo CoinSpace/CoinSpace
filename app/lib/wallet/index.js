@@ -36,6 +36,7 @@ var Wallet = {
   bitcoincash: CsWallet,
   litecoin: CsWallet,
   testnet: CsWallet,
+  smileycoin: CsWallet,
   ethereum: EthereumWallet
 }
 
@@ -162,23 +163,25 @@ function initWallet(networkName, done, txDone) {
     done: done,
     txDone: function(err) {
       if(err) return txDone(err)
-      var txObjs = wallet.getTransactionHistory()
+      var txObjs = wallet.getTransactionHistory();
       txDone(null, txObjs.map(function(tx) {
         return parseHistoryTx(tx)
       }))
     }
   }
 
+
   if (networkName === 'ethereum') {
     options.seed = seed;
     options.minConf = 12;
     options.token = token;
     convert.setDecimals(token ? token.decimals : 18);
-  } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(networkName) !== -1) {
+  } else if (['bitcoin', 'bitcoincash', 'litecoin', 'smileycoin', 'testnet'].indexOf(networkName) !== -1) {
     var accounts = getDerivedAccounts(networkName);
     options.externalAccount = accounts.externalAccount;
     options.internalAccount = accounts.internalAccount;
-    options.minConf = 4;
+    //options.minConf = 20; SKOÐA
+    options.minConf = 1;
     convert.setDecimals(8);
   }
 
@@ -213,7 +216,7 @@ function parseHistoryTx(tx) {
   var networkName = wallet.networkName
   if (networkName === 'ethereum') {
     return utils.parseEthereumTx(tx)
-  } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(networkName) !== -1) {
+  } else if (['bitcoin', 'bitcoincash', 'litecoin', 'smileycoin', 'testnet'].indexOf(networkName) !== -1) {
     return utils.parseBtcLtcTx(tx)
   }
 }
@@ -246,6 +249,7 @@ function getDynamicFees(callback) {
     return callback(fees)
   }
 
+  //EKKI GLEYMA
   request({
     url: urlRoot + 'fees',
     params: {

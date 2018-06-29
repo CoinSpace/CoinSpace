@@ -6,13 +6,37 @@ var middleware = require('./middleware');
 var api = require('./lib/v1/api');
 var app = express();
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+app.get('/', function(req, res, next) {
+  // Handle the get for this route
+});
+
+app.post('/', function(req, res, next) {
+ // Handle the post for this route
+});
+
 var master = require('./lib/v1/master');
 var db = require('./lib/v1/db');
 
 middleware.init(app);
 
+app.use(function (req, res, next) {
+  console.info('===');
+  next();
+})
+
 // API routes
-app.use('/api/v1', api);
+app.use('/api', api);
+
+app.use(function (req, res, next) {
+  console.info('done');
+  next();
+})
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);
@@ -20,7 +44,7 @@ app.use(function(err, req, res, next) {
 });
 
 app.use(function(req, res, next) {
-  res.status(404).send({error: 'Oops! page not found.'});
+  res.status(404).send({error: 'Oops! page not found. :C'});
 });
 
 db().then(function() {
