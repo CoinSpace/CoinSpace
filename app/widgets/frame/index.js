@@ -19,14 +19,6 @@ module.exports = function(el){
     template: require('./index.ract')
   })
 
-  if (process.env.BUILD_TYPE !== 'phonegap') {
-    ractive.on('before-show', function() {
-      ractive.set('googleAdsClient', process.env.GOOGLE_ADS_CLIENT);
-      ractive.set('googleAdsSlot', process.env.GOOGLE_ADS_SLOT);
-      ractive.set('showWebAds', true);
-    });
-  }
-
   // widgets
   var header = initHeader(ractive.find('#header'))
   initTabs(ractive.find('#tabs'))
