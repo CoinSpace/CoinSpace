@@ -3,8 +3,13 @@
 var express = require('express');
 var middleware = require('./middleware');
 
+var cors = require('cors');
+
 var api = require('./lib/v1/api');
 var app = express();
+
+app.use(cors());
+app.options('*', cors());
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

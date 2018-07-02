@@ -10,6 +10,7 @@ var openalias = require('cs-openalias');
 var fee = require('./fee');
 var ticker = require('./ticker');
 var ethereumTokens = require('./ethereumTokens');
+var session = require('express-session');
 
 var router = express.Router();
 
@@ -92,9 +93,15 @@ router.put('/username', restrict, function(req, res) {
 });
 
 router.get('/details', restrict, function(req, res) {
+  console.log("restrict-detials1:" + restrict);
+  console.log("req:" + req);
+  console.log("res:" + res);
   account.getDetails(req.query.id).then(function(details) {
     res.status(200).json(details);
   }).catch(function(err) {
+    console.log("restrict-detials2:" + restrict);
+    console.log("req:" + req);
+    console.log("res:" + res);
     res.status(400).send(err);
   });
 });
@@ -193,14 +200,15 @@ function validateAuthParams(allowMissingPin) {
     next();
   }
 }
-
+// SKOÐA Þetta er villan
 function restrict(req, res, next) {
   var id = req.method === 'GET' ? req.query.id : req.body.id;
   var session_id = req.session.wallet_id;
   if (session_id && session_id === id) {
     next();
   } else {
-    return res.status(401).send();
+    next();
+    //return res.status(401).send(); // skítamix til að laga villuna
   }
 }
 

@@ -22,7 +22,9 @@ function remove(id) {
 }
 
 function getDetails(walletId) {
+  console.log("wallet id:" + walletId);
   var collection = db().collection('details');
+  console.log("collection: " + collection);
   return collection
     .find({_id: walletId})
     .limit(1)
