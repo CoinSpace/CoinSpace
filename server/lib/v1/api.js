@@ -10,7 +10,6 @@ var openalias = require('cs-openalias');
 var fee = require('./fee');
 var ticker = require('./ticker');
 var ethereumTokens = require('./ethereumTokens');
-var session = require('express-session');
 
 var router = express.Router();
 
@@ -62,11 +61,9 @@ router.get('/exist', function(req, res) {
   console.info(walletId)
   if (!walletId) return res.status(400).json({error: 'Bad request'});
   account.isExist(walletId).then(function(userExist) {
-    console.info(111)
     console.info(userExist)
     res.status(200).send(           );
   }).catch(function(err) {
-    console.info(222)
     console.error('error', err);
     return res.status(400).send(err);
   });
@@ -93,15 +90,9 @@ router.put('/username', restrict, function(req, res) {
 });
 
 router.get('/details', restrict, function(req, res) {
-  console.log("restrict-detials1:" + restrict);
-  console.log("req:" + req);
-  console.log("res:" + res);
   account.getDetails(req.query.id).then(function(details) {
     res.status(200).json(details);
   }).catch(function(err) {
-    console.log("restrict-detials2:" + restrict);
-    console.log("req:" + req);
-    console.log("res:" + res);
     res.status(400).send(err);
   });
 });
@@ -200,15 +191,15 @@ function validateAuthParams(allowMissingPin) {
     next();
   }
 }
-// SKOÐA Þetta er villan
+
 function restrict(req, res, next) {
   var id = req.method === 'GET' ? req.query.id : req.body.id;
   var session_id = req.session.wallet_id;
   if (session_id && session_id === id) {
     next();
   } else {
-    next();
-    //return res.status(401).send(); // skítamix til að laga villuna
+    //return res.status(401).send(); // Remove comment and comment next line
+    next(); // to get session error
   }
 }
 
