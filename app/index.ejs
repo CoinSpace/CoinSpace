@@ -38,7 +38,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="<%= require('./assets/icons/favicon-32x32.png') %>">
   <link rel="icon" type="image/png" sizes="16x16" href="<%= require('./assets/icons/favicon-16x16.png') %>">
   <link rel="shortcut icon" href="<%= require('./assets/icons/favicon.ico') %>">
-  <% if (process.env.BUILD_TYPE !== 'phonegap' && process.env.GOOGLE_GTM) { %>
+  <% if (process.env.BUILD_TYPE !== 'phonegap' && process.env.GOOGLE_GTM !== 'false') { %>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -49,7 +49,7 @@
   <% } %>
 </head>
 <body>
-  <% if (process.env.BUILD_TYPE !== 'phonegap' && process.env.GOOGLE_GTM) { %>
+  <% if (process.env.BUILD_TYPE !== 'phonegap' && process.env.GOOGLE_GTM !== 'false') { %>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<%= process.env.GOOGLE_GTM %>"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
