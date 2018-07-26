@@ -38,9 +38,23 @@
   <link rel="icon" type="image/png" sizes="32x32" href="<%= require('./assets/icons/favicon-32x32.png') %>">
   <link rel="icon" type="image/png" sizes="16x16" href="<%= require('./assets/icons/favicon-16x16.png') %>">
   <link rel="shortcut icon" href="<%= require('./assets/icons/favicon.ico') %>">
-
+  <% if (process.env.BUILD_TYPE !== 'phonegap' && process.env.GOOGLE_GTM) { %>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','<%= process.env.GOOGLE_GTM %>');</script>
+  <!-- End Google Tag Manager -->
+  <% } %>
 </head>
 <body>
+  <% if (process.env.BUILD_TYPE !== 'phonegap' && process.env.GOOGLE_GTM) { %>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<%= process.env.GOOGLE_GTM %>"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <% } %>
   <div id="geo-overlay" class="z-1000"></div>
   <div id="general-purpose-overlay" class="z-1000"></div>
   <div id="tooltip" class="z-9000"></div>
