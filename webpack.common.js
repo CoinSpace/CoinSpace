@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -56,6 +57,9 @@ module.exports = {
       inject: false,
       template: 'app/apple-app-site-association.ejs',
       filename: '.well-known/apple-app-site-association'
-    })
+    }),
+    new CopyWebpackPlugin([
+      {from: 'app/security.txt', to: './'}
+    ])
   ]
 };

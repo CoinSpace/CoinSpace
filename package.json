@@ -46,6 +46,7 @@
     "clean-webpack-plugin": "^0.1.16",
     "clipboard": "^2.0.1",
     "commander": "^2.11.0",
+    "copy-webpack-plugin": "^4.5.2",
     "cordova": "6.5.0",
     "core-js": "^2.5.7",
     "counterpart": "^0.18.2",
