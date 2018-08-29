@@ -19,7 +19,7 @@ function init(app) {
       "'self'", 'blob:',
       'shapeshift.io',
       'live.coin.space', 'btc.coin.space', 'bch.coin.space', 'ltc.coin.space',
-      'eth.coin.space', 'dev.eth.coin.space', 'blocks.harri.is'
+      'eth.coin.space', 'dev.eth.coin.space', 'blocks.smileyco.in'
     ]
 
     app.use(csp({
