@@ -204,5 +204,7 @@
     "Memo:": "Мемо:",
     "Please enter a valid memo": "Пожалуйста, введите действительный мемо",
     "The memo contains optional extra information. A string up to 28-bytes long.": "В мемо содержится дополнительная дополнительная информация. Строка длиной до 28 байтов.",
-    "Your wallet isn't activated. You can receive only amount greater than :minReserve :denomination.": "Ваш кошелек не активирован. Вы можете получить только сумму, превышающую %(minReserve)s %(denomination)s."
+    "Your wallet isn't activated. You can receive only amount greater than :minReserve :denomination.": "Ваш кошелек не активирован. Вы можете получить только сумму, превышающую %(minReserve)s %(denomination)s.",
+    "one time": "один раз",
+    "per year": "в год"
 }

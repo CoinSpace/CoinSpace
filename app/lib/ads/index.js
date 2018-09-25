@@ -9,29 +9,57 @@ var ad_units = {
 }
 var resizeHandler = null;
 var storeIsReady = false;
+
 var adFreeId = 'adfree';
 var adFreePrice = '';
+
+var adFreeSubscriptionId = 'adfreesubscription';
+var adFreeSubscriptionPrice = '';
 
 function init() {
   if (!window.store) return false;
   var store = window.store;
-
-  store.ready(function() {
-    storeIsReady = true;
-  });
+  var isAdFree;
+  var isWalletReady = false;
 
   store.register({
     id: adFreeId,
     type: store.NON_CONSUMABLE
   });
 
+  store.register({
+    id: adFreeSubscriptionId,
+    type: store.PAID_SUBSCRIPTION
+  });
+
+  store.when(adFreeId).loaded(function(product) {
+    adFreePrice = product.price;
+  });
+  store.when(adFreeSubscriptionId).loaded(function(product) {
+    adFreeSubscriptionPrice = product.price;
+  });
+
   store.when(adFreeId).approved(function(order) {
-    emitter.emit('ad-free-owned');
-    off();
+    if (!isAdFree) {
+      emitter.emit('ad-free-owned');
+      off();
+      isAdFree = true;
+    }
+    order.finish();
+  });
+  store.when(adFreeSubscriptionId).approved(function(order) {
+    if (!isAdFree) {
+      emitter.emit('ad-free-owned');
+      off();
+      isAdFree = true;
+    }
     order.finish();
   });
 
   store.when(adFreeId).cancelled(function() {
+    emitter.emit('ad-free-cancel-loading');
+  });
+  store.when(adFreeSubscriptionId).cancelled(function() {
     emitter.emit('ad-free-cancel-loading');
   });
 
@@ -39,26 +67,24 @@ function init() {
     emitter.emit('ad-free-cancel-loading');
     console.error(error);
   });
+  store.when(adFreeSubscriptionId).error(function(error) {
+    emitter.emit('ad-free-cancel-loading');
+    console.error(error);
+  });
 
-  var isOwned;
-  var isWalletReady = false;
-
-  store.when(adFreeId).loaded(function(product) {
-    adFreePrice = product.price;
-    isOwned = false;
-    if (product.owned) {
-      isOwned = true;
-      return emitter.emit('ad-free-owned');
+  store.ready(function() {
+    storeIsReady = true;
+    if (!isAdFree) {
+      isAdFree = false;
+      showBanner();
     }
-    showBanner();
     if (isWalletReady) {
       emitter.emit('ad-fee-modal');
     }
   });
-
   emitter.once('wallet-ready', function() {
     isWalletReady = true;
-    if (isOwned === false) {
+    if (isAdFree === false) {
       emitter.emit('ad-fee-modal');
     }
   });
@@ -67,11 +93,18 @@ function init() {
     showAdFreeModal();
     document.addEventListener('resume', showAdFreeModal, false);
   });
+
+  store.refresh();
 }
 
 function buyAdFree() {
   if (!storeIsReady) return false;
   window.store.order(adFreeId);
+}
+
+function buyAdFreeSubscription() {
+  if (!storeIsReady) return false;
+  window.store.order(adFreeSubscriptionId);
 }
 
 function showBanner() {
@@ -97,16 +130,20 @@ function showBanner() {
   });
 }
 
-function showAdFreeModal() {
+function showAdFreeModal(force) {
+  if (!storeIsReady) return false;
+
   var dismissDate = (new Date(parseInt(window.localStorage.getItem('_cs_ad_free_dismiss_date'), 10))).getTime();
   var dismissInterval = 30 * 24 * 3600 * 1000; // 30 days in ms
-  if (isNaN(dismissDate) || (Date.now() - dismissDate) > dismissInterval) {
+  if (isNaN(dismissDate) || (Date.now() - dismissDate) > dismissInterval || force === true) {
     modalRemoveAds({
       onDismiss: function() {
         window.localStorage.setItem('_cs_ad_free_dismiss_date', Date.now());
       },
       price: adFreePrice,
-      buy: buyAdFree
+      buyAdFree: buyAdFree,
+      priceSubscription: adFreeSubscriptionPrice,
+      buyAdFreeSubscription: buyAdFreeSubscription
     });
   }
 }
@@ -121,5 +158,5 @@ function off() {
 
 module.exports = {
   init: init,
-  buyAdFree: buyAdFree
+  showAdFreeModal: showAdFreeModal
 };

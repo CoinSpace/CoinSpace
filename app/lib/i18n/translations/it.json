@@ -204,5 +204,7 @@
     "Memo:": "Memo:",
     "Please enter a valid memo": "Please enter a valid memo",
     "The memo contains optional extra information. A string up to 28-bytes long.": "The memo contains optional extra information. A string up to 28-bytes long.",
-    "Your wallet isn't activated. You can receive only amount greater than :minReserve :denomination.": "Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(denomination)s."
+    "Your wallet isn't activated. You can receive only amount greater than :minReserve :denomination.": "Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(denomination)s.",
+    "one time": "one time",
+    "per year": "per year"
 }

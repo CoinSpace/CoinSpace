@@ -10,7 +10,6 @@
       </div>
       <h2 class="_title">{{translate("Remove Ads")}}</h2>
     </div>
-    <p class="_message">{{price}}</p>
 
     <div class="confirm__buttons">
       {{#if isLoading}}
@@ -20,7 +19,10 @@
           </span>
         </div>
       {{else}}
-        <div class="_buy_btn" on-click="buy">{{translate("buy")}}</div>
+        <p class="_message">{{price}} {{translate("one time")}}</p>
+        <div class="_buy_btn mb-20" on-click="buy">{{translate("buy")}}</div>
+        <p class="_message">{{priceSubscription}} {{translate("per year")}}</p>
+        <div class="_buy_btn" on-click="buy-subscription">{{translate("buy")}}</div>
       {{/if}}
     </div>
 

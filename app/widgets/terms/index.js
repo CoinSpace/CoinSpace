@@ -22,7 +22,7 @@ module.exports = function (el) {
 
   ractive.on('remove-ads', function(context) {
     context.original.preventDefault();
-    ads.buyAdFree();
+    ads.showAdFreeModal(true);
   });
 
   emitter.on('toggle-terms', function(open) {

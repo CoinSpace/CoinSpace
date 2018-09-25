@@ -40,7 +40,7 @@
     color: #a8a7a9;
     font-size: 18px;
     max-width: 200px;
-    margin: 0 auto 20px auto;
+    margin: 0 auto 5px auto;
 
     @include breakpoint(portrait) {
       max-width: 280px;
@@ -52,6 +52,10 @@
   ._buy_btn {
     @extend .csbtn;
     text-transform: uppercase;
+
+    &.mb-20 {
+      margin-bottom: 20px;
+    }
 
     @include breakpoint(portrait) {
       font-size: 26px;

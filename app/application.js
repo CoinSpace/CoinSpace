@@ -31,9 +31,6 @@ window.initCSApp = function() {
 
   if (process.env.BUILD_TYPE === 'phonegap') {
     ads.init();
-    if (window.store) {
-      window.store.refresh();
-    }
   }
 
   auth = walletExists() ? initAuth.pin(null, { userExists: true }) : initAuth.choose()

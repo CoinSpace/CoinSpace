@@ -17,13 +17,14 @@ function open(config) {
     data: {
       isLoading: false,
       onDismiss: onDismiss,
-      price: config.price
+      price: config.price,
+      priceSubscription: config.priceSubscription
     }
   });
 
   function onDismiss() {
     isOpen = false;
-    config.onDismiss();
+    if (config.onDismiss) config.onDismiss();
   }
 
   ractive.on('close', function(){
@@ -32,7 +33,12 @@ function open(config) {
 
   ractive.on('buy', function() {
     ractive.set('isLoading', true);
-    config.buy();
+    config.buyAdFree();
+  });
+
+  ractive.on('buy-subscription', function() {
+    ractive.set('isLoading', true);
+    config.buyAdFreeSubscription();
   });
 
   return ractive;
