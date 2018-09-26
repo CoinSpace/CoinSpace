@@ -22,6 +22,8 @@ function init() {
   var isAdFree;
   var isWalletReady = false;
 
+  store.validator = process.env.SITE_URL + 'iap';
+
   store.register({
     id: adFreeId,
     type: store.NON_CONSUMABLE
@@ -39,21 +41,31 @@ function init() {
     adFreeSubscriptionPrice = product.price;
   });
 
-  store.when(adFreeId).approved(function(order) {
-    if (!isAdFree) {
-      emitter.emit('ad-free-owned');
-      off();
-      isAdFree = true;
-    }
-    order.finish();
+  store.when(adFreeId).approved(function(product) {
+    product.verify();
   });
-  store.when(adFreeSubscriptionId).approved(function(order) {
-    if (!isAdFree) {
-      emitter.emit('ad-free-owned');
-      off();
-      isAdFree = true;
-    }
-    order.finish();
+  store.when(adFreeSubscriptionId).approved(function(product) {
+    product.verify();
+  });
+
+  store.when(adFreeId).verified(function(product) {
+    product.finish();
+  });
+  store.when(adFreeSubscriptionId).verified(function(product) {
+    product.finish();
+  });
+
+  store.when(adFreeId).owned(function() {
+    if (isAdFree) return;
+    emitter.emit('ad-free-owned');
+    off();
+    isAdFree = true;
+  });
+  store.when(adFreeSubscriptionId).owned(function() {
+    if (isAdFree) return;
+    emitter.emit('ad-free-owned');
+    off();
+    isAdFree = true;
   });
 
   store.when(adFreeId).cancelled(function() {
