@@ -22,6 +22,9 @@ function init() {
   var isAdFree;
   var isWalletReady = false;
 
+  var verifications = 0;
+  var isReadyAndVerified = false;
+
   store.validator = process.env.SITE_URL + 'iap';
 
   store.register({
@@ -42,17 +45,26 @@ function init() {
   });
 
   store.when(adFreeId).approved(function(product) {
-    product.verify();
+    verifications++;
+    product.verify().success(function() {
+      product.finish();
+    }).done(function() {
+      setTimeout(function() {
+        verifications--;
+        readyAndVerified();
+      }, 1);
+    })
   });
   store.when(adFreeSubscriptionId).approved(function(product) {
-    product.verify();
-  });
-
-  store.when(adFreeId).verified(function(product) {
-    product.finish();
-  });
-  store.when(adFreeSubscriptionId).verified(function(product) {
-    product.finish();
+    verifications++;
+    product.verify().success(function() {
+      product.finish();
+    }).done(function() {
+      setTimeout(function() {
+        verifications--;
+        readyAndVerified();
+      }, 1);
+    })
   });
 
   store.when(adFreeId).owned(function() {
@@ -86,14 +98,22 @@ function init() {
 
   store.ready(function() {
     storeIsReady = true;
+    readyAndVerified();
+  });
+
+  function readyAndVerified() {
+    if (verifications !== 0 || isReadyAndVerified) return;
+    isReadyAndVerified = true;
+
     if (!isAdFree) {
       isAdFree = false;
       showBanner();
+      if (isWalletReady) {
+        emitter.emit('ad-fee-modal');
+      }
     }
-    if (isWalletReady) {
-      emitter.emit('ad-fee-modal');
-    }
-  });
+  }
+
   emitter.once('wallet-ready', function() {
     isWalletReady = true;
     if (isAdFree === false) {
