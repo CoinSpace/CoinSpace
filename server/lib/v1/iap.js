@@ -3,6 +3,10 @@
 var iap = require('in-app-purchase');
 var PURCHASE_EXPIRED = 6778003;
 var PURCHASE_NOT_FOUND = -1;
+var UNKNOWN_PRODUCT_TYPE = -2;
+
+var PAID_SUBSCRIPTION = 'paid subscription';
+var NON_CONSUMABLE = 'non consumable';
 
 iap.config({
   applePassword: process.env.IAP_APPLE_PASSWORD,
@@ -29,6 +33,8 @@ function validate(product) {
   if (!receipt) return Promise.reject({error: 'bad_receipt'});
   var productId = product.id;
   if (!productId) return Promise.reject({error: 'bad_product_id'});
+  var productType = product.type;
+  if (!productType) return Promise.reject({error: 'bad_product_type'});
 
   return iap.validate(receipt).then(function(validatedData) {
     var purchaseData = iap.getPurchaseData(validatedData);
@@ -38,8 +44,17 @@ function validate(product) {
     if (!purchase) {
       return {ok: false, data: {code: PURCHASE_NOT_FOUND}};
     }
-    if (iap.isExpired(purchase) || iap.isCanceled(purchase)) {
-      return {ok: false, data: {code: PURCHASE_EXPIRED}};
+
+    if (productType === PAID_SUBSCRIPTION) {
+      if (iap.isExpired(purchase)) {
+        return {ok: false, data: {code: PURCHASE_EXPIRED}};
+      }
+    } else if (productType === NON_CONSUMABLE) {
+      if (iap.isCanceled(purchase)) {
+        return {ok: false, data: {code: PURCHASE_EXPIRED}};
+      }
+    } else {
+      return {ok: false, data: {code: UNKNOWN_PRODUCT_TYPE}};
     }
     return {ok: true};
   });
