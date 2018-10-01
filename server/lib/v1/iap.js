@@ -7,10 +7,10 @@ var PURCHASE_NOT_FOUND = -1;
 iap.config({
   applePassword: process.env.IAP_APPLE_PASSWORD,
   googlePublicKeyStrLive: process.env.IAP_GOOGLE_PUBLIC_KEY,
-  // googleAccToken: process.env.IAP_GOOGLE_ACC_TOKEN,
-  // googleRefToken: process.env.IAP_GOOGLE_REF_TOKEN,
-  // googleClientID: process.env.IAP_GOOGLE_CLIENT_ID,
-  // googleClientSecret: process.env.IAP_GOOGLE_CLIENT_SECRET
+  googleAccToken: process.env.IAP_GOOGLE_ACC_TOKEN,
+  googleRefToken: process.env.IAP_GOOGLE_REF_TOKEN,
+  googleClientID: process.env.IAP_GOOGLE_CLIENT_ID,
+  googleClientSecret: process.env.IAP_GOOGLE_CLIENT_SECRET
 });
 
 iap.setup();
