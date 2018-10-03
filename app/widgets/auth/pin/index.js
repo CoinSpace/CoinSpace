@@ -28,11 +28,11 @@ module.exports = function(prevPage, data){
       }
     },
     oncomplete: function() {
-      ractive.find('#setPin').focus();
+      initFingerprintAuth().catch(function() {
+        ractive.find('#setPin').focus();
+      });
     }
   })
-
-  initFingerprintAuth();
 
   ractive.on('focus-pin', function(){
     ractive.set('pinfocused', true)
@@ -136,40 +136,48 @@ module.exports = function(prevPage, data){
   }
 
   function initFingerprintAuth() {
-    if (process.env.BUILD_PLATFORM === 'ios') {
-      window.plugins.touchid.isAvailable(function() {
-        CS.setAvailableTouchId();
-        var pin = CS.getPin();
-        if (pin && CS.walletExists() && userExists) {
-          window.plugins.touchid.verifyFingerprintWithCustomPasswordFallbackAndEnterPasswordLabel(
-            translate('Scan your fingerprint please'),
-            translate('Enter PIN'),
-            function() {
+    return new Promise(function(resolve, reject) {
+      if (process.env.BUILD_PLATFORM === 'ios') {
+        window.plugins.touchid.isAvailable(function() {
+          CS.setAvailableTouchId();
+          var pin = CS.getPin();
+          if (pin && CS.walletExists() && userExists) {
+            window.plugins.touchid.verifyFingerprintWithCustomPasswordFallbackAndEnterPasswordLabel(
+              translate('Scan your fingerprint please'),
+              translate('Enter PIN'),
+              function() {
+                resolve();
+                ractive.set('pin', pin)
+                var boxes = pin.split('')
+                setBoxes(boxes);
+              }, reject
+            )
+          } else {
+            reject();
+          }
+        }, reject)
+      } else if (process.env.BUILD_PLATFORM === 'android') {
+        var FingerprintAuth = window.FingerprintAuth;
+        FingerprintAuth.isAvailable(function(result) {
+          if (!result.isAvailable) return reject();
+          CS.setAvailableTouchId();
+          var pin = CS.getPin();
+          if (pin && CS.walletExists() && userExists) {
+            var config = {clientId: 'coinspace', locale: getLanguage()};
+            FingerprintAuth.encrypt(config, function() {
+              resolve();
               ractive.set('pin', pin)
               var boxes = pin.split('')
               setBoxes(boxes);
-            }
-          )
-        }
-      })
-    }
-
-    if (process.env.BUILD_PLATFORM === 'android') {
-      var FingerprintAuth = window.FingerprintAuth;
-      FingerprintAuth.isAvailable(function(result) {
-        if (!result.isAvailable) return false;
-        CS.setAvailableTouchId();
-        var pin = CS.getPin();
-        if (pin && CS.walletExists() && userExists) {
-          var config = {clientId: 'coinspace', locale: getLanguage()};
-          FingerprintAuth.encrypt(config, function() {
-            ractive.set('pin', pin)
-            var boxes = pin.split('')
-            setBoxes(boxes);
-          });
-        }
-      });
-    }
+            }, reject);
+          } else {
+            reject();
+          }
+        }, reject);
+      } else {
+        reject();
+      }
+    });
   }
 
   return ractive
