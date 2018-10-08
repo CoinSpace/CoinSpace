@@ -206,5 +206,8 @@
   "The memo contains optional extra information. A string up to 28-bytes long.": "The memo contains optional extra information. A string up to 28-bytes long.",
   "Your wallet isn't activated. You can receive only amount greater than :minReserve :denomination.": "Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(denomination)s.",
   "one time": "one time",
-  "per year": "per year"
+  "per year": "per year",
+  "subscribe": "subscribe",
+  "Privacy Policy": "Privacy Policy",
+  "Ad Free Subscription is a recurring subscription. You will automatically be billed the amount listed above through iTunes. Your subscription will auto-renew unless you cancel or turn off auto-renew at least 24 hours before the end of the current period. The subscription fee will be charged every year. You can manage your subscription in iTunes.": "Ad Free Subscription is a recurring subscription. You will automatically be billed the amount listed above through iTunes. Your subscription will auto-renew unless you cancel or turn off auto-renew at least 24 hours before the end of the current period. The subscription fee will be charged every year. You can manage your subscription in iTunes."
 }

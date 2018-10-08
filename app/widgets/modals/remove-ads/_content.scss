@@ -14,7 +14,6 @@
 
   ._icon {
     width: 120px;
-    height: 120px;
     display: block;
     margin: 0 auto;
     position: relative;
@@ -41,6 +40,16 @@
     font-size: 18px;
     max-width: 200px;
     margin: 0 auto 5px auto;
+
+    &._small {
+      font-size: 13px;
+      line-height: 1;
+      margin-top: 15px;
+
+      ._links {
+        margin-top: 10px;
+      }
+    }
 
     @include breakpoint(portrait) {
       max-width: 280px;

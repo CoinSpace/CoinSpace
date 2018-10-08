@@ -206,5 +206,8 @@
     "The memo contains optional extra information. A string up to 28-bytes long.": "В мемо содержится дополнительная дополнительная информация. Строка длиной до 28 байтов.",
     "Your wallet isn't activated. You can receive only amount greater than :minReserve :denomination.": "Ваш кошелек не активирован. Вы можете получить только сумму, превышающую %(minReserve)s %(denomination)s.",
     "one time": "один раз",
-    "per year": "в год"
+    "per year": "в год",
+    "subscribe": "подписаться",
+    "Privacy Policy": "Политика конфиденциальности",
+    "Ad Free Subscription is a recurring subscription. You will automatically be billed the amount listed above through iTunes. Your subscription will auto-renew unless you cancel or turn off auto-renew at least 24 hours before the end of the current period. The subscription fee will be charged every year. You can manage your subscription in iTunes.": "Ad Free Subscription — это периодическая подписка. Вам автоматически будет выставлен счет на стоимость, указанную выше, через iTunes. Ваша подписка будет автоматически обновляться, если вы не отмените или не отключите автоматическое продление по крайней мере за 24 часа до окончания текущего периода. Абонентская плата будет взиматься каждый год. Вы можете управлять подпиской в iTunes."
 }

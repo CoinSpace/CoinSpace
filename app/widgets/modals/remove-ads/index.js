@@ -18,7 +18,8 @@ function open(config) {
       isLoading: false,
       onDismiss: onDismiss,
       price: config.price,
-      priceSubscription: config.priceSubscription
+      priceSubscription: config.priceSubscription,
+      isIOS: process.env.BUILD_PLATFORM === 'ios'
     }
   });
 

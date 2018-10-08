@@ -22,7 +22,17 @@
         <p class="_message">{{price}} {{translate("one time")}}</p>
         <div class="_buy_btn mb-20" on-click="buy">{{translate("buy")}}</div>
         <p class="_message">{{priceSubscription}} {{translate("per year")}}</p>
-        <div class="_buy_btn" on-click="buy-subscription">{{translate("buy")}}</div>
+        <div class="_buy_btn" on-click="buy-subscription">{{translate("subscribe")}}</div>
+        {{#if isIOS}}
+        <div class="_message _small">
+          {{translate("Ad Free Subscription is a recurring subscription. You will automatically be billed the amount listed above through iTunes. Your subscription will auto-renew unless you cancel or turn off auto-renew at least 24 hours before the end of the current period. The subscription fee will be charged every year. You can manage your subscription in iTunes.")}}
+          <div class="_links">
+            <a href="" onclick="window.open('https://www.coin.space/terms-of-service.html', '_system'); return false;">{{translate("Terms of Use")}}</a>
+            and
+            <a href="" onclick="window.open('https://www.coin.space/coinprivacypolicy.html', '_system'); return false;">{{translate("Privacy Policy")}}</a>
+          </div>
+        </div>
+        {{/if}}
       {{/if}}
     </div>
 
