@@ -12,6 +12,7 @@ var initExchange = require('pages/exchange')
 var initHistory = require('pages/history')
 var initTokens = require('pages/tokens')
 var Hammer = require('hammerjs')
+var ads = require('lib/ads')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -64,7 +65,11 @@ module.exports = function(el){
   }
 
   emitter.on('change-tab', function(tab) {
-    showPage(tabs[tab])
+    var page = tabs[tab]
+    if (process.env.BUILD_TYPE === 'phonegap' && currentPage !== page) {
+      ads.showInterstitial()
+    }
+    showPage(page)
   })
 
   emitter.on('toggle-terms', function(open) {

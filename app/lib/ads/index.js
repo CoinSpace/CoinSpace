@@ -2,11 +2,19 @@
 
 var modalRemoveAds = require('widgets/modals/remove-ads');
 var emitter = require('lib/emitter');
+var _ = require('lodash');
 
 var ad_units = {
-  ios : {banner: '196605347445795_200305920409071'},
-  android : {banner: '196605347445795_200306843742312'}
+  ios : {
+    banner: '196605347445795_200305920409071',
+    interstitial: '196605347445795_537787963327530'
+  },
+  android : {
+    banner: '196605347445795_200306843742312',
+    interstitial: '196605347445795_535809093525417'
+  }
 }
+var adid = (/(android)/i.test(navigator.userAgent)) ? ad_units.android : ad_units.ios;
 var resizeHandler = null;
 var storeIsReady = false;
 
@@ -16,10 +24,11 @@ var adFreePrice = '';
 var adFreeSubscriptionId = 'adfreesubscription';
 var adFreeSubscriptionPrice = '';
 
+var isAdFree;
+
 function init() {
   if (!window.store) return false;
   var store = window.store;
-  var isAdFree;
   var isWalletReady = false;
 
   var verifications = 0;
@@ -144,7 +153,6 @@ function showBanner() {
   var FacebookAds = window.FacebookAds;
   var position = FacebookAds.AD_POSITION.BOTTOM_CENTER;
 
-  var adid = (/(android)/i.test(navigator.userAgent)) ? ad_units.android : ad_units.ios;
   FacebookAds.createBanner({
     adId: adid.banner,
     position: position,
@@ -188,7 +196,14 @@ function off() {
   document.removeEventListener('resume', showAdFreeModal, false);
 }
 
+var showInterstitial = _.throttle(function() {
+  if (isAdFree === false) {
+    window.FacebookAds.prepareInterstitial({adId: adid.interstitial, autoShow: true})
+  }
+}, 5 * 60 * 1000, {trailing: false})
+
 module.exports = {
   init: init,
-  showAdFreeModal: showAdFreeModal
+  showAdFreeModal: showAdFreeModal,
+  showInterstitial: showInterstitial
 };
