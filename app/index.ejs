@@ -91,6 +91,26 @@
     </div>
   </div>
 
+  <% if (process.env.BUILD_TYPE !== 'phonegap') { %>
+  <div id="fb_web_ad">
+    <script type="text/javascript">
+      var data = {
+        placementid: '196605347445795_464018960704431',
+        format: '320x50',
+        testmode: <%= process.env.NODE_ENV !== 'production' %>,
+        onAdLoaded: function(element) {
+          document.body.classList.add('fb_web_ads');
+          element.style.display = 'block';
+        },
+        onAdError: function() {}
+      };
+    </script>
+    <script>
+      (function(a,b,c){var d="https://www.facebook.com",e="https://connect.facebook.net/en_US/fbadnw55.js",f={iframeLoaded:true,xhrLoaded:true},g=a.data,h=function(){if(Date.now)return Date.now();else return+new Date()},i=function(B){var C=d+"/audience_network/client_event",D={cb:h(),event_name:"ADNW_ADERROR",ad_pivot_type:"audience_network_mobile_web",sdk_version:"5.5.web",app_id:g.placementid.split("_")[0],publisher_id:g.placementid.split("_")[1],error_message:B},E=[];for(var F in D)E.push(encodeURIComponent(F)+"="+encodeURIComponent(D[F]));var G=C+"?"+E.join("&"),H=new XMLHttpRequest();H.open("GET",G,true);H.send();if(g.onAdError)g.onAdError("1000","Internal error.")},j=function(){if(b.currentScript)return b.currentScript;else{var B=b.getElementsByTagName("script");return B[B.length-1]}},k=function(B){try{return B.document.referrer}catch(C){}return""},l=function(){var B=a,C=[B];try{while(B!==B.parent&&B.parent.document)C.push(B=B.parent)}catch(D){}return C.reverse()},m=function(){var B=l();for(var C=0;C<B.length;C++){var D=B[C],E=D.ADNW||{};D.ADNW=E;if(!D.ADNW)continue;return E.v55=E.v55||{ads:[],window:D}}throw new Error("no_writable_global")},n=function(B){var C=B.indexOf("/",B.indexOf("://")+3);if(C===-1)return B;return B.substring(0,C)},o=function(B){return B.location.href||k(B)},p=function(B){if(B.sdkLoaded)return;var C=B.window.document,D=C.createElement("iframe");D.name="fbadnw";D.style.display="none";D.onload=function(){var E=D.contentDocument.createElement("script");E.src=e;E.async=true;D.contentDocument.body.appendChild(E)};C.body.appendChild(D);B.sdkLoaded=true},q=function(B){var C=/^https?:\/\/www\.google(\.com?)?.\w{2,3}$/;return!!B.match(C)},r=function(B){return!!B.match(/cdn\.ampproject\.org$/)},s=function(){var B=c.ancestorOrigins||[],C=B[B.length-1]||c.origin,D=B[B.length-2]||c.origin;if(q(C)&&r(D))return n(D);else return n(C)},t=function(B){try{return JSON.parse(B)}catch(A){i(A.message);throw A}},u=function(B,C,D){if(!B.iframe){var E=D.createElement("iframe");E.src=d+"/audiencenetwork/iframe/";E.style.display="none";D.body.appendChild(E);B.iframe=E;B.iframeAppendedTime=h();B.iframeData={}}C.iframe=B.iframe;C.iframeData=B.iframeData;C.tagJsIframeAppendedTime=B.iframeAppendedTime||0},v=function(B){var C=d+"/audiencenetwork/xhr/?sdk=5.5.web";for(var D in B)if(typeof B[D]!=="function")C+="&"+D+"="+encodeURIComponent(B[D]);var E=new XMLHttpRequest();E.open("GET",C,true);E.withCredentials=true;E.onreadystatechange=function(){if(E.readyState===4){var F=t(E.response);B.events.push({name:"xhrLoaded",source:B.iframe.contentWindow,data:F,postMessageTimestamp:h(),receivedTimestamp:h()})}};E.send()},w=function(B,C){var D=d+"/audiencenetwork/xhriframe/?sdk=5.5.web";for(var E in C)if(typeof C[E]!=="function")D+="&"+E+"="+encodeURIComponent(C[E]);var F=b.createElement("iframe");F.src=D;F.style.display="none";b.body.appendChild(F);C.iframe=F;C.iframeData={};C.tagJsIframeAppendedTime=h()},x=function(B){var C=function(event){try{var E=event.data;if(E.name in f)B.events.push({name:E.name,source:event.source,data:E.data})}catch(A){}},D=B.iframe.contentWindow.parent;D.addEventListener("message",C,false)},y=function(a){if(a.context&&a.context.sourceUrl)return true;try{return!!JSON.parse(decodeURI(a.name)).ampcontextVersion}catch(A){return false}},z=function(B){var C=h(),D=l()[0],E=j().parentElement,F=D!=a.top,G=D.$sf&&D.$sf.ext,H=o(D),I=m();p(I);var J={amp:y(D),events:[],tagJsInitTime:C,rootElement:E,iframe:null,tagJsIframeAppendedTime:I.iframeAppendedTime||0,url:H,domain:s(),channel:n(o(D)),width:screen.width,height:screen.height,pixelratio:a.devicePixelRatio,placementindex:I.ads.length,crossdomain:F,safeframe:!!G,placementid:g.placementid,format:g.format||"300x250",testmode:!!g.testmode,onAdLoaded:g.onAdLoaded,onAdError:g.onAdError};if(g.bidid)J.bidid=g.bidid;if(F||!c.ancestorOrigins)w(I,J);else{u(I,J,D.document);v(J)}x(J);J.rootElement.dataset.placementid=J.placementid;I.ads.push(J)};try{z()}catch(A){i(A.message||A);throw A}})(window,document,location);
+    </script>
+  </div>
+  <% } %>
+
   <% if (process.env.BUILD_TYPE === 'phonegap') { %>
   <script src="cordova.js"></script>
   <% } %>
