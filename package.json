@@ -49,6 +49,7 @@
     "commander": "^2.11.0",
     "copy-webpack-plugin": "^4.5.2",
     "cordova": "6.5.0",
+    "cordova-custom-config": "^5.0.2",
     "core-js": "^2.5.7",
     "counterpart": "^0.18.2",
     "crypto-js": "^3.1.9-1",
@@ -94,6 +95,7 @@
     "webpack-dev-server": "^2.8.1",
     "webpack-merge": "^4.1.0",
     "worker-loader": "^0.8.1",
+    "xml2js": "^0.4.19",
     "yaqrcode": "^0.2.1"
   },
   "engines": {
