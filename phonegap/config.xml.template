@@ -32,8 +32,10 @@
         <custom-config-file target="AndroidManifest.xml" parent="./application">
             <meta-data android:name = "com.google.android.gms.ads.AD_MANAGER_APP" android:value="true" />
         </custom-config-file>
-        <custom-config-file target="AndroidManifest.xml" parent="/*">
+        <custom-config-file target="AndroidManifest.xml" parent="/*" mode="replace">
             <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+            <uses-feature android:name="android.hardware.camera" android:required="false" />
+            <uses-feature android:name="android.hardware.location.gps" android:required="false" />
         </custom-config-file>
     </platform>
     <platform name="ios">

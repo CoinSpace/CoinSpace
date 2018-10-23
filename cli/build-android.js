@@ -16,7 +16,7 @@ program
   .parse(process.argv);
 
 if (program.run) {
-  return utils.cordova('run android');
+  return utils.cordova('run android --noprepare');
 }
 
 console.log('Start building (webpack)...');
@@ -43,8 +43,8 @@ webpack(webpackConfig, function(error, stats) {
   fse.copySync('build', path.resolve(mobileBuildPath, 'www'));
 
   utils.cordova('platform add android@6.1.0');
-  utils.cordova('plugin add cordova-android-support-gradle-release@1.4.5 --fetch');
-  utils.cordova('plugin add cordova-custom-config@5.0.2 --fetch');
+  utils.cordova('plugin add cordova-android-support-gradle-release@1.4.5');
+  utils.cordova('plugin add cordova-custom-config@5.0.2');
   utils.cordova('plugin add cordova-plugin-geolocation@2.4.3');
   utils.cordova('plugin add cordova-plugin-whitelist@1.3.2');
   utils.cordova('plugin add cordova-plugin-inappbrowser@1.7.1');
