@@ -219,7 +219,8 @@ module.exports = function(el) {
 
   function getRate() {
     ractive.set('isLoadingRate', true);
-    return shapeshift.getRate(ractive.get('fromSymbol'), ractive.get('toSymbol')).then(function(rate) {
+    return shapeshift.marketInfo(ractive.get('fromSymbol'), ractive.get('toSymbol')).then(function(data) {
+      var rate = data.rate;
       ractive.set('isLoadingRate', false);
       ractive.set('rate', rate);
     }).catch(function(err) {

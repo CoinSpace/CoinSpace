@@ -12,16 +12,6 @@ function getCoins() {
   });
 }
 
-function getRate(fromSymbol, toSymbol) {
-  var pair = (fromSymbol + '_' + toSymbol).toLowerCase();
-  return request({
-    url: urlRoot + '/rate/' + pair,
-  }).then(function(data) {
-    if (data.error) throw new Error(data.error);
-    return data.rate;
-  });
-}
-
 function validateAddress(address, symbol) {
   if (!address) return Promise.resolve(false);
   if (!symbol) return Promise.resolve(false);
@@ -99,7 +89,6 @@ function getCoinsArray(coins) {
 
 module.exports = {
   getCoins: getCoins,
-  getRate: getRate,
   validateAddress: validateAddress,
   shift: shift,
   txStat: txStat,
