@@ -12,7 +12,7 @@ function makeRequest(config, callback) {
       showError({message: 'Request timeout. Please check your internet connection.'});
       throw err;
     }
-    throw new Error(err.response.data.error);
+    throw new Error(err.response.data.error || err.response.data.message);
   }).then(function(data) {
     if (callback) {
       setTimeout(function() {

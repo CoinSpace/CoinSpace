@@ -54,6 +54,7 @@ webpack(webpackConfig, function(error, stats) {
   utils.cordova('plugin add cordova-facebook-audnet-sdk@4.23.0');
   utils.cordova('plugin add cordova-plugin-facebookads@4.23.2');
   utils.cordova('plugin add cc.fovea.cordova.purchase@7.2.0');
+  utils.cordova('plugin add cordova-plugin-customurlscheme@4.3.0 --variable URL_SCHEME=coinspace');
 
   if (program.release) {
     utils.cordova('build ios --emulator --buildConfig=../build.json --release');

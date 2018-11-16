@@ -226,4 +226,16 @@
       }
     }
   }
+
+  .logout_link {
+    display: block;
+    cursor: pointer;
+    text-align: center;
+    padding-top: 10px;
+    color: #999;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

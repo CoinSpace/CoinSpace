@@ -113,17 +113,26 @@
 
   </form>
 
-  <div class="confirm__buttons">
-    {{#if isValidating}}
-      <div class="confirm__btn--validating">
-        <span class="_icon">
-          {{>svg_refresh}}
-        </span>
-      </div>
-    {{else}}
-      <div on-click="confirm" class="confirm__btn">{{translate("Confirm")}}</div>
-    {{/if}}
-  </div>
+  {{#if isLogged}}
+    <div class="confirm__buttons">
+      {{#if isValidating}}
+        <div class="confirm__btn--validating">
+          <span class="_icon">
+            {{>svg_refresh}}
+          </span>
+        </div>
+      {{else}}
+        <div on-click="confirm" class="confirm__btn">{{translate("Confirm")}}</div>
+      {{/if}}
+    </div>
+    <div class="logout_link" on-click="logout">
+      {{translate("Logout")}}
+    </div>
+  {{else}}
+    <div class="confirm__btn" on-click="login">
+      {{translate("Sign in")}}
+    </div>
+  {{/if}}
 
 </div>
 {{>footer}}

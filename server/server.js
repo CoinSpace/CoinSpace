@@ -13,6 +13,8 @@ middleware.init(app);
 
 // API routes
 app.use('/api/v1', api);
+app.set('views', './server/views');
+app.set('view engine', 'ejs');
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);

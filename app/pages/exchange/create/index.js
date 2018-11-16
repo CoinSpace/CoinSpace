@@ -10,6 +10,7 @@ var qrcode = require('lib/qrcode');
 var geo = require('lib/geo');
 var showTooltip = require('widgets/modals/tooltip');
 var showError = require('widgets/modals/flash').showError;
+var showInfo = require('widgets/modals/flash').showInfo;
 var _ = require('lodash');
 var db = require('lib/db');
 
@@ -19,6 +20,7 @@ module.exports = function(el) {
     template: require('./index.ract'),
     data: {
       isLoading: true,
+      isLogged: shapeshift.isLogged(),
       isLoadingRate: true,
       qrScannerAvailable: qrcode.isScanAvailable,
       isValidating: false,
@@ -36,6 +38,27 @@ module.exports = function(el) {
       loader: require('../loader.ract'),
       footer: require('../footer.ract')
     }
+  });
+
+  ractive.on('login', function() {
+    shapeshift.login().then(function() {
+      ractive.set('isLogged', true);
+    }).catch(function(err) {
+      console.log('catch', err);
+      if (err.message === 'user_is_not_verified') {
+        return showInfo({
+          message: 'Your ShapeShift account is not verified.',
+          href: 'https://auth.shapeshift.io',
+          linkText: 'Complete verification'
+        })
+      }
+    });
+  });
+
+  ractive.on('logout', function() {
+    shapeshift.logout().then(function() {
+      ractive.set('isLogged', false);
+    });
   });
 
   var fromSymbolObserver = ractive.observe('fromSymbol', function(symbol, old) {
@@ -175,6 +198,11 @@ module.exports = function(el) {
       }
       if (/Please use the precise/.test(err.message)) {
         return showError({message: 'Exchange is currently unavailable for this pair'});
+      }
+      if (/Invalid or Expired Authorization Token/.test(err.message)) {
+        ractive.set('isLogged', false);
+        shapeshift.cleanAccessToken();
+        return showError({message: 'Try to sign in again'});
       }
       console.error(err.message);
       return showError({message: err.message});

@@ -34,7 +34,7 @@ function init() {
   var verifications = 0;
   var isReadyAndVerified = false;
 
-  store.validator = process.env.SITE_URL + 'iap';
+  store.validator = window.urlRoot + 'iap';
 
   store.register({
     id: adFreeId,

@@ -11,6 +11,7 @@ var fee = require('./fee');
 var ticker = require('./ticker');
 var ethereumTokens = require('./ethereumTokens');
 var iap = require('./iap');
+var shapeshift = require('./shapeshift');
 
 var router = express.Router();
 
@@ -161,6 +162,23 @@ router.put('/location', restrict, function(req, res) {
 
 router.delete('/location', restrict, function(req, res) {
   geo.remove(req.body.id).catch(console.error);
+  res.status(200).send();
+});
+
+router.get('/shapeShiftRedirectUri', function(req, res) {
+  var code = req.query.code || '';
+  var buildType = req.query.buildType;
+  if (buildType !== 'phonegap' && buildType !== 'web') return res.status(400).send('Bad request');
+  shapeshift.getAccessToken(code).then(function(accessToken) {
+    res.render('shapeshift', {accessToken: accessToken, buildType: buildType});
+  }).catch(function() {
+    res.render('shapeshift', {accessToken: '', buildType: buildType});
+  });
+});
+
+router.delete('/shapeShiftToken', restrict, function(req, res) {
+  var token = req.body.token;
+  shapeshift.revokeToken(token).catch(function() {});
   res.status(200).send();
 });
 

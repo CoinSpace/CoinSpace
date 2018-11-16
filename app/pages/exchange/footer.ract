@@ -1,3 +1,3 @@
 <div class="_powered_by">
-    Powered by <a href="" onclick="window.open('https://shapeshift.io/', '_system'); return false;">ShapeShift <span class="_icon"></span></a>
+    Powered by <a href="" onclick="window.open('https://shapeshift.io/', '_system'); return false;">ShapeShift <span class="_icon">{{>svg_shapeshift}}</span></a>
 </div>

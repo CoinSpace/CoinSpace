@@ -75,4 +75,10 @@ window.initCSApp = function() {
       originOnTouchStart.apply(this, arguments);
     }
   }
+
+  window.handleOpenURL = function(url) {
+    setTimeout(function() {
+      emitter.emit('handleOpenURL', url);
+    }, 1)
+  }
 }
