@@ -253,9 +253,7 @@ module.exports = function(el) {
     }).catch(function(err) {
       ractive.set('isLoadingRate', false);
       ractive.set('rate', '?');
-      if (/Pair (.+) is currently unavailable/.test(err.message)) return // silence
       console.error(err);
-      return showError({message: err.message});
     });
   }
 
