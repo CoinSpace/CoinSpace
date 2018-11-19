@@ -44,7 +44,6 @@ module.exports = function(el) {
     shapeshift.login().then(function() {
       ractive.set('isLogged', true);
     }).catch(function(err) {
-      console.log('catch', err);
       if (err.message === 'user_is_not_verified') {
         return showInfo({
           message: 'Your ShapeShift account is not verified.',
