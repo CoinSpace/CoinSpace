@@ -3,6 +3,7 @@
 var Ractive = require('widgets/modals/base');
 var showError = require('widgets/modals/flash').showError;
 var CS = require('lib/wallet');
+var shapeshift = require('lib/shapeshift');
 
 function open() {
 
@@ -23,6 +24,7 @@ function open() {
       if (err) return handleError(err);
       CS.reset();
       CS.resetPin();
+      shapeshift.cleanAccessToken();
       ractive.set('confirmation', false);
       ractive.set('success', true);
       setTimeout(function() {

@@ -7,6 +7,7 @@ var validatePin = require('lib/pin-validator')
 var showError = require('widgets/modals/flash').showError
 var translate = require('lib/i18n').translate
 var getLanguage = require('lib/i18n').getLanguage
+var shapeshift = require('lib/shapeshift');
 var pincode = ''
 
 module.exports = function(prevPage, data){
@@ -106,6 +107,7 @@ module.exports = function(prevPage, data){
   ractive.on('clear-credentials', function(){
     CS.reset();
     CS.resetPin();
+    shapeshift.cleanAccessToken();
     location.reload();
   })
 
