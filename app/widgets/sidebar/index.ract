@@ -16,10 +16,15 @@
 
 <div class="settings__footer">
   <div class="_link_group">
-    {{#isEnabledImportExport}}
+    {{#isEOS}}
+    <span class="settings__link" on-click="eos-setup-account">{{translate("Setup EOS account")}}</span>
+    {{/isEOS}}
+    {{#isEnabledImport}}
     <span class="settings__link" on-click="import-private-key">{{translate("Transfer paper wallet / private key")}}</span>
+    {{/isEnabledImport}}
+    {{#isEnabledExport}}
     <span class="settings__link" on-click="export-private-keys">{{translate("Export private keys")}}</span>
-    {{/isEnabledImportExport}}
+    {{/isEnabledExport}}
   </div>
 
   <div class="_btn_group">

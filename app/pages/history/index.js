@@ -8,6 +8,7 @@ var getWallet = require('lib/wallet').getWallet;
 var strftime = require('strftime');
 var showError = require('widgets/modals/flash').showError;
 var showTransactionDetail = require('widgets/modals/transaction-detail');
+var initEosSetup = require('widgets/eos/setup');
 
 module.exports = function(el) {
   var network = getTokenNetwork();
@@ -23,6 +24,7 @@ module.exports = function(el) {
       formatConfirmations: function(number) {
         if (network === 'ripple') return '';
         if (network === 'stellar') return '';
+        if (network === 'eos') return '';
         if (number === 1) {
           return number + ' confirmation';
         } else {
@@ -62,6 +64,13 @@ module.exports = function(el) {
       hasMore: false,
       loadingMore: false
     }
+  })
+
+  initEosSetup(ractive.find('#eos-setup'));
+
+  emitter.on('wallet-ready', function(){
+    var wallet = getWallet();
+    ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
   })
 
   emitter.on('append-transactions', function(newTxs) {

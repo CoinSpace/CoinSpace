@@ -1,4 +1,4 @@
-
+<div class-hidden="needToSetupEos">
   <div class="send__form">
     <form>
 
@@ -116,4 +116,6 @@
       </div>
     {{/validating}}
   </div>
+</div>
 
+<div id="eos-setup" class-hidden="!needToSetupEos"></div>

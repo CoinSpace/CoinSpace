@@ -1,0 +1,204 @@
+.eos_setup_account {
+  padding: 0;
+  padding-top: 20px;
+  background-color: white;
+  min-width: 280px;
+  max-width: 450px;
+
+  @include breakpoint(portrait) {
+    width: 450px;
+    padding-top: 30px;
+  }
+
+  &._success {
+    background-color: $green;
+    ._inputs {
+      ._cancel {
+        max-width: 140px;
+        margin: 0 auto;
+      }
+    }
+    ._responseIcon {
+      margin: 0 auto;
+      display: block;
+      text-align: center;
+    }
+    ._responseTitle {
+      color: white;
+      font-size: 21px;
+      text-align: center;
+      padding-bottom: 40px;
+      max-width: 240px;
+      margin: 0 auto;
+      @include breakpoint(portrait) {
+        font-size: 28px;
+      }
+    }
+  }
+
+  ._header {
+    font-size: 21px;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $grey;
+
+    @include breakpoint(portrait) {
+      font-size: 24px;
+      padding-bottom: 20px;
+    }
+  }
+
+  ._content {
+    padding: 20px 20px 0;
+    ._account_name_group {
+      display: flex;
+      margin-bottom: 20px;
+
+      .input__container {
+        position: relative;
+        margin-top: 5px;
+      }
+
+      .close__input {
+        ._icon{
+          .svg-close {
+            fill: #969594;
+          }
+        }
+      }
+
+      ._label {
+        @include noselect;
+        cursor: pointer;
+        display: block;
+        flex: 1;
+
+        @include breakpoint(portrait) {
+          font-size: 20px;
+        }
+      }
+
+      ._input {
+        @extend .generic_box;
+        @extend .jigsaw-light;
+        padding-left: 10px;
+        padding-right: 38px;
+        border-radius: 2px;
+
+        height: auto;
+
+        &:active, &:focus {
+          outline: 0;
+          border: 1px solid #999;
+        }
+
+        @include breakpoint(portrait) {
+          font-size: 26px;
+          border-radius: 3px;
+          padding-right: 58px;
+        }
+      }
+    }
+    ._description {
+      @extend .jigsaw-regular;
+      @include breakpoint(portrait) {
+        font-size: 20px;
+      }
+    }
+    ._instructions {
+      @extend .jigsaw-regular;
+      @include wrapdat;
+      @include breakpoint(portrait) {
+        font-size: 20px;
+        margin-bottom: 40px;
+      }
+      margin-bottom: 20px;
+      a {
+        text-decoration: underline;
+      }
+    }
+    ._title {
+      @include breakpoint(portrait) {
+        font-size: 20px;
+      }
+    }
+    ._memo_box {
+      @extend .address__box;
+      ._phonegap_memo {
+        @include ellipsis();
+        @include textselect;
+        @extend .jigsaw-light;
+        display: block;
+        padding-right: 40px;
+      }
+      ._memo {
+        @include textselect;
+        @extend .jigsaw-light;
+        display: block;
+        word-break: break-all;
+      }
+    }
+
+  }
+
+  ._inputs {
+    padding: 20px;
+    background-color: white;
+    border-radius: 3px;
+
+    display: flex;
+
+    ._cancel, ._back {
+      @extend .csbtn-base;
+      margin-right: 5px;
+
+      color: darken($grey, 20%);
+      background-color: $grey;
+      box-shadow: 0 2px 0 0 darken($grey, 20%);
+
+      @include breakpoint(portrait) {
+        font-size: 24px;
+      }
+
+      &:hover {
+        color: darken($grey, 20%);
+      }
+    }
+
+    ._confirm {
+      @extend .csbtn;
+      margin-left: 5px;
+
+      @include breakpoint(portrait) {
+        font-size: 24px;
+      }
+    }
+
+    ._confirm--processing {
+      @extend .csbtn-base;
+      position: relative;
+      margin-left: 5px;
+      color: darken($grey, 20%);
+      background-color: $grey;
+      transform: translate(0px, 3px);
+      box-shadow: 0 0px 0 0;
+      &:hover {
+        color: darken($grey, 20%);
+      }
+      ._icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -15px;
+        margin-left: -15px;
+        width: 30px;
+        height: 30px;
+        display: inline;
+        animation:  infinite-spinning 1s linear infinite;
+        .svg-refresh {
+          fill: darken($grey, 20%);
+        }
+      }
+    }
+  }
+}

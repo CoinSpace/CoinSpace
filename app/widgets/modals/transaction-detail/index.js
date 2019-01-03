@@ -11,6 +11,8 @@ module.exports = function(data) {
     content = require('./contentRipple.ract')
   } else if (data.isNetwork('stellar')) {
     content = require('./contentStellar.ract')
+  } else if (data.isNetwork('eos')) {
+    content = require('./contentEOS.ract')
   } else {
     content = require('./contentBtcBchLtc.ract')
   }

@@ -16,6 +16,7 @@ var getDestinationInfo = require('lib/wallet').getDestinationInfo;
 var resolveTo = require('lib/openalias/xhr.js').resolveTo;
 var qrcode = require('lib/qrcode');
 var bchaddr = require('bchaddrjs');
+var initEosSetup = require('widgets/eos/setup');
 
 module.exports = function(el){
   var selectedFiat = '';
@@ -32,6 +33,7 @@ module.exports = function(el){
       isEthereum: false,
       isRipple: false,
       isStellar: false,
+      isEOS: false,
       validating: false,
       gasLimit: '',
       destinationTag: '',
@@ -39,6 +41,8 @@ module.exports = function(el){
       memo: ''
     }
   })
+
+  initEosSetup(ractive.find('#eos-setup'));
 
   emitter.on('prefill-wallet', function(address, context) {
     if (context !== 'send') return;
@@ -64,6 +68,7 @@ module.exports = function(el){
     ractive.set('isEthereum', network === 'ethereum');
     ractive.set('isRipple', network === 'ripple');
     ractive.set('isStellar', network === 'stellar');
+    ractive.set('isEOS', network === 'eos');
   });
 
   ractive.on('open-qr', function() {
@@ -142,8 +147,10 @@ module.exports = function(el){
   })
 
   emitter.on('wallet-ready', function() {
-    ractive.set('denomination', getWallet().denomination);
-    ractive.set('gasLimit', getWallet().gasLimit);
+    var wallet = getWallet();
+    ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
+    ractive.set('denomination', wallet.denomination);
+    ractive.set('gasLimit', wallet.gasLimit);
   });
 
   emitter.once('ticker', function(rates) {

@@ -22,6 +22,8 @@ function validateSend(options) {
       tx = wallet.createTx(to, amount, options.tag, options.invoiceId, !options.destinationInfo.isActive)
     } else if (wallet.networkName === 'stellar') {
       tx = wallet.createTx(to, amount, options.memo, !options.destinationInfo.isActive)
+    } else if (wallet.networkName === 'eos') {
+      tx = wallet.createTx(to, amount, options.memo)
     }
   } catch(e) {
     var error;

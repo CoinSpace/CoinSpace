@@ -103,6 +103,13 @@
   }
 }
 
+.token--eos {
+  background-color: $eos;
+  ._name {
+    color: white;
+  }
+}
+
 .token--ethereum {
   background-color: $ethereal;
   ._name {

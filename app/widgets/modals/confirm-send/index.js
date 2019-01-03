@@ -6,6 +6,7 @@ var btcBchLtc = require('./btcBchLtc');
 var ethereum = require('./ethereum');
 var ripple = require('./ripple');
 var stellar = require('./stellar');
+var eos = require('./eos');
 
 function open(data) {
   var network = getTokenNetwork();
@@ -17,6 +18,8 @@ function open(data) {
     return ripple(data);
   } else if (network === 'stellar') {
     return stellar(data);
+  } else if (network === 'eos') {
+    return eos(data);
   }
 }
 

@@ -1,0 +1,7 @@
+.eos_setup_account_btn {
+  @extend .csbtn;
+  @include breakpoint(portrait) {
+    font-size: 26px;
+    border-radius: 3px;
+  }
+}

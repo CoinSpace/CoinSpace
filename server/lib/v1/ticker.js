@@ -10,6 +10,7 @@ var fsyms = [
   'ETH',
   'XRP',
   'XLM',
+  'EOS',
   'USD'
 ]
 

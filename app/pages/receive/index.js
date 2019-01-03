@@ -2,7 +2,6 @@
 
 var Ractive = require('lib/ractive')
 var emitter = require('lib/emitter')
-var db = require('lib/db')
 var CS = require('lib/wallet')
 var showTooltip = require('widgets/modals/tooltip')
 var showQr = require('widgets/modals/qr')
@@ -11,6 +10,7 @@ var showError = require('widgets/modals/flash').showError
 var showSetDetails = require('widgets/modals/set-details')
 var getTokenNetwork = require('lib/token').getTokenNetwork;
 var qrcode = require('lib/qrcode')
+var initEosSetup = require('widgets/eos/setup');
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -26,9 +26,13 @@ module.exports = function(el){
     }
   })
 
+  initEosSetup(ractive.find('#eos-setup'));
+
   emitter.on('wallet-ready', function(){
-    ractive.set('address', getAddress())
-    showQRcode()
+    var wallet = CS.getWallet();
+    ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
+    ractive.set('address', getAddress());
+    showQRcode();
   })
 
   emitter.on('update-balance', function() {
@@ -51,14 +55,14 @@ module.exports = function(el){
   })
 
   function showQRcode(){
-      if(ractive.get('isPhonegap')){
-          var canvas = document.getElementById("qr_canvas")
-          while (canvas.hasChildNodes()) {
-              canvas.removeChild(canvas.firstChild)
-          }
-          var qr = qrcode.encode(getTokenNetwork() + ':' + getAddress())
-          canvas.appendChild(qr)
+    if (ractive.get('isPhonegap')) {
+      var canvas = document.getElementById('qr_canvas');
+      while (canvas.hasChildNodes()) {
+        canvas.removeChild(canvas.firstChild);
       }
+      var qr = qrcode.encode(getTokenNetwork() + ':' + getAddress());
+      canvas.appendChild(qr);
+    }
   }
 
   function mectoOff(){

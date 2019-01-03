@@ -7,7 +7,8 @@ var symbols = {
   litecoin: 'LTC',
   ethereum: 'ETH',
   ripple: 'XRP',
-  stellar: 'XLM'
+  stellar: 'XLM',
+  eos: 'EOS'
 }
 
 function getDenomination(token) {

@@ -19,6 +19,7 @@ var cache = require('memory-cache')
 var EthereumWallet = require('cs-ethereum-wallet');
 var RippleWallet = require('cs-ripple-wallet');
 var StellarWallet = require('cs-stellar-wallet');
+var EOSWallet = require('cs-eos-wallet');
 var convert = require('lib/convert');
 var getToken = require('lib/token').getToken;
 var setToken = require('lib/token').setToken;
@@ -40,7 +41,8 @@ var Wallet = {
   testnet: CsWallet,
   ethereum: EthereumWallet,
   ripple: RippleWallet,
-  stellar: StellarWallet
+  stellar: StellarWallet,
+  eos: EOSWallet
 }
 
 var urlRoot = window.urlRoot
@@ -192,6 +194,11 @@ function initWallet(networkName, done, txDone) {
     options.seed = seed;
     options.txsPerPage = 20;
     convert.setDecimals(0);
+  } else if (networkName === 'eos') {
+    options.seed = seed;
+    // options.txsPerPage = 20;
+    options.accountName = db.get('eosAccountName') || '';
+    convert.setDecimals(0);
   }
 
   wallet = new Wallet[networkName](options);
@@ -228,6 +235,8 @@ function parseHistoryTx(tx) {
   } else if (networkName === 'ripple') {
     return tx;
   } else if (networkName === 'stellar') {
+    return tx;
+  } else if (networkName === 'eos') {
     return tx;
   } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(networkName) !== -1) {
     return utils.parseBtcLtcTx(tx);

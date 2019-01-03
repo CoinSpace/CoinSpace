@@ -13,7 +13,8 @@ var networks = {
   LTC: 'litecoin',
   ETH: 'ethereum',
   XRP: 'ripple',
-  XLM: 'stellar'
+  XLM: 'stellar',
+  EOS: 'eos'
 };
 
 function save(callback){

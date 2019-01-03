@@ -6,13 +6,16 @@ var initAccount = require('widgets/account-details');
 var importPrivateKey = require('widgets/modals/import-private-key');
 var exportPrivateKeys = require('widgets/modals/export-private-keys');
 var getWallet = require('lib/wallet').getWallet;
+var showEosSetupAccount = require('widgets/modals/eos-setup-account');
 
 module.exports = function(el) {
   var ractive = new Ractive({
     el: el,
     template: require('./index.ract'),
     data: {
-      isEnabledImportExport: true
+      isEnabledImport: true,
+      isEnabledExport: true,
+      isEOS: false
     }
   });
 
@@ -36,12 +39,20 @@ module.exports = function(el) {
     exportPrivateKeys();
   });
 
+  ractive.on('eos-setup-account', showEosSetupAccount);
+
   emitter.on('wallet-ready', function() {
     var wallet = getWallet();
+    ractive.set('isEOS', wallet.networkName === 'eos');
     if (wallet.networkName === 'ethereum' && wallet.token) {
-      ractive.set('isEnabledImportExport', false);
+      ractive.set('isEnabledImport', false);
+      ractive.set('isEnabledExport', false);
+    } else if (wallet.networkName === 'eos') {
+      ractive.set('isEnabledImport', false);
+      ractive.set('isEnabledExport', true);
     } else {
-      ractive.set('isEnabledImportExport', true);
+      ractive.set('isEnabledImport', true);
+      ractive.set('isEnabledExport', true);
     }
   });
 

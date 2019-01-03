@@ -1,27 +1,30 @@
+<div class-hidden="needToSetupEos">
+  <h3 class="_title">{{translate("Your wallet address")}}</h3>
+  <div class="address__box">
+    <span class="_address">{{address}}</span>
+    <div class="_btn" on-click="show-qr">
+      <span class="_icon">
+        {{>svg_expand}}
+      </span>
+    </div>
+  </div>
 
-<h3 class="_title">{{translate("Your wallet address")}}</h3>
-<div class="address__box">
-  <span class="_address">{{address}}</span>
-  <div class="_btn" on-click="show-qr">
-    <span class="_icon">
-      {{>svg_expand}}
-    </span>
+  <div class="qr-code" id="qr_canvas"></div>
+
+  <div class="receive__label">
+  {{^broadcasting}}
+    <h3 class="_title">{{translate("Mecto")}}</h3>
+  {{/broadcasting}}
+  {{#broadcasting}}
+    <h3 id="broadcast_text" class="_title animate__pulseFade">{{translate("Broadcasting your location...")}}</h3>
+  {{/broadcasting}}
+  <span class="_help" on-click="help-mecto">
+    {{>svg_help}}
+  </span>
+  </div>
+  <div class="geo__box">
+    <span class="_btn {{#broadcasting}}is_broadcasting{{/broadcasting}}{{#connecting}}is_connecting{{/connecting}}" on-click="toggle-broadcast">{{translate(btn_message)}}</span>
   </div>
 </div>
 
-<div class="qr-code" id="qr_canvas"></div>
-
-<div class="receive__label">
-{{^broadcasting}}
-  <h3 class="_title">{{translate("Mecto")}}</h3>
-{{/broadcasting}}
-{{#broadcasting}}
-  <h3 id="broadcast_text" class="_title animate__pulseFade">{{translate("Broadcasting your location...")}}</h3>
-{{/broadcasting}}
-<span class="_help" on-click="help-mecto">
-  {{>svg_help}}
-</span>
-</div>
-<div class="geo__box">
-  <span class="_btn {{#broadcasting}}is_broadcasting{{/broadcasting}}{{#connecting}}is_connecting{{/connecting}}" on-click="toggle-broadcast">{{translate(btn_message)}}</span>
-</div>
+<div id="eos-setup" class-hidden="!needToSetupEos"></div>
