@@ -32,7 +32,7 @@ module.exports = function(el) {
         }
       },
       getToAddress: function(tx) {
-        if (network === 'ethereum' || network === 'ripple') {
+        if (network === 'ethereum' || network === 'ripple' || network === 'eos') {
           return tx.to;
         } else if (network === 'stellar') {
           return tx.operations[0] && tx.operations[0].destination;
@@ -42,14 +42,17 @@ module.exports = function(el) {
       },
       isReceived: function(tx) {
         if (network === 'ethereum' || network === 'ripple') {
-          return tx.to === getWallet().addressString;
+          return tx.to === getWallet().addressString; // TODO: make getWallet().isReceivedTx(tx);
         } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet', 'stellar'].indexOf(network) !== -1) {
           return tx.amount > 0;
+        } else if (network === 'eos') {
+          return getWallet().isReceivedTx(tx);
         }
       },
       isConfirmed: function(confirmations) {
         if (network === 'ripple') return true;
         if (network === 'stellar') return true;
+        if (network === 'eos') return true;
         return confirmations >= getWallet().minConf;
       },
       isFailed: function(tx) {
@@ -116,12 +119,12 @@ module.exports = function(el) {
     var wallet = getWallet();
     var cursor;
     if (wallet.networkName === 'ripple') {
-      cursor = transactions[transactions.length - 1].id;
+      cursor = transactions[transactions.length - 1].id; // TODO: move cursor to wallet.txsCursor
     } else if (wallet.networkName === 'stellar') {
-      cursor = transactions[transactions.length - 1].cursor;
+      cursor = transactions[transactions.length - 1].cursor; // TODO: move cursor to wallet.txsCursor
     }
 
-    wallet.loadTxs(wallet.addressString, cursor).then(function(result) {
+    wallet.loadTxs(wallet.addressString, cursor).then(function(result) { // TODO: remove "wallet.addressString, cursor"
       ractive.set('loadingMore', false);
       ractive.set('hasMore', result.hasMoreTxs)
       result.txs.forEach(function(tx) {

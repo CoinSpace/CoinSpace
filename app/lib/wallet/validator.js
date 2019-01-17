@@ -64,6 +64,15 @@ function validateSend(options) {
         error = new Error(message)
         error.interpolations = { sendableBalance: toUnitString(e.sendableBalance) }
         throw error
+      } else if (/Attempt to empty wallet/.test(e.details) && wallet.networkName === 'eos') {
+        message = [
+          'It seems like you are trying to empty your wallet',
+          'Max amount you can send is',
+          'We have amended the value in the amount field for you'
+        ].join('. ')
+        error = new Error(message)
+        error.interpolations = { sendableBalance: toUnitString(e.sendableBalance) }
+        throw error
       } else if (/Attempt to empty wallet/.test(e.details) && (wallet.networkName === 'ripple' || wallet.networkName === 'stellar')) {
         message = [
           'It seems like you are trying to empty your wallet',

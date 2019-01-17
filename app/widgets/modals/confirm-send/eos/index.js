@@ -28,13 +28,6 @@ function open(data) {
     } catch(err) {
       ractive.set('sending', false);
       if (/Insufficient funds/.test(err.message)) return showInfo({title: 'Insufficient funds'});
-      if (data.importTxOptions && /Less than minimum reserve/.test(err.message)) {
-        return showInfo({
-          title: 'Insufficient funds',
-          message: "Your wallet isn't activated. You can receive only amount greater than :minReserve :denomination.",
-          interpolations: {minReserve: wallet.minReserve, denomination: wallet.denomination}
-        });
-      }
       return handleTransactionError(err);
     }
 
@@ -52,13 +45,7 @@ function open(data) {
 
   function createTx() {
     var wallet = getWallet();
-    var tx;
-    if (data.importTxOptions) {
-      tx = wallet.createImportTx(data.importTxOptions);
-    } else {
-      tx = wallet.createTx(data.to, toAtom(data.amount), data.memo, !data.destinationInfo.isActive)
-    }
-
+    var tx = wallet.createTx(data.to, toAtom(data.amount), data.memo)
     return tx;
   }
 
@@ -72,10 +59,7 @@ function open(data) {
 }
 
 function extendData(data) {
-
   data.confirmation = true;
-  data.feeSign = data.importTxOptions ? '-' : '+';
-
   var wallet = getWallet();
   data.fee = wallet.getDefaultFee();
 

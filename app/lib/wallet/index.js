@@ -196,8 +196,10 @@ function initWallet(networkName, done, txDone) {
     convert.setDecimals(0);
   } else if (networkName === 'eos') {
     options.seed = seed;
-    // options.txsPerPage = 20;
     options.accountName = db.get('eosAccountName') || '';
+    if (process.env.NODE_ENV === 'development') {
+      options.chainId = 'e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473';
+    }
     convert.setDecimals(0);
   }
 

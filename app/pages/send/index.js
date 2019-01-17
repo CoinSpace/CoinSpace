@@ -120,7 +120,7 @@ module.exports = function(el){
           if (wallet.networkName === 'ripple') {
             ractive.find('#destination-tag').value = '';
             ractive.find('#invoice-id').value = '';
-          } else if (wallet.networkName === 'stellar') {
+          } else if (wallet.networkName === 'stellar' || wallet.networkName === 'eos') {
             ractive.find('#memo').value = '';
           }
         }
@@ -134,6 +134,9 @@ module.exports = function(el){
         options.amount = new Big(options.amount || '0').toFixed(6).replace(/0+$/, '').replace(/\.+$/, '');
       } else if (wallet.networkName === 'stellar') {
         options.amount = new Big(options.amount || '0').toFixed(7).replace(/0+$/, '').replace(/\.+$/, '');
+        options.memo = ractive.find('#memo').value;
+      } else if (wallet.networkName === 'eos') {
+        options.amount = new Big(options.amount || '0').toFixed(4).replace(/0+$/, '').replace(/\.+$/, '');
         options.memo = ractive.find('#memo').value;
       }
 
@@ -240,9 +243,14 @@ module.exports = function(el){
   })
 
   ractive.on('help-memo', function() {
-    showTooltip({
-      message: 'The memo contains optional extra information. A string up to 28-bytes long.'
-    })
+    var wallet = getWallet();
+    var message = '';
+    if (wallet.networkName === 'stellar') {
+      message = 'The memo contains optional extra information. A string up to 28-bytes long.';
+    } else if (wallet.networkName === 'eos') {
+      message = 'The memo contains optional extra information. A string up to 256-bytes long.';
+    }
+    showTooltip({message: message});
   })
 
   function validateAndShowConfirm(options) {

@@ -222,5 +222,11 @@
   "This account name is already taken, please choose another one.": "This account name is already taken, please choose another one.",
   "To create a new account you need to send amount greater than :minAmount to smart contract :contract with the specified memo.": "To create a new account you need to send amount greater than %(minAmount)s to smart contract %(contract)s with the specified memo.",
   "Check": "Check",
-  "Account has been successfully set up": "Account has been successfully set up"
+  "Account has been successfully set up": "Account has been successfully set up",
+  "The memo contains optional extra information. A string up to 256-bytes long.": "The memo contains optional extra information. A string up to 256-bytes long.",
+  "It seems like you are trying to empty your wallet. Max amount you can send is. We have amended the value in the amount field for you": "It seems like you are trying to empty your wallet. Max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.",
+  "Destination account doesn't exist.": "Destination account doesn't exist.",
+  "Transaction has been expired. Please try again.": "Transaction has been expired. Please try again.",
+  "Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.": "Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.",
+  "Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.": "Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET."
 }

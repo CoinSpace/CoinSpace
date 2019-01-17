@@ -110,7 +110,7 @@
     }
   }
 
-  ._address {
+  ._address, ._memo {
     @include wrapdat;
     @extend .jigsaw-light;
     font-size: 13px;

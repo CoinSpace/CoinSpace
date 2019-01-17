@@ -33,6 +33,16 @@
 
       </div>
     {{/each}}
+    {{^transactions}}
+      {{^loadingTx}}
+        <div class="transactions__message">
+          <div class="_icon">
+            {{>svg_help}}
+          </div>
+          <div class="_message">{{translate("You do not have any transactions yet")}}</div>
+        </div>
+      {{/loadingTx}}
+    {{/transactions}}
     {{#if (hasMore && !loadingTx)}}
       <div class="loadmore__buttons">
         {{#if loadingMore}}
@@ -46,16 +56,6 @@
         {{/if}}
       </div>
     {{/if}}
-    {{^transactions}}
-      {{^loadingTx}}
-        <div class="transactions__message">
-          <div class="_icon">
-            {{>svg_help}}
-          </div>
-          <div class="_message">{{translate("You do not have any transactions yet")}}</div>
-        </div>
-      {{/loadingTx}}
-    {{/transactions}}
   </div>
 </div>
 
