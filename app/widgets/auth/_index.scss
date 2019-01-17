@@ -280,6 +280,12 @@
     box-shadow:inset 0 1px 1px 1px darken($stellar, 20%);
   }
 }
+.eos {
+  .auth__btn--inactive {
+    background-color: $eos;
+    box-shadow:inset 0 1px 1px 1px darken($eos, 20%);
+  }
+}
 .bitcoincash {
   .auth__btn--inactive {
     background-color: $bitcoincash;
@@ -347,6 +353,12 @@
   .auth__btn--loading {
     background-color: $stellar;
     box-shadow:inset 0 1px 1px 1px darken($stellar, 20%);
+  }
+}
+.eos {
+  .auth__btn--loading {
+    background-color: $eos;
+    box-shadow:inset 0 1px 1px 1px darken($eos, 20%);
   }
 }
 .bitcoincash {

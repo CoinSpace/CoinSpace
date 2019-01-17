@@ -74,6 +74,13 @@
     }
   }
 }
+.eos {
+  .tooltip__link {
+    a {
+      color: $eos;
+    }
+  }
+}
 .bitcoincash {
   .tooltip__link {
     a {

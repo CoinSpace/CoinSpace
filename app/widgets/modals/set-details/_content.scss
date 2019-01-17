@@ -84,6 +84,14 @@
     }
   }
 }
+.eos {
+  .set-details {
+    ._btn--loading {
+      background-color: $eos;
+      box-shadow:inset 0 1px 1px 1px darken($eos, 20%);
+    }
+  }
+}
 .bitcoincash {
   .set-details {
     ._btn--loading {

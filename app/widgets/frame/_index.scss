@@ -93,6 +93,11 @@
     background-color: darken($stellar, 30%);
   }
 }
+.eos {
+  .main__iphone_x {
+    background-color: darken($eos, 15%);
+  }
+}
 .bitcoincash {
   .main__iphone_x {
     background-color: darken($bitcoincash, 30%);

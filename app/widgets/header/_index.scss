@@ -39,6 +39,11 @@
     background-color: darken($stellar, 30%);
   }
 }
+.eos {
+  .header {
+    background-color: darken($eos, 15%);
+  }
+}
 .bitcoincash {
   .header {
     background-color: darken($bitcoincash, 30%);

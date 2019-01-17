@@ -23,6 +23,11 @@
     background-color: darken($stellar, 20%);
   }
 }
+.eos {
+  #tabs {
+    background-color: darken($eos, 10%);
+  }
+}
 .bitcoincash {
   #tabs {
     background-color: darken($bitcoincash, 20%);
@@ -89,6 +94,13 @@
   #tabs .tabs .tab {
     &.active {
         border-bottom: 4px solid darken($stellar, 30%);
+    }
+  }
+}
+.eos {
+  #tabs .tabs .tab {
+    &.active {
+        border-bottom: 4px solid darken($eos, 30%);
     }
   }
 }

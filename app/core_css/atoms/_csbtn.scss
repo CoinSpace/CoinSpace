@@ -63,6 +63,13 @@
   }
 }
 
+.eos {
+  .csbtn {
+    background-color: $eos;
+    box-shadow: 0 2px 0 0 darken($eos, 10%);
+  }
+}
+
 .bitcoincash {
   .csbtn {
     background-color: $bitcoincash;
