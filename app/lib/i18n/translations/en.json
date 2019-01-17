@@ -228,5 +228,6 @@
   "Destination account doesn't exist.": "Destination account doesn't exist.",
   "Transaction has been expired. Please try again.": "Transaction has been expired. Please try again.",
   "Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.": "Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.",
-  "Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.": "Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET."
+  "Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.": "Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.",
+  "The extra amount will be deposited to the created account.": "The extra amount will be deposited to the created account."
 }

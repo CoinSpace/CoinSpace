@@ -19,7 +19,7 @@
             minAmount: price
           })}}}
         </div>
-        <h3 class="_title">Memo</h3>
+        <h3 class="_title">{{translate("Memo")}}</h3>
         <div class="_memo_box">
           {{#if isPhonegap}}
           <span class="_phonegap_memo">{{memo}}</span>
@@ -33,7 +33,7 @@
           {{/if}}
         </div>
         <div class="_description">
-          The extra amount will be deposited to the created account.
+          {{translate("The extra amount will be deposited to the created account.")}}
         </div>
       </div>
       <div class="_inputs">
