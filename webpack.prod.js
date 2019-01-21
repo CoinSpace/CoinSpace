@@ -27,6 +27,7 @@ var config = merge(common, {
           loader: 'babel-loader', // special for UglifyJSPlugin
           options: {
             presets: ['es2015'],
+            plugins: ['transform-runtime']
           }
         }
       },
