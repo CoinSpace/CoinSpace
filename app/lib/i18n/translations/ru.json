@@ -220,7 +220,7 @@
     "The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.": "Имя учетной записи EOS должно быть ровно 12 символов и состоять из строчных букв и цифр от 1 до 5.",
     "Invalid account name": "Неверное имя учетной записи",
     "This account name is already taken, please choose another one.": "Это имя учетной записи уже занято, пожалуйста, выберите другое.",
-    "To create a new account you need to send amount greater than :minAmount to smart contract :contract with the specified memo.": "Для создания нового аккаунта необходимо отправить сумму более %(minAmount)s на смарт-контракт %(contract)s с указанным мемо.",
+    "To create a new account you need to make an EOS transfer (amount greater than :minAmount) with the following data from an exchange or other EOS wallet.": "Для создания нового аккаунта необходимо отправить EOS (более %(minAmount)s) с биржи или другого EOS кошелька на указанный ниже адрес с заданным мемо.",
     "Check": "Проверить",
     "Account has been successfully set up": "Аккаунт успешно настроен",
     "The memo contains optional extra information. A string up to 256-bytes long.": "В мемо содержится дополнительная информация. Строка длиной до 256 байтов.",

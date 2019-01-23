@@ -122,16 +122,16 @@
         font-size: 20px;
       }
     }
-    ._memo_box {
+    ._memo_box, ._address_box {
       @extend .address__box;
-      ._phonegap_memo {
+      ._phonegap_memo, ._phonegap_address {
         @include ellipsis();
         @include textselect;
         @extend .jigsaw-light;
         display: block;
         padding-right: 40px;
       }
-      ._memo {
+      ._memo, ._address {
         @include textselect;
         @extend .jigsaw-light;
         display: block;

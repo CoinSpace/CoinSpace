@@ -220,7 +220,7 @@
     "The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.": "The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.",
     "Invalid account name": "Invalid account name",
     "This account name is already taken, please choose another one.": "This account name is already taken, please choose another one.",
-    "To create a new account you need to send amount greater than :minAmount to smart contract :contract with the specified memo.": "To create a new account you need to send amount greater than %(minAmount)s to smart contract %(contract)s with the specified memo.",
+    "To create a new account you need to make an EOS transfer (amount greater than :minAmount) with the following data from an exchange or other EOS wallet.": "To create a new account you need to make an EOS transfer (amount greater than %(minAmount)s) with the following data from an exchange or other EOS wallet.",
     "Check": "Check",
     "Account has been successfully set up": "Account has been successfully set up",
     "The memo contains optional extra information. A string up to 256-bytes long.": "The memo contains optional extra information. A string up to 256-bytes long.",

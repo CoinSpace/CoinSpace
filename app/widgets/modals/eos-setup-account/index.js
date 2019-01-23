@@ -81,7 +81,12 @@ function open() {
 
   ractive.on('share-memo', function() {
     window.plugins.socialsharing.shareWithOptions({
-      message: ractive.get('address')
+      message: ractive.get('memo')
+    });
+  });
+  ractive.on('share-address', function() {
+    window.plugins.socialsharing.shareWithOptions({
+      message: 'coinappsetup'
     });
   });
 

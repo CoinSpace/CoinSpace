@@ -14,10 +14,22 @@
       {{#if showInstruction}}
       <div class="_content">
         <div class="_instructions">
-          {{{translate("To create a new account you need to send amount greater than :minAmount to smart contract :contract with the specified memo.", {
-            contract: '<a href="https://bloks.io/account/coinappsetup" target="_blank">coinappsetup</a>',
+          {{{translate("To create a new account you need to make an EOS transfer (amount greater than :minAmount) with the following data from an exchange or other EOS wallet.", {
             minAmount: price
           })}}}
+        </div>
+        <h3 class="_title">{{translate("Address")}}</h3>
+        <div class="_address_box">
+          {{#if isPhonegap}}
+          <span class="_phonegap_address">coinappsetup</span>
+          <div class="_btn" on-click="share-address">
+            <span class="_icon">
+              {{>svg_expand}}
+            </span>
+          </div>
+          {{else}}
+          <span class="_address">coinappsetup</span>
+          {{/if}}
         </div>
         <h3 class="_title">{{translate("Memo")}}</h3>
         <div class="_memo_box">
