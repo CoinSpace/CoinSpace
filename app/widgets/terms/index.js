@@ -25,6 +25,11 @@ module.exports = function (el) {
     ads.showAdFreeModal(true);
   });
 
+  ractive.on('restore-purchases', function(context) {
+    context.original.preventDefault();
+    ads.restorePurchases();
+  })
+
   emitter.on('toggle-terms', function(open) {
     ractive.el.classList.add('terms-open')
     if (open) {

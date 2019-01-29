@@ -24,6 +24,10 @@
         <div class="about__listitem-title">{{translate("Remove Ads")}}</div>
         <div class="about__listitem-value"><span class="about-arrowright"></span></div>
       </a>
+      <a class="about__listitem" href="" on-click="restore-purchases">
+        <div class="about__listitem-title">{{translate("Restore Purchases")}}</div>
+        <div class="about__listitem-value"><span class="about-arrowright"></span></div>
+      </a>
     {{/if}}
   </div>
   {{/isPhonegap}}

@@ -138,6 +138,11 @@ function init() {
   store.refresh();
 }
 
+function restorePurchases() {
+  if (!storeIsReady) return false;
+  window.store.refresh();
+}
+
 function buyAdFree() {
   if (!storeIsReady) return false;
   window.store.order(adFreeId);
@@ -205,5 +210,6 @@ var showInterstitial = _.throttle(function() {
 module.exports = {
   init: init,
   showAdFreeModal: showAdFreeModal,
-  showInterstitial: showInterstitial
+  showInterstitial: showInterstitial,
+  restorePurchases: restorePurchases
 };

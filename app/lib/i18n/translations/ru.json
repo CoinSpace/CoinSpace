@@ -229,5 +229,6 @@
     "Transaction has been expired. Please try again.": "Срок транзакции истек. Пожалуйста, попробуйте еще раз.",
     "Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.": "Использование CPU вашего аккаунта было превышено. Пожалуйста, попробуйте позже или попросите кого-нибудь предоставить вам больше CPU.",
     "Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.": "Использование NET вашего аккаунта было превышено. Пожалуйста, попробуйте позже или попросите кого-нибудь предоставить вам больше NET.",
-    "The extra amount will be deposited to the created account.": "Лишние монеты будут зачислены на созданный аккаунт."
+    "The extra amount will be deposited to the created account.": "Лишние монеты будут зачислены на созданный аккаунт.",
+    "Restore Purchases": "Восстановить покупки"
 }
