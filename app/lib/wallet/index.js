@@ -167,7 +167,7 @@ function initWallet(networkName, done, txDone) {
     networkName: networkName,
     done: done,
     txDone: function(err) {
-      if(err) return txDone(err)
+      if (err) return txDone(err)
       var txObjs = wallet.getTransactionHistory()
       txDone(null, txObjs.map(function(tx) {
         return parseHistoryTx(tx)

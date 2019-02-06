@@ -310,3 +310,10 @@
     }
   }
 }
+
+.blocked {
+  .settings__link {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}

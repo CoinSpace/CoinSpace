@@ -6,6 +6,8 @@ var sync = require('lib/wallet').sync;
 var db = require('lib/db');
 var showError = require('widgets/modals/flash').showError;
 var emitter = require('lib/emitter');
+var onSyncDoneWrapper = require('lib/wallet/utils').onSyncDoneWrapper;
+var onTxSyncDoneWrapper = require('lib/wallet/utils').onTxSyncDoneWrapper;
 
 function open() {
   var ractive = new Ractive({
@@ -45,6 +47,11 @@ function open() {
         return showError({message: 'Invalid account name'});
       } else if (/Account name is already taken/.test(err.message)) {
         return showError({message: 'This account name is already taken, please choose another one.'});
+      } else if (err.message === 'cs-node-error') {
+        return showError({
+          message: 'Network node error. Please try again later.',
+          interpolations: { network: 'EOS' }
+        });
       }
       console.error(err.message);
       return showError({message: err.message});
@@ -53,24 +60,15 @@ function open() {
 
   function syncWallet() {
     emitter.emit('sync');
+    var onSyncDone = onSyncDoneWrapper({
+      success: function() {
+        emitter.emit('wallet-ready');
+      }
+    });
+    var onTxSyncDone = onTxSyncDoneWrapper();
     setTimeout(function() {
       sync(onSyncDone, onTxSyncDone);
     }, 200);
-    function onSyncDone(err) {
-      if (err) {
-        console.error(err);
-        return showError({message: err.message});
-      }
-      emitter.emit('wallet-ready');
-    }
-    function onTxSyncDone(err, transactions) {
-      if (err) {
-        emitter.emit('set-transactions', []);
-        console.error(err);
-        return showError({message: err.message});
-      }
-      emitter.emit('set-transactions', transactions);
-    }
   }
 
   ractive.on('clearAccountName', function() {

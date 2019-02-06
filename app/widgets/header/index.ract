@@ -16,7 +16,7 @@
   </div>
 
   {{#if isSyncing}}
-    <div class="header__balance">
+    <div class="header__balance show">
       <span class="_amount">...</span>
     </div>
   {{else}}
@@ -31,6 +31,10 @@
       <span class="_currency">{{denomination}}</span>
     </div>
     {{/if}}
+
+    <div class="header__balance_blocked">
+      <span class="_amount">×</span>
+    </div>
   {{/if}}
 
   <div class="header__currency" title="{{translate("Current coin price")}}">

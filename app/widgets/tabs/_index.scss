@@ -145,3 +145,10 @@
     display: none;
   }
 }
+
+.blocked {
+  #send_tab, #receive_tab, #exchange_tab, #history_tab {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}

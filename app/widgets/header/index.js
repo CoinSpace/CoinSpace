@@ -1,14 +1,15 @@
 'use strict';
 
-var Ractive = require('lib/ractive')
-var emitter = require('lib/emitter')
-var sync = require('lib/wallet').sync
-var getWallet = require('lib/wallet').getWallet
-var toUnit = require('lib/convert').toUnit
-var toUnitString = require('lib/convert').toUnitString
-var Big = require('big.js')
-var showError = require('widgets/modals/flash').showError
-var db = require('lib/db')
+var Ractive = require('lib/ractive');
+var emitter = require('lib/emitter');
+var sync = require('lib/wallet').sync;
+var getWallet = require('lib/wallet').getWallet;
+var toUnit = require('lib/convert').toUnit;
+var toUnitString = require('lib/convert').toUnitString;
+var Big = require('big.js');
+var db = require('lib/db');
+var onSyncDoneWrapper = require('lib/wallet/utils').onSyncDoneWrapper;
+var onTxSyncDoneWrapper = require('lib/wallet/utils').onTxSyncDoneWrapper;
 
 module.exports = function(el) {
   var selectedFiat = '';
@@ -73,16 +74,14 @@ module.exports = function(el) {
     if (!ractive.get('isSyncing')) {
       emitter.emit('sync')
       setTimeout(function() {
-        sync(function(err){
-          if (err) return showError({message: err.message})
-          emitter.emit('update-balance')
-        }, function(err, txs) {
-          if (err) {
-            emitter.emit('set-transactions', [])
-            return showError({message: err.message})
+        var onSyncDone = onSyncDoneWrapper({
+          success: function() {
+            emitter.emit('update-balance');
+            emitter.emit('wallet-unblock');
           }
-          emitter.emit('set-transactions', txs)
-        })
+        });
+        var onTxSyncDone = onTxSyncDoneWrapper();
+        sync(onSyncDone, onTxSyncDone);
       }, 200)
     }
   })

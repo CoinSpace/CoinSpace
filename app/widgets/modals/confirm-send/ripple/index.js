@@ -66,15 +66,18 @@ function open(data) {
     ractive.set('confirmation', false)
     var wallet = getWallet();
     var hasResponseData = err.response && err.response.data;
-    if (hasResponseData && err.response.data.resultCode === 'tecNO_DST_INSUF_XRP') {
+
+    if (err.message === 'cs-node-error') {
+      err.message = 'Network node error. Please try again later.'
+      ractive.set('interpolations', { network: 'Ripple' })
+    } else if (hasResponseData && err.response.data.resultCode === 'tecNO_DST_INSUF_XRP') {
+      err.message = "Recipient's wallet isn't activated. You can send only amount greater than :minReserve :denomination.";
       ractive.set('interpolations', {
         minReserve: wallet.minReserve,
         denomination: wallet.denomination
       });
-      ractive.set('error', "Recipient's wallet isn't activated. You can send only amount greater than :minReserve :denomination.");
-    } else {
-      ractive.set('error', err.message)
     }
+    ractive.set('error', err.message)
   }
 
   return ractive

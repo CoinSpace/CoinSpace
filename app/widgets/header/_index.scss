@@ -50,7 +50,7 @@
   }
 }
 
-.header__balance {
+.header__balance, .header__balance_blocked {
   @include clickbtn;
   @extend .jigsaw-light;
   display: flex;
@@ -78,9 +78,20 @@
     }
   }
 }
+.header__balance_blocked {
+  display: none;
+}
+.blocked {
+  .header__balance_blocked, .header__balance.show {
+    display: flex;
+  }
+  .header__balance {
+    display: none;
+  }
+}
 
 .ethereum, .ripple, .stellar {
-  .header__balance {
+  .header__balance, .header__balance_blocked {
     ._amount {
       font-size: 26px;
     }

@@ -5,6 +5,8 @@ var emitter = require('lib/emitter')
 var showError = require('widgets/modals/flash').showError
 var getTokenNetwork = require('lib/token').getTokenNetwork;
 var setToken = require('lib/token').setToken;
+var onSyncDoneWrapper = require('lib/wallet/utils').onSyncDoneWrapper;
+var onTxSyncDoneWrapper = require('lib/wallet/utils').onTxSyncDoneWrapper;
 
 var Auth = Ractive.extend({
   el: document.getElementById("auth"),
@@ -15,7 +17,7 @@ var Auth = Ractive.extend({
     content: require('./content.ract'),
     footer: require('./footer.ract')
   },
-  oninit: function(){
+  oninit: function() {
     var self = this
     this.set('opening', false)
 
@@ -28,41 +30,33 @@ var Auth = Ractive.extend({
     })
 
     function onDoneError(err) {
-      if(err.message === 'user_deleted') {
+      if (err.message === 'user_deleted') {
         return location.reload();
       }
 
       emitter.emit('clear-pin')
 
-      if(err.message === 'auth_failed') {
+      if (err.message === 'auth_failed') {
         return showError({ message: 'Your PIN is incorrect' })
       }
-
       console.error(err)
       return showError({ message: err.message })
     }
 
-   function onSyncDone(err) {
-      self.set('opening', false)
-      if (err) {
+    this.onSyncDone = onSyncDoneWrapper({
+      before: function() {
+        self.set('opening', false);
+      },
+      success: function() {
+        window.scrollTo(0, 0)
+        emitter.emit('wallet-ready')
+      },
+      fail: function(err) {
         setToken(getTokenNetwork()); // fix wrong tokens
-        return onDoneError(err)
+        onDoneError(err);
       }
-
-      window.scrollTo(0, 0)
-      emitter.emit('wallet-ready')
-    }
-
-    function onTxSyncDone(err, transactions) {
-      if (err) {
-        emitter.emit('set-transactions', [])
-        return onDoneError(err)
-      }
-      emitter.emit('set-transactions', transactions)
-    }
-
-    this.onSyncDone = onSyncDone
-    this.onTxSyncDone = onTxSyncDone
+    });
+    this.onTxSyncDone = onTxSyncDoneWrapper({fail: onDoneError});
     this.getTokenNetwork = getTokenNetwork
   }
 })

@@ -9,6 +9,7 @@ var toUnitString = require('lib/convert').toUnitString;
 var bitcoin = require('cs-wallet').bitcoin;
 var showInfo = require('widgets/modals/flash').showInfo;
 var getTokenNetwork = require('lib/token').getTokenNetwork;
+var _ = require('lodash');
 
 function open(data) {
 
@@ -65,6 +66,10 @@ function open(data) {
   function handleTransactionError(err) {
     console.error(err);
     ractive.set('confirmation', false)
+    if (err.message === 'cs-node-error') {
+      err.message = 'Network node error. Please try again later.'
+      ractive.set('interpolations', { network: _.upperFirst(getTokenNetwork()) })
+    }
     ractive.set('error', err.message)
   }
 

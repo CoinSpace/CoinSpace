@@ -9,6 +9,8 @@ var showInfo = require('widgets/modals/flash').showInfo;
 var getWallet = require('lib/wallet').getWallet;
 var getDynamicFees = require('lib/wallet').getDynamicFees;
 var toUnitString = require('lib/convert').toUnitString;
+var getTokenNetwork = require('lib/token').getTokenNetwork;
+var _ = require('lodash');
 
 var ractive;
 
@@ -68,6 +70,11 @@ function open() {
     ractive.set('isLoading', false);
     if (/^Private key equal wallet private key/.test(err.message)) {
       return showError({message: 'Please enter a private key other than your wallet private key'});
+    } else if ('cs-node-error') {
+      return showError({
+        message: 'Network node error. Please try again later.',
+        interpolations: { network: _.upperFirst(getTokenNetwork()) }
+      });
     }
     return showError({message: err.message});
   }

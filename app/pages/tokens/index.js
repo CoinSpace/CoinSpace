@@ -9,7 +9,8 @@ var initWallet = require('lib/wallet').initWallet;
 var emitter = require('lib/emitter');
 var db = require('lib/db');
 var _ = require('lodash');
-var showError = require('widgets/modals/flash').showError;
+var onSyncDoneWrapper = require('lib/wallet/utils').onSyncDoneWrapper;
+var onTxSyncDoneWrapper = require('lib/wallet/utils').onTxSyncDoneWrapper;
 
 var walletTokens = [];
 var isEnabled = false;
@@ -68,26 +69,16 @@ module.exports = function(el) {
 
     emitter.emit('sync');
 
+    var onSyncDone = onSyncDoneWrapper({
+      success: function() {
+        window.scrollTo(0, 0);
+        emitter.emit('wallet-ready');
+      }
+    });
+    var onTxSyncDone = onTxSyncDoneWrapper();
     setTimeout(function() {
       initWallet(network, onSyncDone, onTxSyncDone);
     }, 200);
-
-    function onSyncDone(err) {
-      if (err) {
-        console.error(err);
-        return showError({message: err.message});
-      }
-      window.scrollTo(0, 0);
-      emitter.emit('wallet-ready');
-    }
-    function onTxSyncDone(err, transactions) {
-      if (err) {
-        emitter.emit('set-transactions', []);
-        console.error(err);
-        return showError({message: err.message});
-      }
-      emitter.emit('set-transactions', transactions);
-    }
   }
 
   function removeEthereumToken(token) {

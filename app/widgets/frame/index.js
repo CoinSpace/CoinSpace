@@ -1,30 +1,30 @@
 'use strict';
 
-var Ractive = require('lib/ractive')
-var emitter = require('lib/emitter')
-var initHeader = require('widgets/header')
-var initTabs = require('widgets/tabs')
-var initSidebar = require('widgets/sidebar')
-var initTerms = require('widgets/terms')
-var initSend = require('pages/send')
-var initReceive = require('pages/receive')
-var initExchange = require('pages/exchange')
-var initHistory = require('pages/history')
-var initTokens = require('pages/tokens')
-var Hammer = require('hammerjs')
-var ads = require('lib/ads')
+var Ractive = require('lib/ractive');
+var emitter = require('lib/emitter');
+var initHeader = require('widgets/header');
+var initTabs = require('widgets/tabs');
+var initSidebar = require('widgets/sidebar');
+var initTerms = require('widgets/terms');
+var initSend = require('pages/send');
+var initReceive = require('pages/receive');
+var initExchange = require('pages/exchange');
+var initHistory = require('pages/history');
+var initTokens = require('pages/tokens');
+var Hammer = require('hammerjs');
+var ads = require('lib/ads');
 
-module.exports = function(el){
+module.exports = function(el) {
   var ractive = new Ractive({
     el: el,
     template: require('./index.ract')
-  })
+  });
 
   // widgets
-  var header = initHeader(ractive.find('#header'))
-  initTabs(ractive.find('#tabs'))
-  initSidebar(ractive.find('#sidebar'))
-  initTerms(ractive.find('#terms'))
+  var header = initHeader(ractive.find('#header'));
+  initTabs(ractive.find('#tabs'));
+  initSidebar(ractive.find('#sidebar'));
+  initTerms(ractive.find('#terms'));
 
   // tabs
   var tabs = {
@@ -35,73 +35,82 @@ module.exports = function(el){
     tokens: initTokens(ractive.find('#tokens'))
   }
 
-  var currentPage = tabs.send
-  showPage(tabs.send)
+  var currentPage = tabs.send;
+  showPage(tabs.send);
 
   if (process.env.BUILD_TYPE === 'phonegap') {
     Hammer(ractive.find('#main'), {velocity: 0.1}).on('swipeleft', function() {
       if (currentPage === tabs.send) {
-        emitter.emit('change-tab', 'receive')
+        emitter.emit('change-tab', 'receive');
       } else if (currentPage === tabs.receive) {
-        emitter.emit('change-tab', 'exchange')
+        emitter.emit('change-tab', 'exchange');
       } else if (currentPage === tabs.exchange) {
-        emitter.emit('change-tab', 'history')
+        emitter.emit('change-tab', 'history');
       } else if (currentPage === tabs.history) {
-        emitter.emit('change-tab', 'tokens')
+        emitter.emit('change-tab', 'tokens');
       }
-    })
+    });
 
     Hammer(ractive.find('#main'), {velocity: 0.1}).on('swiperight', function() {
       if (currentPage === tabs.tokens) {
-        emitter.emit('change-tab', 'history')
+        emitter.emit('change-tab', 'history');
       } else if (currentPage === tabs.history) {
-        emitter.emit('change-tab', 'exchange')
+        emitter.emit('change-tab', 'exchange');
       } else if (currentPage === tabs.exchange) {
-        emitter.emit('change-tab', 'receive')
+        emitter.emit('change-tab', 'receive');
       } else if (currentPage === tabs.receive) {
-        emitter.emit('change-tab', 'send')
+        emitter.emit('change-tab', 'send');
       }
-    })
+    });
   }
 
-  emitter.on('change-tab', function(tab) {
-    var page = tabs[tab]
-    if (process.env.BUILD_TYPE === 'phonegap' && currentPage !== page) {
-      ads.showInterstitial()
+  emitter.on('change-tab', function(tab, silent) {
+    var page = tabs[tab];
+    if (process.env.BUILD_TYPE === 'phonegap' && currentPage !== page && !silent) {
+      ads.showInterstitial();
     }
-    showPage(page)
-  })
+    showPage(page);
+  });
 
   emitter.on('toggle-terms', function(open) {
-    var classes = ractive.find('#main').classList
+    var classes = ractive.find('#main').classList;
     if (open) {
-      classes.add('terms-open')
-      classes.add('closed')
+      classes.add('terms-open');
+      classes.add('closed');
     } else {
-      classes.remove('terms-open')
-      classes.remove('closed')
+      classes.remove('terms-open');
+      classes.remove('closed');
     }
-  })
+  });
 
-  function showPage(page){
-    currentPage.hide()
-    page.show()
-    currentPage = page
+  function showPage(page) {
+    currentPage.hide();
+    page.show();
+    currentPage = page;
   }
 
   // menu toggle
   emitter.on('toggle-menu', function(open) {
-    var classes = ractive.find('#main').classList
-    if(open) {
-      ractive.set('sidebar_open', true)
-      classes.add('closed')
+    var classes = ractive.find('#main').classList;
+    if (open) {
+      ractive.set('sidebar_open', true);
+      classes.add('closed');
     } else {
-      ractive.set('sidebar_open', false)
-      classes.remove('closed')
+      ractive.set('sidebar_open', false);
+      classes.remove('closed');
     }
 
-    header.toggleIcon(open)
+    header.toggleIcon(open);
   })
 
-  return ractive
+  emitter.on('wallet-block', function() {
+    emitter.emit('change-tab', 'tokens', true);
+    document.getElementsByTagName('html')[0].classList.add('blocked');
+  });
+
+  emitter.on('wallet-unblock', function() {
+    document.getElementsByTagName('html')[0].classList.remove('blocked');
+  });
+
+  return ractive;
 }
