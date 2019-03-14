@@ -84,6 +84,13 @@
   }
 }
 
+.dogecoin {
+  .csbtn {
+    background-color: $dogecoin;
+    box-shadow: 0 2px 0 0 darken($dogecoin, 10%);
+  }
+}
+
 .csbtn--red {
   @extend .csbtn-base;
 

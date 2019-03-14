@@ -11,6 +11,7 @@ var fsyms = [
   'XRP',
   'XLM',
   'EOS',
+  'DOGE',
   'USD'
 ]
 

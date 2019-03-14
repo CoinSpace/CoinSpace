@@ -8,6 +8,11 @@
     background-color: darken($silver, 20%);
   }
 }
+.dogecoin {
+  #tabs {
+    background-color: darken($dogecoin, 20%);
+  }
+}
 .ethereum {
   #tabs {
     background-color: darken($ethereal, 20%);
@@ -73,6 +78,13 @@
   #tabs .tabs .tab {
     &.active {
         border-bottom: 4px solid darken($silver, 30%);
+    }
+  }
+}
+.dogecoin {
+  #tabs .tabs .tab {
+    &.active {
+        border-bottom: 4px solid darken($dogecoin, 30%);
     }
   }
 }

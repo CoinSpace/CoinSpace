@@ -60,6 +60,14 @@
     }
   }
 }
+.dogecoin {
+  .set-details {
+    ._btn--loading {
+      background-color: $dogecoin;
+      box-shadow:inset 0 1px 1px 1px darken($dogecoin, 20%);
+    }
+  }
+}
 .ethereum {
   .set-details {
     ._btn--loading {

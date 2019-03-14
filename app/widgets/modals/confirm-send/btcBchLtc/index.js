@@ -82,7 +82,7 @@ function extendData(data) {
 
   data.confirmation = true;
   data.feeSign = data.importTxOptions ? '-' : '+';
-  data.isBitcoin = network === 'bitcoin' || network === 'testnet';
+  data.isBitcoin = network === 'bitcoin';
 
   var wallet = getWallet();
   var feeRates = null;
@@ -108,13 +108,8 @@ function extendData(data) {
       this.find('.js-fee-dropdown').selectedIndex = 1; // fix issue when values are the same
     }
 
-  } else if (network === 'bitcoincash') {
-    feeRates = [data.dynamicFees.minimum * 1000 || bitcoin.networks['bitcoincash'].feePerKb];
-    fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents);
-    data.fee = toUnitString(fees[0]);
-
-  } else if (network === 'litecoin') {
-    feeRates = [data.dynamicFees.minimum * 1000 || bitcoin.networks['litecoin'].feePerKb];
+  } else if (network === 'bitcoincash' || network === 'litecoin' || network === 'dogecoin') {
+    feeRates = [data.dynamicFees.minimum * 1000 || bitcoin.networks[network].feePerKb];
     fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents);
     data.fee = toUnitString(fees[0]);
   }

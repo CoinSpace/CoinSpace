@@ -2,13 +2,13 @@
 
 var symbols = {
   bitcoin: 'BTC',
-  testnet: 'BTC',
   bitcoincash: 'BCH',
   litecoin: 'LTC',
   ethereum: 'ETH',
   ripple: 'XRP',
   stellar: 'XLM',
-  eos: 'EOS'
+  eos: 'EOS',
+  dogecoin: 'DOGE'
 }
 
 function getDenomination(token) {

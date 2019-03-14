@@ -4,8 +4,8 @@
   <title>Coin</title>
   <meta charset="utf-8">
   <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
-  <meta name="description" content="Coin Wallet is a free online bitcoin &amp;amp; litecoin wallet which you can use to make worldwide payments for free. We make paying with bitcoins easy and secure">
-  <meta name="keywords" content="Secure, shared wallet, bitcoin, litecoin, web wallet, coin">
+  <meta name="description" content="Coin Wallet is a free online bitcoin, bitcoincash, litecoin, ethereum, ripple, stellar, eos, dogecoin wallet which you can use to make worldwide payments for free. We make paying with bitcoins easy and secure">
+  <meta name="keywords" content="Secure, shared wallet, bitcoin, bitcoincash, litecoin, ethereum, ripple, stellar, eos, dogecoin, web wallet, coin">
   <% if (process.env.BUILD_TYPE === 'phonegap') { %>
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self' blob: gap:;
@@ -18,6 +18,7 @@
     <%= process.env.API_XRP_URL %>
     <%= process.env.API_XLM_URL %>
     <%= process.env.API_EOS_URL %>
+    <%= process.env.API_DOGE_URL %>
     <%= process.env.SITE_URL %>;
     font-src 'self';
     img-src 'self' data: https://www.gravatar.com;

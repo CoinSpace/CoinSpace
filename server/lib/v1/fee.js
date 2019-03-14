@@ -6,7 +6,7 @@ var networks = [
   'bitcoin',
   'bitcoincash',
   'litecoin',
-  'testnet'
+  'dogecoin'
 ];
 
 function save(network, data) {
@@ -30,17 +30,6 @@ function getFromAPI(network) {
     response.data.fastestFee = Math.max(response.data.fastestFee, min)
     return response.data;
   })
-}
-
-function getFromCache(network) {
-  if (networks.indexOf(network) === -1) {
-    return Promise.reject({error: 'Currency fee is not supported'});
-  }
-  var collection = db().collection('fee');
-  return collection
-    .find({_id: network})
-    .limit(1)
-    .next();
 }
 
 function getFromCache(network) {

@@ -19,12 +19,14 @@
     <div class="detail__strings">
 
       <h3 class="_title">{{translate("Transaction Id:")}}</h3>
-      {{#if isNetwork('bitcoin') || isNetwork('testnet')}}
+      {{#if isNetwork('bitcoin')}}
       <a href="" onclick="window.open('https://btc.coin.space/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
       {{elseif isNetwork('bitcoincash')}}
       <a href="" onclick="window.open('https://bch.coin.space/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
       {{elseif isNetwork('litecoin')}}
       <a href="" onclick="window.open('https://ltc.coin.space/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
+      {{elseif isNetwork('dogecoin')}}
+      <a href="" onclick="window.open('https://dogechain.info/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
 			{{/if}}
 
       <h3 class="_title">{{translate("Transaction Fee:")}}</h3>

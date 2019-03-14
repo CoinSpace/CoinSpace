@@ -36,14 +36,14 @@ module.exports = function(el) {
           return tx.to;
         } else if (network === 'stellar') {
           return tx.operations[0] && tx.operations[0].destination;
-        } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(network) !== -1) {
+        } else if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin'].indexOf(network) !== -1) {
           return tx.outs[0].address;
         }
       },
       isReceived: function(tx) {
         if (network === 'ethereum' || network === 'ripple') {
           return tx.to === getWallet().addressString; // TODO: make getWallet().isReceivedTx(tx);
-        } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet', 'stellar'].indexOf(network) !== -1) {
+        } else if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin', 'stellar'].indexOf(network) !== -1) {
           return tx.amount > 0;
         } else if (network === 'eos') {
           return getWallet().isReceivedTx(tx);
@@ -58,7 +58,7 @@ module.exports = function(el) {
       isFailed: function(tx) {
         if (network === 'ethereum' || network === 'ripple') {
           return tx.status === false;
-        } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet', 'stellar'].indexOf(network) !== -1) {
+        } else if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin', 'stellar'].indexOf(network) !== -1) {
           return false;
         }
       },

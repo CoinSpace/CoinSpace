@@ -14,7 +14,8 @@ var networks = {
   ETH: 'ethereum',
   XRP: 'ripple',
   XLM: 'stellar',
-  EOS: 'eos'
+  EOS: 'eos',
+  DOGE: 'dogecoin'
 };
 
 function save(callback){

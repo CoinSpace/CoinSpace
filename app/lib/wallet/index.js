@@ -38,11 +38,11 @@ var Wallet = {
   bitcoin: CsWallet,
   bitcoincash: CsWallet,
   litecoin: CsWallet,
-  testnet: CsWallet,
   ethereum: EthereumWallet,
   ripple: RippleWallet,
   stellar: StellarWallet,
-  eos: EOSWallet
+  eos: EOSWallet,
+  dogecoin: CsWallet
 }
 
 var urlRoot = window.urlRoot
@@ -180,7 +180,7 @@ function initWallet(networkName, done, txDone) {
     options.minConf = 12;
     options.token = token;
     convert.setDecimals(token ? token.decimals : 18);
-  } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(networkName) !== -1) {
+  } else if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin'].indexOf(networkName) !== -1) {
     var accounts = getDerivedAccounts(networkName);
     options.externalAccount = accounts.externalAccount;
     options.internalAccount = accounts.internalAccount;
@@ -240,7 +240,7 @@ function parseHistoryTx(tx) {
     return tx;
   } else if (networkName === 'eos') {
     return tx;
-  } else if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(networkName) !== -1) {
+  } else if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin'].indexOf(networkName) !== -1) {
     return utils.parseBtcLtcTx(tx);
   }
 }
@@ -266,7 +266,7 @@ function reset() {
 }
 
 function getDynamicFees() {
-  if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(wallet.networkName) === -1) return Promise.resolve();
+  if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin'].indexOf(wallet.networkName) === -1) return Promise.resolve();
   var fees = cache.get('fees')
 
   if (fees) {

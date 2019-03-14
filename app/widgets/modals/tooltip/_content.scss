@@ -53,6 +53,13 @@
     }
   }
 }
+.dogecoin {
+  .tooltip__link {
+    a {
+      color: $dogecoin;
+    }
+  }
+}
 .ethereum {
   .tooltip__link {
     a {

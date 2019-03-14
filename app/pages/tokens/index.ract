@@ -89,4 +89,14 @@
     <h3 class="_name">EOS</h3>
   </div>
 
+  <div on-click="switchToken('dogecoin')" class="token__item token--dogecoin">
+    {{#if isCurrentToken('dogecoin')}}
+    <span class="_arrow">{{>svg_arrow}}</span>
+    {{/if}}
+    <span class="_icon">
+      {{>svg_token_dogecoin}}
+    </span>
+    <h3 class="_name">Dogecoin</h3>
+  </div>
+
 </div>

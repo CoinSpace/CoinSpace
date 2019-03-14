@@ -2,6 +2,7 @@
 
 var toAtom = require('lib/convert').toAtom
 var toUnitString = require('lib/convert').toUnitString
+var bitcoin = require('cs-wallet').bitcoin
 
 function validateSend(options) {
   var amount = toAtom(options.amount);
@@ -13,8 +14,9 @@ function validateSend(options) {
   var message;
 
   try {
-    if (['bitcoin', 'bitcoincash', 'litecoin', 'testnet'].indexOf(wallet.networkName) !== -1) {
-      fee = wallet.estimateFees(to, amount, [dynamicFees.minimum * 1000])[0];
+    if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin'].indexOf(wallet.networkName) !== -1) {
+      var defaultRate = bitcoin.networks[wallet.networkName].feePerKb;
+      fee = wallet.estimateFees(to, amount, [dynamicFees.minimum * 1000 || defaultRate])[0];
       tx = wallet.createTx(to, amount, fee);
     } else if (wallet.networkName === 'ethereum') {
       tx = wallet.createTx(to, amount);

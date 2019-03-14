@@ -87,6 +87,14 @@
     }
   }
 }
+.dogecoin {
+  .sidebar__logout {
+    background-color: darken($dogecoin, 30%);
+    &:hover {
+      background-color: darken($dogecoin, 35%);
+    }
+  }
+}
 .ethereum {
   .sidebar__logout {
     background-color: darken($ethereal, 30%);
@@ -230,6 +238,12 @@
   .settings__btn--loading {
     background-color: $silver;
     box-shadow:inset 0 1px 1px 1px darken($silver, 20%);
+  }
+}
+.dogecoin {
+  .settings__btn--loading {
+    background-color: $dogecoin;
+    box-shadow:inset 0 1px 1px 1px darken($dogecoin, 20%);
   }
 }
 .ethereum {

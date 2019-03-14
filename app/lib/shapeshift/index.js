@@ -3,8 +3,9 @@
 var request = require('lib/request');
 var urlRoot = 'https://shapeshift.io/';
 var urlAuthRoot = 'https://auth.shapeshift.io/';
-var prioritySymbols = ['BTC', 'BCH', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS'];
+var prioritySymbols = ['BTC', 'BCH', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE'];
 var emitter = require('lib/emitter');
+var Big = require('big.js');
 var getId = require('lib/wallet').getId;
 
 var hasHandledMobileLogin = false;
@@ -128,6 +129,9 @@ function marketInfo(fromSymbol, toSymbol) {
     url: urlRoot + 'marketinfo/' + pair
   }).then(function(data) {
     if (data.error) throw new Error(data.error);
+    if (data.rate) {
+      data.rate = new Big(data.rate).toFixed();
+    }
     return data;
   });
 }
