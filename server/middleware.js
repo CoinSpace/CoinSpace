@@ -6,7 +6,6 @@ var cookieSession = require('cookie-session');
 var compress = require('compression');
 var path = require('path');
 var helmet = require('helmet');
-var csp = require('helmet-csp');
 var express = require('express');
 
 function init(app) {
@@ -22,7 +21,7 @@ function init(app) {
     var hundredEightyDaysInMilliseconds = 180 * 24 * 60 * 60 * 1000
     app.use(helmet.hsts({
       maxAge: hundredEightyDaysInMilliseconds,
-      includeSubdomains: true
+      includeSubDomains: true
     }))
   }
 

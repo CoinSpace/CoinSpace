@@ -31,7 +31,6 @@
     "ejs": "^2.6.1",
     "express": "^4.15.4",
     "helmet": "^3.8.1",
-    "helmet-csp": "^2.5.1",
     "in-app-purchase": "^1.10.1",
     "mongodb": "^3.1.10",
     "retry": "^0.10.1"
