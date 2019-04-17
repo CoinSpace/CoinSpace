@@ -8,7 +8,8 @@ var symbols = {
   ripple: 'XRP',
   stellar: 'XLM',
   eos: 'EOS',
-  dogecoin: 'DOGE'
+  dogecoin: 'DOGE',
+  dash: 'DASH'
 }
 
 function getDenomination(token) {

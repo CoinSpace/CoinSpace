@@ -6,7 +6,8 @@ var networks = [
   'bitcoin',
   'bitcoincash',
   'litecoin',
-  'dogecoin'
+  'dogecoin',
+  'dash'
 ];
 
 function save(network, data) {

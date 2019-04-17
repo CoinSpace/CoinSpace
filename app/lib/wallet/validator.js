@@ -14,7 +14,7 @@ function validateSend(options) {
   var message;
 
   try {
-    if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin'].indexOf(wallet.networkName) !== -1) {
+    if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin', 'dash'].indexOf(wallet.networkName) !== -1) {
       var defaultRate = bitcoin.networks[wallet.networkName].feePerKb;
       fee = wallet.estimateFees(to, amount, [dynamicFees.minimum * 1000 || defaultRate])[0];
       tx = wallet.createTx(to, amount, fee);

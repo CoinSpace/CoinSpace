@@ -12,6 +12,7 @@ var fsyms = [
   'XLM',
   'EOS',
   'DOGE',
+  'DASH',
   'USD'
 ]
 

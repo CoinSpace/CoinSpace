@@ -108,7 +108,7 @@ function extendData(data) {
       this.find('.js-fee-dropdown').selectedIndex = 1; // fix issue when values are the same
     }
 
-  } else if (network === 'bitcoincash' || network === 'litecoin' || network === 'dogecoin') {
+  } else if (['bitcoincash', 'litecoin', 'dogecoin', 'dash'].indexOf(network) !== -1) {
     feeRates = [data.dynamicFees.minimum * 1000 || bitcoin.networks[network].feePerKb];
     fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents);
     data.fee = toUnitString(fees[0]);

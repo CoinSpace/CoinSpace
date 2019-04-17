@@ -27,6 +27,8 @@
       <a href="" onclick="window.open('https://ltc.coin.space/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
       {{elseif isNetwork('dogecoin')}}
       <a href="" onclick="window.open('https://dogechain.info/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
+      {{elseif isNetwork('dash')}}
+      <a href="" onclick="window.open('https://dash.coin.space/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
 			{{/if}}
 
       <h3 class="_title">{{translate("Transaction Fee:")}}</h3>
