@@ -29,6 +29,11 @@
     background-color: darken($dogecoin, 30%);
   }
 }
+.dash {
+  .header {
+    background-color: darken($dash, 30%);
+  }
+}
 .ethereum {
   .header {
     background-color: darken($ethereal, 30%);

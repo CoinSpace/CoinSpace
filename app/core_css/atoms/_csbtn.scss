@@ -91,6 +91,13 @@
   }
 }
 
+.dash {
+  .csbtn {
+    background-color: $dash;
+    box-shadow: 0 2px 0 0 darken($dash, 10%);
+  }
+}
+
 .csbtn--red {
   @extend .csbtn-base;
 

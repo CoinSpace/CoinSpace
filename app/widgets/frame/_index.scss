@@ -83,6 +83,11 @@
     background-color: darken($dogecoin, 30%);
   }
 }
+.dash {
+  .main__iphone_x {
+    background-color: darken($dash, 30%);
+  }
+}
 .ethereum {
   .main__iphone_x {
     background-color: darken($ethereal, 30%);

@@ -96,6 +96,13 @@
   }
 }
 
+.token--dash {
+  background-color: $dash;
+  ._name {
+    color: white;
+  }
+}
+
 .token--ripple {
   background-color: $ripple;
   ._name {

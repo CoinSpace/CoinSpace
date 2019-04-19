@@ -60,6 +60,13 @@
     }
   }
 }
+.dash {
+  .tooltip__link {
+    a {
+      color: $dash;
+    }
+  }
+}
 .ethereum {
   .tooltip__link {
     a {
