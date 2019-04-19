@@ -12,4 +12,4 @@ RUN npm version && \
 
 COPY . ./
 
-CMD npm run server
+CMD ["npm", "run", "server"]
