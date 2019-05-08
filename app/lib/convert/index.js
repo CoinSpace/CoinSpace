@@ -7,23 +7,23 @@ var factor;
 
 function toAtom(number) {
   if (!number) return '0';
-  return new Big(number).times(factor).toFixed();
+  return Big(number).times(factor).toFixed();
 }
 
 function toUnit(number) {
-  if (!number) return new Big(0);
-  return new Big(number).div(factor)
+  if (!number) return Big(0);
+  return Big(number).div(factor)
 }
 
 function toUnitString(number, d) {
   if (!number) return '0';
-  if (!d) return new Big(number).div(factor).toFixed();
-  return new Big(number).div(new Big(10).pow(d)).toFixed();
+  if (!d) return Big(number).div(factor).toFixed();
+  return Big(number).div(Big(10).pow(d)).toFixed();
 }
 
 function setDecimals(d) {
   decimals = d;
-  factor = new Big(10).pow(decimals);
+  factor = Big(10).pow(decimals);
 }
 
 module.exports = {

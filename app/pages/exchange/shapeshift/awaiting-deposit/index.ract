@@ -1,0 +1,61 @@
+<div class="shapeshift_awaiting_deposit">
+
+  <div class="exchange_header">
+    <div class="_back" on-click="cancel">
+      <span class="_icon"></span> {{translate("Cancel")}}
+    </div>
+    <h2 class="_subtitle">{{translate("Awaiting deposit...")}}</h2>
+  </div>
+
+  <div class="instructions">
+    {{translate("Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress", {
+      depositMax: depositMax,
+      depositSymbol: depositSymbol,
+      toSymbol: toSymbol,
+      toAddress: toAddress
+    })}}
+  </div>
+
+  <h3 class="_title">{{translate("Deposit address", {symbol: depositSymbol})}}</h3>
+  <div class="address__box">
+    <span class="_address">{{depositAddress}}</span>
+    <div class="_btn" on-click="show-qr">
+      <span class="_icon">
+        {{>svg_expand}}
+      </span>
+    </div>
+  </div>
+
+  {{#isPhonegap}}
+  <div class="qr-code" id="deposit_qr_canvas"></div>
+  {{/isPhonegap}}
+
+  <h3 class="_title">{{translate("Deposit minimum")}}</h3>
+  <div class="_market_info">
+    {{#if isLoadingMarketInfo}}
+      {{translate("Loading...")}}
+    {{else}}
+      {{depositMin}} {{depositSymbol}}
+    {{/if}}
+  </div>
+
+  <h3 class="_title">{{translate("Exchange rate")}}</h3>
+  <div class="_market_info">
+    {{#if isLoadingMarketInfo}}
+      {{translate("Loading...")}}
+    {{else}}
+      1 {{depositSymbol}} = {{rate}} {{toSymbol}}
+    {{/if}}
+  </div>
+
+  <h3 class="_title">{{translate("Miner fee")}}</h3>
+  <div class="_market_info">
+    {{#if isLoadingMarketInfo}}
+      {{translate("Loading...")}}
+    {{else}}
+      {{minerFee}} {{toSymbol}}
+    {{/if}}
+  </div>
+
+</div>
+{{>footer}}

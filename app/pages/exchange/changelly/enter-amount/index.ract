@@ -1,0 +1,94 @@
+{{#if isLoading}}
+  {{>loader}}
+{{else}}
+<div class="changelly_enter_amount">
+
+  <div class="exchange_header">
+    <div class="_back" on-click="back">
+      <span class="_icon"></span> {{translate("Back")}}
+    </div>
+  </div>
+
+  <form>
+
+    <div class="exchange__amount from">
+      <div class="_exchange_group">
+        <label class="_label" for="changelly_from_amount">{{translate("From")}}</label>
+
+        <div class="input__container">
+          <input id="changelly_from_amount" class="_input" value="1" on-keyup="input-from-amount" type="number" min="0" step="any" placeholder="{{translate("Amount")}}" autocorrect="off" autocapitalize="off" />
+          <span class="_symbol_dropdown">
+            <span class="_symbol">{{fromSymbol}}</span>
+            <select class="js-from-symbol-select" value="{{fromSymbol}}" tabindex="-1">
+              {{#coins}}
+                <option value="{{symbol}}">{{symbol}} - {{name}}</option>
+              {{/coins}}
+            </select>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="_min_amount">
+      {{translate("Minimum amount:")}}
+      {{#if isFirstEstimate}}
+        ...
+      {{else}}
+        {{minAmount}} {{fromSymbol}}
+      {{/if}}
+    </div>
+
+    <div class="swap__wrapper">
+      <div class="_btn" on-click="swap">
+        <span class="_icon">
+          {{>svg_exchange}}
+        </span>
+      </div>
+    </div>
+
+    <div class="exchange__amount">
+      <div class="_exchange_group">
+        <label for="changelly_to_amount" class="_label">{{translate("To")}}</label>
+        <div class="input__container">
+          <input id="changelly_to_amount" class="_input" type="text" placeholder="{{translate("Amount")}}" autocorrect="off" autocapitalize="off" value="{{toAmount}}" readonly/>
+          <span class="_symbol_dropdown">
+            <span class="_symbol">{{toSymbol}}</span>
+            <select class="js-to-symbol-select" value="{{toSymbol}}" tabindex="-1">
+              {{#coins}}
+                <option value="{{symbol}}">{{symbol}} - {{name}}</option>
+              {{/coins}}
+            </select>
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+    <h3 class="_title">{{translate("Exchange rate")}}</h3>
+    <div class="exchange__rate">
+      {{#if isFirstEstimate}}
+        {{translate("Loading...")}}
+      {{else}}
+        {{#if rate === '0'}} 0 {{else}} 1 {{/if}}
+        {{fromSymbol}} ≈ {{rate}} {{toSymbol}}
+      {{/if}}
+    </div>
+
+  </form>
+
+  <div class="confirm__buttons">
+    {{#if isLoadingEstimate}}
+      <div class="confirm__btn--validating">
+        <span class="_icon">
+          {{>svg_refresh}}
+        </span>
+      </div>
+    {{else}}
+      <div on-click="confirm" class="confirm__btn">{{translate("Next step")}}</div>
+    {{/if}}
+  </div>
+
+</div>
+{{>footer}}
+
+{{/if}}

@@ -15,7 +15,11 @@
       </div>
       <h2 class="flash__title {{type}}">{{translate(title)}}</h2>
     </div>
+    {{#if isHtml}}
+    <p class="flash__message">{{{translate(message, interpolations)}}}</p>
+      {{else}}
     <p class="flash__message">{{translate(message, interpolations)}}</p>
+    {{/if}}
     {{#href}}
       <p class="flash__link"><a href="{{href}}" target="_blank">{{translate(linkText)}}</a></p>
     {{/href}}

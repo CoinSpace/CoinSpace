@@ -23,6 +23,7 @@ function openModal(type, data) {
   data.warning = defaults[type].warning
   data.title = data.title || defaults[type].title
   data.type = type
+  data.isHtml = data.isHtml
   data.onDismiss = function() {
     isOpen = false;
   }

@@ -3,7 +3,7 @@
 var request = require('lib/request');
 var urlRoot = 'https://shapeshift.io/';
 var urlAuthRoot = 'https://auth.shapeshift.io/';
-var prioritySymbols = ['BTC', 'BCH', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH'];
+var PRIORITY_SYMBOLS = ['BTC', 'BCH', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH'];
 var emitter = require('lib/emitter');
 var Big = require('big.js');
 var getId = require('lib/wallet').getId;
@@ -73,7 +73,22 @@ function getCoins() {
   return request({
     url: urlRoot + 'getcoins'
   }).then(function(coins) {
-    return getCoinsArray(coins);
+    return Object.keys(coins).filter(function(key) {
+      return coins[key].status === 'available';
+    }).map(function(key) {
+      return {
+        name: coins[key].name,
+        symbol: coins[key].symbol
+      }
+    }).sort(function(a, b) {
+      if (PRIORITY_SYMBOLS.indexOf(a.symbol) === -1 && PRIORITY_SYMBOLS.indexOf(b.symbol) === -1) {
+        return (a.symbol > b.symbol) ? 1 : -1
+      };
+      if (PRIORITY_SYMBOLS.indexOf(b.symbol) === -1) return -1;
+      if (PRIORITY_SYMBOLS.indexOf(a.symbol) === -1) return 1;
+      if (PRIORITY_SYMBOLS.indexOf(a.symbol) > PRIORITY_SYMBOLS.indexOf(b.symbol)) return 1;
+      return -1;
+    });
   });
 }
 
@@ -130,31 +145,9 @@ function marketInfo(fromSymbol, toSymbol) {
   }).then(function(data) {
     if (data.error) throw new Error(data.error);
     if (data.rate) {
-      data.rate = new Big(data.rate).toFixed();
+      data.rate = Big(data.rate).toFixed();
     }
     return data;
-  });
-}
-
-function getCoinsArray(coins) {
-  prioritySymbols = prioritySymbols.filter(function(symbol) {
-    return coins[symbol];
-  });
-
-  var symbols = Object.keys(coins);
-  symbols = symbols.filter(function(symbol) {
-    return prioritySymbols.indexOf(symbol) === -1;
-  });
-
-  var allSymbols = prioritySymbols.concat(symbols);
-
-  return allSymbols.map(function(symbol) {
-    var coin = coins[symbol];
-    return {
-      name: coin.name,
-      symbol: coin.symbol,
-      disabled: coin.status !== 'available',
-    };
   });
 }
 

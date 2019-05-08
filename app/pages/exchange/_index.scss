@@ -1,37 +1,41 @@
-.exchange__frame {
-  .step {
-    display: none;
-    &.current {
-      display: block;
-    }
-  }
-  .loader__message {
-    padding: 40px;
-    color: $grey;
-    text-align: center;
-    font-size: 24px;
-    @include breakpoint(portrait) {
-      font-size: 32px;
-    }
-  }
-  ._powered_by {
-    @extend .jigsaw-regular;
-    text-align: center;
-    padding-left: 32px;
+#exchange_none {
+  ._title {
     @include breakpoint(portrait) {
       font-size: 20px;
     }
+  }
+  ._btn {
+    @extend .csbtn;
+    margin-top: 20px;
+    @include breakpoint(portrait) {
+      font-size: 26px;
+      border-radius: 3px;
+      margin-top: 40px;
+    }
     ._icon {
       display: inline-block;
-      margin-top: -8px;
-      vertical-align: top;
+      height: 0;
+      width: 40px;
+      margin-left: -45px;
+      margin-right: 5px;
+      margin-top: -40px;
+      vertical-align: middle;
+      @include breakpoint(portrait) {
+        width: 48px;
+        margin-left: -58px;
+        margin-top: -48px;
+        margin-right: 10px;
+      }
     }
   }
-
 }
 
-@import "./create/_index";
-@import "./awaiting-deposit/_index";
-@import "./awaiting/_index";
-@import "./complete/_index";
-@import "./error/_index";
+#exchange_changelly, #exchange_shapeshift, #exchange_none {
+  display: none;
+  &.current {
+    display: block;
+  }
+}
+
+@import "./shapeshift/_index";
+@import "./changelly/_index";

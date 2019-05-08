@@ -1,0 +1,65 @@
+<div class="changelly_awaiting_deposit">
+
+  <div class="exchange_header">
+    <div class="_back" on-click="cancel">
+      <span class="_icon"></span> {{translate("Cancel")}}
+    </div>
+    <h2 class="_subtitle">{{translate("Awaiting deposit...")}}</h2>
+  </div>
+
+  <div class="instructions">
+    {{translate("Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress", {
+      depositAmount: depositAmount,
+      depositSymbol: depositSymbol,
+      toSymbol: toSymbol,
+      toAddress: toAddress
+    })}}
+  </div>
+
+  <h3 class="_title">{{translate("Deposit address", {symbol: depositSymbol})}}</h3>
+  <div class="input__box">
+    <span class="_input">{{depositAddress}}</span>
+    <div class="_btn" on-click="show-qr">
+      <span class="_icon">
+        {{>svg_expand}}
+      </span>
+    </div>
+  </div>
+
+  {{#isPhonegap}}
+  <div class="qr-code" id="deposit_qr_canvas"></div>
+  {{/isPhonegap}}
+
+  {{#extraId}}
+  <h3 class="_title">
+    {{translate("Extra Id")}}
+    <span class="_help" on-click="help-extra-id">
+      {{>svg_help}}
+    </span>
+  </h3>
+  <div class="input__box">
+    <span class="_input">{{extraId}}</span>
+  </div>
+  {{/extraId}}
+
+  <h3 class="_title">{{translate("Exchange rate")}}</h3>
+  <div class="_description">
+    1 {{depositSymbol}} ≈ {{rate}} {{toSymbol}}
+  </div>
+
+  <h3 class="_title">
+    {{translate("Network fee")}}
+    <span class="_help _left" on-click="help-network-fee">
+      {{>svg_help}}
+    </span>
+  </h3>
+  <div class="_description">
+    {{networkFee}} {{toSymbol}}
+  </div>
+
+  <div class="_description">
+    {{translate("You have 36 hours to send funds otherwise the transaction will be cancelled automatically.")}}
+  </div>
+
+</div>
+{{>footer}}

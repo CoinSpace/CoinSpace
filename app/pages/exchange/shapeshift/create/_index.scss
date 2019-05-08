@@ -1,0 +1,270 @@
+.shapeshift_create {
+  margin-bottom: 25px;
+
+  .exchange_header {
+    position: relative;
+    ._back {
+      cursor: pointer;
+      user-select: none;
+      color: #999;
+      display: inline-block;
+      margin-left: -10px;
+      margin-bottom: 10px;
+      @include breakpoint(portrait) {
+        font-size: 20px;
+      }
+      ._icon {
+        width: 25px;
+        height: 25px;
+        background-size: 25px 25px;
+        @include breakpoint(portrait) {
+          width: 30px;
+          height: 30px;
+          background-size: 30px 30px;
+        }
+        display: inline-block;
+        vertical-align: top;
+        background: url('./assets/img/arrow-left.svg');
+        opacity: 0.6;
+      }
+    }
+  }
+
+  ._title {
+    @include breakpoint(portrait) {
+      font-size: 20px;
+    }
+  }
+
+  .exchange__address {
+    display: flex;
+    margin-bottom: 20px;
+    &.from {
+      margin-bottom: 0;
+    }
+
+    ._exchange_group {
+      @include noselect;
+      position: relative;
+      flex: 1;
+      margin-right: 10px;
+      @include breakpoint(portrait) {
+        font-size: 20px;
+      }
+    }
+
+    .input__container {
+      position: relative;
+      margin-top: 5px;
+    }
+
+    .close__input {
+      ._icon {
+        .svg-close {
+          fill: #969594;
+        }
+      }
+    }
+
+    ._select_container {
+      display: inline-block;
+      position: relative;
+      text-decoration: underline;
+      padding: 0 5px;
+      select {
+        position: absolute;
+        opacity: 0;
+        left: 0;
+        top: -5px;
+        @include breakpoint(portrait) {
+          top: 0
+        }
+      }
+    }
+
+    ._label {
+      cursor: pointer;
+      flex: 1;
+    }
+
+    ._btn {
+      @extend .csbtn;
+      margin-top: 29px;
+      padding: 0;
+      width: 42px;
+      height: 42px;
+      position: relative;
+
+      @include breakpoint(portrait) {
+        margin-top: 35px;
+        width: 59px;
+        height: 59px;
+      }
+
+      &._disabled {
+        background-color: $grey;
+        box-shadow: 0 2px 0 0 darken($grey, 10%);
+        color: darken($grey, 20%);
+        pointer-events: none;
+
+        &:hover {
+          color: darken($grey, 20%);
+        }
+      }
+
+      ._icon {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -15px;
+        margin-left: -15px;
+
+        @include breakpoint(portrait) {
+          width: 44px;
+          height: 44px;
+          margin-top: -22px;
+          margin-left: -22px;
+        }
+      }
+    }
+
+    ._btn-qr {
+      margin-right: 10px;
+    }
+
+    ._input {
+      @extend .generic_box;
+      @extend .jigsaw-light;
+      padding-left: 10px;
+      padding-right: 38px;
+      border-radius: 2px;
+
+      height: auto;
+
+      &:active, &:focus {
+        outline: 0;
+        border: 1px solid #999;
+      }
+
+      @include breakpoint(portrait) {
+        font-size: 26px;
+        border-radius: 3px;
+        padding-right: 58px;
+      }
+    }
+
+    ._help {
+      @include clickbtn;
+      position: absolute;
+      top: 0px;
+      right: -5px;
+      font-size: 12px;
+      width: 26px;
+      height: 26px;
+      padding: 4px;
+      opacity: 0.4;
+
+      @include breakpoint(portrait) {
+        width: 32px;
+        height: 32px;
+      }
+
+      &:hover {
+        opacity: 0.7;
+      }
+
+      .svg-help {
+        fill: #333;
+      }
+    }
+  }
+
+  .exchange__rate {
+    @extend .jigsaw-regular;
+    margin-bottom: 20px;
+    @include breakpoint(portrait) {
+      font-size: 20px;
+    }
+  }
+
+  .swap__button {
+    cursor: pointer;
+    padding: 10px 10px 10px 0;
+    user-select: none;
+    display: inline-block;
+    ._icon {
+      width: 28px;
+      height: 28px;
+      display: block;
+      transform: rotate(90deg);
+      .svg-exchange {
+        fill: darken($grey, 20%);
+      }
+      @include breakpoint(portrait) {
+        width: 36px;
+        height: 36px;
+      }
+    }
+  }
+
+  .confirm__buttons {
+    margin-top: 20px;
+    @include breakpoint(portrait) {
+      margin-top: 40px;
+    }
+  }
+
+  .confirm__btn {
+    @extend .csbtn;
+
+    @include breakpoint(portrait) {
+      font-size: 26px;
+      border-radius: 3px;
+    }
+  }
+
+  .confirm__btn--validating {
+    @extend .csbtn-base;
+    position: relative;
+    background-color: $grey;
+    transform: translate(0px, 3px);
+    box-shadow: 0 0px 0 0;
+    height: 60px;
+    @include breakpoint(portrait) {
+      height: 72px;
+    }
+    ._icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -15px;
+      margin-left: -15px;
+      width: 30px;
+      height: 30px;
+      animation: infinite-spinning 1s linear infinite;
+      @include breakpoint(portrait) {
+        margin-top: -18px;
+        margin-left: -18px;
+        width: 36px;
+        height: 36px;
+      }
+      .svg-refresh {
+        fill: darken($grey, 20%);
+      }
+    }
+  }
+
+  .logout_link {
+    display: block;
+    cursor: pointer;
+    text-align: center;
+    padding-top: 10px;
+    color: #999;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

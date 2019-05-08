@@ -36,9 +36,6 @@ module.exports = function(el){
       isEOS: false,
       validating: false,
       gasLimit: '',
-      destinationTag: '',
-      invoiceId: '',
-      memo: ''
     }
   })
 
@@ -131,12 +128,12 @@ module.exports = function(el){
       } else if (wallet.networkName === 'ripple') {
         options.tag = ractive.find('#destination-tag').value;
         options.invoiceId = ractive.find('#invoice-id').value;
-        options.amount = new Big(options.amount || '0').toFixed(6).replace(/0+$/, '').replace(/\.+$/, '');
+        options.amount = Big(options.amount || '0').toFixed(6).replace(/0+$/, '').replace(/\.+$/, '');
       } else if (wallet.networkName === 'stellar') {
-        options.amount = new Big(options.amount || '0').toFixed(7).replace(/0+$/, '').replace(/\.+$/, '');
+        options.amount = Big(options.amount || '0').toFixed(7).replace(/0+$/, '').replace(/\.+$/, '');
         options.memo = ractive.find('#memo').value;
       } else if (wallet.networkName === 'eos') {
-        options.amount = new Big(options.amount || '0').toFixed(4).replace(/0+$/, '').replace(/\.+$/, '');
+        options.amount = Big(options.amount || '0').toFixed(4).replace(/0+$/, '').replace(/\.+$/, '');
         options.memo = ractive.find('#memo').value;
       }
 
@@ -192,7 +189,7 @@ module.exports = function(el){
     var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')];
     var bitcoin = '0';
     if (exchangeRate) {
-      bitcoin = new Big(fiat).div(exchangeRate).toFixed(8)
+      bitcoin = Big(fiat).div(exchangeRate).toFixed(8)
     }
     ractive.find('#bitcoin').value = bitcoin;
   })
@@ -204,7 +201,7 @@ module.exports = function(el){
     var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')];
     if (typeof exchangeRate !== 'number') return;
 
-    var fiat = new Big(bitcoin).times(exchangeRate).toFixed(2);
+    var fiat = Big(bitcoin).times(exchangeRate).toFixed(2);
     ractive.find('#fiat').value = fiat;
   })
 

@@ -1,13 +1,3 @@
-<div class="exchange__frame">
-
-  {{#isLoading}}
-    {{>loader}}
-  {{/isLoading}}
-
-  <div id="exchange_create" class="step"></div>
-  <div id="exchange_awaiting_deposit" class="step"></div>
-  <div id="exchange_awaiting" class="step"></div>
-  <div id="exchange_complete" class="step"></div>
-  <div id="exchange_error" class="step"></div>
-
-</div>
+<div id="exchange_none"></div>
+<div id="exchange_changelly"></div>
+<div id="exchange_shapeshift"></div>

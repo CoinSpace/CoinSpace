@@ -1,0 +1,10 @@
+<div class="shapeshift_awaiting">
+
+  <h2 class="_subtitle">{{translate("Deposit has been received")}} <br> {{translate("Awaiting exchange...")}}</h2>
+
+  <span class="_loading_icon">
+    {{>svg_refresh}}
+  </span>
+
+</div>
+{{>footer}}

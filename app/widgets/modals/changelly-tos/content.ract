@@ -1,0 +1,30 @@
+<div class="modal _cancel">
+  <div class="modal__content changelly_tos">
+    <div class="_header">
+      <span class="modal__cancel" on-click="close">
+        {{>svg_close}}
+      </span>
+      <h2 class="_title">{{translate("Terms of Service")}}</h2>
+    </div>
+
+    <div class="_content">
+      <div class="tos__accept">
+        <div class="_checkbox" on-click="toggle-terms-check">
+          {{#termsChecked}}
+            <div class="_check"></div>
+          {{/termsChecked}}
+        </div>
+        <p class="_checktext">{{{translate("Changelly_TOS")}}}</p>
+      </div>
+    </div>
+
+    <div class="confirm__buttons">
+      {{#if termsChecked}}
+        <div class="_accept_btn" on-click="accept">{{translate("Accept")}}</div>
+      {{else}}
+        <div class="_accept_btn _disabled">{{translate("Accept")}}</div>
+      {{/if}}
+    </div>
+
+  </div>
+</div>

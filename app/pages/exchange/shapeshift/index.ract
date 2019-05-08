@@ -1,0 +1,13 @@
+<div class="shapeshift_frame">
+
+  {{#isLoading}}
+    {{>loader}}
+  {{/isLoading}}
+
+  <div id="shapeshift_create" class="step"></div>
+  <div id="shapeshift_awaiting_deposit" class="step"></div>
+  <div id="shapeshift_awaiting" class="step"></div>
+  <div id="shapeshift_complete" class="step"></div>
+  <div id="shapeshift_error" class="step"></div>
+
+</div>

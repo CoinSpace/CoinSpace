@@ -1,0 +1,101 @@
+.changelly_tos {
+  text-align: center;
+  min-width: 280px;
+  max-width: 350px;
+  padding: 20px;
+
+  @include breakpoint(portrait) {
+    max-width: 520px;
+    padding: 40px;
+  }
+
+  ._header {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 20px;
+    @include breakpoint(portrait) {
+      margin-bottom: 40px;
+    }
+  }
+
+  ._title {
+    font-size: 24px;
+    @include breakpoint(portrait) {
+      font-size: 32px;
+    }
+  }
+
+  ._content {
+    text-align: left;
+    margin-bottom: 20px;
+    @include breakpoint(portrait) {
+      font-size: 20px;
+      margin-bottom: 40px;
+    }
+  }
+
+  ._accept_btn {
+    @extend .csbtn;
+    @include breakpoint(portrait) {
+      font-size: 26px;
+      border-radius: 3px;
+    }
+    &._disabled {
+      background-color: $grey;
+      box-shadow: 0 2px 0 0 darken($grey, 10%);
+      color: darken($grey, 20%);
+      pointer-events: none;
+      &:hover {
+        color: darken($grey, 20%);
+      }
+    }
+  }
+
+  .tos__accept {
+    display: flex;
+    padding-top: 20px;
+    max-width: 240px;
+    margin: 0 auto;
+
+    @include breakpoint(portrait) {
+      padding-top: 40px;
+      max-width: 270px;
+    }
+
+    ._checkbox {
+      @include clickbtn;
+      width: 30px;
+      height: 30px;
+      background-color: #f2f2f2;
+      position: relative;
+      border-radius: 3px;
+      outline: 1px solid rgba(133, 141, 240, 0);
+      box-shadow: inset 0px 1px 3px 0px rgba(0,0,0,0.25);
+    }
+
+    ._check {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      top: 50%;
+      left: 50%;
+      margin-top: -9px;
+      margin-left: -9px;
+      background-color: #575757;
+    }
+
+    ._checktext {
+      flex: 1;
+      margin-left: 10px;
+      text-align: left;
+      @extend .jigsaw-regular;
+      @include breakpoint(portrait) {
+        margin-left: 15px;
+        max-width: 260px;
+      }
+      a {
+        text-decoration: underline;
+      }
+    }
+  }
+}

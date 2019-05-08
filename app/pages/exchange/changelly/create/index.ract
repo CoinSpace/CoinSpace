@@ -1,0 +1,102 @@
+<div class="changelly_create">
+
+  <div class="exchange_header">
+    <div class="_back" on-click="back">
+      <span class="_icon"></span> {{translate("Back")}}
+    </div>
+  </div>
+
+  <form>
+
+    <div class="exchange__address from">
+      <div class="_exchange_group">
+        <label class="_label" for="changelly_return_address">{{fromSymbol}} {{translate("address")}}</label>
+        <div class="input__container">
+          <input id="changelly_return_address" class="_input" type="text" placeholder="{{translate("Return address (optional)")}}" autocorrect="off" autocapitalize="off" value="{{returnAddress}}" />
+          {{#returnAddress}}
+            <div class="close__input" on-click="clearAddress" data-context="changelly-return-address">
+              <span class="_icon">{{> svg_close}}</span>
+            </div>
+          {{/returnAddress}}
+        </div>
+        <span class="_help" on-click="help">
+          {{>svg_help}}
+        </span>
+      </div>
+
+      {{#qrScannerAvailable}}
+        <div class="_btn _btn-qr" on-click="open-qr" data-context="changelly-return-address">
+          <span class="_icon">
+            {{>svg_qr}}
+          </span>
+        </div>
+      {{/qrScannerAvailable}}
+
+      {{#if isGeoEnabled(fromSymbol)}}
+        <div class="_btn" on-click="open-geo" data-context="changelly-return-address">
+          <span class="_icon">
+            {{>svg_mecto}}
+          </span>
+        </div>
+      {{else}}
+        <div class="_btn _disabled">
+          <span class="_icon">
+            {{>svg_mecto}}
+          </span>
+        </div>
+      {{/if}}
+
+    </div>
+
+    <div class="exchange__address">
+      <div class="_exchange_group">
+        <label for="changelly_to_address" class="_label">{{toSymbol}} {{translate("address")}}</label>
+        <div class="input__container">
+          <input id="changelly_to_address" class="_input" type="text" placeholder="{{translate("Address")}}" autocorrect="off" autocapitalize="off" value="{{toAddress}}" />
+          {{#toAddress}}
+            <div class="close__input" on-click="clearAddress" data-context="changelly-to-address">
+              <span class="_icon">{{> svg_close}}</span>
+            </div>
+          {{/toAddress}}
+        </div>
+      </div>
+
+      {{#qrScannerAvailable}}
+        <div class="_btn _btn-qr" on-click="open-qr" data-context="changelly-to-address">
+          <span class="_icon">
+            {{>svg_qr}}
+          </span>
+        </div>
+      {{/qrScannerAvailable}}
+
+      {{#if isGeoEnabled(toSymbol)}}
+      <div class="_btn" on-click="open-geo" data-context="changelly-to-address">
+        <span class="_icon">
+          {{>svg_mecto}}
+        </span>
+      </div>
+      {{else}}
+        <div class="_btn _disabled">
+          <span class="_icon">
+            {{>svg_mecto}}
+          </span>
+        </div>
+      {{/if}}
+    </div>
+
+  </form>
+
+  <div class="confirm__buttons">
+    {{#if isValidating}}
+      <div class="confirm__btn--validating">
+        <span class="_icon">
+          {{>svg_refresh}}
+        </span>
+      </div>
+    {{else}}
+      <div on-click="confirm" class="confirm__btn">{{translate("Confirm")}}</div>
+    {{/if}}
+  </div>
+
+</div>
+{{>footer}}

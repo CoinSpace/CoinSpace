@@ -134,12 +134,12 @@ module.exports = function(el) {
     if(amount == undefined || exchangeRate == undefined) return "N/A";
 
     var btc = toUnit(amount)
-    return new Big(exchangeRate).times(btc).toFixed(2)
+    return Big(exchangeRate).times(btc).toFixed(2)
   }
 
   function bitcoinPrice(exchangeRate) {
     if (typeof exchangeRate !== 'number') return '';
-    return new Big(exchangeRate).times(1).toFixed(2)
+    return Big(exchangeRate).times(1).toFixed(2)
   }
 
   function setPreferredCurrency(currency, old) {

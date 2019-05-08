@@ -85,6 +85,7 @@ partials.svg_exchange = require('lib/svg/exchange.ract')
 partials.svg_error = require('lib/svg/error.ract')
 partials.svg_appstore = require('lib/svg/appstore.ract')
 partials.svg_shapeshift = require('lib/svg/shapeshift.ract')
+partials.svg_changelly = require('lib/svg/changelly.ract')
 
 Ractive.prototype.hide = function(context){
   this.fire('before-hide', context)
