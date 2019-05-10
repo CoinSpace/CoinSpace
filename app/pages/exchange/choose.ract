@@ -1,4 +1,4 @@
-<div class="_title">{{translate("Choose Exchange")}}</div>
+<div class="_title">{{translate("Choose exchange")}}</div>
 <div>
   <div on-click="choose('changelly')" class="_btn">
     <span class="_icon">{{>svg_changelly}}</span>
