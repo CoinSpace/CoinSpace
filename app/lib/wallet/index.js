@@ -268,7 +268,8 @@ function reset() {
 
 function getDynamicFees() {
   if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin', 'dash'].indexOf(wallet.networkName) === -1) return Promise.resolve();
-  var fees = cache.get('fees')
+  var key = 'fees_' + wallet.networkName;
+  var fees = cache.get(key)
 
   if (fees) {
     return Promise.resolve(fees)
@@ -280,7 +281,7 @@ function getDynamicFees() {
       network: wallet.networkName
     },
   }).then(function(data) {
-    cache.put('fees', data, 10 * 60 * 1000)
+    cache.put(key, data, 10 * 60 * 1000)
     return data;
   }).catch(function() {
     return {};
