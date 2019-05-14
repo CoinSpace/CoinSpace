@@ -89,10 +89,6 @@ module.exports = function(el) {
 
   ractive.on('swap', function() {
     ractive.set('fromSymbol', ractive.get('toSymbol'));
-    // Fix safari placeholder bug
-    var fromAmountEl = ractive.find('#changelly_from_amount');
-    fromAmountEl.focus();
-    fromAmountEl.blur();
   });
 
   ractive.on('confirm', function() {
