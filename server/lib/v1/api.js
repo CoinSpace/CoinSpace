@@ -8,6 +8,7 @@ var geo = require('./geo');
 var validatePin = require('cs-pin-validator');
 var openalias = require('cs-openalias');
 var fee = require('./fee');
+var csFee = require('./csFee');
 var ticker = require('./ticker');
 var ethereumTokens = require('./ethereumTokens');
 var iap = require('./iap');
@@ -104,6 +105,15 @@ router.get('/fees', function(req, res) {
   fee.getFromCache(network).then(function(fees) {
     delete fees._id;
     res.status(200).send(fees);
+  }).catch(function(err) {
+    res.status(400).send(err);
+  });
+});
+
+router.get('/csFee', function(req, res) {
+  var network = req.query.network || 'bitcoin'
+  csFee.get(network).then(function(data) {
+    res.status(200).send(data);
   }).catch(function(err) {
     res.status(400).send(err);
   });

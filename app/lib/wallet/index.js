@@ -186,6 +186,12 @@ function initWallet(networkName, done, txDone) {
     options.externalAccount = accounts.externalAccount;
     options.internalAccount = accounts.internalAccount;
     options.minConf = 4;
+    options.getCsFee = function() {
+      return request({
+        url: urlRoot + 'csFee',
+        params: { network: networkName },
+      }).catch(console.error);
+    }
     convert.setDecimals(8);
   } else if (networkName === 'ripple') {
     options.seed = seed;
