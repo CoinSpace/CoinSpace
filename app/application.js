@@ -17,7 +17,6 @@ window.initCSApp = function() {
   var denomination = require('lib/denomination');
 
   var fadeIn = require('lib/transitions/fade.js').fadeIn
-  var ads = require('lib/ads');
 
   var appEl = document.getElementById('app')
   var htmlEl = document.documentElement
@@ -28,10 +27,6 @@ window.initCSApp = function() {
   FastClick.attach(document.body)
 
   initGeoOverlay(document.getElementById('geo-overlay'))
-
-  if (process.env.BUILD_TYPE === 'phonegap') {
-    ads.init();
-  }
 
   auth = walletExists() ? initAuth.pin(null, { userExists: true }) : initAuth.choose()
   var authContentEl = document.getElementById('auth_content')

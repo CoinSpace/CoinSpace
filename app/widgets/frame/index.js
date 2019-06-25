@@ -12,7 +12,6 @@ var initExchange = require('pages/exchange');
 var initHistory = require('pages/history');
 var initTokens = require('pages/tokens');
 var Hammer = require('hammerjs');
-var ads = require('lib/ads');
 
 module.exports = function(el) {
   var ractive = new Ractive({
@@ -64,11 +63,8 @@ module.exports = function(el) {
     });
   }
 
-  emitter.on('change-tab', function(tab, silent) {
+  emitter.on('change-tab', function(tab) {
     var page = tabs[tab];
-    if (process.env.BUILD_TYPE === 'phonegap' && currentPage !== page && !silent) {
-      ads.showInterstitial();
-    }
     showPage(page);
   });
 
@@ -104,7 +100,7 @@ module.exports = function(el) {
   })
 
   emitter.on('wallet-block', function() {
-    emitter.emit('change-tab', 'tokens', true);
+    emitter.emit('change-tab', 'tokens');
     document.getElementsByTagName('html')[0].classList.add('blocked');
   });
 

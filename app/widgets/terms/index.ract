@@ -13,25 +13,6 @@
 	  </div>
   </div>
 
-  {{#isPhonegap}}
-  <div class="about__section">
-    {{#if isAdFree}}
-      <div class="about__listitem">
-        <div class="about__listitem-title">{{translate("Ad free")}}</div>
-      </div>
-    {{else}}
-      <a class="about__listitem" href="" on-click="remove-ads">
-        <div class="about__listitem-title">{{translate("Remove Ads")}}</div>
-        <div class="about__listitem-value"><span class="about-arrowright"></span></div>
-      </a>
-      <a class="about__listitem" href="" on-click="restore-purchases">
-        <div class="about__listitem-title">{{translate("Restore Purchases")}}</div>
-        <div class="about__listitem-value"><span class="about-arrowright"></span></div>
-      </a>
-    {{/if}}
-  </div>
-  {{/isPhonegap}}
-
   <div class="about__section">
 	  <a class="about__listitem" onclick="window.open('https://www.coin.space/coinprivacypolicy.html', '_system'); return false;" href="">
 	  	<div class="about__listitem-title">{{translate("Terms of Use")}}</div>

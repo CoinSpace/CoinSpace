@@ -29,9 +29,6 @@
         <splash src="../images/android/screens/mdpi-port.png" density="port-mdpi"/>
         <splash src="../images/android/screens/hdpi-port.png" density="port-hdpi"/>
         <splash src="../images/android/screens/xhdpi-port.png" density="port-xhdpi"/>
-        <custom-config-file target="AndroidManifest.xml" parent="./application">
-            <meta-data android:name = "com.google.android.gms.ads.AD_MANAGER_APP" android:value="true" />
-        </custom-config-file>
         <custom-config-file target="AndroidManifest.xml" parent="/*" mode="replace">
             <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
             <uses-feature android:name="android.hardware.camera" android:required="false" />

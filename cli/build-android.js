@@ -43,7 +43,6 @@ webpack(webpackConfig, function(error, stats) {
   fse.copySync('build', path.resolve(mobileBuildPath, 'www'));
 
   utils.cordova('platform add android@6.1.0');
-  utils.cordova('plugin add cordova-android-support-gradle-release@1.4.5');
   utils.cordova('plugin add cordova-custom-config@5.0.2');
   utils.cordova('plugin add cordova-plugin-geolocation@2.4.3');
   utils.cordova('plugin add cordova-plugin-whitelist@1.3.2');
@@ -52,10 +51,7 @@ webpack(webpackConfig, function(error, stats) {
   utils.cordova('plugin add phonegap-plugin-barcodescanner@6.0.8');
   utils.cordova('plugin add cordova-plugin-dialogs@1.3.3');
   utils.cordova('plugin add cordova-plugin-x-socialsharing@5.2.0');
-  utils.cordova('plugin add https://github.com/ElieSauveterre/cordova-facebook-audnet-sdk#b31263b30983adad714979fb42b7a68e71a30c73');
-  utils.cordova('plugin add https://github.com/ElieSauveterre/cordova-plugin-facebookads.git#d540140816f93ee37ebef8cf5b05e438db17588a');
   utils.cordova('plugin add cordova-plugin-android-fingerprint-auth@1.4.0');
-  utils.cordova(`plugin add cc.fovea.cordova.purchase@7.2.0 --variable BILLING_KEY="${process.env['ANDROID_BILLING_KEY']}"`);
   utils.cordova('plugin add cordova-plugin-customurlscheme@4.3.0 --variable URL_SCHEME=coinspace');
 
   if (program.release) {
