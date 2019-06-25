@@ -35,11 +35,14 @@ function get(network) {
   ]).then(function(results) {
     var rate = results[0]['USD'];
     var minFee = 0;
+    var maxFee = 0;
     if (rate > 0) {
-      minFee = parseInt(Big(1).div(rate).times(results[1].min_usd).times(1e8), 10)
+      minFee = parseInt(Big(1).div(rate).times(results[1].min_usd).times(1e8), 10);
+      maxFee = parseInt(Big(1).div(rate).times(results[1].max_usd).times(1e8), 10)
     }
     return {
       minFee: minFee,
+      maxFee: maxFee,
       fee: results[1].fee,
       addresses: results[1].addresses
     }
