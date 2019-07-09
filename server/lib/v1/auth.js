@@ -64,7 +64,7 @@ function verifyPin(user, pin) {
   }
 
   var counter = user.failed_attempts + 1;
-  if (counter >= 5) return deleteUser(user._id);
+  if (counter >= 3) return deleteUser(user._id);
   incrementFailCount(user._id);
   return Promise.reject({error: 'auth_failed'});
 }
