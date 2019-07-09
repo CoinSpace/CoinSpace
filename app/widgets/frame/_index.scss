@@ -61,14 +61,6 @@
   }
 }
 
-.fb_web_ads {
-  #main {
-    .content {
-      margin-bottom: 50px;
-    }
-  }
-}
-
 .main__iphone_x {
   @include iphone-x-top;
   background-color: darken($brand-green, 30%);
