@@ -253,5 +253,8 @@
     "Payment wasn't received since 36 hours since the transaction was created.": "Платеж не поступал в течение 36 часов с момента создания транзакции.",
     "Terms of Service": "Условия обслуживания",
     "Accept": "Принять",
-    "Changelly_TOS": "Я прочитал и согласен с <a href=\"\" onclick=\"window.open('https://changelly.com/terms-of-use', '_system'); return false;\">Условиями использования</a> и <a href=\"\" onclick=\"window.open('https://changelly.com/privacy-policy', '_system'); return false;\">Политикой конфиденциальности</a> Changelly.<br>Нажав \"Принять\", я подтверждаю и понимаю, что моя транзакция может вызвать проверку AML/KYC в соответствии с политикой <a href=\"\" onclick=\"window.open('https://changelly.com/aml-kyc', '_system'); return false;\">Changelly AML/KYC</a>."
+    "Changelly_TOS": "Я прочитал и согласен с <a href=\"\" onclick=\"window.open('https://changelly.com/terms-of-use', '_system'); return false;\">Условиями использования</a> и <a href=\"\" onclick=\"window.open('https://changelly.com/privacy-policy', '_system'); return false;\">Политикой конфиденциальности</a> Changelly.<br>Нажав \"Принять\", я подтверждаю и понимаю, что моя транзакция может вызвать проверку AML/KYC в соответствии с политикой <a href=\"\" onclick=\"window.open('https://changelly.com/aml-kyc', '_system'); return false;\">Changelly AML/KYC</a>.",
+    "max.": "макс.",
+    "Fee": "Комиссия",
+    "Amount of coins that is charged from your balance for single transaction (<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;\">more info</a>).": "Количество монет, которое списывается с вашего баланса за одну транзакцию (<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;\">подробнее</a>)."
 }
