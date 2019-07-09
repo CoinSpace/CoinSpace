@@ -206,7 +206,10 @@ module.exports = function(el){
     } else if (wallet.networkName === 'ethereum') {
       fees = [{estimate: toUnitString(wallet.getDefaultFee(), 18)}];
     }
-    ractive.set('fee', fees[ractive.get('feeIndex')].estimate);
+
+    var feeIndex = ractive.get('feeIndex');
+    var fee = fees[feeIndex] ? fees[feeIndex].estimate : fees[0].estimate;
+    ractive.set('fee', fee);
     ractive.set('fees', fees);
   }
 
