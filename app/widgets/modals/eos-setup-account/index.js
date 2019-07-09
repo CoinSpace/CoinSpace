@@ -61,7 +61,7 @@ function open() {
   function syncWallet() {
     emitter.emit('sync');
     var onSyncDone = onSyncDoneWrapper({
-      success: function() {
+      complete: function() {
         emitter.emit('wallet-ready');
       }
     });

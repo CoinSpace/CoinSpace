@@ -3,6 +3,30 @@
     display: none;
   }
 }
+.send__form {
+  ._help {
+    @include clickbtn;
+    position: absolute;
+    top: 0;
+    right: -5px;
+    font-size: 12px;
+    text-align: center;
+    width: 26px;
+    height: 26px;
+    padding: 4px;
+    opacity: 0.4;
+    @include breakpoint(portrait) {
+      width: 32px;
+      height: 32px;
+    }
+    &:hover {
+      opacity: 0.7;
+    }
+    .svg-help {
+      fill: #333;
+    }
+  }
+}
 
 .send__address {
 
@@ -101,15 +125,17 @@
     margin-bottom: 40px;
   }
 
-  ._label {
+  ._label, ._max_btn {
     @include noselect;
     cursor: pointer;
-    display: block;
-
     @include breakpoint(portrait) {
       font-size: 20px;
       margin-top: 40px;
     }
+  }
+  ._max_btn {
+    margin-left: 5px;
+    text-decoration: underline;
   }
 
   ._currency {
@@ -227,6 +253,32 @@
 
 }
 
+.send__fee {
+  position: relative;
+  margin-bottom: 20px;
+  @include noselect;
+  ._select_container {
+    display: inline-block;
+    position: relative;
+    &.multiple {
+      text-decoration: underline;
+    }
+    padding: 0 5px;
+    select {
+      position: absolute;
+      opacity: 0;
+      left: 0;
+      top: -5px;
+      @include breakpoint(portrait) {
+        top: 0
+      }
+    }
+  }
+  ._label {
+    cursor: pointer;
+  }
+}
+
 .send__optional {
 
   position: relative;
@@ -265,31 +317,6 @@
       font-size: 26px;
       border-radius: 3px;
       padding-right: 58px;
-    }
-  }
-  ._help {
-    @include clickbtn;
-    position: absolute;
-    top: 0;
-    right: -5px;
-    font-size: 12px;
-    text-align: center;
-    width: 26px;
-    height: 26px;
-    padding: 4px;
-    opacity: 0.4;
-
-    @include breakpoint(portrait) {
-      width: 32px;
-      height: 32px;
-    }
-
-    &:hover {
-      opacity: 0.7;
-    }
-
-    .svg-help {
-      fill: #333;
     }
   }
 }

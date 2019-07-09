@@ -12,18 +12,20 @@
         <span class="_currency">{{denomination}}</span>
       </div>
 
-      {{#if isBitcoin}}
-      	<div class="_dynamic-fee">
-      		<span class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
-					<select class="js-fee-dropdown" value="{{fee}}">
-						<option value="{{feeMinimum}}">{{feeSign}}{{feeMinimum}} {{denomination}} - {{translate("minimum")}}</option>
-						<option value="{{feeHour}}" selected>{{feeSign}}{{feeHour}} {{denomination}} - {{translate("default")}}</option>
-						<option value="{{feeFastest}}">{{feeSign}}{{feeFastest}} {{denomination}} - {{translate("fastest")}}</option>
-					</select>
-      	</div>
+      {{#if showImportTxFees}}
+      <div class="_import-tx-fee">
+        <span class="_fee" class-multiple="(fees.length !== 1)">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
+        {{#if fees.length > 1}}
+        <select value="{{feeIndex}}" on-change="change-fee">
+          {{#each fees as fee: index}}
+            <option value="{{index}}">{{feeSign}}{{fee.estimate}} {{denomination}} - {{fee.name}}</option>
+          {{/each}}
+        </select>
+        {{/if}}
+      </div>
       {{else}}
-				<span class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
-			{{/if}}
+      <span class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
+      {{/if}}
 
       <span class="_icon">
         {{>svg_sendto}}

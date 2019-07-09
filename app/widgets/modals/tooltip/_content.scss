@@ -29,6 +29,9 @@
   @include breakpoint(portrait) {
     font-size: 24px;
   }
+  a {
+    text-decoration: underline;
+  }
 }
 
 .tooltip__link {

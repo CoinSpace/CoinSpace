@@ -15,7 +15,6 @@ var validateSend = require('./validator')
 var rng = require('secure-random').randomBuffer
 var bitcoin = CsWallet.bitcoin
 var request = require('lib/request')
-var cache = require('memory-cache')
 var EthereumWallet = require('cs-ethereum-wallet');
 var RippleWallet = require('cs-ripple-wallet');
 var StellarWallet = require('cs-stellar-wallet');
@@ -186,6 +185,12 @@ function initWallet(networkName, done, txDone) {
     options.externalAccount = accounts.externalAccount;
     options.internalAccount = accounts.internalAccount;
     options.minConf = 4;
+    options.getDynamicFees = function() {
+      return request({
+        url: urlRoot + 'fees',
+        params: { network: networkName },
+      }).catch(console.error);
+    }
     options.getCsFee = function() {
       return request({
         url: urlRoot + 'csFee',
@@ -272,33 +277,11 @@ function reset() {
   walletDb.deleteCredentials();
 }
 
-function getDynamicFees() {
-  if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin', 'dash'].indexOf(wallet.networkName) === -1) return Promise.resolve();
-  var key = 'fees_' + wallet.networkName;
-  var fees = cache.get(key)
-
-  if (fees) {
-    return Promise.resolve(fees)
-  }
-
-  return request({
-    url: urlRoot + 'fees',
-    params: {
-      network: wallet.networkName
-    },
-  }).then(function(data) {
-    cache.put(key, data, 10 * 60 * 1000)
-    return data;
-  }).catch(function() {
-    return {};
-  });
-}
-
 function getDestinationInfo(to) {
   if (wallet.networkName === 'ripple' || wallet.networkName === 'stellar') {
-    return wallet.getDestinationInfo(to)
+    return wallet.getDestinationInfo(to);
   } else {
-    return Promise.resolve()
+    return Promise.resolve();
   }
 }
 
@@ -319,6 +302,5 @@ module.exports = {
   getPin: getPin,
   resetPin: resetPin,
   setAvailableTouchId: setAvailableTouchId,
-  getDynamicFees: getDynamicFees,
   getDestinationInfo: getDestinationInfo
 }

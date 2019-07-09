@@ -65,6 +65,8 @@ function open(data) {
 function extendData(data) {
   data.confirmation = true;
   var wallet = getWallet();
+
+  data.feeSign = '+';
   data.fee = wallet.getDefaultFee();
 
   return data;

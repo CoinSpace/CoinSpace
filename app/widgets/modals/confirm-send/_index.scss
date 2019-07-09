@@ -84,7 +84,7 @@
     }
   }
 
-  ._dynamic-fee {
+  ._import-tx-fee {
     select {
       opacity: 0;
       position: absolute;
@@ -92,7 +92,7 @@
       width: 100%;
       margin-top: -25px;
     }
-    ._fee {
+    .multiple {
       text-decoration: underline;
     }
   }

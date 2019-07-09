@@ -6,7 +6,6 @@ var getWallet = require('lib/wallet').getWallet;
 var parseHistoryTx = require('lib/wallet').parseHistoryTx;
 var toAtom = require('lib/convert').toAtom;
 var toUnitString = require('lib/convert').toUnitString;
-var bitcoin = require('cs-wallet').bitcoin;
 var showInfo = require('widgets/modals/flash').showInfo;
 var getTokenNetwork = require('lib/token').getTokenNetwork;
 var _ = require('lodash');
@@ -20,6 +19,11 @@ function open(data) {
       success: require('../success.ract')
     },
     data: extendData(data)
+  });
+
+  ractive.on('change-fee', function() {
+    var index = ractive.get('feeIndex');
+    ractive.set('fee', ractive.get('fees')[index].estimate);
   });
 
   ractive.on('send', function() {
@@ -85,33 +89,26 @@ function extendData(data) {
   data.isBitcoin = network === 'bitcoin';
 
   var wallet = getWallet();
-  var feeRates = null;
-  var fees = null;
   var unspents = data.importTxOptions ? data.importTxOptions.unspents : null;
 
-  if (data.isBitcoin) {
-    var defaultFeePerKb = data.dynamicFees.minimum * 1000 || bitcoin.networks['bitcoin'].feePerKb;
+  if (data.importTxOptions) {
+    data.showImportTxFees = true;
+    data.feeIndex = 0;
 
-    feeRates = [
-      defaultFeePerKb,
-      data.dynamicFees.hour * 1000 || defaultFeePerKb,
-      data.dynamicFees.fastest * 1000 || defaultFeePerKb
-    ];
-    fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents);
+    var estimates = wallet.estimateFees(toAtom(data.amount), unspents);
+    var fees = wallet.feeRates.map(function(item, i) {
+      item.estimate = toUnitString(estimates[i]);
+      return item;
+    });
 
-    data.feeMinimum = toUnitString(fees[0]);
-    data.feeHour = toUnitString(fees[1]);
-    data.feeFastest = toUnitString(fees[2]);
-    data.fee = data.feeHour;
-
-    data.onFocus = function() {
-      this.find('.js-fee-dropdown').selectedIndex = 1; // fix issue when values are the same
+    for (var i = 0; i< wallet.feeRates.length; i++) {
+      if (wallet.feeRates[i].default) {
+        data.feeIndex = i;
+        break;
+      }
     }
-
-  } else if (['bitcoincash', 'litecoin', 'dogecoin', 'dash'].indexOf(network) !== -1) {
-    feeRates = [data.dynamicFees.minimum * 1000 || bitcoin.networks[network].feePerKb];
-    fees = wallet.estimateFees(data.to, toAtom(data.amount), feeRates, unspents);
-    data.fee = toUnitString(fees[0]);
+    data.fees = fees;
+    data.fee = fees[data.feeIndex].estimate;
   }
 
   return data;

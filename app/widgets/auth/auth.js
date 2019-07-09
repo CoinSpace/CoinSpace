@@ -47,7 +47,7 @@ var Auth = Ractive.extend({
       before: function() {
         self.set('opening', false);
       },
-      success: function() {
+      complete: function() {
         window.scrollTo(0, 0)
         emitter.emit('wallet-ready')
       },

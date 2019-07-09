@@ -14,9 +14,14 @@ function save(network, data) {
   if (network !== 'bitcoin') throw new Error(network + ' currency fee is not supported');
   var collection = db().collection('fee');
   return collection.updateOne({_id: network}, {$set: {
-    minimum: data.minimum,
-    hour: data.hour,
-    fastest: data.fastest
+    minimum: data.minimum, // deprecated
+    hour: data.hour, // deprecated
+    fastest: data.fastest, // deprecated
+    items: [
+      {name: 'minimum', value: data.minimum},
+      {name: 'hour', value: data.hour, default: true},
+      {name: 'fastest', value: data.fastest},
+    ]
   }}, {upsert: true});
 }
 

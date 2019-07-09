@@ -43,7 +43,7 @@ function parseEthereumTx(tx) {
 function onSyncDoneWrapper(options) {
   options = options || {};
   var before = options.before || function() {};
-  var success = options.success || function() {};
+  var complete = options.complete || function() {};
   var fail = options.fail || function(err) {
     showError({message: err.message});
   };
@@ -52,7 +52,7 @@ function onSyncDoneWrapper(options) {
     if (err && err.message !== 'cs-node-error') {
       return fail(err);
     }
-    success();
+    complete();
     if (err && err.message === 'cs-node-error') {
       emitter.emit('wallet-block');
       return nodeError();

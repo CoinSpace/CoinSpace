@@ -11,12 +11,13 @@ var showInfo = require('widgets/modals/flash').showInfo;
 var showConfirmation = require('widgets/modals/confirm-send');
 var showTooltip = require('widgets/modals/tooltip');
 var validateSend = require('lib/wallet').validateSend;
-var getDynamicFees = require('lib/wallet').getDynamicFees;
 var getDestinationInfo = require('lib/wallet').getDestinationInfo;
 var resolveTo = require('lib/openalias/xhr.js').resolveTo;
 var qrcode = require('lib/qrcode');
 var bchaddr = require('bchaddrjs');
 var initEosSetup = require('widgets/eos/setup');
+var toUnitString = require('lib/convert').toUnitString;
+var toAtom = require('lib/convert').toAtom;
 
 module.exports = function(el){
   var selectedFiat = '';
@@ -30,12 +31,22 @@ module.exports = function(el){
       selectedFiat: defaultFiat,
       exchangeRates: {},
       qrScannerAvailable: qrcode.isScanAvailable,
+      maxAmount: '0',
+      fee: '0',
+      feeIndex: 0,
+      fees: [
+        {value: '0', name: 'minimum'},
+        {value: '0', name: 'default', default: true},
+        {value: '0', name: 'fastest'},
+      ],
       isEthereum: false,
       isRipple: false,
       isStellar: false,
       isEOS: false,
       validating: false,
       gasLimit: '',
+      denomination: '',
+      feeDenomination: ''
     }
   })
 
@@ -84,21 +95,26 @@ module.exports = function(el){
     ractive.set('selectedFiat', currency)
   })
 
-  ractive.on('open-send', function(){
+  ractive.on('open-send', function() {
     ractive.set('validating', true);
+
     var to = ractive.get('to');
+    var fee = ractive.get('fee');
+
+    var delay = function(n) {
+      return new Promise(function(resolve) { setTimeout(resolve, n); });
+    }
 
     Promise.all([
       resolveTo(to),
-      getDynamicFees(),
-      getDestinationInfo(to)
+      getDestinationInfo(to),
+      delay(100) // in order to activate loader
     ]).then(function(results) {
 
       var data = results[0];
       fixBitcoinCashAddress(data);
 
-      var dynamicFees = results[1];
-      var destinationInfo = results[2];
+      var destinationInfo = results[1];
 
       var wallet = getWallet();
 
@@ -106,7 +122,7 @@ module.exports = function(el){
         wallet: wallet,
         to: data.to,
         alias: data.alias,
-        dynamicFees: dynamicFees,
+        fee: fee,
         destinationInfo: destinationInfo,
         amount: ractive.find('#bitcoin').value,
         denomination: ractive.get('denomination'),
@@ -114,6 +130,7 @@ module.exports = function(el){
           ractive.set({to: ''});
           ractive.find('#bitcoin').value = '';
           ractive.find('#fiat').value = '';
+          setFees();
           if (wallet.networkName === 'ripple') {
             ractive.find('#destination-tag').value = '';
             ractive.find('#invoice-id').value = '';
@@ -148,10 +165,50 @@ module.exports = function(el){
 
   emitter.on('wallet-ready', function() {
     var wallet = getWallet();
+    setFees(true);
+    ractive.fire('change-fee');
     ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
     ractive.set('denomination', wallet.denomination);
-    ractive.set('gasLimit', wallet.gasLimit);
+    if (wallet.networkName === 'ethereum') {
+      ractive.set('feeDenomination', 'ETH');
+      if (ractive.find('#gas-limit')) {
+        ractive.find('#gas-limit').value = wallet.gasLimit;
+      }
+      ractive.set('gasLimit', wallet.gasLimit);
+    } else {
+      ractive.set('feeDenomination', wallet.denomination);
+    }
   });
+
+  function setFees(setDefaultFeeOption) {
+    var wallet = getWallet();
+    var value = toAtom(ractive.find('#bitcoin').value || 0);
+    var fees = [];
+    if (setDefaultFeeOption) ractive.set('feeIndex', 0);
+
+    if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin', 'dash'].indexOf(wallet.networkName) !== -1) {
+      var estimates = wallet.estimateFees(value);
+      var minimums = wallet.minimumFees(value);
+      fees = wallet.feeRates.map(function(item, i) {
+        item.estimate = estimates[i] ? toUnitString(estimates[i]) : toUnitString(minimums[i]);
+        return item;
+      });
+      if (setDefaultFeeOption) {
+        for (var i = 0; i< wallet.feeRates.length; i++) {
+          if (wallet.feeRates[i].default) {
+            ractive.set('feeIndex', i);
+            break;
+          }
+        }
+      }
+    } else if (['ripple', 'stellar', 'eos'].indexOf(wallet.networkName) !== -1) {
+      fees = [{estimate: wallet.getDefaultFee()}];
+    } else if (wallet.networkName === 'ethereum') {
+      fees = [{estimate: toUnitString(wallet.getDefaultFee(), 18)}];
+    }
+    ractive.set('fee', fees[ractive.get('feeIndex')].estimate);
+    ractive.set('fees', fees);
+  }
 
   emitter.once('ticker', function(rates) {
     var currencies = Object.keys(rates);
@@ -182,6 +239,22 @@ module.exports = function(el){
     ractive.observe('selectedFiat', setPreferredCurrency)
   }
 
+  ractive.on('change-fee', function() {
+    var wallet = getWallet();
+    var index = ractive.get('feeIndex');
+    if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin', 'dash'].indexOf(wallet.networkName) !== -1) {
+      ractive.set('maxAmount', toUnitString(wallet.maxAmounts[index].value));
+    } else {
+      ractive.set('maxAmount', toUnitString(wallet.getMaxAmount()));
+    }
+    ractive.set('fee', ractive.get('fees')[index].estimate);
+  });
+
+  ractive.on('set-max-amount', function() {
+    ractive.find('#bitcoin').value = ractive.get('maxAmount');
+    ractive.fire('bitcoin-to-fiat');
+  });
+
   ractive.on('fiat-to-bitcoin', function(context) {
     var fiat = ractive.find('#fiat').value;
     if (!fiat || context.event.code === 'Tab') return;
@@ -192,9 +265,10 @@ module.exports = function(el){
       bitcoin = Big(fiat).div(exchangeRate).toFixed(8)
     }
     ractive.find('#bitcoin').value = bitcoin;
+    setFees();
   })
 
-  ractive.on('bitcoin-to-fiat', function() {
+  ractive.on('bitcoin-to-fiat', function(value) {
     var bitcoin = ractive.find('#bitcoin').value;
     if (!bitcoin) return;
 
@@ -203,6 +277,13 @@ module.exports = function(el){
 
     var fiat = Big(bitcoin).times(exchangeRate).toFixed(2);
     ractive.find('#fiat').value = fiat;
+    setFees();
+  })
+
+  ractive.on('gas-limit', function() {
+    wallet.gasLimit = ractive.find('#gas-limit').value || 0;
+    setFees();
+    ractive.fire('change-fee');
   })
 
   ractive.on('clearTo', function(){
@@ -217,6 +298,13 @@ module.exports = function(el){
 
   ractive.on('blurAmountInput', function(context) {
     context.node.parentNode.style.zIndex = ''
+  })
+
+  ractive.on('help-fee', function() {
+    showTooltip({
+      message: "Amount of coins that is charged from your balance for single transaction (<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees.html', '_system'); return false;\">more info</a>).",
+      isHTML: true
+    })
   })
 
   ractive.on('help-gas-limit', function() {

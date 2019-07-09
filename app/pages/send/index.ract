@@ -32,6 +32,7 @@
       <div class="send__amount">
 
         <label class="_label" for="bitcoin">{{translate("Amount")}}</label>
+        <span class="_max_btn" on-click="set-max-amount">({{translate("max.")}} {{maxAmount}} {{denomination}})</span>
 
           <div class="_input-group">
             <input id="bitcoin" class="_input" type="number" min="0" step="any" on-keyup="bitcoin-to-fiat" on-enter="open-send" on-focus="focusAmountInput" on-blur="blurAmountInput">
@@ -49,6 +50,23 @@
             </span>
           </div>
 
+      </div>
+
+      <div class="send__fee">
+        <label class="_label">{{translate("Fee")}}</label>
+        <div class="_select_container" class-multiple="(fees.length !== 1)">
+          +{{fee}} {{feeDenomination}}
+          {{#if fees.length > 1}}
+          <select value="{{feeIndex}}" on-change="change-fee">
+            {{#each fees as fee: index}}
+              <option value="{{index}}">+{{fee.estimate}} {{feeDenomination}} - {{fee.name}}</option>
+            {{/each}}
+          </select>
+          {{/if}}
+        </div>
+        <span class="_help" on-click="help-fee">
+          {{>svg_help}}
+        </span>
       </div>
 
       {{#isRipple}}
@@ -105,7 +123,7 @@
       <div class="send__optional last">
         <label class="_label" for="gas-limit">{{translate("Gas limit")}}
           <div class="input__container">
-            <input id="gas-limit" class="_input" type="number" twoway="false" min="0" step="1" value="{{gasLimit}}" on-enter="open-send" />
+            <input id="gas-limit" class="_input" type="number" on-keyup="gas-limit" twoway="false" min="0" step="1" value="{{gasLimit}}" on-enter="open-send" />
           </div>
         </label>
         <span class="_help" on-click="help-gas-limit">

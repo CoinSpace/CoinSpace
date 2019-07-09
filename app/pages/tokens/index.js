@@ -70,7 +70,7 @@ module.exports = function(el) {
     emitter.emit('sync');
 
     var onSyncDone = onSyncDoneWrapper({
-      success: function() {
+      complete: function() {
         window.scrollTo(0, 0);
         emitter.emit('wallet-ready');
       }

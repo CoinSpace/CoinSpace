@@ -12,6 +12,8 @@
         <span class="_currency">{{denomination}}</span>
       </div>
 
+      <span class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
+
       <span class="_icon">
         {{>svg_sendto}}
       </span>
