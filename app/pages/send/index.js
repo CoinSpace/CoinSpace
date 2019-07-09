@@ -50,6 +50,8 @@ module.exports = function(el){
     }
   })
 
+  var isSyncing = true;
+
   initEosSetup(ractive.find('#eos-setup'));
 
   emitter.on('prefill-wallet', function(address, context) {
@@ -90,6 +92,10 @@ module.exports = function(el){
     }
     emitter.emit('open-overlay', data)
   })
+
+  emitter.on('sync', function() {
+    isSyncing = true;
+  });
 
   emitter.on('header-fiat-changed', function(currency) {
     ractive.set('selectedFiat', currency)
@@ -165,6 +171,7 @@ module.exports = function(el){
 
   emitter.on('wallet-ready', function() {
     var wallet = getWallet();
+    isSyncing = false;
     setFees(true);
     ractive.fire('change-fee');
     ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
@@ -181,6 +188,7 @@ module.exports = function(el){
   });
 
   function setFees(setDefaultFeeOption) {
+    if (isSyncing) return;
     var wallet = getWallet();
     var value = toAtom(ractive.find('#bitcoin').value || 0);
     var fees = [];
@@ -207,9 +215,7 @@ module.exports = function(el){
       fees = [{estimate: toUnitString(wallet.getDefaultFee(), 18)}];
     }
 
-    var feeIndex = ractive.get('feeIndex');
-    var fee = fees[feeIndex] ? fees[feeIndex].estimate : fees[0].estimate;
-    ractive.set('fee', fee);
+    ractive.set('fee', fees[ractive.get('feeIndex')].estimate);
     ractive.set('fees', fees);
   }
 
@@ -305,7 +311,7 @@ module.exports = function(el){
 
   ractive.on('help-fee', function() {
     showTooltip({
-      message: "Amount of coins that is charged from your balance for single transaction (<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees.html', '_system'); return false;\">more info</a>).",
+      message: "Amount of coins that is charged from your balance for single transaction (<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;\">more info</a>).",
       isHTML: true
     })
   })
