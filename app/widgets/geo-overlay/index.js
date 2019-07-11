@@ -74,9 +74,9 @@ module.exports = function(el){
   })
 
   function lookupGeo(context) {
-    geo.search(ractive.get('network'), function(err, results){
+    geo.search(ractive.get('network'), function(err, results) {
 
-      if(ractive.get('searchingAgain')) {
+      if (ractive.get('searchingAgain')) {
         // wait for spinner to spin down
         setTimeout(function(){
           ractive.set('searchingAgain', false)
@@ -84,17 +84,16 @@ module.exports = function(el){
         }, 1000)
       }
 
-      if(err) {
+      if (err) {
         cancelSpinner();
         return showError({
-          message: err.message,
-          onDismiss: function(){
-            ractive.fire('close-geo')
-          }
+          message: err.message
+        }).on('cancel', function() {
+          ractive.fire('close-geo');
         })
       }
 
-      if(context === 'new') {
+      if (context === 'new') {
         // set a brief timeout so it "feels" like we're searching
         setTimeout(function(){
           setNearbys(results)

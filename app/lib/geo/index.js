@@ -19,7 +19,7 @@ var networks = {
   DASH: 'dash'
 };
 
-function save(callback){
+function save(callback) {
   requestLocationEndpoint(false, 'POST', callback)
 }
 
@@ -37,7 +37,7 @@ function remove() {
   })
 }
 
-function getLocation(callback){
+function getLocation(callback) {
   if (!window.navigator.geolocation){
     return callback(new Error('Your browser does not support geolocation'))
   }
@@ -46,21 +46,22 @@ function getLocation(callback){
     callback(null, position.coords.latitude, position.coords.longitude)
   }
 
-  var error = function(){
-      navigator.notification.alert(
-          'Access to the geolocation has been prohibited; please enable it in the Settings app to continue',
-          function(){},
-          'Coin'
-      )
+  var error = function() {
+    var alert = navigator.notification ? navigator.notification.alert : window.alert;
+    alert(
+      'Access to the geolocation has been prohibited; please enable it in the Settings app to continue',
+      function() {},
+      'Coin'
+    )
     callback(new Error('Unable to retrieve your location'))
   }
 
   window.navigator.geolocation.getCurrentPosition(success, error)
 }
 
-function requestLocationEndpoint(network, method, callback){
-  getLocation(function(err, lat, lon){
-    if(err) return callback(err);
+function requestLocationEndpoint(network, method, callback) {
+  getLocation(function(err, lat, lon) {
+    if (err) return callback(err);
 
     var doc = db.get();
     userInfo = {};

@@ -10,7 +10,7 @@ var Modal = Ractive.extend({
   partials: {
     content: require('./content.ract'),
   },
-  onrender: function(){
+  onrender: function() {
 
     var self = this
     var fadeEl = self.find('.js__fadeEl')
@@ -18,21 +18,21 @@ var Modal = Ractive.extend({
     fadeIn(fadeEl, self.get('fadeInDuration'), function() {
       fadeEl.focus()
       var onFocus = self.get('onFocus')
-      if(onFocus) onFocus();
+      if (onFocus) onFocus();
     })
 
     self.on('cancel', function(context) {
-      if(!context.node) return dismissModal();
+      if (!context.node) return dismissModal();
       var originalElement = context.original.srcElement || context.original.originalTarget;
       if (originalElement.classList && originalElement.classList.contains('_cancel')) {
-        dismissModal()
+        dismissModal();
       }
     })
 
-    function dismissModal(){
-      var onDismiss = self.get('onDismiss')
-      if(onDismiss) onDismiss();
-      fadeOut(fadeEl)
+    function dismissModal() {
+      var onDismiss = self.get('onDismiss');
+      if (onDismiss) onDismiss();
+      fadeOut(fadeEl);
     }
   }
 })

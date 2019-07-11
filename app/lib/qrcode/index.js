@@ -63,9 +63,10 @@ function scan(data) {
       }
     },
     function () {
-      navigator.notification.alert(
+      var alert = navigator.notification ? navigator.notification.alert : window.alert;
+      alert(
         'Access to the camera has been prohibited; please enable it in the Settings app to continue',
-        function(){},
+        function() {},
         'Coin'
       )
     },
