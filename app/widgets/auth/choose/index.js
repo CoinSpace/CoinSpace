@@ -4,7 +4,7 @@ var Ractive = require('../auth')
 var passphrasePage = require('../passphrase')
 var createIntroPage = require('../create-intro')
 
-module.exports = function choose(){
+module.exports = function choose() {
   var ractive = new Ractive({
     partials: {
       actions: require('./actions.ract'),
@@ -15,11 +15,11 @@ module.exports = function choose(){
     }
   })
 
-  ractive.on('create-new-wallet', function(){
+  ractive.on('create-new-wallet', function() {
     createIntroPage(choose)
   })
 
-  ractive.on('reveal-passphrase-input', function(){
+  ractive.on('reveal-passphrase-input', function() {
     passphrasePage(choose)
   })
 

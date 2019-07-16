@@ -112,7 +112,7 @@ module.exports = function(prevPage, data){
   })
 
   ractive.on('back', function(){
-    if(prevPage) prevPage(data)
+    if (prevPage) prevPage(data)
   })
 
   function getPin(){
