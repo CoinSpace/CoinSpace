@@ -11,7 +11,7 @@
     "Decoding passphrase": "Декодирование фразы-пароля",
     "Synchronizing Wallet": "Синхронизация кошелька",
     "Set your PIN": "Установите ПИН",
-    "Your passphrase": "Ваша фраза-пароль",
+    "Your passphrase (12 words)": "Ваша фраза-пароль (12 слов)",
     "Your passphrase will not be shown again.": "Ваша фраза-пароль более не появится.",
     "Without it you will lose access to your wallet.": "Без нее вы потеряете доступ к своему кошельку",
     "I have written down or otherwise securely stored my passphrase": "Я записал, или как-то сохранил свою фразу-пароль",
@@ -256,5 +256,8 @@
     "Changelly_TOS": "Я прочитал и согласен с <a href=\"\" onclick=\"window.open('https://changelly.com/terms-of-use', '_system'); return false;\">Условиями использования</a> и <a href=\"\" onclick=\"window.open('https://changelly.com/privacy-policy', '_system'); return false;\">Политикой конфиденциальности</a> Changelly.<br>Нажав \"Принять\", я подтверждаю и понимаю, что моя транзакция может вызвать проверку AML/KYC в соответствии с политикой <a href=\"\" onclick=\"window.open('https://changelly.com/aml-kyc', '_system'); return false;\">Changelly AML/KYC</a>.",
     "max.": "макс.",
     "Fee": "Комиссия",
-    "Amount of coins that is charged from your balance for single transaction (<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;\">more info</a>).": "Количество монет, которое списывается с вашего баланса за одну транзакцию (<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;\">подробнее</a>)."
+    "Amount of coins that is charged from your balance for single transaction (<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;\">more info</a>).": "Количество монет, которое списывается с вашего баланса за одну транзакцию (<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;\">подробнее</a>).",
+    "Confirm passphrase": "Подтвердите фразу-пароль",
+    "Almost ready! Enter next words from your passphrase.": "Почти готово! Введите следующие слова из вашей фразы-пароля.",
+    "Word": "Слово"
 }

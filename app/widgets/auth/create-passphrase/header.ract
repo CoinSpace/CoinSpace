@@ -1,4 +1,5 @@
-<h2 class="_subtitle">{{translate("Your passphrase")}}</h2>
+<h2 class="_subtitle">{{translate("Your passphrase (12 words)")}}</h2>
+
 <div id="js-passphrase" data-clipboard-text="{{passphrase}}" class="_passphrase">
   <span>{{passphrase}}</span>
   {{#if isClipboardEnabled}}

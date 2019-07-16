@@ -134,6 +134,61 @@
       padding-top: 10px;
     }
   }
+
+  ._words {
+    margin-top: 20px;
+  }
+  ._word {
+
+    display: flex;
+    margin-bottom: 20px;
+    text-align: left;
+
+    .input__container {
+      position: relative;
+      margin-top: 5px;
+    }
+
+    .close__input {
+      ._icon{
+        .svg-close {
+          fill: #969594;
+        }
+      }
+    }
+
+    ._label {
+      @include noselect;
+      cursor: pointer;
+      display: block;
+      flex: 1;
+
+      @include breakpoint(portrait) {
+        font-size: 20px;
+      }
+    }
+
+    ._input {
+      @extend .generic_box;
+      @extend .jigsaw-light;
+      padding-left: 10px;
+      padding-right: 38px;
+      border-radius: 2px;
+
+      height: auto;
+
+      &:active, &:focus {
+        outline: 0;
+        border: 1px solid #999;
+      }
+
+      @include breakpoint(portrait) {
+        font-size: 26px;
+        border-radius: 3px;
+        padding-right: 58px;
+      }
+    }
+  }
 }
 
 .passphrase__accept {
