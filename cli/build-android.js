@@ -5,6 +5,7 @@ var fse = require('fs-extra');
 var path = require('path');
 var utils = require('./utils');
 var webpack = require('webpack');
+var replace = require('replace-in-file');
 var dotenv = require('dotenv');
 var mobileBuildPath = 'phonegap/build';
 
@@ -42,7 +43,8 @@ webpack(webpackConfig, function(error, stats) {
   fse.copySync('phonegap/config.xml.template', path.resolve(mobileBuildPath, 'config.xml'));
   fse.copySync('build', path.resolve(mobileBuildPath, 'www'));
 
-  utils.cordova('platform add android@6.1.0');
+  utils.cordova('platform add android@6.4.0');
+
   utils.cordova('plugin add cordova-custom-config@5.0.2');
   utils.cordova('plugin add cordova-plugin-geolocation@2.4.3');
   utils.cordova('plugin add cordova-plugin-whitelist@1.3.2');
@@ -53,16 +55,23 @@ webpack(webpackConfig, function(error, stats) {
   utils.cordova('plugin add cordova-plugin-x-socialsharing@5.2.0');
   utils.cordova('plugin add cordova-plugin-android-fingerprint-auth@1.4.0');
   utils.cordova('plugin add cordova-plugin-customurlscheme@4.3.0 --variable URL_SCHEME=coinspace');
+  utils.cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#45badb1e6f909bb80592779f7cb6baf6875df3ab');
+
+  replace.sync({
+    files: path.resolve(mobileBuildPath, 'platforms/android/project.properties'),
+    from: 'android-26',
+    to: 'android-28'
+  });
 
   if (program.release) {
     utils.cordova('build android --release');
     utils.shell(
       `jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ../release.keystore \
-      -storepass coinspace platforms/android/build/outputs/apk/*-release-unsigned.apk coinspace`,
+      -storepass coinspace platforms/android/build/outputs/apk/release/android-release-unsigned.apk coinspace`,
       {cwd: mobileBuildPath}
     );
     utils.shell(
-      `zipalign -f -v 4 platforms/android/build/outputs/apk/*-release-unsigned.apk \
+      `zipalign -f -v 4 platforms/android/build/outputs/apk/release/android-release-unsigned.apk \
       ../deploy/coinspace-release.apk`,
       {cwd: mobileBuildPath}
     );

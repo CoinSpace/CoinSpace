@@ -16,7 +16,8 @@ module.exports = function(el) {
     data: {
       isEnabledImport: true,
       isEnabledExport: true,
-      isEOS: false
+      isEOS: false,
+      isPhonegap: process.env.BUILD_TYPE === 'phonegap',
     }
   });
 
@@ -33,6 +34,11 @@ module.exports = function(el) {
   ractive.on('about', function() {
     emitter.emit('toggle-menu', false);
     emitter.emit('toggle-terms', true);
+  });
+
+  ractive.on('show-zendesk', function(context) {
+    context.original.preventDefault();
+    window.Zendesk.showHelpCenter();
   });
 
   ractive.on('import-private-key', function() {

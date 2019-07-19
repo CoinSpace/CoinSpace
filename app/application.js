@@ -45,6 +45,9 @@ window.initCSApp = function() {
   })
 
   emitter.once('wallet-ready', function() {
+    if (window.Zendesk) {
+      window.Zendesk.setAnonymousIdentity(process.env.BUILD_PLATFORM + ' user');
+    }
     updateExchangeRates();
     auth.hide();
     frame.show();

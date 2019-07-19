@@ -32,8 +32,15 @@
       <span class="_text">{{translate("Logout")}}</span>
     </div>
 
+    {{#if isPhonegap}}
+    <a class="sidebar__support" on-click="show-zendesk" href="">
+      <span class="_text">{{translate("Support")}}</span>
+    </a>
+    {{else}}
     <a class="sidebar__support" onclick="window.open('https://coinapp.zendesk.com/hc/en-us/sections/115000511287-FAQ', '_system'); return false;" href="">
       <span class="_text">{{translate("Support")}}</span>
     </a>
+    {{/if}}
+
   </div>
 </div>
