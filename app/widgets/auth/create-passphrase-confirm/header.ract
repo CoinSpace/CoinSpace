@@ -1,5 +1,5 @@
 <h2 class="_subtitle">{{translate("Confirm passphrase")}}</h2>
-<p class="_text">{{translate("Almost ready! Enter next words from your passphrase.")}}</p>
+<p class="_text">{{translate("Almost done! Enter the following words from your passphrase.")}}</p>
 
 <div class="_words">
   <div class="_word">

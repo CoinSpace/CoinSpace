@@ -258,6 +258,6 @@
     "Fee": "Комиссия",
     "Amount of coins that is charged from your balance for single transaction (<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;\">more info</a>).": "Количество монет, которое списывается с вашего баланса за одну транзакцию (<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;\">подробнее</a>).",
     "Confirm passphrase": "Подтвердите фразу-пароль",
-    "Almost ready! Enter next words from your passphrase.": "Почти готово! Введите следующие слова из вашей фразы-пароля.",
+    "Almost done! Enter the following words from your passphrase.": "Почти готово! Введите следующие слова из вашей фразы-пароля.",
     "Word": "Слово"
 }

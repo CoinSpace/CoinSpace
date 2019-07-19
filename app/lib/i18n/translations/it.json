@@ -258,6 +258,6 @@
     "Fee": "Fee",
     "Amount of coins that is charged from your balance for single transaction (<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;\">more info</a>).": "Amount of coins that is charged from your balance for single transaction (<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;\">more info</a>).",
     "Confirm passphrase": "Confirm passphrase",
-    "Almost ready! Enter next words from your passphrase.": "Almost ready! Enter next words from your passphrase.",
+    "Almost done! Enter the following words from your passphrase.": "Almost done! Enter the following words from your passphrase.",
     "Word": "Word"
 }
