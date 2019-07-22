@@ -1,9 +1,9 @@
 <h2 class="_subtitle">{{translate("Your passphrase (12 words)")}}</h2>
 
-<div id="js-passphrase" data-clipboard-text="{{passphrase}}" class="_passphrase">
-  <span>{{passphrase}}</span>
+<div id="js-passphrase" data-clipboard-text="{{passphrase}}" class="_passphrase needsclick">
+  <span class="needsclick">{{passphrase}}</span>
   {{#if isClipboardEnabled}}
-    <div class="_copy">
+    <div class="_copy needsclick">
     {{#if isCopied}}
       {{translate("Copied!")}}
     {{else}}
