@@ -48,6 +48,9 @@ window.initCSApp = function() {
     if (window.Zendesk) {
       window.Zendesk.setAnonymousIdentity(process.env.BUILD_PLATFORM + ' user');
     }
+    if (process.env.BUILD_PLATFORM === 'ios') {
+      window.StatusBar.styleLightContent();
+    }
     updateExchangeRates();
     auth.hide();
     frame.show();

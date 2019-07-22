@@ -61,6 +61,7 @@
         <splash src="../images/ios/screens/Default@3x~iphone~comany.png" />
         <splash src="../images/ios/screens/Default@2x~ipad~anyany.png" />
         <splash src="../images/ios/screens/Default@2x~ipad~comany.png" />
+        <preference name="StatusBarStyle" value="default" />
     </platform>
     <preference name="StatusBarBackgroundColor" value="#FFFFFF" />
     <preference name="SplashScreenDelay" value="2000"/>
