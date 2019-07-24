@@ -19,11 +19,11 @@
       <h3 class="_title">{{translate("Transaction Fee:")}}</h3>
       <code class="_value">{{toUnitString(fee)}}</code>
 
-      <h3 class="_title">{{translate("From:")}}</h3>
+      <h3 class="_title">{{translate("From")}}:</h3>
       <code class="_value">{{from}}</code>
 
       {{#if memo}}
-      <h3 class="_title">{{translate("Memo:")}}</h3>
+      <h3 class="_title">{{translate("Memo")}}:</h3>
       <code class="_value">{{memo}}</code>
       {{/if}}
 

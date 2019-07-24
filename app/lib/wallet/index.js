@@ -48,9 +48,6 @@ var Wallet = {
 var urlRoot = window.urlRoot
 
 function createWallet(passphrase, network, callback) {
-  var message = passphrase ? 'Decoding seed phrase' : 'Generating'
-  emitter.emit('wallet-opening', message)
-
   var data = {passphrase: passphrase}
   if(!passphrase){
    data.entropy = rng(128 / 8).toString('hex')

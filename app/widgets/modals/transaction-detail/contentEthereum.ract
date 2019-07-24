@@ -34,12 +34,12 @@
         {{/if}}
       {{/unless}}
 
-      <h3 class="_title">{{translate("From:")}}</h3>
+      <h3 class="_title">{{translate("From")}}:</h3>
       <code class="_value">
         <span class="_address">{{from}}</span>
       </code>
 
-      <h3 class="_title">{{translate("To:")}}</h3>
+      <h3 class="_title">{{translate("To")}}:</h3>
       <code class="_value">
         <span class="_address">{{to}}</span>
       </code>
