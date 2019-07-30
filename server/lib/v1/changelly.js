@@ -107,22 +107,11 @@ function getTransaction(id) {
 }
 
 function encodeSymbol(symbol) {
-  if (symbol === 'bchabc') {
-    symbol = 'bch';
-  } else if (symbol === 'bchsv') {
-    symbol = 'bsv';
-  }
   return symbol.toUpperCase();
 }
 
 function decodeSymbol(symbol) {
-  symbol = symbol.toLowerCase();
-  if (symbol === 'bch') {
-    return 'bchabc';
-  } else if (symbol === 'bsv') {
-    return 'bchsv';
-  }
-  return symbol;
+  return symbol.toLowerCase();
 }
 
 function request(method, params) {
