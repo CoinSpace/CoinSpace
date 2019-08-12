@@ -3,8 +3,9 @@
 var showError = require('widgets/modals/flash').showError;
 var getTokenNetwork = require('lib/token').getTokenNetwork;
 var emitter = require('lib/emitter');
+var bchaddr = require('bchaddrjs');
 
-function parseBtcLtcTx(tx) {
+function parseBtcLtcTx(tx, networkName) {
   return {
     id: tx.txId,
     amount: tx.amount,
@@ -13,17 +14,25 @@ function parseBtcLtcTx(tx) {
     fee: tx.fees,
     ins: tx.vin.map(function(input) {
       return {
-        address: input.addr,
+        address: toAddress(networkName, input.addr),
         amount: input.valueSat
       }
     }),
     outs: tx.vout.map(function(output) {
       return {
-        address: output.scriptPubKey.addresses ? output.scriptPubKey.addresses[0] : null,
+        address: toAddress(networkName, output.scriptPubKey.addresses ? output.scriptPubKey.addresses[0] : null),
         amount: output.valueSat
       }
     })
   }
+}
+
+function toAddress(networkName, address) {
+  if (networkName !== 'bitcoincash') return address;
+  try {
+    address = bchaddr.toCashAddress(address).split(':')[1];
+  } catch (e) {};
+  return address;
 }
 
 function parseEthereumTx(tx) {

@@ -7,6 +7,7 @@ var emitter = require('lib/emitter');
 var showConfirmation = require('widgets/modals/confirm-send');
 var showInfo = require('widgets/modals/flash').showInfo;
 var getWallet = require('lib/wallet').getWallet;
+var setToAlias = require('lib/wallet').setToAlias;
 var toUnitString = require('lib/convert').toUnitString;
 var getTokenNetwork = require('lib/token').getTokenNetwork;
 var _ = require('lodash');
@@ -47,8 +48,11 @@ function open() {
         return showInfo({message: 'This private key has no coins for transfer.'});
       }
       importTxOptions.to = to;
+      setToAlias(importTxOptions);
+      
       showConfirmation({
         to: importTxOptions.to,
+        alias: importTxOptions.alias,
         amount: toUnitString(importTxOptions.amount),
         denomination: wallet.denomination,
         fadeInDuration: 0,

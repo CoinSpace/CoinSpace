@@ -1,3 +1,9 @@
+{{#if isSupportedMoonpay}}
+<div on-click="moonpay" class="_btn">
+  {{translate("Buy with Credit Card")}}
+</div>
+{{/if}}
+
 <div class="_title">{{translate("Choose exchange")}}</div>
 <div>
   <div on-click="choose('changelly')" class="_btn">

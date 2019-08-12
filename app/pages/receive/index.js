@@ -98,8 +98,8 @@ module.exports = function(el){
     })
   })
 
-  function getAddress(){
-    return CS.getWallet().getNextAddress()
+  function getAddress() {
+    return CS.getWallet().getNextAddress();
   }
 
   function handleMectoError(err) {

@@ -15,6 +15,7 @@ window.initCSApp = function() {
   var initGeoOverlay = require('widgets/geo-overlay')
   var getToken = require('lib/token').getToken;
   var denomination = require('lib/denomination');
+  var moonpay = require('lib/moonpay');
 
   var fadeIn = require('lib/transitions/fade.js').fadeIn
 
@@ -52,6 +53,7 @@ window.initCSApp = function() {
       window.StatusBar.styleLightContent();
     }
     updateExchangeRates();
+    moonpay.init();
     auth.hide();
     frame.show();
   });

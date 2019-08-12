@@ -4,6 +4,7 @@ var geo = require('./geo');
 var fee = require('./fee');
 var ticker = require('./ticker');
 var ethereumTokens = require('./ethereumTokens');
+var moonpay = require('./moonpay');
 
 function cleanGeo(interval) {
   setInterval(function intervalFunction(){
@@ -46,9 +47,20 @@ function cacheEthereumTokens(interval) {
   }(), interval);
 }
 
+function cacheMoonpayCoins(interval) {
+  setInterval(function intervalFunction() {
+    moonpay.getCoinsFromAPI().then(function(data) {
+      if (global.gc) global.gc();
+      return moonpay.save('coins', data);
+    }).catch(console.error);
+    return intervalFunction;
+  }(), interval);
+}
+
 module.exports = {
   cleanGeo: cleanGeo,
   cacheFees: cacheFees,
   cacheTicker: cacheTicker,
-  cacheEthereumTokens: cacheEthereumTokens
+  cacheEthereumTokens: cacheEthereumTokens,
+  cacheMoonpayCoins: cacheMoonpayCoins
 }

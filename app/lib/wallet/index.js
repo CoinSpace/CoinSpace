@@ -26,6 +26,7 @@ var db = require('lib/db');
 var _ = require('lodash');
 var HDKey = require('hdkey');
 var Buffer = require('safe-buffer').Buffer;
+var bchaddr = require('bchaddrjs');
 
 var wallet = null
 var seed = null
@@ -250,7 +251,7 @@ function parseHistoryTx(tx) {
   } else if (networkName === 'eos') {
     return tx;
   } else if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin', 'dash'].indexOf(networkName) !== -1) {
-    return utils.parseBtcLtcTx(tx);
+    return utils.parseBtcLtcTx(tx, networkName);
   }
 }
 
@@ -282,6 +283,17 @@ function getDestinationInfo(to) {
   }
 }
 
+function setToAlias(data) {
+  if (wallet.networkName !== 'bitcoincash') return;
+  try {
+    var legacy = bchaddr.toLegacyAddress(data.to);
+    if (legacy !== data.to) {
+      data.alias = data.to;
+      data.to = legacy;
+    }
+  } catch (e) {}
+}
+
 module.exports = {
   openWalletWithPin: openWalletWithPin,
   createWallet: createWallet,
@@ -299,5 +311,6 @@ module.exports = {
   getPin: getPin,
   resetPin: resetPin,
   setAvailableTouchId: setAvailableTouchId,
-  getDestinationInfo: getDestinationInfo
+  getDestinationInfo: getDestinationInfo,
+  setToAlias: setToAlias
 }

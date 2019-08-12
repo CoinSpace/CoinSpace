@@ -14,6 +14,7 @@ var ethereumTokens = require('./ethereumTokens');
 var iap = require('./iap');
 var shapeshift = require('./shapeshift');
 var changelly = require('./changelly');
+var moonpay = require('./moonpay');
 
 var router = express.Router();
 
@@ -237,6 +238,14 @@ router.post('/changelly/createTransaction', restrict, function(req, res) {
 
 router.get('/changelly/transaction/:id', function(req, res) {
   changelly.getTransaction(req.params.id).then(function(data) {
+    res.status(200).send(data);
+  }).catch(function(err) {
+    res.status(400).send(err);
+  });
+});
+
+router.get('/moonpay/coins', function(req, res) {
+  moonpay.getCoinsFromCache().then(function(data) {
     res.status(200).send(data);
   }).catch(function(err) {
     res.status(400).send(err);
