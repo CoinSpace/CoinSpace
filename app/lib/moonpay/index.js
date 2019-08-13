@@ -3,6 +3,15 @@
 var request = require('lib/request');
 var urlRoot = window.urlRoot;
 var coins = {};
+var emitter = require('lib/emitter');
+var showTos = require('widgets/modals/moonpay-success');
+
+emitter.on('handleOpenURL', function(url) {
+  url = url || '';
+  var matchAction = url.match(/action=([^&]+)/);
+  if (!matchAction || matchAction[1] !== 'moonpay-success') return;
+  showTos();
+});
 
 function init() {
   var url = urlRoot + 'moonpay/coins';
@@ -20,7 +29,7 @@ function show(currencyCode, walletAddress) {
 
   var redirectURL;
   if (process.env.BUILD_TYPE === 'phonegap') {
-    redirectURL = 'coinspace://?action=moonpay';
+    redirectURL = 'coinspace://?action=moonpay-success';
   } else {
     redirectURL = window.location.href;
   }

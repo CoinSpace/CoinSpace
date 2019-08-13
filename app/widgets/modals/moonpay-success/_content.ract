@@ -1,0 +1,15 @@
+<div class="modal _cancel">
+  <div class="modal__content moonpay_success">
+    <div class="_icon">
+      {{>svg_success}}
+    </div>
+
+    <h3 class="_title">{{translate("Transaction Successful")}}</h3>
+
+    <p class="_message">{{translate("Your transaction will appear in your history tab shortly.")}}</p>
+    <div class="_inputs">
+      <div class="_cancel">{{translate("Close")}}</div>
+    </div>
+
+  </div>
+</div>
