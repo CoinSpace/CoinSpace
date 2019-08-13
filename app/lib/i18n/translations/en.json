@@ -208,7 +208,6 @@
   "Extra Id": "Extra Id",
   "Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).": "Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).",
   "Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.": "Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.",
-  "security@changelly.com": "security@changelly.com",
   "On hold...": "On hold...",
   "Currently, your transaction (ID: :id) is on hold.<br>Please, contact Changelly to pass KYC.": "Currently, your transaction (ID: %(id)s) is on hold.<br>Please, contact Changelly to pass KYC.",
   "Transaction (ID: :id) has failed. Please, contact Changelly.": "Transaction (ID: %(id)s) has failed. Please, contact Changelly.",

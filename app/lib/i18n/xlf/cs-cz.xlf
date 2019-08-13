@@ -1,0 +1,912 @@
+<xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="cs-cz.json" datatype="plaintext" source-language="en" target-language="cs-cz">
+    <body>
+      <trans-unit id="Back to coin">
+        <source>Back to coin</source>
+        <target>Zpět na coin</target>
+      </trans-unit>
+      <trans-unit id="Create new wallet">
+        <source>Create new wallet</source>
+        <target>Založit novou peněženku</target>
+      </trans-unit>
+      <trans-unit id="Open existing wallet">
+        <source>Open existing wallet</source>
+        <target>Otevřít existující peněženku</target>
+      </trans-unit>
+      <trans-unit id="We are about to generate your very own passphrase">
+        <source>We're about to generate your very own passphrase</source>
+        <target>Nyní vygenerujeme Vaše vlastní heslo</target>
+      </trans-unit>
+      <trans-unit id="This keeps your account secure, and lets you open your wallet on multiple devices.">
+        <source>This keeps your account secure, and lets you open your wallet on multiple devices.</source>
+        <target>Toto umožňuje Vašemu účtu být vždy zabezpečený i při přístupu z různých zařízení.</target>
+      </trans-unit>
+      <trans-unit id="It is very important you write this down.">
+        <source>It's very important you write this down.</source>
+        <target>Je velmi důležité si tohle zaznamenat.</target>
+      </trans-unit>
+      <trans-unit id="Generate passphrase">
+        <source>Generate passphrase</source>
+        <target>Vygenerovat heslo</target>
+      </trans-unit>
+      <trans-unit id="Go back">
+        <source>Go back</source>
+        <target>Vrátit se zpět</target>
+      </trans-unit>
+      <trans-unit id="Generating">
+        <source>Generating</source>
+        <target>Generuji</target>
+      </trans-unit>
+      <trans-unit id="Synchronizing Wallet">
+        <source>Synchronizing Wallet</source>
+        <target>Synchronizuji peněženku</target>
+      </trans-unit>
+      <trans-unit id="Your passphrase (12 words)">
+        <source>Your passphrase (12 words)</source>
+        <target>Vaše heslo (12 slov)</target>
+      </trans-unit>
+      <trans-unit id="Your passphrase will not be shown again.">
+        <source>Your passphrase will not be shown again.</source>
+        <target>Vaše heslo nebude znovu zobrazeno.</target>
+      </trans-unit>
+      <trans-unit id="Without it you will lose access to your wallet.">
+        <source>Without it you will lose access to your wallet.</source>
+        <target>Bez něj ztratíte přístup ke své peněžence.</target>
+      </trans-unit>
+      <trans-unit id="I have written down or otherwise securely stored my passphrase">
+        <source>I have written down or otherwise securely stored my passphrase</source>
+        <target>Zapsal jsem si nebo jinak bezpečně uchoval mé heslo</target>
+      </trans-unit>
+      <trans-unit id="Open wallet">
+        <source>Open wallet</source>
+        <target>Otevřít peněženku</target>
+      </trans-unit>
+      <trans-unit id="Checking passphrase">
+        <source>Checking passphrase</source>
+        <target>Kontroluji heslo</target>
+      </trans-unit>
+      <trans-unit id="Enter Passphrase">
+        <source>Enter Passphrase</source>
+        <target>Vložte heslo</target>
+      </trans-unit>
+      <trans-unit id="Invalid passphrase">
+        <source>Invalid passphrase</source>
+        <target>Neplatné heslo</target>
+      </trans-unit>
+      <trans-unit id="Enter your PIN">
+        <source>Enter your PIN</source>
+        <target>Zadejte Váš PIN</target>
+      </trans-unit>
+      <trans-unit id="Set a PIN for quick access">
+        <source>Set a PIN for quick access</source>
+        <target>Zadejte PIN pro rychlý přístup</target>
+      </trans-unit>
+      <trans-unit id="Review passphrase again">
+        <source>Review passphrase again</source>
+        <target>Znovu zkontrolovat heslo</target>
+      </trans-unit>
+      <trans-unit id="Open a different wallet">
+        <source>Open a different wallet</source>
+        <target>Otevřít jinou peněženku</target>
+      </trans-unit>
+      <trans-unit id="PIN must be a 4-digit number">
+        <source>PIN must be a 4-digit number</source>
+        <target>PIN musí být 4-místné číslo</target>
+      </trans-unit>
+      <trans-unit id="Verifying PIN">
+        <source>Verifying PIN</source>
+        <target>Ověřuji pin</target>
+      </trans-unit>
+      <trans-unit id="Setting PIN">
+        <source>Setting PIN</source>
+        <target>Nastavuji PIN</target>
+      </trans-unit>
+      <trans-unit id="This might take some time,">
+        <source>This might take some time,</source>
+        <target>Tohle může zabrat nějaký čas.</target>
+      </trans-unit>
+      <trans-unit id="please be patient.">
+        <source>please be patient.</source>
+        <target>prosím o strpení</target>
+      </trans-unit>
+      <trans-unit id="Your PIN is incorrect">
+        <source>Your PIN is incorrect</source>
+        <target>Zadaný PIN není správný</target>
+      </trans-unit>
+      <trans-unit id="Request timeout. Please check your internet connection.">
+        <source>Request timeout. Please check your internet connection.</source>
+        <target>Vypršel čas na odpověď. Prosím zkontrolujte své internetové připojení.</target>
+      </trans-unit>
+      <trans-unit id="Could not save your details">
+        <source>Could not save your details</source>
+        <target>Vaše informace nebyli uloženy</target>
+      </trans-unit>
+      <trans-unit id="We could not connect you to Mecto, please check your internet connection.">
+        <source>We couldn't connect you to Mecto, please check your internet connection.</source>
+        <target>Nemohli jsme Vás připojit k Vašemu Mecto, prosím zkontrolujte své internetové připojení.</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid address to send to">
+        <source>Please enter a valid address to send to</source>
+        <target>Prosím zadejte platnou adresu k zaslání</target>
+      </trans-unit>
+      <trans-unit id="Please enter an amount above">
+        <source>Please enter an amount above %(dust)s</source>
+        <target>Prosím výše zadejte množství %(dust)s</target>
+      </trans-unit>
+      <trans-unit id="Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.">
+        <source>Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.</source>
+        <target>Některé prostředky jsou dočasně nedostupné. K odeslání této transakce musíte nejprve počkat na potvrzení příchozích transakcí.</target>
+      </trans-unit>
+      <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
+        <source>It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>Vypadá to, že se snažíte použít vyprázdnit svou peněženku. Po  započtení transakcí, odhadujeme maximální možné množství k odeslání %(sendableBalance)s. Nastavili jsme pro Vás toto množství ve formuláři.</target>
+      </trans-unit>
+      <trans-unit id="You do not have enough funds in your wallet (incl. fee)">
+        <source>You don't have enough funds in your wallet (incl. fee)</source>
+        <target>Nemáte dostatek prostředků ve Vaší peněžence (vč. poplatek).</target>
+      </trans-unit>
+      <trans-unit id="A name is required to set your profile on Coin">
+        <source>A name is required to set your profile on Coin</source>
+        <target>Jméno je vyžadováno k založení profilu na Coin</target>
+      </trans-unit>
+      <trans-unit id="Uh Oh...">
+        <source>Uh Oh...</source>
+        <target>Jejda...</target>
+      </trans-unit>
+      <trans-unit id="Whoops!">
+        <source>Whoops!</source>
+        <target>Hups...</target>
+      </trans-unit>
+      <trans-unit id="Just saying...">
+        <source>Just saying...</source>
+        <target>Jen říkám...</target>
+      </trans-unit>
+      <trans-unit id="Your browser does not support geolocation">
+        <source>Your browser does not support geolocation</source>
+        <target>Váš prohlížeč nepodporuje geolokaci</target>
+      </trans-unit>
+      <trans-unit id="Unable to retrieve your location">
+        <source>Unable to retrieve your location</source>
+        <target>Vaše lokace nebyla zjištěna</target>
+      </trans-unit>
+      <trans-unit id="Without a name, the payer would not be able to identify you on Mecto.">
+        <source>Without a name, the payer wouldn't be able to identify you on Mecto.</source>
+        <target>Bez jména by Vás plátce nebyl schopný na Mecto najít.</target>
+      </trans-unit>
+      <trans-unit id="Change your details">
+        <source>Change your details</source>
+        <target>Změnit svůj profil</target>
+      </trans-unit>
+      <trans-unit id="Your username">
+        <source>Your username</source>
+        <target>Vaše uživatelské jméno</target>
+      </trans-unit>
+      <trans-unit id="Gravatar email">
+        <source>Gravatar email</source>
+        <target>Gravatar e-mail</target>
+      </trans-unit>
+      <trans-unit id="Submit">
+        <source>Submit</source>
+        <target>Odeslat</target>
+      </trans-unit>
+      <trans-unit id="Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.">
+        <source>Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.</source>
+        <target>Gravatar (globálně používaný avatar) je služba, která Vám umožňuje zadáním e-mailové adresy znovu použít stejného avatara napříč různými webovými stránkami a aplikacemi.</target>
+      </trans-unit>
+      <trans-unit id="Create a gravatar">
+        <source>Create a gravatar</source>
+        <target>Vytvořit gravatar</target>
+      </trans-unit>
+      <trans-unit id="Logout">
+        <source>Logout</source>
+        <target>Odhlásit se</target>
+      </trans-unit>
+      <trans-unit id="Support">
+        <source>Support</source>
+        <target>Podpora</target>
+      </trans-unit>
+      <trans-unit id="Send">
+        <source>Send</source>
+        <target>Odeslat</target>
+      </trans-unit>
+      <trans-unit id="Receive">
+        <source>Receive</source>
+        <target>Přijmout</target>
+      </trans-unit>
+      <trans-unit id="History">
+        <source>History</source>
+        <target>Historie</target>
+      </trans-unit>
+      <trans-unit id="Tokens">
+        <source>Tokens</source>
+        <target>Tokeny</target>
+      </trans-unit>
+      <trans-unit id="Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.">
+        <source>Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.</source>
+        <target>Mecto vám umožňujě šířit adresu Vaší peněženky uživatelům nacházejícím se blízko Vás pomocí porovnávání GPS dat. Tyto data jsou smazána poté co vypnete Mecto.</target>
+      </trans-unit>
+      <trans-unit id="Before you start using Mecto, you need to enter a name that will help others identify you.">
+        <source>Before you start using Mecto, you need to enter a name that will help others identify you.</source>
+        <target>Předtím než začnete používat Mecto, musíte nejprve zadat jméno, které pomůže ostatním Vás najít.</target>
+      </trans-unit>
+      <trans-unit id="Save">
+        <source>Save</source>
+        <target>Uložit</target>
+      </trans-unit>
+      <trans-unit id="Loading transactions...">
+        <source>Loading transactions...</source>
+        <target>Probíhá načítání transakcí...</target>
+      </trans-unit>
+      <trans-unit id="Your transaction history">
+        <source>Your transaction history</source>
+        <target>Historie Vašich transakcí</target>
+      </trans-unit>
+      <trans-unit id="pending confirmation">
+        <source>pending confirmation</source>
+        <target>probíhá potvrzení</target>
+      </trans-unit>
+      <trans-unit id="Received">
+        <source>Received</source>
+        <target>Přijato</target>
+      </trans-unit>
+      <trans-unit id="You do not have any transactions yet">
+        <source>You don't have any transactions yet</source>
+        <target>Zatím nebyli uskutečněny žádné transakce.</target>
+      </trans-unit>
+      <trans-unit id="Transaction Id:">
+        <source>Transaction Id:</source>
+        <target>Id transakce:</target>
+      </trans-unit>
+      <trans-unit id="Transaction Fee:">
+        <source>Transaction Fee:</source>
+        <target>Poplatek za transakci:</target>
+      </trans-unit>
+      <trans-unit id="Inputs:">
+        <source>Inputs:</source>
+        <target>Vstupy:</target>
+      </trans-unit>
+      <trans-unit id="Outputs:">
+        <source>Outputs:</source>
+        <target>Výstupy:</target>
+      </trans-unit>
+      <trans-unit id="Your wallet address">
+        <source>Your wallet address</source>
+        <target>Adresa Vaší peněženky</target>
+      </trans-unit>
+      <trans-unit id="Mecto">
+        <source>Mecto</source>
+        <target>Mecto</target>
+      </trans-unit>
+      <trans-unit id="Turn Mecto on">
+        <source>Turn Mecto on</source>
+        <target>Zapnout Mecto</target>
+      </trans-unit>
+      <trans-unit id="Turn Mecto off">
+        <source>Turn Mecto off</source>
+        <target>Vypnout Mecto</target>
+      </trans-unit>
+      <trans-unit id="Checking your location">
+        <source>Checking your location</source>
+        <target>Zjišťuji vaši polohu</target>
+      </trans-unit>
+      <trans-unit id="Broadcasting your location...">
+        <source>Broadcasting your location...</source>
+        <target>Publikovat Vaši polohu</target>
+      </trans-unit>
+      <trans-unit id="Wallet address">
+        <source>Wallet address</source>
+        <target>Adresa peněženky</target>
+      </trans-unit>
+      <trans-unit id="Amount">
+        <source>Amount</source>
+        <target>Množství</target>
+      </trans-unit>
+      <trans-unit id="Confirm">
+        <source>Confirm</source>
+        <target>Potvrdit</target>
+      </trans-unit>
+      <trans-unit id="No Coin users found nearby">
+        <source>No Coin users found nearby</source>
+        <target>Žádní uživatelé Coin nejsou poblíž</target>
+      </trans-unit>
+      <trans-unit id="Search Again">
+        <source>Search Again</source>
+        <target>Hledat znovu</target>
+      </trans-unit>
+      <trans-unit id="Searching...">
+        <source>Searching...</source>
+        <target>Hledám...</target>
+      </trans-unit>
+      <trans-unit id="Searching your area for other Coin users">
+        <source>Searching your area for other Coin users</source>
+        <target>Hledám uživatele Coin ve Vaší blízkosti</target>
+      </trans-unit>
+      <trans-unit id="Confirm transaction">
+        <source>Confirm transaction</source>
+        <target>Potvrdit transakci</target>
+      </trans-unit>
+      <trans-unit id="transaction fee">
+        <source>transaction fee</source>
+        <target>poplatek transakce</target>
+      </trans-unit>
+      <trans-unit id="Cancel">
+        <source>Cancel</source>
+        <target>Zrušit</target>
+      </trans-unit>
+      <trans-unit id="Transaction Successful">
+        <source>Transaction Successful</source>
+        <target>Transakce byla úspěšná</target>
+      </trans-unit>
+      <trans-unit id="Your transaction will appear in your history tab shortly.">
+        <source>Your transaction will appear in your history tab shortly.</source>
+        <target>Vaše transakce se během chvíle objeví v záložce historie.</target>
+      </trans-unit>
+      <trans-unit id="Close">
+        <source>Close</source>
+        <target>Zavřít</target>
+      </trans-unit>
+      <trans-unit id="Transaction Failed">
+        <source>Transaction Failed</source>
+        <target>Transakce selhala</target>
+      </trans-unit>
+      <trans-unit id="Failed">
+        <source>Failed</source>
+        <target>Selhala</target>
+      </trans-unit>
+      <trans-unit id="Sorry, Coin Wallet did not load.">
+        <source>Sorry, Coin Wallet didn't load.</source>
+        <target>Omlouváme se, Coin peněžěnka se nenačetla.</target>
+      </trans-unit>
+      <trans-unit id="Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.">
+        <source>Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.</source>
+        <target>Zkuste instalovat nejnovější verzi prohlížeče nebo vypněte prohlížení v anonymním módu. Pokud vše selže, stáhněte prohlížeč Chrome pro své zařízení.</target>
+      </trans-unit>
+      <trans-unit id="Current coin price">
+        <source>Current coin price</source>
+        <target>Aktuální cena mince</target>
+      </trans-unit>
+      <trans-unit id="Username not available">
+        <source>Username not available</source>
+        <target>Uživatelské jméno není k dispozici.</target>
+      </trans-unit>
+      <trans-unit id="Scan your fingerprint please">
+        <source>Scan your fingerprint please</source>
+        <target>Skenování otisku prstu, prosím</target>
+      </trans-unit>
+      <trans-unit id="Enter PIN">
+        <source>Enter PIN</source>
+        <target>Zadejte kód PIN</target>
+      </trans-unit>
+      <trans-unit id="I Agree To The Terms &amp; Conditions">
+        <source>I Agree To The Terms &amp; Conditions</source>
+        <target>Souhlasím s pravidly a podmínkami</target>
+      </trans-unit>
+      <trans-unit id="Terms of Use">
+        <source>Terms of Use</source>
+        <target>Podmínky užívání</target>
+      </trans-unit>
+      <trans-unit id="Unparsed address">
+        <source>Unparsed address</source>
+        <target>Nezpracovaná adresa</target>
+      </trans-unit>
+      <trans-unit id="Exchange">
+        <source>Exchange</source>
+        <target>Směna</target>
+      </trans-unit>
+      <trans-unit id="From">
+        <source>From</source>
+        <target>Odesílatel</target>
+      </trans-unit>
+      <trans-unit id="To">
+        <source>To</source>
+        <target>Adresát</target>
+      </trans-unit>
+      <trans-unit id="Exchange rate">
+        <source>Exchange rate</source>
+        <target>Směnný kurz</target>
+      </trans-unit>
+      <trans-unit id="Loading...">
+        <source>Loading...</source>
+        <target>Načítám...</target>
+      </trans-unit>
+      <trans-unit id="Address">
+        <source>Address</source>
+        <target>Adresa</target>
+      </trans-unit>
+      <trans-unit id="Return address (optional)">
+        <source>Return address (optional)</source>
+        <target>Adresa pro vrácení (nepovinná)</target>
+      </trans-unit>
+      <trans-unit id="Deposit address">
+        <source>Deposit address (%(symbol)s)</source>
+        <target>Adresa pro uložení (%(symbol)s)</target>
+      </trans-unit>
+      <trans-unit id="Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
+        <source>Send up to %(depositMax)s %(depositSymbol)s to deposit address.
+It will be converted into %(toSymbol)s, and sent to
+ %(toAddress)s</source>
+        <target>Poslat až %(depositMax)s %(depositSymbol)s na adresu pro uložení.
+Bude to převedeno na %(toSymbol)s a posláno na adresu
+ %(toAddress)s</target>
+      </trans-unit>
+      <trans-unit id="Deposit minimum">
+        <source>Deposit minimum</source>
+        <target>Minimální vklad</target>
+      </trans-unit>
+      <trans-unit id="amount :toSymbol have been delivered to :toAddress">
+        <source>%(amount)s %(toSymbol)s have been delivered to
+ %(toAddress)s</source>
+        <target>%(amount)s %(toSymbol)s bylo staženo do
+ %(toAddress)s</target>
+      </trans-unit>
+      <trans-unit id="Back">
+        <source>Back</source>
+        <target>Zpět</target>
+      </trans-unit>
+      <trans-unit id="Awaiting deposit...">
+        <source>Awaiting deposit...</source>
+        <target>Čeká se na vklad...</target>
+      </trans-unit>
+      <trans-unit id="Deposit has been received">
+        <source>Deposit has been received</source>
+        <target>Vklad byl přijat</target>
+      </trans-unit>
+      <trans-unit id="Awaiting exchange...">
+        <source>Awaiting exchange...</source>
+        <target>Čeká se na směnu...</target>
+      </trans-unit>
+      <trans-unit id="Exchange complete!">
+        <source>Exchange complete!</source>
+        <target>Směna je hotova!</target>
+      </trans-unit>
+      <trans-unit id="Done">
+        <source>Done</source>
+        <target>Hotovo</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid return address">
+        <source>Please enter a valid return address</source>
+        <target>Zadejte prosím platnou adresu pro vrácení</target>
+      </trans-unit>
+      <trans-unit id="Miner fee">
+        <source>Miner fee</source>
+        <target>Poplatek těžaře</target>
+      </trans-unit>
+      <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
+        <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
+        <target>Adresou pro návrat má být adresa, kterou máte ve své moci a kam bude Váš vklad vrácen v případě chybné transakce.</target>
+      </trans-unit>
+      <trans-unit id="Remove account">
+        <source>Remove account</source>
+        <target>Odstranit účet</target>
+      </trans-unit>
+      <trans-unit id="Remove">
+        <source>Remove</source>
+        <target>Odstranit</target>
+      </trans-unit>
+      <trans-unit id="Are you sure?">
+        <source>Are you sure?</source>
+        <target>Opravdu to chcete?</target>
+      </trans-unit>
+      <trans-unit id="Account has been successfully removed">
+        <source>Account has been successfully removed</source>
+        <target>Účet byl úspěšně odstraněn</target>
+      </trans-unit>
+      <trans-unit id="This page will be reloaded shortly.">
+        <source>This page will be reloaded shortly.</source>
+        <target>Tato stránka bude brzy znovu načtena</target>
+      </trans-unit>
+      <trans-unit id="About">
+        <source>About</source>
+        <target>O aplikaci</target>
+      </trans-unit>
+      <trans-unit id="Release information">
+        <source>Release information</source>
+        <target>Informace o vydání</target>
+      </trans-unit>
+      <trans-unit id="Version">
+        <source>Version</source>
+        <target>Verze</target>
+      </trans-unit>
+      <trans-unit id="Transfer paper wallet / private key">
+        <source>Transfer paper wallet / private key</source>
+        <target>Přenést papírovou peněženku / privátní klíč</target>
+      </trans-unit>
+      <trans-unit id="Export private keys">
+        <source>Export private keys</source>
+        <target>Exportovat privátní klíče</target>
+      </trans-unit>
+      <trans-unit id="Transfer private key">
+        <source>Transfer private key</source>
+        <target>Přenést privátní klíč</target>
+      </trans-unit>
+      <trans-unit id="Transfer">
+        <source>Transfer</source>
+        <target>Přenos</target>
+      </trans-unit>
+      <trans-unit id="Private key">
+        <source>Private key</source>
+        <target>Privátní klíč</target>
+      </trans-unit>
+      <trans-unit id="This will transfer all coins from the paper wallet address to your wallet.">
+        <source>This will transfer all coins from the paper wallet address to your wallet.</source>
+        <target>Tímto převedete všechny mince z adresy papírové peněženky do své peněženky.</target>
+      </trans-unit>
+      <trans-unit id="This private key has no coins for transfer.">
+        <source>This private key has no coins for transfer.</source>
+        <target>Tento privátní klíč nemá žádné mince, které by bylo možno převést.</target>
+      </trans-unit>
+      <trans-unit id="Invalid private key">
+        <source>Invalid private key</source>
+        <target>Neplatný privátní klíč</target>
+      </trans-unit>
+      <trans-unit id="Insufficient funds">
+        <source>Insufficient funds</source>
+        <target>Nedostatek prostředků</target>
+      </trans-unit>
+      <trans-unit id="Warning!">
+        <source>Warning!</source>
+        <target>Upozornění!</target>
+      </trans-unit>
+      <trans-unit id="Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you&apos;d like them to have access to your funds.">
+        <source>Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you'd like them to have access to your funds.</source>
+        <target>Vaše privátní klíče jsou klíče k Vašim finančním prostředkům, takže je nikomu NESDĚLUJTE, nechcete-li, aby měl přístup k Vašim prostředkům.</target>
+      </trans-unit>
+      <trans-unit id="Show">
+        <source>Show</source>
+        <target>Zobrazit</target>
+      </trans-unit>
+      <trans-unit id="Comma-separated list">
+        <source>Comma-separated list</source>
+        <target>Seznam oddělovaný čárkami</target>
+      </trans-unit>
+      <trans-unit id="Your wallet has no private keys with coins for export.">
+        <source>Your wallet has no private keys with coins for export.</source>
+        <target>Vaše peněženka nemá žádné privátní klíče s mincemi, které by bylo možno exportovat.</target>
+      </trans-unit>
+      <trans-unit id="Add Token">
+        <source>Add Token</source>
+        <target>Přidat žeton</target>
+      </trans-unit>
+      <trans-unit id="Gas limit">
+        <source>Gas limit</source>
+        <target>Limit na plyn</target>
+      </trans-unit>
+      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.">
+        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.</source>
+        <target>Limit na plyn je množství plynu, které pošlete se svou transakcí. Zvýšením tohoto čísla nebude Vaše transakce potvrzena o nic rychleji. Poslat ETH je rovno 21000. Poslat žetony je rovno přibližně 200000.</target>
+      </trans-unit>
+      <trans-unit id="Contract address">
+        <source>Contract address</source>
+        <target>Kontaktní adresa</target>
+      </trans-unit>
+      <trans-unit id="Add">
+        <source>Add</source>
+        <target>Přidat</target>
+      </trans-unit>
+      <trans-unit id="Symbol">
+        <source>Symbol</source>
+        <target>Symbol</target>
+      </trans-unit>
+      <trans-unit id="Decimals">
+        <source>Decimals</source>
+        <target>Desetinná místa</target>
+      </trans-unit>
+      <trans-unit id="Token">
+        <source>Token</source>
+        <target>Žeton</target>
+      </trans-unit>
+      <trans-unit id="Custom token">
+        <source>Custom token</source>
+        <target>Vlastní žeton</target>
+      </trans-unit>
+      <trans-unit id="Please fill out all fields.">
+        <source>Please fill out all fields.</source>
+        <target>Vyplňte prosím všechna pole.</target>
+      </trans-unit>
+      <trans-unit id="Please enter Gas Limit greater than zero">
+        <source>Please enter Gas Limit greater than zero</source>
+        <target>Zadejte prosím limit plynu vyšší než nula</target>
+      </trans-unit>
+      <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
+        <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
+        <target>Nemáte dostatek prostředků v měně Ethereum na zaplacení transakčního poplatku (%(ethereumRequired)s ETH).</target>
+      </trans-unit>
+      <trans-unit id="Click to Select">
+        <source>Click to Select</source>
+        <target>Kliknutím můžete vybrat</target>
+      </trans-unit>
+      <trans-unit id="Copy to Clipboard">
+        <source>Copy to Clipboard</source>
+        <target>Zkopírovat do schránky</target>
+      </trans-unit>
+      <trans-unit id="Copied!">
+        <source>Copied!</source>
+        <target>Zkopírováno!</target>
+      </trans-unit>
+      <trans-unit id="Please enter an address other than your wallet address">
+        <source>Please enter an address other than your wallet address</source>
+        <target>Zadejte prosím jinou adresu, než adresu vaší peněženky</target>
+      </trans-unit>
+      <trans-unit id="Please enter a private key other than your wallet private key">
+        <source>Please enter a private key other than your wallet private key</source>
+        <target>Zadejte prosím jiný privátní klíč, než privátní klíč k Vaší peněžence</target>
+      </trans-unit>
+      <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
+        <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(denomination)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>Zdá se, že se snažíte vyprázdnit svou peněženku. Když jsme uvážili poplatek za transakci a minimální rezervu (%(minReserve)s %(denomination)s), odhadli jsme, že maximální částka, kterou můžete poslat, je %(sendableBalance)s. Hodnotu v poli částka jsme pro vás opravili.</target>
+      </trans-unit>
+      <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :denomination) to your wallet address.">
+        <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(denomination)s) to your wallet address.</source>
+        <target>Vaše peněženka není aktivována. Chcete-li ji aktivovat, pošlete prosím na adresu své peněženky rezervu větší než minimum (%(minReserve)s %(denomination)s).</target>
+      </trans-unit>
+      <trans-unit id="Load more">
+        <source>Load more</source>
+        <target>Načíst více</target>
+      </trans-unit>
+      <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
+        <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
+        <target>Peněženka příjemce není aktivována. Můžete poslat jen částku větší než %(minReserve)s %(denomination)s.</target>
+      </trans-unit>
+      <trans-unit id="Destination tag">
+        <source>Destination tag</source>
+        <target>Cílový štítek</target>
+      </trans-unit>
+      <trans-unit id="Invoice ID">
+        <source>Invoice ID</source>
+        <target>ID faktury</target>
+      </trans-unit>
+      <trans-unit id="(optional)">
+        <source>(optional)</source>
+        <target>(volitelné)</target>
+      </trans-unit>
+      <trans-unit id="An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.">
+        <source>An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.</source>
+        <target>Libovolné 32-bitové celé číslo bez znaménka, které identifikuje důvod platby nebo nevlnkový účet</target>
+      </trans-unit>
+      <trans-unit id="A 256-bit hash that can be used to identify a particular payment.">
+        <source>A 256-bit hash that can be used to identify a particular payment.</source>
+        <target>256 bitový hash, který lze použít k identifikaci konkrétní platby.</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid invoice ID">
+        <source>Please enter a valid invoice ID</source>
+        <target>Zadejte prosím platný identifikátor faktury</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid destination tag">
+        <source>Please enter a valid destination tag</source>
+        <target>Zadejte prosím platný cílový štítek</target>
+      </trans-unit>
+      <trans-unit id="Exchange is currently unavailable for this pair">
+        <source>Exchange is currently unavailable for this pair</source>
+        <target>Pro tento pár v současnosti není možnost směny</target>
+      </trans-unit>
+      <trans-unit id="Payment operations:">
+        <source>Payment operations:</source>
+        <target>Platební operace:</target>
+      </trans-unit>
+      <trans-unit id="Pay (:amount) XLM to :destination">
+        <source>Pay %(amount)s XLM to %(destination)s</source>
+        <target>Zaplatit %(amount)s XLM %(destination)s</target>
+      </trans-unit>
+      <trans-unit id="Created Account :destination with balance :amount XLM">
+        <source>Created Account %(destination)s with balance %(amount)s XLM</source>
+        <target>Byl vytvořen účet %(destination)s se zůstatkem %(amount)s XLM</target>
+      </trans-unit>
+      <trans-unit id="Memo">
+        <source>Memo</source>
+        <target>Poznámka</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid memo">
+        <source>Please enter a valid memo</source>
+        <target>Zadejte prosím platnou poznámku.</target>
+      </trans-unit>
+      <trans-unit id="The memo contains optional extra information. A string up to 28-bytes long.">
+        <source>The memo contains optional extra information. A string up to 28-bytes long.</source>
+        <target>Tato poznámka obsahuje volitelné doplňujícíc informace. Řetězec délky 28 bytů.</target>
+      </trans-unit>
+      <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :denomination.">
+        <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(denomination)s.</source>
+        <target>Vaše peněženka není aktivována. Můžete přijmout jen částku vyšší než %(minReserve)s %(denomination)s.</target>
+      </trans-unit>
+      <trans-unit id="Privacy Policy">
+        <source>Privacy Policy</source>
+        <target>Zásady ochrany osobních údajů</target>
+      </trans-unit>
+      <trans-unit id="Your ShapeShift account is not verified.">
+        <source>Your ShapeShift account is not verified.</source>
+        <target>Váš účet ShapeShift není ověřen.</target>
+      </trans-unit>
+      <trans-unit id="Complete verification">
+        <source>Complete verification</source>
+        <target>Dokončit ověření.</target>
+      </trans-unit>
+      <trans-unit id="Try to sign in again">
+        <source>Try to sign in again</source>
+        <target>Zkuste se znovu přihlásit.</target>
+      </trans-unit>
+      <trans-unit id="Sign in">
+        <source>Sign in</source>
+        <target>Přihlásit se</target>
+      </trans-unit>
+      <trans-unit id="Setup EOS account">
+        <source>Setup EOS account</source>
+        <target>Nastavit účet EOS</target>
+      </trans-unit>
+      <trans-unit id="Account name">
+        <source>Account name</source>
+        <target>Název účtu</target>
+      </trans-unit>
+      <trans-unit id="The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.">
+        <source>The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.</source>
+        <target>Název účtu EOS musí být přesně 12 znaků dlouhý a skládat se jen ze samých malých písmen a číslic od 1 do 5.</target>
+      </trans-unit>
+      <trans-unit id="Invalid account name">
+        <source>Invalid account name</source>
+        <target>Neplatný název účtu</target>
+      </trans-unit>
+      <trans-unit id="This account name is already taken, please choose another one.">
+        <source>This account name is already taken, please choose another one.</source>
+        <target>Tento název účtu byl už vzat. Vyberte prosím jiný.</target>
+      </trans-unit>
+      <trans-unit id="To create a new account you need to make an EOS transfer (amount greater than :minAmount) with the following data from an exchange or other EOS wallet.">
+        <source>To create a new account you need to make an EOS transfer (amount greater than %(minAmount)s) with the following data from an exchange or other EOS wallet.</source>
+        <target>Chcete-li vytvořit nový účet, musíte provést převod EOS (částku větší než %(minAmount)s) s následujícícmi údaji z burzy nebo z jiné peněženky EOS.</target>
+      </trans-unit>
+      <trans-unit id="Check">
+        <source>Check</source>
+        <target>Zkontrolovat</target>
+      </trans-unit>
+      <trans-unit id="Account has been successfully set up">
+        <source>Account has been successfully set up</source>
+        <target>Účet byl úspěšně nakonfigurován</target>
+      </trans-unit>
+      <trans-unit id="The memo contains optional extra information. A string up to 256-bytes long.">
+        <source>The memo contains optional extra information. A string up to 256-bytes long.</source>
+        <target>Tato poznámka vyžaduje volitelné doplňující informace. Řetězec má mít délku 256-bytů.</target>
+      </trans-unit>
+      <trans-unit id="It seems like you are trying to empty your wallet. Max amount you can send is. We have amended the value in the amount field for you">
+        <source>It seems like you are trying to empty your wallet. Max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>Zdá se, že se snažíte vyprázdnit svoji peněženku. Maximální částka, kterou můžete poslat, je %(sendableBalance)s. Hodnotu v poli částky jsme pro Vás opravili.</target>
+      </trans-unit>
+      <trans-unit id="Destination account doesn&apos;t exist.">
+        <source>Destination account doesn't exist.</source>
+        <target>Cílový účet neexistuje.</target>
+      </trans-unit>
+      <trans-unit id="Transaction has been expired. Please try again.">
+        <source>Transaction has been expired. Please try again.</source>
+        <target>Vypršela doba na tuto transakci. Zkuste to prosím znovu.</target>
+      </trans-unit>
+      <trans-unit id="Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.">
+        <source>Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.</source>
+        <target>Využití účtu CPU bylo překročeno. Zkuste to prosím později znovu nebo někoho požádejte, aby Vám přidělil další CPU.</target>
+      </trans-unit>
+      <trans-unit id="Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.">
+        <source>Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.</source>
+        <target>Bylo překročeno využití účtu NET. Zkuste to prosím později znovu nebo někoho požádejte, aby Vám přidělil další NET.</target>
+      </trans-unit>
+      <trans-unit id="The extra amount will be deposited to the created account.">
+        <source>The extra amount will be deposited to the created account.</source>
+        <target>Částka navíc bude uložena na vytvořený účet.</target>
+      </trans-unit>
+      <trans-unit id="Can&apos;t connect to :network node. Please try again later or choose another token.">
+        <source>Can't connect to %(network)s node. Please try again later or choose another token.</source>
+        <target>Nelze se připojit k uzlu %(network)s. Zkuste to prosím později znovu nebo vyberte jiný žeton.</target>
+      </trans-unit>
+      <trans-unit id="Network node error. Please try again later.">
+        <source>%(network)s node error. Please try again later.</source>
+        <target>Chyba uzlu %(network)s. Zkuste to prosím později znovu.</target>
+      </trans-unit>
+      <trans-unit id="Choose exchange">
+        <source>Choose exchange</source>
+        <target>Vyberte burzu</target>
+      </trans-unit>
+      <trans-unit id="Next step">
+        <source>Next step</source>
+        <target>Další krok</target>
+      </trans-unit>
+      <trans-unit id="Minimum amount:">
+        <source>Minimum amount:</source>
+        <target>Minimální množství:</target>
+      </trans-unit>
+      <trans-unit id="address">
+        <source>address</source>
+        <target>adresa</target>
+      </trans-unit>
+      <trans-unit id="Exchange error">
+        <source>Exchange error</source>
+        <target>Chyba směny</target>
+      </trans-unit>
+      <trans-unit id="Transaction not found">
+        <source>Transaction not found</source>
+        <target>Transakce nebyla nalezena</target>
+      </trans-unit>
+      <trans-unit id="Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
+        <source>Send %(depositAmount)s %(depositSymbol)s to deposit address.
+It will be converted into %(toSymbol)s, and sent to
+ %(toAddress)s</source>
+        <target>Pošlete %(depositAmount)s %(depositSymbol)s na adresu vkladu.
+Bude to převedeno na %(toSymbol)s, a zasláno
+ %(toAddress)s</target>
+      </trans-unit>
+      <trans-unit id="Network fee">
+        <source>Network fee</source>
+        <target>Poplatek sítě</target>
+      </trans-unit>
+      <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
+        <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
+        <target>Na odeslání máte 36 hodin. Jiínak bude transakce automaticky zrušena.</target>
+      </trans-unit>
+      <trans-unit id="Extra Id">
+        <source>Extra Id</source>
+        <target>Doplňující ID</target>
+      </trans-unit>
+      <trans-unit id="Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).">
+        <source>Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).</source>
+        <target>Vlastnost pro adresy nebo měny, které využívají ke zpracování transakcí další ID (jako například cílový štítek, poznámku nebo zprávu).</target>
+      </trans-unit>
+      <trans-unit id="Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.">
+        <source>Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.</source>
+        <target>Síťový poplatek je pevně daný a je strháván při každém odesílání peněz. U každé měny se za prováděné operace strhává jistá přesně určená částka. Tento poplatek se strhává tehdy, když jsou Vaše prostředky obsaženy v bločence.</target>
+      </trans-unit>
+      <trans-unit id="On hold...">
+        <source>On hold...</source>
+        <target>Pozastaveno...</target>
+      </trans-unit>
+      <trans-unit id="Currently, your transaction (ID: :id) is on hold.&lt;br&gt;Please, contact Changelly to pass KYC.">
+        <source>Currently, your transaction (ID: %(id)s) is on hold.&lt;br&gt;Please, contact Changelly to pass KYC.</source>
+        <target>V současnosti je Vaše transakce (ID: %(id)s) pozastavena.&lt;br&gt;Kontaktujte prosím Changelly, abyste předali KYC.</target>
+      </trans-unit>
+      <trans-unit id="Transaction (ID: :id) has failed. Please, contact Changelly.">
+        <source>Transaction (ID: %(id)s) has failed. Please, contact Changelly.</source>
+        <target>Transakce (ID: %(id)s) se nezdařila. Kontaktujte prosím Changelly.</target>
+      </trans-unit>
+      <trans-unit id="Exchange failed and coins were refunded to :address.">
+        <source>Exchange failed and coins were refunded to %(address)s.</source>
+        <target>Směna se nezdařila a mince byly vráceny %(address)s.</target>
+      </trans-unit>
+      <trans-unit id="Payment wasn&apos;t received since 36 hours since the transaction was created.">
+        <source>Payment wasn't received since 36 hours since the transaction was created.</source>
+        <target>Platba nebyla přijata do 36 hodin od vytvoření transakce.</target>
+      </trans-unit>
+      <trans-unit id="Terms of Service">
+        <source>Terms of Service</source>
+        <target>Podmínky služby</target>
+      </trans-unit>
+      <trans-unit id="Accept">
+        <source>Accept</source>
+        <target>Přijmout</target>
+      </trans-unit>
+      <trans-unit id="Changelly_TOS">
+        <source>I have read and I agree to the Changelly &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;terms of use&lt;/a&gt; and &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;privacy policy&lt;/a&gt;.&lt;br&gt;By clicking "Accept", I acknowledge and understan that my transaction may trigger AML/KYC verification according to &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;Changelly AML/KYC&lt;/a&gt;.</source>
+        <target>Přečetl(a) jsem si &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;pravidla užívání&lt;/a&gt; a &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;zásady ochrany osobních údajů&lt;/a&gt; Changelly a souhlasím s nimi.&lt;br&gt;Kliknutím na „Přijímám“ vyjadřuji uznání a pochopení, že moje transakce může spustit ověřování AML/KYC v souladu s &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;AML/KYC Changelly&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="max.">
+        <source>max.</source>
+        <target>max.</target>
+      </trans-unit>
+      <trans-unit id="Fee">
+        <source>Fee</source>
+        <target>Zdarma</target>
+      </trans-unit>
+      <trans-unit id="Amount of coins that is charged from your balance for single transaction (&lt;a href=&quot;&quot; onclick=&quot;window.open(&apos;https://www.coin.space/all-about-bitcoin-fees&apos;, &apos;_system&apos;); return false;&quot;&gt;more info&lt;/a&gt;).">
+        <source>Amount of coins that is charged from your balance for single transaction (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;more info&lt;/a&gt;).</source>
+        <target>Počet mincí, které Vám byly odebrány ze zůstatku za jedinou transakci (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;další informace najdete na&lt;/a&gt;).</target>
+      </trans-unit>
+      <trans-unit id="Confirm passphrase">
+        <source>Confirm passphrase</source>
+        <target>Potvrďte heslovou větu</target>
+      </trans-unit>
+      <trans-unit id="Almost done! Enter the following words from your passphrase.">
+        <source>Almost done! Enter the following words from your passphrase.</source>
+        <target>Už jste skoro hotovi! Zadejte následující slova ze své heslové věty.</target>
+      </trans-unit>
+      <trans-unit id="Word">
+        <source>Word</source>
+        <target>Slovo</target>
+      </trans-unit>
+      <trans-unit id="Buy with Credit Card">
+        <source>Buy with Credit Card</source>
+        <target></target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

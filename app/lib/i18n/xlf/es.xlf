@@ -1,0 +1,912 @@
+<xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="es.json" datatype="plaintext" source-language="en" target-language="es">
+    <body>
+      <trans-unit id="Back to coin">
+        <source>Back to coin</source>
+        <target>Volver a la Coin</target>
+      </trans-unit>
+      <trans-unit id="Create new wallet">
+        <source>Create new wallet</source>
+        <target>Crear un nuevo monedero</target>
+      </trans-unit>
+      <trans-unit id="Open existing wallet">
+        <source>Open existing wallet</source>
+        <target>Abrir monedero actual</target>
+      </trans-unit>
+      <trans-unit id="We are about to generate your very own passphrase">
+        <source>We're about to generate your very own passphrase</source>
+        <target>A punto de generar su propio passphrase</target>
+      </trans-unit>
+      <trans-unit id="This keeps your account secure, and lets you open your wallet on multiple devices.">
+        <source>This keeps your account secure, and lets you open your wallet on multiple devices.</source>
+        <target>Esto mantiene su cuenta segura, y le permite abrir su monedero en diferentes dispositivos.</target>
+      </trans-unit>
+      <trans-unit id="It is very important you write this down.">
+        <source>It's very important you write this down.</source>
+        <target>Es muy importante que escriba esto.</target>
+      </trans-unit>
+      <trans-unit id="Generate passphrase">
+        <source>Generate passphrase</source>
+        <target>Generar passphrase</target>
+      </trans-unit>
+      <trans-unit id="Go back">
+        <source>Go back</source>
+        <target>Volver atrás</target>
+      </trans-unit>
+      <trans-unit id="Generating">
+        <source>Generating</source>
+        <target>Generando</target>
+      </trans-unit>
+      <trans-unit id="Synchronizing Wallet">
+        <source>Synchronizing Wallet</source>
+        <target>Sincronizando Monedero</target>
+      </trans-unit>
+      <trans-unit id="Your passphrase (12 words)">
+        <source>Your passphrase (12 words)</source>
+        <target>Su passphrase (12 palabras)</target>
+      </trans-unit>
+      <trans-unit id="Your passphrase will not be shown again.">
+        <source>Your passphrase will not be shown again.</source>
+        <target>Su passphrase no volverá ser mostrada.</target>
+      </trans-unit>
+      <trans-unit id="Without it you will lose access to your wallet.">
+        <source>Without it you will lose access to your wallet.</source>
+        <target>Sin ella, perderá el acceso a su monedero.</target>
+      </trans-unit>
+      <trans-unit id="I have written down or otherwise securely stored my passphrase">
+        <source>I have written down or otherwise securely stored my passphrase</source>
+        <target>He escrito o guardado de forma segura mi passphrase</target>
+      </trans-unit>
+      <trans-unit id="Open wallet">
+        <source>Open wallet</source>
+        <target>Abrir monedero</target>
+      </trans-unit>
+      <trans-unit id="Checking passphrase">
+        <source>Checking passphrase</source>
+        <target>Revisando passphrase</target>
+      </trans-unit>
+      <trans-unit id="Enter Passphrase">
+        <source>Enter Passphrase</source>
+        <target>Introduce passphrase</target>
+      </trans-unit>
+      <trans-unit id="Invalid passphrase">
+        <source>Invalid passphrase</source>
+        <target>Passphrase inválido</target>
+      </trans-unit>
+      <trans-unit id="Enter your PIN">
+        <source>Enter your PIN</source>
+        <target>Introduce su PIN</target>
+      </trans-unit>
+      <trans-unit id="Set a PIN for quick access">
+        <source>Set a PIN for quick access</source>
+        <target>Elige un PIN para acceso rápido</target>
+      </trans-unit>
+      <trans-unit id="Review passphrase again">
+        <source>Review passphrase again</source>
+        <target>Revisa su passphrase de nuevo</target>
+      </trans-unit>
+      <trans-unit id="Open a different wallet">
+        <source>Open a different wallet</source>
+        <target>Abrir un monedero diferente</target>
+      </trans-unit>
+      <trans-unit id="PIN must be a 4-digit number">
+        <source>PIN must be a 4-digit number</source>
+        <target>El pin debe ser un número de 4 dígitos</target>
+      </trans-unit>
+      <trans-unit id="Verifying PIN">
+        <source>Verifying PIN</source>
+        <target>Verificando PIN</target>
+      </trans-unit>
+      <trans-unit id="Setting PIN">
+        <source>Setting PIN</source>
+        <target>Configurando PIN</target>
+      </trans-unit>
+      <trans-unit id="This might take some time,">
+        <source>This might take some time,</source>
+        <target>Esto podría tomar un poco de tiempo,</target>
+      </trans-unit>
+      <trans-unit id="please be patient.">
+        <source>please be patient.</source>
+        <target>paciencia por favor.</target>
+      </trans-unit>
+      <trans-unit id="Your PIN is incorrect">
+        <source>Your PIN is incorrect</source>
+        <target>Su PIN es incorrecto</target>
+      </trans-unit>
+      <trans-unit id="Request timeout. Please check your internet connection.">
+        <source>Request timeout. Please check your internet connection.</source>
+        <target>Solicitud se ha expirado. Revise su conexión de internet.</target>
+      </trans-unit>
+      <trans-unit id="Could not save your details">
+        <source>Could not save your details</source>
+        <target>No se han podido guardar sus datos</target>
+      </trans-unit>
+      <trans-unit id="We could not connect you to Mecto, please check your internet connection.">
+        <source>We couldn't connect you to Mecto, please check your internet connection.</source>
+        <target>No hemos podido conectarlo con Mecto, por favor revise su conexión de internet.</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid address to send to">
+        <source>Please enter a valid address to send to</source>
+        <target>Por favor introduce una dirección válida para enviar</target>
+      </trans-unit>
+      <trans-unit id="Please enter an amount above">
+        <source>Please enter an amount above %(dust)s</source>
+        <target>Por favor entre una cantidad %(dust)s</target>
+      </trans-unit>
+      <trans-unit id="Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.">
+        <source>Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.</source>
+        <target>Algunos fondos temporalmente no están disponibles. Para poder enviar esta transacción deberá esperar a que se confirmen las pendientes transacciones primero.</target>
+      </trans-unit>
+      <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
+        <source>It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>Pareciera que está tratando de vaciar su monedero. Contando encuentra la comisión de la transacción, calculamos que la cantidad máxima que puede enviar es %(sendableBalance)s. Hemos puesto el valor en la casilla para usted.</target>
+      </trans-unit>
+      <trans-unit id="You do not have enough funds in your wallet (incl. fee)">
+        <source>You don't have enough funds in your wallet (incl. fee)</source>
+        <target>No tiene suficiente fondos en su monedero (incl. pago)</target>
+      </trans-unit>
+      <trans-unit id="A name is required to set your profile on Coin">
+        <source>A name is required to set your profile on Coin</source>
+        <target>Se require un nombre para crear su perfil en Coin</target>
+      </trans-unit>
+      <trans-unit id="Uh Oh...">
+        <source>Uh Oh...</source>
+        <target>Algo ha salido mal...</target>
+      </trans-unit>
+      <trans-unit id="Whoops!">
+        <source>Whoops!</source>
+        <target>¡oh..oh!</target>
+      </trans-unit>
+      <trans-unit id="Just saying...">
+        <source>Just saying...</source>
+        <target>Sólo digo...</target>
+      </trans-unit>
+      <trans-unit id="Your browser does not support geolocation">
+        <source>Your browser does not support geolocation</source>
+        <target>Tu navegador no sostiene geolocalización</target>
+      </trans-unit>
+      <trans-unit id="Unable to retrieve your location">
+        <source>Unable to retrieve your location</source>
+        <target>No podemos obtener su ubicación</target>
+      </trans-unit>
+      <trans-unit id="Without a name, the payer would not be able to identify you on Mecto.">
+        <source>Without a name, the payer wouldn't be able to identify you on Mecto.</source>
+        <target>Sin un nombre, el pagador no podría reconocerlo en Mecto</target>
+      </trans-unit>
+      <trans-unit id="Change your details">
+        <source>Change your details</source>
+        <target>Cambie sus preferencias</target>
+      </trans-unit>
+      <trans-unit id="Your username">
+        <source>Your username</source>
+        <target>Nombre de usuario</target>
+      </trans-unit>
+      <trans-unit id="Gravatar email">
+        <source>Gravatar email</source>
+        <target>Email de gravatar</target>
+      </trans-unit>
+      <trans-unit id="Submit">
+        <source>Submit</source>
+        <target>Enviar</target>
+      </trans-unit>
+      <trans-unit id="Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.">
+        <source>Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.</source>
+        <target>Gravatar (globally recognised avatar) es un servicio que le permite reutilizar el mismo avatar en una multitud de páginas web y aplicaciones especificando un correo electrónico.</target>
+      </trans-unit>
+      <trans-unit id="Create a gravatar">
+        <source>Create a gravatar</source>
+        <target>Crear un gravatar</target>
+      </trans-unit>
+      <trans-unit id="Logout">
+        <source>Logout</source>
+        <target>Cerrar sesión</target>
+      </trans-unit>
+      <trans-unit id="Support">
+        <source>Support</source>
+        <target>Apoyo</target>
+      </trans-unit>
+      <trans-unit id="Send">
+        <source>Send</source>
+        <target>Enviar</target>
+      </trans-unit>
+      <trans-unit id="Receive">
+        <source>Receive</source>
+        <target>Recibir</target>
+      </trans-unit>
+      <trans-unit id="History">
+        <source>History</source>
+        <target>Historial</target>
+      </trans-unit>
+      <trans-unit id="Tokens">
+        <source>Tokens</source>
+        <target>Tokens</target>
+      </trans-unit>
+      <trans-unit id="Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.">
+        <source>Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.</source>
+        <target>El Mecto  le permite transmitir su monedero a otros usuarios de Coin cercanos comparando los datos del GPS. Los datos son borrados una vez que cierra Mecto.</target>
+      </trans-unit>
+      <trans-unit id="Before you start using Mecto, you need to enter a name that will help others identify you.">
+        <source>Before you start using Mecto, you need to enter a name that will help others identify you.</source>
+        <target>Antes de empezar a usar Mecto, necesita un nombre para ayudar a los demás a identificarlo.</target>
+      </trans-unit>
+      <trans-unit id="Save">
+        <source>Save</source>
+        <target>Guardar</target>
+      </trans-unit>
+      <trans-unit id="Loading transactions...">
+        <source>Loading transactions...</source>
+        <target>Cargando transaciónes...</target>
+      </trans-unit>
+      <trans-unit id="Your transaction history">
+        <source>Your transaction history</source>
+        <target>Su historial de transacciones</target>
+      </trans-unit>
+      <trans-unit id="pending confirmation">
+        <source>pending confirmation</source>
+        <target>aprobación pendiente</target>
+      </trans-unit>
+      <trans-unit id="Received">
+        <source>Received</source>
+        <target>Recibido</target>
+      </trans-unit>
+      <trans-unit id="You do not have any transactions yet">
+        <source>You don't have any transactions yet</source>
+        <target>No tiene ninguna transacciones aún</target>
+      </trans-unit>
+      <trans-unit id="Transaction Id:">
+        <source>Transaction Id:</source>
+        <target>Id de la transacción:</target>
+      </trans-unit>
+      <trans-unit id="Transaction Fee:">
+        <source>Transaction Fee:</source>
+        <target>Pago de transacciones:</target>
+      </trans-unit>
+      <trans-unit id="Inputs:">
+        <source>Inputs:</source>
+        <target>Inputs:</target>
+      </trans-unit>
+      <trans-unit id="Outputs:">
+        <source>Outputs:</source>
+        <target>Outputs:</target>
+      </trans-unit>
+      <trans-unit id="Your wallet address">
+        <source>Your wallet address</source>
+        <target>Su dirección de monedero</target>
+      </trans-unit>
+      <trans-unit id="Mecto">
+        <source>Mecto</source>
+        <target>Mecto</target>
+      </trans-unit>
+      <trans-unit id="Turn Mecto on">
+        <source>Turn Mecto on</source>
+        <target>Abrir Mecto</target>
+      </trans-unit>
+      <trans-unit id="Turn Mecto off">
+        <source>Turn Mecto off</source>
+        <target>Cerrar Mecto</target>
+      </trans-unit>
+      <trans-unit id="Checking your location">
+        <source>Checking your location</source>
+        <target>Comprobando su ubicación</target>
+      </trans-unit>
+      <trans-unit id="Broadcasting your location...">
+        <source>Broadcasting your location...</source>
+        <target>Difundiendo su ubicación...</target>
+      </trans-unit>
+      <trans-unit id="Wallet address">
+        <source>Wallet address</source>
+        <target>Dirección de monedero</target>
+      </trans-unit>
+      <trans-unit id="Amount">
+        <source>Amount</source>
+        <target>Cantidad</target>
+      </trans-unit>
+      <trans-unit id="Confirm">
+        <source>Confirm</source>
+        <target>Confirmar</target>
+      </trans-unit>
+      <trans-unit id="No Coin users found nearby">
+        <source>No Coin users found nearby</source>
+        <target>No se han encontrado usuarios de Coin cerca</target>
+      </trans-unit>
+      <trans-unit id="Search Again">
+        <source>Search Again</source>
+        <target>Buscando de nuevo</target>
+      </trans-unit>
+      <trans-unit id="Searching...">
+        <source>Searching...</source>
+        <target>Buscando...</target>
+      </trans-unit>
+      <trans-unit id="Searching your area for other Coin users">
+        <source>Searching your area for other Coin users</source>
+        <target>Buscando en su área otros usuarios de Coin</target>
+      </trans-unit>
+      <trans-unit id="Confirm transaction">
+        <source>Confirm transaction</source>
+        <target>Confirmar transacción</target>
+      </trans-unit>
+      <trans-unit id="transaction fee">
+        <source>transaction fee</source>
+        <target>tarifa de transacción</target>
+      </trans-unit>
+      <trans-unit id="Cancel">
+        <source>Cancel</source>
+        <target>Cancelar</target>
+      </trans-unit>
+      <trans-unit id="Transaction Successful">
+        <source>Transaction Successful</source>
+        <target>Transacción exitosa</target>
+      </trans-unit>
+      <trans-unit id="Your transaction will appear in your history tab shortly.">
+        <source>Your transaction will appear in your history tab shortly.</source>
+        <target>Su transacción aparecerá en la pestaña del historial pronto.</target>
+      </trans-unit>
+      <trans-unit id="Close">
+        <source>Close</source>
+        <target>Cerrar</target>
+      </trans-unit>
+      <trans-unit id="Transaction Failed">
+        <source>Transaction Failed</source>
+        <target>Transacción fallida</target>
+      </trans-unit>
+      <trans-unit id="Failed">
+        <source>Failed</source>
+        <target>Fallida</target>
+      </trans-unit>
+      <trans-unit id="Sorry, Coin Wallet did not load.">
+        <source>Sorry, Coin Wallet didn't load.</source>
+        <target>Disculpe, Coin Wallet no cargó.</target>
+      </trans-unit>
+      <trans-unit id="Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.">
+        <source>Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.</source>
+        <target>Intente de actualizar su navegador, o cambiense del modo de navegación privado. Si todo falla, descarga Chrome para su dispositivo.</target>
+      </trans-unit>
+      <trans-unit id="Current coin price">
+        <source>Current coin price</source>
+        <target>Precio actual de coin</target>
+      </trans-unit>
+      <trans-unit id="Username not available">
+        <source>Username not available</source>
+        <target>Nombre de usuario no está disponible</target>
+      </trans-unit>
+      <trans-unit id="Scan your fingerprint please">
+        <source>Scan your fingerprint please</source>
+        <target>Escanee su huella digital por favor</target>
+      </trans-unit>
+      <trans-unit id="Enter PIN">
+        <source>Enter PIN</source>
+        <target>Introduzca PIN</target>
+      </trans-unit>
+      <trans-unit id="I Agree To The Terms &amp; Conditions">
+        <source>I Agree To The Terms &amp; Conditions</source>
+        <target>Acepto términos y condiciones</target>
+      </trans-unit>
+      <trans-unit id="Terms of Use">
+        <source>Terms of Use</source>
+        <target>Términos de uso</target>
+      </trans-unit>
+      <trans-unit id="Unparsed address">
+        <source>Unparsed address</source>
+        <target>Unparsed address</target>
+      </trans-unit>
+      <trans-unit id="Exchange">
+        <source>Exchange</source>
+        <target>Intercambio</target>
+      </trans-unit>
+      <trans-unit id="From">
+        <source>From</source>
+        <target>De</target>
+      </trans-unit>
+      <trans-unit id="To">
+        <source>To</source>
+        <target>Para</target>
+      </trans-unit>
+      <trans-unit id="Exchange rate">
+        <source>Exchange rate</source>
+        <target>Tasa de cambio</target>
+      </trans-unit>
+      <trans-unit id="Loading...">
+        <source>Loading...</source>
+        <target>Cargando...</target>
+      </trans-unit>
+      <trans-unit id="Address">
+        <source>Address</source>
+        <target>Dirección</target>
+      </trans-unit>
+      <trans-unit id="Return address (optional)">
+        <source>Return address (optional)</source>
+        <target>Dirección de retorno (opcional)</target>
+      </trans-unit>
+      <trans-unit id="Deposit address">
+        <source>Deposit address (%(symbol)s)</source>
+        <target>Dirección de depósito (%(symbol)s)</target>
+      </trans-unit>
+      <trans-unit id="Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
+        <source>Send up to %(depositMax)s %(depositSymbol)s to deposit address.
+It will be converted into %(toSymbol)s, and sent to
+ %(toAddress)s</source>
+        <target>Mandar hasta %(depositMax)s %(depositSymbol)s dirección de depósito.
+Será cambiado a %(toSymbol)s, y mandado ha
+ %(toAddress)s</target>
+      </trans-unit>
+      <trans-unit id="Deposit minimum">
+        <source>Deposit minimum</source>
+        <target>Minimo deposito</target>
+      </trans-unit>
+      <trans-unit id="amount :toSymbol have been delivered to :toAddress">
+        <source>%(amount)s %(toSymbol)s have been delivered to
+ %(toAddress)s</source>
+        <target>%(amount)s %(toSymbol)s ha sido entregado a
+ %(toAddress)s</target>
+      </trans-unit>
+      <trans-unit id="Back">
+        <source>Back</source>
+        <target>Regresar</target>
+      </trans-unit>
+      <trans-unit id="Awaiting deposit...">
+        <source>Awaiting deposit...</source>
+        <target>Esperando depósito ...</target>
+      </trans-unit>
+      <trans-unit id="Deposit has been received">
+        <source>Deposit has been received</source>
+        <target>Depósito han sido recibido</target>
+      </trans-unit>
+      <trans-unit id="Awaiting exchange...">
+        <source>Awaiting exchange...</source>
+        <target>Esperando intercambio...</target>
+      </trans-unit>
+      <trans-unit id="Exchange complete!">
+        <source>Exchange complete!</source>
+        <target>¡intercambio realizado</target>
+      </trans-unit>
+      <trans-unit id="Done">
+        <source>Done</source>
+        <target>Terminado</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid return address">
+        <source>Please enter a valid return address</source>
+        <target>Por favor de una dirección de retorno válida</target>
+      </trans-unit>
+      <trans-unit id="Miner fee">
+        <source>Miner fee</source>
+        <target>Tarifa de minero</target>
+      </trans-unit>
+      <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
+        <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
+        <target>Dirección de retorno debería ser una dirección controlada por usted donde el depósito será devuelto en caso de una transacción fracasada.</target>
+      </trans-unit>
+      <trans-unit id="Remove account">
+        <source>Remove account</source>
+        <target>Remover cuenta</target>
+      </trans-unit>
+      <trans-unit id="Remove">
+        <source>Remove</source>
+        <target>Remover</target>
+      </trans-unit>
+      <trans-unit id="Are you sure?">
+        <source>Are you sure?</source>
+        <target>¿ Está serguro?</target>
+      </trans-unit>
+      <trans-unit id="Account has been successfully removed">
+        <source>Account has been successfully removed</source>
+        <target>La cuenta ha sido eliminada exitosamente</target>
+      </trans-unit>
+      <trans-unit id="This page will be reloaded shortly.">
+        <source>This page will be reloaded shortly.</source>
+        <target>Esta página será recargada en breve.</target>
+      </trans-unit>
+      <trans-unit id="About">
+        <source>About</source>
+        <target>Acerca de</target>
+      </trans-unit>
+      <trans-unit id="Release information">
+        <source>Release information</source>
+        <target>Información de liberación</target>
+      </trans-unit>
+      <trans-unit id="Version">
+        <source>Version</source>
+        <target>Versión</target>
+      </trans-unit>
+      <trans-unit id="Transfer paper wallet / private key">
+        <source>Transfer paper wallet / private key</source>
+        <target>Transferencia de monedero de papel/ clave privada</target>
+      </trans-unit>
+      <trans-unit id="Export private keys">
+        <source>Export private keys</source>
+        <target>Exportar clave privada</target>
+      </trans-unit>
+      <trans-unit id="Transfer private key">
+        <source>Transfer private key</source>
+        <target>Transferir clave privada</target>
+      </trans-unit>
+      <trans-unit id="Transfer">
+        <source>Transfer</source>
+        <target>Transferir</target>
+      </trans-unit>
+      <trans-unit id="Private key">
+        <source>Private key</source>
+        <target>Clave privada</target>
+      </trans-unit>
+      <trans-unit id="This will transfer all coins from the paper wallet address to your wallet.">
+        <source>This will transfer all coins from the paper wallet address to your wallet.</source>
+        <target>Esto transferirá todas las monedas de la dirección del monedero de papel a su monedero .</target>
+      </trans-unit>
+      <trans-unit id="This private key has no coins for transfer.">
+        <source>This private key has no coins for transfer.</source>
+        <target>Esta clave privada no tiene monedas para transferir.</target>
+      </trans-unit>
+      <trans-unit id="Invalid private key">
+        <source>Invalid private key</source>
+        <target>Invalida clave privada</target>
+      </trans-unit>
+      <trans-unit id="Insufficient funds">
+        <source>Insufficient funds</source>
+        <target>Fondos insuficiente</target>
+      </trans-unit>
+      <trans-unit id="Warning!">
+        <source>Warning!</source>
+        <target>¡advertencia!</target>
+      </trans-unit>
+      <trans-unit id="Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you&apos;d like them to have access to your funds.">
+        <source>Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you'd like them to have access to your funds.</source>
+        <target>Sus claves privadas son claves a su fondos NO COMPARTIRLOS con nadie al menos que usted le quisiera que tuviera acceso a sus fondos.</target>
+      </trans-unit>
+      <trans-unit id="Show">
+        <source>Show</source>
+        <target>Mostar</target>
+      </trans-unit>
+      <trans-unit id="Comma-separated list">
+        <source>Comma-separated list</source>
+        <target>Comma-separated list</target>
+      </trans-unit>
+      <trans-unit id="Your wallet has no private keys with coins for export.">
+        <source>Your wallet has no private keys with coins for export.</source>
+        <target>Su monedero no tiene clave privada para exportar.</target>
+      </trans-unit>
+      <trans-unit id="Add Token">
+        <source>Add Token</source>
+        <target>Añdir Token</target>
+      </trans-unit>
+      <trans-unit id="Gas limit">
+        <source>Gas limit</source>
+        <target>Límite de gas</target>
+      </trans-unit>
+      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.">
+        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.</source>
+        <target>Limite de gas es el monto de gas para mandar con su transacción. Aumentar el número no confirmará la transacción más rápido. Mandando ETH es igual a 21000. Mandando Token es igual alrededor de 200000. </target>
+      </trans-unit>
+      <trans-unit id="Contract address">
+        <source>Contract address</source>
+        <target>Direcion de contrato</target>
+      </trans-unit>
+      <trans-unit id="Add">
+        <source>Add</source>
+        <target>Añadir</target>
+      </trans-unit>
+      <trans-unit id="Symbol">
+        <source>Symbol</source>
+        <target>Simbolo</target>
+      </trans-unit>
+      <trans-unit id="Decimals">
+        <source>Decimals</source>
+        <target>Decimales</target>
+      </trans-unit>
+      <trans-unit id="Token">
+        <source>Token</source>
+        <target>Token</target>
+      </trans-unit>
+      <trans-unit id="Custom token">
+        <source>Custom token</source>
+        <target>Token personalizado</target>
+      </trans-unit>
+      <trans-unit id="Please fill out all fields.">
+        <source>Please fill out all fields.</source>
+        <target>Por favor llene todos los campos.</target>
+      </trans-unit>
+      <trans-unit id="Please enter Gas Limit greater than zero">
+        <source>Please enter Gas Limit greater than zero</source>
+        <target>Por favor ingrese un límite de gas mayor que cero</target>
+      </trans-unit>
+      <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
+        <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
+        <target>Usted no tiene suficiente Ethereum fondos para pagar la tarifa de transacción. (%(ethereumRequired)s ETH).</target>
+      </trans-unit>
+      <trans-unit id="Click to Select">
+        <source>Click to Select</source>
+        <target>Clic para seleccionar</target>
+      </trans-unit>
+      <trans-unit id="Copy to Clipboard">
+        <source>Copy to Clipboard</source>
+        <target>Copiar al portapapeles</target>
+      </trans-unit>
+      <trans-unit id="Copied!">
+        <source>Copied!</source>
+        <target>Copiado!</target>
+      </trans-unit>
+      <trans-unit id="Please enter an address other than your wallet address">
+        <source>Please enter an address other than your wallet address</source>
+        <target>Por favor ingrese una dirección que no sea su monedero</target>
+      </trans-unit>
+      <trans-unit id="Please enter a private key other than your wallet private key">
+        <source>Please enter a private key other than your wallet private key</source>
+        <target>Por favor ingrese una clave privada que no sea la clave privada de su monedero</target>
+      </trans-unit>
+      <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
+        <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(denomination)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>Parece que estás intentando vaciar su monedero. Teniendo en cuenta la tarifa de transacción y la reserva mínima (%(minReserve)s %(denomination)s), estimamos que la cantidad máxima que puede enviar es %(sendableBalance)s. Hemos modificado el valor en el campo de importe para usted.</target>
+      </trans-unit>
+      <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :denomination) to your wallet address.">
+        <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(denomination)s) to your wallet address.</source>
+        <target>Su monedero no está activado. Para activarlo, por fsvor envíe una reserva mayor que la mínima (%(minReserve)s %(denomination)s) a la dirección de su monedero.</target>
+      </trans-unit>
+      <trans-unit id="Load more">
+        <source>Load more</source>
+        <target>Cargue más</target>
+      </trans-unit>
+      <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
+        <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
+        <target>El monedero del destinatario no está activado. Solo puede enviar una cantidad mayor a %(minReserve)s %(denomination)s.</target>
+      </trans-unit>
+      <trans-unit id="Destination tag">
+        <source>Destination tag</source>
+        <target>Etiqueta de destino</target>
+      </trans-unit>
+      <trans-unit id="Invoice ID">
+        <source>Invoice ID</source>
+        <target>ID de factura</target>
+      </trans-unit>
+      <trans-unit id="(optional)">
+        <source>(optional)</source>
+        <target>(opcional)</target>
+      </trans-unit>
+      <trans-unit id="An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.">
+        <source>An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.</source>
+        <target>Un entero de 32 bits sin signo arbitrario que identifica una razón de pago o una cuenta que no es Ripple.</target>
+      </trans-unit>
+      <trans-unit id="A 256-bit hash that can be used to identify a particular payment.">
+        <source>A 256-bit hash that can be used to identify a particular payment.</source>
+        <target>Un hash de 256 bits que se puede utilizar para identificar un pago en particular.</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid invoice ID">
+        <source>Please enter a valid invoice ID</source>
+        <target>Por favor, introduzca un ID de factura válida</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid destination tag">
+        <source>Please enter a valid destination tag</source>
+        <target>Por favor ingrese una etiqueta de destino válida</target>
+      </trans-unit>
+      <trans-unit id="Exchange is currently unavailable for this pair">
+        <source>Exchange is currently unavailable for this pair</source>
+        <target>El intercambio no está disponible actualmente para este par.</target>
+      </trans-unit>
+      <trans-unit id="Payment operations:">
+        <source>Payment operations:</source>
+        <target>Operaciones de pago:</target>
+      </trans-unit>
+      <trans-unit id="Pay (:amount) XLM to :destination">
+        <source>Pay %(amount)s XLM to %(destination)s</source>
+        <target>Pago %(amount)s XLM a %(destination)s</target>
+      </trans-unit>
+      <trans-unit id="Created Account :destination with balance :amount XLM">
+        <source>Created Account %(destination)s with balance %(amount)s XLM</source>
+        <target>Cuenta creada %(destination)s con saldo %(amount)s XLM</target>
+      </trans-unit>
+      <trans-unit id="Memo">
+        <source>Memo</source>
+        <target>Memorándum</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid memo">
+        <source>Please enter a valid memo</source>
+        <target>Por favor ingrese un memorándum válido</target>
+      </trans-unit>
+      <trans-unit id="The memo contains optional extra information. A string up to 28-bytes long.">
+        <source>The memo contains optional extra information. A string up to 28-bytes long.</source>
+        <target>El memorándum contiene información adicional opcional. Una cadena de hasta 28 bytes de largo.</target>
+      </trans-unit>
+      <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :denomination.">
+        <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(denomination)s.</source>
+        <target>Su monedero no está activado. Solo puede recibir una cantidad mayor de %(minReserve)s %(denomination)s.</target>
+      </trans-unit>
+      <trans-unit id="Privacy Policy">
+        <source>Privacy Policy</source>
+        <target>Póliza de privacidad</target>
+      </trans-unit>
+      <trans-unit id="Your ShapeShift account is not verified.">
+        <source>Your ShapeShift account is not verified.</source>
+        <target>Su cuenta ShapeShift no está verificada.</target>
+      </trans-unit>
+      <trans-unit id="Complete verification">
+        <source>Complete verification</source>
+        <target>Verificación completa</target>
+      </trans-unit>
+      <trans-unit id="Try to sign in again">
+        <source>Try to sign in again</source>
+        <target>Intenta iniciar sesión de nuevo</target>
+      </trans-unit>
+      <trans-unit id="Sign in">
+        <source>Sign in</source>
+        <target>Registrarse</target>
+      </trans-unit>
+      <trans-unit id="Setup EOS account">
+        <source>Setup EOS account</source>
+        <target>Configurar cuenta EOS</target>
+      </trans-unit>
+      <trans-unit id="Account name">
+        <source>Account name</source>
+        <target>Nombre de cuenta</target>
+      </trans-unit>
+      <trans-unit id="The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.">
+        <source>The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.</source>
+        <target>El nombre de la cuenta EOS debe tener exactamente 12 caracteres de largo y consiste de letras minúsculas y dígitos del 1 al 5</target>
+      </trans-unit>
+      <trans-unit id="Invalid account name">
+        <source>Invalid account name</source>
+        <target>Nombre de cuenta inválido</target>
+      </trans-unit>
+      <trans-unit id="This account name is already taken, please choose another one.">
+        <source>This account name is already taken, please choose another one.</source>
+        <target>Este nombre de cuenta ya está en uso, por favor elija otro.</target>
+      </trans-unit>
+      <trans-unit id="To create a new account you need to make an EOS transfer (amount greater than :minAmount) with the following data from an exchange or other EOS wallet.">
+        <source>To create a new account you need to make an EOS transfer (amount greater than %(minAmount)s) with the following data from an exchange or other EOS wallet.</source>
+        <target>Para crear una nueva cuenta, debe realizar una transferencia de EOS (cantidad mayor que %(minAmount)s) con los siguientes datos de una bolsa u otro monedero de EOS.</target>
+      </trans-unit>
+      <trans-unit id="Check">
+        <source>Check</source>
+        <target>Revisar</target>
+      </trans-unit>
+      <trans-unit id="Account has been successfully set up">
+        <source>Account has been successfully set up</source>
+        <target>La cuenta se ha configurado correctamente.</target>
+      </trans-unit>
+      <trans-unit id="The memo contains optional extra information. A string up to 256-bytes long.">
+        <source>The memo contains optional extra information. A string up to 256-bytes long.</source>
+        <target>El memorándum contiene información adicional opcional. Una cadena de hasta 256 bytes de largo.</target>
+      </trans-unit>
+      <trans-unit id="It seems like you are trying to empty your wallet. Max amount you can send is. We have amended the value in the amount field for you">
+        <source>It seems like you are trying to empty your wallet. Max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>Parece que estás intentando vaciar su billetera. La cantidad máxima que puedes enviar es %(sendableBalance)s. Hemos modificado el valor en la cantidad de campo para usted.</target>
+      </trans-unit>
+      <trans-unit id="Destination account doesn&apos;t exist.">
+        <source>Destination account doesn't exist.</source>
+        <target>La cuenta de destino no existe.</target>
+      </trans-unit>
+      <trans-unit id="Transaction has been expired. Please try again.">
+        <source>Transaction has been expired. Please try again.</source>
+        <target>La transacción ha expirado. Por favor Inténtelo de nuevo.</target>
+      </trans-unit>
+      <trans-unit id="Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.">
+        <source>Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.</source>
+        <target>El uso de la CPU de la cuenta se ha excedido. Por favor, inténtelo de nuevo más tarde o pídale a alguien que le dé más CPU.</target>
+      </trans-unit>
+      <trans-unit id="Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.">
+        <source>Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.</source>
+        <target>Se ha excedido el uso de la cuenta NET. Por favor, inténtalo de nuevo más tarde o pídale a alguien que le dé más NET</target>
+      </trans-unit>
+      <trans-unit id="The extra amount will be deposited to the created account.">
+        <source>The extra amount will be deposited to the created account.</source>
+        <target>La cantidad extra será depositada en la cuenta creada.</target>
+      </trans-unit>
+      <trans-unit id="Can&apos;t connect to :network node. Please try again later or choose another token.">
+        <source>Can't connect to %(network)s node. Please try again later or choose another token.</source>
+        <target>No se puede conectar al nodo bitcoin %(network)s. Inténtelo de nuevo más tarde o elija otro token.</target>
+      </trans-unit>
+      <trans-unit id="Network node error. Please try again later.">
+        <source>%(network)s node error. Please try again later.</source>
+        <target>Error de nodo de %(network)s. Por favor, inténtelo de nuevo más tarde.</target>
+      </trans-unit>
+      <trans-unit id="Choose exchange">
+        <source>Choose exchange</source>
+        <target>Elegir intercambio</target>
+      </trans-unit>
+      <trans-unit id="Next step">
+        <source>Next step</source>
+        <target>Proximo paso</target>
+      </trans-unit>
+      <trans-unit id="Minimum amount:">
+        <source>Minimum amount:</source>
+        <target>Monto minimo:</target>
+      </trans-unit>
+      <trans-unit id="address">
+        <source>address</source>
+        <target>Dirección</target>
+      </trans-unit>
+      <trans-unit id="Exchange error">
+        <source>Exchange error</source>
+        <target>Error de intercambio</target>
+      </trans-unit>
+      <trans-unit id="Transaction not found">
+        <source>Transaction not found</source>
+        <target>Transacción no encontrada</target>
+      </trans-unit>
+      <trans-unit id="Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
+        <source>Send %(depositAmount)s %(depositSymbol)s to deposit address.
+It will be converted into %(toSymbol)s, and sent to
+ %(toAddress)s</source>
+        <target>Enviar %(depositAmount)s %(depositSymbol)s la dirección de depósito.
+Se convertirá %(toSymbol)s y se enviará a
+ %(toAddress)s</target>
+      </trans-unit>
+      <trans-unit id="Network fee">
+        <source>Network fee</source>
+        <target>Tarifa de red</target>
+      </trans-unit>
+      <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
+        <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
+        <target>Tiene 36 horas para enviar fondos, de lo contrario, la transacción se cancelará automáticamente.</target>
+      </trans-unit>
+      <trans-unit id="Extra Id">
+        <source>Extra Id</source>
+        <target>Id adicional</target>
+      </trans-unit>
+      <trans-unit id="Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).">
+        <source>Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).</source>
+        <target>Propiedad para direcciones de monedas que usan ID adicionales para el procesamiento de transacciones (por ejemplo, etiqueta de destino, nota o mensaje).</target>
+      </trans-unit>
+      <trans-unit id="Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.">
+        <source>Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.</source>
+        <target>La tarifa de la red es fija y se toma cada vez que se envía dinero. Cada moneda tiene una cantidad estricta tomada por las operaciones. Esta tarifa se toma una vez que sus fondos están incluidos en una cadena de bloques.</target>
+      </trans-unit>
+      <trans-unit id="On hold...">
+        <source>On hold...</source>
+        <target>Espere un momento...</target>
+      </trans-unit>
+      <trans-unit id="Currently, your transaction (ID: :id) is on hold.&lt;br&gt;Please, contact Changelly to pass KYC.">
+        <source>Currently, your transaction (ID: %(id)s) is on hold.&lt;br&gt;Please, contact Changelly to pass KYC.</source>
+        <target>Actualmente, su transacción (ID: %(id)s) está en espera.&lt;br&gt; Por favor, póngase en contacto con Changelly para pasar/aprobar KYC.</target>
+      </trans-unit>
+      <trans-unit id="Transaction (ID: :id) has failed. Please, contact Changelly.">
+        <source>Transaction (ID: %(id)s) has failed. Please, contact Changelly.</source>
+        <target>La transacción (ID: %(id)s) ha fallado. Por favor, póngase en contacto con Changelly.</target>
+      </trans-unit>
+      <trans-unit id="Exchange failed and coins were refunded to :address.">
+        <source>Exchange failed and coins were refunded to %(address)s.</source>
+        <target>El intercambio falló y las monedas fueron devueltas a %(address)s.</target>
+      </trans-unit>
+      <trans-unit id="Payment wasn&apos;t received since 36 hours since the transaction was created.">
+        <source>Payment wasn't received since 36 hours since the transaction was created.</source>
+        <target>El pago no se ha recibido desde hace 36 horas desde que se creó la transacción.</target>
+      </trans-unit>
+      <trans-unit id="Terms of Service">
+        <source>Terms of Service</source>
+        <target>Términos de servicio</target>
+      </trans-unit>
+      <trans-unit id="Accept">
+        <source>Accept</source>
+        <target>Aceptar</target>
+      </trans-unit>
+      <trans-unit id="Changelly_TOS">
+        <source>I have read and I agree to the Changelly &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;terms of use&lt;/a&gt; and &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;privacy policy&lt;/a&gt;.&lt;br&gt;By clicking "Accept", I acknowledge and understan that my transaction may trigger AML/KYC verification according to &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;Changelly AML/KYC&lt;/a&gt;.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="max.">
+        <source>max.</source>
+        <target>maximo.</target>
+      </trans-unit>
+      <trans-unit id="Fee">
+        <source>Fee</source>
+        <target>tarifa</target>
+      </trans-unit>
+      <trans-unit id="Amount of coins that is charged from your balance for single transaction (&lt;a href=&quot;&quot; onclick=&quot;window.open(&apos;https://www.coin.space/all-about-bitcoin-fees&apos;, &apos;_system&apos;); return false;&quot;&gt;more info&lt;/a&gt;).">
+        <source>Amount of coins that is charged from your balance for single transaction (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;more info&lt;/a&gt;).</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Confirm passphrase">
+        <source>Confirm passphrase</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Almost done! Enter the following words from your passphrase.">
+        <source>Almost done! Enter the following words from your passphrase.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Word">
+        <source>Word</source>
+        <target>Palabra</target>
+      </trans-unit>
+      <trans-unit id="Buy with Credit Card">
+        <source>Buy with Credit Card</source>
+        <target></target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

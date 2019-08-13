@@ -3,10 +3,10 @@
 var translate = require('counterpart')
 
 var languages = [
-  'cs-cz', 'es', 'hu', 'ja', 'pl',
-  'sr', 'zh-cn', 'de', 'fil', 'id',
-  'nb', 'ru', 'th', 'en', 'fr',
-  'it', 'nl', 'sr-latn-rs', 'uk'
+  'cs-cz', 'de', 'en', 'es', 'fil',
+  'fr', 'hu', 'id', 'it', 'ja',
+  'nb', 'nl', 'pl', 'pt-br', 'ru',
+  'th', 'uk', 'zh-cn'
 ]
 
 translate.setSeparator('*')
@@ -32,9 +32,9 @@ function safeTranslate() {
   return translate.apply(null, arguments);
 }
 
-function getLanguage(){
+function getLanguage() {
   var language = navigator.language.toLocaleLowerCase() || 'en'
-  return languages.filter(function(l){
+  return languages.filter(function(l) {
     return language === l || language.substr(0, 2) === l
   })[0] || 'en'
 }

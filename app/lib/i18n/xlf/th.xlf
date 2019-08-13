@@ -1,0 +1,912 @@
+<xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="th.json" datatype="plaintext" source-language="en" target-language="th">
+    <body>
+      <trans-unit id="Back to coin">
+        <source>Back to coin</source>
+        <target>กลับไปที่เหรียญ</target>
+      </trans-unit>
+      <trans-unit id="Create new wallet">
+        <source>Create new wallet</source>
+        <target>สร้างกระเป๋าเงินใหม่</target>
+      </trans-unit>
+      <trans-unit id="Open existing wallet">
+        <source>Open existing wallet</source>
+        <target>เปิดใช้กระเป๋าเงินที่มีอยู่</target>
+      </trans-unit>
+      <trans-unit id="We are about to generate your very own passphrase">
+        <source>We're about to generate your very own passphrase</source>
+        <target>เรากำลังจะสร้างวลีรหัสผ่านของคุณ</target>
+      </trans-unit>
+      <trans-unit id="This keeps your account secure, and lets you open your wallet on multiple devices.">
+        <source>This keeps your account secure, and lets you open your wallet on multiple devices.</source>
+        <target>นี่จะทำให้บัญชีของคุณปลอดภัย และช่วยให้คุณเปิดใช้งานกระเป๋าเงินได้จากอุปกรณ์อื่นๆ </target>
+      </trans-unit>
+      <trans-unit id="It is very important you write this down.">
+        <source>It's very important you write this down.</source>
+        <target>มันสำคัญมากที่คุณจะต้องจดสิ่งนี้ไว้</target>
+      </trans-unit>
+      <trans-unit id="Generate passphrase">
+        <source>Generate passphrase</source>
+        <target>สร้างวลีรหัสผ่าน</target>
+      </trans-unit>
+      <trans-unit id="Go back">
+        <source>Go back</source>
+        <target>กลับ</target>
+      </trans-unit>
+      <trans-unit id="Generating">
+        <source>Generating</source>
+        <target>กำลังสร้าง</target>
+      </trans-unit>
+      <trans-unit id="Synchronizing Wallet">
+        <source>Synchronizing Wallet</source>
+        <target>กระเป๋าเงินร่วม</target>
+      </trans-unit>
+      <trans-unit id="Your passphrase (12 words)">
+        <source>Your passphrase (12 words)</source>
+        <target>วลีรหัสผ่านของคุณ (12 คำ)</target>
+      </trans-unit>
+      <trans-unit id="Your passphrase will not be shown again.">
+        <source>Your passphrase will not be shown again.</source>
+        <target>วลีรหัสผ่านของคุณจะไม่แสดงอีกครั้งนะ</target>
+      </trans-unit>
+      <trans-unit id="Without it you will lose access to your wallet.">
+        <source>Without it you will lose access to your wallet.</source>
+        <target>ถ้าไม่มีสิ่งนี้ คุณจะไม่สามารถใช้งานกระเป๋าเงินได้</target>
+      </trans-unit>
+      <trans-unit id="I have written down or otherwise securely stored my passphrase">
+        <source>I have written down or otherwise securely stored my passphrase</source>
+        <target>ฉันจดหรือเก็บวลีรหัสผ่านของฉันไว้แล้ว</target>
+      </trans-unit>
+      <trans-unit id="Open wallet">
+        <source>Open wallet</source>
+        <target>เปิดใช้งานกระเป๋าเงิน</target>
+      </trans-unit>
+      <trans-unit id="Checking passphrase">
+        <source>Checking passphrase</source>
+        <target>กำลังตรวจสอบวลีรหัสผ่าน</target>
+      </trans-unit>
+      <trans-unit id="Enter Passphrase">
+        <source>Enter Passphrase</source>
+        <target>ใส่วลีรหัสผ่าน</target>
+      </trans-unit>
+      <trans-unit id="Invalid passphrase">
+        <source>Invalid passphrase</source>
+        <target>วลีรหัสผ่านนี้ใช้งานไม่ได้</target>
+      </trans-unit>
+      <trans-unit id="Enter your PIN">
+        <source>Enter your PIN</source>
+        <target>ใส่ PIN</target>
+      </trans-unit>
+      <trans-unit id="Set a PIN for quick access">
+        <source>Set a PIN for quick access</source>
+        <target>ตั้งค่า PIN เพื่อให้เข้าถึงได้อย่างรวดเร็ว</target>
+      </trans-unit>
+      <trans-unit id="Review passphrase again">
+        <source>Review passphrase again</source>
+        <target>ตรวจสอบวลีรหัสผ่านอีกครั้ง</target>
+      </trans-unit>
+      <trans-unit id="Open a different wallet">
+        <source>Open a different wallet</source>
+        <target>เปิดใช้งานกระเป๋าเงินอื่น</target>
+      </trans-unit>
+      <trans-unit id="PIN must be a 4-digit number">
+        <source>PIN must be a 4-digit number</source>
+        <target>PIN ต้องเป็นตัวเลข 4 ตัวเท่านั้น</target>
+      </trans-unit>
+      <trans-unit id="Verifying PIN">
+        <source>Verifying PIN</source>
+        <target>ตรวจสอบ PIN</target>
+      </trans-unit>
+      <trans-unit id="Setting PIN">
+        <source>Setting PIN</source>
+        <target>ตั้งค่า PIN</target>
+      </trans-unit>
+      <trans-unit id="This might take some time,">
+        <source>This might take some time,</source>
+        <target>นี่อาจจะใช้เวลาสักพัก</target>
+      </trans-unit>
+      <trans-unit id="please be patient.">
+        <source>please be patient.</source>
+        <target>กรุณารอสักครู่</target>
+      </trans-unit>
+      <trans-unit id="Your PIN is incorrect">
+        <source>Your PIN is incorrect</source>
+        <target>PIN ของคุณไม่ถูกต้อง</target>
+      </trans-unit>
+      <trans-unit id="Request timeout. Please check your internet connection.">
+        <source>Request timeout. Please check your internet connection.</source>
+        <target>หมดเวลาส่งคำ  โปรดเช็คการเชื่อมต่ออินเทอร์เน็ตของคุณ</target>
+      </trans-unit>
+      <trans-unit id="Could not save your details">
+        <source>Could not save your details</source>
+        <target>ไม่สามารถบันทึกข้อมูลของคุณได้</target>
+      </trans-unit>
+      <trans-unit id="We could not connect you to Mecto, please check your internet connection.">
+        <source>We couldn't connect you to Mecto, please check your internet connection.</source>
+        <target>เราไม่สามารถเชื่อมต่อคุณกับ Mecto ได้  โปรดเช็คการเชื่อมต่ออินเทอร์เน็ตของคุณ</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid address to send to">
+        <source>Please enter a valid address to send to</source>
+        <target>กรุณากรอกที่อยู่ซึ่งสามารถติดต่อได้</target>
+      </trans-unit>
+      <trans-unit id="Please enter an amount above">
+        <source>Please enter an amount above %(dust)s</source>
+        <target>กรุณากรอกยอดเงินรวมข้างบน %(dust)s</target>
+      </trans-unit>
+      <trans-unit id="Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.">
+        <source>Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.</source>
+        <target>เงินทุนสำรองนั้นไม่สามารถใช้ได้ชั่วคราว  หากจะทำธุรกรรม คุณจำเป็นต้องรอการยืนยันคำขอการทำธุรกรรมเสียก่อน</target>
+      </trans-unit>
+      <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
+        <source>It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>ดูเหมือนว่าคุณกำลังพยายามใช้เงินในกระเป๋าจนหมด เพราะต้องจ่ายภาษีธุรกรรม จากที่เราคำนวณ ยอดเงินสูงสุดที่คุณสามารถส่งได้คือ %(sendableBalance)s เราได้ทำการแก้ไขมูลค่ารวมให้คุณแล้ว</target>
+      </trans-unit>
+      <trans-unit id="You do not have enough funds in your wallet (incl. fee)">
+        <source>You don't have enough funds in your wallet (incl. fee)</source>
+        <target>คุณมีเงินในกระเป๋าไม่พอ (incl น ค่าจ้าง)</target>
+      </trans-unit>
+      <trans-unit id="A name is required to set your profile on Coin">
+        <source>A name is required to set your profile on Coin</source>
+        <target>คุณจำเป็นต้องกรอกชื่อของคุณเพื่อตั้งค่าโปร์ไฟล์ Coin </target>
+      </trans-unit>
+      <trans-unit id="Uh Oh...">
+        <source>Uh Oh...</source>
+        <target>โอ๊ะ โอ...</target>
+      </trans-unit>
+      <trans-unit id="Whoops!">
+        <source>Whoops!</source>
+        <target>อุปส์!</target>
+      </trans-unit>
+      <trans-unit id="Just saying...">
+        <source>Just saying...</source>
+        <target>บอกไว้ก่อนนะ...</target>
+      </trans-unit>
+      <trans-unit id="Your browser does not support geolocation">
+        <source>Your browser does not support geolocation</source>
+        <target>เบราวเซอร์ของคุณไม่สามารถใช้การหาพิกัดได้</target>
+      </trans-unit>
+      <trans-unit id="Unable to retrieve your location">
+        <source>Unable to retrieve your location</source>
+        <target>ไม่สามารถกู้คืนพิกัดของคุณได้</target>
+      </trans-unit>
+      <trans-unit id="Without a name, the payer would not be able to identify you on Mecto.">
+        <source>Without a name, the payer wouldn't be able to identify you on Mecto.</source>
+        <target>หากไม่กรอกชื่อ ผู้จ่ายเงินจะไม่สามารถระบุตัวตนของคุณบน Mecto ได้</target>
+      </trans-unit>
+      <trans-unit id="Change your details">
+        <source>Change your details</source>
+        <target>เปลี่ยนรายละเอียด</target>
+      </trans-unit>
+      <trans-unit id="Your username">
+        <source>Your username</source>
+        <target>ชื่อผู้ใช้ของคุณ</target>
+      </trans-unit>
+      <trans-unit id="Gravatar email">
+        <source>Gravatar email</source>
+        <target>อีเมลล์ Gravatar</target>
+      </trans-unit>
+      <trans-unit id="Submit">
+        <source>Submit</source>
+        <target>ยอมรับ</target>
+      </trans-unit>
+      <trans-unit id="Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.">
+        <source>Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.</source>
+        <target>กราวาตาร์ (อวาตาร์ที่เป็นที่รู้จักกันทั่วโลก) คือโปรแกรมที่ทำให้คุณสามารถใช้อวาตาร์ตัวเดิมข้ามเว็บไซด์และแอพต่างๆได้โดยการระบุอีเมลล์แอดเดรส</target>
+      </trans-unit>
+      <trans-unit id="Create a gravatar">
+        <source>Create a gravatar</source>
+        <target>สร้างกราวาตาร์</target>
+      </trans-unit>
+      <trans-unit id="Logout">
+        <source>Logout</source>
+        <target>ออกจากระบบ</target>
+      </trans-unit>
+      <trans-unit id="Support">
+        <source>Support</source>
+        <target>สนับสนุน</target>
+      </trans-unit>
+      <trans-unit id="Send">
+        <source>Send</source>
+        <target>ส่ง</target>
+      </trans-unit>
+      <trans-unit id="Receive">
+        <source>Receive</source>
+        <target>รับ</target>
+      </trans-unit>
+      <trans-unit id="History">
+        <source>History</source>
+        <target>ประวัติ</target>
+      </trans-unit>
+      <trans-unit id="Tokens">
+        <source>Tokens</source>
+        <target>โทเค็น</target>
+      </trans-unit>
+      <trans-unit id="Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.">
+        <source>Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.</source>
+        <target>Mecto ช่วยให้คุณแผยแพร่ที่อยู่ของกระเป๋าเงินสู่ผู้ใช้งาน Coin ที่อยู่ใกล้เคียง ด้วยการเปรียบเทียบข้อมูล GPS  ข้อมูลนี้จะถูกลบทันทีหากคุณปิด Mecto</target>
+      </trans-unit>
+      <trans-unit id="Before you start using Mecto, you need to enter a name that will help others identify you.">
+        <source>Before you start using Mecto, you need to enter a name that will help others identify you.</source>
+        <target>ก่อนจะเริ่มใช้งาน Mecto คุณจำเป็นต้องกรอกชื่อของคุณ เพื่อที่ผู้อื่นจะได้ระบุตัวตนของคุณได้</target>
+      </trans-unit>
+      <trans-unit id="Save">
+        <source>Save</source>
+        <target>บันทึก</target>
+      </trans-unit>
+      <trans-unit id="Loading transactions...">
+        <source>Loading transactions...</source>
+        <target>กำลังโหลดธุรกรรม...</target>
+      </trans-unit>
+      <trans-unit id="Your transaction history">
+        <source>Your transaction history</source>
+        <target>ประวัติการทำธุรกรรมของคุณ</target>
+      </trans-unit>
+      <trans-unit id="pending confirmation">
+        <source>pending confirmation</source>
+        <target>กำลังส่งคำยืนยัน</target>
+      </trans-unit>
+      <trans-unit id="Received">
+        <source>Received</source>
+        <target>รับ</target>
+      </trans-unit>
+      <trans-unit id="You do not have any transactions yet">
+        <source>You don't have any transactions yet</source>
+        <target>คุณยังไม่มีการทำธุรกรรมในตอนนี้</target>
+      </trans-unit>
+      <trans-unit id="Transaction Id:">
+        <source>Transaction Id:</source>
+        <target>ID การทำธุรกรรม</target>
+      </trans-unit>
+      <trans-unit id="Transaction Fee:">
+        <source>Transaction Fee:</source>
+        <target>ค่าธรรมเนียมธุรกรรม:</target>
+      </trans-unit>
+      <trans-unit id="Inputs:">
+        <source>Inputs:</source>
+        <target>อินพุต:</target>
+      </trans-unit>
+      <trans-unit id="Outputs:">
+        <source>Outputs:</source>
+        <target>เอาต์พุต:</target>
+      </trans-unit>
+      <trans-unit id="Your wallet address">
+        <source>Your wallet address</source>
+        <target>ที่อยู่กระเป๋าเงินของคุณ</target>
+      </trans-unit>
+      <trans-unit id="Mecto">
+        <source>Mecto</source>
+        <target>Mecto</target>
+      </trans-unit>
+      <trans-unit id="Turn Mecto on">
+        <source>Turn Mecto on</source>
+        <target>เปิด Mecto</target>
+      </trans-unit>
+      <trans-unit id="Turn Mecto off">
+        <source>Turn Mecto off</source>
+        <target>ปิด Mecto</target>
+      </trans-unit>
+      <trans-unit id="Checking your location">
+        <source>Checking your location</source>
+        <target>ตรวจสอบตำแหน่งที่อยู่ของคุณ</target>
+      </trans-unit>
+      <trans-unit id="Broadcasting your location...">
+        <source>Broadcasting your location...</source>
+        <target>เผยแพร่ตำแหน่งที่อยู่ของคุณ</target>
+      </trans-unit>
+      <trans-unit id="Wallet address">
+        <source>Wallet address</source>
+        <target>ที่อยู่ของกระเป่าเงิน</target>
+      </trans-unit>
+      <trans-unit id="Amount">
+        <source>Amount</source>
+        <target>ยอดรวม</target>
+      </trans-unit>
+      <trans-unit id="Confirm">
+        <source>Confirm</source>
+        <target>ยืนยัน</target>
+      </trans-unit>
+      <trans-unit id="No Coin users found nearby">
+        <source>No Coin users found nearby</source>
+        <target>ไม่พบผู้ใช้งาน Coin ที่อยู่ใกล้คุณ</target>
+      </trans-unit>
+      <trans-unit id="Search Again">
+        <source>Search Again</source>
+        <target>ค้นหาอีกครั้ง</target>
+      </trans-unit>
+      <trans-unit id="Searching...">
+        <source>Searching...</source>
+        <target>กำลังค้นหา...</target>
+      </trans-unit>
+      <trans-unit id="Searching your area for other Coin users">
+        <source>Searching your area for other Coin users</source>
+        <target>ค้นหาผู้ใช้งาน Coin ที่อยู่ใกล้คุณ</target>
+      </trans-unit>
+      <trans-unit id="Confirm transaction">
+        <source>Confirm transaction</source>
+        <target>ยืนยันการทำธุรกรรม</target>
+      </trans-unit>
+      <trans-unit id="transaction fee">
+        <source>transaction fee</source>
+        <target>ภาษีการทำธุรกรรม</target>
+      </trans-unit>
+      <trans-unit id="Cancel">
+        <source>Cancel</source>
+        <target>ยกเลิก</target>
+      </trans-unit>
+      <trans-unit id="Transaction Successful">
+        <source>Transaction Successful</source>
+        <target>ทำธุรกรรมเรียบร้อยแล้ว</target>
+      </trans-unit>
+      <trans-unit id="Your transaction will appear in your history tab shortly.">
+        <source>Your transaction will appear in your history tab shortly.</source>
+        <target>การทำธุรกรรมของคุณจะปรากฎในแถบประวัติการใช้งานทันที</target>
+      </trans-unit>
+      <trans-unit id="Close">
+        <source>Close</source>
+        <target>ปิด</target>
+      </trans-unit>
+      <trans-unit id="Transaction Failed">
+        <source>Transaction Failed</source>
+        <target>การทำธุรกรรมผิดพลาด</target>
+      </trans-unit>
+      <trans-unit id="Failed">
+        <source>Failed</source>
+        <target>ล้มเหลว</target>
+      </trans-unit>
+      <trans-unit id="Sorry, Coin Wallet did not load.">
+        <source>Sorry, Coin Wallet didn't load.</source>
+        <target>ขอโทษที Coin Wallet ไม่โหลดเลย</target>
+      </trans-unit>
+      <trans-unit id="Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.">
+        <source>Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.</source>
+        <target>ลองอัพเดทเบราวเซอร์ของคุณหรือสลับไปใช่โหมดเบราเซอร์ส่วนตัวดูสิ ถ้ามีอะไรผิดพลาดอีก ให้ดาวน์โหลด Chrome แทนนะ</target>
+      </trans-unit>
+      <trans-unit id="Current coin price">
+        <source>Current coin price</source>
+        <target>ราคาเหรียญในปัจจุบัน</target>
+      </trans-unit>
+      <trans-unit id="Username not available">
+        <source>Username not available</source>
+        <target>ไม่มีชื่อผู้ใช้</target>
+      </trans-unit>
+      <trans-unit id="Scan your fingerprint please">
+        <source>Scan your fingerprint please</source>
+        <target>สแกนลายนิ้วมือของคุณโปรด</target>
+      </trans-unit>
+      <trans-unit id="Enter PIN">
+        <source>Enter PIN</source>
+        <target>ป้อน PIN</target>
+      </trans-unit>
+      <trans-unit id="I Agree To The Terms &amp; Conditions">
+        <source>I Agree To The Terms &amp; Conditions</source>
+        <target>ฉันยอมรับข้อกำหนดและเงื่อนไข</target>
+      </trans-unit>
+      <trans-unit id="Terms of Use">
+        <source>Terms of Use</source>
+        <target>ข้อกำหนดในการใช้งาน</target>
+      </trans-unit>
+      <trans-unit id="Unparsed address">
+        <source>Unparsed address</source>
+        <target>ที่อยู่ที่ไม่มีการพาร์ส</target>
+      </trans-unit>
+      <trans-unit id="Exchange">
+        <source>Exchange</source>
+        <target>แลกเปลี่ยน</target>
+      </trans-unit>
+      <trans-unit id="From">
+        <source>From</source>
+        <target>จาก</target>
+      </trans-unit>
+      <trans-unit id="To">
+        <source>To</source>
+        <target>ไปยัง</target>
+      </trans-unit>
+      <trans-unit id="Exchange rate">
+        <source>Exchange rate</source>
+        <target>อัตราแลกเปลี่ยน</target>
+      </trans-unit>
+      <trans-unit id="Loading...">
+        <source>Loading...</source>
+        <target>กำลังโหลด...</target>
+      </trans-unit>
+      <trans-unit id="Address">
+        <source>Address</source>
+        <target>ที่อยู่</target>
+      </trans-unit>
+      <trans-unit id="Return address (optional)">
+        <source>Return address (optional)</source>
+        <target>ที่อยู่สำหรับส่งคืน (ไม่จำเป็น)</target>
+      </trans-unit>
+      <trans-unit id="Deposit address">
+        <source>Deposit address (%(symbol)s)</source>
+        <target>ที่อยู่เงินฝาก (%(symbol)s)</target>
+      </trans-unit>
+      <trans-unit id="Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
+        <source>Send up to %(depositMax)s %(depositSymbol)s to deposit address.
+It will be converted into %(toSymbol)s, and sent to
+ %(toAddress)s</source>
+        <target>ส่งมากสูงสุด %(depositMax)s %(depositSymbol)s ไปยังที่อยู่เงินฝาก
+ซึ่งระบบจะแปลงเป็น %(toSymbol)sและส่งไปยัง
+ %(toAddress)s</target>
+      </trans-unit>
+      <trans-unit id="Deposit minimum">
+        <source>Deposit minimum</source>
+        <target>เงินฝากขั้นต่ำ</target>
+      </trans-unit>
+      <trans-unit id="amount :toSymbol have been delivered to :toAddress">
+        <source>%(amount)s %(toSymbol)s have been delivered to
+ %(toAddress)s</source>
+        <target>%(amount)s %(toSymbol)s ถูกส่งไปยัง
+ %(toAddress)s เรียบร้อยแล้ว</target>
+      </trans-unit>
+      <trans-unit id="Back">
+        <source>Back</source>
+        <target>ย้อนกลับ</target>
+      </trans-unit>
+      <trans-unit id="Awaiting deposit...">
+        <source>Awaiting deposit...</source>
+        <target>กำลังรอเงินฝาก...</target>
+      </trans-unit>
+      <trans-unit id="Deposit has been received">
+        <source>Deposit has been received</source>
+        <target>ได้รับเงินฝากเรียบร้อยแล้ว</target>
+      </trans-unit>
+      <trans-unit id="Awaiting exchange...">
+        <source>Awaiting exchange...</source>
+        <target>กำลังรอการแลกเปลี่ยน...</target>
+      </trans-unit>
+      <trans-unit id="Exchange complete!">
+        <source>Exchange complete!</source>
+        <target>การแลกเปลี่ยนเสร็จแล้ว!</target>
+      </trans-unit>
+      <trans-unit id="Done">
+        <source>Done</source>
+        <target>เสร็จสิ้น</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid return address">
+        <source>Please enter a valid return address</source>
+        <target>โปรดป้อนที่อยู่สำหรับส่งคืนที่ถูกต้อง</target>
+      </trans-unit>
+      <trans-unit id="Miner fee">
+        <source>Miner fee</source>
+        <target>ค่าธรรมเนียมการขุด</target>
+      </trans-unit>
+      <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
+        <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
+        <target>ที่อยู่สำหรับส่งคืนควรจะเป็นที่อยู่ที่คุณเป็นผู้ควบคุม โดยมีไว้สำหรับส่งคืนเงินฝากในกรณีที่ธุรกรรมล้มเหลว</target>
+      </trans-unit>
+      <trans-unit id="Remove account">
+        <source>Remove account</source>
+        <target>ลบบัญชี</target>
+      </trans-unit>
+      <trans-unit id="Remove">
+        <source>Remove</source>
+        <target>ลบ</target>
+      </trans-unit>
+      <trans-unit id="Are you sure?">
+        <source>Are you sure?</source>
+        <target>คุณแน่ใจหรือไม่?</target>
+      </trans-unit>
+      <trans-unit id="Account has been successfully removed">
+        <source>Account has been successfully removed</source>
+        <target>ลบบัญชีเรียบร้อยแล้ว</target>
+      </trans-unit>
+      <trans-unit id="This page will be reloaded shortly.">
+        <source>This page will be reloaded shortly.</source>
+        <target>หน้านี้จะรีโหลดในอีกสักครู่</target>
+      </trans-unit>
+      <trans-unit id="About">
+        <source>About</source>
+        <target>เกี่ยวกับ</target>
+      </trans-unit>
+      <trans-unit id="Release information">
+        <source>Release information</source>
+        <target>ข้อมูลการปล่อยอัปเดต</target>
+      </trans-unit>
+      <trans-unit id="Version">
+        <source>Version</source>
+        <target>เวอร์ชัน</target>
+      </trans-unit>
+      <trans-unit id="Transfer paper wallet / private key">
+        <source>Transfer paper wallet / private key</source>
+        <target>ถ่ายโอนกระเป๋าเงินกระดาษ / คีย์ส่วนตัว</target>
+      </trans-unit>
+      <trans-unit id="Export private keys">
+        <source>Export private keys</source>
+        <target>ส่งออกคีย์ส่วนตัว</target>
+      </trans-unit>
+      <trans-unit id="Transfer private key">
+        <source>Transfer private key</source>
+        <target>ถ่ายโอนคีย์ส่วนตัว</target>
+      </trans-unit>
+      <trans-unit id="Transfer">
+        <source>Transfer</source>
+        <target>ถ่ายโอน</target>
+      </trans-unit>
+      <trans-unit id="Private key">
+        <source>Private key</source>
+        <target>คีย์ส่วนตัว</target>
+      </trans-unit>
+      <trans-unit id="This will transfer all coins from the paper wallet address to your wallet.">
+        <source>This will transfer all coins from the paper wallet address to your wallet.</source>
+        <target>การดำเนินการนี้จะถ่ายโอนเหรียญทั้งหมดจากที่อยู่กระเป๋าเงินกระดาษไปยังกระเป๋าเงินของคุณ</target>
+      </trans-unit>
+      <trans-unit id="This private key has no coins for transfer.">
+        <source>This private key has no coins for transfer.</source>
+        <target>คีย์ส่วนตัวนี้ไม่มีเหรียญสำหรับถ่ายโอน</target>
+      </trans-unit>
+      <trans-unit id="Invalid private key">
+        <source>Invalid private key</source>
+        <target>คีย์ส่วนตัวไม่ถูกต้อง</target>
+      </trans-unit>
+      <trans-unit id="Insufficient funds">
+        <source>Insufficient funds</source>
+        <target>เงินไม่เพียงพอ</target>
+      </trans-unit>
+      <trans-unit id="Warning!">
+        <source>Warning!</source>
+        <target>คำเตือน!</target>
+      </trans-unit>
+      <trans-unit id="Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you&apos;d like them to have access to your funds.">
+        <source>Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you'd like them to have access to your funds.</source>
+        <target>คีย์ส่วนตัวคือคีย์ที่กำหนดสิทธิ์การใช้เงินของคุณ เพราะฉะนั้นห้ามแชร์คีย์ดังกล่าวกับใครเด็ดขาด เว้นเสียแต่ว่าคุณต้องการจะให้อีกฝ่ายเข้าถึงเงินของคุณ</target>
+      </trans-unit>
+      <trans-unit id="Show">
+        <source>Show</source>
+        <target>แสดง</target>
+      </trans-unit>
+      <trans-unit id="Comma-separated list">
+        <source>Comma-separated list</source>
+        <target>รายการที่คั่นด้วยเครื่องหมายจุลภาค</target>
+      </trans-unit>
+      <trans-unit id="Your wallet has no private keys with coins for export.">
+        <source>Your wallet has no private keys with coins for export.</source>
+        <target>กระเป๋าเงินของคุณไม่มีคีย์ส่วนตัวที่มีเหรียญสำหรับส่งออก</target>
+      </trans-unit>
+      <trans-unit id="Add Token">
+        <source>Add Token</source>
+        <target>เพิ่มโทเค็น</target>
+      </trans-unit>
+      <trans-unit id="Gas limit">
+        <source>Gas limit</source>
+        <target>จำนวนก๊าซสูงสุด</target>
+      </trans-unit>
+      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.">
+        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.</source>
+        <target>จำนวนก๊าซสูงสุดคือจำนวนก๊าซที่จะส่งไปพร้อมกับธุรกรรมของคุณ การเพิ่มจำนวนตัวเลขนี้จะไม่ได้ส่งผลให้ธุรกรรมของคุณได้รับการยืนยันเร็วขึ้น การส่ง ETH มีค่าเท่ากับ 21000 การส่งโทเค็นมีค่าเท่ากับราว ๆ 200000</target>
+      </trans-unit>
+      <trans-unit id="Contract address">
+        <source>Contract address</source>
+        <target>ที่อยู่สัญญา</target>
+      </trans-unit>
+      <trans-unit id="Add">
+        <source>Add</source>
+        <target>เพิ่ม</target>
+      </trans-unit>
+      <trans-unit id="Symbol">
+        <source>Symbol</source>
+        <target>สัญลักษณ์</target>
+      </trans-unit>
+      <trans-unit id="Decimals">
+        <source>Decimals</source>
+        <target>ทศนิยม</target>
+      </trans-unit>
+      <trans-unit id="Token">
+        <source>Token</source>
+        <target>โทเค็น</target>
+      </trans-unit>
+      <trans-unit id="Custom token">
+        <source>Custom token</source>
+        <target>โทเค็นแบบกำหนดเอง</target>
+      </trans-unit>
+      <trans-unit id="Please fill out all fields.">
+        <source>Please fill out all fields.</source>
+        <target>โปรดกรอกข้อมูลให้ครบทุกช่อง</target>
+      </trans-unit>
+      <trans-unit id="Please enter Gas Limit greater than zero">
+        <source>Please enter Gas Limit greater than zero</source>
+        <target>โปรดป้อนจำนวนก๊าซสูงสุดที่มีค่ามากกว่าศูนย์</target>
+      </trans-unit>
+      <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
+        <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
+        <target>คุณไม่มีเงิน Ethereum เพียงพอที่จะชำระค่าธรรมเนียมธุรกรรม (%(ethereumRequired)s ETH)</target>
+      </trans-unit>
+      <trans-unit id="Click to Select">
+        <source>Click to Select</source>
+        <target>คลิกเพื่อเลือก</target>
+      </trans-unit>
+      <trans-unit id="Copy to Clipboard">
+        <source>Copy to Clipboard</source>
+        <target>คัดลอกไปยังคลิปบอร์ด</target>
+      </trans-unit>
+      <trans-unit id="Copied!">
+        <source>Copied!</source>
+        <target>คัดลอกแล้ว!</target>
+      </trans-unit>
+      <trans-unit id="Please enter an address other than your wallet address">
+        <source>Please enter an address other than your wallet address</source>
+        <target>โปรดป้อนที่อยู่อื่นนอกเหนือไปจากที่อยู่กระเป๋าเงินของคุณ</target>
+      </trans-unit>
+      <trans-unit id="Please enter a private key other than your wallet private key">
+        <source>Please enter a private key other than your wallet private key</source>
+        <target>โปรดป้อนคีย์ส่วนตัวอื่นนอกเหนือไปจากคีย์ส่วนตัวสำหรับกระเป๋าเงินของคุณ</target>
+      </trans-unit>
+      <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
+        <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(denomination)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>ดูเหมือนว่าคุณกำลังพยายามใช้เงินในกระเป๋าให้หมด เมื่อคำนึงถึงค่าธรรมเนียมธุรกรรมและเงินสำรองขั้นต่ำ (%(minReserve)s %(denomination)s) แล้ว เราได้ประเมินว่าจำนวนสูงสุดที่คุณสามารถส่งได้คือ %(sendableBalance)s เราได้แก้ไขค่าในช่องข้อมูลจำนวนเงินให้คุณเรียบร้อยแล้ว</target>
+      </trans-unit>
+      <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :denomination) to your wallet address.">
+        <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(denomination)s) to your wallet address.</source>
+        <target>กระเป๋าเงินของคุณยังไม่ได้เปิดใช้งาน หากต้องการเปิดใช้งาน โปรดส่งเงินที่เป็นจำนวนมากกว่าเงินสำรองขั้นต่ำ (%(minReserve)s %(denomination)s) ไปยังที่อยู่กระเป๋าเงิน</target>
+      </trans-unit>
+      <trans-unit id="Load more">
+        <source>Load more</source>
+        <target>โหลดเพิ่มเติม</target>
+      </trans-unit>
+      <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
+        <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
+        <target>กระเป๋าเงินของผู้รับยังไม่ได้เปิดใช้งาน คุณสามารถส่งเงินเป็นจำนวนมากกว่า %(minReserve)s %(denomination)sเพียงเท่านั้น</target>
+      </trans-unit>
+      <trans-unit id="Destination tag">
+        <source>Destination tag</source>
+        <target>แท็กปลายทาง</target>
+      </trans-unit>
+      <trans-unit id="Invoice ID">
+        <source>Invoice ID</source>
+        <target>ID ใบแจ้งหนี้</target>
+      </trans-unit>
+      <trans-unit id="(optional)">
+        <source>(optional)</source>
+        <target>(ไม่จำเป็น)</target>
+      </trans-unit>
+      <trans-unit id="An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.">
+        <source>An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.</source>
+        <target>ข้อมูลชนิดจำนวนเต็มแบบ 32 บิตที่สุ่มและไม่ลงนาม ซึ่งจะระบุเหตุผลในการชำระเงิน หรือบัญชีที่ไม่ใช่ Ripple</target>
+      </trans-unit>
+      <trans-unit id="A 256-bit hash that can be used to identify a particular payment.">
+        <source>A 256-bit hash that can be used to identify a particular payment.</source>
+        <target>แฮชแบบ 256 บิตที่สามารถใช้เพื่อระบุการชำระเงินที่เฉพาะเจาะจงได้</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid invoice ID">
+        <source>Please enter a valid invoice ID</source>
+        <target>โปรดป้อน ID ใบแจ้งหนี้ที่ถูกต้อง</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid destination tag">
+        <source>Please enter a valid destination tag</source>
+        <target>โปรดป้อนแท็กปลายทางที่ถูกต้อง</target>
+      </trans-unit>
+      <trans-unit id="Exchange is currently unavailable for this pair">
+        <source>Exchange is currently unavailable for this pair</source>
+        <target>การแลกเปลี่ยนยังไม่พร้อมให้ใช้งานสำหรับคู่นี้ในขณะนี้</target>
+      </trans-unit>
+      <trans-unit id="Payment operations:">
+        <source>Payment operations:</source>
+        <target>การดำเนินการชำระเงิน:</target>
+      </trans-unit>
+      <trans-unit id="Pay (:amount) XLM to :destination">
+        <source>Pay %(amount)s XLM to %(destination)s</source>
+        <target>ชำระเงินจำนวน %(amount)s XLM ให้กับ %(destination)s</target>
+      </trans-unit>
+      <trans-unit id="Created Account :destination with balance :amount XLM">
+        <source>Created Account %(destination)s with balance %(amount)s XLM</source>
+        <target>สร้างบัญชี %(destination)s ที่มียอดคงเหลือ %(amount)s XLM แล้ว</target>
+      </trans-unit>
+      <trans-unit id="Memo">
+        <source>Memo</source>
+        <target>บันทึก</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid memo">
+        <source>Please enter a valid memo</source>
+        <target>โปรดป้อนบันทึกที่ถูกต้อง</target>
+      </trans-unit>
+      <trans-unit id="The memo contains optional extra information. A string up to 28-bytes long.">
+        <source>The memo contains optional extra information. A string up to 28-bytes long.</source>
+        <target>บันทึกนี้จะบรรจุข้อมูลเพิ่มเติมที่จะมีหรือไม่มีก็ได้ โดยเป็นสตริงซึ่งมีความยาวสูงสุด 28 ไบต์</target>
+      </trans-unit>
+      <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :denomination.">
+        <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(denomination)s.</source>
+        <target>กระเป๋าเงินของคุณยังไม่ได้เปิดใช้งาน คุณสามารถรับเงินจำนวนมากกว่า %(minReserve)s %(denomination)sเท่านั้น</target>
+      </trans-unit>
+      <trans-unit id="Privacy Policy">
+        <source>Privacy Policy</source>
+        <target>นโยบายความเป็นส่วนตัว</target>
+      </trans-unit>
+      <trans-unit id="Your ShapeShift account is not verified.">
+        <source>Your ShapeShift account is not verified.</source>
+        <target>บัญชี ShapeShift ของคุณยังไม่ได้ได้รับการตรวจสอบยืนยัน</target>
+      </trans-unit>
+      <trans-unit id="Complete verification">
+        <source>Complete verification</source>
+        <target>ดำเนินการตรวจสอบยืนยันให้เสร็จสมบูรณ์</target>
+      </trans-unit>
+      <trans-unit id="Try to sign in again">
+        <source>Try to sign in again</source>
+        <target>ลองลงชื่อเข้าใช้อีกครั้ง</target>
+      </trans-unit>
+      <trans-unit id="Sign in">
+        <source>Sign in</source>
+        <target>ลงชื่อเข้าใช้</target>
+      </trans-unit>
+      <trans-unit id="Setup EOS account">
+        <source>Setup EOS account</source>
+        <target>ตั้งค่าบัญชี EOS</target>
+      </trans-unit>
+      <trans-unit id="Account name">
+        <source>Account name</source>
+        <target>ชื่อบัญชี</target>
+      </trans-unit>
+      <trans-unit id="The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.">
+        <source>The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.</source>
+        <target>ชื่อบัญชี EOS จะต้องมีความยาว 12 ตัวอักษรเท่านั้น รวมถึงประกอบไปด้วยตัวพิมพ์เล็กและตัวเลขตั้งแต่ 1 ถึง 5</target>
+      </trans-unit>
+      <trans-unit id="Invalid account name">
+        <source>Invalid account name</source>
+        <target>ชื่อบัญชีไม่ถูกต้อง</target>
+      </trans-unit>
+      <trans-unit id="This account name is already taken, please choose another one.">
+        <source>This account name is already taken, please choose another one.</source>
+        <target>มีผู้ใช้ชื่อบัญชีนี้แล้ว โปรดเลือกชื่อบัญชีอื่น</target>
+      </trans-unit>
+      <trans-unit id="To create a new account you need to make an EOS transfer (amount greater than :minAmount) with the following data from an exchange or other EOS wallet.">
+        <source>To create a new account you need to make an EOS transfer (amount greater than %(minAmount)s) with the following data from an exchange or other EOS wallet.</source>
+        <target>หากต้องการสร้างบัญชีใหม่ คุณจำเป็นต้องถ่ายโอน EOS (จำนวนมากกว่า %(minAmount)s) พร้อมข้อมูลดังต่อไปนี้จากกระเป๋าเงินแลกเปลี่ยนหรือกระเป๋าเงิน EOS อื่น ๆ</target>
+      </trans-unit>
+      <trans-unit id="Check">
+        <source>Check</source>
+        <target>ตรวจสอบ</target>
+      </trans-unit>
+      <trans-unit id="Account has been successfully set up">
+        <source>Account has been successfully set up</source>
+        <target>ตั้งค่าบัญชีเรียบร้อยแล้ว</target>
+      </trans-unit>
+      <trans-unit id="The memo contains optional extra information. A string up to 256-bytes long.">
+        <source>The memo contains optional extra information. A string up to 256-bytes long.</source>
+        <target>บันทึกนี้จะบรรจุข้อมูลเพิ่มเติมที่จะมีหรือไม่มีก็ได้ โดยเป็นสตริงซึ่งมีความยาวสูงสุด 256 ไบต์</target>
+      </trans-unit>
+      <trans-unit id="It seems like you are trying to empty your wallet. Max amount you can send is. We have amended the value in the amount field for you">
+        <source>It seems like you are trying to empty your wallet. Max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>ดูเหมือนว่าคุณกำลังพยายามใช้เงินในกระเป๋าให้หมด จำนวนสูงสุดที่คุณสามารถส่งได้คือ %(sendableBalance)s เราได้แก้ไขค่าในช่องข้อมูลจำนวนเงินให้คุณเรียบร้อยแล้ว</target>
+      </trans-unit>
+      <trans-unit id="Destination account doesn&apos;t exist.">
+        <source>Destination account doesn't exist.</source>
+        <target>ไม่พบบัญชีปลายทาง</target>
+      </trans-unit>
+      <trans-unit id="Transaction has been expired. Please try again.">
+        <source>Transaction has been expired. Please try again.</source>
+        <target>ธุรกรรมหมดอายุแล้ว โปรดลองอีกครั้ง</target>
+      </trans-unit>
+      <trans-unit id="Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.">
+        <source>Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.</source>
+        <target>ปริมาณการใช้ CPU ของบัญชีเกินขีดจำกัดแล้ว โปรดลองอีกครั้งในภายหลัง หรือขอให้คนอื่นเดิมพัน CPU เพิ่มให้กับคุณ</target>
+      </trans-unit>
+      <trans-unit id="Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.">
+        <source>Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.</source>
+        <target>ปริมาณการใช้ NET ของบัญชีเกินขีดจำกัดแล้ว โปรดลองอีกครั้งในภายหลัง หรือขอให้คนอื่นเดิมพัน NET เพิ่มให้กับคุณ</target>
+      </trans-unit>
+      <trans-unit id="The extra amount will be deposited to the created account.">
+        <source>The extra amount will be deposited to the created account.</source>
+        <target>ระบบจะฝากจำนวนที่เกินไปยังบัญชีที่สร้างขึ้น</target>
+      </trans-unit>
+      <trans-unit id="Can&apos;t connect to :network node. Please try again later or choose another token.">
+        <source>Can't connect to %(network)s node. Please try again later or choose another token.</source>
+        <target>ไม่สามารถเชื่อมต่อกับโนด %(network)s ได้ โปรดลองอีกครั้งในภายหลัง หรือเลือกโทเค็นอื่น</target>
+      </trans-unit>
+      <trans-unit id="Network node error. Please try again later.">
+        <source>%(network)s node error. Please try again later.</source>
+        <target>เกิดข้อผิดพลาดกับโนด%(network)s โปรดลองอีกครั้งในภายหลัง</target>
+      </trans-unit>
+      <trans-unit id="Choose exchange">
+        <source>Choose exchange</source>
+        <target>เลือกการแลกเปลี่ยน</target>
+      </trans-unit>
+      <trans-unit id="Next step">
+        <source>Next step</source>
+        <target>ขั้นตอนต่อไป</target>
+      </trans-unit>
+      <trans-unit id="Minimum amount:">
+        <source>Minimum amount:</source>
+        <target>จำนวนขั้นต่ำ:</target>
+      </trans-unit>
+      <trans-unit id="address">
+        <source>address</source>
+        <target>ที่อยู่</target>
+      </trans-unit>
+      <trans-unit id="Exchange error">
+        <source>Exchange error</source>
+        <target>ข้อผิดพลาดในการแลกเปลี่ยน</target>
+      </trans-unit>
+      <trans-unit id="Transaction not found">
+        <source>Transaction not found</source>
+        <target>ไม่พบธุรกรรม</target>
+      </trans-unit>
+      <trans-unit id="Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
+        <source>Send %(depositAmount)s %(depositSymbol)s to deposit address.
+It will be converted into %(toSymbol)s, and sent to
+ %(toAddress)s</source>
+        <target>ส่ง %(depositAmount)s %(depositSymbol)s ไปยังที่อยู่เงินฝาก
+ซึ่งระบบจะแปลงเป็น %(toSymbol)sและส่งไปยัง
+ %(toAddress)s</target>
+      </trans-unit>
+      <trans-unit id="Network fee">
+        <source>Network fee</source>
+        <target>ค่าธรรมเนียมเครือข่าย</target>
+      </trans-unit>
+      <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
+        <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
+        <target>คุณมีเวลา 36 ชั่วโมงในการส่งเงิน มิฉะนั้นแล้วธุรกรรมดังกล่าวจะถูกยกเลิกโดยอัตโนมัติ</target>
+      </trans-unit>
+      <trans-unit id="Extra Id">
+        <source>Extra Id</source>
+        <target>ID เพิ่มเติม</target>
+      </trans-unit>
+      <trans-unit id="Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).">
+        <source>Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).</source>
+        <target>คุณสมบัติสำหรับที่อยู่สกุลเงินที่ใช้ ID เพิ่มเติมในการประมวลผลธุรกรรม (เช่น แท็กปลายทาง บันทึก หรือข้อความ)</target>
+      </trans-unit>
+      <trans-unit id="Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.">
+        <source>Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.</source>
+        <target>ค่าธรรมเนียมเครือข่ายมีค่าตายตัว และจะถูกเรียกเก็บทุกครั้งที่ส่งเงิน สกุลเงินแต่ละสกุลจะเรียกเก็บเป็นจำนวนที่แน่นอนสำหรับการดำเนินการต่าง ๆ ค่าธรรมเนียมนี้จะมีการเรียกเก็บเมื่อเงินของคุณเป็นส่วนหนึ่งของบล็อกเชน</target>
+      </trans-unit>
+      <trans-unit id="On hold...">
+        <source>On hold...</source>
+        <target>หยุดไว้ชั่วคราว...</target>
+      </trans-unit>
+      <trans-unit id="Currently, your transaction (ID: :id) is on hold.&lt;br&gt;Please, contact Changelly to pass KYC.">
+        <source>Currently, your transaction (ID: %(id)s) is on hold.&lt;br&gt;Please, contact Changelly to pass KYC.</source>
+        <target>ขณะนี้ธุรกรรมของคุณ (ID: %(id)s) อยู่ในสถานะหยุดไว้ชั่วคราว&lt;br&gt;โปรดติดต่อ Changelly เพื่อส่งต่อ KYC</target>
+      </trans-unit>
+      <trans-unit id="Transaction (ID: :id) has failed. Please, contact Changelly.">
+        <source>Transaction (ID: %(id)s) has failed. Please, contact Changelly.</source>
+        <target>ธุรกรรม (ID: %(id)s) ล้มเหลว โปรดติดต่อ Changelly</target>
+      </trans-unit>
+      <trans-unit id="Exchange failed and coins were refunded to :address.">
+        <source>Exchange failed and coins were refunded to %(address)s.</source>
+        <target>การแลกเปลี่ยนล้มเหลว และระบบได้คืนเหรียญไปยัง %(address)s</target>
+      </trans-unit>
+      <trans-unit id="Payment wasn&apos;t received since 36 hours since the transaction was created.">
+        <source>Payment wasn't received since 36 hours since the transaction was created.</source>
+        <target>ระบบไม่ได้รับการชำระเงินเป็นเวลา 36 ชั่วโมงนับตั้งแต่มีการสร้างธุรกรรมดังกล่าวขึ้น</target>
+      </trans-unit>
+      <trans-unit id="Terms of Service">
+        <source>Terms of Service</source>
+        <target>ข้อกำหนดในการใช้บริการ</target>
+      </trans-unit>
+      <trans-unit id="Accept">
+        <source>Accept</source>
+        <target>ยอมรับ</target>
+      </trans-unit>
+      <trans-unit id="Changelly_TOS">
+        <source>I have read and I agree to the Changelly &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;terms of use&lt;/a&gt; and &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;privacy policy&lt;/a&gt;.&lt;br&gt;By clicking "Accept", I acknowledge and understan that my transaction may trigger AML/KYC verification according to &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;Changelly AML/KYC&lt;/a&gt;.</source>
+        <target>ฉันได้อ่านและยอมรับ&lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;ข้อกำหนดในการใช้งาน&lt;/a&gt;และ&lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;นโยบายความเป็นส่วนตัว&lt;/a&gt;ของ Changelly&lt;br&gt;เมื่อคลิกที่ "ยอมรับ" จะถือว่าฉันรับรู้และเข้าใจว่าธุรกรรมของฉันอาจกระตุ้นให้เกิดการตรวจสอบยืนยัน AML/KYC ซึ่งสอดคล้องกับ &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;Changelly AML/KYC&lt;/a&gt;</target>
+      </trans-unit>
+      <trans-unit id="max.">
+        <source>max.</source>
+        <target>สูงสุด</target>
+      </trans-unit>
+      <trans-unit id="Fee">
+        <source>Fee</source>
+        <target>ค่าธรรมเนียม</target>
+      </trans-unit>
+      <trans-unit id="Amount of coins that is charged from your balance for single transaction (&lt;a href=&quot;&quot; onclick=&quot;window.open(&apos;https://www.coin.space/all-about-bitcoin-fees&apos;, &apos;_system&apos;); return false;&quot;&gt;more info&lt;/a&gt;).">
+        <source>Amount of coins that is charged from your balance for single transaction (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;more info&lt;/a&gt;).</source>
+        <target>จำนวนเหรียญที่จะเรียกเก็บจากยอดคงเหลือของคุณสำหรับธุรกรรมหนึ่งรายการ (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;ข้อมูลเพิ่มเติม&lt;/a&gt;)</target>
+      </trans-unit>
+      <trans-unit id="Confirm passphrase">
+        <source>Confirm passphrase</source>
+        <target>ยืนยันวลีรหัสผ่าน</target>
+      </trans-unit>
+      <trans-unit id="Almost done! Enter the following words from your passphrase.">
+        <source>Almost done! Enter the following words from your passphrase.</source>
+        <target>เกือบเสร็จสิ้นแล้ว! ป้อนคำดังต่อไปนี้จากวลีรหัสผ่านของคุณ</target>
+      </trans-unit>
+      <trans-unit id="Word">
+        <source>Word</source>
+        <target>คำ</target>
+      </trans-unit>
+      <trans-unit id="Buy with Credit Card">
+        <source>Buy with Credit Card</source>
+        <target></target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -48,7 +48,7 @@ module.exports = function(el) {
         return showInfo({
           message: 'Your ShapeShift account is not verified.',
           href: 'https://auth.shapeshift.io',
-          linkText: 'Complete verification'
+          linkTextI18n: 'Complete verification'
         })
       }
     });

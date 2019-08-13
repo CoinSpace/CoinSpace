@@ -97,6 +97,7 @@
     "webpack-dev-server": "^2.8.1",
     "webpack-merge": "^4.1.0",
     "worker-loader": "^0.8.1",
+    "xliff": "^4.3.1",
     "xml2js": "^0.4.19",
     "yaqrcode": "^0.2.1"
   },

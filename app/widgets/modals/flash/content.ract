@@ -21,7 +21,7 @@
     <p class="flash__message">{{translate(message, interpolations)}}</p>
     {{/if}}
     {{#href}}
-      <p class="flash__link"><a href="{{href}}" target="_blank">{{translate(linkText)}}</a></p>
+      <p class="flash__link"><a href="{{href}}" target="_blank">{{linkText}}</a></p>
     {{/href}}
   </div>
 </div>

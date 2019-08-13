@@ -1,0 +1,912 @@
+<xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="uk.json" datatype="plaintext" source-language="en" target-language="uk">
+    <body>
+      <trans-unit id="Back to coin">
+        <source>Back to coin</source>
+        <target>Назад до coin</target>
+      </trans-unit>
+      <trans-unit id="Create new wallet">
+        <source>Create new wallet</source>
+        <target>Створити новий гаманець</target>
+      </trans-unit>
+      <trans-unit id="Open existing wallet">
+        <source>Open existing wallet</source>
+        <target>Відкрити існуючий гаманець</target>
+      </trans-unit>
+      <trans-unit id="We are about to generate your very own passphrase">
+        <source>We're about to generate your very own passphrase</source>
+        <target>Зараз буде згенерований Ваш особистий пароль</target>
+      </trans-unit>
+      <trans-unit id="This keeps your account secure, and lets you open your wallet on multiple devices.">
+        <source>This keeps your account secure, and lets you open your wallet on multiple devices.</source>
+        <target>Це зробить Ваш аккаунт більш безпечним та забезпечить доступ до гаманця з різних пристроїв.</target>
+      </trans-unit>
+      <trans-unit id="It is very important you write this down.">
+        <source>It's very important you write this down.</source>
+        <target>Дуже важливо це записати.</target>
+      </trans-unit>
+      <trans-unit id="Generate passphrase">
+        <source>Generate passphrase</source>
+        <target>Згенерувати пароль</target>
+      </trans-unit>
+      <trans-unit id="Go back">
+        <source>Go back</source>
+        <target>Назад</target>
+      </trans-unit>
+      <trans-unit id="Generating">
+        <source>Generating</source>
+        <target>Генерація</target>
+      </trans-unit>
+      <trans-unit id="Synchronizing Wallet">
+        <source>Synchronizing Wallet</source>
+        <target>Синхронізація гаманця</target>
+      </trans-unit>
+      <trans-unit id="Your passphrase (12 words)">
+        <source>Your passphrase (12 words)</source>
+        <target>Ваш пароль (12 слов)</target>
+      </trans-unit>
+      <trans-unit id="Your passphrase will not be shown again.">
+        <source>Your passphrase will not be shown again.</source>
+        <target>Це останній раз коли ваш пароль буде показано.</target>
+      </trans-unit>
+      <trans-unit id="Without it you will lose access to your wallet.">
+        <source>Without it you will lose access to your wallet.</source>
+        <target>Без нього ви втратите доступ до свого гаманця</target>
+      </trans-unit>
+      <trans-unit id="I have written down or otherwise securely stored my passphrase">
+        <source>I have written down or otherwise securely stored my passphrase</source>
+        <target>Мій пароль записано або збережено якимось іншим безпечним чином</target>
+      </trans-unit>
+      <trans-unit id="Open wallet">
+        <source>Open wallet</source>
+        <target>Відкрити гаманець</target>
+      </trans-unit>
+      <trans-unit id="Checking passphrase">
+        <source>Checking passphrase</source>
+        <target>Перевірка пароля</target>
+      </trans-unit>
+      <trans-unit id="Enter Passphrase">
+        <source>Enter Passphrase</source>
+        <target>Введіть пароль</target>
+      </trans-unit>
+      <trans-unit id="Invalid passphrase">
+        <source>Invalid passphrase</source>
+        <target>Невірний пароль</target>
+      </trans-unit>
+      <trans-unit id="Enter your PIN">
+        <source>Enter your PIN</source>
+        <target>Введіть свій PIN</target>
+      </trans-unit>
+      <trans-unit id="Set a PIN for quick access">
+        <source>Set a PIN for quick access</source>
+        <target>Встановити PIN-код для швидкого доступу</target>
+      </trans-unit>
+      <trans-unit id="Review passphrase again">
+        <source>Review passphrase again</source>
+        <target>Перевірте пароль ще раз</target>
+      </trans-unit>
+      <trans-unit id="Open a different wallet">
+        <source>Open a different wallet</source>
+        <target>Відкрити інший гаманець</target>
+      </trans-unit>
+      <trans-unit id="PIN must be a 4-digit number">
+        <source>PIN must be a 4-digit number</source>
+        <target>PIN-код має містити 4 цифри</target>
+      </trans-unit>
+      <trans-unit id="Verifying PIN">
+        <source>Verifying PIN</source>
+        <target>Перевірка PIN-коду</target>
+      </trans-unit>
+      <trans-unit id="Setting PIN">
+        <source>Setting PIN</source>
+        <target>Встановлення PIN-коду</target>
+      </trans-unit>
+      <trans-unit id="This might take some time,">
+        <source>This might take some time,</source>
+        <target>Це може зайняти деякий час,</target>
+      </trans-unit>
+      <trans-unit id="please be patient.">
+        <source>please be patient.</source>
+        <target>будь ласка, зачекайте.</target>
+      </trans-unit>
+      <trans-unit id="Your PIN is incorrect">
+        <source>Your PIN is incorrect</source>
+        <target>Ваш PIN-код невірний</target>
+      </trans-unit>
+      <trans-unit id="Request timeout. Please check your internet connection.">
+        <source>Request timeout. Please check your internet connection.</source>
+        <target>Таймаут запиту. Будь ласка, перевірте ваше Інтернет-з'єднання.</target>
+      </trans-unit>
+      <trans-unit id="Could not save your details">
+        <source>Could not save your details</source>
+        <target>Неможливо зберегти ваші дані</target>
+      </trans-unit>
+      <trans-unit id="We could not connect you to Mecto, please check your internet connection.">
+        <source>We couldn't connect you to Mecto, please check your internet connection.</source>
+        <target>Ми не змогли приєднати вас до Mecto, будь ласка, перевірте ваше Інтернет-з'єднання.</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid address to send to">
+        <source>Please enter a valid address to send to</source>
+        <target>Будь ласка, введіть коректний адрес отримувача </target>
+      </trans-unit>
+      <trans-unit id="Please enter an amount above">
+        <source>Please enter an amount above %(dust)s</source>
+        <target>Будь ласка, введіть суму, більш за %(dust)s</target>
+      </trans-unit>
+      <trans-unit id="Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.">
+        <source>Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.</source>
+        <target>Частина коштів тимчасово недоступна. Щоб відправити цю транзакцію, Вам необхідно дочекатись підтвердження щойно відправлених транзакцій.</target>
+      </trans-unit>
+      <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
+        <source>It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>Схоже, ви намагаєтесь спорожнити свій гаманець. Враховуючи комісію за транзакцію, ми підрахували, що максимальна сума, яку ви можете надіслати, становить %(sendableBalance)s. Ми скоригували суму у відповідному полі.</target>
+      </trans-unit>
+      <trans-unit id="You do not have enough funds in your wallet (incl. fee)">
+        <source>You don't have enough funds in your wallet (incl. fee)</source>
+        <target>Недостатньо коштів у вашому гаманці (включаючи комісію)</target>
+      </trans-unit>
+      <trans-unit id="A name is required to set your profile on Coin">
+        <source>A name is required to set your profile on Coin</source>
+        <target>Для створення профілю на Coin потрібно ім'я</target>
+      </trans-unit>
+      <trans-unit id="Uh Oh...">
+        <source>Uh Oh...</source>
+        <target>Ой ой...</target>
+      </trans-unit>
+      <trans-unit id="Whoops!">
+        <source>Whoops!</source>
+        <target>Упс!</target>
+      </trans-unit>
+      <trans-unit id="Just saying...">
+        <source>Just saying...</source>
+        <target>До відома...</target>
+      </trans-unit>
+      <trans-unit id="Your browser does not support geolocation">
+        <source>Your browser does not support geolocation</source>
+        <target>Ваш браузер не підтримує геолокацію</target>
+      </trans-unit>
+      <trans-unit id="Unable to retrieve your location">
+        <source>Unable to retrieve your location</source>
+        <target>Неможливо отримати ваше розташування</target>
+      </trans-unit>
+      <trans-unit id="Without a name, the payer would not be able to identify you on Mecto.">
+        <source>Without a name, the payer wouldn't be able to identify you on Mecto.</source>
+        <target>Без імені Вас буде неможливо знайти на Mecto.</target>
+      </trans-unit>
+      <trans-unit id="Change your details">
+        <source>Change your details</source>
+        <target>Змінити Ваші дані</target>
+      </trans-unit>
+      <trans-unit id="Your username">
+        <source>Your username</source>
+        <target>Ім'я користувача</target>
+      </trans-unit>
+      <trans-unit id="Gravatar email">
+        <source>Gravatar email</source>
+        <target>E-mail на Gravatar</target>
+      </trans-unit>
+      <trans-unit id="Submit">
+        <source>Submit</source>
+        <target>Послати</target>
+      </trans-unit>
+      <trans-unit id="Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.">
+        <source>Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.</source>
+        <target>«Граватар» (аватар, що розпізнається на глобальному рівні) – це сервіс, який дозволяє використовувати одну й ту ж аватарку на кількох сайтах чи у кількох застосунках, вказавши адресу електронної пошти.</target>
+      </trans-unit>
+      <trans-unit id="Create a gravatar">
+        <source>Create a gravatar</source>
+        <target>Створити граватар</target>
+      </trans-unit>
+      <trans-unit id="Logout">
+        <source>Logout</source>
+        <target>Вийти</target>
+      </trans-unit>
+      <trans-unit id="Support">
+        <source>Support</source>
+        <target>Підтримка</target>
+      </trans-unit>
+      <trans-unit id="Send">
+        <source>Send</source>
+        <target>Послати</target>
+      </trans-unit>
+      <trans-unit id="Receive">
+        <source>Receive</source>
+        <target>Отримати</target>
+      </trans-unit>
+      <trans-unit id="History">
+        <source>History</source>
+        <target>Історія</target>
+      </trans-unit>
+      <trans-unit id="Tokens">
+        <source>Tokens</source>
+        <target>Токени</target>
+      </trans-unit>
+      <trans-unit id="Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.">
+        <source>Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.</source>
+        <target>Mecto дозволяє вам транслювати адресу Вашого гаманця іншим Coin користувачам по сусідству за допомогою GPS даних. Ці дані будуть видалені після того як ви вимкнете Mecto.</target>
+      </trans-unit>
+      <trans-unit id="Before you start using Mecto, you need to enter a name that will help others identify you.">
+        <source>Before you start using Mecto, you need to enter a name that will help others identify you.</source>
+        <target>Перед тим як почати використовувати Mecto, потрібно ввести Ваше ім'я, за яким інші зможуть вас ідентифікувати</target>
+      </trans-unit>
+      <trans-unit id="Save">
+        <source>Save</source>
+        <target>Зберегти</target>
+      </trans-unit>
+      <trans-unit id="Loading transactions...">
+        <source>Loading transactions...</source>
+        <target>Завантаження транзакцій...</target>
+      </trans-unit>
+      <trans-unit id="Your transaction history">
+        <source>Your transaction history</source>
+        <target>Історія Ваших транзакцій</target>
+      </trans-unit>
+      <trans-unit id="pending confirmation">
+        <source>pending confirmation</source>
+        <target>підтвердження очікується</target>
+      </trans-unit>
+      <trans-unit id="Received">
+        <source>Received</source>
+        <target>Отримано</target>
+      </trans-unit>
+      <trans-unit id="You do not have any transactions yet">
+        <source>You don't have any transactions yet</source>
+        <target>У Вас ще немає транзакцій</target>
+      </trans-unit>
+      <trans-unit id="Transaction Id:">
+        <source>Transaction Id:</source>
+        <target>Ідентифікатор транзакції:</target>
+      </trans-unit>
+      <trans-unit id="Transaction Fee:">
+        <source>Transaction Fee:</source>
+        <target>Комісія за транзакцію:</target>
+      </trans-unit>
+      <trans-unit id="Inputs:">
+        <source>Inputs:</source>
+        <target>Вхідні транзакції:</target>
+      </trans-unit>
+      <trans-unit id="Outputs:">
+        <source>Outputs:</source>
+        <target>Вихідні транзакції:</target>
+      </trans-unit>
+      <trans-unit id="Your wallet address">
+        <source>Your wallet address</source>
+        <target>Адреса вашого гаманця</target>
+      </trans-unit>
+      <trans-unit id="Mecto">
+        <source>Mecto</source>
+        <target>Mecto</target>
+      </trans-unit>
+      <trans-unit id="Turn Mecto on">
+        <source>Turn Mecto on</source>
+        <target>Увімкнути Mecto</target>
+      </trans-unit>
+      <trans-unit id="Turn Mecto off">
+        <source>Turn Mecto off</source>
+        <target>Вимкнути Mecto</target>
+      </trans-unit>
+      <trans-unit id="Checking your location">
+        <source>Checking your location</source>
+        <target>Перевіряємо ваше розташування</target>
+      </trans-unit>
+      <trans-unit id="Broadcasting your location...">
+        <source>Broadcasting your location...</source>
+        <target>Транслюємо ваше розташування...</target>
+      </trans-unit>
+      <trans-unit id="Wallet address">
+        <source>Wallet address</source>
+        <target>Адрес гаманця</target>
+      </trans-unit>
+      <trans-unit id="Amount">
+        <source>Amount</source>
+        <target>Сума</target>
+      </trans-unit>
+      <trans-unit id="Confirm">
+        <source>Confirm</source>
+        <target>Підтвердити</target>
+      </trans-unit>
+      <trans-unit id="No Coin users found nearby">
+        <source>No Coin users found nearby</source>
+        <target>Інших користувачів Coin не знайдено</target>
+      </trans-unit>
+      <trans-unit id="Search Again">
+        <source>Search Again</source>
+        <target>Шукати ще раз</target>
+      </trans-unit>
+      <trans-unit id="Searching...">
+        <source>Searching...</source>
+        <target>Пошук...</target>
+      </trans-unit>
+      <trans-unit id="Searching your area for other Coin users">
+        <source>Searching your area for other Coin users</source>
+        <target>Пошук інших користувачів Coin у вашому районі</target>
+      </trans-unit>
+      <trans-unit id="Confirm transaction">
+        <source>Confirm transaction</source>
+        <target>Підтвердить транзакцію</target>
+      </trans-unit>
+      <trans-unit id="transaction fee">
+        <source>transaction fee</source>
+        <target>плата за транзакцію</target>
+      </trans-unit>
+      <trans-unit id="Cancel">
+        <source>Cancel</source>
+        <target>Відміна</target>
+      </trans-unit>
+      <trans-unit id="Transaction Successful">
+        <source>Transaction Successful</source>
+        <target>Транзакція пройшла успішно</target>
+      </trans-unit>
+      <trans-unit id="Your transaction will appear in your history tab shortly.">
+        <source>Your transaction will appear in your history tab shortly.</source>
+        <target>Транзакція незабаром з'явиться у закладці "Історія".</target>
+      </trans-unit>
+      <trans-unit id="Close">
+        <source>Close</source>
+        <target>Закрити</target>
+      </trans-unit>
+      <trans-unit id="Transaction Failed">
+        <source>Transaction Failed</source>
+        <target>Транзакція не пройшла</target>
+      </trans-unit>
+      <trans-unit id="Failed">
+        <source>Failed</source>
+        <target>Не пройшла</target>
+      </trans-unit>
+      <trans-unit id="Sorry, Coin Wallet did not load.">
+        <source>Sorry, Coin Wallet didn't load.</source>
+        <target>Вибачаємося, Coin Wallet не завантажився.</target>
+      </trans-unit>
+      <trans-unit id="Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.">
+        <source>Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.</source>
+        <target>Спробуйте поновити ваш інтернет-браузер, або переключіться із приватного режиму. Якщо це не спрацює, спробуйте браузер Chrome.</target>
+      </trans-unit>
+      <trans-unit id="Current coin price">
+        <source>Current coin price</source>
+        <target>Поточна ціна монети</target>
+      </trans-unit>
+      <trans-unit id="Username not available">
+        <source>Username not available</source>
+        <target>Ім'я користувача не доступне</target>
+      </trans-unit>
+      <trans-unit id="Scan your fingerprint please">
+        <source>Scan your fingerprint please</source>
+        <target>Сканування відбитків пальців, будь ласка</target>
+      </trans-unit>
+      <trans-unit id="Enter PIN">
+        <source>Enter PIN</source>
+        <target>Введіть PIN</target>
+      </trans-unit>
+      <trans-unit id="I Agree To The Terms &amp; Conditions">
+        <source>I Agree To The Terms &amp; Conditions</source>
+        <target>Я погоджуюся з правилами та умовами</target>
+      </trans-unit>
+      <trans-unit id="Terms of Use">
+        <source>Terms of Use</source>
+        <target>Умови використання</target>
+      </trans-unit>
+      <trans-unit id="Unparsed address">
+        <source>Unparsed address</source>
+        <target>Непарсована адреса</target>
+      </trans-unit>
+      <trans-unit id="Exchange">
+        <source>Exchange</source>
+        <target>Обмін</target>
+      </trans-unit>
+      <trans-unit id="From">
+        <source>From</source>
+        <target>З</target>
+      </trans-unit>
+      <trans-unit id="To">
+        <source>To</source>
+        <target>У</target>
+      </trans-unit>
+      <trans-unit id="Exchange rate">
+        <source>Exchange rate</source>
+        <target>Курс обміну</target>
+      </trans-unit>
+      <trans-unit id="Loading...">
+        <source>Loading...</source>
+        <target>Завантаження...</target>
+      </trans-unit>
+      <trans-unit id="Address">
+        <source>Address</source>
+        <target>Адреса</target>
+      </trans-unit>
+      <trans-unit id="Return address (optional)">
+        <source>Return address (optional)</source>
+        <target>Зворотна адреса (за бажанням)</target>
+      </trans-unit>
+      <trans-unit id="Deposit address">
+        <source>Deposit address (%(symbol)s)</source>
+        <target>Адреса для поповнення (%(symbol)s)</target>
+      </trans-unit>
+      <trans-unit id="Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
+        <source>Send up to %(depositMax)s %(depositSymbol)s to deposit address.
+It will be converted into %(toSymbol)s, and sent to
+ %(toAddress)s</source>
+        <target>Надішліть до %(depositMax)s %(depositSymbol)s на адресу для поповнення.
+Їх буде перетворено на %(toSymbol)sта надіслано до
+ %(toAddress)s</target>
+      </trans-unit>
+      <trans-unit id="Deposit minimum">
+        <source>Deposit minimum</source>
+        <target>Мінімальна сума депозиту</target>
+      </trans-unit>
+      <trans-unit id="amount :toSymbol have been delivered to :toAddress">
+        <source>%(amount)s %(toSymbol)s have been delivered to
+ %(toAddress)s</source>
+        <target>%(amount)s %(toSymbol)s доставлено до
+ %(toAddress)s</target>
+      </trans-unit>
+      <trans-unit id="Back">
+        <source>Back</source>
+        <target>Назад</target>
+      </trans-unit>
+      <trans-unit id="Awaiting deposit...">
+        <source>Awaiting deposit...</source>
+        <target>Очікування депозиту...</target>
+      </trans-unit>
+      <trans-unit id="Deposit has been received">
+        <source>Deposit has been received</source>
+        <target>Депозит отримано</target>
+      </trans-unit>
+      <trans-unit id="Awaiting exchange...">
+        <source>Awaiting exchange...</source>
+        <target>Очікування обміну...</target>
+      </trans-unit>
+      <trans-unit id="Exchange complete!">
+        <source>Exchange complete!</source>
+        <target>Обмін завершено!</target>
+      </trans-unit>
+      <trans-unit id="Done">
+        <source>Done</source>
+        <target>Зроблено</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid return address">
+        <source>Please enter a valid return address</source>
+        <target>Введіть дійсну зворотну адресу</target>
+      </trans-unit>
+      <trans-unit id="Miner fee">
+        <source>Miner fee</source>
+        <target>Комісія майнерів</target>
+      </trans-unit>
+      <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
+        <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
+        <target>Зворотна адреса має бути контрольованою вами адресою, на яку повертається депозит у випадку невдалої транзакції.</target>
+      </trans-unit>
+      <trans-unit id="Remove account">
+        <source>Remove account</source>
+        <target>Видалити аккаунт</target>
+      </trans-unit>
+      <trans-unit id="Remove">
+        <source>Remove</source>
+        <target>Видалити</target>
+      </trans-unit>
+      <trans-unit id="Are you sure?">
+        <source>Are you sure?</source>
+        <target>Ви впевнені?</target>
+      </trans-unit>
+      <trans-unit id="Account has been successfully removed">
+        <source>Account has been successfully removed</source>
+        <target>Аккаунт успішно видалено</target>
+      </trans-unit>
+      <trans-unit id="This page will be reloaded shortly.">
+        <source>This page will be reloaded shortly.</source>
+        <target>Цю сторінку незабаром буде завантажено.</target>
+      </trans-unit>
+      <trans-unit id="About">
+        <source>About</source>
+        <target>Про проект</target>
+      </trans-unit>
+      <trans-unit id="Release information">
+        <source>Release information</source>
+        <target>Інформація про версію</target>
+      </trans-unit>
+      <trans-unit id="Version">
+        <source>Version</source>
+        <target>Версія</target>
+      </trans-unit>
+      <trans-unit id="Transfer paper wallet / private key">
+        <source>Transfer paper wallet / private key</source>
+        <target>Перемістити паперовий гаманець / приватний ключ</target>
+      </trans-unit>
+      <trans-unit id="Export private keys">
+        <source>Export private keys</source>
+        <target>Експорт приватних ключів</target>
+      </trans-unit>
+      <trans-unit id="Transfer private key">
+        <source>Transfer private key</source>
+        <target>Переміщення приватного ключа</target>
+      </trans-unit>
+      <trans-unit id="Transfer">
+        <source>Transfer</source>
+        <target>Перемістити</target>
+      </trans-unit>
+      <trans-unit id="Private key">
+        <source>Private key</source>
+        <target>Приватний ключ</target>
+      </trans-unit>
+      <trans-unit id="This will transfer all coins from the paper wallet address to your wallet.">
+        <source>This will transfer all coins from the paper wallet address to your wallet.</source>
+        <target>Це приведе до переміщення всіх монет з адреси паперового гаманця до вашого гаманця.</target>
+      </trans-unit>
+      <trans-unit id="This private key has no coins for transfer.">
+        <source>This private key has no coins for transfer.</source>
+        <target>У цьому приватному ключі немає монет для переміщення.</target>
+      </trans-unit>
+      <trans-unit id="Invalid private key">
+        <source>Invalid private key</source>
+        <target>Недійсний приватний ключ</target>
+      </trans-unit>
+      <trans-unit id="Insufficient funds">
+        <source>Insufficient funds</source>
+        <target>Недостатньо коштів</target>
+      </trans-unit>
+      <trans-unit id="Warning!">
+        <source>Warning!</source>
+        <target>Увага!</target>
+      </trans-unit>
+      <trans-unit id="Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you&apos;d like them to have access to your funds.">
+        <source>Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you'd like them to have access to your funds.</source>
+        <target>Ваші приватні ключі – це ключі до ваших коштів, отже НЕ ДІЛІТЬСЯ ними з будь-якими особами, якщо ви не бажаєте, щоб ці особи мали доступ до ваших коштів.</target>
+      </trans-unit>
+      <trans-unit id="Show">
+        <source>Show</source>
+        <target>Показати</target>
+      </trans-unit>
+      <trans-unit id="Comma-separated list">
+        <source>Comma-separated list</source>
+        <target>Список, розділений комами</target>
+      </trans-unit>
+      <trans-unit id="Your wallet has no private keys with coins for export.">
+        <source>Your wallet has no private keys with coins for export.</source>
+        <target>У вашому гаманці немає приватних ключів з монетами для експорту.</target>
+      </trans-unit>
+      <trans-unit id="Add Token">
+        <source>Add Token</source>
+        <target>Додати токен</target>
+      </trans-unit>
+      <trans-unit id="Gas limit">
+        <source>Gas limit</source>
+        <target>Ліміт газу</target>
+      </trans-unit>
+      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.">
+        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.</source>
+        <target>Ліміт газу – це кількість газу, який потрібно відправити разом із транзакцією. Збільшення цієї кількості не приведе до більш швидкого підтвердження вашої транзакції. Відправлення ETH дорівнює 21000. Відправлення токенів дорівнює приблизно 200000.</target>
+      </trans-unit>
+      <trans-unit id="Contract address">
+        <source>Contract address</source>
+        <target>Адреса контракту</target>
+      </trans-unit>
+      <trans-unit id="Add">
+        <source>Add</source>
+        <target>Додати</target>
+      </trans-unit>
+      <trans-unit id="Symbol">
+        <source>Symbol</source>
+        <target>Символ</target>
+      </trans-unit>
+      <trans-unit id="Decimals">
+        <source>Decimals</source>
+        <target>Десяткові знаки</target>
+      </trans-unit>
+      <trans-unit id="Token">
+        <source>Token</source>
+        <target>Токен</target>
+      </trans-unit>
+      <trans-unit id="Custom token">
+        <source>Custom token</source>
+        <target>Індивідуальний токен</target>
+      </trans-unit>
+      <trans-unit id="Please fill out all fields.">
+        <source>Please fill out all fields.</source>
+        <target>Заповніть усі поля.</target>
+      </trans-unit>
+      <trans-unit id="Please enter Gas Limit greater than zero">
+        <source>Please enter Gas Limit greater than zero</source>
+        <target>Введіть ліміт газу, що більший нуля</target>
+      </trans-unit>
+      <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
+        <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
+        <target>Вам не вистачає коштів Ethereum, щоб сплатити комісію за транзакцію (%(ethereumRequired)s ETH).</target>
+      </trans-unit>
+      <trans-unit id="Click to Select">
+        <source>Click to Select</source>
+        <target>Натисніть для вибору</target>
+      </trans-unit>
+      <trans-unit id="Copy to Clipboard">
+        <source>Copy to Clipboard</source>
+        <target>Копіювати в буфер обміну</target>
+      </trans-unit>
+      <trans-unit id="Copied!">
+        <source>Copied!</source>
+        <target>Скопійовано!</target>
+      </trans-unit>
+      <trans-unit id="Please enter an address other than your wallet address">
+        <source>Please enter an address other than your wallet address</source>
+        <target>Введіть адресу, що відрізняється від адреси вашого гаманця</target>
+      </trans-unit>
+      <trans-unit id="Please enter a private key other than your wallet private key">
+        <source>Please enter a private key other than your wallet private key</source>
+        <target>Введіть приватний ключ, що відрізняється від приватного ключа вашого гаманця</target>
+      </trans-unit>
+      <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
+        <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(denomination)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>Схоже, ви намагаєтесь спорожнити свій гаманець. Враховуючи комісію за транзакцію та мінімальний резерв (%(minReserve)s %(denomination)s), ми підрахували, що максимальна сума, яку ви можете надіслати, становить %(sendableBalance)s. Ми скоригували суму у відповідному полі.</target>
+      </trans-unit>
+      <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :denomination) to your wallet address.">
+        <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(denomination)s) to your wallet address.</source>
+        <target>Ваш гаманець не активований. Щоб активувати його, надішліть суму більшу за мінімальний резерв (%(minReserve)s %(denomination)s) на адресу свого гаманця.</target>
+      </trans-unit>
+      <trans-unit id="Load more">
+        <source>Load more</source>
+        <target>Зарахувати більше</target>
+      </trans-unit>
+      <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
+        <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
+        <target>Гаманець отримувача не активований. Ви можете надіслати лише суму, що перевищує %(minReserve)s %(denomination)s.</target>
+      </trans-unit>
+      <trans-unit id="Destination tag">
+        <source>Destination tag</source>
+        <target>Тег призначення</target>
+      </trans-unit>
+      <trans-unit id="Invoice ID">
+        <source>Invoice ID</source>
+        <target>Ідентифікатор рахунку</target>
+      </trans-unit>
+      <trans-unit id="(optional)">
+        <source>(optional)</source>
+        <target>(за бажанням)</target>
+      </trans-unit>
+      <trans-unit id="An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.">
+        <source>An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.</source>
+        <target>Довільне 32-бітове ціле число, яке позначає призначення платежу або аккаунт, відмінний від аккаунта Ripple.</target>
+      </trans-unit>
+      <trans-unit id="A 256-bit hash that can be used to identify a particular payment.">
+        <source>A 256-bit hash that can be used to identify a particular payment.</source>
+        <target>256-бітний хеш, який можна використовувати для ідентифікації конкретного платежу.</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid invoice ID">
+        <source>Please enter a valid invoice ID</source>
+        <target>Введіть дійсний ідентифікатор рахунку</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid destination tag">
+        <source>Please enter a valid destination tag</source>
+        <target>Введіть дійсний тег призначення</target>
+      </trans-unit>
+      <trans-unit id="Exchange is currently unavailable for this pair">
+        <source>Exchange is currently unavailable for this pair</source>
+        <target>Ця пара зараз не доступна для обміну</target>
+      </trans-unit>
+      <trans-unit id="Payment operations:">
+        <source>Payment operations:</source>
+        <target>Платіжні операції:</target>
+      </trans-unit>
+      <trans-unit id="Pay (:amount) XLM to :destination">
+        <source>Pay %(amount)s XLM to %(destination)s</source>
+        <target>Сплатити %(amount)s XLM до %(destination)s</target>
+      </trans-unit>
+      <trans-unit id="Created Account :destination with balance :amount XLM">
+        <source>Created Account %(destination)s with balance %(amount)s XLM</source>
+        <target>Створено аккаунт %(destination)s з залишком %(amount)s XLM</target>
+      </trans-unit>
+      <trans-unit id="Memo">
+        <source>Memo</source>
+        <target>Мемо</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid memo">
+        <source>Please enter a valid memo</source>
+        <target>Введіть дійсне значення мемо</target>
+      </trans-unit>
+      <trans-unit id="The memo contains optional extra information. A string up to 28-bytes long.">
+        <source>The memo contains optional extra information. A string up to 28-bytes long.</source>
+        <target>Мемо містить надлишкову інформацію. Рядок довжиною до 28 байт.</target>
+      </trans-unit>
+      <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :denomination.">
+        <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(denomination)s.</source>
+        <target>Ваш гаманець не активований. Ви можете отримати лише суму, що перевищує %(minReserve)s %(denomination)s.</target>
+      </trans-unit>
+      <trans-unit id="Privacy Policy">
+        <source>Privacy Policy</source>
+        <target>Політика конфіденційності</target>
+      </trans-unit>
+      <trans-unit id="Your ShapeShift account is not verified.">
+        <source>Your ShapeShift account is not verified.</source>
+        <target>Ваш обліковий запис ShapeShift не верифікований.</target>
+      </trans-unit>
+      <trans-unit id="Complete verification">
+        <source>Complete verification</source>
+        <target>Пройти верифікацію</target>
+      </trans-unit>
+      <trans-unit id="Try to sign in again">
+        <source>Try to sign in again</source>
+        <target>Спробуйте ввійти ще раз</target>
+      </trans-unit>
+      <trans-unit id="Sign in">
+        <source>Sign in</source>
+        <target>Увійти</target>
+      </trans-unit>
+      <trans-unit id="Setup EOS account">
+        <source>Setup EOS account</source>
+        <target>Налаштування EOS-аккаунта</target>
+      </trans-unit>
+      <trans-unit id="Account name">
+        <source>Account name</source>
+        <target>Назва аккаунта</target>
+      </trans-unit>
+      <trans-unit id="The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.">
+        <source>The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.</source>
+        <target>Ім'я EOS-аккаунта повинно складатися рівно з 12 символів і містити малі літери та цифри від 1 до 5.</target>
+      </trans-unit>
+      <trans-unit id="Invalid account name">
+        <source>Invalid account name</source>
+        <target>Недійсна назва аккаунта</target>
+      </trans-unit>
+      <trans-unit id="This account name is already taken, please choose another one.">
+        <source>This account name is already taken, please choose another one.</source>
+        <target>Ця назва аккаунта вже зайнята, виберіть іншу назву.</target>
+      </trans-unit>
+      <trans-unit id="To create a new account you need to make an EOS transfer (amount greater than :minAmount) with the following data from an exchange or other EOS wallet.">
+        <source>To create a new account you need to make an EOS transfer (amount greater than %(minAmount)s) with the following data from an exchange or other EOS wallet.</source>
+        <target>Щоб створити новий аккаунт, потрібно здійснити EOS-переказ (сума більша за %(minAmount)s) із наступними даними з обмінника або іншого EOS-гаманця.</target>
+      </trans-unit>
+      <trans-unit id="Check">
+        <source>Check</source>
+        <target>Перевірити</target>
+      </trans-unit>
+      <trans-unit id="Account has been successfully set up">
+        <source>Account has been successfully set up</source>
+        <target>Аккаунт успішно створено</target>
+      </trans-unit>
+      <trans-unit id="The memo contains optional extra information. A string up to 256-bytes long.">
+        <source>The memo contains optional extra information. A string up to 256-bytes long.</source>
+        <target>Мемо містить надлишкову інформацію. Рядок довжиною до 256 байт.</target>
+      </trans-unit>
+      <trans-unit id="It seems like you are trying to empty your wallet. Max amount you can send is. We have amended the value in the amount field for you">
+        <source>It seems like you are trying to empty your wallet. Max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>Схоже, ви намагаєтесь спорожнити свій гаманець. Максимальна сума, яку ви можете надіслати – %(sendableBalance)s. Ми скоригували суму у відповідному полі.</target>
+      </trans-unit>
+      <trans-unit id="Destination account doesn&apos;t exist.">
+        <source>Destination account doesn't exist.</source>
+        <target>Цільовий аккаунт не існує.</target>
+      </trans-unit>
+      <trans-unit id="Transaction has been expired. Please try again.">
+        <source>Transaction has been expired. Please try again.</source>
+        <target>Час відведений на транзакцію вичерпано, спробуйте ще раз.</target>
+      </trans-unit>
+      <trans-unit id="Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.">
+        <source>Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.</source>
+        <target>Перевищено ліміт споживання ресурсів центрального процесора для облікового запису. Повторіть спробу пізніше, або попросіть когось іншого надати вам більше ресурсів центрального процесора.</target>
+      </trans-unit>
+      <trans-unit id="Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.">
+        <source>Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.</source>
+        <target>Перевищено ліміт використання мережевих ресурсів. Повторіть спробу пізніше, або попросіть когось іншого надати вам більше мережевих ресурсів.</target>
+      </trans-unit>
+      <trans-unit id="The extra amount will be deposited to the created account.">
+        <source>The extra amount will be deposited to the created account.</source>
+        <target>До створеного аккаунта буде перераховано додаткову суму.</target>
+      </trans-unit>
+      <trans-unit id="Can&apos;t connect to :network node. Please try again later or choose another token.">
+        <source>Can't connect to %(network)s node. Please try again later or choose another token.</source>
+        <target>Не вдається підключитися до вузла %(network)s. Повторіть спробу пізніше, або виберіть інший токен.</target>
+      </trans-unit>
+      <trans-unit id="Network node error. Please try again later.">
+        <source>%(network)s node error. Please try again later.</source>
+        <target>Помилка вузла%(network)s. Спробуйте пізніше.</target>
+      </trans-unit>
+      <trans-unit id="Choose exchange">
+        <source>Choose exchange</source>
+        <target>Вибрати операцію обміну</target>
+      </trans-unit>
+      <trans-unit id="Next step">
+        <source>Next step</source>
+        <target>Наступний крок</target>
+      </trans-unit>
+      <trans-unit id="Minimum amount:">
+        <source>Minimum amount:</source>
+        <target>Мінімальна кількість:</target>
+      </trans-unit>
+      <trans-unit id="address">
+        <source>address</source>
+        <target>адреса</target>
+      </trans-unit>
+      <trans-unit id="Exchange error">
+        <source>Exchange error</source>
+        <target>Помилка обміну</target>
+      </trans-unit>
+      <trans-unit id="Transaction not found">
+        <source>Transaction not found</source>
+        <target>Транзакцію не знайдено</target>
+      </trans-unit>
+      <trans-unit id="Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
+        <source>Send %(depositAmount)s %(depositSymbol)s to deposit address.
+It will be converted into %(toSymbol)s, and sent to
+ %(toAddress)s</source>
+        <target>Надішліть %(depositAmount)s %(depositSymbol)s на адресу для поповнення.
+Їх буде конвертовано у %(toSymbol)sта надіслано на
+ %(toAddress)s</target>
+      </trans-unit>
+      <trans-unit id="Network fee">
+        <source>Network fee</source>
+        <target>Комісія за користування мережею</target>
+      </trans-unit>
+      <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
+        <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
+        <target>У вас є 36 годин для надсилання коштів. Після цього транзакцію буде автоматично анульовано.</target>
+      </trans-unit>
+      <trans-unit id="Extra Id">
+        <source>Extra Id</source>
+        <target>Додатковий ідентифікатор</target>
+      </trans-unit>
+      <trans-unit id="Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).">
+        <source>Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).</source>
+        <target>Параметр для адрес валют, які використовують додатковий ідентифікатор для обробки транзакцій (наприклад, «тег призначення», «мемо» або повідомлення).</target>
+      </trans-unit>
+      <trans-unit id="Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.">
+        <source>Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.</source>
+        <target>Комісія за користування мережею є фіксованою та стягується кожного разу, коли надсилаються гроші. Для кожної валюти за операції стягується чітко визначена сума. Ця комісія стягується після включення ваших коштів у блокчейн.</target>
+      </trans-unit>
+      <trans-unit id="On hold...">
+        <source>On hold...</source>
+        <target>Призупинено...</target>
+      </trans-unit>
+      <trans-unit id="Currently, your transaction (ID: :id) is on hold.&lt;br&gt;Please, contact Changelly to pass KYC.">
+        <source>Currently, your transaction (ID: %(id)s) is on hold.&lt;br&gt;Please, contact Changelly to pass KYC.</source>
+        <target>Вашу транзакцію (ідентифікатор: %(id)s) призупинено.&lt;br&gt;Зв’яжіться з Changelly, щоб пройти процедуру перевірки клієнта.</target>
+      </trans-unit>
+      <trans-unit id="Transaction (ID: :id) has failed. Please, contact Changelly.">
+        <source>Transaction (ID: %(id)s) has failed. Please, contact Changelly.</source>
+        <target>Помилка транзакції (ідентифікатор: %(id)s) Зв'яжіться з Changelly.</target>
+      </trans-unit>
+      <trans-unit id="Exchange failed and coins were refunded to :address.">
+        <source>Exchange failed and coins were refunded to %(address)s.</source>
+        <target>Обмін не вдалося здійснити, монети повернені до %(address)s.</target>
+      </trans-unit>
+      <trans-unit id="Payment wasn&apos;t received since 36 hours since the transaction was created.">
+        <source>Payment wasn't received since 36 hours since the transaction was created.</source>
+        <target>Платіж не був здійснений протягом 36 годин з моменту створення транзакції.</target>
+      </trans-unit>
+      <trans-unit id="Terms of Service">
+        <source>Terms of Service</source>
+        <target>Умови надання послуг</target>
+      </trans-unit>
+      <trans-unit id="Accept">
+        <source>Accept</source>
+        <target>Прийняти</target>
+      </trans-unit>
+      <trans-unit id="Changelly_TOS">
+        <source>I have read and I agree to the Changelly &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;terms of use&lt;/a&gt; and &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;privacy policy&lt;/a&gt;.&lt;br&gt;By clicking "Accept", I acknowledge and understan that my transaction may trigger AML/KYC verification according to &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;Changelly AML/KYC&lt;/a&gt;.</source>
+        <target>Я прочитав(-ла) &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;Умови користування&lt;/a&gt; та &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;Політику конфіденційності&lt;/a&gt; Changelly і погоджуюсь із ними.&lt;br&gt;Натискаючи на кнопку «Прийняти», я тим самим визнаю та підтверджую, що моя транзакція може привести до перевірки благонадійності клієнта та дотримання ним законодавства про відмивання грошей відповідно до &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;процедури AML/KYC Changelly&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="max.">
+        <source>max.</source>
+        <target>макс.</target>
+      </trans-unit>
+      <trans-unit id="Fee">
+        <source>Fee</source>
+        <target>Комісія</target>
+      </trans-unit>
+      <trans-unit id="Amount of coins that is charged from your balance for single transaction (&lt;a href=&quot;&quot; onclick=&quot;window.open(&apos;https://www.coin.space/all-about-bitcoin-fees&apos;, &apos;_system&apos;); return false;&quot;&gt;more info&lt;/a&gt;).">
+        <source>Amount of coins that is charged from your balance for single transaction (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;more info&lt;/a&gt;).</source>
+        <target>Кількість монет, що стягується з вашого залишку за одну транзакцію (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;більше інформації&lt;/a&gt;).</target>
+      </trans-unit>
+      <trans-unit id="Confirm passphrase">
+        <source>Confirm passphrase</source>
+        <target>Підтвердити парольну фразу</target>
+      </trans-unit>
+      <trans-unit id="Almost done! Enter the following words from your passphrase.">
+        <source>Almost done! Enter the following words from your passphrase.</source>
+        <target>Майже готово! Введіть наступні слова зі своєї парольної фрази.</target>
+      </trans-unit>
+      <trans-unit id="Word">
+        <source>Word</source>
+        <target>Слово</target>
+      </trans-unit>
+      <trans-unit id="Buy with Credit Card">
+        <source>Buy with Credit Card</source>
+        <target></target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

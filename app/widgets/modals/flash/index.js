@@ -1,6 +1,7 @@
 'use strict';
 
 var Ractive = require('widgets/modals/base')
+var translate = require('lib/i18n').translate
 
 var defaults = {
   error: {
@@ -24,6 +25,11 @@ function openModal(type, data) {
   data.title = data.title || defaults[type].title
   data.type = type
   data.isHtml = data.isHtml
+
+  if (data.href && data.linkTextI18n) {
+    data.linkText = translate(data.linkTextI18n);
+  }
+
   data.onDismiss = function() {
     isOpen = false;
   }

@@ -1,0 +1,912 @@
+<xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="ja.json" datatype="plaintext" source-language="en" target-language="ja">
+    <body>
+      <trans-unit id="Back to coin">
+        <source>Back to coin</source>
+        <target>coinへ戻る</target>
+      </trans-unit>
+      <trans-unit id="Create new wallet">
+        <source>Create new wallet</source>
+        <target>新規ウォレットを作成</target>
+      </trans-unit>
+      <trans-unit id="Open existing wallet">
+        <source>Open existing wallet</source>
+        <target>既存ウォレットを開く</target>
+      </trans-unit>
+      <trans-unit id="We are about to generate your very own passphrase">
+        <source>We're about to generate your very own passphrase</source>
+        <target>個人パスフレーズを作成します</target>
+      </trans-unit>
+      <trans-unit id="This keeps your account secure, and lets you open your wallet on multiple devices.">
+        <source>This keeps your account secure, and lets you open your wallet on multiple devices.</source>
+        <target>このパスフレーズはあなたのアカウントを保護して、他の端末で同じウォレットを同期できるようにしてくれます</target>
+      </trans-unit>
+      <trans-unit id="It is very important you write this down.">
+        <source>It's very important you write this down.</source>
+        <target>絶対になくさないでください。</target>
+      </trans-unit>
+      <trans-unit id="Generate passphrase">
+        <source>Generate passphrase</source>
+        <target>パスフレーズを作成する</target>
+      </trans-unit>
+      <trans-unit id="Go back">
+        <source>Go back</source>
+        <target>戻る</target>
+      </trans-unit>
+      <trans-unit id="Generating">
+        <source>Generating</source>
+        <target>作成中</target>
+      </trans-unit>
+      <trans-unit id="Synchronizing Wallet">
+        <source>Synchronizing Wallet</source>
+        <target>ウォレットを同期中</target>
+      </trans-unit>
+      <trans-unit id="Your passphrase (12 words)">
+        <source>Your passphrase (12 words)</source>
+        <target>パスフレーズ (12ワード)</target>
+      </trans-unit>
+      <trans-unit id="Your passphrase will not be shown again.">
+        <source>Your passphrase will not be shown again.</source>
+        <target>このパスフレーズは今後表示されることはありません。</target>
+      </trans-unit>
+      <trans-unit id="Without it you will lose access to your wallet.">
+        <source>Without it you will lose access to your wallet.</source>
+        <target>パスフレーズを紛失するとウォレットにアクセスできなくなるのでご注意下さい。</target>
+      </trans-unit>
+      <trans-unit id="I have written down or otherwise securely stored my passphrase">
+        <source>I have written down or otherwise securely stored my passphrase</source>
+        <target>パスフレーズを書き留めるなどして、安全な方法で保管したことを約束します</target>
+      </trans-unit>
+      <trans-unit id="Open wallet">
+        <source>Open wallet</source>
+        <target>ウォレットを開く</target>
+      </trans-unit>
+      <trans-unit id="Checking passphrase">
+        <source>Checking passphrase</source>
+        <target>パスフレーズを確認中</target>
+      </trans-unit>
+      <trans-unit id="Enter Passphrase">
+        <source>Enter Passphrase</source>
+        <target>パスフレーズを入力</target>
+      </trans-unit>
+      <trans-unit id="Invalid passphrase">
+        <source>Invalid passphrase</source>
+        <target>このパスフレーズは無効です</target>
+      </trans-unit>
+      <trans-unit id="Enter your PIN">
+        <source>Enter your PIN</source>
+        <target>暗証番号を入力</target>
+      </trans-unit>
+      <trans-unit id="Set a PIN for quick access">
+        <source>Set a PIN for quick access</source>
+        <target>暗証番号を設定</target>
+      </trans-unit>
+      <trans-unit id="Review passphrase again">
+        <source>Review passphrase again</source>
+        <target>パスフレーズを再度確認してください</target>
+      </trans-unit>
+      <trans-unit id="Open a different wallet">
+        <source>Open a different wallet</source>
+        <target>他のウォレットを開く</target>
+      </trans-unit>
+      <trans-unit id="PIN must be a 4-digit number">
+        <source>PIN must be a 4-digit number</source>
+        <target>暗証番号は4桁の数字でご入力下さい</target>
+      </trans-unit>
+      <trans-unit id="Verifying PIN">
+        <source>Verifying PIN</source>
+        <target>暗証番号を確認中</target>
+      </trans-unit>
+      <trans-unit id="Setting PIN">
+        <source>Setting PIN</source>
+        <target>暗証番号を設定中</target>
+      </trans-unit>
+      <trans-unit id="This might take some time,">
+        <source>This might take some time,</source>
+        <target>しばらくお待ち下さい…</target>
+      </trans-unit>
+      <trans-unit id="please be patient.">
+        <source>please be patient.</source>
+        <target>ただいまウォレットを作成しています。</target>
+      </trans-unit>
+      <trans-unit id="Your PIN is incorrect">
+        <source>Your PIN is incorrect</source>
+        <target>暗証番号が間違っています</target>
+      </trans-unit>
+      <trans-unit id="Request timeout. Please check your internet connection.">
+        <source>Request timeout. Please check your internet connection.</source>
+        <target>接続がタイムアウトになりました。ネット環境をご確認ください。</target>
+      </trans-unit>
+      <trans-unit id="Could not save your details">
+        <source>Could not save your details</source>
+        <target>詳細は保存できませんでした</target>
+      </trans-unit>
+      <trans-unit id="We could not connect you to Mecto, please check your internet connection.">
+        <source>We couldn't connect you to Mecto, please check your internet connection.</source>
+        <target>場所に接続できませんでした、ネット環境をご確認ください。</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid address to send to">
+        <source>Please enter a valid address to send to</source>
+        <target>有効なアドレスをご入力ください</target>
+      </trans-unit>
+      <trans-unit id="Please enter an amount above">
+        <source>Please enter an amount above %(dust)s</source>
+        <target>%(dust)s以上の額をご入力下さい</target>
+      </trans-unit>
+      <trans-unit id="Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.">
+        <source>Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.</source>
+        <target>残高のうち、未だご利用いただけないBTCがあります。関連取引が確認されるまで少々お待ち下さい。</target>
+      </trans-unit>
+      <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
+        <source>It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>ウォレットの残高をすべて送ろうとしています。手数料を含めると%(sendableBalance)sのみお送りいただけます。送金額の欄に上記の金額を反映しました。</target>
+      </trans-unit>
+      <trans-unit id="You do not have enough funds in your wallet (incl. fee)">
+        <source>You don't have enough funds in your wallet (incl. fee)</source>
+        <target>残高不足です (incl. fee)</target>
+      </trans-unit>
+      <trans-unit id="A name is required to set your profile on Coin">
+        <source>A name is required to set your profile on Coin</source>
+        <target>Coinのプロフィールを作るには名前の設定が必要です</target>
+      </trans-unit>
+      <trans-unit id="Uh Oh...">
+        <source>Uh Oh...</source>
+        <target>あれ？</target>
+      </trans-unit>
+      <trans-unit id="Whoops!">
+        <source>Whoops!</source>
+        <target>おっと！</target>
+      </trans-unit>
+      <trans-unit id="Just saying...">
+        <source>Just saying...</source>
+        <target>ちなみに...</target>
+      </trans-unit>
+      <trans-unit id="Your browser does not support geolocation">
+        <source>Your browser does not support geolocation</source>
+        <target>ブラウザがGPS位置情報に対応していません</target>
+      </trans-unit>
+      <trans-unit id="Unable to retrieve your location">
+        <source>Unable to retrieve your location</source>
+        <target>位置情報が取得できませんでした</target>
+      </trans-unit>
+      <trans-unit id="Without a name, the payer would not be able to identify you on Mecto.">
+        <source>Without a name, the payer wouldn't be able to identify you on Mecto.</source>
+        <target>ハンドルネームを入力しないと、周りのユーザーにあなたのアドレスが見えません。</target>
+      </trans-unit>
+      <trans-unit id="Change your details">
+        <source>Change your details</source>
+        <target>詳細を変更</target>
+      </trans-unit>
+      <trans-unit id="Your username">
+        <source>Your username</source>
+        <target>あなたのユーザ名</target>
+      </trans-unit>
+      <trans-unit id="Gravatar email">
+        <source>Gravatar email</source>
+        <target>グラバター用メールアドレス</target>
+      </trans-unit>
+      <trans-unit id="Submit">
+        <source>Submit</source>
+        <target>設定する</target>
+      </trans-unit>
+      <trans-unit id="Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.">
+        <source>Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.</source>
+        <target>グラバターとはメールアドレスの登録で同じアバターがインターネット上どこでも使用できるサービスです。</target>
+      </trans-unit>
+      <trans-unit id="Create a gravatar">
+        <source>Create a gravatar</source>
+        <target>グラバターを作成</target>
+      </trans-unit>
+      <trans-unit id="Logout">
+        <source>Logout</source>
+        <target>ログアウト</target>
+      </trans-unit>
+      <trans-unit id="Support">
+        <source>Support</source>
+        <target>問い合わせ</target>
+      </trans-unit>
+      <trans-unit id="Send">
+        <source>Send</source>
+        <target>送る</target>
+      </trans-unit>
+      <trans-unit id="Receive">
+        <source>Receive</source>
+        <target>受け取る</target>
+      </trans-unit>
+      <trans-unit id="History">
+        <source>History</source>
+        <target>履歴</target>
+      </trans-unit>
+      <trans-unit id="Tokens">
+        <source>Tokens</source>
+        <target>コイン</target>
+      </trans-unit>
+      <trans-unit id="Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.">
+        <source>Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.</source>
+        <target>場所はGPS位置情報を元に周りにいるユーザーにあなたのウォレットのアドレスを他のCoinユーザーに公開します。</target>
+      </trans-unit>
+      <trans-unit id="Before you start using Mecto, you need to enter a name that will help others identify you.">
+        <source>Before you start using Mecto, you need to enter a name that will help others identify you.</source>
+        <target>場所をご利用になる前に、他のユーザーと交流できるよう、ハンドルネームを設定する必要があります。</target>
+      </trans-unit>
+      <trans-unit id="Save">
+        <source>Save</source>
+        <target>保存</target>
+      </trans-unit>
+      <trans-unit id="Loading transactions...">
+        <source>Loading transactions...</source>
+        <target>取引を読み込み中...</target>
+      </trans-unit>
+      <trans-unit id="Your transaction history">
+        <source>Your transaction history</source>
+        <target>取引履歴</target>
+      </trans-unit>
+      <trans-unit id="pending confirmation">
+        <source>pending confirmation</source>
+        <target>未確認</target>
+      </trans-unit>
+      <trans-unit id="Received">
+        <source>Received</source>
+        <target>受取り済み</target>
+      </trans-unit>
+      <trans-unit id="You do not have any transactions yet">
+        <source>You don't have any transactions yet</source>
+        <target>まだ取引がありません</target>
+      </trans-unit>
+      <trans-unit id="Transaction Id:">
+        <source>Transaction Id:</source>
+        <target>取引 ID</target>
+      </trans-unit>
+      <trans-unit id="Transaction Fee:">
+        <source>Transaction Fee:</source>
+        <target>取引手数料：</target>
+      </trans-unit>
+      <trans-unit id="Inputs:">
+        <source>Inputs:</source>
+        <target>入力：</target>
+      </trans-unit>
+      <trans-unit id="Outputs:">
+        <source>Outputs:</source>
+        <target>出力：</target>
+      </trans-unit>
+      <trans-unit id="Your wallet address">
+        <source>Your wallet address</source>
+        <target>ウォレットのアドレス</target>
+      </trans-unit>
+      <trans-unit id="Mecto">
+        <source>Mecto</source>
+        <target>場所</target>
+      </trans-unit>
+      <trans-unit id="Turn Mecto on">
+        <source>Turn Mecto on</source>
+        <target>場所を有効にする</target>
+      </trans-unit>
+      <trans-unit id="Turn Mecto off">
+        <source>Turn Mecto off</source>
+        <target>場所を無効にする</target>
+      </trans-unit>
+      <trans-unit id="Checking your location">
+        <source>Checking your location</source>
+        <target>位置情報を確認中</target>
+      </trans-unit>
+      <trans-unit id="Broadcasting your location...">
+        <source>Broadcasting your location...</source>
+        <target>位置情報を配信中...</target>
+      </trans-unit>
+      <trans-unit id="Wallet address">
+        <source>Wallet address</source>
+        <target>ウォレットのアドレス</target>
+      </trans-unit>
+      <trans-unit id="Amount">
+        <source>Amount</source>
+        <target>金額</target>
+      </trans-unit>
+      <trans-unit id="Confirm">
+        <source>Confirm</source>
+        <target>確認する</target>
+      </trans-unit>
+      <trans-unit id="No Coin users found nearby">
+        <source>No Coin users found nearby</source>
+        <target>近くのCoinユーザーが見つけられませんでした</target>
+      </trans-unit>
+      <trans-unit id="Search Again">
+        <source>Search Again</source>
+        <target>再度検索する</target>
+      </trans-unit>
+      <trans-unit id="Searching...">
+        <source>Searching...</source>
+        <target>検索中...</target>
+      </trans-unit>
+      <trans-unit id="Searching your area for other Coin users">
+        <source>Searching your area for other Coin users</source>
+        <target>他のCoinウェブユーザーを検索中</target>
+      </trans-unit>
+      <trans-unit id="Confirm transaction">
+        <source>Confirm transaction</source>
+        <target>取引を確認する</target>
+      </trans-unit>
+      <trans-unit id="transaction fee">
+        <source>transaction fee</source>
+        <target>手数料</target>
+      </trans-unit>
+      <trans-unit id="Cancel">
+        <source>Cancel</source>
+        <target>キャンセル</target>
+      </trans-unit>
+      <trans-unit id="Transaction Successful">
+        <source>Transaction Successful</source>
+        <target>取引完了</target>
+      </trans-unit>
+      <trans-unit id="Your transaction will appear in your history tab shortly.">
+        <source>Your transaction will appear in your history tab shortly.</source>
+        <target>取引は間もなく履歴欄に表示されます。</target>
+      </trans-unit>
+      <trans-unit id="Close">
+        <source>Close</source>
+        <target>閉じる</target>
+      </trans-unit>
+      <trans-unit id="Transaction Failed">
+        <source>Transaction Failed</source>
+        <target>取引に失敗しました</target>
+      </trans-unit>
+      <trans-unit id="Failed">
+        <source>Failed</source>
+        <target>失敗</target>
+      </trans-unit>
+      <trans-unit id="Sorry, Coin Wallet did not load.">
+        <source>Sorry, Coin Wallet didn't load.</source>
+        <target>Coinウォレットが読み込めませんでした</target>
+      </trans-unit>
+      <trans-unit id="Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.">
+        <source>Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.</source>
+        <target>ブラウザをアップデートする、もしくはプライベートモードを通常モードに切り替えて下さい。問題が続くようであればChromeブラウザーをオススメしております。</target>
+      </trans-unit>
+      <trans-unit id="Current coin price">
+        <source>Current coin price</source>
+        <target>現在のコイン価格</target>
+      </trans-unit>
+      <trans-unit id="Username not available">
+        <source>Username not available</source>
+        <target>ユーザー名は使用できません。</target>
+      </trans-unit>
+      <trans-unit id="Scan your fingerprint please">
+        <source>Scan your fingerprint please</source>
+        <target>あなたの指紋をスキャンしてください</target>
+      </trans-unit>
+      <trans-unit id="Enter PIN">
+        <source>Enter PIN</source>
+        <target>PINを入力してください</target>
+      </trans-unit>
+      <trans-unit id="I Agree To The Terms &amp; Conditions">
+        <source>I Agree To The Terms &amp; Conditions</source>
+        <target>私は利用規約に同意します</target>
+      </trans-unit>
+      <trans-unit id="Terms of Use">
+        <source>Terms of Use</source>
+        <target>利用規約</target>
+      </trans-unit>
+      <trans-unit id="Unparsed address">
+        <source>Unparsed address</source>
+        <target>未解析アドレス</target>
+      </trans-unit>
+      <trans-unit id="Exchange">
+        <source>Exchange</source>
+        <target>取引</target>
+      </trans-unit>
+      <trans-unit id="From">
+        <source>From</source>
+        <target>差出</target>
+      </trans-unit>
+      <trans-unit id="To">
+        <source>To</source>
+        <target>宛先</target>
+      </trans-unit>
+      <trans-unit id="Exchange rate">
+        <source>Exchange rate</source>
+        <target>取引レート</target>
+      </trans-unit>
+      <trans-unit id="Loading...">
+        <source>Loading...</source>
+        <target>読み込み中...</target>
+      </trans-unit>
+      <trans-unit id="Address">
+        <source>Address</source>
+        <target>アドレス</target>
+      </trans-unit>
+      <trans-unit id="Return address (optional)">
+        <source>Return address (optional)</source>
+        <target>返送先住所（オプション）</target>
+      </trans-unit>
+      <trans-unit id="Deposit address">
+        <source>Deposit address (%(symbol)s)</source>
+        <target>振込アドレス（%(symbol)s）</target>
+      </trans-unit>
+      <trans-unit id="Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
+        <source>Send up to %(depositMax)s %(depositSymbol)s to deposit address.
+It will be converted into %(toSymbol)s, and sent to
+ %(toAddress)s</source>
+        <target>%(depositMax)s %(depositSymbol)s まで、入金先にお送りください。
+%(toSymbol)s に変換されて
+ %(toAddress)s に送付されます</target>
+      </trans-unit>
+      <trans-unit id="Deposit minimum">
+        <source>Deposit minimum</source>
+        <target>入金最低度</target>
+      </trans-unit>
+      <trans-unit id="amount :toSymbol have been delivered to :toAddress">
+        <source>%(amount)s %(toSymbol)s have been delivered to
+ %(toAddress)s</source>
+        <target>%(amount)s %(toSymbol)sが
+ %(toAddress)sに送信されました</target>
+      </trans-unit>
+      <trans-unit id="Back">
+        <source>Back</source>
+        <target>戻る</target>
+      </trans-unit>
+      <trans-unit id="Awaiting deposit...">
+        <source>Awaiting deposit...</source>
+        <target>入金を待っています...</target>
+      </trans-unit>
+      <trans-unit id="Deposit has been received">
+        <source>Deposit has been received</source>
+        <target>入金を受け取りました</target>
+      </trans-unit>
+      <trans-unit id="Awaiting exchange...">
+        <source>Awaiting exchange...</source>
+        <target>取引を待っています...</target>
+      </trans-unit>
+      <trans-unit id="Exchange complete!">
+        <source>Exchange complete!</source>
+        <target>取引が完了しました！</target>
+      </trans-unit>
+      <trans-unit id="Done">
+        <source>Done</source>
+        <target>完了</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid return address">
+        <source>Please enter a valid return address</source>
+        <target>有効な返信先アドレスを入力してください</target>
+      </trans-unit>
+      <trans-unit id="Miner fee">
+        <source>Miner fee</source>
+        <target>マイナー手数料</target>
+      </trans-unit>
+      <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
+        <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
+        <target>返信先アドレスは、取引が失敗した場合に入金が返却される、お客様が管理するアドレスである必要があります。</target>
+      </trans-unit>
+      <trans-unit id="Remove account">
+        <source>Remove account</source>
+        <target>アカウントを削除</target>
+      </trans-unit>
+      <trans-unit id="Remove">
+        <source>Remove</source>
+        <target>削除</target>
+      </trans-unit>
+      <trans-unit id="Are you sure?">
+        <source>Are you sure?</source>
+        <target>本当によろしいですか？</target>
+      </trans-unit>
+      <trans-unit id="Account has been successfully removed">
+        <source>Account has been successfully removed</source>
+        <target>アカウントは正常に削除されました</target>
+      </trans-unit>
+      <trans-unit id="This page will be reloaded shortly.">
+        <source>This page will be reloaded shortly.</source>
+        <target>このページはまもなくリロードされます。</target>
+      </trans-unit>
+      <trans-unit id="About">
+        <source>About</source>
+        <target>詳細</target>
+      </trans-unit>
+      <trans-unit id="Release information">
+        <source>Release information</source>
+        <target>リリース情報</target>
+      </trans-unit>
+      <trans-unit id="Version">
+        <source>Version</source>
+        <target>バージョン</target>
+      </trans-unit>
+      <trans-unit id="Transfer paper wallet / private key">
+        <source>Transfer paper wallet / private key</source>
+        <target>ペーパーウォレット / 秘密鍵を転送</target>
+      </trans-unit>
+      <trans-unit id="Export private keys">
+        <source>Export private keys</source>
+        <target>秘密鍵をエクスポート</target>
+      </trans-unit>
+      <trans-unit id="Transfer private key">
+        <source>Transfer private key</source>
+        <target>秘密鍵を転送</target>
+      </trans-unit>
+      <trans-unit id="Transfer">
+        <source>Transfer</source>
+        <target>転送</target>
+      </trans-unit>
+      <trans-unit id="Private key">
+        <source>Private key</source>
+        <target>秘密鍵</target>
+      </trans-unit>
+      <trans-unit id="This will transfer all coins from the paper wallet address to your wallet.">
+        <source>This will transfer all coins from the paper wallet address to your wallet.</source>
+        <target>これにより、すべてのコインがペーパーウォレットのアドレスからあなたのウォレットに転送されます。</target>
+      </trans-unit>
+      <trans-unit id="This private key has no coins for transfer.">
+        <source>This private key has no coins for transfer.</source>
+        <target>この秘密鍵には転送のためのコインがありません。</target>
+      </trans-unit>
+      <trans-unit id="Invalid private key">
+        <source>Invalid private key</source>
+        <target>秘密鍵が無効です</target>
+      </trans-unit>
+      <trans-unit id="Insufficient funds">
+        <source>Insufficient funds</source>
+        <target>残高不足です</target>
+      </trans-unit>
+      <trans-unit id="Warning!">
+        <source>Warning!</source>
+        <target>警告！</target>
+      </trans-unit>
+      <trans-unit id="Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you&apos;d like them to have access to your funds.">
+        <source>Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you'd like them to have access to your funds.</source>
+        <target>あなたの秘密鍵は資金への鍵なので、その鍵に資金へのアクセス権を持たせたいのでない限り、誰かと共有しないでください。</target>
+      </trans-unit>
+      <trans-unit id="Show">
+        <source>Show</source>
+        <target>表示</target>
+      </trans-unit>
+      <trans-unit id="Comma-separated list">
+        <source>Comma-separated list</source>
+        <target>コンマ区切りリスト</target>
+      </trans-unit>
+      <trans-unit id="Your wallet has no private keys with coins for export.">
+        <source>Your wallet has no private keys with coins for export.</source>
+        <target>ウォレットにエクスポート用コインの秘密鍵がありません。</target>
+      </trans-unit>
+      <trans-unit id="Add Token">
+        <source>Add Token</source>
+        <target>トークンを追加</target>
+      </trans-unit>
+      <trans-unit id="Gas limit">
+        <source>Gas limit</source>
+        <target>ガスリミット</target>
+      </trans-unit>
+      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.">
+        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.</source>
+        <target>ガスリミットはあなたの取引で送るべきガスの量です。この数を増やしても、取引の確認が早くなるわけではありません。 ETH送信は、21000です。トークン送信は、200000前後です。</target>
+      </trans-unit>
+      <trans-unit id="Contract address">
+        <source>Contract address</source>
+        <target>コントラクトアドレス</target>
+      </trans-unit>
+      <trans-unit id="Add">
+        <source>Add</source>
+        <target>追加</target>
+      </trans-unit>
+      <trans-unit id="Symbol">
+        <source>Symbol</source>
+        <target>シンボル</target>
+      </trans-unit>
+      <trans-unit id="Decimals">
+        <source>Decimals</source>
+        <target>小数</target>
+      </trans-unit>
+      <trans-unit id="Token">
+        <source>Token</source>
+        <target>トークン</target>
+      </trans-unit>
+      <trans-unit id="Custom token">
+        <source>Custom token</source>
+        <target>カスタム トークン</target>
+      </trans-unit>
+      <trans-unit id="Please fill out all fields.">
+        <source>Please fill out all fields.</source>
+        <target>すべての欄に記入してください。</target>
+      </trans-unit>
+      <trans-unit id="Please enter Gas Limit greater than zero">
+        <source>Please enter Gas Limit greater than zero</source>
+        <target>0より大きいガスリミットを入力してください</target>
+      </trans-unit>
+      <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
+        <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
+        <target>取引手数料（%(ethereumRequired)sETH）を支払うための十分なイーサリアム資金がありません。</target>
+      </trans-unit>
+      <trans-unit id="Click to Select">
+        <source>Click to Select</source>
+        <target>クリックして選択</target>
+      </trans-unit>
+      <trans-unit id="Copy to Clipboard">
+        <source>Copy to Clipboard</source>
+        <target>クリップボードにコピー</target>
+      </trans-unit>
+      <trans-unit id="Copied!">
+        <source>Copied!</source>
+        <target>コピーしました！</target>
+      </trans-unit>
+      <trans-unit id="Please enter an address other than your wallet address">
+        <source>Please enter an address other than your wallet address</source>
+        <target>ウォレットアドレス以外のアドレスを入力してください</target>
+      </trans-unit>
+      <trans-unit id="Please enter a private key other than your wallet private key">
+        <source>Please enter a private key other than your wallet private key</source>
+        <target>ウォレットの秘密鍵以外の秘密鍵を入力してください</target>
+      </trans-unit>
+      <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
+        <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(denomination)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>ウォレットを空にしようとしているようですね。取引手数料と最低積立金 (%(minReserve)s%(denomination)s) を考慮して、あなたが送れる最大金額は%(sendableBalance)sと見積もっています。金額欄の数値を修正しました。</target>
+      </trans-unit>
+      <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :denomination) to your wallet address.">
+        <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(denomination)s) to your wallet address.</source>
+        <target>あなたのウォレットは活性化されていません。 有効にするには、最低額（%(minReserve)s %(denomination)s）以上をウォレットのアドレスに送付してください。</target>
+      </trans-unit>
+      <trans-unit id="Load more">
+        <source>Load more</source>
+        <target>もっと読み込む</target>
+      </trans-unit>
+      <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
+        <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
+        <target>受信者のウォレットがアクティブになっていません。%(minReserve)s%(denomination)sより大きい金額のみ送信できます。</target>
+      </trans-unit>
+      <trans-unit id="Destination tag">
+        <source>Destination tag</source>
+        <target>宛先タグ</target>
+      </trans-unit>
+      <trans-unit id="Invoice ID">
+        <source>Invoice ID</source>
+        <target>請求書ID</target>
+      </trans-unit>
+      <trans-unit id="(optional)">
+        <source>(optional)</source>
+        <target>(オプション)</target>
+      </trans-unit>
+      <trans-unit id="An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.">
+        <source>An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.</source>
+        <target>支払いの理由を識別する任意の符号なし32ビット整数あるいは、リップル以外のアカウント。</target>
+      </trans-unit>
+      <trans-unit id="A 256-bit hash that can be used to identify a particular payment.">
+        <source>A 256-bit hash that can be used to identify a particular payment.</source>
+        <target>特定の支払の識別に使用できる256ビットのハッシュ。</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid invoice ID">
+        <source>Please enter a valid invoice ID</source>
+        <target>有効な請求書IDを入力してください</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid destination tag">
+        <source>Please enter a valid destination tag</source>
+        <target>有効な宛先タグを入力してください</target>
+      </trans-unit>
+      <trans-unit id="Exchange is currently unavailable for this pair">
+        <source>Exchange is currently unavailable for this pair</source>
+        <target>このペアでは現在取引を利用できません</target>
+      </trans-unit>
+      <trans-unit id="Payment operations:">
+        <source>Payment operations:</source>
+        <target>支払い処理：</target>
+      </trans-unit>
+      <trans-unit id="Pay (:amount) XLM to :destination">
+        <source>Pay %(amount)s XLM to %(destination)s</source>
+        <target>%(amount)sXLMを%(destination)sへお支払いください</target>
+      </trans-unit>
+      <trans-unit id="Created Account :destination with balance :amount XLM">
+        <source>Created Account %(destination)s with balance %(amount)s XLM</source>
+        <target>残高%(amount)sXLMのアカウント%(destination)sが作成されました</target>
+      </trans-unit>
+      <trans-unit id="Memo">
+        <source>Memo</source>
+        <target>メモ</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid memo">
+        <source>Please enter a valid memo</source>
+        <target>有効なメモを入力してください</target>
+      </trans-unit>
+      <trans-unit id="The memo contains optional extra information. A string up to 28-bytes long.">
+        <source>The memo contains optional extra information. A string up to 28-bytes long.</source>
+        <target>メモには、オプションで最大28バイトの文字列の追加情報が含まれます。</target>
+      </trans-unit>
+      <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :denomination.">
+        <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(denomination)s.</source>
+        <target>ウォレットがアクティベートされていません。%(minReserve)s%(denomination)sより大きい金額のみを受け取ることができます。</target>
+      </trans-unit>
+      <trans-unit id="Privacy Policy">
+        <source>Privacy Policy</source>
+        <target>プライバシーポリシー</target>
+      </trans-unit>
+      <trans-unit id="Your ShapeShift account is not verified.">
+        <source>Your ShapeShift account is not verified.</source>
+        <target>ShapeShiftアカウントは検証されません。</target>
+      </trans-unit>
+      <trans-unit id="Complete verification">
+        <source>Complete verification</source>
+        <target>検証が完了しました</target>
+      </trans-unit>
+      <trans-unit id="Try to sign in again">
+        <source>Try to sign in again</source>
+        <target>再度サインインしてみる</target>
+      </trans-unit>
+      <trans-unit id="Sign in">
+        <source>Sign in</source>
+        <target>サインイン</target>
+      </trans-unit>
+      <trans-unit id="Setup EOS account">
+        <source>Setup EOS account</source>
+        <target>EOSアカウントの設定</target>
+      </trans-unit>
+      <trans-unit id="Account name">
+        <source>Account name</source>
+        <target>アカウント名</target>
+      </trans-unit>
+      <trans-unit id="The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.">
+        <source>The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.</source>
+        <target>EOSアカウント名は12文字以内で、1~5の英小文字と数字で構成されます。</target>
+      </trans-unit>
+      <trans-unit id="Invalid account name">
+        <source>Invalid account name</source>
+        <target>アカウント名が無効です</target>
+      </trans-unit>
+      <trans-unit id="This account name is already taken, please choose another one.">
+        <source>This account name is already taken, please choose another one.</source>
+        <target>このアカウント名は既に使用されています。別のアカウントを選択してください。</target>
+      </trans-unit>
+      <trans-unit id="To create a new account you need to make an EOS transfer (amount greater than :minAmount) with the following data from an exchange or other EOS wallet.">
+        <source>To create a new account you need to make an EOS transfer (amount greater than %(minAmount)s) with the following data from an exchange or other EOS wallet.</source>
+        <target>新しいアカウントを作成するには、取引所または他のEOSウォレットから次のデータを使用してEOS転送（金額が%(minAmount)s以上）を行う必要があります。</target>
+      </trans-unit>
+      <trans-unit id="Check">
+        <source>Check</source>
+        <target>チェック</target>
+      </trans-unit>
+      <trans-unit id="Account has been successfully set up">
+        <source>Account has been successfully set up</source>
+        <target>アカウントは正常に設定されました</target>
+      </trans-unit>
+      <trans-unit id="The memo contains optional extra information. A string up to 256-bytes long.">
+        <source>The memo contains optional extra information. A string up to 256-bytes long.</source>
+        <target>メモには、オプションで最大256バイトの文字列の追加情報が含まれます。</target>
+      </trans-unit>
+      <trans-unit id="It seems like you are trying to empty your wallet. Max amount you can send is. We have amended the value in the amount field for you">
+        <source>It seems like you are trying to empty your wallet. Max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>ウォレットを空にしようとしているようですね。送れる最大金額は%(sendableBalance)sです。金額欄の数値を修正しました。</target>
+      </trans-unit>
+      <trans-unit id="Destination account doesn&apos;t exist.">
+        <source>Destination account doesn't exist.</source>
+        <target>宛先アカウントが存在しません。</target>
+      </trans-unit>
+      <trans-unit id="Transaction has been expired. Please try again.">
+        <source>Transaction has been expired. Please try again.</source>
+        <target>取引は期限切れです。再試行してください。</target>
+      </trans-unit>
+      <trans-unit id="Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.">
+        <source>Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.</source>
+        <target>アカウントのCPU使用量が超過しました。後でもう一度試すか、他の人にCPUを追加してもらってください。</target>
+      </trans-unit>
+      <trans-unit id="Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.">
+        <source>Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.</source>
+        <target>アカウントNETの使用量が超過しました。後でもう一度試すか、他の人にNETを追加してもらってください。</target>
+      </trans-unit>
+      <trans-unit id="The extra amount will be deposited to the created account.">
+        <source>The extra amount will be deposited to the created account.</source>
+        <target>余分な額は作成したアカウントに入金されます。</target>
+      </trans-unit>
+      <trans-unit id="Can&apos;t connect to :network node. Please try again later or choose another token.">
+        <source>Can't connect to %(network)s node. Please try again later or choose another token.</source>
+        <target>%(network)s ノードに接続できません。後でもう一度実行するか、別のトークンを選択してください。</target>
+      </trans-unit>
+      <trans-unit id="Network node error. Please try again later.">
+        <source>%(network)s node error. Please try again later.</source>
+        <target>%(network)s ノードエラー。後でやり直してください。</target>
+      </trans-unit>
+      <trans-unit id="Choose exchange">
+        <source>Choose exchange</source>
+        <target>取引所を選択</target>
+      </trans-unit>
+      <trans-unit id="Next step">
+        <source>Next step</source>
+        <target>次のステップ</target>
+      </trans-unit>
+      <trans-unit id="Minimum amount:">
+        <source>Minimum amount:</source>
+        <target>最小額：</target>
+      </trans-unit>
+      <trans-unit id="address">
+        <source>address</source>
+        <target>アドレス</target>
+      </trans-unit>
+      <trans-unit id="Exchange error">
+        <source>Exchange error</source>
+        <target>取引エラー</target>
+      </trans-unit>
+      <trans-unit id="Transaction not found">
+        <source>Transaction not found</source>
+        <target>取引が見つかりません</target>
+      </trans-unit>
+      <trans-unit id="Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
+        <source>Send %(depositAmount)s %(depositSymbol)s to deposit address.
+It will be converted into %(toSymbol)s, and sent to
+ %(toAddress)s</source>
+        <target>%(depositAmount)s%(depositSymbol)sを入金アドレスに送ってください。
+は%(toSymbol)sに変換され、
+%(toAddress)sに送信されます</target>
+      </trans-unit>
+      <trans-unit id="Network fee">
+        <source>Network fee</source>
+        <target>ネットワーク料金</target>
+      </trans-unit>
+      <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
+        <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
+        <target>36時間以内に送金しないと、取引は自動的に取り消されます。</target>
+      </trans-unit>
+      <trans-unit id="Extra Id">
+        <source>Extra Id</source>
+        <target>追加 ID</target>
+      </trans-unit>
+      <trans-unit id="Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).">
+        <source>Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).</source>
+        <target>取引処理に追加 IDを使用する通貨の所在地のプロパティ (アドレス、タグ、メモ、メッセージなど)。</target>
+      </trans-unit>
+      <trans-unit id="Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.">
+        <source>Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.</source>
+        <target>ネットワーク料金は固定されており、送金のたびに課金されます。各通貨には、操作に使用される厳密な金額があります。この料金は、あなたの資金がブロックチェーンに含まれた時に引かれます。</target>
+      </trans-unit>
+      <trans-unit id="On hold...">
+        <source>On hold...</source>
+        <target>保留中...</target>
+      </trans-unit>
+      <trans-unit id="Currently, your transaction (ID: :id) is on hold.&lt;br&gt;Please, contact Changelly to pass KYC.">
+        <source>Currently, your transaction (ID: %(id)s) is on hold.&lt;br&gt;Please, contact Changelly to pass KYC.</source>
+        <target>現在、あなたの取引 (ID:%(id)s) は保留中です。&lt;br&gt;Changellyに連絡してKYCをパスしてください。</target>
+      </trans-unit>
+      <trans-unit id="Transaction (ID: :id) has failed. Please, contact Changelly.">
+        <source>Transaction (ID: %(id)s) has failed. Please, contact Changelly.</source>
+        <target>取引 (ID:%(id)s) が失敗しました。Changellyに連絡してください。</target>
+      </trans-unit>
+      <trans-unit id="Exchange failed and coins were refunded to :address.">
+        <source>Exchange failed and coins were refunded to %(address)s.</source>
+        <target>交換は失敗し、コインは%(address)sに返金されました。</target>
+      </trans-unit>
+      <trans-unit id="Payment wasn&apos;t received since 36 hours since the transaction was created.">
+        <source>Payment wasn't received since 36 hours since the transaction was created.</source>
+        <target>取引が制作されてから36時間経っても支払いが受け取られていません。</target>
+      </trans-unit>
+      <trans-unit id="Terms of Service">
+        <source>Terms of Service</source>
+        <target>利用規約</target>
+      </trans-unit>
+      <trans-unit id="Accept">
+        <source>Accept</source>
+        <target>同意する</target>
+      </trans-unit>
+      <trans-unit id="Changelly_TOS">
+        <source>I have read and I agree to the Changelly &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;terms of use&lt;/a&gt; and &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;privacy policy&lt;/a&gt;.&lt;br&gt;By clicking "Accept", I acknowledge and understan that my transaction may trigger AML/KYC verification according to &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;Changelly AML/KYC&lt;/a&gt;.</source>
+        <target>私はChangellyの&lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;使用条件&lt;/a&gt;と&lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;プライバシーポリシー&lt;/a&gt;を読み、同意しました。&lt;br&gt;「同意」をクリックすることで、私の取引が&lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;Changelly AML/KYC&lt;/a&gt;に従ったAML/KYC認証を始める可能性があることを認識し理解しています。</target>
+      </trans-unit>
+      <trans-unit id="max.">
+        <source>max.</source>
+        <target>最大</target>
+      </trans-unit>
+      <trans-unit id="Fee">
+        <source>Fee</source>
+        <target>手数料</target>
+      </trans-unit>
+      <trans-unit id="Amount of coins that is charged from your balance for single transaction (&lt;a href=&quot;&quot; onclick=&quot;window.open(&apos;https://www.coin.space/all-about-bitcoin-fees&apos;, &apos;_system&apos;); return false;&quot;&gt;more info&lt;/a&gt;).">
+        <source>Amount of coins that is charged from your balance for single transaction (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;more info&lt;/a&gt;).</source>
+        <target>単一取引の残高から請求されるコインの金額 (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;他の情報&lt;/a&gt;)。</target>
+      </trans-unit>
+      <trans-unit id="Confirm passphrase">
+        <source>Confirm passphrase</source>
+        <target>パスフレーズの確認</target>
+      </trans-unit>
+      <trans-unit id="Almost done! Enter the following words from your passphrase.">
+        <source>Almost done! Enter the following words from your passphrase.</source>
+        <target>もう少しで完成です！パスフレーズから次の単語を入力します。</target>
+      </trans-unit>
+      <trans-unit id="Word">
+        <source>Word</source>
+        <target>単語</target>
+      </trans-unit>
+      <trans-unit id="Buy with Credit Card">
+        <source>Buy with Credit Card</source>
+        <target></target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
