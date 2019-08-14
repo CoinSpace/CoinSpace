@@ -4,13 +4,16 @@ var request = require('lib/request');
 var urlRoot = window.urlRoot;
 var coins = {};
 var emitter = require('lib/emitter');
-var showTos = require('widgets/modals/moonpay-success');
+var showSuccess = require('widgets/modals/moonpay-success');
+
+var hasHandledMobileSuccess = false;
 
 emitter.on('handleOpenURL', function(url) {
   url = url || '';
   var matchAction = url.match(/action=([^&]+)/);
   if (!matchAction || matchAction[1] !== 'moonpay-success') return;
-  showTos();
+  hasHandledMobileSuccess = true;
+  window.localStorage.setItem('_cs_moonpay_success', 'true');
 });
 
 function init() {
@@ -27,11 +30,9 @@ function isSupported(symbol) {
 function show(currencyCode, walletAddress) {
   var baseUrl = process.env.MOONPAY_WIDGET_URL + '&';
 
-  var redirectURL;
+  var redirectURL = process.env.SITE_URL + 'moonpay/redirectURL?buildType=web';
   if (process.env.BUILD_TYPE === 'phonegap') {
-    redirectURL = 'coinspace://?action=moonpay-success';
-  } else {
-    redirectURL = window.location.href;
+    redirectURL = process.env.SITE_URL + 'moonpay/redirectURL?buildType=phonegap';
   }
 
   var params = {
@@ -46,7 +47,26 @@ function show(currencyCode, walletAddress) {
   }).join('&');
 
   baseUrl += queryString;
-  window.open(baseUrl, '_system');
+
+  var width = 550;
+  var height = 550;
+  var options = 'width=' + width + ', ';
+  options += 'height=' + height + ', ';
+  options += 'left=' + ((screen.width - width) / 2) + ', ';
+  options += 'top=' + ((screen.height - height) / 2) + '';
+
+  window.localStorage.removeItem('_cs_moonpay_success');
+  var popup = window.open(baseUrl, '_system', options);
+  var popupInterval = setInterval(function() {
+    if (popup.closed || hasHandledMobileSuccess) {
+      clearInterval(popupInterval);
+      hasHandledMobileSuccess = false;
+      if (window.localStorage.getItem('_cs_moonpay_success') === 'true') {
+        showSuccess();
+      }
+    }
+  }, 250);
+
   return false;
 }
 

@@ -252,6 +252,12 @@ router.get('/moonpay/coins', function(req, res) {
   });
 });
 
+router.get('/moonpay/redirectURL', function(req, res) {
+  var buildType = req.query.buildType;
+  if (buildType !== 'phonegap' && buildType !== 'web') return res.status(400).send('Bad request');
+  res.render('moonpay', {buildType: buildType});
+});
+
 router.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send({error: 'Oops! something went wrong.'});

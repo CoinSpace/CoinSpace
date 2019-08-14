@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MoonPay</title>
+</head>
+<body>
+  Loading...
+<script>
+  var buildType = '<%= buildType %>';
+  if (buildType === 'web') {
+    window.localStorage.setItem('_cs_moonpay_success', 'true');
+    window.close();
+  } else if (buildType === 'phonegap') {
+    window.location = 'coinspace://?action=moonpay-success';
+  }
+</script>
+</body>
+</html>
