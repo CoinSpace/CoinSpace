@@ -23,7 +23,11 @@
     <div class="detail__strings">
 
       <h3 class="_title">{{translate("Transaction Id:")}}</h3>
+      {{#if transaction.token}}
+      <a href="" onclick="window.open('https://etherscan.io/tx/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
+      {{else}}
       <a href="" onclick="window.open('https://blockchair.com/ethereum/transaction/{{id}}', '_system'); return false;" class="_value">{{id}}</a>
+      {{/if}}
 
       {{#unless token}}
         <h3 class="_title">{{translate("Transaction Fee:")}}</h3>
