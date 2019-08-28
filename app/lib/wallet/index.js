@@ -66,7 +66,7 @@ function createWallet(passphrase, network, callback) {
   }
 
   worker.onerror = function(e) {
-    return callback({message: e.message.replace("Uncaught Error: ", '')})
+    return callback({message: e.message.split(': ')[1]})
   }
 
   worker.postMessage(data)
