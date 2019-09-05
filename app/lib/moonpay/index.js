@@ -17,8 +17,10 @@ emitter.on('handleOpenURL', function(url) {
 });
 
 function init() {
-  var url = urlRoot + 'moonpay/coins';
-  return request({url: url}).then(function(data) {
+  return request({url: 'https://api.moonpay.io/v2/ip_address'}).then(function(data) {
+    if (data && data.isAllowed) return request({url: urlRoot + 'moonpay/coins'});
+  }).then(function(data) {
+    if (!data) return;
     coins = data;
   }).catch(console.error);
 }
