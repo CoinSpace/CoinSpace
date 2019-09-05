@@ -1,157 +1,157 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="de.json" datatype="plaintext" source-language="en" target-language="de">
+  <file original="hr.json" datatype="plaintext" source-language="en" target-language="hr">
     <body>
       <trans-unit id="Back to coin">
         <source>Back to coin</source>
-        <target>Zurück zu coin</target>
+        <target>Nazad na novčić</target>
       </trans-unit>
       <trans-unit id="Create new wallet">
         <source>Create new wallet</source>
-        <target>Neue Brieftasche erstellen</target>
+        <target>Kreiraj novi novčanik</target>
       </trans-unit>
       <trans-unit id="Open existing wallet">
         <source>Open existing wallet</source>
-        <target>Bestehende Brieftasche öffnen</target>
+        <target>Otvori postojeći novčanik</target>
       </trans-unit>
       <trans-unit id="We are about to generate your very own passphrase">
         <source>We're about to generate your very own passphrase</source>
-        <target>Wir werden Deine eigene Passphrase erzeugen</target>
+        <target>Uskoro ćemo kreirati Vašu jedinstvenu zaporku</target>
       </trans-unit>
       <trans-unit id="This keeps your account secure, and lets you open your wallet on multiple devices.">
         <source>This keeps your account secure, and lets you open your wallet on multiple devices.</source>
-        <target>Dies sichert Dein Konto ab und ermöglicht es Deine Brieftasche auf mehreren Geräten zu öffnen.</target>
+        <target>Ovime će Vaš korisnički račun biti bezbjedan i moći ćete otvarati Vaš novčanik na različitim uređajima.</target>
       </trans-unit>
       <trans-unit id="It is very important you write this down.">
         <source>It's very important you write this down.</source>
-        <target>Es ist sehr wichtig, dass Du Dir dies aufschreibst. </target>
+        <target>Veoma je važno da ovo zabilježite.</target>
       </trans-unit>
       <trans-unit id="Generate passphrase">
         <source>Generate passphrase</source>
-        <target>Passphrase erzeugen</target>
+        <target>Generiraj zaporku</target>
       </trans-unit>
       <trans-unit id="Go back">
         <source>Go back</source>
-        <target>Zurück</target>
+        <target>Idi nazad</target>
       </trans-unit>
       <trans-unit id="Generating">
         <source>Generating</source>
-        <target>Erzeugen</target>
+        <target>Generira se</target>
       </trans-unit>
       <trans-unit id="Synchronizing Wallet">
         <source>Synchronizing Wallet</source>
-        <target>Synchronisiere die Brieftasche</target>
+        <target>Novčanik se sinhronizira</target>
       </trans-unit>
       <trans-unit id="Your passphrase (12 words)">
         <source>Your passphrase (12 words)</source>
-        <target>Deine Passphrase (12 Wörter)</target>
+        <target>Vaša zaporka (12 riječi)</target>
       </trans-unit>
       <trans-unit id="Your passphrase will not be shown again.">
         <source>Your passphrase will not be shown again.</source>
-        <target>Deine Passphrase wird nicht wieder angezeigt.</target>
+        <target>Vaša zaporka neće biti ponovno prikazana.</target>
       </trans-unit>
       <trans-unit id="Without it you will lose access to your wallet.">
         <source>Without it you will lose access to your wallet.</source>
-        <target>Ohne dies wirst Du Zugang zu Deiner Brieftasche verlieren.</target>
+        <target>Bez nje ćete izgubiti pristup Vašem novčaniku.</target>
       </trans-unit>
       <trans-unit id="I have written down or otherwise securely stored my passphrase">
         <source>I have written down or otherwise securely stored my passphrase</source>
-        <target>Ich habe die Passphrase aufgeschrieben oder anders sicher gespeichert</target>
+        <target>Zabilježio sam ili na drugi način bezbjedno pohranio svoju zaporku</target>
       </trans-unit>
       <trans-unit id="Open wallet">
         <source>Open wallet</source>
-        <target>Brieftasche öffnen</target>
+        <target>Otvori novčanik</target>
       </trans-unit>
       <trans-unit id="Checking passphrase">
         <source>Checking passphrase</source>
-        <target>Prüfe die Passphrase</target>
+        <target>Zaporka se provjerava</target>
       </trans-unit>
       <trans-unit id="Enter Passphrase">
         <source>Enter Passphrase</source>
-        <target>Gib Deine Passphrase ein</target>
+        <target>Unesite zaporku</target>
       </trans-unit>
       <trans-unit id="Invalid passphrase">
         <source>Invalid passphrase</source>
-        <target>Ungültige Passphrase</target>
+        <target>Zaporka nije ispravna</target>
       </trans-unit>
       <trans-unit id="Enter your PIN">
         <source>Enter your PIN</source>
-        <target>Gib Deinen PIN ein</target>
+        <target>Unesite Vaš PIN</target>
       </trans-unit>
       <trans-unit id="Set a PIN for quick access">
         <source>Set a PIN for quick access</source>
-        <target>Lege einen PIN für schnellen Zugang fest</target>
+        <target>Podesite PIN za brzi pristup</target>
       </trans-unit>
       <trans-unit id="Review passphrase again">
         <source>Review passphrase again</source>
-        <target>Prüfe die Passphrase noch einmal</target>
+        <target>Ponovno pogledajte zaporku</target>
       </trans-unit>
       <trans-unit id="Open a different wallet">
         <source>Open a different wallet</source>
-        <target>Eine andere Brieftasche öffnen</target>
+        <target>Otvorite drugi novčanik</target>
       </trans-unit>
       <trans-unit id="PIN must be a 4-digit number">
         <source>PIN must be a 4-digit number</source>
-        <target>PIN muss eine 4-stellige Nummer sein</target>
+        <target>PIN mora biti 4-cifren broj</target>
       </trans-unit>
       <trans-unit id="Verifying PIN">
         <source>Verifying PIN</source>
-        <target>Prüfe PIN</target>
+        <target>PIN se provjerava</target>
       </trans-unit>
       <trans-unit id="Setting PIN">
         <source>Setting PIN</source>
-        <target>Setze PIN</target>
+        <target>PIN se podešava</target>
       </trans-unit>
       <trans-unit id="This might take some time,">
         <source>This might take some time,</source>
-        <target>Dies kann ein wenig dauern,</target>
+        <target>Ovo može potrajati neko vrijeme,</target>
       </trans-unit>
       <trans-unit id="please be patient.">
         <source>please be patient.</source>
-        <target>ein wenig Geduld bitte.</target>
+        <target>molimo Vas za strpljenje.</target>
       </trans-unit>
       <trans-unit id="Your PIN is incorrect">
         <source>Your PIN is incorrect</source>
-        <target>Dein PIN is falsch</target>
+        <target>Vaš PIN nije ispravan</target>
       </trans-unit>
       <trans-unit id="Request timeout. Please check your internet connection.">
         <source>Request timeout. Please check your internet connection.</source>
-        <target>Verbindungsfehler. Bitte prüfe Deine Internetverbindung.</target>
+        <target>Isteklo je vrijeme za zahtjev. Molimo provjerite Vašu internet vezu.</target>
       </trans-unit>
       <trans-unit id="Could not save your details">
         <source>Could not save your details</source>
-        <target>Deine Angaben konnten nicht gespeichert werden</target>
+        <target>Vaši podaci nisu mogli biti zapamćeni</target>
       </trans-unit>
       <trans-unit id="We could not connect you to Mecto, please check your internet connection.">
         <source>We couldn't connect you to Mecto, please check your internet connection.</source>
-        <target>Wir konnten Dich nicht mit Mecto verbinden, bitte prüfe Deine Internetverbindung.</target>
+        <target>Nismo uspjeli da Vas povežemo na Mecto, molimo provjerite Vašu internet vezu.</target>
       </trans-unit>
       <trans-unit id="Please enter a valid address to send to">
         <source>Please enter a valid address to send to</source>
-        <target>Bitte gebe eine gültige Empfängeradresse an</target>
+        <target>Molimo unesite validnu adresu za slanje</target>
       </trans-unit>
       <trans-unit id="Please enter an amount above">
         <source>Please enter an amount above %(dust)s</source>
-        <target>Bitte gebe einen grösseren Betrag als %(dust)s an</target>
+        <target>Molimo unesite neki iznos iznad %(dust)s</target>
       </trans-unit>
       <trans-unit id="Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.">
         <source>Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.</source>
-        <target>Einige Einzahlungen sind noch nicht verfügbar. Um diese Transaktion zu senden, warte bitte bis alle ausstehenden Transaktionen bestätigt sind. </target>
+        <target>Neka sredstva su privremeno nedostupna. Kako biste poslali ovu transakciju, morat ćete sačekati da se Vaše transakcije koje su na čekanju prvo potvrde.</target>
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
         <source>It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
-        <target>Es sieht so aus, als möchtest Du Deine Brieftasche komplett entleeren. Unter der Berücksichtigung von Transaktionsgebühren steht Dir ein Maximalbetrag von %(sendableBalance)s zur Verfügung. Wir haben diesen Betrag in das Eingabefeld für Dich eingetragen. </target>
+        <target>Izgleda da pokušavate isprazniti Vaš novčanik. Uzimajući u obzir proviziju na transakciju, procijenili smo da je maksimalni iznos koji možete poslati %(sendableBalance)s. Izmijenili smo za Vas vrijednost u polju za iznos.</target>
       </trans-unit>
       <trans-unit id="You do not have enough funds in your wallet (incl. fee)">
         <source>You don't have enough funds in your wallet (incl. fee)</source>
-        <target>Das Guthaben deiner Brieftasche reicht nicht aus (inkl. Gebühr)</target>
+        <target>Nemate dovoljno sredstava u Vašem novčaniku (uključujući proviziju)</target>
       </trans-unit>
       <trans-unit id="A name is required to set your profile on Coin">
         <source>A name is required to set your profile on Coin</source>
-        <target>Für Dein Coin-Profil wird ein Name benötigt</target>
+        <target>Potrebno je ime kako biste kreirali profil na Coinu</target>
       </trans-unit>
       <trans-unit id="Uh Oh...">
         <source>Uh Oh...</source>
-        <target>Oh oh...</target>
+        <target>Uh Oh...</target>
       </trans-unit>
       <trans-unit id="Whoops!">
         <source>Whoops!</source>
@@ -159,119 +159,119 @@
       </trans-unit>
       <trans-unit id="Just saying...">
         <source>Just saying...</source>
-        <target>Ich mein' ja nur...</target>
+        <target>Samo kažemo...</target>
       </trans-unit>
       <trans-unit id="Your browser does not support geolocation">
         <source>Your browser does not support geolocation</source>
-        <target>Dein Browser unterstützt Ortung (geolocation) nicht</target>
+        <target>Vaš pregledač ne podržava geolokaciju</target>
       </trans-unit>
       <trans-unit id="Unable to retrieve your location">
         <source>Unable to retrieve your location</source>
-        <target>Dein Standort konnte nicht bestimmt werden</target>
+        <target>Nije moguće preuzeti lokaciju</target>
       </trans-unit>
       <trans-unit id="Without a name, the payer would not be able to identify you on Mecto.">
         <source>Without a name, the payer wouldn't be able to identify you on Mecto.</source>
-        <target>Ohne Name kann der Sender Dich nicht auf Mecto identifizieren</target>
+        <target>Bez imena, onaj ko plaća neće Vas moći identificirati na Mectou.</target>
       </trans-unit>
       <trans-unit id="Change your details">
         <source>Change your details</source>
-        <target>Ändere Deine Angaben</target>
+        <target>Izmijenite svoje podatke</target>
       </trans-unit>
       <trans-unit id="Your username">
         <source>Your username</source>
-        <target>Ihren Benutzernamen</target>
+        <target>Vaše korisničko ime</target>
       </trans-unit>
       <trans-unit id="Gravatar email">
         <source>Gravatar email</source>
-        <target>Gravatar Email</target>
+        <target>Gravatar email</target>
       </trans-unit>
       <trans-unit id="Submit">
         <source>Submit</source>
-        <target>Senden</target>
+        <target>Pošalji</target>
       </trans-unit>
       <trans-unit id="Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.">
         <source>Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.</source>
-        <target>Gravatar (globale Avatare) ist ein Service um den gleichen Avatar auf mehreren Webseiten und Anwendungen mit Hilfe einer Email-Adresse zu verwenden.</target>
+        <target>Gravatar (globalno prepoznati avatar) je usluga koja Vam omogućava koristiti istog avatara na različitim web-stranicama i aplikacijama pomoću email adrese.</target>
       </trans-unit>
       <trans-unit id="Create a gravatar">
         <source>Create a gravatar</source>
-        <target>Erzeuge einen Gravatar</target>
+        <target>Kreiraj gravatara</target>
       </trans-unit>
       <trans-unit id="Logout">
         <source>Logout</source>
-        <target>Ausloggen</target>
+        <target>Odjavite se</target>
       </trans-unit>
       <trans-unit id="Support">
         <source>Support</source>
-        <target>Hilfe</target>
+        <target>Podrška</target>
       </trans-unit>
       <trans-unit id="Send">
         <source>Send</source>
-        <target>Senden</target>
+        <target>Pošalji</target>
       </trans-unit>
       <trans-unit id="Receive">
         <source>Receive</source>
-        <target>Empfangen</target>
+        <target>Primi</target>
       </trans-unit>
       <trans-unit id="History">
         <source>History</source>
-        <target>Chronik</target>
+        <target>Povijest</target>
       </trans-unit>
       <trans-unit id="Tokens">
         <source>Tokens</source>
-        <target>Token</target>
+        <target>Žetoni</target>
       </trans-unit>
       <trans-unit id="Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.">
         <source>Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.</source>
-        <target>Mecto ermöglicht das Austauschen Deiner Empfangsadresse mit anderen örtlich nahen Coin-Benutzern. Hierzu wird Deine GPS-Ortung genutzt. Diese Positionsdaten werden sofort nach Ausschalten von Mecto gelöscht. </target>
+        <target>Mecto Vam omogućava da pomoću poređenja GPS podataka odašiljete adresu Vašeg novčanika drugim korisnicima Coina koji se nalaze u blizini. Ovi podaci se brišu kada isključite Mecto.</target>
       </trans-unit>
       <trans-unit id="Before you start using Mecto, you need to enter a name that will help others identify you.">
         <source>Before you start using Mecto, you need to enter a name that will help others identify you.</source>
-        <target>Um Mecto zu benutzen, musst Du einen Benutzernamen auswählen. So können Dich andere Benutzer finden.</target>
+        <target>Prije nego počnete koristiti Mecto potrebno je unijeti ime na osnovu kojeg će Vas drugi korisnici identificirati.</target>
       </trans-unit>
       <trans-unit id="Save">
         <source>Save</source>
-        <target>Speichern</target>
+        <target>Sačuvaj</target>
       </trans-unit>
       <trans-unit id="Loading transactions...">
         <source>Loading transactions...</source>
-        <target>Transaktionen werden geladen...</target>
+        <target>Transakcije se učitavaju...</target>
       </trans-unit>
       <trans-unit id="Your transaction history">
         <source>Your transaction history</source>
-        <target>Chronik Deiner Transaktionen</target>
+        <target>Vaša povijest transakcija</target>
       </trans-unit>
       <trans-unit id="pending confirmation">
         <source>pending confirmation</source>
-        <target>Warte auf Bestätigungen</target>
+        <target>potvrda na čekanju</target>
       </trans-unit>
       <trans-unit id="Received">
         <source>Received</source>
-        <target>Erhalten</target>
+        <target>Primljeno</target>
       </trans-unit>
       <trans-unit id="You do not have any transactions yet">
         <source>You don't have any transactions yet</source>
-        <target>Du hast noch keine Transaktionen getätigt</target>
+        <target>Nemate nijednu transakciju još uvijek</target>
       </trans-unit>
       <trans-unit id="Transaction Id:">
         <source>Transaction Id:</source>
-        <target>Transaktions-ID:</target>
+        <target>Identifikacioni broj transakcije</target>
       </trans-unit>
       <trans-unit id="Transaction Fee:">
         <source>Transaction Fee:</source>
-        <target>Transaktionsgebühr:</target>
+        <target>Provizija na transakciju:</target>
       </trans-unit>
       <trans-unit id="Inputs:">
         <source>Inputs:</source>
-        <target>Eingänge:</target>
+        <target>Priljev:</target>
       </trans-unit>
       <trans-unit id="Outputs:">
         <source>Outputs:</source>
-        <target>Ausgänge:</target>
+        <target>Odljev:</target>
       </trans-unit>
       <trans-unit id="Your wallet address">
         <source>Your wallet address</source>
-        <target>Die Adresse Deiner Brieftasche</target>
+        <target>Adresa Vašeg novčanika</target>
       </trans-unit>
       <trans-unit id="Mecto">
         <source>Mecto</source>
@@ -279,633 +279,633 @@
       </trans-unit>
       <trans-unit id="Turn Mecto on">
         <source>Turn Mecto on</source>
-        <target>Mecto einschalten</target>
+        <target>Uključi Mecto</target>
       </trans-unit>
       <trans-unit id="Turn Mecto off">
         <source>Turn Mecto off</source>
-        <target>Mecto ausschalten</target>
+        <target>Isključi Mecto</target>
       </trans-unit>
       <trans-unit id="Checking your location">
         <source>Checking your location</source>
-        <target>Suche Deine Position</target>
+        <target>Vaša lokacija se provjerava</target>
       </trans-unit>
       <trans-unit id="Broadcasting your location...">
         <source>Broadcasting your location...</source>
-        <target>Sende Deine Position...</target>
+        <target>Vaša lokacija se odašilje...</target>
       </trans-unit>
       <trans-unit id="Wallet address">
         <source>Wallet address</source>
-        <target>Adresse der Brieftasche</target>
+        <target>Adresa novčanika</target>
       </trans-unit>
       <trans-unit id="Amount">
         <source>Amount</source>
-        <target>Betrag</target>
+        <target>Iznos</target>
       </trans-unit>
       <trans-unit id="Confirm">
         <source>Confirm</source>
-        <target>Bestätige</target>
+        <target>Potvrdi</target>
       </trans-unit>
       <trans-unit id="No Coin users found nearby">
         <source>No Coin users found nearby</source>
-        <target>Es sind keine Coin Benutzer in Deiner Nähe</target>
+        <target>Nije pronađen nijedan korisnik Coina u blizini</target>
       </trans-unit>
       <trans-unit id="Search Again">
         <source>Search Again</source>
-        <target>Erneut suchen</target>
+        <target>Pretraži ponovo</target>
       </trans-unit>
       <trans-unit id="Searching...">
         <source>Searching...</source>
-        <target>Suchen...</target>
+        <target>Pretražuje se...</target>
       </trans-unit>
       <trans-unit id="Searching your area for other Coin users">
         <source>Searching your area for other Coin users</source>
-        <target>Suche andere Coin Benutzer in Deiner Gegend</target>
+        <target>Traže se drugi korisnici Coina u Vašoj oblasti</target>
       </trans-unit>
       <trans-unit id="Confirm transaction">
         <source>Confirm transaction</source>
-        <target>Transaktion bestätigen</target>
+        <target>Potvrdi transakciju</target>
       </trans-unit>
       <trans-unit id="transaction fee">
         <source>transaction fee</source>
-        <target>Transaktionsgebühr</target>
+        <target>provizija na transakciju</target>
       </trans-unit>
       <trans-unit id="Cancel">
         <source>Cancel</source>
-        <target>Abbrechen</target>
+        <target>Poništi</target>
       </trans-unit>
       <trans-unit id="Transaction Successful">
         <source>Transaction Successful</source>
-        <target>Die Transaktion ist erfolgreich verlaufen</target>
+        <target>Uspješna transakcija</target>
       </trans-unit>
       <trans-unit id="Your transaction will appear in your history tab shortly.">
         <source>Your transaction will appear in your history tab shortly.</source>
-        <target>Deine Transaktion wird in Kürze in der Chronik erscheinen.</target>
+        <target>Vaša transakcija će se uskoro pojaviti u kartici "povijest".</target>
       </trans-unit>
       <trans-unit id="Close">
         <source>Close</source>
-        <target>Schließen</target>
+        <target>Zatvori</target>
       </trans-unit>
       <trans-unit id="Transaction Failed">
         <source>Transaction Failed</source>
-        <target>Die Transaktion ist fehlgeschlagen</target>
+        <target>Transakcija nije uspjela</target>
       </trans-unit>
       <trans-unit id="Failed">
         <source>Failed</source>
-        <target>Fehlgeschlagen</target>
+        <target>Nije uspjelo</target>
       </trans-unit>
       <trans-unit id="Sorry, Coin Wallet did not load.">
         <source>Sorry, Coin Wallet didn't load.</source>
-        <target>Entschuldigung, die Coin-Brieftasche konnte nicht geladen werden.</target>
+        <target>Žao nam je, Coin novčanik se nije učitao.</target>
       </trans-unit>
       <trans-unit id="Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.">
         <source>Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.</source>
-        <target>Versuche Deinen Webbrowser zu aktualisieren oder beende den Inkognito-Modus. Ansonsten lade Dir den Chrome Browser für Dein Gerät herunter.</target>
+        <target>Pokušajte ažurirati Vaš pregledač ili se prebaciti sa režima tajnog pregledavanja. Ukoliko ništa od ovoga ne uspije, preuzmite Chrome za Vaš uređaj.</target>
       </trans-unit>
       <trans-unit id="Current coin price">
         <source>Current coin price</source>
-        <target>Aktueller Coin-Preis</target>
+        <target>Trenutačna vrijednost novčića</target>
       </trans-unit>
       <trans-unit id="Username not available">
         <source>Username not available</source>
-        <target>Benutzername nicht verfügbar</target>
+        <target>Korisničko ime nije raspoloživo</target>
       </trans-unit>
       <trans-unit id="Scan your fingerprint please">
         <source>Scan your fingerprint please</source>
-        <target>Scannen Sie Ihren Fingerabdruck bitte</target>
+        <target>Molimo skenirajte otisak Vašega prsta</target>
       </trans-unit>
       <trans-unit id="Enter PIN">
         <source>Enter PIN</source>
-        <target>PIN eingeben</target>
+        <target>Unesite PIN</target>
       </trans-unit>
       <trans-unit id="I Agree To The Terms &amp; Conditions">
         <source>I Agree To The Terms &amp; Conditions</source>
-        <target>Ich stimme den Allgemeine Geschäftsbedingungen zu</target>
+        <target>Prihvatam Uslove korištenja &amp;</target>
       </trans-unit>
       <trans-unit id="Terms of Use">
         <source>Terms of Use</source>
-        <target>Nutzungsbedingungen</target>
+        <target>Uslovi korištenja</target>
       </trans-unit>
       <trans-unit id="Unparsed address">
         <source>Unparsed address</source>
-        <target>Nicht analysierte Adresse</target>
+        <target>Neispravno unijeta adresa</target>
       </trans-unit>
       <trans-unit id="Exchange">
         <source>Exchange</source>
-        <target>Umtauschen</target>
+        <target>Konvertiraj</target>
       </trans-unit>
       <trans-unit id="From">
         <source>From</source>
-        <target>Von</target>
+        <target>Iz</target>
       </trans-unit>
       <trans-unit id="To">
         <source>To</source>
-        <target>In</target>
+        <target>U</target>
       </trans-unit>
       <trans-unit id="Exchange rate">
         <source>Exchange rate</source>
-        <target>Wechselkurs</target>
+        <target>Tečaj</target>
       </trans-unit>
       <trans-unit id="Loading...">
         <source>Loading...</source>
-        <target>Lädt…</target>
+        <target>Učitava se...</target>
       </trans-unit>
       <trans-unit id="Address">
         <source>Address</source>
-        <target>Adresse</target>
+        <target>Adresa</target>
       </trans-unit>
       <trans-unit id="Return address (optional)">
         <source>Return address (optional)</source>
-        <target>Absender (optional)</target>
+        <target>Adresa pošiljaoca (opciono)</target>
       </trans-unit>
       <trans-unit id="Deposit address">
         <source>Deposit address (%(symbol)s)</source>
-        <target>Einzahlungsadresse (%(symbol)s)</target>
+        <target>Adresa primaoca (%(symbol)s)</target>
       </trans-unit>
       <trans-unit id="Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
         <source>Send up to %(depositMax)s %(depositSymbol)s to deposit address.
 It will be converted into %(toSymbol)s, and sent to
  %(toAddress)s</source>
-        <target>Sende bis zu %(depositMax)s %(depositSymbol)s an die Einzahlungsadresse.
-Sie werden in %(toSymbol)s konvertiert und an
- %(toAddress)s gesendet.</target>
+        <target>Pošalji do %(depositMax)s %(depositSymbol)s na adresu primaoca.
+Biće konvertirano u %(toSymbol)s i poslato na
+ %(toAddress)s</target>
       </trans-unit>
       <trans-unit id="Deposit minimum">
         <source>Deposit minimum</source>
-        <target>Einzahlungsminimum</target>
+        <target>Minimalni depozit</target>
       </trans-unit>
       <trans-unit id="amount :toSymbol have been delivered to :toAddress">
         <source>%(amount)s %(toSymbol)s have been delivered to
  %(toAddress)s</source>
-        <target>%(amount)s %(toSymbol)s wurden gesendet an
+        <target>%(amount)s %(toSymbol)s je isporučeno na
  %(toAddress)s</target>
       </trans-unit>
       <trans-unit id="Back">
         <source>Back</source>
-        <target>Zurück</target>
+        <target>Nazad</target>
       </trans-unit>
       <trans-unit id="Awaiting deposit...">
         <source>Awaiting deposit...</source>
-        <target>Warten auf Einzahlung...</target>
+        <target>Čeka se depozit...</target>
       </trans-unit>
       <trans-unit id="Deposit has been received">
         <source>Deposit has been received</source>
-        <target>Einzahlung wurde empfangen</target>
+        <target>Depozit je isporučen</target>
       </trans-unit>
       <trans-unit id="Awaiting exchange...">
         <source>Awaiting exchange...</source>
-        <target>Warten auf Umtausch...</target>
+        <target>Čeka se na konverziju...</target>
       </trans-unit>
       <trans-unit id="Exchange complete!">
         <source>Exchange complete!</source>
-        <target>Umtausch abgeschlossen!</target>
+        <target>Konverzija je završena!</target>
       </trans-unit>
       <trans-unit id="Done">
         <source>Done</source>
-        <target>Fertig</target>
+        <target>Gotovo</target>
       </trans-unit>
       <trans-unit id="Please enter a valid return address">
         <source>Please enter a valid return address</source>
-        <target>Bitte gib einen gültigen Absender ein</target>
+        <target>Molimo unesite validnu adresu pošiljaoca</target>
       </trans-unit>
       <trans-unit id="Miner fee">
         <source>Miner fee</source>
-        <target>Miner-Kommission</target>
+        <target>Provizija na rudarenje</target>
       </trans-unit>
       <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
         <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
-        <target>Der Absender muss eine von Dir kontrollierte Adresse sein, an die die Einzahlung im Fall einer fehlgeschlagenen Transaktion zurückgesandt werden.</target>
+        <target>Adresa pošiljaoca bi trebalo biti adresa koja je pod Vašom kontrolom kako bi na nju bio vraćen depozit u slučaju neuspjele transakcije.</target>
       </trans-unit>
       <trans-unit id="Remove account">
         <source>Remove account</source>
-        <target>Konto entfernen</target>
+        <target>Ukloni korisnički račun</target>
       </trans-unit>
       <trans-unit id="Remove">
         <source>Remove</source>
-        <target>Entfernen</target>
+        <target>Ukloni</target>
       </trans-unit>
       <trans-unit id="Are you sure?">
         <source>Are you sure?</source>
-        <target>Bist Du sicher?</target>
+        <target>Jeste li sigurni?</target>
       </trans-unit>
       <trans-unit id="Account has been successfully removed">
         <source>Account has been successfully removed</source>
-        <target>Das Konto wurde erfolgreich entfernt.</target>
+        <target>Korisnički račun je uspješno uklonjen</target>
       </trans-unit>
       <trans-unit id="This page will be reloaded shortly.">
         <source>This page will be reloaded shortly.</source>
-        <target>Diese Seite wird in Kürze erneut geladen.</target>
+        <target>Ova stranica bit će uskoro ponovno učitana.</target>
       </trans-unit>
       <trans-unit id="About">
         <source>About</source>
-        <target>Über uns</target>
+        <target>O nama</target>
       </trans-unit>
       <trans-unit id="Release information">
         <source>Release information</source>
-        <target>Informationen zur Veröffentlichung</target>
+        <target>Podijeli informaciju</target>
       </trans-unit>
       <trans-unit id="Version">
         <source>Version</source>
-        <target>Version</target>
+        <target>Verzija</target>
       </trans-unit>
       <trans-unit id="Transfer paper wallet / private key">
         <source>Transfer paper wallet / private key</source>
-        <target>Überweisung Papier-Brieftasche/privater Schlüssel</target>
+        <target>Prebaci papirnati novčanik / tajni ključ</target>
       </trans-unit>
       <trans-unit id="Export private keys">
         <source>Export private keys</source>
-        <target>Private Schlüssel exportieren</target>
+        <target>Eksportiraj tajne ključeve</target>
       </trans-unit>
       <trans-unit id="Transfer private key">
         <source>Transfer private key</source>
-        <target>Privaten Schlüssel überweisen</target>
+        <target>Prebaci tajni ključ</target>
       </trans-unit>
       <trans-unit id="Transfer">
         <source>Transfer</source>
-        <target>Überweisen</target>
+        <target>Transfer</target>
       </trans-unit>
       <trans-unit id="Private key">
         <source>Private key</source>
-        <target>Privater Schlüssel</target>
+        <target>Tajni ključ</target>
       </trans-unit>
       <trans-unit id="This will transfer all coins from the paper wallet address to your wallet.">
         <source>This will transfer all coins from the paper wallet address to your wallet.</source>
-        <target>Dadurch werden alle Coins der Papier-Brieftasche an Deine Brieftasche überwiesen.</target>
+        <target>Ovime će se svi novčići prebaciti sa adrese papirnatog novčanika u Vaš novčanik.</target>
       </trans-unit>
       <trans-unit id="This private key has no coins for transfer.">
         <source>This private key has no coins for transfer.</source>
-        <target>Dieser private Schlüssel hat keine zu überweisenden Coins.</target>
+        <target>Ovaj tajni ključ nema novčiće za transfer.</target>
       </trans-unit>
       <trans-unit id="Invalid private key">
         <source>Invalid private key</source>
-        <target>Ungültiger privater Schlüssel</target>
+        <target>Nevažeći tajni ključ</target>
       </trans-unit>
       <trans-unit id="Insufficient funds">
         <source>Insufficient funds</source>
-        <target>Nicht genug Geld</target>
+        <target>Nedovoljno sredstava</target>
       </trans-unit>
       <trans-unit id="Warning!">
         <source>Warning!</source>
-        <target>Warnung!</target>
+        <target>Upozorenje!</target>
       </trans-unit>
       <trans-unit id="Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you&apos;d like them to have access to your funds.">
         <source>Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you'd like them to have access to your funds.</source>
-        <target>Deine privaten Schlüssel sind Schlüssel für Dein Geld. GIB SIE NICHT an andere weiter, es sei denn, du möchtest, dass sie Zugriff auf dein Geld erhalten.</target>
+        <target>Vaši tajni ključevi su ključevi za Vaša sredstva te ih NEMOJTE DIJELITI ni sa kim osim ako ne želite da imaju pristup Vašim sredstvima.</target>
       </trans-unit>
       <trans-unit id="Show">
         <source>Show</source>
-        <target>Anzeigen</target>
+        <target>Prikaži</target>
       </trans-unit>
       <trans-unit id="Comma-separated list">
         <source>Comma-separated list</source>
-        <target>Mit Komma getrennte Liste</target>
+        <target>Lista razdvojena zarezima</target>
       </trans-unit>
       <trans-unit id="Your wallet has no private keys with coins for export.">
         <source>Your wallet has no private keys with coins for export.</source>
-        <target>Deine Brieftasche hat keine privaten Schlüssel mit zu exportierenden Coins.</target>
+        <target>Vaš novčanik nema tajne ključeve sa novčićima za eksport.</target>
       </trans-unit>
       <trans-unit id="Add Token">
         <source>Add Token</source>
-        <target>Token hinzufügen</target>
+        <target>Dodaj žeton</target>
       </trans-unit>
       <trans-unit id="Gas limit">
         <source>Gas limit</source>
-        <target>Gas Coin-Limit</target>
+        <target>Ograničenje plina</target>
       </trans-unit>
       <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.">
         <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.</source>
-        <target>Gas-Limit bezeichnet den Betrag Gas, den Du mit Deiner Transaktion sendest. Die Höhe des Betrags hat keine Auswirkungen auf die schnellere Genehmigung Deiner Transaktion. Senden von ETH entspricht 21.000. Senden von Token entspricht 200.000.</target>
+        <target>Ograničenje plina je iznos plina koji šaljete uz transakciju. Ako povećate ovaj broj, Vaša transakcija neće biti brže potvrđena. Slanje ETH vrijedi 21000. Slanje Žetona vrijedi oko 200000.</target>
       </trans-unit>
       <trans-unit id="Contract address">
         <source>Contract address</source>
-        <target>Vertragsadresse</target>
+        <target>Ugovorna adresa</target>
       </trans-unit>
       <trans-unit id="Add">
         <source>Add</source>
-        <target>Hinzufügen</target>
+        <target>Dodaj</target>
       </trans-unit>
       <trans-unit id="Symbol">
         <source>Symbol</source>
-        <target>Symbol</target>
+        <target>Simbol</target>
       </trans-unit>
       <trans-unit id="Decimals">
         <source>Decimals</source>
-        <target>Dezimalstellen</target>
+        <target>Decimale</target>
       </trans-unit>
       <trans-unit id="Token">
         <source>Token</source>
-        <target>Token</target>
+        <target>Žeton</target>
       </trans-unit>
       <trans-unit id="Custom token">
         <source>Custom token</source>
-        <target>Benutzerdefinierter Token</target>
+        <target>Prilagođeni žeton</target>
       </trans-unit>
       <trans-unit id="Please fill out all fields.">
         <source>Please fill out all fields.</source>
-        <target>Bitte fülle alle Felder aus.</target>
+        <target>Molimo popunite sva polja.</target>
       </trans-unit>
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
-        <target>Bitte gib ein Gas-Limit über null ein</target>
+        <target>Molimo unesite vrijednost Ograničenja plina veću od nule</target>
       </trans-unit>
       <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
         <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
-        <target>Du hast nicht genug Ethereum für die Bezahlung der Transaktionsgebühren (%(ethereumRequired)s ETH).</target>
+        <target>Nemate dovoljno Ethereum sredstava kojim biste platili proviziju na transakciju (%(ethereumRequired)s ETH).</target>
       </trans-unit>
       <trans-unit id="Click to Select">
         <source>Click to Select</source>
-        <target>Zum Auswählen klicken</target>
+        <target>Kliknite da Izaberete</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
-        <target>In die Zwischenablage kopieren</target>
+        <target>Kopiraj na međuspremnik</target>
       </trans-unit>
       <trans-unit id="Copied!">
         <source>Copied!</source>
-        <target>Kopiert!</target>
+        <target>Kopirano!</target>
       </trans-unit>
       <trans-unit id="Please enter an address other than your wallet address">
         <source>Please enter an address other than your wallet address</source>
-        <target>Bitte gib eine andere Adresse als Deine Brieftaschen-Adresse ein.</target>
+        <target>Molimo unesite adresu različitu od adrese Vašeg novčanika</target>
       </trans-unit>
       <trans-unit id="Please enter a private key other than your wallet private key">
         <source>Please enter a private key other than your wallet private key</source>
-        <target>Bitte gib einen anderen privaten Schlüssel ein als den privaten Schlüssel Deiner Brieftasche.</target>
+        <target>Molimo unesite tajni ključ različit od Vašeg tajnog ključa</target>
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
         <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(denomination)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
-        <target>Es sieht so aus, als möchtest Du Deine Brieftasche entleeren. Unter der Berücksichtigung von Transaktionsgebühren und der Mindestreserve (%(minReserve)s %(denomination)s) kannst du maximal einen Betrag von %(sendableBalance)s senden. Wir haben diesen Betrag für Dich in das Eingabefeld eingetragen.</target>
+        <target>Izgleda da pokušavate isprazniti Vaš novčanik. Uzimajući u obzir proviziju na transakciju i minimalnu rezervu %(minReserve)s %(denomination)s), procijenili smo da je maksimalni iznos koji možete poslati %(sendableBalance)s. Izmijenili smo za Vas vrijednost u polju za iznos.</target>
       </trans-unit>
       <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :denomination) to your wallet address.">
         <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(denomination)s) to your wallet address.</source>
-        <target>Deine Brieftasche ist nicht aktiviert. Bitte sende eine höhere Mindestreserve (%(minReserve)s %(denomination)s) an die Adresse deiner Brieftasche.</target>
+        <target>Vaš novčanik nije aktiviran. Kako biste ga aktivirali molimo pošaljite iznos veći od minimalne rezerve (%(minReserve)s %(denomination)s) na adresu Vašeg novčanika.</target>
       </trans-unit>
       <trans-unit id="Load more">
         <source>Load more</source>
-        <target>Mehr laden</target>
+        <target>Učitaj više</target>
       </trans-unit>
       <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
         <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>Die Brieftasche des Empfängers ist nicht aktiviert. Du kannst nur einen Betrag senden, der größer ist als %(minReserve)s %(denomination)s.</target>
+        <target>Novčanik primaoca nije aktiviran. Možete poslati samo iznos veći od %(minReserve)s %(denomination)s.</target>
       </trans-unit>
       <trans-unit id="Destination tag">
         <source>Destination tag</source>
-        <target>Ziel-Tag</target>
+        <target>Oznaka odredišta</target>
       </trans-unit>
       <trans-unit id="Invoice ID">
         <source>Invoice ID</source>
-        <target>Rechnungsnummer</target>
+        <target>Identifikacijski broj fakture</target>
       </trans-unit>
       <trans-unit id="(optional)">
         <source>(optional)</source>
-        <target>(optional)</target>
+        <target>(opciono)</target>
       </trans-unit>
       <trans-unit id="An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.">
         <source>An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.</source>
-        <target>Eine zufällige nicht signierte 32-Bit Ganzzahl, die den Zahlungsgrund oder ein nicht Ripple Konto angibt.</target>
+        <target>Proizvoljan nepotpisani 32-bitni cijeli broj koji identicira svrhu uplate ili ne-Ripple nalog.</target>
       </trans-unit>
       <trans-unit id="A 256-bit hash that can be used to identify a particular payment.">
         <source>A 256-bit hash that can be used to identify a particular payment.</source>
-        <target>Ein 256-Bit-Hash, der zur Identifizierung einer bestimmten Zahlung verwendet werden kann.</target>
+        <target>256-bitna hash oznaka koja se može koristiti za identifikaciju određene uplate.</target>
       </trans-unit>
       <trans-unit id="Please enter a valid invoice ID">
         <source>Please enter a valid invoice ID</source>
-        <target>Bitte gib eine gültige Rechnungs-ID ein.</target>
+        <target>Molimo unesite važeći identifikacijski broj fakture</target>
       </trans-unit>
       <trans-unit id="Please enter a valid destination tag">
         <source>Please enter a valid destination tag</source>
-        <target>Bitte gib einen gültigen Ziel-Tag ein.</target>
+        <target>Molimo unesite važeću oznaku odredišta</target>
       </trans-unit>
       <trans-unit id="Exchange is currently unavailable for this pair">
         <source>Exchange is currently unavailable for this pair</source>
-        <target>Für dieses Währungspaar ist derzeit kein Umtausch möglich.</target>
+        <target>Konverzija je trenutno nedostupna za ovaj par</target>
       </trans-unit>
       <trans-unit id="Payment operations:">
         <source>Payment operations:</source>
-        <target>Zahlungsvorgänge:</target>
+        <target>Operacije uplate:</target>
       </trans-unit>
       <trans-unit id="Pay (:amount) XLM to :destination">
         <source>Pay %(amount)s XLM to %(destination)s</source>
-        <target>%(amount)s XLM an %(destination)szahlen</target>
+        <target>Uplati %(amount)s XLM na %(destination)s</target>
       </trans-unit>
       <trans-unit id="Created Account :destination with balance :amount XLM">
         <source>Created Account %(destination)s with balance %(amount)s XLM</source>
-        <target>Konto %(destination)s mit einem Guthaben von %(amount)s XLM erstellt</target>
+        <target>Kreirani Nalog %(destination)s sa stanjem %(amount)s XLM</target>
       </trans-unit>
       <trans-unit id="Memo">
         <source>Memo</source>
-        <target>Memo</target>
+        <target>Bilješka</target>
       </trans-unit>
       <trans-unit id="Please enter a valid memo">
         <source>Please enter a valid memo</source>
-        <target>Bitte gib ein gültiges Memo ein.</target>
+        <target>Molimo unesite važeću bilješku</target>
       </trans-unit>
       <trans-unit id="The memo contains optional extra information. A string up to 28-bytes long.">
         <source>The memo contains optional extra information. A string up to 28-bytes long.</source>
-        <target>Das Memo enthält optional zusätzliche Informationen. Bis zu 28 Bytes lange Zeichenkette.</target>
+        <target>Bilješka sadrži opcione dodatne informacije. Niz dug do 28 bajtova.</target>
       </trans-unit>
       <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :denomination.">
         <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>Deine Brieftasche ist nicht aktiviert. Du kannst nur einen Betrag senden, der größer ist als %(minReserve)s %(denomination)s.</target>
+        <target>Vaš novčanik nije aktiviran. Možete primiti samo iznos veći od %(minReserve)s %(denomination)s.</target>
       </trans-unit>
       <trans-unit id="Privacy Policy">
         <source>Privacy Policy</source>
-        <target>Datenschutzbestimmungen</target>
+        <target>Politika privatnosti</target>
       </trans-unit>
       <trans-unit id="Your ShapeShift account is not verified.">
         <source>Your ShapeShift account is not verified.</source>
-        <target>Dein ShapeShift-Konto ist nicht verifiziert.</target>
+        <target>Vaš ShapeShift nalog nije verificiran.</target>
       </trans-unit>
       <trans-unit id="Complete verification">
         <source>Complete verification</source>
-        <target>Verifizierung abschließen</target>
+        <target>Izvrši verifikaciju</target>
       </trans-unit>
       <trans-unit id="Try to sign in again">
         <source>Try to sign in again</source>
-        <target>Melde Dich noch einmal an.</target>
+        <target>Pokušajte se ponovno prijaviti</target>
       </trans-unit>
       <trans-unit id="Sign in">
         <source>Sign in</source>
-        <target>Anmelden</target>
+        <target>Prijavite se</target>
       </trans-unit>
       <trans-unit id="Setup EOS account">
         <source>Setup EOS account</source>
-        <target>EOS-Konto einrichten</target>
+        <target>Kreirajte EOS korisnički račun</target>
       </trans-unit>
       <trans-unit id="Account name">
         <source>Account name</source>
-        <target>Kontoname</target>
+        <target>Korisničko ime</target>
       </trans-unit>
       <trans-unit id="The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.">
         <source>The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.</source>
-        <target>Der EOS-Kontoname muss genau 12 Zeichen lang sein und aus Kleinbuchstaben und Zahlen zwischen 1 und 5 bestehen.</target>
+        <target>EOS korisničko ime mora imati tačno 12 karaktera i sastojati se od malih slova i cifara od 1 do 5.</target>
       </trans-unit>
       <trans-unit id="Invalid account name">
         <source>Invalid account name</source>
-        <target>Ungültiger Kontoname</target>
+        <target>Neispravno korisničko ime</target>
       </trans-unit>
       <trans-unit id="This account name is already taken, please choose another one.">
         <source>This account name is already taken, please choose another one.</source>
-        <target>Dieser Kontoname ist bereits vergeben, bitte wähle einen anderen aus.</target>
+        <target>Ovo korisničkoKorisničko ime ime već postoji, molimo izaberite drugo.</target>
       </trans-unit>
       <trans-unit id="To create a new account you need to make an EOS transfer (amount greater than :minAmount) with the following data from an exchange or other EOS wallet.">
         <source>To create a new account you need to make an EOS transfer (amount greater than %(minAmount)s) with the following data from an exchange or other EOS wallet.</source>
-        <target>Wenn Du ein neues Konto erstellen möchtest (Betrag größer als %(minAmount)s) musst du eine EOS-Überweisung durchführen mit den folgenden Informationen von einem Umtausch oder einer anderen EOS-Brieftasche.</target>
+        <target>Da biste kreirali novi korisnički račun morate izvršiti EOS transfer (iznos veći od %(minAmount)s) sa sljedećim podacima od konverzije ili drugog EOS novčanika</target>
       </trans-unit>
       <trans-unit id="Check">
         <source>Check</source>
-        <target>Überprüfen</target>
+        <target>Provjeri</target>
       </trans-unit>
       <trans-unit id="Account has been successfully set up">
         <source>Account has been successfully set up</source>
-        <target>Das Konto wurde erfolgreich eingerichtet.</target>
+        <target>Korisnički račun je uspješno kreiran</target>
       </trans-unit>
       <trans-unit id="The memo contains optional extra information. A string up to 256-bytes long.">
         <source>The memo contains optional extra information. A string up to 256-bytes long.</source>
-        <target>Das Memo enthält optional zusätzliche Informationen. Bis zu 256 Bytes lange Zeichenkette.</target>
+        <target>Bilješka sadrži opcione dodatne informacije. Niz dug do 256 bajtova.</target>
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Max amount you can send is. We have amended the value in the amount field for you">
         <source>It seems like you are trying to empty your wallet. Max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
-        <target>Es sieht so aus, als möchtest Du Deine Brieftasche komplett entleeren. Der Maximalbetrag, den du senden kannst beträgt %(sendableBalance)s. Wir haben diesen Betrag für Dich in das Eingabefeld eingetragen.</target>
+        <target>Izgleda da pokušavate isprazniti Vaš novčanik. Maksimalni iznos koji možete poslati je %(sendableBalance)s. Izmijenili smo za Vas vrijednost u polju za iznos.</target>
       </trans-unit>
       <trans-unit id="Destination account doesn&apos;t exist.">
         <source>Destination account doesn't exist.</source>
-        <target>Das Zielkonto existiert nicht.</target>
+        <target>Korisnički račun odredišta ne postoji.</target>
       </trans-unit>
       <trans-unit id="Transaction has been expired. Please try again.">
         <source>Transaction has been expired. Please try again.</source>
-        <target>Die Transaktion ist abgelaufen. Bitte versuche es erneut.</target>
+        <target>Transakcija je istekla. Molimo pokušajte ponovno kasnije.</target>
       </trans-unit>
       <trans-unit id="Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.">
         <source>Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.</source>
-        <target>CPU-Auslastung des Kontos überschritten. Bitte versuche es später erneut oder bitte andere, Dir mehr CPU zuzuweisen.</target>
+        <target>Upotreba CPUa na korisničkom računu je prekoračena. Molimo pokušajte ponovno kasnije ili zamolite nekoga da Vam uloži više CPUa.</target>
       </trans-unit>
       <trans-unit id="Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.">
         <source>Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.</source>
-        <target>CPU-NETTO-Auslastung des Kontos überschritten. Bitte versuche es später erneut oder bitte andere, Dir mehr NETTO-CPU zuzuweisen.</target>
+        <target>Upotreba NETa je prekoračena. Molimo pokušajte ponovno kasnije ili zamolite nekoga da Vam uloži više NETa.</target>
       </trans-unit>
       <trans-unit id="The extra amount will be deposited to the created account.">
         <source>The extra amount will be deposited to the created account.</source>
-        <target>Der zusätzliche Betrag wird auf das erstellte Konto überwiesen.</target>
+        <target>Dodatni iznos će biti uložen na kreirani korisnički račun.</target>
       </trans-unit>
       <trans-unit id="Can&apos;t connect to :network node. Please try again later or choose another token.">
         <source>Can't connect to %(network)s node. Please try again later or choose another token.</source>
-        <target>Verbindung mit dem %(network)s-Knoten nicht möglich. Bitte versuche es erneut oder wähle einen anderen Knoten.</target>
+        <target>Nije mogućno povezati se na %(network)s node. Molimo pokušajte ponovno kasnije ili izaberite drugi žeton.</target>
       </trans-unit>
       <trans-unit id="Network node error. Please try again later.">
         <source>%(network)s node error. Please try again later.</source>
-        <target>Fehler %(network)s-Knoten. Bitte versuche es später erneut.</target>
+        <target>%(network)s node greška. Molimo pokušajte ponovno kasnije.</target>
       </trans-unit>
       <trans-unit id="Choose exchange">
         <source>Choose exchange</source>
-        <target>Umtausch auswählen</target>
+        <target>Izaberi konverziju</target>
       </trans-unit>
       <trans-unit id="Next step">
         <source>Next step</source>
-        <target>Nächster Schritt</target>
+        <target>Sljedeći korak</target>
       </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
-        <target>Mindestbetrag</target>
+        <target>Minimalni iznos:</target>
       </trans-unit>
       <trans-unit id="address">
         <source>address</source>
-        <target>Adresse</target>
+        <target>adresa</target>
       </trans-unit>
       <trans-unit id="Exchange error">
         <source>Exchange error</source>
-        <target>Fehler beim Umtausch</target>
+        <target>Greška pri konverziji</target>
       </trans-unit>
       <trans-unit id="Transaction not found">
         <source>Transaction not found</source>
-        <target>Transaktion wurde nicht gefunden</target>
+        <target>Transakcija niji pronađena</target>
       </trans-unit>
       <trans-unit id="Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
         <source>Send %(depositAmount)s %(depositSymbol)s to deposit address.
 It will be converted into %(toSymbol)s, and sent to
  %(toAddress)s</source>
-        <target>Sende %(depositAmount)s %(depositSymbol)s an die Einzahlungsadresse.
-Sie werden in %(toSymbol)s konvertiert und an
- %(toAddress)s gesendet.</target>
+        <target>Pošalji %(depositAmount)s %(depositSymbol)s na adresu primaoca.
+Biće konvertovano u %(toSymbol)s i poslato na
+ %(toAddress)s</target>
       </trans-unit>
       <trans-unit id="Network fee">
         <source>Network fee</source>
-        <target>Netzwerkgebühr</target>
+        <target>Provizija na mrežu</target>
       </trans-unit>
       <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
         <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
-        <target>Du hast 36 Stunden Zeit, um das Geld zu senden, andernfalls wird die Transaktion automatisch abgebrochen.</target>
+        <target>Imate 36 sati da pošaljete sredstva - u suprotnom, transakcija će biti automatski poništena.</target>
       </trans-unit>
       <trans-unit id="Extra Id">
         <source>Extra Id</source>
-        <target>Extra-ID</target>
+        <target>Dodatni identifikacijski broj</target>
       </trans-unit>
       <trans-unit id="Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).">
         <source>Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).</source>
-        <target>Eigenschaft für Währungsadressen, die für die Transaktionsverarbeitung eine zusätzliche ID verwenden (z. B. Ziel-Tag, Memo oder Nachricht).</target>
+        <target>Svojstvo adresa valuta koje koriste dodatne identifikacijske brojeve za procese transakcije (npr. oznaka destinacije, bilješka ili poruka).</target>
       </trans-unit>
       <trans-unit id="Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.">
         <source>Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.</source>
-        <target>Die Netzwerkgebühr ist ein fester Betrag, der jeweils erhoben wird, wenn du Geld sendest. Jede Währung hat einen strikten Betrag, der bei Vorgängen verwendet wird. Diese Gebühr wird erhoben, wenn dein Geld in eine Blockchain aufgenommen wird.</target>
+        <target>Provizija na mrežu je fiksna i obračunava se svaki put kada se šalje novac. Za svaku valutu postoji striktan iznos za operacije. Ova provizija se obračunava nakon što se Vaša sredstva uključe u blockchain.</target>
       </trans-unit>
       <trans-unit id="On hold...">
         <source>On hold...</source>
-        <target>Zurückgehalten...</target>
+        <target>Na čekanju...</target>
       </trans-unit>
       <trans-unit id="Currently, your transaction (ID: :id) is on hold.&lt;br&gt;Please, contact Changelly to pass KYC.">
         <source>Currently, your transaction (ID: %(id)s) is on hold.&lt;br&gt;Please, contact Changelly to pass KYC.</source>
-        <target>Deine Transaktion wird derzeit zurückgehalten (ID: %(id)s).&lt;br&gt;Bitte kontaktiere Changelly, um KYC durchzuführen.</target>
+        <target>Trenutno, Vaša transakcija (ID: %(id)s) je na čekanju.&lt;br&gt;Molimo, kontaktirajte Changelly da biste prošli KYC.</target>
       </trans-unit>
       <trans-unit id="Transaction (ID: :id) has failed. Please, contact Changelly.">
         <source>Transaction (ID: %(id)s) has failed. Please, contact Changelly.</source>
-        <target>Transaktion (ID: %(id)s) ist fehlgeschlagen. Bitte kontaktiere Changelly.</target>
+        <target>Transakcija (ID: %(id)s) nije uspjela. Molimo, kontaktirajte Changelly.</target>
       </trans-unit>
       <trans-unit id="Exchange failed and coins were refunded to :address.">
         <source>Exchange failed and coins were refunded to %(address)s.</source>
-        <target>Umtauschen fehlgeschlagen. Die Coins wurden rückerstattet an %(address)s.</target>
+        <target>Konverzija nije uspjela i novčići su refundirani na %(address)s</target>
       </trans-unit>
       <trans-unit id="Payment wasn&apos;t received since 36 hours since the transaction was created.">
         <source>Payment wasn't received since 36 hours since the transaction was created.</source>
-        <target>Nachdem das Konto erstellt wurde, ist innerhalb von 36 Stunden keine Zahlung eingegangen.</target>
+        <target>Uplata nije primljena 36 sati od kako je kreirana transakcija.</target>
       </trans-unit>
       <trans-unit id="Terms of Service">
         <source>Terms of Service</source>
-        <target>Nutzungsbedingungen</target>
+        <target>Uslovi korištenja</target>
       </trans-unit>
       <trans-unit id="Accept">
         <source>Accept</source>
-        <target>Akzeptieren</target>
+        <target>Prihvatam</target>
       </trans-unit>
       <trans-unit id="Changelly_TOS">
         <source>I have read and I agree to the Changelly &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;terms of use&lt;/a&gt; and &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;privacy policy&lt;/a&gt;.&lt;br&gt;By clicking "Accept", I acknowledge and understan that my transaction may trigger AML/KYC verification according to &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;Changelly AML/KYC&lt;/a&gt;.</source>
-        <target>Ich habe die &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;Nutzungsbedingungen&lt;/a&gt; und die &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;Datenschutzbestimmungen&lt;/a&gt; von Challengy gelesen und akzeptiert.&lt;br&gt;. Durch Klicken auf „Akzeptieren“ erkenne ich an und verstehe, dass meine Transaktion gemäß der &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;AML/KYC von Challengy&lt;/a&gt; zu einer AML/KYC-Verifizierung führen kann.</target>
+        <target>Pročitao sam i prihvatam Changelly &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;terms of use&lt;/a&gt; and &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;privacy policy&lt;/a&gt;.&lt;br&gt;Kliknuvši "Prihvatam", potvrđujem i razumijem da moja transakcija može uzrokovati AML/KYC verifikaciju u skladu sa &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;Changelly AML/KYC&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="max.">
         <source>max.</source>
-        <target>max.</target>
+        <target>maks.</target>
       </trans-unit>
       <trans-unit id="Fee">
         <source>Fee</source>
-        <target>Gebühr</target>
+        <target>Provizija</target>
       </trans-unit>
       <trans-unit id="Amount of coins that is charged from your balance for single transaction (&lt;a href=&quot;&quot; onclick=&quot;window.open(&apos;https://www.coin.space/all-about-bitcoin-fees&apos;, &apos;_system&apos;); return false;&quot;&gt;more info&lt;/a&gt;).">
         <source>Amount of coins that is charged from your balance for single transaction (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;more info&lt;/a&gt;).</source>
-        <target>Anzahl der Coins, mit denen Dein Guthaben bei einer einzelnen Transaktion belastet wird (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;weitere Informationen&lt;/a&gt;).</target>
+        <target>Iznos novčića koji će biti naplaćen sa Vašeg računa za pojedinačnu transakciju (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;more info&lt;/a&gt;).</target>
       </trans-unit>
       <trans-unit id="Confirm passphrase">
         <source>Confirm passphrase</source>
-        <target>Passphrase bestätigen</target>
+        <target>Potvrdi zaporku</target>
       </trans-unit>
       <trans-unit id="Almost done! Enter the following words from your passphrase.">
         <source>Almost done! Enter the following words from your passphrase.</source>
-        <target>Fast fertig! Gib die folgenden Wörter Deiner Passphrase ein.</target>
+        <target>Skoro pa gotovo! Unesite sljedeće riječi iz Vaše zaporke</target>
       </trans-unit>
       <trans-unit id="Word">
         <source>Word</source>
-        <target>Wort</target>
+        <target>Riječ</target>
       </trans-unit>
       <trans-unit id="Buy with Credit Card">
         <source>Buy with Credit Card</source>
-        <target></target>
+        <target>Kupite Kreditnom karticom</target>
       </trans-unit>
     </body>
   </file>

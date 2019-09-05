@@ -1,277 +1,277 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="de.json" datatype="plaintext" source-language="en" target-language="de">
+  <file original="km.json" datatype="plaintext" source-language="en" target-language="km">
     <body>
       <trans-unit id="Back to coin">
         <source>Back to coin</source>
-        <target>Zurück zu coin</target>
+        <target>ត្រឡប់ទៅកាក់</target>
       </trans-unit>
       <trans-unit id="Create new wallet">
         <source>Create new wallet</source>
-        <target>Neue Brieftasche erstellen</target>
+        <target>បង្កើតកាបូបថ្មី</target>
       </trans-unit>
       <trans-unit id="Open existing wallet">
         <source>Open existing wallet</source>
-        <target>Bestehende Brieftasche öffnen</target>
+        <target>បើកកាបូបមានស្រាប់</target>
       </trans-unit>
       <trans-unit id="We are about to generate your very own passphrase">
         <source>We're about to generate your very own passphrase</source>
-        <target>Wir werden Deine eigene Passphrase erzeugen</target>
+        <target>យើងរៀបនឹងបង្កើតឃ្លាសម្ងាត់ផ្ទាល់ខ្លួនរបស់អ្នកហើយ</target>
       </trans-unit>
       <trans-unit id="This keeps your account secure, and lets you open your wallet on multiple devices.">
         <source>This keeps your account secure, and lets you open your wallet on multiple devices.</source>
-        <target>Dies sichert Dein Konto ab und ermöglicht es Deine Brieftasche auf mehreren Geräten zu öffnen.</target>
+        <target>ការណ៍នេះធ្វើឲ្យគណនីរបស់អ្នកមានសុវត្ថិភាពហើយអនុញ្ញាតឲ្យអ្នកបើកកាបូបរបស់អ្នកនៅលើឧបករណ៍ជាច្រើនទៀត។</target>
       </trans-unit>
       <trans-unit id="It is very important you write this down.">
         <source>It's very important you write this down.</source>
-        <target>Es ist sehr wichtig, dass Du Dir dies aufschreibst. </target>
+        <target>វាសំខាន់ណាស់សម្រាប់អ្នកសរសេរចូល។</target>
       </trans-unit>
       <trans-unit id="Generate passphrase">
         <source>Generate passphrase</source>
-        <target>Passphrase erzeugen</target>
+        <target>បង្កើតឃ្លាសម្ងាត់</target>
       </trans-unit>
       <trans-unit id="Go back">
         <source>Go back</source>
-        <target>Zurück</target>
+        <target>ត្រឡប់ក្រោយ</target>
       </trans-unit>
       <trans-unit id="Generating">
         <source>Generating</source>
-        <target>Erzeugen</target>
+        <target>កំពុងបង្កើត</target>
       </trans-unit>
       <trans-unit id="Synchronizing Wallet">
         <source>Synchronizing Wallet</source>
-        <target>Synchronisiere die Brieftasche</target>
+        <target>កំពុងធ្វើសមកាលកម្មកាបូប</target>
       </trans-unit>
       <trans-unit id="Your passphrase (12 words)">
         <source>Your passphrase (12 words)</source>
-        <target>Deine Passphrase (12 Wörter)</target>
+        <target>ឃ្លាសម្ងាត់របស់អ្នក (12 ពាក្យ)</target>
       </trans-unit>
       <trans-unit id="Your passphrase will not be shown again.">
         <source>Your passphrase will not be shown again.</source>
-        <target>Deine Passphrase wird nicht wieder angezeigt.</target>
+        <target>ឃ្លាសម្ងាត់របស់អ្នកនឹងមិនត្រូវបានបង្ហាញម្តងទៀតទេ។</target>
       </trans-unit>
       <trans-unit id="Without it you will lose access to your wallet.">
         <source>Without it you will lose access to your wallet.</source>
-        <target>Ohne dies wirst Du Zugang zu Deiner Brieftasche verlieren.</target>
+        <target>បើគ្មានវាទេអ្នកនឹងបាត់បង់សិទ្ធិចូលប្រើកាបូបរបស់អ្នក។</target>
       </trans-unit>
       <trans-unit id="I have written down or otherwise securely stored my passphrase">
         <source>I have written down or otherwise securely stored my passphrase</source>
-        <target>Ich habe die Passphrase aufgeschrieben oder anders sicher gespeichert</target>
+        <target>ខ្ញុំបានសរសេរចូលរួចហើយឬបើមិនដូច្នោះទេទុកឃ្លាសម្ងាត់របស់ខ្ញុំដោយសុវត្ថិភាព។</target>
       </trans-unit>
       <trans-unit id="Open wallet">
         <source>Open wallet</source>
-        <target>Brieftasche öffnen</target>
+        <target>បើកកាបូប</target>
       </trans-unit>
       <trans-unit id="Checking passphrase">
         <source>Checking passphrase</source>
-        <target>Prüfe die Passphrase</target>
+        <target>កំពុងពិនិត្យឃ្លាសម្ងាត់</target>
       </trans-unit>
       <trans-unit id="Enter Passphrase">
         <source>Enter Passphrase</source>
-        <target>Gib Deine Passphrase ein</target>
+        <target>បញ្ចូលឃ្លាសម្ងាត់</target>
       </trans-unit>
       <trans-unit id="Invalid passphrase">
         <source>Invalid passphrase</source>
-        <target>Ungültige Passphrase</target>
+        <target>ឃ្លាសម្ងាត់មិនត្រឹមត្រូវ</target>
       </trans-unit>
       <trans-unit id="Enter your PIN">
         <source>Enter your PIN</source>
-        <target>Gib Deinen PIN ein</target>
+        <target>បញ្ចូលកូដ PIN របស់អ្នក</target>
       </trans-unit>
       <trans-unit id="Set a PIN for quick access">
         <source>Set a PIN for quick access</source>
-        <target>Lege einen PIN für schnellen Zugang fest</target>
+        <target>កំណត់កូដ PIN មួយដើម្បីចូលប្រើបានរហ័ស</target>
       </trans-unit>
       <trans-unit id="Review passphrase again">
         <source>Review passphrase again</source>
-        <target>Prüfe die Passphrase noch einmal</target>
+        <target>ពិនិត្យឃ្លាសម្ងាត់ម្តងទៀត</target>
       </trans-unit>
       <trans-unit id="Open a different wallet">
         <source>Open a different wallet</source>
-        <target>Eine andere Brieftasche öffnen</target>
+        <target>បើកកាបូបមួយផ្សេងទៀត</target>
       </trans-unit>
       <trans-unit id="PIN must be a 4-digit number">
         <source>PIN must be a 4-digit number</source>
-        <target>PIN muss eine 4-stellige Nummer sein</target>
+        <target>កូដ PIN ត្រូវតែជាលេខ 4 ខ្ទង់។</target>
       </trans-unit>
       <trans-unit id="Verifying PIN">
         <source>Verifying PIN</source>
-        <target>Prüfe PIN</target>
+        <target>កំពុងផ្ទៀងផ្ទាត់កូដ PIN</target>
       </trans-unit>
       <trans-unit id="Setting PIN">
         <source>Setting PIN</source>
-        <target>Setze PIN</target>
+        <target>កំពុងកំណត់កូដ PIN</target>
       </trans-unit>
       <trans-unit id="This might take some time,">
         <source>This might take some time,</source>
-        <target>Dies kann ein wenig dauern,</target>
+        <target>វាអាចចំណាយពេលខ្លះ</target>
       </trans-unit>
       <trans-unit id="please be patient.">
         <source>please be patient.</source>
-        <target>ein wenig Geduld bitte.</target>
+        <target>សូម​មេត្តា​​អត់ធ្មត់។</target>
       </trans-unit>
       <trans-unit id="Your PIN is incorrect">
         <source>Your PIN is incorrect</source>
-        <target>Dein PIN is falsch</target>
+        <target>កូដ PIN របស់អ្នកមិនត្រឹមត្រូវ</target>
       </trans-unit>
       <trans-unit id="Request timeout. Please check your internet connection.">
         <source>Request timeout. Please check your internet connection.</source>
-        <target>Verbindungsfehler. Bitte prüfe Deine Internetverbindung.</target>
+        <target>ការស្នើសុំអស់ពេល។ សូមពិនិត្យតំណភ្ជាប់អ៊ីនធឺណិតរបស់អ្នក។</target>
       </trans-unit>
       <trans-unit id="Could not save your details">
         <source>Could not save your details</source>
-        <target>Deine Angaben konnten nicht gespeichert werden</target>
+        <target>មិនអាចរក្សាទុកព័ត៌មានលម្អិតរបស់អ្នកទេ</target>
       </trans-unit>
       <trans-unit id="We could not connect you to Mecto, please check your internet connection.">
         <source>We couldn't connect you to Mecto, please check your internet connection.</source>
-        <target>Wir konnten Dich nicht mit Mecto verbinden, bitte prüfe Deine Internetverbindung.</target>
+        <target>យើងមិនអាចភ្ជាប់អ្នកទៅ Mecto ទេ សូមពិនិត្យមើលតំណភ្ជាប់អ៊ីនធឺណិតរបស់អ្នក។</target>
       </trans-unit>
       <trans-unit id="Please enter a valid address to send to">
         <source>Please enter a valid address to send to</source>
-        <target>Bitte gebe eine gültige Empfängeradresse an</target>
+        <target>សូមបញ្ចូលអាសយដ្ឋានត្រឹមត្រូវដើម្បីផ្ញើទៅ</target>
       </trans-unit>
       <trans-unit id="Please enter an amount above">
         <source>Please enter an amount above %(dust)s</source>
-        <target>Bitte gebe einen grösseren Betrag als %(dust)s an</target>
+        <target>សូមបញ្ចូលចំនួនទឹកប្រាក់ខាងលើ %(dust)s</target>
       </trans-unit>
       <trans-unit id="Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.">
         <source>Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.</source>
-        <target>Einige Einzahlungen sind noch nicht verfügbar. Um diese Transaktion zu senden, warte bitte bis alle ausstehenden Transaktionen bestätigt sind. </target>
+        <target>ជាបណ្តោះអាសន្ន ទឹកប្រាក់មួយចំនួនមិនមានទេ។ ដើម្បីផ្ញើប្រតិបត្តិការនេះអ្នកត្រូវរង់ចាំប្រតិបត្តិការដែលមិនទាន់សម្រេចរបស់អ្នកត្រូវបានបញ្ជាក់ជាមុនសិន។</target>
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
         <source>It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
-        <target>Es sieht so aus, als möchtest Du Deine Brieftasche komplett entleeren. Unter der Berücksichtigung von Transaktionsgebühren steht Dir ein Maximalbetrag von %(sendableBalance)s zur Verfügung. Wir haben diesen Betrag in das Eingabefeld für Dich eingetragen. </target>
+        <target>វាហាក់បីដូចជាអ្នកកំពុងព្យាយាមយកប្រាក់ចេញពីកាបូបរបស់អ្នក។ ចំពោះការគិតថ្លៃសេវាប្រតិបតិ្តការទៅក្នុងគណនី យើងប៉ាន់ស្មានថាចំនួនទឹកប្រាក់អតិបរិមាដែលអ្នកអាចផ្ញើគឺ%(sendableBalance)s។ យើងបានកែប្រែតម្លៃនៅក្នុងវាលចំនួនទឹកប្រាក់សម្រាប់អ្នករួចហើយ។</target>
       </trans-unit>
       <trans-unit id="You do not have enough funds in your wallet (incl. fee)">
         <source>You don't have enough funds in your wallet (incl. fee)</source>
-        <target>Das Guthaben deiner Brieftasche reicht nicht aus (inkl. Gebühr)</target>
+        <target>អ្នកមិនមានទឹកប្រាក់គ្រប់គ្រាន់នៅក្នុងកាបូបរបស់អ្នកទេ (រួមទាំងកម្រៃសេវា)</target>
       </trans-unit>
       <trans-unit id="A name is required to set your profile on Coin">
         <source>A name is required to set your profile on Coin</source>
-        <target>Für Dein Coin-Profil wird ein Name benötigt</target>
+        <target>ឈ្មោះមួយគឺចាំបាច់ដើម្បីកំណត់ប្រវត្តិរូបរបស់អ្នកនៅលើកាក់។</target>
       </trans-unit>
       <trans-unit id="Uh Oh...">
         <source>Uh Oh...</source>
-        <target>Oh oh...</target>
+        <target>អូអូ...</target>
       </trans-unit>
       <trans-unit id="Whoops!">
         <source>Whoops!</source>
-        <target>Ups!</target>
+        <target>អ៊ុប!</target>
       </trans-unit>
       <trans-unit id="Just saying...">
         <source>Just saying...</source>
-        <target>Ich mein' ja nur...</target>
+        <target>គ្រាន់​តែ​និយាយ​ថា...</target>
       </trans-unit>
       <trans-unit id="Your browser does not support geolocation">
         <source>Your browser does not support geolocation</source>
-        <target>Dein Browser unterstützt Ortung (geolocation) nicht</target>
+        <target>កម្មវិធីរុករករបស់អ្នកមិនគាំទ្រទីតាំងភូមិសាស្ត្រ</target>
       </trans-unit>
       <trans-unit id="Unable to retrieve your location">
         <source>Unable to retrieve your location</source>
-        <target>Dein Standort konnte nicht bestimmt werden</target>
+        <target>មិនអាចស្វែងរកទីតាំងអ្នកបានទេ</target>
       </trans-unit>
       <trans-unit id="Without a name, the payer would not be able to identify you on Mecto.">
         <source>Without a name, the payer wouldn't be able to identify you on Mecto.</source>
-        <target>Ohne Name kann der Sender Dich nicht auf Mecto identifizieren</target>
+        <target>បើគ្មានឈ្មោះទេ អ្នកបង់ប្រាក់នឹងមិនអាចកំណត់អត្តសញ្ញាណអ្នកនៅលើ Mecto ឡើយ។</target>
       </trans-unit>
       <trans-unit id="Change your details">
         <source>Change your details</source>
-        <target>Ändere Deine Angaben</target>
+        <target>ផ្លាស់ប្តូរព័ត៌មានលម្អិតរបស់អ្នក</target>
       </trans-unit>
       <trans-unit id="Your username">
         <source>Your username</source>
-        <target>Ihren Benutzernamen</target>
+        <target>ឈ្មោះអ្នកប្រើរបស់អ្នក</target>
       </trans-unit>
       <trans-unit id="Gravatar email">
         <source>Gravatar email</source>
-        <target>Gravatar Email</target>
+        <target>អ៊ីមែល Gravatar</target>
       </trans-unit>
       <trans-unit id="Submit">
         <source>Submit</source>
-        <target>Senden</target>
+        <target>ដាក់ស្នើ</target>
       </trans-unit>
       <trans-unit id="Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.">
         <source>Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.</source>
-        <target>Gravatar (globale Avatare) ist ein Service um den gleichen Avatar auf mehreren Webseiten und Anwendungen mit Hilfe einer Email-Adresse zu verwenden.</target>
+        <target>Gravatar (ត្រូវបានស្គាល់ជាសកលថាជា អាវតា) គឺជាសេវាកម្មមួយដែលអនុញ្ញាតឲ្យអ្នកប្រើអាវតាដដែលឡើងវិញនៅលើវ៉ិបសាយថ៍និងកម្មវិធីទូរសព្ទដោយបញ្ជាក់អាសយដ្ឋានអ៊ីមែល។</target>
       </trans-unit>
       <trans-unit id="Create a gravatar">
         <source>Create a gravatar</source>
-        <target>Erzeuge einen Gravatar</target>
+        <target>បង្កើត gravatar មួយ</target>
       </trans-unit>
       <trans-unit id="Logout">
         <source>Logout</source>
-        <target>Ausloggen</target>
+        <target>ចេញ</target>
       </trans-unit>
       <trans-unit id="Support">
         <source>Support</source>
-        <target>Hilfe</target>
+        <target>គាំទ្រ</target>
       </trans-unit>
       <trans-unit id="Send">
         <source>Send</source>
-        <target>Senden</target>
+        <target>ផ្ញើ</target>
       </trans-unit>
       <trans-unit id="Receive">
         <source>Receive</source>
-        <target>Empfangen</target>
+        <target>ទទួល</target>
       </trans-unit>
       <trans-unit id="History">
         <source>History</source>
-        <target>Chronik</target>
+        <target>ប្រវត្តិ​</target>
       </trans-unit>
       <trans-unit id="Tokens">
         <source>Tokens</source>
-        <target>Token</target>
+        <target>កាស</target>
       </trans-unit>
       <trans-unit id="Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.">
         <source>Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.</source>
-        <target>Mecto ermöglicht das Austauschen Deiner Empfangsadresse mit anderen örtlich nahen Coin-Benutzern. Hierzu wird Deine GPS-Ortung genutzt. Diese Positionsdaten werden sofort nach Ausschalten von Mecto gelöscht. </target>
+        <target>Mecto អនុញ្ញាតឲ្យអ្នកផ្សព្វផ្សាយអាសយដ្ឋានកាបូបរបស់អ្នកទៅអ្នកប្រើកាក់នៅក្បែរៗផ្សេងទៀតដោយការប្រៀបធៀបទិន្នន័យ GPS។ ទិន្នន័យនេះត្រូវបានលុបចោលនៅពេលដែលអ្នកបិទ Mecto។</target>
       </trans-unit>
       <trans-unit id="Before you start using Mecto, you need to enter a name that will help others identify you.">
         <source>Before you start using Mecto, you need to enter a name that will help others identify you.</source>
-        <target>Um Mecto zu benutzen, musst Du einen Benutzernamen auswählen. So können Dich andere Benutzer finden.</target>
+        <target>មុនពេលអ្នកចាប់ផ្តើមប្រើ Mecto អ្នកត្រូវបញ្ចូលឈ្មោះមួយសម្រាប់ជួយឲ្យអ្នកដទៃស្គាល់អ្នក។</target>
       </trans-unit>
       <trans-unit id="Save">
         <source>Save</source>
-        <target>Speichern</target>
+        <target>រក្សាទុក</target>
       </trans-unit>
       <trans-unit id="Loading transactions...">
         <source>Loading transactions...</source>
-        <target>Transaktionen werden geladen...</target>
+        <target>កំពុងផ្ទុកប្រតិបត្តិការ...</target>
       </trans-unit>
       <trans-unit id="Your transaction history">
         <source>Your transaction history</source>
-        <target>Chronik Deiner Transaktionen</target>
+        <target>ប្រវត្តិប្រត្តិបត្តិការរបស់អ្នក</target>
       </trans-unit>
       <trans-unit id="pending confirmation">
         <source>pending confirmation</source>
-        <target>Warte auf Bestätigungen</target>
+        <target>កំពុងរង់ចាំការបញ្ជាក់</target>
       </trans-unit>
       <trans-unit id="Received">
         <source>Received</source>
-        <target>Erhalten</target>
+        <target>បានទទួល</target>
       </trans-unit>
       <trans-unit id="You do not have any transactions yet">
         <source>You don't have any transactions yet</source>
-        <target>Du hast noch keine Transaktionen getätigt</target>
+        <target>អ្នកមិនមានប្រតិបត្តិការណាមួយទេ។</target>
       </trans-unit>
       <trans-unit id="Transaction Id:">
         <source>Transaction Id:</source>
-        <target>Transaktions-ID:</target>
+        <target>លេខប្រតិបត្តិការ៖</target>
       </trans-unit>
       <trans-unit id="Transaction Fee:">
         <source>Transaction Fee:</source>
-        <target>Transaktionsgebühr:</target>
+        <target>ថ្លៃសេវាប្រតិបត្តិការ៖</target>
       </trans-unit>
       <trans-unit id="Inputs:">
         <source>Inputs:</source>
-        <target>Eingänge:</target>
+        <target>ធាតុចូល៖</target>
       </trans-unit>
       <trans-unit id="Outputs:">
         <source>Outputs:</source>
-        <target>Ausgänge:</target>
+        <target>លទ្ធផល៖</target>
       </trans-unit>
       <trans-unit id="Your wallet address">
         <source>Your wallet address</source>
-        <target>Die Adresse Deiner Brieftasche</target>
+        <target>អាសយដ្ឋានកាបូបរបស់អ្នក</target>
       </trans-unit>
       <trans-unit id="Mecto">
         <source>Mecto</source>
@@ -279,633 +279,633 @@
       </trans-unit>
       <trans-unit id="Turn Mecto on">
         <source>Turn Mecto on</source>
-        <target>Mecto einschalten</target>
+        <target>បើក Mecto</target>
       </trans-unit>
       <trans-unit id="Turn Mecto off">
         <source>Turn Mecto off</source>
-        <target>Mecto ausschalten</target>
+        <target>បិទ Mecto</target>
       </trans-unit>
       <trans-unit id="Checking your location">
         <source>Checking your location</source>
-        <target>Suche Deine Position</target>
+        <target>កំពុងពិនិត្យទីតាំងរបស់អ្នក</target>
       </trans-unit>
       <trans-unit id="Broadcasting your location...">
         <source>Broadcasting your location...</source>
-        <target>Sende Deine Position...</target>
+        <target>កំពុងផ្សព្វផ្សាយទីតាំងរបស់អ្នក...</target>
       </trans-unit>
       <trans-unit id="Wallet address">
         <source>Wallet address</source>
-        <target>Adresse der Brieftasche</target>
+        <target>អាសយដ្ឋានកាបូប</target>
       </trans-unit>
       <trans-unit id="Amount">
         <source>Amount</source>
-        <target>Betrag</target>
+        <target>ចំនួនទឹកប្រាក់</target>
       </trans-unit>
       <trans-unit id="Confirm">
         <source>Confirm</source>
-        <target>Bestätige</target>
+        <target>បញ្ជាក់</target>
       </trans-unit>
       <trans-unit id="No Coin users found nearby">
         <source>No Coin users found nearby</source>
-        <target>Es sind keine Coin Benutzer in Deiner Nähe</target>
+        <target>រកមិនឃើញអ្នកប្រើប្រាស់កាក់នៅក្បែរៗនោះទេ</target>
       </trans-unit>
       <trans-unit id="Search Again">
         <source>Search Again</source>
-        <target>Erneut suchen</target>
+        <target>ស្វែងរក​ម្ដង​ទៀត</target>
       </trans-unit>
       <trans-unit id="Searching...">
         <source>Searching...</source>
-        <target>Suchen...</target>
+        <target>កំពុងស្វែងរក...</target>
       </trans-unit>
       <trans-unit id="Searching your area for other Coin users">
         <source>Searching your area for other Coin users</source>
-        <target>Suche andere Coin Benutzer in Deiner Gegend</target>
+        <target>កំពុងស្វែងរកតំបន់របស់អ្នកសម្រាប់អ្នកប្រើប្រាស់កាក់ផ្សេងទៀត</target>
       </trans-unit>
       <trans-unit id="Confirm transaction">
         <source>Confirm transaction</source>
-        <target>Transaktion bestätigen</target>
+        <target>បញ្ជាក់ប្រតិបត្តិការ</target>
       </trans-unit>
       <trans-unit id="transaction fee">
         <source>transaction fee</source>
-        <target>Transaktionsgebühr</target>
+        <target>ថ្លៃសេវាប្រតិបត្តិការ</target>
       </trans-unit>
       <trans-unit id="Cancel">
         <source>Cancel</source>
-        <target>Abbrechen</target>
+        <target>បោះបង់</target>
       </trans-unit>
       <trans-unit id="Transaction Successful">
         <source>Transaction Successful</source>
-        <target>Die Transaktion ist erfolgreich verlaufen</target>
+        <target>ប្រតិបត្តិការជោគជ័យ</target>
       </trans-unit>
       <trans-unit id="Your transaction will appear in your history tab shortly.">
         <source>Your transaction will appear in your history tab shortly.</source>
-        <target>Deine Transaktion wird in Kürze in der Chronik erscheinen.</target>
+        <target>ប្រតិបត្តិការរបស់អ្នកនឹងបង្ហាញនៅក្នុងរបារប្រវត្តិរបស់អ្នកឆាប់ៗនេះ។</target>
       </trans-unit>
       <trans-unit id="Close">
         <source>Close</source>
-        <target>Schließen</target>
+        <target>បិទ</target>
       </trans-unit>
       <trans-unit id="Transaction Failed">
         <source>Transaction Failed</source>
-        <target>Die Transaktion ist fehlgeschlagen</target>
+        <target>ប្រតិបត្តិការបានបរាជ័យ</target>
       </trans-unit>
       <trans-unit id="Failed">
         <source>Failed</source>
-        <target>Fehlgeschlagen</target>
+        <target>បានបរាជ័យ</target>
       </trans-unit>
       <trans-unit id="Sorry, Coin Wallet did not load.">
         <source>Sorry, Coin Wallet didn't load.</source>
-        <target>Entschuldigung, die Coin-Brieftasche konnte nicht geladen werden.</target>
+        <target>សូមអធ្យាស្រ័យ កាបូបកាក់មិនបានផ្ទុកទេ។</target>
       </trans-unit>
       <trans-unit id="Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.">
         <source>Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.</source>
-        <target>Versuche Deinen Webbrowser zu aktualisieren oder beende den Inkognito-Modus. Ansonsten lade Dir den Chrome Browser für Dein Gerät herunter.</target>
+        <target>ព្យាយាមធ្វើបច្ចុប្បន្នភាពកម្មវិធីរុករករបស់អ្នកឬប្តូរចេញពីម៉ូដរុករកឯកជន។ ប្រសិនបើអ្វីៗទាំងអស់បរាជ័យ សូមទាញយក Chrome សម្រាប់ឧបករណ៍របស់អ្នក។</target>
       </trans-unit>
       <trans-unit id="Current coin price">
         <source>Current coin price</source>
-        <target>Aktueller Coin-Preis</target>
+        <target>តម្លៃកាក់បច្ចុប្បន្ន</target>
       </trans-unit>
       <trans-unit id="Username not available">
         <source>Username not available</source>
-        <target>Benutzername nicht verfügbar</target>
+        <target>ឈ្មោះអ្នកប្រើមិនមាន</target>
       </trans-unit>
       <trans-unit id="Scan your fingerprint please">
         <source>Scan your fingerprint please</source>
-        <target>Scannen Sie Ihren Fingerabdruck bitte</target>
+        <target>សូមស្កេនក្រយៅដៃរបស់អ្នក</target>
       </trans-unit>
       <trans-unit id="Enter PIN">
         <source>Enter PIN</source>
-        <target>PIN eingeben</target>
+        <target>បញ្ចូលកូដ PIN</target>
       </trans-unit>
       <trans-unit id="I Agree To The Terms &amp; Conditions">
         <source>I Agree To The Terms &amp; Conditions</source>
-        <target>Ich stimme den Allgemeine Geschäftsbedingungen zu</target>
+        <target>ខ្ញុំយល់ស្របនឹងបញ្ញត្តិនិងល័ក្ខខ័ណ្ឌ</target>
       </trans-unit>
       <trans-unit id="Terms of Use">
         <source>Terms of Use</source>
-        <target>Nutzungsbedingungen</target>
+        <target>លក្ខខណ្ឌនៃការប្រើប្រាស់</target>
       </trans-unit>
       <trans-unit id="Unparsed address">
         <source>Unparsed address</source>
-        <target>Nicht analysierte Adresse</target>
+        <target>អាសយដ្ឋានដែលមិនបានធ្វើសម្ពន្ធ</target>
       </trans-unit>
       <trans-unit id="Exchange">
         <source>Exchange</source>
-        <target>Umtauschen</target>
+        <target>ការប្តូ​រ​ប្រាក់</target>
       </trans-unit>
       <trans-unit id="From">
         <source>From</source>
-        <target>Von</target>
+        <target>ពី</target>
       </trans-unit>
       <trans-unit id="To">
         <source>To</source>
-        <target>In</target>
+        <target>ទៅ</target>
       </trans-unit>
       <trans-unit id="Exchange rate">
         <source>Exchange rate</source>
-        <target>Wechselkurs</target>
+        <target>អត្រា​ប្តូ​រ​ប្រាក់</target>
       </trans-unit>
       <trans-unit id="Loading...">
         <source>Loading...</source>
-        <target>Lädt…</target>
+        <target>កំពុងផ្ទុក...</target>
       </trans-unit>
       <trans-unit id="Address">
         <source>Address</source>
-        <target>Adresse</target>
+        <target>អាសយដ្ឋាន</target>
       </trans-unit>
       <trans-unit id="Return address (optional)">
         <source>Return address (optional)</source>
-        <target>Absender (optional)</target>
+        <target>អាសយដ្ឋានផ្ញើត្រឡប់ (ជម្រើស)</target>
       </trans-unit>
       <trans-unit id="Deposit address">
         <source>Deposit address (%(symbol)s)</source>
-        <target>Einzahlungsadresse (%(symbol)s)</target>
+        <target>អាសយដ្ឋានដាក់ប្រាក់ (%(symbol)s)</target>
       </trans-unit>
       <trans-unit id="Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
         <source>Send up to %(depositMax)s %(depositSymbol)s to deposit address.
 It will be converted into %(toSymbol)s, and sent to
  %(toAddress)s</source>
-        <target>Sende bis zu %(depositMax)s %(depositSymbol)s an die Einzahlungsadresse.
-Sie werden in %(toSymbol)s konvertiert und an
- %(toAddress)s gesendet.</target>
+        <target>ផ្ញើចេញបានដល់ %(depositMax)s %(depositSymbol)s ទៅកាន់អាសយដ្ឋានដាក់ប្រាក់។
+វានឹងត្រូវបានបម្លែងទៅជា %(toSymbol)s, ហើយបានផ្ញើទៅ
+ %(toAddress)s</target>
       </trans-unit>
       <trans-unit id="Deposit minimum">
         <source>Deposit minimum</source>
-        <target>Einzahlungsminimum</target>
+        <target>ការដាក់ប្រាក់បញើរអប្បបរមា</target>
       </trans-unit>
       <trans-unit id="amount :toSymbol have been delivered to :toAddress">
         <source>%(amount)s %(toSymbol)s have been delivered to
  %(toAddress)s</source>
-        <target>%(amount)s %(toSymbol)s wurden gesendet an
- %(toAddress)s</target>
+        <target>%(amount)s %(toSymbol)s ត្រូវបានបញ្ជូនទៅ
+ %(toSymbol)s</target>
       </trans-unit>
       <trans-unit id="Back">
         <source>Back</source>
-        <target>Zurück</target>
+        <target>ត្រឡប់</target>
       </trans-unit>
       <trans-unit id="Awaiting deposit...">
         <source>Awaiting deposit...</source>
-        <target>Warten auf Einzahlung...</target>
+        <target>កំពុងរង់ចាំការដាក់ប្រាក់បញើរ...</target>
       </trans-unit>
       <trans-unit id="Deposit has been received">
         <source>Deposit has been received</source>
-        <target>Einzahlung wurde empfangen</target>
+        <target>ប្រាក់បញ្ញើត្រូវបានទទួល</target>
       </trans-unit>
       <trans-unit id="Awaiting exchange...">
         <source>Awaiting exchange...</source>
-        <target>Warten auf Umtausch...</target>
+        <target>កំពុងរង់ចាំការប្តូរប្រាក់...</target>
       </trans-unit>
       <trans-unit id="Exchange complete!">
         <source>Exchange complete!</source>
-        <target>Umtausch abgeschlossen!</target>
+        <target>ការប្តូរប្រាក់បានបញ្ចប់!</target>
       </trans-unit>
       <trans-unit id="Done">
         <source>Done</source>
-        <target>Fertig</target>
+        <target>បានធ្វើរួច</target>
       </trans-unit>
       <trans-unit id="Please enter a valid return address">
         <source>Please enter a valid return address</source>
-        <target>Bitte gib einen gültigen Absender ein</target>
+        <target>សូមបញ្ចូលអាសយដ្ឋានផ្ញើត្រឡប់ត្រឹមត្រូវ</target>
       </trans-unit>
       <trans-unit id="Miner fee">
         <source>Miner fee</source>
-        <target>Miner-Kommission</target>
+        <target>ថ្លៃអ្នករុករករ៉ែ</target>
       </trans-unit>
       <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
         <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
-        <target>Der Absender muss eine von Dir kontrollierte Adresse sein, an die die Einzahlung im Fall einer fehlgeschlagenen Transaktion zurückgesandt werden.</target>
+        <target>អាសយដ្ឋានផ្ញើត្រឡប់គួរតែជាអាសយដ្ឋានគ្រប់គ្រងដោយអ្នកដែលការដាក់ប្រាក់នឹងត្រូវបានប្រគល់ជូនក្នុងករណីដែលប្រតិបត្តិការបរាជ័យ។</target>
       </trans-unit>
       <trans-unit id="Remove account">
         <source>Remove account</source>
-        <target>Konto entfernen</target>
+        <target>លុប​គណនី​</target>
       </trans-unit>
       <trans-unit id="Remove">
         <source>Remove</source>
-        <target>Entfernen</target>
+        <target>លុប</target>
       </trans-unit>
       <trans-unit id="Are you sure?">
         <source>Are you sure?</source>
-        <target>Bist Du sicher?</target>
+        <target>តើអ្នក​ប្រាកដឬទេ?</target>
       </trans-unit>
       <trans-unit id="Account has been successfully removed">
         <source>Account has been successfully removed</source>
-        <target>Das Konto wurde erfolgreich entfernt.</target>
+        <target>​គណនី​បានលុបចេញដោយជោគជ័យ</target>
       </trans-unit>
       <trans-unit id="This page will be reloaded shortly.">
         <source>This page will be reloaded shortly.</source>
-        <target>Diese Seite wird in Kürze erneut geladen.</target>
+        <target>ទំព័រនេះនឹងត្រូវបានផ្ទុកឡើងវិញក្នុងពេលឆាប់ៗនេះ។</target>
       </trans-unit>
       <trans-unit id="About">
         <source>About</source>
-        <target>Über uns</target>
+        <target>អំពី</target>
       </trans-unit>
       <trans-unit id="Release information">
         <source>Release information</source>
-        <target>Informationen zur Veröffentlichung</target>
+        <target>ការចេញផ្សាយព័ត៌មាន</target>
       </trans-unit>
       <trans-unit id="Version">
         <source>Version</source>
-        <target>Version</target>
+        <target>កំណែ</target>
       </trans-unit>
       <trans-unit id="Transfer paper wallet / private key">
         <source>Transfer paper wallet / private key</source>
-        <target>Überweisung Papier-Brieftasche/privater Schlüssel</target>
+        <target>ផ្ទេរកាបូបក្រដាសប្រាក់/កូនសោឯកជន</target>
       </trans-unit>
       <trans-unit id="Export private keys">
         <source>Export private keys</source>
-        <target>Private Schlüssel exportieren</target>
+        <target>នាំចេញកូនសោឯកជន</target>
       </trans-unit>
       <trans-unit id="Transfer private key">
         <source>Transfer private key</source>
-        <target>Privaten Schlüssel überweisen</target>
+        <target>ផ្ទេរកូនសោឯកជន</target>
       </trans-unit>
       <trans-unit id="Transfer">
         <source>Transfer</source>
-        <target>Überweisen</target>
+        <target>ផ្ទេរ</target>
       </trans-unit>
       <trans-unit id="Private key">
         <source>Private key</source>
-        <target>Privater Schlüssel</target>
+        <target>សោ​ឯកជន</target>
       </trans-unit>
       <trans-unit id="This will transfer all coins from the paper wallet address to your wallet.">
         <source>This will transfer all coins from the paper wallet address to your wallet.</source>
-        <target>Dadurch werden alle Coins der Papier-Brieftasche an Deine Brieftasche überwiesen.</target>
+        <target>ការណ៍នេះនឹងផ្ទេរកាក់ទាំងអស់ពីអាសយដ្ឋានកាបូបក្រដាសប្រាក់ទៅកាបូបរបស់អ្នក។</target>
       </trans-unit>
       <trans-unit id="This private key has no coins for transfer.">
         <source>This private key has no coins for transfer.</source>
-        <target>Dieser private Schlüssel hat keine zu überweisenden Coins.</target>
+        <target>កូនសោឯកជននេះមិនមានកាក់សម្រាប់ផ្ទេរទេ។</target>
       </trans-unit>
       <trans-unit id="Invalid private key">
         <source>Invalid private key</source>
-        <target>Ungültiger privater Schlüssel</target>
+        <target>កូនសោឯកជនមិនត្រឹមត្រូវ</target>
       </trans-unit>
       <trans-unit id="Insufficient funds">
         <source>Insufficient funds</source>
-        <target>Nicht genug Geld</target>
+        <target>ទឹកប្រាក់មិនគ្រប់គ្រាន់</target>
       </trans-unit>
       <trans-unit id="Warning!">
         <source>Warning!</source>
-        <target>Warnung!</target>
+        <target>ការព្រមាន!</target>
       </trans-unit>
       <trans-unit id="Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you&apos;d like them to have access to your funds.">
         <source>Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you'd like them to have access to your funds.</source>
-        <target>Deine privaten Schlüssel sind Schlüssel für Dein Geld. GIB SIE NICHT an andere weiter, es sei denn, du möchtest, dass sie Zugriff auf dein Geld erhalten.</target>
+        <target>កូនសោឯកជនរបស់អ្នកគឺជាកូនសោរសម្រាប់ទឹកប្រាក់របស់អ្នកដូច្នេះសូមកុំចែករំលែកវាជាមួយនរណាម្នាក់លើកលែងតែអ្នកចង់ឲ្យពួកគេមានសិទ្ធិចូលប្រើប្រាស់ទឹកប្រាក់របស់អ្នក។</target>
       </trans-unit>
       <trans-unit id="Show">
         <source>Show</source>
-        <target>Anzeigen</target>
+        <target>បង្ហាញ</target>
       </trans-unit>
       <trans-unit id="Comma-separated list">
         <source>Comma-separated list</source>
-        <target>Mit Komma getrennte Liste</target>
+        <target>បញ្ជីញែកដោយសញ្ញាក្បៀស</target>
       </trans-unit>
       <trans-unit id="Your wallet has no private keys with coins for export.">
         <source>Your wallet has no private keys with coins for export.</source>
-        <target>Deine Brieftasche hat keine privaten Schlüssel mit zu exportierenden Coins.</target>
+        <target>កាបូបរបស់អ្នកគ្មានកូនសោឯកជនដែលមានកាក់សម្រាប់នាំចេញទេ។</target>
       </trans-unit>
       <trans-unit id="Add Token">
         <source>Add Token</source>
-        <target>Token hinzufügen</target>
+        <target>បន្ថែមកាស</target>
       </trans-unit>
       <trans-unit id="Gas limit">
         <source>Gas limit</source>
-        <target>Gas Coin-Limit</target>
+        <target>កម្រិតស៊ាំង</target>
       </trans-unit>
       <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.">
         <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.</source>
-        <target>Gas-Limit bezeichnet den Betrag Gas, den Du mit Deiner Transaktion sendest. Die Höhe des Betrags hat keine Auswirkungen auf die schnellere Genehmigung Deiner Transaktion. Senden von ETH entspricht 21.000. Senden von Token entspricht 200.000.</target>
+        <target>កម្រិតស៊ាំងគឺជាចំនួនស៊ាំងដែលត្រូវផ្ញើជាមួយប្រតិបត្តិការរបស់អ្នក។ ការបង្កើនចំនួននេះនឹងមិនបញ្ជាក់ប្រតិបត្តិការរបស់អ្នកបានលឿនទេ។ ការផ្ញើ ETH គឺស្មើនឹង 21000 ។ ការផ្ញើកាសគឺស្មើប្រហែល 200000 ។</target>
       </trans-unit>
       <trans-unit id="Contract address">
         <source>Contract address</source>
-        <target>Vertragsadresse</target>
+        <target>អាសយដ្ឋានចុះកិច្ចសន្យា</target>
       </trans-unit>
       <trans-unit id="Add">
         <source>Add</source>
-        <target>Hinzufügen</target>
+        <target>បន្ថែម</target>
       </trans-unit>
       <trans-unit id="Symbol">
         <source>Symbol</source>
-        <target>Symbol</target>
+        <target>និមិត្តសញ្ញា</target>
       </trans-unit>
       <trans-unit id="Decimals">
         <source>Decimals</source>
-        <target>Dezimalstellen</target>
+        <target>ទសភាគ</target>
       </trans-unit>
       <trans-unit id="Token">
         <source>Token</source>
-        <target>Token</target>
+        <target>កាស</target>
       </trans-unit>
       <trans-unit id="Custom token">
         <source>Custom token</source>
-        <target>Benutzerdefinierter Token</target>
+        <target>កាសតាមតម្រូវ</target>
       </trans-unit>
       <trans-unit id="Please fill out all fields.">
         <source>Please fill out all fields.</source>
-        <target>Bitte fülle alle Felder aus.</target>
+        <target>សូមបំពេញវាលទាំងអស់</target>
       </trans-unit>
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
-        <target>Bitte gib ein Gas-Limit über null ein</target>
+        <target>សូមបញ្ចូលកម្រិតហ្គាសធំជាងសូន្យ</target>
       </trans-unit>
       <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
         <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
-        <target>Du hast nicht genug Ethereum für die Bezahlung der Transaktionsgebühren (%(ethereumRequired)s ETH).</target>
+        <target>អ្នកមិនមានទឹកប្រាក់ Ethereum គ្រប់គ្រាន់ដើម្បីបង់ថ្លៃប្រតិបត្តិការទេ (%(ethereumRequired)s ETH) ។</target>
       </trans-unit>
       <trans-unit id="Click to Select">
         <source>Click to Select</source>
-        <target>Zum Auswählen klicken</target>
+        <target>ចុចដើម្បីជ្រើស</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
-        <target>In die Zwischenablage kopieren</target>
+        <target>ចម្លង​ទៅកាន់​ក្ដារ​តម្បៀត​ខ្ទាស់</target>
       </trans-unit>
       <trans-unit id="Copied!">
         <source>Copied!</source>
-        <target>Kopiert!</target>
+        <target>បានចម្លង!</target>
       </trans-unit>
       <trans-unit id="Please enter an address other than your wallet address">
         <source>Please enter an address other than your wallet address</source>
-        <target>Bitte gib eine andere Adresse als Deine Brieftaschen-Adresse ein.</target>
+        <target>សូមបញ្ចូលអាសយដ្ឋានក្រៅពីអាសយដ្ឋានកាបូបរបស់អ្នក។</target>
       </trans-unit>
       <trans-unit id="Please enter a private key other than your wallet private key">
         <source>Please enter a private key other than your wallet private key</source>
-        <target>Bitte gib einen anderen privaten Schlüssel ein als den privaten Schlüssel Deiner Brieftasche.</target>
+        <target>សូមបញ្ចូលកូនសោឯកជនក្រៅពីកូនសោឯកជនរបស់កាបូបអ្នក។</target>
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
         <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(denomination)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
-        <target>Es sieht so aus, als möchtest Du Deine Brieftasche entleeren. Unter der Berücksichtigung von Transaktionsgebühren und der Mindestreserve (%(minReserve)s %(denomination)s) kannst du maximal einen Betrag von %(sendableBalance)s senden. Wir haben diesen Betrag für Dich in das Eingabefeld eingetragen.</target>
+        <target>វាហាក់បីដូចជាអ្នកកំពុងព្យាយាមយកប្រាក់ចេញពីកាបូបរបស់អ្នក។ ចំពោះការគិតថ្លៃសេវាប្រតិបតិ្តការនិងទឹកប្រាក់បម្រុងអប្បបរមា (%(minReserve)s %(denomination)s) ទៅក្នុងគណនី យើងប៉ាន់ស្មានថាចំនួនទឹកប្រាក់អតិបរិមាដែលអ្នកអាចផ្ញើគឺ%(sendableBalance)s។ យើងបានកែប្រែតម្លៃនៅក្នុងវាលចំនួនទឹកប្រាក់សម្រាប់អ្នករួចហើយ។</target>
       </trans-unit>
       <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :denomination) to your wallet address.">
         <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(denomination)s) to your wallet address.</source>
-        <target>Deine Brieftasche ist nicht aktiviert. Bitte sende eine höhere Mindestreserve (%(minReserve)s %(denomination)s) an die Adresse deiner Brieftasche.</target>
+        <target>កាបូបរបស់អ្នកមិនធ្វើឲ្យសកម្មទេ។ ដើម្បីធ្វើឲ្យសកម្មវាសូមផ្ញើចំនួនធំជាងចំនួនទឹកប្រាក់បម្រុងអប្បបរមា។ (%(minReserve)s %(denomination)s) ទៅអាសយដ្ឋានកាបូបរបស់អ្នក។</target>
       </trans-unit>
       <trans-unit id="Load more">
         <source>Load more</source>
-        <target>Mehr laden</target>
+        <target>ផ្ទុកបន្ថែម</target>
       </trans-unit>
       <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
         <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>Die Brieftasche des Empfängers ist nicht aktiviert. Du kannst nur einen Betrag senden, der größer ist als %(minReserve)s %(denomination)s.</target>
+        <target>កាបូបរបស់មិនធ្វើឲ្យសកម្មទេ។ អ្នកអាចផ្ញើតែចំនួនទឹកប្រាក់ធំជាង %(minReserve)s %(denomination)s។</target>
       </trans-unit>
       <trans-unit id="Destination tag">
         <source>Destination tag</source>
-        <target>Ziel-Tag</target>
+        <target>ស្លាកទិសដៅ</target>
       </trans-unit>
       <trans-unit id="Invoice ID">
         <source>Invoice ID</source>
-        <target>Rechnungsnummer</target>
+        <target>លេខវិក្កយបត្រ</target>
       </trans-unit>
       <trans-unit id="(optional)">
         <source>(optional)</source>
-        <target>(optional)</target>
+        <target>(ជម្រើស)</target>
       </trans-unit>
       <trans-unit id="An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.">
         <source>An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.</source>
-        <target>Eine zufällige nicht signierte 32-Bit Ganzzahl, die den Zahlungsgrund oder ein nicht Ripple Konto angibt.</target>
+        <target>ចំនួនគត់ 32-bit ដែលមិនបានចុះហត្ថលេខាតាមអំពើចិត្ត បានបញ្ជាក់ពីមូលហេតុនៃការបង់ប្រាក់ឬគណនីដែលមិនមែនជារីបផល។</target>
       </trans-unit>
       <trans-unit id="A 256-bit hash that can be used to identify a particular payment.">
         <source>A 256-bit hash that can be used to identify a particular payment.</source>
-        <target>Ein 256-Bit-Hash, der zur Identifizierung einer bestimmten Zahlung verwendet werden kann.</target>
+        <target>ហាស 256-bit ដែលអាចត្រូវបានប្រើដើម្បីកំណត់ការទូទាត់ជាក់លាក់។</target>
       </trans-unit>
       <trans-unit id="Please enter a valid invoice ID">
         <source>Please enter a valid invoice ID</source>
-        <target>Bitte gib eine gültige Rechnungs-ID ein.</target>
+        <target>សូមបញ្ចូលលេខវិក្កយបត្រត្រឹមត្រូវ</target>
       </trans-unit>
       <trans-unit id="Please enter a valid destination tag">
         <source>Please enter a valid destination tag</source>
-        <target>Bitte gib einen gültigen Ziel-Tag ein.</target>
+        <target>សូមបញ្ចូលស្លាកទិសដៅត្រឹមត្រូវ</target>
       </trans-unit>
       <trans-unit id="Exchange is currently unavailable for this pair">
         <source>Exchange is currently unavailable for this pair</source>
-        <target>Für dieses Währungspaar ist derzeit kein Umtausch möglich.</target>
+        <target>បច្ចុប្បន្នការប្តូរប្រាក់មិនមានសម្រាប់គូនេះទេ</target>
       </trans-unit>
       <trans-unit id="Payment operations:">
         <source>Payment operations:</source>
-        <target>Zahlungsvorgänge:</target>
+        <target>ប្រតិបត្តិការទូទាត់៖</target>
       </trans-unit>
       <trans-unit id="Pay (:amount) XLM to :destination">
         <source>Pay %(amount)s XLM to %(destination)s</source>
-        <target>%(amount)s XLM an %(destination)szahlen</target>
+        <target>បង់ %(amount)s XLM ទៅ %(destination)s</target>
       </trans-unit>
       <trans-unit id="Created Account :destination with balance :amount XLM">
         <source>Created Account %(destination)s with balance %(amount)s XLM</source>
-        <target>Konto %(destination)s mit einem Guthaben von %(amount)s XLM erstellt</target>
+        <target>បង្កើតគណនី %(destination)s ជាមួយនឹងសមតុល្យ %(amount)s XLM </target>
       </trans-unit>
       <trans-unit id="Memo">
         <source>Memo</source>
-        <target>Memo</target>
+        <target>កំណត់ហេតុ៖</target>
       </trans-unit>
       <trans-unit id="Please enter a valid memo">
         <source>Please enter a valid memo</source>
-        <target>Bitte gib ein gültiges Memo ein.</target>
+        <target>សូមបញ្ចូលកំណត់ហេតុត្រឹមត្រូវ</target>
       </trans-unit>
       <trans-unit id="The memo contains optional extra information. A string up to 28-bytes long.">
         <source>The memo contains optional extra information. A string up to 28-bytes long.</source>
-        <target>Das Memo enthält optional zusätzliche Informationen. Bis zu 28 Bytes lange Zeichenkette.</target>
+        <target>កំណត់ហេតុនេះមានព័ត៌មានបន្ថែមសម្រាប់ជាជម្រើស។ ចំនួនខ្សែមានប្រវែងរហូតដល់ 28 បៃ។</target>
       </trans-unit>
       <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :denomination.">
         <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>Deine Brieftasche ist nicht aktiviert. Du kannst nur einen Betrag senden, der größer ist als %(minReserve)s %(denomination)s.</target>
+        <target>កាបូបរបស់អ្នកមិនធ្វើឲ្យសកម្មទេ។ អ្នកអាចទទួលតែចំនួនទឹកប្រាក់ធំជាង %(minReserve)s %(denomination)s។</target>
       </trans-unit>
       <trans-unit id="Privacy Policy">
         <source>Privacy Policy</source>
-        <target>Datenschutzbestimmungen</target>
+        <target>គោលការណ៍សិទ្ធិឯកជន</target>
       </trans-unit>
       <trans-unit id="Your ShapeShift account is not verified.">
         <source>Your ShapeShift account is not verified.</source>
-        <target>Dein ShapeShift-Konto ist nicht verifiziert.</target>
+        <target>គណនី ShapeShift របស់អ្នកមិនត្រូវបានផ្ទៀងផ្ទាត់ទេ។</target>
       </trans-unit>
       <trans-unit id="Complete verification">
         <source>Complete verification</source>
-        <target>Verifizierung abschließen</target>
+        <target>ការផ្ទៀងផ្ទាត់បញ្ចប់</target>
       </trans-unit>
       <trans-unit id="Try to sign in again">
         <source>Try to sign in again</source>
-        <target>Melde Dich noch einmal an.</target>
+        <target>សូមព្យាយាមចុះឈ្មោះចូលម្តងទៀត</target>
       </trans-unit>
       <trans-unit id="Sign in">
         <source>Sign in</source>
-        <target>Anmelden</target>
+        <target>ចុះឈ្មោះចូល</target>
       </trans-unit>
       <trans-unit id="Setup EOS account">
         <source>Setup EOS account</source>
-        <target>EOS-Konto einrichten</target>
+        <target>រៀបចំគណនី EOS</target>
       </trans-unit>
       <trans-unit id="Account name">
         <source>Account name</source>
-        <target>Kontoname</target>
+        <target>ឈ្មោះ​គណនី</target>
       </trans-unit>
       <trans-unit id="The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.">
         <source>The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.</source>
-        <target>Der EOS-Kontoname muss genau 12 Zeichen lang sein und aus Kleinbuchstaben und Zahlen zwischen 1 und 5 bestehen.</target>
+        <target>ឈ្មោះគណនី EOS ត្រូវតែមានប្រវែង 12 តួអក្សរយ៉ាងពិតប្រាកដនិងមានអក្សរតូចនិងលេខពីលេខ 1 ដល់លេខ 5 ។</target>
       </trans-unit>
       <trans-unit id="Invalid account name">
         <source>Invalid account name</source>
-        <target>Ungültiger Kontoname</target>
+        <target>ឈ្មោះគណនីមិនត្រឹមត្រូវ</target>
       </trans-unit>
       <trans-unit id="This account name is already taken, please choose another one.">
         <source>This account name is already taken, please choose another one.</source>
-        <target>Dieser Kontoname ist bereits vergeben, bitte wähle einen anderen aus.</target>
+        <target>ឈ្មោះគណនីនេះត្រូវបានយករួចហើយសូមជ្រើសរើសមួយផ្សេងទៀត។</target>
       </trans-unit>
       <trans-unit id="To create a new account you need to make an EOS transfer (amount greater than :minAmount) with the following data from an exchange or other EOS wallet.">
         <source>To create a new account you need to make an EOS transfer (amount greater than %(minAmount)s) with the following data from an exchange or other EOS wallet.</source>
-        <target>Wenn Du ein neues Konto erstellen möchtest (Betrag größer als %(minAmount)s) musst du eine EOS-Überweisung durchführen mit den folgenden Informationen von einem Umtausch oder einer anderen EOS-Brieftasche.</target>
+        <target>ដើម្បីបង្កើតគណនីថ្មីអ្នកត្រូវធ្វើការផ្ទេរ EOS (ចំនួនទឹកប្រាក់ធំជាង %(minAmount)s) ជាមួយនឹងទិន្នន័យដូចខាងក្រោមពីការប្តូរប្រាក់រឺកាបូប EOS ផ្សេងទៀត។</target>
       </trans-unit>
       <trans-unit id="Check">
         <source>Check</source>
-        <target>Überprüfen</target>
+        <target>ពិនិត្យ</target>
       </trans-unit>
       <trans-unit id="Account has been successfully set up">
         <source>Account has been successfully set up</source>
-        <target>Das Konto wurde erfolgreich eingerichtet.</target>
+        <target>បានបង្កើតគណនីដោយជោគជ័យ</target>
       </trans-unit>
       <trans-unit id="The memo contains optional extra information. A string up to 256-bytes long.">
         <source>The memo contains optional extra information. A string up to 256-bytes long.</source>
-        <target>Das Memo enthält optional zusätzliche Informationen. Bis zu 256 Bytes lange Zeichenkette.</target>
+        <target>កំណត់ហេតុនេះមានព័ត៌មានបន្ថែមសម្រាប់ជាជម្រើស។ ចំនួនខ្សែមានប្រវែងរហូតដល់ 256 បៃ។</target>
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Max amount you can send is. We have amended the value in the amount field for you">
         <source>It seems like you are trying to empty your wallet. Max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
-        <target>Es sieht so aus, als möchtest Du Deine Brieftasche komplett entleeren. Der Maximalbetrag, den du senden kannst beträgt %(sendableBalance)s. Wir haben diesen Betrag für Dich in das Eingabefeld eingetragen.</target>
+        <target>វាហាក់បីដូចជាអ្នកកំពុងព្យាយាមយកប្រាក់ចេញពីកាបូបរបស់អ្នក។ ចំនួនទឹកប្រាក់អតិបរមាដែលអ្នកអាចផ្ញើបាន %(sendableBalance)s។ យើងបានកែប្រែតម្លៃនៅក្នុងវាលចំនួនទឹកប្រាក់សម្រាប់អ្នករួចហើយ។</target>
       </trans-unit>
       <trans-unit id="Destination account doesn&apos;t exist.">
         <source>Destination account doesn't exist.</source>
-        <target>Das Zielkonto existiert nicht.</target>
+        <target>មិនមានគណនីគោលដៅទេ។</target>
       </trans-unit>
       <trans-unit id="Transaction has been expired. Please try again.">
         <source>Transaction has been expired. Please try again.</source>
-        <target>Die Transaktion ist abgelaufen. Bitte versuche es erneut.</target>
+        <target>ប្រតិបត្តិការត្រូវបានផុតកំណត់។ សូម​ព្យាយាម​ម្តង​ទៀត។</target>
       </trans-unit>
       <trans-unit id="Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.">
         <source>Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.</source>
-        <target>CPU-Auslastung des Kontos überschritten. Bitte versuche es später erneut oder bitte andere, Dir mehr CPU zuzuweisen.</target>
+        <target>ការប្រើប្រាស់ CPU គណនីបានលើស។ សូមព្យាយាមម្តងទៀតនៅពេលក្រោយឬសុំឲ្យនរណាម្នាក់ភ្ជាប់ CPU ឲ្យអ្នកបន្ថែមទៀត។</target>
       </trans-unit>
       <trans-unit id="Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.">
         <source>Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.</source>
-        <target>CPU-NETTO-Auslastung des Kontos überschritten. Bitte versuche es später erneut oder bitte andere, Dir mehr NETTO-CPU zuzuweisen.</target>
+        <target>ការប្រើប្រាស់ NET គណនីបានលើស។ សូមព្យាយាមម្តងទៀតនៅពេលក្រោយឬសុំឲ្យនរណាម្នាក់ភ្ជាប់ NET ឲ្យអ្នកបន្ថែមទៀត។</target>
       </trans-unit>
       <trans-unit id="The extra amount will be deposited to the created account.">
         <source>The extra amount will be deposited to the created account.</source>
-        <target>Der zusätzliche Betrag wird auf das erstellte Konto überwiesen.</target>
+        <target>ចំនួនទឹកប្រាក់បន្ថែមនឹងត្រូវបញ្ចូលទៅក្នុងគណនីដែលបានបង្កើត។</target>
       </trans-unit>
       <trans-unit id="Can&apos;t connect to :network node. Please try again later or choose another token.">
         <source>Can't connect to %(network)s node. Please try again later or choose another token.</source>
-        <target>Verbindung mit dem %(network)s-Knoten nicht möglich. Bitte versuche es erneut oder wähle einen anderen Knoten.</target>
+        <target>មិនអាចភ្ជាប់ទៅថ្នាំង %(network)s។ សូមព្យាយាមម្តងទៀតនៅពេលក្រោយឬជ្រើសរើសកាសផ្សេងទៀត។</target>
       </trans-unit>
       <trans-unit id="Network node error. Please try again later.">
         <source>%(network)s node error. Please try again later.</source>
-        <target>Fehler %(network)s-Knoten. Bitte versuche es später erneut.</target>
+        <target>ថ្នាំង %(network)s មានកំហុស។ សូម​ព្យាយាម​ម្តង​ទៀត​នៅ​ពេល​ក្រោយ។</target>
       </trans-unit>
       <trans-unit id="Choose exchange">
         <source>Choose exchange</source>
-        <target>Umtausch auswählen</target>
+        <target>ជ្រើសរើសការប្តូរប្រាក់</target>
       </trans-unit>
       <trans-unit id="Next step">
         <source>Next step</source>
-        <target>Nächster Schritt</target>
+        <target>ជំហាន​បន្ទាប់</target>
       </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
-        <target>Mindestbetrag</target>
+        <target>ចំនួនទឹកប្រាក់អប្បបរមា៖</target>
       </trans-unit>
       <trans-unit id="address">
         <source>address</source>
-        <target>Adresse</target>
+        <target>អាសយដ្ឋាន</target>
       </trans-unit>
       <trans-unit id="Exchange error">
         <source>Exchange error</source>
-        <target>Fehler beim Umtausch</target>
+        <target>កំហុសក្នុងប្តូរប្រាក់</target>
       </trans-unit>
       <trans-unit id="Transaction not found">
         <source>Transaction not found</source>
-        <target>Transaktion wurde nicht gefunden</target>
+        <target>រកមិនឃើញប្រតិបត្តិការទេ</target>
       </trans-unit>
       <trans-unit id="Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
         <source>Send %(depositAmount)s %(depositSymbol)s to deposit address.
 It will be converted into %(toSymbol)s, and sent to
  %(toAddress)s</source>
-        <target>Sende %(depositAmount)s %(depositSymbol)s an die Einzahlungsadresse.
-Sie werden in %(toSymbol)s konvertiert und an
- %(toAddress)s gesendet.</target>
+        <target>ផ្ញើ %(depositAmount)s %(depositSymbol)s ទៅកាន់អាសយដ្ឋានដាក់ប្រាក់បញ្ញើរ។
+វានឹងត្រូវបានបម្លែងទៅជា %(toSymbol)s, ហើយបានផ្ញើទៅ
+ %(toAddress)s</target>
       </trans-unit>
       <trans-unit id="Network fee">
         <source>Network fee</source>
-        <target>Netzwerkgebühr</target>
+        <target>តម្លៃសេវាណែតវើក</target>
       </trans-unit>
       <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
         <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
-        <target>Du hast 36 Stunden Zeit, um das Geld zu senden, andernfalls wird die Transaktion automatisch abgebrochen.</target>
+        <target>អ្នកមានពេល 36 ម៉ោងដើម្បីផ្ញើប្រាក់បើមិនដូច្នេះទេប្រតិបត្តិការនឹងត្រូវលុបចោលដោយស្វ័យប្រវត្តិ។</target>
       </trans-unit>
       <trans-unit id="Extra Id">
         <source>Extra Id</source>
-        <target>Extra-ID</target>
+        <target>លេខសម្គាល់បន្ថែម</target>
       </trans-unit>
       <trans-unit id="Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).">
         <source>Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).</source>
-        <target>Eigenschaft für Währungsadressen, die für die Transaktionsverarbeitung eine zusätzliche ID verwenden (z. B. Ziel-Tag, Memo oder Nachricht).</target>
+        <target>កម្មសិទ្ធិសម្រាប់អាសយដ្ឋានរូបិយប័ណ្ណដែលប្រើអត្តសញ្ញាណប័ណ្ណបន្ថែមសម្រាប់ដំណើរការប្រតិបត្តិការ (ឧ. ស្លាកទិសដៅ កំណត់ហេតុឬសារ)។</target>
       </trans-unit>
       <trans-unit id="Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.">
         <source>Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.</source>
-        <target>Die Netzwerkgebühr ist ein fester Betrag, der jeweils erhoben wird, wenn du Geld sendest. Jede Währung hat einen strikten Betrag, der bei Vorgängen verwendet wird. Diese Gebühr wird erhoben, wenn dein Geld in eine Blockchain aufgenommen wird.</target>
+        <target>ថ្លៃសេវាណែតវើកត្រូវបានជួសជុលនិងត្រូវយករាល់ពេលដែលប្រាក់ត្រូវបានផ្ញើ។ រូបិយប័ណ្ណនីមួយៗមានចំនួនទឹកប្រាក់រឹតត្បិតសម្រាប់ប្រតិបត្តិការ។ ថ្លៃសេវានេះត្រូវបានយកនៅពេលដែលចំនួនទឹកប្រាក់របស់អ្នកត្រូវបានបញ្ចូលទៅក្នុង blockchain ។</target>
       </trans-unit>
       <trans-unit id="On hold...">
         <source>On hold...</source>
-        <target>Zurückgehalten...</target>
+        <target>រង់ចាំ...</target>
       </trans-unit>
       <trans-unit id="Currently, your transaction (ID: :id) is on hold.&lt;br&gt;Please, contact Changelly to pass KYC.">
         <source>Currently, your transaction (ID: %(id)s) is on hold.&lt;br&gt;Please, contact Changelly to pass KYC.</source>
-        <target>Deine Transaktion wird derzeit zurückgehalten (ID: %(id)s).&lt;br&gt;Bitte kontaktiere Changelly, um KYC durchzuführen.</target>
+        <target>បច្ចុប្បន្ន ប្រតិបត្តិការរបស់អ្នក (លេខ៖ %(id)s) កំពុងរង់ចាំ។&lt;br&gt;សូមទាក់ទង Changelly ដើម្បីឲ្យដំណឹងពី KYC។</target>
       </trans-unit>
       <trans-unit id="Transaction (ID: :id) has failed. Please, contact Changelly.">
         <source>Transaction (ID: %(id)s) has failed. Please, contact Changelly.</source>
-        <target>Transaktion (ID: %(id)s) ist fehlgeschlagen. Bitte kontaktiere Changelly.</target>
+        <target>ប្រតិ​ប​ត្ដិ​ការ (លេខ៖ %(id)s) បានបរាជ័យ។ សូមមេត្តាទាក់ទង Changelly ។</target>
       </trans-unit>
       <trans-unit id="Exchange failed and coins were refunded to :address.">
         <source>Exchange failed and coins were refunded to %(address)s.</source>
-        <target>Umtauschen fehlgeschlagen. Die Coins wurden rückerstattet an %(address)s.</target>
+        <target>ការប្តូរប្រាក់បានបរាជ័យហើយកាក់ត្រូវបានសងប្រាក់វិញ។ %(address)s។</target>
       </trans-unit>
       <trans-unit id="Payment wasn&apos;t received since 36 hours since the transaction was created.">
         <source>Payment wasn't received since 36 hours since the transaction was created.</source>
-        <target>Nachdem das Konto erstellt wurde, ist innerhalb von 36 Stunden keine Zahlung eingegangen.</target>
+        <target>ការទូទាត់មិនត្រូវបានទទួលចាប់តាំងពី 36 ម៉ោងចាប់តាំងពីប្រតិបត្តិការត្រូវបានបង្កើត។</target>
       </trans-unit>
       <trans-unit id="Terms of Service">
         <source>Terms of Service</source>
-        <target>Nutzungsbedingungen</target>
+        <target>លក្ខខណ្ឌ​នៃ​សេវាកម្ម</target>
       </trans-unit>
       <trans-unit id="Accept">
         <source>Accept</source>
-        <target>Akzeptieren</target>
+        <target>ទទួលយក</target>
       </trans-unit>
       <trans-unit id="Changelly_TOS">
         <source>I have read and I agree to the Changelly &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;terms of use&lt;/a&gt; and &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;privacy policy&lt;/a&gt;.&lt;br&gt;By clicking "Accept", I acknowledge and understan that my transaction may trigger AML/KYC verification according to &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;Changelly AML/KYC&lt;/a&gt;.</source>
-        <target>Ich habe die &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;Nutzungsbedingungen&lt;/a&gt; und die &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;Datenschutzbestimmungen&lt;/a&gt; von Challengy gelesen und akzeptiert.&lt;br&gt;. Durch Klicken auf „Akzeptieren“ erkenne ich an und verstehe, dass meine Transaktion gemäß der &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;AML/KYC von Challengy&lt;/a&gt; zu einer AML/KYC-Verifizierung führen kann.</target>
+        <target>ខ្ញុំបានអានហើយខ្ញុំយល់ស្របនឹង Changelly &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;ល័ក្ខខ័ណ្ឌនៃការប្រើប្រាស់&lt;/a&gt; និង &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;គោលការណ៍សិទ្ធិឯកជន&lt;/a&gt;.&lt;br&gt;ដោយការចុច"ទទួលយក", ខ្ញុំទទួលស្គាល់និងជឿជាក់ថាប្រតិបត្តិការរបស់ខ្ញុំអាចបង្កឡើង ការផ្ទៀងផ្ទាត់ AML/KYC ពាក់ព័ន្ធនឹង &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;Changelly AML/KYC&lt;/a&gt;។</target>
       </trans-unit>
       <trans-unit id="max.">
         <source>max.</source>
-        <target>max.</target>
+        <target>អតិ.</target>
       </trans-unit>
       <trans-unit id="Fee">
         <source>Fee</source>
-        <target>Gebühr</target>
+        <target>ថ្លៃសេវា</target>
       </trans-unit>
       <trans-unit id="Amount of coins that is charged from your balance for single transaction (&lt;a href=&quot;&quot; onclick=&quot;window.open(&apos;https://www.coin.space/all-about-bitcoin-fees&apos;, &apos;_system&apos;); return false;&quot;&gt;more info&lt;/a&gt;).">
         <source>Amount of coins that is charged from your balance for single transaction (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;more info&lt;/a&gt;).</source>
-        <target>Anzahl der Coins, mit denen Dein Guthaben bei einer einzelnen Transaktion belastet wird (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;weitere Informationen&lt;/a&gt;).</target>
+        <target>ចំនួនកាក់ដែលត្រូវបានគិតថ្លៃពីសមតុល្យរបស់អ្នកសម្រាប់ប្រតិបត្តិការតែមួយ (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;ព័ត៌មានបន្ថែម&lt;/a&gt;)។</target>
       </trans-unit>
       <trans-unit id="Confirm passphrase">
         <source>Confirm passphrase</source>
-        <target>Passphrase bestätigen</target>
+        <target>បញ្ជាក់ឃ្លាសម្ងាត់</target>
       </trans-unit>
       <trans-unit id="Almost done! Enter the following words from your passphrase.">
         <source>Almost done! Enter the following words from your passphrase.</source>
-        <target>Fast fertig! Gib die folgenden Wörter Deiner Passphrase ein.</target>
+        <target>ជិត​រួចរាល់​ហើយ! បញ្ចូលពាក្យខាងក្រោមពីឃ្លាសម្ងាត់របស់អ្នក។</target>
       </trans-unit>
       <trans-unit id="Word">
         <source>Word</source>
-        <target>Wort</target>
+        <target>ពាក្យ</target>
       </trans-unit>
       <trans-unit id="Buy with Credit Card">
         <source>Buy with Credit Card</source>
-        <target></target>
+        <target>ទិញជាមួយកាតឥណទាន</target>
       </trans-unit>
     </body>
   </file>

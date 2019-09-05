@@ -1,221 +1,221 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="de.json" datatype="plaintext" source-language="en" target-language="de">
+  <file original="vi.json" datatype="plaintext" source-language="en" target-language="vi">
     <body>
       <trans-unit id="Back to coin">
         <source>Back to coin</source>
-        <target>Zurück zu coin</target>
+        <target>Quay lại trang chủ</target>
       </trans-unit>
       <trans-unit id="Create new wallet">
         <source>Create new wallet</source>
-        <target>Neue Brieftasche erstellen</target>
+        <target>Tạo ví mới</target>
       </trans-unit>
       <trans-unit id="Open existing wallet">
         <source>Open existing wallet</source>
-        <target>Bestehende Brieftasche öffnen</target>
+        <target>Mở ví hiện có</target>
       </trans-unit>
       <trans-unit id="We are about to generate your very own passphrase">
         <source>We're about to generate your very own passphrase</source>
-        <target>Wir werden Deine eigene Passphrase erzeugen</target>
+        <target>Chúng tôi sẽ tạo cụm mật khẩu của riêng bạn</target>
       </trans-unit>
       <trans-unit id="This keeps your account secure, and lets you open your wallet on multiple devices.">
         <source>This keeps your account secure, and lets you open your wallet on multiple devices.</source>
-        <target>Dies sichert Dein Konto ab und ermöglicht es Deine Brieftasche auf mehreren Geräten zu öffnen.</target>
+        <target>Nhằm bảo mật tài khoản và cho phép bạn mở ví của mình trên nhiều thiết bị</target>
       </trans-unit>
       <trans-unit id="It is very important you write this down.">
         <source>It's very important you write this down.</source>
-        <target>Es ist sehr wichtig, dass Du Dir dies aufschreibst. </target>
+        <target>Quan trọng là bạn phải ghi lại cụm mật khẩu.</target>
       </trans-unit>
       <trans-unit id="Generate passphrase">
         <source>Generate passphrase</source>
-        <target>Passphrase erzeugen</target>
+        <target>Tạo cụm mật khẩu</target>
       </trans-unit>
       <trans-unit id="Go back">
         <source>Go back</source>
-        <target>Zurück</target>
+        <target>Quay lại</target>
       </trans-unit>
       <trans-unit id="Generating">
         <source>Generating</source>
-        <target>Erzeugen</target>
+        <target>Đang tạo</target>
       </trans-unit>
       <trans-unit id="Synchronizing Wallet">
         <source>Synchronizing Wallet</source>
-        <target>Synchronisiere die Brieftasche</target>
+        <target>Đang đồng bộ ví</target>
       </trans-unit>
       <trans-unit id="Your passphrase (12 words)">
         <source>Your passphrase (12 words)</source>
-        <target>Deine Passphrase (12 Wörter)</target>
+        <target>Cụm mật khẩu của bạn (12 từ)</target>
       </trans-unit>
       <trans-unit id="Your passphrase will not be shown again.">
         <source>Your passphrase will not be shown again.</source>
-        <target>Deine Passphrase wird nicht wieder angezeigt.</target>
+        <target>Cụm mật khẩu của bạn sẽ không hiển thị lại.</target>
       </trans-unit>
       <trans-unit id="Without it you will lose access to your wallet.">
         <source>Without it you will lose access to your wallet.</source>
-        <target>Ohne dies wirst Du Zugang zu Deiner Brieftasche verlieren.</target>
+        <target>Không có cụm mật khẩu, bạn sẽ mất quyền truy cập ví.</target>
       </trans-unit>
       <trans-unit id="I have written down or otherwise securely stored my passphrase">
         <source>I have written down or otherwise securely stored my passphrase</source>
-        <target>Ich habe die Passphrase aufgeschrieben oder anders sicher gespeichert</target>
+        <target>Tôi đã ghi lại hoặc lưu trữ bảo mật cụm mật khẩu của mình</target>
       </trans-unit>
       <trans-unit id="Open wallet">
         <source>Open wallet</source>
-        <target>Brieftasche öffnen</target>
+        <target>Mở ví</target>
       </trans-unit>
       <trans-unit id="Checking passphrase">
         <source>Checking passphrase</source>
-        <target>Prüfe die Passphrase</target>
+        <target>Đang kiểm tra cụm mật khẩu</target>
       </trans-unit>
       <trans-unit id="Enter Passphrase">
         <source>Enter Passphrase</source>
-        <target>Gib Deine Passphrase ein</target>
+        <target>Nhập cụm mật khẩu</target>
       </trans-unit>
       <trans-unit id="Invalid passphrase">
         <source>Invalid passphrase</source>
-        <target>Ungültige Passphrase</target>
+        <target>Cụm mật khẩu không hợp lệ</target>
       </trans-unit>
       <trans-unit id="Enter your PIN">
         <source>Enter your PIN</source>
-        <target>Gib Deinen PIN ein</target>
+        <target>Nhập PIN</target>
       </trans-unit>
       <trans-unit id="Set a PIN for quick access">
         <source>Set a PIN for quick access</source>
-        <target>Lege einen PIN für schnellen Zugang fest</target>
+        <target>Đặt mã PIN để truy cập nhanh</target>
       </trans-unit>
       <trans-unit id="Review passphrase again">
         <source>Review passphrase again</source>
-        <target>Prüfe die Passphrase noch einmal</target>
+        <target>Xem lại cụm mật khẩu một lần nữa</target>
       </trans-unit>
       <trans-unit id="Open a different wallet">
         <source>Open a different wallet</source>
-        <target>Eine andere Brieftasche öffnen</target>
+        <target>Mở một ví khác</target>
       </trans-unit>
       <trans-unit id="PIN must be a 4-digit number">
         <source>PIN must be a 4-digit number</source>
-        <target>PIN muss eine 4-stellige Nummer sein</target>
+        <target>Mã PIN phải là số có 4 chữ số</target>
       </trans-unit>
       <trans-unit id="Verifying PIN">
         <source>Verifying PIN</source>
-        <target>Prüfe PIN</target>
+        <target>Đang xác thực mã PIN</target>
       </trans-unit>
       <trans-unit id="Setting PIN">
         <source>Setting PIN</source>
-        <target>Setze PIN</target>
+        <target>Đặt mã PIN</target>
       </trans-unit>
       <trans-unit id="This might take some time,">
         <source>This might take some time,</source>
-        <target>Dies kann ein wenig dauern,</target>
+        <target>Việc này có thể cần chút thời gian,</target>
       </trans-unit>
       <trans-unit id="please be patient.">
         <source>please be patient.</source>
-        <target>ein wenig Geduld bitte.</target>
+        <target>xin hãy kiên nhẫn.</target>
       </trans-unit>
       <trans-unit id="Your PIN is incorrect">
         <source>Your PIN is incorrect</source>
-        <target>Dein PIN is falsch</target>
+        <target>Mã PIN của bạn không chính xác</target>
       </trans-unit>
       <trans-unit id="Request timeout. Please check your internet connection.">
         <source>Request timeout. Please check your internet connection.</source>
-        <target>Verbindungsfehler. Bitte prüfe Deine Internetverbindung.</target>
+        <target>Hết thời gian yêu cầu. Vui lòng kiểm tra kết nối Internet.</target>
       </trans-unit>
       <trans-unit id="Could not save your details">
         <source>Could not save your details</source>
-        <target>Deine Angaben konnten nicht gespeichert werden</target>
+        <target>Không thể lưu thông tin của bạn</target>
       </trans-unit>
       <trans-unit id="We could not connect you to Mecto, please check your internet connection.">
         <source>We couldn't connect you to Mecto, please check your internet connection.</source>
-        <target>Wir konnten Dich nicht mit Mecto verbinden, bitte prüfe Deine Internetverbindung.</target>
+        <target>Chúng tôi không thể kết nối bạn với Mecto, vui lòng kiểm tra kết nối internet.</target>
       </trans-unit>
       <trans-unit id="Please enter a valid address to send to">
         <source>Please enter a valid address to send to</source>
-        <target>Bitte gebe eine gültige Empfängeradresse an</target>
+        <target>Hãy nhập địa chỉ hợp lệ để gửi tới</target>
       </trans-unit>
       <trans-unit id="Please enter an amount above">
         <source>Please enter an amount above %(dust)s</source>
-        <target>Bitte gebe einen grösseren Betrag als %(dust)s an</target>
+        <target>Hãy nhập số tiền trên %(dust)s</target>
       </trans-unit>
       <trans-unit id="Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.">
         <source>Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.</source>
-        <target>Einige Einzahlungen sind noch nicht verfügbar. Um diese Transaktion zu senden, warte bitte bis alle ausstehenden Transaktionen bestätigt sind. </target>
+        <target>Một số quỹ tạm thời chưa có. Để gửi giao dịch này, bạn cần đợi xác nhận các giao dịch đang chờ xử lý trước.</target>
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
         <source>It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
-        <target>Es sieht so aus, als möchtest Du Deine Brieftasche komplett entleeren. Unter der Berücksichtigung von Transaktionsgebühren steht Dir ein Maximalbetrag von %(sendableBalance)s zur Verfügung. Wir haben diesen Betrag in das Eingabefeld für Dich eingetragen. </target>
+        <target>Dường như bạn đang cố dùng hết tiền trong ví. Tính phí giao dịch vào tài khoản, chúng tôi ước tính số tiền tối đa bạn có thể gửi là %(sendableBalance)s. Chúng tôi đã sửa giá trị trường số tiền cho bạn.</target>
       </trans-unit>
       <trans-unit id="You do not have enough funds in your wallet (incl. fee)">
         <source>You don't have enough funds in your wallet (incl. fee)</source>
-        <target>Das Guthaben deiner Brieftasche reicht nicht aus (inkl. Gebühr)</target>
+        <target>Bạn không có đủ tiền trong ví (tính cả phí)</target>
       </trans-unit>
       <trans-unit id="A name is required to set your profile on Coin">
         <source>A name is required to set your profile on Coin</source>
-        <target>Für Dein Coin-Profil wird ein Name benötigt</target>
+        <target>Yêu cầu tên khi thiết lập hồ sơ của bạn trên Coin</target>
       </trans-unit>
       <trans-unit id="Uh Oh...">
         <source>Uh Oh...</source>
-        <target>Oh oh...</target>
+        <target>Uh Oh...</target>
       </trans-unit>
       <trans-unit id="Whoops!">
         <source>Whoops!</source>
-        <target>Ups!</target>
+        <target>Rất tiếc!</target>
       </trans-unit>
       <trans-unit id="Just saying...">
         <source>Just saying...</source>
-        <target>Ich mein' ja nur...</target>
+        <target>Phải nói...</target>
       </trans-unit>
       <trans-unit id="Your browser does not support geolocation">
         <source>Your browser does not support geolocation</source>
-        <target>Dein Browser unterstützt Ortung (geolocation) nicht</target>
+        <target>Trình duyệt không hỗ trợ định vị</target>
       </trans-unit>
       <trans-unit id="Unable to retrieve your location">
         <source>Unable to retrieve your location</source>
-        <target>Dein Standort konnte nicht bestimmt werden</target>
+        <target>Không thể xác định vị trí của bạn</target>
       </trans-unit>
       <trans-unit id="Without a name, the payer would not be able to identify you on Mecto.">
         <source>Without a name, the payer wouldn't be able to identify you on Mecto.</source>
-        <target>Ohne Name kann der Sender Dich nicht auf Mecto identifizieren</target>
+        <target>Không có tên, người trả tiền không thể nhận dạng bạn trên Mecto.</target>
       </trans-unit>
       <trans-unit id="Change your details">
         <source>Change your details</source>
-        <target>Ändere Deine Angaben</target>
+        <target>Thay đổi thông tin</target>
       </trans-unit>
       <trans-unit id="Your username">
         <source>Your username</source>
-        <target>Ihren Benutzernamen</target>
+        <target>Tên đăng nhập</target>
       </trans-unit>
       <trans-unit id="Gravatar email">
         <source>Gravatar email</source>
-        <target>Gravatar Email</target>
+        <target>Email Gravatar</target>
       </trans-unit>
       <trans-unit id="Submit">
         <source>Submit</source>
-        <target>Senden</target>
+        <target>Gửi</target>
       </trans-unit>
       <trans-unit id="Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.">
         <source>Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.</source>
-        <target>Gravatar (globale Avatare) ist ein Service um den gleichen Avatar auf mehreren Webseiten und Anwendungen mit Hilfe einer Email-Adresse zu verwenden.</target>
+        <target>Gravatar (globally recognised avatar - hình ảnh đại diện được công nhận toàn cầu) là một dịch vụ cho phép bạn sử dụng lại hình ảnh đại diện trên các trang web và ứng dụng bằng cách chỉ định một địa chỉ email.</target>
       </trans-unit>
       <trans-unit id="Create a gravatar">
         <source>Create a gravatar</source>
-        <target>Erzeuge einen Gravatar</target>
+        <target>Tạo gravatar</target>
       </trans-unit>
       <trans-unit id="Logout">
         <source>Logout</source>
-        <target>Ausloggen</target>
+        <target>Đăng xuất</target>
       </trans-unit>
       <trans-unit id="Support">
         <source>Support</source>
-        <target>Hilfe</target>
+        <target>Hỗ trợ</target>
       </trans-unit>
       <trans-unit id="Send">
         <source>Send</source>
-        <target>Senden</target>
+        <target>Gửi</target>
       </trans-unit>
       <trans-unit id="Receive">
         <source>Receive</source>
-        <target>Empfangen</target>
+        <target>Nhận</target>
       </trans-unit>
       <trans-unit id="History">
         <source>History</source>
-        <target>Chronik</target>
+        <target>Lịch sử</target>
       </trans-unit>
       <trans-unit id="Tokens">
         <source>Tokens</source>
@@ -223,55 +223,55 @@
       </trans-unit>
       <trans-unit id="Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.">
         <source>Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.</source>
-        <target>Mecto ermöglicht das Austauschen Deiner Empfangsadresse mit anderen örtlich nahen Coin-Benutzern. Hierzu wird Deine GPS-Ortung genutzt. Diese Positionsdaten werden sofort nach Ausschalten von Mecto gelöscht. </target>
+        <target>Mecto cho phép bạn quảng bá địa chỉ ví của mình cho những người dùng Coin khác gần đó bằng cách so sánh dữ liệu GPS. Dữ liệu này bị xóa khi bạn tắt Mecto.</target>
       </trans-unit>
       <trans-unit id="Before you start using Mecto, you need to enter a name that will help others identify you.">
         <source>Before you start using Mecto, you need to enter a name that will help others identify you.</source>
-        <target>Um Mecto zu benutzen, musst Du einen Benutzernamen auswählen. So können Dich andere Benutzer finden.</target>
+        <target>Trước khi bắt đầu sử dụng Mecto, bạn cần nhập tên giúp người khác nhận ra bạn.</target>
       </trans-unit>
       <trans-unit id="Save">
         <source>Save</source>
-        <target>Speichern</target>
+        <target>Lưu</target>
       </trans-unit>
       <trans-unit id="Loading transactions...">
         <source>Loading transactions...</source>
-        <target>Transaktionen werden geladen...</target>
+        <target>Đang tải giao dịch...</target>
       </trans-unit>
       <trans-unit id="Your transaction history">
         <source>Your transaction history</source>
-        <target>Chronik Deiner Transaktionen</target>
+        <target>Lịch sử giao dịch</target>
       </trans-unit>
       <trans-unit id="pending confirmation">
         <source>pending confirmation</source>
-        <target>Warte auf Bestätigungen</target>
+        <target>chờ xác nhận</target>
       </trans-unit>
       <trans-unit id="Received">
         <source>Received</source>
-        <target>Erhalten</target>
+        <target>Đã nhận</target>
       </trans-unit>
       <trans-unit id="You do not have any transactions yet">
         <source>You don't have any transactions yet</source>
-        <target>Du hast noch keine Transaktionen getätigt</target>
+        <target>Bạn chưa có bất kỳ giao dịch nào</target>
       </trans-unit>
       <trans-unit id="Transaction Id:">
         <source>Transaction Id:</source>
-        <target>Transaktions-ID:</target>
+        <target>ID giao dịch:</target>
       </trans-unit>
       <trans-unit id="Transaction Fee:">
         <source>Transaction Fee:</source>
-        <target>Transaktionsgebühr:</target>
+        <target>Phí giao dịch:</target>
       </trans-unit>
       <trans-unit id="Inputs:">
         <source>Inputs:</source>
-        <target>Eingänge:</target>
+        <target>Đầu vào:</target>
       </trans-unit>
       <trans-unit id="Outputs:">
         <source>Outputs:</source>
-        <target>Ausgänge:</target>
+        <target>Đầu ra:</target>
       </trans-unit>
       <trans-unit id="Your wallet address">
         <source>Your wallet address</source>
-        <target>Die Adresse Deiner Brieftasche</target>
+        <target>Địa chỉ ví của bạn</target>
       </trans-unit>
       <trans-unit id="Mecto">
         <source>Mecto</source>
@@ -279,317 +279,317 @@
       </trans-unit>
       <trans-unit id="Turn Mecto on">
         <source>Turn Mecto on</source>
-        <target>Mecto einschalten</target>
+        <target>Bật Mecto</target>
       </trans-unit>
       <trans-unit id="Turn Mecto off">
         <source>Turn Mecto off</source>
-        <target>Mecto ausschalten</target>
+        <target>Tắt Mecto</target>
       </trans-unit>
       <trans-unit id="Checking your location">
         <source>Checking your location</source>
-        <target>Suche Deine Position</target>
+        <target>Kiểm tra vị trí của bạn</target>
       </trans-unit>
       <trans-unit id="Broadcasting your location...">
         <source>Broadcasting your location...</source>
-        <target>Sende Deine Position...</target>
+        <target>Quảng bá vị trí của bạn...</target>
       </trans-unit>
       <trans-unit id="Wallet address">
         <source>Wallet address</source>
-        <target>Adresse der Brieftasche</target>
+        <target>Địa chỉ ví</target>
       </trans-unit>
       <trans-unit id="Amount">
         <source>Amount</source>
-        <target>Betrag</target>
+        <target>Số tiền</target>
       </trans-unit>
       <trans-unit id="Confirm">
         <source>Confirm</source>
-        <target>Bestätige</target>
+        <target>Xác nhận</target>
       </trans-unit>
       <trans-unit id="No Coin users found nearby">
         <source>No Coin users found nearby</source>
-        <target>Es sind keine Coin Benutzer in Deiner Nähe</target>
+        <target>Không tìm thấy người dùng Coin gần đây</target>
       </trans-unit>
       <trans-unit id="Search Again">
         <source>Search Again</source>
-        <target>Erneut suchen</target>
+        <target>Tìm kiếm lại</target>
       </trans-unit>
       <trans-unit id="Searching...">
         <source>Searching...</source>
-        <target>Suchen...</target>
+        <target>Đang tìm kiếm...</target>
       </trans-unit>
       <trans-unit id="Searching your area for other Coin users">
         <source>Searching your area for other Coin users</source>
-        <target>Suche andere Coin Benutzer in Deiner Gegend</target>
+        <target>Tìm kiếm người dùng Coin khác trong khu vực của bạn</target>
       </trans-unit>
       <trans-unit id="Confirm transaction">
         <source>Confirm transaction</source>
-        <target>Transaktion bestätigen</target>
+        <target>Xác nhận giao dịch</target>
       </trans-unit>
       <trans-unit id="transaction fee">
         <source>transaction fee</source>
-        <target>Transaktionsgebühr</target>
+        <target>phí giao dịch</target>
       </trans-unit>
       <trans-unit id="Cancel">
         <source>Cancel</source>
-        <target>Abbrechen</target>
+        <target>Hủy</target>
       </trans-unit>
       <trans-unit id="Transaction Successful">
         <source>Transaction Successful</source>
-        <target>Die Transaktion ist erfolgreich verlaufen</target>
+        <target>Giao dịch thành công</target>
       </trans-unit>
       <trans-unit id="Your transaction will appear in your history tab shortly.">
         <source>Your transaction will appear in your history tab shortly.</source>
-        <target>Deine Transaktion wird in Kürze in der Chronik erscheinen.</target>
+        <target>Giao dịch của bạn sẽ sớm xuất hiện trong thẻ lịch sử.</target>
       </trans-unit>
       <trans-unit id="Close">
         <source>Close</source>
-        <target>Schließen</target>
+        <target>Đóng</target>
       </trans-unit>
       <trans-unit id="Transaction Failed">
         <source>Transaction Failed</source>
-        <target>Die Transaktion ist fehlgeschlagen</target>
+        <target>Giao dịch không thành công</target>
       </trans-unit>
       <trans-unit id="Failed">
         <source>Failed</source>
-        <target>Fehlgeschlagen</target>
+        <target>Không thành công</target>
       </trans-unit>
       <trans-unit id="Sorry, Coin Wallet did not load.">
         <source>Sorry, Coin Wallet didn't load.</source>
-        <target>Entschuldigung, die Coin-Brieftasche konnte nicht geladen werden.</target>
+        <target>Rất tiếc, không tải được ví Coin.</target>
       </trans-unit>
       <trans-unit id="Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.">
         <source>Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.</source>
-        <target>Versuche Deinen Webbrowser zu aktualisieren oder beende den Inkognito-Modus. Ansonsten lade Dir den Chrome Browser für Dein Gerät herunter.</target>
+        <target>Hãy thử cập nhật trình duyệt hoặc chuyển khỏi chế độ duyệt web riêng tư. Nếu vẫn lỗi, hãy tải Chrome cho thiết bị của bạn.</target>
       </trans-unit>
       <trans-unit id="Current coin price">
         <source>Current coin price</source>
-        <target>Aktueller Coin-Preis</target>
+        <target>Giá coin hiện tại</target>
       </trans-unit>
       <trans-unit id="Username not available">
         <source>Username not available</source>
-        <target>Benutzername nicht verfügbar</target>
+        <target>Tên đăng nhập không khả dụng</target>
       </trans-unit>
       <trans-unit id="Scan your fingerprint please">
         <source>Scan your fingerprint please</source>
-        <target>Scannen Sie Ihren Fingerabdruck bitte</target>
+        <target>Vui lòng quét dấu vân tay</target>
       </trans-unit>
       <trans-unit id="Enter PIN">
         <source>Enter PIN</source>
-        <target>PIN eingeben</target>
+        <target>Nhập mã PIN</target>
       </trans-unit>
       <trans-unit id="I Agree To The Terms &amp; Conditions">
         <source>I Agree To The Terms &amp; Conditions</source>
-        <target>Ich stimme den Allgemeine Geschäftsbedingungen zu</target>
+        <target>Tôi đồng ý các Điều khoản &amp; Điều kiện</target>
       </trans-unit>
       <trans-unit id="Terms of Use">
         <source>Terms of Use</source>
-        <target>Nutzungsbedingungen</target>
+        <target>Điều khoản sử dụng</target>
       </trans-unit>
       <trans-unit id="Unparsed address">
         <source>Unparsed address</source>
-        <target>Nicht analysierte Adresse</target>
+        <target>Địa chỉ chưa kiểm tra</target>
       </trans-unit>
       <trans-unit id="Exchange">
         <source>Exchange</source>
-        <target>Umtauschen</target>
+        <target>Giao dịch</target>
       </trans-unit>
       <trans-unit id="From">
         <source>From</source>
-        <target>Von</target>
+        <target>Từ</target>
       </trans-unit>
       <trans-unit id="To">
         <source>To</source>
-        <target>In</target>
+        <target>Sang</target>
       </trans-unit>
       <trans-unit id="Exchange rate">
         <source>Exchange rate</source>
-        <target>Wechselkurs</target>
+        <target>Tỷ giá</target>
       </trans-unit>
       <trans-unit id="Loading...">
         <source>Loading...</source>
-        <target>Lädt…</target>
+        <target>Đang tải...</target>
       </trans-unit>
       <trans-unit id="Address">
         <source>Address</source>
-        <target>Adresse</target>
+        <target>Địa chỉ</target>
       </trans-unit>
       <trans-unit id="Return address (optional)">
         <source>Return address (optional)</source>
-        <target>Absender (optional)</target>
+        <target>Địa chỉ trả lại (tùy chọn)</target>
       </trans-unit>
       <trans-unit id="Deposit address">
         <source>Deposit address (%(symbol)s)</source>
-        <target>Einzahlungsadresse (%(symbol)s)</target>
+        <target>Địa chỉ gửi tiền %(symbol)s</target>
       </trans-unit>
       <trans-unit id="Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
         <source>Send up to %(depositMax)s %(depositSymbol)s to deposit address.
 It will be converted into %(toSymbol)s, and sent to
  %(toAddress)s</source>
-        <target>Sende bis zu %(depositMax)s %(depositSymbol)s an die Einzahlungsadresse.
-Sie werden in %(toSymbol)s konvertiert und an
- %(toAddress)s gesendet.</target>
+        <target>Gửi tối đa %(depositMax)s %(depositSymbol)s đến địa chỉ gửi tiền.
+Sẽ chuyển đổi thành %(toSymbol)s, và gửi đến
+ %(toAddress)s</target>
       </trans-unit>
       <trans-unit id="Deposit minimum">
         <source>Deposit minimum</source>
-        <target>Einzahlungsminimum</target>
+        <target>Tiền gửi tối thiểu</target>
       </trans-unit>
       <trans-unit id="amount :toSymbol have been delivered to :toAddress">
         <source>%(amount)s %(toSymbol)s have been delivered to
  %(toAddress)s</source>
-        <target>%(amount)s %(toSymbol)s wurden gesendet an
+        <target>%(amount)s %(toSymbol)s đã được chuyển đến
  %(toAddress)s</target>
       </trans-unit>
       <trans-unit id="Back">
         <source>Back</source>
-        <target>Zurück</target>
+        <target>Quay lại</target>
       </trans-unit>
       <trans-unit id="Awaiting deposit...">
         <source>Awaiting deposit...</source>
-        <target>Warten auf Einzahlung...</target>
+        <target>Đang chờ gửi tiền...</target>
       </trans-unit>
       <trans-unit id="Deposit has been received">
         <source>Deposit has been received</source>
-        <target>Einzahlung wurde empfangen</target>
+        <target>Đã nhận được tiền gửi</target>
       </trans-unit>
       <trans-unit id="Awaiting exchange...">
         <source>Awaiting exchange...</source>
-        <target>Warten auf Umtausch...</target>
+        <target>Đang chờ giao dịch...</target>
       </trans-unit>
       <trans-unit id="Exchange complete!">
         <source>Exchange complete!</source>
-        <target>Umtausch abgeschlossen!</target>
+        <target>Giao dịch hoàn tất!</target>
       </trans-unit>
       <trans-unit id="Done">
         <source>Done</source>
-        <target>Fertig</target>
+        <target>Hoàn tất</target>
       </trans-unit>
       <trans-unit id="Please enter a valid return address">
         <source>Please enter a valid return address</source>
-        <target>Bitte gib einen gültigen Absender ein</target>
+        <target>Hãy nhập địa chỉ trả lại hợp lệ</target>
       </trans-unit>
       <trans-unit id="Miner fee">
         <source>Miner fee</source>
-        <target>Miner-Kommission</target>
+        <target>Phí khai thác</target>
       </trans-unit>
       <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
         <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
-        <target>Der Absender muss eine von Dir kontrollierte Adresse sein, an die die Einzahlung im Fall einer fehlgeschlagenen Transaktion zurückgesandt werden.</target>
+        <target>Địa chỉ trả lại phải là địa chỉ do bạn kiểm soát, nơi tiền gửi được trả lại trong trường hợp giao dịch không thành công.</target>
       </trans-unit>
       <trans-unit id="Remove account">
         <source>Remove account</source>
-        <target>Konto entfernen</target>
+        <target>Xoá tài khoản</target>
       </trans-unit>
       <trans-unit id="Remove">
         <source>Remove</source>
-        <target>Entfernen</target>
+        <target>Xóa</target>
       </trans-unit>
       <trans-unit id="Are you sure?">
         <source>Are you sure?</source>
-        <target>Bist Du sicher?</target>
+        <target>Bạn có chắc không?</target>
       </trans-unit>
       <trans-unit id="Account has been successfully removed">
         <source>Account has been successfully removed</source>
-        <target>Das Konto wurde erfolgreich entfernt.</target>
+        <target>Xóa tài khoản thành công</target>
       </trans-unit>
       <trans-unit id="This page will be reloaded shortly.">
         <source>This page will be reloaded shortly.</source>
-        <target>Diese Seite wird in Kürze erneut geladen.</target>
+        <target>Trang này sẽ được tải lại ngay.</target>
       </trans-unit>
       <trans-unit id="About">
         <source>About</source>
-        <target>Über uns</target>
+        <target>Giới thiệu</target>
       </trans-unit>
       <trans-unit id="Release information">
         <source>Release information</source>
-        <target>Informationen zur Veröffentlichung</target>
+        <target>Thông tin phát hành</target>
       </trans-unit>
       <trans-unit id="Version">
         <source>Version</source>
-        <target>Version</target>
+        <target>Phiên bản</target>
       </trans-unit>
       <trans-unit id="Transfer paper wallet / private key">
         <source>Transfer paper wallet / private key</source>
-        <target>Überweisung Papier-Brieftasche/privater Schlüssel</target>
+        <target>Chuyển ví giấy / khóa riêng</target>
       </trans-unit>
       <trans-unit id="Export private keys">
         <source>Export private keys</source>
-        <target>Private Schlüssel exportieren</target>
+        <target>Xuất khóa riêng</target>
       </trans-unit>
       <trans-unit id="Transfer private key">
         <source>Transfer private key</source>
-        <target>Privaten Schlüssel überweisen</target>
+        <target>Chuyển khóa riêng</target>
       </trans-unit>
       <trans-unit id="Transfer">
         <source>Transfer</source>
-        <target>Überweisen</target>
+        <target>Chuyển</target>
       </trans-unit>
       <trans-unit id="Private key">
         <source>Private key</source>
-        <target>Privater Schlüssel</target>
+        <target>Khóa riêng</target>
       </trans-unit>
       <trans-unit id="This will transfer all coins from the paper wallet address to your wallet.">
         <source>This will transfer all coins from the paper wallet address to your wallet.</source>
-        <target>Dadurch werden alle Coins der Papier-Brieftasche an Deine Brieftasche überwiesen.</target>
+        <target>Chuyển tất cả coin từ địa chỉ ví giấy sang ví của bạn.</target>
       </trans-unit>
       <trans-unit id="This private key has no coins for transfer.">
         <source>This private key has no coins for transfer.</source>
-        <target>Dieser private Schlüssel hat keine zu überweisenden Coins.</target>
+        <target>Khóa riêng này không có coin để chuyển.</target>
       </trans-unit>
       <trans-unit id="Invalid private key">
         <source>Invalid private key</source>
-        <target>Ungültiger privater Schlüssel</target>
+        <target>Khóa riêng không hợp lệ</target>
       </trans-unit>
       <trans-unit id="Insufficient funds">
         <source>Insufficient funds</source>
-        <target>Nicht genug Geld</target>
+        <target>Không đủ tiền</target>
       </trans-unit>
       <trans-unit id="Warning!">
         <source>Warning!</source>
-        <target>Warnung!</target>
+        <target>Cảnh báo!</target>
       </trans-unit>
       <trans-unit id="Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you&apos;d like them to have access to your funds.">
         <source>Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you'd like them to have access to your funds.</source>
-        <target>Deine privaten Schlüssel sind Schlüssel für Dein Geld. GIB SIE NICHT an andere weiter, es sei denn, du möchtest, dass sie Zugriff auf dein Geld erhalten.</target>
+        <target>Khóa riêng là chìa khóa cho tiền của bạn, vì vậy KHÔNG CHIA SẺ với bất kỳ ai trừ khi bạn muốn họ có quyền truy cập tiền của bạn.</target>
       </trans-unit>
       <trans-unit id="Show">
         <source>Show</source>
-        <target>Anzeigen</target>
+        <target>Hiển thị</target>
       </trans-unit>
       <trans-unit id="Comma-separated list">
         <source>Comma-separated list</source>
-        <target>Mit Komma getrennte Liste</target>
+        <target>Danh sách phân tách bằng dấu phẩy</target>
       </trans-unit>
       <trans-unit id="Your wallet has no private keys with coins for export.">
         <source>Your wallet has no private keys with coins for export.</source>
-        <target>Deine Brieftasche hat keine privaten Schlüssel mit zu exportierenden Coins.</target>
+        <target>Ví của bạn không có khóa riêng với coin để xuất.</target>
       </trans-unit>
       <trans-unit id="Add Token">
         <source>Add Token</source>
-        <target>Token hinzufügen</target>
+        <target>Thêm Token</target>
       </trans-unit>
       <trans-unit id="Gas limit">
         <source>Gas limit</source>
-        <target>Gas Coin-Limit</target>
+        <target>Giới hạn Gas</target>
       </trans-unit>
       <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.">
         <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.</source>
-        <target>Gas-Limit bezeichnet den Betrag Gas, den Du mit Deiner Transaktion sendest. Die Höhe des Betrags hat keine Auswirkungen auf die schnellere Genehmigung Deiner Transaktion. Senden von ETH entspricht 21.000. Senden von Token entspricht 200.000.</target>
+        <target>Giới hạn Gas là lượng gas gửi với giao dịch của bạn. Tăng giá trị này sẽ không giúp giao dịch được xác nhận nhanh hơn. Gửi ETH bằng 21000. Gửi Token bằng khoảng 200000.</target>
       </trans-unit>
       <trans-unit id="Contract address">
         <source>Contract address</source>
-        <target>Vertragsadresse</target>
+        <target>Địa chỉ hợp đồng</target>
       </trans-unit>
       <trans-unit id="Add">
         <source>Add</source>
-        <target>Hinzufügen</target>
+        <target>Thêm</target>
       </trans-unit>
       <trans-unit id="Symbol">
         <source>Symbol</source>
-        <target>Symbol</target>
+        <target>Ký hiệu</target>
       </trans-unit>
       <trans-unit id="Decimals">
         <source>Decimals</source>
-        <target>Dezimalstellen</target>
+        <target>Số thập phân</target>
       </trans-unit>
       <trans-unit id="Token">
         <source>Token</source>
@@ -597,99 +597,99 @@ Sie werden in %(toSymbol)s konvertiert und an
       </trans-unit>
       <trans-unit id="Custom token">
         <source>Custom token</source>
-        <target>Benutzerdefinierter Token</target>
+        <target>Token tùy chỉnh</target>
       </trans-unit>
       <trans-unit id="Please fill out all fields.">
         <source>Please fill out all fields.</source>
-        <target>Bitte fülle alle Felder aus.</target>
+        <target>Hãy điền tất cả các trường.</target>
       </trans-unit>
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
-        <target>Bitte gib ein Gas-Limit über null ein</target>
+        <target>Hãy nhập Giới hạn gas lớn hơn 0</target>
       </trans-unit>
       <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
         <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
-        <target>Du hast nicht genug Ethereum für die Bezahlung der Transaktionsgebühren (%(ethereumRequired)s ETH).</target>
+        <target>Bạn không đủ tiền Ethereum để trả phí giao dịch (%(ethereumRequired)s ETH).</target>
       </trans-unit>
       <trans-unit id="Click to Select">
         <source>Click to Select</source>
-        <target>Zum Auswählen klicken</target>
+        <target>Nhấp chuột để chọn</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
-        <target>In die Zwischenablage kopieren</target>
+        <target>Sao chép vào clipboard</target>
       </trans-unit>
       <trans-unit id="Copied!">
         <source>Copied!</source>
-        <target>Kopiert!</target>
+        <target>Đã sao chép!</target>
       </trans-unit>
       <trans-unit id="Please enter an address other than your wallet address">
         <source>Please enter an address other than your wallet address</source>
-        <target>Bitte gib eine andere Adresse als Deine Brieftaschen-Adresse ein.</target>
+        <target>Hãy nhập địa chỉ khác địa chỉ ví</target>
       </trans-unit>
       <trans-unit id="Please enter a private key other than your wallet private key">
         <source>Please enter a private key other than your wallet private key</source>
-        <target>Bitte gib einen anderen privaten Schlüssel ein als den privaten Schlüssel Deiner Brieftasche.</target>
+        <target>Hãy nhập khóa riêng khác khóa riêng ví</target>
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
         <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(denomination)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
-        <target>Es sieht so aus, als möchtest Du Deine Brieftasche entleeren. Unter der Berücksichtigung von Transaktionsgebühren und der Mindestreserve (%(minReserve)s %(denomination)s) kannst du maximal einen Betrag von %(sendableBalance)s senden. Wir haben diesen Betrag für Dich in das Eingabefeld eingetragen.</target>
+        <target>Dường như bạn đang cố dùng hết tiền trong ví. Tính phí giao dịch vào tài khoản và dự trữ tối thiểu (%(minReserve)s %(denomination)s) trong tài khoản, chúng tôi ước tính số tiền tối đa bạn có thể gửi là %(sendableBalance)s. Chúng tôi đã sửa giá trị trường số tiền cho bạn.</target>
       </trans-unit>
       <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :denomination) to your wallet address.">
         <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(denomination)s) to your wallet address.</source>
-        <target>Deine Brieftasche ist nicht aktiviert. Bitte sende eine höhere Mindestreserve (%(minReserve)s %(denomination)s) an die Adresse deiner Brieftasche.</target>
+        <target>Ví của bạn chưa kích hoạt. Để kích hoạt, vui lòng gửi lớn hơn dự trữ tối thiểu (%(minReserve)s %(denomination)s) vào địa chỉ ví của bạn.</target>
       </trans-unit>
       <trans-unit id="Load more">
         <source>Load more</source>
-        <target>Mehr laden</target>
+        <target>Tải thêm</target>
       </trans-unit>
       <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
         <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>Die Brieftasche des Empfängers ist nicht aktiviert. Du kannst nur einen Betrag senden, der größer ist als %(minReserve)s %(denomination)s.</target>
+        <target>Ví của người nhận chưa kích hoạt. Bạn chỉ có thể gửi số tiền lớn hơn %(minReserve)s %(denomination)s.</target>
       </trans-unit>
       <trans-unit id="Destination tag">
         <source>Destination tag</source>
-        <target>Ziel-Tag</target>
+        <target>Thẻ đích</target>
       </trans-unit>
       <trans-unit id="Invoice ID">
         <source>Invoice ID</source>
-        <target>Rechnungsnummer</target>
+        <target>Số hóa đơn</target>
       </trans-unit>
       <trans-unit id="(optional)">
         <source>(optional)</source>
-        <target>(optional)</target>
+        <target>(tùy chọn)</target>
       </trans-unit>
       <trans-unit id="An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.">
         <source>An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.</source>
-        <target>Eine zufällige nicht signierte 32-Bit Ganzzahl, die den Zahlungsgrund oder ein nicht Ripple Konto angibt.</target>
+        <target>Một số nguyên 32 bit không dấu tùy ý, xác định lý do thanh toán hoặc tài khoản không phải Ripple.</target>
       </trans-unit>
       <trans-unit id="A 256-bit hash that can be used to identify a particular payment.">
         <source>A 256-bit hash that can be used to identify a particular payment.</source>
-        <target>Ein 256-Bit-Hash, der zur Identifizierung einer bestimmten Zahlung verwendet werden kann.</target>
+        <target>Giá trị băm 256 bit có thể sử dụng để xác định một thanh toán cụ thể.</target>
       </trans-unit>
       <trans-unit id="Please enter a valid invoice ID">
         <source>Please enter a valid invoice ID</source>
-        <target>Bitte gib eine gültige Rechnungs-ID ein.</target>
+        <target>Hãy nhập Số hóa đơn hợp lệ</target>
       </trans-unit>
       <trans-unit id="Please enter a valid destination tag">
         <source>Please enter a valid destination tag</source>
-        <target>Bitte gib einen gültigen Ziel-Tag ein.</target>
+        <target>Hãy nhập thẻ đích hợp lệ</target>
       </trans-unit>
       <trans-unit id="Exchange is currently unavailable for this pair">
         <source>Exchange is currently unavailable for this pair</source>
-        <target>Für dieses Währungspaar ist derzeit kein Umtausch möglich.</target>
+        <target>Hiện tại, chưa có giao dịch cho cặp này</target>
       </trans-unit>
       <trans-unit id="Payment operations:">
         <source>Payment operations:</source>
-        <target>Zahlungsvorgänge:</target>
+        <target>Hoạt động thanh toán:</target>
       </trans-unit>
       <trans-unit id="Pay (:amount) XLM to :destination">
         <source>Pay %(amount)s XLM to %(destination)s</source>
-        <target>%(amount)s XLM an %(destination)szahlen</target>
+        <target>Thanh toán %(amount)s XLM cho %(destination)s</target>
       </trans-unit>
       <trans-unit id="Created Account :destination with balance :amount XLM">
         <source>Created Account %(destination)s with balance %(amount)s XLM</source>
-        <target>Konto %(destination)s mit einem Guthaben von %(amount)s XLM erstellt</target>
+        <target>Đã tạo tài khoản %(destination)s với số dư %(amount)s XLM</target>
       </trans-unit>
       <trans-unit id="Memo">
         <source>Memo</source>
@@ -697,215 +697,215 @@ Sie werden in %(toSymbol)s konvertiert und an
       </trans-unit>
       <trans-unit id="Please enter a valid memo">
         <source>Please enter a valid memo</source>
-        <target>Bitte gib ein gültiges Memo ein.</target>
+        <target>Hãy nhập memo hợp lệ</target>
       </trans-unit>
       <trans-unit id="The memo contains optional extra information. A string up to 28-bytes long.">
         <source>The memo contains optional extra information. A string up to 28-bytes long.</source>
-        <target>Das Memo enthält optional zusätzliche Informationen. Bis zu 28 Bytes lange Zeichenkette.</target>
+        <target>Memo chứa thông tin bổ sung tùy chọn. Một chuỗi dài tới 28 byte.</target>
       </trans-unit>
       <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :denomination.">
         <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>Deine Brieftasche ist nicht aktiviert. Du kannst nur einen Betrag senden, der größer ist als %(minReserve)s %(denomination)s.</target>
+        <target>Ví của bạn chưa kích hoạt. Bạn chỉ có thể nhận số tiền lớn hơn %(minReserve)s %(denomination)s.</target>
       </trans-unit>
       <trans-unit id="Privacy Policy">
         <source>Privacy Policy</source>
-        <target>Datenschutzbestimmungen</target>
+        <target>Chính sách bảo mật</target>
       </trans-unit>
       <trans-unit id="Your ShapeShift account is not verified.">
         <source>Your ShapeShift account is not verified.</source>
-        <target>Dein ShapeShift-Konto ist nicht verifiziert.</target>
+        <target>Tài khoản ShapeShift chưa xác minh.</target>
       </trans-unit>
       <trans-unit id="Complete verification">
         <source>Complete verification</source>
-        <target>Verifizierung abschließen</target>
+        <target>Xác minh hoàn tất</target>
       </trans-unit>
       <trans-unit id="Try to sign in again">
         <source>Try to sign in again</source>
-        <target>Melde Dich noch einmal an.</target>
+        <target>Hãy thử đăng nhập lại</target>
       </trans-unit>
       <trans-unit id="Sign in">
         <source>Sign in</source>
-        <target>Anmelden</target>
+        <target>Đăng nhập</target>
       </trans-unit>
       <trans-unit id="Setup EOS account">
         <source>Setup EOS account</source>
-        <target>EOS-Konto einrichten</target>
+        <target>Thiết lập tài khoản EOS</target>
       </trans-unit>
       <trans-unit id="Account name">
         <source>Account name</source>
-        <target>Kontoname</target>
+        <target>Tên tài khoản</target>
       </trans-unit>
       <trans-unit id="The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.">
         <source>The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.</source>
-        <target>Der EOS-Kontoname muss genau 12 Zeichen lang sein und aus Kleinbuchstaben und Zahlen zwischen 1 und 5 bestehen.</target>
+        <target>Tên tài khoản EOS phải dài đúng 12 ký tự và bao gồm chữ cái viết thường và số từ 1 đến 5.</target>
       </trans-unit>
       <trans-unit id="Invalid account name">
         <source>Invalid account name</source>
-        <target>Ungültiger Kontoname</target>
+        <target>Tên tài khoản không hợp lệ</target>
       </trans-unit>
       <trans-unit id="This account name is already taken, please choose another one.">
         <source>This account name is already taken, please choose another one.</source>
-        <target>Dieser Kontoname ist bereits vergeben, bitte wähle einen anderen aus.</target>
+        <target>Tên tài khoản này đã được sử dụng, vui lòng chọn tên khác.</target>
       </trans-unit>
       <trans-unit id="To create a new account you need to make an EOS transfer (amount greater than :minAmount) with the following data from an exchange or other EOS wallet.">
         <source>To create a new account you need to make an EOS transfer (amount greater than %(minAmount)s) with the following data from an exchange or other EOS wallet.</source>
-        <target>Wenn Du ein neues Konto erstellen möchtest (Betrag größer als %(minAmount)s) musst du eine EOS-Überweisung durchführen mit den folgenden Informationen von einem Umtausch oder einer anderen EOS-Brieftasche.</target>
+        <target>Để tạo tài khoản mới, bạn cần thực hiện chuyển khoản EOS (số tiền lớn hơn %(minAmount)s) với dữ liệu bên dưới từ giao dịch hoặc ví EOS khác.</target>
       </trans-unit>
       <trans-unit id="Check">
         <source>Check</source>
-        <target>Überprüfen</target>
+        <target>Kiểm tra</target>
       </trans-unit>
       <trans-unit id="Account has been successfully set up">
         <source>Account has been successfully set up</source>
-        <target>Das Konto wurde erfolgreich eingerichtet.</target>
+        <target>Thiết lập tài khoản thành công</target>
       </trans-unit>
       <trans-unit id="The memo contains optional extra information. A string up to 256-bytes long.">
         <source>The memo contains optional extra information. A string up to 256-bytes long.</source>
-        <target>Das Memo enthält optional zusätzliche Informationen. Bis zu 256 Bytes lange Zeichenkette.</target>
+        <target>Memo chứa thông tin bổ sung tùy chọn. Một chuỗi dài tới 256 byte.</target>
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Max amount you can send is. We have amended the value in the amount field for you">
         <source>It seems like you are trying to empty your wallet. Max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
-        <target>Es sieht so aus, als möchtest Du Deine Brieftasche komplett entleeren. Der Maximalbetrag, den du senden kannst beträgt %(sendableBalance)s. Wir haben diesen Betrag für Dich in das Eingabefeld eingetragen.</target>
+        <target>Dường như bạn đang cố dùng hết tiền trong ví. Số tiền tối đa bạn có thể gửi là %(sendableBalance)s. Chúng tôi đã sửa giá trị trường số tiền cho bạn.</target>
       </trans-unit>
       <trans-unit id="Destination account doesn&apos;t exist.">
         <source>Destination account doesn't exist.</source>
-        <target>Das Zielkonto existiert nicht.</target>
+        <target>Tài khoản đích không tồn tại.</target>
       </trans-unit>
       <trans-unit id="Transaction has been expired. Please try again.">
         <source>Transaction has been expired. Please try again.</source>
-        <target>Die Transaktion ist abgelaufen. Bitte versuche es erneut.</target>
+        <target>Giao dịch đã hết hạn. Vui lòng thử lại.</target>
       </trans-unit>
       <trans-unit id="Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.">
         <source>Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.</source>
-        <target>CPU-Auslastung des Kontos überschritten. Bitte versuche es später erneut oder bitte andere, Dir mehr CPU zuzuweisen.</target>
+        <target>Đã sử dụng vượt quá tài khoản CPU. Vui lòng thử lại sau hoặc yêu cầu ai đó đặt cọc thêm CPU cho bạn.</target>
       </trans-unit>
       <trans-unit id="Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.">
         <source>Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.</source>
-        <target>CPU-NETTO-Auslastung des Kontos überschritten. Bitte versuche es später erneut oder bitte andere, Dir mehr NETTO-CPU zuzuweisen.</target>
+        <target>Đã sử dụng vượt quá tài khoản NET. Vui lòng thử lại sau hoặc yêu cầu ai đó đặt cọc thêm NET cho bạn</target>
       </trans-unit>
       <trans-unit id="The extra amount will be deposited to the created account.">
         <source>The extra amount will be deposited to the created account.</source>
-        <target>Der zusätzliche Betrag wird auf das erstellte Konto überwiesen.</target>
+        <target>Số tiền bổ sung sẽ được gửi vào tài khoản đã tạo.</target>
       </trans-unit>
       <trans-unit id="Can&apos;t connect to :network node. Please try again later or choose another token.">
         <source>Can't connect to %(network)s node. Please try again later or choose another token.</source>
-        <target>Verbindung mit dem %(network)s-Knoten nicht möglich. Bitte versuche es erneut oder wähle einen anderen Knoten.</target>
+        <target>Không thể kết nối với nút mạng %(network)s. Vui lòng thử lại sau hoặc chọn token khác.</target>
       </trans-unit>
       <trans-unit id="Network node error. Please try again later.">
         <source>%(network)s node error. Please try again later.</source>
-        <target>Fehler %(network)s-Knoten. Bitte versuche es später erneut.</target>
+        <target>Lỗi nút mạng %(network)s. Vui lòng thử lại sau.</target>
       </trans-unit>
       <trans-unit id="Choose exchange">
         <source>Choose exchange</source>
-        <target>Umtausch auswählen</target>
+        <target>Chọn giao dịch</target>
       </trans-unit>
       <trans-unit id="Next step">
         <source>Next step</source>
-        <target>Nächster Schritt</target>
+        <target>Bước tiếp theo</target>
       </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
-        <target>Mindestbetrag</target>
+        <target>Số tiền tối thiểu:</target>
       </trans-unit>
       <trans-unit id="address">
         <source>address</source>
-        <target>Adresse</target>
+        <target>địa chỉ</target>
       </trans-unit>
       <trans-unit id="Exchange error">
         <source>Exchange error</source>
-        <target>Fehler beim Umtausch</target>
+        <target>Giao dịch lỗi</target>
       </trans-unit>
       <trans-unit id="Transaction not found">
         <source>Transaction not found</source>
-        <target>Transaktion wurde nicht gefunden</target>
+        <target>Không tìm thấy giao dịch</target>
       </trans-unit>
       <trans-unit id="Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
         <source>Send %(depositAmount)s %(depositSymbol)s to deposit address.
 It will be converted into %(toSymbol)s, and sent to
  %(toAddress)s</source>
-        <target>Sende %(depositAmount)s %(depositSymbol)s an die Einzahlungsadresse.
-Sie werden in %(toSymbol)s konvertiert und an
- %(toAddress)s gesendet.</target>
+        <target>Gửi %(depositAmount)s %(depositSymbol)s đến địa chỉ gửi tiền.
+Sẽ chuyển đổi thành %(toSymbol)s, và gửi đến
+ %(toAddress)s</target>
       </trans-unit>
       <trans-unit id="Network fee">
         <source>Network fee</source>
-        <target>Netzwerkgebühr</target>
+        <target>Phí mạng</target>
       </trans-unit>
       <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
         <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
-        <target>Du hast 36 Stunden Zeit, um das Geld zu senden, andernfalls wird die Transaktion automatisch abgebrochen.</target>
+        <target>Bạn có 36 giờ để gửi tiền nếu không giao dịch sẽ tự động bị hủy.</target>
       </trans-unit>
       <trans-unit id="Extra Id">
         <source>Extra Id</source>
-        <target>Extra-ID</target>
+        <target>ID bổ sung</target>
       </trans-unit>
       <trans-unit id="Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).">
         <source>Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).</source>
-        <target>Eigenschaft für Währungsadressen, die für die Transaktionsverarbeitung eine zusätzliche ID verwenden (z. B. Ziel-Tag, Memo oder Nachricht).</target>
+        <target>Tài sản cho địa chỉ các loại tiền tệ sử dụng ID bổ sung để xử lý giao dịch (ví dụ: thẻ đích, memo hoặc tin nhắn).</target>
       </trans-unit>
       <trans-unit id="Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.">
         <source>Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.</source>
-        <target>Die Netzwerkgebühr ist ein fester Betrag, der jeweils erhoben wird, wenn du Geld sendest. Jede Währung hat einen strikten Betrag, der bei Vorgängen verwendet wird. Diese Gebühr wird erhoben, wenn dein Geld in eine Blockchain aufgenommen wird.</target>
+        <target>Phí mạng là cố định và được thực hiện mỗi lần gửi tiền. Mỗi loại tiền tệ tính phí số tiền nhất định cho các hoạt động. Khoản phí này được thực hiện khi tiền của bạn đưa vào blockchain.</target>
       </trans-unit>
       <trans-unit id="On hold...">
         <source>On hold...</source>
-        <target>Zurückgehalten...</target>
+        <target>Tạm giữ...</target>
       </trans-unit>
       <trans-unit id="Currently, your transaction (ID: :id) is on hold.&lt;br&gt;Please, contact Changelly to pass KYC.">
         <source>Currently, your transaction (ID: %(id)s) is on hold.&lt;br&gt;Please, contact Changelly to pass KYC.</source>
-        <target>Deine Transaktion wird derzeit zurückgehalten (ID: %(id)s).&lt;br&gt;Bitte kontaktiere Changelly, um KYC durchzuführen.</target>
+        <target>Hiện tại, giao dịch của bạn (ID: %(id)s) đang bị tạm giữ.&lt;br&gt;Vui lòng liên hệ Changelly để vượt qua KYC.</target>
       </trans-unit>
       <trans-unit id="Transaction (ID: :id) has failed. Please, contact Changelly.">
         <source>Transaction (ID: %(id)s) has failed. Please, contact Changelly.</source>
-        <target>Transaktion (ID: %(id)s) ist fehlgeschlagen. Bitte kontaktiere Changelly.</target>
+        <target>Giao dịch (ID: %(id)s) không thành công. Vui lòng liên hệ Changelly.</target>
       </trans-unit>
       <trans-unit id="Exchange failed and coins were refunded to :address.">
         <source>Exchange failed and coins were refunded to %(address)s.</source>
-        <target>Umtauschen fehlgeschlagen. Die Coins wurden rückerstattet an %(address)s.</target>
+        <target>Giao dịch không thành công và coin được hoàn trả về %(address)s.</target>
       </trans-unit>
       <trans-unit id="Payment wasn&apos;t received since 36 hours since the transaction was created.">
         <source>Payment wasn't received since 36 hours since the transaction was created.</source>
-        <target>Nachdem das Konto erstellt wurde, ist innerhalb von 36 Stunden keine Zahlung eingegangen.</target>
+        <target>Không nhận được thanh toán sau 36 giờ kể từ khi giao dịch được tạo.</target>
       </trans-unit>
       <trans-unit id="Terms of Service">
         <source>Terms of Service</source>
-        <target>Nutzungsbedingungen</target>
+        <target>Điều khoản dịch vụ</target>
       </trans-unit>
       <trans-unit id="Accept">
         <source>Accept</source>
-        <target>Akzeptieren</target>
+        <target>Chấp nhận</target>
       </trans-unit>
       <trans-unit id="Changelly_TOS">
         <source>I have read and I agree to the Changelly &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;terms of use&lt;/a&gt; and &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;privacy policy&lt;/a&gt;.&lt;br&gt;By clicking "Accept", I acknowledge and understan that my transaction may trigger AML/KYC verification according to &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;Changelly AML/KYC&lt;/a&gt;.</source>
-        <target>Ich habe die &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;Nutzungsbedingungen&lt;/a&gt; und die &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;Datenschutzbestimmungen&lt;/a&gt; von Challengy gelesen und akzeptiert.&lt;br&gt;. Durch Klicken auf „Akzeptieren“ erkenne ich an und verstehe, dass meine Transaktion gemäß der &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;AML/KYC von Challengy&lt;/a&gt; zu einer AML/KYC-Verifizierung führen kann.</target>
+        <target>Tôi đã đọc và đồng ý với Changelly &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;điều khoản sử dụng&lt;/a&gt; and &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;chính sách bảo mật&lt;/a&gt;.&lt;br&gt;Khi nhấp chuột vào "Chấp nhận", tôi xác nhận và hiểu rằng giao dịch có thể kích hoạt xác minh AML/KYC &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;Changelly AML/KYC&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="max.">
         <source>max.</source>
-        <target>max.</target>
+        <target>tối đa.</target>
       </trans-unit>
       <trans-unit id="Fee">
         <source>Fee</source>
-        <target>Gebühr</target>
+        <target>Phí</target>
       </trans-unit>
       <trans-unit id="Amount of coins that is charged from your balance for single transaction (&lt;a href=&quot;&quot; onclick=&quot;window.open(&apos;https://www.coin.space/all-about-bitcoin-fees&apos;, &apos;_system&apos;); return false;&quot;&gt;more info&lt;/a&gt;).">
         <source>Amount of coins that is charged from your balance for single transaction (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;more info&lt;/a&gt;).</source>
-        <target>Anzahl der Coins, mit denen Dein Guthaben bei einer einzelnen Transaktion belastet wird (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;weitere Informationen&lt;/a&gt;).</target>
+        <target>Số lượng coin được tính từ số dư tài khoản cho một giao dịch (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;more info&lt;/a&gt;).</target>
       </trans-unit>
       <trans-unit id="Confirm passphrase">
         <source>Confirm passphrase</source>
-        <target>Passphrase bestätigen</target>
+        <target>Xác nhận cụm mật khẩu</target>
       </trans-unit>
       <trans-unit id="Almost done! Enter the following words from your passphrase.">
         <source>Almost done! Enter the following words from your passphrase.</source>
-        <target>Fast fertig! Gib die folgenden Wörter Deiner Passphrase ein.</target>
+        <target>Gần hoàn thành! Nhập các từ sau từ cụm mật khẩu của bạn.</target>
       </trans-unit>
       <trans-unit id="Word">
         <source>Word</source>
-        <target>Wort</target>
+        <target>Từ</target>
       </trans-unit>
       <trans-unit id="Buy with Credit Card">
         <source>Buy with Credit Card</source>
-        <target></target>
+        <target>Mua bằng thẻ tín dụng</target>
       </trans-unit>
     </body>
   </file>

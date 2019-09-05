@@ -847,10 +847,6 @@ itu akan dikonversi ke %(toSymbol)s, dan dikirim ke
         <source>Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.</source>
         <target>Biaya jaringan ditentukan setiak kali pengiriman dana dilakukan kamana saja. Setiap mata uang memiliki batasan ketat pada setiap jumlah yang dilakukan. Biaya ini diambil setelah dana anda masuk di dalam blockchain.</target>
       </trans-unit>
-      <trans-unit id="security@changelly.com">
-        <source>security@changelly.com</source>
-        <target>security@changelly.com</target>
-      </trans-unit>
       <trans-unit id="On hold...">
         <source>On hold...</source>
         <target>Tertahan...</target>
@@ -906,6 +902,10 @@ itu akan dikonversi ke %(toSymbol)s, dan dikirim ke
       <trans-unit id="Word">
         <source>Word</source>
         <target>Kata</target>
+      </trans-unit>
+      <trans-unit id="Buy with Credit Card">
+        <source>Buy with Credit Card</source>
+        <target></target>
       </trans-unit>
     </body>
   </file>
