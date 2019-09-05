@@ -3,10 +3,10 @@
 var translate = require('counterpart')
 
 var languages = [
-  'cs-cz', 'de', 'en', 'es', 'fil',
-  'fr', 'hu', 'id', 'it', 'ja',
-  'nb', 'nl', 'pl', 'pt-br', 'ru',
-  'th', 'uk', 'zh-cn'
+  'bs', 'cs-cz', 'de', 'en', 'es', 'fil',
+  'fr', 'hr', 'hu', 'id', 'it', 'ja',
+  'km', 'ko', 'nb', 'nl', 'pl', 'pt-br', 'ru',
+  'sr', 'th', 'uk', 'vi', 'zh-cn'
 ]
 
 translate.setSeparator('*')
