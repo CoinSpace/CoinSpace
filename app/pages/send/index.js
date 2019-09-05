@@ -33,6 +33,7 @@ module.exports = function(el){
       qrScannerAvailable: qrcode.isScanAvailable,
       maxAmount: '0',
       fee: '0',
+      to: '',
       feeIndex: 0,
       fees: [
         {value: '0', name: 'minimum'},
@@ -104,7 +105,7 @@ module.exports = function(el){
   ractive.on('open-send', function() {
     ractive.set('validating', true);
 
-    var to = ractive.get('to');
+    var to = ractive.get('to').trim();
     var fee = ractive.get('fee');
 
     var delay = function(n) {
@@ -252,7 +253,8 @@ module.exports = function(el){
     var wallet = getWallet();
     var index = ractive.get('feeIndex');
     if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin', 'dash'].indexOf(wallet.networkName) !== -1) {
-      ractive.set('maxAmount', toUnitString(wallet.maxAmounts[index].value));
+      var maxAmount = wallet.maxAmounts[index] ? wallet.maxAmounts[index].value : 0;
+      ractive.set('maxAmount', toUnitString(maxAmount));
     } else {
       ractive.set('maxAmount', toUnitString(wallet.getMaxAmount()));
     }
