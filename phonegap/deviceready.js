@@ -3,6 +3,7 @@ function onDeviceReady() {
 
   document.addEventListener('backbutton', function(e) {
     e.preventDefault();
+    window.navigator.app.exitApp();
   }, false);
 
   window.Zendesk.initialize(process.env.ZENDESK_APP_ID, process.env.ZENDESK_CLIENT_ID, process.env.ZENDESK_URL);
