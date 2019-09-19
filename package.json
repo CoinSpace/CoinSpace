@@ -31,7 +31,7 @@
     "cs-pin-validator": "file:./app/lib/pin-validator",
     "ejs": "^2.6.1",
     "express": "^4.15.4",
-    "helmet": "^3.8.1",
+    "helmet": "^3.21.0",
     "in-app-purchase": "^1.10.1",
     "mongodb": "^3.1.10",
     "retry": "^0.10.1"

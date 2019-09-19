@@ -18,10 +18,11 @@ function init(app) {
     app.use(helmet.noSniff())
     app.use(helmet.frameguard({action: 'sameorigin'}))
 
-    var hundredEightyDaysInMilliseconds = 180 * 24 * 60 * 60 * 1000
+    var oneYearInSeconds = 31536000
     app.use(helmet.hsts({
-      maxAge: hundredEightyDaysInMilliseconds,
-      includeSubDomains: true
+      maxAge: oneYearInSeconds,
+      includeSubDomains: true,
+      preload: true
     }))
   }
 
