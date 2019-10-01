@@ -164,8 +164,8 @@ module.exports = function(el) {
     if (ractive.get('rate') === '?') return showError({message: 'Exchange is currently unavailable for this pair'});
     var options = {
       fromSymbol: ractive.get('fromSymbol'),
-      returnAddress: ractive.get('returnAddress'),
-      toAddress: ractive.get('toAddress'),
+      returnAddress: ractive.get('returnAddress').trim(),
+      toAddress: ractive.get('toAddress').trim(),
       toSymbol: ractive.get('toSymbol')
     };
     var fromCoin = _.find(ractive.get('coins'), function(item) {

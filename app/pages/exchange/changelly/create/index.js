@@ -105,8 +105,8 @@ module.exports = function(el) {
 
     var options = {
       fromSymbol: ractive.get('fromSymbol'),
-      returnAddress: ractive.get('returnAddress'),
-      toAddress: ractive.get('toAddress'),
+      returnAddress: ractive.get('returnAddress').trim(),
+      toAddress: ractive.get('toAddress').trim(),
       toSymbol: ractive.get('toSymbol'),
       fromAmount: ractive.get('fromAmount')
     };
