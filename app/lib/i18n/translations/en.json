@@ -222,5 +222,6 @@
   "Confirm passphrase": "Confirm passphrase",
   "Almost done! Enter the following words from your passphrase.": "Almost done! Enter the following words from your passphrase.",
   "Word": "Word",
-  "Buy with Credit Card": "Buy with Credit Card"
+  "Buy with Credit Card": "Buy with Credit Card",
+  "Transaction too large": "Transaction too large"
 }

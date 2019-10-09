@@ -24,6 +24,7 @@ function validateSend(options) {
     } else if (wallet.networkName === 'eos') {
       tx = wallet.createTx(to, amount, options.memo)
     }
+    options.tx = tx;
   } catch(e) {
     var error;
     if (/Invalid address/.test(e.message)) {
@@ -51,6 +52,8 @@ function validateSend(options) {
       throw error
     } else if (/Invalid gasLimit/.test(e.message)) {
       throw new Error('Please enter Gas Limit greater than zero')
+    } else if (/Transaction too large/.test(e.message)) {
+      throw new Error('Transaction too large')
     } else if (/Insufficient funds/.test(e.message)) {
       if (/Additional funds confirmation pending/.test(e.details)) {
         throw new Error('Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.')

@@ -907,6 +907,10 @@ Sarà convertito in %(toSymbol)s, e inviato a
         <source>Buy with Credit Card</source>
         <target></target>
       </trans-unit>
+      <trans-unit id="Transaction too large">
+        <source>Transaction too large</source>
+        <target>Transazione troppo grande</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

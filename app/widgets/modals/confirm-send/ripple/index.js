@@ -19,35 +19,36 @@ function open(data) {
 
   ractive.on('send', function() {
     ractive.set('sending', true);
+    setTimeout(function() {
+      var wallet = getWallet();
+      var tx = null;
 
-    var wallet = getWallet();
-    var tx = null;
-
-    try {
-      tx = createTx();
-    } catch(err) {
-      ractive.set('sending', false);
-      if (/Insufficient funds/.test(err.message)) return showInfo({title: 'Insufficient funds'});
-      if (data.importTxOptions && /Less than minimum reserve/.test(err.message)) {
-        return showInfo({
-          title: 'Insufficient funds',
-          message: "Your wallet isn't activated. You can receive only amount greater than :minReserve :denomination.",
-          interpolations: {minReserve: wallet.minReserve, denomination: wallet.denomination}
-        });
+      try {
+        tx = createTx();
+      } catch(err) {
+        ractive.set('sending', false);
+        if (/Insufficient funds/.test(err.message)) return showInfo({title: 'Insufficient funds'});
+        if (data.importTxOptions && /Less than minimum reserve/.test(err.message)) {
+          return showInfo({
+            title: 'Insufficient funds',
+            message: "Your wallet isn't activated. You can receive only amount greater than :minReserve :denomination.",
+            interpolations: {minReserve: wallet.minReserve, denomination: wallet.denomination}
+          });
+        }
+        return handleTransactionError(err);
       }
-      return handleTransactionError(err);
-    }
 
-    wallet.sendTx(tx, function(err) {
-      if (err) return handleTransactionError(err);
+      wallet.sendTx(tx, function(err) {
+        if (err) return handleTransactionError(err);
 
-      ractive.set('confirmation', false);
-      ractive.set('success', true);
-      ractive.set('onDismiss', data.onSuccessDismiss);
+        ractive.set('confirmation', false);
+        ractive.set('success', true);
+        ractive.set('onDismiss', data.onSuccessDismiss);
 
-      // update balance & tx history
-      emitter.emit('wallet-ready');
-    });
+        // update balance & tx history
+        emitter.emit('wallet-ready');
+      });
+    }, 200);
   });
 
   function createTx() {
@@ -56,7 +57,7 @@ function open(data) {
     if (data.importTxOptions) {
       tx = wallet.createImportTx(data.importTxOptions);
     } else {
-      tx = wallet.createTx(data.to, toAtom(data.amount), data.tag, data.invoiceId, !data.destinationInfo.isActive)
+      tx = data.tx;
     }
     return tx;
   }

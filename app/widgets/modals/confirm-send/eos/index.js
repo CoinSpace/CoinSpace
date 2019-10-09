@@ -3,8 +3,6 @@
 var Ractive = require('widgets/modals/base');
 var emitter = require('lib/emitter');
 var getWallet = require('lib/wallet').getWallet;
-var toAtom = require('lib/convert').toAtom;
-var showInfo = require('widgets/modals/flash').showInfo;
 
 function open(data) {
 
@@ -19,35 +17,22 @@ function open(data) {
 
   ractive.on('send', function() {
     ractive.set('sending', true);
+    setTimeout(function() {
+      var wallet = getWallet();
+      var tx = data.tx;
 
-    var wallet = getWallet();
-    var tx = null;
+      wallet.sendTx(tx, function(err) {
+        if (err) return handleTransactionError(err);
 
-    try {
-      tx = createTx();
-    } catch(err) {
-      ractive.set('sending', false);
-      if (/Insufficient funds/.test(err.message)) return showInfo({title: 'Insufficient funds'});
-      return handleTransactionError(err);
-    }
+        ractive.set('confirmation', false);
+        ractive.set('success', true);
+        ractive.set('onDismiss', data.onSuccessDismiss);
 
-    wallet.sendTx(tx, function(err) {
-      if (err) return handleTransactionError(err);
-
-      ractive.set('confirmation', false);
-      ractive.set('success', true);
-      ractive.set('onDismiss', data.onSuccessDismiss);
-
-      // update balance & tx history
-      emitter.emit('wallet-ready');
-    });
+        // update balance & tx history
+        emitter.emit('wallet-ready');
+      });
+    }, 200);
   });
-
-  function createTx() {
-    var wallet = getWallet();
-    var tx = wallet.createTx(data.to, toAtom(data.amount), data.memo)
-    return tx;
-  }
 
   function handleTransactionError(err) {
     console.error(err);

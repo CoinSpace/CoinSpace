@@ -823,8 +823,8 @@ Akan dikonversi ke %(toSymbol)s, dan dikirimkan kepada
         <source>Send %(depositAmount)s %(depositSymbol)s to deposit address.
 It will be converted into %(toSymbol)s, and sent to
  %(toAddress)s</source>
-        <target>Kirim %(depositAmount)s %(depositSymbol)s ke address deposit. 
-itu akan dikonversi ke %(toSymbol)s, dan dikirim ke 
+        <target>Kirim %(depositAmount)s %(depositSymbol)s ke address deposit.
+itu akan dikonversi ke %(toSymbol)s, dan dikirim ke
 %(toAddress)s</target>
       </trans-unit>
       <trans-unit id="Network fee">
@@ -906,6 +906,10 @@ itu akan dikonversi ke %(toSymbol)s, dan dikirim ke
       <trans-unit id="Buy with Credit Card">
         <source>Buy with Credit Card</source>
         <target></target>
+      </trans-unit>
+      <trans-unit id="Transaction too large">
+        <source>Transaction too large</source>
+        <target>Transaksi terlalu besar</target>
       </trans-unit>
     </body>
   </file>
