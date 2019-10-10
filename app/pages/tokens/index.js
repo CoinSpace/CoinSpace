@@ -14,6 +14,15 @@ var onTxSyncDoneWrapper = require('lib/wallet/utils').onTxSyncDoneWrapper;
 
 var walletTokens = [];
 var isEnabled = false;
+var tetherToken = {
+  address: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+  decimals: 6,
+  name: 'Tether USD',
+  network: 'ethereum',
+  symbol: 'USDT',
+  icon: 'svg_token_tether',
+  isDefault: true
+};
 
 module.exports = function(el) {
 
@@ -46,6 +55,7 @@ module.exports = function(el) {
     var ethereumTokens = walletTokens.filter(function(token) {
       return token.network === 'ethereum';
     });
+    ethereumTokens.unshift(tetherToken);
     ractive.set('ethereumTokens', ethereumTokens);
     ractive.set('currentToken', getToken());
   });

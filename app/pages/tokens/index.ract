@@ -35,11 +35,15 @@
     <div class="token__item" on-click="switchToken(this)">
       {{#if isCurrentToken(this)}}
       <span class="_arrow">{{>svg_arrow}}</span>
-      {{else}}
+      {{elseif !this.isDefault}}
       <span class="_remove" on-click="removeEthereumToken(this)">{{> svg_close}}</span>
       {{/if}}
       <span class="_icon">
+        {{#if this.icon}}
+          {{>this.icon}}
+        {{else}}
           {{>svg_letter_t}}
+        {{/if}}
       </span>
       <h4 class="_name">{{name}}</h4>
     </div>

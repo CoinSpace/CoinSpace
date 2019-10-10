@@ -10,10 +10,10 @@ function save(tokens) {
   });
 
   var collection = db().collection('ethereum_tokens');
-  return collection.bulkWrite(operations)
-    .then(function() {
-      return true;
-    });
+  return Promise.all([
+    collection.bulkWrite(operations),
+    collection.deleteMany({_id: { $gte: tokens.length }})
+  ]);
 }
 
 function getFromAPI() {
@@ -26,9 +26,12 @@ function getFromAPI() {
     }
   }).then(function(response) {
     if (!response.data) throw new Error('Bad ethereumTokens response');
-    response.data.tokens.shift();
     var rank = 0;
-    return response.data.tokens.map(function(item) {
+    return response.data.tokens.filter(function(token) {
+      if (token.symbol === 'ETH') return false;
+      if (token.symbol === 'USDT') return false;
+      return true;
+    }).map(function(item) {
       return {
         _id: rank++,
         address: item.address,

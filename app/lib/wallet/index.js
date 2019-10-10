@@ -218,6 +218,7 @@ function initWallet(networkName, done, txDone) {
 }
 
 function isValidWalletToken(token) {
+  if (token && token.isDefault) return true;
   var walletTokens = db.get('walletTokens') || [];
   var isFound = _.find(walletTokens, function(item) {
     return _.isEqual(token, item);
