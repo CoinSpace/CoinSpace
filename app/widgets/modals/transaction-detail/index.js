@@ -1,20 +1,22 @@
 'use strict';
 
-var Ractive = require('widgets/modals/base')
+var Ractive = require('widgets/modals/base');
 
 module.exports = function(data) {
-  var content = null;
+  var content;
+  data.showAllInputs = false;
+  data.inputsPerPage = 10;
   if (data.isNetwork('ethereum')) {
     data.isPendingFee = data.transaction.fee === -1;
-    content = require('./contentEthereum.ract')
+    content = require('./contentEthereum.ract');
   } else if (data.isNetwork('ripple')) {
-    content = require('./contentRipple.ract')
+    content = require('./contentRipple.ract');
   } else if (data.isNetwork('stellar')) {
-    content = require('./contentStellar.ract')
+    content = require('./contentStellar.ract');
   } else if (data.isNetwork('eos')) {
-    content = require('./contentEOS.ract')
+    content = require('./contentEOS.ract');
   } else {
-    content = require('./contentBtcBchLtc.ract')
+    content = require('./contentBtcBchLtc.ract');
   }
 
   var ractive = new Ractive({
@@ -23,12 +25,17 @@ module.exports = function(data) {
       content: content
     },
     data: data
-  })
+  });
+
+  ractive.on('showMoreInputs', function(context) {
+    context.original.preventDefault();
+    ractive.set('showAllInputs', true);
+  });
 
   ractive.on('close', function(){
     ractive.fire('cancel')
-  })
+  });
 
-  return ractive
+  return ractive;
 }
 

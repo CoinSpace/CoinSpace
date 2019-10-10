@@ -643,6 +643,10 @@ Het zal worden geconverteerd in %(toSymbol)s, en worden verzonden naar
         <source>Load more</source>
         <target>Meer laden</target>
       </trans-unit>
+      <trans-unit id="more">
+        <source>more</source>
+        <target>meer</target>
+      </trans-unit>
       <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
         <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
         <target>De portemonnee van de ontvanger is niet geactiveerd. U kunt alleen een bedrag groter dan %(minReserve)s %(denomination)s verzenden.</target>

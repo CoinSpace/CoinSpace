@@ -158,6 +158,7 @@
   "It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you": "It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(denomination)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.",
   "Your wallet isn't activated. To activate it please send greater than minimum reserve (:minReserve :denomination) to your wallet address.": "Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(denomination)s) to your wallet address.",
   "Load more": "Load more",
+  "more": "more",
   "Recipient's wallet isn't activated. You can send only amount greater than :minReserve :denomination.": "Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.",
   "Destination tag": "Destination tag",
   "Invoice ID": "Invoice ID",

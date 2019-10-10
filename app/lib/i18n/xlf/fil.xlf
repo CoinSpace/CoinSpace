@@ -643,6 +643,10 @@ Iko-convert ito sa %(toSymbol)s, at ipapadala sa
         <source>Load more</source>
         <target>Mag-load pa</target>
       </trans-unit>
+      <trans-unit id="more">
+        <source>more</source>
+        <target>pa</target>
+      </trans-unit>
       <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
         <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
         <target>Hindi gumagana ang wallet ng tatanggap. Maaari ka lang magpadala ng halagang mas malaki sa %(minReserve)s %(denomination)s.</target>

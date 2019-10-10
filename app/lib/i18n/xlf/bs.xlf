@@ -643,6 +643,10 @@ Biće konvertovano u %(toSymbol)s i poslato na
         <source>Load more</source>
         <target>Učitaj više</target>
       </trans-unit>
+      <trans-unit id="more">
+        <source>more</source>
+        <target>više</target>
+      </trans-unit>
       <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
         <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
         <target>Novčanik primaoca nije aktiviran. Možete poslati samo iznos veći od %(minReserve)s %(denomination)s.</target>

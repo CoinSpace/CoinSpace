@@ -643,6 +643,10 @@ Den konverteres til %(toSymbol)s og sendes til
         <source>Load more</source>
         <target>Last inn mer</target>
       </trans-unit>
+      <trans-unit id="more">
+        <source>more</source>
+        <target>mer</target>
+      </trans-unit>
       <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
         <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
         <target>Mottakerens lommebok er ikke aktivert. Du kan kun sende beløp høyere enn %(minReserve)s %(denomination)s.</target>

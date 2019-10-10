@@ -643,6 +643,10 @@ Bude to převedeno na %(toSymbol)s a posláno na adresu
         <source>Load more</source>
         <target>Načíst více</target>
       </trans-unit>
+      <trans-unit id="more">
+        <source>more</source>
+        <target>více</target>
+      </trans-unit>
       <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
         <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
         <target>Peněženka příjemce není aktivována. Můžete poslat jen částku větší než %(minReserve)s %(denomination)s.</target>

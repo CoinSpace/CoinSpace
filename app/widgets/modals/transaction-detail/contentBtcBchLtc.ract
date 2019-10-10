@@ -36,18 +36,33 @@
 
       <h3 class="_title">{{translate("Inputs:")}}</h3>
       <code class="_value">
-        {{#ins}}
-          <span class="_address">{{address ? address : translate("Unparsed address")}}</span>
-          <span class="_number">{{toUnitString(amount)}}</span>
-        {{/ins}}
+        {{#if (ins.length > inputsPerPage)}}
+          {{#each ins.slice(0, inputsPerPage)}}
+            <span class="_address">{{address ? address : translate("Unparsed address")}}</span>
+            <span class="_number">{{toUnitString(amount)}}</span>
+          {{/each}}
+          {{#if showAllInputs}}
+            {{#each ins.slice(inputsPerPage)}}
+              <span class="_address">{{address ? address : translate("Unparsed address")}}</span>
+              <span class="_number">{{toUnitString(amount)}}</span>
+            {{/each}}
+          {{else}}
+            <a href="" class="_more" on-click="showMoreInputs">{{translate("more")}}</a>
+          {{/if}}
+        {{else}}
+          {{#each ins}}
+            <span class="_address">{{address ? address : translate("Unparsed address")}}</span>
+            <span class="_number">{{toUnitString(amount)}}</span>
+          {{/each}}
+        {{/if}}
       </code>
 
       <h3 class="_title">{{translate("Outputs:")}}</h3>
       <code class="_value">
-        {{#outs}}
+        {{#each outs}}
           <span class="_address">{{address ? address : translate("Unparsed address")}}</span>
           <span class="_number">{{toUnitString(amount)}}</span>
-        {{/outs}}
+        {{/each}}
       </code>
     </div>
 
