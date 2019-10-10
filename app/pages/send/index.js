@@ -292,6 +292,7 @@ module.exports = function(el){
   })
 
   ractive.on('gas-limit', function() {
+    var wallet = getWallet();
     wallet.gasLimit = ractive.find('#gas-limit').value || 0;
     setFees();
     ractive.fire('change-fee');
