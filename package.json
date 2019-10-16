@@ -59,7 +59,7 @@
     "cs-ethereum-wallet": "git://github.com/CoinSpace/cs-ethereum-wallet.git#v1.1.2",
     "cs-ripple-wallet": "git://github.com/CoinSpace/cs-ripple-wallet.git#v1.0.5",
     "cs-stellar-wallet": "git://github.com/CoinSpace/cs-stellar-wallet.git#v1.0.4",
-    "cs-wallet": "git://github.com/CoinSpace/cs-wallet.git#v0.22.1",
+    "cs-wallet": "git://github.com/CoinSpace/cs-wallet.git#v0.22.2",
     "css-loader": "^0.28.7",
     "dotenv": "^4.0.0",
     "dotenv-webpack": "^1.5.4",
