@@ -1,0 +1,46 @@
+{{#if isLoading}}
+  {{>loader}}
+{{else}}
+<div class="moonpay_auth">
+
+  <div class="_header">
+    <div class="_back" on-click="back">
+      <span class="_icon"></span> {{translate("Back")}}
+    </div>
+  </div>
+
+  {{#if (step === 1)}}
+    <div class="_group">
+      <label class="_label" for="moonpay_signin_email">{{translate("Email")}}</label>
+      <input id="moonpay_signin_email" class="_input" value="{{email}}" on-enter="sign-in" type="email" autocorrect="off" autocapitalize="off"/>
+    </div>
+  {{else}}
+    <div class="_message">
+      {{translate("We've sent verification code to :email.", {email: email})}}
+    </div>
+    <div class="_group">
+      <label class="_label" for="moonpay_signin_code">{{translate("Verification code")}}</label>
+      <input id="moonpay_signin_code" class="_input" value="{{code}}" on-enter="sign-in" type="text" autocorrect="off" autocapitalize="off"/>
+    </div>
+  {{/if}}
+
+  <div class="_confirm_btn_group">
+    {{#if isLoadingSignIn}}
+      <div class="_loading">
+        <span class="_icon">
+          {{>svg_refresh}}
+        </span>
+      </div>
+    {{else}}
+      <div on-click="sign-in" class="_btn">
+        {{#if (step === 1)}}
+          {{translate("Sign in")}}
+        {{else}}
+          {{translate("Submit")}}
+        {{/if}}
+      </div>
+    {{/if}}
+  </div>
+
+</div>
+{{/if}}

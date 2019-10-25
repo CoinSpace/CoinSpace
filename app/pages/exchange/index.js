@@ -4,6 +4,7 @@ var Ractive = require('lib/ractive');
 var emitter = require('lib/emitter');
 var initShapeshift = require('./shapeshift');
 var initChangelly = require('./changelly');
+var initMoonpay = require('./moonpay');
 var moonpay = require('lib/moonpay');
 var getWallet = require('lib/wallet').getWallet;
 
@@ -16,20 +17,16 @@ module.exports = function(el) {
   var exchanges = {
     changelly: initChangelly(ractive.find('#exchange_changelly')),
     shapeshift: initShapeshift(ractive.find('#exchange_shapeshift')),
+    moonpay: initMoonpay(ractive.find('#exchange_moonpay')),
     none: new Ractive({
       el: ractive.find('#exchange_none'),
       template: require('./choose.ract'),
       data: {
         choose: choose,
-        isSupportedMoonpay: false,
+        isSupportedMoonpay: false
       }
     })
   }
-  exchanges.none.on('moonpay', function() {
-    var wallet = getWallet();
-    var symbol = wallet.denomination;
-    moonpay.show(symbol.toLowerCase(), wallet.getNextAddress());
-  });
 
   var currentExchange = exchanges.none;
 

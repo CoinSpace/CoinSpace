@@ -1,0 +1,130 @@
+.moonpay_frame {
+  .step {
+    display: none;
+    &.current {
+      display: block;
+    }
+  }
+  .loader_message {
+    padding: 40px;
+    color: $grey;
+    text-align: center;
+    font-size: 24px;
+    @include breakpoint(portrait) {
+      font-size: 32px;
+    }
+  }
+
+  // Common
+  ._header {
+    position: relative;
+    ._back {
+      cursor: pointer;
+      user-select: none;
+      color: #999;
+      display: inline-block;
+      margin-left: -10px;
+      margin-bottom: 10px;
+      @include breakpoint(portrait) {
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
+      ._icon {
+        width: 25px;
+        height: 25px;
+        background-size: 25px 25px;
+        @include breakpoint(portrait) {
+          width: 30px;
+          height: 30px;
+          background-size: 30px 30px;
+        }
+        display: inline-block;
+        vertical-align: top;
+        background: url('./assets/img/arrow-left.svg');
+        opacity: 0.6;
+      }
+    }
+  }
+  ._message {
+    @extend .jigsaw-regular;
+    @include breakpoint(portrait) {
+      font-size: 20px;
+    }
+  }
+
+  ._group {
+    @include noselect;
+    @include breakpoint(portrait) {
+      font-size: 20px;
+    }
+    ._label {
+      cursor: pointer;
+    }
+    ._input {
+      @extend .generic_box;
+      @extend .jigsaw-light;
+      margin-top: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
+      border-radius: 2px;
+      height: auto;
+      &:active, &:focus {
+        outline: 0;
+        border: 1px solid #999;
+      }
+      @include breakpoint(portrait) {
+        font-size: 26px;
+        border-radius: 3px;
+        padding-right: 58px;
+      }
+    }
+  }
+
+  ._confirm_btn_group {
+    margin-top: 20px;
+    @include breakpoint(portrait) {
+      margin-top: 40px;
+    }
+    ._btn {
+      @extend .csbtn;
+
+      @include breakpoint(portrait) {
+        font-size: 26px;
+        border-radius: 3px;
+      }
+    }
+    ._loading {
+      @extend .csbtn-base;
+      position: relative;
+      background-color: $grey;
+      transform: translate(0px, 3px);
+      box-shadow: 0 0px 0 0;
+      height: 60px;
+      @include breakpoint(portrait) {
+        height: 72px;
+      }
+      ._icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -15px;
+        margin-left: -15px;
+        width: 30px;
+        height: 30px;
+        animation: infinite-spinning 1s linear infinite;
+        @include breakpoint(portrait) {
+          margin-top: -18px;
+          margin-left: -18px;
+          width: 36px;
+          height: 36px;
+        }
+        .svg-refresh {
+          fill: darken($grey, 20%);
+        }
+      }
+    }
+  }
+}
+
+@import "./auth/_index";
+@import "./main/_index";

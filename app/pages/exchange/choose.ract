@@ -1,5 +1,5 @@
 {{#if isSupportedMoonpay}}
-<div on-click="moonpay" class="_btn">
+<div on-click="choose('moonpay')" class="_btn">
   {{translate("Buy with Credit Card")}}
 </div>
 {{/if}}

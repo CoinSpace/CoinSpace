@@ -245,7 +245,16 @@ router.get('/changelly/transaction/:id', function(req, res) {
 });
 
 router.get('/moonpay/coins', function(req, res) {
-  moonpay.getCoinsFromCache().then(function(data) {
+  var country = req.query.country;
+  moonpay.getCoinsFromCache(country).then(function(data) {
+    res.status(200).send(data);
+  }).catch(function(err) {
+    res.status(400).send(err);
+  });
+});
+
+router.get('/moonpay/fiat', function(req, res) {
+  moonpay.getFiatFromCache().then(function(data) {
     res.status(200).send(data);
   }).catch(function(err) {
     res.status(400).send(err);

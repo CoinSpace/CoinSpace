@@ -1,0 +1,10 @@
+<div class="moonpay_frame">
+
+  {{#isLoading}}
+    {{>loader}}
+  {{/isLoading}}
+
+  <div id="moonpay_auth" class="step"></div>
+  <div id="moonpay_main" class="step"></div>
+
+</div>

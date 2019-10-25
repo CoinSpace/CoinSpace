@@ -1,0 +1,45 @@
+{{#if isLoading}}
+  {{>loader}}
+{{else}}
+<div class="moonpay_main">
+
+  <div class="_header">
+    <div class="_back" on-click="back">
+      <span class="_icon"></span> {{translate("Back")}}
+    </div>
+  </div>
+
+  <div class="_message">
+    {{translate("You can purchase up to :dailyLimitRemaining today, and up to :monthlyLimitRemaining this month.", {
+      dailyLimitRemaining: dailyLimitRemaining,
+      monthlyLimitRemaining: monthlyLimitRemaining
+    })}}
+    {{#if limitIncreaseEligible}}
+      {{translate("To increase your limits you need to pass verification.")}}
+    {{/if}}
+  </div>
+
+  <div class="_link">{{translate("Payment methods")}}</div>
+  <div class="_link">{{translate("Verification")}}</div>
+  <div class="_link">{{translate("History")}}</div>
+  <div class="_link">{{translate("Default currency (:symbol)", {symbol: defaultCurrency})}}</div>
+
+  <div class="_confirm_btn_group">
+    {{#if isLoadingBuy}}
+      <div class="_loading">
+        <span class="_icon">
+          {{>svg_refresh}}
+        </span>
+      </div>
+    {{else}}
+      <div on-click="buy" class="_btn">
+        {{translate("Buy")}}
+      </div>
+    {{/if}}
+  </div>
+  <div class="_logout_link" on-click="logout">
+    {{translate("Logout")}}
+  </div>
+
+</div>
+{{/if}}

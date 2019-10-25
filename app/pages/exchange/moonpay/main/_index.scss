@@ -1,0 +1,31 @@
+.moonpay_main {
+  ._message {
+    margin-bottom: 10px;
+  }
+
+  ._link {
+    text-decoration: underline;
+    cursor: pointer;
+    user-select: none;
+    margin-bottom: 10px;
+    @include breakpoint(portrait) {
+      font-size: 20px;
+    }
+  }
+
+  ._logout_link {
+    display: block;
+    cursor: pointer;
+    text-align: center;
+    padding-top: 10px;
+    color: #999;
+    user-select: none;
+    @include breakpoint(portrait) {
+      font-size: 20px;
+      padding-top: 15px;
+    }
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

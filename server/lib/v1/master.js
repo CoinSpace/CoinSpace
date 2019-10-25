@@ -47,11 +47,14 @@ function cacheEthereumTokens(interval) {
   }(), interval);
 }
 
-function cacheMoonpayCoins(interval) {
+function cacheMoonpayCurrencies(interval) {
   setInterval(function intervalFunction() {
-    moonpay.getCoinsFromAPI().then(function(data) {
+    moonpay.getCurrenciesFromAPI().then(function(data) {
       if (global.gc) global.gc();
-      return moonpay.save('coins', data);
+      return Promise.all([
+        moonpay.save('coins', data.coins),
+        moonpay.save('fiat', data.fiat)
+      ]);
     }).catch(console.error);
     return intervalFunction;
   }(), interval);
@@ -62,5 +65,5 @@ module.exports = {
   cacheFees: cacheFees,
   cacheTicker: cacheTicker,
   cacheEthereumTokens: cacheEthereumTokens,
-  cacheMoonpayCoins: cacheMoonpayCoins
+  cacheMoonpayCurrencies: cacheMoonpayCurrencies
 }
