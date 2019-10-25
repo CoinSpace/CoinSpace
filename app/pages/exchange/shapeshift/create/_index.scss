@@ -12,6 +12,7 @@
       margin-bottom: 10px;
       @include breakpoint(portrait) {
         font-size: 20px;
+        margin-bottom: 20px;
       }
       ._icon {
         width: 25px;
@@ -262,6 +263,11 @@
     text-align: center;
     padding-top: 10px;
     color: #999;
+    user-select: none;
+    @include breakpoint(portrait) {
+      font-size: 20px;
+      padding-top: 15px;
+    }
 
     &:hover {
       text-decoration: underline;

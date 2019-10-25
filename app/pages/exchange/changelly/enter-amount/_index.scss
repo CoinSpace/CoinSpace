@@ -12,6 +12,7 @@
       margin-bottom: 10px;
       @include breakpoint(portrait) {
         font-size: 20px;
+        margin-bottom: 20px;
       }
       ._icon {
         width: 25px;

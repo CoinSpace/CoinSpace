@@ -136,8 +136,10 @@
       {{translate("Logout")}}
     </div>
   {{else}}
-    <div class="confirm__btn" on-click="login">
-      {{translate("Sign in")}}
+    <div class="confirm__buttons">
+      <div class="confirm__btn" on-click="login">
+        {{translate("Sign in")}}
+      </div>
     </div>
   {{/if}}
 

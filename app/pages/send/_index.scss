@@ -256,6 +256,9 @@
 .send__fee {
   position: relative;
   margin-bottom: 20px;
+  @include breakpoint(portrait) {
+    font-size: 20px;
+  }
   @include noselect;
   ._select_container {
     display: inline-block;
