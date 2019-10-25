@@ -4,10 +4,8 @@ var Ractive = require('lib/ractive');
 var emitter = require('lib/emitter');
 var initShapeshift = require('./shapeshift');
 var initChangelly = require('./changelly');
-var denomination = require('lib/denomination');
 var moonpay = require('lib/moonpay');
 var getWallet = require('lib/wallet').getWallet;
-var getTokenNetwork = require('lib/token').getTokenNetwork;
 
 module.exports = function(el) {
   var ractive = new Ractive({
@@ -28,15 +26,17 @@ module.exports = function(el) {
     })
   }
   exchanges.none.on('moonpay', function() {
-    var symbol = denomination(getTokenNetwork());
-    moonpay.show(symbol.toLowerCase(), getWallet().getNextAddress());
+    var wallet = getWallet();
+    var symbol = wallet.denomination;
+    moonpay.show(symbol.toLowerCase(), wallet.getNextAddress());
   });
 
   var currentExchange = exchanges.none;
 
   ractive.on('before-show', function() {
-    var symbol = denomination(getTokenNetwork());
-    exchanges.none.set('isSupportedMoonpay', moonpay.isSupported(symbol) && getWallet().getNextAddress());
+    var wallet = getWallet();
+    var symbol = wallet.denomination;
+    exchanges.none.set('isSupportedMoonpay', moonpay.isSupported(symbol) && wallet.getNextAddress());
 
     var preferredExchange = window.localStorage.getItem('_cs_preferred_exchange');
     if (exchanges[preferredExchange]) {

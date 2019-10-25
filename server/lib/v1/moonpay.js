@@ -3,7 +3,7 @@
 var axios = require('axios');
 var db = require('./db');
 
-var PRIORITY_SYMBOLS = ['BTC', 'BCH', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH'];
+var PRIORITY_SYMBOLS = ['BTC', 'BCH', 'ETH', 'USDT', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH'];
 
 function save(_id, data) {
   var collection = db().collection('moonpay');
