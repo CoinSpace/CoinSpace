@@ -49,8 +49,20 @@ module.exports = function(el) {
     emitter.emit('set-exchange', 'none');
   });
 
+  ractive.on('verification', function() {
+    emitter.emit('change-moonpay-step', 'verification', {
+      verificationLevels: verificationLevels
+    });
+  });
+
+  ractive.on('logout', function() {
+    moonpay.cleanAccessToken();
+    moonpay.cleanCustomer();
+    emitter.emit('set-exchange', 'none');
+  });
+
   ractive.on('buy', function() {
-    
+
   });
 
   return ractive;

@@ -20,7 +20,7 @@
   </div>
 
   <div class="_link">{{translate("Payment methods")}}</div>
-  <div class="_link">{{translate("Verification")}}</div>
+  <div class="_link" on-click="verification">{{translate("Verification")}}</div>
   <div class="_link">{{translate("History")}}</div>
   <div class="_link">{{translate("Default currency (:symbol)", {symbol: defaultCurrency})}}</div>
 

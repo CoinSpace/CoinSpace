@@ -1,0 +1,26 @@
+<div class='widget-birthdaypicker'>
+  <div class="wd_dropdown">
+    <span class="wd_value">{{selectedDay}}</span>
+    <select value="{{selectedDay}}">
+      {{#each days}}
+      <option value="{{this}}">{{this}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="wd_dropdown">
+    <span class="wd_value">{{months[selectedMonth]}}</span>
+    <select on-change="set-days" value="{{selectedMonth}}">
+      {{#each months as month: index}}
+      <option value="{{index}}">{{month}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="wd_dropdown">
+    <span class="wd_value">{{selectedYear}}</span>
+    <select on-change="set-days" value="{{selectedYear}}">
+      {{#each years}}
+      <option value="{{this}}">{{this}}</option>
+      {{/each}}
+    </select>
+  </div>
+</div>

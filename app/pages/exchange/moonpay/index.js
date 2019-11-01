@@ -4,15 +4,12 @@ var Ractive = require('lib/ractive');
 var emitter = require('lib/emitter');
 var initAuth = require('./auth');
 var initMain = require('./main');
-var db = require('lib/db');
+var initVerification = require('./verification');
 
 module.exports = function(el) {
   var ractive = new Ractive({
     el: el,
     template: require('./index.ract'),
-    data: {
-      isLoading: true
-    },
     partials: {
       loader: require('./loader.ract')
     }
@@ -21,24 +18,17 @@ module.exports = function(el) {
   var steps = {
     auth: initAuth(ractive.find('#moonpay_auth')),
     main: initMain(ractive.find('#moonpay_main')),
+    verification: initVerification(ractive.find('#moonpay_verification')),
   };
   var currentStep = steps.auth;
 
   ractive.on('before-show', function() {
-    emitter.emit('moonpay');
+    showStep(steps.auth);
   });
 
   ractive.on('before-hide', function() {
     ractive.set('isLoading', true);
     currentStep.hide();
-  });
-
-  emitter.on('moonpay', function() {
-    var moonpayInfo = db.get('moonpayInfo');
-    if (!moonpayInfo) {
-      ractive.set('isLoading', false);
-      return showStep(steps.auth);
-    }
   });
 
   emitter.on('change-moonpay-step', function(step, data) {

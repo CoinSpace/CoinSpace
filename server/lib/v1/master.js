@@ -53,7 +53,21 @@ function cacheMoonpayCurrencies(interval) {
       if (global.gc) global.gc();
       return Promise.all([
         moonpay.save('coins', data.coins),
+        moonpay.save('coins_usa', data.coins_usa),
         moonpay.save('fiat', data.fiat)
+      ]);
+    }).catch(console.error);
+    return intervalFunction;
+  }(), interval);
+}
+
+function cacheMoonpayCountries(interval) {
+  setInterval(function intervalFunction() {
+    moonpay.getCountriesFromAPI().then(function(data) {
+      if (global.gc) global.gc();
+      return Promise.all([
+        moonpay.save('countries_allowed', data.allowed),
+        moonpay.save('countries_documents', data.documents)
       ]);
     }).catch(console.error);
     return intervalFunction;
@@ -65,5 +79,6 @@ module.exports = {
   cacheFees: cacheFees,
   cacheTicker: cacheTicker,
   cacheEthereumTokens: cacheEthereumTokens,
-  cacheMoonpayCurrencies: cacheMoonpayCurrencies
+  cacheMoonpayCurrencies: cacheMoonpayCurrencies,
+  cacheMoonpayCountries: cacheMoonpayCountries
 }

@@ -1,0 +1,26 @@
+{{#if isLoading}}
+  {{>loader}}
+{{else}}
+<div class="moonpay_verification">
+
+  <div class="_header">
+    <div class="_back" on-click="back">
+      <span class="_icon"></span> {{translate("Back")}}
+    </div>
+  </div>
+
+  {{#if customerVerifications.length}}
+    {{#each customerVerifications}}
+    <div class="_btn" on-click="showVerification(this.identifier)">
+      {{translate(getVerificationName(this.identifier))}}
+      {{#if this.completed}} — OK{{/if}}
+    </div>
+    {{/each}}
+  {{else}}
+    <div class="_message">
+      {{translate("No verification methods are currently available.")}}
+    </div>
+  {{/if}}
+
+</div>
+{{/if}}

@@ -1,0 +1,99 @@
+<div class="modal _cancel">
+    <div class="modal__content moonpay_modal moonpay_identity_verification">
+
+      <h3 class="_header">{{translate("Identity verification")}}</h3>
+
+      {{#if isInited}}
+
+      <div class="_step" class-active="step === 1">
+        <div class="_content">
+
+          <div class="_group">
+            <label class="_label" for="moonpay_identity_firtname">{{translate("First name")}}</label>
+            <input id="moonpay_identity_firtname" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{identity.firstName}}" />
+          </div>
+
+          <div class="_group">
+            <label class="_label" for="moonpay_identity_lastname">{{translate("Last name")}}</label>
+            <input id="moonpay_identity_lastname" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{identity.lastName}}" />
+          </div>
+
+          <div class="_group">
+            <label class="_label">{{translate("Date of birth")}}</label>
+            <div id="moonpay_identity_dateofbirth"></div>
+          </div>
+
+          <div class="_group">
+            <label class="_label">{{translate("Country")}}</label>
+            <div id="moonpay_identity_country"></div>
+          </div>
+
+          {{#if identity.address.country === 'USA'}}
+          <div class="_group">
+            <label class="_label" for="moonpay_identity_ssn">{{translate("Social security number")}}</label>
+            <input id="moonpay_identity_ssn" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{identity.socialSecurityNumber}}" />
+          </div>
+          {{/if}}
+
+        </div>
+
+        <div class="_confirm_btn_group">
+          <div class="_cancel">{{translate("Cancel")}}</div>
+          <div class="_confirm" on-click="continue">{{translate("Continue")}}</div>
+        </div>
+
+      </div>
+
+      <div class="_step" class-active="step === 2">
+        <div class="_content">
+
+          <div class="_group">
+            <label class="_label" for="moonpay_identity_address_street">{{translate("Address")}}</label>
+            <input id="moonpay_identity_address_street" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{identity.address.street}}" />
+          </div>
+
+          <div class="_group">
+            <label class="_label" for="moonpay_identity_address_substreet">{{translate("Address 2 (optional)")}}</label>
+            <input id="moonpay_identity_address_substreet" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{identity.address.subStreet}}" />
+          </div>
+
+          <div class="_group">
+            <label class="_label" for="moonpay_identity_address_town">{{translate("City")}}</label>
+            <input id="moonpay_identity_address_town" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{identity.address.town}}" />
+          </div>
+
+          {{#if showStates}}
+          <div class="_group">
+            <label class="_label">{{translate("State")}}</label>
+            <div id="moonpay_identity_address_state"></div>
+          </div>
+          {{/if}}
+
+          <div class="_group">
+            <label class="_label" for="moonpay_identity_address_postcode">{{translate("Post code")}}</label>
+            <input id="moonpay_identity_address_postcode" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{identity.address.postCode}}" />
+          </div>
+
+        </div>
+
+        <div class="_confirm_btn_group">
+          <div class="_back" on-click="back">{{translate("Back")}}</div>
+          {{#if isLoading}}
+            <div class="_loading">
+              <span class="_icon">
+                {{>svg_refresh}}
+              </span>
+            </div>
+          {{else}}
+            <div class="_confirm" on-click="submit">{{translate("Submit")}}</div>
+          {{/if}}
+        </div>
+
+      </div>
+
+      {{else}}
+      <div class="loader_message">{{translate("Loading...")}}</div>
+      {{/if}}
+
+    </div>
+  </div>

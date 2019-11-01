@@ -1,0 +1,11 @@
+.moonpay_verification {
+  ._btn {
+    @extend .csbtn;
+    margin-bottom: 20px;
+    @include breakpoint(portrait) {
+      font-size: 26px;
+      border-radius: 3px;
+      margin-bottom: 40px;
+    }
+  }
+}

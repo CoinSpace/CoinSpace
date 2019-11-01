@@ -38,6 +38,7 @@ db().then(function() {
     master.cacheTicker(1 * 60 * 1000) // 1 minute
     master.cacheEthereumTokens(1 * 60 * 1000) // 1 minute
     master.cacheMoonpayCurrencies(60 * 60 * 1000) // 1 hour
+    master.cacheMoonpayCountries(60 * 60 * 1000) // 1 hour
   }
 }).catch(function(error) {
   console.log('error', error);

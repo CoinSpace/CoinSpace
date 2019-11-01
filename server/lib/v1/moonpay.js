@@ -20,14 +20,15 @@ function getCurrenciesFromAPI() {
     var data = response.data;
     if (!data || !data.length) throw new Error('Bad moonpay response');
 
-    var coins = {any: {}, USA: {}};
+    var coins = {};
+    var coinsUSA = {};
     PRIORITY_SYMBOLS.forEach(function(symbol) {
       var coin = data.find(function(item) {
         return item.code === symbol.toLowerCase() && !item.isSuspended;
       });
       if (coin) {
-        coins.any[symbol] = true;
-        if (coin.isSupportedInUS) coins.USA[symbol] = true;
+        coins[symbol] = true;
+        if (coin.isSupportedInUS) coinsUSA[symbol] = true;
       }
     });
 
@@ -43,28 +44,55 @@ function getCurrenciesFromAPI() {
 
     return {
       coins: coins,
+      coins_usa: coinsUSA,
       fiat: fiat
     };
   });
 }
 
-function getCoinsFromCache(country) {
-  var collection = db().collection('moonpay');
-  return collection
-    .find({_id: 'coins'})
-    .limit(1)
-    .next().then(function(item) {
-      if (!item) return {};
-      delete item.id;
-      if (country === 'USA') return item.data.USA;
-      return item.data.any;
+function getCountriesFromAPI() {
+  return axios.get('https://api.moonpay.io/v3/countries').then(function(response) {
+    var data = response.data;
+    if (!data || !data.length) throw new Error('Bad moonpay response');
+
+    var documents = data.map(function(country) {
+      return {
+        code: country.alpha3,
+        name: country.name,
+        supportedDocuments: country.supportedDocuments
+      }
     });
+
+    var allowed = data.filter(function(country) {
+      return country.isAllowed;
+    }).map(function(country) {
+      var item = {};
+      item.code = country.alpha3;
+      item.name = country.name;
+      if (country.states) {
+        item.states = country.states.filter(function(state) {
+          return state.isAllowed;
+        }).map(function(state) {
+          return {
+            code: state.code,
+            name: state.name
+          };
+        });
+      }
+      return item;
+    });
+
+    return {
+      documents: documents,
+      allowed: allowed
+    };
+  });
 }
 
-function getFiatFromCache() {
+function getFromCache(id) {
   var collection = db().collection('moonpay');
   return collection
-    .find({_id: 'fiat'})
+    .find({_id: id})
     .limit(1)
     .next().then(function(item) {
       if (!item) return {};
@@ -76,6 +104,6 @@ function getFiatFromCache() {
 module.exports = {
   save: save,
   getCurrenciesFromAPI: getCurrenciesFromAPI,
-  getCoinsFromCache: getCoinsFromCache,
-  getFiatFromCache: getFiatFromCache
+  getCountriesFromAPI: getCountriesFromAPI,
+  getFromCache: getFromCache
 };

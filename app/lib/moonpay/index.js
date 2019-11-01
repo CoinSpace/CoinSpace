@@ -10,6 +10,8 @@ var hasHandledMobileSuccess = false;
 var apiKey = process.env.MOONPAY_API_KEY;
 var customer;
 var fiat;
+var countries = {documents: [], allowed: []};
+var ipCountry;
 
 emitter.on('handleOpenURL', function(url) {
   url = url || '';
@@ -21,10 +23,13 @@ emitter.on('handleOpenURL', function(url) {
 
 function init() {
   return request({url: 'https://api.moonpay.io/v3/ip_address', params: {apiKey: apiKey}}).then(function(data) {
-    if (data && data.isAllowed) return request({
-      url: urlRoot + 'moonpay/coins',
-      params: {country: data.alpha3}
-    });
+    if (data && data.isAllowed) {
+      ipCountry = data.alpha3;
+      return request({
+        url: urlRoot + 'moonpay/coins',
+        params: {country: data.alpha3}
+      });
+    }
   }).then(function(data) {
     if (!data) return;
     coins = data;
@@ -118,6 +123,35 @@ function cleanCustomer() {
   customer = undefined;
 }
 
+function updateCustomer(data) {
+  return request({
+    url: 'https://api.moonpay.io/v3/customers/me',
+    method: 'patch',
+    data: data,
+    headers: {
+      'Authorization': 'Bearer ' + getAccessToken()
+    },
+  });
+}
+
+function loadCountries(type) {
+  return request({
+    url: urlRoot + 'moonpay/countries',
+    params: {type: type}
+  }).then(function(data) {
+    if (!data) return;
+    countries[type] = data;
+  });
+}
+
+function getCountries(type) {
+  return countries[type];
+}
+
+function getIpCountry() {
+  return ipCountry;
+}
+
 module.exports = {
   init: init,
   loadFiat: loadFiat,
@@ -131,5 +165,9 @@ module.exports = {
   cleanAccessToken: cleanAccessToken,
   getCustomer: getCustomer,
   setCustomer: setCustomer,
-  cleanCustomer: cleanCustomer
+  cleanCustomer: cleanCustomer,
+  updateCustomer: updateCustomer,
+  loadCountries: loadCountries,
+  getCountries: getCountries,
+  getIpCountry: getIpCountry
 }

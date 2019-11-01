@@ -245,8 +245,9 @@ router.get('/changelly/transaction/:id', function(req, res) {
 });
 
 router.get('/moonpay/coins', function(req, res) {
-  var country = req.query.country;
-  moonpay.getCoinsFromCache(country).then(function(data) {
+  var id = 'coins';
+  if (req.query.country === 'USA') id += '_usa';
+  moonpay.getFromCache(id).then(function(data) {
     res.status(200).send(data);
   }).catch(function(err) {
     res.status(400).send(err);
@@ -254,7 +255,16 @@ router.get('/moonpay/coins', function(req, res) {
 });
 
 router.get('/moonpay/fiat', function(req, res) {
-  moonpay.getFiatFromCache().then(function(data) {
+  moonpay.getFromCache('fiat').then(function(data) {
+    res.status(200).send(data);
+  }).catch(function(err) {
+    res.status(400).send(err);
+  });
+});
+
+router.get('/moonpay/countries', function(req, res) {
+  if (!['documents', 'allowed'].includes(req.query.type)) return res.status(400).json({error: 'Bad request'});
+  moonpay.getFromCache('countries_' + req.query.type).then(function(data) {
     res.status(200).send(data);
   }).catch(function(err) {
     res.status(400).send(err);

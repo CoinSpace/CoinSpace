@@ -1,0 +1,153 @@
+.moonpay_modal {
+  padding: 0;
+  padding-top: 20px;
+  background-color: white;
+  min-width: 280px;
+  max-width: 450px;
+
+  @include breakpoint(portrait) {
+    width: 450px;
+    padding-top: 30px;
+  }
+
+  .loader_message {
+    padding: 20px;
+    color: $grey;
+    font-size: 21px;
+    text-align: center;
+    @include breakpoint(portrait) {
+      font-size: 24px;
+    }
+  }
+
+  ._header {
+    font-size: 21px;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $grey;
+
+    @include breakpoint(portrait) {
+      font-size: 24px;
+      padding-bottom: 20px;
+    }
+  }
+
+  ._step {
+    display: none;
+    &.active {
+      display: block;
+    }
+  }
+
+  ._content {
+    padding: 20px 20px 0;
+
+    ._group {
+      @include noselect;
+      @include breakpoint(portrait) {
+        font-size: 20px;
+      }
+      margin-bottom: 15px;
+      ._label {
+        cursor: pointer;
+        display: block;
+      }
+      ._input {
+        @extend .generic_box;
+        @extend .jigsaw-light;
+        margin-top: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 2px;
+        height: auto;
+        &:active, &:focus {
+          outline: 0;
+          border: 1px solid #999;
+        }
+        @include breakpoint(portrait) {
+          font-size: 26px;
+          border-radius: 3px;
+          padding-right: 58px;
+        }
+      }
+    }
+  }
+
+  ._confirm_btn_group {
+    padding: 0 20px 20px 20px;
+    background-color: white;
+    border-radius: 3px;
+    margin-top: 20px;
+    display: flex;
+
+    @include breakpoint(portrait) {
+      margin-top: 40px;
+    }
+
+    ._cancel, ._back {
+      @extend .csbtn-base;
+      margin-right: 5px;
+
+      color: darken($grey, 20%);
+      background-color: $grey;
+      box-shadow: 0 2px 0 0 darken($grey, 20%);
+
+      @include breakpoint(portrait) {
+        font-size: 24px;
+      }
+
+      &:hover {
+        color: darken($grey, 20%);
+      }
+    }
+
+    ._confirm {
+      @extend .csbtn-base;
+      background-color: $ethereal;
+      box-shadow: 0 2px 0 0 darken($ethereal, 10%);
+      margin-left: 5px;
+
+      @include breakpoint(portrait) {
+        font-size: 24px;
+      }
+      &._disabled {
+        background-color: $grey;
+        box-shadow: 0 2px 0 0 darken($grey, 10%);
+        color: darken($grey, 20%);
+        pointer-events: none;
+        &:hover {
+          color: darken($grey, 20%);
+        }
+      }
+    }
+
+    ._loading {
+      @extend .csbtn-base;
+      position: relative;
+      margin-left: 5px;
+      color: darken($grey, 20%);
+      background-color: $grey;
+      transform: translate(0px, 3px);
+      box-shadow: 0 0px 0 0;
+      &:hover {
+        color: darken($grey, 20%);
+      }
+      ._icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -15px;
+        margin-left: -15px;
+        width: 30px;
+        height: 30px;
+        display: block;
+        animation: infinite-spinning 1s linear infinite;
+        .svg-refresh {
+          fill: darken($grey, 20%);
+        }
+      }
+    }
+  }
+}
+
+@import "./identity-verification/_index";
