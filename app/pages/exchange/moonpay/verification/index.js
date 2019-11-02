@@ -3,6 +3,7 @@
 var Ractive = require('lib/ractive');
 var emitter = require('lib/emitter');
 var showIdentityVerification = require('widgets/modals/moonpay/identity-verification');
+var showPhoneNumberVerification = require('widgets/modals/moonpay/phone-number-verification');
 
 module.exports = function(el) {
   var ractive = new Ractive({
@@ -29,7 +30,8 @@ module.exports = function(el) {
       show: showIdentityVerification
     },
     phone_number_verification: {
-      name: 'Phone number'
+      name: 'Phone number',
+      show: showPhoneNumberVerification
     },
     document_verification: {
       name: 'Document'

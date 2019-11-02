@@ -83,9 +83,7 @@ function signIn(email, securityCode) {
 function limits() {
   return request({
     url: 'https://api.moonpay.io/v3/customers/me/limits',
-    headers: {
-      'Authorization': 'Bearer ' + getAccessToken()
-    }
+    headers: getAuthorizationHeaders()
   });
 }
 
@@ -93,14 +91,18 @@ function refreshToken() {
   return request({
     url: 'https://api.moonpay.io/v3/customers/refresh_token',
     params: {apiKey: apiKey},
-    headers: {
-      'Authorization': 'Bearer ' + getAccessToken()
-    }
+    headers: getAuthorizationHeaders()
   });
 }
 
 function getAccessToken() {
   return window.localStorage.getItem('_cs_moonpay_token');
+}
+
+function getAuthorizationHeaders() {
+  return {
+    'Authorization': 'Bearer ' + getAccessToken()
+  }
 }
 
 function setAccessToken(token) {
@@ -128,9 +130,18 @@ function updateCustomer(data) {
     url: 'https://api.moonpay.io/v3/customers/me',
     method: 'patch',
     data: data,
-    headers: {
-      'Authorization': 'Bearer ' + getAccessToken()
+    headers: getAuthorizationHeaders(),
+  });
+}
+
+function verifyPhoneNumber(code) {
+  return request({
+    url: 'https://api.moonpay.io/v3/customers/verify_phone_number',
+    method: 'post',
+    data: {
+      verificationCode: code
     },
+    headers: getAuthorizationHeaders(),
   });
 }
 
@@ -167,6 +178,7 @@ module.exports = {
   setCustomer: setCustomer,
   cleanCustomer: cleanCustomer,
   updateCustomer: updateCustomer,
+  verifyPhoneNumber: verifyPhoneNumber,
   loadCountries: loadCountries,
   getCountries: getCountries,
   getIpCountry: getIpCountry

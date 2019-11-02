@@ -122,7 +122,6 @@ function open() {
     if (_.isEmpty(data)) return ractive.fire('cancel');
 
     return moonpay.updateCustomer(data).then(function(data) {
-      ractive.set('isLoading', false);
       moonpay.setCustomer(data);
       ractive.fire('cancel');
     }).catch(function(err) {

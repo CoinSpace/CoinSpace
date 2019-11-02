@@ -228,7 +228,7 @@
   "Email": "Email",
   "Please enter a valid email address": "Please enter a valid email address",
   "Verification code": "Verification code",
-  "We've sent verification code to :email.": "We've sent verification code to %(email)s.",
+  "We've sent verification code to :destination.": "We've sent verification code to %(destination)s.",
   "Invalid verification code": "Invalid verification code",
   "You can purchase up to :dailyLimitRemaining today, and up to :monthlyLimitRemaining this month.": "You can purchase up to %(dailyLimitRemaining)s today, and up to %(monthlyLimitRemaining)s this month.",
   "To increase your limits you need to pass verification.": "To increase your limits you need to pass verification.",
@@ -255,5 +255,6 @@
   "City": "City",
   "State": "State",
   "Post code": "Post code",
-  "Please enter a valid info": "Please enter a valid info"
+  "Please enter a valid info": "Please enter a valid info",
+  "Code is invalid or expired. Please try again.": "Code is invalid or expired. Please try again."
 }

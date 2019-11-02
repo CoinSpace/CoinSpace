@@ -16,7 +16,7 @@
     </div>
   {{else}}
     <div class="_message">
-      {{translate("We've sent verification code to :email.", {email: email})}}
+      {{translate("We've sent verification code to :destination.", {destination: email})}}
     </div>
     <div class="_group">
       <label class="_label" for="moonpay_signin_code">{{translate("Verification code")}}</label>
