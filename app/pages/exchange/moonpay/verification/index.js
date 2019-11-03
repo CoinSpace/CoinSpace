@@ -4,6 +4,7 @@ var Ractive = require('lib/ractive');
 var emitter = require('lib/emitter');
 var showIdentityVerification = require('widgets/modals/moonpay/identity-verification');
 var showPhoneNumberVerification = require('widgets/modals/moonpay/phone-number-verification');
+var showFaceMatchVerification = require('widgets/modals/moonpay/face-match-verification');
 
 module.exports = function(el) {
   var ractive = new Ractive({
@@ -37,7 +38,8 @@ module.exports = function(el) {
       name: 'Document'
     },
     face_match_verification: {
-      name: 'Face match'
+      name: 'Face match',
+      show: showFaceMatchVerification
     }
   }
 

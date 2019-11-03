@@ -1,10 +1,8 @@
 <div class='widget-dropdown'>
-  <div class="wd_dropdown">
-    <span class="wd_value">{{getLabel(selectedOption)}}</span>
-    <select value="{{selectedOption}}" on-change="on-change">
-      {{#each options}}
-      <option value="{{this.code}}">{{this.name}}</option>
-      {{/each}}
-    </select>
-  </div>
+  <span class="wd_value">{{getLabel(selectedOption)}}</span>
+  <select value="{{selectedOption}}" on-change="on-change">
+    {{#each options}}
+    <option value="{{this.code}}">{{this.name}}</option>
+    {{/each}}
+  </select>
 </div>

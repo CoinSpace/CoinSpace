@@ -1,0 +1,13 @@
+<div class='widget-filepicker'>
+  {{#if filename}}
+  <span class="wd_value">{{filename}}</span>
+  {{else}}
+  <span class="wd_placeholder">{{translate("Select file...")}}</span>
+  {{/if}}
+  <input id="{{id}}" class="wd_input" type="file" on-change="on-change" accept="image/jpeg, image/png, application/pdf">
+  {{#filename}}
+    <div class="close__input" on-click="clear">
+      <span class="_icon">{{> svg_close}}</span>
+    </div>
+  {{/filename}}
+</div>

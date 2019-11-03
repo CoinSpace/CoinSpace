@@ -163,6 +163,46 @@ function getIpCountry() {
   return ipCountry;
 }
 
+function getFiles() {
+  return request({
+    url: 'https://api.moonpay.io/v3/files',
+    headers: getAuthorizationHeaders()
+  });
+}
+
+function uploadFile(file, type, country, side) {
+  var key;
+  return request({
+    url: 'https://api.moonpay.io/v3/files/s3_signed_request',
+    params: {
+      apiKey: apiKey,
+      fileType: file.type
+    }
+  }).then(function(data) {
+    key = data.key;
+    return request({
+      url: data.signedRequest,
+      method: 'put',
+      data: file,
+      headers: {
+        'Content-Type': file.type
+      }
+    });
+  }).then(function() {
+    return request({
+      url: 'https://api.moonpay.io/v3/files',
+      method: 'post',
+      data: {
+        key: key,
+        type: type,
+        country: country,
+        side: side
+      },
+      headers: getAuthorizationHeaders()
+    })
+  });
+}
+
 module.exports = {
   init: init,
   loadFiat: loadFiat,
@@ -181,5 +221,7 @@ module.exports = {
   verifyPhoneNumber: verifyPhoneNumber,
   loadCountries: loadCountries,
   getCountries: getCountries,
-  getIpCountry: getIpCountry
+  getIpCountry: getIpCountry,
+  getFiles: getFiles,
+  uploadFile: uploadFile
 }

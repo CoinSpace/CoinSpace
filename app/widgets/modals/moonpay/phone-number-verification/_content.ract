@@ -11,7 +11,7 @@
           </div>
         </div>
         <div class="_confirm_btn_group">
-          <div class="_cancel" on-click="back">{{translate("Back")}}</div>
+          <div class="_cancel">{{translate("Back")}}</div>
           {{#if isLoading}}
             <div class="_loading">
               <span class="_icon">

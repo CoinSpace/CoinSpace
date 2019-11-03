@@ -256,5 +256,8 @@
   "State": "State",
   "Post code": "Post code",
   "Please enter a valid info": "Please enter a valid info",
-  "Code is invalid or expired. Please try again.": "Code is invalid or expired. Please try again."
+  "Code is invalid or expired. Please try again.": "Code is invalid or expired. Please try again.",
+  "Selfie": "Selfie",
+  "Select file...": "Select file...",
+  "Upload failed. Please try again later.": "Upload failed. Please try again later."
 }
