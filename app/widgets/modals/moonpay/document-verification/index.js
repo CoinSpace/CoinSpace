@@ -155,6 +155,4 @@ function open() {
   return ractive;
 }
 
-window.qwe = open;
-
 module.exports = open;
