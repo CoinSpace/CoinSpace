@@ -67,7 +67,7 @@ function cacheMoonpayCountries(interval) {
       if (global.gc) global.gc();
       return Promise.all([
         moonpay.save('countries_allowed', data.allowed),
-        moonpay.save('countries_documents', data.documents)
+        moonpay.save('countries_document', data.document)
       ]);
     }).catch(console.error);
     return intervalFunction;

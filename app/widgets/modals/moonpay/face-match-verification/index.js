@@ -28,7 +28,7 @@ function open() {
     ractive.set('isInited', true);
     filePicker = initFilePicker(ractive.find('#moonpay_selfie_widget'), {
       id: 'moonpay_selfie',
-      filename: file ? file.type : ''
+      filename: file ? 'selfie' : ''
     });
   }).catch(console.error);
 

@@ -10,7 +10,7 @@ var hasHandledMobileSuccess = false;
 var apiKey = process.env.MOONPAY_API_KEY;
 var customer;
 var fiat;
-var countries = {documents: [], allowed: []};
+var countries = {document: [], allowed: []};
 var ipCountry;
 
 emitter.on('handleOpenURL', function(url) {

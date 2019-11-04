@@ -259,5 +259,12 @@
   "Code is invalid or expired. Please try again.": "Code is invalid or expired. Please try again.",
   "Selfie": "Selfie",
   "Select file...": "Select file...",
-  "Upload failed. Please try again later.": "Upload failed. Please try again later."
+  "Upload failed. Please try again later.": "Upload failed. Please try again later.",
+  "Country of issuance": "Country of issuance",
+  "Document type": "Document type",
+  "Passport": "Passport",
+  "National identity card": "National identity card",
+  "Driving licence": "Driving licence",
+  "Front side": "Front side",
+  "Back side": "Back side"
 }

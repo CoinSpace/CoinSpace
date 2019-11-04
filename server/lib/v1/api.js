@@ -263,7 +263,7 @@ router.get('/moonpay/fiat', function(req, res) {
 });
 
 router.get('/moonpay/countries', function(req, res) {
-  if (!['documents', 'allowed'].includes(req.query.type)) return res.status(400).json({error: 'Bad request'});
+  if (!['document', 'allowed'].includes(req.query.type)) return res.status(400).json({error: 'Bad request'});
   moonpay.getFromCache('countries_' + req.query.type).then(function(data) {
     res.status(200).send(data);
   }).catch(function(err) {

@@ -55,7 +55,9 @@ function getCountriesFromAPI() {
     var data = response.data;
     if (!data || !data.length) throw new Error('Bad moonpay response');
 
-    var documents = data.map(function(country) {
+    var document = data.filter(function(country) {
+      return country.supportedDocuments && country.supportedDocuments.length > 0;
+    }).map(function(country) {
       return {
         code: country.alpha3,
         name: country.name,
@@ -83,7 +85,7 @@ function getCountriesFromAPI() {
     });
 
     return {
-      documents: documents,
+      document: document,
       allowed: allowed
     };
   });
