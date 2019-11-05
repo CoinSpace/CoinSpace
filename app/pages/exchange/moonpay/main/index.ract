@@ -19,7 +19,7 @@
     {{/if}}
   </div>
 
-  <div class="_link">{{translate("Payment methods")}}</div>
+  <div class="_link" on-click="payment-methods">{{translate("Payment methods")}}</div>
   <div class="_link" on-click="verification">{{translate("Verification")}}</div>
   <div class="_link">{{translate("History")}}</div>
   <div class="_link _dropdown">

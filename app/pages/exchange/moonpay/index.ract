@@ -3,5 +3,6 @@
   <div id="moonpay_auth" class="step"></div>
   <div id="moonpay_main" class="step"></div>
   <div id="moonpay_verification" class="step"></div>
+  <div id="moonpay_payment_methods" class="step"></div>
 
 </div>

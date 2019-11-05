@@ -5,6 +5,7 @@ var emitter = require('lib/emitter');
 var initAuth = require('./auth');
 var initMain = require('./main');
 var initVerification = require('./verification');
+var initPaymentMethods = require('./payment-methods');
 
 module.exports = function(el) {
   var ractive = new Ractive({
@@ -19,6 +20,7 @@ module.exports = function(el) {
     auth: initAuth(ractive.find('#moonpay_auth')),
     main: initMain(ractive.find('#moonpay_main')),
     verification: initVerification(ractive.find('#moonpay_verification')),
+    paymentMethods: initPaymentMethods(ractive.find('#moonpay_payment_methods'))
   };
   var currentStep = steps.auth;
 

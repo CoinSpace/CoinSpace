@@ -74,6 +74,10 @@ module.exports = function(el) {
     });
   });
 
+  ractive.on('payment-methods', function() {
+    emitter.emit('change-moonpay-step', 'paymentMethods');
+  });
+
   ractive.on('logout', function() {
     moonpay.cleanAccessToken();
     moonpay.cleanCustomer();

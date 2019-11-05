@@ -1,0 +1,23 @@
+{{#if isLoading}}
+  {{>loader}}
+{{else}}
+<div class="moonpay_payment_methods">
+
+  <div class="_header">
+    <div class="_back" on-click="back">
+      <span class="_icon"></span> {{translate("Back")}}
+    </div>
+  </div>
+
+  <div class="_message">
+    {{translate("No payment methods.")}}
+  </div>
+
+  <div class="_confirm_btn_group">
+    <div on-click="add" class="_btn">
+      {{translate("Add Credit Card")}}
+    </div>
+  </div>
+
+</div>
+{{/if}}
