@@ -11,6 +11,20 @@
     @include breakpoint(portrait) {
       font-size: 20px;
     }
+    &._dropdown {
+      display: inline-block;
+      position: relative;
+      margin-bottom: 0;
+      select {
+        position: absolute;
+        opacity: 0;
+        left: 0;
+        top: -5px;
+        @include breakpoint(portrait) {
+          top: 0;
+        }
+      }
+    }
   }
 
   ._logout_link {

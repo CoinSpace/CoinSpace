@@ -50,6 +50,17 @@ function getFiatById(id, field) {
   return fiat[id];
 }
 
+function getFiatList() {
+  if (!fiat) return [];
+  return Object.keys(fiat).map(function(key) {
+    var item = fiat[key];
+    item.id = key;
+    return item;
+  }).sort(function(a, b) {
+    return a.symbol > b.symbol ? 1 : -1;
+  });
+}
+
 function isSupported(symbol) {
   return !!coins[symbol];
 }
@@ -207,6 +218,7 @@ module.exports = {
   init: init,
   loadFiat: loadFiat,
   getFiatById: getFiatById,
+  getFiatList: getFiatList,
   isSupported: isSupported,
   isLogged: isLogged,
   signIn: signIn,

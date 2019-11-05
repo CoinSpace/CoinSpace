@@ -14,7 +14,11 @@ module.exports = function(el) {
       dailyLimitRemaining: 0,
       monthlyLimitRemaining: 0,
       limitIncreaseEligible: false,
-      defaultCurrency: ''
+      currencies: [],
+      defaultCurrency: '',
+      defaultCurrencyLabel: function() {
+        return moonpay.getFiatById(ractive.get('defaultCurrency'), 'symbol');
+      },
     },
     partials: {
       loader: require('../loader.ract'),
@@ -22,26 +26,41 @@ module.exports = function(el) {
   });
 
   var verificationLevels = [];
+  var limit;
 
-  ractive.on('before-show', function(context) {
+  ractive.on('before-show', function() {
     ractive.set('isLoading', true);
     return Promise.all([
       moonpay.limits(),
       moonpay.loadFiat()
     ]).then(function(results) {
       ractive.set('isLoading', false);
-      var limit = results[0].limits.find(function(item) {
+      limit = results[0].limits.find(function(item) {
         return item.type === 'buy_credit_debit_card';
       });
       var fiatSign = moonpay.getFiatById(moonpay.getCustomer().defaultCurrencyId, 'sign');
       ractive.set('dailyLimitRemaining', fiatSign + limit.dailyLimitRemaining);
       ractive.set('monthlyLimitRemaining', fiatSign + limit.monthlyLimitRemaining);
       ractive.set('limitIncreaseEligible', results[0].limitIncreaseEligible);
-      ractive.set('defaultCurrency', moonpay.getFiatById(moonpay.getCustomer().defaultCurrencyId, 'symbol'))
+      ractive.set('currencies', moonpay.getFiatList());
+      ractive.set('defaultCurrency', moonpay.getCustomer().defaultCurrencyId);
       verificationLevels = results[0].verificationLevels;
     }).catch(function(err) {
       ractive.set('isLoading', false);
       console.error(err);
+    });
+  });
+
+  ractive.on('change-currency', function() {
+    var id = ractive.get('defaultCurrency');
+    ractive.set('isLoading', true);
+    return moonpay.updateCustomer({defaultCurrencyId: id}).then(function() {
+      moonpay.getCustomer().defaultCurrencyId = id;
+      ractive.show();
+    }).catch(function(err) {
+      console.error(err);
+      ractive.set('isLoading', false);
+      ractive.set('defaultCurrency', moonpay.getCustomer().defaultCurrencyId);
     });
   });
 
