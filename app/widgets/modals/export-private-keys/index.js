@@ -3,12 +3,8 @@
 var Ractive = require('widgets/modals/base');
 var getWallet = require('lib/wallet').getWallet;
 var showInfo = require('widgets/modals/flash').showInfo;
-var isOpen = false;
 
 function open() {
-  if (isOpen) return;
-  isOpen = true;
-
   var ractive = new Ractive({
     el: document.getElementById('flash-modal'),
     partials: {
@@ -17,10 +13,7 @@ function open() {
     data: {
       isShown: false,
       privateKeys: '',
-      isPhonegap: process.env.BUILD_TYPE === 'phonegap',
-      onDismiss: function() {
-        isOpen = false;
-      },
+      isPhonegap: process.env.BUILD_TYPE === 'phonegap'
     }
   });
 

@@ -2,22 +2,15 @@
 
 var db = require('lib/db');
 var Ractive = require('widgets/modals/base');
-var isOpen = false;
 
 function open(callback) {
-  if (isOpen) return;
-  isOpen = true;
-
   var ractive = new Ractive({
     el: document.getElementById('flash-modal'),
     partials: {
       content: require('./content.ract')
     },
     data: {
-      termsChecked: false,
-      onDismiss: function() {
-        isOpen = false;
-      },
+      termsChecked: false
     }
   });
 
