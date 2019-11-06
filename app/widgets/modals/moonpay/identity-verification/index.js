@@ -104,6 +104,10 @@ function open() {
     identity.address.country = countryPicker.getValue();
     identity.address.state = statePicker && statePicker.getValue();
 
+    if (!identity.firstName || !identity.lastName || !identity.address.street || !identity.address.town || !identity.address.postCode) {
+      return handleError(new Error('Please enter a valid info'));
+    }
+
     var data = {};
     Object.keys(identity).forEach(function(key) {
       if (key === 'address') {
@@ -116,9 +120,6 @@ function open() {
       }
     });
 
-    if (data.address && (!data.address.street || !data.address.town || !data.address.postCode)) {
-      return handleError(new Error('Please enter a valid info'));
-    }
     if (_.isEmpty(data)) return ractive.fire('cancel');
 
     return moonpay.updateCustomer(data).then(function(data) {

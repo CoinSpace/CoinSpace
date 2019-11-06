@@ -1,0 +1,109 @@
+<div class="modal _cancel">
+  <div class="modal__content moonpay_modal moonpay_add_credit_card">
+
+    <h3 class="_header">{{translate("Add Credit Card")}}</h3>
+
+    {{#if isInited}}
+    <div class="_step" class-active="step === 1">
+      <div class="_content">
+
+        <div class="_same_address" on-click="toggle-same-address">
+          <div class="_checkbox">
+            {{#sameAddressChecked}}
+              <div class="_check"></div>
+            {{/sameAddressChecked}}
+          </div>
+          <p class="_checktext">{{translate("Use billing address the same that I have.")}}</p>
+        </div>
+
+        <fieldset {{#sameAddressChecked}}disabled{{/sameAddressChecked}}>
+          <div class="_group">
+            <label class="_label" for="moonpay_add_credit_card_street">{{translate("Address")}}</label>
+            <input id="moonpay_add_credit_card_street" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{billingAddress.street}}" />
+          </div>
+
+          <div class="_group">
+            <label class="_label" for="moonpay_add_credit_card_substreet">{{translate("Address 2 (optional)")}}</label>
+            <input id="moonpay_add_credit_card_substreet" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{billingAddress.subStreet}}" />
+          </div>
+
+          <div class="_group">
+            <label class="_label" for="moonpay_add_credit_card_town">{{translate("City")}}</label>
+            <input id="moonpay_add_credit_card_town" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{billingAddress.town}}" />
+          </div>
+
+          <div class="_group">
+            <label class="_label">{{translate("Country")}}</label>
+            <div id="moonpay_add_credit_card_country"></div>
+          </div>
+
+          {{#if showStates}}
+          <div class="_group">
+            <label class="_label">{{translate("State")}}</label>
+            <div id="moonpay_add_credit_card_state"></div>
+          </div>
+          {{/if}}
+
+          <div class="_group">
+            <label class="_label" for="moonpay_add_credit_card_postcode">{{translate("Post code")}}</label>
+            <input id="moonpay_add_credit_card_postcode" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{billingAddress.postCode}}" />
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="_confirm_btn_group">
+        <div class="_cancel">{{translate("Cancel")}}</div>
+        <div class="_confirm" on-click="continue">{{translate("Continue")}}</div>
+      </div>
+
+    </div>
+
+
+    <div class="_step" class-active="step === 2 && !isCcFormInited">
+
+    </div>
+
+    <div class="_step" class-active="step === 2">
+      <div class="_step_container" class-active="isCcFormInited">
+        <div class="_content">
+          <form class="cc_form">
+            <div class="js-cc-number _group">
+              <label class="_label" on-click="focus-cc-field" data-field="cc-number">{{translate("Card number")}}</label>
+              <div class="_field"></div>
+            </div>
+
+            <div class="js-cc-exp _group _exp">
+              <label class="_label" on-click="focus-cc-field" data-field="cc-exp">{{translate("Expiry date")}}</label>
+              <div class="_field"></div>
+            </div>
+
+            <div class="js-cc-cvc _group _cvc">
+              <label class="_label" on-click="focus-cc-field" data-field="cc-cvc">{{translate("CVC")}}</label>
+              <div class="_field"></div>
+            </div>
+          </form>
+        </div>
+        <div class="_confirm_btn_group">
+          <div class="_back" on-click="back">{{translate("Back")}}</div>
+          {{#if isLoading}}
+            <div class="_loading">
+              <span class="_icon">
+                {{>svg_refresh}}
+              </span>
+            </div>
+          {{else}}
+          <div class="_confirm" on-click="add">{{translate("Add")}}</div>
+          {{/if}}
+        </div>
+      </div>
+      <div class="_step_container" class-active="!isCcFormInited">
+        <div class="loader_message">{{translate("Loading...")}}</div>
+      </div>
+    </div>
+
+    {{else}}
+      <div class="loader_message">{{translate("Loading...")}}</div>
+    {{/if}}
+
+  </div>
+</div>

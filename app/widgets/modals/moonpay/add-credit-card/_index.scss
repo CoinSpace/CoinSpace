@@ -1,0 +1,85 @@
+.moonpay_add_credit_card {
+
+  fieldset[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  ._same_address {
+    display: flex;
+    padding-top: 20px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    @include clickbtn;
+
+    @include breakpoint(portrait) {
+      font-size: 20px;
+    }
+
+    ._checkbox {
+      width: 30px;
+      height: 30px;
+      background-color: #f2f2f2;
+      position: relative;
+      border-radius: 3px;
+      outline: 1px solid rgba(133, 141, 240, 0);
+      box-shadow: inset 0px 1px 3px 0px rgba(0,0,0,0.25);
+    }
+
+    ._check {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      top: 50%;
+      left: 50%;
+      margin-top: -9px;
+      margin-left: -9px;
+      background-color: #575757;
+    }
+
+    ._checktext {
+      flex: 1;
+      margin-left: 10px;
+      text-align: left;
+      @extend .jigsaw-regular;
+      a {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  ._step_container {
+    display: none;
+    &.active {
+      display: block;
+    }
+  }
+
+  .cc_form {
+    ._group {
+      ._field {
+        height: 46px;
+        width: 100%;
+        @extend .generic_box;
+        border-radius: 2px;
+        margin-top: 5px;
+        iframe {
+          height: 100%;
+          width: 100%;
+        }
+        @include breakpoint(portrait) {
+          height: 61px;
+        }
+      }
+      &._exp {
+        width: 105px;
+        display: inline-block;
+        margin-right: 16px;
+      }
+      &._cvc {
+        width: 65px;
+        display: inline-block;
+      }
+    }
+  }
+}

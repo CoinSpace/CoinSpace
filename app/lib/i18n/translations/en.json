@@ -268,5 +268,9 @@
   "Front side": "Front side",
   "Back side": "Back side",
   "No payment methods.": "No payment methods.",
-  "Add Credit Card": "Add Credit Card"
+  "Add Credit Card": "Add Credit Card",
+  "Use billing address the same that I have.": "Use billing address the same that I have.",
+  "Card number": "Card number",
+  "Expiry date": "Expiry date",
+  "CVC": "CVC"
 }

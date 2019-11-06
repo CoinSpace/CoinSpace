@@ -3,6 +3,7 @@
 var Ractive = require('lib/ractive');
 var emitter = require('lib/emitter');
 var moonpay = require('lib/moonpay');
+var showAddCreditCard = require('widgets/modals/moonpay/add-credit-card');
 
 module.exports = function(el) {
   var ractive = new Ractive({
@@ -26,7 +27,7 @@ module.exports = function(el) {
   });
 
   ractive.on('add', function() {
-
+    showAddCreditCard();
   });
 
   return ractive;
