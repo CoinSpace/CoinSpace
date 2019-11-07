@@ -232,6 +232,14 @@ function getCards() {
   });
 }
 
+function deleteCard(id) {
+  return request({
+    url: 'https://api.moonpay.io/v3/cards/' + id,
+    method: 'delete',
+    headers: getAuthorizationHeaders()
+  });
+}
+
 module.exports = {
   init: init,
   loadFiat: loadFiat,
@@ -255,5 +263,6 @@ module.exports = {
   getFiles: getFiles,
   uploadFile: uploadFile,
   createCard: createCard,
-  getCards: getCards
+  getCards: getCards,
+  deleteCard: deleteCard
 }

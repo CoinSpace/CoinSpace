@@ -15,6 +15,7 @@ function open(name, remove) {
   });
 
   ractive.on('remove', function() {
+    ractive.set('removing', true);
     remove(this);
   });
 

@@ -1,2 +1,14 @@
 .moonpay_payment_methods {
+  ._group {
+    ._input {
+      position: relative;
+    }
+    .close__input {
+      ._icon {
+        .svg-close {
+          fill: #969594;
+        }
+      }
+    }
+  }
 }

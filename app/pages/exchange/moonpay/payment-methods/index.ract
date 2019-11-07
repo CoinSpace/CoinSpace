@@ -9,9 +9,21 @@
     </div>
   </div>
 
-  <div class="_message">
-    {{translate("No payment methods.")}}
+  {{#if cards.length}}
+  <div class="_group">
+    {{#each cards}}
+    <div class="_input">{{label}}
+      <div class="close__input" on-click="deleteCard(this)">
+        <span class="_icon">{{> svg_close}}</span>
+      </div>
+    </div>
+    {{/each}}
   </div>
+  {{else}}
+    <div class="_message">
+      {{translate("No payment methods.")}}
+    </div>
+  {{/if}}
 
   <div class="_confirm_btn_group">
     <div on-click="add" class="_btn">
