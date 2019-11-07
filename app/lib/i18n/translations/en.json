@@ -273,5 +273,6 @@
   "Card number": "Card number",
   "Expiry date": "Expiry date",
   "CVC": "CVC",
-  "Payment authorization declined": "Payment authorization declined"
+  "Payment authorization declined": "Payment authorization declined",
+  "Identity verification must be passed before saving card": "Identity verification must be passed before saving card"
 }

@@ -90,7 +90,9 @@ function open(data) {
         country: customer.address.country,
       });
     } else {
-      ractive.set('billingAddress', {});
+      ractive.set('billingAddress', {
+        country: moonpay.getIpCountry()
+      });
     }
     initPickers();
   });
@@ -172,6 +174,9 @@ function open(data) {
         ractive.set('onDismiss', data && data.onSuccessDismiss);
         ractive.fire('cancel');
       }).catch(function(err) {
+        if (/Basic customer information must be/.test(err.message)) {
+          return handleError(new Error('Identity verification must be passed before saving card'));
+        }
         console.error(err);
         return handleError(new Error('Payment authorization declined'));
       });
