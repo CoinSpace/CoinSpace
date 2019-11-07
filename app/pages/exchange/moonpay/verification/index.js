@@ -12,7 +12,6 @@ module.exports = function(el) {
     el: el,
     template: require('./index.ract'),
     data: {
-      isLoading: true,
       customerVerifications: [],
       getVerificationName: function(key) {
         return verifications[key].name;
@@ -46,7 +45,6 @@ module.exports = function(el) {
   }
 
   ractive.on('before-show', function(context) {
-    ractive.set('isLoading', false);
     var customerVerifications = [];
     context.verificationLevels.forEach(function(level) {
       level.requirements.forEach(function(item) {

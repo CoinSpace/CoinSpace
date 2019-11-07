@@ -214,6 +214,24 @@ function uploadFile(file, type, country, side) {
   });
 }
 
+function createCard(tokenId) {
+  return request({
+    url: 'https://api.moonpay.io/v3/cards',
+    method: 'post',
+    data: {
+      tokenId: tokenId
+    },
+    headers: getAuthorizationHeaders()
+  })
+}
+
+function getCards() {
+  return request({
+    url: 'https://api.moonpay.io/v3/cards',
+    headers: getAuthorizationHeaders()
+  });
+}
+
 module.exports = {
   init: init,
   loadFiat: loadFiat,
@@ -235,5 +253,7 @@ module.exports = {
   getCountries: getCountries,
   getIpCountry: getIpCountry,
   getFiles: getFiles,
-  uploadFile: uploadFile
+  uploadFile: uploadFile,
+  createCard: createCard,
+  getCards: getCards
 }

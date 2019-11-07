@@ -18,8 +18,14 @@ module.exports = function(el) {
   });
 
   ractive.on('before-show', function() {
-    // ractive.set('isLoading', true);
-    ractive.set('isLoading', false);
+    ractive.set('isLoading', true);
+    return moonpay.getCards().then(function(cards) {
+      ractive.set('isLoading', false);
+      console.log('cards', cards);
+    }).catch(function(err) {
+      ractive.set('isLoading', false);
+      console.error(err);
+    });
   });
 
   ractive.on('back', function() {
@@ -27,7 +33,9 @@ module.exports = function(el) {
   });
 
   ractive.on('add', function() {
-    showAddCreditCard();
+    showAddCreditCard({onSuccessDismiss: function() {
+      ractive.show();
+    }});
   });
 
   return ractive;

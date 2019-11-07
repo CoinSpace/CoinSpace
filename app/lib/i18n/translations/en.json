@@ -272,5 +272,6 @@
   "Use billing address the same that I have.": "Use billing address the same that I have.",
   "Card number": "Card number",
   "Expiry date": "Expiry date",
-  "CVC": "CVC"
+  "CVC": "CVC",
+  "Payment authorization declined": "Payment authorization declined"
 }

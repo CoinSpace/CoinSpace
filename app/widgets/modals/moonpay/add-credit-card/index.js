@@ -8,7 +8,7 @@ var initDropdown = require('widgets/dropdown');
 
 var ractive;
 
-function open() {
+function open(data) {
 
   var customer = moonpay.getCustomer();
   if (!mpSdk.customerId) {
@@ -168,7 +168,13 @@ function open() {
   ractive.on('add', function() {
     ractive.set('isLoading', true);
     ccForm.submit(billingAddress, function(status, response) {
-      ractive.fire('cancel');
+      moonpay.createCard(response.id).then(function() {
+        ractive.set('onDismiss', data && data.onSuccessDismiss);
+        ractive.fire('cancel');
+      }).catch(function(err) {
+        console.error(err);
+        return handleError(new Error('Payment authorization declined'));
+      });
     }, function(err) {
       console.error(err);
       return handleError(new Error('Please enter a valid info'));
