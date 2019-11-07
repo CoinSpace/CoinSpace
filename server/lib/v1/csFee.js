@@ -44,7 +44,8 @@ function get(network) {
       minFee: minFee,
       maxFee: maxFee,
       fee: results[1].fee,
-      addresses: results[1].addresses
+      addresses: results[1].addresses,
+      whitelist: results[1].whitelist
     }
   });
 }
