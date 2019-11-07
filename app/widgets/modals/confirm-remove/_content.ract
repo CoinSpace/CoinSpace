@@ -1,5 +1,5 @@
 <div class="modal _cancel">
-  <div class="modal__content confirm__remove_token">
+  <div class="modal__content confirm__remove">
 
     <h3 class="_header">{{translate("Remove")}} {{name}}</h3>
 

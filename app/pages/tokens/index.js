@@ -1,7 +1,7 @@
 'use strict';
 
 var Ractive = require('lib/ractive');
-var showRemoveConfirmation = require('widgets/modals/confirm-remove-token');
+var showRemoveConfirmation = require('widgets/modals/confirm-remove');
 var addEthereumToken = require('widgets/modals/add-ethereum-token');
 var setToken = require('lib/token').setToken;
 var getToken = require('lib/token').getToken;
@@ -92,9 +92,22 @@ module.exports = function(el) {
   }
 
   function removeEthereumToken(token) {
-    var index = ractive.get('ethereumTokens').indexOf(token);
-    showRemoveConfirmation(token, walletTokens, function() {
-      ractive.splice('ethereumTokens', index, 1);
+    var rindex = ractive.get('ethereumTokens').indexOf(token);
+    showRemoveConfirmation(token.name, function(modal) {
+      var index = walletTokens.indexOf(token);
+      if (index === -1) return modal.fire('cancel');
+
+      walletTokens.splice(index, 1);
+
+      db.set('walletTokens', walletTokens).then(function() {
+        modal.set('onDismiss', function() {
+          ractive.splice('ethereumTokens', rindex, 1);
+        });
+        modal.fire('cancel');
+      }).catch(function(err) {
+        console.error(err);
+        modal.fire('cancel');
+      });
     });
     return false;
   }
