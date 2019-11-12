@@ -274,5 +274,7 @@
   "Expiry date": "Expiry date",
   "CVC": "CVC",
   "Payment authorization declined": "Payment authorization declined",
-  "Identity verification must be passed before saving card": "Identity verification must be passed before saving card"
+  "Identity verification must be passed before saving card": "Identity verification must be passed before saving card",
+  "Payment method": "Payment method",
+  "If the rate changes by more than +/-&nbsp;2.5%% you will be asked to reconfirm the transaction via email.": "If the rate changes by more than +/-&nbsp;2.5%% you will be asked to reconfirm the transaction via email."
 }

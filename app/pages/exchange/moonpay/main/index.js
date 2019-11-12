@@ -10,7 +10,6 @@ module.exports = function(el) {
     template: require('./index.ract'),
     data: {
       isLoading: true,
-      isLoadingBuy: false,
       dailyLimitRemaining: 0,
       monthlyLimitRemaining: 0,
       limitIncreaseEligible: false,
@@ -76,6 +75,14 @@ module.exports = function(el) {
 
   ractive.on('payment-methods', function() {
     emitter.emit('change-moonpay-step', 'paymentMethods');
+  });
+
+  ractive.on('buy', function() {
+    var fiatSymbol = moonpay.getFiatById(moonpay.getCustomer().defaultCurrencyId, 'symbol');
+    emitter.emit('change-moonpay-step', 'purchase', {
+      dailyLimitRemaining: limit.dailyLimitRemaining,
+      fiatSymbol: fiatSymbol
+    });
   });
 
   ractive.on('logout', function() {

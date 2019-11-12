@@ -1,0 +1,77 @@
+{{#if isLoading}}
+  {{>loader}}
+{{else}}
+<div class="moonpay_purchase">
+
+  <div class="_header">
+    <div class="_back" on-click="back">
+      <span class="_icon"></span> {{translate("Back")}}
+    </div>
+  </div>
+
+  <div class="_group">
+    <label class="_label" for="moonpay_purchase_fiat">Amount</label>
+    <span on-click="set-max-amount" class="_max_btn">({{translate("max.")}} {{dailyLimitRemaining}} {{fiatSymbol}})</span>
+    <div class="_input-group _fiat">
+      {{#if isLoadingFiat}}
+      <input class="_input" id="moonpay_purchase_fiat" type="text" value="..." readonly>
+      {{else}}
+      <input class="_input" id="moonpay_purchase_fiat" value="20" type="number" min="20" step="any" on-keyup="fiat-to-crypto" on-focus="focusAmountInput" on-blur="blurAmountInput">
+      {{/if}}
+      <span class="_symbol">{{fiatSymbol}}</span>
+    </div>
+    <div class="_input-group">
+      {{#if isLoadingCrypto}}
+      <input class="_input" id="moonpay_purchase_crypto" type="text" value="..." readonly>
+      {{else}}
+      <input class="_input" id="moonpay_purchase_crypto" type="number" min="0" step="any" on-keyup="crypto-to-fiat" on-focus="focusAmountInput" on-blur="blurAmountInput">
+      {{/if}}
+      <span class="_symbol">{{toSymbol}}</span>
+    </div>
+  </div>
+
+  <div class="_group _exchange_rate">
+    <label class="_label">{{translate("Exchange rate")}}</label>
+    <span class="_help" on-click="help-rate">
+      {{>svg_help}}
+    </span>
+    <div class="_message">
+      {{#if isFirstEstimate}}
+        {{translate("Loading...")}}
+      {{else}}
+        {{#if rate === '0'}} 0 {{else}} 1 {{/if}}
+        {{toSymbol}} ≈ {{rate}} {{fiatSymbol}}
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="_group">
+    <label class="_label">{{translate("Payment method")}}</label><br>
+    <div class="_dropdown">
+      {{#if cards.length}}
+      <div class="_value">{{selectedCard.label}}</div>
+      <select value="{{selectedCard}}" on-change="change-card">
+        {{#each cards}}
+        <option value="{{this}}">{{this.label}}</option>
+        {{/each}}
+      </select>
+      {{else}}
+      <div class="_value" on-click="add-credit-card">{{translate("Add Credit Card")}}</div>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="_confirm_btn_group">
+    {{#if (isLoadingFiat || isLoadingCrypto)}}
+      <div class="_loading">
+        <span class="_icon">
+          {{>svg_refresh}}
+        </span>
+      </div>
+    {{else}}
+      <div on-click="buy" class="_btn">{{translate("Buy")}}</div>
+    {{/if}}
+  </div>
+
+</div>
+{{/if}}

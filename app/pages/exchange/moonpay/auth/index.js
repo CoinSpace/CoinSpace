@@ -3,6 +3,7 @@
 var Ractive = require('lib/ractive');
 var emitter = require('lib/emitter');
 var moonpay = require('lib/moonpay');
+var getWallet = require('lib/wallet').getWallet;
 var showError = require('widgets/modals/flash').showError;
 
 module.exports = function(el) {
@@ -22,6 +23,11 @@ module.exports = function(el) {
   });
 
   ractive.on('before-show', function() {
+    var wallet = getWallet();
+    if (!moonpay.isSupported(wallet.denomination) && wallet.getNextAddress()) {
+      return emitter.emit('set-exchange', 'none');
+    }
+
     if (moonpay.isLogged()) {
       ractive.set('isLoading', true);
       return moonpay.refreshToken().then(function(data) {

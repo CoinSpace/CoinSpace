@@ -32,17 +32,9 @@
   </div>
 
   <div class="_confirm_btn_group">
-    {{#if isLoadingBuy}}
-      <div class="_loading">
-        <span class="_icon">
-          {{>svg_refresh}}
-        </span>
-      </div>
-    {{else}}
-      <div on-click="buy" class="_btn">
-        {{translate("Buy")}}
-      </div>
-    {{/if}}
+    <div on-click="buy" class="_btn">
+      {{translate("Buy")}}
+    </div>
   </div>
   <div class="_logout_link" on-click="logout">
     {{translate("Logout")}}

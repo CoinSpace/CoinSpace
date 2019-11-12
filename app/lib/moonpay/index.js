@@ -229,6 +229,14 @@ function getCards() {
   return request({
     url: 'https://api.moonpay.io/v3/cards',
     headers: getAuthorizationHeaders()
+  }).then(function(cards) {
+    cards.forEach(function(card) {
+      card.label = card.brand.toUpperCase() + '...x' + card.lastDigits;
+    });
+    cards.sort(function(a, b) {
+      return (new Date(b.createdAt)).getTime() - (new Date(a.createdAt).getTime());
+    });
+    return cards;
   });
 }
 
@@ -237,6 +245,29 @@ function deleteCard(id) {
     url: 'https://api.moonpay.io/v3/cards/' + id,
     method: 'delete',
     headers: getAuthorizationHeaders()
+  });
+}
+
+function quote(currencyCode, baseCurrencyCode, baseCurrencyAmount, areFeesIncluded) {
+  return request({
+    url: 'https://api.moonpay.io/v3/currencies/' + currencyCode + '/quote',
+    params: {
+      apiKey: apiKey,
+      baseCurrencyCode: baseCurrencyCode,
+      baseCurrencyAmount: baseCurrencyAmount,
+      areFeesIncluded: areFeesIncluded
+    }
+  });
+}
+
+function rate(currencyCode, baseCurrencyCode) {
+  return request({
+    url: 'https://api.moonpay.io/v3/currencies/' + currencyCode + '/price',
+    params: {
+      apiKey: apiKey
+    }
+  }).then(function(data) {
+    return data[baseCurrencyCode.toUpperCase()]
   });
 }
 
@@ -264,5 +295,7 @@ module.exports = {
   uploadFile: uploadFile,
   createCard: createCard,
   getCards: getCards,
-  deleteCard: deleteCard
+  deleteCard: deleteCard,
+  quote: quote,
+  rate: rate
 }

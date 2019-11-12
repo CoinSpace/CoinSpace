@@ -24,12 +24,6 @@ module.exports = function(el) {
     ractive.set('isLoading', true);
     return moonpay.getCards().then(function(cards) {
       ractive.set('isLoading', false);
-      cards.forEach(function(card) {
-        card.label = card.brand.toUpperCase() + '...x' + card.lastDigits;
-      });
-      cards.sort(function(a, b) {
-        return (new Date(b.createdAt)).getTime() - (new Date(a.createdAt).getTime());
-      });
       ractive.set('cards', cards);
     }).catch(function(err) {
       ractive.set('isLoading', false);
