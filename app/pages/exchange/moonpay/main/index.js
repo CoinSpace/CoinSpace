@@ -77,6 +77,10 @@ module.exports = function(el) {
     emitter.emit('change-moonpay-step', 'paymentMethods');
   });
 
+  ractive.on('history', function() {
+    emitter.emit('change-moonpay-step', 'history');
+  });
+
   ractive.on('buy', function() {
     var fiatSymbol = moonpay.getFiatById(moonpay.getCustomer().defaultCurrencyId, 'symbol');
     emitter.emit('change-moonpay-step', 'purchase', {

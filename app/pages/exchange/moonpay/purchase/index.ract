@@ -26,7 +26,7 @@
       {{else}}
       <input class="_input" id="moonpay_purchase_crypto" type="number" min="0" step="any" on-keyup="crypto-to-fiat" on-focus="focusAmountInput" on-blur="blurAmountInput">
       {{/if}}
-      <span class="_symbol">{{toSymbol}}</span>
+      <span class="_symbol">{{cryptoSymbol}}</span>
     </div>
   </div>
 
@@ -40,7 +40,7 @@
         {{translate("Loading...")}}
       {{else}}
         {{#if rate === '0'}} 0 {{else}} 1 {{/if}}
-        {{toSymbol}} ≈ {{rate}} {{fiatSymbol}}
+        {{cryptoSymbol}} ≈ {{rate}} {{fiatSymbol}}
       {{/if}}
     </div>
   </div>

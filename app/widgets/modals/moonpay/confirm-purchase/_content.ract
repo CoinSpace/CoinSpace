@@ -1,0 +1,82 @@
+<div class="modal _cancel">
+
+  {{#if (status === 'confirm')}}
+  <div class="modal__content moonpay_modal moonpay_confirm_purchase">
+
+    <h3 class="_header">{{translate("Confirm purchase")}}</h3>
+
+    <div class="_content">
+
+      <div class="_fiat">
+        <div class="_value">{{fiatAmount}}</div>
+        <div class="_symbol">{{fiatSymbol}}</div>
+      </div>
+
+      <div class="_crypto">≈ {{cryptoAmount}} {{cryptoSymbol}}</div>
+
+      <div class="_icon">
+        {{>svg_sendto}}
+      </div>
+      <div class="_address">{{address}}</div>
+
+    </div>
+
+    <div class="_confirm_btn_group">
+      <div class="_cancel">{{translate("Cancel")}}</div>
+      {{#if isLoading}}
+        <div class="_loading">
+          <span class="_icon">
+            {{>svg_refresh}}
+          </span>
+        </div>
+      {{else}}
+        <div class="_confirm" on-click="confirm">{{translate("Confirm")}}</div>
+      {{/if}}
+    </div>
+
+  </div>
+  {{/if}}
+
+  {{#if (status === 'waitingAuthorization')}}
+  <div class="modal__content moonpay_modal moonpay_confirm_purchase">
+
+    <h3 class="_header">{{translate("Confirm purchase")}}</h3>
+
+    <div class="_content">
+      <div class="_message">
+        {{translate("3D secure authentication requested.")}}
+      </div>
+    </div>
+
+    <div class="_confirm_btn_group">
+      <div class="_cancel">{{translate("Cancel")}}</div>
+      {{#if isLoading}}
+        <div class="_loading">
+          <span class="_icon">
+            {{>svg_refresh}}
+          </span>
+        </div>
+      {{else}}
+        <div class="_confirm" on-click="threedsecure()">{{translate("Continue")}}</div>
+      {{/if}}
+    </div>
+
+  </div>
+  {{/if}}
+
+  {{#if (status === 'success')}}
+  <div class="modal__content moonpay_modal moonpay_confirm_purchase_filled _success">
+    <div class="_content">
+      <div class="_icon">
+        {{>svg_success}}
+      </div>
+      <h3 class="_title">{{translate("Purchase Successful")}}</h3>
+      <p class="_message">{{translate("Your transaction will appear in your history tab shortly.")}}</p>
+    </div>
+    <div class="_confirm_btn_group">
+      <div class="_cancel">{{translate("Close")}}</div>
+    </div>
+  </div>
+  {{/if}}
+
+</div>

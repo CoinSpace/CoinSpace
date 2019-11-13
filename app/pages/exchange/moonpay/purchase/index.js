@@ -9,6 +9,7 @@ var Big = require('big.js');
 var _ = require('lodash');
 var showAddCreditCard = require('widgets/modals/moonpay/add-credit-card');
 var showTooltip = require('widgets/modals/tooltip');
+var showConfirmPurchase = require('widgets/modals/moonpay/confirm-purchase');
 
 module.exports = function(el) {
   var ractive = new Ractive({
@@ -21,7 +22,7 @@ module.exports = function(el) {
       isFirstEstimate: true,
       dailyLimitRemaining: '',
       fiatSymbol: '',
-      toSymbol: '',
+      cryptoSymbol: '',
       rate: '',
       cards: [],
       selectedCard: undefined,
@@ -31,8 +32,8 @@ module.exports = function(el) {
     }
   });
 
-  var toSymbol;
   var fiatSymbol;
+  var cryptoSymbol;
 
   ractive.on('before-show', function(context) {
     ractive.set('isLoading', true);
@@ -41,9 +42,9 @@ module.exports = function(el) {
     ractive.set('dailyLimitRemaining', context.dailyLimitRemaining);
 
     fiatSymbol = context.fiatSymbol;
-    toSymbol = denomination(getTokenNetwork());
+    cryptoSymbol = denomination(getTokenNetwork());
     ractive.set('fiatSymbol', fiatSymbol);
-    ractive.set('toSymbol', toSymbol);
+    ractive.set('cryptoSymbol', cryptoSymbol);
 
     return moonpay.getCards().then(function(cards) {
       ractive.set('isLoading', false);
@@ -71,7 +72,7 @@ module.exports = function(el) {
       if (!fiatAmount) return reject(new Error('empty_fiat'));
       resolve();
     }).then(function() {
-      return moonpay.quote(toSymbol.toLowerCase(), fiatSymbol.toLowerCase(), fiatAmount, true).then(function(quote) {
+      return moonpay.quote(cryptoSymbol.toLowerCase(), fiatSymbol.toLowerCase(), fiatAmount, true).then(function(quote) {
         ractive.set('isLoadingCrypto', false);
         ractive.set('isFirstEstimate', false);
         ractive.set('rate', Big(quote.totalAmount).div(quote.quoteCurrencyAmount).toFixed(2));
@@ -107,9 +108,9 @@ module.exports = function(el) {
       if (!cryptoAmount) return reject(new Error('empty_crypto'));
       resolve();
     }).then(function() {
-      return moonpay.rate(toSymbol.toLowerCase(), fiatSymbol.toLowerCase()).then(function(baseRate) {
+      return moonpay.rate(cryptoSymbol.toLowerCase(), fiatSymbol.toLowerCase()).then(function(baseRate) {
         var baseFiatAmount = Big(cryptoAmount).times(baseRate).toFixed(2);
-        return moonpay.quote(toSymbol.toLowerCase(), fiatSymbol.toLowerCase(), baseFiatAmount, false).then(function(quote) {
+        return moonpay.quote(cryptoSymbol.toLowerCase(), fiatSymbol.toLowerCase(), baseFiatAmount, false).then(function(quote) {
           ractive.set('isLoadingFiat', false);
           ractive.set('rate', Big(quote.totalAmount).div(cryptoAmount).toFixed(2));
           _fiatAmount = quote.totalAmount.toString();
@@ -158,7 +159,15 @@ module.exports = function(el) {
   });
 
   ractive.on('buy', function() {
-    console.log(ractive.get('selectedCard'));
+    var fiatAmount = ractive.find('#moonpay_purchase_fiat').value;
+    var cryptoAmount = ractive.find('#moonpay_purchase_crypto').value;
+    showConfirmPurchase({
+      fiatAmount: fiatAmount,
+      fiatSymbol: fiatSymbol,
+      cryptoAmount: cryptoAmount,
+      cryptoSymbol: cryptoSymbol,
+      card: ractive.get('selectedCard')
+    });
   });
 
   return ractive;

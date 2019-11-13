@@ -9,12 +9,13 @@
 <body>
   Loading...
 <script>
+  var transactionId = '<%= transactionId %>';
   var buildType = '<%= buildType %>';
   if (buildType === 'web') {
-    window.localStorage.setItem('_cs_moonpay_success', 'true');
+    window.localStorage.setItem('_cs_moonpay_3d_secure', transactionId);
     window.close();
   } else if (buildType === 'phonegap') {
-    window.location = 'coinspace://?action=moonpay-success';
+    window.location = 'coinspace://?action=moonpay-3d-secure&transactionId=' + transactionId;
   }
 </script>
 </body>

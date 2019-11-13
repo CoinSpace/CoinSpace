@@ -1,0 +1,109 @@
+.moonpay_confirm_purchase {
+  ._content {
+    text-align: center;
+    @extend .jigsaw-light;
+
+    ._fiat {
+      padding-top: 20px;
+      display: flex;
+      justify-content: center;
+      ._value {
+        font-size: 32px;
+        @include breakpoint(portrait) {
+          font-size: 48px;
+        }
+      }
+      ._symbol {
+        padding-top: 6px;
+        margin-left: 3px;
+        font-size: 14px;
+        @include breakpoint(portrait) {
+          font-size: 18px;
+        }
+      }
+    }
+
+    ._crypto {
+      @extend .jigsaw-medium;
+      padding-top: 10px;
+      color: darken($grey, 10%);
+      font-size: 12px;
+      @include breakpoint(portrait) {
+        font-size: 18px;
+      }
+    }
+
+    ._icon {
+      width: 25px;
+      height: 25px;
+      margin: 5px auto;
+      color: $grey;
+
+      @include breakpoint(portrait) {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    ._address {
+      @include wrapdat;
+      font-size: 13px;
+      @include breakpoint(portrait) {
+        font-size: 18px;
+      }
+    }
+  }
+
+}
+
+.moonpay_confirm_purchase_filled {
+  ._confirm_btn_group {
+    padding-top: 20px;
+    margin-top: 0;
+  }
+  ._content {
+    padding-top: 20px;
+    @include breakpoint(portrait) {
+      padding-top: 30px;
+    }
+
+    color: white;
+    text-align: center;
+
+    ._icon {
+      margin: 0 auto 20px;
+      width: 120px;
+      height: 120px;
+    }
+
+    ._title {
+      font-size: 21px;
+      padding-bottom: 10px;
+      @include breakpoint(portrait) {
+        font-size: 28px;
+      }
+    }
+
+    ._message {
+      max-width: 180px;
+      margin: 0 auto;
+      padding-bottom: 40px;
+      line-height: 1.3;
+      font-size: 13px;
+      @include breakpoint(portrait) {
+        font-size: 18px;
+        max-width: 250px;
+      }
+    }
+  }
+}
+
+.moonpay_confirm_purchase_filled._success {
+  background-color: $green;
+  ._confirm_btn_group {
+    ._cancel {
+      max-width: 140px;
+      margin: 0 auto;
+    }
+  }
+}

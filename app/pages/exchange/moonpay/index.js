@@ -7,6 +7,7 @@ var initMain = require('./main');
 var initVerification = require('./verification');
 var initPaymentMethods = require('./payment-methods');
 var initPurchase = require('./purchase');
+var initHistory = require('./history');
 
 module.exports = function(el) {
   var ractive = new Ractive({
@@ -22,7 +23,8 @@ module.exports = function(el) {
     main: initMain(ractive.find('#moonpay_main')),
     verification: initVerification(ractive.find('#moonpay_verification')),
     paymentMethods: initPaymentMethods(ractive.find('#moonpay_payment_methods')),
-    purchase: initPurchase(ractive.find('#moonpay_purchase'))
+    purchase: initPurchase(ractive.find('#moonpay_purchase')),
+    history: initHistory(ractive.find('#moonpay_history'))
   };
   var currentStep = steps.auth;
 

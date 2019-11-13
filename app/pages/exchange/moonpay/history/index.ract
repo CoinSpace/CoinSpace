@@ -1,0 +1,13 @@
+{{#if isLoading}}
+  {{>loader}}
+{{else}}
+<div class="moonpay_history">
+
+  <div class="_header">
+    <div class="_back" on-click="back">
+      <span class="_icon"></span> {{translate("Back")}}
+    </div>
+  </div>
+
+</div>
+{{/if}}

@@ -16,9 +16,13 @@ var ipCountry;
 emitter.on('handleOpenURL', function(url) {
   url = url || '';
   var matchAction = url.match(/action=([^&]+)/);
-  if (!matchAction || matchAction[1] !== 'moonpay-success') return;
+  if (!matchAction || matchAction[1] !== 'moonpay-3d-secure') return;
+
+  var matchTxId = url.match(/transactionId=([^&]+)/);
+  var txId = matchTxId ? matchTxId[1] : '';
+
+  window.localStorage.setItem('_cs_moonpay_3d_secure', txId);
   hasHandledMobileSuccess = true;
-  window.localStorage.setItem('_cs_moonpay_success', 'true');
 });
 
 function init() {
@@ -271,6 +275,64 @@ function rate(currencyCode, baseCurrencyCode) {
   });
 }
 
+function createTx(data) {
+  return request({
+    url: 'https://api.moonpay.io/v3/transactions',
+    method: 'post',
+    data: {
+      baseCurrencyAmount: parseFloat(data.baseCurrencyAmount),
+      areFeesIncluded: data.areFeesIncluded,
+      walletAddress: data.walletAddress,
+      baseCurrencyCode: data.baseCurrencyCode,
+      currencyCode: data.currencyCode,
+      returnUrl: data.returnUrl,
+      tokenId: data.tokenId,
+      cardId: data.cardId
+    },
+    headers: getAuthorizationHeaders()
+  });
+}
+
+function getTxs() {
+  return request({
+    url: 'https://api.moonpay.io/v3/transactions',
+    headers: getAuthorizationHeaders()
+  });
+}
+
+function getTxById(id) {
+  return request({
+    url: 'https://api.moonpay.io/v3/transactions/' + id,
+    headers: getAuthorizationHeaders()
+  });
+}
+
+function open3dSecure(url) {
+  return new Promise(function(resolve) {
+    var width = 500;
+    var height = 600;
+    var options = 'width=' + width + ', ';
+    options += 'height=' + height + ', ';
+    options += 'left=' + ((screen.width - width) / 2) + ', ';
+    options += 'top=' + ((screen.height - height) / 2) + '';
+
+    window.localStorage.removeItem('_cs_moonpay_3d_secure');
+    var popup = window.open(url, '_system', options);
+    var popupInterval = setInterval(function() {
+      if (popup.closed || hasHandledMobileSuccess) {
+        clearInterval(popupInterval);
+        hasHandledMobileSuccess = false;
+        return resolve(window.localStorage.getItem('_cs_moonpay_3d_secure'));
+      }
+    }, 250);
+  }).then(function(txId) {
+    if (!txId) throw new Error('3d_failed');
+    return getTxById(txId);
+  }).then(function(tx) {
+    if (tx.status !== 'completed' && tx.status !== 'pending') throw new Error('3d_failed');
+  });
+}
+
 module.exports = {
   init: init,
   loadFiat: loadFiat,
@@ -297,5 +359,8 @@ module.exports = {
   getCards: getCards,
   deleteCard: deleteCard,
   quote: quote,
-  rate: rate
+  rate: rate,
+  createTx: createTx,
+  getTxs: getTxs,
+  open3dSecure: open3dSecure
 }

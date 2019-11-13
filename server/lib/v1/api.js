@@ -273,8 +273,9 @@ router.get('/moonpay/countries', function(req, res) {
 
 router.get('/moonpay/redirectURL', function(req, res) {
   var buildType = req.query.buildType;
+  var transactionId = req.query.transactionId || '';
   if (buildType !== 'phonegap' && buildType !== 'web') return res.status(400).send('Bad request');
-  res.render('moonpay', {buildType: buildType});
+  res.render('moonpay', {transactionId: transactionId, buildType: buildType});
 });
 
 router.use(function(err, req, res, next) {

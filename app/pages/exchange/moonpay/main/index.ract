@@ -21,7 +21,7 @@
 
   <div class="_link" on-click="payment-methods">{{translate("Payment methods")}}</div>
   <div class="_link" on-click="verification">{{translate("Verification")}}</div>
-  <div class="_link">{{translate("History")}}</div>
+  <div class="_link" on-click="history">{{translate("History")}}</div>
   <div class="_link _dropdown">
     <span>{{translate("Default currency (:symbol)", {symbol: defaultCurrencyLabel()})}}</span>
     <select value="{{defaultCurrency}}" on-change="change-currency">
