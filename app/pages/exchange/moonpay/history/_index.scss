@@ -1,3 +1,57 @@
-// Custom styles
-// .moonpay_history {
-// }
+.moonpay_history {
+
+  ._tx {
+    @include clear;
+    @include clickbtn;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid darken($grey--light, 10%);
+
+    @include breakpoint(portrait) {
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+
+    ._status {
+      @include ellipsis();
+      @include media-obj;
+      @extend .jigsaw-light;
+      padding-top: 22px;
+      font-size: 21px;
+
+      @include breakpoint(portrait) {
+        padding-top: 28px;
+        font-size: 26px;
+      }
+    }
+
+    ._detail {
+      float: right;
+      text-align: right;
+      margin-left: 10px;
+    }
+
+    ._amount {
+      @extend .jigsaw-light;
+      font-size: 24px;
+      &._completed {
+        color: $green;
+      }
+      &._failed {
+        color: $red;
+      }
+      @include breakpoint(portrait) {
+        font-size: 32px;
+      }
+    }
+
+    ._time {
+      font-size: 14px;
+      margin-top: -5px;
+      color: $grey;
+      @include breakpoint(portrait) {
+        font-size: 16px;
+      }
+    }
+  }
+}

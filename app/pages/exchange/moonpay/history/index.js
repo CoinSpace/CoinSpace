@@ -3,6 +3,9 @@
 var Ractive = require('lib/ractive');
 var emitter = require('lib/emitter');
 var moonpay = require('lib/moonpay');
+var strftime = require('strftime');
+var Big = require('big.js');
+var showTransactionDetail = require('widgets/modals/moonpay/transaction-detail');
 
 module.exports = function(el) {
   var ractive = new Ractive({
@@ -10,6 +13,8 @@ module.exports = function(el) {
     template: require('./index.ract'),
     data: {
       isLoading: true,
+      txs: [],
+      showDetail: showTransactionDetail
     },
     partials: {
       loader: require('../loader.ract'),
@@ -20,7 +25,14 @@ module.exports = function(el) {
     ractive.set('isLoading', true);
     return moonpay.getTxs().then(function(txs) {
       ractive.set('isLoading', false);
-      console.log('txs', txs);
+      txs.forEach(function(tx) {
+        tx.currencyCode = moonpay.getCryptoSymbolById(tx.currencyId);
+        var fiat = moonpay.getFiatById(tx.baseCurrencyId);
+        var amount = Big(tx.baseCurrencyAmount).plus(tx.feeAmount).plus(tx.extraFeeAmount).toFixed(fiat.precision);
+        tx.fiat = fiat.sign + amount;
+        tx.timestamp = strftime('%b %d %l:%M %p', (new Date(tx.createdAt)));
+      });
+      ractive.set('txs', txs);
     }).catch(function(err) {
       ractive.set('isLoading', false);
       console.error(err);

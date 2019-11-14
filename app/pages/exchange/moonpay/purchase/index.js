@@ -9,6 +9,7 @@ var Big = require('big.js');
 var _ = require('lodash');
 var showAddCreditCard = require('widgets/modals/moonpay/add-credit-card');
 var showTooltip = require('widgets/modals/tooltip');
+var showError = require('widgets/modals/flash').showError;
 var showConfirmPurchase = require('widgets/modals/moonpay/confirm-purchase');
 
 module.exports = function(el) {
@@ -34,6 +35,7 @@ module.exports = function(el) {
 
   var fiatSymbol;
   var cryptoSymbol;
+  var minAmount = 20;
 
   ractive.on('before-show', function(context) {
     ractive.set('isLoading', true);
@@ -53,7 +55,7 @@ module.exports = function(el) {
     });
   });
 
-  var _fiatAmount = '20';
+  var _fiatAmount = minAmount + '';
 
   ractive.on('fiat-to-crypto', function() {
     var fiatAmount = ractive.find('#moonpay_purchase_fiat').value;
@@ -159,14 +161,17 @@ module.exports = function(el) {
   });
 
   ractive.on('buy', function() {
+    var card = ractive.get('selectedCard');
+    if (!card) return showError({message: 'Please select a payment method'});
     var fiatAmount = ractive.find('#moonpay_purchase_fiat').value;
+    if (fiatAmount < minAmount) return showError({message: 'Please enter an amount above', interpolations: {dust: minAmount + ' ' + fiatSymbol}});
     var cryptoAmount = ractive.find('#moonpay_purchase_crypto').value;
     showConfirmPurchase({
       fiatAmount: fiatAmount,
       fiatSymbol: fiatSymbol,
       cryptoAmount: cryptoAmount,
       cryptoSymbol: cryptoSymbol,
-      card: ractive.get('selectedCard')
+      card: card
     });
   });
 

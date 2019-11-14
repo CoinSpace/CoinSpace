@@ -24,11 +24,17 @@ function getCurrenciesFromAPI() {
     var coinsUSA = {};
     PRIORITY_SYMBOLS.forEach(function(symbol) {
       var coin = data.find(function(item) {
-        return item.code === symbol.toLowerCase() && !item.isSuspended;
+        return item.code === symbol.toLowerCase();
       });
       if (coin) {
-        coins[symbol] = true;
-        if (coin.isSupportedInUS) coinsUSA[symbol] = true;
+        coins[coin.id] = {
+          symbol: symbol,
+          isSupported: !coin.isSuspended
+        }
+        coinsUSA[coin.id] = {
+          symbol: symbol,
+          isSupported: !coin.isSuspended && coin.isSupportedInUS
+        }
       }
     });
 
@@ -37,7 +43,8 @@ function getCurrenciesFromAPI() {
       if (item.type === 'fiat') {
         fiat[item.id] = {
           symbol: item.code.toUpperCase(),
-          sign: fiatSigns[item.code] || ''
+          sign: fiatSigns[item.code] || '',
+          precision: item.precision
         };
       }
     });

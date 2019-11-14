@@ -4,7 +4,6 @@ var request = require('lib/request');
 var urlRoot = window.urlRoot;
 var coins = {};
 var emitter = require('lib/emitter');
-var showSuccess = require('widgets/modals/moonpay-success');
 
 var hasHandledMobileSuccess = false;
 var apiKey = process.env.MOONPAY_API_KEY;
@@ -65,8 +64,14 @@ function getFiatList() {
   });
 }
 
+function getCryptoSymbolById(id) {
+  return coins[id] ? coins[id].symbol : '';
+}
+
 function isSupported(symbol) {
-  return !!coins[symbol];
+  return !!Object.keys(coins).find(function(key) {
+    return coins[key].symbol === symbol && coins[key].isSupported;
+  });
 }
 
 function isLogged() {
@@ -338,6 +343,7 @@ module.exports = {
   loadFiat: loadFiat,
   getFiatById: getFiatById,
   getFiatList: getFiatList,
+  getCryptoSymbolById: getCryptoSymbolById,
   isSupported: isSupported,
   isLogged: isLogged,
   signIn: signIn,

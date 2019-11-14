@@ -1,0 +1,73 @@
+
+.moonpay-transaction-detail {
+  padding: 20px;
+
+  @include breakpoint(portrait) {
+    padding: 40px;
+    max-width: 520px;
+  }
+  @include breakpoint(landscape) {
+    max-width: 470px;
+  }
+
+  font-size: 18px;
+  @extend .jigsaw-light;
+
+  ._status {
+    text-align: center;
+    font-size: 24px;
+    @include breakpoint(portrait) {
+      font-size: 32px;
+    }
+
+    &._failed {
+      color: $red;
+    }
+    &._completed {
+      color: $green;
+    }
+  }
+
+  ._time {
+    text-align: center;
+    color: $grey;
+    @include breakpoint(portrait) {
+      font-size: 24px;
+    }
+  }
+
+  ._details {
+    @include wrapdat;
+    padding-top: 5px;
+    ._title {
+      margin-top: 10px;
+      @include breakpoint(portrait) {
+        font-size: 18px;
+      }
+    }
+    a._value {
+      text-decoration: underline;
+    }
+    ._value {
+      @include textselect;
+
+      background-color: $grey--light;
+      box-shadow: inset 0 2px 2px 1px rgba(000,000,000,0.2);
+      padding: 10px;
+      padding-top: 14px;
+      padding-bottom: 14px;
+      display: block;
+      border-radius: 5px;
+      font-size: 13px;
+      line-height: 1.8;
+      overflow: hidden;
+
+      @include breakpoint(portrait) {
+        font-size: 22px;
+      }
+      ._address {
+        float: left;
+      }
+    }
+  }
+}

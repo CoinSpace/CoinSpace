@@ -281,5 +281,9 @@
   "Purchase Successful": "Purchase Successful",
   "3D secure authentication requested.": "3D secure authentication requested.",
   "3D secure authentication failed": "3D secure authentication failed",
-  "Make sure that your card is valid and has sufficient available balance.": "Make sure that your card is valid and has sufficient available balance."
+  "Make sure that your card is valid and has sufficient available balance.": "Make sure that your card is valid and has sufficient available balance.",
+  "Please select a payment method": "Please select a payment method",
+  "Pending": "Pending",
+  "Waiting for authorization": "Waiting for authorization",
+  "Failure reason": "Failure reason"
 }

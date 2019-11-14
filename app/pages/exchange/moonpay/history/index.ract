@@ -9,5 +9,46 @@
     </div>
   </div>
 
+  {{#if txs.length}}
+  <div class="_group">
+    {{#each txs}}
+    <div class="_tx" on-click="showDetail(this)">
+      <div class="_detail">
+        {{#if this.status === 'completed'}}
+          <div class="_amount _completed">+ {{quoteCurrencyAmount}} {{currencyCode}}</div>
+        {{elseif this.status === 'failed'}}
+          <div class="_amount _failed">×</div>
+        {{else}}
+          <div class="_amount">...</div>
+        {{/if}}
+
+        <div class='_time'>{{timestamp}}</div>
+        <div class='_time'>{{fiat}}</div>
+      </div>
+
+      <div class="_status">
+      {{#if this.status === 'pending'}}
+        {{translate("Pending")}}
+      {{elseif this.status === 'waitingAuthorization'}}
+        {{translate("Waiting for authorization")}}
+      {{elseif this.status === 'failed'}}
+        {{translate("Failed")}}
+      {{elseif this.status === 'completed'}}
+        {{translate("Received")}}
+      {{else}}
+        ?
+      {{/if}}
+      </div>
+
+    </div>
+    {{/each}}
+
+  </div>
+  {{else}}
+    <div class="_message">
+      {{translate("You do not have any transactions yet")}}.
+    </div>
+  {{/if}}
+
 </div>
 {{/if}}
