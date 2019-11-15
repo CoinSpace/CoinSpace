@@ -285,5 +285,7 @@
   "Please select a payment method": "Please select a payment method",
   "Pending": "Pending",
   "Waiting for authorization": "Waiting for authorization",
-  "Failure reason": "Failure reason"
+  "Failure reason": "Failure reason",
+  "You have exceeded your daily limit. Please try again later.": "You have exceeded your daily limit. Please try again later.",
+  "You have exceeded your monthly limit. Please try again later.": "You have exceeded your monthly limit. Please try again later."
 }

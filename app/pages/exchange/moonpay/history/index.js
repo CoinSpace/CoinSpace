@@ -14,7 +14,14 @@ module.exports = function(el) {
     data: {
       isLoading: true,
       txs: [],
-      showDetail: showTransactionDetail
+      showDetail: function(tx) {
+        showTransactionDetail({
+          tx: tx,
+          onSuccessDismiss: function() {
+            ractive.show();
+          }
+        });
+      }
     },
     partials: {
       loader: require('../loader.ract'),

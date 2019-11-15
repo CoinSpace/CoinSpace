@@ -1,17 +1,35 @@
 
 .moonpay-transaction-detail {
-  padding: 20px;
-
   @include breakpoint(portrait) {
-    padding: 40px;
     max-width: 520px;
   }
   @include breakpoint(landscape) {
     max-width: 470px;
   }
 
-  font-size: 18px;
-  @extend .jigsaw-light;
+  ._content {
+    font-size: 18px;
+    padding: 20px;
+    @extend .jigsaw-light;
+    @include breakpoint(portrait) {
+      padding: 40px;
+    }
+  }
+
+  ._confirm_btn_group {
+    margin-top: 0;
+    @include breakpoint(portrait) {
+      padding: 0 40px 40px 40px;
+    }
+    ._block {
+      margin-left: 0;
+      height: 60px;
+      @include breakpoint(portrait) {
+        height: 69px;
+        border-radius: 3px;
+      }
+    }
+  }
 
   ._status {
     text-align: center;
@@ -42,7 +60,7 @@
     ._title {
       margin-top: 10px;
       @include breakpoint(portrait) {
-        font-size: 18px;
+        font-size: 20px;
       }
     }
     a._value {
@@ -63,7 +81,7 @@
       overflow: hidden;
 
       @include breakpoint(portrait) {
-        font-size: 22px;
+        font-size: 20px;
       }
       ._address {
         float: left;

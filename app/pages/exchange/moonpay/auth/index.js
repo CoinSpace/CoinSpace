@@ -23,6 +23,9 @@ module.exports = function(el) {
   });
 
   ractive.on('before-show', function() {
+    ractive.set('step', 1);
+    ractive.set('email', '');
+    ractive.set('code', '');
     var wallet = getWallet();
     if (!moonpay.isSupported(wallet.denomination) && wallet.getNextAddress()) {
       return emitter.emit('set-exchange', 'none');

@@ -4,57 +4,76 @@
       {{>svg_close}}
     </span>
 
-    {{#if tx.status === 'completed'}}
-      <div class="_status _completed">+ {{tx.quoteCurrencyAmount}} {{tx.currencyCode}}</div>
-    {{elseif tx.status === 'failed'}}
-      <div class="_status _failed">{{translate("Failed")}}</div>
-    {{else}}
-      <div class="_status">{{translate("Pending")}}</div>
-    {{/if}}
+    <div class="_content">
+      {{#if tx.status === 'pending'}}
+        <div class="_status">{{translate("Pending")}}</div>
+      {{elseif tx.status === 'waitingAuthorization'}}
+        <div class="_status">{{translate("Waiting for authorization")}}</div>
+      {{elseif tx.status === 'failed'}}
+        <div class="_status _failed">{{translate("Failed")}}</div>
+      {{elseif tx.status === 'completed'}}
+        <div class="_status _completed">+ {{tx.quoteCurrencyAmount}} {{tx.currencyCode}}</div>
+      {{else}}
+        <div class="_status">?</div>
+      {{/if}}
 
-    <div class='_time'>{{tx.timestamp}}</div>
-    <div class='_time'>{{tx.fiat}}</div>
+      <div class='_time'>{{tx.timestamp}}</div>
+      <div class='_time'>{{tx.fiat}}</div>
 
-    <div class="_details">
+      <div class="_details">
 
-      {{#if tx.cryptoTransactionId}}
-        <h3 class="_title">{{translate("Transaction Id:")}}</h3>
-        {{#if tx.currencyCode === 'BTC'}}
-        <a href="" onclick="window.open('https://btc.coin.space/tx/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
-        {{elseif tx.currencyCode === 'BCH'}}
-        <a href="" onclick="window.open('https://bch.coin.space/tx/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
-        {{elseif tx.currencyCode === 'ETH'}}
-        <a href="" onclick="window.open('https://blockchair.com/ethereum/transaction/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
-        {{elseif tx.currencyCode === 'USDT'}}
-        <a href="" onclick="window.open('https://blockchair.com/ethereum/transaction/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
-        {{elseif tx.currencyCode === 'LTC'}}
-        <a href="" onclick="window.open('https://ltc.coin.space/tx/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
-        {{elseif tx.currencyCode === 'DOGE'}}
-        <a href="" onclick="window.open('https://blockchair.com/dogecoin/transaction/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
-        {{elseif tx.currencyCode === 'DASH'}}
-        <a href="" onclick="window.open('https://dash.coin.space/tx/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
-        {{elseif tx.currencyCode === 'XRP'}}
-        <a href="" onclick="window.open('https://xrpcharts.ripple.com/#/transactions/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
-        {{elseif tx.currencyCode === 'XLM'}}
-        <a href="" onclick="window.open('https://stellar.expert/explorer/public/tx/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
-        {{elseif tx.currencyCode === 'EOS'}}
-        <a href="" onclick="window.open('https://bloks.io/transaction/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
-        {{else}}
-        <div class="_value">{{tx.cryptoTransactionId}}</div>
+        {{#if tx.cryptoTransactionId}}
+          <h3 class="_title">{{translate("Transaction Id:")}}</h3>
+          {{#if tx.currencyCode === 'BTC'}}
+          <a href="" onclick="window.open('https://btc.coin.space/tx/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          {{elseif tx.currencyCode === 'BCH'}}
+          <a href="" onclick="window.open('https://bch.coin.space/tx/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          {{elseif tx.currencyCode === 'ETH'}}
+          <a href="" onclick="window.open('https://blockchair.com/ethereum/transaction/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          {{elseif tx.currencyCode === 'USDT'}}
+          <a href="" onclick="window.open('https://blockchair.com/ethereum/transaction/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          {{elseif tx.currencyCode === 'LTC'}}
+          <a href="" onclick="window.open('https://ltc.coin.space/tx/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          {{elseif tx.currencyCode === 'DOGE'}}
+          <a href="" onclick="window.open('https://blockchair.com/dogecoin/transaction/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          {{elseif tx.currencyCode === 'DASH'}}
+          <a href="" onclick="window.open('https://dash.coin.space/tx/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          {{elseif tx.currencyCode === 'XRP'}}
+          <a href="" onclick="window.open('https://xrpcharts.ripple.com/#/transactions/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          {{elseif tx.currencyCode === 'XLM'}}
+          <a href="" onclick="window.open('https://stellar.expert/explorer/public/tx/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          {{elseif tx.currencyCode === 'EOS'}}
+          <a href="" onclick="window.open('https://bloks.io/transaction/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          {{else}}
+          <div class="_value">{{tx.cryptoTransactionId}}</div>
+          {{/if}}
         {{/if}}
-      {{/if}}
 
-      {{#if tx.failureReason}}
-      <h3 class="_title">{{translate("Failure reason")}}:</h3>
-      <code class="_value">{{tx.failureReason}}</code>
-      {{/if}}
+        {{#if tx.failureReason}}
+        <h3 class="_title">{{translate("Failure reason")}}:</h3>
+        <code class="_value">{{tx.failureReason}}</code>
+        {{/if}}
 
-      <h3 class="_title">{{translate("To")}}:</h3>
-      <code class="_value">
-        <span class="_address">{{tx.walletAddress}}</span>
-      </code>
-
+        <h3 class="_title">{{translate("To")}}:</h3>
+        <code class="_value">
+          <span class="_address">{{tx.walletAddress}}</span>
+        </code>
+      </div>
     </div>
+
+    {{#if tx.status === 'waitingAuthorization'}}
+    <div class="_confirm_btn_group">
+      {{#if isLoadingAuthorization}}
+        <div class="_loading _block">
+          <span class="_icon">
+            {{>svg_refresh}}
+          </span>
+        </div>
+      {{else}}
+        <div class="_confirm _block" on-click="threedsecure()">{{translate("Continue")}}</div>
+      {{/if}}
+    </div>
+    {{/if}}
 
   </div>
 </div>

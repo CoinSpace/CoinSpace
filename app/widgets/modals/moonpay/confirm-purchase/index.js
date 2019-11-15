@@ -49,6 +49,12 @@ function open(data) {
       }
       ractive.set('status', 'success');
     }).catch(function(err) {
+      if (/daily limit/.test(err.message)) {
+        return handleError(new Error('You have exceeded your daily limit. Please try again later.'));
+      }
+      if (/monthly limit/.test(err.message)) {
+        return handleError(new Error('You have exceeded your monthly limit. Please try again later.'));
+      }
       console.error(err);
       return handleError(new Error('Make sure that your card is valid and has sufficient available balance.'));
     });

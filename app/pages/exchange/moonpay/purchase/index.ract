@@ -46,11 +46,22 @@
   </div>
 
   <div class="_group">
+    <label class="_label">{{translate("Fee")}}</label>
+    <div class="_message">
+      {{#if isFirstEstimate}}
+        {{translate("Loading...")}}
+      {{else}}
+        {{fee}} {{fiatSymbol}}
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="_group">
     <label class="_label">{{translate("Payment method")}}</label><br>
     <div class="_dropdown">
       {{#if cards.length}}
       <div class="_value">{{selectedCard.label}}</div>
-      <select value="{{selectedCard}}" on-change="change-card">
+      <select value="{{selectedCard}}">
         {{#each cards}}
         <option value="{{this}}">{{this.label}}</option>
         {{/each}}
