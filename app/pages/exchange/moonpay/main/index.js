@@ -3,6 +3,7 @@
 var Ractive = require('lib/ractive');
 var emitter = require('lib/emitter');
 var moonpay = require('lib/moonpay');
+var showIdentityVerification = require('widgets/modals/moonpay/identity-verification');
 
 module.exports = function(el) {
   var ractive = new Ractive({
@@ -34,15 +35,16 @@ module.exports = function(el) {
       moonpay.loadFiat()
     ]).then(function(results) {
       ractive.set('isLoading', false);
+      var customer = moonpay.getCustomer();
       limit = results[0].limits.find(function(item) {
         return item.type === 'buy_credit_debit_card';
       });
-      var fiatSign = moonpay.getFiatById(moonpay.getCustomer().defaultCurrencyId, 'sign');
+      var fiatSign = moonpay.getFiatById(customer.defaultCurrencyId, 'sign');
       ractive.set('dailyLimitRemaining', fiatSign + limit.dailyLimitRemaining);
       ractive.set('monthlyLimitRemaining', fiatSign + limit.monthlyLimitRemaining);
       ractive.set('limitIncreaseEligible', results[0].limitIncreaseEligible);
       ractive.set('currencies', moonpay.getFiatList());
-      ractive.set('defaultCurrency', moonpay.getCustomer().defaultCurrencyId);
+      ractive.set('defaultCurrency', customer.defaultCurrencyId);
       verificationLevels = results[0].verificationLevels;
     }).catch(function(err) {
       ractive.set('isLoading', false);
@@ -74,6 +76,9 @@ module.exports = function(el) {
   });
 
   ractive.on('payment-methods', function() {
+    if (!moonpay.getCustomer().firstName) {
+      return showIdentityVerification(ractive.show.bind(ractive));
+    }
     emitter.emit('change-moonpay-step', 'paymentMethods');
   });
 
@@ -82,6 +87,9 @@ module.exports = function(el) {
   });
 
   ractive.on('buy', function() {
+    if (!moonpay.getCustomer().firstName) {
+      return showIdentityVerification(ractive.show.bind(ractive));
+    }
     var fiatSymbol = moonpay.getFiatById(moonpay.getCustomer().defaultCurrencyId, 'symbol');
     emitter.emit('change-moonpay-step', 'purchase', {
       dailyLimitRemaining: limit.dailyLimitRemaining,

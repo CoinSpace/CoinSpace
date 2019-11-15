@@ -9,7 +9,7 @@ var initDropdown = require('widgets/dropdown');
 
 var ractive;
 
-function open() {
+function open(onSuccessDismiss) {
 
   var customer = moonpay.getCustomer();
 
@@ -124,6 +124,9 @@ function open() {
 
     return moonpay.updateCustomer(data).then(function(data) {
       moonpay.setCustomer(data);
+      ractive.set('onDismiss', function() {
+        if (onSuccessDismiss) onSuccessDismiss();
+      });
       ractive.fire('cancel');
     }).catch(function(err) {
       console.error(err);
