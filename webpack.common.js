@@ -60,6 +60,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       {from: 'app/security.txt', to: './'},
+      {from: 'app/apple-developer-merchantid-domain-association.txt', to: './'},
       {from: 'app/assets/icons/favicon.ico', to: './'},
     ])
   ]
