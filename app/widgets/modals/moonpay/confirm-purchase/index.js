@@ -16,6 +16,7 @@ function open(data) {
     data: {
       isLoading: false,
       status: 'confirm',
+      card: data.card,
       fiatAmount: data.fiatAmount,
       fiatSymbol: data.fiatSymbol,
       cryptoAmount: data.cryptoAmount,
@@ -40,8 +41,7 @@ function open(data) {
       baseCurrencyCode: data.fiatSymbol.toLowerCase(),
       currencyCode: data.cryptoSymbol.toLowerCase(),
       returnUrl: redirectURL,
-      tokenId: data.tokenId,
-      cardId: data.card.id
+      card: data.card
     }).then(function(tx) {
       if (tx.status === 'failed') throw new Error('failed');
       if (tx.status === 'waitingAuthorization') {

@@ -30,7 +30,11 @@
           </span>
         </div>
       {{else}}
-        <div class="_confirm" on-click="confirm">{{translate("Confirm")}}</div>
+        {{#if card.type === 'applePay'}}
+          <div class="_confirm apple-pay-button" on-click="confirm"></div>
+        {{else}}
+          <div class="_confirm" on-click="confirm">{{translate("Confirm")}}</div>
+        {{/if}}
       {{/if}}
     </div>
 

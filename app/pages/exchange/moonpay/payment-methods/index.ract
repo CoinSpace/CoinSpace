@@ -12,11 +12,15 @@
   {{#if cards.length}}
   <div class="_group">
     {{#each cards}}
-    <div class="_input">{{label}}
-      <div class="close__input" on-click="deleteCard(this)">
-        <span class="_icon">{{> svg_close}}</span>
-      </div>
-    </div>
+      {{#if this.type === 'applePay'}}
+        <div class="_input">{{label}}</div>
+      {{else}}
+        <div class="_input">{{label}}
+          <div class="close__input" on-click="deleteCard(this)">
+            <span class="_icon">{{> svg_close}}</span>
+          </div>
+        </div>
+      {{/if}}
     {{/each}}
   </div>
   {{else}}
