@@ -39,12 +39,17 @@ module.exports = function(el) {
   var minAmount = 20;
 
   ractive.on('before-show', function(context) {
-    ractive.set('cards', []);
-    ractive.set('selectedCard', undefined);
     ractive.set('isLoading', true);
+    ractive.set('isLoadingFiat', false);
     ractive.set('isLoadingCrypto', true);
     ractive.set('isFirstEstimate', true);
     ractive.set('dailyLimitRemaining', context.dailyLimitRemaining);
+    ractive.set('fiatSymbol', '');
+    ractive.set('cryptoSymbol', '');
+    ractive.set('rate', '');
+    ractive.set('fee', '');
+    ractive.set('cards', []);
+    ractive.set('selectedCard', undefined);
 
     fiatSymbol = context.fiatSymbol;
     cryptoSymbol = denomination(getTokenNetwork());

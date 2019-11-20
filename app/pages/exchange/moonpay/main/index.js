@@ -30,6 +30,11 @@ module.exports = function(el) {
 
   ractive.on('before-show', function() {
     ractive.set('isLoading', true);
+    ractive.set('dailyLimitRemaining', 0);
+    ractive.set('monthlyLimitRemaining', 0);
+    ractive.set('limitIncreaseEligible', false);
+    ractive.set('currencies', []);
+    ractive.set('defaultCurrency', '');
     return Promise.all([
       moonpay.limits(),
       moonpay.loadFiat()

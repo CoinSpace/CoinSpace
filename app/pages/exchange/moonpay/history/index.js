@@ -30,6 +30,7 @@ module.exports = function(el) {
 
   ractive.on('before-show', function() {
     ractive.set('isLoading', true);
+    ractive.set('txs', []);
     return moonpay.getTxs().then(function(txs) {
       ractive.set('isLoading', false);
       txs.forEach(function(tx) {

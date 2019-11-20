@@ -20,7 +20,7 @@
     </div>
     <div class="_group">
       <label class="_label" for="moonpay_signin_code">{{translate("Verification code")}}</label>
-      <input id="moonpay_signin_code" class="_input" value="{{code}}" on-enter="sign-in" type="text" autocorrect="off" autocapitalize="off"/>
+      <input id="moonpay_signin_code" class="_input" value="{{code}}" on-enter="sign-in" type="tel" maxlength="4" pattern="[0-9]*" autocorrect="off" autocapitalize="off"/>
     </div>
   {{/if}}
 

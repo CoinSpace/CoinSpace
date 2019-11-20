@@ -34,14 +34,14 @@ module.exports = function(el) {
     if (moonpay.isLogged()) {
       ractive.set('isLoading', true);
       return moonpay.refreshToken().then(function(data) {
-        console.log('data', data);
+        moonpay.setAccessToken(data.token);
         moonpay.setCustomer(data.customer);
         emitter.emit('change-moonpay-step', 'main');
       }).catch(function(err) {
         ractive.set('isLoading', false);
         moonpay.cleanAccessToken();
         moonpay.cleanCustomer();
-        console.log('err', err);
+        console.error(err);
       });
     }
     ractive.set('isLoading', false);

@@ -22,6 +22,7 @@ module.exports = function(el) {
 
   ractive.on('before-show', function() {
     ractive.set('isLoading', true);
+    ractive.set('cards', []);
     return moonpay.getCards().then(function(cards) {
       ractive.set('isLoading', false);
       ractive.set('cards', cards);
