@@ -7,6 +7,7 @@ const autoprefixer = require('autoprefixer');
 const Dotenv = require('dotenv-webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const envFile = process.env.ENV_FILE ? process.env.ENV_FILE : '.env.prod';
 
@@ -81,7 +82,10 @@ var config = merge(common, {
     new ExtractTextPlugin({
       filename: 'assets/css/all.[contenthash:8].css',
       allChunks: true,
-    })
+    }),
+    new CopyWebpackPlugin([
+      {from: 'app/apple-developer-merchantid-domain-association.prod.txt', to: '.well-known/apple-developer-merchantid-domain-association.txt'},
+    ])
   ]
 });
 

@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const autoprefixer = require('autoprefixer');
 const common = require('./webpack.common.js');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const dotEnv = new Dotenv({
   path: '.env.loc',
@@ -57,6 +58,9 @@ module.exports = merge(common, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
+    new CopyWebpackPlugin([
+      {from: 'app/apple-developer-merchantid-domain-association.dev.txt', to: '.well-known/apple-developer-merchantid-domain-association.txt'},
+    ]),
     dotEnv
   ]
 });
