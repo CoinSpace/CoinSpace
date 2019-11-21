@@ -5,4 +5,11 @@
   overflow-y: auto;
   background-color: rgba(0, 0, 0, 0.5);
   outline: 0;
+  #modal-hidden-input {
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: block;
+  }
 }

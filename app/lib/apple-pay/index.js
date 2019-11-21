@@ -3,6 +3,7 @@
 function isApplePaySupported() {
   var ApplePaySession = window.ApplePaySession;
     return (
+      window.location.protocol === 'https:' &&
       ApplePaySession &&
       ApplePaySession.canMakePayments() &&
       ApplePaySession.supportsVersion(2)
@@ -28,19 +29,18 @@ function generateToken(options) {
     };
 
     session.onpaymentauthorized = function(e) {
-      console.log('e', e);
-      options.callback(e.payment.token).then(function() {
+      options.callback(JSON.stringify(e.payment.token)).then(function() {
         session.completePayment(0);
         resolve();
       }).catch(function(err) {
         console.error(err);
         session.completePayment(1);
-        reject(new Error('This payment has been declined.'));
+        reject(new Error('apple_pay_declined'));
       });
     }
 
     session.oncancel = function() {
-      reject(new Error('The user cancelled this transaction.'));
+      reject(new Error('apple_pay_cancelled'));
     };
 
     session.begin();

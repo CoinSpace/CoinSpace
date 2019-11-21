@@ -98,6 +98,7 @@ function open(data) {
   });
 
   ractive.on('back', function() {
+    ractive.fire('ios-blur');
     ractive.set('step', 1);
   });
 

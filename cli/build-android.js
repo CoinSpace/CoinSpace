@@ -56,6 +56,7 @@ webpack(webpackConfig, function(error, stats) {
   utils.cordova('plugin add cordova-plugin-android-fingerprint-auth@1.4.0');
   utils.cordova('plugin add cordova-plugin-customurlscheme@4.3.0 --variable URL_SCHEME=coinspace');
   utils.cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#45badb1e6f909bb80592779f7cb6baf6875df3ab');
+  utils.cordova('plugin add cordova-plugin-cookiemaster@1.0.5');
 
   replace.sync({
     files: path.resolve(mobileBuildPath, 'platforms/android/project.properties'),

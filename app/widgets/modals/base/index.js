@@ -29,7 +29,15 @@ var Modal = Ractive.extend({
       }
     })
 
+    self.on('ios-blur', function() {
+      // fix ios iframe focus
+      var hiddenInput = self.find('#modal-hidden-input');
+      hiddenInput.focus();
+      hiddenInput.blur();
+    });
+
     function dismissModal() {
+      self.fire('ios-blur');
       var onDismiss = self.get('onDismiss');
       if (onDismiss) onDismiss();
       fadeOut(fadeEl);

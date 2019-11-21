@@ -1,3 +1,4 @@
 <div class="overlay--flash _cancel js__fadeEl" tabindex="-1" on-click="cancel" on-escape="cancel">
   {{>content}}
+  <input id="modal-hidden-input" type="text">
 </div>

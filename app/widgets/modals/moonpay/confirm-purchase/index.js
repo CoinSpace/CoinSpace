@@ -55,6 +55,9 @@ function open(data) {
       if (/monthly limit/.test(err.message)) {
         return handleError(new Error('You have exceeded your monthly limit. Please try again later.'));
       }
+      if (err.message === 'apple_pay_cancelled') {
+        return ractive.set('isLoading', false);
+      }
       console.error(err);
       return handleError(new Error('Make sure that your card is valid and has sufficient available balance.'));
     });

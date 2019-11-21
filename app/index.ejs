@@ -10,7 +10,8 @@
   <meta name="format-detection" content="address=no"/>
   <% if (process.env.BUILD_TYPE === 'phonegap') { %>
   <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self' blob: gap:;
+    default-src 'self' blob: gap:
+    https://*.verygoodvault.com;
     connect-src 'self' blob:
     https://shapeshift.io
     https://api.moonpay.io
@@ -28,7 +29,8 @@
     font-src 'self';
     img-src 'self' data: https://www.gravatar.com;
     style-src 'self' 'unsafe-inline';
-    script-src 'self' blob: 'unsafe-eval' 'unsafe-inline';">
+    script-src 'self' blob: 'unsafe-eval' 'unsafe-inline'
+    https://*.sift.com;">
   <% } %>
   <link rel="apple-touch-icon" sizes="57x57" href="<%= require('./assets/icons/apple-touch-icon-57x57.png') %>">
   <link rel="apple-touch-icon" sizes="60x60" href="<%= require('./assets/icons/apple-touch-icon-60x60.png') %>">

@@ -91,7 +91,7 @@ function signIn(email, securityCode) {
     method: 'post',
     params: {apiKey: apiKey},
     data: {email: email, securityCode: securityCode}
-  }).then(fixIosCookies).catch(function(err) {
+  }).then(fixPhonegapCookies).catch(function(err) {
     if (/Invalid body/.test(err.message)) {
       if (securityCode) throw new Error('invalid_security_code');
       throw new Error('invalid_email');
@@ -113,10 +113,10 @@ function refreshToken() {
     url: 'https://api.moonpay.io/v3/customers/refresh_token',
     params: {apiKey: apiKey},
     headers: getAuthorizationHeaders()
-  }).then(fixIosCookies);
+  }).then(fixPhonegapCookies);
 }
 
-function fixIosCookies(data) {
+function fixPhonegapCookies(data) {
   if (process.env.BUILD_TYPE !== 'phonegap') return Promise.resolve(data);
   return new Promise(function(resolve, reject) {
     cookieMaster.setCookieValue('https://api.moonpay.io', 'customerToken', '',
@@ -304,14 +304,10 @@ function createTx(data) {
         amount: data.baseCurrencyAmount
       },
       validateApplePayTransaction: validateApplePayTransaction,
-      // validateApplePayTransaction: function(validationURL) {
-      //   return validateApplePayTransaction(validationURL);
-      // },
       callback: function(token) {
-        console.log('token', token);
         data.externalToken = {
           tokenProvider: 'apple_pay',
-          token: token,
+          token: token
         }
         delete data.card;
         return _createTx(data);
