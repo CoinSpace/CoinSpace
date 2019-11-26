@@ -645,7 +645,7 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="more">
         <source>more</source>
-        <target></target>
+        <target>추가</target>
       </trans-unit>
       <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
         <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
@@ -914,6 +914,258 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Transaction too large">
         <source>Transaction too large</source>
         <target>거래가 너무 큽니다</target>
+      </trans-unit>
+      <trans-unit id="Email">
+        <source>Email</source>
+        <target>이메일</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid email address">
+        <source>Please enter a valid email address</source>
+        <target>유효한 이메일 주소를 입력해주십시오</target>
+      </trans-unit>
+      <trans-unit id="Verification code">
+        <source>Verification code</source>
+        <target>인증 코드</target>
+      </trans-unit>
+      <trans-unit id="We&apos;ve sent verification code to :destination.">
+        <source>We've sent verification code to %(destination)s.</source>
+        <target>인증 코드를 %(destination)s(으)로 보냈습니다.</target>
+      </trans-unit>
+      <trans-unit id="Invalid verification code">
+        <source>Invalid verification code</source>
+        <target>잘못된 인증 코드</target>
+      </trans-unit>
+      <trans-unit id="You can purchase up to :dailyLimitRemaining today, and up to :monthlyLimitRemaining this month.">
+        <source>You can purchase up to %(dailyLimitRemaining)s today, and up to %(monthlyLimitRemaining)s this month.</source>
+        <target>오늘 최대 %(dailyLimitRemaining)s개를 구매하실 수 있으며, 이번 달에 최대 %(monthlyLimitRemaining)s개를 구매할 수 있습니다.</target>
+      </trans-unit>
+      <trans-unit id="To increase your limits you need to pass verification.">
+        <source>To increase your limits you need to pass verification.</source>
+        <target>한도를 늘리려면 인증을 전달해야 합니다.</target>
+      </trans-unit>
+      <trans-unit id="Payment methods">
+        <source>Payment methods</source>
+        <target>결제 방법</target>
+      </trans-unit>
+      <trans-unit id="Verification">
+        <source>Verification</source>
+        <target>인증</target>
+      </trans-unit>
+      <trans-unit id="Default currency (:symbol)">
+        <source>Default currency (%(symbol)s)</source>
+        <target>기본 통화(%(symbol)s)</target>
+      </trans-unit>
+      <trans-unit id="Buy">
+        <source>Buy</source>
+        <target>구매</target>
+      </trans-unit>
+      <trans-unit id="No verification methods are currently available.">
+        <source>No verification methods are currently available.</source>
+        <target>현재 이용 가능한 인증 방법이 없습니다.</target>
+      </trans-unit>
+      <trans-unit id="Identity">
+        <source>Identity</source>
+        <target>신원</target>
+      </trans-unit>
+      <trans-unit id="Document">
+        <source>Document</source>
+        <target>문서</target>
+      </trans-unit>
+      <trans-unit id="Phone number">
+        <source>Phone number</source>
+        <target>전화번호</target>
+      </trans-unit>
+      <trans-unit id="Face match">
+        <source>Face match</source>
+        <target>얼굴 일치</target>
+      </trans-unit>
+      <trans-unit id="Identity verification">
+        <source>Identity verification</source>
+        <target>신원 확인</target>
+      </trans-unit>
+      <trans-unit id="Document verification">
+        <source>Document verification</source>
+        <target>문서 확인</target>
+      </trans-unit>
+      <trans-unit id="Phone number verification">
+        <source>Phone number verification</source>
+        <target>전화번호 확인</target>
+      </trans-unit>
+      <trans-unit id="Face match verification">
+        <source>Face match verification</source>
+        <target>얼굴 일치 확인</target>
+      </trans-unit>
+      <trans-unit id="Continue">
+        <source>Continue</source>
+        <target>계속</target>
+      </trans-unit>
+      <trans-unit id="First name">
+        <source>First name</source>
+        <target>이름</target>
+      </trans-unit>
+      <trans-unit id="Last name">
+        <source>Last name</source>
+        <target>성</target>
+      </trans-unit>
+      <trans-unit id="Date of birth">
+        <source>Date of birth</source>
+        <target>생년월일</target>
+      </trans-unit>
+      <trans-unit id="Country">
+        <source>Country</source>
+        <target>국가</target>
+      </trans-unit>
+      <trans-unit id="Social security number">
+        <source>Social security number</source>
+        <target>사회보장번호</target>
+      </trans-unit>
+      <trans-unit id="Address 2 (optional)">
+        <source>Address 2 (optional)</source>
+        <target>주소 2 (선택사항)</target>
+      </trans-unit>
+      <trans-unit id="City">
+        <source>City</source>
+        <target>도시</target>
+      </trans-unit>
+      <trans-unit id="State">
+        <source>State</source>
+        <target>주</target>
+      </trans-unit>
+      <trans-unit id="Post code">
+        <source>Post code</source>
+        <target>우편번호</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid info">
+        <source>Please enter a valid info</source>
+        <target>유효한 정보를 입력해주십시오</target>
+      </trans-unit>
+      <trans-unit id="Code is invalid or expired. Please try again.">
+        <source>Code is invalid or expired. Please try again.</source>
+        <target>코드가 잘못되었거나 만료되었습니다. 다시 시도해주십시오.</target>
+      </trans-unit>
+      <trans-unit id="Selfie">
+        <source>Selfie</source>
+        <target>셀피</target>
+      </trans-unit>
+      <trans-unit id="Select file...">
+        <source>Select file...</source>
+        <target>파일 선택...</target>
+      </trans-unit>
+      <trans-unit id="Upload failed. Please try again later.">
+        <source>Upload failed. Please try again later.</source>
+        <target>업로드 실패. 나중에 다시 시도해주십시오.</target>
+      </trans-unit>
+      <trans-unit id="Country of issuance">
+        <source>Country of issuance</source>
+        <target>발행 국가</target>
+      </trans-unit>
+      <trans-unit id="Document type">
+        <source>Document type</source>
+        <target>문서 유형</target>
+      </trans-unit>
+      <trans-unit id="Passport">
+        <source>Passport</source>
+        <target>여권</target>
+      </trans-unit>
+      <trans-unit id="National identity card">
+        <source>National identity card</source>
+        <target>국가 신분증</target>
+      </trans-unit>
+      <trans-unit id="Driving licence">
+        <source>Driving licence</source>
+        <target>운전 면허증</target>
+      </trans-unit>
+      <trans-unit id="Front side">
+        <source>Front side</source>
+        <target>앞면</target>
+      </trans-unit>
+      <trans-unit id="Back side">
+        <source>Back side</source>
+        <target>뒷면</target>
+      </trans-unit>
+      <trans-unit id="No payment methods.">
+        <source>No payment methods.</source>
+        <target>결제 방법 없음</target>
+      </trans-unit>
+      <trans-unit id="Add Credit Card">
+        <source>Add Credit Card</source>
+        <target>신용카드 추가</target>
+      </trans-unit>
+      <trans-unit id="Use billing address the same that I have.">
+        <source>Use billing address the same that I have.</source>
+        <target>내가 보유한 것과 동일한 청구 주소 사용</target>
+      </trans-unit>
+      <trans-unit id="Card number">
+        <source>Card number</source>
+        <target>카드 번호</target>
+      </trans-unit>
+      <trans-unit id="Expiry date">
+        <source>Expiry date</source>
+        <target>만료일</target>
+      </trans-unit>
+      <trans-unit id="CVC">
+        <source>CVC</source>
+        <target>CVC</target>
+      </trans-unit>
+      <trans-unit id="Payment authorization declined">
+        <source>Payment authorization declined</source>
+        <target>결제 인증 거부</target>
+      </trans-unit>
+      <trans-unit id="Identity verification must be passed before saving card">
+        <source>Identity verification must be passed before saving card</source>
+        <target>카드를 저장하기 전 신원 확인이 통과되어야 합니다 </target>
+      </trans-unit>
+      <trans-unit id="Payment method">
+        <source>Payment method</source>
+        <target>결제 방법</target>
+      </trans-unit>
+      <trans-unit id="If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.">
+        <source>If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.</source>
+        <target>요금이 +/-&amp;nbsp;2.5%% 이상 변경되면 이메일을 통해 거래 재확인 요청을 받게 됩니다.</target>
+      </trans-unit>
+      <trans-unit id="Confirm purchase">
+        <source>Confirm purchase</source>
+        <target>구매 확인</target>
+      </trans-unit>
+      <trans-unit id="Purchase Successful">
+        <source>Purchase Successful</source>
+        <target>구매 성공</target>
+      </trans-unit>
+      <trans-unit id="3D secure authentication requested.">
+        <source>3D secure authentication requested.</source>
+        <target>3D 보안 인증 요청됨</target>
+      </trans-unit>
+      <trans-unit id="3D secure authentication failed">
+        <source>3D secure authentication failed</source>
+        <target>3D 보안 인증 실패</target>
+      </trans-unit>
+      <trans-unit id="Make sure that your card is valid and has sufficient available balance.">
+        <source>Make sure that your card is valid and has sufficient available balance.</source>
+        <target>카드가 유효하고 한도가 충분한지 확인하여 주십시오.</target>
+      </trans-unit>
+      <trans-unit id="Please select a payment method">
+        <source>Please select a payment method</source>
+        <target>결제 방법을 선택하십시오</target>
+      </trans-unit>
+      <trans-unit id="Pending">
+        <source>Pending</source>
+        <target>대기 중</target>
+      </trans-unit>
+      <trans-unit id="Waiting for authorization">
+        <source>Waiting for authorization</source>
+        <target>인증 대기</target>
+      </trans-unit>
+      <trans-unit id="Failure reason">
+        <source>Failure reason</source>
+        <target>실패 사유</target>
+      </trans-unit>
+      <trans-unit id="You have exceeded your daily limit. Please try again later.">
+        <source>You have exceeded your daily limit. Please try again later.</source>
+        <target>일일 한도를 초과했습니다. 나중에 다시 시도하십시오.</target>
+      </trans-unit>
+      <trans-unit id="You have exceeded your monthly limit. Please try again later.">
+        <source>You have exceeded your monthly limit. Please try again later.</source>
+        <target>월간 한도를 초과했습니다. 나중에 다시 시도하십시오.</target>
       </trans-unit>
     </body>
   </file>

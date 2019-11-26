@@ -881,7 +881,7 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Changelly_TOS">
         <source>I have read and I agree to the Changelly &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;terms of use&lt;/a&gt; and &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;privacy policy&lt;/a&gt;.&lt;br&gt;By clicking "Accept", I acknowledge and understan that my transaction may trigger AML/KYC verification according to &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;Changelly AML/KYC&lt;/a&gt;.</source>
-        <target></target>
+        <target>Elolvastam és elfogadom a Changelly &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;felhasználási feltételeit&lt;/a&gt; és &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;adatvédelmi irányelveit&lt;/a&gt;.&lt;br&gt;Az „Elfogadás” lehetőségre kattintva elfogadom és megértem, hogy a &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;Changelly AML/KYC&lt;/a&gt; értelmében a tranzakcióm AML/KYC hitelesítést fog igényelni.</target>
       </trans-unit>
       <trans-unit id="max.">
         <source>max.</source>
@@ -893,7 +893,7 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Amount of coins that is charged from your balance for single transaction (&lt;a href=&quot;&quot; onclick=&quot;window.open(&apos;https://www.coin.space/all-about-bitcoin-fees&apos;, &apos;_system&apos;); return false;&quot;&gt;more info&lt;/a&gt;).">
         <source>Amount of coins that is charged from your balance for single transaction (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;more info&lt;/a&gt;).</source>
-        <target></target>
+        <target>Az egyetlen tranzakcióért (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;további információk itt&lt;/a&gt;) egyenlegedről levont érmék száma.</target>
       </trans-unit>
       <trans-unit id="Confirm passphrase">
         <source>Confirm passphrase</source>
@@ -909,11 +909,263 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Buy with Credit Card">
         <source>Buy with Credit Card</source>
-        <target></target>
+        <target>Vásárlás hitelkártyával</target>
       </trans-unit>
       <trans-unit id="Transaction too large">
         <source>Transaction too large</source>
         <target>Túl nagy tranzakció</target>
+      </trans-unit>
+      <trans-unit id="Email">
+        <source>Email</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid email address">
+        <source>Please enter a valid email address</source>
+        <target>Kérjük, adj meg egy érvényes e-mail-címet</target>
+      </trans-unit>
+      <trans-unit id="Verification code">
+        <source>Verification code</source>
+        <target>Hitelesítőkód</target>
+      </trans-unit>
+      <trans-unit id="We&apos;ve sent verification code to :destination.">
+        <source>We've sent verification code to %(destination)s.</source>
+        <target>A hitelesítőkódot a következő címre küldtük: %(destination)s.</target>
+      </trans-unit>
+      <trans-unit id="Invalid verification code">
+        <source>Invalid verification code</source>
+        <target>Hitelesítőkód</target>
+      </trans-unit>
+      <trans-unit id="You can purchase up to :dailyLimitRemaining today, and up to :monthlyLimitRemaining this month.">
+        <source>You can purchase up to %(dailyLimitRemaining)s today, and up to %(monthlyLimitRemaining)s this month.</source>
+        <target>Ma akár %(dailyLimitRemaining)s, ebben a hónapban pedig akár %(monthlyLimitRemaining)s darabot is vásárolhatsz.</target>
+      </trans-unit>
+      <trans-unit id="To increase your limits you need to pass verification.">
+        <source>To increase your limits you need to pass verification.</source>
+        <target>A limit növeléséhez teljesítened kell a hitelesítést.</target>
+      </trans-unit>
+      <trans-unit id="Payment methods">
+        <source>Payment methods</source>
+        <target>Utalási módszerek</target>
+      </trans-unit>
+      <trans-unit id="Verification">
+        <source>Verification</source>
+        <target>Hitelesítés</target>
+      </trans-unit>
+      <trans-unit id="Default currency (:symbol)">
+        <source>Default currency (%(symbol)s)</source>
+        <target>Alapértelmezett deviza (%(symbol)s)</target>
+      </trans-unit>
+      <trans-unit id="Buy">
+        <source>Buy</source>
+        <target>Vásárlás</target>
+      </trans-unit>
+      <trans-unit id="No verification methods are currently available.">
+        <source>No verification methods are currently available.</source>
+        <target>Jelenleg nincs elérhető hitelesítési mód.</target>
+      </trans-unit>
+      <trans-unit id="Identity">
+        <source>Identity</source>
+        <target>Személyazonosság</target>
+      </trans-unit>
+      <trans-unit id="Document">
+        <source>Document</source>
+        <target>Dokumentum</target>
+      </trans-unit>
+      <trans-unit id="Phone number">
+        <source>Phone number</source>
+        <target>Telefonszám</target>
+      </trans-unit>
+      <trans-unit id="Face match">
+        <source>Face match</source>
+        <target>Arcfelismerés</target>
+      </trans-unit>
+      <trans-unit id="Identity verification">
+        <source>Identity verification</source>
+        <target>Személyazonosság hitelesítése</target>
+      </trans-unit>
+      <trans-unit id="Document verification">
+        <source>Document verification</source>
+        <target>Dokumentum hitelesítése</target>
+      </trans-unit>
+      <trans-unit id="Phone number verification">
+        <source>Phone number verification</source>
+        <target>Telefonszám hitelesítése</target>
+      </trans-unit>
+      <trans-unit id="Face match verification">
+        <source>Face match verification</source>
+        <target>Arcfelismerés hitelesítése</target>
+      </trans-unit>
+      <trans-unit id="Continue">
+        <source>Continue</source>
+        <target>Folytatás</target>
+      </trans-unit>
+      <trans-unit id="First name">
+        <source>First name</source>
+        <target>Keresztnév</target>
+      </trans-unit>
+      <trans-unit id="Last name">
+        <source>Last name</source>
+        <target>Vezetéknév</target>
+      </trans-unit>
+      <trans-unit id="Date of birth">
+        <source>Date of birth</source>
+        <target>Születési dátum</target>
+      </trans-unit>
+      <trans-unit id="Country">
+        <source>Country</source>
+        <target>Ország</target>
+      </trans-unit>
+      <trans-unit id="Social security number">
+        <source>Social security number</source>
+        <target>Társadalombiztosítási szám</target>
+      </trans-unit>
+      <trans-unit id="Address 2 (optional)">
+        <source>Address 2 (optional)</source>
+        <target>Címsor 2 (opcionális)</target>
+      </trans-unit>
+      <trans-unit id="City">
+        <source>City</source>
+        <target>Város</target>
+      </trans-unit>
+      <trans-unit id="State">
+        <source>State</source>
+        <target>Állam</target>
+      </trans-unit>
+      <trans-unit id="Post code">
+        <source>Post code</source>
+        <target>Irányítószám</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid info">
+        <source>Please enter a valid info</source>
+        <target>Kérjük, érvényes információkat adj meg</target>
+      </trans-unit>
+      <trans-unit id="Code is invalid or expired. Please try again.">
+        <source>Code is invalid or expired. Please try again.</source>
+        <target>A kód érvénytelen vagy lejárt. Kérjük, próbáld újra.</target>
+      </trans-unit>
+      <trans-unit id="Selfie">
+        <source>Selfie</source>
+        <target>Szelfi</target>
+      </trans-unit>
+      <trans-unit id="Select file...">
+        <source>Select file...</source>
+        <target>Fájl kiválasztása ...</target>
+      </trans-unit>
+      <trans-unit id="Upload failed. Please try again later.">
+        <source>Upload failed. Please try again later.</source>
+        <target>A feltöltés sikertelen volt. Kérjük, próbáld újra később.</target>
+      </trans-unit>
+      <trans-unit id="Country of issuance">
+        <source>Country of issuance</source>
+        <target>Kibocsátási ország</target>
+      </trans-unit>
+      <trans-unit id="Document type">
+        <source>Document type</source>
+        <target>Dokumentum típusa</target>
+      </trans-unit>
+      <trans-unit id="Passport">
+        <source>Passport</source>
+        <target>Útlevél</target>
+      </trans-unit>
+      <trans-unit id="National identity card">
+        <source>National identity card</source>
+        <target>Személyi igazolvány</target>
+      </trans-unit>
+      <trans-unit id="Driving licence">
+        <source>Driving licence</source>
+        <target>Vezetői engedély</target>
+      </trans-unit>
+      <trans-unit id="Front side">
+        <source>Front side</source>
+        <target>Elülső oldal</target>
+      </trans-unit>
+      <trans-unit id="Back side">
+        <source>Back side</source>
+        <target>Hátoldal</target>
+      </trans-unit>
+      <trans-unit id="No payment methods.">
+        <source>No payment methods.</source>
+        <target>Nincsenek fizetési módok.</target>
+      </trans-unit>
+      <trans-unit id="Add Credit Card">
+        <source>Add Credit Card</source>
+        <target>Hitelkártya hozzáadása</target>
+      </trans-unit>
+      <trans-unit id="Use billing address the same that I have.">
+        <source>Use billing address the same that I have.</source>
+        <target>Ugyanannak a számlázási címnek a használata, amellyel rendelkezem.</target>
+      </trans-unit>
+      <trans-unit id="Card number">
+        <source>Card number</source>
+        <target>Kártyaszám</target>
+      </trans-unit>
+      <trans-unit id="Expiry date">
+        <source>Expiry date</source>
+        <target>Lejárat dátuma</target>
+      </trans-unit>
+      <trans-unit id="CVC">
+        <source>CVC</source>
+        <target>CVC-kód</target>
+      </trans-unit>
+      <trans-unit id="Payment authorization declined">
+        <source>Payment authorization declined</source>
+        <target>Az utalás hitelesítése elutasítva</target>
+      </trans-unit>
+      <trans-unit id="Identity verification must be passed before saving card">
+        <source>Identity verification must be passed before saving card</source>
+        <target>A kártya elmentése előtt teljesíteni kell a személyazonosság hitelesítését</target>
+      </trans-unit>
+      <trans-unit id="Payment method">
+        <source>Payment method</source>
+        <target>Utalási módszerek</target>
+      </trans-unit>
+      <trans-unit id="If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.">
+        <source>If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.</source>
+        <target>Ha az arány több mint  értékkel változik, akkor a rendszer felkér, hogy a tranzakciót e-mailen keresztül hitelesítsd.</target>
+      </trans-unit>
+      <trans-unit id="Confirm purchase">
+        <source>Confirm purchase</source>
+        <target>Erősítsd meg a vásárlást</target>
+      </trans-unit>
+      <trans-unit id="Purchase Successful">
+        <source>Purchase Successful</source>
+        <target>Sikeres vásárlás</target>
+      </trans-unit>
+      <trans-unit id="3D secure authentication requested.">
+        <source>3D secure authentication requested.</source>
+        <target>3D-s biztonsági hitelesítés szükséges.</target>
+      </trans-unit>
+      <trans-unit id="3D secure authentication failed">
+        <source>3D secure authentication failed</source>
+        <target>A 3D-s biztonsági hitelesítés sikertelen volt</target>
+      </trans-unit>
+      <trans-unit id="Make sure that your card is valid and has sufficient available balance.">
+        <source>Make sure that your card is valid and has sufficient available balance.</source>
+        <target>Győződj meg róla, hogy a kártyád érvényes, és rendelkezel a szükséges egyenleggel.</target>
+      </trans-unit>
+      <trans-unit id="Please select a payment method">
+        <source>Please select a payment method</source>
+        <target>Kérjük, válassz utalási módot</target>
+      </trans-unit>
+      <trans-unit id="Pending">
+        <source>Pending</source>
+        <target>Függőben</target>
+      </trans-unit>
+      <trans-unit id="Waiting for authorization">
+        <source>Waiting for authorization</source>
+        <target>Várakozás a hitelesítésre</target>
+      </trans-unit>
+      <trans-unit id="Failure reason">
+        <source>Failure reason</source>
+        <target>A hiba oka</target>
+      </trans-unit>
+      <trans-unit id="You have exceeded your daily limit. Please try again later.">
+        <source>You have exceeded your daily limit. Please try again later.</source>
+        <target>Meghaladtad a napi limited. Kérjük, próbáld újra később.</target>
+      </trans-unit>
+      <trans-unit id="You have exceeded your monthly limit. Please try again later.">
+        <source>You have exceeded your monthly limit. Please try again later.</source>
+        <target>Meghaladtad a havi limited. Kérjük, próbáld újra később.</target>
       </trans-unit>
     </body>
   </file>

@@ -909,11 +909,263 @@ Zostanie przeliczony na %(toSymbol)s, i wysłany do
       </trans-unit>
       <trans-unit id="Buy with Credit Card">
         <source>Buy with Credit Card</source>
-        <target></target>
+        <target>Kup kartą kredytową</target>
       </trans-unit>
       <trans-unit id="Transaction too large">
         <source>Transaction too large</source>
         <target>Transakcja zbyt duża</target>
+      </trans-unit>
+      <trans-unit id="Email">
+        <source>Email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid email address">
+        <source>Please enter a valid email address</source>
+        <target>Wprowadź prawidłowy email</target>
+      </trans-unit>
+      <trans-unit id="Verification code">
+        <source>Verification code</source>
+        <target>Kod weryfikacyjny</target>
+      </trans-unit>
+      <trans-unit id="We&apos;ve sent verification code to :destination.">
+        <source>We've sent verification code to %(destination)s.</source>
+        <target>Wysłaliśmy kod weryfikacyjny na adres %(destination)s.</target>
+      </trans-unit>
+      <trans-unit id="Invalid verification code">
+        <source>Invalid verification code</source>
+        <target>Nieprawidłowy kod weryfikacyjny</target>
+      </trans-unit>
+      <trans-unit id="You can purchase up to :dailyLimitRemaining today, and up to :monthlyLimitRemaining this month.">
+        <source>You can purchase up to %(dailyLimitRemaining)s today, and up to %(monthlyLimitRemaining)s this month.</source>
+        <target>Możesz kupić do %(dailyLimitRemaining)s dzisiaj i do %(monthlyLimitRemaining)s w tym miesiącu.</target>
+      </trans-unit>
+      <trans-unit id="To increase your limits you need to pass verification.">
+        <source>To increase your limits you need to pass verification.</source>
+        <target>Aby zwiększyć swoje limity, musisz przejść weryfikację.</target>
+      </trans-unit>
+      <trans-unit id="Payment methods">
+        <source>Payment methods</source>
+        <target>Metody płatności</target>
+      </trans-unit>
+      <trans-unit id="Verification">
+        <source>Verification</source>
+        <target>Weryfikacja</target>
+      </trans-unit>
+      <trans-unit id="Default currency (:symbol)">
+        <source>Default currency (%(symbol)s)</source>
+        <target>Domyślna waluta(%(symbol)s)</target>
+      </trans-unit>
+      <trans-unit id="Buy">
+        <source>Buy</source>
+        <target>Kup</target>
+      </trans-unit>
+      <trans-unit id="No verification methods are currently available.">
+        <source>No verification methods are currently available.</source>
+        <target>Obecnie nie są dostępne żadne metody weryfikacji.</target>
+      </trans-unit>
+      <trans-unit id="Identity">
+        <source>Identity</source>
+        <target>Dokument</target>
+      </trans-unit>
+      <trans-unit id="Document">
+        <source>Document</source>
+        <target>Tożsamości</target>
+      </trans-unit>
+      <trans-unit id="Phone number">
+        <source>Phone number</source>
+        <target>Numer telefonu</target>
+      </trans-unit>
+      <trans-unit id="Face match">
+        <source>Face match</source>
+        <target>Dopasuj twarz</target>
+      </trans-unit>
+      <trans-unit id="Identity verification">
+        <source>Identity verification</source>
+        <target>Weryfikacja tożsamości</target>
+      </trans-unit>
+      <trans-unit id="Document verification">
+        <source>Document verification</source>
+        <target>Weryfikacja dokumentu</target>
+      </trans-unit>
+      <trans-unit id="Phone number verification">
+        <source>Phone number verification</source>
+        <target>Weryfikacja numeru telefonu</target>
+      </trans-unit>
+      <trans-unit id="Face match verification">
+        <source>Face match verification</source>
+        <target>Weryfikacja dopasowania twarzy</target>
+      </trans-unit>
+      <trans-unit id="Continue">
+        <source>Continue</source>
+        <target>Dalej</target>
+      </trans-unit>
+      <trans-unit id="First name">
+        <source>First name</source>
+        <target>Imię</target>
+      </trans-unit>
+      <trans-unit id="Last name">
+        <source>Last name</source>
+        <target>Nazwisko</target>
+      </trans-unit>
+      <trans-unit id="Date of birth">
+        <source>Date of birth</source>
+        <target>Data urodzenia</target>
+      </trans-unit>
+      <trans-unit id="Country">
+        <source>Country</source>
+        <target>Kraj</target>
+      </trans-unit>
+      <trans-unit id="Social security number">
+        <source>Social security number</source>
+        <target>Numer ubezpieczenia społecznego</target>
+      </trans-unit>
+      <trans-unit id="Address 2 (optional)">
+        <source>Address 2 (optional)</source>
+        <target>Adres 2 (opcjonale)</target>
+      </trans-unit>
+      <trans-unit id="City">
+        <source>City</source>
+        <target>Miasto</target>
+      </trans-unit>
+      <trans-unit id="State">
+        <source>State</source>
+        <target>Stan</target>
+      </trans-unit>
+      <trans-unit id="Post code">
+        <source>Post code</source>
+        <target>Kod pocztowy</target>
+      </trans-unit>
+      <trans-unit id="Please enter a valid info">
+        <source>Please enter a valid info</source>
+        <target>Wprowadź prawidłowe informacje</target>
+      </trans-unit>
+      <trans-unit id="Code is invalid or expired. Please try again.">
+        <source>Code is invalid or expired. Please try again.</source>
+        <target>Kod jest nieprawidłowy lub wygasł. Proszę spróbuj ponownie.</target>
+      </trans-unit>
+      <trans-unit id="Selfie">
+        <source>Selfie</source>
+        <target>Selfie</target>
+      </trans-unit>
+      <trans-unit id="Select file...">
+        <source>Select file...</source>
+        <target>Wybierz plik...</target>
+      </trans-unit>
+      <trans-unit id="Upload failed. Please try again later.">
+        <source>Upload failed. Please try again later.</source>
+        <target>Przesyłanie nie powiodło się. Spróbuj ponownie później.</target>
+      </trans-unit>
+      <trans-unit id="Country of issuance">
+        <source>Country of issuance</source>
+        <target>Kraj wystawienia</target>
+      </trans-unit>
+      <trans-unit id="Document type">
+        <source>Document type</source>
+        <target>Rodzaj dokumentu</target>
+      </trans-unit>
+      <trans-unit id="Passport">
+        <source>Passport</source>
+        <target>Paszport</target>
+      </trans-unit>
+      <trans-unit id="National identity card">
+        <source>National identity card</source>
+        <target>Krajowy dowód tożsamości</target>
+      </trans-unit>
+      <trans-unit id="Driving licence">
+        <source>Driving licence</source>
+        <target>Prawo jazdy</target>
+      </trans-unit>
+      <trans-unit id="Front side">
+        <source>Front side</source>
+        <target>Przód</target>
+      </trans-unit>
+      <trans-unit id="Back side">
+        <source>Back side</source>
+        <target>Tył</target>
+      </trans-unit>
+      <trans-unit id="No payment methods.">
+        <source>No payment methods.</source>
+        <target>Brak metod płatności.</target>
+      </trans-unit>
+      <trans-unit id="Add Credit Card">
+        <source>Add Credit Card</source>
+        <target>Dodaj kartę kredytową</target>
+      </trans-unit>
+      <trans-unit id="Use billing address the same that I have.">
+        <source>Use billing address the same that I have.</source>
+        <target>Użyj adresu rozliczeniowego takiego samego, jak podano.</target>
+      </trans-unit>
+      <trans-unit id="Card number">
+        <source>Card number</source>
+        <target>Numer karty</target>
+      </trans-unit>
+      <trans-unit id="Expiry date">
+        <source>Expiry date</source>
+        <target>Data wygaśnięcia</target>
+      </trans-unit>
+      <trans-unit id="CVC">
+        <source>CVC</source>
+        <target>CVC</target>
+      </trans-unit>
+      <trans-unit id="Payment authorization declined">
+        <source>Payment authorization declined</source>
+        <target>Autoryzacja płatności została odrzucona</target>
+      </trans-unit>
+      <trans-unit id="Identity verification must be passed before saving card">
+        <source>Identity verification must be passed before saving card</source>
+        <target>Weryfikacja tożsamości musi zostać przeprowadzona przed zapisaniem karty</target>
+      </trans-unit>
+      <trans-unit id="Payment method">
+        <source>Payment method</source>
+        <target>Metoda płatności</target>
+      </trans-unit>
+      <trans-unit id="If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.">
+        <source>If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.</source>
+        <target>Jeśli stawka zmieni się o więcej niż +/-&amp;nbsp;2.5%% zostaniesz poproszony o potwierdzenie transakcji e-mailem.</target>
+      </trans-unit>
+      <trans-unit id="Confirm purchase">
+        <source>Confirm purchase</source>
+        <target>Potwierdź zakup</target>
+      </trans-unit>
+      <trans-unit id="Purchase Successful">
+        <source>Purchase Successful</source>
+        <target>Zakup wykonany pomyślnie</target>
+      </trans-unit>
+      <trans-unit id="3D secure authentication requested.">
+        <source>3D secure authentication requested.</source>
+        <target>Zażądano bezpiecznego uwierzytelnienia 3D.</target>
+      </trans-unit>
+      <trans-unit id="3D secure authentication failed">
+        <source>3D secure authentication failed</source>
+        <target>Bezpieczne uwierzytelnianie 3D nie powiodło się</target>
+      </trans-unit>
+      <trans-unit id="Make sure that your card is valid and has sufficient available balance.">
+        <source>Make sure that your card is valid and has sufficient available balance.</source>
+        <target>Upewnij się, że Twoja karta jest ważna i ma wystarczające dostępne saldo.</target>
+      </trans-unit>
+      <trans-unit id="Please select a payment method">
+        <source>Please select a payment method</source>
+        <target>Zaznacz metodę płatności</target>
+      </trans-unit>
+      <trans-unit id="Pending">
+        <source>Pending</source>
+        <target>W trakcie</target>
+      </trans-unit>
+      <trans-unit id="Waiting for authorization">
+        <source>Waiting for authorization</source>
+        <target>Oczekiwanie na autoryzację</target>
+      </trans-unit>
+      <trans-unit id="Failure reason">
+        <source>Failure reason</source>
+        <target>Przyczyna niepowodzenia</target>
+      </trans-unit>
+      <trans-unit id="You have exceeded your daily limit. Please try again later.">
+        <source>You have exceeded your daily limit. Please try again later.</source>
+        <target>Przekroczono dzienny limit. Spróbuj ponownie później.</target>
+      </trans-unit>
+      <trans-unit id="You have exceeded your monthly limit. Please try again later.">
+        <source>You have exceeded your monthly limit. Please try again later.</source>
+        <target>Przekroczono miesięczny limit. Spróbuj ponownie później.</target>
       </trans-unit>
     </body>
   </file>
