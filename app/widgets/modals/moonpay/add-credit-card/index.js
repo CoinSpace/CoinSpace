@@ -3,17 +3,13 @@
 var Ractive = require('widgets/modals/base');
 var showError = require('widgets/modals/flash').showError;
 var moonpay = require('lib/moonpay');
-var mpSdk = require('./moonpay-sdk');
 var initDropdown = require('widgets/dropdown');
+var scriptjs = require('scriptjs');
 
 var ractive;
 
 function open(data) {
-
   var customer = moonpay.getCustomer();
-  if (!mpSdk.customerId) {
-    mpSdk.initialize(process.env.MOONPAY_API_KEY, customer.id);
-  }
   var hasAddress = customer.address.street && customer.address.town && customer.address.postCode && customer.address.country;
 
   ractive = new Ractive({
@@ -34,6 +30,7 @@ function open(data) {
       },
       showStates: false,
       isInited: moonpay.getCountries('allowed').length !== 0,
+      isMoonPaySdkInited: !!window.moonpay,
       isCcFormInited: false
     }
   });
@@ -52,6 +49,12 @@ function open(data) {
   } else {
     initPickers();
   }
+
+  scriptjs('https://cdn.moonpay.io/moonpay-sdk.js', function() {
+    if (window.moonpay) {
+      ractive.set('isMoonPaySdkInited', true);
+    };
+  });
 
   function initPickers() {
     var countries = moonpay.getCountries('allowed');
@@ -118,6 +121,9 @@ function open(data) {
 
   function initCcForm() {
     if (ccForm) return;
+
+    var mpSdk = window.moonpay;
+    mpSdk.initialize(process.env.MOONPAY_API_KEY, customer.id);
 
     ccForm = mpSdk.createCardDetailsForm(function(state) {
       if (!ractive.get('isCcFormInited') && state.number && state.cvc && state.expiryDate) {

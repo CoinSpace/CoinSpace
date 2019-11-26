@@ -87,6 +87,7 @@
     "replace-in-file": "^3.0.0-beta.2",
     "safe-buffer": "^5.1.1",
     "sass-loader": "^6.0.6",
+    "scriptjs": "^2.5.9",
     "secure-random": "^1.1.1",
     "sinon": "^3.2.1",
     "strftime": "^0.10.0",
