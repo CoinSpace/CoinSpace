@@ -84,7 +84,7 @@ var config = merge(common, {
       allChunks: true,
     }),
     new CopyWebpackPlugin([
-      {from: 'app/apple-developer-merchantid-domain-association.prod.txt', to: '.well-known/apple-developer-merchantid-domain-association.txt'},
+      {from: `app/apple-developer-merchantid-domain-association.${process.env.ENV}.txt`, to: '.well-known/apple-developer-merchantid-domain-association.txt'},
     ])
   ]
 });

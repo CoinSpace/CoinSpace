@@ -58,9 +58,6 @@ module.exports = merge(common, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new CopyWebpackPlugin([
-      {from: 'app/apple-developer-merchantid-domain-association.dev.txt', to: '.well-known/apple-developer-merchantid-domain-association.txt'},
-    ]),
     dotEnv
   ]
 });

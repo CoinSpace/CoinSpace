@@ -24,6 +24,7 @@ prompt.get(utils.prompts.yesno, function (err, result) {
   console.log('Start building (webpack)...');
 
   process.env['ENV_FILE'] = envFile;
+  process.env['ENV'] = program.env;
   var webpackConfig = require('../webpack.prod');
 
   webpack(webpackConfig, function(error, stats) {
