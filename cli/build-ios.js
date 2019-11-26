@@ -18,6 +18,7 @@ console.log('Start building (webpack)...');
 
 var envFile = `.env.${program.env}`;
 process.env['ENV_FILE'] = envFile;
+process.env['ENV'] = program.env;
 process.env['BUILD_TYPE'] = 'phonegap';
 var webpackConfig = require('../webpack.prod');
 
