@@ -4,6 +4,7 @@ var Ractive = require('widgets/modals/base');
 var showError = require('widgets/modals/flash').showError;
 var CS = require('lib/wallet');
 var shapeshift = require('lib/shapeshift');
+var moonpay = require('lib/moonpay');
 
 function open() {
 
@@ -25,6 +26,7 @@ function open() {
       CS.reset();
       CS.resetPin();
       shapeshift.cleanAccessToken();
+      moonpay.cleanAccessToken();
       ractive.set('confirmation', false);
       ractive.set('success', true);
       setTimeout(function() {

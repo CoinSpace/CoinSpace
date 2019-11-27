@@ -7,6 +7,7 @@ var importPrivateKey = require('widgets/modals/import-private-key');
 var exportPrivateKeys = require('widgets/modals/export-private-keys');
 var CS = require('lib/wallet');
 var shapeshift = require('lib/shapeshift');
+var moonpay = require('lib/moonpay');
 var showEosSetupAccount = require('widgets/modals/eos-setup-account');
 
 module.exports = function(el) {
@@ -28,6 +29,7 @@ module.exports = function(el) {
     CS.reset();
     CS.resetPin();
     shapeshift.cleanAccessToken();
+    moonpay.cleanAccessToken();
     location.reload();
   });
 
