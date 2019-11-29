@@ -4,7 +4,7 @@ var Ractive = require('lib/ractive');
 var emitter = require('lib/emitter');
 var moonpay = require('lib/moonpay');
 var denomination = require('lib/denomination');
-var getTokenNetwork = require('lib/token').getTokenNetwork;
+var getToken = require('lib/token').getToken;
 var Big = require('big.js');
 var _ = require('lodash');
 var showAddCreditCard = require('widgets/modals/moonpay/add-credit-card');
@@ -52,7 +52,7 @@ module.exports = function(el) {
     ractive.set('selectedCard', undefined);
 
     fiatSymbol = context.fiatSymbol;
-    cryptoSymbol = denomination(getTokenNetwork());
+    cryptoSymbol = denomination(getToken());
     ractive.set('fiatSymbol', fiatSymbol);
     ractive.set('cryptoSymbol', cryptoSymbol);
 
