@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="Back to coin">
         <source>Back to coin</source>
-        <target>Zurück zu coin</target>
+        <target>Zurück zu Coin</target>
       </trans-unit>
       <trans-unit id="Create new wallet">
         <source>Create new wallet</source>
@@ -15,19 +15,19 @@
       </trans-unit>
       <trans-unit id="We are about to generate your very own passphrase">
         <source>We're about to generate your very own passphrase</source>
-        <target>Wir werden Deine eigene Passphrase erzeugen</target>
+        <target>Wir werden Deine eigene Passphrase erstellen.</target>
       </trans-unit>
       <trans-unit id="This keeps your account secure, and lets you open your wallet on multiple devices.">
         <source>This keeps your account secure, and lets you open your wallet on multiple devices.</source>
-        <target>Dies sichert Dein Konto ab und ermöglicht es Deine Brieftasche auf mehreren Geräten zu öffnen.</target>
+        <target>Dies sichert Dein Konto ab und Du kannst Deine Brieftasche auf mehreren Geräten öffnen.</target>
       </trans-unit>
       <trans-unit id="It is very important you write this down.">
         <source>It's very important you write this down.</source>
-        <target>Es ist sehr wichtig, dass Du Dir dies aufschreibst. </target>
+        <target>Es ist sehr wichtig, dass sie Dir aufschreibst. </target>
       </trans-unit>
       <trans-unit id="Generate passphrase">
         <source>Generate passphrase</source>
-        <target>Passphrase erzeugen</target>
+        <target>Passphrase erstellen</target>
       </trans-unit>
       <trans-unit id="Go back">
         <source>Go back</source>
@@ -35,11 +35,11 @@
       </trans-unit>
       <trans-unit id="Generating">
         <source>Generating</source>
-        <target>Erzeugen</target>
+        <target>Wird erstellt</target>
       </trans-unit>
       <trans-unit id="Synchronizing Wallet">
         <source>Synchronizing Wallet</source>
-        <target>Synchronisiere die Brieftasche</target>
+        <target>Brieftasche wird synchronisiert</target>
       </trans-unit>
       <trans-unit id="Your passphrase (12 words)">
         <source>Your passphrase (12 words)</source>
@@ -51,11 +51,11 @@
       </trans-unit>
       <trans-unit id="Without it you will lose access to your wallet.">
         <source>Without it you will lose access to your wallet.</source>
-        <target>Ohne dies wirst Du Zugang zu Deiner Brieftasche verlieren.</target>
+        <target>Ohne sie verlierst Du den Zugang zu Deiner Brieftasche.</target>
       </trans-unit>
       <trans-unit id="I have written down or otherwise securely stored my passphrase">
         <source>I have written down or otherwise securely stored my passphrase</source>
-        <target>Ich habe die Passphrase aufgeschrieben oder anders sicher gespeichert</target>
+        <target>Ich habe die Passphrase aufgeschrieben bzw. sicher gespeichert</target>
       </trans-unit>
       <trans-unit id="Open wallet">
         <source>Open wallet</source>
@@ -63,11 +63,11 @@
       </trans-unit>
       <trans-unit id="Checking passphrase">
         <source>Checking passphrase</source>
-        <target>Prüfe die Passphrase</target>
+        <target>Passphrase wird überprüft</target>
       </trans-unit>
       <trans-unit id="Enter Passphrase">
         <source>Enter Passphrase</source>
-        <target>Gib Deine Passphrase ein</target>
+        <target>Gib Deine Passphrase ein.</target>
       </trans-unit>
       <trans-unit id="Invalid passphrase">
         <source>Invalid passphrase</source>
@@ -79,11 +79,11 @@
       </trans-unit>
       <trans-unit id="Set a PIN for quick access">
         <source>Set a PIN for quick access</source>
-        <target>Lege einen PIN für schnellen Zugang fest</target>
+        <target>Lege einen PIN für den schnellen Zugang fest.</target>
       </trans-unit>
       <trans-unit id="Review passphrase again">
         <source>Review passphrase again</source>
-        <target>Prüfe die Passphrase noch einmal</target>
+        <target>Überprüfe die Passphrase noch einmal.</target>
       </trans-unit>
       <trans-unit id="Open a different wallet">
         <source>Open a different wallet</source>
@@ -91,19 +91,19 @@
       </trans-unit>
       <trans-unit id="PIN must be a 4-digit number">
         <source>PIN must be a 4-digit number</source>
-        <target>PIN muss eine 4-stellige Nummer sein</target>
+        <target>Die PIN muss eine 4-stellige Nummer sein.</target>
       </trans-unit>
       <trans-unit id="Verifying PIN">
         <source>Verifying PIN</source>
-        <target>Prüfe PIN</target>
+        <target>Überprüfen der PIN</target>
       </trans-unit>
       <trans-unit id="Setting PIN">
         <source>Setting PIN</source>
-        <target>Setze PIN</target>
+        <target>Festlegen der PIN</target>
       </trans-unit>
       <trans-unit id="This might take some time,">
         <source>This might take some time,</source>
-        <target>Dies kann ein wenig dauern,</target>
+        <target>Dies kann ein etwas dauern,</target>
       </trans-unit>
       <trans-unit id="please be patient.">
         <source>please be patient.</source>
@@ -111,11 +111,11 @@
       </trans-unit>
       <trans-unit id="Your PIN is incorrect">
         <source>Your PIN is incorrect</source>
-        <target>Dein PIN is falsch</target>
+        <target>Deine PIN ist falsch.</target>
       </trans-unit>
       <trans-unit id="Request timeout. Please check your internet connection.">
         <source>Request timeout. Please check your internet connection.</source>
-        <target>Verbindungsfehler. Bitte prüfe Deine Internetverbindung.</target>
+        <target>Verbindungsfehler. Bitte überprüfe Deine Internetverbindung.</target>
       </trans-unit>
       <trans-unit id="Could not save your details">
         <source>Could not save your details</source>
@@ -123,27 +123,27 @@
       </trans-unit>
       <trans-unit id="We could not connect you to Mecto, please check your internet connection.">
         <source>We couldn't connect you to Mecto, please check your internet connection.</source>
-        <target>Wir konnten Dich nicht mit Mecto verbinden, bitte prüfe Deine Internetverbindung.</target>
+        <target>Wir konnten Dich nicht mit Mecto verbinden, bitte überprüfe Deine Internetverbindung.</target>
       </trans-unit>
       <trans-unit id="Please enter a valid address to send to">
         <source>Please enter a valid address to send to</source>
-        <target>Bitte gebe eine gültige Empfängeradresse an</target>
+        <target>Bitte gib eine gültige Empfängeradresse an</target>
       </trans-unit>
       <trans-unit id="Please enter an amount above">
         <source>Please enter an amount above %(dust)s</source>
-        <target>Bitte gebe einen grösseren Betrag als %(dust)s an</target>
+        <target>Bitte gebe einen höheren Betrag als %(dust)s an.</target>
       </trans-unit>
       <trans-unit id="Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.">
         <source>Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.</source>
-        <target>Einige Einzahlungen sind noch nicht verfügbar. Um diese Transaktion zu senden, warte bitte bis alle ausstehenden Transaktionen bestätigt sind. </target>
+        <target>Einige Einzahlungen sind noch nicht verfügbar. Warte bitte, bis alle ausstehenden Transaktionen bestätigt sind, dann kannst Du die Transaktion senden.</target>
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
         <source>It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
-        <target>Es sieht so aus, als möchtest Du Deine Brieftasche komplett entleeren. Unter der Berücksichtigung von Transaktionsgebühren steht Dir ein Maximalbetrag von %(sendableBalance)s zur Verfügung. Wir haben diesen Betrag in das Eingabefeld für Dich eingetragen. </target>
+        <target>Möchtest Du Deine Brieftasche komplett leeren? Unter der Berücksichtigung von Transaktionsgebühren steht Dir ein Maximalbetrag von %(sendableBalance)s zur Verfügung. Wir haben diesen Betrag für Dich in das Eingabefeld eingetragen. </target>
       </trans-unit>
       <trans-unit id="You do not have enough funds in your wallet (incl. fee)">
         <source>You don't have enough funds in your wallet (incl. fee)</source>
-        <target>Das Guthaben deiner Brieftasche reicht nicht aus (inkl. Gebühr)</target>
+        <target>Das Guthaben Deiner Brieftasche reicht nicht aus (inkl. Gebühr)</target>
       </trans-unit>
       <trans-unit id="A name is required to set your profile on Coin">
         <source>A name is required to set your profile on Coin</source>
@@ -163,7 +163,7 @@
       </trans-unit>
       <trans-unit id="Your browser does not support geolocation">
         <source>Your browser does not support geolocation</source>
-        <target>Dein Browser unterstützt Ortung (geolocation) nicht</target>
+        <target>Dein Browser unterstützt die Standortlokalisierung (geolocation) nicht</target>
       </trans-unit>
       <trans-unit id="Unable to retrieve your location">
         <source>Unable to retrieve your location</source>
@@ -179,11 +179,11 @@
       </trans-unit>
       <trans-unit id="Your username">
         <source>Your username</source>
-        <target>Ihren Benutzernamen</target>
+        <target>Dein Benutzernamen</target>
       </trans-unit>
       <trans-unit id="Gravatar email">
         <source>Gravatar email</source>
-        <target>Gravatar Email</target>
+        <target>Gravatar E-Mail</target>
       </trans-unit>
       <trans-unit id="Submit">
         <source>Submit</source>
@@ -191,15 +191,15 @@
       </trans-unit>
       <trans-unit id="Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.">
         <source>Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.</source>
-        <target>Gravatar (globale Avatare) ist ein Service um den gleichen Avatar auf mehreren Webseiten und Anwendungen mit Hilfe einer Email-Adresse zu verwenden.</target>
+        <target>Gravatar (globale Avatare) ist ein Service, der es Dir ermöglicht, den gleichen Avatar für mehrere Webseiten und Anwendungen zu verwenden. Du musst nur Deine E-Mail angeben.</target>
       </trans-unit>
       <trans-unit id="Create a gravatar">
         <source>Create a gravatar</source>
-        <target>Erzeuge einen Gravatar</target>
+        <target>Erstelle einen Gravatar</target>
       </trans-unit>
       <trans-unit id="Logout">
         <source>Logout</source>
-        <target>Ausloggen</target>
+        <target>Abmelden</target>
       </trans-unit>
       <trans-unit id="Support">
         <source>Support</source>
@@ -223,11 +223,11 @@
       </trans-unit>
       <trans-unit id="Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.">
         <source>Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.</source>
-        <target>Mecto ermöglicht das Austauschen Deiner Empfangsadresse mit anderen örtlich nahen Coin-Benutzern. Hierzu wird Deine GPS-Ortung genutzt. Diese Positionsdaten werden sofort nach Ausschalten von Mecto gelöscht. </target>
+        <target>Mecto ermöglicht das Austauschen Deiner Empfangsadresse mit anderen Coin-Benutzern in Deiner Nähe. Hierzu werden Deine GPS-Daten genutzt. Diese Positionsdaten werden sofort nach dem Ausschalten von Mecto gelöscht. </target>
       </trans-unit>
       <trans-unit id="Before you start using Mecto, you need to enter a name that will help others identify you.">
         <source>Before you start using Mecto, you need to enter a name that will help others identify you.</source>
-        <target>Um Mecto zu benutzen, musst Du einen Benutzernamen auswählen. So können Dich andere Benutzer finden.</target>
+        <target>Um Mecto verwenden zu können, musst Du einen Benutzernamen auswählen. So können Dich andere Benutzer finden.</target>
       </trans-unit>
       <trans-unit id="Save">
         <source>Save</source>
@@ -251,7 +251,7 @@
       </trans-unit>
       <trans-unit id="You do not have any transactions yet">
         <source>You don't have any transactions yet</source>
-        <target>Du hast noch keine Transaktionen getätigt</target>
+        <target>Du hast noch keine Transaktionen.</target>
       </trans-unit>
       <trans-unit id="Transaction Id:">
         <source>Transaction Id:</source>
@@ -303,7 +303,7 @@
       </trans-unit>
       <trans-unit id="Confirm">
         <source>Confirm</source>
-        <target>Bestätige</target>
+        <target>Bestätigen</target>
       </trans-unit>
       <trans-unit id="No Coin users found nearby">
         <source>No Coin users found nearby</source>
@@ -319,7 +319,7 @@
       </trans-unit>
       <trans-unit id="Searching your area for other Coin users">
         <source>Searching your area for other Coin users</source>
-        <target>Suche andere Coin Benutzer in Deiner Gegend</target>
+        <target>Es wird nach anderen Coin Benutzer in Deiner Gegend gesucht.</target>
       </trans-unit>
       <trans-unit id="Confirm transaction">
         <source>Confirm transaction</source>
@@ -355,11 +355,11 @@
       </trans-unit>
       <trans-unit id="Sorry, Coin Wallet did not load.">
         <source>Sorry, Coin Wallet didn't load.</source>
-        <target>Entschuldigung, die Coin-Brieftasche konnte nicht geladen werden.</target>
+        <target>Leider konnte die Coin-Brieftasche  nicht geladen werden.</target>
       </trans-unit>
       <trans-unit id="Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.">
         <source>Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.</source>
-        <target>Versuche Deinen Webbrowser zu aktualisieren oder beende den Inkognito-Modus. Ansonsten lade Dir den Chrome Browser für Dein Gerät herunter.</target>
+        <target>Aktualisiere Deinen Webbrowser oder beende den Inkognito-Modus oder lade den Chrome Browser für Dein Gerät herunter.</target>
       </trans-unit>
       <trans-unit id="Current coin price">
         <source>Current coin price</source>
@@ -371,7 +371,7 @@
       </trans-unit>
       <trans-unit id="Scan your fingerprint please">
         <source>Scan your fingerprint please</source>
-        <target>Scannen Sie Ihren Fingerabdruck bitte</target>
+        <target>Scanne Deinen Fingerabdruck.</target>
       </trans-unit>
       <trans-unit id="Enter PIN">
         <source>Enter PIN</source>
@@ -379,7 +379,7 @@
       </trans-unit>
       <trans-unit id="I Agree To The Terms &amp; Conditions">
         <source>I Agree To The Terms &amp; Conditions</source>
-        <target>Ich stimme den Allgemeine Geschäftsbedingungen zu</target>
+        <target>Ich stimme den Allgemeine Geschäftsbedingungen zu.</target>
       </trans-unit>
       <trans-unit id="Terms of Use">
         <source>Terms of Use</source>
@@ -449,7 +449,7 @@ Sie werden in %(toSymbol)s konvertiert und an
       </trans-unit>
       <trans-unit id="Deposit has been received">
         <source>Deposit has been received</source>
-        <target>Einzahlung wurde empfangen</target>
+        <target>Einzahlung wurde empfangen.</target>
       </trans-unit>
       <trans-unit id="Awaiting exchange...">
         <source>Awaiting exchange...</source>
@@ -473,7 +473,7 @@ Sie werden in %(toSymbol)s konvertiert und an
       </trans-unit>
       <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
         <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
-        <target>Der Absender muss eine von Dir kontrollierte Adresse sein, an die die Einzahlung im Fall einer fehlgeschlagenen Transaktion zurückgesandt werden.</target>
+        <target>Der Absender muss eine von Dir kontrollierte Adresse sein, an die die Einzahlung im Fall einer fehlgeschlagenen Transaktion zurückgesandt wird.</target>
       </trans-unit>
       <trans-unit id="Remove account">
         <source>Remove account</source>
@@ -549,7 +549,7 @@ Sie werden in %(toSymbol)s konvertiert und an
       </trans-unit>
       <trans-unit id="Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you&apos;d like them to have access to your funds.">
         <source>Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you'd like them to have access to your funds.</source>
-        <target>Deine privaten Schlüssel sind Schlüssel für Dein Geld. GIB SIE NICHT an andere weiter, es sei denn, du möchtest, dass sie Zugriff auf dein Geld erhalten.</target>
+        <target>Deine privaten Schlüssel sind Schlüssel für Dein Geld. GIB SIE NICHT an andere WEITER, es sei denn, Du möchtest, dass sie Zugriff auf Dein Geld erhalten.</target>
       </trans-unit>
       <trans-unit id="Show">
         <source>Show</source>
@@ -605,7 +605,7 @@ Sie werden in %(toSymbol)s konvertiert und an
       </trans-unit>
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
-        <target>Bitte gib ein Gas-Limit über null ein</target>
+        <target>Bitte gib ein Gas-Limit über null ein.</target>
       </trans-unit>
       <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
         <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
@@ -633,11 +633,11 @@ Sie werden in %(toSymbol)s konvertiert und an
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
         <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(denomination)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
-        <target>Es sieht so aus, als möchtest Du Deine Brieftasche entleeren. Unter der Berücksichtigung von Transaktionsgebühren und der Mindestreserve (%(minReserve)s %(denomination)s) kannst du maximal einen Betrag von %(sendableBalance)s senden. Wir haben diesen Betrag für Dich in das Eingabefeld eingetragen.</target>
+        <target>Möchtest du deine Brieftasche komplett leeren? Unter der Berücksichtigung von Transaktionsgebühren und der Mindestreserve (%(minReserve)s %(denomination)s) kannst du maximal einen Betrag von %(sendableBalance)s senden. Wir haben diesen Betrag für Dich in das Eingabefeld eingetragen.</target>
       </trans-unit>
       <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :denomination) to your wallet address.">
         <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(denomination)s) to your wallet address.</source>
-        <target>Deine Brieftasche ist nicht aktiviert. Bitte sende eine höhere Mindestreserve (%(minReserve)s %(denomination)s) an die Adresse deiner Brieftasche.</target>
+        <target>Deine Brieftasche ist nicht aktiviert. Bitte sende eine höhere Mindestreserve (%(minReserve)s %(denomination)s) an die Adresse Deiner Brieftasche.</target>
       </trans-unit>
       <trans-unit id="Load more">
         <source>Load more</source>
@@ -753,7 +753,7 @@ Sie werden in %(toSymbol)s konvertiert und an
       </trans-unit>
       <trans-unit id="To create a new account you need to make an EOS transfer (amount greater than :minAmount) with the following data from an exchange or other EOS wallet.">
         <source>To create a new account you need to make an EOS transfer (amount greater than %(minAmount)s) with the following data from an exchange or other EOS wallet.</source>
-        <target>Wenn Du ein neues Konto erstellen möchtest (Betrag größer als %(minAmount)s) musst du eine EOS-Überweisung durchführen mit den folgenden Informationen von einem Umtausch oder einer anderen EOS-Brieftasche.</target>
+        <target>Wenn Du ein neues Konto erstellen möchtest (Betrag größer als %(minAmount)s) musst Du eine EOS-Überweisung durchführen mit den folgenden Informationen von einem Umtausch oder einer anderen EOS-Brieftasche.</target>
       </trans-unit>
       <trans-unit id="Check">
         <source>Check</source>
@@ -769,7 +769,7 @@ Sie werden in %(toSymbol)s konvertiert und an
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Max amount you can send is. We have amended the value in the amount field for you">
         <source>It seems like you are trying to empty your wallet. Max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
-        <target>Es sieht so aus, als möchtest Du Deine Brieftasche komplett entleeren. Der Maximalbetrag, den du senden kannst beträgt %(sendableBalance)s. Wir haben diesen Betrag für Dich in das Eingabefeld eingetragen.</target>
+        <target>Möchtest Du Deine Brieftasche komplett leeren. Der Maximalbetrag, den Du senden kannst beträgt %(sendableBalance)s. Wir haben diesen Betrag für Dich in das Eingabefeld eingetragen.</target>
       </trans-unit>
       <trans-unit id="Destination account doesn&apos;t exist.">
         <source>Destination account doesn't exist.</source>
@@ -849,7 +849,7 @@ Sie werden in %(toSymbol)s konvertiert und an
       </trans-unit>
       <trans-unit id="Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.">
         <source>Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.</source>
-        <target>Die Netzwerkgebühr ist ein fester Betrag, der jeweils erhoben wird, wenn du Geld sendest. Jede Währung hat einen strikten Betrag, der bei Vorgängen verwendet wird. Diese Gebühr wird erhoben, wenn dein Geld in eine Blockchain aufgenommen wird.</target>
+        <target>Die Netzwerkgebühr ist ein fester Betrag, der jeweils erhoben wird, wenn Du Geld sendest. Jede Währung hat einen strikten Betrag, der bei Vorgängen verwendet wird. Diese Gebühr wird erhoben, wenn Dein Geld in eine Blockchain aufgenommen wird.</target>
       </trans-unit>
       <trans-unit id="On hold...">
         <source>On hold...</source>
@@ -913,7 +913,7 @@ Sie werden in %(toSymbol)s konvertiert und an
       </trans-unit>
       <trans-unit id="Transaction too large">
         <source>Transaction too large</source>
-        <target>Transaktion zu groß</target>
+        <target>Die Transaktion ist zu groß.</target>
       </trans-unit>
       <trans-unit id="Email">
         <source>Email</source>
@@ -1113,7 +1113,7 @@ Sie werden in %(toSymbol)s konvertiert und an
       </trans-unit>
       <trans-unit id="Identity verification must be passed before saving card">
         <source>Identity verification must be passed before saving card</source>
-        <target>Du muss Deine Identität verifizieren, damit du die Karte speichern kannst.</target>
+        <target>Du muss Deine Identität verifizieren, damit Du die Karte speichern kannst.</target>
       </trans-unit>
       <trans-unit id="Payment method">
         <source>Payment method</source>
