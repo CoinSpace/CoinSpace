@@ -5,6 +5,7 @@ var emitter = require('lib/emitter');
 var toUnitString = require('lib/convert').toUnitString;
 var getTokenNetwork = require('lib/token').getTokenNetwork;
 var getWallet = require('lib/wallet').getWallet;
+var parseHistoryTx = require('lib/wallet').parseHistoryTx;
 var strftime = require('strftime');
 var showError = require('widgets/modals/flash').showError;
 var showTransactionDetail = require('widgets/modals/transaction-detail');
@@ -128,7 +129,7 @@ module.exports = function(el) {
       ractive.set('loadingMore', false);
       ractive.set('hasMore', result.hasMoreTxs)
       result.txs.forEach(function(tx) {
-        ractive.push('transactions', tx);
+        ractive.push('transactions', parseHistoryTx(tx));
       })
     }).catch(function(err) {
       console.error(err);
