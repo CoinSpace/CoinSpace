@@ -1,3 +1,7 @@
 <div class="_img">
-  {{>svg_logo_stack}}
+  {{#if isPhonegap}}
+    {{>svg_logo_stack_mobile}}
+  {{else}}
+    {{>svg_logo_stack}}
+  {{/if}}
 </div>

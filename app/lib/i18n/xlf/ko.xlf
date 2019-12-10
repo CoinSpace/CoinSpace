@@ -1,10 +1,6 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file original="ko.json" datatype="plaintext" source-language="en" target-language="ko">
     <body>
-      <trans-unit id="Back to coin">
-        <source>Back to coin</source>
-        <target>코인으로 돌아 가기</target>
-      </trans-unit>
       <trans-unit id="Create new wallet">
         <source>Create new wallet</source>
         <target>새 월렛 만들기</target>

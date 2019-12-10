@@ -1,3 +1,13 @@
 {{^isPhonegap}}
-<a class="_link" href="https://www.coin.space">{{translate("Back to coin")}}</a>
+<a class="_store" href="https://play.google.com/store/apps/details?id=com.coinspace.app" target="_blank">
+  {{>svg_googleplay}}
+</a>
+<a class="_store" href="https://itunes.apple.com/us/app/coinspace-bitcoin-wallet/id980719434?mt=8" target="_blank">
+  {{>svg_appstore}}
+</a>
+<br>
+<a class="_link" href="https://www.coin.space" target="_blank">
+  Copyright CoinSpace © 2019<br>
+  All Rights Reserved
+</a>
 {{/isPhonegap}}
