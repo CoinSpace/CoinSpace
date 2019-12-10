@@ -1,8 +1,8 @@
 {{^isPhonegap}}
-<a class="_store" href="https://play.google.com/store/apps/details?id=com.coinspace.app" target="_blank">
+<a class="_store _android" href="https://play.google.com/store/apps/details?id=com.coinspace.app" target="_blank">
   {{>svg_googleplay}}
 </a>
-<a class="_store" href="https://itunes.apple.com/us/app/coinspace-bitcoin-wallet/id980719434?mt=8" target="_blank">
+<a class="_store _ios" href="https://itunes.apple.com/us/app/coinspace-bitcoin-wallet/id980719434?mt=8" target="_blank">
   {{>svg_appstore}}
 </a>
 <br>

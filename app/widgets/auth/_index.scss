@@ -570,8 +570,14 @@
 
   ._store {
     display: inline-block;
-    width: 128px;
+    width: 125px;
     padding-top: 5px;
+    &._android {
+      margin-right: 2px;
+    }
+    &._ios {
+      margin-left: 2px;
+    }
   }
   ._link {
     color: #333;
