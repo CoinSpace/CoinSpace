@@ -27,7 +27,7 @@ module.exports = function(el) {
     ractive.set('email', '');
     ractive.set('code', '');
     var wallet = getWallet();
-    if (!moonpay.isSupported(wallet.denomination) && wallet.getNextAddress()) {
+    if (!(moonpay.isSupported(wallet.denomination) && wallet.getNextAddress())) {
       return emitter.emit('set-exchange', 'none');
     }
 

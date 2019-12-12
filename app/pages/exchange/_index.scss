@@ -29,6 +29,15 @@
         margin-right: 10px;
       }
     }
+    &._disabled {
+      background-color: $grey;
+      box-shadow: 0 2px 0 0 darken($grey, 10%);
+      color: darken($grey, 20%);
+      pointer-events: none;
+      &:hover {
+        color: darken($grey, 20%);
+      }
+    }
   }
 }
 

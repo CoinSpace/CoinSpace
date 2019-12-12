@@ -31,10 +31,7 @@ module.exports = function(el) {
   var currentExchange = exchanges.none;
 
   ractive.on('before-show', function() {
-    var wallet = getWallet();
-    var symbol = wallet.denomination;
-    exchanges.none.set('isSupportedMoonpay', moonpay.isSupported(symbol) && wallet.getNextAddress());
-
+    setMoonpayButton();
     var preferredExchange = window.localStorage.getItem('_cs_preferred_exchange');
     if (exchanges[preferredExchange]) {
       showExchange(exchanges[preferredExchange]);
@@ -47,14 +44,22 @@ module.exports = function(el) {
     currentExchange.hide();
   });
 
+  emitter.on('moonpay-init', setMoonpayButton);
+
+  emitter.on('set-exchange', function(exchangeName) {
+    choose(exchangeName);
+  });
+
   function choose(exchangeName) {
     window.localStorage.setItem('_cs_preferred_exchange', exchangeName);
     showExchange(exchanges[exchangeName]);
   }
 
-  emitter.on('set-exchange', function(exchangeName) {
-    choose(exchangeName);
-  });
+  function setMoonpayButton() {
+    var wallet = getWallet();
+    var symbol = wallet.denomination;
+    exchanges.none.set('isSupportedMoonpay', moonpay.isSupported(symbol) && wallet.getNextAddress());
+  }
 
   function showExchange(exchange) {
     setTimeout(function() {

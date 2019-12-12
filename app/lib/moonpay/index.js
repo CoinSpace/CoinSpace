@@ -37,6 +37,7 @@ function init() {
   }).then(function(data) {
     if (!data) return;
     coins = data;
+    emitter.emit('moonpay-init');
   }).catch(console.error);
 }
 

@@ -2,6 +2,10 @@
 <div on-click="choose('moonpay')" class="_btn">
   {{translate("Buy with Credit Card")}}
 </div>
+{{else}}
+<div class="_btn _disabled">
+  {{translate("Buy with Credit Card")}}
+</div>
 {{/if}}
 
 <div class="_title">{{translate("Choose exchange")}}</div>
