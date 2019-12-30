@@ -26,6 +26,7 @@ emitter.on('handleOpenURL', function(url) {
 });
 
 function init() {
+  if (location.hostname.split('.')[1] === 'onion') return;
   return request({url: 'https://api.moonpay.io/v3/ip_address', params: {apiKey: apiKey}}).then(function(data) {
     if (data && data.isAllowed) {
       ipCountry = data.alpha3;
