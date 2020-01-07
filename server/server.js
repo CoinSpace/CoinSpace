@@ -32,7 +32,7 @@ db().then(function() {
     server.timeout = 30000; // 30 sec
   });
 
-  if (process.env.MASTER) {
+  if (process.env.MASTER === '1') {
     master.cleanGeo(60 * 60 * 1000) // 1 hour
     master.cacheFees(60 * 60 * 1000) // 1 hour
     master.cacheTicker(1 * 60 * 1000) // 1 minute

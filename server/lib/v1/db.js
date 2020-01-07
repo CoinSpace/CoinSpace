@@ -6,7 +6,7 @@ var db;
 module.exports = function() {
   if (db) { return db; }
 
-  return MongoClient.connect(process.env.DB_CONNECT, {useNewUrlParser: true})
+  return MongoClient.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopology: true })
     .then(function(client) {
       db = client.db(process.env.DB_NAME);
       db.on('close', function() {
