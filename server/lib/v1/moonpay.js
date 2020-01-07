@@ -2,6 +2,7 @@
 
 var axios = require('axios');
 var db = require('./db');
+var API_KEY = process.env.MOONPAY_API_KEY;
 
 var PRIORITY_SYMBOLS = ['BTC', 'BCH', 'ETH', 'USDT', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH'];
 var fiatSigns = {
@@ -16,7 +17,11 @@ function save(_id, data) {
 }
 
 function getCurrenciesFromAPI() {
-  return axios.get('https://api.moonpay.io/v3/currencies').then(function(response) {
+  return axios.get('https://api.moonpay.io/v3/currencies', {
+    params: {
+      apiKey: API_KEY
+    }
+  }).then(function(response) {
     var data = response.data;
     if (!data || !data.length) throw new Error('Bad moonpay response');
 
