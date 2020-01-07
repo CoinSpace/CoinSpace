@@ -11,7 +11,6 @@ var fee = require('./fee');
 var csFee = require('./csFee');
 var ticker = require('./ticker');
 var ethereumTokens = require('./ethereumTokens');
-var iap = require('./iap');
 var shapeshift = require('./shapeshift');
 var changelly = require('./changelly');
 var moonpay = require('./moonpay');
@@ -141,14 +140,6 @@ router.get('/ticker/applewatch', function(req, res) {
 router.get('/ethereum/tokens', function(req, res) {
   ethereumTokens.getAllFromCache().then(function(data) {
     res.status(200).send(data);
-  }).catch(function(err) {
-    res.status(400).send(err);
-  });
-});
-
-router.post('/iap', function(req, res) {
-  iap.validate(req.body).then(function(response) {
-    res.status(200).send(response);
   }).catch(function(err) {
     res.status(400).send(err);
   });
