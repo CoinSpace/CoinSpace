@@ -46,7 +46,7 @@
     {{#if (hasMore && !loadingTx)}}
       <div class="loadmore__buttons">
         {{#if loadingMore}}
-          <div class="send__btn--validating">
+          <div class="send__btn--loading">
             <span class="_icon">
               {{>svg_refresh}}
             </span>

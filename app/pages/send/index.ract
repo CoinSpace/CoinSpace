@@ -35,12 +35,12 @@
         <span class="_max_btn" on-click="set-max-amount">({{translate("max.")}} {{maxAmount}} {{denomination}})</span>
 
           <div class="_input-group">
-            <input id="bitcoin" class="_input" type="number" min="0" step="any" on-keyup="bitcoin-to-fiat" on-enter="open-send" on-focus="focusAmountInput" on-blur="blurAmountInput">
+            <input id="bitcoin" class="_input" type="number" min="0" step="any" on-input="bitcoin-to-fiat" on-focus="focusAmountInput" on-blur="blurAmountInput">
             <span class="_currency">{{denomination}}</span>
           </div>
 
           <div class="_input-group">
-            <input id="fiat" class="_input fiat" type="number" min="0" step="any" on-keyup="fiat-to-bitcoin" on-enter="open-send" on-focus="focusAmountInput" on-blur="blurAmountInput">
+            <input id="fiat" class="_input fiat" type="number" min="0" step="any" on-input="fiat-to-bitcoin" on-focus="focusAmountInput" on-blur="blurAmountInput">
             <span class="_currency dropdown">
               <select value="{{selectedFiat}}" tabindex="-1">
                 {{#currencies}}
@@ -73,7 +73,7 @@
       <div class="send__optional">
         <label class="_label" for="destination-tag">{{translate("Destination tag")}}
           <div class="input__container">
-            <input id="destination-tag" class="_input" placeholder="{{translate("(optional)")}}" type="number" twoway="false" min="0" max="4294967295" step="1" on-enter="open-send" />
+            <input id="destination-tag" class="_input" placeholder="{{translate("(optional)")}}" type="number" min="0" max="4294967295" step="1" />
           </div>
         </label>
         <span class="_help" on-click="help-destination-tag">
@@ -84,7 +84,7 @@
       <div class="send__optional last">
         <label class="_label" for="invoice-id">{{translate("Invoice ID")}}
           <div class="input__container">
-            <input id="invoice-id" class="_input" placeholder="{{translate("(optional)")}}" type="text" on-enter="open-send" />
+            <input id="invoice-id" class="_input" placeholder="{{translate("(optional)")}}" type="text" />
           </div>
         </label>
         <span class="_help" on-click="help-invoice-id">
@@ -97,7 +97,7 @@
       <div class="send__optional last">
         <label class="_label" for="memo">{{translate("Memo")}}
           <div class="input__container">
-            <input id="memo" class="_input" placeholder="{{translate("(optional)")}}" type="text" maxlength="28" on-enter="open-send" />
+            <input id="memo" class="_input" placeholder="{{translate("(optional)")}}" type="text" maxlength="28" />
           </div>
         </label>
         <span class="_help" on-click="help-memo">
@@ -110,7 +110,7 @@
       <div class="send__optional last">
         <label class="_label" for="memo">{{translate("Memo")}}
           <div class="input__container">
-            <input id="memo" class="_input" placeholder="{{translate("(optional)")}}" type="text" maxlength="256" on-enter="open-send" />
+            <input id="memo" class="_input" placeholder="{{translate("(optional)")}}" type="text" maxlength="256" />
           </div>
         </label>
         <span class="_help" on-click="help-memo">
@@ -123,7 +123,7 @@
       <div class="send__optional last">
         <label class="_label" for="gas-limit">{{translate("Gas limit")}}
           <div class="input__container">
-            <input id="gas-limit" class="_input" type="number" on-keyup="gas-limit" twoway="false" min="0" step="1" value="{{gasLimit}}" on-enter="open-send" />
+            <input id="gas-limit" class="_input" type="number" on-input="gas-limit" twoway="false" min="0" step="1" value="{{gasLimit}}" />
           </div>
         </label>
         <span class="_help" on-click="help-gas-limit">
@@ -136,16 +136,15 @@
   </div>
 
   <div class="send__buttons">
-    {{^validating}}
-      <div on-click="open-send" class="send__btn">{{translate("Confirm")}}</div>
-    {{/validating}}
-    {{#validating}}
-      <div class="send__btn--validating">
-        <span class="_icon">
-          {{>svg_refresh}}
-        </span>
-      </div>
-    {{/validating}}
+    {{#if isLoading}}
+    <div class="send__btn--loading">
+      <span class="_icon">
+        {{>svg_refresh}}
+      </span>
+    </div>
+    {{else}}
+    <div on-click="open-send" class="send__btn">{{translate("Confirm")}}</div>
+    {{/if}}
   </div>
 </div>
 

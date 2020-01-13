@@ -44,7 +44,7 @@ module.exports = function(el){
       isRipple: false,
       isStellar: false,
       isEOS: false,
-      validating: false,
+      isLoading: false,
       gasLimit: '',
       denomination: '',
       feeDenomination: ''
@@ -266,28 +266,26 @@ module.exports = function(el){
     ractive.fire('bitcoin-to-fiat');
   });
 
-  ractive.on('fiat-to-bitcoin', function(context) {
-    var fiat = ractive.find('#fiat').value;
-    if (!fiat || context.event.code === 'Tab') return;
-
-    var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')];
-    var bitcoin = '0';
-    if (exchangeRate) {
-      bitcoin = Big(fiat).div(exchangeRate).toFixed(8)
-    }
-    ractive.find('#bitcoin').value = bitcoin;
-    setFees();
-  })
-
-  ractive.on('bitcoin-to-fiat', function(value) {
-    var bitcoin = ractive.find('#bitcoin').value;
-    if (!bitcoin) return;
+  ractive.on('bitcoin-to-fiat', function() {
+    var bitcoin = ractive.find('#bitcoin').value || 0;
 
     var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')];
     if (typeof exchangeRate !== 'number') return;
 
-    var fiat = Big(bitcoin).times(exchangeRate).toFixed(2);
+    var fiat = bitcoin ? Big(bitcoin).times(exchangeRate).toFixed(2) : '';
     ractive.find('#fiat').value = fiat;
+    setFees();
+  })
+
+  ractive.on('fiat-to-bitcoin', function() {
+    var fiat = ractive.find('#fiat').value || 0;
+
+    var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')];
+    var bitcoin = '0';
+    if (exchangeRate) {
+      bitcoin = fiat ? Big(fiat).div(exchangeRate).toFixed(8) : '';
+    }
+    ractive.find('#bitcoin').value = bitcoin;
     setFees();
   })
 

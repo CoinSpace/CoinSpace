@@ -16,7 +16,7 @@
         <label class="_label" for="changelly_from_amount">{{translate("From")}}</label>
 
         <div class="input__container">
-          <input id="changelly_from_amount" class="_input" value="1" on-keyup="input-from-amount" type="number" min="0" step="any" placeholder="{{translate("Amount")}}" autocorrect="off" autocapitalize="off" />
+          <input id="changelly_from_amount" class="_input" value="1" on-input="input-from-amount" type="number" min="0" step="any" placeholder="{{translate("Amount")}}" autocorrect="off" autocapitalize="off" />
           <span class="_symbol_dropdown">
             <span class="_symbol">{{fromSymbol}}</span>
             <select class="js-from-symbol-select" value="{{fromSymbol}}" tabindex="-1">

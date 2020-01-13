@@ -349,7 +349,7 @@
   }
 }
 
-.send__btn--validating {
+.send__btn--loading {
   @extend .csbtn-base;
   position: relative;
   background-color: $grey;
