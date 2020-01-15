@@ -116,16 +116,8 @@ module.exports = function(el) {
 
   ractive.on('load-more', function() {
     ractive.set('loadingMore', true);
-    var transactions = ractive.get('transactions');
     var wallet = getWallet();
-    var cursor;
-    if (wallet.networkName === 'ripple') {
-      cursor = transactions[transactions.length - 1].id; // TODO: move cursor to wallet.txsCursor
-    } else if (wallet.networkName === 'stellar') {
-      cursor = transactions[transactions.length - 1].cursor; // TODO: move cursor to wallet.txsCursor
-    }
-
-    wallet.loadTxs(wallet.addressString, cursor).then(function(result) { // TODO: remove "wallet.addressString, cursor"
+    wallet.loadTxs().then(function(result) {
       ractive.set('loadingMore', false);
       ractive.set('hasMore', result.hasMoreTxs)
       result.txs.forEach(function(tx) {
