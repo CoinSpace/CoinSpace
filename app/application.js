@@ -47,7 +47,7 @@ window.initCSApp = function() {
 
   emitter.once('wallet-ready', function() {
     if (window.Zendesk) {
-      window.Zendesk.setAnonymousIdentity(process.env.BUILD_PLATFORM + ' user');
+      window.Zendesk.setAnonymousIdentity();
     }
     if (process.env.BUILD_PLATFORM === 'ios') {
       window.StatusBar.styleLightContent();
