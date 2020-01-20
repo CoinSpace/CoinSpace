@@ -4,7 +4,7 @@ require('../application.scss');
 require('core-js/shim');
 
 var token = require('lib/token');
-var fadeOut = require('lib/transitions/loader').out
+var fadeOut = require('lib/transitions/fade.js').fadeOut;
 var Modernizr = require('modernizr')
 var i18n = require('lib/i18n')
 
@@ -20,7 +20,9 @@ function init() {
         /* webpackChunkName: 'application' */
         '../application'
       ).then(function() {
-        fadeOut(containerEl)
+        fadeOut(containerEl, function() {
+          window.initCSApp();
+        });
       });
     } else {
       return import(
