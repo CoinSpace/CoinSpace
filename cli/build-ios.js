@@ -55,6 +55,7 @@ webpack(webpackConfig, function(error, stats) {
   utils.cordova('plugin add cordova-plugin-customurlscheme@4.3.0 --variable URL_SCHEME=coinspace');
   utils.cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#45badb1e6f909bb80592779f7cb6baf6875df3ab');
   utils.cordova('plugin add cordova-plugin-cookiemaster@1.0.5');
+  utils.cordova('plugin add cordova-plugin-3dtouch-shortcutitems@1.0.2');
 
   if (program.release) {
     utils.cordova('build ios --emulator --buildConfig=../build.json --release');
