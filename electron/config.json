@@ -1,0 +1,28 @@
+{
+  "appId": "CoinDigitalCurrencyWallet",
+  "productName": "Coin",
+  "files": [
+    "./electron/build/**/*",
+    "./electron/electron.js",
+    "./app/assets/icons/electron/*.*"
+  ],
+  "directories": {
+    "buildResources": "./electron/build",
+    "output": "./electron/dist"
+  },
+  "win": {
+    "target": ["portable", "appx"],
+    "icon": "./electron/images/win/win.png"
+  },
+  "mac": {
+    "target": ["dmg"],
+    "icon": "./electron/images/mac/mac.png"
+  },
+  "appx": {
+    "identityName": "CoinWallet",
+    "publisher": "CN=********************",
+    "publisherDisplayName": "Coin Digital currency wallet",
+    "applicationId": "CoinWallet",
+    "displayName": "Coin Digital currency wallet"
+  }
+}

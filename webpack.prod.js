@@ -98,6 +98,8 @@ if (process.env.BUILD_TYPE === 'phonegap') {
   delete config.entry['loader'];
 
   config.output.publicPath = '';
+} else if (process.env.BUILD_TYPE === 'electron') {
+  config.output.publicPath = './';
 }
 
 module.exports = config;
