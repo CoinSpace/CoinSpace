@@ -11,7 +11,7 @@ module.exports = function choose() {
       footer: require('./footer.ract')
     },
     data: {
-      isPhonegap: process.env.BUILD_TYPE === 'phonegap'
+      isPhonegap: process.env.BUILD_TYPE === 'phonegap' || process.env.BUILD_TYPE === 'electron'
     }
   })
 
