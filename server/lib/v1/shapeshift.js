@@ -1,7 +1,7 @@
 'use strict';
 
 var axios = require('axios');
-var Authorization = 'Basic ' + new Buffer(process.env.SHAPESHIFT_CLIENT_ID + ':' + process.env.SHAPESHIFT_CLIENT_SECRET).toString('base64');
+var Authorization = 'Basic ' + Buffer.from(process.env.SHAPESHIFT_CLIENT_ID + ':' + process.env.SHAPESHIFT_CLIENT_SECRET).toString('base64');
 
 function revokeToken(token) {
   return axios({
