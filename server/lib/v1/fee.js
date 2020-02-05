@@ -14,9 +14,6 @@ function save(network, data) {
   if (network !== 'bitcoin') throw new Error(network + ' currency fee is not supported');
   var collection = db().collection('fee');
   return collection.updateOne({_id: network}, {$set: {
-    minimum: data.minimum, // deprecated
-    hour: data.hour, // deprecated
-    fastest: data.fastest, // deprecated
     items: [
       {name: 'minimum', value: data.minimum},
       {name: 'hour', value: data.hour, default: true},
@@ -31,10 +28,12 @@ function getFromAPI(network) {
     var data = response.data;
     if (!data.fastestFee || !data.hourFee) throw new Error('Bad fee response');
     var min = 10;
-    response.data.minimum = Math.max(Math.ceil(response.data.hourFee / 2), min)
-    response.data.hourFee = Math.max(response.data.hourFee, min)
-    response.data.fastestFee = Math.max(response.data.fastestFee, min)
-    return response.data;
+    var minimum = Math.max(Math.ceil(data.hourFee / 2), min);
+    var hourFee = Math.max(data.hourFee, min);
+    var fastestFee = Math.max(data.fastestFee, min);
+    if (hourFee <= minimum) hourFee = minimum + 1;
+    if (fastestFee <= hourFee) fastestFee = hourFee + 1;
+    return { minimum, hourFee, fastestFee};
   })
 }
 
