@@ -5,9 +5,9 @@
 <a class="_store _ios" href="https://itunes.apple.com/us/app/coinspace-bitcoin-wallet/id980719434?mt=8" target="_blank">
   {{>svg_appstore}}
 </a>
-{{/isPhonegap}}
 <br>
 <a class="_link" href="https://www.coin.space" target="_blank">
   Copyright CoinSpace © 2020<br>
   All Rights Reserved
 </a>
+{{/isPhonegap}}
