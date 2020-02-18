@@ -3,7 +3,7 @@
 
     <h3 class="_header">{{translate("Add Credit Card")}}</h3>
 
-    {{#if isInited && isMoonPaySdkInited}}
+    {{#if isInited}}
     <div class="_step" class-active="step === 1">
       <div class="_content">
 

@@ -4,7 +4,7 @@ var Ractive = require('widgets/modals/base');
 var showError = require('widgets/modals/flash').showError;
 var moonpay = require('lib/moonpay');
 var initDropdown = require('widgets/dropdown');
-var scriptjs = require('scriptjs');
+var mpSdk = require('@moonpay/browser').default;
 
 var ractive;
 
@@ -30,7 +30,6 @@ function open(data) {
       },
       showStates: false,
       isInited: moonpay.getCountries('allowed').length !== 0,
-      isMoonPaySdkInited: !!window.moonpay,
       isCcFormInited: false
     }
   });
@@ -49,12 +48,6 @@ function open(data) {
   } else {
     initPickers();
   }
-
-  scriptjs('https://cdn.moonpay.io/moonpay-sdk.js', function() {
-    if (window.moonpay) {
-      ractive.set('isMoonPaySdkInited', true);
-    };
-  });
 
   function initPickers() {
     var countries = moonpay.getCountries('allowed');
@@ -122,7 +115,6 @@ function open(data) {
   function initCcForm() {
     if (ccForm) return;
 
-    var mpSdk = window.moonpay;
     mpSdk.initialize(process.env.MOONPAY_API_KEY, customer.id);
 
     ccForm = mpSdk.createCardDetailsForm(function(state) {
