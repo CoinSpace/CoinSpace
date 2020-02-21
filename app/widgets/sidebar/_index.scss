@@ -143,6 +143,14 @@
     }
   }
 }
+.bitcoinsv {
+  .sidebar__logout {
+    background-color: darken($bitcoinsv, 30%);
+    &:hover {
+      background-color: darken($bitcoinsv, 35%);
+    }
+  }
+}
 
 .sidebar__support {
   @extend .sidebar__logout;
@@ -283,6 +291,12 @@
   .settings__btn--loading {
     background-color: $bitcoincash;
     box-shadow:inset 0 1px 1px 1px darken($bitcoincash, 20%);
+  }
+}
+.bitcoinsv {
+  .settings__btn--loading {
+    background-color: $bitcoinsv;
+    box-shadow:inset 0 1px 1px 1px darken($bitcoinsv, 20%);
   }
 }
 

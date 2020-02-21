@@ -5,6 +5,7 @@ var db = require('./db')
 var networks = [
   'bitcoin',
   'bitcoincash',
+  'bitcoinsv',
   'litecoin',
   'dogecoin',
   'dash'

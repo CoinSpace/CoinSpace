@@ -10,7 +10,7 @@ var eos = require('./eos');
 
 function open(data) {
   var network = getTokenNetwork();
-  if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin', 'dash'].indexOf(network) !== -1) {
+  if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(network) !== -1) {
     return btcBchLtc(data);
   } else if (network === 'ethereum') {
     return ethereum(data);

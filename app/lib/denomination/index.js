@@ -3,6 +3,7 @@
 var symbols = {
   bitcoin: 'BTC',
   bitcoincash: 'BCH',
+  bitcoinsv: 'BSV',
   litecoin: 'LTC',
   ethereum: 'ETH',
   ripple: 'XRP',

@@ -6,7 +6,7 @@ var URL = 'https://api.changelly.com';
 var CHANGELLY_API_SECRET = process.env.CHANGELLY_API_SECRET;
 var CHANGELLY_API_KEY = process.env.CHANGELLY_API_KEY;
 
-var PRIORITY_SYMBOLS = ['BTC', 'BCH', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH'];
+var PRIORITY_SYMBOLS = ['BTC', 'BCH', 'BSV', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH'];
 
 function getCoins() {
   return request('getCurrenciesFull', {}).then(function(currencies) {

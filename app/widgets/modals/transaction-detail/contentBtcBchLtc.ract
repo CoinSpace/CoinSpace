@@ -23,6 +23,8 @@
       <a href="" onclick="window.open('https://blockchair.com/bitcoin/transaction/{{id}}?from=coinwallet', '_system'); return false;" class="_value">{{id}}</a>
       {{elseif isNetwork('bitcoincash')}}
       <a href="" onclick="window.open('https://blockchair.com/bitcoin-cash/transaction/{{id}}?from=coinwallet', '_system'); return false;" class="_value">{{id}}</a>
+      {{elseif isNetwork('bitcoinsv')}}
+      <a href="" onclick="window.open('https://blockchair.com/bitcoin-sv/transaction/{{id}}?from=coinwallet', '_system'); return false;" class="_value">{{id}}</a>
       {{elseif isNetwork('litecoin')}}
       <a href="" onclick="window.open('https://blockchair.com/litecoin/transaction/{{id}}?from=coinwallet', '_system'); return false;" class="_value">{{id}}</a>
       {{elseif isNetwork('dogecoin')}}

@@ -28,6 +28,8 @@
           <a href="" onclick="window.open('https://blockchair.com/bitcoin/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
           {{elseif tx.currencyCode === 'BCH'}}
           <a href="" onclick="window.open('https://blockchair.com/bitcoin-cash/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          {{elseif tx.currencyCode === 'BSV'}}
+          <a href="" onclick="window.open('https://blockchair.com/bitcoin-sv/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
           {{elseif tx.currencyCode === 'ETH'}}
           <a href="" onclick="window.open('https://blockchair.com/ethereum/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
           {{elseif tx.currencyCode === 'USDT'}}

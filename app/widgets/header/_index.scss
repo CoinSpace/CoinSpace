@@ -59,6 +59,11 @@
     background-color: darken($bitcoincash, 30%);
   }
 }
+.bitcoinsv {
+  .header {
+    background-color: darken($bitcoinsv, 30%);
+  }
+}
 
 .header__balance, .header__balance_blocked {
   @include clickbtn;

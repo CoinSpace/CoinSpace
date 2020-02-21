@@ -6,6 +6,7 @@ var db = require('./db');
 var fsyms = [
   'BTC',
   'BCH',
+  'BSV',
   'LTC',
   'ETH',
   'XRP',
@@ -50,6 +51,9 @@ function getFromAPI() {
       } else if (key === 'BCH') {
         response.data[key]['mBCH'] = 1000;
         response.data[key]['μBCH'] = 1000000;
+      } else if (key === 'BSV') {
+        response.data[key]['mBSV'] = 1000;
+        response.data[key]['μBSV'] = 1000000;
       }
       return {
         _id: key,

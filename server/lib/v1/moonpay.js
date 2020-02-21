@@ -4,7 +4,7 @@ var axios = require('axios');
 var db = require('./db');
 var API_KEY = process.env.MOONPAY_API_KEY;
 
-var PRIORITY_SYMBOLS = ['BTC', 'BCH', 'ETH', 'USDT', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH'];
+var PRIORITY_SYMBOLS = ['BTC', 'BCH', 'BSV', 'ETH', 'USDT', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH'];
 var fiatSigns = {
   usd: '$',
   eur: '€',

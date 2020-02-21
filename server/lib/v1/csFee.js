@@ -9,6 +9,7 @@ var Big = require('big.js');
 var networks = [
   'bitcoin',
   'bitcoincash',
+  'bitcoinsv',
   'litecoin',
   'dogecoin',
   'dash'
@@ -17,6 +18,7 @@ var networks = [
 var symbols = {
   bitcoin: 'BTC',
   bitcoincash: 'BCH',
+  bitcoinsv: 'BSV',
   litecoin: 'LTC',
   dogecoin: 'DOGE',
   dash: 'DASH'

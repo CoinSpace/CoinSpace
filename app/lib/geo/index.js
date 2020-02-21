@@ -10,6 +10,7 @@ var userInfo = {};
 var networks = {
   BTC: 'bitcoin',
   BCH: 'bitcoincash',
+  BSV: 'bitcoinsv',
   LTC: 'litecoin',
   ETH: 'ethereum',
   XRP: 'ripple',

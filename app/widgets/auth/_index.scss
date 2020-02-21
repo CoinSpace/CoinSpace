@@ -359,6 +359,12 @@
     box-shadow:inset 0 1px 1px 1px darken($bitcoincash, 20%);
   }
 }
+.bitcoinsv {
+  .auth__btn--inactive {
+    background-color: $bitcoinsv;
+    box-shadow:inset 0 1px 1px 1px darken($bitcoinsv, 20%);
+  }
+}
 
 .auth__btn--choose {
   @extend .csbtn;
@@ -444,6 +450,12 @@
   .auth__btn--loading {
     background-color: $bitcoincash;
     box-shadow:inset 0 1px 1px 1px darken($bitcoincash, 20%);
+  }
+}
+.bitcoinsv {
+  .auth__btn--loading {
+    background-color: $bitcoinsv;
+    box-shadow:inset 0 1px 1px 1px darken($bitcoinsv, 20%);
   }
 }
 

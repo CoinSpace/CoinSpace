@@ -37,6 +37,7 @@ var availableTouchId = false
 var Wallet = {
   bitcoin: CsWallet,
   bitcoincash: CsWallet,
+  bitcoinsv: CsWallet,
   litecoin: CsWallet,
   ethereum: EthereumWallet,
   ripple: RippleWallet,
@@ -178,7 +179,7 @@ function initWallet(networkName, done, txDone) {
     options.minConf = 12;
     options.token = token;
     convert.setDecimals(token ? token.decimals : 18);
-  } else if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin', 'dash'].indexOf(networkName) !== -1) {
+  } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(networkName) !== -1) {
     var accounts = getDerivedAccounts(networkName);
     options.externalAccount = accounts.externalAccount;
     options.internalAccount = accounts.internalAccount;
@@ -252,7 +253,7 @@ function parseHistoryTx(tx) {
     return tx;
   } else if (networkName === 'eos') {
     return tx;
-  } else if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin', 'dash'].indexOf(networkName) !== -1) {
+  } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(networkName) !== -1) {
     return utils.parseBtcLtcTx(tx, networkName);
   }
 }

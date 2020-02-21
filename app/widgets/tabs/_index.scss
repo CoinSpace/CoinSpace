@@ -43,6 +43,11 @@
     background-color: darken($bitcoincash, 20%);
   }
 }
+.bitcoinsv {
+  #tabs {
+    background-color: darken($bitcoinsv, 20%);
+  }
+}
 
 #tabs .tabs {
   display: flex;
@@ -132,6 +137,13 @@
   #tabs .tabs .tab {
     &.active {
         border-bottom: 4px solid darken($bitcoincash, 30%);
+    }
+  }
+}
+.bitcoinsv {
+  #tabs .tabs .tab {
+    &.active {
+        border-bottom: 4px solid darken($bitcoinsv, 30%);
     }
   }
 }

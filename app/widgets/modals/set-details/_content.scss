@@ -116,6 +116,14 @@
     }
   }
 }
+.bitcoinsv {
+  .set-details {
+    ._btn--loading {
+      background-color: $bitcoinsv;
+      box-shadow:inset 0 1px 1px 1px darken($bitcoinsv, 20%);
+    }
+  }
+}
 
 .set-details__field {
   margin-bottom: 20px;

@@ -195,7 +195,7 @@ module.exports = function(el){
     var fees = [];
     if (setDefaultFeeOption) ractive.set('feeIndex', 0);
 
-    if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin', 'dash'].indexOf(wallet.networkName) !== -1) {
+    if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(wallet.networkName) !== -1) {
       var estimates = wallet.estimateFees(value);
       var minimums = wallet.minimumFees(value);
       fees = wallet.feeRates.map(function(item, i) {
@@ -252,7 +252,7 @@ module.exports = function(el){
   ractive.on('change-fee', function() {
     var wallet = getWallet();
     var index = ractive.get('feeIndex');
-    if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin', 'dash'].indexOf(wallet.networkName) !== -1) {
+    if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(wallet.networkName) !== -1) {
       var maxAmount = wallet.maxAmounts[index] ? wallet.maxAmounts[index].value : 0;
       ractive.set('maxAmount', toUnitString(maxAmount));
     } else {

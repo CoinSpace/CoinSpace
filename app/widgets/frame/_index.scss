@@ -105,6 +105,11 @@
     background-color: darken($bitcoincash, 30%);
   }
 }
+.bitcoinsv {
+  .main__iphone_x {
+    background-color: darken($bitcoinsv, 30%);
+  }
+}
 
 #sidebar {
   display: flex;

@@ -3,7 +3,7 @@
 var request = require('lib/request');
 var urlRoot = 'https://shapeshift.io/';
 var urlAuthRoot = 'https://auth.shapeshift.io/';
-var PRIORITY_SYMBOLS = ['BTC', 'BCH', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH'];
+var PRIORITY_SYMBOLS = ['BTC', 'BCH', 'BSV', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH'];
 var emitter = require('lib/emitter');
 var Big = require('big.js');
 var getId = require('lib/wallet').getId;

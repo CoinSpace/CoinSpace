@@ -13,7 +13,7 @@ function validateSend(options) {
   var message;
 
   try {
-    if (['bitcoin', 'bitcoincash', 'litecoin', 'dogecoin', 'dash'].indexOf(wallet.networkName) !== -1) {
+    if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(wallet.networkName) !== -1) {
       tx = wallet.createTx(to, amount, fee);
     } else if (wallet.networkName === 'ethereum') {
       tx = wallet.createTx(to, amount);

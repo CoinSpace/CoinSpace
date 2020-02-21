@@ -77,6 +77,13 @@
   }
 }
 
+.bitcoinsv {
+  .csbtn {
+    background-color: $bitcoinsv;
+    box-shadow: 0 2px 0 0 darken($bitcoinsv, 10%);
+  }
+}
+
 .litecoin {
   .csbtn {
     background-color: $silver;
