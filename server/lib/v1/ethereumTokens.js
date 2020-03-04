@@ -20,7 +20,7 @@ function getFromAPI() {
   return axios({
     url: 'https://api.ethplorer.io/getTop',
     params: {
-      apiKey: 'freekey',
+      apiKey: process.env.ETHPLORER_API_KEY,
       criteria: 'cap',
       limit: limit
     }
