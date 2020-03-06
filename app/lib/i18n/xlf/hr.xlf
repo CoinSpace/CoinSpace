@@ -1011,10 +1011,6 @@ Biće konvertiran u %(toSymbol)s i poslan na
         <source>Country</source>
         <target>Zemlja</target>
       </trans-unit>
-      <trans-unit id="Social security number">
-        <source>Social security number</source>
-        <target>Broj socijalnog osiguranja</target>
-      </trans-unit>
       <trans-unit id="Address 2 (optional)">
         <source>Address 2 (optional)</source>
         <target> Adresa 2 (po izboru)</target>

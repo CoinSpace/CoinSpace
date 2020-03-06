@@ -28,13 +28,6 @@
             <div id="moonpay_identity_country"></div>
           </div>
 
-          {{#if identity.address.country === 'USA'}}
-          <div class="_group">
-            <label class="_label" for="moonpay_identity_ssn">{{translate("Social security number")}}</label>
-            <input id="moonpay_identity_ssn" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{identity.socialSecurityNumber}}" />
-          </div>
-          {{/if}}
-
         </div>
 
         <div class="_confirm_btn_group">

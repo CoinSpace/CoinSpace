@@ -1011,10 +1011,6 @@ Sie werden in %(toSymbol)s konvertiert und an
         <source>Country</source>
         <target>Land</target>
       </trans-unit>
-      <trans-unit id="Social security number">
-        <source>Social security number</source>
-        <target>Sozialversicherungsnummer</target>
-      </trans-unit>
       <trans-unit id="Address 2 (optional)">
         <source>Address 2 (optional)</source>
         <target>2. Adresse (optional)</target>

@@ -1011,10 +1011,6 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Country</source>
         <target>국가</target>
       </trans-unit>
-      <trans-unit id="Social security number">
-        <source>Social security number</source>
-        <target>사회보장번호</target>
-      </trans-unit>
       <trans-unit id="Address 2 (optional)">
         <source>Address 2 (optional)</source>
         <target>주소 2 (선택사항)</target>

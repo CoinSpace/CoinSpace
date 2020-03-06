@@ -1011,10 +1011,6 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Country</source>
         <target>Ország</target>
       </trans-unit>
-      <trans-unit id="Social security number">
-        <source>Social security number</source>
-        <target>Társadalombiztosítási szám</target>
-      </trans-unit>
       <trans-unit id="Address 2 (optional)">
         <source>Address 2 (optional)</source>
         <target>Címsor 2 (opcionális)</target>

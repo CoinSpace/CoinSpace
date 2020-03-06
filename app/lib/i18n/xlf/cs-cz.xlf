@@ -1011,10 +1011,6 @@ Bude to převedeno na %(toSymbol)s, a zasláno
         <source>Country</source>
         <target>Země</target>
       </trans-unit>
-      <trans-unit id="Social security number">
-        <source>Social security number</source>
-        <target>Číslo sociálního pojištění</target>
-      </trans-unit>
       <trans-unit id="Address 2 (optional)">
         <source>Address 2 (optional)</source>
         <target>Adresa 2 (nepovinná)</target>

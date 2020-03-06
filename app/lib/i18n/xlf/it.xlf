@@ -1011,10 +1011,6 @@ Sarà convertito in %(toSymbol)s, e inviato a
         <source>Country</source>
         <target>Paese</target>
       </trans-unit>
-      <trans-unit id="Social security number">
-        <source>Social security number</source>
-        <target>Numero di sicurezza sociale</target>
-      </trans-unit>
       <trans-unit id="Address 2 (optional)">
         <source>Address 2 (optional)</source>
         <target>Indirizzo 2 (facoltativo)</target>

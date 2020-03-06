@@ -23,7 +23,6 @@ function open(onSuccessDismiss) {
       identity: {
         firstName: customer.firstName,
         lastName: customer.lastName,
-        socialSecurityNumber: customer.socialSecurityNumber,
         dateOfBirth: customer.dateOfBirth ? new Date(customer.dateOfBirth) : null,
         address: {
           street: customer.address.street,
@@ -62,7 +61,6 @@ function open(onSuccessDismiss) {
     renderStatePicker(selectedCountry);
     countryPicker.on('on-change', function() {
       var code = countryPicker.getValue();
-      ractive.set('socialSecurityNumber', null);
       ractive.set('identity.address', {
         street: null,
         subStreet: null,
