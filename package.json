@@ -1,6 +1,6 @@
 {
   "name": "coin",
-  "version": "2.17.1",
+  "version": "2.18.0",
   "main": "electron/electron.js",
   "description": "Coin Digital currency wallet",
   "bugs": {
