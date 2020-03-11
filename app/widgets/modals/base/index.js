@@ -25,6 +25,7 @@ var Modal = Ractive.extend({
       if (!context.node) return dismissModal();
       var originalElement = context.original.srcElement || context.original.originalTarget;
       if (originalElement.classList && originalElement.classList.contains('_cancel')) {
+        if (self.get('hasIframe')) self.fire('ios-blur');
         dismissModal();
       }
     })
@@ -37,7 +38,6 @@ var Modal = Ractive.extend({
     });
 
     function dismissModal() {
-      self.fire('ios-blur');
       var onDismiss = self.get('onDismiss');
       if (onDismiss) onDismiss();
       fadeOut(fadeEl);

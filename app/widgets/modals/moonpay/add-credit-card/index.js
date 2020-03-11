@@ -30,7 +30,8 @@ function open(data) {
       },
       showStates: false,
       isInited: moonpay.getCountries('allowed').length !== 0,
-      isCcFormInited: false
+      isCcFormInited: false,
+      hasIframe: true
     }
   });
 
@@ -168,6 +169,7 @@ function open(data) {
 
   ractive.on('add', function() {
     ractive.set('isLoading', true);
+    ractive.fire('ios-blur');
     ccForm.submit(billingAddress, function(status, response) {
       moonpay.createCard(response.id).then(function() {
         ractive.set('onDismiss', data && data.onSuccessDismiss);
