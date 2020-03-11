@@ -87,7 +87,6 @@
     "postcss-loader": "^2.0.6",
     "prettier": "^1.19.1",
     "progress-bar-webpack-plugin": "^1.10.0",
-    "prompt": "^1.0.0",
     "qr.js": "0.0.0",
     "ractive": "^0.9.3",
     "ractive-loader": "^0.5.6",
