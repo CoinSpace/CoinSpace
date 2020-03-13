@@ -9,6 +9,8 @@
         <div class="_status">{{translate("Pending")}}</div>
       {{elseif tx.status === 'waitingAuthorization'}}
         <div class="_status">{{translate("Waiting for authorization")}}</div>
+      {{elseif tx.status === 'waitingPayment'}}
+        <div class="_status">{{translate("Waiting for payment")}}</div>
       {{elseif tx.status === 'failed'}}
         <div class="_status _failed">{{translate("Failed")}}</div>
       {{elseif tx.status === 'completed'}}
@@ -51,15 +53,40 @@
           {{/if}}
         {{/if}}
 
+        <h3 class="_title">{{translate("To")}}:</h3>
+        <code class="_value">
+          <span class="_address">{{tx.walletAddress}}</span>
+        </code>
+
         {{#if tx.failureReason}}
         <h3 class="_title">{{translate("Failure reason")}}:</h3>
         <code class="_value">{{tx.failureReason}}</code>
         {{/if}}
 
-        <h3 class="_title">{{translate("To")}}:</h3>
+        {{#if tx.status === 'waitingPayment'}}
+        <h3 class="_title">{{translate("To complete the transaction, please submit a bank transfer with the following information")}}:</h3>
         <code class="_value">
-          <span class="_address">{{tx.walletAddress}}</span>
+          <div>{{translate("Amount")}}: {{tx.fiat}}</div>
+          <div>{{translate("Reference Number")}}: {{tx.bankTransferReference}}</div>
+          {{#if tx.bankDepositInformation.accountNumber}}
+          <div>{{translate("Account number")}}: {{tx.bankDepositInformation.accountNumber}}</div>
+          {{/if}}
+          {{#if tx.bankDepositInformation.sortCode}}
+          <div>{{translate("Sort code")}}: {{tx.bankDepositInformation.sortCode}}</div>
+          {{/if}}
+          {{#if tx.bankDepositInformation.iban}}
+          <div>IBAN: {{tx.bankDepositInformation.iban}}</div>
+          {{/if}}
+          {{#if tx.bankDepositInformation.bic}}
+          <div>BIC: {{tx.bankDepositInformation.bic}}</div>
+          {{/if}}
+          <div>{{translate("Recipient Name")}}: {{tx.bankDepositInformation.accountName}}</div>
+          <div>{{translate("Bank Name")}}: {{tx.bankDepositInformation.bankName}}</div>
+          <div>{{translate("Bank Address")}}: {{tx.bankDepositInformation.bankAddress}}</div>
+          <div>{{translate("Recipient Address")}}: {{tx.bankDepositInformation.accountAddress}}</div>
         </code>
+        {{/if}}
+
       </div>
     </div>
 

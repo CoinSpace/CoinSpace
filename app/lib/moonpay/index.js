@@ -272,6 +272,57 @@ function deleteCard(id) {
   });
 }
 
+function createBankAccount(bankAccount) {
+  var data = { currencyCode: bankAccount.currencyCode.toLowerCase() };
+  if (data.currencyCode === 'eur') {
+    data.iban = bankAccount.iban;
+  } else if (data.currencyCode === 'gbp') {
+    data.accountNumber = bankAccount.accountNumber;
+    data.sortCode = bankAccount.sortCode;
+  }
+  return request({
+    url: 'https://api.moonpay.io/v3/bank_accounts',
+    method: 'post',
+    data: data,
+    headers: getAuthorizationHeaders()
+  })
+}
+
+function getBankAccounts(fiat) {
+  return request({
+    url: 'https://api.moonpay.io/v3/bank_accounts',
+    headers: getAuthorizationHeaders()
+  }).then(function(bankAccounts) {
+    bankAccounts.forEach(function(bankAccount) {
+      var fiatSymbol = getFiatById(bankAccount.currencyId, 'symbol');
+      if (fiatSymbol === 'EUR') {
+        bankAccount.label = fiatSymbol + ' – ' + bankAccount.iban.substr(0, 8) + '...' + bankAccount.iban.substr(-4);
+      } else if (fiatSymbol === 'GBP') {
+        bankAccount.label = fiatSymbol + ' – ' + bankAccount.sortCode + '...' + bankAccount.accountNumber.substr(-4);
+      }
+      bankAccount.fiatSymbol = fiatSymbol;
+      bankAccount.type = 'bankAccount';
+    });
+    if (fiat) {
+      bankAccounts = bankAccounts.filter(function(bankAccount) {
+        return bankAccount.fiatSymbol === fiat;
+      });
+    }
+    bankAccounts.sort(function(a, b) {
+      return (new Date(b.createdAt)).getTime() - (new Date(a.createdAt).getTime());
+    });
+    return bankAccounts;
+  });
+}
+
+function deleteBankAccount(id) {
+  return request({
+    url: 'https://api.moonpay.io/v3/bank_accounts/' + id,
+    method: 'delete',
+    headers: getAuthorizationHeaders()
+  });
+}
+
 function quote(currencyCode, baseCurrencyCode, baseCurrencyAmount, areFeesIncluded) {
   return request({
     url: 'https://api.moonpay.io/v3/currencies/' + currencyCode + '/quote',
@@ -296,7 +347,7 @@ function rate(currencyCode, baseCurrencyCode) {
 }
 
 function createTx(data) {
-  if (data.card.type === 'applePay') {
+  if (data.paymentMethod.type === 'applePay') {
     return applePay.generateToken({
       countryCode: 'MT',
       currencyCode: data.baseCurrencyCode.toUpperCase(),
@@ -311,13 +362,17 @@ function createTx(data) {
           tokenProvider: 'apple_pay',
           token: token
         }
-        delete data.card;
+        delete data.paymentMethod;
         return _createTx(data);
       }
     });
-  } else {
-    data.cardId = data.card.id;
-    delete data.card;
+  } if (data.paymentMethod.type === 'card') {
+    data.cardId = data.paymentMethod.id;
+    delete data.paymentMethod;
+    return _createTx(data);
+  } if (data.paymentMethod.type === 'bankAccount') {
+    data.bankAccountId = data.paymentMethod.id;
+    delete data.paymentMethod;
     return _createTx(data);
   }
 }
@@ -334,7 +389,8 @@ function _createTx(data) {
       currencyCode: data.currencyCode,
       returnUrl: data.returnUrl,
       externalToken: data.externalToken,
-      cardId: data.cardId
+      cardId: data.cardId,
+      bankAccountId: data.bankAccountId
     },
     headers: getAuthorizationHeaders()
   });
@@ -415,6 +471,9 @@ module.exports = {
   createCard: createCard,
   getCards: getCards,
   deleteCard: deleteCard,
+  createBankAccount: createBankAccount,
+  getBankAccounts: getBankAccounts,
+  deleteBankAccount: deleteBankAccount,
   quote: quote,
   rate: rate,
   createTx: createTx,

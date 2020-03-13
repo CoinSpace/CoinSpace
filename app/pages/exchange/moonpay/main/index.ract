@@ -9,15 +9,33 @@
     </div>
   </div>
 
-  <div class="_message">
-    {{translate("You can purchase up to :dailyLimitRemaining today, and up to :monthlyLimitRemaining this month.", {
-      dailyLimitRemaining: dailyLimitRemaining,
-      monthlyLimitRemaining: monthlyLimitRemaining
-    })}}
-    {{#if limitIncreaseEligible}}
-      {{translate("To increase your limits you need to pass verification.")}}
-    {{/if}}
+  <div class="_group">
+    <label>{{translate("Daily limits")}}</label>
+    <div class="_message">
+      {{translate("Credit Card:")}} {{getDailyLimitLabel(creditCardLimit)}}
+      {{#if bankAccountLimit}}
+      <br>
+      {{translate("Bank Account:")}} {{getDailyLimitLabel(bankAccountLimit)}}
+      {{/if}}
+    </div>
   </div>
+
+  <div class="_group">
+    <label>{{translate("Monthly limits")}}</label>
+    <div class="_message">
+      {{translate("Credit Card:")}} {{getMonthlyLimitLabel(creditCardLimit)}}
+      {{#if bankAccountLimit}}
+      <br>
+      {{translate("Bank Account:")}} {{getMonthlyLimitLabel(bankAccountLimit)}}
+      {{/if}}
+    </div>
+  </div>
+
+  {{#if limitIncreaseEligible}}
+  <div class="_message">
+    {{translate("To increase your limits you need to pass verification.")}}
+  </div>
+  {{/if}}
 
   <div class="_link" on-click="payment-methods">{{translate("Payment methods")}}</div>
   <div class="_link" on-click="verification">{{translate("Verification")}}</div>

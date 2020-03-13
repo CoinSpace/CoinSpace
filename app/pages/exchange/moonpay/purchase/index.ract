@@ -59,10 +59,10 @@
   <div class="_group">
     <label class="_label">{{translate("Payment method")}}</label><br>
     <div class="_dropdown">
-      {{#if cards.length}}
-      <div class="_value">{{selectedCard.label}}</div>
-      <select value="{{selectedCard}}">
-        {{#each cards}}
+      {{#if (paymentMethods.length) }}
+      <div class="_value">{{selectedPaymentMethod.label}}</div>
+      <select value="{{selectedPaymentMethod}}" on-change="change-payment-method">
+        {{#each paymentMethods}}
         <option value="{{this}}">{{this.label}}</option>
         {{/each}}
       </select>

@@ -104,10 +104,27 @@
 
 .moonpay_confirm_purchase_filled._success {
   background-color: $green;
+}
+
+.moonpay_confirm_purchase_waiting_payment {
+  ._content {
+    @include textselect;
+  }
+  ._label, ._value {
+    @include breakpoint(portrait) {
+      font-size: 20px;
+    }
+  }
+  ._value {
+    @extend .jigsaw-regular;
+    margin-bottom: 15px;
+  }
+  ._message._top {
+    margin-bottom: 15px;
+  }
   ._confirm_btn_group {
-    ._cancel {
-      max-width: 140px;
-      margin: 0 auto;
+    @include breakpoint(portrait) {
+      margin-top: 20px;
     }
   }
 }

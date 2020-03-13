@@ -30,7 +30,7 @@
           </span>
         </div>
       {{else}}
-        {{#if card.type === 'applePay'}}
+        {{#if paymentMethod.type === 'applePay'}}
           <div class="_confirm apple-pay-button" on-click="confirm"></div>
         {{else}}
           <div class="_confirm" on-click="confirm">{{translate("Confirm")}}</div>
@@ -68,6 +68,61 @@
   </div>
   {{/if}}
 
+  {{#if (status === 'waitingPayment')}}
+  <div class="modal__content moonpay_modal moonpay_confirm_purchase_waiting_payment">
+
+    <h3 class="_header">{{translate("Confirm purchase")}}</h3>
+
+    <div class="_content">
+      <div class="_message _top">
+        {{translate("To complete the transaction, please submit a bank transfer with the following information")}}.
+      </div>
+
+      <div class="_label">{{translate("Amount")}}</div>
+      <div class="_value">{{fiatSymbol}} {{fiatAmount}}</div>
+
+      <div class="_label">{{translate("Reference Number")}}</div>
+      <div class="_value">{{bankTransferReference}}</div>
+
+      {{#if bankDepositInformation.accountNumber}}
+      <div class="_label">{{translate("Account number")}}</div>
+      <div class="_value">{{bankDepositInformation.accountNumber}}</div>
+      {{/if}}
+
+      {{#if bankDepositInformation.sortCode}}
+      <div class="_label">{{translate("Sort code")}}</div>
+      <div class="_value">{{bankDepositInformation.sortCode}}</div>
+      {{/if}}
+
+      {{#if bankDepositInformation.iban}}
+      <div class="_label">IBAN</div>
+      <div class="_value">{{bankDepositInformation.iban}}</div>
+      {{/if}}
+
+      {{#if bankDepositInformation.bic}}
+      <div class="_label">BIC</div>
+      <div class="_value">{{bankDepositInformation.bic}}</div>
+      {{/if}}
+
+      <div class="_label">{{translate("Recipient Name")}}</div>
+      <div class="_value">{{bankDepositInformation.accountName}}</div>
+
+      <div class="_label">{{translate("Bank Name")}}</div>
+      <div class="_value">{{bankDepositInformation.bankName}}</div>
+
+      <div class="_label">{{translate("Bank Address")}}</div>
+      <div class="_value">{{bankDepositInformation.bankAddress}}</div>
+
+      <div class="_label">{{translate("Recipient Address")}}</div>
+      <div class="_value">{{bankDepositInformation.accountAddress}}</div>
+    </div>
+
+    <div class="_confirm_btn_group">
+      <div class="_cancel _single">{{translate("Close")}}</div>
+    </div>
+  </div>
+  {{/if}}
+
   {{#if (status === 'success')}}
   <div class="modal__content moonpay_modal moonpay_confirm_purchase_filled _success">
     <div class="_content">
@@ -78,7 +133,7 @@
       <p class="_message">{{translate("Your transaction will appear in your history tab shortly.")}}</p>
     </div>
     <div class="_confirm_btn_group">
-      <div class="_cancel">{{translate("Close")}}</div>
+      <div class="_cancel _single">{{translate("Close")}}</div>
     </div>
   </div>
   {{/if}}

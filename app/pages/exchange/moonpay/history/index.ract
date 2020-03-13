@@ -31,6 +31,8 @@
         {{translate("Pending")}}
       {{elseif this.status === 'waitingAuthorization'}}
         {{translate("Waiting for authorization")}}
+      {{elseif this.status === 'waitingPayment'}}
+        {{translate("Waiting for payment")}}
       {{elseif this.status === 'failed'}}
         {{translate("Failed")}}
       {{elseif this.status === 'completed'}}

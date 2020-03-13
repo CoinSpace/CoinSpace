@@ -16,12 +16,14 @@ function open(data) {
     data: {
       isLoading: false,
       status: 'confirm',
-      card: data.card,
+      paymentMethod: data.paymentMethod,
       fiatAmount: data.fiatAmount,
       fiatSymbol: data.fiatSymbol,
       cryptoAmount: data.cryptoAmount,
       cryptoSymbol: data.cryptoSymbol,
       address: getWallet().getNextAddress(),
+      bankTransferReference: '',
+      bankDepositInformation: '',
       threedsecure: function() {}
     }
   });
@@ -41,11 +43,14 @@ function open(data) {
       baseCurrencyCode: data.fiatSymbol.toLowerCase(),
       currencyCode: data.cryptoSymbol.toLowerCase(),
       returnUrl: redirectURL,
-      card: data.card
+      paymentMethod: data.paymentMethod
     }).then(function(tx) {
       if (tx.status === 'failed') throw new Error('failed');
       if (tx.status === 'waitingAuthorization') {
         return waitingAuthorization(tx.redirectUrl);
+      }
+      if (tx.status === 'waitingPayment') {
+        return waitingPayment(tx);
       }
       ractive.set('status', 'success');
     }).catch(function(err) {
@@ -75,6 +80,13 @@ function open(data) {
         return handleError(new Error('3D secure authentication failed'));
       });
     });
+  }
+
+  function waitingPayment(tx) {
+    ractive.set('isLoading', false);
+    ractive.set('status', 'waitingPayment');
+    ractive.set('bankTransferReference', tx.bankTransferReference);
+    ractive.set('bankDepositInformation', tx.bankDepositInformation);
   }
 
   function handleError(err) {

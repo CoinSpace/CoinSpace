@@ -11,14 +11,22 @@ module.exports = function(el) {
     template: require('./index.ract'),
     data: {
       isLoading: true,
-      dailyLimitRemaining: 0,
-      monthlyLimitRemaining: 0,
+      creditCardLimit: {},
+      bankAccountLimit: false,
       limitIncreaseEligible: false,
       currencies: [],
       defaultCurrency: '',
       defaultCurrencyLabel: function() {
         return moonpay.getFiatById(ractive.get('defaultCurrency'), 'symbol');
       },
+      getDailyLimitLabel: function(limit) {
+        var sign = moonpay.getFiatById(ractive.get('defaultCurrency'), 'sign');
+        return sign + limit.dailyLimitRemaining + ' / ' + sign + limit.dailyLimit;
+      },
+      getMonthlyLimitLabel: function(limit) {
+        var sign = moonpay.getFiatById(ractive.get('defaultCurrency'), 'sign');
+        return sign + limit.monthlyLimitRemaining + ' / ' + sign + limit.monthlyLimit;
+      }
     },
     partials: {
       loader: require('../loader.ract'),
@@ -26,12 +34,11 @@ module.exports = function(el) {
   });
 
   var verificationLevels = [];
-  var limit;
 
   ractive.on('before-show', function() {
     ractive.set('isLoading', true);
-    ractive.set('dailyLimitRemaining', 0);
-    ractive.set('monthlyLimitRemaining', 0);
+    ractive.set('creditCardLimit', {});
+    ractive.set('bankAccountLimit', false);
     ractive.set('limitIncreaseEligible', false);
     ractive.set('currencies', []);
     ractive.set('defaultCurrency', '');
@@ -41,12 +48,19 @@ module.exports = function(el) {
     ]).then(function(results) {
       ractive.set('isLoading', false);
       var customer = moonpay.getCustomer();
-      limit = results[0].limits.find(function(item) {
+      var fiatSymbol = moonpay.getFiatById(customer.defaultCurrencyId, 'symbol');
+
+      ractive.set('creditCardLimit', results[0].limits.find(function(item) {
         return item.type === 'buy_credit_debit_card';
-      });
-      var fiatSign = moonpay.getFiatById(customer.defaultCurrencyId, 'sign');
-      ractive.set('dailyLimitRemaining', fiatSign + limit.dailyLimitRemaining);
-      ractive.set('monthlyLimitRemaining', fiatSign + limit.monthlyLimitRemaining);
+      }));
+      ractive.set('bankAccountLimit', results[0].limits.find(function(item) {
+        if (fiatSymbol === 'GBP') {
+          return item.type === 'buy_gbp_bank_transfer';
+        } else if (fiatSymbol === 'EUR') {
+          return item.type === 'buy_sepa_bank_transfer';
+        }
+        return false;
+      }));
       ractive.set('limitIncreaseEligible', results[0].limitIncreaseEligible);
       ractive.set('currencies', moonpay.getFiatList());
       ractive.set('defaultCurrency', customer.defaultCurrencyId);
@@ -97,7 +111,8 @@ module.exports = function(el) {
     }
     var fiatSymbol = moonpay.getFiatById(moonpay.getCustomer().defaultCurrencyId, 'symbol');
     emitter.emit('change-moonpay-step', 'purchase', {
-      dailyLimitRemaining: limit.dailyLimitRemaining,
+      creditCardLimit: ractive.get('creditCardLimit.dailyLimitRemaining'),
+      bankAccountLimit: ractive.get('bankAccountLimit.dailyLimitRemaining'),
       fiatSymbol: fiatSymbol
     });
   });

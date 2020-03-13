@@ -26,8 +26,8 @@ module.exports = function(el) {
       cryptoSymbol: '',
       rate: '',
       fee: '',
-      cards: [],
-      selectedCard: undefined,
+      paymentMethods: [],
+      selectedPaymentMethod: undefined,
     },
     partials: {
       loader: require('../loader.ract'),
@@ -35,6 +35,8 @@ module.exports = function(el) {
   });
 
   var fiatSymbol;
+  var creditCardLimit = 0;
+  var bankAccountLimit = 0;
   var cryptoSymbol;
   var minAmount = 20;
 
@@ -43,22 +45,29 @@ module.exports = function(el) {
     ractive.set('isLoadingFiat', false);
     ractive.set('isLoadingCrypto', true);
     ractive.set('isFirstEstimate', true);
-    ractive.set('dailyLimitRemaining', context.dailyLimitRemaining);
     ractive.set('fiatSymbol', '');
     ractive.set('cryptoSymbol', '');
     ractive.set('rate', '');
     ractive.set('fee', '');
-    ractive.set('cards', []);
-    ractive.set('selectedCard', undefined);
+    ractive.set('paymentMethods', []);
+    ractive.set('selectedPaymentMethod', undefined);
 
     fiatSymbol = context.fiatSymbol;
+
+    creditCardLimit = context.creditCardLimit;
+    bankAccountLimit = context.bankAccountLimit;
+
     cryptoSymbol = denomination(getToken());
     ractive.set('fiatSymbol', fiatSymbol);
     ractive.set('cryptoSymbol', cryptoSymbol);
 
-    return moonpay.getCards().then(function(cards) {
+    return Promise.all([
+      moonpay.getCards(),
+      moonpay.getBankAccounts(fiatSymbol)
+    ]).then(function(results) {
       ractive.set('isLoading', false);
-      ractive.set('cards', cards);
+      ractive.set('paymentMethods', results[0].concat(results[1]));
+      setLimit();
       cryptoEstimate();
     });
   });
@@ -167,14 +176,24 @@ module.exports = function(el) {
   ractive.on('add-credit-card', function() {
     showAddCreditCard({onSuccessDismiss: function() {
       return moonpay.getCards().then(function(cards) {
-        ractive.set('cards', cards);
+        ractive.set('paymentMethods', cards);
       });
     }});
   });
 
+  function setLimit() {
+    var selectedPaymentMethod = ractive.get('selectedPaymentMethod');
+    if (selectedPaymentMethod && selectedPaymentMethod.type === 'bankAccount') {
+      ractive.set('dailyLimitRemaining', bankAccountLimit);
+    } else {
+      ractive.set('dailyLimitRemaining', creditCardLimit);
+    }
+  }
+  ractive.on('change-payment-method', setLimit);
+
   ractive.on('buy', function() {
-    var card = ractive.get('selectedCard');
-    if (!card) return showError({message: 'Please select a payment method'});
+    var paymentMethod = ractive.get('selectedPaymentMethod');
+    if (!paymentMethod) return showError({message: 'Please select a payment method'});
     var fiatAmount = ractive.find('#moonpay_purchase_fiat').value;
     if (fiatAmount < minAmount) return showError({message: 'Please enter an amount above', interpolations: {dust: minAmount + ' ' + fiatSymbol}});
     var cryptoAmount = ractive.find('#moonpay_purchase_crypto').value;
@@ -184,7 +203,7 @@ module.exports = function(el) {
       fiatSymbol: fiatSymbol,
       cryptoAmount: cryptoAmount,
       cryptoSymbol: cryptoSymbol,
-      card: card
+      paymentMethod: paymentMethod
     });
   });
 

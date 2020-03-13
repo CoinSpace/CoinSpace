@@ -1070,10 +1070,6 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Back side</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="No payment methods.">
-        <source>No payment methods.</source>
-        <target></target>
-      </trans-unit>
       <trans-unit id="Add Credit Card">
         <source>Add Credit Card</source>
         <target></target>
@@ -1152,6 +1148,86 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="You have exceeded your monthly limit. Please try again later.">
         <source>You have exceeded your monthly limit. Please try again later.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Credit Cards">
+        <source>Credit Cards</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Bank Accounts">
+        <source>Bank Accounts</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="No credit cards.">
+        <source>No credit cards.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="No bank accounts.">
+        <source>No bank accounts.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Add Bank Account">
+        <source>Add Bank Account</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Currency">
+        <source>Currency</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Account number">
+        <source>Account number</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Sort code">
+        <source>Sort code</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Unsupported bank">
+        <source>Unsupported bank</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Daily limits">
+        <source>Daily limits</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Monthly limits">
+        <source>Monthly limits</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Credit Card:">
+        <source>Credit Card:</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Bank Account:">
+        <source>Bank Account:</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Waiting for payment">
+        <source>Waiting for payment</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="To complete the transaction, please submit a bank transfer with the following information">
+        <source>To complete the transaction, please submit a bank transfer with the following information</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Reference Number">
+        <source>Reference Number</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Recipient Name">
+        <source>Recipient Name</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Bank Name">
+        <source>Bank Name</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Bank Address">
+        <source>Bank Address</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Recipient Address">
+        <source>Recipient Address</source>
         <target></target>
       </trans-unit>
     </body>

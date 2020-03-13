@@ -14,7 +14,6 @@
       background-color: white;
       display: flex;
       ._cancel {
-        max-width: 140px;
         margin: 0 auto;
       }
     }
@@ -45,7 +44,7 @@
   ._inputs {
     padding: 20px;
     background-color: white;
-    border-radius: 3px;
+    border-radius: 0 0 3px 3px;
 
     display: flex;
 

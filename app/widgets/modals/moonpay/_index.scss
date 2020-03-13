@@ -81,7 +81,7 @@
   ._confirm_btn_group {
     padding: 0 20px 20px 20px;
     background-color: white;
-    border-radius: 3px;
+    border-radius: 0 0 3px 3px;
     margin-top: 20px;
     display: flex;
 
@@ -103,6 +103,9 @@
 
       &:hover {
         color: darken($grey, 20%);
+      }
+      &._single {
+        margin: 0 auto;
       }
     }
 
@@ -160,5 +163,6 @@
 @import "./face-match-verification/_index";
 @import "./document-verification/_index";
 @import "./add-credit-card/_index";
+@import "./add-bank-account/_index";
 @import "./confirm-purchase/_index";
 @import "./transaction-detail/_index";
