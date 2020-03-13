@@ -931,10 +931,6 @@ Het zal worden geconverteerd in %(toSymbol)s, en worden verzonden naar
         <source>Invalid verification code</source>
         <target>Ongeldige verificatiecode.</target>
       </trans-unit>
-      <trans-unit id="You can purchase up to :dailyLimitRemaining today, and up to :monthlyLimitRemaining this month.">
-        <source>You can purchase up to %(dailyLimitRemaining)s today, and up to %(monthlyLimitRemaining)s this month.</source>
-        <target>U kunt tot %(dailyLimitRemaining)s kopen vandaag, en tot %(monthlyLimitRemaining)s deze maand.</target>
-      </trans-unit>
       <trans-unit id="To increase your limits you need to pass verification.">
         <source>To increase your limits you need to pass verification.</source>
         <target>U moet de verificatie doorlopen om uw limieten te vergroten.</target>

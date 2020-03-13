@@ -931,10 +931,6 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Invalid verification code</source>
         <target>無効な確認コード</target>
       </trans-unit>
-      <trans-unit id="You can purchase up to :dailyLimitRemaining today, and up to :monthlyLimitRemaining this month.">
-        <source>You can purchase up to %(dailyLimitRemaining)s today, and up to %(monthlyLimitRemaining)s this month.</source>
-        <target>今日は %(dailyLimitRemaining)s まで購入でき, 今月は %(monthlyLimitRemaining)s まで購入できます。</target>
-      </trans-unit>
       <trans-unit id="To increase your limits you need to pass verification.">
         <source>To increase your limits you need to pass verification.</source>
         <target>制限を増やすには、確認に合格する必要があります。</target>

@@ -931,10 +931,6 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Invalid verification code</source>
         <target>잘못된 인증 코드</target>
       </trans-unit>
-      <trans-unit id="You can purchase up to :dailyLimitRemaining today, and up to :monthlyLimitRemaining this month.">
-        <source>You can purchase up to %(dailyLimitRemaining)s today, and up to %(monthlyLimitRemaining)s this month.</source>
-        <target>오늘 최대 %(dailyLimitRemaining)s개를 구매하실 수 있으며, 이번 달에 최대 %(monthlyLimitRemaining)s개를 구매할 수 있습니다.</target>
-      </trans-unit>
       <trans-unit id="To increase your limits you need to pass verification.">
         <source>To increase your limits you need to pass verification.</source>
         <target>한도를 늘리려면 인증을 전달해야 합니다.</target>

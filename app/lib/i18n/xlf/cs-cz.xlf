@@ -931,10 +931,6 @@ Bude to převedeno na %(toSymbol)s, a zasláno
         <source>Invalid verification code</source>
         <target>Neplatný ověřovací kód</target>
       </trans-unit>
-      <trans-unit id="You can purchase up to :dailyLimitRemaining today, and up to :monthlyLimitRemaining this month.">
-        <source>You can purchase up to %(dailyLimitRemaining)s today, and up to %(monthlyLimitRemaining)s this month.</source>
-        <target>Dnes můžete zakoupit až %(dailyLimitRemaining)s a tento měsíc až %(monthlyLimitRemaining)s.</target>
-      </trans-unit>
       <trans-unit id="To increase your limits you need to pass verification.">
         <source>To increase your limits you need to pass verification.</source>
         <target>Chcete-li zvýšit své limity, musíte absolvovat ověření.</target>

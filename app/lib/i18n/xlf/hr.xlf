@@ -931,10 +931,6 @@ Biće konvertiran u %(toSymbol)s i poslan na
         <source>Invalid verification code</source>
         <target>Kod za provjeru nije valjan</target>
       </trans-unit>
-      <trans-unit id="You can purchase up to :dailyLimitRemaining today, and up to :monthlyLimitRemaining this month.">
-        <source>You can purchase up to %(dailyLimitRemaining)s today, and up to %(monthlyLimitRemaining)s this month.</source>
-        <target>Možete kupiti do %(dailyLimitRemaining)s danas, a najviše do %(monthlyLimitRemaining)s ovog mjeseca.</target>
-      </trans-unit>
       <trans-unit id="To increase your limits you need to pass verification.">
         <source>To increase your limits you need to pass verification.</source>
         <target>Da biste povećali limite, morate proći provjeru.</target>
