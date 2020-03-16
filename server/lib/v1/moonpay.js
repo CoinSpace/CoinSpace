@@ -6,9 +6,12 @@ var API_KEY = process.env.MOONPAY_API_KEY;
 
 var PRIORITY_SYMBOLS = ['BTC', 'BCH', 'BSV', 'ETH', 'USDT', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH'];
 var fiatSigns = {
+  aud: '$',
+  cad: '$',
   usd: '$',
   eur: '€',
-  gbp: '£'
+  gbp: '£',
+  zar: 'R'
 };
 
 function save(_id, data) {
