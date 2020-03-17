@@ -891,10 +891,6 @@ Sẽ chuyển đổi thành %(toSymbol)s, và gửi đến
         <source>Word</source>
         <target>Từ</target>
       </trans-unit>
-      <trans-unit id="Buy with Credit Card">
-        <source>Buy with Credit Card</source>
-        <target>Mua bằng thẻ tín dụng</target>
-      </trans-unit>
       <trans-unit id="Transaction too large">
         <source>Transaction too large</source>
         <target></target>

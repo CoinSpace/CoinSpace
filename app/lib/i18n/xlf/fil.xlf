@@ -891,10 +891,6 @@ Iko-convert ito sa %(toSymbol)s, at ipapadala sa
         <source>Word</source>
         <target>Salita</target>
       </trans-unit>
-      <trans-unit id="Buy with Credit Card">
-        <source>Buy with Credit Card</source>
-        <target></target>
-      </trans-unit>
       <trans-unit id="Transaction too large">
         <source>Transaction too large</source>
         <target>Masyadong malaki ang transaksyon</target>

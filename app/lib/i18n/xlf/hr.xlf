@@ -891,10 +891,6 @@ Biće konvertiran u %(toSymbol)s i poslan na
         <source>Word</source>
         <target>Riječ</target>
       </trans-unit>
-      <trans-unit id="Buy with Credit Card">
-        <source>Buy with Credit Card</source>
-        <target>Kupite kreditnom karticom</target>
-      </trans-unit>
       <trans-unit id="Transaction too large">
         <source>Transaction too large</source>
         <target>Transakcija prevelika</target>

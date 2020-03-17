@@ -891,10 +891,6 @@ Het zal worden geconverteerd in %(toSymbol)s, en worden verzonden naar
         <source>Word</source>
         <target>Woord</target>
       </trans-unit>
-      <trans-unit id="Buy with Credit Card">
-        <source>Buy with Credit Card</source>
-        <target>Kopen met creditcard</target>
-      </trans-unit>
       <trans-unit id="Transaction too large">
         <source>Transaction too large</source>
         <target>Transactie te groot</target>

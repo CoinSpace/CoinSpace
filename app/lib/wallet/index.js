@@ -47,6 +47,20 @@ var Wallet = {
   dash: CsWallet
 }
 
+var names = {
+  BTC: 'Bitcoin',
+  BCH: 'Bitcoin Cash',
+  BSV: 'Bitcoin SV',
+  LTC: 'Litecoin',
+  ETH: 'Ethereum',
+  XRP: 'Ripple',
+  XLM: 'Stellar',
+  EOS: 'EOS',
+  DOGE: 'Dogecoin',
+  DASH: 'Dash',
+  USDT: 'Tether USD'
+};
+
 var urlRoot = window.urlRoot
 
 function createWallet(passphrase, network, callback) {
@@ -217,6 +231,7 @@ function initWallet(networkName, done, txDone) {
 
   wallet = new Wallet[networkName](options);
   wallet.denomination = token ? denomination(token) : denomination(networkName);
+  wallet.name = names[wallet.denomination] || wallet.denomination;
 }
 
 function isValidWalletToken(token) {

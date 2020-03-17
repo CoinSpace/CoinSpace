@@ -886,10 +886,6 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Word</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="Buy with Credit Card">
-        <source>Buy with Credit Card</source>
-        <target></target>
-      </trans-unit>
       <trans-unit id="Transaction too large">
         <source>Transaction too large</source>
         <target></target>

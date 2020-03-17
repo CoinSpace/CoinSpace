@@ -23,6 +23,7 @@ module.exports = function(el) {
       template: require('./choose.ract'),
       data: {
         choose: choose,
+        crypto: '',
         isSupportedMoonpay: false
       }
     })
@@ -58,6 +59,7 @@ module.exports = function(el) {
   function setMoonpayButton() {
     var wallet = getWallet();
     var symbol = wallet.denomination;
+    exchanges.none.set('crypto', wallet.name);
     exchanges.none.set('isSupportedMoonpay', moonpay.isSupported(symbol) && wallet.getNextAddress());
   }
 

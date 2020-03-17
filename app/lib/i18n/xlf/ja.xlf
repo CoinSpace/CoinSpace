@@ -891,10 +891,6 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Word</source>
         <target>単語</target>
       </trans-unit>
-      <trans-unit id="Buy with Credit Card">
-        <source>Buy with Credit Card</source>
-        <target>クレジットカードで購入</target>
-      </trans-unit>
       <trans-unit id="Transaction too large">
         <source>Transaction too large</source>
         <target>取引が大き過ぎます</target>

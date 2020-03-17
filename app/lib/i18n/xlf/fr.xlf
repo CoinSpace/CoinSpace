@@ -891,10 +891,6 @@ Le montant sera converti en %(toSymbol)s, et sera envoyé à
         <source>Word</source>
         <target>Mot</target>
       </trans-unit>
-      <trans-unit id="Buy with Credit Card">
-        <source>Buy with Credit Card</source>
-        <target>Acheter avec carte de crédit</target>
-      </trans-unit>
       <trans-unit id="Transaction too large">
         <source>Transaction too large</source>
         <target>La transaction est trop grosse</target>
