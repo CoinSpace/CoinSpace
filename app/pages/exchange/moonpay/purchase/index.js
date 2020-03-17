@@ -35,7 +35,7 @@ module.exports = function(el) {
     }
   });
 
-  var fiatSymbol;
+  var fiat;
   var creditCardLimit = 0;
   var bankAccountLimit = 0;
   var cryptoSymbol;
@@ -56,20 +56,19 @@ module.exports = function(el) {
     ractive.set('selectedPaymentMethod', undefined);
     ractive.set('minAmount', context.fiat.minAmount);
 
-    _fiatAmount = context.fiat.minAmount + '';
-
-    fiatSymbol = context.fiat.symbol;
+    fiat = context.fiat;
+    _fiatAmount = fiat.minAmount + '';
 
     creditCardLimit = context.creditCardLimit;
     bankAccountLimit = context.bankAccountLimit;
 
     cryptoSymbol = denomination(getToken());
-    ractive.set('fiatSymbol', fiatSymbol);
+    ractive.set('fiatSymbol', fiat.symbol);
     ractive.set('cryptoSymbol', cryptoSymbol);
 
     return Promise.all([
       moonpay.getCards(),
-      moonpay.getBankAccounts(fiatSymbol)
+      moonpay.getBankAccounts(fiat.symbol)
     ]).then(function(results) {
       ractive.set('isLoading', false);
       ractive.set('paymentMethods', results[0].concat(results[1]));
@@ -95,11 +94,11 @@ module.exports = function(el) {
       if (!fiatAmount) return reject(new Error('empty_fiat'));
       resolve();
     }).then(function() {
-      return moonpay.quote(cryptoSymbol.toLowerCase(), fiatSymbol.toLowerCase(), fiatAmount, false).then(function(quote) {
+      return moonpay.quote(cryptoSymbol.toLowerCase(), fiat.symbol.toLowerCase(), fiatAmount, false).then(function(quote) {
         ractive.set('isLoadingCrypto', false);
         ractive.set('isFirstEstimate', false);
-        ractive.set('rate', Big(quote.baseCurrencyAmount).div(quote.quoteCurrencyAmount).toFixed(2));
-        ractive.set('fee', Big(quote.feeAmount).plus(quote.extraFeeAmount).toFixed(2));
+        ractive.set('rate', Big(quote.baseCurrencyAmount).div(quote.quoteCurrencyAmount).toFixed(fiat.precision));
+        ractive.set('fee', Big(quote.feeAmount).plus(quote.extraFeeAmount).toFixed(fiat.precision));
         _cryptoAmount = quote.quoteCurrencyAmount.toString();
         ractive.find('#moonpay_purchase_crypto').value = _cryptoAmount;
       });
@@ -131,12 +130,12 @@ module.exports = function(el) {
       if (!cryptoAmount) return reject(new Error('empty_crypto'));
       resolve();
     }).then(function() {
-      return moonpay.rate(cryptoSymbol.toLowerCase(), fiatSymbol.toLowerCase()).then(function(baseRate) {
-        var baseFiatAmount = Big(cryptoAmount).times(baseRate).toFixed(2);
-        return moonpay.quote(cryptoSymbol.toLowerCase(), fiatSymbol.toLowerCase(), baseFiatAmount, false).then(function(quote) {
+      return moonpay.rate(cryptoSymbol.toLowerCase(), fiat.symbol.toLowerCase()).then(function(baseRate) {
+        var baseFiatAmount = Big(cryptoAmount).times(baseRate).toFixed(fiat.precision);
+        return moonpay.quote(cryptoSymbol.toLowerCase(), fiat.symbol.toLowerCase(), baseFiatAmount, false).then(function(quote) {
           ractive.set('isLoadingFiat', false);
-          ractive.set('rate', Big(quote.baseCurrencyAmount).div(quote.quoteCurrencyAmount).toFixed(2));
-          ractive.set('fee', Big(quote.feeAmount).plus(quote.extraFeeAmount).toFixed(2));
+          ractive.set('rate', Big(quote.baseCurrencyAmount).div(quote.quoteCurrencyAmount).toFixed(fiat.precision));
+          ractive.set('fee', Big(quote.feeAmount).plus(quote.extraFeeAmount).toFixed(fiat.precision));
           _fiatAmount = quote.baseCurrencyAmount.toString();
           ractive.find('#moonpay_purchase_fiat').value = _fiatAmount;
         });
@@ -198,12 +197,12 @@ module.exports = function(el) {
     if (!paymentMethod) return showError({message: 'Please select a payment method'});
     var fiatAmount = ractive.find('#moonpay_purchase_fiat').value;
     var minAmount = ractive.get('minAmount');
-    if (fiatAmount < minAmount) return showError({message: 'Please enter an amount above', interpolations: {dust: minAmount + ' ' + fiatSymbol}});
+    if (fiatAmount < minAmount) return showError({message: 'Please enter an amount above', interpolations: {dust: minAmount + ' ' + fiat.symbol}});
     var cryptoAmount = ractive.find('#moonpay_purchase_crypto').value;
     var fee = ractive.get('fee');
     showConfirmPurchase({
-      fiatAmount: Big(fiatAmount).plus(fee).toFixed(2),
-      fiatSymbol: fiatSymbol,
+      fiatAmount: Big(fiatAmount).plus(fee).toFixed(fiat.precision),
+      fiatSymbol: fiat.symbol,
       cryptoAmount: cryptoAmount,
       cryptoSymbol: cryptoSymbol,
       paymentMethod: paymentMethod
