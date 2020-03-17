@@ -867,18 +867,6 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Payment wasn't received since 36 hours since the transaction was created.</source>
         <target>거래가 생성된지 36시간이 지났지만 대금을 수취하지 못했습니다.</target>
       </trans-unit>
-      <trans-unit id="Terms of Service">
-        <source>Terms of Service</source>
-        <target>서비스 약정</target>
-      </trans-unit>
-      <trans-unit id="Accept">
-        <source>Accept</source>
-        <target>동의</target>
-      </trans-unit>
-      <trans-unit id="Changelly_TOS">
-        <source>I have read and I agree to the Changelly &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;terms of use&lt;/a&gt; and &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;privacy policy&lt;/a&gt;.&lt;br&gt;By clicking "Accept", I acknowledge and understand that my transaction may trigger AML/KYC verification according to &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;Changelly AML/KYC&lt;/a&gt;.</source>
-        <target>나는 체인질리(Changelly)의 &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;약관&lt;/a&gt;과 &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;개인정보 보호정책&lt;/a&gt;을 읽고 이에 동의합니다.&lt;br&gt;"동의"를 클릭함으로써, &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;체인질리의 고객 신원확인/자금세탁 방지 규정&lt;/a&gt;에 따라 내 거래가 고객 신원확인/자금세탁 방지 확인이 될 수 있음을 인정 및 이해하는 바입니다.</target>
-      </trans-unit>
       <trans-unit id="max.">
         <source>max.</source>
         <target>최대</target>

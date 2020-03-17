@@ -8,7 +8,6 @@ var qrcode = require('lib/qrcode');
 var geo = require('lib/geo');
 var showTooltip = require('widgets/modals/tooltip');
 var showError = require('widgets/modals/flash').showError;
-var showTos = require('widgets/modals/changelly-tos');
 var db = require('lib/db');
 
 module.exports = function(el) {
@@ -97,12 +96,6 @@ module.exports = function(el) {
   });
 
   ractive.on('confirm', function() {
-    if (!db.get('changellyTos')) {
-      return showTos(function() {
-        ractive.fire('confirm');
-      });
-    }
-
     var options = {
       fromSymbol: ractive.get('fromSymbol'),
       returnAddress: ractive.get('returnAddress').trim(),

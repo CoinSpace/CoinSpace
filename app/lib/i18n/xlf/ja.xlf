@@ -867,18 +867,6 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Payment wasn't received since 36 hours since the transaction was created.</source>
         <target>取引が制作されてから36時間経っても支払いが受け取られていません。</target>
       </trans-unit>
-      <trans-unit id="Terms of Service">
-        <source>Terms of Service</source>
-        <target>利用規約</target>
-      </trans-unit>
-      <trans-unit id="Accept">
-        <source>Accept</source>
-        <target>同意する</target>
-      </trans-unit>
-      <trans-unit id="Changelly_TOS">
-        <source>I have read and I agree to the Changelly &lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;terms of use&lt;/a&gt; and &lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;privacy policy&lt;/a&gt;.&lt;br&gt;By clicking "Accept", I acknowledge and understand that my transaction may trigger AML/KYC verification according to &lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;Changelly AML/KYC&lt;/a&gt;.</source>
-        <target>私はChangellyの&lt;a href="" onclick="window.open('https://changelly.com/terms-of-use', '_system'); return false;"&gt;使用条件&lt;/a&gt;と&lt;a href="" onclick="window.open('https://changelly.com/privacy-policy', '_system'); return false;"&gt;プライバシーポリシー&lt;/a&gt;を読み、同意しました。&lt;br&gt;「同意」をクリックすることで、私の取引が&lt;a href="" onclick="window.open('https://changelly.com/aml-kyc', '_system'); return false;"&gt;Changelly AML/KYC&lt;/a&gt;に従ったAML/KYC認証を始める可能性があることを認識し理解しています。</target>
-      </trans-unit>
       <trans-unit id="max.">
         <source>max.</source>
         <target>最大</target>
