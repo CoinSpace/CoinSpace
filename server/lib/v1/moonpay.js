@@ -52,7 +52,8 @@ function getCurrenciesFromAPI() {
         fiat[item.id] = {
           symbol: item.code.toUpperCase(),
           sign: fiatSigns[item.code] || '',
-          precision: item.precision
+          precision: item.precision,
+          minAmount: item.minAmount || 20
         };
       }
     });

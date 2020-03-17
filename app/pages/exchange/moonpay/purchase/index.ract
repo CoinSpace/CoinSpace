@@ -11,12 +11,12 @@
 
   <div class="_group">
     <label class="_label" for="moonpay_purchase_fiat">Amount</label>
-    <span on-click="set-max-amount" class="_max_btn">({{translate("max.")}} {{dailyLimitRemaining}} {{fiatSymbol}})</span>
+    <span on-click="set-max-amount" class="_max_btn">({{translate("max.")}} {{maxAmount}} {{fiatSymbol}})</span>
     <div class="_input-group _fiat">
       {{#if isLoadingFiat}}
       <input class="_input" id="moonpay_purchase_fiat" type="text" value="..." readonly>
       {{else}}
-      <input class="_input" id="moonpay_purchase_fiat" value="20" type="number" min="20" step="any" on-input="fiat-to-crypto" on-focus="focusAmountInput" on-blur="blurAmountInput">
+      <input class="_input" id="moonpay_purchase_fiat" type="number" value="{{minAmount}}" twoway="false" min="{{minAmount}}" step="any" on-input="fiat-to-crypto" on-focus="focusAmountInput" on-blur="blurAmountInput">
       {{/if}}
       <span class="_symbol">{{fiatSymbol}}</span>
     </div>

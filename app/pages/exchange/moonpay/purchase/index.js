@@ -21,13 +21,14 @@ module.exports = function(el) {
       isLoadingFiat: false,
       isLoadingCrypto: true,
       isFirstEstimate: true,
-      dailyLimitRemaining: '',
       fiatSymbol: '',
       cryptoSymbol: '',
       rate: '',
       fee: '',
       paymentMethods: [],
       selectedPaymentMethod: undefined,
+      minAmount: 20,
+      maxAmount: ''
     },
     partials: {
       loader: require('../loader.ract'),
@@ -38,7 +39,9 @@ module.exports = function(el) {
   var creditCardLimit = 0;
   var bankAccountLimit = 0;
   var cryptoSymbol;
-  var minAmount = 20;
+
+  var _fiatAmount = 20 + '';
+  var _cryptoAmount;
 
   ractive.on('before-show', function(context) {
     ractive.set('isLoading', true);
@@ -51,8 +54,11 @@ module.exports = function(el) {
     ractive.set('fee', '');
     ractive.set('paymentMethods', []);
     ractive.set('selectedPaymentMethod', undefined);
+    ractive.set('minAmount', context.fiat.minAmount);
 
-    fiatSymbol = context.fiatSymbol;
+    _fiatAmount = context.fiat.minAmount + '';
+
+    fiatSymbol = context.fiat.symbol;
 
     creditCardLimit = context.creditCardLimit;
     bankAccountLimit = context.bankAccountLimit;
@@ -67,12 +73,10 @@ module.exports = function(el) {
     ]).then(function(results) {
       ractive.set('isLoading', false);
       ractive.set('paymentMethods', results[0].concat(results[1]));
-      setLimit();
+      setMaxAmount();
       cryptoEstimate();
     });
   });
-
-  var _fiatAmount = minAmount + '';
 
   ractive.on('fiat-to-crypto', function() {
     var fiatAmount = ractive.find('#moonpay_purchase_fiat').value;
@@ -109,8 +113,6 @@ module.exports = function(el) {
       if (err && err.message !== 'empty_fiat') console.error(err);
     });
   }
-
-  var _cryptoAmount;
 
   ractive.on('crypto-to-fiat', function() {
     var cryptoAmount = ractive.find('#moonpay_purchase_crypto').value;
@@ -150,7 +152,7 @@ module.exports = function(el) {
   }
 
   ractive.on('set-max-amount', function() {
-    ractive.find('#moonpay_purchase_fiat').value = ractive.get('dailyLimitRemaining');
+    ractive.find('#moonpay_purchase_fiat').value = ractive.get('maxAmount');
     ractive.fire('fiat-to-crypto');
   });
 
@@ -181,20 +183,21 @@ module.exports = function(el) {
     }});
   });
 
-  function setLimit() {
+  function setMaxAmount() {
     var selectedPaymentMethod = ractive.get('selectedPaymentMethod');
     if (selectedPaymentMethod && selectedPaymentMethod.type === 'bankAccount') {
-      ractive.set('dailyLimitRemaining', bankAccountLimit);
+      ractive.set('maxAmount', bankAccountLimit);
     } else {
-      ractive.set('dailyLimitRemaining', creditCardLimit);
+      ractive.set('maxAmount', creditCardLimit);
     }
   }
-  ractive.on('change-payment-method', setLimit);
+  ractive.on('change-payment-method', setMaxAmount);
 
   ractive.on('buy', function() {
     var paymentMethod = ractive.get('selectedPaymentMethod');
     if (!paymentMethod) return showError({message: 'Please select a payment method'});
     var fiatAmount = ractive.find('#moonpay_purchase_fiat').value;
+    var minAmount = ractive.get('minAmount');
     if (fiatAmount < minAmount) return showError({message: 'Please enter an amount above', interpolations: {dust: minAmount + ' ' + fiatSymbol}});
     var cryptoAmount = ractive.find('#moonpay_purchase_crypto').value;
     var fee = ractive.get('fee');

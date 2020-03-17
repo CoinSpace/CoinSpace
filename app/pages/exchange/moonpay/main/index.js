@@ -109,11 +109,11 @@ module.exports = function(el) {
     if (!moonpay.getCustomer().firstName) {
       return showIdentityVerification(ractive.show.bind(ractive));
     }
-    var fiatSymbol = moonpay.getFiatById(moonpay.getCustomer().defaultCurrencyId, 'symbol');
+    var fiat = moonpay.getFiatById(moonpay.getCustomer().defaultCurrencyId);
     emitter.emit('change-moonpay-step', 'purchase', {
       creditCardLimit: ractive.get('creditCardLimit.dailyLimitRemaining'),
       bankAccountLimit: ractive.get('bankAccountLimit.dailyLimitRemaining'),
-      fiatSymbol: fiatSymbol
+      fiat: fiat
     });
   });
 
