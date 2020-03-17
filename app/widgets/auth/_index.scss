@@ -25,6 +25,7 @@
 
 .auth {
   margin: 0 auto;
+  max-width: 100%;
   position: relative;
 
   @include breakpoint(portrait) {

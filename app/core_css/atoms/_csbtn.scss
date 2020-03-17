@@ -4,8 +4,12 @@
   display: block;
   width: 100%;
 
-  padding-left: 30px;
-  padding-right: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  padding-left: 15px;
+  padding-right: 15px;
+
   padding-top: 18px;
   padding-bottom: 15px;
   border-radius: 2px;

@@ -1,5 +1,6 @@
 .set-details {
   max-width: 400px;
+  min-width: 280px;
 
   @include breakpoint(portrait) {
     max-width: 450px;
