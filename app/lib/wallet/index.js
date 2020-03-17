@@ -183,7 +183,7 @@ function initWallet(networkName, done, txDone) {
     var accounts = getDerivedAccounts(networkName);
     options.externalAccount = accounts.externalAccount;
     options.internalAccount = accounts.internalAccount;
-    options.minConf = 4;
+    options.minConf = 3;
     if (networkName === 'bitcoincash') {
       options.minConf = 0;
     }
