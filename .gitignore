@@ -13,3 +13,4 @@ docker-compose.prod.yml
 .vscode/
 electron/build
 electron/dist
+.sentryclirc

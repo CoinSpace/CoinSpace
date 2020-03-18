@@ -15,6 +15,7 @@ var config = merge(common, {
   output: {
     publicPath: '/'
   },
+  devtool: 'hidden-source-map',
   module: {
     rules: [
       {
@@ -67,6 +68,7 @@ var config = merge(common, {
       safe: true
     }),
     new UglifyJSPlugin({
+      sourceMap: true,
       uglifyOptions: {
         mangle: {
           reserved: ['BigInteger','ECPair','Point', '_', 'RippleError', 'RippledError', 'UnexpectedError',

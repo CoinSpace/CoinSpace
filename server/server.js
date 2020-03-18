@@ -1,10 +1,24 @@
 'use strict';
 
 var express = require('express');
+var Sentry = require('@sentry/node');
+var Integrations = require('@sentry/integrations');
 var middleware = require('./middleware');
 
 var api = require('./lib/v1/api');
 var app = express();
+
+Sentry.init({
+  dsn: process.env.SENTRY_DSN_SERVER,
+  environment: process.env.SENTRY_ENVIRONMENT,
+  release: `coin.server@${process.env.npm_package_version}`,
+  integrations: [
+    new Integrations.CaptureConsole({
+      levels: ['error']
+    })
+  ]
+});
+app.use(Sentry.Handlers.requestHandler());
 
 var master = require('./lib/v1/master');
 var db = require('./lib/v1/db');
@@ -15,6 +29,8 @@ middleware.init(app);
 app.use('/api/v1', api);
 app.set('views', './server/views');
 app.set('view engine', 'ejs');
+
+app.use(Sentry.Handlers.errorHandler());
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);

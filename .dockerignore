@@ -13,3 +13,5 @@ phonegap/
 .env.*
 .vscode/
 electron/
+build/**/*.map
+.sentryclirc

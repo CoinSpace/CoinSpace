@@ -3,10 +3,13 @@
 var program = require('commander');
 var fse = require('fs-extra');
 var path = require('path');
+var package = require('../package.json');
 var utils = require('./utils');
 var replace = require('replace-in-file');
 var webpack = require('webpack');
+var dotenv = require('dotenv');
 var mobileBuildPath = 'phonegap/build';
+var SENTRY_RELEASE = `${package.name}.ios@${package.version}`;
 
 program
   .name('build-ios.js')
@@ -17,6 +20,7 @@ program
 console.log('Start building (webpack)...');
 
 var envFile = `.env.${program.env}`;
+dotenv.config({path: envFile});
 process.env['ENV_FILE'] = envFile;
 process.env['ENV'] = program.env;
 process.env['BUILD_TYPE'] = 'phonegap';
@@ -25,7 +29,9 @@ var webpackConfig = require('../webpack.prod');
 webpackConfig.plugins.push(
   new webpack.DefinePlugin({
     'process.env.BUILD_TYPE': JSON.stringify('phonegap'),
-    'process.env.BUILD_PLATFORM': JSON.stringify('ios')
+    'process.env.BUILD_PLATFORM': JSON.stringify('ios'),
+    'process.env.SENTRY_RELEASE': JSON.stringify(SENTRY_RELEASE),
+    'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN_IOS)
   })
 )
 
@@ -40,7 +46,7 @@ webpack(webpackConfig, function(error, stats) {
     from: 'id="com.coinspace.app"',
     to: 'id="com.coinspace.wallet"'
   });
-  fse.copySync('build', path.resolve(mobileBuildPath, 'www'));
+  fse.copySync('build', path.resolve(mobileBuildPath, 'www'), {filter: utils.filterMapFiles});
 
   utils.cordova('platform add ios@4.5.3');
   utils.cordova('plugin add cordova-plugin-geolocation@2.4.3');
@@ -58,6 +64,7 @@ webpack(webpackConfig, function(error, stats) {
   utils.cordova('plugin add cordova-plugin-3dtouch-shortcutitems@1.0.2');
 
   if (program.release) {
+    utils.uploadSentrySourceMaps('ios', SENTRY_RELEASE);
     utils.cordova('build ios --emulator --buildConfig=../build.json --release');
   } else {
     utils.cordova('build ios --emulator --buildConfig=../build.json');

@@ -37,7 +37,7 @@ webpack(webpackConfig, function(error, stats) {
   if (stats.hasErrors()) return console.log(stats.toString({ colors: true }));
 
   fse.removeSync(electronBuildPath);
-  fse.copySync('build', path.resolve(electronBuildPath));
+  fse.copySync('build', path.resolve(electronBuildPath), {filter: utils.filterMapFiles});
   if (program.os === 'win') {
     // copy assets for electron appx installer
     fse.copySync('electron/images/win', path.resolve(`${electronBuildPath}/appx/images`));

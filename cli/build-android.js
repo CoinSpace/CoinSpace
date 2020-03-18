@@ -3,11 +3,13 @@
 var program = require('commander');
 var fse = require('fs-extra');
 var path = require('path');
+var package = require('../package.json');
 var utils = require('./utils');
 var webpack = require('webpack');
 var replace = require('replace-in-file');
 var dotenv = require('dotenv');
 var mobileBuildPath = 'phonegap/build';
+var SENTRY_RELEASE = `${package.name}.android@${package.version}`;
 
 program
   .name('build-android.js')
@@ -32,7 +34,9 @@ var webpackConfig = require('../webpack.prod');
 webpackConfig.plugins.push(
   new webpack.DefinePlugin({
     'process.env.BUILD_TYPE': JSON.stringify('phonegap'),
-    'process.env.BUILD_PLATFORM': JSON.stringify('android')
+    'process.env.BUILD_PLATFORM': JSON.stringify('android'),
+    'process.env.SENTRY_RELEASE': JSON.stringify(SENTRY_RELEASE),
+    'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN_ANDROID)
   })
 )
 
@@ -42,7 +46,7 @@ webpack(webpackConfig, function(error, stats) {
 
   fse.removeSync(mobileBuildPath);
   fse.copySync('phonegap/config.xml.template', path.resolve(mobileBuildPath, 'config.xml'));
-  fse.copySync('build', path.resolve(mobileBuildPath, 'www'));
+  fse.copySync('build', path.resolve(mobileBuildPath, 'www'), {filter: utils.filterMapFiles});
 
   utils.cordova('platform add android@6.4.0');
 
@@ -66,6 +70,7 @@ webpack(webpackConfig, function(error, stats) {
   });
 
   if (program.release) {
+    utils.uploadSentrySourceMaps('android', SENTRY_RELEASE);
     utils.cordova('build android --release');
     utils.shell(
       `jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ../release.keystore \

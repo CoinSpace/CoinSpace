@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const autoprefixer = require('autoprefixer');
 const common = require('./webpack.common.js');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const package = require('./package.json');
 
 const dotEnv = new Dotenv({
   path: '.env.loc',
@@ -58,6 +58,10 @@ module.exports = merge(common, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    dotEnv
+    dotEnv,
+    new webpack.DefinePlugin({
+      'process.env.SENTRY_RELEASE': JSON.stringify(`${package.name}.web@${package.version}`),
+      'process.env.SENTRY_DSN': dotEnv.definitions['process.env.SENTRY_DSN_WEB']
+    })
   ]
 });

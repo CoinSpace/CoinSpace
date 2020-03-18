@@ -269,15 +269,6 @@ router.get('/moonpay/redirectURL', function(req, res) {
   res.render('moonpay', {transactionId: transactionId, buildType: buildType});
 });
 
-router.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send({error: 'Oops! something went wrong.'});
-});
-
-router.use(function(req, res, next) {
-  res.status(404).send({error: 'Oops! page not found.'});
-});
-
 function validateAuthParams(allowMissingPin) {
   return function (req, res, next) {
     if (!req.body.wallet_id || !validatePin(req.body.pin, allowMissingPin)) {

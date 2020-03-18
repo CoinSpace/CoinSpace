@@ -3,6 +3,28 @@
 require('../application.scss');
 require('core-js/shim');
 
+var Sentry = require('@sentry/browser');
+var Integrations = require('@sentry/integrations');
+var SENTRY_PATH_STRIP_RE = /^.*\/[^\.]+(\.app|CodePush|.*(?=\/))/;
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  environment: process.env.SENTRY_ENVIRONMENT,
+  release: process.env.SENTRY_RELEASE,
+  integrations: [
+    new Integrations.CaptureConsole({
+      levels: ['error']
+    }),
+    new Integrations.RewriteFrames({
+      iteratee: function(frame) {
+        if (frame.filename !== '[native code]' && frame.filename !== '<anonymous>') {
+          frame.filename = frame.filename.replace(/^file\:\/\//, '').replace(SENTRY_PATH_STRIP_RE, '');
+        }
+        return frame;
+      }
+    })
+  ],
+});
+
 var token = require('lib/token');
 var fadeOut = require('lib/transitions/fade.js').fadeOut;
 var Modernizr = require('modernizr')
