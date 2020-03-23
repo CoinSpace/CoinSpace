@@ -9,10 +9,6 @@ module.exports = function() {
   return MongoClient.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopology: true })
     .then(function(client) {
       db = client.db(process.env.DB_NAME);
-      db.on('close', function() {
-        console.log('MongoDB has been closed.');
-        process.exit(1);
-      });
       return Promise.all([
         db.collection('mecto').createIndexes([
           {key: {geometry: '2dsphere'}, background: true},
