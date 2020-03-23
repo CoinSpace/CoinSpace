@@ -1137,83 +1137,83 @@ Biće konvertiran u %(toSymbol)s i poslan na
       </trans-unit>
       <trans-unit id="Credit Cards">
         <source>Credit Cards</source>
-        <target></target>
+        <target>Kreditne kartice</target>
       </trans-unit>
       <trans-unit id="Bank Accounts">
         <source>Bank Accounts</source>
-        <target></target>
+        <target>Bankovni računi</target>
       </trans-unit>
       <trans-unit id="No credit cards.">
         <source>No credit cards.</source>
-        <target></target>
+        <target>Nema kreditnih kartica.</target>
       </trans-unit>
       <trans-unit id="No bank accounts.">
         <source>No bank accounts.</source>
-        <target></target>
+        <target>Nema bankovnih računa.</target>
       </trans-unit>
       <trans-unit id="Add Bank Account">
         <source>Add Bank Account</source>
-        <target></target>
+        <target>Dodaj bankovni račun</target>
       </trans-unit>
       <trans-unit id="Currency">
         <source>Currency</source>
-        <target></target>
+        <target>Valuta</target>
       </trans-unit>
       <trans-unit id="Account number">
         <source>Account number</source>
-        <target></target>
+        <target>Broj računa</target>
       </trans-unit>
       <trans-unit id="Sort code">
         <source>Sort code</source>
-        <target></target>
+        <target>Vodeći broj banke</target>
       </trans-unit>
       <trans-unit id="Unsupported bank">
         <source>Unsupported bank</source>
-        <target></target>
+        <target>Nepodržana banka</target>
       </trans-unit>
       <trans-unit id="Daily limits">
         <source>Daily limits</source>
-        <target></target>
+        <target>Dnevni limiti</target>
       </trans-unit>
       <trans-unit id="Monthly limits">
         <source>Monthly limits</source>
-        <target></target>
+        <target>Mjesečni limiti</target>
       </trans-unit>
       <trans-unit id="Credit Card:">
         <source>Credit Card:</source>
-        <target></target>
+        <target>Kreditna kartica:</target>
       </trans-unit>
       <trans-unit id="Bank Account:">
         <source>Bank Account:</source>
-        <target></target>
+        <target>Bankovni račun:</target>
       </trans-unit>
       <trans-unit id="Waiting for payment">
         <source>Waiting for payment</source>
-        <target></target>
+        <target>Čekanje na plaćanje</target>
       </trans-unit>
       <trans-unit id="To complete the transaction, please submit a bank transfer with the following information">
         <source>To complete the transaction, please submit a bank transfer with the following information</source>
-        <target></target>
+        <target>Kako biste dovršili transakciju, pošaljite bankovni prijenos sa sljedećim podacima</target>
       </trans-unit>
       <trans-unit id="Reference Number">
         <source>Reference Number</source>
-        <target></target>
+        <target>Referentni broj</target>
       </trans-unit>
       <trans-unit id="Recipient Name">
         <source>Recipient Name</source>
-        <target></target>
+        <target>Ime i pprezime primatelja</target>
       </trans-unit>
       <trans-unit id="Bank Name">
         <source>Bank Name</source>
-        <target></target>
+        <target>Naziv banke</target>
       </trans-unit>
       <trans-unit id="Bank Address">
         <source>Bank Address</source>
-        <target></target>
+        <target>Adresa banke</target>
       </trans-unit>
       <trans-unit id="Recipient Address">
         <source>Recipient Address</source>
-        <target></target>
+        <target>Adresa primatelja</target>
       </trans-unit>
     </body>
   </file>

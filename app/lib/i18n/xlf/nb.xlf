@@ -1137,83 +1137,83 @@ Den konverteres til %(toSymbol)s og sendes til
       </trans-unit>
       <trans-unit id="Credit Cards">
         <source>Credit Cards</source>
-        <target></target>
+        <target>Kredittkort</target>
       </trans-unit>
       <trans-unit id="Bank Accounts">
         <source>Bank Accounts</source>
-        <target></target>
+        <target>Bankkontoer</target>
       </trans-unit>
       <trans-unit id="No credit cards.">
         <source>No credit cards.</source>
-        <target></target>
+        <target>Ingen kredittkort.</target>
       </trans-unit>
       <trans-unit id="No bank accounts.">
         <source>No bank accounts.</source>
-        <target></target>
+        <target>Ingen bankkontoer.</target>
       </trans-unit>
       <trans-unit id="Add Bank Account">
         <source>Add Bank Account</source>
-        <target></target>
+        <target>Legg til bankkonto</target>
       </trans-unit>
       <trans-unit id="Currency">
         <source>Currency</source>
-        <target></target>
+        <target>Valuta</target>
       </trans-unit>
       <trans-unit id="Account number">
         <source>Account number</source>
-        <target></target>
+        <target>Kontonummer</target>
       </trans-unit>
       <trans-unit id="Sort code">
         <source>Sort code</source>
-        <target></target>
+        <target>Bankkode</target>
       </trans-unit>
       <trans-unit id="Unsupported bank">
         <source>Unsupported bank</source>
-        <target></target>
+        <target>Ustøttet bank</target>
       </trans-unit>
       <trans-unit id="Daily limits">
         <source>Daily limits</source>
-        <target></target>
+        <target>Daglige grenser</target>
       </trans-unit>
       <trans-unit id="Monthly limits">
         <source>Monthly limits</source>
-        <target></target>
+        <target>Månedlige grenser</target>
       </trans-unit>
       <trans-unit id="Credit Card:">
         <source>Credit Card:</source>
-        <target></target>
+        <target>Kredittkort:</target>
       </trans-unit>
       <trans-unit id="Bank Account:">
         <source>Bank Account:</source>
-        <target></target>
+        <target>Bankkonto:</target>
       </trans-unit>
       <trans-unit id="Waiting for payment">
         <source>Waiting for payment</source>
-        <target></target>
+        <target>Venter på betaling</target>
       </trans-unit>
       <trans-unit id="To complete the transaction, please submit a bank transfer with the following information">
         <source>To complete the transaction, please submit a bank transfer with the following information</source>
-        <target></target>
+        <target>Send en bankoverføring med følgende informasjon for å fullføre transaksjonen</target>
       </trans-unit>
       <trans-unit id="Reference Number">
         <source>Reference Number</source>
-        <target></target>
+        <target>Referansenummer</target>
       </trans-unit>
       <trans-unit id="Recipient Name">
         <source>Recipient Name</source>
-        <target></target>
+        <target>Mottakernavn</target>
       </trans-unit>
       <trans-unit id="Bank Name">
         <source>Bank Name</source>
-        <target></target>
+        <target>Banknavn</target>
       </trans-unit>
       <trans-unit id="Bank Address">
         <source>Bank Address</source>
-        <target></target>
+        <target>Bankadresse</target>
       </trans-unit>
       <trans-unit id="Recipient Address">
         <source>Recipient Address</source>
-        <target></target>
+        <target>Mottakeradresse</target>
       </trans-unit>
     </body>
   </file>

@@ -1137,83 +1137,83 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Credit Cards">
         <source>Credit Cards</source>
-        <target></target>
+        <target>신용카드</target>
       </trans-unit>
       <trans-unit id="Bank Accounts">
         <source>Bank Accounts</source>
-        <target></target>
+        <target>은행계좌</target>
       </trans-unit>
       <trans-unit id="No credit cards.">
         <source>No credit cards.</source>
-        <target></target>
+        <target>신용카드 없음</target>
       </trans-unit>
       <trans-unit id="No bank accounts.">
         <source>No bank accounts.</source>
-        <target></target>
+        <target>은행계좌 없음</target>
       </trans-unit>
       <trans-unit id="Add Bank Account">
         <source>Add Bank Account</source>
-        <target></target>
+        <target>은행계좌 추가</target>
       </trans-unit>
       <trans-unit id="Currency">
         <source>Currency</source>
-        <target></target>
+        <target>통화</target>
       </trans-unit>
       <trans-unit id="Account number">
         <source>Account number</source>
-        <target></target>
+        <target>계좌번호</target>
       </trans-unit>
       <trans-unit id="Sort code">
         <source>Sort code</source>
-        <target></target>
+        <target>코드 정렬</target>
       </trans-unit>
       <trans-unit id="Unsupported bank">
         <source>Unsupported bank</source>
-        <target></target>
+        <target>지원되지 않는 은행</target>
       </trans-unit>
       <trans-unit id="Daily limits">
         <source>Daily limits</source>
-        <target></target>
+        <target>일일 한도</target>
       </trans-unit>
       <trans-unit id="Monthly limits">
         <source>Monthly limits</source>
-        <target></target>
+        <target>월간 한도</target>
       </trans-unit>
       <trans-unit id="Credit Card:">
         <source>Credit Card:</source>
-        <target></target>
+        <target>신용카드:</target>
       </trans-unit>
       <trans-unit id="Bank Account:">
         <source>Bank Account:</source>
-        <target></target>
+        <target>은행계좌:</target>
       </trans-unit>
       <trans-unit id="Waiting for payment">
         <source>Waiting for payment</source>
-        <target></target>
+        <target>결제 대기</target>
       </trans-unit>
       <trans-unit id="To complete the transaction, please submit a bank transfer with the following information">
         <source>To complete the transaction, please submit a bank transfer with the following information</source>
-        <target></target>
+        <target>거래를 완료하려면, 다음 정보와 함께 은행 이체 정보를 제출하십시오</target>
       </trans-unit>
       <trans-unit id="Reference Number">
         <source>Reference Number</source>
-        <target></target>
+        <target>참조 번호</target>
       </trans-unit>
       <trans-unit id="Recipient Name">
         <source>Recipient Name</source>
-        <target></target>
+        <target>수령인 성명</target>
       </trans-unit>
       <trans-unit id="Bank Name">
         <source>Bank Name</source>
-        <target></target>
+        <target>은행 명</target>
       </trans-unit>
       <trans-unit id="Bank Address">
         <source>Bank Address</source>
-        <target></target>
+        <target>은행 주소</target>
       </trans-unit>
       <trans-unit id="Recipient Address">
         <source>Recipient Address</source>
-        <target></target>
+        <target>수령인 주소</target>
       </trans-unit>
     </body>
   </file>

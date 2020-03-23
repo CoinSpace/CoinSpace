@@ -1137,83 +1137,83 @@ Het zal worden geconverteerd in %(toSymbol)s, en worden verzonden naar
       </trans-unit>
       <trans-unit id="Credit Cards">
         <source>Credit Cards</source>
-        <target></target>
+        <target>Creditcards</target>
       </trans-unit>
       <trans-unit id="Bank Accounts">
         <source>Bank Accounts</source>
-        <target></target>
+        <target>Bankrekeningen</target>
       </trans-unit>
       <trans-unit id="No credit cards.">
         <source>No credit cards.</source>
-        <target></target>
+        <target>Geen creditcards.</target>
       </trans-unit>
       <trans-unit id="No bank accounts.">
         <source>No bank accounts.</source>
-        <target></target>
+        <target>Geen bankrekeningen.</target>
       </trans-unit>
       <trans-unit id="Add Bank Account">
         <source>Add Bank Account</source>
-        <target></target>
+        <target>Bankrekening toevoegen</target>
       </trans-unit>
       <trans-unit id="Currency">
         <source>Currency</source>
-        <target></target>
+        <target>Valuta</target>
       </trans-unit>
       <trans-unit id="Account number">
         <source>Account number</source>
-        <target></target>
+        <target>Rekeningnummer</target>
       </trans-unit>
       <trans-unit id="Sort code">
         <source>Sort code</source>
-        <target></target>
+        <target>Code sorteren</target>
       </trans-unit>
       <trans-unit id="Unsupported bank">
         <source>Unsupported bank</source>
-        <target></target>
+        <target>Niet-ondersteunde bank</target>
       </trans-unit>
       <trans-unit id="Daily limits">
         <source>Daily limits</source>
-        <target></target>
+        <target>Dagelijkse limieten</target>
       </trans-unit>
       <trans-unit id="Monthly limits">
         <source>Monthly limits</source>
-        <target></target>
+        <target>Maandelijkse limieten</target>
       </trans-unit>
       <trans-unit id="Credit Card:">
         <source>Credit Card:</source>
-        <target></target>
+        <target>Creditcard:</target>
       </trans-unit>
       <trans-unit id="Bank Account:">
         <source>Bank Account:</source>
-        <target></target>
+        <target>Bankrekening:</target>
       </trans-unit>
       <trans-unit id="Waiting for payment">
         <source>Waiting for payment</source>
-        <target></target>
+        <target>Er wordt gewacht op de betaling.</target>
       </trans-unit>
       <trans-unit id="To complete the transaction, please submit a bank transfer with the following information">
         <source>To complete the transaction, please submit a bank transfer with the following information</source>
-        <target></target>
+        <target>Dien een overschrijving met de volgende informatie in om de transactie af te ronden.</target>
       </trans-unit>
       <trans-unit id="Reference Number">
         <source>Reference Number</source>
-        <target></target>
+        <target>Referentienummer</target>
       </trans-unit>
       <trans-unit id="Recipient Name">
         <source>Recipient Name</source>
-        <target></target>
+        <target>Naam ontvanger</target>
       </trans-unit>
       <trans-unit id="Bank Name">
         <source>Bank Name</source>
-        <target></target>
+        <target>Naam bank</target>
       </trans-unit>
       <trans-unit id="Bank Address">
         <source>Bank Address</source>
-        <target></target>
+        <target>Adres bank</target>
       </trans-unit>
       <trans-unit id="Recipient Address">
         <source>Recipient Address</source>
-        <target></target>
+        <target>Adres ontvanger</target>
       </trans-unit>
     </body>
   </file>

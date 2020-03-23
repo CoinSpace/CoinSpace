@@ -893,327 +893,327 @@ Biće konvertovano u %(toSymbol)s i poslato na
       </trans-unit>
       <trans-unit id="Transaction too large">
         <source>Transaction too large</source>
-        <target></target>
+        <target>Transakcija prevelika</target>
       </trans-unit>
       <trans-unit id="Email">
         <source>Email</source>
-        <target></target>
+        <target>E-pošta</target>
       </trans-unit>
       <trans-unit id="Please enter a valid email address">
         <source>Please enter a valid email address</source>
-        <target></target>
+        <target>Unesite valjanu adresu e-pošte</target>
       </trans-unit>
       <trans-unit id="Verification code">
         <source>Verification code</source>
-        <target></target>
+        <target>Kod za provjeru</target>
       </trans-unit>
       <trans-unit id="We&apos;ve sent verification code to :destination.">
         <source>We've sent verification code to %(destination)s.</source>
-        <target></target>
+        <target>Poslali smo Vam kod za provjeru na %(destination)s.</target>
       </trans-unit>
       <trans-unit id="Invalid verification code">
         <source>Invalid verification code</source>
-        <target></target>
+        <target>Kod za provjeru nije važeći</target>
       </trans-unit>
       <trans-unit id="To increase your limits you need to pass verification.">
         <source>To increase your limits you need to pass verification.</source>
-        <target></target>
+        <target>Kako biste povećali limite, morate proći provjeru.</target>
       </trans-unit>
       <trans-unit id="Payment methods">
         <source>Payment methods</source>
-        <target></target>
+        <target>Načini plaćanja</target>
       </trans-unit>
       <trans-unit id="Verification">
         <source>Verification</source>
-        <target></target>
+        <target>Provjera</target>
       </trans-unit>
       <trans-unit id="Default currency (:symbol)">
         <source>Default currency (%(symbol)s)</source>
-        <target></target>
+        <target>Zadana valuta (%(symbol)s)</target>
       </trans-unit>
       <trans-unit id="Buy">
         <source>Buy</source>
-        <target></target>
+        <target>Kupi</target>
       </trans-unit>
       <trans-unit id="No verification methods are currently available.">
         <source>No verification methods are currently available.</source>
-        <target></target>
+        <target>Trenutno nisu dostupni načini provjere.</target>
       </trans-unit>
       <trans-unit id="Identity">
         <source>Identity</source>
-        <target></target>
+        <target>Identitet</target>
       </trans-unit>
       <trans-unit id="Document">
         <source>Document</source>
-        <target></target>
+        <target>Dokument</target>
       </trans-unit>
       <trans-unit id="Phone number">
         <source>Phone number</source>
-        <target></target>
+        <target>Broj telefona</target>
       </trans-unit>
       <trans-unit id="Face match">
         <source>Face match</source>
-        <target></target>
+        <target>Podudaranje lica</target>
       </trans-unit>
       <trans-unit id="Identity verification">
         <source>Identity verification</source>
-        <target></target>
+        <target>Provjera identiteta</target>
       </trans-unit>
       <trans-unit id="Document verification">
         <source>Document verification</source>
-        <target></target>
+        <target>Provjera dokumenta</target>
       </trans-unit>
       <trans-unit id="Phone number verification">
         <source>Phone number verification</source>
-        <target></target>
+        <target>Provjera broja telefona</target>
       </trans-unit>
       <trans-unit id="Face match verification">
         <source>Face match verification</source>
-        <target></target>
+        <target>Provjera podudaranja lica</target>
       </trans-unit>
       <trans-unit id="Continue">
         <source>Continue</source>
-        <target></target>
+        <target>Nastavi</target>
       </trans-unit>
       <trans-unit id="First name">
         <source>First name</source>
-        <target></target>
+        <target>Ime</target>
       </trans-unit>
       <trans-unit id="Last name">
         <source>Last name</source>
-        <target></target>
+        <target>Prezime</target>
       </trans-unit>
       <trans-unit id="Date of birth">
         <source>Date of birth</source>
-        <target></target>
+        <target>Datum rođenja</target>
       </trans-unit>
       <trans-unit id="Country">
         <source>Country</source>
-        <target></target>
+        <target>Zemlja</target>
       </trans-unit>
       <trans-unit id="Address 2 (optional)">
         <source>Address 2 (optional)</source>
-        <target></target>
+        <target> Adresa 2 (opcino)</target>
       </trans-unit>
       <trans-unit id="City">
         <source>City</source>
-        <target></target>
+        <target>Grad</target>
       </trans-unit>
       <trans-unit id="State">
         <source>State</source>
-        <target></target>
+        <target>Država</target>
       </trans-unit>
       <trans-unit id="Post code">
         <source>Post code</source>
-        <target></target>
+        <target>Poštanski broj</target>
       </trans-unit>
       <trans-unit id="Please enter a valid info">
         <source>Please enter a valid info</source>
-        <target></target>
+        <target>Unesite važeće podatke</target>
       </trans-unit>
       <trans-unit id="Code is invalid or expired. Please try again.">
         <source>Code is invalid or expired. Please try again.</source>
-        <target></target>
+        <target>Kod nije važeći. Pokušajte kasnije.</target>
       </trans-unit>
       <trans-unit id="Selfie">
         <source>Selfie</source>
-        <target></target>
+        <target>Selfi</target>
       </trans-unit>
       <trans-unit id="Select file...">
         <source>Select file...</source>
-        <target></target>
+        <target>Izaberi datoteku...</target>
       </trans-unit>
       <trans-unit id="Upload failed. Please try again later.">
         <source>Upload failed. Please try again later.</source>
-        <target></target>
+        <target>Prijenos nije uspio. Pokušajte ponovo kasnije.</target>
       </trans-unit>
       <trans-unit id="Country of issuance">
         <source>Country of issuance</source>
-        <target></target>
+        <target>Zemlja izdavanja dokumenta</target>
       </trans-unit>
       <trans-unit id="Document type">
         <source>Document type</source>
-        <target></target>
+        <target>Vrsta dokumenta</target>
       </trans-unit>
       <trans-unit id="Passport">
         <source>Passport</source>
-        <target></target>
+        <target>Pasoš</target>
       </trans-unit>
       <trans-unit id="National identity card">
         <source>National identity card</source>
-        <target></target>
+        <target>Nacionalna lična karta</target>
       </trans-unit>
       <trans-unit id="Driving licence">
         <source>Driving licence</source>
-        <target></target>
+        <target>Vozačka dozvola</target>
       </trans-unit>
       <trans-unit id="Front side">
         <source>Front side</source>
-        <target></target>
+        <target>Prednja strana</target>
       </trans-unit>
       <trans-unit id="Back side">
         <source>Back side</source>
-        <target></target>
+        <target>Stražnja strana</target>
       </trans-unit>
       <trans-unit id="Add Credit Card">
         <source>Add Credit Card</source>
-        <target></target>
+        <target>Dodajte kreditnu karticu</target>
       </trans-unit>
       <trans-unit id="Use billing address the same that I have.">
         <source>Use billing address the same that I have.</source>
-        <target></target>
+        <target>Upotrijebite adresu za naplatu istu kao i ja.</target>
       </trans-unit>
       <trans-unit id="Card number">
         <source>Card number</source>
-        <target></target>
+        <target>Broj kartice</target>
       </trans-unit>
       <trans-unit id="Expiry date">
         <source>Expiry date</source>
-        <target></target>
+        <target>Datum isteka</target>
       </trans-unit>
       <trans-unit id="CVC">
         <source>CVC</source>
-        <target></target>
+        <target>CVC</target>
       </trans-unit>
       <trans-unit id="Payment authorization declined">
         <source>Payment authorization declined</source>
-        <target></target>
+        <target>Odobrenje plaćanje odbijeno</target>
       </trans-unit>
       <trans-unit id="Identity verification must be passed before saving card">
         <source>Identity verification must be passed before saving card</source>
-        <target></target>
+        <target>Mora se proći provjera identiteta prije nego što se sačuva kartica</target>
       </trans-unit>
       <trans-unit id="Payment method">
         <source>Payment method</source>
-        <target></target>
+        <target>Način plaćanja</target>
       </trans-unit>
       <trans-unit id="If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.">
         <source>If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.</source>
-        <target></target>
+        <target>Ako se tečaj promijeni za više od +/-&amp;nbsp;2.5%%, od Vas će se tražiti da ponovo potvrdite transakciju putem e-pošte.</target>
       </trans-unit>
       <trans-unit id="Confirm purchase">
         <source>Confirm purchase</source>
-        <target></target>
+        <target>Potvrdi kupovinu</target>
       </trans-unit>
       <trans-unit id="Purchase Successful">
         <source>Purchase Successful</source>
-        <target></target>
+        <target>Uspješna kupovina</target>
       </trans-unit>
       <trans-unit id="3D secure authentication requested.">
         <source>3D secure authentication requested.</source>
-        <target></target>
+        <target>Traži se 3D sigurna provjera vjerodostojnosti.</target>
       </trans-unit>
       <trans-unit id="3D secure authentication failed">
         <source>3D secure authentication failed</source>
-        <target></target>
+        <target>Nije uspjela 3D sigurna provjera vjerodostojnosti.</target>
       </trans-unit>
       <trans-unit id="Make sure that your card is valid and has sufficient available balance.">
         <source>Make sure that your card is valid and has sufficient available balance.</source>
-        <target></target>
+        <target>Provjerite je li Vaša kartica važeća i ima li dovoljno raspoloživih sredstava na stanju.</target>
       </trans-unit>
       <trans-unit id="Please select a payment method">
         <source>Please select a payment method</source>
-        <target></target>
+        <target>Izaberite način plaćanja.</target>
       </trans-unit>
       <trans-unit id="Pending">
         <source>Pending</source>
-        <target></target>
+        <target>Na čekanju</target>
       </trans-unit>
       <trans-unit id="Waiting for authorization">
         <source>Waiting for authorization</source>
-        <target></target>
+        <target>Čeka se na odobrenje</target>
       </trans-unit>
       <trans-unit id="Failure reason">
         <source>Failure reason</source>
-        <target></target>
+        <target>Razlog neuspjeha</target>
       </trans-unit>
       <trans-unit id="You have exceeded your daily limit. Please try again later.">
         <source>You have exceeded your daily limit. Please try again later.</source>
-        <target></target>
+        <target>Premašili ste Vaš dnevni limit. Pokušajte ponovo kasnije.</target>
       </trans-unit>
       <trans-unit id="You have exceeded your monthly limit. Please try again later.">
         <source>You have exceeded your monthly limit. Please try again later.</source>
-        <target></target>
+        <target>Premašili ste Vaš mjesečni limit. Pokušajte ponovo kasnije</target>
       </trans-unit>
       <trans-unit id="Credit Cards">
         <source>Credit Cards</source>
-        <target></target>
+        <target>Kreditne kartice</target>
       </trans-unit>
       <trans-unit id="Bank Accounts">
         <source>Bank Accounts</source>
-        <target></target>
+        <target>Bankovni računi</target>
       </trans-unit>
       <trans-unit id="No credit cards.">
         <source>No credit cards.</source>
-        <target></target>
+        <target>Nema kreditnih kartica.</target>
       </trans-unit>
       <trans-unit id="No bank accounts.">
         <source>No bank accounts.</source>
-        <target></target>
+        <target>Nema bankovnih računa.</target>
       </trans-unit>
       <trans-unit id="Add Bank Account">
         <source>Add Bank Account</source>
-        <target></target>
+        <target>Dodaj bankovni račun</target>
       </trans-unit>
       <trans-unit id="Currency">
         <source>Currency</source>
-        <target></target>
+        <target>Valuta</target>
       </trans-unit>
       <trans-unit id="Account number">
         <source>Account number</source>
-        <target></target>
+        <target>Broj računa</target>
       </trans-unit>
       <trans-unit id="Sort code">
         <source>Sort code</source>
-        <target></target>
+        <target>Vodeći broj banke</target>
       </trans-unit>
       <trans-unit id="Unsupported bank">
         <source>Unsupported bank</source>
-        <target></target>
+        <target>Nepodržana banka</target>
       </trans-unit>
       <trans-unit id="Daily limits">
         <source>Daily limits</source>
-        <target></target>
+        <target>Dnevni limiti</target>
       </trans-unit>
       <trans-unit id="Monthly limits">
         <source>Monthly limits</source>
-        <target></target>
+        <target>Mjesečni limiti</target>
       </trans-unit>
       <trans-unit id="Credit Card:">
         <source>Credit Card:</source>
-        <target></target>
+        <target>Kreditna kartica:</target>
       </trans-unit>
       <trans-unit id="Bank Account:">
         <source>Bank Account:</source>
-        <target></target>
+        <target>Bankovni račun:</target>
       </trans-unit>
       <trans-unit id="Waiting for payment">
         <source>Waiting for payment</source>
-        <target></target>
+        <target>Čekanje na plaćanje</target>
       </trans-unit>
       <trans-unit id="To complete the transaction, please submit a bank transfer with the following information">
         <source>To complete the transaction, please submit a bank transfer with the following information</source>
-        <target></target>
+        <target>Kako biste dovršili transakciju, pošaljite bankovni prijenos sa sljedećim podacima</target>
       </trans-unit>
       <trans-unit id="Reference Number">
         <source>Reference Number</source>
-        <target></target>
+        <target>Referentni broj</target>
       </trans-unit>
       <trans-unit id="Recipient Name">
         <source>Recipient Name</source>
-        <target></target>
+        <target>Ime i pprezime primaoca</target>
       </trans-unit>
       <trans-unit id="Bank Name">
         <source>Bank Name</source>
-        <target></target>
+        <target>Naziv banke</target>
       </trans-unit>
       <trans-unit id="Bank Address">
         <source>Bank Address</source>
-        <target></target>
+        <target>Adresa banke</target>
       </trans-unit>
       <trans-unit id="Recipient Address">
         <source>Recipient Address</source>
-        <target></target>
+        <target>Adresa primaoca</target>
       </trans-unit>
     </body>
   </file>

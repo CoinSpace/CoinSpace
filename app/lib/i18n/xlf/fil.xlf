@@ -897,323 +897,323 @@ Iko-convert ito sa %(toSymbol)s, at ipapadala sa
       </trans-unit>
       <trans-unit id="Email">
         <source>Email</source>
-        <target></target>
+        <target>Email</target>
       </trans-unit>
       <trans-unit id="Please enter a valid email address">
         <source>Please enter a valid email address</source>
-        <target></target>
+        <target>Pakilagay ng balidong email address</target>
       </trans-unit>
       <trans-unit id="Verification code">
         <source>Verification code</source>
-        <target></target>
+        <target>Code ng pagpapatotoo</target>
       </trans-unit>
       <trans-unit id="We&apos;ve sent verification code to :destination.">
         <source>We've sent verification code to %(destination)s.</source>
-        <target></target>
+        <target>Nagpadala kami ng code ng pagpapatotoo sa mga %(destination)s.</target>
       </trans-unit>
       <trans-unit id="Invalid verification code">
         <source>Invalid verification code</source>
-        <target></target>
+        <target>Hindi wastong code ng pagpapatotoo</target>
       </trans-unit>
       <trans-unit id="To increase your limits you need to pass verification.">
         <source>To increase your limits you need to pass verification.</source>
-        <target></target>
+        <target>Para madagdagan ang mga limitasyon niyo kailangan kayong pumasa sa pagpapatotoo.</target>
       </trans-unit>
       <trans-unit id="Payment methods">
         <source>Payment methods</source>
-        <target></target>
+        <target>Mga paraan ng pagbabayad</target>
       </trans-unit>
       <trans-unit id="Verification">
         <source>Verification</source>
-        <target></target>
+        <target>Pagpapatotoo</target>
       </trans-unit>
       <trans-unit id="Default currency (:symbol)">
         <source>Default currency (%(symbol)s)</source>
-        <target></target>
+        <target>Default na currency (mga %(symbol)s)</target>
       </trans-unit>
       <trans-unit id="Buy">
         <source>Buy</source>
-        <target></target>
+        <target>Bumili</target>
       </trans-unit>
       <trans-unit id="No verification methods are currently available.">
         <source>No verification methods are currently available.</source>
-        <target></target>
+        <target>Walang mga paraan sa pagpapatotoo ang kasalukuyang magagamit.</target>
       </trans-unit>
       <trans-unit id="Identity">
         <source>Identity</source>
-        <target></target>
+        <target>Pagkakakilanlan</target>
       </trans-unit>
       <trans-unit id="Document">
         <source>Document</source>
-        <target></target>
+        <target>Dokumento</target>
       </trans-unit>
       <trans-unit id="Phone number">
         <source>Phone number</source>
-        <target></target>
+        <target>Numero ng telepono</target>
       </trans-unit>
       <trans-unit id="Face match">
         <source>Face match</source>
-        <target></target>
+        <target>Pagtugma ng mukha</target>
       </trans-unit>
       <trans-unit id="Identity verification">
         <source>Identity verification</source>
-        <target></target>
+        <target>Pagpapatotoo ng pagkakakilanlan</target>
       </trans-unit>
       <trans-unit id="Document verification">
         <source>Document verification</source>
-        <target></target>
+        <target>Pagpapatotoo ng dokumento</target>
       </trans-unit>
       <trans-unit id="Phone number verification">
         <source>Phone number verification</source>
-        <target></target>
+        <target>Pagpapatotoo ng numero ng telepono</target>
       </trans-unit>
       <trans-unit id="Face match verification">
         <source>Face match verification</source>
-        <target></target>
+        <target>Pagpapatotoo ng pagtugma ng mukha</target>
       </trans-unit>
       <trans-unit id="Continue">
         <source>Continue</source>
-        <target></target>
+        <target>Magpatuloy</target>
       </trans-unit>
       <trans-unit id="First name">
         <source>First name</source>
-        <target></target>
+        <target>Unang pangalan</target>
       </trans-unit>
       <trans-unit id="Last name">
         <source>Last name</source>
-        <target></target>
+        <target>Apelyido</target>
       </trans-unit>
       <trans-unit id="Date of birth">
         <source>Date of birth</source>
-        <target></target>
+        <target>Petsa ng kapanganakan</target>
       </trans-unit>
       <trans-unit id="Country">
         <source>Country</source>
-        <target></target>
+        <target>Bansa</target>
       </trans-unit>
       <trans-unit id="Address 2 (optional)">
         <source>Address 2 (optional)</source>
-        <target></target>
+        <target>Address 2 (opsyonal)</target>
       </trans-unit>
       <trans-unit id="City">
         <source>City</source>
-        <target></target>
+        <target>Lungsod</target>
       </trans-unit>
       <trans-unit id="State">
         <source>State</source>
-        <target></target>
+        <target>Estado</target>
       </trans-unit>
       <trans-unit id="Post code">
         <source>Post code</source>
-        <target></target>
+        <target>Zip code</target>
       </trans-unit>
       <trans-unit id="Please enter a valid info">
         <source>Please enter a valid info</source>
-        <target></target>
+        <target>Pakilagay ng balidong impormasyon</target>
       </trans-unit>
       <trans-unit id="Code is invalid or expired. Please try again.">
         <source>Code is invalid or expired. Please try again.</source>
-        <target></target>
+        <target>Hindi balido o napaso ang code. Pakisubukan muli.</target>
       </trans-unit>
       <trans-unit id="Selfie">
         <source>Selfie</source>
-        <target></target>
+        <target>Selfie</target>
       </trans-unit>
       <trans-unit id="Select file...">
         <source>Select file...</source>
-        <target></target>
+        <target>Piliin ang file...</target>
       </trans-unit>
       <trans-unit id="Upload failed. Please try again later.">
         <source>Upload failed. Please try again later.</source>
-        <target></target>
+        <target>Nabigo ang pag-upload. Pakisubukan muli mamaya.</target>
       </trans-unit>
       <trans-unit id="Country of issuance">
         <source>Country of issuance</source>
-        <target></target>
+        <target>Bansang pinagbigyan</target>
       </trans-unit>
       <trans-unit id="Document type">
         <source>Document type</source>
-        <target></target>
+        <target>Klase ng dokumento</target>
       </trans-unit>
       <trans-unit id="Passport">
         <source>Passport</source>
-        <target></target>
+        <target>Pasaporte</target>
       </trans-unit>
       <trans-unit id="National identity card">
         <source>National identity card</source>
-        <target></target>
+        <target>Pambansang pagkakakilanlang card</target>
       </trans-unit>
       <trans-unit id="Driving licence">
         <source>Driving licence</source>
-        <target></target>
+        <target>Lisensiya sa pagmamaneho</target>
       </trans-unit>
       <trans-unit id="Front side">
         <source>Front side</source>
-        <target></target>
+        <target>Harapang panig</target>
       </trans-unit>
       <trans-unit id="Back side">
         <source>Back side</source>
-        <target></target>
+        <target>Likurang panig</target>
       </trans-unit>
       <trans-unit id="Add Credit Card">
         <source>Add Credit Card</source>
-        <target></target>
+        <target>Magdagdag ng Credit Card</target>
       </trans-unit>
       <trans-unit id="Use billing address the same that I have.">
         <source>Use billing address the same that I have.</source>
-        <target></target>
+        <target>Gumamit ng parehong billing address na pareho ng sa akin.</target>
       </trans-unit>
       <trans-unit id="Card number">
         <source>Card number</source>
-        <target></target>
+        <target>Numero ng card</target>
       </trans-unit>
       <trans-unit id="Expiry date">
         <source>Expiry date</source>
-        <target></target>
+        <target>Petsa ng pagkapaso</target>
       </trans-unit>
       <trans-unit id="CVC">
         <source>CVC</source>
-        <target></target>
+        <target>CVC</target>
       </trans-unit>
       <trans-unit id="Payment authorization declined">
         <source>Payment authorization declined</source>
-        <target></target>
+        <target>Tinanggihan ang pahintulot sa pagbabayad</target>
       </trans-unit>
       <trans-unit id="Identity verification must be passed before saving card">
         <source>Identity verification must be passed before saving card</source>
-        <target></target>
+        <target>Ang pagpapatotoo sa pagkakakilanlan ay dapat maipasa bago i-save ang card</target>
       </trans-unit>
       <trans-unit id="Payment method">
         <source>Payment method</source>
-        <target></target>
+        <target>Paraan ng pagbabayad</target>
       </trans-unit>
       <trans-unit id="If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.">
         <source>If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.</source>
-        <target></target>
+        <target>Kung magbago ang rate nang mahigit sa +/-&amp;nbsp;2.5%% ipakukumpirma muli sa iyo ang transaksiyon sa pamamagitan ng email.</target>
       </trans-unit>
       <trans-unit id="Confirm purchase">
         <source>Confirm purchase</source>
-        <target></target>
+        <target>Kumpirmahin ang pagbili</target>
       </trans-unit>
       <trans-unit id="Purchase Successful">
         <source>Purchase Successful</source>
-        <target></target>
+        <target>Matagumpay ang Pagbili</target>
       </trans-unit>
       <trans-unit id="3D secure authentication requested.">
         <source>3D secure authentication requested.</source>
-        <target></target>
+        <target>Humiling ng 3D secure na authetication</target>
       </trans-unit>
       <trans-unit id="3D secure authentication failed">
         <source>3D secure authentication failed</source>
-        <target></target>
+        <target>Nabigo ang 3D secure na authetication</target>
       </trans-unit>
       <trans-unit id="Make sure that your card is valid and has sufficient available balance.">
         <source>Make sure that your card is valid and has sufficient available balance.</source>
-        <target></target>
+        <target>Siguruhin na balido ang card mo at may sapat na magagamit na balanse.</target>
       </trans-unit>
       <trans-unit id="Please select a payment method">
         <source>Please select a payment method</source>
-        <target></target>
+        <target>Pakipili ng paraan ng pagbabayad</target>
       </trans-unit>
       <trans-unit id="Pending">
         <source>Pending</source>
-        <target></target>
+        <target>Nakabinbin</target>
       </trans-unit>
       <trans-unit id="Waiting for authorization">
         <source>Waiting for authorization</source>
-        <target></target>
+        <target>Naghihintay ng pahintulot</target>
       </trans-unit>
       <trans-unit id="Failure reason">
         <source>Failure reason</source>
-        <target></target>
+        <target>Dahilan sa pagkabigo</target>
       </trans-unit>
       <trans-unit id="You have exceeded your daily limit. Please try again later.">
         <source>You have exceeded your daily limit. Please try again later.</source>
-        <target></target>
+        <target>Nalagpasan mo ang pang-araw-araw mong limitasyon. Pakisubukan muli mamaya.</target>
       </trans-unit>
       <trans-unit id="You have exceeded your monthly limit. Please try again later.">
         <source>You have exceeded your monthly limit. Please try again later.</source>
-        <target></target>
+        <target>Nalagpasan mo ang buwanan mong limitasyon. Pakisubukan muli mamaya.</target>
       </trans-unit>
       <trans-unit id="Credit Cards">
         <source>Credit Cards</source>
-        <target></target>
+        <target>Mga Credit Card</target>
       </trans-unit>
       <trans-unit id="Bank Accounts">
         <source>Bank Accounts</source>
-        <target></target>
+        <target>Mga Account sa Bangko</target>
       </trans-unit>
       <trans-unit id="No credit cards.">
         <source>No credit cards.</source>
-        <target></target>
+        <target>Walang mga credit card.</target>
       </trans-unit>
       <trans-unit id="No bank accounts.">
         <source>No bank accounts.</source>
-        <target></target>
+        <target>Walang mga account sa bangko.</target>
       </trans-unit>
       <trans-unit id="Add Bank Account">
         <source>Add Bank Account</source>
-        <target></target>
+        <target>Magdagdag ng Account sa Bangko</target>
       </trans-unit>
       <trans-unit id="Currency">
         <source>Currency</source>
-        <target></target>
+        <target>Currency</target>
       </trans-unit>
       <trans-unit id="Account number">
         <source>Account number</source>
-        <target></target>
+        <target>Numero ng account</target>
       </trans-unit>
       <trans-unit id="Sort code">
         <source>Sort code</source>
-        <target></target>
+        <target>Sort code</target>
       </trans-unit>
       <trans-unit id="Unsupported bank">
         <source>Unsupported bank</source>
-        <target></target>
+        <target>Hindi suportadong bangko</target>
       </trans-unit>
       <trans-unit id="Daily limits">
         <source>Daily limits</source>
-        <target></target>
+        <target>Mga pang-araw-araw na limitasyon</target>
       </trans-unit>
       <trans-unit id="Monthly limits">
         <source>Monthly limits</source>
-        <target></target>
+        <target>Mga buwanang limitasyon</target>
       </trans-unit>
       <trans-unit id="Credit Card:">
         <source>Credit Card:</source>
-        <target></target>
+        <target>Credit Card:</target>
       </trans-unit>
       <trans-unit id="Bank Account:">
         <source>Bank Account:</source>
-        <target></target>
+        <target>Account sa Bangko:</target>
       </trans-unit>
       <trans-unit id="Waiting for payment">
         <source>Waiting for payment</source>
-        <target></target>
+        <target>Naghihintay ng bayad</target>
       </trans-unit>
       <trans-unit id="To complete the transaction, please submit a bank transfer with the following information">
         <source>To complete the transaction, please submit a bank transfer with the following information</source>
-        <target></target>
+        <target>Para kumpletuhin ang transaksiyon, pakisumite ang pagpapadala sa bangko na may sumusunod na impormasyon</target>
       </trans-unit>
       <trans-unit id="Reference Number">
         <source>Reference Number</source>
-        <target></target>
+        <target>Numero ng Sanggunian</target>
       </trans-unit>
       <trans-unit id="Recipient Name">
         <source>Recipient Name</source>
-        <target></target>
+        <target>Pangalan ng Tatanggap</target>
       </trans-unit>
       <trans-unit id="Bank Name">
         <source>Bank Name</source>
-        <target></target>
+        <target>Pangalan ng Bangko</target>
       </trans-unit>
       <trans-unit id="Bank Address">
         <source>Bank Address</source>
-        <target></target>
+        <target>Address ng Bangko</target>
       </trans-unit>
       <trans-unit id="Recipient Address">
         <source>Recipient Address</source>
-        <target></target>
+        <target>Address ng Tatanggap</target>
       </trans-unit>
     </body>
   </file>

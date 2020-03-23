@@ -893,327 +893,327 @@ Sẽ chuyển đổi thành %(toSymbol)s, và gửi đến
       </trans-unit>
       <trans-unit id="Transaction too large">
         <source>Transaction too large</source>
-        <target></target>
+        <target>Giao dịch quá lớn</target>
       </trans-unit>
       <trans-unit id="Email">
         <source>Email</source>
-        <target></target>
+        <target>Email</target>
       </trans-unit>
       <trans-unit id="Please enter a valid email address">
         <source>Please enter a valid email address</source>
-        <target></target>
+        <target>Vui lòng nhập địa chỉ email hợp lệ</target>
       </trans-unit>
       <trans-unit id="Verification code">
         <source>Verification code</source>
-        <target></target>
+        <target>Mã xác thực</target>
       </trans-unit>
       <trans-unit id="We&apos;ve sent verification code to :destination.">
         <source>We've sent verification code to %(destination)s.</source>
-        <target></target>
+        <target>Chúng tôi vừa gửi mã xác thực tới %(destination)s.</target>
       </trans-unit>
       <trans-unit id="Invalid verification code">
         <source>Invalid verification code</source>
-        <target></target>
+        <target>Mã xác thực không hợp lệ</target>
       </trans-unit>
       <trans-unit id="To increase your limits you need to pass verification.">
         <source>To increase your limits you need to pass verification.</source>
-        <target></target>
+        <target>Để tăng giới hạn của mình, bạn cần phải hoàn thành xác thực.</target>
       </trans-unit>
       <trans-unit id="Payment methods">
         <source>Payment methods</source>
-        <target></target>
+        <target>Phương thức thanh toán</target>
       </trans-unit>
       <trans-unit id="Verification">
         <source>Verification</source>
-        <target></target>
+        <target>Xác thực</target>
       </trans-unit>
       <trans-unit id="Default currency (:symbol)">
         <source>Default currency (%(symbol)s)</source>
-        <target></target>
+        <target>Loại tiền tệ mặc định (%(symbol)s)</target>
       </trans-unit>
       <trans-unit id="Buy">
         <source>Buy</source>
-        <target></target>
+        <target>Mua</target>
       </trans-unit>
       <trans-unit id="No verification methods are currently available.">
         <source>No verification methods are currently available.</source>
-        <target></target>
+        <target>Hiện không có phương thức xác thực nào khả dụng.</target>
       </trans-unit>
       <trans-unit id="Identity">
         <source>Identity</source>
-        <target></target>
+        <target>Danh tính</target>
       </trans-unit>
       <trans-unit id="Document">
         <source>Document</source>
-        <target></target>
+        <target>Giấy tờ</target>
       </trans-unit>
       <trans-unit id="Phone number">
         <source>Phone number</source>
-        <target></target>
+        <target>Số điện thoại</target>
       </trans-unit>
       <trans-unit id="Face match">
         <source>Face match</source>
-        <target></target>
+        <target>Khớp khuôn mặt</target>
       </trans-unit>
       <trans-unit id="Identity verification">
         <source>Identity verification</source>
-        <target></target>
+        <target>Xác thực danh tính</target>
       </trans-unit>
       <trans-unit id="Document verification">
         <source>Document verification</source>
-        <target></target>
+        <target>Xác thực giấy tờ</target>
       </trans-unit>
       <trans-unit id="Phone number verification">
         <source>Phone number verification</source>
-        <target></target>
+        <target>Xác thực số điện thoại</target>
       </trans-unit>
       <trans-unit id="Face match verification">
         <source>Face match verification</source>
-        <target></target>
+        <target>Xác thực khớp khuôn mặt</target>
       </trans-unit>
       <trans-unit id="Continue">
         <source>Continue</source>
-        <target></target>
+        <target>Tiếp tục</target>
       </trans-unit>
       <trans-unit id="First name">
         <source>First name</source>
-        <target></target>
+        <target>Tên</target>
       </trans-unit>
       <trans-unit id="Last name">
         <source>Last name</source>
-        <target></target>
+        <target>Họ</target>
       </trans-unit>
       <trans-unit id="Date of birth">
         <source>Date of birth</source>
-        <target></target>
+        <target>Ngày sinh</target>
       </trans-unit>
       <trans-unit id="Country">
         <source>Country</source>
-        <target></target>
+        <target>Quốc gia</target>
       </trans-unit>
       <trans-unit id="Address 2 (optional)">
         <source>Address 2 (optional)</source>
-        <target></target>
+        <target>Địa chỉ 2 (tùy chọn)</target>
       </trans-unit>
       <trans-unit id="City">
         <source>City</source>
-        <target></target>
+        <target>Thành phố</target>
       </trans-unit>
       <trans-unit id="State">
         <source>State</source>
-        <target></target>
+        <target>Bang</target>
       </trans-unit>
       <trans-unit id="Post code">
         <source>Post code</source>
-        <target></target>
+        <target>Mã bưu điện</target>
       </trans-unit>
       <trans-unit id="Please enter a valid info">
         <source>Please enter a valid info</source>
-        <target></target>
+        <target>Vui lòng nhập thông tin hợp lệ</target>
       </trans-unit>
       <trans-unit id="Code is invalid or expired. Please try again.">
         <source>Code is invalid or expired. Please try again.</source>
-        <target></target>
+        <target>Mã không hợp lệ hoặc đã hết hạn. Vui lòng thử lại.</target>
       </trans-unit>
       <trans-unit id="Selfie">
         <source>Selfie</source>
-        <target></target>
+        <target>Ảnh selfie</target>
       </trans-unit>
       <trans-unit id="Select file...">
         <source>Select file...</source>
-        <target></target>
+        <target>Chọn tập tin...</target>
       </trans-unit>
       <trans-unit id="Upload failed. Please try again later.">
         <source>Upload failed. Please try again later.</source>
-        <target></target>
+        <target>Tải lên thất bại. Vui lòng thử lại sau.</target>
       </trans-unit>
       <trans-unit id="Country of issuance">
         <source>Country of issuance</source>
-        <target></target>
+        <target>Quốc gia cấp</target>
       </trans-unit>
       <trans-unit id="Document type">
         <source>Document type</source>
-        <target></target>
+        <target>Loại giấy tờ</target>
       </trans-unit>
       <trans-unit id="Passport">
         <source>Passport</source>
-        <target></target>
+        <target>Hộ chiếu</target>
       </trans-unit>
       <trans-unit id="National identity card">
         <source>National identity card</source>
-        <target></target>
+        <target>Căn cước công dân</target>
       </trans-unit>
       <trans-unit id="Driving licence">
         <source>Driving licence</source>
-        <target></target>
+        <target>Bằng lái xe</target>
       </trans-unit>
       <trans-unit id="Front side">
         <source>Front side</source>
-        <target></target>
+        <target>Mặt trước</target>
       </trans-unit>
       <trans-unit id="Back side">
         <source>Back side</source>
-        <target></target>
+        <target>Mặt sau</target>
       </trans-unit>
       <trans-unit id="Add Credit Card">
         <source>Add Credit Card</source>
-        <target></target>
+        <target>Thêm thẻ tín dụng</target>
       </trans-unit>
       <trans-unit id="Use billing address the same that I have.">
         <source>Use billing address the same that I have.</source>
-        <target></target>
+        <target>Sử dụng địa chỉ thanh toán như đã cung cấp.</target>
       </trans-unit>
       <trans-unit id="Card number">
         <source>Card number</source>
-        <target></target>
+        <target>Số thẻ</target>
       </trans-unit>
       <trans-unit id="Expiry date">
         <source>Expiry date</source>
-        <target></target>
+        <target>Ngày hết hạn</target>
       </trans-unit>
       <trans-unit id="CVC">
         <source>CVC</source>
-        <target></target>
+        <target>CVC</target>
       </trans-unit>
       <trans-unit id="Payment authorization declined">
         <source>Payment authorization declined</source>
-        <target></target>
+        <target>Đã từ chối ủy quyền thanh toán</target>
       </trans-unit>
       <trans-unit id="Identity verification must be passed before saving card">
         <source>Identity verification must be passed before saving card</source>
-        <target></target>
+        <target>Phải xác minh danh tính thành công trước khi lưu thẻ</target>
       </trans-unit>
       <trans-unit id="Payment method">
         <source>Payment method</source>
-        <target></target>
+        <target>Phương thức thanh toán</target>
       </trans-unit>
       <trans-unit id="If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.">
         <source>If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.</source>
-        <target></target>
+        <target>Nếu tỷ giá thay đổi +/-&amp;nbsp;2.5%% trở lên, bạn sẽ nhận được email xác nhận lại giao dịch.</target>
       </trans-unit>
       <trans-unit id="Confirm purchase">
         <source>Confirm purchase</source>
-        <target></target>
+        <target>Xác nhận giao dịch</target>
       </trans-unit>
       <trans-unit id="Purchase Successful">
         <source>Purchase Successful</source>
-        <target></target>
+        <target>Giao dịch thành công</target>
       </trans-unit>
       <trans-unit id="3D secure authentication requested.">
         <source>3D secure authentication requested.</source>
-        <target></target>
+        <target>Đã yêu cầu ủy quyền bảo mật 3D.</target>
       </trans-unit>
       <trans-unit id="3D secure authentication failed">
         <source>3D secure authentication failed</source>
-        <target></target>
+        <target>Ủy quyền bảo mật 3D thất bại</target>
       </trans-unit>
       <trans-unit id="Make sure that your card is valid and has sufficient available balance.">
         <source>Make sure that your card is valid and has sufficient available balance.</source>
-        <target></target>
+        <target>Hãy đảm bảo rằng thẻ của bạn hợp lệ và có đủ số dư khả dụng.</target>
       </trans-unit>
       <trans-unit id="Please select a payment method">
         <source>Please select a payment method</source>
-        <target></target>
+        <target>Vui lòng chọn phương thức thanh toán</target>
       </trans-unit>
       <trans-unit id="Pending">
         <source>Pending</source>
-        <target></target>
+        <target>Đang chờ</target>
       </trans-unit>
       <trans-unit id="Waiting for authorization">
         <source>Waiting for authorization</source>
-        <target></target>
+        <target>Đang chờ ủy quyền</target>
       </trans-unit>
       <trans-unit id="Failure reason">
         <source>Failure reason</source>
-        <target></target>
+        <target>Lý do thất bại</target>
       </trans-unit>
       <trans-unit id="You have exceeded your daily limit. Please try again later.">
         <source>You have exceeded your daily limit. Please try again later.</source>
-        <target></target>
+        <target>Bạn đã vượt quá giới hạn hằng ngày. Vui lòng thử lại sau.</target>
       </trans-unit>
       <trans-unit id="You have exceeded your monthly limit. Please try again later.">
         <source>You have exceeded your monthly limit. Please try again later.</source>
-        <target></target>
+        <target>Bạn đã vượt quá giới hạn hằng tháng. Vui lòng thử lại sau.</target>
       </trans-unit>
       <trans-unit id="Credit Cards">
         <source>Credit Cards</source>
-        <target></target>
+        <target>Thẻ tín dụng</target>
       </trans-unit>
       <trans-unit id="Bank Accounts">
         <source>Bank Accounts</source>
-        <target></target>
+        <target>Tài khoản ngân hàng</target>
       </trans-unit>
       <trans-unit id="No credit cards.">
         <source>No credit cards.</source>
-        <target></target>
+        <target>Không có thẻ tín dụng.</target>
       </trans-unit>
       <trans-unit id="No bank accounts.">
         <source>No bank accounts.</source>
-        <target></target>
+        <target>Không có tài khoản ngân hàng.</target>
       </trans-unit>
       <trans-unit id="Add Bank Account">
         <source>Add Bank Account</source>
-        <target></target>
+        <target>Thêm tài khoản ngân hàng</target>
       </trans-unit>
       <trans-unit id="Currency">
         <source>Currency</source>
-        <target></target>
+        <target>Loại tiền tệ</target>
       </trans-unit>
       <trans-unit id="Account number">
         <source>Account number</source>
-        <target></target>
+        <target>Số tài khoản</target>
       </trans-unit>
       <trans-unit id="Sort code">
         <source>Sort code</source>
-        <target></target>
+        <target>Mã sắp xếp</target>
       </trans-unit>
       <trans-unit id="Unsupported bank">
         <source>Unsupported bank</source>
-        <target></target>
+        <target>Ngân hàng không được hỗ trợ</target>
       </trans-unit>
       <trans-unit id="Daily limits">
         <source>Daily limits</source>
-        <target></target>
+        <target>Giới hạn hằng ngày</target>
       </trans-unit>
       <trans-unit id="Monthly limits">
         <source>Monthly limits</source>
-        <target></target>
+        <target>Giới hạn hằng tháng</target>
       </trans-unit>
       <trans-unit id="Credit Card:">
         <source>Credit Card:</source>
-        <target></target>
+        <target>Thẻ tín dụng:</target>
       </trans-unit>
       <trans-unit id="Bank Account:">
         <source>Bank Account:</source>
-        <target></target>
+        <target>Tài khoản ngân hàng:</target>
       </trans-unit>
       <trans-unit id="Waiting for payment">
         <source>Waiting for payment</source>
-        <target></target>
+        <target>Đang đợi thanh toán</target>
       </trans-unit>
       <trans-unit id="To complete the transaction, please submit a bank transfer with the following information">
         <source>To complete the transaction, please submit a bank transfer with the following information</source>
-        <target></target>
+        <target>Để hoàn thành giao dịch, vui lòng thực hiện chuyển khoản ngân hàng với thông tin sau đây</target>
       </trans-unit>
       <trans-unit id="Reference Number">
         <source>Reference Number</source>
-        <target></target>
+        <target>Số tham chiếu</target>
       </trans-unit>
       <trans-unit id="Recipient Name">
         <source>Recipient Name</source>
-        <target></target>
+        <target>Tên người nhận</target>
       </trans-unit>
       <trans-unit id="Bank Name">
         <source>Bank Name</source>
-        <target></target>
+        <target>Tên ngân hàng</target>
       </trans-unit>
       <trans-unit id="Bank Address">
         <source>Bank Address</source>
-        <target></target>
+        <target>Địa chỉ ngân hàng</target>
       </trans-unit>
       <trans-unit id="Recipient Address">
         <source>Recipient Address</source>
-        <target></target>
+        <target>Địa chỉ người nhận</target>
       </trans-unit>
     </body>
   </file>
