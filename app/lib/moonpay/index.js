@@ -323,14 +323,23 @@ function deleteBankAccount(id) {
   });
 }
 
-function quote(currencyCode, baseCurrencyCode, baseCurrencyAmount, areFeesIncluded) {
+function quote(currencyCode, baseCurrencyCode, baseCurrencyAmount, paymentMethod, areFeesIncluded) {
+  var pm = 'credit_debit_card';
+  if (paymentMethod && paymentMethod.type === 'bankAccount') {
+    if (paymentMethod.fiatSymbol === 'EUR') {
+      pm = 'sepa_bank_transfer';
+    } else if (paymentMethod.fiatSymbol === 'GBP') {
+      pm = 'gbp_bank_transfer';
+    }
+  }
   return request({
     url: 'https://api.moonpay.io/v3/currencies/' + currencyCode + '/quote',
     params: {
       apiKey: apiKey,
       baseCurrencyCode: baseCurrencyCode,
       baseCurrencyAmount: baseCurrencyAmount,
-      areFeesIncluded: areFeesIncluded
+      paymentMethod: pm,
+      areFeesIncluded: areFeesIncluded,
     }
   });
 }
