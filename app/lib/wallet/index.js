@@ -81,6 +81,7 @@ function createWallet(passphrase, network, callback) {
   }
 
   worker.onerror = function(e) {
+    e.preventDefault();
     return callback({message: e.message.split(': ')[1]})
   }
 
