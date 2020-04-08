@@ -17,7 +17,7 @@
 
   {{#showEmail}}
   <div class="_email">
-    <a href="mailto:security@changelly.com">security@changelly.com</a>
+    <a href="mailto:support@changelly.com">support@changelly.com</a>
   </div>
   {{/showEmail}}
 
