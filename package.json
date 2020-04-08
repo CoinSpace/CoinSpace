@@ -47,6 +47,7 @@
     "@sentry/cli": "^1.51.1",
     "ajv": "^5.2.2",
     "autoprefixer": "^7.1.4",
+    "axios-retry": "^3.1.2",
     "b39": "git://github.com/CoinSpace/B39.git#v2.1.2",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",

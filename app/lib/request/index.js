@@ -1,6 +1,8 @@
 'use strict';
 
 var axios = require('axios');
+var axiosRetry = require('axios-retry');
+axiosRetry(axios, {retries: 3, retryDelay: axiosRetry.exponentialDelay, shouldResetTimeout: true});
 var showError = require('widgets/modals/flash').showError;
 
 function makeRequest(config, callback) {
