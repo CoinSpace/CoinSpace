@@ -26,8 +26,14 @@ emitter.on('handleOpenURL', function(url) {
 });
 
 function init() {
-  if (location.hostname.split('.')[1] === 'onion') return;
-  return request({url: 'https://api.moonpay.io/v3/ip_address', params: {apiKey: apiKey}}).then(function(data) {
+  return request({
+    url: 'https://api.moonpay.io/v3/ip_address',
+    params: {apiKey: apiKey},
+    hideFlashError: true
+  }).catch(function(error) {
+    if (error.message === 'Network Error') return false;
+    throw error;
+  }).then(function(data) {
     if (data && data.isAllowed) {
       ipCountry = data.alpha3;
       return request({
