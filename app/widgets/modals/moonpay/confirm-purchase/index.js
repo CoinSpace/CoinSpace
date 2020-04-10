@@ -76,7 +76,7 @@ function open(data) {
       moonpay.open3dSecure(redirectUrl).then(function() {
         ractive.set('status', 'success');
       }).catch(function(err) {
-        console.error(err);
+        if (err.message !== '3d_failed') console.error(err);
         return handleError(new Error('3D secure authentication failed'));
       });
     });

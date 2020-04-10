@@ -28,7 +28,7 @@ function open(data) {
         });
         ractive.fire('cancel');
       }).catch(function(err) {
-        console.error(err);
+        if (err.message !== '3d_failed') console.error(err);
         ractive.set('isLoadingAuthorization', false);
         showError({message: '3D secure authentication failed'});
       });
