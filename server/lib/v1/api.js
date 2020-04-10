@@ -25,7 +25,7 @@ router.post('/register', validateAuthParams(false), function(req, res) {
       res.status(200).send(token);
     })
   }).catch(function(err) {
-    console.error('error', err);
+    if (!['auth_failed', 'user_deleted'].includes(err.error)) console.error('error', err);
     return res.status(400).send(err);
   });
 });
@@ -38,7 +38,7 @@ router.post('/login', validateAuthParams(true), function(req, res) {
       res.status(200).send(token);
     });
   }).catch(function(err) {
-    console.error('error', err);
+    if (!['auth_failed', 'user_deleted'].includes(err.error)) console.error('error', err);
     res.status(400).send(err);
   });
 });
@@ -49,7 +49,6 @@ router.get('/exist', function(req, res) {
   account.isExist(walletId).then(function(userExist) {
     res.status(200).send(userExist);
   }).catch(function(err) {
-    console.error('error', err);
     return res.status(400).send(err);
   });
 });
