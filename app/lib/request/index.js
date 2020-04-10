@@ -11,11 +11,18 @@ function makeRequest(config, callback) {
   return axios.request(config).then(function(response) {
     return response.data;
   }).catch(function(err) {
-    if (!err.response) {
+    if (err.response) {
+      var error = new Error(err.response.data.error || err.response.data.message || err.response.data);
+      error.status = err.response.status;
+      error.url = err.config.url;
+      error.method = err.config.method;
+      throw error;
+    } else if (err.request) {
       if (showFlashError) showError({message: 'Request timeout. Please check your internet connection.'});
       throw err;
+    } else {
+      throw err;
     }
-    throw new Error(err.response.data.error || err.response.data.message);
   }).then(function(data) {
     if (callback) {
       setTimeout(function() {
