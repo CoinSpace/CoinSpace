@@ -117,10 +117,6 @@
         <source>Could not save your details</source>
         <target>Nem lehet elmenteni az adataid</target>
       </trans-unit>
-      <trans-unit id="We could not connect you to Mecto, please check your internet connection.">
-        <source>We couldn't connect you to Mecto, please check your internet connection.</source>
-        <target>Nem tudtunk csatlakoztatni a Mecto-hoz, ellenőrizd az internetkapcsolatot.</target>
-      </trans-unit>
       <trans-unit id="Please enter a valid address to send to">
         <source>Please enter a valid address to send to</source>
         <target>Adj meg egy érvényes címet a küldéshez</target>

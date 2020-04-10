@@ -117,10 +117,6 @@
         <source>Could not save your details</source>
         <target>Hindi mai-save ang iyong mga detalye</target>
       </trans-unit>
-      <trans-unit id="We could not connect you to Mecto, please check your internet connection.">
-        <source>We couldn't connect you to Mecto, please check your internet connection.</source>
-        <target>Hindi namin ikaw maikunekta sa Mecto, maari lamang na i-check ang kuneksyon ng iyong internet.</target>
-      </trans-unit>
       <trans-unit id="Please enter a valid address to send to">
         <source>Please enter a valid address to send to</source>
         <target>Maari lamang na i-enter ang wastong address na papadalhan</target>

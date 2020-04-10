@@ -117,10 +117,6 @@
         <source>Could not save your details</source>
         <target>상세 정보 저장 불가</target>
       </trans-unit>
-      <trans-unit id="We could not connect you to Mecto, please check your internet connection.">
-        <source>We couldn't connect you to Mecto, please check your internet connection.</source>
-        <target>멕토(Mecto)에 연결할 수 없습니다. 인터넷 연결을 확인해주십시오.</target>
-      </trans-unit>
       <trans-unit id="Please enter a valid address to send to">
         <source>Please enter a valid address to send to</source>
         <target>(으)로 보내려면 유효한 주소를 입력하십시오</target>

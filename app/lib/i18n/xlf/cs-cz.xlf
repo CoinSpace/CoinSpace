@@ -117,10 +117,6 @@
         <source>Could not save your details</source>
         <target>Vaše informace nebyli uloženy</target>
       </trans-unit>
-      <trans-unit id="We could not connect you to Mecto, please check your internet connection.">
-        <source>We couldn't connect you to Mecto, please check your internet connection.</source>
-        <target>Nemohli jsme Vás připojit k Vašemu Mecto, prosím zkontrolujte své internetové připojení.</target>
-      </trans-unit>
       <trans-unit id="Please enter a valid address to send to">
         <source>Please enter a valid address to send to</source>
         <target>Prosím zadejte platnou adresu k zaslání</target>

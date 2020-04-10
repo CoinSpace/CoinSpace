@@ -28,7 +28,6 @@
   "Your PIN is incorrect": "Your PIN is incorrect",
   "Request timeout. Please check your internet connection.": "Request timeout. Please check your internet connection.",
   "Could not save your details": "Could not save your details",
-  "We could not connect you to Mecto, please check your internet connection.": "We couldn't connect you to Mecto, please check your internet connection.",
   "Please enter a valid address to send to": "Please enter a valid address to send to",
   "Please enter an amount above": "Please enter an amount above %(dust)s",
   "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.": "Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.",

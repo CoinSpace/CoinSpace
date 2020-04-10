@@ -117,10 +117,6 @@
         <source>Could not save your details</source>
         <target>詳細は保存できませんでした</target>
       </trans-unit>
-      <trans-unit id="We could not connect you to Mecto, please check your internet connection.">
-        <source>We couldn't connect you to Mecto, please check your internet connection.</source>
-        <target>場所に接続できませんでした、ネット環境をご確認ください。</target>
-      </trans-unit>
       <trans-unit id="Please enter a valid address to send to">
         <source>Please enter a valid address to send to</source>
         <target>有効なアドレスをご入力ください</target>

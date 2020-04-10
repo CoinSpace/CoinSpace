@@ -103,14 +103,9 @@ module.exports = function(el){
   }
 
   function handleMectoError(err) {
-    console.error(err)
-
-    var data = {
-      title: 'Uh Oh...',
-      message: "We could not connect you to Mecto, please check your internet connection."
-    }
-
-    showError(data)
+    showError({
+      message: err.message
+    })
     ractive.set('connecting', false)
     ractive.set('broadcasting', false)
     ractive.set('btn_message', 'Turn Mecto on')
