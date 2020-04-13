@@ -44,7 +44,11 @@ function estimate(from, to, amount) {
       to: to
     })
   ]).then(function(results) {
-    var exchangeAmounts = results[0];
+    var exchangeAmounts = results[0] || [{
+      networkFee: '0',
+      amount: '0',
+      result: '0'
+    }];
     var minAmount = results[1];
     return {
       networkFee: prettyNumber(exchangeAmounts[0].networkFee),
