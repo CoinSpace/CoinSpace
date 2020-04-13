@@ -248,6 +248,7 @@ module.exports = function(el) {
     }).catch(function(err) {
       ractive.set('isLoadingRate', false);
       ractive.set('rate', '?');
+      if (/is currently unavailable in your region/.test(err.message)) return;
       console.error(err);
     });
   }
