@@ -70,11 +70,12 @@ function open(data) {
   }
 
   function handleTransactionError(err) {
-    console.error(err);
     ractive.set('confirmation', false)
     if (err.message === 'cs-node-error') {
       err.message = 'Network node error. Please try again later.'
       ractive.set('interpolations', { network: _.upperFirst(getTokenNetwork()) })
+    } else {
+      console.error(err);
     }
     ractive.set('error', err.message)
   }

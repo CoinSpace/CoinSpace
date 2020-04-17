@@ -1,12 +1,12 @@
 'use strict';
 
-var axios = require('axios');
+var axios = require('axios').create({timeout: 30000});
 var axiosRetry = require('axios-retry');
-axiosRetry(axios, {retries: 3, retryDelay: axiosRetry.exponentialDelay, shouldResetTimeout: true});
 var showError = require('widgets/modals/flash').showError;
 
+axiosRetry(axios, {retries: 3, retryDelay: axiosRetry.exponentialDelay, shouldResetTimeout: true});
+
 function makeRequest(config, callback) {
-  config.timeout = config.timeout || 30 * 1000;
   var showFlashError = !config.hideFlashError;
   return axios.request(config).then(function(response) {
     return response.data;

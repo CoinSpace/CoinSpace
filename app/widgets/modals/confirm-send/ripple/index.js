@@ -63,7 +63,6 @@ function open(data) {
   }
 
   function handleTransactionError(err) {
-    console.error(err);
     ractive.set('confirmation', false)
     var wallet = getWallet();
     var hasResponseData = err.response && err.response.data;
@@ -77,6 +76,8 @@ function open(data) {
         minReserve: wallet.minReserve,
         denomination: wallet.denomination
       });
+    } else {
+      console.error(err);
     }
     ractive.set('error', err.message)
   }
