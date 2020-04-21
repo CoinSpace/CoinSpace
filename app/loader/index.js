@@ -1,7 +1,7 @@
 'use strict';
 
 require('../application.scss');
-require('core-js/shim');
+require('babel-polyfill');
 
 var Sentry = require('@sentry/browser');
 var Integrations = require('@sentry/integrations');
@@ -49,9 +49,6 @@ function init() {
     } else {
       nope();
     }
-  }).catch(function(err) {
-    if (/Loading chunk \d+ failed/.test(err.message)) return chunkError();
-    console.error(err);
   });
 }
 
@@ -86,13 +83,6 @@ function nope() {
   var message = i18n.translate('Sorry, Coin Wallet did not load.') +
   '<br/><br/>' +
   i18n.translate('Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.')
-  document.getElementById('loader-message').innerHTML = message;
-}
-
-function chunkError() {
-  var message = 'Sorry, Coin Wallet did not load.' +
-  '<br/><br/>' +
-  'Please check your internet connection.';
   document.getElementById('loader-message').innerHTML = message;
 }
 

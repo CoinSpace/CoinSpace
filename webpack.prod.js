@@ -8,6 +8,7 @@ const Dotenv = require('dotenv-webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
 const envFile = process.env.ENV_FILE ? process.env.ENV_FILE : '.env.prod';
 
@@ -20,15 +21,25 @@ var config = merge(common, {
     rules: [
       {
         test: /\.js$/,
-        include: [
-          /node_modules\/bech32/,
-          /node_modules\/agent-base/
+        exclude: [
+          path.resolve(__dirname, './phonegap/deviceready'),
+          path.resolve(__dirname, './app/loader'),
+          path.resolve(__dirname, './app/lib/i18n'),
+          /node_modules\/lodash/,
+          /node_modules\/ethjs-util/,
+          /node_modules\/eosjs/,
+          /node_modules\/js-xdr/,
+          /node_modules\/clipboard/,
+          /node_modules\/@sentry/
         ],
         use: {
-          loader: 'babel-loader', // special for UglifyJSPlugin
+          loader: 'babel-loader',
           options: {
-            presets: ['es2015'],
-            plugins: ['transform-runtime']
+            presets: [[
+              'env', {
+                useBuiltIns: 'entry'
+              }
+            ]],
           }
         }
       },
