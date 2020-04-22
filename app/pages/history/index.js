@@ -64,9 +64,9 @@ module.exports = function(el) {
         }
       },
       toUnitString: toUnitString,
-      loadingTx: true,
+      isLoading: true,
       hasMore: false,
-      loadingMore: false
+      isLoadingMore: false
     }
   })
 
@@ -81,7 +81,7 @@ module.exports = function(el) {
     newTxs.forEach(function(tx) {
       ractive.unshift('transactions', tx);
     })
-    ractive.set('loadingTx', false)
+    ractive.set('isLoading', false)
   })
 
   emitter.on('set-transactions', function(txs) {
@@ -89,12 +89,12 @@ module.exports = function(el) {
     network = getTokenNetwork();
     ractive.set('transactions', txs)
     ractive.set('hasMore', wallet ? wallet.hasMoreTxs : false)
-    ractive.set('loadingTx', false)
+    ractive.set('isLoading', false)
   })
 
   emitter.on('sync', function() {
     ractive.set('transactions', [])
-    ractive.set('loadingTx', true)
+    ractive.set('isLoading', true)
   })
 
   ractive.on('show-detail', function(context) {
@@ -115,17 +115,17 @@ module.exports = function(el) {
   })
 
   ractive.on('load-more', function() {
-    ractive.set('loadingMore', true);
+    ractive.set('isLoadingMore', true);
     var wallet = getWallet();
     wallet.loadTxs().then(function(result) {
-      ractive.set('loadingMore', false);
+      ractive.set('isLoadingMore', false);
       ractive.set('hasMore', result.hasMoreTxs)
       result.txs.forEach(function(tx) {
         ractive.push('transactions', parseHistoryTx(tx));
       })
     }).catch(function(err) {
       console.error(err);
-      ractive.set('loadingMore', false);
+      ractive.set('isLoadingMore', false);
       showError({message: err.message});
     })
   })

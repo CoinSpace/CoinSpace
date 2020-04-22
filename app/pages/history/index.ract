@@ -1,60 +1,60 @@
 <div class-hidden="needToSetupEos">
   <div class="transactions">
-    {{#loadingTx}}
+    {{#if isLoading}}
       <div class="transactions__message">
         <div class="_message">{{translate("Loading transactions...")}}</div>
       </div>
-    {{/loadingTx}}
-    {{#transactions.length}}
-      <h3 class="_title">{{translate("Your transaction history")}}</h3>
-    {{/transactions.length}}
-    {{#each transactions: index}}
-      <div class="transactions__item" title="{{id}}" data-index="{{index}}" on-click="show-detail">
+    {{else}}
+      {{#if transactions.length}}
+        <h3 class="_title">{{translate("Your transaction history")}}</h3>
+        {{#each transactions: index}}
+        <div class="transactions__item" title="{{id}}" data-index="{{index}}" on-click="show-detail">
 
-        <div class="_detail">
+          <div class="_detail">
 
-          <div class="_amount {{isReceived(this) ? 'green' : 'red'}}">
-            {{isReceived(this) ? '+' : ''}} {{toUnitString(amount)}}
+            <div class="_amount {{isReceived(this) ? 'green' : 'red'}}">
+              {{isReceived(this) ? '+' : ''}} {{toUnitString(amount)}}
+            </div>
+
+            {{#if isConfirmed(confirmations)}}
+              <span class='_time'>{{formatTimestamp(timestamp)}}</span>
+              <span class='_time'>{{formatConfirmations(confirmations)}}</span>
+            {{else}}
+              <span class='_time'>{{translate("pending confirmation")}}</span>
+            {{/if}}
+
           </div>
-
-          {{#if isConfirmed(confirmations)}}
-            <span class='_time'>{{formatTimestamp(timestamp)}}</span>
-            <span class='_time'>{{formatConfirmations(confirmations)}}</span>
+          {{#if isFailed(this)}}
+            <div class="_address">{{translate("Failed")}}</div>
           {{else}}
-            <span class='_time'>{{translate("pending confirmation")}}</span>
+            <div class="_address">{{isReceived(this) ? translate('Received') : getToAddress(this)}}</div>
           {{/if}}
 
         </div>
-        {{#if isFailed(this)}}
-          <div class="_address">{{translate("Failed")}}</div>
-        {{else}}
-          <div class="_address">{{isReceived(this) ? translate('Received') : getToAddress(this)}}</div>
-        {{/if}}
-
-      </div>
-    {{/each}}
-    {{^transactions}}
-      {{^loadingTx}}
+        {{/each}}
+      {{else}}
         <div class="transactions__message">
           <div class="_icon">
             {{>svg_help}}
           </div>
           <div class="_message">{{translate("You do not have any transactions yet")}}</div>
         </div>
-      {{/loadingTx}}
-    {{/transactions}}
-    {{#if (hasMore && !loadingTx)}}
-      <div class="loadmore__buttons">
-        {{#if loadingMore}}
-          <div class="send__btn--loading">
-            <span class="_icon">
-              {{>svg_refresh}}
-            </span>
-          </div>
-        {{else}}
-        <div on-click="load-more" class="loadmore__btn">{{translate("Load more")}}</div>
-        {{/if}}
-      </div>
+      {{/if}}
+
+      {{#if hasMore}}
+        <div class="loadmore__buttons">
+          {{#if isLoadingMore}}
+            <div class="send__btn--loading">
+              <span class="_icon">
+                {{>svg_refresh}}
+              </span>
+            </div>
+          {{else}}
+          <div on-click="load-more" class="loadmore__btn">{{translate("Load more")}}</div>
+          {{/if}}
+        </div>
+      {{/if}}
+
     {{/if}}
   </div>
 </div>
