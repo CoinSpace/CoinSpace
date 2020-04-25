@@ -11,7 +11,13 @@ var fiatSigns = {
   usd: '$',
   eur: '€',
   gbp: '£',
-  zar: 'R'
+  zar: 'R',
+  chf: 'CHF',
+  ils: '₪',
+  nok: 'kr',
+  pln: 'zł',
+  sek: 'kr',
+  rub: '₽'
 };
 
 function save(_id, data) {
