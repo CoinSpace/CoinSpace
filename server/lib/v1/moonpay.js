@@ -5,20 +5,6 @@ var db = require('./db');
 var API_KEY = process.env.MOONPAY_API_KEY;
 
 var PRIORITY_SYMBOLS = ['BTC', 'BCH', 'BSV', 'ETH', 'USDT', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH'];
-var fiatSigns = {
-  aud: '$',
-  cad: '$',
-  usd: '$',
-  eur: '€',
-  gbp: '£',
-  zar: 'R',
-  chf: 'CHF',
-  ils: '₪',
-  nok: 'kr',
-  pln: 'zł',
-  sek: 'kr',
-  rub: '₽'
-};
 
 function save(_id, data) {
   var collection = db().collection('moonpay');
@@ -57,9 +43,9 @@ function getCurrenciesFromAPI() {
       if (item.type === 'fiat') {
         fiat[item.id] = {
           symbol: item.code.toUpperCase(),
-          sign: fiatSigns[item.code] || '',
           precision: item.precision,
-          minAmount: item.minAmount || 20
+          minAmount: item.minAmount || 20,
+          maxAmount: item.maxAmount || 2200
         };
       }
     });

@@ -59,8 +59,8 @@ module.exports = function(el) {
     fiat = context.fiat;
     _fiatAmount = fiat.minAmount + '';
 
-    creditCardLimit = context.creditCardLimit;
-    bankAccountLimit = context.bankAccountLimit;
+    creditCardLimit = Math.min(context.creditCardLimit, fiat.maxAmount);
+    bankAccountLimit = Math.min(context.bankAccountLimit, fiat.maxAmount);
 
     cryptoSymbol = denomination(getToken());
     ractive.set('fiatSymbol', fiat.symbol);

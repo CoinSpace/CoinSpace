@@ -37,7 +37,7 @@ module.exports = function(el) {
         tx.currencyCode = moonpay.getCryptoSymbolById(tx.currencyId);
         var fiat = moonpay.getFiatById(tx.baseCurrencyId);
         var amount = Big(tx.baseCurrencyAmount).plus(tx.feeAmount).plus(tx.extraFeeAmount).toFixed(fiat.precision);
-        tx.fiat = fiat.sign + amount;
+        tx.fiat = amount + ' ' + fiat.symbol;
         tx.timestamp = strftime('%b %d %l:%M %p', (new Date(tx.createdAt)));
       });
       ractive.set('txs', txs);

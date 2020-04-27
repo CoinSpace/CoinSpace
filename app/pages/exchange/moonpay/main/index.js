@@ -20,12 +20,12 @@ module.exports = function(el) {
         return moonpay.getFiatById(ractive.get('defaultCurrency'), 'symbol');
       },
       getDailyLimitLabel: function(limit) {
-        var sign = moonpay.getFiatById(ractive.get('defaultCurrency'), 'sign');
-        return sign + limit.dailyLimitRemaining + ' / ' + sign + limit.dailyLimit;
+        var symbol = moonpay.getFiatById(ractive.get('defaultCurrency'), 'symbol');
+        return limit.dailyLimitRemaining + ' / ' + limit.dailyLimit + ' ' + symbol;
       },
       getMonthlyLimitLabel: function(limit) {
-        var sign = moonpay.getFiatById(ractive.get('defaultCurrency'), 'sign');
-        return sign + limit.monthlyLimitRemaining + ' / ' + sign + limit.monthlyLimit;
+        var symbol = moonpay.getFiatById(ractive.get('defaultCurrency'), 'symbol');
+        return limit.monthlyLimitRemaining + ' / ' + limit.monthlyLimit + ' ' + symbol;
       }
     },
     partials: {
