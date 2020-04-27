@@ -138,6 +138,7 @@ module.exports = function(el){
           ractive.find('#bitcoin').value = '';
           ractive.find('#fiat').value = '';
           setFees();
+          ractive.fire('change-fee');
           if (wallet.networkName === 'ripple') {
             ractive.find('#destination-tag').value = '';
             ractive.find('#invoice-id').value = '';

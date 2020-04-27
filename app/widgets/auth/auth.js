@@ -6,7 +6,6 @@ var showError = require('widgets/modals/flash').showError
 var getTokenNetwork = require('lib/token').getTokenNetwork;
 var setToken = require('lib/token').setToken;
 var onSyncDoneWrapper = require('lib/wallet/utils').onSyncDoneWrapper;
-var onTxSyncDoneWrapper = require('lib/wallet/utils').onTxSyncDoneWrapper;
 
 var Auth = Ractive.extend({
   el: document.getElementById("auth"),
@@ -49,14 +48,12 @@ var Auth = Ractive.extend({
       },
       complete: function() {
         window.scrollTo(0, 0)
-        emitter.emit('wallet-ready')
       },
       fail: function(err) {
         setToken(getTokenNetwork()); // fix wrong tokens
         onDoneError(err);
       }
     });
-    this.onTxSyncDone = onTxSyncDoneWrapper({fail: onDoneError});
     this.getTokenNetwork = getTokenNetwork
   }
 })

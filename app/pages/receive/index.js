@@ -28,12 +28,17 @@ module.exports = function(el){
 
   initEosSetup(ractive.find('#eos-setup'));
 
-  emitter.on('wallet-ready', function(){
+  emitter.on('wallet-ready', function() {
     var wallet = CS.getWallet();
     ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
     ractive.set('address', getAddress());
     showQRcode();
   })
+
+  emitter.on('tx-sent', function() {
+    ractive.set('address', getAddress());
+    showQRcode();
+  });
 
   ractive.on('toggle-broadcast', function() {
     if (ractive.get('connecting')) return;

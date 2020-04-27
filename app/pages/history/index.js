@@ -72,10 +72,26 @@ module.exports = function(el) {
 
   initEosSetup(ractive.find('#eos-setup'));
 
-  emitter.on('wallet-ready', function(){
+  var isLoadingStarted = false;
+  var isSyncing = true;
+
+  ractive.on('before-show', function() {
+    loadTxs();
+  });
+
+  emitter.on('wallet-ready', function() {
+    isSyncing = false;
     var wallet = getWallet();
     ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
+    if (ractive.el.classList.contains('current')) loadTxs();
   })
+
+  function loadTxs() {
+    if (isSyncing) return;
+    if (isLoadingStarted) return;
+    isLoadingStarted = true;
+    loadTxsWithLoader('isLoading');
+  }
 
   emitter.on('append-transactions', function(newTxs) {
     newTxs.forEach(function(tx) {
@@ -84,17 +100,11 @@ module.exports = function(el) {
     ractive.set('isLoading', false)
   })
 
-  emitter.on('set-transactions', function(txs) {
-    var wallet = getWallet();
-    network = getTokenNetwork();
-    ractive.set('transactions', txs)
-    ractive.set('hasMore', wallet ? wallet.hasMoreTxs : false)
-    ractive.set('isLoading', false)
-  })
-
   emitter.on('sync', function() {
+    isSyncing = true;
     ractive.set('transactions', [])
     ractive.set('isLoading', true)
+    isLoadingStarted = false;
   })
 
   ractive.on('show-detail', function(context) {
@@ -116,19 +126,23 @@ module.exports = function(el) {
 
   ractive.on('load-more', function() {
     ractive.set('isLoadingMore', true);
+    loadTxsWithLoader('isLoadingMore');
+  })
+
+  function loadTxsWithLoader(loaderKey) {
     var wallet = getWallet();
     wallet.loadTxs().then(function(result) {
-      ractive.set('isLoadingMore', false);
+      ractive.set(loaderKey, false);
       ractive.set('hasMore', result.hasMoreTxs)
       result.txs.forEach(function(tx) {
         ractive.push('transactions', parseHistoryTx(tx));
       })
     }).catch(function(err) {
       console.error(err);
-      ractive.set('isLoadingMore', false);
+      ractive.set(loaderKey, false);
       showError({message: err.message});
     })
-  })
+  }
 
   return ractive
 }

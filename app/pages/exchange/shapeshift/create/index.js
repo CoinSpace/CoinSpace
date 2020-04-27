@@ -219,14 +219,17 @@ module.exports = function(el) {
     });
   }
 
-  emitter.on('wallet-ready', function() {
+  emitter.on('wallet-ready', setReturnAddress);
+  emitter.on('tx-sent', setReturnAddress);
+
+  function setReturnAddress() {
     if (!ractive.el.classList.contains('current')) {
       return ractive.set('returnAddress', getWallet().getNextAddress());
     }
     if (ractive.get('fromSymbol') === getWallet().denomination) {
       ractive.set('returnAddress', getWallet().getNextAddress());
     }
-  });
+  }
 
   function getFirstSymbol(coins, ignoreSymbol) {
     var nextCoin = null;

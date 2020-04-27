@@ -62,29 +62,13 @@ function onSyncDoneWrapper(options) {
       return fail(err);
     }
     complete();
+    emitter.emit('wallet-ready');
     if (err && err.message === 'cs-node-error') {
       emitter.emit('wallet-block');
       return nodeError();
     } else {
       return emitter.emit('wallet-unblock');
     }
-  }
-}
-
-function onTxSyncDoneWrapper(options) {
-  options = options || {};
-  var fail = options.fail || function(err) {
-    showError({message: err.message});
-  };
-  return function(err, txs) {
-    if (err) {
-      emitter.emit('set-transactions', []);
-      if (err.message === 'cs-node-error') {
-        return nodeError();
-      }
-      return fail(err);
-    }
-    emitter.emit('set-transactions', txs);
   }
 }
 
@@ -98,6 +82,5 @@ function nodeError() {
 module.exports = {
   parseBtcLtcTx: parseBtcLtcTx,
   parseEthereumTx: parseEthereumTx,
-  onSyncDoneWrapper: onSyncDoneWrapper,
-  onTxSyncDoneWrapper: onTxSyncDoneWrapper
+  onSyncDoneWrapper: onSyncDoneWrapper
 }

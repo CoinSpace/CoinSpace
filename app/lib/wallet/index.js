@@ -88,17 +88,9 @@ function createWallet(passphrase, network, callback) {
   worker.postMessage(data)
 }
 
-function callbackError(err, callbacks) {
-  callbacks.forEach(function (callback) {
-    if (!callback) return;
-    return callback(err);
-  });
-}
-
-function setPin(pin, network, done, txSyncDone) {
-  var callbacks = [done, txSyncDone]
+function setPin(pin, network, done) {
   auth.register(id, pin, function(err, token) {
-    if (err) return callbackError(err, callbacks);
+    if (err) return done(err);
 
     savePin(pin);
     walletDb.saveEncrypedSeed(id, AES.encrypt(seed, token));
@@ -107,8 +99,8 @@ function setPin(pin, network, done, txSyncDone) {
     emitter.emit('db-init');
 
     emitter.once('db-ready', function(err) {
-      if (err) return callbackError(err, callbacks);
-      initWallet(network, done, txSyncDone);
+      if (err) return done(err);
+      initWallet(network, done);
     });
   })
 }
@@ -121,8 +113,7 @@ function setUsername(username, callback) {
   auth.setUsername(id, username, callback);
 }
 
-function openWalletWithPin(pin, network, done, txSyncDone) {
-  var callbacks = [done, txSyncDone]
+function openWalletWithPin(pin, network, done) {
   var credentials = walletDb.getCredentials();
   var id = credentials.id
   var encryptedSeed = credentials.seed
@@ -131,7 +122,7 @@ function openWalletWithPin(pin, network, done, txSyncDone) {
       if (err.message === 'user_deleted') {
         walletDb.deleteCredentials();
       }
-      return callbackError(err, callbacks);
+      return done(err);
     }
 
     savePin(pin)
@@ -141,8 +132,8 @@ function openWalletWithPin(pin, network, done, txSyncDone) {
     emitter.emit('db-init');
 
     emitter.once('db-ready', function(err) {
-      if (err) return callbackError(err, callbacks);
-      initWallet(network, done, txSyncDone);
+      if (err) return done(err);
+      initWallet(network, done);
     });
   })
 }
@@ -170,7 +161,7 @@ function assignSeedAndId(s) {
   emitter.emit('wallet-init', {seed: seed, id: id})
 }
 
-function initWallet(networkName, done, txDone) {
+function initWallet(networkName, done) {
   var token = getToken();
   if (!isValidWalletToken(token)) {
     setToken(networkName);
@@ -179,14 +170,7 @@ function initWallet(networkName, done, txDone) {
 
   var options = {
     networkName: networkName,
-    done: done,
-    txDone: function(err) {
-      if (err) return txDone(err)
-      var txObjs = wallet.getTransactionHistory()
-      txDone(null, txObjs.map(function(tx) {
-        return parseHistoryTx(tx)
-      }))
-    }
+    done: done
   }
 
   if (networkName === 'ethereum') {
@@ -274,8 +258,8 @@ function parseHistoryTx(tx) {
   }
 }
 
-function sync(done, txDone) {
-  initWallet(wallet.networkName, done, txDone)
+function sync(done) {
+  initWallet(wallet.networkName, done)
 }
 
 function getWallet() {

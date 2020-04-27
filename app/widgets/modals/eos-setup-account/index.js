@@ -7,7 +7,6 @@ var db = require('lib/db');
 var showError = require('widgets/modals/flash').showError;
 var emitter = require('lib/emitter');
 var onSyncDoneWrapper = require('lib/wallet/utils').onSyncDoneWrapper;
-var onTxSyncDoneWrapper = require('lib/wallet/utils').onTxSyncDoneWrapper;
 
 function open() {
   var ractive = new Ractive({
@@ -60,14 +59,9 @@ function open() {
 
   function syncWallet() {
     emitter.emit('sync');
-    var onSyncDone = onSyncDoneWrapper({
-      complete: function() {
-        emitter.emit('wallet-ready');
-      }
-    });
-    var onTxSyncDone = onTxSyncDoneWrapper();
+    var onSyncDone = onSyncDoneWrapper();
     setTimeout(function() {
-      sync(onSyncDone, onTxSyncDone);
+      sync(onSyncDone);
     }, 200);
   }
 

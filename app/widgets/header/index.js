@@ -9,7 +9,6 @@ var toUnitString = require('lib/convert').toUnitString;
 var Big = require('big.js');
 var db = require('lib/db');
 var onSyncDoneWrapper = require('lib/wallet/utils').onSyncDoneWrapper;
-var onTxSyncDoneWrapper = require('lib/wallet/utils').onTxSyncDoneWrapper;
 
 module.exports = function(el) {
   var selectedFiat = '';
@@ -38,45 +37,42 @@ module.exports = function(el) {
     }
   })
 
-  emitter.on('wallet-ready', function(){
+  var refreshEl = ractive.find('#refresh_el')
+
+  emitter.on('wallet-ready', function() {
     console.log('on wallet-ready event')
     var balance = getWallet().getBalance()
     ractive.set('bitcoinBalance', balance)
     ractive.set('denomination', getWallet().denomination)
-  })
+    ractive.set('isSyncing', false);
+    refreshEl.classList.remove('loading');
+    // IE fix
+    var clone = refreshEl.cloneNode(true);
+    refreshEl.parentNode.replaceChild(clone, refreshEl);
+    refreshEl = clone;
+  });
 
-  ractive.on('toggle', function(){
+  emitter.on('tx-sent', function() {
+    var balance = getWallet().getBalance();
+    ractive.set('bitcoinBalance', balance)
+  });
+
+  ractive.on('toggle', function() {
     window.scrollTo(0, 0);
     emitter.emit('toggle-menu', !ractive.get('menuOpen'))
   })
 
-  function toggleIcon(open){
+  function toggleIcon(open) {
     ractive.set('menuOpen', open)
   }
-
-  var refreshEl = ractive.find('#refresh_el')
-
-  emitter.on('set-transactions', function() {
-    ractive.set('isSyncing', false);
-    refreshEl.classList.remove('loading')
-    // IE fix
-    var clone = refreshEl.cloneNode(true)
-    refreshEl.parentNode.replaceChild(clone, refreshEl)
-    refreshEl = clone
-  })
 
   ractive.on('sync-click', function(context) {
     context.original.preventDefault();
     if (!ractive.get('isSyncing')) {
       emitter.emit('sync')
       setTimeout(function() {
-        var onSyncDone = onSyncDoneWrapper({
-          complete: function() {
-            emitter.emit('wallet-ready');
-          }
-        });
-        var onTxSyncDone = onTxSyncDoneWrapper();
-        sync(onSyncDone, onTxSyncDone);
+        var onSyncDone = onSyncDoneWrapper();
+        sync(onSyncDone);
       }, 200)
     }
   })

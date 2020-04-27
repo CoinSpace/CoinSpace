@@ -10,7 +10,6 @@ var emitter = require('lib/emitter');
 var db = require('lib/db');
 var _ = require('lodash');
 var onSyncDoneWrapper = require('lib/wallet/utils').onSyncDoneWrapper;
-var onTxSyncDoneWrapper = require('lib/wallet/utils').onTxSyncDoneWrapper;
 
 var walletTokens = [];
 var isEnabled = false;
@@ -46,7 +45,7 @@ module.exports = function(el) {
     isEnabled = false;
   });
 
-  emitter.on('set-transactions', function() {
+  emitter.on('wallet-ready', function() {
     isEnabled = true;
   });
 
@@ -82,12 +81,10 @@ module.exports = function(el) {
     var onSyncDone = onSyncDoneWrapper({
       complete: function() {
         window.scrollTo(0, 0);
-        emitter.emit('wallet-ready');
       }
     });
-    var onTxSyncDone = onTxSyncDoneWrapper();
     setTimeout(function() {
-      initWallet(network, onSyncDone, onTxSyncDone);
+      initWallet(network, onSyncDone);
     }, 200);
   }
 

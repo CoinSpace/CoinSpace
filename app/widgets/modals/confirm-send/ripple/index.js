@@ -46,7 +46,7 @@ function open(data) {
         ractive.set('onDismiss', data.onSuccessDismiss);
 
         // update balance & tx history
-        emitter.emit('wallet-ready');
+        emitter.emit('tx-sent');
       });
     }, 200);
   });

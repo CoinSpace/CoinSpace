@@ -41,7 +41,7 @@ function open(data) {
         ractive.set('onDismiss', data.onSuccessDismiss);
 
         // update balance & tx history
-        emitter.emit('wallet-ready');
+        emitter.emit('tx-sent');
         if (historyTx) {
           emitter.emit('append-transactions', [parseHistoryTx(historyTx)]);
         }

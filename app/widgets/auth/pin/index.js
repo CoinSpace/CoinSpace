@@ -130,13 +130,11 @@ module.exports = function(prevPage, data){
   }
 
   function openWithPin(){
-    CS.openWalletWithPin(getPin(), ractive.getTokenNetwork(),
-                         ractive.onSyncDone, ractive.onTxSyncDone)
+    CS.openWalletWithPin(getPin(), ractive.getTokenNetwork(), ractive.onSyncDone)
   }
 
   function setPin(){
-    CS.setPin(getPin(), ractive.getTokenNetwork(),
-              ractive.onSyncDone, ractive.onTxSyncDone)
+    CS.setPin(getPin(), ractive.getTokenNetwork(), ractive.onSyncDone)
   }
 
   function initFingerprintAuth() {
