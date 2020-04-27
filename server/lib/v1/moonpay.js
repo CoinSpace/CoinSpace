@@ -43,6 +43,7 @@ function getCurrenciesFromAPI() {
       if (item.type === 'fiat') {
         fiat[item.id] = {
           symbol: item.code.toUpperCase(),
+          sign: '', // deprecated
           precision: item.precision,
           minAmount: item.minAmount || 20,
           maxAmount: item.maxAmount || 2200
