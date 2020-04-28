@@ -1,0 +1,24 @@
+{
+  "name": "coin",
+  "version": "1.0.0",
+  "description": "Coin Digital Currency Wallet",
+  "bugs": {
+    "url": "https://github.com/CoinSpace/CoinSpace/issues"
+  },
+  "license": "GPL-2.0+",
+  "author": "Coin Wallet",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CoinSpace/CoinSpace.git"
+  },
+  "main": "electron.js",
+  "scripts": {
+    "electron": "ELECTRON_ENABLE_LOGGING=true electron .",
+    "electron-builder": "electron-builder --config ./config.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "electron": "^8.2.4",
+    "electron-builder": "^22.5.1"
+  }
+}

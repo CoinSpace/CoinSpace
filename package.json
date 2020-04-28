@@ -1,8 +1,7 @@
 {
   "name": "coin",
   "version": "2.18.4",
-  "main": "electron/electron.js",
-  "description": "Coin Digital currency wallet",
+  "description": "Coin Digital Currency Wallet",
   "bugs": {
     "url": "https://github.com/CoinSpace/CoinSpace/issues"
   },
@@ -18,8 +17,6 @@
     "dev:link": "linklocal -lr",
     "server": "node --expose-gc ./server/server.js",
     "server:watch": "nodemon -w .env.loc -w ./server -x node -r dotenv/config ./server/server.js dotenv_config_path=.env.loc",
-    "electron": "electron .",
-    "electron-builder": "electron-builder --config ./electron/config.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -72,8 +69,6 @@
     "dotenv": "^4.0.0",
     "dotenv-webpack": "^1.5.4",
     "ejs-loader": "^0.3.0",
-    "electron": "^7.1.9",
-    "electron-builder": "^22.2.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "fastclick": "^1.0.6",
     "file-loader": "^0.11.2",
@@ -89,7 +84,6 @@
     "node-sass": "^4.5.3",
     "nodemon": "^1.12.0",
     "postcss-loader": "^2.0.6",
-    "prettier": "^1.19.1",
     "progress-bar-webpack-plugin": "^1.10.0",
     "qr.js": "0.0.0",
     "ractive": "^0.9.3",
