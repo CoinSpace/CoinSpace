@@ -1,15 +1,16 @@
 #!/usr/bin/env node
+'use strict';
 
 var program = require('commander');
 var fse = require('fs-extra');
 var path = require('path');
-var package = require('../package.json');
+var pkg = require('../package.json');
 var utils = require('./utils');
 var replace = require('replace-in-file');
 var webpack = require('webpack');
 var dotenv = require('dotenv');
 var mobileBuildPath = 'phonegap/build';
-var SENTRY_RELEASE = `${package.name}.ios@${package.version}`;
+var SENTRY_RELEASE = `${pkg.name}.ios@${pkg.version}`;
 
 program
   .name('build-ios.js')
@@ -31,9 +32,9 @@ webpackConfig.plugins.push(
     'process.env.BUILD_TYPE': JSON.stringify('phonegap'),
     'process.env.BUILD_PLATFORM': JSON.stringify('ios'),
     'process.env.SENTRY_RELEASE': JSON.stringify(SENTRY_RELEASE),
-    'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN_IOS)
+    'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN_IOS),
   })
-)
+);
 
 webpack(webpackConfig, function(error, stats) {
   if (error) return console.error(error);
@@ -44,7 +45,7 @@ webpack(webpackConfig, function(error, stats) {
   replace.sync({
     files: path.resolve(mobileBuildPath, 'config.xml'),
     from: 'id="com.coinspace.app"',
-    to: 'id="com.coinspace.wallet"'
+    to: 'id="com.coinspace.wallet"',
   });
   fse.copySync('build', path.resolve(mobileBuildPath, 'www'), {filter: utils.filterMapFiles});
 
@@ -59,6 +60,7 @@ webpack(webpackConfig, function(error, stats) {
   utils.cordova('plugin add cordova-plugin-x-socialsharing@5.2.0');
   utils.cordova('plugin add cordova-plugin-touch-id@3.2.0');
   utils.cordova('plugin add cordova-plugin-customurlscheme@4.3.0 --variable URL_SCHEME=coinspace');
+  // eslint-disable-next-line max-len
   utils.cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#45badb1e6f909bb80592779f7cb6baf6875df3ab');
   utils.cordova('plugin add cordova-plugin-cookiemaster@1.0.5');
   utils.cordova('plugin add cordova-plugin-3dtouch-shortcutitems@1.0.2');

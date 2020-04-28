@@ -1,6 +1,7 @@
+'use strict';
+
 // Modules to control application life and create native browser window
 const { app, shell, BrowserWindow } = require('electron');
-const path = require('path');
 
 // TODO add autoupdater
 

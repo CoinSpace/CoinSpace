@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+'use strict';
 
 var program = require('commander');
 var fse = require('fs-extra');
@@ -43,7 +44,7 @@ function xlf(program) {
     Object.keys(en).forEach(function(key) {
       keys[key] = {
         source: en[key],
-        target: ''
+        target: '',
       };
 
       if (existed[key] && existed[key].target) {
@@ -72,7 +73,7 @@ function json() {
     console.log(js.targetLanguage);
 
     var resource = Object.keys(js.resources)[0];
-    var dest = path.resolve('./app/lib/i18n/translations', resource)
+    var dest = path.resolve('./app/lib/i18n/translations', resource);
 
     var translations = {};
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+'use strict';
 
 var program = require('commander');
 var fse = require('fs-extra');
@@ -28,7 +29,7 @@ var webpackConfig = require('../webpack.prod');
 
 webpackConfig.plugins.push(
   new webpack.DefinePlugin({
-    'process.env.BUILD_TYPE': JSON.stringify('electron')
+    'process.env.BUILD_TYPE': JSON.stringify('electron'),
   })
 );
 

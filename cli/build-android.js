@@ -1,15 +1,16 @@
 #!/usr/bin/env node
+'use strict';
 
 var program = require('commander');
 var fse = require('fs-extra');
 var path = require('path');
-var package = require('../package.json');
+var pkg = require('../package.json');
 var utils = require('./utils');
 var webpack = require('webpack');
 var replace = require('replace-in-file');
 var dotenv = require('dotenv');
 var mobileBuildPath = 'phonegap/build';
-var SENTRY_RELEASE = `${package.name}.android@${package.version}`;
+var SENTRY_RELEASE = `${pkg.name}.android@${pkg.version}`;
 
 program
   .name('build-android.js')
@@ -36,9 +37,9 @@ webpackConfig.plugins.push(
     'process.env.BUILD_TYPE': JSON.stringify('phonegap'),
     'process.env.BUILD_PLATFORM': JSON.stringify('android'),
     'process.env.SENTRY_RELEASE': JSON.stringify(SENTRY_RELEASE),
-    'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN_ANDROID)
+    'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN_ANDROID),
   })
-)
+);
 
 webpack(webpackConfig, function(error, stats) {
   if (error) return console.error(error);
@@ -60,13 +61,14 @@ webpack(webpackConfig, function(error, stats) {
   utils.cordova('plugin add cordova-plugin-x-socialsharing@5.2.0');
   utils.cordova('plugin add cordova-plugin-android-fingerprint-auth@1.4.0');
   utils.cordova('plugin add cordova-plugin-customurlscheme@4.3.0 --variable URL_SCHEME=coinspace');
+  // eslint-disable-next-line max-len
   utils.cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#269d8d9b3f18eccffbf20071a43730c7ac3fd5b0');
   utils.cordova('plugin add cordova-plugin-cookiemaster@1.0.5');
 
   replace.sync({
     files: path.resolve(mobileBuildPath, 'platforms/android/project.properties'),
     from: 'android-26',
-    to: 'android-28'
+    to: 'android-28',
   });
 
   if (program.release) {
