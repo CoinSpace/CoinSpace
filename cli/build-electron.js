@@ -7,7 +7,7 @@ var path = require('path');
 var utils = require('./utils');
 var warning = require('chalk').yellow;
 var webpack = require('webpack');
-var electronBuildPath = 'electron/build';
+var electronBuildPath = 'electron/app';
 
 program
   .name('build-electron.js')
@@ -39,10 +39,10 @@ webpack(webpackConfig, function(error, stats) {
 
   fse.removeSync(electronBuildPath);
   fse.copySync('build', path.resolve(electronBuildPath), {filter: utils.filterMapFiles});
-  if (program.os === 'win') {
+  /*if (program.os === 'win') {
     // copy assets for electron appx installer
     fse.copySync('electron/images/win', path.resolve(`${electronBuildPath}/appx/images`));
-  }
+  }*/
 
   if (program.release) {
     // build electron to electron/dist

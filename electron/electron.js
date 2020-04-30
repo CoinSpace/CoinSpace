@@ -17,7 +17,7 @@ function createWindow() {
     },
   });
 
-  mainWindow.loadFile('./build/index.html');
+  mainWindow.loadFile('./app/index.html');
 
   // set api.moonpay.io cookies
   mainWindow.webContents.session.cookies.set({

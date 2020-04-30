@@ -11,6 +11,6 @@ build/
 docker-compose.dev.yml
 docker-compose.prod.yml
 .vscode/
-electron/build
+electron/app
 electron/dist
 .sentryclirc
