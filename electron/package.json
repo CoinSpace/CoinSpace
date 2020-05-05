@@ -36,10 +36,16 @@
       "publisherDisplayName": "Coin Digital Currency Wallet",
       "applicationId": "CoinWallet",
       "displayName": "Coin Digital Currency Wallet"
+    },
+    "protocols": {
+      "name": "Coin Wallet",
+      "schemes": [
+        "coinspace"
+      ]
     }
   },
   "scripts": {
-    "start": "ELECTRON_ENABLE_LOGGING=true electron .",
+    "start": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "test": "echo \"Error: no test specified\" && exit 1"

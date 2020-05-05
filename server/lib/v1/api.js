@@ -170,7 +170,7 @@ router.delete('/location', restrict, function(req, res) {
 router.get('/shapeShiftRedirectUri', function(req, res) {
   var code = req.query.code || '';
   var buildType = req.query.buildType;
-  if (buildType !== 'phonegap' && buildType !== 'web') return res.status(400).send('Bad request');
+  if (!['web', 'phonegap', 'electron'].includes(buildType)) return res.status(400).send('Bad request');
   shapeshift.getAccessToken(code).then(function(accessToken) {
     res.render('shapeshift', {accessToken: accessToken, buildType: buildType});
   }).catch(function() {
@@ -264,7 +264,7 @@ router.get('/moonpay/countries', function(req, res) {
 router.get('/moonpay/redirectURL', function(req, res) {
   var buildType = req.query.buildType;
   var transactionId = req.query.transactionId || '';
-  if (buildType !== 'phonegap' && buildType !== 'web') return res.status(400).send('Bad request');
+  if (!['web', 'phonegap', 'electron'].includes(buildType)) return res.status(400).send('Bad request');
   res.render('moonpay', {transactionId: transactionId, buildType: buildType});
 });
 

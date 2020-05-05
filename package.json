@@ -17,7 +17,7 @@
     "dev:link": "linklocal -lr",
     "server": "node --expose-gc ./server/server.js",
     "server:watch": "nodemon -w .env.loc -w ./server -x node -r dotenv/config ./server/server.js dotenv_config_path=.env.loc",
-    "lint": "eslint cli/ electron/*.js",
+    "lint": "eslint cli/ electron/*.js webpack.*.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -114,7 +114,7 @@
   "eslintConfig": {
     "extends": ["eslint:recommended"],
     "env": {
-      "es6": true,
+      "es2017": true,
       "node": true,
       "browser": true,
       "commonjs": true,
@@ -125,7 +125,13 @@
         "properties": "never"
       }],
       "semi": 2,
-      "comma-dangle": [2, "always-multiline"],
+      "comma-dangle": [2, {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never"
+      }],
       "indent": [2, 2],
       "no-console": 0,
       "strict": 2,

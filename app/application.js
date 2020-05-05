@@ -79,9 +79,18 @@ window.initCSApp = function() {
     }
   }
 
-  window.handleOpenURL = function(url) {
-    setTimeout(function() {
+  if (process.env.BUILD_TYPE === 'phonegap') {
+    window.handleOpenURL = function(url) {
+      setTimeout(function() {
+        emitter.emit('handleOpenURL', url);
+      }, 1);
+    };
+  }
+
+  if (process.env.BUILD_TYPE === 'electron') {
+    const { ipcRenderer } = require('electron');
+    ipcRenderer.on('handleOpenURL', (event, url) => {
       emitter.emit('handleOpenURL', url);
-    }, 1)
+    });
   }
 }

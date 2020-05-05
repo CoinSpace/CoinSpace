@@ -435,11 +435,14 @@ function open3dSecure(url) {
     options += 'top=' + ((screen.height - height) / 2) + '';
 
     window.localStorage.removeItem('_cs_moonpay_3d_secure');
-    var popup = window.open(url, '_blank', options);
+    var popup = window.open(url, process.env.BUILD_TYPE === 'electron' ? '_modal' : '_blank', options);
     var popupInterval = setInterval(function() {
-      if (popup.closed || hasHandledMobileSuccess) {
+      if ((popup && popup.closed) || hasHandledMobileSuccess) {
         clearInterval(popupInterval);
         hasHandledMobileSuccess = false;
+        if (popup && !popup.closed && popup.close) {
+          popup.close();
+        }
         return resolve(window.localStorage.getItem('_cs_moonpay_3d_secure'));
       }
     }, 250);

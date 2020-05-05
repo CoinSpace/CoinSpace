@@ -1,18 +1,20 @@
+'use strict';
+
 const Dotenv = require('dotenv-webpack');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const autoprefixer = require('autoprefixer');
 const common = require('./webpack.common.js');
-const package = require('./package.json');
+const pkg = require('./package.json');
 
 const dotEnv = new Dotenv({
   path: '.env.loc',
-  safe: true
+  safe: true,
 });
 
 module.exports = merge(common, {
   output: {
-    publicPath: '/'
+    publicPath: '/',
   },
   devServer: {
     disableHostCheck: true,
@@ -25,9 +27,9 @@ module.exports = merge(common, {
         pathRewrite: {
           '^/api/v1' : '/api/v1',
           '^/api' : '',
-        }
+        },
       },
-    }
+    },
   },
   module: {
     rules: [
@@ -35,23 +37,23 @@ module.exports = merge(common, {
         test: /\.(sass|scss)$/,
         use: [
           {
-            loader: 'style-loader'
+            loader: 'style-loader',
           },
           {
-            loader: 'css-loader'
+            loader: 'css-loader',
           },
           {
             loader: 'postcss-loader',
             options: {
               plugins: [
-                autoprefixer
-              ]
-            }
+                autoprefixer,
+              ],
+            },
           },
           {
-            loader: 'sass-loader'
-          }
-        ]
+            loader: 'sass-loader',
+          },
+        ],
       },
     ],
   },
@@ -60,8 +62,9 @@ module.exports = merge(common, {
     new webpack.NamedModulesPlugin(),
     dotEnv,
     new webpack.DefinePlugin({
-      'process.env.SENTRY_RELEASE': JSON.stringify(`${package.name}.web@${package.version}`),
-      'process.env.SENTRY_DSN': dotEnv.definitions['process.env.SENTRY_DSN_WEB']
-    })
-  ]
+      'process.env.BUILD_TYPE': JSON.stringify('web'),
+      'process.env.SENTRY_RELEASE': JSON.stringify(`${pkg.name}.web@${pkg.version}`),
+      'process.env.SENTRY_DSN': dotEnv.definitions['process.env.SENTRY_DSN_WEB'],
+    }),
+  ],
 });

@@ -31,11 +31,14 @@ function open(data) {
   ractive.on('confirm', function() {
     ractive.set('isLoading', true);
 
-    var redirectURL = process.env.SITE_URL + 'moonpay/redirectURL?buildType=web';
-    if (process.env.BUILD_TYPE === 'phonegap') {
-      redirectURL = process.env.SITE_URL + 'moonpay/redirectURL?buildType=phonegap';
+    var redirectURL;
+    console.log('process.env.BUILD_TYPE', process.env.BUILD_TYPE);
+    // TODO switch phonegap too
+    if (process.env.BUILD_TYPE === 'electron') {
+      redirectURL =  'coinspace://?action=moonpay-3d-secure';
+    } else {
+      redirectURL = process.env.SITE_URL + 'moonpay/redirectURL?buildType=' + process.env.BUILD_TYPE;
     }
-
     return moonpay.createTx({
       baseCurrencyAmount: data.fiatAmount,
       areFeesIncluded: true,

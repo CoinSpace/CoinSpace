@@ -34,16 +34,20 @@ function login() {
     options += 'left=' + ((screen.width - width) / 2) + ', ';
     options += 'top=' + ((screen.height - height) / 2) + '';
     var clientId = process.env.SHAPESHIFT_CLIENT_ID;
-    var redirectUri = process.env.SITE_URL + 'shapeShiftRedirectUri?buildType=web';
-    if (process.env.BUILD_TYPE === 'phonegap') {
-      redirectUri = process.env.SITE_URL + 'shapeShiftRedirectUri?buildType=phonegap';
-    }
+    var redirectUri = process.env.SITE_URL + 'shapeShiftRedirectUri?buildType=' + process.env.BUILD_TYPE;
     cleanAccessToken();
-    var popup = window.open(urlAuthRoot + 'oauth/authorize?response_type=code&scope=users:read&client_id=' + clientId + '&redirect_uri=' + redirectUri, '_blank', options);
+    var url = urlAuthRoot + 'oauth/authorize?response_type=code&scope=users:read&client_id=' + clientId + '&redirect_uri=' + redirectUri;
+    var popup = window.open(url, '_blank', options);
+    // TODO rewrite to handle unload event in web and deep link in phonegap and electron
+    // TODO add reasonable timeout
     var popupInterval = setInterval(function() {
-      if (popup.closed || hasHandledMobileLogin) {
+      // popout is undefined in electron
+      if ((popup && popup.closed) || hasHandledMobileLogin) {
         clearInterval(popupInterval);
         hasHandledMobileLogin = false;
+        if (popup && !popup.closed && popup.close) {
+          popup.close();
+        }
         var token = getAccessToken();
         if (!token) return reject(new Error('empty_token'));
         if (token === 'is_not_verified') {

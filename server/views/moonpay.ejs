@@ -16,6 +16,8 @@
     window.close();
   } else if (buildType === 'phonegap') {
     window.location = 'coinspace://?action=moonpay-3d-secure&transactionId=' + transactionId;
+  } else if (buildType === 'electron') {
+    window.location = 'coinspace://?action=moonpay-3d-secure&transactionId=' + transactionId;
   }
 </script>
 </body>

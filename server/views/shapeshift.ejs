@@ -16,6 +16,8 @@
     window.close();
   } else if (buildType === 'phonegap') {
     window.location = 'coinspace://?action=shapeshift-login&accessToken=' + accessToken;
+  } else if (buildType === 'electron') {
+    window.location = 'coinspace://?action=shapeshift-login&accessToken=' + accessToken;
   }
 </script>
 </body>

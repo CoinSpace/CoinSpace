@@ -1,8 +1,12 @@
+'use strict';
+
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+  // we should use web build for electron too
+  //target: process.env.BUILD_TYPE === 'electron' ? 'electron-renderer' : 'web',
   entry: {
     loader: './app/loader/index.js',
   },
@@ -13,15 +17,18 @@ module.exports = {
   },
   node: {
     net: 'empty',
-    tls: 'empty'
+    tls: 'empty',
+  },
+  externals: {
+    electron: 'commonjs electron',
   },
   resolve: {
     alias: {
       lib: path.resolve(__dirname, 'app/lib'),
       pages: path.resolve(__dirname, 'app/pages'),
       widgets: path.resolve(__dirname, 'app/widgets'),
-      modernizr$: path.resolve(__dirname, '.modernizrrc')
-    }
+      modernizr$: path.resolve(__dirname, '.modernizrrc'),
+    },
   },
   module: {
     rules: [
@@ -30,37 +37,37 @@ module.exports = {
         loader: 'file-loader',
         options: {
           name: '[path][name].[hash:8].[ext]',
-          context: './app/'
-        }
+          context: './app/',
+        },
       },
       {
         test:/\.ract$/,
-        use: ['ractive-loader']
+        use: ['ractive-loader'],
       },
       {
         test: /\.modernizrrc$/,
-        use: ['modernizr-loader', 'json-loader']
-      }
+        use: ['modernizr-loader', 'json-loader'],
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       chunks: ['loader'],
-      template: 'app/index.ejs'
+      template: 'app/index.ejs',
     }),
     new HtmlWebpackPlugin({
       inject: false,
       template: 'app/apple-app-site-association.ejs',
-      filename: 'apple-app-site-association'
+      filename: 'apple-app-site-association',
     }),
     new HtmlWebpackPlugin({
       inject: false,
       template: 'app/apple-app-site-association.ejs',
-      filename: '.well-known/apple-app-site-association'
+      filename: '.well-known/apple-app-site-association',
     }),
     new CopyWebpackPlugin([
       {from: 'app/security.txt', to: './'},
       {from: 'app/assets/icons/favicon.ico', to: './'},
-    ])
-  ]
+    ]),
+  ],
 };

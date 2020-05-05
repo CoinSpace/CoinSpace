@@ -1,3 +1,5 @@
+'use strict';
+
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -14,7 +16,7 @@ const envFile = process.env.ENV_FILE ? process.env.ENV_FILE : '.env.prod';
 
 var config = merge(common, {
   output: {
-    publicPath: '/'
+    publicPath: '/',
   },
   devtool: 'hidden-source-map',
   module: {
@@ -30,18 +32,18 @@ var config = merge(common, {
           /node_modules\/eosjs/,
           /node_modules\/js-xdr/,
           /node_modules\/clipboard/,
-          /node_modules\/@sentry/
+          /node_modules\/@sentry/,
         ],
         use: {
           loader: 'babel-loader',
           options: {
             presets: [[
               'env', {
-                useBuiltIns: 'entry'
-              }
+                useBuiltIns: 'entry',
+              },
             ]],
-          }
-        }
+          },
+        },
       },
       {
         test: /\.(sass|scss)$/,
@@ -50,33 +52,33 @@ var config = merge(common, {
             {
               loader: 'css-loader',
               options: {
-                minimize: true
-              }
+                minimize: true,
+              },
             },
             {
               loader: 'postcss-loader',
               options: {
                 plugins: [
-                  autoprefixer
-                ]
-              }
+                  autoprefixer,
+                ],
+              },
             },
             {
-              loader: 'sass-loader'
-            }
+              loader: 'sass-loader',
+            },
           ],
           fallback: 'style-loader',
-          publicPath: '../../'
-        })
+          publicPath: '../../',
+        }),
       },
-    ]
+    ],
   },
   plugins: [
     new CleanWebpackPlugin(['./build'], {verbose: false}),
     new ProgressBarPlugin(),
     new Dotenv({
       path: envFile,
-      safe: true
+      safe: true,
     }),
     new UglifyJSPlugin({
       sourceMap: true,
@@ -86,19 +88,22 @@ var config = merge(common, {
             'LedgerVersionError', 'ConnectionError', 'NotConnectedError',
             'DisconnectedError', 'TimeoutError', 'ResponseFormatError',
             'ValidationError', 'NotFoundError', 'MissingLedgerHistoryError',
-            'PendingLedgerVersionError'
-          ]
-        }
-      }
+            'PendingLedgerVersionError',
+          ],
+        },
+      },
     }),
     new ExtractTextPlugin({
       filename: 'assets/css/all.[contenthash:8].css',
       allChunks: true,
     }),
     new CopyWebpackPlugin([
-      {from: `app/apple-developer-merchantid-domain-association.${process.env.ENV}.txt`, to: '.well-known/apple-developer-merchantid-domain-association.txt'},
-    ])
-  ]
+      {
+        from: `app/apple-developer-merchantid-domain-association.${process.env.ENV}.txt`,
+        to: '.well-known/apple-developer-merchantid-domain-association.txt',
+      },
+    ]),
+  ],
 });
 
 if (process.env.BUILD_TYPE === 'phonegap') {

@@ -24,11 +24,13 @@ console.log('Start building (webpack)...');
 
 process.env['ENV_FILE'] = envFile;
 process.env['ENV'] = program.env;
+process.env['BUILD_TYPE'] = 'web';
 
 var webpackConfig = require('../webpack.prod');
 
 webpackConfig.plugins.push(
   new webpack.DefinePlugin({
+    'process.env.BUILD_TYPE': JSON.stringify('web'),
     'process.env.SENTRY_RELEASE': JSON.stringify(SENTRY_RELEASE),
     'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN_WEB),
   })
