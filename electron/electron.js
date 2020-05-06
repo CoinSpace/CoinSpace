@@ -2,9 +2,17 @@
 
 // Modules to control application life and create native browser window
 const { app, shell, BrowserWindow, protocol } = require('electron');
+const Sentry = require('@sentry/electron');
 
 // Assign env variables
 Object.assign(process.env, require('./app/env.json'));
+
+// Init crashReporter
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  environment: process.env.SENTRY_ENVIRONMENT,
+  release: process.env.SENTRY_RELEASE,
+});
 
 // Suppress deprecation warning
 app.allowRendererProcessReuse = true;

@@ -1,35 +1,46 @@
 #!/usr/bin/env node
 'use strict';
 
-var program = require('commander');
-var fse = require('fs-extra');
-var path = require('path');
-var utils = require('./utils');
-var warning = require('chalk').yellow;
-var webpack = require('webpack');
-var electronBuildPath = 'electron/app';
+const program = require('commander');
+const fse = require('fs-extra');
+const path = require('path');
+const pkg = require('../package.json');
+const utils = require('./utils');
+const warning = require('chalk').yellow;
+const webpack = require('webpack');
+const dotenv = require('dotenv');
+const electronBuildPath = 'electron/app';
+
 
 program
   .name('build-electron.js')
   .option('-e, --env <env>', 'environment', 'dev')
   .option('--release', 'release mode')
   .option('--run', 'debug mode')
-  .option('-o, --os <os>', 'os', 'win')
+  .option('-o, --os <os>', 'os', 'mac')
   .parse(process.argv);
 
-var envFile = `.env.${program.env}`;
-console.log(`ENV_FILE: ${warning(envFile)}`);
+if (!['win', 'mac', 'linux'].includes(program.os)) {
+  console.error(`Unsupported OS: ${program.os}`);
+  process.exit(1);
+}
 
 console.log('Start building (webpack)...');
 
+const envFile = `.env.${program.env}`;
+console.log(`ENV_FILE: ${warning(envFile)}`);
+
+dotenv.config({path: envFile});
 process.env['ENV_FILE'] = envFile;
 process.env['ENV'] = program.env;
 process.env['BUILD_TYPE'] = 'electron';
-var webpackConfig = require('../webpack.prod');
+const webpackConfig = require('../webpack.prod');
 
 webpackConfig.plugins.push(
   new webpack.DefinePlugin({
     'process.env.BUILD_TYPE': JSON.stringify('electron'),
+    'process.env.SENTRY_DSN': JSON.stringify(process.env[`SENTRY_DSN_${program.os.toUpperCase()}`]),
+    'process.env.SENTRY_RELEASE': JSON.stringify(`${pkg.name}.electron-${program.os}@${pkg.version}`),
   })
 );
 
