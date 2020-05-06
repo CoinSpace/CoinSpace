@@ -112,7 +112,9 @@
     "npm": "^6.13.4"
   },
   "eslintConfig": {
-    "extends": ["eslint:recommended"],
+    "extends": [
+      "eslint:recommended"
+    ],
     "env": {
       "es2017": true,
       "node": true,
@@ -121,26 +123,44 @@
       "mocha": true
     },
     "rules": {
-      "camelcase": [2, {
-        "properties": "never"
-      }],
+      "camelcase": [
+        2,
+        {
+          "properties": "never"
+        }
+      ],
       "semi": 2,
-      "comma-dangle": [2, {
-        "arrays": "always-multiline",
-        "objects": "always-multiline",
-        "imports": "always-multiline",
-        "exports": "always-multiline",
-        "functions": "never"
-      }],
-      "indent": [2, 2],
+      "comma-dangle": [
+        2,
+        {
+          "arrays": "always-multiline",
+          "objects": "always-multiline",
+          "imports": "always-multiline",
+          "exports": "always-multiline",
+          "functions": "never"
+        }
+      ],
+      "indent": [
+        2,
+        2
+      ],
       "no-console": 0,
       "strict": 2,
-      "max-len": [2, 120],
+      "max-len": [
+        2,
+        120
+      ],
       "keyword-spacing": 2,
-      "curly": [2, "multi-line"],
-      "no-unused-vars": [2, {
-        "vars": "all"
-      }]
+      "curly": [
+        2,
+        "multi-line"
+      ],
+      "no-unused-vars": [
+        2,
+        {
+          "vars": "all"
+        }
+      ]
     }
   }
 }

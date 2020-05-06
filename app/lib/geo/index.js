@@ -57,12 +57,18 @@ function getLocation(callback) {
     callback(new Error('Unable to retrieve your location'))
   }
 
-  window.navigator.geolocation.getCurrentPosition(success, error)
+  window.navigator.geolocation.getCurrentPosition(success, error, process.env.BUILD_TYPE === 'electron' ? {
+    enableHighAccuracy: true,
+  } : {});
 }
 
 function requestLocationEndpoint(network, method, callback) {
   getLocation(function(err, lat, lon) {
     if (err) return callback(err);
+
+    if (process.env.NODE_ENV === 'development') {
+      console.info(`Current location: https://www.google.com/maps/place/${lat},${lon}`);
+    }
 
     var doc = db.get();
     userInfo = {};

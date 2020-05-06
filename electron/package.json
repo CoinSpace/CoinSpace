@@ -43,7 +43,8 @@
       "schemes": [
         "coinspace"
       ]
-    }
+    },
+    "afterSign": "./notarize.js"
   },
   "scripts": {
     "start": "electron .",
@@ -53,6 +54,7 @@
   },
   "devDependencies": {
     "electron": "^8.2.4",
-    "electron-builder": "^22.5.1"
+    "electron-builder": "^22.5.1",
+    "electron-notarize": "^0.3.0"
   }
 }

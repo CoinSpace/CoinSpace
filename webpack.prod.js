@@ -14,7 +14,7 @@ const path = require('path');
 
 const envFile = process.env.ENV_FILE ? process.env.ENV_FILE : '.env.prod';
 
-var config = merge(common, {
+const config = merge(common, {
   output: {
     publicPath: '/',
   },
@@ -117,6 +117,11 @@ if (process.env.BUILD_TYPE === 'phonegap') {
 
   config.output.publicPath = '';
 } else if (process.env.BUILD_TYPE === 'electron') {
+  config.plugins.push(new HtmlWebpackPlugin({
+    inject: false,
+    template: 'electron/env.ejs',
+    filename: 'env.json',
+  }));
   config.output.publicPath = './';
 }
 

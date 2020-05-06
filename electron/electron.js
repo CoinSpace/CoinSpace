@@ -3,6 +3,12 @@
 // Modules to control application life and create native browser window
 const { app, shell, BrowserWindow, protocol } = require('electron');
 
+// Assign env variables
+Object.assign(process.env, require('./app/env.json'));
+
+// Suppress deprecation warning
+app.allowRendererProcessReuse = true;
+
 // Keep reference to IPC
 let mainWindow;
 
