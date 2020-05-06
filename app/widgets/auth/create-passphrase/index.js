@@ -4,11 +4,12 @@ var Ractive = require('../auth')
 var _ = require('lodash');
 var createPassphraseConfirmPage = require('../create-passphrase-confirm')
 var Clipboard = require('clipboard')
-function confirm(data) {
+function confirm(prevPage, data) {
   var ractive = new Ractive({
     partials: {
       header: require('./header.ract'),
-      actions: require('./actions.ract')
+      actions: require('./actions.ract'),
+      footer: require('./footer.ract')
     },
     data: {
       passphrase: data.mnemonic,
@@ -37,7 +38,13 @@ function confirm(data) {
 
   ractive.on('confirm', function() {
     data.randomIndexes = _.shuffle(_.range(12));
-    createPassphraseConfirmPage(confirm, data)
+    createPassphraseConfirmPage(function() {
+      confirm(prevPage, data);
+    }, data);
+  })
+
+  ractive.on('back', function() {
+    if (prevPage) prevPage();
   })
 
   return ractive

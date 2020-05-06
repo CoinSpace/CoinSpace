@@ -37,7 +37,7 @@ function confirm(prevPage, data) {
   });
 
   ractive.on('back', function() {
-    if (prevPage) prevPage(data);
+    if (prevPage) prevPage();
   });
 
   ractive.on('confirm', function() {

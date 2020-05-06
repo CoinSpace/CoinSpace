@@ -5,7 +5,7 @@ var CS = require('lib/wallet')
 var createPassphrasePage = require('../create-passphrase')
 var showError = require('widgets/modals/flash').showError
 
-module.exports = function(prevPage){
+module.exports = function createIntro(prevPage) {
   var ractive = new Ractive({
     partials: {
       header: require('./header.ract'),
@@ -15,7 +15,7 @@ module.exports = function(prevPage){
   })
 
   ractive.on('back', function(){
-    prevPage()
+    if (prevPage) prevPage();
   })
 
   ractive.on('generate-phrase', function(){
@@ -23,7 +23,9 @@ module.exports = function(prevPage){
     ractive.set('progress', 'Generating')
     CS.createWallet(null, this.getTokenNetwork(), function(err, data) {
       if(err) return showError(err);
-      createPassphrasePage(data)
+      createPassphrasePage(function() {
+        createIntro(prevPage);
+      }, data);
     })
   })
 
