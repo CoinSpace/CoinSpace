@@ -2,6 +2,10 @@
 
 // Modules to control application life and create native browser window
 const { app, shell, BrowserWindow, protocol } = require('electron');
+
+// Set up Application Menu
+require('./menu');
+
 const Sentry = require('@sentry/electron');
 
 // Assign env variables
