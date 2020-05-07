@@ -1,22 +1,21 @@
 'use strict';
 
-// Modules to control application life and create native browser window
-const { app, shell, BrowserWindow, protocol } = require('electron');
-
-// Set up Application Menu
-require('./menu');
-
-const Sentry = require('@sentry/electron');
-
 // Assign env variables
 Object.assign(process.env, require('./app/env.json'));
 
+// Modules to control application life and create native browser window
+const { app, shell, BrowserWindow, protocol } = require('electron');
+
 // Init crashReporter
+const Sentry = require('@sentry/electron');
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
   environment: process.env.SENTRY_ENVIRONMENT,
   release: process.env.SENTRY_RELEASE,
 });
+
+// Set up Application Menu
+require('./menu');
 
 // Suppress deprecation warning
 app.allowRendererProcessReuse = true;
