@@ -82,6 +82,7 @@ module.exports = function(el) {
   emitter.on('wallet-ready', function() {
     isSyncing = false;
     var wallet = getWallet();
+    network = wallet.networkName;
     ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
     if (ractive.el.classList.contains('current')) loadTxs();
   })
