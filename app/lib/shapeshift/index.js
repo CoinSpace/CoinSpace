@@ -39,7 +39,7 @@ function login() {
       redirectUri = process.env.SITE_URL + 'shapeShiftRedirectUri?buildType=phonegap';
     }
     cleanAccessToken();
-    var popup = window.open(urlAuthRoot + 'oauth/authorize?response_type=code&scope=users:read&client_id=' + clientId + '&redirect_uri=' + redirectUri, '_system', options);
+    var popup = window.open(urlAuthRoot + 'oauth/authorize?response_type=code&scope=users:read&client_id=' + clientId + '&redirect_uri=' + redirectUri, '_blank', options);
     var popupInterval = setInterval(function() {
       if (popup.closed || hasHandledMobileLogin) {
         clearInterval(popupInterval);

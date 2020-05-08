@@ -18,6 +18,7 @@ var qrcode = require('lib/qrcode');
 var initEosSetup = require('widgets/eos/setup');
 var toUnitString = require('lib/convert').toUnitString;
 var toAtom = require('lib/convert').toAtom;
+var translate = require('lib/i18n').translate;
 
 module.exports = function(el){
   var selectedFiat = '';
@@ -313,7 +314,8 @@ module.exports = function(el){
 
   ractive.on('help-fee', function() {
     showTooltip({
-      message: "Amount of coins that is charged from your balance for single transaction (<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;\">more info</a>).",
+      message: 'Amount of coins that is charged from your balance for single transaction (:url).',
+      interpolations: {url: "<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees', '_blank'); return false;\">" + translate('more info') + "</a>"},
       isHTML: true
     })
   })

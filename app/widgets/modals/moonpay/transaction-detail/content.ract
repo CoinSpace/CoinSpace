@@ -27,27 +27,27 @@
         {{#if tx.cryptoTransactionId}}
           <h3 class="_title">{{translate("Transaction Id:")}}</h3>
           {{#if tx.currencyCode === 'BTC'}}
-          <a href="" onclick="window.open('https://blockchair.com/bitcoin/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          <a href="" onclick="window.open('https://blockchair.com/bitcoin/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_blank'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
           {{elseif tx.currencyCode === 'BCH'}}
-          <a href="" onclick="window.open('https://blockchair.com/bitcoin-cash/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          <a href="" onclick="window.open('https://blockchair.com/bitcoin-cash/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_blank'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
           {{elseif tx.currencyCode === 'BSV'}}
-          <a href="" onclick="window.open('https://blockchair.com/bitcoin-sv/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          <a href="" onclick="window.open('https://blockchair.com/bitcoin-sv/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_blank'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
           {{elseif tx.currencyCode === 'ETH'}}
-          <a href="" onclick="window.open('https://blockchair.com/ethereum/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          <a href="" onclick="window.open('https://blockchair.com/ethereum/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_blank'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
           {{elseif tx.currencyCode === 'USDT'}}
-          <a href="" onclick="window.open('https://blockchair.com/ethereum/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          <a href="" onclick="window.open('https://blockchair.com/ethereum/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_blank'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
           {{elseif tx.currencyCode === 'LTC'}}
-          <a href="" onclick="window.open('https://blockchair.com/litecoin/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          <a href="" onclick="window.open('https://blockchair.com/litecoin/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_blank'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
           {{elseif tx.currencyCode === 'DOGE'}}
-          <a href="" onclick="window.open('https://blockchair.com/dogecoin/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          <a href="" onclick="window.open('https://blockchair.com/dogecoin/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_blank'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
           {{elseif tx.currencyCode === 'DASH'}}
-          <a href="" onclick="window.open('https://blockchair.com/dash/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          <a href="" onclick="window.open('https://blockchair.com/dash/transaction/{{tx.cryptoTransactionId}}?from=coinwallet', '_blank'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
           {{elseif tx.currencyCode === 'XRP'}}
-          <a href="" onclick="window.open('https://xrpcharts.ripple.com/#/transactions/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          <a href="" onclick="window.open('https://xrpcharts.ripple.com/#/transactions/{{tx.cryptoTransactionId}}', '_blank'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
           {{elseif tx.currencyCode === 'XLM'}}
-          <a href="" onclick="window.open('https://stellar.expert/explorer/public/tx/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          <a href="" onclick="window.open('https://stellar.expert/explorer/public/tx/{{tx.cryptoTransactionId}}', '_blank'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
           {{elseif tx.currencyCode === 'EOS'}}
-          <a href="" onclick="window.open('https://bloks.io/transaction/{{tx.cryptoTransactionId}}', '_system'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
+          <a href="" onclick="window.open('https://bloks.io/transaction/{{tx.cryptoTransactionId}}', '_blank'); return false;" class="_value">{{tx.cryptoTransactionId}}</a>
           {{else}}
           <div class="_value">{{tx.cryptoTransactionId}}</div>
           {{/if}}

@@ -435,7 +435,7 @@ function open3dSecure(url) {
     options += 'top=' + ((screen.height - height) / 2) + '';
 
     window.localStorage.removeItem('_cs_moonpay_3d_secure');
-    var popup = window.open(url, '_system', options);
+    var popup = window.open(url, '_blank', options);
     var popupInterval = setInterval(function() {
       if (popup.closed || hasHandledMobileSuccess) {
         clearInterval(popupInterval);

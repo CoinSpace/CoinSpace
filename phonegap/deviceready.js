@@ -10,6 +10,10 @@ function onDeviceReady() {
 
   if (window.shortcutItem) window.shortcutItem.initialize();
 
+  window.open = function(url, target, options) {
+    return cordova.InAppBrowser.open(url, '_system', options);
+  }
+
   return import(
     /* webpackChunkName: 'loader' */
     '../app/loader'

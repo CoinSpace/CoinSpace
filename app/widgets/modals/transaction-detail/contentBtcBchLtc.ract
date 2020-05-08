@@ -20,17 +20,17 @@
 
       <h3 class="_title">{{translate("Transaction Id:")}}</h3>
       {{#if isNetwork('bitcoin')}}
-      <a href="" onclick="window.open('https://blockchair.com/bitcoin/transaction/{{id}}?from=coinwallet', '_system'); return false;" class="_value">{{id}}</a>
+      <a href="" onclick="window.open('https://blockchair.com/bitcoin/transaction/{{id}}?from=coinwallet', '_blank'); return false;" class="_value">{{id}}</a>
       {{elseif isNetwork('bitcoincash')}}
-      <a href="" onclick="window.open('https://blockchair.com/bitcoin-cash/transaction/{{id}}?from=coinwallet', '_system'); return false;" class="_value">{{id}}</a>
+      <a href="" onclick="window.open('https://blockchair.com/bitcoin-cash/transaction/{{id}}?from=coinwallet', '_blank'); return false;" class="_value">{{id}}</a>
       {{elseif isNetwork('bitcoinsv')}}
-      <a href="" onclick="window.open('https://blockchair.com/bitcoin-sv/transaction/{{id}}?from=coinwallet', '_system'); return false;" class="_value">{{id}}</a>
+      <a href="" onclick="window.open('https://blockchair.com/bitcoin-sv/transaction/{{id}}?from=coinwallet', '_blank'); return false;" class="_value">{{id}}</a>
       {{elseif isNetwork('litecoin')}}
-      <a href="" onclick="window.open('https://blockchair.com/litecoin/transaction/{{id}}?from=coinwallet', '_system'); return false;" class="_value">{{id}}</a>
+      <a href="" onclick="window.open('https://blockchair.com/litecoin/transaction/{{id}}?from=coinwallet', '_blank'); return false;" class="_value">{{id}}</a>
       {{elseif isNetwork('dogecoin')}}
-      <a href="" onclick="window.open('https://blockchair.com/dogecoin/transaction/{{id}}?from=coinwallet', '_system'); return false;" class="_value">{{id}}</a>
+      <a href="" onclick="window.open('https://blockchair.com/dogecoin/transaction/{{id}}?from=coinwallet', '_blank'); return false;" class="_value">{{id}}</a>
       {{elseif isNetwork('dash')}}
-      <a href="" onclick="window.open('https://blockchair.com/dash/transaction/{{id}}?from=coinwallet', '_system'); return false;" class="_value">{{id}}</a>
+      <a href="" onclick="window.open('https://blockchair.com/dash/transaction/{{id}}?from=coinwallet', '_blank'); return false;" class="_value">{{id}}</a>
 			{{/if}}
 
       <h3 class="_title">{{translate("Transaction Fee:")}}</h3>

@@ -4,13 +4,13 @@
       {{>svg_close}}
     </span>
     {{#if isHTML}}
-    <p class="tooltip__message">{{{translate(message)}}}</p>
+    <p class="tooltip__message">{{{translate(message, interpolations)}}}</p>
     {{else}}
-    <p class="tooltip__message">{{translate(message)}}</p>
+    <p class="tooltip__message">{{translate(message, interpolations)}}</p>
     {{/if}}
     {{#if bottomLink}}
     <p class="tooltip__link">
-      <a href="{{bottomLink.url}}" target="_blank">{{translate(bottomLink.text)}}</a>
+      <a href="" onclick="window.open('{{bottomLink.url}}', '_blank'); return false;">{{translate(bottomLink.text)}}</a>
     </p>
     {{/if}}
   </div>
