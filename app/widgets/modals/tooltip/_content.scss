@@ -42,73 +42,7 @@
   }
 
   a {
-    color: $brand-green;
-    &:active {
-      text-decoration: underline;
-    }
-  }
-}
-
-.litecoin {
-  .tooltip__link {
-    a {
-      color: $silver;
-    }
-  }
-}
-.dogecoin {
-  .tooltip__link {
-    a {
-      color: $dogecoin;
-    }
-  }
-}
-.dash {
-  .tooltip__link {
-    a {
-      color: $dash;
-    }
-  }
-}
-.ethereum {
-  .tooltip__link {
-    a {
-      color: $ethereal;
-    }
-  }
-}
-.ripple {
-  .tooltip__link {
-    a {
-      color: $ripple;
-    }
-  }
-}
-.stellar {
-  .tooltip__link {
-    a {
-      color: $stellar;
-    }
-  }
-}
-.eos {
-  .tooltip__link {
-    a {
-      color: $eos;
-    }
-  }
-}
-.bitcoincash {
-  .tooltip__link {
-    a {
-      color: $bitcoincash;
-    }
-  }
-}
-.bitcoinsv {
-  .tooltip__link {
-    a {
-      color: $bitcoinsv;
-    }
+    color: #333;
+    text-decoration: underline;
   }
 }
