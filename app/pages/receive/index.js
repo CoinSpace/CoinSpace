@@ -125,7 +125,7 @@ module.exports = function(el) {
   ractive.on('help-address-type', function() {
     showTooltip({
       message: 'Not all address types are fully compatible on all platforms, so it is important to use a compatible address (:url).',
-      interpolations: {url: "<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-address-types', '_blank'); return false;\">" + translate('more info') + "</a>"},
+      interpolations: {url: "<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-address-types/', '_blank'); return false;\">" + translate('more info') + "</a>"},
       isHTML: true
     })
   })
