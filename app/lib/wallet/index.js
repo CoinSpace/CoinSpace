@@ -183,6 +183,7 @@ function initWallet(networkName, done) {
     options.externalAccount = accounts.externalAccount;
     options.internalAccount = accounts.internalAccount;
     options.minConf = 3;
+    options.addressType = db.get(networkName + '.addressType') || 'p2pkh';
     if (networkName === 'bitcoincash') {
       options.minConf = 0;
     }

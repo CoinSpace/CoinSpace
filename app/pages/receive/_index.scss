@@ -4,9 +4,47 @@
     @include breakpoint(portrait) {
       font-size: 20px;
     }
+    position: relative;
   }
   .hidden {
     display: none;
+  }
+  ._select_container {
+    display: inline-block;
+    position: relative;
+    text-decoration: underline;
+    padding: 0 5px;
+    select {
+      position: absolute;
+      opacity: 0;
+      left: 0;
+      top: -5px;
+      @include breakpoint(portrait) {
+        top: 0;
+      }
+    }
+  }
+  ._help {
+    @include clickbtn;
+    position: absolute;
+    top: 0;
+    right: -5px;
+    font-size: 12px;
+    text-align: center;
+    width: 26px;
+    height: 26px;
+    padding: 4px;
+    opacity: 0.4;
+    @include breakpoint(portrait) {
+      width: 32px;
+      height: 32px;
+    }
+    &:hover {
+      opacity: 0.7;
+    }
+    .svg-help {
+      fill: #333;
+    }
   }
 }
 
@@ -76,34 +114,6 @@
 
 .receive__label {
   position: relative;
-
-  ._help {
-    @include clickbtn;
-    position: absolute;
-    top: 0;
-    right: -5px;
-    font-size: 12px;
-    text-align: center;
-    width: 26px;
-    height: 26px;
-    padding: 4px;
-    opacity: 0.4;
-
-    @include breakpoint(portrait) {
-      width: 32px;
-      height: 32px;
-    }
-
-
-    &:hover {
-      opacity: 0.7;
-    }
-
-    .svg-help {
-      fill: #333;
-    }
-  }
-
 }
 
 .geo__box {

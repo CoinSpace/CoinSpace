@@ -78,7 +78,7 @@
         left: 0;
         top: -5px;
         @include breakpoint(portrait) {
-          top: 0
+          top: 0;
         }
       }
     }

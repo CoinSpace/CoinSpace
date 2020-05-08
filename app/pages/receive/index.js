@@ -11,8 +11,10 @@ var showSetDetails = require('widgets/modals/set-details')
 var getTokenNetwork = require('lib/token').getTokenNetwork;
 var qrcode = require('lib/qrcode')
 var initEosSetup = require('widgets/eos/setup');
+var db = require('lib/db');
+var translate = require('lib/i18n').translate;
 
-module.exports = function(el){
+module.exports = function(el) {
   var ractive = new Ractive({
     el: el,
     template: require('./index.ract'),
@@ -22,7 +24,21 @@ module.exports = function(el){
       btn_message: 'Turn Mecto on',
       connecting: false,
       broadcasting: false,
-      isPhonegap: process.env.BUILD_TYPE === 'phonegap'
+      isPhonegap: process.env.BUILD_TYPE === 'phonegap',
+      addressTypes: [],
+      addressType: '',
+      getAddressTypeLabel: function(type) {
+        if (type === 'p2pkh') return '(P2PKH)';
+        if (type === 'p2sh') return '(P2SH)';
+        if (type === 'p2wpkh') return '(Bech32)';
+        return '-';
+      },
+      getAddressTypeOption: function(type) {
+        if (type === 'p2pkh') return translate('P2PKH - Legacy');
+        if (type === 'p2sh') return translate('P2SH - SegWit compatible');
+        if (type === 'p2wpkh') return translate('Bech32 - SegWit native');
+        return '-';
+      }
     }
   })
 
@@ -31,13 +47,22 @@ module.exports = function(el){
   emitter.on('wallet-ready', function() {
     var wallet = CS.getWallet();
     ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
-    ractive.set('address', getAddress());
-    showQRcode();
-  })
 
-  emitter.on('tx-sent', function() {
-    ractive.set('address', getAddress());
-    showQRcode();
+    var addressTypes = (wallet.network && wallet.network.addressTypes) || [];
+    ractive.set('addressTypes', addressTypes);
+    ractive.set('addressType', wallet.addressType);
+    showAddress();
+  })
+  emitter.on('tx-sent', showAddress);
+  emitter.on('change-address-type', showAddress);
+
+  ractive.on('change-address-type', function() {
+    var wallet = CS.getWallet();
+    var addressType = ractive.get('addressType');
+    db.set(wallet.networkName + '.addressType', addressType).then(function() {
+      wallet.addressType = addressType;
+      emitter.emit('change-address-type');
+    }).catch(console.error);
   });
 
   ractive.on('toggle-broadcast', function() {
@@ -55,13 +80,13 @@ module.exports = function(el){
     }
   })
 
-  function showQRcode(){
+  function showQRcode(address) {
     if (ractive.get('isPhonegap')) {
       var canvas = document.getElementById('qr_canvas');
       while (canvas.hasChildNodes()) {
         canvas.removeChild(canvas.firstChild);
       }
-      var qr = qrcode.encode(getTokenNetwork() + ':' + getAddress());
+      var qr = qrcode.encode(getTokenNetwork() + ':' + address);
       canvas.appendChild(qr);
     }
   }
@@ -97,14 +122,24 @@ module.exports = function(el){
     }
   })
 
+  ractive.on('help-address-type', function() {
+    showTooltip({
+      message: 'Not all address types are fully compatible on all platforms, so it is important to use a compatible address (:url).',
+      interpolations: {url: "<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-address-types', '_blank'); return false;\">" + translate('more info') + "</a>"},
+      isHTML: true
+    })
+  })
+
   ractive.on('help-mecto', function() {
     showTooltip({
       message: 'Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.'
     })
   })
 
-  function getAddress() {
-    return CS.getWallet().getNextAddress();
+  function showAddress() {
+    var address = CS.getWallet().getNextAddress();
+    ractive.set('address', address);
+    showQRcode(address);
   }
 
   function handleMectoError(err) {

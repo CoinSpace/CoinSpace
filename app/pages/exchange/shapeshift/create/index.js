@@ -221,6 +221,7 @@ module.exports = function(el) {
 
   emitter.on('wallet-ready', setReturnAddress);
   emitter.on('tx-sent', setReturnAddress);
+  emitter.on('change-address-type', setReturnAddress);
 
   function setReturnAddress() {
     if (!ractive.el.classList.contains('current')) {

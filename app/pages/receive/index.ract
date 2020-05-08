@@ -1,5 +1,22 @@
 <div class-hidden="needToSetupEos">
-  <h3 class="_title">{{translate("Your wallet address")}}</h3>
+  <h3 class="_title">
+    {{translate("Your wallet address")}}
+
+    {{#if addressTypes.length > 1}}
+    <div class="_select_container">
+      {{getAddressTypeLabel(addressType)}}
+      <select value="{{addressType}}" on-change="change-address-type">
+        {{#each addressTypes}}
+          <option value="{{this}}">{{getAddressTypeOption(this)}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <span class="_help" on-click="help-address-type">
+      {{>svg_help}}
+    </span>
+    {{/if}}
+  </h3>
+
   <div class="address__box">
     <span class="_address">{{address}}</span>
     <div class="_btn" on-click="show-qr">
