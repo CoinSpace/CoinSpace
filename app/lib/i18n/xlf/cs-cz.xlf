@@ -871,9 +871,9 @@ Bude to převedeno na %(toSymbol)s, a zasláno
         <source>Fee</source>
         <target>Zdarma</target>
       </trans-unit>
-      <trans-unit id="Amount of coins that is charged from your balance for single transaction (&lt;a href=&quot;&quot; onclick=&quot;window.open(&apos;https://www.coin.space/all-about-bitcoin-fees&apos;, &apos;_system&apos;); return false;&quot;&gt;more info&lt;/a&gt;).">
-        <source>Amount of coins that is charged from your balance for single transaction (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;more info&lt;/a&gt;).</source>
-        <target>Počet mincí, které Vám byly odebrány ze zůstatku za jedinou transakci (&lt;a href="" onclick="window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;"&gt;další informace najdete na&lt;/a&gt;).</target>
+      <trans-unit id="Amount of coins that is charged from your balance for single transaction (:url).">
+        <source>Amount of coins that is charged from your balance for single transaction (%(url)s).</source>
+        <target>Počet mincí, které Vám byly odebrány ze zůstatku za jedinou transakci (%(url)s).</target>
       </trans-unit>
       <trans-unit id="Confirm passphrase">
         <source>Confirm passphrase</source>
@@ -1210,6 +1210,26 @@ Bude to převedeno na %(toSymbol)s, a zasláno
       <trans-unit id="Recipient Address">
         <source>Recipient Address</source>
         <target>Adresa příjemce</target>
+      </trans-unit>
+      <trans-unit id="P2PKH - Legacy">
+        <source>P2PKH - Legacy</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="P2SH - SegWit compatible">
+        <source>P2SH - SegWit compatible</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Bech32 - SegWit native">
+        <source>Bech32 - SegWit native</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Not all address types are fully compatible on all platforms, so it is important to use a compatible address (:url).">
+        <source>Not all address types are fully compatible on all platforms, so it is important to use a compatible address (%(url)s).</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="more info">
+        <source>more info</source>
+        <target></target>
       </trans-unit>
     </body>
   </file>

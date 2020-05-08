@@ -214,7 +214,7 @@
   "Payment wasn't received since 36 hours since the transaction was created.": "Payment wasn't received since 36 hours since the transaction was created.",
   "max.": "max.",
   "Fee": "Fee",
-  "Amount of coins that is charged from your balance for single transaction (<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;\">more info</a>).": "Amount of coins that is charged from your balance for single transaction (<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees', '_system'); return false;\">more info</a>).",
+  "Amount of coins that is charged from your balance for single transaction (:url).": "Amount of coins that is charged from your balance for single transaction (%(url)s).",
   "Confirm passphrase": "Confirm passphrase",
   "Almost done! Enter the following words from your passphrase.": "Almost done! Enter the following words from your passphrase.",
   "Word": "Word",
@@ -298,5 +298,10 @@
   "Recipient Name": "Recipient Name",
   "Bank Name": "Bank Name",
   "Bank Address": "Bank Address",
-  "Recipient Address": "Recipient Address"
+  "Recipient Address": "Recipient Address",
+  "P2PKH - Legacy": "P2PKH - Legacy",
+  "P2SH - SegWit compatible": "P2SH - SegWit compatible",
+  "Bech32 - SegWit native": "Bech32 - SegWit native",
+  "Not all address types are fully compatible on all platforms, so it is important to use a compatible address (:url).": "Not all address types are fully compatible on all platforms, so it is important to use a compatible address (%(url)s).",
+  "more info": "more info"
 }
