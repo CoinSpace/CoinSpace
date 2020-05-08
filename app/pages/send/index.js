@@ -315,7 +315,7 @@ module.exports = function(el){
   ractive.on('help-fee', function() {
     showTooltip({
       message: 'Amount of coins that is charged from your balance for single transaction (:url).',
-      interpolations: {url: "<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees', '_blank'); return false;\">" + translate('more info') + "</a>"},
+      interpolations: {url: "<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees/', '_blank'); return false;\">" + translate('more info') + "</a>"},
       isHTML: true
     })
   })
