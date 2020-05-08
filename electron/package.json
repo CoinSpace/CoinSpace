@@ -16,6 +16,23 @@
     "directories": {
       "buildResources": "resources"
     },
+    "files": [
+      "!env.ejs",
+      "!README.md",
+      "!notarize.js",
+      "!**/node_modules/*/.github",
+      "!**/node_modules/*/.editorconfig",
+      "!**/node_modules/*/.jscs.json",
+      "!**/node_modules/*/.eslintignore",
+      "!**/node_modules/*/.nycrc",
+      "!**/node_modules/*/.nvmrc",
+      "!**/node_modules/*/.eslintrc.js",
+      "!**/node_modules/*/.istanbul.yml",
+      "!**/node_modules/*/Makefile",
+      "!**/node_modules/*/Readme.md",
+      "!**/node_modules/*/Changelog.md",
+      "!**/node_modules/*/HISTORY.md"
+    ],
     "win": {
       "target": [
         "portable",
