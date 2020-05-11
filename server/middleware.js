@@ -26,21 +26,27 @@ function init(app) {
     }))
   }
 
-  var anHour = 1000 * 60 * 60
+  var dayInMs = 24 * 60 * 60 * 1000;
   app.use(bodyParser.urlencoded({extended: true}))
   app.use(bodyParser.json())
   app.use(cookieParser(process.env.COOKIE_SALT))
   app.use(cookieSession({
     signed: false,
     overwrite: false,
-    maxAge: anHour,
+    maxAge: dayInMs,
     httpOnly: true,
     secure: isProduction()
   }))
+
+  app.use(function (req, res, next) {
+    req.session.nowInMinutes = Math.floor(Date.now() / 60e3);
+    next();
+  })
+
   app.use(cookieOnion)
   app.use(compress())
 
-  var cacheControl = isProduction() ? { maxAge: anHour } : null
+  var cacheControl = isProduction() ? { maxAge: dayInMs } : null
   app.use(express.static(path.join(__dirname, '..', 'build'), cacheControl))
 }
 
