@@ -1243,8 +1243,8 @@ Sarà convertito in %(toSymbol)s, e inviato a
         <source>Your post code is invalid, please try again</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="This card is already in use on a different MoonPay account">
-        <source>This card is already in use on a different MoonPay account</source>
+      <trans-unit id="This card is already in use on a different account">
+        <source>This card is already in use on a different account</source>
         <target></target>
       </trans-unit>
       <trans-unit id="Sorry, we only accept Visa, Mastercard and Maestro cards at present">
