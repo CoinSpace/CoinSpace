@@ -105,6 +105,7 @@ function signIn(email, securityCode) {
       throw new Error('invalid_email');
     }
     if (/Invalid security code/.test(err.message)) throw new Error('invalid_security_code');
+    if (/Security code has expired/.test(err.message)) throw new Error('invalid_security_code');
     throw err;
   });
 }
