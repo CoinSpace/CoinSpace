@@ -312,6 +312,5 @@
   "You must enter a mobile phone number valid for your country": "You must enter a mobile phone number valid for your country",
   "The billing address of this card does not match the billing address that you entered, please try again": "The billing address of this card does not match the billing address that you entered, please try again",
   "File upload is disabled due to identity check status": "File upload is disabled due to identity check status",
-  "The transaction total amount exceeds the customer daily limit": "The transaction total amount exceeds the customer daily limit",
   "Your state is not supported at the moment, sorry for the inconvenience": "Your state is not supported at the moment, sorry for the inconvenience"
 }

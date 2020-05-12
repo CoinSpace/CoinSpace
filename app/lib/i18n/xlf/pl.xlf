@@ -1263,10 +1263,6 @@ Zostanie przeliczony na %(toSymbol)s, i wysłany do
         <source>File upload is disabled due to identity check status</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="The transaction total amount exceeds the customer daily limit">
-        <source>The transaction total amount exceeds the customer daily limit</source>
-        <target></target>
-      </trans-unit>
       <trans-unit id="Your state is not supported at the moment, sorry for the inconvenience">
         <source>Your state is not supported at the moment, sorry for the inconvenience</source>
         <target></target>
