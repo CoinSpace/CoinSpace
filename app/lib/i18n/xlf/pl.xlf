@@ -1231,6 +1231,46 @@ Zostanie przeliczony na %(toSymbol)s, i wysłany do
         <source>more info</source>
         <target></target>
       </trans-unit>
+      <trans-unit id="Customer info update is disabled due to identity check status">
+        <source>Customer info update is disabled due to identity check status</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Sorry, we don&apos;t accept disposable email addresses">
+        <source>Sorry, we don't accept disposable email addresses</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Your post code is invalid, please try again">
+        <source>Your post code is invalid, please try again</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="This card is already in use on a different MoonPay account">
+        <source>This card is already in use on a different MoonPay account</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Sorry, we only accept Visa, Mastercard and Maestro cards at present">
+        <source>Sorry, we only accept Visa, Mastercard and Maestro cards at present</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="You must enter a mobile phone number valid for your country">
+        <source>You must enter a mobile phone number valid for your country</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="The billing address of this card does not match the billing address that you entered, please try again">
+        <source>The billing address of this card does not match the billing address that you entered, please try again</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="File upload is disabled due to identity check status">
+        <source>File upload is disabled due to identity check status</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="The transaction total amount exceeds the customer daily limit">
+        <source>The transaction total amount exceeds the customer daily limit</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Your state is not supported at the moment, sorry for the inconvenience">
+        <source>Your state is not supported at the moment, sorry for the inconvenience</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

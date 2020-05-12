@@ -303,5 +303,15 @@
   "P2SH - SegWit compatible": "P2SH - SegWit compatible",
   "Bech32 - SegWit native": "Bech32 - SegWit native",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address (:url).": "Not all address types are fully compatible on all platforms, so it is important to use a compatible address (%(url)s).",
-  "more info": "more info"
+  "more info": "more info",
+  "Customer info update is disabled due to identity check status": "Customer info update is disabled due to identity check status",
+  "Sorry, we don't accept disposable email addresses": "Sorry, we don't accept disposable email addresses",
+  "Your post code is invalid, please try again": "Your post code is invalid, please try again",
+  "This card is already in use on a different MoonPay account": "This card is already in use on a different MoonPay account",
+  "Sorry, we only accept Visa, Mastercard and Maestro cards at present": "Sorry, we only accept Visa, Mastercard and Maestro cards at present",
+  "You must enter a mobile phone number valid for your country": "You must enter a mobile phone number valid for your country",
+  "The billing address of this card does not match the billing address that you entered, please try again": "The billing address of this card does not match the billing address that you entered, please try again",
+  "File upload is disabled due to identity check status": "File upload is disabled due to identity check status",
+  "The transaction total amount exceeds the customer daily limit": "The transaction total amount exceeds the customer daily limit",
+  "Your state is not supported at the moment, sorry for the inconvenience": "Your state is not supported at the moment, sorry for the inconvenience"
 }
