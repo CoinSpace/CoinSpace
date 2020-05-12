@@ -10,6 +10,7 @@ var strftime = require('strftime');
 var showError = require('widgets/modals/flash').showError;
 var showTransactionDetail = require('widgets/modals/transaction-detail');
 var initEosSetup = require('widgets/eos/setup');
+var _ = require('lodash');
 
 module.exports = function(el) {
   var network = getTokenNetwork();
@@ -138,9 +139,16 @@ module.exports = function(el) {
         ractive.push('transactions', parseHistoryTx(tx));
       })
     }).catch(function(err) {
-      console.error(err);
       ractive.set(loaderKey, false);
-      showError({message: err.message});
+      if (err.message === 'cs-node-error') {
+        showError({
+          message: 'Network node error. Please try again later.',
+          interpolations: { network: _.upperFirst(getTokenNetwork()) }
+        });
+      } else {
+        console.error(err);
+        showError({message: err.message});
+      }
     })
   }
 
