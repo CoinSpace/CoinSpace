@@ -46,8 +46,14 @@ function init(app) {
   app.use(cookieOnion)
   app.use(compress())
 
-  var cacheControl = isProduction() ? { maxAge: dayInMs } : null
+  var cacheControl = isProduction() ? { maxAge: dayInMs, setHeaders: setCustomCacheControl } : null
   app.use(express.static(path.join(__dirname, '..', 'build'), cacheControl))
+}
+
+function setCustomCacheControl(res, path) {
+  if (express.static.mime.lookup(path) === 'text/html') {
+    res.setHeader('Cache-Control', 'public, max-age=0');
+  }
 }
 
 function cookieOnion(req, res, next) {
