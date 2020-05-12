@@ -98,7 +98,6 @@ module.exports = function(el) {
     newTxs.forEach(function(tx) {
       ractive.unshift('transactions', tx);
     })
-    ractive.set('isLoading', false)
   })
 
   emitter.on('sync', function() {
