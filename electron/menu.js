@@ -13,6 +13,12 @@ const helpMenu = {
         await shell.openExternal('https://coinapp.zendesk.com/hc/en-us/sections/115000511287-FAQ');
       },
     },
+    {
+      label: 'Support',
+      click: async () => {
+        await shell.openExternal('https://coinapp.zendesk.com/hc/en-us');
+      },
+    },
   ],
 };
 
