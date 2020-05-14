@@ -45,8 +45,7 @@
       "target": [
         "dmg",
         "mas"
-      ],
-      "icon": "./images/mac/mac.png"
+      ]
     },
     "appx": {
       "identityName": "CoinWallet",
@@ -67,6 +66,7 @@
     "start": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
+    "clean": "rm -rf ./dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -74,7 +74,7 @@
   },
   "devDependencies": {
     "electron": "^8.2.4",
-    "electron-builder": "^22.5.1",
+    "electron-builder": "^22.6.1",
     "electron-notarize": "^0.3.0"
   }
 }
