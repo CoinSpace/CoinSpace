@@ -1213,59 +1213,59 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="P2PKH - Legacy">
         <source>P2PKH - Legacy</source>
-        <target></target>
+        <target>P2PKH - örökség</target>
       </trans-unit>
       <trans-unit id="P2SH - SegWit compatible">
         <source>P2SH - SegWit compatible</source>
-        <target></target>
+        <target>P2SH - SegWit-kompatibilis</target>
       </trans-unit>
       <trans-unit id="Bech32 - SegWit native">
         <source>Bech32 - SegWit native</source>
-        <target></target>
+        <target>Bech32 - SegWit natív</target>
       </trans-unit>
       <trans-unit id="Not all address types are fully compatible on all platforms, so it is important to use a compatible address (:url).">
         <source>Not all address types are fully compatible on all platforms, so it is important to use a compatible address (%(url)s).</source>
-        <target></target>
+        <target>Nem minden címtípus kompatibilis minden platformon, ezért fontos kompatibilis címet (%(url)s) használni.</target>
       </trans-unit>
       <trans-unit id="more info">
         <source>more info</source>
-        <target></target>
+        <target>több információ</target>
       </trans-unit>
       <trans-unit id="Customer info update is disabled due to identity check status">
         <source>Customer info update is disabled due to identity check status</source>
-        <target></target>
+        <target>A személyazonosság ellenőrzése miatt az ügyfél-információ frissítése le van tiltva</target>
       </trans-unit>
       <trans-unit id="Sorry, we don&apos;t accept disposable email addresses">
         <source>Sorry, we don't accept disposable email addresses</source>
-        <target></target>
+        <target>Sajnáljuk, eldobható e-mail címet nem fogadunk el</target>
       </trans-unit>
       <trans-unit id="Your post code is invalid, please try again">
         <source>Your post code is invalid, please try again</source>
-        <target></target>
+        <target>Az irányítószám érvénytelen, próbáld meg újra</target>
       </trans-unit>
       <trans-unit id="This card is already in use on a different account">
         <source>This card is already in use on a different account</source>
-        <target></target>
+        <target>Ezt a kártyát egy másik fiókban már használják</target>
       </trans-unit>
       <trans-unit id="Sorry, we only accept Visa, Mastercard and Maestro cards at present">
         <source>Sorry, we only accept Visa, Mastercard and Maestro cards at present</source>
-        <target></target>
+        <target>Sajnos, jelenleg csak Visa, Mastercard és Meastro kártyákat fogadunk el</target>
       </trans-unit>
       <trans-unit id="You must enter a mobile phone number valid for your country">
         <source>You must enter a mobile phone number valid for your country</source>
-        <target></target>
+        <target>Az országodban érvényes mobiltelefon-számot kell megadnod</target>
       </trans-unit>
       <trans-unit id="The billing address of this card does not match the billing address that you entered, please try again">
         <source>The billing address of this card does not match the billing address that you entered, please try again</source>
-        <target></target>
+        <target>A kártya számlázási címe nem egyezik a megadott számlázási címmel, próbáld meg újra</target>
       </trans-unit>
       <trans-unit id="File upload is disabled due to identity check status">
         <source>File upload is disabled due to identity check status</source>
-        <target></target>
+        <target>A személyazonosság ellenőrzése miatt a fájlfeltöltés le van tiltva</target>
       </trans-unit>
       <trans-unit id="Your state is not supported at the moment, sorry for the inconvenience">
         <source>Your state is not supported at the moment, sorry for the inconvenience</source>
-        <target></target>
+        <target>Az állapotod pillanatnyilag nincs támogatva, elnézést az okozott kényelmetlenségért</target>
       </trans-unit>
     </body>
   </file>

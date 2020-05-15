@@ -1213,59 +1213,59 @@ Den konverteres til %(toSymbol)s og sendes til
       </trans-unit>
       <trans-unit id="P2PKH - Legacy">
         <source>P2PKH - Legacy</source>
-        <target></target>
+        <target>P2PKH – Legacy</target>
       </trans-unit>
       <trans-unit id="P2SH - SegWit compatible">
         <source>P2SH - SegWit compatible</source>
-        <target></target>
+        <target>P2SH – SegWit-kompatibel</target>
       </trans-unit>
       <trans-unit id="Bech32 - SegWit native">
         <source>Bech32 - SegWit native</source>
-        <target></target>
+        <target>Bech32 – SegWit-opprinnelse</target>
       </trans-unit>
       <trans-unit id="Not all address types are fully compatible on all platforms, so it is important to use a compatible address (:url).">
         <source>Not all address types are fully compatible on all platforms, so it is important to use a compatible address (%(url)s).</source>
-        <target></target>
+        <target>Ikke alle adressetyper er fullt kompatible på alle plattformer. Derfor er det viktig å bruke en kompatibel adresse (%(url)s).</target>
       </trans-unit>
       <trans-unit id="more info">
         <source>more info</source>
-        <target></target>
+        <target>mer info</target>
       </trans-unit>
       <trans-unit id="Customer info update is disabled due to identity check status">
         <source>Customer info update is disabled due to identity check status</source>
-        <target></target>
+        <target>Oppdatering av kundeinfo er deaktivert grunnet status til identitetssjekk</target>
       </trans-unit>
       <trans-unit id="Sorry, we don&apos;t accept disposable email addresses">
         <source>Sorry, we don't accept disposable email addresses</source>
-        <target></target>
+        <target>Beklager, vi godtar ikke engangs e-postadresser</target>
       </trans-unit>
       <trans-unit id="Your post code is invalid, please try again">
         <source>Your post code is invalid, please try again</source>
-        <target></target>
+        <target>Postnummeret ditt er ugyldig, forsøk igjen</target>
       </trans-unit>
       <trans-unit id="This card is already in use on a different account">
         <source>This card is already in use on a different account</source>
-        <target></target>
+        <target>Kortet er allerede i bruk på en annen konto</target>
       </trans-unit>
       <trans-unit id="Sorry, we only accept Visa, Mastercard and Maestro cards at present">
         <source>Sorry, we only accept Visa, Mastercard and Maestro cards at present</source>
-        <target></target>
+        <target>Beklager, vi godtar for tiden betalingskortene Visa, Mastercard og Maestro</target>
       </trans-unit>
       <trans-unit id="You must enter a mobile phone number valid for your country">
         <source>You must enter a mobile phone number valid for your country</source>
-        <target></target>
+        <target>Du må oppgi et mobiltelefonnummer som er gyldig i landet ditt</target>
       </trans-unit>
       <trans-unit id="The billing address of this card does not match the billing address that you entered, please try again">
         <source>The billing address of this card does not match the billing address that you entered, please try again</source>
-        <target></target>
+        <target>Fakturaadressen for dette kortet samsvarer ikke med fakturaadressen du har oppgitt, forsøk igjen</target>
       </trans-unit>
       <trans-unit id="File upload is disabled due to identity check status">
         <source>File upload is disabled due to identity check status</source>
-        <target></target>
+        <target>Filopplasting er deaktivert grunnet status til identitetssjekk</target>
       </trans-unit>
       <trans-unit id="Your state is not supported at the moment, sorry for the inconvenience">
         <source>Your state is not supported at the moment, sorry for the inconvenience</source>
-        <target></target>
+        <target>Statusen din støttes for øyeblikket ikke, beklager ubeleiligheten</target>
       </trans-unit>
     </body>
   </file>

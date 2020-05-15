@@ -1213,59 +1213,59 @@ Bude to převedeno na %(toSymbol)s, a zasláno
       </trans-unit>
       <trans-unit id="P2PKH - Legacy">
         <source>P2PKH - Legacy</source>
-        <target></target>
+        <target>P2PKH - stará verze</target>
       </trans-unit>
       <trans-unit id="P2SH - SegWit compatible">
         <source>P2SH - SegWit compatible</source>
-        <target></target>
+        <target>P2SH - kompatibilní se SegWit</target>
       </trans-unit>
       <trans-unit id="Bech32 - SegWit native">
         <source>Bech32 - SegWit native</source>
-        <target></target>
+        <target>Bech32 - nativní SegWit</target>
       </trans-unit>
       <trans-unit id="Not all address types are fully compatible on all platforms, so it is important to use a compatible address (:url).">
         <source>Not all address types are fully compatible on all platforms, so it is important to use a compatible address (%(url)s).</source>
-        <target></target>
+        <target>Ne všechny typy adres jsou plně kompatibilní na všech platformách, takže je důležité používat kompatibilní adresu (%(url)s).</target>
       </trans-unit>
       <trans-unit id="more info">
         <source>more info</source>
-        <target></target>
+        <target>další informace</target>
       </trans-unit>
       <trans-unit id="Customer info update is disabled due to identity check status">
         <source>Customer info update is disabled due to identity check status</source>
-        <target></target>
+        <target>Aktualizace informací o zákazníkovi jsou zakázány z důvodu stavu kontroly totožnosti</target>
       </trans-unit>
       <trans-unit id="Sorry, we don&apos;t accept disposable email addresses">
         <source>Sorry, we don't accept disposable email addresses</source>
-        <target></target>
+        <target>Promiňte, ale jednorázové e-mailové adresy nepřijímáme</target>
       </trans-unit>
       <trans-unit id="Your post code is invalid, please try again">
         <source>Your post code is invalid, please try again</source>
-        <target></target>
+        <target>Vaše poštovní směrovací číslo je neplatné. Zkuste to prosím znovu.</target>
       </trans-unit>
       <trans-unit id="This card is already in use on a different account">
         <source>This card is already in use on a different account</source>
-        <target></target>
+        <target>Tato karta je již používána u jiného účtu</target>
       </trans-unit>
       <trans-unit id="Sorry, we only accept Visa, Mastercard and Maestro cards at present">
         <source>Sorry, we only accept Visa, Mastercard and Maestro cards at present</source>
-        <target></target>
+        <target>Promiňte, ale v současnosti přijímáme jen karty Visa, Mastercard a Maestro</target>
       </trans-unit>
       <trans-unit id="You must enter a mobile phone number valid for your country">
         <source>You must enter a mobile phone number valid for your country</source>
-        <target></target>
+        <target>Musíte zadat číslo mobilního telefonu platné ve Vaší zemi</target>
       </trans-unit>
       <trans-unit id="The billing address of this card does not match the billing address that you entered, please try again">
         <source>The billing address of this card does not match the billing address that you entered, please try again</source>
-        <target></target>
+        <target>Fakturační adresa pro tuto kartu neodpovídá Vámi zadané fakturační adrese. Zkuste to prosím znovu.</target>
       </trans-unit>
       <trans-unit id="File upload is disabled due to identity check status">
         <source>File upload is disabled due to identity check status</source>
-        <target></target>
+        <target>Nahrávání souborů je zakázáno z důvodu stavu kontroly identity</target>
       </trans-unit>
       <trans-unit id="Your state is not supported at the moment, sorry for the inconvenience">
         <source>Your state is not supported at the moment, sorry for the inconvenience</source>
-        <target></target>
+        <target>Váš stav není v současnosti podporován. Omlouváme se za způsobenou nepříjemnost.</target>
       </trans-unit>
     </body>
   </file>

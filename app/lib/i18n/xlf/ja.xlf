@@ -1213,59 +1213,59 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="P2PKH - Legacy">
         <source>P2PKH - Legacy</source>
-        <target></target>
+        <target>P2PKH－レガシー</target>
       </trans-unit>
       <trans-unit id="P2SH - SegWit compatible">
         <source>P2SH - SegWit compatible</source>
-        <target></target>
+        <target>P2SH－SegWit互換性</target>
       </trans-unit>
       <trans-unit id="Bech32 - SegWit native">
         <source>Bech32 - SegWit native</source>
-        <target></target>
+        <target>Bech32－SegWitネイティブ</target>
       </trans-unit>
       <trans-unit id="Not all address types are fully compatible on all platforms, so it is important to use a compatible address (:url).">
         <source>Not all address types are fully compatible on all platforms, so it is important to use a compatible address (%(url)s).</source>
-        <target></target>
+        <target>全てのアドレスタイプが全部のプラットフォームにおいて完全に互換性があるのではない為、互換性アドレスを使用する事が重要です(%(url)s)。</target>
       </trans-unit>
       <trans-unit id="more info">
         <source>more info</source>
-        <target></target>
+        <target>詳細</target>
       </trans-unit>
       <trans-unit id="Customer info update is disabled due to identity check status">
         <source>Customer info update is disabled due to identity check status</source>
-        <target></target>
+        <target>身分証明書確認ステータスにより、顧客の情報更新は無効となっています</target>
       </trans-unit>
       <trans-unit id="Sorry, we don&apos;t accept disposable email addresses">
         <source>Sorry, we don't accept disposable email addresses</source>
-        <target></target>
+        <target>申し訳ありませんが、使い捨てメールアドレスは承認できません</target>
       </trans-unit>
       <trans-unit id="Your post code is invalid, please try again">
         <source>Your post code is invalid, please try again</source>
-        <target></target>
+        <target>コードが無効です。もう一度やり直してください</target>
       </trans-unit>
       <trans-unit id="This card is already in use on a different account">
         <source>This card is already in use on a different account</source>
-        <target></target>
+        <target>このカードは既に他のアカウントで使用されています</target>
       </trans-unit>
       <trans-unit id="Sorry, we only accept Visa, Mastercard and Maestro cards at present">
         <source>Sorry, we only accept Visa, Mastercard and Maestro cards at present</source>
-        <target></target>
+        <target>申し訳ありませんが、現在お使いいただけるカードはVisa／Mastercard／Maestrocardsのみとなっております</target>
       </trans-unit>
       <trans-unit id="You must enter a mobile phone number valid for your country">
         <source>You must enter a mobile phone number valid for your country</source>
-        <target></target>
+        <target>お住まいの国で有効な携帯電話番号を入力する必要があります</target>
       </trans-unit>
       <trans-unit id="The billing address of this card does not match the billing address that you entered, please try again">
         <source>The billing address of this card does not match the billing address that you entered, please try again</source>
-        <target></target>
+        <target>このカードの請求先住所は入力頂いた住所と一致しません。もう一度お試しください</target>
       </trans-unit>
       <trans-unit id="File upload is disabled due to identity check status">
         <source>File upload is disabled due to identity check status</source>
-        <target></target>
+        <target>身分証明書確認ステータスにより、ファイルのアップロードは無効となっています</target>
       </trans-unit>
       <trans-unit id="Your state is not supported at the moment, sorry for the inconvenience">
         <source>Your state is not supported at the moment, sorry for the inconvenience</source>
-        <target></target>
+        <target>申し訳ありませんが、あなたの州は現在サポートされていません。</target>
       </trans-unit>
     </body>
   </file>

@@ -1213,59 +1213,59 @@ Biće konvertovano u %(toSymbol)s i poslato na
       </trans-unit>
       <trans-unit id="P2PKH - Legacy">
         <source>P2PKH - Legacy</source>
-        <target></target>
+        <target>P2PKH - Zastarela</target>
       </trans-unit>
       <trans-unit id="P2SH - SegWit compatible">
         <source>P2SH - SegWit compatible</source>
-        <target></target>
+        <target>P2SH - Kompatibilna sa SegWit</target>
       </trans-unit>
       <trans-unit id="Bech32 - SegWit native">
         <source>Bech32 - SegWit native</source>
-        <target></target>
+        <target>Bech32 - Originalna SegWit</target>
       </trans-unit>
       <trans-unit id="Not all address types are fully compatible on all platforms, so it is important to use a compatible address (:url).">
         <source>Not all address types are fully compatible on all platforms, so it is important to use a compatible address (%(url)s).</source>
-        <target></target>
+        <target>Nisu sve vrste adresa u potpunosti kompatibilne na svim platformama, zato je važno da se koristi kompatibilna adresa (%(url)s).</target>
       </trans-unit>
       <trans-unit id="more info">
         <source>more info</source>
-        <target></target>
+        <target>više informacija</target>
       </trans-unit>
       <trans-unit id="Customer info update is disabled due to identity check status">
         <source>Customer info update is disabled due to identity check status</source>
-        <target></target>
+        <target>Ažuriranje podataka o klijentima je onemogućeno zbog statusa provere identiteta</target>
       </trans-unit>
       <trans-unit id="Sorry, we don&apos;t accept disposable email addresses">
         <source>Sorry, we don't accept disposable email addresses</source>
-        <target></target>
+        <target>Nažalost, ne prihvatamo adrese e-pošte za jednokratnu upotrebu</target>
       </trans-unit>
       <trans-unit id="Your post code is invalid, please try again">
         <source>Your post code is invalid, please try again</source>
-        <target></target>
+        <target>Vaš poštanski broj nije važeći, pokušajte ponovo</target>
       </trans-unit>
       <trans-unit id="This card is already in use on a different account">
         <source>This card is already in use on a different account</source>
-        <target></target>
+        <target>Ova kartica se već koristi na drugom nalogu</target>
       </trans-unit>
       <trans-unit id="Sorry, we only accept Visa, Mastercard and Maestro cards at present">
         <source>Sorry, we only accept Visa, Mastercard and Maestro cards at present</source>
-        <target></target>
+        <target>Nažalost, trenutno prihvatamo samo Visa, Mastercard i Maestro kartice</target>
       </trans-unit>
       <trans-unit id="You must enter a mobile phone number valid for your country">
         <source>You must enter a mobile phone number valid for your country</source>
-        <target></target>
+        <target>Morate da unesete broj mobilnog telefona koji važi za vašu zemlju</target>
       </trans-unit>
       <trans-unit id="The billing address of this card does not match the billing address that you entered, please try again">
         <source>The billing address of this card does not match the billing address that you entered, please try again</source>
-        <target></target>
+        <target>Adresa za fakturisanje na ovoj kartici ne odgovara adresi za fakturisanje koju ste uneli, pokušajte ponovo</target>
       </trans-unit>
       <trans-unit id="File upload is disabled due to identity check status">
         <source>File upload is disabled due to identity check status</source>
-        <target></target>
+        <target>Prenos datoteka je onemogućen zbog statusa provere identiteta</target>
       </trans-unit>
       <trans-unit id="Your state is not supported at the moment, sorry for the inconvenience">
         <source>Your state is not supported at the moment, sorry for the inconvenience</source>
-        <target></target>
+        <target>Vaša zemlja trenutno nije podržana, žao nam je zbog neugodnosti</target>
       </trans-unit>
     </body>
   </file>

@@ -1213,59 +1213,59 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="P2PKH - Legacy">
         <source>P2PKH - Legacy</source>
-        <target></target>
+        <target>P2PKH - កេរ្តិ៍ដំណែល</target>
       </trans-unit>
       <trans-unit id="P2SH - SegWit compatible">
         <source>P2SH - SegWit compatible</source>
-        <target></target>
+        <target>P2SH – SegWit ដែលអាចប្រើជាមួយគ្នាបាន</target>
       </trans-unit>
       <trans-unit id="Bech32 - SegWit native">
         <source>Bech32 - SegWit native</source>
-        <target></target>
+        <target>Bech32 – SegWit ប្រភពដើម</target>
       </trans-unit>
       <trans-unit id="Not all address types are fully compatible on all platforms, so it is important to use a compatible address (:url).">
         <source>Not all address types are fully compatible on all platforms, so it is important to use a compatible address (%(url)s).</source>
-        <target></target>
+        <target>មិនមែនប្រភេទអាសយដ្ឋានទាំងអស់សុទ្ធតែអាចប្រើជាមួយគ្នាបាននៅក្នុងគំរូកម្មវិធីទាំងអស់ទេ ដូច្នេះវាមានសារៈសំខាន់ណាស់ត្រូវប្រើអាសយដ្ឋានដែលអាចប្រើជាមួយគ្នាបាន (%(url)s)។</target>
       </trans-unit>
       <trans-unit id="more info">
         <source>more info</source>
-        <target></target>
+        <target>ព័​ត៍​មាន​បន្ថែម</target>
       </trans-unit>
       <trans-unit id="Customer info update is disabled due to identity check status">
         <source>Customer info update is disabled due to identity check status</source>
-        <target></target>
+        <target>ការធ្វើបច្ចុប្បន្នភាពព័ត៌មានអតិថិជន ត្រូវបានបិទដំណើរការដោយសារតែស្ថានភាពត្រួតពិនិត្យអត្តសញ្ញាណ</target>
       </trans-unit>
       <trans-unit id="Sorry, we don&apos;t accept disposable email addresses">
         <source>Sorry, we don't accept disposable email addresses</source>
-        <target></target>
+        <target>សូមអភ័យទោស យើងខ្ញុំមិនទទួលយកអាសយដ្ឋានអ៊ីម៉ែលដែលអាចបោះចោលក្រោយពេលប្រើបានទេ</target>
       </trans-unit>
       <trans-unit id="Your post code is invalid, please try again">
         <source>Your post code is invalid, please try again</source>
-        <target></target>
+        <target>លេខកូដប្រៃសណីយ៍របស់អ្នក មិនត្រឹមត្រូវទេ សូមព្យាយាមម្តងទៀត</target>
       </trans-unit>
       <trans-unit id="This card is already in use on a different account">
         <source>This card is already in use on a different account</source>
-        <target></target>
+        <target>កាតនេះ ត្រូវបានប្រើរួចហើយនៅក្នុងគណនីផ្សេងគ្នា</target>
       </trans-unit>
       <trans-unit id="Sorry, we only accept Visa, Mastercard and Maestro cards at present">
         <source>Sorry, we only accept Visa, Mastercard and Maestro cards at present</source>
-        <target></target>
+        <target>សូមអភ័យទោស បច្ចុប្បន្នយើងខ្ញុំទទួលយកតែកាតវីសា Visa, ម៉ាស្ទ័រកាត Mastercard និងកាតម៉ាយស្ត្រូ Maestro ប៉ុណ្ណោះ</target>
       </trans-unit>
       <trans-unit id="You must enter a mobile phone number valid for your country">
         <source>You must enter a mobile phone number valid for your country</source>
-        <target></target>
+        <target>លោកអ្នកត្រូវតែបញ្ចូលលេខទូរស័ព្ទចល័តដែលមានសុពលភាពសម្រាប់ប្រទេសរបស់អ្នក</target>
       </trans-unit>
       <trans-unit id="The billing address of this card does not match the billing address that you entered, please try again">
         <source>The billing address of this card does not match the billing address that you entered, please try again</source>
-        <target></target>
+        <target>អាសយដ្ឋានវិក្កយបត្រកាតនេះ មិនត្រូវគ្នានឹងអាសយដ្ឋានវិក្កយបត្រដែលលោកអ្នកបានបញ្ចូលទេ សូមព្យាយាមម្តងទៀត</target>
       </trans-unit>
       <trans-unit id="File upload is disabled due to identity check status">
         <source>File upload is disabled due to identity check status</source>
-        <target></target>
+        <target>ការផ្ទុកឯកសារត្រូវបានបិទដំណើរការដោយសារស្ថានភាពត្រួតពិនិត្យអត្តសញ្ញាណ</target>
       </trans-unit>
       <trans-unit id="Your state is not supported at the moment, sorry for the inconvenience">
         <source>Your state is not supported at the moment, sorry for the inconvenience</source>
-        <target></target>
+        <target>រដ្ឋរបស់អ្នកមិនដំណើរការបានទេនៅពេលនេះ សូមអភ័យទោសចំពោះការរអាក់រអួលនេះ</target>
       </trans-unit>
     </body>
   </file>

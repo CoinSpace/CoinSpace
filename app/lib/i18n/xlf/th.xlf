@@ -1213,59 +1213,59 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="P2PKH - Legacy">
         <source>P2PKH - Legacy</source>
-        <target></target>
+        <target>P2PKH - ดั้งเดิม</target>
       </trans-unit>
       <trans-unit id="P2SH - SegWit compatible">
         <source>P2SH - SegWit compatible</source>
-        <target></target>
+        <target>P2SH - SegWit โหมดเข้ากันได้</target>
       </trans-unit>
       <trans-unit id="Bech32 - SegWit native">
         <source>Bech32 - SegWit native</source>
-        <target></target>
+        <target>Bech32 - SegWit โหมดเนทีฟ</target>
       </trans-unit>
       <trans-unit id="Not all address types are fully compatible on all platforms, so it is important to use a compatible address (:url).">
         <source>Not all address types are fully compatible on all platforms, so it is important to use a compatible address (%(url)s).</source>
-        <target></target>
+        <target>ประเภทที่อยู่บางประเภทอาจไม่สามารถเข้ากันได้กับทุกแพลตฟอร์ม ดังนั้นการใช้ที่อยู่ที่เข้ากันได้จึงเป็นสิ่งสำคัญ (%(url)s).</target>
       </trans-unit>
       <trans-unit id="more info">
         <source>more info</source>
-        <target></target>
+        <target>ข้อมูลเพิ่มเติม</target>
       </trans-unit>
       <trans-unit id="Customer info update is disabled due to identity check status">
         <source>Customer info update is disabled due to identity check status</source>
-        <target></target>
+        <target>การอัปเดตข้อมูลลูกค้าถูกปิดใช้งานเนื่องจากสถานะการตรวจสอบบัตรประจำตัว</target>
       </trans-unit>
       <trans-unit id="Sorry, we don&apos;t accept disposable email addresses">
         <source>Sorry, we don't accept disposable email addresses</source>
-        <target></target>
+        <target>ขออภัย เราไม่ยอมรับที่อยู่อีเมลแบบใช้ครั้งเดียว</target>
       </trans-unit>
       <trans-unit id="Your post code is invalid, please try again">
         <source>Your post code is invalid, please try again</source>
-        <target></target>
+        <target>รหัสไปรษณีย์ของคุณไม่ถูกต้อง โปรดลองอีกครั้ง</target>
       </trans-unit>
       <trans-unit id="This card is already in use on a different account">
         <source>This card is already in use on a different account</source>
-        <target></target>
+        <target>บัตรนี้ถูกใช้ในบัญชีอื่นแล้ว</target>
       </trans-unit>
       <trans-unit id="Sorry, we only accept Visa, Mastercard and Maestro cards at present">
         <source>Sorry, we only accept Visa, Mastercard and Maestro cards at present</source>
-        <target></target>
+        <target>ขออภัย ขณะนี้เรายอมรับเฉพาะบัตร Visa, Mastercard และ Maestro เท่านั้น</target>
       </trans-unit>
       <trans-unit id="You must enter a mobile phone number valid for your country">
         <source>You must enter a mobile phone number valid for your country</source>
-        <target></target>
+        <target>คุณจะต้องป้อนหมายเลขโทรศัพท์มือถือที่ถูกต้องสำหรับประเทศของคุณ</target>
       </trans-unit>
       <trans-unit id="The billing address of this card does not match the billing address that you entered, please try again">
         <source>The billing address of this card does not match the billing address that you entered, please try again</source>
-        <target></target>
+        <target>ที่อยู่เรียกเก็บเงินของบัตรนี้ไม่ตรงกับที่อยู่เรียกเก็บเงินที่คุณป้อน กรุณาลองอีกครั้ง</target>
       </trans-unit>
       <trans-unit id="File upload is disabled due to identity check status">
         <source>File upload is disabled due to identity check status</source>
-        <target></target>
+        <target>การอัปโหลดไฟล์ถูกปิดใช้งานเนื่องจากสถานะการตรวจสอบบัตรประจำตัว</target>
       </trans-unit>
       <trans-unit id="Your state is not supported at the moment, sorry for the inconvenience">
         <source>Your state is not supported at the moment, sorry for the inconvenience</source>
-        <target></target>
+        <target>ยังไม่รองรับรัฐของคุณในขณะนี้ ขออภัยในความไม่สะดวก</target>
       </trans-unit>
     </body>
   </file>
