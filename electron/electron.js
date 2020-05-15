@@ -4,7 +4,8 @@
 Object.assign(process.env, require('./app/env.json'));
 
 // Modules to control application life and create native browser window
-const { app, shell, BrowserWindow, protocol } = require('electron');
+const { app, Menu, protocol } = require('electron');
+const openWindow = require('./lib/openWindow');
 
 // Init crashReporter
 const Sentry = require('@sentry/electron');
@@ -15,19 +16,12 @@ Sentry.init({
 });
 
 // Set up Application Menu
-require('./menu');
+const menuTemplate = require('./lib/menu');
+const menu = Menu.buildFromTemplate(menuTemplate);
+Menu.setApplicationMenu(menu);
 
 // Suppress deprecation warning
 app.allowRendererProcessReuse = true;
-
-// Keep reference to IPC
-let mainWindow;
-
-function handleOpenURL(url) {
-  if (mainWindow) {
-    mainWindow.webContents.send('handleOpenURL', url);
-  }
-}
 
 if (!app.isDefaultProtocolClient('coinspace')) {
   // Define custom protocol handler. Deep linking works on packaged versions of the application!
@@ -36,76 +30,25 @@ if (!app.isDefaultProtocolClient('coinspace')) {
 
 // TODO add autoupdater
 
-function createWindow() {
-  // Create the browser window.
-  mainWindow = new BrowserWindow({
-    width: 500,
-    height: 700,
-    minWidth: 500,
-    minHeight: 700,
-    webPreferences: {
-      devTools: process.env.NODE_ENV === 'development',
-      nodeIntegration: true,
-    },
-  });
-
-  mainWindow.loadFile('./app/index.html');
-
-  protocol.registerStringProtocol('coinspace', (request, cb) => {
-    handleOpenURL(request.url);
-    cb('ok');
-  });
-
-  // set api.moonpay.io cookies
-  mainWindow.webContents.session.cookies.set({
-    url: 'https://api.moonpay.io',
-    name: 'customerToken',
-    value: '',
-    domain: 'api.moonpay.io',
-    expirationDate: 9999999999,
-  });
-
-  // Catch all attempts to open new window and open them in default browser
-  mainWindow.webContents.on('new-window', (event, url, frameName, disposition, options) => {
-    if (frameName === '_modal') {
-      const [mainWindowWidth, mainWindowHeight] = mainWindow.getSize();
-      event.preventDefault();
-      Object.assign(options, {
-        width: mainWindowWidth,
-        height: mainWindowHeight,
-        resizable: false,
-        left: null,
-        top: null,
-        modal: true,
-        parent: mainWindow,
-        webPreferences: {
-          sandbox: true,
-        },
-      });
-      const modal = new BrowserWindow(options);
-      modal.loadURL(url);
-      event.newGuest = modal;
-      return;
-    }
-
-    event.preventDefault();
-    shell.openExternal(url);
-  });
-}
-
 // The application has finished basic startup
 app.on('will-finish-launching', () => {
   // Protocol handler for macOS
   app.on('open-url', (event, url) => {
     event.preventDefault();
-    handleOpenURL(url);
+    openWindow(url);
   });
 });
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.on('ready', () => {
+  protocol.registerStringProtocol('coinspace', (request, cb) => {
+    openWindow(request.url);
+    cb('ok');
+  });
+  openWindow();
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
@@ -119,9 +62,7 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
+  openWindow();
 });
 
 // In this file you can include the rest of your app's specific main process

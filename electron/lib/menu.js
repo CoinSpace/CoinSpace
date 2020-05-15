@@ -1,6 +1,7 @@
 'use strict';
 
-const { shell, Menu } = require('electron');
+const { app, shell } = require('electron');
+const openWindow = require('./openWindow');
 
 const isMac = process.platform === 'darwin';
 
@@ -28,23 +29,50 @@ const template = [
   ...(isMac ? [macAppMenu] : []),
   { role: 'fileMenu' },
   { role: 'editMenu' },
+  // View submenu
   {
     role: 'viewMenu',
     label: 'View',
     submenu: [
-      { role: 'reload' },
-      { role: 'forceReload' },
+      {
+        label: 'Reload',
+        role: 'forcereload',
+      },
       { type: 'separator' },
       { role: 'resetZoom' },
       { role: 'zoomIn' },
       { role: 'zoomOut' },
       { type: 'separator' },
+      ...( process.env.NODE_ENV === 'development' ? [{
+        role: 'toggledevtools',
+      }] : []),
       { role: 'togglefullscreen' },
     ],
   },
-  { role: 'windowMenu' },
+  // Window submenu
+  {
+    role: 'windowMenu',
+    label: 'Window',
+    submenu: [
+      { role: 'minimize' },
+      { role: 'zoom' },
+      ...(isMac ? [
+        { type: 'separator' },
+        {
+          label: app.name,
+          click: () => {
+            openWindow();
+          },
+          accelerator: 'CmdOrCtrl+O',
+        },
+        { type: 'separator' },
+        { role: 'front' },
+      ] : [
+        { role: 'close' },
+      ]),
+    ],
+  },
   helpMenu,
 ];
 
-const menu = Menu.buildFromTemplate(template);
-Menu.setApplicationMenu(menu);
+module.exports = template;
