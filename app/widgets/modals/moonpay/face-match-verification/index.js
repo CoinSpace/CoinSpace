@@ -40,6 +40,9 @@ function open() {
     return moonpay.uploadFile(file, 'selfie', moonpay.getIpCountry()).then(function() {
       ractive.fire('cancel');
     }).catch(function(err) {
+      if (/File upload is disabled due to identity check status/.test(err.message)) {
+        return handleError(new Error('File upload is disabled due to identity check status'));
+      }
       console.error(err);
       return handleError(new Error('Upload failed. Please try again later.'));
     });

@@ -127,6 +127,15 @@ function open(onSuccessDismiss) {
       });
       ractive.fire('cancel');
     }).catch(function(err) {
+      if (/Customer info update is disabled/.test(err.message)) {
+        return handleError(new Error('Customer info update is disabled due to identity check status'));
+      }
+      if (/Your (post|ZIP) code is invalid/.test(err.message)) {
+        return handleError(new Error('Your post code is invalid, please try again'));
+      }
+      if (/Your state is not supported/.test(err.message)) {
+        return handleError(new Error('Your state is not supported at the moment, sorry for the inconvenience'));
+      }
       console.error(err);
       return handleError(new Error('Please enter a valid info'));
     });

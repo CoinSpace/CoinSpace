@@ -34,6 +34,9 @@ function open() {
       ractive.set('isLoading', false);
       ractive.set('step', 2);
     }).catch(function(err) {
+      if (/You must enter a mobile phone number valid for your country/.test(err.message)) {
+        return handleError(new Error('You must enter a mobile phone number valid for your country'));
+      }
       console.error(err);
       return handleError(new Error('Please enter a valid info'));
     });

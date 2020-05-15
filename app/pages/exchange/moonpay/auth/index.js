@@ -69,6 +69,9 @@ module.exports = function(el) {
       if (err.message === 'invalid_email') {
         return showError({message: 'Please enter a valid email address'});
       }
+      if (err.message === 'invalid_email_disposable') {
+        return showError({message: "Sorry, we don't accept disposable email addresses"});
+      }
       if (err.message === 'invalid_security_code') {
         return showError({message: 'Invalid verification code'});
       }

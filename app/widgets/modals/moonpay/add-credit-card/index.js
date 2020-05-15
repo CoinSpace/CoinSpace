@@ -178,6 +178,15 @@ function open(data) {
         if (/Basic customer information must be/.test(err.message)) {
           return handleError(new Error('Identity verification must be passed before saving card'));
         }
+        if (/This card is already in use/.test(err.message)) {
+          return handleError(new Error('This card is already in use on a different account'));
+        }
+        if (/Sorry, we only accept Visa, Mastercard and Maestro/.test(err.message)) {
+          return handleError(new Error('Sorry, we only accept Visa, Mastercard and Maestro cards at present'));
+        }
+        if (/The billing address of this card does not match/.test(err.message)) {
+          return handleError(new Error('The billing address of this card does not match the billing address that you entered, please try again'));
+        }
         console.error(err);
         return handleError(new Error('Payment authorization declined'));
       });

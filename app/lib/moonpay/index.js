@@ -104,6 +104,7 @@ function signIn(email, securityCode) {
       if (securityCode) throw new Error('invalid_security_code');
       throw new Error('invalid_email');
     }
+    if (/disposable email/.test(err.message)) throw new Error('invalid_email_disposable');
     if (/Invalid security code/.test(err.message)) throw new Error('invalid_security_code');
     if (/Security code has expired/.test(err.message)) throw new Error('invalid_security_code');
     throw err;
