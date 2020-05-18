@@ -17,11 +17,11 @@ program
   .option('-e, --env <env>', 'environment', 'dev')
   .option('--release', 'release mode')
   .option('--run', 'debug mode')
-  .option('-o, --os <os>', 'os', 'mac')
+  .option('-p, --platform <platform>', 'platform', 'mac')
   .parse(process.argv);
 
-if (!['win', 'mac', 'linux'].includes(program.os)) {
-  console.error(`Unsupported OS: ${program.os}`);
+if (!['win', 'mac', 'mas', 'linux'].includes(program.platform)) {
+  console.error(`Unsupported Platform: ${program.platform}`);
   process.exit(1);
 }
 
@@ -39,8 +39,9 @@ const webpackConfig = require('../webpack.prod');
 webpackConfig.plugins.push(
   new webpack.DefinePlugin({
     'process.env.BUILD_TYPE': JSON.stringify('electron'),
-    'process.env.SENTRY_DSN': JSON.stringify(process.env[`SENTRY_DSN_${program.os.toUpperCase()}`]),
-    'process.env.SENTRY_RELEASE': JSON.stringify(`${pkg.name}.electron-${program.os}@${pkg.version}`),
+    'process.env.BUILD_PLATFORM': JSON.stringify(program.platform),
+    'process.env.SENTRY_DSN': JSON.stringify(process.env[`SENTRY_DSN_${program.platform.toUpperCase()}`]),
+    'process.env.SENTRY_RELEASE': JSON.stringify(`${pkg.name}.electron-${program.platform}@${pkg.version}`),
   })
 );
 
@@ -50,7 +51,7 @@ webpack(webpackConfig, function(error, stats) {
 
   fse.removeSync(electronBuildPath);
   fse.copySync('build', path.resolve(electronBuildPath), {filter: utils.filterMapFiles});
-  /*if (program.os === 'win') {
+  /*if (program.platform === 'win') {
     // copy assets for electron appx installer
     fse.copySync('electron/images/win', path.resolve(`${electronBuildPath}/appx/images`));
   }*/
