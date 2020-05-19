@@ -1,6 +1,7 @@
 'use strict';
 
 const { shell, BrowserWindow } = require('electron');
+const { isDevelopment } = require('./constants');
 
 // Keep reference to IPC
 let mainWindow;
@@ -20,7 +21,7 @@ function openWindow(deeplink) {
       minWidth: 500,
       minHeight: 700,
       webPreferences: {
-        devTools: process.env.NODE_ENV === 'development',
+        devTools: isDevelopment,
         nodeIntegration: true,
       },
     });
@@ -64,6 +65,7 @@ function openWindow(deeplink) {
     if (mainWindow.isMinimized()) {
       mainWindow.restore();
     }
+    mainWindow.show();
   }
 
   if (deeplink) {

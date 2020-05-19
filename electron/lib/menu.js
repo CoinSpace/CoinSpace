@@ -2,8 +2,7 @@
 
 const { app, shell } = require('electron');
 const openWindow = require('./openWindow');
-
-const isMac = process.platform === 'darwin';
+const { isDevelopment, isMac } = require('./constants');
 
 const helpMenu = {
   role: 'help',
@@ -43,7 +42,7 @@ const template = [
       { role: 'zoomIn' },
       { role: 'zoomOut' },
       { type: 'separator' },
-      ...( process.env.NODE_ENV === 'development' ? [{
+      ...( isDevelopment ? [{
         role: 'toggledevtools',
       }] : []),
       { role: 'togglefullscreen' },
