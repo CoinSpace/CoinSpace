@@ -101,6 +101,10 @@ Ractive.prototype.show = function(context){
   this.el.classList.add('current')
 }
 
-Ractive.defaults.data = { translate: translate }
+Ractive.defaults.data = {
+  translate: translate,
+  BUILD_TYPE: process.env.BUILD_TYPE,
+  BUILD_PLATFORM: process.env.BUILD_PLATFORM,
+};
 
 module.exports = Ractive
