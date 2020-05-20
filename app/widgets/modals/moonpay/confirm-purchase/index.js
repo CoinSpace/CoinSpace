@@ -11,11 +11,11 @@ function open(data) {
 
   ractive = new Ractive({
     partials: {
-      content: require('./_content.ract')
+      content: require('./_content.ract'),
     },
     data: {
       isLoading: false,
-      status: 'confirm',
+      status: data.status || 'confirm',
       paymentMethod: data.paymentMethod,
       fiatAmount: data.fiatAmount,
       fiatSymbol: data.fiatSymbol,
@@ -24,8 +24,8 @@ function open(data) {
       address: getWallet().getNextAddress(),
       bankTransferReference: '',
       bankDepositInformation: '',
-      threedsecure: function() {}
-    }
+      threedsecure: function() {},
+    },
   });
 
   ractive.on('confirm', function() {
@@ -46,7 +46,7 @@ function open(data) {
       baseCurrencyCode: data.fiatSymbol.toLowerCase(),
       currencyCode: data.cryptoSymbol.toLowerCase(),
       returnUrl: redirectURL,
-      paymentMethod: data.paymentMethod
+      paymentMethod: data.paymentMethod,
     }).then(function(tx) {
       if (tx.status === 'failed') throw new Error('failed');
       if (tx.status === 'waitingAuthorization') {

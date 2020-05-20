@@ -1,7 +1,13 @@
 {{#if isSupportedMoonpay}}
-<div on-click="choose('moonpay')" class="_btn">
-  {{translate("Buy")}} {{crypto}}
-</div>
+  {{#if BUILD_PLATFORM === "mas"}}
+  <div on-click="moonpay" class="_btn">
+    {{translate("Buy")}} {{crypto}}
+  </div>
+  {{else}}
+  <div on-click="choose('moonpay')" class="_btn">
+    {{translate("Buy")}} {{crypto}}
+  </div>
+  {{/if}}
 {{else}}
 <div class="_btn _disabled">
   {{translate("Buy")}} {{crypto}}

@@ -5,6 +5,7 @@ var urlRoot = window.urlRoot;
 var coins = {};
 var emitter = require('lib/emitter');
 var applePay = require('lib/apple-pay');
+var showConfirmPurchase = require('widgets/modals/moonpay/confirm-purchase');
 
 var hasHandledMobileSuccess = false;
 var apiKey = process.env.MOONPAY_API_KEY;
@@ -16,20 +17,26 @@ var ipCountry;
 emitter.on('handleOpenURL', function(url) {
   url = url || '';
   var matchAction = url.match(/action=([^&]+)/);
-  if (!matchAction || matchAction[1] !== 'moonpay-3d-secure') return;
 
-  var matchTxId = url.match(/transactionId=([^&]+)/);
-  var txId = matchTxId ? matchTxId[1] : '';
+  if (matchAction && matchAction[1] === 'moonpay-3d-secure') {
+    var matchTxId = url.match(/transactionId=([^&]+)/);
+    var txId = matchTxId ? matchTxId[1] : '';
 
-  window.localStorage.setItem('_cs_moonpay_3d_secure', txId);
-  hasHandledMobileSuccess = true;
+    window.localStorage.setItem('_cs_moonpay_3d_secure', txId);
+    hasHandledMobileSuccess = true;
+  }
+
+  if (matchAction && matchAction[1] === 'moonpay-success') {
+    window.localStorage.setItem('_cs_moonpay_success', 'true');
+    hasHandledMobileSuccess = true;
+  }
 });
 
 function init() {
   return request({
     url: 'https://api.moonpay.io/v3/ip_address',
     params: {apiKey: apiKey},
-    hideFlashError: true
+    hideFlashError: true,
   }).catch(function(error) {
     if (error.message === 'Network Error') return false;
     throw error;
@@ -38,7 +45,7 @@ function init() {
       ipCountry = data.alpha3;
       return request({
         url: urlRoot + 'moonpay/coins',
-        params: {country: data.alpha3}
+        params: {country: data.alpha3},
       });
     }
   }).then(function(data) {
@@ -98,7 +105,7 @@ function signIn(email, securityCode) {
     url: 'https://api.moonpay.io/v3/customers/email_login',
     method: 'post',
     params: {apiKey: apiKey},
-    data: {email: email, securityCode: securityCode}
+    data: {email: email, securityCode: securityCode},
   }).then(fixPhonegapCookies).catch(function(err) {
     if (/Invalid body/.test(err.message)) {
       if (securityCode) throw new Error('invalid_security_code');
@@ -114,7 +121,7 @@ function signIn(email, securityCode) {
 function limits() {
   return request({
     url: 'https://api.moonpay.io/v3/customers/me/limits',
-    headers: getAuthorizationHeaders()
+    headers: getAuthorizationHeaders(),
   });
 }
 
@@ -122,7 +129,7 @@ function refreshToken() {
   return request({
     url: 'https://api.moonpay.io/v3/customers/refresh_token',
     params: {apiKey: apiKey},
-    headers: getAuthorizationHeaders()
+    headers: getAuthorizationHeaders(),
   }).then(fixPhonegapCookies);
 }
 
@@ -130,8 +137,8 @@ function fixPhonegapCookies(data) {
   if (process.env.BUILD_TYPE !== 'phonegap') return Promise.resolve(data);
   return new Promise(function(resolve, reject) {
     cookieMaster.setCookieValue('https://api.moonpay.io', 'customerToken', '',
-    function() { resolve(data); },
-    function(err) { reject(err); });
+      function() { resolve(data); },
+      function(err) { reject(err); });
   });
 }
 
@@ -141,8 +148,8 @@ function getAccessToken() {
 
 function getAuthorizationHeaders() {
   return {
-    'Authorization': 'Bearer ' + getAccessToken()
-  }
+    'Authorization': 'Bearer ' + getAccessToken(),
+  };
 }
 
 function setAccessToken(token) {
@@ -179,7 +186,7 @@ function verifyPhoneNumber(code) {
     url: 'https://api.moonpay.io/v3/customers/verify_phone_number',
     method: 'post',
     data: {
-      verificationCode: code
+      verificationCode: code,
     },
     headers: getAuthorizationHeaders(),
   });
@@ -188,7 +195,7 @@ function verifyPhoneNumber(code) {
 function loadCountries(type) {
   return request({
     url: urlRoot + 'moonpay/countries',
-    params: {type: type}
+    params: {type: type},
   }).then(function(data) {
     if (!data) return;
     countries[type] = data;
@@ -206,7 +213,7 @@ function getIpCountry() {
 function getFiles() {
   return request({
     url: 'https://api.moonpay.io/v3/files',
-    headers: getAuthorizationHeaders()
+    headers: getAuthorizationHeaders(),
   });
 }
 
@@ -216,8 +223,8 @@ function uploadFile(file, type, country, side) {
     url: 'https://api.moonpay.io/v3/files/s3_signed_request',
     params: {
       apiKey: apiKey,
-      fileType: file.type
-    }
+      fileType: file.type,
+    },
   }).then(function(data) {
     key = data.key;
     return request({
@@ -225,8 +232,8 @@ function uploadFile(file, type, country, side) {
       method: 'put',
       data: file,
       headers: {
-        'Content-Type': file.type
-      }
+        'Content-Type': file.type,
+      },
     });
   }).then(function() {
     return request({
@@ -236,10 +243,10 @@ function uploadFile(file, type, country, side) {
         key: key,
         type: type,
         country: country,
-        side: side
+        side: side,
       },
-      headers: getAuthorizationHeaders()
-    })
+      headers: getAuthorizationHeaders(),
+    });
   });
 }
 
@@ -248,16 +255,16 @@ function createCard(tokenId) {
     url: 'https://api.moonpay.io/v3/cards',
     method: 'post',
     data: {
-      tokenId: tokenId
+      tokenId: tokenId,
     },
-    headers: getAuthorizationHeaders()
-  })
+    headers: getAuthorizationHeaders(),
+  });
 }
 
 function getCards() {
   return request({
     url: 'https://api.moonpay.io/v3/cards',
-    headers: getAuthorizationHeaders()
+    headers: getAuthorizationHeaders(),
   }).then(function(cards) {
     cards.forEach(function(card) {
       card.label = card.brand.toUpperCase() + '...x' + card.lastDigits;
@@ -276,7 +283,7 @@ function deleteCard(id) {
   return request({
     url: 'https://api.moonpay.io/v3/cards/' + id,
     method: 'delete',
-    headers: getAuthorizationHeaders()
+    headers: getAuthorizationHeaders(),
   });
 }
 
@@ -292,14 +299,14 @@ function createBankAccount(bankAccount) {
     url: 'https://api.moonpay.io/v3/bank_accounts',
     method: 'post',
     data: data,
-    headers: getAuthorizationHeaders()
-  })
+    headers: getAuthorizationHeaders(),
+  });
 }
 
 function getBankAccounts(fiat) {
   return request({
     url: 'https://api.moonpay.io/v3/bank_accounts',
-    headers: getAuthorizationHeaders()
+    headers: getAuthorizationHeaders(),
   }).then(function(bankAccounts) {
     bankAccounts.forEach(function(bankAccount) {
       var fiatSymbol = getFiatById(bankAccount.currencyId, 'symbol');
@@ -327,7 +334,7 @@ function deleteBankAccount(id) {
   return request({
     url: 'https://api.moonpay.io/v3/bank_accounts/' + id,
     method: 'delete',
-    headers: getAuthorizationHeaders()
+    headers: getAuthorizationHeaders(),
   });
 }
 
@@ -348,7 +355,7 @@ function quote(currencyCode, baseCurrencyCode, baseCurrencyAmount, paymentMethod
       baseCurrencyAmount: baseCurrencyAmount,
       paymentMethod: pm,
       areFeesIncluded: areFeesIncluded,
-    }
+    },
   });
 }
 
@@ -356,10 +363,10 @@ function rate(currencyCode, baseCurrencyCode) {
   return request({
     url: 'https://api.moonpay.io/v3/currencies/' + currencyCode + '/price',
     params: {
-      apiKey: apiKey
-    }
+      apiKey: apiKey,
+    },
   }).then(function(data) {
-    return data[baseCurrencyCode.toUpperCase()]
+    return data[baseCurrencyCode.toUpperCase()];
   });
 }
 
@@ -371,17 +378,17 @@ function createTx(data) {
       total: {
         label: 'MoonPay',
         type: 'final',
-        amount: data.baseCurrencyAmount
+        amount: data.baseCurrencyAmount,
       },
       validateApplePayTransaction: validateApplePayTransaction,
       callback: function(token) {
         data.externalToken = {
           tokenProvider: 'apple_pay',
-          token: token
-        }
+          token: token,
+        };
         delete data.paymentMethod;
         return _createTx(data);
-      }
+      },
     });
   } if (data.paymentMethod.type === 'card') {
     data.cardId = data.paymentMethod.id;
@@ -407,23 +414,23 @@ function _createTx(data) {
       returnUrl: data.returnUrl,
       externalToken: data.externalToken,
       cardId: data.cardId,
-      bankAccountId: data.bankAccountId
+      bankAccountId: data.bankAccountId,
     },
-    headers: getAuthorizationHeaders()
+    headers: getAuthorizationHeaders(),
   });
 }
 
 function getTxs() {
   return request({
     url: 'https://api.moonpay.io/v3/transactions',
-    headers: getAuthorizationHeaders()
+    headers: getAuthorizationHeaders(),
   });
 }
 
 function getTxById(id) {
   return request({
     url: 'https://api.moonpay.io/v3/transactions/' + id,
-    headers: getAuthorizationHeaders()
+    headers: getAuthorizationHeaders(),
   });
 }
 
@@ -461,8 +468,42 @@ function validateApplePayTransaction(validationUrl) {
     url: 'https://api.moonpay.io/v3/apple_pay/validate',
     method: 'post',
     data: {validationUrl: validationUrl},
-    headers: getAuthorizationHeaders()
+    headers: getAuthorizationHeaders(),
   });
+}
+
+function show(currencyCode, walletAddress) {
+  var baseUrl = process.env.MOONPAY_WIDGET_URL + '&';
+  // TODO handle moonpay transactionStatus=failed
+  var redirectURL =  'coinspace://?action=moonpay-success';
+
+  var params = {
+    currencyCode: currencyCode,
+    walletAddress: walletAddress,
+    redirectURL: encodeURIComponent(redirectURL),
+    feeBreakdown: false,
+    enabledPaymentMethods: 'credit_debit_card,sepa_bank_transfer,gbp_bank_transfer',
+  };
+
+  var queryString = Object.keys(params).map(function(key) {
+    return key + '=' + params[key];
+  }).join('&');
+
+  baseUrl += queryString;
+
+  window.localStorage.removeItem('_cs_moonpay_success');
+  var popup = window.open(baseUrl, '_blank');
+  var popupInterval = setInterval(function() {
+    if ((popup && popup.closed) || hasHandledMobileSuccess) {
+      clearInterval(popupInterval);
+      hasHandledMobileSuccess = false;
+      if (window.localStorage.getItem('_cs_moonpay_success') === 'true') {
+        showConfirmPurchase({ status: 'success' });
+      }
+    }
+  }, 250);
+
+  return false;
 }
 
 module.exports = {
@@ -499,5 +540,6 @@ module.exports = {
   createTx: createTx,
   getTxs: getTxs,
   open3dSecure: open3dSecure,
-  validateApplePayTransaction: validateApplePayTransaction
-}
+  validateApplePayTransaction: validateApplePayTransaction,
+  show: show,
+};
