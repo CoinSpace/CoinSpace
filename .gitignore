@@ -14,3 +14,4 @@ docker-compose.prod.yml
 electron/app
 electron/dist
 .sentryclirc
+*.provisionprofile

@@ -11,7 +11,7 @@ var getWallet = require('lib/wallet').getWallet;
 module.exports = function(el) {
   var ractive = new Ractive({
     el: el,
-    template: require('./index.ract')
+    template: require('./index.ract'),
   });
 
   var exchanges = {
@@ -24,10 +24,16 @@ module.exports = function(el) {
       data: {
         choose: choose,
         crypto: '',
-        isSupportedMoonpay: false
-      }
-    })
-  }
+        isSupportedMoonpay: false,
+      },
+    }),
+  };
+
+  exchanges.none.on('moonpay', function() {
+    var wallet = getWallet();
+    var symbol = wallet.denomination;
+    moonpay.show(symbol.toLowerCase(), wallet.getNextAddress());
+  });
 
   var currentExchange = exchanges.none;
 
@@ -68,8 +74,8 @@ module.exports = function(el) {
       currentExchange.hide();
       exchange.show();
       currentExchange = exchange;
-    })
+    });
   }
 
   return ractive;
-}
+};
