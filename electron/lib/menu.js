@@ -19,13 +19,21 @@ const helpMenu = {
         await shell.openExternal('https://coinapp.zendesk.com/hc/en-us');
       },
     },
+    ...(!isMac ? [
+      { type: 'separator' },
+      {
+        role: 'about',
+        click: async () => {
+          // TODO set icon
+          await app.showAboutPanel();
+        },
+      },
+    ] : []),
   ],
 };
 
-const macAppMenu = { role: 'appMenu' };
-
 const template = [
-  ...(isMac ? [macAppMenu] : []),
+  ...(isMac ? [{ role: 'appMenu' }] : []),
   { role: 'fileMenu' },
   { role: 'editMenu' },
   // View submenu
