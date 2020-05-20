@@ -15,3 +15,9 @@
   width: 0;
   line-height: 0;
 }
+
+html.build_type--electron {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
