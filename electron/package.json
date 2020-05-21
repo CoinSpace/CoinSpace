@@ -17,6 +17,8 @@
       "buildResources": "resources"
     },
     "files": [
+      "**/*",
+      "resources/icon.*",
       "!env.ejs",
       "!README.md",
       "!notarize.js",
