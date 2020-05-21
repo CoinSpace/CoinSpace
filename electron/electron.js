@@ -51,7 +51,7 @@ function init() {
 
   // Someone tried to run a second instance
   app.on('second-instance', (event, argv) => {
-    openWindow(argv ? argv[1] : null);
+    openWindow(argv.find(item => item.startsWith('coinspace')));
   });
 
   // This method will be called when Electron has finished
