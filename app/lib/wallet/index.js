@@ -179,9 +179,7 @@ function initWallet(networkName, done) {
     options.token = token;
     convert.setDecimals(token ? token.decimals : 18);
   } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(networkName) !== -1) {
-    var accounts = getDerivedAccounts(networkName);
-    options.externalAccount = accounts.externalAccount;
-    options.internalAccount = accounts.internalAccount;
+    options.hdkey = HDKey.fromMasterSeed(new Buffer(seed, 'hex'));
     options.minConf = 3;
     options.addressType = db.get(networkName + '.addressType') || 'p2pkh';
     if (networkName === 'bitcoincash') {
@@ -227,21 +225,6 @@ function isValidWalletToken(token) {
     return _.isEqual(token, item);
   });
   return !!isFound;
-}
-
-function getDerivedAccounts(networkName) {
-  if (wallet && wallet.networkName === networkName && wallet.externalAccount && wallet.internalAccount) {
-    return {
-      externalAccount: wallet.externalAccount,
-      internalAccount: wallet.internalAccount
-    }
-  }
-  var network = bitcoin.networks[networkName]
-  var accountZero = HDKey.fromMasterSeed(new Buffer(seed, 'hex'), network.bip32).deriveChild(HDKey.HARDENED_OFFSET)
-  return {
-    externalAccount: accountZero.deriveChild(0),
-    internalAccount: accountZero.deriveChild(1)
-  }
 }
 
 function parseHistoryTx(tx) {
