@@ -37,10 +37,11 @@
     ],
     "win": {
       "target": [
+        "nsis",
         "portable",
         "appx"
       ],
-      "icon": "./images/win/win.png"
+      "publisherName": "CN=Coin Space"
     },
     "mac": {
       "category": "public.app-category.finance",
@@ -51,10 +52,11 @@
     },
     "appx": {
       "identityName": "CoinWallet",
-      "publisher": "CN=********************",
+      "publisher": "CoinSpace",
       "publisherDisplayName": "Coin Digital Currency Wallet",
       "applicationId": "CoinWallet",
-      "displayName": "Coin Digital Currency Wallet"
+      "displayName": "Coin Digital Currency Wallet",
+      "setBuildNumber": true
     },
     "protocols": {
       "name": "Coin Wallet",
