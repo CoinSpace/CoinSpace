@@ -3,6 +3,8 @@ npm-debug.log
 bundle.*
 build/
 .DS_Store
+Thumbs.db
+Thumbs.db:encryptable
 .idea
 /phonegap/build.json
 /phonegap/release.keystore
@@ -15,3 +17,4 @@ electron/app
 electron/dist
 .sentryclirc
 *.provisionprofile
+*.pfx
