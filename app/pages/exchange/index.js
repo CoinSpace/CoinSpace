@@ -39,8 +39,10 @@ module.exports = function(el) {
 
   ractive.on('before-show', function() {
     setMoonpayButton();
+    if (process.env.BUILD_PLATFORM === 'mas') return showExchange(exchanges.none);
+
     var preferredExchange = window.localStorage.getItem('_cs_preferred_exchange');
-    if (exchanges[preferredExchange] && process.env.BUILD_PLATFORM !== 'mas') {
+    if (exchanges[preferredExchange]) {
       showExchange(exchanges[preferredExchange]);
     } else {
       showExchange(exchanges.none);
