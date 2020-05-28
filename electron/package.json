@@ -4,7 +4,11 @@
   "version": "1.0.0",
   "description": "Coin Digital Currency Wallet",
   "license": "GPL-2.0+",
-  "author": "Coin Wallet",
+  "author": {
+    "name" : "Coin Wallet",
+    "email" : "support@coin.space",
+    "url" : "https://www.coin.space/"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CoinSpace/CoinSpace.git"
@@ -57,7 +61,14 @@
     },
     "linux": {
       "executableName": "coin",
-      "synopsis": "Coin Digital Currency Wallet"
+      "synopsis": "Coin Digital Currency Wallet",
+      "target": [
+        "snap",
+        "appimage",
+        "deb",
+        "rpm",
+        "dir"
+      ]
     },
     "protocols": {
       "name": "Coin Wallet",
