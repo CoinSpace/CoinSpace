@@ -3,7 +3,7 @@
 var execSync = require('child_process').execSync;
 var chalk = require('chalk');
 var path = require('path');
-var cordovaPath = path.resolve(__dirname, '../node_modules/.bin/', 'cordova');
+var cordovaPath = path.resolve(__dirname, '../phonegap/node_modules/.bin/', 'cordova');
 var sentryPath = path.resolve(__dirname, '../node_modules/.bin/', 'sentry-cli');
 var mobileBuildPath = 'phonegap/build';
 
