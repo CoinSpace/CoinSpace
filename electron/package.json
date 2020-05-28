@@ -44,13 +44,12 @@
     },
     "win": {
       "target": [
-        "nsis-web"
-      ],
-      "publisherName": "CN=Coin Space"
+        "nsis",
+        "portable"
+      ]
     },
     "appx": {
       "identityName": "CoinWallet",
-      "publisher": "CoinSpace",
       "publisherDisplayName": "Coin Digital Currency Wallet",
       "applicationId": "CoinWallet",
       "displayName": "Coin Digital Currency Wallet",
