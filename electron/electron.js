@@ -6,7 +6,8 @@ Object.assign(process.env, require('./app/env.json'));
 // Modules to control application life and create native browser window
 const path = require('path');
 const { app, Menu, protocol } = require('electron');
-const { isMas } = require('./lib/constants');
+const pkg = require('./package.json');
+const { isMas, isWindows, isLinux } = require('./lib/constants');
 const menuTemplate = require('./lib/menu');
 const openWindow = require('./lib/openWindow');
 const Sentry = require('@sentry/electron');
@@ -14,9 +15,20 @@ const Sentry = require('@sentry/electron');
 // Suppress deprecation warning
 app.allowRendererProcessReuse = true;
 
-app.setAboutPanelOptions({
-  iconPath: path.join(__dirname, './resources/icon.png'),
-});
+if (isWindows) {
+  app.setAboutPanelOptions({
+    iconPath: path.join(__dirname, 'resources/64x64.png'),
+  });
+}
+
+if (isLinux) {
+  app.setAboutPanelOptions({
+    applicationName: app.name,
+    applicationVersion: app.getVersion(),
+    website: pkg.homepage,
+    iconPath: path.join(__dirname, 'resources/64x64.png'),
+  });
+}
 
 function init() {
   const lock = app.requestSingleInstanceLock();
