@@ -24,6 +24,7 @@
     "files": [
       "**/*",
       "resources/icon.*",
+      "resources/64x64.png",
       "!env.ejs",
       "!README.md",
       "!notarize.js",
