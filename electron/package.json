@@ -5,9 +5,9 @@
   "description": "Coin Digital Currency Wallet",
   "license": "GPL-2.0+",
   "author": {
-    "name" : "Coin Wallet",
-    "email" : "support@coin.space",
-    "url" : "https://www.coin.space/"
+    "name": "Coin Wallet",
+    "email": "support@coin.space",
+    "url": "https://www.coin.space/"
   },
   "homepage": "https://www.coin.space/",
   "repository": {
