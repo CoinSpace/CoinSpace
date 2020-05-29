@@ -9,6 +9,7 @@
     "email" : "support@coin.space",
     "url" : "https://www.coin.space/"
   },
+  "homepage": "https://www.coin.space/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CoinSpace/CoinSpace.git"
@@ -60,13 +61,14 @@
       "setBuildNumber": true
     },
     "linux": {
+      "icon": "icon.icns",
       "executableName": "coin",
       "synopsis": "Coin Digital Currency Wallet",
       "target": [
         "snap",
-        "appimage",
         "deb",
         "rpm",
+        "tar.xz",
         "dir"
       ]
     },
