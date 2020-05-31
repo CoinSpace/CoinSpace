@@ -3,6 +3,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 module.exports = {
   // we should use web build for electron too
@@ -69,5 +70,11 @@ module.exports = {
       {from: 'app/security.txt', to: './'},
       {from: 'app/assets/icons/favicon.ico', to: './'},
     ]),
+    new CircularDependencyPlugin({
+      exclude: /node_modules/,
+      failOnError: true,
+      allowAsyncCycles: false,
+      cwd: process.cwd(),
+    })
   ],
 };
