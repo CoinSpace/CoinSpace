@@ -7,6 +7,7 @@ var initChangelly = require('./changelly');
 var initMoonpay = require('./moonpay');
 var moonpay = require('lib/moonpay');
 var getWallet = require('lib/wallet').getWallet;
+var showConfirmPurchase = require('widgets/modals/moonpay/confirm-purchase');
 
 module.exports = function(el) {
   var ractive = new Ractive({
@@ -32,7 +33,9 @@ module.exports = function(el) {
   exchanges.none.on('moonpay', function() {
     var wallet = getWallet();
     var symbol = wallet.denomination;
-    moonpay.show(symbol.toLowerCase(), wallet.getNextAddress());
+    moonpay.show(symbol.toLowerCase(), wallet.getNextAddress(), function() {
+      showConfirmPurchase({ status: 'success' });
+    });
   });
 
   var currentExchange = exchanges.none;

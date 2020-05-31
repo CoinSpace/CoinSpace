@@ -5,7 +5,6 @@ var urlRoot = window.urlRoot;
 var coins = {};
 var emitter = require('lib/emitter');
 var applePay = require('lib/apple-pay');
-var showConfirmPurchase = require('widgets/modals/moonpay/confirm-purchase');
 
 var hasHandledMobileSuccess = false;
 var apiKey = process.env.MOONPAY_API_KEY;
@@ -472,7 +471,7 @@ function validateApplePayTransaction(validationUrl) {
   });
 }
 
-function show(currencyCode, walletAddress) {
+function show(currencyCode, walletAddress, onSuccess) {
   var baseUrl = process.env.MOONPAY_WIDGET_URL + '&';
   // TODO handle moonpay transactionStatus=failed
   var redirectURL =  'coinspace://?action=moonpay-success';
@@ -498,7 +497,7 @@ function show(currencyCode, walletAddress) {
       clearInterval(popupInterval);
       hasHandledMobileSuccess = false;
       if (window.localStorage.getItem('_cs_moonpay_success') === 'true') {
-        showConfirmPurchase({ status: 'success' });
+        if (onSuccess) onSuccess();
       }
     }
   }, 250);

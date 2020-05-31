@@ -32,7 +32,6 @@ function open(data) {
     ractive.set('isLoading', true);
 
     var redirectURL;
-    console.log('process.env.BUILD_TYPE', process.env.BUILD_TYPE);
     // TODO switch phonegap too
     if (process.env.BUILD_TYPE === 'electron') {
       redirectURL =  'coinspace://?action=moonpay-3d-secure';
