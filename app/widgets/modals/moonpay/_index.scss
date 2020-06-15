@@ -110,9 +110,7 @@
     }
 
     ._confirm {
-      @extend .csbtn-base;
-      background-color: $ethereal;
-      box-shadow: 0 2px 0 0 darken($ethereal, 10%);
+      @extend .csbtn;
       margin-left: 5px;
 
       @include breakpoint(portrait) {
