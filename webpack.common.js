@@ -75,6 +75,6 @@ module.exports = {
       failOnError: true,
       allowAsyncCycles: false,
       cwd: process.cwd(),
-    })
+    }),
   ],
 };
