@@ -11,7 +11,10 @@
         {{/each}}
       </select>
     </div>
-    <span class="_help" on-click="help-address-type">
+    {{/if}}
+
+    {{#if addressTooltip}}
+    <span class="_help" on-click="help-address">
       {{>svg_help}}
     </span>
     {{/if}}

@@ -312,5 +312,6 @@
   "You must enter a mobile phone number valid for your country": "You must enter a mobile phone number valid for your country",
   "The billing address of this card does not match the billing address that you entered, please try again": "The billing address of this card does not match the billing address that you entered, please try again",
   "File upload is disabled due to identity check status": "File upload is disabled due to identity check status",
-  "Your state is not supported at the moment, sorry for the inconvenience": "Your state is not supported at the moment, sorry for the inconvenience"
+  "Your state is not supported at the moment, sorry for the inconvenience": "Your state is not supported at the moment, sorry for the inconvenience",
+  "Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.": "Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy."
 }

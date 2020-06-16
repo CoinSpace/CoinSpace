@@ -4,9 +4,9 @@
       {{>svg_close}}
     </span>
     {{#if isHTML}}
-    <p class="tooltip__message">{{{translate(message, interpolations)}}}</p>
+    <p class="tooltip__message">{{{message}}}</p>
     {{else}}
-    <p class="tooltip__message">{{translate(message, interpolations)}}</p>
+    <p class="tooltip__message">{{message}}</p>
     {{/if}}
     {{#if bottomLink}}
     <p class="tooltip__link">

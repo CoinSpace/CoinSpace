@@ -17,7 +17,7 @@
     "dev:link": "linklocal -lr",
     "server": "node --expose-gc ./server/server.js",
     "server:watch": "nodemon -w .env.loc -w ./server -x node -r dotenv/config ./server/server.js dotenv_config_path=.env.loc",
-    "lint": "eslint cli/ electron/*.js electron/lib/*.js webpack.*.js",
+    "lint": "eslint cli/ electron/*.js electron/lib/*.js webpack.*.js app/widgets/modals/tooltip/*.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

@@ -1267,6 +1267,10 @@ Biće konvertovano u %(toSymbol)s i poslato na
         <source>Your state is not supported at the moment, sorry for the inconvenience</source>
         <target>Vaša zemlja trenutno nije podržana, žao nam je zbog neugodnosti</target>
       </trans-unit>
+      <trans-unit id="Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.">
+        <source>Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
