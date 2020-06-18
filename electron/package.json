@@ -73,6 +73,15 @@
         "dir"
       ]
     },
+    "snap": {
+      "publish": {
+        "provider": "snapStore",
+        "channels": [
+          "edge",
+          "stable"
+        ]
+      }
+    },
     "protocols": {
       "name": "Coin Wallet",
       "schemes": [
