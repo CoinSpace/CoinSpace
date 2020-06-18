@@ -189,8 +189,7 @@
 
 .settings__avatar {
   @include icon(120px, 120px, block);
-  width: 110px;
-  -webkit-mask-image: url('./assets/img/hex-large.svg');
+  clip-path: circle(52px at center);
   margin: 0 auto;
   margin-bottom: 10px;
 }
