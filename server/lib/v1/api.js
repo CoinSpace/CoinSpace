@@ -23,10 +23,8 @@ const router = express.Router();
 router.post('/register', validateAuthParams(false), function(req, res) {
   const walletId = req.body.wallet_id;
   auth.register(walletId, req.body.pin).then(function(token) {
-    setCookie(req, walletId, function() {
-      console.log('registered wallet %s', walletId);
-      res.status(200).send(token);
-    });
+    console.log('registered wallet %s', walletId);
+    res.status(200).send(token);
   }).catch(function(err) {
     if (!['auth_failed', 'user_deleted'].includes(err.error)) console.error('error', err);
     return res.status(400).send(err);
@@ -36,10 +34,8 @@ router.post('/register', validateAuthParams(false), function(req, res) {
 router.post('/login', validateAuthParams(true), function(req, res) {
   const walletId = req.body.wallet_id;
   auth.login(walletId, req.body.pin).then(function(token) {
-    setCookie(req, walletId, function() {
-      console.log('authenticated wallet %s', walletId);
-      res.status(200).send(token);
-    });
+    console.log('authenticated wallet %s', walletId);
+    res.status(200).send(token);
   }).catch(function(err) {
     if (!['auth_failed', 'user_deleted'].includes(err.error)) console.error('error', err);
     res.status(400).send(err);
@@ -65,10 +61,10 @@ router.get('/openalias', function(req, res) {
   });
 });
 
-router.put('/username', restrict, function(req, res) {
-  const id = req.body.id;
-  const username = req.body.username;
-  if (!username) return res.status(400).json({ error: 'Bad request' });
+router.put('/username', function(req, res) {
+  var id = req.body.id;
+  var username = req.body.username;
+  if (!username) return res.status(400).json({error: 'Bad request'});
   account.setUsername(id, username).then(function(username) {
     res.status(200).send({ username: username });
   }).catch(function(err) {
@@ -76,7 +72,7 @@ router.put('/username', restrict, function(req, res) {
   });
 });
 
-router.get('/details', restrict, function(req, res) {
+router.get('/details', function(req, res) {
   account.getDetails(req.query.id).then(function(details) {
     res.status(200).json(details);
   }).catch(function(err) {
@@ -84,8 +80,8 @@ router.get('/details', restrict, function(req, res) {
   });
 });
 
-router.put('/details', restrict, function(req, res) {
-  if (!req.body.data) return res.status(400).json({ error: 'Bad request' });
+router.put('/details', function(req, res) {
+  if (!req.body.data) return res.status(400).json({error: 'Bad request'});
   account.saveDetails(req.body.id, req.body.data).then(function(details) {
     res.status(200).json(details);
   }).catch(function(err) {
@@ -93,8 +89,8 @@ router.put('/details', restrict, function(req, res) {
   });
 });
 
-router.delete('/account', restrict, function(req, res) {
-  const id = req.body.id;
+router.delete('/account', function(req, res) {
+  var id = req.body.id;
   account.remove(id).then(function() {
     res.status(200).send();
   }).catch(function(err) {
@@ -147,8 +143,8 @@ router.get('/ethereum/tokens', function(req, res) {
   });
 });
 
-router.post('/location', restrict, function(req, res) {
-  const data = req.body;
+router.post('/location', function(req, res) {
+  var data = req.body;
   geo.save(data.lat, data.lon, data).then(function() {
     res.status(201).send();
   }).catch(function(err) {
@@ -156,8 +152,8 @@ router.post('/location', restrict, function(req, res) {
   });
 });
 
-router.put('/location', restrict, function(req, res) {
-  const data = req.body;
+router.put('/location', function(req, res) {
+  var data = req.body;
   geo.search(data.lat, data.lon, data).then(function(results) {
     res.status(200).json(results);
   }).catch(function(err) {
@@ -165,7 +161,7 @@ router.put('/location', restrict, function(req, res) {
   });
 });
 
-router.delete('/location', restrict, function(req, res) {
+router.delete('/location', function(req, res) {
   geo.remove(req.body.id).catch(console.error);
   res.status(200).send();
 });
@@ -181,8 +177,8 @@ router.get('/shapeShiftRedirectUri', function(req, res) {
   });
 });
 
-router.delete('/shapeShiftToken', restrict, function(req, res) {
-  const token = req.body.token;
+router.delete('/shapeShiftToken', function(req, res) {
+  var token = req.body.token;
   shapeshift.revokeToken(token).catch(function() {});
   res.status(200).send();
 });
@@ -215,13 +211,13 @@ router.get('/changelly/validate/:address/:symbol', function(req, res) {
   });
 });
 
-router.post('/changelly/createTransaction', restrict, function(req, res) {
-  const from = req.body.from;
-  const to = req.body.to;
-  const amount = req.body.amount;
-  const address = req.body.address;
-  const refundAddress = req.body.refundAddress;
-  if (!from || !to || !amount || !address) return res.status(400).json({ error: 'Bad request' });
+router.post('/changelly/createTransaction', function(req, res) {
+  var from = req.body.from;
+  var to = req.body.to;
+  var amount = req.body.amount;
+  var address = req.body.address;
+  var refundAddress = req.body.refundAddress;
+  if (!from || !to || !amount || !address) return res.status(400).json({error: 'Bad request'});
   changelly.createTransaction(from, to, amount, address, refundAddress).then(function(data) {
     res.status(200).send(data);
   }).catch(function(err) {
@@ -353,25 +349,6 @@ function validateAuthParams(allowMissingPin) {
     }
     next();
   };
-}
-
-function restrict(req, res, next) {
-  const id = req.method === 'GET' ? req.query.id : req.body.id;
-  // eslint-disable-next-line camelcase
-  const session_id = req.session.wallet_id;
-  // eslint-disable-next-line camelcase
-  if (session_id && session_id === id) {
-    next();
-  } else {
-    return res.status(401).send();
-  }
-}
-
-// eslint-disable-next-line camelcase
-function setCookie(req, wallet_id, callback) {
-  // eslint-disable-next-line camelcase
-  req.session.wallet_id = wallet_id;
-  callback();
 }
 
 module.exports = router;

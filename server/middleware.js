@@ -1,66 +1,46 @@
 'use strict';
 
 var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
-var cookieSession = require('cookie-session');
 var compress = require('compression');
 var path = require('path');
 var helmet = require('helmet');
 var express = require('express');
+var cors = require('cors');
 
 function init(app) {
 
   app.use(requireHTTPS);
 
   if (isProduction()) {
-    app.set('trust proxy', true)
-    app.use(helmet.xssFilter())
-    app.use(helmet.noSniff())
-    app.use(helmet.frameguard({action: 'sameorigin'}))
+    app.set('trust proxy', true);
+    app.use(helmet.xssFilter());
+    app.use(helmet.noSniff());
+    app.use(helmet.frameguard({action: 'sameorigin'}));
 
-    var oneYearInSeconds = 31536000
+    var oneYearInSeconds = 31536000;
     app.use(helmet.hsts({
       maxAge: oneYearInSeconds,
       includeSubDomains: true,
-      preload: true
-    }))
+      preload: true,
+    }));
   }
 
+  app.use(cors());
+
   var dayInMs = 24 * 60 * 60 * 1000;
-  app.use(bodyParser.urlencoded({extended: true}))
-  app.use(bodyParser.json())
-  app.use(cookieParser(process.env.COOKIE_SALT))
-  app.use(cookieSession({
-    signed: false,
-    overwrite: false,
-    maxAge: dayInMs,
-    httpOnly: true,
-    secure: isProduction()
-  }))
+  app.use(bodyParser.urlencoded({extended: true}));
+  app.use(bodyParser.json());
 
-  app.use(function (req, res, next) {
-    req.session.nowInMinutes = Math.floor(Date.now() / 60e3);
-    next();
-  })
+  app.use(compress());
 
-  app.use(cookieOnion)
-  app.use(compress())
-
-  var cacheControl = isProduction() ? { maxAge: dayInMs, setHeaders: setCustomCacheControl } : null
-  app.use(express.static(path.join(__dirname, '..', 'build'), cacheControl))
+  var cacheControl = isProduction() ? { maxAge: dayInMs, setHeaders: setCustomCacheControl } : null;
+  app.use(express.static(path.join(__dirname, '..', 'build'), cacheControl));
 }
 
 function setCustomCacheControl(res, path) {
   if (express.static.mime.lookup(path) === 'text/html') {
     res.setHeader('Cache-Control', 'public, max-age=0');
   }
-}
-
-function cookieOnion(req, res, next) {
-  if (isOnionDomain(req)) {
-    req.sessionOptions.secure = false;
-  }
-  next();
 }
 
 function requireHTTPS(req, res, next) {
@@ -80,5 +60,5 @@ function isOnionDomain(req) {
 }
 
 module.exports = {
-  init: init
+  init: init,
 };

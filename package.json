@@ -17,7 +17,7 @@
     "dev:link": "linklocal -lr",
     "server": "node --expose-gc ./server/server.js",
     "server:watch": "nodemon -w .env.loc -w ./server -x node -r dotenv/config ./server/server.js dotenv_config_path=.env.loc",
-    "lint": "eslint cli/ electron/*.js electron/lib/*.js webpack.*.js app/widgets/modals/tooltip/*.js server/server.js server/lib/v1/db.js server/lib/v1/master.js server/lib/v1/github.js server/lib/v1/api.js",
+    "lint": "eslint cli/ electron/*.js electron/lib/*.js webpack.*.js app/widgets/modals/tooltip/*.js server/middleware.js server/server.js server/lib/v1/db.js server/lib/v1/master.js server/lib/v1/github.js server/lib/v1/api.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -28,15 +28,12 @@
     "big.js": "^3.1.3",
     "body-parser": "^1.18.1",
     "compression": "^1.7.0",
-    "cookie-parser": "^1.4.3",
-    "cookie-session": "^1.3.1",
-    "cradle": "^0.7.1",
+    "cors": "^2.8.5",
     "cs-openalias": "file:./app/lib/openalias",
     "cs-pin-validator": "file:./app/lib/pin-validator",
     "ejs": "^2.6.1",
     "express": "^4.15.4",
     "helmet": "^3.21.0",
-    "in-app-purchase": "^1.10.1",
     "mongodb": "^3.1.10",
     "retry": "^0.10.1",
     "semver": "^7.3.2"
