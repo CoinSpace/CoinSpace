@@ -30,7 +30,7 @@ console.log('Start building (webpack)...');
 const envFile = `.env.${program.env}`;
 console.log(`ENV_FILE: ${warning(envFile)}`);
 
-dotenv.config({path: envFile});
+dotenv.config({ path: envFile });
 process.env['ENV_FILE'] = envFile;
 process.env['ENV'] = program.env;
 process.env['BUILD_TYPE'] = 'electron';
@@ -50,7 +50,7 @@ webpack(webpackConfig, function(error, stats) {
   if (stats.hasErrors()) return console.log(stats.toString({ colors: true }));
 
   fse.removeSync(electronBuildPath);
-  fse.copySync('build', path.resolve(electronBuildPath), {filter: utils.filterMapFiles});
+  fse.copySync('build', path.resolve(electronBuildPath), { filter: utils.filterMapFiles });
   /*if (program.platform === 'win') {
     // copy assets for electron appx installer
     fse.copySync('electron/images/win', path.resolve(`${electronBuildPath}/appx/images`));

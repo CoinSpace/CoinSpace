@@ -67,8 +67,8 @@ module.exports = {
       filename: '.well-known/apple-app-site-association',
     }),
     new CopyWebpackPlugin([
-      {from: 'app/security.txt', to: './'},
-      {from: 'app/assets/icons/favicon.ico', to: './'},
+      { from: 'app/security.txt', to: './' },
+      { from: 'app/assets/icons/favicon.ico', to: './' },
     ]),
     new CircularDependencyPlugin({
       exclude: /node_modules/,

@@ -21,7 +21,7 @@ program
 console.log('Start building (webpack)...');
 
 var envFile = `.env.${program.env}`;
-dotenv.config({path: envFile});
+dotenv.config({ path: envFile });
 process.env['ENV_FILE'] = envFile;
 process.env['ENV'] = program.env;
 process.env['BUILD_TYPE'] = 'phonegap';
@@ -38,7 +38,7 @@ webpackConfig.plugins.push(
 
 webpack(webpackConfig, function(error, stats) {
   if (error) return console.error(error);
-  if (stats.hasErrors()) return console.log(stats.toString({colors: true}));
+  if (stats.hasErrors()) return console.log(stats.toString({ colors: true }));
 
   fse.removeSync(mobileBuildPath);
   fse.copySync('phonegap/config.xml.template', path.resolve(mobileBuildPath, 'config.xml'));
@@ -47,7 +47,7 @@ webpack(webpackConfig, function(error, stats) {
     from: 'id="com.coinspace.app"',
     to: 'id="com.coinspace.wallet"',
   });
-  fse.copySync('build', path.resolve(mobileBuildPath, 'www'), {filter: utils.filterMapFiles});
+  fse.copySync('build', path.resolve(mobileBuildPath, 'www'), { filter: utils.filterMapFiles });
 
   utils.cordova('platform add ios@4.5.3');
   utils.cordova('plugin add cordova-plugin-geolocation@2.4.3');

@@ -17,7 +17,7 @@ program
 
 var currentDockerMachine = process.env.DOCKER_MACHINE_NAME ? process.env.DOCKER_MACHINE_NAME : 'local';
 var envFile = `.env.${program.env}`;
-dotenv.config({path: envFile});
+dotenv.config({ path: envFile });
 console.log(`ENV_FILE: ${warning(envFile)}`);
 console.log(`DOCKER MACHINE: ${warning(currentDockerMachine)}`);
 console.log('Start building (webpack)...');
@@ -38,7 +38,7 @@ webpackConfig.plugins.push(
 
 webpack(webpackConfig, function(error, stats) {
   if (error) return console.error(error);
-  if (stats.hasErrors()) return console.log(stats.toString({colors: true}));
+  if (stats.hasErrors()) return console.log(stats.toString({ colors: true }));
   if (program.release) {
     utils.uploadSentrySourceMaps('web', SENTRY_RELEASE);
   }

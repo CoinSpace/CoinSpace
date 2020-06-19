@@ -74,7 +74,7 @@ const config = merge(common, {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(['./build'], {verbose: false}),
+    new CleanWebpackPlugin(['./build'], { verbose: false }),
     new ProgressBarPlugin(),
     new Dotenv({
       path: envFile,
@@ -84,7 +84,7 @@ const config = merge(common, {
       sourceMap: true,
       uglifyOptions: {
         mangle: {
-          reserved: ['BigInteger','ECPair','Point', '_', 'RippleError', 'RippledError', 'UnexpectedError',
+          reserved: ['BigInteger', 'ECPair', 'Point', '_', 'RippleError', 'RippledError', 'UnexpectedError',
             'LedgerVersionError', 'ConnectionError', 'NotConnectedError',
             'DisconnectedError', 'TimeoutError', 'ResponseFormatError',
             'ValidationError', 'NotFoundError', 'MissingLedgerHistoryError',

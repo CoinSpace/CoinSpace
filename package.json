@@ -143,7 +143,21 @@
           "functions": "never"
         }
       ],
-      "object-curly-spacing": [2, "always"],
+      "comma-spacing": [
+        2,
+        {
+          "before": false,
+          "after": true
+        }
+      ],
+      "object-curly-spacing": [
+        2,
+        "always"
+      ],
+      "array-bracket-spacing": [
+        2,
+        "never"
+      ],
       "indent": [
         2,
         2

@@ -51,7 +51,7 @@ function xlf(program) {
         keys[key].target = existed[key].target;
       }
     });
-    js.resources = {[resource]: keys};
+    js.resources = { [resource]: keys };
     var xliff = jsToXliff12(js, {});
 
     fse.writeFileSync(dest, xliff);

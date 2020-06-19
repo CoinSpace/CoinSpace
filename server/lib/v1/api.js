@@ -48,7 +48,7 @@ router.post('/login', validateAuthParams(true), function(req, res) {
 
 router.get('/exist', function(req, res) {
   const walletId = req.query.wallet_id;
-  if (!walletId) return res.status(400).json({error: 'Bad request'});
+  if (!walletId) return res.status(400).json({ error: 'Bad request' });
   account.isExist(walletId).then(function(userExist) {
     res.status(200).send(userExist);
   }).catch(function(err) {
@@ -58,19 +58,19 @@ router.get('/exist', function(req, res) {
 
 router.get('/openalias', function(req, res) {
   const hostname = req.query.hostname;
-  if (!hostname) return res.status(400).json({error: 'Bad request'});
+  if (!hostname) return res.status(400).json({ error: 'Bad request' });
   openalias.resolve(hostname, function(err, address, name) {
     if (err) return res.status(400).send(err);
-    res.status(200).send({address: address, name: name});
+    res.status(200).send({ address: address, name: name });
   });
 });
 
 router.put('/username', restrict, function(req, res) {
   const id = req.body.id;
   const username = req.body.username;
-  if (!username) return res.status(400).json({error: 'Bad request'});
+  if (!username) return res.status(400).json({ error: 'Bad request' });
   account.setUsername(id, username).then(function(username) {
-    res.status(200).send({username: username});
+    res.status(200).send({ username: username });
   }).catch(function(err) {
     res.status(400).send(err);
   });
@@ -85,7 +85,7 @@ router.get('/details', restrict, function(req, res) {
 });
 
 router.put('/details', restrict, function(req, res) {
-  if (!req.body.data) return res.status(400).json({error: 'Bad request'});
+  if (!req.body.data) return res.status(400).json({ error: 'Bad request' });
   account.saveDetails(req.body.id, req.body.data).then(function(details) {
     res.status(200).json(details);
   }).catch(function(err) {
@@ -123,7 +123,7 @@ router.get('/csFee', function(req, res) {
 
 router.get('/ticker', function(req, res) {
   const crypto = req.query.crypto;
-  if (!crypto) return res.status(400).json({error: 'Bad request'});
+  if (!crypto) return res.status(400).json({ error: 'Bad request' });
   ticker.getFromCache(crypto).then(function(data) {
     res.status(200).send(data);
   }).catch(function(err) {
@@ -175,9 +175,9 @@ router.get('/shapeShiftRedirectUri', function(req, res) {
   const buildType = req.query.buildType;
   if (!['web', 'phonegap', 'electron'].includes(buildType)) return res.status(400).send('Bad request');
   shapeshift.getAccessToken(code).then(function(accessToken) {
-    res.render('shapeshift', {accessToken: accessToken, buildType: buildType});
+    res.render('shapeshift', { accessToken: accessToken, buildType: buildType });
   }).catch(function() {
-    res.render('shapeshift', {accessToken: '', buildType: buildType});
+    res.render('shapeshift', { accessToken: '', buildType: buildType });
   });
 });
 
@@ -199,7 +199,7 @@ router.get('/changelly/estimate', function(req, res) {
   const from = req.query.from || '';
   const to = req.query.to || '';
   const amount = req.query.amount || 0;
-  if (!from || !to) return res.status(400).json({error: 'Bad request'});
+  if (!from || !to) return res.status(400).json({ error: 'Bad request' });
   changelly.estimate(from, to, amount).then(function(data) {
     res.status(200).send(data);
   }).catch(function(err) {
@@ -221,7 +221,7 @@ router.post('/changelly/createTransaction', restrict, function(req, res) {
   const amount = req.body.amount;
   const address = req.body.address;
   const refundAddress = req.body.refundAddress;
-  if (!from || !to || !amount || !address) return res.status(400).json({error: 'Bad request'});
+  if (!from || !to || !amount || !address) return res.status(400).json({ error: 'Bad request' });
   changelly.createTransaction(from, to, amount, address, refundAddress).then(function(data) {
     res.status(200).send(data);
   }).catch(function(err) {
@@ -258,7 +258,7 @@ router.get('/moonpay/fiat', function(req, res) {
 });
 
 router.get('/moonpay/countries', function(req, res) {
-  if (!['document', 'allowed'].includes(req.query.type)) return res.status(400).json({error: 'Bad request'});
+  if (!['document', 'allowed'].includes(req.query.type)) return res.status(400).json({ error: 'Bad request' });
   moonpay.getFromCache('countries_' + req.query.type).then(function(data) {
     res.status(200).send(data);
   }).catch(function(err) {
@@ -270,7 +270,7 @@ router.get('/moonpay/redirectURL', function(req, res) {
   const buildType = req.query.buildType;
   const transactionId = req.query.transactionId || '';
   if (!['web', 'phonegap', 'electron'].includes(buildType)) return res.status(400).send('Bad request');
-  res.render('moonpay', {transactionId: transactionId, buildType: buildType});
+  res.render('moonpay', { transactionId: transactionId, buildType: buildType });
 });
 
 // for debug
@@ -299,12 +299,12 @@ router.get('/update/:distribution/:arch/:version', (req, res, next) => {
   const app = req.get('User-Agent').includes('CoinSpace') ? 'electron' : 'app';
   const { distribution, arch, version } = req.params;
   if (!semver.valid(version)) {
-    return res.status(400).send({ error: `Invalid SemVer: "${version}"`});
+    return res.status(400).send({ error: `Invalid SemVer: "${version}"` });
   }
   github.getUpdate(distribution, arch, app)
     .then(update => {
       if (!update) {
-        res.status(404).send({ error: 'Unsupported platform'});
+        res.status(404).send({ error: 'Unsupported platform' });
       } else if (semver.eq(update.version, version)) {
         // send "no content" if version exactly match
         // this allows to downgrade version
@@ -337,7 +337,7 @@ router.get('/update/win/x64/:version/RELEASES', (req, res, next) => {
 function validateAuthParams(allowMissingPin) {
   return function (req, res, next) {
     if (!req.body.wallet_id || !validatePin(req.body.pin, allowMissingPin)) {
-      return res.status(400).json({error: 'Bad request'});
+      return res.status(400).json({ error: 'Bad request' });
     }
     next();
   };

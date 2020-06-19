@@ -26,7 +26,7 @@ if (program.run) {
 console.log('Start building (webpack)...');
 
 var envFile = `.env.${program.env}`;
-dotenv.config({path: envFile});
+dotenv.config({ path: envFile });
 process.env['ENV_FILE'] = envFile;
 process.env['ENV'] = program.env;
 process.env['BUILD_TYPE'] = 'phonegap';
@@ -43,11 +43,11 @@ webpackConfig.plugins.push(
 
 webpack(webpackConfig, function(error, stats) {
   if (error) return console.error(error);
-  if (stats.hasErrors()) return console.log(stats.toString({colors: true}));
+  if (stats.hasErrors()) return console.log(stats.toString({ colors: true }));
 
   fse.removeSync(mobileBuildPath);
   fse.copySync('phonegap/config.xml.template', path.resolve(mobileBuildPath, 'config.xml'));
-  fse.copySync('build', path.resolve(mobileBuildPath, 'www'), {filter: utils.filterMapFiles});
+  fse.copySync('build', path.resolve(mobileBuildPath, 'www'), { filter: utils.filterMapFiles });
 
   utils.cordova('platform add android@6.4.0');
 
@@ -77,12 +77,12 @@ webpack(webpackConfig, function(error, stats) {
     utils.shell(
       `jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ../release.keystore \
       -storepass coinspace platforms/android/build/outputs/apk/release/android-release-unsigned.apk coinspace`,
-      {cwd: mobileBuildPath}
+      { cwd: mobileBuildPath }
     );
     utils.shell(
       `zipalign -f -v 4 platforms/android/build/outputs/apk/release/android-release-unsigned.apk \
       ../deploy/coinspace-release.apk`,
-      {cwd: mobileBuildPath}
+      { cwd: mobileBuildPath }
     );
   } else {
     utils.cordova('build android');
