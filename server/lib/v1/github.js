@@ -203,4 +203,5 @@ module.exports = {
   getLatest,
   getUpdate,
   getUpdates,
+  account: GH_ACCOUNT,
 };

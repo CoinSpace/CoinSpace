@@ -339,7 +339,7 @@ router.get('/download/:distribution/:arch', (req, res, next) => {
   github.getUpdate(distribution, arch, 'app')
     .then(update => {
       if (!update) {
-        res.status(404).send('Unsupported platform');
+        res.redirect(302, `https://github.com/${github.account}/releases/latest`);
       } else {
         res.redirect(302, update.url);
       }
