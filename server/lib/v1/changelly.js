@@ -1,3 +1,5 @@
+'use strict';
+
 var axios = require('axios');
 var crypto = require('crypto');
 var Big = require('big.js');
