@@ -1,12 +1,12 @@
 'use strict';
 
-var express = require('express');
-var Sentry = require('@sentry/node');
-var Integrations = require('@sentry/integrations');
-var middleware = require('./middleware');
+const express = require('express');
+const Sentry = require('@sentry/node');
+const Integrations = require('@sentry/integrations');
+const middleware = require('./middleware');
 
-var api = require('./lib/v1/api');
-var app = express();
+const api = require('./lib/v1/api');
+const app = express();
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN_SERVER,
@@ -14,14 +14,14 @@ Sentry.init({
   release: `coin.server@${process.env.npm_package_version}`,
   integrations: [
     new Integrations.CaptureConsole({
-      levels: ['error']
-    })
-  ]
+      levels: ['error'],
+    }),
+  ],
 });
 app.use(Sentry.Handlers.requestHandler());
 
-var master = require('./lib/v1/master');
-var db = require('./lib/v1/db');
+const master = require('./lib/v1/master');
+const db = require('./lib/v1/db');
 
 middleware.init(app);
 
@@ -32,30 +32,32 @@ app.set('view engine', 'ejs');
 
 app.use(Sentry.Handlers.errorHandler());
 
-app.use(function(err, req, res, next) {
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send({error: 'Oops! something went wrong.'});
+  res.status(500).send({ error: 'Oops! something went wrong.' });
 });
 
-app.use(function(req, res, next) {
-  res.status(404).send({error: 'Oops! page not found.'});
+// eslint-disable-next-line no-unused-vars
+app.use((req, res, next) => {
+  res.status(404).send({ error: 'Oops! page not found.' });
 });
 
-db().then(function() {
-  var port = process.env.PORT || 8080;
-  var server = app.listen(port, function() {
-    console.info('server listening on http://localhost:' + server.address().port)
+db().then(() => {
+  const port = process.env.PORT || 8080;
+  const server = app.listen(port, () => {
+    console.info('server listening on http://localhost:' + server.address().port);
     server.timeout = 30000; // 30 sec
   });
 
   if (process.env.MASTER === '1') {
-    master.cleanGeo(60 * 60 * 1000) // 1 hour
-    master.cacheFees(60 * 60 * 1000) // 1 hour
-    master.cacheTicker(1 * 60 * 1000) // 1 minute
-    master.cacheEthereumTokens(1 * 60 * 1000) // 1 minute
-    master.cacheMoonpayCurrencies(60 * 60 * 1000) // 1 hour
-    master.cacheMoonpayCountries(60 * 60 * 1000) // 1 hour
+    master.cleanGeo(60 * 60 * 1000); // 1 hour
+    master.cacheFees(60 * 60 * 1000); // 1 hour
+    master.cacheTicker(1 * 60 * 1000); // 1 minute
+    master.cacheEthereumTokens(1 * 60 * 1000); // 1 minute
+    master.cacheMoonpayCurrencies(60 * 60 * 1000); // 1 hour
+    master.cacheMoonpayCountries(60 * 60 * 1000); // 1 hour
   }
-}).catch(function(error) {
+}).catch((error) => {
   console.log('error', error);
 });

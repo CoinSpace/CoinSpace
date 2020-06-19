@@ -1,29 +1,32 @@
+/*eslint no-var: "error"*/
 'use strict';
 
-var express = require('express');
+const express = require('express');
 
-var auth = require('./auth');
-var account = require('./account');
-var geo = require('./geo');
-var validatePin = require('cs-pin-validator');
-var openalias = require('cs-openalias');
-var fee = require('./fee');
-var csFee = require('./csFee');
-var ticker = require('./ticker');
-var ethereumTokens = require('./ethereumTokens');
-var shapeshift = require('./shapeshift');
-var changelly = require('./changelly');
-var moonpay = require('./moonpay');
+const auth = require('./auth');
+const account = require('./account');
+const geo = require('./geo');
+const validatePin = require('cs-pin-validator');
+const openalias = require('cs-openalias');
+const fee = require('./fee');
+const csFee = require('./csFee');
+const ticker = require('./ticker');
+const ethereumTokens = require('./ethereumTokens');
+const shapeshift = require('./shapeshift');
+const changelly = require('./changelly');
+const moonpay = require('./moonpay');
+const semver = require('semver');
+const github = require('./github');
 
-var router = express.Router();
+const router = express.Router();
 
 router.post('/register', validateAuthParams(false), function(req, res) {
-  var walletId = req.body.wallet_id;
+  const walletId = req.body.wallet_id;
   auth.register(walletId, req.body.pin).then(function(token) {
     setCookie(req, walletId, function() {
       console.log('registered wallet %s', walletId);
       res.status(200).send(token);
-    })
+    });
   }).catch(function(err) {
     if (!['auth_failed', 'user_deleted'].includes(err.error)) console.error('error', err);
     return res.status(400).send(err);
@@ -31,7 +34,7 @@ router.post('/register', validateAuthParams(false), function(req, res) {
 });
 
 router.post('/login', validateAuthParams(true), function(req, res) {
-  var walletId = req.body.wallet_id;
+  const walletId = req.body.wallet_id;
   auth.login(walletId, req.body.pin).then(function(token) {
     setCookie(req, walletId, function() {
       console.log('authenticated wallet %s', walletId);
@@ -44,7 +47,7 @@ router.post('/login', validateAuthParams(true), function(req, res) {
 });
 
 router.get('/exist', function(req, res) {
-  var walletId = req.query.wallet_id;
+  const walletId = req.query.wallet_id;
   if (!walletId) return res.status(400).json({error: 'Bad request'});
   account.isExist(walletId).then(function(userExist) {
     res.status(200).send(userExist);
@@ -54,17 +57,17 @@ router.get('/exist', function(req, res) {
 });
 
 router.get('/openalias', function(req, res) {
-  var hostname = req.query.hostname
+  const hostname = req.query.hostname;
   if (!hostname) return res.status(400).json({error: 'Bad request'});
   openalias.resolve(hostname, function(err, address, name) {
-    if(err) return res.status(400).send(err)
-    res.status(200).send({address: address, name: name})
-  })
+    if (err) return res.status(400).send(err);
+    res.status(200).send({address: address, name: name});
+  });
 });
 
 router.put('/username', restrict, function(req, res) {
-  var id = req.body.id;
-  var username = req.body.username;
+  const id = req.body.id;
+  const username = req.body.username;
   if (!username) return res.status(400).json({error: 'Bad request'});
   account.setUsername(id, username).then(function(username) {
     res.status(200).send({username: username});
@@ -91,16 +94,16 @@ router.put('/details', restrict, function(req, res) {
 });
 
 router.delete('/account', restrict, function(req, res) {
-  var id = req.body.id;
+  const id = req.body.id;
   account.remove(id).then(function() {
-    res.status(200).send()
+    res.status(200).send();
   }).catch(function(err) {
     res.status(400).send(err);
-  })
+  });
 });
 
 router.get('/fees', function(req, res) {
-  var network = req.query.network || 'bitcoin'
+  const network = req.query.network || 'bitcoin';
   fee.getFromCache(network).then(function(fees) {
     delete fees._id;
     res.status(200).send(fees);
@@ -110,7 +113,7 @@ router.get('/fees', function(req, res) {
 });
 
 router.get('/csFee', function(req, res) {
-  var network = req.query.network || 'bitcoin'
+  const network = req.query.network || 'bitcoin';
   csFee.get(network).then(function(data) {
     res.status(200).send(data);
   }).catch(function(err) {
@@ -119,7 +122,7 @@ router.get('/csFee', function(req, res) {
 });
 
 router.get('/ticker', function(req, res) {
-  var crypto = req.query.crypto
+  const crypto = req.query.crypto;
   if (!crypto) return res.status(400).json({error: 'Bad request'});
   ticker.getFromCache(crypto).then(function(data) {
     res.status(200).send(data);
@@ -145,7 +148,7 @@ router.get('/ethereum/tokens', function(req, res) {
 });
 
 router.post('/location', restrict, function(req, res) {
-  var data = req.body;
+  const data = req.body;
   geo.save(data.lat, data.lon, data).then(function() {
     res.status(201).send();
   }).catch(function(err) {
@@ -154,7 +157,7 @@ router.post('/location', restrict, function(req, res) {
 });
 
 router.put('/location', restrict, function(req, res) {
-  var data = req.body;
+  const data = req.body;
   geo.search(data.lat, data.lon, data).then(function(results) {
     res.status(200).json(results);
   }).catch(function(err) {
@@ -168,8 +171,8 @@ router.delete('/location', restrict, function(req, res) {
 });
 
 router.get('/shapeShiftRedirectUri', function(req, res) {
-  var code = req.query.code || '';
-  var buildType = req.query.buildType;
+  const code = req.query.code || '';
+  const buildType = req.query.buildType;
   if (!['web', 'phonegap', 'electron'].includes(buildType)) return res.status(400).send('Bad request');
   shapeshift.getAccessToken(code).then(function(accessToken) {
     res.render('shapeshift', {accessToken: accessToken, buildType: buildType});
@@ -179,7 +182,7 @@ router.get('/shapeShiftRedirectUri', function(req, res) {
 });
 
 router.delete('/shapeShiftToken', restrict, function(req, res) {
-  var token = req.body.token;
+  const token = req.body.token;
   shapeshift.revokeToken(token).catch(function() {});
   res.status(200).send();
 });
@@ -193,9 +196,9 @@ router.get('/changelly/getCoins', function(req, res) {
 });
 
 router.get('/changelly/estimate', function(req, res) {
-  var from = req.query.from || '';
-  var to = req.query.to || '';
-  var amount = req.query.amount || 0;
+  const from = req.query.from || '';
+  const to = req.query.to || '';
+  const amount = req.query.amount || 0;
   if (!from || !to) return res.status(400).json({error: 'Bad request'});
   changelly.estimate(from, to, amount).then(function(data) {
     res.status(200).send(data);
@@ -209,15 +212,15 @@ router.get('/changelly/validate/:address/:symbol', function(req, res) {
     res.status(200).send(data);
   }).catch(function(err) {
     res.status(400).send(err);
-  })
+  });
 });
 
 router.post('/changelly/createTransaction', restrict, function(req, res) {
-  var from = req.body.from;
-  var to = req.body.to;
-  var amount = req.body.amount;
-  var address = req.body.address;
-  var refundAddress = req.body.refundAddress;
+  const from = req.body.from;
+  const to = req.body.to;
+  const amount = req.body.amount;
+  const address = req.body.address;
+  const refundAddress = req.body.refundAddress;
   if (!from || !to || !amount || !address) return res.status(400).json({error: 'Bad request'});
   changelly.createTransaction(from, to, amount, address, refundAddress).then(function(data) {
     res.status(200).send(data);
@@ -235,8 +238,10 @@ router.get('/changelly/transaction/:id', function(req, res) {
 });
 
 router.get('/moonpay/coins', function(req, res) {
-  var id = 'coins';
-  if (req.query.country === 'USA') id += '_usa';
+  let id = 'coins';
+  if (req.query.country === 'USA'){
+    id += '_usa';
+  }
   moonpay.getFromCache(id).then(function(data) {
     res.status(200).send(data);
   }).catch(function(err) {
@@ -262,24 +267,85 @@ router.get('/moonpay/countries', function(req, res) {
 });
 
 router.get('/moonpay/redirectURL', function(req, res) {
-  var buildType = req.query.buildType;
-  var transactionId = req.query.transactionId || '';
+  const buildType = req.query.buildType;
+  const transactionId = req.query.transactionId || '';
   if (!['web', 'phonegap', 'electron'].includes(buildType)) return res.status(400).send('Bad request');
   res.render('moonpay', {transactionId: transactionId, buildType: buildType});
+});
+
+router.get('/updates', (req, res, next) => {
+  github.getUpdates()
+    .then((updates) => {
+      return Object.values(updates).map((item) => {
+        return {
+          name: item.name,
+          version: item.version,
+          url: item.url,
+          distribution: item.distribution,
+          arch: item.arch,
+          app: item.app,
+        };
+      });
+    })
+    .then((updates) => {
+      res.status(200).send(updates);
+    })
+    .catch(next);
+});
+
+router.get('/update/:distribution/:arch/:version', (req, res, next) => {
+  const app = req.get('User-Agent').includes('CoinSpace') ? 'electron' : 'app';
+  const { distribution, arch, version } = req.params;
+  if (!semver.valid(version)) {
+    return res.status(400).send({ error: `Invalid SemVer: "${version}"`});
+  }
+  github.getUpdate(distribution, arch, app)
+    .then(update => {
+      if (!update) {
+        res.status(404).send({ error: 'Unsupported platform'});
+      } else if (semver.eq(update.version, version)) {
+        // send "no content" if version exactly match
+        // this allows to downgrade version
+        res.status(204).end();
+      } else {
+        res.status(200).send({
+          name: update.name,
+          version: update.version,
+          url: update.url,
+        });
+      }
+    }).catch(next);
+});
+
+router.get('/update/win/x64/:version/RELEASES', (req, res, next) => {
+  const { version } = req.params;
+  if (!semver.valid(version)) {
+    return res.status(400).send(`Invalid SemVer: "${version}"`);
+  }
+  github.getUpdate('win', 'x64', 'electron')
+    .then(update => {
+      if (!update) {
+        res.status(404).send('Unsupported platform');
+      } else {
+        res.status(200).send(update.content);
+      }
+    }).catch(next);
 });
 
 function validateAuthParams(allowMissingPin) {
   return function (req, res, next) {
     if (!req.body.wallet_id || !validatePin(req.body.pin, allowMissingPin)) {
-      return res.status(400).json({error: 'Bad request'})
+      return res.status(400).json({error: 'Bad request'});
     }
     next();
-  }
+  };
 }
 
 function restrict(req, res, next) {
-  var id = req.method === 'GET' ? req.query.id : req.body.id;
-  var session_id = req.session.wallet_id;
+  const id = req.method === 'GET' ? req.query.id : req.body.id;
+  // eslint-disable-next-line camelcase
+  const session_id = req.session.wallet_id;
+  // eslint-disable-next-line camelcase
   if (session_id && session_id === id) {
     next();
   } else {
@@ -287,7 +353,9 @@ function restrict(req, res, next) {
   }
 }
 
+// eslint-disable-next-line camelcase
 function setCookie(req, wallet_id, callback) {
+  // eslint-disable-next-line camelcase
   req.session.wallet_id = wallet_id;
   callback();
 }
