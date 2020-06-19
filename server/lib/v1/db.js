@@ -23,7 +23,7 @@ module.exports = function() {
         db.collection('details').createIndexes([
           { key: { username_sha: 1 }, background: true, unique: true, sparse: true },
         ]),
-        db.collection('platforms').createIndexes([
+        db.collection('releases').createIndexes([
           {
             key: {
               distribution: 1,

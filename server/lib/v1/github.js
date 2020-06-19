@@ -91,7 +91,7 @@ const platforms = [{
 
 
 function save(updates) {
-  const collection = db().collection('platforms');
+  const collection = db().collection('releases');
   return Promise.all(updates.map((update) => {
     return collection.updateOne({
       distribution: update.distribution,
@@ -102,11 +102,11 @@ function save(updates) {
 }
 
 async function getUpdates() {
-  return db().collection('platforms').find({}).toArray();
+  return db().collection('releases').find({}).toArray();
 }
 
 async function getUpdate(distribution, arch, app) {
-  return db().collection('platforms').findOne({
+  return db().collection('releases').findOne({
     distribution,
     arch,
     app,
