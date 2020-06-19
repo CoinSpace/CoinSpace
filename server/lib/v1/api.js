@@ -273,10 +273,12 @@ router.get('/moonpay/redirectURL', function(req, res) {
   res.render('moonpay', {transactionId: transactionId, buildType: buildType});
 });
 
+// for debug
+// returns all releases
 router.get('/updates', (req, res, next) => {
   github.getUpdates()
     .then((updates) => {
-      return Object.values(updates).map((item) => {
+      return updates.map((item) => {
         return {
           name: item.name,
           version: item.version,

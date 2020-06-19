@@ -1,6 +1,7 @@
 /*eslint no-var: "error"*/
 'use strict';
 
+const db = require('./db');
 const semver = require('semver');
 const axios = require('axios').create({
   timeout: 30000,
@@ -18,8 +19,6 @@ const GH_TOKEN = process.env.GH_TOKEN;
 
 const TYPE_FILE = 'file';
 const TYPE_LINK = 'link';
-// 10 min
-const EXPIRE = 10 * 60 * 1000;
 
 
 const platforms = [{
@@ -91,27 +90,27 @@ const platforms = [{
 });
 
 
-let latest;
-let lock;
-let timestamp = 0;
+function save(updates) {
+  const collection = db().collection('platforms');
+  return Promise.all(updates.map((update) => {
+    return collection.updateOne({
+      distribution: update.distribution,
+      arch: update.arch,
+      app: update.app,
+    }, { $set: update }, { upsert: true });
+  }));
+}
 
 async function getUpdates() {
-  if (!lock && Date.now() - timestamp > EXPIRE) {
-    lock = true;
-    latest = getLatest().catch((err) => {
-      console.error(err);
-      return {};
-    });
-    await latest;
-    lock = false;
-    timestamp = Date.now();
-  }
-  return latest;
+  return db().collection('platforms').find({}).toArray();
 }
 
 async function getUpdate(distribution, arch, app) {
-  const updates = await getUpdates();
-  return updates[`${distribution}-${arch}-${app}`] || updates[`${distribution}-any-${app}`];
+  return db().collection('platforms').findOne({
+    distribution,
+    arch,
+    app,
+  });
 }
 
 async function getLatest() {
@@ -200,6 +199,8 @@ async function getReleasesContent(version) {
 }
 
 module.exports = {
+  save,
+  getLatest,
   getUpdate,
   getUpdates,
 };
