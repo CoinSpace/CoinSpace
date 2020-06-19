@@ -334,6 +334,18 @@ router.get('/update/win/x64/:version/RELEASES', (req, res, next) => {
     }).catch(next);
 });
 
+router.get('/download/:distribution/:arch', (req, res, next) => {
+  const { distribution, arch } = req.params;
+  github.getUpdate(distribution, arch, 'app')
+    .then(update => {
+      if (!update) {
+        res.status(404).send('Unsupported platform');
+      } else {
+        res.redirect(302, update.url);
+      }
+    }).catch(next);
+});
+
 function validateAuthParams(allowMissingPin) {
   return function (req, res, next) {
     if (!req.body.wallet_id || !validatePin(req.body.pin, allowMissingPin)) {
