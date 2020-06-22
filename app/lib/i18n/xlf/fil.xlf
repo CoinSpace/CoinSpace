@@ -1269,7 +1269,7 @@ Iko-convert ito sa %(toSymbol)s, at ipapadala sa
       </trans-unit>
       <trans-unit id="Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.">
         <source>Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.</source>
-        <target></target>
+        <target>Babaguhin ang address pagkatapos tanggapin ang mga pondo. Lahat ng mga dating ginamit na address ay nanatiling balido at maaari pa ring gamiting tumanggap ng mga pondo ng maraming beses. Mangyaring gamitin ang bagong address para sa bawat transaksiyon na tinatanggap upang pahusayin ang privacy.</target>
       </trans-unit>
     </body>
   </file>

@@ -1269,7 +1269,7 @@ Esto se convertirá en %(toSymbol)s y se enviará a
       </trans-unit>
       <trans-unit id="Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.">
         <source>Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.</source>
-        <target></target>
+        <target>La dirección se cambiará después de recibir los fondos. Todas las direcciones utilizadas anteriormente siguen siendo válidas y pueden utilizarse para recibir fondos varias veces. Por favor, usa una nueva dirección para cada transacción recibida para mejorar tu privacidad.</target>
       </trans-unit>
     </body>
   </file>

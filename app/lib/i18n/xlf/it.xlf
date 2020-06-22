@@ -949,7 +949,7 @@ Sarà convertito in %(toSymbol)s, e inviato a
       </trans-unit>
       <trans-unit id="Face match">
         <source>Face match</source>
-        <target>Abbianamento viso</target>
+        <target>Abbinamento viso</target>
       </trans-unit>
       <trans-unit id="Identity verification">
         <source>Identity verification</source>
@@ -1009,7 +1009,7 @@ Sarà convertito in %(toSymbol)s, e inviato a
       </trans-unit>
       <trans-unit id="Code is invalid or expired. Please try again.">
         <source>Code is invalid or expired. Please try again.</source>
-        <target>Il codico è scaduto o non valido. Riprova.</target>
+        <target>Il codice è scaduto o non valido. Riprova.</target>
       </trans-unit>
       <trans-unit id="Selfie">
         <source>Selfie</source>
@@ -1085,7 +1085,7 @@ Sarà convertito in %(toSymbol)s, e inviato a
       </trans-unit>
       <trans-unit id="If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.">
         <source>If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.</source>
-        <target>Se la tariffa cambia oltre +/-&amp;nbsp;2.5%% riceverai una richiesta di conferma della transazione via email.</target>
+        <target>Se la tariffa cambia oltre +/-&amp;nbsp;2,5%% riceverai una richiesta di conferma della transazione via email.</target>
       </trans-unit>
       <trans-unit id="Confirm purchase">
         <source>Confirm purchase</source>
@@ -1269,7 +1269,7 @@ Sarà convertito in %(toSymbol)s, e inviato a
       </trans-unit>
       <trans-unit id="Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.">
         <source>Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.</source>
-        <target></target>
+        <target>L'indirizzo verrà modificato dopo aver ricevuto i fondi. Tutti gli indirizzi utilizzati in precedenza rimangono validi e possono comunque essere utilizzati per ricevere fondi altre volte. Ti invitiamo a utilizzare un nuovo indirizzo per ogni transazione ricevente per migliorare la tua privacy.</target>
       </trans-unit>
     </body>
   </file>
