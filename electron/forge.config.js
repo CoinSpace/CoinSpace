@@ -133,12 +133,13 @@ module.exports = {
         snap: {
           summary: pkg.description,
           category: 'Office;Finance',
-          publish: {
+          /*publish: {
             provider: 'snapStore',
             channels: ['edge', 'stable'],
-          },
+          },*/
         },
-        publish: process.env.SNAP_TOKEN ? 'always' : 'never',
+        //publish: process.env.SNAP_TOKEN ? 'always' : 'never',
+        publish: 'never',
       },
     },
   ],

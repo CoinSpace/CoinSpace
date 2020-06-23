@@ -30,9 +30,9 @@ before_script:
     security set-key-partition-list -S apple-tool:,apple: -s -k travis build.keychain 2>&1 >/dev/null;
     rm certificate.p12;
   fi
-  if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-    echo "$SNAP_TOKEN" | snapcraft login --with -;
-  fi
+  #if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+  #  echo "$SNAP_TOKEN" | snapcraft login --with -;
+  #fi
 
 script:
 - node ./cli/i18n.js --json

@@ -25,13 +25,13 @@ if (!['win', 'mac', 'mas', 'snap'].includes(program.platform)) {
   process.exit(1);
 }
 
-let NODE_ENV = program.env;
+process.env.NODE_ENV = program.env;
 
 if (program.env === 'dev') {
-  NODE_ENV = 'development';
+  process.env.NODE_ENV = 'development';
 }
 if (program.env === 'prod') {
-  NODE_ENV = 'production';
+  process.env.NODE_ENV = 'production';
 }
 
 console.log('Start building (webpack)...');
@@ -47,7 +47,6 @@ const webpackConfig = require('../webpack.prod');
 
 webpackConfig.plugins.push(
   new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
     'process.env.BUILD_TYPE': JSON.stringify('electron'),
     'process.env.BUILD_PLATFORM': JSON.stringify(program.platform),
     'process.env.SENTRY_DSN': JSON.stringify(process.env[`SENTRY_DSN_${program.platform.toUpperCase()}`]),
@@ -81,7 +80,6 @@ webpack(webpackConfig, function(error, stats) {
       env: {
         ...process.env,
         BUILD_PLATFORM: program.platform,
-        NODE_ENV,
       },
     });
     console.log('Electron build Done!');
@@ -93,7 +91,6 @@ webpack(webpackConfig, function(error, stats) {
       env: {
         ...process.env,
         BUILD_PLATFORM: program.platform,
-        NODE_ENV,
       },
     });
     console.log('Stop electron run!');
