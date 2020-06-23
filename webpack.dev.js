@@ -10,6 +10,7 @@ const pkg = require('./package.json');
 const dotEnv = new Dotenv({
   path: '.env.loc',
   safe: true,
+  defaults: true,
 });
 
 module.exports = merge(common, {

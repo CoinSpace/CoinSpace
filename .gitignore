@@ -10,6 +10,7 @@ Thumbs.db:encryptable
 /phonegap/release.keystore
 /.env.*
 !.env.example
+!.env.defaults
 docker-compose.dev.yml
 docker-compose.prod.yml
 .vscode/
