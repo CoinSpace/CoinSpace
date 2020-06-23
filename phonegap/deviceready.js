@@ -14,6 +14,11 @@ function onDeviceReady() {
     return cordova.InAppBrowser.open(url, '_system', options);
   }
 
+  // fix ios (check in cordova-ios 6.1.0)
+  window.StatusBar.styleDefault();
+  StatusBar.overlaysWebView(false);
+  StatusBar.overlaysWebView(true);
+
   return import(
     /* webpackChunkName: 'loader' */
     '../app/loader'

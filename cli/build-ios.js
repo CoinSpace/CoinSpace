@@ -11,6 +11,7 @@ var webpack = require('webpack');
 var dotenv = require('dotenv');
 var mobileBuildPath = 'phonegap/build';
 var SENTRY_RELEASE = `${pkg.name}.ios@${pkg.version}`;
+var xcode = require('../phonegap/node_modules/xcode');
 
 program
   .name('build-ios.js')
@@ -49,28 +50,127 @@ webpack(webpackConfig, function(error, stats) {
   });
   fse.copySync('build', path.resolve(mobileBuildPath, 'www'), { filter: utils.filterMapFiles });
 
-  utils.cordova('platform add ios@4.5.3');
-  utils.cordova('plugin add cordova-plugin-geolocation@2.4.3');
-  utils.cordova('plugin add cordova-plugin-whitelist@1.3.2');
-  utils.cordova('plugin add cordova-plugin-splashscreen@4.0.3');
-  utils.cordova('plugin add phonegap-plugin-barcodescanner@6.0.8');
-  utils.cordova('plugin add cordova-plugin-dialogs@1.3.3');
-  utils.cordova('plugin add cordova-plugin-inappbrowser@1.7.1');
-  utils.cordova('plugin add cordova-plugin-statusbar@2.3.0');
-  utils.cordova('plugin add cordova-plugin-x-socialsharing@5.2.0');
-  utils.cordova('plugin add cordova-plugin-touch-id@3.2.0');
-  utils.cordova('plugin add cordova-plugin-customurlscheme@4.3.0 --variable URL_SCHEME=coinspace');
+  utils.cordova('platform add ios@6.0.0');
+  utils.cordova('plugin add cordova-plugin-geolocation@4.0.2');
+  utils.cordova('plugin add phonegap-plugin-barcodescanner@8.1.0');
+  utils.cordova('plugin add cordova-plugin-dialogs@2.0.2');
+  utils.cordova('plugin add cordova-plugin-inappbrowser@4.0.0');
+  utils.cordova('plugin add cordova-plugin-statusbar@2.4.3');
+  utils.cordova('plugin add cordova-plugin-x-socialsharing@5.6.8');
   // eslint-disable-next-line max-len
-  utils.cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#45badb1e6f909bb80592779f7cb6baf6875df3ab');
+  utils.cordova('plugin add cordova-plugin-touch-id@3.4.0 --variable FACEID_USAGE_DESCRIPTION="Used for easy authentication"');
+  utils.cordova('plugin add cordova-plugin-customurlscheme@5.0.1 --variable URL_SCHEME=coinspace');
+  // eslint-disable-next-line max-len
+  utils.cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#23f993dc73feafbf8eb00496f9a5da0884374a10');
   utils.cordova('plugin add cordova-plugin-cookiemaster@1.0.5');
   utils.cordova('plugin add cordova-plugin-3dtouch-shortcutitems@1.0.2');
 
+  addWatchApp();
+
   if (program.release) {
     utils.uploadSentrySourceMaps('ios', SENTRY_RELEASE);
-    utils.cordova('build ios --emulator --buildConfig=../build.json --release');
-  } else {
-    utils.cordova('build ios --emulator --buildConfig=../build.json');
   }
 
+  utils.shell('open platforms/ios/Coin.xcworkspace', {cwd: mobileBuildPath});
   console.log('Done!');
 });
+
+function addWatchApp() {
+  utils.shell(`git clone https://github.com/CoinSpace/cs-watchapp-ios.git`, {cwd: mobileBuildPath});
+  utils.shell(`cd cs-watchapp-ios && git checkout 5959518ace9464c1559cbc7d22fcca08f475cf8a -q`, {cwd: mobileBuildPath});
+  utils.shell(`ln -s ${path.resolve(mobileBuildPath, 'cs-watchapp-ios/WatchApp')} ./platforms/ios/WatchApp`, {cwd: mobileBuildPath});
+  utils.shell(`ln -s ${path.resolve(mobileBuildPath, 'cs-watchapp-ios/WatchAppExtension')} ./platforms/ios/WatchAppExtension`, {cwd: mobileBuildPath});
+
+  var projectPath = path.resolve(mobileBuildPath, 'platforms/ios/Coin.xcodeproj/project.pbxproj');
+  var project = xcode.project(projectPath);
+
+  project.parse(function (err) {
+    if (err) throw err;
+
+    const WatchApp = addFolderToProject('WatchApp', path.join(mobileBuildPath, 'platforms/ios'), project);
+    const WatchAppExtension = addFolderToProject('WatchAppExtension', path.join(mobileBuildPath, 'platforms/ios'), project);
+
+    function addFolderToProject(folderPath, basePath, project, isChild) {
+      var folder = path.basename(folderPath);
+      var watchAppPaths = fse.readdirSync(path.resolve(basePath, folderPath));
+      var files = [];
+      var childs = [];
+      watchAppPaths.forEach((f) => {
+        if (f.startsWith('.')) return;
+        var s = fse.statSync(path.resolve(basePath, folderPath, f));
+        if (s.isFile() || path.extname(f) === '.xcassets') {
+          files.push(path.join(folderPath, f));
+        } else {
+          childs.push(addFolderToProject(path.join(folderPath, f), basePath, project, true));
+        }
+      });
+      const group = project.addPbxGroup(files, path.basename(folder), '""');
+      childs.forEach((child) => {
+        files = files.concat(child.files);
+        project.addToPbxGroup(child.group.uuid, group.uuid);
+      });
+
+      if (!isChild) {
+        project.addToPbxGroup(group.uuid, project.findPBXGroupKey({name: 'CustomTemplate'}));
+      }
+      return { group, files };
+    }
+
+    // add new targets
+    var WatchAppTarget = project.addTarget('WatchApp', 'watch2_app', 'WatchApp', 'com.coinspace.wallet.watchapp');
+    var WatchAppExtensionTarget = project.addTarget('WatchAppExtension', 'watch2_extension', 'WatchAppExtension', 'com.coinspace.wallet.watchapp.extension');
+
+    // edit XCBuildConfiguration
+    const pbxXCBuildConfigurationSection = project.pbxXCBuildConfigurationSection();
+    Object.keys(pbxXCBuildConfigurationSection).forEach((key) => {
+      const setting = pbxXCBuildConfigurationSection[key].buildSettings;
+      if (!setting) return false;
+      const name = pbxXCBuildConfigurationSection[key].name;
+      if (setting['PRODUCT_NAME'] === '"WatchApp"' || setting['PRODUCT_NAME'] === '"WatchAppExtension"') {
+        setting['SDKROOT'] = 'watchos';
+        setting['MARKETING_VERSION'] = '2.20.1';
+        setting['CURRENT_PROJECT_VERSION'] = '1';
+        setting['SWIFT_VERSION'] = '4.0';
+        setting['TARGETED_DEVICE_FAMILY'] = '4';
+        setting['WATCHOS_DEPLOYMENT_TARGET'] = '4.3';
+        if (name === 'Release') {
+          setting['SWIFT_OPTIMIZATION_LEVEL'] = '"-O"';
+          setting['SWIFT_COMPILATION_MODE'] = 'wholemodule';
+        } else {
+          setting['SWIFT_OPTIMIZATION_LEVEL'] = '"-Onone"';
+        }
+      }
+      if (setting['PRODUCT_NAME'] === '"WatchApp"') {
+        setting['CODE_SIGN_ENTITLEMENTS'] = '"WatchApp/CoinSpace WatchApp.entitlements"';
+        setting['ASSETCATALOG_COMPILER_APPICON_NAME'] = 'AppIcon';
+      } else if (setting['PRODUCT_NAME'] === '"WatchAppExtension"') {
+        setting['SWIFT_OBJC_BRIDGING_HEADER'] = '""';
+        setting['CODE_SIGN_ENTITLEMENTS'] = '"WatchAppExtension/CoinSpace WatchApp Extension.entitlements"';
+        setting['ASSETCATALOG_COMPILER_COMPLICATION_NAME'] = 'Complication';
+      }
+    });
+
+    project.addBuildPhase(
+      WatchApp.files.filter((f) => /(\.xcassets|\.storyboard)$/.test(f)),
+      'PBXResourcesBuildPhase',
+      'Resources',
+      WatchAppTarget.uuid
+    );
+
+    project.addBuildPhase(WatchAppExtension.files.filter((f) => /\.swift$/.test(f)), 'PBXSourcesBuildPhase', 'Sources', WatchAppExtensionTarget.uuid);
+
+    project.addBuildPhase(
+      WatchAppExtension.files.filter((f) => /(\.xcassets)$/.test(f)),
+      'PBXResourcesBuildPhase',
+      'Resources',
+      WatchAppExtensionTarget.uuid
+    );
+
+    fse.writeFileSync(projectPath, project.writeSync());
+
+    // add pods
+    var watchAppPodfile = fse.readFileSync(path.resolve(mobileBuildPath, 'cs-watchapp-ios/WatchAppExtension/Podfile'));
+    fse.appendFileSync(path.resolve(mobileBuildPath, 'platforms/ios/Podfile'), watchAppPodfile);
+    utils.shell(`pod install`, {cwd: path.join(mobileBuildPath, 'platforms/ios')});
+  });
+}

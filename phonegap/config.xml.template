@@ -1,73 +1,150 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.coinspace.app" android-versionCode="2185" version="2.20.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
-    <name>Coin</name>
-    <description>
-        Coin application.
-    </description>
-    <author email="support@coin.space" href="https://www.coin.space">
-        Coin Team
-    </author>
-    <content src="index.html" />
-    <access origin="*" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
-    <allow-intent href="tel:*" />
-    <allow-intent href="sms:*" />
-    <allow-intent href="mailto:*" />
-    <allow-intent href="geo:*" />
-    <allow-navigation href="https://*/*" />
-    <platform name="android">
-        <allow-intent href="market:*" />
-        <icon src="../images/android/icons/36.png" density="ldpi"/>
-        <icon src="../images/android/icons/48.png" density="mdpi"/>
-        <icon src="../images/android/icons/72.png" density="hdpi"/>
-        <icon src="../images/android/icons/96.png" density="xhdpi"/>
-        <splash src="../images/android/screens/ldpi-land.png" density="land-ldpi"/>
-        <splash src="../images/android/screens/mdpi-land.png" density="land-mdpi"/>
-        <splash src="../images/android/screens/hdpi-land.png" density="land-hdpi"/>
-        <splash src="../images/android/screens/xhdpi-land.png" density="land-xhdpi"/>
-        <splash src="../images/android/screens/ldpi-port.png" density="port-ldpi"/>
-        <splash src="../images/android/screens/mdpi-port.png" density="port-mdpi"/>
-        <splash src="../images/android/screens/hdpi-port.png" density="port-hdpi"/>
-        <splash src="../images/android/screens/xhdpi-port.png" density="port-xhdpi"/>
-        <custom-config-file target="AndroidManifest.xml" parent="/*" mode="replace">
-            <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
-            <uses-feature android:name="android.hardware.camera" android:required="false" />
-            <uses-feature android:name="android.hardware.location.gps" android:required="false" />
-        </custom-config-file>
-    </platform>
-    <platform name="ios">
-        <icon src="../images/ios/icons/icon-60@3x.png" width="180" height="180" />
-        <icon src="../images/ios/icons/icon-60.png" width="60" height="60" />
-        <icon src="../images/ios/icons/icon-60@2x.png" width="120" height="120" />
-        <icon src="../images/ios/icons/icon-76.png" width="76" height="76" />
-        <icon src="../images/ios/icons/icon-76@2x.png" width="152" height="152" />
-        <icon src="../images/ios/icons/icon-40.png" width="40" height="40" />
-        <icon src="../images/ios/icons/icon-40@2x.png" width="80" height="80" />
-        <icon src="../images/ios/icons/icon.png" width="57" height="57" />
-        <icon src="../images/ios/icons/icon@2x.png" width="114" height="114" />
-        <icon src="../images/ios/icons/icon-72.png" width="72" height="72" />
-        <icon src="../images/ios/icons/icon-72@2x.png" width="144" height="144" />
-        <icon src="../images/ios/icons/icon-small.png" width="29" height="29" />
-        <icon src="../images/ios/icons/icon-small@2x.png" width="58" height="58" />
-        <icon src="../images/ios/icons/icon-50.png" width="50" height="50" />
-        <icon src="../images/ios/icons/icon-50@2x.png" width="100" height="100" />
-        <icon src="../images/ios/icons/icon-83.5@2x.png" width="167" height="167" />
-        <icon src="../images/ios/icons/icon-small@3x.png" width="87" height="87" />
-        <splash src="../images/ios/screens/Default@2x~iphone~anyany.png" />
-        <splash src="../images/ios/screens/Default@2x~iphone~comany.png" />
-        <splash src="../images/ios/screens/Default@2x~iphone~comcom.png" />
-        <splash src="../images/ios/screens/Default@3x~iphone~anyany.png" />
-        <splash src="../images/ios/screens/Default@3x~iphone~anycom.png" />
-        <splash src="../images/ios/screens/Default@3x~iphone~comany.png" />
-        <splash src="../images/ios/screens/Default@2x~ipad~anyany.png" />
-        <splash src="../images/ios/screens/Default@2x~ipad~comany.png" />
-        <preference name="StatusBarStyle" value="default" />
-    </platform>
-    <preference name="StatusBarBackgroundColor" value="#FFFFFF" />
-    <preference name="SplashScreenDelay" value="2000"/>
-    <preference name="android-minSdkVersion" value="22" />
-    <preference name="android-targetSdkVersion" value="28" />
-    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
-    <preference name="DisallowOverscroll" value="true"/>
+<widget id="com.coinspace.app" android-versionCode="2185" ios-CFBundleVersion="1" version="2.20.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+  <name>Coin</name>
+  <description>
+    Coin application.
+  </description>
+  <author email="support@coin.space" href="https://www.coin.space">
+    Coin Team
+  </author>
+  <content src="index.html" />
+  <access origin="*" />
+  <allow-intent href="http://*/*" />
+  <allow-intent href="https://*/*" />
+  <allow-intent href="tel:*" />
+  <allow-intent href="sms:*" />
+  <allow-intent href="mailto:*" />
+  <allow-intent href="geo:*" />
+  <allow-navigation href="https://*/*" />
+  <platform name="android">
+    <allow-intent href="market:*" />
+    <icon src="../images/android/icons/36.png" density="ldpi"/>
+    <icon src="../images/android/icons/48.png" density="mdpi"/>
+    <icon src="../images/android/icons/72.png" density="hdpi"/>
+    <icon src="../images/android/icons/96.png" density="xhdpi"/>
+    <splash src="../images/android/screens/ldpi-land.png" density="land-ldpi"/>
+    <splash src="../images/android/screens/mdpi-land.png" density="land-mdpi"/>
+    <splash src="../images/android/screens/hdpi-land.png" density="land-hdpi"/>
+    <splash src="../images/android/screens/xhdpi-land.png" density="land-xhdpi"/>
+    <splash src="../images/android/screens/ldpi-port.png" density="port-ldpi"/>
+    <splash src="../images/android/screens/mdpi-port.png" density="port-mdpi"/>
+    <splash src="../images/android/screens/hdpi-port.png" density="port-hdpi"/>
+    <splash src="../images/android/screens/xhdpi-port.png" density="port-xhdpi"/>
+    <custom-config-file target="AndroidManifest.xml" parent="/*" mode="replace">
+      <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+      <uses-feature android:name="android.hardware.camera" android:required="false" />
+      <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+    </custom-config-file>
+  </platform>
+  <platform name="ios">
+    <icon src="../images/ios/icons/icon-20.png" width="20" height="20" />
+    <icon src="../images/ios/icons/icon-20@2x.png" width="40" height="40" />
+    <icon src="../images/ios/icons/icon-20@3x.png" width="60" height="60" />
+    <icon src="../images/ios/icons/icon-40.png" width="40" height="40" />
+    <icon src="../images/ios/icons/icon-40@2x.png" width="80" height="80" />
+    <icon src="../images/ios/icons/icon-50.png" width="50" height="50" />
+    <icon src="../images/ios/icons/icon-50@2x.png" width="100" height="100" />
+    <icon src="../images/ios/icons/icon-60@2x.png" width="120" height="120" />
+    <icon src="../images/ios/icons/icon-60@3x.png" width="180" height="180" />
+    <icon src="../images/ios/icons/icon-72.png" width="72" height="72" />
+    <icon src="../images/ios/icons/icon-72@2x.png" width="144" height="144" />
+    <icon src="../images/ios/icons/icon-76.png" width="76" height="76" />
+    <icon src="../images/ios/icons/icon-76@2x.png" width="152" height="152" />
+    <icon src="../images/ios/icons/icon-83.5@2x.png" width="167" height="167" />
+    <icon src="../images/ios/icons/icon-1024.png" width="1024" height="1024" />
+    <icon src="../images/ios/icons/icon-29.png" width="29" height="29" />
+    <icon src="../images/ios/icons/icon-29@2x.png" width="58" height="58" />
+    <icon src="../images/ios/icons/icon-29@3x.png" width="87" height="87" />
+    <icon src="../images/ios/icons/icon.png" width="57" height="57" />
+    <icon src="../images/ios/icons/icon@2x.png" width="114" height="114" />
+    <icon src="../images/ios/icons/icon-24@2x.png" width="48" height="48" />
+    <icon src="../images/ios/icons/icon-27.5@2x.png" width="55" height="55" />
+    <icon src="../images/ios/icons/icon-44@2x.png" width="88" height="88" />
+    <icon src="../images/ios/icons/icon-86@2x.png" width="172" height="172" />
+    <icon src="../images/ios/icons/icon-98@2x.png" width="196" height="196" />
+    <splash src="../images/ios/screens/Default@2x~iphone~anyany.png" />
+    <splash src="../images/ios/screens/Default@2x~iphone~comany.png" />
+    <splash src="../images/ios/screens/Default@2x~iphone~comcom.png" />
+    <splash src="../images/ios/screens/Default@3x~iphone~anyany.png" />
+    <splash src="../images/ios/screens/Default@3x~iphone~anycom.png" />
+    <splash src="../images/ios/screens/Default@3x~iphone~comany.png" />
+    <splash src="../images/ios/screens/Default@2x~ipad~anyany.png" />
+    <splash src="../images/ios/screens/Default@2x~ipad~comany.png" />
+    <edit-config target="NSLocationWhenInUseUsageDescription" file="Coin/Coin-Info.plist" mode="merge">
+      <string>Need location access to find users nearby</string>
+    </edit-config>
+    <edit-config target="NSLocationAlwaysAndWhenInUseUsageDescription" file="Coin/Coin-Info.plist" mode="merge">
+      <string>Need location access to find users nearby</string>
+    </edit-config>
+    <edit-config target="NSLocationAlwaysUsageDescription" file="Coin/Coin-Info.plist" mode="merge">
+      <string>Need location access to find users nearby</string>
+    </edit-config>
+    <edit-config target="NSCameraUsageDescription" file="Coin/Coin-Info.plist" mode="merge">
+      <string>Used to scan barcodes and take pictures for support</string>
+    </edit-config>
+    <edit-config target="UIApplicationShortcutItems" file="Coin/Coin-Info.plist" mode="merge">
+      <array>
+        <dict>
+          <key>UIApplicationShortcutItemIconFile</key>
+          <string></string>
+          <key>UIApplicationShortcutItemTitle</key>
+          <string>Bitcoin</string>
+          <key>UIApplicationShortcutItemType</key>
+          <string>com.coinspace.wallet.bitcoin</string>
+        </dict>
+        <dict>
+          <key>UIApplicationShortcutItemIconFile</key>
+          <string></string>
+          <key>UIApplicationShortcutItemTitle</key>
+          <string>Bitcoin Cash</string>
+          <key>UIApplicationShortcutItemType</key>
+          <string>com.coinspace.wallet.bitcoincash</string>
+        </dict>
+        <dict>
+          <key>UIApplicationShortcutItemIconFile</key>
+          <string></string>
+          <key>UIApplicationShortcutItemTitle</key>
+          <string>Ethereum</string>
+          <key>UIApplicationShortcutItemType</key>
+          <string>com.coinspace.wallet.ethereum</string>
+        </dict>
+        <dict>
+          <key>UIApplicationShortcutItemIconFile</key>
+          <string></string>
+          <key>UIApplicationShortcutItemTitle</key>
+          <string>Litecoin</string>
+          <key>UIApplicationShortcutItemType</key>
+          <string>com.coinspace.wallet.litecoin</string>
+        </dict>
+      </array>
+    </edit-config>
+    <edit-config target="UISupportedInterfaceOrientations" file="Coin/Coin-Info.plist" mode="merge">
+      <array>
+        <string>UIInterfaceOrientationPortrait</string>
+      </array>
+    </edit-config>
+    <edit-config target="UISupportedInterfaceOrientations~ipad" file="Coin/Coin-Info.plist" mode="merge">
+      <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+      </array>
+    </edit-config>
+    <edit-config target="com.apple.developer.associated-domains" file="Coin/Entitlements-Debug.plist" mode="merge">
+      <array>
+        <string>applinks:coin.space</string>
+      </array>
+    </edit-config>
+    <edit-config target="com.apple.developer.associated-domains" file="Coin/Entitlements-Release.plist" mode="merge">
+      <array>
+        <string>applinks:coin.space</string>
+      </array>
+    </edit-config>
+  </platform>
+  <preference name="StatusBarBackgroundColor" value="#FFFFFF" />
+  <preference name="SplashScreenDelay" value="2000"/>
+  <preference name="android-minSdkVersion" value="22" />
+  <preference name="android-targetSdkVersion" value="28" />
+  <preference name="KeyboardDisplayRequiresUserAction" value="false" />
+  <preference name="DisallowOverscroll" value="true"/>
 </widget>
