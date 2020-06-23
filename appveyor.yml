@@ -14,6 +14,7 @@ install:
   - npm ci
   - cd electron
   - npm ci
+  - cd ..
 
 before_build:
   - ps: >-
@@ -27,6 +28,7 @@ before_build:
   - ps: $Env:VERSION=$(node -p -e "require('./package.json').version")
   - ps: cd electron
   - ps: npm version $VERSION
+  - ps: cd ..
 
 build_script:
   - ps: node ./cli/i18n.js --json
