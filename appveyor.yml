@@ -11,10 +11,9 @@ environment:
 
 install:
   - ps: Install-Product node 12 x64
-  - npm ci
-  - ps: >-
-      Set-Location -Path electron
-      npm ci
+  - ps: npm ci
+  - ps: cd electron
+  - ps: npm ci
 
 before_build:
   - ps: >-
@@ -25,14 +24,12 @@ before_build:
         [IO.File]::WriteAllBytes($filename, $bytes)
       }
   - ps: $Env:GOOGLE_CLOUD_PRIVATE_KEY=$Env:GOOGLE_CLOUD_PRIVATE_KEY.replace("\n","`n")
-  - ps: >-
-      $VERSION=$(node -p -e "require('./package.json').version")
-      Set-Location -Path electron
-      npm version $VERSION
+  - ps: $Env:VERSION=$(node -p -e "require('./package.json').version")
+  - ps: cd electron
+  - ps: npm version $VERSION
 
 build_script:
-  - ps: >-
-      node ./cli/i18n.js --json
-      node ./cli/build.js electron --env=prod --release --platform=$Env:DISTRIBUTION
+  - ps: node ./cli/i18n.js --json
+  - ps: node ./cli/build.js electron --env=prod --release --platform=$Env:DISTRIBUTION
 
 test: off
