@@ -11,9 +11,9 @@ environment:
 
 install:
   - ps: Install-Product node 12 x64
-  - ps: npm ci
-  - ps: cd electron
-  - ps: npm ci
+  - npm ci
+  - cd electron
+  - npm ci
 
 before_build:
   - ps: >-
