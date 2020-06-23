@@ -55,7 +55,18 @@ webpack(webpackConfig, function(error, stats) {
   if (program.release) {
     // build electron to electron/dist
     console.log(`Start building (electron:${program.platform})...`);
-    utils.shell('npm run publish', {
+    let platform = program.platform;
+
+    if (program.platform === 'mac') {
+      platform = 'darwin';
+    }
+    if (program.platform === 'win') {
+      platform = 'win32';
+    }
+    if (program.platform === 'snap') {
+      platform = 'linux';
+    }
+    utils.shell(`npm run publish --platform=${platform}`, {
       cwd: './electron',
       env: {
         ...process.env,
