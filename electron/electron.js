@@ -6,11 +6,16 @@ Object.assign(process.env, require('./app/env.json'));
 // Modules to control application life and create native browser window
 const path = require('path');
 const { app, Menu, protocol } = require('electron');
+const log = require('electron-log');
 const pkg = require('./package.json');
 const { isMas, isWindows, isLinux } = require('./lib/constants');
 const menuTemplate = require('./lib/menu');
 const openWindow = require('./lib/openWindow');
 const Sentry = require('@sentry/electron');
+const updater = require('./lib/updater');
+
+if (require('electron-squirrel-startup')) return;
+
 
 // Suppress deprecation warning
 app.allowRendererProcessReuse = true;
@@ -80,6 +85,7 @@ function init() {
       cb('ok');
     });
     openWindow();
+    updater({ log });
   });
 
   // Quit when all windows are closed.

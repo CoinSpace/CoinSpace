@@ -14,7 +14,7 @@ docker-compose.dev.yml
 docker-compose.prod.yml
 .vscode/
 electron/app
-electron/dist
+electron/out
 .sentryclirc
 *.provisionprofile
 *.pfx

@@ -1,0 +1,42 @@
+matrix:
+  include:
+  - os: osx
+    osx_image: xcode11.5
+    language: node_js
+    node_js: '12'
+    env: DISTRIBUTION=mac
+  #- os: linux
+  #  dist: bionic
+  #  language: node_js
+  #  node_js: '12'
+  #  env: DISTRIBUTION=snap
+  #  addons:
+  #    snaps:
+  #    - name: snapcraft
+  #      confinement: classic
+
+env:
+- NODE_ENV=production
+
+branches:
+  only:
+  - desktop
+
+before_script:
+- |
+  if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+    echo $CERTIFICATE_MAC | base64 --decode > certificate.p12;
+    security create-keychain -p travis build.keychain;
+    security default-keychain -s build.keychain;
+    security unlock-keychain -p travis build.keychain;
+    security import certificate.p12 -k build.keychain -P $CERTIFICATE_MAC_PASSWORD -T /usr/bin/codesign 2>&1 >/dev/null;
+    security set-key-partition-list -S apple-tool:,apple: -s -k travis build.keychain 2>&1 >/dev/null;
+    rm certificate.p12;
+  fi
+  if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+    echo "$SNAP_TOKEN" | snapcraft login --with -;
+  fi
+
+script:
+- node ./cli/i18n.js --json
+- node ./cli/build.js electron --platform=${DISTRIBUTION}

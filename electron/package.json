@@ -1,7 +1,7 @@
 {
   "name": "coin",
   "productName": "Coin Wallet",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Coin Digital Currency Wallet",
   "license": "GPL-2.0+",
   "author": {
@@ -15,94 +15,32 @@
     "url": "git+https://github.com/CoinSpace/CoinSpace.git"
   },
   "main": "electron.js",
-  "build": {
-    "appId": "com.coinspace.wallet",
-    "productName": "Coin Wallet",
-    "directories": {
-      "buildResources": "resources"
-    },
-    "files": [
-      "**/*",
-      "resources/icon.*",
-      "resources/64x64.png",
-      "!env.ejs",
-      "!README.md",
-      "!notarize.js",
-      "!**/node_modules/*/.github",
-      "!**/node_modules/*/.editorconfig",
-      "!**/node_modules/*/.jscs.json",
-      "!**/node_modules/*/.eslintignore",
-      "!**/node_modules/*/.nycrc",
-      "!**/node_modules/*/.nvmrc",
-      "!**/node_modules/*/.eslintrc.js",
-      "!**/node_modules/*/.istanbul.yml",
-      "!**/node_modules/*/Makefile",
-      "!**/node_modules/*/Readme.md",
-      "!**/node_modules/*/Changelog.md",
-      "!**/node_modules/*/HISTORY.md"
-    ],
-    "mac": {
-      "category": "public.app-category.finance",
-      "target": [
-        "dmg",
-        "mas"
-      ]
-    },
-    "win": {
-      "target": [
-        "nsis",
-        "portable"
-      ]
-    },
-    "appx": {
-      "identityName": "CoinWallet",
-      "publisherDisplayName": "Coin Digital Currency Wallet",
-      "applicationId": "CoinWallet",
-      "displayName": "Coin Digital Currency Wallet",
-      "setBuildNumber": true
-    },
-    "linux": {
-      "icon": "icon.icns",
-      "executableName": "coin",
-      "synopsis": "Coin Digital Currency Wallet",
-      "target": [
-        "snap",
-        "deb",
-        "rpm",
-        "tar.xz",
-        "dir"
-      ]
-    },
-    "snap": {
-      "publish": {
-        "provider": "snapStore",
-        "channels": [
-          "edge",
-          "stable"
-        ]
-      }
-    },
-    "protocols": {
-      "name": "Coin Wallet",
-      "schemes": [
-        "coinspace"
-      ]
-    },
-    "afterSign": "./notarize.js"
+  "config": {
+    "forge": "forge.config.js"
   },
   "scripts": {
-    "start": "electron .",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder",
-    "clean": "rm -rf ./dist",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "clean": "rm -rf ./out",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@sentry/electron": "^1.3.0"
+    "@sentry/electron": "^1.3.0",
+    "electron-log": "^4.2.2",
+    "electron-squirrel-startup": "^1.0.0"
   },
   "devDependencies": {
-    "electron": "^8.2.4",
-    "electron-builder": "^22.6.1",
-    "electron-notarize": "^0.3.0"
+    "@electron-forge/cli": "^6.0.0-beta.51",
+    "@electron-forge/maker-dmg": "^6.0.0-beta.51",
+    "@electron-forge/maker-snap": "^6.0.0-beta.51",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.51",
+    "@electron-forge/maker-zip": "^6.0.0-beta.51",
+    "@mahnunchik/maker-pkg": "^6.0.0-beta.51",
+    "@mahnunchik/publisher-gcs": "^6.0.0-beta.51",
+    "@mahnunchik/publisher-github": "^6.0.0-beta.51",
+    "app-builder-lib": "^22.7.0",
+    "electron": "^8.3.0"
   }
 }

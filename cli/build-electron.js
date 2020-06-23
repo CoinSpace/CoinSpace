@@ -20,7 +20,7 @@ program
   .option('-p, --platform <platform>', 'platform', 'mac')
   .parse(process.argv);
 
-if (!['win', 'mac', 'mas', 'linux'].includes(program.platform)) {
+if (!['win', 'mac', 'mas', 'snap'].includes(program.platform)) {
   console.error(`Unsupported Platform: ${program.platform}`);
   process.exit(1);
 }
@@ -51,20 +51,28 @@ webpack(webpackConfig, function(error, stats) {
 
   fse.removeSync(electronBuildPath);
   fse.copySync('build', path.resolve(electronBuildPath), { filter: utils.filterMapFiles });
-  /*if (program.platform === 'win') {
-    // copy assets for electron appx installer
-    fse.copySync('electron/images/win', path.resolve(`${electronBuildPath}/appx/images`));
-  }*/
 
   if (program.release) {
     // build electron to electron/dist
     console.log('Start building (electron)...');
-    utils.shell('npm run electron-builder');
+    utils.shell('npm run publish', {
+      cwd: './electron',
+      env: {
+        ...process.env,
+        BUILD_PLATFORM: program.platform,
+      },
+    });
     console.log('Electron build Done!');
   } else if (program.run) {
     // run electron app
     console.log('Debug Electron app building (electron)...');
-    utils.shell('npm run electron');
+    utils.shell('npm start', {
+      cwd: './electron',
+      env: {
+        ...process.env,
+        BUILD_PLATFORM: program.platform,
+      },
+    });
     console.log('Stop electron run!');
   } else {
     console.log('Webpack build Done!');
