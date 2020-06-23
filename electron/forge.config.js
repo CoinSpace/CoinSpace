@@ -2,7 +2,6 @@
 
 const pkg = require('./package.json');
 
-const VERSION = process.env.VERSION || pkg.version;
 const BUILD_PLATFORM = process.env.BUILD_PLATFORM;
 
 if (!['win', 'mac', 'mas', 'snap'].includes(BUILD_PLATFORM)) {
@@ -11,7 +10,7 @@ if (!['win', 'mac', 'mas', 'snap'].includes(BUILD_PLATFORM)) {
 
 module.exports = {
   packagerConfig: {
-    appVersion: VERSION,
+    appVersion: pkg.version,
     //asar: true,
     icon: 'resources/icon',
     executableName: ['win'].includes(BUILD_PLATFORM) ? pkg.productName : pkg.name,
@@ -91,7 +90,7 @@ module.exports = {
       ],
       config: {
         name: pkg.productName,
-        title: `${pkg.productName} ${VERSION}`,
+        title: `${pkg.productName} ${pkg.version}`,
         icon: 'resources/icon.icns',
         background: 'resources/background.tiff',
         contents: (opts) => {
@@ -121,7 +120,7 @@ module.exports = {
         'mas',
       ],
       config: {
-        name: `${pkg.productName}-${VERSION}.pkg`,
+        name: `${pkg.productName}-${pkg.version}.pkg`,
       },
     },
     {
@@ -159,6 +158,7 @@ module.exports = {
       name: '@mahnunchik/publisher-gcs',
       config: {
         bucket: 'coinspace-travis-ci',
+        folder: pkg.version,
         public: false,
       },
     },

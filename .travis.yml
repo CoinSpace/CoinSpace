@@ -26,9 +26,7 @@ branches:
 
 install:
   - npm ci
-  - cd electron
-  - npm ci
-  - cd ..
+  - (cd electron && npm ci)
 
 before_script:
 - |
@@ -49,5 +47,6 @@ before_script:
   #fi
 
 script:
+- (cd electron && npm version $(node -p -e "require('../package.json').version"))
 - node ./cli/i18n.js --json
 - node ./cli/build.js electron --env=prod --release --platform=${DISTRIBUTION}
