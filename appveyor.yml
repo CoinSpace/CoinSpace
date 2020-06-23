@@ -1,0 +1,38 @@
+image: Visual Studio 2019
+
+platform:
+  - x64
+
+init:
+  - git config --global core.autocrlf input
+
+environment:
+  DISTRIBUTION: win
+
+install:
+  - ps: Install-Product node 12 x64
+  - npm ci
+  - ps: >-
+      Set-Location -Path electron
+      npm ci
+
+before_build:
+  - ps: >-
+      if (Test-Path Env:\CERTIFICATE_WIN) {
+        $workingDirectory = Convert-Path (Resolve-Path -path ".")
+        $filename = "$workingDirectory\resources\certificate.pfx"
+        $bytes = [Convert]::FromBase64String($env:CERTIFICATE_WIN)
+        [IO.File]::WriteAllBytes($filename, $bytes)
+      }
+  - ps: $Env:GOOGLE_CLOUD_PRIVATE_KEY=$Env:GOOGLE_CLOUD_PRIVATE_KEY.replace("\n","`n")
+  - ps: >-
+      $VERSION=$(node -p -e "require('./package.json').version")
+      Set-Location -Path electron
+      npm version $VERSION
+
+build_script:
+  - ps: >-
+      node ./cli/i18n.js --json
+      node ./cli/build.js electron --env=prod --release --platform=$Env:DISTRIBUTION
+
+test: off

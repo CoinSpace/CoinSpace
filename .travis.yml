@@ -45,8 +45,8 @@ before_script:
   #if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
   #  echo "$SNAP_TOKEN" | snapcraft login --with -;
   #fi
+- (cd electron && npm version $(node -p -e "require('../package.json').version"))
 
 script:
-- (cd electron && npm version $(node -p -e "require('../package.json').version"))
 - node ./cli/i18n.js --json
 - node ./cli/build.js electron --env=prod --release --platform=${DISTRIBUTION}
