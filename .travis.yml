@@ -5,6 +5,11 @@ matrix:
     language: node_js
     node_js: '12'
     env: DISTRIBUTION=mac
+  - os: osx
+    osx_image: xcode11.5
+    language: node_js
+    node_js: '12'
+    env: DISTRIBUTION=mas
   - os: linux
     dist: bionic
     language: node_js
@@ -35,6 +40,9 @@ before_script:
     security import certificate.p12 -k build.keychain -P $CERTIFICATE_MAC_PASSWORD -T /usr/bin/codesign 2>&1 >/dev/null;
     security set-key-partition-list -S apple-tool:,apple: -s -k travis build.keychain 2>&1 >/dev/null;
     rm certificate.p12;
+    if [[ "$DISTRIBUTION" == "mas" ]]; then
+      echo $PROVISIONING_DISTRIBUTION | base64 --decode > electron/embedded.provisionprofile;
+    fi
   fi
   #if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
   #  echo "$SNAP_TOKEN" | snapcraft login --with -;

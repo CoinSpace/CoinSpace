@@ -80,6 +80,7 @@ webpack(webpackConfig, function(error, stats) {
       env: {
         ...process.env,
         BUILD_PLATFORM: program.platform,
+        VERSION: pkg.version,
       },
     });
     console.log('Electron build Done!');
