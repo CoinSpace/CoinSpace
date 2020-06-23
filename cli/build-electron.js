@@ -75,7 +75,7 @@ webpack(webpackConfig, function(error, stats) {
     if (program.platform === 'snap') {
       platform = 'linux';
     }
-    utils.shell(`npm run publish --platform=${platform}`, {
+    utils.shell(`npm run publish -- --platform=${platform}`, {
       cwd: './electron',
       env: {
         ...process.env,
