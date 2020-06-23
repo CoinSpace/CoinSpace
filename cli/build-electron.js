@@ -54,7 +54,7 @@ webpack(webpackConfig, function(error, stats) {
 
   if (program.release) {
     // build electron to electron/dist
-    console.log('Start building (electron)...');
+    console.log(`Start building (electron:${program.platform})...`);
     utils.shell('npm run publish', {
       cwd: './electron',
       env: {
@@ -65,7 +65,7 @@ webpack(webpackConfig, function(error, stats) {
     console.log('Electron build Done!');
   } else if (program.run) {
     // run electron app
-    console.log('Debug Electron app building (electron)...');
+    console.log(`Debug Electron app building (electron:${program.platform})...`);
     utils.shell('npm start', {
       cwd: './electron',
       env: {

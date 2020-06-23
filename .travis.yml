@@ -16,7 +16,8 @@ matrix:
   #      confinement: classic
 
 env:
-- NODE_ENV=production
+  global:
+  - NODE_ENV=production
 
 branches:
   only:
