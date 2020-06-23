@@ -51,7 +51,6 @@ module.exports = {
         'hardened-runtime': false,
         entitlements: 'resources/entitlements.mas.plist',
         'entitlements-inherit': 'resources/entitlements.mas.inherit.plist',
-        'provisioning-profile': process.env.APPLE_PROVISIONING,
       } : {}),
     },
     osxNotarize: (BUILD_PLATFORM === 'mac' && process.env.APPLE_ID && process.env.APPLE_PASSWORD) ? {
