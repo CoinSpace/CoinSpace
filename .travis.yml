@@ -36,4 +36,4 @@ before_script:
 
 script:
 - node ./cli/i18n.js --json
-- node ./cli/build.js electron --platform=${DISTRIBUTION}
+- node ./cli/build.js electron --env=prod --release --platform=${DISTRIBUTION}
