@@ -23,6 +23,7 @@ install:
   - npm ci
   - cd electron
   - npm ci
+  - cd ..
 
 before_script:
 - |
