@@ -5,19 +5,15 @@ matrix:
     language: node_js
     node_js: '12'
     env: DISTRIBUTION=mac
-  #- os: linux
-  #  dist: bionic
-  #  language: node_js
-  #  node_js: '12'
-  #  env: DISTRIBUTION=snap
-  #  addons:
-  #    snaps:
-  #    - name: snapcraft
-  #      confinement: classic
-
-env:
-  global:
-  - NODE_ENV=production
+  - os: linux
+    dist: bionic
+    language: node_js
+    node_js: '12'
+    env: DISTRIBUTION=snap
+    addons:
+      snaps:
+      - name: snapcraft
+        confinement: classic
 
 branches:
   only:

@@ -138,7 +138,7 @@ module.exports = {
             channels: ['edge', 'stable'],
           },
         },
-        publish: 'always',
+        publish: process.env.SNAP_TOKEN ? 'always' : 'never',
       },
     },
   ],
