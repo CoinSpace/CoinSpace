@@ -27,7 +27,7 @@ before_build:
   - ps: $Env:GOOGLE_CLOUD_PRIVATE_KEY=$Env:GOOGLE_CLOUD_PRIVATE_KEY.replace("\n","`n")
   - ps: $Env:VERSION=$(node -p -e "require('./package.json').version")
   - ps: cd electron
-  - ps: npm version $VERSION
+  - ps: npm version $Env:VERSION
   - ps: cd ..
 
 build_script:
