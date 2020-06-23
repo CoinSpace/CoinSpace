@@ -19,6 +19,11 @@ branches:
   only:
   - desktop
 
+install:
+  - npm ci
+  - cd electron
+  - npm ci
+
 before_script:
 - |
   if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
