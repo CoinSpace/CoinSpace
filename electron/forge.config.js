@@ -142,7 +142,7 @@ module.exports = {
     },
   ],
   publishers: [
-    /*...(['mac', 'win'].includes(BUILD_PLATFORM) ? [{
+    ...(['mac', 'win'].includes(BUILD_PLATFORM) ? [{
       name: '@mahnunchik/publisher-github',
       config: {
         repository: {
@@ -152,7 +152,7 @@ module.exports = {
         draft: true,
         override: true,
       },
-    }] : []),*/
+    }] : []),
     {
       name: '@mahnunchik/publisher-gcs',
       config: {

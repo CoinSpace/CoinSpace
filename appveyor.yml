@@ -31,7 +31,7 @@ before_build:
   - ps: cd ..
 
 build_script:
-  - ps: node ./cli/i18n.js --json
-  - ps: node ./cli/build.js electron --env=prod --release --platform=$Env:DISTRIBUTION
+  - node ./cli/i18n.js --json
+  - node ./cli/build.js electron --env=prod --release --platform=%DISTRIBUTION%
 
 test: off
