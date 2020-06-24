@@ -31,7 +31,12 @@ before_build:
   - ps: cd ..
 
 build_script:
-  - node ./cli/i18n.js --json
-  - node ./cli/build.js electron --env=prod --release --platform=%DISTRIBUTION%
+  - ps: |
+      if ($true)
+      {
+        node ./cli/i18n.js --json
+        node ./cli/build.js electron --env=prod --release --platform=$Env:DISTRIBUTION
+        Write-Host "Success"
+      }
 
 test: off
