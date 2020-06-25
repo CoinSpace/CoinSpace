@@ -44,9 +44,11 @@ before_script:
       echo $PROVISIONING_DISTRIBUTION | base64 --decode > electron/embedded.provisionprofile;
     fi
   fi
-  #if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-  #  echo "$SNAP_TOKEN" | snapcraft login --with -;
-  #fi
+  if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+    # https://github.com/electron-userland/electron-builder/pull/5001
+    sed -i'.backup' -e 's/await this.helper.writeDesktopEntry(this.options, packager.executableName, desktopFile, {/await this.helper.writeDesktopEntry(this.options, packager.executableName + " %U", desktopFile, {/g' electron/node_modules/app-builder-lib/out/targets/snap.js
+    #echo "$SNAP_TOKEN" | snapcraft login --with -;
+  fi
 - (cd electron && npm version $(node -p -e "require('../package.json').version"))
 
 script:

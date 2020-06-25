@@ -136,6 +136,10 @@ module.exports = {
             channels: ['edge', 'stable'],
           },*/
         },
+        protocols: {
+          name: 'Coin Wallet',
+          schemes: ['coinspace'],
+        },
         //publish: process.env.SNAP_TOKEN ? 'always' : 'never',
         publish: 'never',
       },
