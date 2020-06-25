@@ -79,6 +79,7 @@ module.exports = {
         name: 'com.coinspace.wallet',
         setupExe: `${pkg.productName} Setup.exe`,
         setupIcon: 'resources/icon.ico',
+        loadingGif: 'resources/loading.gif',
         certificateFile: 'resources/certificate.pfx',
         certificatePassword:  process.env.CERTIFICATE_WIN_PASSWORD,
         //remoteReleases: 'https://github.com/CoinSpace/CoinSpace',
