@@ -14,6 +14,10 @@ const openWindow = require('./lib/openWindow');
 const Sentry = require('@sentry/electron');
 const updater = require('./lib/updater');
 
+if (process.env.NODE_ENV === 'production') {
+  log.transports.file.level = false;
+}
+
 if (require('electron-squirrel-startup')) return;
 
 
