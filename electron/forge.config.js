@@ -3,6 +3,7 @@
 const pkg = require('./package.json');
 
 const BUILD_PLATFORM = process.env.BUILD_PLATFORM;
+const BRANCH = process.env.TRAVIS_BRANCH || process.env.APPVEYOR_REPO_BRANCH;
 
 if (!['win', 'mac', 'mas', 'snap'].includes(BUILD_PLATFORM)) {
   throw new Error(`Please specify valid distribution, provided: '${BUILD_PLATFORM}'`);
@@ -131,22 +132,21 @@ module.exports = {
         snap: {
           summary: pkg.description,
           category: 'Office;Finance',
-          /*publish: {
+          publish: {
             provider: 'snapStore',
             channels: ['edge', 'stable'],
-          },*/
+          },
         },
         protocols: {
           name: 'Coin Wallet',
           schemes: ['coinspace'],
         },
-        //publish: process.env.SNAP_TOKEN ? 'always' : 'never',
-        publish: 'never',
+        publish: process.env.SNAP_TOKEN && BRANCH === 'master' ? 'always' : 'never',
       },
     },
   ],
   publishers: [
-    ...(['mac', 'win'].includes(BUILD_PLATFORM) ? [{
+    ...(['mac', 'win'].includes(BUILD_PLATFORM) && BRANCH === 'master' ? [{
       name: '@mahnunchik/publisher-github',
       config: {
         repository: {
@@ -161,7 +161,7 @@ module.exports = {
       name: '@mahnunchik/publisher-gcs',
       config: {
         bucket: 'coinspace-travis-ci',
-        folder: pkg.version,
+        folder: `${pkg.version}-${BRANCH || 'local'}`,
         public: false,
       },
     },
