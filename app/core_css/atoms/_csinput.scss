@@ -1,0 +1,88 @@
+.csinput {
+  @extend .generic_box;
+  @extend .jigsaw-light;
+  border-radius: 2px;
+  height: auto;
+  &:active, &:focus {
+    outline: 0;
+    border: 1px solid #999;
+  }
+  @include breakpoint(portrait) {
+    font-size: 26px;
+    border-radius: 3px;
+  }
+}
+
+.csinput_with_x {
+  position: relative;
+  border: 1px solid $grey;
+  background-color: $grey--light;
+  margin-top: 5px;
+  border-radius: 2px;
+  overflow: hidden;
+  padding-right: 38px;
+
+  &:focus-within {
+    border: 1px solid #999;
+  }
+
+  @include breakpoint(portrait) {
+    border-radius: 3px;
+    padding-right: 58px;
+  }
+  ._input {
+    @extend .jigsaw-light;
+    background-color: $grey--light;
+    padding: 10px 0 10px 10px;
+    border: 0;
+    height: auto;
+    &:active, &:focus {
+      outline: 0;
+      border: 0;
+    }
+    @include breakpoint(portrait) {
+      font-size: 26px;
+    }
+  }
+  .close__input {
+    ._icon {
+      .svg-close {
+        fill: #969594;
+      }
+    }
+  }
+}
+
+.close__input {
+  @include clickbtn;
+  width: 35px;
+  opacity: 0.4;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  @include breakpoint(portrait) {
+    width: 54px;
+  }
+
+  ._icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -10px;
+
+    @include breakpoint(portrait) {
+      width: 30px;
+      height: 30px;
+      right: 15px;
+      margin-top: -15px;
+    }
+    .svg-close {
+      fill: #969594;
+    }
+  }
+}

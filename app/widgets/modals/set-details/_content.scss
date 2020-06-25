@@ -138,21 +138,8 @@
   }
 
   ._input {
-    @extend .jigsaw-light;
-    border: 1px solid #ccc;
+    @extend .csinput;
     margin-top: 5px;
-    height: 50px;
-    padding-left: 10px;
-    border-radius: 3px;
-
-    @include breakpoint(portrait) {
-      font-size: 24px;
-    }
-
-    &:active, &:focus {
-      outline: 0;
-      border: 1px solid #999;
-    }
   }
 }
 

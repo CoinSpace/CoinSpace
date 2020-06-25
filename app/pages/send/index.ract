@@ -72,9 +72,7 @@
       {{#isRipple}}
       <div class="send__optional">
         <label class="_label" for="destination-tag">{{translate("Destination tag")}}
-          <div class="input__container">
-            <input id="destination-tag" class="_input" placeholder="{{translate("(optional)")}}" type="number" min="0" max="4294967295" step="1" />
-          </div>
+          <input id="destination-tag" class="_input" placeholder="{{translate("(optional)")}}" type="number" min="0" max="4294967295" step="1" />
         </label>
         <span class="_help" on-click="help-destination-tag">
           {{>svg_help}}
@@ -83,9 +81,7 @@
 
       <div class="send__optional last">
         <label class="_label" for="invoice-id">{{translate("Invoice ID")}}
-          <div class="input__container">
-            <input id="invoice-id" class="_input" placeholder="{{translate("(optional)")}}" type="text" />
-          </div>
+          <input id="invoice-id" class="_input" placeholder="{{translate("(optional)")}}" type="text" />
         </label>
         <span class="_help" on-click="help-invoice-id">
           {{>svg_help}}

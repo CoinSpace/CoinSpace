@@ -48,15 +48,11 @@
         </div>
 
         <label class="_label" for="token_symbol">{{translate("Symbol")}}
-          <div class="input__container">
-            <input id="token_symbol" class="_input" type="text" on-enter="add" autocorrect="off" autocapitalize="off" value="{{symbol}}" />
-          </div>
+          <input id="token_symbol" class="_input_single" type="text" on-enter="add" autocorrect="off" autocapitalize="off" value="{{symbol}}" />
         </label>
 
         <label class="_label" for="token_decimals">{{translate("Decimals")}}
-          <div class="input__container">
-            <input id="token_decimals" class="_input" type="number" on-enter="add" min="0" step="1" autocorrect="off" autocapitalize="off" value="{{decimals}}" />
-          </div>
+          <input id="token_decimals" class="_input_single" type="number" on-enter="add" min="0" step="1" autocorrect="off" autocapitalize="off" value="{{decimals}}" />
         </label>
         {{/token}}
 

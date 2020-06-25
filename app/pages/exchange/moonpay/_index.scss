@@ -61,22 +61,8 @@
       cursor: pointer;
     }
     ._input {
-      @extend .generic_box;
-      @extend .jigsaw-light;
+      @extend .csinput;
       margin-top: 5px;
-      padding-left: 10px;
-      padding-right: 10px;
-      border-radius: 2px;
-      height: auto;
-      &:active, &:focus {
-        outline: 0;
-        border: 1px solid #999;
-      }
-      @include breakpoint(portrait) {
-        font-size: 26px;
-        border-radius: 3px;
-        padding-right: 58px;
-      }
     }
   }
 

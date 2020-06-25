@@ -36,8 +36,7 @@
     padding: 20px 20px 0;
 
     .input__container {
-      position: relative;
-      margin-top: 5px;
+      @extend .csinput_with_x;
     }
 
     ._token_container {
@@ -76,37 +75,13 @@
       }
     }
 
-    ._input {
-      @extend .generic_box;
-      @extend .jigsaw-light;
-      padding-left: 10px;
-      padding-right: 38px;
-      border-radius: 2px;
-
-      height: auto;
-
-      &:active, &:focus {
-        outline: 0;
-        border: 1px solid #999;
-      }
-
-      @include breakpoint(portrait) {
-        font-size: 26px;
-        border-radius: 3px;
-        padding-right: 58px;
-      }
+    ._input_single {
+      @extend .csinput;
+      margin-top: 5px;
     }
 
     ._contract_address_group {
       display: flex;
-
-      .close__input {
-        ._icon {
-          .svg-close {
-            fill: #969594;
-          }
-        }
-      }
 
       ._label {
         flex: 1;

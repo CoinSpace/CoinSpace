@@ -146,16 +146,7 @@
     text-align: left;
 
     .input__container {
-      position: relative;
-      margin-top: 5px;
-    }
-
-    .close__input {
-      ._icon{
-        .svg-close {
-          fill: #969594;
-        }
-      }
+      @extend .csinput_with_x;
     }
 
     ._label {
@@ -166,27 +157,6 @@
 
       @include breakpoint(portrait) {
         font-size: 20px;
-      }
-    }
-
-    ._input {
-      @extend .generic_box;
-      @extend .jigsaw-light;
-      padding-left: 10px;
-      padding-right: 38px;
-      border-radius: 2px;
-
-      height: auto;
-
-      &:active, &:focus {
-        outline: 0;
-        border: 1px solid #999;
-      }
-
-      @include breakpoint(portrait) {
-        font-size: 26px;
-        border-radius: 3px;
-        padding-right: 58px;
       }
     }
   }
@@ -631,33 +601,17 @@
   }
 
   .input__container {
-    position: relative;
-    margin-top: 5px;
-
+    @extend .csinput_with_x;
+    background-color: #fff;
     @include breakpoint(portrait) {
       margin-bottom: 5px;
     }
-  }
-
-  ._input {
-    @extend .jigsaw-light;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    color: #333;
-    height: 50px;
-    padding-left: 10px;
-    padding-right: 38px;
-    border-radius: 3px;
-
-    @include breakpoint(portrait) {
-      font-size: 20px;
-      height: 72px;
-      padding-right: 58px;
-    }
-
-    &:active, &:focus {
-      outline: 0;
-      border: 1px solid #999;
+    ._input {
+      background-color: #fff;
+      @include breakpoint(portrait) {
+        font-size: 20px;
+        height: 72px;
+      }
     }
   }
 }
@@ -762,41 +716,6 @@
   @include breakpoint(portrait) {
     padding-top: 34px;
   }
-}
-
-
-
-.close__input {
-  @include clickbtn;
-  width: 35px;
-  opacity: 0.4;
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-
-
-  @include breakpoint(portrait) {
-    width: 54px;
-  }
-
-  ._icon {
-    display: block;
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    margin-top: -10px;
-
-    @include breakpoint(portrait) {
-      width: 30px;
-      height: 30px;
-      right: 15px;
-      margin-top: -15px;
-    }
-  }
-
 }
 
 .loading__spinner {

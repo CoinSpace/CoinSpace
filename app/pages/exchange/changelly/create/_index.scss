@@ -55,16 +55,7 @@
     }
 
     .input__container {
-      position: relative;
-      margin-top: 5px;
-    }
-
-    .close__input {
-      ._icon {
-        .svg-close {
-          fill: #969594;
-        }
-      }
+      @extend .csinput_with_x;
     }
 
     ._label {
@@ -117,27 +108,6 @@
 
     ._btn-qr {
       margin-right: 10px;
-    }
-
-    ._input {
-      @extend .generic_box;
-      @extend .jigsaw-light;
-      padding-left: 10px;
-      padding-right: 38px;
-      border-radius: 2px;
-
-      height: auto;
-
-      &:active, &:focus {
-        outline: 0;
-        border: 1px solid #999;
-      }
-
-      @include breakpoint(portrait) {
-        font-size: 26px;
-        border-radius: 3px;
-        padding-right: 58px;
-      }
     }
 
     ._help {
