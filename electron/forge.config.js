@@ -9,9 +9,16 @@ if (!['win', 'mac', 'mas', 'snap'].includes(BUILD_PLATFORM)) {
   throw new Error(`Please specify valid distribution, provided: '${BUILD_PLATFORM}'`);
 }
 
+let buildVersion = pkg.version;
+
+if (BUILD_PLATFORM === 'mas' && process.env.TRAVIS_BUILD_NUMBER) {
+  buildVersion = `1.0.${process.env.TRAVIS_BUILD_NUMBER}`;
+}
+
 module.exports = {
   packagerConfig: {
     appVersion: pkg.version,
+    buildVersion,
     //asar: true,
     icon: 'resources/icon',
     executableName: ['win'].includes(BUILD_PLATFORM) ? pkg.productName : pkg.name,
