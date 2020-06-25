@@ -3,6 +3,14 @@ image: Visual Studio 2019
 platform:
   - x64
 
+skip_tags: true
+
+branches:
+  only:
+    - master
+    - develop
+    - desktop
+
 init:
   - git config --global core.autocrlf input
 

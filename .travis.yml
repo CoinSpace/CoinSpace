@@ -22,6 +22,8 @@ matrix:
 
 branches:
   only:
+  - master
+  - develop
   - desktop
 
 install:
