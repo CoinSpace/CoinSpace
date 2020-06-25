@@ -62,9 +62,9 @@ router.get('/openalias', function(req, res) {
 });
 
 router.put('/username', function(req, res) {
-  var id = req.body.id;
-  var username = req.body.username;
-  if (!username) return res.status(400).json({error: 'Bad request'});
+  const id = req.body.id;
+  const username = req.body.username;
+  if (!username) return res.status(400).json({ error: 'Bad request' });
   account.setUsername(id, username).then(function(username) {
     res.status(200).send({ username: username });
   }).catch(function(err) {
@@ -81,7 +81,7 @@ router.get('/details', function(req, res) {
 });
 
 router.put('/details', function(req, res) {
-  if (!req.body.data) return res.status(400).json({error: 'Bad request'});
+  if (!req.body.data) return res.status(400).json({ error: 'Bad request' });
   account.saveDetails(req.body.id, req.body.data).then(function(details) {
     res.status(200).json(details);
   }).catch(function(err) {
@@ -90,7 +90,7 @@ router.put('/details', function(req, res) {
 });
 
 router.delete('/account', function(req, res) {
-  var id = req.body.id;
+  const id = req.body.id;
   account.remove(id).then(function() {
     res.status(200).send();
   }).catch(function(err) {
@@ -144,7 +144,7 @@ router.get('/ethereum/tokens', function(req, res) {
 });
 
 router.post('/location', function(req, res) {
-  var data = req.body;
+  const data = req.body;
   geo.save(data.lat, data.lon, data).then(function() {
     res.status(201).send();
   }).catch(function(err) {
@@ -153,7 +153,7 @@ router.post('/location', function(req, res) {
 });
 
 router.put('/location', function(req, res) {
-  var data = req.body;
+  const data = req.body;
   geo.search(data.lat, data.lon, data).then(function(results) {
     res.status(200).json(results);
   }).catch(function(err) {
@@ -178,7 +178,7 @@ router.get('/shapeShiftRedirectUri', function(req, res) {
 });
 
 router.delete('/shapeShiftToken', function(req, res) {
-  var token = req.body.token;
+  const token = req.body.token;
   shapeshift.revokeToken(token).catch(function() {});
   res.status(200).send();
 });
@@ -212,12 +212,12 @@ router.get('/changelly/validate/:address/:symbol', function(req, res) {
 });
 
 router.post('/changelly/createTransaction', function(req, res) {
-  var from = req.body.from;
-  var to = req.body.to;
-  var amount = req.body.amount;
-  var address = req.body.address;
-  var refundAddress = req.body.refundAddress;
-  if (!from || !to || !amount || !address) return res.status(400).json({error: 'Bad request'});
+  const from = req.body.from;
+  const to = req.body.to;
+  const amount = req.body.amount;
+  const address = req.body.address;
+  const refundAddress = req.body.refundAddress;
+  if (!from || !to || !amount || !address) return res.status(400).json({ error: 'Bad request' });
   changelly.createTransaction(from, to, amount, address, refundAddress).then(function(data) {
     res.status(200).send(data);
   }).catch(function(err) {

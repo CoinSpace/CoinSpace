@@ -15,7 +15,7 @@ function init(app) {
     app.set('trust proxy', true);
     app.use(helmet.xssFilter());
     app.use(helmet.noSniff());
-    app.use(helmet.frameguard({action: 'sameorigin'}));
+    app.use(helmet.frameguard({ action: 'sameorigin' }));
 
     var oneYearInSeconds = 31536000;
     app.use(helmet.hsts({
@@ -28,7 +28,7 @@ function init(app) {
   app.use(cors());
 
   var dayInMs = 24 * 60 * 60 * 1000;
-  app.use(bodyParser.urlencoded({extended: true}));
+  app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
 
   app.use(compress());
