@@ -82,6 +82,12 @@
     <edit-config target="NSCameraUsageDescription" file="Coin/Coin-Info.plist" mode="merge">
       <string>Used to scan barcodes and take pictures for support</string>
     </edit-config>
+    <edit-config target="UIStatusBarHidden" file="Coin/Coin-Info.plist" mode="overwrite">
+      <true/>
+    </edit-config>
+    <edit-config target="UIViewControllerBasedStatusBarAppearance" file="Coin/Coin-Info.plist" mode="overwrite">
+      <false/>
+    </edit-config>
     <edit-config target="UIApplicationShortcutItems" file="Coin/Coin-Info.plist" mode="merge">
       <array>
         <dict>
@@ -118,18 +124,6 @@
         </dict>
       </array>
     </edit-config>
-    <edit-config target="UISupportedInterfaceOrientations" file="Coin/Coin-Info.plist" mode="merge">
-      <array>
-        <string>UIInterfaceOrientationPortrait</string>
-      </array>
-    </edit-config>
-    <edit-config target="UISupportedInterfaceOrientations~ipad" file="Coin/Coin-Info.plist" mode="merge">
-      <array>
-        <string>UIInterfaceOrientationPortrait</string>
-        <string>UIInterfaceOrientationLandscapeLeft</string>
-        <string>UIInterfaceOrientationLandscapeRight</string>
-      </array>
-    </edit-config>
     <edit-config target="com.apple.developer.associated-domains" file="Coin/Entitlements-Debug.plist" mode="merge">
       <array>
         <string>applinks:coin.space</string>
@@ -142,7 +136,7 @@
     </edit-config>
   </platform>
   <preference name="StatusBarBackgroundColor" value="#FFFFFF" />
-  <preference name="SplashScreenDelay" value="2000"/>
+  <preference name="SplashScreenDelay" value="1000"/>
   <preference name="android-minSdkVersion" value="22" />
   <preference name="android-targetSdkVersion" value="28" />
   <preference name="KeyboardDisplayRequiresUserAction" value="false" />

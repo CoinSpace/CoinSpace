@@ -14,10 +14,13 @@ function onDeviceReady() {
     return cordova.InAppBrowser.open(url, '_system', options);
   }
 
-  // fix ios (check in cordova-ios 6.1.0)
-  window.StatusBar.styleDefault();
-  StatusBar.overlaysWebView(false);
-  StatusBar.overlaysWebView(true);
+  // fix ios status bar
+  setTimeout(function() {
+    window.StatusBar.styleDefault();
+    window.StatusBar.show();
+    window.StatusBar.overlaysWebView(false);
+    window.StatusBar.overlaysWebView(true);
+  }, 500);
 
   return import(
     /* webpackChunkName: 'loader' */
