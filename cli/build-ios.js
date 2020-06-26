@@ -52,7 +52,7 @@ webpack(webpackConfig, async function(error, stats) {
   });
   fse.copySync('build', path.resolve(mobileBuildPath, 'www'), { filter: utils.filterMapFiles });
 
-  // /* eslint-disable max-len */
+  /* eslint-disable max-len */
   utils.cordova('platform add ios@6.1.0');
   utils.cordova('plugin add cordova-plugin-geolocation@4.0.2');
   utils.cordova('plugin add phonegap-plugin-barcodescanner@8.1.0');
@@ -73,8 +73,8 @@ webpack(webpackConfig, async function(error, stats) {
     'UISupportedInterfaceOrientations~ipad': [
       'UIInterfaceOrientationPortrait',
       'UIInterfaceOrientationLandscapeLeft',
-      'UIInterfaceOrientationLandscapeRight'
-    ]
+      'UIInterfaceOrientationLandscapeRight',
+    ],
   };
   updatePlist(path.join(mobileBuildPath, 'platforms/ios/Coin/Coin-Info.plist'), orientations);
 
@@ -93,7 +93,7 @@ function updatePlist(plistPath, update) {
   const plistData = Object.assign({}, plistContent, update);
   fse.writeFileSync(plistPath, plist.build(plistData, {
     indent: '\t',
-    offset: -1
+    offset: -1,
   }), 'utf-8');
 }
 
