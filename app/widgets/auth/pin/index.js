@@ -6,7 +6,6 @@ var emitter = require('lib/emitter')
 var validatePin = require('lib/pin-validator')
 var showError = require('widgets/modals/flash').showError
 var translate = require('lib/i18n').translate
-var getLanguage = require('lib/i18n').getLanguage
 var shapeshift = require('lib/shapeshift');
 var moonpay = require('lib/moonpay');
 var pincode = ''
@@ -159,14 +158,12 @@ module.exports = function(prevPage, data){
           }
         }, reject)
       } else if (process.env.BUILD_PLATFORM === 'android') {
-        var FingerprintAuth = window.FingerprintAuth;
-        FingerprintAuth.isAvailable(function(result) {
-          if (!result.isAvailable) return reject();
+        var Fingerprint = window.Fingerprint;
+        Fingerprint.isAvailable(function() {
           CS.setAvailableTouchId();
           var pin = CS.getPin();
           if (pin && CS.walletExists() && userExists) {
-            var config = {clientId: 'coinspace', locale: getLanguage()};
-            FingerprintAuth.encrypt(config, function() {
+            Fingerprint.show({}, function() {
               resolve();
               ractive.set('pin', pin)
               var boxes = pin.split('')
