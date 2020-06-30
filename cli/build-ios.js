@@ -65,6 +65,7 @@ webpack(webpackConfig, async function(error, stats) {
   utils.cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#23f993dc73feafbf8eb00496f9a5da0884374a10');
   utils.cordova('plugin add cordova-plugin-cookiemaster@1.0.5');
   utils.cordova('plugin add cordova-plugin-3dtouch-shortcutitems@1.0.2');
+  utils.cordova('plugin add cordova-plugin-safariviewcontroller@1.6.0');
 
   var orientations = {
     'UISupportedInterfaceOrientations': [

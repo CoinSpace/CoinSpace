@@ -7,7 +7,6 @@ var path = require('path');
 var pkg = require('../package.json');
 var utils = require('./utils');
 var webpack = require('webpack');
-var replace = require('replace-in-file');
 var dotenv = require('dotenv');
 var mobileBuildPath = 'phonegap/build';
 var SENTRY_RELEASE = `${pkg.name}.android@${pkg.version}`;
@@ -49,38 +48,32 @@ webpack(webpackConfig, function(error, stats) {
   fse.copySync('phonegap/config.xml.template', path.resolve(mobileBuildPath, 'config.xml'));
   fse.copySync('build', path.resolve(mobileBuildPath, 'www'), { filter: utils.filterMapFiles });
 
-  utils.cordova('platform add android@6.4.0');
-
-  utils.cordova('plugin add cordova-custom-config@5.0.2');
-  utils.cordova('plugin add cordova-plugin-geolocation@2.4.3');
-  utils.cordova('plugin add cordova-plugin-whitelist@1.3.2');
-  utils.cordova('plugin add cordova-plugin-inappbrowser@1.7.1');
-  utils.cordova('plugin add cordova-plugin-splashscreen@4.0.3');
-  utils.cordova('plugin add phonegap-plugin-barcodescanner@6.0.8');
-  utils.cordova('plugin add cordova-plugin-dialogs@1.3.3');
-  utils.cordova('plugin add cordova-plugin-x-socialsharing@5.2.0');
-  utils.cordova('plugin add cordova-plugin-android-fingerprint-auth@1.4.0');
-  utils.cordova('plugin add cordova-plugin-customurlscheme@4.3.0 --variable URL_SCHEME=coinspace');
-  // eslint-disable-next-line max-len
-  utils.cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#269d8d9b3f18eccffbf20071a43730c7ac3fd5b0');
+  /* eslint-disable max-len */
+  utils.cordova('platform add android@8.1.0');
+  utils.cordova('plugin add cordova-custom-config@5.1.0');
+  utils.cordova('plugin add cordova-plugin-geolocation@4.0.2');
+  utils.cordova('plugin add phonegap-plugin-barcodescanner@8.1.0');
+  utils.cordova('plugin add cordova-plugin-dialogs@2.0.2');
+  utils.cordova('plugin add cordova-plugin-inappbrowser@4.0.0');
+  utils.cordova('plugin add cordova-plugin-x-socialsharing@5.6.8');
+  utils.cordova('plugin add cordova-plugin-android-fingerprint-auth@1.5.0');
+  utils.cordova('plugin add cordova-plugin-customurlscheme@5.0.1 --variable URL_SCHEME=coinspace');
+  utils.cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#23f993dc73feafbf8eb00496f9a5da0884374a10');
   utils.cordova('plugin add cordova-plugin-cookiemaster@1.0.5');
-
-  replace.sync({
-    files: path.resolve(mobileBuildPath, 'platforms/android/project.properties'),
-    from: 'android-26',
-    to: 'android-28',
-  });
+  utils.cordova('plugin add cordova-plugin-splashscreen@5.0.4');
+  utils.cordova('plugin add cordova-plugin-whitelist@1.3.4');
+  utils.cordova('plugin add cordova-plugin-safariviewcontroller@1.6.0');
 
   if (program.release) {
     utils.uploadSentrySourceMaps('android', SENTRY_RELEASE);
     utils.cordova('build android --release');
     utils.shell(
       `jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ../release.keystore \
-      -storepass coinspace platforms/android/build/outputs/apk/release/android-release-unsigned.apk coinspace`,
+      -storepass coinspace platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk coinspace`,
       { cwd: mobileBuildPath }
     );
     utils.shell(
-      `zipalign -f -v 4 platforms/android/build/outputs/apk/release/android-release-unsigned.apk \
+      `zipalign -f -v 4 platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk \
       ../deploy/coinspace-release.apk`,
       { cwd: mobileBuildPath }
     );

@@ -14,14 +14,6 @@ function onDeviceReady() {
     return cordova.InAppBrowser.open(url, '_system', options);
   }
 
-  // fix ios status bar
-  setTimeout(function() {
-    window.StatusBar.styleDefault();
-    window.StatusBar.show();
-    window.StatusBar.overlaysWebView(false);
-    window.StatusBar.overlaysWebView(true);
-  }, 500);
-
   return import(
     /* webpackChunkName: 'loader' */
     '../app/loader'

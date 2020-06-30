@@ -26,15 +26,21 @@
     <splash src="../images/android/screens/mdpi-land.png" density="land-mdpi"/>
     <splash src="../images/android/screens/hdpi-land.png" density="land-hdpi"/>
     <splash src="../images/android/screens/xhdpi-land.png" density="land-xhdpi"/>
+    <splash src="../images/android/screens/xxhdpi-land.png" density="land-xxhdpi"/>
+    <splash src="../images/android/screens/xxxhdpi-land.png" density="land-xxxhdpi"/>
     <splash src="../images/android/screens/ldpi-port.png" density="port-ldpi"/>
     <splash src="../images/android/screens/mdpi-port.png" density="port-mdpi"/>
     <splash src="../images/android/screens/hdpi-port.png" density="port-hdpi"/>
     <splash src="../images/android/screens/xhdpi-port.png" density="port-xhdpi"/>
+    <splash src="../images/android/screens/xxhdpi-port.png" density="port-xxhdpi"/>
+    <splash src="../images/android/screens/xxxhdpi-port.png" density="port-xxxhdpi"/>
     <custom-config-file target="AndroidManifest.xml" parent="/*" mode="replace">
       <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
       <uses-feature android:name="android.hardware.camera" android:required="false" />
       <uses-feature android:name="android.hardware.location.gps" android:required="false" />
     </custom-config-file>
+    <preference name="SplashMaintainAspectRatio" value="true" />
+    <preference name="AndroidLaunchMode" value="singleTask"/>
   </platform>
   <platform name="ios">
     <icon src="../images/ios/icons/icon-20.png" width="20" height="20" />
@@ -135,8 +141,8 @@
       </array>
     </edit-config>
   </platform>
+  <preference name="AutoHideSplashScreen" value="false" />
   <preference name="StatusBarBackgroundColor" value="#FFFFFF" />
-  <preference name="SplashScreenDelay" value="1000"/>
   <preference name="android-minSdkVersion" value="22" />
   <preference name="android-targetSdkVersion" value="28" />
   <preference name="KeyboardDisplayRequiresUserAction" value="false" />

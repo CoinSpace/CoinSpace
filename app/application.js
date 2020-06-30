@@ -21,6 +21,17 @@ window.initCSApp = function() {
 
   var appEl = document.getElementById('app')
   var htmlEl = document.documentElement
+
+  if (process.env.BUILD_TYPE === 'phonegap') {
+    if (process.env.BUILD_PLATFORM === 'ios') {
+      window.StatusBar.styleDefault();
+      window.StatusBar.show();
+      window.StatusBar.overlaysWebView(false);
+      window.StatusBar.overlaysWebView(true);
+    }
+    navigator.splashscreen.hide();
+  }
+
   var frame = initFrame(appEl)
   var auth = null
 
@@ -81,6 +92,7 @@ window.initCSApp = function() {
 
   if (process.env.BUILD_TYPE === 'phonegap') {
     window.handleOpenURL = function(url) {
+      SafariViewController.hide();
       setTimeout(function() {
         emitter.emit('handleOpenURL', url);
       }, 1);
