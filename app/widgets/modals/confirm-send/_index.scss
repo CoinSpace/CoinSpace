@@ -27,13 +27,13 @@
 
 
 .confirm__header {
-  font-size: 21px;
+  font-size: $big_font_size;
   text-align: center;
   padding-bottom: 10px;
   border-bottom: 1px solid $grey;
 
   @include breakpoint(portrait) {
-    font-size: 24px;
+    font-size: $big_font_size--portrait;
     padding-bottom: 20px;
   }
 }
@@ -53,34 +53,34 @@
 
     ._value {
       @extend .jigsaw-light;
-      font-size: 32px;
+      font-size: $large_font_size;
 
       @include breakpoint(portrait) {
-        font-size: 48px;
+        font-size: $large_font_size--portrait;
       }
     }
 
     ._currency {
       @extend .jigsaw-light;
-      font-size: 14px;
+      font-size: $small_font_size;
       padding-top: 6px;
       margin-left: 3px;
 
       @include breakpoint(portrait) {
-        font-size: 18px;
+        font-size: $small_font_size--portrait;
       }
     }
   }
 
   ._fee {
     display: block;
-    font-size: 12px;
+    font-size: $small_font_size;
     color: darken($grey, 10%);
     text-align: center;
     padding-top: 10px;
 
     @include breakpoint(portrait) {
-      font-size: 18px;
+      font-size: $small_font_size--portrait;
     }
   }
 
@@ -113,11 +113,11 @@
   ._address, ._memo {
     @include wrapdat;
     @extend .jigsaw-light;
-    font-size: 13px;
+    font-size: $small_font_size;
     display: block;
     text-align: center;
     @include breakpoint(portrait) {
-      font-size: 18px;
+      font-size: $small_font_size--portrait;
     }
   }
   ._info_medium {
@@ -143,7 +143,7 @@
     box-shadow: 0 2px 0 0 darken($grey, 20%);
 
     @include breakpoint(portrait) {
-      font-size: 24px;
+      font-size: $big_font_size--portrait;
     }
 
     &:hover {
@@ -156,7 +156,7 @@
     margin-right: 5px;
 
     @include breakpoint(portrait) {
-      font-size: 24px;
+      font-size: $big_font_size--portrait;
     }
   }
 
@@ -165,7 +165,7 @@
     margin-left: 5px;
 
     @include breakpoint(portrait) {
-      font-size: 24px;
+      font-size: $big_font_size--portrait;
     }
   }
 
@@ -208,12 +208,12 @@
 
 .confirm__responseTitle {
   color: white;
-  font-size: 21px;
+  font-size: $header_font_size;
   text-align: center;
   padding-bottom: 10px;
 
   @include breakpoint(portrait) {
-    font-size: 28px;
+    font-size: $header_font_size--portrait;
   }
 }
 
@@ -224,10 +224,10 @@
   margin: 0 auto;
   padding-bottom: 40px;
   line-height: 1.3;
-  font-size: 13px;
+  font-size: $small_font_size;
 
   @include breakpoint(portrait) {
-    font-size: 18px;
+    font-size: $small_font_size--portrait;
     max-width: 250px;
   }
 }

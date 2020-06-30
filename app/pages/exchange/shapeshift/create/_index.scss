@@ -11,7 +11,7 @@
       margin-left: -10px;
       margin-bottom: 10px;
       @include breakpoint(portrait) {
-        font-size: 20px;
+        font-size: $base_font_size--portrait;
         margin-bottom: 20px;
       }
       ._icon {
@@ -33,7 +33,7 @@
 
   ._title {
     @include breakpoint(portrait) {
-      font-size: 20px;
+      font-size: $base_font_size--portrait;
     }
   }
 
@@ -50,7 +50,7 @@
       flex: 1;
       margin-right: 10px;
       @include breakpoint(portrait) {
-        font-size: 20px;
+        font-size: $base_font_size--portrait;
       }
     }
 
@@ -131,7 +131,7 @@
       position: absolute;
       top: 0px;
       right: -5px;
-      font-size: 12px;
+      font-size: $small_font_size;
       width: 26px;
       height: 26px;
       padding: 4px;
@@ -156,7 +156,7 @@
     @extend .jigsaw-regular;
     margin-bottom: 20px;
     @include breakpoint(portrait) {
-      font-size: 20px;
+      font-size: $base_font_size--portrait;
     }
   }
 
@@ -191,7 +191,7 @@
     @extend .csbtn;
 
     @include breakpoint(portrait) {
-      font-size: 26px;
+      font-size: $btn_font_size--portrait;
       border-radius: 3px;
     }
   }
@@ -235,7 +235,7 @@
     color: #999;
     user-select: none;
     @include breakpoint(portrait) {
-      font-size: 20px;
+      font-size: $base_font_size--portrait;
       padding-top: 15px;
     }
 

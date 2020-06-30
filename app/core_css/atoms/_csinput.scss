@@ -8,7 +8,7 @@
     border: 1px solid #999;
   }
   @include breakpoint(portrait) {
-    font-size: 26px;
+    font-size: $btn_font_size--portrait;
     border-radius: 3px;
   }
 }
@@ -41,7 +41,7 @@
       border: 0;
     }
     @include breakpoint(portrait) {
-      font-size: 26px;
+      font-size: $btn_font_size--portrait;
     }
   }
   .close__input {

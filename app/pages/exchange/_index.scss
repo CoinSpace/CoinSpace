@@ -2,7 +2,7 @@
   ._title {
     margin-bottom: 10px;
     @include breakpoint(portrait) {
-      font-size: 20px;
+      font-size: $base_font_size--portrait;
       margin-bottom: 20px;
     }
   }
@@ -10,7 +10,7 @@
     @extend .csbtn;
     margin-bottom: 20px;
     @include breakpoint(portrait) {
-      font-size: 26px;
+      font-size: $btn_font_size--portrait;
       border-radius: 3px;
       margin-bottom: 30px;
     }

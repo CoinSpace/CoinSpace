@@ -9,9 +9,9 @@
     padding: 40px;
     color: $grey;
     text-align: center;
-    font-size: 24px;
+    font-size: $subtitle_font_size;
     @include breakpoint(portrait) {
-      font-size: 32px;
+      font-size: $subtitle_font_size--portrait;
     }
   }
 
@@ -26,7 +26,7 @@
       margin-left: -10px;
       margin-bottom: 10px;
       @include breakpoint(portrait) {
-        font-size: 20px;
+        font-size: $base_font_size--portrait;
         margin-bottom: 20px;
       }
       ._icon {
@@ -48,14 +48,14 @@
   ._message {
     @extend .jigsaw-regular;
     @include breakpoint(portrait) {
-      font-size: 20px;
+      font-size: $base_font_size--portrait;
     }
   }
 
   ._group {
     @include noselect;
     @include breakpoint(portrait) {
-      font-size: 20px;
+      font-size: $base_font_size--portrait;
     }
     ._label {
       cursor: pointer;
@@ -75,7 +75,7 @@
       @extend .csbtn;
 
       @include breakpoint(portrait) {
-        font-size: 26px;
+        font-size: $btn_font_size--portrait;
         border-radius: 3px;
       }
     }

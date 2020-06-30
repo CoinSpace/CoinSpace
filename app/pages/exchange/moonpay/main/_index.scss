@@ -9,7 +9,7 @@
     user-select: none;
     margin-bottom: 10px;
     @include breakpoint(portrait) {
-      font-size: 20px;
+      font-size: $base_font_size--portrait;
     }
     &._dropdown {
       display: inline-block;
@@ -35,7 +35,7 @@
     color: #999;
     user-select: none;
     @include breakpoint(portrait) {
-      font-size: 20px;
+      font-size: $base_font_size--portrait;
       padding-top: 15px;
     }
     &:hover {

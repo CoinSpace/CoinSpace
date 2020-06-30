@@ -16,7 +16,7 @@
   @include breakpoint(portrait) {
     height: 61px;
     min-width: 100px;
-    font-size: 26px;
+    font-size: $btn_font_size--portrait;
     border-radius: 3px;
   }
 

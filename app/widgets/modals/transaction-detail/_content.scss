@@ -12,15 +12,15 @@
     max-width: 470px;
   }
 
-  font-size: 18px;
+  font-size: $big_font_size;
   @extend .jigsaw-light;
 
   ._amount {
     text-align: center;
-    font-size: 32px;
+    font-size: $large_font_size;
 
     @include breakpoint(portrait) {
-      font-size: 44px;
+      font-size: $large_font_size--portrait;
     }
 
     &.red {
@@ -35,13 +35,13 @@
     text-align: center;
     color: $grey;
     @include breakpoint(portrait) {
-      font-size: 24px;
+      font-size: $big_font_size--portrait;
     }
   }
   ._status {
     text-align: center;
     @include breakpoint(portrait) {
-      font-size: 24px;
+      font-size: $big_font_size--portrait;
     }
   }
 
@@ -52,7 +52,7 @@
       margin-top: 10px;
 
       @include breakpoint(portrait) {
-        font-size: 18px;
+        font-size: $small_font_size--portrait;
       }
     }
     a._value {
@@ -68,12 +68,12 @@
       padding-bottom: 14px;
       display: block;
       border-radius: 5px;
-      font-size: 13px;
+      font-size: $small_font_size;
       line-height: 1.8;
       overflow: hidden;
 
       @include breakpoint(portrait) {
-        font-size: 22px;
+        font-size: $small_font_size--portrait;
       }
       ._address {
         float: left;
@@ -96,9 +96,9 @@
   }
   .transaction__detail {
     ._amount {
-      font-size: 24px;
+      font-size: $subtitle_font_size;
       @include breakpoint(portrait) {
-        font-size: 32px;
+        font-size: $subtitle_font_size--portrait;
       }
     }
   }

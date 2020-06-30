@@ -19,9 +19,9 @@
   }
 
   ._title {
-    font-size: 24px;
+    font-size: $subtitle_font_size;
     @include breakpoint(portrait) {
-      font-size: 32px;
+      font-size: $subtitle_font_size--portrait;
     }
   }
 
@@ -32,7 +32,7 @@
       @extend .jigsaw-regular;
     }
     @include breakpoint(portrait) {
-      font-size: 20px;
+      font-size: $base_font_size--portrait;
       margin-bottom: 40px;
     }
     ._keys {
@@ -45,13 +45,13 @@
       padding-bottom: 14px;
       display: block;
       border-radius: 5px;
-      font-size: 14px;
+      font-size: $small_font_size;
       line-height: 1.8;
       overflow-x: hidden;
       overflow-y: scroll;
       max-height: 300px;
       @include breakpoint(portrait) {
-        font-size: 18px;
+        font-size: $small_font_size--portrait;
       }
     }
   }
@@ -59,7 +59,7 @@
   ._show_btn {
     @extend .csbtn;
     @include breakpoint(portrait) {
-      font-size: 26px;
+      font-size: $btn_font_size--portrait;
       border-radius: 3px;
     }
   }

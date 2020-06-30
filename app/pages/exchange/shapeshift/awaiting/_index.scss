@@ -2,13 +2,13 @@
   padding-top: 30px;
   margin-bottom: 25px;
   ._subtitle {
-    font-size: 24px;
+    font-size: $subtitle_font_size;
     line-height: 1.2;
     text-align: center;
     color: #999;
     margin-bottom: 15px;
     @include breakpoint(portrait) {
-      font-size: 32px;
+      font-size: $subtitle_font_size--portrait;
       margin-bottom: 30px;
     }
   }

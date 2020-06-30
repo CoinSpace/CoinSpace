@@ -24,7 +24,7 @@
     @extend .csbtn;
 
     @include breakpoint(portrait) {
-      font-size: 26px;
+      font-size: $btn_font_size--portrait;
       border-radius: 3px;
     }
   }
@@ -66,7 +66,7 @@
   padding-bottom: 5px;
 
   @include breakpoint(portrait) {
-    font-size: 20px;
+    font-size: $base_font_size--portrait;
   }
  }
 }
@@ -88,17 +88,17 @@
     @include media-obj;
     @extend .jigsaw-light;
     padding-top: 13px;
-    font-size: 21px;
+    font-size: $header_font_size;
 
     @include breakpoint(portrait) {
       padding-top: 18px;
-      font-size: 26px;
+      font-size: $header_font_size--portrait;
     }
   }
 
   ._expandBtn {
     @include clickbtn;
-    font-size: 16px;
+    font-size: $base_font_size;
     opacity: 0.4;
   }
 
@@ -110,20 +110,20 @@
 
   ._amount {
     @extend .jigsaw-light;
-    font-size: 24px;
+    font-size: $subtitle_font_size;
 
     @include breakpoint(portrait) {
-      font-size: 32px;
+      font-size: $subtitle_font_size--portrait;
     }
   }
 
   ._time {
     display: block;
-    font-size: 14px;
+    font-size: $small_font_size;
     margin-top: -5px;
     color: $grey;
     @include breakpoint(portrait) {
-      font-size: 16px;
+      font-size: $small_font_size--portrait;
     }
   }
 
@@ -144,10 +144,10 @@
   }
 
   ._message {
-    font-size: 24px;
+    font-size: $subtitle_font_size;
     line-height: 1.2;
     @include breakpoint(portrait) {
-      font-size: 32px;
+      font-size: $subtitle_font_size--portrait;
     }
   }
 
@@ -156,9 +156,9 @@
 .ethereum, .ripple, .stellar {
   .transactions__item {
     ._amount {
-      font-size: 18px;
+      font-size: $big_font_size;
       @include breakpoint(portrait) {
-        font-size: 24px;
+        font-size: $big_font_size--portrait;
       }
     }
   }

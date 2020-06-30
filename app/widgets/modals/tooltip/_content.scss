@@ -1,6 +1,6 @@
 
 .tooltip {
-  font-size: 18px;
+  font-size: $big_font_size;
   min-width: 280px;
   max-width: 350px;
   @include breakpoint(portrait) {
@@ -27,7 +27,7 @@
   @extend .jigsaw-regular;
 
   @include breakpoint(portrait) {
-    font-size: 24px;
+    font-size: $big_font_size--portrait;
   }
   a {
     text-decoration: underline;
@@ -38,7 +38,7 @@
   padding-top: 20px;
 
   @include breakpoint(portrait) {
-    font-size: 24px;
+    font-size: $big_font_size--portrait;
   }
 
   a {

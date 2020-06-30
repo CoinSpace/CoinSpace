@@ -43,7 +43,7 @@
   cursor: pointer;
   padding-top: 7px;
   padding-right: 20px;
-  font-size: 20px;
+  font-size: $big_font_size;
   opacity: 1;
 }
 
@@ -196,7 +196,7 @@
 
 .settings__name {
   text-align: center;
-  font-size: 24px;
+  font-size: $subtitle_font_size;
 }
 
 .settings__link {
@@ -333,7 +333,7 @@
     position: absolute;
     top: 10px;
     right: -5px;
-    font-size: 12px;
+    font-size: $small_font_size;
     text-align: center;
     color: white;
     opacity: 0.4;

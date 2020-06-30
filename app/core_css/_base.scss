@@ -128,3 +128,9 @@ a {
     color: darken($foreground, 10%);
   }
 }
+
+select {
+  option {
+    font-weight: 400;
+  }
+}

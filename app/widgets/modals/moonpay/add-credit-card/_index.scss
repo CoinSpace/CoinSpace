@@ -13,7 +13,7 @@
     @include clickbtn;
 
     @include breakpoint(portrait) {
-      font-size: 20px;
+      font-size: $base_font_size--portrait;
     }
 
     ._checkbox {

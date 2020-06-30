@@ -11,21 +11,21 @@
   .loader_message {
     padding: 20px;
     color: $grey;
-    font-size: 21px;
+    font-size: $header_font_size;
     text-align: center;
     @include breakpoint(portrait) {
-      font-size: 24px;
+      font-size: $header_font_size--portrait;
     }
   }
 
   ._header {
-    font-size: 21px;
+    font-size: $header_font_size;
     text-align: center;
     padding: 20px 20px 10px;
     border-bottom: 1px solid $grey;
 
     @include breakpoint(portrait) {
-      font-size: 24px;
+      font-size: $header_font_size--portrait;
       padding: 30px 20px 20px;
     }
   }
@@ -43,14 +43,14 @@
     ._message {
       @extend .jigsaw-regular;
       @include breakpoint(portrait) {
-        font-size: 20px;
+        font-size: $base_font_size--portrait;
       }
     }
 
     ._group {
       @include noselect;
       @include breakpoint(portrait) {
-        font-size: 20px;
+        font-size: $base_font_size--portrait;
       }
       margin-bottom: 15px;
       ._label {
@@ -84,7 +84,7 @@
       box-shadow: 0 2px 0 0 darken($grey, 20%);
 
       @include breakpoint(portrait) {
-        font-size: 24px;
+        font-size: $big_font_size--portrait;
       }
 
       &:hover {
@@ -100,7 +100,7 @@
       margin-left: 5px;
 
       @include breakpoint(portrait) {
-        font-size: 24px;
+        font-size: $big_font_size--portrait;
       }
       &._disabled {
         background-color: $grey;

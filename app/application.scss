@@ -4,12 +4,11 @@
 // Include file - converts to application.css
 // ------------------------------------------------------------------------------------
 
-
-// Assets (used in variables)
-@import "core_css/_fonts";
-
 // Global Variables
 @import "core_css/_variables";
+
+// Font Assets
+@import "core_css/_fonts";
 
 // Mixins
 @import "core_css/mixins/_compass";

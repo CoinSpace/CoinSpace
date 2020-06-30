@@ -7,13 +7,35 @@
 
 // font family - update these when external fonts are setup
 
+$font_family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
 
 // font weights should be descriptive
 
 
 // font sizes generally used on the html element and some mixins
 
-$base_font_size: 16px;
+$base_font_size: 15px;
+$base_font_size--portrait: 18px;
+
+$small_font_size: 13px;
+$small_font_size--portrait: 16px;
+
+$big_font_size: 16px;
+$big_font_size--portrait: 21px;
+
+$header_font_size: 21px;
+$header_font_size--portrait: 26px;
+
+$subtitle_font_size: 22px;
+$subtitle_font_size--portrait: 30px;
+
+$large_font_size: 32px;
+$large_font_size--portrait: 42px;
+
+$btn_font_size: 17px;
+$btn_font_size--portrait: 26px;
+
 $base_line_height: 1.5;
 
 

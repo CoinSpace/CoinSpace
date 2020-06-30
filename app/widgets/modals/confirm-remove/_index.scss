@@ -9,13 +9,13 @@
   }
 
   ._header {
-    font-size: 21px;
+    font-size: $big_font_size;
     text-align: center;
     padding: 20px 20px 10px;
     border-bottom: 1px solid $grey;
 
     @include breakpoint(portrait) {
-      font-size: 24px;
+      font-size: $big_font_size--portrait;
       padding: 30px 20px 20px;
     }
   }
@@ -24,9 +24,9 @@
     @extend .jigsaw-light;
     text-align: center;
     padding: 20px 20px 0;
-    font-size: 32px;
+    font-size: $large_font_size;
     @include breakpoint(portrait) {
-      font-size: 44px;
+      font-size: $large_font_size--portrait;
     }
   }
 
@@ -46,7 +46,7 @@
       box-shadow: 0 2px 0 0 darken($grey, 20%);
 
       @include breakpoint(portrait) {
-        font-size: 24px;
+        font-size: $big_font_size--portrait;
       }
 
       &:hover {
@@ -59,7 +59,7 @@
       margin-left: 5px;
 
       @include breakpoint(portrait) {
-        font-size: 24px;
+        font-size: $big_font_size--portrait;
       }
     }
 

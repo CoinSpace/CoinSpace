@@ -10,7 +10,7 @@
     padding-bottom: 5px;
 
     @include breakpoint(portrait) {
-      font-size: 20px;
+      font-size: $base_font_size--portrait;
       padding-left: 40px;
     }
   }
@@ -45,11 +45,11 @@
 
   ._name {
     @include media-obj;
-    font-size: 18px;
+    font-size: $big_font_size;
     padding-top: 13px;
 
     @include breakpoint(portrait) {
-      font-size: 26px;
+      font-size: $big_font_size--portrait;
       padding-top: 22px;
     }
   }
@@ -160,7 +160,7 @@
   }
   .add_btn {
     @include breakpoint(portrait) {
-      font-size: 26px;
+      font-size: $btn_font_size--portrait;
     }
   }
 }

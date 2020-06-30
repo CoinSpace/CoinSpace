@@ -8,7 +8,7 @@
   }
 
   ._content {
-    font-size: 18px;
+    font-size: $big_font_size;
     padding: 20px;
     @extend .jigsaw-light;
     @include breakpoint(portrait) {
@@ -33,9 +33,9 @@
 
   ._status {
     text-align: center;
-    font-size: 24px;
+    font-size: $subtitle_font_size;
     @include breakpoint(portrait) {
-      font-size: 32px;
+      font-size: $subtitle_font_size--portrait;
     }
 
     &._failed {
@@ -50,7 +50,7 @@
     text-align: center;
     color: $grey;
     @include breakpoint(portrait) {
-      font-size: 24px;
+      font-size: $big_font_size--portrait;
     }
   }
 
@@ -60,7 +60,7 @@
     ._title {
       margin-top: 10px;
       @include breakpoint(portrait) {
-        font-size: 20px;
+        font-size: $base_font_size--portrait;
       }
     }
     a._value {
@@ -76,12 +76,12 @@
       padding-bottom: 14px;
       display: block;
       border-radius: 5px;
-      font-size: 13px;
+      font-size: $small_font_size;
       line-height: 1.8;
       overflow: hidden;
 
       @include breakpoint(portrait) {
-        font-size: 20px;
+        font-size: $small_font_size--portrait;
       }
       ._address {
         float: left;

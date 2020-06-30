@@ -9,16 +9,16 @@
     padding: 40px;
     color: $grey;
     text-align: center;
-    font-size: 24px;
+    font-size: $subtitle_font_size;
     @include breakpoint(portrait) {
-      font-size: 32px;
+      font-size: $subtitle_font_size--portrait;
     }
   }
   ._powered_by {
     @extend .jigsaw-regular;
     text-align: center;
     @include breakpoint(portrait) {
-      font-size: 20px;
+      font-size: $base_font_size--portrait;
     }
     ._icon {
       display: inline-block;

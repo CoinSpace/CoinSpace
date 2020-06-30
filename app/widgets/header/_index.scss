@@ -76,12 +76,12 @@
   width: 100%;
 
   ._amount {
-    font-size: 32px;
+    font-size: $large_font_size;
     line-height: 48px;
   }
   ._currency {
     @extend .jigsaw-medium;
-    font-size: 14px;
+    font-size: $small_font_size;
     padding-top: 5px;
     margin-left: 3px;
   }
@@ -89,7 +89,7 @@
   @include breakpoint(portrait) {
     margin-top: 10px;
     ._amount {
-      font-size: 43px;
+      font-size: $large_font_size--portrait;
     }
   }
 }
@@ -112,12 +112,12 @@
     }
     @include breakpoint(portrait) {
       ._amount {
-        font-size: 43px;
+        font-size: $large_font_size--portrait;
       }
     }
     @include breakpoint(landscape) {
       ._amount {
-        font-size: 32px;
+        font-size: $large_font_size;
       }
     }
   }
@@ -199,7 +199,7 @@
   position: absolute;
   right: 20px;
   top: 55px;
-  font-size: 14px;
+  font-size: $small_font_size;
 
   select {
     position: absolute;
@@ -218,6 +218,6 @@
   @include breakpoint(portrait) {
     top: 110px;
     right: 30px;
-    font-size: 20px;
+    font-size: $base_font_size--portrait;
   }
 }

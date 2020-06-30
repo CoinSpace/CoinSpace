@@ -11,7 +11,7 @@
       margin-left: -10px;
       margin-bottom: 10px;
       @include breakpoint(portrait) {
-        font-size: 20px;
+        font-size: $base_font_size--portrait;
         margin-bottom: 20px;
       }
       ._icon {
@@ -33,14 +33,14 @@
 
   ._title {
     @include breakpoint(portrait) {
-      font-size: 20px;
+      font-size: $base_font_size--portrait;
     }
   }
 
   ._min_amount {
     @extend .jigsaw-regular;
     @include breakpoint(portrait) {
-      font-size: 20px;
+      font-size: $base_font_size--portrait;
     }
   }
 
@@ -57,7 +57,7 @@
       flex: 1;
       margin-right: 10px;
       @include breakpoint(portrait) {
-        font-size: 20px;
+        font-size: $base_font_size--portrait;
       }
     }
 
@@ -78,14 +78,14 @@
         cursor: pointer;
         display: block;
         text-align: right;
-        font-size: 18px;
+        font-size: $big_font_size;
         top: 6px;
         right: 3px;
         opacity: 0.4;
         width: 100px;
         @include breakpoint(portrait) {
           top: 8px;
-          font-size: 24px;
+          font-size: $big_font_size--portrait;
         }
         ._symbol {
           position: absolute;
@@ -99,7 +99,7 @@
         select {
           opacity: 0;
           @extend .jigsaw-light;
-          font-size: 18px;
+          font-size: $big_font_size;
           border: none;
           background-color: transparent;
           width: 100%;
@@ -107,7 +107,7 @@
             outline: none;
           }
           @include breakpoint(portrait) {
-            font-size: 24px;
+            font-size: $big_font_size--portrait;
           }
         }
       }
@@ -147,7 +147,7 @@
     @extend .jigsaw-regular;
     margin-bottom: 20px;
     @include breakpoint(portrait) {
-      font-size: 20px;
+      font-size: $base_font_size--portrait;
     }
   }
 
@@ -193,7 +193,7 @@
     @extend .csbtn;
 
     @include breakpoint(portrait) {
-      font-size: 26px;
+      font-size: $btn_font_size--portrait;
       border-radius: 3px;
     }
   }

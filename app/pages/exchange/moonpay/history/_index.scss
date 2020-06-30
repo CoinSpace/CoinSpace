@@ -17,11 +17,11 @@
       @include media-obj;
       @extend .jigsaw-light;
       padding-top: 22px;
-      font-size: 21px;
+      font-size: $header_font_size;
 
       @include breakpoint(portrait) {
         padding-top: 28px;
-        font-size: 26px;
+        font-size: $header_font_size--portrait;
       }
     }
 
@@ -33,7 +33,7 @@
 
     ._amount {
       @extend .jigsaw-light;
-      font-size: 24px;
+      font-size: $subtitle_font_size;
       &._completed {
         color: $green;
       }
@@ -41,16 +41,16 @@
         color: $red;
       }
       @include breakpoint(portrait) {
-        font-size: 32px;
+        font-size: $subtitle_font_size--portrait;
       }
     }
 
     ._time {
-      font-size: 14px;
+      font-size: $small_font_size;
       margin-top: -5px;
       color: $grey;
       @include breakpoint(portrait) {
-        font-size: 16px;
+        font-size: $base_font_size;
       }
     }
   }

@@ -1,67 +1,31 @@
-
-
-
-// Font imports go here
+// Font go here
 // ------------------------------------------------------------------------------------
 
-@font-face {
-  font-family: "Jigsaw Light";
-  src: url("./assets/fonts/WF-018717-007225-000029-1403764055.eot");
-  src: url("./assets/fonts/WF-018717-007225-000029-1403764055.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/WF-018717-007225-000029-1403764055.woff") format("woff"), url("./assets/fonts/WF-018717-007225-000029-1403764055.svg#typotheque_webfonts_service") format("svg");
-  font-style: normal;
-  font-weight: normal;
-  font-stretch: normal;
-}
-@font-face {
-  font-family: "Jigsaw Regular";
-  src: url("./assets/fonts/WF-018717-007225-000031-1403764055.eot");
-  src: url("./assets/fonts/WF-018717-007225-000031-1403764055.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/WF-018717-007225-000031-1403764055.woff") format("woff"), url("./assets/fonts/WF-018717-007225-000031-1403764055.svg#typotheque_webfonts_service") format("svg");
-  font-style: normal;
-  font-weight: normal;
-  font-stretch: normal;
-}
-@font-face {
-  font-family: "Jigsaw Medium";
-  src: url("./assets/fonts/WF-018717-007225-000033-1403764055.eot");
-  src: url("./assets/fonts/WF-018717-007225-000033-1403764055.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/WF-018717-007225-000033-1403764055.woff") format("woff"), url("./assets/fonts/WF-018717-007225-000033-1403764055.svg#typotheque_webfonts_service") format("svg");
-  font-style: normal;
-  font-weight: normal;
-  font-stretch: normal;
-}
-@font-face {
-  font-family: "Jigsaw Bold";
-  src: url("./assets/fonts/WF-018717-007225-000035-1403764055.eot");
-  src: url("./assets/fonts/WF-018717-007225-000035-1403764055.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/WF-018717-007225-000035-1403764055.woff") format("woff"), url("./assets/fonts/WF-018717-007225-000035-1403764055.svg#typotheque_webfonts_service") format("svg");
-  font-style: normal;
-  font-weight: normal;
-  font-stretch: normal;
-}
-
 .jigsaw-light {
-  font-family: "Jigsaw Light";
+  font-family: $font_family;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 300;
   font-stretch: normal;
 }
 
 .jigsaw-regular {
-  font-family: "Jigsaw Regular";
+  font-family: $font_family;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-stretch: normal;
 }
 
 .jigsaw-medium {
-  font-family: "Jigsaw Medium";
+  font-family: $font_family;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 600;
   font-stretch: normal;
 }
 
 .jigsaw-bold {
-  font-family: "Jigsaw Bold";
+  font-family: $font_family;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 700;
   font-stretch: normal;
 }
 

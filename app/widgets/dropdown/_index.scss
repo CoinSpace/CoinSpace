@@ -16,7 +16,7 @@
   @include breakpoint(portrait) {
     height: 61px;
     min-width: 100px;
-    font-size: 26px;
+    font-size: $btn_font_size--portrait;
     border-radius: 3px;
   }
 
@@ -48,7 +48,7 @@
   }
   select {
     opacity: 0;
-    font-size: 18px;
+    font-size: $big_font_size;
     border: none;
     background-color: transparent;
     width: 100%;
@@ -59,7 +59,7 @@
       outline: none;
     }
     @include breakpoint(portrait) {
-      font-size: 26px;
+      font-size: $big_font_size--portrait;
     }
   }
 }

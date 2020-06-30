@@ -11,7 +11,7 @@
       margin-left: -10px;
       margin-bottom: 5px;
       @include breakpoint(portrait) {
-        font-size: 20px;
+        font-size: $base_font_size--portrait;
         margin-bottom: 10px;
       }
       ._icon {
@@ -30,13 +30,13 @@
       }
     }
     ._subtitle {
-      font-size: 24px;
+      font-size: $subtitle_font_size;
       line-height: 1.2;
       text-align: center;
       color: #999;
       margin-bottom: 20px;
       @include breakpoint(portrait) {
-        font-size: 32px;
+        font-size: $subtitle_font_size--portrait;
         margin-bottom: 40px;
       }
     }
@@ -46,7 +46,7 @@
     @extend .jigsaw-regular;
     @include wrapdat;
     @include breakpoint(portrait) {
-      font-size: 20px;
+      font-size: $base_font_size--portrait;
       margin-bottom: 40px;
     }
     margin-bottom: 20px;
@@ -54,7 +54,7 @@
 
   ._title {
     @include breakpoint(portrait) {
-      font-size: 20px;
+      font-size: $base_font_size--portrait;
     }
   }
 
@@ -117,7 +117,7 @@
     }
 
     @include breakpoint(portrait) {
-      font-size: 26px;
+      font-size: $btn_font_size--portrait;
       border-radius: 3px;
     }
   }
@@ -130,7 +130,7 @@
     @extend .jigsaw-regular;
     margin-bottom: 5px;
     @include breakpoint(portrait) {
-      font-size: 20px;
+      font-size: $base_font_size--portrait;
       margin-bottom: 10px;
     }
   }

@@ -30,11 +30,11 @@
 
 .flash__title {
   @extend .jigsaw-bold;
-  font-size: 24px;
+  font-size: $subtitle_font_size;
   padding-bottom: 10px;
 
   @include breakpoint(portrait) {
-    font-size: 32px;
+    font-size: $subtitle_font_size--portrait;
   }
 
   &.error {
@@ -48,13 +48,13 @@
 
 .flash__message {
   color: #a8a7a9;
-  font-size: 18px;
+  font-size: $big_font_size;
   max-width: 200px;
   margin: 0 auto;
 
   @include breakpoint(portrait) {
     max-width: 280px;
-    font-size: 24px;
+    font-size: $big_font_size--portrait;
     line-height: 1.4;
   }
 }
@@ -64,7 +64,7 @@
   text-decoration: underline;
   @include breakpoint(portrait) {
     margin-top: 10px;
-    font-size: 24px;
+    font-size: $big_font_size--portrait;
     line-height: 1.4;
   }
 }

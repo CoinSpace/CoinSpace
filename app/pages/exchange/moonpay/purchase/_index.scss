@@ -13,7 +13,7 @@
       position: absolute;
       top: 0;
       right: -5px;
-      font-size: 12px;
+      font-size: $small_font_size;
       text-align: center;
       width: 26px;
       height: 26px;
@@ -59,14 +59,14 @@
     z-index: 500;
     display: block;
     text-align: right;
-    font-size: 18px;
+    font-size: $big_font_size;
     pointer-events: none;
     right: 10px;
     top: 11px;
     opacity: 0.4;
     @include breakpoint(portrait) {
       top: 14px;
-      font-size: 24px;
+      font-size: $big_font_size--portrait;
     }
   }
   ._dropdown {

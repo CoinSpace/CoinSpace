@@ -6,7 +6,7 @@
 }
 
 .qr__container {
-  font-size: 18px;
+  font-size: $big_font_size;
   min-width: 280px;
   max-width: 350px;
   @include breakpoint(portrait) {
@@ -20,7 +20,7 @@
       margin-top: 10px;
 
       @include breakpoint(portrait) {
-        font-size: 18px;
+        font-size: $small_font_size--portrait;
       }
     }
 
@@ -34,11 +34,11 @@
       padding-bottom: 14px;
       display: block;
       border-radius: 5px;
-      font-size: 13px;
+      font-size: $small_font_size;
       line-height: 1.8;
 
       @include breakpoint(portrait) {
-        font-size: 22px;
+        font-size: $small_font_size--portrait;
       }
     }
 

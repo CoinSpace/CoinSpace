@@ -166,11 +166,11 @@
 .tab__text {
   display: block;
   @extend .jigsaw-light;
-  font-size: 14px;
+  font-size: $small_font_size;
   opacity: 0.3;
 
   @include breakpoint(portrait) {
-    font-size: 18px;
+    font-size: $small_font_size--portrait;
   }
 }
 

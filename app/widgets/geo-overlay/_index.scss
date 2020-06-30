@@ -21,7 +21,7 @@
     @extend .jigsaw-light;
     text-align: center;
     flex: 1;
-    font-size: 22px;
+    font-size: $subtitle_font_size;
     padding-top: 5px;
     color: white;
   }
@@ -66,7 +66,7 @@
   right: 0;
 
   ._text {
-    font-size: 14px;
+    font-size: $small_font_size;
     text-align: center;
     color: white;
     position: absolute;
@@ -134,7 +134,7 @@
     @extend .jigsaw-light;
     color: white;
     padding-top: 23px;
-    font-size: 24px;
+    font-size: $subtitle_font_size;
     text-align: center;
   }
 }
@@ -160,7 +160,7 @@
   }
 
   ._message {
-    font-size: 16px;
+    font-size: $base_font_size;
     text-align: center;
     color: white;
     padding-bottom: 30px;
