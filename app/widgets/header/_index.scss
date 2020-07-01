@@ -1,21 +1,26 @@
 .header {
   display: flex;
   justify-content: space-between;
-  padding-top: 5px;
+  align-items: center;
+
   background-color: darken($brand-green, 30%);
   color: white;
-  padding-top: 12px;
-  padding-bottom: 12px;
+
+  padding-left: 20px;
+  padding-right: 20px;
+
+  height: 97px;
   position: relative;
 
   @include breakpoint(iphone5) {
-    padding-top: 22px;
-    padding-bottom: 22px;
+    padding-left: 14px;
+    padding-right: 14px;
   }
 
   @include breakpoint(portrait) {
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+    height: 140px;
   }
 }
 
@@ -70,14 +75,13 @@
   @extend .jigsaw-light;
   display: flex;
   justify-content: center;
-  margin-top: 5px;
   margin-right: 10px;
   margin-left: 10px;
   width: 100%;
 
   ._amount {
     font-size: $large_font_size;
-    line-height: 48px;
+    line-height: 1.5;
   }
   ._currency {
     @extend .jigsaw-medium;
@@ -87,7 +91,6 @@
   }
 
   @include breakpoint(portrait) {
-    margin-top: 10px;
     ._amount {
       font-size: $large_font_size--portrait;
     }
@@ -108,16 +111,16 @@
 .ethereum, .ripple, .stellar {
   .header__balance, .header__balance_blocked {
     ._amount {
-      font-size: 26px;
-    }
-    @include breakpoint(portrait) {
-      ._amount {
-        font-size: $large_font_size--portrait;
-      }
+      font-size: 24px;
     }
     @include breakpoint(landscape) {
       ._amount {
         font-size: $large_font_size;
+      }
+    }
+    @include breakpoint(portrait) {
+      ._amount {
+        font-size: $large_font_size--portrait;
       }
     }
   }
@@ -125,34 +128,24 @@
 
 .icon_atom {
   @include clickbtn;
-  width: 50px;
-  padding-top: 12px;
   text-align: center;
-  margin-bottom: 5px;
-
-
-}
-
-.header__toggle {
-  @extend .icon_atom;
-  padding-left: 10px;
-
-  @include breakpoint(portrait) {
-    width: 100px;
-    padding-top: 20px;
-  }
 
   ._icon {
-    width: 25px;
-    height: 25px;
     display: block;
     margin: 0 auto;
+
+    width: 25px;
+    height: 25px;
 
     @include breakpoint(portrait) {
       width: 35px;
       height: 35px;
     }
   }
+}
+
+.header__toggle {
+  @extend .icon_atom;
 }
 
 .toggle_overlay {
@@ -167,25 +160,9 @@
 
 .header__refresh {
   @extend .icon_atom;
-  padding-right: 10px;
-
-  @include breakpoint(portrait) {
-    width: 100px;
-    padding-top: 20px;
-  }
   ._icon {
-    width: 25px;
-    height: 25px;
-    display: block;
-    margin: 0 auto;
-
     &.loading {
       animation: infinite-spinning 1s linear infinite;
-    }
-
-    @include breakpoint(portrait) {
-      width: 35px;
-      height: 35px;
     }
   }
 
@@ -198,7 +175,7 @@
   @include clickbtn;
   position: absolute;
   right: 20px;
-  top: 55px;
+  bottom: 8px;
   font-size: $small_font_size;
 
   select {
@@ -211,12 +188,10 @@
   }
 
   @include breakpoint(iphone5) {
-    top: 68px;
-    right: 15px;
+    right: 14px;
   }
 
   @include breakpoint(portrait) {
-    top: 110px;
     right: 30px;
     font-size: $base_font_size--portrait;
   }
