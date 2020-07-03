@@ -22,15 +22,13 @@ window.initCSApp = function() {
   var appEl = document.getElementById('app')
   var htmlEl = document.documentElement
 
-  if (process.env.BUILD_TYPE === 'phonegap') {
-    if (process.env.BUILD_PLATFORM === 'ios') {
-      window.StatusBar.styleDefault();
-      window.StatusBar.show();
-      window.StatusBar.overlaysWebView(false);
-      window.StatusBar.overlaysWebView(true);
-    }
-    navigator.splashscreen.hide();
+  if (process.env.BUILD_PLATFORM === 'ios') {
+    window.StatusBar.styleDefault();
+    window.StatusBar.show();
+    window.StatusBar.overlaysWebView(false);
+    window.StatusBar.overlaysWebView(true);
   }
+  if (process.env.BUILD_TYPE === 'phonegap') navigator.splashscreen.hide();
 
   var frame = initFrame(appEl)
   var auth = null
@@ -57,12 +55,8 @@ window.initCSApp = function() {
   })
 
   emitter.once('wallet-ready', function() {
-    if (window.Zendesk) {
-      window.Zendesk.setAnonymousIdentity();
-    }
-    if (process.env.BUILD_PLATFORM === 'ios') {
-      window.StatusBar.styleLightContent();
-    }
+    if (process.env.BUILD_TYPE === 'phonegap') window.Zendesk.setAnonymousIdentity();
+    if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.styleLightContent();
     updateExchangeRates();
     moonpay.init();
     auth.hide();
@@ -93,6 +87,7 @@ window.initCSApp = function() {
   if (process.env.BUILD_TYPE === 'phonegap') {
     window.handleOpenURL = function(url) {
       SafariViewController.hide();
+      if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.styleLightContent();
       setTimeout(function() {
         emitter.emit('handleOpenURL', url);
       }, 1);

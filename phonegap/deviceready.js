@@ -14,6 +14,24 @@ function onDeviceReady() {
     return cordova.InAppBrowser.open(url, '_system', options);
   }
 
+  SafariViewController.isAvailable(function(available) {
+    if (!available) return;
+    window.open = function(url) {
+      SafariViewController.show({
+        url: url
+      },
+      function(result) {
+        if (process.env.BUILD_PLATFORM === 'ios') {
+          if (result.event === 'opened') return window.StatusBar.styleDefault();
+          if (result.event === 'closed') return window.StatusBar.styleLightContent();
+        }
+      },
+      function() {
+        if (process.env.BUILD_PLATFORM === 'ios') return window.StatusBar.styleLightContent();
+      })
+    }
+  });
+
   return import(
     /* webpackChunkName: 'loader' */
     '../app/loader'
