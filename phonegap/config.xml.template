@@ -91,6 +91,9 @@
     <edit-config target="UIStatusBarHidden" file="Coin/Coin-Info.plist" mode="overwrite">
       <true/>
     </edit-config>
+    <edit-config target="ITSAppUsesNonExemptEncryption" file="Coin/Coin-Info.plist" mode="overwrite">
+      <false/>
+    </edit-config>
     <edit-config target="UIViewControllerBasedStatusBarAppearance" file="Coin/Coin-Info.plist" mode="overwrite">
       <false/>
     </edit-config>
