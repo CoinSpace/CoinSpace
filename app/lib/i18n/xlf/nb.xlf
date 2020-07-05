@@ -1271,6 +1271,10 @@ Den konverteres til %(toSymbol)s og sendes til
         <source>Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.</source>
         <target>Adressen forandres etter mottak av penger. Alle tidligere benyttede adresser forblir gyldige, og kan fremdeles benyttes til å motta penger flere ganger. For å øke personvernet ditt, benytter du en ny adresse for hver mottatte transaksjon.</target>
       </trans-unit>
+      <trans-unit id="Recipient&apos;s wallet requires a destination tag.">
+        <source>Recipient's wallet requires a destination tag.</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
