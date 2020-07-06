@@ -70,7 +70,7 @@
   }
 }
 
-.header__balance, .header__balance_blocked {
+.header__balance {
   @include clickbtn;
   @extend .jigsaw-light;
   display: flex;
@@ -79,9 +79,11 @@
   margin-left: 10px;
   width: 100%;
 
+  line-height: 1.5;
+  font-size: $large_font_size;
+
   ._amount {
     font-size: $large_font_size;
-    line-height: 1.5;
   }
   ._currency {
     @extend .jigsaw-medium;
@@ -91,16 +93,17 @@
   }
 
   @include breakpoint(portrait) {
+    font-size: $large_font_size--portrait;
     ._amount {
       font-size: $large_font_size--portrait;
     }
   }
 }
-.header__balance_blocked {
+.header__balance.cross {
   display: none;
 }
 .blocked {
-  .header__balance_blocked, .header__balance.show {
+  .header__balance.cross, .header__balance.show {
     display: flex;
   }
   .header__balance {
@@ -108,19 +111,15 @@
   }
 }
 
+// up to 15 decimals
 .ethereum, .ripple, .stellar {
-  .header__balance, .header__balance_blocked {
-    ._amount {
-      font-size: 24px;
-    }
-    @include breakpoint(landscape) {
+  .header__balance {
+    @media (max-width: 450px) {
       ._amount {
-        font-size: $large_font_size;
+        font-size: $header_font_size;
       }
-    }
-    @include breakpoint(portrait) {
-      ._amount {
-        font-size: $large_font_size--portrait;
+      ._currency {
+        padding-top: 0;
       }
     }
   }

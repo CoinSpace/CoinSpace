@@ -101,5 +101,11 @@
         font-size: $subtitle_font_size--portrait;
       }
     }
+    ._status {
+      font-size: $subtitle_font_size;
+      @include breakpoint(portrait) {
+        font-size: $subtitle_font_size--portrait;
+      }
+    }
   }
 }

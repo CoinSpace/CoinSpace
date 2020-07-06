@@ -51,14 +51,15 @@
 
   ._btn {
     @extend .csbtn;
-    margin-top: 29px;
+    align-self: flex-end;
+    margin-bottom: 2px;
+
     padding: 0;
     width: 42px;
     height: 42px;
     position: relative;
 
     @include breakpoint(portrait) {
-      margin-top: 35px;
       width: 59px;
       height: 59px;
     }

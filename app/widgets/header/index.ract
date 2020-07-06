@@ -32,9 +32,7 @@
     </div>
     {{/if}}
 
-    <div class="header__balance_blocked">
-      <span class="_amount">×</span>
-    </div>
+    <div class="header__balance cross">×</div>
   {{/if}}
 
   <div class="header__currency" title="{{translate("Current coin price")}}">

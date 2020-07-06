@@ -59,7 +59,7 @@
   display: block;
   padding-bottom: 10px;
   padding-top: 10px;
-  width: 100%;
+  width: 20%;
 
   text-align: center;
 
@@ -164,6 +164,7 @@
 }
 
 .tab__text {
+  @include ellipsis();
   display: block;
   @extend .jigsaw-light;
   font-size: $small_font_size;

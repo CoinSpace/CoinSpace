@@ -21,12 +21,12 @@
   ._header {
     font-size: $header_font_size;
     text-align: center;
-    padding: 20px 20px 10px;
+    padding: 20px 20px 15px;
     border-bottom: 1px solid $grey;
 
     @include breakpoint(portrait) {
       font-size: $header_font_size--portrait;
-      padding: 30px 20px 20px;
+      padding: 30px 20px 25px;
     }
   }
 

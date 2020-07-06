@@ -38,12 +38,12 @@
   ._header {
     font-size: $header_font_size;
     text-align: center;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
     border-bottom: 1px solid $grey;
 
     @include breakpoint(portrait) {
       font-size: $header_font_size--portrait;
-      padding-bottom: 20px;
+      padding-bottom: 25px;
     }
   }
 

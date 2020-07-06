@@ -13,12 +13,12 @@
   ._header {
     font-size: $header_font_size;
     text-align: center;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
     border-bottom: 1px solid $grey;
 
     @include breakpoint(portrait) {
       font-size: $header_font_size--portrait;
-      padding-bottom: 20px;
+      padding-bottom: 25px;
     }
   }
 
@@ -45,14 +45,14 @@
 
       ._btn {
         @extend .csbtn;
-        margin-top: 29px;
+        align-self: flex-end;
+        margin-bottom: 2px;
         padding: 0;
         width: 42px;
         height: 42px;
         position: relative;
 
         @include breakpoint(portrait) {
-          margin-top: 35px;
           width: 59px;
           height: 59px;
         }

@@ -2,7 +2,7 @@
   @extend .generic_box;
   @extend .jigsaw-light;
   border-radius: 2px;
-  height: auto;
+  height: 44px;
   &:active, &:focus {
     outline: 0;
     border: 1px solid #999;
@@ -10,6 +10,7 @@
   @include breakpoint(portrait) {
     font-size: $btn_font_size--portrait;
     border-radius: 3px;
+    height: 61px;
   }
 }
 
@@ -21,6 +22,7 @@
   border-radius: 2px;
   overflow: hidden;
   padding-right: 38px;
+  height: 44px;
 
   &:focus-within {
     border: 1px solid #999;
@@ -29,13 +31,14 @@
   @include breakpoint(portrait) {
     border-radius: 3px;
     padding-right: 58px;
+    height: 61px;
   }
   ._input {
     @extend .jigsaw-light;
     background-color: $grey--light;
     padding: 10px 0 10px 10px;
     border: 0;
-    height: auto;
+    height: 100%;
     &:active, &:focus {
       outline: 0;
       border: 0;

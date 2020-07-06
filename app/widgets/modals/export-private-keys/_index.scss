@@ -48,7 +48,6 @@
       font-size: $small_font_size;
       line-height: 1.8;
       overflow-x: hidden;
-      overflow-y: scroll;
       max-height: 300px;
       @include breakpoint(portrait) {
         font-size: $small_font_size--portrait;

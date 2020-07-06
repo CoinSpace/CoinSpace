@@ -21,14 +21,14 @@
   }
 
   ._header {
-    font-size: $big_font_size;
+    font-size: $header_font_size;
     text-align: center;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
     border-bottom: 1px solid $grey;
 
     @include breakpoint(portrait) {
-      font-size: $big_font_size--portrait;
-      padding-bottom: 20px;
+      font-size: $header_font_size--portrait;
+      padding-bottom: 25px;
     }
   }
 
@@ -82,9 +82,11 @@
 
     ._contract_address_group {
       display: flex;
+      margin-bottom: 20px;
 
       ._label {
         flex: 1;
+        margin-bottom: 0;
       }
 
       ._btn {
@@ -92,14 +94,14 @@
         background-color: $ethereal;
         box-shadow: 0 2px 0 0 darken($ethereal, 10%);
 
-        margin-top: 29px;
+        align-self: flex-end;
+        margin-bottom: 2px;
         padding: 0;
         width: 42px;
         height: 42px;
         position: relative;
 
         @include breakpoint(portrait) {
-          margin-top: 35px;
           width: 59px;
           height: 59px;
         }

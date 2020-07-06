@@ -30,7 +30,7 @@
   opacity: 0.6;
 }
 .about__title {
-  font-size: 1.2em;
+  font-size: $header_font_size;
   font-weight: normal;
   margin: 0 70px;
   text-align: center;
@@ -48,7 +48,7 @@
   text-transform: uppercase;
   margin-bottom: 0.1em;
   letter-spacing: 1px;
-  font-size: 0.9em;
+  font-size: $small_font_size;
   color: #555;
   outline: 0;
 }
