@@ -143,7 +143,7 @@ module.exports = {
           category: 'Office;Finance',
           publish: {
             provider: 'snapStore',
-            channels: ['edge', 'stable'],
+            channels: ['edge'],
           },
         },
         protocols: {
