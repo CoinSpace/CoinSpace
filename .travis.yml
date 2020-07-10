@@ -50,6 +50,9 @@ before_script:
     if [[ "$DISTRIBUTION" == "mas" ]]; then
       echo $PROVISIONING_DISTRIBUTION | base64 --decode > electron/embedded.provisionprofile;
     fi
+    if [[ "$DISTRIBUTION" == "mas-dev" ]]; then
+      echo $PROVISIONING_DEVELOPMENT | base64 --decode > electron/embedded.provisionprofile;
+    fi
   fi
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
     # https://github.com/electron-userland/electron-builder/pull/5001
