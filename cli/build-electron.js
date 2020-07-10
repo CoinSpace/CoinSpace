@@ -20,7 +20,7 @@ program
   .option('-p, --platform <platform>', 'platform', 'mac')
   .parse(process.argv);
 
-if (!['win', 'mac', 'mas', 'snap'].includes(program.platform)) {
+if (!['win', 'mac', 'mas', 'mas-dev', 'snap'].includes(program.platform)) {
   console.error(`Unsupported Platform: ${program.platform}`);
   process.exit(1);
 }
@@ -48,7 +48,8 @@ const webpackConfig = require('../webpack.prod');
 webpackConfig.plugins.push(
   new webpack.DefinePlugin({
     'process.env.BUILD_TYPE': JSON.stringify('electron'),
-    'process.env.BUILD_PLATFORM': JSON.stringify(program.platform),
+    // use mas app for mas-dev build
+    'process.env.BUILD_PLATFORM': JSON.stringify(program.platform === 'mas-dev' ? 'mas' : program.platform),
     'process.env.SENTRY_DSN': JSON.stringify(process.env[`SENTRY_DSN_${program.platform.toUpperCase()}`]),
     'process.env.SENTRY_RELEASE': JSON.stringify(`${pkg.name}.electron-${program.platform}@${pkg.version}`),
   })
@@ -68,6 +69,9 @@ webpack(webpackConfig, function(error, stats) {
 
     if (program.platform === 'mac') {
       platform = 'darwin';
+    }
+    if (program.platform === 'mas' || program.platform === 'mas-dev') {
+      platform = 'mas';
     }
     if (program.platform === 'win') {
       platform = 'win32';

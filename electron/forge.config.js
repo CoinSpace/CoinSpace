@@ -5,7 +5,7 @@ const pkg = require('./package.json');
 const BUILD_PLATFORM = process.env.BUILD_PLATFORM;
 const BRANCH = process.env.TRAVIS_BRANCH || process.env.APPVEYOR_REPO_BRANCH;
 
-if (!['win', 'mac', 'mas', 'snap'].includes(BUILD_PLATFORM)) {
+if (!['win', 'mac', 'mas', 'mas-dev', 'snap'].includes(BUILD_PLATFORM)) {
   throw new Error(`Please specify valid distribution, provided: '${BUILD_PLATFORM}'`);
 }
 
@@ -50,12 +50,13 @@ module.exports = {
     osxSign: {
       'gatekeeper-assess': false,
       identity: process.env.APPLE_IDENTITY,
+      type: BUILD_PLATFORM === 'mas-dev' ? 'development' : 'distribution',
       ...(BUILD_PLATFORM === 'mac'? {
         'hardened-runtime': true,
         entitlements: 'resources/entitlements.mac.plist',
         'entitlements-inherit': 'resources/entitlements.mac.plist',
       } : {}),
-      ...(BUILD_PLATFORM === 'mas'? {
+      ...(['mas', 'mas-dev'].includes(BUILD_PLATFORM) ? {
         'hardened-runtime': false,
         entitlements: 'resources/entitlements.mas.plist',
         'entitlements-inherit': 'resources/entitlements.mas.inherit.plist',
@@ -128,7 +129,7 @@ module.exports = {
         'mas',
       ],
       config: {
-        name: `${pkg.productName}-${pkg.version}.pkg`,
+        name: `${pkg.productName}-${pkg.version}${BUILD_PLATFORM === 'mas-dev' ? '-dev': ''}.pkg`,
       },
     },
     {
