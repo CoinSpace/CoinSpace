@@ -10,6 +10,11 @@ matrix:
     language: node_js
     node_js: '12'
     env: DISTRIBUTION=mas
+  - os: osx
+    osx_image: xcode11.5
+    language: node_js
+    node_js: '12'
+    env: DISTRIBUTION=mas-dev
   - os: linux
     dist: bionic
     language: node_js
