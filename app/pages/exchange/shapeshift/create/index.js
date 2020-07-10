@@ -94,6 +94,7 @@ module.exports = function(el) {
       }
     }).catch(function(err) {
       console.error(err);
+      ractive.set('isLoading', false);
       return showError({message: err.message});
     });
   });
