@@ -67,7 +67,7 @@
     "dotenv": "^4.0.0",
     "dotenv-webpack": "^1.5.4",
     "ejs-loader": "^0.3.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.5.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "fastclick": "^1.0.6",
     "file-loader": "^0.11.2",
@@ -124,14 +124,14 @@
     },
     "rules": {
       "camelcase": [
-        2,
+        "error",
         {
           "properties": "never"
         }
       ],
-      "semi": 2,
+      "semi": "error",
       "comma-dangle": [
-        2,
+        "error",
         {
           "arrays": "always-multiline",
           "objects": "always-multiline",
@@ -141,37 +141,37 @@
         }
       ],
       "comma-spacing": [
-        2,
+        "error",
         {
           "before": false,
           "after": true
         }
       ],
       "object-curly-spacing": [
-        2,
+        "error",
         "always"
       ],
       "array-bracket-spacing": [
-        2,
+        "error",
         "never"
       ],
       "indent": [
-        2,
+        "error",
         2
       ],
-      "no-console": 0,
-      "strict": 2,
+      "no-console": "off",
+      "strict": "error",
       "max-len": [
-        2,
+        "error",
         120
       ],
-      "keyword-spacing": 2,
+      "keyword-spacing": "error",
       "curly": [
-        2,
+        "error",
         "multi-line"
       ],
       "no-unused-vars": [
-        2,
+        "error",
         {
           "vars": "all"
         }
