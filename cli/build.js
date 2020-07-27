@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 
-var program = require('commander');
-var pkg = require('../package.json');
+const program = require('commander');
+const pkg = require('../package.json');
 
 program
   .version(pkg.version)

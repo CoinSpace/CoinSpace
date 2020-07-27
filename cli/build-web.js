@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 'use strict';
 
-var program = require('commander');
-var warning = require('chalk').yellow;
-var webpack = require('webpack');
-var pkg = require('../package.json');
-var dotenv = require('dotenv');
-var utils = require('./utils');
-var SENTRY_RELEASE = `${pkg.name}.web@${pkg.version}`;
+const program = require('commander');
+const warning = require('chalk').yellow;
+const webpack = require('webpack');
+const pkg = require('../package.json');
+const dotenv = require('dotenv');
+const utils = require('./utils');
+const SENTRY_RELEASE = `${pkg.name}.web@${pkg.version}`;
 
 program
   .name('build-web.js')
@@ -15,7 +15,7 @@ program
   .option('--release', 'release mode')
   .parse(process.argv);
 
-var envFile = `.env.${program.env}`;
+const envFile = `.env.${program.env}`;
 dotenv.config({ path: envFile });
 console.log(`ENV_FILE: ${warning(envFile)}`);
 console.log('Start building (webpack)...');
@@ -24,7 +24,7 @@ process.env['ENV_FILE'] = envFile;
 process.env['ENV'] = program.env;
 process.env['BUILD_TYPE'] = 'web';
 
-var webpackConfig = require('../webpack.prod');
+const webpackConfig = require('../webpack.prod');
 
 webpackConfig.plugins.push(
   new webpack.DefinePlugin({

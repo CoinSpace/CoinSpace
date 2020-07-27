@@ -1,14 +1,14 @@
 'use strict';
 
-var execSync = require('child_process').execSync;
-var chalk = require('chalk');
-var path = require('path');
-var cordovaPath = path.resolve(__dirname, '../phonegap/node_modules/.bin/', 'cordova');
-var sentryPath = path.resolve(__dirname, '../node_modules/.bin/', 'sentry-cli');
+const { execSync } = require('child_process');
+const chalk = require('chalk');
+const path = require('path');
+const cordovaPath = path.resolve(__dirname, '../phonegap/node_modules/.bin/', 'cordova');
+const sentryPath = path.resolve(__dirname, '../node_modules/.bin/', 'sentry-cli');
 
 function shell(command, options) {
   console.log(`Executing: ${chalk.green(command)}`);
-  var defaultOptions = { stdio: [0, 1, 2] };
+  const defaultOptions = { stdio: [0, 1, 2] };
   execSync(command, Object.assign(defaultOptions, options));
 }
 
@@ -29,8 +29,8 @@ function uploadSentrySourceMaps(project, release) {
 }
 
 module.exports = {
-  shell: shell,
-  cordova: cordova,
-  filterMapFiles: filterMapFiles,
-  uploadSentrySourceMaps: uploadSentrySourceMaps,
+  shell,
+  cordova,
+  filterMapFiles,
+  uploadSentrySourceMaps,
 };

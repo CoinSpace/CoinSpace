@@ -1,11 +1,11 @@
 'use strict';
 
-var bodyParser = require('body-parser');
-var compress = require('compression');
-var path = require('path');
-var helmet = require('helmet');
-var express = require('express');
-var cors = require('cors');
+const bodyParser = require('body-parser');
+const compress = require('compression');
+const path = require('path');
+const helmet = require('helmet');
+const express = require('express');
+const cors = require('cors');
 
 function init(app) {
 
@@ -17,7 +17,7 @@ function init(app) {
     app.use(helmet.noSniff());
     app.use(helmet.frameguard({ action: 'sameorigin' }));
 
-    var oneYearInSeconds = 31536000;
+    const oneYearInSeconds = 31536000;
     app.use(helmet.hsts({
       maxAge: oneYearInSeconds,
       includeSubDomains: true,
@@ -27,13 +27,13 @@ function init(app) {
 
   app.use(cors());
 
-  var dayInMs = 24 * 60 * 60 * 1000;
+  const dayInMs = 24 * 60 * 60 * 1000;
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
 
   app.use(compress());
 
-  var cacheControl = isProduction() ? { maxAge: dayInMs, setHeaders: setCustomCacheControl } : null;
+  const cacheControl = isProduction() ? { maxAge: dayInMs, setHeaders: setCustomCacheControl } : null;
   app.use(express.static(path.join(__dirname, '..', 'build'), cacheControl));
 }
 
@@ -44,7 +44,7 @@ function setCustomCacheControl(res, path) {
 }
 
 function requireHTTPS(req, res, next) {
-  var herokuForwardedFromHTTPS = req.headers['x-forwarded-proto'] === 'https';
+  const herokuForwardedFromHTTPS = req.headers['x-forwarded-proto'] === 'https';
   if (!herokuForwardedFromHTTPS && !isOnionDomain(req) && isProduction()) {
     return res.redirect('https://' + req.get('host') + req.url);
   }
@@ -60,5 +60,5 @@ function isOnionDomain(req) {
 }
 
 module.exports = {
-  init: init,
+  init,
 };

@@ -1,4 +1,3 @@
-/*eslint no-var: "error"*/
 'use strict';
 
 const express = require('express');
@@ -57,7 +56,7 @@ router.get('/openalias', function(req, res) {
   if (!hostname) return res.status(400).json({ error: 'Bad request' });
   openalias.resolve(hostname, function(err, address, name) {
     if (err) return res.status(400).send(err);
-    res.status(200).send({ address: address, name: name });
+    res.status(200).send({ address, name });
   });
 });
 
@@ -66,7 +65,7 @@ router.put('/username', function(req, res) {
   const username = req.body.username;
   if (!username) return res.status(400).json({ error: 'Bad request' });
   account.setUsername(id, username).then(function(username) {
-    res.status(200).send({ username: username });
+    res.status(200).send({ username });
   }).catch(function(err) {
     res.status(400).send(err);
   });
@@ -171,9 +170,9 @@ router.get('/shapeShiftRedirectUri', function(req, res) {
   const buildType = req.query.buildType;
   if (!['web', 'phonegap', 'electron'].includes(buildType)) return res.status(400).send('Bad request');
   shapeshift.getAccessToken(code).then(function(accessToken) {
-    res.render('shapeshift', { accessToken: accessToken, buildType: buildType });
+    res.render('shapeshift', { accessToken, buildType });
   }).catch(function() {
-    res.render('shapeshift', { accessToken: '', buildType: buildType });
+    res.render('shapeshift', { accessToken: '', buildType });
   });
 });
 
@@ -266,7 +265,7 @@ router.get('/moonpay/redirectURL', function(req, res) {
   const buildType = req.query.buildType;
   const transactionId = req.query.transactionId || '';
   if (!['web', 'phonegap', 'electron'].includes(buildType)) return res.status(400).send('Bad request');
-  res.render('moonpay', { transactionId: transactionId, buildType: buildType });
+  res.render('moonpay', { transactionId, buildType });
 });
 
 // for debug

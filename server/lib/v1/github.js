@@ -1,4 +1,3 @@
-/*eslint no-var: "error"*/
 'use strict';
 
 const db = require('./db');
