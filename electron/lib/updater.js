@@ -8,7 +8,7 @@ const {
   BUILD_PLATFORM,
 } = process.env;
 
-module.exports = function updater (opts = {}) {
+module.exports = function updater(opts = {}) {
   const log = opts.log;
   if (!supportedDistribution.includes(BUILD_PLATFORM)) {
     log.log(`Electron's auto updater does not support the '${BUILD_PLATFORM}' distribution`);

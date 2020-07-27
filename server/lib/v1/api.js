@@ -19,7 +19,7 @@ const github = require('./github');
 
 const router = express.Router();
 
-router.post('/register', validateAuthParams(false), function(req, res) {
+router.post('/register', validateAuthParams, function(req, res) {
   const walletId = req.body.wallet_id;
   auth.register(walletId, req.body.pin).then(function(token) {
     console.log('registered wallet %s', walletId);
@@ -30,7 +30,7 @@ router.post('/register', validateAuthParams(false), function(req, res) {
   });
 });
 
-router.post('/login', validateAuthParams(true), function(req, res) {
+router.post('/login', validateAuthParams, function(req, res) {
   const walletId = req.body.wallet_id;
   auth.login(walletId, req.body.pin).then(function(token) {
     console.log('authenticated wallet %s', walletId);
@@ -341,13 +341,11 @@ router.get('/download/:distribution/:arch', (req, res, next) => {
     }).catch(next);
 });
 
-function validateAuthParams(allowMissingPin) {
-  return function (req, res, next) {
-    if (!req.body.wallet_id || !validatePin(req.body.pin, allowMissingPin)) {
-      return res.status(400).json({ error: 'Bad request' });
-    }
-    next();
-  };
+function validateAuthParams(req, res, next) {
+  if (!req.body.wallet_id || !validatePin(req.body.pin)) {
+    return res.status(400).json({ error: 'Bad request' });
+  }
+  next();
 }
 
 module.exports = router;

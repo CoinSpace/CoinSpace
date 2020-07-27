@@ -111,7 +111,7 @@ if (process.env.ENV === 'dev' || process.env.ENV === 'prod') {
 }
 
 if (process.env.BUILD_TYPE === 'phonegap') {
-  var htmlPlugin = config.plugins.find(function(plugin) {
+  const htmlPlugin = config.plugins.find(function(plugin) {
     return plugin instanceof HtmlWebpackPlugin;
   });
   htmlPlugin.options.chunks = ['deviceready'];
