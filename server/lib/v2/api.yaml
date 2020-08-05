@@ -1,0 +1,276 @@
+openapi: '3.0.3'
+
+info:
+  version: 2.0.0
+  title: Coin Wallet API V2
+
+servers:
+  - url: /api/v2
+
+paths:
+  /register:
+    post:
+      description: Register new device
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: 'object'
+              properties:
+                pin:
+                  description: Pin signature
+                  $ref: '#/components/schemas/Hex64String'
+                wallet:
+                  description: Wallet ID
+                  $ref: '#/components/schemas/Hex64String'
+              required:
+                - pin
+                - wallet
+      responses:
+        '200':
+          description: Registration success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jwt:
+                    type: string
+                  token:
+                    type: string
+                required:
+                  - jwt
+                  - token
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /login:
+    post:
+      description: Login device
+      security:
+        - loginAuth: []
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: 'object'
+              properties:
+                pin:
+                  description: Pin signature
+                  $ref: '#/components/schemas/Hex64String'
+              required:
+                - pin
+      responses:
+        '200':
+          description: Login success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jwt:
+                    type: string
+                  second:
+                    type: boolean
+                required:
+                  - jwt
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /first/attestation:
+    get:
+      description: Get Attestation Options for First Factor
+      security:
+        - walletAuth: []
+      responses:
+        '200':
+          description: Attestation Options
+          content:
+            application/json:
+              schema:
+                type: object
+        default:
+          $ref: '#/components/responses/GeneralError'
+    post:
+      description: Verify Attestation for First Factor
+      security:
+        - walletAuth: []
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: 'object'
+      responses:
+        '200':
+          description: Attestation Result
+          content:
+            application/json:
+              schema:
+                type: object
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /first/assertion:
+    get:
+      description: Get Assertion Options for First Factor
+      security:
+        - loginAuth: []
+      responses:
+        '200':
+          description: Assertion Options
+          content:
+            application/json:
+              schema:
+                type: object
+        default:
+          $ref: '#/components/responses/GeneralError'
+    post:
+      description: Verify Assertion for First Factor
+      security:
+        - loginAuth: []
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: 'object'
+      responses:
+        '200':
+          description: Assertion Result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jwt:
+                    type: string
+                  second:
+                    type: boolean
+                required:
+                  - jwt
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /second/attestation:
+    get:
+      description: Get Attestation Options for Second Factor
+      security:
+        - walletAuth: []
+      responses:
+        '200':
+          description: Attestation Options
+          content:
+            application/json:
+              schema:
+                type: object
+        default:
+          $ref: '#/components/responses/GeneralError'
+    post:
+      description: Verify Attestation for Second Factor
+      security:
+        - walletAuth: []
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: 'object'
+      responses:
+        '200':
+          description: Attestation Result
+          content:
+            application/json:
+              schema:
+                type: object
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /second/assertion:
+    get:
+      description: Get Assertion Options for Second Factor
+      security:
+        - secondAuth: []
+      responses:
+        '200':
+          description: Assertion Options
+          content:
+            application/json:
+              schema:
+                type: object
+        default:
+          $ref: '#/components/responses/GeneralError'
+    post:
+      description: Verify Assertion for Second Factor
+      security:
+        - secondAuth: []
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: 'object'
+      responses:
+        '200':
+          description: Assertion Result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jwt:
+                    type: string
+                required:
+                  - jwt
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /token:
+    get:
+      description: Get token
+      security:
+        - walletAuth: []
+      responses:
+        '200':
+          description: Token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                required:
+                  - token
+        default:
+          $ref: '#/components/responses/GeneralError'
+
+components:
+  schemas:
+    Hex64String:
+      type: string
+      pattern: "^[a-f0-9]{64}$"
+  responses:
+    GeneralError:
+      description: Unexpected error
+      content:
+        application/json:
+          schema:
+            required:
+              - code
+              - message
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+  securitySchemes:
+    loginAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    walletAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    secondAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

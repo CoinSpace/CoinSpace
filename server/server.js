@@ -4,8 +4,10 @@ const express = require('express');
 const Sentry = require('@sentry/node');
 const Integrations = require('@sentry/integrations');
 const middleware = require('./middleware');
+const { isHttpError } = require('http-errors');
 
-const api = require('./lib/v1/api');
+const apiV1 = require('./lib/v1/api');
+const apiV2 = require('./lib/v2/api');
 const app = express();
 
 Sentry.init({
@@ -26,7 +28,8 @@ const db = require('./lib/v1/db');
 middleware.init(app);
 
 // API routes
-app.use('/api/v1', api);
+app.use('/api/v1', apiV1);
+app.use('/api/v2', apiV2);
 app.set('views', './server/views');
 app.set('view engine', 'ejs');
 
@@ -34,8 +37,23 @@ app.use(Sentry.Handlers.errorHandler());
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send({ error: 'Oops! something went wrong.' });
+  console.error(err.stack || err.message || err);
+  const status = err.status || 500;
+  const expose = isHttpError(err) ? err.expose : status < 500;
+
+  res.status(status);
+
+  if (expose) {
+    res.send({
+      error: process.NODE_ENV === 'production' ? err.name : err.message,
+      code: status,
+    });
+  } else {
+    res.send({
+      error: 'Oops! something went wrong.',
+      code: status,
+    });
+  }
 });
 
 // eslint-disable-next-line no-unused-vars
