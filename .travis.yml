@@ -3,41 +3,70 @@ matrix:
   - os: osx
     osx_image: xcode11.5
     language: node_js
-    node_js: '12'
-    env: DISTRIBUTION=mac
+    env:
+     DISTRIBUTION: mac
+     BUILD_TYPE: electron
   - os: osx
     osx_image: xcode11.5
     language: node_js
-    node_js: '12'
     env: DISTRIBUTION=mas
+    env:
+      BUILD_TYPE: electron
   - os: osx
     osx_image: xcode11.5
     language: node_js
-    node_js: '12'
-    env: DISTRIBUTION=mas-dev
+    env:
+      DISTRIBUTION: mas-dev
+      BUILD_TYPE: electron
   - os: linux
     dist: bionic
     language: node_js
-    node_js: '12'
-    env: DISTRIBUTION=snap
+    env:
+      DISTRIBUTION: snap
+      BUILD_TYPE: electron
     addons:
       snaps:
       - name: snapcraft
         confinement: classic
 
+  - os: osx
+    osx_image: xcode11.5
+    language: objective-c
+    before_install:
+      - nvm install $(< .nvmrc)
+    env:
+      DISTRIBUTION: ios
+      BUILD_TYPE: phonegap
+  - os: linux
+    dist: trusty
+    language: android
+    android:
+      components:
+        - build-tools-29.0.1
+        - android-28
+    before_install:
+      - nvm install $(< .nvmrc)
+      - export PATH=$PATH:$ANDROID_HOME/build-tools/29.0.1
+    env:
+      DISTRIBUTION: android
+      BUILD_TYPE: phonegap
+
 branches:
   only:
-  - master
-  - develop
-  - desktop
+    - master
+    - develop
+    - desktop
 
 install:
-  - npm ci
-  - (cd electron && npm ci)
+  - NODE_ENV=ci npm ci
+  - (cd ${BUILD_TYPE} && NODE_ENV=ci npm ci)
 
 before_script:
 - |
-  if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+  export GOOGLE_APPLICATION_CREDENTIALS=$TRAVIS_BUILD_DIR/gcloud.key.json
+  echo $GOOGLE_CLOUD_KEY_FILE | base64 --decode > gcloud.key.json;
+
+  if [[ "$DISTRIBUTION" == "mac" || "$DISTRIBUTION" == "mas" || "$DISTRIBUTION" == "mas-dev" ]]; then
     echo $CERTIFICATE_MAC | base64 --decode > certificate.p12;
     security create-keychain -p travis build.keychain;
     security default-keychain -s build.keychain;
@@ -53,14 +82,29 @@ before_script:
     if [[ "$DISTRIBUTION" == "mas-dev" ]]; then
       echo $PROVISIONING_DEVELOPMENT | base64 --decode > electron/embedded.provisionprofile;
     fi
-  fi
-  if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+  elif [[ "$DISTRIBUTION" == "snap" ]]; then
     # https://github.com/electron-userland/electron-builder/pull/5001
     sed -i'.backup' -e 's/await this.helper.writeDesktopEntry(this.options, packager.executableName, desktopFile, {/await this.helper.writeDesktopEntry(this.options, packager.executableName + " %U", desktopFile, {/g' electron/node_modules/app-builder-lib/out/targets/snap.js;
     echo "$SNAP_TOKEN" | snapcraft login --with -;
+  elif [[ "$DISTRIBUTION" == "ios" ]]; then
+    echo $CERTIFICATE_DISTRIBUTION | base64 --decode > certificate.p12;
+    security create-keychain -p travis build.keychain;
+    security default-keychain -s build.keychain;
+    security unlock-keychain -p travis build.keychain;
+    security set-keychain-settings build.keychain;
+    security list-keychains -d user -s build.keychain;
+    security import certificate.p12 -k build.keychain -P $CERTIFICATE_DISTRIBUTION_PASSWORD -T /usr/bin/codesign -T /usr/bin/productbuild 2>&1 >/dev/null;
+    security set-key-partition-list -S apple-tool:,apple: -s -k travis build.keychain 2>&1 >/dev/null;
+    rm certificate.p12;
+    mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles/
+    echo $PROVISIONING_IOS | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.mobileprovision;
+    echo $PROVISIONING_IOS_WATCH_APP | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.watchapp.mobileprovision;
+    echo $PROVISIONING_IOS_WATCH_APP_EXTENSION | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.watchapp.extension.mobileprovision;
+  elif [[ "$DISTRIBUTION" == "android" ]]; then
+    echo $ANDROID_RELEASE_KEYSTORE | base64 --decode > phonegap/release.keystore;
   fi
-- (cd electron && npm version $(node -p -e "require('../package.json').version"))
+- (cd ${BUILD_TYPE} && npm version $(node -p -e "require('../package.json').version"))
 
 script:
 - node ./cli/i18n.js --json
-- node ./cli/build.js electron --env=prod --release --platform=${DISTRIBUTION}
+- node ./cli/build.js ${BUILD_TYPE} --env=prod --release --platform=${DISTRIBUTION}

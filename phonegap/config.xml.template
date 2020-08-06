@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.coinspace.app" android-versionCode="2188" ios-CFBundleVersion="1" version="2.20.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<widget id="<%= widget.id %>" android-versionCode="<%= widget.androidVersionCode  %>" ios-CFBundleVersion="<%= widget.iosCFBundleVersion %>" version="<%= widget.version %>" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
   <name>Coin</name>
   <description>
     Coin application.
@@ -34,6 +34,12 @@
     <splash src="../images/android/screens/xhdpi-port.png" density="port-xhdpi"/>
     <splash src="../images/android/screens/xxhdpi-port.png" density="port-xxhdpi"/>
     <splash src="../images/android/screens/xxxhdpi-port.png" density="port-xxxhdpi"/>
+    <splash src="../images/android/screens/ldpi-port.png" density="ldpi"/>
+    <splash src="../images/android/screens/mdpi-port.png" density="mdpi"/>
+    <splash src="../images/android/screens/hdpi-port.png" density="hdpi"/>
+    <splash src="../images/android/screens/xhdpi-port.png" density="xhdpi"/>
+    <splash src="../images/android/screens/xxhdpi-port.png" density="xxhdpi"/>
+    <splash src="../images/android/screens/xxxhdpi-port.png" density="xxxhdpi"/>
     <custom-config-file target="AndroidManifest.xml" parent="/*" mode="replace">
       <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
       <uses-feature android:name="android.hardware.camera" android:required="false" />

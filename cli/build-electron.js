@@ -25,15 +25,6 @@ if (!['win', 'mac', 'mas', 'mas-dev', 'snap'].includes(program.platform)) {
   process.exit(1);
 }
 
-process.env.NODE_ENV = program.env;
-
-if (program.env === 'dev') {
-  process.env.NODE_ENV = 'development';
-}
-if (program.env === 'prod') {
-  process.env.NODE_ENV = 'production';
-}
-
 console.log('Start building (webpack)...');
 
 const envFile = `.env.${program.env}`;
@@ -56,8 +47,11 @@ webpackConfig.plugins.push(
 );
 
 webpack(webpackConfig, function(error, stats) {
-  if (error) return console.error(error);
-  if (stats.hasErrors()) return console.log(stats.toString({ colors: true }));
+  if (error) throw error;
+  if (stats.hasErrors()) {
+    console.log(stats.toString({ colors: true }));
+    throw new Error('stats errors');
+  }
 
   fse.removeSync(electronBuildPath);
   fse.copySync('build', path.resolve(electronBuildPath), { filter: utils.filterMapFiles });

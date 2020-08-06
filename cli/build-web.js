@@ -37,8 +37,11 @@ webpackConfig.plugins.push(
 );
 
 webpack(webpackConfig, function(error, stats) {
-  if (error) return console.error(error);
-  if (stats.hasErrors()) return console.log(stats.toString({ colors: true }));
+  if (error) throw error;
+  if (stats.hasErrors()) {
+    console.log(stats.toString({ colors: true }));
+    throw new Error('stats errors');
+  }
   if (program.release) {
     utils.uploadSentrySourceMaps('web', SENTRY_RELEASE);
   }

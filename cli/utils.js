@@ -5,7 +5,6 @@ var chalk = require('chalk');
 var path = require('path');
 var cordovaPath = path.resolve(__dirname, '../phonegap/node_modules/.bin/', 'cordova');
 var sentryPath = path.resolve(__dirname, '../node_modules/.bin/', 'sentry-cli');
-var mobileBuildPath = 'phonegap/build';
 
 function shell(command, options) {
   console.log(`Executing: ${chalk.green(command)}`);
@@ -13,8 +12,10 @@ function shell(command, options) {
   execSync(command, Object.assign(defaultOptions, options));
 }
 
-function cordova(command) {
-  shell(`${cordovaPath} ${command}`, { cwd: mobileBuildPath });
+function cordova(cwd) {
+  return function(command) {
+    shell(`${cordovaPath} ${command}`, { cwd });
+  }
 }
 
 function filterMapFiles(src) {
