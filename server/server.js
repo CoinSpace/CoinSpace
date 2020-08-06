@@ -39,13 +39,12 @@ app.use(Sentry.Handlers.errorHandler());
 app.use((err, req, res, next) => {
   console.error(err.stack || err.message || err);
   const status = err.status || 500;
-  const expose = isHttpError(err) ? err.expose : status < 500;
 
   res.status(status);
 
-  if (expose) {
+  if (isHttpError(err)) {
     res.send({
-      error: process.NODE_ENV === 'production' ? err.name : err.message,
+      error: err.expose === true ? err.message : err.name,
       code: status,
     });
   } else {

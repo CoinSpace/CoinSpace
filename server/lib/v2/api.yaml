@@ -77,22 +77,50 @@ paths:
                   - jwt
         default:
           $ref: '#/components/responses/GeneralError'
-  /first/attestation:
+  /token:
     get:
-      description: Get Attestation Options for First Factor
+      description: Get token
       security:
         - walletAuth: []
       responses:
         '200':
-          description: Attestation Options
+          description: Token
           content:
             application/json:
               schema:
                 type: object
+                properties:
+                  token:
+                    type: string
+                  jwt:
+                    type: string
+                required:
+                  - token
         default:
           $ref: '#/components/responses/GeneralError'
-    post:
-      description: Verify Attestation for First Factor
+  /details:
+    get:
+      description: Get user details
+      security:
+        - walletAuth: []
+      responses:
+        '200':
+          description: Update user details result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                  jwt:
+                    type: string
+                required:
+                  - data
+        default:
+          $ref: '#/components/responses/GeneralError'
+    put:
+      description: Update user details
       security:
         - walletAuth: []
       requestBody:
@@ -101,13 +129,80 @@ paths:
           'application/json':
             schema:
               type: 'object'
+              properties:
+                data:
+                  description: User details
+                  type: string
+              required:
+                - data
       responses:
         '200':
-          description: Attestation Result
+          description: Update user details result
           content:
             application/json:
               schema:
                 type: object
+                properties:
+                  data:
+                    type: string
+                  jwt:
+                    type: string
+                required:
+                  - data
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /username:
+    put:
+      description: Update username
+      security:
+        - walletAuth: []
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: 'object'
+              properties:
+                username:
+                  description: Username
+                  type: string
+              required:
+                - username
+      responses:
+        '200':
+          description: Update username result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  jwt:
+                    type: string
+                required:
+                  - username
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /first/attestation:
+    get:
+      description: Get Attestation Options for First Factor
+      security:
+        - walletAuth: []
+      responses:
+        '200':
+          $ref: '#/components/responses/AttestationOptions'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    post:
+      description: Verify Attestation for First Factor
+      security:
+        - walletAuth: []
+      requestBody:
+        $ref: '#/components/requestBodies/Attestation'
+      responses:
+        '200':
+          $ref: '#/components/responses/AttestationResponse'
         default:
           $ref: '#/components/responses/GeneralError'
   /first/assertion:
@@ -117,11 +212,7 @@ paths:
         - loginAuth: []
       responses:
         '200':
-          description: Assertion Options
-          content:
-            application/json:
-              schema:
-                type: object
+          $ref: '#/components/responses/AssertionOptions'
         default:
           $ref: '#/components/responses/GeneralError'
     post:
@@ -129,11 +220,7 @@ paths:
       security:
         - loginAuth: []
       requestBody:
-        required: true
-        content:
-          'application/json':
-            schema:
-              type: 'object'
+        $ref: '#/components/requestBodies/Assertion'
       responses:
         '200':
           description: Assertion Result
@@ -157,11 +244,7 @@ paths:
         - walletAuth: []
       responses:
         '200':
-          description: Attestation Options
-          content:
-            application/json:
-              schema:
-                type: object
+          $ref: '#/components/responses/AttestationOptions'
         default:
           $ref: '#/components/responses/GeneralError'
     post:
@@ -169,18 +252,10 @@ paths:
       security:
         - walletAuth: []
       requestBody:
-        required: true
-        content:
-          'application/json':
-            schema:
-              type: 'object'
+        $ref: '#/components/requestBodies/Attestation'
       responses:
         '200':
-          description: Attestation Result
-          content:
-            application/json:
-              schema:
-                type: object
+          $ref: '#/components/responses/AttestationResponse'
         default:
           $ref: '#/components/responses/GeneralError'
   /second/assertion:
@@ -190,11 +265,7 @@ paths:
         - secondAuth: []
       responses:
         '200':
-          description: Assertion Options
-          content:
-            application/json:
-              schema:
-                type: object
+          $ref: '#/components/responses/AssertionOptions'
         default:
           $ref: '#/components/responses/GeneralError'
     post:
@@ -202,11 +273,7 @@ paths:
       security:
         - secondAuth: []
       requestBody:
-        required: true
-        content:
-          'application/json':
-            schema:
-              type: 'object'
+        $ref: '#/components/requestBodies/Assertion'
       responses:
         '200':
           description: Assertion Result
@@ -221,32 +288,51 @@ paths:
                   - jwt
         default:
           $ref: '#/components/responses/GeneralError'
-  /token:
-    get:
-      description: Get token
-      security:
-        - walletAuth: []
-      responses:
-        '200':
-          description: Token
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  token:
-                    type: string
-                required:
-                  - token
-        default:
-          $ref: '#/components/responses/GeneralError'
 
 components:
   schemas:
     Hex64String:
       type: string
       pattern: "^[a-f0-9]{64}$"
+  requestBodies:
+    Attestation:
+      description: Attestation Request
+      required: true
+      content:
+        'application/json':
+          schema:
+            type: 'object'
+    Assertion:
+      description: Assertion Request
+      required: true
+      content:
+        'application/json':
+          schema:
+            type: 'object'
   responses:
+    AttestationOptions:
+      description: Attestation Options
+      content:
+        application/json:
+          schema:
+            type: object
+    AssertionOptions:
+      description: Assertion Options
+      content:
+        application/json:
+          schema:
+            type: object
+    AttestationResponse:
+      description: Success Attestation Result
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+            required:
+              - success
     GeneralError:
       description: Unexpected error
       content:

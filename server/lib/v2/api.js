@@ -78,9 +78,38 @@ new OpenApiValidator({
     }));
 
     router.get('/token', asyncWrapper(async (req, res) => {
-      const info = await device.token(req.deviceId);
+      const token = await device.token(req.deviceId);
+      const jwt = getJWT(req.deviceId, 'wallet', '5 min');
       res.status(200).send({
-        token: info.token,
+        token,
+        jwt,
+      });
+    }));
+
+    router.get('/details', asyncWrapper(async (req, res) => {
+      const data = await device.getDetails(req.deviceId);
+      const jwt = getJWT(req.deviceId, 'wallet', '5 min');
+      res.status(200).send({
+        data,
+        jwt,
+      });
+    }));
+
+    router.put('/details', asyncWrapper(async (req, res) => {
+      const data = await device.setDetails(req.deviceId, req.body.data);
+      const jwt = getJWT(req.deviceId, 'wallet', '5 min');
+      res.status(200).send({
+        data,
+        jwt,
+      });
+    }));
+
+    router.put('/username', asyncWrapper(async (req, res) => {
+      const username = await device.setUsername(req.deviceId, req.body.username);
+      const jwt = getJWT(req.deviceId, 'wallet', '5 min');
+      res.status(200).send({
+        username,
+        jwt,
       });
     }));
 

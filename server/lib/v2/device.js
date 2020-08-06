@@ -88,10 +88,39 @@ async function login(id, pin) {
 
 async function token(id) {
   const device = await _getDevice(id);
+  return device.token;
+}
 
-  return {
-    token: device.token,
-  };
+async function getDetails(id) {
+  const device = await _getDevice(id);
+  const details = await db().collection('details')
+    .findOne({ _id: device.wallet_id });
+  return details && details.data;
+}
+
+async function setDetails(id, data) {
+  const device = await _getDevice(id);
+  await db().collection('details')
+    .updateOne({ _id: device.wallet_id }, { $set: { data } }, { upsert: true });
+  return data;
+}
+
+async function setUsername(id, username) {
+  const device = await _getDevice(id);
+  username = username.toLowerCase().replace(/[^a-z0-9-]/g, '');
+  const usernameSha = crypto.createHash('sha1')
+    .update(username + process.env.USERNAME_SALT)
+    .digest('hex');
+
+  await db().collection('details')
+    .updateOne({ _id: device.wallet_id }, { $set: { username_sha: usernameSha } }, { upsert: true })
+    .catch((err) => {
+      if (err.name === 'MongoError' && err.code === 11000) {
+        throw createError(400, 'Username already taken');
+      }
+      throw err;
+    });
+  return username;
 }
 
 async function firstAttestationOptions(id) {
@@ -369,6 +398,9 @@ module.exports = {
   register,
   login,
   token,
+  getDetails,
+  setDetails,
+  setUsername,
   firstAttestationOptions,
   firstAttestationVerify,
   firstAssertionOptions,
