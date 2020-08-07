@@ -19,9 +19,11 @@ environment:
 
 install:
   - ps: Install-Product node 12 x64
+  - set NODE_ENV=ci
   - npm ci
   - cd electron
   - npm ci
+  - set NODE_ENV=production
   - cd ..
 
 before_build:
