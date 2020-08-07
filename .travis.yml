@@ -9,8 +9,8 @@ matrix:
   - os: osx
     osx_image: xcode11.5
     language: node_js
-    env: DISTRIBUTION=mas
     env:
+      DISTRIBUTION: mas
       BUILD_TYPE: electron
   - os: osx
     osx_image: xcode11.5
