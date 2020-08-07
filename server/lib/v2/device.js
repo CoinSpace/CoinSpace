@@ -123,6 +123,15 @@ async function setUsername(id, username) {
   return username;
 }
 
+async function remove(id) {
+  const device = await _getDevice(id);
+  await Promise.all([
+    db().collection('devices').deleteMany({ wallet_id: device.wallet_id }),
+    db().collection('details').deleteOne({ _id: device.wallet_id }),
+  ]);
+  return true;
+}
+
 async function firstAttestationOptions(id) {
   const collection = db().collection('devices');
   const device = await _getDevice(id);
@@ -401,6 +410,7 @@ module.exports = {
   getDetails,
   setDetails,
   setUsername,
+  remove,
   firstAttestationOptions,
   firstAttestationVerify,
   firstAssertionOptions,

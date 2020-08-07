@@ -54,7 +54,7 @@ new OpenApiValidator({
     router.post('/register', asyncWrapper(async (req, res) => {
       const info = await device.register(req.body.wallet, req.body.pin);
       const jwt = getJWT(info.id, 'login');
-      res.status(200).send({
+      res.status(201).send({
         jwt,
         token: info.token,
       });
@@ -110,6 +110,13 @@ new OpenApiValidator({
       res.status(200).send({
         username,
         jwt,
+      });
+    }));
+
+    router.delete('/account', asyncWrapper(async (req, res) => {
+      const success = await device.remove(req.deviceId);
+      res.status(200).send({
+        success,
       });
     }));
 

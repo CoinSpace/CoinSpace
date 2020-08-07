@@ -28,7 +28,7 @@ paths:
                 - pin
                 - wallet
       responses:
-        '200':
+        '201':
           description: Registration success
           content:
             application/json:
@@ -182,6 +182,25 @@ paths:
                     type: string
                 required:
                   - username
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /account:
+    delete:
+      description: Remove account
+      security:
+        - walletAuth: []
+      responses:
+        '200':
+          description: Account removed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                required:
+                  - success
         default:
           $ref: '#/components/responses/GeneralError'
   /first/attestation:
