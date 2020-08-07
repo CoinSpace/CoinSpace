@@ -1,22 +1,22 @@
 'use strict';
 
-var request = require('lib/request');
-var urlRoot = 'https://shapeshift.io/';
-var urlAuthRoot = 'https://auth.shapeshift.io/';
-var PRIORITY_SYMBOLS = ['BTC', 'BCH', 'BSV', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH'];
-var emitter = require('lib/emitter');
-var Big = require('big.js');
-var getId = require('lib/wallet').getId;
+const request = require('lib/request');
+const shapeshiftRoot = 'https://shapeshift.io/';
+const urlAuthRoot = 'https://auth.shapeshift.io/';
+const PRIORITY_SYMBOLS = ['BTC', 'BCH', 'BSV', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH'];
+const emitter = require('lib/emitter');
+const Big = require('big.js');
+const getId = require('lib/wallet').getId;
 
-var hasHandledMobileLogin = false;
+let hasHandledMobileLogin = false;
 
 emitter.on('handleOpenURL', function(url) {
   url = url || '';
-  var matchAction = url.match(/action=([^&]+)/);
+  const matchAction = url.match(/action=([^&]+)/);
   if (!matchAction || matchAction[1] !== 'shapeshift-login') return;
 
-  var matchAccessToken = url.match(/accessToken=([^&]+)/);
-  var accessToken = matchAccessToken ? matchAccessToken[1] : '';
+  const matchAccessToken = url.match(/accessToken=([^&]+)/);
+  const accessToken = matchAccessToken ? matchAccessToken[1] : '';
   setAccessToken(accessToken);
   hasHandledMobileLogin = true;
 });
@@ -27,20 +27,21 @@ function isLogged() {
 
 function login() {
   return new Promise(function(resolve, reject) {
-    var width = 640;
-    var height = 720;
-    var options = 'width=' + width + ', ';
+    const width = 640;
+    const height = 720;
+    let options = 'width=' + width + ', ';
     options += 'height=' + height + ', ';
     options += 'left=' + ((screen.width - width) / 2) + ', ';
     options += 'top=' + ((screen.height - height) / 2) + '';
-    var clientId = process.env.SHAPESHIFT_CLIENT_ID;
-    var redirectUri = process.env.SITE_URL + 'shapeShiftRedirectUri?buildType=' + process.env.BUILD_TYPE;
+    const clientId = process.env.SHAPESHIFT_CLIENT_ID;
+    const redirectUri = process.env.SITE_URL + 'shapeShiftRedirectUri?buildType=' + process.env.BUILD_TYPE;
     cleanAccessToken();
-    var url = urlAuthRoot + 'oauth/authorize?response_type=code&scope=users:read&client_id=' + clientId + '&redirect_uri=' + redirectUri;
-    var popup = window.open(url, '_blank', options);
+    // eslint-disable-next-line max-len
+    const url = urlAuthRoot + 'oauth/authorize?response_type=code&scope=users:read&client_id=' + clientId + '&redirect_uri=' + redirectUri;
+    const popup = window.open(url, '_blank', options);
     // TODO rewrite to handle unload event in web and deep link in phonegap and electron
     // TODO add reasonable timeout
-    var popupInterval = setInterval(function() {
+    const popupInterval = setInterval(function() {
       // popout is undefined in electron
       if ((popup && popup.closed) || hasHandledMobileLogin) {
         clearInterval(popupInterval);
@@ -48,7 +49,7 @@ function login() {
         if (popup && !popup.closed && popup.close) {
           popup.close();
         }
-        var token = getAccessToken();
+        const token = getAccessToken();
         if (!token) return reject(new Error('empty_token'));
         if (token === 'is_not_verified') {
           cleanAccessToken();
@@ -62,12 +63,12 @@ function login() {
 
 function logout() {
   return request({
-    url: window.urlRoot + 'shapeShiftToken',
+    url: window.urlRoot + 'v1/shapeShiftToken',
     method: 'delete',
     data: {
       token: getAccessToken(),
-      id: getId()
-    }
+      id: getId(),
+    },
   }).then(function() {
     cleanAccessToken();
   });
@@ -75,19 +76,19 @@ function logout() {
 
 function getCoins() {
   return request({
-    url: urlRoot + 'getcoins'
+    url: shapeshiftRoot + 'getcoins',
   }).then(function(coins) {
     return Object.keys(coins).filter(function(key) {
       return coins[key].status === 'available';
     }).map(function(key) {
       return {
         name: coins[key].name,
-        symbol: coins[key].symbol
-      }
+        symbol: coins[key].symbol,
+      };
     }).sort(function(a, b) {
       if (PRIORITY_SYMBOLS.indexOf(a.symbol) === -1 && PRIORITY_SYMBOLS.indexOf(b.symbol) === -1) {
-        return (a.symbol > b.symbol) ? 1 : -1
-      };
+        return (a.symbol > b.symbol) ? 1 : -1;
+      }
       if (PRIORITY_SYMBOLS.indexOf(b.symbol) === -1) return -1;
       if (PRIORITY_SYMBOLS.indexOf(a.symbol) === -1) return 1;
       if (PRIORITY_SYMBOLS.indexOf(a.symbol) > PRIORITY_SYMBOLS.indexOf(b.symbol)) return 1;
@@ -100,42 +101,42 @@ function validateAddress(address, symbol) {
   if (!address) return Promise.resolve(false);
   if (!symbol) return Promise.resolve(false);
   return request({
-    url: urlRoot + 'validateAddress/' + address + '/' + symbol,
+    url: shapeshiftRoot + 'validateAddress/' + address + '/' + symbol,
   }).then(function(data) {
     return !!data.isvalid;
   });
 }
 
 function shift(options) {
-  var data = {
+  const data = {
     withdrawal: options.toAddress,
     pair: (options.fromSymbol + '_' + options.toSymbol).toLowerCase(),
-    apiKey: process.env.SHAPESHIFT_API_KEY
+    apiKey: process.env.SHAPESHIFT_API_KEY,
   };
   if (options.returnAddress) {
     data.returnAddress = options.returnAddress;
   }
   return request({
-    url: urlRoot + 'shift',
+    url: shapeshiftRoot + 'shift',
     method: 'post',
-    data: data,
+    data,
     headers: {
-      'Authorization': 'Bearer ' + getAccessToken()
-    }
+      'Authorization': 'Bearer ' + getAccessToken(),
+    },
   }).then(function(data) {
     if (data.error) throw new Error(data.error);
     return {
       depositAddress: data.deposit,
       depositSymbol: data.depositType,
       toAddress: data.withdrawal,
-      toSymbol: data.withdrawalType
+      toSymbol: data.withdrawalType,
     };
   });
 }
 
 function txStat(depositAddress) {
   return request({
-    url: urlRoot + 'txStat/' + encodeURIComponent(depositAddress)
+    url: shapeshiftRoot + 'txStat/' + encodeURIComponent(depositAddress),
   }).then(function(data) {
     if (data.error && data.status !== 'failed') throw new Error(data.error);
     return data;
@@ -143,9 +144,9 @@ function txStat(depositAddress) {
 }
 
 function marketInfo(fromSymbol, toSymbol) {
-  var pair = (fromSymbol + '_' + toSymbol).toLowerCase();
+  const pair = (fromSymbol + '_' + toSymbol).toLowerCase();
   return request({
-    url: urlRoot + 'marketinfo/' + pair
+    url: shapeshiftRoot + 'marketinfo/' + pair,
   }).then(function(data) {
     if (data.error) throw new Error(data.error);
     if (data.rate) {
@@ -168,13 +169,13 @@ function setAccessToken(token) {
 }
 
 module.exports = {
-  isLogged: isLogged,
-  login: login,
-  logout: logout,
-  cleanAccessToken: cleanAccessToken,
-  getCoins: getCoins,
-  validateAddress: validateAddress,
-  shift: shift,
-  txStat: txStat,
-  marketInfo: marketInfo
+  isLogged,
+  login,
+  logout,
+  cleanAccessToken,
+  getCoins,
+  validateAddress,
+  shift,
+  txStat,
+  marketInfo,
 };

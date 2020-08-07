@@ -43,7 +43,7 @@ function init() {
     if (data && data.isAllowed) {
       ipCountry = data.alpha3;
       return request({
-        url: urlRoot + 'moonpay/coins',
+        url: urlRoot + 'v1/moonpay/coins',
         params: {country: data.alpha3},
       });
     }
@@ -56,7 +56,7 @@ function init() {
 
 function loadFiat() {
   if (fiat) return Promise.resolve();
-  return request({url: urlRoot + 'moonpay/fiat'}).then(function(data) {
+  return request({url: urlRoot + 'v1/moonpay/fiat'}).then(function(data) {
     fiat = data;
   }).catch(console.error);
 }
@@ -199,7 +199,7 @@ function verifyPhoneNumber(code) {
 
 function loadCountries(type) {
   return request({
-    url: urlRoot + 'moonpay/countries',
+    url: urlRoot + 'v1/moonpay/countries',
     params: {type: type},
   }).then(function(data) {
     if (!data) return;

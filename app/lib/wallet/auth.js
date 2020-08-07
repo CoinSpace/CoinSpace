@@ -5,22 +5,22 @@ var db = require('lib/db')
 var urlRoot = window.urlRoot
 
 function register(wallet_id, pin, callback) {
-  postCredentials('register', { wallet_id: wallet_id, pin: pin }, callback)
+  postCredentials('v1/register', { wallet_id: wallet_id, pin: pin }, callback)
 }
 
 function login(wallet_id, pin, callback) {
-  postCredentials('login', { wallet_id: wallet_id, pin: pin }, callback)
+  postCredentials('v1/login', { wallet_id: wallet_id, pin: pin }, callback)
 }
 
 function exist(wallet_id, callback) {
   request({
-    url: urlRoot + 'exist?wallet_id=' + wallet_id
+    url: urlRoot + 'v1/exist?wallet_id=' + wallet_id
   }, callback)
 }
 
 function remove(wallet_id, callback) {
   request({
-    url: urlRoot + 'account',
+    url: urlRoot + 'v1/account',
     method: 'delete',
     data: {
       id: wallet_id
@@ -36,7 +36,7 @@ function setUsername(wallet_id, username, callback) {
   if(username == oldUsername) return callback(null, userInfo.firstName);
 
   request({
-    url: urlRoot + 'username',
+    url: urlRoot + 'v1/username',
     method: 'put',
     data: {
       id: wallet_id,

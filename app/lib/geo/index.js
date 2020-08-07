@@ -30,7 +30,7 @@ function search(network, callback) {
 
 function remove() {
   request({
-    url: urlRoot + 'location',
+    url: urlRoot + 'v1/location',
     method: 'delete',
     data: {
       id: getId()
@@ -82,7 +82,7 @@ function requestLocationEndpoint(network, method, callback) {
     userInfo.lon = lon;
 
     request({
-      url: urlRoot + 'location',
+      url: urlRoot + 'v1/location',
       method: method,
       data: userInfo
     }, callback);

@@ -31,7 +31,7 @@ function open(walletTokens, callback) {
 
   if (tokens.length === 0) {
     request({
-      url: urlRoot + 'ethereum/tokens'
+      url: urlRoot + 'v1/ethereum/tokens'
     }).then(function(data) {
       tokens = data;
       ractive.set({

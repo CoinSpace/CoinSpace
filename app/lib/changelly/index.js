@@ -7,13 +7,13 @@ var urlRoot = window.urlRoot;
 
 function getCoins() {
   return request({
-    url: urlRoot + 'changelly/getCoins'
+    url: urlRoot + 'v1/changelly/getCoins'
   });
 }
 
 function estimate(fromSymbol, toSymbol, amount) {
   return request({
-    url: urlRoot + 'changelly/estimate',
+    url: urlRoot + 'v1/changelly/estimate',
     params: {
       from: fromSymbol,
       to: toSymbol,
@@ -26,7 +26,7 @@ function validateAddress(address, symbol) {
   if (!address) return Promise.resolve(false);
   if (!symbol) return Promise.resolve(false);
   return request({
-    url: urlRoot + 'changelly/validate/' + address + '/' + symbol,
+    url: urlRoot + 'v1/changelly/validate/' + address + '/' + symbol,
   }).then(function(data) {
     return !!data.isValid;
   });
@@ -34,7 +34,7 @@ function validateAddress(address, symbol) {
 
 function createTransaction(options) {
   return request({
-    url: urlRoot + 'changelly/createTransaction',
+    url: urlRoot + 'v1/changelly/createTransaction',
     method: 'post',
     data: {
       id: getId(),
@@ -52,7 +52,7 @@ function createTransaction(options) {
 
 function getTransaction(id) {
   return request({
-    url: urlRoot + 'changelly/transaction/' + id,
+    url: urlRoot + 'v1/changelly/transaction/' + id,
   });
 }
 

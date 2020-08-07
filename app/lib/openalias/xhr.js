@@ -9,7 +9,7 @@ function resolveTo(to) {
   var hostname = to.replace('@', '.')
   if (!hostname.match(/\./)) return Promise.resolve({to: to});
   return request({
-    url: urlRoot + 'openalias?hostname=' + hostname,
+    url: urlRoot + 'v1/openalias?hostname=' + hostname,
   }).then(function(data) {
     return {to: data.address, alias: to};
   }).catch(function() {

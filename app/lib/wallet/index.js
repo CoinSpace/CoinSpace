@@ -187,13 +187,13 @@ function initWallet(networkName, done) {
     }
     options.getDynamicFees = function() {
       return request({
-        url: urlRoot + 'fees',
+        url: urlRoot + 'v1/fees',
         params: { network: networkName },
       }).catch(console.error);
     }
     options.getCsFee = function() {
       return request({
-        url: urlRoot + 'csFee',
+        url: urlRoot + 'v1/csFee',
         params: { network: networkName },
       }).catch(console.error);
     }
