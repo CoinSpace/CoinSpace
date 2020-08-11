@@ -1,172 +1,174 @@
 'use strict';
 
-var Ractive = require('../auth')
-var CS = require('lib/wallet')
-var emitter = require('lib/emitter')
-var validatePin = require('lib/pin-validator')
-var showError = require('widgets/modals/flash').showError
-var translate = require('lib/i18n').translate
-var shapeshift = require('lib/shapeshift');
-var moonpay = require('lib/moonpay');
-var pincode = ''
+const Ractive = require('../auth');
+const CS = require('lib/wallet');
+const emitter = require('lib/emitter');
+const validatePin = require('lib/pin-validator');
+const { showError } = require('widgets/modals/flash');
+const { translate } = require('lib/i18n');
+const shapeshift = require('lib/shapeshift');
+const moonpay = require('lib/moonpay');
+let pincode = '';
 
-module.exports = function(prevPage, data){
-  data = data || {}
-  var userExists = data.userExists
+module.exports = function(prevPage, data) {
+  data = data || {};
+  const userExists = data.userExists;
 
-  var ractive = new Ractive({
+  const ractive = new Ractive({
     partials: {
       header: require('./header.ract'),
       content: require('./content.ract'),
-      footer: require('./footer.ract')
+      footer: require('./footer.ract'),
     },
     data: {
-      userExists: userExists,
+      userExists,
       pin: '',
       boxes: [null, null, null, null],
-      visible: function(number){
-        return number != null
-      }
+      visible(number) {
+        return number != null;
+      },
     },
-    oncomplete: function() {
-      initFingerprintAuth().catch(function() {
+    oncomplete() {
+      initFingerprintAuth().catch(() => {
         ractive.find('#setPin').focus();
       });
-    }
-  })
+    },
+  });
 
-  ractive.on('focus-pin', function(){
-    ractive.set('pinfocused', true)
-  })
+  ractive.on('focus-pin', () => {
+    ractive.set('pinfocused', true);
+  });
 
-  ractive.on('blur-pin', function(){
-    ractive.set('pinfocused', false)
-  })
+  ractive.on('blur-pin', () => {
+    ractive.set('pinfocused', false);
+  });
 
   function pinCode(pin) {
-      return function(){
-          var pinParts = pin.split('')
-          var pinString = ''
-          for(var i=0; i<pinParts.length; i++) {
-              if((parseInt(pinParts[i]) || parseInt(pinParts[i]) === 0) && typeof parseInt(pinParts[i]) === 'number') {
-                  pinString += pinParts[i]
-              }
-          }
-          pincode = pinString
-          return pincode
+    return function() {
+      const pinParts = pin.split('');
+      let pinString = '';
+      for (let i=0; i<pinParts.length; i++) {
+        if ((parseInt(pinParts[i]) || parseInt(pinParts[i]) === 0) && typeof parseInt(pinParts[i]) === 'number') {
+          pinString += pinParts[i];
+        }
       }
+      pincode = pinString;
+      return pincode;
+    };
   }
 
-  ractive.observe('pin', function(){
-    var pin = ractive.find('#setPin').value
-    var p = pinCode(pin)
-    var boxes = p().split('')
+  ractive.observe('pin', () => {
+    const pin = ractive.find('#setPin').value;
+    const p = pinCode(pin);
+    const boxes = p().split('');
 
-    if(boxes.length === 4) {
-      ractive.find('#setPin').blur()
-      ractive.fire('enter-pin')
+    if (boxes.length === 4) {
+      ractive.find('#setPin').blur();
+      ractive.fire('enter-pin');
     } else {
-      setTimeout(function(){
-        ractive.set('pin', pincode)
-      }, 0)
+      setTimeout(() => {
+        ractive.set('pin', pincode);
+      }, 0);
     }
 
     setBoxes(boxes);
-  })
+  });
 
-  ractive.on('enter-pin', function(){
+  ractive.on('enter-pin', () => {
 
-    setTimeout(function(){
+    setTimeout(() => {
 
-      if(!validatePin(getPin())){
-        emitter.emit('clear-pin')
-        return showError({ message: 'PIN must be a 4-digit number' })
+      if (!validatePin(getPin())) {
+        emitter.emit('clear-pin');
+        return showError({ message: 'PIN must be a 4-digit number' });
       }
 
-      ractive.set('opening', true)
+      ractive.set('opening', true);
 
       if (userExists) {
-        ractive.set('progress', 'Verifying PIN')
-        if (CS.walletExists()) { return openWithPin() }
+        ractive.set('progress', 'Verifying PIN');
+        if (CS.walletExists()) {
+          return openWithPin();
+        }
         return setPin();
       }
-      ractive.set('progress', 'Setting PIN')
-      ractive.set('userExists', true)
-      setPin()
+      ractive.set('progress', 'Setting PIN');
+      ractive.set('userExists', true);
+      setPin();
 
-    }, 500)
+    }, 500);
 
-  })
+  });
 
-  emitter.on('clear-pin', function() {
-    ractive.find('#setPin').value = ''
-    ractive.set('pin', '')
+  emitter.on('clear-pin', () => {
+    ractive.find('#setPin').value = '';
+    ractive.set('pin', '');
     setBoxes([]);
-  })
+  });
 
-  ractive.on('clear-credentials', function(){
+  ractive.on('clear-credentials', () => {
     CS.reset();
     CS.resetPin();
     shapeshift.cleanAccessToken();
     moonpay.cleanAccessToken();
     location.reload();
-  })
+  });
 
-  ractive.on('back', function(){
-    if (prevPage) prevPage(data)
-  })
+  ractive.on('back', () => {
+    if (prevPage) prevPage(data);
+  });
 
-  function getPin(){
-    var pin = pincode || ractive.get('pin')
-    return pin ? pin.toString() : ''
+  function getPin() {
+    const pin = pincode || ractive.get('pin');
+    return pin ? pin.toString() : '';
   }
 
   function setBoxes(boxes) {
-    for (var i = boxes.length; i < 4; i++) {
-      boxes[i] = null
+    for (let i = boxes.length; i < 4; i++) {
+      boxes[i] = null;
     }
     ractive.set('boxes', boxes);
   }
 
-  function openWithPin(){
-    CS.openWalletWithPin(getPin(), ractive.getTokenNetwork(), ractive.onSyncDone)
+  function openWithPin() {
+    CS.openWalletWithPin(getPin(), ractive.getTokenNetwork(), ractive.onSyncDone);
   }
 
-  function setPin(){
-    CS.setPin(getPin(), ractive.getTokenNetwork(), ractive.onSyncDone)
+  function setPin() {
+    CS.setPin(getPin(), ractive.getTokenNetwork(), ractive.onSyncDone);
   }
 
   function initFingerprintAuth() {
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
       if (process.env.BUILD_PLATFORM === 'ios') {
-        window.plugins.touchid.isAvailable(function() {
+        window.plugins.touchid.isAvailable(() => {
           CS.setAvailableTouchId();
-          var pin = CS.getPin();
+          const pin = CS.getPin();
           if (pin && CS.walletExists() && userExists) {
             window.plugins.touchid.verifyFingerprintWithCustomPasswordFallbackAndEnterPasswordLabel(
               translate('Scan your fingerprint please'),
               translate('Enter PIN'),
-              function() {
+              () => {
                 resolve();
-                ractive.set('pin', pin)
-                var boxes = pin.split('')
+                ractive.set('pin', pin);
+                const boxes = pin.split('');
                 setBoxes(boxes);
               }, reject
-            )
+            );
           } else {
             reject();
           }
-        }, reject)
+        }, reject);
       } else if (process.env.BUILD_PLATFORM === 'android') {
-        var Fingerprint = window.Fingerprint;
-        Fingerprint.isAvailable(function() {
+        const Fingerprint = window.Fingerprint;
+        Fingerprint.isAvailable(() => {
           CS.setAvailableTouchId();
-          var pin = CS.getPin();
+          const pin = CS.getPin();
           if (pin && CS.walletExists() && userExists) {
-            Fingerprint.show({}, function() {
+            Fingerprint.show({}, () => {
               resolve();
-              ractive.set('pin', pin)
-              var boxes = pin.split('')
+              ractive.set('pin', pin);
+              const boxes = pin.split('');
               setBoxes(boxes);
             }, reject);
           } else {
@@ -179,6 +181,6 @@ module.exports = function(prevPage, data){
     });
   }
 
-  return ractive
-}
+  return ractive;
+};
 

@@ -1,65 +1,68 @@
 'use strict';
+const request = require('lib/request');
+const db = require('lib/db');
+const urlRoot = window.urlRoot;
 
-var request = require('lib/request')
-var db = require('lib/db')
-var urlRoot = window.urlRoot
-
-function register(wallet_id, pin, callback) {
-  postCredentials('v1/register', { wallet_id: wallet_id, pin: pin }, callback)
+function register(walletId, pin, callback) {
+  postCredentials('v1/register', { wallet_id: walletId, pin }, callback);
 }
 
-function login(wallet_id, pin, callback) {
-  postCredentials('v1/login', { wallet_id: wallet_id, pin: pin }, callback)
+function login(walletId, pin, callback) {
+  postCredentials('v1/login', { wallet_id: walletId, pin }, callback);
 }
 
-function exist(wallet_id, callback) {
+function exist(walletId, callback) {
   request({
-    url: urlRoot + 'v1/exist?wallet_id=' + wallet_id
-  }, callback)
+    url: urlRoot + 'v1/exist?wallet_id=' + walletId,
+  }, callback);
 }
 
-function remove(wallet_id, callback) {
+function remove(walletId, callback) {
   request({
     url: urlRoot + 'v1/account',
     method: 'delete',
     data: {
-      id: wallet_id
-    }
-  }, callback)
+      id: walletId,
+    },
+  }, callback);
 }
 
-function setUsername(wallet_id, username, callback) {
-  var userInfo = db.get('userInfo');
-  var oldUsername = (userInfo.firstName || '').toLowerCase().replace(/[^a-z0-9-]/g, '')
-  username = (username || '').toLowerCase().replace(/[^a-z0-9-]/g, '')
+function setUsername(walletId, username, callback) {
+  const userInfo = db.get('userInfo');
+  const oldUsername = (userInfo.firstName || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
+  username = (username || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
 
-  if(username == oldUsername) return callback(null, userInfo.firstName);
+  if (username == oldUsername) {
+    return callback(null, userInfo.firstName);
+  }
 
   request({
     url: urlRoot + 'v1/username',
     method: 'put',
     data: {
-      id: wallet_id,
-      username: username
-    }
+      id: walletId,
+      username,
+    },
   }, function(err, data) {
-    if (err) return callback(err);
+    if (err) {
+      return callback(err);
+    }
     return callback(null, data.username);
-  })
+  });
 }
 
 function postCredentials(endpoint, data, callback) {
   request({
     url: urlRoot + endpoint,
     method: 'post',
-    data: data
-  }, callback)
+    data,
+  }, callback);
 }
 
 module.exports = {
-  register: register,
-  login: login,
-  exist: exist,
-  remove: remove,
-  setUsername: setUsername
-}
+  register,
+  login,
+  exist,
+  remove,
+  setUsername,
+};

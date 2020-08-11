@@ -1,61 +1,57 @@
 'use strict';
 
-var Ractive = require('lib/ractive')
-var emitter = require('lib/emitter')
-var showError = require('widgets/modals/flash').showError
-var getTokenNetwork = require('lib/token').getTokenNetwork;
-var setToken = require('lib/token').setToken;
-var onSyncDoneWrapper = require('lib/wallet/utils').onSyncDoneWrapper;
+const Ractive = require('lib/ractive');
+const emitter = require('lib/emitter');
+const { showError } = require('widgets/modals/flash');
+const { getTokenNetwork } = require('lib/token');
+const { setToken } = require('lib/token');
+const { onSyncDoneWrapper } = require('lib/wallet/utils');
 
-var Auth = Ractive.extend({
+const Auth = Ractive.extend({
   el: document.getElementById("auth"),
   template: require('./index.ract'),
   partials: {
     header: require('./header.ract'),
     actions: require('./actions.ract'),
     content: require('./content.ract'),
-    footer: require('./footer.ract')
+    footer: require('./footer.ract'),
   },
-  oninit: function() {
-    var self = this
-    this.set('opening', false)
+  oninit() {
+    this.set('opening', false);
 
-    emitter.on('wallet-opening', function(progress){
-      self.set('progress', progress)
-    })
+    emitter.on('wallet-opening', (progress) => {
+      this.set('progress', progress);
+    });
 
-    self.on('teardown', function(){
-      emitter.removeAllListeners('wallet-opening')
-    })
-
-    function onDoneError(err) {
-      if (err.message === 'user_deleted') {
-        return location.reload();
-      }
-
-      emitter.emit('clear-pin')
-
-      if (err.message === 'auth_failed') {
-        return showError({ message: 'Your PIN is incorrect' })
-      }
-      console.error(err)
-      return showError({ message: err.message })
-    }
+    this.on('teardown', () => {
+      emitter.removeAllListeners('wallet-opening');
+    });
 
     this.onSyncDone = onSyncDoneWrapper({
-      before: function() {
-        self.set('opening', false);
+      before: () => {
+        console.log('before opening');
+        this.set('opening', false);
       },
-      complete: function() {
-        window.scrollTo(0, 0)
+      complete: () => {
+        window.scrollTo(0, 0);
       },
-      fail: function(err) {
+      fail: (err) => {
         setToken(getTokenNetwork()); // fix wrong tokens
-        onDoneError(err);
-      }
-    });
-    this.getTokenNetwork = getTokenNetwork
-  }
-})
+        if (err.message === 'user_deleted') {
+          return location.reload();
+        }
 
-module.exports = Auth
+        emitter.emit('clear-pin');
+
+        if (err.message === 'auth_failed') {
+          return showError({ message: 'Your PIN is incorrect' });
+        }
+        console.error(err);
+        return showError({ message: err.message });
+      },
+    });
+    this.getTokenNetwork = getTokenNetwork;
+  },
+});
+
+module.exports = Auth;

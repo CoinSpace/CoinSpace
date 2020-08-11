@@ -1,40 +1,39 @@
 'use strict';
 
-var Worker = require('worker-loader?inline&fallback=false!./worker.js');
-var worker = new Worker()
+const Worker = require('worker-loader?inline&fallback=false!./worker.js');
+const worker = new Worker();
 
-var auth = require('./auth')
-var utils = require('./utils')
-var walletDb = require('./db')
-var emitter = require('lib/emitter')
-var crypto = require('crypto')
-var AES = require('lib/aes')
-var denomination = require('lib/denomination')
-var CsWallet = require('cs-wallet')
-var validateSend = require('./validator')
-var rng = require('secure-random').randomBuffer
-var bitcoin = CsWallet.bitcoin
-var request = require('lib/request')
-var EthereumWallet = require('cs-ethereum-wallet');
-var RippleWallet = require('cs-ripple-wallet');
-var StellarWallet = require('cs-stellar-wallet');
-var EOSWallet = require('cs-eos-wallet');
-var convert = require('lib/convert');
-var getToken = require('lib/token').getToken;
-var setToken = require('lib/token').setToken;
-var db = require('lib/db');
-var _ = require('lodash');
-var HDKey = require('hdkey');
-var Buffer = require('safe-buffer').Buffer;
-var bchaddr = require('bchaddrjs');
+const auth = require('./auth');
+const utils = require('./utils');
+const walletDb = require('./db');
+const emitter = require('lib/emitter');
+const crypto = require('crypto');
+const AES = require('lib/aes');
+const denomination = require('lib/denomination');
+const CsWallet = require('cs-wallet');
+const validateSend = require('./validator');
+const rng = require('secure-random').randomBuffer;
+const request = require('lib/request');
+const EthereumWallet = require('cs-ethereum-wallet');
+const RippleWallet = require('cs-ripple-wallet');
+const StellarWallet = require('cs-stellar-wallet');
+const EOSWallet = require('cs-eos-wallet');
+const convert = require('lib/convert');
+const getToken = require('lib/token').getToken;
+const setToken = require('lib/token').setToken;
+const db = require('lib/db');
+const _ = require('lodash');
+const HDKey = require('hdkey');
+const Buffer = require('safe-buffer').Buffer;
+const bchaddr = require('bchaddrjs');
 
-var wallet = null
-var seed = null
-var mnemonic = null
-var id = null
-var availableTouchId = false
+let wallet = null;
+let seed = null;
+let mnemonic = null;
+let id = null;
+let availableTouchId = false;
 
-var Wallet = {
+const Wallet = {
   bitcoin: CsWallet,
   bitcoincash: CsWallet,
   bitcoinsv: CsWallet,
@@ -44,10 +43,10 @@ var Wallet = {
   stellar: StellarWallet,
   eos: EOSWallet,
   dogecoin: CsWallet,
-  dash: CsWallet
-}
+  dash: CsWallet,
+};
 
-var names = {
+const names = {
   BTC: 'Bitcoin',
   BCH: 'Bitcoin Cash',
   BSV: 'Bitcoin SV',
@@ -58,34 +57,34 @@ var names = {
   EOS: 'EOS',
   DOGE: 'Dogecoin',
   DASH: 'Dash',
-  USDT: 'Tether USD'
+  USDT: 'Tether USD',
 };
 
-var urlRoot = window.urlRoot
+const urlRoot = window.urlRoot;
 
 function createWallet(passphrase, network, callback) {
-  var data = {passphrase: passphrase}
-  if(!passphrase){
-   data.entropy = rng(128 / 8).toString('hex')
+  const data = { passphrase };
+  if (!passphrase) {
+    data.entropy = rng(128 / 8).toString('hex');
   }
 
   worker.onmessage = function(e) {
-    assignSeedAndId(e.data.seed)
+    assignSeedAndId(e.data.seed);
 
-    mnemonic = e.data.mnemonic
-    auth.exist(id, function(err, userExists){
-      if(err) return callback(err);
+    mnemonic = e.data.mnemonic;
+    auth.exist(id, function(err, userExists) {
+      if (err) return callback(err);
 
-      callback(null, {userExists: userExists, mnemonic: mnemonic})
-    })
-  }
+      callback(null, { userExists, mnemonic });
+    });
+  };
 
   worker.onerror = function(e) {
     e.preventDefault();
-    return callback({message: e.message.split(': ')[1]})
-  }
+    return callback({ message: e.message.split(': ')[1] });
+  };
 
-  worker.postMessage(data)
+  worker.postMessage(data);
 }
 
 function setPin(pin, network, done) {
@@ -102,7 +101,7 @@ function setPin(pin, network, done) {
       if (err) return done(err);
       initWallet(network, done);
     });
-  })
+  });
 }
 
 function removeAccount(callback) {
@@ -114,9 +113,9 @@ function setUsername(username, callback) {
 }
 
 function openWalletWithPin(pin, network, done) {
-  var credentials = walletDb.getCredentials();
-  var id = credentials.id
-  var encryptedSeed = credentials.seed
+  const credentials = walletDb.getCredentials();
+  const id = credentials.id;
+  const encryptedSeed = credentials.seed;
   auth.login(id, pin, function(err, token) {
     if (err) {
       if (err.message === 'user_deleted') {
@@ -125,7 +124,7 @@ function openWalletWithPin(pin, network, done) {
       return done(err);
     }
 
-    savePin(pin)
+    savePin(pin);
     assignSeedAndId(AES.decrypt(encryptedSeed, token));
 
     emitter.emit('wallet-opening', 'Synchronizing Wallet');
@@ -135,43 +134,43 @@ function openWalletWithPin(pin, network, done) {
       if (err) return done(err);
       initWallet(network, done);
     });
-  })
+  });
 }
 
-function savePin(pin){
-    if (availableTouchId) window.localStorage.setItem('_pin_cs', AES.encrypt(pin, 'pinCoinSpace'));
+function savePin(pin) {
+  if (availableTouchId) window.localStorage.setItem('_pin_cs', AES.encrypt(pin, 'pinCoinSpace'));
 }
 
-function setAvailableTouchId(){
-    availableTouchId = true
+function setAvailableTouchId() {
+  availableTouchId = true;
 }
 
-function getPin(){
-    var pin = window.localStorage.getItem('_pin_cs')
-    return pin ? AES.decrypt(pin, 'pinCoinSpace') : null
+function getPin() {
+  const pin = window.localStorage.getItem('_pin_cs');
+  return pin ? AES.decrypt(pin, 'pinCoinSpace') : null;
 }
 
-function resetPin(){
-    window.localStorage.removeItem('_pin_cs')
+function resetPin() {
+  window.localStorage.removeItem('_pin_cs');
 }
 
-function assignSeedAndId(s) {
-  seed = s
-  id = crypto.createHash('sha256').update(seed).digest('hex')
-  emitter.emit('wallet-init', {seed: seed, id: id})
+function assignSeedAndId(_seed) {
+  seed = _seed;
+  id = crypto.createHash('sha256').update(seed).digest('hex');
+  emitter.emit('wallet-init', { seed, id });
 }
 
 function initWallet(networkName, done) {
-  var token = getToken();
+  let token = getToken();
   if (!isValidWalletToken(token)) {
     setToken(networkName);
     token = false;
   }
 
-  var options = {
-    networkName: networkName,
-    done: done
-  }
+  const options = {
+    networkName,
+    done,
+  };
 
   if (networkName === 'ethereum') {
     options.seed = seed;
@@ -190,13 +189,13 @@ function initWallet(networkName, done) {
         url: urlRoot + 'v1/fees',
         params: { network: networkName },
       }).catch(console.error);
-    }
+    };
     options.getCsFee = function() {
       return request({
         url: urlRoot + 'v1/csFee',
         params: { network: networkName },
       }).catch(console.error);
-    }
+    };
     convert.setDecimals(8);
   } else if (networkName === 'ripple') {
     options.seed = seed;
@@ -220,15 +219,15 @@ function initWallet(networkName, done) {
 
 function isValidWalletToken(token) {
   if (token && token.isDefault) return true;
-  var walletTokens = db.get('walletTokens') || [];
-  var isFound = _.find(walletTokens, function(item) {
+  const walletTokens = db.get('walletTokens') || [];
+  const isFound = _.find(walletTokens, function(item) {
     return _.isEqual(token, item);
   });
   return !!isFound;
 }
 
 function parseHistoryTx(tx) {
-  var networkName = wallet.networkName;
+  const networkName = wallet.networkName;
   if (networkName === 'ethereum') {
     return utils.parseEthereumTx(tx);
   } else if (networkName === 'ripple') {
@@ -243,7 +242,7 @@ function parseHistoryTx(tx) {
 }
 
 function sync(done) {
-  initWallet(wallet.networkName, done)
+  initWallet(wallet.networkName, done);
 }
 
 function getWallet() {
@@ -273,31 +272,32 @@ function getDestinationInfo(to) {
 function setToAlias(data) {
   if (wallet.networkName !== 'bitcoincash') return;
   try {
-    var legacy = bchaddr.toLegacyAddress(data.to);
+    const legacy = bchaddr.toLegacyAddress(data.to);
     if (legacy !== data.to) {
       data.alias = data.to;
       data.to = legacy;
     }
+  // eslint-disable-next-line
   } catch (e) {}
 }
 
 module.exports = {
-  openWalletWithPin: openWalletWithPin,
-  createWallet: createWallet,
-  setPin: setPin,
-  removeAccount: removeAccount,
-  setUsername: setUsername,
-  getWallet: getWallet,
-  getId: getId,
-  walletExists: walletExists,
-  reset: reset,
-  sync: sync,
-  initWallet: initWallet,
-  validateSend: validateSend,
-  parseHistoryTx: parseHistoryTx,
-  getPin: getPin,
-  resetPin: resetPin,
-  setAvailableTouchId: setAvailableTouchId,
-  getDestinationInfo: getDestinationInfo,
-  setToAlias: setToAlias
-}
+  openWalletWithPin,
+  createWallet,
+  setPin,
+  removeAccount,
+  setUsername,
+  getWallet,
+  getId,
+  walletExists,
+  reset,
+  sync,
+  initWallet,
+  validateSend,
+  parseHistoryTx,
+  getPin,
+  resetPin,
+  setAvailableTouchId,
+  getDestinationInfo,
+  setToAlias,
+};

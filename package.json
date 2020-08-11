@@ -17,7 +17,7 @@
     "dev:link": "linklocal -lr",
     "server": "node --expose-gc ./server/server.js",
     "server:watch": "nodemon -w ./server -x node -r dotenv/config ./server/server.js dotenv_config_path=./server/.env.loc",
-    "lint": "eslint cli/ electron/*.js electron/lib/*.js webpack.*.js app/widgets/modals/tooltip/*.js app/lib/shapeshift/*.js server/middleware.js server/server.js server/lib/v1/db.js server/lib/v1/master.js server/lib/v1/github.js server/lib/v1/api.js server/lib/v1/account.js server/lib/v1/auth.js server/lib/v2/*.js",
+    "lint": "eslint cli/ electron/*.js electron/lib/*.js webpack.*.js app/widgets/modals/tooltip/*.js app/widgets/auth/*.js app/widgets/auth/**/*.js app/widgets/account-details/*.js app/*.js app/lib/shapeshift/*.js app/lib/db/*.js app/lib/wallet/*.js app/lib/request/*.js app/lib/aes/*.js server/middleware.js server/server.js server/lib/v1/db.js server/lib/v1/master.js server/lib/v1/github.js server/lib/v1/api.js server/lib/v1/account.js server/lib/v1/auth.js server/lib/v2/*.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -171,6 +171,7 @@
         120
       ],
       "keyword-spacing": "error",
+      "space-before-blocks": "error",
       "curly": [
         "error",
         "multi-line"

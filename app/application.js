@@ -2,25 +2,25 @@
 
 window.urlRoot = process.env.SITE_URL;
 if (process.env.BUILD_TYPE !== 'phonegap' && process.env.BUILD_TYPE !== 'electron') {
-  window.urlRoot = '/' + window.urlRoot.split('/').slice(3).join('/')
+  window.urlRoot = '/' + window.urlRoot.split('/').slice(3).join('/');
 }
 
 window.initCSApp = function() {
-  var ticker = require('lib/ticker-api')
-  var emitter = require('lib/emitter')
-  var walletExists = require('lib/wallet').walletExists
-  var FastClick = require('fastclick')
-  var initFrame = require('widgets/frame')
-  var initAuth = require('widgets/auth')
-  var initGeoOverlay = require('widgets/geo-overlay')
-  var getToken = require('lib/token').getToken;
-  var denomination = require('lib/denomination');
-  var moonpay = require('lib/moonpay');
+  const ticker = require('lib/ticker-api');
+  const emitter = require('lib/emitter');
+  const { walletExists } = require('lib/wallet');
+  const FastClick = require('fastclick');
+  const initFrame = require('widgets/frame');
+  const initAuth = require('widgets/auth');
+  const initGeoOverlay = require('widgets/geo-overlay');
+  const { getToken } = require('lib/token');
+  const denomination = require('lib/denomination');
+  const moonpay = require('lib/moonpay');
 
-  var fadeIn = require('lib/transitions/fade.js').fadeIn
+  const { fadeIn } = require('lib/transitions/fade.js');
 
-  var appEl = document.getElementById('app')
-  var htmlEl = document.documentElement
+  const appEl = document.getElementById('app');
+  const htmlEl = document.documentElement;
 
   if (process.env.BUILD_PLATFORM === 'ios') {
     window.StatusBar.styleDefault();
@@ -30,31 +30,31 @@ window.initCSApp = function() {
   }
   if (process.env.BUILD_TYPE === 'phonegap') navigator.splashscreen.hide();
 
-  var frame = initFrame(appEl)
-  var auth = null
+  const frame = initFrame(appEl);
+  let auth = null;
 
   fixFastClick();
-  FastClick.attach(document.body)
+  FastClick.attach(document.body);
 
-  initGeoOverlay(document.getElementById('geo-overlay'))
+  initGeoOverlay(document.getElementById('geo-overlay'));
 
-  auth = walletExists() ? initAuth.pin(null, { userExists: true }) : initAuth.choose()
-  var authContentEl = document.getElementById('auth_content')
+  auth = walletExists() ? initAuth.pin(null, { userExists: true }) : initAuth.choose();
+  const authContentEl = document.getElementById('auth_content');
   authContentEl.style.opacity = 0;
-  fadeIn(authContentEl)
-  auth.show()
+  fadeIn(authContentEl);
+  auth.show();
 
-  emitter.on('open-overlay', function(){
-    appEl.classList.add('is_hidden')
-    htmlEl.classList.add('prevent_scroll')
-  })
+  emitter.on('open-overlay', () => {
+    appEl.classList.add('is_hidden');
+    htmlEl.classList.add('prevent_scroll');
+  });
 
-  emitter.on('close-overlay', function(){
-    appEl.classList.remove('is_hidden')
-    htmlEl.classList.remove('prevent_scroll')
-  })
+  emitter.on('close-overlay', () => {
+    appEl.classList.remove('is_hidden');
+    htmlEl.classList.remove('prevent_scroll');
+  });
 
-  emitter.once('wallet-ready', function() {
+  emitter.once('wallet-ready', () => {
     if (process.env.BUILD_TYPE === 'phonegap') window.Zendesk.setAnonymousIdentity();
     if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.styleLightContent();
     updateExchangeRates();
@@ -63,32 +63,33 @@ window.initCSApp = function() {
     frame.show();
   });
 
-  emitter.on('sync', function() {
+  emitter.on('sync', () => {
     updateExchangeRates();
   });
 
   function updateExchangeRates() {
-    ticker.getExchangeRates(denomination(getToken())).then(function(rates) {
+    ticker.getExchangeRates(denomination(getToken())).then((rates) => {
       emitter.emit('ticker', rates);
     }).catch(console.error);
   }
 
   function fixFastClick() {
-    var originOnTouchStart = FastClick.prototype.onTouchStart;
+    const originOnTouchStart = FastClick.prototype.onTouchStart;
     FastClick.prototype.onTouchStart = function(event) {
-      var targetElement = this.getTargetElementFromEventTarget(event.target);
+      const targetElement = this.getTargetElementFromEventTarget(event.target);
       if (targetElement.nodeName.toLowerCase() === 'select') {
         return false;
       }
       originOnTouchStart.apply(this, arguments);
-    }
+    };
   }
 
   if (process.env.BUILD_TYPE === 'phonegap') {
     window.handleOpenURL = function(url) {
+      // eslint-disable-next-line no-undef
       SafariViewController.hide();
       if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.styleLightContent();
-      setTimeout(function() {
+      setTimeout(() => {
         emitter.emit('handleOpenURL', url);
       }, 1);
     };
@@ -100,4 +101,4 @@ window.initCSApp = function() {
       emitter.emit('handleOpenURL', url);
     });
   }
-}
+};

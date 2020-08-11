@@ -8,7 +8,7 @@ const moonpay = require('./moonpay');
 const github = require('./github');
 
 function cleanGeo(interval) {
-  setInterval(function intervalFunction(){
+  setInterval(function intervalFunction() {
     geo.removeOlderThan(interval).catch(console.error);
     return intervalFunction;
   }(), interval);

@@ -1,23 +1,23 @@
 'use strict';
 
-var emitter = require('lib/emitter');
-var _ = require('lodash');
-var AES = require('lib/aes');
-var randAvatarIndex = require('lib/avatar').randAvatarIndex;
-var encrypt = AES.encrypt;
-var decrypt = AES.decrypt;
+const emitter = require('lib/emitter');
+const _ = require('lodash');
+const AES = require('lib/aes');
+const { randAvatarIndex } = require('lib/avatar');
+const encrypt = AES.encrypt;
+const decrypt = AES.decrypt;
 
-var request = require('lib/request');
-var urlRoot = window.urlRoot;
+const request = require('lib/request');
+const urlRoot = window.urlRoot;
 
-var id = null;
-var secret = null;
-var details = null;
+let id = null;
+let secret = null;
+let details = null;
 
 function set(key, value) {
   if (id === null) return Promise.reject(new Error('wallet not ready'));
-  var data = JSON.parse(decrypt(details, secret));
-  if(data[key] && value && typeof value === 'object' && value.constructor === Object) {
+  const data = JSON.parse(decrypt(details, secret));
+  if (data[key] && value && typeof value === 'object' && value.constructor === Object) {
     _.merge(data[key], value);
   } else {
     data[key] = value;
@@ -28,15 +28,15 @@ function set(key, value) {
 }
 
 function initDetails() {
-  var defaultValue = {
+  const defaultValue = {
     systemInfo: { preferredCurrency: 'USD' },
     userInfo: {
       firstName: '',
       lastName: '',
       email: '',
-      avatarIndex: randAvatarIndex()
-    }
-  }
+      avatarIndex: randAvatarIndex(),
+    },
+  };
   return save(defaultValue);
 }
 
@@ -45,15 +45,15 @@ function save(data) {
     url: urlRoot + 'v1/details',
     method: 'put',
     data: {
-      id: id,
-      data: encrypt(JSON.stringify(data), secret)
-    }
-  })
+      id,
+      data: encrypt(JSON.stringify(data), secret),
+    },
+  });
 }
 
 function get(key) {
   if (id === null) return console.error('wallet not ready');
-  var data = JSON.parse(decrypt(details, secret));
+  const data = JSON.parse(decrypt(details, secret));
   if (!key) {
     return data;
   }
@@ -63,11 +63,11 @@ function get(key) {
 emitter.on('wallet-init', function(data) {
   secret = data.seed;
   id = data.id;
-})
+});
 
 emitter.on('db-init', function() {
   request({
-    url: urlRoot + 'v1/details?id=' + id
+    url: urlRoot + 'v1/details?id=' + id,
   }).then(function(doc) {
     if (!doc) {
       return initDetails();
@@ -83,6 +83,6 @@ emitter.on('db-init', function() {
 });
 
 module.exports = {
-  get: get,
-  set: set
-}
+  get,
+  set,
+};

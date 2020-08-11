@@ -234,7 +234,7 @@ router.get('/changelly/transaction/:id', function(req, res) {
 
 router.get('/moonpay/coins', function(req, res) {
   let id = 'coins';
-  if (req.query.country === 'USA'){
+  if (req.query.country === 'USA') {
     id += '_usa';
   }
   moonpay.getFromCache(id).then(function(data) {

@@ -1,9 +1,9 @@
 'use strict';
 
-var showError = require('widgets/modals/flash').showError;
-var getTokenNetwork = require('lib/token').getTokenNetwork;
-var emitter = require('lib/emitter');
-var bchaddr = require('bchaddrjs');
+const showError = require('widgets/modals/flash').showError;
+const getTokenNetwork = require('lib/token').getTokenNetwork;
+const emitter = require('lib/emitter');
+const bchaddr = require('bchaddrjs');
 
 function parseBtcLtcTx(tx, networkName) {
   return {
@@ -15,22 +15,23 @@ function parseBtcLtcTx(tx, networkName) {
     ins: tx.vin.map(function(input) {
       return {
         address: toAddress(networkName, input.addr),
-        amount: input.valueSat
-      }
+        amount: input.valueSat,
+      };
     }),
     outs: tx.vout.map(function(output) {
       return {
         address: toAddress(networkName, output.scriptPubKey.addresses ? output.scriptPubKey.addresses[0] : null),
-        amount: output.valueSat
-      }
-    })
-  }
+        amount: output.valueSat,
+      };
+    }),
+  };
 }
 
 function toAddress(networkName, address) {
   if (networkName !== 'bitcoincash') return address;
   try {
     address = bchaddr.toCashAddress(address).split(':')[1];
+  // eslint-disable-next-line
   } catch (e) {};
   return address;
 }
@@ -45,16 +46,16 @@ function parseEthereumTx(tx) {
     status: tx.status,
     from: tx.from,
     to: tx.to,
-    token: tx.token
-  }
+    token: tx.token,
+  };
 }
 
 function onSyncDoneWrapper(options) {
   options = options || {};
-  var before = options.before || function() {};
-  var complete = options.complete || function() {};
-  var fail = options.fail || function(err) {
-    showError({message: err.message});
+  const before = options.before || function() {};
+  const complete = options.complete || function() {};
+  const fail = options.fail || function(err) {
+    showError({ message: err.message });
   };
   return function(err) {
     before();
@@ -69,18 +70,18 @@ function onSyncDoneWrapper(options) {
     } else {
       return emitter.emit('wallet-unblock');
     }
-  }
+  };
 }
 
 function nodeError() {
   return showError({
     message: "Can't connect to :network node. Please try again later or choose another token.",
-    interpolations: { network: getTokenNetwork() }
-  })
+    interpolations: { network: getTokenNetwork() },
+  });
 }
 
 module.exports = {
-  parseBtcLtcTx: parseBtcLtcTx,
-  parseEthereumTx: parseEthereumTx,
-  onSyncDoneWrapper: onSyncDoneWrapper
-}
+  parseBtcLtcTx,
+  parseEthereumTx,
+  onSyncDoneWrapper,
+};

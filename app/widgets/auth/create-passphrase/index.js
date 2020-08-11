@@ -1,53 +1,54 @@
 'use strict';
 
-var Ractive = require('../auth')
-var _ = require('lodash');
-var createPassphraseConfirmPage = require('../create-passphrase-confirm')
-var Clipboard = require('clipboard')
+const Ractive = require('../auth');
+const _ = require('lodash');
+const createPassphraseConfirmPage = require('../create-passphrase-confirm');
+const Clipboard = require('clipboard');
+
 function confirm(prevPage, data) {
-  var ractive = new Ractive({
+  const ractive = new Ractive({
     partials: {
       header: require('./header.ract'),
       actions: require('./actions.ract'),
-      footer: require('./footer.ract')
+      footer: require('./footer.ract'),
     },
     data: {
       passphrase: data.mnemonic,
       isCopied: false,
       isClipboardEnabled: Clipboard.isSupported(),
       checked: false,
-      termsChecked: false
-    }
-  })
-
-  var clipboard = new Clipboard(ractive.find('#js-passphrase'));
-  clipboard.on('success', function() {
-      ractive.set('isCopied', true);
-      setTimeout(function() {
-        ractive.set('isCopied', false);
-      }, 1000)
+      termsChecked: false,
+    },
   });
 
-  ractive.on('toggle-check', function() {
+  const clipboard = new Clipboard(ractive.find('#js-passphrase'));
+  clipboard.on('success', () => {
+    ractive.set('isCopied', true);
+    setTimeout(() => {
+      ractive.set('isCopied', false);
+    }, 1000);
+  });
+
+  ractive.on('toggle-check', () => {
     ractive.set('checked', !ractive.get('checked'));
-  })
+  });
 
-  ractive.on('toggle-terms-check', function() {
+  ractive.on('toggle-terms-check', () => {
     ractive.set('termsChecked', !ractive.get('termsChecked'));
-  })
+  });
 
-  ractive.on('confirm', function() {
+  ractive.on('confirm', () => {
     data.randomIndexes = _.shuffle(_.range(12));
-    createPassphraseConfirmPage(function() {
+    createPassphraseConfirmPage(() => {
       confirm(prevPage, data);
     }, data);
-  })
+  });
 
-  ractive.on('back', function() {
+  ractive.on('back', () => {
     if (prevPage) prevPage();
-  })
+  });
 
-  return ractive
+  return ractive;
 }
 
-module.exports = confirm
+module.exports = confirm;

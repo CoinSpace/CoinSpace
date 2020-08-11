@@ -1,16 +1,16 @@
 'use strict';
-var AES = require('lib/aes');
+const AES = require('lib/aes');
 
 function saveEncrypedSeed(id, encryptedSeed) {
-  var data = {
-    id: id,
-    seed: encryptedSeed
+  const data = {
+    id,
+    seed: encryptedSeed,
   };
   window.localStorage.setItem('_cs_credentials', AES.encrypt(JSON.stringify(data), 'seedCoinspace'));
 }
 
 function getCredentials() {
-  var credentials = window.localStorage.getItem('_cs_credentials');
+  const credentials = window.localStorage.getItem('_cs_credentials');
   return credentials ? JSON.parse(AES.decrypt(credentials, 'seedCoinspace')) : null;
 }
 
@@ -19,7 +19,7 @@ function deleteCredentials() {
 }
 
 module.exports = {
-  saveEncrypedSeed: saveEncrypedSeed,
-  getCredentials: getCredentials,
-  deleteCredentials: deleteCredentials
-}
+  saveEncrypedSeed,
+  getCredentials,
+  deleteCredentials,
+};

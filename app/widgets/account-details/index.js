@@ -1,138 +1,139 @@
 'use strict';
 
-var Ractive = require('lib/ractive')
-var Profile = require('lib/transitions/profileAnimation.js')
-var showTooltip = require('widgets/modals/tooltip')
-var showError = require('widgets/modals/flash').showError
-var emitter = require('lib/emitter')
-var Avatar = require('lib/avatar')
-var db = require('lib/db')
-var setUsername = require('lib/wallet').setUsername
-var showRemoveConfirmation = require('widgets/modals/confirm-remove-account')
+const Ractive = require('lib/ractive');
+const Profile = require('lib/transitions/profileAnimation.js');
+const showTooltip = require('widgets/modals/tooltip');
+const { showError } = require('widgets/modals/flash');
+const emitter = require('lib/emitter');
+const Avatar = require('lib/avatar');
+const db = require('lib/db');
+const { setUsername } = require('lib/wallet');
+const showRemoveConfirmation = require('widgets/modals/confirm-remove-account');
 
 module.exports = function init(el) {
 
-  var ractive = new Ractive({
-    el: el,
+  const ractive = new Ractive({
+    el,
     template: require('./index.ract'),
     data: {
       start_open: true,
       user: {
         firstName: '',
-        email: ''
+        email: '',
       },
       editingName: false,
       editingEmail: false,
-      animating: false
-    }
-  })
+      animating: false,
+    },
+  });
 
-  var $previewEl = ractive.find('#details-preview')
-  var $editEl = ractive.find('#details-edit')
-  var $nameEl = ractive.find('#details-name')
+  const $previewEl = ractive.find('#details-preview');
+  const $editEl = ractive.find('#details-edit');
+  const $nameEl = ractive.find('#details-name');
 
-  $nameEl.onkeypress = function(e) {
+  $nameEl.onkeypress = (e) => {
     e = e || window.event;
-    var charCode = e.keyCode || e.which;
-    var charStr = String.fromCharCode(charCode);
-    if(!charStr.match(/^[a-zA-Z0-9-]+$/)) {
+    const charCode = e.keyCode || e.which;
+    const charStr = String.fromCharCode(charCode);
+    if (!charStr.match(/^[a-zA-Z0-9-]+$/)) {
       return false;
     }
   };
 
-  emitter.once('wallet-ready', function() {
-    var userInfo = db.get('userInfo');
+  emitter.once('wallet-ready', () => {
+    const userInfo = db.get('userInfo');
     ractive.set('user', userInfo);
-    setAvatar()
+    setAvatar();
 
     if (ractive.get('user.firstName')) {
-      Profile.hide($editEl, ractive)
+      Profile.hide($editEl, ractive);
     } else {
-      Profile.hide($previewEl, ractive)
+      Profile.hide($previewEl, ractive);
     }
-  })
+  });
 
-  ractive.on('edit-details', function(){
-    if(ractive.get('animating')) return;
-    Profile.hide($previewEl, ractive, function(){
-      Profile.show($editEl, ractive)
-    })
-  })
+  ractive.on('edit-details', () => {
+    if (ractive.get('animating')) return;
+    Profile.hide($previewEl, ractive, () => {
+      Profile.show($editEl, ractive);
+    });
+  });
 
-  emitter.on('details-updated', function(details){
-    ractive.set('user', details)
-    Profile.hide($editEl, ractive, function(){
-      Profile.show($previewEl, ractive)
-    })
-  })
+  emitter.on('details-updated', (details) => {
+    ractive.set('user', details);
+    Profile.hide($editEl, ractive, () => {
+      Profile.show($previewEl, ractive);
+    });
+  });
 
-  ractive.on('help', function() {
+  ractive.on('help', () => {
     showTooltip({
+      // eslint-disable-next-line max-len
       message: 'Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.',
       bottomLink: {
         text: 'Create a gravatar',
-        url: 'https://gravatar.com/'
-      }
-    })
-  })
+        url: 'https://gravatar.com/',
+      },
+    });
+  });
 
-  ractive.on('submit-details', function(){
-    if(ractive.get('animating')) return;
+  ractive.on('submit-details', () => {
+    if (ractive.get('animating')) return;
 
-    var details = ractive.get('user')
+    const details = ractive.get('user');
 
-    if(blank(details.firstName)) {
-      return showError({message: "A name is required to set your profile on Coin"})
+    if (blank(details.firstName)) {
+      return showError({ message: "A name is required to set your profile on Coin" });
     }
 
-    if(blank(details.email) && details.avatarIndex == undefined) {
-      details.avatarIndex = Avatar.randAvatarIndex()
+    if (blank(details.email) && details.avatarIndex == undefined) {
+      details.avatarIndex = Avatar.randAvatarIndex();
     }
 
-    ractive.set('submitting', true)
+    ractive.set('submitting', true);
 
-    setUsername(details.firstName, function(err, username){
-      if(err) {
-        ractive.set('submitting', false)
-        if(err.message === 'username_exists') return showError({message: "Username not available"})
+    setUsername(details.firstName, (err, username) => {
+      if (err) {
+        ractive.set('submitting', false);
+        if (err.message === 'username_exists') return showError({ message: "Username not available" });
         return console.error(err);
       }
 
-      details.firstName = username
+      details.firstName = username;
 
-      db.set('userInfo', details).then(function() {
+      db.set('userInfo', details).then(() => {
         ractive.set('submitting', false);
         emitter.emit('details-updated', details);
         setAvatar();
-      }).catch(function() {
+      }).catch(() => {
         handleUserError();
       });
 
-    })
-  })
+    });
+  });
 
-  ractive.on('remove-account', function() {
+  ractive.on('remove-account', () => {
     showRemoveConfirmation();
   });
 
-  function setAvatar(){
-    var avatar = Avatar.getAvatar(ractive.get('user.email'),
-                                  ractive.get('user.avatarIndex'))
-    var avatarEl = ractive.find('#details-preview').querySelector('.settings__avatar')
-    avatarEl.style.setProperty('background-image', "url('" + avatar + "')")
+  function setAvatar() {
+    const avatar = Avatar.getAvatar(ractive.get('user.email'),
+      ractive.get('user.avatarIndex'));
+    const avatarEl = ractive.find('#details-preview').querySelector('.settings__avatar');
+    avatarEl.style.setProperty('background-image', "url('" + avatar + "')");
   }
 
   function handleUserError() {
-    var data = {
+    const data = {
       title: "Uh Oh...",
-      message: "Could not save your details"
-    }
-    showError(data)
+      message: "Could not save your details",
+    };
+    showError(data);
   }
 
   function blank(str) {
-    return (str == undefined || str.trim() === '')
+    return (str == undefined || str.trim() === '');
   }
 
-  return ractive
-}
+  return ractive;
+};

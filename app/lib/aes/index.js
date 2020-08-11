@@ -1,16 +1,16 @@
-var CJS = require('crypto-js')
-var AES = CJS.AES
-var utf8Encode = CJS.enc.Utf8
+'use strict';
+
+const CryptoJS = require('crypto-js');
 
 function encrypt(text, key) {
-  return AES.encrypt(text, key).toString()
+  return CryptoJS.AES.encrypt(text, key).toString();
 }
 
 function decrypt(text, key) {
-  return utf8Encode.stringify(AES.decrypt(text, key))
+  return CryptoJS.enc.Utf8.stringify(CryptoJS.AES.decrypt(text, key));
 }
 
 module.exports = {
-  encrypt: encrypt,
-  decrypt: decrypt
-}
+  encrypt,
+  decrypt,
+};

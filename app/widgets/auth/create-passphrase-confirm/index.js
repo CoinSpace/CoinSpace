@@ -1,14 +1,14 @@
 'use strict';
 
-var Ractive = require('../auth');
-var pinPage = require('../pin');
+const Ractive = require('../auth');
+const pinPage = require('../pin');
 
 function confirm(prevPage, data) {
-  var words = data.mnemonic.split(' ');
-  var firstWord = words[data.randomIndexes[0]];
-  var secondWord = words[data.randomIndexes[1]];
+  const words = data.mnemonic.split(' ');
+  const firstWord = words[data.randomIndexes[0]];
+  const secondWord = words[data.randomIndexes[1]];
 
-  var ractive = new Ractive({
+  const ractive = new Ractive({
     partials: {
       header: require('./header.ract'),
       actions: require('./actions.ract'),
@@ -19,14 +19,14 @@ function confirm(prevPage, data) {
       firstWord: '',
       secondWord: '',
       randomIndexes: data.randomIndexes,
-      isCorrect: function() {
+      isCorrect() {
         return this.get('firstWord').trim() === firstWord && this.get('secondWord').trim() === secondWord;
-      }
-    }
+      },
+    },
   });
 
-  ractive.on('clearWord', function(context) {
-    var dataContext = context.node.getAttribute('data-context');
+  ractive.on('clearWord', (context) => {
+    const dataContext = context.node.getAttribute('data-context');
     if (dataContext === 'first-word') {
       ractive.set('firstWord', '');
       ractive.find('#first-word').focus();
@@ -36,11 +36,11 @@ function confirm(prevPage, data) {
     }
   });
 
-  ractive.on('back', function() {
+  ractive.on('back', () => {
     if (prevPage) prevPage();
   });
 
-  ractive.on('confirm', function() {
+  ractive.on('confirm', () => {
     pinPage(prevPage, data);
   });
 
