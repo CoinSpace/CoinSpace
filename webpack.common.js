@@ -4,6 +4,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
+const dotenv = require('dotenv');
+
+dotenv.config({ path: '.env.defaults' });
 
 module.exports = {
   // we should use web build for electron too

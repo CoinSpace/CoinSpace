@@ -80,8 +80,7 @@ const config = merge(common, {
       path: envFile,
       safe: true,
       // Use system envirinment variables on CI
-      systemvars: !!process.env.CI,
-      defaults: true,
+      systemvars: !!process.env.CI
     }),
     new UglifyJSPlugin({
       sourceMap: true,
