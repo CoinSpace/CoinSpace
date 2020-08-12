@@ -34,7 +34,14 @@ before_build:
         $bytes = [Convert]::FromBase64String($env:CERTIFICATE_WIN)
         [IO.File]::WriteAllBytes($filename, $bytes)
       }
-  - ps: $Env:GOOGLE_CLOUD_PRIVATE_KEY=$Env:GOOGLE_CLOUD_PRIVATE_KEY.replace("\n","`n")
+  - ps: >-
+      if (Test-Path Env:\GOOGLE_CLOUD_KEY_FILE) {
+        $workingDirectory = Convert-Path (Resolve-Path -path ".")
+        $filename = "$workingDirectory\gcloud.key.json"
+        $bytes = [Convert]::FromBase64String($env:GOOGLE_CLOUD_KEY_FILE)
+        [IO.File]::WriteAllBytes($filename, $bytes)
+        $Env:GOOGLE_APPLICATION_CREDENTIALS="$filename"
+      }
   - ps: $Env:VERSION=$(node -p -e "require('./package.json').version")
   - ps: cd electron
   - ps: npm version $Env:VERSION

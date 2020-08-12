@@ -38,7 +38,7 @@ webpackConfig.plugins.push(
     'process.env.BUILD_TYPE': JSON.stringify('phonegap'),
     'process.env.BUILD_PLATFORM': JSON.stringify(program.platform),
     'process.env.SENTRY_RELEASE': JSON.stringify(SENTRY_RELEASE),
-    'process.env.SENTRY_DSN': JSON.stringify(process.env[`SENTRY_DSN_${program.platform.toUpperCase()}`]),
+    'process.env.SENTRY_DSN': JSON.stringify(process.env['SENTRY_DSN']),
   })
 );
 

@@ -2,19 +2,14 @@ version: '2.2'
 services:
   web:
     build: .
-    env_file: .env.loc
-    links:
-      - mongo
-
-  web_master:
-    image: coinspace_web
-    env_file: .env.loc
-    links:
-      - mongo
-    ports:
-      - '${PORT:-8080}:${PORT:-8080}'
+    env_file: ./server/.env.loc
     environment:
-      MASTER: 1
+      PORT: 8000
+      DB_CONNECT: mongodb://mongo:27017/coinspace
+    ports:
+      - 8000:8000
+    links:
+      - mongo
 
   mongo:
     image: mongo:3.6

@@ -1,0 +1,48 @@
+steps:
+
+- name: 'node:12.14.1'
+  id: 'build assets'
+  env:
+    - 'CI=true'
+    - 'SITE_URL=${_SITE_URL}'
+    - 'IOS_APP_ID=${_IOS_APP_ID}'
+    - 'SHAPESHIFT_API_KEY=${_SHAPESHIFT_API_KEY}'
+    - 'SHAPESHIFT_CLIENT_ID=${_SHAPESHIFT_CLIENT_ID}'
+    - 'NODE_ENV=${_NODE_ENV}'
+    - 'MOONPAY_API_KEY=${_MOONPAY_API_KEY}'
+    - 'MOONPAY_WIDGET_URL=${_MOONPAY_WIDGET_URL}'
+    - 'SENTRY_ENVIRONMENT=${_SENTRY_ENVIRONMENT}'
+    - 'SENTRY_DSN=${_SENTRY_DSN}'
+    - 'SENTRY_ORG=${_SENTRY_ORG}'
+    - 'SENTRY_AUTH_TOKEN=${_SENTRY_AUTH_TOKEN}'
+  entrypoint: 'sh'
+  args:
+    - '-c'
+    - |
+      NODE_ENV=CI npm ci && \
+      ./cli/i18n.js --json && \
+      ./cli/build.js web --env=${_BUILD_ENV} --release
+
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'build image'
+  entrypoint: 'sh'
+  args:
+    - '-c'
+    - |
+      docker build --tag "gcr.io/$PROJECT_ID/${_APP}:latest" . \
+      && docker push "gcr.io/$PROJECT_ID/${_APP}:latest"
+
+- name: 'gcr.io/cloud-builders/kubectl'
+  id: 'deploy'
+  args: ['delete', 'po', '-l', 'app=${_APP}']
+  env:
+    - 'CLOUDSDK_COMPUTE_ZONE=${_CLOUDSDK_COMPUTE_ZONE}'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLOUDSDK_CONTAINER_CLUSTER}'
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: 'purge cdn'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    gcloud compute url-maps invalidate-cdn-cache ${_CDN_URL_MAP_NAME} --host ${_CDN_HOST} --path "/*" --async

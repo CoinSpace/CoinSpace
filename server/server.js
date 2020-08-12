@@ -9,7 +9,7 @@ const api = require('./lib/v1/api');
 const app = express();
 
 Sentry.init({
-  dsn: process.env.SENTRY_DSN_SERVER,
+  dsn: process.env.SENTRY_DSN,
   environment: process.env.SENTRY_ENVIRONMENT,
   release: `coin.server@${process.env.npm_package_version}`,
   integrations: [

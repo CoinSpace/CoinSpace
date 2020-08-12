@@ -24,7 +24,6 @@ function filterMapFiles(src) {
 
 function uploadSentrySourceMaps(project, release) {
   shell(`${sentryPath} releases -p ${project} new ${release}`);
-  shell(`${sentryPath} releases -p ${project} files ${release} delete --all`);
   // eslint-disable-next-line max-len
   shell(`${sentryPath} releases -p ${project} files ${release} upload-sourcemaps --no-rewrite --url-prefix '/' ./build/assets/js`);
 }

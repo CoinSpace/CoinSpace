@@ -67,6 +67,7 @@ before_script:
   echo $GOOGLE_CLOUD_KEY_FILE | base64 --decode > gcloud.key.json;
 
   if [[ "$DISTRIBUTION" == "mac" || "$DISTRIBUTION" == "mas" || "$DISTRIBUTION" == "mas-dev" ]]; then
+    export SENTRY_DSN=${SENTRY_DSN_MAC}
     echo $CERTIFICATE_MAC | base64 --decode > certificate.p12;
     security create-keychain -p travis build.keychain;
     security default-keychain -s build.keychain;
@@ -77,16 +78,20 @@ before_script:
     security set-key-partition-list -S apple-tool:,apple: -s -k travis build.keychain 2>&1 >/dev/null;
     rm certificate.p12;
     if [[ "$DISTRIBUTION" == "mas" ]]; then
+      export SENTRY_DSN=${SENTRY_DSN_MAS}
       echo $PROVISIONING_DISTRIBUTION | base64 --decode > electron/embedded.provisionprofile;
     fi
     if [[ "$DISTRIBUTION" == "mas-dev" ]]; then
+      export SENTRY_DSN=${SENTRY_DSN_MAS}
       echo $PROVISIONING_DEVELOPMENT | base64 --decode > electron/embedded.provisionprofile;
     fi
   elif [[ "$DISTRIBUTION" == "snap" ]]; then
+    export SENTRY_DSN=${SENTRY_DSN_SNAP}
     # https://github.com/electron-userland/electron-builder/pull/5001
     sed -i'.backup' -e 's/await this.helper.writeDesktopEntry(this.options, packager.executableName, desktopFile, {/await this.helper.writeDesktopEntry(this.options, packager.executableName + " %U", desktopFile, {/g' electron/node_modules/app-builder-lib/out/targets/snap.js;
     echo "$SNAP_TOKEN" | snapcraft login --with -;
   elif [[ "$DISTRIBUTION" == "ios" ]]; then
+    export SENTRY_DSN=${SENTRY_DSN_IOS}
     echo $CERTIFICATE_DISTRIBUTION | base64 --decode > certificate.p12;
     security create-keychain -p travis build.keychain;
     security default-keychain -s build.keychain;
@@ -101,6 +106,7 @@ before_script:
     echo $PROVISIONING_IOS_WATCH_APP | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.watchapp.mobileprovision;
     echo $PROVISIONING_IOS_WATCH_APP_EXTENSION | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.watchapp.extension.mobileprovision;
   elif [[ "$DISTRIBUTION" == "android" ]]; then
+    export SENTRY_DSN=${SENTRY_DSN_ANDROID}
     echo $ANDROID_RELEASE_KEYSTORE | base64 --decode > phonegap/release.keystore;
   fi
 - (cd ${BUILD_TYPE} && npm version $(node -p -e "require('../package.json').version"))

@@ -99,15 +99,18 @@ const config = merge(common, {
     new ExtractTextPlugin({
       filename: 'assets/css/all.[contenthash:8].css',
       allChunks: true,
-    }),
-    new CopyWebpackPlugin([
-      {
-        from: `app/apple-developer-merchantid-domain-association.${process.env.ENV}.txt`,
-        to: '.well-known/apple-developer-merchantid-domain-association.txt',
-      },
-    ]),
+    })
   ],
 });
+
+if (process.env.ENV === 'dev' || process.env.ENV === 'prod') {
+  config.plugins.push(new CopyWebpackPlugin([
+    {
+      from: `app/apple-developer-merchantid-domain-association.${process.env.ENV}.txt`,
+      to: '.well-known/apple-developer-merchantid-domain-association.txt',
+    },
+  ]));
+}
 
 if (process.env.BUILD_TYPE === 'phonegap') {
   var htmlPlugin = config.plugins.find(function(plugin) {

@@ -24,7 +24,7 @@ module.exports = merge(common, {
     port: 8000,
     proxy: {
       '/api': {
-        target: 'http://localhost:' + JSON.parse(dotEnv.definitions['process.env.PORT']),
+        target: 'http://localhost:8080',
         pathRewrite: {
           '^/api/v1' : '/api/v1',
           '^/api' : '',
@@ -65,7 +65,7 @@ module.exports = merge(common, {
     new webpack.DefinePlugin({
       'process.env.BUILD_TYPE': JSON.stringify('web'),
       'process.env.SENTRY_RELEASE': JSON.stringify(`${pkg.name}.web@${pkg.version}`),
-      'process.env.SENTRY_DSN': dotEnv.definitions['process.env.SENTRY_DSN_WEB'],
+      'process.env.SENTRY_DSN': dotEnv.definitions['process.env.SENTRY_DSN'],
     }),
   ],
 });

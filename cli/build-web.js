@@ -15,11 +15,9 @@ program
   .option('--release', 'release mode')
   .parse(process.argv);
 
-var currentDockerMachine = process.env.DOCKER_MACHINE_NAME ? process.env.DOCKER_MACHINE_NAME : 'local';
 var envFile = `.env.${program.env}`;
 dotenv.config({ path: envFile });
 console.log(`ENV_FILE: ${warning(envFile)}`);
-console.log(`DOCKER MACHINE: ${warning(currentDockerMachine)}`);
 console.log('Start building (webpack)...');
 
 process.env['ENV_FILE'] = envFile;
@@ -32,7 +30,7 @@ webpackConfig.plugins.push(
   new webpack.DefinePlugin({
     'process.env.BUILD_TYPE': JSON.stringify('web'),
     'process.env.SENTRY_RELEASE': JSON.stringify(SENTRY_RELEASE),
-    'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN_WEB),
+    'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN),
   })
 );
 

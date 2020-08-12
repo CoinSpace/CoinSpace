@@ -41,7 +41,7 @@ webpackConfig.plugins.push(
     'process.env.BUILD_TYPE': JSON.stringify('electron'),
     // use mas app for mas-dev build
     'process.env.BUILD_PLATFORM': JSON.stringify(program.platform === 'mas-dev' ? 'mas' : program.platform),
-    'process.env.SENTRY_DSN': JSON.stringify(process.env[`SENTRY_DSN_${program.platform.toUpperCase()}`]),
+    'process.env.SENTRY_DSN': JSON.stringify(process.env['SENTRY_DSN']),
     'process.env.SENTRY_RELEASE': JSON.stringify(`${pkg.name}.electron-${program.platform}@${pkg.version}`),
   })
 );

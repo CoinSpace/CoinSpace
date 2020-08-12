@@ -8,7 +8,7 @@ Thumbs.db:encryptable
 .idea
 /phonegap/build.json
 /phonegap/release.keystore
-/.env.*
+.env.*
 !.env.example
 !.env.defaults
 docker-compose.dev.yml
@@ -16,6 +16,5 @@ docker-compose.prod.yml
 .vscode/
 electron/app
 electron/out
-.sentryclirc
 *.provisionprofile
 *.pfx
