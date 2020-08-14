@@ -79,8 +79,7 @@ const config = merge(common, {
     new Dotenv({
       path: envFile,
       safe: true,
-      // Use system envirinment variables on CI
-      systemvars: !!process.env.CI
+      systemvars: true
     }),
     new UglifyJSPlugin({
       sourceMap: true,
