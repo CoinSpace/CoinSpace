@@ -146,6 +146,9 @@ module.exports = function(el){
           } else if (wallet.networkName === 'stellar' || wallet.networkName === 'eos') {
             ractive.find('#memo').value = '';
           }
+          if (ractive.get('BUILD_TYPE') === 'phonegap') {
+            cordova.plugins.InAppReview.requestReviewDialog();
+          }
         }
       }
 

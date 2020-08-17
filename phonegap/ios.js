@@ -39,6 +39,7 @@ async function run() {
   cordova('plugin add cordova-plugin-cookiemaster@1.0.5');
   cordova('plugin add cordova-plugin-3dtouch-shortcutitems@1.0.2');
   cordova('plugin add cordova-plugin-safariviewcontroller@1.6.0');
+  cordova('plugin add cordova-plugin-inapp-review@1.1.0');
 
   var orientations = {
     'UISupportedInterfaceOrientations': [

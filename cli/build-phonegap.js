@@ -9,6 +9,7 @@ const utils = require('./utils');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
 const mobileBuildPath = 'phonegap/build';
+const cordova = utils.cordova(mobileBuildPath);
 
 program
   .name('build-phonegap.js')
@@ -19,7 +20,7 @@ program
   .parse(process.argv);
 
 if (program.run && program.platform === 'android') {
-  return utils.cordova('run android --noprepare');
+  return cordova('run android --noprepare');
 }
 
 console.log('Start building (webpack)...');
