@@ -132,7 +132,9 @@ async function remove(id) {
     db().collection('devices').deleteMany({ wallet_id: device.wallet_id }),
     db().collection('details').deleteOne({ _id: device.wallet_id }),
   ]);
-  return true;
+  return {
+    success: true,
+  };
 }
 
 async function firstAttestationOptions(id) {

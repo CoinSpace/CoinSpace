@@ -12,6 +12,8 @@ const router = express.Router();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWE_SECRET = process.env.JWE_SECRET;
+const JWT_EXPIRES_WALLET = '1 hour';
+const JWT_EXPIRES_SECOND = '10 min';
 
 function getJWT(id, audience, expiresIn) {
   return jose.JWE.encrypt(jose.JWT.sign({
@@ -55,7 +57,7 @@ new OpenApiValidator({
       const info = await device.register(req.body.wallet, req.body.pin);
       console.log('registered wallet %s', info.id);
       const login = getJWT(info.id, 'login');
-      const jwt = getJWT(info.id, 'wallet', '5 min');
+      const jwt = getJWT(info.id, 'wallet', JWT_EXPIRES_WALLET);
       res.status(201).send({
         login,
         jwt,
@@ -68,14 +70,14 @@ new OpenApiValidator({
 
       if (info.second === true) {
         console.log('authenticated first factor wallet %s', info.id);
-        const jwt = getJWT(info.id, 'second', '5 min');
+        const jwt = getJWT(info.id, 'second', JWT_EXPIRES_SECOND);
         res.status(200).send({
           second: true,
           jwt,
         });
       } else {
         console.log('authenticated wallet %s', info.id);
-        const jwt = getJWT(info.id, 'wallet', '5 min');
+        const jwt = getJWT(info.id, 'wallet', JWT_EXPIRES_WALLET);
         res.status(200).send({
           jwt,
         });
@@ -85,7 +87,7 @@ new OpenApiValidator({
     router.get('/token', asyncWrapper(async (req, res) => {
       const info = await device.token(req.deviceId);
       console.log('got token wallet %s', info.id);
-      const jwt = getJWT(info.id, 'wallet', '5 min');
+      const jwt = getJWT(info.id, 'wallet', JWT_EXPIRES_WALLET);
       res.status(200).send({
         token: info.token,
         jwt,
@@ -94,7 +96,7 @@ new OpenApiValidator({
 
     router.get('/details', asyncWrapper(async (req, res) => {
       const data = await device.getDetails(req.deviceId);
-      const jwt = getJWT(req.deviceId, 'wallet', '5 min');
+      const jwt = getJWT(req.deviceId, 'wallet', JWT_EXPIRES_WALLET);
       res.status(200).send({
         data,
         jwt,
@@ -103,7 +105,7 @@ new OpenApiValidator({
 
     router.put('/details', asyncWrapper(async (req, res) => {
       const data = await device.setDetails(req.deviceId, req.body.data);
-      const jwt = getJWT(req.deviceId, 'wallet', '5 min');
+      const jwt = getJWT(req.deviceId, 'wallet', JWT_EXPIRES_WALLET);
       res.status(200).send({
         data,
         jwt,
@@ -112,7 +114,7 @@ new OpenApiValidator({
 
     router.put('/username', asyncWrapper(async (req, res) => {
       const username = await device.setUsername(req.deviceId, req.body.username);
-      const jwt = getJWT(req.deviceId, 'wallet', '5 min');
+      const jwt = getJWT(req.deviceId, 'wallet', JWT_EXPIRES_WALLET);
       res.status(200).send({
         username,
         jwt,
@@ -120,20 +122,30 @@ new OpenApiValidator({
     }));
 
     router.delete('/account', asyncWrapper(async (req, res) => {
-      const success = await device.remove(req.deviceId);
+      const info = await device.remove(req.deviceId);
+      const jwt = getJWT(req.deviceId, 'wallet', JWT_EXPIRES_WALLET);
       res.status(200).send({
-        success,
+        ...info,
+        jwt,
       });
     }));
 
     router.get('/first/attestation', asyncWrapper(async (req, res) => {
       const options = await device.firstAttestationOptions(req.deviceId);
-      res.status(200).send(options);
+      const jwt = getJWT(req.deviceId, 'wallet', JWT_EXPIRES_WALLET);
+      res.status(200).send({
+        ...options,
+        jwt,
+      });
     }));
 
     router.post('/first/attestation', asyncWrapper(async (req, res) => {
       const info = await device.firstAttestationVerify(req.deviceId, req.body);
-      res.status(200).send(info);
+      const jwt = getJWT(req.deviceId, 'wallet', JWT_EXPIRES_WALLET);
+      res.status(200).send({
+        ...info,
+        jwt,
+      });
     }));
 
     router.get('/first/assertion', asyncWrapper(async (req, res) => {
@@ -145,13 +157,13 @@ new OpenApiValidator({
       const info = await device.firstAssertionVerify(req.deviceId, req.body);
 
       if (info.second === true) {
-        const jwt = getJWT(info.id, 'second', '5 min');
+        const jwt = getJWT(info.id, 'second', JWT_EXPIRES_SECOND);
         res.status(200).send({
           second: true,
           jwt,
         });
       } else {
-        const jwt = getJWT(info.id, 'wallet', '5 min');
+        const jwt = getJWT(info.id, 'wallet', JWT_EXPIRES_WALLET);
         res.status(200).send({
           jwt,
         });
@@ -160,12 +172,20 @@ new OpenApiValidator({
 
     router.get('/second/attestation', asyncWrapper(async (req, res) => {
       const options = await device.secondAttestationOptions(req.deviceId);
-      res.status(200).send(options);
+      const jwt = getJWT(req.deviceId, 'wallet', JWT_EXPIRES_WALLET);
+      res.status(200).send({
+        ...options,
+        jwt,
+      });
     }));
 
     router.post('/second/attestation', asyncWrapper(async (req, res) => {
       const info = await device.secondAttestationVerify(req.deviceId, req.body);
-      res.status(200).send(info);
+      const jwt = getJWT(req.deviceId, 'wallet', JWT_EXPIRES_WALLET);
+      res.status(200).send({
+        ...info,
+        jwt,
+      });
     }));
 
     router.get('/second/assertion', asyncWrapper(async (req, res) => {
@@ -175,7 +195,7 @@ new OpenApiValidator({
 
     router.post('/second/assertion', asyncWrapper(async (req, res) => {
       const info = await device.secondAssertionVerify(req.deviceId, req.body);
-      const jwt = getJWT(info.id, 'wallet', '5 min');
+      const jwt = getJWT(info.id, 'wallet', JWT_EXPIRES_WALLET);
       res.status(200).send({
         jwt,
       });
