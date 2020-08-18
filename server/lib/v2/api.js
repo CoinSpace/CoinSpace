@@ -53,8 +53,11 @@ new OpenApiValidator({
 
     router.post('/register', asyncWrapper(async (req, res) => {
       const info = await device.register(req.body.wallet, req.body.pin);
-      const jwt = getJWT(info.id, 'login');
+      console.log('registered wallet %s', info.id);
+      const login = getJWT(info.id, 'login');
+      const jwt = getJWT(info.id, 'wallet', '5 min');
       res.status(201).send({
+        login,
         jwt,
         token: info.token,
       });
@@ -64,12 +67,14 @@ new OpenApiValidator({
       const info = await device.login(req.deviceId, req.body.pin);
 
       if (info.second === true) {
+        console.log('authenticated first factor wallet %s', info.id);
         const jwt = getJWT(info.id, 'second', '5 min');
         res.status(200).send({
           second: true,
           jwt,
         });
       } else {
+        console.log('authenticated wallet %s', info.id);
         const jwt = getJWT(info.id, 'wallet', '5 min');
         res.status(200).send({
           jwt,
@@ -78,10 +83,11 @@ new OpenApiValidator({
     }));
 
     router.get('/token', asyncWrapper(async (req, res) => {
-      const token = await device.token(req.deviceId);
-      const jwt = getJWT(req.deviceId, 'wallet', '5 min');
+      const info = await device.token(req.deviceId);
+      console.log('got token wallet %s', info.id);
+      const jwt = getJWT(info.id, 'wallet', '5 min');
       res.status(200).send({
-        token,
+        token: info.token,
         jwt,
       });
     }));

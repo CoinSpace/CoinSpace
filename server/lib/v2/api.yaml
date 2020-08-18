@@ -35,11 +35,16 @@ paths:
               schema:
                 type: object
                 properties:
+                  login:
+                    description: Login JWT
+                    type: string
                   jwt:
+                    description: Wallet JWT
                     type: string
                   token:
                     type: string
                 required:
+                  - login
                   - jwt
                   - token
         default:
@@ -132,6 +137,8 @@ paths:
               properties:
                 data:
                   description: User details
+                  type: string
+                jwt:
                   type: string
               required:
                 - data

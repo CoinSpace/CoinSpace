@@ -31,6 +31,10 @@ emitter.on('handleOpenURL', function(url) {
   }
 });
 
+emitter.on('wallet-reset', () => {
+  cleanAccessToken();
+});
+
 function init() {
   return request({
     url: 'https://api.moonpay.io/v3/ip_address',

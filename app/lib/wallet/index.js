@@ -8,30 +8,32 @@ const utils = require('./utils');
 const walletDb = require('./db');
 const emitter = require('lib/emitter');
 const crypto = require('crypto');
-const AES = require('lib/aes');
+const encryption = require('lib/encryption');
 const denomination = require('lib/denomination');
 const CsWallet = require('cs-wallet');
 const validateSend = require('./validator');
-const rng = require('secure-random').randomBuffer;
 const request = require('lib/request');
 const EthereumWallet = require('cs-ethereum-wallet');
 const RippleWallet = require('cs-ripple-wallet');
 const StellarWallet = require('cs-stellar-wallet');
 const EOSWallet = require('cs-eos-wallet');
 const convert = require('lib/convert');
-const getToken = require('lib/token').getToken;
-const setToken = require('lib/token').setToken;
+const {
+  getToken,
+  getTokenNetwork,
+  setToken,
+} = require('lib/token');
 const db = require('lib/db');
 const _ = require('lodash');
 const HDKey = require('hdkey');
 const Buffer = require('safe-buffer').Buffer;
 const bchaddr = require('bchaddrjs');
 
-let wallet = null;
-let seed = null;
-let mnemonic = null;
-let id = null;
-let availableTouchId = false;
+const state = {
+  wallet: null,
+  seed: null,
+  id: null,
+};
 
 const Wallet = {
   bitcoin: CsWallet,
@@ -62,105 +64,112 @@ const names = {
 
 const urlRoot = window.urlRoot;
 
-function createWallet(passphrase, network, callback) {
+function createWallet(passphrase) {
   const data = { passphrase };
-  if (!passphrase) {
-    data.entropy = rng(128 / 8).toString('hex');
-  }
 
-  worker.onmessage = function(e) {
-    assignSeedAndId(e.data.seed);
+  return new Promise((resolve, reject) => {
+    worker.onmessage = function(event) {
+      walletDb.setKey(event.data.key);
+      assignSeedAndId(event.data.seed);
+      resolve({ mnemonic: event.data.mnemonic });
+    };
 
-    mnemonic = e.data.mnemonic;
-    auth.exist(id, function(err, userExists) {
-      if (err) return callback(err);
+    worker.onerror = function(event) {
+      event.preventDefault();
+      reject(new Error(event.message.split(': ')[1]));
+    };
 
-      callback(null, { userExists, mnemonic });
-    });
-  };
-
-  worker.onerror = function(e) {
-    e.preventDefault();
-    return callback({ message: e.message.split(': ')[1] });
-  };
-
-  worker.postMessage(data);
-}
-
-function setPin(pin, network, done) {
-  auth.register(id, pin, function(err, token) {
-    if (err) return done(err);
-
-    savePin(pin);
-    walletDb.saveEncrypedSeed(id, AES.encrypt(seed, token));
-
-    emitter.emit('wallet-opening', 'Synchronizing Wallet');
-    emitter.emit('db-init');
-
-    emitter.once('db-ready', function(err) {
-      if (err) return done(err);
-      initWallet(network, done);
-    });
+    worker.postMessage(data);
   });
 }
 
-function removeAccount(callback) {
-  auth.remove(id, callback);
+function migrateWallet(pin) {
+  const key = crypto.randomBytes(32).toString('hex');
+  walletDb.setKey(key);
+
+  return registerWallet(pin);
 }
 
-function setUsername(username, callback) {
-  auth.setUsername(id, username, callback);
+function registerWallet(pin) {
+  const key = walletDb.getKey();
+  const hash = encryption.sha256pin(pin, key);
+
+  return auth.register(state.id, hash)
+    .then(({ login, token }) => {
+      walletDb.setSeed(state.seed, token);
+      walletDb.setLoginJWT(login);
+    });
 }
 
-function openWalletWithPin(pin, network, done) {
+async function loginWithPin(pin) {
+  const key = walletDb.getKey();
+  const hash = encryption.sha256pin(pin, key);
+
+  const { second } = await auth.login(walletDb.getLoginJWT(), hash);
+
+  if (second) {
+    console.log('need second factor!');
+    // TODO implement
+  } else {
+    return _openWallet();
+  }
+}
+
+async function loginWithFido() {
+  // TODO implement
+}
+
+function _openWallet() {
+  return auth.token()
+    .then(({ token }) => {
+      assignSeedAndId(walletDb.getSeed(token));
+    });
+}
+
+function removeAccount() {
+  return auth.remove(state.id);
+}
+
+function setUsername(username) {
+  return auth.setUsername(username);
+}
+
+// DEPRECATED
+function openWalletWithPinDEPRECATED(pin, network, done) {
   const credentials = walletDb.getCredentials();
   const id = credentials.id;
   const encryptedSeed = credentials.seed;
-  auth.login(id, pin, function(err, token) {
+  auth.loginDEPRECATED(id, pin, function(err, token) {
     if (err) {
       if (err.message === 'user_deleted') {
         walletDb.deleteCredentials();
       }
       return done(err);
     }
-
-    savePin(pin);
-    assignSeedAndId(AES.decrypt(encryptedSeed, token));
-
-    emitter.emit('wallet-opening', 'Synchronizing Wallet');
-    emitter.emit('db-init');
-
-    emitter.once('db-ready', function(err) {
-      if (err) return done(err);
-      initWallet(network, done);
-    });
+    assignSeedAndId(encryption.decrypt(encryptedSeed, token));
+    done();
   });
 }
 
-function savePin(pin) {
-  if (availableTouchId) window.localStorage.setItem('_pin_cs', AES.encrypt(pin, 'pinCoinSpace'));
-}
-
-function setAvailableTouchId() {
-  availableTouchId = true;
-}
-
-function getPin() {
+// DEPRECATED
+function getPinDEPRECATED() {
   const pin = window.localStorage.getItem('_pin_cs');
-  return pin ? AES.decrypt(pin, 'pinCoinSpace') : null;
+  return pin ? encryption.decrypt(pin, 'pinCoinSpace') : null;
 }
-
-function resetPin() {
+// DEPRECATED
+function resetPinDEPRECATED() {
   window.localStorage.removeItem('_pin_cs');
 }
 
-function assignSeedAndId(_seed) {
-  seed = _seed;
-  id = crypto.createHash('sha256').update(seed).digest('hex');
-  emitter.emit('wallet-init', { seed, id });
+function assignSeedAndId(seed) {
+  const id = crypto.createHash('sha256').update(seed).digest('hex');
+  state.seed = seed;
+  state.id = id;
+  emitter.emit('wallet-init', { seed });
 }
 
-function initWallet(networkName, done) {
+function initWallet() {
+  const networkName = getTokenNetwork();
   let token = getToken();
   if (!isValidWalletToken(token)) {
     setToken(networkName);
@@ -169,16 +178,21 @@ function initWallet(networkName, done) {
 
   const options = {
     networkName,
-    done,
+    done(err) {
+      if (err) {
+        return emitter.emit('wallet-error', err);
+      }
+      emitter.emit('wallet-ready');
+    },
   };
 
   if (networkName === 'ethereum') {
-    options.seed = seed;
+    options.seed = state.seed;
     options.minConf = 12;
     options.token = token;
     convert.setDecimals(token ? token.decimals : 18);
   } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(networkName) !== -1) {
-    options.hdkey = HDKey.fromMasterSeed(new Buffer(seed, 'hex'));
+    options.hdkey = HDKey.fromMasterSeed(new Buffer(state.seed, 'hex'));
     options.minConf = 3;
     options.addressType = db.get(networkName + '.addressType') || 'p2pkh';
     if (networkName === 'bitcoincash') {
@@ -198,13 +212,13 @@ function initWallet(networkName, done) {
     };
     convert.setDecimals(8);
   } else if (networkName === 'ripple') {
-    options.seed = seed;
+    options.seed = state.seed;
     convert.setDecimals(0);
   } else if (networkName === 'stellar') {
-    options.seed = seed;
+    options.seed = state.seed;
     convert.setDecimals(0);
   } else if (networkName === 'eos') {
-    options.seed = seed;
+    options.seed = state.seed;
     options.accountName = db.get('eosAccountName') || '';
     if (process.env.NODE_ENV === 'development') {
       options.chainId = 'e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473';
@@ -212,9 +226,9 @@ function initWallet(networkName, done) {
     convert.setDecimals(0);
   }
 
-  wallet = new Wallet[networkName](options);
-  wallet.denomination = token ? denomination(token) : denomination(networkName);
-  wallet.name = names[wallet.denomination] || wallet.denomination;
+  state.wallet = new Wallet[networkName](options);
+  state.wallet.denomination = token ? denomination(token) : denomination(networkName);
+  state.wallet.name = names[state.wallet.denomination] || state.wallet.denomination;
 }
 
 function isValidWalletToken(token) {
@@ -227,7 +241,7 @@ function isValidWalletToken(token) {
 }
 
 function parseHistoryTx(tx) {
-  const networkName = wallet.networkName;
+  const networkName = state.wallet.networkName;
   if (networkName === 'ethereum') {
     return utils.parseEthereumTx(tx);
   } else if (networkName === 'ripple') {
@@ -241,36 +255,49 @@ function parseHistoryTx(tx) {
   }
 }
 
-function sync(done) {
-  initWallet(wallet.networkName, done);
+function sync() {
+  initWallet(state.wallet.networkName);
 }
 
 function getWallet() {
-  return wallet;
+  return state.wallet;
 }
 
 function getId() {
-  return id;
+  return state.id;
 }
 
-function walletExists() {
+// DEPRECATED
+function walletExistsDEPRECATED() {
   return !!walletDb.getCredentials();
+}
+
+// DEPRECATED
+function deleteCredentialsDEPRECATED() {
+  walletDb.deleteCredentials();
+}
+
+function walletRegistered() {
+  return walletDb.isRegistered();
 }
 
 function reset() {
   walletDb.deleteCredentials();
+  walletDb.reset();
+  emitter.emit('wallet-reset');
+  resetPinDEPRECATED();
 }
 
 function getDestinationInfo(to) {
-  if (wallet.networkName === 'ripple' || wallet.networkName === 'stellar') {
-    return wallet.getDestinationInfo(to);
+  if (state.wallet.networkName === 'ripple' || state.wallet.networkName === 'stellar') {
+    return state.wallet.getDestinationInfo(to);
   } else {
     return Promise.resolve();
   }
 }
 
 function setToAlias(data) {
-  if (wallet.networkName !== 'bitcoincash') return;
+  if (state.wallet.networkName !== 'bitcoincash') return;
   try {
     const legacy = bchaddr.toLegacyAddress(data.to);
     if (legacy !== data.to) {
@@ -281,23 +308,36 @@ function setToAlias(data) {
   } catch (e) {}
 }
 
+emitter.on('db-ready', () => {
+  initWallet();
+});
+
+emitter.on('db-error', (err) => {
+  emitter.emit('wallet-error', err);
+});
+
 module.exports = {
-  openWalletWithPin,
+  openWalletWithPinDEPRECATED,
   createWallet,
-  setPin,
+  //setPin,
+  registerWallet,
+  migrateWallet,
+  loginWithPin,
+  loginWithFido,
   removeAccount,
   setUsername,
   getWallet,
   getId,
-  walletExists,
+  walletExistsDEPRECATED,
+  deleteCredentialsDEPRECATED,
+  walletRegistered,
   reset,
   sync,
   initWallet,
   validateSend,
   parseHistoryTx,
-  getPin,
-  resetPin,
-  setAvailableTouchId,
+  getPinDEPRECATED,
+  resetPinDEPRECATED,
   getDestinationInfo,
   setToAlias,
 };

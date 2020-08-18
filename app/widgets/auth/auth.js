@@ -2,10 +2,6 @@
 
 const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
-const { showError } = require('widgets/modals/flash');
-const { getTokenNetwork } = require('lib/token');
-const { setToken } = require('lib/token');
-const { onSyncDoneWrapper } = require('lib/wallet/utils');
 
 const Auth = Ractive.extend({
   el: document.getElementById("auth"),
@@ -26,31 +22,6 @@ const Auth = Ractive.extend({
     this.on('teardown', () => {
       emitter.removeAllListeners('wallet-opening');
     });
-
-    this.onSyncDone = onSyncDoneWrapper({
-      before: () => {
-        console.log('before opening');
-        this.set('opening', false);
-      },
-      complete: () => {
-        window.scrollTo(0, 0);
-      },
-      fail: (err) => {
-        setToken(getTokenNetwork()); // fix wrong tokens
-        if (err.message === 'user_deleted') {
-          return location.reload();
-        }
-
-        emitter.emit('clear-pin');
-
-        if (err.message === 'auth_failed') {
-          return showError({ message: 'Your PIN is incorrect' });
-        }
-        console.error(err);
-        return showError({ message: err.message });
-      },
-    });
-    this.getTokenNetwork = getTokenNetwork;
   },
 });
 

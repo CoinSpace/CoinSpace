@@ -21,6 +21,10 @@ emitter.on('handleOpenURL', function(url) {
   hasHandledMobileLogin = true;
 });
 
+emitter.on('wallet-reset', () => {
+  cleanAccessToken();
+});
+
 function isLogged() {
   return !!getAccessToken();
 }

@@ -3,51 +3,65 @@ const request = require('lib/request');
 const db = require('lib/db');
 const urlRoot = window.urlRoot;
 
-function register(walletId, pin, callback) {
-  postCredentials('v1/register', { wallet_id: walletId, pin }, callback);
+function register(walletId, pin) {
+  return request({
+    jwt: false,
+    url: `${urlRoot}v2/register`,
+    method: 'post',
+    data: {
+      wallet: walletId,
+      pin,
+    },
+  });
 }
 
-function login(walletId, pin, callback) {
+// DEPRECATED
+function loginDEPRECATED(walletId, pin, callback) {
   postCredentials('v1/login', { wallet_id: walletId, pin }, callback);
 }
 
-function exist(walletId, callback) {
-  request({
-    url: urlRoot + 'v1/exist?wallet_id=' + walletId,
-  }, callback);
-}
-
-function remove(walletId, callback) {
-  request({
-    url: urlRoot + 'v1/account',
-    method: 'delete',
+function login(jwt, pin) {
+  return request({
+    jwt,
+    url: `${urlRoot}v2/login`,
+    method: 'post',
     data: {
-      id: walletId,
+      pin,
     },
-  }, callback);
+  });
 }
 
-function setUsername(walletId, username, callback) {
+function token() {
+  return request({
+    url: `${urlRoot}v2/token`,
+    method: 'get',
+  });
+}
+
+function remove() {
+  return request({
+    url: `${urlRoot}v2/account`,
+    method: 'delete',
+  });
+}
+
+function setUsername(username) {
   const userInfo = db.get('userInfo');
   const oldUsername = (userInfo.firstName || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
-  username = (username || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
+  const newUsername = (username || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
 
-  if (username == oldUsername) {
-    return callback(null, userInfo.firstName);
+  if (newUsername === oldUsername) {
+    return Promise.resolve(userInfo.firstName);
   }
 
-  request({
-    url: urlRoot + 'v1/username',
+  return request({
+    url: `${urlRoot}v2/username`,
     method: 'put',
     data: {
-      id: walletId,
-      username,
+      username: newUsername,
     },
-  }, function(err, data) {
-    if (err) {
-      return callback(err);
-    }
-    return callback(null, data.username);
+  }).then((data) => {
+    return data.username;
   });
 }
 
@@ -61,8 +75,9 @@ function postCredentials(endpoint, data, callback) {
 
 module.exports = {
   register,
+  loginDEPRECATED,
   login,
-  exist,
+  token,
   remove,
   setUsername,
 };

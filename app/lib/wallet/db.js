@@ -1,25 +1,64 @@
 'use strict';
-const AES = require('lib/aes');
+const encryption = require('lib/encryption');
 
-function saveEncrypedSeed(id, encryptedSeed) {
-  const data = {
-    id,
-    seed: encryptedSeed,
-  };
-  window.localStorage.setItem('_cs_credentials', AES.encrypt(JSON.stringify(data), 'seedCoinspace'));
+function setKey(key) {
+  window.localStorage.setItem('_cs_key', key);
 }
 
+function getKey() {
+  return window.localStorage.getItem('_cs_key');
+}
+
+function setSeed(seed, token) {
+  window.localStorage.setItem('_cs_seed', encryption.encrypt(seed, token));
+}
+
+function getSeed(token) {
+  return encryption.decrypt(window.localStorage.getItem('_cs_seed'), token);
+}
+
+function setLoginJWT(jwt) {
+  window.localStorage.setItem('_cs_login', jwt);
+}
+
+function getLoginJWT() {
+  return window.localStorage.getItem('_cs_login');
+}
+
+// DEPRECATED
 function getCredentials() {
   const credentials = window.localStorage.getItem('_cs_credentials');
-  return credentials ? JSON.parse(AES.decrypt(credentials, 'seedCoinspace')) : null;
+  return credentials ? JSON.parse(encryption.decrypt(credentials, 'seedCoinspace')) : null;
 }
 
+// DEPRECATED
 function deleteCredentials() {
   window.localStorage.removeItem('_cs_credentials');
 }
 
+function isRegistered() {
+  return !!window.localStorage.getItem('_cs_login')
+    && !!window.localStorage.getItem('_cs_seed')
+    && !!window.localStorage.getItem('_cs_key');
+}
+
+function reset() {
+  window.localStorage.removeItem('_cs_login');
+  window.localStorage.removeItem('_cs_seed');
+  window.localStorage.removeItem('_cs_key');
+}
+
 module.exports = {
-  saveEncrypedSeed,
+  // DEPRECATED
   getCredentials,
+  // DEPRECATED
   deleteCredentials,
+  isRegistered,
+  setKey,
+  getKey,
+  setSeed,
+  getSeed,
+  setLoginJWT,
+  getLoginJWT,
+  reset,
 };

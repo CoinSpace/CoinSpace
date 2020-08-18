@@ -7,7 +7,7 @@ const { showError } = require('widgets/modals/flash');
 const emitter = require('lib/emitter');
 const Avatar = require('lib/avatar');
 const db = require('lib/db');
-const { setUsername } = require('lib/wallet');
+const CS = require('lib/wallet');
 const showRemoveConfirmation = require('widgets/modals/confirm-remove-account');
 
 module.exports = function init(el) {
@@ -42,7 +42,7 @@ module.exports = function init(el) {
 
   emitter.once('wallet-ready', () => {
     const userInfo = db.get('userInfo');
-    ractive.set('user', userInfo);
+    ractive.set('user', Object.assign({}, userInfo));
     setAvatar();
 
     if (ractive.get('user.firstName')) {
@@ -92,24 +92,25 @@ module.exports = function init(el) {
 
     ractive.set('submitting', true);
 
-    setUsername(details.firstName, (err, username) => {
-      if (err) {
+    CS.setUsername(details.firstName)
+      .then((username) => {
+        details.firstName = username;
+
+        db.set('userInfo', details).then(() => {
+          ractive.set('submitting', false);
+          emitter.emit('details-updated', details);
+          setAvatar();
+        }).catch(() => {
+          handleUserError();
+        });
+      })
+      .catch((err) => {
         ractive.set('submitting', false);
-        if (err.message === 'username_exists') return showError({ message: "Username not available" });
+        if (err.status === 400) {
+          return showError({ message: "Username not available" });
+        }
         return console.error(err);
-      }
-
-      details.firstName = username;
-
-      db.set('userInfo', details).then(() => {
-        ractive.set('submitting', false);
-        emitter.emit('details-updated', details);
-        setAvatar();
-      }).catch(() => {
-        handleUserError();
       });
-
-    });
   });
 
   ractive.on('remove-account', () => {

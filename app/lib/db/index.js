@@ -2,29 +2,28 @@
 
 const emitter = require('lib/emitter');
 const _ = require('lodash');
-const AES = require('lib/aes');
+const { encrypt, decrypt } = require('lib/encryption');
 const { randAvatarIndex } = require('lib/avatar');
-const encrypt = AES.encrypt;
-const decrypt = AES.decrypt;
 
 const request = require('lib/request');
 const urlRoot = window.urlRoot;
 
-let id = null;
-let secret = null;
-let details = null;
+const state = {
+  secret: null,
+  details: null,
+};
 
 function set(key, value) {
-  if (id === null) return Promise.reject(new Error('wallet not ready'));
-  const data = JSON.parse(decrypt(details, secret));
-  if (data[key] && value && typeof value === 'object' && value.constructor === Object) {
-    _.merge(data[key], value);
+  if (state.details === null) return Promise.reject(new Error('wallet not ready'));
+  if (state.details[key] && value && typeof value === 'object' && value.constructor === Object) {
+    _.merge(state.details[key], value);
   } else {
-    data[key] = value;
+    state.details[key] = value;
   }
-  return save(data).then(function(doc) {
-    details = doc;
-  });
+  return save(state.details)
+    .then((data) => {
+      state.details = data;
+    });
 }
 
 function initDetails() {
@@ -42,43 +41,40 @@ function initDetails() {
 
 function save(data) {
   return request({
-    url: urlRoot + 'v1/details',
+    url: `${urlRoot}v2/details`,
     method: 'put',
     data: {
-      id,
-      data: encrypt(JSON.stringify(data), secret),
+      data: encrypt(JSON.stringify(data), state.secret),
     },
-  });
+  }).then((details) => JSON.parse(decrypt(details.data, state.secret)));
 }
 
 function get(key) {
-  if (id === null) return console.error('wallet not ready');
-  const data = JSON.parse(decrypt(details, secret));
+  if (state.details === null) return console.error('wallet not ready');
   if (!key) {
-    return data;
+    return state.details;
   }
-  return data[key];
+  return state.details[key];
 }
 
 emitter.on('wallet-init', function(data) {
-  secret = data.seed;
-  id = data.id;
+  state.secret = data.seed;
 });
 
-emitter.on('db-init', function() {
+emitter.on('db-init', () => {
   request({
-    url: urlRoot + 'v1/details?id=' + id,
-  }).then(function(doc) {
-    if (!doc) {
+    url: `${urlRoot}v2/details`,
+  }).then((details) => {
+    if (!details.data) {
       return initDetails();
     }
-    return doc;
-  }).then(function(doc) {
-    details = doc;
+    return JSON.parse(decrypt(details.data, state.secret));
+  }).then((data) => {
+    state.details = data;
     emitter.emit('db-ready');
-  }).catch(function(err) {
+  }).catch((err) => {
     console.error(err);
-    emitter.emit('db-ready', err);
+    emitter.emit('db-error', err);
   });
 });
 

@@ -21,12 +21,13 @@ module.exports = function createIntro(prevPage) {
   ractive.on('generate-phrase', () => {
     ractive.set('opening', true);
     ractive.set('progress', 'Generating');
-    CS.createWallet(null, ractive.getTokenNetwork(), (err, data) => {
-      if (err) return showError(err);
-      createPassphrasePage(() => {
-        createIntro(prevPage);
-      }, data);
-    });
+    CS.createWallet(null)
+      .then((data) => {
+        createPassphrasePage(() => {
+          createIntro(prevPage);
+        }, data);
+      })
+      .catch(showError);
   });
 
   return ractive;

@@ -8,14 +8,15 @@ if (process.env.BUILD_TYPE !== 'phonegap' && process.env.BUILD_TYPE !== 'electro
 window.initCSApp = function() {
   const ticker = require('lib/ticker-api');
   const emitter = require('lib/emitter');
-  const { walletExists } = require('lib/wallet');
+  const CS = require('lib/wallet');
   const FastClick = require('fastclick');
   const initFrame = require('widgets/frame');
   const initAuth = require('widgets/auth');
   const initGeoOverlay = require('widgets/geo-overlay');
-  const { getToken } = require('lib/token');
+  const { getToken, setToken, getTokenNetwork } = require('lib/token');
   const denomination = require('lib/denomination');
   const moonpay = require('lib/moonpay');
+  const { showError } = require('widgets/modals/flash');
 
   const { fadeIn } = require('lib/transitions/fade.js');
 
@@ -38,7 +39,9 @@ window.initCSApp = function() {
 
   initGeoOverlay(document.getElementById('geo-overlay'));
 
-  auth = walletExists() ? initAuth.pin(null, { userExists: true }) : initAuth.choose();
+  auth = (CS.walletRegistered() || CS.walletExistsDEPRECATED()) ? initAuth.pin(null, {
+    userExists: true,
+  }) : initAuth.choose();
   const authContentEl = document.getElementById('auth_content');
   authContentEl.style.opacity = 0;
   fadeIn(authContentEl);
@@ -54,13 +57,61 @@ window.initCSApp = function() {
     htmlEl.classList.remove('prevent_scroll');
   });
 
+  emitter.once('auth-success', () => {
+    emitter.emit('wallet-opening', 'Synchronizing Wallet');
+    emitter.emit('db-init');
+  });
+
+  emitter.on('auth-error', (err) => {
+    if (err.status === 410 || err.status === 404) {
+      CS.reset();
+      return location.reload();
+    }
+    if (err.status === 401) {
+      emitter.emit('clear-pin');
+      return showError({ message: 'Your PIN is incorrect' });
+    }
+    // Deprecated start
+    if (err.message === 'user_deleted') {
+      CS.reset();
+      return location.reload();
+    }
+    if (err.message === 'auth_failed') {
+      return showError({ message: 'Your PIN is incorrect' });
+    }
+    // Deprecated end
+    console.error(err);
+    return showError({ message: err.message });
+  });
+
+  emitter.emit('re-enable-touchid', () => {
+    console.log('Suggest re-enable touchid');
+    // TODO implement
+  });
+
   emitter.once('wallet-ready', () => {
+    window.scrollTo(0, 0);
+    emitter.emit('wallet-unblock');
     if (process.env.BUILD_TYPE === 'phonegap') window.Zendesk.setAnonymousIdentity();
     if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.styleLightContent();
     updateExchangeRates();
     moonpay.init();
     auth.hide();
     frame.show();
+  });
+
+  emitter.on('wallet-error', (err) => {
+    if (err && err.message === 'cs-node-error') {
+      emitter.emit('wallet-block');
+      showError({
+        message: "Can't connect to :network node. Please try again later or choose another token.",
+        interpolations: { network: getTokenNetwork() },
+      });
+    } else {
+      console.error(err);
+      setToken(getTokenNetwork()); // fix wrong tokens
+      showError({ message: err.message });
+    }
   });
 
   emitter.on('sync', () => {

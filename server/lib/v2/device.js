@@ -47,7 +47,7 @@ const fidoAlgorithmIDs = [
 async function register(walletId, pin) {
   const collection = db().collection('devices');
 
-  const id = crypto.randomBytes(64).toString('hex');
+  const id = crypto.randomBytes(32).toString('hex');
   const token = crypto.randomBytes(64).toString('hex');
 
   await collection.insertOne({
@@ -88,7 +88,10 @@ async function login(id, pin) {
 
 async function token(id) {
   const device = await _getDevice(id);
-  return device.token;
+  return {
+    id: device._id,
+    token: device.token,
+  };
 }
 
 async function getDetails(id) {

@@ -26,7 +26,17 @@ function enterPassphrase(prevPage) {
     const passphrase = ractive.get('passphrase').toLowerCase().trim();
 
     if (passphrase !== '') {
-      CS.createWallet(passphrase, ractive.getTokenNetwork(), onWalletCreated);
+      CS.createWallet(passphrase)
+        .then((data) => {
+          ractive.set('opening', false);
+          pinPage(() => {
+            enterPassphrase(prevPage);
+          }, data);
+        })
+        .catch((err) => {
+          ractive.set('opening', false);
+          showError(err);
+        });
       ractive.set('opening', true);
       ractive.set('progress', 'Checking passphrase');
     }
@@ -37,18 +47,6 @@ function enterPassphrase(prevPage) {
     ractive.set('passphrase', '');
     passfield.focus();
   });
-
-  function onWalletCreated(err, data) {
-    ractive.set('opening', false);
-
-    if (err) {
-      return showError(err);
-    }
-
-    pinPage(() => {
-      enterPassphrase(prevPage);
-    }, data);
-  }
 
   return ractive;
 }

@@ -6,12 +6,8 @@ const emitter = require('lib/emitter');
 const validatePin = require('lib/pin-validator');
 const { showError } = require('widgets/modals/flash');
 const { translate } = require('lib/i18n');
-const shapeshift = require('lib/shapeshift');
-const moonpay = require('lib/moonpay');
-let pincode = '';
 
-module.exports = function(prevPage, data) {
-  data = data || {};
+module.exports = function(prevPage, data = {}) {
   const userExists = data.userExists;
 
   const ractive = new Ractive({
@@ -29,9 +25,13 @@ module.exports = function(prevPage, data) {
       },
     },
     oncomplete() {
-      initFingerprintAuth().catch(() => {
+      if (CS.getPinDEPRECATED()) {
+        initFingerprintAuth().catch(() => {
+          ractive.find('#setPin').focus();
+        });
+      } else {
         ractive.find('#setPin').focus();
-      });
+      }
     },
   });
 
@@ -43,74 +43,83 @@ module.exports = function(prevPage, data) {
     ractive.set('pinfocused', false);
   });
 
-  function pinCode(pin) {
-    return function() {
-      const pinParts = pin.split('');
-      let pinString = '';
-      for (let i=0; i<pinParts.length; i++) {
-        if ((parseInt(pinParts[i]) || parseInt(pinParts[i]) === 0) && typeof parseInt(pinParts[i]) === 'number') {
-          pinString += pinParts[i];
-        }
-      }
-      pincode = pinString;
-      return pincode;
-    };
-  }
+  ractive.observe('pin', (pin) => {
+    const boxes = pin.split('')
+      .map(part => parseInt(part, 10))
+      .filter(part => !isNaN(part));
 
-  ractive.observe('pin', () => {
-    const pin = ractive.find('#setPin').value;
-    const p = pinCode(pin);
-    const boxes = p().split('');
+    setBoxes(boxes);
 
     if (boxes.length === 4) {
       ractive.find('#setPin').blur();
-      ractive.fire('enter-pin');
+      ractive.fire('enter-pin', {}, boxes);
     } else {
-      setTimeout(() => {
-        ractive.set('pin', pincode);
-      }, 0);
+      ractive.set('pin', boxes.join(''));
     }
-
-    setBoxes(boxes);
   });
 
-  ractive.on('enter-pin', () => {
+  ractive.on('enter-pin', (context, pin) => {
+    // It should never happened
+    if (!validatePin(pin.join(''))) {
+      emitter.emit('clear-pin');
+      return showError({ message: 'PIN must be a 4-digit number' });
+    }
 
-    setTimeout(() => {
+    ractive.set('opening', true);
 
-      if (!validatePin(getPin())) {
-        emitter.emit('clear-pin');
-        return showError({ message: 'PIN must be a 4-digit number' });
-      }
-
-      ractive.set('opening', true);
-
-      if (userExists) {
-        ractive.set('progress', 'Verifying PIN');
-        if (CS.walletExists()) {
-          return openWithPin();
+    if (CS.walletExistsDEPRECATED()) {
+      CS.openWalletWithPinDEPRECATED(pin.join(''), 'stub', (err) => {
+        if (err) {
+          emitter.emit('auth-error', err);
+          return;
         }
-        return setPin();
-      }
+        CS.migrateWallet(pin)
+          .then(() => {
+            emitter.emit('auth-success');
+            CS.deleteCredentialsDEPRECATED();
+            if (CS.getPinDEPRECATED()) {
+              CS.resetPinDEPRECATED();
+              emitter.emit('re-enable-touchid');
+            }
+          })
+          .catch(err => {
+            emitter.emit('auth-error', err);
+          });
+      });
+      return;
+    }
+
+    if (userExists) {
+      ractive.set('progress', 'Verifying PIN');
+      CS.loginWithPin(pin)
+        .then(() => {
+          emitter.emit('auth-success');
+        })
+        .catch(err => {
+          emitter.emit('auth-error', err);
+        });
+    } else {
       ractive.set('progress', 'Setting PIN');
       ractive.set('userExists', true);
-      setPin();
 
-    }, 500);
-
+      CS.registerWallet(pin)
+        .then(() => {
+          emitter.emit('auth-success');
+        })
+        .catch(err => {
+          emitter.emit('auth-error', err);
+        });
+    }
   });
 
   emitter.on('clear-pin', () => {
-    ractive.find('#setPin').value = '';
+    ractive.set('opening', false);
     ractive.set('pin', '');
     setBoxes([]);
   });
 
   ractive.on('clear-credentials', () => {
     CS.reset();
-    CS.resetPin();
-    shapeshift.cleanAccessToken();
-    moonpay.cleanAccessToken();
     location.reload();
   });
 
@@ -118,33 +127,21 @@ module.exports = function(prevPage, data) {
     if (prevPage) prevPage(data);
   });
 
-  function getPin() {
-    const pin = pincode || ractive.get('pin');
-    return pin ? pin.toString() : '';
-  }
-
   function setBoxes(boxes) {
-    for (let i = boxes.length; i < 4; i++) {
-      boxes[i] = null;
-    }
-    ractive.set('boxes', boxes);
-  }
-
-  function openWithPin() {
-    CS.openWalletWithPin(getPin(), ractive.getTokenNetwork(), ractive.onSyncDone);
-  }
-
-  function setPin() {
-    CS.setPin(getPin(), ractive.getTokenNetwork(), ractive.onSyncDone);
+    ractive.set('boxes', [
+      boxes[0],
+      boxes[1],
+      boxes[2],
+      boxes[3],
+    ]);
   }
 
   function initFingerprintAuth() {
     return new Promise((resolve, reject) => {
       if (process.env.BUILD_PLATFORM === 'ios') {
         window.plugins.touchid.isAvailable(() => {
-          CS.setAvailableTouchId();
-          const pin = CS.getPin();
-          if (pin && CS.walletExists() && userExists) {
+          const pin = CS.getPinDEPRECATED();
+          if (pin && CS.walletExistsDEPRECATED() && userExists) {
             window.plugins.touchid.verifyFingerprintWithCustomPasswordFallbackAndEnterPasswordLabel(
               translate('Scan your fingerprint please'),
               translate('Enter PIN'),
@@ -162,9 +159,8 @@ module.exports = function(prevPage, data) {
       } else if (process.env.BUILD_PLATFORM === 'android') {
         const Fingerprint = window.Fingerprint;
         Fingerprint.isAvailable(() => {
-          CS.setAvailableTouchId();
-          const pin = CS.getPin();
-          if (pin && CS.walletExists() && userExists) {
+          const pin = CS.getPinDEPRECATED();
+          if (pin && CS.walletExistsDEPRECATED() && userExists) {
             Fingerprint.show({}, () => {
               resolve();
               ractive.set('pin', pin);
