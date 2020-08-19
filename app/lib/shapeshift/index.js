@@ -38,7 +38,7 @@ function login() {
     options += 'left=' + ((screen.width - width) / 2) + ', ';
     options += 'top=' + ((screen.height - height) / 2) + '';
     const clientId = process.env.SHAPESHIFT_CLIENT_ID;
-    const redirectUri = process.env.SITE_URL + 'shapeShiftRedirectUri?buildType=' + process.env.BUILD_TYPE;
+    const redirectUri = process.env.SITE_URL + 'v1/shapeShiftRedirectUri?buildType=' + process.env.BUILD_TYPE;
     cleanAccessToken();
     // eslint-disable-next-line max-len
     const url = urlAuthRoot + 'oauth/authorize?response_type=code&scope=users:read&client_id=' + clientId + '&redirect_uri=' + redirectUri;

@@ -20,7 +20,7 @@ module.exports = function updater(opts = {}) {
     return;
   }
 
-  const feedURL = `${SITE_URL}update/${BUILD_PLATFORM}/${process.arch}/${app.getVersion()}`;
+  const feedURL = `${SITE_URL}v1/update/${BUILD_PLATFORM}/${process.arch}/${app.getVersion()}`;
   const requestHeaders = {
     'User-Agent': `CoinSpace/${BUILD_PLATFORM}/${app.getVersion()} (${process.platform}: ${process.arch})`,
   };

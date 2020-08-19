@@ -36,7 +36,7 @@ function open(data) {
     if (process.env.BUILD_TYPE === 'electron') {
       redirectURL =  'coinspace://?action=moonpay-3d-secure';
     } else {
-      redirectURL = process.env.SITE_URL + 'moonpay/redirectURL?buildType=' + process.env.BUILD_TYPE;
+      redirectURL = process.env.SITE_URL + 'v1/moonpay/redirectURL?buildType=' + process.env.BUILD_TYPE;
     }
     return moonpay.createTx({
       baseCurrencyAmount: data.fiatAmount,
