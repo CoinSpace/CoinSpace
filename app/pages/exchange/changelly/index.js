@@ -1,56 +1,56 @@
 'use strict';
 
-var Ractive = require('lib/ractive');
-var emitter = require('lib/emitter');
-var initCreate = require('./create');
-var initEnterAmount = require('./enter-amount');
-var initAwaitingDeposit = require('./awaiting-deposit');
-var initAwaiting = require('./awaiting');
-var initComplete = require('./complete');
-var initError = require('./error');
-var db = require('lib/db');
-var changelly = require('lib/changelly');
-var showError = require('widgets/modals/flash').showError;
+const Ractive = require('lib/ractive');
+const emitter = require('lib/emitter');
+const initCreate = require('./create');
+const initEnterAmount = require('./enter-amount');
+const initAwaitingDeposit = require('./awaiting-deposit');
+const initAwaiting = require('./awaiting');
+const initComplete = require('./complete');
+const initError = require('./error');
+const db = require('lib/db');
+const changelly = require('lib/changelly');
+const { showError } = require('widgets/modals/flash');
 
 module.exports = function(el) {
-  var ractive = new Ractive({
-    el: el,
+  const ractive = new Ractive({
+    el,
     template: require('./index.ract'),
     data: {
-      isLoading: true
+      isLoading: true,
     },
     partials: {
-      loader: require('./loader.ract')
-    }
+      loader: require('./loader.ract'),
+    },
   });
 
-  var steps = {
+  const steps = {
     enterAmount: initEnterAmount(ractive.find('#changelly_enter_amount')),
     create: initCreate(ractive.find('#changelly_create')),
     awaitingDeposit: initAwaitingDeposit(ractive.find('#changelly_awaiting_deposit')),
     awaiting: initAwaiting(ractive.find('#changelly_awaiting')),
     complete: initComplete(ractive.find('#changelly_complete')),
-    error: initError(ractive.find('#changelly_error'))
+    error: initError(ractive.find('#changelly_error')),
   };
-  var currentStep = steps.enterAmount;
+  let currentStep = steps.enterAmount;
 
-  ractive.on('before-show', function() {
+  ractive.on('before-show', () => {
     emitter.emit('changelly');
   });
 
-  ractive.on('before-hide', function() {
+  ractive.on('before-hide', () => {
     ractive.set('isLoading', true);
     currentStep.hide();
   });
 
-  emitter.on('changelly', function() {
-    var changellyInfo = db.get('changellyInfo');
+  emitter.on('changelly', () => {
+    const changellyInfo = db.get('changellyInfo');
     if (!changellyInfo) {
       ractive.set('isLoading', false);
       return showStep(steps.enterAmount);
     }
 
-    changelly.getTransaction(changellyInfo.id).then(function(tx) {
+    changelly.getTransaction(changellyInfo.id).then((tx) => {
       ractive.set('isLoading', false);
       if (tx.status === 'waiting') {
         showStep(steps.awaitingDeposit, changellyInfo);
@@ -64,35 +64,35 @@ module.exports = function(el) {
         showStep(steps.error, {
           message: 'Transaction (ID: :id) has failed. Please, contact Changelly.',
           interpolations: {
-            id: changellyInfo.id
+            id: changellyInfo.id,
           },
-          showEmail: true
+          showEmail: true,
         });
       } else if (tx.status === 'refunded') {
         showStep(steps.error, {
           message: 'Exchange failed and coins were refunded to :address.',
           interpolations: {
-            address: changellyInfo.returnAddress
+            address: changellyInfo.returnAddress,
           },
         });
       } else if (tx.status === 'overdue') {
-        showStep(steps.error, {message: "Payment wasn't received since 36 hours since the transaction was created."});
+        showStep(steps.error, { message: "Payment wasn't received since 36 hours since the transaction was created." });
       } else {
-        showStep(steps.error, {message: tx.error});
+        showStep(steps.error, { message: tx.error });
       }
-    }).catch(function(err) {
+    }).catch((err) => {
       console.error(err);
       ractive.set('isLoading', false);
-      return showError({message: err.message});
+      return showError({ message: err.message });
     });
   });
 
-  emitter.on('change-changelly-step', function(step, data) {
+  emitter.on('change-changelly-step', (step, data) => {
     showStep(steps[step], data);
-  })
+  });
 
   function showStep(step, data) {
-    setTimeout(function() {
+    setTimeout(() => {
       currentStep.hide();
       step.show(data);
       currentStep = step;
@@ -100,4 +100,4 @@ module.exports = function(el) {
   }
 
   return ractive;
-}
+};

@@ -1,30 +1,29 @@
 'use strict';
 
-var Ractive = require('widgets/modals/base')
-var translate = require('lib/i18n').translate
+const Ractive = require('widgets/modals/base');
+const { translate } = require('lib/i18n');
 
-var defaults = {
+const defaults = {
   error: {
     error: true,
-    title: 'Whoops!'
+    title: 'Whoops!',
   },
   info: {
     warning: true,
-    title: 'Just saying...'
-  }
-}
+    title: 'Just saying...',
+  },
+};
 
-var isOpen = false;
+let isOpen = false;
 
 function openModal(type, data) {
   if (isOpen) return;
-  isOpen = true
-  data = data || {}
-  data.error = defaults[type].error
-  data.warning = defaults[type].warning
-  data.title = data.title || defaults[type].title
-  data.type = type
-  data.isHtml = data.isHtml
+  isOpen = true;
+  data = data || {};
+  data.error = defaults[type].error;
+  data.warning = defaults[type].warning;
+  data.title = data.title || defaults[type].title;
+  data.type = type;
 
   if (data.href && data.linkTextI18n) {
     data.linkText = translate(data.linkTextI18n);
@@ -32,35 +31,35 @@ function openModal(type, data) {
 
   data.onDismiss = function() {
     isOpen = false;
-  }
+  };
 
-  var ractive = new Ractive({
+  const ractive = new Ractive({
     el: document.getElementById('flash-modal'),
     partials: {
-      content: require('./content.ract')
+      content: require('./content.ract'),
     },
-    data: data
-  })
+    data,
+  });
 
-  ractive.on('close', function(){
-    ractive.fire('cancel')
-  })
+  ractive.on('close', ()=> {
+    ractive.fire('cancel');
+  });
 
-  return ractive
+  return ractive;
 }
 
 function showError(data) {
   if (data.message === 'Network Error') {
-    data.message = 'Request timeout. Please check your internet connection.'
+    data.message = 'Request timeout. Please check your internet connection.';
   }
-  return openModal('error', data)
+  return openModal('error', data);
 }
 
 function showInfo(data) {
-  return openModal('info', data)
+  return openModal('info', data);
 }
 
 module.exports = {
-  showError: showError,
-  showInfo: showInfo
-}
+  showError,
+  showInfo,
+};

@@ -1,11 +1,11 @@
 'use strict';
 
-var Ractive = require('widgets/modals/base');
-var showError = require('widgets/modals/flash').showError;
-var getWallet = require('lib/wallet').getWallet;
-var moonpay = require('lib/moonpay');
+const Ractive = require('widgets/modals/base');
+const { showError } = require('widgets/modals/flash');
+const { getWallet } = require('lib/wallet');
+const moonpay = require('lib/moonpay');
 
-var ractive;
+let ractive;
 
 function open(data) {
 
@@ -24,14 +24,14 @@ function open(data) {
       address: getWallet().getNextAddress(),
       bankTransferReference: '',
       bankDepositInformation: '',
-      threedsecure: function() {},
+      threedsecure() {},
     },
   });
 
-  ractive.on('confirm', function() {
+  ractive.on('confirm', () => {
     ractive.set('isLoading', true);
 
-    var redirectURL;
+    let redirectURL;
     // TODO switch phonegap too
     if (process.env.BUILD_TYPE === 'electron') {
       redirectURL =  'coinspace://?action=moonpay-3d-secure';
@@ -46,7 +46,7 @@ function open(data) {
       currencyCode: data.cryptoSymbol.toLowerCase(),
       returnUrl: redirectURL,
       paymentMethod: data.paymentMethod,
-    }).then(function(tx) {
+    }).then((tx) => {
       if (tx.status === 'failed') throw new Error('failed');
       if (tx.status === 'waitingAuthorization') {
         return waitingAuthorization(tx.redirectUrl);
@@ -55,7 +55,7 @@ function open(data) {
         return waitingPayment(tx);
       }
       ractive.set('status', 'success');
-    }).catch(function(err) {
+    }).catch((err) => {
       if (/daily limit/.test(err.message)) {
         return handleError(new Error('You have exceeded your daily limit. Please try again later.'));
       }
@@ -73,11 +73,11 @@ function open(data) {
   function waitingAuthorization(redirectUrl) {
     ractive.set('isLoading', false);
     ractive.set('status', 'waitingAuthorization');
-    ractive.set('threedsecure', function() {
+    ractive.set('threedsecure', () => {
       ractive.set('isLoading', true);
-      moonpay.open3dSecure(redirectUrl).then(function() {
+      moonpay.open3dSecure(redirectUrl).then(() => {
         ractive.set('status', 'success');
-      }).catch(function(err) {
+      }).catch((err) => {
         if (err.message !== '3d_failed') console.error(err);
         return handleError(new Error('3D secure authentication failed'));
       });
@@ -93,7 +93,7 @@ function open(data) {
 
   function handleError(err) {
     ractive.set('isLoading', false);
-    showError({message: err.message});
+    showError({ message: err.message });
   }
 
   return ractive;

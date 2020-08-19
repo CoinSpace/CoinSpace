@@ -1,57 +1,56 @@
 'use strict';
 
-var axios = require('axios')
-var db = require('./db')
+const db = require('./db');
 
-var ticker = require('./ticker')
-var Big = require('big.js');
+const ticker = require('./ticker');
+const Big = require('big.js');
 
-var networks = [
+const networks = [
   'bitcoin',
   'bitcoincash',
   'bitcoinsv',
   'litecoin',
   'dogecoin',
-  'dash'
+  'dash',
 ];
 
-var symbols = {
+const symbols = {
   bitcoin: 'BTC',
   bitcoincash: 'BCH',
   bitcoinsv: 'BSV',
   litecoin: 'LTC',
   dogecoin: 'DOGE',
-  dash: 'DASH'
-}
+  dash: 'DASH',
+};
 
 function get(network) {
   if (networks.indexOf(network) === -1) {
-    return Promise.reject({error: 'Currency cs fee is not supported'});
+    return Promise.reject({ error: 'Currency cs fee is not supported' });
   }
 
-  var collection = db().collection('cs_fee');
+  const collection = db().collection('cs_fee');
 
   return Promise.all([
     ticker.getFromCache(symbols[network]),
-    collection.find({_id: network}).limit(1).next()
-  ]).then(function(results) {
-    var rate = results[0]['USD'];
-    var minFee = 0;
-    var maxFee = 0;
+    collection.find({ _id: network }).limit(1).next(),
+  ]).then((results) => {
+    const rate = results[0]['USD'];
+    let minFee = 0;
+    let maxFee = 0;
     if (rate > 0) {
       minFee = parseInt(Big(1).div(rate).times(results[1].min_usd).times(1e8), 10);
-      maxFee = parseInt(Big(1).div(rate).times(results[1].max_usd).times(1e8), 10)
+      maxFee = parseInt(Big(1).div(rate).times(results[1].max_usd).times(1e8), 10);
     }
     return {
-      minFee: minFee,
-      maxFee: maxFee,
+      minFee,
+      maxFee,
       fee: results[1].fee,
       addresses: results[1].addresses,
-      whitelist: results[1].whitelist
-    }
+      whitelist: results[1].whitelist,
+    };
   });
 }
 
 module.exports = {
-  get: get
-}
+  get,
+};

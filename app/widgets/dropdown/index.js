@@ -1,20 +1,20 @@
 'use strict';
 
-var Ractive = require('lib/ractive');
+const Ractive = require('lib/ractive');
 
 module.exports = function(el, options, selectedOption) {
-  var ractive = new Ractive({
-    el: el,
+  const ractive = new Ractive({
+    el,
     template: require('./index.ract'),
     data: {
-      options: options,
-      getLabel: function(code) {
-        var option = options.find(function(item) {
+      options,
+      getLabel(code) {
+        const option = options.find((item) => {
           return item.code === code;
         });
         return option ? option.name : '';
       },
-      selectedOption: selectedOption,
+      selectedOption,
     },
   });
 
@@ -23,4 +23,4 @@ module.exports = function(el, options, selectedOption) {
   };
 
   return ractive;
-}
+};

@@ -1,9 +1,9 @@
 'use strict';
 
-var Big = require('big.js')
+const Big = require('big.js');
 
-var decimals;
-var factor;
+let decimals;
+let factor;
 
 function toAtom(number) {
   if (!number) return '0';
@@ -12,7 +12,7 @@ function toAtom(number) {
 
 function toUnit(number) {
   if (!number) return Big(0);
-  return Big(number).div(factor)
+  return Big(number).div(factor);
 }
 
 function toUnitString(number, d) {
@@ -27,8 +27,8 @@ function setDecimals(d) {
 }
 
 module.exports = {
-  toAtom: toAtom,
-  toUnit: toUnit,
-  toUnitString: toUnitString,
-  setDecimals: setDecimals
-}
+  toAtom,
+  toUnit,
+  toUnitString,
+  setDecimals,
+};

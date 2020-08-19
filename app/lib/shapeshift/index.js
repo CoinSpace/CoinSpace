@@ -6,11 +6,11 @@ const urlAuthRoot = 'https://auth.shapeshift.io/';
 const PRIORITY_SYMBOLS = ['BTC', 'BCH', 'BSV', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH'];
 const emitter = require('lib/emitter');
 const Big = require('big.js');
-const getId = require('lib/wallet').getId;
+const { getId } = require('lib/wallet');
 
 let hasHandledMobileLogin = false;
 
-emitter.on('handleOpenURL', function(url) {
+emitter.on('handleOpenURL', (url) => {
   url = url || '';
   const matchAction = url.match(/action=([^&]+)/);
   if (!matchAction || matchAction[1] !== 'shapeshift-login') return;
@@ -30,7 +30,7 @@ function isLogged() {
 }
 
 function login() {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     const width = 640;
     const height = 720;
     let options = 'width=' + width + ', ';
@@ -45,7 +45,7 @@ function login() {
     const popup = window.open(url, '_blank', options);
     // TODO rewrite to handle unload event in web and deep link in phonegap and electron
     // TODO add reasonable timeout
-    const popupInterval = setInterval(function() {
+    const popupInterval = setInterval(() => {
       // popout is undefined in electron
       if ((popup && popup.closed) || hasHandledMobileLogin) {
         clearInterval(popupInterval);
@@ -73,7 +73,7 @@ function logout() {
       token: getAccessToken(),
       id: getId(),
     },
-  }).then(function() {
+  }).then(() => {
     cleanAccessToken();
   });
 }
@@ -81,15 +81,15 @@ function logout() {
 function getCoins() {
   return request({
     url: shapeshiftRoot + 'getcoins',
-  }).then(function(coins) {
-    return Object.keys(coins).filter(function(key) {
+  }).then((coins) => {
+    return Object.keys(coins).filter((key) => {
       return coins[key].status === 'available';
-    }).map(function(key) {
+    }).map((key) => {
       return {
         name: coins[key].name,
         symbol: coins[key].symbol,
       };
-    }).sort(function(a, b) {
+    }).sort((a, b) => {
       if (PRIORITY_SYMBOLS.indexOf(a.symbol) === -1 && PRIORITY_SYMBOLS.indexOf(b.symbol) === -1) {
         return (a.symbol > b.symbol) ? 1 : -1;
       }
@@ -106,7 +106,7 @@ function validateAddress(address, symbol) {
   if (!symbol) return Promise.resolve(false);
   return request({
     url: shapeshiftRoot + 'validateAddress/' + address + '/' + symbol,
-  }).then(function(data) {
+  }).then((data) => {
     return !!data.isvalid;
   });
 }
@@ -127,7 +127,7 @@ function shift(options) {
     headers: {
       'Authorization': 'Bearer ' + getAccessToken(),
     },
-  }).then(function(data) {
+  }).then((data) => {
     if (data.error) throw new Error(data.error);
     return {
       depositAddress: data.deposit,
@@ -141,7 +141,7 @@ function shift(options) {
 function txStat(depositAddress) {
   return request({
     url: shapeshiftRoot + 'txStat/' + encodeURIComponent(depositAddress),
-  }).then(function(data) {
+  }).then((data) => {
     if (data.error && data.status !== 'failed') throw new Error(data.error);
     return data;
   });
@@ -151,7 +151,7 @@ function marketInfo(fromSymbol, toSymbol) {
   const pair = (fromSymbol + '_' + toSymbol).toLowerCase();
   return request({
     url: shapeshiftRoot + 'marketinfo/' + pair,
-  }).then(function(data) {
+  }).then((data) => {
     if (data.error) throw new Error(data.error);
     if (data.rate) {
       data.rate = Big(data.rate).toFixed();

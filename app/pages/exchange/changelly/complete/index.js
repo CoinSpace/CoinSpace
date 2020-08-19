@@ -1,38 +1,38 @@
 'use strict';
 
-var Ractive = require('lib/ractive');
-var emitter = require('lib/emitter');
-var db = require('lib/db');
+const Ractive = require('lib/ractive');
+const emitter = require('lib/emitter');
+const db = require('lib/db');
 
 module.exports = function(el) {
-  var ractive = new Ractive({
-    el: el,
+  const ractive = new Ractive({
+    el,
     template: require('./index.ract'),
     data: {
       toSymbol: '',
       toAddress: '',
-      amount: ''
+      amount: '',
     },
     partials: {
-      footer: require('../footer.ract')
-    }
+      footer: require('../footer.ract'),
+    },
   });
 
-  ractive.on('before-show', function(context) {
+  ractive.on('before-show', (context) => {
     ractive.set({
       toSymbol: context.toSymbol,
       toAddress: context.toAddress,
-      amount: context.amount
+      amount: context.amount,
     });
   });
 
-  ractive.on('done', function() {
-    db.set('changellyInfo', null).then(function() {
+  ractive.on('done', () => {
+    db.set('changellyInfo', null).then(() => {
       emitter.emit('change-changelly-step', 'enterAmount');
-    }).catch(function(err) {
+    }).catch((err) => {
       console.error(err);
-    })
+    });
   });
 
   return ractive;
-}
+};

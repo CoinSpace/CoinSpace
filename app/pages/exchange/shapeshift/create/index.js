@@ -1,22 +1,22 @@
 'use strict';
 
-var Ractive = require('lib/ractive');
-var emitter = require('lib/emitter');
-var getWallet = require('lib/wallet').getWallet;
-var denomination = require('lib/denomination');
-var getTokenNetwork = require('lib/token').getTokenNetwork;
-var shapeshift = require('lib/shapeshift');
-var qrcode = require('lib/qrcode');
-var geo = require('lib/geo');
-var showTooltip = require('widgets/modals/tooltip');
-var showError = require('widgets/modals/flash').showError;
-var showInfo = require('widgets/modals/flash').showInfo;
-var _ = require('lodash');
-var db = require('lib/db');
+const Ractive = require('lib/ractive');
+const emitter = require('lib/emitter');
+const { getWallet } = require('lib/wallet');
+const denomination = require('lib/denomination');
+const { getTokenNetwork } = require('lib/token');
+const shapeshift = require('lib/shapeshift');
+const qrcode = require('lib/qrcode');
+const geo = require('lib/geo');
+const showTooltip = require('widgets/modals/tooltip');
+const { showError } = require('widgets/modals/flash');
+const { showInfo } = require('widgets/modals/flash');
+const _ = require('lodash');
+const db = require('lib/db');
 
 module.exports = function(el) {
-  var ractive = new Ractive({
-    el: el,
+  const ractive = new Ractive({
+    el,
     template: require('./index.ract'),
     data: {
       isLoading: true,
@@ -30,37 +30,37 @@ module.exports = function(el) {
       toSymbol: '',
       rate: '?',
       coins: [],
-      isGeoEnabled: function(symbol) {
+      isGeoEnabled(symbol) {
         return Object.keys(geo.networks).indexOf(symbol) !== -1;
-      }
+      },
     },
     partials: {
       loader: require('../loader.ract'),
-      footer: require('../footer.ract')
-    }
+      footer: require('../footer.ract'),
+    },
   });
 
-  ractive.on('login', function() {
-    shapeshift.login().then(function() {
+  ractive.on('login', () => {
+    shapeshift.login().then(() => {
       ractive.set('isLogged', true);
-    }).catch(function(err) {
+    }).catch((err) => {
       if (err.message === 'user_is_not_verified') {
         return showInfo({
           message: 'Your ShapeShift account is not verified.',
           href: 'https://auth.shapeshift.io',
-          linkTextI18n: 'Complete verification'
-        })
+          linkTextI18n: 'Complete verification',
+        });
       }
     });
   });
 
-  ractive.on('logout', function() {
-    shapeshift.logout().then(function() {
+  ractive.on('logout', () => {
+    shapeshift.logout().then(() => {
       ractive.set('isLogged', false);
     });
   });
 
-  var fromSymbolObserver = ractive.observe('fromSymbol', function(symbol, old) {
+  const fromSymbolObserver = ractive.observe('fromSymbol', (symbol, old) => {
     if (!old) return;
     if (symbol === ractive.get('toSymbol')) {
       return ractive.set('toSymbol', old);
@@ -68,7 +68,7 @@ module.exports = function(el) {
     return getRate();
   });
 
-  ractive.observe('toSymbol', function(symbol, old) {
+  ractive.observe('toSymbol', (symbol, old) => {
     if (!old) return;
     if (symbol === ractive.get('fromSymbol')) {
       return ractive.set('fromSymbol', old);
@@ -76,8 +76,8 @@ module.exports = function(el) {
     return getRate();
   });
 
-  ractive.on('before-show', function() {
-    shapeshift.getCoins().then(function(coins) {
+  ractive.on('before-show', () => {
+    shapeshift.getCoins().then((coins) => {
       ractive.set('isLoading', false);
       ractive.set('coins', coins);
 
@@ -85,30 +85,30 @@ module.exports = function(el) {
       ractive.set('fromSymbol', denomination(getTokenNetwork()));
       fromSymbolObserver.resume();
 
-      var fromSymbol = ractive.get('fromSymbol');
+      const fromSymbol = ractive.get('fromSymbol');
       if (fromSymbol === ractive.get('toSymbol')) {
-        var symbol = getFirstSymbol(coins, fromSymbol);
+        const symbol = getFirstSymbol(coins, fromSymbol);
         ractive.set('toSymbol', symbol);
       } else {
         return getRate();
       }
-    }).catch(function(err) {
+    }).catch((err) => {
       console.error(err);
       ractive.set('isLoading', false);
-      return showError({message: err.message});
+      return showError({ message: err.message });
     });
   });
 
-  ractive.on('before-hide', function() {
+  ractive.on('before-hide', () => {
     ractive.set('isLoading', true);
   });
 
-  ractive.on('back', function() {
+  ractive.on('back', () => {
     emitter.emit('set-exchange', 'none');
   });
 
-  ractive.on('clearAddress', function(context) {
-    var dataContext = context.node.getAttribute('data-context');
+  ractive.on('clearAddress', (context) => {
+    const dataContext = context.node.getAttribute('data-context');
     if (dataContext === 'shapeshift-to-address') {
       ractive.set('toAddress', '');
       ractive.find('#shapeshift_to_address').focus();
@@ -118,95 +118,95 @@ module.exports = function(el) {
     }
   });
 
-  ractive.on('open-geo', function(context) {
-    var dataContext = context.node.getAttribute('data-context');
-    var data = {
+  ractive.on('open-geo', (context) => {
+    const dataContext = context.node.getAttribute('data-context');
+    const data = {
       overlay: 'geo',
       context: dataContext,
     };
 
     if (dataContext === 'shapeshift-return-address') {
-      data.network = geo.networks[ractive.get('fromSymbol')]
+      data.network = geo.networks[ractive.get('fromSymbol')];
     } else if (dataContext === 'shapeshift-to-address') {
-      data.network = geo.networks[ractive.get('toSymbol')]
+      data.network = geo.networks[ractive.get('toSymbol')];
     }
     emitter.emit('open-overlay', data);
   });
 
-  ractive.on('open-qr', function(context) {
+  ractive.on('open-qr', (context) => {
     qrcode.scan({
-      context: context.node.getAttribute('data-context')
+      context: context.node.getAttribute('data-context'),
     });
   });
 
-  emitter.on('prefill-wallet', function(address, context) {
+  emitter.on('prefill-wallet', (address, context) => {
     if (context === 'shapeshift-return-address') {
-      ractive.set('returnAddress', address)
+      ractive.set('returnAddress', address);
     } else if (context === 'shapeshift-to-address') {
-      ractive.set('toAddress', address)
+      ractive.set('toAddress', address);
     }
-  })
+  });
 
-  ractive.on('help', function() {
+  ractive.on('help', () => {
     showTooltip({
       message: 'Return address should be an address controlled by you where ' +
-      'deposit will be returned in the event of a failed transaction.'
+      'deposit will be returned in the event of a failed transaction.',
     });
   });
 
-  ractive.on('swap', function() {
+  ractive.on('swap', () => {
     ractive.set('fromSymbol', ractive.get('toSymbol'));
-    var returnAddress = ractive.get('returnAddress');
+    const returnAddress = ractive.get('returnAddress');
     ractive.set('returnAddress', ractive.get('toAddress'));
     ractive.set('toAddress', returnAddress);
   });
 
-  ractive.on('confirm', function() {
-    if (ractive.get('rate') === '?') return showError({message: 'Exchange is currently unavailable for this pair'});
-    var options = {
+  ractive.on('confirm', () => {
+    if (ractive.get('rate') === '?') return showError({ message: 'Exchange is currently unavailable for this pair' });
+    const options = {
       fromSymbol: ractive.get('fromSymbol'),
       returnAddress: ractive.get('returnAddress').trim(),
       toAddress: ractive.get('toAddress').trim(),
-      toSymbol: ractive.get('toSymbol')
+      toSymbol: ractive.get('toSymbol'),
     };
-    var fromCoin = _.find(ractive.get('coins'), function(item) {
+    const fromCoin = _.find(ractive.get('coins'), (item) => {
       return item.symbol === options.fromSymbol;
     });
-    return validateAddresses(options).then(function() {
-      return shapeshift.shift(options).then(function(data) {
+    return validateAddresses(options).then(() => {
+      return shapeshift.shift(options).then((data) => {
         data.depositCoinName = fromCoin ? fromCoin.name : '';
-        db.set('shapeshiftInfo', data).then(function() {
+        db.set('shapeshiftInfo', data).then(() => {
           ractive.set('isValidating', false);
           emitter.emit('change-shapeshift-step', 'awaitingDeposit', data);
-        }).catch(function(err) {
+        }).catch((err) => {
           ractive.set('isValidating', false);
           console.error(err);
         });
       });
-    }).catch(function(err) {
+    }).catch((err) => {
       ractive.set('isValidating', false);
       if (err.message === 'invalid_return_address') {
-        return showError({message: 'Please enter a valid return address'});
+        return showError({ message: 'Please enter a valid return address' });
       }
       if (err.message === 'invalid_to_address') {
-        return showError({message: 'Please enter a valid address to send to'});
+        return showError({ message: 'Please enter a valid address to send to' });
       }
       if (/Please use the precise/.test(err.message)) {
-        return showError({message: 'Exchange is currently unavailable for this pair'});
+        return showError({ message: 'Exchange is currently unavailable for this pair' });
       }
       if (/Invalid or Expired Authorization Token/.test(err.message)) {
         ractive.set('isLogged', false);
         shapeshift.cleanAccessToken();
-        return showError({message: 'Try to sign in again'});
+        return showError({ message: 'Try to sign in again' });
       }
       console.error(err.message);
-      return showError({message: err.message});
+      return showError({ message: err.message });
     });
   });
 
   function validateAddresses(options) {
     ractive.set('isValidating', true);
-    var promises = [];
+    const promises = [];
     if (options.returnAddress) {
       promises.push(shapeshift.validateAddress(options.returnAddress, options.fromSymbol));
     } else {
@@ -214,7 +214,7 @@ module.exports = function(el) {
     }
     promises.push(shapeshift.validateAddress(options.toAddress, options.toSymbol));
 
-    return Promise.all(promises).then(function(results) {
+    return Promise.all(promises).then((results) => {
       if (!results[0]) throw new Error('invalid_return_address');
       if (!results[1]) throw new Error('invalid_to_address');
     });
@@ -234,8 +234,8 @@ module.exports = function(el) {
   }
 
   function getFirstSymbol(coins, ignoreSymbol) {
-    var nextCoin = null;
-    coins.some(function(coin) {
+    let nextCoin = null;
+    coins.some((coin) => {
       if (coin.symbol !== ignoreSymbol) {
         nextCoin = coin;
         return true;
@@ -246,11 +246,11 @@ module.exports = function(el) {
 
   function getRate() {
     ractive.set('isLoadingRate', true);
-    return shapeshift.marketInfo(ractive.get('fromSymbol'), ractive.get('toSymbol')).then(function(data) {
-      var rate = data.rate;
+    return shapeshift.marketInfo(ractive.get('fromSymbol'), ractive.get('toSymbol')).then((data) => {
+      const { rate } = data;
       ractive.set('isLoadingRate', false);
       ractive.set('rate', rate);
-    }).catch(function(err) {
+    }).catch((err) => {
       ractive.set('isLoadingRate', false);
       ractive.set('rate', '?');
       if (/is currently unavailable in your region/.test(err.message)) return;
@@ -259,4 +259,4 @@ module.exports = function(el) {
   }
 
   return ractive;
-}
+};

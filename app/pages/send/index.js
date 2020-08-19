@@ -1,31 +1,31 @@
 'use strict';
 
-var Ractive = require('lib/ractive');
-var Big = require('big.js');
-var emitter = require('lib/emitter');
-var db = require('lib/db');
-var getWallet = require('lib/wallet').getWallet;
-var setToAlias = require('lib/wallet').setToAlias;
-var getTokenNetwork = require('lib/token').getTokenNetwork;
-var showError = require('widgets/modals/flash').showError;
-var showInfo = require('widgets/modals/flash').showInfo;
-var showConfirmation = require('widgets/modals/confirm-send');
-var showTooltip = require('widgets/modals/tooltip');
-var validateSend = require('lib/wallet').validateSend;
-var getDestinationInfo = require('lib/wallet').getDestinationInfo;
-var resolveTo = require('lib/openalias/xhr.js').resolveTo;
-var qrcode = require('lib/qrcode');
-var initEosSetup = require('widgets/eos/setup');
-var toUnitString = require('lib/convert').toUnitString;
-var toAtom = require('lib/convert').toAtom;
-var translate = require('lib/i18n').translate;
+const Ractive = require('lib/ractive');
+const Big = require('big.js');
+const emitter = require('lib/emitter');
+const db = require('lib/db');
+const { getWallet } = require('lib/wallet');
+const { setToAlias } = require('lib/wallet');
+const { getTokenNetwork } = require('lib/token');
+const { showError } = require('widgets/modals/flash');
+const { showInfo } = require('widgets/modals/flash');
+const showConfirmation = require('widgets/modals/confirm-send');
+const showTooltip = require('widgets/modals/tooltip');
+const { validateSend } = require('lib/wallet');
+const { getDestinationInfo } = require('lib/wallet');
+const { resolveTo } = require('lib/openalias/xhr.js');
+const qrcode = require('lib/qrcode');
+const initEosSetup = require('widgets/eos/setup');
+const { toUnitString } = require('lib/convert');
+const { toAtom } = require('lib/convert');
+const { translate } = require('lib/i18n');
 
-module.exports = function(el){
-  var selectedFiat = '';
-  var defaultFiat = 'USD';
+module.exports = function(el) {
+  let selectedFiat = '';
+  const defaultFiat = 'USD';
 
-  var ractive = new Ractive({
-    el: el,
+  const ractive = new Ractive({
+    el,
     template: require('./index.ract'),
     data: {
       currencies: [],
@@ -37,9 +37,9 @@ module.exports = function(el){
       to: '',
       feeIndex: 0,
       fees: [
-        {value: '0', name: 'minimum'},
-        {value: '0', name: 'default', default: true},
-        {value: '0', name: 'fastest'},
+        { value: '0', name: 'minimum' },
+        { value: '0', name: 'default', default: true },
+        { value: '0', name: 'fastest' },
       ],
       isEthereum: false,
       isRipple: false,
@@ -48,94 +48,94 @@ module.exports = function(el){
       isLoading: false,
       gasLimit: '',
       denomination: '',
-      feeDenomination: ''
-    }
-  })
+      feeDenomination: '',
+    },
+  });
 
-  var isSyncing = true;
+  let isSyncing = true;
 
   initEosSetup(ractive.find('#eos-setup'));
 
-  emitter.on('prefill-wallet', function(address, context) {
+  emitter.on('prefill-wallet', (address, context) => {
     if (context !== 'send') return;
-    ractive.set('to', address)
-  })
+    ractive.set('to', address);
+  });
 
-  emitter.on('prefill-value', function(value, context) {
+  emitter.on('prefill-value', (value, context) => {
     if (context !== 'send') return;
     ractive.find('#bitcoin').value = value;
-    ractive.fire('bitcoin-to-fiat')
-  })
+    ractive.fire('bitcoin-to-fiat');
+  });
 
-  emitter.on('prefill-destination-tag', function(tag, context) {
+  emitter.on('prefill-destination-tag', (tag, context) => {
     if (context !== 'send') return;
-    var $tag = ractive.find('#destination-tag');
+    const $tag = ractive.find('#destination-tag');
     if ($tag) {
       $tag.value = tag;
     }
-  })
+  });
 
-  ractive.on('before-show', function() {
-    var network = getTokenNetwork();
+  ractive.on('before-show', () => {
+    const network = getTokenNetwork();
     ractive.set('isEthereum', network === 'ethereum');
     ractive.set('isRipple', network === 'ripple');
     ractive.set('isStellar', network === 'stellar');
     ractive.set('isEOS', network === 'eos');
   });
 
-  ractive.on('open-qr', function() {
-    qrcode.scan({context: 'send'});
-  })
+  ractive.on('open-qr', () => {
+    qrcode.scan({ context: 'send' });
+  });
 
-  ractive.on('open-geo', function(){
-    var data = {
+  ractive.on('open-geo', ()=> {
+    const data = {
       overlay: 'geo',
-      context: 'send'
-    }
-    emitter.emit('open-overlay', data)
-  })
+      context: 'send',
+    };
+    emitter.emit('open-overlay', data);
+  });
 
-  emitter.on('sync', function() {
+  emitter.on('sync', () => {
     isSyncing = true;
   });
 
-  emitter.on('header-fiat-changed', function(currency) {
-    ractive.set('selectedFiat', currency)
-  })
+  emitter.on('header-fiat-changed', (currency) => {
+    ractive.set('selectedFiat', currency);
+  });
 
-  ractive.on('open-send', function() {
+  ractive.on('open-send', () => {
     ractive.set('validating', true);
 
-    var to = ractive.get('to').trim();
-    var fee = ractive.get('fee');
+    const to = ractive.get('to').trim();
+    const fee = ractive.get('fee');
 
-    var delay = function(n) {
-      return new Promise(function(resolve) { setTimeout(resolve, n); });
-    }
+    const delay = function(n) {
+      return new Promise((resolve) => { setTimeout(resolve, n); });
+    };
 
     Promise.all([
       resolveTo(to),
       getDestinationInfo(to),
-      delay(100) // in order to activate loader
-    ]).then(function(results) {
+      delay(100), // in order to activate loader
+    ]).then((results) => {
 
-      var data = results[0];
+      const data = results[0];
       setToAlias(data);
 
-      var destinationInfo = results[1];
+      const destinationInfo = results[1];
 
-      var wallet = getWallet();
+      const wallet = getWallet();
 
-      var options = {
-        wallet: wallet,
+      const options = {
+        wallet,
         to: data.to,
         alias: data.alias,
-        fee: fee,
-        destinationInfo: destinationInfo,
+        fee,
+        destinationInfo,
         amount: ractive.find('#bitcoin').value,
         denomination: ractive.get('denomination'),
-        onSuccessDismiss: function() {
-          ractive.set({to: ''});
+        onSuccessDismiss() {
+          ractive.set({ to: '' });
           ractive.find('#bitcoin').value = '';
           ractive.find('#fiat').value = '';
           setFees();
@@ -147,10 +147,11 @@ module.exports = function(el){
             ractive.find('#memo').value = '';
           }
           if (ractive.get('BUILD_TYPE') === 'phonegap') {
+            // eslint-disable-next-line no-undef
             cordova.plugins.InAppReview.requestReviewDialog();
           }
-        }
-      }
+        },
+      };
 
       if (wallet.networkName === 'ethereum') {
         wallet.gasLimit = ractive.find('#gas-limit').value;
@@ -167,16 +168,16 @@ module.exports = function(el){
       }
 
       validateAndShowConfirm(options);
-    }).catch(function(e) {
+    }).catch((e) => {
       ractive.set('validating', false);
       if (/is not a valid address/.test(e.message)) {
-        return showError({title: 'Uh Oh...', message: 'Please enter a valid address to send to'})
+        return showError({ title: 'Uh Oh...', message: 'Please enter a valid address to send to' });
       }
-    })
-  })
+    });
+  });
 
-  emitter.on('wallet-ready', function() {
-    var wallet = getWallet();
+  emitter.on('wallet-ready', () => {
+    const wallet = getWallet();
     isSyncing = false;
     setFees(true);
     ractive.fire('change-fee');
@@ -195,20 +196,20 @@ module.exports = function(el){
 
   function setFees(setDefaultFeeOption) {
     if (isSyncing) return;
-    var wallet = getWallet();
-    var value = toAtom(ractive.find('#bitcoin').value || 0);
-    var fees = [];
+    const wallet = getWallet();
+    const value = toAtom(ractive.find('#bitcoin').value || 0);
+    let fees = [];
     if (setDefaultFeeOption) ractive.set('feeIndex', 0);
 
     if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(wallet.networkName) !== -1) {
-      var estimates = wallet.estimateFees(value);
-      var minimums = wallet.minimumFees(value);
-      fees = wallet.feeRates.map(function(item, i) {
+      const estimates = wallet.estimateFees(value);
+      const minimums = wallet.minimumFees(value);
+      fees = wallet.feeRates.map((item, i) => {
         item.estimate = estimates[i] ? toUnitString(estimates[i]) : toUnitString(minimums[i]);
         return item;
       });
       if (setDefaultFeeOption) {
-        for (var i = 0; i< wallet.feeRates.length; i++) {
+        for (let i = 0; i< wallet.feeRates.length; i++) {
           if (wallet.feeRates[i].default) {
             ractive.set('feeIndex', i);
             break;
@@ -216,24 +217,24 @@ module.exports = function(el){
         }
       }
     } else if (['ripple', 'stellar', 'eos'].indexOf(wallet.networkName) !== -1) {
-      fees = [{estimate: wallet.getDefaultFee()}];
+      fees = [{ estimate: wallet.getDefaultFee() }];
     } else if (wallet.networkName === 'ethereum') {
-      fees = [{estimate: toUnitString(wallet.getDefaultFee(), 18)}];
+      fees = [{ estimate: toUnitString(wallet.getDefaultFee(), 18) }];
     }
 
     ractive.set('fee', fees[ractive.get('feeIndex')].estimate);
     ractive.set('fees', fees);
   }
 
-  emitter.once('ticker', function(rates) {
-    var currencies = Object.keys(rates);
+  emitter.once('ticker', (rates) => {
+    const currencies = Object.keys(rates);
     initPreferredCurrency(currencies);
     ractive.set('currencies', currencies);
     ractive.set('exchangeRates', rates);
     ractive.fire('bitcoin-to-fiat');
 
-    emitter.on('ticker', function(rates) {
-      var currencies = Object.keys(rates);
+    emitter.on('ticker', (rates) => {
+      const currencies = Object.keys(rates);
       if (currencies.indexOf(selectedFiat) === -1) {
         selectedFiat = defaultFiat;
         ractive.set('selectedFiat', selectedFiat);
@@ -242,23 +243,23 @@ module.exports = function(el){
       ractive.set('exchangeRates', rates);
       ractive.fire('bitcoin-to-fiat');
     });
-  })
+  });
 
   function initPreferredCurrency(currencies) {
-    var systemInfo = db.get('systemInfo');
+    const systemInfo = db.get('systemInfo');
     selectedFiat = systemInfo.preferredCurrency;
     if (currencies.indexOf(selectedFiat) === -1) {
       selectedFiat = defaultFiat;
     }
     ractive.set('selectedFiat', selectedFiat);
-    ractive.observe('selectedFiat', setPreferredCurrency)
+    ractive.observe('selectedFiat', setPreferredCurrency);
   }
 
-  ractive.on('change-fee', function() {
-    var wallet = getWallet();
-    var index = ractive.get('feeIndex');
+  ractive.on('change-fee', () => {
+    const wallet = getWallet();
+    const index = ractive.get('feeIndex');
     if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(wallet.networkName) !== -1) {
-      var maxAmount = wallet.maxAmounts[index] ? wallet.maxAmounts[index].value : 0;
+      const maxAmount = wallet.maxAmounts[index] ? wallet.maxAmounts[index].value : 0;
       ractive.set('maxAmount', toUnitString(maxAmount));
     } else {
       ractive.set('maxAmount', toUnitString(wallet.getMaxAmount()));
@@ -266,93 +267,94 @@ module.exports = function(el){
     ractive.set('fee', ractive.get('fees')[index].estimate);
   });
 
-  ractive.on('set-max-amount', function() {
+  ractive.on('set-max-amount', () => {
     ractive.find('#bitcoin').value = ractive.get('maxAmount');
     ractive.fire('bitcoin-to-fiat');
   });
 
-  ractive.on('bitcoin-to-fiat', function() {
-    var bitcoin = ractive.find('#bitcoin').value || 0;
+  ractive.on('bitcoin-to-fiat', () => {
+    const bitcoin = ractive.find('#bitcoin').value || 0;
 
-    var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')];
+    const exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')];
     if (typeof exchangeRate !== 'number') return;
 
-    var fiat = bitcoin ? Big(bitcoin).times(exchangeRate).toFixed(2) : '';
+    const fiat = bitcoin ? Big(bitcoin).times(exchangeRate).toFixed(2) : '';
     ractive.find('#fiat').value = fiat;
     setFees();
-  })
+  });
 
-  ractive.on('fiat-to-bitcoin', function() {
-    var fiat = ractive.find('#fiat').value || 0;
+  ractive.on('fiat-to-bitcoin', () => {
+    const fiat = ractive.find('#fiat').value || 0;
 
-    var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')];
-    var bitcoin = '0';
+    const exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')];
+    let bitcoin = '0';
     if (exchangeRate) {
       bitcoin = fiat ? Big(fiat).div(exchangeRate).toFixed(8) : '';
     }
     ractive.find('#bitcoin').value = bitcoin;
     setFees();
-  })
+  });
 
-  ractive.on('gas-limit', function() {
-    var wallet = getWallet();
+  ractive.on('gas-limit', () => {
+    const wallet = getWallet();
     wallet.gasLimit = ractive.find('#gas-limit').value || 0;
     setFees();
     ractive.fire('change-fee');
-  })
+  });
 
-  ractive.on('clearTo', function(){
-    var passfield = ractive.find('#to')
-    ractive.set('to', '')
-    passfield.focus()
-  })
+  ractive.on('clearTo', ()=> {
+    const passfield = ractive.find('#to');
+    ractive.set('to', '');
+    passfield.focus();
+  });
 
-  ractive.on('focusAmountInput', function(context) {
-    context.node.parentNode.style.zIndex = 5000
-  })
+  ractive.on('focusAmountInput', (context) => {
+    context.node.parentNode.style.zIndex = 5000;
+  });
 
-  ractive.on('blurAmountInput', function(context) {
-    context.node.parentNode.style.zIndex = ''
-  })
+  ractive.on('blurAmountInput', (context) => {
+    context.node.parentNode.style.zIndex = '';
+  });
 
-  ractive.on('help-fee', function() {
+  ractive.on('help-fee', () => {
     showTooltip({
       message: 'Amount of coins that is charged from your balance for single transaction (:url).',
-      interpolations: {url: "<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees/', '_blank'); return false;\">" + translate('more info') + "</a>"},
-      isHTML: true
-    })
-  })
+      // eslint-disable-next-line max-len
+      interpolations: { url: "<a href=\"\" onclick=\"window.open('https://www.coin.space/all-about-bitcoin-fees/', '_blank'); return false;\">" + translate('more info') + "</a>" },
+      isHTML: true,
+    });
+  });
 
-  ractive.on('help-gas-limit', function() {
+  ractive.on('help-gas-limit', () => {
     showTooltip({
       message: 'Gas limit is the amount of gas to send with your transaction. ' +
       'Increasing this number will not get your transaction confirmed faster. ' +
-      'Sending ETH is equal 21000. Sending Tokens is equal around 200000.'
-    })
-  })
+      'Sending ETH is equal 21000. Sending Tokens is equal around 200000.',
+    });
+  });
 
-  ractive.on('help-destination-tag', function() {
+  ractive.on('help-destination-tag', () => {
     showTooltip({
-      message: 'An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.'
-    })
-  })
+      message: 'An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.',
+    });
+  });
 
-  ractive.on('help-invoice-id', function() {
+  ractive.on('help-invoice-id', () => {
     showTooltip({
-      message: 'A 256-bit hash that can be used to identify a particular payment.'
-    })
-  })
+      message: 'A 256-bit hash that can be used to identify a particular payment.',
+    });
+  });
 
-  ractive.on('help-memo', function() {
-    var wallet = getWallet();
-    var message = '';
+  ractive.on('help-memo', () => {
+    const wallet = getWallet();
+    let message = '';
     if (wallet.networkName === 'stellar') {
       message = 'The memo contains optional extra information. A string up to 28-bytes long.';
     } else if (wallet.networkName === 'eos') {
       message = 'The memo contains optional extra information. A string up to 256-bytes long.';
     }
-    showTooltip({message: message});
-  })
+    showTooltip({ message });
+  });
 
   function validateAndShowConfirm(options) {
     try {
@@ -361,22 +363,28 @@ module.exports = function(el){
       showConfirmation(options);
     } catch (err) {
       ractive.set('validating', false);
-      var interpolations = err.interpolations
+      const { interpolations } = err;
       if (/trying to empty your wallet/.test(err.message)) {
         ractive.find('#bitcoin').value = interpolations.sendableBalance;
         ractive.fire('bitcoin-to-fiat');
-        return showInfo({message: err.message, interpolations: interpolations})
+        return showInfo({ message: err.message, interpolations });
       }
-      return showError({title: 'Uh Oh...', message: err.message, href: err.href, linkText: err.linkText, interpolations: interpolations})
+      return showError({
+        title: 'Uh Oh...',
+        message: err.message,
+        href: err.href,
+        linkText: err.linkText,
+        interpolations,
+      });
     }
   }
 
-  function setPreferredCurrency(currency, old){
+  function setPreferredCurrency(currency, old) {
     if (old === undefined) return; // when loading wallet
 
-    emitter.emit('send-fiat-changed', currency)
-    ractive.fire('bitcoin-to-fiat')
+    emitter.emit('send-fiat-changed', currency);
+    ractive.fire('bitcoin-to-fiat');
   }
 
-  return ractive
-}
+  return ractive;
+};

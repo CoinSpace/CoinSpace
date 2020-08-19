@@ -1,53 +1,53 @@
 'use strict';
 
-var Ractive = require('lib/ractive');
-var emitter = require('lib/emitter');
-var showIdentityVerification = require('widgets/modals/moonpay/identity-verification');
-var showPhoneNumberVerification = require('widgets/modals/moonpay/phone-number-verification');
-var showFaceMatchVerification = require('widgets/modals/moonpay/face-match-verification');
-var showDocumentVerification = require('widgets/modals/moonpay/document-verification');
+const Ractive = require('lib/ractive');
+const emitter = require('lib/emitter');
+const showIdentityVerification = require('widgets/modals/moonpay/identity-verification');
+const showPhoneNumberVerification = require('widgets/modals/moonpay/phone-number-verification');
+const showFaceMatchVerification = require('widgets/modals/moonpay/face-match-verification');
+const showDocumentVerification = require('widgets/modals/moonpay/document-verification');
 
 module.exports = function(el) {
-  var ractive = new Ractive({
-    el: el,
+  const ractive = new Ractive({
+    el,
     template: require('./index.ract'),
     data: {
       customerVerifications: [],
-      getVerificationName: function(key) {
+      getVerificationName(key) {
         return verifications[key].name;
       },
-      showVerification: function(key) {
+      showVerification(key) {
         verifications[key].show();
-      }
+      },
     },
     partials: {
       loader: require('../loader.ract'),
-    }
+    },
   });
 
-  var verifications = {
+  const verifications = {
     identity_verification: {
       name: 'Identity',
-      show: showIdentityVerification
+      show: showIdentityVerification,
     },
     phone_number_verification: {
       name: 'Phone number',
-      show: showPhoneNumberVerification
+      show: showPhoneNumberVerification,
     },
     document_verification: {
       name: 'Document',
-      show: showDocumentVerification
+      show: showDocumentVerification,
     },
     face_match_verification: {
       name: 'Face match',
-      show: showFaceMatchVerification
-    }
-  }
+      show: showFaceMatchVerification,
+    },
+  };
 
-  ractive.on('before-show', function(context) {
-    var customerVerifications = [];
-    context.verificationLevels.forEach(function(level) {
-      level.requirements.forEach(function(item) {
+  ractive.on('before-show', (context) => {
+    const customerVerifications = [];
+    context.verificationLevels.forEach((level) => {
+      level.requirements.forEach((item) => {
         if (verifications[item.identifier]) {
           customerVerifications.push(item);
         }
@@ -56,9 +56,9 @@ module.exports = function(el) {
     ractive.set('customerVerifications', customerVerifications);
   });
 
-  ractive.on('back', function() {
+  ractive.on('back', () => {
     emitter.emit('change-moonpay-step', 'main');
   });
 
   return ractive;
-}
+};

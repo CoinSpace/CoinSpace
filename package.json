@@ -17,7 +17,7 @@
     "dev:link": "linklocal -lr",
     "server": "node --expose-gc ./server/server.js",
     "server:watch": "nodemon -w ./server -x node -r dotenv/config ./server/server.js dotenv_config_path=./server/.env.loc",
-    "lint": "eslint cli/ electron/*.js electron/lib/*.js webpack.*.js app/widgets/modals/tooltip/*.js app/pages/receive/*.js app/widgets/header/*.js app/widgets/modals/confirm-remove-account/*.js app/widgets/auth/*.js app/widgets/sidebar/*.js app/widgets/auth/**/*.js app/widgets/account-details/*.js app/widgets/modals/set-details/*.js app/*.js app/widgets/modals/eos-setup-account/*.js app/pages/tokens/*.js app/lib/shapeshift/*.js app/lib/db/*.js app/lib/wallet/*.js app/lib/request/*.js app/lib/encryption/*.js server/middleware.js server/server.js server/lib/v1/db.js server/lib/v1/master.js server/lib/v1/github.js server/lib/v1/api.js server/lib/v1/account.js server/lib/v1/auth.js server/lib/v2/*.js",
+    "lint": "eslint webpack.*.js 'cli/*.js' 'electron/**/*.js' 'app/**/*.js' 'server/**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -123,7 +123,7 @@
       "mocha": true
     },
     "parserOptions": {
-      "ecmaVersion": 2018
+      "ecmaVersion": 2020
     },
     "rules": {
       "camelcase": [
@@ -182,6 +182,15 @@
         }
       ],
       "no-var": "error",
+      "prefer-const": "error",
+      "prefer-arrow-callback": "error",
+      "prefer-destructuring": [
+        "error",
+        {
+          "object": true,
+          "array": false
+        }
+      ],
       "space-before-function-paren": [
         "error",
         {

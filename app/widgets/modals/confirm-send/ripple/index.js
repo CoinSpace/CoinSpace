@@ -1,44 +1,43 @@
 'use strict';
 
-var Ractive = require('widgets/modals/base');
-var emitter = require('lib/emitter');
-var getWallet = require('lib/wallet').getWallet;
-var toAtom = require('lib/convert').toAtom;
-var showInfo = require('widgets/modals/flash').showInfo;
+const Ractive = require('widgets/modals/base');
+const emitter = require('lib/emitter');
+const { getWallet } = require('lib/wallet');
+const { showInfo } = require('widgets/modals/flash');
 
 function open(data) {
 
-  var ractive = new Ractive({
+  const ractive = new Ractive({
     partials: {
       content: require('./_content.ract'),
       error: require('../error.ract'),
-      success: require('../success.ract')
+      success: require('../success.ract'),
     },
-    data: extendData(data)
+    data: extendData(data),
   });
 
-  ractive.on('send', function() {
+  ractive.on('send', () => {
     ractive.set('sending', true);
-    setTimeout(function() {
-      var wallet = getWallet();
-      var tx = null;
+    setTimeout(() => {
+      const wallet = getWallet();
+      let tx = null;
 
       try {
         tx = createTx();
-      } catch(err) {
+      } catch (err) {
         ractive.set('sending', false);
-        if (/Insufficient funds/.test(err.message)) return showInfo({title: 'Insufficient funds'});
+        if (/Insufficient funds/.test(err.message)) return showInfo({ title: 'Insufficient funds' });
         if (data.importTxOptions && /Less than minimum reserve/.test(err.message)) {
           return showInfo({
             title: 'Insufficient funds',
             message: "Your wallet isn't activated. You can receive only amount greater than :minReserve :denomination.",
-            interpolations: {minReserve: wallet.minReserve, denomination: wallet.denomination}
+            interpolations: { minReserve: wallet.minReserve, denomination: wallet.denomination },
           });
         }
         return handleTransactionError(err);
       }
 
-      wallet.sendTx(tx, function(err) {
+      wallet.sendTx(tx, (err) => {
         if (err) return handleTransactionError(err);
 
         ractive.set('confirmation', false);
@@ -52,24 +51,26 @@ function open(data) {
   });
 
   function createTx() {
-    var wallet = getWallet();
-    var tx;
+    const wallet = getWallet();
+    let tx;
     if (data.importTxOptions) {
       tx = wallet.createImportTx(data.importTxOptions);
     } else {
+      // eslint-disable-next-line prefer-destructuring
       tx = data.tx;
     }
     return tx;
   }
 
   function handleTransactionError(err) {
-    ractive.set('confirmation', false)
-    var wallet = getWallet();
+    ractive.set('confirmation', false);
+    const wallet = getWallet();
     if (err.message === 'tecNO_DST_INSUF_XRP') {
+      // eslint-disable-next-line max-len
       err.message = "Recipient's wallet isn't activated. You can send only amount greater than :minReserve :denomination.";
       ractive.set('interpolations', {
         minReserve: wallet.minReserve,
-        denomination: wallet.denomination
+        denomination: wallet.denomination,
       });
     } else if (err.message === 'tecDST_TAG_NEEDED') {
       err.message = "Recipient's wallet requires a destination tag.";
@@ -79,10 +80,10 @@ function open(data) {
     } else {
       console.error(err);
     }
-    ractive.set('error', err.message)
+    ractive.set('error', err.message);
   }
 
-  return ractive
+  return ractive;
 }
 
 function extendData(data) {
@@ -90,10 +91,10 @@ function extendData(data) {
   data.confirmation = true;
   data.feeSign = data.importTxOptions ? '-' : '+';
 
-  var wallet = getWallet();
+  const wallet = getWallet();
   data.fee = wallet.getDefaultFee();
 
   return data;
 }
 
-module.exports = open
+module.exports = open;

@@ -43,7 +43,7 @@ webpackConfig.plugins.push(
   })
 );
 
-webpack(webpackConfig, function(error, stats) {
+webpack(webpackConfig, (error, stats) => {
   if (error) throw error;
   if (stats.hasErrors()) {
     console.log(stats.toString({ colors: true }));
@@ -59,7 +59,7 @@ webpack(webpackConfig, function(error, stats) {
     cwd: './phonegap',
     env: {
       ...process.env,
-      RELEASE: program.release
+      RELEASE: program.release,
     },
   });
 

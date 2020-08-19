@@ -16,7 +16,7 @@ function cleanGeo(interval) {
 
 function cacheFees(interval) {
   setInterval(function intervalFunction() {
-    fee.getFromAPI('bitcoin').then(function(data) {
+    fee.getFromAPI('bitcoin').then((data) => {
       if (global.gc) global.gc();
       return fee.save('bitcoin', {
         minimum: data.minimum,
@@ -30,7 +30,7 @@ function cacheFees(interval) {
 
 function cacheTicker(interval) {
   setInterval(function intervalFunction() {
-    ticker.getFromAPI().then(function(data) {
+    ticker.getFromAPI().then((data) => {
       if (global.gc) global.gc();
       return ticker.save(data);
     }).catch(console.error);
@@ -40,7 +40,7 @@ function cacheTicker(interval) {
 
 function cacheEthereumTokens(interval) {
   setInterval(function intervalFunction() {
-    ethereumTokens.getFromAPI().then(function(data) {
+    ethereumTokens.getFromAPI().then((data) => {
       if (global.gc) global.gc();
       return ethereumTokens.save(data);
     }).catch(console.error);
@@ -50,7 +50,7 @@ function cacheEthereumTokens(interval) {
 
 function cacheMoonpayCurrencies(interval) {
   setInterval(function intervalFunction() {
-    moonpay.getCurrenciesFromAPI().then(function(data) {
+    moonpay.getCurrenciesFromAPI().then((data) => {
       if (global.gc) global.gc();
       return Promise.all([
         moonpay.save('coins', data.coins),
@@ -64,7 +64,7 @@ function cacheMoonpayCurrencies(interval) {
 
 function cacheMoonpayCountries(interval) {
   setInterval(function intervalFunction() {
-    moonpay.getCountriesFromAPI().then(function(data) {
+    moonpay.getCountriesFromAPI().then((data) => {
       if (global.gc) global.gc();
       return Promise.all([
         moonpay.save('countries_allowed', data.allowed),

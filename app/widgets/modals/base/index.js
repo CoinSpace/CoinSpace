@@ -1,49 +1,49 @@
 'use strict';
 
-var Ractive = require('lib/ractive')
-var fadeIn = require('lib/transitions/fade.js').fadeIn
-var fadeOut = require('lib/transitions/fade.js').fadeOut
+const Ractive = require('lib/ractive');
+const { fadeIn } = require('lib/transitions/fade.js');
+const { fadeOut } = require('lib/transitions/fade.js');
 
-var Modal = Ractive.extend({
+const Modal = Ractive.extend({
   el: document.getElementById('general-purpose-overlay'),
   template: require('./index.ract'),
   partials: {
     content: require('./content.ract'),
   },
-  onrender: function() {
+  onrender() {
 
-    var self = this
-    var fadeEl = self.find('.js__fadeEl')
+    const self = this;
+    const fadeEl = self.find('.js__fadeEl');
 
-    fadeIn(fadeEl, self.get('fadeInDuration'), function() {
-      fadeEl.focus()
-      var onFocus = self.get('onFocus')
+    fadeIn(fadeEl, self.get('fadeInDuration'), () => {
+      fadeEl.focus();
+      const onFocus = self.get('onFocus');
       if (onFocus) onFocus();
-    })
+    });
 
-    self.on('cancel', function(context) {
+    self.on('cancel', (context) => {
       if (!context.node) return dismissModal();
-      var originalElement = context.original.srcElement || context.original.originalTarget;
+      const originalElement = context.original.srcElement || context.original.originalTarget;
       if (originalElement.classList && originalElement.classList.contains('_cancel')) {
         if (self.get('hasIframe')) self.fire('ios-blur');
         dismissModal();
       }
-    })
+    });
 
-    self.on('ios-blur', function() {
+    self.on('ios-blur', () => {
       // fix ios iframe focus
-      var hiddenInput = self.find('#modal-hidden-input');
+      const hiddenInput = self.find('#modal-hidden-input');
       hiddenInput.focus();
       hiddenInput.blur();
     });
 
     function dismissModal() {
-      var onDismiss = self.get('onDismiss');
+      const onDismiss = self.get('onDismiss');
       if (onDismiss) onDismiss();
       fadeOut(fadeEl);
     }
-  }
-})
+  },
+});
 
-module.exports = Modal
+module.exports = Modal;
 

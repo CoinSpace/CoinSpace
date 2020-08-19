@@ -1,50 +1,50 @@
 'use strict';
 
-var Ractive = require('widgets/modals/base');
-var showError = require('widgets/modals/flash').showError;
-var moonpay = require('lib/moonpay');
-var initDropdown = require('widgets/dropdown');
-var initFilePicker = require('widgets/filepicker');
-var translate = require('lib/i18n').translate;
+const Ractive = require('widgets/modals/base');
+const { showError } = require('widgets/modals/flash');
+const moonpay = require('lib/moonpay');
+const initDropdown = require('widgets/dropdown');
+const initFilePicker = require('widgets/filepicker');
+const { translate } = require('lib/i18n');
 
-var ractive;
+let ractive;
 
 function open() {
 
   ractive = new Ractive({
     partials: {
-      content: require('./_content.ract')
+      content: require('./_content.ract'),
     },
     data: {
       isLoading: false,
       isInited: false,
       step: 1,
-      hasTwoSides: false
-    }
+      hasTwoSides: false,
+    },
   });
 
-  var countryPicker;
-  var documentTypePicker;
-  var documentPicker;
-  var documentFrontPicker;
-  var documentBackPicker;
+  let countryPicker;
+  let documentTypePicker;
+  let documentPicker;
+  let documentFrontPicker;
+  let documentBackPicker;
 
-  var allDocumentTypes = [
-    {code: 'passport', name: translate('Passport')},
-    {code: 'national_identity_card', name: translate('National identity card')},
-    {code: 'driving_licence', name: translate('Driving licence')},
+  const allDocumentTypes = [
+    { code: 'passport', name: translate('Passport') },
+    { code: 'national_identity_card', name: translate('National identity card') },
+    { code: 'driving_licence', name: translate('Driving licence') },
   ];
 
-  var existingFile;
+  let existingFile;
 
   Promise.all([
     moonpay.getFiles(),
-    moonpay.getCountries('document').length === 0 ? moonpay.loadCountries('document') : Promise.resolve()
-  ]).then(function(results) {
+    moonpay.getCountries('document').length === 0 ? moonpay.loadCountries('document') : Promise.resolve(),
+  ]).then((results) => {
     ractive.set('isInited', true);
 
-    var selectedCountry = moonpay.getIpCountry();
-    var selectedType;
+    let selectedCountry = moonpay.getIpCountry();
+    let selectedType;
 
     existingFile = getValidDocumentFile(results[0]);
     if (existingFile) {
@@ -52,19 +52,19 @@ function open() {
       selectedType = existingFile.type;
     }
 
-    var countries = moonpay.getCountries('document');
+    const countries = moonpay.getCountries('document');
     countryPicker = initDropdown(ractive.find('#moonpay_document_country'), countries, selectedCountry);
     renderDocumentTypePicker(selectedCountry, selectedType);
-    countryPicker.on('on-change', function() {
+    countryPicker.on('on-change', () => {
       renderDocumentTypePicker(countryPicker.getValue());
     });
   }).catch(console.error);
 
   function renderDocumentTypePicker(code, selectedType) {
-    var countries = moonpay.getCountries('document');
-    var country = code ? countries.find(function(country) { return country.code === code; }) : countries[0];
+    const countries = moonpay.getCountries('document');
+    const country = code ? countries.find((country) => { return country.code === code; }) : countries[0];
     if (country && country.supportedDocuments) {
-      var options = allDocumentTypes.filter(function(item) {
+      const options = allDocumentTypes.filter((item) => {
         return country.supportedDocuments.indexOf(item.code) !== -1;
       });
       documentTypePicker = initDropdown(ractive.find('#moonpay_document_document_type'), options, selectedType);
@@ -73,13 +73,14 @@ function open() {
     }
   }
 
-  ractive.on('continue', function() {
+  ractive.on('continue', () => {
     ractive.set('step', 2);
-    var type = documentTypePicker.getValue();
-    var hasTwoSides = type === 'national_identity_card' || type === 'driving_licence';
+    const type = documentTypePicker.getValue();
+    const hasTwoSides = type === 'national_identity_card' || type === 'driving_licence';
     ractive.set('hasTwoSides', hasTwoSides);
 
-    var filename = '';
+    let filename = '';
+    // eslint-disable-next-line max-len
     if (existingFile && existingFile.type === documentTypePicker.getValue() && existingFile.country === countryPicker.getValue()) {
       filename = 'document';
     }
@@ -87,39 +88,39 @@ function open() {
     if (hasTwoSides) {
       documentFrontPicker = initFilePicker(ractive.find('#moonpay_document_front_widget'), {
         id: 'moonpay_document_front',
-        filename: filename
+        filename,
       });
       documentBackPicker = initFilePicker(ractive.find('#moonpay_document_back_widget'), {
         id: 'moonpay_document_back',
-        filename: filename
+        filename,
       });
     } else {
       documentPicker = initFilePicker(ractive.find('#moonpay_document_widget'), {
         id: 'moonpay_document',
-        filename: filename
+        filename,
       });
     }
   });
 
-  ractive.on('back', function() {
+  ractive.on('back', () => {
     ractive.set('step', 1);
   });
 
-  ractive.on('submit', function() {
+  ractive.on('submit', () => {
     ractive.set('isLoading', true);
-    var type = documentTypePicker.getValue();
-    var country = countryPicker.getValue();
+    const type = documentTypePicker.getValue();
+    const country = countryPicker.getValue();
 
     if (ractive.get('hasTwoSides')) {
-      var front = documentFrontPicker.getFile();
-      var back = documentBackPicker.getFile();
+      const front = documentFrontPicker.getFile();
+      const back = documentBackPicker.getFile();
       if (!front || !back) return handleError(new Error('Please fill out all fields.'));
       return Promise.all([
         moonpay.uploadFile(front, type, country, 'front'),
-        moonpay.uploadFile(back, type, country, 'back')
-      ]).then(function() {
+        moonpay.uploadFile(back, type, country, 'back'),
+      ]).then(() => {
         ractive.fire('cancel');
-      }).catch(function(err) {
+      }).catch((err) => {
         if (/File upload is disabled due to identity check status/.test(err.message)) {
           return handleError(new Error('File upload is disabled due to identity check status'));
         }
@@ -127,11 +128,11 @@ function open() {
         return handleError(new Error('Upload failed. Please try again later.'));
       });
     } else {
-      var document = documentPicker.getFile();
+      const document = documentPicker.getFile();
       if (!document) return handleError(new Error('Please fill out all fields.'));
-      return moonpay.uploadFile(document, type, country).then(function() {
+      return moonpay.uploadFile(document, type, country).then(() => {
         ractive.fire('cancel');
-      }).catch(function(err) {
+      }).catch((err) => {
         if (/File upload is disabled due to identity check status/.test(err.message)) {
           return handleError(new Error('File upload is disabled due to identity check status'));
         }
@@ -142,11 +143,12 @@ function open() {
   });
 
   function getValidDocumentFile(files) {
-    files = files.filter(function(item) {
+    files = files.filter((item) => {
       return ['passport', 'national_identity_card', 'driving_licence'].indexOf(item.type) !== -1;
     });
     if (files.length === 0) return false;
     if (files.length === 1 && files[0].type === 'passport') return files[0];
+    // eslint-disable-next-line max-len
     if (files.length === 2 && files[0].type === files[1].type && ['national_identity_card', 'driving_licence'].indexOf(files[0].type) !== -1) {
       return files[0];
     }
@@ -155,7 +157,7 @@ function open() {
 
   function handleError(err) {
     ractive.set('isLoading', false);
-    showError({message: err.message});
+    showError({ message: err.message });
   }
 
   return ractive;

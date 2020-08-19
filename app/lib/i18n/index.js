@@ -1,29 +1,29 @@
 'use strict';
 
-var translate = require('counterpart')
+const translate = require('counterpart');
 
-var languages = [
+const languages = [
   'bs', 'cs-cz', 'de', 'en', 'es', 'fil',
   'fr', 'hr', 'hu', 'id', 'it', 'ja',
   'km', 'ko', 'nb', 'nl', 'pl', 'pt-br', 'ru',
-  'sr', 'th', 'uk', 'vi', 'zh-cn'
-]
+  'sr', 'th', 'uk', 'vi', 'zh-cn',
+];
 
-translate.setSeparator('*')
+translate.setSeparator('*');
 
-translate.setMissingEntryGenerator(function(key) {
+translate.setMissingEntryGenerator((key) => {
   console.error('Missing translation: ' + key);
   return key;
 });
 
 function loadTranslation() {
-  var language = getLanguage()
+  const language = getLanguage();
   return import(
     /* webpackChunkName: '[request]' */
     './translations/' + language
-  ).then(function(translation) {
-    translate.registerTranslations(language, translation)
-    translate.setLocale(language)
+  ).then((translation) => {
+    translate.registerTranslations(language, translation);
+    translate.setLocale(language);
   });
 }
 
@@ -33,14 +33,14 @@ function safeTranslate() {
 }
 
 function getLanguage() {
-  var language = navigator.language.toLocaleLowerCase() || 'en'
-  return languages.filter(function(l) {
-    return language === l || language.substr(0, 2) === l
-  })[0] || 'en'
+  const language = navigator.language.toLocaleLowerCase() || 'en';
+  return languages.filter((l) => {
+    return language === l || language.substr(0, 2) === l;
+  })[0] || 'en';
 }
 
 module.exports = {
-  loadTranslation: loadTranslation,
+  loadTranslation,
   translate: safeTranslate,
-  getLanguage: getLanguage
-}
+  getLanguage,
+};

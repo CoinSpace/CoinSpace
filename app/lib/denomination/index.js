@@ -1,6 +1,6 @@
 'use strict';
 
-var symbols = {
+const symbols = {
   bitcoin: 'BTC',
   bitcoincash: 'BCH',
   bitcoinsv: 'BSV',
@@ -10,8 +10,8 @@ var symbols = {
   stellar: 'XLM',
   eos: 'EOS',
   dogecoin: 'DOGE',
-  dash: 'DASH'
-}
+  dash: 'DASH',
+};
 
 function getDenomination(token) {
   if (typeof token === 'string') return symbols[token];

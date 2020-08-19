@@ -9,13 +9,13 @@ function parseBtcLtcTx(tx, networkName) {
     timestamp: tx.timestamp * 1000,
     confirmations: tx.confirmations,
     fee: tx.fees,
-    ins: tx.vin.map(function(input) {
+    ins: tx.vin.map((input) => {
       return {
         address: toAddress(networkName, input.addr),
         amount: input.valueSat,
       };
     }),
-    outs: tx.vout.map(function(output) {
+    outs: tx.vout.map((output) => {
       return {
         address: toAddress(networkName, output.scriptPubKey.addresses ? output.scriptPubKey.addresses[0] : null),
         amount: output.valueSat,

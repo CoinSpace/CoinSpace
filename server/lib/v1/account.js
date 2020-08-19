@@ -8,7 +8,7 @@ function isExist(walletId) {
   return collection
     .find({ _id: walletId }, { projection: { _id: 1 } })
     .limit(1)
-    .next().then(function(user) {
+    .next().then((user) => {
       if (!user) return false;
       return true;
     });
@@ -26,7 +26,7 @@ function getDetails(walletId) {
   return collection
     .find({ _id: walletId })
     .limit(1)
-    .next().then(function(doc) {
+    .next().then((doc) => {
       if (!doc) return doc;
       return doc.data;
     });
@@ -34,7 +34,7 @@ function getDetails(walletId) {
 
 function saveDetails(walletId, data) {
   const collection = db().collection('details');
-  return collection.updateOne({ _id: walletId }, { $set: { data } }, { upsert: true } ).then(function() {
+  return collection.updateOne({ _id: walletId }, { $set: { data } }, { upsert: true } ).then(() => {
     return data;
   });
 }
@@ -44,7 +44,7 @@ function setUsername(walletId, username) {
   return collection
     .find({ _id: walletId })
     .limit(1)
-    .next().then(function(user) {
+    .next().then((user) => {
       if (!user) return Promise.reject({ error: 'error getting doc' });
 
       username = username.toLowerCase().replace(/[^a-z0-9-]/g, '');
@@ -53,9 +53,9 @@ function setUsername(walletId, username) {
         .digest('hex');
       return db().collection('details').updateOne({ _id: user._id }, {
         $set: { username_sha: usernameSha },
-      }, { upsert: true }).then(function() {
+      }, { upsert: true }).then(() => {
         return username;
-      }).catch(function(error) {
+      }).catch((error) => {
         if (error && error.message && error.message.match(/E11000 duplicate key error/)) {
           return Promise.reject({ error: 'username_exists' });
         }

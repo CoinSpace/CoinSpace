@@ -1,17 +1,18 @@
 'use strict';
 
 function getToken() {
-  var token = window.localStorage.getItem('_cs_token');
+  let token = window.localStorage.getItem('_cs_token');
 
   try {
     token = JSON.parse(token);
+  // eslint-disable-next-line no-empty
   } catch (e) {}
 
   return token;
 }
 
 function getTokenNetwork() {
-  var token = getToken();
+  const token = getToken();
   if (!token) return false;
   if (typeof token === 'string') return token;
   return token.network;
@@ -22,7 +23,7 @@ function setToken(token) {
 }
 
 module.exports = {
-  getToken: getToken,
-  getTokenNetwork: getTokenNetwork,
-  setToken: setToken
-}
+  getToken,
+  getTokenNetwork,
+  setToken,
+};

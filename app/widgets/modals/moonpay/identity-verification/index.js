@@ -1,21 +1,21 @@
 'use strict';
 
-var Ractive = require('widgets/modals/base');
-var showError = require('widgets/modals/flash').showError;
-var _ = require('lodash');
-var moonpay = require('lib/moonpay');
-var initBirthdayPicker = require('widgets/birthdaypicker');
-var initDropdown = require('widgets/dropdown');
+const Ractive = require('widgets/modals/base');
+const { showError } = require('widgets/modals/flash');
+const _ = require('lodash');
+const moonpay = require('lib/moonpay');
+const initBirthdayPicker = require('widgets/birthdaypicker');
+const initDropdown = require('widgets/dropdown');
 
-var ractive;
+let ractive;
 
 function open(onSuccessDismiss) {
 
-  var customer = moonpay.getCustomer();
+  const customer = moonpay.getCustomer();
 
   ractive = new Ractive({
     partials: {
-      content: require('./_content.ract')
+      content: require('./_content.ract'),
     },
     data: {
       isLoading: false,
@@ -31,19 +31,19 @@ function open(onSuccessDismiss) {
           postCode: customer.address.postCode,
           state: customer.address.state,
           country: customer.address.country || moonpay.getIpCountry(),
-        }
+        },
       },
       showStates: false,
       isInited: moonpay.getCountries('allowed').length !== 0,
-    }
+    },
   });
 
-  var birthdayPicker;
-  var countryPicker;
-  var statePicker;
+  let birthdayPicker;
+  let countryPicker;
+  let statePicker;
 
   if (moonpay.getCountries('allowed').length === 0) {
-    moonpay.loadCountries('allowed').then(function() {
+    moonpay.loadCountries('allowed').then(() => {
       ractive.set('isInited', true);
       initPickers();
     }).catch(console.error);
@@ -52,15 +52,15 @@ function open(onSuccessDismiss) {
   }
 
   function initPickers() {
-    var date = ractive.get('identity.dateOfBirth');
+    const date = ractive.get('identity.dateOfBirth');
     birthdayPicker = initBirthdayPicker(ractive.find('#moonpay_identity_dateofbirth'), date);
 
-    var countries = moonpay.getCountries('allowed');
-    var selectedCountry = ractive.get('identity.address.country');
+    const countries = moonpay.getCountries('allowed');
+    const selectedCountry = ractive.get('identity.address.country');
     countryPicker = initDropdown(ractive.find('#moonpay_identity_country'), countries, selectedCountry);
     renderStatePicker(selectedCountry);
-    countryPicker.on('on-change', function() {
-      var code = countryPicker.getValue();
+    countryPicker.on('on-change', () => {
+      const code = countryPicker.getValue();
       ractive.set('identity.address', {
         street: null,
         subStreet: null,
@@ -74,11 +74,11 @@ function open(onSuccessDismiss) {
   }
 
   function renderStatePicker(code) {
-    var countries = moonpay.getCountries('allowed');
-    var country = code ? countries.find(function(country) { return country.code === code; }) : countries[0];
+    const countries = moonpay.getCountries('allowed');
+    const country = code ? countries.find((country) => { return country.code === code; }) : countries[0];
     if (country && country.states) {
       ractive.set('showStates', true);
-      var selectedState = ractive.get('identity.address.state') || undefined;
+      const selectedState = ractive.get('identity.address.state') || undefined;
       statePicker = initDropdown(ractive.find('#moonpay_identity_address_state'), country.states, selectedState);
     } else {
       ractive.set('showStates', false);
@@ -86,28 +86,29 @@ function open(onSuccessDismiss) {
     }
   }
 
-  ractive.on('continue', function() {
+  ractive.on('continue', () => {
     ractive.set('step', 2);
   });
 
-  ractive.on('back', function() {
+  ractive.on('back', () => {
     ractive.set('step', 1);
   });
 
-  ractive.on('submit', function() {
+  ractive.on('submit', () => {
     ractive.set('isLoading', true);
 
-    var identity = ractive.get('identity');
+    const identity = ractive.get('identity');
     identity.dateOfBirth = birthdayPicker.getBirthday();
     identity.address.country = countryPicker.getValue();
     identity.address.state = statePicker && statePicker.getValue();
 
+    // eslint-disable-next-line max-len
     if (!identity.firstName || !identity.lastName || !identity.address.street || !identity.address.town || !identity.address.postCode) {
       return handleError(new Error('Please enter a valid info'));
     }
 
-    var data = {};
-    Object.keys(identity).forEach(function(key) {
+    const data = {};
+    Object.keys(identity).forEach((key) => {
       if (key === 'address') {
         if (_.isEqual(identity.address, customer.address)) return;
         data.address = identity.address;
@@ -120,13 +121,13 @@ function open(onSuccessDismiss) {
 
     if (_.isEmpty(data)) return ractive.fire('cancel');
 
-    return moonpay.updateCustomer(data).then(function(data) {
+    return moonpay.updateCustomer(data).then((data) => {
       moonpay.setCustomer(data);
-      ractive.set('onDismiss', function() {
+      ractive.set('onDismiss', () => {
         if (onSuccessDismiss) onSuccessDismiss();
       });
       ractive.fire('cancel');
-    }).catch(function(err) {
+    }).catch((err) => {
       if (/Customer info update is disabled/.test(err.message)) {
         return handleError(new Error('Customer info update is disabled due to identity check status'));
       }
@@ -143,7 +144,7 @@ function open(onSuccessDismiss) {
 
   function handleError(err) {
     ractive.set('isLoading', false);
-    showError({message: err.message});
+    showError({ message: err.message });
   }
 
   return ractive;

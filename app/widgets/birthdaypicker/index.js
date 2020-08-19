@@ -1,26 +1,39 @@
 'use strict';
 
-var Ractive = require('lib/ractive');
+const Ractive = require('lib/ractive');
 
 module.exports = function(el, date) {
-  var now = new Date();
-  var maxYear = now.getFullYear() - 18;
-  var minYear = maxYear - 120;
-  var years = [];
-  for (var year = maxYear; year >= minYear; year--) {
+  const now = new Date();
+  const maxYear = now.getFullYear() - 18;
+  const minYear = maxYear - 120;
+  const years = [];
+  for (let year = maxYear; year >= minYear; year--) {
     years.push(year);
   }
 
-  var ractive = new Ractive({
-    el: el,
+  const ractive = new Ractive({
+    el,
     template: require('./index.ract'),
     data: {
-      months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-      years: years,
+      months: [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ],
+      years,
       days: [],
       selectedDay: 1,
       selectedMonth: 0,
-      selectedYear: maxYear
+      selectedYear: maxYear,
     },
   });
 
@@ -35,18 +48,18 @@ module.exports = function(el, date) {
   }
 
   function setDays() {
-    var year = ractive.get('selectedYear');
-    var month = ractive.get('selectedMonth');
-    var maxDays = new Date(year, month + 1, 0).getDate();
-    var days = [];
-    for (var day = 1; day <= maxDays; day++) {
+    const year = ractive.get('selectedYear');
+    const month = ractive.get('selectedMonth');
+    const maxDays = new Date(year, month + 1, 0).getDate();
+    const days = [];
+    for (let day = 1; day <= maxDays; day++) {
       days.push(day);
     }
     ractive.set('days', days);
   }
 
   ractive.getBirthday = function() {
-    var date = new Date(Date.UTC(
+    const date = new Date(Date.UTC(
       this.get('selectedYear'),
       this.get('selectedMonth'),
       this.get('selectedDay')
@@ -55,4 +68,4 @@ module.exports = function(el, date) {
   };
 
   return ractive;
-}
+};

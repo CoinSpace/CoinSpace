@@ -1,21 +1,21 @@
 'use strict';
 
-var Ractive = require('widgets/modals/base');
-var showError = require('widgets/modals/flash').showError;
-var qrcode = require('lib/qrcode');
-var emitter = require('lib/emitter');
-var request = require('lib/request');
-var urlRoot = window.urlRoot;
-var db = require('lib/db');
+const Ractive = require('widgets/modals/base');
+const { showError } = require('widgets/modals/flash');
+const qrcode = require('lib/qrcode');
+const emitter = require('lib/emitter');
+const request = require('lib/request');
+const { urlRoot } = window;
+const db = require('lib/db');
 
-var tokens = [];
-var ractive;
+let tokens = [];
+let ractive;
 
 function open(walletTokens, callback) {
 
   ractive = new Ractive({
     partials: {
-      content: require('./_content.ract')
+      content: require('./_content.ract'),
     },
     data: {
       isLoading: false,
@@ -23,41 +23,41 @@ function open(walletTokens, callback) {
       contractAddress: '',
       symbol: '',
       decimals: '',
-      tokens: tokens,
+      tokens,
       token: '-1',
-      isInited: tokens.length !== 0
-    }
+      isInited: tokens.length !== 0,
+    },
   });
 
   if (tokens.length === 0) {
     request({
-      url: urlRoot + 'v1/ethereum/tokens'
-    }).then(function(data) {
+      url: urlRoot + 'v1/ethereum/tokens',
+    }).then((data) => {
       tokens = data;
       ractive.set({
-        tokens: tokens,
-        isInited: true
+        tokens,
+        isInited: true,
       });
     }).catch(console.error);
   }
 
-  ractive.on('clearContractAddress', function() {
-    var input = ractive.find('#contract_address');
+  ractive.on('clearContractAddress', () => {
+    const input = ractive.find('#contract_address');
     ractive.set('contractAddress', '');
     input.focus();
   });
 
-  ractive.on('add', function() {
+  ractive.on('add', () => {
     ractive.set('isLoading', true);
 
-    var token = ractive.get('token');
-    var data = {
+    const token = ractive.get('token');
+    const data = {
       address: token ? token.address : ractive.get('contractAddress').trim(),
       symbol: token ? token.symbol : ractive.get('symbol').trim(),
       name: token ? token.name : ractive.get('symbol').trim(),
       decimals: token ? token.decimals : ractive.get('decimals'),
-      network: 'ethereum'
-    }
+      network: 'ethereum',
+    };
 
     if (!data.address || !data.symbol || typeof data.decimals !== 'number') {
       return handleError(new Error('Please fill out all fields.'));
@@ -65,30 +65,30 @@ function open(walletTokens, callback) {
 
     walletTokens.push(data);
 
-    db.set('walletTokens', walletTokens).then(function() {
+    db.set('walletTokens', walletTokens).then(() => {
       callback(data);
       ractive.fire('cancel');
-    }).catch(function(err) {
+    }).catch((err) => {
       console.error(err);
       ractive.fire('cancel');
     });
   });
 
-  ractive.on('open-qr', function() {
-    qrcode.scan({context: 'ethereum-contract-address'});
+  ractive.on('open-qr', () => {
+    qrcode.scan({ context: 'ethereum-contract-address' });
   });
 
   function handleError(err) {
     ractive.set('isLoading', false);
-    showError({message: err.message});
+    showError({ message: err.message });
   }
 
   return ractive;
 }
 
-emitter.on('prefill-wallet', function(contractAddress, context) {
+emitter.on('prefill-wallet', (contractAddress, context) => {
   if (context !== 'ethereum-contract-address' || !ractive) return;
   ractive.set('contractAddress', contractAddress);
 });
 
-module.exports = open
+module.exports = open;

@@ -1,52 +1,52 @@
 'use strict';
 
-var Ractive = require('lib/ractive')
-var emitter = require('lib/emitter')
+const Ractive = require('lib/ractive');
+const emitter = require('lib/emitter');
 
-module.exports = function(el){
-  var ractive = new Ractive({
-    el: el,
-    template: require('./index.ract')
-  })
+module.exports = function(el) {
+  const ractive = new Ractive({
+    el,
+    template: require('./index.ract'),
+  });
 
-  var tabElements = {
+  const tabElements = {
     send: '#send_tab',
     receive: '#receive_tab',
     exchange: '#exchange_tab',
     history: '#history_tab',
-    tokens: '#tokens_tab'
-  }
-  var active;
-  function highlightTab(node){
-    if(node !== active && active && active.classList.contains('active')) {
-      active.classList.remove('active')
+    tokens: '#tokens_tab',
+  };
+  let active;
+  function highlightTab(node) {
+    if (node !== active && active && active.classList.contains('active')) {
+      active.classList.remove('active');
     }
-    node.classList.add('active')
-    active = node
+    node.classList.add('active');
+    active = node;
   }
 
-  emitter.once('wallet-ready', function() {
+  emitter.once('wallet-ready', () => {
     highlightTab(ractive.find(tabElements.send));
   });
 
-  emitter.on('change-tab', function(tab) {
+  emitter.on('change-tab', (tab) => {
     highlightTab(ractive.find(tabElements[tab]));
-  })
+  });
 
-  emitter.on('toggle-menu', function(open) {
-    var classes = ractive.el.classList
+  emitter.on('toggle-menu', (open) => {
+    const classes = ractive.el.classList;
     if (open) {
-      classes.add('open')
+      classes.add('open');
     } else {
-      classes.remove('open')
+      classes.remove('open');
     }
-  })
+  });
 
-  ractive.on('select', function(context){
+  ractive.on('select', (context)=> {
     context.original.preventDefault();
-    emitter.emit('change-tab', context.node.dataset.tab)
+    emitter.emit('change-tab', context.node.dataset.tab);
     highlightTab(context.node);
-  })
+  });
 
-  return ractive
-}
+  return ractive;
+};

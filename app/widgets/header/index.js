@@ -2,10 +2,10 @@
 
 const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
-const sync = require('lib/wallet').sync;
-const getWallet = require('lib/wallet').getWallet;
-const toUnit = require('lib/convert').toUnit;
-const toUnitString = require('lib/convert').toUnitString;
+const { sync } = require('lib/wallet');
+const { getWallet } = require('lib/wallet');
+const { toUnit } = require('lib/convert');
+const { toUnitString } = require('lib/convert');
 const Big = require('big.js');
 const db = require('lib/db');
 

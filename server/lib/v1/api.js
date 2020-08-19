@@ -19,250 +19,250 @@ const github = require('./github');
 
 const router = express.Router();
 
-router.post('/register', validateAuthParams, function(req, res) {
+router.post('/register', validateAuthParams, (req, res) => {
   const walletId = req.body.wallet_id;
-  auth.register(walletId, req.body.pin).then(function(token) {
+  auth.register(walletId, req.body.pin).then((token) => {
     console.log('registered wallet %s', walletId);
     res.status(200).send(token);
-  }).catch(function(err) {
+  }).catch((err) => {
     if (!['auth_failed', 'user_deleted'].includes(err.error)) console.error('error', err);
     return res.status(400).send(err);
   });
 });
 
-router.post('/login', validateAuthParams, function(req, res) {
+router.post('/login', validateAuthParams, (req, res) => {
   const walletId = req.body.wallet_id;
-  auth.login(walletId, req.body.pin).then(function(token) {
+  auth.login(walletId, req.body.pin).then((token) => {
     console.log('authenticated wallet %s', walletId);
     res.status(200).send(token);
-  }).catch(function(err) {
+  }).catch((err) => {
     if (!['auth_failed', 'user_deleted'].includes(err.error)) console.error('error', err);
     res.status(400).send(err);
   });
 });
 
-router.get('/exist', function(req, res) {
+router.get('/exist', (req, res) => {
   const walletId = req.query.wallet_id;
   if (!walletId) return res.status(400).json({ error: 'Bad request' });
-  account.isExist(walletId).then(function(userExist) {
+  account.isExist(walletId).then((userExist) => {
     res.status(200).send(userExist);
-  }).catch(function(err) {
+  }).catch((err) => {
     return res.status(400).send(err);
   });
 });
 
-router.get('/openalias', function(req, res) {
-  const hostname = req.query.hostname;
+router.get('/openalias', (req, res) => {
+  const { hostname } = req.query;
   if (!hostname) return res.status(400).json({ error: 'Bad request' });
-  openalias.resolve(hostname, function(err, address, name) {
+  openalias.resolve(hostname, (err, address, name) => {
     if (err) return res.status(400).send(err);
     res.status(200).send({ address, name });
   });
 });
 
-router.put('/username', function(req, res) {
-  const id = req.body.id;
-  const username = req.body.username;
+router.put('/username', (req, res) => {
+  const { id } = req.body;
+  const { username } = req.body;
   if (!username) return res.status(400).json({ error: 'Bad request' });
-  account.setUsername(id, username).then(function(username) {
+  account.setUsername(id, username).then((username) => {
     res.status(200).send({ username });
-  }).catch(function(err) {
+  }).catch((err) => {
     res.status(400).send(err);
   });
 });
 
-router.get('/details', function(req, res) {
-  account.getDetails(req.query.id).then(function(details) {
+router.get('/details', (req, res) => {
+  account.getDetails(req.query.id).then((details) => {
     res.status(200).json(details);
-  }).catch(function(err) {
+  }).catch((err) => {
     res.status(400).send(err);
   });
 });
 
-router.put('/details', function(req, res) {
+router.put('/details', (req, res) => {
   if (!req.body.data) return res.status(400).json({ error: 'Bad request' });
-  account.saveDetails(req.body.id, req.body.data).then(function(details) {
+  account.saveDetails(req.body.id, req.body.data).then((details) => {
     res.status(200).json(details);
-  }).catch(function(err) {
+  }).catch((err) => {
     res.status(400).send(err);
   });
 });
 
-router.delete('/account', function(req, res) {
-  const id = req.body.id;
-  account.remove(id).then(function() {
+router.delete('/account', (req, res) => {
+  const { id } = req.body;
+  account.remove(id).then(() => {
     res.status(200).send();
-  }).catch(function(err) {
+  }).catch((err) => {
     res.status(400).send(err);
   });
 });
 
-router.get('/fees', function(req, res) {
+router.get('/fees', (req, res) => {
   const network = req.query.network || 'bitcoin';
-  fee.getFromCache(network).then(function(fees) {
+  fee.getFromCache(network).then((fees) => {
     delete fees._id;
     res.status(200).send(fees);
-  }).catch(function(err) {
+  }).catch((err) => {
     res.status(400).send(err);
   });
 });
 
-router.get('/csFee', function(req, res) {
+router.get('/csFee', (req, res) => {
   const network = req.query.network || 'bitcoin';
-  csFee.get(network).then(function(data) {
+  csFee.get(network).then((data) => {
     res.status(200).send(data);
-  }).catch(function(err) {
+  }).catch((err) => {
     res.status(400).send(err);
   });
 });
 
-router.get('/ticker', function(req, res) {
-  const crypto = req.query.crypto;
+router.get('/ticker', (req, res) => {
+  const { crypto } = req.query;
   if (!crypto) return res.status(400).json({ error: 'Bad request' });
-  ticker.getFromCache(crypto).then(function(data) {
+  ticker.getFromCache(crypto).then((data) => {
     res.status(200).send(data);
-  }).catch(function(err) {
+  }).catch((err) => {
     res.status(400).send(err);
   });
 });
 
-router.get('/ticker/applewatch', function(req, res) {
-  ticker.getFromCacheForAppleWatch().then(function(data) {
+router.get('/ticker/applewatch', (req, res) => {
+  ticker.getFromCacheForAppleWatch().then((data) => {
     res.status(200).send(data);
-  }).catch(function(err) {
+  }).catch((err) => {
     res.status(400).send(err);
   });
 });
 
-router.get('/ethereum/tokens', function(req, res) {
-  ethereumTokens.getAllFromCache().then(function(data) {
+router.get('/ethereum/tokens', (req, res) => {
+  ethereumTokens.getAllFromCache().then((data) => {
     res.status(200).send(data);
-  }).catch(function(err) {
+  }).catch((err) => {
     res.status(400).send(err);
   });
 });
 
-router.post('/location', function(req, res) {
+router.post('/location', (req, res) => {
   const data = req.body;
-  geo.save(data.lat, data.lon, data).then(function() {
+  geo.save(data.lat, data.lon, data).then(() => {
     res.status(201).send();
-  }).catch(function(err) {
+  }).catch((err) => {
     res.status(400).json(err);
   });
 });
 
-router.put('/location', function(req, res) {
+router.put('/location', (req, res) => {
   const data = req.body;
-  geo.search(data.lat, data.lon, data).then(function(results) {
+  geo.search(data.lat, data.lon, data).then((results) => {
     res.status(200).json(results);
-  }).catch(function(err) {
+  }).catch((err) => {
     res.status(400).json(err);
   });
 });
 
-router.delete('/location', function(req, res) {
+router.delete('/location', (req, res) => {
   geo.remove(req.body.id).catch(console.error);
   res.status(200).send();
 });
 
-router.get('/shapeShiftRedirectUri', function(req, res) {
+router.get('/shapeShiftRedirectUri', (req, res) => {
   const code = req.query.code || '';
-  const buildType = req.query.buildType;
+  const { buildType } = req.query;
   if (!['web', 'phonegap', 'electron'].includes(buildType)) return res.status(400).send('Bad request');
-  shapeshift.getAccessToken(code).then(function(accessToken) {
+  shapeshift.getAccessToken(code).then((accessToken) => {
     res.render('shapeshift', { accessToken, buildType });
-  }).catch(function() {
+  }).catch(() => {
     res.render('shapeshift', { accessToken: '', buildType });
   });
 });
 
-router.delete('/shapeShiftToken', function(req, res) {
-  const token = req.body.token;
-  shapeshift.revokeToken(token).catch(function() {});
+router.delete('/shapeShiftToken', (req, res) => {
+  const { token } = req.body;
+  shapeshift.revokeToken(token).catch(() => {});
   res.status(200).send();
 });
 
-router.get('/changelly/getCoins', function(req, res) {
-  changelly.getCoins().then(function(coins) {
+router.get('/changelly/getCoins', (req, res) => {
+  changelly.getCoins().then((coins) => {
     res.status(200).send(coins);
-  }).catch(function(err) {
+  }).catch((err) => {
     res.status(400).send(err);
   });
 });
 
-router.get('/changelly/estimate', function(req, res) {
+router.get('/changelly/estimate', (req, res) => {
   const from = req.query.from || '';
   const to = req.query.to || '';
   const amount = req.query.amount || 0;
   if (!from || !to) return res.status(400).json({ error: 'Bad request' });
-  changelly.estimate(from, to, amount).then(function(data) {
+  changelly.estimate(from, to, amount).then((data) => {
     res.status(200).send(data);
-  }).catch(function(err) {
+  }).catch((err) => {
     res.status(400).send(err);
   });
 });
 
-router.get('/changelly/validate/:address/:symbol', function(req, res) {
-  changelly.validateAddress(req.params.address, req.params.symbol).then(function(data) {
+router.get('/changelly/validate/:address/:symbol', (req, res) => {
+  changelly.validateAddress(req.params.address, req.params.symbol).then((data) => {
     res.status(200).send(data);
-  }).catch(function(err) {
+  }).catch((err) => {
     res.status(400).send(err);
   });
 });
 
-router.post('/changelly/createTransaction', function(req, res) {
-  const from = req.body.from;
-  const to = req.body.to;
-  const amount = req.body.amount;
-  const address = req.body.address;
-  const refundAddress = req.body.refundAddress;
+router.post('/changelly/createTransaction', (req, res) => {
+  const { from } = req.body;
+  const { to } = req.body;
+  const { amount } = req.body;
+  const { address } = req.body;
+  const { refundAddress } = req.body;
   if (!from || !to || !amount || !address) return res.status(400).json({ error: 'Bad request' });
-  changelly.createTransaction(from, to, amount, address, refundAddress).then(function(data) {
+  changelly.createTransaction(from, to, amount, address, refundAddress).then((data) => {
     res.status(200).send(data);
-  }).catch(function(err) {
+  }).catch((err) => {
     res.status(400).send(err);
   });
 });
 
-router.get('/changelly/transaction/:id', function(req, res) {
-  changelly.getTransaction(req.params.id).then(function(data) {
+router.get('/changelly/transaction/:id', (req, res) => {
+  changelly.getTransaction(req.params.id).then((data) => {
     res.status(200).send(data);
-  }).catch(function(err) {
+  }).catch((err) => {
     res.status(400).send(err);
   });
 });
 
-router.get('/moonpay/coins', function(req, res) {
+router.get('/moonpay/coins', (req, res) => {
   let id = 'coins';
   if (req.query.country === 'USA') {
     id += '_usa';
   }
-  moonpay.getFromCache(id).then(function(data) {
+  moonpay.getFromCache(id).then((data) => {
     res.status(200).send(data);
-  }).catch(function(err) {
+  }).catch((err) => {
     res.status(400).send(err);
   });
 });
 
-router.get('/moonpay/fiat', function(req, res) {
-  moonpay.getFromCache('fiat').then(function(data) {
+router.get('/moonpay/fiat', (req, res) => {
+  moonpay.getFromCache('fiat').then((data) => {
     res.status(200).send(data);
-  }).catch(function(err) {
+  }).catch((err) => {
     res.status(400).send(err);
   });
 });
 
-router.get('/moonpay/countries', function(req, res) {
+router.get('/moonpay/countries', (req, res) => {
   if (!['document', 'allowed'].includes(req.query.type)) return res.status(400).json({ error: 'Bad request' });
-  moonpay.getFromCache('countries_' + req.query.type).then(function(data) {
+  moonpay.getFromCache('countries_' + req.query.type).then((data) => {
     res.status(200).send(data);
-  }).catch(function(err) {
+  }).catch((err) => {
     res.status(400).send(err);
   });
 });
 
-router.get('/moonpay/redirectURL', function(req, res) {
-  const buildType = req.query.buildType;
+router.get('/moonpay/redirectURL', (req, res) => {
+  const { buildType } = req.query;
   const transactionId = req.query.transactionId || '';
   if (!['web', 'phonegap', 'electron'].includes(buildType)) return res.status(400).send('Bad request');
   res.render('moonpay', { transactionId, buildType });

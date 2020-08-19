@@ -1,20 +1,21 @@
 'use strict';
 
-var Ractive = require('widgets/modals/base');
-var showError = require('widgets/modals/flash').showError;
-var moonpay = require('lib/moonpay');
-var initDropdown = require('widgets/dropdown');
-var mpSdk = require('@moonpay/browser').default;
+const Ractive = require('widgets/modals/base');
+const { showError } = require('widgets/modals/flash');
+const moonpay = require('lib/moonpay');
+const initDropdown = require('widgets/dropdown');
+const mpSdk = require('@moonpay/browser').default;
 
-var ractive;
+let ractive;
 
 function open(data) {
-  var customer = moonpay.getCustomer();
-  var hasAddress = customer.address.street && customer.address.town && customer.address.postCode && customer.address.country;
+  const customer = moonpay.getCustomer();
+  // eslint-disable-next-line max-len
+  const hasAddress = customer.address.street && customer.address.town && customer.address.postCode && customer.address.country;
 
   ractive = new Ractive({
     partials: {
-      content: require('./_content.ract')
+      content: require('./_content.ract'),
     },
     data: {
       isLoading: false,
@@ -26,23 +27,23 @@ function open(data) {
         town: customer.address.town,
         postCode: customer.address.postCode,
         state: customer.address.state,
-        country: customer.address.country || moonpay.getIpCountry()
+        country: customer.address.country || moonpay.getIpCountry(),
       },
       showStates: false,
       isInited: moonpay.getCountries('allowed').length !== 0,
       isCcFormInited: false,
-      hasIframe: true
-    }
+      hasIframe: true,
+    },
   });
 
-  var countryPicker;
-  var statePicker;
-  var ccForm;
-  var ccFields = {};
-  var billingAddress;
+  let countryPicker;
+  let statePicker;
+  let ccForm;
+  let ccFields = {};
+  let billingAddress;
 
   if (moonpay.getCountries('allowed').length === 0) {
-    moonpay.loadCountries('allowed').then(function() {
+    moonpay.loadCountries('allowed').then(() => {
       ractive.set('isInited', true);
       initPickers();
     }).catch(console.error);
@@ -51,22 +52,22 @@ function open(data) {
   }
 
   function initPickers() {
-    var countries = moonpay.getCountries('allowed');
-    var selectedCountry = ractive.get('billingAddress.country');
+    const countries = moonpay.getCountries('allowed');
+    const selectedCountry = ractive.get('billingAddress.country');
     countryPicker = initDropdown(ractive.find('#moonpay_add_credit_card_country'), countries, selectedCountry);
     renderStatePicker(selectedCountry);
-    countryPicker.on('on-change', function() {
-      var code = countryPicker.getValue();
+    countryPicker.on('on-change', () => {
+      const code = countryPicker.getValue();
       renderStatePicker(code);
     });
   }
 
   function renderStatePicker(code) {
-    var countries = moonpay.getCountries('allowed');
-    var country = code ? countries.find(function(country) { return country.code === code; }) : countries[0];
+    const countries = moonpay.getCountries('allowed');
+    const country = code ? countries.find((country) => { return country.code === code; }) : countries[0];
     if (country && country.states) {
       ractive.set('showStates', true);
-      var selectedState = ractive.get('billingAddress.state') || undefined;
+      const selectedState = ractive.get('billingAddress.state') || undefined;
       statePicker = initDropdown(ractive.find('#moonpay_add_credit_card_state'), country.states, selectedState);
     } else {
       ractive.set('showStates', false);
@@ -74,8 +75,8 @@ function open(data) {
     }
   }
 
-  ractive.on('toggle-same-address', function() {
-    var sameAddressChecked = ractive.get('sameAddressChecked');
+  ractive.on('toggle-same-address', () => {
+    const sameAddressChecked = ractive.get('sameAddressChecked');
     ractive.set('sameAddressChecked', !sameAddressChecked);
     if (!sameAddressChecked) {
       ractive.set('billingAddress', {
@@ -88,18 +89,18 @@ function open(data) {
       });
     } else {
       ractive.set('billingAddress', {
-        country: moonpay.getIpCountry()
+        country: moonpay.getIpCountry(),
       });
     }
     initPickers();
   });
 
-  ractive.on('back', function() {
+  ractive.on('back', () => {
     ractive.fire('ios-blur');
     ractive.set('step', 1);
   });
 
-  ractive.on('continue', function() {
+  ractive.on('continue', () => {
 
     billingAddress = ractive.get('billingAddress');
     billingAddress.country = countryPicker.getValue();
@@ -118,28 +119,28 @@ function open(data) {
 
     mpSdk.initialize(process.env.MOONPAY_API_KEY, customer.id);
 
-    ccForm = mpSdk.createCardDetailsForm(function(state) {
+    ccForm = mpSdk.createCardDetailsForm((state) => {
       if (!ractive.get('isCcFormInited') && state.number && state.cvc && state.expiryDate) {
         ractive.set('isCcFormInited', true);
       }
     });
 
-    var css = {
+    const css = {
       fontSize: '16px',
       color: '#333333',
       '&::-webkit-input-placeholder': {
-        color: '#b3b3b3'
+        color: '#b3b3b3',
       },
       '&:-moz-placeholder': {
-        color: '#b3b3b3'
-      }
-    }
+        color: '#b3b3b3',
+      },
+    };
 
     ccFields = {
       'cc-number': ccForm.createField('.js-cc-number ._field', {
         type: 'card-number',
         name: 'number',
-        css: css,
+        css,
         placeholder: '4242 4242 4242 4242',
         validations: ['required', 'validCardNumber'],
         showCardIcon: true,
@@ -147,7 +148,7 @@ function open(data) {
       'cc-exp': ccForm.createField('.js-cc-exp ._field', {
         type: 'card-expiration-date',
         name: 'expiryDate',
-        css: css,
+        css,
         placeholder: '01 / 25',
         validations: ['required', 'validCardExpirationDate'],
         yearLength: 2,
@@ -155,26 +156,26 @@ function open(data) {
       'cc-cvc': ccForm.createField('.js-cc-cvc ._field', {
         type: 'card-security-code',
         name: 'cvc',
-        css: css,
+        css,
         placeholder: '345',
         validations: ['required', 'validCardSecurityCode'],
-      })
-    }
+      }),
+    };
   }
 
-  ractive.on('focus-cc-field', function(context) {
-    var field = context.node.getAttribute('data-field');
+  ractive.on('focus-cc-field', (context) => {
+    const field = context.node.getAttribute('data-field');
     if (ccFields[field]) ccFields[field].focus();
   });
 
-  ractive.on('add', function() {
+  ractive.on('add', () => {
     ractive.set('isLoading', true);
     ractive.fire('ios-blur');
-    ccForm.submit(billingAddress, function(status, response) {
-      moonpay.createCard(response.id).then(function() {
+    ccForm.submit(billingAddress, (status, response) => {
+      moonpay.createCard(response.id).then(() => {
         ractive.set('onDismiss', data && data.onSuccessDismiss);
         ractive.fire('cancel');
-      }).catch(function(err) {
+      }).catch((err) => {
         if (/Basic customer information must be/.test(err.message)) {
           return handleError(new Error('Identity verification must be passed before saving card'));
         }
@@ -185,12 +186,13 @@ function open(data) {
           return handleError(new Error('Sorry, we only accept Visa, Mastercard and Maestro cards at present'));
         }
         if (/The billing address of this card does not match/.test(err.message)) {
+          // eslint-disable-next-line max-len
           return handleError(new Error('The billing address of this card does not match the billing address that you entered, please try again'));
         }
         console.error(err);
         return handleError(new Error('Payment authorization declined'));
       });
-    }, function(err) {
+    }, (err) => {
       console.error(err);
       return handleError(new Error('Please enter a valid info'));
     });
@@ -198,7 +200,7 @@ function open(data) {
 
   function handleError(err) {
     ractive.set('isLoading', false);
-    showError({message: err.message});
+    showError({ message: err.message });
   }
 
   return ractive;

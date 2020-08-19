@@ -79,7 +79,7 @@ const config = merge(common, {
     new Dotenv({
       path: envFile,
       safe: true,
-      systemvars: true
+      systemvars: true,
     }),
     new UglifyJSPlugin({
       sourceMap: true,
@@ -97,7 +97,7 @@ const config = merge(common, {
     new ExtractTextPlugin({
       filename: 'assets/css/all.[contenthash:8].css',
       allChunks: true,
-    })
+    }),
   ],
 });
 
@@ -111,7 +111,7 @@ if (process.env.ENV === 'dev' || process.env.ENV === 'prod') {
 }
 
 if (process.env.BUILD_TYPE === 'phonegap') {
-  const htmlPlugin = config.plugins.find(function(plugin) {
+  const htmlPlugin = config.plugins.find((plugin) => {
     return plugin instanceof HtmlWebpackPlugin;
   });
   htmlPlugin.options.chunks = ['deviceready'];

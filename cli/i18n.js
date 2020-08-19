@@ -28,7 +28,7 @@ function run(program) {
 }
 
 function xlf(program) {
-  fse.readdirSync('./app/lib/i18n/xlf').forEach(function(file) {
+  fse.readdirSync('./app/lib/i18n/xlf').forEach((file) => {
     if (!file.endsWith('.xlf')) return;
 
     const dest = path.resolve('./app/lib/i18n/xlf', file);
@@ -41,7 +41,7 @@ function xlf(program) {
 
     const existed = js.resources[resource];
     const keys = {};
-    Object.keys(en).forEach(function(key) {
+    Object.keys(en).forEach((key) => {
       keys[key] = {
         source: en[key],
         target: '',
@@ -61,7 +61,7 @@ function xlf(program) {
 
 function json() {
   program.exclude.push('empty');
-  fse.readdirSync('./app/lib/i18n/xlf').forEach(function(file) {
+  fse.readdirSync('./app/lib/i18n/xlf').forEach((file) => {
     if (!file.endsWith('.xlf')) return;
 
     const data = fse.readFileSync(path.resolve('./app/lib/i18n/xlf', file), 'utf8');
@@ -77,7 +77,7 @@ function json() {
 
     const translations = {};
 
-    Object.keys(en).forEach(function(key) {
+    Object.keys(en).forEach((key) => {
       translations[key] = en[key];
       if (js.resources[resource][key] && js.resources[resource][key].target) {
         translations[key] = js.resources[resource][key].target;

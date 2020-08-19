@@ -1,12 +1,12 @@
 'use strict';
 
-const toAtom = require('lib/convert').toAtom;
-const toUnitString = require('lib/convert').toUnitString;
+const { toAtom } = require('lib/convert');
+const { toUnitString } = require('lib/convert');
 
 function validateSend(options) {
   const amount = toAtom(options.amount);
-  const wallet = options.wallet;
-  const to = options.to;
+  const { wallet } = options;
+  const { to } = options;
   const fee = toAtom(options.fee);
   let tx = null;
   let message;

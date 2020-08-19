@@ -1,23 +1,23 @@
 'use strict';
 
-var Ractive = require('lib/ractive');
-var emitter = require('lib/emitter');
-var showInfo = require('widgets/modals/flash').showInfo;
+const Ractive = require('lib/ractive');
+const emitter = require('lib/emitter');
+const { showInfo } = require('widgets/modals/flash');
 
 module.exports = function(el) {
-  var ractive = new Ractive({
-    el: el,
+  const ractive = new Ractive({
+    el,
     template: require('./index.ract'),
     data: {},
     partials: {
-      footer: require('../footer.ract')
-    }
+      footer: require('../footer.ract'),
+    },
   });
 
-  var delay = 60 * 1000; // 60 seconds
-  var interval;
+  const delay = 60 * 1000; // 60 seconds
+  let interval;
 
-  ractive.on('before-show', function(context) {
+  ractive.on('before-show', (context) => {
     if (context.status === 'hold') {
       showInfo({
         isHtml: true,
@@ -26,19 +26,19 @@ module.exports = function(el) {
         href: 'mailto:security@changelly.com',
         linkText: 'security@changelly.com',
         interpolations: {
-          id: context.id
-        }
+          id: context.id,
+        },
       });
     }
 
-    interval = setInterval(function() {
+    interval = setInterval(() => {
       emitter.emit('changelly');
     }, delay);
   });
 
-  ractive.on('before-hide', function() {
+  ractive.on('before-hide', () => {
     clearInterval(interval);
   });
 
   return ractive;
-}
+};

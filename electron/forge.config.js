@@ -2,7 +2,7 @@
 
 const pkg = require('./package.json');
 
-const BUILD_PLATFORM = process.env.BUILD_PLATFORM;
+const { BUILD_PLATFORM } = process.env;
 const BRANCH = process.env.TRAVIS_BRANCH || process.env.APPVEYOR_REPO_BRANCH;
 
 if (!['win', 'mac', 'mas', 'mas-dev', 'snap'].includes(BUILD_PLATFORM)) {

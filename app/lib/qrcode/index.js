@@ -1,84 +1,85 @@
 'use strict';
 
 // https://github.com/defunctzombie/qr.js/blob/515790fad4682b2d38008f229dbd814b0d2633e4/example/index.js
-var qr = require('qr.js')
-var emitter = require('lib/emitter')
-var EthereumWallet = require('cs-ethereum-wallet');
-var isValidIban = EthereumWallet.prototype.isValidIban;
-var getAddressFromIban = EthereumWallet.prototype.getAddressFromIban;
-var isScanAvailable = process.env.BUILD_TYPE === 'phonegap'
+const qr = require('qr.js');
+const emitter = require('lib/emitter');
+const EthereumWallet = require('cs-ethereum-wallet');
+const { isValidIban } = EthereumWallet.prototype;
+const { getAddressFromIban } = EthereumWallet.prototype;
+const isScanAvailable = process.env.BUILD_TYPE === 'phonegap';
 
 function encode(string, options) {
-  options = options || {}
-  var width = options.width || 200
-  var height = options.height || 200
+  options = options || {};
+  const width = options.width || 200;
+  const height = options.height || 200;
 
-  var canvas = document.createElement('canvas')
-  canvas.width = width
-  canvas.height = height
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
 
-  var ctx = canvas.getContext('2d')
+  const ctx = canvas.getContext('2d');
 
-  var cells = qr(string).modules
+  const cells = qr(string).modules;
 
-  var tileW = width  / cells.length
-  var tileH = height / cells.length
+  const tileW = width  / cells.length;
+  const tileH = height / cells.length;
 
-  for (var r = 0; r < cells.length ; ++r) {
-      var row = cells[r]
-      for (var c = 0; c < row.length ; ++c) {
-          ctx.fillStyle = row[c] ? '#000' : '#fff'
-          var w = (Math.ceil((c+1)*tileW) - Math.floor(c*tileW))
-          var h = (Math.ceil((r+1)*tileH) - Math.floor(r*tileH))
-          ctx.fillRect(Math.round(c*tileW), Math.round(r*tileH), w, h)
-      }
+  for (let r = 0; r < cells.length ; ++r) {
+    const row = cells[r];
+    for (let c = 0; c < row.length ; ++c) {
+      ctx.fillStyle = row[c] ? '#000' : '#fff';
+      const w = (Math.ceil((c+1)*tileW) - Math.floor(c*tileW));
+      const h = (Math.ceil((r+1)*tileH) - Math.floor(r*tileH));
+      ctx.fillRect(Math.round(c*tileW), Math.round(r*tileH), w, h);
+    }
   }
 
-  return canvas
+  return canvas;
 }
 
 function scan(data) {
   if (!isScanAvailable) return false;
 
+  // eslint-disable-next-line no-undef
   cordova.plugins.barcodeScanner.scan(
-    function(result) {
+    (result) => {
       if (result.text) {
-        var address = result.text.split('?')[0].split(':').pop()
+        let address = result.text.split('?')[0].split(':').pop();
 
         if (isValidIban(address)) {
           address = getAddressFromIban(address);
         }
 
-        emitter.emit('prefill-wallet', address, data.context)
+        emitter.emit('prefill-wallet', address, data.context);
 
-        var match;
-        match = result.text.match(/amount=([0-9.]+)/)
+        let match;
+        match = result.text.match(/amount=([0-9.]+)/);
         if (match && match[1]) {
-          emitter.emit('prefill-value', match[1], data.context)
+          emitter.emit('prefill-value', match[1], data.context);
         }
-        match = result.text.match(/dt=(\d+)/)
+        match = result.text.match(/dt=(\d+)/);
         if (match && match[1]) {
-          emitter.emit('prefill-destination-tag', match[1], data.context)
+          emitter.emit('prefill-destination-tag', match[1], data.context);
         }
       }
     },
-    function () {
-      var alert = navigator.notification ? navigator.notification.alert : window.alert;
+    () => {
+      const alert = navigator.notification ? navigator.notification.alert : window.alert;
       alert(
         'Access to the camera has been prohibited; please enable it in the Settings app to continue',
-        function() {},
+        () => {},
         'Coin'
-      )
+      );
     },
     {
-      showTorchButton: true
+      showTorchButton: true,
     }
-  )
+  );
 }
 
 module.exports = {
-  encode: encode,
-  scan: scan,
-  isScanAvailable: isScanAvailable
-}
+  encode,
+  scan,
+  isScanAvailable,
+};
 

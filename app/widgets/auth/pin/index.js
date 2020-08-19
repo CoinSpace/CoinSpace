@@ -8,7 +8,7 @@ const { showError } = require('widgets/modals/flash');
 const { translate } = require('lib/i18n');
 
 module.exports = function(prevPage, data = {}) {
-  const userExists = data.userExists;
+  const { userExists } = data;
 
   const ractive = new Ractive({
     partials: {
@@ -157,7 +157,7 @@ module.exports = function(prevPage, data = {}) {
           }
         }, reject);
       } else if (process.env.BUILD_PLATFORM === 'android') {
-        const Fingerprint = window.Fingerprint;
+        const { Fingerprint } = window;
         Fingerprint.isAvailable(() => {
           const pin = CS.getPinDEPRECATED();
           if (pin && CS.walletExistsDEPRECATED() && userExists) {

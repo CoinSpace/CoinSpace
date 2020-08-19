@@ -1,55 +1,55 @@
 'use strict';
 
-var Ractive = require('lib/ractive');
-var emitter = require('lib/emitter');
-var moonpay = require('lib/moonpay');
-var strftime = require('strftime');
-var Big = require('big.js');
-var showTransactionDetail = require('widgets/modals/moonpay/transaction-detail');
+const Ractive = require('lib/ractive');
+const emitter = require('lib/emitter');
+const moonpay = require('lib/moonpay');
+const strftime = require('strftime');
+const Big = require('big.js');
+const showTransactionDetail = require('widgets/modals/moonpay/transaction-detail');
 
 module.exports = function(el) {
-  var ractive = new Ractive({
-    el: el,
+  const ractive = new Ractive({
+    el,
     template: require('./index.ract'),
     data: {
       isLoading: true,
       txs: [],
-      showDetail: function(tx) {
+      showDetail(tx) {
         showTransactionDetail({
-          tx: tx,
-          onSuccessDismiss: function() {
+          tx,
+          onSuccessDismiss() {
             ractive.show();
-          }
+          },
         });
-      }
+      },
     },
     partials: {
       loader: require('../loader.ract'),
-    }
+    },
   });
 
-  ractive.on('before-show', function() {
+  ractive.on('before-show', () => {
     ractive.set('isLoading', true);
     ractive.set('txs', []);
-    return moonpay.getTxs().then(function(txs) {
+    return moonpay.getTxs().then((txs) => {
       ractive.set('isLoading', false);
-      txs.forEach(function(tx) {
+      txs.forEach((tx) => {
         tx.currencyCode = moonpay.getCryptoSymbolById(tx.currencyId);
-        var fiat = moonpay.getFiatById(tx.baseCurrencyId);
-        var amount = Big(tx.baseCurrencyAmount).plus(tx.feeAmount).plus(tx.extraFeeAmount).toFixed(fiat.precision);
+        const fiat = moonpay.getFiatById(tx.baseCurrencyId);
+        const amount = Big(tx.baseCurrencyAmount).plus(tx.feeAmount).plus(tx.extraFeeAmount).toFixed(fiat.precision);
         tx.fiat = amount + ' ' + fiat.symbol;
         tx.timestamp = strftime('%b %d %l:%M %p', (new Date(tx.createdAt)));
       });
       ractive.set('txs', txs);
-    }).catch(function(err) {
+    }).catch((err) => {
       ractive.set('isLoading', false);
       console.error(err);
     });
   });
 
-  ractive.on('back', function() {
+  ractive.on('back', () => {
     emitter.emit('change-moonpay-step', 'main');
   });
 
   return ractive;
-}
+};

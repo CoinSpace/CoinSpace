@@ -1,30 +1,30 @@
 'use strict';
 
-var Ractive = require('lib/ractive');
-var emitter = require('lib/emitter');
+const Ractive = require('lib/ractive');
+const emitter = require('lib/emitter');
 
 module.exports = function(el) {
-  var ractive = new Ractive({
-    el: el,
+  const ractive = new Ractive({
+    el,
     template: require('./index.ract'),
     data: {},
     partials: {
-      footer: require('../footer.ract')
-    }
+      footer: require('../footer.ract'),
+    },
   });
 
-  var delay = 60 * 1000; // 60 seconds
-  var interval;
+  const delay = 60 * 1000; // 60 seconds
+  let interval;
 
-  ractive.on('before-show', function() {
-    interval = setInterval(function() {
+  ractive.on('before-show', () => {
+    interval = setInterval(() => {
       emitter.emit('shapeshift');
     }, delay);
   });
 
-  ractive.on('before-hide', function() {
+  ractive.on('before-hide', () => {
     clearInterval(interval);
   });
 
   return ractive;
-}
+};

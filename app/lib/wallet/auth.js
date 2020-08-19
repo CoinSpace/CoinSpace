@@ -1,7 +1,7 @@
 'use strict';
 const request = require('lib/request');
 const db = require('lib/db');
-const urlRoot = window.urlRoot;
+const { urlRoot } = window;
 
 function register(walletId, pin) {
   return request({

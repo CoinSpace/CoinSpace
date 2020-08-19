@@ -6,7 +6,7 @@ const { encrypt, decrypt } = require('lib/encryption');
 const { randAvatarIndex } = require('lib/avatar');
 
 const request = require('lib/request');
-const urlRoot = window.urlRoot;
+const { urlRoot } = window;
 
 const state = {
   secret: null,
@@ -57,7 +57,7 @@ function get(key) {
   return state.details[key];
 }
 
-emitter.on('wallet-init', function(data) {
+emitter.on('wallet-init', (data) => {
   state.secret = data.seed;
 });
 

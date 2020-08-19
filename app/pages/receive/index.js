@@ -45,7 +45,7 @@ module.exports = function(el) {
 
   initEosSetup(ractive.find('#eos-setup'));
 
-  emitter.on('wallet-ready', function() {
+  emitter.on('wallet-ready', () => {
     const wallet = CS.getWallet();
     ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
 
@@ -65,7 +65,7 @@ module.exports = function(el) {
   emitter.on('tx-sent', showAddress);
   emitter.on('change-address-type', showAddress);
 
-  ractive.on('change-address-type', function() {
+  ractive.on('change-address-type', () => {
     const wallet = CS.getWallet();
     const addressType = ractive.get('addressType');
     db.set(wallet.networkName + '.addressType', addressType)
@@ -76,13 +76,13 @@ module.exports = function(el) {
       .catch(console.error);
   });
 
-  ractive.on('toggle-broadcast', function() {
+  ractive.on('toggle-broadcast', () => {
     if (ractive.get('connecting')) return;
 
     if (ractive.get('broadcasting')) {
       mectoOff();
     } else {
-      showSetDetails(function(err) {
+      showSetDetails((err) => {
         if (err) {
           return showError({ message: 'Could not save your details' });
         }
@@ -111,7 +111,7 @@ module.exports = function(el) {
   function mectoOn() {
     ractive.set('connecting', true);
     ractive.set('btn_message', 'Checking your location');
-    geo.save(function(err) {
+    geo.save((err) => {
       if (err) {
         return handleMectoError(err);
       }
@@ -121,7 +121,7 @@ module.exports = function(el) {
     });
   }
 
-  ractive.on('show-qr', function() {
+  ractive.on('show-qr', () => {
     if (ractive.get('isPhonegap')) {
       window.plugins.socialsharing.shareWithOptions({
         message: ractive.get('address'),
@@ -133,7 +133,7 @@ module.exports = function(el) {
     }
   });
 
-  ractive.on('help-address', function() {
+  ractive.on('help-address', () => {
     // eslint-disable-next-line max-len
     let message = translate('Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.');
     if (ractive.get('addressTypes').length > 1) {
@@ -152,7 +152,7 @@ module.exports = function(el) {
     });
   });
 
-  ractive.on('help-mecto', function() {
+  ractive.on('help-mecto', () => {
     showTooltip({
       // eslint-disable-next-line max-len
       message: 'Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.',

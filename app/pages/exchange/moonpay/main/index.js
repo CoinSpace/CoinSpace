@@ -1,13 +1,13 @@
 'use strict';
 
-var Ractive = require('lib/ractive');
-var emitter = require('lib/emitter');
-var moonpay = require('lib/moonpay');
-var showIdentityVerification = require('widgets/modals/moonpay/identity-verification');
+const Ractive = require('lib/ractive');
+const emitter = require('lib/emitter');
+const moonpay = require('lib/moonpay');
+const showIdentityVerification = require('widgets/modals/moonpay/identity-verification');
 
 module.exports = function(el) {
-  var ractive = new Ractive({
-    el: el,
+  const ractive = new Ractive({
+    el,
     template: require('./index.ract'),
     data: {
       isLoading: true,
@@ -16,26 +16,26 @@ module.exports = function(el) {
       limitIncreaseEligible: false,
       currencies: [],
       defaultCurrency: '',
-      defaultCurrencyLabel: function() {
+      defaultCurrencyLabel() {
         return moonpay.getFiatById(ractive.get('defaultCurrency'), 'symbol');
       },
-      getDailyLimitLabel: function(limit) {
-        var symbol = moonpay.getFiatById(ractive.get('defaultCurrency'), 'symbol');
+      getDailyLimitLabel(limit) {
+        const symbol = moonpay.getFiatById(ractive.get('defaultCurrency'), 'symbol');
         return limit.dailyLimitRemaining + ' / ' + limit.dailyLimit + ' ' + symbol;
       },
-      getMonthlyLimitLabel: function(limit) {
-        var symbol = moonpay.getFiatById(ractive.get('defaultCurrency'), 'symbol');
+      getMonthlyLimitLabel(limit) {
+        const symbol = moonpay.getFiatById(ractive.get('defaultCurrency'), 'symbol');
         return limit.monthlyLimitRemaining + ' / ' + limit.monthlyLimit + ' ' + symbol;
-      }
+      },
     },
     partials: {
       loader: require('../loader.ract'),
-    }
+    },
   });
 
-  var verificationLevels = [];
+  let verificationLevels = [];
 
-  ractive.on('before-show', function() {
+  ractive.on('before-show', () => {
     ractive.set('isLoading', true);
     ractive.set('creditCardLimit', {});
     ractive.set('bankAccountLimit', false);
@@ -44,16 +44,16 @@ module.exports = function(el) {
     ractive.set('defaultCurrency', '');
     return Promise.all([
       moonpay.limits(),
-      moonpay.loadFiat()
-    ]).then(function(results) {
+      moonpay.loadFiat(),
+    ]).then((results) => {
       ractive.set('isLoading', false);
-      var customer = moonpay.getCustomer();
-      var fiatSymbol = moonpay.getFiatById(customer.defaultCurrencyId, 'symbol');
+      const customer = moonpay.getCustomer();
+      const fiatSymbol = moonpay.getFiatById(customer.defaultCurrencyId, 'symbol');
 
-      ractive.set('creditCardLimit', results[0].limits.find(function(item) {
+      ractive.set('creditCardLimit', results[0].limits.find((item) => {
         return item.type === 'buy_credit_debit_card';
       }));
-      ractive.set('bankAccountLimit', results[0].limits.find(function(item) {
+      ractive.set('bankAccountLimit', results[0].limits.find((item) => {
         if (fiatSymbol === 'GBP') {
           return item.type === 'buy_gbp_bank_transfer';
         } else if (fiatSymbol === 'EUR') {
@@ -64,68 +64,69 @@ module.exports = function(el) {
       ractive.set('limitIncreaseEligible', results[0].limitIncreaseEligible);
       ractive.set('currencies', moonpay.getFiatList());
       ractive.set('defaultCurrency', customer.defaultCurrencyId);
+      // eslint-disable-next-line prefer-destructuring
       verificationLevels = results[0].verificationLevels;
-    }).catch(function(err) {
+    }).catch((err) => {
       ractive.set('isLoading', false);
       console.error(err);
     });
   });
 
-  ractive.on('change-currency', function() {
-    var id = ractive.get('defaultCurrency');
+  ractive.on('change-currency', () => {
+    const id = ractive.get('defaultCurrency');
     ractive.set('isLoading', true);
-    return moonpay.updateCustomer({defaultCurrencyId: id}).then(function() {
+    return moonpay.updateCustomer({ defaultCurrencyId: id }).then(() => {
       moonpay.getCustomer().defaultCurrencyId = id;
       ractive.show();
-    }).catch(function(err) {
+    }).catch((err) => {
       console.error(err);
       ractive.set('isLoading', false);
       ractive.set('defaultCurrency', moonpay.getCustomer().defaultCurrencyId);
     });
   });
 
-  ractive.on('back', function() {
+  ractive.on('back', () => {
     emitter.emit('set-exchange', 'none');
   });
 
-  ractive.on('verification', function() {
+  ractive.on('verification', () => {
     emitter.emit('change-moonpay-step', 'verification', {
-      verificationLevels: verificationLevels
+      verificationLevels,
     });
   });
 
-  ractive.on('payment-methods', function() {
+  ractive.on('payment-methods', () => {
     if (!moonpay.getCustomer().firstName) {
       return showIdentityVerification(ractive.show.bind(ractive));
     }
     emitter.emit('change-moonpay-step', 'paymentMethods');
   });
 
-  ractive.on('history', function() {
+  ractive.on('history', () => {
     emitter.emit('change-moonpay-step', 'history');
   });
 
-  ractive.on('buy', function() {
+  ractive.on('buy', () => {
     if (!moonpay.getCustomer().firstName) {
       return showIdentityVerification(ractive.show.bind(ractive));
     }
-    var fiat = moonpay.getFiatById(moonpay.getCustomer().defaultCurrencyId);
+    const fiat = moonpay.getFiatById(moonpay.getCustomer().defaultCurrencyId);
     emitter.emit('change-moonpay-step', 'purchase', {
       creditCardLimit: ractive.get('creditCardLimit.dailyLimitRemaining'),
       bankAccountLimit: ractive.get('bankAccountLimit.dailyLimitRemaining'),
-      fiat: fiat
+      fiat,
     });
   });
 
-  ractive.on('logout', function() {
+  ractive.on('logout', () => {
     moonpay.cleanAccessToken();
     moonpay.cleanCustomer();
     emitter.emit('set-exchange', 'none');
   });
 
-  ractive.on('buy', function() {
+  ractive.on('buy', () => {
 
   });
 
   return ractive;
-}
+};

@@ -1,45 +1,45 @@
 'use strict';
 
-var Ractive = require('widgets/modals/base');
-var showError = require('widgets/modals/flash').showError;
-var moonpay = require('lib/moonpay');
-var initFilePicker = require('widgets/filepicker');
+const Ractive = require('widgets/modals/base');
+const { showError } = require('widgets/modals/flash');
+const moonpay = require('lib/moonpay');
+const initFilePicker = require('widgets/filepicker');
 
-var ractive;
+let ractive;
 
 function open() {
 
   ractive = new Ractive({
     partials: {
-      content: require('./_content.ract')
+      content: require('./_content.ract'),
     },
     data: {
       isLoading: false,
-      isInited: false
-    }
+      isInited: false,
+    },
   });
 
-  var filePicker;
+  let filePicker;
 
-  moonpay.getFiles().then(function(files) {
-    var file = files.find(function(item) {
+  moonpay.getFiles().then((files) => {
+    const file = files.find((item) => {
       return item.type === 'selfie';
-    })
+    });
     ractive.set('isInited', true);
     filePicker = initFilePicker(ractive.find('#moonpay_selfie_widget'), {
       id: 'moonpay_selfie',
-      filename: file ? 'selfie' : ''
+      filename: file ? 'selfie' : '',
     });
   }).catch(console.error);
 
-  ractive.on('submit', function() {
+  ractive.on('submit', () => {
     ractive.set('isLoading', true);
-    var file = filePicker.getFile();
+    const file = filePicker.getFile();
     if (!file) return handleError(new Error('Please fill out all fields.'));
 
-    return moonpay.uploadFile(file, 'selfie', moonpay.getIpCountry()).then(function() {
+    return moonpay.uploadFile(file, 'selfie', moonpay.getIpCountry()).then(() => {
       ractive.fire('cancel');
-    }).catch(function(err) {
+    }).catch((err) => {
       if (/File upload is disabled due to identity check status/.test(err.message)) {
         return handleError(new Error('File upload is disabled due to identity check status'));
       }
@@ -50,7 +50,7 @@ function open() {
 
   function handleError(err) {
     ractive.set('isLoading', false);
-    showError({message: err.message});
+    showError({ message: err.message });
   }
 
   return ractive;

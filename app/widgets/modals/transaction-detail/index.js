@@ -1,9 +1,9 @@
 'use strict';
 
-var Ractive = require('widgets/modals/base');
+const Ractive = require('widgets/modals/base');
 
 module.exports = function(data) {
-  var content;
+  let content;
   data.showAllInputs = false;
   data.inputsPerPage = 10;
   if (data.isNetwork('ethereum')) {
@@ -19,23 +19,23 @@ module.exports = function(data) {
     content = require('./contentBtcBchLtc.ract');
   }
 
-  var ractive = new Ractive({
+  const ractive = new Ractive({
     el: document.getElementById('transaction-detail'),
     partials: {
-      content: content
+      content,
     },
-    data: data
+    data,
   });
 
-  ractive.on('showMoreInputs', function(context) {
+  ractive.on('showMoreInputs', (context) => {
     context.original.preventDefault();
     ractive.set('showAllInputs', true);
   });
 
-  ractive.on('close', function(){
-    ractive.fire('cancel')
+  ractive.on('close', ()=> {
+    ractive.fire('cancel');
   });
 
   return ractive;
-}
+};
 

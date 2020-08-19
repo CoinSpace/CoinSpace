@@ -26,7 +26,7 @@ const {
 const db = require('lib/db');
 const _ = require('lodash');
 const HDKey = require('hdkey');
-const Buffer = require('safe-buffer').Buffer;
+const { Buffer } = require('safe-buffer');
 const bchaddr = require('bchaddrjs');
 
 const state = {
@@ -62,7 +62,7 @@ const names = {
   USDT: 'Tether USD',
 };
 
-const urlRoot = window.urlRoot;
+const { urlRoot } = window;
 
 function createWallet(passphrase) {
   const data = { passphrase };
@@ -137,9 +137,9 @@ function setUsername(username) {
 // DEPRECATED
 function openWalletWithPinDEPRECATED(pin, network, done) {
   const credentials = walletDb.getCredentials();
-  const id = credentials.id;
+  const { id } = credentials;
   const encryptedSeed = credentials.seed;
-  auth.loginDEPRECATED(id, pin, function(err, token) {
+  auth.loginDEPRECATED(id, pin, (err, token) => {
     if (err) {
       if (err.message === 'user_deleted') {
         walletDb.deleteCredentials();
@@ -234,14 +234,14 @@ function initWallet() {
 function isValidWalletToken(token) {
   if (token && token.isDefault) return true;
   const walletTokens = db.get('walletTokens') || [];
-  const isFound = _.find(walletTokens, function(item) {
+  const isFound = _.find(walletTokens, (item) => {
     return _.isEqual(token, item);
   });
   return !!isFound;
 }
 
 function parseHistoryTx(tx) {
-  const networkName = state.wallet.networkName;
+  const { networkName } = state.wallet;
   if (networkName === 'ethereum') {
     return utils.parseEthereumTx(tx);
   } else if (networkName === 'ripple') {

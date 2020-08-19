@@ -1,54 +1,54 @@
 'use strict';
 
-var Ractive = require('lib/ractive');
-var emitter = require('lib/emitter');
-var initCreate = require('./create');
-var initAwaitingDeposit = require('./awaiting-deposit');
-var initAwaiting = require('./awaiting');
-var initComplete = require('./complete');
-var initError = require('./error');
-var db = require('lib/db');
-var shapeshift = require('lib/shapeshift');
-var showError = require('widgets/modals/flash').showError;
+const Ractive = require('lib/ractive');
+const emitter = require('lib/emitter');
+const initCreate = require('./create');
+const initAwaitingDeposit = require('./awaiting-deposit');
+const initAwaiting = require('./awaiting');
+const initComplete = require('./complete');
+const initError = require('./error');
+const db = require('lib/db');
+const shapeshift = require('lib/shapeshift');
+const { showError } = require('widgets/modals/flash');
 
 module.exports = function(el) {
-  var ractive = new Ractive({
-    el: el,
+  const ractive = new Ractive({
+    el,
     template: require('./index.ract'),
     data: {
-      isLoading: true
+      isLoading: true,
     },
     partials: {
-      loader: require('./loader.ract')
-    }
+      loader: require('./loader.ract'),
+    },
   });
 
-  var steps = {
+  const steps = {
     create: initCreate(ractive.find('#shapeshift_create')),
     awaitingDeposit: initAwaitingDeposit(ractive.find('#shapeshift_awaiting_deposit')),
     awaiting: initAwaiting(ractive.find('#shapeshift_awaiting')),
     complete: initComplete(ractive.find('#shapeshift_complete')),
-    error: initError(ractive.find('#shapeshift_error'))
+    error: initError(ractive.find('#shapeshift_error')),
   };
-  var currentStep = steps.create;
+  let currentStep = steps.create;
 
-  ractive.on('before-show', function() {
+  ractive.on('before-show', () => {
     emitter.emit('shapeshift');
   });
 
-  ractive.on('before-hide', function() {
+  ractive.on('before-hide', () => {
     ractive.set('isLoading', true);
     currentStep.hide();
   });
 
-  emitter.on('shapeshift', function() {
-    var shapeshiftInfo = db.get('shapeshiftInfo');
+  emitter.on('shapeshift', () => {
+    const shapeshiftInfo = db.get('shapeshiftInfo');
     if (!shapeshiftInfo) {
       ractive.set('isLoading', false);
       return showStep(steps.create);
     }
 
-    shapeshift.txStat(shapeshiftInfo.depositAddress).then(function(data) {
+    shapeshift.txStat(shapeshiftInfo.depositAddress).then((data) => {
       ractive.set('isLoading', false);
       if (data.status === 'no_deposits') {
         showStep(steps.awaitingDeposit, shapeshiftInfo);
@@ -57,21 +57,21 @@ module.exports = function(el) {
       } else if (data.status === 'complete') {
         showStep(steps.complete, data);
       } else {
-        showStep(steps.error, {message: data.error});
+        showStep(steps.error, { message: data.error });
       }
-    }).catch(function(err) {
+    }).catch((err) => {
       console.error(err);
       ractive.set('isLoading', false);
-      return showError({message: err.message});
+      return showError({ message: err.message });
     });
   });
 
-  emitter.on('change-shapeshift-step', function(step, data) {
+  emitter.on('change-shapeshift-step', (step, data) => {
     showStep(steps[step], data);
-  })
+  });
 
   function showStep(step, data) {
-    setTimeout(function() {
+    setTimeout(() => {
       currentStep.hide();
       step.show(data);
       currentStep = step;
@@ -79,4 +79,4 @@ module.exports = function(el) {
   }
 
   return ractive;
-}
+};

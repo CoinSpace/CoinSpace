@@ -14,7 +14,7 @@ axiosRetry(axios, {
 });
 
 const GH_ACCOUNT = process.env.GH_ACCOUNT || 'CoinSpace/CoinSpace';
-const GH_TOKEN = process.env.GH_TOKEN;
+const { GH_TOKEN } = process.env;
 
 const TYPE_FILE = 'file';
 const TYPE_LINK = 'link';

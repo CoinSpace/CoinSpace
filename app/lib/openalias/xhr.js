@@ -1,22 +1,24 @@
-var request = require('lib/request')
-var urlRoot = window.urlRoot;
-var getTokenNetwork = require('lib/token').getTokenNetwork;
+'use strict';
+
+const request = require('lib/request');
+const { urlRoot } = window;
+const { getTokenNetwork } = require('lib/token');
 
 function resolveTo(to) {
-  if (getTokenNetwork() !== 'bitcoin') return Promise.resolve({to: to});
+  if (getTokenNetwork() !== 'bitcoin') return Promise.resolve({ to });
 
-  to = to || ''
-  var hostname = to.replace('@', '.')
-  if (!hostname.match(/\./)) return Promise.resolve({to: to});
+  to = to || '';
+  const hostname = to.replace('@', '.');
+  if (!hostname.match(/\./)) return Promise.resolve({ to });
   return request({
     url: urlRoot + 'v1/openalias?hostname=' + hostname,
-  }).then(function(data) {
-    return {to: data.address, alias: to};
-  }).catch(function() {
-    return {to: to};
+  }).then((data) => {
+    return { to: data.address, alias: to };
+  }).catch(() => {
+    return { to };
   });
 }
 
 module.exports = {
-  resolveTo: resolveTo
-}
+  resolveTo,
+};

@@ -1,32 +1,32 @@
 'use strict';
 
-var Ractive = require('lib/ractive');
-var emitter = require('lib/emitter');
-var db = require('lib/db');
+const Ractive = require('lib/ractive');
+const emitter = require('lib/emitter');
+const db = require('lib/db');
 
 module.exports = function(el) {
-  var ractive = new Ractive({
-    el: el,
+  const ractive = new Ractive({
+    el,
     template: require('./index.ract'),
     data: {
       message: '',
     },
     partials: {
-      footer: require('../footer.ract')
-    }
+      footer: require('../footer.ract'),
+    },
   });
 
-  ractive.on('before-show', function(context) {
+  ractive.on('before-show', (context) => {
     ractive.set('message', context.message);
   });
 
-  ractive.on('close', function() {
-    db.set('shapeshiftInfo', null).then(function() {
+  ractive.on('close', () => {
+    db.set('shapeshiftInfo', null).then(() => {
       emitter.emit('change-shapeshift-step', 'create');
-    }).catch(function(err) {
+    }).catch((err) => {
       console.error(err);
     });
   });
 
   return ractive;
-}
+};

@@ -5,7 +5,7 @@ const account = require('./account');
 const crypto = require('crypto');
 
 function register(walletId, pin) {
-  return account.isExist(walletId).then(function(userExist) {
+  return account.isExist(walletId).then((userExist) => {
     if (!userExist) {
       return createUser(walletId, pin);
     }
@@ -18,7 +18,7 @@ function login(walletId, pin) {
   return collection
     .find({ _id: walletId })
     .limit(1)
-    .next().then(function(user) {
+    .next().then((user) => {
       if (!user) return Promise.reject({ error: 'user_deleted' });
       return verifyPin(user, pin);
     });
@@ -35,7 +35,7 @@ function createUser(walletId, pin) {
     salt: hashAndSalt[1],
     token,
     failed_attempts: 0,
-  }).then(function() {
+  }).then(() => {
     return token;
   });
 }
@@ -81,7 +81,7 @@ function incrementFailCount(id) {
 
 function deleteUser(id) {
   const collection = db().collection('users');
-  return collection.deleteOne({ _id: id }).then(function() {
+  return collection.deleteOne({ _id: id }).then(() => {
     return Promise.reject({ error: 'user_deleted' });
   });
 }

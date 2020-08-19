@@ -10,8 +10,8 @@ const { asyncWrapper } = require('./utils');
 
 const router = express.Router();
 
-const JWT_SECRET = process.env.JWT_SECRET;
-const JWE_SECRET = process.env.JWE_SECRET;
+const { JWT_SECRET } = process.env;
+const { JWE_SECRET } = process.env;
 const JWT_EXPIRES_WALLET = '1 hour';
 const JWT_EXPIRES_SECOND = '10 min';
 

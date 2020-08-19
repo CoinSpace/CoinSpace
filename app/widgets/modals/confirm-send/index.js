@@ -1,15 +1,15 @@
 'use strict';
 
-var getTokenNetwork = require('lib/token').getTokenNetwork;
+const { getTokenNetwork } = require('lib/token');
 
-var btcBchLtc = require('./btcBchLtc');
-var ethereum = require('./ethereum');
-var ripple = require('./ripple');
-var stellar = require('./stellar');
-var eos = require('./eos');
+const btcBchLtc = require('./btcBchLtc');
+const ethereum = require('./ethereum');
+const ripple = require('./ripple');
+const stellar = require('./stellar');
+const eos = require('./eos');
 
 function open(data) {
-  var network = getTokenNetwork();
+  const network = getTokenNetwork();
   if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(network) !== -1) {
     return btcBchLtc(data);
   } else if (network === 'ethereum') {
@@ -23,4 +23,4 @@ function open(data) {
   }
 }
 
-module.exports = open
+module.exports = open;

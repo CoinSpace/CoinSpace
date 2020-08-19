@@ -3,7 +3,7 @@
 const B39 = require('b39');
 const crypto = require('crypto');
 
-self.addEventListener('message', function(e) {
+self.addEventListener('message', (e) => {
   const data = e.data || {};
   const mnemonic = data.passphrase || B39.generateMnemonic(128);
   const key = crypto.randomBytes(32).toString('hex');

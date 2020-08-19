@@ -1,7 +1,7 @@
 'use strict';
 
 const Ractive = require('widgets/modals/base');
-const translate = require('lib/i18n').translate;
+const { translate } = require('lib/i18n');
 
 module.exports = function showTooltip(data) {
 
@@ -17,7 +17,7 @@ module.exports = function showTooltip(data) {
     data,
   });
 
-  ractive.on('close', function() {
+  ractive.on('close', () => {
     ractive.fire('cancel');
   });
 

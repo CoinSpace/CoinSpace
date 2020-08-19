@@ -1,13 +1,13 @@
 'use strict';
 
-var request = require('lib/request');
-var db = require('lib/db');
-var getWallet = require('lib/wallet').getWallet;
-var getId = require('lib/wallet').getId;
-var getTokenNetwork = require('lib/token').getTokenNetwork;
-var urlRoot = window.urlRoot;
-var userInfo = {};
-var networks = {
+const request = require('lib/request');
+const db = require('lib/db');
+const { getWallet } = require('lib/wallet');
+const { getId } = require('lib/wallet');
+const { getTokenNetwork } = require('lib/token');
+const { urlRoot } = window;
+let userInfo = {};
+const networks = {
   BTC: 'bitcoin',
   BCH: 'bitcoincash',
   BSV: 'bitcoinsv',
@@ -17,15 +17,15 @@ var networks = {
   XLM: 'stellar',
   EOS: 'eos',
   DOGE: 'dogecoin',
-  DASH: 'dash'
+  DASH: 'dash',
 };
 
 function save(callback) {
-  requestLocationEndpoint(false, 'POST', callback)
+  requestLocationEndpoint(false, 'POST', callback);
 }
 
 function search(network, callback) {
-  requestLocationEndpoint(network, 'PUT', callback)
+  requestLocationEndpoint(network, 'PUT', callback);
 }
 
 function remove() {
@@ -33,29 +33,29 @@ function remove() {
     url: urlRoot + 'v1/location',
     method: 'delete',
     data: {
-      id: getId()
-    }
-  })
+      id: getId(),
+    },
+  });
 }
 
 function getLocation(callback) {
-  if (!window.navigator.geolocation){
-    return callback(new Error('Your browser does not support geolocation'))
+  if (!window.navigator.geolocation) {
+    return callback(new Error('Your browser does not support geolocation'));
   }
 
-  var success = function(position){
-    callback(null, position.coords.latitude, position.coords.longitude)
-  }
+  const success = function(position) {
+    callback(null, position.coords.latitude, position.coords.longitude);
+  };
 
-  var error = function() {
-    var alert = navigator.notification ? navigator.notification.alert : window.alert;
+  const error = function() {
+    const alert = navigator.notification ? navigator.notification.alert : window.alert;
     alert(
       'Access to the geolocation has been prohibited; please enable it in the Settings app to continue',
-      function() {},
+      () => {},
       'Coin'
-    )
-    callback(new Error('Unable to retrieve your location'))
-  }
+    );
+    callback(new Error('Unable to retrieve your location'));
+  };
 
   window.navigator.geolocation.getCurrentPosition(success, error, process.env.BUILD_TYPE === 'electron' ? {
     enableHighAccuracy: true,
@@ -63,14 +63,14 @@ function getLocation(callback) {
 }
 
 function requestLocationEndpoint(network, method, callback) {
-  getLocation(function(err, lat, lon) {
+  getLocation((err, lat, lon) => {
     if (err) return callback(err);
 
     if (process.env.NODE_ENV === 'development') {
       console.info(`Current location: https://www.google.com/maps/place/${lat},${lon}`);
     }
 
-    var doc = db.get();
+    const doc = db.get();
     userInfo = {};
     userInfo.id = getId();
     userInfo.name = doc.userInfo.firstName;
@@ -83,15 +83,15 @@ function requestLocationEndpoint(network, method, callback) {
 
     request({
       url: urlRoot + 'v1/location',
-      method: method,
-      data: userInfo
+      method,
+      data: userInfo,
     }, callback);
-  })
+  });
 }
 
 module.exports = {
-  search: search,
-  save: save,
-  remove: remove,
-  networks: networks
-}
+  search,
+  save,
+  remove,
+  networks,
+};

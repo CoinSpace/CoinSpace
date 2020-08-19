@@ -15,7 +15,7 @@ function shell(command, options) {
 function cordova(cwd) {
   return function(command) {
     shell(`${cordovaPath} ${command}`, { cwd });
-  }
+  };
 }
 
 function filterMapFiles(src) {

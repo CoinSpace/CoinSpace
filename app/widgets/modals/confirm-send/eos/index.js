@@ -1,27 +1,27 @@
 'use strict';
 
-var Ractive = require('widgets/modals/base');
-var emitter = require('lib/emitter');
-var getWallet = require('lib/wallet').getWallet;
+const Ractive = require('widgets/modals/base');
+const emitter = require('lib/emitter');
+const { getWallet } = require('lib/wallet');
 
 function open(data) {
 
-  var ractive = new Ractive({
+  const ractive = new Ractive({
     partials: {
       content: require('./_content.ract'),
       error: require('../error.ract'),
-      success: require('../success.ract')
+      success: require('../success.ract'),
     },
-    data: extendData(data)
+    data: extendData(data),
   });
 
-  ractive.on('send', function() {
+  ractive.on('send', () => {
     ractive.set('sending', true);
-    setTimeout(function() {
-      var wallet = getWallet();
-      var tx = data.tx;
+    setTimeout(() => {
+      const wallet = getWallet();
+      const { tx } = data;
 
-      wallet.sendTx(tx, function(err) {
+      wallet.sendTx(tx, (err) => {
         if (err) return handleTransactionError(err);
 
         ractive.set('confirmation', false);
@@ -35,22 +35,22 @@ function open(data) {
   });
 
   function handleTransactionError(err) {
-    ractive.set('confirmation', false)
+    ractive.set('confirmation', false);
     if (err.message === 'cs-node-error') {
-      err.message = 'Network node error. Please try again later.'
-      ractive.set('interpolations', { network: 'EOS' })
+      err.message = 'Network node error. Please try again later.';
+      ractive.set('interpolations', { network: 'EOS' });
     } else {
       console.error(err);
     }
-    ractive.set('error', err.message)
+    ractive.set('error', err.message);
   }
 
-  return ractive
+  return ractive;
 }
 
 function extendData(data) {
   data.confirmation = true;
-  var wallet = getWallet();
+  const wallet = getWallet();
 
   data.feeSign = '+';
   data.fee = wallet.getDefaultFee();
@@ -58,4 +58,4 @@ function extendData(data) {
   return data;
 }
 
-module.exports = open
+module.exports = open;

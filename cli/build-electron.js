@@ -46,7 +46,7 @@ webpackConfig.plugins.push(
   })
 );
 
-webpack(webpackConfig, function(error, stats) {
+webpack(webpackConfig, (error, stats) => {
   if (error) throw error;
   if (stats.hasErrors()) {
     console.log(stats.toString({ colors: true }));
@@ -59,7 +59,7 @@ webpack(webpackConfig, function(error, stats) {
   if (program.release) {
     // build electron to electron/dist
     console.log(`Start building (electron:${program.platform})...`);
-    let platform = program.platform;
+    let { platform } = program;
 
     if (program.platform === 'mac') {
       platform = 'darwin';

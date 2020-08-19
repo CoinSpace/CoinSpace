@@ -24,7 +24,7 @@ function open() {
         CS.reset();
         ractive.set('confirmation', false);
         ractive.set('success', true);
-        setTimeout(function() {
+        setTimeout(() => {
           location.reload();
         }, 3000);
       })

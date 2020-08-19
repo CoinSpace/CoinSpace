@@ -1,13 +1,13 @@
 'use strict';
 
-var request = require('lib/request');
-var urlRoot = window.urlRoot;
+const request = require('lib/request');
+const { urlRoot } = window;
 
 function getExchangeRates(crypto) {
-  var url = urlRoot + 'v1/ticker?crypto=' + crypto;
-  return request({url: url});
+  const url = urlRoot + 'v1/ticker?crypto=' + crypto;
+  return request({ url });
 }
 
 module.exports = {
-  getExchangeRates: getExchangeRates
-}
+  getExchangeRates,
+};

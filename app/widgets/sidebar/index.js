@@ -22,33 +22,33 @@ module.exports = function(el) {
 
   initAccount(ractive.find('#account-details'));
 
-  ractive.on('logout', function(context) {
+  ractive.on('logout', (context) => {
     context.original.preventDefault();
     CS.reset();
     location.reload();
   });
 
-  ractive.on('about', function() {
+  ractive.on('about', () => {
     emitter.emit('toggle-menu', false);
     emitter.emit('toggle-terms', true);
   });
 
-  ractive.on('show-zendesk', function(context) {
+  ractive.on('show-zendesk', (context) => {
     context.original.preventDefault();
     window.Zendesk.showHelpCenter();
   });
 
-  ractive.on('import-private-key', function() {
+  ractive.on('import-private-key', () => {
     importPrivateKey();
   });
 
-  ractive.on('export-private-keys', function() {
+  ractive.on('export-private-keys', () => {
     exportPrivateKeys();
   });
 
   ractive.on('eos-setup-account', showEosSetupAccount);
 
-  emitter.on('wallet-ready', function() {
+  emitter.on('wallet-ready', () => {
     const wallet = CS.getWallet();
     ractive.set('isEOS', wallet.networkName === 'eos');
     if (wallet.networkName === 'ethereum' && wallet.token) {
@@ -63,7 +63,7 @@ module.exports = function(el) {
     }
   });
 
-  emitter.on('toggle-menu', function(open) {
+  emitter.on('toggle-menu', (open) => {
     const classes = ractive.el.classList;
     if (open) {
       classes.add('open');

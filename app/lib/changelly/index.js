@@ -1,13 +1,13 @@
 'use strict';
 
-var request = require('lib/request');
-var getId = require('lib/wallet').getId;
+const request = require('lib/request');
+const { getId } = require('lib/wallet');
 
-var urlRoot = window.urlRoot;
+const { urlRoot } = window;
 
 function getCoins() {
   return request({
-    url: urlRoot + 'v1/changelly/getCoins'
+    url: urlRoot + 'v1/changelly/getCoins',
   });
 }
 
@@ -17,8 +17,8 @@ function estimate(fromSymbol, toSymbol, amount) {
     params: {
       from: fromSymbol,
       to: toSymbol,
-      amount: amount
-    }
+      amount,
+    },
   });
 }
 
@@ -27,7 +27,7 @@ function validateAddress(address, symbol) {
   if (!symbol) return Promise.resolve(false);
   return request({
     url: urlRoot + 'v1/changelly/validate/' + address + '/' + symbol,
-  }).then(function(data) {
+  }).then((data) => {
     return !!data.isValid;
   });
 }
@@ -43,8 +43,8 @@ function createTransaction(options) {
       amount: options.fromAmount,
       address: options.toAddress,
       refundAddress: options.returnAddress,
-    }
-  }).then(function(data) {
+    },
+  }).then((data) => {
     if (!data) throw new Error('exchange_error');
     return data;
   });
@@ -57,9 +57,9 @@ function getTransaction(id) {
 }
 
 module.exports = {
-  getCoins: getCoins,
-  estimate: estimate,
-  validateAddress: validateAddress,
-  createTransaction: createTransaction,
-  getTransaction: getTransaction
+  getCoins,
+  estimate,
+  validateAddress,
+  createTransaction,
+  getTransaction,
 };

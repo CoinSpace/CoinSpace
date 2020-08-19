@@ -1,17 +1,17 @@
 'use strict';
 
-var Ractive = require('widgets/modals/base');
+const Ractive = require('widgets/modals/base');
 
 function open(name, remove) {
 
-  var ractive = new Ractive({
+  const ractive = new Ractive({
     partials: {
-      content: require('./_content.ract')
+      content: require('./_content.ract'),
     },
     data: {
       removing: false,
-      name: name
-    }
+      name,
+    },
   });
 
   ractive.on('remove', function() {
@@ -22,4 +22,4 @@ function open(name, remove) {
   return ractive;
 }
 
-module.exports = open
+module.exports = open;
