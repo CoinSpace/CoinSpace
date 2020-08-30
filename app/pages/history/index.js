@@ -94,6 +94,7 @@ module.exports = function(el) {
     if (isSyncing) return;
     if (isLoadingStarted) return;
     isLoadingStarted = true;
+    ractive.set('transactions', []);
     loadTxsWithLoader('isLoading');
   }
 
