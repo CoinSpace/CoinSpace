@@ -5,8 +5,8 @@
       {{>svg_close}}
     </span>
 
-    <div class="_amount {{isReceived(this) ? 'green' : 'red'}}">
-      {{isReceived(this) ? '+' : ''}} {{toUnitString(amount)}}
+    <div class="_amount {{isIncoming ? 'green' : 'red'}}">
+      {{isIncoming ? '+' : ''}} {{toUnitString(amount)}}
     </div>
 
     {{#if isConfirmed(confirmations)}}

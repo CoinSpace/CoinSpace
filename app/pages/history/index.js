@@ -5,7 +5,6 @@ const emitter = require('lib/emitter');
 const { toUnitString } = require('lib/convert');
 const { getTokenNetwork } = require('lib/token');
 const { getWallet } = require('lib/wallet');
-const { parseHistoryTx } = require('lib/wallet');
 const strftime = require('strftime');
 const { showError } = require('widgets/modals/flash');
 const showTransactionDetail = require('widgets/modals/transaction-detail');
@@ -40,16 +39,6 @@ module.exports = function(el) {
           return tx.operations[0] && tx.operations[0].destination;
         } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(network) !== -1) {
           return tx.outs[0].address;
-        }
-      },
-      isReceived(tx) {
-        if (network === 'ethereum' || network === 'ripple') {
-          return tx.to === getWallet().addressString; // TODO: make getWallet().isReceivedTx(tx);
-        // eslint-disable-next-line max-len
-        } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash', 'stellar'].indexOf(network) !== -1) {
-          return tx.amount > 0;
-        } else if (network === 'eos') {
-          return getWallet().isReceivedTx(tx);
         }
       },
       isConfirmed(confirmations) {
@@ -117,7 +106,6 @@ module.exports = function(el) {
       transaction: ractive.get('transactions')[index],
       formatTimestamp: ractive.get('formatTimestamp'),
       formatConfirmations: ractive.get('formatConfirmations'),
-      isReceived: ractive.get('isReceived'),
       isFailed: ractive.get('isFailed'),
       isConfirmed: ractive.get('isConfirmed'),
       toUnitString: ractive.get('toUnitString'),
@@ -139,7 +127,7 @@ module.exports = function(el) {
       ractive.set(loaderKey, false);
       ractive.set('hasMore', result.hasMoreTxs);
       result.txs.forEach((tx) => {
-        ractive.push('transactions', parseHistoryTx(tx));
+        ractive.push('transactions', tx);
       });
     }).catch((err) => {
       ractive.set(loaderKey, false);

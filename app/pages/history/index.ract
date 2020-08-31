@@ -12,8 +12,8 @@
 
           <div class="_detail">
 
-            <div class="_amount {{isReceived(this) ? 'green' : 'red'}}">
-              {{isReceived(this) ? '+' : ''}} {{toUnitString(amount)}}
+            <div class="_amount {{isIncoming ? 'green' : 'red'}}">
+              {{isIncoming ? '+' : ''}} {{toUnitString(amount)}}
             </div>
 
             {{#if isConfirmed(confirmations)}}
@@ -27,7 +27,7 @@
           {{#if isFailed(this)}}
             <div class="_address">{{translate("Failed")}}</div>
           {{else}}
-            <div class="_address">{{isReceived(this) ? translate('Received') : getToAddress(this)}}</div>
+            <div class="_address">{{isIncoming ? translate('Received') : getToAddress(this)}}</div>
           {{/if}}
 
         </div>

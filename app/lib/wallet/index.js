@@ -4,7 +4,6 @@ const Worker = require('worker-loader?inline&fallback=false!./worker.js');
 const worker = new Worker();
 
 const auth = require('./auth');
-const utils = require('./utils');
 const walletDb = require('./db');
 const emitter = require('lib/emitter');
 const crypto = require('crypto');
@@ -25,8 +24,6 @@ const {
 } = require('lib/token');
 const db = require('lib/db');
 const _ = require('lodash');
-const HDKey = require('hdkey');
-const { Buffer } = require('safe-buffer');
 const bchaddr = require('bchaddrjs');
 
 const state = {
@@ -178,47 +175,25 @@ function initWallet() {
 
   const options = {
     networkName,
-    done(err) {
-      if (err) {
-        return emitter.emit('wallet-error', err);
-      }
-      emitter.emit('wallet-ready');
-    },
+    seed: state.seed
   };
 
   if (networkName === 'ethereum') {
-    options.seed = state.seed;
     options.minConf = 12;
     options.token = token;
     convert.setDecimals(token ? token.decimals : 18);
   } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(networkName) !== -1) {
-    options.hdkey = HDKey.fromMasterSeed(new Buffer(state.seed, 'hex'));
     options.minConf = 3;
     options.addressType = db.get(networkName + '.addressType') || 'p2pkh';
     if (networkName === 'bitcoincash') {
       options.minConf = 0;
     }
-    options.getDynamicFees = function() {
-      return request({
-        url: urlRoot + 'v1/fees',
-        params: { network: networkName },
-      }).catch(console.error);
-    };
-    options.getCsFee = function() {
-      return request({
-        url: urlRoot + 'v1/csFee',
-        params: { network: networkName },
-      }).catch(console.error);
-    };
     convert.setDecimals(8);
   } else if (networkName === 'ripple') {
-    options.seed = state.seed;
     convert.setDecimals(0);
   } else if (networkName === 'stellar') {
-    options.seed = state.seed;
     convert.setDecimals(0);
   } else if (networkName === 'eos') {
-    options.seed = state.seed;
     options.accountName = db.get('eosAccountName') || '';
     if (process.env.NODE_ENV === 'development') {
       options.chainId = 'e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473';
@@ -229,6 +204,26 @@ function initWallet() {
   state.wallet = new Wallet[networkName](options);
   state.wallet.denomination = token ? denomination(token) : denomination(networkName);
   state.wallet.name = names[state.wallet.denomination] || state.wallet.denomination;
+  state.wallet.load({
+    getDynamicFees() {
+      return request({
+        url: urlRoot + 'v1/fees',
+        params: { network: networkName },
+      }).catch(console.error);
+    },
+    getCsFee() {
+      return request({
+        url: urlRoot + 'v1/csFee',
+        params: { network: networkName },
+      }).catch(console.error);
+    },
+    done(err) {
+      if (err) {
+        return emitter.emit('wallet-error', err);
+      }
+      emitter.emit('wallet-ready');
+    },
+  });
 }
 
 function isValidWalletToken(token) {
@@ -238,21 +233,6 @@ function isValidWalletToken(token) {
     return _.isEqual(token, item);
   });
   return !!isFound;
-}
-
-function parseHistoryTx(tx) {
-  const { networkName } = state.wallet;
-  if (networkName === 'ethereum') {
-    return utils.parseEthereumTx(tx);
-  } else if (networkName === 'ripple') {
-    return tx;
-  } else if (networkName === 'stellar') {
-    return tx;
-  } else if (networkName === 'eos') {
-    return tx;
-  } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(networkName) !== -1) {
-    return utils.parseBtcLtcTx(tx, networkName);
-  }
 }
 
 function sync() {
@@ -335,7 +315,6 @@ module.exports = {
   sync,
   initWallet,
   validateSend,
-  parseHistoryTx,
   getPinDEPRECATED,
   resetPinDEPRECATED,
   getDestinationInfo,

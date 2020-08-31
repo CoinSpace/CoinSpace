@@ -3,7 +3,6 @@
 const Ractive = require('widgets/modals/base');
 const emitter = require('lib/emitter');
 const { getWallet } = require('lib/wallet');
-const { parseHistoryTx } = require('lib/wallet');
 const { toUnitString } = require('lib/convert');
 const { showInfo } = require('widgets/modals/flash');
 
@@ -32,6 +31,8 @@ function open(data) {
         return handleTransactionError(err);
       }
 
+      tx = tx.sign();
+
       wallet.sendTx(tx, (err, historyTx) => {
         if (err) return handleTransactionError(err);
 
@@ -42,7 +43,7 @@ function open(data) {
         // update balance & tx history
         emitter.emit('tx-sent');
         if (historyTx) {
-          emitter.emit('append-transactions', [parseHistoryTx(historyTx)]);
+          emitter.emit('append-transactions', [historyTx]);
         }
       });
     }, 200);

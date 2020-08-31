@@ -37,6 +37,8 @@ function open(data) {
         return handleTransactionError(err);
       }
 
+      tx = tx.sign();
+
       wallet.sendTx(tx, (err) => {
         if (err) return handleTransactionError(err);
 

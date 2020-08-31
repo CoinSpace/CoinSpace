@@ -9,8 +9,8 @@
       <div class="_status">{{translate("Failed")}}</div>
     {{/if}}
 
-    <div class="_amount {{isReceived(this) ? 'green' : 'red'}}">
-      {{isReceived(this) ? '+' : ''}} {{toUnitString(amount)}}
+    <div class="_amount {{isIncoming ? 'green' : 'red'}}">
+      {{isIncoming ? '+' : ''}} {{toUnitString(amount)}}
     </div>
 
     <div class='_time'>{{formatTimestamp(timestamp)}}</div>

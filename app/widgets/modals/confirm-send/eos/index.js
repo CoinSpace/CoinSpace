@@ -21,6 +21,8 @@ function open(data) {
       const wallet = getWallet();
       const { tx } = data;
 
+      tx = tx.sign();
+
       wallet.sendTx(tx, (err) => {
         if (err) return handleTransactionError(err);
 
