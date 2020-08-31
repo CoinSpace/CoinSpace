@@ -5,8 +5,7 @@ const express = require('express');
 const auth = require('./auth');
 const account = require('./account');
 const geo = require('./geo');
-const validatePin = require('cs-pin-validator');
-const openalias = require('cs-openalias');
+const openalias = require('./openalias');
 const fee = require('./fee');
 const csFee = require('./csFee');
 const ticker = require('./ticker');
@@ -346,6 +345,10 @@ function validateAuthParams(req, res, next) {
     return res.status(400).json({ error: 'Bad request' });
   }
   next();
+}
+
+function validatePin(pin) {
+  return pin != undefined && pin.match(/^\d{4}$/);
 }
 
 module.exports = router;
