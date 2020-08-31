@@ -19,7 +19,7 @@ function open(data) {
     ractive.set('sending', true);
     setTimeout(() => {
       const wallet = getWallet();
-      const { tx } = data;
+      let { tx } = data;
 
       tx = tx.sign();
 

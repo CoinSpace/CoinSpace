@@ -175,7 +175,7 @@ function initWallet() {
 
   const options = {
     networkName,
-    seed: state.seed
+    seed: state.seed,
   };
 
   if (networkName === 'ethereum') {
