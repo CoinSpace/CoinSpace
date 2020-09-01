@@ -1,0 +1,57 @@
+<div class="auth_create_passphrase">
+
+  <h2>{{translate("Your passphrase (12 words)")}}</h2>
+
+  <div id="js-passphrase" data-clipboard-text="{{passphrase}}" class="_passphrase needsclick">
+    <span class="needsclick">{{passphrase}}</span>
+    {{#if isClipboardEnabled}}
+      <div class="_copy needsclick">
+      {{#if isCopied}}
+        {{translate("Copied!")}}
+      {{else}}
+        {{translate("Copy to Clipboard")}}
+      {{/if}}
+      </div>
+    {{/if}}
+  </div>
+  <div class="_passphrase_warning" class-alert="checked">
+    <div class="_bold">{{translate("Warning!")}}</div>
+    {{translate("Your passphrase will not be shown again.")}}<br />
+    {{translate("Without it you will lose access to your wallet.")}}
+  </div>
+
+  <div class="_passphrase_accept" on-click="toggle-check">
+    <div id="check" class="_checkbox">
+      {{#if checked}}
+        <div id="check" class="_check"></div>
+      {{/if}}
+    </div>
+    <p class="_checktext">{{translate("I have written down or otherwise securely stored my passphrase")}}</p>
+  </div>
+
+  <div class="_passphrase_accept" on-click="toggle-terms-check">
+    <div id="check" class="_checkbox">
+      {{#if termsChecked}}
+        <div id="check" class="_check"></div>
+      {{/if}}
+    </div>
+    <p class="_checktext">{{translate("I Agree To The Terms & Conditions")}}</p>
+  </div>
+
+  <div class="_tos">
+    <a class="_tos_link" onclick="window.open('https://www.coin.space/terms-of-service/', '_blank'); return false;" href="">
+      {{translate("Terms of Use")}}
+    </a>
+  </div>
+
+  <div class="_btn_group">
+    {{#if (checked && termsChecked) }}
+    <div class="_btn" on-click="confirm">{{translate("Confirm")}}</div>
+    {{else}}
+    <div class="_btn _disabled" >{{translate("Confirm")}}</div>
+    {{/if}}
+  </div>
+
+  <span class="_footer_link" on-click="back">{{translate("Go back")}}</span>
+
+</div>

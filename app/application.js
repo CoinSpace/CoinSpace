@@ -11,7 +11,7 @@ window.initCSApp = function() {
   const CS = require('lib/wallet');
   const FastClick = require('fastclick');
   const initFrame = require('widgets/frame');
-  const initAuth = require('widgets/auth');
+  const initAuth = require('pages/auth');
   const initGeoOverlay = require('widgets/geo-overlay');
   const { getToken, setToken, getTokenNetwork } = require('lib/token');
   const denomination = require('lib/denomination');
@@ -38,11 +38,11 @@ window.initCSApp = function() {
   FastClick.attach(document.body);
 
   initGeoOverlay(document.getElementById('geo-overlay'));
-
-  auth = (CS.walletRegistered() || CS.walletExistsDEPRECATED()) ? initAuth.pin(null, {
-    userExists: true,
-  }) : initAuth.choose();
-  const authContentEl = document.getElementById('auth_content');
+  // auth = (CS.walletRegistered() || CS.walletExistsDEPRECATED()) ? initAuth.pin(null, {
+  //   userExists: true,
+  // }) : initAuth.choose();
+  auth = initAuth(document.getElementById('auth'));
+  const authContentEl = document.getElementById('auth_frame');
   authContentEl.style.opacity = 0;
   fadeIn(authContentEl);
   auth.show();

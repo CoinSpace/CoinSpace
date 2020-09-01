@@ -62,6 +62,7 @@
 @mixin clickbtn() {
   @include noselect;
   cursor: pointer;
+  outline: none;
 }
 
 
@@ -96,4 +97,11 @@
 @mixin iphone-x-top() {
   height: env(safe-area-inset-top); // fallback
   height: constant(safe-area-inset-top);
+}
+
+@mixin small_font_size {
+  font-size: $small_font_size;
+  @include breakpoint(portrait) {
+    font-size: $small_font_size--portrait;
+  }
 }

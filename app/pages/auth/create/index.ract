@@ -1,0 +1,26 @@
+<div class="auth_create">
+
+  <h2>{{translate("We are about to generate your very own passphrase")}}</h2>
+  <p class="_description">{{translate("This keeps your account secure, and lets you open your wallet on multiple devices.")}}<br/> {{translate("It is very important you write this down.")}}</p>
+
+  {{#isLoading}}
+    <div class="_spinner">
+      {{>svg_refresh}}
+    </div>
+  {{/isLoading}}
+
+  <div class="_btn_group">
+    {{#if isLoading}}
+      <div class="_btn _disabled">
+        {{translate('Generating')}}...
+      </div>
+    {{else}}
+      <div class="_btn" on-click="generate-phrase">{{translate("Generate passphrase")}}</div>
+    {{/if}}
+  </div>
+
+  {{#unless isLoading}}
+    <span class="_footer_link" on-click="back">{{translate("Go back")}}</span>
+  {{/unless}}
+
+</div>

@@ -30,7 +30,6 @@
 
 // widgets
 @import "widgets/terms/_index";
-@import "widgets/auth/_index";
 @import "widgets/frame/_index";
 @import "widgets/header/_index";
 @import "widgets/tabs/_index";
@@ -57,6 +56,7 @@
 @import "widgets/eos/setup/_index";
 
 // pages
+@import "pages/auth/_index";
 @import "pages/send/_index";
 @import "pages/receive/_index";
 @import "pages/exchange/_index";

@@ -1,0 +1,90 @@
+.auth_create_passphrase {
+  ._passphrase {
+    @include textselect;
+    font-family: monospace;
+    cursor: pointer;
+    padding: 20px;
+    overflow: auto;
+    line-height: 1.6;
+    background-color: #f2f2f2;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    box-shadow: inset 0px 1px 3px 0px rgba(0,0,0,0.25);
+    ._copy {
+      border-top: 1px solid #ccc;
+      margin-top: 10px;
+      margin-bottom: -8px;
+      padding-top: 10px;
+      @include small_font_size;
+    }
+  }
+  ._passphrase_warning {
+    background-color: $yellow;
+    color: darken($yellow, 25%);
+    padding: 10px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    ._bold {
+      font-weight: bold;
+    }
+    &.alert {
+      background-color: #ff0000;
+      color: #fff;
+    }
+    margin-bottom: 20px;
+    @include breakpoint(portrait) {
+      margin-bottom: 40px;
+    }
+    @include small_font_size;
+  }
+  ._passphrase_accept {
+    display: flex;
+    max-width: 240px;
+    margin: 0 auto 20px auto;
+    cursor: pointer;
+    @include small_font_size;
+    @include breakpoint(portrait) {
+      margin: 0 auto 40px auto;
+      max-width: 270px;
+    }
+    ._checkbox {
+      @include clickbtn;
+      width: 30px;
+      height: 30px;
+      background-color: #f2f2f2;
+      position: relative;
+      border-radius: 3px;
+      outline: 1px solid rgba(133, 141, 240, 0);
+      box-shadow: inset 0px 1px 3px 0px rgba(0,0,0,0.25);
+    }
+    ._check {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      top: 50%;
+      left: 50%;
+      margin-top: -9px;
+      margin-left: -9px;
+      background-color: #575757;
+    }
+    ._checktext {
+      flex: 1;
+      margin-left: 10px;
+      text-align: left;
+      @include breakpoint(portrait) {
+        margin-left: 15px;
+        max-width: 260px;
+      }
+    }
+  }
+  ._tos {
+    margin-bottom: 40px;
+  }
+  ._tos_link {
+    @include clickbtn;
+    border-bottom: #e2e2e2 1px solid;
+    padding: 10px;
+    line-height: 25px;
+    display: block;
+  }
+}

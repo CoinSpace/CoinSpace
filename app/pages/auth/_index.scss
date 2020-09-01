@@ -1,0 +1,94 @@
+#auth {
+  display: none;
+  &.current {
+    display: flex;
+    align-items: center;
+  }
+  min-width: 100%;
+  min-height: 100%;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+#auth_frame {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 300px;
+  position: relative;
+  color: #333;
+  padding-bottom: 20px;
+  font-size: $base_font_size;
+  @include breakpoint(portrait) {
+    font-size: $base_font_size--portrait;
+    max-width: 360px;
+  }
+  .step {
+    display: none;
+    &.current {
+      display: block;
+    }
+  }
+  h2 {
+    font-size: $header_font_size;
+    line-height: 1.3;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    @include breakpoint(portrait) {
+      font-size: $header_font_size--portrait;
+      line-height: 1.3;
+      padding-bottom: 20px;
+    }
+  }
+
+  ._description {
+    line-height: 1.3;
+    margin-bottom: 20px;
+    @include small_font_size;
+  }
+
+  ._btn_group {
+    width: 100%;
+    min-width: 240px;
+    margin: 0 auto;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-radius: 4px;
+    box-shadow: inset 0px 1px 3px 0px rgba(0,0,0,0.25);
+    @include breakpoint(portrait) {
+      padding: 20px;
+    }
+    ._btn {
+      @extend .csbtn;
+      margin-bottom: 10px;
+      @include breakpoint(portrait) {
+        font-size: $base_font_size--portrait;
+        padding: 22px 30px 20px 30px;
+        margin-bottom: 20px;
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+      &._disabled {
+        pointer-events: none;
+        opacity: 0.5;
+      }
+    }
+  }
+
+  ._footer_link {
+    display: block;
+    padding: 5px;
+    @include clickbtn;
+    &:active {
+      text-decoration: underline;
+    }
+    @include small_font_size;
+  }
+}
+
+@import "./choose/_index";
+@import "./create/_index";
+@import "./create-passphrase/_index";
+@import "./create-passphrase-confirm/_index";
