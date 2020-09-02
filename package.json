@@ -30,11 +30,11 @@
     "compression": "^1.7.0",
     "cors": "^2.8.5",
     "ejs": "^2.6.1",
+    "elliptic": "^6.5.3",
     "express": "^4.15.4",
-    "express-openapi-validator": "^3.16.7",
+    "express-openapi-validator": "^4.0.0-alpha.1",
     "helmet": "^3.21.0",
     "http-errors": "^1.8.0",
-    "jose": "^1.27.2",
     "mongodb": "^3.1.10",
     "retry": "^0.10.1",
     "semver": "^7.3.2"

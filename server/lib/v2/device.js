@@ -11,8 +11,8 @@ const {
 const db = require('../v1/db');
 const { generateChallenge } = require('./utils');
 
-const MAX_FAILED_ATTEMPTS_FIRST = 3;
-const MAX_FAILED_ATTEMPTS_SECOND = 3;
+const COLLECTION = 'wallets';
+const MAX_FAILED_ATTEMPTS = 3;
 
 const url = new URL(process.env.SITE_URL);
 
@@ -44,105 +44,226 @@ const fidoAlgorithmIDs = [
 ];
 
 
-async function register(walletId, pin) {
-  const collection = db().collection('devices');
+async function register(walletId, deviceId, pinHash) {
+  const wallets = db().collection(COLLECTION);
 
-  const id = crypto.randomBytes(32).toString('hex');
-  const token = crypto.randomBytes(64).toString('hex');
+  const publicToken = crypto.randomBytes(64).toString('hex');
+  const privateToken = crypto.randomBytes(64).toString('hex');
 
-  await collection.insertOne({
-    _id: id,
-    wallet_id: walletId,
-    token,
-    pin_signature: pin,
-    failed_attempts_first: 0,
-    failed_attempts_second: 0,
-    // First Factor
-    authenticator: null,
-    // Second Factor
-    authenticators: [],
+  await wallets.updateOne({
+    _id: walletId,
+    'devices._id': { $ne: deviceId },
+  }, {
+    $setOnInsert: {
+      authenticators: [],
+      details: null,
+      settings: {
+        auth_for_pivate: true,
+      },
+    },
+    $push: {
+      devices: {
+        _id: deviceId,
+        pin_hash: pinHash,
+        authenticator: null,
+        public_token: publicToken,
+        private_token: privateToken,
+        failed_attempts: {},
+        challenge: null,
+      },
+    },
+  }, {
+    upsert: true,
+  }).catch((err) => {
+    if (err.name === 'MongoError' && err.code === 11000) {
+      throw createError(400, err.message, { expose: false });
+    }
+    throw err;
   });
 
   return {
-    id,
-    token,
+    publicToken,
+    privateToken,
   };
 }
 
-async function login(id, pin) {
-  const collection = db().collection('devices');
+async function tokenPublicPinVerify(deviceId, pinHash) {
+  const wallet = await getWallet(deviceId);
 
-  const device = await _getDevice(id);
-
-  if (device.pin_signature !== pin) {
-    await _unsuccessfulFirstFactor(device);
+  if (wallet.device.pin_hash !== pinHash) {
+    await _unsuccessfulAuth(wallet, 'public', 'pin');
   }
-
-  await collection.updateOne({ _id: device._id }, { $set: { failed_attempts_first: 0 } });
+  await _successfulAuth(wallet, 'public', 'pin');
 
   return {
-    id: device._id,
-    second: device.authenticators && device.authenticators.length > 0,
+    publicToken: wallet.device.public_token,
   };
 }
 
-async function token(id) {
-  const device = await _getDevice(id);
-  return {
-    id: device._id,
-    token: device.token,
-  };
-}
+async function tokenPublicPlatformOptions(deviceId) {
+  const wallet = await getWallet(deviceId);
 
-async function getDetails(id) {
-  const device = await _getDevice(id);
-  const details = await db().collection('details')
-    .findOne({ _id: device.wallet_id });
-  return details && details.data;
-}
-
-async function setDetails(id, data) {
-  const device = await _getDevice(id);
-  await db().collection('details')
-    .updateOne({ _id: device.wallet_id }, { $set: { data } }, { upsert: true });
-  return data;
-}
-
-async function setUsername(id, username) {
-  const device = await _getDevice(id);
-  username = username.toLowerCase().replace(/[^a-z0-9-]/g, '');
-  const usernameSha = crypto.createHash('sha1')
-    .update(username + process.env.USERNAME_SALT)
-    .digest('hex');
-
-  await db().collection('details')
-    .updateOne({ _id: device.wallet_id }, { $set: { username_sha: usernameSha } }, { upsert: true })
-    .catch((err) => {
-      if (err.name === 'MongoError' && err.code === 11000) {
-        throw createError(400, 'Username already taken');
-      }
-      throw err;
+  if (wallet.device.authenticator && wallet.device.authenticator.credentialID) {
+    const options = generateAssertionOptions({
+      challenge: generateChallenge(),
+      allowedCredentialIDs: [wallet.device.authenticator.credentialID],
     });
-  return username;
+    await _setChallenge(wallet, options.challenge);
+
+    return options;
+  } else {
+    throw createError(400, 'No authenticator');
+  }
 }
 
-async function remove(id) {
-  const device = await _getDevice(id);
-  await Promise.all([
-    db().collection('devices').deleteMany({ wallet_id: device.wallet_id }),
-    db().collection('details').deleteOne({ _id: device.wallet_id }),
-  ]);
-  return {
-    success: true,
-  };
+async function tokenPublicPlatformVerify(deviceId, body) {
+  const wallet = await getWallet(deviceId);
+
+  const { verified, authenticatorInfo } = await verifyAssertionResponse({
+    credential: body,
+    expectedChallenge: wallet.device.challenge,
+    expectedOrigin: ORIGIN,
+    expectedRPID: RP_ID,
+    authenticator: wallet.device.authenticator,
+  });
+
+  if (verified) {
+    await _successfulAuth(wallet, 'public', 'platform');
+    await _updateAuthenticatorPlatform(wallet, authenticatorInfo);
+
+    return {
+      publicToken: wallet.device.public_token,
+    };
+  } else {
+    await _unsuccessfulAuth(wallet, 'public', 'platform');
+  }
 }
 
-async function firstAttestationOptions(id) {
-  const collection = db().collection('devices');
-  const device = await _getDevice(id);
+async function tokenPrivate(deviceId) {
+  const wallet = await getWallet(deviceId);
+  if (wallet.settings.auth_for_pivate === false && wallet.authenticators.length === 0) {
+    return {
+      privateToken: wallet.device.private_token,
+    };
+  }
+  throw createError(401, 'Authorization required');
+}
+
+async function tokenPrivatePinVerify(deviceId, pinHash) {
+  const wallet = await getWallet(deviceId);
+
+  if (wallet.settings.auth_for_pivate === true) {
+    if (wallet.device.pin_hash !== pinHash) {
+      await _unsuccessfulAuth(wallet, 'private', 'pin');
+    }
+    await _successfulAuth(wallet, 'private', 'pin');
+
+    if (wallet.authenticators.length === 0) {
+      return {
+        privateToken: wallet.device.private_token,
+      };
+    }
+    return tokenPrivateCrossplatformOptions(deviceId);
+  }
+  throw createError(400, 'Incorrect authenticator');
+}
+
+async function tokenPrivatePlatformOptions(deviceId) {
+  const wallet = await getWallet(deviceId);
+
+  if (wallet.device.authenticator && wallet.device.authenticator.credentialID) {
+    const options = generateAssertionOptions({
+      challenge: generateChallenge(),
+      allowedCredentialIDs: [wallet.device.authenticator.credentialID],
+    });
+    await _setChallenge(wallet, options.challenge);
+
+    return options;
+  } else {
+    throw createError(400, 'No authenticator');
+  }
+}
+
+async function tokenPrivatePlatformVerify(deviceId, body) {
+  const wallet = await getWallet(deviceId);
+
+  const { verified, authenticatorInfo } = await verifyAssertionResponse({
+    credential: body,
+    expectedChallenge: wallet.device.challenge,
+    expectedOrigin: ORIGIN,
+    expectedRPID: RP_ID,
+    authenticator: wallet.device.authenticator,
+  });
+
+  if (verified) {
+    await _successfulAuth(wallet, 'private', 'platform');
+    await _updateAuthenticatorPlatform(wallet, authenticatorInfo);
+
+    if (wallet.authenticators.length === 0) {
+      return {
+        privateToken: wallet.device.private_token,
+      };
+    }
+    return tokenPrivateCrossplatformOptions(deviceId);
+  } else {
+    await _unsuccessfulAuth(wallet, 'private', 'platform');
+  }
+}
+
+async function tokenPrivateCrossplatformOptions(deviceId) {
+  const wallet = await getWallet(deviceId);
+
+  if (wallet.authenticators && wallet.authenticators.length > 0) {
+    const options = generateAssertionOptions({
+      challenge: generateChallenge(),
+      allowedCredentialIDs: wallet.authenticators.map(authenticator => authenticator.credentialID),
+    });
+
+    await _setChallenge(wallet, options.challenge);
+
+    return options;
+  } else {
+    throw createError(400, 'No authenticator');
+  }
+}
+
+async function tokenPrivateCrossplatformVerify(deviceId, body) {
+  const wallet = await getWallet(deviceId);
+
+  const authenticator = wallet.authenticators.find(authenticator =>
+    authenticator.credentialID === body.id
+  );
+  if (authenticator) {
+    const { verified, authenticatorInfo } = await verifyAssertionResponse({
+      credential: body,
+      expectedChallenge: wallet.device.challenge,
+      expectedOrigin: ORIGIN,
+      expectedRPID: RP_ID,
+      authenticator,
+    });
+
+    if (verified) {
+      await _successfulAuth(wallet, 'private', 'crossplatform');
+      await _updateAuthenticatorCrossplatform(wallet, authenticatorInfo);
+
+      return {
+        privateToken: wallet.device.private_token,
+      };
+    } else {
+      throw createError(400, 'Incorrect authenticator');
+    }
+  } else {
+    await _unsuccessfulAuth(wallet, 'private', 'crossplatform');
+  }
+}
+
+// Attestation
+
+async function platformAttestationOptions(deviceId) {
+  const wallet = await getWallet(deviceId);
 
   const user = crypto.createHash('sha1')
-    .update(device._id)
+    .update(wallet.device._id)
     .digest('hex');
 
   const options = generateAttestationOptions({
@@ -154,40 +275,26 @@ async function firstAttestationOptions(id) {
     attestationType: 'none',
     supportedAlgorithmIDs: fidoAlgorithmIDs,
     authenticatorSelection: {
-      authenticatorAttachment: 'platform',
+      //authenticatorAttachment: 'platform',
     },
   });
-
-  await collection.updateOne({ _id: device._id }, {
-    $set: { challenge: options.challenge },
-  });
+  await _setChallenge(wallet, options.challenge);
 
   return options;
 }
 
-async function firstAttestationVerify(id, body) {
-  const collection = db().collection('devices');
-  const device = await _getDevice(id);
+async function platformAttestationVerify(deviceId, body) {
+  const wallet = await getWallet(deviceId);
 
   const { verified, authenticatorInfo } = await verifyAttestationResponse({
     credential: body,
-    expectedChallenge: device.challenge,
+    expectedChallenge: wallet.device.challenge,
     expectedOrigin: ORIGIN,
     expectedRPID: RP_ID,
   });
 
   if (verified === true) {
-    await collection.updateOne({ _id: device._id }, {
-      $set: {
-        challenge: null,
-        authenticator: {
-          credentialID: authenticatorInfo.base64CredentialID,
-          publicKey: authenticatorInfo.base64PublicKey,
-          counter: authenticatorInfo.counter,
-          date: new Date(),
-        },
-      },
-    });
+    await _setAuthenticatorPlatform(wallet, authenticatorInfo);
     return {
       success: true,
     };
@@ -196,64 +303,11 @@ async function firstAttestationVerify(id, body) {
   }
 }
 
-async function firstAssertionOptions(id) {
-  const collection = db().collection('devices');
-  const device = await _getDevice(id);
-
-  if (device.authenticator && device.authenticator.credentialID) {
-    const options = generateAssertionOptions({
-      challenge: generateChallenge(),
-      allowedCredentialIDs: [device.authenticator.credentialID],
-    });
-
-    await collection.updateOne({ _id: device._id }, {
-      $set: { challenge: options.challenge },
-    });
-
-    return options;
-  } else {
-    throw createError(400, 'No authenticator for first factor');
-  }
-}
-
-async function firstAssertionVerify(id, body) {
-  const collection = db().collection('devices');
-  const device = await _getDevice(id);
-  const { verified, authenticatorInfo } = await verifyAssertionResponse({
-    credential: body,
-    expectedChallenge: device.challenge,
-    expectedOrigin: ORIGIN,
-    expectedRPID: RP_ID,
-    authenticator: device.authenticator,
-  });
-
-  if (verified) {
-    await collection.updateOne({ _id: device._id }, {
-      $set: {
-        challenge: null,
-        authenticator: {
-          ...device.authenticator,
-          counter: authenticatorInfo.counter,
-        },
-        failed_attempts_first: 0,
-      },
-    });
-
-    return {
-      id: device._id,
-      second: device.authenticators && device.authenticators.length > 0,
-    };
-  } else {
-    await _unsuccessfulFirstFactor(device);
-  }
-}
-
-async function secondAttestationOptions(id) {
-  const collection = db().collection('devices');
-  const device = await _getDevice(id);
+async function crossplatformAttestationOptions(deviceId) {
+  const wallet = await getWallet(deviceId);
 
   const user = crypto.createHash('sha1')
-    .update(device._id)
+    .update(wallet._id)
     .digest('hex');
 
   const options = generateAttestationOptions({
@@ -267,42 +321,27 @@ async function secondAttestationOptions(id) {
     authenticatorSelection: {
       authenticatorAttachment: 'cross-platform',
     },
-    excludedCredentialIDs: device.authenticators ?
-      device.authenticators.map(authenticator => authenticator.credentialID) : undefined,
+    excludedCredentialIDs: wallet.authenticators ?
+      wallet.authenticators.map(authenticator => authenticator.credentialID) : undefined,
   });
 
-  await collection.updateOne({ _id: device._id }, {
-    $set: { challenge: options.challenge },
-  });
+  await _setChallenge(wallet, options.challenge);
 
   return options;
 }
 
-async function secondAttestationVerify(id, body) {
-  const collection = db().collection('devices');
-  const device = await _getDevice(id);
+async function crossplatformAttestationVerify(deviceId, body) {
+  const wallet = await getWallet(deviceId);
 
   const { verified, authenticatorInfo } = await verifyAttestationResponse({
     credential: body,
-    expectedChallenge: device.challenge,
+    expectedChallenge: wallet.device.challenge,
     expectedOrigin: ORIGIN,
     expectedRPID: RP_ID,
   });
 
   if (verified === true) {
-    await collection.updateOne({ _id: device._id }, {
-      $set: {
-        challenge: null,
-      },
-      $push: {
-        authenticators: {
-          credentialID: authenticatorInfo.base64CredentialID,
-          publicKey: authenticatorInfo.base64PublicKey,
-          counter: authenticatorInfo.counter,
-          date: new Date(),
-        },
-      },
-    });
+    await _setAuthenticatorCrossplatform(wallet, authenticatorInfo);
     return {
       success: true,
     };
@@ -311,117 +350,229 @@ async function secondAttestationVerify(id, body) {
   }
 }
 
-async function secondAssertionOptions(id) {
-  const collection = db().collection('devices');
-  const device = await _getDevice(id);
-
-  if (device.authenticators && device.authenticators.length > 0) {
-    const options = generateAssertionOptions({
-      challenge: generateChallenge(),
-      allowedCredentialIDs: device.authenticators.map(authenticator => authenticator.credentialID),
-    });
-
-    await collection.updateOne({ _id: device._id }, {
-      $set: { challenge: options.challenge },
-    });
-
-    return options;
-  } else {
-    throw createError(400, 'No authenticator for second factor');
-  }
+async function listCrossplatformAuthenticators(deviceId) {
+  const wallet = await getWallet(deviceId);
+  return wallet.authenticators.map(item => {
+    return {
+      credentialID: item.credentialID,
+      date: item.date,
+    };
+  });
 }
 
-async function secondAssertionVerify(id, body) {
-  const collection = db().collection('devices');
-  const device = await _getDevice(id);
+async function removeCrossplatformAuthenticator(deviceId, credentialID) {
+  const wallets = db().collection(COLLECTION);
+  await wallets.updateOne({
+    'devices._id': deviceId,
+    'authenticators.credentialID': credentialID,
+  }, {
+    // It doesn't works with dot notation =(
+    $pull: { authenticators: { credentialID } },
+  });
+  return {
+    success: true,
+  };
+}
 
-  const authenticator = device.authenticators.find(authenticator =>
-    authenticator.credentialID === body.id
-  );
-  if (authenticator) {
-    const { verified, authenticatorInfo } = await verifyAssertionResponse({
-      credential: body,
-      expectedChallenge: device.challenge,
-      expectedOrigin: ORIGIN,
-      expectedRPID: RP_ID,
-      authenticator,
+async function getDetails(deviceId) {
+  const wallet = await getWallet(deviceId);
+  return wallet.details;
+}
+
+async function setDetails(deviceId, details) {
+  const wallet = await getWallet(deviceId);
+  await db().collection(COLLECTION)
+    .updateOne({ _id: wallet._id }, { $set: { details } });
+  return details;
+}
+
+async function setUsername(deviceId, username) {
+  const wallet = await getWallet(deviceId);
+  username = username.toLowerCase().replace(/[^a-z0-9-]/g, '');
+  const usernameSha = crypto.createHash('sha1')
+    .update(username + process.env.USERNAME_SALT)
+    .digest('hex');
+
+  await db().collection(COLLECTION)
+    .updateOne({ _id: wallet._id }, { $set: { username_sha: usernameSha } }, { upsert: true })
+    .catch((err) => {
+      if (err.name === 'MongoError' && err.code === 11000) {
+        throw createError(400, 'Username already taken');
+      }
+      throw err;
     });
+  return username;
+}
 
-    if (verified) {
-      authenticator.counter = authenticatorInfo.counter;
+async function removeDevice(deviceId) {
+  const wallets = db().collection(COLLECTION);
+  await wallets.updateOne({
+    'devices._id': deviceId,
+  }, {
+    // It doesn't works with dot notation =(
+    $pull: { devices: { _id: deviceId } },
+  });
+  return {
+    success: true,
+  };
+}
 
-      await collection.updateOne({ _id: device._id }, {
-        $set: {
-          challenge: null,
-          authenticators: device.authenticators,
-          failed_attempts_second: 0,
-        },
-      });
-
-      return {
-        id: device._id,
-      };
-    } else {
-      throw createError(400, 'Incorrect authenticator for second factor');
-    }
-  } else {
-    await _unsuccessfulSecondFactor(device);
-  }
+async function removeWallet(deviceId) {
+  const wallets = db().collection(COLLECTION);
+  await wallets.removeOne({
+    'devices._id': deviceId,
+  });
+  return {
+    success: true,
+  };
 }
 
 // Internal
 
-async function _getDevice(id) {
-  const collection = db().collection('devices');
-  const device = await collection.findOne({
-    _id: id,
+async function getWallet(deviceId) {
+  const wallets = db().collection(COLLECTION);
+  const wallet = await wallets.findOne({
+    'devices._id': deviceId,
   });
 
-  if (!device) {
-    throw createError(404, 'Unknown device');
+  if (!wallet) {
+    throw createError(404, 'Unknown wallet');
   }
+  // Current device
+  wallet.device = wallet.devices.find(item => item._id === deviceId);
 
-  return device;
+  return wallet;
 }
 
-async function _unsuccessfulFirstFactor(device) {
-  const collection = db().collection('devices');
+async function _successfulAuth(wallet, tokenType, authType) {
+  const wallets = db().collection(COLLECTION);
 
-  if (device.failed_attempts_first + 1 >= MAX_FAILED_ATTEMPTS_FIRST) {
-    await collection.deleteOne({ _id: device._id });
+  await wallets.updateOne({
+    'devices._id': wallet.device._id,
+  }, {
+    $set: {
+      [`devices.$.failed_attempts.${tokenType}_${authType}`]: 0,
+    },
+  });
+}
+
+async function _unsuccessfulAuth(wallet, tokenType, authType) {
+  const wallets = db().collection(COLLECTION);
+  const attempt = (wallet.device.failed_attempts || {})[`${tokenType}_${authType}`] || 0;
+
+  if (attempt + 1 >= MAX_FAILED_ATTEMPTS) {
+    await wallets.updateOne({
+      'devices._id': wallet.device._id,
+    }, {
+      // It doesn't works with dot notation =(
+      $pull: { devices: { _id: wallet.device._id } },
+    });
     throw createError(410, 'Removed by max failed attempts');
   } else {
-    await collection.updateOne({ _id: device._id }, { $inc: { failed_attempts_first: 1 } });
+    await wallets.updateOne({
+      'devices._id': wallet.device._id,
+    }, {
+      $inc: { [`devices.$.failed_attempts.${tokenType}_${authType}`]: 1 },
+    });
     throw createError(401, 'Unauthorized device');
   }
 }
 
-async function _unsuccessfulSecondFactor(device) {
-  const collection = db().collection('devices');
+async function _setChallenge(wallet, challenge) {
+  const wallets = db().collection(COLLECTION);
+  await wallets.updateOne({
+    'devices._id': wallet.device._id,
+  }, {
+    $set: { 'devices.$.challenge': challenge },
+  });
+}
 
-  if (device.failed_attempts_second + 1 >= MAX_FAILED_ATTEMPTS_SECOND) {
-    await collection.deleteOne({ _id: device._id });
-    throw createError(410, 'Removed by max failed attempts');
-  } else {
-    await collection.updateOne({ _id: device._id }, { $inc: { failed_attempts_second: 1 } });
-    throw createError(401, 'Unauthorized device');
-  }
+async function _setAuthenticatorPlatform(wallet, authenticatorInfo) {
+  const wallets = db().collection(COLLECTION);
+  await wallets.updateOne({
+    'devices._id': wallet.device._id,
+  }, {
+    $set: {
+      'devices.$.challenge': null,
+      'devices.$.authenticator': {
+        credentialID: authenticatorInfo.base64CredentialID,
+        publicKey: authenticatorInfo.base64PublicKey,
+        counter: authenticatorInfo.counter,
+        date: new Date(),
+      },
+    },
+  });
+}
+
+async function _updateAuthenticatorPlatform(wallet, authenticatorInfo) {
+  const wallets = db().collection(COLLECTION);
+  await wallets.updateOne({
+    'devices._id': wallet.device._id,
+  }, {
+    $set: {
+      'devices.$.challenge': null,
+      'devices.$.authenticator.counter': authenticatorInfo.counter,
+    },
+  });
+}
+
+async function _setAuthenticatorCrossplatform(wallet, authenticatorInfo) {
+  const wallets = db().collection(COLLECTION);
+  await wallets.updateOne({
+    'devices._id': wallet.device._id,
+  }, {
+    $set: {
+      'devices.$.challenge': null,
+    },
+    $push: {
+      authenticators: {
+        credentialID: authenticatorInfo.base64CredentialID,
+        publicKey: authenticatorInfo.base64PublicKey,
+        counter: authenticatorInfo.counter,
+        date: new Date(),
+      },
+    },
+  });
+}
+
+async function _updateAuthenticatorCrossplatform(wallet, authenticatorInfo) {
+  const wallets = db().collection(COLLECTION);
+  await wallets.updateOne({
+    _id: wallet._id,
+    'authenticators.credentialID': authenticatorInfo.base64CredentialID,
+  }, {
+    $set: {
+      'authenticators.$.counter': authenticatorInfo.counter,
+    },
+  });
 }
 
 module.exports = {
   register,
-  login,
-  token,
+
+  tokenPublicPinVerify,
+  tokenPublicPlatformOptions,
+  tokenPublicPlatformVerify,
+
+  tokenPrivate,
+  tokenPrivatePinVerify,
+  tokenPrivatePlatformOptions,
+  tokenPrivatePlatformVerify,
+  tokenPrivateCrossplatformOptions,
+  tokenPrivateCrossplatformVerify,
+
+  platformAttestationOptions,
+  platformAttestationVerify,
+  crossplatformAttestationOptions,
+  crossplatformAttestationVerify,
+
+  listCrossplatformAuthenticators,
+  removeCrossplatformAuthenticator,
   getDetails,
   setDetails,
   setUsername,
-  remove,
-  firstAttestationOptions,
-  firstAttestationVerify,
-  firstAssertionOptions,
-  firstAssertionVerify,
-  secondAttestationOptions,
-  secondAttestationVerify,
-  secondAssertionOptions,
-  secondAssertionVerify,
+  removeDevice,
+  removeWallet,
+
+  getWallet,
 };

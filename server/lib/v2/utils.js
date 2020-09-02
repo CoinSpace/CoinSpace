@@ -1,6 +1,9 @@
 'use strict';
 
 const crypto = require('crypto');
+const createError = require('http-errors');
+const EdDSA = require('elliptic').eddsa;
+const ec = new EdDSA('ed25519');
 
 function generateChallenge() {
   return crypto.randomBytes(64);
@@ -13,7 +16,32 @@ function asyncWrapper(fn) {
   };
 }
 
+
+function verifyReq(key, req) {
+  try {
+    const base = [
+      req.method.toLowerCase(),
+      req.originalUrl,
+      req.get('Host') || '',
+      req.get('X-Date') || '',
+    ];
+    if (req.bodyHash) {
+      base.push(req.bodyHash);
+    }
+
+    const buf = Buffer.from(base.join(' '), 'utf8');
+    if (ec.keyFromPublic(key).verify(buf, req.get('Signature'))) {
+      return true;
+    } else {
+      return Promise.reject(createError(401, 'Invalid signature'));
+    }
+  } catch (err) {
+    throw createError(400, err.message, { expose: false });
+  }
+}
+
 module.exports = {
   generateChallenge,
   asyncWrapper,
+  verifyReq,
 };

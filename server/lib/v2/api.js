@@ -2,205 +2,30 @@
 
 const path = require('path');
 const express = require('express');
-const createError = require('http-errors');
-const jose = require('jose');
-const { OpenApiValidator } = require('express-openapi-validator');
+const OpenApiValidator = require('express-openapi-validator');
+const { verifyReq } = require('./utils');
 const device = require('./device');
-const { asyncWrapper } = require('./utils');
 
-const router = express.Router();
+// TODO https://github.com/cdimascio/express-openapi-validator/pull/351#issuecomment-684743497
+//const router = express.Router();
+const router = express();
 
-const { JWT_SECRET } = process.env;
-const { JWE_SECRET } = process.env;
-const JWT_EXPIRES_WALLET = '1 hour';
-const JWT_EXPIRES_SECOND = '10 min';
-
-function getJWT(id, audience, expiresIn) {
-  return jose.JWE.encrypt(jose.JWT.sign({
-    id,
-  }, JWT_SECRET, {
-    audience,
-    expiresIn,
-  }), JWE_SECRET);
-}
-
-function authenticate(audience) {
-  // req, scopes, schema
-  return (req) => {
-    const token = req.headers.authorization.replace(/Bearer\s+/i, '');
-    const data = jose.JWT.verify(jose.JWE.decrypt(token, JWE_SECRET).toString(), JWT_SECRET);
-
-    if (data.aud === audience) {
-      req.deviceId = data.id;
-      return true;
-    }
-    throw createError(403, 'Invalid audience');
-  };
-}
-
-new OpenApiValidator({
+router.use(OpenApiValidator.middleware({
   apiSpec: path.join(__dirname, 'api.yaml'),
   // Validate responses only in dev environment
   validateResponses: process.NODE_ENV !== 'production',
+  operationHandlers: path.join(__dirname),
   validateSecurity: {
     handlers: {
-      loginAuth: authenticate('login'),
-      walletAuth: authenticate('wallet'),
-      secondAuth: authenticate('second'),
+      async walletSignature(req) {
+        const wallet = await device.getWallet(req.query.id);
+        return verifyReq(wallet._id, req);
+      },
+      async deviceSignature(req) {
+        return verifyReq(req.query.id, req);
+      },
     },
   },
-})
-  .install(router)
-  .then(() => {
-
-    router.post('/register', asyncWrapper(async (req, res) => {
-      const info = await device.register(req.body.wallet, req.body.pin);
-      console.log('registered wallet %s', info.id);
-      const login = getJWT(info.id, 'login');
-      const jwt = getJWT(info.id, 'wallet', JWT_EXPIRES_WALLET);
-      res.status(201).send({
-        login,
-        jwt,
-        token: info.token,
-      });
-    }));
-
-    router.post('/login', asyncWrapper(async (req, res) => {
-      const info = await device.login(req.deviceId, req.body.pin);
-
-      if (info.second === true) {
-        console.log('authenticated first factor wallet %s', info.id);
-        const jwt = getJWT(info.id, 'second', JWT_EXPIRES_SECOND);
-        res.status(200).send({
-          second: true,
-          jwt,
-        });
-      } else {
-        console.log('authenticated wallet %s', info.id);
-        const jwt = getJWT(info.id, 'wallet', JWT_EXPIRES_WALLET);
-        res.status(200).send({
-          jwt,
-        });
-      }
-    }));
-
-    router.get('/token', asyncWrapper(async (req, res) => {
-      const info = await device.token(req.deviceId);
-      console.log('got token wallet %s', info.id);
-      const jwt = getJWT(info.id, 'wallet', JWT_EXPIRES_WALLET);
-      res.status(200).send({
-        token: info.token,
-        jwt,
-      });
-    }));
-
-    router.get('/details', asyncWrapper(async (req, res) => {
-      const data = await device.getDetails(req.deviceId);
-      const jwt = getJWT(req.deviceId, 'wallet', JWT_EXPIRES_WALLET);
-      res.status(200).send({
-        data,
-        jwt,
-      });
-    }));
-
-    router.put('/details', asyncWrapper(async (req, res) => {
-      const data = await device.setDetails(req.deviceId, req.body.data);
-      const jwt = getJWT(req.deviceId, 'wallet', JWT_EXPIRES_WALLET);
-      res.status(200).send({
-        data,
-        jwt,
-      });
-    }));
-
-    router.put('/username', asyncWrapper(async (req, res) => {
-      const username = await device.setUsername(req.deviceId, req.body.username);
-      const jwt = getJWT(req.deviceId, 'wallet', JWT_EXPIRES_WALLET);
-      res.status(200).send({
-        username,
-        jwt,
-      });
-    }));
-
-    router.delete('/account', asyncWrapper(async (req, res) => {
-      const info = await device.remove(req.deviceId);
-      const jwt = getJWT(req.deviceId, 'wallet', JWT_EXPIRES_WALLET);
-      res.status(200).send({
-        ...info,
-        jwt,
-      });
-    }));
-
-    router.get('/first/attestation', asyncWrapper(async (req, res) => {
-      const options = await device.firstAttestationOptions(req.deviceId);
-      const jwt = getJWT(req.deviceId, 'wallet', JWT_EXPIRES_WALLET);
-      res.status(200).send({
-        ...options,
-        jwt,
-      });
-    }));
-
-    router.post('/first/attestation', asyncWrapper(async (req, res) => {
-      const info = await device.firstAttestationVerify(req.deviceId, req.body);
-      const jwt = getJWT(req.deviceId, 'wallet', JWT_EXPIRES_WALLET);
-      res.status(200).send({
-        ...info,
-        jwt,
-      });
-    }));
-
-    router.get('/first/assertion', asyncWrapper(async (req, res) => {
-      const options = await device.firstAssertionOptions(req.deviceId);
-      res.status(200).send(options);
-    }));
-
-    router.post('/first/assertion', asyncWrapper(async (req, res) => {
-      const info = await device.firstAssertionVerify(req.deviceId, req.body);
-
-      if (info.second === true) {
-        const jwt = getJWT(info.id, 'second', JWT_EXPIRES_SECOND);
-        res.status(200).send({
-          second: true,
-          jwt,
-        });
-      } else {
-        const jwt = getJWT(info.id, 'wallet', JWT_EXPIRES_WALLET);
-        res.status(200).send({
-          jwt,
-        });
-      }
-    }));
-
-    router.get('/second/attestation', asyncWrapper(async (req, res) => {
-      const options = await device.secondAttestationOptions(req.deviceId);
-      const jwt = getJWT(req.deviceId, 'wallet', JWT_EXPIRES_WALLET);
-      res.status(200).send({
-        ...options,
-        jwt,
-      });
-    }));
-
-    router.post('/second/attestation', asyncWrapper(async (req, res) => {
-      const info = await device.secondAttestationVerify(req.deviceId, req.body);
-      const jwt = getJWT(req.deviceId, 'wallet', JWT_EXPIRES_WALLET);
-      res.status(200).send({
-        ...info,
-        jwt,
-      });
-    }));
-
-    router.get('/second/assertion', asyncWrapper(async (req, res) => {
-      const options = await device.secondAssertionOptions(req.deviceId);
-      res.status(200).send(options);
-    }));
-
-    router.post('/second/assertion', asyncWrapper(async (req, res) => {
-      const info = await device.secondAssertionVerify(req.deviceId, req.body);
-      const jwt = getJWT(info.id, 'wallet', JWT_EXPIRES_WALLET);
-      res.status(200).send({
-        jwt,
-      });
-    }));
-
-  });
+}));
 
 module.exports = router;

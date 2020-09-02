@@ -23,6 +23,10 @@ module.exports = function() {
         db.collection('details').createIndexes([
           { key: { username_sha: 1 }, background: true, unique: true, sparse: true },
         ]),
+        db.collection('wallets').createIndexes([
+          { key: { username_sha: 1 }, background: true, unique: true, sparse: true },
+          { key: { 'devices._id': 1 }, background: true, unique: true, sparse: true },
+        ]),
         db.collection('releases').createIndexes([
           {
             key: {

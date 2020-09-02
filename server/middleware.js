@@ -6,6 +6,7 @@ const path = require('path');
 const helmet = require('helmet');
 const express = require('express');
 const cors = require('cors');
+const crypto = require('crypto');
 
 function init(app) {
 
@@ -29,7 +30,11 @@ function init(app) {
 
   const dayInMs = 24 * 60 * 60 * 1000;
   app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(bodyParser.json());
+  app.use(bodyParser.json({
+    verify(req, res, buf) {
+      req.bodyHash = req.body ? crypto.createHash('sha256').update(buf).digest('hex') : '';
+    },
+  }));
 
   app.use(compress());
 

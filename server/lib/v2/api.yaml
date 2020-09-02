@@ -10,6 +10,8 @@ servers:
 paths:
   /register:
     post:
+      x-eov-operation-id: register
+      x-eov-operation-handler: handlers
       description: Register new device
       requestBody:
         required: true
@@ -18,42 +20,43 @@ paths:
             schema:
               type: 'object'
               properties:
-                pin:
-                  description: Pin signature
-                  $ref: '#/components/schemas/Hex64String'
-                wallet:
+                walletId:
                   description: Wallet ID
                   $ref: '#/components/schemas/Hex64String'
+                deviceId:
+                  description: Device ID
+                  $ref: '#/components/schemas/Hex64String'
+                pinHash:
+                  description: PIN Hash
+                  $ref: '#/components/schemas/Hex64String'
               required:
-                - pin
-                - wallet
+                - walletId
+                - deviceId
+                - pinHash
       responses:
         '201':
-          description: Registration success
+          description: Registration Success
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  login:
-                    description: Login JWT
-                    type: string
-                  jwt:
-                    description: Wallet JWT
-                    type: string
-                  token:
-                    type: string
+                  privateToken:
+                    $ref: '#/components/schemas/Hex128String'
+                  publicToken:
+                    $ref: '#/components/schemas/Hex128String'
                 required:
-                  - login
-                  - jwt
-                  - token
+                  - privateToken
+                  - publicToken
         default:
           $ref: '#/components/responses/GeneralError'
-  /login:
+  /token/public/pin:
     post:
-      description: Login device
-      security:
-        - loginAuth: []
+      x-eov-operation-id: tokenPublicPinVerify
+      x-eov-operation-handler: handlers
+      description: Get public token
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
       requestBody:
         required: true
         content:
@@ -61,73 +64,249 @@ paths:
             schema:
               type: 'object'
               properties:
-                pin:
-                  description: Pin signature
+                pinHash:
+                  description: PIN Hash
                   $ref: '#/components/schemas/Hex64String'
               required:
-                - pin
+                - pinHash
       responses:
         '200':
-          description: Login success
+          description: Auth Result
           content:
             application/json:
               schema:
                 type: object
-                properties:
-                  jwt:
-                    type: string
-                  second:
-                    type: boolean
-                required:
-                  - jwt
         default:
           $ref: '#/components/responses/GeneralError'
-  /token:
+  /token/public/platform:
     get:
-      description: Get token
-      security:
-        - walletAuth: []
+      x-eov-operation-id: tokenPublicPlatformOptions
+      x-eov-operation-handler: handlers
+      description: Get Assertion Options
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
       responses:
         '200':
-          description: Token
+          $ref: '#/components/responses/AssertionOptions'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    post:
+      x-eov-operation-id: tokenPublicPlatformVerify
+      x-eov-operation-handler: handlers
+      description: Verify Assertion
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      requestBody:
+        $ref: '#/components/requestBodies/Assertion'
+      responses:
+        '200':
+          $ref: '#/components/responses/AssertionResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /token/private:
+    get:
+      x-eov-operation-id: tokenPrivate
+      x-eov-operation-handler: handlers
+      description: Get Private Token
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/AssertionOptions'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /token/private/platform:
+    get:
+      x-eov-operation-id: tokenPrivatePlatformOptions
+      x-eov-operation-handler: handlers
+      description: Get Assertion Options
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/AssertionOptions'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    post:
+      x-eov-operation-id: tokenPrivatePlatformVerify
+      x-eov-operation-handler: handlers
+      description: Verify Assertion
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      requestBody:
+        $ref: '#/components/requestBodies/Assertion'
+      responses:
+        '200':
+          $ref: '#/components/responses/AssertionResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /token/private/crossplatform:
+    get:
+      x-eov-operation-id: tokenPrivateCrossplatformOptions
+      x-eov-operation-handler: handlers
+      description: Get Assertion Options
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/AssertionOptions'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    post:
+      x-eov-operation-id: tokenPrivateCrossplatformVerify
+      x-eov-operation-handler: handlers
+      description: Verify Assertion
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      requestBody:
+        $ref: '#/components/requestBodies/Assertion'
+      responses:
+        '200':
+          $ref: '#/components/responses/AssertionResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /platform/attestation:
+    get:
+      x-eov-operation-id: platformAttestationOptions
+      x-eov-operation-handler: handlers
+      description: Get Attestation Options for Platform Authenticator
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/AttestationOptions'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    post:
+      x-eov-operation-id: platformAttestationVerify
+      x-eov-operation-handler: handlers
+      description: Verify Attestation for Platform Authenticator
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      requestBody:
+        $ref: '#/components/requestBodies/Attestation'
+      responses:
+        '200':
+          $ref: '#/components/responses/AttestationResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /crossplatform/attestation:
+    get:
+      x-eov-operation-id: crossplatformAttestationOptions
+      x-eov-operation-handler: handlers
+      description: Get Attestation Options for Cross-Platform Authenticator
+      security:
+        - walletSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/AttestationOptions'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    post:
+      x-eov-operation-id: crossplatformAttestationVerify
+      x-eov-operation-handler: handlers
+      description: Verify Attestation for Cross-Platform Authenticator
+      security:
+        - walletSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      requestBody:
+        $ref: '#/components/requestBodies/Attestation'
+      responses:
+        '200':
+          $ref: '#/components/responses/AttestationResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /crossplatform:
+    get:
+      x-eov-operation-id: listCrossplatformAuthenticators
+      x-eov-operation-handler: handlers
+      description: List Cross-Platform Authenticators
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      responses:
+        '200':
+          description: List of Authenticators
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  token:
-                    type: string
-                  jwt:
-                    type: string
-                required:
-                  - token
+                type: array
+        default:
+          $ref: '#/components/responses/GeneralError'
+    delete:
+      x-eov-operation-id: removeCrossplatformAuthenticator
+      x-eov-operation-handler: handlers
+      description: Remove Authenticator
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - walletSignature: []
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: 'object'
+              properties:
+                credentialID:
+                  type: string
+              required:
+                - credentialID
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
         default:
           $ref: '#/components/responses/GeneralError'
   /details:
     get:
+      x-eov-operation-id: getDetails
+      x-eov-operation-handler: handlers
       description: Get user details
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
       security:
-        - walletAuth: []
+        - deviceSignature: []
       responses:
         '200':
-          description: Update user details result
+          description: User datails
           content:
             application/json:
               schema:
                 type: object
                 properties:
                   data:
-                    type: string
-                  jwt:
+                    description: User details
                     type: string
                 required:
                   - data
         default:
           $ref: '#/components/responses/GeneralError'
     put:
+      x-eov-operation-id: setDetails
+      x-eov-operation-handler: handlers
       description: Update user details
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
       security:
-        - walletAuth: []
+        - deviceSignature: []
       requestBody:
         required: true
         content:
@@ -138,21 +317,17 @@ paths:
                 data:
                   description: User details
                   type: string
-                jwt:
-                  type: string
               required:
                 - data
       responses:
         '200':
           description: Update user details result
           content:
-            application/json:
+            'application/json':
               schema:
                 type: object
                 properties:
                   data:
-                    type: string
-                  jwt:
                     type: string
                 required:
                   - data
@@ -160,9 +335,13 @@ paths:
           $ref: '#/components/responses/GeneralError'
   /username:
     put:
+      x-eov-operation-id: setUsername
+      x-eov-operation-handler: handlers
       description: Update username
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
       security:
-        - walletAuth: []
+        - deviceSignature: []
       requestBody:
         required: true
         content:
@@ -185,133 +364,36 @@ paths:
                 properties:
                   username:
                     type: string
-                  jwt:
-                    type: string
                 required:
                   - username
         default:
           $ref: '#/components/responses/GeneralError'
-  /account:
+  /device:
     delete:
-      description: Remove account
+      x-eov-operation-id: removeDevice
+      x-eov-operation-handler: handlers
+      description: Remove Device
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
       security:
-        - walletAuth: []
+        - deviceSignature: []
       responses:
         '200':
-          description: Account removed
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                required:
-                  - success
+          $ref: '#/components/responses/SuccessResponse'
         default:
           $ref: '#/components/responses/GeneralError'
-  /first/attestation:
-    get:
-      description: Get Attestation Options for First Factor
+  /wallet:
+    delete:
+      x-eov-operation-id: removeWallet
+      x-eov-operation-handler: handlers
+      description: Remove Wallet
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
       security:
-        - walletAuth: []
+        - walletSignature: []
       responses:
         '200':
-          $ref: '#/components/responses/AttestationOptions'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    post:
-      description: Verify Attestation for First Factor
-      security:
-        - walletAuth: []
-      requestBody:
-        $ref: '#/components/requestBodies/Attestation'
-      responses:
-        '200':
-          $ref: '#/components/responses/AttestationResponse'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /first/assertion:
-    get:
-      description: Get Assertion Options for First Factor
-      security:
-        - loginAuth: []
-      responses:
-        '200':
-          $ref: '#/components/responses/AssertionOptions'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    post:
-      description: Verify Assertion for First Factor
-      security:
-        - loginAuth: []
-      requestBody:
-        $ref: '#/components/requestBodies/Assertion'
-      responses:
-        '200':
-          description: Assertion Result
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  jwt:
-                    type: string
-                  second:
-                    type: boolean
-                required:
-                  - jwt
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /second/attestation:
-    get:
-      description: Get Attestation Options for Second Factor
-      security:
-        - walletAuth: []
-      responses:
-        '200':
-          $ref: '#/components/responses/AttestationOptions'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    post:
-      description: Verify Attestation for Second Factor
-      security:
-        - walletAuth: []
-      requestBody:
-        $ref: '#/components/requestBodies/Attestation'
-      responses:
-        '200':
-          $ref: '#/components/responses/AttestationResponse'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /second/assertion:
-    get:
-      description: Get Assertion Options for Second Factor
-      security:
-        - secondAuth: []
-      responses:
-        '200':
-          $ref: '#/components/responses/AssertionOptions'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    post:
-      description: Verify Assertion for Second Factor
-      security:
-        - secondAuth: []
-      requestBody:
-        $ref: '#/components/requestBodies/Assertion'
-      responses:
-        '200':
-          description: Assertion Result
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  jwt:
-                    type: string
-                required:
-                  - jwt
+          $ref: '#/components/responses/SuccessResponse'
         default:
           $ref: '#/components/responses/GeneralError'
 
@@ -320,6 +402,16 @@ components:
     Hex64String:
       type: string
       pattern: "^[a-f0-9]{64}$"
+    Hex128String:
+      type: string
+      pattern: "^[a-f0-9]{128}$"
+  parameters:
+    deviceId:
+      in: query
+      name: id
+      description: Device ID
+      schema:
+        $ref: '#/components/schemas/Hex64String'
   requestBodies:
     Attestation:
       description: Attestation Request
@@ -359,6 +451,23 @@ components:
                 type: boolean
             required:
               - success
+    AssertionResponse:
+      description: Success Assertion Result
+      content:
+        application/json:
+          schema:
+            type: object
+    SuccessResponse:
+      description: Success Response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+            required:
+              - success
     GeneralError:
       description: Unexpected error
       content:
@@ -374,15 +483,11 @@ components:
               message:
                 type: string
   securitySchemes:
-    loginAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-    walletAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-    secondAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
+    deviceSignature:
+      type: apiKey
+      in: header
+      name: Signature
+    walletSignature:
+      type: apiKey
+      in: header
+      name: Signature
