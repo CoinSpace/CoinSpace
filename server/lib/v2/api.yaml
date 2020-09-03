@@ -114,7 +114,41 @@ paths:
         - $ref: '#/components/parameters/deviceId'
       responses:
         '200':
-          $ref: '#/components/responses/AssertionOptions'
+          description: Private Token
+          content:
+            application/json:
+              schema:
+                type: object
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /token/private/pin:
+    post:
+      x-eov-operation-id: tokenPrivatePinVerify
+      x-eov-operation-handler: handlers
+      description: Get public token
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: 'object'
+              properties:
+                pinHash:
+                  description: PIN Hash
+                  $ref: '#/components/schemas/Hex64String'
+              required:
+                - pinHash
+      responses:
+        '200':
+          description: Auth Result
+          content:
+            application/json:
+              schema:
+                type: object
         default:
           $ref: '#/components/responses/GeneralError'
   /token/private/platform:

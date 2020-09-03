@@ -9,13 +9,18 @@ function generateChallenge() {
   return crypto.randomBytes(64);
 }
 
+function generateUser(id) {
+  return crypto.createHash('sha1')
+    .update(id)
+    .digest('hex');
+}
+
 function asyncWrapper(fn) {
   return (res, req, next) => {
     Promise.resolve(fn(res, req, next))
       .catch(next);
   };
 }
-
 
 function verifyReq(key, req) {
   try {
@@ -42,6 +47,7 @@ function verifyReq(key, req) {
 
 module.exports = {
   generateChallenge,
+  generateUser,
   asyncWrapper,
   verifyReq,
 };

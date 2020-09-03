@@ -3,12 +3,19 @@
 const path = require('path');
 const express = require('express');
 const OpenApiValidator = require('express-openapi-validator');
-const { verifyReq } = require('./utils');
-const device = require('./device');
+const { verifyReq, asyncWrapper } = require('./utils');
+const wallets = require('./wallets');
 
 // TODO https://github.com/cdimascio/express-openapi-validator/pull/351#issuecomment-684743497
 //const router = express.Router();
 const router = express();
+
+router.use('/api/v2/*', asyncWrapper(async (req, res, next) => {
+  if (req.query.id) {
+    req.device = await wallets.getDevice(req.query.id);
+  }
+  next();
+}));
 
 router.use(OpenApiValidator.middleware({
   apiSpec: path.join(__dirname, 'api.yaml'),
@@ -17,12 +24,17 @@ router.use(OpenApiValidator.middleware({
   operationHandlers: path.join(__dirname),
   validateSecurity: {
     handlers: {
-      async walletSignature(req) {
-        const wallet = await device.getWallet(req.query.id);
-        return verifyReq(wallet._id, req);
+      walletSignature(req) {
+        if (req.device) {
+          return verifyReq(req.device.wallet._id, req);
+        }
+        return false;
       },
-      async deviceSignature(req) {
-        return verifyReq(req.query.id, req);
+      deviceSignature(req) {
+        if (req.device) {
+          return verifyReq(req.device._id, req);
+        }
+        return false;
       },
     },
   },
