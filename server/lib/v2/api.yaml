@@ -39,15 +39,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  privateToken:
-                    $ref: '#/components/schemas/Hex128String'
-                  publicToken:
-                    $ref: '#/components/schemas/Hex128String'
-                required:
-                  - privateToken
-                  - publicToken
+                allOf:
+                  - $ref: '#/components/schemas/PublicToken'
+                  - $ref: '#/components/schemas/PrivateToken'
         default:
           $ref: '#/components/responses/GeneralError'
   /token/public/pin:
@@ -58,24 +52,14 @@ paths:
       parameters:
         - $ref: '#/components/parameters/deviceId'
       requestBody:
-        required: true
-        content:
-          'application/json':
-            schema:
-              type: 'object'
-              properties:
-                pinHash:
-                  description: PIN Hash
-                  $ref: '#/components/schemas/Hex64String'
-              required:
-                - pinHash
+        $ref: '#/components/requestBodies/PIN'
       responses:
         '200':
-          description: Auth Result
+          description: Public Token
           content:
             application/json:
               schema:
-                type: object
+                $ref: '#/components/schemas/PublicToken'
         default:
           $ref: '#/components/responses/GeneralError'
   /token/public/platform:
@@ -87,7 +71,7 @@ paths:
         - $ref: '#/components/parameters/deviceId'
       responses:
         '200':
-          $ref: '#/components/responses/AssertionOptions'
+          $ref: '#/components/responses/AssertionOptionsResponse'
         default:
           $ref: '#/components/responses/GeneralError'
     post:
@@ -118,7 +102,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                $ref: '#/components/schemas/PrivateToken'
         default:
           $ref: '#/components/responses/GeneralError'
   /token/private/pin:
@@ -131,24 +115,16 @@ paths:
       parameters:
         - $ref: '#/components/parameters/deviceId'
       requestBody:
-        required: true
-        content:
-          'application/json':
-            schema:
-              type: 'object'
-              properties:
-                pinHash:
-                  description: PIN Hash
-                  $ref: '#/components/schemas/Hex64String'
-              required:
-                - pinHash
+        $ref: '#/components/requestBodies/PIN'
       responses:
         '200':
           description: Auth Result
           content:
             application/json:
               schema:
-                type: object
+                oneOf:
+                  - $ref: '#/components/schemas/PrivateToken'
+                  - $ref: '#/components/schemas/AssertionOptions'
         default:
           $ref: '#/components/responses/GeneralError'
   /token/private/platform:
@@ -162,7 +138,7 @@ paths:
         - $ref: '#/components/parameters/deviceId'
       responses:
         '200':
-          $ref: '#/components/responses/AssertionOptions'
+          $ref: '#/components/responses/AssertionOptionsResponse'
         default:
           $ref: '#/components/responses/GeneralError'
     post:
@@ -177,7 +153,13 @@ paths:
         $ref: '#/components/requestBodies/Assertion'
       responses:
         '200':
-          $ref: '#/components/responses/AssertionResponse'
+          description: Auth Result
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/PrivateToken'
+                  - $ref: '#/components/schemas/AssertionOptions'
         default:
           $ref: '#/components/responses/GeneralError'
   /token/private/crossplatform:
@@ -191,7 +173,7 @@ paths:
         - $ref: '#/components/parameters/deviceId'
       responses:
         '200':
-          $ref: '#/components/responses/AssertionOptions'
+          $ref: '#/components/responses/AssertionOptionsResponse'
         default:
           $ref: '#/components/responses/GeneralError'
     post:
@@ -206,7 +188,11 @@ paths:
         $ref: '#/components/requestBodies/Assertion'
       responses:
         '200':
-          $ref: '#/components/responses/AssertionResponse'
+          description: Private Token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrivateToken'
         default:
           $ref: '#/components/responses/GeneralError'
   /platform/attestation:
@@ -220,7 +206,7 @@ paths:
         - $ref: '#/components/parameters/deviceId'
       responses:
         '200':
-          $ref: '#/components/responses/AttestationOptions'
+          $ref: '#/components/responses/AttestationOptionsResponse'
         default:
           $ref: '#/components/responses/GeneralError'
     post:
@@ -249,7 +235,7 @@ paths:
         - $ref: '#/components/parameters/deviceId'
       responses:
         '200':
-          $ref: '#/components/responses/AttestationOptions'
+          $ref: '#/components/responses/AttestationOptionsResponse'
         default:
           $ref: '#/components/responses/GeneralError'
     post:
@@ -439,6 +425,34 @@ components:
     Hex128String:
       type: string
       pattern: "^[a-f0-9]{128}$"
+    PublicToken:
+      type: object
+      properties:
+        publicToken:
+          $ref: '#/components/schemas/Hex128String'
+      required:
+        - publicToken
+    PrivateToken:
+      type: object
+      properties:
+        privateToken:
+          $ref: '#/components/schemas/Hex128String'
+      required:
+        - privateToken
+    AttestationOptions:
+      type: object
+      properties:
+        challenge:
+          type: string
+      required:
+        - challenge
+    AssertionOptions:
+      type: object
+      properties:
+        challenge:
+          type: string
+      required:
+        - challenge
   parameters:
     deviceId:
       in: query
@@ -447,6 +461,19 @@ components:
       schema:
         $ref: '#/components/schemas/Hex64String'
   requestBodies:
+    PIN:
+      description: PIN Hash
+      required: true
+      content:
+        'application/json':
+          schema:
+            type: 'object'
+            properties:
+              pinHash:
+                description: PIN Hash
+                $ref: '#/components/schemas/Hex64String'
+            required:
+              - pinHash
     Attestation:
       description: Attestation Request
       required: true
@@ -462,18 +489,18 @@ components:
           schema:
             type: 'object'
   responses:
-    AttestationOptions:
+    AttestationOptionsResponse:
       description: Attestation Options
       content:
         application/json:
           schema:
-            type: object
-    AssertionOptions:
+            $ref: '#/components/schemas/AttestationOptions'
+    AssertionOptionsResponse:
       description: Assertion Options
       content:
         application/json:
           schema:
-            type: object
+            $ref: '#/components/schemas/AssertionOptions'
     AttestationResponse:
       description: Success Attestation Result
       content:
