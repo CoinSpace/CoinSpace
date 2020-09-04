@@ -24,9 +24,6 @@ const config = merge(common, {
       {
         test: /\.js$/,
         exclude: [
-          path.resolve(__dirname, './phonegap/deviceready'),
-          path.resolve(__dirname, './app/loader'),
-          path.resolve(__dirname, './app/lib/i18n'),
           path.resolve(__dirname, './node_modules/lodash/'),
           path.resolve(__dirname, './node_modules/ethjs-util/'),
           path.resolve(__dirname, './node_modules/eosjs/'),
@@ -42,6 +39,9 @@ const config = merge(common, {
                 useBuiltIns: 'entry',
               },
             ]],
+            parserOpts: {
+              plugins: ['dynamicImport'],
+            },
           },
         },
       },
@@ -116,7 +116,7 @@ if (process.env.BUILD_TYPE === 'phonegap') {
   });
   htmlPlugin.options.chunks = ['deviceready'];
 
-  config.entry['deviceready'] = './phonegap/deviceready.js';
+  config.entry['deviceready'] = ['babel-polyfill', './phonegap/deviceready.js'];
   delete config.entry['loader'];
 
   config.output.publicPath = '';

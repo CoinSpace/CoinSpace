@@ -1,7 +1,10 @@
-document.addEventListener('deviceready', onDeviceReady, false);
-function onDeviceReady() {
+'use strict';
+/* eslint-disable no-undef */
 
-  document.addEventListener('backbutton', function(e) {
+document.addEventListener('deviceready', onDeviceReady, false);
+async function onDeviceReady() {
+
+  document.addEventListener('backbutton', (e) => {
     e.preventDefault();
     window.navigator.app.exitApp();
   }, false);
@@ -10,27 +13,32 @@ function onDeviceReady() {
 
   if (window.shortcutItem) window.shortcutItem.initialize();
 
-  window.open = function(url, target, options) {
+  window.open = (url, target, options) => {
     return cordova.InAppBrowser.open(url, '_system', options);
-  }
+  };
 
-  SafariViewController.isAvailable(function(available) {
+  SafariViewController.isAvailable((available) => {
     if (!available) return;
-    window.open = function(url) {
-      SafariViewController.show({
-        url: url
-      },
-      function(result) {
-        if (process.env.BUILD_PLATFORM === 'ios') {
-          if (result.event === 'opened') return window.StatusBar.styleDefault();
-          if (result.event === 'closed') return window.StatusBar.styleLightContent();
-        }
-      },
-      function() {
-        if (process.env.BUILD_PLATFORM === 'ios') return window.StatusBar.styleLightContent();
-      })
-    }
+    window.open = (url) => {
+      SafariViewController.show(
+        { url },
+        (result) => {
+          if (process.env.BUILD_PLATFORM === 'ios') {
+            if (result.event === 'opened') return window.StatusBar.styleDefault();
+            if (result.event === 'closed') return window.StatusBar.styleLightContent();
+          }
+        },
+        () => {
+          if (process.env.BUILD_PLATFORM === 'ios') return window.StatusBar.styleLightContent();
+        });
+    };
   });
+
+  try {
+    window.legacyTouchIdIsAvailable = await legacyTouchIdIsAvailable();
+  } catch (e) {
+    console.log('Oops!');
+  }
 
   return import(
     /* webpackChunkName: 'loader' */
@@ -38,17 +46,37 @@ function onDeviceReady() {
   );
 }
 
+async function legacyTouchIdIsAvailable() {
+  return new Promise((resolve) => {
+    if (process.env.BUILD_PLATFORM === 'ios') {
+      window.plugins.touchid.isAvailable(() => {
+        resolve(true);
+      }, () => {
+        resolve(false);
+      });
+    } else if (process.env.BUILD_PLATFORM === 'android') {
+      window.Fingerprint.isAvailable(() => {
+        resolve(true);
+      }, () => {
+        resolve(false);
+      });
+    }
+  }).catch(() => {
+    return false;
+  });
+}
+
 window.onShortcutEvent = function(event) {
-  var network = event.data.split('.').pop();
+  const network = event.data.split('.').pop();
   if (['bitcoin', 'bitcoincash', 'ethereum', 'litecoin'].indexOf(network) === -1) return;
 
-  var regex = /^network=/;
-  var networkParam = window.location.search.substr(1).split('&').filter(function(e) {
+  const regex = /^network=/;
+  const networkParam = window.location.search.substr(1).split('&').filter((e) => {
     return e.match(regex);
   })[0];
-  var queryNetwork = networkParam ? networkParam.replace(regex, '') : null;
+  const queryNetwork = networkParam ? networkParam.replace(regex, '') : null;
   if (network === queryNetwork) return;
 
-  var baseUrl = window.location.href.split('?')[0];
+  const baseUrl = window.location.href.split('?')[0];
   return window.location = baseUrl + '?network=' + network;
 };

@@ -1,7 +1,6 @@
 'use strict';
 
 require('../application.scss');
-require('babel-polyfill');
 
 const Sentry = require('@sentry/browser');
 const Integrations = require('@sentry/integrations');

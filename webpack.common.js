@@ -12,7 +12,7 @@ module.exports = {
   // we should use web build for electron too
   //target: process.env.BUILD_TYPE === 'electron' ? 'electron-renderer' : 'web',
   entry: {
-    loader: './app/loader/index.js',
+    loader: ['babel-polyfill', './app/loader/index.js'],
   },
   output: {
     filename: 'assets/js/[name].[hash:8].js',
