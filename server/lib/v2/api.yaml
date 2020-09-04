@@ -37,7 +37,7 @@ paths:
         '201':
           description: Registration Success
           content:
-            application/json:
+            'application/json':
               schema:
                 allOf:
                   - $ref: '#/components/schemas/PublicToken'
@@ -57,7 +57,7 @@ paths:
         '200':
           description: Public Token
           content:
-            application/json:
+            'application/json':
               schema:
                 $ref: '#/components/schemas/PublicToken'
         default:
@@ -100,7 +100,7 @@ paths:
         '200':
           description: Private Token
           content:
-            application/json:
+            'application/json':
               schema:
                 $ref: '#/components/schemas/PrivateToken'
         default:
@@ -120,7 +120,7 @@ paths:
         '200':
           description: Auth Result
           content:
-            application/json:
+            'application/json':
               schema:
                 oneOf:
                   - $ref: '#/components/schemas/PrivateToken'
@@ -155,7 +155,7 @@ paths:
         '200':
           description: Auth Result
           content:
-            application/json:
+            'application/json':
               schema:
                 oneOf:
                   - $ref: '#/components/schemas/PrivateToken'
@@ -190,7 +190,7 @@ paths:
         '200':
           description: Private Token
           content:
-            application/json:
+            'application/json':
               schema:
                 $ref: '#/components/schemas/PrivateToken'
         default:
@@ -266,7 +266,7 @@ paths:
         '200':
           description: List of Authenticators
           content:
-            application/json:
+            'application/json':
               schema:
                 type: array
         default:
@@ -295,6 +295,47 @@ paths:
           $ref: '#/components/responses/SuccessResponse'
         default:
           $ref: '#/components/responses/GeneralError'
+  /settings:
+    get:
+      x-eov-operation-id: getSettings
+      x-eov-operation-handler: handlers
+      description: Get user Settings
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: User Settings
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Settings'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    patch:
+      x-eov-operation-id: setSettings
+      x-eov-operation-handler: handlers
+      description: Update user Settings
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - walletSignature: []
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Settings'
+      responses:
+        '200':
+          description: Update user Settings result
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Settings'
+        default:
+          $ref: '#/components/responses/GeneralError'
   /details:
     get:
       x-eov-operation-id: getDetails
@@ -308,7 +349,7 @@ paths:
         '200':
           description: User datails
           content:
-            application/json:
+            'application/json':
               schema:
                 type: object
                 properties:
@@ -367,25 +408,14 @@ paths:
         content:
           'application/json':
             schema:
-              type: 'object'
-              properties:
-                username:
-                  description: Username
-                  type: string
-              required:
-                - username
+              $ref: '#/components/schemas/Username'
       responses:
         '200':
           description: Update username result
           content:
-            application/json:
+            'application/json':
               schema:
-                type: object
-                properties:
-                  username:
-                    type: string
-                required:
-                  - username
+                $ref: '#/components/schemas/Username'
         default:
           $ref: '#/components/responses/GeneralError'
   /device:
@@ -453,6 +483,19 @@ components:
           type: string
       required:
         - challenge
+    Username:
+      type: object
+      properties:
+        username:
+          type: string
+      required:
+        - username
+    Settings:
+      type: object
+      properties:
+        authForPivate:
+          description: Authorization for private token
+          type: boolean
   parameters:
     deviceId:
       in: query
@@ -492,19 +535,19 @@ components:
     AttestationOptionsResponse:
       description: Attestation Options
       content:
-        application/json:
+        'application/json':
           schema:
             $ref: '#/components/schemas/AttestationOptions'
     AssertionOptionsResponse:
       description: Assertion Options
       content:
-        application/json:
+        'application/json':
           schema:
             $ref: '#/components/schemas/AssertionOptions'
     AttestationResponse:
       description: Success Attestation Result
       content:
-        application/json:
+        'application/json':
           schema:
             type: object
             properties:
@@ -515,13 +558,13 @@ components:
     AssertionResponse:
       description: Success Assertion Result
       content:
-        application/json:
+        'application/json':
           schema:
             type: object
     SuccessResponse:
       description: Success Response
       content:
-        application/json:
+        'application/json':
           schema:
             type: object
             properties:
@@ -532,7 +575,7 @@ components:
     GeneralError:
       description: Unexpected error
       content:
-        application/json:
+        'application/json':
           schema:
             required:
               - code

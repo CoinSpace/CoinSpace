@@ -180,11 +180,17 @@ async function crossplatformVerify(device, body, type) {
   const wallets = db().collection(COLLECTION);
   await wallets.updateOne({
     'devices._id': device._id,
-    'authenticators.credentialID': authenticatorInfo.base64CredentialID,
   }, {
     $set: {
       [`devices.$.failed_attempts.${type}_crossplatform`]: 0,
       [`devices.$.challenges.${type}_crossplatform`]: null,
+    },
+  });
+  await wallets.updateOne({
+    _id: device.wallet._id,
+    'authenticators.credentialID': authenticatorInfo.base64CredentialID,
+  }, {
+    $set: {
       'authenticators.$.counter': authenticatorInfo.counter,
     },
   });
@@ -311,8 +317,14 @@ async function removeCrossplatformAuthenticator(device, credentialID) {
   });
 }
 
-async function getDetails(device) {
-  return device.wallet.details;
+async function setSettings(device, data) {
+  const settings = {
+    ...device.wallet.settings,
+    ...data,
+  };
+  await db().collection(COLLECTION)
+    .updateOne({ _id: device.wallet._id }, { $set: { settings } });
+  return settings;
 }
 
 async function setDetails(device, details) {
@@ -427,7 +439,7 @@ module.exports = {
   // API
   listCrossplatformAuthenticators,
   removeCrossplatformAuthenticator,
-  getDetails,
+  setSettings,
   setDetails,
   setUsername,
   removeDevice,

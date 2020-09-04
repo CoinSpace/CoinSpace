@@ -137,9 +137,24 @@ exports.removeCrossplatformAuthenticator = asyncWrapper(async (req, res) => {
   res.status(200).send({ success: true });
 });
 
+exports.getSettings = asyncWrapper(async (req, res) => {
+  res.status(200).send({
+    authForPivate: req.device.wallet.settings.auth_for_pivate,
+  });
+});
+
+exports.setSettings = asyncWrapper(async (req, res) => {
+  console.log('setSettings');
+  const settings = await wallets.setSettings(req.device, req.body);
+  res.status(200).send({
+    authForPivate: settings.auth_for_pivate,
+  });
+});
+
 exports.getDetails = asyncWrapper(async (req, res) => {
-  const data = await wallets.getDetails(req.device);
-  res.status(200).send({ data });
+  res.status(200).send({
+    data: req.device.wallet.details,
+  });
 });
 
 exports.setDetails = asyncWrapper(async (req, res) => {
