@@ -144,7 +144,6 @@ exports.getSettings = asyncWrapper(async (req, res) => {
 });
 
 exports.setSettings = asyncWrapper(async (req, res) => {
-  console.log('setSettings');
   const settings = await wallets.setSettings(req.device, req.body);
   res.status(200).send({
     authForPivate: settings.auth_for_pivate,
