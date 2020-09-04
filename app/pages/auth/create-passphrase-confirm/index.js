@@ -2,6 +2,9 @@
 
 const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
+const PinWidget = require('widgets/pin');
+const { translate } = require('lib/i18n');
+const CS = require('lib/wallet');
 
 module.exports = function(el) {
   const ractive = new Ractive({
@@ -41,7 +44,19 @@ module.exports = function(el) {
   });
 
   ractive.on('confirm', () => {
-    console.log('confirm');
+    ractive.pinWidget = PinWidget({
+      header: translate('Set a PIN for quick access'),
+      headerLoading: translate('Setting PIN'),
+    }, (pin) => {
+      CS.registerWallet(pin)
+        .then(() => {
+          emitter.emit('auth-success');
+        })
+        .catch(err => {
+          ractive.pinWidget.wrong();
+          emitter.emit('auth-error', err);
+        });
+    });
   });
 
   ractive.on('back', () => {

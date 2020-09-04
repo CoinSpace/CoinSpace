@@ -90,6 +90,8 @@ partials.svg_appstore = require('lib/svg/appstore.ract');
 partials.svg_googleplay = require('lib/svg/googleplay.ract');
 partials.svg_shapeshift = require('lib/svg/shapeshift.ract');
 partials.svg_changelly = require('lib/svg/changelly.ract');
+partials.svg_backspace = require('lib/svg/backspace.ract');
+partials.svg_touchid = require('lib/svg/touchid.ract');
 
 Ractive.prototype.hide = function(context) {
   this.fire('before-hide', context);
@@ -105,6 +107,22 @@ Ractive.defaults.data = {
   translate,
   BUILD_TYPE: process.env.BUILD_TYPE,
   BUILD_PLATFORM: process.env.BUILD_PLATFORM,
+};
+
+Ractive.decorators['numbers'] = (node) => {
+  let keypressHandler;
+  node.addEventListener('keypress', keypressHandler = (event) => {
+    const charCode = event.keyCode || event.which;
+    const charStr = String.fromCharCode(charCode);
+    if (!charStr.match(/^[0-9]+$/)) {
+      event.preventDefault();
+    }
+  });
+  return {
+    teardown() {
+      node.removeEventListener('keypress', keypressHandler);
+    },
+  };
 };
 
 module.exports = Ractive;

@@ -38,10 +38,8 @@ window.initCSApp = function() {
   FastClick.attach(document.body);
 
   initGeoOverlay(document.getElementById('geo-overlay'));
-  // auth = (CS.walletRegistered() || CS.walletExistsDEPRECATED()) ? initAuth.pin(null, {
-  //   userExists: true,
-  // }) : initAuth.choose();
-  auth = initAuth(document.getElementById('auth'));
+  const userExists = (CS.walletRegistered() || CS.walletExistsDEPRECATED());
+  auth = initAuth(document.getElementById('auth'), { userExists });
   const authContentEl = document.getElementById('auth_frame');
   authContentEl.style.opacity = 0;
   fadeIn(authContentEl);
@@ -67,18 +65,13 @@ window.initCSApp = function() {
       CS.reset();
       return location.reload();
     }
-    if (err.status === 401) {
-      emitter.emit('clear-pin');
-      return showError({ message: 'Your PIN is incorrect' });
-    }
+    if (err.status === 401) return;
     // Deprecated start
     if (err.message === 'user_deleted') {
       CS.reset();
       return location.reload();
     }
-    if (err.message === 'auth_failed') {
-      return showError({ message: 'Your PIN is incorrect' });
-    }
+    if (err.message === 'auth_failed') return;
     // Deprecated end
     console.error(err);
     return showError({ message: err.message });

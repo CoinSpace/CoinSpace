@@ -6,8 +6,9 @@ const initChoose = require('./choose');
 const initCreate = require('./create');
 const initCreatePassphrase = require('./create-passphrase');
 const initCreatePassphraseConfirm = require('./create-passphrase-confirm');
+const { translate } = require('lib/i18n');
 
-module.exports = function(el) {
+module.exports = function(el, options) {
   const ractive = new Ractive({
     el,
     template: require('./index.ract'),
@@ -22,11 +23,24 @@ module.exports = function(el) {
   let currentStep = steps.choose;
 
   ractive.on('before-show', () => {
-    showStep(steps.choose);
+    if (options.userExists) {
+      steps.choose.showPin();
+    } else {
+      showStep(steps.choose);
+    }
   });
 
   ractive.on('before-hide', () => {
     currentStep.hide();
+    const { pinWidget } = currentStep;
+    if (pinWidget && !pinWidget.torndown) pinWidget.close();
+  });
+
+  emitter.on('wallet-opening', () => {
+    const { pinWidget } = currentStep;
+    if (!pinWidget) return;
+    pinWidget.set('header', translate('Synchronizing Wallet'));
+    pinWidget.set('description', translate('This might take some time,') + '<br/>' + translate('please be patient.'));
   });
 
   emitter.on('change-auth-step', (step, data) => {
