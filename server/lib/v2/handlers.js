@@ -35,7 +35,7 @@ exports.tokenPublicPlatformVerify = asyncWrapper(async (req, res) => {
 // Private
 
 exports.tokenPrivate = asyncWrapper(async (req, res) => {
-  if (req.device.wallet.settings.auth_for_pivate === false) {
+  if (req.device.wallet.settings['1fa_private'] === false) {
     if (req.device.wallet.authenticators.length === 0) {
       return res.status(200).send({
         privateToken: req.device.private_token,
@@ -47,7 +47,7 @@ exports.tokenPrivate = asyncWrapper(async (req, res) => {
 });
 
 exports.tokenPrivatePinVerify = asyncWrapper(async (req, res) => {
-  if (req.device.wallet.settings.auth_for_pivate === true) {
+  if (req.device.wallet.settings['1fa_private'] !== false) {
     await wallets.pinVerify(req.device, req.body.pinHash, 'private');
     if (req.device.wallet.authenticators.length === 0) {
       return res.status(200).send({
@@ -63,7 +63,7 @@ exports.tokenPrivatePinVerify = asyncWrapper(async (req, res) => {
 });
 
 exports.tokenPrivatePlatformOptions = asyncWrapper(async (req, res) => {
-  if (req.device.wallet.settings.auth_for_pivate === true) {
+  if (req.device.wallet.settings['1fa_private'] !== false) {
     const options = await wallets.platformOptions(req.device, 'private');
     return res.status(200).send(options);
   }
@@ -72,7 +72,7 @@ exports.tokenPrivatePlatformOptions = asyncWrapper(async (req, res) => {
 });
 
 exports.tokenPrivatePlatformVerify = asyncWrapper(async (req, res) => {
-  if (req.device.wallet.settings.auth_for_pivate === true) {
+  if (req.device.wallet.settings['1fa_private'] !== false) {
     await wallets.platformVerify(req.device, req.body, 'private');
     if (req.device.wallet.authenticators.length === 0) {
       return res.status(200).send({
@@ -88,7 +88,7 @@ exports.tokenPrivatePlatformVerify = asyncWrapper(async (req, res) => {
 });
 
 exports.tokenPrivateCrossplatformOptions = asyncWrapper(async (req, res) => {
-  if (req.device.wallet.settings.auth_for_pivate === false) {
+  if (req.device.wallet.settings['1fa_private'] === false) {
     const options = await wallets.crossplatformOptions(req.device, 'private');
     return res.status(200).send(options);
   }
@@ -139,14 +139,18 @@ exports.removeCrossplatformAuthenticator = asyncWrapper(async (req, res) => {
 
 exports.getSettings = asyncWrapper(async (req, res) => {
   res.status(200).send({
-    authForPivate: req.device.wallet.settings.auth_for_pivate,
+    '1faPrivate': req.device.wallet.settings['1fa_private'],
   });
 });
 
 exports.setSettings = asyncWrapper(async (req, res) => {
-  const settings = await wallets.setSettings(req.device, req.body);
+  const data = {};
+  if ('1faPrivate' in req.body) {
+    data['1fa_private'] = req.body['1faPrivate'];
+  }
+  const settings = await wallets.setSettings(req.device, data);
   res.status(200).send({
-    authForPivate: settings.auth_for_pivate,
+    '1faPrivate': settings['1fa_private'],
   });
 });
 

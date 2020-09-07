@@ -493,7 +493,7 @@ components:
     Settings:
       type: object
       properties:
-        authForPivate:
+        1faPrivate:
           description: Authorization for private token
           type: boolean
   parameters:

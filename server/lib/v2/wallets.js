@@ -58,7 +58,7 @@ async function register(walletId, deviceId, pinHash) {
       authenticators: [],
       details: null,
       settings: {
-        auth_for_pivate: true,
+        '1fa_private': true,
       },
     },
     $push: {
@@ -209,6 +209,7 @@ async function platformAttestationOptions(device) {
     attestationType: 'none',
     supportedAlgorithmIDs: fidoAlgorithmIDs,
     authenticatorSelection: {
+      // TODO: uncomment before prod
       //authenticatorAttachment: 'platform',
     },
   });
