@@ -96,9 +96,10 @@
   ._keyboard {
     flex: 1;
     ._btns {
-      width: 250px;
+      width: 100%;
+      max-width: 250px;
       @include breakpoint(portrait) {
-        width: 350px;
+        max-width: 350px;
       }
       margin: 0 auto;
     }

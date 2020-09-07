@@ -3,6 +3,7 @@
 const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
 const PinWidget = require('widgets/pin');
+const PassphraseWidget = require('widgets/passphrase');
 const { translate } = require('lib/i18n');
 const CS = require('lib/wallet');
 
@@ -17,7 +18,29 @@ module.exports = function(el) {
   });
 
   ractive.on('reveal-passphrase-input', () => {
-    console.log('reveal-passphrase-input');
+    ractive.passphraseWidget = PassphraseWidget({ animation: false }, (passphrase) => {
+      CS.createWallet(passphrase)
+        .then(() => {
+          ractive.pinWidget = PinWidget({
+            header: translate('Set a PIN for quick access'),
+            headerLoading: translate('Setting PIN'),
+            append: true,
+          }, (pin) => {
+            CS.registerWallet(pin)
+              .then(() => {
+                emitter.emit('auth-success');
+              })
+              .catch(err => {
+                ractive.pinWidget.wrong();
+                emitter.emit('auth-error', err);
+              });
+          });
+          ractive.pinWidget.on('back', () => {
+            ractive.passphraseWidget.set('isLoading', false);
+          });
+        })
+        .catch(ractive.passphraseWidget.wrong);
+    });
   });
 
   ractive.showPin = () => {

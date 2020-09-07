@@ -17,7 +17,7 @@
           <div class="_dot" class-_filled="pin.length > 2"></div>
           <div class="_dot" class-_filled="pin.length > 3"></div>
           {{#if BUILD_TYPE !== 'phonegap' }}
-          <input class="js-pin-input" type="text" maxlength="4" value={{pin}} as-numbers />
+          <input class="js-pin-input" type="text" maxlength="4" value={{pin}} autocorrect="off" autocapitalize="off" as-numbers />
           {{/if}}
         </div>
       {{/if}}

@@ -32,7 +32,8 @@ module.exports = function(el, options) {
 
   ractive.on('before-hide', () => {
     currentStep.hide();
-    const { pinWidget } = currentStep;
+    const { passphraseWidget, pinWidget } = currentStep;
+    if (passphraseWidget && !passphraseWidget.torndown) passphraseWidget.close();
     if (pinWidget && !pinWidget.torndown) pinWidget.close();
   });
 

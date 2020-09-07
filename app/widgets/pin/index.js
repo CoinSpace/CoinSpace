@@ -6,25 +6,30 @@ const CS = require('lib/wallet');
 const showLegacyTouchId = require('lib/legacy-touch-id');
 
 function open(options, callback) {
-
-  const header = options.header || translate('Enter your PIN');
-  const headerLoading = options.headerLoading || translate('Verifying PIN');
+  const {
+    header = translate('Enter your PIN'),
+    headerLoading = translate('Verifying PIN'),
+    backLabel = translate('Back'),
+    touchId,
+    append = false,
+  } = options;
   // eslint-disable-next-line max-len
   const legacyTouchIdIsAvailable = CS.getPinDEPRECATED() && CS.walletExistsDEPRECATED() && window.legacyTouchIdIsAvailable;
   const fidoTouchIdIsAvailable = !!window.localStorage.getItem('_cs_touchid_enabled');
 
   const ractive = new Ractive({
     el: document.getElementById('general-purpose-overlay'),
+    append,
     template: require('./index.ract'),
     data: {
       header,
+      backLabel,
       isLoading: false,
       isWrong: false,
       isOpen: false,
       description: '',
       pin: '',
-      backLabel: options.backLabel || translate('Back'),
-      touchId: options.touchId && (legacyTouchIdIsAvailable || fidoTouchIdIsAvailable),
+      touchId: touchId && (legacyTouchIdIsAvailable || fidoTouchIdIsAvailable),
       enter(number) {
         const pin = this.get('pin');
         if (pin.length === 4) return;

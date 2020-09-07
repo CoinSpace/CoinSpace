@@ -1,16 +1,1 @@
-.auth_create {
-  ._spinner {
-    display: block;
-    width: 25px;
-    height: 25px;
-    margin: 0 auto;
-    margin-bottom: 10px;
-    margin-top: 25px;
-    opacity: 0.3;
-    animation:  infinite-spinning 1s linear infinite;
-    @include breakpoint(portrait) {
-      width: 45px;
-      height: 45px;
-    }
-  }
-}
+// .auth_create {}

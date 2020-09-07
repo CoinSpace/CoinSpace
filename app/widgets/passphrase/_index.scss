@@ -1,49 +1,64 @@
-#auth {
-  display: none;
-  &.current {
-    display: flex;
-    align-items: center;
-  }
-  min-width: 100%;
-  min-height: 100%;
-  padding-top: 40px;
-  padding-bottom: 40px;
-}
-
-#auth_frame {
+.widget-passphrase {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: hidden;
   text-align: center;
-  margin: 0 auto;
-  max-width: 320px;
-  width: 100%;
-  color: #333;
-  padding: 10px;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
   font-size: $base_font_size;
   @include breakpoint(portrait) {
     font-size: $base_font_size--portrait;
-    max-width: 380px;
   }
-  .step {
-    display: none;
-    &.current {
-      display: block;
-    }
+  &._animated {
+    transition: transform .3s, opacity .3s;
+  }
+  opacity: 0;
+  transform: translateY(100%);
+  &._open {
+    opacity: 1;
+    transform: translateY(0);
   }
   h2 {
     font-size: $header_font_size;
     line-height: 1.3;
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 30px;
     @include breakpoint(portrait) {
       font-size: $header_font_size--portrait;
       line-height: 1.3;
-      padding-bottom: 20px;
+      padding-bottom: 40px;
     }
   }
 
-  ._description {
-    line-height: 1.3;
-    margin-bottom: 20px;
-    @include small_font_size;
+  ._content {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    @include breakpoint(portrait) {
+      max-width: 380px;
+    }
+    padding: 10px;
+  }
+
+  ._group {
+    display: flex;
+    margin-bottom: 40px;
+    text-align: left;
+    ._label {
+      @include noselect;
+      cursor: pointer;
+      display: block;
+      flex: 1;
+    }
+    ._input_container {
+      @extend .csinput_with_x;
+    }
   }
 
   ._btn_group {
@@ -58,14 +73,9 @@
     }
     ._btn {
       @extend .csbtn;
-      margin-bottom: 10px;
       @include breakpoint(portrait) {
         font-size: $base_font_size--portrait;
         padding: 22px 30px 20px 30px;
-        margin-bottom: 20px;
-      }
-      &:last-child {
-        margin-bottom: 0;
       }
       &._disabled {
         pointer-events: none;
@@ -73,7 +83,6 @@
       }
     }
   }
-
   ._footer_link {
     display: block;
     padding: 5px;
@@ -84,8 +93,3 @@
     @include small_font_size;
   }
 }
-
-@import "./choose/_index";
-@import "./create/_index";
-@import "./create-passphrase/_index";
-@import "./create-passphrase-confirm/_index";

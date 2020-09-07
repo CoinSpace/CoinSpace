@@ -1,0 +1,40 @@
+<div class="widget-passphrase" class-_animated="animation" class-_open="isOpen">
+
+  <div class="_content">
+
+    <h2>{{{header}}}</h2>
+
+    <div class="_group">
+      <label class="_label">{{translate('Your passphrase (12 words)').replace('12', count() + '/12')}}
+      <div class="_input_container">
+        <input class="js-passphrase-input _input" type="text" autocorrect="off" autocapitalize="off"
+          value="{{passphrase}}" on-enter="open-wallet-with-passphrase"
+          {{#if isLoading}} readonly {{/if}}
+          />
+        {{#passphrase}}
+          <div class="close__input" on-click="clear-passphrase">
+            <span class="_icon">{{> svg_close}}</span>
+          </div>
+        {{/passphrase}}
+      </div>
+    </label>
+  </div>
+
+    <div class="_btn_group">
+      {{#if count() === 12 }}
+        {{#if isLoading}}
+          <div class="_btn _disabled">
+            {{translate('Checking passphrase')}}...
+          </div>
+        {{else}}
+          <div class="_btn" on-click="confirm">{{translate("Confirm")}}</div>
+        {{/if}}
+      {{else}}
+      <div class="_btn _disabled">{{translate("Confirm")}}</div>
+      {{/if}}
+    </div>
+
+    <span class="_footer_link" on-click="back">{{translate("Back")}}</span>
+  </div>
+
+</div>
