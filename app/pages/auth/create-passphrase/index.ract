@@ -52,6 +52,6 @@
     {{/if}}
   </div>
 
-  <span class="_footer_link" on-click="back">{{translate("Go back")}}</span>
+  <span class="_footer_link" on-click="back">{{translate("Back")}}</span>
 
 </div>

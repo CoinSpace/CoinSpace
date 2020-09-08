@@ -34,7 +34,7 @@
     {{#if isCorrect() }}
     <div class="_btn" on-click="confirm">{{translate("Confirm")}}</div>
     {{else}}
-    <div class="_btn _disabled" >{{translate("Confirm")}}</div>
+    <div class="_btn _disabled">{{translate("Confirm")}}</div>
     {{/if}}
   </div>
 

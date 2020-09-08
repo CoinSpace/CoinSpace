@@ -14,7 +14,7 @@
   </div>
 
   {{#unless isLoading}}
-    <span class="_footer_link" on-click="back">{{translate("Go back")}}</span>
+    <span class="_footer_link" on-click="back">{{translate("Back")}}</span>
   {{/unless}}
 
 </div>
