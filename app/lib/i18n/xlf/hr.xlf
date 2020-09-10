@@ -931,6 +931,10 @@ Biće konvertiran u %(toSymbol)s i poslan na
         <source>Buy</source>
         <target>Kupi</target>
       </trans-unit>
+      <trans-unit id="Sell">
+        <source>Sell</source>
+        <target>Prodavati</target>
+      </trans-unit>
       <trans-unit id="No verification methods are currently available.">
         <source>No verification methods are currently available.</source>
         <target>Trenutačno nisu dostupni načini provjere.</target>

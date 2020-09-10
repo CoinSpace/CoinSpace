@@ -931,6 +931,10 @@ Bude to převedeno na %(toSymbol)s, a zasláno
         <source>Buy</source>
         <target>Nakoupit</target>
       </trans-unit>
+      <trans-unit id="Sell">
+        <source>Sell</source>
+        <target>Prodat</target>
+      </trans-unit>
       <trans-unit id="No verification methods are currently available.">
         <source>No verification methods are currently available.</source>
         <target>V současnosti nejsou dostupné žádné ověřovací metody.</target>

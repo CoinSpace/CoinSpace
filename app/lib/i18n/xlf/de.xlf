@@ -931,6 +931,10 @@ Sie werden in %(toSymbol)s konvertiert und an
         <source>Buy</source>
         <target>Kaufen</target>
       </trans-unit>
+      <trans-unit id="Sell">
+        <source>Sell</source>
+        <target>Verkaufen</target>
+      </trans-unit>
       <trans-unit id="No verification methods are currently available.">
         <source>No verification methods are currently available.</source>
         <target>Derzeit ist keine Verifizierungsmethode verfügbar.</target>

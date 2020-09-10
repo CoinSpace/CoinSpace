@@ -931,6 +931,10 @@ Iko-convert ito sa %(toSymbol)s, at ipapadala sa
         <source>Buy</source>
         <target>Bumili</target>
       </trans-unit>
+      <trans-unit id="Sell">
+        <source>Sell</source>
+        <target>Ibenta</target>
+      </trans-unit>
       <trans-unit id="No verification methods are currently available.">
         <source>No verification methods are currently available.</source>
         <target>Walang mga paraan sa pagpapatotoo ang kasalukuyang magagamit.</target>

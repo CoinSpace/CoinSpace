@@ -931,6 +931,10 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Buy</source>
         <target>Купить</target>
       </trans-unit>
+      <trans-unit id="Sell">
+        <source>Sell</source>
+        <target>Продать</target>
+      </trans-unit>
       <trans-unit id="No verification methods are currently available.">
         <source>No verification methods are currently available.</source>
         <target>В настоящее время нет доступных методов верификации.</target>
@@ -1272,7 +1276,7 @@ It will be converted into %(toSymbol)s, and sent to
         <target>Адрес будет изменен после получения средств. Все ранее использованные адреса остаются действительными и могут быть использованы для получения средств множество раз. Пожалуйста, используйте новый адрес для каждой транзакции, чтобы улучшить вашу конфиденциальность.</target>
       </trans-unit>
       <trans-unit id="Recipient&apos;s wallet requires a destination tag.">
-        <source>Кошелек получателя требует тег назначения.</source>
+        <source>Recipient's wallet requires a destination tag.</source>
         <target></target>
       </trans-unit>
     </body>

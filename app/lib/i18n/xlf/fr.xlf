@@ -931,6 +931,10 @@ Le montant sera converti en %(toSymbol)s, et sera envoyé à
         <source>Buy</source>
         <target>Acheter</target>
       </trans-unit>
+      <trans-unit id="Sell">
+        <source>Sell</source>
+        <target>Vendre</target>
+      </trans-unit>
       <trans-unit id="No verification methods are currently available.">
         <source>No verification methods are currently available.</source>
         <target>Aucune méthode de vérification n'est actuellement disponible.</target>

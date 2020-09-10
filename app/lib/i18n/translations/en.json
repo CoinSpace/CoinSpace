@@ -229,6 +229,7 @@
   "Verification": "Verification",
   "Default currency (:symbol)": "Default currency (%(symbol)s)",
   "Buy": "Buy",
+  "Sell": "Sell",
   "No verification methods are currently available.": "No verification methods are currently available.",
   "Identity": "Identity",
   "Document": "Document",

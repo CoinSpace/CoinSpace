@@ -931,6 +931,10 @@ Sarà convertito in %(toSymbol)s, e inviato a
         <source>Buy</source>
         <target>Acquista</target>
       </trans-unit>
+      <trans-unit id="Sell">
+        <source>Sell</source>
+        <target>Vendere</target>
+      </trans-unit>
       <trans-unit id="No verification methods are currently available.">
         <source>No verification methods are currently available.</source>
         <target>Al momento non è disponibile alcun metodo di verifica.</target>

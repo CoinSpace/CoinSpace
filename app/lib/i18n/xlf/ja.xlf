@@ -931,6 +931,10 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Buy</source>
         <target>購入</target>
       </trans-unit>
+      <trans-unit id="Sell">
+        <source>Sell</source>
+        <target>売る</target>
+      </trans-unit>
       <trans-unit id="No verification methods are currently available.">
         <source>No verification methods are currently available.</source>
         <target>現在使用できる確認方法はありません。</target>

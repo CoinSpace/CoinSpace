@@ -4,7 +4,6 @@ var Ractive = require('lib/ractive');
 var emitter = require('lib/emitter');
 var initShapeshift = require('./shapeshift');
 var initChangelly = require('./changelly');
-var initMoonpay = require('./moonpay');
 var moonpay = require('lib/moonpay');
 var getWallet = require('lib/wallet').getWallet;
 var showConfirmPurchase = require('widgets/modals/moonpay/confirm-purchase');
@@ -18,24 +17,30 @@ module.exports = function(el) {
   var exchanges = {
     changelly: initChangelly(ractive.find('#exchange_changelly')),
     shapeshift: initShapeshift(ractive.find('#exchange_shapeshift')),
-    moonpay: initMoonpay(ractive.find('#exchange_moonpay')),
     none: new Ractive({
       el: ractive.find('#exchange_none'),
       template: require('./choose.ract'),
       data: {
         choose: choose,
         crypto: '',
-        isSupportedMoonpay: false,
+        isSupportedMoonpayBuy: false,
+        isSupportedMoonpaySell: false,
       },
     }),
   };
 
-  exchanges.none.on('moonpay', function() {
+  exchanges.none.on('moonpay-buy', function() {
     var wallet = getWallet();
     var symbol = wallet.denomination;
     moonpay.show(symbol.toLowerCase(), wallet.getNextAddress(), function() {
       showConfirmPurchase({ status: 'success' });
     });
+  });
+
+  exchanges.none.on('moonpay-sell', function() {
+    var wallet = getWallet();
+    var symbol = wallet.denomination;
+    moonpay.showSell(symbol.toLowerCase(), wallet.getNextAddress());
   });
 
   var currentExchange = exchanges.none;
@@ -71,7 +76,8 @@ module.exports = function(el) {
     var wallet = getWallet();
     var symbol = wallet.denomination;
     exchanges.none.set('crypto', wallet.name);
-    exchanges.none.set('isSupportedMoonpay', moonpay.isSupported(symbol) && wallet.getNextAddress());
+    exchanges.none.set('isSupportedMoonpayBuy', moonpay.isSupported(symbol) && wallet.getNextAddress());
+    exchanges.none.set('isSupportedMoonpaySell', moonpay.isSellSupported(symbol));
   }
 
   function showExchange(exchange) {

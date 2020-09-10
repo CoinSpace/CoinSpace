@@ -89,6 +89,12 @@ function isSupported(symbol) {
   });
 }
 
+function isSellSupported(symbol) {
+  return !!Object.keys(coins).find(function(key) {
+    return coins[key].symbol === symbol && coins[key].isSellSupported;
+  });
+}
+
 function isLogged() {
   return !!getAccessToken();
 }
@@ -472,7 +478,7 @@ function validateApplePayTransaction(validationUrl) {
 }
 
 function show(currencyCode, walletAddress, onSuccess) {
-  var baseUrl = process.env.MOONPAY_WIDGET_URL + '&';
+  var baseUrl = process.env.MOONPAY_WIDGET_BUY_URL + '&';
   // TODO handle moonpay transactionStatus=failed
   var redirectURL =  'coinspace://?action=moonpay-success';
 
@@ -480,8 +486,7 @@ function show(currencyCode, walletAddress, onSuccess) {
     currencyCode: currencyCode,
     walletAddress: walletAddress,
     redirectURL: encodeURIComponent(redirectURL),
-    feeBreakdown: false,
-    enabledPaymentMethods: 'credit_debit_card,sepa_bank_transfer,gbp_bank_transfer',
+    enabledPaymentMethods: 'credit_debit_card,sepa_bank_transfer,gbp_bank_transfer,apple_pay',
   };
 
   var queryString = Object.keys(params).map(function(key) {
@@ -505,6 +510,20 @@ function show(currencyCode, walletAddress, onSuccess) {
   return false;
 }
 
+function showSell(baseCurrencyCode, refundWalletAddress) {
+  var baseUrl = process.env.MOONPAY_WIDGET_SELL_URL + '&';
+  var params = {
+    baseCurrencyCode: baseCurrencyCode,
+    refundWalletAddress: refundWalletAddress,
+  };
+  var queryString = Object.keys(params).map(function(key) {
+    return key + '=' + params[key];
+  }).join('&');
+  baseUrl += queryString;
+  window.open(baseUrl, '_blank');
+  return false;
+}
+
 module.exports = {
   init: init,
   loadFiat: loadFiat,
@@ -512,6 +531,7 @@ module.exports = {
   getFiatList: getFiatList,
   getCryptoSymbolById: getCryptoSymbolById,
   isSupported: isSupported,
+  isSellSupported: isSellSupported,
   isLogged: isLogged,
   signIn: signIn,
   limits: limits,
@@ -541,4 +561,5 @@ module.exports = {
   open3dSecure: open3dSecure,
   validateApplePayTransaction: validateApplePayTransaction,
   show: show,
+  showSell: showSell
 };

@@ -29,11 +29,13 @@ function getCurrenciesFromAPI() {
       if (coin) {
         coins[coin.id] = {
           symbol: symbol,
-          isSupported: !coin.isSuspended
+          isSupported: !coin.isSuspended,
+          isSellSupported: coin.isSellSupported && process.env.ENABLE_MOONPAY_SELL === 'true'
         }
         coinsUSA[coin.id] = {
           symbol: symbol,
-          isSupported: !coin.isSuspended && coin.isSupportedInUS
+          isSupported: !coin.isSuspended && coin.isSupportedInUS,
+          isSellSupported: coin.isSellSupported && process.env.ENABLE_MOONPAY_SELL === 'true'
         }
       }
     });
