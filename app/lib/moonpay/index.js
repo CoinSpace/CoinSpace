@@ -477,15 +477,11 @@ function validateApplePayTransaction(validationUrl) {
   });
 }
 
-function show(currencyCode, walletAddress, onSuccess) {
+function show(currencyCode, walletAddress) {
   var baseUrl = process.env.MOONPAY_WIDGET_BUY_URL + '&';
-  // TODO handle moonpay transactionStatus=failed
-  var redirectURL =  'coinspace://?action=moonpay-success';
-
   var params = {
     currencyCode: currencyCode,
     walletAddress: walletAddress,
-    redirectURL: encodeURIComponent(redirectURL),
     enabledPaymentMethods: 'credit_debit_card,sepa_bank_transfer,gbp_bank_transfer,apple_pay',
   };
 
@@ -494,19 +490,7 @@ function show(currencyCode, walletAddress, onSuccess) {
   }).join('&');
 
   baseUrl += queryString;
-
-  window.localStorage.removeItem('_cs_moonpay_success');
-  var popup = window.open(baseUrl, '_blank');
-  var popupInterval = setInterval(function() {
-    if ((popup && popup.closed) || hasHandledMobileSuccess) {
-      clearInterval(popupInterval);
-      hasHandledMobileSuccess = false;
-      if (window.localStorage.getItem('_cs_moonpay_success') === 'true') {
-        if (onSuccess) onSuccess();
-      }
-    }
-  }, 250);
-
+  window.open(baseUrl, '_blank');
   return false;
 }
 

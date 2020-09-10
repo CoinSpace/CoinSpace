@@ -32,9 +32,7 @@ module.exports = function(el) {
   exchanges.none.on('moonpay-buy', function() {
     var wallet = getWallet();
     var symbol = wallet.denomination;
-    moonpay.show(symbol.toLowerCase(), wallet.getNextAddress(), function() {
-      showConfirmPurchase({ status: 'success' });
-    });
+    moonpay.show(symbol.toLowerCase(), wallet.getNextAddress());
   });
 
   exchanges.none.on('moonpay-sell', function() {
