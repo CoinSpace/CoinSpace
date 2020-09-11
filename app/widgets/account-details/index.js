@@ -6,7 +6,7 @@ const showTooltip = require('widgets/modals/tooltip');
 const { showError } = require('widgets/modals/flash');
 const emitter = require('lib/emitter');
 const Avatar = require('lib/avatar');
-const db = require('lib/db');
+const details = require('lib/wallet/details');
 const CS = require('lib/wallet');
 const showRemoveConfirmation = require('widgets/modals/confirm-remove-account');
 
@@ -41,7 +41,7 @@ module.exports = function init(el) {
   };
 
   emitter.once('wallet-ready', () => {
-    const userInfo = db.get('userInfo');
+    const userInfo = details.get('userInfo');
     ractive.set('user', Object.assign({}, userInfo));
     setAvatar();
 
@@ -59,8 +59,8 @@ module.exports = function init(el) {
     });
   });
 
-  emitter.on('details-updated', (details) => {
-    ractive.set('user', details);
+  emitter.on('details-updated', (user) => {
+    ractive.set('user', user);
     Profile.hide($editEl, ractive, () => {
       Profile.show($previewEl, ractive);
     });
@@ -80,25 +80,25 @@ module.exports = function init(el) {
   ractive.on('submit-details', () => {
     if (ractive.get('animating')) return;
 
-    const details = ractive.get('user');
+    const user = ractive.get('user');
 
-    if (blank(details.firstName)) {
+    if (blank(user.firstName)) {
       return showError({ message: "A name is required to set your profile on Coin" });
     }
 
-    if (blank(details.email) && details.avatarIndex == undefined) {
-      details.avatarIndex = Avatar.randAvatarIndex();
+    if (blank(user.email) && user.avatarIndex == undefined) {
+      user.avatarIndex = Avatar.randAvatarIndex();
     }
 
     ractive.set('submitting', true);
 
-    CS.setUsername(details.firstName)
+    CS.setUsername(user.firstName)
       .then((username) => {
-        details.firstName = username;
+        user.firstName = username;
 
-        db.set('userInfo', details).then(() => {
+        details.set('userInfo', user).then(() => {
           ractive.set('submitting', false);
-          emitter.emit('details-updated', details);
+          emitter.emit('details-updated', user);
           setAvatar();
         }).catch(() => {
           handleUserError();

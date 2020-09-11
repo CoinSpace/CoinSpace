@@ -7,7 +7,7 @@ const initAwaitingDeposit = require('./awaiting-deposit');
 const initAwaiting = require('./awaiting');
 const initComplete = require('./complete');
 const initError = require('./error');
-const db = require('lib/db');
+const details = require('lib/wallet/details');
 const shapeshift = require('lib/shapeshift');
 const { showError } = require('widgets/modals/flash');
 
@@ -42,7 +42,7 @@ module.exports = function(el) {
   });
 
   emitter.on('shapeshift', () => {
-    const shapeshiftInfo = db.get('shapeshiftInfo');
+    const shapeshiftInfo = details.get('shapeshiftInfo');
     if (!shapeshiftInfo) {
       ractive.set('isLoading', false);
       return showStep(steps.create);

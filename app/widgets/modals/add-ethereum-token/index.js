@@ -6,7 +6,7 @@ const qrcode = require('lib/qrcode');
 const emitter = require('lib/emitter');
 const request = require('lib/request');
 const { urlRoot } = window;
-const db = require('lib/db');
+const details = require('lib/wallet/details');
 
 let tokens = [];
 let ractive;
@@ -65,7 +65,7 @@ function open(walletTokens, callback) {
 
     walletTokens.push(data);
 
-    db.set('walletTokens', walletTokens).then(() => {
+    details.set('walletTokens', walletTokens).then(() => {
       callback(data);
       ractive.fire('cancel');
     }).catch((err) => {

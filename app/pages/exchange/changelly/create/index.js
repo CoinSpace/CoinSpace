@@ -8,7 +8,7 @@ const qrcode = require('lib/qrcode');
 const geo = require('lib/geo');
 const showTooltip = require('widgets/modals/tooltip');
 const { showError } = require('widgets/modals/flash');
-const db = require('lib/db');
+const details = require('lib/wallet/details');
 
 module.exports = function(el) {
   const ractive = new Ractive({
@@ -106,7 +106,7 @@ module.exports = function(el) {
     return validateAddresses(options).then(() => {
       return changelly.createTransaction(options).then((data) => {
         data.networkFee = ractive.get('networkFee');
-        db.set('changellyInfo', data).then(() => {
+        details.set('changellyInfo', data).then(() => {
           ractive.set('isValidating', false);
           emitter.emit('change-changelly-step', 'awaitingDeposit', data);
         }).catch((err) => {

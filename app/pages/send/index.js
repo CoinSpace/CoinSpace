@@ -3,7 +3,7 @@
 const Ractive = require('lib/ractive');
 const Big = require('big.js');
 const emitter = require('lib/emitter');
-const db = require('lib/db');
+const details = require('lib/wallet/details');
 const { getWallet } = require('lib/wallet');
 const { setToAlias } = require('lib/wallet');
 const { getTokenNetwork } = require('lib/token');
@@ -246,7 +246,7 @@ module.exports = function(el) {
   });
 
   function initPreferredCurrency(currencies) {
-    const systemInfo = db.get('systemInfo');
+    const systemInfo = details.get('systemInfo');
     selectedFiat = systemInfo.preferredCurrency;
     if (currencies.indexOf(selectedFiat) === -1) {
       selectedFiat = defaultFiat;

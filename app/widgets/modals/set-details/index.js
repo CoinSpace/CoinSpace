@@ -1,13 +1,13 @@
 'use strict';
 
 const Ractive = require('widgets/modals/base');
-const db = require('lib/db');
+const details = require('lib/wallet/details');
 const emitter = require('lib/emitter');
 const { showError } = require('widgets/modals/flash');
 const CS = require('lib/wallet');
 
 function fetchDetails(callback) {
-  const userInfo = db.get('userInfo');
+  const userInfo = details.get('userInfo');
   const name = userInfo.firstName;
   if (name && name !== '') {
     return callback();
@@ -58,7 +58,7 @@ function openModal(data) {
       .then((username) => {
         details.firstName = username;
 
-        db.set('userInfo', details)
+        details.set('userInfo', details)
           .then(() => {
             ractive.fire('cancel');
             ractive.set('submitting', false);

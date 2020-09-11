@@ -11,7 +11,7 @@ const showSetDetails = require('widgets/modals/set-details');
 const { getTokenNetwork } = require('lib/token');
 const qrcode = require('lib/qrcode');
 const initEosSetup = require('widgets/eos/setup');
-const db = require('lib/db');
+const details = require('lib/wallet/details');
 const { translate } = require('lib/i18n');
 
 module.exports = function(el) {
@@ -68,7 +68,7 @@ module.exports = function(el) {
   ractive.on('change-address-type', () => {
     const wallet = CS.getWallet();
     const addressType = ractive.get('addressType');
-    db.set(wallet.networkName + '.addressType', addressType)
+    details.set(wallet.networkName + '.addressType', addressType)
       .then(() => {
         wallet.addressType = addressType;
         emitter.emit('change-address-type');

@@ -4,7 +4,7 @@ const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
 const showQr = require('widgets/modals/qr');
 const qrcode = require('lib/qrcode');
-const db = require('lib/db');
+const details = require('lib/wallet/details');
 const showTooltip = require('widgets/modals/tooltip');
 const { translate } = require('lib/i18n');
 
@@ -55,7 +55,7 @@ module.exports = function(el) {
   });
 
   ractive.on('cancel', () => {
-    db.set('changellyInfo', null).then(() => {
+    details.set('changellyInfo', null).then(() => {
       emitter.emit('change-changelly-step', 'enterAmount');
     }).catch((err) => {
       console.error(err);

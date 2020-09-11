@@ -1,7 +1,7 @@
 'use strict';
 
 const request = require('lib/request');
-const db = require('lib/db');
+const details = require('lib/wallet/details');
 const { getWallet } = require('lib/wallet');
 const { getId } = require('lib/wallet');
 const { getTokenNetwork } = require('lib/token');
@@ -70,7 +70,7 @@ function requestLocationEndpoint(network, method, callback) {
       console.info(`Current location: https://www.google.com/maps/place/${lat},${lon}`);
     }
 
-    const doc = db.get();
+    const doc = details.get();
     userInfo = {};
     userInfo.id = getId();
     userInfo.name = doc.userInfo.firstName;

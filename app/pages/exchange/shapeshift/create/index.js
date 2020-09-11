@@ -12,7 +12,7 @@ const showTooltip = require('widgets/modals/tooltip');
 const { showError } = require('widgets/modals/flash');
 const { showInfo } = require('widgets/modals/flash');
 const _ = require('lodash');
-const db = require('lib/db');
+const details = require('lib/wallet/details');
 
 module.exports = function(el) {
   const ractive = new Ractive({
@@ -175,7 +175,7 @@ module.exports = function(el) {
     return validateAddresses(options).then(() => {
       return shapeshift.shift(options).then((data) => {
         data.depositCoinName = fromCoin ? fromCoin.name : '';
-        db.set('shapeshiftInfo', data).then(() => {
+        details.set('shapeshiftInfo', data).then(() => {
           ractive.set('isValidating', false);
           emitter.emit('change-shapeshift-step', 'awaitingDeposit', data);
         }).catch((err) => {

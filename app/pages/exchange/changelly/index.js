@@ -8,7 +8,7 @@ const initAwaitingDeposit = require('./awaiting-deposit');
 const initAwaiting = require('./awaiting');
 const initComplete = require('./complete');
 const initError = require('./error');
-const db = require('lib/db');
+const details = require('lib/wallet/details');
 const changelly = require('lib/changelly');
 const { showError } = require('widgets/modals/flash');
 
@@ -44,7 +44,7 @@ module.exports = function(el) {
   });
 
   emitter.on('changelly', () => {
-    const changellyInfo = db.get('changellyInfo');
+    const changellyInfo = details.get('changellyInfo');
     if (!changellyInfo) {
       ractive.set('isLoading', false);
       return showStep(steps.enterAmount);

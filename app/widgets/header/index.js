@@ -7,7 +7,7 @@ const { getWallet } = require('lib/wallet');
 const { toUnit } = require('lib/convert');
 const { toUnitString } = require('lib/convert');
 const Big = require('big.js');
-const db = require('lib/db');
+const details = require('lib/wallet/details');
 
 module.exports = function(el) {
   let selectedFiat = '';
@@ -110,7 +110,7 @@ module.exports = function(el) {
   });
 
   function initPreferredCurrency(currencies) {
-    const systemInfo = db.get('systemInfo');
+    const systemInfo = details.get('systemInfo');
     selectedFiat = systemInfo.preferredCurrency;
     if (currencies.indexOf(selectedFiat) === -1) {
       selectedFiat = defaultFiat;
@@ -137,7 +137,7 @@ module.exports = function(el) {
     selectedFiat = currency;
     emitter.emit('header-fiat-changed', selectedFiat);
 
-    db.set('systemInfo', { preferredCurrency: selectedFiat })
+    details.set('systemInfo', { preferredCurrency: selectedFiat })
       .catch((err) => {
         console.error(err);
       });

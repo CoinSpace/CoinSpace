@@ -7,7 +7,7 @@ const { setToken } = require('lib/token');
 const { getToken } = require('lib/token');
 const { initWallet } = require('lib/wallet');
 const emitter = require('lib/emitter');
-const db = require('lib/db');
+const details = require('lib/wallet/details');
 const _ = require('lodash');
 
 let walletTokens = [];
@@ -49,7 +49,7 @@ module.exports = function(el) {
   });
 
   ractive.on('before-show', () => {
-    walletTokens = db.get('walletTokens') || [];
+    walletTokens = details.get('walletTokens') || [];
     const ethereumTokens = walletTokens.filter((token) => {
       return token.network === 'ethereum';
     });
@@ -78,7 +78,7 @@ module.exports = function(el) {
     emitter.emit('sync');
 
     setTimeout(() => {
-      initWallet(network);
+      initWallet();
     }, 200);
   }
 
@@ -90,7 +90,7 @@ module.exports = function(el) {
 
       walletTokens.splice(index, 1);
 
-      db.set('walletTokens', walletTokens).then(() => {
+      details.set('walletTokens', walletTokens).then(() => {
         modal.set('onDismiss', () => {
           ractive.splice('ethereumTokens', rindex, 1);
         });

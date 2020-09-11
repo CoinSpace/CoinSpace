@@ -2,7 +2,7 @@
 
 const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
-const db = require('lib/db');
+const details = require('lib/wallet/details');
 
 module.exports = function(el) {
   const ractive = new Ractive({
@@ -27,7 +27,7 @@ module.exports = function(el) {
   });
 
   ractive.on('done', () => {
-    db.set('shapeshiftInfo', null).then(() => {
+    details.set('shapeshiftInfo', null).then(() => {
       emitter.emit('change-shapeshift-step', 'create');
     }).catch((err) => {
       console.error(err);

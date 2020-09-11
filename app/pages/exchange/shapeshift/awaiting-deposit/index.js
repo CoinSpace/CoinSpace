@@ -4,7 +4,7 @@ const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
 const showQr = require('widgets/modals/qr');
 const qrcode = require('lib/qrcode');
-const db = require('lib/db');
+const details = require('lib/wallet/details');
 const shapeshift = require('lib/shapeshift');
 const { showError } = require('widgets/modals/flash');
 const { translate } = require('lib/i18n');
@@ -67,7 +67,7 @@ module.exports = function(el) {
   });
 
   ractive.on('cancel', () => {
-    db.set('shapeshiftInfo', null).then(() => {
+    details.set('shapeshiftInfo', null).then(() => {
       emitter.emit('change-shapeshift-step', 'create');
     }).catch((err) => {
       console.error(err);

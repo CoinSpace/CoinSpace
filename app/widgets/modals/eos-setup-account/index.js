@@ -3,7 +3,7 @@
 const Ractive = require('widgets/modals/base');
 const { getWallet } = require('lib/wallet');
 const { sync } = require('lib/wallet');
-const db = require('lib/db');
+const details = require('lib/wallet/details');
 const { showError } = require('widgets/modals/flash');
 const emitter = require('lib/emitter');
 
@@ -34,7 +34,7 @@ function open() {
         ractive.set('price', result.price + ' EOS');
         ractive.set('memo', result.memo);
       } else {
-        db.set('eosAccountName', accountName).then(() => {
+        details.set('eosAccountName', accountName).then(() => {
           ractive.set('success', true);
           syncWallet();
         });
