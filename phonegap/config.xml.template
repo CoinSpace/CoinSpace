@@ -83,7 +83,7 @@
     <splash src="../images/ios/screens/Default@2x~ipad~anyany.png" />
     <splash src="../images/ios/screens/Default@2x~ipad~comany.png" />
     <edit-config target="NSLocationWhenInUseUsageDescription" file="Coin/Coin-Info.plist" mode="merge">
-      <string>Turn on location services to send or receive coins from people around you.</string>
+      <string>Turn on location services to send or receive coins with people around you.</string>
     </edit-config>
     <edit-config target="NSCameraUsageDescription" file="Coin/Coin-Info.plist" mode="merge">
       <string>This app uses the camera to scan barcodes and take pictures.</string>
