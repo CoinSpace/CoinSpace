@@ -1,0 +1,20 @@
+<div class="widget-touch-id-setup" class-_animated="animation" class-_open="isOpen">
+
+  <div class="_content">
+
+    <div class="_icon">
+      {{>svg_touchid}}
+    </div>
+
+    <h2>{{{header}}}</h2>
+
+    <p class="_description">{{description}}</p>
+
+    <div class="_btn_group">
+      <div class="_btn" on-click="confirm">{{buttonLabel}}</div>
+    </div>
+
+    <span class="_footer_link" on-click="back">{{translate("Skip")}}</span>
+  </div>
+
+</div>

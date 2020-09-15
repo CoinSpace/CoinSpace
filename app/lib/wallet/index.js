@@ -4,11 +4,11 @@ const Worker = require('worker-loader?inline&fallback=false!./worker.js');
 const worker = new Worker();
 
 const auth = require('./auth');
-const walletDb = require('./db');
+const LS = require('./localStorage');
+const seeds = require('./seeds');
 const emitter = require('lib/emitter');
 const crypto = require('crypto');
 const encryption = require('lib/encryption');
-const denomination = require('lib/denomination');
 const CsWallet = require('cs-wallet');
 const validateSend = require('./validator');
 const request = require('lib/request');
@@ -16,20 +16,24 @@ const EthereumWallet = require('cs-ethereum-wallet');
 const RippleWallet = require('cs-ripple-wallet');
 const StellarWallet = require('cs-stellar-wallet');
 const EOSWallet = require('cs-eos-wallet');
+const { eddsa } = require('elliptic');
+const ec = new eddsa('ed25519');
+const security = require('./security');
+const { startAttestation, startAssertion } = require('@simplewebauthn/browser');
+
 const convert = require('lib/convert');
 const {
   getToken,
   getTokenNetwork,
   setToken,
 } = require('lib/token');
-const db = require('lib/db');
+const details = require('lib/wallet/details');
+const settings = require('lib/wallet/settings');
 const _ = require('lodash');
 const bchaddr = require('bchaddrjs');
 
 const state = {
   wallet: null,
-  seed: null,
-  id: null,
 };
 
 const Wallet = {
@@ -45,127 +49,137 @@ const Wallet = {
   dash: CsWallet,
 };
 
-const names = {
-  BTC: 'Bitcoin',
-  BCH: 'Bitcoin Cash',
-  BSV: 'Bitcoin SV',
-  LTC: 'Litecoin',
-  ETH: 'Ethereum',
-  XRP: 'Ripple',
-  XLM: 'Stellar',
-  EOS: 'EOS',
-  DOGE: 'Dogecoin',
-  DASH: 'Dash',
-  USDT: 'Tether USD',
-};
-
 const { urlRoot } = window;
 
 function createWallet(passphrase) {
   const data = { passphrase };
-
   return new Promise((resolve, reject) => {
     worker.onmessage = function(event) {
-      walletDb.setKey(event.data.key);
-      assignSeedAndId(event.data.seed);
+      seeds.set('private', event.data.seed);
       resolve({ mnemonic: event.data.mnemonic });
     };
-
     worker.onerror = function(event) {
       event.preventDefault();
       reject(new Error(event.message.split(': ')[1]));
     };
-
     worker.postMessage(data);
   });
 }
 
 function migrateWallet(pin) {
-  const key = crypto.randomBytes(32).toString('hex');
-  walletDb.setKey(key);
-
+  // const key = crypto.randomBytes(32).toString('hex');
+  // walletDb.setKey(key);
   return registerWallet(pin);
 }
 
-function registerWallet(pin) {
-  const key = walletDb.getKey();
-  const hash = encryption.sha256pin(pin, key);
-
-  return auth.register(state.id, hash)
-    .then(({ login, token }) => {
-      walletDb.setSeed(state.seed, token);
-      walletDb.setLoginJWT(login);
-    });
+async function registerWallet(pin) {
+  const pinKey = crypto.randomBytes(32).toString('hex');
+  const walletSeed = seeds.get('private');
+  const wallet = ec.keyFromSecret(walletSeed);
+  const deviceSeed = crypto.randomBytes(32).toString('hex');
+  const device = ec.keyFromSecret(deviceSeed);
+  const deviceId = device.getPublic('hex');
+  const pinHash = crypto.createHmac('sha256', Buffer.from(pinKey, 'hex')).update(pin).digest('hex');
+  const detailsKey = crypto.createHmac('sha256', 'hello bro!').update(walletSeed).digest('hex');
+  const { publicToken, privateToken } = await request({
+    url: '/api/v2/register',
+    method: 'post',
+    data: {
+      walletId: wallet.getPublic('hex'),
+      deviceId,
+      pinHash,
+    },
+    seed: 'private',
+  });
+  seeds.set('public', deviceSeed, publicToken);
+  seeds.set('private', walletSeed, privateToken);
+  LS.setEncryptedSeed('public', encryption.encrypt(deviceSeed, publicToken));
+  LS.setEncryptedSeed('private', encryption.encrypt(walletSeed, privateToken));
+  LS.setPinKey(pinKey);
+  LS.setId(deviceId);
+  LS.setDetailsKey(detailsKey);
+  await Promise.all([details.init(), settings.init()]);
+  initWallet(true);
 }
 
 async function loginWithPin(pin) {
-  const key = walletDb.getKey();
-  const hash = encryption.sha256pin(pin, key);
+  const pinHash = crypto.createHmac('sha256', Buffer.from(LS.getPinKey(), 'hex')).update(pin).digest('hex');
+  const { publicToken } = await request({
+    url: `/api/v2/token/public/pin?id=${LS.getId()}`,
+    method: 'post',
+    data: {
+      pinHash,
+    },
+  });
+  seeds.unlock('public', publicToken);
+  await Promise.all([details.init(), settings.init()]);
+  initWallet();
+}
 
-  const { second } = await auth.login(walletDb.getLoginJWT(), hash);
+async function loginWithTouchId() {
+  const options = await request({
+    url: `/api/v2/token/public/platform?id=${LS.getId()}`,
+    method: 'get',
+  });
+  const assertion = await startAssertion(options);
+  const res = await request({
+    url: `/api/v2/token/public/platform?id=${LS.getId()}`,
+    method: 'post',
+    data: assertion,
+  });
+  seeds.unlock('public', res.publicToken);
+  await Promise.all([details.init(), settings.init()]);
+  initWallet();
+}
 
-  if (second) {
-    console.log('need second factor!');
-    // TODO implement
-  } else {
-    return _openWallet();
-  }
+async function enableTouchId() {
+  const options = await request({
+    url: `/api/v2/platform/attestation?id=${LS.getId()}`,
+    method: 'get',
+    seed: 'public',
+  });
+  const attestation = await startAttestation(options);
+  await request({
+    url: `/api/v2/platform/attestation?id=${LS.getId()}`,
+    method: 'post',
+    data: attestation,
+    seed: 'public',
+  });
+  LS.setTouchIdEnabled(true);
 }
 
 async function loginWithFido() {
   // TODO implement
 }
 
-function _openWallet() {
-  return auth.token()
-    .then(({ token }) => {
-      assignSeedAndId(walletDb.getSeed(token));
-    });
-}
-
 function removeAccount() {
-  return auth.remove(state.id);
-}
-
-function setUsername(username) {
-  return auth.setUsername(username);
-}
-
-// DEPRECATED
-function openWalletWithPinDEPRECATED(pin, network, done) {
-  const credentials = walletDb.getCredentials();
-  const { id } = credentials;
-  const encryptedSeed = credentials.seed;
-  auth.loginDEPRECATED(id, pin, (err, token) => {
-    if (err) {
-      if (err.message === 'user_deleted') {
-        walletDb.deleteCredentials();
-      }
-      return done(err);
-    }
-    assignSeedAndId(encryption.decrypt(encryptedSeed, token));
-    done();
+  return request({
+    url: `${urlRoot}v2/wallet?id=${LS.getId()}`,
+    method: 'delete',
+    seed: 'private',
   });
 }
 
-// DEPRECATED
-function getPinDEPRECATED() {
-  const pin = window.localStorage.getItem('_pin_cs');
-  return pin ? encryption.decrypt(pin, 'pinCoinSpace') : null;
-}
-// DEPRECATED
-function resetPinDEPRECATED() {
-  window.localStorage.removeItem('_pin_cs');
+function setUsername(username) {
+  const userInfo = details.get('userInfo');
+  const oldUsername = (userInfo.firstName || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
+  const newUsername = (username || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
+  if (newUsername === oldUsername) {
+    return Promise.resolve(userInfo.firstName);
+  }
+  return request({
+    url: `${urlRoot}v2/username?id=${LS.getId()}`,
+    method: 'put',
+    data: {
+      username: newUsername,
+    },
+    seed: 'public',
+  }).then((data) => {
+    return data.username;
+  });
 }
 
-function assignSeedAndId(seed) {
-  const id = crypto.createHash('sha256').update(seed).digest('hex');
-  state.seed = seed;
-  state.id = id;
-  emitter.emit('wallet-init', { seed });
-}
-
-function initWallet() {
+function initWallet(isRegistration) {
   const networkName = getTokenNetwork();
   let token = getToken();
   if (!isValidWalletToken(token)) {
@@ -173,37 +187,38 @@ function initWallet() {
     token = false;
   }
 
-  const options = {
-    networkName,
-    seed: state.seed,
-  };
+  let publicKey;
+  const seed = seeds.get('private');
+  if (seed) {
+    Object.keys(Wallet).forEach((key) => {
+      let wallet;
+      if (key === networkName) {
+        wallet = new Wallet[key](Object.assign({ seed, networkName }, getExtraOptions(networkName)));
+        state.wallet = wallet;
+      } else {
+        wallet = new Wallet[key]({ seed, networkName: key });
+      }
+      LS.setPublicKey(wallet, seeds.get('public'));
+    });
+    security.lock(state.wallet);
+  } else {
+    publicKey = LS.getPublicKey(networkName, seeds.get('public'));
+    const options = Object.assign({ publicKey, networkName }, getExtraOptions(networkName));
+    state.wallet = new Wallet[networkName](options);
+  }
 
   if (networkName === 'ethereum') {
-    options.minConf = 12;
-    options.token = token;
     convert.setDecimals(token ? token.decimals : 18);
   } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(networkName) !== -1) {
-    options.minConf = 3;
-    options.addressType = db.get(networkName + '.addressType') || 'p2pkh';
-    if (networkName === 'bitcoincash') {
-      options.minConf = 0;
-    }
     convert.setDecimals(8);
   } else if (networkName === 'ripple') {
     convert.setDecimals(0);
   } else if (networkName === 'stellar') {
     convert.setDecimals(0);
   } else if (networkName === 'eos') {
-    options.accountName = db.get('eosAccountName') || '';
-    if (process.env.NODE_ENV === 'development') {
-      options.chainId = 'e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473';
-    }
     convert.setDecimals(0);
   }
 
-  state.wallet = new Wallet[networkName](options);
-  state.wallet.denomination = token ? denomination(token) : denomination(networkName);
-  state.wallet.name = names[state.wallet.denomination] || state.wallet.denomination;
   state.wallet.load({
     getDynamicFees() {
       return request({
@@ -221,14 +236,31 @@ function initWallet() {
       if (err) {
         return emitter.emit('wallet-error', err);
       }
-      emitter.emit('wallet-ready');
+      emitter.emit('wallet-ready', isRegistration);
     },
   });
+
+  function getExtraOptions(networkName) {
+    const options = {};
+    if (networkName === 'ethereum') {
+      options.minConf = 12;
+      options.token = token;
+    } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(networkName) !== -1) {
+      options.minConf = 3;
+      options.addressType = details.get(networkName + '.addressType') || 'p2pkh';
+      if (networkName === 'bitcoincash') {
+        options.minConf = 0;
+      }
+    } else if (networkName === 'eos') {
+      options.accountName = details.get('eosAccountName') || '';
+    }
+    return options;
+  }
 }
 
 function isValidWalletToken(token) {
   if (token && token.isDefault) return true;
-  const walletTokens = db.get('walletTokens') || [];
+  const walletTokens = details.get('walletTokens') || [];
   const isFound = _.find(walletTokens, (item) => {
     return _.isEqual(token, item);
   });
@@ -236,7 +268,7 @@ function isValidWalletToken(token) {
 }
 
 function sync() {
-  initWallet(state.wallet.networkName);
+  initWallet();
 }
 
 function getWallet() {
@@ -247,23 +279,13 @@ function getId() {
   return state.id;
 }
 
-// DEPRECATED
-function walletExistsDEPRECATED() {
-  return !!walletDb.getCredentials();
-}
-
-// DEPRECATED
-function deleteCredentialsDEPRECATED() {
-  walletDb.deleteCredentials();
-}
-
 function walletRegistered() {
-  return walletDb.isRegistered();
+  return LS.isRegistered();
 }
 
 function reset() {
-  walletDb.deleteCredentials();
-  walletDb.reset();
+  LS.deleteCredentials();
+  LS.reset();
   emitter.emit('wallet-reset');
   resetPinDEPRECATED();
 }
@@ -288,21 +310,50 @@ function setToAlias(data) {
   } catch (e) {}
 }
 
-emitter.on('db-ready', () => {
-  initWallet();
-});
+// DEPRECATED
+function openWalletWithPinDEPRECATED(pin, network, done) {
+  const credentials = LS.getCredentials();
+  const { id } = credentials;
+  const encryptedSeed = credentials.seed;
+  auth.loginDEPRECATED(id, pin, (err, token) => {
+    if (err) {
+      if (err.message === 'user_deleted') {
+        LS.deleteCredentials();
+      }
+      return done(err);
+    }
+    seeds.set('private', encryption.decrypt(encryptedSeed, token));
+    done();
+  });
+}
 
-emitter.on('db-error', (err) => {
-  emitter.emit('wallet-error', err);
-});
+// DEPRECATED
+function walletExistsDEPRECATED() {
+  return !!LS.getCredentials();
+}
+
+// DEPRECATED
+function deleteCredentialsDEPRECATED() {
+  LS.deleteCredentials();
+}
+
+// DEPRECATED
+function getPinDEPRECATED() {
+  const pin = window.localStorage.getItem('_pin_cs');
+  return pin ? encryption.decrypt(pin, 'pinCoinSpace') : null;
+}
+// DEPRECATED
+function resetPinDEPRECATED() {
+  window.localStorage.removeItem('_pin_cs');
+}
 
 module.exports = {
   openWalletWithPinDEPRECATED,
   createWallet,
-  //setPin,
   registerWallet,
   migrateWallet,
   loginWithPin,
+  loginWithTouchId,
   loginWithFido,
   removeAccount,
   setUsername,
@@ -319,4 +370,5 @@ module.exports = {
   resetPinDEPRECATED,
   getDestinationInfo,
   setToAlias,
+  enableTouchId,
 };

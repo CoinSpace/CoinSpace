@@ -17,8 +17,8 @@
           </div>
         {{/passphrase}}
       </div>
-    </label>
-  </div>
+      </label>
+    </div>
 
     <div class="_btn_group">
       {{#if count() === 12 }}

@@ -3,19 +3,35 @@
 const axios = require('axios').create({ timeout: 30000 });
 const axiosRetry = require('axios-retry');
 const { showError } = require('widgets/modals/flash');
+const { eddsa } = require('elliptic');
+const ec = new eddsa('ed25519');
+const crypto = require('crypto');
+const seeds = require('lib/wallet/seeds');
 
 axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay, shouldResetTimeout: true });
-
-const state = {};
 
 function makeRequest(config, callback) {
   const showFlashError = !config.hideFlashError;
 
-  if (config.jwt !== false && (config.jwt || state.jwt) && config.url.includes('/v2/')) {
-    if (!config.headers) {
-      config.headers = {};
+  if (config.seed) {
+    const secret = seeds.get(config.seed);
+    const privateKey = ec.keyFromSecret(secret);
+
+    const body = config.data && JSON.stringify(config.data);
+    const date = (new Date()).toUTCString();
+    const base = [
+      config.method,
+      config.url,
+      location.host,
+      date,
+    ];
+    if (config.method !== 'gets' && body) {
+      base.push(crypto.createHash('sha256').update(body).digest().toString('hex'));
     }
-    config.headers['Authorization'] = `Bearer ${config.jwt || state.jwt}`;
+    const signature = privateKey.sign(Buffer.from(base.join(' '))).toHex();
+    config.headers = config.headers || {};
+    config.headers['X-Date'] = date;
+    config.headers['Signature'] = signature;
   }
 
   return axios.request(config)
@@ -44,9 +60,6 @@ function makeRequest(config, callback) {
         setTimeout(() => {
           callback(null, data);
         });
-      }
-      if (data.jwt) {
-        state.jwt = data.jwt;
       }
       return data;
     }, (err) => {

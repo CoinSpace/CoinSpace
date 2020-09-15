@@ -1,28 +1,18 @@
 'use strict';
 const encryption = require('lib/encryption');
 
-const seeds = {
-  public: null,
-  private: null,
-};
-
-function getSeed(type) {
-  return seeds[type];
-}
-
-function setSeed(type, seed, token) {
-  seeds[type] = seed;
-  if (token) {
-    window.localStorage.setItem(type, encryption.encrypt(seed, token));
+function getEncryptedSeed(type) {
+  if (type === 'public' || type === 'private') {
+    return window.localStorage.getItem(type);
   }
+  throw new Error('Wrong seed type');
 }
 
-function lockSeed(type) {
-  setSeed(type, null);
-}
-
-function unlockSeed(type, token) {
-  seeds[type] = encryption.decrypt(window.localStorage.getItem(type), token);
+function setEncryptedSeed(type, encryptedSeed) {
+  if (type === 'public' || type === 'private') {
+    return window.localStorage.setItem(type, encryptedSeed);
+  }
+  throw new Error('Wrong seed type');
 }
 
 function getId() {
@@ -49,13 +39,13 @@ function setDetailsKey(detailsKey) {
   window.localStorage.setItem('detailsKey', detailsKey);
 }
 
-function getPublicKey(networkName) {
-  return encryption.decrypt(window.localStorage.getItem(`_cs_public_key_${networkName}`), seeds['public']);
+function getPublicKey(networkName, token) {
+  return encryption.decrypt(window.localStorage.getItem(`_cs_public_key_${networkName}`), token);
 }
 
-function setPublicKey(wallet) {
-  const backup = encryption.encrypt(wallet.publicKey(), seeds['public']);
-  window.localStorage.setItem(`_cs_public_key_${wallet.networkName}`, backup);
+function setPublicKey(wallet, token) {
+  const publicKey = encryption.encrypt(wallet.publicKey(), token);
+  window.localStorage.setItem(`_cs_public_key_${wallet.networkName}`, publicKey);
 }
 
 // DEPRECATED
@@ -99,17 +89,26 @@ function reset() {
   window.localStorage.removeItem('_cs_public_key_ripple');
   window.localStorage.removeItem('_cs_public_key_stellar');
   window.localStorage.removeItem('_cs_public_key_eos');
+  window.localStorage.removeItem('_cs_touchid_enabled');
+}
+
+function isTouchIdEnabled() {
+  return !!window.localStorage.getItem('_cs_touchid_enabled');
+}
+
+function setTouchIdEnabled(value) {
+  return window.localStorage.setItem('_cs_touchid_enabled', value);
 }
 
 module.exports = {
   getCredentials, // DEPRECATED
   getPin, // DEPRECATED
   deleteCredentials, // DEPRECATED
+
+  getEncryptedSeed,
+  setEncryptedSeed,
+
   isRegistered,
-  getSeed,
-  setSeed,
-  lockSeed,
-  unlockSeed,
   getId,
   setId,
   getPinKey,
@@ -119,4 +118,6 @@ module.exports = {
   getPublicKey,
   setPublicKey,
   reset,
+  isTouchIdEnabled,
+  setTouchIdEnabled
 };

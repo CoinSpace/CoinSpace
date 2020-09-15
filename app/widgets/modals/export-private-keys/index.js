@@ -2,11 +2,11 @@
 
 const Ractive = require('widgets/modals/base');
 const { getWallet } = require('lib/wallet');
+const { unlock, lock } = require('lib/wallet/security');
 const { showInfo } = require('widgets/modals/flash');
 
 function open() {
   const ractive = new Ractive({
-    el: document.getElementById('flash-modal'),
     partials: {
       content: require('./content.ract'),
     },
@@ -22,16 +22,22 @@ function open() {
   });
 
   ractive.on('show-keys', () => {
-    const privateKeys = getWallet().exportPrivateKeys();
-    if (privateKeys.length === 0) {
-      ractive.fire('cancel');
-      return showInfo({
-        message: 'Your wallet has no private keys with coins for export.',
-        fadeInDuration: 0,
-      });
-    }
-    ractive.set('privateKeys', privateKeys);
-    ractive.set('isShown', true);
+    const wallet = getWallet();
+
+    unlock(wallet).then(() => {
+      const privateKeys = wallet.exportPrivateKeys();
+      lock(wallet);
+      if (privateKeys.length === 0) {
+        ractive.fire('cancel');
+        return showInfo({
+          message: 'Your wallet has no private keys with coins for export.',
+          fadeInDuration: 0,
+        });
+      }
+      ractive.set('privateKeys', privateKeys);
+      ractive.set('isShown', true);
+    });
+
   });
 
   ractive.on('export-keys', () => {

@@ -37,13 +37,6 @@ module.exports = function(el, options) {
     if (pinWidget && !pinWidget.torndown) pinWidget.close();
   });
 
-  emitter.on('wallet-opening', () => {
-    const { pinWidget } = currentStep;
-    if (!pinWidget) return;
-    pinWidget.set('header', translate('Synchronizing Wallet'));
-    pinWidget.set('description', translate('This might take some time,') + '<br/>' + translate('please be patient.'));
-  });
-
   emitter.on('change-auth-step', (step, data) => {
     showStep(steps[step], data);
   });

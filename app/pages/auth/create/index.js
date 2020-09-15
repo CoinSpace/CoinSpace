@@ -18,15 +18,17 @@ module.exports = function(el) {
     ractive.set('isLoading', false);
   });
 
-  ractive.on('generate-phrase', () => {
+  ractive.on('generate-phrase', async () => {
     ractive.set('isLoading', true);
-    CS.createWallet(null)
-      .then((data) => {
-        emitter.emit('change-auth-step', 'createPassphrase', {
-          passphrase: data.mnemonic,
-        });
-      })
-      .catch(showError);
+    try {
+      const data = await CS.createWallet(null);
+      emitter.emit('change-auth-step', 'createPassphrase', {
+        passphrase: data.mnemonic,
+      });
+    } catch (err) {
+      ractive.set('isLoading', false);
+      showError(err);
+    }
   });
 
   ractive.on('back', () => {

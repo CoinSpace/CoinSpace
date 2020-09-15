@@ -47,15 +47,15 @@ module.exports = function(el) {
     ractive.pinWidget = PinWidget({
       header: translate('Set a PIN for quick access'),
       headerLoading: translate('Setting PIN'),
-    }, (pin) => {
-      CS.registerWallet(pin)
-        .then(() => {
-          emitter.emit('auth-success');
-        })
-        .catch(err => {
+      async onPin(pin) {
+        try {
+          await CS.registerWallet(pin);
+          ractive.pinWidget.loadingWallet();
+        } catch (err) {
           ractive.pinWidget.wrong();
           emitter.emit('auth-error', err);
-        });
+        }
+      }
     });
   });
 

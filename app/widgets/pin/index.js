@@ -2,20 +2,22 @@
 
 const Ractive = require('lib/ractive');
 const { translate } = require('lib/i18n');
-const CS = require('lib/wallet');
+const LS = require('lib/wallet/localStorage');
 const showLegacyTouchId = require('lib/legacy-touch-id');
 
-function open(options, callback) {
+function open(options) {
   const {
     header = translate('Enter your PIN'),
     headerLoading = translate('Verifying PIN'),
     backLabel = translate('Back'),
+    onPin = () => {},
+    onTouchId = () => {},
     touchId,
     append = false,
   } = options;
   // eslint-disable-next-line max-len
-  const legacyTouchIdIsAvailable = CS.getPinDEPRECATED() && CS.walletExistsDEPRECATED() && window.legacyTouchIdIsAvailable;
-  const fidoTouchIdIsAvailable = !!window.localStorage.getItem('_cs_touchid_enabled');
+  const legacyTouchIdIsAvailable = LS.getPin() && !!LS.getCredentials() && window.legacyTouchIdIsAvailable;
+  const fidoTouchIdIsAvailable = LS.isTouchIdEnabled();
 
   const ractive = new Ractive({
     el: document.getElementById('general-purpose-overlay'),
@@ -51,7 +53,7 @@ function open(options, callback) {
     if (pin.length === 4) {
       ractive.set('isLoading', true);
       ractive.set('header', headerLoading);
-      callback(pin);
+      onPin(pin);
     }
   });
 
@@ -62,21 +64,21 @@ function open(options, callback) {
     ractive.set('pin', pin.substr(0, pin.length - 1));
   });
 
-  ractive.on('touch-id', () => {
+  ractive.on('touch-id', async () => {
     if (ractive.get('isLoading')) return;
 
     if (fidoTouchIdIsAvailable) {
-      // FIDO touch id
-      return;
+      return onTouchId();
     }
 
     if (legacyTouchIdIsAvailable) {
-      return showLegacyTouchId().then(() => {
-        ractive.set('pin', CS.getPinDEPRECATED());
-      }).catch(() => {
+      try {
+        await showLegacyTouchId();
+        ractive.set('pin', LS.getPin());
+      } catch (err) {
         const $pinInput = ractive.find('.js-pin-input');
         if ($pinInput) $pinInput.focus();
-      });
+      }
     }
   });
 
@@ -99,6 +101,12 @@ function open(options, callback) {
       ractive.set('isWrong', false);
     }, 700);
   };
+
+  ractive.loadingWallet = () => {
+    ractive.set('isLoading', true);
+    ractive.set('header', translate('Synchronizing Wallet'));
+    ractive.set('description', translate('This might take some time,') + '<br/>' + translate('please be patient.'));
+  }
 
   ractive.close = () => {
     ractive.set('isOpen', false);

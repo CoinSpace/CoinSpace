@@ -8,7 +8,6 @@ function open(options, callback) {
   const {
     animation = true,
     header = translate('Enter Passphrase'),
-    backLabel = translate('Back'),
   } = options;
 
   const ractive = new Ractive({
@@ -16,7 +15,6 @@ function open(options, callback) {
     template: require('./index.ract'),
     data: {
       header,
-      backLabel,
       animation,
       isLoading: false,
       isOpen: false,

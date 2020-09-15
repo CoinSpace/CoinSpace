@@ -40,8 +40,11 @@ const config = merge(common, {
               },
             ]],
             parserOpts: {
-              plugins: ['dynamicImport'],
+              plugins: ['dynamicImport', 'objectRestSpread'],
             },
+            plugins: [
+              'transform-object-rest-spread',
+            ]
           },
         },
       },

@@ -17,6 +17,7 @@ window.initCSApp = function() {
   const denomination = require('lib/denomination');
   const moonpay = require('lib/moonpay');
   const { showError } = require('widgets/modals/flash');
+  const showTouchIdSetup = require('widgets/touch-id-setup');
 
   const { fadeIn } = require('lib/transitions/fade.js');
 
@@ -55,11 +56,6 @@ window.initCSApp = function() {
     htmlEl.classList.remove('prevent_scroll');
   });
 
-  emitter.once('auth-success', () => {
-    emitter.emit('wallet-opening', 'Synchronizing Wallet');
-    emitter.emit('db-init');
-  });
-
   emitter.on('auth-error', (err) => {
     if (err.status === 410 || err.status === 404) {
       CS.reset();
@@ -82,14 +78,29 @@ window.initCSApp = function() {
     // TODO implement
   });
 
-  emitter.once('wallet-ready', () => {
+  emitter.once('wallet-ready', (isRegistration) => {
     window.scrollTo(0, 0);
     emitter.emit('wallet-unblock');
     if (process.env.BUILD_TYPE === 'phonegap') window.Zendesk.setAnonymousIdentity();
     if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.styleLightContent();
     updateExchangeRates();
     moonpay.init();
-    auth.hide();
+
+    if (isRegistration) {
+      const touchIdSetupWidget = showTouchIdSetup({append: true});
+      touchIdSetupWidget.on('confirm', async () => {
+        try {
+          await CS.enableTouchId();
+        } catch (err) {
+          console.error(err);
+        }
+        touchIdSetupWidget.close();
+      });
+      setTimeout(() => auth.hide(), 300);
+    } else {
+      auth.hide();
+    }
+
     frame.show();
   });
 

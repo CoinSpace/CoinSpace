@@ -18,28 +18,29 @@ module.exports = function(el) {
   });
 
   ractive.on('reveal-passphrase-input', () => {
-    ractive.passphraseWidget = PassphraseWidget({ animation: false }, (passphrase) => {
-      CS.createWallet(passphrase)
-        .then(() => {
-          ractive.pinWidget = PinWidget({
-            header: translate('Set a PIN for quick access'),
-            headerLoading: translate('Setting PIN'),
-            append: true,
-          }, (pin) => {
-            CS.registerWallet(pin)
-              .then(() => {
-                emitter.emit('auth-success');
-              })
-              .catch(err => {
-                ractive.pinWidget.wrong();
-                emitter.emit('auth-error', err);
-              });
-          });
-          ractive.pinWidget.on('back', () => {
-            ractive.passphraseWidget.set('isLoading', false);
-          });
-        })
-        .catch(ractive.passphraseWidget.wrong);
+    ractive.passphraseWidget = PassphraseWidget({ animation: false }, async (passphrase) => {
+      try {
+        await CS.createWallet(passphrase);
+        ractive.pinWidget = PinWidget({
+          header: translate('Set a PIN for quick access'),
+          headerLoading: translate('Setting PIN'),
+          append: true,
+          async onPin(pin) {
+            try {
+              await CS.registerWallet(pin);
+              ractive.pinWidget.loadingWallet();
+            } catch (err) {
+              ractive.pinWidget.wrong();
+              emitter.emit('auth-error', err);
+            }
+          }
+        });
+        ractive.pinWidget.on('back', () => {
+          ractive.passphraseWidget.set('isLoading', false);
+        });
+      } catch (err) {
+        ractive.passphraseWidget.wrong(err);
+      }
     });
   });
 
@@ -47,40 +48,48 @@ module.exports = function(el) {
     ractive.pinWidget = PinWidget({
       backLabel: translate('Logout'),
       touchId: true,
-    }, (pin) => {
+      async onPin(pin) {
+        // TODO: migration
+        // if (CS.walletExistsDEPRECATED()) {
+        //   CS.openWalletWithPinDEPRECATED(pin, 'stub', (err) => {
+        //     if (err) {
+        //       ractive.pinWidget.wrong();
+        //       emitter.emit('auth-error', err);
+        //       return;
+        //     }
+        //     CS.migrateWallet(pin)
+        //       .then(() => {
+        //         emitter.emit('auth-success');
+        //         CS.deleteCredentialsDEPRECATED();
+        //         if (CS.getPinDEPRECATED()) {
+        //           CS.resetPinDEPRECATED();
+        //           emitter.emit('re-enable-touchid');
+        //         }
+        //       })
+        //       .catch(err => {
+        //         ractive.pinWidget.wrong();
+        //         emitter.emit('auth-error', err);
+        //       });
+        //   });
+        //   return;
+        // }
 
-      if (CS.walletExistsDEPRECATED()) {
-        CS.openWalletWithPinDEPRECATED(pin, 'stub', (err) => {
-          if (err) {
-            ractive.pinWidget.wrong();
-            emitter.emit('auth-error', err);
-            return;
-          }
-          CS.migrateWallet(pin)
-            .then(() => {
-              emitter.emit('auth-success');
-              CS.deleteCredentialsDEPRECATED();
-              if (CS.getPinDEPRECATED()) {
-                CS.resetPinDEPRECATED();
-                emitter.emit('re-enable-touchid');
-              }
-            })
-            .catch(err => {
-              ractive.pinWidget.wrong();
-              emitter.emit('auth-error', err);
-            });
-        });
-        return;
-      }
-
-      CS.loginWithPin(pin)
-        .then(() => {
-          emitter.emit('auth-success');
-        })
-        .catch(err => {
+        try {
+          await CS.loginWithPin(pin);
+          ractive.pinWidget.loadingWallet();
+        } catch (err) {
           ractive.pinWidget.wrong();
           emitter.emit('auth-error', err);
-        });
+        }
+      },
+      async onTouchId() {
+        try {
+          await CS.loginWithTouchId();
+          ractive.pinWidget.loadingWallet();
+        } catch (err) {
+          console.error(err);
+        }
+      }
     });
 
     ractive.pinWidget.fire('touch-id');

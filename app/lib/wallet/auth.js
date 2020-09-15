@@ -1,19 +1,7 @@
 'use strict';
 const request = require('lib/request');
-const db = require('lib/db');
+const details = require('lib/wallet/details');
 const { urlRoot } = window;
-
-function register(walletId, pin) {
-  return request({
-    jwt: false,
-    url: `${urlRoot}v2/register`,
-    method: 'post',
-    data: {
-      wallet: walletId,
-      pin,
-    },
-  });
-}
 
 // DEPRECATED
 function loginDEPRECATED(walletId, pin, callback) {
@@ -46,7 +34,7 @@ function remove() {
 }
 
 function setUsername(username) {
-  const userInfo = db.get('userInfo');
+  const userInfo = details.get('userInfo');
   const oldUsername = (userInfo.firstName || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
   const newUsername = (username || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
 
@@ -74,7 +62,6 @@ function postCredentials(endpoint, data, callback) {
 }
 
 module.exports = {
-  register,
   loginDEPRECATED,
   login,
   token,
