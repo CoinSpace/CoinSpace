@@ -25,7 +25,7 @@ function open(options) {
       isOpen: false,
     },
     oncomplete() {
-      this.set('isOpen', true);
+      setTimeout(() => this.set('isOpen', true), 1); // ios fix
     },
     onteardown() {
       this.set('isOpen', false);

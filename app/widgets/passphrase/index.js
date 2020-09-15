@@ -26,8 +26,10 @@ function open(options, callback) {
     },
     oncomplete() {
       const $passphrase = ractive.find('.js-passphrase-input');
-      $passphrase.focus();
-      this.set('isOpen', true);
+      if (process.env.BUILD_TYPE !== 'phonegap') {
+        $passphrase.focus();
+      }
+      setTimeout(() => this.set('isOpen', true), 1); // ios fix
     },
     onteardown() {
       this.set('isOpen', false);

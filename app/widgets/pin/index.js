@@ -41,7 +41,7 @@ function open(options) {
     oncomplete() {
       const $pinInput = ractive.find('.js-pin-input');
       if ($pinInput) $pinInput.focus();
-      this.set('isOpen', true);
+      setTimeout(() => this.set('isOpen', true), 1); // ios fix
     },
     onteardown() {
       this.set('isOpen', false);
