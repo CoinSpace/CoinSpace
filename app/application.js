@@ -96,7 +96,7 @@ window.initCSApp = function() {
         }
         touchIdSetupWidget.close();
       });
-      setTimeout(() => auth.hide(), 300);
+      touchIdSetupWidget.on('close', () => auth.hide());
     } else {
       auth.hide();
     }

@@ -37,6 +37,7 @@ function open(options) {
   });
 
   ractive.close = () => {
+    ractive.fire('close');
     ractive.set('isOpen', false);
     setTimeout(() => {
       ractive.teardown();

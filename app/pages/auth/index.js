@@ -35,6 +35,7 @@ module.exports = function(el, options) {
     const { passphraseWidget, pinWidget } = currentStep;
     if (passphraseWidget && !passphraseWidget.torndown) passphraseWidget.close();
     if (pinWidget && !pinWidget.torndown) pinWidget.close();
+    if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.styleLightContent();
   });
 
   emitter.on('change-auth-step', (step, data) => {
