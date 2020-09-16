@@ -32,20 +32,21 @@ function open(options) {
       description: '',
       pin: '',
       touchId: touchId && (legacyTouchIdIsAvailable || fidoTouchIdIsAvailable),
-      enter(number) {
-        const pin = this.get('pin');
-        if (pin.length === 4) return;
-        this.set('pin', pin + number);
-      },
+      enter,
     },
     oncomplete() {
-      const $pinInput = ractive.find('.js-pin-input');
-      if ($pinInput) $pinInput.focus();
+      ractive.find('.widget-pin').focus();
       setTimeout(() => this.set('isOpen', true), 1); // ios fix
     },
     onteardown() {
       this.set('isOpen', false);
     },
+  });
+
+  ractive.on('keyboard', (context) => {
+    const which = context.original.which || context.original.keyCode;
+    const number = which - 48;
+    enter(number);
   });
 
   ractive.observe('pin', (pin) => {
@@ -76,8 +77,7 @@ function open(options) {
         await showLegacyTouchId();
         ractive.set('pin', LS.getPin());
       } catch (err) {
-        const $pinInput = ractive.find('.js-pin-input');
-        if ($pinInput) $pinInput.focus();
+        // nothing
       }
     }
   });
@@ -92,11 +92,7 @@ function open(options) {
     ractive.set('isWrong', true);
     ractive.set('header', header);
     ractive.set('description', error && translate(error));
-    ractive.set('pin', '').then(() => {
-      const $pinInput = ractive.find('.js-pin-input');
-      if ($pinInput) $pinInput.blur();
-      if ($pinInput) $pinInput.focus();
-    });
+    ractive.set('pin', '');
     setTimeout(() => {
       ractive.set('isWrong', false);
     }, 700);
@@ -106,7 +102,7 @@ function open(options) {
     ractive.set('isLoading', true);
     ractive.set('header', translate('Synchronizing Wallet'));
     ractive.set('description', translate('This might take some time,') + '<br/>' + translate('please be patient.'));
-  }
+  };
 
   ractive.close = () => {
     ractive.set('isOpen', false);
@@ -114,6 +110,12 @@ function open(options) {
       ractive.teardown();
     }, 300);
   };
+
+  function enter(number) {
+    const pin = ractive.get('pin');
+    if (pin.length === 4) return;
+    ractive.set('pin', pin + number);
+  }
 
   return ractive;
 }

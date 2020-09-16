@@ -13,7 +13,7 @@ const makeKeyDefinition = function( code ) {
     node.addEventListener( 'keydown', keydownHandler = function( event ) {
       const which = event.which || event.keyCode;
 
-      if ( which === code ) {
+      if ( which === code || (code instanceof Array && code.indexOf(which) !== -1) ) {
         event.preventDefault();
 
         fire({
@@ -42,6 +42,8 @@ events.leftarrow = makeKeyDefinition(37);
 events.rightarrow = makeKeyDefinition(39);
 events.downarrow = makeKeyDefinition(40);
 events.uparrow = makeKeyDefinition(38);
+
+events.number = makeKeyDefinition([48, 49, 50, 51, 52, 53, 54, 55, 56, 57]);
 
 const { partials } = Ractive;
 

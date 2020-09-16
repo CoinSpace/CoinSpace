@@ -25,10 +25,6 @@ function open(options, callback) {
       },
     },
     oncomplete() {
-      const $passphrase = ractive.find('.js-passphrase-input');
-      if (process.env.BUILD_TYPE !== 'phonegap') {
-        $passphrase.focus();
-      }
       setTimeout(() => this.set('isOpen', true), 1); // ios fix
     },
     onteardown() {

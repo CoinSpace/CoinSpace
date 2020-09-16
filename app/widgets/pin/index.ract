@@ -1,4 +1,4 @@
-<div class="widget-pin" class-_open="isOpen">
+<div class="widget-pin" class-_open="isOpen" tabindex="-1" on-number="keyboard">
 
   <div class="_header">
     <div class="_top">
@@ -16,9 +16,6 @@
           <div class="_dot" class-_filled="pin.length > 1"></div>
           <div class="_dot" class-_filled="pin.length > 2"></div>
           <div class="_dot" class-_filled="pin.length > 3"></div>
-          {{#if BUILD_TYPE !== 'phonegap' }}
-          <input class="js-pin-input" type="text" maxlength="4" value={{pin}} autocorrect="off" autocapitalize="off" as-numbers />
-          {{/if}}
         </div>
       {{/if}}
       <div>{{{description}}}</div>
