@@ -1,79 +1,81 @@
 'use strict';
 const encryption = require('lib/encryption');
+const { getToken, setToken } = require('lib/token');
+const { localStorage } = window;
 
 function getEncryptedSeed(type) {
   if (type === 'public' || type === 'private') {
-    return window.localStorage.getItem(type);
+    return localStorage.getItem(type);
   }
   throw new Error('Wrong seed type');
 }
 
 function setEncryptedSeed(type, encryptedSeed) {
   if (type === 'public' || type === 'private') {
-    return window.localStorage.setItem(type, encryptedSeed);
+    return localStorage.setItem(type, encryptedSeed);
   }
   throw new Error('Wrong seed type');
 }
 
 function getId() {
-  return window.localStorage.getItem('id');
+  return localStorage.getItem('id');
 }
 
 function setId(id) {
-  window.localStorage.setItem('id', id);
+  localStorage.setItem('id', id);
 }
 
 function getPinKey() {
-  return window.localStorage.getItem('pinKey');
+  return localStorage.getItem('pinKey');
 }
 
 function setPinKey(pinKey) {
-  window.localStorage.setItem('pinKey', pinKey);
+  localStorage.setItem('pinKey', pinKey);
 }
 
 function getDetailsKey() {
-  return window.localStorage.getItem('detailsKey');
+  return localStorage.getItem('detailsKey');
 }
 
 function setDetailsKey(detailsKey) {
-  window.localStorage.setItem('detailsKey', detailsKey);
+  localStorage.setItem('detailsKey', detailsKey);
 }
 
 function getPublicKey(networkName, token) {
-  return encryption.decrypt(window.localStorage.getItem(`_cs_public_key_${networkName}`), token);
+  return encryption.decrypt(localStorage.getItem(`_cs_public_key_${networkName}`), token);
 }
 
 function setPublicKey(wallet, token) {
   const publicKey = encryption.encrypt(wallet.publicKey(), token);
-  window.localStorage.setItem(`_cs_public_key_${wallet.networkName}`, publicKey);
+  localStorage.setItem(`_cs_public_key_${wallet.networkName}`, publicKey);
 }
 
 // DEPRECATED
 function getCredentials() {
-  const credentials = window.localStorage.getItem('_cs_credentials');
+  const credentials = localStorage.getItem('_cs_credentials');
   return credentials ? JSON.parse(encryption.decrypt(credentials, 'seedCoinspace')) : null;
 }
 
 // DEPRECATED
 function deleteCredentialsLegacy() {
-  window.localStorage.removeItem('_cs_credentials');
+  localStorage.removeItem('_cs_credentials');
 }
 
 function getPin() {
-  const pin = window.localStorage.getItem('_pin_cs');
+  const pin = localStorage.getItem('_pin_cs');
   return pin ? encryption.decrypt(pin, 'pinCoinSpace') : null;
 }
 
 function setPin(pin) {
-  window.localStorage.setItem('_pin_cs', encryption.encrypt(pin, 'pinCoinSpace'));
+  localStorage.setItem('_pin_cs', encryption.encrypt(pin, 'pinCoinSpace'));
 }
 
 function isRegistered() {
-  return !!window.localStorage.getItem('id')
-    && !!window.localStorage.getItem('public')
-    && !!window.localStorage.getItem('private')
-    && !!window.localStorage.getItem('pinKey')
-    && !!window.localStorage.getItem('detailsKey');
+  return !!localStorage.getItem('id')
+    && !!localStorage.getItem('public')
+    && !!localStorage.getItem('private')
+    && !!localStorage.getItem('pinKey')
+    && !!localStorage.getItem('detailsKey');
 }
 
 function isRegisteredLegacy() {
@@ -81,30 +83,17 @@ function isRegisteredLegacy() {
 }
 
 function reset() {
-  window.localStorage.removeItem('id');
-  window.localStorage.removeItem('public');
-  window.localStorage.removeItem('private');
-  window.localStorage.removeItem('pinKey');
-  window.localStorage.removeItem('detailsKey');
-  window.localStorage.removeItem('_cs_public_key_bitcoin');
-  window.localStorage.removeItem('_cs_public_key_litecoin');
-  window.localStorage.removeItem('_cs_public_key_bitcoincash');
-  window.localStorage.removeItem('_cs_public_key_bitcoinsv');
-  window.localStorage.removeItem('_cs_public_key_dogecoin');
-  window.localStorage.removeItem('_cs_public_key_dash');
-  window.localStorage.removeItem('_cs_public_key_ethereum');
-  window.localStorage.removeItem('_cs_public_key_ripple');
-  window.localStorage.removeItem('_cs_public_key_stellar');
-  window.localStorage.removeItem('_cs_public_key_eos');
-  window.localStorage.removeItem('_cs_touchid_enabled');
+  const token = getToken();
+  localStorage.clear();
+  setToken(token);
 }
 
 function isFidoTouchIdEnabled() {
-  return !!window.localStorage.getItem('_cs_touchid_enabled');
+  return !!localStorage.getItem('_cs_touchid_enabled');
 }
 
 function setFidoTouchIdEnabled(value) {
-  return window.localStorage.setItem('_cs_touchid_enabled', value);
+  return localStorage.setItem('_cs_touchid_enabled', value);
 }
 
 module.exports = {

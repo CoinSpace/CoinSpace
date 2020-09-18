@@ -9,7 +9,6 @@ if (process.env.BUILD_TYPE === 'web') {
 window.initCSApp = async function() {
   const ticker = require('lib/ticker-api');
   const emitter = require('lib/emitter');
-  const CS = require('lib/wallet');
   const LS = require('lib/wallet/localStorage');
   const FastClick = require('fastclick');
   const initFrame = require('widgets/frame');
@@ -63,13 +62,13 @@ window.initCSApp = async function() {
 
   emitter.on('auth-error', (err) => {
     if (err.status === 410 || err.status === 404) {
-      CS.reset();
+      LS.reset();
       return location.reload();
     }
     if (err.status === 401) return;
     // Deprecated start
     if (err.message === 'user_deleted') {
-      CS.reset();
+      LS.reset();
       return location.reload();
     }
     if (err.message === 'auth_failed') return;

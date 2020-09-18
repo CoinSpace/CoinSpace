@@ -3,8 +3,7 @@
 const Ractive = require('lib/ractive');
 const showRemoveConfirmation = require('widgets/modals/confirm-remove');
 const addEthereumToken = require('widgets/modals/add-ethereum-token');
-const { setToken } = require('lib/token');
-const { getToken } = require('lib/token');
+const { getToken, setToken } = require('lib/token');
 const { initWallet } = require('lib/wallet');
 const emitter = require('lib/emitter');
 const details = require('lib/wallet/details');

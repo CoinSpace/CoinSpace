@@ -3,6 +3,7 @@
 const Ractive = require('widgets/modals/base');
 const { showError } = require('widgets/modals/flash');
 const CS = require('lib/wallet');
+const LS = require('lib/wallet/localStorage');
 
 function open() {
 
@@ -21,7 +22,7 @@ function open() {
     ractive.set('removing', true);
     CS.removeAccount()
       .then(() => {
-        CS.reset();
+        LS.reset();
         ractive.set('confirmation', false);
         ractive.set('success', true);
         setTimeout(() => {

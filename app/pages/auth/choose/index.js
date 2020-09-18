@@ -6,6 +6,7 @@ const PinWidget = require('widgets/pin');
 const PassphraseWidget = require('widgets/passphrase');
 const { translate } = require('lib/i18n');
 const CS = require('lib/wallet');
+const LS = require('lib/wallet/localStorage');
 
 module.exports = function(el) {
   const ractive = new Ractive({
@@ -99,7 +100,7 @@ module.exports = function(el) {
     ractive.pinWidget.fire('touch-id');
 
     ractive.pinWidget.on('back', () => {
-      CS.reset();
+      LS.reset();
       emitter.emit('change-auth-step', 'choose');
     });
   };

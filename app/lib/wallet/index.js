@@ -258,13 +258,6 @@ function getWallet() {
   return state.wallet;
 }
 
-function reset() {
-  LS.deleteCredentialsLegacy();
-  LS.reset();
-  emitter.emit('wallet-reset');
-  LS.setPin('');
-}
-
 function getDestinationInfo(to) {
   if (state.wallet.networkName === 'ripple' || state.wallet.networkName === 'stellar') {
     return state.wallet.getDestinationInfo(to);
@@ -313,7 +306,6 @@ module.exports = {
   removeAccount,
   setUsername,
   getWallet,
-  reset,
   sync,
   initWallet,
   validateSend,

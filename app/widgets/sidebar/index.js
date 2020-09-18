@@ -6,6 +6,7 @@ const initAccount = require('widgets/account-details');
 const importPrivateKey = require('widgets/modals/import-private-key');
 const exportPrivateKeys = require('widgets/modals/export-private-keys');
 const CS = require('lib/wallet');
+const LS = require('lib/wallet/localStorage');
 const showEosSetupAccount = require('widgets/modals/eos-setup-account');
 
 module.exports = function(el) {
@@ -24,7 +25,7 @@ module.exports = function(el) {
 
   ractive.on('logout', (context) => {
     context.original.preventDefault();
-    CS.reset();
+    LS.reset();
     location.reload();
   });
 
