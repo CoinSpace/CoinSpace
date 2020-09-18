@@ -9,12 +9,13 @@ if (process.env.BUILD_TYPE === 'web') {
 window.initCSApp = async function() {
   const ticker = require('lib/ticker-api');
   const emitter = require('lib/emitter');
+  emitter.setMaxListeners(15);
   const LS = require('lib/wallet/localStorage');
   const FastClick = require('fastclick');
   const initFrame = require('widgets/frame');
   const initAuth = require('pages/auth');
   const initGeoOverlay = require('widgets/geo-overlay');
-  const { getToken, setToken, getTokenNetwork } = require('lib/token');
+  const { getToken } = require('lib/token');
   const denomination = require('lib/denomination');
   const moonpay = require('lib/moonpay');
   const touchId = require('lib/touch-id');
@@ -65,9 +66,8 @@ window.initCSApp = async function() {
     return showError({ message: err.message });
   });
 
-  emitter.once('wallet-ready', (pin) => {
+  emitter.once('wallet-ready', ({ pin } ) => {
     window.scrollTo(0, 0);
-    emitter.emit('wallet-unblock');
     if (process.env.BUILD_TYPE === 'phonegap') window.Zendesk.setAnonymousIdentity();
     updateExchangeRates();
     moonpay.init();
@@ -80,20 +80,6 @@ window.initCSApp = async function() {
     }
 
     frame.show();
-  });
-
-  emitter.on('wallet-error', (err) => {
-    if (err && err.message === 'cs-node-error') {
-      emitter.emit('wallet-block');
-      showError({
-        message: "Can't connect to :network node. Please try again later or choose another token.",
-        interpolations: { network: getTokenNetwork() },
-      });
-    } else {
-      console.error(err);
-      setToken(getTokenNetwork()); // fix wrong tokens
-      showError({ message: err.message });
-    }
   });
 
   emitter.on('sync', () => {

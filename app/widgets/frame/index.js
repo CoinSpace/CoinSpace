@@ -11,6 +11,8 @@ const initReceive = require('pages/receive');
 const initExchange = require('pages/exchange');
 const initHistory = require('pages/history');
 const initTokens = require('pages/tokens');
+const { showError } = require('widgets/modals/flash');
+const { setToken, getTokenNetwork } = require('lib/token');
 const Hammer = require('hammerjs');
 
 module.exports = function(el) {
@@ -99,13 +101,23 @@ module.exports = function(el) {
     header.toggleIcon(open);
   });
 
-  emitter.on('wallet-block', () => {
-    emitter.emit('change-tab', 'tokens');
-    document.getElementsByTagName('html')[0].classList.add('blocked');
-  });
-
-  emitter.on('wallet-unblock', () => {
-    document.getElementsByTagName('html')[0].classList.remove('blocked');
+  emitter.on('wallet-ready', ({ err }) => {
+    if (err) {
+      if (err.message === 'cs-node-error') {
+        emitter.emit('change-tab', 'tokens');
+        document.getElementsByTagName('html')[0].classList.add('blocked');
+        showError({
+          message: "Can't connect to :network node. Please try again later or choose another token.",
+          interpolations: { network: getTokenNetwork() },
+        });
+      } else {
+        console.error(err);
+        setToken(getTokenNetwork()); // fix wrong tokens
+        showError({ message: err.message });
+      }
+    } else {
+      document.getElementsByTagName('html')[0].classList.remove('blocked');
+    }
   });
 
   return ractive;

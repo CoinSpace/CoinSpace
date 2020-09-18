@@ -184,10 +184,7 @@ function initWallet(pin) {
       }).catch(console.error);
     },
     done(err) {
-      if (err) {
-        return emitter.emit('wallet-error', err);
-      }
-      emitter.emit('wallet-ready', pin);
+      emitter.emit('wallet-ready', { pin, err });
     },
   });
 
