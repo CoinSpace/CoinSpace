@@ -26,8 +26,7 @@ function verifyReq(key, req) {
   try {
     const base = [
       req.method.toLowerCase(),
-      req.originalUrl,
-      req.get('Host') || '',
+      `${req.protocol}://${req.get('Host')}${req.originalUrl}`,
       req.get('X-Date') || '',
     ];
     if (req.bodyHash) {

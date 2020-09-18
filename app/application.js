@@ -1,14 +1,16 @@
 'use strict';
 
-window.urlRoot = process.env.SITE_URL;
-if (process.env.BUILD_TYPE !== 'phonegap' && process.env.BUILD_TYPE !== 'electron') {
-  window.urlRoot = '/' + window.urlRoot.split('/').slice(3).join('/');
+if (process.env.BUILD_TYPE === 'web') {
+  window.urlRoot = window.origin + '/api/';
+} else {
+  window.urlRoot = process.env.SITE_URL;
 }
 
-window.initCSApp = function() {
+window.initCSApp = async function() {
   const ticker = require('lib/ticker-api');
   const emitter = require('lib/emitter');
   const CS = require('lib/wallet');
+  const LS = require('lib/wallet/localStorage');
   const FastClick = require('fastclick');
   const initFrame = require('widgets/frame');
   const initAuth = require('pages/auth');
@@ -16,6 +18,7 @@ window.initCSApp = function() {
   const { getToken, setToken, getTokenNetwork } = require('lib/token');
   const denomination = require('lib/denomination');
   const moonpay = require('lib/moonpay');
+  const touchId = require('lib/touch-id');
   const { showError } = require('widgets/modals/flash');
   const showTouchIdSetup = require('widgets/touch-id-setup');
 
@@ -32,6 +35,8 @@ window.initCSApp = function() {
   }
   if (process.env.BUILD_TYPE === 'phonegap') navigator.splashscreen.hide();
 
+  await touchId.init();
+
   const frame = initFrame(appEl);
   let auth = null;
 
@@ -39,7 +44,7 @@ window.initCSApp = function() {
   FastClick.attach(document.body);
 
   initGeoOverlay(document.getElementById('geo-overlay'));
-  const userExists = (CS.walletRegistered() || CS.walletExistsDEPRECATED());
+  const userExists = (LS.isRegistered() || LS.isRegisteredLegacy());
   auth = initAuth(document.getElementById('auth'), { userExists });
   const authContentEl = document.getElementById('auth_frame');
   authContentEl.style.opacity = 0;
@@ -78,24 +83,15 @@ window.initCSApp = function() {
     // TODO implement
   });
 
-  emitter.once('wallet-ready', (isRegistration) => {
+  emitter.once('wallet-ready', (pin) => {
     window.scrollTo(0, 0);
     emitter.emit('wallet-unblock');
     if (process.env.BUILD_TYPE === 'phonegap') window.Zendesk.setAnonymousIdentity();
-    if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.styleLightContent();
     updateExchangeRates();
     moonpay.init();
 
-    if (isRegistration) {
-      const touchIdSetupWidget = showTouchIdSetup({append: true});
-      touchIdSetupWidget.on('confirm', async () => {
-        try {
-          await CS.enableTouchId();
-        } catch (err) {
-          console.error(err);
-        }
-        touchIdSetupWidget.close();
-      });
+    if (pin && touchId.isAvailable()) {
+      const touchIdSetupWidget = showTouchIdSetup({ append: true, pin });
       touchIdSetupWidget.on('close', () => auth.hide());
     } else {
       auth.hide();
@@ -144,6 +140,14 @@ window.initCSApp = function() {
       // eslint-disable-next-line no-undef
       SafariViewController.hide();
       if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.styleLightContent();
+      setTimeout(() => {
+        emitter.emit('handleOpenURL', url);
+      }, 1);
+    };
+  }
+
+  if (process.env.BUILD_TYPE === 'web') {
+    window.handleOpenURL = function(url) {
       setTimeout(() => {
         emitter.emit('handleOpenURL', url);
       }, 1);

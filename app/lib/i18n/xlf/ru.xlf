@@ -363,7 +363,7 @@
       </trans-unit>
       <trans-unit id="Scan your fingerprint please">
         <source>Scan your fingerprint please</source>
-        <target>Приложите палец, чтобы войти в приложение</target>
+        <target>Приложите свой палец, пожалуйста</target>
       </trans-unit>
       <trans-unit id="Enter PIN">
         <source>Enter PIN</source>

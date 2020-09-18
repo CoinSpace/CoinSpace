@@ -21,9 +21,9 @@ module.exports = function(el) {
   ractive.on('generate-phrase', async () => {
     ractive.set('isLoading', true);
     try {
-      const data = await CS.createWallet(null);
+      const { mnemonic } = await CS.createWallet(null);
       emitter.emit('change-auth-step', 'createPassphrase', {
-        passphrase: data.mnemonic,
+        passphrase: mnemonic,
       });
     } catch (err) {
       ractive.set('isLoading', false);

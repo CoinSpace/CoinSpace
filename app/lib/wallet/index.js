@@ -19,7 +19,7 @@ const EOSWallet = require('cs-eos-wallet');
 const { eddsa } = require('elliptic');
 const ec = new eddsa('ed25519');
 const security = require('./security');
-const { startAttestation, startAssertion } = require('@simplewebauthn/browser');
+const touchId = require('lib/touch-id');
 
 const convert = require('lib/convert');
 const {
@@ -60,7 +60,7 @@ function createWallet(passphrase) {
     };
     worker.onerror = function(event) {
       event.preventDefault();
-      reject(new Error(event.message.split(': ')[1]));
+      reject(new Error('Invalid passphrase'));
     };
     worker.postMessage(data);
   });
@@ -82,7 +82,7 @@ async function registerWallet(pin) {
   const pinHash = crypto.createHmac('sha256', Buffer.from(pinKey, 'hex')).update(pin).digest('hex');
   const detailsKey = crypto.createHmac('sha256', 'hello bro!').update(walletSeed).digest('hex');
   const { publicToken, privateToken } = await request({
-    url: '/api/v2/register',
+    url: `${urlRoot}v2/register`,
     method: 'post',
     data: {
       walletId: wallet.getPublic('hex'),
@@ -99,13 +99,13 @@ async function registerWallet(pin) {
   LS.setId(deviceId);
   LS.setDetailsKey(detailsKey);
   await Promise.all([details.init(), settings.init()]);
-  initWallet(true);
+  initWallet(pin);
 }
 
 async function loginWithPin(pin) {
   const pinHash = crypto.createHmac('sha256', Buffer.from(LS.getPinKey(), 'hex')).update(pin).digest('hex');
   const { publicToken } = await request({
-    url: `/api/v2/token/public/pin?id=${LS.getId()}`,
+    url: `${urlRoot}v2/token/public/pin?id=${LS.getId()}`,
     method: 'post',
     data: {
       pinHash,
@@ -116,70 +116,26 @@ async function loginWithPin(pin) {
   initWallet();
 }
 
-async function loginWithTouchId() {
-  const options = await request({
-    url: `/api/v2/token/public/platform?id=${LS.getId()}`,
-    method: 'get',
-  });
-  const assertion = await startAssertion(options);
-  const res = await request({
-    url: `/api/v2/token/public/platform?id=${LS.getId()}`,
-    method: 'post',
-    data: assertion,
-  });
-  seeds.unlock('public', res.publicToken);
-  await Promise.all([details.init(), settings.init()]);
-  initWallet();
-}
-
-async function enableTouchId() {
-  const options = await request({
-    url: `/api/v2/platform/attestation?id=${LS.getId()}`,
-    method: 'get',
-    seed: 'public',
-  });
-  const attestation = await startAttestation(options);
-  await request({
-    url: `/api/v2/platform/attestation?id=${LS.getId()}`,
-    method: 'post',
-    data: attestation,
-    seed: 'public',
-  });
-  LS.setTouchIdEnabled(true);
+async function loginWithTouchId(showSpinner) {
+  if (process.env.BUILD_TYPE === 'phonegap') {
+    await touchId.phonegap();
+    const pin = LS.getPin();
+    showSpinner();
+    return loginWithPin(pin);
+  } else {
+    const publicToken = await touchId.fido();
+    showSpinner();
+    seeds.unlock('public', publicToken);
+    await Promise.all([details.init(), settings.init()]);
+    initWallet();
+  }
 }
 
 async function loginWithFido() {
   // TODO implement
 }
 
-function removeAccount() {
-  return request({
-    url: `${urlRoot}v2/wallet?id=${LS.getId()}`,
-    method: 'delete',
-    seed: 'private',
-  });
-}
-
-function setUsername(username) {
-  const userInfo = details.get('userInfo');
-  const oldUsername = (userInfo.firstName || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
-  const newUsername = (username || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
-  if (newUsername === oldUsername) {
-    return Promise.resolve(userInfo.firstName);
-  }
-  return request({
-    url: `${urlRoot}v2/username?id=${LS.getId()}`,
-    method: 'put',
-    data: {
-      username: newUsername,
-    },
-    seed: 'public',
-  }).then((data) => {
-    return data.username;
-  });
-}
-
-function initWallet(isRegistration) {
+function initWallet(pin) {
   const networkName = getTokenNetwork();
   let token = getToken();
   if (!isValidWalletToken(token)) {
@@ -236,7 +192,7 @@ function initWallet(isRegistration) {
       if (err) {
         return emitter.emit('wallet-error', err);
       }
-      emitter.emit('wallet-ready', isRegistration);
+      emitter.emit('wallet-ready', pin);
     },
   });
 
@@ -258,6 +214,33 @@ function initWallet(isRegistration) {
   }
 }
 
+function removeAccount() {
+  return request({
+    url: `${urlRoot}v2/wallet?id=${LS.getId()}`,
+    method: 'delete',
+    seed: 'private',
+  });
+}
+
+function setUsername(username) {
+  const userInfo = details.get('userInfo');
+  const oldUsername = (userInfo.firstName || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
+  const newUsername = (username || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
+  if (newUsername === oldUsername) {
+    return Promise.resolve(userInfo.firstName);
+  }
+  return request({
+    url: `${urlRoot}v2/username?id=${LS.getId()}`,
+    method: 'put',
+    data: {
+      username: newUsername,
+    },
+    seed: 'public',
+  }).then((data) => {
+    return data.username;
+  });
+}
+
 function isValidWalletToken(token) {
   if (token && token.isDefault) return true;
   const walletTokens = details.get('walletTokens') || [];
@@ -275,19 +258,11 @@ function getWallet() {
   return state.wallet;
 }
 
-function getId() {
-  return state.id;
-}
-
-function walletRegistered() {
-  return LS.isRegistered();
-}
-
 function reset() {
-  LS.deleteCredentials();
+  LS.deleteCredentialsLegacy();
   LS.reset();
   emitter.emit('wallet-reset');
-  resetPinDEPRECATED();
+  LS.setPin('');
 }
 
 function getDestinationInfo(to) {
@@ -311,14 +286,14 @@ function setToAlias(data) {
 }
 
 // DEPRECATED
-function openWalletWithPinDEPRECATED(pin, network, done) {
+function loginWithPinLegacy(pin, done) {
   const credentials = LS.getCredentials();
   const { id } = credentials;
   const encryptedSeed = credentials.seed;
   auth.loginDEPRECATED(id, pin, (err, token) => {
     if (err) {
       if (err.message === 'user_deleted') {
-        LS.deleteCredentials();
+        LS.deleteCredentialsLegacy();
       }
       return done(err);
     }
@@ -327,48 +302,21 @@ function openWalletWithPinDEPRECATED(pin, network, done) {
   });
 }
 
-// DEPRECATED
-function walletExistsDEPRECATED() {
-  return !!LS.getCredentials();
-}
-
-// DEPRECATED
-function deleteCredentialsDEPRECATED() {
-  LS.deleteCredentials();
-}
-
-// DEPRECATED
-function getPinDEPRECATED() {
-  const pin = window.localStorage.getItem('_pin_cs');
-  return pin ? encryption.decrypt(pin, 'pinCoinSpace') : null;
-}
-// DEPRECATED
-function resetPinDEPRECATED() {
-  window.localStorage.removeItem('_pin_cs');
-}
-
 module.exports = {
-  openWalletWithPinDEPRECATED,
   createWallet,
   registerWallet,
   migrateWallet,
   loginWithPin,
+  loginWithPinLegacy,
   loginWithTouchId,
   loginWithFido,
   removeAccount,
   setUsername,
   getWallet,
-  getId,
-  walletExistsDEPRECATED,
-  deleteCredentialsDEPRECATED,
-  walletRegistered,
   reset,
   sync,
   initWallet,
   validateSend,
-  getPinDEPRECATED,
-  resetPinDEPRECATED,
   getDestinationInfo,
   setToAlias,
-  enableTouchId,
 };

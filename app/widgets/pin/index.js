@@ -2,8 +2,7 @@
 
 const Ractive = require('lib/ractive');
 const { translate } = require('lib/i18n');
-const LS = require('lib/wallet/localStorage');
-const showLegacyTouchId = require('lib/legacy-touch-id');
+const { isEnabled } = require('lib/touch-id');
 
 function open(options) {
   const {
@@ -15,9 +14,6 @@ function open(options) {
     touchId,
     append = false,
   } = options;
-  // eslint-disable-next-line max-len
-  const legacyTouchIdIsAvailable = LS.getPin() && !!LS.getCredentials() && window.legacyTouchIdIsAvailable;
-  const fidoTouchIdIsAvailable = LS.isTouchIdEnabled();
 
   const ractive = new Ractive({
     el: document.getElementById('general-purpose-overlay'),
@@ -31,7 +27,7 @@ function open(options) {
       isOpen: false,
       description: '',
       pin: '',
-      touchId: touchId && (legacyTouchIdIsAvailable || fidoTouchIdIsAvailable),
+      touchId: touchId && isEnabled(),
       enter,
     },
     oncomplete() {
@@ -52,9 +48,11 @@ function open(options) {
   ractive.observe('pin', (pin) => {
     pin = pin.trim();
     if (pin.length === 4) {
-      ractive.set('isLoading', true);
-      ractive.set('header', headerLoading);
-      onPin(pin);
+      setTimeout(() => {
+        ractive.set('isLoading', true);
+        ractive.set('header', headerLoading);
+        onPin(pin);
+      }, 300);
     }
   });
 
@@ -66,20 +64,9 @@ function open(options) {
   });
 
   ractive.on('touch-id', async () => {
+    if (!isEnabled()) return;
     if (ractive.get('isLoading')) return;
-
-    if (fidoTouchIdIsAvailable) {
-      return onTouchId();
-    }
-
-    if (legacyTouchIdIsAvailable) {
-      try {
-        await showLegacyTouchId();
-        ractive.set('pin', LS.getPin());
-      } catch (err) {
-        // nothing
-      }
-    }
+    return onTouchId();
   });
 
   ractive.on('back', () => {

@@ -55,14 +55,17 @@ function getCredentials() {
 }
 
 // DEPRECATED
-function deleteCredentials() {
+function deleteCredentialsLegacy() {
   window.localStorage.removeItem('_cs_credentials');
 }
 
-// DEPRECATED
 function getPin() {
   const pin = window.localStorage.getItem('_pin_cs');
   return pin ? encryption.decrypt(pin, 'pinCoinSpace') : null;
+}
+
+function setPin(pin) {
+  window.localStorage.setItem('_pin_cs', encryption.encrypt(pin, 'pinCoinSpace'));
 }
 
 function isRegistered() {
@@ -71,6 +74,10 @@ function isRegistered() {
     && !!window.localStorage.getItem('private')
     && !!window.localStorage.getItem('pinKey')
     && !!window.localStorage.getItem('detailsKey');
+}
+
+function isRegisteredLegacy() {
+  return !!getCredentials();
 }
 
 function reset() {
@@ -92,23 +99,25 @@ function reset() {
   window.localStorage.removeItem('_cs_touchid_enabled');
 }
 
-function isTouchIdEnabled() {
+function isFidoTouchIdEnabled() {
   return !!window.localStorage.getItem('_cs_touchid_enabled');
 }
 
-function setTouchIdEnabled(value) {
+function setFidoTouchIdEnabled(value) {
   return window.localStorage.setItem('_cs_touchid_enabled', value);
 }
 
 module.exports = {
   getCredentials, // DEPRECATED
-  getPin, // DEPRECATED
-  deleteCredentials, // DEPRECATED
+  deleteCredentialsLegacy, // DEPRECATED
+  getPin,
+  setPin,
 
   getEncryptedSeed,
   setEncryptedSeed,
 
   isRegistered,
+  isRegisteredLegacy,
   getId,
   setId,
   getPinKey,
@@ -118,6 +127,6 @@ module.exports = {
   getPublicKey,
   setPublicKey,
   reset,
-  isTouchIdEnabled,
-  setTouchIdEnabled
+  isFidoTouchIdEnabled,
+  setFidoTouchIdEnabled,
 };

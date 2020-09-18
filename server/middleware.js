@@ -11,9 +11,9 @@ const crypto = require('crypto');
 function init(app) {
 
   app.use(requireHTTPS);
+  app.set('trust proxy', true);
 
   if (isProduction()) {
-    app.set('trust proxy', true);
     app.use(helmet.xssFilter());
     app.use(helmet.noSniff());
     app.use(helmet.frameguard({ action: 'sameorigin' }));

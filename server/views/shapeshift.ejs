@@ -11,13 +11,14 @@
 <script>
   var accessToken = '<%= accessToken %>';
   var buildType = '<%= buildType %>';
+  var data = encodeURIComponent(JSON.stringify(accessToken));
   if (buildType === 'web') {
-    window.localStorage.setItem('_cs_shapeshift_token', accessToken);
+    window.opener.handleOpenURL('coinspace://?window=shapeshiftLogin&data=' + data);
     window.close();
   } else if (buildType === 'phonegap') {
-    window.location = 'coinspace://?action=shapeshift-login&accessToken=' + accessToken;
+    window.location = 'coinspace://?window=shapeshiftLogin&data=' + data;
   } else if (buildType === 'electron') {
-    window.location = 'coinspace://?action=shapeshift-login&accessToken=' + accessToken;
+    window.location = 'coinspace://?window=shapeshiftLogin&data=' + data;
   }
 </script>
 </body>

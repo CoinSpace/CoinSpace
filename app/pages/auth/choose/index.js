@@ -33,7 +33,7 @@ module.exports = function(el) {
               ractive.pinWidget.wrong();
               emitter.emit('auth-error', err);
             }
-          }
+          },
         });
         ractive.pinWidget.on('back', () => {
           ractive.passphraseWidget.set('isLoading', false);
@@ -50,8 +50,8 @@ module.exports = function(el) {
       touchId: true,
       async onPin(pin) {
         // TODO: migration
-        // if (CS.walletExistsDEPRECATED()) {
-        //   CS.openWalletWithPinDEPRECATED(pin, 'stub', (err) => {
+        // if (LS.isRegisteredLegacy()) {
+        //   CS.loginWithPinLegacy(pin, (err) => {
         //     if (err) {
         //       ractive.pinWidget.wrong();
         //       emitter.emit('auth-error', err);
@@ -60,9 +60,9 @@ module.exports = function(el) {
         //     CS.migrateWallet(pin)
         //       .then(() => {
         //         emitter.emit('auth-success');
-        //         CS.deleteCredentialsDEPRECATED();
-        //         if (CS.getPinDEPRECATED()) {
-        //           CS.resetPinDEPRECATED();
+        //         LS.deleteCredentialsLegacy();
+        //         if (LS.getPin()) {
+        //           LS.setPin('');
         //           emitter.emit('re-enable-touchid');
         //         }
         //       })
@@ -84,12 +84,16 @@ module.exports = function(el) {
       },
       async onTouchId() {
         try {
-          await CS.loginWithTouchId();
+          await CS.loginWithTouchId(() => {
+            ractive.pinWidget.set('isLoading', true);
+          });
           ractive.pinWidget.loadingWallet();
         } catch (err) {
-          console.error(err);
+          if (err.message === 'touch_id_error') return;
+          ractive.pinWidget.wrong();
+          emitter.emit('auth-error', err);
         }
-      }
+      },
     });
 
     ractive.pinWidget.fire('touch-id');

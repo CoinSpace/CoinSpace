@@ -7,19 +7,7 @@ const PRIORITY_SYMBOLS = ['BTC', 'BCH', 'BSV', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS'
 const emitter = require('lib/emitter');
 const Big = require('big.js');
 const { getId } = require('lib/wallet');
-
-let hasHandledMobileLogin = false;
-
-emitter.on('handleOpenURL', (url) => {
-  url = url || '';
-  const matchAction = url.match(/action=([^&]+)/);
-  if (!matchAction || matchAction[1] !== 'shapeshift-login') return;
-
-  const matchAccessToken = url.match(/accessToken=([^&]+)/);
-  const accessToken = matchAccessToken ? matchAccessToken[1] : '';
-  setAccessToken(accessToken);
-  hasHandledMobileLogin = true;
-});
+const windowExtra = require('lib/window-extra');
 
 emitter.on('wallet-reset', () => {
   cleanAccessToken();
@@ -29,40 +17,26 @@ function isLogged() {
   return !!getAccessToken();
 }
 
-function login() {
-  return new Promise((resolve, reject) => {
-    const width = 640;
-    const height = 720;
-    let options = 'width=' + width + ', ';
-    options += 'height=' + height + ', ';
-    options += 'left=' + ((screen.width - width) / 2) + ', ';
-    options += 'top=' + ((screen.height - height) / 2) + '';
-    const clientId = process.env.SHAPESHIFT_CLIENT_ID;
-    const redirectUri = process.env.SITE_URL + 'v1/shapeShiftRedirectUri?buildType=' + process.env.BUILD_TYPE;
-    cleanAccessToken();
-    // eslint-disable-next-line max-len
-    const url = urlAuthRoot + 'oauth/authorize?response_type=code&scope=users:read&client_id=' + clientId + '&redirect_uri=' + redirectUri;
-    const popup = window.open(url, '_blank', options);
-    // TODO rewrite to handle unload event in web and deep link in phonegap and electron
-    // TODO add reasonable timeout
-    const popupInterval = setInterval(() => {
-      // popout is undefined in electron
-      if ((popup && popup.closed) || hasHandledMobileLogin) {
-        clearInterval(popupInterval);
-        hasHandledMobileLogin = false;
-        if (popup && !popup.closed && popup.close) {
-          popup.close();
-        }
-        const token = getAccessToken();
-        if (!token) return reject(new Error('empty_token'));
-        if (token === 'is_not_verified') {
-          cleanAccessToken();
-          return reject(new Error('user_is_not_verified'));
-        }
-        return resolve();
-      }
-    }, 250);
+async function login() {
+  const clientId = process.env.SHAPESHIFT_CLIENT_ID;
+  const redirectUri = process.env.SITE_URL + 'v1/shapeShiftRedirectUri?buildType=' + process.env.BUILD_TYPE;
+  cleanAccessToken();
+  // eslint-disable-next-line max-len
+  const url = urlAuthRoot + 'oauth/authorize?response_type=code&scope=users:read&client_id=' + clientId + '&redirect_uri=' + redirectUri;
+
+  const accessToken = await windowExtra.open({
+    url,
+    name: 'shapeshiftLogin',
+    width: 640,
+    height: 720,
   });
+
+  if (!accessToken) throw new Error('empty_token');
+  if (accessToken === 'is_not_verified') {
+    cleanAccessToken();
+    throw new Error('user_is_not_verified');
+  }
+  setAccessToken(accessToken);
 }
 
 function logout() {

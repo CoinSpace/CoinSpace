@@ -34,36 +34,10 @@ async function onDeviceReady() {
     };
   });
 
-  try {
-    window.legacyTouchIdIsAvailable = await legacyTouchIdIsAvailable();
-  } catch (e) {
-    console.log('Oops!');
-  }
-
   return import(
     /* webpackChunkName: 'loader' */
     '../app/loader'
   );
-}
-
-async function legacyTouchIdIsAvailable() {
-  return new Promise((resolve) => {
-    if (process.env.BUILD_PLATFORM === 'ios') {
-      window.plugins.touchid.isAvailable(() => {
-        resolve(true);
-      }, () => {
-        resolve(false);
-      });
-    } else if (process.env.BUILD_PLATFORM === 'android') {
-      window.Fingerprint.isAvailable(() => {
-        resolve(true);
-      }, () => {
-        resolve(false);
-      });
-    }
-  }).catch(() => {
-    return false;
-  });
 }
 
 window.onShortcutEvent = function(event) {

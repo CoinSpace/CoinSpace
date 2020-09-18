@@ -3,6 +3,7 @@
 const Ractive = require('lib/ractive');
 const { translate } = require('lib/i18n');
 const os = require('lib/detect-os');
+const touchId = require('lib/touch-id');
 
 function open(options) {
   const {
@@ -11,6 +12,7 @@ function open(options) {
     description = getDescription(),
     buttonLabel = getButtonLabel(),
     append = false,
+    pin,
   } = options;
 
   const ractive = new Ractive({
@@ -33,6 +35,16 @@ function open(options) {
   });
 
   ractive.on('back', () => {
+    ractive.close();
+  });
+
+  ractive.on('confirm', async () => {
+    try {
+      await touchId.enable(pin);
+    } catch (err) {
+      if (err.message === 'touch_id_error') return;
+      return console.error(err);
+    }
     ractive.close();
   });
 
@@ -68,7 +80,7 @@ function getDescription() {
 }
 
 function getButtonLabel() {
-  let message = translate('Enable') + ' ';
+  const message = translate('Enable') + ' ';
   if (os === 'ios' || os === 'macos') {
     return message + translate('Touch ID');
   } else if (os === 'android') {

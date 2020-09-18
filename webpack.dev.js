@@ -22,6 +22,7 @@ module.exports = merge(common, {
     disableHostCheck: true,
     contentBase: false,
     hot: true,
+    host: '0.0.0.0',
     port: 8000,
     proxy: {
       '/api': {

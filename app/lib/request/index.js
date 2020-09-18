@@ -22,10 +22,9 @@ function makeRequest(config, callback) {
     const base = [
       config.method,
       config.url,
-      location.host,
       date,
     ];
-    if (config.method !== 'gets' && body) {
+    if (config.method !== 'get' && body) {
       base.push(crypto.createHash('sha256').update(body).digest().toString('hex'));
     }
     const signature = privateKey.sign(Buffer.from(base.join(' '))).toHex();
