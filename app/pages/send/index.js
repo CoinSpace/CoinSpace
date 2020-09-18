@@ -89,10 +89,9 @@ module.exports = function(el) {
 
   ractive.on('open-geo', ()=> {
     const data = {
-      overlay: 'geo',
       context: 'send',
     };
-    emitter.emit('open-overlay', data);
+    emitter.emit('open-geo-overlay', data);
   });
 
   emitter.on('sync', () => {

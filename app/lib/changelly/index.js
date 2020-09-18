@@ -1,7 +1,6 @@
 'use strict';
 
 const request = require('lib/request');
-const { getId } = require('lib/wallet');
 
 const { urlRoot } = window;
 
@@ -37,7 +36,6 @@ function createTransaction(options) {
     url: urlRoot + 'v1/changelly/createTransaction',
     method: 'post',
     data: {
-      id: getId(),
       from: options.fromSymbol,
       to: options.toSymbol,
       amount: options.fromAmount,

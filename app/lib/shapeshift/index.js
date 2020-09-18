@@ -5,7 +5,6 @@ const shapeshiftRoot = 'https://shapeshift.io/';
 const urlAuthRoot = 'https://auth.shapeshift.io/';
 const PRIORITY_SYMBOLS = ['BTC', 'BCH', 'BSV', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH'];
 const Big = require('big.js');
-const { getId } = require('lib/wallet');
 const windowExtra = require('lib/window-extra');
 
 function isLogged() {
@@ -40,7 +39,6 @@ function logout() {
     method: 'delete',
     data: {
       token: getAccessToken(),
-      id: getId(),
     },
   }).then(() => {
     cleanAccessToken();

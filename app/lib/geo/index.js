@@ -3,7 +3,7 @@
 const request = require('lib/request');
 const details = require('lib/wallet/details');
 const { getWallet } = require('lib/wallet');
-const { getId } = require('lib/wallet');
+const LS = require('lib/wallet/localStorage');
 const { getTokenNetwork } = require('lib/token');
 const { urlRoot } = window;
 let userInfo = {};
@@ -33,7 +33,7 @@ function remove() {
     url: urlRoot + 'v1/location',
     method: 'delete',
     data: {
-      id: getId(),
+      id: LS.getId(),
     },
   });
 }
@@ -72,7 +72,7 @@ function requestLocationEndpoint(network, method, callback) {
 
     const doc = details.get();
     userInfo = {};
-    userInfo.id = getId();
+    userInfo.id = LS.getId();
     userInfo.name = doc.userInfo.firstName;
     userInfo.email = doc.userInfo.email;
     userInfo.avatarIndex = doc.userInfo.avatarIndex;

@@ -62,7 +62,6 @@ module.exports = function(el) {
   ractive.on('open-geo', (context) => {
     const dataContext = context.node.getAttribute('data-context');
     const data = {
-      overlay: 'geo',
       context: dataContext,
     };
 
@@ -71,7 +70,7 @@ module.exports = function(el) {
     } else if (dataContext === 'changelly-to-address') {
       data.network = geo.networks[ractive.get('toSymbol')];
     }
-    emitter.emit('open-overlay', data);
+    emitter.emit('open-geo-overlay', data);
   });
 
   ractive.on('open-qr', (context) => {

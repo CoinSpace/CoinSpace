@@ -24,18 +24,16 @@ module.exports = function(el) {
     },
   });
 
-  emitter.on('open-overlay', (data) => {
-    if (data.overlay === 'geo') {
-      ractive.set('searching', true);
-      fadeIn(ractive.find('.js__fadeEl'), () => {
-        ractive.set({
-          context: data.context,
-          network: data.network,
-          search_message: 'Searching your area for other Coin users',
-        });
-        ractive.fire('search-nearby');
+  emitter.on('open-geo-overlay', (data) => {
+    ractive.set('searching', true);
+    fadeIn(ractive.find('.js__fadeEl'), () => {
+      ractive.set({
+        context: data.context,
+        network: data.network,
+        search_message: 'Searching your area for other Coin users',
       });
-    }
+      ractive.fire('search-nearby');
+    });
   });
 
   ractive.on('select', (context)=> {

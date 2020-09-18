@@ -24,7 +24,6 @@ window.initCSApp = async function() {
   const { fadeIn } = require('lib/transitions/fade.js');
 
   const appEl = document.getElementById('app');
-  const htmlEl = document.documentElement;
 
   if (process.env.BUILD_PLATFORM === 'ios') {
     window.StatusBar.styleDefault();
@@ -48,16 +47,6 @@ window.initCSApp = async function() {
   authContentEl.style.opacity = 0;
   fadeIn(authContentEl);
   auth.show();
-
-  emitter.on('open-overlay', () => {
-    appEl.classList.add('is_hidden');
-    htmlEl.classList.add('prevent_scroll');
-  });
-
-  emitter.on('close-overlay', () => {
-    appEl.classList.remove('is_hidden');
-    htmlEl.classList.remove('prevent_scroll');
-  });
 
   emitter.on('auth-error', (err) => {
     if (err.status === 410 || err.status === 404) {

@@ -92,10 +92,6 @@ html {
   overflow-y: scroll;
 
   -webkit-overflow-scrolling: touch;
-
-  &.prevent_scroll {
-    overflow-y: hidden;
-  }
 }
 
 body {
