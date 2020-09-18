@@ -43,8 +43,7 @@ window.initCSApp = async function() {
   FastClick.attach(document.body);
 
   initGeoOverlay(document.getElementById('geo-overlay'));
-  const userExists = (LS.isRegistered() || LS.isRegisteredLegacy());
-  auth = initAuth(document.getElementById('auth'), { userExists });
+  auth = initAuth(document.getElementById('auth'));
   const authContentEl = document.getElementById('auth_frame');
   authContentEl.style.opacity = 0;
   fadeIn(authContentEl);
@@ -75,11 +74,6 @@ window.initCSApp = async function() {
     // Deprecated end
     console.error(err);
     return showError({ message: err.message });
-  });
-
-  emitter.emit('re-enable-touchid', () => {
-    console.log('Suggest re-enable touchid');
-    // TODO implement
   });
 
   emitter.once('wallet-ready', (pin) => {

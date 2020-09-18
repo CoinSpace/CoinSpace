@@ -2,13 +2,13 @@
 
 const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
+const LS = require('lib/wallet/localStorage');
 const initChoose = require('./choose');
 const initCreate = require('./create');
 const initCreatePassphrase = require('./create-passphrase');
 const initCreatePassphraseConfirm = require('./create-passphrase-confirm');
-const { translate } = require('lib/i18n');
 
-module.exports = function(el, options) {
+module.exports = function(el) {
   const ractive = new Ractive({
     el,
     template: require('./index.ract'),
@@ -23,7 +23,7 @@ module.exports = function(el, options) {
   let currentStep = steps.choose;
 
   ractive.on('before-show', () => {
-    if (options.userExists) {
+    if ((LS.isRegistered() || LS.isRegisteredLegacy())) {
       steps.choose.showPin();
     } else {
       showStep(steps.choose);

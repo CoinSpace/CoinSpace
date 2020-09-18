@@ -6,7 +6,8 @@ const { randAvatarIndex } = require('lib/avatar');
 
 const request = require('lib/request');
 const { urlRoot } = window;
-const LS = require('lib/wallet/localStorage');
+const LS = require('./localStorage');
+const seeds = require('./seeds');
 
 const state = {
   details: null,
@@ -48,8 +49,8 @@ function set(key, value) {
     });
 }
 
-function _initDetails() {
-  const defaultValue = {
+async function _initDetails() {
+  let defaultValue = {
     systemInfo: { preferredCurrency: 'USD' },
     userInfo: {
       firstName: '',
@@ -58,6 +59,15 @@ function _initDetails() {
       avatarIndex: randAvatarIndex(),
     },
   };
+
+  if (LS.isRegisteredLegacy()) {
+    const legacy = await request({
+      url: `${urlRoot}v1/details?id=${LS.getCredentials().id}`,
+    });
+    if (legacy) {
+      defaultValue = JSON.parse(decrypt(legacy, seeds.get('private')));
+    }
+  }
   return _save(defaultValue);
 }
 

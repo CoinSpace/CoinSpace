@@ -3,7 +3,6 @@
 const Worker = require('worker-loader?inline&fallback=false!./worker.js');
 const worker = new Worker();
 
-const auth = require('./auth');
 const LS = require('./localStorage');
 const seeds = require('./seeds');
 const emitter = require('lib/emitter');
@@ -66,12 +65,6 @@ function createWallet(passphrase) {
   });
 }
 
-function migrateWallet(pin) {
-  // const key = crypto.randomBytes(32).toString('hex');
-  // walletDb.setKey(key);
-  return registerWallet(pin);
-}
-
 async function registerWallet(pin) {
   const pinKey = crypto.randomBytes(32).toString('hex');
   const walletSeed = seeds.get('private');
@@ -103,6 +96,9 @@ async function registerWallet(pin) {
 }
 
 async function loginWithPin(pin) {
+  if (LS.isRegisteredLegacy()) {
+    return migrateLegacyWallet(pin);
+  }
   const pinHash = crypto.createHmac('sha256', Buffer.from(LS.getPinKey(), 'hex')).update(pin).digest('hex');
   const { publicToken } = await request({
     url: `${urlRoot}v2/token/public/pin?id=${LS.getId()}`,
@@ -121,6 +117,9 @@ async function loginWithTouchId(showSpinner) {
     await touchId.phonegap();
     const pin = LS.getPin();
     showSpinner();
+    if (LS.isRegisteredLegacy()) {
+      return migrateLegacyWallet(pin);
+    }
     return loginWithPin(pin);
   } else {
     const publicToken = await touchId.fido();
@@ -129,10 +128,6 @@ async function loginWithTouchId(showSpinner) {
     await Promise.all([details.init(), settings.init()]);
     initWallet();
   }
-}
-
-async function loginWithFido() {
-  // TODO implement
 }
 
 function initWallet(pin) {
@@ -278,31 +273,30 @@ function setToAlias(data) {
   } catch (e) {}
 }
 
+async function migrateLegacyWallet(pin) {
+  await loginWithPinLegacy(pin);
+  await registerWallet(pin);
+  LS.deleteCredentialsLegacy();
+}
+
 // DEPRECATED
-function loginWithPinLegacy(pin, done) {
+async function loginWithPinLegacy(pin) {
   const credentials = LS.getCredentials();
   const { id } = credentials;
   const encryptedSeed = credentials.seed;
-  auth.loginDEPRECATED(id, pin, (err, token) => {
-    if (err) {
-      if (err.message === 'user_deleted') {
-        LS.deleteCredentialsLegacy();
-      }
-      return done(err);
-    }
-    seeds.set('private', encryption.decrypt(encryptedSeed, token));
-    done();
+  const token = await request({
+    url: `${urlRoot}v1/login`,
+    method: 'post',
+    data: { wallet_id: id, pin },
   });
+  seeds.set('private', encryption.decrypt(encryptedSeed, token));
 }
 
 module.exports = {
   createWallet,
   registerWallet,
-  migrateWallet,
   loginWithPin,
-  loginWithPinLegacy,
   loginWithTouchId,
-  loginWithFido,
   removeAccount,
   setUsername,
   getWallet,

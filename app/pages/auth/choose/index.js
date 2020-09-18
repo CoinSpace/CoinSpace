@@ -50,31 +50,6 @@ module.exports = function(el) {
       backLabel: translate('Logout'),
       touchId: true,
       async onPin(pin) {
-        // TODO: migration
-        // if (LS.isRegisteredLegacy()) {
-        //   CS.loginWithPinLegacy(pin, (err) => {
-        //     if (err) {
-        //       ractive.pinWidget.wrong();
-        //       emitter.emit('auth-error', err);
-        //       return;
-        //     }
-        //     CS.migrateWallet(pin)
-        //       .then(() => {
-        //         emitter.emit('auth-success');
-        //         LS.deleteCredentialsLegacy();
-        //         if (LS.getPin()) {
-        //           LS.setPin('');
-        //           emitter.emit('re-enable-touchid');
-        //         }
-        //       })
-        //       .catch(err => {
-        //         ractive.pinWidget.wrong();
-        //         emitter.emit('auth-error', err);
-        //       });
-        //   });
-        //   return;
-        // }
-
         try {
           await CS.loginWithPin(pin);
           ractive.pinWidget.loadingWallet();
