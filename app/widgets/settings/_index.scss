@@ -12,10 +12,9 @@
     border-bottom: #e2e2e2 1px solid;
     ._title {
       font-size: $header_font_size;
-      font-weight: normal;
+      white-space: nowrap;
       margin: 0 70px;
       text-align: center;
-      color: #34a2ff;
       display: block;
       line-height: 25px;
     }
@@ -24,17 +23,17 @@
       position: absolute;
       top: 12px;
       left: 10px;
-      color: #999;
+      color: #34a2ff;
       white-space: nowrap;
       line-height: 25px;
-      ._icon {
+      svg {
+        float: left;
         width: 25px;
         height: 25px;
-        display: inline-block;
-        vertical-align: top;
-        background: url('./assets/img/arrow-left.svg');
-        background-size: 25px 25px;
-        opacity: 0.6;
+        transform: rotate(90deg);
+        .svg-arrow {
+          fill: #34a2ff;
+        }
       }
     }
   }
@@ -70,14 +69,15 @@
         top: 50%;
         margin-top: -10px;
         color: #999;
-      }
-      ._arrow_right {
-        width: 20px;
-        height: 20px;
-        background: url('./assets/img/arrow-right.svg');
-        background-size: 20px 20px;
-        opacity: 0.6;
-        display: block;
+        svg {
+          float: left;
+          width: 20px;
+          height: 20px;
+          transform: rotate(-90deg);
+          .svg-arrow {
+            fill: #b6b6b6;
+          }
+        }
       }
       &._logout {
         @include clickbtn;

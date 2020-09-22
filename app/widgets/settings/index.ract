@@ -3,7 +3,7 @@
   <div class="_iphone_x"></div>
 
   <div class="_header">
-    <div class="_back" on-click="back"><span class="_icon"></span> {{translate("Back")}}</div>
+    <div class="_back" on-click="back">{{>svg_arrow}} {{translate("Back")}}</div>
     <span class="_title">{{translate("Settings")}}</span>
   </div>
 
@@ -11,7 +11,7 @@
     <div class="_list_item">
       <div class="_avatar" style-background-image="{{ avatar }}"></div>
       <div class="_label">{{translate("Your username")}}</div>
-      <div class="_value"><span class="_arrow_right"></span></div>
+      <div class="_value">{{>svg_arrow}}</div>
     </div>
   </div>
 
@@ -19,11 +19,11 @@
     <div class="_title">{{translate("Security")}}</div>
     <div class="_list_item">
       <div class="_label">{{translate("PIN & Touch ID")}}</div>
-      <div class="_value"><span class="_arrow_right"></span></div>
+      <div class="_value">{{>svg_arrow}}</div>
     </div>
     <div class="_list_item">
       <div class="_label">{{translate("Hardware Security")}}</div>
-      <div class="_value"><span class="_arrow_right"></span></div>
+      <div class="_value">{{>svg_arrow}}</div>
     </div>
   </div>
 
@@ -32,19 +32,19 @@
     {{#if isEOS}}
     <div class="_list_item" on-click="eos-setup-account">
       <div class="_label">{{translate("Setup EOS account")}}</div>
-      <div class="_value"><span class="_arrow_right"></span></div>
+      <div class="_value">{{>svg_arrow}}</div>
     </div>
     {{/if}}
     {{#if isEnabledImport}}
     <div class="_list_item" on-click="import-private-key">
       <div class="_label">{{translate("Transfer paper wallet / private key")}}</div>
-      <div class="_value"><span class="_arrow_right"></span></div>
+      <div class="_value">{{>svg_arrow}}</div>
     </div>
     {{/if}}
     {{#if isEnabledExport}}
     <div class="_list_item" on-click="export-private-keys">
       <div class="_label">{{translate("Export private keys")}}</div>
-      <div class="_value"><span class="_arrow_right"></span></div>
+      <div class="_value">{{>svg_arrow}}</div>
     </div>
     {{/if}}
   </div>
@@ -52,11 +52,11 @@
   <div class="_section">
     <div class="_list_item" on-click="support">
       <div class="_label">{{translate("Support")}}</div>
-      <div class="_value"><span class="_arrow_right"></span></div>
+      <div class="_value">{{>svg_arrow}}</div>
     </div>
     <div class="_list_item">
       <div class="_label">{{translate("About")}}</div>
-      <div class="_value"><span class="_arrow_right"></span></div>
+      <div class="_value">{{>svg_arrow}}</div>
     </div>
   </div>
 
