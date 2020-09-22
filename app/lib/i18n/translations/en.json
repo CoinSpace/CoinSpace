@@ -323,5 +323,10 @@
   "Enable": "Enable",
   "Use Touch ID in place of PIN.": "Use Touch ID in place of PIN.",
   "Use Fingerprint in place of PIN.": "Use Fingerprint in place of PIN.",
-  "Use Biometrics in place of PIN.": "Use Biometrics in place of PIN."
+  "Use Biometrics in place of PIN.": "Use Biometrics in place of PIN.",
+  "Settings": "Settings",
+  "Security": "Security",
+  "PIN & Touch ID": "PIN & Touch ID",
+  "Hardware Security": "Hardware Security",
+  "Tools": "Tools"
 }

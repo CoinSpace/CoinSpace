@@ -4,8 +4,7 @@ const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
 const initHeader = require('widgets/header');
 const initTabs = require('widgets/tabs');
-const initSidebar = require('widgets/sidebar');
-const initTerms = require('widgets/terms');
+const initSettings = require('widgets/settings');
 const initSend = require('pages/send');
 const initReceive = require('pages/receive');
 const initExchange = require('pages/exchange');
@@ -19,13 +18,24 @@ module.exports = function(el) {
   const ractive = new Ractive({
     el,
     template: require('./index.ract'),
+    data: {
+      isSettingsShown: false,
+    },
   });
 
   // widgets
   const header = initHeader(ractive.find('#header'));
+  header.on('show-settings', () => {
+    ractive.set('isSettingsShown', true);
+    window.scrollTo(0, 0);
+  });
+
+  const settings = initSettings(ractive.find('#settings'));
+  settings.on('back', () => {
+    ractive.set('isSettingsShown', false);
+  });
+
   initTabs(ractive.find('#tabs'));
-  initSidebar(ractive.find('#sidebar'));
-  initTerms(ractive.find('#terms'));
 
   // tabs
   const tabs = {
@@ -70,36 +80,11 @@ module.exports = function(el) {
     showPage(page);
   });
 
-  emitter.on('toggle-terms', (open) => {
-    const classes = ractive.find('#main').classList;
-    if (open) {
-      classes.add('terms-open');
-      classes.add('closed');
-    } else {
-      classes.remove('terms-open');
-      classes.remove('closed');
-    }
-  });
-
   function showPage(page) {
     currentPage.hide();
     page.show();
     currentPage = page;
   }
-
-  // menu toggle
-  emitter.on('toggle-menu', (open) => {
-    const classes = ractive.find('#main').classList;
-    if (open) {
-      ractive.set('sidebar_open', true);
-      classes.add('closed');
-    } else {
-      ractive.set('sidebar_open', false);
-      classes.remove('closed');
-    }
-
-    header.toggleIcon(open);
-  });
 
   emitter.on('wallet-ready', ({ err }) => {
     if (err) {

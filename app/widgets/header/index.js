@@ -18,7 +18,6 @@ module.exports = function(el) {
     template: require('./index.ract'),
     data: {
       toUnitString,
-      menuOpen: false,
       isSyncing: true,
       exchangeRates: {},
       currencies: [],
@@ -55,15 +54,6 @@ module.exports = function(el) {
     const balance = getWallet().getBalance();
     ractive.set('bitcoinBalance', balance);
   });
-
-  ractive.on('toggle', () => {
-    window.scrollTo(0, 0);
-    emitter.emit('toggle-menu', !ractive.get('menuOpen'));
-  });
-
-  function toggleIcon(open) {
-    ractive.set('menuOpen', open);
-  }
 
   ractive.on('sync-click', (context) => {
     context.original.preventDefault();
@@ -142,8 +132,6 @@ module.exports = function(el) {
         console.error(err);
       });
   }
-
-  ractive.toggleIcon = toggleIcon;
 
   return ractive;
 };

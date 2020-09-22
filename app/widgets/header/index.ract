@@ -1,54 +1,47 @@
-{{#menuOpen}}
-<div class="toggle_overlay" on-click="toggle"></div>
-{{/menuOpen}}
+<div class="widget-header">
+  <div class="header">
 
-<div class="header">
-
-  <div id="menu_btn" class="header__toggle {{#menuOpen}}is_open{{/menuOpen}}" on-click="toggle">
-    <span class="_icon">
-      {{^menuOpen}}
+    <div class="_settings" on-click="show-settings">
+      <span class="_icon">
         {{>svg_settings}}
-      {{/menuOpen}}
-      {{#menuOpen}}
-        {{>svg_close}}
-      {{/menuOpen}}
-    </span>
-  </div>
+      </span>
+    </div>
 
-  {{#if isSyncing}}
-    <div class="header__balance show">
-      <span class="_amount">...</span>
-    </div>
-  {{else}}
-    {{#if showFiat}}
-    <div class="header__balance" on-click="toggle-currencies">
-      <span class="_amount">{{bitcoinToFiat(bitcoinBalance, exchangeRates[selectedFiat])}}</span>
-      <span class="_currency">{{selectedFiat}}</span>
-    </div>
+    {{#if isSyncing}}
+      <div class="header__balance show">
+        <span class="_amount">...</span>
+      </div>
     {{else}}
-    <div class="header__balance" on-click="toggle-currencies">
-      <span class="_amount">{{cropBalance(toUnitString(bitcoinBalance))}}</span>
-      <span class="_currency">{{denomination}}</span>
-    </div>
+      {{#if showFiat}}
+      <div class="header__balance" on-click="toggle-currencies">
+        <span class="_amount">{{bitcoinToFiat(bitcoinBalance, exchangeRates[selectedFiat])}}</span>
+        <span class="_currency">{{selectedFiat}}</span>
+      </div>
+      {{else}}
+      <div class="header__balance" on-click="toggle-currencies">
+        <span class="_amount">{{cropBalance(toUnitString(bitcoinBalance))}}</span>
+        <span class="_currency">{{denomination}}</span>
+      </div>
+      {{/if}}
+
+      <div class="header__balance cross">×</div>
     {{/if}}
 
-    <div class="header__balance cross">×</div>
-  {{/if}}
+    <div class="header__currency" title="{{translate('Current coin price')}}">
+      {{bitcoinPrice(exchangeRates[selectedFiat])}} {{selectedFiat}}
+      <select value="{{selectedFiat}}">
+        {{#currencies}}
+          <option value="{{.}}">{{.}}</option>
+        {{/currencies}}
+      </select>
+    </div>
 
-  <div class="header__currency" title="{{translate("Current coin price")}}">
-    {{bitcoinPrice(exchangeRates[selectedFiat])}} {{selectedFiat}}
-    <select value="{{selectedFiat}}">
-      {{#currencies}}
-        <option value="{{.}}">{{.}}</option>
-      {{/currencies}}
-    </select>
-  </div>
+    <div class="header__refresh" on-click="sync-click">
+      <span id="refresh_el" class="_icon loading">
+        {{>svg_refresh}}
+      </span>
+    </div>
 
-  <div class="header__refresh" on-click="sync-click">
-    <span id="refresh_el" class="_icon loading">
-      {{>svg_refresh}}
-    </span>
   </div>
 
 </div>
-

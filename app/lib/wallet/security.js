@@ -6,6 +6,7 @@ const settings = require('lib/wallet/settings');
 const seeds = require('./seeds');
 const LS = require('./localStorage');
 const crypto = require('crypto');
+const { urlRoot } = window;
 
 function unlock(wallet) {
   return new Promise((resolve) => {
@@ -16,7 +17,7 @@ function unlock(wallet) {
         onPin(pin) {
           const pinHash = crypto.createHmac('sha256', Buffer.from(LS.getPinKey(), 'hex')).update(pin).digest('hex');
           return request({
-            url: `/api/v2/token/private/pin?id=${LS.getId()}`,
+            url: `${urlRoot}v2/token/private/pin?id=${LS.getId()}`,
             method: 'post',
             data: {
               pinHash,
@@ -30,11 +31,11 @@ function unlock(wallet) {
           }).catch(() => {
             pinWidget.wrong();
           });
-        }
+        },
       });
     } else {
       return request({
-        url: `/api/v2/token/private?id=${LS.getId()}`,
+        url: `${urlRoot}v2/token/private?id=${LS.getId()}`,
         method: 'get',
         seed: 'public',
       }).then(({ privateToken }) => {

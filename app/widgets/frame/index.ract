@@ -1,9 +1,8 @@
 <div class="frame">
 
-  <div id="sidebar" class="animate_in"></div>
-  <div id="terms" class="animate_in closed"></div>
+  <div id="settings" class-current="isSettingsShown"></div>
 
-  <div id="main" class="animate_in">
+  <div id="main" class-current="!isSettingsShown">
 
     <div class="main__iphone_x"></div>
 

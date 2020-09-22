@@ -33,15 +33,6 @@ module.exports = function(el) {
     highlightTab(ractive.find(tabElements[tab]));
   });
 
-  emitter.on('toggle-menu', (open) => {
-    const classes = ractive.el.classList;
-    if (open) {
-      classes.add('open');
-    } else {
-      classes.remove('open');
-    }
-  });
-
   ractive.on('select', (context)=> {
     context.original.preventDefault();
     emitter.emit('change-tab', context.node.dataset.tab);

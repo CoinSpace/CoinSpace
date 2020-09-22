@@ -1,119 +1,128 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  background-color: darken($brand-green, 30%);
-  color: white;
-
-  padding-left: 20px;
-  padding-right: 20px;
-
-  height: 97px;
-  position: relative;
-
-  @include breakpoint(iphone5) {
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-
-  @include breakpoint(portrait) {
-    padding-left: 30px;
-    padding-right: 30px;
-    height: 140px;
-  }
-}
-
-.litecoin {
+.widget-header {
   .header {
-    background-color: darken($silver, 30%);
-  }
-}
-.dogecoin {
-  .header {
-    background-color: darken($dogecoin, 30%);
-  }
-}
-.dash {
-  .header {
-    background-color: darken($dash, 30%);
-  }
-}
-.ethereum {
-  .header {
-    background-color: darken($ethereal, 30%);
-  }
-}
-.ripple {
-  .header {
-    background-color: darken($ripple, 30%);
-  }
-}
-.stellar {
-  .header {
-    background-color: darken($stellar, 30%);
-  }
-}
-.eos {
-  .header {
-    background-color: darken($eos, 15%);
-  }
-}
-.bitcoincash {
-  .header {
-    background-color: darken($bitcoincash, 30%);
-  }
-}
-.bitcoinsv {
-  .header {
-    background-color: darken($bitcoinsv, 30%);
-  }
-}
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-.header__balance {
-  @include clickbtn;
-  @extend .jigsaw-light;
-  display: flex;
-  justify-content: center;
-  margin-right: 10px;
-  margin-left: 10px;
-  width: 100%;
+    background-color: darken($brand-green, 30%);
+    color: white;
 
-  line-height: 1.5;
-  font-size: $large_font_size;
+    padding-left: 20px;
+    padding-right: 20px;
 
-  ._amount {
-    font-size: $large_font_size;
-  }
-  ._currency {
-    @extend .jigsaw-medium;
-    font-size: $small_font_size;
-    padding-top: 5px;
-    margin-left: 3px;
-  }
+    height: 97px;
+    position: relative;
 
-  @include breakpoint(portrait) {
-    font-size: $large_font_size--portrait;
-    ._amount {
-      font-size: $large_font_size--portrait;
+    @include breakpoint(iphone5) {
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+
+    @include breakpoint(portrait) {
+      padding-left: 30px;
+      padding-right: 30px;
+      height: 140px;
     }
   }
-}
-.header__balance.cross {
-  display: none;
-}
-.blocked {
-  .header__balance.cross, .header__balance.show {
-    display: flex;
-  }
+
   .header__balance {
+    @include clickbtn;
+    @extend .jigsaw-light;
+    display: flex;
+    justify-content: center;
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 100%;
+
+    line-height: 1.5;
+    font-size: $large_font_size;
+
+    ._amount {
+      font-size: $large_font_size;
+    }
+    ._currency {
+      @extend .jigsaw-medium;
+      font-size: $small_font_size;
+      padding-top: 5px;
+      margin-left: 3px;
+    }
+
+    @include breakpoint(portrait) {
+      font-size: $large_font_size--portrait;
+      ._amount {
+        font-size: $large_font_size--portrait;
+      }
+    }
+  }
+  .header__balance.cross {
     display: none;
+  }
+
+  .icon_atom {
+    @include clickbtn;
+    text-align: center;
+
+    ._icon {
+      display: block;
+      margin: 0 auto;
+
+      width: 25px;
+      height: 25px;
+
+      @include breakpoint(portrait) {
+        width: 35px;
+        height: 35px;
+      }
+    }
+  }
+
+  ._settings {
+    @extend .icon_atom;
+  }
+
+  .header__refresh {
+    @extend .icon_atom;
+    ._icon {
+      &.loading {
+        animation: infinite-spinning 1s linear infinite;
+      }
+    }
+
+    .svg-refresh {
+      fill: white;
+    }
+  }
+
+  .header__currency {
+    @include clickbtn;
+    position: absolute;
+    right: 20px;
+    bottom: 8px;
+    font-size: $small_font_size;
+
+    select {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+
+    @include breakpoint(iphone5) {
+      right: 14px;
+    }
+
+    @include breakpoint(portrait) {
+      right: 30px;
+      font-size: $base_font_size--portrait;
+    }
   }
 }
 
 // up to 15 decimals
 .ethereum, .ripple, .stellar {
-  .header__balance {
+  .widget-header .header__balance {
     @media (max-width: 450px) {
       ._amount {
         font-size: $header_font_size;
@@ -125,73 +134,39 @@
   }
 }
 
-.icon_atom {
-  @include clickbtn;
-  text-align: center;
-
-  ._icon {
-    display: block;
-    margin: 0 auto;
-
-    width: 25px;
-    height: 25px;
-
-    @include breakpoint(portrait) {
-      width: 35px;
-      height: 35px;
-    }
-  }
+.litecoin .widget-header .header {
+  background-color: darken($silver, 30%);
+}
+.dogecoin .widget-header .header {
+  background-color: darken($dogecoin, 30%);
+}
+.dash .widget-header .header {
+  background-color: darken($dash, 30%);
+}
+.ethereum .widget-header .header {
+  background-color: darken($ethereal, 30%);
+}
+.ripple .widget-header .header {
+  background-color: darken($ripple, 30%);
+}
+.stellar .widget-header .header {
+  background-color: darken($stellar, 30%);
+}
+.eos .widget-header .header {
+  background-color: darken($eos, 15%);
+}
+.bitcoincash .widget-header .header {
+  background-color: darken($bitcoincash, 30%);
+}
+.bitcoinsv .widget-header .header {
+  background-color: darken($bitcoinsv, 30%);
 }
 
-.header__toggle {
-  @extend .icon_atom;
-}
-
-.toggle_overlay {
-  cursor: pointer;
-  position: absolute;
-  z-index: 9000;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.header__refresh {
-  @extend .icon_atom;
-  ._icon {
-    &.loading {
-      animation: infinite-spinning 1s linear infinite;
-    }
+.blocked .widget-header {
+  .header__balance.cross, .header__balance.show {
+    display: flex;
   }
-
-  .svg-refresh {
-    fill: white;
-  }
-}
-
-.header__currency {
-  @include clickbtn;
-  position: absolute;
-  right: 20px;
-  bottom: 8px;
-  font-size: $small_font_size;
-
-  select {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-  }
-
-  @include breakpoint(iphone5) {
-    right: 14px;
-  }
-
-  @include breakpoint(portrait) {
-    right: 30px;
-    font-size: $base_font_size--portrait;
+  .header__balance {
+    display: none;
   }
 }

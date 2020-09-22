@@ -29,11 +29,9 @@
 @import "core_css/_app";
 
 // widgets
-@import "widgets/terms/_index";
 @import "widgets/frame/_index";
 @import "widgets/header/_index";
 @import "widgets/tabs/_index";
-@import "widgets/sidebar/_index";
 @import "widgets/birthdaypicker/_index";
 @import "widgets/filepicker/_index";
 @import "widgets/dropdown/_index";
@@ -57,6 +55,7 @@
 @import "widgets/pin/_index";
 @import "widgets/passphrase/_index";
 @import "widgets/touch-id-setup/_index";
+@import "widgets/settings/_index";
 
 // pages
 @import "pages/auth/_index";

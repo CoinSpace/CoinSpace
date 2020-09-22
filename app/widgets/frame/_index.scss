@@ -8,55 +8,23 @@
 }
 
 #main {
-  @include clear;
-  position: relative;
   background-color: $background;
-  flex: 1; // take up full width
+  flex: 1;
   min-width: 0;
 
-  transition: transform .3s, opacity 0.3s, margin 0s;
-  transform: translateX(0);
-  box-shadow: -5px 0px 15px 0px rgba(25,25,25,0.3);
-  -webkit-transition-delay: 0s, 0s, 0s;
-     -moz-transition-delay: 0s, 0s, 0s;
-      -ms-transition-delay: 0s, 0s, 0s;
-       -o-transition-delay: 0s, 0s, 0s;
-          transition-delay: 0s, 0s, 0s;
-
-  &.closed {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    transform: translateX(273px);
-    overflow: hidden;
-  }
-
-  &.terms-open {transform: translateX(0); opacity: 0; margin-left: 10000px;
-    -webkit-transition-delay: 0s, 0s, 0.3s;
-       -moz-transition-delay: 0s, 0s, 0.3s;
-        -ms-transition-delay: 0s, 0s, 0.3s;
-         -o-transition-delay: 0s, 0s, 0.3s;
-            transition-delay: 0s, 0s, 0.3s;
+  display: none;
+  &.current {
+    display: block;
   }
 
   .content {
-
     display: none;
     padding: 20px;
-
     &.current {
       display: block;
     }
     @include breakpoint(portrait) {
       padding: 40px;
-    }
-  }
-
-  @include breakpoint(portrait) {
-    &.closed {
-      transform: translateX(320px);
     }
   }
 }
@@ -65,114 +33,41 @@
   @include iphone-x-top;
   background-color: darken($brand-green, 30%);
 }
-.litecoin {
-  .main__iphone_x {
-    background-color: darken($silver, 30%);
-  }
+.litecoin .main__iphone_x {
+  background-color: darken($silver, 30%);
 }
-.dogecoin {
-  .main__iphone_x {
-    background-color: darken($dogecoin, 30%);
-  }
+.dogecoin .main__iphone_x {
+  background-color: darken($dogecoin, 30%);
 }
-.dash {
-  .main__iphone_x {
-    background-color: darken($dash, 30%);
-  }
+.dash .main__iphone_x {
+  background-color: darken($dash, 30%);
 }
-.ethereum {
-  .main__iphone_x {
-    background-color: darken($ethereal, 30%);
-  }
+.ethereum .main__iphone_x {
+  background-color: darken($ethereal, 30%);
 }
-.ripple {
-  .main__iphone_x {
-    background-color: darken($ripple, 30%);
-  }
+.ripple .main__iphone_x {
+  background-color: darken($ripple, 30%);
 }
-.stellar {
-  .main__iphone_x {
-    background-color: darken($stellar, 30%);
-  }
+.stellar .main__iphone_x {
+  background-color: darken($stellar, 30%);
 }
-.eos {
-  .main__iphone_x {
-    background-color: darken($eos, 15%);
-  }
+.eos .main__iphone_x {
+  background-color: darken($eos, 15%);
 }
-.bitcoincash {
-  .main__iphone_x {
-    background-color: darken($bitcoincash, 30%);
-  }
+.bitcoincash .main__iphone_x {
+  background-color: darken($bitcoincash, 30%);
 }
-.bitcoinsv {
-  .main__iphone_x {
-    background-color: darken($bitcoinsv, 30%);
-  }
+.bitcoinsv .main__iphone_x {
+  background-color: darken($bitcoinsv, 30%);
 }
 
-#sidebar {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  width: 273px;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
-
-  color: #333;
-  background-color: white;
-
-
-  transform: translateX(-100%);
-  transition: transform .3s ease;
-
-  &.animating {
-    position: fixed;
-    bottom: auto;
-  }
-
-  &.open {
-    transform: translateX(0);
-    position: relative;
-  }
-
-  @include breakpoint(portrait) {
-    width: 320px;
-  }
-}
-
-#terms {
-  @include clear;
-  position: relative;
-  background-color: #f2f2f2;
-  flex: 1; // take up full width
+#settings {
+  flex: 1;
   min-width: 0;
-  transition: transform .3s, opacity 0.3s, margin 0s;
-  transform: translateX(0);
-  box-shadow: -5px 0px 15px 0px rgba(25,25,25,0.3);
-  margin-top: -10000px;
-  opacity: 0;
+  background-color: #f2f2f2;
 
-  &.closed {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    transform: translateX(273px);
-    overflow: hidden;
-  }
-
-  &.terms-open {margin-top: 0; opacity: 1;}
-
-  @include breakpoint(portrait) {
-    &.closed {
-      transform: translateX(320px);
-    }
+  display: none;
+  &.current {
+    display: block;
   }
 }
