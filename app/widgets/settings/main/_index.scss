@@ -1,0 +1,32 @@
+.widget-settings-main {
+  ._section {
+    ._list_item {
+      &._logout {
+        @include clickbtn;
+        color: #ff3b30;
+        text-align: center;
+      }
+    }
+    &._account {
+      margin-top: 20px;
+      ._label {
+        line-height: 64px;
+        margin-left: 70px;
+        font-size: $header_font_size;
+      }
+      ._avatar {
+        position: absolute;
+        top: 50%;
+        margin-top: -32px;
+        margin-left: -4px;
+        width: 64px;
+        height: 64px;
+        background-repeat: no-repeat;
+        background-position: 50%;
+        background-size: 64px 64px;
+        -webkit-clip-path: circle(28px at center);
+        clip-path: circle(28px at center);
+      }
+    }
+  }
+}

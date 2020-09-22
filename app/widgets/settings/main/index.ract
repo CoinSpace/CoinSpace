@@ -1,0 +1,61 @@
+<div class="widget-settings-main">
+
+  <div class="_header">
+    <div class="_back" on-click="back">{{>svg_arrow}} {{translate("Back")}}</div>
+    <span class="_title">{{translate("Settings")}}</span>
+  </div>
+
+  <div class="_section _account">
+    <div class="_list_item _btn">
+      <div class="_avatar" style-background-image="{{ avatar }}"></div>
+      <div class="_label">{{translate("Your username")}}</div>
+      <div class="_arrow">{{>svg_arrow}}</div>
+    </div>
+  </div>
+
+  <div class="_section">
+    <div class="_title">{{translate("Security")}}</div>
+    <div class="_list_item _btn">
+      <div class="_label">{{translate("PIN & Touch ID")}}</div>
+      <div class="_arrow">{{>svg_arrow}}</div>
+    </div>
+  </div>
+
+  <div class="_section">
+    <div class="_title">{{translate("Tools")}}</div>
+    {{#if isEOS}}
+    <div class="_list_item _btn" on-click="eos-setup-account">
+      <div class="_label">{{translate("Setup EOS account")}}</div>
+      <div class="_arrow">{{>svg_arrow}}</div>
+    </div>
+    {{/if}}
+    {{#if isEnabledImport}}
+    <div class="_list_item _btn" on-click="import-private-key">
+      <div class="_label">{{translate("Transfer paper wallet / private key")}}</div>
+      <div class="_arrow">{{>svg_arrow}}</div>
+    </div>
+    {{/if}}
+    {{#if isEnabledExport}}
+    <div class="_list_item _btn" on-click="export-private-keys">
+      <div class="_label">{{translate("Export private keys")}}</div>
+      <div class="_arrow">{{>svg_arrow}}</div>
+    </div>
+    {{/if}}
+  </div>
+
+  <div class="_section">
+    <div class="_list_item _btn" on-click="support">
+      <div class="_label">{{translate("Support")}}</div>
+      <div class="_arrow">{{>svg_arrow}}</div>
+    </div>
+    <div class="_list_item _btn" on-click="about">
+      <div class="_label">{{translate("About")}}</div>
+      <div class="_arrow">{{>svg_arrow}}</div>
+    </div>
+  </div>
+
+  <div class="_section">
+    <div class="_list_item _btn _logout" on-click="logout">{{translate("Logout")}}</div>
+  </div>
+
+</div>

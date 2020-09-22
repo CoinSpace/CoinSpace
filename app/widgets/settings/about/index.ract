@@ -1,0 +1,25 @@
+<div class="widget-settings-about">
+  <div class="_header">
+    <div class="_back" on-click="back">{{>svg_arrow}} {{translate("Back")}}</div>
+    <span class="_title">{{translate("About")}}</span>
+  </div>
+
+  <div class="_section">
+    <div class="_title">{{translate("Release information")}}</div>
+    <div class="_list_item">
+      <div class="_label">{{translate("Version")}}</div>
+      <div class="_value">{{version}}</div>
+    </div>
+  </div>
+
+  <div class="_section">
+    <div class="_list_item _btn" on-click="terms">
+      <div class="_label">{{translate("Terms of Use")}}</div>
+      <div class="_arrow">{{>svg_arrow}}</div>
+    </div>
+    <div class="_list_item _btn" on-click="privacy">
+      <div class="_label">{{translate("Privacy Policy")}}</div>
+      <div class="_arrow">{{>svg_arrow}}</div>
+    </div>
+  </div>
+</div>

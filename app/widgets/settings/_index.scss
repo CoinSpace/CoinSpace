@@ -1,5 +1,12 @@
 .widget-settings {
 
+  .step {
+    display: none;
+    &.current {
+      display: block;
+    }
+  }
+
   ._iphone_x {
     @include iphone-x-top;
     background: #fff;
@@ -51,7 +58,9 @@
       outline: 0;
     }
     ._list_item {
-      @include clickbtn;
+      &._btn {
+        @include clickbtn;
+      }
       display: block;
       background: #fff;
       border-bottom: #e2e2e2 1px solid;
@@ -63,7 +72,7 @@
         @include ellipsis();
         margin-right: 20px;
       }
-      ._value {
+      ._arrow {
         position: absolute;
         right: 10px;
         top: 50%;
@@ -79,32 +88,9 @@
           }
         }
       }
-      &._logout {
-        @include clickbtn;
-        color: #ff3b30;
-        text-align: center;
-      }
-    }
-    &._account {
-      margin-top: 20px;
-      ._label {
-        line-height: 64px;
-        margin-left: 70px;
-        font-size: $header_font_size;
-      }
-      ._avatar {
-        position: absolute;
-        top: 50%;
-        margin-top: -32px;
-        margin-left: -4px;
-        width: 64px;
-        height: 64px;
-        background-repeat: no-repeat;
-        background-position: 50%;
-        background-size: 64px 64px;
-        -webkit-clip-path: circle(28px at center);
-        clip-path: circle(28px at center);
-      }
     }
   }
 }
+
+@import "./main/_index";
+@import "./about/_index";
