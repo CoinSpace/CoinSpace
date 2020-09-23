@@ -82,10 +82,7 @@ module.exports = function(el) {
     if (ractive.get('broadcasting')) {
       mectoOff();
     } else {
-      showSetDetails((err) => {
-        if (err) {
-          return showError({ message: 'Could not save your details' });
-        }
+      showSetDetails(() => {
         mectoOn();
       });
     }

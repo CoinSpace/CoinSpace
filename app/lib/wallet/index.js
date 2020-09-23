@@ -216,10 +216,10 @@ function removeAccount() {
 
 function setUsername(username) {
   const userInfo = details.get('userInfo');
-  const oldUsername = (userInfo.firstName || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
+  const oldUsername = (userInfo.username || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
   const newUsername = (username || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
   if (newUsername === oldUsername) {
-    return Promise.resolve(userInfo.firstName);
+    return Promise.resolve(userInfo.username);
   }
   return request({
     url: `${urlRoot}v2/username?id=${LS.getId()}`,

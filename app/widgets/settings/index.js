@@ -3,7 +3,9 @@
 const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
 const initMain = require('./main');
+const initAccount = require('./account');
 const initAbout = require('./about');
+const details = require('lib/wallet/details');
 
 module.exports = function(el) {
   const ractive = new Ractive({
@@ -13,13 +15,11 @@ module.exports = function(el) {
 
   const steps = {
     main: initMain(ractive.find('#widget-settings-main')),
+    account: initAccount(ractive.find('#widget-settings-account')),
     about: initAbout(ractive.find('#widget-settings-about')),
   };
   let currentStep = steps.main;
-
-  ractive.on('before-show', () => {
-    showStep(steps.main);
-  });
+  currentStep.show({ userInfo: details.get('userInfo') });
 
   ractive.on('before-hide', () => {
     ractive.set('isLoading', true);

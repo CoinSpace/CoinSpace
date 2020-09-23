@@ -2,7 +2,8 @@
 
   <div class="_iphone_x"></div>
 
-  <div id="widget-settings-main" class="step current"></div>
+  <div id="widget-settings-main" class="step"></div>
+  <div id="widget-settings-account" class="step"></div>
   <div id="widget-settings-about" class="step"></div>
 
 </div>

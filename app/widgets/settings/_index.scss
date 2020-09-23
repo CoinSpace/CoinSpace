@@ -1,6 +1,8 @@
 .widget-settings {
+  height: 100%;
 
   .step {
+    height: 100%;
     display: none;
     &.current {
       display: block;
@@ -51,7 +53,7 @@
     ._title {
       padding: 0 10px;
       text-transform: uppercase;
-      margin-bottom: 0.1em;
+      margin-bottom: 2px;
       letter-spacing: 1px;
       font-size: $small_font_size;
       color: #555;
@@ -93,4 +95,5 @@
 }
 
 @import "./main/_index";
+@import "./account/_index";
 @import "./about/_index";

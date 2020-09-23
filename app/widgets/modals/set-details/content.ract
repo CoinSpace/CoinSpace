@@ -9,15 +9,14 @@
     <div class="set-details__field">
       <label class="_label">
         {{translate("Your username")}}
-        <input id="set-details-name" class="_input" type="text" maxlength="63" value="{{name}}" on-enter='submit-details' />
+        <input id="set-details-name" class="_input" type="text" maxlength="63" value="{{username}}" on-enter='submit-details' />
       </label>
     </div>
 
-    {{^submitting}}
-      <div class="csbtn" on-click="submit-details">{{translate("Save")}}</div>
-    {{/submitting}}
-    {{#submitting}}
+    {{#if isLoading}}
       <div class="csbtn--loading">{{translate("Save")}}...</div>
-    {{/submitting}}
+    {{else}}
+      <div class="csbtn" on-click="submit-details">{{translate("Save")}}</div>
+    {{/if}}
   </div>
 </div>

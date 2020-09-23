@@ -1,0 +1,41 @@
+<div class="widget-settings-account">
+  <div class="_header">
+    <div class="_back" on-click="back">{{>svg_arrow}} {{translate("Back")}}</div>
+    <span class="_title">{{translate("Settings")}}</span>
+  </div>
+
+  <div class="_content">
+
+    <div class="_form">
+      <div class="_input_group">
+        <label class="_label">{{translate("Your username")}}
+          <input class="_input" type="text" maxlength="63" value="{{username}}" autocorrect="off" autocapitalize="off" />
+        </label>
+      </div>
+
+      <div class="_input_group">
+        <label class="_label">{{translate("Gravatar email")}}
+          <input class="_input" type="email" value="{{email}}" on-enter="save" autocorrect="off" autocapitalize="off" />
+        </label>
+        <span class="_help" on-click="help-gravatar">
+          {{>svg_help}}
+        </span>
+      </div>
+
+      <div class="_btn_group">
+        {{#if isLoading}}
+        <div class="csbtn--loading">
+          <span class="_icon">
+            {{>svg_refresh}}
+          </span>
+        </div>
+        {{else}}
+        <div class="csbtn" on-click="save">{{translate("Save")}}</div>
+        {{/if}}
+        <div class="csbtn--red" on-click="remove">{{translate("Remove account")}}</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

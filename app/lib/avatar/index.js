@@ -24,7 +24,7 @@ function emailToAvatar(email) {
   return [
     'https://www.gravatar.com/avatar/',
     crypto.createHash('md5').update(email).digest('hex'),
-    '?size=200',
+    '?size=64',
   ].join('');
 }
 

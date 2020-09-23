@@ -47,7 +47,7 @@ function setUsername(walletId, username) {
     .next().then((user) => {
       if (!user) return Promise.reject({ error: 'error getting doc' });
 
-      username = username.toLowerCase().replace(/[^a-z0-9-]/g, '');
+      username = username.toLowerCase().replace(/[^a-z0-9-]/g, '').substr(0, 63);
       const usernameSha = crypto.createHash('sha1')
         .update(username + process.env.USERNAME_SALT)
         .digest('hex');

@@ -2,82 +2,51 @@
 
 const Ractive = require('widgets/modals/base');
 const details = require('lib/wallet/details');
-const emitter = require('lib/emitter');
 const { showError } = require('widgets/modals/flash');
 const CS = require('lib/wallet');
 
-function fetchDetails(callback) {
+function open(callback) {
   const userInfo = details.get('userInfo');
-  const name = userInfo.firstName;
-  if (name && name !== '') {
-    return callback();
-  }
+  if (userInfo.username && userInfo.username !== '') return callback();
 
-  openModal({
-    name,
-    email: userInfo.email,
-    callback,
-  });
-}
-
-function openModal(data) {
   const ractive = new Ractive({
     partials: {
       content: require('./content.ract'),
     },
+    data: {
+      username: '',
+      isLoading: false,
+    },
   });
-
-  const $nameEl = ractive.find('#set-details-name');
-
-  $nameEl.onkeypress = function(e) {
-    e = e || window.event;
-    const charCode = e.keyCode || e.which;
-    const charStr = String.fromCharCode(charCode);
-    if (!charStr.match(/^[a-zA-Z0-9-]+$/)) {
-      return false;
-    }
-  };
 
   ractive.on('close', () => {
     ractive.fire('cancel');
   });
 
-  ractive.on('submit-details', () =>{
-    const details = {
-      firstName: ractive.get('name') + '',
-      email: ractive.get('email'),
-    };
-
-    if (!details.firstName || details.firstName.trim() === 'undefined') {
-      return showError({ message: "Without a name, the payer would not be able to identify you on Mecto." });
+  ractive.on('submit-details', async () => {
+    const username = ractive.get('username').trim();
+    if (!username) {
+      return showError({ message: 'Without a name, the payer would not be able to identify you on Mecto.' });
     }
 
-    ractive.set('submitting', true);
-
-    CS.setUsername(details.firstName)
-      .then((username) => {
-        details.firstName = username;
-
-        details.set('userInfo', details)
-          .then(() => {
-            ractive.fire('cancel');
-            ractive.set('submitting', false);
-            emitter.emit('details-updated', details);
-            data.callback();
-          })
-          .catch(data.callback);
-      })
-      .catch((err) => {
-        ractive.set('submitting', false);
-        if (err.status === 400) {
-          return showError({ message: "Username not available" });
-        }
-        return console.error(err);
-      });
+    ractive.set('isLoading', true);
+    try {
+      const safeUsername = await CS.setUsername(username);
+      await details.set('userInfo', { username: safeUsername });
+      ractive.fire('cancel');
+      callback();
+    } catch (err) {
+      if (err.status === 400) {
+        showError({ message: 'Username not available' });
+      } else {
+        showError({ message: 'Could not save your details' });
+      }
+    }
+    ractive.set('isLoading', false);
   });
 
   return ractive;
 }
 
-module.exports = fetchDetails;
+module.exports = open;
 

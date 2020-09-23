@@ -4,12 +4,12 @@ const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
 const initHeader = require('widgets/header');
 const initTabs = require('widgets/tabs');
-const initSettings = require('widgets/settings');
 const initSend = require('pages/send');
 const initReceive = require('pages/receive');
 const initExchange = require('pages/exchange');
 const initHistory = require('pages/history');
 const initTokens = require('pages/tokens');
+const showSettings = require('widgets/settings');
 const { showError } = require('widgets/modals/flash');
 const { setToken, getTokenNetwork } = require('lib/token');
 const Hammer = require('hammerjs');
@@ -27,12 +27,12 @@ module.exports = function(el) {
   const header = initHeader(ractive.find('#header'));
   header.on('show-settings', () => {
     ractive.set('isSettingsShown', true);
-    window.scrollTo(0, 0);
-  });
+    const settings = showSettings(ractive.find('#settings'));
+    settings.on('back', () => {
+      ractive.set('isSettingsShown', false);
+    });
 
-  const settings = initSettings(ractive.find('#settings'));
-  settings.on('back', () => {
-    ractive.set('isSettingsShown', false);
+    window.scrollTo(0, 0);
   });
 
   initTabs(ractive.find('#tabs'));

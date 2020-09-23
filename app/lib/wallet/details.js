@@ -53,8 +53,7 @@ async function _initDetails() {
   let defaultValue = {
     systemInfo: { preferredCurrency: 'USD' },
     userInfo: {
-      firstName: '',
-      lastName: '',
+      username: '',
       email: '',
       avatarIndex: randAvatarIndex(),
     },
@@ -66,6 +65,7 @@ async function _initDetails() {
     });
     if (legacy) {
       defaultValue = JSON.parse(decrypt(legacy, seeds.get('private')));
+      if (defaultValue.userInfo.firstName) defaultValue.userInfo.username = defaultValue.userInfo.firstName;
     }
   }
   return _save(defaultValue);

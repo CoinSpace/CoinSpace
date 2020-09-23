@@ -6,9 +6,9 @@
   </div>
 
   <div class="_section _account">
-    <div class="_list_item _btn">
+    <div class="_list_item _btn" on-click="account">
       <div class="_avatar" style-background-image="{{ avatar }}"></div>
-      <div class="_label">{{translate("Your username")}}</div>
+      <div class="_label">{{ username }}</div>
       <div class="_arrow">{{>svg_arrow}}</div>
     </div>
   </div>

@@ -8,13 +8,15 @@ const CS = require('lib/wallet');
 const importPrivateKey = require('widgets/modals/import-private-key');
 const exportPrivateKeys = require('widgets/modals/export-private-keys');
 const showEosSetupAccount = require('widgets/modals/eos-setup-account');
+const { translate } = require('lib/i18n');
 
 module.exports = function(el) {
   const ractive = new Ractive({
     el,
     template: require('./index.ract'),
     data: {
-      avatar: `url('${Avatar.getAvatarByIndex(3)}')`,
+      avatar: '',
+      username: '',
       isEnabledImport: true,
       isEnabledExport: true,
       isEOS: false,
@@ -33,6 +35,18 @@ module.exports = function(el) {
     } else {
       ractive.set('isEnabledImport', true);
       ractive.set('isEnabledExport', true);
+    }
+  });
+
+  ractive.on('account', () => {
+    emitter.emit('change-widget-settings-step', 'account');
+  });
+
+  ractive.on('before-show', ({ userInfo }) => {
+    if (userInfo) {
+      const avatar = Avatar.getAvatar(userInfo.email, userInfo.avatarIndex);
+      ractive.set('avatar', `url('${avatar}')`);
+      ractive.set('username', userInfo.username || translate('Your username'));
     }
   });
 

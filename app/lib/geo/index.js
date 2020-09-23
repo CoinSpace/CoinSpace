@@ -30,7 +30,7 @@ function search(network, callback) {
 
 function remove() {
   request({
-    url: urlRoot + 'v1/location',
+    url: urlRoot + 'v2/location',
     method: 'delete',
     data: {
       id: LS.getId(),
@@ -73,7 +73,7 @@ function requestLocationEndpoint(network, method, callback) {
     const doc = details.get();
     userInfo = {};
     userInfo.id = LS.getId();
-    userInfo.name = doc.userInfo.firstName;
+    userInfo.name = doc.userInfo.username;
     userInfo.email = doc.userInfo.email;
     userInfo.avatarIndex = doc.userInfo.avatarIndex;
     userInfo.address = getWallet().getNextAddress();
@@ -82,7 +82,7 @@ function requestLocationEndpoint(network, method, callback) {
     userInfo.lon = lon;
 
     request({
-      url: urlRoot + 'v1/location',
+      url: urlRoot + 'v2/location',
       method,
       data: userInfo,
     }, callback);
