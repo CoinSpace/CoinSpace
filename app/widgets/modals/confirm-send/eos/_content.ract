@@ -25,15 +25,15 @@
     </div>
 
     <div class="confirm__inputs">
-      <div class="_cancel">{{translate("Cancel")}}</div>
+      <div class="csbtn--grey _cancel">{{translate("Cancel")}}</div>
       {{#if sending}}
-        <div class="_send--sending">
+        <div class="csbtn--loading">
           <span class="_icon">
             {{>svg_refresh}}
           </span>
         </div>
       {{else}}
-        <div class="_send" on-click="send">{{translate("Send")}}</div>
+        <div class="csbtn" on-click="send">{{translate("Send")}}</div>
       {{/if}}
     </div>
 

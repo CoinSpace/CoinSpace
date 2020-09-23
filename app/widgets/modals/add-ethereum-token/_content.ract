@@ -59,18 +59,18 @@
       </div>
 
       <div class="_inputs">
-        <div class="_cancel">{{translate("Cancel")}}</div>
+        <div class="csbtn--grey _cancel">{{translate("Cancel")}}</div>
         {{#if isLoading}}
-          <div class="_add--processing">
+          <div class="csbtn--loading">
             <span class="_icon">
               {{>svg_refresh}}
             </span>
           </div>
         {{else}}
           {{#if token !== '-1'}}
-          <div class="_add" on-click="add">{{translate("Add")}}</div>
+          <div class="csbtn" on-click="add">{{translate("Add")}}</div>
           {{else}}
-          <div class="_add _disabled">{{translate("Add")}}</div>
+          <div class="csbtn _disabled">{{translate("Add")}}</div>
           {{/if}}
         {{/if}}
       </div>

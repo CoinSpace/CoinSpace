@@ -22,18 +22,18 @@
     </div>
 
     <div class="_confirm_btn_group">
-      <div class="_cancel">{{translate("Cancel")}}</div>
+      <div class="csbtn--grey _cancel">{{translate("Cancel")}}</div>
       {{#if isLoading}}
-        <div class="_loading">
+        <div class="csbtn--loading">
           <span class="_icon">
             {{>svg_refresh}}
           </span>
         </div>
       {{else}}
         {{#if paymentMethod.type === 'applePay'}}
-          <div class="_confirm apple-pay-button" on-click="confirm"></div>
+          <div class="csbtn apple-pay-button" on-click="confirm"></div>
         {{else}}
-          <div class="_confirm" on-click="confirm">{{translate("Confirm")}}</div>
+          <div class="csbtn" on-click="confirm">{{translate("Confirm")}}</div>
         {{/if}}
       {{/if}}
     </div>
@@ -53,15 +53,15 @@
     </div>
 
     <div class="_confirm_btn_group">
-      <div class="_cancel">{{translate("Cancel")}}</div>
+      <div class="csbtn--grey _cancel">{{translate("Cancel")}}</div>
       {{#if isLoading}}
-        <div class="_loading">
+        <div class="csbtn--loading">
           <span class="_icon">
             {{>svg_refresh}}
           </span>
         </div>
       {{else}}
-        <div class="_confirm" on-click="threedsecure()">{{translate("Continue")}}</div>
+        <div class="csbtn" on-click="threedsecure()">{{translate("Continue")}}</div>
       {{/if}}
     </div>
 
@@ -118,7 +118,7 @@
     </div>
 
     <div class="_confirm_btn_group">
-      <div class="_cancel _single">{{translate("Close")}}</div>
+      <div class="csbtn--grey _cancel _single">{{translate("Close")}}</div>
     </div>
   </div>
   {{/if}}
@@ -133,7 +133,7 @@
       <p class="_message">{{translate("Your transaction will appear in your history tab shortly.")}}</p>
     </div>
     <div class="_confirm_btn_group">
-      <div class="_cancel _single">{{translate("Close")}}</div>
+      <div class="csbtn--grey _cancel _single">{{translate("Close")}}</div>
     </div>
   </div>
   {{/if}}

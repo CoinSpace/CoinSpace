@@ -1,19 +1,19 @@
 {{#if isSupportedMoonpayBuy}}
-  <div on-click="moonpay-buy" class="_btn">
+  <div on-click="moonpay-buy" class="csbtn">
     {{translate("Buy")}} {{crypto}}
   </div>
 {{else}}
-  <div class="_btn _disabled">
+  <div class="csbtn _disabled">
     {{translate("Buy")}} {{crypto}}
   </div>
 {{/if}}
 
 {{#if isSupportedMoonpaySell}}
-  <div on-click="moonpay-sell" class="_btn">
+  <div on-click="moonpay-sell" class="csbtn">
     {{translate("Sell")}} {{crypto}}
   </div>
 {{else}}
-  <div class="_btn _disabled">
+  <div class="csbtn _disabled">
     {{translate("Sell")}} {{crypto}}
   </div>
 {{/if}}
@@ -21,11 +21,11 @@
 {{#if BUILD_PLATFORM !== "mas"}}
 <div class="_title">{{translate("Choose exchange")}}</div>
 <div>
-  <div on-click="choose('changelly')" class="_btn">
+  <div on-click="choose('changelly')" class="csbtn">
     <span class="_icon">{{>svg_changelly}}</span>
     Changelly
   </div>
-  <div on-click="choose('shapeshift')" class="_btn">
+  <div on-click="choose('shapeshift')" class="csbtn">
     <span class="_icon">{{>svg_shapeshift}}</span>
     ShapeShift
   </div>

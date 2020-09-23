@@ -9,7 +9,7 @@
       <h3 class="_title">{{title}}:</h3>
       <code class="_value">{{address}}</code>
       <div class="_actions">
-      <a class="_btn" href="{{mailto()}}">
+      <a class="csbtn--icon" href="{{mailto()}}">
         <span class="_icon">
           {{>svg_email}}
         </span>

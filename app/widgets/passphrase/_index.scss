@@ -70,12 +70,7 @@
     @include breakpoint(portrait) {
       padding: 20px;
     }
-    ._btn {
-      @extend .csbtn;
-      @include breakpoint(portrait) {
-        font-size: $base_font_size--portrait;
-        padding: 22px 30px 20px 30px;
-      }
+    .csbtn {
       &._disabled {
         pointer-events: none;
         opacity: 0.5;

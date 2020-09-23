@@ -93,13 +93,13 @@
     {{#if tx.status === 'waitingAuthorization'}}
     <div class="_confirm_btn_group">
       {{#if isLoadingAuthorization}}
-        <div class="_loading _block">
+        <div class="csbtn--loading _block">
           <span class="_icon">
             {{>svg_refresh}}
           </span>
         </div>
       {{else}}
-        <div class="_confirm _block" on-click="threedsecure()">{{translate("Continue")}}</div>
+        <div class="csbtn _block" on-click="threedsecure()">{{translate("Continue")}}</div>
       {{/if}}
     </div>
     {{/if}}

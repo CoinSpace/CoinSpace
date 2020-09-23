@@ -5,11 +5,11 @@
 
   <div class="_btn_group">
     {{#if isLoading}}
-      <div class="_btn _disabled">
+      <div class="csbtn _disabled">
         {{translate('Generating')}}...
       </div>
     {{else}}
-      <div class="_btn" on-click="generate-phrase">{{translate("Generate passphrase")}}</div>
+      <div class="csbtn" on-click="generate-phrase">{{translate("Generate passphrase")}}</div>
     {{/if}}
   </div>
 

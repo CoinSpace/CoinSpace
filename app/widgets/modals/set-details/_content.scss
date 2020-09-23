@@ -17,39 +17,8 @@
     }
   }
 
-  ._btn {
-    @extend .csbtn;
+  .csbtn, .csbtn--loading {
     margin-top: 20px;
-    @include breakpoint(portrait) {
-      font-size: $big_font_size--portrait;
-    }
-  }
-
-  ._btn--loading {
-    @extend .csbtn-base;
-    margin-top: 20px;
-    position: relative;
-    color: rgba(255,255,255, 0.3);
-    background-color: $brand-green;
-    box-shadow:inset 0 1px 1px 1px darken($brand-green, 20%);
-    transform: translate(0px, 3px);
-    display: flex;
-    justify-content: center;
-    padding-left: 4px;
-    padding-right: 4px;
-
-    @include breakpoint(portrait) {
-      font-size: $big_font_size--portrait;
-    }
-
-    &:active {
-      box-shadow:inset 0 1px 1px 1px darken($brand-green, 20%);
-      transform: translate(0px, 3px);
-    }
-
-    &:hover {
-      color: rgba(255,255,255, 0.3);
-    }
   }
 }
 

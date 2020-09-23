@@ -71,44 +71,6 @@
     @include breakpoint(portrait) {
       margin-top: 40px;
     }
-    ._btn {
-      @extend .csbtn;
-
-      @include breakpoint(portrait) {
-        font-size: $btn_font_size--portrait;
-        border-radius: 3px;
-      }
-    }
-    ._loading {
-      @extend .csbtn-base;
-      position: relative;
-      background-color: $grey;
-      transform: translate(0px, 3px);
-      box-shadow: 0 0px 0 0;
-      height: 60px;
-      @include breakpoint(portrait) {
-        height: 72px;
-      }
-      ._icon {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-top: -15px;
-        margin-left: -15px;
-        width: 30px;
-        height: 30px;
-        animation: infinite-spinning 1s linear infinite;
-        @include breakpoint(portrait) {
-          margin-top: -18px;
-          margin-left: -18px;
-          width: 36px;
-          height: 36px;
-        }
-        .svg-refresh {
-          fill: darken($grey, 20%);
-        }
-      }
-    }
   }
 }
 

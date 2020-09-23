@@ -5,6 +5,7 @@
   width: 100%;
 
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
 
   padding-left: 15px;
@@ -17,6 +18,8 @@
   color: white;
   text-align: center;
   font-size: $btn_font_size;
+  line-height: 27px;
+
   background-color: $brand-green;
   box-shadow: 0 2px 0 0 darken($brand-green, 10%);
 
@@ -28,10 +31,6 @@
     box-shadow: 0 0px 0 0;
   }
 
-  &:hover {
-    color: white;
-  }
-
   &:after {
     content: "";
     position: absolute;
@@ -40,10 +39,62 @@
     right: 0px;
     bottom: 0px;
   }
+
+  @include breakpoint(portrait) {
+    font-size: $btn_font_size--portrait;
+    border-radius: 3px;
+    line-height: 40px;
+  }
 }
 
 .csbtn {
   @extend .csbtn-base;
+
+}
+
+.csbtn--icon {
+  @extend .csbtn;
+  ._icon {
+    display: block;
+    margin: 0 auto;
+    width: 27px;
+    height: 27px;
+    @include breakpoint(portrait) {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+
+.csbtn--loading {
+  @extend .csbtn-base;
+  position: relative;
+  background-color: $grey;
+  transform: translate(0px, 3px);
+  box-shadow: 0 0px 0 0;
+  height: 60px;
+  @include breakpoint(portrait) {
+    height: 73px;
+  }
+  ._icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -15px;
+    margin-left: -15px;
+    width: 30px;
+    height: 30px;
+    animation: infinite-spinning 1s linear infinite;
+    @include breakpoint(portrait) {
+      margin-top: -18px;
+      margin-left: -18px;
+      width: 36px;
+      height: 36px;
+    }
+    .svg-refresh {
+      fill: darken($grey, 20%);
+    }
+  }
 }
 
 .ethereum {
@@ -122,10 +173,14 @@
   background-color: $yellow;
   box-shadow: 0 3px 0 0 darken($yellow, 10%);
   color: darken($yellow, 20%);
+}
 
-  &:hover {
-    color: darken($yellow, 20%);
-  }
+.csbtn--grey {
+  @extend .csbtn-base;
+
+  background-color: $grey;
+  box-shadow: 0 2px 0 0 darken($grey, 20%);
+  color: darken($grey, 20%);
 }
 
 

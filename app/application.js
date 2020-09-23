@@ -74,12 +74,14 @@ window.initCSApp = async function() {
 
     if (pin && touchId.isAvailable()) {
       const touchIdSetupWidget = showTouchIdSetup({ append: true, pin });
-      touchIdSetupWidget.on('close', () => auth.hide());
+      touchIdSetupWidget.on('close', () => {
+        auth.hide();
+        frame.show();
+      });
     } else {
       auth.hide();
+      frame.show();
     }
-
-    frame.show();
   });
 
   emitter.on('sync', () => {

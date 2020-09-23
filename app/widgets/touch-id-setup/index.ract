@@ -11,7 +11,7 @@
     <p class="_description">{{description}}</p>
 
     <div class="_btn_group">
-      <div class="_btn" on-click="confirm">{{buttonLabel}}</div>
+      <div class="csbtn" on-click="confirm">{{buttonLabel}}</div>
     </div>
 
     <span class="_footer_link" on-click="back">{{translate("Skip")}}</span>

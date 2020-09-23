@@ -49,15 +49,15 @@
         </div>
       </div>
       <div class="_inputs">
-        <div class="_back" on-click="back">{{translate("Back")}}</div>
+        <div class="csbtn--grey _back" on-click="back">{{translate("Back")}}</div>
         {{#if isLoading}}
-          <div class="_confirm--processing">
+          <div class="csbtn--loading">
             <span class="_icon">
               {{>svg_refresh}}
             </span>
           </div>
         {{else}}
-          <div class="_confirm" on-click="confirm">{{translate("Check")}}</div>
+          <div class="csbtn" on-click="confirm">{{translate("Check")}}</div>
         {{/if}}
       </div>
       {{else}}
@@ -79,15 +79,15 @@
         </div>
       </div>
       <div class="_inputs">
-        <div class="_cancel">{{translate("Cancel")}}</div>
+        <div class="csbtn--grey _cancel">{{translate("Cancel")}}</div>
         {{#if isLoading}}
-          <div class="_confirm--processing">
+          <div class="csbtn--loading">
             <span class="_icon">
               {{>svg_refresh}}
             </span>
           </div>
         {{else}}
-          <div class="_confirm" on-click="confirm">{{translate("Confirm")}}</div>
+          <div class="csbtn" on-click="confirm">{{translate("Confirm")}}</div>
         {{/if}}
       </div>
       {{/if}}

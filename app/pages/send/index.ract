@@ -133,13 +133,13 @@
 
   <div class="send__buttons">
     {{#if isLoading}}
-    <div class="send__btn--loading">
+    <div class="csbtn--loading">
       <span class="_icon">
         {{>svg_refresh}}
       </span>
     </div>
     {{else}}
-    <div on-click="open-send" class="send__btn">{{translate("Confirm")}}</div>
+    <div on-click="open-send" class="csbtn">{{translate("Confirm")}}</div>
     {{/if}}
   </div>
 </div>

@@ -54,40 +54,4 @@
       }
     }
   }
-
-  ._show_btn {
-    @extend .csbtn;
-    @include breakpoint(portrait) {
-      font-size: $btn_font_size--portrait;
-      border-radius: 3px;
-    }
-  }
-
-  ._export_btn {
-    @extend .csbtn;
-    height: 60px;
-    position: relative;
-
-    @include breakpoint(portrait) {
-      height: 69px;
-      border-radius: 3px;
-    }
-
-    ._icon {
-      width: 30px;
-      height: 30px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin-top: -15px;
-      margin-left: -15px;
-
-      @include breakpoint(portrait) {
-        width: 44px;
-        height: 44px;
-        margin-top: -22px;
-        margin-left: -22px;
-      }
-    }
-  }
 }

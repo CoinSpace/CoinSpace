@@ -6,5 +6,5 @@
 
 <p class="confirm__responseMsg">{{translate("Your transaction will appear in your history tab shortly.")}}</p>
 <div class="confirm__inputs">
-  <div class="_cancel">{{translate("Close")}}</div>
+  <div class="csbtn--grey _cancel">{{translate("Close")}}</div>
 </div>

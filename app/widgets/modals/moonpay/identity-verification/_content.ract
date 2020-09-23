@@ -31,8 +31,8 @@
         </div>
 
         <div class="_confirm_btn_group">
-          <div class="_cancel">{{translate("Cancel")}}</div>
-          <div class="_confirm" on-click="continue">{{translate("Continue")}}</div>
+          <div class="csbtn--grey _cancel">{{translate("Cancel")}}</div>
+          <div class="csbtn" on-click="continue">{{translate("Continue")}}</div>
         </div>
 
       </div>
@@ -70,15 +70,15 @@
         </div>
 
         <div class="_confirm_btn_group">
-          <div class="_back" on-click="back">{{translate("Back")}}</div>
+          <div class="csbtn--grey _back" on-click="back">{{translate("Back")}}</div>
           {{#if isLoading}}
-            <div class="_loading">
+            <div class="csbtn--loading">
               <span class="_icon">
                 {{>svg_refresh}}
               </span>
             </div>
           {{else}}
-            <div class="_confirm" on-click="submit">{{translate("Submit")}}</div>
+            <div class="csbtn" on-click="submit">{{translate("Submit")}}</div>
           {{/if}}
         </div>
 

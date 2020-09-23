@@ -1,1 +1,1 @@
-<div on-click="setup" class="eos_setup_account_btn">{{translate("Setup EOS account")}}</div>
+<div on-click="setup" class="csbtn">{{translate("Setup EOS account")}}</div>

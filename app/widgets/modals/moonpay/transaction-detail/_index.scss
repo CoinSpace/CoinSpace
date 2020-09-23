@@ -23,11 +23,6 @@
     }
     ._block {
       margin-left: 0;
-      height: 60px;
-      @include breakpoint(portrait) {
-        height: 69px;
-        border-radius: 3px;
-      }
     }
   }
 

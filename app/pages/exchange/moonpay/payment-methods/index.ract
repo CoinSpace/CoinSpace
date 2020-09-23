@@ -31,7 +31,7 @@
   {{/if}}
 
   <div class="_confirm_btn_group">
-    <div on-click="add-credit-card" class="_btn">
+    <div on-click="add-credit-card" class="csbtn">
       {{translate("Add Credit Card")}}
     </div>
   </div>
@@ -56,7 +56,7 @@
   {{/if}}
 
   <div class="_confirm_btn_group">
-    <div on-click="add-bank-account" class="_btn">
+    <div on-click="add-bank-account" class="csbtn">
       {{translate("Add Bank Account")}}
     </div>
   </div>

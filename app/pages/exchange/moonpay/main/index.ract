@@ -50,7 +50,7 @@
   </div>
 
   <div class="_confirm_btn_group">
-    <div on-click="buy" class="_btn">
+    <div on-click="buy" class="csbtn">
       {{translate("Buy")}}
     </div>
   </div>

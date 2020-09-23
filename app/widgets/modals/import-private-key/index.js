@@ -49,7 +49,7 @@ function open() {
       }
       importTxOptions.to = to;
       setToAlias(importTxOptions);
-      
+
       showConfirmation({
         to: importTxOptions.to,
         alias: importTxOptions.alias,

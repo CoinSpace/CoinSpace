@@ -78,13 +78,13 @@
 
   <div class="confirm__buttons">
     {{#if isLoadingEstimate}}
-      <div class="confirm__btn--validating">
+      <div class="csbtn--loading">
         <span class="_icon">
           {{>svg_refresh}}
         </span>
       </div>
     {{else}}
-      <div on-click="confirm" class="confirm__btn">{{translate("Next step")}}</div>
+      <div on-click="confirm" class="csbtn">{{translate("Next step")}}</div>
     {{/if}}
   </div>
 

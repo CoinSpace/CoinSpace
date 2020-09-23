@@ -44,13 +44,13 @@
       {{#if hasMore}}
         <div class="loadmore__buttons">
           {{#if isLoadingMore}}
-            <div class="send__btn--loading">
+            <div class="csbtn--loading">
               <span class="_icon">
                 {{>svg_refresh}}
               </span>
             </div>
           {{else}}
-          <div on-click="load-more" class="loadmore__btn">{{translate("Load more")}}</div>
+          <div on-click="load-more" class="csbtn">{{translate("Load more")}}</div>
           {{/if}}
         </div>
       {{/if}}

@@ -166,10 +166,6 @@
     padding-bottom: 30px;
   }
 
-  ._btn {
-    @extend .csbtn--yellow;
-  }
-
   &.is_searching {
     ._message {
       opacity: 0.3;

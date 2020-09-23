@@ -126,41 +126,25 @@
     border-radius: 4px;
   }
 
-    ._btn {
-      @extend .csbtn;
-      margin-bottom: 5px;
-
-      @include breakpoint(portrait) {
-        font-size: $btn_font_size--portrait;
-        border-radius: 3px;
-      }
-
-      &.is_broadcasting {
-        background-color: $yellow;
-        box-shadow: 0 3px 0 0 darken($yellow, 10%);
-        color: darken($yellow, 20%);
-
-        &:hover {
-          color: darken($yellow, 20%);
-        }
-      }
-
-      &.is_connecting {
-        background-color: $grey;
-        box-shadow: 0 3px 0 0 darken($grey, 10%);
-        color: darken($grey, 20%);
-
-        &:hover {
-          color: darken($grey, 20%);
-        }
-      }
+  .csbtn {
+    margin-bottom: 5px;
+    &.is_broadcasting {
+      background-color: $yellow;
+      box-shadow: 0 3px 0 0 darken($yellow, 10%);
+      color: darken($yellow, 20%);
     }
-
-    ._text {
-      font-size: $small_font_size;
-      line-height: 1.3;
-      color: $grey;
+    &.is_connecting {
+      background-color: $grey;
+      box-shadow: 0 3px 0 0 darken($grey, 10%);
+      color: darken($grey, 20%);
     }
+  }
+
+  ._text {
+    font-size: $small_font_size;
+    line-height: 1.3;
+    color: $grey;
+  }
 }
 
 #qr-modal {

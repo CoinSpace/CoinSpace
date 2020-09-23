@@ -88,13 +88,13 @@
 
   <div class="confirm__buttons">
     {{#if isValidating}}
-      <div class="confirm__btn--validating">
+      <div class="csbtn--loading">
         <span class="_icon">
           {{>svg_refresh}}
         </span>
       </div>
     {{else}}
-      <div on-click="confirm" class="confirm__btn">{{translate("Confirm")}}</div>
+      <div on-click="confirm" class="csbtn">{{translate("Confirm")}}</div>
     {{/if}}
   </div>
 

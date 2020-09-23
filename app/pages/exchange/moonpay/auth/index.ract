@@ -26,13 +26,13 @@
 
   <div class="_confirm_btn_group">
     {{#if isLoadingSignIn}}
-      <div class="_loading">
+      <div class="csbtn--loading">
         <span class="_icon">
           {{>svg_refresh}}
         </span>
       </div>
     {{else}}
-      <div on-click="sign-in" class="_btn">
+      <div on-click="sign-in" class="csbtn">
         {{#if (step === 1)}}
           {{translate("Sign in")}}
         {{else}}

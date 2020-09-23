@@ -49,41 +49,6 @@
       @include breakpoint(portrait) {
         padding-top: 40px;
       }
-
-      ._btn {
-        @extend .csbtn;
-        display: inline-block;
-        width: 36px;
-        height: 36px;
-        right: 3px;
-        top: 50%;
-        padding: 0;
-        padding-top: 7px;
-        border-radius: 2px;
-
-        @include breakpoint(portrait) {
-          width: 60px;
-          height: 60px;
-        }
-
-        ._icon {
-          width: 26px;
-          height: 26px;
-          display: block;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          margin-top: -13px;
-          margin-left: -13px;
-
-          @include breakpoint(portrait) {
-            width: 40px;
-            height: 40px;
-            margin-top: -20px;
-            margin-left: -20px;
-          }
-        }
-      }
     }
   }
 }

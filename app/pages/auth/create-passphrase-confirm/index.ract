@@ -32,9 +32,9 @@
 
   <div class="_btn_group">
     {{#if isCorrect() }}
-    <div class="_btn" on-click="confirm">{{translate("Confirm")}}</div>
+    <div class="csbtn" on-click="confirm">{{translate("Confirm")}}</div>
     {{else}}
-    <div class="_btn _disabled">{{translate("Confirm")}}</div>
+    <div class="csbtn _disabled">{{translate("Confirm")}}</div>
     {{/if}}
   </div>
 

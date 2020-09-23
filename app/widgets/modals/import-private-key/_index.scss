@@ -94,57 +94,12 @@
 
     display: flex;
 
-    ._cancel {
-      @extend .csbtn-base;
+    .csbtn, .csbtn--loading {
+      margin-left: 5px;
+    }
+
+    .csbtn--grey {
       margin-right: 5px;
-
-      color: darken($grey, 20%);
-      background-color: $grey;
-      box-shadow: 0 2px 0 0 darken($grey, 20%);
-
-      @include breakpoint(portrait) {
-        font-size: $big_font_size--portrait;
-      }
-
-      &:hover {
-        color: darken($grey, 20%);
-      }
-    }
-
-    ._transfer {
-      @extend .csbtn;
-      margin-left: 5px;
-
-      @include breakpoint(portrait) {
-        font-size: $big_font_size--portrait;
-      }
-    }
-
-    ._transfer--processing {
-      @extend .csbtn-base;
-      position: relative;
-      margin-left: 5px;
-      color: darken($grey, 20%);
-      background-color: $grey;
-      transform: translate(0px, 3px);
-      box-shadow: 0 0px 0 0;
-      &:hover {
-        color: darken($grey, 20%);
-      }
-      ._icon {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-top: -15px;
-        margin-left: -15px;
-        width: 30px;
-        height: 30px;
-        display: block;
-        animation:  infinite-spinning 1s linear infinite;
-        .svg-refresh {
-          fill: darken($grey, 20%);
-        }
-      }
     }
   }
 

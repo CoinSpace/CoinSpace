@@ -8,7 +8,7 @@
 
   {{#if customerVerifications.length}}
     {{#each customerVerifications}}
-    <div class="_btn" on-click="showVerification(this.identifier)">
+    <div class="csbtn" on-click="showVerification(this.identifier)">
       {{translate(getVerificationName(this.identifier))}}
       {{#if this.completed}} — OK{{/if}}
     </div>

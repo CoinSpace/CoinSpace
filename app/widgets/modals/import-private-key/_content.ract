@@ -31,15 +31,15 @@
     </div>
 
     <div class="_inputs">
-      <div class="_cancel">{{translate("Cancel")}}</div>
+      <div class="csbtn--grey _cancel">{{translate("Cancel")}}</div>
       {{#if isLoading}}
-        <div class="_transfer--processing">
+        <div class="csbtn--loading">
           <span class="_icon">
             {{>svg_refresh}}
           </span>
         </div>
       {{else}}
-        <div class="_transfer" on-click="transfer">{{translate("Transfer")}}</div>
+        <div class="csbtn" on-click="transfer">{{translate("Transfer")}}</div>
       {{/if}}
     </div>
 

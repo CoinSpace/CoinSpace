@@ -23,14 +23,14 @@
     <div class="_btn_group">
       {{#if count() === 12 }}
         {{#if isLoading}}
-          <div class="_btn _disabled">
+          <div class="csbtn _disabled">
             {{translate('Checking passphrase')}}...
           </div>
         {{else}}
-          <div class="_btn" on-click="confirm">{{translate("Confirm")}}</div>
+          <div class="csbtn" on-click="confirm">{{translate("Confirm")}}</div>
         {{/if}}
       {{else}}
-      <div class="_btn _disabled">{{translate("Confirm")}}</div>
+      <div class="csbtn _disabled">{{translate("Confirm")}}</div>
       {{/if}}
     </div>
 

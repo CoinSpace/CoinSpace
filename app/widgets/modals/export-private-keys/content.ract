@@ -14,7 +14,7 @@
       </div>
 
       {{#isPhonegap}}
-      <div class="_export_btn" on-click="export-keys">
+      <div class="csbtn--icon" on-click="export-keys">
         <span class="_icon">
           {{>svg_expand}}
         </span>
@@ -30,7 +30,7 @@
       </div>
 
       <div class="confirm__buttons">
-        <div class="_show_btn" on-click="show-keys">{{translate("Show")}}</div>
+        <div class="csbtn" on-click="show-keys">{{translate("Show")}}</div>
       </div>
     {{/if}}
 

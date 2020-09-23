@@ -74,13 +74,13 @@
 
   <div class="_confirm_btn_group">
     {{#if (isLoadingFiat || isLoadingCrypto)}}
-      <div class="_loading">
+      <div class="csbtn--loading">
         <span class="_icon">
           {{>svg_refresh}}
         </span>
       </div>
     {{else}}
-      <div on-click="buy" class="_btn">{{translate("Buy")}}</div>
+      <div on-click="buy" class="csbtn">{{translate("Buy")}}</div>
     {{/if}}
   </div>
 

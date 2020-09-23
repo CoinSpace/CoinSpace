@@ -9,15 +9,15 @@
     </div>
 
     <div class="_inputs">
-      <div class="_cancel">{{translate("Cancel")}}</div>
+      <div class="csbtn--grey _cancel">{{translate("Cancel")}}</div>
       {{#if removing}}
-        <div class="_remove--processing">
+        <div class="csbtn--loading">
           <span class="_icon">
             {{>svg_refresh}}
           </span>
         </div>
       {{else}}
-        <div class="_remove" on-click="remove">{{translate("Remove")}}</div>
+        <div class="csbtn--red" on-click="remove">{{translate("Remove")}}</div>
       {{/if}}
     </div>
   {{/confirmation}}
@@ -31,7 +31,7 @@
 
     <p class="_responseMsg">{{translate("This page will be reloaded shortly.")}}</p>
     <div class="_inputs">
-      <div class="_cancel" on-click="reload">{{translate("Close")}}</div>
+      <div class="csbtn--grey _cancel" on-click="reload">{{translate("Close")}}</div>
     </div>
   {{/success}}
 

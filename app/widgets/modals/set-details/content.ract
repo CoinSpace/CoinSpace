@@ -14,10 +14,10 @@
     </div>
 
     {{^submitting}}
-      <div class="_btn" on-click="submit-details">{{translate("Save")}}</div>
+      <div class="csbtn" on-click="submit-details">{{translate("Save")}}</div>
     {{/submitting}}
     {{#submitting}}
-      <div class="_btn--loading">{{translate("Save")}}...</div>
+      <div class="csbtn--loading">{{translate("Save")}}...</div>
     {{/submitting}}
   </div>
 </div>
