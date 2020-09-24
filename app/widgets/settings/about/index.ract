@@ -4,6 +4,7 @@
     <div class="_row">
       <div class="_back" on-click="back">{{>svg_arrow}} {{translate("Back")}}</div>
       <span class="_title">{{translate("About")}}</span>
+      <div class="_save"></div>
     </div>
   </div>
 

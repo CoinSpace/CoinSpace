@@ -1,12 +1,5 @@
 .widget-settings-main {
   ._section {
-    ._list_item {
-      &._logout {
-        @include clickbtn;
-        color: #ff3b30;
-        text-align: center;
-      }
-    }
     &._account {
       margin-top: 20px;
       ._label {

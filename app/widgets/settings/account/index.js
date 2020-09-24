@@ -13,7 +13,6 @@ module.exports = function(el) {
     el,
     template: require('./index.ract'),
     data: {
-      isLoading: false,
       username: '',
       email: '',
     },
@@ -31,7 +30,6 @@ module.exports = function(el) {
     if (!username) {
       return showError({ message: 'A name is required to set your profile on Coin' });
     }
-    ractive.set('isLoading', true);
     try {
       const safeUsername = await CS.setUsername(username);
       await details.set('userInfo', {
@@ -46,7 +44,6 @@ module.exports = function(el) {
         console.error(err);
       }
     }
-    ractive.set('isLoading', false);
   });
 
   ractive.on('remove', showRemoveConfirmation);

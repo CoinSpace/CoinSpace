@@ -1,75 +1,11 @@
 .widget-settings-account {
-  height: 100%;
-
-  ._content {
-    margin-top: -50px;
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-  }
-
-  ._form {
-    width: 100%;
-    max-width: 320px;
-    @include breakpoint(portrait) {
-      max-width: 380px;
-    }
-  }
-
-  ._input_group {
-    width: 100%;
-    position: relative;
-    margin-bottom: 10px;
-    &.last {
-      margin-bottom: 20px;
-    }
-    @include breakpoint(portrait) {
-      margin-bottom: 40px;
-    }
-
-    ._label {
-      @include noselect;
-      cursor: pointer;
-      display: block;
-      @include breakpoint(portrait) {
-        font-size: $base_font_size--portrait;
+  ._section {
+    &._input {
+      &:first-child {
+        margin-bottom: 10px;
       }
-    }
-
-    ._input {
-      margin-top: 5px;
-      @extend .csinput;
-    }
-    ._help {
-      @include clickbtn;
-      position: absolute;
-      top: 0;
-      right: -5px;
-      font-size: $small_font_size;
-      text-align: center;
-      width: 26px;
-      height: 26px;
-      padding: 4px;
-      opacity: 0.4;
-      @include breakpoint(portrait) {
-        width: 32px;
-        height: 32px;
-      }
-      &:hover {
-        opacity: 0.7;
-      }
-      .svg-help {
-        fill: #333;
-      }
-    }
-  }
-
-  ._btn_group {
-    .csbtn, .csbtn--red, .csbtn--loading {
-      margin-top: 20px;
-      @include breakpoint(portrait) {
-        margin-top: 40px;
+      &:last-child {
+        margin-top: 10px;
       }
     }
   }

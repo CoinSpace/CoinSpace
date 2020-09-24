@@ -5,6 +5,7 @@
     <div class="_row">
       <div class="_back" on-click="back">{{>svg_arrow}} {{translate("Back")}}</div>
       <span class="_title">{{translate("Settings")}}</span>
+      <div class="_save"></div>
     </div>
   </div>
 
@@ -58,7 +59,7 @@
   </div>
 
   <div class="_section">
-    <div class="_list_item _btn _logout" on-click="logout">{{translate("Logout")}}</div>
+    <div class="_list_item _btn _danger" on-click="logout">{{translate("Logout")}}</div>
   </div>
 
 </div>

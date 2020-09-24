@@ -27,25 +27,24 @@
     z-index: 1;
     border-bottom: #e2e2e2 1px solid;
     ._row {
-      position: relative;
       max-width: $max_content_width;
       margin: 0 auto;
+      display: flex;
     }
     ._title {
+      flex: 2;
+      @include ellipsis();
       font-size: $header_font_size;
-      white-space: nowrap;
-      margin: 0 70px;
       text-align: center;
-      display: block;
       line-height: 25px;
+      margin-left: 5px;
+      margin-right: 5px;
     }
     ._back {
+      flex: 1;
+      @include ellipsis();
       @include clickbtn;
-      position: absolute;
-      top: 0;
-      left: 0;
       color: #34a2ff;
-      white-space: nowrap;
       line-height: 25px;
       svg {
         float: left;
@@ -57,11 +56,24 @@
         }
       }
     }
+    ._save {
+      flex: 1;
+      text-align: right;
+      @include ellipsis();
+      @include clickbtn;
+      color: #34a2ff;
+      line-height: 25px;
+    }
   }
 
   ._section {
     margin: 35px 0;
     outline: 0;
+    input[type=text], input[type=email] {
+      outline: 0;
+      height: 25px;
+      border: 0;
+    }
     ._title {
       padding: 0 10px;
       text-transform: uppercase;
@@ -71,7 +83,22 @@
       color: #555;
       outline: 0;
     }
+    ._description {
+      padding: 0 10px;
+      margin-top: 2px;
+      font-size: $small_font_size;
+      color: #555;
+      outline: 0;
+      a {
+        color: #34a2ff;
+      }
+    }
     ._list_item {
+      &._danger {
+        @include clickbtn;
+        color: #ff3b30;
+        text-align: center;
+      }
       &._btn {
         @include clickbtn;
       }
