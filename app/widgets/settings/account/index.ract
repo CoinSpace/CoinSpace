@@ -1,7 +1,10 @@
 <div class="widget-settings-account">
   <div class="_header">
-    <div class="_back" on-click="back">{{>svg_arrow}} {{translate("Back")}}</div>
-    <span class="_title">{{translate("Settings")}}</span>
+    <div class="_iphone_x"></div>
+    <div class="_row">
+      <div class="_back" on-click="back">{{>svg_arrow}} {{translate("Back")}}</div>
+      <span class="_title">{{translate("Settings")}}</span>
+    </div>
   </div>
 
   <div class="_content">

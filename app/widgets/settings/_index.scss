@@ -1,5 +1,6 @@
 .widget-settings {
   height: 100%;
+  padding-top: 50px;
 
   .step {
     height: 100%;
@@ -17,8 +18,15 @@
   ._header {
     background: #fff;
     padding: 12px 10px;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
     border-bottom: #e2e2e2 1px solid;
+    ._row {
+      position: relative;
+    }
     ._title {
       font-size: $header_font_size;
       white-space: nowrap;
@@ -30,8 +38,8 @@
     ._back {
       @include clickbtn;
       position: absolute;
-      top: 12px;
-      left: 10px;
+      top: 0;
+      left: 0;
       color: #34a2ff;
       white-space: nowrap;
       line-height: 25px;
