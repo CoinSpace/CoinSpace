@@ -17,6 +17,7 @@ module.exports = function(el) {
       email: '',
     },
   });
+  let isLoading = false;
 
   ractive.on('before-show', () => {
     const user = details.get('userInfo');
@@ -25,11 +26,13 @@ module.exports = function(el) {
   });
 
   ractive.on('save', async () => {
+    if (isLoading) return;
     const username = ractive.get('username').trim();
     const email = ractive.get('email').trim();
     if (!username) {
       return showError({ message: 'A name is required to set your profile on Coin' });
     }
+    isLoading = true;
     try {
       const safeUsername = await CS.setUsername(username);
       await details.set('userInfo', {
@@ -44,6 +47,7 @@ module.exports = function(el) {
         console.error(err);
       }
     }
+    isLoading = false;
   });
 
   ractive.on('remove', showRemoveConfirmation);
