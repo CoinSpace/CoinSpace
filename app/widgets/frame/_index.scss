@@ -19,12 +19,14 @@
 
   .content {
     display: none;
-    padding: 20px;
+    padding: 40px 20px;
+    max-width: $max_content_width;
+    margin: 0 auto;
     &.current {
       display: block;
     }
     @include breakpoint(portrait) {
-      padding: 40px;
+      padding: 80px 40px;
     }
   }
 }

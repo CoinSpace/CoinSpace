@@ -1,5 +1,7 @@
 .widget-settings {
   height: 100%;
+  max-width: $max_content_width;
+  margin: 0 auto;
   padding-top: 50px;
 
   .step {
@@ -26,6 +28,8 @@
     border-bottom: #e2e2e2 1px solid;
     ._row {
       position: relative;
+      max-width: $max_content_width;
+      margin: 0 auto;
     }
     ._title {
       font-size: $header_font_size;

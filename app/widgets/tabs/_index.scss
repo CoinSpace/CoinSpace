@@ -51,7 +51,8 @@
 
 #tabs .tabs {
   display: flex;
-  justify-content: space-between;
+  max-width: $max_content_width;
+  margin: 0 auto;
 }
 
 #tabs .tabs .tab {

@@ -1,11 +1,12 @@
 .widget-header {
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background-color: darken($brand-green, 30%);
+  color: white;
 
-    background-color: darken($brand-green, 30%);
-    color: white;
+  .header {
+    max-width: $max_content_width;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
 
     padding-left: 20px;
     padding-right: 20px;
@@ -13,14 +14,9 @@
     height: 97px;
     position: relative;
 
-    @include breakpoint(iphone5) {
-      padding-left: 14px;
-      padding-right: 14px;
-    }
-
     @include breakpoint(portrait) {
-      padding-left: 30px;
-      padding-right: 30px;
+      padding-left: 40px;
+      padding-right: 40px;
       height: 140px;
     }
   }
@@ -34,12 +30,8 @@
     margin-left: 10px;
     width: 100%;
 
-    line-height: 1.5;
     font-size: $large_font_size;
 
-    ._amount {
-      font-size: $large_font_size;
-    }
     ._currency {
       @extend .jigsaw-medium;
       font-size: $small_font_size;
@@ -49,8 +41,8 @@
 
     @include breakpoint(portrait) {
       font-size: $large_font_size--portrait;
-      ._amount {
-        font-size: $large_font_size--portrait;
+      ._currency {
+        font-size: $small_font_size--portrait;
       }
     }
   }
@@ -109,13 +101,9 @@
       opacity: 0;
     }
 
-    @include breakpoint(iphone5) {
-      right: 14px;
-    }
-
     @include breakpoint(portrait) {
-      right: 30px;
-      font-size: $base_font_size--portrait;
+      right: 40px;
+      font-size: $small_font_size--portrait;
     }
   }
 }
