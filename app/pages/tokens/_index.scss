@@ -1,9 +1,5 @@
 #tokens {
 
-  &.content {
-    padding: 0px;
-  }
-
   ._title {
     padding-left: 20px;
     padding-right: 20px;
@@ -20,21 +16,22 @@
 }
 
 .token__item {
-  @include clear;
   @include clickbtn;
-  padding: 15px;
+  display: flex;
+  align-items: center;
+  padding: 15px 15px 15px 0;
+  border-top: 1px solid darken($grey--light, 10%);
 
   @include breakpoint(portrait) {
-    padding: 30px;
+    padding: 30px 30px 30px 0;
   }
 
   ._icon {
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    display: inline-block;
-    float: left;
-    border: 2px solid white;
+    display: block;
+    flex-shrink: 0;
     margin-right: 20px;
 
     @include breakpoint(portrait) {
@@ -44,111 +41,89 @@
   }
 
   ._name {
-    @include media-obj;
     font-size: $big_font_size;
-    padding-top: 13px;
-
+    flex: 1;
     @include breakpoint(portrait) {
       font-size: $big_font_size--portrait;
-      padding-top: 22px;
+    }
+    ._token {
+      margin-right: 10px;
     }
   }
 
   ._arrow {
-    float: right;
+    flex-shrink: 0;
     width: 25px;
     height: 25px;
-    margin-top: 13px;
+    .svg-arrow {
+      fill: $grey;
+    }
 
     @include breakpoint(portrait) {
       width: 40px;
       height: 40px;
-      margin-top: 22px;
     }
   }
-}
 
-.token--bitcoin {
-  background-color: $brand-green;
-  ._name {
-    color: white;
+  ._add_btn {
+    display: inline-block;
+    text-decoration: underline;
+    margin-right: 10px;
   }
 }
 
-.token--bitcoincash {
+.token--bitcoin ._icon {
+  background-color: $bitcoin;
+}
+
+.token--bitcoincash ._icon {
   background-color: $bitcoincash;
-  ._name {
-    color: white;
-  }
 }
 
-.token--bitcoinsv {
+.token--bitcoinsv ._icon {
   background-color: $bitcoinsv;
-  ._name {
-    color: white;
-  }
 }
 
-.token--litecoin {
-  background-color: $silver;
-  ._name {
-    color: white;
-  }
+.token--litecoin ._icon {
+  background-color: $litecoin;
 }
 
-.token--dogecoin {
+.token--dogecoin ._icon {
   background-color: $dogecoin;
-  ._name {
-    color: white;
-  }
 }
 
-.token--dash {
+.token--dash ._icon {
   background-color: $dash;
-  ._name {
-    color: white;
-  }
 }
 
-.token--ripple {
+.token--ripple ._icon {
   background-color: $ripple;
-  ._name {
-    color: white;
-  }
 }
 
-.token--stellar {
+.token--stellar ._icon {
   background-color: $stellar;
-  ._name {
-    color: white;
-  }
 }
 
-.token--eos {
+.token--eos ._icon {
   background-color: $eos;
-  ._name {
-    color: white;
-  }
 }
 
-.token--ethereum {
+.token--ethereum ._icon {
   background-color: $ethereal;
-  ._name {
-    color: white;
-  }
 }
 
 .ethereum_tokens {
   .token__item {
-    background-color: $ethereal;
-    border-top: 1px solid white;
-    color: white;
     ._remove {
       padding: 13px;
+      margin-right: -13px;
       width: 50px;
       height: 50px;
-      float: right;
-      margin-right: -13px;
+      flex-shrink: 0;
+
+      .svg-close {
+        fill: $grey;
+      }
 
       @include breakpoint(portrait) {
         width: 80px;
@@ -156,11 +131,6 @@
         padding: 20px;
         margin-right: -20px;
       }
-    }
-  }
-  .add_btn {
-    @include breakpoint(portrait) {
-      font-size: $btn_font_size--portrait;
     }
   }
 }

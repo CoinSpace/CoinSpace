@@ -90,10 +90,7 @@
       }
 
       ._btn {
-        @extend .csbtn-base;
-        background-color: $ethereal;
-        box-shadow: 0 2px 0 0 darken($ethereal, 10%);
-
+        @extend .csbtn;
         align-self: flex-end;
         margin-bottom: 2px;
         padding: 0;
@@ -144,8 +141,6 @@
       margin-left: 5px;
     }
     .csbtn {
-      background-color: $ethereal;
-      box-shadow: 0 2px 0 0 darken($ethereal, 10%);
       &._disabled {
         background-color: $grey;
         box-shadow: 0 2px 0 0 darken($grey, 10%);

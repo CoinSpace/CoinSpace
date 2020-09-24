@@ -122,34 +122,6 @@
   }
 }
 
-.litecoin .widget-header .header {
-  background-color: darken($silver, 30%);
-}
-.dogecoin .widget-header .header {
-  background-color: darken($dogecoin, 30%);
-}
-.dash .widget-header .header {
-  background-color: darken($dash, 30%);
-}
-.ethereum .widget-header .header {
-  background-color: darken($ethereal, 30%);
-}
-.ripple .widget-header .header {
-  background-color: darken($ripple, 30%);
-}
-.stellar .widget-header .header {
-  background-color: darken($stellar, 30%);
-}
-.eos .widget-header .header {
-  background-color: darken($eos, 15%);
-}
-.bitcoincash .widget-header .header {
-  background-color: darken($bitcoincash, 30%);
-}
-.bitcoinsv .widget-header .header {
-  background-color: darken($bitcoinsv, 30%);
-}
-
 .blocked .widget-header {
   .header__balance.cross, .header__balance.show {
     display: flex;

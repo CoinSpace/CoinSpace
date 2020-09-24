@@ -102,7 +102,8 @@ module.exports = function(el) {
     return false;
   }
 
-  ractive.on('add-ethereum-token', () => {
+  ractive.on('add-ethereum-token', (context) => {
+    context.event.stopPropagation();
     addEthereumToken(walletTokens, (token) => {
       ractive.push('ethereumTokens', token);
     });

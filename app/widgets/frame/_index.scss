@@ -35,33 +35,6 @@
   @include iphone-x-top;
   background-color: darken($brand-green, 30%);
 }
-.litecoin .main__iphone_x {
-  background-color: darken($silver, 30%);
-}
-.dogecoin .main__iphone_x {
-  background-color: darken($dogecoin, 30%);
-}
-.dash .main__iphone_x {
-  background-color: darken($dash, 30%);
-}
-.ethereum .main__iphone_x {
-  background-color: darken($ethereal, 30%);
-}
-.ripple .main__iphone_x {
-  background-color: darken($ripple, 30%);
-}
-.stellar .main__iphone_x {
-  background-color: darken($stellar, 30%);
-}
-.eos .main__iphone_x {
-  background-color: darken($eos, 15%);
-}
-.bitcoincash .main__iphone_x {
-  background-color: darken($bitcoincash, 30%);
-}
-.bitcoinsv .main__iphone_x {
-  background-color: darken($bitcoinsv, 30%);
-}
 
 #settings {
   flex: 1;

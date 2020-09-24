@@ -97,69 +97,6 @@
   }
 }
 
-.ethereum {
-  .csbtn {
-    background-color: $ethereal;
-    box-shadow: 0 2px 0 0 darken($ethereal, 10%);
-  }
-}
-
-.ripple {
-  .csbtn {
-    background-color: $ripple;
-    box-shadow: 0 2px 0 0 darken($ripple, 10%);
-  }
-}
-
-.stellar {
-  .csbtn {
-    background-color: $stellar;
-    box-shadow: 0 2px 0 0 darken($stellar, 10%);
-  }
-}
-
-.eos {
-  .csbtn {
-    background-color: $eos;
-    box-shadow: 0 2px 0 0 darken($eos, 10%);
-  }
-}
-
-.bitcoincash {
-  .csbtn {
-    background-color: $bitcoincash;
-    box-shadow: 0 2px 0 0 darken($bitcoincash, 10%);
-  }
-}
-
-.bitcoinsv {
-  .csbtn {
-    background-color: $bitcoinsv;
-    box-shadow: 0 2px 0 0 darken($bitcoinsv, 10%);
-  }
-}
-
-.litecoin {
-  .csbtn {
-    background-color: $silver;
-    box-shadow: 0 2px 0 0 darken($silver, 10%);
-  }
-}
-
-.dogecoin {
-  .csbtn {
-    background-color: $dogecoin;
-    box-shadow: 0 2px 0 0 darken($dogecoin, 10%);
-  }
-}
-
-.dash {
-  .csbtn {
-    background-color: $dash;
-    box-shadow: 0 2px 0 0 darken($dash, 10%);
-  }
-}
-
 .csbtn--red {
   @extend .csbtn-base;
 

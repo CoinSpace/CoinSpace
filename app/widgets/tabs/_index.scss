@@ -3,52 +3,6 @@
   background-color: darken($brand-green, 20%);
 }
 
-.litecoin {
-  #tabs {
-    background-color: darken($silver, 20%);
-  }
-}
-.dogecoin {
-  #tabs {
-    background-color: darken($dogecoin, 20%);
-  }
-}
-.dash {
-  #tabs {
-    background-color: darken($dash, 20%);
-  }
-}
-.ethereum {
-  #tabs {
-    background-color: darken($ethereal, 20%);
-  }
-}
-.ripple {
-  #tabs {
-    background-color: darken($ripple, 20%);
-  }
-}
-.stellar {
-  #tabs {
-    background-color: darken($stellar, 20%);
-  }
-}
-.eos {
-  #tabs {
-    background-color: darken($eos, 10%);
-  }
-}
-.bitcoincash {
-  #tabs {
-    background-color: darken($bitcoincash, 20%);
-  }
-}
-.bitcoinsv {
-  #tabs {
-    background-color: darken($bitcoinsv, 20%);
-  }
-}
-
 #tabs .tabs {
   display: flex;
   max-width: $max_content_width;
@@ -81,70 +35,6 @@
     border-bottom: 4px solid darken($brand-green, 30%);
     .tab__icon, .tab__text {
       opacity: 1.0;
-    }
-  }
-}
-
-.litecoin {
-  #tabs .tabs .tab {
-    &.active {
-        border-bottom: 4px solid darken($silver, 30%);
-    }
-  }
-}
-.dogecoin {
-  #tabs .tabs .tab {
-    &.active {
-        border-bottom: 4px solid darken($dogecoin, 30%);
-    }
-  }
-}
-.dash {
-  #tabs .tabs .tab {
-    &.active {
-        border-bottom: 4px solid darken($dash, 30%);
-    }
-  }
-}
-.ethereum {
-  #tabs .tabs .tab {
-    &.active {
-        border-bottom: 4px solid darken($ethereal, 30%);
-    }
-  }
-}
-.ripple {
-  #tabs .tabs .tab {
-    &.active {
-        border-bottom: 4px solid darken($ripple, 30%);
-    }
-  }
-}
-.stellar {
-  #tabs .tabs .tab {
-    &.active {
-        border-bottom: 4px solid darken($stellar, 30%);
-    }
-  }
-}
-.eos {
-  #tabs .tabs .tab {
-    &.active {
-        border-bottom: 4px solid darken($eos, 30%);
-    }
-  }
-}
-.bitcoincash {
-  #tabs .tabs .tab {
-    &.active {
-        border-bottom: 4px solid darken($bitcoincash, 30%);
-    }
-  }
-}
-.bitcoinsv {
-  #tabs .tabs .tab {
-    &.active {
-        border-bottom: 4px solid darken($bitcoinsv, 30%);
     }
   }
 }
