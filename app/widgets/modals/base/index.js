@@ -12,6 +12,8 @@ const Modal = Ractive.extend({
   },
   onrender() {
 
+    document.getElementsByTagName('html')[0].classList.add(`${this.el.id}--shown`);
+
     const self = this;
     const fadeEl = self.find('.js__fadeEl');
 
@@ -40,7 +42,10 @@ const Modal = Ractive.extend({
     function dismissModal() {
       const onDismiss = self.get('onDismiss');
       if (onDismiss) onDismiss();
-      fadeOut(fadeEl);
+      fadeOut(fadeEl, () => {
+        document.getElementsByTagName('html')[0].classList.remove(`${self.el.id}--shown`);
+        self.teardown();
+      });
     }
   },
 });

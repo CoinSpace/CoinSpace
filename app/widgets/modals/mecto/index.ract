@@ -4,7 +4,7 @@
 
     {{^searching}}
       <div class='_refresh' on-click="search-again">
-        <span id="refresh_el" class="_icon">
+        <span id="refresh_el" class="_icon" class-loading="searchingAgain">
           {{>svg_refresh}}
         </span>
       </div>
@@ -13,7 +13,7 @@
     <h3 class="_title">{{translate("Mecto")}}</h3>
 
     {{^searching}}
-      <div class="_cancel" on-click="close-geo">
+      <div class="_cancel" on-click="close">
         {{>svg_close}}
       </div>
     {{/searching}}
@@ -21,14 +21,14 @@
     </div>
 
     {{#searching}}
-      <div id="searching_container" class="geo__searching" on-click="close-geo">
+      <div id="searching_container" class="geo__searching">
         <span id="geo-pulse" class="_oval"></span>
         <div class="_text">
           <p class="_max-width">
             {{translate(search_message)}}
           </p>
         </div>
-        <div id="geo-pin" class="geo__pindrop">
+        <div id="geo-pin" class="geo__pindrop" style="transform: translateY(-100%);">
           <span class="_pin">
             {{>svg_mecto}}
           </span>
@@ -44,7 +44,7 @@
         data-wallet={{address}}
         data-name={{name}}
         data-email={{email}}>
-        <img class="_avatar" src="{{getAvatar(email, avatarIndex)}}" />
+        <img class="_avatar" src="{{getAvatar(email, avatarIndex, 120)}}" />
         <h3 class="_name">{{name}}</h3>
       </div>
     </div>

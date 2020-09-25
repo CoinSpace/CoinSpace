@@ -9,6 +9,7 @@ const geo = require('lib/geo');
 const showTooltip = require('widgets/modals/tooltip');
 const { showError } = require('widgets/modals/flash');
 const details = require('lib/wallet/details');
+const showMecto = require('widgets/modals/mecto');
 
 module.exports = function(el) {
   const ractive = new Ractive({
@@ -61,29 +62,27 @@ module.exports = function(el) {
 
   ractive.on('open-geo', (context) => {
     const dataContext = context.node.getAttribute('data-context');
-    const data = {
-      context: dataContext,
-    };
-
     if (dataContext === 'changelly-return-address') {
-      data.network = geo.networks[ractive.get('fromSymbol')];
+      showMecto(geo.networks[ractive.get('fromSymbol')], (address) => {
+        ractive.set('returnAddress', address);
+      });
     } else if (dataContext === 'changelly-to-address') {
-      data.network = geo.networks[ractive.get('toSymbol')];
+      showMecto(geo.networks[ractive.get('toSymbol')], (address) => {
+        ractive.set('toAddress', address);
+      });
     }
-    emitter.emit('open-geo-overlay', data);
   });
 
   ractive.on('open-qr', (context) => {
-    qrcode.scan({
-      context: context.node.getAttribute('data-context'),
-    });
-  });
-
-  emitter.on('prefill-wallet', (address, context) => {
+    context = context.node.getAttribute('data-context');
     if (context === 'changelly-return-address') {
-      ractive.set('returnAddress', address);
+      qrcode.scan(({ address }) => {
+        if (address) ractive.set('returnAddress', address);
+      });
     } else if (context === 'changelly-to-address') {
-      ractive.set('toAddress', address);
+      qrcode.scan(({ address }) => {
+        if (address) ractive.set('toAddress', address);
+      });
     }
   });
 

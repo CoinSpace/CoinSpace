@@ -44,7 +44,7 @@ module.exports = function(el) {
 
   ractive.on('before-show', ({ userInfo }) => {
     if (userInfo) {
-      const avatar = Avatar.getAvatar(userInfo.email, userInfo.avatarIndex);
+      const avatar = Avatar.getAvatar(userInfo.email, userInfo.avatarIndex, 64);
       ractive.set('avatar', `url('${avatar}')`);
       ractive.set('username', userInfo.username || translate('Your username'));
     }

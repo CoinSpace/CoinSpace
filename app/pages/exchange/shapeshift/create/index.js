@@ -13,6 +13,7 @@ const { showError } = require('widgets/modals/flash');
 const { showInfo } = require('widgets/modals/flash');
 const _ = require('lodash');
 const details = require('lib/wallet/details');
+const showMecto = require('widgets/modals/mecto');
 
 module.exports = function(el) {
   const ractive = new Ractive({
@@ -120,29 +121,27 @@ module.exports = function(el) {
 
   ractive.on('open-geo', (context) => {
     const dataContext = context.node.getAttribute('data-context');
-    const data = {
-      context: dataContext,
-    };
-
     if (dataContext === 'shapeshift-return-address') {
-      data.network = geo.networks[ractive.get('fromSymbol')];
+      showMecto(geo.networks[ractive.get('fromSymbol')], (address) => {
+        ractive.set('returnAddress', address);
+      });
     } else if (dataContext === 'shapeshift-to-address') {
-      data.network = geo.networks[ractive.get('toSymbol')];
+      showMecto(geo.networks[ractive.get('toSymbol')], (address) => {
+        ractive.set('toAddress', address);
+      });
     }
-    emitter.emit('open-geo-overlay', data);
   });
 
   ractive.on('open-qr', (context) => {
-    qrcode.scan({
-      context: context.node.getAttribute('data-context'),
-    });
-  });
-
-  emitter.on('prefill-wallet', (address, context) => {
+    context = context.node.getAttribute('data-context');
     if (context === 'shapeshift-return-address') {
-      ractive.set('returnAddress', address);
+      qrcode.scan(({ address }) => {
+        if (address) ractive.set('returnAddress', address);
+      });
     } else if (context === 'shapeshift-to-address') {
-      ractive.set('toAddress', address);
+      qrcode.scan(({ address }) => {
+        if (address) ractive.set('toAddress', address);
+      });
     }
   });
 

@@ -14,7 +14,6 @@ window.initCSApp = async function() {
   const FastClick = require('fastclick');
   const initFrame = require('widgets/frame');
   const initAuth = require('pages/auth');
-  const initGeoOverlay = require('widgets/geo-overlay');
   const { getToken } = require('lib/token');
   const denomination = require('lib/denomination');
   const moonpay = require('lib/moonpay');
@@ -42,7 +41,6 @@ window.initCSApp = async function() {
   fixFastClick();
   FastClick.attach(document.body);
 
-  initGeoOverlay(document.getElementById('geo-overlay'));
   auth = initAuth(document.getElementById('auth'));
   const authContentEl = document.getElementById('auth_frame');
   authContentEl.style.opacity = 0;

@@ -147,43 +147,6 @@
   }
 }
 
-#qr-modal {
-  @extend .overlay;
-  cursor: pointer;
-  background: rgba(0, 0, 0, 0.6);
-  overflow-y: hidden;
-}
-
-#qr-container {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-
-  transform: translateY(100%);
-  transition: transform ease 0.3s;
-
-  &.is_visible {
-    transform: translateY(0);
-  }
-
-  .qr__content {
-    position: absolute;
-    background-color: white;
-    top: 20px;
-    left: 15px;
-    right: 15px;
-    border-radius: 5px;
-    border: 5px solid white;
-  }
-
-  canvas {
-    margin: 0 auto;
-    border-radius: 3px;
-  }
-}
-
 .qr-code {
   display: table;
   margin: 0 auto;

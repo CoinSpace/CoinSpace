@@ -3,7 +3,6 @@
 const Ractive = require('widgets/modals/base');
 const { showError } = require('widgets/modals/flash');
 const qrcode = require('lib/qrcode');
-const emitter = require('lib/emitter');
 const showConfirmation = require('widgets/modals/confirm-send');
 const { showInfo } = require('widgets/modals/flash');
 const { getWallet } = require('lib/wallet');
@@ -63,7 +62,9 @@ function open() {
   });
 
   ractive.on('open-qr', () => {
-    qrcode.scan({ context: 'import-private-key' });
+    qrcode.scan(({ address }) => {
+      if (address) ractive.set('privateKey', address);
+    });
   });
 
   function handleError(err) {
@@ -81,10 +82,5 @@ function open() {
 
   return ractive;
 }
-
-emitter.on('prefill-wallet', (privateKey, context) => {
-  if (context !== 'import-private-key' || !ractive) return;
-  ractive.set('privateKey', privateKey);
-});
 
 module.exports = open;

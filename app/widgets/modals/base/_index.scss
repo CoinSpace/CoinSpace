@@ -1,10 +1,14 @@
 
+html.general-purpose-overlay--shown,
+html.tooltip--shown,
+html.transaction-detail--shown,
+html.flash-modal--shown {
+  overflow: hidden;
+}
 .overlay--flash {
   @extend .overlay;
   @include clickbtn;
-  overflow-y: auto;
   background-color: rgba(0, 0, 0, 0.5);
-  outline: 0;
   #modal-hidden-input {
     height: 0;
     padding: 0;

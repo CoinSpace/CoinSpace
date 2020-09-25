@@ -2,7 +2,6 @@
 
 // https://github.com/defunctzombie/qr.js/blob/515790fad4682b2d38008f229dbd814b0d2633e4/example/index.js
 const qr = require('qr.js');
-const emitter = require('lib/emitter');
 const EthereumWallet = require('cs-ethereum-wallet');
 const { isValidIban } = EthereumWallet.prototype;
 const { getAddressFromIban } = EthereumWallet.prototype;
@@ -37,7 +36,7 @@ function encode(string, options) {
   return canvas;
 }
 
-function scan(data) {
+function scan(callback) {
   if (!isScanAvailable) return false;
 
   // eslint-disable-next-line no-undef
@@ -50,17 +49,19 @@ function scan(data) {
           address = getAddressFromIban(address);
         }
 
-        emitter.emit('prefill-wallet', address, data.context);
+        const data = { address };
 
         let match;
         match = result.text.match(/amount=([0-9.]+)/);
         if (match && match[1]) {
-          emitter.emit('prefill-value', match[1], data.context);
+          data.value = match[1];
         }
         match = result.text.match(/dt=(\d+)/);
         if (match && match[1]) {
-          emitter.emit('prefill-destination-tag', match[1], data.context);
+          data.tag = match[1];
         }
+
+        callback(data);
       }
     },
     () => {

@@ -69,11 +69,15 @@
   }
 
   ._settings {
+    padding: 10px;
+    margin-left: -10px;
     @extend .icon_atom;
   }
 
   .header__refresh {
     @extend .icon_atom;
+    padding: 5px 10px;
+    margin-right: -10px;
     ._icon {
       &.loading {
         animation: infinite-spinning 1s linear infinite;

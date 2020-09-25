@@ -18,13 +18,13 @@ function formatEmail(email) {
   return email.trim().toLowerCase();
 }
 
-function emailToAvatar(email) {
+function emailToAvatar(email, size) {
   email = formatEmail(email);
 
   return [
     'https://www.gravatar.com/avatar/',
     crypto.createHash('md5').update(email).digest('hex'),
-    '?size=64',
+    `?size=${size}`,
   ].join('');
 }
 
@@ -36,9 +36,9 @@ function getAvatarByIndex(index) {
   return avatars[index];
 }
 
-function getAvatar(email, avatarIndex) {
+function getAvatar(email, avatarIndex, size) {
   if (!blank(email)) {
-    return emailToAvatar(email);
+    return emailToAvatar(email, size);
   }
   return getAvatarByIndex(avatarIndex);
 }

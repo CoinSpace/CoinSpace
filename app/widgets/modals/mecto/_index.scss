@@ -1,7 +1,5 @@
-
 .overlay--geo {
   @extend .overlay;
-  overflow-y: auto;
   background-color: $blue;
 }
 
@@ -51,10 +49,11 @@
     width: 38px;
     height: 38px;
     padding: 4px;
+    svg {
+      pointer-events: none;
+    }
   }
 }
-
-
 
 .geo__searching {
 
@@ -138,7 +137,6 @@
     text-align: center;
   }
 }
-
 
 .geo__noresults {
 

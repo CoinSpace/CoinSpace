@@ -75,7 +75,9 @@ function open(walletTokens, callback) {
   });
 
   ractive.on('open-qr', () => {
-    qrcode.scan({ context: 'ethereum-contract-address' });
+    qrcode.scan(({ address }) => {
+      ractive.set('contractAddress', address);
+    });
   });
 
   function handleError(err) {
@@ -85,10 +87,5 @@ function open(walletTokens, callback) {
 
   return ractive;
 }
-
-emitter.on('prefill-wallet', (contractAddress, context) => {
-  if (context !== 'ethereum-contract-address' || !ractive) return;
-  ractive.set('contractAddress', contractAddress);
-});
 
 module.exports = open;

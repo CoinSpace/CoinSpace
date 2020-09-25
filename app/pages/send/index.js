@@ -10,6 +10,7 @@ const { getTokenNetwork } = require('lib/token');
 const { showError } = require('widgets/modals/flash');
 const { showInfo } = require('widgets/modals/flash');
 const showConfirmation = require('widgets/modals/confirm-send');
+const showMecto = require('widgets/modals/mecto');
 const showTooltip = require('widgets/modals/tooltip');
 const { validateSend } = require('lib/wallet');
 const { getDestinationInfo } = require('lib/wallet');
@@ -56,25 +57,6 @@ module.exports = function(el) {
 
   initEosSetup(ractive.find('#eos-setup'));
 
-  emitter.on('prefill-wallet', (address, context) => {
-    if (context !== 'send') return;
-    ractive.set('to', address);
-  });
-
-  emitter.on('prefill-value', (value, context) => {
-    if (context !== 'send') return;
-    ractive.find('#bitcoin').value = value;
-    ractive.fire('bitcoin-to-fiat');
-  });
-
-  emitter.on('prefill-destination-tag', (tag, context) => {
-    if (context !== 'send') return;
-    const $tag = ractive.find('#destination-tag');
-    if ($tag) {
-      $tag.value = tag;
-    }
-  });
-
   ractive.on('before-show', () => {
     const network = getTokenNetwork();
     ractive.set('isEthereum', network === 'ethereum');
@@ -84,14 +66,23 @@ module.exports = function(el) {
   });
 
   ractive.on('open-qr', () => {
-    qrcode.scan({ context: 'send' });
+    qrcode.scan(({ address, value, tag }) => {
+      if (address) ractive.set('to', address);
+      if (value) {
+        ractive.find('#bitcoin').value = value;
+        ractive.fire('bitcoin-to-fiat');
+      }
+      const $tag = ractive.find('#destination-tag');
+      if (tag && $tag) {
+        $tag.value = tag;
+      }
+    });
   });
 
   ractive.on('open-geo', ()=> {
-    const data = {
-      context: 'send',
-    };
-    emitter.emit('open-geo-overlay', data);
+    showMecto(null, (address) => {
+      ractive.set('to', address);
+    });
   });
 
   emitter.on('sync', () => {
