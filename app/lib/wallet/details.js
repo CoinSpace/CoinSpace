@@ -65,7 +65,10 @@ async function _initDetails() {
     });
     if (legacy) {
       defaultValue = JSON.parse(decrypt(legacy, seeds.get('private')));
-      if (defaultValue.userInfo.firstName) defaultValue.userInfo.username = defaultValue.userInfo.firstName;
+      if (defaultValue.userInfo) {
+        delete defaultValue.userInfo.firstName;
+        delete defaultValue.userInfo.lastName;
+      }
     }
   }
   return _save(defaultValue);

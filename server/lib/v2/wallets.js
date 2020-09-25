@@ -341,7 +341,7 @@ async function setUsername(device, username) {
     .digest('hex');
 
   await db().collection(COLLECTION)
-    .updateOne({ _id: device.wallet._id }, { $set: { username_sha: usernameSha } }, { upsert: true })
+    .updateOne({ _id: device.wallet._id }, { $set: { username_sha: usernameSha } })
     .catch((err) => {
       if (err.name === 'MongoError' && err.code === 11000) {
         throw createError(400, 'Username already taken');
