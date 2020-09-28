@@ -20,12 +20,14 @@ module.exports = function(el) {
       isEnabledImport: true,
       isEnabledExport: true,
       isEOS: false,
+      walletName: '',
     },
   });
 
-  emitter.on('wallet-ready', () => {
+  ractive.on('before-show', () => {
     const wallet = CS.getWallet();
     ractive.set('isEOS', wallet.networkName === 'eos');
+    ractive.set('walletName', wallet.name);
     if (wallet.networkName === 'ethereum' && wallet.token) {
       ractive.set('isEnabledImport', false);
       ractive.set('isEnabledExport', false);

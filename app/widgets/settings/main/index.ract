@@ -25,8 +25,9 @@
     </div>
   </div>
 
+  {{#unless (!isEOS && !isEnabledImport && !isEnabledExport)}}
   <div class="_section">
-    <div class="_title">{{translate("Tools")}}</div>
+    <div class="_title">{{translate("Tools")}} ({{walletName}})</div>
     {{#if isEOS}}
     <div class="_list_item _btn" on-click="eos-setup-account">
       <div class="_label">{{translate("Setup EOS account")}}</div>
@@ -46,6 +47,7 @@
     </div>
     {{/if}}
   </div>
+  {{/unless}}
 
   <div class="_section">
     <div class="_list_item _btn" on-click="support">
