@@ -38,7 +38,7 @@
 
   ._content {
     width: 100%;
-    max-width: 320px;
+    max-width: 380px;
     @include breakpoint(portrait) {
       max-width: 380px;
     }
