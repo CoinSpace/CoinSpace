@@ -21,22 +21,21 @@ function open() {
     ractive.fire('cancel');
   });
 
-  ractive.on('show-keys', () => {
+  ractive.on('show-keys', async () => {
     const wallet = getWallet();
 
-    unlock(wallet).then(() => {
-      const privateKeys = wallet.exportPrivateKeys();
-      lock(wallet);
-      if (privateKeys.length === 0) {
-        ractive.fire('cancel');
-        return showInfo({
-          message: 'Your wallet has no private keys with coins for export.',
-          fadeInDuration: 0,
-        });
-      }
-      ractive.set('privateKeys', privateKeys);
-      ractive.set('isShown', true);
-    });
+    await unlock(wallet);
+    const privateKeys = wallet.exportPrivateKeys();
+    lock(wallet);
+    if (privateKeys.length === 0) {
+      ractive.fire('cancel');
+      return showInfo({
+        message: 'Your wallet has no private keys with coins for export.',
+        fadeInDuration: 0,
+      });
+    }
+    ractive.set('privateKeys', privateKeys);
+    ractive.set('isShown', true);
 
   });
 

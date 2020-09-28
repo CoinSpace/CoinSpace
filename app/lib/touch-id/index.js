@@ -68,7 +68,7 @@ function phonegap() {
   });
 }
 
-async function fido() {
+async function publicToken() {
   const options = await request({
     url: `${urlRoot}v2/token/public/platform?id=${LS.getId()}`,
     method: 'get',
@@ -87,6 +87,27 @@ async function fido() {
   return res.publicToken;
 }
 
+async function privateToken() {
+  const options = await request({
+    url: `${urlRoot}v2/token/private/platform?id=${LS.getId()}`,
+    method: 'get',
+    seed: 'public',
+  });
+  let assertion;
+  try {
+    assertion = await startAssertion(options);
+  } catch (err) {
+    throw new Error('touch_id_error');
+  }
+  const res = await request({
+    url: `${urlRoot}v2/token/private/platform?id=${LS.getId()}`,
+    method: 'post',
+    data: assertion,
+    seed: 'public',
+  });
+  return res.privateToken;
+}
+
 function isEnabled() {
   if (!isAvailable) return false;
   if (process.env.BUILD_TYPE === 'phonegap') {
@@ -98,7 +119,8 @@ function isEnabled() {
 module.exports = {
   init,
   enable,
-  fido,
+  publicToken,
+  privateToken,
   phonegap,
   isAvailable: () => isAvailable,
   isEnabled,

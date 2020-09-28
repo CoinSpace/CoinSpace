@@ -122,7 +122,7 @@ async function loginWithTouchId(showSpinner) {
     }
     return loginWithPin(pin);
   } else {
-    const publicToken = await touchId.fido();
+    const publicToken = await touchId.publicToken();
     showSpinner();
     seeds.unlock('public', publicToken);
     await Promise.all([details.init(), settings.init()]);
