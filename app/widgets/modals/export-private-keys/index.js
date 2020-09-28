@@ -23,8 +23,11 @@ function open() {
 
   ractive.on('show-keys', async () => {
     const wallet = getWallet();
-
-    await unlock(wallet);
+    try {
+      await unlock(wallet);
+    } catch (err) {
+      return;
+    }
     const privateKeys = wallet.exportPrivateKeys();
     lock(wallet);
     if (privateKeys.length === 0) {

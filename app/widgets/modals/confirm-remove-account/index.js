@@ -3,7 +3,7 @@
 const Ractive = require('widgets/modals/base');
 const { showError } = require('widgets/modals/flash');
 const CS = require('lib/wallet');
-const LS = require('lib/wallet/localStorage');
+const { unlock, lock } = require('lib/wallet/security');
 
 function open() {
 
@@ -18,21 +18,27 @@ function open() {
     },
   });
 
-  ractive.on('remove', () => {
-    ractive.set('removing', true);
-    CS.removeAccount()
-      .then(() => {
-        LS.reset();
-        ractive.set('confirmation', false);
-        ractive.set('success', true);
-        setTimeout(() => {
-          location.reload();
-        }, 3000);
-      })
-      .catch((err) => {
-        ractive.set('removing', false);
-        showError({ message: err.message });
-      });
+  ractive.on('remove', async () => {
+
+    try {
+      await unlock();
+    } catch (err) {
+      return;
+    }
+
+    try {
+      ractive.set('removing', true);
+      await CS.removeAccount();
+      ractive.set('confirmation', false);
+      ractive.set('success', true);
+      setTimeout(() => {
+        location.reload();
+      }, 3000);
+    } catch (err) {
+      lock();
+      ractive.set('removing', false);
+      showError({ message: err.message });
+    }
   });
 
   ractive.on('reload', () => {

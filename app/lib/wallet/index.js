@@ -206,12 +206,13 @@ function initWallet(pin) {
   }
 }
 
-function removeAccount() {
-  return request({
+async function removeAccount() {
+  await request({
     url: `${urlRoot}v2/wallet?id=${LS.getId()}`,
     method: 'delete',
     seed: 'private',
   });
+  LS.reset();
 }
 
 function setUsername(username) {

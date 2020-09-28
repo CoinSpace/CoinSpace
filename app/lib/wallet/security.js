@@ -11,7 +11,7 @@ const touchId = require('lib/touch-id');
 const { urlRoot } = window;
 
 function unlock(wallet) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     if (settings.get('1faPrivate')) {
       const pinWidget = PinWidget({
         touchId: true,
@@ -20,7 +20,7 @@ function unlock(wallet) {
           try {
             const privateToken = await _getPrivateTokenByPin(pin);
             seeds.unlock('private', privateToken);
-            wallet.unlock(seeds.get('private'));
+            if (wallet) wallet.unlock(seeds.get('private'));
             pinWidget.close();
             resolve();
           } catch (err) {
@@ -41,7 +41,7 @@ function unlock(wallet) {
               pinWidget.set('isLoading', true);
             }
             seeds.unlock('private', privateToken);
-            wallet.unlock(seeds.get('private'));
+            if (wallet) wallet.unlock(seeds.get('private'));
             pinWidget.close();
             resolve();
           } catch (err) {
@@ -54,6 +54,10 @@ function unlock(wallet) {
 
       pinWidget.fire('touch-id');
 
+      pinWidget.on('back', () => {
+        reject(new Error('cancelled'));
+      });
+
     } else {
       return request({
         url: `${urlRoot}v2/token/private?id=${LS.getId()}`,
@@ -61,7 +65,7 @@ function unlock(wallet) {
         seed: 'public',
       }).then(({ privateToken }) => {
         seeds.unlock('private', privateToken);
-        wallet.unlock(seeds.get('private'));
+        if (wallet) wallet.unlock(seeds.get('private'));
         resolve();
       });
     }
@@ -69,7 +73,7 @@ function unlock(wallet) {
 }
 
 function lock(wallet) {
-  wallet.lock();
+  if (wallet) wallet.lock();
   seeds.lock('private');
 }
 
