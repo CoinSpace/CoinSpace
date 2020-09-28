@@ -1,11 +1,7 @@
 <div class="auth_choose">
 
   <div class="_img">
-    {{#if BUILD_TYPE === 'web'}}
-      {{>svg_logo_stack}}
-    {{else}}
-      {{>svg_logo_stack_mobile}}
-    {{/if}}
+    {{>svg_logo_stack}}
   </div>
 
   <div class="_btn_group">
@@ -21,7 +17,7 @@
     {{>svg_appstore}}
   </a>
   <br>
-  <a class="_footer_link" href="https://www.coin.space" target="_blank">
+  <a class="_footer_link" href="https://coin.space" target="_blank">
     Copyright CoinSpace © 2020<br>
     All Rights Reserved
   </a>

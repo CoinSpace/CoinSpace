@@ -97,11 +97,13 @@
 
   ._keyboard {
     flex: 1;
+    margin-left: 10px;
+    margin-right: 10px;
     ._btns {
       width: 100%;
-      max-width: 250px;
+      max-width: 300px;
       @include breakpoint(portrait) {
-        max-width: 350px;
+        max-width: 400px;
       }
       margin: 0 auto;
     }

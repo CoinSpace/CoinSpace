@@ -1,7 +1,7 @@
 .auth_choose {
 
   ._img {
-    height: 90px;
+    height: 120px;
     display: block;
     margin: 0 auto;
     margin-bottom: 30px;
@@ -9,7 +9,7 @@
       height: 100%;
     }
     @include breakpoint(portrait) {
-      height: 120px;
+      height: 150px;
       margin-bottom: 40px;
     }
   }
