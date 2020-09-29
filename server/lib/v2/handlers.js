@@ -2,6 +2,7 @@
 
 const createError = require('http-errors');
 const wallets = require('./wallets');
+const mecto = require('./mecto');
 const { asyncWrapper, verifyReq } = require('./utils');
 
 exports.register = asyncWrapper(async (req, res) => {
@@ -177,5 +178,20 @@ exports.removeDevice = asyncWrapper(async (req, res) => {
 
 exports.removeWallet = asyncWrapper(async (req, res) => {
   await wallets.removeWallet(req.device);
+  res.status(200).send({ success: true });
+});
+
+exports.searchMecto = asyncWrapper(async (req, res) => {
+  const results = await mecto.search(req.device, req.query);
+  res.status(200).send(results);
+});
+
+exports.saveMecto = asyncWrapper(async (req, res) => {
+  await mecto.save(req.device, req.body);
+  res.status(200).send({ success: true });
+});
+
+exports.removeMecto = asyncWrapper(async (req, res) => {
+  await mecto.remove(req.device);
   res.status(200).send({ success: true });
 });

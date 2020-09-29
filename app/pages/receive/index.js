@@ -105,17 +105,17 @@ module.exports = function(el) {
     geo.remove();
   }
 
-  function mectoOn() {
+  async function mectoOn() {
     ractive.set('connecting', true);
     ractive.set('btn_message', 'Checking your location');
-    geo.save((err) => {
-      if (err) {
-        return handleMectoError(err);
-      }
+    try {
+      await geo.save();
       ractive.set('connecting', false);
       ractive.set('broadcasting', true);
       ractive.set('btn_message', 'Turn Mecto off');
-    });
+    } catch (err) {
+      return handleMectoError(err);
+    }
   }
 
   ractive.on('show-qr', () => {

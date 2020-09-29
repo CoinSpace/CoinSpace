@@ -15,7 +15,7 @@
     "client": "webpack --config webpack.prod.js",
     "client:watch": "webpack-dev-server --config webpack.dev.js",
     "server": "node --expose-gc ./server/server.js",
-    "server:watch": "nodemon -w ./server -x node -r dotenv/config ./server/server.js dotenv_config_path=./server/.env.loc",
+    "server:watch": "nodemon -e js,yaml -w ./server -x node -r dotenv/config ./server/server.js dotenv_config_path=./server/.env.loc",
     "lint": "eslint webpack.*.js 'cli/*.js' 'electron/**/*.js' 'app/**/*.js' 'server/**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

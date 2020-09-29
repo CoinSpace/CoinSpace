@@ -23,6 +23,7 @@ function save(lat, lon, userInfo) {
         address: userInfo.address,
         network: userInfo.network,
         timestamp: new Date(),
+        version: 1,
         geometry: {
           type: 'Point',
           coordinates: [lon, lat],
@@ -53,6 +54,7 @@ function search(lat, lon, userInfo) {
   return collection.find({
     _id: { $ne: userInfo.id },
     network: userInfo.network,
+    version: 1,
     geometry: {
       $nearSphere: {
         $geometry: {

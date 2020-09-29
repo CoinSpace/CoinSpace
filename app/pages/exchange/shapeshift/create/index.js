@@ -7,7 +7,6 @@ const denomination = require('lib/denomination');
 const { getTokenNetwork } = require('lib/token');
 const shapeshift = require('lib/shapeshift');
 const qrcode = require('lib/qrcode');
-const geo = require('lib/geo');
 const showTooltip = require('widgets/modals/tooltip');
 const { showError } = require('widgets/modals/flash');
 const { showInfo } = require('widgets/modals/flash');
@@ -31,9 +30,6 @@ module.exports = function(el) {
       toSymbol: '',
       rate: '?',
       coins: [],
-      isGeoEnabled(symbol) {
-        return Object.keys(geo.networks).indexOf(symbol) !== -1;
-      },
     },
     partials: {
       loader: require('../loader.ract'),
@@ -122,11 +118,11 @@ module.exports = function(el) {
   ractive.on('open-geo', (context) => {
     const dataContext = context.node.getAttribute('data-context');
     if (dataContext === 'shapeshift-return-address') {
-      showMecto(geo.networks[ractive.get('fromSymbol')], (address) => {
+      showMecto((address) => {
         ractive.set('returnAddress', address);
       });
     } else if (dataContext === 'shapeshift-to-address') {
-      showMecto(geo.networks[ractive.get('toSymbol')], (address) => {
+      showMecto((address) => {
         ractive.set('toAddress', address);
       });
     }

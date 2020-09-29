@@ -80,7 +80,7 @@ module.exports = function(el) {
   });
 
   ractive.on('open-geo', ()=> {
-    showMecto(null, (address) => {
+    showMecto((address) => {
       ractive.set('to', address);
     });
   });

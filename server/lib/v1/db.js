@@ -16,6 +16,7 @@ module.exports = function() {
         db.collection('mecto').createIndexes([
           { key: { geometry: '2dsphere' }, background: true },
           { key: { network: 1 }, background: true },
+          { key: { version: 1 }, background: true },
         ]),
         db.collection('ethereum_tokens').createIndexes([
           { key: { symbol: 1 }, background: true },

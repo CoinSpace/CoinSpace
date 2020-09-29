@@ -5,7 +5,6 @@ const emitter = require('lib/emitter');
 const { getWallet } = require('lib/wallet');
 const changelly = require('lib/changelly');
 const qrcode = require('lib/qrcode');
-const geo = require('lib/geo');
 const showTooltip = require('widgets/modals/tooltip');
 const { showError } = require('widgets/modals/flash');
 const details = require('lib/wallet/details');
@@ -22,9 +21,6 @@ module.exports = function(el) {
       returnAddress: '',
       toAddress: '',
       toSymbol: '',
-      isGeoEnabled(symbol) {
-        return Object.keys(geo.networks).indexOf(symbol) !== -1;
-      },
     },
     partials: {
       loader: require('../loader.ract'),
@@ -63,11 +59,11 @@ module.exports = function(el) {
   ractive.on('open-geo', (context) => {
     const dataContext = context.node.getAttribute('data-context');
     if (dataContext === 'changelly-return-address') {
-      showMecto(geo.networks[ractive.get('fromSymbol')], (address) => {
+      showMecto((address) => {
         ractive.set('returnAddress', address);
       });
     } else if (dataContext === 'changelly-to-address') {
-      showMecto(geo.networks[ractive.get('toSymbol')], (address) => {
+      showMecto((address) => {
         ractive.set('toAddress', address);
       });
     }

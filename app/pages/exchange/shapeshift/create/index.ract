@@ -43,19 +43,11 @@
         </div>
       {{/qrScannerAvailable}}
 
-      {{#if isGeoEnabled(fromSymbol)}}
-        <div class="_btn" on-click="open-geo" data-context="shapeshift-return-address">
-          <span class="_icon">
-            {{>svg_mecto}}
-          </span>
-        </div>
-      {{else}}
-        <div class="_btn _disabled">
-          <span class="_icon">
-            {{>svg_mecto}}
-          </span>
-        </div>
-      {{/if}}
+      <div class="_btn" on-click="open-geo" data-context="shapeshift-return-address">
+        <span class="_icon">
+          {{>svg_mecto}}
+        </span>
+      </div>
 
     </div>
 
@@ -94,19 +86,11 @@
         </div>
       {{/qrScannerAvailable}}
 
-      {{#if isGeoEnabled(toSymbol)}}
       <div class="_btn" on-click="open-geo" data-context="shapeshift-to-address">
         <span class="_icon">
           {{>svg_mecto}}
         </span>
       </div>
-      {{else}}
-        <div class="_btn _disabled">
-          <span class="_icon">
-            {{>svg_mecto}}
-          </span>
-        </div>
-      {{/if}}
     </div>
 
     <h3 class="_title">{{translate("Exchange rate")}}</h3>

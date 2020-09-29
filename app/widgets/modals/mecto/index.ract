@@ -41,11 +41,9 @@
     {{#nearbys}}
     <div class="geo__results">
       <div class="_item" on-click="select"
-        data-wallet={{address}}
-        data-name={{name}}
-        data-email={{email}}>
+        data-wallet={{address}}>
         <img class="_avatar" src="{{getAvatar(email, avatarIndex, 120)}}" />
-        <h3 class="_name">{{name}}</h3>
+        <h3 class="_name">{{username}}</h3>
       </div>
     </div>
     {{/nearbys}}

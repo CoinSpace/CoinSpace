@@ -4,88 +4,68 @@ const request = require('lib/request');
 const details = require('lib/wallet/details');
 const { getWallet } = require('lib/wallet');
 const LS = require('lib/wallet/localStorage');
-const { getTokenNetwork } = require('lib/token');
 const { urlRoot } = window;
-let userInfo = {};
-const networks = {
-  BTC: 'bitcoin',
-  BCH: 'bitcoincash',
-  BSV: 'bitcoinsv',
-  LTC: 'litecoin',
-  ETH: 'ethereum',
-  XRP: 'ripple',
-  XLM: 'stellar',
-  EOS: 'eos',
-  DOGE: 'dogecoin',
-  DASH: 'dash',
-};
 
-function save(callback) {
-  requestLocationEndpoint(false, 'POST', callback);
-}
-
-function search(network, callback) {
-  requestLocationEndpoint(network, 'PUT', callback);
-}
-
-function remove() {
-  request({
-    url: urlRoot + 'v2/location',
-    method: 'delete',
+async function save() {
+  const { latitude, longitude } = await getLocation();
+  const userInfo = details.get('userInfo');
+  return request({
+    url: `${urlRoot}v2/mecto?id=${LS.getId()}`,
+    method: 'put',
     data: {
-      id: LS.getId(),
+      username: userInfo.username,
+      email: userInfo.email,
+      avatarIndex: userInfo.avatarIndex,
+      address: getWallet().getNextAddress(),
+      lat: latitude,
+      lon: longitude,
     },
+    seed: 'public',
   });
 }
 
-function getLocation(callback) {
-  if (!window.navigator.geolocation) {
-    return callback(new Error('Your browser does not support geolocation'));
-  }
-
-  const success = function(position) {
-    callback(null, position.coords.latitude, position.coords.longitude);
-  };
-
-  const error = function() {
-    const alert = navigator.notification ? navigator.notification.alert : window.alert;
-    alert(
-      'Access to the geolocation has been prohibited; please enable it in the Settings app to continue',
-      () => {},
-      'Coin'
-    );
-    callback(new Error('Unable to retrieve your location'));
-  };
-
-  window.navigator.geolocation.getCurrentPosition(success, error, process.env.BUILD_TYPE === 'electron' ? {
-    enableHighAccuracy: true,
-  } : {});
+async function search() {
+  const { latitude, longitude } = await getLocation();
+  const results = await request({
+    url: `${urlRoot}v2/mecto?id=${LS.getId()}&lat=${latitude}&lon=${longitude}`,
+    method: 'get',
+    seed: 'public',
+  });
+  return results;
 }
 
-function requestLocationEndpoint(network, method, callback) {
-  getLocation((err, lat, lon) => {
-    if (err) return callback(err);
+function remove() {
+  return request({
+    url: urlRoot + `v2/mecto?id=${LS.getId()}`,
+    method: 'delete',
+    seed: 'public',
+  }).catch(() => {});
+}
 
-    if (process.env.NODE_ENV === 'development') {
-      console.info(`Current location: https://www.google.com/maps/place/${lat},${lon}`);
+async function getLocation() {
+  return new Promise((resolve, reject) => {
+    if (!window.navigator.geolocation) {
+      return reject(new Error('Your browser does not support geolocation'));
     }
 
-    const doc = details.get();
-    userInfo = {};
-    userInfo.id = LS.getId();
-    userInfo.name = doc.userInfo.username;
-    userInfo.email = doc.userInfo.email;
-    userInfo.avatarIndex = doc.userInfo.avatarIndex;
-    userInfo.address = getWallet().getNextAddress();
-    userInfo.network = network || getTokenNetwork();
-    userInfo.lat = lat;
-    userInfo.lon = lon;
+    const options = process.env.BUILD_TYPE === 'electron' ? {
+      enableHighAccuracy: true,
+    } : {};
 
-    request({
-      url: urlRoot + 'v2/location',
-      method,
-      data: userInfo,
-    }, callback);
+    const alert = navigator.notification ? navigator.notification.alert : window.alert;
+
+    window.navigator.geolocation.getCurrentPosition(
+      (position) => { resolve(position.coords); },
+      () => {
+        alert(
+          'Access to the geolocation has been prohibited; please enable it in the Settings app to continue',
+          () => {},
+          'Coin'
+        );
+        reject(new Error('Unable to retrieve your location'));
+      },
+      options
+    );
   });
 }
 
@@ -93,5 +73,4 @@ module.exports = {
   search,
   save,
   remove,
-  networks,
 };

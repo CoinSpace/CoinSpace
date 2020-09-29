@@ -7,7 +7,7 @@ const { showError } = require('widgets/modals/flash');
 const animatePin = require('lib/transitions/pinDrop.js').drop;
 const resetPin = require('lib/transitions/pinDrop.js').reset;
 
-function open(network, callback) {
+function open(callback) {
   const ractive = new Ractive({
     template: require('./index.ract'),
     data: {
@@ -51,28 +51,15 @@ function open(network, callback) {
     } else {
       await new Promise((resolve) => setTimeout(resolve, 1000));
     }
-    geo.search(network, (err, results) => {
-      if (err) {
-        ractive.set('searching', false);
-        ractive.set('searchingAgain', false);
-        return showError({ message: err.message });
-      }
-      ractive.set('searching', false);
-      ractive.set('searchingAgain', false);
-      setNearbys(results);
-    });
-  }
 
-  function setNearbys(results) {
-    let nearbys;
-    if (results == null || results.length < 1) {
-      nearbys = [];
-    } else {
-      nearbys = results.map((record) => {
-        return record[0];
-      });
+    try {
+      const results = await geo.search();
+      ractive.set('nearbys', results);
+    } catch (err) {
+      showError({ message: err.message });
     }
-    ractive.set('nearbys', nearbys);
+    ractive.set('searching', false);
+    ractive.set('searchingAgain', false);
   }
 
   return ractive;
