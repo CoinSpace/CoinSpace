@@ -9,6 +9,7 @@ const importPrivateKey = require('widgets/modals/import-private-key');
 const exportPrivateKeys = require('widgets/modals/export-private-keys');
 const showEosSetupAccount = require('widgets/modals/eos-setup-account');
 const { translate } = require('lib/i18n');
+const os = require('lib/detect-os');
 
 module.exports = function(el) {
   const ractive = new Ractive({
@@ -20,6 +21,7 @@ module.exports = function(el) {
       isEnabledImport: true,
       isEnabledExport: true,
       isEOS: false,
+      securityPinLabel: getSecurityPinLabel(),
       walletName: '',
     },
   });
@@ -42,6 +44,10 @@ module.exports = function(el) {
 
   ractive.on('account', () => {
     emitter.emit('change-widget-settings-step', 'account');
+  });
+
+  ractive.on('security-pin', () => {
+    emitter.emit('change-widget-settings-step', 'securityPin');
   });
 
   ractive.on('before-show', ({ userInfo }) => {
@@ -75,3 +81,13 @@ module.exports = function(el) {
 
   return ractive;
 };
+
+function getSecurityPinLabel() {
+  if (os === 'ios' || os === 'macos') {
+    return translate('PIN & Touch ID');
+  } else if (os === 'android') {
+    return translate('PIN & Fingerprint');
+  } else {
+    return translate('PIN & Biometrics');
+  }
+}

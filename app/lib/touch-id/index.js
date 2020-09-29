@@ -39,7 +39,12 @@ async function enable(pin) {
       method: 'get',
       seed: 'public',
     });
-    const attestation = await startAttestation(options);
+    let attestation;
+    try {
+      attestation = await startAttestation(options);
+    } catch (err) {
+      throw new Error('touch_id_error');
+    }
     await request({
       url: `${urlRoot}v2/platform/attestation?id=${LS.getId()}`,
       method: 'post',
@@ -47,6 +52,14 @@ async function enable(pin) {
       seed: 'public',
     });
     LS.setFidoTouchIdEnabled(true);
+  }
+}
+
+function disable() {
+  if (process.env.BUILD_TYPE === 'phonegap') {
+    LS.setPin(false);
+  } else {
+    LS.setFidoTouchIdEnabled(false);
   }
 }
 
@@ -119,6 +132,7 @@ function isEnabled() {
 module.exports = {
   init,
   enable,
+  disable,
   publicToken,
   privateToken,
   phonegap,

@@ -4,6 +4,7 @@
 
   <div id="widget-settings-main" class="step"></div>
   <div id="widget-settings-account" class="step"></div>
+  <div id="widget-settings-security-pin" class="step"></div>
   <div id="widget-settings-about" class="step"></div>
 
 </div>

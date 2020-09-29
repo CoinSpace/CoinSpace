@@ -11,16 +11,18 @@
 
   <div class="_section _account">
     <div class="_list_item _btn" on-click="account">
-      <div class="_avatar" style-background-image="{{ avatar }}"></div>
-      <div class="_label">{{ username }}</div>
+      <div class="_avatar_group">
+        <div class="_avatar" style-background-image="{{ avatar }}"></div>
+        <div class="_label">{{ username }}</div>
+      </div>
       <div class="_arrow">{{>svg_arrow}}</div>
     </div>
   </div>
 
   <div class="_section">
     <div class="_title">{{translate("Security")}}</div>
-    <div class="_list_item _btn">
-      <div class="_label">{{translate("PIN & Touch ID")}}</div>
+    <div class="_list_item _btn" on-click="security-pin">
+      <div class="_label">{{securityPinLabel}}</div>
       <div class="_arrow">{{>svg_arrow}}</div>
     </div>
   </div>

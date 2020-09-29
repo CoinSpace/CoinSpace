@@ -67,6 +67,7 @@ function getPin() {
 }
 
 function setPin(pin) {
+  if (!pin) return localStorage.removeItem('_pin_cs');
   localStorage.setItem('_pin_cs', encryption.encrypt(pin, 'pinCoinSpace'));
 }
 
@@ -93,6 +94,7 @@ function isFidoTouchIdEnabled() {
 }
 
 function setFidoTouchIdEnabled(value) {
+  if (!value) return localStorage.removeItem('_cs_touchid_enabled');
   return localStorage.setItem('_cs_touchid_enabled', value);
 }
 

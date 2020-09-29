@@ -327,6 +327,11 @@
   "Settings": "Settings",
   "Security": "Security",
   "PIN & Touch ID": "PIN & Touch ID",
+  "PIN & Fingerprint": "PIN & Fingerprint",
+  "PIN & Biometrics": "PIN & Biometrics",
   "Hardware Security": "Hardware Security",
-  "Tools": "Tools"
+  "Tools": "Tools",
+  "Use for:": "Use for:",
+  "Send coins, export private keys": "Send coins, export private keys",
+  "Always used to open the app.": "Always used to open the app."
 }

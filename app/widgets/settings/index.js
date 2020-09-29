@@ -5,6 +5,7 @@ const emitter = require('lib/emitter');
 const initMain = require('./main');
 const initAccount = require('./account');
 const initAbout = require('./about');
+const initSecurityPin = require('./security/pin');
 const details = require('lib/wallet/details');
 
 module.exports = function(el) {
@@ -16,6 +17,7 @@ module.exports = function(el) {
   const steps = {
     main: initMain(ractive.find('#widget-settings-main')),
     account: initAccount(ractive.find('#widget-settings-account')),
+    securityPin: initSecurityPin(ractive.find('#widget-settings-security-pin')),
     about: initAbout(ractive.find('#widget-settings-about')),
   };
   let currentStep = steps.main;

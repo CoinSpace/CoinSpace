@@ -2,15 +2,17 @@
   ._section {
     &._account {
       margin-top: 20px;
+      ._avatar_group {
+        display: flex;
+        overflow: hidden;
+      }
       ._label {
         line-height: 64px;
-        margin-left: 70px;
+        margin-left: 10px;
         font-size: $header_font_size;
       }
       ._avatar {
-        position: absolute;
-        top: 50%;
-        margin-top: -32px;
+        flex-shrink: 0;
         margin-left: -4px;
         width: 64px;
         height: 64px;

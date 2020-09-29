@@ -102,30 +102,53 @@
       &._btn {
         @include clickbtn;
       }
-      display: block;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       background: #fff;
       border-bottom: #e2e2e2 1px solid;
       padding: 10px;
       line-height: 25px;
-      position: relative;
       outline: 0;
       ._label {
         @include ellipsis();
-        margin-right: 20px;
       }
       ._arrow {
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        margin-top: -10px;
-        color: #999;
         svg {
-          float: left;
+          display: block;
           width: 20px;
           height: 20px;
           transform: rotate(-90deg);
           .svg-arrow {
             fill: #b6b6b6;
+          }
+        }
+      }
+      ._radio_btn {
+        @include clickbtn;
+        position: relative;
+        display: inline-block;
+        width: 55px;
+        height: 32px;
+        background-color: #ececee;
+        border-radius: 32px;
+        transition: all 0.3s ease-out;
+        &:before {
+          content: '';
+          display: inline-block;
+          width: 28px;
+          height: 28px;
+          border-radius: 100%;
+          background-color: white;
+          position: absolute;
+          top: 2px;
+          right: 24px;
+          transition: all 0.3s ease-out;
+        }
+        &._checked {
+          background-color: #5cce59;
+          &:before {
+            right: 2px;
           }
         }
       }
@@ -136,3 +159,4 @@
 @import "./main/_index";
 @import "./account/_index";
 @import "./about/_index";
+@import "./security/pin/_index";
