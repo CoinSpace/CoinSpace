@@ -20,11 +20,11 @@ const platforms = [
   {
     os: 'linux',
     platform: /linux.*/i,
-  }
+  },
 ];
 
 let os = 'unknown';
-let found = platforms.find(target => target.platform.test(window.navigator.platform))
-if (found) os = found.os;
+const found = platforms.find(target => target.platform.test(window.navigator.platform));
+if (found) ({ os } = found);
 
 module.exports = os;

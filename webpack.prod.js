@@ -44,7 +44,7 @@ const config = merge(common, {
             },
             plugins: [
               'transform-object-rest-spread',
-            ]
+            ],
           },
         },
       },

@@ -3,7 +3,6 @@
 const Ractive = require('widgets/modals/base');
 const { showError } = require('widgets/modals/flash');
 const qrcode = require('lib/qrcode');
-const emitter = require('lib/emitter');
 const request = require('lib/request');
 const { urlRoot } = window;
 const details = require('lib/wallet/details');
