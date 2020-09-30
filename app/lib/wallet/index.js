@@ -17,7 +17,6 @@ const StellarWallet = require('cs-stellar-wallet');
 const EOSWallet = require('cs-eos-wallet');
 const { eddsa } = require('elliptic');
 const ec = new eddsa('ed25519');
-const security = require('./security');
 const touchId = require('lib/touch-id');
 
 const convert = require('lib/convert');
@@ -146,12 +145,12 @@ function initWallet(pin) {
       if (key === networkName) {
         wallet = new Wallet[key](Object.assign({ seed, networkName }, getExtraOptions(networkName)));
         state.wallet = wallet;
+        state.wallet.lock();
       } else {
         wallet = new Wallet[key]({ seed, networkName: key });
       }
       LS.setPublicKey(wallet, seeds.get('public'));
     });
-    security.lock(state.wallet);
   } else {
     publicKey = LS.getPublicKey(networkName, seeds.get('public'));
     const options = Object.assign({ publicKey, networkName }, getExtraOptions(networkName));

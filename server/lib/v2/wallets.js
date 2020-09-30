@@ -209,8 +209,7 @@ async function platformAttestationOptions(device) {
     attestationType: 'none',
     supportedAlgorithmIDs: fidoAlgorithmIDs,
     authenticatorSelection: {
-      // TODO: uncomment before prod
-      //authenticatorAttachment: 'platform',
+      authenticatorAttachment: 'platform',
     },
   });
   await _setChallenge(device, options.challenge, 'attestation', 'platform');

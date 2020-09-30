@@ -7,6 +7,7 @@ const initChoose = require('./choose');
 const initCreate = require('./create');
 const initCreatePassphrase = require('./create-passphrase');
 const initCreatePassphraseConfirm = require('./create-passphrase-confirm');
+const security = require('lib/wallet/security');
 
 module.exports = function(el) {
   const ractive = new Ractive({
@@ -32,6 +33,7 @@ module.exports = function(el) {
 
   ractive.on('before-hide', () => {
     currentStep.hide();
+    security.lock();
     const { passphraseWidget, pinWidget } = currentStep;
     if (passphraseWidget && !passphraseWidget.torndown) passphraseWidget.close();
     if (pinWidget && !pinWidget.torndown) pinWidget.close();

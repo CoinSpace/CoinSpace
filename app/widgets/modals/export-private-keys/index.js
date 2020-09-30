@@ -21,25 +21,32 @@ function open() {
     ractive.fire('cancel');
   });
 
+  let isLoading = false;
+
   ractive.on('show-keys', async () => {
+    if (isLoading) return;
+    isLoading = true;
+
     const wallet = getWallet();
     try {
       await unlock(wallet);
+      const privateKeys = wallet.exportPrivateKeys();
+      lock(wallet);
+      if (privateKeys.length === 0) {
+        ractive.fire('cancel');
+        return showInfo({
+          message: 'Your wallet has no private keys with coins for export.',
+          fadeInDuration: 0,
+        });
+      }
+      ractive.set('privateKeys', privateKeys);
+      ractive.set('isShown', true);
     } catch (err) {
-      return;
+      lock(wallet);
+      if (err.message !== 'cancelled') console.error(err);
     }
-    const privateKeys = wallet.exportPrivateKeys();
-    lock(wallet);
-    if (privateKeys.length === 0) {
-      ractive.fire('cancel');
-      return showInfo({
-        message: 'Your wallet has no private keys with coins for export.',
-        fadeInDuration: 0,
-      });
-    }
-    ractive.set('privateKeys', privateKeys);
-    ractive.set('isShown', true);
 
+    isLoading = false;
   });
 
   ractive.on('export-keys', () => {

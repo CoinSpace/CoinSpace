@@ -37,7 +37,7 @@ async function enable(pin) {
     const options = await request({
       url: `${urlRoot}v2/platform/attestation?id=${LS.getId()}`,
       method: 'get',
-      seed: 'public',
+      seed: 'private',
     });
     let attestation;
     try {
@@ -49,7 +49,7 @@ async function enable(pin) {
       url: `${urlRoot}v2/platform/attestation?id=${LS.getId()}`,
       method: 'post',
       data: attestation,
-      seed: 'public',
+      seed: 'private',
     });
     LS.setFidoTouchIdEnabled(true);
   }

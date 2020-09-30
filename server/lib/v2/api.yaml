@@ -201,7 +201,7 @@ paths:
       x-eov-operation-handler: handlers
       description: Get Attestation Options for Platform Authenticator
       security:
-        - deviceSignature: []
+        - walletSignature: []
       parameters:
         - $ref: '#/components/parameters/deviceId'
       responses:
@@ -214,7 +214,7 @@ paths:
       x-eov-operation-handler: handlers
       description: Verify Attestation for Platform Authenticator
       security:
-        - deviceSignature: []
+        - walletSignature: []
       parameters:
         - $ref: '#/components/parameters/deviceId'
       requestBody:

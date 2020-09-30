@@ -2,7 +2,7 @@
 
 const request = require('lib/request');
 const { urlRoot } = window;
-const LS = require('lib/wallet/localStorage');
+const LS = require('./localStorage');
 
 const state = {
   settings: null,
@@ -26,8 +26,24 @@ function get(key) {
   return state.settings[key];
 }
 
-function set(key, value) {
-  // TODO
+async function set(key, value, security) {
+  const { unlock, lock } = security;
+  const data = {};
+  data[key] = value;
+  try {
+    await unlock();
+    await request({
+      url: `${urlRoot}v2/settings?id=${LS.getId()}`,
+      method: 'patch',
+      data,
+      seed: 'private',
+    });
+    state.settings[key] = value;
+    lock();
+  } catch (err) {
+    lock();
+    throw err;
+  }
 }
 
 module.exports = {

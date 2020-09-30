@@ -10,6 +10,7 @@ const exportPrivateKeys = require('widgets/modals/export-private-keys');
 const showEosSetupAccount = require('widgets/modals/eos-setup-account');
 const { translate } = require('lib/i18n');
 const os = require('lib/detect-os');
+const touchId = require('lib/touch-id');
 
 module.exports = function(el) {
   const ractive = new Ractive({
@@ -83,6 +84,7 @@ module.exports = function(el) {
 };
 
 function getSecurityPinLabel() {
+  if (!touchId.isAvailable()) return translate('PIN');
   if (os === 'ios' || os === 'macos') {
     return translate('PIN & Touch ID');
   } else if (os === 'android') {

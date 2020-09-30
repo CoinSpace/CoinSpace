@@ -10,7 +10,7 @@
 
     <div class="_inputs">
       <div class="csbtn--grey _cancel">{{translate("Cancel")}}</div>
-      {{#if removing}}
+      {{#if isLoading}}
         <div class="csbtn--loading">
           <span class="_icon">
             {{>svg_refresh}}
