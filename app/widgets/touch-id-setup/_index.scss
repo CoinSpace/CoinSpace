@@ -44,12 +44,9 @@
 
   ._content {
     width: 100%;
-    max-width: 320px;
+    max-width: 380px;
     margin: 0 auto;
-    @include breakpoint(portrait) {
-      max-width: 380px;
-    }
-    padding: 10px;
+    padding: 20px;
 
     ._icon {
       svg {

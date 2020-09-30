@@ -120,7 +120,7 @@ function getTitle() {
 
 function getTouchIdLabel() {
   if (os === 'ios' || os === 'macos') {
-    return translate('Touch ID');
+    return 'Touch&nbsp;ID';
   } else if (os === 'android') {
     return translate('Fingerprint');
   } else {

@@ -16,11 +16,10 @@
   max-width: 380px;
   width: 100%;
   color: #333;
-  padding: 10px;
+  padding: 20px;
   font-size: $base_font_size;
   @include breakpoint(portrait) {
     font-size: $base_font_size--portrait;
-    max-width: 380px;
   }
   .step {
     display: none;

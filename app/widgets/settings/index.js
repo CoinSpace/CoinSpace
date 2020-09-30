@@ -23,10 +23,7 @@ module.exports = function(el) {
   let currentStep = steps.main;
   currentStep.show({ userInfo: details.get('userInfo') });
 
-  ractive.on('before-hide', () => {
-    ractive.set('isLoading', true);
-    currentStep.hide();
-  });
+  if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.styleDefault();
 
   emitter.on('change-widget-settings-step', (step, data) => {
     showStep(steps[step], data);
@@ -34,6 +31,7 @@ module.exports = function(el) {
 
   steps.main.on('back', () => {
     ractive.fire('back');
+    if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.styleLightContent();
   });
 
   function showStep(step, data) {

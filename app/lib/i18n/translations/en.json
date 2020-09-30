@@ -317,7 +317,6 @@
   "Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.": "Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.",
   "Recipient's wallet requires a destination tag.": "Recipient's wallet requires a destination tag.",
   "Skip": "Skip",
-  "Touch ID": "Touch ID",
   "Fingerprint": "Fingerprint",
   "Biometrics": "Biometrics",
   "Enable": "Enable",
@@ -333,6 +332,7 @@
   "Hardware Security": "Hardware Security",
   "Tools": "Tools",
   "Use for:": "Use for:",
-  "Send coins, export private keys": "Send coins, export private keys",
-  "Always used to open the app.": "Always used to open the app."
+  "High Security": "High Security",
+  "Always used to open the app.": "Always used to open the app.",
+  "Send coins, export private keys, remove account, :touchId.": "Send coins, export private keys, remove account, %(touchId)s."
 }

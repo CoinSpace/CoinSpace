@@ -61,7 +61,7 @@ function open(options) {
 
 function getHeader() {
   if (os === 'ios' || os === 'macos') {
-    return translate('Touch ID');
+    return 'Touch ID';
   } else if (os === 'android') {
     return translate('Fingerprint');
   } else {
@@ -82,7 +82,7 @@ function getDescription() {
 function getButtonLabel() {
   const message = translate('Enable') + ' ';
   if (os === 'ios' || os === 'macos') {
-    return message + translate('Touch ID');
+    return message + 'Touch ID';
   } else if (os === 'android') {
     return message + translate('Fingerprint');
   } else {

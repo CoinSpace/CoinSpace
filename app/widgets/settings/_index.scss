@@ -19,7 +19,6 @@
 
   ._header {
     background: #fff;
-    padding: 12px 10px;
     position: fixed;
     top: 0;
     left: 0;
@@ -30,6 +29,7 @@
       max-width: $max_content_width;
       margin: 0 auto;
       display: flex;
+      padding: 12px 15px;
     }
     ._title {
       flex: 2;
@@ -46,6 +46,7 @@
       @include clickbtn;
       color: #34a2ff;
       line-height: 25px;
+      transform: translateX(-10px);
       svg {
         float: left;
         width: 25px;
@@ -75,7 +76,7 @@
       border: 0;
     }
     ._title {
-      padding: 0 10px;
+      padding: 0 15px;
       text-transform: uppercase;
       margin-bottom: 2px;
       letter-spacing: 1px;
@@ -84,7 +85,7 @@
       outline: 0;
     }
     ._description {
-      padding: 0 10px;
+      padding: 0 15px;
       margin-top: 2px;
       font-size: $small_font_size;
       color: #555;
@@ -107,13 +108,14 @@
       align-items: center;
       background: #fff;
       border-bottom: #e2e2e2 1px solid;
-      padding: 10px;
+      padding: 10px 15px;
       line-height: 25px;
       outline: 0;
       ._label {
         @include ellipsis();
       }
       ._arrow {
+        margin-right: -5px;
         svg {
           display: block;
           width: 20px;

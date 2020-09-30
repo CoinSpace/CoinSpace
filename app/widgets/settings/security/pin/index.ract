@@ -11,7 +11,7 @@
   {{#if isTouchIdAvailable}}
   <div class="_section">
     <div class="_list_item">
-      <div class="_label">{{touchIdLabel}}</div>
+      <div class="_label">{{{touchIdLabel}}}</div>
       <div class="_radio_btn" class-_checked="isTouchIdEnabled" on-click="toggle-touchid"></div>
     </div>
   </div>
@@ -20,10 +20,11 @@
   <div class="_section">
     <div class="_title">{{translate("Use for:")}}</div>
     <div class="_list_item">
-      <div class="_label">{{translate("Send coins, export private keys")}}</div>
+      <div class="_label">{{translate("High Security")}}</div>
       <div class="_radio_btn" class-_checked="isOneFaPrivateEnabled" on-click="toggle-1fa-private"></div>
     </div>
     <div class="_description">
+      {{{translate("Send coins, export private keys, remove account, :touchId.", {touchId: touchIdLabel})}}}
       {{translate("Always used to open the app.")}}
     </div>
   </div>

@@ -5,7 +5,7 @@
   bottom: 0;
   right: 0;
   left: 0;
-  padding: 10px;
+  padding: 20px;
   overflow: hidden;
   text-align: center;
   height: 100%;
@@ -97,8 +97,6 @@
 
   ._keyboard {
     flex: 1;
-    margin-left: 10px;
-    margin-right: 10px;
     ._btns {
       width: 100%;
       max-width: 300px;
