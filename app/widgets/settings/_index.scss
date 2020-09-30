@@ -97,7 +97,7 @@
       &._danger {
         @include clickbtn;
         color: #ff3b30;
-        text-align: center;
+        justify-content: center;
       }
       &._btn {
         @include clickbtn;
