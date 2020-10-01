@@ -13,6 +13,22 @@ async function onDeviceReady() {
 
   if (window.shortcutItem) window.shortcutItem.initialize();
 
+  if (process.env.BUILD_PLATFORM === 'ios') {
+    const { styleDefault, styleLightContent } = window.StatusBar;
+    window.StatusBar.styleDefault = (temp) => {
+      if (!temp) window.StatusBar.style = 'default';
+      styleDefault();
+    };
+    window.StatusBar.styleLightContent = (temp) => {
+      if (!temp) window.StatusBar.style = 'lightContent';
+      styleLightContent();
+    };
+    window.StatusBar.styleReset = () => {
+      if (window.StatusBar.style === 'default') return styleDefault();
+      if (window.StatusBar.style === 'lightContent') return styleLightContent();
+    };
+  }
+
   window.open = (url, target, options) => {
     return cordova.InAppBrowser.open(url, '_system', options);
   };
@@ -24,12 +40,12 @@ async function onDeviceReady() {
         { url },
         (result) => {
           if (process.env.BUILD_PLATFORM === 'ios') {
-            if (result.event === 'opened') return window.StatusBar.styleDefault();
-            if (result.event === 'closed') return window.StatusBar.styleLightContent();
+            if (result.event === 'opened') return window.StatusBar.styleDefault(true);
+            if (result.event === 'closed') return window.StatusBar.styleReset();
           }
         },
         () => {
-          if (process.env.BUILD_PLATFORM === 'ios') return window.StatusBar.styleLightContent();
+          if (process.env.BUILD_PLATFORM === 'ios') return window.StatusBar.styleReset();
         });
     };
   });
