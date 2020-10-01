@@ -31,7 +31,7 @@ module.exports = function(el) {
   let isLoadingOneFaPrivate = false;
 
   ractive.on('back', () => {
-    emitter.emit('change-widget-settings-step', 'main');
+    ractive.fire('change-step', { step: 'main' });
   });
 
   ractive.on('toggle-touchid', async () => {

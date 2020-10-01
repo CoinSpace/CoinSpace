@@ -12,9 +12,10 @@ const initTokens = require('pages/tokens');
 const showSettings = require('widgets/settings');
 const { showError } = require('widgets/modals/flash');
 const { setToken, getTokenNetwork } = require('lib/token');
+const { getWallet } = require('lib/wallet');
 const Hammer = require('hammerjs');
 
-module.exports = function(el) {
+module.exports = function(el, err) {
   const ractive = new Ractive({
     el,
     template: require('./index.ract'),
@@ -87,13 +88,14 @@ module.exports = function(el) {
   }
 
   emitter.on('wallet-ready', ({ err }) => {
+    console.log('on wallet-ready event');
     if (err) {
       if (err.message === 'cs-node-error') {
         emitter.emit('change-tab', 'tokens');
         document.getElementsByTagName('html')[0].classList.add('blocked');
         showError({
           message: "Can't connect to :network node. Please try again later or choose another token.",
-          interpolations: { network: getTokenNetwork() },
+          interpolations: { network: getWallet().networkName },
         });
       } else {
         console.error(err);
@@ -104,6 +106,8 @@ module.exports = function(el) {
       document.getElementsByTagName('html')[0].classList.remove('blocked');
     }
   });
+
+  emitter.emit('wallet-ready', { err });
 
   return ractive;
 };

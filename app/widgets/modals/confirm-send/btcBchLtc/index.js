@@ -2,11 +2,9 @@
 
 const Ractive = require('widgets/modals/base');
 const emitter = require('lib/emitter');
-const { getWallet } = require('lib/wallet');
 const { toAtom } = require('lib/convert');
 const { toUnitString } = require('lib/convert');
 const { showInfo } = require('widgets/modals/flash');
-const { getTokenNetwork } = require('lib/token');
 const _ = require('lodash');
 
 function open(data) {
@@ -19,6 +17,7 @@ function open(data) {
     },
     data: extendData(data),
   });
+  const { wallet } = data;
 
   ractive.on('change-fee', () => {
     const index = ractive.get('feeIndex');
@@ -28,7 +27,6 @@ function open(data) {
   ractive.on('send', () => {
     ractive.set('sending', true);
     setTimeout(() => {
-      const wallet = getWallet();
       let tx;
 
       try {
@@ -58,7 +56,6 @@ function open(data) {
   });
 
   function createTx() {
-    const wallet = getWallet();
     let tx;
     const fee = toAtom(ractive.get('fee'));
     if (data.importTxOptions) {
@@ -75,7 +72,7 @@ function open(data) {
     ractive.set('confirmation', false);
     if (err.message === 'cs-node-error') {
       err.message = 'Network node error. Please try again later.';
-      ractive.set('interpolations', { network: _.upperFirst(getTokenNetwork()) });
+      ractive.set('interpolations', { network: _.upperFirst(wallet.networkName) });
     } else {
       console.error(err);
     }
@@ -87,13 +84,12 @@ function open(data) {
 
 function extendData(data) {
 
-  const network = getTokenNetwork();
+  const { wallet } = data;
 
   data.confirmation = true;
   data.feeSign = data.importTxOptions ? '-' : '+';
-  data.isBitcoin = network === 'bitcoin';
+  data.isBitcoin = wallet.networkName === 'bitcoin';
 
-  const wallet = getWallet();
   const unspents = data.importTxOptions ? data.importTxOptions.unspents : null;
 
   if (data.importTxOptions) {

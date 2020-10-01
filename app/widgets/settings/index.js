@@ -1,7 +1,6 @@
 'use strict';
 
 const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
 const initMain = require('./main');
 const initAccount = require('./account');
 const initAbout = require('./about');
@@ -25,8 +24,10 @@ module.exports = function(el) {
 
   if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.styleDefault();
 
-  emitter.on('change-widget-settings-step', (step, data) => {
-    showStep(steps[step], data);
+  Object.keys(steps).forEach((key) => {
+    steps[key].on('change-step', (context) => {
+      showStep(steps[context.step], context);
+    });
   });
 
   steps.main.on('back', () => {

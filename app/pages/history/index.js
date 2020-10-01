@@ -3,7 +3,6 @@
 const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
 const { toUnitString } = require('lib/convert');
-const { getTokenNetwork } = require('lib/token');
 const { getWallet } = require('lib/wallet');
 const strftime = require('strftime');
 const { showError } = require('widgets/modals/flash');
@@ -12,7 +11,7 @@ const initEosSetup = require('widgets/eos/setup');
 const _ = require('lodash');
 
 module.exports = function(el) {
-  let network = getTokenNetwork();
+  let network = '';
   const ractive = new Ractive({
     el,
     template: require('./index.ract'),
@@ -134,7 +133,7 @@ module.exports = function(el) {
       if (err.message === 'cs-node-error') {
         showError({
           message: 'Network node error. Please try again later.',
-          interpolations: { network: _.upperFirst(getTokenNetwork()) },
+          interpolations: { network: _.upperFirst(wallet.networkName) },
         });
       } else {
         console.error(err);

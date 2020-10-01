@@ -2,8 +2,7 @@
 
 const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
-const denomination = require('lib/denomination');
-const { getTokenNetwork } = require('lib/token');
+const CS = require('lib/wallet');
 const changelly = require('lib/changelly');
 const { showError } = require('widgets/modals/flash');
 const _ = require('lodash');
@@ -67,7 +66,7 @@ module.exports = function(el) {
       ractive.set('coins', coins);
 
       fromSymbolObserver.silence();
-      ractive.set('fromSymbol', denomination(getTokenNetwork()));
+      ractive.set('fromSymbol', CS.getWallet().denomination);
       fromSymbolObserver.resume();
 
       const fromSymbol = ractive.get('fromSymbol');

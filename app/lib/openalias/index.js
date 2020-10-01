@@ -2,10 +2,9 @@
 
 const request = require('lib/request');
 const { urlRoot } = window;
-const { getTokenNetwork } = require('lib/token');
 
-function resolveTo(to) {
-  if (getTokenNetwork() !== 'bitcoin') return Promise.resolve({ to });
+function resolveTo(network, to) {
+  if (network !== 'bitcoin') return Promise.resolve({ to });
 
   to = to || '';
   const hostname = to.replace('@', '.');

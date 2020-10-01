@@ -3,7 +3,6 @@
 const Ractive = require('lib/ractive');
 const LS = require('lib/wallet/localStorage');
 const Avatar = require('lib/avatar');
-const emitter = require('lib/emitter');
 const CS = require('lib/wallet');
 const importPrivateKey = require('widgets/modals/import-private-key');
 const exportPrivateKeys = require('widgets/modals/export-private-keys');
@@ -44,11 +43,11 @@ module.exports = function(el) {
   });
 
   ractive.on('account', () => {
-    emitter.emit('change-widget-settings-step', 'account');
+    ractive.fire('change-step', { step: 'account' });
   });
 
   ractive.on('security-pin', () => {
-    emitter.emit('change-widget-settings-step', 'securityPin');
+    ractive.fire('change-step', { step: 'securityPin' });
   });
 
   ractive.on('before-show', ({ userInfo }) => {
@@ -72,7 +71,7 @@ module.exports = function(el) {
   });
 
   ractive.on('about', () => {
-    emitter.emit('change-widget-settings-step', 'about');
+    ractive.fire('change-step', { step: 'about' });
   });
 
   ractive.on('logout', () => {

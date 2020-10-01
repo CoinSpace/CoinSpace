@@ -8,7 +8,6 @@ const showQr = require('widgets/modals/qr');
 const geo = require('lib/geo');
 const { showError } = require('widgets/modals/flash');
 const showSetDetails = require('widgets/modals/set-details');
-const { getTokenNetwork } = require('lib/token');
 const qrcode = require('lib/qrcode');
 const initEosSetup = require('widgets/eos/setup');
 const details = require('lib/wallet/details');
@@ -94,7 +93,7 @@ module.exports = function(el) {
       while (canvas.hasChildNodes()) {
         canvas.removeChild(canvas.firstChild);
       }
-      const qr = qrcode.encode(getTokenNetwork() + ':' + address);
+      const qr = qrcode.encode(CS.getWallet().networkName + ':' + address);
       canvas.appendChild(qr);
     }
   }
@@ -126,6 +125,7 @@ module.exports = function(el) {
     } else {
       showQr({
         address: ractive.get('address'),
+        name: CS.getWallet().networkName,
       });
     }
   });

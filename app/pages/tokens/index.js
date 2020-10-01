@@ -60,8 +60,6 @@ module.exports = function(el) {
   function switchToken(token) {
     if (token === ractive.get('currentToken')) return;
     if (!isEnabled) return;
-    const currentToken = ractive.get('currentToken');
-    const currentTokenNetwork = currentToken.network || currentToken;
 
     const network = token.network || token;
     const baseUrl = window.location.href.split('?')[0];
@@ -71,8 +69,6 @@ module.exports = function(el) {
     setToken(token);
 
     window.history.replaceState(null, null, url);
-    document.getElementsByTagName('html')[0].classList.remove(currentTokenNetwork);
-    document.getElementsByTagName('html')[0].classList.add(network);
 
     emitter.emit('sync');
 

@@ -1,7 +1,6 @@
 'use strict';
 
 const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
 const showRemoveConfirmation = require('widgets/modals/confirm-remove-account');
 const showTooltip = require('widgets/modals/tooltip');
 const { showError } = require('widgets/modals/flash');
@@ -39,7 +38,7 @@ module.exports = function(el) {
         username: safeUsername,
         email,
       });
-      emitter.emit('change-widget-settings-step', 'main', { userInfo: details.get('userInfo') });
+      ractive.fire('change-step', { step: 'main', userInfo: details.get('userInfo') });
     } catch (err) {
       if (err.status === 400) {
         showError({ message: 'Username not available' });
@@ -64,7 +63,7 @@ module.exports = function(el) {
   });
 
   ractive.on('back', () => {
-    emitter.emit('change-widget-settings-step', 'main');
+    ractive.fire('change-step', { step: 'main' });
   });
 
   return ractive;

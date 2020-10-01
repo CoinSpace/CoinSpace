@@ -2,15 +2,16 @@
 
 const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
-const { sync } = require('lib/wallet');
+const { initWallet } = require('lib/wallet');
 const { getWallet } = require('lib/wallet');
 const { toUnit } = require('lib/convert');
 const { toUnitString } = require('lib/convert');
 const Big = require('big.js');
 const details = require('lib/wallet/details');
+const ticker = require('lib/ticker-api');
 
 module.exports = function(el) {
-  let selectedFiat = '';
+  let selectedFiat = details.get('systemInfo').preferredCurrency;
   const defaultFiat = 'USD';
 
   const ractive = new Ractive({
@@ -23,7 +24,7 @@ module.exports = function(el) {
       currencies: [],
       bitcoinToFiat,
       bitcoinPrice,
-      selectedFiat: defaultFiat,
+      selectedFiat,
       cropBalance(amount) {
         let dotIndex;
         if (amount > 0.0001 && (dotIndex = amount.indexOf('.')) !== -1 ) {
@@ -35,10 +36,11 @@ module.exports = function(el) {
     },
   });
 
+  ractive.observe('selectedFiat', setPreferredCurrency);
+
   let refreshEl = ractive.find('#refresh_el');
 
   emitter.on('wallet-ready', () => {
-    console.log('on wallet-ready event');
     const balance = getWallet().getBalance();
     ractive.set('bitcoinBalance', balance);
     ractive.set('denomination', getWallet().denomination);
@@ -48,6 +50,7 @@ module.exports = function(el) {
     const clone = refreshEl.cloneNode(true);
     refreshEl.parentNode.replaceChild(clone, refreshEl);
     refreshEl = clone;
+    updateRates();
   });
 
   emitter.on('tx-sent', () => {
@@ -60,7 +63,7 @@ module.exports = function(el) {
     if (!ractive.get('isSyncing')) {
       emitter.emit('sync');
       setTimeout(() => {
-        sync();
+        initWallet();
       }, 200);
     }
   });
@@ -82,31 +85,15 @@ module.exports = function(el) {
     ractive.set('selectedFiat', currency);
   });
 
-  emitter.once('ticker', (rates) => {
+  function updateRates() {
+    const rates = ticker.getRates();
     const currencies = Object.keys(rates);
-    initPreferredCurrency(currencies);
-    ractive.set('currencies', currencies);
-    ractive.set('exchangeRates', rates);
-
-    emitter.on('ticker', (rates) => {
-      const currencies = Object.keys(rates);
-      if (currencies.indexOf(selectedFiat) === -1) {
-        selectedFiat = defaultFiat;
-        ractive.set('selectedFiat', selectedFiat);
-      }
-      ractive.set('currencies', currencies);
-      ractive.set('exchangeRates', rates);
-    });
-  });
-
-  function initPreferredCurrency(currencies) {
-    const systemInfo = details.get('systemInfo');
-    selectedFiat = systemInfo.preferredCurrency;
     if (currencies.indexOf(selectedFiat) === -1) {
       selectedFiat = defaultFiat;
+      ractive.set('selectedFiat', selectedFiat);
     }
-    ractive.set('selectedFiat', selectedFiat);
-    ractive.observe('selectedFiat', setPreferredCurrency);
+    ractive.set('currencies', currencies);
+    ractive.set('exchangeRates', rates);
   }
 
   function bitcoinToFiat(amount, exchangeRate) {

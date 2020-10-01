@@ -18,6 +18,7 @@ const EOSWallet = require('cs-eos-wallet');
 const { eddsa } = require('elliptic');
 const ec = new eddsa('ed25519');
 const touchId = require('lib/touch-id');
+const ticker = require('lib/ticker-api');
 
 const convert = require('lib/convert');
 const {
@@ -91,7 +92,7 @@ async function registerWallet(pin) {
   LS.setId(deviceId);
   LS.setDetailsKey(detailsKey);
   await Promise.all([details.init(), settings.init()]);
-  initWallet(pin);
+  await initWallet(pin);
 }
 
 async function loginWithPin(pin) {
@@ -108,7 +109,7 @@ async function loginWithPin(pin) {
   });
   seeds.unlock('public', publicToken);
   await Promise.all([details.init(), settings.init()]);
-  initWallet();
+  await initWallet();
 }
 
 async function loginWithTouchId(showSpinner) {
@@ -125,11 +126,11 @@ async function loginWithTouchId(showSpinner) {
     showSpinner();
     seeds.unlock('public', publicToken);
     await Promise.all([details.init(), settings.init()]);
-    initWallet();
+    await initWallet();
   }
 }
 
-function initWallet(pin) {
+async function initWallet(pin) {
   const networkName = getTokenNetwork();
   let token = getToken();
   if (!isValidWalletToken(token)) {
@@ -168,6 +169,8 @@ function initWallet(pin) {
   } else if (networkName === 'eos') {
     convert.setDecimals(0);
   }
+
+  await ticker.load(state.wallet.denomination);
 
   state.wallet.load({
     getDynamicFees() {
@@ -242,10 +245,6 @@ function isValidWalletToken(token) {
   return !!isFound;
 }
 
-function sync() {
-  initWallet();
-}
-
 function getWallet() {
   return state.wallet;
 }
@@ -297,7 +296,6 @@ module.exports = {
   removeAccount,
   setUsername,
   getWallet,
-  sync,
   initWallet,
   validateSend,
   getDestinationInfo,

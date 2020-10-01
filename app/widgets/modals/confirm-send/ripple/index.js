@@ -2,7 +2,6 @@
 
 const Ractive = require('widgets/modals/base');
 const emitter = require('lib/emitter');
-const { getWallet } = require('lib/wallet');
 const { showInfo } = require('widgets/modals/flash');
 
 function open(data) {
@@ -15,11 +14,11 @@ function open(data) {
     },
     data: extendData(data),
   });
+  const { wallet } = data;
 
   ractive.on('send', () => {
     ractive.set('sending', true);
     setTimeout(() => {
-      const wallet = getWallet();
       let tx = null;
 
       try {
@@ -53,7 +52,6 @@ function open(data) {
   });
 
   function createTx() {
-    const wallet = getWallet();
     let tx;
     if (data.importTxOptions) {
       tx = wallet.createImportTx(data.importTxOptions);
@@ -66,7 +64,6 @@ function open(data) {
 
   function handleTransactionError(err) {
     ractive.set('confirmation', false);
-    const wallet = getWallet();
     if (err.message === 'tecNO_DST_INSUF_XRP') {
       // eslint-disable-next-line max-len
       err.message = "Recipient's wallet isn't activated. You can send only amount greater than :minReserve :denomination.";
@@ -89,13 +86,10 @@ function open(data) {
 }
 
 function extendData(data) {
-
+  const { wallet } = data;
   data.confirmation = true;
   data.feeSign = data.importTxOptions ? '-' : '+';
-
-  const wallet = getWallet();
   data.fee = wallet.getDefaultFee();
-
   return data;
 }
 

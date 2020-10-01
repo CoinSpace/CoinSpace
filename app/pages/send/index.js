@@ -6,7 +6,6 @@ const emitter = require('lib/emitter');
 const details = require('lib/wallet/details');
 const { getWallet } = require('lib/wallet');
 const { setToAlias } = require('lib/wallet');
-const { getTokenNetwork } = require('lib/token');
 const { showError } = require('widgets/modals/flash');
 const { showInfo } = require('widgets/modals/flash');
 const showConfirmation = require('widgets/modals/confirm-send');
@@ -20,9 +19,10 @@ const initEosSetup = require('widgets/eos/setup');
 const { toUnitString } = require('lib/convert');
 const { toAtom } = require('lib/convert');
 const { translate } = require('lib/i18n');
+const ticker = require('lib/ticker-api');
 
 module.exports = function(el) {
-  let selectedFiat = '';
+  let selectedFiat = details.get('systemInfo').preferredCurrency;
   const defaultFiat = 'USD';
 
   const ractive = new Ractive({
@@ -30,7 +30,7 @@ module.exports = function(el) {
     template: require('./index.ract'),
     data: {
       currencies: [],
-      selectedFiat: defaultFiat,
+      selectedFiat,
       exchangeRates: {},
       qrScannerAvailable: qrcode.isScanAvailable,
       maxAmount: '0',
@@ -57,8 +57,10 @@ module.exports = function(el) {
 
   initEosSetup(ractive.find('#eos-setup'));
 
+  ractive.observe('selectedFiat', setPreferredCurrency);
+
   ractive.on('before-show', () => {
-    const network = getTokenNetwork();
+    const network = getWallet().networkName;
     ractive.set('isEthereum', network === 'ethereum');
     ractive.set('isRipple', network === 'ripple');
     ractive.set('isStellar', network === 'stellar');
@@ -103,8 +105,10 @@ module.exports = function(el) {
       return new Promise((resolve) => { setTimeout(resolve, n); });
     };
 
+    const wallet = getWallet();
+
     Promise.all([
-      resolveTo(to),
+      resolveTo(wallet.networkName, to),
       getDestinationInfo(to),
       delay(100), // in order to activate loader
     ]).then((results) => {
@@ -113,8 +117,6 @@ module.exports = function(el) {
       setToAlias(data);
 
       const destinationInfo = results[1];
-
-      const wallet = getWallet();
 
       const options = {
         wallet,
@@ -182,6 +184,7 @@ module.exports = function(el) {
     } else {
       ractive.set('feeDenomination', wallet.denomination);
     }
+    updateRates();
   });
 
   function setFees(setDefaultFeeOption) {
@@ -216,33 +219,16 @@ module.exports = function(el) {
     ractive.set('fees', fees);
   }
 
-  emitter.once('ticker', (rates) => {
+  function updateRates() {
+    const rates = ticker.getRates();
     const currencies = Object.keys(rates);
-    initPreferredCurrency(currencies);
+    if (currencies.indexOf(selectedFiat) === -1) {
+      selectedFiat = defaultFiat;
+      ractive.set('selectedFiat', selectedFiat);
+    }
     ractive.set('currencies', currencies);
     ractive.set('exchangeRates', rates);
     ractive.fire('bitcoin-to-fiat');
-
-    emitter.on('ticker', (rates) => {
-      const currencies = Object.keys(rates);
-      if (currencies.indexOf(selectedFiat) === -1) {
-        selectedFiat = defaultFiat;
-        ractive.set('selectedFiat', selectedFiat);
-      }
-      ractive.set('currencies', currencies);
-      ractive.set('exchangeRates', rates);
-      ractive.fire('bitcoin-to-fiat');
-    });
-  });
-
-  function initPreferredCurrency(currencies) {
-    const systemInfo = details.get('systemInfo');
-    selectedFiat = systemInfo.preferredCurrency;
-    if (currencies.indexOf(selectedFiat) === -1) {
-      selectedFiat = defaultFiat;
-    }
-    ractive.set('selectedFiat', selectedFiat);
-    ractive.observe('selectedFiat', setPreferredCurrency);
   }
 
   ractive.on('change-fee', () => {

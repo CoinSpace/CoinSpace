@@ -2,7 +2,7 @@
 
 const Ractive = require('widgets/modals/base');
 const { getWallet } = require('lib/wallet');
-const { sync } = require('lib/wallet');
+const { initWallet } = require('lib/wallet');
 const details = require('lib/wallet/details');
 const { showError } = require('widgets/modals/flash');
 const emitter = require('lib/emitter');
@@ -59,7 +59,7 @@ function open() {
   function syncWallet() {
     emitter.emit('sync');
     setTimeout(() => {
-      sync();
+      initWallet();
     }, 200);
   }
 

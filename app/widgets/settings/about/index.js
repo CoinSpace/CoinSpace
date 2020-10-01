@@ -1,7 +1,6 @@
 'use strict';
 
 const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
 
 module.exports = function(el) {
   const ractive = new Ractive({
@@ -13,7 +12,7 @@ module.exports = function(el) {
   });
 
   ractive.on('back', () => {
-    emitter.emit('change-widget-settings-step', 'main');
+    ractive.fire('change-step', { step: 'main' });
   });
 
   ractive.on('terms', () => {

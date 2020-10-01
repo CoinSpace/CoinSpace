@@ -7,15 +7,11 @@ if (process.env.BUILD_TYPE === 'web') {
 }
 
 window.initCSApp = async function() {
-  const ticker = require('lib/ticker-api');
   const emitter = require('lib/emitter');
-  emitter.setMaxListeners(15);
   const LS = require('lib/wallet/localStorage');
   const FastClick = require('fastclick');
   const initFrame = require('widgets/frame');
   const initAuth = require('pages/auth');
-  const { getToken } = require('lib/token');
-  const denomination = require('lib/denomination');
   const moonpay = require('lib/moonpay');
   const touchId = require('lib/touch-id');
   const { showError } = require('widgets/modals/flash');
@@ -35,13 +31,10 @@ window.initCSApp = async function() {
 
   await touchId.init();
 
-  const frame = initFrame(appEl);
-  let auth = null;
-
   fixFastClick();
   FastClick.attach(document.body);
 
-  auth = initAuth(document.getElementById('auth'));
+  const auth = initAuth(document.getElementById('auth'));
   const authContentEl = document.getElementById('auth_frame');
   authContentEl.style.opacity = 0;
   fadeIn(authContentEl);
@@ -64,12 +57,11 @@ window.initCSApp = async function() {
     return showError({ message: err.message });
   });
 
-  emitter.once('wallet-ready', ({ pin } ) => {
+  emitter.once('wallet-ready', ({ pin, err } ) => {
     window.scrollTo(0, 0);
     if (process.env.BUILD_TYPE === 'phonegap') window.Zendesk.setAnonymousIdentity();
-    updateExchangeRates();
     moonpay.init();
-
+    const frame = initFrame(appEl, err);
     if (pin && touchId.isAvailable()) {
       const touchIdSetupWidget = showTouchIdSetup({ append: true, pin });
       touchIdSetupWidget.on('close', () => {
@@ -81,16 +73,6 @@ window.initCSApp = async function() {
       frame.show();
     }
   });
-
-  emitter.on('sync', () => {
-    updateExchangeRates();
-  });
-
-  function updateExchangeRates() {
-    ticker.getExchangeRates(denomination(getToken())).then((rates) => {
-      emitter.emit('ticker', rates);
-    }).catch(console.error);
-  }
 
   function fixFastClick() {
     const originOnTouchStart = FastClick.prototype.onTouchStart;

@@ -3,9 +3,8 @@
 const Ractive = require('widgets/modals/base');
 const { translate } = require('lib/i18n');
 const qrcode = require('lib/qrcode');
-const { getTokenNetwork } = require('lib/token');
 
-module.exports = function showTooltip(data) {
+module.exports = function(data) {
   data.mailto = mailto;
   data.title = data.title || translate('Your wallet address');
   const ractive = new Ractive({
@@ -17,7 +16,7 @@ module.exports = function showTooltip(data) {
   });
 
   const canvas = ractive.find('#qr-canvas');
-  const name = data.name || getTokenNetwork();
+  const name = data.name || '';
   const qr = qrcode.encode(name + ':' + data.address);
   canvas.appendChild(qr);
 

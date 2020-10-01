@@ -35,8 +35,6 @@ function init() {
   i18n.loadTranslation().then(() => {
     if (Modernizr.localstorage && Modernizr.webworkers && Modernizr.blobconstructor && Modernizr.getrandomvalues) {
       setupNetwork();
-
-      document.getElementsByTagName('html')[0].classList.add(token.getTokenNetwork());
       const containerEl = document.getElementById('loader');
 
       return import(

@@ -8,7 +8,6 @@ const { showInfo } = require('widgets/modals/flash');
 const { getWallet } = require('lib/wallet');
 const { setToAlias } = require('lib/wallet');
 const { toUnitString } = require('lib/convert');
-const { getTokenNetwork } = require('lib/token');
 const _ = require('lodash');
 
 let ractive;
@@ -50,6 +49,7 @@ function open() {
       setToAlias(importTxOptions);
 
       showConfirmation({
+        wallet,
         to: importTxOptions.to,
         alias: importTxOptions.alias,
         amount: toUnitString(importTxOptions.amount),
@@ -74,7 +74,7 @@ function open() {
     } else if (err.message === 'cs-node-error') {
       return showError({
         message: 'Network node error. Please try again later.',
-        interpolations: { network: _.upperFirst(getTokenNetwork()) },
+        interpolations: { network: _.upperFirst(getWallet().networkName) },
       });
     }
     return showError({ message: err.message });

@@ -3,8 +3,7 @@
 const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
 const moonpay = require('lib/moonpay');
-const denomination = require('lib/denomination');
-const { getToken } = require('lib/token');
+const CS = require('lib/wallet');
 const Big = require('big.js');
 const _ = require('lodash');
 const showAddCreditCard = require('widgets/modals/moonpay/add-credit-card');
@@ -63,7 +62,7 @@ module.exports = function(el) {
     creditCardLimit = Math.min(context.creditCardLimit, fiat.maxAmount);
     bankAccountLimit = Math.min(context.bankAccountLimit, fiat.maxAmount);
 
-    cryptoSymbol = denomination(getToken());
+    cryptoSymbol = CS.getWallet().denomination;
     ractive.set('fiatSymbol', fiat.symbol);
     ractive.set('cryptoSymbol', cryptoSymbol);
 

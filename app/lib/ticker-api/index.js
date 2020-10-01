@@ -2,12 +2,18 @@
 
 const request = require('lib/request');
 const { urlRoot } = window;
+let rates = {};
 
-function getExchangeRates(crypto) {
-  const url = urlRoot + 'v1/ticker?crypto=' + crypto;
-  return request({ url });
+async function load(crypto) {
+  try {
+    const url = urlRoot + 'v1/ticker?crypto=' + crypto;
+    rates = await request({ url });
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 module.exports = {
-  getExchangeRates,
+  load,
+  getRates: () => rates,
 };
