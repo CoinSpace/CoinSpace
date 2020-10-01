@@ -6,6 +6,7 @@ const { toAtom } = require('lib/convert');
 const { toUnitString } = require('lib/convert');
 const { showInfo } = require('widgets/modals/flash');
 const _ = require('lodash');
+const { unlock, lock } = require('lib/wallet/security');
 
 function open(data) {
 
@@ -25,8 +26,7 @@ function open(data) {
   });
 
   ractive.on('send', () => {
-    ractive.set('sending', true);
-    setTimeout(() => {
+    setTimeout(async () => {
       let tx;
 
       try {
@@ -37,7 +37,15 @@ function open(data) {
         return handleTransactionError(err);
       }
 
-      tx = tx.sign();
+      try {
+        await unlock(wallet);
+        tx = tx.sign();
+        lock(wallet);
+      } catch (err) {
+        lock(wallet);
+        if (err.message !== 'cancelled') console.error(err);
+        return ractive.set('sending', false);
+      }
 
       wallet.sendTx(tx, (err, historyTx) => {
         if (err) return handleTransactionError(err);
