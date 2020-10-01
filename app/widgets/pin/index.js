@@ -15,6 +15,12 @@ function open(options) {
     append = false,
   } = options;
 
+  let statusBarStyle;
+  if (process.env.BUILD_PLATFORM === 'ios') {
+    statusBarStyle = window.StatusBar.style;
+    window.StatusBar.setStyle('default');
+  }
+
   const ractive = new Ractive({
     el: document.getElementById('general-purpose-overlay'),
     append,
@@ -93,6 +99,9 @@ function open(options) {
 
   ractive.close = () => {
     ractive.set('isOpen', false);
+    if (process.env.BUILD_PLATFORM === 'ios') {
+      window.StatusBar.setStyle(statusBarStyle);
+    }
     setTimeout(() => {
       ractive.teardown();
     }, 300);

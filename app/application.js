@@ -22,7 +22,7 @@ window.initCSApp = async function() {
   const appEl = document.getElementById('app');
 
   if (process.env.BUILD_PLATFORM === 'ios') {
-    window.StatusBar.styleDefault();
+    window.StatusBar.setStyle('default');
     window.StatusBar.show();
     window.StatusBar.overlaysWebView(false);
     window.StatusBar.overlaysWebView(true);
@@ -87,9 +87,9 @@ window.initCSApp = async function() {
 
   if (process.env.BUILD_TYPE === 'phonegap') {
     window.handleOpenURL = function(url) {
-      // eslint-disable-next-line no-undef
+      const { SafariViewController } = window;
       SafariViewController.hide();
-      if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.styleLightContent();
+      if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.setStyle(SafariViewController.statusBarStyle);
       setTimeout(() => {
         emitter.emit('handleOpenURL', url);
       }, 1);

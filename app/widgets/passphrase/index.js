@@ -10,6 +10,12 @@ function open(options, callback) {
     header = translate('Enter Passphrase'),
   } = options;
 
+  let statusBarStyle;
+  if (process.env.BUILD_PLATFORM === 'ios') {
+    statusBarStyle = window.StatusBar.style;
+    window.StatusBar.setStyle('default');
+  }
+
   const ractive = new Ractive({
     el: document.getElementById('general-purpose-overlay'),
     template: require('./index.ract'),
@@ -58,6 +64,9 @@ function open(options, callback) {
 
   ractive.close = () => {
     ractive.set('isOpen', false);
+    if (process.env.BUILD_PLATFORM === 'ios') {
+      window.StatusBar.setStyle(statusBarStyle);
+    }
     setTimeout(() => {
       ractive.teardown();
     }, 300);

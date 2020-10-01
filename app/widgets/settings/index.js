@@ -22,8 +22,6 @@ module.exports = function(el) {
   let currentStep = steps.main;
   currentStep.show({ userInfo: details.get('userInfo') });
 
-  if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.styleDefault();
-
   Object.keys(steps).forEach((key) => {
     steps[key].on('change-step', (context) => {
       showStep(steps[context.step], context);
@@ -32,7 +30,6 @@ module.exports = function(el) {
 
   steps.main.on('back', () => {
     ractive.fire('back');
-    if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.styleLightContent();
   });
 
   function showStep(step, data) {

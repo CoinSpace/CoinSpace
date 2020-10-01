@@ -29,10 +29,11 @@ module.exports = function(el, err) {
   header.on('show-settings', () => {
     ractive.set('isSettingsShown', true);
     const settings = showSettings(ractive.find('#settings'));
+    if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.setStyle('default');
     settings.on('back', () => {
       ractive.set('isSettingsShown', false);
+      if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.setStyle('lightContent');
     });
-
     window.scrollTo(0, 0);
   });
 
@@ -86,6 +87,10 @@ module.exports = function(el, err) {
     page.show();
     currentPage = page;
   }
+
+  ractive.on('before-show', () => {
+    if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.setStyle('lightContent');
+  });
 
   emitter.on('wallet-ready', ({ err }) => {
     console.log('on wallet-ready event');

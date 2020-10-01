@@ -14,18 +14,10 @@ async function onDeviceReady() {
   if (window.shortcutItem) window.shortcutItem.initialize();
 
   if (process.env.BUILD_PLATFORM === 'ios') {
-    const { styleDefault, styleLightContent } = window.StatusBar;
-    window.StatusBar.styleDefault = (temp) => {
-      if (!temp) window.StatusBar.style = 'default';
-      styleDefault();
-    };
-    window.StatusBar.styleLightContent = (temp) => {
-      if (!temp) window.StatusBar.style = 'lightContent';
-      styleLightContent();
-    };
-    window.StatusBar.styleReset = () => {
-      if (window.StatusBar.style === 'default') return styleDefault();
-      if (window.StatusBar.style === 'lightContent') return styleLightContent();
+    window.StatusBar.setStyle = (style) => {
+      window.StatusBar.style = style;
+      if (style === 'default') return window.StatusBar.styleDefault();
+      if (style === 'lightContent') return window.StatusBar.styleLightContent();
     };
   }
 
@@ -36,16 +28,21 @@ async function onDeviceReady() {
   SafariViewController.isAvailable((available) => {
     if (!available) return;
     window.open = (url) => {
+      if (process.env.BUILD_PLATFORM === 'ios') {
+        SafariViewController.statusBarStyle = window.StatusBar.style;
+      }
       SafariViewController.show(
         { url },
         (result) => {
           if (process.env.BUILD_PLATFORM === 'ios') {
-            if (result.event === 'opened') return window.StatusBar.styleDefault(true);
-            if (result.event === 'closed') return window.StatusBar.styleReset();
+            if (result.event === 'opened') return window.StatusBar.setStyle('default');
+            if (result.event === 'closed') {
+              return window.StatusBar.setStyle(SafariViewController.statusBarStyle);
+            }
           }
         },
         () => {
-          if (process.env.BUILD_PLATFORM === 'ios') return window.StatusBar.styleReset();
+          return window.StatusBar.setStyle(SafariViewController.statusBarStyle);
         });
     };
   });
