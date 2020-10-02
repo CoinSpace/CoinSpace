@@ -1,23 +1,23 @@
 <div class="overlay--geo js__fadeEl">
 
     <div class="geo__header">
+      <div class="_header">
+        {{^searching}}
+          <div class='_refresh' on-click="search-again">
+            <span id="refresh_el" class="_icon" class-loading="searchingAgain">
+              {{>svg_refresh}}
+            </span>
+          </div>
+        {{/searching}}
 
-    {{^searching}}
-      <div class='_refresh' on-click="search-again">
-        <span id="refresh_el" class="_icon" class-loading="searchingAgain">
-          {{>svg_refresh}}
-        </span>
+        <h3 class="_title">{{translate("Mecto")}}</h3>
+
+        {{^searching}}
+          <div class="_cancel" on-click="close">
+            {{>svg_close}}
+          </div>
+        {{/searching}}
       </div>
-    {{/searching}}
-
-    <h3 class="_title">{{translate("Mecto")}}</h3>
-
-    {{^searching}}
-      <div class="_cancel" on-click="close">
-        {{>svg_close}}
-      </div>
-    {{/searching}}
-
     </div>
 
     {{#searching}}

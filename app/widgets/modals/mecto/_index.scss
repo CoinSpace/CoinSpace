@@ -4,53 +4,62 @@
 }
 
 .geo__header {
-  padding-top: 29px;
-  padding-bottom: 29px;
+  width: 100%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-  display: flex;
-  justify-content: space-between;
+  margin-bottom: 30px;
+  ._header {
+    max-width: $max_content_width;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 97px;
 
-  @include breakpoint(iphone5) {
-    padding-top: 40px;
-    padding-bottom: 40px;
-  }
+    @include breakpoint(portrait) {
+      height: 140px;
+      padding-left: 40px;
+      padding-right: 40px;
+    }
 
-  ._title {
-    @extend .jigsaw-light;
-    text-align: center;
-    flex: 1;
-    font-size: $subtitle_font_size;
-    padding-top: 5px;
-    color: white;
-  }
+    ._title {
+      @extend .jigsaw-light;
+      text-align: center;
+      flex: 1;
+      font-size: $subtitle_font_size;
+      @include breakpoint(portrait) {
+        font-size: $subtitle_font_size--portrait;
+      }
+      color: white;
+    }
 
-  ._refresh {
-    @include clickbtn;
-    margin-left: 20px;
-    ._icon {
+    ._refresh {
+      @include clickbtn;
+      ._icon {
+        display: block;
+        width: 38px;
+        height: 38px;
+        padding: 4px;
+        &.loading {
+          animation: infinite-spinning 1s linear infinite;
+        }
+      }
+
+      .svg-refresh {
+        fill: white;
+      }
+    }
+
+    ._cancel {
+      @include clickbtn;
       display: block;
       width: 38px;
       height: 38px;
       padding: 4px;
-      &.loading {
-        animation: infinite-spinning 1s linear infinite;
+      svg {
+        pointer-events: none;
       }
-    }
-
-    .svg-refresh {
-      fill: white;
-    }
-  }
-
-  ._cancel {
-    @include clickbtn;
-    margin-right: 20px;
-    display: block;
-    width: 38px;
-    height: 38px;
-    padding: 4px;
-    svg {
-      pointer-events: none;
     }
   }
 }
@@ -113,14 +122,14 @@
 
 .geo__results {
 
+  max-width: $max_content_width;
+  margin: 0 auto;
   ._item {
     @include clickbtn;
     display: block;
-    padding-top: 30px;
     padding-bottom: 30px;
     padding-left: 30px;
     padding-right: 30px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
   }
 
   ._avatar {
@@ -143,8 +152,8 @@
   position: absolute;
   top: 35%;
   left: 50%;
-  margin-left: -100px;
-  width: 200px;
+  margin-left: -150px;
+  width: 300px;
   z-index: 500;
 
   ._icon {
