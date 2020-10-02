@@ -42,6 +42,7 @@ events.leftarrow = makeKeyDefinition(37);
 events.rightarrow = makeKeyDefinition(39);
 events.downarrow = makeKeyDefinition(40);
 events.uparrow = makeKeyDefinition(38);
+events.backspace = makeKeyDefinition(8);
 
 events.number = makeKeyDefinition([48, 49, 50, 51, 52, 53, 54, 55, 56, 57]);
 

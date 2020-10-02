@@ -1,4 +1,4 @@
-<div class="widget-pin" class-_open="isOpen" tabindex="-1" on-number="keyboard">
+<div class="widget-pin" class-_open="isOpen" tabindex="-1" on-backspace="backspace" on-number="keyboard">
 
   <div class="_header">
     <div class="_top">
