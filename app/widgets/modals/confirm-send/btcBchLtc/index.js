@@ -26,6 +26,7 @@ function open(data) {
   });
 
   ractive.on('send', () => {
+    ractive.set('sending', true);
     setTimeout(async () => {
       let tx;
 
