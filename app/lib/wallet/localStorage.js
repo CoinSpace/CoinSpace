@@ -5,40 +5,40 @@ const { localStorage } = window;
 
 function getEncryptedSeed(type) {
   if (type === 'public' || type === 'private') {
-    return localStorage.getItem(type);
+    return localStorage.getItem(`_cs_${type}`);
   }
   throw new Error('Wrong seed type');
 }
 
 function setEncryptedSeed(type, encryptedSeed) {
   if (type === 'public' || type === 'private') {
-    return localStorage.setItem(type, encryptedSeed);
+    return localStorage.setItem(`_cs_${type}`, encryptedSeed);
   }
   throw new Error('Wrong seed type');
 }
 
 function getId() {
-  return localStorage.getItem('id');
+  return localStorage.getItem('_cs_id');
 }
 
 function setId(id) {
-  localStorage.setItem('id', id);
+  localStorage.setItem('_cs_id', id);
 }
 
 function getPinKey() {
-  return localStorage.getItem('pinKey');
+  return localStorage.getItem('_cs_pin_key');
 }
 
 function setPinKey(pinKey) {
-  localStorage.setItem('pinKey', pinKey);
+  localStorage.setItem('_cs_pin_key', pinKey);
 }
 
 function getDetailsKey() {
-  return localStorage.getItem('detailsKey');
+  return localStorage.getItem('_cs_details_key');
 }
 
 function setDetailsKey(detailsKey) {
-  localStorage.setItem('detailsKey', detailsKey);
+  localStorage.setItem('_cs_details_key', detailsKey);
 }
 
 function getPublicKey(networkName, token) {
@@ -72,11 +72,11 @@ function setPin(pin) {
 }
 
 function isRegistered() {
-  return !!localStorage.getItem('id')
-    && !!localStorage.getItem('public')
-    && !!localStorage.getItem('private')
-    && !!localStorage.getItem('pinKey')
-    && !!localStorage.getItem('detailsKey');
+  return !!localStorage.getItem('_cs_id')
+    && !!localStorage.getItem('_cs_public')
+    && !!localStorage.getItem('_cs_private')
+    && !!localStorage.getItem('_cs_pin_key')
+    && !!localStorage.getItem('_cs_details_key');
 }
 
 function isRegisteredLegacy() {
