@@ -73,7 +73,7 @@ async function registerWallet(pin) {
   const device = ec.keyFromSecret(deviceSeed);
   const deviceId = device.getPublic('hex');
   const pinHash = crypto.createHmac('sha256', Buffer.from(pinKey, 'hex')).update(pin).digest('hex');
-  const detailsKey = crypto.createHmac('sha256', 'hello bro!').update(walletSeed).digest('hex');
+  const detailsKey = crypto.createHmac('sha256', 'Coin Wallet').update(walletSeed).digest('hex');
   const { publicToken, privateToken } = await request({
     url: `${urlRoot}v2/register`,
     method: 'post',
