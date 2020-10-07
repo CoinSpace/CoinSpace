@@ -6,11 +6,9 @@ const OpenApiValidator = require('express-openapi-validator');
 const { verifyReq, asyncWrapper } = require('./utils');
 const wallets = require('./wallets');
 
-// TODO https://github.com/cdimascio/express-openapi-validator/pull/351#issuecomment-684743497
-//const router = express.Router();
-const router = express();
+const router = express.Router();
 
-router.use('/api/v2/*', asyncWrapper(async (req, res, next) => {
+router.use(asyncWrapper(async (req, res, next) => {
   if (req.query.id) {
     req.device = await wallets.getDevice(req.query.id);
   }

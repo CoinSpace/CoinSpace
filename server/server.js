@@ -29,9 +29,7 @@ middleware.init(app);
 
 // API routes
 app.use('/api/v1', apiV1);
-// TODO https://github.com/cdimascio/express-openapi-validator/pull/351#issuecomment-684743497
-//app.use('/api/v2', apiV2);
-app.use(apiV2);
+app.use('/api/v2', apiV2);
 app.set('views', './server/views');
 app.set('view engine', 'ejs');
 

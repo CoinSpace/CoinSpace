@@ -32,7 +32,7 @@
     "ejs": "^2.6.1",
     "elliptic": "^6.5.3",
     "express": "^4.15.4",
-    "express-openapi-validator": "^4.0.0-alpha.1",
+    "express-openapi-validator": "^4.1.0",
     "helmet": "^3.21.0",
     "http-errors": "^1.8.0",
     "mongodb": "^3.1.10",
