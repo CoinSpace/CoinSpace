@@ -22,7 +22,7 @@
   "dependencies": {
     "@sentry/integrations": "^5.14.2",
     "@sentry/node": "^5.14.2",
-    "@simplewebauthn/server": "^0.8.1",
+    "@simplewebauthn/server": "^0.9.1",
     "axios": "^0.19.0",
     "axios-retry": "^3.1.8",
     "big.js": "^3.1.3",

@@ -202,8 +202,8 @@ async function platformAttestationOptions(device) {
   const user = generateUser(device._id);
   const options = generateAttestationOptions({
     challenge: generateChallenge(),
-    serviceName: RP_NAME,
     rpID: RP_ID,
+    rpName: RP_NAME,
     userID: user,
     userName: user,
     attestationType: 'none',
@@ -250,8 +250,8 @@ async function crossplatformAttestationOptions(device) {
 
   const options = generateAttestationOptions({
     challenge: generateChallenge(),
-    serviceName: RP_NAME,
     rpID: RP_ID,
+    rpName: RP_NAME,
     userID: user,
     userName: user,
     attestationType: 'none',
