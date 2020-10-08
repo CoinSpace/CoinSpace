@@ -4,7 +4,7 @@
     <div class="_iphone_x"></div>
     <div class="_row">
       <div class="_back" on-click="back">{{>svg_arrow}} {{translate("Back")}}</div>
-      <span class="_title">{{translate("Settings")}}</span>
+      <span class="_title">{{translate("Account")}}</span>
       <div class="_save" on-click="save">{{translate("Save")}}</div>
     </div>
   </div>

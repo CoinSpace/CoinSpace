@@ -1355,6 +1355,10 @@ Biće konvertiran u %(toSymbol)s i poslan na
         <source>Send coins, export private keys, remove account, %(touchId)s.</source>
         <target>Šaljite kovanice, izvezite privatne ključeve, uklonite račun, %(touchId)s.</target>
       </trans-unit>
+      <trans-unit id="Account">
+        <source>Account</source>
+        <target>Račun</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

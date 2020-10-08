@@ -1355,6 +1355,10 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Send coins, export private keys, remove account, %(touchId)s.</source>
         <target>코인 보내기, 개인 키를 내보내기, 계정 삭제, %(touchId)s.</target>
       </trans-unit>
+      <trans-unit id="Account">
+        <source>Account</source>
+        <target>계정</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

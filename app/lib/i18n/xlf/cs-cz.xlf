@@ -1355,6 +1355,10 @@ Bude to převedeno na %(toSymbol)s, a zasláno
         <source>Send coins, export private keys, remove account, %(touchId)s.</source>
         <target>Posílat mince, exportovat privátní klíče, odstranit účet, %(touchId)s</target>
       </trans-unit>
+      <trans-unit id="Account">
+        <source>Account</source>
+        <target>Účet</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1355,6 +1355,10 @@ Den konverteres til %(toSymbol)s og sendes til
         <source>Send coins, export private keys, remove account, %(touchId)s.</source>
         <target>Send mynter, eksporter private nøkler, fjern konto, %(touchId)s.</target>
       </trans-unit>
+      <trans-unit id="Account">
+        <source>Account</source>
+        <target>Regnskap</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

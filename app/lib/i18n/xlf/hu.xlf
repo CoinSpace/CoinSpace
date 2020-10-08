@@ -1355,6 +1355,10 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Send coins, export private keys, remove account, %(touchId)s.</source>
         <target>Küldj érméket, exportálj privát kulcsokat, távolítsd el a fiókot, %(touchId)s.</target>
       </trans-unit>
+      <trans-unit id="Account">
+        <source>Account</source>
+        <target>Számla</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

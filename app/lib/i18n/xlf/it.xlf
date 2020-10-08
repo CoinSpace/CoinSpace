@@ -1355,6 +1355,10 @@ Sarà convertito in %(toSymbol)s, e inviato a
         <source>Send coins, export private keys, remove account, %(touchId)s.</source>
         <target>Invia i coin, esporta chiavi private, rimuovi account, %(touchId)s.</target>
       </trans-unit>
+      <trans-unit id="Account">
+        <source>Account</source>
+        <target>Account</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
