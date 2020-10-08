@@ -306,6 +306,17 @@ async function crossplatformAttestationVerify(device, body) {
   });
 }
 
+async function removePlatformAuthenticator(device) {
+  const wallets = db().collection(COLLECTION);
+  await wallets.updateOne({
+    'devices._id': device._id,
+  }, {
+    $set: {
+      'devices.$.authenticator': null,
+    },
+  });
+}
+
 async function listCrossplatformAuthenticators(device) {
   return device.wallet.authenticators.map(item => {
     return {
@@ -446,6 +457,7 @@ module.exports = {
   crossplatformAttestationOptions,
   crossplatformAttestationVerify,
   // API
+  removePlatformAuthenticator,
   listCrossplatformAuthenticators,
   removeCrossplatformAuthenticator,
   setSettings,

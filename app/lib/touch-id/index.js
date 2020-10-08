@@ -55,10 +55,15 @@ async function enable(pin) {
   }
 }
 
-function disable() {
+async function disable() {
   if (process.env.BUILD_TYPE === 'phonegap') {
     LS.setPin(false);
   } else {
+    await request({
+      url: `${urlRoot}v2/platform?id=${LS.getId()}`,
+      method: 'delete',
+      seed: 'private',
+    });
     LS.setFidoTouchIdEnabled(false);
   }
 }

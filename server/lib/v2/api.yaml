@@ -224,6 +224,20 @@ paths:
           $ref: '#/components/responses/AttestationResponse'
         default:
           $ref: '#/components/responses/GeneralError'
+  /platform:
+    delete:
+      x-eov-operation-id: removePlatformAuthenticator
+      x-eov-operation-handler: handlers
+      description: Remove Authenticator
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - walletSignature: []
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
   /crossplatform/attestation:
     get:
       x-eov-operation-id: crossplatformAttestationOptions

@@ -128,6 +128,11 @@ exports.crossplatformAttestationVerify = asyncWrapper(async (req, res) => {
 
 // API
 
+exports.removePlatformAuthenticator = asyncWrapper(async (req, res) => {
+  await wallets.removePlatformAuthenticator(req.device);
+  res.status(200).send({ success: true });
+});
+
 exports.listCrossplatformAuthenticators = asyncWrapper(async (req, res) => {
   const list = await wallets.listCrossplatformAuthenticators(req.device);
   res.status(200).send(list);

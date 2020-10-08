@@ -40,24 +40,27 @@ module.exports = function(el) {
     const { unlock, lock } = security;
 
     const isTouchIdEnabled = ractive.get('isTouchIdEnabled');
-    if (isTouchIdEnabled) {
-      touchId.disable();
-      ractive.set('isTouchIdEnabled', false);
-    } else {
-      try {
-        if (process.env.BUILD_TYPE === 'phonegap') {
+    try {
+      if (process.env.BUILD_TYPE === 'phonegap') {
+        if (isTouchIdEnabled) {
+          await touchId.disable();
+        } else {
           const pin = await getPin();
           await touchId.enable(pin);
-        } else {
-          await unlock();
-          await touchId.enable();
-          lock();
         }
-        ractive.set('isTouchIdEnabled', true);
-      } catch (err) {
+      } else {
+        await unlock();
+        if (isTouchIdEnabled) {
+          await touchId.disable();
+        } else {
+          await touchId.enable();
+        }
         lock();
-        if (err.message !== 'touch_id_error' && err.message !== 'cancelled') console.error(err);
       }
+      ractive.set('isTouchIdEnabled', !isTouchIdEnabled);
+    } catch (err) {
+      lock();
+      if (err.message !== 'touch_id_error' && err.message !== 'cancelled') console.error(err);
     }
     isLoadingTouchId = false;
   });
