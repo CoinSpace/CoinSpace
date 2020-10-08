@@ -1277,83 +1277,83 @@ Sẽ chuyển đổi thành %(toSymbol)s, và gửi đến
       </trans-unit>
       <trans-unit id="Recipient&apos;s wallet requires a destination tag.">
         <source>Recipient's wallet requires a destination tag.</source>
-        <target></target>
+        <target>Ví của người nhận phải có thẻ đích.</target>
       </trans-unit>
       <trans-unit id="Skip">
         <source>Skip</source>
-        <target></target>
+        <target>Bỏ qua</target>
       </trans-unit>
       <trans-unit id="Fingerprint">
         <source>Fingerprint</source>
-        <target></target>
+        <target>Dấu vân tay</target>
       </trans-unit>
       <trans-unit id="Biometrics">
         <source>Biometrics</source>
-        <target></target>
+        <target>Sinh trắc học</target>
       </trans-unit>
       <trans-unit id="Enable">
         <source>Enable</source>
-        <target></target>
+        <target>Bật</target>
       </trans-unit>
       <trans-unit id="Use Touch ID in place of PIN.">
         <source>Use Touch ID in place of PIN.</source>
-        <target></target>
+        <target>Sử dụng Touch ID thay cho PIN.</target>
       </trans-unit>
       <trans-unit id="Use Fingerprint in place of PIN.">
         <source>Use Fingerprint in place of PIN.</source>
-        <target></target>
+        <target>Sử dụng Vân tay thay cho PIN.</target>
       </trans-unit>
       <trans-unit id="Use Biometrics in place of PIN.">
         <source>Use Biometrics in place of PIN.</source>
-        <target></target>
+        <target>Sử dụng Sinh trắc học thay cho PIN.</target>
       </trans-unit>
       <trans-unit id="Settings">
         <source>Settings</source>
-        <target></target>
+        <target>Cài đặt</target>
       </trans-unit>
       <trans-unit id="Security">
         <source>Security</source>
-        <target></target>
+        <target>Bảo mật</target>
       </trans-unit>
       <trans-unit id="PIN &amp; Touch ID">
         <source>PIN &amp; Touch ID</source>
-        <target></target>
+        <target>PIN &amp; Touch ID</target>
       </trans-unit>
       <trans-unit id="PIN &amp; Fingerprint">
         <source>PIN &amp; Fingerprint</source>
-        <target></target>
+        <target>PIN &amp; Dấu vân tay</target>
       </trans-unit>
       <trans-unit id="PIN &amp; Biometrics">
         <source>PIN &amp; Biometrics</source>
-        <target></target>
+        <target>PIN &amp; Sinh trắc học</target>
       </trans-unit>
       <trans-unit id="PIN">
         <source>PIN</source>
-        <target></target>
+        <target>PIN</target>
       </trans-unit>
       <trans-unit id="Hardware Security">
         <source>Hardware Security</source>
-        <target></target>
+        <target>Bảo mật Phần cứng</target>
       </trans-unit>
       <trans-unit id="Tools">
         <source>Tools</source>
-        <target></target>
+        <target>Công cụ</target>
       </trans-unit>
       <trans-unit id="Use for:">
         <source>Use for:</source>
-        <target></target>
+        <target>Sử dụng để:</target>
       </trans-unit>
       <trans-unit id="High Security">
         <source>High Security</source>
-        <target></target>
+        <target>Bảo mật cao:</target>
       </trans-unit>
       <trans-unit id="Always used to open the app.">
         <source>Always used to open the app.</source>
-        <target></target>
+        <target>Luôn sử dụng để mở ứng dụng.</target>
       </trans-unit>
       <trans-unit id="Send coins, export private keys, remove account, :touchId.">
         <source>Send coins, export private keys, remove account, %(touchId)s.</source>
-        <target></target>
+        <target>Gửi đồng tiền, xuất khóa riêng tư, gỡ bỏ tài khoản, %(touchId)s.</target>
       </trans-unit>
     </body>
   </file>
