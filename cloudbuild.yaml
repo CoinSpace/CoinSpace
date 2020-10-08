@@ -5,7 +5,6 @@ steps:
   env:
     - 'CI=true'
     - 'SITE_URL=${_SITE_URL}'
-    - 'IOS_APP_ID=${_IOS_APP_ID}'
     - 'SHAPESHIFT_API_KEY=${_SHAPESHIFT_API_KEY}'
     - 'SHAPESHIFT_CLIENT_ID=${_SHAPESHIFT_CLIENT_ID}'
     - 'NODE_ENV=${_NODE_ENV}'

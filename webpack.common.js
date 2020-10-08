@@ -67,16 +67,6 @@ module.exports = {
       template: 'app/fido/index.ejs',
       filename: 'fido/index.html',
     }),
-    new HtmlWebpackPlugin({
-      inject: false,
-      template: 'app/apple-app-site-association.ejs',
-      filename: 'apple-app-site-association',
-    }),
-    new HtmlWebpackPlugin({
-      inject: false,
-      template: 'app/apple-app-site-association.ejs',
-      filename: '.well-known/apple-app-site-association',
-    }),
     new CopyWebpackPlugin([
       { from: 'app/security.txt', to: './' },
       { from: 'app/assets/icons/favicon.ico', to: './' },

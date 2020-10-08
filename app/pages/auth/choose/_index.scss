@@ -13,19 +13,4 @@
       margin-bottom: 40px;
     }
   }
-
-  ._store {
-    display: inline-block;
-    width: 125px;
-    padding-top: 5px;
-    &._android {
-      margin-right: 2px;
-    }
-    &._ios {
-      margin-left: 2px;
-    }
-    @include breakpoint(portrait) {
-      width: 140px;
-    }
-  }
 }

@@ -10,13 +10,6 @@
   </div>
 
   {{#if BUILD_TYPE === 'web'}}
-  <a class="_store _android" href="https://play.google.com/store/apps/details?id=com.coinspace.app" target="_blank">
-    {{>svg_googleplay}}
-  </a>
-  <a class="_store _ios" href="https://itunes.apple.com/us/app/coinspace-bitcoin-wallet/id980719434?mt=8" target="_blank">
-    {{>svg_appstore}}
-  </a>
-  <br>
   <a class="_footer_link" href="https://coin.space" target="_blank">
     Copyright CoinSpace © 2020<br>
     All Rights Reserved
