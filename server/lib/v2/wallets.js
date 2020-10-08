@@ -13,6 +13,7 @@ const { generateChallenge, generateUser } = require('./utils');
 
 const COLLECTION = 'wallets';
 const MAX_FAILED_ATTEMPTS = 3;
+const MAX_DEVICES = 100;
 
 const url = new URL(process.env.SITE_URL);
 
@@ -63,13 +64,18 @@ async function register(walletId, deviceId, pinHash) {
     },
     $push: {
       devices: {
-        _id: deviceId,
-        pin_hash: pinHash,
-        authenticator: null,
-        public_token: publicToken,
-        private_token: privateToken,
-        failed_attempts: {},
-        challenges: {},
+        $each: [{
+          _id: deviceId,
+          pin_hash: pinHash,
+          authenticator: null,
+          public_token: publicToken,
+          private_token: privateToken,
+          failed_attempts: {},
+          challenges: {},
+          date: new Date(),
+        }],
+        $sort: { date: -1 },
+        $slice: MAX_DEVICES,
       },
     },
   }, {
@@ -98,6 +104,7 @@ async function pinVerify(device, pinHash, type) {
     $set: {
       [`devices.$.failed_attempts.${type}_pin`]: 0,
       [`devices.$.failed_attempts.${type}_platform`]: 0,
+      'devices.$.date': new Date(),
     },
   });
 }
@@ -137,6 +144,7 @@ async function platformVerify(device, body, type) {
       [`devices.$.failed_attempts.${type}_platform`]: 0,
       [`devices.$.challenges.${type}_platform`]: null,
       'devices.$.authenticator.counter': authenticatorInfo.counter,
+      'devices.$.date': new Date(),
     },
   });
 }
@@ -184,6 +192,7 @@ async function crossplatformVerify(device, body, type) {
     $set: {
       [`devices.$.failed_attempts.${type}_crossplatform`]: 0,
       [`devices.$.challenges.${type}_crossplatform`]: null,
+      'devices.$.date': new Date(),
     },
   });
   await wallets.updateOne({
