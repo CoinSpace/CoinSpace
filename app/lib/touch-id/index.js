@@ -43,6 +43,7 @@ async function enable(pin) {
     try {
       attestation = await startAttestation(options);
     } catch (err) {
+      console.error(err);
       throw new Error('touch_id_error');
     }
     await request({
@@ -95,6 +96,7 @@ async function publicToken() {
   try {
     assertion = await startAssertion(options);
   } catch (err) {
+    console.error(err);
     throw new Error('touch_id_error');
   }
   const res = await request({
@@ -115,6 +117,7 @@ async function privateToken() {
   try {
     assertion = await startAssertion(options);
   } catch (err) {
+    console.error(err);
     throw new Error('touch_id_error');
   }
   const res = await request({
