@@ -1353,7 +1353,7 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Send coins, export private keys, remove account, security settings.">
         <source>Send coins, export private keys, remove account, security settings.</source>
-        <target>Отправить монеты, экспортировать приватные ключи, удалить аккаунт, %(touchId)s.</target>
+        <target>Отправить монеты, экспортировать приватные ключи, удалить аккаунт, настройки безопасности.</target>
       </trans-unit>
       <trans-unit id="Account">
         <source>Account</source>
