@@ -1351,9 +1351,9 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Always used to open the app.</source>
         <target>ใช้เพื่อเปิดแอปเสมอ</target>
       </trans-unit>
-      <trans-unit id="Send coins, export private keys, remove account, :touchId.">
-        <source>Send coins, export private keys, remove account, %(touchId)s.</source>
-        <target>ส่งเหรียญ ส่งออกคีย์ส่วนตัว ลบบัญชี %(touchId)s.</target>
+      <trans-unit id="Send coins, export private keys, remove account, security settings.">
+        <source>Send coins, export private keys, remove account, security settings.</source>
+        <target>ส่งเหรียญ ส่งออกคีย์ส่วนตัว ลบบัญชี การตั้งค่าความปลอดภัย.</target>
       </trans-unit>
       <trans-unit id="Account">
         <source>Account</source>

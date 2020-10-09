@@ -1351,9 +1351,9 @@ Bude to převedeno na %(toSymbol)s, a zasláno
         <source>Always used to open the app.</source>
         <target>Vždy používat k otevírání aplikace.</target>
       </trans-unit>
-      <trans-unit id="Send coins, export private keys, remove account, :touchId.">
-        <source>Send coins, export private keys, remove account, %(touchId)s.</source>
-        <target>Posílat mince, exportovat privátní klíče, odstranit účet, %(touchId)s</target>
+      <trans-unit id="Send coins, export private keys, remove account, security settings.">
+        <source>Send coins, export private keys, remove account, security settings.</source>
+        <target>Posílat mince, exportovat privátní klíče, odstranit účet, nastavení zabezpečení.</target>
       </trans-unit>
       <trans-unit id="Account">
         <source>Account</source>

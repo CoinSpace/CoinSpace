@@ -1351,9 +1351,9 @@ O valor será convertido em %(toSymbol)s e enviado para
         <source>Always used to open the app.</source>
         <target>Sempre usado para abrir o aplicativo.</target>
       </trans-unit>
-      <trans-unit id="Send coins, export private keys, remove account, :touchId.">
-        <source>Send coins, export private keys, remove account, %(touchId)s.</source>
-        <target>Enviar moedas, exportar chaves privativas, remover conta, %(touchId)s.</target>
+      <trans-unit id="Send coins, export private keys, remove account, security settings.">
+        <source>Send coins, export private keys, remove account, security settings.</source>
+        <target>Enviar moedas, exportar chaves privativas, remover conta, configurações de segurança.</target>
       </trans-unit>
       <trans-unit id="Account">
         <source>Account</source>

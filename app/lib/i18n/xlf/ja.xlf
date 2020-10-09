@@ -1351,9 +1351,9 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Always used to open the app.</source>
         <target>アプリをオープンするために必ず使用します。</target>
       </trans-unit>
-      <trans-unit id="Send coins, export private keys, remove account, :touchId.">
-        <source>Send coins, export private keys, remove account, %(touchId)s.</source>
-        <target>コインを送信、プライベートキーをエクスポート、アカウントを削除、 %(touchId)s.</target>
+      <trans-unit id="Send coins, export private keys, remove account, security settings.">
+        <source>Send coins, export private keys, remove account, security settings.</source>
+        <target>コインを送信、プライベートキーをエクスポート、アカウントを削除、 セキュリティ設定。</target>
       </trans-unit>
       <trans-unit id="Account">
         <source>Account</source>

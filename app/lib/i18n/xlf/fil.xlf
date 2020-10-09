@@ -1351,9 +1351,9 @@ Iko-convert ito sa %(toSymbol)s, at ipapadala sa
         <source>Always used to open the app.</source>
         <target>Palaging gamitin upang buksan ang app.</target>
       </trans-unit>
-      <trans-unit id="Send coins, export private keys, remove account, :touchId.">
-        <source>Send coins, export private keys, remove account, %(touchId)s.</source>
-        <target>Ipadala ang mga barya, i-export ang mga pribadong key, tanggalin ang account, %(touchId)s.</target>
+      <trans-unit id="Send coins, export private keys, remove account, security settings.">
+        <source>Send coins, export private keys, remove account, security settings.</source>
+        <target>Ipadala ang mga barya, i-export ang mga pribadong key, tanggalin ang account, mga setting ng seguridad.</target>
       </trans-unit>
       <trans-unit id="Account">
         <source>Account</source>

@@ -334,6 +334,6 @@
   "Use for:": "Use for:",
   "High Security": "High Security",
   "Always used to open the app.": "Always used to open the app.",
-  "Send coins, export private keys, remove account, :touchId.": "Send coins, export private keys, remove account, %(touchId)s.",
+  "Send coins, export private keys, remove account, security settings.": "Send coins, export private keys, remove account, security settings.",
   "Account": "Account"
 }

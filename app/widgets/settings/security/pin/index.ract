@@ -24,7 +24,7 @@
       <div class="_radio_btn" class-_checked="isOneFaPrivateEnabled" on-click="toggle-1fa-private"></div>
     </div>
     <div class="_description">
-      {{{translate("Send coins, export private keys, remove account, :touchId.", {touchId: touchIdLabel})}}}
+      {{{translate("Send coins, export private keys, remove account, security settings.")}}}
       {{translate("Always used to open the app.")}}
     </div>
   </div>

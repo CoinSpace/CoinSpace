@@ -1351,9 +1351,9 @@ Biće konvertiran u %(toSymbol)s i poslan na
         <source>Always used to open the app.</source>
         <target>Uvijek se koristi za otvaranje aplikacije.</target>
       </trans-unit>
-      <trans-unit id="Send coins, export private keys, remove account, :touchId.">
-        <source>Send coins, export private keys, remove account, %(touchId)s.</source>
-        <target>Šaljite kovanice, izvezite privatne ključeve, uklonite račun, %(touchId)s.</target>
+      <trans-unit id="Send coins, export private keys, remove account, security settings.">
+        <source>Send coins, export private keys, remove account, security settings.</source>
+        <target>Šaljite kovanice, izvezite privatne ključeve, uklonite račun, sigurnosne postavke.</target>
       </trans-unit>
       <trans-unit id="Account">
         <source>Account</source>
