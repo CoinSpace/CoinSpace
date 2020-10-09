@@ -52,8 +52,6 @@ function unlock(wallet) {
         },
       });
 
-      pinWidget.fire('touch-id');
-
       pinWidget.on('back', () => {
         reject(new Error('cancelled'));
       });

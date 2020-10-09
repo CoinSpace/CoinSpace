@@ -3,6 +3,7 @@
 const Ractive = require('lib/ractive');
 const { translate } = require('lib/i18n');
 const { isEnabled } = require('lib/touch-id');
+const isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(window.navigator.userAgent);
 
 function open(options) {
   const {
@@ -79,6 +80,16 @@ function open(options) {
     if (ractive.get('isLoading')) return;
     ractive.close();
   });
+
+  if (touchId) {
+    if (process.env.BUILD_TYPE === 'web') {
+      if (!isSafari) {
+        ractive.fire('touch-id');
+      }
+    } else {
+      ractive.fire('touch-id');
+    }
+  }
 
   ractive.wrong = (error) => {
     ractive.set('isLoading', false);

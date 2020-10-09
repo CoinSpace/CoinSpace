@@ -72,8 +72,6 @@ module.exports = function(el) {
       },
     });
 
-    ractive.pinWidget.fire('touch-id');
-
     ractive.pinWidget.on('back', () => {
       LS.reset();
       emitter.emit('change-auth-step', 'choose');
