@@ -74,7 +74,7 @@ module.exports = function(el) {
     const symbol = wallet.denomination;
     exchanges.none.set('crypto', wallet.name);
     exchanges.none.set('isSupportedMoonpayBuy', moonpay.isSupported(symbol) && wallet.getNextAddress());
-    exchanges.none.set('isSupportedMoonpaySell', moonpay.isSellSupported(symbol));
+    exchanges.none.set('isSupportedMoonpaySell', moonpay.isSellSupported(symbol) && wallet.getNextAddress());
   }
 
   function showExchange(exchange) {

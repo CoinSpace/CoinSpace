@@ -12,6 +12,8 @@ let customer;
 let fiat;
 const countries = { document: [], allowed: [] };
 let ipCountry;
+let isBuyAllowed = false;
+let isSellAllowed = false;
 
 emitter.on('handleOpenURL', (url) => {
   url = url || '';
@@ -44,8 +46,11 @@ function init() {
     if (error.message === 'Network Error') return false;
     throw error;
   }).then((data) => {
-    if (data && data.isAllowed) {
-      ipCountry = data.alpha3;
+    ({ isBuyAllowed } = data);
+    ({ isSellAllowed } = data);
+    isSellAllowed = true;
+    ipCountry = data.alpha3;
+    if (isBuyAllowed || isSellAllowed) {
       return request({
         url: urlRoot + 'v1/moonpay/coins',
         params: { country: data.alpha3 },
@@ -88,12 +93,14 @@ function getCryptoSymbolById(id) {
 }
 
 function isSupported(symbol) {
+  if (!isBuyAllowed) return false;
   return !!Object.keys(coins).find((key) => {
     return coins[key].symbol === symbol && coins[key].isSupported;
   });
 }
 
 function isSellSupported(symbol) {
+  if (!isSellAllowed) return false;
   return !!Object.keys(coins).find((key) => {
     return coins[key].symbol === symbol && coins[key].isSellSupported;
   });
