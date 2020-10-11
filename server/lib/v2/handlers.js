@@ -203,6 +203,6 @@ exports.removeMecto = asyncWrapper(async (req, res) => {
 });
 
 exports.moonpaySign = asyncWrapper(async (req, res) => {
-  const urls = await moonpay.sign(req.body.urls);
+  const urls = moonpay.sign(req.body.urls);
   res.status(200).send({ urls });
 });

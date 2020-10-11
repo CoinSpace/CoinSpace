@@ -2,7 +2,7 @@
 
 const crypto = require('crypto');
 
-async function sign(urls) {
+function sign(urls) {
   return urls.map((url) => {
     const signature = crypto
       .createHmac('sha256', process.env.MOONPAY_API_SECRET)
