@@ -3,6 +3,7 @@
 const createError = require('http-errors');
 const wallets = require('./wallets');
 const mecto = require('./mecto');
+const moonpay = require('./moonpay');
 const { asyncWrapper, verifyReq } = require('./utils');
 
 exports.register = asyncWrapper(async (req, res) => {
@@ -199,4 +200,9 @@ exports.saveMecto = asyncWrapper(async (req, res) => {
 exports.removeMecto = asyncWrapper(async (req, res) => {
   await mecto.remove(req.device);
   res.status(200).send({ success: true });
+});
+
+exports.moonpaySign = asyncWrapper(async (req, res) => {
+  const urls = await moonpay.sign(req.body.urls);
+  res.status(200).send({ urls });
 });

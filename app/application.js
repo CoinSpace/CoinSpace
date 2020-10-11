@@ -12,7 +12,6 @@ window.initCSApp = async function() {
   const FastClick = require('fastclick');
   const initFrame = require('widgets/frame');
   const initAuth = require('pages/auth');
-  const moonpay = require('lib/moonpay');
   const touchId = require('lib/touch-id');
   const { showError } = require('widgets/modals/flash');
   const showTouchIdSetup = require('widgets/touch-id-setup');
@@ -60,7 +59,6 @@ window.initCSApp = async function() {
   emitter.once('wallet-ready', ({ pin, err } ) => {
     window.scrollTo(0, 0);
     if (process.env.BUILD_TYPE === 'phonegap') window.Zendesk.setAnonymousIdentity();
-    moonpay.init();
     const frame = initFrame(appEl, err);
     if (pin && touchId.isAvailable()) {
       const touchIdSetupWidget = showTouchIdSetup({ append: true, pin });

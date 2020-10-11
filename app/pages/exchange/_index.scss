@@ -1,43 +1,3 @@
-#exchange_none {
-  ._title {
-    margin-bottom: 10px;
-    @include breakpoint(portrait) {
-      font-size: $base_font_size--portrait;
-      margin-bottom: 20px;
-    }
-  }
-  .csbtn {
-    margin-bottom: 20px;
-    @include breakpoint(portrait) {
-      margin-bottom: 30px;
-    }
-    ._icon {
-      display: inline-block;
-      height: 0;
-      width: 40px;
-      margin-left: -45px;
-      margin-right: 5px;
-      margin-top: -40px;
-      vertical-align: middle;
-      @include breakpoint(portrait) {
-        width: 48px;
-        margin-left: -58px;
-        margin-top: -48px;
-        margin-right: 10px;
-      }
-    }
-    &._disabled {
-      background-color: $grey;
-      box-shadow: 0 2px 0 0 darken($grey, 10%);
-      color: darken($grey, 20%);
-      pointer-events: none;
-      &:hover {
-        color: darken($grey, 20%);
-      }
-    }
-  }
-}
-
 #exchange_changelly, #exchange_shapeshift, #exchange_moonpay, #exchange_none {
   display: none;
   &.current {
@@ -48,3 +8,4 @@
 @import "./shapeshift/_index";
 @import "./changelly/_index";
 @import "./moonpay/_index";
+@import "./none/_index";

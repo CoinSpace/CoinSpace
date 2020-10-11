@@ -5,6 +5,7 @@ const { urlRoot } = window;
 let coins = {};
 const emitter = require('lib/emitter');
 const applePay = require('lib/apple-pay');
+const LS = require('lib/wallet/localStorage');
 
 let hasHandledMobileSuccess = false;
 const apiKey = process.env.MOONPAY_API_KEY;
@@ -14,6 +15,7 @@ const countries = { document: [], allowed: [] };
 let ipCountry;
 let isBuyAllowed = false;
 let isSellAllowed = false;
+let isInited = false;
 
 emitter.on('handleOpenURL', (url) => {
   url = url || '';
@@ -37,30 +39,29 @@ emitter.on('wallet-reset', () => {
   cleanAccessToken();
 });
 
-function init() {
-  return request({
-    url: 'https://api.moonpay.io/v3/ip_address',
-    params: { apiKey },
-    hideFlashError: true,
-  }).catch((error) => {
-    if (error.message === 'Network Error') return false;
-    throw error;
-  }).then((data) => {
+async function init() {
+  if (isInited) return true;
+  isInited = true;
+  try {
+    const data = await request({
+      url: 'https://api.moonpay.io/v3/ip_address',
+      params: { apiKey },
+      hideFlashError: true,
+    });
     ({ isBuyAllowed } = data);
     ({ isSellAllowed } = data);
-    isSellAllowed = true;
+
     ipCountry = data.alpha3;
     if (isBuyAllowed || isSellAllowed) {
-      return request({
+      const _coins = await request({
         url: urlRoot + 'v1/moonpay/coins',
         params: { country: data.alpha3 },
       });
+      if (_coins) coins = _coins;
     }
-  }).then((data) => {
-    if (!data) return;
-    coins = data;
-    emitter.emit('moonpay-init');
-  }).catch(console.error);
+  } catch (err) {
+    if (err.message !== 'Network Error') console.error(err);
+  }
 }
 
 function loadFiat() {
@@ -490,7 +491,48 @@ function validateApplePayTransaction(validationUrl) {
   });
 }
 
-function show(currencyCode, walletAddress) {
+async function getWidgetUrls(symbol, address) {
+  let buy;
+  let sell;
+  let urls = [];
+
+  if (isSupported(symbol) && address) {
+    buy = getBuyUrl(symbol.toLowerCase(), address);
+    urls.push(buy);
+    buy = urls.length - 1;
+  }
+  if (isSellSupported(symbol) && address) {
+    sell = getSellUrl(symbol.toLowerCase(), address);
+    urls.push(sell);
+    sell = urls.length - 1;
+  }
+
+  if (urls.length) {
+    urls = await signUrls(urls);
+    buy = urls[buy];
+    sell = urls[sell];
+  }
+
+  return {
+    buy,
+    sell,
+  };
+}
+
+function getSellUrl(baseCurrencyCode, refundWalletAddress) {
+  let baseUrl = process.env.MOONPAY_WIDGET_SELL_URL + '&';
+  const params = {
+    baseCurrencyCode,
+    refundWalletAddress,
+  };
+  const queryString = Object.keys(params).map((key) => {
+    return key + '=' + encodeURIComponent(params[key]);
+  }).join('&');
+  baseUrl += queryString;
+  return baseUrl;
+}
+
+function getBuyUrl(currencyCode, walletAddress) {
   let baseUrl = process.env.MOONPAY_WIDGET_BUY_URL + '&';
   const params = {
     currencyCode,
@@ -499,26 +541,23 @@ function show(currencyCode, walletAddress) {
   };
 
   const queryString = Object.keys(params).map((key) => {
-    return key + '=' + params[key];
+    return key + '=' + encodeURIComponent(params[key]);
   }).join('&');
 
   baseUrl += queryString;
-  window.open(baseUrl, '_blank');
-  return false;
+  return baseUrl;
 }
 
-function showSell(baseCurrencyCode, refundWalletAddress) {
-  let baseUrl = process.env.MOONPAY_WIDGET_SELL_URL + '&';
-  const params = {
-    baseCurrencyCode,
-    refundWalletAddress,
-  };
-  const queryString = Object.keys(params).map((key) => {
-    return key + '=' + params[key];
-  }).join('&');
-  baseUrl += queryString;
-  window.open(baseUrl, '_blank');
-  return false;
+async function signUrls(urls) {
+  const result = await request({
+    url: `${urlRoot}v2/moonpay/sign?id=${LS.getId()}`,
+    method: 'post',
+    data: {
+      urls,
+    },
+    seed: 'public',
+  });
+  return result.urls;
 }
 
 module.exports = {
@@ -557,6 +596,5 @@ module.exports = {
   getTxs,
   open3dSecure,
   validateApplePayTransaction,
-  show,
-  showSell,
+  getWidgetUrls,
 };
