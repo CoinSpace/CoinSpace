@@ -147,7 +147,7 @@
   <preference name="AutoHideSplashScreen" value="false" />
   <preference name="StatusBarBackgroundColor" value="#FFFFFF" />
   <preference name="android-minSdkVersion" value="22" />
-  <preference name="android-targetSdkVersion" value="28" />
+  <preference name="android-targetSdkVersion" value="29" />
   <preference name="KeyboardDisplayRequiresUserAction" value="false" />
   <preference name="DisallowOverscroll" value="true"/>
 </widget>
