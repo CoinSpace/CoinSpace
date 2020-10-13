@@ -18,7 +18,7 @@ async function run() {
       id: 'com.coinspace.app',
       version: pkg.version,
       androidVersionCode: BUILD_NUMBER,
-    }
+    },
   });
   fse.writeFileSync(path.resolve(buildPath, 'config.xml'), config);
 
@@ -58,7 +58,7 @@ async function run() {
   }
 }
 
-process.on('unhandledRejection', function(err) {
+process.on('unhandledRejection', (err) => {
   throw err;
 });
 

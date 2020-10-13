@@ -20,8 +20,8 @@ async function run() {
     widget: {
       id: 'com.coinspace.wallet',
       version: pkg.version,
-      iosCFBundleVersion: BUILD_NUMBER
-    }
+      iosCFBundleVersion: BUILD_NUMBER,
+    },
   });
   fse.writeFileSync(path.resolve(buildPath, 'config.xml'), config);
 
@@ -41,7 +41,7 @@ async function run() {
   cordova('plugin add cordova-plugin-safariviewcontroller@1.6.0');
   cordova('plugin add cordova-plugin-inapp-review@1.1.0');
 
-  var orientations = {
+  const orientations = {
     'UISupportedInterfaceOrientations': [
       'UIInterfaceOrientationPortrait',
     ],
@@ -56,12 +56,14 @@ async function run() {
   await addWatchApp();
 
   if (process.env.CI) {
-    utils.shell(`set -o pipefail && xcodebuild -workspace Coin.xcworkspace -scheme Coin \
+    utils.shell(
+      `set -o pipefail && xcodebuild -workspace Coin.xcworkspace -scheme Coin \
       -configuration AppStoreDistribution archive \
       -archivePath Coin.xcarchive | xcpretty`,
       { cwd: path.join(buildPath, 'platforms/ios') }
     );
-    utils.shell(`set -o pipefail && xcodebuild -exportArchive -archivePath Coin.xcarchive \
+    utils.shell(
+      `set -o pipefail && xcodebuild -exportArchive -archivePath Coin.xcarchive \
       -exportOptionsPlist ../../../iosExportOptions.plist \
       -exportPath ../../../deploy | xcpretty`,
       { cwd: path.join(buildPath, 'platforms/ios') }
@@ -74,7 +76,7 @@ async function run() {
 }
 
 function updatePlist(plistPath, update) {
-  var plistContent = plist.parse(fse.readFileSync(plistPath, 'utf-8'));
+  const plistContent = plist.parse(fse.readFileSync(plistPath, 'utf-8'));
   const plistData = Object.assign({}, plistContent, update);
   fse.writeFileSync(plistPath, plist.build(plistData, {
     indent: '\t',
@@ -88,21 +90,21 @@ async function addWatchApp() {
   utils.shell(`ln -s ${path.resolve(buildPath, 'cs-watchapp-ios/WatchApp')} ./platforms/ios/WatchApp`, { cwd: buildPath });
   utils.shell(`ln -s ${path.resolve(buildPath, 'cs-watchapp-ios/WatchAppExtension')} ./platforms/ios/WatchAppExtension`, { cwd: buildPath });
 
-  var projectPath = path.resolve(buildPath, 'platforms/ios/Coin.xcodeproj/project.pbxproj');
-  var project = xcode.project(projectPath);
+  const projectPath = path.resolve(buildPath, 'platforms/ios/Coin.xcodeproj/project.pbxproj');
+  const project = xcode.project(projectPath);
   await util.promisify(project.parse.bind(project))();
 
   const WatchApp = addFolderToProject('WatchApp', path.join(buildPath, 'platforms/ios'), project);
   const WatchAppExtension = addFolderToProject('WatchAppExtension', path.join(buildPath, 'platforms/ios'), project);
 
   function addFolderToProject(folderPath, basePath, project, isChild) {
-    var folder = path.basename(folderPath);
-    var watchAppPaths = fse.readdirSync(path.resolve(basePath, folderPath));
-    var files = [];
-    var childs = [];
+    const folder = path.basename(folderPath);
+    const watchAppPaths = fse.readdirSync(path.resolve(basePath, folderPath));
+    let files = [];
+    const childs = [];
     watchAppPaths.forEach((f) => {
       if (f.startsWith('.')) return;
-      var s = fse.statSync(path.resolve(basePath, folderPath, f));
+      const s = fse.statSync(path.resolve(basePath, folderPath, f));
       if (s.isFile() || path.extname(f) === '.xcassets') {
         files.push(path.join(folderPath, f));
       } else {
@@ -122,8 +124,8 @@ async function addWatchApp() {
   }
 
   // add new targets
-  var WatchAppTarget = project.addTarget('WatchApp', 'watch2_app', 'WatchApp', 'com.coinspace.wallet.watchapp');
-  var WatchAppExtensionTarget = project.addTarget('WatchAppExtension', 'watch2_extension', 'WatchAppExtension', 'com.coinspace.wallet.watchapp.extension');
+  const WatchAppTarget = project.addTarget('WatchApp', 'watch2_app', 'WatchApp', 'com.coinspace.wallet.watchapp');
+  const WatchAppExtensionTarget = project.addTarget('WatchAppExtension', 'watch2_extension', 'WatchAppExtension', 'com.coinspace.wallet.watchapp.extension');
 
   // edit XCBuildConfiguration
   const pbxXCBuildConfigurationSection = project.pbxXCBuildConfigurationSection();
@@ -135,7 +137,7 @@ async function addWatchApp() {
     setting['CODE_SIGN_STYLE'] = 'Manual';
     setting['DEVELOPMENT_TEAM'] = '3M4KWD4BUU';
 
-    const name = pbxXCBuildConfigurationSection[key].name;
+    const { name } = pbxXCBuildConfigurationSection[key];
     if (setting['PRODUCT_NAME'] === '"WatchApp"' || setting['PRODUCT_NAME'] === '"WatchAppExtension"') {
       setting['SDKROOT'] = 'watchos';
       setting['MARKETING_VERSION'] = pkg.version;
@@ -198,12 +200,12 @@ async function addWatchApp() {
   fse.writeFileSync(projectPath, project.writeSync());
 
   // add pods
-  var watchAppPodfile = fse.readFileSync(path.resolve(buildPath, 'cs-watchapp-ios/WatchAppExtension/Podfile'));
+  const watchAppPodfile = fse.readFileSync(path.resolve(buildPath, 'cs-watchapp-ios/WatchAppExtension/Podfile'));
   fse.appendFileSync(path.resolve(buildPath, 'platforms/ios/Podfile'), watchAppPodfile);
   utils.shell(`pod install`, { cwd: path.join(buildPath, 'platforms/ios') });
 }
 
-process.on('unhandledRejection', function(err) {
+process.on('unhandledRejection', (err) => {
   throw err;
 });
 

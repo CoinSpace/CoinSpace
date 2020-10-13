@@ -55,7 +55,7 @@ module.exports = function(el) {
           ractive.pinWidget.wrong();
           emitter.emit('auth-error', err);
         }
-      }
+      },
     });
   });
 
