@@ -3,7 +3,7 @@
 const platforms = [
   {
     os: 'android',
-    platform: /android.*/i,
+    userAgent: /android/i,
   },
   {
     os: 'ios',
@@ -24,7 +24,12 @@ const platforms = [
 ];
 
 let os = 'unknown';
-const found = platforms.find(target => target.platform.test(window.navigator.platform));
+const found = platforms.find((target) => {
+  if (target.userAgent) {
+    return target.userAgent.test(window.navigator.userAgent);
+  }
+  return target.platform.test(window.navigator.platform);
+});
 if (found) ({ os } = found);
 
 module.exports = os;
