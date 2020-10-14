@@ -1,6 +1,9 @@
 .overlay--geo {
   @extend .overlay;
   background-color: $blue;
+  ._iphone_x {
+    @include iphone-x-top;
+  }
 }
 
 .geo__header {

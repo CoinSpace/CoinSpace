@@ -1,5 +1,5 @@
 <div class="overlay--geo js__fadeEl">
-
+    <div class="_iphone_x"></div>
     <div class="geo__header">
       <div class="_header">
         {{^searching}}
