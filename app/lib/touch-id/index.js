@@ -20,6 +20,8 @@ async function init() {
           window.Fingerprint.isAvailable(() => resolve(true), () => resolve(false));
         }
       });
+    } else if (process.env.BUILD_TYPE === 'electron') {
+      isAvailable = false;
     } else {
       isAvailable = PublicKeyCredential
         && PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable
