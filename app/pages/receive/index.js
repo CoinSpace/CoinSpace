@@ -44,6 +44,10 @@ module.exports = function(el) {
 
   initEosSetup(ractive.find('#eos-setup'));
 
+  ractive.on('before-show', () => {
+    showAddress();
+  });
+
   emitter.on('wallet-ready', () => {
     const wallet = CS.getWallet();
     ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
@@ -59,9 +63,7 @@ module.exports = function(el) {
       'dogecoin',
       'dash',
     ].indexOf(wallet.networkName) !== -1);
-    showAddress();
   });
-  emitter.on('tx-sent', showAddress);
   emitter.on('change-address-type', showAddress);
 
   ractive.on('change-address-type', () => {
