@@ -18,7 +18,7 @@ module.exports = function(data) {
   const canvas = ractive.find('#qr-canvas');
   const name = data.name || '';
   const qr = qrcode.encode(name + ':' + data.address);
-  canvas.appendChild(qr);
+  canvas.innerHTML = qr;
 
   ractive.on('close', ()=> {
     ractive.fire('cancel');

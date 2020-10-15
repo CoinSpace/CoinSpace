@@ -16,6 +16,10 @@ function encode(string, options) {
   canvas.width = width;
   canvas.height = height;
 
+  const img = document.createElement('img');
+  img.width = width;
+  img.height = height;
+
   const ctx = canvas.getContext('2d');
 
   const cells = qr(string).modules;
@@ -33,7 +37,8 @@ function encode(string, options) {
     }
   }
 
-  return canvas;
+  img.src = canvas.toDataURL();
+  return img.outerHTML;
 }
 
 function scan(callback) {

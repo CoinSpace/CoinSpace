@@ -44,10 +44,6 @@ module.exports = function(el) {
 
   initEosSetup(ractive.find('#eos-setup'));
 
-  ractive.on('before-show', () => {
-    showAddress();
-  });
-
   emitter.on('wallet-ready', () => {
     const wallet = CS.getWallet();
     ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
@@ -63,7 +59,9 @@ module.exports = function(el) {
       'dogecoin',
       'dash',
     ].indexOf(wallet.networkName) !== -1);
+    showAddress();
   });
+  emitter.on('tx-sent', showAddress);
   emitter.on('change-address-type', showAddress);
 
   ractive.on('change-address-type', () => {
@@ -92,11 +90,8 @@ module.exports = function(el) {
   function showQRcode(address) {
     if (ractive.get('isPhonegap')) {
       const canvas = document.getElementById('qr_canvas');
-      while (canvas.hasChildNodes()) {
-        canvas.removeChild(canvas.firstChild);
-      }
       const qr = qrcode.encode(CS.getWallet().networkName + ':' + address);
-      canvas.appendChild(qr);
+      canvas.innerHTML = qr;
     }
   }
 

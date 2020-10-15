@@ -93,12 +93,9 @@ module.exports = function(el) {
   function showQRcode() {
     if (ractive.get('isPhonegap')) {
       const canvas = ractive.find('#deposit_qr_canvas');
-      while (canvas.hasChildNodes()) {
-        canvas.removeChild(canvas.firstChild);
-      }
       const name = ractive.get('depositSymbol').toLowerCase();
       const qr = qrcode.encode(name + ':' + ractive.get('depositAddress'));
-      canvas.appendChild(qr);
+      canvas.innerHTML = qr;
     }
   }
 
