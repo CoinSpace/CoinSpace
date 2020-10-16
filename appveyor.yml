@@ -19,6 +19,8 @@ environment:
 
 install:
   - ps: Install-Product node 12 x64
+  - ps: >-
+      "//npm.pkg.github.com/:_authToken=$Env:GITHUB_NPM_TOKEN`n" | out-file ".npmrc"
   - set NODE_ENV=ci
   - npm ci
   - cd electron

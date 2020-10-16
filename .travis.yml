@@ -60,6 +60,7 @@ branches:
     - desktop
 
 install:
+  - echo //npm.pkg.github.com/:_authToken=$GITHUB_NPM_TOKEN >> .npmrc
   - NODE_ENV=ci npm ci
   - (cd ${BUILD_TYPE} && NODE_ENV=ci npm ci)
 
