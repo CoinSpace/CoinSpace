@@ -1,6 +1,6 @@
 'use strict';
 
-const B39 = require('b39');
+const B39 = require('@coinspace/b39');
 
 self.addEventListener('message', (e) => {
   const data = e.data || {};
