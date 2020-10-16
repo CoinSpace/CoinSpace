@@ -1,6 +1,0 @@
-{{^opening}}
-  <span class="_link" on-click="back">{{translate("Go back")}}</span>
-{{/opening}}
-{{#opening}}
-  <div class="opening__padding"></div>
-{{/opening}}

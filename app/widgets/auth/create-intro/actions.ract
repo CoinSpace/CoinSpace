@@ -1,9 +1,0 @@
-{{^opening}}
-  <div class="auth__btn" on-click="generate-phrase">{{translate("Generate passphrase")}}</div>
-{{/opening}}
-
-{{#opening}}
-  <div class="auth__btn--loading">
-    <span class="_text">{{translate(progress)}}...</span>
-  </div>
-{{/opening}}

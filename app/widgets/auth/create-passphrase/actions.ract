@@ -1,5 +1,0 @@
-{{#if (checked && termsChecked) }}
-<div class="auth__btn" on-click="confirm">{{translate("Confirm")}}</div>
-{{else}}
-<div class="auth__btn--inactive" >{{translate("Confirm")}}</div>
-{{/if}}
