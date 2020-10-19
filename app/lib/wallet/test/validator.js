@@ -1,7 +1,7 @@
 /* global expect */
 'use strict';
 
-const Wallet = require('cs-wallet');
+const Wallet = require('@coinspace/cs-wallet');
 const validateSend = require('../validator');
 const sinon = require('sinon');
 
