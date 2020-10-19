@@ -9,7 +9,11 @@ const {
   verifyAssertionResponse,
 } = require('@simplewebauthn/server');
 const db = require('../v1/db');
-const { generateChallenge, generateUser } = require('./utils');
+const {
+  generateChallenge,
+  generateUser,
+  mapAuthenticator,
+} = require('./utils');
 
 const COLLECTION = 'wallets';
 const MAX_FAILED_ATTEMPTS = 3;
@@ -113,7 +117,7 @@ async function platformOptions(device, type) {
   if (device.authenticator && device.authenticator.credentialID) {
     const options = generateAssertionOptions({
       challenge: generateChallenge(),
-      allowedCredentialIDs: [device.authenticator.credentialID],
+      allowCredentials: [mapAuthenticator(device.authenticator)],
     });
     await _setChallenge(device, options.challenge, type, 'platform');
 
@@ -154,7 +158,7 @@ async function crossplatformOptions(device, type) {
   if (wallet.authenticators && wallet.authenticators.length > 0) {
     const options = generateAssertionOptions({
       challenge: generateChallenge(),
-      allowedCredentialIDs: wallet.authenticators.map(authenticator => authenticator.credentialID),
+      allowCredentials: wallet.authenticators.map(mapAuthenticator),
     });
 
     await _setChallenge(device, options.challenge, type, 'crossplatform');
@@ -247,6 +251,7 @@ async function platformAttestationVerify(device, body) {
         credentialID: authenticatorInfo.base64CredentialID,
         publicKey: authenticatorInfo.base64PublicKey,
         counter: authenticatorInfo.counter,
+        transports: body.transports,
         date: new Date(),
       },
     },
@@ -268,8 +273,7 @@ async function crossplatformAttestationOptions(device) {
     authenticatorSelection: {
       authenticatorAttachment: 'cross-platform',
     },
-    excludedCredentialIDs: wallet.authenticators ?
-      wallet.authenticators.map(authenticator => authenticator.credentialID) : undefined,
+    excludeCredentials: wallet.authenticators ? wallet.authenticators.map(mapAuthenticator) : undefined,
   });
 
   await _setChallenge(device, options.challenge, 'attestation', 'crossplatform');
@@ -300,6 +304,7 @@ async function crossplatformAttestationVerify(device, body) {
         credentialID: authenticatorInfo.base64CredentialID,
         publicKey: authenticatorInfo.base64PublicKey,
         counter: authenticatorInfo.counter,
+        transports: body.transports,
         date: new Date(),
       },
     },

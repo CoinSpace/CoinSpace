@@ -44,9 +44,18 @@ function verifyReq(key, req) {
   }
 }
 
+function mapAuthenticator(authenticator) {
+  return {
+    id: authenticator.credentialID,
+    type: 'public-key',
+    transports: authenticator.transports,
+  };
+}
+
 module.exports = {
   generateChallenge,
   generateUser,
   asyncWrapper,
   verifyReq,
+  mapAuthenticator,
 };
