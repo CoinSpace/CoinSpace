@@ -48,7 +48,7 @@ function mapAuthenticator(authenticator) {
   return {
     id: authenticator.credentialID,
     type: 'public-key',
-    transports: authenticator.transports,
+    transports: authenticator.transports || undefined,
   };
 }
 
