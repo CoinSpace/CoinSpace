@@ -18,6 +18,7 @@ const {
 const COLLECTION = 'wallets';
 const MAX_FAILED_ATTEMPTS = 3;
 const MAX_DEVICES = 100;
+const MAX_AUTHENTICATORS = 10;
 
 const url = new URL(process.env.SITE_URL);
 
@@ -262,6 +263,10 @@ async function crossplatformAttestationOptions(device) {
   const { wallet } = device;
   const user = generateUser(wallet._id);
 
+  if (wallet.authenticators && wallet.authenticators.length >= MAX_AUTHENTICATORS) {
+    throw createError(400, 'The number of authenticators has exceeded the maximum limit');
+  }
+
   const options = generateAttestationOptions({
     challenge: generateChallenge(),
     rpID: RP_ID,
@@ -282,6 +287,11 @@ async function crossplatformAttestationOptions(device) {
 }
 
 async function crossplatformAttestationVerify(device, body) {
+  const { wallet } = device;
+  if (wallet.authenticators && wallet.authenticators.length >= MAX_AUTHENTICATORS) {
+    throw createError(400, 'The number of authenticators has exceeded the maximum limit');
+  }
+
   const { verified, authenticatorInfo } = await verifyAttestationResponse({
     credential: body,
     expectedChallenge: device.challenges['attestation_crossplatform'],

@@ -1359,6 +1359,14 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Account</source>
         <target>帐户</target>
       </trans-unit>
+      <trans-unit id="Hardware keys:">
+        <source>Hardware keys:</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Add Hardware Key...">
+        <source>Add Hardware Key...</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

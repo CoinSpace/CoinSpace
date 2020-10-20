@@ -335,5 +335,7 @@
   "High Security": "High Security",
   "Always used to open the app.": "Always used to open the app.",
   "Send coins, export private keys, remove account, security settings.": "Send coins, export private keys, remove account, security settings.",
-  "Account": "Account"
+  "Account": "Account",
+  "Hardware keys:": "Hardware keys:",
+  "Add Hardware Key...": "Add Hardware Key..."
 }

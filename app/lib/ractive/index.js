@@ -93,6 +93,7 @@ partials.svg_shapeshift = require('lib/svg/shapeshift.ract');
 partials.svg_changelly = require('lib/svg/changelly.ract');
 partials.svg_backspace = require('lib/svg/backspace.ract');
 partials.svg_touchid = require('lib/svg/touchid.ract');
+partials.svg_trash = require('lib/svg/trash.ract');
 
 Ractive.prototype.hide = function(context) {
   this.fire('before-hide', context);

@@ -5,6 +5,7 @@ const initMain = require('./main');
 const initAccount = require('./account');
 const initAbout = require('./about');
 const initSecurityPin = require('./security/pin');
+const initSecurityHardware = require('./security/hardware');
 const details = require('lib/wallet/details');
 
 module.exports = function(el) {
@@ -17,6 +18,7 @@ module.exports = function(el) {
     main: initMain(ractive.find('#widget-settings-main')),
     account: initAccount(ractive.find('#widget-settings-account')),
     securityPin: initSecurityPin(ractive.find('#widget-settings-security-pin')),
+    securityHardware: initSecurityHardware(ractive.find('#widget-settings-security-hardware')),
     about: initAbout(ractive.find('#widget-settings-about')),
   };
   let currentStep = steps.main;

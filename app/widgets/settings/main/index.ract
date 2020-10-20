@@ -25,6 +25,10 @@
       <div class="_label">{{securityPinLabel}}</div>
       <div class="_arrow">{{>svg_arrow}}</div>
     </div>
+    <div class="_list_item _btn" on-click="security-hardware">
+      <div class="_label">{{translate("Hardware Security")}}</div>
+      <div class="_arrow">{{>svg_arrow}}</div>
+    </div>
   </div>
 
   {{#unless (!isEOS && !isEnabledImport && !isEnabledExport)}}

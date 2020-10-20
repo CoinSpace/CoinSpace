@@ -1359,6 +1359,14 @@ Le montant sera converti en %(toSymbol)s, et sera envoyé à
         <source>Account</source>
         <target>Compte</target>
       </trans-unit>
+      <trans-unit id="Hardware keys:">
+        <source>Hardware keys:</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Add Hardware Key...">
+        <source>Add Hardware Key...</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

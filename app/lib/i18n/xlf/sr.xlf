@@ -1359,6 +1359,14 @@ Biće konvertovano u %(toSymbol)s i poslato na
         <source>Account</source>
         <target>Račun</target>
       </trans-unit>
+      <trans-unit id="Hardware keys:">
+        <source>Hardware keys:</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Add Hardware Key...">
+        <source>Add Hardware Key...</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -6,6 +6,7 @@ const LS = require('lib/wallet/localStorage');
 const { PublicKeyCredential } = window;
 const { urlRoot } = window;
 const { startAttestation, startAssertion } = require('@simplewebauthn/browser');
+const hardware = require('lib/hardware');
 
 let isAvailable = false;
 
@@ -126,7 +127,12 @@ async function privateToken() {
     data: assertion,
     seed: 'public',
   });
-  return res.privateToken;
+
+  if (res.privateToken) {
+    return res.privateToken;
+  } else if (res.challenge) {
+    return hardware.privateToken(res);
+  }
 }
 
 function isEnabled() {

@@ -67,6 +67,16 @@
     }
   }
 
+  ._loader {
+    padding: 40px;
+    color: $grey;
+    text-align: center;
+    font-size: $subtitle_font_size;
+    @include breakpoint(portrait) {
+      font-size: $subtitle_font_size--portrait;
+    }
+  }
+
   ._section {
     margin: 35px 0;
     outline: 0;
@@ -94,14 +104,13 @@
         color: #34a2ff;
       }
     }
+    ._btn {
+      @include clickbtn;
+    }
     ._list_item {
       &._danger {
-        @include clickbtn;
         color: #ff3b30;
         justify-content: center;
-      }
-      &._btn {
-        @include clickbtn;
       }
       display: flex;
       justify-content: space-between;
@@ -113,6 +122,19 @@
       outline: 0;
       ._label {
         @include ellipsis();
+      }
+      ._link {
+        color: #34a2ff;
+      }
+      ._trash {
+        margin: -10px -15px -10px 0;
+        padding: 10px;
+        svg {
+          fill: #ff3b30;
+          display: block;
+          width: 20px;
+          height: 20px;
+        }
       }
       ._arrow {
         margin-right: -5px;
@@ -162,3 +184,4 @@
 @import "./account/_index";
 @import "./about/_index";
 @import "./security/pin/_index";
+@import "./security/hardware/_index";

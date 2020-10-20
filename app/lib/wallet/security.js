@@ -8,6 +8,7 @@ const LS = require('./localStorage');
 const crypto = require('crypto');
 const emitter = require('lib/emitter');
 const touchId = require('lib/touch-id');
+const hardware = require('lib/hardware');
 const { urlRoot } = window;
 
 function unlock(wallet) {
@@ -25,6 +26,7 @@ function unlock(wallet) {
             resolve();
           } catch (err) {
             pinWidget.wrong();
+            if (err.message === 'hardware_error') return;
             emitter.emit('auth-error', err);
           }
         },
@@ -46,6 +48,7 @@ function unlock(wallet) {
             resolve();
           } catch (err) {
             if (err.message === 'touch_id_error') return;
+            if (err.message === 'hardware_error') return;
             pinWidget.wrong();
             emitter.emit('auth-error', err);
           }
@@ -85,7 +88,12 @@ async function _getPrivateTokenByPin(pin) {
     },
     seed: 'public',
   });
-  return res.privateToken;
+
+  if (res.privateToken) {
+    return res.privateToken;
+  } else if (res.challenge) {
+    return hardware.privateToken(res);
+  }
 }
 
 module.exports = {

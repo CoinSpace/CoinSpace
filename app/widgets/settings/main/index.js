@@ -49,6 +49,9 @@ module.exports = function(el) {
   ractive.on('security-pin', () => {
     ractive.fire('change-step', { step: 'securityPin' });
   });
+  ractive.on('security-hardware', () => {
+    ractive.fire('change-step', { step: 'securityHardware' });
+  });
 
   ractive.on('before-show', ({ userInfo }) => {
     if (userInfo) {
