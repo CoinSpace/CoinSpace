@@ -9,7 +9,7 @@ const openalias = require('./openalias');
 const fee = require('./fee');
 const csFee = require('./csFee');
 const ticker = require('./ticker');
-const ethereumTokens = require('./ethereumTokens');
+const ethereumTokens = require('../ethereumTokens');
 const shapeshift = require('./shapeshift');
 const changelly = require('./changelly');
 const moonpay = require('./moonpay');
@@ -134,7 +134,7 @@ router.get('/ticker/applewatch', (req, res) => {
 });
 
 router.get('/ethereum/tokens', (req, res) => {
-  ethereumTokens.getAllFromCache().then((data) => {
+  ethereumTokens.getTokens().then((data) => {
     res.status(200).send(data);
   }).catch((err) => {
     res.status(400).send(err);

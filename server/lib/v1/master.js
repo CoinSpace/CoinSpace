@@ -3,7 +3,6 @@
 const geo = require('./geo');
 const fee = require('./fee');
 const ticker = require('./ticker');
-const ethereumTokens = require('./ethereumTokens');
 const moonpay = require('./moonpay');
 const github = require('./github');
 
@@ -33,16 +32,6 @@ function cacheTicker(interval) {
     ticker.getFromAPI().then((data) => {
       if (global.gc) global.gc();
       return ticker.save(data);
-    }).catch(console.error);
-    return intervalFunction;
-  }(), interval);
-}
-
-function cacheEthereumTokens(interval) {
-  setInterval(function intervalFunction() {
-    ethereumTokens.getFromAPI().then((data) => {
-      if (global.gc) global.gc();
-      return ethereumTokens.save(data);
     }).catch(console.error);
     return intervalFunction;
   }(), interval);
@@ -88,7 +77,6 @@ module.exports = {
   cleanGeo,
   cacheFees,
   cacheTicker,
-  cacheEthereumTokens,
   cacheMoonpayCurrencies,
   cacheMoonpayCountries,
   cacheGithubReleases,

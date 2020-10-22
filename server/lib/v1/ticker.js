@@ -2,6 +2,7 @@
 
 const axios = require('axios');
 const db = require('./db');
+const ethereumTokens = require('../ethereumTokens');
 
 const fsyms = [
   'BTC',
@@ -14,8 +15,10 @@ const fsyms = [
   'EOS',
   'DOGE',
   'DASH',
-  'USDT',
-  'USD',
+  // moved to ethereum tokens
+  //'USDT',
+  // not necessary anymore
+  //'USD',
 ];
 
 const tsyms = [
@@ -75,22 +78,7 @@ function getFromCache(symbol) {
       });
   }
 
-  const tokens = db().collection('ethereum_tokens');
-  return Promise.all([
-    tokens.find({ symbol }).limit(1).next(),
-    ticker.find({ _id: 'USD' }).limit(1).next(),
-  ]).then((results) => {
-    const token = results[0];
-    const ticker = results[1];
-    const data = {};
-    tsyms.forEach((key) => {
-      if (!token) {
-        return (data[key] = 0);
-      }
-      data[key] = parseFloat((ticker.data[key] * token.price).toFixed(6));
-    });
-    return data;
-  });
+  return ethereumTokens.getPriceBySymbol(symbol);
 }
 
 function getFromCacheForAppleWatch() {

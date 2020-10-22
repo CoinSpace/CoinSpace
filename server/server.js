@@ -71,11 +71,10 @@ db().then(() => {
     master.cleanGeo(60 * 60 * 1000); // 1 hour
     master.cacheFees(10 * 60 * 1000); // 10 minutes
     master.cacheTicker(1 * 60 * 1000); // 1 minute
-    master.cacheEthereumTokens(1 * 60 * 1000); // 1 minute
     master.cacheMoonpayCurrencies(60 * 60 * 1000); // 1 hour
     master.cacheMoonpayCountries(60 * 60 * 1000); // 1 hour
     master.cacheGithubReleases(10 * 60 * 1000); // 10 minutes
   }
 }).catch((error) => {
-  console.log('error', error);
+  console.error('error', error);
 });
