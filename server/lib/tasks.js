@@ -1,10 +1,26 @@
 'use strict';
 
-const geo = require('./geo');
-const fee = require('./fee');
-const ticker = require('./ticker');
-const moonpay = require('./moonpay');
-const github = require('./github');
+const pForever = require('p-forever');
+const delay = require('delay');
+const geo = require('./v1/geo');
+const fee = require('./v1//fee');
+const moonpay = require('./v1//moonpay');
+const github = require('./v1//github');
+const tokens = require('./tokens');
+
+function syncTokens(interval) {
+  return pForever(async () => {
+    await tokens.syncTokens().catch(console.error);
+    await delay(interval);
+  });
+}
+
+function updatePrices(interval) {
+  return pForever(async () => {
+    await tokens.updatePrices().catch(console.error);
+    await delay(interval);
+  });
+}
 
 function cleanGeo(interval) {
   setInterval(function intervalFunction() {
@@ -22,16 +38,6 @@ function cacheFees(interval) {
         hour: data.hourFee,
         fastest: data.fastestFee,
       });
-    }).catch(console.error);
-    return intervalFunction;
-  }(), interval);
-}
-
-function cacheTicker(interval) {
-  setInterval(function intervalFunction() {
-    ticker.getFromAPI().then((data) => {
-      if (global.gc) global.gc();
-      return ticker.save(data);
     }).catch(console.error);
     return intervalFunction;
   }(), interval);
@@ -74,9 +80,10 @@ function cacheGithubReleases(interval) {
 }
 
 module.exports = {
+  syncTokens,
+  updatePrices,
   cleanGeo,
   cacheFees,
-  cacheTicker,
   cacheMoonpayCurrencies,
   cacheMoonpayCountries,
   cacheGithubReleases,

@@ -4,6 +4,7 @@ const createError = require('http-errors');
 const wallets = require('./wallets');
 const mecto = require('./mecto');
 const moonpay = require('./moonpay');
+const tokens = require('../tokens');
 const { asyncWrapper, verifyReq } = require('./utils');
 
 exports.register = asyncWrapper(async (req, res) => {
@@ -207,4 +208,14 @@ exports.removeMecto = asyncWrapper(async (req, res) => {
 exports.moonpaySign = asyncWrapper(async (req, res) => {
   const urls = moonpay.sign(req.body.urls);
   res.status(200).send({ urls });
+});
+
+exports.getTokens = asyncWrapper(async (req, res) => {
+  const list = await tokens.getTokens(req.query.platform);
+  res.status(200).send(list);
+});
+
+exports.getPrices = asyncWrapper(async (req, res) => {
+  const list = await tokens.getPrices(req.query.tokens);
+  res.status(200).send(list);
 });

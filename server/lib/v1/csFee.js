@@ -2,7 +2,7 @@
 
 const db = require('./db');
 
-const ticker = require('./ticker');
+const tokens = require('../tokens');
 const Big = require('big.js');
 
 const networks = [
@@ -15,12 +15,12 @@ const networks = [
 ];
 
 const symbols = {
-  bitcoin: 'BTC',
-  bitcoincash: 'BCH',
-  bitcoinsv: 'BSV',
-  litecoin: 'LTC',
-  dogecoin: 'DOGE',
-  dash: 'DASH',
+  bitcoin: 'bitcoin',
+  bitcoincash: 'bitcoin-cash',
+  bitcoinsv: 'bitcoin-cash-sv',
+  litecoin: 'litecoin',
+  dogecoin: 'dogecoin',
+  dash: 'dash',
 };
 
 function get(network) {
@@ -31,7 +31,7 @@ function get(network) {
   const collection = db().collection('cs_fee');
 
   return Promise.all([
-    ticker.getFromCache(symbols[network]),
+    tokens.getPrice(symbols[network]),
     collection.find({ _id: network }).limit(1).next(),
   ]).then((results) => {
     const rate = results[0]['USD'];

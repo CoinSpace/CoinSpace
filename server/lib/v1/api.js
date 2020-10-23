@@ -8,8 +8,7 @@ const geo = require('./geo');
 const openalias = require('./openalias');
 const fee = require('./fee');
 const csFee = require('./csFee');
-const ticker = require('./ticker');
-const ethereumTokens = require('../ethereumTokens');
+const tokens = require('../tokens');
 const shapeshift = require('./shapeshift');
 const changelly = require('./changelly');
 const moonpay = require('./moonpay');
@@ -118,7 +117,7 @@ router.get('/csFee', (req, res) => {
 router.get('/ticker', (req, res) => {
   const { crypto } = req.query;
   if (!crypto) return res.status(400).json({ error: 'Bad request' });
-  ticker.getFromCache(crypto).then((data) => {
+  tokens.getPriceBySymbol(crypto).then((data) => {
     res.status(200).send(data);
   }).catch((err) => {
     res.status(400).send(err);
@@ -126,7 +125,7 @@ router.get('/ticker', (req, res) => {
 });
 
 router.get('/ticker/applewatch', (req, res) => {
-  ticker.getFromCacheForAppleWatch().then((data) => {
+  tokens.getFromCacheForAppleWatch().then((data) => {
     res.status(200).send(data);
   }).catch((err) => {
     res.status(400).send(err);
@@ -134,7 +133,7 @@ router.get('/ticker/applewatch', (req, res) => {
 });
 
 router.get('/ethereum/tokens', (req, res) => {
-  ethereumTokens.getTokens().then((data) => {
+  tokens.getTokens('ethereum').then((data) => {
     res.status(200).send(data);
   }).catch((err) => {
     res.status(400).send(err);

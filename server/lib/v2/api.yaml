@@ -484,6 +484,42 @@ paths:
           $ref: '#/components/responses/SuccessResponse'
         default:
           $ref: '#/components/responses/GeneralError'
+  /tokens:
+    get:
+      x-eov-operation-id: getTokens
+      x-eov-operation-handler: handlers
+      description: Get supported tokens
+      parameters:
+        - $ref: '#/components/parameters/platform'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: List of tokens
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/TokenList'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /prices:
+    get:
+      x-eov-operation-id: getPrices
+      x-eov-operation-handler: handlers
+      description: Get prices of tokens
+      parameters:
+        - $ref: '#/components/parameters/tokens'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: List of prices
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/PriceList'
+        default:
+          $ref: '#/components/responses/GeneralError'
   /device:
     delete:
       x-eov-operation-id: removeDevice
@@ -638,6 +674,58 @@ components:
             type: string
           minItems: 1
           maxItems: 5
+    TokenList:
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+          platform:
+            type: string
+          symbol:
+            type: string
+          name:
+            type: string
+          address:
+            type: string
+          decimals:
+            type: number
+          icon:
+            type: string
+          market_cap_rank:
+            type: number
+        required:
+          - _id
+          - platform
+          - symbol
+          - name
+          - address
+          - decimals
+          - icon
+          - market_cap_rank
+    PriceList:
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+          name:
+            type: string
+          platform:
+            type: string
+            nullable: true
+          symbol:
+            type: string
+          prices:
+            type: object
+        required:
+          - _id
+          - name
+          - platform
+          - symbol
+          - prices
   parameters:
     deviceId:
       in: query
@@ -660,6 +748,25 @@ components:
       description: Longitude
       schema:
         type: number
+    platform:
+      in: query
+      name: platform
+      required: true
+      description: Platform issued tokens
+      schema:
+        type: string
+    tokens:
+      in: query
+      name: tokens
+      required: true
+      description: List of token IDs
+      style: form
+      explode: false
+      allowReserved: true
+      schema:
+        type: array
+        items:
+          type: string
   requestBodies:
     PIN:
       description: PIN Hash

@@ -2,10 +2,8 @@
 
 const Sentry = require('@sentry/node');
 const Integrations = require('@sentry/integrations');
-const pForever = require('p-forever');
-const delay = require('delay');
 const db = require('./lib/v1/db');
-const ethereumTokens = require('./lib/ethereumTokens');
+const tasks = require('./lib/tasks');
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
@@ -20,16 +18,13 @@ Sentry.init({
 
 db().then(async () => {
   await Promise.all([
-    pForever(async () => {
-      await ethereumTokens.syncTokens();
-      // delay 12 hours
-      await delay(12 * 60 * 60 * 1000);
-    }),
-    pForever(async () => {
-      await ethereumTokens.updatePrices();
-      // delay 1 minute
-      await delay(60 * 1000);
-    }),
+    tasks.syncTokens(12 * 60 * 60 * 1000), // delay 12 hours
+    tasks.updatePrices(60 * 1000), // delay 1 minute
+    tasks.cleanGeo(60 * 60 * 1000), // 1 hour
+    tasks.cacheFees(10 * 60 * 1000), // 10 minutes
+    tasks.cacheMoonpayCurrencies(60 * 60 * 1000), // 1 hour
+    tasks.cacheMoonpayCountries(60 * 60 * 1000), // 1 hour
+    tasks.cacheGithubReleases(10 * 60 * 1000), // 10 minutes
   ]);
 }).catch((error) => {
   console.error('error', error);

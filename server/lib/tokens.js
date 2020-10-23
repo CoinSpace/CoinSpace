@@ -5,13 +5,35 @@ const axios = require('axios');
 const axiosRetry = require('axios-retry');
 const rateLimit = require('axios-rate-limit');
 
-const COLLECTION = 'ethereum_tokens';
+const COLLECTION = 'tokens';
 const CURRENCIES = [
   'AUD', 'BRL', 'CAD', 'CHF', 'CNY',
   'DKK', 'EUR', 'GBP', 'IDR', 'ILS',
   'JPY', 'MXN', 'NOK', 'NZD', 'PLN',
   'RUB', 'SEK', 'SGD', 'TRY', 'UAH',
   'USD', 'ZAR',
+];
+const CRYPTOCURRENCIES = [
+  // BTC
+  'bitcoin',
+  // BCH
+  'bitcoin-cash',
+  // BSV
+  'bitcoin-cash-sv',
+  // LTC
+  'litecoin',
+  // ETH
+  'ethereum',
+  // XRP
+  'ripple',
+  // XLM
+  'stellar',
+  // EOS
+  'eos',
+  // DOGE
+  'dogecoin',
+  // DASH
+  'dash',
 ];
 
 const coingecko = axios.create({
@@ -58,13 +80,31 @@ async function syncTokens() {
   for (const item of list) {
     try {
       if (['0-5x-long-', '1x-short-', '3x-long-', '3x-short-'].some(pattern => item.id.startsWith(pattern))) {
-        //console.log(`Filter token ${item.id} '${item.symbol}' ${item.name}`);
+        //console.log(`Filter token id: '${item.id}' symbol: '${item.symbol}' name: '${item.name}'`);
         continue;
       }
 
       const { data: token } = await coingecko.get(`/coins/${item.id}`);
 
-      if (token.asset_platform_id === 'ethereum' && token.contract_address && token.market_cap_rank) {
+      if (token.asset_platform_id === null
+          && CRYPTOCURRENCIES.includes(token.id)) {
+        await db().collection(COLLECTION).updateOne({
+          _id: token.id,
+        }, {
+          $set: {
+            name: token.name,
+            platform: null,
+            symbol: token.symbol.toUpperCase(),
+            icon: token.image && token.image.large,
+            market_cap_rank: token.market_cap_rank || 9999999,
+            synchronized_at: new Date(),
+          },
+        }, {
+          upsert: true,
+        });
+      } else if (token.asset_platform_id === 'ethereum'
+                && token.contract_address
+                && token.market_cap_rank) {
         const { data: info } = await coinspace.get(`/token/${token.contract_address}`);
         /*
         // For check purposes
@@ -80,6 +120,7 @@ async function syncTokens() {
         }, {
           $set: {
             name: token.name,
+            platform: 'ethereum',
             address: token.contract_address,
             decimals: parseInt(info.decimals),
             symbol: info.symbol,
@@ -92,7 +133,8 @@ async function syncTokens() {
         });
       } else {
         // For check purposes
-        //console.log(`Incorrect token id: '${token.id}' symbol: '${token.symbol}' name: '${token.name}'`);
+        // eslint-disable-next-line max-len
+        //console.log(`Skip token id: '${token.id}' platform: ${token.asset_platform_id} symbol: '${token.symbol}' name: '${token.name}'`);
       }
     } catch (err) {
       console.error(err);
@@ -105,7 +147,6 @@ async function updatePrices() {
   console.time('update prices');
 
   const PER_PAGE = 500;
-
   let page = 0;
   let tokens;
   do {
@@ -162,13 +203,51 @@ async function updatePrices() {
   console.timeEnd('update prices');
 }
 
-function getTokens() {
+function getTokens(platform) {
+  const query = {
+    synchronized_at: { $gte: new Date(Date.now() - (7 * 24 * 60 * 60 * 1000)) },
+  };
+  if (platform) {
+    query.platform = platform;
+  }
   return db().collection(COLLECTION)
-    .find({
-      synchronized_at: { $gte: new Date(Date.now() - (7 * 24 * 60 * 60 * 1000)) },
-    }, {
+    .find(query, {
       projection: {
         prices: 0,
+        synchronized_at: 0,
+        updated_at: 0,
+      },
+    })
+    .toArray();
+}
+
+function getPrice(id) {
+  return db().collection(COLLECTION)
+    .findOne({
+      _id: id,
+    }, {
+      projection: {
+        address: 0,
+        decimals: 0,
+        icon: 0,
+        market_cap_rank: 0,
+        synchronized_at: 0,
+        updated_at: 0,
+      },
+    })
+    .then((doc) => doc.prices);
+}
+
+function getPrices(ids) {
+  return db().collection(COLLECTION)
+    .find({
+      _id: { $in: ids },
+    }, {
+      projection: {
+        address: 0,
+        decimals: 0,
+        icon: 0,
+        market_cap_rank: 0,
         synchronized_at: 0,
         updated_at: 0,
       },
@@ -185,23 +264,32 @@ async function getPriceBySymbol(symbol) {
   }
 }
 
-// For future use
-async function getPrices(ids) {
-  const tokens = await db().collection(COLLECTION)
-    .find({ _id: { $in: ids } })
-    .toArray();
-
-  const data = {};
-  for (const token of tokens) {
-    data[token._id] = token.prices;
-  }
-  return data;
+// For backward compatibility
+async function getFromCacheForAppleWatch() {
+  const tickers = {
+    'bitcoin': 'BTC',
+    'bitcoin-cash': 'BCH',
+    'litecoin': 'LTC',
+    'ethereum': 'ETH',
+  };
+  return await db().collection(COLLECTION)
+    .find({ _id: { $in: Object.keys(tickers) } })
+    .toArray()
+    .then((docs) => {
+      return docs.reduce((result, doc) => {
+        result[tickers[doc._id]] = doc.prices;
+        return result;
+      }, {});
+    });
 }
 
 module.exports = {
   syncTokens,
   getTokens,
   updatePrices,
-  getPriceBySymbol,
+  getPrice,
   getPrices,
+  // For backward compatibility
+  getPriceBySymbol,
+  getFromCacheForAppleWatch,
 };

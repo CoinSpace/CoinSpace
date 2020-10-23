@@ -22,7 +22,6 @@ Sentry.init({
 });
 app.use(Sentry.Handlers.requestHandler());
 
-const master = require('./lib/v1/master');
 const db = require('./lib/v1/db');
 
 middleware.init(app);
@@ -66,15 +65,6 @@ db().then(() => {
     console.info('server listening on http://localhost:' + server.address().port);
     server.timeout = 30000; // 30 sec
   });
-
-  if (process.env.MASTER === '1') {
-    master.cleanGeo(60 * 60 * 1000); // 1 hour
-    master.cacheFees(10 * 60 * 1000); // 10 minutes
-    master.cacheTicker(1 * 60 * 1000); // 1 minute
-    master.cacheMoonpayCurrencies(60 * 60 * 1000); // 1 hour
-    master.cacheMoonpayCountries(60 * 60 * 1000); // 1 hour
-    master.cacheGithubReleases(10 * 60 * 1000); // 10 minutes
-  }
 }).catch((error) => {
   console.error('error', error);
 });
