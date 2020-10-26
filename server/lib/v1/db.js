@@ -18,8 +18,9 @@ module.exports = function() {
           { key: { network: 1 }, background: true },
           { key: { version: 1 }, background: true },
         ]),
-        db.collection('ethereum_tokens').createIndexes([
+        db.collection('tokens').createIndexes([
           { key: { symbol: 1 }, background: true },
+          { key: { platform: 1 }, background: true },
         ]),
         db.collection('details').createIndexes([
           { key: { username_sha: 1 }, background: true, unique: true, sparse: true },
