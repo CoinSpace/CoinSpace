@@ -337,5 +337,6 @@
   "Send coins, export private keys, remove account, security settings.": "Send coins, export private keys, remove account, security settings.",
   "Account": "Account",
   "Hardware keys:": "Hardware keys:",
-  "Add Hardware Key...": "Add Hardware Key..."
+  "Add Hardware Key...": "Add Hardware Key...",
+  "Hardware Keys are not supported by your device": "Hardware Keys are not supported by your device"
 }

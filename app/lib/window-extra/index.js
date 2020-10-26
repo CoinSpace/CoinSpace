@@ -12,7 +12,12 @@ emitter.on('handleOpenURL', (url) => {
   let data = getParam(url, 'data');
   data = data ? JSON.parse(decodeURIComponent(data)) : '';
 
-  windows[name].resolve(data);
+  const error = getParam(url, 'error');
+  if (error) {
+    windows[name].reject(new Error(decodeURIComponent(error)));
+  } else {
+    windows[name].resolve(data);
+  }
 });
 
 function getParam(url, name) {
@@ -23,7 +28,8 @@ function getParam(url, name) {
 
 function open(options) {
   let promiseResolve;
-  const promise = new Promise((resolve) => {
+  let promiseReject;
+  const promise = new Promise((resolve, reject) => {
     const width = options.width || 500;
     const height = options.height || 600;
     let features = 'width=' + width + ', ';
@@ -33,8 +39,10 @@ function open(options) {
 
     window.open(options.url, options.target || '_blank', features);
     promiseResolve = resolve;
+    promiseReject = reject;
   });
   promise.resolve = promiseResolve;
+  promise.reject = promiseReject;
   windows[options.name] = promise;
   return promise;
 }

@@ -3,7 +3,17 @@
 const request = require('lib/request');
 const LS = require('lib/wallet/localStorage');
 const { startAttestation, startAssertion } = require('@simplewebauthn/browser');
-const { urlRoot } = window;
+const { showError } = require('widgets/modals/flash');
+const windowExtra = require('lib/window-extra');
+const { urlRoot, PublicKeyCredential } = window;
+const urlFido = urlRoot.replace('/api/', '/fido/');
+const notSupportedError = () => {
+  showError({
+    message: 'Hardware Keys are not supported by your device',
+    href: 'https://coinapp.zendesk.com/hc/en-us',
+    linkTextI18n: 'more info',
+  });
+};
 
 async function list() {
   const keys = await request({
@@ -26,18 +36,27 @@ async function remove(key) {
 }
 
 async function add() {
+  validate();
   const options = await request({
     url: `${urlRoot}v2/crossplatform/attestation?id=${LS.getId()}`,
     method: 'get',
     seed: 'private',
   });
+
   let attestation;
   try {
-    attestation = await startAttestation(options);
+    if (process.env.BUILD_TYPE === 'web') {
+      attestation = await startAttestation(options);
+    } else {
+      attestation = await windowExtra.open({
+        url: `${urlFido}?action=attestation&options=${encodeURIComponent(JSON.stringify(options))}`,
+        name: 'fido',
+      });
+    }
   } catch (err) {
-    console.error(err);
-    throw new Error('hardware_error');
+    handleError(err);
   }
+
   await request({
     url: `${urlRoot}v2/crossplatform/attestation?id=${LS.getId()}`,
     method: 'post',
@@ -47,12 +66,29 @@ async function add() {
 }
 
 async function privateToken(options) {
+  validate();
+  if (!options) {
+    options = await request({
+      url: `${urlRoot}v2/token/private/crossplatform?id=${LS.getId()}`,
+      method: 'get',
+      seed: 'public',
+    });
+  }
+
   let assertion;
   try {
-    assertion = await startAssertion(options);
+    if (process.env.BUILD_TYPE === 'web') {
+      assertion = await startAssertion(options);
+    } else {
+      assertion = await windowExtra.open({
+        url: `${urlFido}?action=assertion&options=${encodeURIComponent(JSON.stringify(options))}`,
+        name: 'fido',
+        width: 640,
+        height: 720,
+      });
+    }
   } catch (err) {
-    console.error(err);
-    throw new Error('hardware_error');
+    handleError(err);
   }
 
   const res = await request({
@@ -63,6 +99,22 @@ async function privateToken(options) {
   });
 
   return res.privateToken;
+}
+
+function validate() {
+  if (process.env.BUILD_TYPE === 'web' && !PublicKeyCredential) {
+    notSupportedError();
+    throw new Error('hardware_error');
+  }
+}
+
+function handleError(err) {
+  if (err.message === 'hardware_not_supported') {
+    notSupportedError();
+  } else {
+    console.error(err);
+  }
+  throw new Error('hardware_error');
 }
 
 module.exports = {

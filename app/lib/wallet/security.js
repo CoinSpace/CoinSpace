@@ -19,14 +19,14 @@ function unlock(wallet) {
         append: true,
         async onPin(pin) {
           try {
-            const privateToken = await _getPrivateTokenByPin(pin);
+            const privateToken = await _getPrivateTokenByPin(pin, pinWidget);
             seeds.unlock('private', privateToken);
             if (wallet) wallet.unlock(seeds.get('private'));
             pinWidget.close();
             resolve();
           } catch (err) {
-            pinWidget.wrong();
             if (err.message === 'hardware_error') return;
+            pinWidget.wrong();
             emitter.emit('auth-error', err);
           }
         },
@@ -37,7 +37,7 @@ function unlock(wallet) {
               await touchId.phonegap();
               const pin = LS.getPin();
               pinWidget.set('isLoading', true);
-              privateToken = await _getPrivateTokenByPin(pin);
+              privateToken = await _getPrivateTokenByPin(pin, pinWidget);
             } else {
               privateToken = await touchId.privateToken();
               pinWidget.set('isLoading', true);
@@ -60,14 +60,13 @@ function unlock(wallet) {
       });
 
     } else {
-      return request({
-        url: `${urlRoot}v2/token/private?id=${LS.getId()}`,
-        method: 'get',
-        seed: 'public',
-      }).then(({ privateToken }) => {
+      return _getPrivateToken().then((privateToken) => {
         seeds.unlock('private', privateToken);
         if (wallet) wallet.unlock(seeds.get('private'));
         resolve();
+      }).catch((err) => {
+        if (err.message === 'hardware_error') return reject(new Error('cancelled'));
+        reject(err);
       });
     }
   });
@@ -78,7 +77,7 @@ function lock(wallet) {
   seeds.lock('private');
 }
 
-async function _getPrivateTokenByPin(pin) {
+async function _getPrivateTokenByPin(pin, pinWidget) {
   const pinHash = crypto.createHmac('sha256', Buffer.from(LS.getPinKey(), 'hex')).update(pin).digest('hex');
   const res = await request({
     url: `${urlRoot}v2/token/private/pin?id=${LS.getId()}`,
@@ -92,7 +91,20 @@ async function _getPrivateTokenByPin(pin) {
   if (res.privateToken) {
     return res.privateToken;
   } else if (res.challenge) {
+    pinWidget.reset();
     return hardware.privateToken(res);
+  }
+}
+
+async function _getPrivateToken() {
+  if (settings.get('hasAuthenticators')) {
+    return hardware.privateToken();
+  } else {
+    return request({
+      url: `${urlRoot}v2/token/private?id=${LS.getId()}`,
+      method: 'get',
+      seed: 'public',
+    }).then(({ privateToken }) => privateToken);
   }
 }
 

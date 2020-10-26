@@ -147,6 +147,7 @@ exports.removeCrossplatformAuthenticator = asyncWrapper(async (req, res) => {
 exports.getSettings = asyncWrapper(async (req, res) => {
   res.status(200).send({
     '1faPrivate': req.device.wallet.settings['1fa_private'],
+    hasAuthenticators: req.device.wallet.authenticators.length !== 0,
   });
 });
 
@@ -158,6 +159,7 @@ exports.setSettings = asyncWrapper(async (req, res) => {
   const settings = await wallets.setSettings(req.device, data);
   res.status(200).send({
     '1faPrivate': settings['1fa_private'],
+    hasAuthenticators: req.device.wallet.authenticators.length !== 0,
   });
 });
 

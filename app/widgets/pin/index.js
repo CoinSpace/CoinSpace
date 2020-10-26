@@ -102,6 +102,14 @@ function open(options) {
     }, 700);
   };
 
+  ractive.reset = () => {
+    ractive.set('isLoading', false);
+    ractive.set('isWrong', false);
+    ractive.set('header', header);
+    ractive.set('description', '');
+    ractive.set('pin', '');
+  };
+
   ractive.loadingWallet = () => {
     ractive.set('isLoading', true);
     ractive.set('header', translate('Synchronizing Wallet'));

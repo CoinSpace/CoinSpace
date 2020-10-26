@@ -46,8 +46,13 @@ async function set(key, value, security) {
   }
 }
 
+function clientSet(key, value) {
+  state.settings[key] = value;
+}
+
 module.exports = {
   get,
   set,
+  clientSet,
   init,
 };

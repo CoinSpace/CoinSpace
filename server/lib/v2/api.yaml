@@ -626,6 +626,9 @@ components:
         1faPrivate:
           description: Authorization for private token
           type: boolean
+        hasAuthenticators:
+          description: Has Cross-Platform Authenticators
+          type: boolean
     MoonpayUrls:
       type: object
       properties:

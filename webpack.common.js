@@ -9,13 +9,16 @@ const pkg = require('./package.json');
 const dotenv = require('dotenv');
 
 dotenv.config({ path: '.env.defaults' });
+process.env.BUILD_TYPE = process.env.BUILD_TYPE || 'web';
 
 module.exports = {
   // we should use web build for electron too
   //target: process.env.BUILD_TYPE === 'electron' ? 'electron-renderer' : 'web',
   entry: {
     loader: ['babel-polyfill', './app/loader/index.js'],
-    fido: ['babel-polyfill', './app/fido/index.js'],
+    ...(process.env.BUILD_TYPE === 'web' ? {
+      fido: ['babel-polyfill', './app/fido/index.js'],
+    } : {}),
   },
   output: {
     filename: 'assets/js/[name].[hash:8].js',
@@ -62,11 +65,13 @@ module.exports = {
       chunks: ['loader'],
       template: 'app/index.ejs',
     }),
-    new HtmlWebpackPlugin({
-      chunks: ['fido'],
-      template: 'app/fido/index.ejs',
-      filename: 'fido/index.html',
-    }),
+    ...(process.env.BUILD_TYPE === 'web' ?
+      [new HtmlWebpackPlugin({
+        chunks: ['fido'],
+        template: 'app/fido/index.ejs',
+        filename: 'fido/index.html',
+      })] : []
+    ),
     new CopyWebpackPlugin([
       { from: 'app/security.txt', to: './' },
       { from: 'app/assets/icons/favicon.ico', to: './' },
