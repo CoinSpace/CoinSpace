@@ -38,13 +38,6 @@ function remove(id) {
   return collection.deleteOne({ _id: id });
 }
 
-function removeOlderThan(age) {
-  const collection = db().collection('mecto');
-  const date = new Date();
-  date.setMilliseconds(date.getMilliseconds() - age);
-  return collection.deleteMany({ timestamp: { $lt: date } });
-}
-
 function search(lat, lon, userInfo) {
   // eslint-disable-next-line max-len
   if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash', 'ethereum', 'ripple', 'stellar', 'eos'].indexOf(userInfo.network) === -1) {
@@ -82,5 +75,4 @@ module.exports = {
   save,
   search,
   remove,
-  removeOlderThan,
 };

@@ -17,6 +17,7 @@ module.exports = function() {
           { key: { geometry: '2dsphere' }, background: true },
           { key: { network: 1 }, background: true },
           { key: { version: 1 }, background: true },
+          { key: { timestamp: 1 }, background: true, expireAfterSeconds: 60 * 60 }, // 1 hour
         ]),
         db.collection('tokens').createIndexes([
           { key: { symbol: 1 }, background: true },

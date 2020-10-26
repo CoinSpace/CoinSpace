@@ -20,7 +20,6 @@ db().then(async () => {
   await Promise.all([
     tasks.syncTokens(12 * 60 * 60 * 1000), // delay 12 hours
     tasks.updatePrices(60 * 1000), // delay 1 minute
-    tasks.cleanGeo(60 * 60 * 1000), // 1 hour
     tasks.cacheFees(10 * 60 * 1000), // 10 minutes
     tasks.cacheMoonpayCurrencies(60 * 60 * 1000), // 1 hour
     tasks.cacheMoonpayCountries(60 * 60 * 1000), // 1 hour

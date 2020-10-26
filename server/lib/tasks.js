@@ -2,7 +2,6 @@
 
 const pForever = require('p-forever');
 const delay = require('delay');
-const geo = require('./v1/geo');
 const fee = require('./v1//fee');
 const moonpay = require('./v1//moonpay');
 const github = require('./v1//github');
@@ -20,13 +19,6 @@ function updatePrices(interval) {
     await tokens.updatePrices().catch(console.error);
     await delay(interval);
   });
-}
-
-function cleanGeo(interval) {
-  setInterval(function intervalFunction() {
-    geo.removeOlderThan(interval).catch(console.error);
-    return intervalFunction;
-  }(), interval);
 }
 
 function cacheFees(interval) {
@@ -82,7 +74,6 @@ function cacheGithubReleases(interval) {
 module.exports = {
   syncTokens,
   updatePrices,
-  cleanGeo,
   cacheFees,
   cacheMoonpayCurrencies,
   cacheMoonpayCountries,
