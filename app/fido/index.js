@@ -2,7 +2,6 @@
 
 const { startAttestation, startAssertion } = require('@simplewebauthn/browser');
 const { PublicKeyCredential } = window;
-const BUILD_TYPE = 'phonegap';
 
 async function init() {
   const action = getParam('action');
@@ -35,12 +34,10 @@ async function assertion(options) {
 }
 
 function close(url) {
-  if (BUILD_TYPE === 'phonegap') {
-    window.location = url;
-  } else if (BUILD_TYPE === 'web') {
-    window.opener.handleOpenURL(url);
-    window.close();
-  }
+  window.location = url;
+  // debug (web)
+  // window.opener.handleOpenURL(url);
+  // window.close();
 }
 
 function getParam(name) {
