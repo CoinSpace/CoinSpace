@@ -51,6 +51,7 @@ async function add() {
       attestation = await windowExtra.open({
         url: `${urlFido}?action=attestation&options=${encodeURIComponent(JSON.stringify(options))}`,
         name: 'fido',
+        target: process.env.BUILD_TYPE === 'electron' ? '_modal' : '_system',
       });
     }
   } catch (err) {
@@ -83,8 +84,7 @@ async function privateToken(options) {
       assertion = await windowExtra.open({
         url: `${urlFido}?action=assertion&options=${encodeURIComponent(JSON.stringify(options))}`,
         name: 'fido',
-        width: 640,
-        height: 720,
+        target: process.env.BUILD_TYPE === 'electron' ? '_modal' : '_system',
       });
     }
   } catch (err) {

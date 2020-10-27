@@ -28,15 +28,6 @@ function openWindow(deeplink) {
 
     mainWindow.loadFile('./app/index.html');
 
-    // set api.moonpay.io cookies
-    mainWindow.webContents.session.cookies.set({
-      url: 'https://api.moonpay.io',
-      name: 'customerToken',
-      value: '',
-      domain: 'api.moonpay.io',
-      expirationDate: 9999999999,
-    });
-
     // Catch all attempts to open new window and open them in default browser
     mainWindow.webContents.on('new-window', (event, url, frameName, disposition, options) => {
       event.preventDefault();
@@ -66,6 +57,11 @@ function openWindow(deeplink) {
       mainWindow.restore();
     }
     mainWindow.show();
+  }
+
+  for (const child of mainWindow.getChildWindows()) {
+    // Close modals
+    child.close();
   }
 
   if (deeplink) {
