@@ -1367,6 +1367,10 @@ O valor será convertido em %(toSymbol)s e enviado para
         <source>Add Hardware Key...</source>
         <target></target>
       </trans-unit>
+      <trans-unit id="Hardware Keys are not supported by your device">
+        <source>Hardware Keys are not supported by your device</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

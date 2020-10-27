@@ -10,7 +10,7 @@ const urlFido = urlRoot.replace('/api/', '/fido/');
 const notSupportedError = () => {
   showError({
     message: 'Hardware Keys are not supported by your device',
-    href: 'https://coinapp.zendesk.com/hc/en-us',
+    href: 'https://coinapp.zendesk.com/hc/en-us/articles/360051635571',
     linkTextI18n: 'more info',
   });
 };
