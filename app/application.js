@@ -3,7 +3,7 @@
 if (process.env.BUILD_TYPE === 'web') {
   window.urlRoot = window.origin + '/api/';
 } else {
-  window.urlRoot = process.env.SITE_URL;
+  window.urlRoot = process.env.SITE_URL + 'api/';
 }
 
 window.initCSApp = async function() {
