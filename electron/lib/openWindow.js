@@ -1,6 +1,6 @@
 'use strict';
 
-const { shell, BrowserWindow } = require('electron');
+const { shell, BrowserWindow, BrowserView } = require('electron');
 const { isDevelopment } = require('./constants');
 
 // Keep reference to IPC
@@ -34,20 +34,30 @@ function openWindow(deeplink) {
       if (frameName === '_modal') {
         const [mainWindowWidth, mainWindowHeight] = mainWindow.getSize();
         Object.assign(options, {
-          width: mainWindowWidth,
-          height: mainWindowHeight,
-          resizable: false,
-          left: null,
-          top: null,
-          modal: true,
-          parent: mainWindow,
           webPreferences: {
             sandbox: true,
           },
         });
-        const modal = new BrowserWindow(options);
-        modal.loadURL(url);
-        event.newGuest = modal;
+        const modal = new BrowserView(options);
+        // https://github.com/electron/electron/issues/24833
+        //event.newGuest = modal;
+        mainWindow.setBrowserView(modal);
+        // fix options in constructor
+        modal.setBounds({
+          x: 0,
+          y: 0,
+          width: mainWindowWidth,
+          height: mainWindowHeight,
+        });
+        modal.setAutoResize({
+          width: true,
+          height: true,
+          horizontal: true,
+          vertical: true,
+        });
+        // fix transparent background
+        modal.setBackgroundColor('#fff');
+        modal.webContents.loadURL(url);
         return;
       }
       shell.openExternal(url);
@@ -62,6 +72,11 @@ function openWindow(deeplink) {
   for (const child of mainWindow.getChildWindows()) {
     // Close modals
     child.close();
+  }
+
+  for (const view of mainWindow.getBrowserViews()) {
+    mainWindow.removeBrowserView(view);
+    view.destroy();
   }
 
   if (deeplink) {
