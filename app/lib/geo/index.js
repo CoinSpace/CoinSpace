@@ -10,7 +10,7 @@ async function save() {
   const { latitude, longitude } = await getLocation();
   const userInfo = details.get('userInfo');
   return request({
-    url: `${urlRoot}v2/mecto?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/mecto?id=${LS.getId()}`,
     method: 'put',
     data: {
       username: userInfo.username,
@@ -27,7 +27,7 @@ async function save() {
 async function search() {
   const { latitude, longitude } = await getLocation();
   const results = await request({
-    url: `${urlRoot}v2/mecto?id=${LS.getId()}&lat=${latitude}&lon=${longitude}`,
+    url: `${urlRoot}api/v2/mecto?id=${LS.getId()}&lat=${latitude}&lon=${longitude}`,
     method: 'get',
     seed: 'public',
   });
@@ -36,7 +36,7 @@ async function search() {
 
 function remove() {
   return request({
-    url: urlRoot + `v2/mecto?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/mecto?id=${LS.getId()}`,
     method: 'delete',
     seed: 'public',
   }).catch(() => {});

@@ -75,7 +75,7 @@ async function registerWallet(pin) {
   const pinHash = crypto.createHmac('sha256', Buffer.from(pinKey, 'hex')).update(pin).digest('hex');
   const detailsKey = crypto.createHmac('sha256', 'Coin Wallet').update(walletSeed).digest('hex');
   const { publicToken, privateToken } = await request({
-    url: `${urlRoot}v2/register`,
+    url: `${urlRoot}api/v2/register`,
     method: 'post',
     data: {
       walletId: wallet.getPublic('hex'),
@@ -101,7 +101,7 @@ async function loginWithPin(pin) {
   }
   const pinHash = crypto.createHmac('sha256', Buffer.from(LS.getPinKey(), 'hex')).update(pin).digest('hex');
   const { publicToken } = await request({
-    url: `${urlRoot}v2/token/public/pin?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/token/public/pin?id=${LS.getId()}`,
     method: 'post',
     data: {
       pinHash,
@@ -175,13 +175,13 @@ async function initWallet(pin) {
   state.wallet.load({
     getDynamicFees() {
       return request({
-        url: urlRoot + 'v1/fees',
+        url: urlRoot + 'api/v1/fees',
         params: { network: networkName },
       }).catch(console.error);
     },
     getCsFee() {
       return request({
-        url: urlRoot + 'v1/csFee',
+        url: urlRoot + 'api/v1/csFee',
         params: { network: networkName },
       }).catch(console.error);
     },
@@ -210,7 +210,7 @@ async function initWallet(pin) {
 
 async function removeAccount() {
   await request({
-    url: `${urlRoot}v2/wallet?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/wallet?id=${LS.getId()}`,
     method: 'delete',
     seed: 'private',
   });
@@ -225,7 +225,7 @@ function setUsername(username) {
     return Promise.resolve(userInfo.username);
   }
   return request({
-    url: `${urlRoot}v2/username?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/username?id=${LS.getId()}`,
     method: 'put',
     data: {
       username: newUsername,
@@ -281,7 +281,7 @@ async function loginWithPinLegacy(pin) {
   const { id } = credentials;
   const encryptedSeed = credentials.seed;
   const token = await request({
-    url: `${urlRoot}v1/login`,
+    url: `${urlRoot}api/v1/login`,
     method: 'post',
     data: { wallet_id: id, pin },
   });

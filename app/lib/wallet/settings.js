@@ -10,7 +10,7 @@ const state = {
 
 function init() {
   return request({
-    url: `${urlRoot}v2/settings?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/settings?id=${LS.getId()}`,
     method: 'get',
     seed: 'public',
   }).then((settings) => {
@@ -33,7 +33,7 @@ async function set(key, value, security) {
   try {
     await unlock();
     await request({
-      url: `${urlRoot}v2/settings?id=${LS.getId()}`,
+      url: `${urlRoot}api/v2/settings?id=${LS.getId()}`,
       method: 'patch',
       data,
       seed: 'private',

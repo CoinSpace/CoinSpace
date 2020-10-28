@@ -38,7 +38,7 @@ async function enable(pin) {
     LS.setPin(pin);
   } else {
     const options = await request({
-      url: `${urlRoot}v2/platform/attestation?id=${LS.getId()}`,
+      url: `${urlRoot}api/v2/platform/attestation?id=${LS.getId()}`,
       method: 'get',
       seed: 'private',
     });
@@ -50,7 +50,7 @@ async function enable(pin) {
       throw new Error('touch_id_error');
     }
     await request({
-      url: `${urlRoot}v2/platform/attestation?id=${LS.getId()}`,
+      url: `${urlRoot}api/v2/platform/attestation?id=${LS.getId()}`,
       method: 'post',
       data: attestation,
       seed: 'private',
@@ -64,7 +64,7 @@ async function disable() {
     LS.setPin(false);
   } else {
     await request({
-      url: `${urlRoot}v2/platform?id=${LS.getId()}`,
+      url: `${urlRoot}api/v2/platform?id=${LS.getId()}`,
       method: 'delete',
       seed: 'private',
     });
@@ -92,7 +92,7 @@ function phonegap() {
 
 async function publicToken() {
   const options = await request({
-    url: `${urlRoot}v2/token/public/platform?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/token/public/platform?id=${LS.getId()}`,
     method: 'get',
   });
   let assertion;
@@ -103,7 +103,7 @@ async function publicToken() {
     throw new Error('touch_id_error');
   }
   const res = await request({
-    url: `${urlRoot}v2/token/public/platform?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/token/public/platform?id=${LS.getId()}`,
     method: 'post',
     data: assertion,
   });
@@ -112,7 +112,7 @@ async function publicToken() {
 
 async function privateToken() {
   const options = await request({
-    url: `${urlRoot}v2/token/private/platform?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/token/private/platform?id=${LS.getId()}`,
     method: 'get',
     seed: 'public',
   });
@@ -124,7 +124,7 @@ async function privateToken() {
     throw new Error('touch_id_error');
   }
   const res = await request({
-    url: `${urlRoot}v2/token/private/platform?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/token/private/platform?id=${LS.getId()}`,
     method: 'post',
     data: assertion,
     seed: 'public',

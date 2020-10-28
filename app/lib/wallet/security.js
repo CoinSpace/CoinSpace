@@ -80,7 +80,7 @@ function lock(wallet) {
 async function _getPrivateTokenByPin(pin, pinWidget) {
   const pinHash = crypto.createHmac('sha256', Buffer.from(LS.getPinKey(), 'hex')).update(pin).digest('hex');
   const res = await request({
-    url: `${urlRoot}v2/token/private/pin?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/token/private/pin?id=${LS.getId()}`,
     method: 'post',
     data: {
       pinHash,
@@ -101,7 +101,7 @@ async function _getPrivateToken() {
     return hardware.privateToken();
   } else {
     return request({
-      url: `${urlRoot}v2/token/private?id=${LS.getId()}`,
+      url: `${urlRoot}api/v2/token/private?id=${LS.getId()}`,
       method: 'get',
       seed: 'public',
     }).then(({ privateToken }) => privateToken);

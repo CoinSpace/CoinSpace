@@ -10,7 +10,7 @@ function resolveTo(network, to) {
   const hostname = to.replace('@', '.');
   if (!hostname.match(/\./)) return Promise.resolve({ to });
   return request({
-    url: urlRoot + 'v1/openalias?hostname=' + hostname,
+    url: urlRoot + 'api/v1/openalias?hostname=' + hostname,
   }).then((data) => {
     return { to: data.address, alias: to };
   }).catch(() => {

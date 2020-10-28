@@ -35,7 +35,7 @@ async function login() {
 
 function logout() {
   return request({
-    url: window.urlRoot + 'v1/shapeShiftToken',
+    url: window.urlRoot + 'api/v1/shapeShiftToken',
     method: 'delete',
     data: {
       token: getAccessToken(),

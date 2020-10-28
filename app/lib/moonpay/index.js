@@ -23,7 +23,7 @@ async function init() {
 
     if (isBuyAllowed || isSellAllowed) {
       const _coins = await request({
-        url: urlRoot + 'v1/moonpay/coins',
+        url: urlRoot + 'api/v1/moonpay/coins',
         params: { country: data.alpha3 },
       });
       if (_coins) coins = _coins;
@@ -106,7 +106,7 @@ function getSellUrl(baseCurrencyCode, refundWalletAddress) {
 
 async function signUrls(urls) {
   const result = await request({
-    url: `${urlRoot}v2/moonpay/sign?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/moonpay/sign?id=${LS.getId()}`,
     method: 'post',
     data: {
       urls,

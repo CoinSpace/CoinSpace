@@ -1,9 +1,9 @@
 'use strict';
 
 if (process.env.BUILD_TYPE === 'web') {
-  window.urlRoot = window.origin + '/api/';
+  window.urlRoot = `${window.location.protocol}//${window.location.hostname}/`;
 } else {
-  window.urlRoot = process.env.SITE_URL + 'api/';
+  window.urlRoot = process.env.SITE_URL;
 }
 
 window.initCSApp = async function() {
