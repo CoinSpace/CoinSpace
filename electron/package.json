@@ -7,9 +7,9 @@
   "author": {
     "name": "Coin Wallet",
     "email": "support@coin.space",
-    "url": "https://www.coin.space/"
+    "url": "https://coin.space/"
   },
-  "homepage": "https://www.coin.space/",
+  "homepage": "https://coin.space/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CoinSpace/CoinSpace.git"
