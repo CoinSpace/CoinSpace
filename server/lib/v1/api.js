@@ -166,7 +166,10 @@ router.delete('/location', (req, res) => {
 
 router.get('/shapeShiftRedirectUri', (req, res) => {
   const code = req.query.code || '';
-  const { buildType } = req.query;
+  const { buildType, hostname } = req.query;
+  if (hostname === process.env.DOMAIN_ONION && hostname !== req.hostname) {
+    return res.redirect(302, `http://${hostname}${req.originalUrl}`);
+  }
   if (!['web', 'phonegap', 'electron'].includes(buildType)) return res.status(400).send('Bad request');
   shapeshift.getAccessToken(code).then((accessToken) => {
     res.render('shapeshift', { accessToken, buildType });

@@ -13,7 +13,8 @@ function isLogged() {
 
 async function login() {
   const clientId = process.env.SHAPESHIFT_CLIENT_ID;
-  const redirectUri = process.env.SITE_URL + 'api/v1/shapeShiftRedirectUri?buildType=' + process.env.BUILD_TYPE;
+  const redirectParams = encodeURIComponent(`buildType=${process.env.BUILD_TYPE}&hostname=${window.location.hostname}`);
+  const redirectUri = process.env.SITE_URL + `api/v1/shapeShiftRedirectUri?${redirectParams}`;
   cleanAccessToken();
   // eslint-disable-next-line max-len
   const url = urlAuthRoot + 'oauth/authorize?response_type=code&scope=users:read&client_id=' + clientId + '&redirect_uri=' + redirectUri;
