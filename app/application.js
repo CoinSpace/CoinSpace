@@ -1,7 +1,8 @@
 'use strict';
 
 if (process.env.BUILD_TYPE === 'web') {
-  window.urlRoot = `${window.location.protocol}//${window.location.hostname}/`;
+  const port = window.location.port ? `:${window.location.port}` : '';
+  window.urlRoot = `${window.location.protocol}//${window.location.hostname}${port}/`;
 } else {
   window.urlRoot = process.env.SITE_URL;
 }
