@@ -16,10 +16,56 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-stretch: normal;
+    }
+    ._container {
+      max-width: 320px;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    ._message {
+      font-size: 17px;
+      user-select: none;
+      padding: 40px 20px;
+      text-align: center;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    ._btn {
+      font-weight: 500;
+      user-select: none;
+      cursor: pointer;
+      outline: none;
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-top: 18px;
+      padding-bottom: 15px;
+      border-radius: 2px;
+      color: white;
+      text-align: center;
+      font-size: 17px;
+      line-height: 27px;
+      background-color: #3cc77a;
+      box-shadow: 0 2px 0 0 #2ea262;
+      margin: 0 auto;
+    }
+    ._btn:active {
+      transform: translate(0px, 3px);
+      box-shadow: 0 0px 0 0;
     }
   </style>
 </head>
 <body>
-  Loading...
+  <div class="_container">
+    <div id="message" class="_message">Loading...</div>
+    <div id="back-btn" class="_btn">Back</div>
+  </div>
 </body>
 </html>
