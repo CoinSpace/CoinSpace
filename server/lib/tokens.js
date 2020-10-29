@@ -96,7 +96,7 @@ async function syncTokens() {
             platform: null,
             symbol: token.symbol.toUpperCase(),
             icon: token.image && token.image.large,
-            market_cap_rank: token.market_cap_rank || 9999999,
+            market_cap_rank: token.market_cap_rank || Number.MAX_SAFE_INTEGER,
             synchronized_at: new Date(),
           },
         }, {
@@ -125,7 +125,7 @@ async function syncTokens() {
             decimals: parseInt(info.decimals),
             symbol: info.symbol,
             icon: token.image && token.image.large,
-            market_cap_rank: token.market_cap_rank || 9999999,
+            market_cap_rank: token.market_cap_rank || Number.MAX_SAFE_INTEGER,
             synchronized_at: new Date(),
           },
         }, {
@@ -203,7 +203,7 @@ async function updatePrices() {
   console.timeEnd('update prices');
 }
 
-function getTokens(platform) {
+function getTokens(platform, limit=0) {
   const query = {
     synchronized_at: { $gte: new Date(Date.now() - (7 * 24 * 60 * 60 * 1000)) },
   };
@@ -212,6 +212,10 @@ function getTokens(platform) {
   }
   return db().collection(COLLECTION)
     .find(query, {
+      limit,
+      sort: {
+        market_cap_rank: 1,
+      },
       projection: {
         prices: 0,
         synchronized_at: 0,
@@ -258,7 +262,7 @@ function getPrices(ids) {
 // For backward compatibility
 async function getPriceBySymbol(symbol) {
   const token = await db().collection(COLLECTION)
-    .findOne({ symbol }, { market_cap_rank: { rating: -1 } });
+    .findOne({ symbol }, { sort: { market_cap_rank: 1 } });
   if (token) {
     return token.prices;
   }

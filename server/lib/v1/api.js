@@ -133,7 +133,7 @@ router.get('/ticker/applewatch', (req, res) => {
 });
 
 router.get('/ethereum/tokens', (req, res) => {
-  tokens.getTokens('ethereum').then((data) => {
+  tokens.getTokens('ethereum', 50).then((data) => {
     res.status(200).send(data);
   }).catch((err) => {
     res.status(400).send(err);
