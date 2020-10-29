@@ -1362,8 +1362,8 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Add Hardware Key...</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="Hardware Keys are not supported by your device">
-        <source>Hardware Keys are not supported by your device</source>
+      <trans-unit id="Hardware Keys are not supported">
+        <source>Hardware Keys are not supported</source>
         <target></target>
       </trans-unit>
     </body>
