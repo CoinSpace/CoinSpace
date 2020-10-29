@@ -16,11 +16,11 @@ module.exports = function(el) {
   });
 
   ractive.on('terms', () => {
-    window.open('https://coin.space/terms-of-service/', '_blank');
+    window.open('https://coin.space/terms-of-service/', '_blank').opener = null;
   });
 
   ractive.on('privacy', () => {
-    window.open('https://coin.space/coinprivacypolicy/', '_blank');
+    window.open('https://coin.space/coinprivacypolicy/', '_blank').opener = null;
   });
 
   return ractive;

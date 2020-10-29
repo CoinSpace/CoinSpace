@@ -10,7 +10,7 @@
     {{/if}}
     {{#if bottomLink}}
     <p class="tooltip__link">
-      <a href="" onclick="window.open('{{bottomLink.url}}', '_blank'); return false;">{{translate(bottomLink.text)}}</a>
+      <a href="" onclick="window.open('{{bottomLink.url}}', '_blank').opener = null; return false;">{{translate(bottomLink.text)}}</a>
     </p>
     {{/if}}
   </div>

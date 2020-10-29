@@ -39,7 +39,7 @@
   </div>
 
   <div class="_tos">
-    <a class="_tos_link" onclick="window.open('https://coin.space/terms-of-service/', '_blank'); return false;" href="">
+    <a class="_tos_link" onclick="window.open('https://coin.space/terms-of-service/', '_blank').opener = null; return false;" href="">
       {{translate("Terms of Use")}}
     </a>
   </div>

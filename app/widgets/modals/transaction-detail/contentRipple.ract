@@ -18,7 +18,7 @@
     <div class="detail__strings">
 
       <h3 class="_title">{{translate("Transaction Id:")}}</h3>
-      <a href="" onclick="window.open('https://xrpcharts.ripple.com/#/transactions/{{id}}', '_blank'); return false;" class="_value">{{id}}</a>
+      <a href="" onclick="window.open('https://xrpcharts.ripple.com/#/transactions/{{id}}', '_blank').opener = null; return false;" class="_value">{{id}}</a>
 
       <h3 class="_title">{{translate("Transaction Fee:")}}</h3>
       <code class="_value">{{toUnitString(fee)}}</code>

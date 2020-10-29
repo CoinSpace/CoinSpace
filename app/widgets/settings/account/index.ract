@@ -24,7 +24,7 @@
       </div>
       <div class="_description">
         {{translate("Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.")}}
-        <a href="" onclick="window.open('https://gravatar.com/', '_blank'); return false;">{{translate("Create a gravatar")}}</a>.
+        <a href="" onclick="window.open('https://gravatar.com/', '_blank').opener = null; return false;">{{translate("Create a gravatar")}}</a>.
       </div>
     </div>
   </div>
