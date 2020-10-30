@@ -43,7 +43,9 @@ async function onDeviceReady() {
         },
         () => {
           return window.StatusBar.setStyle(SafariViewController.statusBarStyle);
-        });
+        }
+      );
+      return {};
     };
   });
 
