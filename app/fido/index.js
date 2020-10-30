@@ -21,10 +21,13 @@ async function init() {
       $message.innerHTML = 'Use your Hardware Key';
       await assertion(options);
     }
+    $message.innerHTML = 'Success!';
   } catch (err) {
+    $message.innerHTML = 'Error :(';
     console.error(err);
     close('coinspace://?window=fido&error=' + encodeURIComponent(err.message));
   }
+  $backBtn.innerHTML = 'OK';
 }
 
 async function attestation(options) {
