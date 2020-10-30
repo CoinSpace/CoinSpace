@@ -25,13 +25,15 @@ function save(network, data) {
 
 function getFromAPI(network) {
   if (network !== 'bitcoin') throw new Error(network + ' currency fee is not supported');
-  return axios.get('https://bitcoinfees.earn.com/api/v1/fees/recommended').then((response) => {
-    const { data } = response;
-    if (!data.fastestFee || !data.hourFee) throw new Error('Bad fee response');
+  return axios.get('https://api.blockchair.com/bitcoin/stats').then((response) => {
+    const { data } = response.data || {};
+    if (!data || !data.suggested_transaction_fee_per_byte_sat) throw new Error('Bad fee response');
+    let fastestFee = data.suggested_transaction_fee_per_byte_sat;
+    let hourFee = Math.ceil(fastestFee * 0.9);
     const min = 10;
-    const minimum = Math.max(Math.ceil(data.hourFee / 2), min);
-    let hourFee = Math.max(data.hourFee, min);
-    let fastestFee = Math.max(data.fastestFee, min);
+    const minimum = Math.max(Math.ceil(hourFee / 2), min);
+    hourFee = Math.max(hourFee, min);
+    fastestFee = Math.max(fastestFee, min);
     if (hourFee <= minimum) hourFee = minimum + 1;
     if (fastestFee <= hourFee) fastestFee = hourFee + 1;
     return { minimum, hourFee, fastestFee };

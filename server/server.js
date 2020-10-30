@@ -69,7 +69,7 @@ db().then(() => {
 
   if (process.env.MASTER === '1') {
     master.cleanGeo(60 * 60 * 1000); // 1 hour
-    master.cacheFees(60 * 60 * 1000); // 1 hour
+    master.cacheFees(10 * 60 * 1000); // 10 minutes
     master.cacheTicker(1 * 60 * 1000); // 1 minute
     master.cacheEthereumTokens(1 * 60 * 1000); // 1 minute
     master.cacheMoonpayCurrencies(60 * 60 * 1000); // 1 hour
