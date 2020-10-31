@@ -43,7 +43,7 @@
     "@coinspace/b39": "^2.1.3",
     "@coinspace/cs-eos-wallet": "^1.2.1",
     "@coinspace/cs-ethereum-wallet": "^1.3.3",
-    "@coinspace/cs-ripple-wallet": "^1.2.1",
+    "@coinspace/cs-ripple-wallet": "^1.2.2",
     "@coinspace/cs-stellar-wallet": "^1.2.1",
     "@coinspace/cs-wallet": "^0.28.1",
     "@moonpay/browser": "^1.0.3",
