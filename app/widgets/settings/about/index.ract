@@ -12,7 +12,7 @@
     <div class="_title">{{translate("Release information")}}</div>
     <div class="_list_item">
       <div class="_label">{{translate("Version")}}</div>
-      <div class="_value">{{version}}</div>
+      <div class="_value">{{version}} ({{commit}})</div>
     </div>
   </div>
 

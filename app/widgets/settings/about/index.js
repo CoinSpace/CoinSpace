@@ -8,6 +8,7 @@ module.exports = function(el) {
     template: require('./index.ract'),
     data: {
       version: process.env.VERSION,
+      commit: process.env.COMMIT,
     },
   });
 

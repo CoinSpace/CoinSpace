@@ -11,6 +11,8 @@ const dotenv = require('dotenv');
 dotenv.config({ path: '.env.defaults' });
 process.env.BUILD_TYPE = process.env.BUILD_TYPE || 'web';
 
+const COMMIT = (process.env.TRAVIS_COMMIT || process.env.APPVEYOR_REPO_COMMIT || 'local').substring(0, 7);
+
 module.exports = {
   // we should use web build for electron too
   //target: process.env.BUILD_TYPE === 'electron' ? 'electron-renderer' : 'web',
@@ -84,6 +86,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env.VERSION': JSON.stringify(`v${pkg.version}`),
+      'process.env.COMMIT':  JSON.stringify(COMMIT),
     }),
   ],
 };
