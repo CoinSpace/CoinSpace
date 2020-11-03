@@ -86,10 +86,17 @@ async function syncTokens() {
 
       const { data: token } = await coingecko.get(`/coins/${item.id}`);
 
-      if (token.asset_platform_id === null
-          && CRYPTOCURRENCIES.includes(token.id)) {
+      if (token.asset_platform_id === null && CRYPTOCURRENCIES.includes(token.id)) {
+        let _id = token.id;
+        // migrate id
+        if (_id === 'bitcoin-cash') {
+          _id = 'bitcoincash';
+        }
+        if (_id === 'bitcoin-cash-sv') {
+          _id = 'bitcoinsv';
+        }
         await db().collection(COLLECTION).updateOne({
-          _id: token.id,
+          _id,
         }, {
           $set: {
             name: token.name,
@@ -98,6 +105,7 @@ async function syncTokens() {
             icon: token.image && token.image.large,
             market_cap_rank: token.market_cap_rank || Number.MAX_SAFE_INTEGER,
             synchronized_at: new Date(),
+            coingecko_id: token.id,
           },
         }, {
           upsert: true,
@@ -127,6 +135,7 @@ async function syncTokens() {
             icon: token.image && token.image.large,
             market_cap_rank: token.market_cap_rank || Number.MAX_SAFE_INTEGER,
             synchronized_at: new Date(),
+            coingecko_id: token.id,
           },
         }, {
           upsert: true,
@@ -155,7 +164,7 @@ async function updatePrices() {
         // 7 days ago
         synchronized_at: { $gte: new Date(Date.now() - (7 * 24 * 60 * 60 * 1000)) },
       }, {
-        projection: { _id: 1 },
+        projection: { _id: 1, coingecko_id: 1 },
       })
       .sort({ _id: 1 })
       .limit(PER_PAGE)
@@ -168,22 +177,22 @@ async function updatePrices() {
 
     const { data } = await coingecko.get('/simple/price', {
       params: {
-        ids: tokens.map(item => item._id).join(','),
+        ids: tokens.map(item => item.coingecko_id).join(','),
         vs_currencies: CURRENCIES.join(','),
       },
     });
 
     const operations = [];
 
-    for (const id in data) {
+    for (const coingeckoId in data) {
       const updatedAt = new Date();
       const prices = {};
-      for (const currency in data[id]) {
-        prices[currency.toUpperCase()] = data[id][currency];
+      for (const currency in data[coingeckoId]) {
+        prices[currency.toUpperCase()] = data[coingeckoId][currency];
       }
       operations.push({
         updateOne: {
-          filter: { _id: id },
+          filter: { _id: tokens.find(token => token.coingecko_id === coingeckoId)._id },
           update: {
             $set: {
               prices,
@@ -194,8 +203,10 @@ async function updatePrices() {
       });
     }
 
-    await db().collection(COLLECTION)
-      .bulkWrite(operations, { ordered: false });
+    if (operations.length > 0) {
+      await db().collection(COLLECTION)
+        .bulkWrite(operations, { ordered: false });
+    }
 
     page++;
   } while (tokens.length === PER_PAGE);
@@ -272,7 +283,7 @@ async function getPriceBySymbol(symbol) {
 async function getFromCacheForAppleWatch() {
   const tickers = {
     'bitcoin': 'BTC',
-    'bitcoin-cash': 'BCH',
+    'bitcoincash': 'BCH',
     'litecoin': 'LTC',
     'ethereum': 'ETH',
   };

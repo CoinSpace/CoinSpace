@@ -14,15 +14,6 @@ const networks = [
   'dash',
 ];
 
-const symbols = {
-  bitcoin: 'bitcoin',
-  bitcoincash: 'bitcoin-cash',
-  bitcoinsv: 'bitcoin-cash-sv',
-  litecoin: 'litecoin',
-  dogecoin: 'dogecoin',
-  dash: 'dash',
-};
-
 function get(network) {
   if (networks.indexOf(network) === -1) {
     return Promise.reject({ error: 'Currency cs fee is not supported' });
@@ -31,7 +22,7 @@ function get(network) {
   const collection = db().collection('cs_fee');
 
   return Promise.all([
-    tokens.getPrice(symbols[network]),
+    tokens.getPrice(network),
     collection.find({ _id: network }).limit(1).next(),
   ]).then((results) => {
     const rate = results[0]['USD'];
