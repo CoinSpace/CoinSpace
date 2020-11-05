@@ -80,7 +80,15 @@ function getBuyUrl(currencyCode, walletAddress) {
   const params = {
     currencyCode,
     walletAddress,
-    enabledPaymentMethods: 'credit_debit_card,sepa_bank_transfer,gbp_bank_transfer,apple_pay,google_pay,samsung_pay',
+    enabledPaymentMethods: [
+      'credit_debit_card',
+      'apple_pay',
+      'google_pay',
+      'samsung_pay',
+      'sepa_bank_transfer',
+      'gbp_bank_transfer',
+      'gbp_open_banking_payment',
+    ].join(','),
   };
 
   const queryString = Object.keys(params).map((key) => {
