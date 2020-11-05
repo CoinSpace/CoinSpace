@@ -100,7 +100,7 @@ async function syncTokens() {
         }, {
           $set: {
             name: token.name,
-            platform: null,
+            network: null,
             symbol: token.symbol.toUpperCase(),
             icon: token.image && token.image.large,
             market_cap_rank: token.market_cap_rank || Number.MAX_SAFE_INTEGER,
@@ -128,7 +128,7 @@ async function syncTokens() {
         }, {
           $set: {
             name: token.name,
-            platform: 'ethereum',
+            network: 'ethereum',
             address: token.contract_address,
             decimals: parseInt(info.decimals),
             symbol: info.symbol,
@@ -143,7 +143,7 @@ async function syncTokens() {
       } else {
         // For check purposes
         // eslint-disable-next-line max-len
-        //console.log(`Skip token id: '${token.id}' platform: ${token.asset_platform_id} symbol: '${token.symbol}' name: '${token.name}'`);
+        //console.log(`Skip token id: '${token.id}' network: ${token.asset_platform_id} symbol: '${token.symbol}' name: '${token.name}'`);
       }
     } catch (err) {
       console.error(err);
@@ -214,12 +214,12 @@ async function updatePrices() {
   console.timeEnd('update prices');
 }
 
-function getTokens(platform, limit=0) {
+function getTokens(network, limit=0) {
   const query = {
     synchronized_at: { $gte: new Date(Date.now() - (7 * 24 * 60 * 60 * 1000)) },
   };
-  if (platform) {
-    query.platform = platform;
+  if (network) {
+    query.network = network;
   }
   return db().collection(COLLECTION)
     .find(query, {
@@ -228,6 +228,7 @@ function getTokens(platform, limit=0) {
         market_cap_rank: 1,
       },
       projection: {
+        coingecko_id: 0,
         prices: 0,
         synchronized_at: 0,
         updated_at: 0,
@@ -246,6 +247,7 @@ function getPrice(id) {
         decimals: 0,
         icon: 0,
         market_cap_rank: 0,
+        coingecko_id: 0,
         synchronized_at: 0,
         updated_at: 0,
       },
@@ -263,6 +265,7 @@ function getPrices(ids) {
         decimals: 0,
         icon: 0,
         market_cap_rank: 0,
+        coingecko_id: 0,
         synchronized_at: 0,
         updated_at: 0,
       },

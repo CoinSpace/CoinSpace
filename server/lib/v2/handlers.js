@@ -211,7 +211,7 @@ exports.moonpaySign = asyncWrapper(async (req, res) => {
 });
 
 exports.getTokens = asyncWrapper(async (req, res) => {
-  const list = await tokens.getTokens(req.query.platform);
+  const list = await tokens.getTokens(req.query.network);
   res.status(200).send(list);
 });
 

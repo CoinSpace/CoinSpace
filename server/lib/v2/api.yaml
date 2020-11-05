@@ -490,7 +490,8 @@ paths:
       x-eov-operation-handler: handlers
       description: Get supported tokens
       parameters:
-        - $ref: '#/components/parameters/platform'
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/network'
       security:
         - deviceSignature: []
       responses:
@@ -508,6 +509,7 @@ paths:
       x-eov-operation-handler: handlers
       description: Get prices of tokens
       parameters:
+        - $ref: '#/components/parameters/deviceId'
         - $ref: '#/components/parameters/tokens'
       security:
         - deviceSignature: []
@@ -681,7 +683,7 @@ components:
         properties:
           _id:
             type: string
-          platform:
+          network:
             type: string
           symbol:
             type: string
@@ -697,7 +699,7 @@ components:
             type: number
         required:
           - _id
-          - platform
+          - network
           - symbol
           - name
           - address
@@ -713,7 +715,7 @@ components:
             type: string
           name:
             type: string
-          platform:
+          network:
             type: string
             nullable: true
           symbol:
@@ -723,7 +725,7 @@ components:
         required:
           - _id
           - name
-          - platform
+          - network
           - symbol
           - prices
   parameters:
@@ -748,11 +750,11 @@ components:
       description: Longitude
       schema:
         type: number
-    platform:
+    network:
       in: query
-      name: platform
+      name: network
       required: true
-      description: Platform issued tokens
+      description: Network issued tokens
       schema:
         type: string
     tokens:
