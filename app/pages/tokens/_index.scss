@@ -1,18 +1,24 @@
 #tokens {
 
   ._title {
-    padding-left: 20px;
-    padding-right: 20px;
     padding-bottom: 5px;
 
     @include breakpoint(portrait) {
       font-size: $base_font_size--portrait;
-      padding-left: 40px;
     }
   }
 }
 .tokens {
   display: block;
+  padding-bottom: 15px;
+}
+.actions {
+  padding: 15px 0 15px 0;
+  border-top: 1px solid darken($grey--light, 10%);
+
+  @include breakpoint(portrait) {
+    padding: 30px 30px 30px 0;
+  }
 }
 
 .token__item {
@@ -30,9 +36,17 @@
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    display: block;
     flex-shrink: 0;
     margin-right: 20px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      width: 100%;
+      height: auto;
+    }
 
     @include breakpoint(portrait) {
       width: 80px;

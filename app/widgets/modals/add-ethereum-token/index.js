@@ -3,16 +3,13 @@
 const Ractive = require('widgets/modals/base');
 const { showError } = require('widgets/modals/flash');
 const qrcode = require('lib/qrcode');
-const request = require('lib/request');
-const { urlRoot } = window;
 const details = require('lib/wallet/details');
+const tokens = require('lib/tokens');
 
-let tokens = [];
-let ractive;
+function open(callback) {
 
-function open(walletTokens, callback) {
-
-  ractive = new Ractive({
+  const walletTokens = details.get('tokens');
+  const ractive = new Ractive({
     partials: {
       content: require('./_content.ract'),
     },
@@ -22,23 +19,19 @@ function open(walletTokens, callback) {
       contractAddress: '',
       symbol: '',
       decimals: '',
-      tokens,
+      tokens: [],
       token: '-1',
-      isInited: tokens.length !== 0,
+      isInited: false,
     },
   });
 
-  if (tokens.length === 0) {
-    request({
-      url: urlRoot + 'api/v1/ethereum/tokens',
-    }).then((data) => {
-      tokens = data;
+  tokens.getTokens()
+    .then((ethereumTokens) => {
       ractive.set({
-        tokens,
+        tokens: ethereumTokens,
         isInited: true,
       });
     }).catch(console.error);
-  }
 
   ractive.on('clearContractAddress', () => {
     const input = ractive.find('#contract_address');
@@ -46,15 +39,15 @@ function open(walletTokens, callback) {
     input.focus();
   });
 
-  ractive.on('add', () => {
+  ractive.on('add', async () => {
     ractive.set('isLoading', true);
 
     const token = ractive.get('token');
-    const data = {
-      address: token ? token.address : ractive.get('contractAddress').trim(),
-      symbol: token ? token.symbol : ractive.get('symbol').trim(),
-      name: token ? token.name : ractive.get('symbol').trim(),
-      decimals: token ? token.decimals : ractive.get('decimals'),
+    const data = token ? await tokens.getTokenById(token._id) : {
+      address: ractive.get('contractAddress').trim(),
+      symbol: ractive.get('symbol').trim(),
+      name: ractive.get('symbol').trim(),
+      decimals: ractive.get('decimals'),
       network: 'ethereum',
     };
 
@@ -64,7 +57,7 @@ function open(walletTokens, callback) {
 
     walletTokens.push(data);
 
-    details.set('walletTokens', walletTokens).then(() => {
+    details.set('tokens', walletTokens).then(() => {
       callback(data);
       ractive.fire('cancel');
     }).catch((err) => {

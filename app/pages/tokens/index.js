@@ -6,20 +6,11 @@ const addEthereumToken = require('widgets/modals/add-ethereum-token');
 const { getToken, setToken } = require('lib/token');
 const { initWallet } = require('lib/wallet');
 const emitter = require('lib/emitter');
+const tokens = require('lib/tokens');
 const details = require('lib/wallet/details');
 const _ = require('lodash');
 
-let walletTokens = [];
 let isEnabled = false;
-const tetherToken = {
-  address: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-  decimals: 6,
-  name: 'Tether USD',
-  network: 'ethereum',
-  symbol: 'USDT',
-  icon: 'svg_token_tether',
-  isDefault: true,
-};
 
 module.exports = function(el) {
 
@@ -47,13 +38,26 @@ module.exports = function(el) {
     isEnabled = true;
   });
 
-  ractive.on('before-show', () => {
-    walletTokens = details.get('walletTokens') || [];
-    const ethereumTokens = walletTokens.filter((token) => {
-      return token.network === 'ethereum';
-    });
-    ethereumTokens.unshift(tetherToken);
-    ractive.set('ethereumTokens', ethereumTokens);
+  ractive.on('before-show', async () => {
+    try {
+      const walletTokens = await Promise.all(details.get('tokens').map(async (walletToken) => {
+        if (walletToken._id) {
+          const current = await tokens.getTokenById(walletToken._id);
+          return current || walletToken;
+        } else {
+          const current = await tokens.getTokenByAddress(walletToken.address);
+          return current || walletToken;
+        }
+      }));
+      if (!_.isEqual(details.get('tokens'), walletTokens)) {
+        await details.set('tokens', walletTokens);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
+    const walletTokens = details.get('tokens');
+    ractive.set('ethereumTokens', walletTokens.filter(item => item.network === 'ethereum'));
     ractive.set('currentToken', getToken());
   });
 
@@ -78,14 +82,15 @@ module.exports = function(el) {
   }
 
   function removeEthereumToken(token) {
-    const rindex = ractive.get('ethereumTokens').indexOf(token);
+    const rindex = ractive.get('ethereumTokens').findIndex((item) => _.isEqual(item, token));
+    const walletTokens = details.get('tokens');
     showRemoveConfirmation(token.name, (modal) => {
-      const index = walletTokens.indexOf(token);
+      const index = walletTokens.findIndex((item) => _.isEqual(item, token));
       if (index === -1) return modal.fire('cancel');
 
       walletTokens.splice(index, 1);
 
-      details.set('walletTokens', walletTokens).then(() => {
+      details.set('tokens', walletTokens).then(() => {
         modal.set('onDismiss', () => {
           ractive.splice('ethereumTokens', rindex, 1);
         });
@@ -100,7 +105,7 @@ module.exports = function(el) {
 
   ractive.on('add-ethereum-token', (context) => {
     context.event.stopPropagation();
-    addEthereumToken(walletTokens, (token) => {
+    addEthereumToken((token) => {
       ractive.push('ethereumTokens', token);
     });
   });

@@ -1,126 +1,132 @@
+<div class="_title">{{translate("Coins")}}</div>
 
 <div class="tokens">
 
   <div on-click="switchToken('bitcoin')" class="token__item token--bitcoin">
-    <span class="_icon">
+    <div class="_icon">
       {{>svg_token_bitcoin}}
-    </span>
+    </div>
     <div class="_name">Bitcoin</div>
     {{#if isCurrentToken('bitcoin')}}
-    <span class="_arrow">{{>svg_arrow}}</span>
+    <div class="_arrow">{{>svg_arrow}}</div>
     {{/if}}
   </div>
 
   <div on-click="switchToken('bitcoincash')" class="token__item token--bitcoincash">
-    <span class="_icon">
+    <div class="_icon">
       {{>svg_token_bitcoincash}}
-    </span>
+    </div>
     <div class="_name">Bitcoin Cash</div>
     {{#if isCurrentToken('bitcoincash')}}
-    <span class="_arrow">{{>svg_arrow}}</span>
+    <div class="_arrow">{{>svg_arrow}}</div>
     {{/if}}
   </div>
 
   <div on-click="switchToken('bitcoinsv')" class="token__item token--bitcoinsv">
-    <span class="_icon">
+    <div class="_icon">
       {{>svg_token_bitcoinsv}}
-    </span>
+    </div>
     <div class="_name">Bitcoin SV</div>
     {{#if isCurrentToken('bitcoinsv')}}
-    <span class="_arrow">{{>svg_arrow}}</span>
+    <div class="_arrow">{{>svg_arrow}}</div>
     {{/if}}
   </div>
 
   <div on-click="switchToken('ethereum')" class="token__item token--ethereum">
-    <span class="_icon">
+    <div class="_icon">
       {{>svg_token_ethereum}}
-    </span>
-    <div class="_name">
-      <span class="_token">Ethereum</span>
-      <div class="_add_btn" on-click="add-ethereum-token">{{translate("Add Token")}}</div>
     </div>
+    <div class="_name">Ethereum</div>
     {{#if isCurrentToken('ethereum')}}
-    <span class="_arrow">{{>svg_arrow}}</span>
+    <div class="_arrow">{{>svg_arrow}}</div>
     {{/if}}
-  </div>
-  <div class="ethereum_tokens">
-    {{#each ethereumTokens}}
-    <div class="token__item token--ethereum" on-click="switchToken(this)">
-      <span class="_icon">
-        {{#if this.icon}}
-          {{>this.icon}}
-        {{else}}
-          {{>svg_letter_t}}
-        {{/if}}
-      </span>
-      <div class="_name">{{name}}</div>
-      {{#if isCurrentToken(this)}}
-      <span class="_arrow">{{>svg_arrow}}</span>
-      {{elseif !this.isDefault}}
-      <span class="_remove" on-click="removeEthereumToken(this)">{{> svg_close}}</span>
-      {{/if}}
-    </div>
-    {{/each}}
   </div>
 
   <div on-click="switchToken('litecoin')" class="token__item token--litecoin">
-    <span class="_icon">
+    <div class="_icon">
       {{>svg_token_litecoin}}
-    </span>
+    </div>
     <div class="_name">Litecoin</div>
     {{#if isCurrentToken('litecoin')}}
-    <span class="_arrow">{{>svg_arrow}}</span>
+    <div class="_arrow">{{>svg_arrow}}</div>
     {{/if}}
   </div>
 
   <div on-click="switchToken('ripple')" class="token__item token--ripple">
-    <span class="_icon">
+    <div class="_icon">
       {{>svg_token_ripple}}
-    </span>
+    </div>
     <div class="_name">Ripple</div>
     {{#if isCurrentToken('ripple')}}
-    <span class="_arrow">{{>svg_arrow}}</span>
+    <div class="_arrow">{{>svg_arrow}}</div>
     {{/if}}
   </div>
 
   <div on-click="switchToken('stellar')" class="token__item token--stellar">
-    <span class="_icon">
+    <div class="_icon">
       {{>svg_token_stellar}}
-    </span>
+    </div>
     <div class="_name">Stellar</div>
     {{#if isCurrentToken('stellar')}}
-    <span class="_arrow">{{>svg_arrow}}</span>
+    <div class="_arrow">{{>svg_arrow}}</div>
     {{/if}}
   </div>
 
   <div on-click="switchToken('eos')" class="token__item token--eos">
-    <span class="_icon">
+    <div class="_icon">
       {{>svg_token_eos}}
-    </span>
+    </div>
     <div class="_name">EOS</div>
     {{#if isCurrentToken('eos')}}
-    <span class="_arrow">{{>svg_arrow}}</span>
+    <div class="_arrow">{{>svg_arrow}}</div>
     {{/if}}
   </div>
 
   <div on-click="switchToken('dogecoin')" class="token__item token--dogecoin">
-    <span class="_icon">
+    <div class="_icon">
       {{>svg_token_dogecoin}}
-    </span>
+    </div>
     <div class="_name">Dogecoin</div>
     {{#if isCurrentToken('dogecoin')}}
-    <span class="_arrow">{{>svg_arrow}}</span>
+    <div class="_arrow">{{>svg_arrow}}</div>
     {{/if}}
   </div>
 
   <div on-click="switchToken('dash')" class="token__item token--dash">
-    <span class="_icon">
+    <div class="_icon">
       {{>svg_token_dash}}
-    </span>
+    </div>
     <div class="_name">Dash</div>
     {{#if isCurrentToken('dash')}}
-    <span class="_arrow">{{>svg_arrow}}</span>
+    <div class="_arrow">{{>svg_arrow}}</div>
     {{/if}}
   </div>
+</div>
 
+<div class="_title">{{translate("Tokens")}}</div>
+
+<div class="ethereum_tokens">
+  {{#each ethereumTokens}}
+  <div class="token__item token--ethereum" on-click="switchToken(this)">
+    <div class="_icon">
+      {{#if this.icon}}
+        <img src="{{this.icon}}"/>
+      {{else}}
+        {{>svg_letter_t}}
+      {{/if}}
+    </div>
+    <div class="_name">{{name}}</div>
+    {{#if isCurrentToken(this)}}
+    <div class="_arrow">{{>svg_arrow}}</div>
+    {{else}}
+    <div class="_remove" on-click="removeEthereumToken(this)">{{> svg_close}}</div>
+    {{/if}}
+  </div>
+  {{/each}}
+</div>
+
+<div class="actions">
+  <div on-click="add-ethereum-token" class="csbtn">
+    {{translate("Add Token")}}
+  </div>
 </div>

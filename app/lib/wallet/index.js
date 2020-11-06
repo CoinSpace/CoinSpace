@@ -237,8 +237,7 @@ function setUsername(username) {
 }
 
 function isValidWalletToken(token) {
-  if (token && token.isDefault) return true;
-  const walletTokens = details.get('walletTokens') || [];
+  const walletTokens = details.get('tokens');
   const isFound = _.find(walletTokens, (item) => {
     return _.isEqual(token, item);
   });
