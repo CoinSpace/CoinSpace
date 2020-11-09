@@ -1,23 +1,30 @@
 'use strict';
 
-const CryptoJS = require('crypto-js');
+const crypto = require('crypto');
+const EVPBytesToKey = require('evp_bytestokey');
 
 function encrypt(text, key) {
-  return CryptoJS.AES.encrypt(text, key).toString();
+  const salt = crypto.randomBytes(8);
+  const result = EVPBytesToKey(key, salt, 256, 16);
+  const cipher = crypto.createCipheriv('aes-256-cbc', result.key, result.iv);
+  let encrypted = cipher.update(text);
+  encrypted = Buffer.concat([encrypted, cipher.final()]);
+  encrypted = Buffer.concat([Buffer.from('Salted__'), salt, encrypted]);
+  return encrypted.toString('base64');
 }
 
 function decrypt(text, key) {
-  return CryptoJS.enc.Utf8.stringify(CryptoJS.AES.decrypt(text, key));
-}
-
-// pin: Array, key: hex String
-function sha256pin(pin, key) {
-  return CryptoJS.HmacSHA256(
-    CryptoJS.lib.WordArray.create(new Uint8Array(pin)), CryptoJS.enc.Hex.parse(key)).toString();
+  const encryptedBytesWithSalt = Buffer.from(text, 'base64');
+  const encryptedBytes = encryptedBytesWithSalt.slice(16, encryptedBytesWithSalt.length);
+  const salt = encryptedBytesWithSalt.slice(8, 16);
+  const result = EVPBytesToKey(key, salt, 256, 16);
+  const cipher = crypto.createDecipheriv('aes-256-cbc', result.key, result.iv);
+  let decrypted = cipher.update(encryptedBytes);
+  decrypted = Buffer.concat([decrypted, cipher.final()]);
+  return decrypted.toString('utf8');
 }
 
 module.exports = {
   encrypt,
   decrypt,
-  sha256pin,
 };
