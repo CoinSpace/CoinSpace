@@ -1,5 +1,6 @@
 'use strict';
 
+const _ = require('lodash');
 const Fuse = require('fuse.js/dist/fuse.basic.common.js');
 const LS = require('lib/wallet/localStorage');
 const emitter = require('lib/emitter');
@@ -31,9 +32,27 @@ function init() {
       seed: 'public',
     });
 
-    cache.then(data => {
-      tokens = data;
-    });
+    cache
+      .then(data => {
+        tokens = data;
+      })
+      .then(() => {
+        const walletTokens = (details.get('tokens') || []).map((walletToken) => {
+          if (walletToken._id) {
+            const current = getTokenById(walletToken._id);
+            return current || walletToken;
+          } else {
+            const current = getTokenByAddress(walletToken.address);
+            return current || walletToken;
+          }
+        });
+        if (!_.isEqual(details.get('tokens'), walletTokens)) {
+          return details.set('tokens', walletTokens);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
   return cache;
 }

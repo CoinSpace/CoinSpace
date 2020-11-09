@@ -6,10 +6,6 @@ const initList = require('./list');
 const initSearch = require('./search');
 const initCustom = require('./custom');
 const tokens = require('lib/tokens');
-const details = require('lib/wallet/details');
-const _ = require('lodash');
-
-let _init;
 
 module.exports = function(el) {
   const ractive = new Ractive({
@@ -31,32 +27,8 @@ module.exports = function(el) {
 
   let currentPage = pages.list;
 
-  function init() {
-    if (!_init) {
-      _init = tokens.init()
-        .then(() => {
-          const walletTokens = details.get('tokens').map((walletToken) => {
-            if (walletToken._id) {
-              const current = tokens.getTokenById(walletToken._id);
-              return current || walletToken;
-            } else {
-              const current = tokens.getTokenByAddress(walletToken.address);
-              return current || walletToken;
-            }
-          });
-          if (!_.isEqual(details.get('tokens'), walletTokens)) {
-            return details.set('tokens', walletTokens);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-    return _init;
-  }
-
   ractive.on('before-show', async () => {
-    await init();
+    await tokens.init();
     ractive.set('isLoading', false);
     showPage(pages.list);
   });
