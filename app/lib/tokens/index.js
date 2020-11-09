@@ -1,5 +1,6 @@
 'use strict';
 
+const Fuse = require('fuse.js/dist/fuse.basic.common.js');
 const LS = require('lib/wallet/localStorage');
 const emitter = require('lib/emitter');
 const request = require('lib/request');
@@ -7,6 +8,8 @@ const details = require('lib/wallet/details');
 const { urlRoot } = window;
 
 let cache;
+let tokens;
+let index;
 
 function filter(token) {
   return {
@@ -20,31 +23,52 @@ function filter(token) {
   };
 }
 
-function getTokens() {
+function init() {
   if (!cache) {
     cache = request({
       url: `${urlRoot}api/v2/tokens?id=${LS.getId()}&network=ethereum`,
       method: 'get',
       seed: 'public',
     });
+
+    cache.then(data => {
+      tokens = data;
+    });
   }
   return cache;
 }
 
-async function getTokenById(id) {
-  const tokens = await getTokens();
+function getTokens() {
+  if (!tokens) {
+    throw new Error('tokens not ready');
+  }
+  return tokens;
+}
+
+function getTokenById(id) {
   const token = tokens.find(item => item._id === id);
   if (token) {
     return filter(token);
   }
 }
 
-async function getTokenByAddress(address) {
-  const tokens = await getTokens();
+function getTokenByAddress(address) {
   const token = tokens.find(item => item.address === address);
   if (token) {
     return filter(token);
   }
+}
+
+function search(query) {
+  if (!query || !query.trim()) {
+    return tokens;
+  }
+  if (!index) {
+    index = new Fuse(tokens, {
+      keys: ['name', 'symbol', 'address', '_id'],
+    });
+  }
+  return index.search(query.trim()).map(item => item.item);
 }
 
 async function migrate() {
@@ -53,11 +77,14 @@ async function migrate() {
 
   if (!newTokens && oldTokens) {
     // to be migrated
-    let tokens = [];
+
+    await init();
+
+    let walletTokens = [];
 
     const tetherToken = getTokenById('tether');
     if (tetherToken) {
-      tokens.push(tetherToken);
+      walletTokens.push(tetherToken);
     }
 
     const migratedTokens = oldTokens.map((oldToken) => {
@@ -75,9 +102,9 @@ async function migrate() {
       }
     });
 
-    tokens = [...tokens, ...migratedTokens];
+    walletTokens = [...walletTokens, ...migratedTokens];
 
-    details.set('tokens', tokens);
+    details.set('tokens', walletTokens);
     // unset walletTokens
     details.set('walletTokens');
   }
@@ -92,7 +119,9 @@ emitter.once('wallet-ready', () => {
 });
 
 module.exports = {
+  init,
   getTokens,
   getTokenById,
   getTokenByAddress,
+  search,
 };

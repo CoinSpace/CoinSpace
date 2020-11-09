@@ -1,0 +1,115 @@
+#tokens_custom {
+  .input__container {
+    @extend .csinput_with_x;
+  }
+
+  ._token_container {
+    margin-bottom: 20px;
+    @include noselect;
+    @include ellipsis;
+    @include breakpoint(portrait) {
+      font-size: $base_font_size--portrait;
+    }
+  }
+
+  ._select_container {
+    display: inline-block;
+    position: relative;
+    text-decoration: underline;
+    padding: 0 5px;
+    select {
+      position: absolute;
+      opacity: 0;
+      left: 0;
+      top: -5px;
+      @include breakpoint(portrait) {
+        top: 0
+      }
+    }
+  }
+
+  ._label {
+    @include noselect;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 20px;
+
+    @include breakpoint(portrait) {
+      font-size: $base_font_size--portrait;
+    }
+  }
+
+  ._input_single {
+    @extend .csinput;
+    margin-top: 5px;
+  }
+
+  ._contract_address_group {
+    display: flex;
+    margin-bottom: 20px;
+
+    ._label {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    ._btn {
+      @extend .csbtn;
+      align-self: flex-end;
+      margin-bottom: 2px;
+      padding: 0;
+      width: 42px;
+      height: 42px;
+      position: relative;
+
+      @include breakpoint(portrait) {
+        width: 59px;
+        height: 59px;
+      }
+
+      ._icon {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -15px;
+        margin-left: -15px;
+
+        @include breakpoint(portrait) {
+          width: 44px;
+          height: 44px;
+          margin-top: -22px;
+          margin-left: -22px;
+        }
+      }
+    }
+
+    ._btn-qr {
+      margin-left: 10px;
+    }
+  }
+
+  .actions {
+    padding: 0 0 20px 0;
+    background-color: white;
+    border-radius: 3px;
+
+    display: flex;
+
+    .csbtn--grey {
+      margin-right: 5px;
+    }
+    .csbtn, .csbtn--loading {
+      margin-left: 5px;
+    }
+    .csbtn {
+      &._disabled {
+        background-color: $grey;
+        box-shadow: 0 2px 0 0 darken($grey, 10%);
+        color: darken($grey, 20%);
+        pointer-events: none;
+      }
+    }
+  }
+}

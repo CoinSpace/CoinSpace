@@ -1,114 +1,81 @@
 'use strict';
 
 const Ractive = require('lib/ractive');
-const showRemoveConfirmation = require('widgets/modals/confirm-remove');
-const addEthereumToken = require('widgets/modals/add-ethereum-token');
-const { getToken, setToken } = require('lib/token');
-const { initWallet } = require('lib/wallet');
 const emitter = require('lib/emitter');
+const initList = require('./list');
+const initSearch = require('./search');
+const initCustom = require('./custom');
 const tokens = require('lib/tokens');
 const details = require('lib/wallet/details');
 const _ = require('lodash');
 
-let isEnabled = false;
+let _init;
 
 module.exports = function(el) {
-
   const ractive = new Ractive({
     el,
     template: require('./index.ract'),
     data: {
-      title: 'Available Tokens',
-      id: 'token_dropdown',
-      currentToken: '',
-      isCurrentToken(token) {
-        return _.isEqual(token, this.get('currentToken'));
-      },
-      switchToken,
-      removeEthereumToken,
-      ethereumTokens: [],
+      isLoading: true,
+    },
+    partials: {
+      loader: require('./loader.ract'),
     },
   });
 
-  emitter.on('sync', () => {
-    isEnabled = false;
-  });
+  const pages = {
+    list: initList(ractive.find('#tokens_list')),
+    search: initSearch(ractive.find('#tokens_search')),
+    custom: initCustom(ractive.find('#tokens_custom')),
+  };
 
-  emitter.on('wallet-ready', () => {
-    isEnabled = true;
-  });
+  let currentPage = pages.list;
+
+  function init() {
+    if (!_init) {
+      _init = tokens.init()
+        .then(() => {
+          const walletTokens = details.get('tokens').map((walletToken) => {
+            if (walletToken._id) {
+              const current = tokens.getTokenById(walletToken._id);
+              return current || walletToken;
+            } else {
+              const current = tokens.getTokenByAddress(walletToken.address);
+              return current || walletToken;
+            }
+          });
+          if (!_.isEqual(details.get('tokens'), walletTokens)) {
+            return details.set('tokens', walletTokens);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+    return _init;
+  }
 
   ractive.on('before-show', async () => {
-    try {
-      const walletTokens = await Promise.all(details.get('tokens').map(async (walletToken) => {
-        if (walletToken._id) {
-          const current = await tokens.getTokenById(walletToken._id);
-          return current || walletToken;
-        } else {
-          const current = await tokens.getTokenByAddress(walletToken.address);
-          return current || walletToken;
-        }
-      }));
-      if (!_.isEqual(details.get('tokens'), walletTokens)) {
-        await details.set('tokens', walletTokens);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-
-    const walletTokens = details.get('tokens');
-    ractive.set('ethereumTokens', walletTokens.filter(item => item.network === 'ethereum'));
-    ractive.set('currentToken', getToken());
+    await init();
+    ractive.set('isLoading', false);
+    showPage(pages.list);
   });
 
-  function switchToken(token) {
-    if (token === ractive.get('currentToken')) return;
-    if (!isEnabled) return;
+  ractive.on('before-hide', () => {
+    currentPage.hide();
+  });
 
-    const network = token.network || token;
-    const baseUrl = window.location.href.split('?')[0];
-    const url = baseUrl + '?network=' + network;
+  emitter.on('set-tokens', (page) => {
+    showPage(pages[page]);
+  });
 
-    ractive.set('currentToken', token);
-    setToken(token);
-
-    window.history.replaceState(null, null, url);
-
-    emitter.emit('sync');
-
+  function showPage(page) {
     setTimeout(() => {
-      initWallet();
-    }, 200);
-  }
-
-  function removeEthereumToken(token) {
-    const rindex = ractive.get('ethereumTokens').findIndex((item) => _.isEqual(item, token));
-    const walletTokens = details.get('tokens');
-    showRemoveConfirmation(token.name, (modal) => {
-      const index = walletTokens.findIndex((item) => _.isEqual(item, token));
-      if (index === -1) return modal.fire('cancel');
-
-      walletTokens.splice(index, 1);
-
-      details.set('tokens', walletTokens).then(() => {
-        modal.set('onDismiss', () => {
-          ractive.splice('ethereumTokens', rindex, 1);
-        });
-        modal.fire('cancel');
-      }).catch((err) => {
-        console.error(err);
-        modal.fire('cancel');
-      });
+      currentPage.hide();
+      page.show();
+      currentPage = page;
     });
-    return false;
   }
-
-  ractive.on('add-ethereum-token', (context) => {
-    context.event.stopPropagation();
-    addEthereumToken((token) => {
-      ractive.push('ethereumTokens', token);
-    });
-  });
 
   return ractive;
 };
