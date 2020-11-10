@@ -103,8 +103,9 @@ module.exports = function(el) {
     return Big(exchangeRate).times(btc).toFixed(2);
   }
 
+  // TODO it seems not only bitcoin price
   function bitcoinPrice(exchangeRate) {
-    if (typeof exchangeRate !== 'number') return '';
+    if (typeof exchangeRate !== 'number') return 0;
     return Big(exchangeRate).times(1).toFixed(2);
   }
 
