@@ -59,29 +59,6 @@
     }
   }
 
-  .tokens__message {
-    padding: 40px;
-    color: $grey;
-    text-align: center;
-
-    ._icon {
-      @include icon(80px, 80px, block);
-      margin: 0 auto;
-      margin-bottom: 20px;
-      .svg-help {
-        fill: $grey;
-      }
-    }
-
-    ._message {
-      font-size: $subtitle_font_size;
-      line-height: 1.2;
-      @include breakpoint(portrait) {
-        font-size: $subtitle_font_size--portrait;
-      }
-    }
-  }
-
   .token__item {
     @include clickbtn;
     display: flex;

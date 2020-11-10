@@ -19,29 +19,26 @@
   </div>
 </form>
 
-{{#if ethereumTokens.length}}
-  <div class="ethereum_tokens">
-    {{#each ethereumTokens.slice(0, show)}}
-    <div class="token__item token--ethereum" on-click="addToken(_id)">
-      <div class="_icon">
-        {{#if this.icon}}
-          <img src="{{this.icon}}"/>
-        {{else}}
-          {{>svg_letter_t}}
-        {{/if}}
-      </div>
-      <div class="_name">{{name}}</div>
-    </div>
-    {{/each}}
-  </div>
-{{else}}
-  <div class="tokens__message">
+<div class="ethereum_tokens">
+  {{#each ethereumTokens.slice(0, show)}}
+  <div class="token__item token--ethereum" on-click="addToken(_id)">
     <div class="_icon">
-      {{>svg_help}}
+      {{#if this.icon}}
+        <img src="{{this.icon}}"/>
+      {{else}}
+        {{>svg_letter_t}}
+      {{/if}}
     </div>
-    <div class="_message">{{translate("Nothing found")}}</div>
+    <div class="_name">{{name}}</div>
   </div>
-{{/if}}
+  {{/each}}
+  <div class="token__item token--ethereum" on-click="addCustomToken">
+    <div class="_icon">
+      {{>svg_token}}
+    </div>
+    <div class="_name">{{translate("Add Custom Token")}}</div>
+  </div>
+</div>
 
 
 {{#if ethereumTokens.length > show}}
@@ -49,8 +46,3 @@
     <div on-click="loadMore" class="csbtn">{{translate("Load more")}}</div>
   </div>
 {{/if}}
-<div class="add__button">
-  <div on-click="addCustomToken" class="csbtn">
-    {{translate("Add Custom Token")}}
-  </div>
-</div>
