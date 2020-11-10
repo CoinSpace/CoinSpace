@@ -29,6 +29,9 @@
 @import "core_css/atoms/_overlays";
 @import "core_css/_app";
 
+// Partials
+@import "partials/loader/_index";
+
 // widgets
 @import "widgets/frame/_index";
 @import "widgets/header/_index";
