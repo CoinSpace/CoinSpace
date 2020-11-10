@@ -4,8 +4,10 @@
     @include noselect;
     position: relative;
     flex: 1;
+    margin-bottom: 15px;
     @include breakpoint(portrait) {
       font-size: $base_font_size--portrait;
+      margin-bottom: 30px;
     }
   }
 
