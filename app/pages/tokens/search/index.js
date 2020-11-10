@@ -20,6 +20,14 @@ module.exports = function(el) {
     },
   });
 
+  function search() {
+    const walletTokenIds = details.get('tokens').map(item => item._id);
+    const ethereumTokens = tokens.search(ractive.get('searchQuery'))
+      .filter(item => !walletTokenIds.includes(item._id));
+    ractive.set('show', PER_PAGE);
+    ractive.set('ethereumTokens', ethereumTokens);
+  }
+
   function addToken(id) {
     const token = tokens.getTokenById(id);
     const walletTokens = details.get('tokens');
@@ -37,14 +45,9 @@ module.exports = function(el) {
 
   ractive.on('before-show', () => {
     ractive.set('searchQuery', null);
-    ractive.set('ethereumTokens', tokens.search());
+    search();
     window.scrollTo(0, 0);
   });
-
-  function search() {
-    ractive.set('show', PER_PAGE);
-    ractive.set('ethereumTokens', tokens.search(ractive.get('searchQuery')));
-  }
 
   ractive.on('back', () => {
     emitter.emit('set-tokens', 'list');
