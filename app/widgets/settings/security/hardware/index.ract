@@ -9,7 +9,7 @@
   </div>
 
   {{#if isLoading}}
-  <div class="_loader">{{translate("Loading...")}}</div>
+    {{>loader}}
   {{else}}
   <div class="_section">
     <div class="_title">{{translate("Hardware keys:")}}</div>

@@ -14,7 +14,7 @@ module.exports = function(el) {
       isLoading: true,
     },
     partials: {
-      loader: require('../../partials/loader/loader.ract'),
+      loader: require('partials/loader/loader.ract'),
     },
   });
 

@@ -40,6 +40,7 @@ module.exports = {
       pages: path.resolve(__dirname, 'app/pages'),
       widgets: path.resolve(__dirname, 'app/widgets'),
       modernizr$: path.resolve(__dirname, '.modernizrrc'),
+      partials: path.resolve(__dirname, 'app/partials'),
     },
   },
   module: {

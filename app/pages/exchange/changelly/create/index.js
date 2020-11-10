@@ -23,7 +23,7 @@ module.exports = function(el) {
       toSymbol: '',
     },
     partials: {
-      loader: require('../loader.ract'),
+      loader: require('partials/loader/loader.ract'),
       footer: require('../footer.ract'),
     },
   });

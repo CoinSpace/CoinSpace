@@ -22,6 +22,9 @@ module.exports = function(el) {
         return strftime('%F %T', date);
       },
     },
+    partials: {
+      loader: require('partials/loader/loader.ract'),
+    },
   });
 
   let isLoadingAdd = false;

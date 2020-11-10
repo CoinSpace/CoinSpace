@@ -5,15 +5,6 @@
       display: block;
     }
   }
-  .loader__message {
-    padding: 40px;
-    color: $grey;
-    text-align: center;
-    font-size: $subtitle_font_size;
-    @include breakpoint(portrait) {
-      font-size: $subtitle_font_size--portrait;
-    }
-  }
   ._powered_by {
     @extend .jigsaw-regular;
     text-align: center;

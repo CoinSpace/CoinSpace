@@ -10,7 +10,7 @@ module.exports = function(el) {
     el,
     template: require('./index.ract'),
     partials: {
-      loader: require('./loader.ract'),
+      loader: require('partials/loader/loader.ract'),
     },
     data: {
       isLoading: false,

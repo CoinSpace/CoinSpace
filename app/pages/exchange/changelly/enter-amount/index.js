@@ -23,7 +23,7 @@ module.exports = function(el) {
       coins: [],
     },
     partials: {
-      loader: require('../loader.ract'),
+      loader: require('partials/loader/loader.ract'),
       footer: require('../footer.ract'),
     },
   });
