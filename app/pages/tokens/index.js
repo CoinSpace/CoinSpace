@@ -4,7 +4,6 @@ const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
 const initList = require('./list');
 const initSearch = require('./search');
-const initCustom = require('./custom');
 const tokens = require('lib/tokens');
 
 module.exports = function(el) {
@@ -22,7 +21,6 @@ module.exports = function(el) {
   const pages = {
     list: initList(ractive.find('#tokens_list')),
     search: initSearch(ractive.find('#tokens_search')),
-    custom: initCustom(ractive.find('#tokens_custom')),
   };
 
   let currentPage = pages.list;

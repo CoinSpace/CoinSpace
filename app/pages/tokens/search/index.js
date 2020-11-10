@@ -4,6 +4,7 @@ const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
 const details = require('lib/wallet/details');
 const tokens = require('lib/tokens');
+const addCustomToken = require('widgets/modals/add-custom-token');
 
 const PER_PAGE = 10;
 
@@ -63,7 +64,7 @@ module.exports = function(el) {
   });
 
   ractive.on('addCustomToken', () => {
-    emitter.emit('set-tokens', 'custom');
+    addCustomToken();
   });
 
   return ractive;
