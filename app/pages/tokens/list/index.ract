@@ -125,7 +125,7 @@
   {{/each}}
 </div>
 
-<div class="actions">
+<div class="action_buttons">
   <div on-click="addEthereumToken" class="csbtn">
     {{translate("Add Token")}}
   </div>

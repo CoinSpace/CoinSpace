@@ -1,23 +1,14 @@
 #tokens_list {
   ._title {
     padding-bottom: 5px;
+    border-bottom: 1px solid darken($grey--light, 10%);
 
     @include breakpoint(portrait) {
       font-size: $base_font_size--portrait;
     }
   }
 
-  .actions {
-    padding: 15px 0 15px 0;
-    border-top: 1px solid darken($grey--light, 10%);
-
-    @include breakpoint(portrait) {
-      padding: 30px 30px 30px 0;
-    }
-  }
-
   .coins {
-    display: block;
     padding-bottom: 15px;
   }
 }

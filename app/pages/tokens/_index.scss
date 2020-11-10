@@ -59,12 +59,24 @@
     }
   }
 
+  // TODO merge with .loadmore__buttons
+  .action_buttons {
+    margin-top: 20px;
+    @include breakpoint(portrait) {
+      margin-top: 40px;
+    }
+  }
+
   .token__item {
     @include clickbtn;
     display: flex;
     align-items: center;
     padding: 15px 15px 15px 0;
-    border-top: 1px solid darken($grey--light, 10%);
+    border-bottom: 1px solid darken($grey--light, 10%);
+
+    &:last-child {
+      border-bottom: 0;
+    }
 
     @include breakpoint(portrait) {
       padding: 30px 30px 30px 0;

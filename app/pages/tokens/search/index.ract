@@ -42,7 +42,7 @@
 
 
 {{#if ethereumTokens.length > show}}
-  <div class="loadmore__button">
+  <div class="action_buttons">
     <div on-click="loadMore" class="csbtn">{{translate("Load more")}}</div>
   </div>
 {{/if}}
