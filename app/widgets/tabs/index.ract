@@ -27,6 +27,6 @@
     <span class="tab__icon">
       {{>svg_token}}
     </span>
-    <span class="tab__text">{{translate("Tokens")}}</span>
+    <span class="tab__text">{{translate("Coins")}}</span>
   </a>
 </div>
