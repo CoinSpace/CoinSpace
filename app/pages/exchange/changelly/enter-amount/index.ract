@@ -3,7 +3,7 @@
 {{else}}
 <div class="changelly_enter_amount">
 
-  <div class="exchange_header">
+  <div class="csheader-back">
     <div class="_back" on-click="back">
       <span class="_icon"></span> {{translate("Back")}}
     </div>
