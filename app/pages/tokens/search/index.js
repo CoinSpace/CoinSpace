@@ -36,6 +36,7 @@ module.exports = function(el) {
   }
 
   ractive.on('before-show', () => {
+    ractive.set('searchQuery', null);
     ractive.set('ethereumTokens', tokens.search());
     window.scrollTo(0, 0);
   });
