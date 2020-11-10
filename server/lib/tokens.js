@@ -113,7 +113,8 @@ async function syncTokens() {
       } else if (token.asset_platform_id === 'ethereum'
                 && token.contract_address
                 && token.market_cap_rank) {
-        const { data: info } = await coinspace.get(`/token/${token.contract_address}`);
+        const address = token.contract_address.toLowerCase();
+        const { data: info } = await coinspace.get(`/token/${address}`);
         /*
         // For check purposes
         if (info.name.trim() !== token.name.trim()) {
@@ -129,7 +130,7 @@ async function syncTokens() {
           $set: {
             name: token.name,
             network: 'ethereum',
-            address: token.contract_address,
+            address,
             decimals: parseInt(info.decimals),
             symbol: info.symbol,
             icon: token.image && token.image.large,
