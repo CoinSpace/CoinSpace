@@ -34,7 +34,7 @@
   {{/each}}
   <div class="token__item token--ethereum" on-click="addCustomToken">
     <div class="_icon">
-      {{>svg_token}}
+      {{>svg_settings}}
     </div>
     <div class="_name">{{translate("Add Custom Token")}}</div>
   </div>
