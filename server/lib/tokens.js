@@ -47,6 +47,7 @@ axiosRetry(coingecko, {
   retryCondition: (err) => {
     return axiosRetry.isNetworkOrIdempotentRequestError(err) || (err.response && err.response.status === 429);
   },
+  shouldResetTimeout: true,
 });
 
 rateLimit(coingecko, {
@@ -114,7 +115,23 @@ async function syncTokens() {
                 && token.contract_address
                 && token.market_cap_rank) {
         const address = token.contract_address.toLowerCase();
-        const { data: info } = await coinspace.get(`/token/${address}`);
+        const { data: info } = await coinspace.get(`/token/${address}`)
+          .catch((err) => {
+            if (err.response && err.response.status === 400) {
+              // For check purposes
+              //throw new Error(`Incorrect address: ${address}`);
+              return {};
+            }
+            if (err.response && err.response.status === 404) {
+              // For check purposes
+              //throw new Error(`Token not found on address: ${address}`);
+              return {};
+            }
+            throw err;
+          });
+        if (!info) {
+          continue;
+        }
         /*
         // For check purposes
         if (info.name.trim() !== token.name.trim()) {
