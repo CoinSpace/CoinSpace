@@ -295,6 +295,11 @@ async function getPriceBySymbol(symbol) {
   if (token) {
     fixSatoshi(token);
     return token.prices;
+  } else {
+    return CURRENCIES.reduce((obj, item) => {
+      obj[item] = 0;
+      return obj;
+    }, {});
   }
 }
 
