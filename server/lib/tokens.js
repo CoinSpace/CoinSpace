@@ -275,10 +275,25 @@ function getPrices(ids) {
 }
 
 // For backward compatibility
+function fixSatoshi(doc) {
+  if (doc._id === 'bitcoin') {
+    doc['prices']['mBTC'] = 1000;
+    doc['prices']['μBTC'] = 1000000;
+  } else if (doc._id === 'bitcoincash') {
+    doc['prices']['mBCH'] = 1000;
+    doc['prices']['μBCH'] = 1000000;
+  } else if (doc._id === 'bitcoinsv') {
+    doc['prices']['mBSV'] = 1000;
+    doc['prices']['μBSV'] = 1000000;
+  }
+}
+
+// For backward compatibility
 async function getPriceBySymbol(symbol) {
   const token = await db().collection(COLLECTION)
     .findOne({ symbol }, { sort: { market_cap_rank: 1 } });
   if (token) {
+    fixSatoshi(token);
     return token.prices;
   }
 }
@@ -296,6 +311,7 @@ async function getFromCacheForAppleWatch() {
     .toArray()
     .then((docs) => {
       return docs.reduce((result, doc) => {
+        fixSatoshi(doc);
         result[tickers[doc._id]] = doc.prices;
         return result;
       }, {});
