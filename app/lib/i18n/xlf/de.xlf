@@ -1387,6 +1387,10 @@ Sie werden in %(toSymbol)s konvertiert und an
         <source>This Token has already been added.</source>
         <target></target>
       </trans-unit>
+      <trans-unit id="address is not a valid address.">
+        <source>%(address)s is not a valid address.</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

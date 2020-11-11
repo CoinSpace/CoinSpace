@@ -1387,6 +1387,10 @@ Le montant sera converti en %(toSymbol)s, et sera envoyé à
         <source>This Token has already been added.</source>
         <target></target>
       </trans-unit>
+      <trans-unit id="address is not a valid address.">
+        <source>%(address)s is not a valid address.</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

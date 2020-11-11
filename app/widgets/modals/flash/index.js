@@ -51,6 +51,13 @@ function openModal(type, data) {
 function showError(data) {
   if (data.message === 'Network Error') {
     data.message = 'Request timeout. Please check your internet connection.';
+  } else if (data.message.search(/is not a valid address$/)) {
+    data = Object.assign(data, {
+      message: 'address is not a valid address.',
+      interpolations: {
+        address: data.message.match(/^(.*) is not a valid address$/)[1],
+      },
+    });
   }
   return openModal('error', data);
 }
