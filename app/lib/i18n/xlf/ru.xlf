@@ -1371,6 +1371,22 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Hardware Keys are not supported</source>
         <target>Аппаратные ключи не поддерживаются</target>
       </trans-unit>
+      <trans-unit id="Coins">
+        <source>Coins</source>
+        <target>Монеты</target>
+      </trans-unit>
+      <trans-unit id="Search">
+        <source>Search</source>
+        <target>Поиск</target>
+      </trans-unit>
+      <trans-unit id="Add Custom Token">
+        <source>Add Custom Token</source>
+        <target>Добавить свой токен</target>
+      </trans-unit>
+      <trans-unit id="This Token has already been added.">
+        <source>This Token has already been added.</source>
+        <target>Этот токен уже добавлен.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

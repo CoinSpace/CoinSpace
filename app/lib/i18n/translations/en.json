@@ -338,5 +338,9 @@
   "Account": "Account",
   "Hardware keys:": "Hardware keys:",
   "Add Hardware Key...": "Add Hardware Key...",
-  "Hardware Keys are not supported": "Hardware Keys are not supported"
+  "Hardware Keys are not supported": "Hardware Keys are not supported",
+  "Coins": "Coins",
+  "Search": "Search",
+  "Add Custom Token": "Add Custom Token",
+  "This Token has already been added.": "This Token has already been added."
 }

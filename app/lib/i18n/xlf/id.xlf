@@ -1371,6 +1371,22 @@ itu akan dikonversi ke %(toSymbol)s, dan dikirim ke
         <source>Hardware Keys are not supported</source>
         <target></target>
       </trans-unit>
+      <trans-unit id="Coins">
+        <source>Coins</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Search">
+        <source>Search</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Add Custom Token">
+        <source>Add Custom Token</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="This Token has already been added.">
+        <source>This Token has already been added.</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

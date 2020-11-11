@@ -45,7 +45,7 @@ function open() {
     if (token._id) {
       const walletTokenIds = details.get('tokens').map(item => item._id);
       if (walletTokenIds.includes(token._id)) {
-        return showError({ message: 'Token already added.' });
+        return showError({ message: 'This Token has already been added.' });
       }
     }
 
