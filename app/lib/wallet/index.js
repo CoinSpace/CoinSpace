@@ -170,7 +170,12 @@ async function initWallet(pin) {
     convert.setDecimals(0);
   }
 
-  await ticker.load(state.wallet.denomination);
+  if (token) {
+    await ticker.init(token._id);
+  } else {
+    // TODO rewrite to _id too
+    await ticker.init(networkName);
+  }
 
   state.wallet.load({
     getDynamicFees() {

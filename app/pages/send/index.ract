@@ -39,6 +39,7 @@
             <span class="_currency">{{denomination}}</span>
           </div>
 
+          {{#if currencies.length}}
           <div class="_input-group">
             <input id="fiat" class="_input fiat" type="number" min="0" step="any" on-input="fiat-to-bitcoin" on-focus="focusAmountInput" on-blur="blurAmountInput">
             <span class="_currency dropdown">
@@ -49,6 +50,7 @@
               </select>
             </span>
           </div>
+          {{/if}}
 
       </div>
 

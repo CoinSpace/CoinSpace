@@ -97,7 +97,7 @@ module.exports = function(el) {
   }
 
   function bitcoinToFiat(amount, exchangeRate) {
-    if (amount == undefined || exchangeRate == undefined) return "N/A";
+    if (amount == undefined || exchangeRate == undefined) return '⚠️';
 
     const btc = toUnit(amount);
     return Big(exchangeRate).times(btc).toFixed(2);
@@ -105,7 +105,7 @@ module.exports = function(el) {
 
   // TODO it seems not only bitcoin price
   function bitcoinPrice(exchangeRate) {
-    if (typeof exchangeRate !== 'number') return 0;
+    if (typeof exchangeRate !== 'number') return '⚠️';
     return Big(exchangeRate).times(1).toFixed(2);
   }
 
