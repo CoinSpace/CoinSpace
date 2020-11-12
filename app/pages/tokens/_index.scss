@@ -48,6 +48,10 @@
         height: auto;
       }
 
+      .svg-settings {
+        fill: #999;
+      }
+
       @include breakpoint(portrait) {
         width: 80px;
         height: 80px;
