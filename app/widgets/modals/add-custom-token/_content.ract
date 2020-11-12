@@ -28,7 +28,15 @@
 
       <div class="_inputs">
         <div class="csbtn--grey _cancel">{{translate("Cancel")}}</div>
-        <div class="csbtn" on-click="addToken">{{translate("Add")}}</div>
+        {{#if isValidating}}
+          <div class="csbtn--loading">
+            <span class="_icon">
+              {{>svg_refresh}}
+            </span>
+          </div>
+        {{else}}
+          <div class="csbtn" on-click="addToken">{{translate("Add")}}</div>
+        {{/if}}
       </div>
     </div>
   </div>

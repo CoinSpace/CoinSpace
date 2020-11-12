@@ -16,6 +16,7 @@ function open() {
     data: {
       qrScannerAvailable: qrcode.isScanAvailable,
       address: '',
+      isValidating: false,
     },
   });
 
@@ -25,11 +26,13 @@ function open() {
   });
 
   ractive.on('addToken', async () => {
+    ractive.set('isValidating', true);
     const walletTokens = details.get('tokens');
     const address = ractive.get('address').trim().toLowerCase();
     let token;
 
     if (!address) {
+      ractive.set('isValidating', false);
       return showError({ message: 'Please fill out address.' });
     }
 
@@ -50,11 +53,13 @@ function open() {
     }
 
     if (!token) {
+      ractive.set('isValidating', false);
       return;
     }
 
     if ((token._id && walletTokens.map(item => item._id).includes(token._id))
         || walletTokens.map(item => item.address).includes(token.address)) {
+      ractive.set('isValidating', false);
       return showError({ message: 'This Token has already been added.' });
     }
 
@@ -64,6 +69,7 @@ function open() {
         console.error(err);
       })
       .finally(() => {
+        ractive.set('isValidating', false);
         ractive.fire('cancel');
         emitter.emit('set-tokens', 'list');
       });
