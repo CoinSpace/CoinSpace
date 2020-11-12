@@ -16,8 +16,6 @@ function open() {
     data: {
       qrScannerAvailable: qrcode.isScanAvailable,
       address: '',
-      symbol: '',
-      decimals: '',
     },
   });
 
@@ -28,29 +26,39 @@ function open() {
 
   ractive.on('addToken', async () => {
     const walletTokens = details.get('tokens');
-    const token = {
-      _id: ractive.get('_id'),
-      address: ractive.get('address').trim().toLowerCase(),
-      symbol: ractive.get('symbol').trim(),
-      name: ractive.get('name') || ractive.get('symbol').trim(),
-      decimals: ractive.get('decimals'),
-      icon: ractive.get('icon'),
-      network: 'ethereum',
-    };
+    const address = ractive.get('address').trim().toLowerCase();
+    let token;
 
-    if (!token.address || !token.symbol || typeof token.decimals !== 'number') {
-      return showError({ message: 'Please fill out all fields.' });
+    if (!address) {
+      return showError({ message: 'Please fill out address.' });
     }
 
-    if (token._id) {
-      const walletTokenIds = details.get('tokens').map(item => item._id);
-      if (walletTokenIds.includes(token._id)) {
-        return showError({ message: 'This Token has already been added.' });
-      }
+    token = tokens.getTokenByAddress(address);
+
+    if (!token) {
+      token = await tokens.requestTokenByAddress(address).catch((err) => {
+        if (err.status === 400 || err.status === 404) {
+          showError({
+            message: 'address is not a valid address.',
+            interpolations: {
+              address,
+            },
+          });
+        }
+        console.error(err);
+      });
+    }
+
+    if (!token) {
+      return;
+    }
+
+    if ((token._id && walletTokens.map(item => item._id).includes(token._id))
+        || walletTokens.map(item => item.address).includes(token.address)) {
+      return showError({ message: 'This Token has already been added.' });
     }
 
     walletTokens.push(token);
-
     details.set('tokens', walletTokens)
       .catch((err) => {
         console.error(err);
@@ -59,21 +67,6 @@ function open() {
         ractive.fire('cancel');
         emitter.emit('set-tokens', 'list');
       });
-  });
-
-  ractive.on('inputAddress', () => {
-    const token = tokens.getTokenByAddress(ractive.get('address').toLowerCase());
-    if (token) {
-      ractive.set('_id', token._id);
-      ractive.set('symbol', token.symbol);
-      ractive.set('name', token.name);
-      ractive.set('decimals', token.decimals);
-      ractive.set('icon', token.icon);
-    } else {
-      ractive.set('_id', null);
-      ractive.set('name', null);
-      ractive.set('icon', null);
-    }
   });
 
   ractive.on('openQr', () => {

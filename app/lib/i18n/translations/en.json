@@ -343,5 +343,6 @@
   "Search": "Search",
   "Add Custom Token": "Add Custom Token",
   "This Token has already been added.": "This Token has already been added.",
-  "address is not a valid address.": "%(address)s is not a valid address."
+  "address is not a valid address.": "%(address)s is not a valid address.",
+  "Please fill out address.": "Please fill out address."
 }

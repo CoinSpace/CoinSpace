@@ -1391,6 +1391,10 @@ It will be converted into %(toSymbol)s, and sent to
         <source>%(address)s is not a valid address.</source>
         <target>%(address)s недействительный адрес.</target>
       </trans-unit>
+      <trans-unit id="Please fill out address.">
+        <source>Please fill out address.</source>
+        <target>Пожалуйста, укажите адрес.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

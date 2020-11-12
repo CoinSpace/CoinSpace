@@ -1391,6 +1391,10 @@ Den konverteres til %(toSymbol)s og sendes til
         <source>%(address)s is not a valid address.</source>
         <target></target>
       </trans-unit>
+      <trans-unit id="Please fill out address.">
+        <source>Please fill out address.</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

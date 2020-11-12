@@ -12,6 +12,7 @@ let cache;
 let tokens;
 let index;
 
+// strip unnecessary fields
 function filter(token) {
   return {
     _id: token._id,
@@ -78,6 +79,21 @@ function getTokenByAddress(address) {
   }
 }
 
+function requestTokenByAddress(address) {
+  return request({
+    url: `${process.env.API_ETH_URL}token/${address}`,
+    method: 'get',
+  }).then((data) => {
+    return {
+      address,
+      symbol: data.symbol,
+      name: data.name,
+      decimals: data.decimals,
+      network: 'ethereum',
+    };
+  });
+}
+
 function search(query) {
   if (!query || !query.trim()) {
     return tokens;
@@ -142,5 +158,6 @@ module.exports = {
   getTokens,
   getTokenById,
   getTokenByAddress,
+  requestTokenByAddress,
   search,
 };
