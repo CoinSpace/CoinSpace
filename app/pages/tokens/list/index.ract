@@ -105,7 +105,7 @@
 
 <div class="_title">{{translate("Tokens")}}</div>
 
-<div class="ethereum_tokens">
+<div class="coins">
   {{#each ethereumTokens}}
   <div class="token__item token--ethereum" on-click="switchToken(this)">
     <div class="_icon">

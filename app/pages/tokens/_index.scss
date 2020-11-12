@@ -9,11 +9,10 @@
     }
   }
 
-  // TODO merge with .loadmore__buttons
-  .action_buttons {
-    margin-top: 20px;
+  .coins {
+    margin-bottom: 15px;
     @include breakpoint(portrait) {
-      margin-top: 40px;
+      margin-bottom: 30px;
     }
   }
 
@@ -83,10 +82,23 @@
       }
     }
 
-    ._add_btn {
-      display: inline-block;
-      text-decoration: underline;
-      margin-right: 10px;
+    ._remove {
+      padding: 13px;
+      margin-right: -13px;
+      width: 50px;
+      height: 50px;
+      flex-shrink: 0;
+
+      .svg-close {
+        fill: $grey;
+      }
+
+      @include breakpoint(portrait) {
+        width: 80px;
+        height: 80px;
+        padding: 20px;
+        margin-right: -20px;
+      }
     }
   }
 
@@ -128,28 +140,5 @@
 
   .token--ethereum ._icon {
     background-color: $ethereal;
-  }
-
-  .ethereum_tokens {
-    .token__item {
-      ._remove {
-        padding: 13px;
-        margin-right: -13px;
-        width: 50px;
-        height: 50px;
-        flex-shrink: 0;
-
-        .svg-close {
-          fill: $grey;
-        }
-
-        @include breakpoint(portrait) {
-          width: 80px;
-          height: 80px;
-          padding: 20px;
-          margin-right: -20px;
-        }
-      }
-    }
   }
 }

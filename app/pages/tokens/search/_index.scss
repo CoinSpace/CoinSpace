@@ -1,9 +1,6 @@
 #tokens_search {
-
   ._search_group {
     @include noselect;
-    position: relative;
-    flex: 1;
     margin-bottom: 15px;
     @include breakpoint(portrait) {
       font-size: $base_font_size--portrait;
@@ -17,75 +14,5 @@
 
   ._label {
     cursor: pointer;
-    flex: 1;
-  }
-
-  ._btn {
-    @extend .csbtn;
-    align-self: flex-end;
-    margin-bottom: 2px;
-
-    padding: 0;
-    width: 42px;
-    height: 42px;
-    position: relative;
-
-    @include breakpoint(portrait) {
-      width: 59px;
-      height: 59px;
-    }
-
-    &._disabled {
-      background-color: $grey;
-      box-shadow: 0 2px 0 0 darken($grey, 10%);
-      color: darken($grey, 20%);
-      pointer-events: none;
-
-      &:hover {
-        color: darken($grey, 20%);
-      }
-    }
-
-    ._icon {
-      width: 30px;
-      height: 30px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin-top: -15px;
-      margin-left: -15px;
-
-      @include breakpoint(portrait) {
-        width: 44px;
-        height: 44px;
-        margin-top: -22px;
-        margin-left: -22px;
-      }
-    }
-  }
-
-  ._help {
-    @include clickbtn;
-    position: absolute;
-    top: 0px;
-    right: -5px;
-    font-size: $small_font_size;
-    width: 26px;
-    height: 26px;
-    padding: 4px;
-    opacity: 0.4;
-
-    @include breakpoint(portrait) {
-      width: 32px;
-      height: 32px;
-    }
-
-    &:hover {
-      opacity: 0.7;
-    }
-
-    .svg-help {
-      fill: #333;
-    }
   }
 }

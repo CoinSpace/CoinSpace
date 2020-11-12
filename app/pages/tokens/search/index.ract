@@ -8,7 +8,7 @@
   <div class="_search_group">
     <label class="_label" for="search_token">{{translate("Token")}}
       <div class="input__container">
-        <input id="search_token" placeholder="{{translate("Search")}}" on-input="inputQuery" on-enter="inputQuery" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{searchQuery}}" />
+        <input id="search_token" placeholder="{{translate("Search")}}" on-input="inputQuery" on-enter="inputQuery" class="_input" type="text" autocorrect="off" autocapitalize="off" autocomplete="off" value="{{searchQuery}}" />
         {{#searchQuery}}
           <div class="close__input" on-click="clearQuery">
             <span class="_icon">{{> svg_close}}</span>
@@ -19,7 +19,7 @@
   </div>
 </form>
 
-<div class="ethereum_tokens">
+<div class="coins">
   {{#each ethereumTokens.slice(0, show)}}
   <div class="token__item token--ethereum" on-click="addToken(_id)">
     <div class="_icon">
