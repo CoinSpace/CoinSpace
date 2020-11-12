@@ -215,7 +215,12 @@ exports.getTokens = asyncWrapper(async (req, res) => {
   res.status(200).send(list);
 });
 
-exports.getPrices = asyncWrapper(async (req, res) => {
-  const list = await tokens.getPrices(req.query.tokens);
-  res.status(200).send(list);
+exports.getTicker = asyncWrapper(async (req, res) => {
+  const ticker = await tokens.getTicker(req.query.crypto);
+  res.status(200).send(ticker);
+});
+
+exports.getTickers = asyncWrapper(async (req, res) => {
+  const tickers = await tokens.getTickers(req.query.crypto);
+  res.status(200).send(tickers);
 });

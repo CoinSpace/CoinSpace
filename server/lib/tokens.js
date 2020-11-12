@@ -1,6 +1,7 @@
 'use strict';
 
 const db = require('./v1/db');
+const createError = require('http-errors');
 const axios = require('axios');
 const axiosRetry = require('axios-retry');
 const rateLimit = require('axios-rate-limit');
@@ -246,46 +247,42 @@ function getTokens(network, limit=0) {
         market_cap_rank: 1,
       },
       projection: {
-        coingecko_id: 0,
-        prices: 0,
-        synchronized_at: 0,
-        updated_at: 0,
+        network: 1,
+        symbol: 1,
+        name: 1,
+        address: 1,
+        decimals: 1,
+        icon: 1,
+        market_cap_rank: 1,
       },
     })
     .toArray();
 }
 
-function getPrice(id) {
+function getTicker(id) {
   return db().collection(COLLECTION)
     .findOne({
       _id: id,
     }, {
       projection: {
-        address: 0,
-        decimals: 0,
-        icon: 0,
-        market_cap_rank: 0,
-        coingecko_id: 0,
-        synchronized_at: 0,
-        updated_at: 0,
+        prices: 1,
       },
     })
-    .then((doc) => doc.prices);
+    .then((doc) => {
+      if (!doc) {
+        throw createError(404, 'Coin or token not found');
+      }
+      return doc;
+    });
 }
 
-function getPrices(ids) {
+function getTickers(ids) {
   return db().collection(COLLECTION)
     .find({
       _id: { $in: ids },
     }, {
       projection: {
-        address: 0,
-        decimals: 0,
-        icon: 0,
-        market_cap_rank: 0,
-        coingecko_id: 0,
-        synchronized_at: 0,
-        updated_at: 0,
+        prices: 1,
       },
     })
     .toArray();
@@ -344,8 +341,8 @@ module.exports = {
   syncTokens,
   getTokens,
   updatePrices,
-  getPrice,
-  getPrices,
+  getTicker,
+  getTickers,
   // For backward compatibility
   getPriceBySymbol,
   getFromCacheForAppleWatch,

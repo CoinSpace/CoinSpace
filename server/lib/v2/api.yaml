@@ -503,23 +503,42 @@ paths:
                 $ref: '#/components/schemas/TokenList'
         default:
           $ref: '#/components/responses/GeneralError'
-  /prices:
+  /ticker:
     get:
-      x-eov-operation-id: getPrices
+      x-eov-operation-id: getTicker
       x-eov-operation-handler: handlers
-      description: Get prices of tokens
+      description: Get prices of single coin or token
       parameters:
         - $ref: '#/components/parameters/deviceId'
-        - $ref: '#/components/parameters/tokens'
+        - $ref: '#/components/parameters/cryptoId'
       security:
         - deviceSignature: []
       responses:
         '200':
-          description: List of prices
+          description: Ticker for coin or token
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/PriceList'
+                $ref: '#/components/schemas/Ticker'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /tickers:
+    get:
+      x-eov-operation-id: getTickers
+      x-eov-operation-handler: handlers
+      description: Get prices of one or more coins or tokens
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cryptoIds'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: List of tickers for coin or token
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/TickerList'
         default:
           $ref: '#/components/responses/GeneralError'
   /device:
@@ -706,28 +725,20 @@ components:
           - decimals
           - icon
           - market_cap_rank
-    PriceList:
+    Ticker:
+      type: object
+      properties:
+        _id:
+          type: string
+        prices:
+          type: object
+      required:
+        - _id
+        - prices
+    TickerList:
       type: array
       items:
-        type: object
-        properties:
-          _id:
-            type: string
-          name:
-            type: string
-          network:
-            type: string
-            nullable: true
-          symbol:
-            type: string
-          prices:
-            type: object
-        required:
-          - _id
-          - name
-          - network
-          - symbol
-          - prices
+        $ref: '#/components/schemas/Ticker'
   parameters:
     deviceId:
       in: query
@@ -757,11 +768,18 @@ components:
       description: Network issued tokens
       schema:
         type: string
-    tokens:
+    cryptoId:
       in: query
-      name: tokens
+      name: crypto
       required: true
-      description: List of token IDs
+      description: Coin or Token ID
+      schema:
+        type: string
+    cryptoIds:
+      in: query
+      name: crypto
+      required: true
+      description: List of Coin or Token IDs
       style: form
       explode: false
       allowReserved: true

@@ -22,10 +22,10 @@ function get(network) {
   const collection = db().collection('cs_fee');
 
   return Promise.all([
-    tokens.getPrice(network),
+    tokens.getTicker(network),
     collection.find({ _id: network }).limit(1).next(),
   ]).then((results) => {
-    const rate = results[0]['USD'];
+    const rate = results[0]['prices']['USD'];
     let minFee = 0;
     let maxFee = 0;
     if (rate > 0) {
