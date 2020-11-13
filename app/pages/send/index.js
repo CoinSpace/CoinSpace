@@ -296,7 +296,7 @@ module.exports = function(el) {
     showTooltip({
       message: 'Amount of coins that is charged from your balance for single transaction (:url).',
       // eslint-disable-next-line max-len
-      interpolations: { url: "<a href=\"\" onclick=\"window.open('https://coin.space/all-about-bitcoin-fees/', '_blank').opener = null; return false;\">" + translate('more info') + "</a>" },
+      interpolations: { url: "<a href=\"\" onclick=\"return window.safeOpen('https://coin.space/all-about-bitcoin-fees/', '_blank');\">" + translate('more info') + "</a>" },
       isHTML: true,
     });
   });

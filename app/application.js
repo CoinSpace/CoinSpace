@@ -84,6 +84,14 @@ window.initCSApp = async function() {
     };
   }
 
+  window.safeOpen = function(...args) {
+    const win = window.open(...args);
+    if (win) {
+      win.opener = null;
+    }
+    return false;
+  };
+
   if (process.env.BUILD_TYPE === 'phonegap') {
     window.handleOpenURL = function(url) {
       const { SafariViewController } = window;

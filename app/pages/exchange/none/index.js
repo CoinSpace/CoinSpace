@@ -22,11 +22,11 @@ module.exports = function(el) {
   });
 
   ractive.on('moonpay-buy', () => {
-    window.open(ractive.get('moonpayBuyUrl'), '_blank').opener = null;
+    window.safeOpen(ractive.get('moonpayBuyUrl'), '_blank');
   });
 
   ractive.on('moonpay-sell', () => {
-    window.open(ractive.get('moonpaySellUrl'), '_blank').opener = null;
+    window.safeOpen(ractive.get('moonpaySellUrl'), '_blank');
   });
 
   ractive.on('before-show', async () => {

@@ -7,7 +7,7 @@
 <p class="confirm__responseMsg">{{translate(error, interpolations)}}</p>
 
 <div class="confirm__inputs">
-  <a class="csbtn--red" onclick="window.open('https://coinapp.zendesk.com/hc/en-us', '_blank').opener = null; return false;" href="">
+  <a class="csbtn--red" onclick="return window.safeOpen('https://coinapp.zendesk.com/hc/en-us', '_blank');" href="">
     <span class="_text">{{translate("Support")}}</span>
   </a>
   <div class="csbtn--grey _cancel">{{translate("Close")}}</div>
