@@ -338,7 +338,7 @@
   "Account": "Account",
   "Hardware keys:": "Hardware keys:",
   "Add Hardware Key...": "Add Hardware Key...",
-  "Hardware Keys are not supported": "Hardware Keys are not supported",
+  "Hardware Keys are not supported by your device": "Hardware Keys are not supported by your device",
   "Coins": "Coins",
   "Search": "Search",
   "Add Custom Token": "Add Custom Token",

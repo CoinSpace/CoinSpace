@@ -1367,8 +1367,8 @@ Het zal worden geconverteerd in %(toSymbol)s, en worden verzonden naar
         <source>Add Hardware Key...</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="Hardware Keys are not supported">
-        <source>Hardware Keys are not supported</source>
+      <trans-unit id="Hardware Keys are not supported by your device">
+        <source>Hardware Keys are not supported by your device</source>
         <target></target>
       </trans-unit>
       <trans-unit id="Coins">
