@@ -5,7 +5,7 @@ const pkg = require('./package.json');
 const { BUILD_PLATFORM } = process.env;
 const BRANCH = process.env.TRAVIS_BRANCH || process.env.APPVEYOR_REPO_BRANCH;
 
-if (!['win', 'mac', 'mas', 'mas-dev', 'snap'].includes(BUILD_PLATFORM)) {
+if (!['win', 'appx', 'mac', 'mas', 'mas-dev', 'snap'].includes(BUILD_PLATFORM)) {
   throw new Error(`Please specify valid distribution, provided: '${BUILD_PLATFORM}'`);
 }
 
@@ -21,7 +21,7 @@ module.exports = {
     buildVersion,
     //asar: true,
     icon: 'resources/icon',
-    executableName: ['win'].includes(BUILD_PLATFORM) ? pkg.productName : pkg.name,
+    executableName: ['win', 'appx'].includes(BUILD_PLATFORM) ? pkg.productName : pkg.name,
     ignore: [
       /README.md/i,
       /HISTORY.md/i,
@@ -73,7 +73,7 @@ module.exports = {
     },
   },
   makers: [
-    {
+    BUILD_PLATFORM === 'win' && {
       name: '@electron-forge/maker-squirrel',
       config: {
         // App ID
@@ -82,8 +82,17 @@ module.exports = {
         setupIcon: 'resources/icon.ico',
         loadingGif: 'resources/loading.gif',
         certificateFile: 'resources/certificate.pfx',
-        certificatePassword:  process.env.CERTIFICATE_WIN_PASSWORD,
+        certificatePassword: process.env.CERTIFICATE_WIN_PASSWORD,
         //remoteReleases: 'https://github.com/CoinSpace/CoinSpace',
+      },
+    },
+    BUILD_PLATFORM === 'appx' && {
+      name: '@electron-forge/maker-appx',
+      config: {
+        publisher: process.env.PUBLISHER_APPX,
+        devCert: 'resources/certificate.pfx',
+        certPass: process.env.CERTIFICATE_WIN_PASSWORD,
+        assets: 'resources/appx',
       },
     },
     {
@@ -153,9 +162,9 @@ module.exports = {
         publish: process.env.SNAP_TOKEN && BRANCH === 'master' ? 'always' : 'never',
       },
     },
-  ],
+  ].filter(item => !!item),
   publishers: [
-    ...(['mac', 'win'].includes(BUILD_PLATFORM) && BRANCH === 'master' ? [{
+    ['mac', 'win'].includes(BUILD_PLATFORM) && BRANCH === 'master' && {
       name: '@mahnunchik/publisher-github',
       config: {
         repository: {
@@ -165,7 +174,7 @@ module.exports = {
         draft: true,
         override: true,
       },
-    }] : []),
+    },
     {
       name: '@mahnunchik/publisher-gcs',
       config: {
@@ -174,5 +183,5 @@ module.exports = {
         public: false,
       },
     },
-  ],
+  ].filter(item => !!item),
 };
