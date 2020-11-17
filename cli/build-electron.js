@@ -20,7 +20,7 @@ program
   .option('-p, --platform <platform>', 'platform', 'mac')
   .parse(process.argv);
 
-if (!['win', 'appx', 'mac', 'mas', 'mas-dev', 'snap'].includes(program.platform)) {
+if (!['win', 'appx', 'appx-dev', 'mac', 'mas', 'mas-dev', 'snap'].includes(program.platform)) {
   console.error(`Unsupported Platform: ${program.platform}`);
   process.exit(1);
 }
@@ -67,7 +67,7 @@ webpack(webpackConfig, (error, stats) => {
     if (program.platform === 'mas' || program.platform === 'mas-dev') {
       platform = 'mas';
     }
-    if (program.platform === 'win' || program.platform === 'appx') {
+    if (program.platform === 'win' || program.platform === 'appx' || program.platform === 'appx-dev') {
       platform = 'win32';
     }
     if (program.platform === 'snap') {

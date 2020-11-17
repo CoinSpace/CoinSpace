@@ -5,7 +5,7 @@ const pkg = require('./package.json');
 const { BUILD_PLATFORM } = process.env;
 const BRANCH = process.env.TRAVIS_BRANCH || process.env.APPVEYOR_REPO_BRANCH;
 
-if (!['win', 'appx', 'mac', 'mas', 'mas-dev', 'snap'].includes(BUILD_PLATFORM)) {
+if (!['win', 'appx', 'appx-dev', 'mac', 'mas', 'mas-dev', 'snap'].includes(BUILD_PLATFORM)) {
   throw new Error(`Please specify valid distribution, provided: '${BUILD_PLATFORM}'`);
 }
 
@@ -21,13 +21,13 @@ module.exports = {
     buildVersion,
     //asar: true,
     icon: 'resources/icon',
-    executableName: ['win', 'appx'].includes(BUILD_PLATFORM) ? pkg.productName : pkg.name,
+    executableName: ['win', 'appx', 'appx-dev'].includes(BUILD_PLATFORM) ? pkg.productName : pkg.name,
     ignore: [
       /README.md/i,
       /HISTORY.md/i,
       /CHANGELOG.md/i,
       '^/(?!electron.js|env.json|package.json|lib|app|resources|node_modules)',
-      ['win', 'snap'].includes(BUILD_PLATFORM) ? '^/resources/(?!64x64.png)' : '^/resources',
+      ['win', 'appx', 'appx-dev', 'snap'].includes(BUILD_PLATFORM) ? '^/resources/(?!64x64.png)' : '^/resources',
       'Makefile',
       '.travis.yml',
       'appveyor.yml',
@@ -44,6 +44,7 @@ module.exports = {
       '.coveralls.yml',
       '.istanbul.yml',
       '.jscs.json',
+      'Thumbs.db',
     ],
     appBundleId: 'com.coinspace.wallet',
     appCategoryType: 'public.app-category.finance',
@@ -86,13 +87,15 @@ module.exports = {
         //remoteReleases: 'https://github.com/CoinSpace/CoinSpace',
       },
     },
-    BUILD_PLATFORM === 'appx' && {
+    BUILD_PLATFORM === 'appx-dev' && {
       name: '@electron-forge/maker-appx',
       config: {
+        packageName: 'coindev',
         publisher: process.env.PUBLISHER_APPX,
         devCert: 'resources/certificate.pfx',
         certPass: process.env.CERTIFICATE_WIN_PASSWORD,
         assets: 'resources/appx',
+        makePri: true,
       },
     },
     {
