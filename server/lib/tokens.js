@@ -75,6 +75,7 @@ rateLimit(coinspace, {
 });
 
 async function syncTokens() {
+  console.log('sync tokens: start');
   console.time('sync tokens');
 
   const { data: list } = await coingecko.get('/coins/list');
@@ -88,7 +89,7 @@ async function syncTokens() {
 
       const { data: token } = await coingecko.get(`/coins/${item.id}`);
 
-      if (token.asset_platform_id === null && CRYPTOCURRENCIES.includes(token.id)) {
+      if (CRYPTOCURRENCIES.includes(token.id)) {
         let _id = token.id;
         // migrate id
         if (_id === 'bitcoin-cash') {
@@ -112,6 +113,7 @@ async function syncTokens() {
         }, {
           upsert: true,
         });
+        console.log(`updated coin: ${_id}`);
       } else if (token.asset_platform_id === 'ethereum'
                 && token.contract_address
                 && token.market_cap_rank) {
@@ -159,6 +161,7 @@ async function syncTokens() {
         }, {
           upsert: true,
         });
+        console.log(`updated ethereum token: ${token.id}`);
       } else {
         // For check purposes
         // eslint-disable-next-line max-len
