@@ -16,16 +16,15 @@
 @import "core_css/mixins/_breakpoints";
 @import "core_css/mixins/_icons";
 
-// Reset
-@import "core_css/reset/_normalize";
-@import "core_css/reset/_formalize";
 @import "core_css/_animations";
 @import "core_css/_javascript";
 @import "core_css/_base";
 @import "core_css/atoms/_csbtn";
 @import "core_css/atoms/_csheader";
 @import "core_css/atoms/_shapes";
-@import "core_css/atoms/csinput";
+@import "core_css/atoms/_csformgroup";
+@import "core_css/atoms/_csinput";
+@import "core_css/atoms/_cscode";
 @import "core_css/atoms/_overlays";
 @import "core_css/_app";
 

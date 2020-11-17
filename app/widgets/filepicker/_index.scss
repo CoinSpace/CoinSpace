@@ -1,35 +1,16 @@
 .widget-filepicker {
-  margin-top: 5px;
-  @extend .generic_box;
-  @extend .jigsaw-light;
-  padding: 0;
-  border-radius: 2px;
-  height: 46px;
-  position: relative;
-  min-width: 50px;
-
-  &:active, &:focus {
-    outline: 0;
-    border: 1px solid #999;
+  .csinput__input {
+    opacity: 0;
+    height: 100%;
   }
-
-  @include breakpoint(portrait) {
-    height: 61px;
-    min-width: 100px;
-    font-size: $btn_font_size--portrait;
-    border-radius: 3px;
-  }
-
   .wd_value, .wd_placeholder {
+    @include ellipsis();
     position: absolute;
     pointer-events: none;
     width: 100%;
     top: 10px;
     padding-left: 10px;
     padding-right: 40px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     @include breakpoint(portrait) {
       padding-right: 50px;
       top: 11px;
@@ -37,16 +18,5 @@
   }
   .wd_placeholder {
     color: lighten(#333, 50%);
-  }
-  .wd_input {
-    opacity: 0;
-    height: 100%;
-  }
-  .close__input {
-    ._icon {
-      .svg-close {
-        fill: #969594;
-      }
-    }
   }
 }

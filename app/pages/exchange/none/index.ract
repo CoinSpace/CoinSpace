@@ -6,7 +6,7 @@
     {{translate("Buy")}} {{crypto}}
   </div>
   {{else}}
-  <div class="csbtn _disabled">
+  <div class="csbtn csbtn--disabled">
     {{translate("Buy")}} {{crypto}}
   </div>
   {{/if}}
@@ -16,7 +16,7 @@
     {{translate("Sell")}} {{crypto}}
   </div>
   {{else}}
-  <div class="csbtn _disabled">
+  <div class="csbtn csbtn--disabled">
     {{translate("Sell")}} {{crypto}}
   </div>
   {{/if}}

@@ -1,5 +1,6 @@
 #exchange_none {
   ._title {
+    @extend .jigsaw-medium;
     margin-bottom: 10px;
     @include breakpoint(portrait) {
       font-size: $base_font_size--portrait;
@@ -24,15 +25,6 @@
         margin-left: -58px;
         margin-top: -48px;
         margin-right: 10px;
-      }
-    }
-    &._disabled {
-      background-color: $grey;
-      box-shadow: 0 2px 0 0 darken($grey, 10%);
-      color: darken($grey, 20%);
-      pointer-events: none;
-      &:hover {
-        color: darken($grey, 20%);
       }
     }
   }

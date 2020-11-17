@@ -1,47 +1,9 @@
-.confirm__remove {
-  padding: 0;
-  background-color: white;
-  min-width: 280px;
-  max-width: 450px;
-
-  @include breakpoint(portrait) {
-    width: 450px;
-  }
-
-  ._header {
-    font-size: $header_font_size;
-    text-align: center;
-    padding: 20px 20px 15px;
-    border-bottom: 1px solid $grey;
-
-    @include breakpoint(portrait) {
-      font-size: $header_font_size--portrait;
-      padding: 30px 20px 25px;
-    }
-  }
-
+.modal-confirm-remove {
   ._content {
-    @extend .jigsaw-light;
     text-align: center;
-    padding: 20px 20px 0;
     font-size: $large_font_size;
     @include breakpoint(portrait) {
       font-size: $large_font_size--portrait;
-    }
-  }
-
-  ._inputs {
-    padding: 20px;
-    background-color: white;
-    border-radius: 3px;
-
-    display: flex;
-
-    .csbtn--grey {
-      margin-right: 5px;
-    }
-    .csbtn--red, .csbtn--loading {
-      margin-left: 5px;
     }
   }
 }

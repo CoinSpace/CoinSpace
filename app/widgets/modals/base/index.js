@@ -9,16 +9,17 @@ const Modal = Ractive.extend({
   template: require('./index.ract'),
   partials: {
     content: require('./content.ract'),
+    cross: require('./cross.ract'),
   },
   onrender() {
 
     document.getElementsByTagName('html')[0].classList.add(`${this.el.id}--shown`);
-
     const self = this;
-    const fadeEl = self.find('.js__fadeEl');
+    const $modal = self.find('.js-modal');
 
-    fadeIn(fadeEl, self.get('fadeInDuration'), () => {
-      fadeEl.focus();
+    fadeIn($modal, { duration: self.get('fadeInDuration') }, () => {
+      const $container = self.find('.js-container');
+      if ($container) $container.focus();
       const onFocus = self.get('onFocus');
       if (onFocus) onFocus();
     });
@@ -26,23 +27,19 @@ const Modal = Ractive.extend({
     self.on('cancel', (context) => {
       if (!context.node) return dismissModal();
       const originalElement = context.original.srcElement || context.original.originalTarget;
-      if (originalElement.classList && originalElement.classList.contains('_cancel')) {
-        if (self.get('hasIframe')) self.fire('ios-blur');
+      if (originalElement.classList && originalElement.classList.contains('overlay__container')) {
         dismissModal();
       }
     });
 
-    self.on('ios-blur', () => {
-      // fix ios iframe focus
-      const hiddenInput = self.find('#modal-hidden-input');
-      hiddenInput.focus();
-      hiddenInput.blur();
+    self.on('close', () => {
+      self.fire('cancel');
     });
 
     function dismissModal() {
       const onDismiss = self.get('onDismiss');
       if (onDismiss) onDismiss();
-      fadeOut(fadeEl, () => {
+      fadeOut($modal, () => {
         document.getElementsByTagName('html')[0].classList.remove(`${self.el.id}--shown`);
         self.teardown();
       });

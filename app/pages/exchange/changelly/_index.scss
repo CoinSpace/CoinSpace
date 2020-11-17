@@ -6,7 +6,6 @@
     }
   }
   ._powered_by {
-    @extend .jigsaw-regular;
     text-align: center;
     @include breakpoint(portrait) {
       font-size: $base_font_size--portrait;

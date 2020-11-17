@@ -6,7 +6,7 @@
       {{>svg_touchid}}
     </div>
 
-    <h2>{{{header}}}</h2>
+    <div class="_title">{{{header}}}</div>
 
     <p class="_description">{{description}}</p>
 

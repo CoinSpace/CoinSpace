@@ -12,6 +12,10 @@ const defaults = {
     warning: true,
     title: 'Just saying...',
   },
+  success: {
+    success: true,
+    title: 'Success!',
+  },
 };
 
 let isOpen = false;
@@ -22,6 +26,7 @@ function openModal(type, data) {
   data = data || {};
   data.error = defaults[type].error;
   data.warning = defaults[type].warning;
+  data.success = defaults[type].success;
   data.title = data.title || defaults[type].title;
   data.type = type;
 
@@ -34,15 +39,11 @@ function openModal(type, data) {
   };
 
   const ractive = new Ractive({
-    el: document.getElementById('flash-modal'),
+    el: data.el || document.getElementById('flash-modal'),
     partials: {
       content: require('./content.ract'),
     },
     data,
-  });
-
-  ractive.on('close', ()=> {
-    ractive.fire('cancel');
   });
 
   return ractive;
@@ -66,7 +67,12 @@ function showInfo(data) {
   return openModal('info', data);
 }
 
+function showSuccess(data) {
+  return openModal('success', data);
+}
+
 module.exports = {
   showError,
   showInfo,
+  showSuccess,
 };

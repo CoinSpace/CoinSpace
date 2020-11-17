@@ -8,9 +8,9 @@
   <div class="_search_group">
     <label class="_label" for="search_token">{{translate("Token")}}
       <div class="input__container">
-        <input id="search_token" placeholder="{{translate("Search")}}" on-input="inputQuery" on-enter="inputQuery" class="_input" type="text" autocorrect="off" autocapitalize="off" autocomplete="off" value="{{searchQuery}}" />
+        <input id="search_token" placeholder="{{translate("Search")}}" on-input="inputQuery" on-enter="inputQuery" class="csinput__input" type="text" autocorrect="off" autocapitalize="off" autocomplete="off" value="{{searchQuery}}" />
         {{#searchQuery}}
-          <div class="close__input" on-click="clearQuery">
+          <div class="_cross" on-click="clearQuery">
             <span class="_icon">{{> svg_close}}</span>
           </div>
         {{/searchQuery}}

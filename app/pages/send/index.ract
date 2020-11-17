@@ -2,131 +2,158 @@
   <div class="send__form">
     <form>
 
-      <div class="send__address">
-        <label class="_label" for="to">{{translate("Wallet address")}}
-          <div class="input__container">
-            <input id="to" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{to}}" />
+      <div id="fp"></div>
+
+      <div class="csformgroup">
+        <div class="csformgroup__input-group">
+          <div class="csformgroup__input-group__header">
+            <label for="to">{{translate("Wallet address")}}</label>
+          </div>
+          <div class="csinput csinput--with-x">
+            <input id="to" class="csinput__input" type="text" autocorrect="off" autocapitalize="off" value="{{to}}" />
             {{#to}}
-              <div class="close__input" on-click="clearTo">
-                <span class="_icon">{{> svg_close}}</span>
+              <div class="csinput__cross" on-click="clearTo">
+                <span class="csinput__cross__icon">{{> svg_close}}</span>
               </div>
             {{/to}}
           </div>
-        </label>
-
+        </div>
         {{#qrScannerAvailable}}
-          <div class="_btn _btn-qr" on-click="open-qr">
-            <span class="_icon">
-              {{>svg_qr}}
-            </span>
+          <div class="csbtn" on-click="open-qr">
+            <span class="csbtn__icon">{{>svg_qr}}</span>
           </div>
         {{/qrScannerAvailable}}
-
-        <div class="_btn" on-click="open-geo">
-          <span class="_icon">
+        <div class="csbtn" on-click="open-geo">
+          <span class="csbtn__icon">
             {{>svg_mecto}}
           </span>
         </div>
       </div>
 
       <div class="send__amount">
-
-        <label class="_label" for="bitcoin">{{translate("Amount")}}</label>
-        <span class="_max_btn" on-click="set-max-amount">({{translate("max.")}} {{maxAmount}} {{denomination}})</span>
-
-          <div class="_input-group">
-            <input id="bitcoin" class="_input" type="number" min="0" step="any" on-input="bitcoin-to-fiat" on-focus="focusAmountInput" on-blur="blurAmountInput">
-            <span class="_currency">{{denomination}}</span>
+        <div class="csformgroup">
+          <div class="csformgroup__input-group">
+            <div class="csformgroup__input-group__header">
+              <label for="bitcoin">{{translate("Amount")}}</label>
+              <div class="csformgroup__select-container" on-click="set-max-amount">
+                ({{translate("max.")}} {{maxAmount}} {{denomination}})
+              </div>
+            </div>
+            <div class="csinput _crypto_input">
+              <input id="bitcoin" class="csinput__input" type="number" min="0" step="any" on-input="bitcoin-to-fiat" on-focus="focusAmountInput" on-blur="blurAmountInput">
+              <span class="_crypto">{{denomination}}</span>
+            </div>
+            <div class="csinput csinput--with-dropdown _fiat_input" class-_fiat_input--hidden="!currencies.length">
+              <input id="fiat" class="csinput__input fiat" type="number" min="0" step="any" on-input="fiat-to-bitcoin" on-focus="focusAmountInput" on-blur="blurAmountInput">
+              <span class="csinput__dropdown">
+                <span class="csinput__dropdown__label">{{selectedFiat}}</span>
+                <select value="{{selectedFiat}}" tabindex="-1">
+                  {{#currencies}}
+                    <option value="{{.}}">{{.}}</option>
+                  {{/currencies}}
+                </select>
+              </span>
+            </div>
           </div>
-
-          {{#if currencies.length}}
-          <div class="_input-group">
-            <input id="fiat" class="_input fiat" type="number" min="0" step="any" on-input="fiat-to-bitcoin" on-focus="focusAmountInput" on-blur="blurAmountInput">
-            <span class="_currency dropdown">
-              <select value="{{selectedFiat}}" tabindex="-1">
-                {{#currencies}}
-                  <option value="{{.}}">{{.}}</option>
-                {{/currencies}}
-              </select>
-            </span>
-          </div>
-          {{/if}}
-
+        </div>
       </div>
 
-      <div class="send__fee">
-        <label class="_label">{{translate("Fee")}}</label>
-        <div class="_select_container" class-multiple="(fees.length !== 1)">
-          +{{fee}} {{feeDenomination}}
-          {{#if fees.length > 1}}
-          <select value="{{feeIndex}}" on-change="change-fee">
-            {{#each fees as fee: index}}
-              <option value="{{index}}">+{{fee.estimate}} {{feeDenomination}} - {{fee.name}}</option>
-            {{/each}}
-          </select>
-          {{/if}}
+      <div class="csformgroup csformgroup--fee">
+        <div class="csformgroup__input-group">
+          <div class="csformgroup__input-group__header">
+            <label>{{translate("Fee")}}</label>
+            <div class="csformgroup__select-container">
+              +{{fee}} {{feeDenomination}}
+              {{#if fees.length > 1}}
+              <select value="{{feeIndex}}" on-change="change-fee">
+                {{#each fees as fee: index}}
+                  <option value="{{index}}">+{{fee.estimate}} {{feeDenomination}} - {{fee.name}}</option>
+                {{/each}}
+              </select>
+              {{/if}}
+            </div>
+            <span class="csformgroup__help" on-click="help-fee">
+              {{>svg_help}}
+            </span>
+          </div>
         </div>
-        <span class="_help" on-click="help-fee">
-          {{>svg_help}}
-        </span>
       </div>
 
       {{#isRipple}}
-      <div class="send__optional">
-        <label class="_label" for="destination-tag">{{translate("Destination tag")}}
-          <input id="destination-tag" class="_input" placeholder="{{translate("(optional)")}}" type="number" min="0" max="4294967295" step="1" />
-        </label>
-        <span class="_help" on-click="help-destination-tag">
-          {{>svg_help}}
-        </span>
+      <div class="csformgroup">
+        <div class="csformgroup__input-group">
+          <div class="csformgroup__input-group__header">
+            <label for="destination-tag">{{translate("Destination tag")}}</label>
+            <span class="csformgroup__help" on-click="help-destination-tag">
+              {{>svg_help}}
+            </span>
+          </div>
+          <div class="csinput">
+            <input id="destination-tag" class="csinput__input" placeholder="{{translate("(optional)")}}" type="number" min="0" max="4294967295" step="1" />
+          </div>
+        </div>
       </div>
 
-      <div class="send__optional last">
-        <label class="_label" for="invoice-id">{{translate("Invoice ID")}}
-          <input id="invoice-id" class="_input" placeholder="{{translate("(optional)")}}" type="text" />
-        </label>
-        <span class="_help" on-click="help-invoice-id">
-          {{>svg_help}}
-        </span>
+      <div class="csformgroup">
+        <div class="csformgroup__input-group">
+          <div class="csformgroup__input-group__header">
+            <label for="invoice-id">{{translate("Invoice ID")}}</label>
+            <span class="csformgroup__help" on-click="help-invoice-id">
+              {{>svg_help}}
+            </span>
+          </div>
+          <div class="csinput">
+            <input id="invoice-id" class="csinput__input" placeholder="{{translate("(optional)")}}" type="text" />
+          </div>
+        </div>
       </div>
       {{/isRipple}}
 
       {{#isStellar}}
-      <div class="send__optional last">
-        <label class="_label" for="memo">{{translate("Memo")}}
-          <div class="input__container">
-            <input id="memo" class="_input" placeholder="{{translate("(optional)")}}" type="text" maxlength="28" />
+      <div class="csformgroup">
+        <div class="csformgroup__input-group">
+          <div class="csformgroup__input-group__header">
+            <label for="memo">{{translate("Memo")}}</label>
+            <span class="csformgroup__help" on-click="help-memo">
+              {{>svg_help}}
+            </span>
           </div>
-        </label>
-        <span class="_help" on-click="help-memo">
-          {{>svg_help}}
-        </span>
+          <div class="csinput">
+            <input id="memo" class="csinput__input" placeholder="{{translate("(optional)")}}" type="text" maxlength="28" />
+          </div>
+        </div>
       </div>
       {{/isStellar}}
 
       {{#isEOS}}
-      <div class="send__optional last">
-        <label class="_label" for="memo">{{translate("Memo")}}
-          <div class="input__container">
-            <input id="memo" class="_input" placeholder="{{translate("(optional)")}}" type="text" maxlength="256" />
+      <div class="csformgroup">
+        <div class="csformgroup__input-group">
+          <div class="csformgroup__input-group__header">
+            <label for="memo">{{translate("Memo")}}</label>
+            <span class="csformgroup__help" on-click="help-memo">
+              {{>svg_help}}
+            </span>
           </div>
-        </label>
-        <span class="_help" on-click="help-memo">
-          {{>svg_help}}
-        </span>
+          <div class="csinput">
+            <input id="memo" class="csinput__input" placeholder="{{translate("(optional)")}}" type="text" maxlength="256" />
+          </div>
+        </div>
       </div>
       {{/isEOS}}
 
       {{#isEthereum}}
-      <div class="send__optional last">
-        <label class="_label" for="gas-limit">{{translate("Gas limit")}}
-          <div class="input__container">
-            <input id="gas-limit" class="_input" type="number" on-input="gas-limit" twoway="false" min="0" step="1" value="{{gasLimit}}" />
+      <div class="csformgroup">
+        <div class="csformgroup__input-group">
+          <div class="csformgroup__input-group__header">
+            <label for="gas-limit">{{translate("Gas limit")}}</label>
+            <span class="csformgroup__help" on-click="help-gas-limit">
+              {{>svg_help}}
+            </span>
           </div>
-        </label>
-        <span class="_help" on-click="help-gas-limit">
-          {{>svg_help}}
-        </span>
+          <div class="csinput">
+            <input id="gas-limit" class="csinput__input" type="number" on-input="gas-limit" twoway="false" min="0" step="1" value="{{gasLimit}}" />
+          </div>
+        </div>
       </div>
       {{/isEthereum}}
 
@@ -135,8 +162,8 @@
 
   <div class="send__buttons">
     {{#if isLoading}}
-    <div class="csbtn--loading">
-      <span class="_icon">
+    <div class="csbtn csbtn--loading">
+      <span class="csbtn__icon">
         {{>svg_refresh}}
       </span>
     </div>

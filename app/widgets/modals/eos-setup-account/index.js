@@ -4,7 +4,7 @@ const Ractive = require('widgets/modals/base');
 const { getWallet } = require('lib/wallet');
 const { initWallet } = require('lib/wallet');
 const details = require('lib/wallet/details');
-const { showError } = require('widgets/modals/flash');
+const { showError, showSuccess } = require('widgets/modals/flash');
 const emitter = require('lib/emitter');
 
 function open() {
@@ -14,7 +14,6 @@ function open() {
     },
     data: {
       isLoading: false,
-      success: false,
       accountName: '',
       showInstruction: false,
       price: '',
@@ -35,7 +34,7 @@ function open() {
         ractive.set('memo', result.memo);
       } else {
         details.set('eosAccountName', accountName).then(() => {
-          ractive.set('success', true);
+          showSuccess({ el: ractive.el, message: 'Account has been successfully set up', fadeInDuration: 0 });
           syncWallet();
         });
       }

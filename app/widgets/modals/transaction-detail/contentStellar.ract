@@ -1,48 +1,45 @@
 {{#transaction}}
-<div class="modal _cancel">
-  <div class="modal__content transaction__detail">
-    <span class="modal__cancel" on-click="close">
-      {{>svg_close}}
-    </span>
+<div class="modal-with-cross modal-transaction-detail">
 
-    <div class="_amount {{isIncoming ? 'green' : 'red'}}">
+  <div class="_header">
+    <div class="_title {{isIncoming ? 'green' : 'red'}}">
       {{isIncoming ? '+' : ''}} {{toUnitString(amount)}}
     </div>
-
-    <div class='_time'>{{formatTimestamp(timestamp)}}</div>
-
-    <div class="detail__strings">
-
-      <h3 class="_title">{{translate("Transaction Id:")}}</h3>
-      <a href="" onclick="return window.safeOpen('https://stellar.expert/explorer/public/tx/{{id}}', '_blank');" class="_value">{{id}}</a>
-
-      <h3 class="_title">{{translate("Transaction Fee:")}}</h3>
-      <code class="_value">{{toUnitString(fee)}}</code>
-
-      <h3 class="_title">{{translate("From")}}:</h3>
-      <code class="_value">{{from}}</code>
-
-      {{#if memo}}
-      <h3 class="_title">{{translate("Memo")}}:</h3>
-      <code class="_value">{{memo}}</code>
-      {{/if}}
-
-      <h3 class="_title">{{translate("Payment operations:")}}</h3>
-      <code class="_value">
-      {{#if operations[0]}}
-        {{#each operations}}
-          {{#if type === 'payment'}}
-            <div>{{translate('Pay (:amount) XLM to :destination', {amount: toUnitString(amount), destination: destination})}}</div>
-          {{elseif type === 'createAccount'}}
-            <div>{{translate('Created Account :destination with balance :amount XLM', {amount: toUnitString(amount), destination: destination})}}</div>
-          {{/if}}
-        {{/each}}
-      {{else}}
-      -
-      {{/if}}
-      </code>
-
-    </div>
+    <div class='_status'>{{formatTimestamp(timestamp)}}</div>
   </div>
+
+  <div class="_content">
+    {{>cross}}
+
+    <label>{{translate("Transaction Id:")}}</label>
+    <a href="" onclick="return window.safeOpen('https://stellar.expert/explorer/public/tx/{{id}}', '_blank');" class="cscode">{{id}}</a>
+
+    <label>{{translate("Transaction Fee:")}}</label>
+    <code class="cscode">{{toUnitString(fee)}}</code>
+
+    <label>{{translate("From")}}:</label>
+    <code class="cscode">{{from}}</code>
+
+    {{#if memo}}
+    <label>{{translate("Memo")}}:</label>
+    <code class="cscode">{{memo}}</code>
+    {{/if}}
+
+    <label>{{translate("Payment operations:")}}</label>
+    <code class="cscode">
+    {{#if operations[0]}}
+      {{#each operations}}
+        {{#if type === 'payment'}}
+          <div>{{translate('Pay (:amount) XLM to :destination', {amount: toUnitString(amount), destination: destination})}}</div>
+        {{elseif type === 'createAccount'}}
+          <div>{{translate('Created Account :destination with balance :amount XLM', {amount: toUnitString(amount), destination: destination})}}</div>
+        {{/if}}
+      {{/each}}
+    {{else}}
+    -
+    {{/if}}
+    </code>
+  </div>
+
 </div>
 {{/transaction}}

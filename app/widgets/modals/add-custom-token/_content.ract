@@ -7,9 +7,9 @@
         <div class="_contract_address_group">
           <label class="_label" for="contract_address">{{translate("Contract address")}}
             <div class="input__container">
-              <input id="contract_address" class="_input" type="text" on-enter="addToken" autocorrect="off" autocapitalize="off" value="{{address}}" />
+              <input id="contract_address" class="csinput__input" type="text" on-enter="addToken" on-input="inputAddress" autocorrect="off" autocapitalize="off" value="{{address}}" />
               {{#address}}
-                <div class="close__input" on-click="clearAddress">
+                <div class="_cross" on-click="clearAddress">
                   <span class="_icon">{{> svg_close}}</span>
                 </div>
               {{/address}}

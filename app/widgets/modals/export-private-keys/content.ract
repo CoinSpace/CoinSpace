@@ -1,38 +1,51 @@
-<div class="modal _cancel">
-  <div class="modal__content export_private_keys">
-    <div class="_header">
-      <span class="modal__cancel" on-click="close">
-        {{>svg_close}}
-      </span>
-      <h2 class="_title">{{translate("Export private keys")}}</h2>
-    </div>
+<div class="modal modal-export-private-keys">
 
-    {{#if isShown}}
-      <div class="_content">
-        <div class="_label">{{translate("Comma-separated list")}}</div>
-        <code class="_keys">{{privateKeys}}</code>
+  <div class="_header">
+    {{translate("Export private keys")}}
+  </div>
+
+  {{#if isShown}}
+  <div class="_content">
+    <div class="csformgroup csformgroup--readonly">
+      <div class="csformgroup__input-group">
+        <div class="csformgroup__input-group__header">
+          <label>{{translate("Comma-separated list")}}</label>
+        </div>
+        <div class="csinput csinput--multi">
+          <div class="csinput__input" tabindex="0">{{privateKeys}}</div>
+        </div>
       </div>
-
-      {{#isPhonegap}}
-      <div class="csbtn--icon" on-click="export-keys">
-        <span class="_icon">
-          {{>svg_expand}}
+    </div>
+  </div>
+  <div class="_footer">
+    {{#if isPhonegap}}
+    <div class="csbtn csbtn--white" on-click="close">{{translate("Cancel")}}</div>
+    <div class="csbtn" on-click="export-keys">
+      <span class="csbtn__icon">
+        {{>svg_expand}}
+      </span>
+    </div>
+    {{else}}
+    <div class="csbtn" on-click="close">{{translate("Close")}}</div>
+    {{/if}}
+  </div>
+  {{else}}
+  <div class="_content">
+    <label>{{translate("Warning!")}}</label>
+    <div>{{translate("Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you'd like them to have access to your funds.")}}</div>
+  </div>
+  <div class="_footer">
+    <div class="csbtn csbtn--white" on-click="close">{{translate("Cancel")}}</div>
+    {{#if isLoading}}
+      <div class="csbtn csbtn--loading">
+        <span class="csbtn__icon">
+          {{>svg_refresh}}
         </span>
       </div>
-      {{/isPhonegap}}
-
     {{else}}
-      <div class="_content">
-        <div class="_label">{{translate("Warning!")}}</div>
-        <p class="_description">
-          {{translate("Your private keys are keys to your funds so DO NOT SHARE them with anyone unless you'd like them to have access to your funds.")}}
-        </p>
-      </div>
-
-      <div class="confirm__buttons">
-        <div class="csbtn" on-click="show-keys">{{translate("Show")}}</div>
-      </div>
+      <div class="csbtn" on-click="show-keys">{{translate("Show")}}</div>
     {{/if}}
-
   </div>
+  {{/if}}
+
 </div>

@@ -1,50 +1,48 @@
 {{#transaction}}
-<div class="modal _cancel">
-  <div class="modal__content transaction__detail">
-    <span class="modal__cancel" on-click="close">
-      {{>svg_close}}
-    </span>
+<div class="modal-with-cross modal-transaction-detail">
 
+  <div class="_header">
     {{#if isFailed(this)}}
-      <div class="_status">{{translate("Failed")}}</div>
+    <div class="_title">{{translate("Failed")}}</div>
     {{/if}}
-
-    <div class="_amount {{isIncoming ? 'green' : 'red'}}">
+    <div class="_title {{isIncoming ? 'green' : 'red'}}">
       {{isIncoming ? '+' : ''}} {{toUnitString(amount)}}
     </div>
 
     {{#if isConfirmed(confirmations)}}
-      <div class='_time'>{{formatTimestamp(timestamp)}}</div>
-      <div class='_time'>{{formatConfirmations(confirmations)}}</div>
+      <div class='_status'>
+        <div>{{formatTimestamp(timestamp)}}</div>
+        <div>{{formatConfirmations(confirmations)}}</div>
+      </div>
     {{else}}
-      <div class='_time'>{{translate("pending confirmation")}}</div>
+      <div class='_status'>{{translate("pending confirmation")}}</div>
     {{/if}}
-
-    <div class="detail__strings">
-
-      <h3 class="_title">{{translate("Transaction Id:")}}</h3>
-      <a href="" onclick="return window.safeOpen('https://blockchair.com/ethereum/transaction/{{id}}?from=coinwallet', '_blank');" class="_value">{{id}}</a>
-
-      {{#unless token}}
-        <h3 class="_title">{{translate("Transaction Fee:")}}</h3>
-        {{#if isPendingFee}}
-          <code class="_value">{{translate("pending confirmation")}}</code>
-        {{else}}
-          <code class="_value">{{toUnitString(fee)}}</code>
-        {{/if}}
-      {{/unless}}
-
-      <h3 class="_title">{{translate("From")}}:</h3>
-      <code class="_value">
-        <span class="_address">{{from}}</span>
-      </code>
-
-      <h3 class="_title">{{translate("To")}}:</h3>
-      <code class="_value">
-        <span class="_address">{{to}}</span>
-      </code>
-    </div>
-
   </div>
+
+  <div class="_content">
+    {{>cross}}
+    <label>{{translate("Transaction Id:")}}</label>
+    <a href="" onclick="return window.safeOpen('https://blockchair.com/ethereum/transaction/{{id}}?from=coinwallet', '_blank');" class="cscode">{{id}}</a>
+
+    {{#unless token}}
+      <label>{{translate("Transaction Fee:")}}</label>
+      {{#if isPendingFee}}
+        <code class="cscode">{{translate("pending confirmation")}}</code>
+      {{else}}
+        <code class="cscode">{{toUnitString(fee)}}</code>
+      {{/if}}
+    {{/unless}}
+
+    <label>{{translate("From")}}:</label>
+    <code class="cscode">
+      <span class="_address">{{from}}</span>
+    </code>
+
+    <label>{{translate("To")}}:</label>
+    <code class="cscode">
+      <span class="_address">{{to}}</span>
+    </code>
+  </div>
+
 </div>
 {{/transaction}}

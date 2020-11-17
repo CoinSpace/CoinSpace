@@ -2,18 +2,4 @@
   ._words {
     margin-bottom: 40px;
   }
-  ._word {
-    display: flex;
-    margin-bottom: 20px;
-    text-align: left;
-    .input__container {
-      @extend .csinput_with_x;
-    }
-    ._label {
-      @include noselect;
-      cursor: pointer;
-      display: block;
-      flex: 1;
-    }
-  }
 }

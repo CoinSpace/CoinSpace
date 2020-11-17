@@ -4,7 +4,7 @@ const Ractive = require('widgets/modals/base');
 const emitter = require('lib/emitter');
 const { toAtom } = require('lib/convert');
 const { toUnitString } = require('lib/convert');
-const { showInfo } = require('widgets/modals/flash');
+const { showInfo, showError, showSuccess } = require('widgets/modals/flash');
 const _ = require('lodash');
 const { unlock, lock } = require('lib/wallet/security');
 
@@ -13,8 +13,6 @@ function open(data) {
   const ractive = new Ractive({
     partials: {
       content: require('./_content.ract'),
-      error: require('../error.ract'),
-      success: require('../success.ract'),
     },
     data: extendData(data),
   });
@@ -48,12 +46,18 @@ function open(data) {
         return ractive.set('sending', false);
       }
 
+      console.log('tx', tx);
+
       wallet.sendTx(tx, (err, historyTx) => {
         if (err) return handleTransactionError(err);
 
-        ractive.set('confirmation', false);
-        ractive.set('success', true);
-        ractive.set('onDismiss', data.onSuccessDismiss);
+        if (data.onSuccessDismiss) data.onSuccessDismiss();
+        showSuccess({
+          el: ractive.el,
+          title: 'Transaction Successful',
+          message: 'Your transaction will appear in your history tab shortly.',
+          fadeInDuration: 0,
+        });
 
         // update balance & tx history
         emitter.emit('tx-sent');
@@ -78,14 +82,19 @@ function open(data) {
   }
 
   function handleTransactionError(err) {
-    ractive.set('confirmation', false);
     if (err.message === 'cs-node-error') {
       err.message = 'Network node error. Please try again later.';
-      ractive.set('interpolations', { network: _.upperFirst(wallet.networkName) });
+      err.interpolations = { network: _.upperFirst(wallet.networkName) };
     } else {
       console.error(err);
     }
-    ractive.set('error', err.message);
+    showError({
+      el: ractive.el,
+      title: 'Transaction Failed',
+      message: err.message,
+      interpolations: err.interpolations,
+      fadeInDuration: 0,
+    });
   }
 
   return ractive;
@@ -95,7 +104,6 @@ function extendData(data) {
 
   const { wallet } = data;
 
-  data.confirmation = true;
   data.feeSign = data.importTxOptions ? '-' : '+';
   data.isBitcoin = wallet.networkName === 'bitcoin';
 

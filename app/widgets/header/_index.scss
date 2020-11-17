@@ -112,20 +112,6 @@
   }
 }
 
-// up to 15 decimals
-.ethereum, .ripple, .stellar {
-  .widget-header .header__balance {
-    @media (max-width: 450px) {
-      ._amount {
-        font-size: $header_font_size;
-      }
-      ._currency {
-        padding-top: 0;
-      }
-    }
-  }
-}
-
 .blocked .widget-header {
   .header__balance.cross, .header__balance.show {
     display: flex;

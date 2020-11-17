@@ -26,7 +26,7 @@
     padding: 20px 20px 0;
 
     .input__container {
-      @extend .csinput_with_x;
+      // @extend .csinput_with_x;
     }
 
     ._label {
@@ -41,7 +41,7 @@
     }
 
     ._input_single {
-      @extend .csinput;
+      // @extend .csinput;
       margin-top: 5px;
     }
 

@@ -42,7 +42,6 @@
 
   ._message {
     text-align: center;
-    @extend .jigsaw-regular;
     @include wrapdat;
     @include breakpoint(portrait) {
       font-size: $base_font_size--portrait;

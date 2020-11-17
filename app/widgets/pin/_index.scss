@@ -23,20 +23,20 @@
     opacity: 1;
     transform: translateY(0);
   }
-  h2 {
-    font-size: $header_font_size;
-    margin-bottom: 10px;
-    @include breakpoint(portrait) {
-      font-size: $header_font_size--portrait;
-      margin-bottom: 20px;
-    }
-  }
-
   ._header {
     flex: 1;
     display: flex;
     flex-flow: column;
     justify-content: center;
+    ._title {
+      font-size: $header_font_size;
+      margin-bottom: 10px;
+      @include breakpoint(portrait) {
+        font-size: $header_font_size--portrait;
+        margin-bottom: 20px;
+      }
+      @extend .jigsaw-medium;
+    }
     ._top {
       flex: 1;
       display: flex;
@@ -85,8 +85,10 @@
       margin: 0 auto;
       margin-top: 5px;
       margin-bottom: 10px;
-      opacity: 0.3;
-      animation:  infinite-spinning 1s linear infinite;
+      animation: infinite-spinning 1s linear infinite;
+      .svg-refresh {
+        fill: $grey;
+      }
       @include breakpoint(portrait) {
         width: 45px;
         height: 45px;
@@ -117,7 +119,6 @@
       overflow: hidden;
       text-overflow: ellipsis;
       margin: 0 10px 5px 10px;
-      @extend .jigsaw-regular;
       cursor: pointer;
       &:before {
         content: '';

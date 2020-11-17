@@ -19,10 +19,6 @@ function open(callback) {
     },
   });
 
-  ractive.on('close', () => {
-    ractive.fire('cancel');
-  });
-
   ractive.on('submit-details', async () => {
     const username = ractive.get('username').trim();
     if (!username) {

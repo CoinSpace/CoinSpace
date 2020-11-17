@@ -1,24 +1,22 @@
-<div class="modal _cancel">
-  <div class="modal__content confirm__remove">
+<div class="modal modal-confirm-remove">
 
-    <h3 class="_header">{{translate("Remove")}} {{name}}</h3>
+  <div class="_header">{{translate("Remove")}} {{name}}</div>
 
-    <div class="_content">
-      {{translate("Are you sure?")}}
-    </div>
-
-    <div class="_inputs">
-      <div class="csbtn--grey _cancel">{{translate("Cancel")}}</div>
-      {{#if removing}}
-        <div class="csbtn--loading">
-          <span class="_icon">
-            {{>svg_refresh}}
-          </span>
-        </div>
-      {{else}}
-        <div class="csbtn--red" on-click="remove">{{translate("Remove")}}</div>
-      {{/if}}
-    </div>
-
+  <div class="_content">
+    {{translate("Are you sure?")}}
   </div>
+
+  <div class="_footer">
+    <div class="csbtn csbtn--white" on-click="close">{{translate("Cancel")}}</div>
+    {{#if removing}}
+      <div class="csbtn csbtn--loading">
+        <span class="csbtn__icon">
+          {{>svg_refresh}}
+        </span>
+      </div>
+    {{else}}
+      <div class="csbtn csbtn--red" on-click="remove">{{translate("Remove")}}</div>
+    {{/if}}
+  </div>
+
 </div>

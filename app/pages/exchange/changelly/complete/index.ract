@@ -4,7 +4,7 @@
     <div class="_back" on-click="done">
       <span class="_icon"></span> {{translate("Done")}}
     </div>
-    <h2 class="_subtitle">{{translate("Exchange complete!")}}</h2>
+    <div class="_subtitle">{{translate("Exchange complete!")}}</div>
   </div>
 
   <div class="_complete_icon">

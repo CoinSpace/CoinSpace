@@ -1,49 +1,44 @@
 {{#transaction}}
-<div class="modal _cancel">
-  <div class="modal__content transaction__detail">
-    <span class="modal__cancel" on-click="close">
-      {{>svg_close}}
-    </span>
+<div class="modal-with-cross modal-transaction-detail">
 
+  <div class="_header">
     {{#if isFailed(this)}}
-      <div class="_status">{{translate("Failed")}}</div>
+      <div class="_title">{{translate("Failed")}}</div>
     {{/if}}
-
-    <div class="_amount {{isIncoming ? 'green' : 'red'}}">
+    <div class="_title {{isIncoming ? 'green' : 'red'}}">
       {{isIncoming ? '+' : ''}} {{toUnitString(amount)}}
     </div>
-
-    <div class='_time'>{{formatTimestamp(timestamp)}}</div>
-
-    <div class="detail__strings">
-
-      <h3 class="_title">{{translate("Transaction Id:")}}</h3>
-      <a href="" onclick="return window.safeOpen('https://xrpcharts.ripple.com/#/transactions/{{id}}', '_blank');" class="_value">{{id}}</a>
-
-      <h3 class="_title">{{translate("Transaction Fee:")}}</h3>
-      <code class="_value">{{toUnitString(fee)}}</code>
-
-      <h3 class="_title">{{translate("From")}}:</h3>
-      <code class="_value">
-        <span class="_address">{{from}}</span>
-      </code>
-
-      <h3 class="_title">{{translate("To")}}:</h3>
-      <code class="_value">
-        <span class="_address">{{to}}</span>
-      </code>
-
-      {{#if destinationTag !== undefined}}
-      <h3 class="_title">{{translate("Destination tag")}}:</h3>
-      <code class="_value">{{destinationTag}}</code>
-      {{/if}}
-
-      {{#if invoiceId}}
-      <h3 class="_title">{{translate("Invoice ID")}}:</h3>
-      <code class="_value">{{invoiceId}}</code>
-      {{/if}}
-    </div>
-
+    <div class='_status'>{{formatTimestamp(timestamp)}}</div>
   </div>
+
+  <div class="_content">
+    {{>cross}}
+    <label>{{translate("Transaction Id:")}}</label>
+    <a href="" onclick="return window.safeOpen('https://xrpcharts.ripple.com/#/transactions/{{id}}', '_blank');" class="cscode">{{id}}</a>
+
+    <label>{{translate("Transaction Fee:")}}</label>
+    <code class="cscode">{{toUnitString(fee)}}</code>
+
+    <label>{{translate("From")}}:</label>
+    <code class="cscode">
+      <span class="_address">{{from}}</span>
+    </code>
+
+    <label>{{translate("To")}}:</label>
+    <code class="cscode">
+      <span class="_address">{{to}}</span>
+    </code>
+
+    {{#if destinationTag !== undefined}}
+    <label>{{translate("Destination tag")}}:</label>
+    <code class="cscode">{{destinationTag}}</code>
+    {{/if}}
+
+    {{#if invoiceId}}
+    <label>{{translate("Invoice ID")}}:</label>
+    <code class="cscode">{{invoiceId}}</code>
+    {{/if}}
+  </div>
+
 </div>
 {{/transaction}}

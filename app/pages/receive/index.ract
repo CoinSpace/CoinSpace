@@ -1,29 +1,32 @@
 <div class-hidden="needToSetupEos">
-  <h3 class="_title">
-    {{translate("Your wallet address")}}
 
-    {{#if addressTypes.length > 1}}
-    <div class="_select_container">
-      {{getAddressTypeLabel(addressType)}}
-      <select value="{{addressType}}" on-change="change-address-type">
-        {{#each addressTypes}}
-          <option value="{{this}}">{{getAddressTypeOption(this)}}</option>
-        {{/each}}
-      </select>
+  <div class="csformgroup csformgroup--readonly">
+    <div class="csformgroup__input-group">
+      <div class="csformgroup__input-group__header">
+        <label>{{translate("Your wallet address")}}</label>
+        {{#if addressTypes.length > 1}}
+        <div class="csformgroup__select-container">
+          {{getAddressTypeLabel(addressType)}}
+          <select value="{{addressType}}" on-change="change-address-type">
+            {{#each addressTypes}}
+              <option value="{{this}}">{{getAddressTypeOption(this)}}</option>
+            {{/each}}
+          </select>
+        </div>
+        {{/if}}
+        {{#if addressTooltip}}
+        <span class="csformgroup__help" on-click="help-address">
+          {{>svg_help}}
+        </span>
+        {{/if}}
+      </div>
+      <div class="csinput">
+        <div class="csinput__input" tabindex="0">{{address}}</div>
+      </div>
     </div>
-    {{/if}}
 
-    {{#if addressTooltip}}
-    <span class="_help" on-click="help-address">
-      {{>svg_help}}
-    </span>
-    {{/if}}
-  </h3>
-
-  <div class="address__box">
-    <span class="_address">{{address}}</span>
-    <div class="_btn" on-click="show-qr">
-      <span class="_icon">
+    <div class="csbtn" on-click="show-qr">
+      <span class="csbtn__icon">
         {{>svg_expand}}
       </span>
     </div>
@@ -33,10 +36,10 @@
 
   <div class="receive__label">
   {{^broadcasting}}
-    <h3 class="_title">{{translate("Mecto")}}</h3>
+    <div class="_title">{{translate("Mecto")}}</div>
   {{/broadcasting}}
   {{#broadcasting}}
-    <h3 id="broadcast_text" class="_title animate__pulseFade">{{translate("Broadcasting your location...")}}</h3>
+    <div id="broadcast_text" class="_title animate__pulseFade">{{translate("Broadcasting your location...")}}</div>
   {{/broadcasting}}
   <span class="_help" on-click="help-mecto">
     {{>svg_help}}

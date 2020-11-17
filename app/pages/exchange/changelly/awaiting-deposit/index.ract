@@ -4,7 +4,7 @@
     <div class="_back" on-click="cancel">
       <span class="_icon"></span> {{translate("Cancel")}}
     </div>
-    <h2 class="_subtitle">{{translate("Awaiting deposit...")}}</h2>
+    <div class="_subtitle">{{translate("Awaiting deposit...")}}</div>
   </div>
 
   <div class="instructions">
@@ -16,11 +16,17 @@
     })}}
   </div>
 
-  <h3 class="_title">{{translate("Deposit address", {symbol: depositSymbol})}}</h3>
-  <div class="input__box">
-    <span class="_input">{{depositAddress}}</span>
-    <div class="_btn" on-click="show-qr">
-      <span class="_icon">
+  <div class="csformgroup csformgroup--readonly">
+    <div class="csformgroup__input-group">
+      <div class="csformgroup__input-group__header">
+        <label>{{translate("Deposit address", {symbol: depositSymbol})}}</label>
+      </div>
+      <div class="csinput">
+        <div class="csinput__input" tabindex="0">{{depositAddress}}</div>
+      </div>
+    </div>
+    <div class="csbtn" on-click="show-qr">
+      <span class="csbtn__icon">
         {{>svg_expand}}
       </span>
     </div>
@@ -31,30 +37,37 @@
   {{/isPhonegap}}
 
   {{#extraId}}
-  <h3 class="_title">
-    {{translate("Extra Id")}}
-    <span class="_help" on-click="help-extra-id">
-      {{>svg_help}}
-    </span>
-  </h3>
-  <div class="input__box">
-    <span class="_input">{{extraId}}</span>
+  <div class="csformgroup csformgroup--readonly">
+    <div class="csformgroup__input-group">
+      <div class="csformgroup__input-group__header">
+        <label>{{translate("Extra Id")}}</label>
+      </div>
+      <div class="csinput">
+        <div class="csinput__input" tabindex="0">{{extraId}}</div>
+      </div>
+    </div>
   </div>
   {{/extraId}}
 
-  <h3 class="_title">{{translate("Exchange rate")}}</h3>
-  <div class="_description">
-    1 {{depositSymbol}} ≈ {{rate}} {{toSymbol}}
+  <div class="csformgroup csformgroup--readonly">
+    <div class="csformgroup__input-group">
+      <div class="csformgroup__input-group__header">
+        <label>{{translate("Exchange rate")}}</label>
+      </div>
+      1 {{depositSymbol}} ≈ {{rate}} {{toSymbol}}
+    </div>
   </div>
 
-  <h3 class="_title">
-    {{translate("Network fee")}}
-    <span class="_help _left" on-click="help-network-fee">
-      {{>svg_help}}
-    </span>
-  </h3>
-  <div class="_description">
-    {{networkFee}} {{toSymbol}}
+  <div class="csformgroup csformgroup--readonly">
+    <div class="csformgroup__input-group">
+      <div class="csformgroup__input-group__header">
+        <label>{{translate("Network fee")}}</label>
+        <span class="csformgroup__help" on-click="help-network-fee">
+          {{>svg_help}}
+        </span>
+      </div>
+      {{networkFee}} {{toSymbol}}
+    </div>
   </div>
 
   <div class="_description">

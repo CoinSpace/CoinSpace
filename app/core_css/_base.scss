@@ -14,7 +14,7 @@ form,fieldset,legend,
 table,th,td,caption,
 figure,
 hr {
-  @extend .jigsaw-medium;
+  @extend .jigsaw-regular;
   margin:0;
   padding:0;
 }
@@ -36,7 +36,7 @@ header,hgroup,menu,nav,section{
 }
 
 
-strong,b,mark {
+strong,b,mark,label {
   @extend .jigsaw-medium;
 }
 
@@ -126,5 +126,32 @@ a {
 select {
   option {
     font-weight: 400;
+  }
+}
+
+textarea,
+select,
+input[type="email"],
+input[type="number"],
+input[type="file"],
+input[type="text"] {
+  width: 100%;
+  color: $foreground;
+  font-size: $base_font_size;
+  text-align: left;
+  -moz-appearance: textfield;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  @include breakpoint(portrait) {
+    font-size: $base_font_size--portrait;
+  }
+  &:invalid {
+    box-shadow: none;
   }
 }

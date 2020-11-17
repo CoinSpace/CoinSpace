@@ -15,14 +15,10 @@ module.exports = function(data) {
     data,
   });
 
-  const canvas = ractive.find('#qr-canvas');
+  const canvas = ractive.find('.js-canvas');
   const name = data.name || '';
   const qr = qrcode.encode(name + ':' + data.address);
   canvas.innerHTML = qr;
-
-  ractive.on('close', ()=> {
-    ractive.fire('cancel');
-  });
 
   function mailto() {
     return 'mailto:?body=' + encodeURIComponent(data.address + '\n\nSent from Coin Wallet\nhttps://coin.space');

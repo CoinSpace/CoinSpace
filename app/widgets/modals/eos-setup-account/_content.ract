@@ -1,96 +1,99 @@
-<div class="modal _cancel">
-  <div class="modal__content eos_setup_account {{#success}}_success{{/success}}">
+<div class="modal modal-eos-setup-account">
 
-    {{#if success}}
-      <div class="_responseIcon">
-        {{>svg_success}}
-      </div>
-      <h3 class="_responseTitle">{{translate("Account has been successfully set up")}}</h3>
-      <div class="_inputs">
-        <div class="_cancel">{{translate("Close")}}</div>
-      </div>
-    {{else}}
-      <h3 class="_header">{{translate("Setup EOS account")}}</h3>
-      {{#if showInstruction}}
-      <div class="_content">
-        <div class="_instructions">
-          {{{translate("To create a new account you need to make an EOS transfer (amount greater than :minAmount) with the following data from an exchange or other EOS wallet.", {
-            minAmount: price
-          })}}}
+  <div class="_header">{{translate("Setup EOS account")}}</div>
+  {{#if showInstruction}}
+  <div class="_content">
+    <div class="_instructions">
+      {{{translate("To create a new account you need to make an EOS transfer (amount greater than :minAmount) with the following data from an exchange or other EOS wallet.", {
+        minAmount: price
+      })}}}
+    </div>
+
+    <div class="csformgroup csformgroup--readonly">
+      <div class="csformgroup__input-group">
+        <div class="csformgroup__input-group__header">
+          <label>{{translate("Address")}}</label>
         </div>
-        <h3 class="_title">{{translate("Address")}}</h3>
-        <div class="_address_box">
-          {{#if isPhonegap}}
-          <span class="_phonegap_address">coinappsetup</span>
-          <div class="_btn" on-click="share-address">
-            <span class="_icon">
-              {{>svg_expand}}
-            </span>
-          </div>
-          {{else}}
-          <span class="_address">coinappsetup</span>
-          {{/if}}
-        </div>
-        <h3 class="_title">{{translate("Memo")}}</h3>
-        <div class="_memo_box">
-          {{#if isPhonegap}}
-          <span class="_phonegap_memo">{{memo}}</span>
-          <div class="_btn" on-click="share-memo">
-            <span class="_icon">
-              {{>svg_expand}}
-            </span>
-          </div>
-          {{else}}
-          <span class="_memo">{{memo}}</span>
-          {{/if}}
-        </div>
-        <div class="_description">
-          {{translate("The extra amount will be deposited to the created account.")}}
+        <div class="csinput">
+          <div class="csinput__input" tabindex="0">coinappsetup</div>
         </div>
       </div>
-      <div class="_inputs">
-        <div class="csbtn--grey _back" on-click="back">{{translate("Back")}}</div>
-        {{#if isLoading}}
-          <div class="csbtn--loading">
-            <span class="_icon">
-              {{>svg_refresh}}
-            </span>
-          </div>
-        {{else}}
-          <div class="csbtn" on-click="confirm">{{translate("Check")}}</div>
-        {{/if}}
-      </div>
-      {{else}}
-      <div class="_content">
-        <div class="_account_name_group">
-          <label class="_label" for="account_name">{{translate("Account name")}}
-            <div class="input__container">
-              <input id="account_name" class="_input" type="text" maxlength="12" autocorrect="off" autocapitalize="off" value="{{accountName}}" />
-              {{#accountName}}
-                <div class="close__input" on-click="clearAccountName">
-                  <span class="_icon">{{> svg_close}}</span>
-                </div>
-              {{/accountName}}
-            </div>
-          </label>
-        </div>
-        <div class="_description">
-          {{translate("The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.")}}
-        </div>
-      </div>
-      <div class="_inputs">
-        <div class="csbtn--grey _cancel">{{translate("Cancel")}}</div>
-        {{#if isLoading}}
-          <div class="csbtn--loading">
-            <span class="_icon">
-              {{>svg_refresh}}
-            </span>
-          </div>
-        {{else}}
-          <div class="csbtn" on-click="confirm">{{translate("Confirm")}}</div>
-        {{/if}}
+      {{#if isPhonegap}}
+      <div class="csbtn" on-click="share-address">
+        <span class="csbtn__icon">
+          {{>svg_expand}}
+        </span>
       </div>
       {{/if}}
+    </div>
+
+    <div class="csformgroup csformgroup--readonly">
+      <div class="csformgroup__input-group">
+        <div class="csformgroup__input-group__header">
+          <label>{{translate("Memo")}}</label>
+        </div>
+        <div class="csinput" class-csinput--multi="!isPhonegap">
+          <div class="csinput__input" tabindex="0">{{memo}}</div>
+        </div>
+      </div>
+      {{#if isPhonegap}}
+      <div class="csbtn" on-click="share-memo">
+        <span class="csbtn__icon">
+          {{>svg_expand}}
+        </span>
+      </div>
+      {{/if}}
+    </div>
+
+    <div>
+      {{translate("The extra amount will be deposited to the created account.")}}
+    </div>
+  </div>
+
+  <div class="_footer">
+    <div class="csbtn csbtn--white _back" on-click="back">{{translate("Back")}}</div>
+    {{#if isLoading}}
+      <div class="csbtn csbtn--loading">
+        <span class="csbtn__icon">
+          {{>svg_refresh}}
+        </span>
+      </div>
+    {{else}}
+      <div class="csbtn" on-click="confirm">{{translate("Check")}}</div>
     {{/if}}
   </div>
+  {{else}}
+  <div class="_content">
+    <div class="csformgroup">
+      <div class="csformgroup__input-group">
+        <div class="csformgroup__input-group__header">
+          <label for="account_name">{{translate("Account name")}}</label>
+        </div>
+        <div class="csinput csinput--with-x">
+          <input id="account_name" class="csinput__input" type="text" maxlength="12" autocorrect="off" autocapitalize="off" value="{{accountName}}" />
+          {{#accountName}}
+            <div class="csinput__cross" on-click="clearAccountName">
+              <span class="csinput__cross__icon">{{> svg_close}}</span>
+            </div>
+          {{/accountName}}
+        </div>
+      </div>
+    </div>
+    <div>
+      {{translate("The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.")}}
+    </div>
+  </div>
+  <div class="_footer">
+    <div class="csbtn csbtn--white" on-click="close">{{translate("Cancel")}}</div>
+    {{#if isLoading}}
+      <div class="csbtn csbtn--loading">
+        <span class="csbtn__icon">
+          {{>svg_refresh}}
+        </span>
+      </div>
+    {{else}}
+      <div class="csbtn" on-click="confirm">{{translate("Confirm")}}</div>
+    {{/if}}
+  </div>
+  {{/if}}
 </div>

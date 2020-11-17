@@ -1,4 +1,5 @@
-<div class="overlay--flash _cancel js__fadeEl" tabindex="-1" on-click="cancel" on-escape="cancel">
-  {{>content}}
-  <input id="modal-hidden-input" type="text" tabindex="-1">
+<div class="js-modal overlay overlay--flash">
+  <div class="js-container overlay__container" on-click="cancel" on-escape="cancel" tabindex="-1">
+    {{>content}}
+  </div>
 </div>

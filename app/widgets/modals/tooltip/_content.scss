@@ -1,48 +1,7 @@
-
-.tooltip {
-  font-size: $big_font_size;
-  min-width: 280px;
-  max-width: 350px;
-  @include breakpoint(portrait) {
-    max-width: 450px;
-  }
-}
-
-.tooltip__cancel {
-  @include clickbtn;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 45px;
-  height: 45px;
-  padding: 10px;
-  z-index: 1000;
-
-  .svg-close {
-    fill: $grey;
-  }
-}
-
-.tooltip__message {
-  @extend .jigsaw-regular;
-
-  @include breakpoint(portrait) {
-    font-size: $big_font_size--portrait;
-  }
-  a {
-    text-decoration: underline;
-  }
-}
-
-.tooltip__link {
-  padding-top: 20px;
-
-  @include breakpoint(portrait) {
-    font-size: $big_font_size--portrait;
-  }
-
-  a {
-    color: #333;
-    text-decoration: underline;
+.modal-tooltip {
+  ._content {
+    a {
+      text-decoration: underline;
+    }
   }
 }

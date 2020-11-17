@@ -1,27 +1,36 @@
 
-<div class="modal _cancel">
-  <div class="modal__content flash">
-    <div class="flash__header" on-click="close">
-      <span class="modal__cancel">
-        {{>svg_close}}
-      </span>
-      <div class="flash__icon">
-        {{#error}}
-          {{>svg_cancel}}
-        {{/error}}
-        {{#warning}}
-          {{>svg_warning}}
-        {{/warning}}
-      </div>
-      <h2 class="flash__title {{type}}">{{translate(title)}}</h2>
+<div class="modal-with-cross modal-flash">
+
+  <div class="_header">
+    <div class="_icon">
+      {{#error}}
+        {{>svg_cancel}}
+      {{/error}}
+      {{#warning}}
+        {{>svg_warning}}
+      {{/warning}}
+      {{#success}}
+        {{>svg_success}}
+      {{/success}}
     </div>
-    {{#if isHtml}}
-    <p class="flash__message">{{{translate(message, interpolations)}}}</p>
-      {{else}}
-    <p class="flash__message">{{translate(message, interpolations)}}</p>
-    {{/if}}
-    {{#href}}
-      <p class="flash__link"><a href="" onclick="return window.safeOpen('{{href}}', '_blank');">{{linkText}}</a></p>
-    {{/href}}
   </div>
+
+  <div class="_content">
+    {{>cross}}
+    <div class="_title {{type}}">{{translate(title)}}</div>
+    {{#if isHtml}}
+    <div class="_message">{{{translate(message, interpolations)}}}</div>
+      {{else}}
+    <div class="_message">{{translate(message, interpolations)}}</div>
+    {{/if}}
+  </div>
+
+  <div class="_footer">
+    {{#if href}}
+      <div class="csbtn" class-csbtn--red="error" class-csbtn--yellow="warning" onclick="return window.safeOpen('{{href}}', '_blank');">{{linkText}}</div>
+    {{else}}
+      <div class="csbtn" class-csbtn--red="error" class-csbtn--yellow="warning" on-click="close">OK</div>
+    {{/if}}
+  </div>
+
 </div>

@@ -1,83 +1,29 @@
-
-.confirm {
-  padding: 0;
-  padding-top: 20px;
-  background-color: white;
-  min-width: 280px;
-  max-width: 450px;
-
-  @include breakpoint(portrait) {
-    width: 450px;
-    padding-top: 30px;
-  }
-
-  &._error {
-    background-color: $red;
-  }
-  &._success {
-    background-color: $green;
-  }
-}
-
-
-.confirm__header {
-  font-size: $header_font_size;
+.modal-confirm-send {
   text-align: center;
-  padding-bottom: 15px;
-  border-bottom: 1px solid $grey;
-
-  @include breakpoint(portrait) {
-    font-size: $header_font_size--portrait;
-    padding-bottom: 25px;
-  }
-}
-
-.confirm__transaction{
-
-  text-align: center;
-  padding-left: 20px;
-  padding-right: 20px;
-
   ._amount {
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    @extend .jigsaw-light;
     display: flex;
     justify-content: center;
-
     ._value {
-      @extend .jigsaw-light;
       font-size: $large_font_size;
-
       @include breakpoint(portrait) {
         font-size: $large_font_size--portrait;
       }
     }
-
     ._currency {
-      @extend .jigsaw-light;
-      font-size: $small_font_size;
-      padding-top: 6px;
+      padding-top: 5px;
       margin-left: 3px;
-
-      @include breakpoint(portrait) {
-        font-size: $small_font_size--portrait;
-      }
     }
+    margin-bottom: 10px;
   }
-
   ._fee {
-    display: block;
     font-size: $small_font_size;
     color: darken($grey, 10%);
-    text-align: center;
-    padding-top: 10px;
-
     @include breakpoint(portrait) {
       font-size: $small_font_size--portrait;
     }
+    margin-bottom: 10px;
   }
-
   ._import-tx-fee {
     select {
       opacity: 0;
@@ -86,101 +32,30 @@
       width: 100%;
       margin-top: -25px;
     }
-    .multiple {
+    ._multiple {
       text-decoration: underline;
     }
   }
-
-  ._icon {
-    display: inline-block;
+  ._arrow_down {
     width: 25px;
     height: 25px;
-    margin-top: 5px;
+    margin: 0 auto;
     color: $grey;
-
     @include breakpoint(portrait) {
       width: 40px;
       height: 40px;
     }
+    margin-bottom: 10px;
   }
-
-  ._address, ._memo {
+  ._info {
     @include wrapdat;
     @extend .jigsaw-light;
     font-size: $small_font_size;
-    display: block;
-    text-align: center;
     @include breakpoint(portrait) {
       font-size: $small_font_size--portrait;
     }
-  }
-  ._info_medium {
-    @extend ._address;
-    @extend .jigsaw-medium;
-  }
-}
-
-.confirm__inputs {
-
-  padding: 20px;
-  background-color: white;
-  border-radius: 0 0 3px 3px;
-
-  display: flex;
-
-  .csbtn--red, .csbtn--grey {
-    margin-right: 5px;
-  }
-  .csbtn, .csbtn--loading {
-    margin-left: 5px;
-  }
-}
-
-.confirm__responseIcon {
-  margin: 0 auto;
-  margin-bottom: 20px;
-  width: 120px;
-  height: 120px;
-  display: block;
-  text-align: center;
-}
-
-.confirm__responseTitle {
-  color: white;
-  font-size: $header_font_size;
-  text-align: center;
-  padding-bottom: 10px;
-
-  @include breakpoint(portrait) {
-    font-size: $header_font_size--portrait;
-  }
-}
-
-.confirm__responseMsg {
-  color: white;
-  text-align: center;
-  max-width: 180px;
-  margin: 0 auto;
-  padding-bottom: 40px;
-  line-height: 1.3;
-  font-size: $small_font_size;
-
-  @include breakpoint(portrait) {
-    font-size: $small_font_size--portrait;
-    max-width: 250px;
-  }
-}
-
-._success {
-
-  .confirm__inputs {
-
-    background-color: white;
-    display: flex;
-
-    ._cancel {
-      margin: 0 auto;
+    &--bold {
+      @extend .jigsaw-medium;
     }
-
   }
 }

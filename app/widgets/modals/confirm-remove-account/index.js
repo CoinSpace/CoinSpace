@@ -3,6 +3,7 @@
 const Ractive = require('widgets/modals/base');
 const CS = require('lib/wallet');
 const { unlock, lock } = require('lib/wallet/security');
+const { showSuccess } = require('widgets/modals/flash');
 
 function open() {
 
@@ -11,8 +12,6 @@ function open() {
       content: require('./_content.ract'),
     },
     data: {
-      confirmation: true,
-      success: false,
       isLoading: false,
     },
   });
@@ -24,8 +23,13 @@ function open() {
       await unlock();
       await CS.removeAccount();
       lock();
-      ractive.set('confirmation', false);
-      ractive.set('success', true);
+      showSuccess({
+        el: ractive.el,
+        title: 'Account has been successfully removed',
+        message: 'This page will be reloaded shortly.',
+        fadeInDuration: 0,
+      });
+
       setTimeout(() => {
         location.reload();
       }, 3000);
@@ -35,10 +39,6 @@ function open() {
     }
 
     ractive.set('isLoading', false);
-  });
-
-  ractive.on('reload', () => {
-    location.reload();
   });
 
   return ractive;

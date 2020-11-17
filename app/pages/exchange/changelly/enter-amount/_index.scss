@@ -2,119 +2,25 @@
   margin-bottom: 25px;
 
   ._title {
+    @extend .jigsaw-medium;
     @include breakpoint(portrait) {
       font-size: $base_font_size--portrait;
     }
   }
 
   ._min_amount {
-    @extend .jigsaw-regular;
     @include breakpoint(portrait) {
       font-size: $base_font_size--portrait;
     }
   }
 
-  .exchange__amount {
-    display: flex;
-    margin-bottom: 20px;
+  .csformgroup {
     &.from {
       margin-bottom: 0;
     }
-
-    ._exchange_group {
-      @include noselect;
-      position: relative;
-      flex: 1;
-      margin-right: 10px;
-      @include breakpoint(portrait) {
-        font-size: $base_font_size--portrait;
-      }
-    }
-
-    .input__container {
-      position: relative;
-      margin-top: 5px;
-
-      ._symbol_dropdown {
-        @include noselect;
-        @extend .jigsaw-light;
-
-        background-image: url(data:image/png;base64,R0lGODlhDQAEAIAAAAAAAP8A/yH5BAEHAAEALAAAAAANAAQAAAILhA+hG5jMDpxvhgIAOw==);
-        background-repeat: no-repeat;
-        background-position: right center;
-
-        position: absolute;
-        z-index: 500;
-        cursor: pointer;
-        display: block;
-        text-align: right;
-        font-size: $big_font_size;
-        top: 6px;
-        right: 3px;
-        opacity: 0.4;
-        width: 100px;
-        @include breakpoint(portrait) {
-          top: 8px;
-          font-size: $big_font_size--portrait;
-        }
-        ._symbol {
-          position: absolute;
-          top: 5px;
-          right: 27px;
-          @include breakpoint(portrait) {
-            top: 6px;
-            right: 29px;
-          }
-        }
-        select {
-          opacity: 0;
-          @extend .jigsaw-light;
-          font-size: $big_font_size;
-          border: none;
-          background-color: transparent;
-          width: 100%;
-          &:focus {
-            outline: none;
-          }
-          @include breakpoint(portrait) {
-            font-size: $big_font_size--portrait;
-          }
-        }
-      }
-    }
-
-    ._select_container {
-      display: inline-block;
-      position: relative;
-      text-decoration: underline;
-      padding: 0 5px;
-      select {
-        position: absolute;
-        opacity: 0;
-        left: 0;
-        top: -5px;
-        @include breakpoint(portrait) {
-          top: 0
-        }
-      }
-    }
-
-    ._label {
-      flex: 1;
-      &._pointer {
-        cursor: pointer;
-      }
-    }
-
-    ._input {
-      @extend .csinput;
-      padding-right: 100px;
-    }
-
   }
 
   .exchange__rate {
-    @extend .jigsaw-regular;
     margin-bottom: 20px;
     @include breakpoint(portrait) {
       font-size: $base_font_size--portrait;

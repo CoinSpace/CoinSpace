@@ -1,125 +1,94 @@
 
 #history {
-
   .hidden {
     display: none;
   }
-
-  .green {
-    color: $green;
-  }
-
-  .red {
-    color: $red;
-  }
-
-  .loadmore__buttons {
-    margin-top: 20px;
-    @include breakpoint(portrait) {
-      margin-top: 40px;
-    }
-  }
 }
 
-.transactions {
- ._title {
-  padding-bottom: 5px;
-
+.history {
+  margin-bottom: 20px;
   @include breakpoint(portrait) {
-    font-size: $base_font_size--portrait;
+    margin-bottom: 40px;
   }
- }
-}
-
-.transactions__item {
-  @include clear;
-  @include clickbtn;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-top: 1px solid darken($grey--light, 10%);
-
-  @include breakpoint(portrait) {
-    padding-top: 30px;
-    padding-bottom: 30px;
-  }
-
-  ._address {
-    @include ellipsis();
-    @include media-obj;
-    @extend .jigsaw-light;
-    padding-top: 13px;
-    font-size: $header_font_size;
-
+  ._title {
+    @extend .jigsaw-medium;
+    padding-bottom: 5px;
     @include breakpoint(portrait) {
-      padding-top: 18px;
-      font-size: $header_font_size--portrait;
+      font-size: $base_font_size--portrait;
     }
   }
-
-  ._expandBtn {
-    @include clickbtn;
-    font-size: $base_font_size;
-    opacity: 0.4;
-  }
-
-  ._detail {
-    float: right;
-    text-align: right;
-    margin-left: 10px;
-  }
-
-  ._amount {
-    @extend .jigsaw-light;
-    font-size: $subtitle_font_size;
-
-    @include breakpoint(portrait) {
-      font-size: $subtitle_font_size--portrait;
-    }
-  }
-
-  ._time {
-    display: block;
-    font-size: $small_font_size;
-    margin-top: -5px;
+  ._message_container {
+    padding: 40px;
     color: $grey;
-    @include breakpoint(portrait) {
-      font-size: $small_font_size--portrait;
+    text-align: center;
+    ._icon {
+      @include icon(80px, 80px, block);
+      margin: 0 auto;
+      margin-bottom: 20px;
     }
-  }
-
-}
-
-.transactions__message {
-  padding: 40px;
-  color: $grey;
-  text-align: center;
-
-  ._icon {
-    @include icon(80px, 80px, block);
-    margin: 0 auto;
-    margin-bottom: 20px;
-    .svg-help {
-      fill: $grey;
-    }
-  }
-
-  ._message {
-    font-size: $subtitle_font_size;
-    line-height: 1.2;
-    @include breakpoint(portrait) {
-      font-size: $subtitle_font_size--portrait;
-    }
-  }
-
-}
-
-.ethereum, .ripple, .stellar {
-  .transactions__item {
-    ._amount {
-      font-size: $big_font_size;
+    ._message {
+      font-size: $subtitle_font_size;
+      line-height: 1.2;
       @include breakpoint(portrait) {
-        font-size: $big_font_size--portrait;
+        font-size: $subtitle_font_size--portrait;
       }
     }
   }
+
+  ._transaction {
+    @include clickbtn;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid darken($grey--light, 10%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .red {
+      color: $red;
+    }
+    .green {
+      color: $brand-green;
+    }
+
+    @include breakpoint(portrait) {
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+
+    ._address {
+      @include ellipsis();
+      @extend .jigsaw-light;
+      font-size: $header_font_size;
+      @include breakpoint(portrait) {
+        font-size: $header_font_size--portrait;
+      }
+    }
+
+    ._detail {
+      text-align: right;
+      flex-shrink: 0;
+      margin-left: 10px;
+    }
+
+    ._amount {
+      @extend .jigsaw-light;
+      font-size: $subtitle_font_size;
+      @include breakpoint(portrait) {
+        font-size: $subtitle_font_size--portrait;
+      }
+    }
+
+    ._status {
+      font-size: $small_font_size;
+      margin-top: -5px;
+      line-height: 1.2;
+      color: $grey;
+      @include breakpoint(portrait) {
+        font-size: $small_font_size--portrait;
+      }
+    }
+
+  }
+
 }

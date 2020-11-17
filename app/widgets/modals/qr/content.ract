@@ -1,20 +1,18 @@
 
-<div class="modal _cancel">
-  <div class="modal__content qr__container">
-    <span class="modal__cancel" on-click="close">
-      {{>svg_close}}
-    </span>
-    <div id="qr-canvas"></div>
-    <div class="detail__strings">
-      <h3 class="_title">{{title}}:</h3>
-      <code class="_value">{{address}}</code>
-      <div class="_actions">
-      <a class="csbtn--icon" href="{{mailto()}}">
-        <span class="_icon">
-          {{>svg_email}}
-        </span>
-      </a>
-      </div>
-    </div>
+<div class="modal-with-cross modal-qr">
+
+  <div class="_content">
+    {{>cross}}
+    <div class="js-canvas _canvas"></div>
+    <label>{{title}}:</label>
+    <code class="cscode">{{address}}</code>
   </div>
+  <div class="_footer">
+    <a class="csbtn" href="{{mailto()}}">
+      <span class="csbtn__icon">
+        {{>svg_email}}
+      </span>
+    </a>
+  </div>
+
 </div>

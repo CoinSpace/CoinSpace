@@ -24,15 +24,8 @@ function fadeAnimation(el, props, options, callback) {
 }
 
 module.exports = {
-  fadeIn(el, duration, callback) {
-    if (typeof duration === 'function') {
-      callback = duration;
-      duration = false;
-    }
-    const options = {
-      display: 'block',
-      duration: typeof duration === 'number' ? duration : 300,
-    };
+  fadeIn(el, { duration = 300 } = {}, callback) {
+    const options = { display: 'block', duration };
     const props = {
       opacity: 1.0,
     };

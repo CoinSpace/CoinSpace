@@ -1,6 +1,6 @@
 <div class="auth_create_passphrase">
 
-  <h2>{{translate("Your passphrase (12 words)")}}</h2>
+  <div class="_header">{{translate("Your passphrase (12 words)")}}</div>
 
   <div id="js-passphrase" data-clipboard-text="{{passphrase}}" class="_passphrase needsclick">
     <span class="needsclick">{{passphrase}}</span>
@@ -48,7 +48,7 @@
     {{#if (checked && termsChecked) }}
     <div class="csbtn" on-click="confirm">{{translate("Confirm")}}</div>
     {{else}}
-    <div class="csbtn _disabled" >{{translate("Confirm")}}</div>
+    <div class="csbtn csbtn--disabled" >{{translate("Confirm")}}</div>
     {{/if}}
   </div>
 

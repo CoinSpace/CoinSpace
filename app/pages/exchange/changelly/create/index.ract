@@ -8,61 +8,64 @@
 
   <form>
 
-    <div class="exchange__address from">
-      <div class="_exchange_group">
-        <label class="_label" for="changelly_return_address">{{fromSymbol}} {{translate("address")}}</label>
-        <div class="input__container">
-          <input id="changelly_return_address" class="_input" type="text" placeholder="{{translate("Return address (optional)")}}" autocorrect="off" autocapitalize="off" value="{{returnAddress}}" />
+    <div class="csformgroup">
+      <div class="csformgroup__input-group">
+        <div class="csformgroup__input-group__header">
+          <label for="changelly_return_address">{{fromSymbol}} {{translate("address")}}</label>
+          <span class="csformgroup__help" on-click="help">
+            {{>svg_help}}
+          </span>
+        </div>
+        <div class="csinput csinput--with-x">
+          <input id="changelly_return_address" class="csinput__input" type="text" placeholder="{{translate("Return address (optional)")}}" autocorrect="off" autocapitalize="off" value="{{returnAddress}}" />
           {{#returnAddress}}
-            <div class="close__input" on-click="clearAddress" data-context="changelly-return-address">
-              <span class="_icon">{{> svg_close}}</span>
+            <div class="csinput__cross" on-click="clearAddress" data-context="changelly-return-address">
+              <span class="csinput__cross__icon">{{> svg_close}}</span>
             </div>
           {{/returnAddress}}
         </div>
-        <span class="_help" on-click="help">
-          {{>svg_help}}
-        </span>
       </div>
 
       {{#qrScannerAvailable}}
-        <div class="_btn _btn-qr" on-click="open-qr" data-context="changelly-return-address">
-          <span class="_icon">
+        <div class="csbtn" on-click="open-qr" data-context="changelly-return-address">
+          <span class="csbtn__icon">
             {{>svg_qr}}
           </span>
         </div>
       {{/qrScannerAvailable}}
 
-      <div class="_btn" on-click="open-geo" data-context="changelly-return-address">
-        <span class="_icon">
+      <div class="csbtn" on-click="open-geo" data-context="changelly-return-address">
+        <span class="csbtn__icon">
           {{>svg_mecto}}
         </span>
       </div>
-
     </div>
 
-    <div class="exchange__address">
-      <div class="_exchange_group">
-        <label for="changelly_to_address" class="_label">{{toSymbol}} {{translate("address")}}</label>
-        <div class="input__container">
-          <input id="changelly_to_address" class="_input" type="text" placeholder="{{translate("Address")}}" autocorrect="off" autocapitalize="off" value="{{toAddress}}" />
+    <div class="csformgroup">
+      <div class="csformgroup__input-group">
+        <div class="csformgroup__input-group__header">
+          <label for="changelly_to_address">{{toSymbol}} {{translate("address")}}</label>
+        </div>
+        <div class="csinput csinput--with-x">
+          <input id="changelly_to_address" class="csinput__input" type="text" placeholder="{{translate("Address")}}" autocorrect="off" autocapitalize="off" value="{{toAddress}}" />
           {{#toAddress}}
-            <div class="close__input" on-click="clearAddress" data-context="changelly-to-address">
-              <span class="_icon">{{> svg_close}}</span>
+            <div class="csinput__cross" on-click="clearAddress" data-context="changelly-to-address">
+              <span class="csinput__cross__icon">{{> svg_close}}</span>
             </div>
           {{/toAddress}}
         </div>
       </div>
 
       {{#qrScannerAvailable}}
-        <div class="_btn _btn-qr" on-click="open-qr" data-context="changelly-to-address">
-          <span class="_icon">
+        <div class="csbtn" on-click="open-qr" data-context="changelly-to-address">
+          <span class="csbtn__icon">
             {{>svg_qr}}
           </span>
         </div>
       {{/qrScannerAvailable}}
 
-      <div class="_btn" on-click="open-geo" data-context="changelly-to-address">
-        <span class="_icon">
+      <div class="csbtn" on-click="open-geo" data-context="changelly-to-address">
+        <span class="csbtn__icon">
           {{>svg_mecto}}
         </span>
       </div>
@@ -72,8 +75,8 @@
 
   <div class="confirm__buttons">
     {{#if isValidating}}
-      <div class="csbtn--loading">
-        <span class="_icon">
+      <div class="csbtn csbtn--loading">
+        <span class="csbtn__icon">
           {{>svg_refresh}}
         </span>
       </div>

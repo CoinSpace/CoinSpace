@@ -1,20 +1,34 @@
-<div class="modal _cancel">
-  <div class="modal__content set-details">
-    <span class="modal__cancel" on-click="close">
-        {{>svg_close}}
-    </span>
-    <div class="_info">
+<div class="modal modal-set-details">
+
+  <div class="_header">{{translate("Account")}}</div>
+
+  <div class="_content">
+
+    <div class="_description">
       {{translate("Before you start using Mecto, you need to enter a name that will help others identify you.")}}
     </div>
-    <div class="set-details__field">
-      <label class="_label">
-        {{translate("Your username")}}
-        <input id="set-details-name" class="_input" type="text" maxlength="63" value="{{username}}" on-enter='submit-details' />
-      </label>
+
+    <div class="csformgroup">
+      <div class="csformgroup__input-group">
+        <div class="csformgroup__input-group__header">
+          <label for="set-details-name">{{translate("Your username")}}</label>
+        </div>
+        <div class="csinput">
+          <input id="set-details-name" class="csinput__input" type="text" maxlength="63" value="{{username}}" on-enter="submit-details" />
+        </div>
+      </div>
     </div>
 
+  </div>
+
+  <div class="_footer">
+    <div class="csbtn csbtn--white" on-click="close">{{translate("Cancel")}}</div>
     {{#if isLoading}}
-      <div class="csbtn--loading">{{translate("Save")}}...</div>
+      <div class="csbtn csbtn--loading">
+        <span class="csbtn__icon">
+          {{>svg_refresh}}
+        </span>
+      </div>
     {{else}}
       <div class="csbtn" on-click="submit-details">{{translate("Save")}}</div>
     {{/if}}

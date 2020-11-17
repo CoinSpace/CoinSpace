@@ -1,51 +1,40 @@
-<div class="modal _cancel">
-  <div class="modal__content confirm {{#success}}_success{{/success}} {{#error}}_error{{/error}}">
+<div class="modal modal-confirm-send">
 
-  {{#confirmation}}
+  <div class="_header">
+    {{translate("Confirm transaction")}}
+  </div>
 
-    <h3 class="confirm__header">{{translate("Confirm transaction")}}</h3>
+  <div class="_content">
 
-    <div class="confirm__transaction">
-
-      <div class="_amount">
-        <span class="_value">{{amount}}</span>
-        <span class="_currency">{{denomination}}</span>
-      </div>
-
-      <span class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
-
-      <span class="_icon">
-        {{>svg_sendto}}
-      </span>
-      <span class="_address">{{to}}</span>
-      {{#if memo}}
-      <span class="_memo">{{translate("Memo")}}: {{memo}}</span>
-      {{/if}}
-
+    <div class="_amount">
+      <span class="_value">{{amount}}</span>
+      <span class="_currency">{{denomination}}</span>
     </div>
 
-    <div class="confirm__inputs">
-      <div class="csbtn--grey _cancel">{{translate("Cancel")}}</div>
-      {{#if sending}}
-        <div class="csbtn--loading">
-          <span class="_icon">
-            {{>svg_refresh}}
-          </span>
-        </div>
-      {{else}}
-        <div class="csbtn" on-click="send">{{translate("Send")}}</div>
-      {{/if}}
+    <div class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</div>
+
+    <div class="_arrow_down">
+      {{>svg_sendto}}
     </div>
 
-  {{/confirmation}}
-
-  {{#success}}
-    {{>success}}
-  {{/success}}
-
-  {{#error}}
-    {{>error}}
-  {{/error}}
+    <div class="_info">{{to}}</div>
+    {{#if memo}}
+    <div class="_info">{{translate("Memo")}}: {{memo}}</div>
+    {{/if}}
 
   </div>
+
+  <div class="_footer">
+    <div class="csbtn csbtn--white" on-click="close">{{translate("Cancel")}}</div>
+    {{#if sending}}
+      <div class="csbtn csbtn--loading">
+        <span class="csbtn__icon">
+          {{>svg_refresh}}
+        </span>
+      </div>
+    {{else}}
+      <div class="csbtn" on-click="send">{{translate("Send")}}</div>
+    {{/if}}
+  </div>
+
 </div>

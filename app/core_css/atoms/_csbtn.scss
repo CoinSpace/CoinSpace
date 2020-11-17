@@ -1,30 +1,27 @@
 // main btn style
-.csbtn-base {
+.csbtn {
+  $self: &;
   @include clickbtn;
+  @include ellipsis();
+  @extend .jigsaw-medium;
   display: block;
   width: 100%;
-
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-
-  padding-left: 15px;
-  padding-right: 15px;
-
-  padding-top: 18px;
-  padding-bottom: 15px;
+  padding: 18px 15px 15px 15px;
   border-radius: 2px;
-
   color: white;
   text-align: center;
   font-size: $btn_font_size;
   line-height: 27px;
-
   background-color: $brand-green;
   box-shadow: 0 2px 0 0 darken($brand-green, 10%);
-
   transition: none;
   position: relative;
+
+  @include breakpoint(portrait) {
+    font-size: $btn_font_size--portrait;
+    border-radius: 3px;
+    line-height: 40px;
+  }
 
   &:active {
     transform: translate(0px, 3px);
@@ -40,21 +37,7 @@
     bottom: 0px;
   }
 
-  @include breakpoint(portrait) {
-    font-size: $btn_font_size--portrait;
-    border-radius: 3px;
-    line-height: 40px;
-  }
-}
-
-.csbtn {
-  @extend .csbtn-base;
-
-}
-
-.csbtn--icon {
-  @extend .csbtn;
-  ._icon {
+  &__icon {
     display: block;
     margin: 0 auto;
     width: 27px;
@@ -64,60 +47,62 @@
       height: 40px;
     }
   }
-}
 
-.csbtn--loading {
-  @extend .csbtn-base;
-  position: relative;
-  background-color: $grey;
-  transform: translate(0px, 3px);
-  box-shadow: 0 0px 0 0;
-  height: 60px;
-  @include breakpoint(portrait) {
-    height: 73px;
-  }
-  ._icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -15px;
-    margin-left: -15px;
-    width: 30px;
-    height: 30px;
-    animation: infinite-spinning 1s linear infinite;
+  &--loading {
+    position: relative;
+    pointer-events: none;
+    background-color: $grey;
+    transform: translate(0px, 3px);
+    box-shadow: 0 0px 0 0;
+    height: 60px;
     @include breakpoint(portrait) {
-      margin-top: -18px;
-      margin-left: -18px;
-      width: 36px;
-      height: 36px;
+      height: 73px;
     }
-    .svg-refresh {
-      fill: darken($grey, 20%);
+    #{ $self }__icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -15px;
+      margin-left: -15px;
+      width: 30px;
+      height: 30px;
+      animation: infinite-spinning 1s linear infinite;
+      @include breakpoint(portrait) {
+        margin-top: -18px;
+        margin-left: -18px;
+        width: 36px;
+        height: 36px;
+      }
     }
   }
+
+  &--white {
+    background-color: #fff;
+    box-shadow: 0 2px 0 0 $grey;
+    color: #333;
+    border: 1px solid $grey;
+    border-bottom: 0;
+    &:active {
+      transform: translate(0px, 2px);
+      box-shadow: 0 1px 0 0 $grey;
+    }
+  }
+
+  &--red {
+    background-color: $red;
+    box-shadow: 0 3px 0 0 darken($red, 10%);
+  }
+
+  &--yellow {
+    background-color: $yellow;
+    box-shadow: 0 3px 0 0 darken($yellow, 10%);
+    color: darken($yellow, 20%);
+  }
+
+  &--disabled {
+    background-color: $grey;
+    box-shadow: 0 2px 0 0 darken($grey, 10%);
+    color: darken($grey, 20%);
+    pointer-events: none;
+  }
 }
-
-.csbtn--red {
-  @extend .csbtn-base;
-
-  background-color: #da553e;
-  box-shadow: 0 3px 0 0 darken(#da553e, 10%);
-}
-
-.csbtn--yellow {
-  @extend .csbtn-base;
-
-  background-color: $yellow;
-  box-shadow: 0 3px 0 0 darken($yellow, 10%);
-  color: darken($yellow, 20%);
-}
-
-.csbtn--grey {
-  @extend .csbtn-base;
-
-  background-color: $grey;
-  box-shadow: 0 2px 0 0 darken($grey, 20%);
-  color: darken($grey, 20%);
-}
-
-

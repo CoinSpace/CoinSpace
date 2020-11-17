@@ -1,73 +1,78 @@
 {{#transaction}}
-<div class="modal _cancel">
-  <div class="modal__content transaction__detail">
-    <span class="modal__cancel" on-click="close">
-      {{>svg_close}}
-    </span>
+<div class="modal-with-cross modal-transaction-detail">
 
-    <div class="_amount {{isIncoming ? 'green' : 'red'}}">
+  <div class="_header">
+    <div class="_title {{isIncoming ? 'green' : 'red'}}">
       {{isIncoming ? '+' : ''}} {{toUnitString(amount)}}
     </div>
 
     {{#if isConfirmed(confirmations)}}
-      <div class='_time'>{{formatTimestamp(timestamp)}}</div>
-      <div class='_time'>{{formatConfirmations(confirmations)}}</div>
+      <div class="_status">
+        <div>{{formatTimestamp(timestamp)}}</div>
+        <div>{{formatConfirmations(confirmations)}}</div>
+      </div>
     {{else}}
-      <div class='_time'>{{translate("pending confirmation")}}</div>
+      <div class='_status'>{{translate("pending confirmation")}}</div>
+    {{/if}}
+  </div>
+
+  <div class="_content">
+    {{>cross}}
+    <label>{{translate("Transaction Id:")}}</label>
+    {{#if isNetwork('bitcoin')}}
+    <a href="" onclick="return window.safeOpen('https://blockchair.com/bitcoin/transaction/{{id}}?from=coinwallet', '_blank');" class="cscode">{{id}}</a>
+    {{elseif isNetwork('bitcoincash')}}
+    <a href="" onclick="return window.safeOpen('https://blockchair.com/bitcoin-cash/transaction/{{id}}?from=coinwallet', '_blank');" class="cscode">{{id}}</a>
+    {{elseif isNetwork('bitcoinsv')}}
+    <a href="" onclick="return window.safeOpen('https://blockchair.com/bitcoin-sv/transaction/{{id}}?from=coinwallet', '_blank');" class="cscode">{{id}}</a>
+    {{elseif isNetwork('litecoin')}}
+    <a href="" onclick="return window.safeOpen('https://blockchair.com/litecoin/transaction/{{id}}?from=coinwallet', '_blank');" class="cscode">{{id}}</a>
+    {{elseif isNetwork('dogecoin')}}
+    <a href="" onclick="return window.safeOpen('https://blockchair.com/dogecoin/transaction/{{id}}?from=coinwallet', '_blank');" class="cscode">{{id}}</a>
+    {{elseif isNetwork('dash')}}
+    <a href="" onclick="return window.safeOpen('https://blockchair.com/dash/transaction/{{id}}?from=coinwallet', '_blank');" class="cscode">{{id}}</a>
     {{/if}}
 
-    <div class="detail__strings">
+    <label>{{translate("Transaction Fee:")}}</label>
+    <code class="cscode">{{toUnitString(fee)}}</code>
 
-      <h3 class="_title">{{translate("Transaction Id:")}}</h3>
-      {{#if isNetwork('bitcoin')}}
-      <a href="" onclick="return window.safeOpen('https://blockchair.com/bitcoin/transaction/{{id}}?from=coinwallet', '_blank');" class="_value">{{id}}</a>
-      {{elseif isNetwork('bitcoincash')}}
-      <a href="" onclick="return window.safeOpen('https://blockchair.com/bitcoin-cash/transaction/{{id}}?from=coinwallet', '_blank')" class="_value">{{id}}</a>
-      {{elseif isNetwork('bitcoinsv')}}
-      <a href="" onclick="return window.safeOpen('https://blockchair.com/bitcoin-sv/transaction/{{id}}?from=coinwallet', '_blank');" class="_value">{{id}}</a>
-      {{elseif isNetwork('litecoin')}}
-      <a href="" onclick="return window.safeOpen('https://blockchair.com/litecoin/transaction/{{id}}?from=coinwallet', '_blank');" class="_value">{{id}}</a>
-      {{elseif isNetwork('dogecoin')}}
-      <a href="" onclick="return window.safeOpen('https://blockchair.com/dogecoin/transaction/{{id}}?from=coinwallet', '_blank');" class="_value">{{id}}</a>
-      {{elseif isNetwork('dash')}}
-      <a href="" onclick="return window.safeOpen('https://blockchair.com/dash/transaction/{{id}}?from=coinwallet', '_blank');" class="_value">{{id}}</a>
-			{{/if}}
-
-      <h3 class="_title">{{translate("Transaction Fee:")}}</h3>
-      <code class="_value">{{toUnitString(fee)}}</code>
-
-      <h3 class="_title">{{translate("Inputs:")}}</h3>
-      <code class="_value">
-        {{#if (ins.length > inputsPerPage)}}
-          {{#each ins.slice(0, inputsPerPage)}}
-            <span class="_address">{{address ? address : translate("Unparsed address")}}</span>
-            <span class="_number">{{toUnitString(amount)}}</span>
-          {{/each}}
-          {{#if showAllInputs}}
-            {{#each ins.slice(inputsPerPage)}}
-              <span class="_address">{{address ? address : translate("Unparsed address")}}</span>
-              <span class="_number">{{toUnitString(amount)}}</span>
-            {{/each}}
-          {{else}}
-            <a href="" class="_more" on-click="showMoreInputs">{{translate("more")}}</a>
-          {{/if}}
-        {{else}}
-          {{#each ins}}
-            <span class="_address">{{address ? address : translate("Unparsed address")}}</span>
-            <span class="_number">{{toUnitString(amount)}}</span>
-          {{/each}}
-        {{/if}}
-      </code>
-
-      <h3 class="_title">{{translate("Outputs:")}}</h3>
-      <code class="_value">
-        {{#each outs}}
+    <label>{{translate("Inputs:")}}</label>
+    <code class="cscode">
+      {{#if (ins.length > inputsPerPage)}}
+        {{#each ins.slice(0, inputsPerPage)}}
           <span class="_address">{{address ? address : translate("Unparsed address")}}</span>
           <span class="_number">{{toUnitString(amount)}}</span>
         {{/each}}
-      </code>
-    </div>
+        {{#if showAllInputs}}
+          {{#each ins.slice(inputsPerPage)}}
+            <span class="_address">{{address ? address : translate("Unparsed address")}}</span>
+            <span class="_number">{{toUnitString(amount)}}</span>
+          {{/each}}
+        {{else}}
+          <a href="" class="_more" on-click="showMoreInputs">{{translate("more")}}</a>
+        {{/if}}
+      {{else}}
+        {{#each ins}}
+          <span class="_address">{{address ? address : translate("Unparsed address")}}</span>
+          <span class="_number">{{toUnitString(amount)}}</span>
+        {{/each}}
+      {{/if}}
+    </code>
 
+    <label>{{translate("Outputs:")}}</label>
+    <code class="cscode">
+      {{#each outs}}
+        <span class="_address">{{address ? address : translate("Unparsed address")}}</span>
+        <span class="_number">{{toUnitString(amount)}}</span>
+      {{/each}}
+    </code>
   </div>
+
+  <div class="_footer">
+    {{#if (isRBF && !isIncoming)}}
+    <div class="csbtn" on-click="bumpFee">Accelerate</div>
+    {{/if}}
+  </div>
+
 </div>
 {{/transaction}}

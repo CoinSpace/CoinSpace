@@ -11,14 +11,15 @@
 
   <form>
 
-    <div class="exchange__amount from">
-      <div class="_exchange_group">
-        <label class="_label" for="changelly_from_amount">{{translate("From")}}</label>
-
-        <div class="input__container">
-          <input id="changelly_from_amount" class="_input" value="1" on-input="input-from-amount" type="number" min="0" step="any" placeholder="{{translate("Amount")}}" autocorrect="off" autocapitalize="off" />
-          <span class="_symbol_dropdown">
-            <span class="_symbol">{{fromSymbol}}</span>
+    <div class="csformgroup from">
+      <div class="csformgroup__input-group">
+        <div class="csformgroup__input-group__header">
+          <label for="changelly_from_amount">{{translate("From")}}</label>
+        </div>
+        <div class="csinput csinput--with-dropdown">
+          <input id="changelly_from_amount" class="csinput__input" value="1" on-input="input-from-amount" type="number" min="0" step="any" placeholder="{{translate("Amount")}}" autocorrect="off" autocapitalize="off" />
+          <span class="csinput__dropdown">
+            <span class="csinput__dropdown__label">{{fromSymbol}}</span>
             <select class="js-from-symbol-select" value="{{fromSymbol}}" tabindex="-1">
               {{#coins}}
                 <option value="{{symbol}}">{{symbol}} - {{name}}</option>
@@ -46,13 +47,15 @@
       </div>
     </div>
 
-    <div class="exchange__amount">
-      <div class="_exchange_group">
-        <label for="changelly_to_amount" class="_label">{{translate("To")}}</label>
-        <div class="input__container">
-          <input id="changelly_to_amount" class="_input" type="text" placeholder="{{translate("Amount")}}" autocorrect="off" autocapitalize="off" value="{{toAmount}}" readonly/>
-          <span class="_symbol_dropdown">
-            <span class="_symbol">{{toSymbol}}</span>
+    <div class="csformgroup">
+      <div class="csformgroup__input-group">
+        <div class="csformgroup__input-group__header">
+          <label for="changelly_to_amount">{{translate("To")}}</label>
+        </div>
+        <div class="csinput csinput--with-dropdown">
+          <input id="changelly_to_amount" class="csinput__input" type="text" placeholder="{{translate("Amount")}}" autocorrect="off" autocapitalize="off" value="{{toAmount}}" readonly/>
+          <span class="csinput__dropdown">
+            <span class="csinput__dropdown__label">{{toSymbol}}</span>
             <select class="js-to-symbol-select" value="{{toSymbol}}" tabindex="-1">
               {{#coins}}
                 <option value="{{symbol}}">{{symbol}} - {{name}}</option>
@@ -61,10 +64,9 @@
           </span>
         </div>
       </div>
-
     </div>
 
-    <h3 class="_title">{{translate("Exchange rate")}}</h3>
+    <div class="_title">{{translate("Exchange rate")}}</div>
     <div class="exchange__rate">
       {{#if isFirstEstimate}}
         {{translate("Loading...")}}
@@ -78,8 +80,8 @@
 
   <div class="confirm__buttons">
     {{#if isLoadingEstimate}}
-      <div class="csbtn--loading">
-        <span class="_icon">
+      <div class="csbtn csbtn--loading">
+        <span class="csbtn__icon">
           {{>svg_refresh}}
         </span>
       </div>

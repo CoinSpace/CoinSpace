@@ -1,17 +1,12 @@
-<div class="modal _cancel">
-  <div class="modal__content tooltip">
-    <span class="modal__cancel" on-click="close">
-      {{>svg_close}}
-    </span>
+<div class="modal-with-cross modal-tooltip">
+
+  <div class="_content">
+    {{>cross}}
     {{#if isHTML}}
-    <p class="tooltip__message">{{{message}}}</p>
+      {{{message}}}
     {{else}}
-    <p class="tooltip__message">{{message}}</p>
-    {{/if}}
-    {{#if bottomLink}}
-    <p class="tooltip__link">
-      <a href="" onclick="return window.safeOpen('{{bottomLink.url}}', '_blank');">{{translate(bottomLink.text)}}</a>
-    </p>
+      {{message}}
     {{/if}}
   </div>
+
 </div>

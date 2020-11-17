@@ -1,6 +1,6 @@
 <div class="changelly_awaiting">
 
-  <h2 class="_subtitle">{{translate("Deposit has been received")}} <br> {{translate("Awaiting exchange...")}}</h2>
+  <div class="_subtitle">{{translate("Deposit has been received")}} <br> {{translate("Awaiting exchange...")}}</div>
 
   <span class="_loading_icon">
     {{>svg_refresh}}

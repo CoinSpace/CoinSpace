@@ -41,10 +41,6 @@ function open(callback) {
     lookupGeo();
   });
 
-  ractive.on('close', () => {
-    ractive.fire('cancel');
-  });
-
   async function lookupGeo(context) {
     if (context === 'new') {
       await new Promise((resolve) => setTimeout(resolve, 1500));

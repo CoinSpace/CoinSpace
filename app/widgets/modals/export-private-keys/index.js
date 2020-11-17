@@ -17,10 +17,6 @@ function open() {
     },
   });
 
-  ractive.on('close', ()=> {
-    ractive.fire('cancel');
-  });
-
   let isLoading = false;
 
   ractive.on('show-keys', async () => {

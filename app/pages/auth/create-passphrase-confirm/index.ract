@@ -1,32 +1,38 @@
 <div class="auth_create_passphrase_confirm">
 
-  <h2>{{translate("Confirm passphrase")}}</h2>
+  <div class="_header">{{translate("Confirm passphrase")}}</div>
   <p class="_description">{{translate("Almost done! Enter the following words from your passphrase.")}}</p>
 
   <div class="_words">
-    <div class="_word">
-      <label class="_label" for="first-word">{{translate("Word")}} #{{ (randomIndexes[0] + 1) }}
-        <div class="input__container">
-          <input id="first-word" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{firstWord}}" />
+    <div class="csformgroup">
+      <div class="csformgroup__input-group">
+        <div class="csformgroup__input-group__header">
+          <label for="first-word">{{translate("Word")}} #{{ (randomIndexes[0] + 1) }}</label>
+        </div>
+        <div class="csinput csinput--with-x">
+          <input id="first-word" class="csinput__input" type="text" autocorrect="off" autocapitalize="off" value="{{firstWord}}" />
           {{#firstWord}}
-            <div class="close__input" on-click="clearWord" data-context="first-word">
-              <span class="_icon">{{> svg_close}}</span>
+            <div class="csinput__cross" on-click="clearWord" data-context="first-word">
+              <span class="csinput__cross__icon">{{> svg_close}}</span>
             </div>
           {{/firstWord}}
         </div>
-      </label>
+      </div>
     </div>
-    <div class="_word">
-      <label class="_label" for="second-word">{{translate("Word")}} #{{ (randomIndexes[1] + 1) }}
-        <div class="input__container">
-          <input id="second-word" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{secondWord}}" />
+    <div class="csformgroup">
+      <div class="csformgroup__input-group">
+        <div class="csformgroup__input-group__header">
+          <label for="second-word">{{translate("Word")}} #{{ (randomIndexes[1] + 1) }}</label>
+        </div>
+        <div class="csinput csinput--with-x">
+          <input id="second-word" class="csinput__input" type="text" autocorrect="off" autocapitalize="off" value="{{secondWord}}" />
           {{#secondWord}}
-            <div class="close__input" on-click="clearWord" data-context="second-word">
-              <span class="_icon">{{> svg_close}}</span>
+            <div class="csinput__cross" on-click="clearWord" data-context="second-word">
+              <span class="csinput__cross__icon">{{> svg_close}}</span>
             </div>
           {{/secondWord}}
         </div>
-      </label>
+      </div>
     </div>
   </div>
 
@@ -34,7 +40,7 @@
     {{#if isCorrect() }}
     <div class="csbtn" on-click="confirm">{{translate("Confirm")}}</div>
     {{else}}
-    <div class="csbtn _disabled">{{translate("Confirm")}}</div>
+    <div class="csbtn csbtn--disabled">{{translate("Confirm")}}</div>
     {{/if}}
   </div>
 

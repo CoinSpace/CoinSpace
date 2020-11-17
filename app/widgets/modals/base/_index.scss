@@ -5,15 +5,78 @@ html.transaction-detail--shown,
 html.flash-modal--shown {
   overflow: hidden;
 }
-.overlay--flash {
-  @extend .overlay;
-  @include clickbtn;
-  background-color: rgba(0, 0, 0, 0.5);
-  #modal-hidden-input {
-    height: 0;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    display: block;
+%modal-base {
+  cursor: default;
+  border-radius: 3px;
+  background-color: $background;
+  box-shadow: 0 2px 2px 1px rgba(0,0,0,0.2);
+  position: relative;
+  min-width: 280px;
+  width: 100%;
+  max-width: 350px;
+  font-size: $base_font_size;
+  @include breakpoint(portrait) {
+    max-width: 450px;
+    font-size: $base_font_size--portrait;
+  }
+  ._header {
+    text-align: center;
+  }
+  ._content {
+    padding: 20px;
+  }
+  ._footer {
+    padding: 20px;
+  }
+}
+.modal {
+  @extend %modal-base;
+  ._header {
+    padding: 20px;
+    font-size: $header_font_size;
+    border-bottom: 1px solid $grey;
+    @include breakpoint(portrait) {
+      font-size: $header_font_size--portrait;
+    }
+  }
+  ._footer {
+    display: flex;
+    .csbtn {
+      margin: 0 5px;
+      &:first-child {
+        margin-left: 0;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+.modal-with-cross {
+  @extend %modal-base;
+  ._cross {
+    @include clickbtn;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 45px;
+    height: 45px;
+    padding: 10px;
+    z-index: 1000;
+  }
+  ._header {
+    padding: 40px 20px 20px;
+  }
+  ._content {
+    &:first-child {
+      padding-top: 40px;
+    }
+    &:last-child {
+      padding-bottom: 40px;
+    }
+    label {
+      margin-bottom: 5px;
+      display: block;
+    }
   }
 }

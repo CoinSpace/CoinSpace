@@ -1,39 +1,24 @@
-<div class="modal _cancel">
-  <div class="modal__content confirm__remove_account {{#success}}_success{{/success}}">
+<div class="modal modal-remove-account">
 
-  {{#confirmation}}
-    <h3 class="_header">{{translate("Remove account")}}</h3>
-
-    <div class="_content">
-      {{translate("Are you sure?")}}
-    </div>
-
-    <div class="_inputs">
-      <div class="csbtn--grey _cancel">{{translate("Cancel")}}</div>
-      {{#if isLoading}}
-        <div class="csbtn--loading">
-          <span class="_icon">
-            {{>svg_refresh}}
-          </span>
-        </div>
-      {{else}}
-        <div class="csbtn--red" on-click="remove">{{translate("Remove")}}</div>
-      {{/if}}
-    </div>
-  {{/confirmation}}
-
-  {{#success}}
-    <div class="_responseIcon">
-      {{>svg_success}}
-    </div>
-
-    <h3 class="_responseTitle">{{translate("Account has been successfully removed")}}</h3>
-
-    <p class="_responseMsg">{{translate("This page will be reloaded shortly.")}}</p>
-    <div class="_inputs">
-      <div class="csbtn--grey _cancel" on-click="reload">{{translate("Close")}}</div>
-    </div>
-  {{/success}}
-
+  <div class="_header">
+    {{translate("Remove account")}}
   </div>
+
+  <div class="_content">
+    {{translate("Are you sure?")}}
+  </div>
+
+  <div class="_footer">
+    <div class="csbtn csbtn--white" on-click="close">{{translate("Cancel")}}</div>
+    {{#if isLoading}}
+      <div class="csbtn csbtn--loading">
+        <span class="csbtn__icon">
+          {{>svg_refresh}}
+        </span>
+      </div>
+    {{else}}
+      <div class="csbtn csbtn--red" on-click="remove">{{translate("Remove")}}</div>
+    {{/if}}
+  </div>
+
 </div>

@@ -17,9 +17,5 @@ module.exports = function showTooltip(data) {
     data,
   });
 
-  ractive.on('close', () => {
-    ractive.fire('cancel');
-  });
-
   return ractive;
 };

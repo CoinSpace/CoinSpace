@@ -2,7 +2,7 @@
 
 const Ractive = require('widgets/modals/base');
 const emitter = require('lib/emitter');
-const { showInfo } = require('widgets/modals/flash');
+const { showInfo, showError, showSuccess } = require('widgets/modals/flash');
 const { unlock, lock } = require('lib/wallet/security');
 
 function open(data) {
@@ -10,8 +10,6 @@ function open(data) {
   const ractive = new Ractive({
     partials: {
       content: require('./_content.ract'),
-      error: require('../error.ract'),
-      success: require('../success.ract'),
     },
     data: extendData(data),
   });
@@ -50,9 +48,13 @@ function open(data) {
       wallet.sendTx(tx, (err) => {
         if (err) return handleTransactionError(err);
 
-        ractive.set('confirmation', false);
-        ractive.set('success', true);
-        ractive.set('onDismiss', data.onSuccessDismiss);
+        if (data.onSuccessDismiss) data.onSuccessDismiss();
+        showSuccess({
+          el: ractive.el,
+          title: 'Transaction Successful',
+          message: 'Your transaction will appear in your history tab shortly.',
+          fadeInDuration: 0,
+        });
 
         // update balance & tx history
         emitter.emit('tx-sent');
@@ -72,23 +74,28 @@ function open(data) {
   }
 
   function handleTransactionError(err) {
-    ractive.set('confirmation', false);
     if (err.message === 'tecNO_DST_INSUF_XRP') {
       // eslint-disable-next-line max-len
       err.message = "Recipient's wallet isn't activated. You can send only amount greater than :minReserve :denomination.";
-      ractive.set('interpolations', {
+      err.interpolations = {
         minReserve: wallet.minReserve,
         denomination: wallet.denomination,
-      });
+      };
     } else if (err.message === 'tecDST_TAG_NEEDED') {
       err.message = "Recipient's wallet requires a destination tag.";
     } else if (err.message === 'cs-node-error') {
       err.message = 'Network node error. Please try again later.';
-      ractive.set('interpolations', { network: 'Ripple' });
+      err.interpolations = { network: 'Ripple' };
     } else {
       console.error(err);
     }
-    ractive.set('error', err.message);
+    showError({
+      el: ractive.el,
+      title: 'Transaction Failed',
+      message: err.message,
+      interpolations: err.interpolations,
+      fadeInDuration: 0,
+    });
   }
 
   return ractive;
@@ -96,7 +103,6 @@ function open(data) {
 
 function extendData(data) {
   const { wallet } = data;
-  data.confirmation = true;
   data.feeSign = data.importTxOptions ? '-' : '+';
   data.fee = wallet.getDefaultFee();
   return data;

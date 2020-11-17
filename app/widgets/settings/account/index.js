@@ -2,7 +2,6 @@
 
 const Ractive = require('lib/ractive');
 const showRemoveConfirmation = require('widgets/modals/confirm-remove-account');
-const showTooltip = require('widgets/modals/tooltip');
 const { showError } = require('widgets/modals/flash');
 const CS = require('lib/wallet');
 const details = require('lib/wallet/details');
@@ -51,16 +50,6 @@ module.exports = function(el) {
 
   ractive.on('remove', showRemoveConfirmation);
 
-  ractive.on('help-gravatar', () => {
-    showTooltip({
-      // eslint-disable-next-line max-len
-      message: 'Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.',
-      bottomLink: {
-        text: 'Create a gravatar',
-        url: 'https://gravatar.com/',
-      },
-    });
-  });
 
   ractive.on('back', () => {
     ractive.fire('change-step', { step: 'main' });

@@ -27,15 +27,12 @@
       display: block;
     }
   }
-  h2 {
+  ._header {
+    @extend .jigsaw-medium;
+    padding: 20px;
     font-size: $header_font_size;
-    line-height: 1.3;
-    padding-top: 10px;
-    padding-bottom: 30px;
     @include breakpoint(portrait) {
       font-size: $header_font_size--portrait;
-      line-height: 1.3;
-      padding-bottom: 20px;
     }
   }
 
@@ -62,10 +59,6 @@
       }
       &:last-child {
         margin-bottom: 0;
-      }
-      &._disabled {
-        pointer-events: none;
-        opacity: 0.5;
       }
     }
   }

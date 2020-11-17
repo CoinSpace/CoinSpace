@@ -1,41 +1,5 @@
-.set-details {
-  max-width: 400px;
-  min-width: 280px;
-
-  @include breakpoint(portrait) {
-    max-width: 450px;
-  }
-
-  ._info {
-    @extend .jigsaw-light;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid $grey;
-
-    @include breakpoint(portrait) {
-      font-size: $big_font_size--portrait;
-    }
-  }
-
-  .csbtn, .csbtn--loading {
-    margin-top: 20px;
+.modal-set-details {
+  ._description {
+    margin-bottom: 20px;
   }
 }
-
-.set-details__field {
-  margin-bottom: 20px;
-  ._label {
-    @include noselect;
-    cursor: pointer;
-    display: block;
-    @include breakpoint(portrait) {
-      font-size: $small_font_size--portrait;
-    }
-  }
-
-  ._input {
-    @extend .csinput;
-    margin-top: 5px;
-  }
-}
-

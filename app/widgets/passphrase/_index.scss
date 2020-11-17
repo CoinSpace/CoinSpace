@@ -9,6 +9,7 @@
   text-align: center;
   height: 100%;
   display: flex;
+  flex-flow: column;
   align-items: center;
   justify-content: center;
   font-size: $base_font_size;
@@ -24,15 +25,12 @@
     opacity: 1;
     transform: translateY(0);
   }
-  h2 {
+  ._header {
+    @extend .jigsaw-medium;
+    padding: 20px;
     font-size: $header_font_size;
-    line-height: 1.3;
-    padding-top: 10px;
-    padding-bottom: 30px;
     @include breakpoint(portrait) {
       font-size: $header_font_size--portrait;
-      line-height: 1.3;
-      padding-bottom: 40px;
     }
   }
 
@@ -42,19 +40,8 @@
     padding: 20px;
   }
 
-  ._group {
-    display: flex;
+  .csformgroup {
     margin-bottom: 40px;
-    text-align: left;
-    ._label {
-      @include noselect;
-      cursor: pointer;
-      display: block;
-      flex: 1;
-    }
-    ._input_container {
-      @extend .csinput_with_x;
-    }
   }
 
   ._btn_group {
@@ -66,12 +53,6 @@
     box-shadow: inset 0px 1px 3px 0px rgba(0,0,0,0.25);
     @include breakpoint(portrait) {
       padding: 20px;
-    }
-    .csbtn {
-      &._disabled {
-        pointer-events: none;
-        opacity: 0.5;
-      }
     }
   }
   ._footer_link {

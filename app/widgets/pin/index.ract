@@ -2,7 +2,9 @@
 
   <div class="_header">
     <div class="_top">
-      <h2>{{{header}}}</h2>
+      <div class="_title">
+        {{{header}}}
+      </div>
     </div>
     <div class="_bottom">
 
