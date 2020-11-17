@@ -15,7 +15,9 @@ init:
   - git config --global core.autocrlf input
 
 environment:
-  DISTRIBUTION: win
+  matrix:
+    - DISTRIBUTION: win
+    - DISTRIBUTION: appx-dev
 
 install:
   - ps: Install-Product node 12 x64
@@ -48,6 +50,8 @@ before_build:
       }
   - ps: $Env:VERSION=$(node -p -e "require('./package.json').version")
   - ps: cd electron
+  # patch https://github.com/felixrieseberg/electron-windows-store/blob/master/template/appxmanifest.xml
+  - ps: Copy-Item "resources/appxmanifest.xml" -Destination "node_modules/electron-windows-store/template/appxmanifest.xml"
   - ps: npm version $Env:VERSION
   - ps: cd ..
 
