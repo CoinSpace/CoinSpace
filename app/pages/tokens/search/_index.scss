@@ -1,18 +1,8 @@
-#tokens_search {
-  ._search_group {
-    @include noselect;
-    margin-bottom: 15px;
+.tokens-search {
+  .csformgroup {
+    margin-bottom: 10px;
     @include breakpoint(portrait) {
-      font-size: $base_font_size--portrait;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
-  }
-
-  .input__container {
-    // @extend .csinput_with_x;
-  }
-
-  ._label {
-    cursor: pointer;
   }
 }

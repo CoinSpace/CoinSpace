@@ -4,8 +4,8 @@
 <div class="shapeshift_create">
 
   <div class="csheader-back">
-    <div class="_back" on-click="back">
-      <span class="_icon"></span> {{translate("Back")}}
+    <div class="csheader-back__btn" on-click="back">
+      <span class="csheader-back__btn__icon">{{>svg_arrow}}</span> {{translate("Back")}}
     </div>
   </div>
 

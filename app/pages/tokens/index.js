@@ -19,8 +19,8 @@ module.exports = function(el) {
   });
 
   const pages = {
-    list: initList(ractive.find('#tokens_list')),
-    search: initSearch(ractive.find('#tokens_search')),
+    list: initList(ractive.find('#tokens-list')),
+    search: initSearch(ractive.find('#tokens-search')),
   };
 
   let currentPage = pages.list;

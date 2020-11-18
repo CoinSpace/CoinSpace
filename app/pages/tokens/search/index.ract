@@ -1,48 +1,48 @@
-<div class="csheader-back">
-  <div class="_back" on-click="back">
-    <span class="_icon"></span> {{translate("Back")}}
+<div class="tokens-search">
+  <div class="csheader-back">
+    <div class="csheader-back__btn" on-click="back">
+      <span class="csheader-back__btn__icon">{{>svg_arrow}}</span> {{translate("Back")}}
+    </div>
   </div>
-</div>
 
-<form>
-  <div class="_search_group">
-    <label class="_label" for="search_token">{{translate("Token")}}
-      <div class="input__container">
-        <input id="search_token" placeholder="{{translate("Search")}}" on-input="inputQuery" on-enter="inputQuery" class="csinput__input" type="text" autocorrect="off" autocapitalize="off" autocomplete="off" value="{{searchQuery}}" />
+  <div class="csformgroup">
+    <div class="csformgroup__input-group">
+      <div class="csformgroup__input-group__header">
+        <label for="search_token">{{translate("Token")}}</label>
+      </div>
+      <div class="csinput csinput--with-x">
+        <input id="search_token" class="csinput__input" type="text" placeholder="{{translate("Search")}}" on-input="inputQuery" on-enter="inputQuery" autocorrect="off" autocapitalize="off" autocomplete="off" value="{{searchQuery}}" />
         {{#searchQuery}}
-          <div class="_cross" on-click="clearQuery">
-            <span class="_icon">{{> svg_close}}</span>
+          <div class="csinput__cross" on-click="clearQuery">
+            <span class="csinput__cross__icon">{{> svg_close}}</span>
           </div>
         {{/searchQuery}}
       </div>
-    </label>
-  </div>
-</form>
-
-<div class="coins">
-  {{#each ethereumTokens.slice(0, show)}}
-  <div class="token__item token--ethereum" on-click="addToken(_id)">
-    <div class="_icon">
-      {{#if this.icon}}
-        <img src="{{this.icon}}"/>
-      {{else}}
-        {{>svg_letter_t}}
-      {{/if}}
     </div>
-    <div class="_name">{{name}}</div>
   </div>
-  {{/each}}
-  <div class="token__item token--ethereum" on-click="addCustomToken">
-    <div class="_icon">
-      {{>svg_settings}}
+
+  <div class="_coins">
+    {{#each ethereumTokens.slice(0, show)}}
+    <div class="_token _token--ethereum" on-click="addToken(_id)">
+      <div class="_token__icon">
+        {{#if this.icon}}
+          <img src="{{this.icon}}"/>
+        {{else}}
+          {{>svg_letter_t}}
+        {{/if}}
+      </div>
+      <div class="_token__name">{{name}}</div>
     </div>
-    <div class="_name">{{translate("Add Custom Token")}}</div>
+    {{/each}}
+    <div class="_token _token--ethereum" on-click="addCustomToken">
+      <div class="_token__icon">
+        {{>svg_settings}}
+      </div>
+      <div class="_token__name">{{translate("Add Custom Token")}}</div>
+    </div>
   </div>
-</div>
 
-
-{{#if ethereumTokens.length > show}}
-  <div class="action_buttons">
+  {{#if ethereumTokens.length > show}}
     <div on-click="loadMore" class="csbtn">{{translate("Load more")}}</div>
-  </div>
-{{/if}}
+  {{/if}}
+</div>

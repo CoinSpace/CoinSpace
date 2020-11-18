@@ -1,8 +1,8 @@
-#tokens_list {
+.tokens-list {
   ._title {
+    @extend .jigsaw-medium;
     padding-bottom: 5px;
     border-bottom: 1px solid darken($grey--light, 10%);
-
     @include breakpoint(portrait) {
       font-size: $base_font_size--portrait;
     }

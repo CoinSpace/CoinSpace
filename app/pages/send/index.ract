@@ -2,8 +2,6 @@
   <div class="send__form">
     <form>
 
-      <div id="fp"></div>
-
       <div class="csformgroup">
         <div class="csformgroup__input-group">
           <div class="csformgroup__input-group__header">

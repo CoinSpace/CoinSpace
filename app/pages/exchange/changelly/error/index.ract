@@ -1,8 +1,10 @@
 <div class="changelly_error">
 
   <div class="exchange_header">
-    <div class="_back" on-click="close">
-      <span class="_icon"></span> {{translate("Close")}}
+    <div class="csheader-back">
+      <div class="csheader-back__btn" on-click="close">
+        <span class="csheader-back__btn__icon">{{>svg_arrow}}</span> {{translate("Close")}}
+      </div>
     </div>
     <div class="_subtitle">{{translate("Whoops!")}}</div>
   </div>

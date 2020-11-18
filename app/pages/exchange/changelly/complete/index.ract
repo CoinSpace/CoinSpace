@@ -1,8 +1,10 @@
 <div class="changelly_complete">
 
   <div class="exchange_header">
-    <div class="_back" on-click="done">
-      <span class="_icon"></span> {{translate("Done")}}
+    <div class="csheader-back">
+      <div class="csheader-back__btn" on-click="done">
+        <span class="csheader-back__btn__icon">{{>svg_arrow}}</span> {{translate("Done")}}
+      </div>
     </div>
     <div class="_subtitle">{{translate("Exchange complete!")}}</div>
   </div>

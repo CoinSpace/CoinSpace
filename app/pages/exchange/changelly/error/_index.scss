@@ -2,32 +2,6 @@
   margin-bottom: 25px;
   .exchange_header {
     position: relative;
-    ._back {
-      cursor: pointer;
-      user-select: none;
-      color: #999;
-      display: inline-block;
-      margin-left: -10px;
-      margin-bottom: 5px;
-      @include breakpoint(portrait) {
-        font-size: $base_font_size--portrait;
-        margin-bottom: 10px;
-      }
-      ._icon {
-        width: 25px;
-        height: 25px;
-        background-size: 25px 25px;
-        @include breakpoint(portrait) {
-          width: 30px;
-          height: 30px;
-          background-size: 30px 30px;
-        }
-        display: inline-block;
-        vertical-align: top;
-        background: url('./assets/img/arrow-left.svg');
-        opacity: 0.6;
-      }
-    }
     ._subtitle {
       font-size: $subtitle_font_size;
       line-height: 1.2;
