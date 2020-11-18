@@ -17,6 +17,7 @@ init:
 environment:
   matrix:
     - DISTRIBUTION: win
+    - DISTRIBUTION: appx
     - DISTRIBUTION: appx-dev
 
 install:

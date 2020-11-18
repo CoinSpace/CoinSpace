@@ -15,6 +15,10 @@ if (BUILD_PLATFORM === 'mas' && process.env.TRAVIS_BUILD_NUMBER) {
   buildVersion = `1.0.${process.env.TRAVIS_BUILD_NUMBER}`;
 }
 
+if (BUILD_PLATFORM === 'appx' || BUILD_PLATFORM === 'appx-dev') {
+  buildVersion = `${pkg.version}.${process.env.APPVEYOR_BUILD_NUMBER || 0}`;
+}
+
 module.exports = {
   packagerConfig: {
     appVersion: pkg.version,
@@ -87,15 +91,29 @@ module.exports = {
         //remoteReleases: 'https://github.com/CoinSpace/CoinSpace',
       },
     },
+    BUILD_PLATFORM === 'appx' && {
+      name: '@electron-forge/maker-appx',
+      config: {
+        identityName: process.env.APPX_IDENTITY,
+        packageName: process.env.APPX_PACKAGE,
+        packageVersion: buildVersion,
+        publisher: process.env.APPX_PUBLISHER,
+        assets: 'resources/appx',
+        makePri: true,
+        makeVersionWinStoreCompatible: false,
+      },
+    },
     BUILD_PLATFORM === 'appx-dev' && {
       name: '@electron-forge/maker-appx',
       config: {
-        packageName: 'coindev',
-        publisher: process.env.PUBLISHER_APPX,
+        packageName: `${process.env.APPX_PACKAGE}Dev`,
+        packageVersion: buildVersion,
+        publisher: process.env.APPX_PUBLISHER_DEV,
         devCert: 'resources/certificate.pfx',
         certPass: process.env.CERTIFICATE_WIN_PASSWORD,
         assets: 'resources/appx',
         makePri: true,
+        makeVersionWinStoreCompatible: false,
       },
     },
     {
