@@ -13,6 +13,9 @@
       &.info {
         color: $yellow;
       }
+      &.success {
+        color: $brand-green;
+      }
     }
     ._message {
       color: darken($grey, 20%);
