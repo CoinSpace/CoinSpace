@@ -2,7 +2,6 @@
   ._content {
     text-align: center;
     ._title {
-      @include wrapdat;
       @extend .jigsaw-bold;
       font-size: $subtitle_font_size;
       @include breakpoint(portrait) {
@@ -19,7 +18,6 @@
       }
     }
     ._message {
-      @include wrapdat;
       color: darken($grey, 20%);
     }
   }

@@ -7,6 +7,7 @@
   }
 
   label {
+    padding-right: 5px;
     cursor: pointer;
   }
   .csbtn {
@@ -64,7 +65,6 @@
     display: inline-block;
     position: relative;
     text-decoration: underline;
-    padding: 0 5px;
     select {
       position: absolute;
       opacity: 0;

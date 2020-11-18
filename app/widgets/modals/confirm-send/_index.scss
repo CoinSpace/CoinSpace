@@ -48,7 +48,6 @@
     margin-bottom: 10px;
   }
   ._info {
-    @include wrapdat;
     @extend .jigsaw-light;
     font-size: $small_font_size;
     @include breakpoint(portrait) {

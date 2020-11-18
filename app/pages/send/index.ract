@@ -33,9 +33,7 @@
           <div class="csformgroup__input-group">
             <div class="csformgroup__input-group__header">
               <label for="bitcoin">{{translate("Amount")}}</label>
-              <div class="csformgroup__select-container" on-click="set-max-amount">
-                ({{translate("max.")}} {{maxAmount}} {{denomination}})
-              </div>
+              <strong class="_max_btn" on-click="set-max-amount">({{translate("max.")}} {{maxAmount}} {{denomination}})</strong>
             </div>
             <div class="csinput _crypto_input">
               <input id="bitcoin" class="csinput__input" type="number" min="0" step="any" on-input="bitcoin-to-fiat" on-focus="focusAmountInput" on-blur="blurAmountInput">
@@ -60,16 +58,18 @@
         <div class="csformgroup__input-group">
           <div class="csformgroup__input-group__header">
             <label>{{translate("Fee")}}</label>
-            <div class="csformgroup__select-container">
+            {{#if fees.length > 1}}
+            <div class="csformgroup__select-container" class-qwe="fees.length > 1">
               +{{fee}} {{feeDenomination}}
-              {{#if fees.length > 1}}
               <select value="{{feeIndex}}" on-change="change-fee">
                 {{#each fees as fee: index}}
                   <option value="{{index}}">+{{fee.estimate}} {{feeDenomination}} - {{fee.name}}</option>
                 {{/each}}
               </select>
-              {{/if}}
             </div>
+            {{else}}
+            <strong>+{{fee}} {{feeDenomination}}</strong>
+            {{/if}}
             <span class="csformgroup__help" on-click="help-fee">
               {{>svg_help}}
             </span>

@@ -6,6 +6,7 @@ html.flash-modal--shown {
   overflow: hidden;
 }
 %modal-base {
+  @include wrapdat;
   cursor: default;
   border-radius: 3px;
   background-color: $background;

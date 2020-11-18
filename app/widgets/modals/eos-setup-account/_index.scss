@@ -1,6 +1,5 @@
 .modal-eos-setup-account {
   ._instructions {
-    @include wrapdat;
     @include breakpoint(portrait) {
       margin-bottom: 40px;
     }
