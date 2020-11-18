@@ -1,42 +1,43 @@
-<div class="modal _cancel">
-    <div class="modal__content add_ethereum_token">
+<div class="modal modal-add-custom-token">
 
-      <h3 class="_header">{{translate("Add Token")}}</h3>
+  <div class="_header">
+    {{translate("Add Token")}}
+  </div>
 
-      <div class="_content">
-        <div class="_contract_address_group">
-          <label class="_label" for="contract_address">{{translate("Contract address")}}
-            <div class="input__container">
-              <input id="contract_address" class="csinput__input" type="text" on-enter="addToken" on-input="inputAddress" autocorrect="off" autocapitalize="off" value="{{address}}" />
-              {{#address}}
-                <div class="_cross" on-click="clearAddress">
-                  <span class="_icon">{{> svg_close}}</span>
-                </div>
-              {{/address}}
+  <div class="_content">
+    <div class="csformgroup">
+      <div class="csformgroup__input-group">
+        <div class="csformgroup__input-group__header">
+          <label for="contract_address">{{translate("Contract address")}}</label>
+        </div>
+        <div class="csinput csinput--with-x">
+          <input id="contract_address" class="csinput__input" type="text" maxlength="42" on-enter="addToken" autocorrect="off" autocapitalize="off" value="{{address}}" />
+          {{#address}}
+            <div class="csinput__cross" on-click="clearAddress">
+              <span class="csinput__cross__icon">{{> svg_close}}</span>
             </div>
-          </label>
-
-          {{#qrScannerAvailable}}
-            <div class="_btn _btn-qr" on-click="openQr">
-              <span class="_icon">
-                {{>svg_qr}}
-              </span>
-            </div>
-          {{/qrScannerAvailable}}
+          {{/address}}
         </div>
       </div>
-
-      <div class="_inputs">
-        <div class="csbtn--grey _cancel">{{translate("Cancel")}}</div>
-        {{#if isValidating}}
-          <div class="csbtn--loading">
-            <span class="_icon">
-              {{>svg_refresh}}
-            </span>
-          </div>
-        {{else}}
-          <div class="csbtn" on-click="addToken">{{translate("Add")}}</div>
-        {{/if}}
-      </div>
+      {{#qrScannerAvailable}}
+        <div class="csbtn" on-click="openQr">
+          <span class="csbtn__icon">{{>svg_qr}}</span>
+        </div>
+      {{/qrScannerAvailable}}
     </div>
   </div>
+
+  <div class="_footer">
+    <div class="csbtn csbtn--white" on-click="close">{{translate("Cancel")}}</div>
+    {{#if isValidating}}
+      <div class="csbtn csbtn--loading">
+        <span class="csbtn__icon">
+          {{>svg_refresh}}
+        </span>
+      </div>
+    {{else}}
+      <div class="csbtn" on-click="addToken">{{translate("Add")}}</div>
+    {{/if}}
+  </div>
+
+</div>
