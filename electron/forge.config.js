@@ -15,10 +15,6 @@ if (BUILD_PLATFORM === 'mas' && process.env.TRAVIS_BUILD_NUMBER) {
   buildVersion = `1.0.${process.env.TRAVIS_BUILD_NUMBER}`;
 }
 
-if (BUILD_PLATFORM === 'appx' || BUILD_PLATFORM === 'appx-dev') {
-  buildVersion = `${pkg.version}.${process.env.APPVEYOR_BUILD_NUMBER || 0}`;
-}
-
 module.exports = {
   packagerConfig: {
     appVersion: pkg.version,
@@ -96,26 +92,22 @@ module.exports = {
       config: {
         identityName: process.env.APPX_IDENTITY,
         packageName: process.env.APPX_PACKAGE,
-        packageVersion: buildVersion,
         publisher: process.env.APPX_PUBLISHER,
         publisherDisplayName: process.env.APPX_PUBLISHER_NAME,
         assets: 'resources/appx',
         makePri: true,
-        makeVersionWinStoreCompatible: false,
       },
     },
     BUILD_PLATFORM === 'appx-dev' && {
       name: '@electron-forge/maker-appx',
       config: {
         packageName: `${process.env.APPX_PACKAGE}Dev`,
-        packageVersion: buildVersion,
         publisher: process.env.APPX_PUBLISHER_DEV,
         publisherDisplayName: process.env.APPX_PUBLISHER_NAME,
         devCert: 'resources/certificate.pfx',
         certPass: process.env.CERTIFICATE_WIN_PASSWORD,
         assets: 'resources/appx',
         makePri: true,
-        makeVersionWinStoreCompatible: false,
       },
     },
     {
