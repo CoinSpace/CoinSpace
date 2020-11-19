@@ -53,6 +53,11 @@ before_build:
   - ps: cd electron
   # patch https://github.com/felixrieseberg/electron-windows-store/blob/master/template/appxmanifest.xml
   - ps: Copy-Item "resources/appxmanifest.xml" -Destination "node_modules/electron-windows-store/template/appxmanifest.xml"
+  # patch https://github.com/felixrieseberg/electron-windows-store/blob/master/lib/sign.js
+  - ps: >-
+      $sign="node_modules/electron-windows-store/lib/sign.js"
+      (Get-Content $sign -Raw).replace("function signAppx (program) {`n", "function signAppx (program) { return;`n") | Set-Content $sign
+      (Get-Content $sign -Raw).replace("function makeCert (parametersOrPublisherName, certFilePath, program) {`n", "function makeCert (parametersOrPublisherName, certFilePath, program) { return;`n") | Set-Content $sign
   - ps: npm version $Env:VERSION
   - ps: cd ..
 
