@@ -44,7 +44,7 @@
     {{/if}}
   </div>
 
-  {{#if hasMore}}
+  {{#if (hasMore && !isLoading) }}
     {{#if isLoadingMore}}
       <div class="csbtn csbtn--loading">
         <span class="csbtn__icon">
