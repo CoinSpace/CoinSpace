@@ -46,8 +46,6 @@ function open(data) {
         return ractive.set('sending', false);
       }
 
-      console.log('tx', tx);
-
       wallet.sendTx(tx, (err, historyTx) => {
         if (err) return handleTransactionError(err);
 
@@ -61,9 +59,7 @@ function open(data) {
 
         // update balance & tx history
         emitter.emit('tx-sent');
-        if (historyTx) {
-          emitter.emit('append-transactions', [historyTx]);
-        }
+        emitter.emit('append-transactions', [historyTx]);
       });
     }, 200);
   });

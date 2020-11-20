@@ -1,6 +1,9 @@
 'use strict';
 
 const Ractive = require('widgets/modals/base');
+const showConfirmAcceleration = require('widgets/modals/confirm-acceleration');
+const { getWallet } = require('lib/wallet');
+const { showInfo } = require('widgets/modals/flash');
 
 module.exports = function(data) {
   let content;
@@ -20,7 +23,6 @@ module.exports = function(data) {
   }
 
   const ractive = new Ractive({
-    el: document.getElementById('transaction-detail'),
     partials: {
       content,
     },
@@ -32,8 +34,19 @@ module.exports = function(data) {
     ractive.set('showAllInputs', true);
   });
 
-  ractive.on('close', ()=> {
-    ractive.fire('cancel');
+  ractive.on('accelerate', () => {
+    const wallet = getWallet();
+    let tx;
+    try {
+      tx = wallet.createReplacement(data.transaction);
+    } catch (err) {
+      return showInfo({ title: err.message });
+    }
+    showConfirmAcceleration({
+      el: ractive.el,
+      fadeInDuration: 0,
+      tx,
+    });
   });
 
   return ractive;

@@ -92,6 +92,11 @@ module.exports = function(el) {
     });
   });
 
+  emitter.on('replace-transaction', ({ tx, newTx }) => {
+    const i = ractive.get('transactions').indexOf(tx);
+    ractive.splice('transactions', i, 1, newTx);
+  });
+
   emitter.on('sync', () => {
     isSyncing = true;
     ractive.set('transactions', []);

@@ -1,0 +1,25 @@
+<div class="modal modal-confirm-acceleration">
+
+  <div class="_header">{{translate("Confirm acceleration")}}</div>
+
+  <div class="_content">
+    <div class="_percent">
+      {{translate("Speed")}} {{replaceByFeePercent}}
+    </div>
+    {{amount}} {{denomination}}
+  </div>
+
+  <div class="_footer">
+    <div class="csbtn csbtn--white" on-click="close">{{translate("Cancel")}}</div>
+    {{#if isLoading}}
+      <div class="csbtn csbtn--loading">
+        <span class="csbtn__icon">
+          {{>svg_refresh}}
+        </span>
+      </div>
+    {{else}}
+      <div class="csbtn" on-click="confirm">{{translate("Confirm")}}</div>
+    {{/if}}
+  </div>
+
+</div>

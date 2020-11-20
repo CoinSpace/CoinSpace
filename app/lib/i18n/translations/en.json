@@ -345,5 +345,11 @@
   "This Token has already been added.": "This Token has already been added.",
   "address is not a valid address.": "%(address)s is not a valid address.",
   "Please fill out address.": "Please fill out address.",
-  "Success!": "Success!"
+  "Success!": "Success!",
+  "Accelerate": "Accelerate",
+  "Confirm acceleration": "Confirm acceleration",
+  "Acceleration Successful": "Acceleration Successful",
+  "Acceleration Failed": "Acceleration Failed",
+  "Speed": "Speed",
+  "Your transaction will be replaced in your history tab shortly.": "Your transaction will be replaced in your history tab shortly."
 }
