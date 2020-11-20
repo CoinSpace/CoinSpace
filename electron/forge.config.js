@@ -91,7 +91,8 @@ module.exports = {
       name: '@electron-forge/maker-appx',
       config: {
         identityName: process.env.APPX_IDENTITY,
-        packageName: process.env.APPX_PACKAGE,
+        packageName: 'CoinWallet',
+        packageDisplayName: process.env.APPX_PACKAGE_NAME,
         publisher: process.env.APPX_PUBLISHER,
         publisherDisplayName: process.env.APPX_PUBLISHER_NAME,
         assets: 'resources/appx',
@@ -101,7 +102,8 @@ module.exports = {
     BUILD_PLATFORM === 'appx-dev' && {
       name: '@electron-forge/maker-appx',
       config: {
-        packageName: `${process.env.APPX_PACKAGE}Dev`,
+        packageName: 'CoinWalletDev',
+        packageDisplayName: process.env.APPX_PACKAGE_NAME,
         publisher: process.env.APPX_PUBLISHER_DEV,
         publisherDisplayName: process.env.APPX_PUBLISHER_NAME,
         devCert: 'resources/certificate.pfx',
