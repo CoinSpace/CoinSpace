@@ -201,8 +201,11 @@ async function initWallet(pin) {
       options.minConf = 12;
       options.token = token;
     } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(networkName) !== -1) {
+      const addressType = details.get(networkName + '.addressType');
+      if (addressType) {
+        options.addressType = addressType;
+      }
       options.minConf = 3;
-      options.addressType = details.get(networkName + '.addressType') || 'p2pkh';
       if (networkName === 'bitcoincash') {
         options.minConf = 0;
       }
