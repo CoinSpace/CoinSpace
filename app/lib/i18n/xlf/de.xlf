@@ -1395,6 +1395,38 @@ Sie werden in %(toSymbol)s konvertiert und an
         <source>Please fill out address.</source>
         <target></target>
       </trans-unit>
+      <trans-unit id="Success!">
+        <source>Success!</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Accelerate">
+        <source>Accelerate</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Confirm acceleration">
+        <source>Confirm acceleration</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Acceleration Successful">
+        <source>Acceleration Successful</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Acceleration Failed">
+        <source>Acceleration Failed</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Speed">
+        <source>Speed</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Your transaction will be replaced in your history tab shortly.">
+        <source>Your transaction will be replaced in your history tab shortly.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="confirmations:">
+        <source>confirmations:</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

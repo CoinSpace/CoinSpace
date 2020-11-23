@@ -295,7 +295,7 @@
       </trans-unit>
       <trans-unit id="Confirm">
         <source>Confirm</source>
-        <target>Подтверждение</target>
+        <target>Подтвердить</target>
       </trans-unit>
       <trans-unit id="No Coin users found nearby">
         <source>No Coin users found nearby</source>
@@ -331,7 +331,7 @@
       </trans-unit>
       <trans-unit id="Your transaction will appear in your history tab shortly.">
         <source>Your transaction will appear in your history tab shortly.</source>
-        <target>Ваша транзакция скоро появится в истории</target>
+        <target>Ваша транзакция скоро появится в истории.</target>
       </trans-unit>
       <trans-unit id="Close">
         <source>Close</source>
@@ -1394,6 +1394,38 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Please fill out address.">
         <source>Please fill out address.</source>
         <target>Пожалуйста, укажите адрес.</target>
+      </trans-unit>
+      <trans-unit id="Success!">
+        <source>Success!</source>
+        <target>Успех!</target>
+      </trans-unit>
+      <trans-unit id="Accelerate">
+        <source>Accelerate</source>
+        <target>Ускорить</target>
+      </trans-unit>
+      <trans-unit id="Confirm acceleration">
+        <source>Confirm acceleration</source>
+        <target>Подтвердить ускорение</target>
+      </trans-unit>
+      <trans-unit id="Acceleration Successful">
+        <source>Acceleration Successful</source>
+        <target>Ускорение успешно</target>
+      </trans-unit>
+      <trans-unit id="Acceleration Failed">
+        <source>Acceleration Failed</source>
+        <target>Ускорение неуспешно</target>
+      </trans-unit>
+      <trans-unit id="Speed">
+        <source>Speed</source>
+        <target>Скорость</target>
+      </trans-unit>
+      <trans-unit id="Your transaction will be replaced in your history tab shortly.">
+        <source>Your transaction will be replaced in your history tab shortly.</source>
+        <target>Ваша транзакция скоро будет заменена в истории.</target>
+      </trans-unit>
+      <trans-unit id="confirmations:">
+        <source>confirmations:</source>
+        <target>подтверждения:</target>
       </trans-unit>
     </body>
   </file>
