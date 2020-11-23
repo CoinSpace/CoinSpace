@@ -4,6 +4,7 @@ steps:
   id: 'build assets'
   env:
     - 'CI=true'
+    - 'COMMIT_SHA=${COMMIT_SHA}'
     - 'SITE_URL=${_SITE_URL}'
     - 'SHAPESHIFT_API_KEY=${_SHAPESHIFT_API_KEY}'
     - 'SHAPESHIFT_CLIENT_ID=${_SHAPESHIFT_CLIENT_ID}'
