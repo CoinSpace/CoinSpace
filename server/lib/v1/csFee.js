@@ -32,7 +32,7 @@ function get(network) {
     if (rate > 0) {
       minFee = parseInt(Big(1).div(rate).times(results[1].min_usd).times(1e8), 10);
       maxFee = parseInt(Big(1).div(rate).times(results[1].max_usd).times(1e8), 10);
-      rbfFee = parseInt(Big(1).div(rate).times(results[1].rbf_usd).times(1e8), 10);
+      rbfFee = parseInt(Big(1).div(rate).times(results[1].rbf_usd || 0).times(1e8), 10);
     }
     return {
       minFee,
