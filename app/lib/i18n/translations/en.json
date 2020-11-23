@@ -351,5 +351,6 @@
   "Acceleration Successful": "Acceleration Successful",
   "Acceleration Failed": "Acceleration Failed",
   "Speed": "Speed",
-  "Your transaction will be replaced in your history tab shortly.": "Your transaction will be replaced in your history tab shortly."
+  "Your transaction will be replaced in your history tab shortly.": "Your transaction will be replaced in your history tab shortly.",
+  "confirmations:": "confirmations:"
 }

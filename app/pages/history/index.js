@@ -8,6 +8,7 @@ const strftime = require('strftime');
 const { showError } = require('widgets/modals/flash');
 const showTransactionDetail = require('widgets/modals/transaction-detail');
 const initEosSetup = require('widgets/eos/setup');
+const { translate } = require('lib/i18n');
 const _ = require('lodash');
 
 module.exports = function(el) {
@@ -25,11 +26,7 @@ module.exports = function(el) {
         if (network === 'ripple') return '';
         if (network === 'stellar') return '';
         if (network === 'eos') return '';
-        if (number === 1) {
-          return number + ' confirmation';
-        } else {
-          return number + ' confirmations';
-        }
+        return `${translate('confirmations:')} ${number}`;
       },
       getToAddress(tx) {
         if (network === 'ethereum' || network === 'ripple' || network === 'eos') {
