@@ -28,14 +28,17 @@ function get(network) {
     const rate = results[0]['prices']['USD'];
     let minFee = 0;
     let maxFee = 0;
+    let rbfFee = 0;
     if (rate > 0) {
       minFee = parseInt(Big(1).div(rate).times(results[1].min_usd).times(1e8), 10);
       maxFee = parseInt(Big(1).div(rate).times(results[1].max_usd).times(1e8), 10);
+      rbfFee = parseInt(Big(1).div(rate).times(results[1].rbf_usd).times(1e8), 10);
     }
     return {
       minFee,
       maxFee,
       fee: results[1].fee,
+      rbfFee,
       addresses: results[1].addresses,
       whitelist: results[1].whitelist,
     };
