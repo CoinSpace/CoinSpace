@@ -11,12 +11,10 @@
   <meta name="apple-itunes-app" content="app-id=980719434"/>
   <% if (process.env.BUILD_TYPE === 'phonegap') { %>
   <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self' blob: gap:
-    https://*.verygoodvault.com;
+    default-src 'self' blob: gap:;
     connect-src 'self' blob:
     https://shapeshift.io
     https://api.moonpay.io
-    https://*.amazonaws.com
     https://sentry.io
     <%= process.env.API_BTC_URL %>
     <%= process.env.API_BCH_URL %>
@@ -30,10 +28,9 @@
     <%= process.env.API_DASH_URL %>
     <%= process.env.SITE_URL %>;
     font-src 'self';
-    img-src 'self' data: https://www.gravatar.com;
+    img-src 'self' data: https://www.gravatar.com https://assets.coingecko.com;
     style-src 'self' 'unsafe-inline';
-    script-src 'self' blob: 'unsafe-eval' 'unsafe-inline'
-    https://*.sift.com;">
+    script-src 'self' blob: 'unsafe-eval' 'unsafe-inline';">
   <% } %>
   <link rel="apple-touch-icon" sizes="57x57" href="<%= require('./assets/icons/apple-touch-icon-57x57.png') %>">
   <link rel="apple-touch-icon" sizes="60x60" href="<%= require('./assets/icons/apple-touch-icon-60x60.png') %>">
