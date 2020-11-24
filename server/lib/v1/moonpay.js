@@ -4,8 +4,6 @@ const axios = require('axios');
 const db = require('./db');
 const API_KEY = process.env.MOONPAY_API_KEY;
 
-const PRIORITY_SYMBOLS = ['BTC', 'BCH', 'BSV', 'ETH', 'USDT', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH'];
-
 function save(_id, data) {
   const collection = db().collection('moonpay');
   return collection.updateOne({ _id }, { $set: { data } }, { upsert: true });
@@ -22,18 +20,15 @@ function getCurrenciesFromAPI() {
 
     const coins = {};
     const coinsUSA = {};
-    PRIORITY_SYMBOLS.forEach((symbol) => {
-      const coin = data.find((item) => {
-        return item.code === symbol.toLowerCase();
-      });
-      if (coin) {
+    data.forEach((coin) => {
+      if (coin.type === 'crypto') {
         coins[coin.id] = {
-          symbol,
+          symbol: coin.code.toUpperCase(),
           isSupported: !coin.isSuspended,
           isSellSupported: coin.isSellSupported && process.env.ENABLE_MOONPAY_SELL === 'true',
         };
         coinsUSA[coin.id] = {
-          symbol,
+          symbol: coin.code.toUpperCase(),
           isSupported: !coin.isSuspended && coin.isSupportedInUS,
           isSellSupported: coin.isSellSupported && process.env.ENABLE_MOONPAY_SELL === 'true',
         };
