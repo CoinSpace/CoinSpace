@@ -9,7 +9,6 @@ const autoprefixer = require('autoprefixer');
 const Dotenv = require('dotenv-webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 const envFile = process.env.ENV_FILE ? process.env.ENV_FILE : '.env.prod';
@@ -103,15 +102,6 @@ const config = merge(common, {
     }),
   ],
 });
-
-if (process.env.ENV === 'dev' || process.env.ENV === 'prod') {
-  config.plugins.push(new CopyWebpackPlugin([
-    {
-      from: `app/apple-developer-merchantid-domain-association.${process.env.ENV}.txt`,
-      to: '.well-known/apple-developer-merchantid-domain-association.txt',
-    },
-  ]));
-}
 
 if (process.env.BUILD_TYPE === 'phonegap') {
   const htmlPlugin = config.plugins.find((plugin) => {
