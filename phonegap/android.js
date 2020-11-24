@@ -33,7 +33,6 @@ async function run() {
   cordova('plugin add cordova-plugin-fingerprint-aio@3.0.1');
   cordova('plugin add cordova-plugin-customurlscheme@5.0.1 --variable URL_SCHEME=coinspace');
   cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#23f993dc73feafbf8eb00496f9a5da0884374a10');
-  cordova('plugin add cordova-plugin-cookiemaster@1.0.5');
   cordova('plugin add cordova-plugin-splashscreen@5.0.4');
   cordova('plugin add cordova-plugin-whitelist@1.3.4');
   cordova('plugin add cordova-plugin-safariviewcontroller@1.6.0');

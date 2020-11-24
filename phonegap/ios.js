@@ -36,7 +36,6 @@ async function run() {
   cordova('plugin add cordova-plugin-touch-id@3.4.0 --variable FACEID_USAGE_DESCRIPTION="Used for easy authentication."');
   cordova('plugin add cordova-plugin-customurlscheme@5.0.1 --variable URL_SCHEME=coinspace');
   cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#269bdcca489a9a06d127ccc0999784d9c94c7171');
-  cordova('plugin add cordova-plugin-cookiemaster@1.0.5');
   cordova('plugin add cordova-plugin-3dtouch-shortcutitems@1.0.2');
   cordova('plugin add cordova-plugin-safariviewcontroller@1.6.0');
   cordova('plugin add cordova-plugin-inapp-review@1.1.0');
