@@ -51,7 +51,7 @@
       </trans-unit>
       <trans-unit id="I have written down or otherwise securely stored my passphrase">
         <source>I have written down or otherwise securely stored my passphrase</source>
-        <target>Zabeležio sam ili na drugi način bezbedno sačuvao svoju lozinku</target>
+        <target>Zabeležio/la sam ili na drugi način bezbedno sačuvao/la svoju lozinku</target>
       </trans-unit>
       <trans-unit id="Open wallet">
         <source>Open wallet</source>
@@ -175,7 +175,7 @@
       </trans-unit>
       <trans-unit id="Gravatar email">
         <source>Gravatar email</source>
-        <target>Gravatar email</target>
+        <target>Gravatar e-poruka</target>
       </trans-unit>
       <trans-unit id="Submit">
         <source>Submit</source>
@@ -183,7 +183,7 @@
       </trans-unit>
       <trans-unit id="Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.">
         <source>Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.</source>
-        <target>Gravatar (globalno prepoznati avatar) je usluga koja Vam omogućava da pomoću email adrese koristite istog avatara na različitim web sajtovima i aplikacijama.</target>
+        <target>Gravatar (globalno prepoznati avatar) je usluga koja Vam omogućava da pomoću adrese e-pošte koristite istog avatara na različitim web sajtovima i aplikacijama.</target>
       </trans-unit>
       <trans-unit id="Create a gravatar">
         <source>Create a gravatar</source>
@@ -191,7 +191,7 @@
       </trans-unit>
       <trans-unit id="Logout">
         <source>Logout</source>
-        <target>Odjavite se</target>
+        <target>Odjavi se</target>
       </trans-unit>
       <trans-unit id="Support">
         <source>Support</source>
@@ -371,7 +371,7 @@
       </trans-unit>
       <trans-unit id="I Agree To The Terms &amp; Conditions">
         <source>I Agree To The Terms &amp; Conditions</source>
-        <target>Prihvatam Uslove korišćenja &amp;</target>
+        <target>Prihvatam Uslove i odredbe korišćenja</target>
       </trans-unit>
       <trans-unit id="Terms of Use">
         <source>Terms of Use</source>
@@ -605,11 +605,11 @@ Biće konvertovano u %(toSymbol)s i poslato na
       </trans-unit>
       <trans-unit id="Click to Select">
         <source>Click to Select</source>
-        <target>Kliknite da Izaberete</target>
+        <target>Kliknite na Izaberi</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
-        <target>Kopiraj na međuspremnik</target>
+        <target>Kopiraj u međuspremnik</target>
       </trans-unit>
       <trans-unit id="Copied!">
         <source>Copied!</source>
@@ -933,7 +933,7 @@ Biće konvertovano u %(toSymbol)s i poslato na
       </trans-unit>
       <trans-unit id="Sell">
         <source>Sell</source>
-        <target>Prodam</target>
+        <target>Prodaj</target>
       </trans-unit>
       <trans-unit id="No verification methods are currently available.">
         <source>No verification methods are currently available.</source>
@@ -1141,7 +1141,7 @@ Biće konvertovano u %(toSymbol)s i poslato na
       </trans-unit>
       <trans-unit id="Bank Accounts">
         <source>Bank Accounts</source>
-        <target>Bankovni računi</target>
+        <target>Bankovni račun</target>
       </trans-unit>
       <trans-unit id="No credit cards.">
         <source>No credit cards.</source>
@@ -1153,7 +1153,7 @@ Biće konvertovano u %(toSymbol)s i poslato na
       </trans-unit>
       <trans-unit id="Add Bank Account">
         <source>Add Bank Account</source>
-        <target>Dodaj bankovni računi</target>
+        <target>Dodaj bankovni račun</target>
       </trans-unit>
       <trans-unit id="Currency">
         <source>Currency</source>
@@ -1361,71 +1361,71 @@ Biće konvertovano u %(toSymbol)s i poslato na
       </trans-unit>
       <trans-unit id="Hardware keys:">
         <source>Hardware keys:</source>
-        <target></target>
+        <target>Hardverski ključevi:</target>
       </trans-unit>
       <trans-unit id="Add Hardware Key...">
         <source>Add Hardware Key...</source>
-        <target></target>
+        <target>Dodaj hardverski ključ...</target>
       </trans-unit>
       <trans-unit id="Hardware Keys are not supported by your device">
         <source>Hardware Keys are not supported by your device</source>
-        <target></target>
+        <target>Vaš uređaj ne podržava hardverske ključeve</target>
       </trans-unit>
       <trans-unit id="Coins">
         <source>Coins</source>
-        <target></target>
+        <target>Kovanice</target>
       </trans-unit>
       <trans-unit id="Search">
         <source>Search</source>
-        <target></target>
+        <target>Pretraži</target>
       </trans-unit>
       <trans-unit id="Add Custom Token">
         <source>Add Custom Token</source>
-        <target></target>
+        <target>Dodaj prilagođeni žeton</target>
       </trans-unit>
       <trans-unit id="This Token has already been added.">
         <source>This Token has already been added.</source>
-        <target></target>
+        <target>Ovaj žeton je već dodat.</target>
       </trans-unit>
       <trans-unit id="address is not a valid address.">
         <source>%(address)s is not a valid address.</source>
-        <target></target>
+        <target>%(address)s nije validna adresa.</target>
       </trans-unit>
       <trans-unit id="Please fill out address.">
         <source>Please fill out address.</source>
-        <target></target>
+        <target>Popunite adresu.</target>
       </trans-unit>
       <trans-unit id="Success!">
         <source>Success!</source>
-        <target></target>
+        <target>Uspeh!</target>
       </trans-unit>
       <trans-unit id="Accelerate">
         <source>Accelerate</source>
-        <target></target>
+        <target>Ubrzaj</target>
       </trans-unit>
       <trans-unit id="Confirm acceleration">
         <source>Confirm acceleration</source>
-        <target></target>
+        <target>Potvrdi ubrzavanje</target>
       </trans-unit>
       <trans-unit id="Acceleration Successful">
         <source>Acceleration Successful</source>
-        <target></target>
+        <target>Uspešno ubrzavanje</target>
       </trans-unit>
       <trans-unit id="Acceleration Failed">
         <source>Acceleration Failed</source>
-        <target></target>
+        <target>Ubrzavanje nije uspelo</target>
       </trans-unit>
       <trans-unit id="Speed">
         <source>Speed</source>
-        <target></target>
+        <target>Brzina</target>
       </trans-unit>
       <trans-unit id="Your transaction will be replaced in your history tab shortly.">
         <source>Your transaction will be replaced in your history tab shortly.</source>
-        <target></target>
+        <target>Vaša transakcija će uskoro biti zamenjena u vašoj kartici "istorija".</target>
       </trans-unit>
       <trans-unit id="confirmations:">
         <source>confirmations:</source>
-        <target></target>
+        <target>potvrde:</target>
       </trans-unit>
     </body>
   </file>

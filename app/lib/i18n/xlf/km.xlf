@@ -15,11 +15,11 @@
       </trans-unit>
       <trans-unit id="This keeps your account secure, and lets you open your wallet on multiple devices.">
         <source>This keeps your account secure, and lets you open your wallet on multiple devices.</source>
-        <target>ការណ៍នេះធ្វើឲ្យគណនីរបស់អ្នកមានសុវត្ថិភាពហើយអនុញ្ញាតឲ្យអ្នកបើកកាបូបរបស់អ្នកនៅលើឧបករណ៍ជាច្រើនទៀត។</target>
+        <target>វារក្សាគណនីរបស់អ្នកមានសុវត្ថិភាពហើយអនុញ្ញាតឲ្យអ្នកបើកកាបូបរបស់អ្នកនៅលើឧបករណ៍ជាច្រើនទៀត។</target>
       </trans-unit>
       <trans-unit id="It is very important you write this down.">
         <source>It's very important you write this down.</source>
-        <target>វាសំខាន់ណាស់សម្រាប់អ្នកសរសេរចូល។</target>
+        <target>វាសំខាន់ណាស់ដែលអ្នកត្រូវសរសេរវា។</target>
       </trans-unit>
       <trans-unit id="Generate passphrase">
         <source>Generate passphrase</source>
@@ -51,7 +51,7 @@
       </trans-unit>
       <trans-unit id="I have written down or otherwise securely stored my passphrase">
         <source>I have written down or otherwise securely stored my passphrase</source>
-        <target>ខ្ញុំបានសរសេរចូលរួចហើយឬបើមិនដូច្នោះទេទុកឃ្លាសម្ងាត់របស់ខ្ញុំដោយសុវត្ថិភាព។</target>
+        <target>ខ្ញុំបានសរសេរវារួចហើយឬបើមិនដូច្នោះទេទុកឃ្លាសម្ងាត់របស់ខ្ញុំដោយសុវត្ថិភាព។</target>
       </trans-unit>
       <trans-unit id="Open wallet">
         <source>Open wallet</source>
@@ -123,7 +123,7 @@
       </trans-unit>
       <trans-unit id="Please enter an amount above">
         <source>Please enter an amount above %(dust)s</source>
-        <target>សូមបញ្ចូលចំនួនទឹកប្រាក់ខាងលើ %(dust)s</target>
+        <target>សូមបញ្ចូលចំនួនខាងលើជា %(dust)s</target>
       </trans-unit>
       <trans-unit id="Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.">
         <source>Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.</source>
@@ -139,7 +139,7 @@
       </trans-unit>
       <trans-unit id="A name is required to set your profile on Coin">
         <source>A name is required to set your profile on Coin</source>
-        <target>ឈ្មោះមួយគឺចាំបាច់ដើម្បីកំណត់ប្រវត្តិរូបរបស់អ្នកនៅលើកាក់។</target>
+        <target>ត្រូវការឈ្មោះដើម្បីកំណត់ប្រវត្តិរូបរបស់អ្នកនៅលើកាក់។</target>
       </trans-unit>
       <trans-unit id="Uh Oh...">
         <source>Uh Oh...</source>
@@ -183,7 +183,7 @@
       </trans-unit>
       <trans-unit id="Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.">
         <source>Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.</source>
-        <target>Gravatar (ត្រូវបានស្គាល់ជាសកលថាជា អាវតា) គឺជាសេវាកម្មមួយដែលអនុញ្ញាតឲ្យអ្នកប្រើអាវតាដដែលឡើងវិញនៅលើវ៉ិបសាយថ៍និងកម្មវិធីទូរសព្ទដោយបញ្ជាក់អាសយដ្ឋានអ៊ីមែល។</target>
+        <target>Gravatar (ត្រូវបានស្គាល់ជាសកលថាជា អាវតា) គឺជាសេវាកម្មមួយដែលអនុញ្ញាតឲ្យអ្នកប្រើអាវតាដដែលឡើងវិញនៅលើវ៉ិបសាយថ៍និងកម្មវិធីទូរស័ព្ទដោយបញ្ជាក់អាសយដ្ឋានអ៊ីមែល។</target>
       </trans-unit>
       <trans-unit id="Create a gravatar">
         <source>Create a gravatar</source>
@@ -211,7 +211,7 @@
       </trans-unit>
       <trans-unit id="Tokens">
         <source>Tokens</source>
-        <target>កាស</target>
+        <target>និមិត្ដរូប</target>
       </trans-unit>
       <trans-unit id="Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.">
         <source>Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.</source>
@@ -1361,71 +1361,71 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Hardware keys:">
         <source>Hardware keys:</source>
-        <target></target>
+        <target>សោផ្នែករឹង</target>
       </trans-unit>
       <trans-unit id="Add Hardware Key...">
         <source>Add Hardware Key...</source>
-        <target></target>
+        <target>បន្ថែមសោរផ្នែករឹង</target>
       </trans-unit>
       <trans-unit id="Hardware Keys are not supported by your device">
         <source>Hardware Keys are not supported by your device</source>
-        <target></target>
+        <target>ឧបករណ៍របស់អ្នកទេមិនគាំទ្រសោផ្នែករឹងទេ</target>
       </trans-unit>
       <trans-unit id="Coins">
         <source>Coins</source>
-        <target></target>
+        <target>កាក់</target>
       </trans-unit>
       <trans-unit id="Search">
         <source>Search</source>
-        <target></target>
+        <target>ស្វែងរក...</target>
       </trans-unit>
       <trans-unit id="Add Custom Token">
         <source>Add Custom Token</source>
-        <target></target>
+        <target>បន្ថែមនិមិត្ដរូបតាមតម្រូវ</target>
       </trans-unit>
       <trans-unit id="This Token has already been added.">
         <source>This Token has already been added.</source>
-        <target></target>
+        <target>និមិត្ដរូបនេះត្រូវបានបន្ថែមរួចហើយ។</target>
       </trans-unit>
       <trans-unit id="address is not a valid address.">
         <source>%(address)s is not a valid address.</source>
-        <target></target>
+        <target>%(address)s មិនមែនជាអាសយដ្ឋានត្រឹមត្រូវទេ។</target>
       </trans-unit>
       <trans-unit id="Please fill out address.">
         <source>Please fill out address.</source>
-        <target></target>
+        <target>សូមបំពេញអាសយដ្ឋាន់</target>
       </trans-unit>
       <trans-unit id="Success!">
         <source>Success!</source>
-        <target></target>
+        <target>ជោគជ័យ</target>
       </trans-unit>
       <trans-unit id="Accelerate">
         <source>Accelerate</source>
-        <target></target>
+        <target>បង្កើនល្បឿន/កម្រិត</target>
       </trans-unit>
       <trans-unit id="Confirm acceleration">
         <source>Confirm acceleration</source>
-        <target></target>
+        <target>បញ្ជាក់បការបង្កើនល្បឿន/កម្រិត</target>
       </trans-unit>
       <trans-unit id="Acceleration Successful">
         <source>Acceleration Successful</source>
-        <target></target>
+        <target>ការបង្កើនល្បឿន/កម្រិតជោគជ័យ</target>
       </trans-unit>
       <trans-unit id="Acceleration Failed">
         <source>Acceleration Failed</source>
-        <target></target>
+        <target>ការបង្កើនល្បឿន/កម្រិតបានបរាជ័យ</target>
       </trans-unit>
       <trans-unit id="Speed">
         <source>Speed</source>
-        <target></target>
+        <target>ល្បឿន</target>
       </trans-unit>
       <trans-unit id="Your transaction will be replaced in your history tab shortly.">
         <source>Your transaction will be replaced in your history tab shortly.</source>
-        <target></target>
+        <target>ប្រតិបត្តិការរបស់អ្នកនឹងជំនួសនៅក្នុងបារប្រវត្តិរបស់អ្នកឆាប់ៗនេះ។</target>
       </trans-unit>
       <trans-unit id="confirmations:">
         <source>confirmations:</source>
-        <target></target>
+        <target>ការបញ្ចាក់</target>
       </trans-unit>
     </body>
   </file>

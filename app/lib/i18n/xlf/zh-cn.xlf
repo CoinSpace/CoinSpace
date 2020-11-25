@@ -1357,75 +1357,75 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Account">
         <source>Account</source>
-        <target>帐户</target>
+        <target>账户</target>
       </trans-unit>
       <trans-unit id="Hardware keys:">
         <source>Hardware keys:</source>
-        <target></target>
+        <target>硬件密钥：</target>
       </trans-unit>
       <trans-unit id="Add Hardware Key...">
         <source>Add Hardware Key...</source>
-        <target></target>
+        <target>添加硬件密钥……</target>
       </trans-unit>
       <trans-unit id="Hardware Keys are not supported by your device">
         <source>Hardware Keys are not supported by your device</source>
-        <target></target>
+        <target>您的设备不支持硬件密钥</target>
       </trans-unit>
       <trans-unit id="Coins">
         <source>Coins</source>
-        <target></target>
+        <target>货币</target>
       </trans-unit>
       <trans-unit id="Search">
         <source>Search</source>
-        <target></target>
+        <target>搜索</target>
       </trans-unit>
       <trans-unit id="Add Custom Token">
         <source>Add Custom Token</source>
-        <target></target>
+        <target>添加自定义代币</target>
       </trans-unit>
       <trans-unit id="This Token has already been added.">
         <source>This Token has already been added.</source>
-        <target></target>
+        <target>此代币已经添加。</target>
       </trans-unit>
       <trans-unit id="address is not a valid address.">
         <source>%(address)s is not a valid address.</source>
-        <target></target>
+        <target>%(address)s 不是一个有效地址。</target>
       </trans-unit>
       <trans-unit id="Please fill out address.">
         <source>Please fill out address.</source>
-        <target></target>
+        <target>请填写地址。</target>
       </trans-unit>
       <trans-unit id="Success!">
         <source>Success!</source>
-        <target></target>
+        <target>成功！</target>
       </trans-unit>
       <trans-unit id="Accelerate">
         <source>Accelerate</source>
-        <target></target>
+        <target>加速</target>
       </trans-unit>
       <trans-unit id="Confirm acceleration">
         <source>Confirm acceleration</source>
-        <target></target>
+        <target>确认加速</target>
       </trans-unit>
       <trans-unit id="Acceleration Successful">
         <source>Acceleration Successful</source>
-        <target></target>
+        <target>加速成功</target>
       </trans-unit>
       <trans-unit id="Acceleration Failed">
         <source>Acceleration Failed</source>
-        <target></target>
+        <target>加速失败</target>
       </trans-unit>
       <trans-unit id="Speed">
         <source>Speed</source>
-        <target></target>
+        <target>速度</target>
       </trans-unit>
       <trans-unit id="Your transaction will be replaced in your history tab shortly.">
         <source>Your transaction will be replaced in your history tab shortly.</source>
-        <target></target>
+        <target>您的交易将很快在您的历史记录标签中替换。</target>
       </trans-unit>
       <trans-unit id="confirmations:">
         <source>confirmations:</source>
-        <target></target>
+        <target>确认：</target>
       </trans-unit>
     </body>
   </file>

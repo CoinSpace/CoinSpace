@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="Create new wallet">
         <source>Create new wallet</source>
-        <target>Új tárca</target>
+        <target>Új tárca létrehozása</target>
       </trans-unit>
       <trans-unit id="Open existing wallet">
         <source>Open existing wallet</source>
@@ -11,15 +11,15 @@
       </trans-unit>
       <trans-unit id="We are about to generate your very own passphrase">
         <source>We're about to generate your very own passphrase</source>
-        <target>Hamarosan legeneráljuk a jelszavad.</target>
+        <target>Hamarosan generáljuk a jelszavad</target>
       </trans-unit>
       <trans-unit id="This keeps your account secure, and lets you open your wallet on multiple devices.">
         <source>This keeps your account secure, and lets you open your wallet on multiple devices.</source>
-        <target>Ez segít biztonságban tartani a fiókodat és segítségével meg tudod nyitni a tárcád más eszközökön is.</target>
+        <target>Ezzel biztonságban tarthatod a fiókod és más eszközökön is meg tudod nyitni a tárcád.</target>
       </trans-unit>
       <trans-unit id="It is very important you write this down.">
         <source>It's very important you write this down.</source>
-        <target>Nagyon fontos, hogy ezt helyesen leírd.</target>
+        <target>Nagyon fontos, hogy ezt helyesen írd le.</target>
       </trans-unit>
       <trans-unit id="Generate passphrase">
         <source>Generate passphrase</source>
@@ -39,15 +39,15 @@
       </trans-unit>
       <trans-unit id="Your passphrase (12 words)">
         <source>Your passphrase (12 words)</source>
-        <target>A jelszavad (12 szó)</target>
+        <target>Saját jelszó (12 szó)</target>
       </trans-unit>
       <trans-unit id="Your passphrase will not be shown again.">
         <source>Your passphrase will not be shown again.</source>
-        <target>Többet nem fogod látni ezt a jelszót</target>
+        <target>Többet nem fogod látni ezt a jelszót.</target>
       </trans-unit>
       <trans-unit id="Without it you will lose access to your wallet.">
         <source>Without it you will lose access to your wallet.</source>
-        <target>Nélküle nem tudsz hozzáférni a tárcádhoz, ha elveszted.</target>
+        <target>Nélküle nem tudsz hozzáférni a tárcádhoz.</target>
       </trans-unit>
       <trans-unit id="I have written down or otherwise securely stored my passphrase">
         <source>I have written down or otherwise securely stored my passphrase</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="Open wallet">
         <source>Open wallet</source>
-        <target>Tárce megnyitása</target>
+        <target>Tárca megnyitása</target>
       </trans-unit>
       <trans-unit id="Checking passphrase">
         <source>Checking passphrase</source>
@@ -71,15 +71,15 @@
       </trans-unit>
       <trans-unit id="Enter your PIN">
         <source>Enter your PIN</source>
-        <target>Add meg a PIN kódod</target>
+        <target>PIN-kód megadása</target>
       </trans-unit>
       <trans-unit id="Set a PIN for quick access">
         <source>Set a PIN for quick access</source>
-        <target>Állíts be PIN-t a gyors hozzáférés érdekében</target>
+        <target>PIN beállítása gyors hozzáféréshez</target>
       </trans-unit>
       <trans-unit id="Review passphrase again">
         <source>Review passphrase again</source>
-        <target>Ellenőrizd a jelszavad</target>
+        <target>Jelszó ismételt ellenőrzése</target>
       </trans-unit>
       <trans-unit id="Open a different wallet">
         <source>Open a different wallet</source>
@@ -1361,71 +1361,71 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Hardware keys:">
         <source>Hardware keys:</source>
-        <target></target>
+        <target>Hardverkulcsok:</target>
       </trans-unit>
       <trans-unit id="Add Hardware Key...">
         <source>Add Hardware Key...</source>
-        <target></target>
+        <target>Hardverkulcs hozzáadása...</target>
       </trans-unit>
       <trans-unit id="Hardware Keys are not supported by your device">
         <source>Hardware Keys are not supported by your device</source>
-        <target></target>
+        <target>A készülék nem támogatja a hardverkulcsokat</target>
       </trans-unit>
       <trans-unit id="Coins">
         <source>Coins</source>
-        <target></target>
+        <target>Érmék</target>
       </trans-unit>
       <trans-unit id="Search">
         <source>Search</source>
-        <target></target>
+        <target>Keresés</target>
       </trans-unit>
       <trans-unit id="Add Custom Token">
         <source>Add Custom Token</source>
-        <target></target>
+        <target>Egyéni token hozzáadása</target>
       </trans-unit>
       <trans-unit id="This Token has already been added.">
         <source>This Token has already been added.</source>
-        <target></target>
+        <target>Ezt a tokent már hozzáadták.</target>
       </trans-unit>
       <trans-unit id="address is not a valid address.">
         <source>%(address)s is not a valid address.</source>
-        <target></target>
+        <target>%(address)s nem érvényes cím.</target>
       </trans-unit>
       <trans-unit id="Please fill out address.">
         <source>Please fill out address.</source>
-        <target></target>
+        <target>Töltsd ki a címet.</target>
       </trans-unit>
       <trans-unit id="Success!">
         <source>Success!</source>
-        <target></target>
+        <target>Sikerült!</target>
       </trans-unit>
       <trans-unit id="Accelerate">
         <source>Accelerate</source>
-        <target></target>
+        <target>Gyorsítás</target>
       </trans-unit>
       <trans-unit id="Confirm acceleration">
         <source>Confirm acceleration</source>
-        <target></target>
+        <target>Gyorsítás megerősítése</target>
       </trans-unit>
       <trans-unit id="Acceleration Successful">
         <source>Acceleration Successful</source>
-        <target></target>
+        <target>Sikeres gyorsítás</target>
       </trans-unit>
       <trans-unit id="Acceleration Failed">
         <source>Acceleration Failed</source>
-        <target></target>
+        <target>Sikertelen gyorsítás</target>
       </trans-unit>
       <trans-unit id="Speed">
         <source>Speed</source>
-        <target></target>
+        <target>Sebesség</target>
       </trans-unit>
       <trans-unit id="Your transaction will be replaced in your history tab shortly.">
         <source>Your transaction will be replaced in your history tab shortly.</source>
-        <target></target>
+        <target>A tranzakciód hamarosan le lesz cserélve az előzmények között.</target>
       </trans-unit>
       <trans-unit id="confirmations:">
         <source>confirmations:</source>
-        <target></target>
+        <target>megerősítés:</target>
       </trans-unit>
     </body>
   </file>

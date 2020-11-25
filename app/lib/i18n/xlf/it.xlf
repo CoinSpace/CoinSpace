@@ -1305,7 +1305,7 @@ Sarà convertito in %(toSymbol)s, e inviato a
       </trans-unit>
       <trans-unit id="Use Biometrics in place of PIN.">
         <source>Use Biometrics in place of PIN.</source>
-        <target>Utilizza la buometria al posto del PIN.</target>
+        <target>Utilizza la biometria al posto del PIN.</target>
       </trans-unit>
       <trans-unit id="Settings">
         <source>Settings</source>
@@ -1361,71 +1361,71 @@ Sarà convertito in %(toSymbol)s, e inviato a
       </trans-unit>
       <trans-unit id="Hardware keys:">
         <source>Hardware keys:</source>
-        <target></target>
+        <target>Chiavi hardware:</target>
       </trans-unit>
       <trans-unit id="Add Hardware Key...">
         <source>Add Hardware Key...</source>
-        <target></target>
+        <target>Aggiungi chiave hardware...</target>
       </trans-unit>
       <trans-unit id="Hardware Keys are not supported by your device">
         <source>Hardware Keys are not supported by your device</source>
-        <target></target>
+        <target>Le chiavi non sono supportate dal tuo dispositivo</target>
       </trans-unit>
       <trans-unit id="Coins">
         <source>Coins</source>
-        <target></target>
+        <target>Coin</target>
       </trans-unit>
       <trans-unit id="Search">
         <source>Search</source>
-        <target></target>
+        <target>Ricerca</target>
       </trans-unit>
       <trans-unit id="Add Custom Token">
         <source>Add Custom Token</source>
-        <target></target>
+        <target>Aggiungi Token personalizzati</target>
       </trans-unit>
       <trans-unit id="This Token has already been added.">
         <source>This Token has already been added.</source>
-        <target></target>
+        <target>Questo Token è già stato aggiunto</target>
       </trans-unit>
       <trans-unit id="address is not a valid address.">
         <source>%(address)s is not a valid address.</source>
-        <target></target>
+        <target>%(address)s non è un indirizzo email valido</target>
       </trans-unit>
       <trans-unit id="Please fill out address.">
         <source>Please fill out address.</source>
-        <target></target>
+        <target>Compila l'indirizzo</target>
       </trans-unit>
       <trans-unit id="Success!">
         <source>Success!</source>
-        <target></target>
+        <target>Successo!</target>
       </trans-unit>
       <trans-unit id="Accelerate">
         <source>Accelerate</source>
-        <target></target>
+        <target>Accelera</target>
       </trans-unit>
       <trans-unit id="Confirm acceleration">
         <source>Confirm acceleration</source>
-        <target></target>
+        <target>Conferma accelerazione</target>
       </trans-unit>
       <trans-unit id="Acceleration Successful">
         <source>Acceleration Successful</source>
-        <target></target>
+        <target>Accelerazione avvenuta con successo</target>
       </trans-unit>
       <trans-unit id="Acceleration Failed">
         <source>Acceleration Failed</source>
-        <target></target>
+        <target>Accelerazione non riuscita</target>
       </trans-unit>
       <trans-unit id="Speed">
         <source>Speed</source>
-        <target></target>
+        <target>Velocità</target>
       </trans-unit>
       <trans-unit id="Your transaction will be replaced in your history tab shortly.">
         <source>Your transaction will be replaced in your history tab shortly.</source>
-        <target></target>
+        <target>A breve la tua transazione sarà sostituita nella scheda della tua cronologia.</target>
       </trans-unit>
       <trans-unit id="confirmations:">
         <source>confirmations:</source>
-        <target></target>
+        <target>conferme:</target>
       </trans-unit>
     </body>
   </file>

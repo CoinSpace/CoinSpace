@@ -255,11 +255,11 @@
       </trans-unit>
       <trans-unit id="Inputs:">
         <source>Inputs:</source>
-        <target>Entrées :</target>
+        <target>Entrées:</target>
       </trans-unit>
       <trans-unit id="Outputs:">
         <source>Outputs:</source>
-        <target>Sorties :</target>
+        <target>Sorties:</target>
       </trans-unit>
       <trans-unit id="Your wallet address">
         <source>Your wallet address</source>
@@ -677,7 +677,7 @@ Le montant sera converti en %(toSymbol)s, et sera envoyé à
       </trans-unit>
       <trans-unit id="Payment operations:">
         <source>Payment operations:</source>
-        <target>Opérations de paiement :</target>
+        <target>Opérations de paiement:</target>
       </trans-unit>
       <trans-unit id="Pay (:amount) XLM to :destination">
         <source>Pay %(amount)s XLM to %(destination)s</source>
@@ -1341,7 +1341,7 @@ Le montant sera converti en %(toSymbol)s, et sera envoyé à
       </trans-unit>
       <trans-unit id="Use for:">
         <source>Use for:</source>
-        <target>Utiliser pour :</target>
+        <target>Utiliser pour:</target>
       </trans-unit>
       <trans-unit id="High Security">
         <source>High Security</source>
@@ -1361,71 +1361,71 @@ Le montant sera converti en %(toSymbol)s, et sera envoyé à
       </trans-unit>
       <trans-unit id="Hardware keys:">
         <source>Hardware keys:</source>
-        <target></target>
+        <target>Clés matérielles:</target>
       </trans-unit>
       <trans-unit id="Add Hardware Key...">
         <source>Add Hardware Key...</source>
-        <target></target>
+        <target>Ajouter la clé matérielle...</target>
       </trans-unit>
       <trans-unit id="Hardware Keys are not supported by your device">
         <source>Hardware Keys are not supported by your device</source>
-        <target></target>
+        <target>Les clés matérielles ne sont pas compatibles avec votre appareil</target>
       </trans-unit>
       <trans-unit id="Coins">
         <source>Coins</source>
-        <target></target>
+        <target>Pièces</target>
       </trans-unit>
       <trans-unit id="Search">
         <source>Search</source>
-        <target></target>
+        <target>Recherche</target>
       </trans-unit>
       <trans-unit id="Add Custom Token">
         <source>Add Custom Token</source>
-        <target></target>
+        <target>Ajouter un jeton personnalisé</target>
       </trans-unit>
       <trans-unit id="This Token has already been added.">
         <source>This Token has already been added.</source>
-        <target></target>
+        <target>Ce jeton a déjà été ajouté.</target>
       </trans-unit>
       <trans-unit id="address is not a valid address.">
         <source>%(address)s is not a valid address.</source>
-        <target></target>
+        <target>%(address)s n'est pas une adresse valide.</target>
       </trans-unit>
       <trans-unit id="Please fill out address.">
         <source>Please fill out address.</source>
-        <target></target>
+        <target>Veuillez remplir l'adresse.</target>
       </trans-unit>
       <trans-unit id="Success!">
         <source>Success!</source>
-        <target></target>
+        <target>Réussi !</target>
       </trans-unit>
       <trans-unit id="Accelerate">
         <source>Accelerate</source>
-        <target></target>
+        <target>Accélérer</target>
       </trans-unit>
       <trans-unit id="Confirm acceleration">
         <source>Confirm acceleration</source>
-        <target></target>
+        <target>Confirmer l'accélération</target>
       </trans-unit>
       <trans-unit id="Acceleration Successful">
         <source>Acceleration Successful</source>
-        <target></target>
+        <target>Accélération réussie</target>
       </trans-unit>
       <trans-unit id="Acceleration Failed">
         <source>Acceleration Failed</source>
-        <target></target>
+        <target>Accélération échouée</target>
       </trans-unit>
       <trans-unit id="Speed">
         <source>Speed</source>
-        <target></target>
+        <target>Vitesse</target>
       </trans-unit>
       <trans-unit id="Your transaction will be replaced in your history tab shortly.">
         <source>Your transaction will be replaced in your history tab shortly.</source>
-        <target></target>
+        <target>Votre transaction va bientôt être remplacée dans l'historique.</target>
       </trans-unit>
       <trans-unit id="confirmations:">
         <source>confirmations:</source>
-        <target></target>
+        <target>confirmations:</target>
       </trans-unit>
     </body>
   </file>

@@ -7,35 +7,35 @@
       </trans-unit>
       <trans-unit id="Open existing wallet">
         <source>Open existing wallet</source>
-        <target>Otevřít existující peněženku</target>
+        <target>Otevřít stávající peněženku</target>
       </trans-unit>
       <trans-unit id="We are about to generate your very own passphrase">
         <source>We're about to generate your very own passphrase</source>
-        <target>Nyní vygenerujeme Vaše vlastní heslo</target>
+        <target>Nyní vytvoříme Vaše vlastní heslo</target>
       </trans-unit>
       <trans-unit id="This keeps your account secure, and lets you open your wallet on multiple devices.">
         <source>This keeps your account secure, and lets you open your wallet on multiple devices.</source>
-        <target>Toto umožňuje Vašemu účtu být vždy zabezpečený i při přístupu z různých zařízení.</target>
+        <target>Toto heslo Váš účet zabezpečí a umožní Vám mít peněženku otevřenou na více zařízeních.</target>
       </trans-unit>
       <trans-unit id="It is very important you write this down.">
         <source>It's very important you write this down.</source>
-        <target>Je velmi důležité si tohle zaznamenat.</target>
+        <target>Je velmi důležité si to zapsat.</target>
       </trans-unit>
       <trans-unit id="Generate passphrase">
         <source>Generate passphrase</source>
-        <target>Vygenerovat heslo</target>
+        <target>Vytvořit heslo</target>
       </trans-unit>
       <trans-unit id="Go back">
         <source>Go back</source>
-        <target>Vrátit se zpět</target>
+        <target>Zpět</target>
       </trans-unit>
       <trans-unit id="Generating">
         <source>Generating</source>
-        <target>Generuji</target>
+        <target>Probíhá vytváření</target>
       </trans-unit>
       <trans-unit id="Synchronizing Wallet">
         <source>Synchronizing Wallet</source>
-        <target>Synchronizuji peněženku</target>
+        <target>Probíhá synchronizace peněženky</target>
       </trans-unit>
       <trans-unit id="Your passphrase (12 words)">
         <source>Your passphrase (12 words)</source>
@@ -43,7 +43,7 @@
       </trans-unit>
       <trans-unit id="Your passphrase will not be shown again.">
         <source>Your passphrase will not be shown again.</source>
-        <target>Vaše heslo nebude znovu zobrazeno.</target>
+        <target>Vaše heslo už nebude znovu zobrazeno.</target>
       </trans-unit>
       <trans-unit id="Without it you will lose access to your wallet.">
         <source>Without it you will lose access to your wallet.</source>
@@ -51,7 +51,7 @@
       </trans-unit>
       <trans-unit id="I have written down or otherwise securely stored my passphrase">
         <source>I have written down or otherwise securely stored my passphrase</source>
-        <target>Zapsal jsem si nebo jinak bezpečně uchoval mé heslo</target>
+        <target>Své heslo jsem si zapsal nebo jinak bezpečně uschoval</target>
       </trans-unit>
       <trans-unit id="Open wallet">
         <source>Open wallet</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="Enter Passphrase">
         <source>Enter Passphrase</source>
-        <target>Vložte heslo</target>
+        <target>Zadejte heslo</target>
       </trans-unit>
       <trans-unit id="Invalid passphrase">
         <source>Invalid passphrase</source>
@@ -71,11 +71,11 @@
       </trans-unit>
       <trans-unit id="Enter your PIN">
         <source>Enter your PIN</source>
-        <target>Zadejte Váš PIN</target>
+        <target>Zadejte svůj PIN</target>
       </trans-unit>
       <trans-unit id="Set a PIN for quick access">
         <source>Set a PIN for quick access</source>
-        <target>Zadejte PIN pro rychlý přístup</target>
+        <target>Nastavte si PIN pro rychlý přístup</target>
       </trans-unit>
       <trans-unit id="Review passphrase again">
         <source>Review passphrase again</source>
@@ -87,23 +87,23 @@
       </trans-unit>
       <trans-unit id="PIN must be a 4-digit number">
         <source>PIN must be a 4-digit number</source>
-        <target>PIN musí být 4-místné číslo</target>
+        <target>PIN musí být čtyřmístné číslo</target>
       </trans-unit>
       <trans-unit id="Verifying PIN">
         <source>Verifying PIN</source>
-        <target>Ověřuji pin</target>
+        <target>Ověřuji PIN</target>
       </trans-unit>
       <trans-unit id="Setting PIN">
         <source>Setting PIN</source>
-        <target>Nastavuji PIN</target>
+        <target>Nastavení PIN</target>
       </trans-unit>
       <trans-unit id="This might take some time,">
         <source>This might take some time,</source>
-        <target>Tohle může zabrat nějaký čas.</target>
+        <target>Toto může nějakou dobu trvat,</target>
       </trans-unit>
       <trans-unit id="please be patient.">
         <source>please be patient.</source>
-        <target>prosím o strpení</target>
+        <target>mějte prosím strpení.</target>
       </trans-unit>
       <trans-unit id="Your PIN is incorrect">
         <source>Your PIN is incorrect</source>
@@ -111,23 +111,23 @@
       </trans-unit>
       <trans-unit id="Request timeout. Please check your internet connection.">
         <source>Request timeout. Please check your internet connection.</source>
-        <target>Vypršel čas na odpověď. Prosím zkontrolujte své internetové připojení.</target>
+        <target>Vypršel čas na odpověď. Zkontrolujte prosím své připojení k internetu.</target>
       </trans-unit>
       <trans-unit id="Could not save your details">
         <source>Could not save your details</source>
-        <target>Vaše informace nebyli uloženy</target>
+        <target>Vaše informace nebyly uloženy</target>
       </trans-unit>
       <trans-unit id="Please enter a valid address to send to">
         <source>Please enter a valid address to send to</source>
-        <target>Prosím zadejte platnou adresu k zaslání</target>
+        <target>Zadejte prosím platnou adresu k zaslání</target>
       </trans-unit>
       <trans-unit id="Please enter an amount above">
         <source>Please enter an amount above %(dust)s</source>
-        <target>Prosím výše zadejte množství %(dust)s</target>
+        <target>Zadejte prosím částku přes %(dust)s</target>
       </trans-unit>
       <trans-unit id="Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.">
         <source>Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.</source>
-        <target>Některé prostředky jsou dočasně nedostupné. K odeslání této transakce musíte nejprve počkat na potvrzení příchozích transakcí.</target>
+        <target>Některé prostředky jsou dočasně nedostupné. Chcete-li tuto transakci odeslat, musíte nejprve počkat na potvrzení příchozích transakcí.</target>
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
         <source>It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
@@ -1361,71 +1361,71 @@ Bude to převedeno na %(toSymbol)s, a zasláno
       </trans-unit>
       <trans-unit id="Hardware keys:">
         <source>Hardware keys:</source>
-        <target></target>
+        <target>Hardwarové klíče:</target>
       </trans-unit>
       <trans-unit id="Add Hardware Key...">
         <source>Add Hardware Key...</source>
-        <target></target>
+        <target>Přidat hardwarový klíč...</target>
       </trans-unit>
       <trans-unit id="Hardware Keys are not supported by your device">
         <source>Hardware Keys are not supported by your device</source>
-        <target></target>
+        <target>Vaše zařízení hardwarové klíče nepodporuje</target>
       </trans-unit>
       <trans-unit id="Coins">
         <source>Coins</source>
-        <target></target>
+        <target>Mince</target>
       </trans-unit>
       <trans-unit id="Search">
         <source>Search</source>
-        <target></target>
+        <target>Vyhledávání</target>
       </trans-unit>
       <trans-unit id="Add Custom Token">
         <source>Add Custom Token</source>
-        <target></target>
+        <target>Přidat vlastní token</target>
       </trans-unit>
       <trans-unit id="This Token has already been added.">
         <source>This Token has already been added.</source>
-        <target></target>
+        <target>Tento token byl už přidán.</target>
       </trans-unit>
       <trans-unit id="address is not a valid address.">
         <source>%(address)s is not a valid address.</source>
-        <target></target>
+        <target>%(address)s není platná adresa.</target>
       </trans-unit>
       <trans-unit id="Please fill out address.">
         <source>Please fill out address.</source>
-        <target></target>
+        <target>Vyplňte prosím adresu.</target>
       </trans-unit>
       <trans-unit id="Success!">
         <source>Success!</source>
-        <target></target>
+        <target>Úspěch!</target>
       </trans-unit>
       <trans-unit id="Accelerate">
         <source>Accelerate</source>
-        <target></target>
+        <target>Zrychlit</target>
       </trans-unit>
       <trans-unit id="Confirm acceleration">
         <source>Confirm acceleration</source>
-        <target></target>
+        <target>Potvrdit zrychlení</target>
       </trans-unit>
       <trans-unit id="Acceleration Successful">
         <source>Acceleration Successful</source>
-        <target></target>
+        <target>Zrychlení bylo úspěšné</target>
       </trans-unit>
       <trans-unit id="Acceleration Failed">
         <source>Acceleration Failed</source>
-        <target></target>
+        <target>Zrychlení se nezdařilo</target>
       </trans-unit>
       <trans-unit id="Speed">
         <source>Speed</source>
-        <target></target>
+        <target>Rychlost</target>
       </trans-unit>
       <trans-unit id="Your transaction will be replaced in your history tab shortly.">
         <source>Your transaction will be replaced in your history tab shortly.</source>
-        <target></target>
+        <target>Vaše transakce bude za chvíli vyměněna ve Vaší záložce historie.</target>
       </trans-unit>
       <trans-unit id="confirmations:">
         <source>confirmations:</source>
-        <target></target>
+        <target>potvrzení:</target>
       </trans-unit>
     </body>
   </file>
