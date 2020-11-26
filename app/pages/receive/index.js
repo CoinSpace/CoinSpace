@@ -11,6 +11,7 @@ const showSetDetails = require('widgets/modals/set-details');
 const qrcode = require('lib/qrcode');
 const initEosSetup = require('widgets/eos/setup');
 const details = require('lib/wallet/details');
+const Clipboard = require('clipboard');
 const { translate } = require('lib/i18n');
 
 module.exports = function(el) {
@@ -43,6 +44,16 @@ module.exports = function(el) {
   });
 
   initEosSetup(ractive.find('#eos-setup'));
+
+  if (ractive.get('IS_CLIPBOARD_SUPPORTED')) {
+    const clipboard = new Clipboard(ractive.find('.js-address-input'));
+    clipboard.on('success', () => {
+      ractive.set('isAddressCopied', true);
+      setTimeout(() => {
+        ractive.set('isAddressCopied', false);
+      }, 1000);
+    });
+  }
 
   emitter.on('wallet-ready', () => {
     const wallet = CS.getWallet();

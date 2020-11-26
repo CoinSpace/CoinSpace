@@ -12,7 +12,6 @@ module.exports = function(el) {
     data: {
       passphrase: '',
       isCopied: false,
-      isClipboardEnabled: Clipboard.isSupported(),
       checked: false,
       termsChecked: false,
     },
@@ -24,13 +23,15 @@ module.exports = function(el) {
     ractive.set('termsChecked', context.termsChecked);
   });
 
-  const clipboard = new Clipboard(ractive.find('#js-passphrase'));
-  clipboard.on('success', () => {
-    ractive.set('isCopied', true);
-    setTimeout(() => {
-      ractive.set('isCopied', false);
-    }, 1000);
-  });
+  if (ractive.get('IS_CLIPBOARD_SUPPORTED')) {
+    const clipboard = new Clipboard(ractive.find('.js-passphrase'));
+    clipboard.on('success', () => {
+      ractive.set('isCopied', true);
+      setTimeout(() => {
+        ractive.set('isCopied', false);
+      }, 1000);
+    });
+  }
 
   ractive.on('toggle-check', () => {
     ractive.set('checked', !ractive.get('checked'));

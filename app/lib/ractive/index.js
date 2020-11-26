@@ -4,6 +4,7 @@ if (process.env.NODE_ENV === 'production') {
   Ractive.DEBUG = false;
 }
 const { translate } = require('lib/i18n');
+const Clipboard = require('clipboard');
 
 // extracted from https://github.com/RactiveJS/Ractive-events-keys
 const makeKeyDefinition = function( code ) {
@@ -109,6 +110,7 @@ Ractive.defaults.data = {
   translate,
   BUILD_TYPE: process.env.BUILD_TYPE,
   BUILD_PLATFORM: process.env.BUILD_PLATFORM,
+  IS_CLIPBOARD_SUPPORTED: Clipboard.isSupported(),
 };
 
 Ractive.decorators['numbers'] = (node) => {

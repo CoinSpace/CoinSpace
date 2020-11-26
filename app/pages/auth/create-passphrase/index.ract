@@ -2,10 +2,10 @@
 
   <div class="_header">{{translate("Your passphrase (12 words)")}}</div>
 
-  <div id="js-passphrase" data-clipboard-text="{{passphrase}}" class="_passphrase needsclick">
-    <span class="needsclick">{{passphrase}}</span>
-    {{#if isClipboardEnabled}}
-      <div class="_copy needsclick">
+  <div class="js-passphrase _passphrase" data-clipboard-text="{{passphrase}}">
+    <span class="">{{passphrase}}</span>
+    {{#if IS_CLIPBOARD_SUPPORTED}}
+      <div class="_copy">
       {{#if isCopied}}
         {{translate("Copied!")}}
       {{else}}

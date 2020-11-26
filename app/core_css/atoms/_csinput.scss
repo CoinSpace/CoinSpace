@@ -25,6 +25,9 @@
     height: 100%;
     cursor: pointer;
     outline: 0;
+    &[data-clipboard-text] {
+      cursor: pointer;
+    }
   }
 
   &--multi {

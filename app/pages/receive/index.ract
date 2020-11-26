@@ -21,7 +21,17 @@
         {{/if}}
       </div>
       <div class="csinput">
+        {{#if IS_CLIPBOARD_SUPPORTED}}
+        <div class="js-address-input csinput__input" tabindex="0" data-clipboard-text="{{address}}">
+          {{#if isAddressCopied}}
+            {{translate("Copied!")}}
+          {{else}}
+            {{address}}
+          {{/if}}
+        </div>
+        {{else}}
         <div class="csinput__input" tabindex="0">{{address}}</div>
+        {{/if}}
       </div>
     </div>
 
