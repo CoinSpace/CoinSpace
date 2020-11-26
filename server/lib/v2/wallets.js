@@ -224,6 +224,7 @@ async function platformAttestationOptions(device) {
     supportedAlgorithmIDs: fidoAlgorithmIDs,
     authenticatorSelection: {
       authenticatorAttachment: 'platform',
+      userVerification: 'discouraged',
     },
   });
   await _setChallenge(device, options.challenge, 'attestation', 'platform');
@@ -277,6 +278,7 @@ async function crossplatformAttestationOptions(device) {
     supportedAlgorithmIDs: fidoAlgorithmIDs,
     authenticatorSelection: {
       authenticatorAttachment: 'cross-platform',
+      userVerification: 'discouraged',
     },
     excludeCredentials: wallet.authenticators ? wallet.authenticators.map(mapAuthenticator) : undefined,
   });
