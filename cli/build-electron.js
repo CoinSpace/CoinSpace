@@ -40,7 +40,7 @@ webpackConfig.plugins.push(
   new webpack.DefinePlugin({
     'process.env.BUILD_TYPE': JSON.stringify('electron'),
     // use mas, appx app for mas-dev and appx-dev build
-    'process.env.BUILD_PLATFORM': JSON.stringify(program.platform.release('-dev', '')),
+    'process.env.BUILD_PLATFORM': JSON.stringify(program.platform.replace('-dev', '')),
     'process.env.SENTRY_DSN': JSON.stringify(process.env['SENTRY_DSN']),
     'process.env.SENTRY_RELEASE': JSON.stringify(`${pkg.name}.electron-${program.platform}@${pkg.version}`),
   })
