@@ -50,13 +50,21 @@ const platforms = [{
   type: TYPE_FILE,
   pattern: /\.dmg$/i,
 }, {
-  // Mac App Strore application
+  // Mac App Store application
   distribution: 'mas',
   arch: 'any',
   app: 'app',
   type: TYPE_LINK,
   pattern: /id980719434\/?#\?platform=mac/ig,
   link: 'https://apps.apple.com/ru/app/coin-bitcoin-wallet/id980719434',
+}, {
+  // Windows / Microsoft Store application
+  distribution: 'appx',
+  arch: 'any',
+  app: 'app',
+  type: TYPE_LINK,
+  pattern: /apps\/9NBLGGH5PXJQ/ig,
+  link: 'https://www.microsoft.com/store/apps/9NBLGGH5PXJQ',
 }, {
   // Common for iPhone, iPad, and Apple Watch
   distribution: 'ios',
