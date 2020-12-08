@@ -34,7 +34,7 @@ function getAccessToken(code) {
       method: 'get',
       url: 'https://auth.shapeshift.io/oauth/token/details',
       headers: {
-        'Authorization': 'Bearer ' + accessToken,
+        Authorization: 'Bearer ' + accessToken,
       },
     }).then((response) => {
       const isVerified = response.data && response.data.user.verificationStatus !== 'NONE';

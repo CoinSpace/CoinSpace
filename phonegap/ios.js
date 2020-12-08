@@ -41,6 +41,7 @@ async function run() {
   cordova('plugin add cordova-plugin-inapp-review@1.1.0');
 
   const orientations = {
+    // eslint-disable-next-line quote-props
     'UISupportedInterfaceOrientations': [
       'UIInterfaceOrientationPortrait',
     ],

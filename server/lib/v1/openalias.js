@@ -34,7 +34,7 @@ function resolve(hostname, callback) {
 
         return callback(null, address, name);
       }
-      return callback({ 'error': 'No OpenAlias record found.' });
+      return callback({ error: 'No OpenAlias record found.' });
     });
   });
 }

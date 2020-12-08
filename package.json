@@ -51,6 +51,7 @@
     "@coinspace/cs-ripple-wallet": "^1.2.2",
     "@coinspace/cs-stellar-wallet": "^1.2.1",
     "@coinspace/cs-wallet": "^0.30.5",
+    "@coinspace/eslint-config": "^1.0.1",
     "@moonpay/browser": "^1.0.3",
     "@sentry/browser": "^5.14.2",
     "@sentry/cli": "^1.51.1",
@@ -74,7 +75,7 @@
     "dotenv": "^4.0.0",
     "dotenv-webpack": "^1.5.4",
     "ejs-loader": "^0.3.0",
-    "eslint": "^7.5.0",
+    "eslint": "^7.15.0",
     "evp_bytestokey": "^1.0.3",
     "extract-text-webpack-plugin": "^3.0.0",
     "fastclick": "^1.0.6",
@@ -116,92 +117,13 @@
   },
   "eslintConfig": {
     "extends": [
-      "eslint:recommended"
+      "@coinspace"
     ],
     "env": {
-      "es2017": true,
       "node": true,
       "browser": true,
       "commonjs": true,
       "mocha": true
-    },
-    "parserOptions": {
-      "ecmaVersion": 2020
-    },
-    "rules": {
-      "camelcase": [
-        "error",
-        {
-          "properties": "never"
-        }
-      ],
-      "semi": "error",
-      "comma-dangle": [
-        "error",
-        {
-          "arrays": "always-multiline",
-          "objects": "always-multiline",
-          "imports": "always-multiline",
-          "exports": "always-multiline",
-          "functions": "never"
-        }
-      ],
-      "comma-spacing": [
-        "error",
-        {
-          "before": false,
-          "after": true
-        }
-      ],
-      "object-curly-spacing": [
-        "error",
-        "always"
-      ],
-      "object-shorthand": "error",
-      "array-bracket-spacing": [
-        "error",
-        "never"
-      ],
-      "indent": [
-        "error",
-        2
-      ],
-      "no-console": "off",
-      "strict": "error",
-      "max-len": [
-        "error",
-        120
-      ],
-      "keyword-spacing": "error",
-      "space-before-blocks": "error",
-      "curly": [
-        "error",
-        "multi-line"
-      ],
-      "no-unused-vars": [
-        "error",
-        {
-          "vars": "all"
-        }
-      ],
-      "no-var": "error",
-      "prefer-const": "error",
-      "prefer-arrow-callback": "error",
-      "prefer-destructuring": [
-        "error",
-        {
-          "object": true,
-          "array": false
-        }
-      ],
-      "space-before-function-paren": [
-        "error",
-        {
-          "anonymous": "never",
-          "named": "never",
-          "asyncArrow": "always"
-        }
-      ]
     }
   }
 }

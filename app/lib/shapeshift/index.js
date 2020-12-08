@@ -93,7 +93,7 @@ function shift(options) {
     method: 'post',
     data,
     headers: {
-      'Authorization': 'Bearer ' + getAccessToken(),
+      Authorization: 'Bearer ' + getAccessToken(),
     },
   }).then((data) => {
     if (data.error) throw new Error(data.error);

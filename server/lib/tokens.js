@@ -323,10 +323,10 @@ async function getPriceBySymbol(symbol) {
 // For backward compatibility
 async function getFromCacheForAppleWatch() {
   const tickers = {
-    'bitcoin': 'BTC',
-    'bitcoincash': 'BCH',
-    'litecoin': 'LTC',
-    'ethereum': 'ETH',
+    bitcoin: 'BTC',
+    bitcoincash: 'BCH',
+    litecoin: 'LTC',
+    ethereum: 'ETH',
   };
   return await db().collection(COLLECTION)
     .find({ _id: { $in: Object.keys(tickers) } })
