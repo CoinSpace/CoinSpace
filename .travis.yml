@@ -60,6 +60,8 @@ branches:
     - desktop
 
 install:
+  - npm config set @coinspace:registry https://npm.pkg.github.com
+  - npm config set "//npm.pkg.github.com/:_authToken" '${NPM_READ_TOKEN}'
   - NODE_ENV=ci npm ci
   - (cd ${BUILD_TYPE} && NODE_ENV=ci npm ci)
 
