@@ -109,7 +109,7 @@ async function getFees(cryptoId) {
       value: fees.fee.fastest,
     });
   }
-  return items;
+  return { items };
 }
 
 module.exports = {

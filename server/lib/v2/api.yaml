@@ -769,9 +769,14 @@ components:
         - name
         - value
     FeeList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Fee'
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fee'
+      required:
+        - items
   parameters:
     deviceId:
       in: query

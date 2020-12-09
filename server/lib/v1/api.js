@@ -98,7 +98,7 @@ router.delete('/account', (req, res) => {
 router.get('/fees', (req, res) => {
   const network = req.query.network || 'bitcoin';
   fee.getFees(network).then((fees) => {
-    res.status(200).send({ items: fees });
+    res.status(200).send(fees);
   }).catch((err) => {
     res.status(400).send(err);
   });
