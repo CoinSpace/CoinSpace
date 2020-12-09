@@ -29,6 +29,8 @@ steps:
 
 - name: 'gcr.io/cloud-builders/docker'
   id: 'build image'
+  env:
+    - 'NODE_AUTH_TOKEN=${_NPM_READ_TOKEN}'
   entrypoint: 'sh'
   args:
     - '-c'
