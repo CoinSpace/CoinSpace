@@ -1427,6 +1427,18 @@ Bude to převedeno na %(toSymbol)s, a zasláno
         <source>confirmations:</source>
         <target>potvrzení:</target>
       </trans-unit>
+      <trans-unit id="minimum">
+        <source>minimum</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="default">
+        <source>default</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="fastest">
+        <source>fastest</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1427,6 +1427,18 @@ itu akan dikonversi ke %(toSymbol)s, dan dikirim ke
         <source>confirmations:</source>
         <target>konfirmasi:</target>
       </trans-unit>
+      <trans-unit id="minimum">
+        <source>minimum</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="default">
+        <source>default</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="fastest">
+        <source>fastest</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

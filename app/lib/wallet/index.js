@@ -180,8 +180,9 @@ async function initWallet(pin) {
   state.wallet.load({
     getDynamicFees() {
       return request({
-        url: urlRoot + 'api/v1/fees',
-        params: { network: networkName },
+        url: `${urlRoot}api/v2/fees?id=${LS.getId()}&crypto=${networkName}`,
+        method: 'get',
+        seed: 'public',
       }).catch(console.error);
     },
     getCsFee() {

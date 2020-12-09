@@ -17,7 +17,7 @@
       {{#if fees.length > 1}}
       <select value="{{feeIndex}}" on-change="change-fee">
         {{#each fees as fee: index}}
-          <option value="{{index}}">{{feeSign}}{{fee.estimate}} {{denomination}} - {{fee.name}}</option>
+          <option value="{{index}}">{{feeSign}}{{fee.estimate}} {{denomination}} - {{translate(fee.name)}}</option>
         {{/each}}
       </select>
       {{/if}}

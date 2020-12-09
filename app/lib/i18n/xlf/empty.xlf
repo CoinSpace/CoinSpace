@@ -1422,6 +1422,18 @@ It will be converted into %(toSymbol)s, and sent to
         <source>confirmations:</source>
         <target></target>
       </trans-unit>
+      <trans-unit id="minimum">
+        <source>minimum</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="default">
+        <source>default</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="fastest">
+        <source>fastest</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
