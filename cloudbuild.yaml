@@ -22,7 +22,7 @@ steps:
     - '-c'
     - |
       npm config set @coinspace:registry https://npm.pkg.github.com && \
-      npm config set "//npm.pkg.github.com/:_authToken" '${NODE_AUTH_TOKEN}' && \
+      npm config set "//npm.pkg.github.com/:_authToken" '$${NODE_AUTH_TOKEN}' && \
       NODE_ENV=CI npm ci && \
       ./cli/i18n.js --json && \
       ./cli/build.js web --env=${_BUILD_ENV} --release
