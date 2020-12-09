@@ -92,6 +92,9 @@ async function getFees(cryptoId) {
   }
   const fees = await db().collection('fee')
     .findOne({ _id: cryptoId });
+  if (!fees) {
+    throw createError(404, 'Coin fee was not found');
+  }
   const items = [{
     name: 'default',
     value: fees.fee.default,
