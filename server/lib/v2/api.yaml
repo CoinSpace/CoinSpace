@@ -557,7 +557,7 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/Fees'
+                $ref: '#/components/schemas/FeeList'
         default:
           $ref: '#/components/responses/GeneralError'
   /device:
@@ -758,17 +758,20 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Ticker'
-    Fees:
+    Fee:
       type: object
       properties:
-        minimum:
+        name:
           type: string
-        default:
-          type: string
-        fastest:
-          type: string
+        value:
+          type: number
       required:
-        - default
+        - name
+        - value
+    FeeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Fee'
   parameters:
     deviceId:
       in: query

@@ -86,37 +86,19 @@ async function updateFees() {
   }
 }
 
-function _getFees(cryptoId) {
+async function getFees(cryptoId) {
   if (!CRYPTO.includes(cryptoId)) {
     throw createError(400, 'Coin fee is not supported');
   }
-  return db().collection('fee')
+  const fees = await db().collection('fee')
     .findOne({ _id: cryptoId });
-}
-
-async function getFees(cryptoId) {
-  const fees = await _getFees(cryptoId);
-  const json = {
-    default: fees.fee.default,
-  };
-  if (fees.fee.minimum !== fees.fee.default) {
-    json.minimum = fees.fee.minimum;
-  }
-  if (fees.fee.fastest !== fees.fee.default) {
-    json.fastest = fees.fee.fastest;
-  }
-  return json;
-}
-
-async function getFeesDeprecated(cryptoId) {
-  const fees = await _getFees(cryptoId);
   const items = [{
-    name: 'hour',
+    name: 'default',
     value: fees.fee.default,
     default: true,
   }];
   if (fees.fee.minimum !== fees.fee.default) {
-    items.push({
+    items.unshift({
       name: 'minimum',
       value: fees.fee.minimum,
     });
@@ -127,11 +109,10 @@ async function getFeesDeprecated(cryptoId) {
       value: fees.fee.fastest,
     });
   }
-  return { items };
+  return items;
 }
 
 module.exports = {
   updateFees,
   getFees,
-  getFeesDeprecated,
 };
