@@ -541,6 +541,25 @@ paths:
                 $ref: '#/components/schemas/TickerList'
         default:
           $ref: '#/components/responses/GeneralError'
+  /fees:
+    get:
+      x-eov-operation-id: getFees
+      x-eov-operation-handler: handlers
+      description: Get transaction fees for coin
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cryptoId'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Fees for coin
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Fees'
+        default:
+          $ref: '#/components/responses/GeneralError'
   /device:
     delete:
       x-eov-operation-id: removeDevice
@@ -739,6 +758,17 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Ticker'
+    Fees:
+      type: object
+      properties:
+        minimum:
+          type: string
+        default:
+          type: string
+        fastest:
+          type: string
+      required:
+        - default
   parameters:
     deviceId:
       in: query

@@ -6,7 +6,7 @@ const auth = require('./auth');
 const account = require('./account');
 const geo = require('./geo');
 const openalias = require('./openalias');
-const fee = require('./fee');
+const fee = require('../fee');
 const csFee = require('./csFee');
 const tokens = require('../tokens');
 const shapeshift = require('./shapeshift');
@@ -97,8 +97,7 @@ router.delete('/account', (req, res) => {
 
 router.get('/fees', (req, res) => {
   const network = req.query.network || 'bitcoin';
-  fee.getFromCache(network).then((fees) => {
-    delete fees._id;
+  fee.getFeesDeprecated(network).then((fees) => {
     res.status(200).send(fees);
   }).catch((err) => {
     res.status(400).send(err);

@@ -5,6 +5,7 @@ const wallets = require('./wallets');
 const mecto = require('./mecto');
 const moonpay = require('./moonpay');
 const tokens = require('../tokens');
+const fee = require('../fee');
 const { asyncWrapper, verifyReq } = require('./utils');
 
 exports.register = asyncWrapper(async (req, res) => {
@@ -223,4 +224,9 @@ exports.getTicker = asyncWrapper(async (req, res) => {
 exports.getTickers = asyncWrapper(async (req, res) => {
   const tickers = await tokens.getTickers(req.query.crypto);
   res.status(200).send(tickers);
+});
+
+exports.getFees = asyncWrapper(async (req, res) => {
+  const fees = await fee.getFees(req.query.crypto);
+  res.status(200).send(fees);
 });

@@ -2,7 +2,7 @@
 
 const pForever = require('p-forever');
 const delay = require('delay');
-const fee = require('./v1//fee');
+const fee = require('./fee');
 const moonpay = require('./v1//moonpay');
 const github = require('./v1//github');
 const tokens = require('./tokens');
@@ -22,17 +22,10 @@ function updatePrices(interval) {
 }
 
 function cacheFees(interval) {
-  setInterval(function intervalFunction() {
-    fee.getFromAPI('bitcoin').then((data) => {
-      if (global.gc) global.gc();
-      return fee.save('bitcoin', {
-        minimum: data.minimum,
-        hour: data.hourFee,
-        fastest: data.fastestFee,
-      });
-    }).catch(console.error);
-    return intervalFunction;
-  }(), interval);
+  return pForever(async () => {
+    await fee.updateFees().catch(console.error);
+    await delay(interval);
+  });
 }
 
 function cacheMoonpayCurrencies(interval) {
