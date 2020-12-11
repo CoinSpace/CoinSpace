@@ -29,6 +29,9 @@ function verifyReq(key, req) {
       `${req.protocol}://${req.get('Host')}${req.originalUrl}`,
       req.get('X-Date') || '',
     ];
+    if (req.get('X-Release') !== undefined) {
+      base.push(req.get('X-Release'));
+    }
     if (req.bodyHash) {
       base.push(req.bodyHash);
     }

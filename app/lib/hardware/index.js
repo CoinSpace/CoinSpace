@@ -1,7 +1,6 @@
 'use strict';
 
 const request = require('lib/request');
-const LS = require('lib/wallet/localStorage');
 const { startAttestation, startAssertion } = require('@simplewebauthn/browser');
 const { showError } = require('widgets/modals/flash');
 const windowExtra = require('lib/window-extra');
@@ -16,7 +15,7 @@ const notSupportedError = () => {
 
 async function list() {
   const keys = await request({
-    url: `${urlRoot}api/v2/crossplatform?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/crossplatform`,
     method: 'get',
     seed: 'public',
   });
@@ -25,7 +24,7 @@ async function list() {
 
 async function remove(key) {
   await request({
-    url: `${urlRoot}api/v2/crossplatform?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/crossplatform`,
     method: 'delete',
     data: {
       credentialID: key.credentialID,
@@ -37,7 +36,7 @@ async function remove(key) {
 async function add() {
   validate();
   const options = await request({
-    url: `${urlRoot}api/v2/crossplatform/attestation?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/crossplatform/attestation`,
     method: 'get',
     seed: 'private',
   });
@@ -58,7 +57,7 @@ async function add() {
   }
 
   await request({
-    url: `${urlRoot}api/v2/crossplatform/attestation?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/crossplatform/attestation`,
     method: 'post',
     data: attestation,
     seed: 'private',
@@ -69,7 +68,7 @@ async function privateToken(options) {
   validate();
   if (!options) {
     options = await request({
-      url: `${urlRoot}api/v2/token/private/crossplatform?id=${LS.getId()}`,
+      url: `${urlRoot}api/v2/token/private/crossplatform`,
       method: 'get',
       seed: 'public',
     });
@@ -91,7 +90,7 @@ async function privateToken(options) {
   }
 
   const res = await request({
-    url: `${urlRoot}api/v2/token/private/crossplatform?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/token/private/crossplatform`,
     method: 'post',
     data: assertion,
     seed: 'public',

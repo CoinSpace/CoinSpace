@@ -6,6 +6,8 @@ const path = require('path');
 const helmet = require('helmet');
 const express = require('express');
 const cors = require('cors');
+const axios = require('axios');
+const querystring = require('querystring');
 const crypto = require('crypto');
 
 function init(app) {
@@ -37,6 +39,26 @@ function init(app) {
   }));
 
   app.use(compress());
+
+  app.use('/api/', (req, res, next) => {
+    next();
+    const id = req.query.id || req.body.deviceId || req.body.wallet_id;
+    if (!id) return;
+    const [, app, store, version] = req.get('X-Release') !== undefined ?
+      req.get('X-Release').match(/(.+)\.(.+)@(.+)/i) : [];
+    axios({
+      url: 'https://www.google-analytics.com/collect',
+      method: 'post',
+      data: querystring.stringify({
+        v: 1, t: 'screenview',
+        tid: process.env.ANALYTICS_ID,
+        aip: 1, uid: id,
+        dl: req.path, dt: req.path, cd: req.path,
+        uip: req.ip, ua: req.get('User-Agent'),
+        an: app, av: version, aiid: store,
+      }),
+    }).catch(() => {});
+  });
 
   const cacheControl = isProduction() ? { maxAge: dayInMs, setHeaders: setCustomCacheControl } : null;
   app.use(express.static(path.join(__dirname, '..', 'build'), cacheControl));

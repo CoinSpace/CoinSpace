@@ -7,7 +7,7 @@ const webpack = require('webpack');
 const pkg = require('../package.json');
 const dotenv = require('dotenv');
 const utils = require('./utils');
-const SENTRY_RELEASE = `${pkg.name}.web@${pkg.version}`;
+const RELEASE = `${pkg.name}.web@${pkg.version}`;
 
 program
   .name('build-web.js')
@@ -29,7 +29,7 @@ const webpackConfig = require('../webpack.prod');
 webpackConfig.plugins.push(
   new webpack.DefinePlugin({
     'process.env.BUILD_TYPE': JSON.stringify('web'),
-    'process.env.SENTRY_RELEASE': JSON.stringify(SENTRY_RELEASE),
+    'process.env.RELEASE': JSON.stringify(RELEASE),
     'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN),
   })
 );
@@ -41,7 +41,7 @@ webpack(webpackConfig, (error, stats) => {
     throw new Error('stats errors');
   }
   if (program.release) {
-    utils.uploadSentrySourceMaps('web', SENTRY_RELEASE);
+    utils.uploadSentrySourceMaps('web', RELEASE);
   }
   console.log('Done!');
 });

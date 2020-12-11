@@ -41,6 +41,7 @@ function logout() {
     data: {
       token: getAccessToken(),
     },
+    id: true,
   }).then(() => {
     cleanAccessToken();
   });

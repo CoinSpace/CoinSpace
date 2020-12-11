@@ -2,17 +2,19 @@
 
 const request = require('lib/request');
 const { urlRoot } = window;
-const LS = require('lib/wallet/localStorage');
 
 let rates = {};
 
-function init(id) {
-  if (!id) {
+function init(cryptoId) {
+  if (!cryptoId) {
     rates = {};
     return;
   }
   return request({
-    url: `${urlRoot}api/v2/ticker?id=${LS.getId()}&crypto=${id}`,
+    url: `${urlRoot}api/v2/ticker`,
+    params: {
+      crypto: cryptoId,
+    },
     method: 'get',
     seed: 'public',
   }).catch((err) => {
@@ -21,13 +23,13 @@ function init(id) {
   }).then((data) => {
     rates = data.prices || {};
 
-    if (id === 'bitcoin') {
+    if (cryptoId === 'bitcoin') {
       rates['mBTC'] = 1000;
       rates['μBTC'] = 1000000;
-    } else if (id === 'bitcoincash') {
+    } else if (cryptoId === 'bitcoincash') {
       rates['mBCH'] = 1000;
       rates['μBCH'] = 1000000;
-    } else if (id === 'bitcoinsv') {
+    } else if (cryptoId === 'bitcoinsv') {
       rates['mBSV'] = 1000;
       rates['μBSV'] = 1000000;
     }

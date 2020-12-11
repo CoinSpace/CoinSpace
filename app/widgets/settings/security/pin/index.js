@@ -90,11 +90,12 @@ async function getPin() {
         try {
           const pinHash = crypto.createHmac('sha256', Buffer.from(LS.getPinKey(), 'hex')).update(pin).digest('hex');
           await request({
-            url: `${urlRoot}api/v2/token/public/pin?id=${LS.getId()}`,
+            url: `${urlRoot}api/v2/token/public/pin`,
             method: 'post',
             data: {
               pinHash,
             },
+            id: true,
           });
           pinWidget.close();
           resolve(pin);

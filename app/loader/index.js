@@ -9,7 +9,7 @@ const SENTRY_PATH_STRIP_RE = /^.*\/[^\.]+(\.app|CodePush|.*(?=\/))/;
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
   environment: process.env.SENTRY_ENVIRONMENT,
-  release: process.env.SENTRY_RELEASE,
+  release: process.env.RELEASE,
   integrations: [
     new Integrations.CaptureConsole({
       levels: ['error'],

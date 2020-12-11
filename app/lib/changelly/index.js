@@ -7,6 +7,7 @@ const { urlRoot } = window;
 function getCoins() {
   return request({
     url: urlRoot + 'api/v1/changelly/getCoins',
+    id: true,
   });
 }
 
@@ -18,6 +19,7 @@ function estimate(fromSymbol, toSymbol, amount) {
       to: toSymbol,
       amount,
     },
+    id: true,
   });
 }
 
@@ -26,6 +28,7 @@ function validateAddress(address, symbol) {
   if (!symbol) return Promise.resolve(false);
   return request({
     url: urlRoot + 'api/v1/changelly/validate/' + address + '/' + symbol,
+    id: true,
   }).then((data) => {
     return !!data.isValid;
   });
@@ -42,6 +45,7 @@ function createTransaction(options) {
       address: options.toAddress,
       refundAddress: options.returnAddress,
     },
+    id: true,
   }).then((data) => {
     if (!data) throw new Error('exchange_error');
     return data;
@@ -51,6 +55,7 @@ function createTransaction(options) {
 function getTransaction(id) {
   return request({
     url: urlRoot + 'api/v1/changelly/transaction/' + id,
+    id: true,
   });
 }
 

@@ -11,6 +11,7 @@ function resolveTo(network, to) {
   if (!hostname.match(/\./)) return Promise.resolve({ to });
   return request({
     url: urlRoot + 'api/v1/openalias?hostname=' + hostname,
+    id: true,
   }).then((data) => {
     return { to: data.address, alias: to };
   }).catch(() => {

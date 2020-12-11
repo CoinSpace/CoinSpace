@@ -15,7 +15,7 @@ const state = {
 
 function init() {
   return request({
-    url: `${urlRoot}api/v2/details?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/details`,
     method: 'get',
     seed: 'public',
   }).then((details) => {
@@ -85,7 +85,7 @@ async function _initDetails() {
 function _save(data) {
   const key = LS.getDetailsKey();
   return request({
-    url: `${urlRoot}api/v2/details?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/details`,
     method: 'put',
     data: {
       data: encrypt(JSON.stringify(data), key),

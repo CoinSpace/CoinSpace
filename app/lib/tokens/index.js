@@ -28,7 +28,10 @@ function filter(token) {
 function init() {
   if (!cache) {
     cache = request({
-      url: `${urlRoot}api/v2/tokens?id=${LS.getId()}&network=ethereum`,
+      url: `${urlRoot}api/v2/tokens`,
+      params: {
+        network: 'ethereum',
+      },
       method: 'get',
       seed: 'public',
     });

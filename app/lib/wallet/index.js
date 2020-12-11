@@ -83,6 +83,7 @@ async function registerWallet(pin) {
       pinHash,
     },
     seed: 'private',
+    id: false,
   });
   seeds.set('public', deviceSeed, publicToken);
   seeds.set('private', walletSeed, privateToken);
@@ -101,11 +102,12 @@ async function loginWithPin(pin) {
   }
   const pinHash = crypto.createHmac('sha256', Buffer.from(LS.getPinKey(), 'hex')).update(pin).digest('hex');
   const { publicToken } = await request({
-    url: `${urlRoot}api/v2/token/public/pin?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/token/public/pin`,
     method: 'post',
     data: {
       pinHash,
     },
+    id: true,
   });
   seeds.unlock('public', publicToken);
   await Promise.all([details.init(), settings.init()]);
@@ -180,7 +182,10 @@ async function initWallet(pin) {
   state.wallet.load({
     getDynamicFees() {
       return request({
-        url: `${urlRoot}api/v2/fees?id=${LS.getId()}&crypto=${networkName}`,
+        url: `${urlRoot}api/v2/fees`,
+        params: {
+          crypto: networkName,
+        },
         method: 'get',
         seed: 'public',
       }).catch(console.error);
@@ -189,6 +194,7 @@ async function initWallet(pin) {
       return request({
         url: urlRoot + 'api/v1/csFee',
         params: { network: networkName },
+        id: true,
       }).catch(console.error);
     },
     done(err) {
@@ -219,7 +225,7 @@ async function initWallet(pin) {
 
 async function removeAccount() {
   await request({
-    url: `${urlRoot}api/v2/wallet?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/wallet`,
     method: 'delete',
     seed: 'private',
   });
@@ -234,7 +240,7 @@ function setUsername(username) {
     return Promise.resolve(userInfo.username);
   }
   return request({
-    url: `${urlRoot}api/v2/username?id=${LS.getId()}`,
+    url: `${urlRoot}api/v2/username`,
     method: 'put',
     data: {
       username: newUsername,
