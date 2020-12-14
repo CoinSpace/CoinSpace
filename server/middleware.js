@@ -42,7 +42,7 @@ function init(app) {
 
   app.use('/api/', (req, res, next) => {
     next();
-    const id = req.query.id || req.body.deviceId || req.body.wallet_id;
+    const id = req.query.id || req.body.deviceId || req.body.id || req.body.wallet_id;
     if (!id) return;
     const [, app, store, version] = req.get('X-Release') !== undefined ?
       req.get('X-Release').match(/(.+)\.(.+)@(.+)/i) : [];
