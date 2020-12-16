@@ -78,7 +78,6 @@
     "eslint": "^7.15.0",
     "evp_bytestokey": "^1.0.3",
     "extract-text-webpack-plugin": "^3.0.0",
-    "fastclick": "^1.0.6",
     "file-loader": "^0.11.2",
     "fs-extra": "^4.0.2",
     "fuse.js": "^6.4.3",

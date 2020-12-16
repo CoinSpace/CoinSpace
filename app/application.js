@@ -10,7 +10,6 @@ if (process.env.BUILD_TYPE === 'web') {
 window.initCSApp = async function() {
   const emitter = require('lib/emitter');
   const LS = require('lib/wallet/localStorage');
-  const FastClick = require('fastclick');
   const initFrame = require('widgets/frame');
   const initAuth = require('pages/auth');
   const touchId = require('lib/touch-id');
@@ -30,9 +29,6 @@ window.initCSApp = async function() {
   if (process.env.BUILD_TYPE === 'phonegap') navigator.splashscreen.hide();
 
   await touchId.init();
-
-  fixFastClick();
-  FastClick.attach(document.body);
 
   const auth = initAuth(document.getElementById('auth'));
   const authContentEl = document.getElementById('auth_frame');
@@ -72,17 +68,6 @@ window.initCSApp = async function() {
       frame.show();
     }
   });
-
-  function fixFastClick() {
-    const originOnTouchStart = FastClick.prototype.onTouchStart;
-    FastClick.prototype.onTouchStart = function(event) {
-      const targetElement = this.getTargetElementFromEventTarget(event.target);
-      if (targetElement.nodeName.toLowerCase() === 'select') {
-        return false;
-      }
-      originOnTouchStart.apply(this, arguments);
-    };
-  }
 
   window.safeOpen = function(...args) {
     const win = window.open(...args);
