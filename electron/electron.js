@@ -44,7 +44,9 @@ const lock = app.requestSingleInstanceLock();
 // https://github.com/electron/electron/issues/15958
 if (!isMas && !lock) {
   app.quit();
+  return;
 }
+
 // Init crashReporter
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
