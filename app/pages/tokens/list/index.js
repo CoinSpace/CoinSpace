@@ -2,7 +2,7 @@
 
 const Ractive = require('lib/ractive');
 const showRemoveConfirmation = require('widgets/modals/confirm-remove');
-const { getToken, setToken } = require('lib/token');
+const { getCrypto, setCrypto } = require('lib/crypto');
 const { initWallet } = require('lib/wallet');
 const emitter = require('lib/emitter');
 const details = require('lib/wallet/details');
@@ -10,17 +10,21 @@ const _ = require('lodash');
 
 let isEnabled = false;
 
+function isCryptoEqual(a, b) {
+  return a && b && (a === b._id || _.isEqual(a, b));
+}
+
 module.exports = function(el) {
 
   const ractive = new Ractive({
     el,
     template: require('./index.ract'),
     data: {
-      currentToken: '',
-      isCurrentToken(token) {
-        return _.isEqual(token, this.get('currentToken'));
+      currentCrypto: null,
+      isCurrentCrypto(crypto) {
+        return isCryptoEqual(crypto, this.get('currentCrypto'));
       },
-      switchToken,
+      switchCrypto,
       removeEthereumToken,
       ethereumTokens: [],
     },
@@ -38,22 +42,17 @@ module.exports = function(el) {
   ractive.on('before-show', () => {
     const walletTokens = details.get('tokens');
     ractive.set('ethereumTokens', walletTokens.filter(item => item.network === 'ethereum'));
-    ractive.set('currentToken', getToken());
+    ractive.set('currentCrypto', getCrypto());
   });
 
-  function switchToken(token) {
-    if (token === ractive.get('currentToken')) return;
+  function switchCrypto(crypto) {
+    if (isCryptoEqual(crypto, ractive.get('currentCrypto'))) {
+      return;
+    }
     if (!isEnabled) return;
 
-    const network = token.network || token;
-    const baseUrl = window.location.href.split('?')[0];
-    const url = baseUrl + '?network=' + network;
-
-    ractive.set('currentToken', token);
-    setToken(token);
-
-    window.history.replaceState(null, null, url);
-
+    setCrypto(crypto);
+    ractive.set('currentCrypto', getCrypto());
     emitter.emit('sync');
 
     setTimeout(() => {

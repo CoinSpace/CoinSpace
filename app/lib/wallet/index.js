@@ -21,14 +21,9 @@ const touchId = require('lib/touch-id');
 const ticker = require('lib/ticker-api');
 
 const convert = require('lib/convert');
-const {
-  getToken,
-  getTokenNetwork,
-  setToken,
-} = require('lib/token');
+const { getCrypto } = require('lib/crypto');
 const details = require('lib/wallet/details');
 const settings = require('lib/wallet/settings');
-const _ = require('lodash');
 const bchaddr = require('bchaddrjs');
 
 const state = {
@@ -133,58 +128,46 @@ async function loginWithTouchId(showSpinner) {
 }
 
 async function initWallet(pin) {
-  const networkName = getTokenNetwork();
-  let token = getToken();
-  if (!isValidWalletToken(token)) {
-    setToken(networkName);
-    token = false;
-  }
+  const crypto = getCrypto();
 
-  let publicKey;
   const seed = seeds.get('private');
   if (seed) {
     Object.keys(Wallet).forEach((key) => {
-      let wallet;
-      if (key === networkName) {
-        wallet = new Wallet[key](Object.assign({ seed, networkName }, getExtraOptions(networkName)));
-        state.wallet = wallet;
-        state.wallet.lock();
-      } else {
-        wallet = new Wallet[key]({ seed, networkName: key });
-      }
+      const wallet = new Wallet[key]({
+        seed,
+        networkName: key,
+      });
+      wallet.lock();
       LS.setPublicKey(wallet, seeds.get('public'));
     });
-  } else {
-    publicKey = LS.getPublicKey(networkName, seeds.get('public'));
-    const options = Object.assign({ publicKey, networkName }, getExtraOptions(networkName));
-    state.wallet = new Wallet[networkName](options);
   }
+  const publicKey = LS.getPublicKey(crypto.network, seeds.get('public'));
+  const options = Object.assign({
+    publicKey,
+    networkName: crypto.network,
+  }, getExtraOptions(crypto));
+  state.wallet = new Wallet[crypto.network](options);
 
-  if (networkName === 'ethereum') {
-    convert.setDecimals(token ? token.decimals : 18);
-  } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(networkName) !== -1) {
+  if (crypto.network === 'ethereum') {
+    convert.setDecimals(crypto.decimals || 18);
+  } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].includes(crypto._id)) {
     convert.setDecimals(8);
-  } else if (networkName === 'ripple') {
+  } else if (crypto._id === 'ripple') {
     convert.setDecimals(0);
-  } else if (networkName === 'stellar') {
+  } else if (crypto._id === 'stellar') {
     convert.setDecimals(0);
-  } else if (networkName === 'eos') {
+  } else if (crypto._id === 'eos') {
     convert.setDecimals(0);
   }
 
-  if (token) {
-    await ticker.init(token._id);
-  } else {
-    // TODO rewrite to _id too
-    await ticker.init(networkName);
-  }
+  await ticker.init(crypto._id);
 
   state.wallet.load({
     getDynamicFees() {
       return request({
         url: `${urlRoot}api/v2/fees`,
         params: {
-          crypto: networkName,
+          crypto: crypto._id,
         },
         method: 'get',
         seed: 'public',
@@ -193,7 +176,8 @@ async function initWallet(pin) {
     getCsFee() {
       return request({
         url: urlRoot + 'api/v1/csFee',
-        params: { network: networkName },
+        // TODO move to _id
+        params: { network: crypto.network },
         id: true,
       }).catch(console.error);
     },
@@ -201,26 +185,26 @@ async function initWallet(pin) {
       emitter.emit('wallet-ready', { pin, err });
     },
   });
+}
 
-  function getExtraOptions(networkName) {
-    const options = {};
-    if (networkName === 'ethereum') {
-      options.minConf = 12;
-      options.token = token;
-    } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(networkName) !== -1) {
-      const addressType = details.get(networkName + '.addressType');
-      if (addressType) {
-        options.addressType = addressType;
-      }
-      options.minConf = 3;
-      if (networkName === 'bitcoincash') {
-        options.minConf = 0;
-      }
-    } else if (networkName === 'eos') {
-      options.accountName = details.get('eosAccountName') || '';
+function getExtraOptions(crypto) {
+  const options = {};
+  if (crypto.network === 'ethereum') {
+    options.minConf = 12;
+    options.token = crypto._id !== 'ethereum' ? crypto : false;
+  } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].includes(crypto.network)) {
+    const addressType = details.get(crypto.network + '.addressType');
+    if (addressType) {
+      options.addressType = addressType;
     }
-    return options;
+    options.minConf = 3;
+    if (crypto.network === 'bitcoincash') {
+      options.minConf = 0;
+    }
+  } else if (crypto.network === 'eos') {
+    options.accountName = details.get('eosAccountName') || '';
   }
+  return options;
 }
 
 async function removeAccount() {
@@ -249,14 +233,6 @@ function setUsername(username) {
   }).then((data) => {
     return data.username;
   });
-}
-
-function isValidWalletToken(token) {
-  const walletTokens = details.get('tokens');
-  const isFound = _.find(walletTokens, (item) => {
-    return _.isEqual(token, item);
-  });
-  return !!isFound;
 }
 
 function getWallet() {

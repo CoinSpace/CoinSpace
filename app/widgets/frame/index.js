@@ -11,7 +11,7 @@ const initHistory = require('pages/history');
 const initTokens = require('pages/tokens');
 const showSettings = require('widgets/settings');
 const { showError } = require('widgets/modals/flash');
-const { setToken, getTokenNetwork } = require('lib/token');
+const { setCrypto } = require('lib/crypto');
 const { getWallet } = require('lib/wallet');
 const Hammer = require('hammerjs');
 
@@ -104,7 +104,7 @@ module.exports = function(el, err) {
         });
       } else {
         console.error(err);
-        setToken(getTokenNetwork()); // fix wrong tokens
+        setCrypto(); // fix wrong tokens
         showError({ message: err.message });
       }
     } else {

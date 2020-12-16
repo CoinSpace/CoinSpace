@@ -5,7 +5,6 @@ const { encrypt, decrypt } = require('lib/encryption');
 const { randAvatarIndex } = require('lib/avatar');
 
 const request = require('lib/request');
-const { urlRoot } = window;
 const LS = require('./localStorage');
 const seeds = require('./seeds');
 
@@ -15,7 +14,7 @@ const state = {
 
 function init() {
   return request({
-    url: `${urlRoot}api/v2/details`,
+    url: `${window.urlRoot}api/v2/details`,
     method: 'get',
     seed: 'public',
   }).then((details) => {
@@ -69,7 +68,7 @@ async function _initDetails() {
 
   if (LS.isRegisteredLegacy()) {
     const legacy = await request({
-      url: `${urlRoot}api/v1/details?id=${LS.getCredentials().id}`,
+      url: `${window.urlRoot}api/v1/details?id=${LS.getCredentials().id}`,
     });
     if (legacy) {
       defaultValue = JSON.parse(decrypt(legacy, seeds.get('private')));
@@ -85,7 +84,7 @@ async function _initDetails() {
 function _save(data) {
   const key = LS.getDetailsKey();
   return request({
-    url: `${urlRoot}api/v2/details`,
+    url: `${window.urlRoot}api/v2/details`,
     method: 'put',
     data: {
       data: encrypt(JSON.stringify(data), key),

@@ -3,102 +3,102 @@
 
   <div class="_coins">
 
-    <div on-click="switchToken('bitcoin')" class="_token _token--bitcoin">
+    <div on-click="switchCrypto('bitcoin')" class="_token _token--bitcoin">
       <div class="_token__icon">
         {{>svg_token_bitcoin}}
       </div>
       <div class="_token__name">Bitcoin</div>
-      {{#if isCurrentToken('bitcoin')}}
+      {{#if isCurrentCrypto('bitcoin')}}
       <div class="_token__arrow">{{>svg_arrow}}</div>
       {{/if}}
     </div>
 
-    <div on-click="switchToken('bitcoincash')" class="_token _token--bitcoincash">
+    <div on-click="switchCrypto('bitcoincash')" class="_token _token--bitcoincash">
       <div class="_token__icon">
         {{>svg_token_bitcoincash}}
       </div>
       <div class="_token__name">Bitcoin Cash</div>
-      {{#if isCurrentToken('bitcoincash')}}
+      {{#if isCurrentCrypto('bitcoincash')}}
       <div class="_token__arrow">{{>svg_arrow}}</div>
       {{/if}}
     </div>
 
-    <div on-click="switchToken('bitcoinsv')" class="_token _token--bitcoinsv">
+    <div on-click="switchCrypto('bitcoinsv')" class="_token _token--bitcoinsv">
       <div class="_token__icon">
         {{>svg_token_bitcoinsv}}
       </div>
       <div class="_token__name">Bitcoin SV</div>
-      {{#if isCurrentToken('bitcoinsv')}}
+      {{#if isCurrentCrypto('bitcoinsv')}}
       <div class="_token__arrow">{{>svg_arrow}}</div>
       {{/if}}
     </div>
 
-    <div on-click="switchToken('ethereum')" class="_token _token--ethereum">
+    <div on-click="switchCrypto('ethereum')" class="_token _token--ethereum">
       <div class="_token__icon">
         {{>svg_token_ethereum}}
       </div>
       <div class="_token__name">Ethereum</div>
-      {{#if isCurrentToken('ethereum')}}
+      {{#if isCurrentCrypto('ethereum')}}
       <div class="_token__arrow">{{>svg_arrow}}</div>
       {{/if}}
     </div>
 
-    <div on-click="switchToken('litecoin')" class="_token _token--litecoin">
+    <div on-click="switchCrypto('litecoin')" class="_token _token--litecoin">
       <div class="_token__icon">
         {{>svg_token_litecoin}}
       </div>
       <div class="_token__name">Litecoin</div>
-      {{#if isCurrentToken('litecoin')}}
+      {{#if isCurrentCrypto('litecoin')}}
       <div class="_token__arrow">{{>svg_arrow}}</div>
       {{/if}}
     </div>
 
-    <div on-click="switchToken('ripple')" class="_token _token--ripple">
+    <div on-click="switchCrypto('ripple')" class="_token _token--ripple">
       <div class="_token__icon">
         {{>svg_token_ripple}}
       </div>
       <div class="_token__name">Ripple</div>
-      {{#if isCurrentToken('ripple')}}
+      {{#if isCurrentCrypto('ripple')}}
       <div class="_token__arrow">{{>svg_arrow}}</div>
       {{/if}}
     </div>
 
-    <div on-click="switchToken('stellar')" class="_token _token--stellar">
+    <div on-click="switchCrypto('stellar')" class="_token _token--stellar">
       <div class="_token__icon">
         {{>svg_token_stellar}}
       </div>
       <div class="_token__name">Stellar</div>
-      {{#if isCurrentToken('stellar')}}
+      {{#if isCurrentCrypto('stellar')}}
       <div class="_token__arrow">{{>svg_arrow}}</div>
       {{/if}}
     </div>
 
-    <div on-click="switchToken('eos')" class="_token _token--eos">
+    <div on-click="switchCrypto('eos')" class="_token _token--eos">
       <div class="_token__icon">
         {{>svg_token_eos}}
       </div>
       <div class="_token__name">EOS</div>
-      {{#if isCurrentToken('eos')}}
+      {{#if isCurrentCrypto('eos')}}
       <div class="_token__arrow">{{>svg_arrow}}</div>
       {{/if}}
     </div>
 
-    <div on-click="switchToken('dogecoin')" class="_token _token--dogecoin">
+    <div on-click="switchCrypto('dogecoin')" class="_token _token--dogecoin">
       <div class="_token__icon">
         {{>svg_token_dogecoin}}
       </div>
       <div class="_token__name">Dogecoin</div>
-      {{#if isCurrentToken('dogecoin')}}
+      {{#if isCurrentCrypto('dogecoin')}}
       <div class="_token__arrow">{{>svg_arrow}}</div>
       {{/if}}
     </div>
 
-    <div on-click="switchToken('dash')" class="_token _token--dash">
+    <div on-click="switchCrypto('dash')" class="_token _token--dash">
       <div class="_token__icon">
         {{>svg_token_dash}}
       </div>
       <div class="_token__name">Dash</div>
-      {{#if isCurrentToken('dash')}}
+      {{#if isCurrentCrypto('dash')}}
       <div class="_token__arrow">{{>svg_arrow}}</div>
       {{/if}}
     </div>
@@ -108,7 +108,7 @@
 
   <div class="_coins">
     {{#each ethereumTokens}}
-    <div class="_token _token--ethereum" on-click="switchToken(this)">
+    <div class="_token _token--ethereum" on-click="switchCrypto(this)">
       <div class="_token__icon">
         {{#if this.icon}}
           <img src="{{this.icon}}"/>
@@ -117,7 +117,7 @@
         {{/if}}
       </div>
       <div class="_token__name">{{name}}</div>
-      {{#if isCurrentToken(this)}}
+      {{#if isCurrentCrypto(this._id || this)}}
       <div class="_token__arrow">{{>svg_arrow}}</div>
       {{else}}
       <div class="_token__remove" on-click="removeEthereumToken(this)">{{> svg_close}}</div>

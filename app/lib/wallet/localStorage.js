@@ -1,6 +1,5 @@
 'use strict';
 const encryption = require('lib/encryption');
-const { getToken, setToken } = require('lib/token');
 const { localStorage } = window;
 
 function getEncryptedSeed(type) {
@@ -84,9 +83,7 @@ function isRegisteredLegacy() {
 }
 
 function reset() {
-  const token = getToken();
   localStorage.clear();
-  setToken(token);
 }
 
 function isFidoTouchIdEnabled() {

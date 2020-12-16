@@ -26,7 +26,7 @@ Sentry.init({
   ],
 });
 
-const token = require('lib/token');
+const token = require('lib/crypto');
 const { fadeOut } = require('lib/transitions/fade.js');
 const Modernizr = require('modernizr');
 const i18n = require('lib/i18n');
@@ -34,7 +34,7 @@ const i18n = require('lib/i18n');
 function init() {
   i18n.loadTranslation().then(() => {
     if (Modernizr.localstorage && Modernizr.webworkers && Modernizr.blobconstructor && Modernizr.getrandomvalues) {
-      setupNetwork();
+      setupCrypto();
       const containerEl = document.getElementById('loader');
 
       return import(
@@ -51,41 +51,17 @@ function init() {
   });
 }
 
-function setupNetwork() {
-  const networks = [
-    'bitcoin',
-    'bitcoincash',
-    'bitcoinsv',
-    'litecoin',
-    'dogecoin',
-    'dash',
-    'ethereum',
-    'ripple',
-    'stellar',
-    'eos',
-  ];
-  const defaultNetwork = networks[0];
-  let lastNetwork = token.getTokenNetwork();
-
-  if (networks.indexOf(lastNetwork) === -1) {
-    lastNetwork = defaultNetwork;
-    token.setToken(lastNetwork);
-  }
-
-  const regex = /^network=/;
+function setupCrypto() {
+  const regex = /^(network|coin)=/;
   const networkParam = window.location.search.substr(1).split('&').filter((e) => {
     return e.match(regex);
   })[0];
   const queryNetwork = networkParam ? networkParam.replace(regex, '') : null;
 
-  if (networks.indexOf(queryNetwork) === -1) {
-    const baseUrl = window.location.href.split('?')[0];
-    const url = baseUrl + '?network=' + lastNetwork;
-    return window.history.replaceState(null, null, url);
-  }
-
-  if (queryNetwork !== lastNetwork) {
-    return token.setToken(queryNetwork);
+  if (queryNetwork) {
+    const url = window.location.href.split('?')[0];
+    window.history.replaceState(null, null, url);
+    token.setCrypto(queryNetwork);
   }
 }
 
