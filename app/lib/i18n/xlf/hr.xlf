@@ -1201,7 +1201,7 @@ Biće konvertiran u %(toSymbol)s i poslan na
       </trans-unit>
       <trans-unit id="Recipient Name">
         <source>Recipient Name</source>
-        <target>Ime i pprezime primatelja</target>
+        <target>Ime i prezime primatelja</target>
       </trans-unit>
       <trans-unit id="Bank Name">
         <source>Bank Name</source>
@@ -1429,15 +1429,15 @@ Biće konvertiran u %(toSymbol)s i poslan na
       </trans-unit>
       <trans-unit id="minimum">
         <source>minimum</source>
-        <target></target>
+        <target>najmanja</target>
       </trans-unit>
       <trans-unit id="default">
         <source>default</source>
-        <target></target>
+        <target>osnovna</target>
       </trans-unit>
       <trans-unit id="fastest">
         <source>fastest</source>
-        <target></target>
+        <target>najbrža</target>
       </trans-unit>
     </body>
   </file>

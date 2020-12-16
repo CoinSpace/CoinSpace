@@ -1201,7 +1201,7 @@ Biće konvertovano u %(toSymbol)s i poslato na
       </trans-unit>
       <trans-unit id="Recipient Name">
         <source>Recipient Name</source>
-        <target>Ime i pprezime primaoca</target>
+        <target>Ime i prezime primaoca</target>
       </trans-unit>
       <trans-unit id="Bank Name">
         <source>Bank Name</source>
@@ -1381,7 +1381,7 @@ Biće konvertovano u %(toSymbol)s i poslato na
       </trans-unit>
       <trans-unit id="Add Custom Token">
         <source>Add Custom Token</source>
-        <target>Dodaj prolagođeni token</target>
+        <target>Dodaj prilagođeni token</target>
       </trans-unit>
       <trans-unit id="This Token has already been added.">
         <source>This Token has already been added.</source>
@@ -1409,7 +1409,7 @@ Biće konvertovano u %(toSymbol)s i poslato na
       </trans-unit>
       <trans-unit id="Acceleration Successful">
         <source>Acceleration Successful</source>
-        <target>Ospješno ubrzavanje</target>
+        <target>Uspješno ubrzavanje</target>
       </trans-unit>
       <trans-unit id="Acceleration Failed">
         <source>Acceleration Failed</source>
@@ -1421,7 +1421,7 @@ Biće konvertovano u %(toSymbol)s i poslato na
       </trans-unit>
       <trans-unit id="Your transaction will be replaced in your history tab shortly.">
         <source>Your transaction will be replaced in your history tab shortly.</source>
-        <target>Vaša transakcije če butu zamijenjena skoro u vašoj kartici "historija".</target>
+        <target>Vaša transakcije će bitu zamijenjena uskoro u vašoj kartici "historija".</target>
       </trans-unit>
       <trans-unit id="confirmations:">
         <source>confirmations:</source>
@@ -1429,15 +1429,15 @@ Biće konvertovano u %(toSymbol)s i poslato na
       </trans-unit>
       <trans-unit id="minimum">
         <source>minimum</source>
-        <target></target>
+        <target>najmanja</target>
       </trans-unit>
       <trans-unit id="default">
         <source>default</source>
-        <target></target>
+        <target>osnovna</target>
       </trans-unit>
       <trans-unit id="fastest">
         <source>fastest</source>
-        <target></target>
+        <target>najbrža</target>
       </trans-unit>
     </body>
   </file>

@@ -1429,15 +1429,15 @@ Iko-convert ito sa %(toSymbol)s, at ipapadala sa
       </trans-unit>
       <trans-unit id="minimum">
         <source>minimum</source>
-        <target></target>
+        <target>pinakamaliit</target>
       </trans-unit>
       <trans-unit id="default">
         <source>default</source>
-        <target></target>
+        <target>default</target>
       </trans-unit>
       <trans-unit id="fastest">
         <source>fastest</source>
-        <target></target>
+        <target>pinakamabilis</target>
       </trans-unit>
     </body>
   </file>

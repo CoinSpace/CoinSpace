@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="It is very important you write this down.">
         <source>It's very important you write this down.</source>
-        <target>Je velmi důležité si to zapsat.</target>
+        <target>Je velmi důležité, abyste si jej zapsali.</target>
       </trans-unit>
       <trans-unit id="Generate passphrase">
         <source>Generate passphrase</source>
@@ -1429,15 +1429,15 @@ Bude to převedeno na %(toSymbol)s, a zasláno
       </trans-unit>
       <trans-unit id="minimum">
         <source>minimum</source>
-        <target></target>
+        <target>minimální</target>
       </trans-unit>
       <trans-unit id="default">
         <source>default</source>
-        <target></target>
+        <target>implicitní</target>
       </trans-unit>
       <trans-unit id="fastest">
         <source>fastest</source>
-        <target></target>
+        <target>nejrychlejší</target>
       </trans-unit>
     </body>
   </file>

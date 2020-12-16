@@ -1429,15 +1429,15 @@ O valor será convertido em %(toSymbol)s e enviado para
       </trans-unit>
       <trans-unit id="minimum">
         <source>minimum</source>
-        <target></target>
+        <target>mínimo</target>
       </trans-unit>
       <trans-unit id="default">
         <source>default</source>
-        <target></target>
+        <target>padrão</target>
       </trans-unit>
       <trans-unit id="fastest">
         <source>fastest</source>
-        <target></target>
+        <target>mais rápido</target>
       </trans-unit>
     </body>
   </file>
