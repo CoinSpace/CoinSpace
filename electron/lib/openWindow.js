@@ -63,20 +63,22 @@ function openWindow(deeplink) {
       shell.openExternal(url);
     });
   } else {
-    if (mainWindow.isMinimized()) {
-      mainWindow.restore();
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) {
+        mainWindow.restore();
+      }
+      mainWindow.show();
+
+      for (const child of mainWindow.getChildWindows()) {
+        // Close modals
+        child.close();
+      }
+
+      for (const view of mainWindow.getBrowserViews()) {
+        mainWindow.removeBrowserView(view);
+        view.destroy();
+      }
     }
-    mainWindow.show();
-  }
-
-  for (const child of mainWindow.getChildWindows()) {
-    // Close modals
-    child.close();
-  }
-
-  for (const view of mainWindow.getBrowserViews()) {
-    mainWindow.removeBrowserView(view);
-    view.destroy();
   }
 
   if (deeplink) {
