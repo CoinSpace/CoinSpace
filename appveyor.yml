@@ -35,6 +35,7 @@ before_build:
   - ps: >-
       if ($Env:APPVEYOR_REPO_BRANCH -eq "master") {
         $Env:SITE_URL="https://coin.space/"
+        $Env:SENTRY_ENVIRONMENT="production"
       }
   - ps: >-
       if (Test-Path Env:\CERTIFICATE_WIN) {
