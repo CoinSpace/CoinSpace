@@ -33,7 +33,7 @@ install:
 
 before_build:
   - ps: >-
-      if ($Env:APPVEYOR_REPO_BRANCH -ne "develop") {
+      if ($Env:APPVEYOR_REPO_BRANCH -eq "master") {
         $Env:SITE_URL="https://coin.space/"
       }
   - ps: >-
