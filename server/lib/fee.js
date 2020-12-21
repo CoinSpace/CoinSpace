@@ -25,20 +25,6 @@ function coinPerKilobyte2satPerByte(bitcoinPerKilobyte) {
   return Math.round(bitcoinPerKilobyte * 1e8 / 1e3);
 }
 
-async function estimatesmartfee(cryptoId) {
-  const api = API[cryptoId];
-  try {
-    return {
-      minimum: coinPerKilobyte2satPerByte((await axios.get(`${api}estimatesmartfee?target=12`)).data.feerate),
-      default: coinPerKilobyte2satPerByte((await axios.get(`${api}estimatesmartfee?target=6`)).data.feerate),
-      fastest: coinPerKilobyte2satPerByte((await axios.get(`${api}estimatesmartfee?target=2`)).data.feerate),
-    };
-  } catch (err) {
-    console.log(`${cryptoId} estimatesmartfee:`, err.message);
-    return null;
-  }
-}
-
 async function estimatefee(cryptoId) {
   const api = API[cryptoId];
   try {
@@ -53,15 +39,6 @@ async function estimatefee(cryptoId) {
   }
 }
 
-const ADAPTERS = {
-  bitcoin: estimatesmartfee,
-  bitcoincash: estimatefee,
-  bitcoinsv: estimatefee,
-  litecoin: estimatesmartfee,
-  dogecoin: estimatesmartfee,
-  dash: estimatesmartfee,
-};
-
 async function updateFees() {
   for (const id of CRYPTO) {
     const item = await db().collection('fee')
@@ -71,7 +48,7 @@ async function updateFees() {
       continue;
     }
 
-    const fee = await ADAPTERS[id](id);
+    const fee = await estimatefee(id);
     if (fee) {
       await db().collection('fee')
         .updateOne({
