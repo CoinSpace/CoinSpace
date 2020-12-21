@@ -57,15 +57,7 @@ async function onDeviceReady() {
 
 window.onShortcutEvent = function(event) {
   const network = event.data.split('.').pop();
-  if (['bitcoin', 'bitcoincash', 'ethereum', 'litecoin'].indexOf(network) === -1) return;
-
-  const regex = /^network=/;
-  const networkParam = window.location.search.substr(1).split('&').filter((e) => {
-    return e.match(regex);
-  })[0];
-  const queryNetwork = networkParam ? networkParam.replace(regex, '') : null;
-  if (network === queryNetwork) return;
-
+  if (!['bitcoin', 'bitcoincash', 'ethereum', 'litecoin'].includes(network)) return;
   const baseUrl = window.location.href.split('?')[0];
-  return window.location = baseUrl + '?network=' + network;
+  return window.location = `${baseUrl}?coin=${network}`;
 };
