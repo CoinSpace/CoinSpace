@@ -13,6 +13,9 @@ const seeds = require('lib/wallet/seeds');
 axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay, shouldResetTimeout: true });
 
 axios.interceptors.request.use((config) => {
+  if (!config.url.startsWith(window.urlRoot)) {
+    return config;
+  }
   if (!config.method) {
     config.method = 'get';
   }
