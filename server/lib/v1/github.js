@@ -21,6 +21,14 @@ const TYPE_LINK = 'link';
 
 
 const platforms = [{
+  // Web wallet
+  distribution: 'web',
+  arch: 'any',
+  app: 'app',
+  type: TYPE_LINK,
+  pattern: /coin\.space\/wallet/ig,
+  link: 'https://coin.space/wallet/',
+}, {
   // Windows application, update from app
   distribution: 'win',
   arch: 'x64',
