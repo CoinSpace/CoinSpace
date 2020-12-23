@@ -77,5 +77,5 @@ module.exports = function updater(opts = {}) {
 
   // check for updates right away and keep checking later
   autoUpdater.checkForUpdates();
-  setInterval(() => { autoUpdater.checkForUpdates(); }, 15 * 60 * 60 * 1000);
+  setInterval(() => { autoUpdater.checkForUpdates(); }, 12 * 60 * 60 * 1000);
 };
