@@ -18,7 +18,7 @@ function init() {
 
 async function checkUpdate() {
   const distribution = process.env.BUILD_TYPE === 'web' ? 'web' : process.env.BUILD_PLATFORM;
-  const arch = process.arch || 'any';
+  const arch = (window.process && window.process.arch) || 'any';
   try {
     update = await request({
       url: `${urlRoot}api/v1/update/${distribution}/${arch}/${process.env.VERSION}`,
