@@ -300,16 +300,15 @@ router.get('/update/:distribution/:arch/:version', (req, res, next) => {
     .then(update => {
       if (!update) {
         res.status(404).send({ error: 'Unsupported platform' });
-      } else if (semver.eq(update.version, version)) {
-        // send "no content" if version exactly match
-        // this allows to downgrade version
-        res.status(204).end();
-      } else {
+      } else if (semver.gt(update.version, version)) {
         res.status(200).send({
           name: update.name,
           version: update.version,
           url: update.url,
         });
+      } else {
+        // send "no content" if version is equal or less
+        res.status(204).end();
       }
     }).catch(next);
 });
