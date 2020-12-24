@@ -11,7 +11,12 @@
   <div class="_section">
     <div class="_title">{{translate("Release information")}}</div>
     <div class="_list_item">
-      <div class="_label">{{translate("Version")}}</div>
+      <div class="_label">
+        {{translate("Version")}}
+        {{#if hasUpdate}}
+        (<div class="_btn _link" on-click="confirmUpdate">{{translate("Update")}}</div>)
+        {{/if}}
+      </div>
       <div class="_value">{{version}} ({{commit}})</div>
     </div>
   </div>

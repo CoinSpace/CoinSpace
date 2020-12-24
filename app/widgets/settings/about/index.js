@@ -1,6 +1,7 @@
 'use strict';
 
 const Ractive = require('lib/ractive');
+const updater = require('lib/updater');
 
 module.exports = function(el) {
   const ractive = new Ractive({
@@ -9,6 +10,7 @@ module.exports = function(el) {
     data: {
       version: process.env.VERSION,
       commit: process.env.COMMIT,
+      hasUpdate: updater.hasUpdate(),
     },
   });
 
@@ -23,6 +25,8 @@ module.exports = function(el) {
   ractive.on('privacy', () => {
     window.safeOpen('https://coin.space/coinprivacypolicy/', '_blank');
   });
+
+  ractive.on('confirmUpdate', updater.confirmUpdate);
 
   return ractive;
 };

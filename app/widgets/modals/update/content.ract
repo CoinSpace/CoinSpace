@@ -1,0 +1,15 @@
+<div class="modal modal-update">
+
+  <div class="_header">
+    {{translate("Update")}}
+  </div>
+
+  <div class="_content">
+    {{translate("A new version of Coin Wallet is available. Would you like to update it now?")}}
+  </div>
+  <div class="_footer">
+    <div class="csbtn csbtn--white" on-click="skip">{{translate("Skip")}}</div>
+    <div class="csbtn" on-click="confirm">{{translate("Update")}}</div>
+  </div>
+
+</div>

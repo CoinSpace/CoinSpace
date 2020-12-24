@@ -13,6 +13,7 @@ window.initCSApp = async function() {
   const initFrame = require('widgets/frame');
   const initAuth = require('pages/auth');
   const touchId = require('lib/touch-id');
+  const updater = require('lib/updater');
   const { showError } = require('widgets/modals/flash');
   const showTouchIdSetup = require('widgets/touch-id-setup');
 
@@ -29,6 +30,7 @@ window.initCSApp = async function() {
   if (process.env.BUILD_TYPE === 'phonegap') navigator.splashscreen.hide();
 
   await touchId.init();
+  updater.init();
 
   const auth = initAuth(document.getElementById('auth'));
   const authContentEl = document.getElementById('auth_frame');

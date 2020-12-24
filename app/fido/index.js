@@ -32,7 +32,6 @@ async function init() {
 
 async function attestation(options) {
   let attestation = await startAttestation(options);
-  console.log('attestation', attestation);
   attestation = encodeURIComponent(JSON.stringify(attestation));
   close('coinspace://?window=fido&data=' + attestation);
 }
