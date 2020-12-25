@@ -27,11 +27,11 @@ async function checkUpdate() {
     if (!update) return;
     update.distribution = distribution;
 
-    const isSkipped = !!localStorage.getItem(`_cs_update_shown_${update.version}`);
+    const isSkipped = update.version === localStorage.getItem('_cs_update_shown');
     if (isSkipped) return;
 
     showUpdate({ confirmUpdate });
-    localStorage.setItem(`_cs_update_shown_${update.version}`, true);
+    localStorage.setItem('_cs_update_shown', update.version);
   } catch (err) {
     console.error(err);
   }
