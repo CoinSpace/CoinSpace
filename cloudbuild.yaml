@@ -16,16 +16,16 @@ steps:
     - 'SENTRY_DSN=${_SENTRY_DSN}'
     - 'SENTRY_ORG=${_SENTRY_ORG}'
     - 'SENTRY_AUTH_TOKEN=${_SENTRY_AUTH_TOKEN}'
-    - 'NODE_AUTH_TOKEN=${_NPM_READ_TOKEN}'
+    - 'DOMAIN_ONION=${_DOMAIN_ONION}'
   entrypoint: 'sh'
   args:
     - '-c'
     - |
       npm config set @coinspace:registry https://npm.pkg.github.com && \
-      npm config set "//npm.pkg.github.com/:_authToken" '$${NODE_AUTH_TOKEN}' && \
+      npm config set "//npm.pkg.github.com/:_authToken" ${_NPM_READ_TOKEN} && \
       NODE_ENV=CI npm ci && \
       ./cli/i18n.js --json && \
-      ./cli/build.js web --env=${_BUILD_ENV} --release
+      ./cli/build.js web --env=${_BUILD_ENV} --release --platform=${_DISTRIBUTION}
 
 - name: 'gcr.io/cloud-builders/docker'
   id: 'build image'
@@ -49,4 +49,6 @@ steps:
   args:
   - '-c'
   - |
-    gcloud compute url-maps invalidate-cdn-cache ${_CDN_URL_MAP_NAME} --host ${_CDN_HOST} --path "/*" --async
+    if [[ "${_DISTRIBUTION}" == "web" ]]; then
+      gcloud compute url-maps invalidate-cdn-cache ${_CDN_URL_MAP_NAME} --host ${_CDN_HOST} --path "/*" --async
+    fi

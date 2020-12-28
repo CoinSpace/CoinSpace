@@ -1,8 +1,7 @@
 'use strict';
 
-if (process.env.BUILD_TYPE === 'web') {
-  const port = window.location.port ? `:${window.location.port}` : '';
-  window.urlRoot = `${window.location.protocol}//${window.location.hostname}${port}/`;
+if (process.env.BUILD_PLATFORM === 'tor') {
+  window.urlRoot = `http://${process.env.DOMAIN_ONION}/`;
 } else {
   window.urlRoot = process.env.SITE_URL;
 }

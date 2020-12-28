@@ -29,6 +29,14 @@ const platforms = [{
   pattern: /coin\.space\/wallet/ig,
   link: 'https://coin.space/wallet/',
 }, {
+  // Tor wallet
+  distribution: 'tor',
+  arch: 'any',
+  app: 'app',
+  type: TYPE_LINK,
+  pattern: /coinapp3ahbvjupq\.onion/ig,
+  link: 'http://coinapp3ahbvjupq.onion/',
+}, {
   // Windows application, update from app
   distribution: 'win',
   arch: 'x64',
