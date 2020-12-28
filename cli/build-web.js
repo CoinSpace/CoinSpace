@@ -45,7 +45,7 @@ webpack(webpackConfig, (error, stats) => {
     throw new Error('stats errors');
   }
   if (program.release) {
-    utils.uploadSentrySourceMaps('web', RELEASE);
+    utils.uploadSentrySourceMaps(program.platform, RELEASE);
   }
   console.log('Done!');
 });
