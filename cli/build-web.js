@@ -32,7 +32,6 @@ const RELEASE = `${pkg.name}.web-${program.platform}@${pkg.version}`;
 webpackConfig.plugins.push(
   new webpack.DefinePlugin({
     'process.env.RELEASE': JSON.stringify(RELEASE),
-    'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN),
   })
 );
 
