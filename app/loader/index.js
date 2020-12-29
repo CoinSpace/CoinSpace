@@ -26,7 +26,6 @@ Sentry.init({
   ],
 });
 
-const token = require('lib/crypto');
 const { fadeOut } = require('lib/transitions/fade.js');
 const Modernizr = require('modernizr');
 const i18n = require('lib/i18n');
@@ -61,7 +60,7 @@ function setupCrypto() {
   if (queryNetwork) {
     const url = window.location.href.split('?')[0];
     window.history.replaceState(null, null, url);
-    token.setCrypto(queryNetwork);
+    window.localStorage.setItem('_cs_token', queryNetwork);
   }
 }
 
