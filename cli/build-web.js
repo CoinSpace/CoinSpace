@@ -31,8 +31,6 @@ const RELEASE = `${pkg.name}.web-${program.platform}@${pkg.version}`;
 
 webpackConfig.plugins.push(
   new webpack.DefinePlugin({
-    'process.env.BUILD_TYPE': JSON.stringify('web'),
-    'process.env.BUILD_PLATFORM': JSON.stringify(program.platform),
     'process.env.RELEASE': JSON.stringify(RELEASE),
     'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN),
   })

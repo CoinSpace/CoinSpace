@@ -30,14 +30,13 @@ dotenv.config({ path: envFile });
 process.env['ENV_FILE'] = envFile;
 process.env['ENV'] = program.env;
 process.env['BUILD_TYPE'] = 'phonegap';
+process.env['BUILD_PLATFORM'] = program.platform;
 const webpackConfig = require('../webpack.prod');
 
 const RELEASE = `${pkg.name}.phonegap-${program.platform}@${pkg.version}`;
 
 webpackConfig.plugins.push(
   new webpack.DefinePlugin({
-    'process.env.BUILD_TYPE': JSON.stringify('phonegap'),
-    'process.env.BUILD_PLATFORM': JSON.stringify(program.platform),
     'process.env.RELEASE': JSON.stringify(RELEASE),
     'process.env.SENTRY_DSN': JSON.stringify(process.env['SENTRY_DSN']),
   })
