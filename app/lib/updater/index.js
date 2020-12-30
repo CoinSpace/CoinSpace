@@ -17,15 +17,13 @@ function init() {
 }
 
 async function checkUpdate() {
-  const distribution = process.env.BUILD_TYPE === 'web' ? 'web' : process.env.BUILD_PLATFORM;
   const arch = (window.process && window.process.arch) || 'any';
   try {
     update = await request({
-      url: `${urlRoot}api/v1/update/${distribution}/${arch}/${process.env.VERSION}`,
+      url: `${urlRoot}api/v1/update/${process.env.BUILD_PLATFORM}/${arch}/${process.env.VERSION}`,
       method: 'get',
     });
     if (!update) return;
-    update.distribution = distribution;
 
     const isSkipped = update.version === localStorage.getItem('_cs_update_shown');
     if (isSkipped) return;
@@ -39,7 +37,7 @@ async function checkUpdate() {
 
 function confirmUpdate() {
   if (!update) return;
-  if (update.distribution === 'web') return location.reload();
+  if (process.env.BUILD_PLATFORM === 'web') return location.reload();
   window.safeOpen(update.url, '_blank');
 }
 
