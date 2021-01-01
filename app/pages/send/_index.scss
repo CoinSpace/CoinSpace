@@ -27,6 +27,13 @@
     @include breakpoint(portrait) {
       padding-right: 60px;
     }
+    &--hidden {
+      display: none;
+    }
+  }
+  ._fiat_input {
+    margin-top: -1px;
+    @extend ._crypto_input;
   }
   ._crypto {
     @include noselect;
@@ -42,14 +49,6 @@
     @include breakpoint(portrait) {
       line-height: 59px;
       font-size: $big_font_size--portrait;
-    }
-  }
-  ._fiat_input {
-    margin-top: -1px;
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
-    &--hidden {
-      display: none;
     }
   }
 }

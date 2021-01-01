@@ -4,14 +4,17 @@ const Ractive = require('lib/ractive');
 const LS = require('lib/wallet/localStorage');
 const Avatar = require('lib/avatar');
 const CS = require('lib/wallet');
+const details = require('lib/wallet/details');
 const importPrivateKey = require('widgets/modals/import-private-key');
 const exportPrivateKeys = require('widgets/modals/export-private-keys');
 const showEosSetupAccount = require('widgets/modals/eos-setup-account');
 const { translate } = require('lib/i18n');
 const os = require('lib/detect-os');
 const touchId = require('lib/touch-id');
+const emitter = require('lib/emitter');
 
 module.exports = function(el) {
+  const currency = details.get('systemInfo').preferredCurrency;
   const ractive = new Ractive({
     el,
     template: require('./index.ract'),
@@ -23,6 +26,14 @@ module.exports = function(el) {
       isEOS: false,
       securityPinLabel: getSecurityPinLabel(),
       walletName: '',
+      currencies: [
+        'AUD', 'BRL', 'CAD', 'CHF', 'CNY',
+        'DKK', 'EUR', 'GBP', 'IDR', 'ILS',
+        'JPY', 'MXN', 'NOK', 'NZD', 'PLN',
+        'RUB', 'SEK', 'SGD', 'TRY', 'UAH',
+        'USD', 'ZAR',
+      ],
+      currency,
     },
   });
 
@@ -80,6 +91,17 @@ module.exports = function(el) {
   ractive.on('logout', () => {
     LS.reset();
     location.reload();
+  });
+
+  ractive.on('setPreferredCurrency', () => {
+    const currency = ractive.get('currency');
+    details.set('systemInfo', {
+      preferredCurrency: currency,
+    }).then(() => {
+      emitter.emit('currency-changed', currency);
+    }, (err) => {
+      console.error(err);
+    });
   });
 
   return ractive;

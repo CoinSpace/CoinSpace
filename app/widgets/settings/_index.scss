@@ -111,6 +111,14 @@
       ._label {
         @include ellipsis();
       }
+      ._select {
+        margin-left: auto;
+
+        select {
+          appearance: none;
+          color: darken($grey, 20%);
+        }
+      }
       ._link {
         color: #34a2ff;
       }

@@ -51,11 +51,22 @@
       }
     }
 
+    &__details {
+      flex: 1;
+    }
+
     &__name {
       font-size: $big_font_size;
-      flex: 1;
       @include breakpoint(portrait) {
         font-size: $big_font_size--portrait;
+      }
+    }
+
+    &__price {
+      color: $grey;
+      font-size: $small_font_size;
+      @include breakpoint(portrait) {
+        font-size: $small_font_size--portrait;
       }
     }
 

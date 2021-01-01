@@ -5,6 +5,8 @@ const emitter = require('lib/emitter');
 const initList = require('./list');
 const initSearch = require('./search');
 const tokens = require('lib/tokens');
+const { getCrypto, setCrypto } = require('lib/crypto');
+const { initWallet } = require('lib/wallet');
 
 module.exports = function(el) {
   const ractive = new Ractive({
@@ -37,6 +39,16 @@ module.exports = function(el) {
 
   emitter.on('set-tokens', (page) => {
     showPage(pages[page]);
+  });
+
+  emitter.on('token-added', (crypto) => {
+    setCrypto(crypto);
+    ractive.set('currentCrypto', getCrypto());
+    emitter.emit('sync');
+
+    setTimeout(() => {
+      initWallet();
+    }, 200);
   });
 
   function showPage(page) {

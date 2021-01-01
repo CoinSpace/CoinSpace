@@ -46,6 +46,8 @@ function init(app) {
     if (!id) return;
     const [, app, store, version] = req.get('X-Release') !== undefined ?
       req.get('X-Release').match(/(.+)\.(.+)@(.+)/i) : [];
+    const screen = req.path + (req.query.crypto ? `/${req.query.crypto}` : '')
+      + (req.query.network ? `/${req.query.network}` : '');
     axios({
       url: 'https://www.google-analytics.com/collect',
       method: 'post',
@@ -53,7 +55,7 @@ function init(app) {
         v: 1, t: 'screenview',
         tid: process.env.ANALYTICS_ID,
         aip: 1, uid: id,
-        dl: req.path, dt: req.path, cd: req.path,
+        dl: screen, dt: screen, cd: screen,
         uip: req.ip, ua: req.get('User-Agent'),
         an: app, av: version, aiid: store,
       }),

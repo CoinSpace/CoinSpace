@@ -2,7 +2,6 @@
 
 const Big = require('big.js');
 
-let decimals;
 let factor;
 
 function toAtom(number) {
@@ -21,8 +20,7 @@ function toUnitString(number, d) {
   return Big(number).div(Big(10).pow(d)).toFixed();
 }
 
-function setDecimals(d) {
-  decimals = d;
+function setDecimals(decimals) {
   factor = Big(10).pow(decimals);
 }
 

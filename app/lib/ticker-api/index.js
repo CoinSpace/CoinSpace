@@ -1,42 +1,47 @@
 'use strict';
 
 const request = require('lib/request');
-const { urlRoot } = window;
+const emitter = require('lib/emitter');
 
 let rates = {};
 
-function init(cryptoId) {
-  if (!cryptoId) {
-    rates = {};
+function init(crypto) {
+  const cryptoIds = crypto.map((item) => {
+    if (typeof item === 'string') {
+      return item;
+    }
+    if (item._id) {
+      return item._id;
+    }
+  }).filter((item) => !!item);
+  if (!cryptoIds.length) {
+    emitter.emit('rates-updated', rates);
     return;
   }
   return request({
-    url: `${urlRoot}api/v2/ticker`,
+    url: `${window.urlRoot}api/v2/tickers`,
     params: {
-      crypto: cryptoId,
+      crypto: cryptoIds.join(','),
     },
     method: 'get',
     seed: 'public',
   }).catch((err) => {
     console.error(err);
-    return {};
+    rates = {};
+    emitter.emit('rates-updated', rates);
   }).then((data) => {
-    rates = data.prices || {};
-
-    if (cryptoId === 'bitcoin') {
-      rates['mBTC'] = 1000;
-      rates['μBTC'] = 1000000;
-    } else if (cryptoId === 'bitcoincash') {
-      rates['mBCH'] = 1000;
-      rates['μBCH'] = 1000000;
-    } else if (cryptoId === 'bitcoinsv') {
-      rates['mBSV'] = 1000;
-      rates['μBSV'] = 1000000;
+    for (const item of data) {
+      rates[item._id] = item.prices;
     }
+    emitter.emit('rates-updated', rates);
   });
+}
+
+function getRates() {
+  return rates;
 }
 
 module.exports = {
   init,
-  getRates: () => rates,
+  getRates,
 };

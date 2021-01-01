@@ -20,6 +20,21 @@
   </div>
 
   <div class="_section">
+    <div class="_title">{{translate("General")}}</div>
+    <div class="_list_item _btn" on-click="general-currency">
+      <div class="_label">{{translate("Local currency")}}</div>
+      <div class="_select" title="{{translate('Local currency')}}">
+        <select value="{{currency}}" on-change="setPreferredCurrency">
+          {{#currencies}}
+            <option value="{{.}}">{{.}}</option>
+          {{/currencies}}
+        </select>
+      </div>
+      <div class="_arrow">{{>svg_arrow}}</div>
+    </div>
+  </div>
+
+  <div class="_section">
     <div class="_title">{{translate("Security")}}</div>
     <div class="_list_item _btn" on-click="security-pin">
       <div class="_label">{{securityPinLabel}}</div>

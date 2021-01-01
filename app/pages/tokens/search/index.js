@@ -40,6 +40,7 @@ module.exports = function(el) {
       })
       .finally(() => {
         emitter.emit('set-tokens', 'list');
+        emitter.emit('token-added', token);
       });
   }
 

@@ -72,6 +72,7 @@ function open() {
         ractive.set('isValidating', false);
         ractive.fire('cancel');
         emitter.emit('set-tokens', 'list');
+        emitter.emit('token-added', token);
       });
   });
 

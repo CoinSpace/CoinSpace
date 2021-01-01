@@ -11,7 +11,6 @@ function open(callback) {
   const ractive = new Ractive({
     template: require('./index.ract'),
     data: {
-      exchangeRates: {},
       nearbys: [],
       searching: true,
       searchingAgain: false,

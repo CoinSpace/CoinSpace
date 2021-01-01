@@ -2,106 +2,20 @@
   <div class="_title">{{translate("Coins")}}</div>
 
   <div class="_coins">
-
-    <div on-click="switchCrypto('bitcoin')" class="_token _token--bitcoin">
+    {{#each coins}}
+    <div class="_token _token--{{_id}}" on-click="switchCrypto(this)">
       <div class="_token__icon">
-        {{>svg_token_bitcoin}}
+        {{>`svg_token_${_id}`}}
       </div>
-      <div class="_token__name">Bitcoin</div>
-      {{#if isCurrentCrypto('bitcoin')}}
+      <div class="_token__details">
+        <div class="_token__name">{{name}}</div>
+        <div class="_token__price" title="{{translate('Current coin price')}}">{{getPrice(_id)}}</div>
+      </div>
+      {{#if isCurrentCrypto(_id || this)}}
       <div class="_token__arrow">{{>svg_arrow}}</div>
       {{/if}}
     </div>
-
-    <div on-click="switchCrypto('bitcoincash')" class="_token _token--bitcoincash">
-      <div class="_token__icon">
-        {{>svg_token_bitcoincash}}
-      </div>
-      <div class="_token__name">Bitcoin Cash</div>
-      {{#if isCurrentCrypto('bitcoincash')}}
-      <div class="_token__arrow">{{>svg_arrow}}</div>
-      {{/if}}
-    </div>
-
-    <div on-click="switchCrypto('bitcoinsv')" class="_token _token--bitcoinsv">
-      <div class="_token__icon">
-        {{>svg_token_bitcoinsv}}
-      </div>
-      <div class="_token__name">Bitcoin SV</div>
-      {{#if isCurrentCrypto('bitcoinsv')}}
-      <div class="_token__arrow">{{>svg_arrow}}</div>
-      {{/if}}
-    </div>
-
-    <div on-click="switchCrypto('ethereum')" class="_token _token--ethereum">
-      <div class="_token__icon">
-        {{>svg_token_ethereum}}
-      </div>
-      <div class="_token__name">Ethereum</div>
-      {{#if isCurrentCrypto('ethereum')}}
-      <div class="_token__arrow">{{>svg_arrow}}</div>
-      {{/if}}
-    </div>
-
-    <div on-click="switchCrypto('litecoin')" class="_token _token--litecoin">
-      <div class="_token__icon">
-        {{>svg_token_litecoin}}
-      </div>
-      <div class="_token__name">Litecoin</div>
-      {{#if isCurrentCrypto('litecoin')}}
-      <div class="_token__arrow">{{>svg_arrow}}</div>
-      {{/if}}
-    </div>
-
-    <div on-click="switchCrypto('ripple')" class="_token _token--ripple">
-      <div class="_token__icon">
-        {{>svg_token_ripple}}
-      </div>
-      <div class="_token__name">Ripple</div>
-      {{#if isCurrentCrypto('ripple')}}
-      <div class="_token__arrow">{{>svg_arrow}}</div>
-      {{/if}}
-    </div>
-
-    <div on-click="switchCrypto('stellar')" class="_token _token--stellar">
-      <div class="_token__icon">
-        {{>svg_token_stellar}}
-      </div>
-      <div class="_token__name">Stellar</div>
-      {{#if isCurrentCrypto('stellar')}}
-      <div class="_token__arrow">{{>svg_arrow}}</div>
-      {{/if}}
-    </div>
-
-    <div on-click="switchCrypto('eos')" class="_token _token--eos">
-      <div class="_token__icon">
-        {{>svg_token_eos}}
-      </div>
-      <div class="_token__name">EOS</div>
-      {{#if isCurrentCrypto('eos')}}
-      <div class="_token__arrow">{{>svg_arrow}}</div>
-      {{/if}}
-    </div>
-
-    <div on-click="switchCrypto('dogecoin')" class="_token _token--dogecoin">
-      <div class="_token__icon">
-        {{>svg_token_dogecoin}}
-      </div>
-      <div class="_token__name">Dogecoin</div>
-      {{#if isCurrentCrypto('dogecoin')}}
-      <div class="_token__arrow">{{>svg_arrow}}</div>
-      {{/if}}
-    </div>
-
-    <div on-click="switchCrypto('dash')" class="_token _token--dash">
-      <div class="_token__icon">
-        {{>svg_token_dash}}
-      </div>
-      <div class="_token__name">Dash</div>
-      {{#if isCurrentCrypto('dash')}}
-      <div class="_token__arrow">{{>svg_arrow}}</div>
-      {{/if}}
-    </div>
+    {{/each}}
   </div>
 
   <div class="_title">{{translate("Tokens")}}</div>
@@ -116,8 +30,11 @@
           {{>svg_letter_t}}
         {{/if}}
       </div>
-      <div class="_token__name">{{name}}</div>
-      {{#if isCurrentCrypto(this._id || this)}}
+      <div class="_token__details">
+        <div class="_token__name">{{name}}</div>
+        <div class="_token__price" title="{{translate('Current coin price')}}">{{getPrice(this._id)}}</div>
+      </div>
+      {{#if isCurrentCrypto(_id || this)}}
       <div class="_token__arrow">{{>svg_arrow}}</div>
       {{else}}
       <div class="_token__remove" on-click="removeEthereumToken(this)">{{> svg_close}}</div>

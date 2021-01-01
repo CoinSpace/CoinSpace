@@ -160,7 +160,7 @@ async function initWallet(pin) {
     convert.setDecimals(0);
   }
 
-  await ticker.init(crypto._id);
+  await ticker.init([crypto]);
 
   state.wallet.load({
     getDynamicFees() {

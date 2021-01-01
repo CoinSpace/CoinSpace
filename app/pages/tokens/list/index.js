@@ -6,7 +6,9 @@ const { getCrypto, setCrypto } = require('lib/crypto');
 const { initWallet } = require('lib/wallet');
 const emitter = require('lib/emitter');
 const details = require('lib/wallet/details');
+const ticker = require('lib/ticker-api');
 const _ = require('lodash');
+const { walletCoins } = require('lib/crypto');
 
 let isEnabled = false;
 
@@ -15,17 +17,29 @@ function isCryptoEqual(a, b) {
 }
 
 module.exports = function(el) {
-
   const ractive = new Ractive({
     el,
     template: require('./index.ract'),
     data: {
       currentCrypto: null,
+      currency: null,
+      rates: ticker.getRates(),
       isCurrentCrypto(crypto) {
         return isCryptoEqual(crypto, this.get('currentCrypto'));
       },
+      getPrice(cryptoId) {
+        if (cryptoId) {
+          const rates = ractive.get('rates')[cryptoId] || {};
+          const currency = this.get('currency');
+          if (rates[currency]) {
+            return `${rates[currency]} ${currency}`;
+          }
+        }
+        return '⚠️';
+      },
       switchCrypto,
       removeEthereumToken,
+      coins: [],
       ethereumTokens: [],
     },
   });
@@ -36,13 +50,24 @@ module.exports = function(el) {
 
   emitter.on('wallet-ready', () => {
     isEnabled = true;
+    ractive.set('rates', ticker.getRates());
   });
 
+  emitter.on('currency-changed', (currency) => {
+    ractive.set('currency', currency);
+  });
+
+  emitter.on('rates-updated', (rates) => {
+    ractive.set('rates', rates);
+  });
 
   ractive.on('before-show', () => {
+    ractive.set('coins', walletCoins);
     const walletTokens = details.get('tokens');
     ractive.set('ethereumTokens', walletTokens.filter(item => item.network === 'ethereum'));
     ractive.set('currentCrypto', getCrypto());
+    ractive.set('currency', details.get('systemInfo').preferredCurrency);
+    ticker.init([...walletCoins, ...walletTokens.filter((item) => item._id)]);
   });
 
   function switchCrypto(crypto) {

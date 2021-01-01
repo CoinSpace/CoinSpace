@@ -3,18 +3,47 @@
 const _ = require('lodash');
 const details = require('lib/wallet/details');
 
-const walletCoins = [
-  'bitcoin',
-  'bitcoincash',
-  'bitcoinsv',
-  'litecoin',
-  'dogecoin',
-  'dash',
-  'ethereum',
-  'ripple',
-  'stellar',
-  'eos',
-];
+const walletCoins = [{
+  _id: 'bitcoin',
+  network: 'bitcoin',
+  name: 'Bitcoin',
+}, {
+  _id: 'bitcoincash',
+  network: 'bitcoincash',
+  name: 'Bitcoin Cash',
+}, {
+  _id: 'bitcoinsv',
+  network: 'bitcoinsv',
+  name: 'Bitcoin SV',
+}, {
+  _id: 'ethereum',
+  network: 'ethereum',
+  name: 'Ethereum',
+}, {
+  _id: 'litecoin',
+  network: 'litecoin',
+  name: 'Litecoin',
+}, {
+  _id: 'ripple',
+  network: 'ripple',
+  name: 'Ripple',
+}, {
+  _id: 'stellar',
+  network: 'stellar',
+  name: 'Stellar',
+}, {
+  _id: 'eos',
+  network: 'eos',
+  name: 'EOS',
+}, {
+  _id: 'dogecoin',
+  network: 'dogecoin',
+  name: 'Dogecoin',
+}, {
+  _id: 'dash',
+  network: 'dash',
+  name: 'Dash',
+}];
 const DEFAULT_COIN = 'bitcoin';
 
 function getCrypto() {
@@ -34,11 +63,11 @@ function getCrypto() {
       return token;
     }
   } else {
-    if (walletCoins.includes(crypto)) {
-      return {
-        _id: crypto,
-        network: crypto,
-      };
+    const coin = walletCoins.find((item) => {
+      return item._id === crypto;
+    });
+    if (coin) {
+      return coin;
     }
     const token = walletTokens.find((item) => {
       return item._id === crypto;
@@ -67,6 +96,7 @@ function setCrypto(crypto) {
 }
 
 module.exports = {
+  walletCoins,
   getCrypto,
   setCrypto,
 };
