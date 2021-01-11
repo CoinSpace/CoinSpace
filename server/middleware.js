@@ -19,13 +19,6 @@ function init(app) {
     app.use(helmet.xssFilter());
     app.use(helmet.noSniff());
     app.use(helmet.frameguard({ action: 'sameorigin' }));
-
-    const oneYearInSeconds = 31536000;
-    app.use(helmet.hsts({
-      maxAge: oneYearInSeconds,
-      includeSubDomains: true,
-      preload: true,
-    }));
   }
 
   app.use(cors());
