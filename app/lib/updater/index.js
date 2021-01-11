@@ -9,7 +9,7 @@ let update = false;
 function init() {
   setTimeout(() => {
     checkUpdate();
-  }, 1000);
+  }, ['win', 'mac'].includes(process.env.BUILD_PLATFORM) ? 5 * 60 * 1000 : 1000);
 
   setInterval(() => {
     checkUpdate();
