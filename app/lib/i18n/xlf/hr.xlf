@@ -1439,6 +1439,22 @@ Biće konvertiran u %(toSymbol)s i poslan na
         <source>fastest</source>
         <target>najbrža</target>
       </trans-unit>
+      <trans-unit id="Update">
+        <source>Update</source>
+        <target>Ažuriraj</target>
+      </trans-unit>
+      <trans-unit id="A new version of Coin Wallet is available. Would you like to update it now?">
+        <source>A new version of Coin Wallet is available. Would you like to update it now?</source>
+        <target>Dostupna je nova verzija novčanika za novčiće. Da li biste željeli ažurirati ga sad?</target>
+      </trans-unit>
+      <trans-unit id="General">
+        <source>General</source>
+        <target>Opće informacije</target>
+      </trans-unit>
+      <trans-unit id="Local currency">
+        <source>Local currency</source>
+        <target>Lokalna valuta</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

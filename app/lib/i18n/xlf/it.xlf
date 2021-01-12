@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="It is very important you write this down.">
         <source>It's very important you write this down.</source>
-        <target>E' davvero importante salvare questa frase.</target>
+        <target>È davvero importante salvare questa frase.</target>
       </trans-unit>
       <trans-unit id="Generate passphrase">
         <source>Generate passphrase</source>
@@ -933,7 +933,7 @@ Sarà convertito in %(toSymbol)s, e inviato a
       </trans-unit>
       <trans-unit id="Sell">
         <source>Sell</source>
-        <target>Vendere</target>
+        <target>Vendi</target>
       </trans-unit>
       <trans-unit id="No verification methods are currently available.">
         <source>No verification methods are currently available.</source>
@@ -1077,7 +1077,7 @@ Sarà convertito in %(toSymbol)s, e inviato a
       </trans-unit>
       <trans-unit id="Payment authorization declined">
         <source>Payment authorization declined</source>
-        <target>Auturizzazione al pagamento negata</target>
+        <target>Autorizzazione al pagamento negata</target>
       </trans-unit>
       <trans-unit id="Identity verification must be passed before saving card">
         <source>Identity verification must be passed before saving card</source>
@@ -1233,7 +1233,7 @@ Sarà convertito in %(toSymbol)s, e inviato a
       </trans-unit>
       <trans-unit id="more info">
         <source>more info</source>
-        <target>Ulteriori informazioni</target>
+        <target>ulteriori informazioni</target>
       </trans-unit>
       <trans-unit id="Customer info update is disabled due to identity check status">
         <source>Customer info update is disabled due to identity check status</source>
@@ -1438,6 +1438,22 @@ Sarà convertito in %(toSymbol)s, e inviato a
       <trans-unit id="fastest">
         <source>fastest</source>
         <target>il più veloce</target>
+      </trans-unit>
+      <trans-unit id="Update">
+        <source>Update</source>
+        <target>Aggiorna</target>
+      </trans-unit>
+      <trans-unit id="A new version of Coin Wallet is available. Would you like to update it now?">
+        <source>A new version of Coin Wallet is available. Would you like to update it now?</source>
+        <target>È disponibile una nuova versione di Coin Wallet. Vorresti eseguire adesso l'aggiornamento?</target>
+      </trans-unit>
+      <trans-unit id="General">
+        <source>General</source>
+        <target>Generale</target>
+      </trans-unit>
+      <trans-unit id="Local currency">
+        <source>Local currency</source>
+        <target>Valuta locale</target>
       </trans-unit>
     </body>
   </file>

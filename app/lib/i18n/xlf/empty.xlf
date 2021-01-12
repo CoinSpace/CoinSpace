@@ -1434,6 +1434,22 @@ It will be converted into %(toSymbol)s, and sent to
         <source>fastest</source>
         <target></target>
       </trans-unit>
+      <trans-unit id="Update">
+        <source>Update</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="A new version of Coin Wallet is available. Would you like to update it now?">
+        <source>A new version of Coin Wallet is available. Would you like to update it now?</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="General">
+        <source>General</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Local currency">
+        <source>Local currency</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1439,6 +1439,22 @@ It will be converted into %(toSymbol)s, and sent to
         <source>fastest</source>
         <target>เร็วที่สุด</target>
       </trans-unit>
+      <trans-unit id="Update">
+        <source>Update</source>
+        <target>อัพเดต</target>
+      </trans-unit>
+      <trans-unit id="A new version of Coin Wallet is available. Would you like to update it now?">
+        <source>A new version of Coin Wallet is available. Would you like to update it now?</source>
+        <target>Coin Wallet เวอร์ชันใหม่พร้อมให้บริการแล้ว คุณต้องการอัปเดตตอนนี้หรือไม่</target>
+      </trans-unit>
+      <trans-unit id="General">
+        <source>General</source>
+        <target>ทั่วไป</target>
+      </trans-unit>
+      <trans-unit id="Local currency">
+        <source>Local currency</source>
+        <target>สกุลเงินท้องถิ่น</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

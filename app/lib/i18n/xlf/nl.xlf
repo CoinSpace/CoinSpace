@@ -1439,6 +1439,22 @@ Het zal worden geconverteerd in %(toSymbol)s, en worden verzonden naar
         <source>fastest</source>
         <target>snelste</target>
       </trans-unit>
+      <trans-unit id="Update">
+        <source>Update</source>
+        <target>Updaten</target>
+      </trans-unit>
+      <trans-unit id="A new version of Coin Wallet is available. Would you like to update it now?">
+        <source>A new version of Coin Wallet is available. Would you like to update it now?</source>
+        <target>Er is een nieuwe versie van Coin Wallet beschikbaar. Wilt u nu een update uitvoeren?</target>
+      </trans-unit>
+      <trans-unit id="General">
+        <source>General</source>
+        <target>Algemeen</target>
+      </trans-unit>
+      <trans-unit id="Local currency">
+        <source>Local currency</source>
+        <target>Locale valuta</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

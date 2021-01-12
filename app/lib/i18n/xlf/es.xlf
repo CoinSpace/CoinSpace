@@ -1439,6 +1439,22 @@ Esto se convertirá en %(toSymbol)s y se enviará a
         <source>fastest</source>
         <target>más rápido</target>
       </trans-unit>
+      <trans-unit id="Update">
+        <source>Update</source>
+        <target>Actualizar</target>
+      </trans-unit>
+      <trans-unit id="A new version of Coin Wallet is available. Would you like to update it now?">
+        <source>A new version of Coin Wallet is available. Would you like to update it now?</source>
+        <target>Una nueva versión de Coin Wallet está disponible. ¿Quieres actualizarla ahora?</target>
+      </trans-unit>
+      <trans-unit id="General">
+        <source>General</source>
+        <target>General</target>
+      </trans-unit>
+      <trans-unit id="Local currency">
+        <source>Local currency</source>
+        <target>Divisa predeterminada</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

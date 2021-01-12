@@ -11,7 +11,7 @@
       </trans-unit>
       <trans-unit id="We are about to generate your very own passphrase">
         <source>We're about to generate your very own passphrase</source>
-        <target>個人パスフレーズを作成します</target>
+        <target>個人パスフレーズをこれから作成します</target>
       </trans-unit>
       <trans-unit id="This keeps your account secure, and lets you open your wallet on multiple devices.">
         <source>This keeps your account secure, and lets you open your wallet on multiple devices.</source>
@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="It is very important you write this down.">
         <source>It's very important you write this down.</source>
-        <target>このパスフレーズは必ず入力してください。</target>
+        <target>このパスフレーズは重要ですので必ず入力してください。</target>
       </trans-unit>
       <trans-unit id="Generate passphrase">
         <source>Generate passphrase</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="Generating">
         <source>Generating</source>
-        <target>作成中</target>
+        <target>生成中</target>
       </trans-unit>
       <trans-unit id="Synchronizing Wallet">
         <source>Synchronizing Wallet</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="Your passphrase (12 words)">
         <source>Your passphrase (12 words)</source>
-        <target>パスフレーズ (12文字)</target>
+        <target>あなたのパスフレーズ (12文字)</target>
       </trans-unit>
       <trans-unit id="Your passphrase will not be shown again.">
         <source>Your passphrase will not be shown again.</source>
@@ -1438,6 +1438,22 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="fastest">
         <source>fastest</source>
         <target>最速</target>
+      </trans-unit>
+      <trans-unit id="Update">
+        <source>Update</source>
+        <target>更新</target>
+      </trans-unit>
+      <trans-unit id="A new version of Coin Wallet is available. Would you like to update it now?">
+        <source>A new version of Coin Wallet is available. Would you like to update it now?</source>
+        <target>Coinウォレットの新規バージョンがあります。今すぐ更新しますか？</target>
+      </trans-unit>
+      <trans-unit id="General">
+        <source>General</source>
+        <target>一般</target>
+      </trans-unit>
+      <trans-unit id="Local currency">
+        <source>Local currency</source>
+        <target>ローカル通貨</target>
       </trans-unit>
     </body>
   </file>

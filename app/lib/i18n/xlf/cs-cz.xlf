@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="Create new wallet">
         <source>Create new wallet</source>
-        <target>Založit novou peněženku</target>
+        <target>Vytvořit novou peněženku</target>
       </trans-unit>
       <trans-unit id="Open existing wallet">
         <source>Open existing wallet</source>
@@ -1438,6 +1438,22 @@ Bude to převedeno na %(toSymbol)s, a zasláno
       <trans-unit id="fastest">
         <source>fastest</source>
         <target>nejrychlejší</target>
+      </trans-unit>
+      <trans-unit id="Update">
+        <source>Update</source>
+        <target>Aktualizovat</target>
+      </trans-unit>
+      <trans-unit id="A new version of Coin Wallet is available. Would you like to update it now?">
+        <source>A new version of Coin Wallet is available. Would you like to update it now?</source>
+        <target>Je k dispozici nová verze peněženky Coin. Chcete ji hned aktualizovat?</target>
+      </trans-unit>
+      <trans-unit id="General">
+        <source>General</source>
+        <target>Obecné</target>
+      </trans-unit>
+      <trans-unit id="Local currency">
+        <source>Local currency</source>
+        <target>Místní měna</target>
       </trans-unit>
     </body>
   </file>
