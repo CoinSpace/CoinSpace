@@ -63,7 +63,7 @@
     }
 
     &__price {
-      color: $grey;
+      color: darken($grey, 20%);
       font-size: $small_font_size;
       @include breakpoint(portrait) {
         font-size: $small_font_size--portrait;
