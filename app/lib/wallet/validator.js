@@ -1,7 +1,6 @@
 'use strict';
 
-const { toAtom } = require('lib/convert');
-const { toUnitString } = require('lib/convert');
+const { toAtom, toUnitString } = require('lib/convert');
 
 function validateSend(options) {
   const amount = toAtom(options.amount);

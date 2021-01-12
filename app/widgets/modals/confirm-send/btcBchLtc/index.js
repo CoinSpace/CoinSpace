@@ -2,8 +2,7 @@
 
 const Ractive = require('widgets/modals/base');
 const emitter = require('lib/emitter');
-const { toAtom } = require('lib/convert');
-const { toUnitString } = require('lib/convert');
+const { toAtom, toUnitString } = require('lib/convert');
 const { showInfo, showError, showSuccess } = require('widgets/modals/flash');
 const _ = require('lodash');
 const { unlock, lock } = require('lib/wallet/security');
