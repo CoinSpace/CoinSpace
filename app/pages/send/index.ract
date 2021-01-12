@@ -40,7 +40,7 @@
                 <input id="crypto" class="csinput__input" type="number" min="0" step="any" on-input="crypto-to-fiat" on-focus="focusAmountInput" on-blur="blurAmountInput">
                 <span class="csinput__dropdown">
                   <span class="csinput__dropdown__label">{{factor}}</span>
-                  <select value="{{factor}}" tabindex="-1">
+                  <select value="{{factor}}" on-change="crypto-to-fiat" tabindex="-1">
                     {{#each factors}}
                       <option value="{{@key}}">{{@key}}</option>
                     {{/each}}

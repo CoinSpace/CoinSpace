@@ -266,10 +266,6 @@ module.exports = function(el) {
     ractive.fire('crypto-to-fiat');
   });
 
-  ractive.observe('factor', () => {
-    ractive.fire('crypto-to-fiat');
-  });
-
   ractive.on('crypto-to-fiat', () => {
     const crypto = ractive.find('#crypto').value || 0;
 
