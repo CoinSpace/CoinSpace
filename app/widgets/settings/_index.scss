@@ -112,11 +112,25 @@
         @include ellipsis();
       }
       ._select {
-        margin-left: auto;
-
-        select {
-          appearance: none;
+        display: flex;
+        align-items: center;
+        position: relative;
+        ._select_label {
+          position: absolute;
+          right: 20px;
           color: darken($grey, 20%);
+        }
+        select {
+          @include clickbtn;
+          opacity: 0;
+          line-height: inherit;
+          appearance: none;
+          padding-right: 20px;
+        }
+        ._arrow {
+          position: absolute;
+          right: 0;
+          pointer-events: none;
         }
       }
       ._link {
