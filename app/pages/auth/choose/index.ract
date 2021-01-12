@@ -11,7 +11,7 @@
 
   {{#if BUILD_TYPE === 'web'}}
   <a class="_footer_link" href="https://coin.space" target="_blank">
-    Copyright CoinSpace © 2020<br>
+    Copyright CoinSpace © 2021<br>
     All Rights Reserved
   </a>
   {{/if}}
