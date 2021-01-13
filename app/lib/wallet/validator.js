@@ -47,7 +47,7 @@ function validateSend(options) {
         error.interpolations = { minReserve: wallet.minReserve, denomination: wallet.denomination };
       } else {
         error = new Error('Please enter an amount above');
-        error.interpolations = { dust: toUnitString(e.dustThreshold) };
+        error.interpolations = { dust: `${toUnitString(e.dustThreshold)} ${wallet.denomination}` };
       }
       throw error;
     } else if (/Invalid gasLimit/.test(e.message)) {

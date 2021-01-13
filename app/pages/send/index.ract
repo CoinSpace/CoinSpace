@@ -35,26 +35,23 @@
               <label for="crypto">{{translate("Amount")}}</label>
               <strong class="_max_btn" on-click="set-max-amount">({{translate("max.")}} {{maxAmount}} {{denomination}})</strong>
             </div>
-            {{#if ['bitcoin', 'bitcoincash', 'bitcoinsv'].includes(cryptoId)}}
-              <div class="csinput csinput--with-dropdown _crypto_input">
-                <input id="crypto" class="csinput__input" type="number" min="0" step="any" on-input="crypto-to-fiat" on-focus="focusAmountInput" on-blur="blurAmountInput">
-                <span class="csinput__dropdown">
-                  <span class="csinput__dropdown__label">{{factor}}</span>
-                  <select value="{{factor}}" on-change="crypto-to-fiat" tabindex="-1">
-                    {{#each factors}}
-                      <option value="{{@key}}">{{@key}}</option>
-                    {{/each}}
-                  </select>
-                </span>
-              </div>
-            {{else}}
-              <div class="csinput _crypto_input">
-                <input id="crypto" class="csinput__input" type="number" min="0" step="any" on-input="crypto-to-fiat" on-focus="focusAmountInput" on-blur="blurAmountInput">
-                <span class="_crypto">{{denomination}}</span>
-              </div>
-            {{/if}}
+            <div class="csinput _crypto_input" class-csinput--with-dropdown="factors">
+              <input id="crypto" class="csinput__input" type="number" min="0" step="any" on-input="crypto-to-fiat">
+              {{#if factors}}
+              <span class="csinput__dropdown">
+                <span class="csinput__dropdown__label">{{factor}}</span>
+                <select value="{{factor}}" on-change="crypto-to-fiat">
+                  {{#each factors}}
+                    <option value="{{@key}}">{{@key}}</option>
+                  {{/each}}
+                </select>
+              </span>
+              {{else}}
+              <span class="_crypto">{{denomination}}</span>
+              {{/if}}
+            </div>
             <div class="csinput _fiat_input" class-_crypto_input--hidden="isCryptoInputHidden">
-              <input id="fiat" class="csinput__input" type="number" min="0" step="any" on-input="fiat-to-crypto" on-focus="focusAmountInput" on-blur="blurAmountInput">
+              <input id="fiat" class="csinput__input" type="number" min="0" step="any" on-input="fiat-to-crypto">
               <span class="_crypto">{{currency}}</span>
             </div>
           </div>

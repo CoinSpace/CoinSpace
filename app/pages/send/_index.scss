@@ -27,6 +27,9 @@
     @include breakpoint(portrait) {
       padding-right: 60px;
     }
+    &:focus-within {
+      z-index: 5000;
+    }
     &--hidden {
       display: none;
     }

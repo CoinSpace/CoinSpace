@@ -47,7 +47,6 @@ module.exports = function(el) {
     el,
     template: require('./index.ract'),
     data: {
-      cryptoId: getCrypto()._id,
       currency,
       rates,
       qrScannerAvailable: qrcode.isScanAvailable,
@@ -69,7 +68,7 @@ module.exports = function(el) {
       denomination: '',
       feeDenomination: '',
       factor: '',
-      factors: {},
+      factors: false,
       isCryptoInputHidden: !rates[currency],
     },
   });
@@ -113,13 +112,13 @@ module.exports = function(el) {
   emitter.on('currency-changed', (currency) => {
     ractive.set('currency', currency);
     ractive.set('isCryptoInputHidden', !ractive.get('rates')[ractive.get('currency')]);
-    ractive.fire('crypto-to-fiat');
+    setFiatFromCrypto();
   });
 
   emitter.on('rates-updated', (rates) => {
     ractive.set('rates', rates[getCrypto()._id] || {});
     ractive.set('isCryptoInputHidden', !ractive.get('rates')[ractive.get('currency')]);
-    ractive.fire('crypto-to-fiat');
+    setFiatFromCrypto();
   });
 
   ractive.on('open-send', () => {
@@ -198,13 +197,12 @@ module.exports = function(el) {
   emitter.on('wallet-ready', () => {
     const wallet = getWallet();
     isSyncing = false;
-    setFees(true);
     ractive.fire('change-fee');
-    ractive.set('cryptoId', getCrypto()._id);
     ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
     ractive.set('denomination', wallet.denomination);
     ractive.set('factors', FACTORS[getCrypto()._id]);
     ractive.set('factor', wallet.denomination);
+    setFees(true);
     if (wallet.networkName === 'ethereum') {
       ractive.set('feeDenomination', 'ETH');
       if (ractive.find('#gas-limit')) {
@@ -214,6 +212,7 @@ module.exports = function(el) {
     } else {
       ractive.set('feeDenomination', wallet.denomination);
     }
+    setFiatFromCrypto();
   });
 
   function setFees(setDefaultFeeOption) {
@@ -248,29 +247,6 @@ module.exports = function(el) {
     ractive.set('fees', fees);
   }
 
-  function normalizeCrypto(amount) {
-    if (!amount) return amount;
-    if (['bitcoin', 'bitcoincash', 'bitcoinsv'].includes(ractive.get('cryptoId'))) {
-      const factor = ractive.get('factors')[ractive.get('factor')];
-      if (factor !== 1) {
-        // decimals is 8 for bitcoin like crypto
-        return Big(amount).div(factor).toFixed(8);
-      }
-    }
-    return amount;
-  }
-
-  function denormalizeCrypto(amount) {
-    if (!amount) return amount;
-    if (['bitcoin', 'bitcoincash', 'bitcoinsv'].includes(ractive.get('cryptoId'))) {
-      const factor = ractive.get('factors')[ractive.get('factor')];
-      if (factor !== 1) {
-        return Big(amount).times(factor).toFixed(8 - Math.log10(factor));
-      }
-    }
-    return amount;
-  }
-
   ractive.on('change-fee', () => {
     const wallet = getWallet();
     const index = ractive.get('feeIndex');
@@ -289,13 +265,7 @@ module.exports = function(el) {
   });
 
   ractive.on('crypto-to-fiat', () => {
-    const crypto = ractive.find('#crypto').value || 0;
-
-    const exchangeRate = ractive.get('rates')[ractive.get('currency')];
-    if (typeof exchangeRate !== 'number') return;
-
-    const fiat = crypto ? Big(normalizeCrypto(crypto)).times(exchangeRate).toFixed(2) : '';
-    ractive.find('#fiat').value = fiat;
+    setFiatFromCrypto();
     setFees();
   });
 
@@ -323,14 +293,6 @@ module.exports = function(el) {
     const passfield = ractive.find('#to');
     ractive.set('to', '');
     passfield.focus();
-  });
-
-  ractive.on('focusAmountInput', (context) => {
-    context.node.parentNode.style.zIndex = 5000;
-  });
-
-  ractive.on('blurAmountInput', (context) => {
-    context.node.parentNode.style.zIndex = '';
   });
 
   ractive.on('help-fee', () => {
@@ -372,6 +334,40 @@ module.exports = function(el) {
     }
     showTooltip({ message });
   });
+
+  function normalizeCrypto(amount) {
+    if (!amount) return amount;
+    const factors = ractive.get('factors');
+    if (!factors) return amount;
+    if (!ractive.get('factors')) return amount;
+    const factor = factors[ractive.get('factor')];
+    if (factor !== 1) {
+      // decimals is 8 for bitcoin like crypto
+      return Big(amount).div(factor).toFixed(8);
+    }
+    return amount;
+  }
+
+  function denormalizeCrypto(amount) {
+    if (!amount) return amount;
+    const factors = ractive.get('factors');
+    if (!factors) return amount;
+    const factor = factors[ractive.get('factor')];
+    if (factor !== 1) {
+      return Big(amount).times(factor).toFixed(8 - Math.log10(factor));
+    }
+    return amount;
+  }
+
+  function setFiatFromCrypto() {
+    const crypto = ractive.find('#crypto').value || 0;
+
+    const exchangeRate = ractive.get('rates')[ractive.get('currency')];
+    if (typeof exchangeRate !== 'number') return;
+
+    const fiat = crypto ? Big(normalizeCrypto(crypto)).times(exchangeRate).toFixed(2) : '';
+    ractive.find('#fiat').value = fiat;
+  }
 
   function validateAndShowConfirm(options) {
     try {
