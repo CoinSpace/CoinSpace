@@ -50,7 +50,22 @@ matrix:
       - nvm install $(< .nvmrc)
       - export PATH=$PATH:$ANDROID_HOME/build-tools/29.0.1
     env:
-      DISTRIBUTION: android
+      DISTRIBUTION: android-play
+      BUILD_TYPE: phonegap
+  - os: linux
+    dist: trusty
+    language: android
+    android:
+      components:
+        - build-tools-29.0.1
+        - android-28
+        - extra-google-m2repository
+        - extra-android-m2repository
+    before_install:
+      - nvm install $(< .nvmrc)
+      - export PATH=$PATH:$ANDROID_HOME/build-tools/29.0.1
+    env:
+      DISTRIBUTION: android-galaxy
       BUILD_TYPE: phonegap
 
 branches:

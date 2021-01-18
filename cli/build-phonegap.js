@@ -53,7 +53,15 @@ webpack(webpackConfig, (error, stats) => {
 
   console.log(`Start building (phonegap:${program.platform})...`);
 
-  utils.shell(`npm run ${program.platform}`, {
+  let { platform } = program;
+  if (program.platform === 'android-play') {
+    platform = 'android';
+  }
+  if (program.platform === 'android-galaxy') {
+    platform = 'android';
+  }
+
+  utils.shell(`npm run ${platform}`, {
     cwd: './phonegap',
     env: {
       ...process.env,
@@ -62,7 +70,7 @@ webpack(webpackConfig, (error, stats) => {
   });
 
   if (program.release) {
-    utils.uploadSentrySourceMaps(program.platform, RELEASE);
+    utils.uploadSentrySourceMaps(platform, RELEASE);
   }
   console.log('Done!');
 });

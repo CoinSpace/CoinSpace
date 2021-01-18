@@ -50,7 +50,7 @@ async function run() {
       ../deploy/coinspace-release.apk`,
       { cwd: buildPath }
     );
-    const destination = `${pkg.version}-${process.env.TRAVIS_BRANCH || 'local'}/${pkg.name}-${pkg.version}.apk`;
+    const destination = `${pkg.version}-${process.env.TRAVIS_BRANCH || 'local'}/${pkg.name}-${process.env.BUILD_PLATFORM}-${pkg.version}.apk`;
     await storage.bucket('coinspace-travis-ci').upload('deploy/coinspace-release.apk', { destination });
   } else {
     cordova('build android');

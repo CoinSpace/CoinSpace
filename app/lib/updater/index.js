@@ -37,7 +37,7 @@ async function checkUpdate() {
 
 function confirmUpdate() {
   if (!update) return;
-  if (process.env.BUILD_PLATFORM === 'web') return location.reload();
+  if (process.env.BUILD_TYPE === 'web') return location.reload();
   window.safeOpen(update.url, '_blank');
 }
 

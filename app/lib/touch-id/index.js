@@ -16,7 +16,7 @@ async function init() {
       isAvailable = await new Promise((resolve) => {
         if (process.env.BUILD_PLATFORM === 'ios') {
           window.plugins.touchid.isAvailable(() => resolve(true), () => resolve(false));
-        } else if (process.env.BUILD_PLATFORM === 'android') {
+        } else if (process.env.BUILD_PLATFORM.startsWith('android')) {
           window.Fingerprint.isAvailable(() => resolve(true), () => resolve(false));
         }
       });
@@ -82,7 +82,7 @@ function phonegap() {
         () => resolve(),
         () => reject(error)
       );
-    } else if (process.env.BUILD_PLATFORM === 'android') {
+    } else if (process.env.BUILD_PLATFORM.startsWith('android')) {
       window.Fingerprint.show({}, () => resolve(), () => reject(error));
     } else {
       reject(error);

@@ -90,13 +90,29 @@ const platforms = [{
   pattern: /id980719434\/?#\?platform=(iphone|ipad|appleWatch)/ig,
   link: 'https://apps.apple.com/us/app/coin-bitcoin-wallet/id980719434',
 }, {
-  // Android app
+  // Android Play app (deprecated)
   distribution: 'android',
   arch: 'any',
   app: 'app',
   type: TYPE_LINK,
   pattern: /details\/?\?id=com\.coinspace\.app/ig,
   link: 'https://play.google.com/store/apps/details?id=com.coinspace.app',
+}, {
+  // Android Play app
+  distribution: 'android-play',
+  arch: 'any',
+  app: 'app',
+  type: TYPE_LINK,
+  pattern: /details\/?\?id=com\.coinspace\.app/ig,
+  link: 'https://play.google.com/store/apps/details?id=com.coinspace.app',
+}, {
+  // Android Galaxy app
+  distribution: 'android-galaxy',
+  arch: 'any',
+  app: 'app',
+  type: TYPE_LINK,
+  pattern: /galaxy\.store\/coinapp/ig,
+  link: 'https://galaxy.store/coinapp',
 }, {
   // Linux snap
   distribution: 'snap',

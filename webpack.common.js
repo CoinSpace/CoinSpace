@@ -9,7 +9,7 @@ const pkg = require('./package.json');
 const dotenv = require('dotenv');
 
 dotenv.config({ path: '.env.defaults' });
-process.env.BUILD_PLATFORM = process.env.BUILD_PLATFORM || 'web';
+process.env.BUILD_TYPE = process.env.BUILD_TYPE || 'web';
 
 const COMMIT = (
   process.env.TRAVIS_COMMIT ||
@@ -23,7 +23,7 @@ module.exports = {
   //target: process.env.BUILD_TYPE === 'electron' ? 'electron-renderer' : 'web',
   entry: {
     loader: ['babel-polyfill', './app/loader/index.js'],
-    ...(process.env.BUILD_PLATFORM === 'web' ? {
+    ...(process.env.BUILD_TYPE === 'web' ? {
       fido: ['babel-polyfill', './app/fido/index.js'],
     } : {}),
   },
@@ -73,7 +73,7 @@ module.exports = {
       chunks: ['loader'],
       template: 'app/index.ejs',
     }),
-    ...(process.env.BUILD_PLATFORM === 'web' ?
+    ...(process.env.BUILD_TYPE === 'web' ?
       [new HtmlWebpackPlugin({
         chunks: ['fido'],
         template: 'app/fido/index.ejs',
