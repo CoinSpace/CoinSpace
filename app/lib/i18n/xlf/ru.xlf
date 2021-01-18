@@ -315,7 +315,7 @@
       </trans-unit>
       <trans-unit id="Confirm transaction">
         <source>Confirm transaction</source>
-        <target>Подтвердить транзакции</target>
+        <target>Подтвердить транзакцию</target>
       </trans-unit>
       <trans-unit id="transaction fee">
         <source>transaction fee</source>
