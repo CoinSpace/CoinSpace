@@ -4,7 +4,7 @@ const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
 const { initWallet } = require('lib/wallet');
 const { getWallet } = require('lib/wallet');
-const { toUnit, toUnitString } = require('lib/convert');
+const { toUnit, toUnitString, cryptoToFiat } = require('lib/convert');
 const Big = require('big.js');
 const details = require('lib/wallet/details');
 const ticker = require('lib/ticker-api');
@@ -19,7 +19,11 @@ module.exports = function(el) {
       toUnitString,
       isSyncing: true,
       rates: ticker.getRates()[getCrypto()._id] || {},
-      cryptoToFiat,
+      cryptoToFiat(amount) {
+        const value = toUnit(amount);
+        const exchangeRate = ractive.get('rates')[ractive.get('currency')];
+        return cryptoToFiat(value, exchangeRate);
+      },
       currency: details.get('systemInfo').preferredCurrency,
       cropBalance(amount) {
         let dotIndex;
@@ -81,14 +85,6 @@ module.exports = function(el) {
   emitter.on('rates-updated', (rates) => {
     ractive.set('rates', rates[getCrypto()._id] || {});
   });
-
-  function cryptoToFiat(amount) {
-    const exchangeRate = ractive.get('rates')[ractive.get('currency')];
-    if (amount == undefined || exchangeRate == undefined) return '⚠️';
-
-    const btc = toUnit(amount);
-    return Big(exchangeRate).times(btc).toFixed(2);
-  }
 
   return ractive;
 };

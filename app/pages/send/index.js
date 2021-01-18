@@ -16,7 +16,7 @@ const { getDestinationInfo } = require('lib/wallet');
 const { resolveTo } = require('lib/openalias');
 const qrcode = require('lib/qrcode');
 const initEosSetup = require('widgets/eos/setup');
-const { toAtom, toUnitString } = require('lib/convert');
+const { toAtom, toUnitString, cryptoToFiat } = require('lib/convert');
 const { translate } = require('lib/i18n');
 const ticker = require('lib/ticker-api');
 const { getCrypto } = require('lib/crypto');
@@ -365,7 +365,7 @@ module.exports = function(el) {
     const exchangeRate = ractive.get('rates')[ractive.get('currency')];
     if (typeof exchangeRate !== 'number') return;
 
-    const fiat = crypto ? Big(normalizeCrypto(crypto)).times(exchangeRate).toFixed(2) : '';
+    const fiat = crypto ? cryptoToFiat(normalizeCrypto(crypto), exchangeRate) : '';
     ractive.find('#fiat').value = fiat;
   }
 

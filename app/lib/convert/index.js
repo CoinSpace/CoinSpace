@@ -24,9 +24,22 @@ function setDecimals(decimals) {
   factor = Big(10).pow(decimals);
 }
 
+function cryptoToFiat(amount, exchangeRate) {
+  if (amount == undefined || exchangeRate == undefined) return '⚠️';
+  const rate = Big(exchangeRate);
+  const value = Big(amount).times(rate);
+  if (value.gt(1.0)) {
+    return value.toFixed(2);
+  } else {
+    const decimals = rate.toFixed().includes('.') ? rate.toFixed().split('.')[1].length : 2;
+    return value.toFixed(decimals > 2 ? decimals : 2)
+  }
+}
+
 module.exports = {
   toAtom,
   toUnit,
   toUnitString,
   setDecimals,
+  cryptoToFiat,
 };

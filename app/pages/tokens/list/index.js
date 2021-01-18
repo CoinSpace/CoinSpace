@@ -9,6 +9,7 @@ const details = require('lib/wallet/details');
 const ticker = require('lib/ticker-api');
 const _ = require('lodash');
 const { walletCoins } = require('lib/crypto');
+const { cryptoToFiat } = require('lib/convert');
 
 let isEnabled = false;
 
@@ -32,7 +33,7 @@ module.exports = function(el) {
           const rates = ractive.get('rates')[cryptoId] || {};
           const currency = this.get('currency');
           if (rates[currency]) {
-            return `${rates[currency]} ${currency}`;
+            return `${cryptoToFiat(1, rates[currency])} ${currency}`;
           }
         }
         return '⚠️';
