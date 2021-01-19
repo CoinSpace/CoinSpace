@@ -124,7 +124,7 @@ before_script:
     echo $PROVISIONING_IOS | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.mobileprovision;
     echo $PROVISIONING_IOS_WATCH_APP | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.watchapp.mobileprovision;
     echo $PROVISIONING_IOS_WATCH_APP_EXTENSION | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.watchapp.extension.mobileprovision;
-  elif [[ "$DISTRIBUTION" == "android" ]]; then
+  elif [[ "$DISTRIBUTION" == "android-play" || "$DISTRIBUTION" == "android-galaxy" ]]; then
     export SENTRY_DSN=${SENTRY_DSN_ANDROID}
     echo $ANDROID_RELEASE_KEYSTORE | base64 --decode > phonegap/release.keystore;
   fi
