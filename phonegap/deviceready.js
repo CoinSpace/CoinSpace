@@ -6,6 +6,7 @@ async function onDeviceReady() {
 
   document.addEventListener('backbutton', (e) => {
     e.preventDefault();
+    if (window.backButtonOff) return;
     window.navigator.app.exitApp();
   }, false);
 

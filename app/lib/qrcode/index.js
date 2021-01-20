@@ -44,9 +44,11 @@ function encode(string, options) {
 function scan(callback) {
   if (!isScanAvailable) return false;
 
+  window.backButtonOff = true;
   // eslint-disable-next-line no-undef
   cordova.plugins.barcodeScanner.scan(
     (result) => {
+      setTimeout(() => { window.backButtonOff = false; }, 1000);
       if (result.text) {
         let address = result.text.split('?')[0].split(':').pop();
 
@@ -70,6 +72,7 @@ function scan(callback) {
       }
     },
     () => {
+      setTimeout(() => { window.backButtonOff = false; }, 1000);
       const alert = navigator.notification ? navigator.notification.alert : window.alert;
       alert(
         'Access to the camera has been prohibited; please enable it in the Settings app to continue',

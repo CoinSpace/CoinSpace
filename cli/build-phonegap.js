@@ -19,7 +19,7 @@ program
   .option('-p, --platform <platform>', 'platform')
   .parse(process.argv);
 
-if (program.run && program.platform === 'android') {
+if (program.run && program.platform.startsWith('android')) {
   return cordova('run android --noprepare');
 }
 
