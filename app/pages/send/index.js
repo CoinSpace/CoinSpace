@@ -164,9 +164,9 @@ module.exports = function(el) {
           } else if (wallet.networkName === 'stellar' || wallet.networkName === 'eos') {
             ractive.find('#memo').value = '';
           }
-          if (ractive.get('BUILD_TYPE') === 'phonegap') {
+          if (['ios', 'android-play'].includes(process.env.BUILD_PLATFORM)) {
             // eslint-disable-next-line no-undef
-            cordova.plugins.InAppReview.requestReviewDialog();
+            cordova.plugins.InAppReview.requestReviewDialog().catch(() => {});
           }
         },
       };
