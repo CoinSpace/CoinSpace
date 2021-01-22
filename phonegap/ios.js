@@ -26,6 +26,7 @@ async function run() {
   fse.writeFileSync(path.resolve(buildPath, 'config.xml'), config);
 
   /* eslint-disable max-len */
+  /* eslint-disable quote-props */
   cordova('platform add ios@6.1.0');
   cordova('plugin add cordova-plugin-geolocation@4.0.2');
   cordova('plugin add phonegap-plugin-barcodescanner@8.1.0');
@@ -40,8 +41,7 @@ async function run() {
   cordova('plugin add cordova-plugin-safariviewcontroller@1.6.0');
   cordova('plugin add cordova-plugin-inapp-review@1.1.0');
 
-  const orientations = {
-    // eslint-disable-next-line quote-props
+  const update = {
     'UISupportedInterfaceOrientations': [
       'UIInterfaceOrientationPortrait',
     ],
@@ -50,8 +50,25 @@ async function run() {
       'UIInterfaceOrientationLandscapeLeft',
       'UIInterfaceOrientationLandscapeRight',
     ],
+    'CFBundleURLTypes': [
+      {
+        'CFBundleURLSchemes': [
+          'coinspace',
+          'bitcoin',
+          'bitcoincash',
+          'bitcoinsv',
+          'ethereum',
+          'litecoin',
+          'ripple',
+          'stellar',
+          'eos',
+          'dogecoin',
+          'dash',
+        ],
+      },
+    ],
   };
-  updatePlist(path.join(buildPath, 'platforms/ios/Coin/Coin-Info.plist'), orientations);
+  updatePlist(path.join(buildPath, 'platforms/ios/Coin/Coin-Info.plist'), update);
 
   await addWatchApp();
 

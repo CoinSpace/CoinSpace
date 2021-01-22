@@ -6,6 +6,7 @@ const windows = {};
 
 emitter.on('handleOpenURL', (url) => {
   url = url || '';
+  if (!url.startsWith('coinspace://')) return;
   const name = getParam(url, 'window');
   if (!windows[name]) return;
 

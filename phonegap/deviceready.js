@@ -1,6 +1,8 @@
 'use strict';
 /* eslint-disable no-undef */
 
+const bip21 = require('lib/bip21');
+
 document.addEventListener('deviceready', onDeviceReady, false);
 async function onDeviceReady() {
 
@@ -61,4 +63,12 @@ window.onShortcutEvent = function(event) {
   if (!['bitcoin', 'bitcoincash', 'ethereum', 'litecoin'].includes(network)) return;
   const baseUrl = window.location.href.split('?')[0];
   return window.location = `${baseUrl}?coin=${network}`;
+};
+
+window.handleOpenURL = function(url) {
+  if (!bip21.isValidScheme(url)) return;
+  window.localStorage.setItem('_cs_bip21', url);
+  const baseUrl = window.location.href.split('?')[0];
+  const network = url.split(':')[0];
+  window.location = `${baseUrl}?coin=${network}`;
 };

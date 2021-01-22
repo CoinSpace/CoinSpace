@@ -1,5 +1,7 @@
 'use strict';
 
+const bip21 = require('lib/bip21');
+
 // https://github.com/defunctzombie/qr.js/blob/515790fad4682b2d38008f229dbd814b0d2633e4/example/index.js
 const qr = require('qr.js');
 const EthereumWallet = require('@coinspace/cs-ethereum-wallet');
@@ -50,24 +52,10 @@ function scan(callback) {
     (result) => {
       setTimeout(() => { window.backButtonOff = false; }, 1000);
       if (result.text) {
-        let address = result.text.split('?')[0].split(':').pop();
-
-        if (isValidIban(address)) {
-          address = getAddressFromIban(address);
+        const data = bip21.decode(result.text);
+        if (isValidIban(data.address)) {
+          data.address = getAddressFromIban(data.address);
         }
-
-        const data = { address };
-
-        let match;
-        match = result.text.match(/amount=([0-9.]+)/);
-        if (match && match[1]) {
-          data.value = match[1];
-        }
-        match = result.text.match(/dt=(\d+)/);
-        if (match && match[1]) {
-          data.tag = match[1];
-        }
-
         callback(data);
       }
     },

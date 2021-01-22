@@ -20,6 +20,7 @@ const { toAtom, toUnitString, cryptoToFiat } = require('lib/convert');
 const { translate } = require('lib/i18n');
 const ticker = require('lib/ticker-api');
 const { getCrypto } = require('lib/crypto');
+const bip21 = require('lib/bip21');
 
 const FACTORS = {
   bitcoin: {
@@ -83,20 +84,12 @@ module.exports = function(el) {
     ractive.set('isRipple', network === 'ripple');
     ractive.set('isStellar', network === 'stellar');
     ractive.set('isEOS', network === 'eos');
+    const url = window.localStorage.getItem('_cs_bip21');
+    if (url) bip21Handler(url);
   });
 
   ractive.on('open-qr', () => {
-    qrcode.scan(({ address, value, tag }) => {
-      if (address) ractive.set('to', address);
-      if (value) {
-        ractive.find('#crypto').value = denormalizeCrypto(value);
-        ractive.fire('crypto-to-fiat');
-      }
-      const $tag = ractive.find('#destination-tag');
-      if (tag && $tag) {
-        $tag.value = tag;
-      }
-    });
+    qrcode.scan(setBip21Values);
   });
 
   ractive.on('open-geo', ()=> {
@@ -120,6 +113,8 @@ module.exports = function(el) {
     ractive.set('isCryptoInputHidden', !ractive.get('rates')[ractive.get('currency')]);
     setFiatFromCrypto();
   });
+
+  emitter.on('handleOpenURL', bip21Handler);
 
   ractive.on('open-send', () => {
     ractive.set('validating', true);
@@ -389,6 +384,24 @@ module.exports = function(el) {
         linkText: err.linkText,
         interpolations,
       });
+    }
+  }
+
+  function bip21Handler(url) {
+    if (!bip21.isValidScheme(url)) return;
+    setBip21Values(bip21.decode(url));
+    window.localStorage.removeItem('_cs_bip21');
+  }
+
+  function setBip21Values({ address, value, tag }) {
+    if (address) ractive.set('to', address);
+    if (value) {
+      ractive.find('#crypto').value = denormalizeCrypto(value);
+      ractive.fire('crypto-to-fiat');
+    }
+    const $tag = ractive.find('#destination-tag');
+    if (tag && $tag) {
+      $tag.value = tag;
     }
   }
 
