@@ -47,7 +47,7 @@ async function add() {
       attestation = await startAttestation(options);
     } else {
       attestation = await windowExtra.open({
-        url: `${urlRoot}/fido/?action=attestation&options=${encodeURIComponent(JSON.stringify(options))}`,
+        url: `${urlRoot}fido/?action=attestation&options=${encodeURIComponent(JSON.stringify(options))}`,
         name: 'fido',
         target: process.env.BUILD_TYPE === 'electron' ? '_modal' : '_system',
       });
@@ -80,7 +80,7 @@ async function privateToken(options) {
       assertion = await startAssertion(options);
     } else {
       assertion = await windowExtra.open({
-        url: `${urlRoot}/fido/?action=assertion&options=${encodeURIComponent(JSON.stringify(options))}`,
+        url: `${urlRoot}fido/?action=assertion&options=${encodeURIComponent(JSON.stringify(options))}`,
         name: 'fido',
         target: process.env.BUILD_TYPE === 'electron' ? '_modal' : '_system',
       });

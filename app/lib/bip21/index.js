@@ -36,11 +36,11 @@ function decode(url) {
 }
 
 function registerProtocolHandler(network) {
-  if (!process.env.BUILD_TYPE === 'web') return;
+  if (!process.env.BUILD_PLATFORM === 'web') return;
   if (!navigator.registerProtocolHandler) return;
   if (!supportedProtocols.includes(network)) return;
   try {
-    navigator.registerProtocolHandler(network, `${urlRoot}?coin=${network}&bip21=%s`, 'Coin Wallet');
+    navigator.registerProtocolHandler(network, `${urlRoot}wallet/?coin=${network}&bip21=%s`, 'Coin Wallet');
     // eslint-disable-next-line
   } catch (e) {}
 }
