@@ -8,17 +8,24 @@ if (process.env.BUILD_PLATFORM === 'tor') {
 
 window.initCSApp = async function() {
   const emitter = require('lib/emitter');
+  const bip21 = require('lib/bip21');
   const LS = require('lib/wallet/localStorage');
   const initFrame = require('widgets/frame');
   const initAuth = require('pages/auth');
   const touchId = require('lib/touch-id');
   const updater = require('lib/updater');
+  const querystring = require('querystring');
   const { showError } = require('widgets/modals/flash');
   const showTouchIdSetup = require('widgets/touch-id-setup');
 
   const { fadeIn } = require('lib/transitions/fade.js');
 
   const appEl = document.getElementById('app');
+
+  setupBip21();
+  setupCrypto();
+
+  window.history.replaceState(null, null, window.location.href.split('?')[0]);
 
   if (process.env.BUILD_PLATFORM === 'ios') {
     window.StatusBar.setStyle('default');
@@ -103,4 +110,17 @@ window.initCSApp = async function() {
       emitter.emit('handleOpenURL', url);
     });
   }
+
+  function setupBip21() {
+    const params = querystring.parse(window.location.href.split('?')[1]);
+    if (!bip21.isValidScheme(params.bip21)) return;
+    window.localStorage.setItem('_cs_bip21', params.bip21);
+  }
+
+  function setupCrypto() {
+    const { network, coin } = querystring.parse(window.location.href.split('?')[1]);
+    const crypto = network || coin;
+    if (crypto) window.localStorage.setItem('_cs_token', crypto);
+  }
+
 };

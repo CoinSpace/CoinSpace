@@ -10,6 +10,7 @@ const ticker = require('lib/ticker-api');
 const _ = require('lodash');
 const { walletCoins } = require('lib/crypto');
 const { cryptoToFiat } = require('lib/convert');
+const bip21 = require('lib/bip21');
 
 let isEnabled = false;
 
@@ -45,6 +46,8 @@ module.exports = function(el) {
     },
   });
 
+  bip21.registerProtocolHandler(getCrypto().network);
+
   emitter.on('sync', () => {
     isEnabled = false;
   });
@@ -78,7 +81,10 @@ module.exports = function(el) {
     if (!isEnabled) return;
 
     setCrypto(crypto);
-    ractive.set('currentCrypto', getCrypto());
+    const currentCrypto = getCrypto();
+    ractive.set('currentCrypto', currentCrypto);
+    bip21.registerProtocolHandler(currentCrypto.network);
+
     emitter.emit('sync');
 
     setTimeout(() => {

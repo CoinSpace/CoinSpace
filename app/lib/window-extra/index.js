@@ -1,31 +1,25 @@
 'use strict';
 
 const emitter = require('lib/emitter');
+const querystring = require('querystring');
 
 const windows = {};
 
 emitter.on('handleOpenURL', (url) => {
   url = url || '';
   if (!url.startsWith('coinspace://')) return;
-  const name = getParam(url, 'window');
-  if (!windows[name]) return;
 
-  let data = getParam(url, 'data');
-  data = data ? JSON.parse(decodeURIComponent(data)) : '';
-
-  const error = getParam(url, 'error');
+  const params = querystring.parse(url.split('?')[1]);
+  const { window, error } = params;
+  let { data } = params;
+  if (!windows[window]) return;
+  data = data ? JSON.parse(data) : '';
   if (error) {
-    windows[name].reject(new Error(decodeURIComponent(error)));
+    windows[window].reject(new Error(error));
   } else {
-    windows[name].resolve(data);
+    windows[window].resolve(data);
   }
 });
-
-function getParam(url, name) {
-  const reg = new RegExp(name + '=([^&]+)');
-  const matchAction = url.match(reg);
-  return matchAction && matchAction[1];
-}
 
 function open(options) {
   let promiseResolve;

@@ -33,7 +33,6 @@ const i18n = require('lib/i18n');
 function init() {
   i18n.loadTranslation().then(() => {
     if (Modernizr.localstorage && Modernizr.webworkers && Modernizr.blobconstructor && Modernizr.getrandomvalues) {
-      setupCrypto();
       const containerEl = document.getElementById('loader');
 
       return import(
@@ -48,20 +47,6 @@ function init() {
       nope();
     }
   });
-}
-
-function setupCrypto() {
-  const regex = /^(network|coin)=/;
-  const networkParam = window.location.search.substr(1).split('&').filter((e) => {
-    return e.match(regex);
-  })[0];
-  const queryNetwork = networkParam ? networkParam.replace(regex, '') : null;
-
-  if (queryNetwork) {
-    const url = window.location.href.split('?')[0];
-    window.history.replaceState(null, null, url);
-    window.localStorage.setItem('_cs_token', queryNetwork);
-  }
 }
 
 function nope() {

@@ -1,6 +1,7 @@
 'use strict';
 
 const request = require('lib/request');
+const querystring = require('querystring');
 const { urlRoot } = window;
 const apiKey = process.env.MOONPAY_API_KEY;
 let coins = {};
@@ -91,11 +92,7 @@ function getBuyUrl(currencyCode, walletAddress) {
     ].join(','),
   };
 
-  const queryString = Object.keys(params).map((key) => {
-    return key + '=' + encodeURIComponent(params[key]);
-  }).join('&');
-
-  baseUrl += queryString;
+  baseUrl += querystring.stringify(params);
   return baseUrl;
 }
 
@@ -105,10 +102,7 @@ function getSellUrl(baseCurrencyCode, refundWalletAddress) {
     baseCurrencyCode,
     refundWalletAddress,
   };
-  const queryString = Object.keys(params).map((key) => {
-    return key + '=' + encodeURIComponent(params[key]);
-  }).join('&');
-  baseUrl += queryString;
+  baseUrl += querystring.stringify(params);
   return baseUrl;
 }
 

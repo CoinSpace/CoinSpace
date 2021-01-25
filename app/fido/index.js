@@ -4,16 +4,19 @@ const { startAttestation, startAssertion } = require('@simplewebauthn/browser');
 const { PublicKeyCredential } = window;
 let $backBtn;
 
+const querystring = require('querystring');
+
 async function init() {
   $backBtn = document.getElementById('back-btn');
   $backBtn.onclick = () => close('coinspace://');
 
-  const action = getParam('action');
-  let options = getParam('options');
+  const params = querystring.parse(location.href.split('?')[1]);
+  const { action } = params;
+  let { options } = params;
   const $message = document.getElementById('message');
   try {
     if (!PublicKeyCredential) throw new Error('hardware_not_supported');
-    options = JSON.parse(decodeURIComponent(options));
+    if (options) options = JSON.parse(options);
     if (action === 'attestation' && options) {
       $message.innerHTML = 'Use your new Hardware Key';
       await attestation(options);
@@ -51,12 +54,6 @@ function close(url) {
     return false;
   };
   $backBtn.onclick();
-}
-
-function getParam(name) {
-  const reg = new RegExp(name + '=([^&]+)');
-  const matchAction = location.href.match(reg);
-  return matchAction && matchAction[1];
 }
 
 init();

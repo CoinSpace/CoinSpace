@@ -1,19 +1,22 @@
 'use strict';
 
+const { urlRoot } = window;
+const supportedProtocols = [
+  'bitcoin',
+  'bitcoincash',
+  'bitcoinsv',
+  'ethereum',
+  'litecoin',
+  'ripple',
+  'stellar',
+  'eos',
+  'dogecoin',
+  'dash',
+];
+
 function isValidScheme(url) {
   if (!url) return false;
-  return [
-    'bitcoin',
-    'bitcoincash',
-    'bitcoinsv',
-    'ethereum',
-    'litecoin',
-    'ripple',
-    'stellar',
-    'eos',
-    'dogecoin',
-    'dash',
-  ].some((network) => url.startsWith(`${network}:`));
+  return supportedProtocols.some((network) => url.startsWith(`${network}:`));
 }
 
 function decode(url) {
@@ -32,7 +35,18 @@ function decode(url) {
   return data;
 }
 
+function registerProtocolHandler(network) {
+  if (!process.env.BUILD_TYPE === 'web') return;
+  if (!navigator.registerProtocolHandler) return;
+  if (!supportedProtocols.includes(network)) return;
+  try {
+    navigator.registerProtocolHandler(network, `${urlRoot}?coin=${network}&bip21=%s`, 'Coin Wallet');
+    // eslint-disable-next-line
+  } catch (e) {}
+}
+
 module.exports = {
   isValidScheme,
   decode,
+  registerProtocolHandler,
 };
