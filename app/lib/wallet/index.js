@@ -148,17 +148,7 @@ async function initWallet(pin) {
   }, getExtraOptions(crypto));
   state.wallet = new Wallet[crypto.network](options);
 
-  if (crypto.network === 'ethereum') {
-    convert.setDecimals(crypto.decimals || 18);
-  } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].includes(crypto._id)) {
-    convert.setDecimals(8);
-  } else if (crypto._id === 'ripple') {
-    convert.setDecimals(0);
-  } else if (crypto._id === 'stellar') {
-    convert.setDecimals(0);
-  } else if (crypto._id === 'eos') {
-    convert.setDecimals(0);
-  }
+  convert.setDecimals(state.wallet.decimals);
 
   await ticker.init([crypto]);
 
@@ -188,10 +178,14 @@ async function initWallet(pin) {
 }
 
 function getExtraOptions(crypto) {
-  const options = {};
+  const options = {
+    useTestNetwork: process.env.COIN_NETWORK === 'regtest',
+  };
   if (crypto.network === 'ethereum') {
+    options.name = crypto.name;
     options.minConf = 12;
     options.token = crypto._id !== 'ethereum' ? crypto : false;
+    options.decimals = crypto.decimals !== undefined ? crypto.decimals : 18;
   } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].includes(crypto.network)) {
     const addressType = details.get(crypto.network + '.addressType');
     if (addressType) {

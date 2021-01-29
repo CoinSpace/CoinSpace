@@ -34,7 +34,7 @@ module.exports = function(el) {
           const rates = ractive.get('rates')[cryptoId] || {};
           const currency = this.get('currency');
           if (rates[currency]) {
-            return `${cryptoToFiat(1, rates[currency])} ${currency}`;
+            return `${cryptoToFiat(1, rates[currency]) || '⚠️'} ${currency}`;
           }
         }
         return '⚠️';

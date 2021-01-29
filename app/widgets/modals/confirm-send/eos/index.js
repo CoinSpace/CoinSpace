@@ -4,6 +4,7 @@ const Ractive = require('widgets/modals/base');
 const emitter = require('lib/emitter');
 const { unlock, lock } = require('lib/wallet/security');
 const { showError, showSuccess } = require('widgets/modals/flash');
+const { toUnitString } = require('lib/convert');
 
 function open(data) {
 
@@ -69,7 +70,7 @@ function open(data) {
 function extendData(data) {
   const { wallet } = data;
   data.feeSign = '+';
-  data.fee = wallet.getDefaultFee();
+  data.fee = toUnitString(wallet.getDefaultFee());
   return data;
 }
 

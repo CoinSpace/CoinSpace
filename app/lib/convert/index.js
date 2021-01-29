@@ -2,44 +2,49 @@
 
 const Big = require('big.js');
 
-let factor;
+const state = {};
 
-function toAtom(number) {
-  if (!number) return '0';
-  return Big(number).times(factor).toFixed();
+function toAtom(unit) {
+  if (!unit) return '0';
+  return Big(unit).times(state.factor).toFixed(0);
 }
 
-function toUnit(number) {
-  if (!number) return Big(0);
-  return Big(number).div(factor);
-}
-
-function toUnitString(number, d) {
-  if (!number) return '0';
-  if (!d) return Big(number).div(factor).toFixed();
-  return Big(number).div(Big(10).pow(d)).toFixed();
+function toUnitString(atom, decimals) {
+  if (!atom) return '0';
+  if (!decimals) return Big(atom).div(state.factor).toFixed();
+  // strip leading zeros
+  return Big(atom).div(Big(10).pow(decimals)).toFixed();
 }
 
 function setDecimals(decimals) {
-  factor = Big(10).pow(decimals);
+  state.decimals = decimals;
+  state.factor = Big(10).pow(decimals);
 }
 
-function cryptoToFiat(amount, exchangeRate) {
-  if (amount == undefined || exchangeRate == undefined) return '⚠️';
+function cryptoToFiat(unit, exchangeRate) {
+  if (unit == undefined || exchangeRate == undefined) return;
   const rate = Big(exchangeRate);
-  const value = Big(amount).times(rate);
+  const value = Big(unit).times(rate);
   if (value.gt(1.0)) {
     return value.toFixed(2);
   } else {
     const decimals = rate.toFixed().includes('.') ? rate.toFixed().split('.')[1].length : 2;
-    return value.toFixed(decimals > 2 ? decimals : 2)
+    return value.toFixed(decimals > 2 ? decimals : 2);
   }
+}
+
+function fiatToCrypto(value, exchangeRate) {
+  if (value == undefined || exchangeRate == undefined) return;
+  const rate = Big(exchangeRate);
+  const unit = Big(value).div(rate).toFixed(state.decimals);
+  // strip leading zeros
+  return Big(unit).toFixed();
 }
 
 module.exports = {
   toAtom,
-  toUnit,
   toUnitString,
   setDecimals,
   cryptoToFiat,
+  fiatToCrypto,
 };

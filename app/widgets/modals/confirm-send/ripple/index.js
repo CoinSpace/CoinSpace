@@ -4,6 +4,7 @@ const Ractive = require('widgets/modals/base');
 const emitter = require('lib/emitter');
 const { showInfo, showError, showSuccess } = require('widgets/modals/flash');
 const { unlock, lock } = require('lib/wallet/security');
+const { toUnitString } = require('lib/convert');
 
 function open(data) {
 
@@ -29,7 +30,7 @@ function open(data) {
           return showInfo({
             title: 'Insufficient funds',
             message: "Your wallet isn't activated. You can receive only amount greater than :minReserve :denomination.",
-            interpolations: { minReserve: wallet.minReserve, denomination: wallet.denomination },
+            interpolations: { minReserve: toUnitString(wallet.getMinReserve()), denomination: wallet.denomination },
           });
         }
         return handleTransactionError(err);
@@ -78,7 +79,7 @@ function open(data) {
       // eslint-disable-next-line max-len
       err.message = "Recipient's wallet isn't activated. You can send only amount greater than :minReserve :denomination.";
       err.interpolations = {
-        minReserve: wallet.minReserve,
+        minReserve: toUnitString(wallet.getMinReserve()),
         denomination: wallet.denomination,
       };
     } else if (err.message === 'tecDST_TAG_NEEDED') {
@@ -104,7 +105,7 @@ function open(data) {
 function extendData(data) {
   const { wallet } = data;
   data.feeSign = data.importTxOptions ? '-' : '+';
-  data.fee = wallet.getDefaultFee();
+  data.fee = toUnitString(wallet.getDefaultFee());
   return data;
 }
 

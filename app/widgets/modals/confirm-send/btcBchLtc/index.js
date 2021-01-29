@@ -108,14 +108,16 @@ function extendData(data) {
     data.showImportTxFees = true;
     data.feeIndex = 0;
 
+    const feeRates = wallet.getFeeRates();
     const estimates = wallet.estimateFees(toAtom(data.amount), unspents);
-    const fees = wallet.feeRates.map((item, i) => {
-      item.estimate = toUnitString(estimates[i]);
-      return item;
+    const fees = feeRates.map((item, i) => {
+      return Object.assign({
+        estimate: toUnitString(estimates[i]),
+      }, item);
     });
 
-    for (let i = 0; i< wallet.feeRates.length; i++) {
-      if (wallet.feeRates[i].default) {
+    for (const i in feeRates) {
+      if (feeRates[i].default) {
         data.feeIndex = i;
         break;
       }
