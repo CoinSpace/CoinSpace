@@ -12,23 +12,15 @@
         <span class="_amount">...</span>
       </div>
     {{else}}
-      {{#if showFiat}}
-      <div class="header__balance" on-click="toggle-currencies">
-        <span class="_amount">{{cryptoToFiat(bitcoinBalance)}}</span>
+      <div class="header__balance {{size}}" on-click="toggle-currencies">
+        <span class="_amount">{{amount}}</span>
         <span class="_currency">{{currency}}</span>
       </div>
-      {{else}}
-      <div class="header__balance" on-click="toggle-currencies">
-        <span class="_amount">{{toUnitString(bitcoinBalance)}}</span>
-        <span class="_currency">{{denomination}}</span>
-      </div>
-      {{/if}}
-
       <div class="header__balance cross">×</div>
     {{/if}}
 
     <div class="header__refresh" on-click="sync-click">
-      <span id="refresh_el" class="_icon loading">
+      <span class="_icon" class-loading="isSyncing">
         {{>svg_refresh}}
       </span>
     </div>

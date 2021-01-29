@@ -11,39 +11,50 @@ const { getCrypto } = require('lib/crypto');
 
 module.exports = function(el) {
 
+  const state = {
+    rates: ticker.getRates()[getCrypto()._id] || {},
+    currency: details.get('systemInfo').preferredCurrency,
+  };
+
   const ractive = new Ractive({
     el,
     template: require('./index.ract'),
     data: {
-      toUnitString,
       isSyncing: true,
-      rates: ticker.getRates()[getCrypto()._id] || {},
-      cryptoToFiat(amount) {
-        const value = toUnitString(amount);
-        const exchangeRate = ractive.get('rates')[ractive.get('currency')];
-        return cryptoToFiat(value, exchangeRate) || '⚠️';
-      },
-      currency: details.get('systemInfo').preferredCurrency,
+      amount: '',
+      currency: '',
     },
   });
 
-  let refreshEl = ractive.find('#refresh_el');
+  function updateBalance() {
+    const showFiat = ractive.get('showFiat');
+    const balance = getWallet().getBalance();
+    let amount;
+    let currency;
+    if (showFiat) {
+      const exchangeRate = state.rates[state.currency];
+      amount = cryptoToFiat(toUnitString(balance), exchangeRate) || '⚠️';
+      // eslint-disable-next-line prefer-destructuring
+      currency = state.currency;
+    } else {
+      amount = toUnitString(balance);
+      currency = getWallet().denomination;
+    }
+    const size = amount.length > 25 ? 'small' : amount.length > 18 ? 'medium' : 'large';
+    ractive.set({
+      amount,
+      currency,
+      size,
+    });
+  }
 
   emitter.on('wallet-ready', () => {
-    const balance = getWallet().getBalance();
-    ractive.set('bitcoinBalance', balance);
-    ractive.set('denomination', getWallet().denomination);
+    updateBalance();
     ractive.set('isSyncing', false);
-    refreshEl.classList.remove('loading');
-    // IE fix
-    const clone = refreshEl.cloneNode(true);
-    refreshEl.parentNode.replaceChild(clone, refreshEl);
-    refreshEl = clone;
   });
 
   emitter.on('tx-sent', () => {
-    const balance = getWallet().getBalance();
-    ractive.set('bitcoinBalance', balance);
+    updateBalance();
   });
 
   ractive.on('sync-click', (context) => {
@@ -58,7 +69,6 @@ module.exports = function(el) {
 
   emitter.on('sync', () => {
     ractive.set('isSyncing', true);
-    refreshEl.classList.add('loading');
   });
 
   ractive.on('toggle-currencies', () => {
@@ -67,14 +77,17 @@ module.exports = function(el) {
     } else {
       ractive.set('showFiat', true);
     }
+    updateBalance();
   });
 
   emitter.on('currency-changed', (currency) => {
-    ractive.set('currency', currency);
+    state.currency = currency;
+    updateBalance();
   });
 
   emitter.on('rates-updated', (rates) => {
-    ractive.set('rates', rates[getCrypto()._id] || {});
+    state.rates = rates[getCrypto()._id] || {};
+    updateBalance();
   });
 
   return ractive;

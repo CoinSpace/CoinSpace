@@ -45,6 +45,24 @@
         font-size: $small_font_size--portrait;
       }
     }
+
+    @media (max-width: 600px) {
+      &.large {
+        ._amount {
+          font-size: $large_font_size;
+        }
+      }
+      &.medium {
+        ._amount {
+          font-size: $header_font_size;
+        }
+      }
+      &.small {
+        ._amount {
+          font-size: $base_font_size;
+        }
+      } 
+    }
   }
   .header__balance.cross {
     display: none;
