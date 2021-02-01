@@ -15,6 +15,20 @@ if (BUILD_PLATFORM === 'mas' && process.env.TRAVIS_BUILD_NUMBER) {
   buildVersion = `1.0.${process.env.TRAVIS_BUILD_NUMBER}`;
 }
 
+const protocols = [
+  'coinspace',
+  'bitcoin',
+  'bitcoincash',
+  'bitcoinsv',
+  'ethereum',
+  'litecoin',
+  'ripple',
+  'stellar',
+  'eos',
+  'dogecoin',
+  'dash',
+];
+
 module.exports = {
   packagerConfig: {
     appVersion: pkg.version,
@@ -70,7 +84,7 @@ module.exports = {
     } : undefined,
     protocols: {
       name: 'Coin Wallet',
-      schemes: ['coinspace'],
+      schemes: protocols,
     },
   },
   makers: [
@@ -174,7 +188,7 @@ module.exports = {
         },
         protocols: {
           name: 'Coin Wallet',
-          schemes: ['coinspace'],
+          schemes: protocols,
         },
         publish: process.env.SNAP_TOKEN && BRANCH === 'master' ? 'always' : 'never',
       },

@@ -23,6 +23,20 @@ if (require('electron-squirrel-startup')) return;
 // Suppress deprecation warning
 app.allowRendererProcessReuse = true;
 
+const protocols = [
+  'coinspace',
+  'bitcoin',
+  'bitcoincash',
+  'bitcoinsv',
+  'ethereum',
+  'litecoin',
+  'ripple',
+  'stellar',
+  'eos',
+  'dogecoin',
+  'dash',
+];
+
 if (isWindows) {
   app.setAboutPanelOptions({
     iconPath: path.join(__dirname, 'resources/64x64.png'),
@@ -58,10 +72,12 @@ Sentry.init({
 const menu = Menu.buildFromTemplate(menuTemplate);
 Menu.setApplicationMenu(menu);
 
-if (!app.isDefaultProtocolClient('coinspace')) {
-  // Define custom protocol handler. Deep linking works on packaged versions of the application!
-  app.setAsDefaultProtocolClient('coinspace');
-}
+protocols.forEach((item) => {
+  if (!app.isDefaultProtocolClient(item)) {
+    // Define custom protocol handler. Deep linking works on packaged versions of the application!
+    app.setAsDefaultProtocolClient(item);
+  }
+});
 
 // The application has finished basic startup
 app.on('will-finish-launching', () => {
@@ -74,7 +90,9 @@ app.on('will-finish-launching', () => {
 
 // Someone tried to run a second instance
 app.on('second-instance', (event, argv) => {
-  openWindow(argv.find(item => item.startsWith('coinspace')));
+  openWindow(argv.find(arg => {
+    return protocols.some((item) => arg.startsWith(item));
+  }));
 });
 
 // This method will be called when Electron has finished
