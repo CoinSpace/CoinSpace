@@ -13,6 +13,7 @@ const menuTemplate = require('./lib/menu');
 const openWindow = require('./lib/openWindow');
 const Sentry = require('@sentry/electron');
 const updater = require('./lib/updater');
+const schemes = require('./lib/schemes');
 
 if (process.env.NODE_ENV === 'production') {
   log.transports.file.level = false;
@@ -25,16 +26,7 @@ app.allowRendererProcessReuse = true;
 
 const protocols = [
   'coinspace',
-  'bitcoin',
-  'bitcoincash',
-  'bitcoinsv',
-  'ethereum',
-  'litecoin',
-  'ripple',
-  'stellar',
-  'eos',
-  'dogecoin',
-  'dash',
+  ...schemes,
 ];
 
 if (isWindows) {
@@ -52,7 +44,7 @@ if (isLinux) {
   });
 }
 
-
+let startupUrl;
 const lock = app.requestSingleInstanceLock();
 
 // https://github.com/electron/electron/issues/15958
@@ -84,7 +76,11 @@ app.on('will-finish-launching', () => {
   // Protocol handler for macOS
   app.on('open-url', (event, url) => {
     event.preventDefault();
-    openWindow(url);
+    if (app.isReady()) {
+      openWindow(url);
+    } else {
+      startupUrl = url;
+    }
   });
 });
 
@@ -99,11 +95,12 @@ app.on('second-instance', (event, argv) => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  log.log('app ready');
   protocol.registerStringProtocol('coinspace', (request, cb) => {
     openWindow(request.url);
     cb('ok');
   });
-  openWindow();
+  openWindow(startupUrl);
   updater({ log });
 
   app.on('activate', () => {

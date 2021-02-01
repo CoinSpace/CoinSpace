@@ -1,7 +1,11 @@
 'use strict';
 
+const url = require('url');
+const path = require('path');
 const { shell, BrowserWindow, BrowserView } = require('electron');
 const { isDevelopment } = require('./constants');
+const log = require('electron-log');
+const schemes = require('./schemes');
 
 // Keep reference to IPC
 let mainWindow;
@@ -13,6 +17,7 @@ function handleOpenURL(url) {
 }
 
 function openWindow(deeplink) {
+  log.log('open window:', deeplink);
   if (BrowserWindow.getAllWindows().length === 0) {
     // Create the browser window.
     mainWindow = new BrowserWindow({
@@ -26,7 +31,21 @@ function openWindow(deeplink) {
       },
     });
 
-    mainWindow.loadFile('./app/index.html');
+    if (deeplink && schemes.some((scheme) => deeplink.startsWith(`${scheme}:`))) {
+      const coin = schemes.find((scheme) => deeplink.startsWith(`${scheme}:`));
+      mainWindow.loadURL(url.format({
+        protocol: 'file',
+        slashes: true,
+        pathname: path.join(__dirname, '../app/index.html'),
+        search: `?coin=${coin}`,
+      }));
+    } else {
+      mainWindow.loadURL(url.format({
+        protocol: 'file',
+        slashes: true,
+        pathname: path.join(__dirname, '../app/index.html'),
+      }));
+    }
 
     // Catch all attempts to open new window and open them in default browser
     mainWindow.webContents.on('new-window', (event, url, frameName, disposition, options) => {

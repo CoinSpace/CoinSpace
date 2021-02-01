@@ -1,6 +1,7 @@
 'use strict';
 
 const pkg = require('./package.json');
+const schemes = require('./lib/schemes');
 
 const { BUILD_PLATFORM } = process.env;
 const BRANCH = process.env.TRAVIS_BRANCH || process.env.APPVEYOR_REPO_BRANCH;
@@ -17,16 +18,7 @@ if (BUILD_PLATFORM === 'mas' && process.env.TRAVIS_BUILD_NUMBER) {
 
 const protocols = [
   'coinspace',
-  'bitcoin',
-  'bitcoincash',
-  'bitcoinsv',
-  'ethereum',
-  'litecoin',
-  'ripple',
-  'stellar',
-  'eos',
-  'dogecoin',
-  'dash',
+  ...schemes,
 ];
 
 module.exports = {
