@@ -36,7 +36,7 @@ function decode(url) {
 }
 
 function registerProtocolHandler(network) {
-  if (!process.env.BUILD_PLATFORM === 'web') return;
+  if (process.env.BUILD_PLATFORM !== 'web') return;
   if (!navigator.registerProtocolHandler) return;
   if (!supportedProtocols.includes(network)) return;
   try {
