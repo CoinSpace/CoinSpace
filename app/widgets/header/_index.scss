@@ -26,11 +26,16 @@
     @extend .jigsaw-light;
     display: flex;
     justify-content: center;
+    overflow: hidden;
     margin-right: 10px;
     margin-left: 10px;
     width: 100%;
 
     font-size: $large_font_size;
+
+    ._amount {
+      @include ellipsis();
+    }
 
     ._currency {
       @extend .jigsaw-medium;
@@ -55,14 +60,6 @@
       &.medium {
         ._amount {
           font-size: $header_font_size;
-        }
-        ._currency {
-          padding-top: 0;
-        }
-      }
-      &.small {
-        ._amount {
-          font-size: $base_font_size;
         }
         ._currency {
           padding-top: 0;

@@ -13,7 +13,7 @@
       </div>
     {{else}}
       <div class="header__balance {{size}}" on-click="toggle-currencies">
-        <span class="_amount">{{amount}}</span>
+        <span class="_amount" title="{{amount}}">{{amount}}</span>
         <span class="_currency">{{currency}}</span>
       </div>
       <div class="header__balance cross">×</div>

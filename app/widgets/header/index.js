@@ -40,7 +40,7 @@ module.exports = function(el) {
       amount = toUnitString(balance);
       currency = getWallet().denomination;
     }
-    const size = amount.length > 18 ? 'small' : amount.length > 12 ? 'medium' : 'large';
+    const size = amount.length > 12 ? 'medium' : 'large';
     ractive.set({
       amount,
       currency,
