@@ -41,33 +41,53 @@
           <uap:Protocol Name="coinspace">
             <uap:DisplayName>Coin Wallet</uap:DisplayName>
           </uap:Protocol>
+        </uap:Extension>
+        <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="bitcoin">
             <uap:DisplayName>Coin Wallet</uap:DisplayName>
           </uap:Protocol>
+        </uap:Extension>
+        <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="bitcoincash">
             <uap:DisplayName>Coin Wallet</uap:DisplayName>
           </uap:Protocol>
+        </uap:Extension>
+        <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="bitcoinsv">
             <uap:DisplayName>Coin Wallet</uap:DisplayName>
           </uap:Protocol>
+        </uap:Extension>
+        <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="ethereum">
             <uap:DisplayName>Coin Wallet</uap:DisplayName>
           </uap:Protocol>
+        </uap:Extension>
+        <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="litecoin">
             <uap:DisplayName>Coin Wallet</uap:DisplayName>
           </uap:Protocol>
+        </uap:Extension>
+        <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="ripple">
             <uap:DisplayName>Coin Wallet</uap:DisplayName>
           </uap:Protocol>
+        </uap:Extension>
+        <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="stellar">
             <uap:DisplayName>Coin Wallet</uap:DisplayName>
           </uap:Protocol>
+        </uap:Extension>
+        <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="eos">
             <uap:DisplayName>Coin Wallet</uap:DisplayName>
           </uap:Protocol>
+        </uap:Extension>
+        <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="dogecoin">
             <uap:DisplayName>Coin Wallet</uap:DisplayName>
           </uap:Protocol>
+        </uap:Extension>
+        <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="dash">
             <uap:DisplayName>Coin Wallet</uap:DisplayName>
           </uap:Protocol>
