@@ -41,10 +41,15 @@ function fiatToCrypto(value, exchangeRate) {
   return Big(unit).toFixed();
 }
 
+function toDecimalString(value) {
+  return toUnitString(toAtom(value));
+}
+
 module.exports = {
   toAtom,
   toUnitString,
   setDecimals,
   cryptoToFiat,
   fiatToCrypto,
+  toDecimalString,
 };

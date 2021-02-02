@@ -16,7 +16,7 @@ const { getDestinationInfo } = require('lib/wallet');
 const { resolveTo } = require('lib/openalias');
 const qrcode = require('lib/qrcode');
 const initEosSetup = require('widgets/eos/setup');
-const { toAtom, toUnitString, cryptoToFiat, fiatToCrypto } = require('lib/convert');
+const { toAtom, toUnitString, cryptoToFiat, fiatToCrypto, toDecimalString } = require('lib/convert');
 const { translate } = require('lib/i18n');
 const ticker = require('lib/ticker-api');
 const { getCrypto } = require('lib/crypto');
@@ -145,7 +145,7 @@ module.exports = function(el) {
         alias: data.alias,
         fee,
         destinationInfo,
-        amount: normalizeCrypto(ractive.find('#crypto').value),
+        amount: normalizeCrypto(toDecimalString(ractive.find('#crypto').value)),
         denomination: ractive.get('denomination'),
         onSuccessDismiss() {
           ractive.set({ to: '' });
@@ -171,12 +171,9 @@ module.exports = function(el) {
       } else if (wallet.networkName === 'ripple') {
         options.tag = ractive.find('#destination-tag').value;
         options.invoiceId = ractive.find('#invoice-id').value;
-        options.amount = Big(options.amount || '0').toFixed(6).replace(/0+$/, '').replace(/\.+$/, '');
       } else if (wallet.networkName === 'stellar') {
-        options.amount = Big(options.amount || '0').toFixed(7).replace(/0+$/, '').replace(/\.+$/, '');
         options.memo = ractive.find('#memo').value;
       } else if (wallet.networkName === 'eos') {
-        options.amount = Big(options.amount || '0').toFixed(4).replace(/0+$/, '').replace(/\.+$/, '');
         options.memo = ractive.find('#memo').value;
       }
 
