@@ -42,7 +42,7 @@
   <div class="csformgroup csformgroup--readonly">
     <div class="csformgroup__input-group">
       <div class="csformgroup__input-group__header">
-        <label>{{translate("Extra Id")}}</label>
+        <label>{{translate(extraIdLabel)}}</label>
       </div>
       <div class="csinput">
         <div class="csinput__input" tabindex="0">{{extraId}}</div>

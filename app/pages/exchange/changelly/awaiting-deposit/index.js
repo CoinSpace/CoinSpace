@@ -8,6 +8,12 @@ const details = require('lib/wallet/details');
 const showTooltip = require('widgets/modals/tooltip');
 const { translate } = require('lib/i18n');
 
+const extraIdLabels = {
+  XLM: 'Memo',
+  EOS: 'Memo',
+  XRP: 'Destination tag',
+};
+
 module.exports = function(el) {
   const ractive = new Ractive({
     el,
@@ -17,6 +23,7 @@ module.exports = function(el) {
       depositSymbol: '',
       depositAddress: '-',
       extraId: '',
+      extraIdLabel: '',
       networkFee: '',
       toAddress: '',
       toSymbol: '',
@@ -41,6 +48,7 @@ module.exports = function(el) {
       depositSymbol: context.depositSymbol,
       depositAddress: context.depositAddress,
       extraId: context.extraId,
+      extraIdLabel: extraIdLabels[context.depositSymbol] || 'Extra Id',
       networkFee: context.networkFee,
       toAddress: context.toAddress,
       toSymbol: context.toSymbol,
