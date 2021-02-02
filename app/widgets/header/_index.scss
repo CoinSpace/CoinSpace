@@ -56,12 +56,18 @@
         ._amount {
           font-size: $header_font_size;
         }
+        ._currency {
+          padding-top: 0;
+        }
       }
       &.small {
         ._amount {
           font-size: $base_font_size;
         }
-      } 
+        ._currency {
+          padding-top: 0;
+        }
+      }
     }
   }
   .header__balance.cross {

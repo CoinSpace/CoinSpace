@@ -14,6 +14,7 @@ module.exports = function(el) {
   const state = {
     rates: ticker.getRates()[getCrypto()._id] || {},
     currency: details.get('systemInfo').preferredCurrency,
+    showFiat: false,
   };
 
   const ractive = new Ractive({
@@ -27,11 +28,10 @@ module.exports = function(el) {
   });
 
   function updateBalance() {
-    const showFiat = ractive.get('showFiat');
     const balance = getWallet().getBalance();
     let amount;
     let currency;
-    if (showFiat) {
+    if (state.showFiat) {
       const exchangeRate = state.rates[state.currency];
       amount = cryptoToFiat(toUnitString(balance), exchangeRate) || '⚠️';
       // eslint-disable-next-line prefer-destructuring
@@ -40,7 +40,7 @@ module.exports = function(el) {
       amount = toUnitString(balance);
       currency = getWallet().denomination;
     }
-    const size = amount.length > 25 ? 'small' : amount.length > 18 ? 'medium' : 'large';
+    const size = amount.length > 18 ? 'small' : amount.length > 12 ? 'medium' : 'large';
     ractive.set({
       amount,
       currency,
@@ -72,11 +72,7 @@ module.exports = function(el) {
   });
 
   ractive.on('toggle-currencies', () => {
-    if (ractive.get('showFiat')) {
-      ractive.set('showFiat', false);
-    } else {
-      ractive.set('showFiat', true);
-    }
+    state.showFiat = !state.showFiat;
     updateBalance();
   });
 
