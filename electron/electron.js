@@ -8,7 +8,7 @@ const path = require('path');
 const { app, Menu, protocol } = require('electron');
 const log = require('electron-log');
 const pkg = require('./package.json');
-const { isMas, isWindows, isLinux } = require('./lib/constants');
+const { isMac, isMas, isWindows, isLinux } = require('./lib/constants');
 const menuTemplate = require('./lib/menu');
 const openWindow = require('./lib/openWindow');
 const Sentry = require('@sentry/electron');
@@ -84,11 +84,15 @@ app.on('will-finish-launching', () => {
   });
 });
 
+function extractUrlFromArgv(argv) {
+  return argv.find(arg => {
+    return protocols.some((item) => arg.startsWith(`${item}:`));
+  });
+}
+
 // Someone tried to run a second instance
 app.on('second-instance', (event, argv) => {
-  openWindow(argv.find(arg => {
-    return protocols.some((item) => arg.startsWith(item));
-  }));
+  openWindow(extractUrlFromArgv(argv));
 });
 
 // This method will be called when Electron has finished
@@ -100,7 +104,12 @@ app.whenReady().then(() => {
     openWindow(request.url);
     cb('ok');
   });
-  openWindow(startupUrl);
+  if (isMac) {
+    openWindow(startupUrl);
+  } else {
+    openWindow(extractUrlFromArgv(process.argv));
+  }
+
   updater({ log });
 
   app.on('activate', () => {
