@@ -2,7 +2,6 @@
 
 const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
-const initShapeshift = require('./shapeshift');
 const initChangelly = require('./changelly');
 const initNone = require('./none');
 
@@ -14,7 +13,6 @@ module.exports = function(el) {
 
   const exchanges = {
     changelly: initChangelly(ractive.find('#exchange_changelly')),
-    shapeshift: initShapeshift(ractive.find('#exchange_shapeshift')),
     none: initNone(ractive.find('#exchange_none')),
   };
 

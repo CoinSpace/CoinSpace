@@ -413,18 +413,6 @@
         <source>Deposit address (%(symbol)s)</source>
         <target>입금 주소 (%(symbol)s)</target>
       </trans-unit>
-      <trans-unit id="Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
-        <source>Send up to %(depositMax)s %(depositSymbol)s to deposit address.
-It will be converted into %(toSymbol)s, and sent to
- %(toAddress)s</source>
-        <target>최고 %(depositMax)s %(depositSymbol)s을/를 입금 주소로 보냅니다.
-%(toSymbol)s(으)로 환전해서
- %(toAddress)s(으)로 보냅니다.</target>
-      </trans-unit>
-      <trans-unit id="Deposit minimum">
-        <source>Deposit minimum</source>
-        <target>최소 입금액</target>
-      </trans-unit>
       <trans-unit id="amount :toSymbol have been delivered to :toAddress">
         <source>%(amount)s %(toSymbol)s have been delivered to
  %(toAddress)s</source>
@@ -706,22 +694,6 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Privacy Policy">
         <source>Privacy Policy</source>
         <target>개인정보 보호정책</target>
-      </trans-unit>
-      <trans-unit id="Your ShapeShift account is not verified.">
-        <source>Your ShapeShift account is not verified.</source>
-        <target>셰이프쉬프트(ShapeShift) 계정이 확인되지 않았습니다.</target>
-      </trans-unit>
-      <trans-unit id="Complete verification">
-        <source>Complete verification</source>
-        <target>확인 완료</target>
-      </trans-unit>
-      <trans-unit id="Try to sign in again">
-        <source>Try to sign in again</source>
-        <target>다시 로그인을 시도하십시오</target>
-      </trans-unit>
-      <trans-unit id="Sign in">
-        <source>Sign in</source>
-        <target>로그인</target>
       </trans-unit>
       <trans-unit id="Setup EOS account">
         <source>Setup EOS account</source>

@@ -413,18 +413,6 @@
         <source>Deposit address (%(symbol)s)</source>
         <target>អាសយដ្ឋានដាក់ប្រាក់ (%(symbol)s)</target>
       </trans-unit>
-      <trans-unit id="Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
-        <source>Send up to %(depositMax)s %(depositSymbol)s to deposit address.
-It will be converted into %(toSymbol)s, and sent to
- %(toAddress)s</source>
-        <target>ផ្ញើចេញបានដល់ %(depositMax)s %(depositSymbol)s ទៅកាន់អាសយដ្ឋានដាក់ប្រាក់។
-វានឹងត្រូវបានបម្លែងទៅជា %(toSymbol)s, ហើយបានផ្ញើទៅ
- %(toAddress)s</target>
-      </trans-unit>
-      <trans-unit id="Deposit minimum">
-        <source>Deposit minimum</source>
-        <target>ការដាក់ប្រាក់បញើរអប្បបរមា</target>
-      </trans-unit>
       <trans-unit id="amount :toSymbol have been delivered to :toAddress">
         <source>%(amount)s %(toSymbol)s have been delivered to
  %(toAddress)s</source>
@@ -706,22 +694,6 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Privacy Policy">
         <source>Privacy Policy</source>
         <target>គោលការណ៍សិទ្ធិឯកជន</target>
-      </trans-unit>
-      <trans-unit id="Your ShapeShift account is not verified.">
-        <source>Your ShapeShift account is not verified.</source>
-        <target>គណនី ShapeShift របស់អ្នកមិនត្រូវបានផ្ទៀងផ្ទាត់ទេ។</target>
-      </trans-unit>
-      <trans-unit id="Complete verification">
-        <source>Complete verification</source>
-        <target>ការផ្ទៀងផ្ទាត់បញ្ចប់</target>
-      </trans-unit>
-      <trans-unit id="Try to sign in again">
-        <source>Try to sign in again</source>
-        <target>សូមព្យាយាមចុះឈ្មោះចូលម្តងទៀត</target>
-      </trans-unit>
-      <trans-unit id="Sign in">
-        <source>Sign in</source>
-        <target>ចុះឈ្មោះចូល</target>
       </trans-unit>
       <trans-unit id="Setup EOS account">
         <source>Setup EOS account</source>

@@ -413,18 +413,6 @@
         <source>Deposit address (%(symbol)s)</source>
         <target>存款地址（%(symbol)s）</target>
       </trans-unit>
-      <trans-unit id="Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
-        <source>Send up to %(depositMax)s %(depositSymbol)s to deposit address.
-It will be converted into %(toSymbol)s, and sent to
- %(toAddress)s</source>
-        <target>发送%(depositMax)s %(depositSymbol)s到存款地址。
-它将转换为%(toSymbol)s，并发送到
- %(toAddress)s</target>
-      </trans-unit>
-      <trans-unit id="Deposit minimum">
-        <source>Deposit minimum</source>
-        <target>最低存款</target>
-      </trans-unit>
       <trans-unit id="amount :toSymbol have been delivered to :toAddress">
         <source>%(amount)s %(toSymbol)s have been delivered to
  %(toAddress)s</source>
@@ -706,22 +694,6 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Privacy Policy">
         <source>Privacy Policy</source>
         <target>隐私政策</target>
-      </trans-unit>
-      <trans-unit id="Your ShapeShift account is not verified.">
-        <source>Your ShapeShift account is not verified.</source>
-        <target>你的ShapeShift账户未验证。</target>
-      </trans-unit>
-      <trans-unit id="Complete verification">
-        <source>Complete verification</source>
-        <target>完成验证</target>
-      </trans-unit>
-      <trans-unit id="Try to sign in again">
-        <source>Try to sign in again</source>
-        <target>尝试再次登录</target>
-      </trans-unit>
-      <trans-unit id="Sign in">
-        <source>Sign in</source>
-        <target>登录</target>
       </trans-unit>
       <trans-unit id="Setup EOS account">
         <source>Setup EOS account</source>

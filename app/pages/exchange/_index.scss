@@ -1,10 +1,9 @@
-#exchange_changelly, #exchange_shapeshift, #exchange_none {
+#exchange_changelly, #exchange_none {
   display: none;
   &.current {
     display: block;
   }
 }
 
-@import "./shapeshift/_index";
 @import "./changelly/_index";
 @import "./none/_index";

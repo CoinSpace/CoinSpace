@@ -413,18 +413,6 @@
         <source>Deposit address (%(symbol)s)</source>
         <target>Địa chỉ gửi tiền %(symbol)s</target>
       </trans-unit>
-      <trans-unit id="Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
-        <source>Send up to %(depositMax)s %(depositSymbol)s to deposit address.
-It will be converted into %(toSymbol)s, and sent to
- %(toAddress)s</source>
-        <target>Gửi tối đa %(depositMax)s %(depositSymbol)s đến địa chỉ gửi tiền.
-Sẽ chuyển đổi thành %(toSymbol)s, và gửi đến
- %(toAddress)s</target>
-      </trans-unit>
-      <trans-unit id="Deposit minimum">
-        <source>Deposit minimum</source>
-        <target>Tiền gửi tối thiểu</target>
-      </trans-unit>
       <trans-unit id="amount :toSymbol have been delivered to :toAddress">
         <source>%(amount)s %(toSymbol)s have been delivered to
  %(toAddress)s</source>
@@ -706,22 +694,6 @@ Sẽ chuyển đổi thành %(toSymbol)s, và gửi đến
       <trans-unit id="Privacy Policy">
         <source>Privacy Policy</source>
         <target>Chính sách bảo mật</target>
-      </trans-unit>
-      <trans-unit id="Your ShapeShift account is not verified.">
-        <source>Your ShapeShift account is not verified.</source>
-        <target>Tài khoản ShapeShift chưa xác minh.</target>
-      </trans-unit>
-      <trans-unit id="Complete verification">
-        <source>Complete verification</source>
-        <target>Xác minh hoàn tất</target>
-      </trans-unit>
-      <trans-unit id="Try to sign in again">
-        <source>Try to sign in again</source>
-        <target>Hãy thử đăng nhập lại</target>
-      </trans-unit>
-      <trans-unit id="Sign in">
-        <source>Sign in</source>
-        <target>Đăng nhập</target>
       </trans-unit>
       <trans-unit id="Setup EOS account">
         <source>Setup EOS account</source>

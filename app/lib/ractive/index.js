@@ -90,7 +90,6 @@ partials.svg_warning = require('lib/svg/warning.ract');
 partials.svg_mecto_not_found = require('lib/svg/mecto_not_found.ract');
 partials.svg_exchange = require('lib/svg/exchange.ract');
 partials.svg_error = require('lib/svg/error.ract');
-partials.svg_shapeshift = require('lib/svg/shapeshift.ract');
 partials.svg_changelly = require('lib/svg/changelly.ract');
 partials.svg_backspace = require('lib/svg/backspace.ract');
 partials.svg_touchid = require('lib/svg/touchid.ract');

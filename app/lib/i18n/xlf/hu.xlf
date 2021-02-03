@@ -413,18 +413,6 @@
         <source>Deposit address (%(symbol)s)</source>
         <target>Letéti cím (%(symbol)s)</target>
       </trans-unit>
-      <trans-unit id="Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
-        <source>Send up to %(depositMax)s %(depositSymbol)s to deposit address.
-It will be converted into %(toSymbol)s, and sent to
- %(toAddress)s</source>
-        <target>Küldj maximum %(depositMax)s %(depositSymbol)s coint a letéti címre.
-Át lesz váltva %(toSymbol)s coinra és erre a címre lesz elküldve
- %(toAddress)s</target>
-      </trans-unit>
-      <trans-unit id="Deposit minimum">
-        <source>Deposit minimum</source>
-        <target>Minimális letét</target>
-      </trans-unit>
       <trans-unit id="amount :toSymbol have been delivered to :toAddress">
         <source>%(amount)s %(toSymbol)s have been delivered to
  %(toAddress)s</source>
@@ -706,22 +694,6 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Privacy Policy">
         <source>Privacy Policy</source>
         <target>Adatpolitika</target>
-      </trans-unit>
-      <trans-unit id="Your ShapeShift account is not verified.">
-        <source>Your ShapeShift account is not verified.</source>
-        <target>A Shapeshift számlád nincs hitelesítve.</target>
-      </trans-unit>
-      <trans-unit id="Complete verification">
-        <source>Complete verification</source>
-        <target>Teljes hitelesítés</target>
-      </trans-unit>
-      <trans-unit id="Try to sign in again">
-        <source>Try to sign in again</source>
-        <target>Próbálj meg újra belépni</target>
-      </trans-unit>
-      <trans-unit id="Sign in">
-        <source>Sign in</source>
-        <target>Belépés</target>
       </trans-unit>
       <trans-unit id="Setup EOS account">
         <source>Setup EOS account</source>

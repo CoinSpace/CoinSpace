@@ -413,18 +413,6 @@
         <source>Deposit address (%(symbol)s)</source>
         <target>Adresa primaoca (%(symbol)s)</target>
       </trans-unit>
-      <trans-unit id="Send up to :depositMax :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
-        <source>Send up to %(depositMax)s %(depositSymbol)s to deposit address.
-It will be converted into %(toSymbol)s, and sent to
- %(toAddress)s</source>
-        <target>Pošalji do %(depositMax)s %(depositSymbol)s na adresu primaoca.
-Biće konvertovano u %(toSymbol)s i poslato na
- %(toAddress)s</target>
-      </trans-unit>
-      <trans-unit id="Deposit minimum">
-        <source>Deposit minimum</source>
-        <target>Minimalni depozit</target>
-      </trans-unit>
       <trans-unit id="amount :toSymbol have been delivered to :toAddress">
         <source>%(amount)s %(toSymbol)s have been delivered to
  %(toAddress)s</source>
@@ -706,22 +694,6 @@ Biće konvertovano u %(toSymbol)s i poslato na
       <trans-unit id="Privacy Policy">
         <source>Privacy Policy</source>
         <target>Politika privatnosti</target>
-      </trans-unit>
-      <trans-unit id="Your ShapeShift account is not verified.">
-        <source>Your ShapeShift account is not verified.</source>
-        <target>Vaš ShapeShift nalog nije verifikovan.</target>
-      </trans-unit>
-      <trans-unit id="Complete verification">
-        <source>Complete verification</source>
-        <target>Izvrši verifikaciju</target>
-      </trans-unit>
-      <trans-unit id="Try to sign in again">
-        <source>Try to sign in again</source>
-        <target>Pokušajte da se ponovo prijavite</target>
-      </trans-unit>
-      <trans-unit id="Sign in">
-        <source>Sign in</source>
-        <target>Prijavite se</target>
       </trans-unit>
       <trans-unit id="Setup EOS account">
         <source>Setup EOS account</source>
