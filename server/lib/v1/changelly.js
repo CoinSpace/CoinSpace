@@ -8,7 +8,7 @@ const URL = 'https://api.changelly.com';
 const { CHANGELLY_API_SECRET } = process.env;
 const { CHANGELLY_API_KEY } = process.env;
 
-const PRIORITY_SYMBOLS = ['BTC', 'BCH', 'BSV', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH'];
+const PRIORITY_SYMBOLS = ['BTC', 'BCH', 'BSV', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH', 'USDT'];
 
 function getCoins() {
   return request('getCurrenciesFull', {}).then((currencies) => {
@@ -16,7 +16,7 @@ function getCoins() {
       return currency.enabled;
     }).map((currency) => {
       return {
-        name: currency.fullName,
+        name: encodeName(currency.fullName),
         symbol: encodeSymbol(currency.name),
       };
     }).sort((a, b) => {
@@ -33,6 +33,8 @@ function getCoins() {
 }
 
 function getMinAmount(from, to) {
+  from = decodeSymbol(from);
+  to = decodeSymbol(to);
   return request('getMinAmount', { from, to }).then((minAmount) => {
     if (!minAmount) throw Error('Exchange is currently unavailable for this pair');
     return {
@@ -124,11 +126,21 @@ function getTransaction(id) {
 }
 
 function encodeSymbol(symbol) {
+  if (symbol === 'usdt20') return 'USDT';
+  if (symbol === 'usdt') return 'USDT (Omni)';
   return symbol.toUpperCase();
 }
 
 function decodeSymbol(symbol) {
+  if (symbol === 'USDT (Omni)') return 'usdt';
+  if (symbol === 'USDT') return 'usdt20';
   return symbol.toLowerCase();
+}
+
+function encodeName(name) {
+  if (name === 'Tether ERC20') return 'Tether USD';
+  if (name === 'Tether USD') return 'Tether Omni';
+  return name;
 }
 
 function request(method, params) {
