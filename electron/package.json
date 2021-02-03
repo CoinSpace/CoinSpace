@@ -41,7 +41,7 @@
     "@mahnunchik/maker-pkg": "6.0.0-beta.51",
     "@mahnunchik/publisher-gcs": "6.0.0-beta.51",
     "@mahnunchik/publisher-github": "6.0.0-beta.51",
-    "app-builder-lib": "^22.7.0",
-    "electron": "^8.3.0"
+    "app-builder-lib": "^22.9.1",
+    "electron": "^9.4.0"
   }
 }
