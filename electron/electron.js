@@ -12,8 +12,8 @@ const { isMac, isMas, isWindows, isLinux } = require('./lib/constants');
 const menuTemplate = require('./lib/menu');
 const openWindow = require('./lib/openWindow');
 const Sentry = require('@sentry/electron');
-const updater = require('./lib/updater');
 const schemes = require('./lib/schemes');
+require('./lib/updater');
 
 if (process.env.NODE_ENV === 'production') {
   log.transports.file.level = false;
@@ -109,8 +109,6 @@ app.whenReady().then(() => {
   } else {
     openWindow(extractUrlFromArgv(process.argv));
   }
-
-  updater({ log });
 
   app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the

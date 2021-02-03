@@ -3,6 +3,24 @@
 const { app, shell } = require('electron');
 const openWindow = require('./openWindow');
 const { isDevelopment, isMac } = require('./constants');
+const updater = require('./updater');
+
+const updateMenu = {
+  get label() {
+    switch (updater.state) {
+      case 'checking-for-update':
+        return 'Checking for Updates';
+      default:
+        return 'Check for Updates';
+    }
+  },
+  get enabled() {
+    return updater.state !== 'checking-for-update';
+  },
+  click() {
+    updater.checkForUpdates();
+  },
+};
 
 const helpMenu = {
   role: 'help',
@@ -28,12 +46,31 @@ const helpMenu = {
           await app.showAboutPanel();
         },
       },
+      ...(updater.supported ? [updateMenu] : []),
     ] : []),
   ],
 };
 
+const appMenu = {
+  get label() {
+    return app.name;
+  },
+  submenu: [
+    { role: 'about' },
+    ...(updater.supported ? [updateMenu] : []),
+    { type: 'separator' },
+    { role: 'services' },
+    { type: 'separator' },
+    { role: 'hide' },
+    { role: 'hideOthers' },
+    { role: 'unhide' },
+    { type: 'separator' },
+    { role: 'quit' },
+  ],
+};
+
 const template = [
-  ...(isMac ? [{ role: 'appMenu' }] : []),
+  ...(isMac ? [appMenu] : []),
   { role: 'fileMenu' },
   { role: 'editMenu' },
   // View submenu
