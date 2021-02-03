@@ -32,6 +32,15 @@ function getCoins() {
   });
 }
 
+function getMinAmount(from, to) {
+  return request('getMinAmount', { from, to }).then((minAmount) => {
+    if (!minAmount) throw Error('Exchange is currently unavailable for this pair');
+    return {
+      minAmount: prettyNumber(minAmount),
+    };
+  });
+}
+
 function estimate(from, to, amount) {
   from = decodeSymbol(from);
   to = decodeSymbol(to);
@@ -41,6 +50,7 @@ function estimate(from, to, amount) {
       to,
       amount,
     }]),
+    // deprecated (not used since v3.0.7)
     request('getMinAmount', {
       from,
       to,
@@ -144,6 +154,7 @@ function request(method, params) {
 
 module.exports = {
   getCoins,
+  getMinAmount,
   estimate,
   validateAddress,
   createTransaction,

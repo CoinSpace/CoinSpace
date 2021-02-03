@@ -11,6 +11,17 @@ function getCoins() {
   });
 }
 
+function getMinAmount(fromSymbol, toSymbol) {
+  return request({
+    url: urlRoot + 'api/v1/changelly/getMinAmount',
+    params: {
+      from: fromSymbol,
+      to: toSymbol,
+    },
+    id: true,
+  });
+}
+
 function estimate(fromSymbol, toSymbol, amount) {
   return request({
     url: urlRoot + 'api/v1/changelly/estimate',
@@ -61,6 +72,7 @@ function getTransaction(id) {
 
 module.exports = {
   getCoins,
+  getMinAmount,
   estimate,
   validateAddress,
   createTransaction,

@@ -186,7 +186,18 @@ router.get('/changelly/getCoins', (req, res) => {
   changelly.getCoins().then((coins) => {
     res.status(200).send(coins);
   }).catch((err) => {
-    res.status(400).send(err);
+    res.status(400).send({ error: err.message });
+  });
+});
+
+router.get('/changelly/getMinAmount', (req, res) => {
+  const from = req.query.from || '';
+  const to = req.query.to || '';
+  if (!from || !to) return res.status(400).json({ error: 'Bad request' });
+  changelly.getMinAmount(from, to).then((data) => {
+    res.status(200).send(data);
+  }).catch((err) => {
+    res.status(400).send({ error: err.message });
   });
 });
 
@@ -198,7 +209,7 @@ router.get('/changelly/estimate', (req, res) => {
   changelly.estimate(from, to, amount).then((data) => {
     res.status(200).send(data);
   }).catch((err) => {
-    res.status(400).send(err);
+    res.status(400).send({ error: err.message });
   });
 });
 
@@ -206,7 +217,7 @@ router.get('/changelly/validate/:address/:symbol', (req, res) => {
   changelly.validateAddress(req.params.address, req.params.symbol).then((data) => {
     res.status(200).send(data);
   }).catch((err) => {
-    res.status(400).send(err);
+    res.status(400).send({ error: err.message });
   });
 });
 
@@ -220,7 +231,7 @@ router.post('/changelly/createTransaction', (req, res) => {
   changelly.createTransaction(from, to, amount, address, refundAddress).then((data) => {
     res.status(200).send(data);
   }).catch((err) => {
-    res.status(400).send(err);
+    res.status(400).send({ error: err.message });
   });
 });
 
@@ -228,7 +239,7 @@ router.get('/changelly/transaction/:id', (req, res) => {
   changelly.getTransaction(req.params.id).then((data) => {
     res.status(200).send(data);
   }).catch((err) => {
-    res.status(400).send(err);
+    res.status(400).send({ error: err.message });
   });
 });
 

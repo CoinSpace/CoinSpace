@@ -133,17 +133,24 @@ module.exports = function(el) {
     debounceEstimate();
   }
 
-  const debounceEstimate = _.debounce(() => {
+  const debounceEstimate = _.debounce(async () => {
     if (!ractive.el.classList.contains('current')) return;
-    const fromAmount = ractive.find('#changelly_from_amount').value;
-    changelly.estimate(ractive.get('fromSymbol'), ractive.get('toSymbol'), fromAmount).then((data) => {
+    let fromAmount = ractive.find('#changelly_from_amount').value || -1;
+    try {
+      const { minAmount } = await changelly.getMinAmount(ractive.get('fromSymbol'), ractive.get('toSymbol'));
+      ractive.set('minAmount', minAmount);
+      if (parseFloat(fromAmount) < parseFloat(minAmount)) {
+        fromAmount = minAmount;
+        ractive.find('#changelly_from_amount').value = minAmount;
+        _fromAmount = minAmount;
+      }
+      const data = await changelly.estimate(ractive.get('fromSymbol'), ractive.get('toSymbol'), fromAmount);
       ractive.set('rate', data.rate);
       ractive.set('toAmount', data.result);
-      ractive.set('minAmount', data.minAmount);
       ractive.set('networkFee', data.networkFee);
       ractive.set('isLoadingEstimate', false);
       ractive.set('isFirstEstimate', false);
-    }).catch((err) => {
+    } catch (err) {
       ractive.set('rate', '?');
       ractive.set('toAmount', '?');
       ractive.set('minAmount', '?');
@@ -151,7 +158,7 @@ module.exports = function(el) {
       ractive.set('isLoadingEstimate', false);
       ractive.set('isFirstEstimate', false);
       console.error(err);
-    });
+    }
   }, 500);
 
   return ractive;
