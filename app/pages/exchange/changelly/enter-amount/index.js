@@ -135,13 +135,14 @@ module.exports = function(el) {
 
   const debounceEstimate = _.debounce(async () => {
     if (!ractive.el.classList.contains('current')) return;
-    let fromAmount = ractive.find('#changelly_from_amount').value || -1;
     try {
       const { minAmount } = await changelly.getMinAmount(ractive.get('fromSymbol'), ractive.get('toSymbol'));
+      const input = ractive.find('#changelly_from_amount');
+      let fromAmount = input.value || -1;
       ractive.set('minAmount', minAmount);
-      if (parseFloat(fromAmount) < parseFloat(minAmount)) {
+      if ((parseFloat(fromAmount) < parseFloat(minAmount)) && input !== document.activeElement) {
         fromAmount = minAmount;
-        ractive.find('#changelly_from_amount').value = minAmount;
+        input.value = minAmount;
         _fromAmount = minAmount;
       }
       const data = await changelly.estimate(ractive.get('fromSymbol'), ractive.get('toSymbol'), fromAmount);
