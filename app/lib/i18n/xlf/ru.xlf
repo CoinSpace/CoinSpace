@@ -247,7 +247,7 @@
       </trans-unit>
       <trans-unit id="Transaction Id:">
         <source>Transaction Id:</source>
-        <target>Код транзакции:</target>
+        <target>ID транзакции:</target>
       </trans-unit>
       <trans-unit id="Transaction Fee:">
         <source>Transaction Fee:</source>
@@ -1426,6 +1426,10 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Local currency">
         <source>Local currency</source>
         <target>Местная валюта</target>
+      </trans-unit>
+      <trans-unit id="Changelly Transaction ID">
+        <source>Changelly Transaction ID</source>
+        <target>Changelly ID транзакции</target>
       </trans-unit>
     </body>
   </file>

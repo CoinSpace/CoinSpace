@@ -247,11 +247,11 @@
       </trans-unit>
       <trans-unit id="Transaction Id:">
         <source>Transaction Id:</source>
-        <target>ID ng Transaksyon</target>
+        <target>ID ng Transaksyon:</target>
       </trans-unit>
       <trans-unit id="Transaction Fee:">
         <source>Transaction Fee:</source>
-        <target>Bayad sa Transaksyon</target>
+        <target>Bayad sa Transaksyon:</target>
       </trans-unit>
       <trans-unit id="Inputs:">
         <source>Inputs:</source>
@@ -1426,6 +1426,10 @@ Iko-convert ito sa %(toSymbol)s, at ipapadala sa
       <trans-unit id="Local currency">
         <source>Local currency</source>
         <target>Lokal na pera</target>
+      </trans-unit>
+      <trans-unit id="Changelly Transaction ID">
+        <source>Changelly Transaction ID</source>
+        <target>Changelly ID ng Transaksyon</target>
       </trans-unit>
     </body>
   </file>

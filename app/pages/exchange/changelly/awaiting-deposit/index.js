@@ -7,6 +7,7 @@ const qrcode = require('lib/qrcode');
 const details = require('lib/wallet/details');
 const showTooltip = require('widgets/modals/tooltip');
 const { translate } = require('lib/i18n');
+const clipboard = require('lib/clipboard');
 
 const extraIdLabels = {
   XLM: 'Memo',
@@ -23,11 +24,12 @@ module.exports = function(el) {
       depositSymbol: '',
       depositAddress: '-',
       extraId: '',
-      extraIdLabel: '',
+      extraIdLabel: 'Extra Id',
       networkFee: '',
       toAddress: '',
       toSymbol: '',
       rate: '',
+      changellyTransactionId: '',
       isPhonegap: process.env.BUILD_TYPE === 'phonegap',
     },
     partials: {
@@ -53,10 +55,14 @@ module.exports = function(el) {
       toAddress: context.toAddress,
       toSymbol: context.toSymbol,
       rate: context.rate,
+      changellyTransactionId: context.id,
     });
 
     showQRcode();
   });
+
+  clipboard(ractive.find('.js-deposit-address'));
+  clipboard(ractive.find('.js-extra-id'));
 
   ractive.on('before-hide', () => {
     clearInterval(interval);

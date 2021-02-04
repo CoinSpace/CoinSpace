@@ -1427,6 +1427,10 @@ Biće konvertovano u %(toSymbol)s i poslato na
         <source>Local currency</source>
         <target>Lokalna valuta</target>
       </trans-unit>
+      <trans-unit id="Changelly Transaction ID">
+        <source>Changelly Transaction ID</source>
+        <target>Changelly Identifikacioni broj transakcije</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

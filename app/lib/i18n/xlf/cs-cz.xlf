@@ -1427,6 +1427,10 @@ Bude to převedeno na %(toSymbol)s, a zasláno
         <source>Local currency</source>
         <target>Místní měna</target>
       </trans-unit>
+      <trans-unit id="Changelly Transaction ID">
+        <source>Changelly Transaction ID</source>
+        <target>Changelly Id transakce</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

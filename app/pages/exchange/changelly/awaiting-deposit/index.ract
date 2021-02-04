@@ -9,7 +9,7 @@
     <div class="_subtitle">{{translate("Awaiting deposit...")}}</div>
   </div>
 
-  <div class="instructions">
+  <div class="_instructions">
     {{translate("Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress", {
       depositAmount: depositAmount,
       depositSymbol: depositSymbol,
@@ -24,7 +24,9 @@
         <label>{{translate("Deposit address", {symbol: depositSymbol})}}</label>
       </div>
       <div class="csinput">
-        <div class="csinput__input" tabindex="0">{{depositAddress}}</div>
+        <div class="js-deposit-address csinput__input" tabindex="0" data-clipboard-text="{{depositAddress}}">
+          {{depositAddress}}
+        </div>
       </div>
     </div>
     <div class="csbtn" on-click="show-qr">
@@ -38,18 +40,18 @@
   <div class="qr-code" id="deposit_qr_canvas"></div>
   {{/isPhonegap}}
 
-  {{#extraId}}
-  <div class="csformgroup csformgroup--readonly">
+  <div class="csformgroup csformgroup--readonly" class-csformgroup--hidden="!extraId">
     <div class="csformgroup__input-group">
       <div class="csformgroup__input-group__header">
         <label>{{translate(extraIdLabel)}}</label>
       </div>
       <div class="csinput">
-        <div class="csinput__input" tabindex="0">{{extraId}}</div>
+        <div class="js-extra-id csinput__input" tabindex="0" data-clipboard-text="{{extraId}}">
+          {{extraId}}
+        </div>
       </div>
     </div>
   </div>
-  {{/extraId}}
 
   <div class="csformgroup csformgroup--readonly">
     <div class="csformgroup__input-group">
@@ -69,6 +71,15 @@
         </span>
       </div>
       {{networkFee}} {{toSymbol}}
+    </div>
+  </div>
+
+  <div class="csformgroup csformgroup--readonly">
+    <div class="csformgroup__input-group">
+      <div class="csformgroup__input-group__header">
+        <label>{{translate("Changelly Transaction ID")}}</label>
+      </div>
+      {{changellyTransactionId}}
     </div>
   </div>
 

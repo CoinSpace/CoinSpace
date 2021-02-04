@@ -1424,6 +1424,10 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Local currency</source>
         <target></target>
       </trans-unit>
+      <trans-unit id="Changelly Transaction ID">
+        <source>Changelly Transaction ID</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

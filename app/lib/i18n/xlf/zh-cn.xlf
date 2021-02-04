@@ -1427,6 +1427,10 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Local currency</source>
         <target>当地货币</target>
       </trans-unit>
+      <trans-unit id="Changelly Transaction ID">
+        <source>Changelly Transaction ID</source>
+        <target>Changelly 交易ID</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

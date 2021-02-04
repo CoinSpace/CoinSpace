@@ -1427,6 +1427,10 @@ itu akan dikonversi ke %(toSymbol)s, dan dikirim ke
         <source>Local currency</source>
         <target>Mata uang lokal</target>
       </trans-unit>
+      <trans-unit id="Changelly Transaction ID">
+        <source>Changelly Transaction ID</source>
+        <target>Changelly Id Transaksi</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

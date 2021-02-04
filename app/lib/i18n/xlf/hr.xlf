@@ -247,7 +247,7 @@
       </trans-unit>
       <trans-unit id="Transaction Id:">
         <source>Transaction Id:</source>
-        <target>Identifikacijski broj transakcije</target>
+        <target>Identifikacijski broj transakcije:</target>
       </trans-unit>
       <trans-unit id="Transaction Fee:">
         <source>Transaction Fee:</source>
@@ -1426,6 +1426,10 @@ Biće konvertiran u %(toSymbol)s i poslan na
       <trans-unit id="Local currency">
         <source>Local currency</source>
         <target>Lokalna valuta</target>
+      </trans-unit>
+      <trans-unit id="Changelly Transaction ID">
+        <source>Changelly Transaction ID</source>
+        <target>Changelly Identifikacijski broj transakcije</target>
       </trans-unit>
     </body>
   </file>

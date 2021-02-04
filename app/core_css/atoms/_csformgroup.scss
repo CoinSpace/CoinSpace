@@ -43,7 +43,6 @@
   }
 
   &__input-group {
-    @include noselect;
     flex: 1;
     min-width: 0;
     margin-right: 10px;
@@ -54,6 +53,7 @@
       font-size: $base_font_size--portrait;
     }
     &__header {
+      @include noselect;
       margin-bottom: 5px;
       position: relative;
       text-align: left;
@@ -97,5 +97,9 @@
     .csinput__input {
       cursor: default;
     }
+  }
+
+  &--hidden {
+    display: none;
   }
 }

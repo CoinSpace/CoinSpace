@@ -1427,6 +1427,10 @@ O valor será convertido em %(toSymbol)s e enviado para
         <source>Local currency</source>
         <target>Moeda local</target>
       </trans-unit>
+      <trans-unit id="Changelly Transaction ID">
+        <source>Changelly Transaction ID</source>
+        <target>Changelly ID da operação</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

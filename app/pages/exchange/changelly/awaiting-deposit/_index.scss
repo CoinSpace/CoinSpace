@@ -16,7 +16,7 @@
     }
   }
 
-  .instructions {
+  ._instructions {
     @include wrapdat;
     @include breakpoint(portrait) {
       font-size: $base_font_size--portrait;

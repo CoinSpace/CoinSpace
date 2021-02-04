@@ -353,5 +353,6 @@
   "Update": "Update",
   "A new version of Coin Wallet is available. Would you like to update it now?": "A new version of Coin Wallet is available. Would you like to update it now?",
   "General": "General",
-  "Local currency": "Local currency"
+  "Local currency": "Local currency",
+  "Changelly Transaction ID": "Changelly Transaction ID"
 }
