@@ -79,7 +79,9 @@
       <div class="csformgroup__input-group__header">
         <label>{{translate("Changelly Transaction ID")}}</label>
       </div>
-      {{changellyTransactionId}}
+      <div class="_tx-id">
+        {{changellyTransactionId}}
+      </div>
     </div>
   </div>
 
