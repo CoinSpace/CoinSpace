@@ -10,15 +10,23 @@ const updateMenu = {
     switch (updater.state) {
       case 'checking-for-update':
         return 'Checking for Updates';
+      case 'update-available':
+        return 'Updating...';
+      case 'update-downloaded':
+        return 'Restart to Update';
       default:
         return 'Check for Updates';
     }
   },
   get enabled() {
-    return updater.state !== 'checking-for-update';
+    return ['update-not-available', 'error'].includes(updater.state);
   },
   click() {
-    updater.checkForUpdates();
+    if (updater.state === 'update-downloaded') {
+      updater.quitAndInstall();
+    } else {
+      updater.checkForUpdates();
+    }
   },
 };
 

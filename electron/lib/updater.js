@@ -86,13 +86,23 @@ class Updater {
         autoUpdater.quitAndInstall();
       }
     });
+  }
 
+  launchCheckForUpdates() {
     // check for updates right away and keep checking later
     autoUpdater.checkForUpdates();
     setInterval(() => { autoUpdater.checkForUpdates(); }, 12 * 60 * 60 * 1000);
   }
 
+  quitAndInstall() {
+    autoUpdater.quitAndInstall();
+  }
+
   checkForUpdates() {
+    if (['checking-for-update', 'update-available', 'update-downloaded'].includes(this.state)) {
+      log.log(`already checked: ${this.state}`);
+      return;
+    }
     autoUpdater.checkForUpdates();
 
     new Promise((resolve) => {
