@@ -14,6 +14,7 @@ module.exports = function(el) {
       isCopied: false,
       checked: false,
       termsChecked: false,
+      IS_CLIPBOARD_SUPPORTED: Clipboard.isSupported(),
     },
   });
 

@@ -109,7 +109,6 @@ Ractive.defaults.data = {
   translate,
   BUILD_TYPE: process.env.BUILD_TYPE,
   BUILD_PLATFORM: process.env.BUILD_PLATFORM,
-  IS_CLIPBOARD_SUPPORTED: Clipboard.isSupported(),
 };
 
 Ractive.decorators['numbers'] = (node) => {
