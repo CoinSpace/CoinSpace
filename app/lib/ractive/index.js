@@ -4,7 +4,6 @@ if (process.env.NODE_ENV === 'production') {
   Ractive.DEBUG = false;
 }
 const { translate } = require('lib/i18n');
-const Clipboard = require('clipboard');
 
 // extracted from https://github.com/RactiveJS/Ractive-events-keys
 const makeKeyDefinition = function( code ) {
