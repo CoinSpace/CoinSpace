@@ -80,8 +80,7 @@ async function registerWallet(pin) {
     seed: 'private',
     id: false,
   });
-  seeds.set('public', deviceSeed, publicToken);
-  seeds.set('private', walletSeed, privateToken);
+  seeds.set('public', deviceSeed);
   LS.setEncryptedSeed('public', encryption.encrypt(deviceSeed, publicToken));
   LS.setEncryptedSeed('private', encryption.encrypt(walletSeed, privateToken));
   LS.setPinKey(pinKey);
