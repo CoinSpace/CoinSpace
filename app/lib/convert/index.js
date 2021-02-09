@@ -25,12 +25,13 @@ function cryptoToFiat(unit, exchangeRate) {
   if (unit == undefined || exchangeRate == undefined) return;
   const rate = Big(exchangeRate);
   const value = Big(unit).times(rate);
-  if (value.gt(1.0)) {
-    return value.toFixed(2);
-  } else {
-    const decimals = rate.toFixed().includes('.') ? rate.toFixed().split('.')[1].length : 2;
-    return value.toFixed(decimals > 2 ? decimals : 2);
+  let decimals = 2;
+  if (value.lte(1.0) && rate.toFixed().includes('.')) {
+    const rateDecimals = rate.toFixed().split('.')[1].length;
+    decimals = rateDecimals > 2 ? rateDecimals : 2;
   }
+  // strip leading zeros
+  return Big(value.toFixed(decimals)).toFixed();
 }
 
 function fiatToCrypto(value, exchangeRate) {
