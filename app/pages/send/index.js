@@ -41,7 +41,7 @@ const FACTORS = {
 };
 
 module.exports = function(el) {
-  const rates = ticker.getRates()[getCrypto()._id] || {};
+  const rates = ticker.getRates(getCrypto()._id);
   const currency = details.get('systemInfo').preferredCurrency;
 
   const ractive = new Ractive({
@@ -108,8 +108,8 @@ module.exports = function(el) {
     setFiatFromCrypto();
   });
 
-  emitter.on('rates-updated', (rates) => {
-    ractive.set('rates', rates[getCrypto()._id] || {});
+  emitter.on('rates-updated', () => {
+    ractive.set('rates', ticker.getRates(getCrypto()._id));
     ractive.set('isCryptoInputHidden', !ractive.get('rates')[ractive.get('currency')]);
     setFiatFromCrypto();
   });
@@ -265,11 +265,7 @@ module.exports = function(el) {
   });
 
   ractive.on('fiat-to-crypto', () => {
-    const fiat = ractive.find('#fiat').value || 0;
-
-    const exchangeRate = ractive.get('rates')[ractive.get('currency')];
-    const crypto = fiat ? denormalizeCrypto(fiatToCrypto(fiat, exchangeRate)) : '';
-    ractive.find('#crypto').value = crypto || '';
+    setCryptoFromFiat();
     setFees();
   });
 
@@ -358,6 +354,14 @@ module.exports = function(el) {
 
     const fiat = crypto ? cryptoToFiat(normalizeCrypto(crypto), exchangeRate) : '';
     ractive.find('#fiat').value = fiat || '';
+  }
+
+  function setCryptoFromFiat() {
+    const fiat = ractive.find('#fiat').value || 0;
+
+    const exchangeRate = ractive.get('rates')[ractive.get('currency')];
+    const crypto = fiat ? denormalizeCrypto(fiatToCrypto(fiat, exchangeRate)) : '';
+    ractive.find('#crypto').value = crypto || '';
   }
 
   function validateAndShowConfirm(options) {

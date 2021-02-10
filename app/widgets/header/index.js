@@ -12,7 +12,7 @@ const { getCrypto } = require('lib/crypto');
 module.exports = function(el) {
 
   const state = {
-    rates: ticker.getRates()[getCrypto()._id] || {},
+    rates: ticker.getRates(getCrypto()._id),
     currency: details.get('systemInfo').preferredCurrency,
     showFiat: false,
   };
@@ -81,8 +81,8 @@ module.exports = function(el) {
     updateBalance();
   });
 
-  emitter.on('rates-updated', (rates) => {
-    state.rates = rates[getCrypto()._id] || {};
+  emitter.on('rates-updated', () => {
+    state.rates = ticker.getRates(getCrypto()._id);
     updateBalance();
   });
 

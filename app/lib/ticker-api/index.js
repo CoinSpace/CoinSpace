@@ -37,11 +37,16 @@ function init(crypto) {
   });
 }
 
-function getRates() {
+function getAllRates() {
   return rates;
+}
+
+function getRates(cryptoId) {
+  return rates[cryptoId] || {};
 }
 
 module.exports = {
   init,
+  getAllRates,
   getRates,
 };

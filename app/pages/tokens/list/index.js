@@ -25,7 +25,7 @@ module.exports = function(el) {
     data: {
       currentCrypto: null,
       currency: null,
-      rates: ticker.getRates(),
+      rates: ticker.getAllRates(),
       isCurrentCrypto(crypto) {
         return isCryptoEqual(crypto, this.get('currentCrypto'));
       },
@@ -54,7 +54,7 @@ module.exports = function(el) {
 
   emitter.on('wallet-ready', () => {
     isEnabled = true;
-    ractive.set('rates', ticker.getRates());
+    ractive.set('rates', ticker.getAllRates());
   });
 
   emitter.on('currency-changed', (currency) => {
