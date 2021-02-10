@@ -73,7 +73,7 @@
 
   <div class="_section">
     <div class="_list_item _btn" on-click="support">
-      <div class="_label">{{translate("Support")}}</div>
+      <div class="_label">{{translate("Support")}} (English)</div>
       <div class="_arrow">{{>svg_arrow}}</div>
     </div>
     <div class="_list_item _btn" on-click="about">
