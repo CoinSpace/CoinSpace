@@ -14,7 +14,7 @@ async function init() {
   isInited = true;
   try {
     const data = await request({
-      url: 'https://api.moonpay.io/v3/ip_address',
+      url: 'https://api.moonpay.com/v3/ip_address',
       params: { apiKey },
       hideFlashError: true,
     });

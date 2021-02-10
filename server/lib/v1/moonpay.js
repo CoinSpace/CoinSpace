@@ -10,7 +10,7 @@ function save(_id, data) {
 }
 
 function getCurrenciesFromAPI() {
-  return axios.get('https://api.moonpay.io/v3/currencies', {
+  return axios.get('https://api.moonpay.com/v3/currencies', {
     params: {
       apiKey: API_KEY,
     },
@@ -57,7 +57,7 @@ function getCurrenciesFromAPI() {
 }
 
 function getCountriesFromAPI() {
-  return axios.get('https://api.moonpay.io/v3/countries').then((response) => {
+  return axios.get('https://api.moonpay.com/v3/countries').then((response) => {
     const { data } = response;
     if (!data || !data.length) throw new Error('Bad moonpay response');
 
