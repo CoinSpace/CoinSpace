@@ -61,8 +61,8 @@ module.exports = function(el) {
     showQRcode();
   });
 
-  clipboard(ractive.find('.js-deposit-address'));
-  clipboard(ractive.find('.js-extra-id'));
+  clipboard(ractive, '.js-deposit-address', 'depositAddress');
+  clipboard(ractive, '.js-extra-id', 'extraId');
 
   ractive.on('before-hide', () => {
     clearInterval(interval);
