@@ -139,7 +139,7 @@ module.exports = function(el) {
         // eslint-disable-next-line max-len
         'Not all address types are fully compatible on all platforms, so it is important to use a compatible address (:url).',
         // eslint-disable-next-line max-len
-        { url: "<a href=\"\" onclick=\"return window.safeOpen('https://coin.space/all-about-address-types/', '_blank');\">" + translate('more info') + "</a>" }
+        { url: "<a href=\"\" onclick=\"return window.safeOpen('https://coin.space/all-about-address-types/', '_blank');\">" + translate('more info') + '</a>' }
       );
     }
     showTooltip({

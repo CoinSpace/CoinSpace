@@ -5,7 +5,7 @@ const Velocity = require('velocity-animate');
 function animateProfile(el, props, display, context, callback) {
   context.set('animating', true);
   Velocity.animate(el, props, {
-    easing: "ease",
+    easing: 'ease',
     duration: 300,
     complete() {
       context.set('animating', false);

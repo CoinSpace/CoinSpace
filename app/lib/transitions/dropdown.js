@@ -9,20 +9,20 @@ function animateDropdown(el, icon, props, options) {
 
   // arrow
   Velocity.animate(icon, props.icon, {
-    easing: "ease",
+    easing: 'ease',
     duration: 300,
   });
 
   // container
   Velocity.animate(el, props.container, {
-    easing: "linear",
+    easing: 'linear',
     duration: 400,
     display: options.display,
   });
 
   // content
   Velocity.animate(childEl, props.content, {
-    easing: "ease",
+    easing: 'ease',
     duration: 300,
     delay: options.contentDelay || undefined,
     complete() {

@@ -92,7 +92,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env.VERSION': JSON.stringify(`v${pkg.version}`),
-      'process.env.COMMIT':  JSON.stringify(COMMIT),
+      'process.env.COMMIT': JSON.stringify(COMMIT),
     }),
   ],
 };

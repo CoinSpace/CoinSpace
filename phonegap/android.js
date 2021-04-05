@@ -41,13 +41,13 @@ async function run() {
   if (process.env.RELEASE) {
     cordova('build android --release');
     utils.shell(
-      `jarsigner -sigalg SHA1withRSA -digestalg SHA1 -keystore ../release.keystore \
-      -storepass coinspace platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk coinspace`,
+      'jarsigner -sigalg SHA1withRSA -digestalg SHA1 -keystore ../release.keystore \
+      -storepass coinspace platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk coinspace',
       { cwd: buildPath }
     );
     utils.shell(
-      `zipalign -f 4 platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk \
-      ../deploy/coinspace-release.apk`,
+      'zipalign -f 4 platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk \
+      ../deploy/coinspace-release.apk',
       { cwd: buildPath }
     );
     const destination = `${pkg.version}-${process.env.TRAVIS_BRANCH || 'local'}/${pkg.name}-${process.env.BUILD_PLATFORM}-${pkg.version}.apk`;

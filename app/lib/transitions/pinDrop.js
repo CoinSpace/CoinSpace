@@ -41,7 +41,7 @@ function pulse(pulseEl) {
         opacity: 0,
         scale: 1.0,
       }, {
-        easing: "ease-out",
+        easing: 'ease-out',
         duration: 800,
       });
     },

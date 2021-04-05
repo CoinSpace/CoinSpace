@@ -86,7 +86,7 @@ function getButtonLabel() {
   } else if (os === 'android') {
     return message + translate('Fingerprint');
   } else {
-    return message +  translate('Biometrics');
+    return message + translate('Biometrics');
   }
 }
 

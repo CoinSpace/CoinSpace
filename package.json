@@ -75,7 +75,8 @@
     "dotenv": "^4.0.0",
     "dotenv-webpack": "^1.5.4",
     "ejs-loader": "^0.3.0",
-    "eslint": "^7.15.0",
+    "eslint": "^7.23.0",
+    "eslint-config-coinspace": "^1.1.3",
     "evp_bytestokey": "^1.0.3",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
@@ -116,7 +117,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "@coinspace"
+      "coinspace"
     ],
     "env": {
       "node": true,

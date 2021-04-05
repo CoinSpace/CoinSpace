@@ -20,7 +20,7 @@ class Updater {
     }
 
     if (process.env.NODE_ENV !== 'production') {
-      log.log(`Electron's auto updater must be used in production environment`);
+      log.log('Electron\'s auto updater must be used in production environment');
       return this;
     }
 

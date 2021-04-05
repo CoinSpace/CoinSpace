@@ -74,15 +74,15 @@ async function run() {
 
   if (process.env.CI) {
     utils.shell(
-      `set -o pipefail && xcodebuild -workspace Coin.xcworkspace -scheme Coin \
+      'set -o pipefail && xcodebuild -workspace Coin.xcworkspace -scheme Coin \
       -configuration AppStoreDistribution archive \
-      -archivePath Coin.xcarchive | xcpretty`,
+      -archivePath Coin.xcarchive | xcpretty',
       { cwd: path.join(buildPath, 'platforms/ios') }
     );
     utils.shell(
-      `set -o pipefail && xcodebuild -exportArchive -archivePath Coin.xcarchive \
+      'set -o pipefail && xcodebuild -exportArchive -archivePath Coin.xcarchive \
       -exportOptionsPlist ../../../iosExportOptions.plist \
-      -exportPath ../../../deploy | xcpretty`,
+      -exportPath ../../../deploy | xcpretty',
       { cwd: path.join(buildPath, 'platforms/ios') }
     );
     const destination = `${pkg.version}-${process.env.TRAVIS_BRANCH || 'local'}/${pkg.name}-${pkg.version}.ipa`;
@@ -102,8 +102,8 @@ function updatePlist(plistPath, update) {
 }
 
 async function addWatchApp() {
-  utils.shell(`git clone https://github.com/CoinSpace/cs-watchapp-ios.git`, { cwd: buildPath });
-  utils.shell(`cd cs-watchapp-ios && git checkout ca942f2afc90062b5100d90332f8acafdff85788 -q`, { cwd: buildPath });
+  utils.shell('git clone https://github.com/CoinSpace/cs-watchapp-ios.git', { cwd: buildPath });
+  utils.shell('cd cs-watchapp-ios && git checkout ca942f2afc90062b5100d90332f8acafdff85788 -q', { cwd: buildPath });
   utils.shell(`ln -s ${path.resolve(buildPath, 'cs-watchapp-ios/WatchApp')} ./platforms/ios/WatchApp`, { cwd: buildPath });
   utils.shell(`ln -s ${path.resolve(buildPath, 'cs-watchapp-ios/WatchAppExtension')} ./platforms/ios/WatchAppExtension`, { cwd: buildPath });
 
@@ -219,7 +219,7 @@ async function addWatchApp() {
   // add pods
   const watchAppPodfile = fse.readFileSync(path.resolve(buildPath, 'cs-watchapp-ios/WatchAppExtension/Podfile'));
   fse.appendFileSync(path.resolve(buildPath, 'platforms/ios/Podfile'), watchAppPodfile);
-  utils.shell(`pod install`, { cwd: path.join(buildPath, 'platforms/ios') });
+  utils.shell('pod install', { cwd: path.join(buildPath, 'platforms/ios') });
 }
 
 process.on('unhandledRejection', (err) => {

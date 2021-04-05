@@ -26,7 +26,7 @@ function encode(string, options) {
 
   const cells = qr(string).modules;
 
-  const tileW = width  / cells.length;
+  const tileW = width / cells.length;
   const tileH = height / cells.length;
 
   for (let r = 0; r < cells.length ; ++r) {
