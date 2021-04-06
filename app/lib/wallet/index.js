@@ -199,6 +199,13 @@ function getExtraOptions(crypto) {
   return options;
 }
 
+async function updateWallet() {
+  if (typeof state.wallet.update === 'function') {
+    await state.wallet.update();
+    emitter.emit('wallet-update');
+  }
+}
+
 async function removeAccount() {
   await request({
     url: `${urlRoot}api/v2/wallet`,
@@ -279,6 +286,7 @@ module.exports = {
   setUsername,
   getWallet,
   initWallet,
+  updateWallet,
   validateSend,
   getDestinationInfo,
   setToAlias,

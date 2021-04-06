@@ -4,7 +4,7 @@ const Ractive = require('lib/ractive');
 const Big = require('big.js');
 const emitter = require('lib/emitter');
 const details = require('lib/wallet/details');
-const { getWallet } = require('lib/wallet');
+const { getWallet, updateWallet } = require('lib/wallet');
 const { setToAlias } = require('lib/wallet');
 const { showError } = require('widgets/modals/flash');
 const { showInfo } = require('widgets/modals/flash');
@@ -79,6 +79,9 @@ module.exports = function(el) {
   initEosSetup(ractive.find('#eos-setup'));
 
   ractive.on('before-show', () => {
+    if (!isSyncing) {
+      updateWallet();
+    }
     const network = getWallet().networkName;
     ractive.set('isEthereum', network === 'ethereum');
     ractive.set('isRipple', network === 'ripple');
@@ -205,6 +208,11 @@ module.exports = function(el) {
       ractive.set('feeDenomination', wallet.denomination);
     }
     setFiatFromCrypto();
+  });
+
+  emitter.on('wallet-update', () => {
+    setFees();
+    ractive.fire('change-fee');
   });
 
   function setFees(setDefaultFeeOption) {
