@@ -125,6 +125,10 @@
         <source>Please enter an amount above %(dust)s</source>
         <target>%(dust)s 이상의 금액을 입력해주십시오</target>
       </trans-unit>
+      <trans-unit id="Please enter an amount below">
+        <source>Please enter an amount below %(max)s</source>
+        <target>%(max)s 미만의 금액을 입력하십시오</target>
+      </trans-unit>
       <trans-unit id="Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.">
         <source>Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.</source>
         <target>일시적으로 일부 자금을 사용할 수 없습니다. 이 거래를 전송하려면 먼저 보류 중인 거래가 확인되기를 기다려야 합니다.</target>

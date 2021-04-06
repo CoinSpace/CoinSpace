@@ -28,6 +28,9 @@ module.exports = function(el) {
     },
   });
 
+  let _maxAmount;
+  let _fromAmount = '1';
+
   const fromSymbolObserver = ractive.observe('fromSymbol', (symbol, old) => {
     if (!old) return;
     if (symbol === ractive.get('toSymbol')) {
@@ -44,7 +47,6 @@ module.exports = function(el) {
     return estimate();
   });
 
-  let _fromAmount = '1';
   ractive.on('input-from-amount', () => {
     const fromAmount = ractive.find('#changelly_from_amount').value;
     if (fromAmount === _fromAmount) return;
@@ -94,14 +96,19 @@ module.exports = function(el) {
     if (ractive.get('rate') === '?') return showError({ message: 'Exchange is currently unavailable for this pair' });
 
     const fromAmount = parseFloat(ractive.find('#changelly_from_amount').value) || -1;
+    const fromSymbol = ractive.get('fromSymbol');
     const minAmount = parseFloat(ractive.get('minAmount')) || 0;
     if (fromAmount < minAmount) {
-      const interpolations = { dust: ractive.get('minAmount') || 0 };
+      const interpolations = { dust: `${ractive.get('minAmount') || 0} ${fromSymbol}` };
       return showError({ message: 'Please enter an amount above', interpolations });
+    }
+    if (_maxAmount && fromAmount > _maxAmount) {
+      const interpolations = { max: `${_maxAmount} ${fromSymbol}` };
+      return showError({ message: 'Please enter an amount below', interpolations });
     }
 
     const data = {
-      fromSymbol: ractive.get('fromSymbol'),
+      fromSymbol,
       fromAmount: ractive.find('#changelly_from_amount').value,
       toSymbol: ractive.get('toSymbol'),
       networkFee: ractive.get('networkFee'),
@@ -136,7 +143,10 @@ module.exports = function(el) {
   const debounceEstimate = _.debounce(async () => {
     if (!ractive.el.classList.contains('current')) return;
     try {
-      const { minAmount } = await changelly.getMinAmount(ractive.get('fromSymbol'), ractive.get('toSymbol'));
+      const fromSymbol = ractive.get('fromSymbol');
+      const toSymbol = ractive.get('toSymbol');
+      const { minAmount, maxAmount } = await changelly.getPairsParams(fromSymbol, toSymbol);
+      _maxAmount = parseFloat(maxAmount) || 0;
       const input = ractive.find('#changelly_from_amount');
       let fromAmount = input.value || -1;
       ractive.set('minAmount', minAmount);
@@ -145,7 +155,7 @@ module.exports = function(el) {
         input.value = minAmount;
         _fromAmount = minAmount;
       }
-      const data = await changelly.estimate(ractive.get('fromSymbol'), ractive.get('toSymbol'), fromAmount);
+      const data = await changelly.estimate(fromSymbol, toSymbol, fromAmount);
       ractive.set('rate', data.rate);
       ractive.set('toAmount', data.result);
       ractive.set('networkFee', data.networkFee);

@@ -32,6 +32,7 @@ function getCoins() {
   });
 }
 
+// deprecated since v3.0.8
 function getMinAmount(from, to) {
   from = decodeSymbol(from);
   to = decodeSymbol(to);
@@ -39,6 +40,18 @@ function getMinAmount(from, to) {
     if (!minAmount) throw Error('Exchange is currently unavailable for this pair');
     return {
       minAmount: prettyNumber(minAmount),
+    };
+  });
+}
+
+function getPairsParams(from, to) {
+  from = decodeSymbol(from);
+  to = decodeSymbol(to);
+  return request('getPairsParams', [{ from, to }]).then((result) => {
+    if (!result) throw Error('Exchange is currently unavailable for this pair');
+    return {
+      minAmount: prettyNumber(result[0].minAmountFloat),
+      maxAmount: prettyNumber(result[0].maxAmountFloat),
     };
   });
 }
@@ -167,6 +180,7 @@ function request(method, params) {
 module.exports = {
   getCoins,
   getMinAmount,
+  getPairsParams,
   estimate,
   validateAddress,
   createTransaction,

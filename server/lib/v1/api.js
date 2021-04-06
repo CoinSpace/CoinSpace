@@ -190,11 +190,23 @@ router.get('/changelly/getCoins', (req, res) => {
   });
 });
 
+// deprecated since v3.0.8
 router.get('/changelly/getMinAmount', (req, res) => {
   const from = req.query.from || '';
   const to = req.query.to || '';
   if (!from || !to) return res.status(400).json({ error: 'Bad request' });
   changelly.getMinAmount(from, to).then((data) => {
+    res.status(200).send(data);
+  }).catch((err) => {
+    res.status(400).send({ error: err.message });
+  });
+});
+
+router.get('/changelly/getPairsParams', (req, res) => {
+  const from = req.query.from || '';
+  const to = req.query.to || '';
+  if (!from || !to) return res.status(400).json({ error: 'Bad request' });
+  changelly.getPairsParams(from, to).then((data) => {
     res.status(200).send(data);
   }).catch((err) => {
     res.status(400).send({ error: err.message });

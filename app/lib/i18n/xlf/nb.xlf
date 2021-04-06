@@ -125,6 +125,10 @@
         <source>Please enter an amount above %(dust)s</source>
         <target>Vennglist legg in mengde høyere enn %(dust)s</target>
       </trans-unit>
+      <trans-unit id="Please enter an amount below">
+        <source>Please enter an amount below %(max)s</source>
+        <target>Vennligst skriv inn et beløp under %(max)s</target>
+      </trans-unit>
       <trans-unit id="Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.">
         <source>Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.</source>
         <target>Noen midler er midlertidlig utilgjengelige. For å sende denne transaksjonen må du først vente til dine ventende midler er bekreftet.</target>

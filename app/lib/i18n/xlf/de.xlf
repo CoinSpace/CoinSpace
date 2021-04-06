@@ -123,7 +123,11 @@
       </trans-unit>
       <trans-unit id="Please enter an amount above">
         <source>Please enter an amount above %(dust)s</source>
-        <target>Bitte gebe einen höheren Betrag als %(dust)s an.</target>
+        <target>Bitte gebe einen höheren Betrag als %(dust)s an</target>
+      </trans-unit>
+      <trans-unit id="Please enter an amount below">
+        <source>Please enter an amount below %(max)s</source>
+        <target>Bitte geben Sie einen Betrag unter %(max)s ein</target>
       </trans-unit>
       <trans-unit id="Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.">
         <source>Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.</source>

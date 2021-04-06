@@ -125,6 +125,10 @@
         <source>Please enter an amount above %(dust)s</source>
         <target>Adj meg egy fentinél magasabb összeget %(dust)s</target>
       </trans-unit>
+      <trans-unit id="Please enter an amount below">
+        <source>Please enter an amount below %(max)s</source>
+        <target>Kérjük, adjon meg egy %(max)s alatti összeget</target>
+      </trans-unit>
       <trans-unit id="Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.">
         <source>Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.</source>
         <target>Egyes összegek ideiglenesen nem elérhetőek. Küldéshez szükséged van a folyamatban lévő tranzakciók megerősítésére.</target>

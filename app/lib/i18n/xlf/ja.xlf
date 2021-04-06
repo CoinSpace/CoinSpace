@@ -125,6 +125,10 @@
         <source>Please enter an amount above %(dust)s</source>
         <target>%(dust)s以上の額をご入力下さい</target>
       </trans-unit>
+      <trans-unit id="Please enter an amount below">
+        <source>Please enter an amount below %(max)s</source>
+        <target>%(max)s未満の金額を入力してください</target>
+      </trans-unit>
       <trans-unit id="Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.">
         <source>Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.</source>
         <target>残高のうち、未だご利用いただけないBTCがあります。関連取引が確認されるまで少々お待ち下さい。</target>

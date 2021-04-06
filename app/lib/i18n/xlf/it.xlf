@@ -125,6 +125,10 @@
         <source>Please enter an amount above %(dust)s</source>
         <target>Inserisci un importo superiore a %(dust)s</target>
       </trans-unit>
+      <trans-unit id="Please enter an amount below">
+        <source>Please enter an amount below %(max)s</source>
+        <target>Inserisci un importo inferiore a %(max)s</target>
+      </trans-unit>
       <trans-unit id="Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.">
         <source>Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first.</source>
         <target>Parte dei tuoi fondi non sono disponibili. Per inviare questa transazione, devi aspettare che le tue transazioni pendenti siano confermate.</target>
