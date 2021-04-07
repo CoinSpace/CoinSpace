@@ -51,8 +51,6 @@
     "@coinspace/cs-ripple-wallet": "^1.3.2",
     "@coinspace/cs-stellar-wallet": "^1.3.3",
     "@coinspace/cs-wallet": "^0.31.1",
-    "@coinspace/eslint-config": "^1.0.2",
-    "@moonpay/browser": "^1.0.3",
     "@sentry/browser": "^5.14.2",
     "@sentry/cli": "^1.51.1",
     "@simplewebauthn/browser": "^1.0.0",
