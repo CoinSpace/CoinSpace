@@ -111,15 +111,14 @@ async function loginWithPin(pin) {
 async function loginWithTouchId(showSpinner) {
   if (process.env.BUILD_TYPE === 'phonegap') {
     await touchId.phonegap();
-    const pin = LS.getPin();
     showSpinner();
+    const pin = LS.getPin();
     if (LS.isRegisteredLegacy()) {
       return migrateLegacyWallet(pin);
     }
     return loginWithPin(pin);
   } else {
-    const publicToken = await touchId.publicToken();
-    showSpinner();
+    const publicToken = await touchId.publicToken(showSpinner);
     seeds.unlock('public', publicToken);
     await Promise.all([details.init(), settings.init()]);
     await initWallet();

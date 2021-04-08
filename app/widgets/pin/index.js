@@ -127,6 +127,7 @@ function open(options) {
   };
 
   function enter(number) {
+    if (ractive.get('isLoading')) return;
     const pin = ractive.get('pin');
     if (pin.length === 4) return;
     ractive.set('pin', pin + number);
