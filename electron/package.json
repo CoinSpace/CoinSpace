@@ -42,6 +42,6 @@
     "@mahnunchik/publisher-gcs": "6.0.0-beta.54",
     "@mahnunchik/publisher-github": "6.0.0-beta.54",
     "app-builder-lib": "^22.9.1",
-    "electron": "^9.4.0"
+    "electron": "^10.4.2"
   }
 }

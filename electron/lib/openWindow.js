@@ -28,6 +28,7 @@ function openWindow(deeplink) {
       webPreferences: {
         devTools: isDevelopment,
         nodeIntegration: true,
+        contextIsolation: false,
       },
     });
 

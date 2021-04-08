@@ -19,6 +19,8 @@ if (process.env.NODE_ENV === 'production') {
   log.transports.file.level = false;
 }
 
+log.log('versions', process.versions);
+
 if (require('electron-squirrel-startup')) return;
 
 // Suppress deprecation warning
