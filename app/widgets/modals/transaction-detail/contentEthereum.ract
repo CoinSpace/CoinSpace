@@ -44,5 +44,11 @@
     </code>
   </div>
 
+  <div class="_footer">
+    {{#if (isRBF && !isIncoming)}}
+    <div class="csbtn" on-click="accelerate">{{translate("Accelerate")}}</div>
+    {{/if}}
+  </div>
+
 </div>
 {{/transaction}}
