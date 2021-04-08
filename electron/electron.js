@@ -26,11 +26,6 @@ if (require('electron-squirrel-startup')) return;
 // Suppress deprecation warning
 app.allowRendererProcessReuse = true;
 
-const protocols = [
-  'coinspace',
-  ...schemes,
-];
-
 if (isWindows) {
   app.setAboutPanelOptions({
     iconPath: path.join(__dirname, 'resources/64x64.png'),
@@ -66,7 +61,7 @@ Sentry.init({
 const menu = Menu.buildFromTemplate(menuTemplate);
 Menu.setApplicationMenu(menu);
 
-protocols.forEach((item) => {
+schemes.forEach((item) => {
   if (!app.isDefaultProtocolClient(item)) {
     // Define custom protocol handler. Deep linking works on packaged versions of the application!
     app.setAsDefaultProtocolClient(item);
@@ -88,7 +83,7 @@ app.on('will-finish-launching', () => {
 
 function extractUrlFromArgv(argv) {
   return argv.find(arg => {
-    return protocols.some((item) => arg.startsWith(`${item}:`));
+    return schemes.some((item) => arg.startsWith(`${item}:`));
   });
 }
 
