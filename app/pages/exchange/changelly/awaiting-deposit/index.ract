@@ -25,7 +25,7 @@
       </div>
       <div class="csinput">
         <div class="js-deposit-address csinput__input" tabindex="0" data-clipboard-text="{{depositAddress}}">
-          {{depositAddress}}
+          {{#if isCopiedDepositAddress}}{{translate("Copied!")}}{{else}}{{depositAddress}}{{/if}}
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
       </div>
       <div class="csinput">
         <div class="js-extra-id csinput__input" tabindex="0" data-clipboard-text="{{extraId}}">
-          {{extraId}}
+          {{#if isCopiedExtraId}}{{translate("Copied!")}}{{else}}{{extraId}}{{/if}}
         </div>
       </div>
     </div>

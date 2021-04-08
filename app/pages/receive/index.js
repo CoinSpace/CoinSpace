@@ -45,7 +45,7 @@ module.exports = function(el) {
 
   initEosSetup(ractive.find('#eos-setup'));
 
-  clipboard(ractive, '.js-address-input', 'address');
+  clipboard(ractive, '.js-address-input', 'isCopiedAddress');
 
   emitter.on('wallet-ready', () => {
     const wallet = CS.getWallet();

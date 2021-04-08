@@ -27,6 +27,7 @@ module.exports = function(el) {
   if (ractive.get('IS_CLIPBOARD_SUPPORTED')) {
     const clipboard = new Clipboard(ractive.find('.js-passphrase'));
     clipboard.on('success', () => {
+      if (ractive.get('isCopied')) return;
       ractive.set('isCopied', true);
       setTimeout(() => {
         ractive.set('isCopied', false);

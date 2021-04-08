@@ -22,7 +22,7 @@
       </div>
       <div class="csinput">
         <div class="js-address-input csinput__input" tabindex="0" data-clipboard-text="{{address}}">
-          {{address}}
+          {{#if isCopiedAddress}}{{translate("Copied!")}}{{else}}{{address}}{{/if}}
         </div>
       </div>
     </div>

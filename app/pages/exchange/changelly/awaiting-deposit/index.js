@@ -61,8 +61,8 @@ module.exports = function(el) {
     showQRcode();
   });
 
-  clipboard(ractive, '.js-deposit-address', 'depositAddress');
-  clipboard(ractive, '.js-extra-id', 'extraId');
+  clipboard(ractive, '.js-deposit-address', 'isCopiedDepositAddress');
+  clipboard(ractive, '.js-extra-id', 'isCopiedExtraId');
 
   ractive.on('before-hide', () => {
     clearInterval(interval);

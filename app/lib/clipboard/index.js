@@ -1,15 +1,19 @@
 'use strict';
 
-const { translate } = require('lib/i18n');
 const Clipboard = require('clipboard');
 
-function init(ractive, selector, variable) {
+function init(ractive, selector, isCopied) {
   if (!Clipboard.isSupported()) return;
   const clipboard = new Clipboard(ractive.find(selector));
+  let isRunning = false;
   clipboard.on('success', () => {
-    const origin = ractive.get(variable);
-    ractive.set(variable, translate('Copied!'));
-    setTimeout(() => ractive.set(variable, origin), 1000);
+    if (isRunning) return;
+    isRunning = true;
+    ractive.set(isCopied, true);
+    setTimeout(() => {
+      isRunning = false;
+      ractive.set(isCopied, false);
+    }, 1000);
   });
   return clipboard;
 }
