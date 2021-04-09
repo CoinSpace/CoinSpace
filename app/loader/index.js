@@ -8,6 +8,7 @@ const Integrations = require('@sentry/integrations');
 const SENTRY_PATH_STRIP_RE = /^.*\/[^\.]+(\.app|CodePush|.*(?=\/))/;
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
+  autoSessionTracking: process.env.BUILD_TYPE === 'electron',
   environment: process.env.SENTRY_ENVIRONMENT,
   release: process.env.RELEASE,
   integrations: [
