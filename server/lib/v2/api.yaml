@@ -370,6 +370,7 @@ paths:
                   data:
                     description: User details
                     type: string
+                    nullable: true
                 required:
                   - data
         default:
