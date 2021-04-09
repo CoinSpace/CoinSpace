@@ -96,7 +96,8 @@ function openWindow(deeplink) {
 
       for (const view of mainWindow.getBrowserViews()) {
         mainWindow.removeBrowserView(view);
-        view.destroy();
+        // no destroy method in electron 11+
+        //view.destroy();
       }
     }
   }

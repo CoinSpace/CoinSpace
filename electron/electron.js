@@ -97,9 +97,12 @@ app.on('second-instance', (event, argv) => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   log.log('app ready');
-  protocol.registerStringProtocol('coinspace', (request, cb) => {
+  protocol.registerStringProtocol('coinspace', (request/*, cb*/) => {
     openWindow(request.url);
-    cb('ok');
+    // no calback due to bug
+    // https://github.com/electron/electron/issues/28407
+    // https://github.com/electron/electron/issues/28579
+    //cb('ok');
   });
   if (isMac) {
     openWindow(startupUrl);
