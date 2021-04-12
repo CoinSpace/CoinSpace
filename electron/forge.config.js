@@ -177,6 +177,7 @@ module.exports = {
             provider: 'snapStore',
             channels: ['edge'],
           },
+          plugs: ['default', 'u2f-devices'],
         },
         protocols: {
           name: 'Coin Wallet',
