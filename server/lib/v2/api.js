@@ -18,7 +18,7 @@ router.use(asyncWrapper(async (req, res, next) => {
 router.use(OpenApiValidator.middleware({
   apiSpec: path.join(__dirname, 'api.yaml'),
   // Validate responses only in dev environment
-  validateResponses: process.NODE_ENV !== 'production',
+  validateResponses: process.env.NODE_ENV !== 'production',
   operationHandlers: path.join(__dirname),
   validateSecurity: {
     handlers: {
