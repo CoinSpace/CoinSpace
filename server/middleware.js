@@ -34,13 +34,14 @@ function init(app) {
   app.use(compress());
 
   app.use('/api/', (req, res, next) => {
-    next();
     const id = req.query.id || req.body.deviceId || req.body.id || req.body.wallet_id;
-    if (!id) return;
+    if (!id) return next();
     const [, app, store, version] = req.get('X-Release') !== undefined ?
       req.get('X-Release').match(/(.+)\.(.+)@(.+)/i) : [];
     const screen = req.path + (req.query.crypto ? `/${req.query.crypto}` : '')
       + (req.query.network ? `/${req.query.network}` : '');
+    const useragent = req.get('User-Agent');
+    next();
     axios({
       url: 'https://www.google-analytics.com/collect',
       method: 'post',
@@ -49,7 +50,7 @@ function init(app) {
         tid: process.env.ANALYTICS_ID,
         aip: 1, uid: id,
         dl: screen, dt: screen, cd: screen,
-        uip: req.ip, ua: req.get('User-Agent'),
+        uip: req.ip, ua: useragent,
         an: app, av: version, aiid: store,
       }),
     }).catch(() => {});
