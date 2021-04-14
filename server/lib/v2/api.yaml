@@ -902,12 +902,12 @@ components:
           schema:
             required:
               - code
-              - message
+              - error
             properties:
               code:
                 type: integer
                 format: int32
-              message:
+              error:
                 type: string
   securitySchemes:
     deviceSignature:
