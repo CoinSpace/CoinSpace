@@ -1,6 +1,6 @@
 'use strict';
 
-const { encrypt, decrypt } = require('lib/encryption');
+const { encryptJSON, decryptJSON } = require('lib/encryption');
 const request = require('lib/request');
 
 class Cache {
@@ -17,7 +17,7 @@ class Cache {
       seed: 'public',
     });
     if (res.data) {
-      this.cache = JSON.parse(decrypt(res.data, this.key));
+      this.cache = decryptJSON(res.data, this.key);
     } else {
       this.cache = {};
     }
@@ -35,11 +35,11 @@ class Cache {
           url: this.url,
           method: 'put',
           data: {
-            data: encrypt(JSON.stringify(this.cache), this.key),
+            data: encryptJSON(this.cache, this.key),
           },
           seed: 'public',
         });
-        this.cache = JSON.parse(decrypt(res.data, this.key));
+        this.cache = decryptJSON(res.data, this.key);
       });
     return this.pending;
   }

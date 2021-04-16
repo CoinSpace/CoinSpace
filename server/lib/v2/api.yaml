@@ -409,6 +409,67 @@ paths:
                   - data
         default:
           $ref: '#/components/responses/GeneralError'
+  /cache/{cacheName}:
+    get:
+      x-eov-operation-id: getCache
+      x-eov-operation-handler: handlers
+      description: Get cache
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cacheName'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Cache
+          content:
+            'application/json':
+              schema:
+                type: object
+                properties:
+                  data:
+                    description: Cache
+                    type: string
+                    nullable: true
+                required:
+                  - data
+        default:
+          $ref: '#/components/responses/GeneralError'
+    put:
+      x-eov-operation-id: setCache
+      x-eov-operation-handler: handlers
+      description: Update cache
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cacheName'
+      security:
+        - deviceSignature: []
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: 'object'
+              properties:
+                data:
+                  description: Cache
+                  type: string
+              required:
+                - data
+      responses:
+        '200':
+          description: Update cache result
+          content:
+            'application/json':
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                required:
+                  - data
+        default:
+          $ref: '#/components/responses/GeneralError'
   /username:
     put:
       x-eov-operation-id: setUsername
@@ -826,6 +887,13 @@ components:
         type: array
         items:
           type: string
+    cacheName:
+      in: path
+      name: cacheName
+      schema:
+        type: string
+      required: true
+      description: Cache name
   requestBodies:
     PIN:
       description: PIN Hash

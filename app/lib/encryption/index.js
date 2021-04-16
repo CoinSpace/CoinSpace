@@ -13,6 +13,10 @@ function encrypt(text, key) {
   return encrypted.toString('base64');
 }
 
+function encryptJSON(json, key) {
+  return encrypt(JSON.stringify(json), key);
+}
+
 function decrypt(text, key) {
   const encryptedBytesWithSalt = Buffer.from(text, 'base64');
   const encryptedBytes = encryptedBytesWithSalt.slice(16, encryptedBytesWithSalt.length);
@@ -24,7 +28,13 @@ function decrypt(text, key) {
   return decrypted.toString('utf8');
 }
 
+function decryptJSON(text, key) {
+  return JSON.parse(decrypt(text, key));
+}
+
 module.exports = {
   encrypt,
+  encryptJSON,
   decrypt,
+  decryptJSON,
 };

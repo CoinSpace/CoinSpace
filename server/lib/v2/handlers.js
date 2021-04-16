@@ -2,6 +2,7 @@
 
 const createError = require('http-errors');
 const wallets = require('./wallets');
+const cache = require('./cache');
 const mecto = require('./mecto');
 const moonpay = require('./moonpay');
 const tokens = require('../tokens');
@@ -173,6 +174,16 @@ exports.getDetails = asyncWrapper(async (req, res) => {
 
 exports.setDetails = asyncWrapper(async (req, res) => {
   const data = await wallets.setDetails(req.device, req.body.data);
+  res.status(200).send({ data });
+});
+
+exports.getCache = asyncWrapper(async (req, res) => {
+  const data = await cache.getCache(req.device, req.params.cacheName);
+  res.status(200).send({ data });
+});
+
+exports.setCache = asyncWrapper(async (req, res) => {
+  const data = await cache.setCache(req.device, req.params.cacheName, req.body.data);
   res.status(200).send({ data });
 });
 
