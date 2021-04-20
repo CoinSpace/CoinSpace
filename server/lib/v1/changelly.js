@@ -9,10 +9,12 @@ const { CHANGELLY_API_SECRET } = process.env;
 const { CHANGELLY_API_KEY } = process.env;
 
 const PRIORITY_SYMBOLS = ['BTC', 'BCH', 'BSV', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH', 'USDT'];
+const DEPRECATED_SYMBOLS = ['wtc', 'waxp'];
 
 function getCoins() {
   return request('getCurrenciesFull', {}).then((currencies) => {
     const coins = currencies.filter((currency) => {
+      if (DEPRECATED_SYMBOLS.includes(currency.name)) return false;
       return currency.enabled;
     }).map((currency) => {
       return {
