@@ -217,10 +217,6 @@
         <source>Tokens</source>
         <target>Mga token</target>
       </trans-unit>
-      <trans-unit id="Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.">
-        <source>Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.</source>
-        <target>Ang Mecto ay nagpapahintulot sa iyong wallet address na i-broadcast ito sa kalapit na mga gumagamit ng Coin sa pamamagitan ng pagkumpara ng GPS data. Ang data na ito ay mabubura kapag pinatay ang Mecto off.</target>
-      </trans-unit>
       <trans-unit id="Before you start using Mecto, you need to enter a name that will help others identify you.">
         <source>Before you start using Mecto, you need to enter a name that will help others identify you.</source>
         <target>Bago mo simulan ang paggamit ng Mecto, kinakailangan mong mag-enter ng pangalan na tutulong sa iba sa pagkakilala sa iyo.</target>
@@ -272,22 +268,6 @@
       <trans-unit id="Mecto">
         <source>Mecto</source>
         <target>Mecto</target>
-      </trans-unit>
-      <trans-unit id="Turn Mecto on">
-        <source>Turn Mecto on</source>
-        <target>Buksan ang Mecto</target>
-      </trans-unit>
-      <trans-unit id="Turn Mecto off">
-        <source>Turn Mecto off</source>
-        <target>Isara ang Mecto</target>
-      </trans-unit>
-      <trans-unit id="Checking your location">
-        <source>Checking your location</source>
-        <target>I-check ang iyong lokasyon</target>
-      </trans-unit>
-      <trans-unit id="Broadcasting your location...">
-        <source>Broadcasting your location...</source>
-        <target>I-broadcast ang iyong lokasyon...</target>
       </trans-unit>
       <trans-unit id="Wallet address">
         <source>Wallet address</source>
@@ -1434,6 +1414,14 @@ Iko-convert ito sa %(toSymbol)s, at ipapadala sa
       <trans-unit id="Changelly Transaction ID">
         <source>Changelly Transaction ID</source>
         <target>Changelly ID ng Transaksyon</target>
+      </trans-unit>
+      <trans-unit id="Transaction ID">
+        <source>Transaction ID</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Accept">
+        <source>Accept</source>
+        <target></target>
       </trans-unit>
     </body>
   </file>

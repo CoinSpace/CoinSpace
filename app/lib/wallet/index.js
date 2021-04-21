@@ -30,6 +30,25 @@ const state = {
   wallet: null,
 };
 
+// UI debug
+class FakeWallet {
+  constructor() {
+    this.networkName = 'monero';
+    this.denomination = 'XMR';
+    this.decimals = 12;
+  }
+  lock() {}
+  publicKey() { return ''; }
+  getBalance() { return '0'; }
+  getMaxAmount() { return '0'; }
+  getNextAddress() { return 'next address'; }
+  loadTxs() { return Promise.resolve({ txs: [] }); }
+  load(options) {
+    const { done } = options;
+    done(null);
+  }
+}
+
 const Wallet = {
   bitcoin: CsWallet,
   bitcoincash: CsWallet,
@@ -41,6 +60,7 @@ const Wallet = {
   eos: EOSWallet,
   dogecoin: CsWallet,
   dash: CsWallet,
+  monero: FakeWallet,
 };
 
 const { urlRoot } = window;

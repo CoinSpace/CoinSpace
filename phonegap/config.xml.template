@@ -109,6 +109,12 @@
         <category android:name="android.intent.category.BROWSABLE" />
         <data android:scheme="dash"/>
       </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="monero"/>
+      </intent-filter>
     </config-file>
   </platform>
   <platform name="ios">

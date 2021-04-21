@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div class="_btn_group">
+    <div class="csbtngroup">
       {{#if count() === 12 }}
         {{#if isLoading}}
           <div class="csbtn csbtn--disabled">

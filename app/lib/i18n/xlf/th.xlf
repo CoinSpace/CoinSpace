@@ -217,10 +217,6 @@
         <source>Tokens</source>
         <target>โทเค็น</target>
       </trans-unit>
-      <trans-unit id="Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.">
-        <source>Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.</source>
-        <target>Mecto ช่วยให้คุณแผยแพร่ที่อยู่ของกระเป๋าเงินสู่ผู้ใช้งาน Coin ที่อยู่ใกล้เคียง ด้วยการเปรียบเทียบข้อมูล GPS  ข้อมูลนี้จะถูกลบทันทีหากคุณปิด Mecto</target>
-      </trans-unit>
       <trans-unit id="Before you start using Mecto, you need to enter a name that will help others identify you.">
         <source>Before you start using Mecto, you need to enter a name that will help others identify you.</source>
         <target>ก่อนจะเริ่มใช้งาน Mecto คุณจำเป็นต้องกรอกชื่อของคุณ เพื่อที่ผู้อื่นจะได้ระบุตัวตนของคุณได้</target>
@@ -272,22 +268,6 @@
       <trans-unit id="Mecto">
         <source>Mecto</source>
         <target>Mecto</target>
-      </trans-unit>
-      <trans-unit id="Turn Mecto on">
-        <source>Turn Mecto on</source>
-        <target>เปิด Mecto</target>
-      </trans-unit>
-      <trans-unit id="Turn Mecto off">
-        <source>Turn Mecto off</source>
-        <target>ปิด Mecto</target>
-      </trans-unit>
-      <trans-unit id="Checking your location">
-        <source>Checking your location</source>
-        <target>ตรวจสอบตำแหน่งที่อยู่ของคุณ</target>
-      </trans-unit>
-      <trans-unit id="Broadcasting your location...">
-        <source>Broadcasting your location...</source>
-        <target>เผยแพร่ตำแหน่งที่อยู่ของคุณ</target>
       </trans-unit>
       <trans-unit id="Wallet address">
         <source>Wallet address</source>
@@ -1434,6 +1414,14 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Changelly Transaction ID">
         <source>Changelly Transaction ID</source>
         <target>Changelly ID การทำธุรกรรม</target>
+      </trans-unit>
+      <trans-unit id="Transaction ID">
+        <source>Transaction ID</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Accept">
+        <source>Accept</source>
+        <target></target>
       </trans-unit>
     </body>
   </file>

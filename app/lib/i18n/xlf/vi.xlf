@@ -217,10 +217,6 @@
         <source>Tokens</source>
         <target>Token</target>
       </trans-unit>
-      <trans-unit id="Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.">
-        <source>Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.</source>
-        <target>Mecto cho phép bạn quảng bá địa chỉ ví của mình cho những người dùng Coin khác gần đó bằng cách so sánh dữ liệu GPS. Dữ liệu này bị xóa khi bạn tắt Mecto.</target>
-      </trans-unit>
       <trans-unit id="Before you start using Mecto, you need to enter a name that will help others identify you.">
         <source>Before you start using Mecto, you need to enter a name that will help others identify you.</source>
         <target>Trước khi bắt đầu sử dụng Mecto, bạn cần nhập tên giúp người khác nhận ra bạn.</target>
@@ -272,22 +268,6 @@
       <trans-unit id="Mecto">
         <source>Mecto</source>
         <target>Mecto</target>
-      </trans-unit>
-      <trans-unit id="Turn Mecto on">
-        <source>Turn Mecto on</source>
-        <target>Bật Mecto</target>
-      </trans-unit>
-      <trans-unit id="Turn Mecto off">
-        <source>Turn Mecto off</source>
-        <target>Tắt Mecto</target>
-      </trans-unit>
-      <trans-unit id="Checking your location">
-        <source>Checking your location</source>
-        <target>Kiểm tra vị trí của bạn</target>
-      </trans-unit>
-      <trans-unit id="Broadcasting your location...">
-        <source>Broadcasting your location...</source>
-        <target>Quảng bá vị trí của bạn...</target>
       </trans-unit>
       <trans-unit id="Wallet address">
         <source>Wallet address</source>
@@ -1434,6 +1414,14 @@ Sẽ chuyển đổi thành %(toSymbol)s, và gửi đến
       <trans-unit id="Changelly Transaction ID">
         <source>Changelly Transaction ID</source>
         <target>Changelly ID giao dịch</target>
+      </trans-unit>
+      <trans-unit id="Transaction ID">
+        <source>Transaction ID</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Accept">
+        <source>Accept</source>
+        <target></target>
       </trans-unit>
     </body>
   </file>

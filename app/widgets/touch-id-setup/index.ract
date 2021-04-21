@@ -10,7 +10,7 @@
 
     <p class="_description">{{description}}</p>
 
-    <div class="_btn_group">
+    <div class="csbtngroup">
       <div class="csbtn" on-click="confirm">{{buttonLabel}}</div>
     </div>
 

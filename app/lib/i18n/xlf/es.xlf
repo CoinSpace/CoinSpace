@@ -217,10 +217,6 @@
         <source>Tokens</source>
         <target>Tokens</target>
       </trans-unit>
-      <trans-unit id="Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.">
-        <source>Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.</source>
-        <target>Mecto te permite difundir tu dirección de monedero a usuarios de Coin cercanos comparando datos GPS. Estos datos se eliminan una vez que desactivas Mecto.</target>
-      </trans-unit>
       <trans-unit id="Before you start using Mecto, you need to enter a name that will help others identify you.">
         <source>Before you start using Mecto, you need to enter a name that will help others identify you.</source>
         <target>Antes de comenzar a usar Mecto, debes introducir un nombre que permita que las demás personas te identifiquen.</target>
@@ -272,22 +268,6 @@
       <trans-unit id="Mecto">
         <source>Mecto</source>
         <target>Mecto</target>
-      </trans-unit>
-      <trans-unit id="Turn Mecto on">
-        <source>Turn Mecto on</source>
-        <target>Activar Mecto</target>
-      </trans-unit>
-      <trans-unit id="Turn Mecto off">
-        <source>Turn Mecto off</source>
-        <target>Desactivar Mecto</target>
-      </trans-unit>
-      <trans-unit id="Checking your location">
-        <source>Checking your location</source>
-        <target>Comprobando tu ubicación</target>
-      </trans-unit>
-      <trans-unit id="Broadcasting your location...">
-        <source>Broadcasting your location...</source>
-        <target>Difundiendo tu ubicación...</target>
       </trans-unit>
       <trans-unit id="Wallet address">
         <source>Wallet address</source>
@@ -1434,6 +1414,14 @@ Esto se convertirá en %(toSymbol)s y se enviará a
       <trans-unit id="Changelly Transaction ID">
         <source>Changelly Transaction ID</source>
         <target>Changelly Id. de la transacción</target>
+      </trans-unit>
+      <trans-unit id="Transaction ID">
+        <source>Transaction ID</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Accept">
+        <source>Accept</source>
+        <target></target>
       </trans-unit>
     </body>
   </file>

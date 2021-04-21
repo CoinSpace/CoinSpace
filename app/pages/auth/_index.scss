@@ -42,27 +42,6 @@
     @include small_font_size;
   }
 
-  ._btn_group {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #f2f2f2;
-    border-radius: 4px;
-    box-shadow: inset 0px 1px 3px 0px rgba(0,0,0,0.25);
-    @include breakpoint(portrait) {
-      padding: 20px;
-    }
-    .csbtn {
-      margin-bottom: 10px;
-      @include breakpoint(portrait) {
-        margin-bottom: 20px;
-      }
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
-
   ._footer_link {
     display: block;
     padding: 5px;

@@ -64,6 +64,7 @@ async function run() {
           'eos',
           'dogecoin',
           'dash',
+          'monero',
         ],
       },
     ],

@@ -12,6 +12,7 @@ const supportedProtocols = [
   'eos',
   'dogecoin',
   'dash',
+  'monero',
 ];
 
 function isValidScheme(url) {

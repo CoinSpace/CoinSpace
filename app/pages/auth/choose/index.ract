@@ -4,7 +4,7 @@
     {{>svg_logo_stack}}
   </div>
 
-  <div class="_btn_group">
+  <div class="csbtngroup">
     <div class="csbtn" on-click="create-new-wallet">{{translate("Create new wallet")}}</div>
     <div class="csbtn" on-click="reveal-passphrase-input">{{translate("Open existing wallet")}}</div>
   </div>

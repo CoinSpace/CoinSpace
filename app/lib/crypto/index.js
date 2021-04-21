@@ -43,6 +43,10 @@ const walletCoins = [{
   _id: 'dash',
   network: 'dash',
   name: 'Dash',
+}, {
+  _id: 'monero',
+  network: 'monero',
+  name: 'Monero',
 }];
 const DEFAULT_COIN = 'bitcoin';
 

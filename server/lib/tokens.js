@@ -35,6 +35,8 @@ const CRYPTOCURRENCIES = [
   'dogecoin',
   // DASH
   'dash',
+  // XMR
+  'monero',
 ];
 
 const coingecko = axios.create({

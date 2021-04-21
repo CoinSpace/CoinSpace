@@ -25,34 +25,55 @@
       </div>
     </div>
 
-    <div class="csbtn" on-click="show-qr">
+    <div class="csbtn {{ broadcasting ? 'animate__pulseFade csbtn--blue' : '' }}" class-csbtn--disabled="connecting" on-click="toggle-broadcast">
+      <span class="csbtn__icon">
+        {{>svg_mecto}}
+      </span>
+    </div>
+    {{#if isPhonegap}}
+    <div class="csbtn" on-click="share">
       <span class="csbtn__icon">
         {{>svg_expand}}
       </span>
     </div>
+    {{else}}
+    <div class="csbtn" on-click="email">
+      <span class="csbtn__icon">
+        {{>svg_email}}
+      </span>
+    </div>
+    {{/if}}
   </div>
 
-  {{#isPhonegap}}
-  <div class="qr-code" id="qr_canvas"></div>
-  {{/isPhonegap}}
+  <div class="_qrcode" id="qr_canvas"></div>
 
-  <div class="csformgroup csformgroup--mecto">
+  {{#isMonero}}
+  <div class="csformgroup">
     <div class="csformgroup__input-group">
       <div class="csformgroup__input-group__header">
-        {{#if broadcasting}}
-        <label class="animate__pulseFade">{{translate("Broadcasting your location...")}}</label>
-        {{else}}
-        <label>{{translate("Mecto")}}</label>
-        {{/if}}
-        <span class="csformgroup__help" on-click="help-mecto">
-          {{>svg_help}}
-        </span>
+        <label for="tx-id">{{translate("Transaction ID")}}</label>
+      </div>
+      <div class="csinput csinput--with-x">
+        <input id="tx-id" class="csinput__input" type="text" autocorrect="off" autocapitalize="off" value="{{txId}}" />
+        {{#txId}}
+          <div class="csinput__cross" on-click="clearTxId">
+            <span class="csinput__cross__icon">{{> svg_close}}</span>
+          </div>
+        {{/txId}}
       </div>
     </div>
   </div>
-  <div class="geo__box">
-    <span class="csbtn {{#broadcasting}}is_broadcasting{{/broadcasting}}{{#connecting}}is_connecting{{/connecting}}" on-click="toggle-broadcast">{{translate(btn_message)}}</span>
-  </div>
+    {{#if isAccepting}}
+    <div class="csbtn csbtn--loading">
+      <span class="csbtn__icon">
+        {{>svg_refresh}}
+      </span>
+    </div>
+    {{else}}
+    <div on-click="accept" class="csbtn">{{translate("Accept")}}</div>
+    {{/if}}
+  {{/isMonero}}
+
 </div>
 
 <div id="eos-setup" class-hidden="!needToSetupEos"></div>

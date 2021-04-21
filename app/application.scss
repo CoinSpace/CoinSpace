@@ -20,6 +20,7 @@
 @import "core_css/_javascript";
 @import "core_css/_base";
 @import "core_css/atoms/_csbtn";
+@import "core_css/atoms/_csbtngroup";
 @import "core_css/atoms/_csheader";
 @import "core_css/atoms/_shapes";
 @import "core_css/atoms/_csformgroup";
@@ -52,7 +53,6 @@
 @import "widgets/modals/export-private-keys/_index";
 @import "widgets/modals/update/_index";
 @import "widgets/modals/transaction-detail/_content";
-@import "widgets/modals/qr/_content";
 @import "widgets/modals/eos-setup-account/_index";
 @import "widgets/pin/_index";
 @import "widgets/passphrase/_index";

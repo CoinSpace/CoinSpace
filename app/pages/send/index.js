@@ -243,6 +243,8 @@ module.exports = function(el) {
       fees = [{ estimate: toUnitString(wallet.getDefaultFee()) }];
     } else if (wallet.networkName === 'ethereum') {
       fees = [{ estimate: toUnitString(wallet.getDefaultFee(), 18) }];
+    } else if (wallet.networkName === 'monero') { // debug
+      fees = [{ estimate: '0' }];
     }
 
     ractive.set('fee', fees[ractive.get('feeIndex')].estimate);

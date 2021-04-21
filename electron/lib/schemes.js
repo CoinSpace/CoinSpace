@@ -12,4 +12,5 @@ module.exports = [
   'eos',
   'dogecoin',
   'dash',
+  'monero',
 ];

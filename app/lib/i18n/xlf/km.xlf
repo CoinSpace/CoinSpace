@@ -217,10 +217,6 @@
         <source>Tokens</source>
         <target>និមិត្ដរូប</target>
       </trans-unit>
-      <trans-unit id="Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.">
-        <source>Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.</source>
-        <target>Mecto អនុញ្ញាតឲ្យអ្នកផ្សព្វផ្សាយអាសយដ្ឋានកាបូបរបស់អ្នកទៅអ្នកប្រើកាក់នៅក្បែរៗផ្សេងទៀតដោយការប្រៀបធៀបទិន្នន័យ GPS។ ទិន្នន័យនេះត្រូវបានលុបចោលនៅពេលដែលអ្នកបិទ Mecto។</target>
-      </trans-unit>
       <trans-unit id="Before you start using Mecto, you need to enter a name that will help others identify you.">
         <source>Before you start using Mecto, you need to enter a name that will help others identify you.</source>
         <target>មុនពេលអ្នកចាប់ផ្តើមប្រើ Mecto អ្នកត្រូវបញ្ចូលឈ្មោះមួយសម្រាប់ជួយឲ្យអ្នកដទៃស្គាល់អ្នក។</target>
@@ -272,22 +268,6 @@
       <trans-unit id="Mecto">
         <source>Mecto</source>
         <target>Mecto</target>
-      </trans-unit>
-      <trans-unit id="Turn Mecto on">
-        <source>Turn Mecto on</source>
-        <target>បើក Mecto</target>
-      </trans-unit>
-      <trans-unit id="Turn Mecto off">
-        <source>Turn Mecto off</source>
-        <target>បិទ Mecto</target>
-      </trans-unit>
-      <trans-unit id="Checking your location">
-        <source>Checking your location</source>
-        <target>កំពុងពិនិត្យទីតាំងរបស់អ្នក</target>
-      </trans-unit>
-      <trans-unit id="Broadcasting your location...">
-        <source>Broadcasting your location...</source>
-        <target>កំពុងផ្សព្វផ្សាយទីតាំងរបស់អ្នក...</target>
       </trans-unit>
       <trans-unit id="Wallet address">
         <source>Wallet address</source>
@@ -1434,6 +1414,14 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Changelly Transaction ID">
         <source>Changelly Transaction ID</source>
         <target>Changelly លេខប្រតិបត្តិការ៖</target>
+      </trans-unit>
+      <trans-unit id="Transaction ID">
+        <source>Transaction ID</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Accept">
+        <source>Accept</source>
+        <target></target>
       </trans-unit>
     </body>
   </file>

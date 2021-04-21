@@ -2,7 +2,6 @@
 
 const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
-const showQr = require('widgets/modals/qr');
 const qrcode = require('lib/qrcode');
 const details = require('lib/wallet/details');
 const showTooltip = require('widgets/modals/tooltip');
@@ -50,7 +49,7 @@ module.exports = function(el) {
       depositSymbol: context.depositSymbol,
       depositAddress: context.depositAddress,
       extraId: context.extraId,
-      extraIdLabel: extraIdLabels[context.depositSymbol] || 'Extra Id',
+      extraIdLabel: translate(extraIdLabels[context.depositSymbol] || 'Extra Id'),
       networkFee: context.networkFee,
       toAddress: context.toAddress,
       toSymbol: context.toSymbol,
@@ -58,7 +57,10 @@ module.exports = function(el) {
       changellyTransactionId: context.id,
     });
 
-    showQRcode();
+    const canvas = ractive.find('#deposit_qr_canvas');
+    const name = ractive.get('depositSymbol').toLowerCase();
+    const qr = qrcode.encode(`${name}:${context.depositAddress}`);
+    canvas.innerHTML = qr;
   });
 
   clipboard(ractive, '.js-deposit-address', 'isCopiedDepositAddress');
@@ -90,27 +92,26 @@ module.exports = function(el) {
     });
   });
 
-  ractive.on('show-qr', ()=> {
-    if (ractive.get('isPhonegap')) {
-      window.plugins.socialsharing.shareWithOptions({
-        message: ractive.get('depositAddress'),
-      });
-    } else {
-      showQr({
-        address: ractive.get('depositAddress'),
-        name: ractive.get('depositSymbol').toLowerCase(),
-        title: translate('Deposit address', { symbol: ractive.get('depositSymbol') }),
-      });
-    }
+  ractive.on('share', () => {
+    window.plugins.socialsharing.shareWithOptions({
+      message: getShareMessage(),
+    });
   });
 
-  function showQRcode() {
-    if (ractive.get('isPhonegap')) {
-      const canvas = ractive.find('#deposit_qr_canvas');
-      const name = ractive.get('depositSymbol').toLowerCase();
-      const qr = qrcode.encode(name + ':' + ractive.get('depositAddress'));
-      canvas.innerHTML = qr;
+  ractive.on('email', () => {
+    const message = getShareMessage();
+    const link = 'mailto:?body=' + encodeURIComponent(`${message}\n\nSent from Coin Wallet\nhttps://coin.space`);
+    window.safeOpen(link, '_blank');
+  });
+
+  function getShareMessage() {
+    let message = ractive.get('depositAddress');
+    const extraId = ractive.get('extraId');
+    const extraIdLabel = ractive.get('extraIdLabel');
+    if (extraId) {
+      message = `${message} (${extraIdLabel}: ${extraId})`;
     }
+    return message;
   }
 
   return ractive;

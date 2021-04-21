@@ -9,35 +9,10 @@
     }
     margin-bottom: 0;
   }
-}
 
-.geo__box {
-  @extend .generic_box;
-  margin-top: 5px;
-  text-align: center;
-
-  @include breakpoint(portrait) {
-    font-size: $btn_font_size--portrait;
-    border-radius: 4px;
+  ._qrcode {
+    display: table;
+    margin: 0 auto;
+    margin-bottom: 15px;
   }
-
-  .csbtn {
-    margin-bottom: 5px;
-    &.is_broadcasting {
-      background-color: $yellow;
-      box-shadow: 0 3px 0 0 darken($yellow, 10%);
-      color: darken($yellow, 20%);
-    }
-    &.is_connecting {
-      background-color: $grey;
-      box-shadow: 0 3px 0 0 darken($grey, 10%);
-      color: darken($grey, 20%);
-    }
-  }
-}
-
-.qr-code {
-  display: table;
-  margin: 0 auto;
-  margin-bottom: 15px;
 }

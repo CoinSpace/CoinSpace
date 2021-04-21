@@ -53,7 +53,6 @@
   "Receive": "Receive",
   "History": "History",
   "Tokens": "Tokens",
-  "Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.": "Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.",
   "Before you start using Mecto, you need to enter a name that will help others identify you.": "Before you start using Mecto, you need to enter a name that will help others identify you.",
   "Save": "Save",
   "Loading transactions...": "Loading transactions...",
@@ -67,10 +66,6 @@
   "Outputs:": "Outputs:",
   "Your wallet address": "Your wallet address",
   "Mecto": "Mecto",
-  "Turn Mecto on": "Turn Mecto on",
-  "Turn Mecto off": "Turn Mecto off",
-  "Checking your location": "Checking your location",
-  "Broadcasting your location...": "Broadcasting your location...",
   "Wallet address": "Wallet address",
   "Amount": "Amount",
   "Confirm": "Confirm",
@@ -355,5 +350,7 @@
   "A new version of Coin Wallet is available. Would you like to update it now?": "A new version of Coin Wallet is available. Would you like to update it now?",
   "General": "General",
   "Local currency": "Local currency",
-  "Changelly Transaction ID": "Changelly Transaction ID"
+  "Changelly Transaction ID": "Changelly Transaction ID",
+  "Transaction ID": "Transaction ID",
+  "Accept": "Accept"
 }

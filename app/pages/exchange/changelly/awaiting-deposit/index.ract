@@ -27,21 +27,27 @@
         <input class="js-deposit-address csinput__input" type="text" data-clipboard-text="{{depositAddress}}" twoway="false" value="{{ isCopiedDepositAddress ? translate('Copied!') : depositAddress }}" readonly/>
       </div>
     </div>
-    <div class="csbtn" on-click="show-qr">
+    {{#if isPhonegap}}
+    <div class="csbtn" on-click="share">
       <span class="csbtn__icon">
         {{>svg_expand}}
       </span>
     </div>
+    {{else}}
+    <div class="csbtn" on-click="email">
+      <span class="csbtn__icon">
+        {{>svg_email}}
+      </span>
+    </div>
+    {{/if}}
   </div>
 
-  {{#isPhonegap}}
-  <div class="qr-code" id="deposit_qr_canvas"></div>
-  {{/isPhonegap}}
+  <div class="_qrcode" id="deposit_qr_canvas"></div>
 
   <div class="csformgroup csformgroup--readonly" class-csformgroup--hidden="!extraId">
     <div class="csformgroup__input-group">
       <div class="csformgroup__input-group__header">
-        <label>{{translate(extraIdLabel)}}</label>
+        <label>{{extraIdLabel}}</label>
       </div>
       <div class="csinput">
         <input class="js-extra-id csinput__input" type="text" data-clipboard-text="{{extraId}}" twoway="false" value="{{ isCopiedExtraId ? translate('Copied!') : extraId }}" readonly/>

@@ -4,7 +4,6 @@ const Ractive = require('lib/ractive');
 const emitter = require('lib/emitter');
 const CS = require('lib/wallet');
 const showTooltip = require('widgets/modals/tooltip');
-const showQr = require('widgets/modals/qr');
 const geo = require('lib/geo');
 const { showError } = require('widgets/modals/flash');
 const showSetDetails = require('widgets/modals/set-details');
@@ -13,6 +12,7 @@ const initEosSetup = require('widgets/eos/setup');
 const details = require('lib/wallet/details');
 const clipboard = require('lib/clipboard');
 const { translate } = require('lib/i18n');
+const { getWallet } = require('lib/wallet');
 
 module.exports = function(el) {
   const ractive = new Ractive({
@@ -21,13 +21,15 @@ module.exports = function(el) {
     data: {
       address: '',
       qrVisible: false,
-      btn_message: 'Turn Mecto on',
       connecting: false,
       broadcasting: false,
       isPhonegap: process.env.BUILD_TYPE === 'phonegap',
       addressTypes: [],
       addressType: '',
       addressTooltip: false,
+      isMonero: false,
+      isAccepting: false,
+      txId: '',
       getAddressTypeLabel(type) {
         if (type === 'p2pkh') return '(P2PKH)';
         if (type === 'p2sh') return '(P2SH)';
@@ -67,6 +69,11 @@ module.exports = function(el) {
   emitter.on('tx-sent', showAddress);
   emitter.on('change-address-type', showAddress);
 
+  ractive.on('before-show', () => {
+    const network = getWallet().networkName;
+    ractive.set('isMonero', network === 'monero');
+  });
+
   ractive.on('change-address-type', () => {
     const wallet = CS.getWallet();
     const addressType = ractive.get('addressType');
@@ -90,44 +97,32 @@ module.exports = function(el) {
     }
   });
 
-  function showQRcode(address) {
-    if (ractive.get('isPhonegap')) {
-      const canvas = document.getElementById('qr_canvas');
-      const qr = qrcode.encode(CS.getWallet().networkName + ':' + address);
-      canvas.innerHTML = qr;
-    }
-  }
-
   function mectoOff() {
     ractive.set('broadcasting', false);
-    ractive.set('btn_message', 'Turn Mecto on');
     geo.remove();
   }
 
   async function mectoOn() {
     ractive.set('connecting', true);
-    ractive.set('btn_message', 'Checking your location');
     try {
       await geo.save();
       ractive.set('connecting', false);
       ractive.set('broadcasting', true);
-      ractive.set('btn_message', 'Turn Mecto off');
     } catch (err) {
       return handleMectoError(err);
     }
   }
 
-  ractive.on('show-qr', () => {
-    if (ractive.get('isPhonegap')) {
-      window.plugins.socialsharing.shareWithOptions({
-        message: ractive.get('address'),
-      });
-    } else {
-      showQr({
-        address: ractive.get('address'),
-        name: CS.getWallet().networkName,
-      });
-    }
+  ractive.on('share', () => {
+    window.plugins.socialsharing.shareWithOptions({
+      message: ractive.get('address'),
+    });
+  });
+
+  ractive.on('email', () => {
+    const address = ractive.get('address');
+    const link = 'mailto:?body=' + encodeURIComponent(`${address}\n\nSent from Coin Wallet\nhttps://coin.space`);
+    window.safeOpen(link, '_blank');
   });
 
   ractive.on('help-address', () => {
@@ -149,17 +144,24 @@ module.exports = function(el) {
     });
   });
 
-  ractive.on('help-mecto', () => {
-    showTooltip({
-      // eslint-disable-next-line max-len
-      message: 'Mecto lets you broadcast your wallet address to other nearby Coin users by comparing GPS data. This data is deleted once you turn Mecto off.',
-    });
+  ractive.on('clearTxId', () => {
+    ractive.set('txId', '');
+    ractive.find('#tx-id').focus();
+  });
+
+  ractive.on('accept', () => {
+    ractive.set('isAccepting', true);
+    setTimeout(() => {
+      ractive.set('isAccepting', false);
+    }, 1000);
   });
 
   function showAddress() {
     const address = CS.getWallet().getNextAddress();
     ractive.set('address', address);
-    showQRcode(address);
+    const $canvas = ractive.find('#qr_canvas');
+    const qr = qrcode.encode(CS.getWallet().networkName + ':' + address);
+    $canvas.innerHTML = qr;
   }
 
   function handleMectoError(err) {
@@ -168,7 +170,6 @@ module.exports = function(el) {
     });
     ractive.set('connecting', false);
     ractive.set('broadcasting', false);
-    ractive.set('btn_message', 'Turn Mecto on');
   }
 
   return ractive;

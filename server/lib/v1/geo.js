@@ -40,7 +40,7 @@ function remove(id) {
 
 function search(lat, lon, userInfo) {
   // eslint-disable-next-line max-len
-  if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash', 'ethereum', 'ripple', 'stellar', 'eos'].indexOf(userInfo.network) === -1) {
+  if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash', 'ethereum', 'ripple', 'stellar', 'eos', 'monero'].indexOf(userInfo.network) === -1) {
     return Promise.reject({ error: 'unsupported_network' });
   }
   const collection = db().collection('mecto');

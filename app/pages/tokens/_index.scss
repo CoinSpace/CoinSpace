@@ -144,6 +144,11 @@
         background-color: $dash;
       }
     }
+    &--monero {
+      ._token__icon {
+        background-color: $monero;
+      }
+    }
   }
 }
 
