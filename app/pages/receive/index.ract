@@ -21,9 +21,7 @@
         {{/if}}
       </div>
       <div class="csinput">
-        <div class="js-address-input csinput__input" tabindex="0" data-clipboard-text="{{address}}">
-          {{#if isCopiedAddress}}{{translate("Copied!")}}{{else}}{{address}}{{/if}}
-        </div>
+        <input class="js-address-input csinput__input" type="text" data-clipboard-text="{{address}}" twoway="false" value="{{ isCopiedAddress ? translate('Copied!') : address }}" readonly/>
       </div>
     </div>
 
@@ -34,18 +32,23 @@
     </div>
   </div>
 
+  {{#isPhonegap}}
   <div class="qr-code" id="qr_canvas"></div>
+  {{/isPhonegap}}
 
-  <div class="receive__label">
-  {{^broadcasting}}
-    <div class="_title">{{translate("Mecto")}}</div>
-  {{/broadcasting}}
-  {{#broadcasting}}
-    <div id="broadcast_text" class="_title animate__pulseFade">{{translate("Broadcasting your location...")}}</div>
-  {{/broadcasting}}
-  <span class="_help" on-click="help-mecto">
-    {{>svg_help}}
-  </span>
+  <div class="csformgroup csformgroup--mecto">
+    <div class="csformgroup__input-group">
+      <div class="csformgroup__input-group__header">
+        {{#if broadcasting}}
+        <label class="animate__pulseFade">{{translate("Broadcasting your location...")}}</label>
+        {{else}}
+        <label>{{translate("Mecto")}}</label>
+        {{/if}}
+        <span class="csformgroup__help" on-click="help-mecto">
+          {{>svg_help}}
+        </span>
+      </div>
+    </div>
   </div>
   <div class="geo__box">
     <span class="csbtn {{#broadcasting}}is_broadcasting{{/broadcasting}}{{#connecting}}is_connecting{{/connecting}}" on-click="toggle-broadcast">{{translate(btn_message)}}</span>

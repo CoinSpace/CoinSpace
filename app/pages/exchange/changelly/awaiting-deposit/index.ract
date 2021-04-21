@@ -24,9 +24,7 @@
         <label>{{translate("Deposit address", {symbol: depositSymbol})}}</label>
       </div>
       <div class="csinput">
-        <div class="js-deposit-address csinput__input" tabindex="0" data-clipboard-text="{{depositAddress}}">
-          {{#if isCopiedDepositAddress}}{{translate("Copied!")}}{{else}}{{depositAddress}}{{/if}}
-        </div>
+        <input class="js-deposit-address csinput__input" type="text" data-clipboard-text="{{depositAddress}}" twoway="false" value="{{ isCopiedDepositAddress ? translate('Copied!') : depositAddress }}" readonly/>
       </div>
     </div>
     <div class="csbtn" on-click="show-qr">
@@ -46,9 +44,7 @@
         <label>{{translate(extraIdLabel)}}</label>
       </div>
       <div class="csinput">
-        <div class="js-extra-id csinput__input" tabindex="0" data-clipboard-text="{{extraId}}">
-          {{#if isCopiedExtraId}}{{translate("Copied!")}}{{else}}{{extraId}}{{/if}}
-        </div>
+        <input class="js-extra-id csinput__input" type="text" data-clipboard-text="{{extraId}}" twoway="false" value="{{ isCopiedExtraId ? translate('Copied!') : extraId }}" readonly/>
       </div>
     </div>
   </div>

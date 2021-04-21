@@ -15,7 +15,7 @@
           <label>{{translate("Address")}}</label>
         </div>
         <div class="csinput">
-          <div class="csinput__input" tabindex="0">coinappsetup</div>
+          <input class="csinput__input" type="text" twoway="false" value="coinappsetup" readonly/>
         </div>
       </div>
       {{#if isPhonegap}}

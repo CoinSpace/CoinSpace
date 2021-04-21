@@ -1,35 +1,14 @@
 
 #receive {
-  ._title {
-    @extend .jigsaw-medium;
-    @include breakpoint(portrait) {
-      font-size: $base_font_size--portrait;
-    }
-    position: relative;
-  }
   .hidden {
     display: none;
   }
-  ._help {
-    @include clickbtn;
-    position: absolute;
-    top: 0;
-    right: -5px;
-    width: 26px;
-    height: 26px;
-    padding: 4px;
-    @include breakpoint(portrait) {
-      width: 32px;
-      height: 32px;
+  .csformgroup--mecto {
+    label {
+      cursor: default;
     }
-    &:hover {
-      opacity: 0.9;
-    }
+    margin-bottom: 0;
   }
-}
-
-.receive__label {
-  position: relative;
 }
 
 .geo__box {
@@ -54,12 +33,6 @@
       box-shadow: 0 3px 0 0 darken($grey, 10%);
       color: darken($grey, 20%);
     }
-  }
-
-  ._text {
-    font-size: $small_font_size;
-    line-height: 1.3;
-    color: $grey;
   }
 }
 
