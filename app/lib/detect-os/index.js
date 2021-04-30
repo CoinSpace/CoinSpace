@@ -1,5 +1,3 @@
-'use strict';
-
 const platforms = [
   {
     os: 'android',
@@ -32,4 +30,4 @@ const found = platforms.find((target) => {
 });
 if (found) ({ os } = found);
 
-module.exports = os;
+export default os;

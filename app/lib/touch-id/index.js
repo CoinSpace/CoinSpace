@@ -1,12 +1,10 @@
-'use strict';
-
-const { translate } = require('lib/i18n');
-const request = require('lib/request');
-const LS = require('lib/wallet/localStorage');
+import { translate } from 'lib/i18n';
+import request from 'lib/request';
+import LS from 'lib/wallet/localStorage';
 const { PublicKeyCredential } = window;
 const { urlRoot } = window;
-const { startAttestation, startAssertion } = require('@simplewebauthn/browser');
-const hardware = require('lib/hardware');
+import { startAttestation, startAssertion } from '@simplewebauthn/browser';
+import hardware from 'lib/hardware';
 
 let isAvailable = false;
 
@@ -140,7 +138,7 @@ async function privateToken() {
   }
 }
 
-function isEnabled() {
+export function isEnabled() {
   if (!isAvailable) return false;
   if (process.env.BUILD_TYPE === 'phonegap') {
     return !!LS.getPin();
@@ -148,7 +146,7 @@ function isEnabled() {
   return !!LS.isFidoTouchIdEnabled();
 }
 
-module.exports = {
+export default {
   init,
   enable,
   disable,

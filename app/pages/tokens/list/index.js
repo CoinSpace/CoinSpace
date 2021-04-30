@@ -1,16 +1,15 @@
-'use strict';
-
-const Ractive = require('lib/ractive');
-const showRemoveConfirmation = require('widgets/modals/confirm-remove');
-const { getCrypto, setCrypto } = require('lib/crypto');
-const { initWallet } = require('lib/wallet');
-const emitter = require('lib/emitter');
-const details = require('lib/wallet/details');
-const ticker = require('lib/ticker-api');
-const _ = require('lodash');
-const { walletCoins } = require('lib/crypto');
-const { cryptoToFiat } = require('lib/convert');
-const bip21 = require('lib/bip21');
+import Ractive from 'lib/ractive';
+import showRemoveConfirmation from 'widgets/modals/confirm-remove';
+import { getCrypto, setCrypto } from 'lib/crypto';
+import { initWallet } from 'lib/wallet';
+import emitter from 'lib/emitter';
+import details from 'lib/wallet/details';
+import ticker from 'lib/ticker-api';
+import _ from 'lodash';
+import { walletCoins } from 'lib/crypto';
+import { cryptoToFiat } from 'lib/convert';
+import bip21 from 'lib/bip21';
+import template from './index.ract';
 
 let isEnabled = false;
 
@@ -18,10 +17,10 @@ function isCryptoEqual(a, b) {
   return a && b && (a === b._id || _.isEqual(a, b));
 }
 
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       currentCrypto: null,
       currency: null,
@@ -120,4 +119,4 @@ module.exports = function(el) {
   });
 
   return ractive;
-};
+}

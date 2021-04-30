@@ -1,6 +1,5 @@
-'use strict';
-const encryption = require('lib/encryption');
-const LS = require('./localStorage');
+import encryption from 'lib/encryption';
+import LS from './localStorage';
 
 const seeds = {
   public: null,
@@ -23,7 +22,7 @@ function unlock(type, token) {
   seeds[type] = encryption.decrypt(LS.getEncryptedSeed(type), token);
 }
 
-module.exports = {
+export default {
   get,
   set,
   lock,

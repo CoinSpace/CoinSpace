@@ -1,9 +1,7 @@
-'use strict';
-
-const request = require('lib/request');
+import request from 'lib/request';
 const { urlRoot } = window;
 
-function resolveTo(network, to) {
+export function resolveTo(network, to) {
   if (network !== 'bitcoin') return Promise.resolve({ to });
 
   to = to || '';
@@ -19,6 +17,6 @@ function resolveTo(network, to) {
   });
 }
 
-module.exports = {
+export default {
   resolveTo,
 };

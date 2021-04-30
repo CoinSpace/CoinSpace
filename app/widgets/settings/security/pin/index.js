@@ -1,23 +1,22 @@
-'use strict';
-
-const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
-const { translate } = require('lib/i18n');
-const os = require('lib/detect-os');
-const settings = require('lib/wallet/settings');
-const touchId = require('lib/touch-id');
-const PinWidget = require('widgets/pin');
-const request = require('lib/request');
-const LS = require('lib/wallet/localStorage');
-const crypto = require('crypto');
-const security = require('lib/wallet/security');
+import Ractive from 'lib/ractive';
+import emitter from 'lib/emitter';
+import { translate } from 'lib/i18n';
+import os from 'lib/detect-os';
+import settings from 'lib/wallet/settings';
+import touchId from 'lib/touch-id';
+import PinWidget from 'widgets/pin';
+import request from 'lib/request';
+import LS from 'lib/wallet/localStorage';
+import crypto from 'crypto';
+import security from 'lib/wallet/security';
+import template from './index.ract';
 
 const { urlRoot } = window;
 
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       title: getTitle(),
       touchIdLabel: getTouchIdLabel(),
@@ -81,7 +80,7 @@ module.exports = function(el) {
   });
 
   return ractive;
-};
+}
 
 async function getPin() {
   return new Promise((resolve, reject) => {

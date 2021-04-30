@@ -1,9 +1,8 @@
-'use strict';
-
-const Ractive = require('widgets/modals/base');
-const details = require('lib/wallet/details');
-const { showError } = require('widgets/modals/flash');
-const CS = require('lib/wallet');
+import Ractive from 'widgets/modals/base';
+import details from 'lib/wallet/details';
+import { showError } from 'widgets/modals/flash';
+import CS from 'lib/wallet';
+import content from './content.ract';
 
 function open(callback) {
   const userInfo = details.get('userInfo');
@@ -11,7 +10,7 @@ function open(callback) {
 
   const ractive = new Ractive({
     partials: {
-      content: require('./content.ract'),
+      content,
     },
     data: {
       username: '',
@@ -44,5 +43,5 @@ function open(callback) {
   return ractive;
 }
 
-module.exports = open;
+export default open;
 

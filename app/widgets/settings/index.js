@@ -1,17 +1,16 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import initMain from './main';
+import initAccount from './account';
+import initAbout from './about';
+import initSecurityPin from './security/pin';
+import initSecurityHardware from './security/hardware';
+import details from 'lib/wallet/details';
+import template from './index.ract';
 
-const Ractive = require('lib/ractive');
-const initMain = require('./main');
-const initAccount = require('./account');
-const initAbout = require('./about');
-const initSecurityPin = require('./security/pin');
-const initSecurityHardware = require('./security/hardware');
-const details = require('lib/wallet/details');
-
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
   });
 
   const steps = {
@@ -43,4 +42,4 @@ module.exports = function(el) {
   }
 
   return ractive;
-};
+}

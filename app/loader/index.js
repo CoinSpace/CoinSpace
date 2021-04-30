@@ -1,9 +1,8 @@
-'use strict';
-
-require('../application.scss');
-
-const Sentry = require('@sentry/browser');
-const Integrations = require('@sentry/integrations');
+import '../application.scss';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+import * as Sentry from '@sentry/browser';
+import { CaptureConsole, RewriteFrames } from '@sentry/integrations';
 // eslint-disable-next-line no-useless-escape
 const SENTRY_PATH_STRIP_RE = /^.*\/[^\.]+(\.app|CodePush|.*(?=\/))/;
 Sentry.init({
@@ -12,10 +11,10 @@ Sentry.init({
   environment: process.env.SENTRY_ENVIRONMENT,
   release: process.env.RELEASE,
   integrations: [
-    new Integrations.CaptureConsole({
+    new CaptureConsole({
       levels: ['error'],
     }),
-    new Integrations.RewriteFrames({
+    new RewriteFrames({
       iteratee(frame) {
         if (frame.filename !== '[native code]' && frame.filename !== '<anonymous>') {
           // eslint-disable-next-line no-useless-escape
@@ -27,15 +26,18 @@ Sentry.init({
   ],
 });
 
-const { fadeOut } = require('lib/transitions/fade.js');
-const Modernizr = require('modernizr');
-const i18n = require('lib/i18n');
+import { fadeOut } from 'lib/transitions/fade.js';
+import i18n from 'lib/i18n';
+if (process.env.BUILD_PLATFORM === 'tor') {
+  window.urlRoot = `http://${process.env.DOMAIN_ONION}/`;
+} else {
+  window.urlRoot = process.env.SITE_URL;
+}
 
 function init() {
   i18n.loadTranslation().then(() => {
-    if (Modernizr.localstorage && Modernizr.webworkers && Modernizr.blobconstructor && Modernizr.getrandomvalues) {
+    if (window.localStorage && window.Worker) {
       const containerEl = document.getElementById('loader');
-
       return import(
         /* webpackChunkName: 'application' */
         '../application'

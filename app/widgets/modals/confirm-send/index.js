@@ -1,10 +1,8 @@
-'use strict';
-
-const btcBchLtc = require('./btcBchLtc');
-const ethereum = require('./ethereum');
-const ripple = require('./ripple');
-const stellar = require('./stellar');
-const eos = require('./eos');
+import btcBchLtc from './btcBchLtc';
+import ethereum from './ethereum';
+import ripple from './ripple';
+import stellar from './stellar';
+import eos from './eos';
 
 function open(data) {
   const network = data.wallet.networkName;
@@ -21,4 +19,4 @@ function open(data) {
   }
 }
 
-module.exports = open;
+export default open;

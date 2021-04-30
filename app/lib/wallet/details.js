@@ -1,12 +1,9 @@
-'use strict';
-
-const _ = require('lodash');
-const { encrypt, decrypt } = require('lib/encryption');
-const { randAvatarIndex } = require('lib/avatar');
-
-const request = require('lib/request');
-const LS = require('./localStorage');
-const seeds = require('./seeds');
+import _ from 'lodash';
+import { encrypt, decrypt } from 'lib/encryption';
+import { randAvatarIndex } from 'lib/avatar';
+import request from 'lib/request';
+import LS from './localStorage';
+import seeds from './seeds';
 
 const state = {
   details: null,
@@ -93,7 +90,7 @@ function _save(data) {
   }).then((details) => JSON.parse(decrypt(details.data, key)));
 }
 
-module.exports = {
+export default {
   get,
   set,
   init,

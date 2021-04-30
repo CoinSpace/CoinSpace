@@ -1,22 +1,22 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import emitter from 'lib/emitter';
+import initList from './list';
+import initSearch from './search';
+import tokens from 'lib/tokens';
+import { getCrypto, setCrypto } from 'lib/crypto';
+import { initWallet } from 'lib/wallet';
+import template from './index.ract';
+import loader from 'partials/loader/loader.ract';
 
-const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
-const initList = require('./list');
-const initSearch = require('./search');
-const tokens = require('lib/tokens');
-const { getCrypto, setCrypto } = require('lib/crypto');
-const { initWallet } = require('lib/wallet');
-
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       isLoading: true,
     },
     partials: {
-      loader: require('partials/loader/loader.ract'),
+      loader,
     },
   });
 
@@ -60,4 +60,4 @@ module.exports = function(el) {
   }
 
   return ractive;
-};
+}

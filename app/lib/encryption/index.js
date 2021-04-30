@@ -1,9 +1,7 @@
-'use strict';
+import crypto from 'crypto';
+import EVPBytesToKey from 'evp_bytestokey';
 
-const crypto = require('crypto');
-const EVPBytesToKey = require('evp_bytestokey');
-
-function encrypt(text, key) {
+export function encrypt(text, key) {
   const salt = crypto.randomBytes(8);
   const result = EVPBytesToKey(key, salt, 256, 16);
   const cipher = crypto.createCipheriv('aes-256-cbc', result.key, result.iv);
@@ -17,7 +15,7 @@ function encryptJSON(json, key) {
   return encrypt(JSON.stringify(json), key);
 }
 
-function decrypt(text, key) {
+export function decrypt(text, key) {
   const encryptedBytesWithSalt = Buffer.from(text, 'base64');
   const encryptedBytes = encryptedBytesWithSalt.slice(16, encryptedBytesWithSalt.length);
   const salt = encryptedBytesWithSalt.slice(8, 16);
@@ -32,7 +30,7 @@ function decryptJSON(text, key) {
   return JSON.parse(decrypt(text, key));
 }
 
-module.exports = {
+export default {
   encrypt,
   encryptJSON,
   decrypt,

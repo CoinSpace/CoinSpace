@@ -1,15 +1,14 @@
-'use strict';
-
-const Ractive = require('widgets/modals/base');
-const { getAvatar } = require('lib/avatar');
-const geo = require('lib/geo');
-const { showError } = require('widgets/modals/flash');
-const animatePin = require('lib/transitions/pinDrop.js').drop;
-const resetPin = require('lib/transitions/pinDrop.js').reset;
+import Ractive from 'widgets/modals/base';
+import { getAvatar } from 'lib/avatar';
+import geo from 'lib/geo';
+import { showError } from 'widgets/modals/flash';
+import { drop as animatePin } from 'lib/transitions/pinDrop.js';
+import { reset as resetPin } from 'lib/transitions/pinDrop.js';
+import template from './index.ract';
 
 function open(callback) {
   const ractive = new Ractive({
-    template: require('./index.ract'),
+    template,
     data: {
       nearbys: [],
       searching: true,
@@ -60,4 +59,4 @@ function open(callback) {
   return ractive;
 }
 
-module.exports = open;
+export default open;

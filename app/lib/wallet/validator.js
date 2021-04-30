@@ -1,8 +1,6 @@
-'use strict';
+import { toAtom, toUnitString } from 'lib/convert';
 
-const { toAtom, toUnitString } = require('lib/convert');
-
-function validateSend(options) {
+export function validateSend(options) {
   const amount = toAtom(options.amount);
   const { wallet } = options;
   const { to } = options;
@@ -103,4 +101,4 @@ function validateSend(options) {
   }
 }
 
-module.exports = validateSend;
+export default validateSend;

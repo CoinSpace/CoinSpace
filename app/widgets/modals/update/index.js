@@ -1,12 +1,11 @@
-'use strict';
-
-const Ractive = require('widgets/modals/base');
+import Ractive from 'widgets/modals/base';
+import content from './content.ract';
 
 function open({ confirmUpdate }) {
   const ractive = new Ractive({
     append: true,
     partials: {
-      content: require('./content.ract'),
+      content,
     },
     data: {},
   });
@@ -20,4 +19,4 @@ function open({ confirmUpdate }) {
   return ractive;
 }
 
-module.exports = open;
+export default open;

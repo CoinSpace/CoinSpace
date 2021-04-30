@@ -1,17 +1,16 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import emitter from 'lib/emitter';
+import PinWidget from 'widgets/pin';
+import PassphraseWidget from 'widgets/passphrase';
+import { translate } from 'lib/i18n';
+import CS from 'lib/wallet';
+import LS from 'lib/wallet/localStorage';
+import template from './index.ract';
 
-const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
-const PinWidget = require('widgets/pin');
-const PassphraseWidget = require('widgets/passphrase');
-const { translate } = require('lib/i18n');
-const CS = require('lib/wallet');
-const LS = require('lib/wallet/localStorage');
-
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
   });
 
   ractive.on('create-new-wallet', () => {
@@ -79,5 +78,4 @@ module.exports = function(el) {
   };
 
   return ractive;
-};
-
+}

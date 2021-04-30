@@ -1,9 +1,7 @@
-'use strict';
-
-const Velocity = require('velocity-animate');
+import Velocity from 'velocity-animate';
 let pulseInterval;
 
-function reset(pinEl, callback) {
+export function reset(pinEl, callback) {
   clearInterval(pulseInterval);
   if (pinEl !== undefined) {
     Velocity.animate(pinEl, { translateY: '-100%' }, {
@@ -15,7 +13,7 @@ function reset(pinEl, callback) {
   }
 }
 
-function drop(pinEl, pulseEl, callback) {
+export function drop(pinEl, pulseEl, callback) {
   Velocity.animate(pinEl, { translateY: 0 }, {
     easing: [400, 28],
     duration: 400,
@@ -48,7 +46,7 @@ function pulse(pulseEl) {
   });
 }
 
-module.exports = {
+export default {
   reset,
   drop,
 };

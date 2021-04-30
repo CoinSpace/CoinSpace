@@ -1,16 +1,16 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import emitter from 'lib/emitter';
+import moonpay from 'lib/moonpay';
+import { getWallet } from 'lib/wallet';
+import template from './index.ract';
+import loader from 'partials/loader/loader.ract';
 
-const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
-const moonpay = require('lib/moonpay');
-const { getWallet } = require('lib/wallet');
-
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     partials: {
-      loader: require('partials/loader/loader.ract'),
+      loader,
     },
     data: {
       isLoading: false,
@@ -51,4 +51,4 @@ module.exports = function(el) {
   }
 
   return ractive;
-};
+}

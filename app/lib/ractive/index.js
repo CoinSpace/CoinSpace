@@ -1,9 +1,8 @@
-'use strict';
-const Ractive = require('ractive/runtime.js');
+import Ractive from 'ractive/runtime.js';
 if (process.env.NODE_ENV === 'production') {
   Ractive.DEBUG = false;
 }
-const { translate } = require('lib/i18n');
+import { translate } from 'lib/i18n';
 
 // extracted from https://github.com/RactiveJS/Ractive-events-keys
 const makeKeyDefinition = function( code ) {
@@ -127,4 +126,4 @@ Ractive.decorators['numbers'] = (node) => {
   };
 };
 
-module.exports = Ractive;
+export default Ractive;

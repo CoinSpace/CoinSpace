@@ -1,14 +1,13 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import emitter from 'lib/emitter';
+import CS from 'lib/wallet';
+import { showError } from 'widgets/modals/flash';
+import template from './index.ract';
 
-const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
-const CS = require('lib/wallet');
-const { showError } = require('widgets/modals/flash');
-
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       isLoading: false,
     },
@@ -36,5 +35,5 @@ module.exports = function(el) {
   });
 
   return ractive;
-};
+}
 

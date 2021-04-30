@@ -1,10 +1,9 @@
-'use strict';
-
-const bip21 = require('lib/bip21');
+import bip21 from 'lib/bip21';
 
 // https://github.com/defunctzombie/qr.js/blob/515790fad4682b2d38008f229dbd814b0d2633e4/example/index.js
-const qr = require('qr.js');
-const EthereumWallet = require('@coinspace/cs-ethereum-wallet');
+import qr from 'qr.js';
+
+import EthereumWallet from '@coinspace/cs-ethereum-wallet';
 const { isValidIban } = EthereumWallet.prototype;
 const { getAddressFromIban } = EthereumWallet.prototype;
 const isScanAvailable = process.env.BUILD_TYPE === 'phonegap';
@@ -74,7 +73,7 @@ function scan(callback) {
   );
 }
 
-module.exports = {
+export default {
   encode,
   scan,
   isScanAvailable,

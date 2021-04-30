@@ -1,15 +1,14 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import emitter from 'lib/emitter';
+import { initWallet } from 'lib/wallet';
+import { getWallet } from 'lib/wallet';
+import { toUnitString, cryptoToFiat } from 'lib/convert';
+import details from 'lib/wallet/details';
+import ticker from 'lib/ticker-api';
+import { getCrypto } from 'lib/crypto';
+import template from './index.ract';
 
-const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
-const { initWallet } = require('lib/wallet');
-const { getWallet } = require('lib/wallet');
-const { toUnitString, cryptoToFiat } = require('lib/convert');
-const details = require('lib/wallet/details');
-const ticker = require('lib/ticker-api');
-const { getCrypto } = require('lib/crypto');
-
-module.exports = function(el) {
+export default function(el) {
 
   const state = {
     rates: ticker.getRates(getCrypto()._id),
@@ -19,7 +18,7 @@ module.exports = function(el) {
 
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       isSyncing: true,
       amount: '',
@@ -87,4 +86,4 @@ module.exports = function(el) {
   });
 
   return ractive;
-};
+}

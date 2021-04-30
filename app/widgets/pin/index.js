@@ -1,8 +1,7 @@
-'use strict';
-
-const Ractive = require('lib/ractive');
-const { translate } = require('lib/i18n');
-const { isEnabled } = require('lib/touch-id');
+import Ractive from 'lib/ractive';
+import { translate } from 'lib/i18n';
+import { isEnabled } from 'lib/touch-id';
+import template from './index.ract';
 const isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(window.navigator.userAgent);
 
 function open(options) {
@@ -25,7 +24,7 @@ function open(options) {
   const ractive = new Ractive({
     el: document.getElementById('general-purpose-overlay'),
     append,
-    template: require('./index.ract'),
+    template,
     data: {
       header,
       backLabel,
@@ -136,4 +135,4 @@ function open(options) {
   return ractive;
 }
 
-module.exports = open;
+export default open;

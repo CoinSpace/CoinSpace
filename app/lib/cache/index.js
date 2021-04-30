@@ -1,7 +1,5 @@
-'use strict';
-
-const { encryptJSON, decryptJSON } = require('lib/encryption');
-const request = require('lib/request');
+import { encryptJSON, decryptJSON } from 'lib/encryption';
+import request from 'lib/request';
 
 class Cache {
   constructor(baseUrl, name, key) {
@@ -45,4 +43,4 @@ class Cache {
   }
 }
 
-module.exports = Cache;
+export default Cache;

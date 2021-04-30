@@ -1,6 +1,4 @@
-'use strict';
-
-const request = require('lib/request');
+import request from 'lib/request';
 
 const { urlRoot } = window;
 
@@ -70,7 +68,7 @@ function getTransaction(id) {
   });
 }
 
-module.exports = {
+export default {
   getCoins,
   getPairsParams,
   estimate,

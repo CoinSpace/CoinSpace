@@ -1,15 +1,14 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import showEosSetupAccount from 'widgets/modals/eos-setup-account';
+import template from './index.ract';
 
-const Ractive = require('lib/ractive');
-const showEosSetupAccount = require('widgets/modals/eos-setup-account');
-
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
   });
 
   ractive.on('setup', showEosSetupAccount);
 
   return ractive;
-};
+}

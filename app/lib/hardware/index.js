@@ -1,9 +1,7 @@
-'use strict';
-
-const request = require('lib/request');
-const { startAttestation, startAssertion } = require('@simplewebauthn/browser');
-const { showError } = require('widgets/modals/flash');
-const windowExtra = require('lib/window-extra');
+import request from 'lib/request';
+import { startAttestation, startAssertion } from '@simplewebauthn/browser';
+import { showError } from 'widgets/modals/flash';
+import windowExtra from 'lib/window-extra';
 const { urlRoot, PublicKeyCredential } = window;
 const notSupportedError = () => {
   showError({
@@ -115,7 +113,7 @@ function handleError(err) {
   throw new Error('hardware_error');
 }
 
-module.exports = {
+export default {
   list,
   remove,
   add,

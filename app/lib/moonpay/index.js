@@ -1,7 +1,5 @@
-'use strict';
-
-const request = require('lib/request');
-const querystring = require('querystring');
+import request from 'lib/request';
+import querystring from 'querystring';
 const { urlRoot } = window;
 const apiKey = process.env.MOONPAY_API_KEY;
 let coins = {};
@@ -118,7 +116,7 @@ async function signUrls(urls) {
   return result.urls;
 }
 
-module.exports = {
+export default {
   init,
   getWidgetUrls,
 };

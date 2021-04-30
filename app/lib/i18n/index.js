@@ -1,6 +1,4 @@
-'use strict';
-
-const translate = require('counterpart');
+import counterpart from 'counterpart';
 
 const languages = [
   'bs', 'cs-cz', 'de', 'en', 'es', 'fil',
@@ -9,9 +7,9 @@ const languages = [
   'sr', 'th', 'uk', 'vi', 'zh-cn',
 ];
 
-translate.setSeparator('*');
+counterpart.setSeparator('*');
 
-translate.setMissingEntryGenerator((key) => {
+counterpart.setMissingEntryGenerator((key) => {
   console.error('Missing translation: ' + key);
   return key;
 });
@@ -22,14 +20,14 @@ function loadTranslation() {
     /* webpackChunkName: '[request]' */
     './translations/' + language
   ).then((translation) => {
-    translate.registerTranslations(language, translation);
-    translate.setLocale(language);
+    counterpart.registerTranslations(language, translation.default);
+    counterpart.setLocale(language);
   });
 }
 
-function safeTranslate() {
+export function translate() {
   if (arguments[0] === undefined) return '';
-  return translate.apply(null, arguments);
+  return counterpart.apply(null, arguments);
 }
 
 function getLanguage() {
@@ -39,8 +37,8 @@ function getLanguage() {
   })[0] || 'en';
 }
 
-module.exports = {
+export default {
   loadTranslation,
-  translate: safeTranslate,
+  translate,
   getLanguage,
 };

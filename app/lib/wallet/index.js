@@ -1,30 +1,27 @@
-'use strict';
+const worker = new Worker(new URL('./worker.js', import.meta.url));
+import LS from './localStorage';
 
-const Worker = require('worker-loader?inline&fallback=false!./worker.js');
-const worker = new Worker();
+import seeds from './seeds';
+import emitter from 'lib/emitter';
+import crypto from 'crypto';
+import encryption from 'lib/encryption';
+import CsWallet from '@coinspace/cs-wallet';
+import request from 'lib/request';
+import EthereumWallet from '@coinspace/cs-ethereum-wallet';
+import RippleWallet from '@coinspace/cs-ripple-wallet';
+import StellarWallet from '@coinspace/cs-stellar-wallet';
+import EOSWallet from '@coinspace/cs-eos-wallet';
 
-const LS = require('./localStorage');
-const seeds = require('./seeds');
-const emitter = require('lib/emitter');
-const crypto = require('crypto');
-const encryption = require('lib/encryption');
-const CsWallet = require('@coinspace/cs-wallet');
-const validateSend = require('./validator');
-const request = require('lib/request');
-const EthereumWallet = require('@coinspace/cs-ethereum-wallet');
-const RippleWallet = require('@coinspace/cs-ripple-wallet');
-const StellarWallet = require('@coinspace/cs-stellar-wallet');
-const EOSWallet = require('@coinspace/cs-eos-wallet');
-const { eddsa } = require('elliptic');
+import { eddsa } from 'elliptic';
+
 const ec = new eddsa('ed25519');
-const touchId = require('lib/touch-id');
-const ticker = require('lib/ticker-api');
-
-const convert = require('lib/convert');
-const { getCrypto } = require('lib/crypto');
-const details = require('lib/wallet/details');
-const settings = require('lib/wallet/settings');
-const bchaddr = require('bchaddrjs');
+import touchId from 'lib/touch-id';
+import ticker from 'lib/ticker-api';
+import convert from 'lib/convert';
+import { getCrypto } from 'lib/crypto';
+import details from 'lib/wallet/details';
+import settings from 'lib/wallet/settings';
+import bchaddr from 'bchaddrjs';
 
 const state = {
   wallet: null,
@@ -145,7 +142,7 @@ async function loginWithTouchId(showSpinner) {
   }
 }
 
-async function initWallet(pin) {
+export async function initWallet(pin) {
   const crypto = getCrypto();
 
   const seed = seeds.get('private');
@@ -219,7 +216,7 @@ function getExtraOptions(crypto) {
   return options;
 }
 
-async function updateWallet() {
+export async function updateWallet() {
   if (typeof state.wallet.update === 'function') {
     await state.wallet.update();
     emitter.emit('wallet-update');
@@ -254,11 +251,11 @@ function setUsername(username) {
   });
 }
 
-function getWallet() {
+export function getWallet() {
   return state.wallet;
 }
 
-function getDestinationInfo(to) {
+export function getDestinationInfo(to) {
   if (state.wallet.networkName === 'ripple' || state.wallet.networkName === 'stellar') {
     return state.wallet.getDestinationInfo(to);
   } else {
@@ -266,7 +263,7 @@ function getDestinationInfo(to) {
   }
 }
 
-function setToAlias(data) {
+export function setToAlias(data) {
   if (state.wallet.networkName !== 'bitcoincash') return;
   try {
     const legacy = bchaddr.toLegacyAddress(data.to);
@@ -297,7 +294,7 @@ async function loginWithPinLegacy(pin) {
   seeds.set('private', encryption.decrypt(encryptedSeed, token));
 }
 
-module.exports = {
+export default {
   createWallet,
   registerWallet,
   loginWithPin,
@@ -307,7 +304,6 @@ module.exports = {
   getWallet,
   initWallet,
   updateWallet,
-  validateSend,
   getDestinationInfo,
   setToAlias,
 };

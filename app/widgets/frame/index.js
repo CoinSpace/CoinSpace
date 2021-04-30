@@ -1,24 +1,23 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import emitter from 'lib/emitter';
+import initHeader from 'widgets/header';
+import initTabs from 'widgets/tabs';
+import initSend from 'pages/send';
+import initReceive from 'pages/receive';
+import initExchange from 'pages/exchange';
+import initHistory from 'pages/history';
+import initTokens from 'pages/tokens';
+import showSettings from 'widgets/settings';
+import { showError } from 'widgets/modals/flash';
+import { setCrypto } from 'lib/crypto';
+import { getWallet } from 'lib/wallet';
+import Hammer from 'hammerjs';
+import template from './index.ract';
 
-const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
-const initHeader = require('widgets/header');
-const initTabs = require('widgets/tabs');
-const initSend = require('pages/send');
-const initReceive = require('pages/receive');
-const initExchange = require('pages/exchange');
-const initHistory = require('pages/history');
-const initTokens = require('pages/tokens');
-const showSettings = require('widgets/settings');
-const { showError } = require('widgets/modals/flash');
-const { setCrypto } = require('lib/crypto');
-const { getWallet } = require('lib/wallet');
-const Hammer = require('hammerjs');
-
-module.exports = function(el, err) {
+export default function(el, err) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       isSettingsShown: false,
     },
@@ -115,4 +114,4 @@ module.exports = function(el, err) {
   emitter.emit('wallet-ready', { err });
 
   return ractive;
-};
+}

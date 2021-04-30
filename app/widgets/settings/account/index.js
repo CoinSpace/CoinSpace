@@ -1,15 +1,14 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import showRemoveConfirmation from 'widgets/modals/confirm-remove-account';
+import { showError } from 'widgets/modals/flash';
+import CS from 'lib/wallet';
+import details from 'lib/wallet/details';
+import template from './index.ract';
 
-const Ractive = require('lib/ractive');
-const showRemoveConfirmation = require('widgets/modals/confirm-remove-account');
-const { showError } = require('widgets/modals/flash');
-const CS = require('lib/wallet');
-const details = require('lib/wallet/details');
-
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       username: '',
       email: '',
@@ -56,4 +55,4 @@ module.exports = function(el) {
   });
 
   return ractive;
-};
+}

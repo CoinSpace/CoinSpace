@@ -1,6 +1,4 @@
-'use strict';
-
-const crypto = require('crypto');
+import crypto from 'crypto';
 const avatars = [
   require('../../assets/img/avatar_0.png'),
   require('../../assets/img/avatar_1.png'),
@@ -28,7 +26,7 @@ function emailToAvatar(email, size) {
   ].join('');
 }
 
-function randAvatarIndex() {
+export function randAvatarIndex() {
   return Math.floor(Math.random() * 10);
 }
 
@@ -36,7 +34,7 @@ function getAvatarByIndex(index) {
   return avatars[index];
 }
 
-function getAvatar(email, avatarIndex, size) {
+export function getAvatar(email, avatarIndex, size) {
   if (!blank(email)) {
     return emailToAvatar(email, size);
   }
@@ -47,7 +45,7 @@ function blank(str) {
   return (str == undefined || str.trim() === '');
 }
 
-module.exports = {
+export default {
   emailToAvatar,
   randAvatarIndex,
   getAvatarByIndex,

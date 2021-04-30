@@ -1,23 +1,22 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import LS from 'lib/wallet/localStorage';
+import Avatar from 'lib/avatar';
+import CS from 'lib/wallet';
+import details from 'lib/wallet/details';
+import importPrivateKey from 'widgets/modals/import-private-key';
+import exportPrivateKeys from 'widgets/modals/export-private-keys';
+import showEosSetupAccount from 'widgets/modals/eos-setup-account';
+import { translate } from 'lib/i18n';
+import os from 'lib/detect-os';
+import touchId from 'lib/touch-id';
+import emitter from 'lib/emitter';
+import template from './index.ract';
 
-const Ractive = require('lib/ractive');
-const LS = require('lib/wallet/localStorage');
-const Avatar = require('lib/avatar');
-const CS = require('lib/wallet');
-const details = require('lib/wallet/details');
-const importPrivateKey = require('widgets/modals/import-private-key');
-const exportPrivateKeys = require('widgets/modals/export-private-keys');
-const showEosSetupAccount = require('widgets/modals/eos-setup-account');
-const { translate } = require('lib/i18n');
-const os = require('lib/detect-os');
-const touchId = require('lib/touch-id');
-const emitter = require('lib/emitter');
-
-module.exports = function(el) {
+export default function(el) {
   const currency = details.get('systemInfo').preferredCurrency;
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       avatar: '',
       username: '',
@@ -105,7 +104,7 @@ module.exports = function(el) {
   });
 
   return ractive;
-};
+}
 
 function getSecurityPinLabel() {
   if (!touchId.isAvailable()) return translate('PIN');

@@ -1,6 +1,4 @@
-'use strict';
-
-const Velocity = require('velocity-animate');
+import Velocity from 'velocity-animate';
 let spinInterval;
 
 function spin(el) {
@@ -20,7 +18,7 @@ function stop() {
   clearInterval(spinInterval);
 }
 
-module.exports = {
+export default {
   stop,
   spin,
 };

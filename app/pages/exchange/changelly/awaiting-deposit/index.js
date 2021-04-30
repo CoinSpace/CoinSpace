@@ -1,12 +1,12 @@
-'use strict';
-
-const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
-const qrcode = require('lib/qrcode');
-const details = require('lib/wallet/details');
-const showTooltip = require('widgets/modals/tooltip');
-const { translate } = require('lib/i18n');
-const clipboard = require('lib/clipboard');
+import Ractive from 'lib/ractive';
+import emitter from 'lib/emitter';
+import qrcode from 'lib/qrcode';
+import details from 'lib/wallet/details';
+import showTooltip from 'widgets/modals/tooltip';
+import { translate } from 'lib/i18n';
+import clipboard from 'lib/clipboard';
+import template from './index.ract';
+import footer from '../footer.ract';
 
 const extraIdLabels = {
   XLM: 'Memo',
@@ -14,10 +14,10 @@ const extraIdLabels = {
   XRP: 'Destination tag',
 };
 
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       depositAmount: '',
       depositSymbol: '',
@@ -32,7 +32,7 @@ module.exports = function(el) {
       isPhonegap: process.env.BUILD_TYPE === 'phonegap',
     },
     partials: {
-      footer: require('../footer.ract'),
+      footer,
     },
   });
 
@@ -115,4 +115,4 @@ module.exports = function(el) {
   }
 
   return ractive;
-};
+}

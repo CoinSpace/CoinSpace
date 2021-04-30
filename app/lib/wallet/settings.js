@@ -1,6 +1,4 @@
-'use strict';
-
-const request = require('lib/request');
+import request from 'lib/request';
 const { urlRoot } = window;
 
 const state = {
@@ -49,7 +47,7 @@ function clientSet(key, value) {
   state.settings[key] = value;
 }
 
-module.exports = {
+export default {
   get,
   set,
   clientSet,

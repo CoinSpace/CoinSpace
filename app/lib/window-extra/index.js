@@ -1,7 +1,5 @@
-'use strict';
-
-const emitter = require('lib/emitter');
-const querystring = require('querystring');
+import emitter from 'lib/emitter';
+import querystring from 'querystring';
 
 const windows = {};
 
@@ -42,6 +40,6 @@ function open(options) {
   return promise;
 }
 
-module.exports = {
+export default {
   open,
 };

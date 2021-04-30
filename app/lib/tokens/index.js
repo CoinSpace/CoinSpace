@@ -1,11 +1,9 @@
-'use strict';
-
-const _ = require('lodash');
-const Fuse = require('fuse.js/dist/fuse.basic.common.js');
-const LS = require('lib/wallet/localStorage');
-const emitter = require('lib/emitter');
-const request = require('lib/request');
-const details = require('lib/wallet/details');
+import _ from 'lodash';
+import Fuse from 'fuse.js/dist/fuse.basic.common.js';
+import LS from 'lib/wallet/localStorage';
+import emitter from 'lib/emitter';
+import request from 'lib/request';
+import details from 'lib/wallet/details';
 const { urlRoot } = window;
 
 let cache;
@@ -156,7 +154,7 @@ emitter.once('wallet-ready', () => {
   });
 });
 
-module.exports = {
+export default {
   init,
   getTokens,
   getTokenById,

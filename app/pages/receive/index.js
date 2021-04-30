@@ -1,23 +1,22 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import emitter from 'lib/emitter';
+import CS from 'lib/wallet';
+import showTooltip from 'widgets/modals/tooltip';
+import geo from 'lib/geo';
+import { showError } from 'widgets/modals/flash';
+import showSetDetails from 'widgets/modals/set-details';
+import qrcode from 'lib/qrcode';
+import initEosSetup from 'widgets/eos/setup';
+import details from 'lib/wallet/details';
+import clipboard from 'lib/clipboard';
+import { translate } from 'lib/i18n';
+import { getWallet } from 'lib/wallet';
+import template from './index.ract';
 
-const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
-const CS = require('lib/wallet');
-const showTooltip = require('widgets/modals/tooltip');
-const geo = require('lib/geo');
-const { showError } = require('widgets/modals/flash');
-const showSetDetails = require('widgets/modals/set-details');
-const qrcode = require('lib/qrcode');
-const initEosSetup = require('widgets/eos/setup');
-const details = require('lib/wallet/details');
-const clipboard = require('lib/clipboard');
-const { translate } = require('lib/i18n');
-const { getWallet } = require('lib/wallet');
-
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       address: '',
       qrVisible: false,
@@ -173,4 +172,4 @@ module.exports = function(el) {
   }
 
   return ractive;
-};
+}

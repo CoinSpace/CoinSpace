@@ -1,12 +1,9 @@
-'use strict';
-
 const Dotenv = require('dotenv-webpack');
 const webpack = require('webpack');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const autoprefixer = require('autoprefixer');
 const common = require('./webpack.common.js');
 const pkg = require('./package.json');
-const path = require('path');
 
 const dotEnv = new Dotenv({
   path: '.env.loc',
@@ -15,6 +12,9 @@ const dotEnv = new Dotenv({
 });
 
 module.exports = merge(common, {
+  mode: 'development',
+  cache: true, // disable cache while "npm link"
+  target: 'web',
   output: {
     publicPath: '/',
   },
@@ -39,20 +39,6 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        include: [
-          path.resolve(__dirname, './node_modules/@simplewebauthn/browser/'),
-        ],
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: 'env',
-            parserOpts: { plugins: ['objectRestSpread'] },
-            plugins: ['transform-object-rest-spread'],
-          },
-        },
-      },
-      {
         test: /\.(sass|scss)$/,
         use: [
           {
@@ -64,9 +50,11 @@ module.exports = merge(common, {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: [
-                autoprefixer,
-              ],
+              postcssOptions: {
+                plugins: [
+                  autoprefixer,
+                ],
+              },
             },
           },
           {
@@ -78,13 +66,12 @@ module.exports = merge(common, {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
     dotEnv,
     new webpack.DefinePlugin({
       'process.env.BUILD_TYPE': JSON.stringify('web'),
       'process.env.BUILD_PLATFORM': JSON.stringify('web'),
       'process.env.RELEASE': JSON.stringify(`${pkg.name}.web-web@${pkg.version}`),
-      'process.env.SENTRY_DSN': dotEnv.definitions['process.env.SENTRY_DSN'],
+      'process.env.SENTRY_DSN': JSON.stringify(dotEnv.getEnvs().env.SENTRY_DSN),
     }),
   ],
 });

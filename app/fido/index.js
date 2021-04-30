@@ -1,10 +1,8 @@
-'use strict';
-
-const { startAttestation, startAssertion } = require('@simplewebauthn/browser');
+import { startAttestation, startAssertion } from '@simplewebauthn/browser';
 const { PublicKeyCredential } = window;
 let $backBtn;
 
-const querystring = require('querystring');
+import querystring from 'querystring';
 
 async function init() {
   $backBtn = document.getElementById('back-btn');

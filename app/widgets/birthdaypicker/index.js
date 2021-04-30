@@ -1,8 +1,7 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import template from './index.ract';
 
-const Ractive = require('lib/ractive');
-
-module.exports = function(el, date) {
+export default function(el, date) {
   const now = new Date();
   const maxYear = now.getFullYear() - 18;
   const minYear = maxYear - 120;
@@ -13,7 +12,7 @@ module.exports = function(el, date) {
 
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       months: [
         'January',
@@ -68,4 +67,4 @@ module.exports = function(el, date) {
   };
 
   return ractive;
-};
+}

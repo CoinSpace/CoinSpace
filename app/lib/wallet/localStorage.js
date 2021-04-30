@@ -1,5 +1,4 @@
-'use strict';
-const encryption = require('lib/encryption');
+import encryption from 'lib/encryption';
 const { localStorage } = window;
 
 function getEncryptedSeed(type) {
@@ -95,7 +94,7 @@ function setFidoTouchIdEnabled(value) {
   return localStorage.setItem('_cs_touchid_enabled', value);
 }
 
-module.exports = {
+export default {
   getCredentials, // DEPRECATED
   deleteCredentialsLegacy, // DEPRECATED
   getPin,

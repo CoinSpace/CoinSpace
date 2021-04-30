@@ -1,18 +1,18 @@
-'use strict';
-
-const Ractive = require('lib/ractive');
-const security = require('lib/wallet/security');
-const strftime = require('strftime');
-const hardware = require('lib/hardware');
-const PassphraseWidget = require('widgets/passphrase');
-const CS = require('lib/wallet');
-const settings = require('lib/wallet/settings');
+import Ractive from 'lib/ractive';
+import security from 'lib/wallet/security';
+import strftime from 'strftime';
+import hardware from 'lib/hardware';
+import PassphraseWidget from 'widgets/passphrase';
+import CS from 'lib/wallet';
+import settings from 'lib/wallet/settings';
+import template from './index.ract';
+import loader from 'partials/loader/loader.ract';
 const MAX_AUTHENTICATORS = 10;
 
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       MAX_AUTHENTICATORS,
       isLoading: true,
@@ -23,7 +23,7 @@ module.exports = function(el) {
       },
     },
     partials: {
-      loader: require('partials/loader/loader.ract'),
+      loader,
     },
   });
 
@@ -84,4 +84,4 @@ module.exports = function(el) {
   }
 
   return ractive;
-};
+}

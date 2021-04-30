@@ -1,9 +1,8 @@
-'use strict';
+import Ractive from 'widgets/modals/base';
+import { translate } from 'lib/i18n';
+import content from './content.ract';
 
-const Ractive = require('widgets/modals/base');
-const { translate } = require('lib/i18n');
-
-module.exports = function showTooltip(data) {
+export default function showTooltip(data) {
 
   if (!data.isTranslated) {
     data.message = translate(data.message, data.interpolations);
@@ -12,10 +11,10 @@ module.exports = function showTooltip(data) {
   const ractive = new Ractive({
     el: document.getElementById('tooltip'),
     partials: {
-      content: require('./content.ract'),
+      content,
     },
     data,
   });
 
   return ractive;
-};
+}

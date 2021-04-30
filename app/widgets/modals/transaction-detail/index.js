@@ -1,25 +1,28 @@
-'use strict';
+import Ractive from 'widgets/modals/base';
+import showConfirmAcceleration from 'widgets/modals/confirm-acceleration';
+import { getWallet } from 'lib/wallet';
+import { showInfo } from 'widgets/modals/flash';
+import contentEthereum from './contentEthereum.ract';
+import contentRipple from './contentRipple.ract';
+import contentStellar from './contentStellar.ract';
+import contentEOS from './contentEOS.ract';
+import contentBtcBchLtc from './contentBtcBchLtc.ract';
 
-const Ractive = require('widgets/modals/base');
-const showConfirmAcceleration = require('widgets/modals/confirm-acceleration');
-const { getWallet } = require('lib/wallet');
-const { showInfo } = require('widgets/modals/flash');
-
-module.exports = function(data) {
+export default function(data) {
   let content;
   data.showAllInputs = false;
   data.inputsPerPage = 10;
   if (data.isNetwork('ethereum')) {
     data.isPendingFee = data.transaction.fee === -1;
-    content = require('./contentEthereum.ract');
+    content = contentEthereum;
   } else if (data.isNetwork('ripple')) {
-    content = require('./contentRipple.ract');
+    content = contentRipple;
   } else if (data.isNetwork('stellar')) {
-    content = require('./contentStellar.ract');
+    content = contentStellar;
   } else if (data.isNetwork('eos')) {
-    content = require('./contentEOS.ract');
+    content = contentEOS;
   } else {
-    content = require('./contentBtcBchLtc.ract');
+    content = contentBtcBchLtc;
   }
 
   const ractive = new Ractive({
@@ -50,5 +53,5 @@ module.exports = function(data) {
   });
 
   return ractive;
-};
+}
 

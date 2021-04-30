@@ -1,26 +1,25 @@
-'use strict';
-
-const Ractive = require('lib/ractive');
-const Big = require('big.js');
-const emitter = require('lib/emitter');
-const details = require('lib/wallet/details');
-const { getWallet, updateWallet } = require('lib/wallet');
-const { setToAlias } = require('lib/wallet');
-const { showError } = require('widgets/modals/flash');
-const { showInfo } = require('widgets/modals/flash');
-const showConfirmation = require('widgets/modals/confirm-send');
-const showMecto = require('widgets/modals/mecto');
-const showTooltip = require('widgets/modals/tooltip');
-const { validateSend } = require('lib/wallet');
-const { getDestinationInfo } = require('lib/wallet');
-const { resolveTo } = require('lib/openalias');
-const qrcode = require('lib/qrcode');
-const initEosSetup = require('widgets/eos/setup');
-const { toAtom, toUnitString, cryptoToFiat, fiatToCrypto, toDecimalString } = require('lib/convert');
-const { translate } = require('lib/i18n');
-const ticker = require('lib/ticker-api');
-const { getCrypto } = require('lib/crypto');
-const bip21 = require('lib/bip21');
+import Ractive from 'lib/ractive';
+import Big from 'big.js';
+import emitter from 'lib/emitter';
+import details from 'lib/wallet/details';
+import { getWallet, updateWallet } from 'lib/wallet';
+import { setToAlias } from 'lib/wallet';
+import { showError } from 'widgets/modals/flash';
+import { showInfo } from 'widgets/modals/flash';
+import showConfirmation from 'widgets/modals/confirm-send';
+import showMecto from 'widgets/modals/mecto';
+import showTooltip from 'widgets/modals/tooltip';
+import { validateSend } from 'lib/wallet/validator';
+import { getDestinationInfo } from 'lib/wallet';
+import { resolveTo } from 'lib/openalias';
+import qrcode from 'lib/qrcode';
+import initEosSetup from 'widgets/eos/setup';
+import { toAtom, toUnitString, cryptoToFiat, fiatToCrypto, toDecimalString } from 'lib/convert';
+import { translate } from 'lib/i18n';
+import ticker from 'lib/ticker-api';
+import { getCrypto } from 'lib/crypto';
+import bip21 from 'lib/bip21';
+import template from './index.ract';
 
 const FACTORS = {
   bitcoin: {
@@ -40,13 +39,13 @@ const FACTORS = {
   },
 };
 
-module.exports = function(el) {
+export default function(el) {
   const rates = ticker.getRates(getCrypto()._id);
   const currency = details.get('systemInfo').preferredCurrency;
 
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       currency,
       rates,
@@ -416,4 +415,4 @@ module.exports = function(el) {
   }
 
   return ractive;
-};
+}

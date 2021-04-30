@@ -1,8 +1,7 @@
-'use strict';
-
-const Ractive = require('lib/ractive');
-const { translate } = require('lib/i18n');
-const { showError } = require('widgets/modals/flash');
+import Ractive from 'lib/ractive';
+import { translate } from 'lib/i18n';
+import { showError } from 'widgets/modals/flash';
+import template from './index.ract';
 
 function open(options, callback) {
   const {
@@ -18,7 +17,7 @@ function open(options, callback) {
 
   const ractive = new Ractive({
     el: document.getElementById('general-purpose-overlay'),
-    template: require('./index.ract'),
+    template,
     data: {
       header,
       animation,
@@ -74,4 +73,4 @@ function open(options, callback) {
 
   return ractive;
 }
-module.exports = open;
+export default open;

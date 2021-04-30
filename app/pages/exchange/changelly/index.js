@@ -1,26 +1,26 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import emitter from 'lib/emitter';
+import initCreate from './create';
+import initEnterAmount from './enter-amount';
+import initAwaitingDeposit from './awaiting-deposit';
+import initAwaiting from './awaiting';
+import initComplete from './complete';
+import initError from './error';
+import details from 'lib/wallet/details';
+import changelly from 'lib/changelly';
+import { showError } from 'widgets/modals/flash';
+import template from './index.ract';
+import loader from 'partials/loader/loader.ract';
 
-const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
-const initCreate = require('./create');
-const initEnterAmount = require('./enter-amount');
-const initAwaitingDeposit = require('./awaiting-deposit');
-const initAwaiting = require('./awaiting');
-const initComplete = require('./complete');
-const initError = require('./error');
-const details = require('lib/wallet/details');
-const changelly = require('lib/changelly');
-const { showError } = require('widgets/modals/flash');
-
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       isLoading: true,
     },
     partials: {
-      loader: require('partials/loader/loader.ract'),
+      loader,
     },
   });
 
@@ -100,4 +100,4 @@ module.exports = function(el) {
   }
 
   return ractive;
-};
+}

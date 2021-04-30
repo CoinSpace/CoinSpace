@@ -1,16 +1,15 @@
-'use strict';
-
-const Ractive = require('widgets/modals/base');
-const emitter = require('lib/emitter');
-const { unlock, lock } = require('lib/wallet/security');
-const { showError, showSuccess } = require('widgets/modals/flash');
-const { toUnitString } = require('lib/convert');
+import Ractive from 'widgets/modals/base';
+import emitter from 'lib/emitter';
+import { unlock, lock } from 'lib/wallet/security';
+import { showError, showSuccess } from 'widgets/modals/flash';
+import { toUnitString } from 'lib/convert';
+import content from './_content.ract';
 
 function open(data) {
 
   const ractive = new Ractive({
     partials: {
-      content: require('./_content.ract'),
+      content,
     },
     data: extendData(data),
   });
@@ -74,4 +73,4 @@ function extendData(data) {
   return data;
 }
 
-module.exports = open;
+export default open;

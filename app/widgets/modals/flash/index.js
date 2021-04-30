@@ -1,7 +1,6 @@
-'use strict';
-
-const Ractive = require('widgets/modals/base');
-const { translate } = require('lib/i18n');
+import Ractive from 'widgets/modals/base';
+import { translate } from 'lib/i18n';
+import content from './content.ract';
 
 const defaults = {
   error: {
@@ -41,7 +40,7 @@ function openModal(type, data) {
   const ractive = new Ractive({
     el: data.el || document.getElementById('flash-modal'),
     partials: {
-      content: require('./content.ract'),
+      content,
     },
     data,
   });
@@ -49,22 +48,22 @@ function openModal(type, data) {
   return ractive;
 }
 
-function showError(data) {
+export function showError(data) {
   if (data.message === 'Network Error') {
     data.message = 'Request timeout. Please check your internet connection.';
   }
   return openModal('error', data);
 }
 
-function showInfo(data) {
+export function showInfo(data) {
   return openModal('info', data);
 }
 
-function showSuccess(data) {
+export function showSuccess(data) {
   return openModal('success', data);
 }
 
-module.exports = {
+export default {
   showError,
   showInfo,
   showSuccess,

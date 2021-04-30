@@ -1,15 +1,16 @@
-'use strict';
-
-const Ractive = require('lib/ractive');
-const { fadeIn } = require('lib/transitions/fade.js');
-const { fadeOut } = require('lib/transitions/fade.js');
+import Ractive from 'lib/ractive';
+import { fadeIn } from 'lib/transitions/fade.js';
+import { fadeOut } from 'lib/transitions/fade.js';
+import template from './index.ract';
+import content from './content.ract';
+import cross from './cross.ract';
 
 const Modal = Ractive.extend({
   el: document.getElementById('general-purpose-overlay'),
-  template: require('./index.ract'),
+  template,
   partials: {
-    content: require('./content.ract'),
-    cross: require('./cross.ract'),
+    content,
+    cross,
   },
   onrender() {
 
@@ -47,5 +48,5 @@ const Modal = Ractive.extend({
   },
 });
 
-module.exports = Modal;
+export default Modal;
 

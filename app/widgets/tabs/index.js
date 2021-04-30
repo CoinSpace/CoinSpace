@@ -1,12 +1,11 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import emitter from 'lib/emitter';
+import template from './index.ract';
 
-const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
-
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
   });
 
   const tabElements = {
@@ -38,4 +37,4 @@ module.exports = function(el) {
   });
 
   return ractive;
-};
+}

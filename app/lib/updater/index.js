@@ -1,7 +1,5 @@
-'use strict';
-
-const request = require('lib/request');
-const showUpdate = require('widgets/modals/update');
+import request from 'lib/request';
+import showUpdate from 'widgets/modals/update';
 const { urlRoot, localStorage } = window;
 
 let update = false;
@@ -41,7 +39,7 @@ function confirmUpdate() {
   window.safeOpen(update.url, '_blank');
 }
 
-module.exports = {
+export default {
   init,
   confirmUpdate,
   hasUpdate: () => !!update,

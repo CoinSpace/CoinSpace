@@ -1,17 +1,15 @@
-'use strict';
-
-const request = require('lib/request');
-const PinWidget = require('widgets/pin');
-const settings = require('lib/wallet/settings');
-const seeds = require('./seeds');
-const LS = require('./localStorage');
-const crypto = require('crypto');
-const emitter = require('lib/emitter');
-const touchId = require('lib/touch-id');
-const hardware = require('lib/hardware');
+import request from 'lib/request';
+import PinWidget from 'widgets/pin';
+import settings from 'lib/wallet/settings';
+import seeds from './seeds';
+import LS from './localStorage';
+import crypto from 'crypto';
+import emitter from 'lib/emitter';
+import touchId from 'lib/touch-id';
+import hardware from 'lib/hardware';
 const { urlRoot } = window;
 
-function unlock(wallet) {
+export function unlock(wallet) {
   return new Promise((resolve, reject) => {
     if (settings.get('1faPrivate')) {
       const pinWidget = PinWidget({
@@ -72,7 +70,7 @@ function unlock(wallet) {
   });
 }
 
-function lock(wallet) {
+export function lock(wallet) {
   if (wallet) wallet.lock();
   seeds.lock('private');
 }
@@ -108,7 +106,7 @@ async function _getPrivateToken() {
   }
 }
 
-module.exports = {
+export default {
   unlock,
   lock,
 };

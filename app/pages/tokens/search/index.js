@@ -1,17 +1,16 @@
-'use strict';
-
-const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
-const details = require('lib/wallet/details');
-const tokens = require('lib/tokens');
-const addCustomToken = require('widgets/modals/add-custom-token');
+import Ractive from 'lib/ractive';
+import emitter from 'lib/emitter';
+import details from 'lib/wallet/details';
+import tokens from 'lib/tokens';
+import addCustomToken from 'widgets/modals/add-custom-token';
+import template from './index.ract';
 
 const PER_PAGE = 10;
 
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       searchQuery: null,
       ethereumTokens: [],
@@ -73,4 +72,4 @@ module.exports = function(el) {
   });
 
   return ractive;
-};
+}

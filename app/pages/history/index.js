@@ -1,21 +1,20 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import emitter from 'lib/emitter';
+import { toUnitString } from 'lib/convert';
+import { getWallet } from 'lib/wallet';
+import strftime from 'strftime';
+import { showError } from 'widgets/modals/flash';
+import showTransactionDetail from 'widgets/modals/transaction-detail';
+import initEosSetup from 'widgets/eos/setup';
+import { translate } from 'lib/i18n';
+import _ from 'lodash';
+import template from './index.ract';
 
-const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
-const { toUnitString } = require('lib/convert');
-const { getWallet } = require('lib/wallet');
-const strftime = require('strftime');
-const { showError } = require('widgets/modals/flash');
-const showTransactionDetail = require('widgets/modals/transaction-detail');
-const initEosSetup = require('widgets/eos/setup');
-const { translate } = require('lib/i18n');
-const _ = require('lodash');
-
-module.exports = function(el) {
+export default function(el) {
   let network = '';
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       transactions: [],
       formatTimestamp(timestamp) {
@@ -145,4 +144,4 @@ module.exports = function(el) {
   }
 
   return ractive;
-};
+}

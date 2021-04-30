@@ -1,14 +1,13 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import emitter from 'lib/emitter';
+import initChangelly from './changelly';
+import initNone from './none';
+import template from './index.ract';
 
-const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
-const initChangelly = require('./changelly');
-const initNone = require('./none');
-
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
   });
 
   const exchanges = {
@@ -47,4 +46,4 @@ module.exports = function(el) {
   }
 
   return ractive;
-};
+}

@@ -1,11 +1,10 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import template from './index.ract';
 
-const Ractive = require('lib/ractive');
-
-module.exports = function(el, options, selectedOption) {
+export default function(el, options, selectedOption) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       options,
       getLabel(code) {
@@ -23,4 +22,4 @@ module.exports = function(el, options, selectedOption) {
   };
 
   return ractive;
-};
+}

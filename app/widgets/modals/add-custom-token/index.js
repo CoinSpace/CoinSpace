@@ -1,17 +1,16 @@
-'use strict';
-
-const Ractive = require('widgets/modals/base');
-const emitter = require('lib/emitter');
-const { showError } = require('widgets/modals/flash');
-const qrcode = require('lib/qrcode');
-const details = require('lib/wallet/details');
-const tokens = require('lib/tokens');
+import Ractive from 'widgets/modals/base';
+import emitter from 'lib/emitter';
+import { showError } from 'widgets/modals/flash';
+import qrcode from 'lib/qrcode';
+import details from 'lib/wallet/details';
+import tokens from 'lib/tokens';
+import content from './_content.ract';
 
 function open() {
 
   const ractive = new Ractive({
     partials: {
-      content: require('./_content.ract'),
+      content,
     },
     data: {
       qrScannerAvailable: qrcode.isScanAvailable,
@@ -85,4 +84,4 @@ function open() {
   return ractive;
 }
 
-module.exports = open;
+export default open;

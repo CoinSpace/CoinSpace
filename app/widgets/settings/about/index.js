@@ -1,12 +1,11 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import updater from 'lib/updater';
+import template from './index.ract';
 
-const Ractive = require('lib/ractive');
-const updater = require('lib/updater');
-
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       version: process.env.VERSION,
       commit: process.env.COMMIT,
@@ -29,4 +28,4 @@ module.exports = function(el) {
   ractive.on('confirmUpdate', updater.confirmUpdate);
 
   return ractive;
-};
+}

@@ -1,14 +1,13 @@
-'use strict';
-
-const Ractive = require('widgets/modals/base');
-const { showError } = require('widgets/modals/flash');
-const qrcode = require('lib/qrcode');
-const showConfirmation = require('widgets/modals/confirm-send');
-const { showInfo } = require('widgets/modals/flash');
-const { getWallet } = require('lib/wallet');
-const { setToAlias } = require('lib/wallet');
-const { toUnitString } = require('lib/convert');
-const _ = require('lodash');
+import Ractive from 'widgets/modals/base';
+import { showError } from 'widgets/modals/flash';
+import qrcode from 'lib/qrcode';
+import showConfirmation from 'widgets/modals/confirm-send';
+import { showInfo } from 'widgets/modals/flash';
+import { getWallet } from 'lib/wallet';
+import { setToAlias } from 'lib/wallet';
+import { toUnitString } from 'lib/convert';
+import _ from 'lodash';
+import content from './_content.ract';
 
 let ractive;
 
@@ -16,7 +15,7 @@ function open() {
 
   ractive = new Ractive({
     partials: {
-      content: require('./_content.ract'),
+      content,
     },
     data: {
       isLoading: false,
@@ -83,4 +82,4 @@ function open() {
   return ractive;
 }
 
-module.exports = open;
+export default open;

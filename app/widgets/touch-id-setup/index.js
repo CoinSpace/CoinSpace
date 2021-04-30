@@ -1,9 +1,8 @@
-'use strict';
-
-const Ractive = require('lib/ractive');
-const { translate } = require('lib/i18n');
-const os = require('lib/detect-os');
-const touchId = require('lib/touch-id');
+import Ractive from 'lib/ractive';
+import { translate } from 'lib/i18n';
+import os from 'lib/detect-os';
+import touchId from 'lib/touch-id';
+import template from './index.ract';
 
 function open(options) {
   const {
@@ -18,7 +17,7 @@ function open(options) {
   const ractive = new Ractive({
     el: document.getElementById('general-purpose-overlay'),
     append,
-    template: require('./index.ract'),
+    template,
     data: {
       header,
       description,
@@ -90,4 +89,4 @@ function getButtonLabel() {
   }
 }
 
-module.exports = open;
+export default open;

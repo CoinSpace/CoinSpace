@@ -1,16 +1,17 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import emitter from 'lib/emitter';
+import CS from 'lib/wallet';
+import changelly from 'lib/changelly';
+import { showError } from 'widgets/modals/flash';
+import _ from 'lodash';
+import template from './index.ract';
+import footer from '../footer.ract';
+import loader from 'partials/loader/loader.ract';
 
-const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
-const CS = require('lib/wallet');
-const changelly = require('lib/changelly');
-const { showError } = require('widgets/modals/flash');
-const _ = require('lodash');
-
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       isLoading: true,
       isLoadingEstimate: true,
@@ -23,8 +24,8 @@ module.exports = function(el) {
       coins: [],
     },
     partials: {
-      loader: require('partials/loader/loader.ract'),
-      footer: require('../footer.ract'),
+      loader,
+      footer,
     },
   });
 
@@ -173,4 +174,4 @@ module.exports = function(el) {
   }, 500);
 
   return ractive;
-};
+}

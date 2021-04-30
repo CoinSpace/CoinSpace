@@ -1,24 +1,16 @@
-'use strict';
-
-if (process.env.BUILD_PLATFORM === 'tor') {
-  window.urlRoot = `http://${process.env.DOMAIN_ONION}/`;
-} else {
-  window.urlRoot = process.env.SITE_URL;
-}
+import emitter from 'lib/emitter';
+import bip21 from 'lib/bip21';
+import LS from 'lib/wallet/localStorage';
+import initFrame from 'widgets/frame';
+import initAuth from 'pages/auth';
+import touchId from 'lib/touch-id';
+import updater from 'lib/updater';
+import querystring from 'querystring';
+import { showError } from 'widgets/modals/flash';
+import showTouchIdSetup from 'widgets/touch-id-setup';
+import { fadeIn } from 'lib/transitions/fade.js';
 
 window.initCSApp = async function() {
-  const emitter = require('lib/emitter');
-  const bip21 = require('lib/bip21');
-  const LS = require('lib/wallet/localStorage');
-  const initFrame = require('widgets/frame');
-  const initAuth = require('pages/auth');
-  const touchId = require('lib/touch-id');
-  const updater = require('lib/updater');
-  const querystring = require('querystring');
-  const { showError } = require('widgets/modals/flash');
-  const showTouchIdSetup = require('widgets/touch-id-setup');
-
-  const { fadeIn } = require('lib/transitions/fade.js');
 
   const appEl = document.getElementById('app');
 

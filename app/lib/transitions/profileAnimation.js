@@ -1,6 +1,4 @@
-'use strict';
-
-const Velocity = require('velocity-animate');
+import Velocity from 'velocity-animate';
 
 function animateProfile(el, props, display, context, callback) {
   context.set('animating', true);
@@ -15,7 +13,7 @@ function animateProfile(el, props, display, context, callback) {
   });
 }
 
-module.exports = {
+export default {
   show(el, context, callback) {
     animateProfile(el, {
       scale: [1.0, 'spring'],

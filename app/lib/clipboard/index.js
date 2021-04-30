@@ -1,6 +1,4 @@
-'use strict';
-
-const Clipboard = require('clipboard');
+import Clipboard from 'clipboard';
 
 function init(ractive, selector, isCopied) {
   if (!Clipboard.isSupported()) return;
@@ -18,4 +16,4 @@ function init(ractive, selector, isCopied) {
   return clipboard;
 }
 
-module.exports = init;
+export default init;

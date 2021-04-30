@@ -1,8 +1,6 @@
-'use strict';
-
-const request = require('lib/request');
-const details = require('lib/wallet/details');
-const { getWallet } = require('lib/wallet');
+import request from 'lib/request';
+import details from 'lib/wallet/details';
+import { getWallet } from 'lib/wallet';
 const { urlRoot } = window;
 
 async function save() {
@@ -72,7 +70,7 @@ async function getLocation() {
   });
 }
 
-module.exports = {
+export default {
   search,
   save,
   remove,

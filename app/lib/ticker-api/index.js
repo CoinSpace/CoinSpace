@@ -1,7 +1,5 @@
-'use strict';
-
-const request = require('lib/request');
-const emitter = require('lib/emitter');
+import request from 'lib/request';
+import emitter from 'lib/emitter';
 
 let rates = {};
 
@@ -45,7 +43,7 @@ function getRates(cryptoId) {
   return rates[cryptoId] || {};
 }
 
-module.exports = {
+export default {
   init,
   getAllRates,
   getRates,

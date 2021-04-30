@@ -1,5 +1,3 @@
-'use strict';
-
 const { urlRoot } = window;
 const supportedProtocols = [
   'bitcoin',
@@ -46,7 +44,7 @@ function registerProtocolHandler(network) {
   } catch (e) {}
 }
 
-module.exports = {
+export default {
   isValidScheme,
   decode,
   registerProtocolHandler,

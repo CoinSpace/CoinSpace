@@ -1,6 +1,4 @@
-'use strict';
-
-const Velocity = require('velocity-animate');
+import Velocity from 'velocity-animate';
 
 function animateDropdown(el, icon, props, options) {
 
@@ -31,7 +29,7 @@ function animateDropdown(el, icon, props, options) {
   });
 }
 
-module.exports = {
+export default {
   show(el, icon, context) {
     const props = {
       icon: { rotateZ: '180deg' },

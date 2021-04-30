@@ -1,19 +1,20 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import emitter from 'lib/emitter';
+import { getWallet } from 'lib/wallet';
+import changelly from 'lib/changelly';
+import qrcode from 'lib/qrcode';
+import showTooltip from 'widgets/modals/tooltip';
+import { showError } from 'widgets/modals/flash';
+import details from 'lib/wallet/details';
+import showMecto from 'widgets/modals/mecto';
+import template from './index.ract';
+import footer from '../footer.ract';
+import loader from 'partials/loader/loader.ract';
 
-const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
-const { getWallet } = require('lib/wallet');
-const changelly = require('lib/changelly');
-const qrcode = require('lib/qrcode');
-const showTooltip = require('widgets/modals/tooltip');
-const { showError } = require('widgets/modals/flash');
-const details = require('lib/wallet/details');
-const showMecto = require('widgets/modals/mecto');
-
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       qrScannerAvailable: qrcode.isScanAvailable,
       isValidating: false,
@@ -23,8 +24,8 @@ module.exports = function(el) {
       toSymbol: '',
     },
     partials: {
-      loader: require('partials/loader/loader.ract'),
-      footer: require('../footer.ract'),
+      loader,
+      footer,
     },
   });
 
@@ -141,4 +142,4 @@ module.exports = function(el) {
   }
 
   return ractive;
-};
+}

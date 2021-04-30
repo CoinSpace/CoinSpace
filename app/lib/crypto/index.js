@@ -1,9 +1,7 @@
-'use strict';
+import _ from 'lodash';
+import details from 'lib/wallet/details';
 
-const _ = require('lodash');
-const details = require('lib/wallet/details');
-
-const walletCoins = [{
+export const walletCoins = [{
   _id: 'bitcoin',
   network: 'bitcoin',
   name: 'Bitcoin',
@@ -50,7 +48,7 @@ const walletCoins = [{
 }];
 const DEFAULT_COIN = 'bitcoin';
 
-function getCrypto() {
+export function getCrypto() {
   let crypto = window.localStorage.getItem('_cs_token') || DEFAULT_COIN;
   const walletTokens = details.get('tokens');
 
@@ -87,7 +85,7 @@ function getCrypto() {
   };
 }
 
-function setCrypto(crypto) {
+export function setCrypto(crypto) {
   if (!crypto) {
     window.localStorage.setItem('_cs_token', DEFAULT_COIN);
   } else if (typeof crypto === 'string') {
@@ -99,7 +97,7 @@ function setCrypto(crypto) {
   }
 }
 
-module.exports = {
+export default {
   walletCoins,
   getCrypto,
   setCrypto,

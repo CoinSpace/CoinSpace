@@ -1,14 +1,13 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import emitter from 'lib/emitter';
+import _ from 'lodash';
+import Clipboard from 'clipboard';
+import template from './index.ract';
 
-const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
-const _ = require('lodash');
-const Clipboard = require('clipboard');
-
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       passphrase: '',
       isCopied: false,
@@ -56,5 +55,5 @@ module.exports = function(el) {
   });
 
   return ractive;
-};
+}
 

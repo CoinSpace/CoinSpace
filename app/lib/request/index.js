@@ -1,14 +1,13 @@
-'use strict';
-
-const axios = require('axios').create({ timeout: 30000 });
-const buildURL = require('axios/lib/helpers/buildURL.js');
-const axiosRetry = require('axios-retry');
-const LS = require('lib/wallet/localStorage');
-const { showError } = require('widgets/modals/flash');
-const { eddsa } = require('elliptic');
+import Axios from 'axios';
+const axios = Axios.create({ timeout: 30000 });
+import buildURL from 'axios/lib/helpers/buildURL.js';
+import axiosRetry from 'axios-retry';
+import LS from 'lib/wallet/localStorage';
+import { showError } from 'widgets/modals/flash';
+import { eddsa } from 'elliptic';
 const ec = new eddsa('ed25519');
-const crypto = require('crypto');
-const seeds = require('lib/wallet/seeds');
+import crypto from 'crypto';
+import seeds from 'lib/wallet/seeds';
 
 axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay, shouldResetTimeout: true });
 
@@ -87,4 +86,4 @@ function makeRequest(config, callback) {
     });
 }
 
-module.exports = makeRequest;
+export default makeRequest;

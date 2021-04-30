@@ -1,20 +1,20 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import emitter from 'lib/emitter';
+import details from 'lib/wallet/details';
+import { translate } from 'lib/i18n';
+import template from './index.ract';
+import footer from '../footer.ract';
 
-const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
-const details = require('lib/wallet/details');
-const { translate } = require('lib/i18n');
-
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
     data: {
       message: '',
       showEmail: true,
     },
     partials: {
-      footer: require('../footer.ract'),
+      footer,
     },
   });
 
@@ -32,4 +32,4 @@ module.exports = function(el) {
   });
 
   return ractive;
-};
+}

@@ -1,18 +1,17 @@
-'use strict';
+import Ractive from 'lib/ractive';
+import emitter from 'lib/emitter';
+import LS from 'lib/wallet/localStorage';
+import initChoose from './choose';
+import initCreate from './create';
+import initCreatePassphrase from './create-passphrase';
+import initCreatePassphraseConfirm from './create-passphrase-confirm';
+import security from 'lib/wallet/security';
+import template from './index.ract';
 
-const Ractive = require('lib/ractive');
-const emitter = require('lib/emitter');
-const LS = require('lib/wallet/localStorage');
-const initChoose = require('./choose');
-const initCreate = require('./create');
-const initCreatePassphrase = require('./create-passphrase');
-const initCreatePassphraseConfirm = require('./create-passphrase-confirm');
-const security = require('lib/wallet/security');
-
-module.exports = function(el) {
+export default function(el) {
   const ractive = new Ractive({
     el,
-    template: require('./index.ract'),
+    template,
   });
 
   const steps = {
@@ -52,4 +51,4 @@ module.exports = function(el) {
   }
 
   return ractive;
-};
+}
