@@ -47,6 +47,9 @@ module.exports = {
     },
     fallback: {
       assert: require.resolve('assert'),
+      buffer: require.resolve('buffer'),
+      events: require.resolve('events'),
+      querystring: require.resolve('querystring-es3'),
       stream: require.resolve('stream-browserify'),
       crypto: require.resolve('crypto-browserify'),
     },
