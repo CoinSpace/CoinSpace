@@ -1,6 +1,5 @@
 import request from 'lib/request';
 import querystring from 'querystring';
-const { urlRoot } = window;
 const apiKey = process.env.MOONPAY_API_KEY;
 let coins = {};
 let isBuyAllowed = false;
@@ -21,7 +20,7 @@ async function init() {
 
     if (isBuyAllowed || isSellAllowed) {
       const _coins = await request({
-        url: urlRoot + 'api/v1/moonpay/coins',
+        url: `${process.env.SITE_URL}api/v1/moonpay/coins`,
         params: { country: data.alpha3 },
         id: true,
       });
@@ -106,7 +105,7 @@ function getSellUrl(baseCurrencyCode, refundWalletAddress) {
 
 async function signUrls(urls) {
   const result = await request({
-    url: `${urlRoot}api/v2/moonpay/sign`,
+    url: `${process.env.SITE_URL}api/v2/moonpay/sign`,
     method: 'post',
     data: {
       urls,

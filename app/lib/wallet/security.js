@@ -7,7 +7,6 @@ import crypto from 'crypto';
 import emitter from 'lib/emitter';
 import touchId from 'lib/touch-id';
 import hardware from 'lib/hardware';
-const { urlRoot } = window;
 
 export function unlock(wallet) {
   return new Promise((resolve, reject) => {
@@ -78,7 +77,7 @@ export function lock(wallet) {
 async function _getPrivateTokenByPin(pin, pinWidget) {
   const pinHash = crypto.createHmac('sha256', Buffer.from(LS.getPinKey(), 'hex')).update(pin).digest('hex');
   const res = await request({
-    url: `${urlRoot}api/v2/token/private/pin`,
+    url: `${process.env.SITE_URL}api/v2/token/private/pin`,
     method: 'post',
     data: {
       pinHash,
@@ -99,7 +98,7 @@ async function _getPrivateToken() {
     return hardware.privateToken();
   } else {
     return request({
-      url: `${urlRoot}api/v2/token/private`,
+      url: `${process.env.SITE_URL}api/v2/token/private`,
       method: 'get',
       seed: 'public',
     }).then(({ privateToken }) => privateToken);

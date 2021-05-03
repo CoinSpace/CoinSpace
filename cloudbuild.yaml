@@ -16,7 +16,6 @@ steps:
     - 'SENTRY_DSN=${_SENTRY_DSN}'
     - 'SENTRY_ORG=${_SENTRY_ORG}'
     - 'SENTRY_AUTH_TOKEN=${_SENTRY_AUTH_TOKEN}'
-    - 'DOMAIN_ONION=${_DOMAIN_ONION}'
   entrypoint: 'sh'
   args:
     - '-c'

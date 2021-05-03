@@ -12,7 +12,7 @@ import seeds from 'lib/wallet/seeds';
 axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay, shouldResetTimeout: true });
 
 axios.interceptors.request.use((config) => {
-  if (!config.url.startsWith(window.urlRoot)) {
+  if (!config.url.startsWith(process.env.SITE_URL)) {
     return config;
   }
   if (!config.method) {

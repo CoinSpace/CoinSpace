@@ -1,6 +1,6 @@
 import request from 'lib/request';
 import showUpdate from 'widgets/modals/update';
-const { urlRoot, localStorage } = window;
+const { localStorage } = window;
 
 let update = false;
 
@@ -18,7 +18,7 @@ async function checkUpdate() {
   const arch = (['win', 'mac'].includes(process.env.BUILD_PLATFORM) && window.process && window.process.arch) || 'any';
   try {
     update = await request({
-      url: `${urlRoot}api/v1/update/${process.env.BUILD_PLATFORM}/${arch}/${process.env.VERSION}`,
+      url: `${process.env.SITE_URL}api/v1/update/${process.env.BUILD_PLATFORM}/${arch}/${process.env.VERSION}`,
       method: 'get',
     });
     if (!update) return;

@@ -17,7 +17,7 @@ function init(crypto) {
     return;
   }
   return request({
-    url: `${window.urlRoot}api/v2/tickers`,
+    url: `${process.env.SITE_URL}api/v2/tickers`,
     params: {
       crypto: cryptoIds.join(','),
     },

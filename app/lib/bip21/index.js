@@ -1,4 +1,3 @@
-const { urlRoot } = window;
 const supportedProtocols = [
   'bitcoin',
   'bitcoincash',
@@ -39,7 +38,10 @@ function registerProtocolHandler(network) {
   if (!navigator.registerProtocolHandler) return;
   if (!supportedProtocols.includes(network)) return;
   try {
-    navigator.registerProtocolHandler(network, `${urlRoot}wallet/?coin=${network}&bip21=%s`, 'Coin Wallet');
+    navigator.registerProtocolHandler(
+      network,
+      `${process.env.SITE_URL}wallet/?coin=${network}&bip21=%s`, 'Coin Wallet'
+    );
     // eslint-disable-next-line
   } catch (e) {}
 }

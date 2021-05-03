@@ -2,7 +2,6 @@ import { translate } from 'lib/i18n';
 import request from 'lib/request';
 import LS from 'lib/wallet/localStorage';
 const { PublicKeyCredential } = window;
-const { urlRoot } = window;
 import { startAttestation, startAssertion } from '@simplewebauthn/browser';
 import hardware from 'lib/hardware';
 
@@ -36,7 +35,7 @@ async function enable(pin) {
     LS.setPin(pin);
   } else {
     const options = await request({
-      url: `${urlRoot}api/v2/platform/attestation`,
+      url: `${process.env.SITE_URL}api/v2/platform/attestation`,
       method: 'get',
       seed: 'private',
     });
@@ -48,7 +47,7 @@ async function enable(pin) {
       throw new Error('touch_id_error');
     }
     await request({
-      url: `${urlRoot}api/v2/platform/attestation`,
+      url: `${process.env.SITE_URL}api/v2/platform/attestation`,
       method: 'post',
       data: attestation,
       seed: 'private',
@@ -62,7 +61,7 @@ async function disable() {
     LS.setPin(false);
   } else {
     await request({
-      url: `${urlRoot}api/v2/platform`,
+      url: `${process.env.SITE_URL}api/v2/platform`,
       method: 'delete',
       seed: 'private',
     });
@@ -90,7 +89,7 @@ function phonegap() {
 
 async function publicToken(afterAssertion) {
   const options = await request({
-    url: `${urlRoot}api/v2/token/public/platform`,
+    url: `${process.env.SITE_URL}api/v2/token/public/platform`,
     method: 'get',
     id: true,
   });
@@ -103,7 +102,7 @@ async function publicToken(afterAssertion) {
   }
   if (afterAssertion) afterAssertion();
   const res = await request({
-    url: `${urlRoot}api/v2/token/public/platform`,
+    url: `${process.env.SITE_URL}api/v2/token/public/platform`,
     method: 'post',
     data: assertion,
     id: true,
@@ -113,7 +112,7 @@ async function publicToken(afterAssertion) {
 
 async function privateToken() {
   const options = await request({
-    url: `${urlRoot}api/v2/token/private/platform`,
+    url: `${process.env.SITE_URL}api/v2/token/private/platform`,
     method: 'get',
     seed: 'public',
   });
@@ -125,7 +124,7 @@ async function privateToken() {
     throw new Error('touch_id_error');
   }
   const res = await request({
-    url: `${urlRoot}api/v2/token/private/platform`,
+    url: `${process.env.SITE_URL}api/v2/token/private/platform`,
     method: 'post',
     data: assertion,
     seed: 'public',

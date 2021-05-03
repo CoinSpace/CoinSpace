@@ -162,20 +162,6 @@ router.delete('/location', (req, res) => {
   res.status(200).send();
 });
 
-router.get('/shapeShiftRedirectUri', (req, res) => {
-  const code = req.query.code || '';
-  const { buildType, hostname } = req.query;
-  if (hostname === process.env.DOMAIN_ONION && hostname !== req.hostname) {
-    return res.redirect(302, `http://${hostname}${req.originalUrl}`);
-  }
-  if (!['web', 'phonegap', 'electron'].includes(buildType)) return res.status(400).send('Bad request');
-  shapeshift.getAccessToken(code).then((accessToken) => {
-    res.render('shapeshift', { accessToken, buildType });
-  }).catch(() => {
-    res.render('shapeshift', { accessToken: '', buildType });
-  });
-});
-
 router.delete('/shapeShiftToken', (req, res) => {
   const { token } = req.body;
   shapeshift.revokeToken(token).catch(() => {});

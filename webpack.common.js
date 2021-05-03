@@ -7,6 +7,7 @@ const CircularDependencyPlugin = require('circular-dependency-plugin');
 const webpack = require('webpack');
 const pkg = require('./package.json');
 const dotenv = require('dotenv');
+const polyfills = ['core-js/stable', 'regenerator-runtime/runtime'];
 
 dotenv.config({ path: '.env.defaults' });
 process.env.BUILD_TYPE = process.env.BUILD_TYPE || 'web';
@@ -23,9 +24,9 @@ module.exports = {
   //target: process.env.BUILD_TYPE === 'electron' ? 'electron-renderer' : 'web',
   target: ['web', 'es5'],
   entry: {
-    loader: './app/loader/index.js',
+    loader: polyfills.concat('./app/loader/index.js'),
     ...(process.env.BUILD_TYPE === 'web' ? {
-      fido: './app/fido/index.js',
+      fido: polyfills.concat('./app/fido/index.js'),
     } : {}),
   },
   output: {

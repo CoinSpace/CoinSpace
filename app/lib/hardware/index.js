@@ -2,7 +2,7 @@ import request from 'lib/request';
 import { startAttestation, startAssertion } from '@simplewebauthn/browser';
 import { showError } from 'widgets/modals/flash';
 import windowExtra from 'lib/window-extra';
-const { urlRoot, PublicKeyCredential } = window;
+const { PublicKeyCredential } = window;
 const notSupportedError = () => {
   showError({
     message: 'Hardware Keys are not supported by your device',
@@ -13,7 +13,7 @@ const notSupportedError = () => {
 
 async function list() {
   const keys = await request({
-    url: `${urlRoot}api/v2/crossplatform`,
+    url: `${process.env.SITE_URL}api/v2/crossplatform`,
     method: 'get',
     seed: 'public',
   });
@@ -22,7 +22,7 @@ async function list() {
 
 async function remove(key) {
   await request({
-    url: `${urlRoot}api/v2/crossplatform`,
+    url: `${process.env.SITE_URL}api/v2/crossplatform`,
     method: 'delete',
     data: {
       credentialID: key.credentialID,
@@ -34,7 +34,7 @@ async function remove(key) {
 async function add() {
   validate();
   const options = await request({
-    url: `${urlRoot}api/v2/crossplatform/attestation`,
+    url: `${process.env.SITE_URL}api/v2/crossplatform/attestation`,
     method: 'get',
     seed: 'private',
   });
@@ -45,7 +45,7 @@ async function add() {
       attestation = await startAttestation(options);
     } else {
       attestation = await windowExtra.open({
-        url: `${urlRoot}fido/?action=attestation&options=${encodeURIComponent(JSON.stringify(options))}`,
+        url: `${process.env.SITE_URL}fido/?action=attestation&options=${encodeURIComponent(JSON.stringify(options))}`,
         name: 'fido',
         target: process.env.BUILD_TYPE === 'electron' ? '_modal' : '_system',
       });
@@ -55,7 +55,7 @@ async function add() {
   }
 
   await request({
-    url: `${urlRoot}api/v2/crossplatform/attestation`,
+    url: `${process.env.SITE_URL}api/v2/crossplatform/attestation`,
     method: 'post',
     data: attestation,
     seed: 'private',
@@ -66,7 +66,7 @@ async function privateToken(options) {
   validate();
   if (!options) {
     options = await request({
-      url: `${urlRoot}api/v2/token/private/crossplatform`,
+      url: `${process.env.SITE_URL}api/v2/token/private/crossplatform`,
       method: 'get',
       seed: 'public',
     });
@@ -78,7 +78,7 @@ async function privateToken(options) {
       assertion = await startAssertion(options);
     } else {
       assertion = await windowExtra.open({
-        url: `${urlRoot}fido/?action=assertion&options=${encodeURIComponent(JSON.stringify(options))}`,
+        url: `${process.env.SITE_URL}fido/?action=assertion&options=${encodeURIComponent(JSON.stringify(options))}`,
         name: 'fido',
         target: process.env.BUILD_TYPE === 'electron' ? '_modal' : '_system',
       });
@@ -88,7 +88,7 @@ async function privateToken(options) {
   }
 
   const res = await request({
-    url: `${urlRoot}api/v2/token/private/crossplatform`,
+    url: `${process.env.SITE_URL}api/v2/token/private/crossplatform`,
     method: 'post',
     data: assertion,
     seed: 'public',

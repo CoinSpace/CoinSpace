@@ -1,5 +1,4 @@
 import request from 'lib/request';
-const { urlRoot } = window;
 
 export function resolveTo(network, to) {
   if (network !== 'bitcoin') return Promise.resolve({ to });
@@ -8,7 +7,7 @@ export function resolveTo(network, to) {
   const hostname = to.replace('@', '.');
   if (!hostname.match(/\./)) return Promise.resolve({ to });
   return request({
-    url: urlRoot + 'api/v1/openalias?hostname=' + hostname,
+    url: process.env.SITE_URL + 'api/v1/openalias?hostname=' + hostname,
     id: true,
   }).then((data) => {
     return { to: data.address, alias: to };

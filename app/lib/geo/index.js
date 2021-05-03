@@ -1,13 +1,12 @@
 import request from 'lib/request';
 import details from 'lib/wallet/details';
 import { getWallet } from 'lib/wallet';
-const { urlRoot } = window;
 
 async function save() {
   const { latitude, longitude } = await getLocation();
   const userInfo = details.get('userInfo');
   return request({
-    url: `${urlRoot}api/v2/mecto`,
+    url: `${process.env.SITE_URL}api/v2/mecto`,
     method: 'put',
     data: {
       username: userInfo.username,
@@ -24,7 +23,7 @@ async function save() {
 async function search() {
   const { latitude, longitude } = await getLocation();
   const results = await request({
-    url: `${urlRoot}api/v2/mecto`,
+    url: `${process.env.SITE_URL}api/v2/mecto`,
     params: {
       lat: latitude,
       lon: longitude,
@@ -37,7 +36,7 @@ async function search() {
 
 function remove() {
   return request({
-    url: `${urlRoot}api/v2/mecto`,
+    url: `${process.env.SITE_URL}api/v2/mecto`,
     method: 'delete',
     seed: 'public',
   }).catch(() => {});

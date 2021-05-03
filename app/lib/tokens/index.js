@@ -4,7 +4,6 @@ import LS from 'lib/wallet/localStorage';
 import emitter from 'lib/emitter';
 import request from 'lib/request';
 import details from 'lib/wallet/details';
-const { urlRoot } = window;
 
 let cache;
 let tokens;
@@ -26,7 +25,7 @@ function filter(token) {
 function init() {
   if (!cache) {
     cache = request({
-      url: `${urlRoot}api/v2/tokens`,
+      url: `${process.env.SITE_URL}api/v2/tokens`,
       params: {
         network: 'ethereum',
       },

@@ -60,8 +60,6 @@ const Wallet = {
   monero: FakeWallet,
 };
 
-const { urlRoot } = window;
-
 function createWallet(passphrase) {
   const data = { passphrase };
   return new Promise((resolve, reject) => {
@@ -87,7 +85,7 @@ async function registerWallet(pin) {
   const pinHash = crypto.createHmac('sha256', Buffer.from(pinKey, 'hex')).update(pin).digest('hex');
   const detailsKey = crypto.createHmac('sha256', 'Coin Wallet').update(walletSeed).digest('hex');
   const { publicToken, privateToken } = await request({
-    url: `${urlRoot}api/v2/register`,
+    url: `${process.env.SITE_URL}api/v2/register`,
     method: 'post',
     data: {
       walletId: wallet.getPublic('hex'),
@@ -113,7 +111,7 @@ async function loginWithPin(pin) {
   }
   const pinHash = crypto.createHmac('sha256', Buffer.from(LS.getPinKey(), 'hex')).update(pin).digest('hex');
   const { publicToken } = await request({
-    url: `${urlRoot}api/v2/token/public/pin`,
+    url: `${process.env.SITE_URL}api/v2/token/public/pin`,
     method: 'post',
     data: {
       pinHash,
@@ -170,7 +168,7 @@ export async function initWallet(pin) {
   state.wallet.load({
     getDynamicFees() {
       return request({
-        url: `${urlRoot}api/v2/fees`,
+        url: `${process.env.SITE_URL}api/v2/fees`,
         params: {
           crypto: crypto._id,
         },
@@ -180,7 +178,7 @@ export async function initWallet(pin) {
     },
     getCsFee() {
       return request({
-        url: urlRoot + 'api/v1/csFee',
+        url: `${process.env.SITE_URL}api/v1/csFee`,
         // TODO move to _id
         params: { network: crypto.network },
         id: true,
@@ -225,7 +223,7 @@ export async function updateWallet() {
 
 async function removeAccount() {
   await request({
-    url: `${urlRoot}api/v2/wallet`,
+    url: `${process.env.SITE_URL}api/v2/wallet`,
     method: 'delete',
     seed: 'private',
   });
@@ -240,7 +238,7 @@ function setUsername(username) {
     return Promise.resolve(userInfo.username);
   }
   return request({
-    url: `${urlRoot}api/v2/username`,
+    url: `${process.env.SITE_URL}api/v2/username`,
     method: 'put',
     data: {
       username: newUsername,
@@ -287,7 +285,7 @@ async function loginWithPinLegacy(pin) {
   const { id } = credentials;
   const encryptedSeed = credentials.seed;
   const token = await request({
-    url: `${urlRoot}api/v1/login`,
+    url: `${process.env.SITE_URL}api/v1/login`,
     method: 'post',
     data: { wallet_id: id, pin },
   });

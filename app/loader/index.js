@@ -1,6 +1,4 @@
 import '../application.scss';
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
 import * as Sentry from '@sentry/browser';
 import { CaptureConsole, RewriteFrames } from '@sentry/integrations';
 // eslint-disable-next-line no-useless-escape
@@ -28,11 +26,6 @@ Sentry.init({
 
 import { fadeOut } from 'lib/transitions/fade.js';
 import i18n from 'lib/i18n';
-if (process.env.BUILD_PLATFORM === 'tor') {
-  window.urlRoot = `http://${process.env.DOMAIN_ONION}/`;
-} else {
-  window.urlRoot = process.env.SITE_URL;
-}
 
 function init() {
   i18n.loadTranslation().then(() => {

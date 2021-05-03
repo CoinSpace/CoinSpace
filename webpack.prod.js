@@ -8,6 +8,7 @@ const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const path = require('path');
+const polyfills = ['core-js/stable', 'regenerator-runtime/runtime'];
 
 const envFile = process.env.ENV_FILE ? process.env.ENV_FILE : '.env.prod';
 
@@ -80,6 +81,14 @@ const config = merge(common, {
           format: {
             comments: false,
           },
+          mangle: {
+            reserved: ['BigInteger', 'ECPair', 'Point', '_', 'RippleError', 'RippledError', 'UnexpectedError',
+              'LedgerVersionError', 'ConnectionError', 'NotConnectedError',
+              'DisconnectedError', 'TimeoutError', 'ResponseFormatError',
+              'ValidationError', 'NotFoundError', 'MissingLedgerHistoryError',
+              'PendingLedgerVersionError',
+            ],
+          },
         },
         extractComments: false,
       }),
@@ -91,9 +100,9 @@ if (process.env.BUILD_TYPE === 'phonegap') {
   const htmlPlugin = config.plugins.find((plugin) => {
     return plugin instanceof HtmlWebpackPlugin;
   });
-  htmlPlugin.options.chunks = ['deviceready'];
+  htmlPlugin.userOptions.chunks = ['deviceready'];
 
-  config.entry['deviceready'] = ['babel-polyfill', './phonegap/deviceready.js'];
+  config.entry['deviceready'] = polyfills.concat('./phonegap/deviceready.js');
   delete config.entry['loader'];
 
   config.output.publicPath = '';

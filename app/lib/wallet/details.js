@@ -11,7 +11,7 @@ const state = {
 
 function init() {
   return request({
-    url: `${window.urlRoot}api/v2/details`,
+    url: `${process.env.SITE_URL}api/v2/details`,
     method: 'get',
     seed: 'public',
   }).then((details) => {
@@ -65,7 +65,7 @@ async function _initDetails() {
 
   if (LS.isRegisteredLegacy()) {
     const legacy = await request({
-      url: `${window.urlRoot}api/v1/details?id=${LS.getCredentials().id}`,
+      url: `${process.env.SITE_URL}api/v1/details?id=${LS.getCredentials().id}`,
     });
     if (legacy) {
       defaultValue = JSON.parse(decrypt(legacy, seeds.get('private')));
@@ -81,7 +81,7 @@ async function _initDetails() {
 function _save(data) {
   const key = LS.getDetailsKey();
   return request({
-    url: `${window.urlRoot}api/v2/details`,
+    url: `${process.env.SITE_URL}api/v2/details`,
     method: 'put',
     data: {
       data: encrypt(JSON.stringify(data), key),

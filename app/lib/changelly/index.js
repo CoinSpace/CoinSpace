@@ -1,17 +1,15 @@
 import request from 'lib/request';
 
-const { urlRoot } = window;
-
 function getCoins() {
   return request({
-    url: urlRoot + 'api/v1/changelly/getCoins',
+    url: process.env.SITE_URL + 'api/v1/changelly/getCoins',
     id: true,
   });
 }
 
 function getPairsParams(fromSymbol, toSymbol) {
   return request({
-    url: urlRoot + 'api/v1/changelly/getPairsParams',
+    url: process.env.SITE_URL + 'api/v1/changelly/getPairsParams',
     params: {
       from: fromSymbol,
       to: toSymbol,
@@ -22,7 +20,7 @@ function getPairsParams(fromSymbol, toSymbol) {
 
 function estimate(fromSymbol, toSymbol, amount) {
   return request({
-    url: urlRoot + 'api/v1/changelly/estimate',
+    url: process.env.SITE_URL + 'api/v1/changelly/estimate',
     params: {
       from: fromSymbol,
       to: toSymbol,
@@ -36,7 +34,7 @@ function validateAddress(address, symbol) {
   if (!address) return Promise.resolve(false);
   if (!symbol) return Promise.resolve(false);
   return request({
-    url: urlRoot + 'api/v1/changelly/validate/' + address + '/' + symbol,
+    url: process.env.SITE_URL + 'api/v1/changelly/validate/' + address + '/' + symbol,
     id: true,
   }).then((data) => {
     return !!data.isValid;
@@ -45,7 +43,7 @@ function validateAddress(address, symbol) {
 
 function createTransaction(options) {
   return request({
-    url: urlRoot + 'api/v1/changelly/createTransaction',
+    url: process.env.SITE_URL + 'api/v1/changelly/createTransaction',
     method: 'post',
     data: {
       from: options.fromSymbol,
@@ -63,7 +61,7 @@ function createTransaction(options) {
 
 function getTransaction(id) {
   return request({
-    url: urlRoot + 'api/v1/changelly/transaction/' + id,
+    url: process.env.SITE_URL + 'api/v1/changelly/transaction/' + id,
     id: true,
   });
 }

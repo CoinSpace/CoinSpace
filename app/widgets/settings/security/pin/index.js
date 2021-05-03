@@ -11,8 +11,6 @@ import crypto from 'crypto';
 import security from 'lib/wallet/security';
 import template from './index.ract';
 
-const { urlRoot } = window;
-
 export default function(el) {
   const ractive = new Ractive({
     el,
@@ -89,7 +87,7 @@ async function getPin() {
         try {
           const pinHash = crypto.createHmac('sha256', Buffer.from(LS.getPinKey(), 'hex')).update(pin).digest('hex');
           await request({
-            url: `${urlRoot}api/v2/token/public/pin`,
+            url: `${process.env.SITE_URL}api/v2/token/public/pin`,
             method: 'post',
             data: {
               pinHash,
