@@ -1,6 +1,6 @@
 import { toAtom, toUnitString } from 'lib/convert';
 
-export function validateSend(options) {
+export async function validateSend(options) {
   const amount = toAtom(options.amount);
   const { wallet } = options;
   const { to } = options;
@@ -14,7 +14,7 @@ export function validateSend(options) {
     } else if (wallet.networkName === 'ethereum') {
       tx = wallet.createTx(to, amount);
     } else if (wallet.networkName === 'ripple') {
-      tx = wallet.createTx(to, amount, options.tag, options.invoiceId, !options.destinationInfo.isActive);
+      tx = await wallet.createTx(to, amount, options.tag, options.invoiceId);
     } else if (wallet.networkName === 'stellar') {
       tx = wallet.createTx(to, amount, options.memo, !options.destinationInfo.isActive);
     } else if (wallet.networkName === 'eos') {

@@ -179,7 +179,7 @@ export default function(el) {
         options.memo = ractive.find('#memo').value;
       }
 
-      validateAndShowConfirm(options);
+      return validateAndShowConfirm(options);
     }).catch((e) => {
       ractive.set('validating', false);
       if (/is not a valid address/.test(e.message)) {
@@ -373,9 +373,9 @@ export default function(el) {
     ractive.find('#crypto').value = crypto || '';
   }
 
-  function validateAndShowConfirm(options) {
+  async function validateAndShowConfirm(options) {
     try {
-      validateSend(options);
+      await validateSend(options);
       ractive.set('validating', false);
       showConfirmation(options);
     } catch (err) {

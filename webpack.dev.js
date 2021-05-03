@@ -13,7 +13,7 @@ const dotEnv = new Dotenv({
 
 module.exports = merge(common, {
   mode: 'development',
-  cache: true, // disable cache while "npm link"
+  cache: true, // set "false" cache while "npm link"
   target: 'web',
   output: {
     publicPath: '/',

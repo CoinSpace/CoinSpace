@@ -21,7 +21,7 @@ function open(data) {
       let tx = null;
 
       try {
-        tx = createTx();
+        tx = await createTx();
       } catch (err) {
         ractive.set('sending', false);
         if (/Insufficient funds/.test(err.message)) return showInfo({ title: 'Insufficient funds' });
@@ -62,10 +62,10 @@ function open(data) {
     }, 200);
   });
 
-  function createTx() {
+  async function createTx() {
     let tx;
     if (data.importTxOptions) {
-      tx = wallet.createImportTx(data.importTxOptions);
+      tx = await wallet.createImportTx(data.importTxOptions);
     } else {
       // eslint-disable-next-line prefer-destructuring
       tx = data.tx;

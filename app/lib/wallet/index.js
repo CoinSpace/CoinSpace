@@ -254,7 +254,7 @@ export function getWallet() {
 }
 
 export function getDestinationInfo(to) {
-  if (state.wallet.networkName === 'ripple' || state.wallet.networkName === 'stellar') {
+  if (state.wallet.networkName === 'stellar') {
     return state.wallet.getDestinationInfo(to);
   } else {
     return Promise.resolve();
