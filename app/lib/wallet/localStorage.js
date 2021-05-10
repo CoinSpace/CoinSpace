@@ -39,6 +39,10 @@ function setDetailsKey(detailsKey) {
   localStorage.setItem('_cs_details_key', detailsKey);
 }
 
+function hasPublicKey(networkName) {
+  return !!localStorage.getItem(`_cs_public_key_${networkName}`);
+}
+
 function getPublicKey(networkName, token) {
   return encryption.decrypt(localStorage.getItem(`_cs_public_key_${networkName}`), token);
 }
@@ -111,6 +115,7 @@ export default {
   setPinKey,
   getDetailsKey,
   setDetailsKey,
+  hasPublicKey,
   getPublicKey,
   setPublicKey,
   reset,

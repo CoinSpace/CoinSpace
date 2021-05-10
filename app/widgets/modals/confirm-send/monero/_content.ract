@@ -1,0 +1,37 @@
+<div class="modal modal-confirm-send">
+
+  <div class="_header">
+    {{translate("Confirm transaction")}}
+  </div>
+
+  <div class="_content">
+
+    <div class="_amount">
+      <span class="_value">{{amount}}</span>
+      <span class="_currency">{{denomination}}</span>
+    </div>
+
+    <div class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</div>
+
+    <div class="_arrow_down">
+      {{>svg_sendto}}
+    </div>
+
+    <div class="_info">{{to}}</div>
+
+  </div>
+
+  <div class="_footer">
+    <div class="csbtn csbtn--white" on-click="close">{{translate("Cancel")}}</div>
+    {{#if sending}}
+      <div class="csbtn csbtn--loading">
+        <span class="csbtn__icon">
+          {{>svg_refresh}}
+        </span>
+      </div>
+    {{else}}
+      <div class="csbtn" on-click="send">{{translate("Send")}}</div>
+    {{/if}}
+  </div>
+
+</div>

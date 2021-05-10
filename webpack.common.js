@@ -47,12 +47,14 @@ module.exports = {
       partials: path.resolve(__dirname, 'app/partials'),
     },
     fallback: {
-      assert: require.resolve('assert'),
-      buffer: require.resolve('buffer'),
-      events: require.resolve('events'),
+      assert: require.resolve('assert/'),
+      buffer: require.resolve('buffer/'),
+      events: require.resolve('events/'),
       querystring: require.resolve('querystring-es3'),
       stream: require.resolve('stream-browserify'),
       crypto: require.resolve('crypto-browserify'),
+      path: require.resolve('path-browserify'),
+      fs: false,
     },
   },
   module: {
@@ -86,6 +88,10 @@ module.exports = {
     ),
     new CopyWebpackPlugin({
       patterns: [
+        {
+          from: 'node_modules/mymonero-core-js/monero_utils/',
+          to: 'assets/js/mymonero_core_js/monero_utils/',
+        },
         { from: 'app/security.txt', to: './' },
         { from: 'app/assets/icons/favicon.ico', to: './' },
       ],
@@ -97,7 +103,7 @@ module.exports = {
       cwd: process.cwd(),
     }),
     new webpack.ProvidePlugin({
-      Buffer: ['buffer', 'Buffer'],
+      Buffer: ['buffer/', 'Buffer'],
     }),
     new webpack.DefinePlugin({
       'process.env.VERSION': JSON.stringify(`v${pkg.version}`),

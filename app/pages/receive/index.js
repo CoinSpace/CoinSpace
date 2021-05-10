@@ -1,6 +1,5 @@
 import Ractive from 'lib/ractive';
 import emitter from 'lib/emitter';
-import CS from 'lib/wallet';
 import showTooltip from 'widgets/modals/tooltip';
 import geo from 'lib/geo';
 import { showError } from 'widgets/modals/flash';
@@ -12,6 +11,7 @@ import clipboard from 'lib/clipboard';
 import { translate } from 'lib/i18n';
 import { getWallet } from 'lib/wallet';
 import template from './index.ract';
+import { lock, unlock } from 'lib/wallet/security';
 
 export default function(el) {
   const ractive = new Ractive({
@@ -49,7 +49,7 @@ export default function(el) {
   clipboard(ractive, '.js-address-input', 'isCopiedAddress');
 
   emitter.on('wallet-ready', () => {
-    const wallet = CS.getWallet();
+    const wallet = getWallet();
     ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
 
     const addressTypes = (wallet.network && wallet.network.addressTypes) || [];
@@ -74,7 +74,7 @@ export default function(el) {
   });
 
   ractive.on('change-address-type', () => {
-    const wallet = CS.getWallet();
+    const wallet = getWallet();
     const addressType = ractive.get('addressType');
     details.set(wallet.networkName + '.addressType', addressType)
       .then(() => {
@@ -148,18 +148,27 @@ export default function(el) {
     ractive.find('#tx-id').focus();
   });
 
-  ractive.on('accept', () => {
+  ractive.on('accept', async () => {
     ractive.set('isAccepting', true);
-    setTimeout(() => {
-      ractive.set('isAccepting', false);
-    }, 1000);
+    const wallet = getWallet();
+    try {
+      await unlock(wallet);
+      await wallet.addTx(ractive.get('txId'));
+      ractive.set('txId', '');
+      emitter.emit('tx-added');
+    } catch (err) {
+      console.error(err);
+      // TODO add error handling
+    }
+    await lock(wallet);
+    ractive.set('isAccepting', false);
   });
 
   function showAddress() {
-    const address = CS.getWallet().getNextAddress();
+    const address = getWallet().getNextAddress();
     ractive.set('address', address);
     const $canvas = ractive.find('#qr_canvas');
-    const qr = qrcode.encode(CS.getWallet().networkName + ':' + address);
+    const qr = qrcode.encode(getWallet().networkName + ':' + address);
     $canvas.innerHTML = qr;
   }
 

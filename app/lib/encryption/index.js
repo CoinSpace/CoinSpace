@@ -11,7 +11,7 @@ export function encrypt(text, key) {
   return encrypted.toString('base64');
 }
 
-function encryptJSON(json, key) {
+export function encryptJSON(json, key) {
   return encrypt(JSON.stringify(json), key);
 }
 
@@ -26,7 +26,7 @@ export function decrypt(text, key) {
   return decrypted.toString('utf8');
 }
 
-function decryptJSON(text, key) {
+export function decryptJSON(text, key) {
   return JSON.parse(decrypt(text, key));
 }
 

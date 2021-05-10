@@ -5,12 +5,16 @@ import seeds from './seeds';
 import emitter from 'lib/emitter';
 import crypto from 'crypto';
 import encryption from 'lib/encryption';
-import CsWallet from '@coinspace/cs-wallet';
 import request from 'lib/request';
+import Cache from 'lib/cache';
+import { unlock, lock } from 'lib/wallet/security';
+
+import CsWallet from '@coinspace/cs-wallet';
 import EthereumWallet from '@coinspace/cs-ethereum-wallet';
 import RippleWallet from '@coinspace/cs-ripple-wallet';
 import StellarWallet from '@coinspace/cs-stellar-wallet';
 import EOSWallet from '@coinspace/cs-eos-wallet';
+import MoneroWallet from '@coinspace/cs-monero-wallet';
 
 import { eddsa } from 'elliptic';
 
@@ -28,6 +32,7 @@ const state = {
 };
 
 // UI debug
+/*
 class FakeWallet {
   constructor() {
     this.networkName = 'monero';
@@ -45,6 +50,7 @@ class FakeWallet {
     done(null);
   }
 }
+*/
 
 const Wallet = {
   bitcoin: CsWallet,
@@ -57,7 +63,7 @@ const Wallet = {
   eos: EOSWallet,
   dogecoin: CsWallet,
   dash: CsWallet,
-  monero: FakeWallet,
+  monero: MoneroWallet,
 };
 
 function createWallet(passphrase) {
@@ -149,45 +155,63 @@ export async function initWallet(pin) {
       const wallet = new Wallet[key]({
         seed,
         networkName: key,
+        ...getExtraOptions({ network: key }),
       });
       wallet.lock();
       LS.setPublicKey(wallet, seeds.get('public'));
     });
   }
-  const publicKey = LS.getPublicKey(crypto.network, seeds.get('public'));
-  const options = Object.assign({
-    publicKey,
-    networkName: crypto.network,
-  }, getExtraOptions(crypto));
-  state.wallet = new Wallet[crypto.network](options);
+
+  if (!seed && !LS.hasPublicKey(crypto.network)) {
+    await unlock();
+    state.wallet = new Wallet[crypto.network]({
+      seed: seeds.get('private'),
+      networkName: crypto.network,
+      ...getExtraOptions(crypto),
+    });
+    state.wallet.lock();
+    await lock();
+    LS.setPublicKey(state.wallet, seeds.get('public'));
+  } else {
+    const publicKey = LS.getPublicKey(crypto.network, seeds.get('public'));
+    const options = Object.assign({
+      publicKey,
+      networkName: crypto.network,
+    }, getExtraOptions(crypto));
+    state.wallet = new Wallet[crypto.network](options);
+  }
 
   convert.setDecimals(state.wallet.decimals);
 
   await ticker.init([crypto]);
 
-  state.wallet.load({
-    getDynamicFees() {
-      return request({
-        url: `${process.env.SITE_URL}api/v2/fees`,
-        params: {
-          crypto: crypto._id,
-        },
-        method: 'get',
-        seed: 'public',
-      }).catch(console.error);
-    },
-    getCsFee() {
-      return request({
-        url: `${process.env.SITE_URL}api/v1/csFee`,
-        // TODO move to _id
-        params: { network: crypto.network },
-        id: true,
-      }).catch(console.error);
-    },
-    done(err) {
-      emitter.emit('wallet-ready', { pin, err });
-    },
-  });
+  try {
+    await state.wallet.load({
+      getDynamicFees() {
+        return request({
+          url: `${process.env.SITE_URL}api/v2/fees`,
+          params: {
+            crypto: crypto._id,
+          },
+          method: 'get',
+          seed: 'public',
+        }).catch(console.error);
+      },
+      getCsFee() {
+        return request({
+          url: `${process.env.SITE_URL}api/v1/csFee`,
+          // TODO move to _id
+          params: { network: crypto.network },
+          id: true,
+        }).catch(console.error);
+      },
+    });
+
+    emitter.emit('wallet-ready', { pin });
+  } catch (err) {
+    // TODO maybe migrate to wallet-error
+    emitter.emit('wallet-ready', { pin, err });
+  }
 }
 
 function getExtraOptions(crypto) {
@@ -210,6 +234,11 @@ function getExtraOptions(crypto) {
     }
   } else if (crypto.network === 'eos') {
     options.accountName = details.get('eosAccountName') || '';
+  } else if (crypto.network === 'monero') {
+    options.cache = new Cache(process.env.SITE_URL, 'monero', LS.getDetailsKey());
+    options.request = request;
+    options.apiNode = process.env.API_XMR_URL;
+    options.apiWeb = process.env.SITE_URL;
   }
   return options;
 }

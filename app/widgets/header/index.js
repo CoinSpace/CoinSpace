@@ -56,6 +56,10 @@ export default function(el) {
     updateBalance();
   });
 
+  emitter.on('tx-added', () => {
+    updateBalance();
+  });
+
   ractive.on('sync-click', (context) => {
     context.original.preventDefault();
     if (!ractive.get('isSyncing')) {
