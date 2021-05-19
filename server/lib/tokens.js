@@ -38,7 +38,7 @@ const CRYPTOCURRENCIES = [
   // ETH
   {
     id: 'ethereum',
-    decimals: 12,
+    decimals: 18,
   },
   // XRP
   {
