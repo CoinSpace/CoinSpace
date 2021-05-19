@@ -89,7 +89,7 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'node_modules/mymonero-core-js/monero_utils/',
+          from: 'node_modules/@coinspace/monero-core-js/monero_utils/',
           to: 'assets/js/mymonero_core_js/monero_utils/',
         },
         { from: 'app/security.txt', to: './' },

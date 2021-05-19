@@ -7,7 +7,7 @@ const account = require('./account');
 const geo = require('./geo');
 const openalias = require('./openalias');
 const fee = require('../fee');
-const csFee = require('./csFee');
+const csFee = require('../csFee');
 const tokens = require('../tokens');
 const shapeshift = require('./shapeshift');
 const changelly = require('./changelly');
@@ -106,7 +106,7 @@ router.get('/fees', (req, res) => {
 
 router.get('/csFee', (req, res) => {
   const network = req.query.network || 'bitcoin';
-  csFee.get(network).then((data) => {
+  csFee.getCsFee(network).then((data) => {
     res.status(200).send(data);
   }).catch((err) => {
     res.status(400).send(err);

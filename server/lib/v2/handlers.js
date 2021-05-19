@@ -7,6 +7,7 @@ const mecto = require('./mecto');
 const moonpay = require('./moonpay');
 const tokens = require('../tokens');
 const fee = require('../fee');
+const csFee = require('../csFee');
 const { asyncWrapper, verifyReq } = require('./utils');
 
 exports.register = asyncWrapper(async (req, res) => {
@@ -229,7 +230,11 @@ exports.getTokens = asyncWrapper(async (req, res) => {
 
 exports.getTicker = asyncWrapper(async (req, res) => {
   const ticker = await tokens.getTicker(req.query.crypto);
-  res.status(200).send(ticker);
+  res.status(200).send({
+    _id: ticker._id,
+    prices: ticker.prices,
+    // strip decimals
+  });
 });
 
 exports.getTickers = asyncWrapper(async (req, res) => {
@@ -240,4 +245,9 @@ exports.getTickers = asyncWrapper(async (req, res) => {
 exports.getFees = asyncWrapper(async (req, res) => {
   const fees = await fee.getFees(req.query.crypto);
   res.status(200).send(fees);
+});
+
+exports.getCsFee = asyncWrapper(async (req, res) => {
+  const fee = await csFee.getCsFee(req.query.crypto);
+  res.status(200).send(fee);
 });

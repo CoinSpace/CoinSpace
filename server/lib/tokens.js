@@ -16,27 +16,60 @@ const CURRENCIES = [
 ];
 const CRYPTOCURRENCIES = [
   // BTC
-  'bitcoin',
+  {
+    id: 'bitcoin',
+    decimals: 8,
+  },
   // BCH
-  'bitcoin-cash',
+  {
+    id: 'bitcoin-cash',
+    decimals: 8,
+  },
   // BSV
-  'bitcoin-cash-sv',
+  {
+    id: 'bitcoin-cash-sv',
+    decimals: 8,
+  },
   // LTC
-  'litecoin',
+  {
+    id: 'litecoin',
+    decimals: 8,
+  },
   // ETH
-  'ethereum',
+  {
+    id: 'ethereum',
+    decimals: 12,
+  },
   // XRP
-  'ripple',
+  {
+    id: 'ripple',
+    decimals: 6,
+  },
   // XLM
-  'stellar',
+  {
+    id: 'stellar',
+    decimals: 7,
+  },
   // EOS
-  'eos',
+  {
+    id: 'eos',
+    decimals: 4,
+  },
   // DOGE
-  'dogecoin',
+  {
+    id: 'dogecoin',
+    decimals: 8,
+  },
   // DASH
-  'dash',
+  {
+    id: 'dash',
+    decimals: 8,
+  },
   // XMR
-  'monero',
+  {
+    id: 'monero',
+    decimals: 12,
+  },
 ];
 
 const coingecko = axios.create({
@@ -91,7 +124,9 @@ async function syncTokens() {
 
       const { data: token } = await coingecko.get(`/coins/${item.id}`);
 
-      if (CRYPTOCURRENCIES.includes(token.id)) {
+      const crypto = CRYPTOCURRENCIES.find((crypto) => crypto.id === item.id);
+
+      if (crypto) {
         let _id = token.id;
         // migrate id
         if (_id === 'bitcoin-cash') {
@@ -106,6 +141,7 @@ async function syncTokens() {
           $set: {
             name: token.name,
             network: null,
+            decimals: crypto.decimals,
             symbol: token.symbol.toUpperCase(),
             icon: token.image && token.image.large,
             market_cap_rank: token.market_cap_rank || Number.MAX_SAFE_INTEGER,
@@ -271,6 +307,7 @@ function getTicker(id) {
     }, {
       projection: {
         prices: 1,
+        decimals: 1,
       },
     })
     .then((doc) => {
