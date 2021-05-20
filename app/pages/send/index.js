@@ -53,7 +53,7 @@ export default function(el) {
       maxAmount: '0',
       fee: '0',
       to: '',
-      feeIndex: 0,
+      feeName: 'default',
       fees: [
         { value: '0', name: 'minimum' },
         { value: '0', name: 'default', default: true },
@@ -154,7 +154,6 @@ export default function(el) {
           ractive.find('#crypto').value = '';
           ractive.find('#fiat').value = '';
           setFees();
-          ractive.fire('change-fee');
           if (wallet.networkName === 'ripple') {
             ractive.find('#destination-tag').value = '';
             ractive.find('#invoice-id').value = '';
@@ -191,7 +190,6 @@ export default function(el) {
   emitter.on('wallet-ready', () => {
     const wallet = getWallet();
     isSyncing = false;
-    ractive.fire('change-fee');
     ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
     ractive.set('denomination', wallet.denomination);
     ractive.set('factors', FACTORS[getCrypto()._id]);
@@ -200,9 +198,9 @@ export default function(el) {
     if (wallet.networkName === 'ethereum') {
       ractive.set('feeDenomination', 'ETH');
       if (ractive.find('#gas-limit')) {
-        ractive.find('#gas-limit').value = wallet.getGasLimit();
+        ractive.find('#gas-limit').value = wallet.gasLimit;
       }
-      ractive.set('gasLimit', wallet.getGasLimit());
+      ractive.set('gasLimit', wallet.gasLimit);
     } else {
       ractive.set('feeDenomination', wallet.denomination);
     }
@@ -211,7 +209,6 @@ export default function(el) {
 
   emitter.on('wallet-update', () => {
     setFees();
-    ractive.fire('change-fee');
   });
 
   function setFees(setDefaultFeeOption) {
@@ -219,48 +216,47 @@ export default function(el) {
     const wallet = getWallet();
     const value = toAtom(normalizeCrypto(ractive.find('#crypto').value) || 0);
     let fees = [];
-    if (setDefaultFeeOption) ractive.set('feeIndex', 0);
 
-    if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(wallet.networkName) !== -1) {
-      const estimates = wallet.estimateFees(value);
-      const minimums = wallet.minimumFees(value);
-      const feeRates = wallet.getFeeRates();
-      fees = feeRates.map((item, i) => {
-        return Object.assign({
-          estimate: estimates[i] ? toUnitString(estimates[i]) : toUnitString(minimums[i]),
-        }, item);
-      });
-      if (setDefaultFeeOption) {
-        for (const i in feeRates) {
-          if (feeRates[i].default) {
-            ractive.set('feeIndex', i);
-            break;
+    if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash', 'monero']
+      .includes(wallet.networkName)) {
+      fees = wallet.estimateFees(value).map((item) => {
+        if (setDefaultFeeOption) {
+          if (item.default === true) {
+            ractive.set('feeName', item.name);
           }
         }
-      }
-    } else if (['ripple', 'stellar', 'eos'].indexOf(wallet.networkName) !== -1) {
-      fees = [{ estimate: toUnitString(wallet.getDefaultFee()) }];
+        return {
+          ...item,
+          estimate: toUnitString(item.estimate),
+          maxAmount: toUnitString(item.maxAmount),
+        };
+      });
+    } else if (['ripple', 'stellar', 'eos'].includes(wallet.networkName)) {
+      fees = [{
+        name: 'default',
+        estimate: toUnitString(wallet.defaultFee),
+        maxAmount: toUnitString(wallet.maxAmount),
+      }];
+      ractive.set('feeName', 'default');
     } else if (wallet.networkName === 'ethereum') {
-      fees = [{ estimate: toUnitString(wallet.getDefaultFee(), 18) }];
-    } else if (wallet.networkName === 'monero') { // debug
-      fees = [{ estimate: '0' }];
+      fees = [{
+        name: 'default',
+        estimate: toUnitString(wallet.defaultFee, 18),
+        maxAmount: toUnitString(wallet.maxAmount),
+      }];
+      ractive.set('feeName', 'default');
     }
 
-    ractive.set('fee', fees[ractive.get('feeIndex')].estimate);
     ractive.set('fees', fees);
+    ractive.fire('change-fee');
   }
 
   ractive.on('change-fee', () => {
-    const wallet = getWallet();
-    const index = ractive.get('feeIndex');
-    if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(wallet.networkName) !== -1) {
-      const maxAmounts = wallet.getMaxAmounts();
-      const maxAmount = maxAmounts[index] ? maxAmounts[index].value : 0;
-      ractive.set('maxAmount', toUnitString(maxAmount));
-    } else {
-      ractive.set('maxAmount', toUnitString(wallet.getMaxAmount()));
-    }
-    ractive.set('fee', ractive.get('fees')[index].estimate);
+    const feeName = ractive.get('feeName');
+    const fees = ractive.get('fees');
+    const fee = fees.find((item) => item.name === feeName);
+    ractive.set('maxAmount', fee.maxAmount);
+    ractive.set('fee', fee.estimate);
   });
 
   ractive.on('set-max-amount', () => {
@@ -280,9 +276,8 @@ export default function(el) {
 
   ractive.on('gas-limit', () => {
     const wallet = getWallet();
-    wallet.setGasLimit(ractive.find('#gas-limit').value || 0);
+    wallet.gasLimit = ractive.find('#gas-limit').value || 0;
     setFees();
-    ractive.fire('change-fee');
   });
 
   ractive.on('clearTo', ()=> {

@@ -39,9 +39,8 @@ function open(data) {
         return ractive.set('sending', false);
       }
 
-      wallet.sendTx(tx, (err, historyTx) => {
-        if (err) return handleTransactionError(err);
-
+      try {
+        const historyTx = wallet.sendTx(tx);
         if (data.onSuccessDismiss) data.onSuccessDismiss();
         showSuccess({
           el: ractive.el,
@@ -55,7 +54,9 @@ function open(data) {
         if (historyTx) {
           emitter.emit('append-transactions', [historyTx]);
         }
-      });
+      } catch (err) {
+        return handleTransactionError(err);
+      }
     }, 200);
   });
 
@@ -92,7 +93,7 @@ function open(data) {
 function extendData(data) {
   const { wallet } = data;
   data.feeSign = data.importTxOptions ? '-' : '+';
-  data.fee = toUnitString(wallet.getDefaultFee(), 18);
+  data.fee = toUnitString(wallet.defaultFee, 18);
   data.feeDenomination = 'ETH';
   return data;
 }

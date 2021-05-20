@@ -186,26 +186,7 @@ export async function initWallet(pin) {
   await ticker.init([crypto]);
 
   try {
-    await state.wallet.load({
-      getDynamicFees() {
-        return request({
-          url: `${process.env.SITE_URL}api/v2/fees`,
-          params: {
-            crypto: crypto._id,
-          },
-          method: 'get',
-          seed: 'public',
-        }).catch(console.error);
-      },
-      getCsFee() {
-        return request({
-          url: `${process.env.SITE_URL}api/v1/csFee`,
-          // TODO move to _id
-          params: { network: crypto.network },
-          id: true,
-        }).catch(console.error);
-      },
-    });
+    await state.wallet.load();
 
     emitter.emit('wallet-ready', { pin });
   } catch (err) {
@@ -218,6 +199,21 @@ function getExtraOptions(crypto) {
   const options = {
     useTestNetwork: process.env.COIN_NETWORK === 'regtest',
   };
+
+  if (crypto.network === 'bitcoin') {
+    options.apiNode = process.env.API_BTC_URL;
+  } else if (crypto.network === 'bitcoincash') {
+    options.apiNode = process.env.API_BCH_URL;
+  } else if (crypto.network === 'bitcoinsv') {
+    options.apiNode = process.env.API_BSV_URL;
+  } else if (crypto.network === 'litecoin') {
+    options.apiNode = process.env.API_LTC_URL;
+  } else if (crypto.network === 'dogecoin') {
+    options.apiNode = process.env.API_DOGE_URL;
+  } else if (crypto.network === 'dash') {
+    options.apiNode = process.env.API_DASH_URL;
+  }
+
   if (crypto.network === 'ethereum') {
     options.name = crypto.name;
     options.minConf = 12;
@@ -232,6 +228,24 @@ function getExtraOptions(crypto) {
     if (crypto.network === 'bitcoincash') {
       options.minConf = 0;
     }
+    options.getDynamicFees = () => {
+      return request({
+        url: `${process.env.SITE_URL}api/v2/fees`,
+        params: {
+          crypto: crypto._id,
+        },
+        method: 'get',
+        seed: 'public',
+      }).catch(console.error);
+    };
+    options.getCsFee = () => {
+      return request({
+        url: `${process.env.SITE_URL}api/v1/csFee`,
+        // TODO move to _id
+        params: { network: crypto.network },
+        id: true,
+      }).catch(console.error);
+    };
   } else if (crypto.network === 'eos') {
     options.accountName = details.get('eosAccountName') || '';
   } else if (crypto.network === 'monero') {

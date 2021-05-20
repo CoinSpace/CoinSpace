@@ -29,9 +29,8 @@ function open(data) {
         if (err.message !== 'cancelled') console.error(err);
         return ractive.set('sending', false);
       }
-
-      wallet.sendTx(tx, (err) => {
-        if (err) return handleTransactionError(err);
+      try {
+        await wallet.sendTx(tx);
 
         if (data.onSuccessDismiss) data.onSuccessDismiss();
         showSuccess({
@@ -43,7 +42,9 @@ function open(data) {
 
         // update balance & tx history
         emitter.emit('tx-sent');
-      });
+      } catch (err) {
+        return handleTransactionError(err);
+      }
     }, 200);
   });
 
@@ -69,7 +70,7 @@ function open(data) {
 function extendData(data) {
   const { wallet } = data;
   data.feeSign = '+';
-  data.fee = toUnitString(wallet.getDefaultFee());
+  data.fee = toUnitString(wallet.defaultFee);
   return data;
 }
 

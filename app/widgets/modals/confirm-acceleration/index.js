@@ -37,9 +37,8 @@ function open(data) {
       if (err.message !== 'cancelled') console.error(err);
       return ractive.set('isLoading', false);
     }
-
-    wallet.sendTx(tx, (err, historyTx) => {
-      if (err) return handleTransactionError(err);
+    try {
+      const historyTx = await wallet.sendTx(tx);
       showSuccess({
         el: ractive.el,
         title: 'Acceleration Successful',
@@ -52,8 +51,9 @@ function open(data) {
         tx: tx.replaceByFeeTx,
         newTx: historyTx,
       });
-    });
-
+    } catch (err) {
+      return handleTransactionError(err);
+    }
   });
 
   function handleTransactionError(err) {

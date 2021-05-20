@@ -1,6 +1,7 @@
 import Axios from 'axios';
 const axios = Axios.create({ timeout: 30000 });
 import buildURL from 'axios/lib/helpers/buildURL.js';
+import combineURLs from 'axios/lib/helpers/combineURLs.js';
 import axiosRetry from 'axios-retry';
 import LS from 'lib/wallet/localStorage';
 import { showError } from 'widgets/modals/flash';
@@ -12,6 +13,10 @@ import seeds from 'lib/wallet/seeds';
 axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay, shouldResetTimeout: true });
 
 axios.interceptors.request.use((config) => {
+  if (config.baseURL) {
+    config.url = combineURLs(config.baseURL, config.url);
+    delete config.baseURL;
+  }
   if (!config.url.startsWith(process.env.SITE_URL)) {
     return config;
   }

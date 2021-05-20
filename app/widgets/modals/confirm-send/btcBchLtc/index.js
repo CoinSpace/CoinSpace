@@ -17,8 +17,8 @@ function open(data) {
   const { wallet } = data;
 
   ractive.on('change-fee', () => {
-    const index = ractive.get('feeIndex');
-    ractive.set('fee', ractive.get('fees')[index].estimate);
+    const feeName = ractive.get('feeName');
+    ractive.set('fee', ractive.get('fees').find((item) => item.name === feeName).estimate);
   });
 
   ractive.on('send', () => {
@@ -44,8 +44,8 @@ function open(data) {
         return ractive.set('sending', false);
       }
 
-      wallet.sendTx(tx, (err, historyTx) => {
-        if (err) return handleTransactionError(err);
+      try {
+        const historyTx = await wallet.sendTx(tx);
 
         if (data.onSuccessDismiss) data.onSuccessDismiss();
         showSuccess({
@@ -58,7 +58,9 @@ function open(data) {
         // update balance & tx history
         emitter.emit('tx-sent');
         emitter.emit('append-transactions', [historyTx]);
-      });
+      } catch (err) {
+        return handleTransactionError(err);
+      }
     }, 200);
   });
 
@@ -105,24 +107,21 @@ function extendData(data) {
 
   if (data.importTxOptions) {
     data.showImportTxFees = true;
-    data.feeIndex = 0;
+    data.feeName = 'default';
 
-    const feeRates = wallet.getFeeRates();
     const estimates = wallet.estimateFees(toAtom(data.amount), unspents);
-    const fees = feeRates.map((item, i) => {
-      return Object.assign({
-        estimate: toUnitString(estimates[i]),
-      }, item);
+    const fees = estimates.map((item) => {
+      if (item.default === true) {
+        data.feeName = item.name;
+      }
+      return {
+        ...item,
+        estimate: toUnitString(item.estimate),
+      };
     });
 
-    for (const i in feeRates) {
-      if (feeRates[i].default) {
-        data.feeIndex = i;
-        break;
-      }
-    }
     data.fees = fees;
-    data.fee = fees[data.feeIndex].estimate;
+    data.fee = fees.find((item) => item.name === data.feeName).estimate;
   }
 
   return data;

@@ -27,7 +27,7 @@ export default function(el) {
   });
 
   function updateBalance() {
-    const balance = getWallet().getBalance();
+    const { balance } = getWallet();
     let amount;
     let currency;
     if (state.showFiat) {

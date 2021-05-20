@@ -15,9 +15,9 @@
     <div class="_import-tx-fee">
       <div class="_fee" class-_multiple="(fees.length !== 1)">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</div>
       {{#if fees.length > 1}}
-      <select value="{{feeIndex}}" on-change="change-fee">
+      <select value="{{feeName}}" on-change="change-fee">
         {{#each fees as fee: index}}
-          <option value="{{index}}">{{feeSign}}{{fee.estimate}} {{denomination}} - {{translate(fee.name)}}</option>
+          <option value="{{fee.name}}">{{feeSign}}{{fee.estimate}} {{denomination}} - {{translate(fee.name)}}</option>
         {{/each}}
       </select>
       {{/if}}
