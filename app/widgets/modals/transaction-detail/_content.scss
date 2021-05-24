@@ -28,8 +28,15 @@
       &:last-child {
         margin-bottom: 0;
       }
+      ._item {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+      }
       ._address {
         float: left;
+        max-width: 75%;
       }
       ._number {
         float: right;

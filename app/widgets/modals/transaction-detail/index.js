@@ -6,6 +6,7 @@ import contentEthereum from './contentEthereum.ract';
 import contentRipple from './contentRipple.ract';
 import contentStellar from './contentStellar.ract';
 import contentEOS from './contentEOS.ract';
+import contentMonero from './contentMonero.ract';
 import contentBtcBchLtc from './contentBtcBchLtc.ract';
 
 export default function(data) {
@@ -21,6 +22,8 @@ export default function(data) {
     content = contentStellar;
   } else if (data.isNetwork('eos')) {
     content = contentEOS;
+  } else if (data.isNetwork('monero')) {
+    content = contentMonero;
   } else {
     content = contentBtcBchLtc;
   }

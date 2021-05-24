@@ -6,7 +6,7 @@
       {{isIncoming ? '+' : ''}} {{toUnitString(amount)}}
     </div>
 
-    {{#if isConfirmed(confirmations)}}
+    {{#if isConfirmed(transaction)}}
       <div class="_status">
         <div>{{formatTimestamp(timestamp)}}</div>
         <div>{{formatConfirmations(confirmations)}}</div>

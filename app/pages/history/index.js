@@ -32,21 +32,24 @@ export default function(el) {
           return tx.to;
         } else if (network === 'stellar') {
           return tx.operations[0] && tx.operations[0].destination;
-        } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(network) !== -1) {
+        } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].includes(network)) {
           return tx.outs[0].address;
+        } else if (network === 'monero') {
+          return translate('Sent');
         }
       },
-      isConfirmed(confirmations) {
+      isConfirmed(tx) {
         if (network === 'ripple') return true;
         if (network === 'stellar') return true;
         if (network === 'eos') return true;
-        return confirmations >= getWallet().minConf;
+        if (network === 'monero') return tx.confirmed;
+        return tx.confirmations >= getWallet().minConf;
       },
       isFailed(tx) {
         if (network === 'ethereum' || network === 'ripple') {
           return tx.status === false;
         // eslint-disable-next-line max-len
-        } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash', 'stellar'].indexOf(network) !== -1) {
+        } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash', 'stellar', 'monero'].includes(network)) {
           return false;
         }
       },

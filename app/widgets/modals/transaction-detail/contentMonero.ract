@@ -1,0 +1,68 @@
+{{#transaction}}
+<div class="modal-with-cross modal-transaction-detail">
+
+  <div class="_header">
+    <div class="_title {{isIncoming ? 'green' : 'red'}}">
+      {{isIncoming ? '+' : ''}} {{toUnitString(amount)}}
+    </div>
+
+    {{#if isConfirmed(transaction)}}
+      <div class="_status">
+        <div>{{formatTimestamp(timestamp)}}</div>
+        <div>{{formatConfirmations(confirmations)}}</div>
+      </div>
+    {{else}}
+      <div class='_status'>{{translate("pending confirmation")}}</div>
+    {{/if}}
+  </div>
+
+  <div class="_content">
+    {{>cross}}
+    <label>{{translate("Transaction Id:")}}</label>
+    <a href="" onclick="return window.safeOpen('https://blockchair.com/monero/transaction/{{txId}}?from=coinwallet', '_blank');" class="cscode">{{txId}}</a>
+
+    <label>{{translate("Transaction Fee:")}}</label>
+    <code class="cscode">{{toUnitString(fee)}}</code>
+
+    <label>{{translate("Inputs:")}}</label>
+    <code class="cscode">
+      {{#if (ins.length > inputsPerPage)}}
+        {{#each ins.slice(0, inputsPerPage)}}
+          <div class="_item">
+            <span class="_address">{{address ? address : translate("Stealth address")}}</span>
+            <span class="_number">{{toUnitString(amount)}}</span>
+          </div>
+        {{/each}}
+        {{#if showAllInputs}}
+          {{#each ins.slice(inputsPerPage)}}
+            <div class="_item">
+              <span class="_address">{{address ? address : translate("Stealth address")}}</span>
+              <span class="_number">{{toUnitString(amount)}}</span>
+            </div>
+          {{/each}}
+        {{else}}
+          <a href="" class="_more" on-click="showMoreInputs">{{translate("more")}}</a>
+        {{/if}}
+      {{else}}
+        {{#each ins}}
+          <div class="_item">
+            <span class="_address">{{address ? address : translate("Stealth address")}}</span>
+            <span class="_number">{{toUnitString(amount)}}</span>
+          </div>
+        {{/each}}
+      {{/if}}
+    </code>
+
+    <label>{{translate("Outputs:")}}</label>
+    <code class="cscode">
+      {{#each outs}}
+        <div class="_item">
+          <div class="_address">{{address ? address : translate("Stealth address")}}</div>
+          <div class="_number">{{toUnitString(amount)}}</div>
+        </div>
+      {{/each}}
+    </code>
+  </div>
+
+</div>
+{{/transaction}}
