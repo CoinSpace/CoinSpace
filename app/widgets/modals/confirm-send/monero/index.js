@@ -71,7 +71,7 @@ function open(data) {
 
 function extendData(data) {
   data.feeSign = '+';
-  data.fee = toUnitString(data.tx.used_fee);
+  data.fee = toUnitString(data.tx.fee);
   return data;
 }
 

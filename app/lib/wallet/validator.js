@@ -1,5 +1,4 @@
 import { toAtom, toUnitString } from 'lib/convert';
-import { unlock, lock } from 'lib/wallet/security';
 
 export async function validateSend(options) {
   const amount = toAtom(options.amount);
@@ -21,9 +20,7 @@ export async function validateSend(options) {
     } else if (wallet.networkName === 'eos') {
       tx = wallet.createTx(to, amount, options.memo);
     } else if (wallet.networkName === 'monero') {
-      await unlock(wallet);
-      tx = await wallet.createTx(to, amount /* fee or priority */);
-      await lock(wallet);
+      tx = await wallet.createTx(to, amount, options.feeName);
     }
     options.tx = tx;
   } catch (e) {

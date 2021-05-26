@@ -146,6 +146,7 @@ export default function(el) {
         to: data.to,
         alias: data.alias,
         fee,
+        feeName: ractive.get('feeName'),
         destinationInfo,
         amount: normalizeCrypto(toDecimalString(ractive.find('#crypto').value)),
         denomination: ractive.get('denomination'),
