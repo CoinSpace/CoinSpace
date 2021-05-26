@@ -1,9 +1,9 @@
 import { encryptJSON, decryptJSON } from 'lib/encryption';
 import request from 'lib/request';
 
-class Cache {
+class Storage {
   constructor(baseUrl, name, key) {
-    this.url = `${baseUrl}api/v2/cache/${name}`;
+    this.url = `${baseUrl}api/v2/storage/${name}`;
     this.key = key;
     // no await
     this.pending = this.init();
@@ -15,32 +15,32 @@ class Cache {
       seed: 'public',
     });
     if (res.data) {
-      this.cache = decryptJSON(res.data, this.key);
+      this.storage = decryptJSON(res.data, this.key);
     } else {
-      this.cache = {};
+      this.storage = {};
     }
   }
   async get(key) {
     await this.pending;
-    return this.cache[key];
+    return this.storage[key];
   }
   async set(key, value) {
     // no await
     this.pending = this.pending
       .then(async () => {
-        this.cache[key] = value;
+        this.storage[key] = value;
         const res = await request({
           url: this.url,
           method: 'put',
           data: {
-            data: encryptJSON(this.cache, this.key),
+            data: encryptJSON(this.storage, this.key),
           },
           seed: 'public',
         });
-        this.cache = decryptJSON(res.data, this.key);
+        this.storage = decryptJSON(res.data, this.key);
       });
     return this.pending;
   }
 }
 
-export default Cache;
+export default Storage;

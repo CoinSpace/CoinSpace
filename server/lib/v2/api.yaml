@@ -409,26 +409,26 @@ paths:
                   - data
         default:
           $ref: '#/components/responses/GeneralError'
-  /cache/{cacheName}:
+  /storage/{storageName}:
     get:
-      x-eov-operation-id: getCache
+      x-eov-operation-id: getStorage
       x-eov-operation-handler: handlers
-      description: Get cache
+      description: Get storage
       parameters:
         - $ref: '#/components/parameters/deviceId'
-        - $ref: '#/components/parameters/cacheName'
+        - $ref: '#/components/parameters/storageName'
       security:
         - deviceSignature: []
       responses:
         '200':
-          description: Cache
+          description: Storage
           content:
             'application/json':
               schema:
                 type: object
                 properties:
                   data:
-                    description: Cache
+                    description: Storage
                     type: string
                     nullable: true
                 required:
@@ -436,12 +436,12 @@ paths:
         default:
           $ref: '#/components/responses/GeneralError'
     put:
-      x-eov-operation-id: setCache
+      x-eov-operation-id: setStorage
       x-eov-operation-handler: handlers
-      description: Update cache
+      description: Update storage
       parameters:
         - $ref: '#/components/parameters/deviceId'
-        - $ref: '#/components/parameters/cacheName'
+        - $ref: '#/components/parameters/storageName'
       security:
         - deviceSignature: []
       requestBody:
@@ -452,13 +452,13 @@ paths:
               type: 'object'
               properties:
                 data:
-                  description: Cache
+                  description: Storage
                   type: string
               required:
                 - data
       responses:
         '200':
-          description: Update cache result
+          description: Update storage result
           content:
             'application/json':
               schema:
@@ -932,13 +932,13 @@ components:
         type: array
         items:
           type: string
-    cacheName:
+    storageName:
       in: path
-      name: cacheName
+      name: storageName
       schema:
         type: string
       required: true
-      description: Cache name
+      description: Storage name
   requestBodies:
     PIN:
       description: PIN Hash

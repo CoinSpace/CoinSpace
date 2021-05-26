@@ -2,7 +2,7 @@
 
 const createError = require('http-errors');
 const wallets = require('./wallets');
-const cache = require('./cache');
+const storage = require('./storage');
 const mecto = require('./mecto');
 const moonpay = require('./moonpay');
 const tokens = require('../tokens');
@@ -178,13 +178,13 @@ exports.setDetails = asyncWrapper(async (req, res) => {
   res.status(200).send({ data });
 });
 
-exports.getCache = asyncWrapper(async (req, res) => {
-  const data = await cache.getCache(req.device, req.params.cacheName);
+exports.getStorage = asyncWrapper(async (req, res) => {
+  const data = await storage.getStorage(req.device, req.params.storageName);
   res.status(200).send({ data });
 });
 
-exports.setCache = asyncWrapper(async (req, res) => {
-  const data = await cache.setCache(req.device, req.params.cacheName, req.body.data);
+exports.setStorage = asyncWrapper(async (req, res) => {
+  const data = await storage.setStorage(req.device, req.params.storageName, req.body.data);
   res.status(200).send({ data });
 });
 

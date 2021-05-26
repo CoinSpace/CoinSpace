@@ -6,7 +6,7 @@ import emitter from 'lib/emitter';
 import crypto from 'crypto';
 import encryption from 'lib/encryption';
 import request from 'lib/request';
-import Cache from 'lib/cache';
+import Storage from 'lib/storage';
 import { unlock, lock } from 'lib/wallet/security';
 
 import CsWallet from '@coinspace/cs-wallet';
@@ -249,7 +249,7 @@ function getExtraOptions(crypto) {
   } else if (crypto.network === 'eos') {
     options.accountName = details.get('eosAccountName') || '';
   } else if (crypto.network === 'monero') {
-    options.cache = new Cache(process.env.SITE_URL, 'monero', LS.getDetailsKey());
+    options.storage = new Storage(process.env.SITE_URL, 'monero', LS.getDetailsKey());
     options.request = request;
     options.apiNode = process.env.API_XMR_URL;
     options.apiWeb = process.env.SITE_URL;
