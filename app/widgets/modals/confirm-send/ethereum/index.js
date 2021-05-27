@@ -40,7 +40,7 @@ function open(data) {
       }
 
       try {
-        const historyTx = wallet.sendTx(tx);
+        const historyTx = await wallet.sendTx(tx);
         if (data.onSuccessDismiss) data.onSuccessDismiss();
         showSuccess({
           el: ractive.el,

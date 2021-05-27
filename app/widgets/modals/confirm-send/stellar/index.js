@@ -29,7 +29,7 @@ function open(data) {
           return showInfo({
             title: 'Insufficient funds',
             message: "Your wallet isn't activated. You can receive only amount greater than :minReserve :denomination.",
-            interpolations: { minReserve: toUnitString(wallet.getMinReserve()), denomination: wallet.denomination },
+            interpolations: { minReserve: toUnitString(wallet.minReserve), denomination: wallet.denomination },
           });
         }
         return handleTransactionError(err);

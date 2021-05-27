@@ -36,7 +36,7 @@ export async function validateSend(options) {
     } else if (/Inactive account/.test(e.message)) {
       // eslint-disable-next-line max-len
       error = new Error("Your wallet isn't activated. To activate it please send greater than minimum reserve (:minReserve :denomination) to your wallet address.");
-      error.interpolations = { minReserve: toUnitString(wallet.getMinReserve()), denomination: wallet.denomination };
+      error.interpolations = { minReserve: toUnitString(wallet.minReserve), denomination: wallet.denomination };
       throw error;
     } else if (/Destination address equal source address/.test(e.message)) {
       throw new Error('Please enter an address other than your wallet address');
@@ -44,7 +44,7 @@ export async function validateSend(options) {
       if (/Less than minimum reserve/.test(e.details)) {
         // eslint-disable-next-line max-len
         error = new Error("Recipient's wallet isn't activated. You can send only amount greater than :minReserve :denomination.");
-        error.interpolations = { minReserve: toUnitString(wallet.getMinReserve()), denomination: wallet.denomination };
+        error.interpolations = { minReserve: toUnitString(wallet.minReserve), denomination: wallet.denomination };
       } else {
         error = new Error('Please enter an amount above');
         error.interpolations = { dust: `${toUnitString(e.dustThreshold)} ${wallet.denomination}` };
@@ -86,7 +86,7 @@ export async function validateSend(options) {
         error = new Error(message);
         error.interpolations = {
           sendableBalance: toUnitString(e.sendableBalance),
-          minReserve: toUnitString(wallet.getMinReserve()),
+          minReserve: toUnitString(wallet.minReserve),
           denomination: wallet.denomination,
         };
         throw error;

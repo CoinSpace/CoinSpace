@@ -29,7 +29,7 @@ function open(data) {
           return showInfo({
             title: 'Insufficient funds',
             message: "Your wallet isn't activated. You can receive only amount greater than :minReserve :denomination.",
-            interpolations: { minReserve: toUnitString(wallet.getMinReserve()), denomination: wallet.denomination },
+            interpolations: { minReserve: toUnitString(wallet.minReserve), denomination: wallet.denomination },
           });
         }
         return handleTransactionError(err);
@@ -79,7 +79,7 @@ function open(data) {
       // eslint-disable-next-line max-len
       err.message = "Recipient's wallet isn't activated. You can send only amount greater than :minReserve :denomination.";
       err.interpolations = {
-        minReserve: toUnitString(wallet.getMinReserve()),
+        minReserve: toUnitString(wallet.minReserve),
         denomination: wallet.denomination,
       };
     } else if (err.message === 'tecDST_TAG_NEEDED') {
