@@ -33,12 +33,16 @@ export default function(el) {
         if (type === 'p2pkh') return '(P2PKH)';
         if (type === 'p2sh') return '(P2SH)';
         if (type === 'p2wpkh') return '(Bech32)';
+        if (type === 'address') return translate('Address');
+        if (type === 'subaddress') return translate('Subaddress');
         return '-';
       },
       getAddressTypeOption(type) {
         if (type === 'p2pkh') return translate('P2PKH - Legacy');
         if (type === 'p2sh') return translate('P2SH - SegWit compatible');
         if (type === 'p2wpkh') return translate('Bech32 - SegWit native');
+        if (type === 'address') return translate('Standard address');
+        if (type === 'subaddress') return translate('Subaddress');
         return '-';
       },
     },
@@ -52,7 +56,7 @@ export default function(el) {
     const wallet = getWallet();
     ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
 
-    const addressTypes = (wallet.network && wallet.network.addressTypes) || [];
+    const addressTypes = (wallet.network && wallet.network.addressTypes) || wallet.addressTypes || [];
     ractive.set('addressTypes', addressTypes);
     ractive.set('addressType', wallet.addressType);
     ractive.set('addressTooltip', [
