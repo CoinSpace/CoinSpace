@@ -60,7 +60,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(png|svg|jpg|gif|ico|woff|woff2|eot|ttf|otf)$/i,
+        test: /\.(png|svg|jpg|gif|ico|woff|woff2|eot|ttf|otf|wasm)$/i,
         type: 'asset/resource',
         generator: {
           filename: (pathData) => {
@@ -88,10 +88,6 @@ module.exports = {
     ),
     new CopyWebpackPlugin({
       patterns: [
-        {
-          from: 'node_modules/@coinspace/monero-core-js/build/MoneroCoreJS.wasm',
-          to: 'assets/MoneroCoreJS.wasm',
-        },
         { from: 'app/security.txt', to: './' },
         { from: 'app/assets/icons/favicon.ico', to: './' },
       ],

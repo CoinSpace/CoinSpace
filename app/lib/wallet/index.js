@@ -151,15 +151,15 @@ export async function initWallet(pin) {
 
   const seed = seeds.get('private');
   if (seed) {
-    Object.keys(Wallet).forEach((key) => {
+    for (const key of Object.keys(Wallet)) {
       const wallet = new Wallet[key]({
         seed,
         networkName: key,
-        ...getExtraOptions({ network: key }),
+        ...await getExtraOptions({ network: key }),
       });
       wallet.lock();
       LS.setPublicKey(wallet, seeds.get('public'));
-    });
+    }
   }
 
   if (!seed && !LS.hasPublicKey(crypto.network)) {
@@ -167,18 +167,18 @@ export async function initWallet(pin) {
     state.wallet = new Wallet[crypto.network]({
       seed: seeds.get('private'),
       networkName: crypto.network,
-      ...getExtraOptions(crypto),
+      ...await getExtraOptions(crypto),
     });
     state.wallet.lock();
     await lock();
     LS.setPublicKey(state.wallet, seeds.get('public'));
   } else {
     const publicKey = LS.getPublicKey(crypto.network, seeds.get('public'));
-    const options = Object.assign({
+    state.wallet = new Wallet[crypto.network]({
       publicKey,
       networkName: crypto.network,
-    }, getExtraOptions(crypto));
-    state.wallet = new Wallet[crypto.network](options);
+      ...await getExtraOptions(crypto),
+    });
   }
 
   convert.setDecimals(state.wallet.decimals);
@@ -195,7 +195,7 @@ export async function initWallet(pin) {
   }
 }
 
-function getExtraOptions(crypto) {
+async function getExtraOptions(crypto) {
   const options = {
     useTestNetwork: process.env.COIN_NETWORK === 'regtest',
   };
@@ -249,6 +249,7 @@ function getExtraOptions(crypto) {
   } else if (crypto.network === 'eos') {
     options.accountName = details.get('eosAccountName') || '';
   } else if (crypto.network === 'monero') {
+    options.wasm = (await import('@coinspace/monero-core-js/build/MoneroCoreJS.wasm')).default;
     options.storage = new Storage(process.env.SITE_URL, 'monero', LS.getDetailsKey());
     options.request = request;
     options.apiNode = process.env.API_XMR_URL;
