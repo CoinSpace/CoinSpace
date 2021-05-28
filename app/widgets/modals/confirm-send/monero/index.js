@@ -30,7 +30,7 @@ function open(data) {
       }
 
       try {
-        await wallet.sendTx(tx);
+        const historyTx = await wallet.sendTx(tx);
 
         lock(wallet);
 
@@ -44,6 +44,7 @@ function open(data) {
 
         // update balance & tx history
         emitter.emit('tx-sent');
+        emitter.emit('append-transactions', [historyTx]);
       } catch (err) {
         return handleTransactionError(err);
       }

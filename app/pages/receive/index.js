@@ -153,9 +153,10 @@ export default function(el) {
     const wallet = getWallet();
     try {
       await unlock(wallet);
-      await wallet.addTx(ractive.get('txId'));
+      const historyTx = await wallet.addTx(ractive.get('txId'));
       ractive.set('txId', '');
       emitter.emit('tx-added');
+      emitter.emit('append-transactions', [historyTx]);
     } catch (err) {
       console.error(err);
       // TODO add error handling
