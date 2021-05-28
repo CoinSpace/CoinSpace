@@ -60,12 +60,19 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(png|svg|jpg|gif|ico|woff|woff2|eot|ttf|otf|wasm)$/i,
+        test: /\.(png|svg|jpg|gif|ico|woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
         generator: {
           filename: (pathData) => {
             return `${path.dirname(pathData.filename).substr(4)}/[name].[hash:8][ext]`;
           },
+        },
+      },
+      {
+        test: /\.wasm$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/wasm/[name].[hash:8][ext]',
         },
       },
       {
