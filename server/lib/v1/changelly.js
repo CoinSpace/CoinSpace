@@ -8,7 +8,7 @@ const URL = 'https://api.changelly.com';
 const { CHANGELLY_API_SECRET } = process.env;
 const { CHANGELLY_API_KEY } = process.env;
 
-const PRIORITY_SYMBOLS = ['BTC', 'BCH', 'BSV', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH', 'USDT'];
+const PRIORITY_SYMBOLS = ['BTC', 'BCH', 'BSV', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH', 'XMR', 'USDT'];
 const DEPRECATED_SYMBOLS = ['wtc', 'waxp'];
 
 function getCoins() {
