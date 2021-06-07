@@ -352,5 +352,13 @@
   "Local currency": "Local currency",
   "Changelly Transaction ID": "Changelly Transaction ID",
   "Transaction ID": "Transaction ID",
-  "Accept": "Accept"
+  "Accept": "Accept",
+  "Transaction has already been added.": "Transaction has already been added.",
+  "Unknown transaction.": "Unknown transaction.",
+  "Not your transaction. It can't be added.": "Not your transaction. It can't be added.",
+  "Invalid transaction.": "Invalid transaction.",
+  "Standard": "Standard",
+  "Subaddress": "Subaddress",
+  "Sent": "Sent",
+  "Stealth address": "Stealth address"
 }
