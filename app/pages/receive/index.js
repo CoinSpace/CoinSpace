@@ -33,7 +33,7 @@ export default function(el) {
         if (type === 'p2pkh') return '(P2PKH)';
         if (type === 'p2sh') return '(P2SH)';
         if (type === 'p2wpkh') return '(Bech32)';
-        if (type === 'address') return translate('Address');
+        if (type === 'address') return translate('Standard');
         if (type === 'subaddress') return translate('Subaddress');
         return '-';
       },
@@ -41,7 +41,7 @@ export default function(el) {
         if (type === 'p2pkh') return translate('P2PKH - Legacy');
         if (type === 'p2sh') return translate('P2SH - SegWit compatible');
         if (type === 'p2wpkh') return translate('Bech32 - SegWit native');
-        if (type === 'address') return translate('Standard address');
+        if (type === 'address') return translate('Standard');
         if (type === 'subaddress') return translate('Subaddress');
         return '-';
       },
@@ -155,9 +155,10 @@ export default function(el) {
   ractive.on('accept', async () => {
     ractive.set('isAccepting', true);
     const wallet = getWallet();
+    const txId = ractive.get('txId');
     try {
       await unlock(wallet);
-      const historyTx = await wallet.addTx(ractive.get('txId'));
+      const historyTx = await wallet.addTx(txId);
       ractive.set('txId', '');
       emitter.emit('tx-added');
       emitter.emit('append-transactions', [historyTx]);
@@ -166,10 +167,25 @@ export default function(el) {
         message: 'Your transaction will appear in your history tab shortly.',
       });
     } catch (err) {
-      // TODO: handle error message in i18n
-      showError({
-        message: err.message,
-      });
+      if (/Transaction already added/.test(err.message)) {
+        showError({
+          message: 'Transaction has already been added.',
+        });
+      } else if (/Unknown transaction/.test(err.message)) {
+        showError({
+          message: 'Unknown transaction.',
+        });
+      } else if (/Not your transaction/.test(err.message)) {
+        showError({
+          message: "Not your transaction. It can't be added.",
+        });
+      } else {
+        console.error(`txId: '${txId}'`, err);
+        showError({
+          title: 'Uh Oh...',
+          message: 'Invalid transaction.',
+        });
+      }
     }
     await lock(wallet);
     ractive.set('isAccepting', false);

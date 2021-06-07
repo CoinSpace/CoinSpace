@@ -46,6 +46,9 @@ export default function(el) {
     } else if (wallet.networkName === 'eos') {
       ractive.set('isEnabledImport', false);
       ractive.set('isEnabledExport', true);
+    } else if (wallet.networkName === 'monero') {
+      ractive.set('isEnabledImport', false);
+      ractive.set('isEnabledExport', true);
     } else {
       ractive.set('isEnabledImport', true);
       ractive.set('isEnabledExport', true);
