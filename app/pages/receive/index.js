@@ -2,7 +2,7 @@ import Ractive from 'lib/ractive';
 import emitter from 'lib/emitter';
 import showTooltip from 'widgets/modals/tooltip';
 import geo from 'lib/geo';
-import { showError } from 'widgets/modals/flash';
+import { showError, showSuccess } from 'widgets/modals/flash';
 import showSetDetails from 'widgets/modals/set-details';
 import qrcode from 'lib/qrcode';
 import initEosSetup from 'widgets/eos/setup';
@@ -161,9 +161,15 @@ export default function(el) {
       ractive.set('txId', '');
       emitter.emit('tx-added');
       emitter.emit('append-transactions', [historyTx]);
+      showSuccess({
+        title: 'Transaction Accepted',
+        message: 'Your transaction will appear in your history tab shortly.',
+      });
     } catch (err) {
-      console.error(err);
-      // TODO add error handling
+      // TODO: handle error message in i18n
+      showError({
+        message: err.message,
+      });
     }
     await lock(wallet);
     ractive.set('isAccepting', false);
