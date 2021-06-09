@@ -20,7 +20,7 @@ export async function validateSend(options) {
     } else if (wallet.networkName === 'eos') {
       tx = wallet.createTx(to, amount, options.memo);
     } else if (wallet.networkName === 'monero') {
-      tx = await wallet.createTx(to, amount, options.feeName);
+      tx = await wallet.createTx(to, amount, fee);
     }
     options.tx = tx;
   } catch (e) {
@@ -52,6 +52,9 @@ export async function validateSend(options) {
       throw error;
     } else if (/Invalid gasLimit/.test(e.message)) {
       throw new Error('Please enter Gas Limit greater than zero');
+    } else if (/Invalid fee/.test(e.message)) {
+      // TODO add translation when inplemented in wallets
+      throw new Error('Please enter valid fee');
     } else if (/Transaction too large/.test(e.message)) {
       throw new Error('Transaction too large');
     } else if (/Insufficient funds/.test(e.message)) {
