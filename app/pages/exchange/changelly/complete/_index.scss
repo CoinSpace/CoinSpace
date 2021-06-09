@@ -15,11 +15,10 @@
     }
   }
 
-  ._message {
-    text-align: center;
+  .csformgroup {
     @include wrapdat;
-    @include breakpoint(portrait) {
-      font-size: $base_font_size--portrait;
+    a {
+      text-decoration: underline;
     }
   }
 

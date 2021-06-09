@@ -5,46 +5,57 @@ export const walletCoins = [{
   _id: 'bitcoin',
   network: 'bitcoin',
   name: 'Bitcoin',
+  txUrl: (txId) => `https://blockchair.com/bitcoin/transaction/${txId}?from=coinwallet`,
 }, {
   _id: 'bitcoincash',
   network: 'bitcoincash',
   name: 'Bitcoin Cash',
+  txUrl: (txId) => `https://blockchair.com/bitcoin-cash/transaction/${txId}?from=coinwallet`,
 }, {
   _id: 'bitcoinsv',
   network: 'bitcoinsv',
   name: 'Bitcoin SV',
+  txUrl: (txId) => `https://blockchair.com/bitcoin-sv/transaction/${txId}?from=coinwallet`,
 }, {
   _id: 'ethereum',
   network: 'ethereum',
   name: 'Ethereum',
+  txUrl: (txId) => `https://blockchair.com/ethereum/transaction/${txId}?from=coinwallet`,
 }, {
   _id: 'litecoin',
   network: 'litecoin',
   name: 'Litecoin',
+  txUrl: (txId) => `https://blockchair.com/litecoin/transaction/${txId}?from=coinwallet`,
 }, {
   _id: 'ripple',
   network: 'ripple',
   name: 'Ripple',
+  txUrl: (txId) => `https://xrpcharts.ripple.com/#/transactions/${txId}`,
 }, {
   _id: 'stellar',
   network: 'stellar',
   name: 'Stellar',
+  txUrl: (txId) => `https://stellar.expert/explorer/public/tx/${txId}`,
 }, {
   _id: 'eos',
   network: 'eos',
   name: 'EOS',
+  txUrl: (txId) => `https://bloks.io/transaction/${txId}`,
 }, {
   _id: 'dogecoin',
   network: 'dogecoin',
   name: 'Dogecoin',
+  txUrl: (txId) => `https://blockchair.com/dogecoin/transaction/${txId}?from=coinwallet`,
 }, {
   _id: 'dash',
   network: 'dash',
   name: 'Dash',
+  txUrl: (txId) => `https://blockchair.com/dash/transaction/${txId}?from=coinwallet`,
 }, {
   _id: 'monero',
   network: 'monero',
   name: 'Monero',
+  txUrl: (txId) => `https://blockchair.com/monero/transaction/${txId}?from=coinwallet`,
 }];
 const DEFAULT_COIN = 'bitcoin';
 

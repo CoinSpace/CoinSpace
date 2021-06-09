@@ -112,9 +112,6 @@ export default function(el) {
       isFailed: ractive.get('isFailed'),
       isConfirmed: ractive.get('isConfirmed'),
       toUnitString: ractive.get('toUnitString'),
-      isNetwork(str) {
-        return str === network;
-      },
     };
     showTransactionDetail(data);
   });

@@ -59,6 +59,8 @@ export default function(el) {
         showStep(steps.awaiting, changellyInfo);
       } else if (tx.status === 'finished') {
         changellyInfo.amount = tx.amountTo;
+        changellyInfo.payoutHashLink = tx.payoutHashLink;
+        changellyInfo.payoutHash = tx.payoutHash;
         showStep(steps.complete, changellyInfo);
       } else if (tx.status === 'failed') {
         showStep(steps.error, {

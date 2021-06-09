@@ -12,7 +12,7 @@
     {{>cross}}
 
     <label>{{translate("Transaction Id:")}}</label>
-    <a href="" onclick="return window.safeOpen('https://stellar.expert/explorer/public/tx/{{id}}', '_blank');" class="cscode">{{id}}</a>
+    <a href="" onclick="return window.safeOpen('{{txUrl(id)}}', '_blank');" class="cscode">{{id}}</a>
 
     <label>{{translate("Transaction Fee:")}}</label>
     <code class="cscode">{{toUnitString(fee)}}</code>

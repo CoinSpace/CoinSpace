@@ -19,7 +19,7 @@
   <div class="_content">
     {{>cross}}
     <label>{{translate("Transaction Id:")}}</label>
-    <a href="" onclick="return window.safeOpen('https://blockchair.com/monero/transaction/{{txId}}?from=coinwallet', '_blank');" class="cscode">{{txId}}</a>
+    <a href="" onclick="return window.safeOpen('{{txUrl(txId)}}', '_blank');" class="cscode">{{txId}}</a>
 
     <label>{{translate("Transaction Fee:")}}</label>
     <code class="cscode">{{toUnitString(fee)}}</code>

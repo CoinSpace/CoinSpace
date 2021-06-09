@@ -22,7 +22,7 @@
   <div class="_content">
     {{>cross}}
     <label>{{translate("Transaction Id:")}}</label>
-    <a href="" onclick="return window.safeOpen('https://blockchair.com/ethereum/transaction/{{id}}?from=coinwallet', '_blank');" class="cscode">{{id}}</a>
+    <a href="" onclick="return window.safeOpen('{{txUrl(id)}}', '_blank');" class="cscode">{{id}}</a>
 
     {{#unless token}}
       <label>{{translate("Transaction Fee:")}}</label>

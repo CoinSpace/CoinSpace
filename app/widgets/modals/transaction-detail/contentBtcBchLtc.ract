@@ -19,19 +19,7 @@
   <div class="_content">
     {{>cross}}
     <label>{{translate("Transaction Id:")}}</label>
-    {{#if isNetwork('bitcoin')}}
-    <a href="" onclick="return window.safeOpen('https://blockchair.com/bitcoin/transaction/{{id}}?from=coinwallet', '_blank');" class="cscode">{{id}}</a>
-    {{elseif isNetwork('bitcoincash')}}
-    <a href="" onclick="return window.safeOpen('https://blockchair.com/bitcoin-cash/transaction/{{id}}?from=coinwallet', '_blank');" class="cscode">{{id}}</a>
-    {{elseif isNetwork('bitcoinsv')}}
-    <a href="" onclick="return window.safeOpen('https://blockchair.com/bitcoin-sv/transaction/{{id}}?from=coinwallet', '_blank');" class="cscode">{{id}}</a>
-    {{elseif isNetwork('litecoin')}}
-    <a href="" onclick="return window.safeOpen('https://blockchair.com/litecoin/transaction/{{id}}?from=coinwallet', '_blank');" class="cscode">{{id}}</a>
-    {{elseif isNetwork('dogecoin')}}
-    <a href="" onclick="return window.safeOpen('https://blockchair.com/dogecoin/transaction/{{id}}?from=coinwallet', '_blank');" class="cscode">{{id}}</a>
-    {{elseif isNetwork('dash')}}
-    <a href="" onclick="return window.safeOpen('https://blockchair.com/dash/transaction/{{id}}?from=coinwallet', '_blank');" class="cscode">{{id}}</a>
-    {{/if}}
+    <a href="" onclick="return window.safeOpen('{{txUrl(id)}}', '_blank');" class="cscode">{{id}}</a>
 
     <label>{{translate("Transaction Fee:")}}</label>
     <code class="cscode">{{toUnitString(fee)}}</code>

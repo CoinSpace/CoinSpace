@@ -136,6 +136,10 @@ function getTransaction(id) {
     return {
       amountTo: tx.amountTo,
       status: tx.status,
+      ...(tx.status === 'finished' ? {
+        payoutHashLink: tx.payoutHashLink,
+        payoutHash: tx.payoutHash,
+      } : {}),
     };
   });
 }

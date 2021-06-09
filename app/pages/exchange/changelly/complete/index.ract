@@ -13,13 +13,32 @@
     {{>svg_success}}
   </div>
 
-  <div class="_message">
-    {{translate("amount :toSymbol have been delivered to :toAddress", {
-      amount: amount,
-      toSymbol: toSymbol,
-      toAddress: toAddress
-    })}}
+  <div class="csformgroup csformgroup--readonly">
+    <div class="csformgroup__input-group">
+      {{translate("amount :toSymbol have been delivered to :toAddress", {
+        amount: amount,
+        toSymbol: toSymbol,
+        toAddress: toAddress
+      })}}
+    </div>
   </div>
+
+  <div class="csformgroup csformgroup--readonly">
+    <div class="csformgroup__input-group">
+      <div class="csformgroup__input-group__header">
+        <label>{{translate("Transaction ID")}}</label>
+      </div>
+      <a href="" onclick="return window.safeOpen('{{txUrl(payoutHash)}}', '_blank');">{{payoutHash}}</a>
+    </div>
+  </div>
+
+  {{#if network === 'monero'}}
+  <div class="csformgroup csformgroup--readonly">
+    <div class="csformgroup__input-group">
+      {{translate("In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.")}}
+    </div>
+  </div>
+  {{/if}}
 
 </div>
 {{>footer}}

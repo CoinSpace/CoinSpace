@@ -14,7 +14,7 @@
   <div class="_content">
     {{>cross}}
     <label>{{translate("Transaction Id:")}}</label>
-    <a href="" onclick="return window.safeOpen('https://xrpcharts.ripple.com/#/transactions/{{id}}', '_blank');" class="cscode">{{id}}</a>
+    <a href="" onclick="return window.safeOpen('{{txUrl(id)}}', '_blank');" class="cscode">{{id}}</a>
 
     <label>{{translate("Transaction Fee:")}}</label>
     <code class="cscode">{{toUnitString(fee)}}</code>
