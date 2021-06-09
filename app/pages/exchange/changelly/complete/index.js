@@ -28,6 +28,8 @@ export default function(el) {
       toSymbol: '',
       toAddress: '',
       amount: '',
+      payoutHash: '',
+      txUrl: () => '',
     },
     partials: {
       footer,
