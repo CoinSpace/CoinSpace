@@ -53,10 +53,10 @@ window.initCSApp = async function() {
     return showError({ message: err.message });
   });
 
-  emitter.once('wallet-ready', ({ pin, err } ) => {
+  emitter.once('auth-success', (pin) => {
     window.scrollTo(0, 0);
     if (process.env.BUILD_TYPE === 'phonegap') window.Zendesk.setAnonymousIdentity();
-    const frame = initFrame(appEl, err);
+    const frame = initFrame(appEl);
     if (pin && touchId.isAvailable()) {
       const touchIdSetupWidget = showTouchIdSetup({ append: true, pin });
       touchIdSetupWidget.on('close', () => {

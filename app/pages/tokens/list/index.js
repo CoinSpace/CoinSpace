@@ -56,6 +56,11 @@ export default function(el) {
     ractive.set('rates', ticker.getAllRates());
   });
 
+  emitter.on('wallet-error', () => {
+    isEnabled = true;
+    ractive.set('rates', ticker.getAllRates());
+  });
+
   emitter.on('currency-changed', (currency) => {
     ractive.set('currency', currency);
   });

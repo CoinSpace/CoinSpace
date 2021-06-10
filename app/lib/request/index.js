@@ -62,18 +62,16 @@ axios.interceptors.request.use((config) => {
   return config;
 });
 
-function makeRequest(config, callback) {
-  if (callback) {
-    throw new Error('Callback style not supported!');
-  }
-  const showFlashError = !config.hideFlashError;
-
+function request(config = {}) {
   return axios.request(config)
     .then((response) => {
       return response.data;
     })
     .catch((err) => {
       // TODO handle 401
+      if (config.disableDefaultCatch) {
+        throw err;
+      }
       if (err.response) {
         const error = new Error(err.response.data.error || err.response.data.message || err.response.data);
         error.status = err.response.status;
@@ -81,7 +79,7 @@ function makeRequest(config, callback) {
         error.method = err.config.method;
         throw error;
       } else if (err.request) {
-        if (showFlashError) {
+        if (!config.hideFlashError) {
           showError({ message: 'Request timeout. Please check your internet connection.' });
         }
         throw err;
@@ -91,4 +89,4 @@ function makeRequest(config, callback) {
     });
 }
 
-export default makeRequest;
+export default request;

@@ -14,7 +14,7 @@ import { getWallet } from 'lib/wallet';
 import Hammer from 'hammerjs';
 import template from './index.ract';
 
-export default function(el, err) {
+export default function(el) {
   const ractive = new Ractive({
     el,
     template,
@@ -91,27 +91,24 @@ export default function(el, err) {
     if (process.env.BUILD_PLATFORM === 'ios') window.StatusBar.setStyle('lightContent');
   });
 
-  emitter.on('wallet-ready', ({ err }) => {
-    console.log('on wallet-ready event');
-    if (err) {
-      if (err.message === 'cs-node-error') {
-        emitter.emit('change-tab', 'tokens');
-        document.getElementsByTagName('html')[0].classList.add('blocked');
-        showError({
-          message: "Can't connect to :network node. Please try again later or choose another token.",
-          interpolations: { network: getWallet().networkName },
-        });
-      } else {
-        console.error(err);
-        setCrypto(); // fix wrong tokens
-        showError({ message: err.message });
-      }
-    } else {
-      document.getElementsByTagName('html')[0].classList.remove('blocked');
-    }
+  emitter.on('wallet-ready', () => {
+    document.getElementsByTagName('html')[0].classList.remove('blocked');
   });
 
-  emitter.emit('wallet-ready', { err });
+  emitter.on('wallet-error', (err) => {
+    if (err.message === 'cs-node-error') {
+      emitter.emit('change-tab', 'tokens');
+      document.getElementsByTagName('html')[0].classList.add('blocked');
+      showError({
+        message: "Can't connect to :network node. Please try again later or choose another token.",
+        interpolations: { network: getWallet().networkName },
+      });
+    } else {
+      console.error(err);
+      setCrypto(); // fix wrong tokens
+      showError({ message: err.message });
+    }
+  });
 
   return ractive;
 }

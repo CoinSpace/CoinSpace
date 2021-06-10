@@ -108,7 +108,8 @@ async function registerWallet(pin) {
   LS.setId(deviceId);
   LS.setDetailsKey(detailsKey);
   await Promise.all([details.init(), settings.init()]);
-  await initWallet(pin);
+  emitter.emit('auth-success', pin);
+  await initWallet(walletSeed);
 }
 
 async function loginWithPin(pin) {
@@ -126,6 +127,7 @@ async function loginWithPin(pin) {
   });
   seeds.unlock('public', publicToken);
   await Promise.all([details.init(), settings.init()]);
+  emitter.emit('auth-success', pin);
   await initWallet();
 }
 
@@ -142,14 +144,14 @@ async function loginWithTouchId(showSpinner) {
     const publicToken = await touchId.publicToken(showSpinner);
     seeds.unlock('public', publicToken);
     await Promise.all([details.init(), settings.init()]);
+    emitter.emit('auth-success');
     await initWallet();
   }
 }
 
-export async function initWallet(pin) {
+export async function initWallet(seed) {
   const crypto = getCrypto();
 
-  const seed = seeds.get('private');
   if (seed) {
     for (const key of Object.keys(Wallet)) {
       const wallet = new Wallet[key]({
@@ -188,10 +190,9 @@ export async function initWallet(pin) {
   try {
     await state.wallet.load();
 
-    emitter.emit('wallet-ready', { pin });
+    emitter.emit('wallet-ready');
   } catch (err) {
-    // TODO maybe migrate to wallet-error
-    emitter.emit('wallet-ready', { pin, err });
+    emitter.emit('wallet-error', err);
   }
 }
 

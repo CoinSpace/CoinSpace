@@ -81,11 +81,6 @@ export default function(el) {
     if (!isSyncing) {
       updateWallet();
     }
-    const network = getWallet().networkName;
-    ractive.set('isEthereum', network === 'ethereum');
-    ractive.set('isRipple', network === 'ripple');
-    ractive.set('isStellar', network === 'stellar');
-    ractive.set('isEOS', network === 'eos');
     const url = window.localStorage.getItem('_cs_bip21');
     if (url) bip21Handler(url);
   });
@@ -191,6 +186,10 @@ export default function(el) {
   emitter.on('wallet-ready', () => {
     const wallet = getWallet();
     isSyncing = false;
+    ractive.set('isEthereum', wallet.networkName === 'ethereum');
+    ractive.set('isRipple', wallet.networkName === 'ripple');
+    ractive.set('isStellar', wallet.networkName === 'stellar');
+    ractive.set('isEOS', wallet.networkName === 'eos');
     ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
     ractive.set('denomination', wallet.denomination);
     ractive.set('factors', FACTORS[getCrypto()._id]);
