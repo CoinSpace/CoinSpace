@@ -162,6 +162,7 @@ export default function(el) {
       ractive.set('txId', '');
       emitter.emit('tx-added');
       emitter.emit('append-transactions', [historyTx]);
+      emitter.emit('wallet-update');
       showSuccess({
         title: 'Transaction Accepted',
         message: 'Your transaction will appear in your history tab shortly.',

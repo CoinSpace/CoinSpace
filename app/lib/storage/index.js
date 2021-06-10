@@ -1,4 +1,4 @@
-import { encryptJSON, decryptJSON } from 'lib/encryption';
+import { encrypt, decrypt } from 'lib/encryption';
 import request from 'lib/request';
 
 class Storage {
@@ -15,8 +15,10 @@ class Storage {
       seed: 'public',
     });
     if (res.data) {
-      this.storage = decryptJSON(res.data, this.key);
+      this.json = decrypt(res.data, this.key);
+      this.storage = JSON.parse(this.json);
     } else {
+      this.json = '{}';
       this.storage = {};
     }
   }
@@ -29,15 +31,20 @@ class Storage {
     this.pending = this.pending
       .then(async () => {
         this.storage[key] = value;
+        const json = JSON.stringify(this.storage);
+        if (json === this.json) {
+          return;
+        }
         const res = await request({
           url: this.url,
           method: 'put',
           data: {
-            data: encryptJSON(this.storage, this.key),
+            data: encrypt(json, this.key),
           },
           seed: 'public',
         });
-        this.storage = decryptJSON(res.data, this.key);
+        this.json = decrypt(res.data, this.key);
+        this.storage = JSON.parse(this.json);
       });
     return this.pending;
   }
