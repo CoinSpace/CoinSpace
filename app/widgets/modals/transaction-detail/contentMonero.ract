@@ -26,6 +26,9 @@
 
     <label>{{translate("Inputs:")}}</label>
     <code class="cscode">
+      {{#if coinbase}}
+        <div class="_item">Coinbase</div>
+      {{/if}}
       {{#if (ins.length > inputsPerPage)}}
         {{#each ins.slice(0, inputsPerPage)}}
           <div class="_item">
