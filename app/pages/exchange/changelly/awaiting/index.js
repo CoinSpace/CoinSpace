@@ -1,6 +1,7 @@
 import Ractive from 'lib/ractive';
 import emitter from 'lib/emitter';
 import { showInfo } from 'widgets/modals/flash';
+import { translate } from 'lib/i18n';
 import template from './index.ract';
 import footer from '../footer.ract';
 
@@ -21,13 +22,12 @@ export default function(el) {
     if (context.status === 'hold') {
       showInfo({
         isHtml: true,
-        title: 'On hold...',
-        message: 'Currently, your transaction (ID: :id) is on hold.<br>Please, contact Changelly to pass KYC.',
+        title: translate('On hold...'),
+        // eslint-disable-next-line max-len
+        message: translate('Currently, your transaction (ID: :id) is on hold.<br>Please, contact Changelly to pass KYC.',
+          { id: context.id }),
         href: 'mailto:security@changelly.com',
         linkText: 'security@changelly.com',
-        interpolations: {
-          id: context.id,
-        },
       });
     }
 

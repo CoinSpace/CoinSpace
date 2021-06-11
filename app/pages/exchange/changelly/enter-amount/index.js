@@ -3,6 +3,7 @@ import emitter from 'lib/emitter';
 import CS from 'lib/wallet';
 import changelly from 'lib/changelly';
 import { showError } from 'widgets/modals/flash';
+import { translate } from 'lib/i18n';
 import _ from 'lodash';
 import template from './index.ract';
 import footer from '../footer.ract';
@@ -81,7 +82,7 @@ export default function(el) {
       }
     }).catch((err) => {
       ractive.set('isLoading', false);
-      return showError({ message: err.message });
+      return showError({ message: translate(err.message) });
     });
   });
 
@@ -94,18 +95,22 @@ export default function(el) {
   });
 
   ractive.on('confirm', () => {
-    if (ractive.get('rate') === '?') return showError({ message: 'Exchange is currently unavailable for this pair' });
+    if (ractive.get('rate') === '?') {
+      return showError({
+        message: translate('Exchange is currently unavailable for this pair'),
+      });
+    }
 
     const fromAmount = parseFloat(ractive.find('#changelly_from_amount').value) || -1;
     const fromSymbol = ractive.get('fromSymbol');
     const minAmount = parseFloat(ractive.get('minAmount')) || 0;
     if (fromAmount < minAmount) {
       const interpolations = { dust: `${ractive.get('minAmount') || 0} ${fromSymbol}` };
-      return showError({ message: 'Please enter an amount above', interpolations });
+      return showError({ message: translate('Please enter an amount above', interpolations) });
     }
     if (_maxAmount && fromAmount > _maxAmount) {
       const interpolations = { max: `${_maxAmount} ${fromSymbol}` };
-      return showError({ message: 'Please enter an amount below', interpolations });
+      return showError({ message: translate('Please enter an amount below', interpolations) });
     }
 
     const data = {

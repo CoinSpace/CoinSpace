@@ -1,6 +1,7 @@
 import Ractive from 'widgets/modals/base';
 import emitter from 'lib/emitter';
 import { showError } from 'widgets/modals/flash';
+import { translate } from 'lib/i18n';
 import qrcode from 'lib/qrcode';
 import details from 'lib/wallet/details';
 import tokens from 'lib/tokens';
@@ -32,7 +33,7 @@ function open() {
 
     if (!address) {
       ractive.set('isValidating', false);
-      return showError({ message: 'Please fill out address.' });
+      return showError({ message: translate('Please fill out address.') });
     }
 
     token = tokens.getTokenByAddress(address);
@@ -41,10 +42,9 @@ function open() {
       token = await tokens.requestTokenByAddress(address).catch((err) => {
         if (err.status === 400 || err.status === 404) {
           showError({
-            message: 'address is not a valid address.',
-            interpolations: {
+            message: translate('address is not a valid address.', {
               address,
-            },
+            }),
           });
         }
         console.error(err);
@@ -59,7 +59,7 @@ function open() {
     if ((token._id && walletTokens.map(item => item._id).includes(token._id))
         || walletTokens.map(item => item.address).includes(token.address)) {
       ractive.set('isValidating', false);
-      return showError({ message: 'This Token has already been added.' });
+      return showError({ message: translate('This Token has already been added.') });
     }
 
     walletTokens.push(token);

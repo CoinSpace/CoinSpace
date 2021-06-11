@@ -2,6 +2,7 @@ import Ractive from 'widgets/modals/base';
 import emitter from 'lib/emitter';
 import { toAtom, toUnitString } from 'lib/convert';
 import { showInfo, showError, showSuccess } from 'widgets/modals/flash';
+import { translate } from 'lib/i18n';
 import _ from 'lodash';
 import { unlock, lock } from 'lib/wallet/security';
 import content from './_content.ract';
@@ -30,7 +31,7 @@ function open(data) {
         tx = createTx();
       } catch (err) {
         ractive.set('sending', false);
-        if (/Insufficient funds/.test(err.message)) return showInfo({ title: 'Insufficient funds' });
+        if (/Insufficient funds/.test(err.message)) return showInfo({ title: translate('Insufficient funds') });
         return handleTransactionError(err);
       }
 
@@ -50,8 +51,8 @@ function open(data) {
         if (data.onSuccessDismiss) data.onSuccessDismiss();
         showSuccess({
           el: ractive.el,
-          title: 'Transaction Successful',
-          message: 'Your transaction will appear in your history tab shortly.',
+          title: translate('Transaction Successful'),
+          message: translate('Your transaction will appear in your history tab shortly.'),
           fadeInDuration: 0,
         });
 
@@ -79,16 +80,17 @@ function open(data) {
 
   function handleTransactionError(err) {
     if (err.message === 'cs-node-error') {
-      err.message = 'Network node error. Please try again later.';
-      err.interpolations = { network: _.upperFirst(wallet.networkName) };
+      err.message = translate('Network node error. Please try again later.', {
+        network: _.upperFirst(wallet.networkName),
+      });
     } else {
       console.error(err);
     }
     showError({
       el: ractive.el,
-      title: 'Transaction Failed',
+      title: translate('Transaction Failed'),
+      // TODO should we translate unknown error?
       message: err.message,
-      interpolations: err.interpolations,
       fadeInDuration: 0,
     });
   }

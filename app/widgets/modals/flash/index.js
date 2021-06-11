@@ -5,15 +5,15 @@ import content from './content.ract';
 const defaults = {
   error: {
     error: true,
-    title: 'Whoops!',
+    title: translate('Whoops!'),
   },
   info: {
     warning: true,
-    title: 'Just saying...',
+    title: translate('Just saying...'),
   },
   success: {
     success: true,
-    title: 'Success!',
+    title: translate('Success!'),
   },
 };
 
@@ -28,10 +28,6 @@ function openModal(type, data) {
   data.success = defaults[type].success;
   data.title = data.title || defaults[type].title;
   data.type = type;
-
-  if (data.href && data.linkTextI18n) {
-    data.linkText = translate(data.linkTextI18n);
-  }
 
   data.onDismiss = function() {
     isOpen = false;
@@ -50,7 +46,7 @@ function openModal(type, data) {
 
 export function showError(data) {
   if (data.message === 'Network Error') {
-    data.message = 'Request timeout. Please check your internet connection.';
+    data.message = translate('Request timeout. Please check your internet connection.');
   }
   return openModal('error', data);
 }

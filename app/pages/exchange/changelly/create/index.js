@@ -5,6 +5,7 @@ import changelly from 'lib/changelly';
 import qrcode from 'lib/qrcode';
 import showTooltip from 'widgets/modals/tooltip';
 import { showError } from 'widgets/modals/flash';
+import { translate } from 'lib/i18n';
 import details from 'lib/wallet/details';
 import showMecto from 'widgets/modals/mecto';
 import template from './index.ract';
@@ -85,8 +86,8 @@ export default function(el) {
 
   ractive.on('help', () => {
     showTooltip({
-      message: 'Return address should be an address controlled by you where ' +
-      'deposit will be returned in the event of a failed transaction.',
+      // eslint-disable-next-line max-len
+      message: translate('Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.'),
     });
   });
 
@@ -112,16 +113,17 @@ export default function(el) {
     }).catch((err) => {
       ractive.set('isValidating', false);
       if (err.message === 'invalid_return_address') {
-        return showError({ message: 'Please enter a valid return address' });
+        return showError({ message: translate('Please enter a valid return address') });
       }
       if (err.message === 'invalid_to_address') {
-        return showError({ message: 'Please enter a valid address to send to' });
+        return showError({ message: translate('Please enter a valid address to send to') });
       }
       if (err.message === 'exchange_error') {
-        return showError({ message: 'Exchange error' });
+        return showError({ message: translate('Exchange error') });
       }
       console.error(err.message);
-      return showError({ message: err.message });
+      // TODO should we translate unknown errors?
+      return showError({ message: translate(err.message) });
     });
   });
 

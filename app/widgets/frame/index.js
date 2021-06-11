@@ -14,6 +14,7 @@ import { getWallet } from 'lib/wallet';
 import Hammer from 'hammerjs';
 import _ from 'lodash';
 import template from './index.ract';
+import { translate } from 'lib/i18n';
 
 export default function(el) {
   const ractive = new Ractive({
@@ -101,13 +102,15 @@ export default function(el) {
       emitter.emit('change-tab', 'tokens');
       document.getElementsByTagName('html')[0].classList.add('blocked');
       showError({
-        message: "Can't connect to :network node. Please try again later or choose another token.",
-        interpolations: { network: _.upperFirst(getWallet().networkName) },
+        message: translate("Can't connect to :network node. Please try again later or choose another token.", {
+          network: _.upperFirst(getWallet().networkName),
+        }),
       });
     } else {
       console.error(err);
       setCrypto(); // fix wrong tokens
-      showError({ message: err.message });
+      // TODO should we translate unknown error?
+      showError({ message: translate(err.message) });
     }
   });
 

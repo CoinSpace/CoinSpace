@@ -2,6 +2,7 @@ import Ractive from 'widgets/modals/base';
 import { getAvatar } from 'lib/avatar';
 import geo from 'lib/geo';
 import { showError } from 'widgets/modals/flash';
+import { translate } from 'lib/i18n';
 import { drop as animatePin } from 'lib/transitions/pinDrop.js';
 import { reset as resetPin } from 'lib/transitions/pinDrop.js';
 import template from './index.ract';
@@ -14,7 +15,7 @@ function open(callback) {
       searching: true,
       searchingAgain: false,
       getAvatar,
-      search_message: 'Searching your area for other Coin users',
+      search_message: translate('Searching your area for other Coin users'),
     },
     oncomplete() {
       const pinEl = ractive.find('#geo-pin');
@@ -50,6 +51,7 @@ function open(callback) {
       const results = await geo.search();
       ractive.set('nearbys', results);
     } catch (err) {
+      // TODO should we translate unknown error?
       showError({ message: err.message });
     }
     ractive.set('searching', false);

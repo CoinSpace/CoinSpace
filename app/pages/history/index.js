@@ -4,9 +4,9 @@ import { toUnitString } from 'lib/convert';
 import { getWallet } from 'lib/wallet';
 import strftime from 'strftime';
 import { showError } from 'widgets/modals/flash';
+import { translate } from 'lib/i18n';
 import showTransactionDetail from 'widgets/modals/transaction-detail';
 import initEosSetup from 'widgets/eos/setup';
-import { translate } from 'lib/i18n';
 import _ from 'lodash';
 import template from './index.ract';
 
@@ -133,11 +133,13 @@ export default function(el) {
       ractive.set(loaderKey, false);
       if (err.message === 'cs-node-error') {
         showError({
-          message: 'Network node error. Please try again later.',
-          interpolations: { network: _.upperFirst(wallet.networkName) },
+          message: translate('Network node error. Please try again later.', {
+            network: _.upperFirst(wallet.networkName),
+          }),
         });
       } else {
         console.error(err);
+        // TODO should we translate unknown error?
         showError({ message: err.message });
       }
     });

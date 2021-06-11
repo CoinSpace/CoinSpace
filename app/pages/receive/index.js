@@ -133,9 +133,8 @@ export default function(el) {
     let message = translate('Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.');
     if (ractive.get('addressTypes').length > 1) {
       message += '<br><br>';
-      message += translate(
-        // eslint-disable-next-line max-len
-        'Not all address types are fully compatible on all platforms, so it is important to use a compatible address (:url).',
+      // eslint-disable-next-line max-len
+      message += translate('Not all address types are fully compatible on all platforms, so it is important to use a compatible address (:url).',
         // eslint-disable-next-line max-len
         { url: "<a href=\"\" onclick=\"return window.safeOpen('https://coin.space/all-about-address-types/', '_blank');\">" + translate('more info') + '</a>' }
       );
@@ -143,7 +142,6 @@ export default function(el) {
     showTooltip({
       message,
       isHTML: true,
-      isTranslated: true,
     });
   });
 
@@ -164,27 +162,27 @@ export default function(el) {
       emitter.emit('append-transactions', [historyTx]);
       emitter.emit('wallet-update');
       showSuccess({
-        title: 'Transaction Accepted',
-        message: 'Your transaction will appear in your history tab shortly.',
+        title: translate('Transaction Accepted'),
+        message: translate('Your transaction will appear in your history tab shortly.'),
       });
     } catch (err) {
       if (/Transaction already added/.test(err.message)) {
         showError({
-          message: 'Transaction has already been added.',
+          message: translate('Transaction has already been added.'),
         });
       } else if (/Unknown transaction/.test(err.message)) {
         showError({
-          message: 'Unknown transaction.',
+          message: translate('Unknown transaction.'),
         });
       } else if (/Not your transaction/.test(err.message)) {
         showError({
-          message: "Not your transaction. It can't be added.",
+          message: translate("Not your transaction. It can't be added."),
         });
       } else {
         console.error(`txId: '${txId}'`, err);
         showError({
-          title: 'Uh Oh...',
-          message: 'Invalid transaction.',
+          title: translate('Uh Oh...'),
+          message: translate('Invalid transaction.'),
         });
       }
     }
@@ -202,6 +200,7 @@ export default function(el) {
 
   function handleMectoError(err) {
     showError({
+      // TODO should we translate unknown error?
       message: err.message,
     });
     ractive.set('connecting', false);

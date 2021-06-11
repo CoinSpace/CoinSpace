@@ -2,6 +2,7 @@ import Ractive from 'widgets/modals/base';
 import { getWallet } from 'lib/wallet';
 import { unlock, lock } from 'lib/wallet/security';
 import { showInfo } from 'widgets/modals/flash';
+import { translate } from 'lib/i18n';
 import content from './content.ract';
 
 function open() {
@@ -30,7 +31,7 @@ function open() {
       if (privateKeys.length === 0) {
         ractive.fire('cancel');
         return showInfo({
-          message: 'Your wallet has no private keys with coins for export.',
+          message: translate('Your wallet has no private keys with coins for export.'),
           fadeInDuration: 0,
         });
       }

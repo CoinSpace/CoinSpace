@@ -67,7 +67,7 @@
               +{{fee}} {{feeDenomination}}
               <select value="{{feeName}}" on-change="change-fee">
                 {{#each fees as fee}}
-                  <option value="{{fee.name}}">+{{fee.estimate}} {{feeDenomination}} - {{translate(fee.name)}}</option>
+                  <option value="{{fee.name}}">+{{fee.estimate}} {{feeDenomination}} - {{fee.title || translate(fee.name)}}</option>
                 {{/each}}
               </select>
             </div>

@@ -2,12 +2,13 @@ import request from 'lib/request';
 import { startAttestation, startAssertion } from '@simplewebauthn/browser';
 import { showError } from 'widgets/modals/flash';
 import windowExtra from 'lib/window-extra';
+import { translate } from 'lib/i18n';
 const { PublicKeyCredential } = window;
 const notSupportedError = () => {
   showError({
-    message: 'Hardware Keys are not supported by your device',
+    message: translate('Hardware Keys are not supported by your device'),
     href: 'https://coinapp.zendesk.com/hc/en-us/articles/360051635571',
-    linkTextI18n: 'more info',
+    linkText: translate('more info'),
   });
 };
 

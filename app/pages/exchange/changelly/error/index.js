@@ -1,7 +1,6 @@
 import Ractive from 'lib/ractive';
 import emitter from 'lib/emitter';
 import details from 'lib/wallet/details';
-import { translate } from 'lib/i18n';
 import template from './index.ract';
 import footer from '../footer.ract';
 
@@ -19,7 +18,7 @@ export default function(el) {
   });
 
   ractive.on('before-show', (context) => {
-    ractive.set('message', translate(context.message, context.interpolations));
+    ractive.set('message', context.message);
     ractive.set('showEmail', !!context.showEmail);
   });
 

@@ -3,6 +3,7 @@ import { getWallet } from 'lib/wallet';
 import { initWallet } from 'lib/wallet';
 import details from 'lib/wallet/details';
 import { showError, showSuccess } from 'widgets/modals/flash';
+import { translate } from 'lib/i18n';
 import emitter from 'lib/emitter';
 import content from './_content.ract';
 
@@ -33,23 +34,27 @@ function open() {
         ractive.set('memo', result.memo);
       } else {
         details.set('eosAccountName', accountName).then(() => {
-          showSuccess({ el: ractive.el, message: 'Account has been successfully set up', fadeInDuration: 0 });
+          showSuccess({
+            el: ractive.el,
+            message: translate('Account has been successfully set up'),
+            fadeInDuration: 0,
+          });
           syncWallet();
         });
       }
     }).catch((err) => {
       ractive.set('isLoading', false);
       if (/Invalid account name/.test(err.message)) {
-        return showError({ message: 'Invalid account name' });
+        return showError({ message: translate('Invalid account name') });
       } else if (/Account name is already taken/.test(err.message)) {
-        return showError({ message: 'This account name is already taken, please choose another one.' });
+        return showError({ message: translate('This account name is already taken, please choose another one.') });
       } else if (err.message === 'cs-node-error') {
         return showError({
-          message: 'Network node error. Please try again later.',
-          interpolations: { network: 'EOS' },
+          message: translate('Network node error. Please try again later.', { network: 'EOS' }),
         });
       }
       console.error(err.message);
+      // TODO should we translate unknown error?
       return showError({ message: err.message });
     });
   });

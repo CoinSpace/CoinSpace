@@ -5,6 +5,7 @@ import combineURLs from 'axios/lib/helpers/combineURLs.js';
 import axiosRetry from 'axios-retry';
 import LS from 'lib/wallet/localStorage';
 import { showError } from 'widgets/modals/flash';
+import { translate } from 'lib/i18n';
 import { eddsa } from 'elliptic';
 const ec = new eddsa('ed25519');
 import crypto from 'crypto';
@@ -80,7 +81,7 @@ function request(config = {}) {
         throw error;
       } else if (err.request) {
         if (!config.hideFlashError) {
-          showError({ message: 'Request timeout. Please check your internet connection.' });
+          showError({ message: translate('Request timeout. Please check your internet connection.') });
         }
         throw err;
       } else {

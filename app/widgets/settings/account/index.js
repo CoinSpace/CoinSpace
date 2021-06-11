@@ -4,6 +4,7 @@ import { showError } from 'widgets/modals/flash';
 import CS from 'lib/wallet';
 import details from 'lib/wallet/details';
 import template from './index.ract';
+import { translate } from 'lib/i18n';
 
 export default function(el) {
   const ractive = new Ractive({
@@ -27,7 +28,7 @@ export default function(el) {
     const username = ractive.get('username').trim();
     const email = ractive.get('email').trim();
     if (!username) {
-      return showError({ message: 'A name is required to set your profile on Coin' });
+      return showError({ message: translate('A name is required to set your profile on Coin') });
     }
     isLoading = true;
     try {
@@ -39,7 +40,7 @@ export default function(el) {
       ractive.fire('change-step', { step: 'main', userInfo: details.get('userInfo') });
     } catch (err) {
       if (err.status === 400) {
-        showError({ message: 'Username not available' });
+        showError({ message: translate('Username not available') });
       } else {
         console.error(err);
       }

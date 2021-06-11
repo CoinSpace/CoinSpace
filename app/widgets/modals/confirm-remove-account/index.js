@@ -2,6 +2,7 @@ import Ractive from 'widgets/modals/base';
 import CS from 'lib/wallet';
 import { unlock, lock } from 'lib/wallet/security';
 import { showSuccess } from 'widgets/modals/flash';
+import { translate } from 'lib/i18n';
 import content from './_content.ract';
 
 function open() {
@@ -24,8 +25,8 @@ function open() {
       lock();
       showSuccess({
         el: ractive.el,
-        title: 'Account has been successfully removed',
-        message: 'This page will be reloaded shortly.',
+        title: translate('Account has been successfully removed'),
+        message: translate('This page will be reloaded shortly.'),
         fadeInDuration: 0,
       });
 

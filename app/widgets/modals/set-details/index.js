@@ -1,6 +1,7 @@
 import Ractive from 'widgets/modals/base';
 import details from 'lib/wallet/details';
 import { showError } from 'widgets/modals/flash';
+import { translate } from 'lib/i18n';
 import CS from 'lib/wallet';
 import content from './content.ract';
 
@@ -21,7 +22,7 @@ function open(callback) {
   ractive.on('submit-details', async () => {
     const username = ractive.get('username').trim();
     if (!username) {
-      return showError({ message: 'Without a name, the payer would not be able to identify you on Mecto.' });
+      return showError({ message: translate('Without a name, the payer would not be able to identify you on Mecto.') });
     }
 
     ractive.set('isLoading', true);
@@ -32,9 +33,9 @@ function open(callback) {
       callback();
     } catch (err) {
       if (err.status === 400) {
-        showError({ message: 'Username not available' });
+        showError({ message: translate('Username not available') });
       } else {
-        showError({ message: 'Could not save your details' });
+        showError({ message: translate('Could not save your details') });
       }
     }
     ractive.set('isLoading', false);

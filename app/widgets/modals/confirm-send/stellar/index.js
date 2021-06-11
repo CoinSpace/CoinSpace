@@ -1,6 +1,7 @@
 import Ractive from 'widgets/modals/base';
 import emitter from 'lib/emitter';
 import { showInfo, showError, showSuccess } from 'widgets/modals/flash';
+import { translate } from 'lib/i18n';
 import { unlock, lock } from 'lib/wallet/security';
 import { toUnitString } from 'lib/convert';
 import content from './_content.ract';
@@ -24,12 +25,15 @@ function open(data) {
         tx = createTx();
       } catch (err) {
         ractive.set('sending', false);
-        if (/Insufficient funds/.test(err.message)) return showInfo({ title: 'Insufficient funds' });
+        if (/Insufficient funds/.test(err.message)) return showInfo({ title: translate('Insufficient funds') });
         if (data.importTxOptions && /Less than minimum reserve/.test(err.message)) {
           return showInfo({
-            title: 'Insufficient funds',
-            message: "Your wallet isn't activated. You can receive only amount greater than :minReserve :denomination.",
-            interpolations: { minReserve: toUnitString(wallet.minReserve), denomination: wallet.denomination },
+            title: translate('Insufficient funds'),
+            // eslint-disable-next-line max-len
+            message: translate("Your wallet isn't activated. You can receive only amount greater than :minReserve :denomination.", {
+              minReserve: toUnitString(wallet.minReserve),
+              denomination: wallet.denomination,
+            }),
           });
         }
         return handleTransactionError(err);
@@ -50,8 +54,8 @@ function open(data) {
         if (data.onSuccessDismiss) data.onSuccessDismiss();
         showSuccess({
           el: ractive.el,
-          title: 'Transaction Successful',
-          message: 'Your transaction will appear in your history tab shortly.',
+          title: translate('Transaction Successful'),
+          message: translate('Your transaction will appear in your history tab shortly.'),
           fadeInDuration: 0,
         });
 
@@ -77,16 +81,15 @@ function open(data) {
 
   function handleTransactionError(err) {
     if (err.message === 'cs-node-error') {
-      err.message = 'Network node error. Please try again later.';
-      err.interpolations = { network: 'Stellar' };
+      err.message = translate('Network node error. Please try again later.', { network: 'Stellar' });
     } else {
       console.error(err);
     }
     showError({
       el: ractive.el,
-      title: 'Transaction Failed',
+      title: translate('Transaction Failed'),
+      // TODO should we translate unknown error?
       message: err.message,
-      interpolations: err.interpolations,
       fadeInDuration: 0,
     });
   }

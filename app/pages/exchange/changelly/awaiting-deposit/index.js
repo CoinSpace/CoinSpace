@@ -23,7 +23,7 @@ export default function(el) {
       depositSymbol: '',
       depositAddress: '-',
       extraId: '',
-      extraIdLabel: 'Extra Id',
+      extraIdLabel: translate('Extra Id'),
       networkFee: '',
       toAddress: '',
       toSymbol: '',
@@ -81,14 +81,14 @@ export default function(el) {
   ractive.on('help-extra-id', () => {
     showTooltip({
       // eslint-disable-next-line max-len
-      message: 'Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).',
+      message: translate('Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).'),
     });
   });
 
   ractive.on('help-network-fee', () => {
     showTooltip({
       // eslint-disable-next-line max-len
-      message: 'Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.',
+      message: translate('Network fee is fixed and taken each time wherever money is sent. Each currency has a strict amount taken for operations. This fee is taken once your funds are included in a blockchain.'),
     });
   });
 

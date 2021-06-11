@@ -17,11 +17,11 @@
 
   <div class="_content">
     {{>cross}}
-    <div class="_title {{type}}">{{translate(title)}}</div>
+    <div class="_title {{type}}">{{title}}</div>
     {{#if isHtml}}
-    <div class="_message">{{{translate(message, interpolations)}}}</div>
+    <div class="_message">{{{message}}}</div>
       {{else}}
-    <div class="_message">{{translate(message, interpolations)}}</div>
+    <div class="_message">{{message}}</div>
     {{/if}}
   </div>
 

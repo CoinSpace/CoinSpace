@@ -4,8 +4,7 @@ import emitter from 'lib/emitter';
 import details from 'lib/wallet/details';
 import { getWallet, updateWallet } from 'lib/wallet';
 import { setToAlias } from 'lib/wallet';
-import { showError } from 'widgets/modals/flash';
-import { showInfo } from 'widgets/modals/flash';
+import { showInfo, showError } from 'widgets/modals/flash';
 import showConfirmation from 'widgets/modals/confirm-send';
 import showMecto from 'widgets/modals/mecto';
 import showTooltip from 'widgets/modals/tooltip';
@@ -55,9 +54,9 @@ export default function(el) {
       to: '',
       feeName: 'default',
       fees: [
-        { value: '0', name: 'minimum' },
-        { value: '0', name: 'default', default: true },
-        { value: '0', name: 'fastest' },
+        { value: '0', name: 'minimum', title: translate('minimum') },
+        { value: '0', name: 'default', title: translate('default'), default: true },
+        { value: '0', name: 'fastest', title: translate('fastest') },
       ],
       isEthereum: false,
       isRipple: false,
@@ -178,7 +177,10 @@ export default function(el) {
     }).catch((e) => {
       ractive.set('validating', false);
       if (/is not a valid address/.test(e.message)) {
-        return showError({ title: 'Uh Oh...', message: 'Please enter a valid address to send to' });
+        return showError({
+          title: translate('Uh Oh...'),
+          message: translate('Please enter a valid address to send to'),
+        });
       }
     });
   });
@@ -288,30 +290,31 @@ export default function(el) {
 
   ractive.on('help-fee', () => {
     showTooltip({
-      message: 'Amount of coins that is charged from your balance for single transaction (:url).',
-      // eslint-disable-next-line max-len
-      interpolations: { url: "<a href=\"\" onclick=\"return window.safeOpen('https://coin.space/all-about-bitcoin-fees/', '_blank');\">" + translate('more info') + '</a>' },
+      message: translate('Amount of coins that is charged from your balance for single transaction (:url).', {
+        // eslint-disable-next-line max-len
+        url: "<a href=\"\" onclick=\"return window.safeOpen('https://coin.space/all-about-bitcoin-fees/', '_blank');\">" + translate('more info') + '</a>',
+      }),
       isHTML: true,
     });
   });
 
   ractive.on('help-gas-limit', () => {
     showTooltip({
-      message: 'Gas limit is the amount of gas to send with your transaction. ' +
-      'Increasing this number will not get your transaction confirmed faster. ' +
-      'Sending ETH is equal 21000. Sending Tokens is equal around 200000.',
+      // eslint-disable-next-line max-len
+      message: translate('Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.'),
     });
   });
 
   ractive.on('help-destination-tag', () => {
     showTooltip({
-      message: 'An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.',
+      // eslint-disable-next-line max-len
+      message: translate('An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.'),
     });
   });
 
   ractive.on('help-invoice-id', () => {
     showTooltip({
-      message: 'A 256-bit hash that can be used to identify a particular payment.',
+      message: translate('A 256-bit hash that can be used to identify a particular payment.'),
     });
   });
 
@@ -319,9 +322,9 @@ export default function(el) {
     const wallet = getWallet();
     let message = '';
     if (wallet.networkName === 'stellar') {
-      message = 'The memo contains optional extra information. A string up to 28-bytes long.';
+      message = translate('The memo contains optional extra information. A string up to 28-bytes long.');
     } else if (wallet.networkName === 'eos') {
-      message = 'The memo contains optional extra information. A string up to 256-bytes long.';
+      message = translate('The memo contains optional extra information. A string up to 256-bytes long.');
     }
     showTooltip({ message });
   });
@@ -375,18 +378,18 @@ export default function(el) {
       showConfirmation(options);
     } catch (err) {
       ractive.set('validating', false);
-      const { interpolations } = err;
       if (/trying to empty your wallet/.test(err.message)) {
-        ractive.find('#crypto').value = denormalizeCrypto(interpolations.sendableBalance);
+        ractive.find('#crypto').value = denormalizeCrypto(err.sendableBalance);
         ractive.fire('crypto-to-fiat');
-        return showInfo({ message: err.message, interpolations });
+        // error message already translated
+        return showInfo({ message: err.message });
       }
       return showError({
-        title: 'Uh Oh...',
+        title: translate('Uh Oh...'),
+        // error message already translated
         message: err.message,
         href: err.href,
         linkText: err.linkText,
-        interpolations,
       });
     }
   }

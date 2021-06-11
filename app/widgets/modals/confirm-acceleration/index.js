@@ -3,6 +3,7 @@ import emitter from 'lib/emitter';
 import { getWallet } from 'lib/wallet';
 import { unlock, lock } from 'lib/wallet/security';
 import { showError, showSuccess } from 'widgets/modals/flash';
+import { translate } from 'lib/i18n';
 import { toUnitString } from 'lib/convert';
 import _ from 'lodash';
 import content from './_content.ract';
@@ -41,8 +42,8 @@ function open(data) {
       const historyTx = await wallet.sendTx(tx);
       showSuccess({
         el: ractive.el,
-        title: 'Acceleration Successful',
-        message: 'Your transaction will be replaced in your history tab shortly.',
+        title: translate('Acceleration Successful'),
+        message: translate('Your transaction will be replaced in your history tab shortly.'),
         fadeInDuration: 0,
       });
       // update balance & tx history
@@ -58,16 +59,17 @@ function open(data) {
 
   function handleTransactionError(err) {
     if (err.message === 'cs-node-error') {
-      err.message = 'Network node error. Please try again later.';
-      err.interpolations = { network: _.upperFirst(wallet.networkName) };
+      err.message = translate('Network node error. Please try again later.', {
+        network: _.upperFirst(wallet.networkName),
+      });
     } else {
       console.error(err);
     }
     showError({
       el: ractive.el,
-      title: 'Acceleration Failed',
+      title: translate('Acceleration Failed'),
+      // TODO should we translate unknown error?
       message: err.message,
-      interpolations: err.interpolations,
       fadeInDuration: 0,
     });
   }

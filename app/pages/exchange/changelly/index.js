@@ -9,6 +9,7 @@ import initError from './error';
 import details from 'lib/wallet/details';
 import changelly from 'lib/changelly';
 import { showError } from 'widgets/modals/flash';
+import { translate } from 'lib/i18n';
 import template from './index.ract';
 import loader from 'partials/loader/loader.ract';
 
@@ -64,27 +65,35 @@ export default function(el) {
         showStep(steps.complete, changellyInfo);
       } else if (tx.status === 'failed') {
         showStep(steps.error, {
-          message: 'Transaction (ID: :id) has failed. Please, contact Changelly.',
-          interpolations: {
+          message: translate('Transaction (ID: :id) has failed. Please, contact Changelly.', {
             id: changellyInfo.id,
-          },
+          }),
           showEmail: true,
         });
       } else if (tx.status === 'refunded') {
         showStep(steps.error, {
-          message: 'Exchange failed and coins were refunded to :address.',
-          interpolations: {
+          message: translate('Exchange failed and coins were refunded to :address.', {
             address: changellyInfo.returnAddress,
-          },
+          }),
         });
       } else if (tx.status === 'overdue') {
-        showStep(steps.error, { message: "Payment wasn't received since 36 hours since the transaction was created." });
+        showStep(steps.error, {
+          message: translate("Payment wasn't received since 36 hours since the transaction was created."),
+        });
       } else {
-        showStep(steps.error, { message: tx.error });
+        let message;
+        if (tx.error === 'Transaction not found') {
+          message = translate('Transaction not found');
+        } else {
+          // TODO should we translate unknown error?
+          message = tx.error;
+        }
+        showStep(steps.error, { message });
       }
     }).catch((err) => {
       console.error(err);
       ractive.set('isLoading', false);
+      // TODO should we translate unknown error?
       return showError({ message: err.message });
     });
   });

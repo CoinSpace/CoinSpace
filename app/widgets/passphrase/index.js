@@ -58,7 +58,7 @@ function open(options, callback) {
 
   ractive.wrong = () => {
     ractive.set('isLoading', false);
-    showError({ message: 'Invalid passphrase' });
+    showError({ message: translate('Invalid passphrase') });
   };
 
   ractive.close = () => {
