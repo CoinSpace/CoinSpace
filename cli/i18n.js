@@ -6,6 +6,7 @@ const fse = require('fs-extra');
 const path = require('path');
 const jsToXliff12 = require('xliff/jsToXliff12');
 const xliff12ToJs = require('xliff/xliff12ToJs');
+const klaw = require('klaw-sync');
 
 function list(value) {
   return value.split(',');
@@ -15,6 +16,7 @@ program
   .name('i18n.js')
   .option('--json', 'make json from xlf')
   .option('--xlf', 'update xlf from en.json')
+  .option('--extract', 'extract strings to translate')
   .option('-e, --exclude <items>', 'excluded languages', list, [])
   .parse(process.argv);
 
@@ -25,6 +27,7 @@ const en = require(path.resolve('./app/lib/i18n/translations/en.json'));
 function run(program) {
   if (program.xlf) return xlf(program);
   if (program.json) return json(program);
+  if (program.extract) return extract(program);
 }
 
 function xlf(program) {
@@ -87,6 +90,43 @@ function json() {
     fse.writeFileSync(dest, JSON.stringify(translations, null, 2) + '\n', 'utf8');
     console.log(`${dest} saved.`);
   });
+}
+
+function extract() {
+  const files = klaw('./app', {
+    nodir: true,
+    traverseAll: true,
+    filter(item) {
+      const extname = path.extname(item.path);
+      return ['.js', '.ract'].includes(extname);
+    },
+  });
+  const keys = new Set();
+  for (const file of files) {
+    const content = fse.readFileSync(file.path, 'utf8');
+    const regexps = [
+      /translate\('([^']*)/g,
+      /translate\("([^"]*)/g,
+      /translate\(`([^`]*)/g,
+    ];
+    for (const regexp of regexps) {
+      let match;
+      while ((match = regexp.exec(content)) !== null) {
+        keys.add(match[1]);
+      }
+    }
+  }
+  for (const key of keys.values()) {
+    if (!en[key]) {
+      en[key] = key;
+    }
+  }
+  for (const key in en) {
+    if (!keys.has(key)) {
+      delete en[key];
+    }
+  }
+  fse.writeFileSync(path.resolve('./app/lib/i18n/translations/en.json'), JSON.stringify(en, null, 2) + '\n', 'utf8');
 }
 
 run(program);
