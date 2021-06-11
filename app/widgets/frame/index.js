@@ -12,6 +12,7 @@ import { showError } from 'widgets/modals/flash';
 import { setCrypto } from 'lib/crypto';
 import { getWallet } from 'lib/wallet';
 import Hammer from 'hammerjs';
+import _ from 'lodash';
 import template from './index.ract';
 
 export default function(el) {
@@ -101,7 +102,7 @@ export default function(el) {
       document.getElementsByTagName('html')[0].classList.add('blocked');
       showError({
         message: "Can't connect to :network node. Please try again later or choose another token.",
-        interpolations: { network: getWallet().networkName },
+        interpolations: { network: _.upperFirst(getWallet().networkName) },
       });
     } else {
       console.error(err);

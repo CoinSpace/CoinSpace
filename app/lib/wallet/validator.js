@@ -1,4 +1,5 @@
 import { toAtom, toUnitString } from 'lib/convert';
+import _ from 'lodash';
 
 export async function validateSend(options) {
   const amount = toAtom(options.amount);
@@ -99,6 +100,10 @@ export async function validateSend(options) {
     } else if (/Insufficient ethereum funds for token transaction/.test(e.message)) {
       error = new Error('You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).');
       error.interpolations = { ethereumRequired: toUnitString(e.ethereumRequired, 18) };
+      throw error;
+    } else if (e.message === 'cs-node-error') {
+      error = new Error('Network node error. Please try again later.');
+      error.interpolations = { network: _.upperFirst(wallet.networkName) };
       throw error;
     }
 
