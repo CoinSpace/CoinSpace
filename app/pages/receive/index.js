@@ -188,7 +188,7 @@ export default function(el) {
         });
       }
     }
-    await lock(wallet);
+    lock(wallet);
     ractive.set('isAccepting', false);
   });
 

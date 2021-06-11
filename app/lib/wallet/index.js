@@ -31,27 +31,6 @@ const state = {
   wallet: null,
 };
 
-// UI debug
-/*
-class FakeWallet {
-  constructor() {
-    this.networkName = 'monero';
-    this.denomination = 'XMR';
-    this.decimals = 12;
-  }
-  lock() {}
-  publicKey() { return ''; }
-  getBalance() { return '0'; }
-  getMaxAmount() { return '0'; }
-  getNextAddress() { return 'next address'; }
-  loadTxs() { return Promise.resolve({ txs: [] }); }
-  load(options) {
-    const { done } = options;
-    done(null);
-  }
-}
-*/
-
 const Wallet = {
   bitcoin: CsWallet,
   bitcoincash: CsWallet,
@@ -164,24 +143,12 @@ export async function initWallet(seed) {
     }
   }
 
-  if (!seed && !LS.hasPublicKey(crypto.network)) {
-    await unlock();
-    state.wallet = new Wallet[crypto.network]({
-      seed: seeds.get('private'),
-      networkName: crypto.network,
-      ...await getExtraOptions(crypto),
-    });
-    state.wallet.lock();
-    await lock();
-    LS.setPublicKey(state.wallet, seeds.get('public'));
-  } else {
-    const publicKey = LS.getPublicKey(crypto.network, seeds.get('public'));
-    state.wallet = new Wallet[crypto.network]({
-      publicKey,
-      networkName: crypto.network,
-      ...await getExtraOptions(crypto),
-    });
-  }
+  const publicKey = LS.getPublicKey(crypto.network, seeds.get('public'));
+  state.wallet = new Wallet[crypto.network]({
+    publicKey,
+    networkName: crypto.network,
+    ...await getExtraOptions(crypto),
+  });
 
   convert.setDecimals(state.wallet.decimals);
 
@@ -266,6 +233,23 @@ export async function updateWallet() {
   }
 }
 
+export async function addPublicKey(crypto) {
+  try {
+    await unlock();
+    const wallet = new Wallet[crypto.network]({
+      seed: seeds.get('private'),
+      networkName: crypto.network,
+      ...await getExtraOptions(crypto),
+    });
+    LS.setPublicKey(wallet, seeds.get('public'));
+    lock();
+  } catch (err) {
+    lock();
+    if (err.message !== 'cancelled') console.error(err);
+    throw err;
+  }
+}
+
 async function removeAccount() {
   await request({
     url: `${process.env.SITE_URL}api/v2/wallet`,
@@ -347,6 +331,7 @@ export default {
   getWallet,
   initWallet,
   updateWallet,
+  addPublicKey,
   getDestinationInfo,
   setToAlias,
 };

@@ -1,7 +1,8 @@
 import Ractive from 'lib/ractive';
 import showRemoveConfirmation from 'widgets/modals/confirm-remove';
 import { getCrypto, setCrypto } from 'lib/crypto';
-import { initWallet } from 'lib/wallet';
+import { initWallet, addPublicKey } from 'lib/wallet';
+import LS from 'lib/wallet/localStorage';
 import emitter from 'lib/emitter';
 import details from 'lib/wallet/details';
 import ticker from 'lib/ticker-api';
@@ -78,11 +79,18 @@ export default function(el) {
     ticker.init([...walletCoins, ...walletTokens.filter((item) => item._id)]);
   });
 
-  function switchCrypto(crypto) {
+  async function switchCrypto(crypto) {
     if (isCryptoEqual(crypto, ractive.get('currentCrypto'))) {
       return;
     }
     if (!isEnabled) return;
+    if (!LS.hasPublicKey(crypto.network)) {
+      try {
+        await addPublicKey(crypto);
+      } catch (err) {
+        return;
+      }
+    }
 
     setCrypto(crypto);
     const currentCrypto = getCrypto();
