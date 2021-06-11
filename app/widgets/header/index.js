@@ -52,6 +52,10 @@ export default function(el) {
     ractive.set('isSyncing', false);
   });
 
+  emitter.on('wallet-error', () => {
+    ractive.set('isSyncing', false);
+  });
+
   emitter.on('tx-sent', () => {
     updateBalance();
   });
