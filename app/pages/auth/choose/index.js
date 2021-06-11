@@ -28,7 +28,6 @@ export default function(el) {
           async onPin(pin) {
             try {
               await CS.registerWallet(pin);
-              ractive.pinWidget.loadingWallet();
             } catch (err) {
               ractive.pinWidget.wrong();
               emitter.emit('auth-error', err);
@@ -51,7 +50,6 @@ export default function(el) {
       async onPin(pin) {
         try {
           await CS.loginWithPin(pin);
-          ractive.pinWidget.loadingWallet();
         } catch (err) {
           ractive.pinWidget.wrong();
           emitter.emit('auth-error', err);
@@ -62,7 +60,6 @@ export default function(el) {
           await CS.loginWithTouchId(() => {
             ractive.pinWidget.set('isLoading', true);
           });
-          ractive.pinWidget.loadingWallet();
         } catch (err) {
           if (err.message === 'touch_id_error') return;
           ractive.pinWidget.wrong();

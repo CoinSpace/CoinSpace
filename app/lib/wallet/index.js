@@ -61,6 +61,7 @@ function createWallet(passphrase) {
 }
 
 async function registerWallet(pin) {
+  emitter.emit('wallet-loading');
   const pinKey = crypto.randomBytes(32).toString('hex');
   const walletSeed = seeds.get('private');
   const wallet = ec.keyFromSecret(walletSeed);
@@ -104,6 +105,7 @@ async function loginWithPin(pin) {
     },
     id: true,
   });
+  emitter.emit('wallet-loading');
   seeds.unlock('public', publicToken);
   await Promise.all([details.init(), settings.init()]);
   emitter.emit('auth-success', pin);
@@ -121,6 +123,7 @@ async function loginWithTouchId(showSpinner) {
     return loginWithPin(pin);
   } else {
     const publicToken = await touchId.publicToken(showSpinner);
+    emitter.emit('wallet-loading');
     seeds.unlock('public', publicToken);
     await Promise.all([details.init(), settings.init()]);
     emitter.emit('auth-success');

@@ -49,7 +49,6 @@ export default function(el) {
       async onPin(pin) {
         try {
           await CS.registerWallet(pin);
-          ractive.pinWidget.loadingWallet();
         } catch (err) {
           ractive.pinWidget.wrong();
           emitter.emit('auth-error', err);
