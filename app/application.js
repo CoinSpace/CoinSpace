@@ -7,7 +7,6 @@ import touchId from 'lib/touch-id';
 import updater from 'lib/updater';
 import querystring from 'querystring';
 import { showError } from 'widgets/modals/flash';
-import { translate } from 'lib/i18n';
 import showTouchIdSetup from 'widgets/touch-id-setup';
 import { fadeIn } from 'lib/transitions/fade.js';
 

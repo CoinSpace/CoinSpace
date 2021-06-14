@@ -57,7 +57,7 @@ function open(options) {
       setTimeout(() => {
         ractive.set('isLoading', true);
         ractive.set('header', headerLoading);
-        onPin(pin);
+        onPin.bind(ractive)(pin);
       }, 300);
     }
   });
@@ -72,7 +72,7 @@ function open(options) {
   ractive.on('touch-id', async () => {
     if (!isEnabled()) return;
     if (ractive.get('isLoading')) return;
-    return onTouchId();
+    return onTouchId.bind(ractive)();
   });
 
   ractive.on('back', () => {

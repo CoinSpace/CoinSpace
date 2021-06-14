@@ -27,9 +27,9 @@ export default function(el) {
           append: true,
           async onPin(pin) {
             try {
-              await CS.registerWallet(pin, ractive.pinWidget);
+              await CS.registerWallet(pin, this);
             } catch (err) {
-              ractive.pinWidget.wrong();
+              this.wrong();
               emitter.emit('auth-error', err);
             }
           },
@@ -49,18 +49,18 @@ export default function(el) {
       touchId: true,
       async onPin(pin) {
         try {
-          await CS.loginWithPin(pin, ractive.pinWidget);
+          await CS.loginWithPin(pin, this);
         } catch (err) {
-          ractive.pinWidget.wrong();
+          this.wrong();
           emitter.emit('auth-error', err);
         }
       },
       async onTouchId() {
         try {
-          await CS.loginWithTouchId(ractive.pinWidget);
+          await CS.loginWithTouchId(this);
         } catch (err) {
           if (err.message === 'touch_id_error') return;
-          ractive.pinWidget.wrong();
+          this.wrong();
           emitter.emit('auth-error', err);
         }
       },

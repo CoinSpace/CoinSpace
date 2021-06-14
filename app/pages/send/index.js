@@ -4,7 +4,7 @@ import emitter from 'lib/emitter';
 import details from 'lib/wallet/details';
 import { getWallet, updateWallet } from 'lib/wallet';
 import { setToAlias } from 'lib/wallet';
-import { showInfo, showError } from 'widgets/modals/flash';
+import { showError } from 'widgets/modals/flash';
 import showConfirmation from 'widgets/modals/confirm-send';
 import showMecto from 'widgets/modals/mecto';
 import showTooltip from 'widgets/modals/tooltip';

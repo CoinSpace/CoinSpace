@@ -48,9 +48,9 @@ export default function(el) {
       headerLoading: translate('Setting PIN'),
       async onPin(pin) {
         try {
-          await CS.registerWallet(pin, ractive.pinWidget);
+          await CS.registerWallet(pin, this);
         } catch (err) {
-          ractive.pinWidget.wrong();
+          this.wrong();
           emitter.emit('auth-error', err);
         }
       },

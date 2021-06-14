@@ -108,7 +108,7 @@ async function loginWithPin(pin, widget) {
   widget && widget.loadingWallet();
   seeds.unlock('public', publicToken);
   await Promise.all([details.init(), settings.init()]);
-  emitter.emit('auth-success', pin);
+  emitter.emit('auth-success');
   await initWallet();
 }
 

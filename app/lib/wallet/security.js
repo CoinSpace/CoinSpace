@@ -16,14 +16,14 @@ export function unlock(wallet) {
         append: true,
         async onPin(pin) {
           try {
-            const privateToken = await _getPrivateTokenByPin(pin, pinWidget);
+            const privateToken = await _getPrivateTokenByPin(pin, this);
             seeds.unlock('private', privateToken);
             if (wallet) wallet.unlock(seeds.get('private'));
-            pinWidget.close();
+            this.close();
             resolve();
           } catch (err) {
             if (err.message === 'hardware_error') return;
-            pinWidget.wrong();
+            this.wrong();
             emitter.emit('auth-error', err);
           }
         },
@@ -33,20 +33,20 @@ export function unlock(wallet) {
             if (process.env.BUILD_TYPE === 'phonegap') {
               await touchId.phonegap();
               const pin = LS.getPin();
-              pinWidget.set('isLoading', true);
-              privateToken = await _getPrivateTokenByPin(pin, pinWidget);
+              this.set('isLoading', true);
+              privateToken = await _getPrivateTokenByPin(pin, this);
             } else {
               privateToken = await touchId.privateToken();
-              pinWidget.set('isLoading', true);
+              this.set('isLoading', true);
             }
             seeds.unlock('private', privateToken);
             if (wallet) wallet.unlock(seeds.get('private'));
-            pinWidget.close();
+            this.close();
             resolve();
           } catch (err) {
             if (err.message === 'touch_id_error') return;
             if (err.message === 'hardware_error') return;
-            pinWidget.wrong();
+            this.wrong();
             emitter.emit('auth-error', err);
           }
         },

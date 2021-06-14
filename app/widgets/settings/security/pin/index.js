@@ -94,10 +94,10 @@ async function getPin() {
             },
             id: true,
           });
-          pinWidget.close();
+          this.close();
           resolve(pin);
         } catch (err) {
-          pinWidget.wrong();
+          this.wrong();
           emitter.emit('auth-error', err);
         }
       },
