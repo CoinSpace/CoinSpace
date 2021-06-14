@@ -44,6 +44,8 @@ function xlf(program) {
 
     const existed = js.resources[resource];
     const keys = {};
+    let units = 0;
+    let words = 0;
     Object.keys(en).forEach((key) => {
       keys[key] = {
         source: en[key],
@@ -52,8 +54,12 @@ function xlf(program) {
 
       if (existed[key] && existed[key].target) {
         keys[key].target = existed[key].target;
+      } else {
+        units = units + 1;
+        words = words + en[key].split(' ').length;
       }
     });
+    console.log(`${js.targetLanguage}: ${units} units with ${words} words per language.`);
     js.resources = { [resource]: keys };
     const xliff = jsToXliff12(js, {});
 
