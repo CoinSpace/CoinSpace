@@ -245,10 +245,6 @@
         <source>You don't have any transactions yet</source>
         <target>Zatím nebyli uskutečněny žádné transakce.</target>
       </trans-unit>
-      <trans-unit id="Transaction Id:">
-        <source>Transaction Id:</source>
-        <target>Id transakce:</target>
-      </trans-unit>
       <trans-unit id="Transaction Fee:">
         <source>Transaction Fee:</source>
         <target>Poplatek za transakci:</target>
@@ -1411,16 +1407,52 @@ Bude to převedeno na %(toSymbol)s, a zasláno
         <source>Local currency</source>
         <target>Místní měna</target>
       </trans-unit>
-      <trans-unit id="Changelly Transaction ID">
-        <source>Changelly Transaction ID</source>
-        <target>Changelly Id transakce</target>
-      </trans-unit>
       <trans-unit id="Transaction ID">
         <source>Transaction ID</source>
-        <target></target>
+        <target>Id transakce</target>
       </trans-unit>
       <trans-unit id="Accept">
         <source>Accept</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Transaction has already been added.">
+        <source>Transaction has already been added.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Unknown transaction.">
+        <source>Unknown transaction.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Not your transaction. It can&apos;t be added.">
+        <source>Not your transaction. It can't be added.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Invalid transaction.">
+        <source>Invalid transaction.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Standard">
+        <source>Standard</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Subaddress">
+        <source>Subaddress</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Sent">
+        <source>Sent</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Stealth address">
+        <source>Stealth address</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Transaction Accepted">
+        <source>Transaction Accepted</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.">
+        <source>In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.</source>
         <target></target>
       </trans-unit>
     </body>

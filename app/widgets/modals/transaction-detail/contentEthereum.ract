@@ -21,7 +21,7 @@
 
   <div class="_content">
     {{>cross}}
-    <label>{{translate("Transaction Id:")}}</label>
+    <label>{{translate("Transaction ID")}}:</label>
     <a href="" onclick="return window.safeOpen('{{txUrl(id)}}', '_blank');" class="cscode">{{id}}</a>
 
     {{#unless token}}

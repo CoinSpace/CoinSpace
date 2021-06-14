@@ -18,7 +18,7 @@
 
   <div class="_content">
     {{>cross}}
-    <label>{{translate("Transaction Id:")}}</label>
+    <label>{{translate("Transaction ID")}}:</label>
     <a href="" onclick="return window.safeOpen('{{txUrl(txId)}}', '_blank');" class="cscode">{{txId}}</a>
 
     <label>{{translate("Transaction Fee:")}}</label>
