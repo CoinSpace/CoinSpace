@@ -1009,51 +1009,51 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Accept">
         <source>Accept</source>
-        <target></target>
+        <target>Принять</target>
       </trans-unit>
       <trans-unit id="Transaction has already been added.">
         <source>Transaction has already been added.</source>
-        <target></target>
+        <target>Транзакция уже была добавлена.</target>
       </trans-unit>
       <trans-unit id="Unknown transaction.">
         <source>Unknown transaction.</source>
-        <target></target>
+        <target>Неизвестная транзакция.</target>
       </trans-unit>
       <trans-unit id="Not your transaction. It can&apos;t be added.">
         <source>Not your transaction. It can't be added.</source>
-        <target></target>
+        <target>Не ваша транзакция не может быть добавлена.</target>
       </trans-unit>
       <trans-unit id="Invalid transaction.">
         <source>Invalid transaction.</source>
-        <target></target>
+        <target>Неверная транзакция</target>
       </trans-unit>
       <trans-unit id="Standard">
         <source>Standard</source>
-        <target></target>
+        <target>Стандартный</target>
       </trans-unit>
       <trans-unit id="Subaddress">
         <source>Subaddress</source>
-        <target></target>
+        <target>Субадрес</target>
       </trans-unit>
       <trans-unit id="Sent">
         <source>Sent</source>
-        <target></target>
+        <target>Отправлено</target>
       </trans-unit>
       <trans-unit id="Stealth address">
         <source>Stealth address</source>
-        <target></target>
+        <target>Скрытый адрес</target>
       </trans-unit>
       <trans-unit id="Transaction Accepted">
         <source>Transaction Accepted</source>
-        <target></target>
+        <target>Транзакция принята</target>
       </trans-unit>
       <trans-unit id="In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.">
         <source>In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.</source>
-        <target></target>
+        <target>Для получения средств переключитесь на монету Monero и примите транзакцию на вкладке «Получить».</target>
       </trans-unit>
-      <trans-unit id="Transaction fee is too low. Please reload your wallet.">
-        <source>Transaction fee is too low. Please reload your wallet.</source>
-        <target></target>
+      <trans-unit id="Transaction fee is too low. Please click on refresh button.">
+        <source>Transaction fee is too low. Please click on refresh button.</source>
+        <target>Комиссия за транзакцию слишком низкая. Пожалуйста, нажмите кнопку обновления кошелька.</target>
       </trans-unit>
     </body>
   </file>

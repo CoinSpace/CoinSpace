@@ -1051,8 +1051,8 @@ Bude to převedeno na %(toSymbol)s, a zasláno
         <source>In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="Transaction fee is too low. Please reload your wallet.">
-        <source>Transaction fee is too low. Please reload your wallet.</source>
+      <trans-unit id="Transaction fee is too low. Please click on refresh button.">
+        <source>Transaction fee is too low. Please click on refresh button.</source>
         <target></target>
       </trans-unit>
     </body>

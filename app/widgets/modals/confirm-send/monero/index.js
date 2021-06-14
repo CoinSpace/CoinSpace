@@ -57,7 +57,7 @@ function open(data) {
     if (err.message === 'cs-node-error') {
       message = translate('Network node error. Please try again later.', { network: 'Monero' });
     } else if (/^Transaction fee is too low/.test(err.message)) {
-      message = translate('Transaction fee is too low. Please reload your wallet.');
+      message = translate('Transaction fee is too low. Please click on refresh button.');
     } else {
       console.error('not translated error:', err);
       // eslint-disable-next-line prefer-destructuring

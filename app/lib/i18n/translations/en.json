@@ -260,5 +260,5 @@
   "Stealth address": "Stealth address",
   "Transaction Accepted": "Transaction Accepted",
   "In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.": "In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.",
-  "Transaction fee is too low. Please reload your wallet.": "Transaction fee is too low. Please reload your wallet."
+  "Transaction fee is too low. Please click on refresh button.": "Transaction fee is too low. Please click on refresh button."
 }
