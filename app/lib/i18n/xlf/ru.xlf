@@ -25,10 +25,6 @@
         <source>Generate passphrase</source>
         <target>Создать фразу-пароль</target>
       </trans-unit>
-      <trans-unit id="Go back">
-        <source>Go back</source>
-        <target>Назад</target>
-      </trans-unit>
       <trans-unit id="Generating">
         <source>Generating</source>
         <target>Генерация</target>
@@ -52,10 +48,6 @@
       <trans-unit id="I have written down or otherwise securely stored my passphrase">
         <source>I have written down or otherwise securely stored my passphrase</source>
         <target>Я записал, или как-то сохранил свою фразу-пароль</target>
-      </trans-unit>
-      <trans-unit id="Open wallet">
-        <source>Open wallet</source>
-        <target>Открыть кошелек</target>
       </trans-unit>
       <trans-unit id="Checking passphrase">
         <source>Checking passphrase</source>
@@ -81,14 +73,6 @@
         <source>Review passphrase again</source>
         <target>Повторите фразу-пароль</target>
       </trans-unit>
-      <trans-unit id="Open a different wallet">
-        <source>Open a different wallet</source>
-        <target>Открыть другой кошелек</target>
-      </trans-unit>
-      <trans-unit id="PIN must be a 4-digit number">
-        <source>PIN must be a 4-digit number</source>
-        <target>ПИН должен состоять из 4 цифр</target>
-      </trans-unit>
       <trans-unit id="Verifying PIN">
         <source>Verifying PIN</source>
         <target>Проверка ПИНа</target>
@@ -104,10 +88,6 @@
       <trans-unit id="please be patient.">
         <source>please be patient.</source>
         <target>пожалуйста подождите.</target>
-      </trans-unit>
-      <trans-unit id="Your PIN is incorrect">
-        <source>Your PIN is incorrect</source>
-        <target>Ваш ПИН неверен</target>
       </trans-unit>
       <trans-unit id="Request timeout. Please check your internet connection.">
         <source>Request timeout. Please check your internet connection.</source>
@@ -169,10 +149,6 @@
         <source>Without a name, the payer wouldn't be able to identify you on Mecto.</source>
         <target>Без имени, отправитель не сможет найти вас в Mecto.</target>
       </trans-unit>
-      <trans-unit id="Change your details">
-        <source>Change your details</source>
-        <target>Изменить профиль</target>
-      </trans-unit>
       <trans-unit id="Your username">
         <source>Your username</source>
         <target>Ваше имя пользователя</target>
@@ -180,10 +156,6 @@
       <trans-unit id="Gravatar email">
         <source>Gravatar email</source>
         <target>Gravatar email</target>
-      </trans-unit>
-      <trans-unit id="Submit">
-        <source>Submit</source>
-        <target>Ввести</target>
       </trans-unit>
       <trans-unit id="Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.">
         <source>Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.</source>
@@ -427,10 +399,6 @@
         <source>Please enter a valid return address</source>
         <target>Пожалуйста, введите правильный адрес возврата</target>
       </trans-unit>
-      <trans-unit id="Miner fee">
-        <source>Miner fee</source>
-        <target>Комиссия майнера</target>
-      </trans-unit>
       <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
         <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
         <target>Обратный адрес должен принадлежать вам, чтобы в случае сбоя депозит был возвращен на этот адрес.</target>
@@ -543,25 +511,9 @@
         <source>Add</source>
         <target>Добавить</target>
       </trans-unit>
-      <trans-unit id="Symbol">
-        <source>Symbol</source>
-        <target>Символ</target>
-      </trans-unit>
-      <trans-unit id="Decimals">
-        <source>Decimals</source>
-        <target>Дробность (число)</target>
-      </trans-unit>
       <trans-unit id="Token">
         <source>Token</source>
         <target>Токен</target>
-      </trans-unit>
-      <trans-unit id="Custom token">
-        <source>Custom token</source>
-        <target>Свой токен</target>
-      </trans-unit>
-      <trans-unit id="Please fill out all fields.">
-        <source>Please fill out all fields.</source>
-        <target>Пожалуйста, заполните все поля.</target>
       </trans-unit>
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
@@ -570,10 +522,6 @@
       <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
         <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
         <target>У вас недостаточно средств Ethereum для оплаты транзакции (%(ethereumRequired)s ETH).</target>
-      </trans-unit>
-      <trans-unit id="Click to Select">
-        <source>Click to Select</source>
-        <target>Нажмите, чтобы выбрать</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -843,42 +791,6 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Transaction too large</source>
         <target>Транзакция слишком большая</target>
       </trans-unit>
-      <trans-unit id="Email">
-        <source>Email</source>
-        <target>Email</target>
-      </trans-unit>
-      <trans-unit id="Please enter a valid email address">
-        <source>Please enter a valid email address</source>
-        <target>Пожалуйста, введите действительный адрес эл. почты</target>
-      </trans-unit>
-      <trans-unit id="Verification code">
-        <source>Verification code</source>
-        <target>Код подтверждения</target>
-      </trans-unit>
-      <trans-unit id="We&apos;ve sent verification code to :destination.">
-        <source>We've sent verification code to %(destination)s.</source>
-        <target>Мы отправили код подтверждения на %(destination)s.</target>
-      </trans-unit>
-      <trans-unit id="Invalid verification code">
-        <source>Invalid verification code</source>
-        <target>Неверный код подтверждения</target>
-      </trans-unit>
-      <trans-unit id="To increase your limits you need to pass verification.">
-        <source>To increase your limits you need to pass verification.</source>
-        <target>Чтобы увеличить свои лимиты, вам необходимо пройти верификацию.</target>
-      </trans-unit>
-      <trans-unit id="Payment methods">
-        <source>Payment methods</source>
-        <target>Способы оплаты</target>
-      </trans-unit>
-      <trans-unit id="Verification">
-        <source>Verification</source>
-        <target>Верификация</target>
-      </trans-unit>
-      <trans-unit id="Default currency (:symbol)">
-        <source>Default currency (%(symbol)s)</source>
-        <target>Валюта по умолчанию (%(symbol)s)</target>
-      </trans-unit>
       <trans-unit id="Buy">
         <source>Buy</source>
         <target>Купить</target>
@@ -886,286 +798,6 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Sell">
         <source>Sell</source>
         <target>Продать</target>
-      </trans-unit>
-      <trans-unit id="No verification methods are currently available.">
-        <source>No verification methods are currently available.</source>
-        <target>В настоящее время нет доступных методов верификации.</target>
-      </trans-unit>
-      <trans-unit id="Identity">
-        <source>Identity</source>
-        <target>Личность</target>
-      </trans-unit>
-      <trans-unit id="Document">
-        <source>Document</source>
-        <target>Документ</target>
-      </trans-unit>
-      <trans-unit id="Phone number">
-        <source>Phone number</source>
-        <target>Номер телефона</target>
-      </trans-unit>
-      <trans-unit id="Face match">
-        <source>Face match</source>
-        <target>Селфи</target>
-      </trans-unit>
-      <trans-unit id="Identity verification">
-        <source>Identity verification</source>
-        <target>Верификация личности</target>
-      </trans-unit>
-      <trans-unit id="Document verification">
-        <source>Document verification</source>
-        <target>Верификация документов</target>
-      </trans-unit>
-      <trans-unit id="Phone number verification">
-        <source>Phone number verification</source>
-        <target>Верификация номера телефона</target>
-      </trans-unit>
-      <trans-unit id="Face match verification">
-        <source>Face match verification</source>
-        <target>Верификация селфи</target>
-      </trans-unit>
-      <trans-unit id="Continue">
-        <source>Continue</source>
-        <target>Продолжить</target>
-      </trans-unit>
-      <trans-unit id="First name">
-        <source>First name</source>
-        <target>Имя</target>
-      </trans-unit>
-      <trans-unit id="Last name">
-        <source>Last name</source>
-        <target>Фамилия</target>
-      </trans-unit>
-      <trans-unit id="Date of birth">
-        <source>Date of birth</source>
-        <target>Дата рождения</target>
-      </trans-unit>
-      <trans-unit id="Country">
-        <source>Country</source>
-        <target>Страна</target>
-      </trans-unit>
-      <trans-unit id="Address 2 (optional)">
-        <source>Address 2 (optional)</source>
-        <target>Адрес 2 (необязательно)</target>
-      </trans-unit>
-      <trans-unit id="City">
-        <source>City</source>
-        <target>Город</target>
-      </trans-unit>
-      <trans-unit id="State">
-        <source>State</source>
-        <target>Штат</target>
-      </trans-unit>
-      <trans-unit id="Post code">
-        <source>Post code</source>
-        <target>Почтовый индекс</target>
-      </trans-unit>
-      <trans-unit id="Please enter a valid info">
-        <source>Please enter a valid info</source>
-        <target>Пожалуйста, введите достоверную информацию</target>
-      </trans-unit>
-      <trans-unit id="Code is invalid or expired. Please try again.">
-        <source>Code is invalid or expired. Please try again.</source>
-        <target>Код недействителен или просрочен. Пожалуйста, попробуйте еще раз.</target>
-      </trans-unit>
-      <trans-unit id="Selfie">
-        <source>Selfie</source>
-        <target>Селфи</target>
-      </trans-unit>
-      <trans-unit id="Select file...">
-        <source>Select file...</source>
-        <target>Выбрать файл…</target>
-      </trans-unit>
-      <trans-unit id="Upload failed. Please try again later.">
-        <source>Upload failed. Please try again later.</source>
-        <target>Загрузка не удалась. Пожалуйста, попробуйте позже.</target>
-      </trans-unit>
-      <trans-unit id="Country of issuance">
-        <source>Country of issuance</source>
-        <target>Страна выдачи</target>
-      </trans-unit>
-      <trans-unit id="Document type">
-        <source>Document type</source>
-        <target>Тип документа</target>
-      </trans-unit>
-      <trans-unit id="Passport">
-        <source>Passport</source>
-        <target>Паспорт</target>
-      </trans-unit>
-      <trans-unit id="National identity card">
-        <source>National identity card</source>
-        <target>Национальное удостоверение личности</target>
-      </trans-unit>
-      <trans-unit id="Driving licence">
-        <source>Driving licence</source>
-        <target>Водительские права</target>
-      </trans-unit>
-      <trans-unit id="Front side">
-        <source>Front side</source>
-        <target>Лицевая сторона</target>
-      </trans-unit>
-      <trans-unit id="Back side">
-        <source>Back side</source>
-        <target>Задняя сторона</target>
-      </trans-unit>
-      <trans-unit id="Add Credit Card">
-        <source>Add Credit Card</source>
-        <target>Добавить банковскую карту</target>
-      </trans-unit>
-      <trans-unit id="Use billing address the same that I have.">
-        <source>Use billing address the same that I have.</source>
-        <target>Использовать адрес для выставления счетов, такой же, как у меня.</target>
-      </trans-unit>
-      <trans-unit id="Card number">
-        <source>Card number</source>
-        <target>Номер карты</target>
-      </trans-unit>
-      <trans-unit id="Expiry date">
-        <source>Expiry date</source>
-        <target>Дата истечения срока</target>
-      </trans-unit>
-      <trans-unit id="CVC">
-        <source>CVC</source>
-        <target>CVC</target>
-      </trans-unit>
-      <trans-unit id="Payment authorization declined">
-        <source>Payment authorization declined</source>
-        <target>Платежное разрешение отклонено</target>
-      </trans-unit>
-      <trans-unit id="Identity verification must be passed before saving card">
-        <source>Identity verification must be passed before saving card</source>
-        <target>Верификация личности должна быть пройдена перед сохранением карты</target>
-      </trans-unit>
-      <trans-unit id="Payment method">
-        <source>Payment method</source>
-        <target>Способ оплаты</target>
-      </trans-unit>
-      <trans-unit id="If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.">
-        <source>If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.</source>
-        <target>Если обменный курс поменяется более чем на +/-&amp;nbsp;2.5%%, вас попросят подтвердить транзакцию по электронной почте.</target>
-      </trans-unit>
-      <trans-unit id="Confirm purchase">
-        <source>Confirm purchase</source>
-        <target>Подтвердить покупку</target>
-      </trans-unit>
-      <trans-unit id="Purchase Successful">
-        <source>Purchase Successful</source>
-        <target>Покупка прошла успешно</target>
-      </trans-unit>
-      <trans-unit id="3D secure authentication requested.">
-        <source>3D secure authentication requested.</source>
-        <target>Запрошена 3D-аутентификация.</target>
-      </trans-unit>
-      <trans-unit id="3D secure authentication failed">
-        <source>3D secure authentication failed</source>
-        <target>3D-аутентификация не удалась</target>
-      </trans-unit>
-      <trans-unit id="Make sure that your card is valid and has sufficient available balance.">
-        <source>Make sure that your card is valid and has sufficient available balance.</source>
-        <target>Убедитесь, что ваша карта действительна и имеет достаточное количество средств.</target>
-      </trans-unit>
-      <trans-unit id="Please select a payment method">
-        <source>Please select a payment method</source>
-        <target>Пожалуйста, выберите способ оплаты</target>
-      </trans-unit>
-      <trans-unit id="Pending">
-        <source>Pending</source>
-        <target>В ожидании</target>
-      </trans-unit>
-      <trans-unit id="Waiting for authorization">
-        <source>Waiting for authorization</source>
-        <target>В ожидании авторизации</target>
-      </trans-unit>
-      <trans-unit id="Failure reason">
-        <source>Failure reason</source>
-        <target>Причина отказа</target>
-      </trans-unit>
-      <trans-unit id="You have exceeded your daily limit. Please try again later.">
-        <source>You have exceeded your daily limit. Please try again later.</source>
-        <target>Вы превысили свой дневной лимит. Пожалуйста, попробуйте позже.</target>
-      </trans-unit>
-      <trans-unit id="You have exceeded your monthly limit. Please try again later.">
-        <source>You have exceeded your monthly limit. Please try again later.</source>
-        <target>Вы превысили свой месячный лимит. Пожалуйста, попробуйте позже.</target>
-      </trans-unit>
-      <trans-unit id="Credit Cards">
-        <source>Credit Cards</source>
-        <target>Кредитные карты</target>
-      </trans-unit>
-      <trans-unit id="Bank Accounts">
-        <source>Bank Accounts</source>
-        <target>Банковские счета</target>
-      </trans-unit>
-      <trans-unit id="No credit cards.">
-        <source>No credit cards.</source>
-        <target>Нет кредитных карт.</target>
-      </trans-unit>
-      <trans-unit id="No bank accounts.">
-        <source>No bank accounts.</source>
-        <target>Нет банковских счетов.</target>
-      </trans-unit>
-      <trans-unit id="Add Bank Account">
-        <source>Add Bank Account</source>
-        <target>Добавить банковский счет</target>
-      </trans-unit>
-      <trans-unit id="Currency">
-        <source>Currency</source>
-        <target>Валюта</target>
-      </trans-unit>
-      <trans-unit id="Account number">
-        <source>Account number</source>
-        <target>Номер счета</target>
-      </trans-unit>
-      <trans-unit id="Sort code">
-        <source>Sort code</source>
-        <target>Код сортировки</target>
-      </trans-unit>
-      <trans-unit id="Unsupported bank">
-        <source>Unsupported bank</source>
-        <target>Банк не поддерживается</target>
-      </trans-unit>
-      <trans-unit id="Daily limits">
-        <source>Daily limits</source>
-        <target>Дневные лимиты</target>
-      </trans-unit>
-      <trans-unit id="Monthly limits">
-        <source>Monthly limits</source>
-        <target>Месячные лимиты</target>
-      </trans-unit>
-      <trans-unit id="Credit Card:">
-        <source>Credit Card:</source>
-        <target>Кредитная карта:</target>
-      </trans-unit>
-      <trans-unit id="Bank Account:">
-        <source>Bank Account:</source>
-        <target>Банковский счет:</target>
-      </trans-unit>
-      <trans-unit id="Waiting for payment">
-        <source>Waiting for payment</source>
-        <target>Ожидание платежа</target>
-      </trans-unit>
-      <trans-unit id="To complete the transaction, please submit a bank transfer with the following information">
-        <source>To complete the transaction, please submit a bank transfer with the following information</source>
-        <target>Для завершения транзакции, пожалуйста, отправьте банковский перевод со следующей информацией</target>
-      </trans-unit>
-      <trans-unit id="Reference Number">
-        <source>Reference Number</source>
-        <target>Номер ссылки</target>
-      </trans-unit>
-      <trans-unit id="Recipient Name">
-        <source>Recipient Name</source>
-        <target>Имя получателя</target>
-      </trans-unit>
-      <trans-unit id="Bank Name">
-        <source>Bank Name</source>
-        <target>Название банка</target>
-      </trans-unit>
-      <trans-unit id="Bank Address">
-        <source>Bank Address</source>
-        <target>Адрес банка</target>
-      </trans-unit>
-      <trans-unit id="Recipient Address">
-        <source>Recipient Address</source>
-        <target>Адрес получателя</target>
       </trans-unit>
       <trans-unit id="P2PKH - Legacy">
         <source>P2PKH - Legacy</source>
@@ -1186,42 +818,6 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="more info">
         <source>more info</source>
         <target>подробнее</target>
-      </trans-unit>
-      <trans-unit id="Customer info update is disabled due to identity check status">
-        <source>Customer info update is disabled due to identity check status</source>
-        <target>Обновление информации отключено из-за статуса проверки личности</target>
-      </trans-unit>
-      <trans-unit id="Sorry, we don&apos;t accept disposable email addresses">
-        <source>Sorry, we don't accept disposable email addresses</source>
-        <target>Извините, мы не принимаем одноразовые адреса</target>
-      </trans-unit>
-      <trans-unit id="Your post code is invalid, please try again">
-        <source>Your post code is invalid, please try again</source>
-        <target>Ваш почтовый индекс неверен, пожалуйста, попробуйте еще раз</target>
-      </trans-unit>
-      <trans-unit id="This card is already in use on a different account">
-        <source>This card is already in use on a different account</source>
-        <target>Эта карта уже используется в другом аккаунте</target>
-      </trans-unit>
-      <trans-unit id="Sorry, we only accept Visa, Mastercard and Maestro cards at present">
-        <source>Sorry, we only accept Visa, Mastercard and Maestro cards at present</source>
-        <target>К сожалению, в настоящее время мы принимаем только карты Visa, Mastercard и Maestro</target>
-      </trans-unit>
-      <trans-unit id="You must enter a mobile phone number valid for your country">
-        <source>You must enter a mobile phone number valid for your country</source>
-        <target>Вам надо ввести номер мобильного телефона, действительный для вашей страны</target>
-      </trans-unit>
-      <trans-unit id="The billing address of this card does not match the billing address that you entered, please try again">
-        <source>The billing address of this card does not match the billing address that you entered, please try again</source>
-        <target>Платежный адрес этой карты не совпадает с платежным адресом, который вы ввели, попробуйте еще раз</target>
-      </trans-unit>
-      <trans-unit id="File upload is disabled due to identity check status">
-        <source>File upload is disabled due to identity check status</source>
-        <target>Загрузка файла отключена из-за статуса проверки личности</target>
-      </trans-unit>
-      <trans-unit id="Your state is not supported at the moment, sorry for the inconvenience">
-        <source>Your state is not supported at the moment, sorry for the inconvenience</source>
-        <target>Ваш штат не поддерживается на данный момент, извините за неудобства</target>
       </trans-unit>
       <trans-unit id="Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.">
         <source>Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.</source>
@@ -1453,6 +1049,10 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.">
         <source>In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Transaction fee is too low. Please reload your wallet.">
+        <source>Transaction fee is too low. Please reload your wallet.</source>
         <target></target>
       </trans-unit>
     </body>

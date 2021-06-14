@@ -25,10 +25,6 @@
         <source>Generate passphrase</source>
         <target>암호 생성</target>
       </trans-unit>
-      <trans-unit id="Go back">
-        <source>Go back</source>
-        <target>돌아가기</target>
-      </trans-unit>
       <trans-unit id="Generating">
         <source>Generating</source>
         <target>생성 중</target>
@@ -52,10 +48,6 @@
       <trans-unit id="I have written down or otherwise securely stored my passphrase">
         <source>I have written down or otherwise securely stored my passphrase</source>
         <target>나는 내 암호를 적어두거나 다른 방법으로 안전하게 저장해두었습니다</target>
-      </trans-unit>
-      <trans-unit id="Open wallet">
-        <source>Open wallet</source>
-        <target>월렛 열기</target>
       </trans-unit>
       <trans-unit id="Checking passphrase">
         <source>Checking passphrase</source>
@@ -81,14 +73,6 @@
         <source>Review passphrase again</source>
         <target>암호 다시 검토</target>
       </trans-unit>
-      <trans-unit id="Open a different wallet">
-        <source>Open a different wallet</source>
-        <target>다른 월렛 열기</target>
-      </trans-unit>
-      <trans-unit id="PIN must be a 4-digit number">
-        <source>PIN must be a 4-digit number</source>
-        <target>PIN 번호는 4자리 숫자입니다.</target>
-      </trans-unit>
       <trans-unit id="Verifying PIN">
         <source>Verifying PIN</source>
         <target>PIN 번호 확인</target>
@@ -104,10 +88,6 @@
       <trans-unit id="please be patient.">
         <source>please be patient.</source>
         <target>잠시만 기다려주십시오.</target>
-      </trans-unit>
-      <trans-unit id="Your PIN is incorrect">
-        <source>Your PIN is incorrect</source>
-        <target>PIN 번호가 정확하지 않습니다</target>
       </trans-unit>
       <trans-unit id="Request timeout. Please check your internet connection.">
         <source>Request timeout. Please check your internet connection.</source>
@@ -169,10 +149,6 @@
         <source>Without a name, the payer wouldn't be able to identify you on Mecto.</source>
         <target>이름이 없으면 지급인이 멕토(Mecto)에서 여러분을 식별할 수 없습니다.</target>
       </trans-unit>
-      <trans-unit id="Change your details">
-        <source>Change your details</source>
-        <target>상세 정보 변경</target>
-      </trans-unit>
       <trans-unit id="Your username">
         <source>Your username</source>
         <target>사용자명</target>
@@ -180,10 +156,6 @@
       <trans-unit id="Gravatar email">
         <source>Gravatar email</source>
         <target>그라바타(Gravatar) 이메일</target>
-      </trans-unit>
-      <trans-unit id="Submit">
-        <source>Submit</source>
-        <target>제출</target>
       </trans-unit>
       <trans-unit id="Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.">
         <source>Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.</source>
@@ -427,10 +399,6 @@
         <source>Please enter a valid return address</source>
         <target>유효한 반환 주소를 입력해주십시오</target>
       </trans-unit>
-      <trans-unit id="Miner fee">
-        <source>Miner fee</source>
-        <target>채굴자 수수료</target>
-      </trans-unit>
       <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
         <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
         <target>반환 주소는 여러분이 관리하는 주소로 거래 실패 시 입금액이 반환되는 주소입니다.</target>
@@ -543,25 +511,9 @@
         <source>Add</source>
         <target>추가</target>
       </trans-unit>
-      <trans-unit id="Symbol">
-        <source>Symbol</source>
-        <target>통화 코드</target>
-      </trans-unit>
-      <trans-unit id="Decimals">
-        <source>Decimals</source>
-        <target>소숫점 자리수</target>
-      </trans-unit>
       <trans-unit id="Token">
         <source>Token</source>
         <target>토큰</target>
-      </trans-unit>
-      <trans-unit id="Custom token">
-        <source>Custom token</source>
-        <target>맞춤 토큰</target>
-      </trans-unit>
-      <trans-unit id="Please fill out all fields.">
-        <source>Please fill out all fields.</source>
-        <target>모든 란을 기재해주십시오.</target>
       </trans-unit>
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
@@ -570,10 +522,6 @@
       <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
         <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
         <target>이더리움이 부족해 거래 수수료(%(ethereumRequired)s ETH)를 지급할 수 없습니다.</target>
-      </trans-unit>
-      <trans-unit id="Click to Select">
-        <source>Click to Select</source>
-        <target>클릭해서 선택</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -843,42 +791,6 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Transaction too large</source>
         <target>거래가 너무 큽니다</target>
       </trans-unit>
-      <trans-unit id="Email">
-        <source>Email</source>
-        <target>이메일</target>
-      </trans-unit>
-      <trans-unit id="Please enter a valid email address">
-        <source>Please enter a valid email address</source>
-        <target>유효한 이메일 주소를 입력해주십시오</target>
-      </trans-unit>
-      <trans-unit id="Verification code">
-        <source>Verification code</source>
-        <target>인증 코드</target>
-      </trans-unit>
-      <trans-unit id="We&apos;ve sent verification code to :destination.">
-        <source>We've sent verification code to %(destination)s.</source>
-        <target>인증 코드를 %(destination)s(으)로 보냈습니다.</target>
-      </trans-unit>
-      <trans-unit id="Invalid verification code">
-        <source>Invalid verification code</source>
-        <target>잘못된 인증 코드</target>
-      </trans-unit>
-      <trans-unit id="To increase your limits you need to pass verification.">
-        <source>To increase your limits you need to pass verification.</source>
-        <target>한도를 늘리려면 인증을 전달해야 합니다.</target>
-      </trans-unit>
-      <trans-unit id="Payment methods">
-        <source>Payment methods</source>
-        <target>결제 방법</target>
-      </trans-unit>
-      <trans-unit id="Verification">
-        <source>Verification</source>
-        <target>인증</target>
-      </trans-unit>
-      <trans-unit id="Default currency (:symbol)">
-        <source>Default currency (%(symbol)s)</source>
-        <target>기본 통화(%(symbol)s)</target>
-      </trans-unit>
       <trans-unit id="Buy">
         <source>Buy</source>
         <target>구매</target>
@@ -886,286 +798,6 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Sell">
         <source>Sell</source>
         <target>팔다</target>
-      </trans-unit>
-      <trans-unit id="No verification methods are currently available.">
-        <source>No verification methods are currently available.</source>
-        <target>현재 이용 가능한 인증 방법이 없습니다.</target>
-      </trans-unit>
-      <trans-unit id="Identity">
-        <source>Identity</source>
-        <target>신원</target>
-      </trans-unit>
-      <trans-unit id="Document">
-        <source>Document</source>
-        <target>문서</target>
-      </trans-unit>
-      <trans-unit id="Phone number">
-        <source>Phone number</source>
-        <target>전화번호</target>
-      </trans-unit>
-      <trans-unit id="Face match">
-        <source>Face match</source>
-        <target>얼굴 일치</target>
-      </trans-unit>
-      <trans-unit id="Identity verification">
-        <source>Identity verification</source>
-        <target>신원 확인</target>
-      </trans-unit>
-      <trans-unit id="Document verification">
-        <source>Document verification</source>
-        <target>문서 확인</target>
-      </trans-unit>
-      <trans-unit id="Phone number verification">
-        <source>Phone number verification</source>
-        <target>전화번호 확인</target>
-      </trans-unit>
-      <trans-unit id="Face match verification">
-        <source>Face match verification</source>
-        <target>얼굴 일치 확인</target>
-      </trans-unit>
-      <trans-unit id="Continue">
-        <source>Continue</source>
-        <target>계속</target>
-      </trans-unit>
-      <trans-unit id="First name">
-        <source>First name</source>
-        <target>이름</target>
-      </trans-unit>
-      <trans-unit id="Last name">
-        <source>Last name</source>
-        <target>성</target>
-      </trans-unit>
-      <trans-unit id="Date of birth">
-        <source>Date of birth</source>
-        <target>생년월일</target>
-      </trans-unit>
-      <trans-unit id="Country">
-        <source>Country</source>
-        <target>국가</target>
-      </trans-unit>
-      <trans-unit id="Address 2 (optional)">
-        <source>Address 2 (optional)</source>
-        <target>주소 2 (선택사항)</target>
-      </trans-unit>
-      <trans-unit id="City">
-        <source>City</source>
-        <target>도시</target>
-      </trans-unit>
-      <trans-unit id="State">
-        <source>State</source>
-        <target>주</target>
-      </trans-unit>
-      <trans-unit id="Post code">
-        <source>Post code</source>
-        <target>우편번호</target>
-      </trans-unit>
-      <trans-unit id="Please enter a valid info">
-        <source>Please enter a valid info</source>
-        <target>유효한 정보를 입력해주십시오</target>
-      </trans-unit>
-      <trans-unit id="Code is invalid or expired. Please try again.">
-        <source>Code is invalid or expired. Please try again.</source>
-        <target>코드가 잘못되었거나 만료되었습니다. 다시 시도해주십시오.</target>
-      </trans-unit>
-      <trans-unit id="Selfie">
-        <source>Selfie</source>
-        <target>셀피</target>
-      </trans-unit>
-      <trans-unit id="Select file...">
-        <source>Select file...</source>
-        <target>파일 선택...</target>
-      </trans-unit>
-      <trans-unit id="Upload failed. Please try again later.">
-        <source>Upload failed. Please try again later.</source>
-        <target>업로드 실패. 나중에 다시 시도해주십시오.</target>
-      </trans-unit>
-      <trans-unit id="Country of issuance">
-        <source>Country of issuance</source>
-        <target>발행 국가</target>
-      </trans-unit>
-      <trans-unit id="Document type">
-        <source>Document type</source>
-        <target>문서 유형</target>
-      </trans-unit>
-      <trans-unit id="Passport">
-        <source>Passport</source>
-        <target>여권</target>
-      </trans-unit>
-      <trans-unit id="National identity card">
-        <source>National identity card</source>
-        <target>국가 신분증</target>
-      </trans-unit>
-      <trans-unit id="Driving licence">
-        <source>Driving licence</source>
-        <target>운전 면허증</target>
-      </trans-unit>
-      <trans-unit id="Front side">
-        <source>Front side</source>
-        <target>앞면</target>
-      </trans-unit>
-      <trans-unit id="Back side">
-        <source>Back side</source>
-        <target>뒷면</target>
-      </trans-unit>
-      <trans-unit id="Add Credit Card">
-        <source>Add Credit Card</source>
-        <target>신용카드 추가</target>
-      </trans-unit>
-      <trans-unit id="Use billing address the same that I have.">
-        <source>Use billing address the same that I have.</source>
-        <target>내가 보유한 것과 동일한 청구 주소 사용</target>
-      </trans-unit>
-      <trans-unit id="Card number">
-        <source>Card number</source>
-        <target>카드 번호</target>
-      </trans-unit>
-      <trans-unit id="Expiry date">
-        <source>Expiry date</source>
-        <target>만료일</target>
-      </trans-unit>
-      <trans-unit id="CVC">
-        <source>CVC</source>
-        <target>CVC</target>
-      </trans-unit>
-      <trans-unit id="Payment authorization declined">
-        <source>Payment authorization declined</source>
-        <target>결제 인증 거부</target>
-      </trans-unit>
-      <trans-unit id="Identity verification must be passed before saving card">
-        <source>Identity verification must be passed before saving card</source>
-        <target>카드를 저장하기 전 신원 확인이 통과되어야 합니다 </target>
-      </trans-unit>
-      <trans-unit id="Payment method">
-        <source>Payment method</source>
-        <target>결제 방법</target>
-      </trans-unit>
-      <trans-unit id="If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.">
-        <source>If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.</source>
-        <target>요금이 +/-&amp;nbsp;2.5%% 이상 변경되면 이메일을 통해 거래 재확인 요청을 받게 됩니다.</target>
-      </trans-unit>
-      <trans-unit id="Confirm purchase">
-        <source>Confirm purchase</source>
-        <target>구매 확인</target>
-      </trans-unit>
-      <trans-unit id="Purchase Successful">
-        <source>Purchase Successful</source>
-        <target>구매 성공</target>
-      </trans-unit>
-      <trans-unit id="3D secure authentication requested.">
-        <source>3D secure authentication requested.</source>
-        <target>3D 보안 인증 요청됨</target>
-      </trans-unit>
-      <trans-unit id="3D secure authentication failed">
-        <source>3D secure authentication failed</source>
-        <target>3D 보안 인증 실패</target>
-      </trans-unit>
-      <trans-unit id="Make sure that your card is valid and has sufficient available balance.">
-        <source>Make sure that your card is valid and has sufficient available balance.</source>
-        <target>카드가 유효하고 한도가 충분한지 확인하여 주십시오.</target>
-      </trans-unit>
-      <trans-unit id="Please select a payment method">
-        <source>Please select a payment method</source>
-        <target>결제 방법을 선택하십시오</target>
-      </trans-unit>
-      <trans-unit id="Pending">
-        <source>Pending</source>
-        <target>대기 중</target>
-      </trans-unit>
-      <trans-unit id="Waiting for authorization">
-        <source>Waiting for authorization</source>
-        <target>인증 대기</target>
-      </trans-unit>
-      <trans-unit id="Failure reason">
-        <source>Failure reason</source>
-        <target>실패 사유</target>
-      </trans-unit>
-      <trans-unit id="You have exceeded your daily limit. Please try again later.">
-        <source>You have exceeded your daily limit. Please try again later.</source>
-        <target>일일 한도를 초과했습니다. 나중에 다시 시도하십시오.</target>
-      </trans-unit>
-      <trans-unit id="You have exceeded your monthly limit. Please try again later.">
-        <source>You have exceeded your monthly limit. Please try again later.</source>
-        <target>월간 한도를 초과했습니다. 나중에 다시 시도하십시오.</target>
-      </trans-unit>
-      <trans-unit id="Credit Cards">
-        <source>Credit Cards</source>
-        <target>신용카드</target>
-      </trans-unit>
-      <trans-unit id="Bank Accounts">
-        <source>Bank Accounts</source>
-        <target>은행계좌</target>
-      </trans-unit>
-      <trans-unit id="No credit cards.">
-        <source>No credit cards.</source>
-        <target>신용카드 없음</target>
-      </trans-unit>
-      <trans-unit id="No bank accounts.">
-        <source>No bank accounts.</source>
-        <target>은행계좌 없음</target>
-      </trans-unit>
-      <trans-unit id="Add Bank Account">
-        <source>Add Bank Account</source>
-        <target>은행계좌 추가</target>
-      </trans-unit>
-      <trans-unit id="Currency">
-        <source>Currency</source>
-        <target>통화</target>
-      </trans-unit>
-      <trans-unit id="Account number">
-        <source>Account number</source>
-        <target>계좌번호</target>
-      </trans-unit>
-      <trans-unit id="Sort code">
-        <source>Sort code</source>
-        <target>코드 정렬</target>
-      </trans-unit>
-      <trans-unit id="Unsupported bank">
-        <source>Unsupported bank</source>
-        <target>지원되지 않는 은행</target>
-      </trans-unit>
-      <trans-unit id="Daily limits">
-        <source>Daily limits</source>
-        <target>일일 한도</target>
-      </trans-unit>
-      <trans-unit id="Monthly limits">
-        <source>Monthly limits</source>
-        <target>월간 한도</target>
-      </trans-unit>
-      <trans-unit id="Credit Card:">
-        <source>Credit Card:</source>
-        <target>신용카드:</target>
-      </trans-unit>
-      <trans-unit id="Bank Account:">
-        <source>Bank Account:</source>
-        <target>은행계좌:</target>
-      </trans-unit>
-      <trans-unit id="Waiting for payment">
-        <source>Waiting for payment</source>
-        <target>결제 대기</target>
-      </trans-unit>
-      <trans-unit id="To complete the transaction, please submit a bank transfer with the following information">
-        <source>To complete the transaction, please submit a bank transfer with the following information</source>
-        <target>거래를 완료하려면, 다음 정보와 함께 은행 이체 정보를 제출하십시오</target>
-      </trans-unit>
-      <trans-unit id="Reference Number">
-        <source>Reference Number</source>
-        <target>참조 번호</target>
-      </trans-unit>
-      <trans-unit id="Recipient Name">
-        <source>Recipient Name</source>
-        <target>수령인 성명</target>
-      </trans-unit>
-      <trans-unit id="Bank Name">
-        <source>Bank Name</source>
-        <target>은행 명</target>
-      </trans-unit>
-      <trans-unit id="Bank Address">
-        <source>Bank Address</source>
-        <target>은행 주소</target>
-      </trans-unit>
-      <trans-unit id="Recipient Address">
-        <source>Recipient Address</source>
-        <target>수령인 주소</target>
       </trans-unit>
       <trans-unit id="P2PKH - Legacy">
         <source>P2PKH - Legacy</source>
@@ -1186,42 +818,6 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="more info">
         <source>more info</source>
         <target>추가 정보</target>
-      </trans-unit>
-      <trans-unit id="Customer info update is disabled due to identity check status">
-        <source>Customer info update is disabled due to identity check status</source>
-        <target>신원 확인 상태 때문에 고객 정보 업데이트가 비활성화되어 있습니다</target>
-      </trans-unit>
-      <trans-unit id="Sorry, we don&apos;t accept disposable email addresses">
-        <source>Sorry, we don't accept disposable email addresses</source>
-        <target>죄송합니다, 임시 이메일 주소는 사용하실 수 없습니다</target>
-      </trans-unit>
-      <trans-unit id="Your post code is invalid, please try again">
-        <source>Your post code is invalid, please try again</source>
-        <target>우편번호가 잘못되었습니다. 다시 시도해주십시오.</target>
-      </trans-unit>
-      <trans-unit id="This card is already in use on a different account">
-        <source>This card is already in use on a different account</source>
-        <target>이 카드는 다른 계정에서 이미 사용 중입니다</target>
-      </trans-unit>
-      <trans-unit id="Sorry, we only accept Visa, Mastercard and Maestro cards at present">
-        <source>Sorry, we only accept Visa, Mastercard and Maestro cards at present</source>
-        <target>죄송합니다, 현재 Visa, Mastercard 및 Maestro 카드만 사용하실 수 있습니다</target>
-      </trans-unit>
-      <trans-unit id="You must enter a mobile phone number valid for your country">
-        <source>You must enter a mobile phone number valid for your country</source>
-        <target>귀하의 국가에서 유효한 휴대폰 번호를 입력해야 합니다</target>
-      </trans-unit>
-      <trans-unit id="The billing address of this card does not match the billing address that you entered, please try again">
-        <source>The billing address of this card does not match the billing address that you entered, please try again</source>
-        <target>이 카드의 청구지 주소가 입력하신 청구지 주소와 일치하지 않습니다. 다시 시도하여 주십시오.</target>
-      </trans-unit>
-      <trans-unit id="File upload is disabled due to identity check status">
-        <source>File upload is disabled due to identity check status</source>
-        <target>신원 확인 상태 때문에 파일 업로드가 비활성화되어 있습니다</target>
-      </trans-unit>
-      <trans-unit id="Your state is not supported at the moment, sorry for the inconvenience">
-        <source>Your state is not supported at the moment, sorry for the inconvenience</source>
-        <target>현재 귀하의 상태는 지원되지 않습니다. 불편을 드려 죄송합니다.</target>
       </trans-unit>
       <trans-unit id="Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.">
         <source>Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.</source>
@@ -1453,6 +1049,10 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.">
         <source>In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Transaction fee is too low. Please reload your wallet.">
+        <source>Transaction fee is too low. Please reload your wallet.</source>
         <target></target>
       </trans-unit>
     </body>

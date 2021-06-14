@@ -25,10 +25,6 @@
         <source>Generate passphrase</source>
         <target>Jelszó generálása</target>
       </trans-unit>
-      <trans-unit id="Go back">
-        <source>Go back</source>
-        <target>Vissza</target>
-      </trans-unit>
       <trans-unit id="Generating">
         <source>Generating</source>
         <target>Generálás</target>
@@ -52,10 +48,6 @@
       <trans-unit id="I have written down or otherwise securely stored my passphrase">
         <source>I have written down or otherwise securely stored my passphrase</source>
         <target>Leírtam vagy más módon biztonságosan elmentettem a jelszavam</target>
-      </trans-unit>
-      <trans-unit id="Open wallet">
-        <source>Open wallet</source>
-        <target>Tárca megnyitása</target>
       </trans-unit>
       <trans-unit id="Checking passphrase">
         <source>Checking passphrase</source>
@@ -81,14 +73,6 @@
         <source>Review passphrase again</source>
         <target>Jelszó ismételt ellenőrzése</target>
       </trans-unit>
-      <trans-unit id="Open a different wallet">
-        <source>Open a different wallet</source>
-        <target>Nyiss meg egy másik tárcát</target>
-      </trans-unit>
-      <trans-unit id="PIN must be a 4-digit number">
-        <source>PIN must be a 4-digit number</source>
-        <target>A PIN csak négyszámjegyű lehet</target>
-      </trans-unit>
       <trans-unit id="Verifying PIN">
         <source>Verifying PIN</source>
         <target>PIN ellenőrzése</target>
@@ -104,10 +88,6 @@
       <trans-unit id="please be patient.">
         <source>please be patient.</source>
         <target>légy türelmes.</target>
-      </trans-unit>
-      <trans-unit id="Your PIN is incorrect">
-        <source>Your PIN is incorrect</source>
-        <target>A PIN kódod helytelen</target>
       </trans-unit>
       <trans-unit id="Request timeout. Please check your internet connection.">
         <source>Request timeout. Please check your internet connection.</source>
@@ -169,10 +149,6 @@
         <source>Without a name, the payer wouldn't be able to identify you on Mecto.</source>
         <target>Név nélkül a megbízó nem tud a Mecto-n beazonosítani.</target>
       </trans-unit>
-      <trans-unit id="Change your details">
-        <source>Change your details</source>
-        <target>Adatok megváltoztatása</target>
-      </trans-unit>
       <trans-unit id="Your username">
         <source>Your username</source>
         <target>Felhasználóneved</target>
@@ -180,10 +156,6 @@
       <trans-unit id="Gravatar email">
         <source>Gravatar email</source>
         <target>Gravatar e-mail</target>
-      </trans-unit>
-      <trans-unit id="Submit">
-        <source>Submit</source>
-        <target>Küldés</target>
       </trans-unit>
       <trans-unit id="Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.">
         <source>Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.</source>
@@ -427,10 +399,6 @@
         <source>Please enter a valid return address</source>
         <target>Írj be egy érvényes visszatérítési címet</target>
       </trans-unit>
-      <trans-unit id="Miner fee">
-        <source>Miner fee</source>
-        <target>Bányászdíj</target>
-      </trans-unit>
       <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
         <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
         <target>A visszatérítési díj egy olyan cím kell hogy legyen, ami a Tiéd és ahova sikertelen tranzakció esetén visszatérítésre kerül az összeg.</target>
@@ -543,25 +511,9 @@
         <source>Add</source>
         <target>Hozzáadás</target>
       </trans-unit>
-      <trans-unit id="Symbol">
-        <source>Symbol</source>
-        <target>Szimbólum</target>
-      </trans-unit>
-      <trans-unit id="Decimals">
-        <source>Decimals</source>
-        <target>Tizedesjegyek</target>
-      </trans-unit>
       <trans-unit id="Token">
         <source>Token</source>
         <target>Token</target>
-      </trans-unit>
-      <trans-unit id="Custom token">
-        <source>Custom token</source>
-        <target>Tetszőleges token</target>
-      </trans-unit>
-      <trans-unit id="Please fill out all fields.">
-        <source>Please fill out all fields.</source>
-        <target>Töltsd ki az összes mezőt.</target>
       </trans-unit>
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
@@ -570,10 +522,6 @@
       <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
         <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
         <target>Nincs elegendő Ethereumod a tranzakciós költség kifizetésére (%(ethereumRequired)s ETH).</target>
-      </trans-unit>
-      <trans-unit id="Click to Select">
-        <source>Click to Select</source>
-        <target>Kattints a kiválasztáshoz</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -843,42 +791,6 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Transaction too large</source>
         <target>Túl nagy tranzakció</target>
       </trans-unit>
-      <trans-unit id="Email">
-        <source>Email</source>
-        <target>E-mail</target>
-      </trans-unit>
-      <trans-unit id="Please enter a valid email address">
-        <source>Please enter a valid email address</source>
-        <target>Kérjük, adj meg egy érvényes e-mail-címet</target>
-      </trans-unit>
-      <trans-unit id="Verification code">
-        <source>Verification code</source>
-        <target>Hitelesítőkód</target>
-      </trans-unit>
-      <trans-unit id="We&apos;ve sent verification code to :destination.">
-        <source>We've sent verification code to %(destination)s.</source>
-        <target>A hitelesítőkódot a következő címre küldtük: %(destination)s.</target>
-      </trans-unit>
-      <trans-unit id="Invalid verification code">
-        <source>Invalid verification code</source>
-        <target>Hitelesítőkód</target>
-      </trans-unit>
-      <trans-unit id="To increase your limits you need to pass verification.">
-        <source>To increase your limits you need to pass verification.</source>
-        <target>A limit növeléséhez teljesítened kell a hitelesítést.</target>
-      </trans-unit>
-      <trans-unit id="Payment methods">
-        <source>Payment methods</source>
-        <target>Utalási módszerek</target>
-      </trans-unit>
-      <trans-unit id="Verification">
-        <source>Verification</source>
-        <target>Hitelesítés</target>
-      </trans-unit>
-      <trans-unit id="Default currency (:symbol)">
-        <source>Default currency (%(symbol)s)</source>
-        <target>Alapértelmezett deviza (%(symbol)s)</target>
-      </trans-unit>
       <trans-unit id="Buy">
         <source>Buy</source>
         <target>Vásárlás</target>
@@ -886,286 +798,6 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Sell">
         <source>Sell</source>
         <target>Elad</target>
-      </trans-unit>
-      <trans-unit id="No verification methods are currently available.">
-        <source>No verification methods are currently available.</source>
-        <target>Jelenleg nincs elérhető hitelesítési mód.</target>
-      </trans-unit>
-      <trans-unit id="Identity">
-        <source>Identity</source>
-        <target>Személyazonosság</target>
-      </trans-unit>
-      <trans-unit id="Document">
-        <source>Document</source>
-        <target>Dokumentum</target>
-      </trans-unit>
-      <trans-unit id="Phone number">
-        <source>Phone number</source>
-        <target>Telefonszám</target>
-      </trans-unit>
-      <trans-unit id="Face match">
-        <source>Face match</source>
-        <target>Arcfelismerés</target>
-      </trans-unit>
-      <trans-unit id="Identity verification">
-        <source>Identity verification</source>
-        <target>Személyazonosság hitelesítése</target>
-      </trans-unit>
-      <trans-unit id="Document verification">
-        <source>Document verification</source>
-        <target>Dokumentum hitelesítése</target>
-      </trans-unit>
-      <trans-unit id="Phone number verification">
-        <source>Phone number verification</source>
-        <target>Telefonszám hitelesítése</target>
-      </trans-unit>
-      <trans-unit id="Face match verification">
-        <source>Face match verification</source>
-        <target>Arcfelismerés hitelesítése</target>
-      </trans-unit>
-      <trans-unit id="Continue">
-        <source>Continue</source>
-        <target>Folytatás</target>
-      </trans-unit>
-      <trans-unit id="First name">
-        <source>First name</source>
-        <target>Keresztnév</target>
-      </trans-unit>
-      <trans-unit id="Last name">
-        <source>Last name</source>
-        <target>Vezetéknév</target>
-      </trans-unit>
-      <trans-unit id="Date of birth">
-        <source>Date of birth</source>
-        <target>Születési dátum</target>
-      </trans-unit>
-      <trans-unit id="Country">
-        <source>Country</source>
-        <target>Ország</target>
-      </trans-unit>
-      <trans-unit id="Address 2 (optional)">
-        <source>Address 2 (optional)</source>
-        <target>Címsor 2 (opcionális)</target>
-      </trans-unit>
-      <trans-unit id="City">
-        <source>City</source>
-        <target>Város</target>
-      </trans-unit>
-      <trans-unit id="State">
-        <source>State</source>
-        <target>Állam</target>
-      </trans-unit>
-      <trans-unit id="Post code">
-        <source>Post code</source>
-        <target>Irányítószám</target>
-      </trans-unit>
-      <trans-unit id="Please enter a valid info">
-        <source>Please enter a valid info</source>
-        <target>Kérjük, érvényes információkat adj meg</target>
-      </trans-unit>
-      <trans-unit id="Code is invalid or expired. Please try again.">
-        <source>Code is invalid or expired. Please try again.</source>
-        <target>A kód érvénytelen vagy lejárt. Kérjük, próbáld újra.</target>
-      </trans-unit>
-      <trans-unit id="Selfie">
-        <source>Selfie</source>
-        <target>Szelfi</target>
-      </trans-unit>
-      <trans-unit id="Select file...">
-        <source>Select file...</source>
-        <target>Fájl kiválasztása ...</target>
-      </trans-unit>
-      <trans-unit id="Upload failed. Please try again later.">
-        <source>Upload failed. Please try again later.</source>
-        <target>A feltöltés sikertelen volt. Kérjük, próbáld újra később.</target>
-      </trans-unit>
-      <trans-unit id="Country of issuance">
-        <source>Country of issuance</source>
-        <target>Kibocsátási ország</target>
-      </trans-unit>
-      <trans-unit id="Document type">
-        <source>Document type</source>
-        <target>Dokumentum típusa</target>
-      </trans-unit>
-      <trans-unit id="Passport">
-        <source>Passport</source>
-        <target>Útlevél</target>
-      </trans-unit>
-      <trans-unit id="National identity card">
-        <source>National identity card</source>
-        <target>Személyi igazolvány</target>
-      </trans-unit>
-      <trans-unit id="Driving licence">
-        <source>Driving licence</source>
-        <target>Vezetői engedély</target>
-      </trans-unit>
-      <trans-unit id="Front side">
-        <source>Front side</source>
-        <target>Elülső oldal</target>
-      </trans-unit>
-      <trans-unit id="Back side">
-        <source>Back side</source>
-        <target>Hátoldal</target>
-      </trans-unit>
-      <trans-unit id="Add Credit Card">
-        <source>Add Credit Card</source>
-        <target>Hitelkártya hozzáadása</target>
-      </trans-unit>
-      <trans-unit id="Use billing address the same that I have.">
-        <source>Use billing address the same that I have.</source>
-        <target>Ugyanannak a számlázási címnek a használata, amellyel rendelkezem.</target>
-      </trans-unit>
-      <trans-unit id="Card number">
-        <source>Card number</source>
-        <target>Kártyaszám</target>
-      </trans-unit>
-      <trans-unit id="Expiry date">
-        <source>Expiry date</source>
-        <target>Lejárat dátuma</target>
-      </trans-unit>
-      <trans-unit id="CVC">
-        <source>CVC</source>
-        <target>CVC-kód</target>
-      </trans-unit>
-      <trans-unit id="Payment authorization declined">
-        <source>Payment authorization declined</source>
-        <target>Az utalás hitelesítése elutasítva</target>
-      </trans-unit>
-      <trans-unit id="Identity verification must be passed before saving card">
-        <source>Identity verification must be passed before saving card</source>
-        <target>A kártya elmentése előtt teljesíteni kell a személyazonosság hitelesítését</target>
-      </trans-unit>
-      <trans-unit id="Payment method">
-        <source>Payment method</source>
-        <target>Utalási módszerek</target>
-      </trans-unit>
-      <trans-unit id="If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.">
-        <source>If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.</source>
-        <target>Ha az arány több mint  értékkel változik, akkor a rendszer felkér, hogy a tranzakciót e-mailen keresztül hitelesítsd.</target>
-      </trans-unit>
-      <trans-unit id="Confirm purchase">
-        <source>Confirm purchase</source>
-        <target>Erősítsd meg a vásárlást</target>
-      </trans-unit>
-      <trans-unit id="Purchase Successful">
-        <source>Purchase Successful</source>
-        <target>Sikeres vásárlás</target>
-      </trans-unit>
-      <trans-unit id="3D secure authentication requested.">
-        <source>3D secure authentication requested.</source>
-        <target>3D-s biztonsági hitelesítés szükséges.</target>
-      </trans-unit>
-      <trans-unit id="3D secure authentication failed">
-        <source>3D secure authentication failed</source>
-        <target>A 3D-s biztonsági hitelesítés sikertelen volt</target>
-      </trans-unit>
-      <trans-unit id="Make sure that your card is valid and has sufficient available balance.">
-        <source>Make sure that your card is valid and has sufficient available balance.</source>
-        <target>Győződj meg róla, hogy a kártyád érvényes, és rendelkezel a szükséges egyenleggel.</target>
-      </trans-unit>
-      <trans-unit id="Please select a payment method">
-        <source>Please select a payment method</source>
-        <target>Kérjük, válassz utalási módot</target>
-      </trans-unit>
-      <trans-unit id="Pending">
-        <source>Pending</source>
-        <target>Függőben</target>
-      </trans-unit>
-      <trans-unit id="Waiting for authorization">
-        <source>Waiting for authorization</source>
-        <target>Várakozás a hitelesítésre</target>
-      </trans-unit>
-      <trans-unit id="Failure reason">
-        <source>Failure reason</source>
-        <target>A hiba oka</target>
-      </trans-unit>
-      <trans-unit id="You have exceeded your daily limit. Please try again later.">
-        <source>You have exceeded your daily limit. Please try again later.</source>
-        <target>Meghaladtad a napi limited. Kérjük, próbáld újra később.</target>
-      </trans-unit>
-      <trans-unit id="You have exceeded your monthly limit. Please try again later.">
-        <source>You have exceeded your monthly limit. Please try again later.</source>
-        <target>Meghaladtad a havi limited. Kérjük, próbáld újra később.</target>
-      </trans-unit>
-      <trans-unit id="Credit Cards">
-        <source>Credit Cards</source>
-        <target>Hitelkártyák</target>
-      </trans-unit>
-      <trans-unit id="Bank Accounts">
-        <source>Bank Accounts</source>
-        <target>Bankszámlák</target>
-      </trans-unit>
-      <trans-unit id="No credit cards.">
-        <source>No credit cards.</source>
-        <target>Nincsenek hitelkártyák.</target>
-      </trans-unit>
-      <trans-unit id="No bank accounts.">
-        <source>No bank accounts.</source>
-        <target>Nincsenek bankszámlák.</target>
-      </trans-unit>
-      <trans-unit id="Add Bank Account">
-        <source>Add Bank Account</source>
-        <target>Bankszámla hozzáadása</target>
-      </trans-unit>
-      <trans-unit id="Currency">
-        <source>Currency</source>
-        <target>Pénznem</target>
-      </trans-unit>
-      <trans-unit id="Account number">
-        <source>Account number</source>
-        <target>Számlaszám</target>
-      </trans-unit>
-      <trans-unit id="Sort code">
-        <source>Sort code</source>
-        <target>Fiókazonosító</target>
-      </trans-unit>
-      <trans-unit id="Unsupported bank">
-        <source>Unsupported bank</source>
-        <target>Nem támogatott bank</target>
-      </trans-unit>
-      <trans-unit id="Daily limits">
-        <source>Daily limits</source>
-        <target>Napi limitek</target>
-      </trans-unit>
-      <trans-unit id="Monthly limits">
-        <source>Monthly limits</source>
-        <target>Havi limitek</target>
-      </trans-unit>
-      <trans-unit id="Credit Card:">
-        <source>Credit Card:</source>
-        <target>Hitelkártya:</target>
-      </trans-unit>
-      <trans-unit id="Bank Account:">
-        <source>Bank Account:</source>
-        <target>Bankszámla:</target>
-      </trans-unit>
-      <trans-unit id="Waiting for payment">
-        <source>Waiting for payment</source>
-        <target>Várakozás a fizetésre</target>
-      </trans-unit>
-      <trans-unit id="To complete the transaction, please submit a bank transfer with the following information">
-        <source>To complete the transaction, please submit a bank transfer with the following information</source>
-        <target>A tranzakció teljesítéséhez kérjük, a következő információkkal kiegészített banki utalást indítson el</target>
-      </trans-unit>
-      <trans-unit id="Reference Number">
-        <source>Reference Number</source>
-        <target>Referenciaszám</target>
-      </trans-unit>
-      <trans-unit id="Recipient Name">
-        <source>Recipient Name</source>
-        <target>Kedvezményezett neve</target>
-      </trans-unit>
-      <trans-unit id="Bank Name">
-        <source>Bank Name</source>
-        <target>Bank neve</target>
-      </trans-unit>
-      <trans-unit id="Bank Address">
-        <source>Bank Address</source>
-        <target>Bank címe</target>
-      </trans-unit>
-      <trans-unit id="Recipient Address">
-        <source>Recipient Address</source>
-        <target>Kedvezményezett címe</target>
       </trans-unit>
       <trans-unit id="P2PKH - Legacy">
         <source>P2PKH - Legacy</source>
@@ -1186,42 +818,6 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="more info">
         <source>more info</source>
         <target>több információ</target>
-      </trans-unit>
-      <trans-unit id="Customer info update is disabled due to identity check status">
-        <source>Customer info update is disabled due to identity check status</source>
-        <target>A személyazonosság ellenőrzése miatt az ügyfél-információ frissítése le van tiltva</target>
-      </trans-unit>
-      <trans-unit id="Sorry, we don&apos;t accept disposable email addresses">
-        <source>Sorry, we don't accept disposable email addresses</source>
-        <target>Sajnáljuk, eldobható e-mail címet nem fogadunk el</target>
-      </trans-unit>
-      <trans-unit id="Your post code is invalid, please try again">
-        <source>Your post code is invalid, please try again</source>
-        <target>Az irányítószám érvénytelen, próbáld meg újra</target>
-      </trans-unit>
-      <trans-unit id="This card is already in use on a different account">
-        <source>This card is already in use on a different account</source>
-        <target>Ezt a kártyát egy másik fiókban már használják</target>
-      </trans-unit>
-      <trans-unit id="Sorry, we only accept Visa, Mastercard and Maestro cards at present">
-        <source>Sorry, we only accept Visa, Mastercard and Maestro cards at present</source>
-        <target>Sajnos, jelenleg csak Visa, Mastercard és Meastro kártyákat fogadunk el</target>
-      </trans-unit>
-      <trans-unit id="You must enter a mobile phone number valid for your country">
-        <source>You must enter a mobile phone number valid for your country</source>
-        <target>Az országodban érvényes mobiltelefon-számot kell megadnod</target>
-      </trans-unit>
-      <trans-unit id="The billing address of this card does not match the billing address that you entered, please try again">
-        <source>The billing address of this card does not match the billing address that you entered, please try again</source>
-        <target>A kártya számlázási címe nem egyezik a megadott számlázási címmel, próbáld meg újra</target>
-      </trans-unit>
-      <trans-unit id="File upload is disabled due to identity check status">
-        <source>File upload is disabled due to identity check status</source>
-        <target>A személyazonosság ellenőrzése miatt a fájlfeltöltés le van tiltva</target>
-      </trans-unit>
-      <trans-unit id="Your state is not supported at the moment, sorry for the inconvenience">
-        <source>Your state is not supported at the moment, sorry for the inconvenience</source>
-        <target>Az állapotod pillanatnyilag nincs támogatva, elnézést az okozott kényelmetlenségért</target>
       </trans-unit>
       <trans-unit id="Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.">
         <source>Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.</source>
@@ -1453,6 +1049,10 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.">
         <source>In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Transaction fee is too low. Please reload your wallet.">
+        <source>Transaction fee is too low. Please reload your wallet.</source>
         <target></target>
       </trans-unit>
     </body>

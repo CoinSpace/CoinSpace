@@ -25,10 +25,6 @@
         <source>Generate passphrase</source>
         <target>បង្កើតឃ្លាសម្ងាត់</target>
       </trans-unit>
-      <trans-unit id="Go back">
-        <source>Go back</source>
-        <target>ត្រឡប់ក្រោយ</target>
-      </trans-unit>
       <trans-unit id="Generating">
         <source>Generating</source>
         <target>កំពុងបង្កើត</target>
@@ -52,10 +48,6 @@
       <trans-unit id="I have written down or otherwise securely stored my passphrase">
         <source>I have written down or otherwise securely stored my passphrase</source>
         <target>ខ្ញុំបានសរសេរវារួចហើយឬបើមិនដូច្នោះទេទុកឃ្លាសម្ងាត់របស់ខ្ញុំដោយសុវត្ថិភាព។</target>
-      </trans-unit>
-      <trans-unit id="Open wallet">
-        <source>Open wallet</source>
-        <target>បើកកាបូប</target>
       </trans-unit>
       <trans-unit id="Checking passphrase">
         <source>Checking passphrase</source>
@@ -81,14 +73,6 @@
         <source>Review passphrase again</source>
         <target>ពិនិត្យឃ្លាសម្ងាត់ម្តងទៀត</target>
       </trans-unit>
-      <trans-unit id="Open a different wallet">
-        <source>Open a different wallet</source>
-        <target>បើកកាបូបមួយផ្សេងទៀត</target>
-      </trans-unit>
-      <trans-unit id="PIN must be a 4-digit number">
-        <source>PIN must be a 4-digit number</source>
-        <target>កូដ PIN ត្រូវតែជាលេខ 4 ខ្ទង់។</target>
-      </trans-unit>
       <trans-unit id="Verifying PIN">
         <source>Verifying PIN</source>
         <target>កំពុងផ្ទៀងផ្ទាត់កូដ PIN</target>
@@ -104,10 +88,6 @@
       <trans-unit id="please be patient.">
         <source>please be patient.</source>
         <target>សូម​មេត្តា​​អត់ធ្មត់។</target>
-      </trans-unit>
-      <trans-unit id="Your PIN is incorrect">
-        <source>Your PIN is incorrect</source>
-        <target>កូដ PIN របស់អ្នកមិនត្រឹមត្រូវ</target>
       </trans-unit>
       <trans-unit id="Request timeout. Please check your internet connection.">
         <source>Request timeout. Please check your internet connection.</source>
@@ -169,10 +149,6 @@
         <source>Without a name, the payer wouldn't be able to identify you on Mecto.</source>
         <target>បើគ្មានឈ្មោះទេ អ្នកបង់ប្រាក់នឹងមិនអាចកំណត់អត្តសញ្ញាណអ្នកនៅលើ Mecto ឡើយ។</target>
       </trans-unit>
-      <trans-unit id="Change your details">
-        <source>Change your details</source>
-        <target>ផ្លាស់ប្តូរព័ត៌មានលម្អិតរបស់អ្នក</target>
-      </trans-unit>
       <trans-unit id="Your username">
         <source>Your username</source>
         <target>ឈ្មោះអ្នកប្រើរបស់អ្នក</target>
@@ -180,10 +156,6 @@
       <trans-unit id="Gravatar email">
         <source>Gravatar email</source>
         <target>អ៊ីមែល Gravatar</target>
-      </trans-unit>
-      <trans-unit id="Submit">
-        <source>Submit</source>
-        <target>ដាក់ស្នើ</target>
       </trans-unit>
       <trans-unit id="Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.">
         <source>Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.</source>
@@ -427,10 +399,6 @@
         <source>Please enter a valid return address</source>
         <target>សូមបញ្ចូលអាសយដ្ឋានផ្ញើត្រឡប់ត្រឹមត្រូវ</target>
       </trans-unit>
-      <trans-unit id="Miner fee">
-        <source>Miner fee</source>
-        <target>ថ្លៃអ្នករុករករ៉ែ</target>
-      </trans-unit>
       <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
         <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
         <target>អាសយដ្ឋានផ្ញើត្រឡប់គួរតែជាអាសយដ្ឋានគ្រប់គ្រងដោយអ្នកដែលការដាក់ប្រាក់នឹងត្រូវបានប្រគល់ជូនក្នុងករណីដែលប្រតិបត្តិការបរាជ័យ។</target>
@@ -543,25 +511,9 @@
         <source>Add</source>
         <target>បន្ថែម</target>
       </trans-unit>
-      <trans-unit id="Symbol">
-        <source>Symbol</source>
-        <target>និមិត្តសញ្ញា</target>
-      </trans-unit>
-      <trans-unit id="Decimals">
-        <source>Decimals</source>
-        <target>ទសភាគ</target>
-      </trans-unit>
       <trans-unit id="Token">
         <source>Token</source>
         <target>កាស</target>
-      </trans-unit>
-      <trans-unit id="Custom token">
-        <source>Custom token</source>
-        <target>កាសតាមតម្រូវ</target>
-      </trans-unit>
-      <trans-unit id="Please fill out all fields.">
-        <source>Please fill out all fields.</source>
-        <target>សូមបំពេញវាលទាំងអស់</target>
       </trans-unit>
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
@@ -570,10 +522,6 @@
       <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
         <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
         <target>អ្នកមិនមានទឹកប្រាក់ Ethereum គ្រប់គ្រាន់ដើម្បីបង់ថ្លៃប្រតិបត្តិការទេ (%(ethereumRequired)s ETH) ។</target>
-      </trans-unit>
-      <trans-unit id="Click to Select">
-        <source>Click to Select</source>
-        <target>ចុចដើម្បីជ្រើស</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -843,42 +791,6 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Transaction too large</source>
         <target>ប្រតិបត្តិការច្រើនពេក</target>
       </trans-unit>
-      <trans-unit id="Email">
-        <source>Email</source>
-        <target>អ៊ីម៉ែល</target>
-      </trans-unit>
-      <trans-unit id="Please enter a valid email address">
-        <source>Please enter a valid email address</source>
-        <target>សូមបញ្ចូលអាសយដ្ឋានអ៊ីម៉ែលដែលមានសុពលភាព</target>
-      </trans-unit>
-      <trans-unit id="Verification code">
-        <source>Verification code</source>
-        <target>កូដផ្ទៀងផ្ទាត់</target>
-      </trans-unit>
-      <trans-unit id="We&apos;ve sent verification code to :destination.">
-        <source>We've sent verification code to %(destination)s.</source>
-        <target>យើងខ្ញុំបានផ្ញើលេខកូដផ្ទៀងផ្ទាត់ទៅ %(destination)s។</target>
-      </trans-unit>
-      <trans-unit id="Invalid verification code">
-        <source>Invalid verification code</source>
-        <target>កូដចូលប្រើមិនត្រឹមត្រូវ</target>
-      </trans-unit>
-      <trans-unit id="To increase your limits you need to pass verification.">
-        <source>To increase your limits you need to pass verification.</source>
-        <target>ដើម្បីបង្កើនការកំណត់លក្ខខណ្ឌរបស់អ្នក លោកអ្នកត្រូវការឆ្លងកាត់ការផ្ទៀងផ្ទាត់។</target>
-      </trans-unit>
-      <trans-unit id="Payment methods">
-        <source>Payment methods</source>
-        <target>វិធីសាស្រ្តទូទាត់ប្រាក់</target>
-      </trans-unit>
-      <trans-unit id="Verification">
-        <source>Verification</source>
-        <target>ការផ្ទៀងផ្ទាត់</target>
-      </trans-unit>
-      <trans-unit id="Default currency (:symbol)">
-        <source>Default currency (%(symbol)s)</source>
-        <target>រូបិយប័ណ្ណមិនបានបង់ (%(symbol)s)</target>
-      </trans-unit>
       <trans-unit id="Buy">
         <source>Buy</source>
         <target>ទិញ</target>
@@ -886,286 +798,6 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Sell">
         <source>Sell</source>
         <target>លក់</target>
-      </trans-unit>
-      <trans-unit id="No verification methods are currently available.">
-        <source>No verification methods are currently available.</source>
-        <target>បច្ចុប្បន្ននេះ មិនអាចមានវិធីសាស្ត្រផ្ទៀងផ្ទាត់ឡើយ។</target>
-      </trans-unit>
-      <trans-unit id="Identity">
-        <source>Identity</source>
-        <target>អត្តសញ្ណាណ</target>
-      </trans-unit>
-      <trans-unit id="Document">
-        <source>Document</source>
-        <target>ឯកសារ</target>
-      </trans-unit>
-      <trans-unit id="Phone number">
-        <source>Phone number</source>
-        <target>លេខទូរស័ព្ទ</target>
-      </trans-unit>
-      <trans-unit id="Face match">
-        <source>Face match</source>
-        <target>ការផ្គូផ្គងមុខ</target>
-      </trans-unit>
-      <trans-unit id="Identity verification">
-        <source>Identity verification</source>
-        <target>ការផ្ទៀងផ្ទាត់អត្តសញ្ញាណ</target>
-      </trans-unit>
-      <trans-unit id="Document verification">
-        <source>Document verification</source>
-        <target>ការផ្ទៀងផ្ទាត់ឯកសារ</target>
-      </trans-unit>
-      <trans-unit id="Phone number verification">
-        <source>Phone number verification</source>
-        <target>ការផ្ទៀងផ្ទាត់លេខទូរស័ព្ទ</target>
-      </trans-unit>
-      <trans-unit id="Face match verification">
-        <source>Face match verification</source>
-        <target>ការផ្ទៀងផ្ទាត់ផ្គូផ្គងមុខ</target>
-      </trans-unit>
-      <trans-unit id="Continue">
-        <source>Continue</source>
-        <target>បន្ត</target>
-      </trans-unit>
-      <trans-unit id="First name">
-        <source>First name</source>
-        <target>នាមខ្លួន</target>
-      </trans-unit>
-      <trans-unit id="Last name">
-        <source>Last name</source>
-        <target>នាមត្រកូល</target>
-      </trans-unit>
-      <trans-unit id="Date of birth">
-        <source>Date of birth</source>
-        <target>ថ្ងៃខែឆ្នាំកំណើត</target>
-      </trans-unit>
-      <trans-unit id="Country">
-        <source>Country</source>
-        <target>ប្រទេស</target>
-      </trans-unit>
-      <trans-unit id="Address 2 (optional)">
-        <source>Address 2 (optional)</source>
-        <target>អាសយដ្ឋាន 2 (ដែលមានជម្រើស)</target>
-      </trans-unit>
-      <trans-unit id="City">
-        <source>City</source>
-        <target>ទីក្រុង</target>
-      </trans-unit>
-      <trans-unit id="State">
-        <source>State</source>
-        <target>រដ្ឋ</target>
-      </trans-unit>
-      <trans-unit id="Post code">
-        <source>Post code</source>
-        <target>កូដប្រៃសណីយ៍</target>
-      </trans-unit>
-      <trans-unit id="Please enter a valid info">
-        <source>Please enter a valid info</source>
-        <target>សូមបញ្ចូលព័ត៌មានដែលត្រឹមត្រូវ</target>
-      </trans-unit>
-      <trans-unit id="Code is invalid or expired. Please try again.">
-        <source>Code is invalid or expired. Please try again.</source>
-        <target>លេខកូដមិនត្រឹមត្រូវ ឬផុតកំណត់។ សូមព្យាយាមម្តងទៀត។</target>
-      </trans-unit>
-      <trans-unit id="Selfie">
-        <source>Selfie</source>
-        <target>សែលហ្វី</target>
-      </trans-unit>
-      <trans-unit id="Select file...">
-        <source>Select file...</source>
-        <target>ជ្រើសរើសហ្វៃល៍...</target>
-      </trans-unit>
-      <trans-unit id="Upload failed. Please try again later.">
-        <source>Upload failed. Please try again later.</source>
-        <target>ការផ្ទុក មិនបានសម្រេច។ សូមព្យាយាមម្តងទៀតនៅពេលក្រោយ។</target>
-      </trans-unit>
-      <trans-unit id="Country of issuance">
-        <source>Country of issuance</source>
-        <target>ប្រទេសចេញឯកសារ</target>
-      </trans-unit>
-      <trans-unit id="Document type">
-        <source>Document type</source>
-        <target>ប្រភេទឯកសារ</target>
-      </trans-unit>
-      <trans-unit id="Passport">
-        <source>Passport</source>
-        <target>លិខិតឆ្លងដែន</target>
-      </trans-unit>
-      <trans-unit id="National identity card">
-        <source>National identity card</source>
-        <target>អត្តសញ្ញាណប័ណ្ណជាតិ </target>
-      </trans-unit>
-      <trans-unit id="Driving licence">
-        <source>Driving licence</source>
-        <target>ប័ណ្ណបើកបរយានយន្ត</target>
-      </trans-unit>
-      <trans-unit id="Front side">
-        <source>Front side</source>
-        <target>ផ្នែក​ខាងមុខ</target>
-      </trans-unit>
-      <trans-unit id="Back side">
-        <source>Back side</source>
-        <target>ផ្នែក​ខាងក្រោយ</target>
-      </trans-unit>
-      <trans-unit id="Add Credit Card">
-        <source>Add Credit Card</source>
-        <target>បន្ថែមប័ណ្ណឥណទាន</target>
-      </trans-unit>
-      <trans-unit id="Use billing address the same that I have.">
-        <source>Use billing address the same that I have.</source>
-        <target>ប្រើអាសយដ្ឋានវិក្កយបត្រដែលខ្ញុំមានដូចគ្នា។</target>
-      </trans-unit>
-      <trans-unit id="Card number">
-        <source>Card number</source>
-        <target>លេខ​ប័ណ្ណ</target>
-      </trans-unit>
-      <trans-unit id="Expiry date">
-        <source>Expiry date</source>
-        <target>កាលបរិច្ឆេទផុតកំណត់</target>
-      </trans-unit>
-      <trans-unit id="CVC">
-        <source>CVC</source>
-        <target>CVC</target>
-      </trans-unit>
-      <trans-unit id="Payment authorization declined">
-        <source>Payment authorization declined</source>
-        <target>ការផ្តល់សិទ្ធិអនុញ្ញាតបង់ប្រាក់ បានបដិសេធ</target>
-      </trans-unit>
-      <trans-unit id="Identity verification must be passed before saving card">
-        <source>Identity verification must be passed before saving card</source>
-        <target>ការផ្ទៀងផ្ទាត់អត្តសញ្ញាណត្រូវតែឆ្លងកាត់មុនពេលរក្សាទុកប័ណ្ណ</target>
-      </trans-unit>
-      <trans-unit id="Payment method">
-        <source>Payment method</source>
-        <target>វិធីសាស្រ្តទូទាត់ប្រាក់</target>
-      </trans-unit>
-      <trans-unit id="If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.">
-        <source>If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.</source>
-        <target>ប្រសិនបើអត្រាផ្លាស់ប្តូរលើសពី +/-&amp;nbsp;2.5%%  លោកអ្នកនឹងត្រូវបានគេស្នើសុំឱ្យបញ្ជាក់ប្រតិបត្តិការឡើងវិញតាមអ៊ីម៉ែល។</target>
-      </trans-unit>
-      <trans-unit id="Confirm purchase">
-        <source>Confirm purchase</source>
-        <target>បញ្ជាក់ការទិញ</target>
-      </trans-unit>
-      <trans-unit id="Purchase Successful">
-        <source>Purchase Successful</source>
-        <target>ការទិញដោយជោគជ័យ</target>
-      </trans-unit>
-      <trans-unit id="3D secure authentication requested.">
-        <source>3D secure authentication requested.</source>
-        <target>ការផ្ទៀងផ្ទាត់សុវត្ថិភាព 3D ដែលបានស្នើសុំ។</target>
-      </trans-unit>
-      <trans-unit id="3D secure authentication failed">
-        <source>3D secure authentication failed</source>
-        <target>ការផ្ទៀងផ្ទាត់សុវត្ថិភាព 3D ដែលមិនបានសម្រេច។</target>
-      </trans-unit>
-      <trans-unit id="Make sure that your card is valid and has sufficient available balance.">
-        <source>Make sure that your card is valid and has sufficient available balance.</source>
-        <target>ត្រូវប្រាកដថាប័ណ្ណរបស់អ្នកមានសុពលភាព និងមានសមតុល្យដែលអាចមានគ្រប់គ្រាន់។</target>
-      </trans-unit>
-      <trans-unit id="Please select a payment method">
-        <source>Please select a payment method</source>
-        <target>សូមជ្រើសរើសវិធីសាស្ត្រទូទាត់ប្រាក់</target>
-      </trans-unit>
-      <trans-unit id="Pending">
-        <source>Pending</source>
-        <target>នៅជំពាក់</target>
-      </trans-unit>
-      <trans-unit id="Waiting for authorization">
-        <source>Waiting for authorization</source>
-        <target>រង់ចាំការផ្តល់សិទ្ធិអនុញ្ញាត</target>
-      </trans-unit>
-      <trans-unit id="Failure reason">
-        <source>Failure reason</source>
-        <target>មូលហេតុនៃការខកខាន</target>
-      </trans-unit>
-      <trans-unit id="You have exceeded your daily limit. Please try again later.">
-        <source>You have exceeded your daily limit. Please try again later.</source>
-        <target>លោកអ្នកហួសកម្រិតកំណត់លក្ខខណ្ឌប្រចាំថ្ងៃរបស់អ្នក។ សូមព្យាយាមម្តងទៀតនៅពេលក្រោយ។</target>
-      </trans-unit>
-      <trans-unit id="You have exceeded your monthly limit. Please try again later.">
-        <source>You have exceeded your monthly limit. Please try again later.</source>
-        <target>លោកអ្នកហួសកម្រិតកំណត់លក្ខខណ្ឌប្រចាំខែរបស់អ្នក។ សូមព្យាយាមម្តងទៀតនៅពេលក្រោយ។</target>
-      </trans-unit>
-      <trans-unit id="Credit Cards">
-        <source>Credit Cards</source>
-        <target>ប័ណ្ណឥណទាន</target>
-      </trans-unit>
-      <trans-unit id="Bank Accounts">
-        <source>Bank Accounts</source>
-        <target>គណនីធនាគារ</target>
-      </trans-unit>
-      <trans-unit id="No credit cards.">
-        <source>No credit cards.</source>
-        <target>គ្មានប័ណ្ណឥណទាន</target>
-      </trans-unit>
-      <trans-unit id="No bank accounts.">
-        <source>No bank accounts.</source>
-        <target>គ្មានគណនីធនាគារ។</target>
-      </trans-unit>
-      <trans-unit id="Add Bank Account">
-        <source>Add Bank Account</source>
-        <target>បន្ថែមគណនីធនាគារ</target>
-      </trans-unit>
-      <trans-unit id="Currency">
-        <source>Currency</source>
-        <target>រូបិយប័ណ្ណ</target>
-      </trans-unit>
-      <trans-unit id="Account number">
-        <source>Account number</source>
-        <target>លេខ​គណនី</target>
-      </trans-unit>
-      <trans-unit id="Sort code">
-        <source>Sort code</source>
-        <target>លេខកូដធនាគារក្នុងស្រុក</target>
-      </trans-unit>
-      <trans-unit id="Unsupported bank">
-        <source>Unsupported bank</source>
-        <target>ធនាគារដែលមិនមានជំនួយគាំទ្រ</target>
-      </trans-unit>
-      <trans-unit id="Daily limits">
-        <source>Daily limits</source>
-        <target>ការកំណត់លក្ខខណ្ឌប្រចាំថ្ងៃ</target>
-      </trans-unit>
-      <trans-unit id="Monthly limits">
-        <source>Monthly limits</source>
-        <target>ការកំណត់លក្ខខណ្ឌប្រចាំខែ</target>
-      </trans-unit>
-      <trans-unit id="Credit Card:">
-        <source>Credit Card:</source>
-        <target>ប័ណ្ណឥណទាន៖</target>
-      </trans-unit>
-      <trans-unit id="Bank Account:">
-        <source>Bank Account:</source>
-        <target>គណនីធនាគារ៖</target>
-      </trans-unit>
-      <trans-unit id="Waiting for payment">
-        <source>Waiting for payment</source>
-        <target>រង់ចាំការទូទាត់ប្រាក់</target>
-      </trans-unit>
-      <trans-unit id="To complete the transaction, please submit a bank transfer with the following information">
-        <source>To complete the transaction, please submit a bank transfer with the following information</source>
-        <target>ដើម្បីបញ្ចប់ប្រតិបត្តិការ សូមបញ្ជូនការផ្ទេរប្រាក់តាមធនាគារដែលមានមានព័ត៌មានដូចខាងក្រោម</target>
-      </trans-unit>
-      <trans-unit id="Reference Number">
-        <source>Reference Number</source>
-        <target>លេខ​ឯកសារយោង</target>
-      </trans-unit>
-      <trans-unit id="Recipient Name">
-        <source>Recipient Name</source>
-        <target>ឈ្មោះអ្នកទទួល</target>
-      </trans-unit>
-      <trans-unit id="Bank Name">
-        <source>Bank Name</source>
-        <target>ឈ្មោះធនាគារ</target>
-      </trans-unit>
-      <trans-unit id="Bank Address">
-        <source>Bank Address</source>
-        <target>អាសយដ្ឋានធនាគារ</target>
-      </trans-unit>
-      <trans-unit id="Recipient Address">
-        <source>Recipient Address</source>
-        <target>អាសយដ្ឋានអ្នកទទួល</target>
       </trans-unit>
       <trans-unit id="P2PKH - Legacy">
         <source>P2PKH - Legacy</source>
@@ -1186,42 +818,6 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="more info">
         <source>more info</source>
         <target>ព័​ត៍​មាន​បន្ថែម</target>
-      </trans-unit>
-      <trans-unit id="Customer info update is disabled due to identity check status">
-        <source>Customer info update is disabled due to identity check status</source>
-        <target>ការធ្វើបច្ចុប្បន្នភាពព័ត៌មានអតិថិជន ត្រូវបានបិទដំណើរការដោយសារតែស្ថានភាពត្រួតពិនិត្យអត្តសញ្ញាណ</target>
-      </trans-unit>
-      <trans-unit id="Sorry, we don&apos;t accept disposable email addresses">
-        <source>Sorry, we don't accept disposable email addresses</source>
-        <target>សូមអភ័យទោស យើងខ្ញុំមិនទទួលយកអាសយដ្ឋានអ៊ីម៉ែលដែលអាចបោះចោលក្រោយពេលប្រើបានទេ</target>
-      </trans-unit>
-      <trans-unit id="Your post code is invalid, please try again">
-        <source>Your post code is invalid, please try again</source>
-        <target>លេខកូដប្រៃសណីយ៍របស់អ្នក មិនត្រឹមត្រូវទេ សូមព្យាយាមម្តងទៀត</target>
-      </trans-unit>
-      <trans-unit id="This card is already in use on a different account">
-        <source>This card is already in use on a different account</source>
-        <target>កាតនេះ ត្រូវបានប្រើរួចហើយនៅក្នុងគណនីផ្សេងគ្នា</target>
-      </trans-unit>
-      <trans-unit id="Sorry, we only accept Visa, Mastercard and Maestro cards at present">
-        <source>Sorry, we only accept Visa, Mastercard and Maestro cards at present</source>
-        <target>សូមអភ័យទោស បច្ចុប្បន្នយើងខ្ញុំទទួលយកតែកាតវីសា Visa, ម៉ាស្ទ័រកាត Mastercard និងកាតម៉ាយស្ត្រូ Maestro ប៉ុណ្ណោះ</target>
-      </trans-unit>
-      <trans-unit id="You must enter a mobile phone number valid for your country">
-        <source>You must enter a mobile phone number valid for your country</source>
-        <target>លោកអ្នកត្រូវតែបញ្ចូលលេខទូរស័ព្ទចល័តដែលមានសុពលភាពសម្រាប់ប្រទេសរបស់អ្នក</target>
-      </trans-unit>
-      <trans-unit id="The billing address of this card does not match the billing address that you entered, please try again">
-        <source>The billing address of this card does not match the billing address that you entered, please try again</source>
-        <target>អាសយដ្ឋានវិក្កយបត្រកាតនេះ មិនត្រូវគ្នានឹងអាសយដ្ឋានវិក្កយបត្រដែលលោកអ្នកបានបញ្ចូលទេ សូមព្យាយាមម្តងទៀត</target>
-      </trans-unit>
-      <trans-unit id="File upload is disabled due to identity check status">
-        <source>File upload is disabled due to identity check status</source>
-        <target>ការផ្ទុកឯកសារត្រូវបានបិទដំណើរការដោយសារស្ថានភាពត្រួតពិនិត្យអត្តសញ្ញាណ</target>
-      </trans-unit>
-      <trans-unit id="Your state is not supported at the moment, sorry for the inconvenience">
-        <source>Your state is not supported at the moment, sorry for the inconvenience</source>
-        <target>រដ្ឋរបស់អ្នកមិនដំណើរការបានទេនៅពេលនេះ សូមអភ័យទោសចំពោះការរអាក់រអួលនេះ</target>
       </trans-unit>
       <trans-unit id="Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.">
         <source>Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.</source>
@@ -1453,6 +1049,10 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.">
         <source>In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Transaction fee is too low. Please reload your wallet.">
+        <source>Transaction fee is too low. Please reload your wallet.</source>
         <target></target>
       </trans-unit>
     </body>

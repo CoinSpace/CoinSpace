@@ -53,15 +53,20 @@ function open(data) {
   });
 
   function handleTransactionError(err) {
+    let message;
     if (err.message === 'cs-node-error') {
-      err.message = translate('Network node error. Please try again later.', { network: 'Monero' });
+      message = translate('Network node error. Please try again later.', { network: 'Monero' });
+    } else if (/^Transaction fee is too low/.test(err.message)) {
+      message = translate('Transaction fee is too low. Please reload your wallet.');
     } else {
-      console.error(err);
+      console.error('not translated error:', err);
+      // eslint-disable-next-line prefer-destructuring
+      message = err.message;
     }
     showError({
       el: ractive.el,
       title: translate('Transaction Failed'),
-      message: err.message,
+      message,
       fadeInDuration: 0,
     });
   }

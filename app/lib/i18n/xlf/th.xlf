@@ -25,10 +25,6 @@
         <source>Generate passphrase</source>
         <target>สร้างวลีรหัสผ่าน</target>
       </trans-unit>
-      <trans-unit id="Go back">
-        <source>Go back</source>
-        <target>กลับ</target>
-      </trans-unit>
       <trans-unit id="Generating">
         <source>Generating</source>
         <target>กำลังสร้าง</target>
@@ -52,10 +48,6 @@
       <trans-unit id="I have written down or otherwise securely stored my passphrase">
         <source>I have written down or otherwise securely stored my passphrase</source>
         <target>ฉันจดหรือเก็บวลีรหัสผ่านของฉันไว้แล้ว</target>
-      </trans-unit>
-      <trans-unit id="Open wallet">
-        <source>Open wallet</source>
-        <target>เปิดใช้งานกระเป๋าเงิน</target>
       </trans-unit>
       <trans-unit id="Checking passphrase">
         <source>Checking passphrase</source>
@@ -81,14 +73,6 @@
         <source>Review passphrase again</source>
         <target>ตรวจสอบวลีรหัสผ่านอีกครั้ง</target>
       </trans-unit>
-      <trans-unit id="Open a different wallet">
-        <source>Open a different wallet</source>
-        <target>เปิดใช้งานกระเป๋าเงินอื่น</target>
-      </trans-unit>
-      <trans-unit id="PIN must be a 4-digit number">
-        <source>PIN must be a 4-digit number</source>
-        <target>PIN ต้องเป็นตัวเลข 4 ตัวเท่านั้น</target>
-      </trans-unit>
       <trans-unit id="Verifying PIN">
         <source>Verifying PIN</source>
         <target>ตรวจสอบ PIN</target>
@@ -104,10 +88,6 @@
       <trans-unit id="please be patient.">
         <source>please be patient.</source>
         <target>กรุณารอสักครู่</target>
-      </trans-unit>
-      <trans-unit id="Your PIN is incorrect">
-        <source>Your PIN is incorrect</source>
-        <target>PIN ของคุณไม่ถูกต้อง</target>
       </trans-unit>
       <trans-unit id="Request timeout. Please check your internet connection.">
         <source>Request timeout. Please check your internet connection.</source>
@@ -169,10 +149,6 @@
         <source>Without a name, the payer wouldn't be able to identify you on Mecto.</source>
         <target>หากไม่กรอกชื่อ ผู้จ่ายเงินจะไม่สามารถระบุตัวตนของคุณบน Mecto ได้</target>
       </trans-unit>
-      <trans-unit id="Change your details">
-        <source>Change your details</source>
-        <target>เปลี่ยนรายละเอียด</target>
-      </trans-unit>
       <trans-unit id="Your username">
         <source>Your username</source>
         <target>ชื่อผู้ใช้ของคุณ</target>
@@ -180,10 +156,6 @@
       <trans-unit id="Gravatar email">
         <source>Gravatar email</source>
         <target>อีเมลล์ Gravatar</target>
-      </trans-unit>
-      <trans-unit id="Submit">
-        <source>Submit</source>
-        <target>ยอมรับ</target>
       </trans-unit>
       <trans-unit id="Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.">
         <source>Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.</source>
@@ -427,10 +399,6 @@
         <source>Please enter a valid return address</source>
         <target>โปรดป้อนที่อยู่สำหรับส่งคืนที่ถูกต้อง</target>
       </trans-unit>
-      <trans-unit id="Miner fee">
-        <source>Miner fee</source>
-        <target>ค่าธรรมเนียมการขุด</target>
-      </trans-unit>
       <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
         <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
         <target>ที่อยู่สำหรับส่งคืนควรจะเป็นที่อยู่ที่คุณเป็นผู้ควบคุม โดยมีไว้สำหรับส่งคืนเงินฝากในกรณีที่ธุรกรรมล้มเหลว</target>
@@ -543,25 +511,9 @@
         <source>Add</source>
         <target>เพิ่ม</target>
       </trans-unit>
-      <trans-unit id="Symbol">
-        <source>Symbol</source>
-        <target>สัญลักษณ์</target>
-      </trans-unit>
-      <trans-unit id="Decimals">
-        <source>Decimals</source>
-        <target>ทศนิยม</target>
-      </trans-unit>
       <trans-unit id="Token">
         <source>Token</source>
         <target>โทเค็น</target>
-      </trans-unit>
-      <trans-unit id="Custom token">
-        <source>Custom token</source>
-        <target>โทเค็นแบบกำหนดเอง</target>
-      </trans-unit>
-      <trans-unit id="Please fill out all fields.">
-        <source>Please fill out all fields.</source>
-        <target>โปรดกรอกข้อมูลให้ครบทุกช่อง</target>
       </trans-unit>
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
@@ -570,10 +522,6 @@
       <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
         <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
         <target>คุณไม่มีเงิน Ethereum เพียงพอที่จะชำระค่าธรรมเนียมธุรกรรม (%(ethereumRequired)s ETH)</target>
-      </trans-unit>
-      <trans-unit id="Click to Select">
-        <source>Click to Select</source>
-        <target>คลิกเพื่อเลือก</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -843,42 +791,6 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Transaction too large</source>
         <target>ธุรกรรมมีขนาดใหญ่เกินไป</target>
       </trans-unit>
-      <trans-unit id="Email">
-        <source>Email</source>
-        <target>อีเมล</target>
-      </trans-unit>
-      <trans-unit id="Please enter a valid email address">
-        <source>Please enter a valid email address</source>
-        <target>โปรดป้อนที่อยู่อีเมลที่ถูกต้อง</target>
-      </trans-unit>
-      <trans-unit id="Verification code">
-        <source>Verification code</source>
-        <target>รหัสตรวจสอบยืนยัน</target>
-      </trans-unit>
-      <trans-unit id="We&apos;ve sent verification code to :destination.">
-        <source>We've sent verification code to %(destination)s.</source>
-        <target>เราส่งรหัสตรวจสอบยืนยันไปที่ %(destination)s.</target>
-      </trans-unit>
-      <trans-unit id="Invalid verification code">
-        <source>Invalid verification code</source>
-        <target>รหัสการตรวจสอบยืนยันไม่ถูกต้อง</target>
-      </trans-unit>
-      <trans-unit id="To increase your limits you need to pass verification.">
-        <source>To increase your limits you need to pass verification.</source>
-        <target>คุณต้องผ่านการตรวจสอบยืนยันก่อนจะเพิ่มขีดจำกัดของคุณ</target>
-      </trans-unit>
-      <trans-unit id="Payment methods">
-        <source>Payment methods</source>
-        <target>วิธีการชำระเงิน</target>
-      </trans-unit>
-      <trans-unit id="Verification">
-        <source>Verification</source>
-        <target>การตรวจสอบยืนยัน</target>
-      </trans-unit>
-      <trans-unit id="Default currency (:symbol)">
-        <source>Default currency (%(symbol)s)</source>
-        <target>สกุลเงินเริ่มต้น (%(symbol)s)</target>
-      </trans-unit>
       <trans-unit id="Buy">
         <source>Buy</source>
         <target>ซื้อ</target>
@@ -886,286 +798,6 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Sell">
         <source>Sell</source>
         <target>ขาย</target>
-      </trans-unit>
-      <trans-unit id="No verification methods are currently available.">
-        <source>No verification methods are currently available.</source>
-        <target>ไม่มีวิธีการตรวจสอบยืนยันที่พร้อมใช้งาน</target>
-      </trans-unit>
-      <trans-unit id="Identity">
-        <source>Identity</source>
-        <target>บัตรประจำตัว</target>
-      </trans-unit>
-      <trans-unit id="Document">
-        <source>Document</source>
-        <target>เอกสาร</target>
-      </trans-unit>
-      <trans-unit id="Phone number">
-        <source>Phone number</source>
-        <target>หมายเลขโทรศัพท์</target>
-      </trans-unit>
-      <trans-unit id="Face match">
-        <source>Face match</source>
-        <target>การตรวจสอบใบหน้าที่ตรงกัน</target>
-      </trans-unit>
-      <trans-unit id="Identity verification">
-        <source>Identity verification</source>
-        <target>การตรวจสอบยืนยันตัวตน</target>
-      </trans-unit>
-      <trans-unit id="Document verification">
-        <source>Document verification</source>
-        <target>การตรวจสอบยืนยันเอกสาร</target>
-      </trans-unit>
-      <trans-unit id="Phone number verification">
-        <source>Phone number verification</source>
-        <target>การตรวจสอบยืนยันหมายเลขโทรศัพท์</target>
-      </trans-unit>
-      <trans-unit id="Face match verification">
-        <source>Face match verification</source>
-        <target>การตรวจสอบยืนยันใบหน้าที่ตรงกัน</target>
-      </trans-unit>
-      <trans-unit id="Continue">
-        <source>Continue</source>
-        <target>ดำเนินการต่อ</target>
-      </trans-unit>
-      <trans-unit id="First name">
-        <source>First name</source>
-        <target>ชื่อ</target>
-      </trans-unit>
-      <trans-unit id="Last name">
-        <source>Last name</source>
-        <target>นามสกุล</target>
-      </trans-unit>
-      <trans-unit id="Date of birth">
-        <source>Date of birth</source>
-        <target>วันเกิด</target>
-      </trans-unit>
-      <trans-unit id="Country">
-        <source>Country</source>
-        <target>ประเทศ</target>
-      </trans-unit>
-      <trans-unit id="Address 2 (optional)">
-        <source>Address 2 (optional)</source>
-        <target>ที่อยู่ 2 (ไม่จำเป็น)</target>
-      </trans-unit>
-      <trans-unit id="City">
-        <source>City</source>
-        <target>เมือง</target>
-      </trans-unit>
-      <trans-unit id="State">
-        <source>State</source>
-        <target>รัฐ</target>
-      </trans-unit>
-      <trans-unit id="Post code">
-        <source>Post code</source>
-        <target>รหัสไปรษณีย์</target>
-      </trans-unit>
-      <trans-unit id="Please enter a valid info">
-        <source>Please enter a valid info</source>
-        <target>โปรดป้อนข้อมูลที่ถูกต้อง</target>
-      </trans-unit>
-      <trans-unit id="Code is invalid or expired. Please try again.">
-        <source>Code is invalid or expired. Please try again.</source>
-        <target>รหัสไม่ถูกต้องหรือหมดอายุแล้ว โปรดลองอีกครั้ง</target>
-      </trans-unit>
-      <trans-unit id="Selfie">
-        <source>Selfie</source>
-        <target>ภาพถ่ายเซลฟี่</target>
-      </trans-unit>
-      <trans-unit id="Select file...">
-        <source>Select file...</source>
-        <target>เลือกไฟล์...</target>
-      </trans-unit>
-      <trans-unit id="Upload failed. Please try again later.">
-        <source>Upload failed. Please try again later.</source>
-        <target>การอัปโหลดผิดพลาด โปรดลองอีกครั้งในภายหลัง</target>
-      </trans-unit>
-      <trans-unit id="Country of issuance">
-        <source>Country of issuance</source>
-        <target>ประเทศที่ออกเอกสาร</target>
-      </trans-unit>
-      <trans-unit id="Document type">
-        <source>Document type</source>
-        <target>ประเภทเอกสาร</target>
-      </trans-unit>
-      <trans-unit id="Passport">
-        <source>Passport</source>
-        <target>หนังสือเดินทาง</target>
-      </trans-unit>
-      <trans-unit id="National identity card">
-        <source>National identity card</source>
-        <target>ไม่มีบัตรประชาชน</target>
-      </trans-unit>
-      <trans-unit id="Driving licence">
-        <source>Driving licence</source>
-        <target>ใบขับขี่</target>
-      </trans-unit>
-      <trans-unit id="Front side">
-        <source>Front side</source>
-        <target>ด้านหน้า</target>
-      </trans-unit>
-      <trans-unit id="Back side">
-        <source>Back side</source>
-        <target>ด้านหลัง</target>
-      </trans-unit>
-      <trans-unit id="Add Credit Card">
-        <source>Add Credit Card</source>
-        <target>เพิ่มบัตรเครดิต</target>
-      </trans-unit>
-      <trans-unit id="Use billing address the same that I have.">
-        <source>Use billing address the same that I have.</source>
-        <target>ใช้ที่อยู่เรียกเก็บเิงนเดียวกับที่อยู่ที่ฉันมี</target>
-      </trans-unit>
-      <trans-unit id="Card number">
-        <source>Card number</source>
-        <target>หมายเลขบัตร</target>
-      </trans-unit>
-      <trans-unit id="Expiry date">
-        <source>Expiry date</source>
-        <target>วันหมดอายุ</target>
-      </trans-unit>
-      <trans-unit id="CVC">
-        <source>CVC</source>
-        <target>รหัสยืนยัน (CVC)</target>
-      </trans-unit>
-      <trans-unit id="Payment authorization declined">
-        <source>Payment authorization declined</source>
-        <target>การขออนุมัติการชำระเงินถูกปฏิเสธ</target>
-      </trans-unit>
-      <trans-unit id="Identity verification must be passed before saving card">
-        <source>Identity verification must be passed before saving card</source>
-        <target>ต้องผ่านการตรวจสอบยืนยันตัวตนก่อนจะบันทึกบัตร</target>
-      </trans-unit>
-      <trans-unit id="Payment method">
-        <source>Payment method</source>
-        <target>วิธีการชำระเงิน</target>
-      </trans-unit>
-      <trans-unit id="If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.">
-        <source>If the rate changes by more than +/-&amp;nbsp;2.5%% you will be asked to reconfirm the transaction via email.</source>
-        <target>หากอัตรามีการเปลี่ยนแปลงมากกว่า +/-&amp;nbsp;2.5%% คุณจะถูกขอให้ยืนยันธุรกรรมซ้ำอีกครั้งผ่านทางอีเมล</target>
-      </trans-unit>
-      <trans-unit id="Confirm purchase">
-        <source>Confirm purchase</source>
-        <target>ยืนยันการซื้อ</target>
-      </trans-unit>
-      <trans-unit id="Purchase Successful">
-        <source>Purchase Successful</source>
-        <target>การซื้อสำเร็จ</target>
-      </trans-unit>
-      <trans-unit id="3D secure authentication requested.">
-        <source>3D secure authentication requested.</source>
-        <target>ร้องขอการตรวจสอบยืนยัน 3D Secure</target>
-      </trans-unit>
-      <trans-unit id="3D secure authentication failed">
-        <source>3D secure authentication failed</source>
-        <target>การตรวจสอบยืนยัน 3D Secure ล้มเหลว</target>
-      </trans-unit>
-      <trans-unit id="Make sure that your card is valid and has sufficient available balance.">
-        <source>Make sure that your card is valid and has sufficient available balance.</source>
-        <target>ตรวจสอบให้แน่ใจว่าบัตรของคุณใช้งานได้และมีวงเงินเพียงพอ</target>
-      </trans-unit>
-      <trans-unit id="Please select a payment method">
-        <source>Please select a payment method</source>
-        <target>โปรดเลือกวิธีการชำระเงิน</target>
-      </trans-unit>
-      <trans-unit id="Pending">
-        <source>Pending</source>
-        <target>รอดำเนินการ</target>
-      </trans-unit>
-      <trans-unit id="Waiting for authorization">
-        <source>Waiting for authorization</source>
-        <target>กำลังรอการอนุมัติ</target>
-      </trans-unit>
-      <trans-unit id="Failure reason">
-        <source>Failure reason</source>
-        <target>เหตุผลของความล้มเหลว</target>
-      </trans-unit>
-      <trans-unit id="You have exceeded your daily limit. Please try again later.">
-        <source>You have exceeded your daily limit. Please try again later.</source>
-        <target>คุณใช้งานเกินขีดจำกัดต่อวันของคุณ โปรดลองอีกครั้งในภายหลัง</target>
-      </trans-unit>
-      <trans-unit id="You have exceeded your monthly limit. Please try again later.">
-        <source>You have exceeded your monthly limit. Please try again later.</source>
-        <target>คุณใช้งานเกินขีดจำกัดรายเดือนของคุณ โปรดลองอีกครั้งในภายหลัง</target>
-      </trans-unit>
-      <trans-unit id="Credit Cards">
-        <source>Credit Cards</source>
-        <target>บัตรเครดิต</target>
-      </trans-unit>
-      <trans-unit id="Bank Accounts">
-        <source>Bank Accounts</source>
-        <target>บัญชีธนาคาร</target>
-      </trans-unit>
-      <trans-unit id="No credit cards.">
-        <source>No credit cards.</source>
-        <target>ไม่มีบัตรเครดิต</target>
-      </trans-unit>
-      <trans-unit id="No bank accounts.">
-        <source>No bank accounts.</source>
-        <target>ไม่มีบัญชีธนาคาร</target>
-      </trans-unit>
-      <trans-unit id="Add Bank Account">
-        <source>Add Bank Account</source>
-        <target>เพิ่มบัญชีธนาคาร</target>
-      </trans-unit>
-      <trans-unit id="Currency">
-        <source>Currency</source>
-        <target>สกุลเงิน</target>
-      </trans-unit>
-      <trans-unit id="Account number">
-        <source>Account number</source>
-        <target>หมายเลขบัญชี</target>
-      </trans-unit>
-      <trans-unit id="Sort code">
-        <source>Sort code</source>
-        <target>รหัสการจัดเรียง</target>
-      </trans-unit>
-      <trans-unit id="Unsupported bank">
-        <source>Unsupported bank</source>
-        <target>ธนาคารที่ไม่รองรับ</target>
-      </trans-unit>
-      <trans-unit id="Daily limits">
-        <source>Daily limits</source>
-        <target>ขีดจำกัดรายวันสูงสุด</target>
-      </trans-unit>
-      <trans-unit id="Monthly limits">
-        <source>Monthly limits</source>
-        <target>ขีดจำกัดรายเดือน</target>
-      </trans-unit>
-      <trans-unit id="Credit Card:">
-        <source>Credit Card:</source>
-        <target>บัตรเครดิต:</target>
-      </trans-unit>
-      <trans-unit id="Bank Account:">
-        <source>Bank Account:</source>
-        <target>บัญชีธนาคาร:</target>
-      </trans-unit>
-      <trans-unit id="Waiting for payment">
-        <source>Waiting for payment</source>
-        <target>กำลังรอการชำระเงิน</target>
-      </trans-unit>
-      <trans-unit id="To complete the transaction, please submit a bank transfer with the following information">
-        <source>To complete the transaction, please submit a bank transfer with the following information</source>
-        <target>เพื่อดำเนินธุรกรรมให้เสร็จสิ้น โปรดส่งการโอนเงินผ่านธนาคารพร้อมข้อมูลดังต่อไปนี้</target>
-      </trans-unit>
-      <trans-unit id="Reference Number">
-        <source>Reference Number</source>
-        <target>หมายเลขอ้างอิง</target>
-      </trans-unit>
-      <trans-unit id="Recipient Name">
-        <source>Recipient Name</source>
-        <target>ชื่อผู้รับ</target>
-      </trans-unit>
-      <trans-unit id="Bank Name">
-        <source>Bank Name</source>
-        <target>ชื่อธนาคาร:</target>
-      </trans-unit>
-      <trans-unit id="Bank Address">
-        <source>Bank Address</source>
-        <target>ที่อยู่ธนาคาร</target>
-      </trans-unit>
-      <trans-unit id="Recipient Address">
-        <source>Recipient Address</source>
-        <target>ที่อยู่ผู้รับ</target>
       </trans-unit>
       <trans-unit id="P2PKH - Legacy">
         <source>P2PKH - Legacy</source>
@@ -1186,42 +818,6 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="more info">
         <source>more info</source>
         <target>ข้อมูลเพิ่มเติม</target>
-      </trans-unit>
-      <trans-unit id="Customer info update is disabled due to identity check status">
-        <source>Customer info update is disabled due to identity check status</source>
-        <target>การอัปเดตข้อมูลลูกค้าถูกปิดใช้งานเนื่องจากสถานะการตรวจสอบบัตรประจำตัว</target>
-      </trans-unit>
-      <trans-unit id="Sorry, we don&apos;t accept disposable email addresses">
-        <source>Sorry, we don't accept disposable email addresses</source>
-        <target>ขออภัย เราไม่ยอมรับที่อยู่อีเมลแบบใช้ครั้งเดียว</target>
-      </trans-unit>
-      <trans-unit id="Your post code is invalid, please try again">
-        <source>Your post code is invalid, please try again</source>
-        <target>รหัสไปรษณีย์ของคุณไม่ถูกต้อง โปรดลองอีกครั้ง</target>
-      </trans-unit>
-      <trans-unit id="This card is already in use on a different account">
-        <source>This card is already in use on a different account</source>
-        <target>บัตรนี้ถูกใช้ในบัญชีอื่นแล้ว</target>
-      </trans-unit>
-      <trans-unit id="Sorry, we only accept Visa, Mastercard and Maestro cards at present">
-        <source>Sorry, we only accept Visa, Mastercard and Maestro cards at present</source>
-        <target>ขออภัย ขณะนี้เรายอมรับเฉพาะบัตร Visa, Mastercard และ Maestro เท่านั้น</target>
-      </trans-unit>
-      <trans-unit id="You must enter a mobile phone number valid for your country">
-        <source>You must enter a mobile phone number valid for your country</source>
-        <target>คุณจะต้องป้อนหมายเลขโทรศัพท์มือถือที่ถูกต้องสำหรับประเทศของคุณ</target>
-      </trans-unit>
-      <trans-unit id="The billing address of this card does not match the billing address that you entered, please try again">
-        <source>The billing address of this card does not match the billing address that you entered, please try again</source>
-        <target>ที่อยู่เรียกเก็บเงินของบัตรนี้ไม่ตรงกับที่อยู่เรียกเก็บเงินที่คุณป้อน กรุณาลองอีกครั้ง</target>
-      </trans-unit>
-      <trans-unit id="File upload is disabled due to identity check status">
-        <source>File upload is disabled due to identity check status</source>
-        <target>การอัปโหลดไฟล์ถูกปิดใช้งานเนื่องจากสถานะการตรวจสอบบัตรประจำตัว</target>
-      </trans-unit>
-      <trans-unit id="Your state is not supported at the moment, sorry for the inconvenience">
-        <source>Your state is not supported at the moment, sorry for the inconvenience</source>
-        <target>ยังไม่รองรับรัฐของคุณในขณะนี้ ขออภัยในความไม่สะดวก</target>
       </trans-unit>
       <trans-unit id="Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.">
         <source>Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.</source>
@@ -1453,6 +1049,10 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.">
         <source>In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Transaction fee is too low. Please reload your wallet.">
+        <source>Transaction fee is too low. Please reload your wallet.</source>
         <target></target>
       </trans-unit>
     </body>
