@@ -55,6 +55,9 @@ export default function(el) {
         }
       },
     });
+    emitter.once('wallet-loading', () => {
+      ractive.pinWidget.loadingWallet();
+    });
   });
 
   ractive.on('back', () => {

@@ -34,6 +34,9 @@ export default function(el) {
             }
           },
         });
+        emitter.once('wallet-loading', () => {
+          ractive.pinWidget.loadingWallet();
+        });
         ractive.pinWidget.on('back', () => {
           ractive.passphraseWidget.set('isLoading', false);
         });
@@ -66,6 +69,10 @@ export default function(el) {
           emitter.emit('auth-error', err);
         }
       },
+    });
+
+    emitter.once('wallet-loading', () => {
+      ractive.pinWidget.loadingWallet();
     });
 
     ractive.pinWidget.on('back', () => {

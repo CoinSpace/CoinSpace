@@ -1,7 +1,6 @@
 import Ractive from 'lib/ractive';
 import { translate } from 'lib/i18n';
 import { isEnabled } from 'lib/touch-id';
-import emitter from 'lib/emitter';
 import template from './index.ract';
 const isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(window.navigator.userAgent);
 
@@ -110,11 +109,11 @@ function open(options) {
     ractive.set('pin', '');
   };
 
-  emitter.once('wallet-loading', () => {
+  ractive.loadingWallet = () => {
     ractive.set('isLoading', true);
     ractive.set('header', translate('Synchronizing Wallet'));
     ractive.set('description', translate('This might take some time,') + '<br/>' + translate('please be patient.'));
-  });
+  };
 
   ractive.close = () => {
     ractive.set('isOpen', false);
