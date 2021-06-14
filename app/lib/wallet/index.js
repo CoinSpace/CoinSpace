@@ -60,8 +60,7 @@ function createWallet(passphrase) {
   });
 }
 
-async function registerWallet(pin, widget) {
-  widget && widget.loadingWallet();
+async function registerWallet(pin) {
   const pinKey = crypto.randomBytes(32).toString('hex');
   const walletSeed = seeds.get('private');
   const wallet = ec.keyFromSecret(walletSeed);
@@ -92,7 +91,7 @@ async function registerWallet(pin, widget) {
   await initWallet(walletSeed);
 }
 
-async function loginWithPin(pin, widget) {
+async function loginWithPin(pin) {
   if (LS.isRegisteredLegacy()) {
     return migrateLegacyWallet(pin);
   }
@@ -105,7 +104,6 @@ async function loginWithPin(pin, widget) {
     },
     id: true,
   });
-  widget && widget.loadingWallet();
   seeds.unlock('public', publicToken);
   await Promise.all([details.init(), settings.init()]);
   emitter.emit('auth-success');
@@ -120,10 +118,9 @@ async function loginWithTouchId(widget) {
     if (LS.isRegisteredLegacy()) {
       return migrateLegacyWallet(pin);
     }
-    return loginWithPin(pin, widget);
+    return loginWithPin(pin);
   } else {
     const publicToken = await touchId.publicToken(widget);
-    widget && widget.loadingWallet();
     seeds.unlock('public', publicToken);
     await Promise.all([details.init(), settings.init()]);
     emitter.emit('auth-success');

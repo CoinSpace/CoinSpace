@@ -48,7 +48,7 @@ export default function(el) {
       headerLoading: translate('Setting PIN'),
       async onPin(pin) {
         try {
-          await CS.registerWallet(pin, this);
+          await CS.registerWallet(pin);
         } catch (err) {
           this.wrong();
           emitter.emit('auth-error', err);

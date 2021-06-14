@@ -27,7 +27,7 @@ export default function(el) {
           append: true,
           async onPin(pin) {
             try {
-              await CS.registerWallet(pin, this);
+              await CS.registerWallet(pin);
             } catch (err) {
               this.wrong();
               emitter.emit('auth-error', err);
@@ -49,7 +49,7 @@ export default function(el) {
       touchId: true,
       async onPin(pin) {
         try {
-          await CS.loginWithPin(pin, this);
+          await CS.loginWithPin(pin);
         } catch (err) {
           this.wrong();
           emitter.emit('auth-error', err);

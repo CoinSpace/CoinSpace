@@ -109,12 +109,6 @@ function open(options) {
     ractive.set('pin', '');
   };
 
-  ractive.loadingWallet = () => {
-    ractive.set('isLoading', true);
-    ractive.set('header', translate('Synchronizing Wallet'));
-    ractive.set('description', translate('This might take some time,') + '<br/>' + translate('please be patient.'));
-  };
-
   ractive.loading = () => {
     ractive.set('isLoading', true);
   };

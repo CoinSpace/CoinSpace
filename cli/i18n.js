@@ -133,6 +133,7 @@ function extract() {
     }
   }
   fse.writeFileSync(path.resolve('./app/lib/i18n/translations/en.json'), JSON.stringify(en, null, 2) + '\n', 'utf8');
+  console.log('Done!');
 }
 
 run(program);
