@@ -50,16 +50,28 @@ function open(data) {
   });
 
   function handleTransactionError(err) {
+    let message;
     if (err.message === 'cs-node-error') {
-      err.message = translate('Network node error. Please try again later.', { network: 'EOS' });
+      message = translate('Network node error. Please try again later.', { network: 'EOS' });
+    } else if (/^Account does not exist/.test(err.message)) {
+      message = translate("Destination account doesn't exist.");
+    } else if (/^Expired transaction/.test(err.message)) {
+      message = translate('Transaction has been expired. Please try again.');
+    } else if (/^CPU usage exceeded/.test(err.message)) {
+      // eslint-disable-next-line max-len
+      message = translate('Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.');
+    } else if (/^NET usage exceeded/.test(err.message)) {
+      // eslint-disable-next-line max-len
+      message = translate('Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.');
     } else {
-      console.error(err);
+      console.error('not translated error:', err);
+      // eslint-disable-next-line prefer-destructuring
+      message = err.message;
     }
     showError({
       el: ractive.el,
       title: translate('Transaction Failed'),
-      // TODO should we translate unknown error?
-      message: err.message,
+      message,
       fadeInDuration: 0,
     });
   }
