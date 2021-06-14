@@ -115,6 +115,10 @@ function open(options) {
     ractive.set('description', translate('This might take some time,') + '<br/>' + translate('please be patient.'));
   };
 
+  ractive.loading = () => {
+    ractive.set('isLoading', true);
+  };
+
   ractive.close = () => {
     ractive.set('isOpen', false);
     if (process.env.BUILD_PLATFORM === 'ios') {

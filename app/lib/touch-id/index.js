@@ -87,7 +87,7 @@ function phonegap() {
   });
 }
 
-async function publicToken(afterAssertion) {
+async function publicToken(widget) {
   const options = await request({
     url: `${process.env.SITE_URL}api/v2/token/public/platform`,
     method: 'get',
@@ -100,7 +100,7 @@ async function publicToken(afterAssertion) {
     console.error(err);
     throw new Error('touch_id_error');
   }
-  if (afterAssertion) afterAssertion();
+  widget && widget.loading();
   const res = await request({
     url: `${process.env.SITE_URL}api/v2/token/public/platform`,
     method: 'post',

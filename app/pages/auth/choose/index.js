@@ -27,15 +27,12 @@ export default function(el) {
           append: true,
           async onPin(pin) {
             try {
-              await CS.registerWallet(pin);
+              await CS.registerWallet(pin, ractive.pinWidget);
             } catch (err) {
               ractive.pinWidget.wrong();
               emitter.emit('auth-error', err);
             }
           },
-        });
-        emitter.once('wallet-loading', () => {
-          ractive.pinWidget.loadingWallet();
         });
         ractive.pinWidget.on('back', () => {
           ractive.passphraseWidget.set('isLoading', false);
@@ -52,7 +49,7 @@ export default function(el) {
       touchId: true,
       async onPin(pin) {
         try {
-          await CS.loginWithPin(pin);
+          await CS.loginWithPin(pin, ractive.pinWidget);
         } catch (err) {
           ractive.pinWidget.wrong();
           emitter.emit('auth-error', err);
@@ -60,9 +57,7 @@ export default function(el) {
       },
       async onTouchId() {
         try {
-          await CS.loginWithTouchId(() => {
-            ractive.pinWidget.set('isLoading', true);
-          });
+          await CS.loginWithTouchId(ractive.pinWidget);
         } catch (err) {
           if (err.message === 'touch_id_error') return;
           ractive.pinWidget.wrong();
@@ -70,11 +65,6 @@ export default function(el) {
         }
       },
     });
-
-    emitter.once('wallet-loading', () => {
-      ractive.pinWidget.loadingWallet();
-    });
-
     ractive.pinWidget.on('back', () => {
       LS.reset();
       emitter.emit('change-auth-step', 'choose');
