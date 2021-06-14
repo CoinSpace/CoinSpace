@@ -79,26 +79,28 @@ function open(data) {
   }
 
   function handleTransactionError(err) {
+    let message;
     if (err.message === 'tecNO_DST_INSUF_XRP') {
       // eslint-disable-next-line max-len
-      err.message = translate("Recipient's wallet isn't activated. You can send only amount greater than :minReserve :denomination.", {
+      message = translate("Recipient's wallet isn't activated. You can send only amount greater than :minReserve :denomination.", {
         minReserve: toUnitString(wallet.minReserve),
         denomination: wallet.denomination,
       });
     } else if (err.message === 'tecDST_TAG_NEEDED') {
-      err.message = translate("Recipient's wallet requires a destination tag.");
+      message = translate("Recipient's wallet requires a destination tag.");
     } else if (err.message === 'cs-node-error') {
-      err.message = translate('Network node error. Please try again later.', {
+      message = translate('Network node error. Please try again later.', {
         network: 'Ripple',
       });
     } else {
-      console.error(err);
+      console.error('not translated error:', err);
+      // eslint-disable-next-line prefer-destructuring
+      message = err.message;
     }
     showError({
       el: ractive.el,
       title: translate('Transaction Failed'),
-      // TODO should we translate unknown error?
-      message: err.message,
+      message,
       fadeInDuration: 0,
     });
   }

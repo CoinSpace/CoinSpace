@@ -1,6 +1,5 @@
 import request from 'lib/request';
 import details from 'lib/wallet/details';
-import { translate } from 'lib/i18n';
 import { getWallet } from 'lib/wallet';
 
 async function save() {
@@ -18,6 +17,7 @@ async function save() {
       lon: longitude,
     },
     seed: 'public',
+    hideFlashError: true,
   });
 }
 
@@ -31,6 +31,7 @@ async function search() {
     },
     method: 'get',
     seed: 'public',
+    hideFlashError: true,
   });
   return results;
 }
@@ -40,13 +41,14 @@ function remove() {
     url: `${process.env.SITE_URL}api/v2/mecto`,
     method: 'delete',
     seed: 'public',
-  }).catch(() => {});
+    hideFlashError: true,
+  });
 }
 
 async function getLocation() {
   return new Promise((resolve, reject) => {
     if (!window.navigator.geolocation) {
-      return reject(new Error(translate('Your browser does not support geolocation')));
+      return reject(new Error('Your browser does not support geolocation'));
     }
 
     const options = process.env.BUILD_TYPE === 'electron' ? {
@@ -63,7 +65,7 @@ async function getLocation() {
           () => {},
           'Coin'
         );
-        reject(new Error(translate('Unable to retrieve your location')));
+        reject(new Error('Unable to retrieve your location'));
       },
       options
     );

@@ -85,15 +85,14 @@ export default function(el) {
         if (tx.error === 'Transaction not found') {
           message = translate('Transaction not found');
         } else {
-          // TODO should we translate unknown error?
+          console.error('not translated error:', tx.error);
           message = tx.error;
         }
         showStep(steps.error, { message });
       }
     }).catch((err) => {
-      console.error(err);
+      console.error('not translated error:', err);
       ractive.set('isLoading', false);
-      // TODO should we translate unknown error?
       return showError({ message: err.message });
     });
   });

@@ -37,7 +37,7 @@ function open() {
     try {
       privateKey = wallet.createPrivateKey(ractive.get('privateKey'));
     } catch (err) {
-      return handleError(new Error(translate('Invalid private key')));
+      return handleError(new Error('Invalid private key'));
     }
     wallet.getImportTxOptions(privateKey).then((importTxOptions) => {
       if (parseFloat(importTxOptions.amount) === 0) {
@@ -70,6 +70,8 @@ function open() {
     ractive.set('isLoading', false);
     if (/^Private key equal wallet private key/.test(err.message)) {
       return showError({ message: translate('Please enter a private key other than your wallet private key') });
+    } else if (err.message === 'Invalid private key') {
+      return showError({ message: translate('Invalid private key') });
     } else if (err.message === 'cs-node-error') {
       return showError({
         message: translate('Network node error. Please try again later.', {
@@ -77,7 +79,7 @@ function open() {
         }),
       });
     }
-    // TODO should we translate unknown error?
+    console.error('not translated error:', err);
     return showError({ message: err.message });
   }
 

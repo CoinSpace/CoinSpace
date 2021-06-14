@@ -80,16 +80,18 @@ function open(data) {
   }
 
   function handleTransactionError(err) {
+    let message;
     if (err.message === 'cs-node-error') {
-      err.message = translate('Network node error. Please try again later.', { network: 'Stellar' });
+      message = translate('Network node error. Please try again later.', { network: 'Stellar' });
     } else {
-      console.error(err);
+      console.error('not translated error:', err);
+      // eslint-disable-next-line prefer-destructuring
+      message = err.message;
     }
     showError({
       el: ractive.el,
       title: translate('Transaction Failed'),
-      // TODO should we translate unknown error?
-      message: err.message,
+      message,
       fadeInDuration: 0,
     });
   }

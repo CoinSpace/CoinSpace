@@ -100,9 +100,13 @@ export default function(el) {
     }
   });
 
-  function mectoOff() {
+  async function mectoOff() {
     ractive.set('broadcasting', false);
-    geo.remove();
+    try {
+      await geo.remove();
+    } catch (err) {
+      return handleMectoError(err);
+    }
   }
 
   async function mectoOn() {
@@ -199,9 +203,16 @@ export default function(el) {
   }
 
   function handleMectoError(err) {
+    let message;
+    if (err.request) {
+      message = translate('Request timeout. Please check your internet connection.');
+    } else {
+      console.error('not translated error:', err);
+      // eslint-disable-next-line prefer-destructuring
+      message = err.message;
+    }
     showError({
-      // TODO should we translate unknown error?
-      message: err.message,
+      message,
     });
     ractive.set('connecting', false);
     ractive.set('broadcasting', false);

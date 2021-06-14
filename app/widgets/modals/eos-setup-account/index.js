@@ -53,8 +53,7 @@ function open() {
           message: translate('Network node error. Please try again later.', { network: 'EOS' }),
         });
       }
-      console.error(err.message);
-      // TODO should we translate unknown error?
+      console.error('not translated error:', err);
       return showError({ message: err.message });
     });
   });

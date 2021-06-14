@@ -121,9 +121,8 @@ export default function(el) {
       if (err.message === 'exchange_error') {
         return showError({ message: translate('Exchange error') });
       }
-      console.error(err.message);
-      // TODO should we translate unknown errors?
-      return showError({ message: translate(err.message) });
+      console.error('not translated error:', err);
+      return showError({ message: err.message });
     });
   });
 

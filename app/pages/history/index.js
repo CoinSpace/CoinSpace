@@ -138,8 +138,7 @@ export default function(el) {
           }),
         });
       } else {
-        console.error(err);
-        // TODO should we translate unknown error?
+        console.error('not translated error:', err);
         showError({ message: err.message });
       }
     });

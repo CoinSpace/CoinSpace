@@ -181,6 +181,12 @@ export default function(el) {
           title: translate('Uh Oh...'),
           message: translate('Please enter a valid address to send to'),
         });
+      } else {
+        console.error('not translated error:', e);
+        return showError({
+          title: translate('Uh Oh...'),
+          message: e.message,
+        });
       }
     });
   });
@@ -378,19 +384,10 @@ export default function(el) {
       showConfirmation(options);
     } catch (err) {
       ractive.set('validating', false);
-      if (/trying to empty your wallet/.test(err.message)) {
-        ractive.find('#crypto').value = denormalizeCrypto(err.sendableBalance);
+      if (/Attempt to empty wallet/.test(err.message)) {
+        ractive.find('#crypto').value = denormalizeCrypto(toUnitString(err.sendableBalance));
         ractive.fire('crypto-to-fiat');
-        // error message already translated
-        return showInfo({ message: err.message });
       }
-      return showError({
-        title: translate('Uh Oh...'),
-        // error message already translated
-        message: err.message,
-        href: err.href,
-        linkText: err.linkText,
-      });
     }
   }
 

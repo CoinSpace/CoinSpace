@@ -50,9 +50,8 @@ window.initCSApp = async function() {
     }
     if (err.message === 'auth_failed') return;
     // Deprecated end
-    console.error(err);
-    // TODO should we translate unknown error?
-    return showError({ message: translate(err.message) });
+    console.error('not translated error:', err);
+    return showError({ message: err.message });
   });
 
   emitter.once('auth-success', (pin) => {
