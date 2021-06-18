@@ -29,10 +29,6 @@
         <source>Generating</source>
         <target>生成中</target>
       </trans-unit>
-      <trans-unit id="Synchronizing Wallet">
-        <source>Synchronizing Wallet</source>
-        <target>ウォレットを同期中</target>
-      </trans-unit>
       <trans-unit id="Your passphrase (12 words)">
         <source>Your passphrase (12 words)</source>
         <target>あなたのパスフレーズ (12文字)</target>
@@ -80,14 +76,6 @@
       <trans-unit id="Setting PIN">
         <source>Setting PIN</source>
         <target>暗証番号を設定中</target>
-      </trans-unit>
-      <trans-unit id="This might take some time,">
-        <source>This might take some time,</source>
-        <target>しばらくお待ち下さい…</target>
-      </trans-unit>
-      <trans-unit id="please be patient.">
-        <source>please be patient.</source>
-        <target>ただいまウォレットを作成しています。</target>
       </trans-unit>
       <trans-unit id="Request timeout. Please check your internet connection.">
         <source>Request timeout. Please check your internet connection.</source>
@@ -1009,51 +997,51 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Accept">
         <source>Accept</source>
-        <target></target>
+        <target>受諾</target>
       </trans-unit>
       <trans-unit id="Transaction has already been added.">
         <source>Transaction has already been added.</source>
-        <target></target>
+        <target>取引はすでに追加されています。</target>
       </trans-unit>
       <trans-unit id="Unknown transaction.">
         <source>Unknown transaction.</source>
-        <target></target>
+        <target>不明な取引</target>
       </trans-unit>
       <trans-unit id="Not your transaction. It can&apos;t be added.">
         <source>Not your transaction. It can't be added.</source>
-        <target></target>
+        <target>あなたの取引ではないので追加できません。</target>
       </trans-unit>
       <trans-unit id="Invalid transaction.">
         <source>Invalid transaction.</source>
-        <target></target>
+        <target>無効な取引</target>
       </trans-unit>
       <trans-unit id="Standard">
         <source>Standard</source>
-        <target></target>
+        <target>スタンダード</target>
       </trans-unit>
       <trans-unit id="Subaddress">
         <source>Subaddress</source>
-        <target></target>
+        <target>サブアドレス</target>
       </trans-unit>
       <trans-unit id="Sent">
         <source>Sent</source>
-        <target></target>
+        <target>送信済み</target>
       </trans-unit>
       <trans-unit id="Stealth address">
         <source>Stealth address</source>
-        <target></target>
+        <target>ステルスアドレス</target>
       </trans-unit>
       <trans-unit id="Transaction Accepted">
         <source>Transaction Accepted</source>
-        <target></target>
+        <target>取引は受諾されました</target>
       </trans-unit>
       <trans-unit id="In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.">
         <source>In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.</source>
-        <target></target>
+        <target>ファンドを受領するには、Moneroコインに切り替えて、«受領» タブの上にある取引を受諾してください。</target>
       </trans-unit>
       <trans-unit id="Transaction fee is too low. Please click on refresh button.">
         <source>Transaction fee is too low. Please click on refresh button.</source>
-        <target></target>
+        <target>取引手数料が低すぎます。リフレッシュのボタンをクリックしてください。</target>
       </trans-unit>
     </body>
   </file>

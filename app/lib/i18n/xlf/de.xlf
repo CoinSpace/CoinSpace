@@ -29,10 +29,6 @@
         <source>Generating</source>
         <target>Wird erstellt</target>
       </trans-unit>
-      <trans-unit id="Synchronizing Wallet">
-        <source>Synchronizing Wallet</source>
-        <target>Brieftasche wird synchronisiert</target>
-      </trans-unit>
       <trans-unit id="Your passphrase (12 words)">
         <source>Your passphrase (12 words)</source>
         <target>Deine Passphrase (12 Wörter)</target>
@@ -80,14 +76,6 @@
       <trans-unit id="Setting PIN">
         <source>Setting PIN</source>
         <target>Festlegen der PIN</target>
-      </trans-unit>
-      <trans-unit id="This might take some time,">
-        <source>This might take some time,</source>
-        <target>Dies kann ein etwas dauern,</target>
-      </trans-unit>
-      <trans-unit id="please be patient.">
-        <source>please be patient.</source>
-        <target>ein wenig Geduld bitte.</target>
       </trans-unit>
       <trans-unit id="Request timeout. Please check your internet connection.">
         <source>Request timeout. Please check your internet connection.</source>
@@ -1009,51 +997,51 @@ Sie werden in %(toSymbol)s konvertiert und an
       </trans-unit>
       <trans-unit id="Accept">
         <source>Accept</source>
-        <target></target>
+        <target>Akzeptieren</target>
       </trans-unit>
       <trans-unit id="Transaction has already been added.">
         <source>Transaction has already been added.</source>
-        <target></target>
+        <target>Die Transaktion wurde bereits hinzugefügt.</target>
       </trans-unit>
       <trans-unit id="Unknown transaction.">
         <source>Unknown transaction.</source>
-        <target></target>
+        <target>Unbekannte Transaktion.</target>
       </trans-unit>
       <trans-unit id="Not your transaction. It can&apos;t be added.">
         <source>Not your transaction. It can't be added.</source>
-        <target></target>
+        <target>Nicht Ihre Transaktion. Sie kann nicht hinzugefügt werden.</target>
       </trans-unit>
       <trans-unit id="Invalid transaction.">
         <source>Invalid transaction.</source>
-        <target></target>
+        <target>Ungültige Transaktion.</target>
       </trans-unit>
       <trans-unit id="Standard">
         <source>Standard</source>
-        <target></target>
+        <target>Standard</target>
       </trans-unit>
       <trans-unit id="Subaddress">
         <source>Subaddress</source>
-        <target></target>
+        <target>Unteradresse</target>
       </trans-unit>
       <trans-unit id="Sent">
         <source>Sent</source>
-        <target></target>
+        <target>Gesendet</target>
       </trans-unit>
       <trans-unit id="Stealth address">
         <source>Stealth address</source>
-        <target></target>
+        <target>Stealth-Adresse</target>
       </trans-unit>
       <trans-unit id="Transaction Accepted">
         <source>Transaction Accepted</source>
-        <target></target>
+        <target>Die Transaktion wurde akzeptiert</target>
       </trans-unit>
       <trans-unit id="In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.">
         <source>In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.</source>
-        <target></target>
+        <target>Um Geld zu empfangen, wechseln Sie bitte zu Monero-Münzen und akzeptieren Sie die obige Transaktion auf der Registerkarte „Empfangen“.</target>
       </trans-unit>
       <trans-unit id="Transaction fee is too low. Please click on refresh button.">
         <source>Transaction fee is too low. Please click on refresh button.</source>
-        <target></target>
+        <target>Die Transaktionsgebühr ist zu niedrig. Bitte klicken Sie auf die Schaltfläche „Aktualisieren“.</target>
       </trans-unit>
     </body>
   </file>

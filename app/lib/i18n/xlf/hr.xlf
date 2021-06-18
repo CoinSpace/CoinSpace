@@ -29,10 +29,6 @@
         <source>Generating</source>
         <target>Generira se</target>
       </trans-unit>
-      <trans-unit id="Synchronizing Wallet">
-        <source>Synchronizing Wallet</source>
-        <target>Novčanik se sinkronizira</target>
-      </trans-unit>
       <trans-unit id="Your passphrase (12 words)">
         <source>Your passphrase (12 words)</source>
         <target>Vaša zaporka (12 riječi)</target>
@@ -80,14 +76,6 @@
       <trans-unit id="Setting PIN">
         <source>Setting PIN</source>
         <target>PIN se podešava</target>
-      </trans-unit>
-      <trans-unit id="This might take some time,">
-        <source>This might take some time,</source>
-        <target>Ovo može potrajati neko vrijeme,</target>
-      </trans-unit>
-      <trans-unit id="please be patient.">
-        <source>please be patient.</source>
-        <target>molimo vas za strpljenje.</target>
       </trans-unit>
       <trans-unit id="Request timeout. Please check your internet connection.">
         <source>Request timeout. Please check your internet connection.</source>
@@ -1009,51 +997,51 @@ Biće konvertiran u %(toSymbol)s i poslan na
       </trans-unit>
       <trans-unit id="Accept">
         <source>Accept</source>
-        <target></target>
+        <target>Prihvati</target>
       </trans-unit>
       <trans-unit id="Transaction has already been added.">
         <source>Transaction has already been added.</source>
-        <target></target>
+        <target>Transakcija je već dodana.</target>
       </trans-unit>
       <trans-unit id="Unknown transaction.">
         <source>Unknown transaction.</source>
-        <target></target>
+        <target>Nepoznata transakcija</target>
       </trans-unit>
       <trans-unit id="Not your transaction. It can&apos;t be added.">
         <source>Not your transaction. It can't be added.</source>
-        <target></target>
+        <target>Transakcija nije vaša. Ne može biti dodana.</target>
       </trans-unit>
       <trans-unit id="Invalid transaction.">
         <source>Invalid transaction.</source>
-        <target></target>
+        <target>Nevaljana transakcija</target>
       </trans-unit>
       <trans-unit id="Standard">
         <source>Standard</source>
-        <target></target>
+        <target>Standardna</target>
       </trans-unit>
       <trans-unit id="Subaddress">
         <source>Subaddress</source>
-        <target></target>
+        <target>Pod-adresa</target>
       </trans-unit>
       <trans-unit id="Sent">
         <source>Sent</source>
-        <target></target>
+        <target>Poslano</target>
       </trans-unit>
       <trans-unit id="Stealth address">
         <source>Stealth address</source>
-        <target></target>
+        <target>Nevidljiva adresa</target>
       </trans-unit>
       <trans-unit id="Transaction Accepted">
         <source>Transaction Accepted</source>
-        <target></target>
+        <target>Transakcija prihvaćena</target>
       </trans-unit>
       <trans-unit id="In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.">
         <source>In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.</source>
-        <target></target>
+        <target>Kako biste dobili sredstva, prebacite se na Monero novčić i prihvatite gornju transakciju na kartici «Receive» (Primi).</target>
       </trans-unit>
       <trans-unit id="Transaction fee is too low. Please click on refresh button.">
         <source>Transaction fee is too low. Please click on refresh button.</source>
-        <target></target>
+        <target>Provizija za transakciju je premala. Kliknite gumb za osvježavanje.</target>
       </trans-unit>
     </body>
   </file>

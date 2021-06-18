@@ -29,10 +29,6 @@
         <source>Generating</source>
         <target>កំពុងបង្កើត</target>
       </trans-unit>
-      <trans-unit id="Synchronizing Wallet">
-        <source>Synchronizing Wallet</source>
-        <target>កំពុងធ្វើសមកាលកម្មកាបូប</target>
-      </trans-unit>
       <trans-unit id="Your passphrase (12 words)">
         <source>Your passphrase (12 words)</source>
         <target>ឃ្លាសម្ងាត់របស់អ្នក (12 ពាក្យ)</target>
@@ -80,14 +76,6 @@
       <trans-unit id="Setting PIN">
         <source>Setting PIN</source>
         <target>កំពុងកំណត់កូដ PIN</target>
-      </trans-unit>
-      <trans-unit id="This might take some time,">
-        <source>This might take some time,</source>
-        <target>វាអាចចំណាយពេលខ្លះ</target>
-      </trans-unit>
-      <trans-unit id="please be patient.">
-        <source>please be patient.</source>
-        <target>សូម​មេត្តា​​អត់ធ្មត់។</target>
       </trans-unit>
       <trans-unit id="Request timeout. Please check your internet connection.">
         <source>Request timeout. Please check your internet connection.</source>
@@ -1009,51 +997,51 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Accept">
         <source>Accept</source>
-        <target></target>
+        <target>ទទួល</target>
       </trans-unit>
       <trans-unit id="Transaction has already been added.">
         <source>Transaction has already been added.</source>
-        <target></target>
+        <target>ប្រតិបត្តិតការនេះត្រូវបានបន្ថែមរួចហើយ។</target>
       </trans-unit>
       <trans-unit id="Unknown transaction.">
         <source>Unknown transaction.</source>
-        <target></target>
+        <target>ការបកប្រែមិនស្គាល់</target>
       </trans-unit>
       <trans-unit id="Not your transaction. It can&apos;t be added.">
         <source>Not your transaction. It can't be added.</source>
-        <target></target>
+        <target>មិនមែនប្រតិបត្តិការរបស់អ្នកទេ។ វាមិនអាចបន្ថែមបានទេ</target>
       </trans-unit>
       <trans-unit id="Invalid transaction.">
         <source>Invalid transaction.</source>
-        <target></target>
+        <target>ប្រតិបត្តិការមិនត្រឹមត្រូវ</target>
       </trans-unit>
       <trans-unit id="Standard">
         <source>Standard</source>
-        <target></target>
+        <target>ស្ដង់ដារ</target>
       </trans-unit>
       <trans-unit id="Subaddress">
         <source>Subaddress</source>
-        <target></target>
+        <target>អាសយដ្ឋានរង</target>
       </trans-unit>
       <trans-unit id="Sent">
         <source>Sent</source>
-        <target></target>
+        <target>បានផ្ញើ</target>
       </trans-unit>
       <trans-unit id="Stealth address">
         <source>Stealth address</source>
-        <target></target>
+        <target>អាសយដ្ឋានសំងាត់</target>
       </trans-unit>
       <trans-unit id="Transaction Accepted">
         <source>Transaction Accepted</source>
-        <target></target>
+        <target>ប្រតិបត្តិការដែរបានទទួល</target>
       </trans-unit>
       <trans-unit id="In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.">
         <source>In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.</source>
-        <target></target>
+        <target>ដើម្បីទទួលបានថវិកាសូមប្តូរទៅកាក់ម៉ូន័រ៉ូនិងទទួលយកប្រតិបត្តិការខាងលើនៅលើផ្ទាំង«ទទួល»។</target>
       </trans-unit>
       <trans-unit id="Transaction fee is too low. Please click on refresh button.">
         <source>Transaction fee is too low. Please click on refresh button.</source>
-        <target></target>
+        <target>ថ្លៃសេវាប្រតិបត្តិការទាបពេក។ សូមចុចលើប៊ូតុងរីហ្វ្រេស</target>
       </trans-unit>
     </body>
   </file>

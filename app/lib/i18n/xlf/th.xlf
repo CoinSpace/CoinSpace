@@ -29,10 +29,6 @@
         <source>Generating</source>
         <target>กำลังสร้าง</target>
       </trans-unit>
-      <trans-unit id="Synchronizing Wallet">
-        <source>Synchronizing Wallet</source>
-        <target>กระเป๋าเงินร่วม</target>
-      </trans-unit>
       <trans-unit id="Your passphrase (12 words)">
         <source>Your passphrase (12 words)</source>
         <target>วลีรหัสผ่านของคุณ (12 คำ)</target>
@@ -80,14 +76,6 @@
       <trans-unit id="Setting PIN">
         <source>Setting PIN</source>
         <target>ตั้งค่า PIN</target>
-      </trans-unit>
-      <trans-unit id="This might take some time,">
-        <source>This might take some time,</source>
-        <target>นี่อาจจะใช้เวลาสักพัก</target>
-      </trans-unit>
-      <trans-unit id="please be patient.">
-        <source>please be patient.</source>
-        <target>กรุณารอสักครู่</target>
       </trans-unit>
       <trans-unit id="Request timeout. Please check your internet connection.">
         <source>Request timeout. Please check your internet connection.</source>
@@ -1009,51 +997,51 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Accept">
         <source>Accept</source>
-        <target></target>
+        <target>ยอมรับ</target>
       </trans-unit>
       <trans-unit id="Transaction has already been added.">
         <source>Transaction has already been added.</source>
-        <target></target>
+        <target>เพิ่มธุรกรรมเรียบร้อยแล้ว</target>
       </trans-unit>
       <trans-unit id="Unknown transaction.">
         <source>Unknown transaction.</source>
-        <target></target>
+        <target>ธุรกรรมที่ไม่รู้จัก</target>
       </trans-unit>
       <trans-unit id="Not your transaction. It can&apos;t be added.">
         <source>Not your transaction. It can't be added.</source>
-        <target></target>
+        <target>ไม่ใช่ธุรกรรมของคุณ ไม่สามารถเพิ่มได้</target>
       </trans-unit>
       <trans-unit id="Invalid transaction.">
         <source>Invalid transaction.</source>
-        <target></target>
+        <target>ธุรกรรมที่ไม่ถูกต้อง</target>
       </trans-unit>
       <trans-unit id="Standard">
         <source>Standard</source>
-        <target></target>
+        <target>มาตรฐาน</target>
       </trans-unit>
       <trans-unit id="Subaddress">
         <source>Subaddress</source>
-        <target></target>
+        <target>ที่อยู่ย่อย</target>
       </trans-unit>
       <trans-unit id="Sent">
         <source>Sent</source>
-        <target></target>
+        <target>ส่ง</target>
       </trans-unit>
       <trans-unit id="Stealth address">
         <source>Stealth address</source>
-        <target></target>
+        <target>ที่อยู่บัญชีชิงทรัพย์</target>
       </trans-unit>
       <trans-unit id="Transaction Accepted">
         <source>Transaction Accepted</source>
-        <target></target>
+        <target>การทำธุรกรรมได้รับการยอมรับ</target>
       </trans-unit>
       <trans-unit id="In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.">
         <source>In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.</source>
-        <target></target>
+        <target>หากต้องการรับเงิน โปรดเปลี่ยนไปใช้เหรียญ Monero และยอมรับธุรกรรมด้านบนในแท็บ «รับ»</target>
       </trans-unit>
       <trans-unit id="Transaction fee is too low. Please click on refresh button.">
         <source>Transaction fee is too low. Please click on refresh button.</source>
-        <target></target>
+        <target>ค่าธรรมเนียมในการทำธุรกรรมต่ำเกินไป กรุณาคลิกที่ปุ่มรีเฟรช</target>
       </trans-unit>
     </body>
   </file>

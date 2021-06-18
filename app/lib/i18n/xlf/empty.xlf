@@ -29,10 +29,6 @@
         <source>Generating</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="Synchronizing Wallet">
-        <source>Synchronizing Wallet</source>
-        <target></target>
-      </trans-unit>
       <trans-unit id="Your passphrase (12 words)">
         <source>Your passphrase (12 words)</source>
         <target></target>
@@ -79,14 +75,6 @@
       </trans-unit>
       <trans-unit id="Setting PIN">
         <source>Setting PIN</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="This might take some time,">
-        <source>This might take some time,</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="please be patient.">
-        <source>please be patient.</source>
         <target></target>
       </trans-unit>
       <trans-unit id="Request timeout. Please check your internet connection.">
