@@ -14,11 +14,15 @@ import seeds from 'lib/wallet/seeds';
 axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay, shouldResetTimeout: true });
 
 axios.interceptors.request.use((config) => {
+  if (config.intercepted === true) {
+    return config;
+  }
   if (config.baseURL) {
     config.url = combineURLs(config.baseURL, config.url);
     delete config.baseURL;
   }
   if (!config.url.startsWith(process.env.SITE_URL)) {
+    config.intercepted = true;
     return config;
   }
   if (!config.method) {
@@ -60,6 +64,7 @@ axios.interceptors.request.use((config) => {
     config.headers['Signature'] = signature;
   }
 
+  config.intercepted = true;
   return config;
 });
 
