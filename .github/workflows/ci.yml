@@ -13,7 +13,7 @@ jobs:
             node: 14
             DISTRIBUTION: mac
             BUILD_TYPE: electron
-            SENTRY_DSN: ${{ secrets.SENTRY_DSN_MAC }}
+            SENTRY_KEY: SENTRY_DSN_MAC
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -91,7 +91,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DISTRIBUTION: ${{ matrix.DISTRIBUTION }}
           BUILD_TYPE: ${{ matrix.BUILD_TYPE }}
-          SENTRY_DSN: ${{ matrix.SENTRY_DSN }}
+          SENTRY_DSN: ${{ secrets[matrix.SENTRY_KEY] }}
           SHAPESHIFT_API_KEY: ${{ secrets.SHAPESHIFT_API_KEY }}
           SHAPESHIFT_CLIENT_ID: ${{ secrets.SHAPESHIFT_CLIENT_ID }}
           MOONPAY_API_KEY: ${{ secrets.MOONPAY_API_KEY }}
