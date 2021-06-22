@@ -13,7 +13,7 @@ dotenv.config({ path: '.env.defaults' });
 process.env.BUILD_TYPE = process.env.BUILD_TYPE || 'web';
 
 const COMMIT = (
-  process.env.TRAVIS_COMMIT ||
+  process.env.GITHUB_SHA ||
   process.env.APPVEYOR_REPO_COMMIT ||
   process.env.COMMIT_SHA ||
   'local'

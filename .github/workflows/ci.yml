@@ -1,0 +1,117 @@
+name: CoinSpace CI
+
+on: push
+
+jobs:
+  build:
+    environment: ${{ github.ref == 'refs/heads/master' && 'production' || 'development' }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: macos-10.15
+            node: 14
+            DISTRIBUTION: mac
+            BUILD_TYPE: electron
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install Node.js dependencies
+        env:
+          NODE_ENV: ci
+          BUILD_TYPE: ${{ matrix.BUILD_TYPE }}
+        run: |
+          npm ci
+          (cd ${BUILD_TYPE} && npm ci)
+      - name: Install certificates & prepare for build
+        env:
+          DISTRIBUTION: ${{ matrix.DISTRIBUTION }}
+          CERTIFICATE_MAC: ${{ secrets.CERTIFICATE_MAC }}
+          CERTIFICATE_MAC_PASSWORD: ${{ secrets.CERTIFICATE_MAC_PASSWORD }}
+          CERTIFICATE_DISTRIBUTION: ${{ secrets.CERTIFICATE_DISTRIBUTION }}
+          CERTIFICATE_DISTRIBUTION_PASSWORD: ${{ secrets.CERTIFICATE_DISTRIBUTION_PASSWORD }}
+          PROVISIONING_DISTRIBUTION: ${{ secrets.PROVISIONING_DISTRIBUTION }}
+          PROVISIONING_DEVELOPMENT: ${{ secrets.PROVISIONING_DEVELOPMENT }}
+          PROVISIONING_IOS: ${{ secrets.PROVISIONING_IOS }}
+          PROVISIONING_IOS_WATCH_APP: ${{ secrets.PROVISIONING_IOS_WATCH_APP }}
+          PROVISIONING_IOS_WATCH_APP_EXTENSION: ${{ secrets.PROVISIONING_IOS_WATCH_APP_EXTENSION }}
+          GOOGLE_CLOUD_KEY: ${{ secrets.GOOGLE_CLOUD_KEY }}
+          SNAP_TOKEN: ${{ secrets.SNAP_TOKEN }}
+          ANDROID_RELEASE_KEYSTORE: ${{ secrets.ANDROID_RELEASE_KEYSTORE }}
+          SENTRY_DSN_MAC: ${{ secrets.SENTRY_DSN_MAC }}
+          SENTRY_DSN_MAS: ${{ secrets.SENTRY_DSN_MAS }}
+          SENTRY_DSN_SNAP: ${{ secrets.SENTRY_DSN_SNAP }}
+          SENTRY_DSN_IOS: ${{ secrets.SENTRY_DSN_IOS }}
+          SENTRY_DSN_ANDROID: ${{ secrets.SENTRY_DSN_ANDROID }}
+        run: |
+          export GOOGLE_APPLICATION_CREDENTIALS=$GITHUB_WORKSPACE/gcloud.key.json
+          echo $GOOGLE_CLOUD_KEY | base64 --decode > gcloud.key.json;
+
+          if [[ "$DISTRIBUTION" == "mac" || "$DISTRIBUTION" == "mas" || "$DISTRIBUTION" == "mas-dev" ]]; then
+            echo $CERTIFICATE_MAC | base64 --decode > certificate.p12;
+            security create-keychain -p coinspace build.keychain;
+            security default-keychain -s build.keychain;
+            security unlock-keychain -p coinspace build.keychain;
+            security set-keychain-settings build.keychain;
+            security list-keychains -d user -s build.keychain;
+            security import certificate.p12 -k build.keychain -P $CERTIFICATE_MAC_PASSWORD -T /usr/bin/codesign -T /usr/bin/productbuild 2>&1 >/dev/null;
+            security set-key-partition-list -S apple-tool:,apple: -s -k coinspace build.keychain 2>&1 >/dev/null;
+            rm certificate.p12;
+            if [[ "$DISTRIBUTION" == "mac" ]]; then
+              export SENTRY_DSN=${SENTRY_DSN_MAC}
+            fi
+            if [[ "$DISTRIBUTION" == "mas" ]]; then
+              export SENTRY_DSN=${SENTRY_DSN_MAS}
+              echo $PROVISIONING_DISTRIBUTION | base64 --decode > electron/embedded.provisionprofile;
+            fi
+            if [[ "$DISTRIBUTION" == "mas-dev" ]]; then
+              export SENTRY_DSN=${SENTRY_DSN_MAS}
+              echo $PROVISIONING_DEVELOPMENT | base64 --decode > electron/embedded.provisionprofile;
+            fi
+          elif [[ "$DISTRIBUTION" == "snap" ]]; then
+            export SENTRY_DSN=${SENTRY_DSN_SNAP}
+            echo "$SNAP_TOKEN" | snapcraft login --with -;
+          elif [[ "$DISTRIBUTION" == "ios" ]]; then
+            export SENTRY_DSN=${SENTRY_DSN_IOS}
+            echo $CERTIFICATE_DISTRIBUTION | base64 --decode > certificate.p12;
+            security create-keychain -p coinspace build.keychain;
+            security default-keychain -s build.keychain;
+            security unlock-keychain -p coinspace build.keychain;
+            security set-keychain-settings build.keychain;
+            security list-keychains -d user -s build.keychain;
+            security import certificate.p12 -k build.keychain -P $CERTIFICATE_DISTRIBUTION_PASSWORD -T /usr/bin/codesign -T /usr/bin/productbuild 2>&1 >/dev/null;
+            security set-key-partition-list -S apple-tool:,apple: -s -k coinspace build.keychain 2>&1 >/dev/null;
+            rm certificate.p12;
+            mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles/
+            echo $PROVISIONING_IOS | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.mobileprovision;
+            echo $PROVISIONING_IOS_WATCH_APP | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.watchapp.mobileprovision;
+            echo $PROVISIONING_IOS_WATCH_APP_EXTENSION | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.watchapp.extension.mobileprovision;
+          elif [[ "$DISTRIBUTION" == "android-play" || "$DISTRIBUTION" == "android-galaxy" ]]; then
+            export SENTRY_DSN=${SENTRY_DSN_ANDROID}
+            echo $ANDROID_RELEASE_KEYSTORE | base64 --decode > phonegap/release.keystore;
+          fi
+      - name: Set app version
+        env:
+          BUILD_TYPE: ${{ matrix.BUILD_TYPE }}
+        run: (cd ${BUILD_TYPE} && npm version $(node -p -e "require('../package.json').version"))
+      - name: Build app
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DISTRIBUTION: ${{ matrix.DISTRIBUTION }}
+          BUILD_TYPE: ${{ matrix.BUILD_TYPE }}
+          SHAPESHIFT_API_KEY: ${{ secrets.SHAPESHIFT_API_KEY }}
+          SHAPESHIFT_CLIENT_ID: ${{ secrets.SHAPESHIFT_CLIENT_ID }}
+          MOONPAY_API_KEY: ${{ secrets.MOONPAY_API_KEY }}
+          MOONPAY_WIDGET_BUY_URL: ${{ secrets.MOONPAY_WIDGET_BUY_URL }}
+          MOONPAY_WIDGET_SELL_URL: ${{ secrets.MOONPAY_WIDGET_SELL_URL }}
+          SENTRY_ENVIRONMENT: ${{ secrets.SENTRY_ENVIRONMENT }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+        run: |
+          node ./cli/i18n.js --json
+          node ./cli/build.js ${BUILD_TYPE} --env=prod --release --platform=${DISTRIBUTION}

@@ -4,7 +4,7 @@ const pkg = require('./package.json');
 const schemes = require('./lib/schemes');
 
 const { BUILD_PLATFORM } = process.env;
-const BRANCH = process.env.TRAVIS_BRANCH || process.env.APPVEYOR_REPO_BRANCH;
+const BRANCH = process.env.APPVEYOR_REPO_BRANCH || process.env.GITHUB_REF.replace('refs/heads/', '');
 
 if (!['win', 'appx', 'appx-dev', 'mac', 'mas', 'mas-dev', 'snap'].includes(BUILD_PLATFORM)) {
   throw new Error(`Please specify valid distribution, provided: '${BUILD_PLATFORM}'`);
@@ -12,8 +12,8 @@ if (!['win', 'appx', 'appx-dev', 'mac', 'mas', 'mas-dev', 'snap'].includes(BUILD
 
 let buildVersion = pkg.version;
 
-if (BUILD_PLATFORM === 'mas' && process.env.TRAVIS_BUILD_NUMBER) {
-  buildVersion = `1.0.${process.env.TRAVIS_BUILD_NUMBER}`;
+if (BUILD_PLATFORM === 'mas' && process.env.GITHUB_RUN_NUMBER) {
+  buildVersion = `1.1.${process.env.GITHUB_RUN_NUMBER}`;
 }
 
 const protocols = [
@@ -35,7 +35,6 @@ module.exports = {
       '^/(?!electron.js|env.json|package.json|lib|app|resources|node_modules)',
       ['win', 'appx', 'appx-dev', 'snap'].includes(BUILD_PLATFORM) ? '^/resources/(?!64x64.png)' : '^/resources',
       'Makefile',
-      '.travis.yml',
       'appveyor.yml',
       '.editorconfig',
       '.gitignore',
