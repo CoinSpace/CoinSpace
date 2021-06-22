@@ -26,7 +26,7 @@ jobs:
           NPM_READ_TOKEN: ${{ secrets.NPM_READ_TOKEN }}
         run: |
           npm config set @coinspace:registry https://npm.pkg.github.com
-          npm config set "//npm.pkg.github.com/:_authToken" '${NPM_READ_TOKEN}'
+          npm config set "//npm.pkg.github.com/:_authToken" "${NPM_READ_TOKEN}"
           npm ci
           (cd ${BUILD_TYPE} && npm ci)
       - name: Install certificates & prepare for build
