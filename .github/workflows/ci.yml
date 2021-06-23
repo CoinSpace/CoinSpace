@@ -29,6 +29,11 @@ jobs:
             DISTRIBUTION: snap
             BUILD_TYPE: electron
             SENTRY_KEY: SENTRY_DSN_SNAP
+          - os: macos-10.15
+            node: 14
+            DISTRIBUTION: ios
+            BUILD_TYPE: phonegap
+            SENTRY_KEY: SENTRY_DSN_IOS
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
