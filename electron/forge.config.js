@@ -4,7 +4,8 @@ const pkg = require('./package.json');
 const schemes = require('./lib/schemes');
 
 const { BUILD_PLATFORM } = process.env;
-const BRANCH = process.env.APPVEYOR_REPO_BRANCH || process.env.GITHUB_REF.replace('refs/heads/', '');
+const BRANCH = process.env.APPVEYOR_REPO_BRANCH ||
+  (process.env.GITHUB_REF && process.env.GITHUB_REF.replace('refs/heads/', ''));
 
 if (!['win', 'appx', 'appx-dev', 'mac', 'mas', 'mas-dev', 'snap'].includes(BUILD_PLATFORM)) {
   throw new Error(`Please specify valid distribution, provided: '${BUILD_PLATFORM}'`);
