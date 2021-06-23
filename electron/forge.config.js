@@ -201,7 +201,7 @@ module.exports = {
     {
       name: '@mahnunchik/publisher-gcs',
       config: {
-        bucket: 'coinspace-travis-ci',
+        bucket: 'coinspace-builds',
         folder: `${pkg.version}-${BRANCH || 'local'}`,
         public: false,
       },

@@ -62,7 +62,6 @@ jobs:
           PROVISIONING_IOS_WATCH_APP: ${{ secrets.PROVISIONING_IOS_WATCH_APP }}
           PROVISIONING_IOS_WATCH_APP_EXTENSION: ${{ secrets.PROVISIONING_IOS_WATCH_APP_EXTENSION }}
           GOOGLE_CLOUD_KEY: ${{ secrets.GOOGLE_CLOUD_KEY }}
-          #SNAP_TOKEN: ${{ secrets.SNAP_TOKEN }}
           ANDROID_RELEASE_KEYSTORE: ${{ secrets.ANDROID_RELEASE_KEYSTORE }}
         run: |
           echo $GOOGLE_CLOUD_KEY | base64 --decode > gcloud.key.json;
@@ -83,8 +82,6 @@ jobs:
             if [[ "$DISTRIBUTION" == "mas-dev" ]]; then
               echo $PROVISIONING_DEVELOPMENT | base64 --decode > electron/embedded.provisionprofile;
             fi
-          elif [[ "$DISTRIBUTION" == "snap" ]]; then
-            #echo "$SNAP_TOKEN" | snapcraft login --with -;
           elif [[ "$DISTRIBUTION" == "ios" ]]; then
             echo $CERTIFICATE_DISTRIBUTION | base64 --decode > certificate.p12;
             security create-keychain -p coinspace build.keychain;
