@@ -10,7 +10,8 @@ const storage = new Storage();
 const buildPath = 'build';
 const cordova = utils.cordova(buildPath);
 
-const BUILD_NUMBER = parseInt(process.env.TRAVIS_BUILD_NUMBER || '1') + 2187;
+const BUILD_NUMBER = parseInt(process.env.GITHUB_RUN_NUMBER || '1') + 2187;
+const BRANCH = process.env.GITHUB_REF && process.env.GITHUB_REF.replace('refs/heads/', '');
 
 async function run() {
   const config = ejs.render(fse.readFileSync('config.xml.template', 'utf-8'), {
@@ -50,8 +51,8 @@ async function run() {
       ../deploy/coinspace-release.apk',
       { cwd: buildPath }
     );
-    const destination = `${pkg.version}-${process.env.TRAVIS_BRANCH || 'local'}/${pkg.name}-${process.env.BUILD_PLATFORM}-${pkg.version}.apk`;
-    await storage.bucket('coinspace-travis-ci').upload('deploy/coinspace-release.apk', { destination });
+    const destination = `${pkg.version}-${BRANCH || 'local'}/${pkg.name}-${process.env.BUILD_PLATFORM}-${pkg.version}.apk`;
+    await storage.bucket(process.env.GOOGLE_CLOUD_BUCKET).upload('deploy/coinspace-release.apk', { destination });
   } else {
     cordova('build android');
   }

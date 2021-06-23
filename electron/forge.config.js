@@ -201,7 +201,7 @@ module.exports = {
     {
       name: '@mahnunchik/publisher-gcs',
       config: {
-        bucket: 'coinspace-builds',
+        bucket: process.env.GOOGLE_CLOUD_BUCKET,
         folder: `${pkg.version}-${BRANCH || 'local'}`,
         public: false,
       },

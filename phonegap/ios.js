@@ -13,7 +13,8 @@ const storage = new Storage();
 const buildPath = 'build';
 const cordova = utils.cordova(buildPath);
 
-const BUILD_NUMBER = process.env.TRAVIS_BUILD_NUMBER || '1';
+const BUILD_NUMBER = process.env.GITHUB_RUN_NUMBER || '1';
+const BRANCH = process.env.GITHUB_REF && process.env.GITHUB_REF.replace('refs/heads/', '');
 
 async function run() {
   const config = ejs.render(fse.readFileSync('config.xml.template', 'utf-8'), {
@@ -86,8 +87,8 @@ async function run() {
       -exportPath ../../../deploy | xcpretty',
       { cwd: path.join(buildPath, 'platforms/ios') }
     );
-    const destination = `${pkg.version}-${process.env.TRAVIS_BRANCH || 'local'}/${pkg.name}-${pkg.version}.ipa`;
-    await storage.bucket('coinspace-travis-ci').upload('deploy/Coin.ipa', { destination });
+    const destination = `${pkg.version}-${BRANCH || 'local'}/${pkg.name}-${pkg.version}.ipa`;
+    await storage.bucket(process.env.GOOGLE_CLOUD_BUCKET).upload('deploy/Coin.ipa', { destination });
   } else {
     utils.shell('open platforms/ios/Coin.xcworkspace', { cwd: buildPath });
   }
