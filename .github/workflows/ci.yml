@@ -14,6 +14,21 @@ jobs:
             DISTRIBUTION: mac
             BUILD_TYPE: electron
             SENTRY_KEY: SENTRY_DSN_MAC
+          - os: macos-10.15
+            node: 14
+            DISTRIBUTION: mas
+            BUILD_TYPE: electron
+            SENTRY_KEY: SENTRY_DSN_MAS
+          - os: macos-10.15
+            node: 14
+            DISTRIBUTION: mas-dev
+            BUILD_TYPE: electron
+            SENTRY_KEY: SENTRY_DSN_MAS
+          - os: ubuntu-20.04
+            node: 14
+            DISTRIBUTION: snap
+            BUILD_TYPE: electron
+            SENTRY_KEY: SENTRY_DSN_SNAP
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -29,6 +44,11 @@ jobs:
           npm config set "//npm.pkg.github.com/:_authToken" "${NPM_READ_TOKEN}"
           npm ci
           (cd ${BUILD_TYPE} && npm ci)
+      - name: Install Snapcraft
+        if: ${{ matrix.DISTRIBUTION == 'snap' }}
+        uses: samuelmeuli/action-snapcraft@v1
+        with:
+          snapcraft_token: ${{ secrets.SNAP_TOKEN }}
       - name: Install certificates & prepare for build
         env:
           DISTRIBUTION: ${{ matrix.DISTRIBUTION }}
@@ -42,7 +62,7 @@ jobs:
           PROVISIONING_IOS_WATCH_APP: ${{ secrets.PROVISIONING_IOS_WATCH_APP }}
           PROVISIONING_IOS_WATCH_APP_EXTENSION: ${{ secrets.PROVISIONING_IOS_WATCH_APP_EXTENSION }}
           GOOGLE_CLOUD_KEY: ${{ secrets.GOOGLE_CLOUD_KEY }}
-          SNAP_TOKEN: ${{ secrets.SNAP_TOKEN }}
+          #SNAP_TOKEN: ${{ secrets.SNAP_TOKEN }}
           ANDROID_RELEASE_KEYSTORE: ${{ secrets.ANDROID_RELEASE_KEYSTORE }}
         run: |
           echo $GOOGLE_CLOUD_KEY | base64 --decode > gcloud.key.json;
@@ -64,7 +84,7 @@ jobs:
               echo $PROVISIONING_DEVELOPMENT | base64 --decode > electron/embedded.provisionprofile;
             fi
           elif [[ "$DISTRIBUTION" == "snap" ]]; then
-            echo "$SNAP_TOKEN" | snapcraft login --with -;
+            #echo "$SNAP_TOKEN" | snapcraft login --with -;
           elif [[ "$DISTRIBUTION" == "ios" ]]; then
             echo $CERTIFICATE_DISTRIBUTION | base64 --decode > certificate.p12;
             security create-keychain -p coinspace build.keychain;
