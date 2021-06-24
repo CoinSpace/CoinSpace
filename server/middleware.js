@@ -38,7 +38,7 @@ function init(app) {
     if (!id) return next();
     const [, app, store, version] = req.get('X-Release') !== undefined ?
       req.get('X-Release').match(/(.+)\.(.+)@(.+)/i) : [];
-    const screen = req.path + (req.query.crypto ? `/${req.query.crypto}` : '')
+    const screen = req.baseUrl + req.path + (req.query.crypto ? `/${req.query.crypto}` : '')
       + (req.query.network ? `/${req.query.network}` : '');
     const useragent = req.get('User-Agent');
     next();
