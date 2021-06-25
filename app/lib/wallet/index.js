@@ -220,7 +220,7 @@ async function getExtraOptions(crypto) {
     if (process.env.BUILD_TYPE === 'phonegap') {
       options.wasm = (new URL('@coinspace/monero-core-js/build/MoneroCoreJS.wasm', import.meta.url)).href;
     } else {
-      options.wasm = (await import('@coinspace/monero-core-js/build/MoneroCoreJS.wasm')).default;
+      options.wasm = require('@coinspace/monero-core-js/build/MoneroCoreJS.wasm');
     }
     options.storage = new Storage(process.env.SITE_URL, 'monero', LS.getDetailsKey());
     options.request = request;
