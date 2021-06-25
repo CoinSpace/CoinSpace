@@ -26,6 +26,7 @@ const config = merge(common, {
           path.resolve(__dirname, './node_modules/lodash/'),
           path.resolve(__dirname, './node_modules/core-js/'),
           path.resolve(__dirname, './node_modules/regenerator-runtime/'),
+          path.resolve(__dirname, './node_modules/@coinspace/monero-core-js/build/MoneroCoreJS.asm.js'),
         ],
         use: {
           loader: 'babel-loader',
