@@ -69,7 +69,7 @@ jobs:
           GOOGLE_CLOUD_KEY: ${{ secrets.GOOGLE_CLOUD_KEY }}
           ANDROID_RELEASE_KEYSTORE: ${{ secrets.ANDROID_RELEASE_KEYSTORE }}
         run: |
-          echo $GITHUB_RUN_NUMBER;
+          echo "GITHUB_RUN_NUMBER: $GITHUB_RUN_NUMBER";
           echo $GOOGLE_CLOUD_KEY | base64 --decode > gcloud.key.json;
 
           if [[ "$DISTRIBUTION" == "mac" || "$DISTRIBUTION" == "mas" || "$DISTRIBUTION" == "mas-dev" ]]; then
