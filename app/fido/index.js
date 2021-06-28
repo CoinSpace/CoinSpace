@@ -1,25 +1,35 @@
 import { startAttestation, startAssertion } from '@simplewebauthn/browser';
-const { PublicKeyCredential } = window;
-let $backBtn;
-
 import querystring from 'querystring';
+const { PublicKeyCredential } = window;
+let $btn;
+let $message;
 
 async function init() {
-  $backBtn = document.getElementById('back-btn');
-  $backBtn.onclick = () => close('coinspace://');
+  $btn = document.getElementById('btn');
+  $btn.innerHTML = 'OK';
+  $message = document.getElementById('message');
 
   const params = querystring.parse(location.href.split('?')[1]);
-  const { action } = params;
+
+  if (params.buildPlatform === 'ios') {
+    $message.innerHTML = getActionLabel(params.action);
+    $btn.onclick = () => run(params);
+  } else {
+    run(params);
+  }
+}
+
+async function run(params) {
+  $btn.onclick = () => close('coinspace://');
   let { options } = params;
-  const $message = document.getElementById('message');
+  const { action } = params;
   try {
     if (!PublicKeyCredential) throw new Error('hardware_not_supported');
     if (options) options = JSON.parse(options);
+    $message.innerHTML = getActionLabel(action);
     if (action === 'attestation' && options) {
-      $message.innerHTML = 'Use your new Hardware Key';
       await attestation(options);
     } else if (action === 'assertion' && options) {
-      $message.innerHTML = 'Use your Hardware Key';
       await assertion(options);
     }
     $message.innerHTML = 'Success!';
@@ -28,7 +38,6 @@ async function init() {
     console.error(err);
     close('coinspace://?window=fido&error=' + encodeURIComponent(err.message));
   }
-  $backBtn.innerHTML = 'OK';
 }
 
 async function attestation(options) {
@@ -43,15 +52,21 @@ async function assertion(options) {
   close('coinspace://?window=fido&data=' + assertion);
 }
 
+function getActionLabel(action) {
+  if (action === 'attestation') return 'Use your new Hardware Key';
+  if (action === 'assertion') return 'Use your Hardware Key';
+  return 'Unknown action';
+}
+
 function close(url) {
-  $backBtn.onclick = () => {
+  $btn.onclick = () => {
     window.location = url;
     // debug (web)
     // window.opener.handleOpenURL(url);
     // window.close();
     return false;
   };
-  $backBtn.onclick();
+  $btn.onclick();
 }
 
 init();

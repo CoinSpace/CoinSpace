@@ -219,4 +219,6 @@
   <preference name="android-targetSdkVersion" value="29" />
   <preference name="KeyboardDisplayRequiresUserAction" value="false" />
   <preference name="DisallowOverscroll" value="true"/>
+  <preference name="scheme" value="app" />
+  <preference name="hostname" value="localhost" />
 </widget>

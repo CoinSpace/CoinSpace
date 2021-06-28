@@ -3,6 +3,7 @@ import { startAttestation, startAssertion } from '@simplewebauthn/browser';
 import { showError } from 'widgets/modals/flash';
 import windowExtra from 'lib/window-extra';
 import { translate } from 'lib/i18n';
+import querystring from 'querystring';
 const { PublicKeyCredential } = window;
 const notSupportedError = () => {
   showError({
@@ -40,13 +41,19 @@ async function add() {
     seed: 'private',
   });
 
+  const params = {
+    action: 'attestation',
+    options: JSON.stringify(options),
+    buildPlatform: process.env.BUILD_PLATFORM,
+  };
+
   let attestation;
   try {
     if (process.env.BUILD_TYPE === 'web') {
       attestation = await startAttestation(options);
     } else {
       attestation = await windowExtra.open({
-        url: `${process.env.SITE_URL}fido/?action=attestation&options=${encodeURIComponent(JSON.stringify(options))}`,
+        url: `${process.env.SITE_URL}fido/?${querystring.stringify(params)}`,
         name: 'fido',
         target: process.env.BUILD_TYPE === 'electron' ? '_modal' : '_system',
       });
@@ -73,13 +80,19 @@ async function privateToken(options) {
     });
   }
 
+  const params = {
+    action: 'assertion',
+    options: JSON.stringify(options),
+    buildPlatform: process.env.BUILD_PLATFORM,
+  };
+
   let assertion;
   try {
     if (process.env.BUILD_TYPE === 'web') {
       assertion = await startAssertion(options);
     } else {
       assertion = await windowExtra.open({
-        url: `${process.env.SITE_URL}fido/?action=assertion&options=${encodeURIComponent(JSON.stringify(options))}`,
+        url: `${process.env.SITE_URL}fido/?${querystring.stringify(params)}`,
         name: 'fido',
         target: process.env.BUILD_TYPE === 'electron' ? '_modal' : '_system',
       });
