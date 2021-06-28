@@ -34,6 +34,16 @@ jobs:
             DISTRIBUTION: ios
             BUILD_TYPE: phonegap
             SENTRY_KEY: SENTRY_DSN_IOS
+          - os: ubuntu-20.04
+            node: 14
+            DISTRIBUTION: android-play
+            BUILD_TYPE: phonegap
+            SENTRY_KEY: SENTRY_DSN_ANDROID
+          - os: ubuntu-20.04
+            node: 14
+            DISTRIBUTION: android-galaxy
+            BUILD_TYPE: phonegap
+            SENTRY_KEY: SENTRY_DSN_ANDROID
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -54,6 +64,11 @@ jobs:
         uses: samuelmeuli/action-snapcraft@v1
         with:
           snapcraft_token: ${{ secrets.SNAP_TOKEN }}
+      - name: Install JDK 1.8
+        if: ${{ matrix.DISTRIBUTION == 'android-play' || matrix.DISTRIBUTION == 'android-galaxy' }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
       - name: Install certificates & prepare for build
         env:
           DISTRIBUTION: ${{ matrix.DISTRIBUTION }}
@@ -104,6 +119,7 @@ jobs:
             echo $PROVISIONING_IOS_WATCH_APP_EXTENSION | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.watchapp.extension.mobileprovision;
           elif [[ "$DISTRIBUTION" == "android-play" || "$DISTRIBUTION" == "android-galaxy" ]]; then
             echo $ANDROID_RELEASE_KEYSTORE | base64 --decode > phonegap/release.keystore;
+            echo "/usr/local/lib/android/sdk/build-tools/30.0.3" >> $GITHUB_PATH
           fi
       - name: Set app version
         env:

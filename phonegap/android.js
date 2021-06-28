@@ -10,7 +10,7 @@ const storage = new Storage();
 const buildPath = 'build';
 const cordova = utils.cordova(buildPath);
 
-const BUILD_NUMBER = parseInt(process.env.GITHUB_RUN_NUMBER || '1') + 2187;
+const BUILD_NUMBER = parseInt(process.env.GITHUB_RUN_NUMBER || '1') + 2530;
 const BRANCH = process.env.GITHUB_REF && process.env.GITHUB_REF.replace('refs/heads/', '');
 
 async function run() {
