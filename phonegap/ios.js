@@ -78,17 +78,17 @@ async function run() {
     utils.shell(
       'set -o pipefail && xcodebuild -workspace Coin.xcworkspace -scheme Coin \
       -configuration AppStoreDistribution archive \
-      -archivePath Coin.xcarchive',
+      -archivePath Coin.xcarchive | xcpretty',
       { cwd: path.join(buildPath, 'platforms/ios') }
     );
     utils.shell(
       'set -o pipefail && xcodebuild -exportArchive -archivePath Coin.xcarchive \
       -exportOptionsPlist ../../../iosExportOptions.plist \
-      -exportPath ../../../deploy',
+      -exportPath ../../../deploy | xcpretty',
       { cwd: path.join(buildPath, 'platforms/ios') }
     );
-    // const destination = `${pkg.version}-${BRANCH || 'local'}/${pkg.name}-${pkg.version}.ipa`;
-    // await storage.bucket(process.env.GOOGLE_CLOUD_BUCKET).upload('deploy/Coin.ipa', { destination });
+    const destination = `${pkg.version}-${BRANCH || 'local'}/${pkg.name}-${pkg.version}.ipa`;
+    await storage.bucket(process.env.GOOGLE_CLOUD_BUCKET).upload('deploy/Coin.ipa', { destination });
   } else {
     utils.shell('open platforms/ios/Coin.xcworkspace', { cwd: buildPath });
   }
