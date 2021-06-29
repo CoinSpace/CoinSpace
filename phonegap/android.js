@@ -25,9 +25,11 @@ async function run() {
 
   /* eslint-disable max-len */
   cordova('platform add android@8.1.0');
+  cordova('plugin add cordova-plugin-androidx@3.0.0');
+  cordova('plugin add cordova-plugin-androidx-adapter@1.1.3');
   cordova('plugin add cordova-custom-config@5.1.0');
   cordova('plugin add cordova-plugin-geolocation@4.0.2');
-  cordova('plugin add phonegap-plugin-barcodescanner@8.1.0');
+  cordova('plugin add phonegap-plugin-barcodescanner@8.1.0 --variable ANDROID_SUPPORT_V4_VERSION=28.0.0');
   cordova('plugin add cordova-plugin-dialogs@2.0.2');
   cordova('plugin add cordova-plugin-inappbrowser@4.0.0');
   cordova('plugin add cordova-plugin-x-socialsharing@5.6.8');
