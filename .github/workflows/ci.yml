@@ -144,6 +144,9 @@ jobs:
           APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
           GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/gcloud.key.json
           GOOGLE_CLOUD_BUCKET: ${{ secrets.GOOGLE_CLOUD_BUCKET }}
+          ZENDESK_APP_ID: ${{ secrets.ZENDESK_APP_ID }}
+          ZENDESK_CLIENT_ID: ${{ secrets.ZENDESK_CLIENT_ID }}
+          ZENDESK_URL: ${{ secrets.ZENDESK_URL }}
         run: |
           node ./cli/i18n.js --json
           node ./cli/build.js ${BUILD_TYPE} --env=prod --release --platform=${DISTRIBUTION}
