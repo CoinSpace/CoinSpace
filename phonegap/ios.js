@@ -37,7 +37,7 @@ async function run() {
   cordova('plugin add cordova-plugin-x-socialsharing@5.6.8 --variable PHOTO_LIBRARY_USAGE_DESCRIPTION="This app uses your photo library to upload photos." --variable PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION="This app saves images to your photo library."');
   cordova('plugin add cordova-plugin-touch-id@3.4.0 --variable FACEID_USAGE_DESCRIPTION="Used for easy authentication."');
   cordova('plugin add cordova-plugin-customurlscheme@5.0.1 --variable URL_SCHEME=coinspace');
-  cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#8fcf90c399568895ba8b6e3e858727d275b0f29f');
+  cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#b9e98ce96df3ad21290186b959f861e04446ebdc');
   cordova('plugin add cordova-plugin-3dtouch-shortcutitems@1.0.2');
   cordova('plugin add cordova-plugin-safariviewcontroller@1.6.0');
   cordova('plugin add cordova-plugin-inapp-review@1.1.0');
@@ -78,17 +78,17 @@ async function run() {
     utils.shell(
       'set -o pipefail && xcodebuild -workspace Coin.xcworkspace -scheme Coin \
       -configuration AppStoreDistribution archive \
-      -archivePath Coin.xcarchive | xcpretty',
+      -archivePath Coin.xcarchive',
       { cwd: path.join(buildPath, 'platforms/ios') }
     );
     utils.shell(
       'set -o pipefail && xcodebuild -exportArchive -archivePath Coin.xcarchive \
       -exportOptionsPlist ../../../iosExportOptions.plist \
-      -exportPath ../../../deploy | xcpretty',
+      -exportPath ../../../deploy',
       { cwd: path.join(buildPath, 'platforms/ios') }
     );
-    const destination = `${pkg.version}-${BRANCH || 'local'}/${pkg.name}-${pkg.version}.ipa`;
-    await storage.bucket(process.env.GOOGLE_CLOUD_BUCKET).upload('deploy/Coin.ipa', { destination });
+    // const destination = `${pkg.version}-${BRANCH || 'local'}/${pkg.name}-${pkg.version}.ipa`;
+    // await storage.bucket(process.env.GOOGLE_CLOUD_BUCKET).upload('deploy/Coin.ipa', { destination });
   } else {
     utils.shell('open platforms/ios/Coin.xcworkspace', { cwd: buildPath });
   }
