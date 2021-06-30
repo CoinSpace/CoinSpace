@@ -183,7 +183,7 @@ module.exports = {
           name: 'Coin Wallet',
           schemes: protocols,
         },
-        publish: process.env.SNAP_TOKEN && BRANCH === 'master' ? 'always' : 'never',
+        publish: BRANCH === 'master' ? 'always' : 'never',
       },
     },
   ].filter(item => !!item),
