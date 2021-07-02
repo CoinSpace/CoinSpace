@@ -13,6 +13,21 @@ import seeds from 'lib/wallet/seeds';
 
 axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay, shouldResetTimeout: true });
 
+const URLS = [
+  process.env.SITE_URL,
+  process.env.API_BTC_URL,
+  process.env.API_BCH_URL,
+  process.env.API_BSV_URL,
+  process.env.API_LTC_URL,
+  process.env.API_ETH_URL,
+  process.env.API_XRP_URL,
+  process.env.API_XLM_URL,
+  process.env.API_EOS_URL,
+  process.env.API_DOGE_URL,
+  process.env.API_DASH_URL,
+  process.env.API_XMR_URL,
+];
+
 axios.interceptors.request.use((config) => {
   if (config.intercepted === true) {
     return config;
@@ -21,7 +36,7 @@ axios.interceptors.request.use((config) => {
     config.url = combineURLs(config.baseURL, config.url);
     delete config.baseURL;
   }
-  if (!config.url.startsWith(process.env.SITE_URL)) {
+  if (!URLS.some((item) => config.url.startsWith(item))) {
     config.intercepted = true;
     return config;
   }

@@ -41,6 +41,7 @@ function init(app) {
     const screen = req.baseUrl + req.path + (req.query.crypto ? `/${req.query.crypto}` : '')
       + (req.query.network ? `/${req.query.network}` : '');
     const useragent = req.get('User-Agent');
+    const language = req.acceptsLanguages()[0];
     next();
     axios({
       url: 'https://www.google-analytics.com/collect',
@@ -50,7 +51,7 @@ function init(app) {
         tid: process.env.ANALYTICS_ID,
         aip: 1, uid: id,
         dl: screen, dt: screen, cd: screen,
-        uip: req.ip, ua: useragent,
+        uip: req.ip, ua: useragent, ul: language,
         an: app, av: version, aiid: store,
       }),
     }).catch(() => {});
