@@ -12,7 +12,7 @@
       <div class="csformgroup__input-group">
         <div class="csformgroup__input-group__header">
           <label for="changelly_return_address">{{fromSymbol}} {{translate("address")}}</label>
-          <span class="csformgroup__help" on-click="help">
+          <span class="csformgroup__input-group__header__help" on-click="help">
             {{>svg_help}}
           </span>
         </div>

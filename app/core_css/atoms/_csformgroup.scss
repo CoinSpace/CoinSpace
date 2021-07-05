@@ -56,7 +56,23 @@
       @include noselect;
       margin-bottom: 5px;
       position: relative;
+      display: flex;
       text-align: left;
+      &__help {
+        @include clickbtn;
+        width: 18px;
+        height: 18px;
+        margin-top: 4px;
+        margin-left: 4px;
+        flex-shrink: 0;
+        @include breakpoint(portrait) {
+          width: 26px;
+          height: 26px;
+        }
+        &:hover {
+          opacity: 0.9;
+        }
+      }
     }
   }
 
@@ -70,23 +86,6 @@
       opacity: 0;
       left: 0;
       top: 0;
-    }
-  }
-
-  &__help {
-    @include clickbtn;
-    position: absolute;
-    top: 0;
-    right: -5px;
-    width: 26px;
-    height: 26px;
-    padding: 4px;
-    @include breakpoint(portrait) {
-      width: 32px;
-      height: 32px;
-    }
-    &:hover {
-      opacity: 0.9;
     }
   }
 

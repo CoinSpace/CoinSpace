@@ -61,20 +61,22 @@
       <div class="csformgroup csformgroup--fee">
         <div class="csformgroup__input-group">
           <div class="csformgroup__input-group__header">
-            <label>{{translate("Fee")}}</label>
-            {{#if fees.length > 1}}
-            <div class="csformgroup__select-container" class-qwe="fees.length > 1">
-              +{{fee}} {{feeDenomination}}
-              <select value="{{feeName}}" on-change="change-fee">
-                {{#each fees as fee}}
-                  <option value="{{fee.name}}">+{{fee.estimate}} {{feeDenomination}} - {{fee.title || translate(fee.name)}}</option>
-                {{/each}}
-              </select>
+            <div class="csformgroup__input-group__header__label">
+              <label>{{translate("Fee")}}</label>
+              {{#if fees.length > 1}}
+              <div class="csformgroup__select-container" class-qwe="fees.length > 1">
+                +{{fee}} {{feeDenomination}}
+                <select value="{{feeName}}" on-change="change-fee">
+                  {{#each fees as fee}}
+                    <option value="{{fee.name}}">+{{fee.estimate}} {{feeDenomination}} - {{fee.title || translate(fee.name)}}</option>
+                  {{/each}}
+                </select>
+              </div>
+              {{else}}
+              <strong>+{{fee}} {{feeDenomination}}</strong>
+              {{/if}}
             </div>
-            {{else}}
-            <strong>+{{fee}} {{feeDenomination}}</strong>
-            {{/if}}
-            <span class="csformgroup__help" on-click="help-fee">
+            <span class="csformgroup__input-group__header__help" on-click="help-fee">
               {{>svg_help}}
             </span>
           </div>
@@ -86,7 +88,7 @@
         <div class="csformgroup__input-group">
           <div class="csformgroup__input-group__header">
             <label for="destination-tag">{{translate("Destination tag")}}</label>
-            <span class="csformgroup__help" on-click="help-destination-tag">
+            <span class="csformgroup__input-group__header__help" on-click="help-destination-tag">
               {{>svg_help}}
             </span>
           </div>
@@ -100,7 +102,7 @@
         <div class="csformgroup__input-group">
           <div class="csformgroup__input-group__header">
             <label for="invoice-id">{{translate("Invoice ID")}}</label>
-            <span class="csformgroup__help" on-click="help-invoice-id">
+            <span class="csformgroup__input-group__header__help" on-click="help-invoice-id">
               {{>svg_help}}
             </span>
           </div>
@@ -116,7 +118,7 @@
         <div class="csformgroup__input-group">
           <div class="csformgroup__input-group__header">
             <label for="memo">{{translate("Memo")}}</label>
-            <span class="csformgroup__help" on-click="help-memo">
+            <span class="csformgroup__input-group__header__help" on-click="help-memo">
               {{>svg_help}}
             </span>
           </div>
@@ -132,7 +134,7 @@
         <div class="csformgroup__input-group">
           <div class="csformgroup__input-group__header">
             <label for="memo">{{translate("Memo")}}</label>
-            <span class="csformgroup__help" on-click="help-memo">
+            <span class="csformgroup__input-group__header__help" on-click="help-memo">
               {{>svg_help}}
             </span>
           </div>
@@ -148,7 +150,7 @@
         <div class="csformgroup__input-group">
           <div class="csformgroup__input-group__header">
             <label for="gas-limit">{{translate("Gas limit")}}</label>
-            <span class="csformgroup__help" on-click="help-gas-limit">
+            <span class="csformgroup__input-group__header__help" on-click="help-gas-limit">
               {{>svg_help}}
             </span>
           </div>

@@ -68,7 +68,7 @@
     <div class="csformgroup__input-group">
       <div class="csformgroup__input-group__header">
         <label>{{translate("Network fee")}}</label>
-        <span class="csformgroup__help" on-click="help-network-fee">
+        <span class="csformgroup__input-group__header__help" on-click="help-network-fee">
           {{>svg_help}}
         </span>
       </div>

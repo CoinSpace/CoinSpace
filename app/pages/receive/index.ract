@@ -3,19 +3,21 @@
   <div class="csformgroup csformgroup--readonly">
     <div class="csformgroup__input-group">
       <div class="csformgroup__input-group__header">
-        <label>{{translate("Your wallet address")}}</label>
-        {{#if addressTypes.length > 1}}
-        <div class="csformgroup__select-container">
-          {{getAddressTypeLabel(addressType)}}
-          <select value="{{addressType}}" on-change="change-address-type">
-            {{#each addressTypes}}
-              <option value="{{this}}">{{getAddressTypeOption(this)}}</option>
-            {{/each}}
-          </select>
+        <div class="csformgroup__input-group__header__label">
+          <label>{{translate("Your wallet address")}}</label>
+          {{#if addressTypes.length > 1}}
+          <div class="csformgroup__select-container">
+            {{getAddressTypeLabel(addressType)}}
+            <select value="{{addressType}}" on-change="change-address-type">
+              {{#each addressTypes}}
+                <option value="{{this}}">{{getAddressTypeOption(this)}}</option>
+              {{/each}}
+            </select>
+          </div>
+          {{/if}}
         </div>
-        {{/if}}
         {{#if addressTooltip}}
-        <span class="csformgroup__help" on-click="help-address">
+        <span class="csformgroup__input-group__header__help" on-click="help-address">
           {{>svg_help}}
         </span>
         {{/if}}
