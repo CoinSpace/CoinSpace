@@ -217,6 +217,10 @@ async function getExtraOptions(crypto) {
   } else if (crypto.network === 'eos') {
     options.accountName = details.get('eosAccountName') || '';
   } else if (crypto.network === 'monero') {
+    const addressType = details.get(crypto.network + '.addressType');
+    if (addressType) {
+      options.addressType = addressType;
+    }
     if (process.env.BUILD_TYPE === 'phonegap') {
       options.wasm = (new URL('@coinspace/monero-core-js/build/MoneroCoreJS.wasm', import.meta.url)).href;
     } else {
