@@ -182,6 +182,10 @@ export default function(el) {
         showError({
           message: translate("Not your transaction. It can't be added."),
         });
+      } else if (/Invalid Transaction ID/.test(err.message)) {
+        showError({
+          message: translate('Invalid Transaction ID.'),
+        });
       } else {
         console.error(`txId: '${txId}'`, err);
         showError({
