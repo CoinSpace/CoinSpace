@@ -32,8 +32,10 @@
         <div class="csformgroup">
           <div class="csformgroup__input-group">
             <div class="csformgroup__input-group__header">
-              <label for="crypto">{{translate("Amount")}}</label>
-              <strong class="_max_btn" on-click="set-max-amount">({{translate("max.")}} {{maxAmount}} {{denomination}})</strong>
+              <div class="csformgroup__input-group__header__label">
+                <label for="crypto">{{translate("Amount")}}</label>
+                <strong class="_max_btn" on-click="set-max-amount">({{translate("max.")}} {{maxAmount}} {{denomination}})</strong>
+              </div>
             </div>
             <div class="csinput _crypto_input" class-csinput--with-dropdown="factors">
               <input id="crypto" class="csinput__input" type="number" min="0" step="any" on-input="crypto-to-fiat">
