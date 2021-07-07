@@ -21,7 +21,7 @@ export default function(el) {
   ractive.on('before-show', (context) => {
     if (context.status === 'hold') {
       showInfo({
-        isHtml: true,
+        isHTML: true,
         title: translate('On hold...'),
         // eslint-disable-next-line max-len
         message: translate('Currently, your transaction (ID: :id) is on hold.<br>Please, contact Changelly to pass KYC.',

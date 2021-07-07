@@ -257,5 +257,7 @@
   "Stealth address": "Stealth address",
   "Transaction Accepted": "Transaction Accepted",
   "In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.": "In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.",
-  "Transaction fee is too low. Please click on refresh button.": "Transaction fee is too low. Please click on refresh button."
+  "Transaction fee is too low. Please click on refresh button.": "Transaction fee is too low. Please click on refresh button.",
+  "Only transactions addressed to you can be accepted. The minimum number of confirmations is 10 (:url).": "Only transactions addressed to you can be accepted. The minimum number of confirmations is 10 (%(url)s).",
+  "Invalid Transaction ID.": "Invalid Transaction ID."
 }

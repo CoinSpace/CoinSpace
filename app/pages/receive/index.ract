@@ -54,6 +54,9 @@
     <div class="csformgroup__input-group">
       <div class="csformgroup__input-group__header">
         <label for="tx-id">{{translate("Transaction ID")}}</label>
+        <span class="csformgroup__input-group__header__help" on-click="help-monero-accept">
+          {{>svg_help}}
+        </span>
       </div>
       <div class="csinput csinput--with-x">
         <input id="tx-id" class="csinput__input" type="text" autocorrect="off" autocapitalize="off" value="{{txId}}" />

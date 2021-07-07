@@ -149,6 +149,18 @@ export default function(el) {
     });
   });
 
+  ractive.on('help-monero-accept', () => {
+    // eslint-disable-next-line max-len
+    const message = translate('Only transactions addressed to you can be accepted. The minimum number of confirmations is 10 (:url).', {
+      // eslint-disable-next-line max-len
+      url: `<a href="" onclick="return window.safeOpen('https://coinapp.zendesk.com/hc/en-us/articles/4403046925204', '_blank');">${translate('more info')}</a>`,
+    });
+    showTooltip({
+      message,
+      isHTML: true,
+    });
+  });
+
   ractive.on('clearTxId', () => {
     ractive.set('txId', '');
     ractive.find('#tx-id').focus();
@@ -170,6 +182,10 @@ export default function(el) {
         message: translate('Your transaction will appear in your history tab shortly.'),
       });
     } catch (err) {
+      const moreInfo = {
+        href: 'https://coinapp.zendesk.com/hc/en-us/articles/4403046925204',
+        linkText: translate('more info'),
+      };
       if (/Transaction already added/.test(err.message)) {
         showError({
           message: translate('Transaction has already been added.'),
@@ -177,14 +193,17 @@ export default function(el) {
       } else if (/Unknown transaction/.test(err.message)) {
         showError({
           message: translate('Unknown transaction.'),
+          ...moreInfo,
         });
       } else if (/Not your transaction/.test(err.message)) {
         showError({
           message: translate("Not your transaction. It can't be added."),
+          ...moreInfo,
         });
       } else if (/Invalid Transaction ID/.test(err.message)) {
         showError({
           message: translate('Invalid Transaction ID.'),
+          ...moreInfo,
         });
       } else {
         console.error(`txId: '${txId}'`, err);

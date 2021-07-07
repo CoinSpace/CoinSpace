@@ -18,9 +18,9 @@
   <div class="_content">
     {{>cross}}
     <div class="_title {{type}}">{{title}}</div>
-    {{#if isHtml}}
+    {{#if isHTML}}
     <div class="_message">{{{message}}}</div>
-      {{else}}
+    {{else}}
     <div class="_message">{{message}}</div>
     {{/if}}
   </div>
