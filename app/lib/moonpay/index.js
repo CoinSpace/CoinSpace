@@ -86,6 +86,7 @@ function getBuyUrl(currencyCode, walletAddress) {
       'sepa_bank_transfer',
       'gbp_bank_transfer',
       'gbp_open_banking_payment',
+      'ach_bank_transfer',
     ].join(','),
   };
 
