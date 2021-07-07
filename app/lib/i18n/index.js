@@ -4,7 +4,7 @@ const languages = [
   'bs', 'cs-cz', 'de', 'en', 'es', 'fil',
   'fr', 'hr', 'hu', 'id', 'it', 'ja',
   'km', 'ko', 'nb', 'nl', 'pl', 'pt-br', 'ru',
-  'sr', 'th', 'uk', 'vi', 'zh-cn',
+  'sr', 'th', 'tr', 'uk', 'vi', 'zh-cn',
 ];
 
 counterpart.setSeparator('*');
