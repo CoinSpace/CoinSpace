@@ -9,9 +9,6 @@
   <meta name="format-detection" content="telephone=no"/>
   <meta name="format-detection" content="address=no"/>
   <meta name="apple-itunes-app" content="app-id=980719434"/>
-  <% if (process.env.BUILD_TYPE === 'web') { %>
-  <meta http-equiv="onion-location" content="<%= process.env.SITE_URL %>" />
-  <% } %>
   <% if (process.env.BUILD_TYPE === 'phonegap') { %>
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self' blob: gap:;
