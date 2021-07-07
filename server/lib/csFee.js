@@ -35,6 +35,7 @@ async function getCsFee(cryptoId) {
     minFee: parseInt(Big(1).div(rate).times(csFee.min_usd).times(Big(10).pow(ticker.decimals)), 10),
     maxFee: parseInt(Big(1).div(rate).times(csFee.max_usd).times(Big(10).pow(ticker.decimals)), 10),
     rbfFee: parseInt(Big(1).div(rate).times(csFee.rbf_usd || 0).times(Big(10).pow(ticker.decimals)), 10),
+    skipMinFee: csFee.skipMinFee || false,
     addresses: csFee.addresses,
     whitelist: csFee.whitelist,
   };
