@@ -205,7 +205,7 @@ export default function(el) {
           message: translate('Invalid Transaction ID.'),
           ...moreInfo,
         });
-      } else {
+      } else if (err.message !== 'cancelled') {
         console.error(`txId: '${txId}'`, err);
         showError({
           title: translate('Uh Oh...'),
