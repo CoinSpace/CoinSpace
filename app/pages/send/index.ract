@@ -34,7 +34,11 @@
             <div class="csformgroup__input-group__header">
               <div class="csformgroup__input-group__header__label">
                 <label for="crypto">{{translate("Amount")}}</label>
-                <strong class="_max_btn" on-click="set-max-amount">({{translate("max.")}} {{maxAmount}} {{denomination}})</strong>
+                {{#if denomination}}
+                  <strong class="_max_btn" on-click="set-max-amount">({{translate("max.")}} {{maxAmount}} {{denomination}})</strong>
+                {{else}}
+                  <strong>...</strong>
+                {{/if}}
               </div>
             </div>
             <div class="csinput _crypto_input" class-csinput--with-dropdown="factors">
@@ -65,17 +69,21 @@
           <div class="csformgroup__input-group__header">
             <div class="csformgroup__input-group__header__label">
               <label>{{translate("Fee")}}</label>
-              {{#if fees.length > 1}}
-              <div class="csformgroup__select-container" class-qwe="fees.length > 1">
-                +{{fee}} {{feeDenomination}}
-                <select value="{{feeName}}" on-change="change-fee">
-                  {{#each fees as fee}}
-                    <option value="{{fee.name}}">+{{fee.estimate}} {{feeDenomination}} - {{fee.title || translate(fee.name)}}</option>
-                  {{/each}}
-                </select>
-              </div>
+              {{#if feeDenomination}}
+                {{#if fees.length > 1}}
+                <div class="csformgroup__select-container" class-qwe="fees.length > 1">
+                  +{{fee}} {{feeDenomination}}
+                  <select value="{{feeName}}" on-change="change-fee">
+                    {{#each fees as fee}}
+                      <option value="{{fee.name}}">+{{fee.estimate}} {{feeDenomination}} - {{fee.title || translate(fee.name)}}</option>
+                    {{/each}}
+                  </select>
+                </div>
+                {{else}}
+                <strong>+{{fee}} {{feeDenomination}}</strong>
+                {{/if}}
               {{else}}
-              <strong>+{{fee}} {{feeDenomination}}</strong>
+                <strong>...</strong>
               {{/if}}
             </div>
             <span class="csformgroup__input-group__header__help" on-click="help-fee">
