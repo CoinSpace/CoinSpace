@@ -1,5 +1,5 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="pt-br.json" datatype="plaintext" source-language="en" target-language="pt-br">
+  <file original="pt-BR.json" datatype="plaintext" source-language="en" target-language="pt-BR">
     <body>
       <trans-unit id="Create new wallet">
         <source>Create new wallet</source>

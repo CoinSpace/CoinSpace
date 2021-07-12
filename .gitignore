@@ -18,3 +18,4 @@ electron/app
 electron/out
 *.provisionprofile
 *.pfx
+app/lib/i18n/list.json

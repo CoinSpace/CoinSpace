@@ -1,11 +1,6 @@
 import counterpart from 'counterpart';
 
-const languages = [
-  'bs', 'cs-cz', 'de', 'en', 'es', 'fil',
-  'fr', 'hr', 'hu', 'id', 'it', 'ja',
-  'km', 'ko', 'nb', 'nl', 'pl', 'pt-br', 'ru',
-  'sr', 'th', 'tr', 'uk', 'vi', 'zh-cn',
-];
+const languages = require('./list.json').map((item) => item.toLocaleLowerCase());
 
 counterpart.setSeparator('*');
 
@@ -31,9 +26,11 @@ export function translate() {
 }
 
 function getLanguage() {
-  const language = navigator.language.toLocaleLowerCase() || 'en';
-  return languages.filter((l) => {
-    return language === l || language.substr(0, 2) === l;
+  const languageFull = navigator.language.toLocaleLowerCase() || 'en';
+  const languageShort = languageFull.split('-')[0];
+  return languages.filter((full) => {
+    const short = full.split('-')[0];
+    return full === languageFull || short === languageShort;
   })[0] || 'en';
 }
 
