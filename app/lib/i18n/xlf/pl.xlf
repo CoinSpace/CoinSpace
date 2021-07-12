@@ -1045,11 +1045,11 @@ Zostanie przeliczony na %(toSymbol)s, i wysłany do
       </trans-unit>
       <trans-unit id="Only transactions addressed to you can be accepted. The minimum number of confirmations is 10 (:url).">
         <source>Only transactions addressed to you can be accepted. The minimum number of confirmations is 10 (%(url)s).</source>
-        <target></target>
+        <target>Zaakceptowane mogą być tylko transakcje skierowane do Ciebie. Minimalna liczba potwierdzeń wynosi 10 (%(url)s).</target>
       </trans-unit>
       <trans-unit id="Invalid Transaction ID.">
         <source>Invalid Transaction ID.</source>
-        <target></target>
+        <target>Nieprawidłowy ID transakcji.</target>
       </trans-unit>
     </body>
   </file>
