@@ -12,6 +12,7 @@ const { Storage } = require('@google-cloud/storage');
 const storage = new Storage();
 const buildPath = 'build';
 const cordova = utils.cordova(buildPath);
+const languages = require('../app/lib/i18n/list.json');
 
 const BUILD_NUMBER = process.env.GITHUB_RUN_NUMBER || '1';
 const BRANCH = process.env.GITHUB_REF && process.env.GITHUB_REF.replace('refs/heads/', '');
@@ -69,6 +70,7 @@ async function run() {
         ],
       },
     ],
+    'CFBundleLocalizations': languages,
   };
   updatePlist(path.join(buildPath, 'platforms/ios/Coin/Coin-Info.plist'), update);
 
