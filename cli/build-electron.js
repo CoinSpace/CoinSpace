@@ -39,10 +39,12 @@ process.env['BUILD_PLATFORM'] = program.platform.replace('-dev', '');
 const webpackConfig = require('../webpack.prod');
 
 const RELEASE = `${pkg.name}.electron-${program.platform}@${pkg.version}`;
+const PLATFORM = `electron-${program.platform}`;
 
 webpackConfig.plugins.push(
   new webpack.DefinePlugin({
     'process.env.RELEASE': JSON.stringify(RELEASE),
+    'process.env.PLATFORM': JSON.stringify(PLATFORM),
   })
 );
 

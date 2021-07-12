@@ -70,6 +70,7 @@ module.exports = merge(common, {
     new webpack.DefinePlugin({
       'process.env.BUILD_TYPE': JSON.stringify('web'),
       'process.env.BUILD_PLATFORM': JSON.stringify('web'),
+      'process.env.PLATFORM': JSON.stringify('web-web'),
       'process.env.RELEASE': JSON.stringify(`${pkg.name}.web-web@${pkg.version}`),
       'process.env.SENTRY_DSN': JSON.stringify(dotEnv.getEnvs().env.SENTRY_DSN),
     }),

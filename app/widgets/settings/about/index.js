@@ -8,6 +8,7 @@ export default function(el) {
     template,
     data: {
       version: process.env.VERSION,
+      platform: process.env.PLATFORM,
       commit: process.env.COMMIT,
       hasUpdate: updater.hasUpdate(),
     },

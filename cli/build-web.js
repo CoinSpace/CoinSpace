@@ -28,10 +28,12 @@ process.env['BUILD_PLATFORM'] = program.platform;
 const webpackConfig = require('../webpack.prod');
 
 const RELEASE = `${pkg.name}.web-${program.platform}@${pkg.version}`;
+const PLATFORM = `web-${program.platform}`;
 
 webpackConfig.plugins.push(
   new webpack.DefinePlugin({
     'process.env.RELEASE': JSON.stringify(RELEASE),
+    'process.env.PLATFORM': JSON.stringify(PLATFORM),
   })
 );
 
