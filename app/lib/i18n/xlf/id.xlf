@@ -1043,6 +1043,14 @@ itu akan dikonversi ke %(toSymbol)s, dan dikirim ke
         <source>Transaction fee is too low. Please click on refresh button.</source>
         <target>Biaya transaksi terlalu rendah. Harap klik tombol muat ulang.</target>
       </trans-unit>
+      <trans-unit id="Only transactions addressed to you can be accepted. The minimum number of confirmations is 10 (:url).">
+        <source>Only transactions addressed to you can be accepted. The minimum number of confirmations is 10 (%(url)s).</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Invalid Transaction ID.">
+        <source>Invalid Transaction ID.</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

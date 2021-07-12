@@ -1043,6 +1043,14 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Transaction fee is too low. Please click on refresh button.</source>
         <target>Комиссия за транзакцию слишком низкая. Пожалуйста, нажмите кнопку обновления кошелька.</target>
       </trans-unit>
+      <trans-unit id="Only transactions addressed to you can be accepted. The minimum number of confirmations is 10 (:url).">
+        <source>Only transactions addressed to you can be accepted. The minimum number of confirmations is 10 (%(url)s).</source>
+        <target>Принимаются только транзакции, адресованные вам. Минимальное количество подтверждений - 10 (%(url)s).</target>
+      </trans-unit>
+      <trans-unit id="Invalid Transaction ID.">
+        <source>Invalid Transaction ID.</source>
+        <target>Неверный ID транзакции.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1043,6 +1043,14 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Transaction fee is too low. Please click on refresh button.</source>
         <target>거래 수수료는 매우 낮습니다. 새로 고침 버튼을 클릭하십시오.</target>
       </trans-unit>
+      <trans-unit id="Only transactions addressed to you can be accepted. The minimum number of confirmations is 10 (:url).">
+        <source>Only transactions addressed to you can be accepted. The minimum number of confirmations is 10 (%(url)s).</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Invalid Transaction ID.">
+        <source>Invalid Transaction ID.</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

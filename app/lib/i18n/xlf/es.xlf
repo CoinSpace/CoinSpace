@@ -1043,6 +1043,14 @@ Esto se convertirá en %(toSymbol)s y se enviará a
         <source>Transaction fee is too low. Please click on refresh button.</source>
         <target>La tarifa de la transacción es muy baja. Por favor, haz clic en el botón de actualización.</target>
       </trans-unit>
+      <trans-unit id="Only transactions addressed to you can be accepted. The minimum number of confirmations is 10 (:url).">
+        <source>Only transactions addressed to you can be accepted. The minimum number of confirmations is 10 (%(url)s).</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Invalid Transaction ID.">
+        <source>Invalid Transaction ID.</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
