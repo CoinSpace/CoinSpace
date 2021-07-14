@@ -3,7 +3,7 @@
 const setLanguages = require('electron-packager-languages');
 const pkg = require('./package.json');
 const schemes = require('./lib/schemes');
-const languages = require('../app/lib/i18n/list.json');
+const languages = ['en'].concat(require('../app/lib/i18n/list.json'));
 
 const { BUILD_PLATFORM } = process.env;
 const BRANCH = process.env.APPVEYOR_REPO_BRANCH ||
