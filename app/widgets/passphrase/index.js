@@ -2,6 +2,7 @@ import Ractive from 'lib/ractive';
 import { translate } from 'lib/i18n';
 import { showError } from 'widgets/modals/flash';
 import template from './index.ract';
+const DEFAULT_WORDLIST = require('@coinspace/b39/wordlists/en.json');
 
 function open(options, callback) {
   const {
@@ -27,6 +28,20 @@ function open(options, callback) {
       count() {
         const passphrase = this.get('passphrase').trim();
         return passphrase ? passphrase.split(' ').length : 0;
+      },
+      suggestions() {
+        const passphrase = this.get('passphrase').toLowerCase();
+        const lastWord = passphrase.split(' ').slice(-1)[0];
+        if (!lastWord) return [];
+        const suggestions = DEFAULT_WORDLIST.filter((word) => word.startsWith(lastWord)).slice(0, 3);
+        return suggestions;
+      },
+      acceptSuggestion(suggestion) {
+        const words = this.get('passphrase').toLowerCase().trim().split(' ');
+        words[words.length - 1] = `${suggestion} `;
+        this.set('passphrase', words.join(' '));
+        const $passphrase = ractive.find('.js-passphrase-input');
+        $passphrase.focus();
       },
     },
     oncomplete() {

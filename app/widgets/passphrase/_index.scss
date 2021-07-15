@@ -41,7 +41,7 @@
   }
 
   .csformgroup {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
 
   ._footer_link {
@@ -52,5 +52,21 @@
       text-decoration: underline;
     }
     @include small_font_size;
+  }
+
+  ._suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 42px;
+    @include breakpoint(portrait) {
+      min-height: 47px;
+    }
+    &__word {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 10px;
+    }
   }
 }

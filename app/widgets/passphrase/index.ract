@@ -20,6 +20,11 @@
             </div>
           {{/passphrase}}
         </div>
+        <div class="_suggestions">
+          {{#each suggestions()}}
+          <div class="_suggestions__word" on-click="acceptSuggestion(this)">{{this}}</div>
+          {{/each}}
+        </div>
       </div>
     </div>
 
