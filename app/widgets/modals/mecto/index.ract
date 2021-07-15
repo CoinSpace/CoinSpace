@@ -25,7 +25,7 @@
       <span id="geo-pulse" class="_oval"></span>
       <div class="_text">
         <p class="_max-width">
-          {{translate(search_message)}}
+          {{search_message}}
         </p>
       </div>
       <div id="geo-pin" class="geo__pindrop" style="transform: translateY(-100%);">
