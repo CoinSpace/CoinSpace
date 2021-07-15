@@ -13,7 +13,6 @@
   },
   "scripts": {
     "client": "webpack --config webpack.prod.js",
-    "monero": "webpack --config webpack.monero.js",
     "client:watch": "webpack serve --config webpack.dev.js",
     "server": "node --expose-gc ./server/server.js",
     "server:watch": "nodemon -e js,yaml -w ./server -x node -r dotenv/config ./server/server.js dotenv_config_path=./server/.env.loc",

@@ -12,7 +12,9 @@ const { Storage } = require('@google-cloud/storage');
 const storage = new Storage();
 const buildPath = 'build';
 const cordova = utils.cordova(buildPath);
-const languages = ['en'].concat(require('../app/lib/i18n/list.json'));
+const languages = ['en'].concat(require('../app/lib/i18n/list.json')).map((item) => {
+  return item.replace('-', '_').replace(/_[a-z]+/, s => s.toUpperCase());
+});
 
 const BUILD_NUMBER = process.env.GITHUB_RUN_NUMBER || '1';
 const BRANCH = process.env.GITHUB_REF && process.env.GITHUB_REF.replace('refs/heads/', '');

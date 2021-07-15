@@ -1,6 +1,6 @@
 import counterpart from 'counterpart';
 
-const languages = require('./list.json').map((item) => item.toLocaleLowerCase());
+const languages = require('./list.json');
 
 counterpart.setSeparator('*');
 
@@ -26,7 +26,7 @@ export function translate() {
 }
 
 function getLanguage() {
-  const languageFull = navigator.language.toLocaleLowerCase() || 'en';
+  const languageFull = navigator.language.toLowerCase() || 'en';
   const languageShort = languageFull.split('-')[0];
   return languages.filter((full) => {
     const short = full.split('-')[0];
