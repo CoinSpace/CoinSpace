@@ -12,7 +12,7 @@ const { Storage } = require('@google-cloud/storage');
 const storage = new Storage();
 const buildPath = 'build';
 const cordova = utils.cordova(buildPath);
-const languages = ['en'].concat(require('../app/lib/i18n/list.json')).map((item) => {
+const languages = require('../app/lib/i18n/list.json').map((item) => {
   return item.replace('-', '_').replace(/_[a-z]+/, s => s.toUpperCase());
 });
 

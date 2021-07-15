@@ -3,7 +3,7 @@
 const setLanguages = require('electron-packager-languages');
 const pkg = require('./package.json');
 const schemes = require('./lib/schemes');
-const languages = ['en'].concat(require('../app/lib/i18n/list.json')).map((item) => {
+const languages = require('../app/lib/i18n/list.json').map((item) => {
   return item.replace('-', '_').replace(/_[a-z]+/, s => s.toUpperCase());
 });
 

@@ -69,7 +69,7 @@ function xlf(program) {
 }
 
 function json() {
-  const list = [];
+  const list = ['en'];
   program.exclude.push('empty');
   fse.readdirSync('./app/lib/i18n/xlf').forEach((file) => {
     if (!file.endsWith('.xlf')) return;
@@ -82,9 +82,9 @@ function json() {
 
     console.log(js.targetLanguage);
 
-    list.push(js.targetLanguage);
     const resource = Object.keys(js.resources)[0];
     const dest = path.resolve('./app/lib/i18n/translations', resource);
+    list.push(resource.split('.')[0]);
 
     const translations = {};
 
