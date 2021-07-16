@@ -34,8 +34,8 @@ const platforms = [{
   arch: 'any',
   app: 'app',
   type: TYPE_LINK,
-  pattern: /coinapp3ahbvjupq\.onion/ig,
-  link: 'http://coinapp3ahbvjupq.onion/',
+  pattern: /coinspacezp5mmyuicbz2hoafbnduj4vzkttq3grn5mnwdue5t343zid\.onion/ig,
+  link: 'http://coinspacezp5mmyuicbz2hoafbnduj4vzkttq3grn5mnwdue5t343zid.onion/',
 }, {
   // Windows application, update from app
   distribution: 'win',
