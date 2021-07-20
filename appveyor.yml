@@ -65,6 +65,10 @@ before_build:
       }
   - ps: npm version $Env:VERSION
   - ps: cd ..
+  - ps: >-
+        if ($Env:APPVEYOR_REPO_BRANCH -ne "master") {
+          $Env:NODE_ENV="development"
+        }
 
 build_script:
   - ps: |

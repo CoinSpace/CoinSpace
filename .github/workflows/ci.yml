@@ -127,6 +127,7 @@ jobs:
         run: (cd ${BUILD_TYPE} && npm version $(node -p -e "require('../package.json').version"))
       - name: Build app
         env:
+          NODE_ENV: ${{ github.ref == 'refs/heads/master' && 'production' || 'development' }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DISTRIBUTION: ${{ matrix.DISTRIBUTION }}
           BUILD_TYPE: ${{ matrix.BUILD_TYPE }}
