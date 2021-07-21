@@ -16,6 +16,7 @@ docker-compose.prod.yml
 .vscode/
 electron/app
 electron/out
+electron/resources/appxmanifest.xml
 *.provisionprofile
 *.pfx
 app/lib/i18n/list.json

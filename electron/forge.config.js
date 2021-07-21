@@ -3,9 +3,8 @@
 const setLanguages = require('electron-packager-languages');
 const pkg = require('./package.json');
 const schemes = require('./lib/schemes');
-const languages = require('../app/lib/i18n/list.json').map((item) => {
-  return item.replace('-', '_').replace(/_[a-z]+/, s => s.toUpperCase());
-});
+const languages = require('../app/lib/i18n/list.json');
+const appxmanifest = require('./support/appxmanifest');
 
 const { BUILD_PLATFORM } = process.env;
 const BRANCH = process.env.APPVEYOR_REPO_BRANCH ||
@@ -20,11 +19,6 @@ let buildVersion = pkg.version;
 if (BUILD_PLATFORM === 'mas' && process.env.GITHUB_RUN_NUMBER) {
   buildVersion = `1.1.${process.env.GITHUB_RUN_NUMBER}`;
 }
-
-const protocols = [
-  'coinspace',
-  ...schemes,
-];
 
 module.exports = {
   packagerConfig: {
@@ -80,9 +74,28 @@ module.exports = {
     } : undefined,
     protocols: {
       name: 'Coin Wallet',
-      schemes: protocols,
+      schemes,
     },
-    afterCopy: [...(['mac', 'mas', 'mas-dev'].includes(BUILD_PLATFORM) ? [setLanguages(languages)] : [])],
+    afterCopy: [
+      ...(['mac', 'mas', 'mas-dev'].includes(BUILD_PLATFORM) ? [setLanguages(languages.map((item) => {
+        return item.replace('-', '_').replace(/_[a-z]+/, s => s.toUpperCase());
+      }))] : []),
+      ...(['appx', 'appx-dev'].includes(BUILD_PLATFORM) ? [appxmanifest({
+        packageVersion: `${pkg.version}.0`,
+        identityName: BUILD_PLATFORM === 'appx' ? process.env.APPX_IDENTITY : pkg.name,
+        packageName: BUILD_PLATFORM === 'appx' ? 'CoinWallet' : 'CoinWalletDev',
+        packageDescription: pkg.description,
+        packageDisplayName: process.env.APPX_PACKAGE_NAME,
+        publisherName: BUILD_PLATFORM === 'appx' ? process.env.APPX_PUBLISHER : process.env.APPX_PUBLISHER_DEV,
+        publisherDisplayName: process.env.APPX_PUBLISHER_NAME,
+        packageExecutable: `app\\${pkg.productName}.exe`,
+        languages,
+        protocols: {
+          name: 'Coin Wallet',
+          schemes,
+        },
+      })] : []),
+    ],
   },
   makers: [
     BUILD_PLATFORM === 'win' && {
@@ -101,12 +114,10 @@ module.exports = {
     BUILD_PLATFORM === 'appx' && {
       name: '@electron-forge/maker-appx',
       config: {
-        identityName: process.env.APPX_IDENTITY,
         packageName: 'CoinWallet',
-        packageDisplayName: process.env.APPX_PACKAGE_NAME,
         publisher: process.env.APPX_PUBLISHER,
-        publisherDisplayName: process.env.APPX_PUBLISHER_NAME,
         assets: 'resources/appx',
+        manifest: 'resources/appxmanifest.xml',
         makePri: true,
       },
     },
@@ -114,12 +125,11 @@ module.exports = {
       name: '@electron-forge/maker-appx',
       config: {
         packageName: 'CoinWalletDev',
-        packageDisplayName: process.env.APPX_PACKAGE_NAME,
         publisher: process.env.APPX_PUBLISHER_DEV,
-        publisherDisplayName: process.env.APPX_PUBLISHER_NAME,
         devCert: 'resources/certificate.pfx',
         certPass: process.env.CERTIFICATE_WIN_PASSWORD,
         assets: 'resources/appx',
+        manifest: 'resources/appxmanifest.xml',
         makePri: true,
       },
     },
@@ -186,7 +196,7 @@ module.exports = {
         },
         protocols: {
           name: 'Coin Wallet',
-          schemes: protocols,
+          schemes,
         },
         publish: BRANCH === 'master' ? 'always' : 'never',
       },
