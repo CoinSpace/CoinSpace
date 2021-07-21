@@ -89,9 +89,11 @@ class Updater {
   }
 
   launchCheckForUpdates() {
-    // check for updates right away and keep checking later
-    autoUpdater.checkForUpdates();
-    setInterval(() => { autoUpdater.checkForUpdates(); }, 12 * 60 * 60 * 1000);
+    if (this.supported) {
+      // check for updates right away and keep checking later
+      autoUpdater.checkForUpdates();
+      setInterval(() => { autoUpdater.checkForUpdates(); }, 12 * 60 * 60 * 1000);
+    }
   }
 
   quitAndInstall() {
