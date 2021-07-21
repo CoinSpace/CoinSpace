@@ -82,7 +82,7 @@ module.exports = {
       name: 'Coin Wallet',
       schemes: protocols,
     },
-    afterCopy: [setLanguages(languages)],
+    afterCopy: [...(['mac', 'mas', 'mas-dev'].includes(BUILD_PLATFORM) ? [setLanguages(languages)] : [])],
   },
   makers: [
     BUILD_PLATFORM === 'win' && {
