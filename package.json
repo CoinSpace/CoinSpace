@@ -5,8 +5,8 @@
   "bugs": {
     "url": "https://github.com/CoinSpace/CoinSpace/issues"
   },
-  "license": "GPL-2.0+",
-  "author": "Coin Wallet",
+  "license": "MIT",
+  "author": "Coin Crypto Wallet <support@coin.space> (https://coin.space/)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CoinSpace/CoinSpace.git"

@@ -3,7 +3,7 @@
   "productName": "Coin Wallet",
   "version": "1.0.0",
   "description": "Coin Digital Currency Wallet",
-  "license": "GPL-2.0+",
+  "license": "MIT",
   "author": {
     "name": "Coin Wallet",
     "email": "support@coin.space",
