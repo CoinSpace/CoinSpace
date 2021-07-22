@@ -21,7 +21,7 @@ environment:
     - DISTRIBUTION: appx-dev
 
 install:
-  - ps: Install-Product node 12 x64
+  - ps: Install-Product node 14 x64
   - set NODE_ENV=ci
   - npm config set @coinspace:registry https://npm.pkg.github.com
   - npm config set "//npm.pkg.github.com/:_authToken" ${NPM_READ_TOKEN}
