@@ -82,6 +82,19 @@ webpack(webpackConfig, (error, stats) => {
         BUILD_PLATFORM: program.platform,
       },
     });
+    if (program.platform === 'mac') {
+      platform = 'mac';
+    }
+    if (program.platform === 'mas' || program.platform === 'mas-dev') {
+      platform = 'mas';
+    }
+    if (program.platform === 'win' || program.platform === 'appx' || program.platform === 'appx-dev') {
+      platform = 'win';
+    }
+    if (program.platform === 'snap') {
+      platform = 'linux';
+    }
+    utils.uploadSentrySourceMaps(platform, RELEASE);
     console.log('Electron build Done!');
   } else if (program.run) {
     // run electron app
