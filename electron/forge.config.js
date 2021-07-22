@@ -7,8 +7,7 @@ const languages = require('../app/lib/i18n/list.json');
 const appxmanifest = require('./support/appxmanifest');
 
 const { BUILD_PLATFORM } = process.env;
-const BRANCH = process.env.APPVEYOR_REPO_BRANCH ||
-  (process.env.GITHUB_REF && process.env.GITHUB_REF.replace('refs/heads/', ''));
+const BRANCH = process.env.GITHUB_REF && process.env.GITHUB_REF.replace('refs/heads/', '');
 
 if (!['win', 'appx', 'appx-dev', 'mac', 'mas', 'mas-dev', 'snap'].includes(BUILD_PLATFORM)) {
   throw new Error(`Please specify valid distribution, provided: '${BUILD_PLATFORM}'`);
@@ -34,7 +33,6 @@ module.exports = {
       '^/(?!electron.js|env.json|package.json|lib|app|resources|node_modules)',
       ['win', 'appx', 'appx-dev', 'snap'].includes(BUILD_PLATFORM) ? '^/resources/(?!64x64.png)' : '^/resources',
       'Makefile',
-      'appveyor.yml',
       '.editorconfig',
       '.gitignore',
       '.gitattributes',

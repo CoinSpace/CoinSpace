@@ -14,7 +14,6 @@ process.env.BUILD_TYPE = process.env.BUILD_TYPE || 'web';
 
 const COMMIT = (
   process.env.GITHUB_SHA ||
-  process.env.APPVEYOR_REPO_COMMIT ||
   process.env.COMMIT_SHA ||
   'local'
 ).substring(0, 7);
