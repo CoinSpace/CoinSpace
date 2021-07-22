@@ -29,6 +29,21 @@ jobs:
             DISTRIBUTION: snap
             BUILD_TYPE: electron
             SENTRY_KEY: SENTRY_DSN_SNAP
+          - os: windows-2019
+            node: 14
+            DISTRIBUTION: win
+            BUILD_TYPE: electron
+            SENTRY_KEY: SENTRY_DSN_WIN
+          - os: windows-2019
+            node: 14
+            DISTRIBUTION: appx
+            BUILD_TYPE: electron
+            SENTRY_KEY: SENTRY_DSN_WIN
+          - os: windows-2019
+            node: 14
+            DISTRIBUTION: appx-dev
+            BUILD_TYPE: electron
+            SENTRY_KEY: SENTRY_DSN_WIN
           - os: macos-10.15
             node: 14
             DISTRIBUTION: ios
@@ -54,6 +69,7 @@ jobs:
           NODE_ENV: ci
           BUILD_TYPE: ${{ matrix.BUILD_TYPE }}
           NPM_READ_TOKEN: ${{ secrets.NPM_READ_TOKEN }}
+        shell: bash
         run: |
           npm config set @coinspace:registry https://npm.pkg.github.com
           npm config set "//npm.pkg.github.com/:_authToken" "${NPM_READ_TOKEN}"
@@ -83,6 +99,8 @@ jobs:
           PROVISIONING_IOS_WATCH_APP_EXTENSION: ${{ secrets.PROVISIONING_IOS_WATCH_APP_EXTENSION }}
           GOOGLE_CLOUD_KEY: ${{ secrets.GOOGLE_CLOUD_KEY }}
           ANDROID_RELEASE_KEYSTORE: ${{ secrets.ANDROID_RELEASE_KEYSTORE }}
+          CERTIFICATE_WIN: ${{ secrets.CERTIFICATE_WIN }}
+        shell: bash
         run: |
           echo "GITHUB_RUN_NUMBER: $GITHUB_RUN_NUMBER";
           echo $GOOGLE_CLOUD_KEY | base64 --decode > gcloud.key.json;
@@ -120,10 +138,17 @@ jobs:
           elif [[ "$DISTRIBUTION" == "android-play" || "$DISTRIBUTION" == "android-galaxy" ]]; then
             echo $ANDROID_RELEASE_KEYSTORE | base64 --decode > phonegap/release.keystore;
             echo "/usr/local/lib/android/sdk/build-tools/30.0.3" >> $GITHUB_PATH
+          elif [[ "$DISTRIBUTION" == "win" || "$DISTRIBUTION" == "appx" || "$DISTRIBUTION" == "appx-dev" ]]; then
+            echo $CERTIFICATE_WIN | base64 --decode > electron/resources/certificate.pfx
+            if [[ "$DISTRIBUTION" == "appx" ]]; then
+              sed -i 's/function signAppx (program) {/function signAppx (program) { return;/' electron/node_modules/electron-windows-store/lib/sign.js
+              sed -i 's/function makeCert (parametersOrPublisherName, certFilePath, program) {/function makeCert (parametersOrPublisherName, certFilePath, program) { return;/' electron/node_modules/electron-windows-store/lib/sign.js
+            fi
           fi
       - name: Set app version
         env:
           BUILD_TYPE: ${{ matrix.BUILD_TYPE }}
+        shell: bash
         run: (cd ${BUILD_TYPE} && npm version $(node -p -e "require('../package.json').version"))
       - name: Build app
         env:
@@ -148,6 +173,13 @@ jobs:
           ZENDESK_APP_ID: ${{ secrets.ZENDESK_APP_ID }}
           ZENDESK_CLIENT_ID: ${{ secrets.ZENDESK_CLIENT_ID }}
           ZENDESK_URL: ${{ secrets.ZENDESK_URL }}
+          CERTIFICATE_WIN_PASSWORD: ${{ secrets.CERTIFICATE_WIN_PASSWORD }}
+          APPX_IDENTITY: ${{ secrets.APPX_IDENTITY }}
+          APPX_PACKAGE_NAME: ${{ secrets.APPX_PACKAGE_NAME }}
+          APPX_PUBLISHER: ${{ secrets.APPX_PUBLISHER }}
+          APPX_PUBLISHER_DEV: ${{ secrets.APPX_PUBLISHER_DEV }}
+          APPX_PUBLISHER_NAME: ${{ secrets.APPX_PUBLISHER_NAME }}
+        shell: bash
         run: |
           node ./cli/i18n.js --json
           node ./cli/build.js ${BUILD_TYPE} --env=prod --release --platform=${DISTRIBUTION}
