@@ -1,6 +1,6 @@
 import '../application.scss';
 import * as Sentry from '@sentry/browser';
-import { CaptureConsole, RewriteFrames } from '@sentry/integrations';
+import { RewriteFrames } from '@sentry/integrations';
 // eslint-disable-next-line no-useless-escape
 const SENTRY_PATH_STRIP_RE = /^.*\/[^\.]+(\.app|CodePush|.*(?=\/))/;
 Sentry.init({
@@ -9,9 +9,6 @@ Sentry.init({
   environment: process.env.SENTRY_ENVIRONMENT,
   release: process.env.RELEASE,
   integrations: [
-    new CaptureConsole({
-      levels: ['error'],
-    }),
     new RewriteFrames({
       iteratee(frame) {
         if (frame.filename !== '[native code]' && frame.filename !== '<anonymous>') {
@@ -23,6 +20,15 @@ Sentry.init({
     }),
   ],
 });
+const { error } = console;
+console.error = function() {
+  if (typeof arguments[0] === 'string') {
+    Sentry.captureException(new Error(arguments[0]));
+  } else {
+    Sentry.captureException(arguments[0]);
+  }
+  error.apply(this, arguments);
+};
 
 import { fadeOut } from 'lib/transitions/fade.js';
 import i18n from 'lib/i18n';
