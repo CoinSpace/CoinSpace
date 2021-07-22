@@ -226,17 +226,16 @@ export default function(el) {
   }
 
   function handleMectoError(err) {
-    let message;
-    if (err.request) {
-      message = translate('Request timeout. Please check your internet connection.');
+    if (err.message === 'Your browser does not support geolocation') {
+      showError({ message: translate('Your browser does not support geolocation') });
+    } else if (err.message === 'Unable to retrieve your location') {
+      showError({ message: translate('Unable to retrieve your location') });
+    } else if (err.request) {
+      showError({ message: translate('Request timeout. Please check your internet connection.') });
     } else {
       console.error('not translated error:', err);
-      // eslint-disable-next-line prefer-destructuring
-      message = err.message;
+      showError({ message: err.message });
     }
-    showError({
-      message,
-    });
     ractive.set('connecting', false);
     ractive.set('broadcasting', false);
   }
