@@ -113,6 +113,7 @@ module.exports = {
       name: '@electron-forge/maker-appx',
       config: {
         packageName: 'CoinWallet',
+        identityName: process.env.APPX_IDENTITY,
         publisher: process.env.APPX_PUBLISHER,
         assets: 'resources/appx',
         manifest: 'resources/appxmanifest.xml',
@@ -123,6 +124,7 @@ module.exports = {
       name: '@electron-forge/maker-appx',
       config: {
         packageName: 'CoinWalletDev',
+        identityName: pkg.name,
         publisher: process.env.APPX_PUBLISHER_DEV,
         devCert: 'resources/certificate.pfx',
         certPass: process.env.CERTIFICATE_WIN_PASSWORD,
