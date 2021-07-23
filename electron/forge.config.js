@@ -87,7 +87,15 @@ module.exports = {
         publisherName: BUILD_PLATFORM === 'appx' ? process.env.APPX_PUBLISHER : process.env.APPX_PUBLISHER_DEV,
         publisherDisplayName: process.env.APPX_PUBLISHER_NAME,
         packageExecutable: `app\\${pkg.productName}.exe`,
-        languages,
+        languages: languages.map((lang) => {
+          // https://docs.microsoft.com/en-us/windows/uwp/publish/supported-languages
+          switch (lang) {
+            case 'sr':
+              return 'sr-Latn';
+            default:
+              return lang;
+          }
+        }),
         protocols: {
           name: 'Coin Wallet',
           schemes,
