@@ -59,7 +59,7 @@ function open(data) {
     } else if (/^Transaction fee is too low/.test(err.message)) {
       message = translate('Transaction fee is too low. Please click on refresh button.');
     } else {
-      console.error('not translated error:', err);
+      console.error(`not translated error: ${err.message}`);
       // eslint-disable-next-line prefer-destructuring
       message = err.message;
     }

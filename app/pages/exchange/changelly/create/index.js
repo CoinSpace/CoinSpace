@@ -121,7 +121,7 @@ export default function(el) {
       if (err.message === 'exchange_error') {
         return showError({ message: translate('Exchange error') });
       }
-      console.error('not translated error:', err);
+      console.error(`not translated error: ${err.message}`);
       return showError({ message: err.message });
     });
   });

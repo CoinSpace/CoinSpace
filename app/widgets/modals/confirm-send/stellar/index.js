@@ -84,7 +84,7 @@ function open(data) {
     if (err.message === 'cs-node-error') {
       message = translate('Network node error. Please try again later.', { network: 'Stellar' });
     } else {
-      console.error('not translated error:', err);
+      console.error(`not translated error: ${err.message}`);
       // eslint-disable-next-line prefer-destructuring
       message = err.message;
     }

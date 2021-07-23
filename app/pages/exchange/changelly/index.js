@@ -85,13 +85,13 @@ export default function(el) {
         if (tx.error === 'Transaction not found') {
           message = translate('Transaction not found');
         } else {
-          console.error('not translated error:', tx.error);
+          console.error(`not translated error: ${tx.error}`);
           message = tx.error;
         }
         showStep(steps.error, { message });
       }
     }).catch((err) => {
-      console.error('not translated error:', err);
+      console.error(`not translated error: ${err.message}`);
       ractive.set('isLoading', false);
       return showError({ message: err.message });
     });

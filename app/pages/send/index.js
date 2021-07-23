@@ -174,18 +174,18 @@ export default function(el) {
       }
 
       return validateAndShowConfirm(options);
-    }).catch((e) => {
+    }).catch((err) => {
       ractive.set('validating', false);
-      if (/is not a valid address/.test(e.message)) {
+      if (/is not a valid address/.test(err.message)) {
         return showError({
           title: translate('Uh Oh...'),
           message: translate('Please enter a valid address to send to'),
         });
       } else {
-        console.error('not translated error:', e);
+        console.error(`not translated error: ${err.message}`);
         return showError({
           title: translate('Uh Oh...'),
-          message: e.message,
+          message: err.message,
         });
       }
     });

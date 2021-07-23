@@ -58,7 +58,7 @@ function open(callback) {
       } else if (err.request) {
         showError({ message: translate('Request timeout. Please check your internet connection.') });
       } else {
-        console.error('not translated error:', err);
+        console.error(`not translated error: ${err.message}`);
         showError({ message: err.message });
       }
     }

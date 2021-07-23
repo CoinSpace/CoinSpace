@@ -50,7 +50,7 @@ export default function(data) {
     try {
       tx = wallet.createReplacement(data.transaction);
     } catch (err) {
-      console.error('not translated error:', err);
+      console.error(`not translated error: ${err.message}`);
       return showInfo({ title: err.message });
     }
     showConfirmAcceleration({

@@ -64,7 +64,7 @@ function open(data) {
       // eslint-disable-next-line max-len
       message = translate('Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.');
     } else {
-      console.error('not translated error:', err);
+      console.error(`not translated error: ${err.message}`);
       // eslint-disable-next-line prefer-destructuring
       message = err.message;
     }

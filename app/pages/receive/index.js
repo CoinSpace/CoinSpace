@@ -206,7 +206,7 @@ export default function(el) {
           ...moreInfo,
         });
       } else if (err.message !== 'cancelled') {
-        console.error(`txId: '${txId}'`, err);
+        console.error(`txId: '${txId}' error: ${err.message}`);
         showError({
           title: translate('Uh Oh...'),
           message: translate('Invalid transaction.'),
@@ -233,7 +233,7 @@ export default function(el) {
     } else if (err.request) {
       showError({ message: translate('Request timeout. Please check your internet connection.') });
     } else {
-      console.error('not translated error:', err);
+      console.error(`not translated error: ${err.message}`);
       showError({ message: err.message });
     }
     ractive.set('connecting', false);

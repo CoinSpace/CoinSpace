@@ -53,7 +53,7 @@ function open() {
           message: translate('Network node error. Please try again later.', { network: 'EOS' }),
         });
       }
-      console.error('not translated error:', err);
+      console.error(`not translated error: ${err.message}`);
       return showError({ message: err.message });
     });
   });

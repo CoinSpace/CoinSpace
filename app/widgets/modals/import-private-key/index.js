@@ -79,7 +79,7 @@ function open() {
         }),
       });
     }
-    console.error('not translated error:', err);
+    console.error(`not translated error: ${err.message}`);
     return showError({ message: err.message });
   }
 

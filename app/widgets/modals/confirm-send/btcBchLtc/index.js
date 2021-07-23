@@ -85,7 +85,7 @@ function open(data) {
         network: _.upperFirst(wallet.networkName),
       });
     } else {
-      console.error('not translated error:', err);
+      console.error(`not translated error: ${err.message}`);
       // eslint-disable-next-line prefer-destructuring
       message = err.message;
     }

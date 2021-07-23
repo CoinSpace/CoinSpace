@@ -49,7 +49,7 @@ window.initCSApp = async function() {
     }
     if (err.message === 'auth_failed') return;
     // Deprecated end
-    console.error('not translated error:', err);
+    console.error(`not translated error: ${err.message}`);
     return showError({ message: err.message });
   });
 

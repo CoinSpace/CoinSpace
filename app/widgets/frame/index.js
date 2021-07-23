@@ -107,7 +107,7 @@ export default function(el) {
         }),
       });
     } else {
-      console.error('not translated error:', err);
+      console.error(`not translated error: ${err.message}`);
       setCrypto(); // fix wrong tokens
       showError({ message: err.message });
     }

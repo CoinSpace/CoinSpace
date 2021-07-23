@@ -93,7 +93,7 @@ function open(data) {
         network: 'Ripple',
       });
     } else {
-      console.error('not translated error:', err);
+      console.error(`not translated error: ${err.message}`);
       // eslint-disable-next-line prefer-destructuring
       message = err.message;
     }
