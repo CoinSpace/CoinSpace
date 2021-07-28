@@ -71,6 +71,7 @@ const CRYPTOCURRENCIES = [
     decimals: 12,
   },
 ];
+const PRIORITY_IDS = [...CRYPTOCURRENCIES.map((crypto) => crypto.id), 'tether'];
 
 const coingecko = axios.create({
   baseURL: 'https://api.coingecko.com/api/v3',
@@ -114,6 +115,14 @@ async function syncTokens() {
   console.time('sync tokens');
 
   const { data: list } = await coingecko.get('/coins/list');
+  list.sort((a, b) => {
+    const cryptoA = PRIORITY_IDS.includes(a.id);
+    const cryptoB = PRIORITY_IDS.includes(b.id);
+    if (cryptoA && cryptoB) return 0;
+    if (cryptoA) return -1;
+    if (cryptoB) return 1;
+    return 0;
+  });
 
   for (const item of list) {
     try {
