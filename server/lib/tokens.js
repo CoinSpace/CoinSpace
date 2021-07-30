@@ -5,6 +5,7 @@ const createError = require('http-errors');
 const axios = require('axios');
 const axiosRetry = require('axios-retry');
 const rateLimit = require('axios-rate-limit');
+const querystring = require('querystring');
 
 const COLLECTION = 'tokens';
 const CURRENCIES = [
@@ -131,7 +132,15 @@ async function syncTokens() {
         continue;
       }
 
-      const { data: token } = await coingecko.get(`/coins/${item.id}`);
+      const query = querystring.stringify({
+        localization: false,
+        tickers: false,
+        market_data: false,
+        community_data: false,
+        developer_data: false,
+        sparkline: false,
+      });
+      const { data: token } = await coingecko.get(`/coins/${item.id}?${query}`);
 
       const crypto = CRYPTOCURRENCIES.find((crypto) => crypto.id === item.id);
 
