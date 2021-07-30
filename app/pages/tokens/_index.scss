@@ -149,6 +149,11 @@
         background-color: $monero;
       }
     }
+    &--binancecoin {
+      ._token__icon {
+        background-color: $binancecoin;
+      }
+    }
   }
 }
 

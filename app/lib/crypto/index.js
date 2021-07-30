@@ -56,6 +56,11 @@ export const walletCoins = [{
   network: 'monero',
   name: 'Monero',
   txUrl: (txId) => `https://blockchair.com/monero/transaction/${txId}?from=coinwallet`,
+}, {
+  _id: 'binancecoin',
+  network: 'binance-smart-chain',
+  name: 'Binance Smart Chain',
+  txUrl: (txId) => `https://bscscan.com/tx/${txId}`,
 }];
 const DEFAULT_COIN = 'bitcoin';
 
