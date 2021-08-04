@@ -29,7 +29,7 @@
     {{#if href}}
       <div class="csbtn" class-csbtn--red="error" class-csbtn--yellow="warning" onclick="return window.safeOpen('{{href}}', '_blank');">{{linkText}}</div>
     {{else}}
-      <div class="csbtn" class-csbtn--red="error" class-csbtn--yellow="warning" on-click="close">OK</div>
+      <div class="csbtn" class-csbtn--red="error" class-csbtn--yellow="warning" on-click="action">{{buttonText}}</div>
     {{/if}}
   </div>
 

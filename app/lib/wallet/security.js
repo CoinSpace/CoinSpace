@@ -7,6 +7,9 @@ import crypto from 'crypto';
 import emitter from 'lib/emitter';
 import touchId from 'lib/touch-id';
 import hardware from 'lib/hardware';
+import { isSafari } from 'lib/detect-os';
+import { translate } from 'lib/i18n';
+import { showSuccess } from 'widgets/modals/flash';
 
 export function unlock(wallet) {
   return new Promise((resolve, reject) => {
@@ -36,8 +39,30 @@ export function unlock(wallet) {
               this.set('isLoading', true);
               privateToken = await _getPrivateTokenByPin(pin, this);
             } else {
-              privateToken = await touchId.privateToken();
-              this.set('isLoading', true);
+              const res = await touchId.privateToken();
+              if (res.privateToken) {
+                this.set('isLoading', true);
+                // eslint-disable-next-line prefer-destructuring
+                privateToken = res.privateToken;
+              } else if (res.challenge) {
+                if (isSafari) {
+                  await new Promise((done, error) => {
+                    const modal = showSuccess({
+                      title: translate('Hardware Security'),
+                      message: translate('Hardware key is required to complete action.'),
+                      buttonText: translate('Use hardware key'),
+                    });
+                    modal.on('action', done);
+                    modal.on('close', () => error(new Error('hardware_error')));
+                  });
+                  privateToken = await hardware.privateToken(res);
+                } else {
+                  privateToken = await hardware.privateToken(res);
+                }
+              } else {
+                reject(new Error('cancelled'));
+                return;
+              }
             }
             seeds.unlock('private', privateToken);
             if (wallet) wallet.unlock(seeds.get('private'));

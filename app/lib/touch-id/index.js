@@ -3,7 +3,6 @@ import request from 'lib/request';
 import LS from 'lib/wallet/localStorage';
 const { PublicKeyCredential } = window;
 import { startAttestation, startAssertion } from '@simplewebauthn/browser';
-import hardware from 'lib/hardware';
 
 let isAvailable = false;
 
@@ -107,7 +106,7 @@ async function publicToken(widget) {
     data: assertion,
     id: true,
   });
-  return res.publicToken;
+  return res;
 }
 
 async function privateToken() {
@@ -130,11 +129,7 @@ async function privateToken() {
     seed: 'public',
   });
 
-  if (res.privateToken) {
-    return res.privateToken;
-  } else if (res.challenge) {
-    return hardware.privateToken(res);
-  }
+  return res;
 }
 
 export function isEnabled() {

@@ -2,7 +2,7 @@ import Ractive from 'lib/ractive';
 import { translate } from 'lib/i18n';
 import { isEnabled } from 'lib/touch-id';
 import template from './index.ract';
-const isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(window.navigator.userAgent);
+import { isSafari } from 'lib/detect-os';
 
 function open(options) {
   const {

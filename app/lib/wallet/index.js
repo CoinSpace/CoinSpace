@@ -120,7 +120,7 @@ async function loginWithTouchId(widget) {
     }
     return loginWithPin(pin);
   } else {
-    const publicToken = await touchId.publicToken(widget);
+    const { publicToken } = await touchId.publicToken(widget);
     seeds.unlock('public', publicToken);
     await Promise.all([details.init(), settings.init()]);
     emitter.emit('auth-success');

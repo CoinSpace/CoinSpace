@@ -6,14 +6,17 @@ const defaults = {
   error: {
     error: true,
     title: translate('Whoops!'),
+    buttonText: translate('OK'),
   },
   info: {
     warning: true,
     title: translate('Just saying...'),
+    buttonText: translate('OK'),
   },
   success: {
     success: true,
     title: translate('Success!'),
+    buttonText: translate('OK'),
   },
 };
 
@@ -27,6 +30,7 @@ function openModal(type, data) {
   data.warning = defaults[type].warning;
   data.success = defaults[type].success;
   data.title = data.title || defaults[type].title;
+  data.buttonText = data.buttonText || defaults[type].buttonText;
   data.type = type;
 
   data.onDismiss = function() {

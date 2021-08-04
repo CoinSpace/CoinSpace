@@ -37,6 +37,10 @@ const Modal = Ractive.extend({
       self.fire('cancel');
     });
 
+    self.on('action', () => {
+      self.fire('cancel');
+    });
+
     function dismissModal() {
       const onDismiss = self.get('onDismiss');
       if (onDismiss) onDismiss();

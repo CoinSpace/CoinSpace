@@ -31,3 +31,5 @@ const found = platforms.find((target) => {
 if (found) ({ os } = found);
 
 export default os;
+
+export const isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(window.navigator.userAgent);
