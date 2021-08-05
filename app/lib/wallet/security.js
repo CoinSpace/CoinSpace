@@ -46,14 +46,12 @@ export function unlock(wallet) {
                 privateToken = res.privateToken;
               } else if (res.challenge) {
                 if (isSafari) {
-                  await new Promise((done, error) => {
+                  await new Promise((done) => {
                     const modal = showSuccess({
                       title: translate('Hardware Security'),
                       message: translate('Hardware key is required to complete action.'),
-                      buttonText: translate('Use hardware key'),
                     });
-                    modal.on('action', done);
-                    modal.on('close', () => error(new Error('hardware_error')));
+                    modal.on('cancel', done);
                   });
                   privateToken = await hardware.privateToken(res);
                 } else {
