@@ -25,19 +25,18 @@ export default function(el) {
     data: {
       currentCrypto: null,
       currency: null,
-      rates: ticker.getAllRates(),
+      rates: {},
       isCurrentCrypto(crypto) {
         return isCryptoEqual(crypto, this.get('currentCrypto'));
       },
       getPrice(cryptoId) {
-        if (cryptoId) {
-          const rates = ractive.get('rates')[cryptoId] || {};
-          const currency = this.get('currency');
-          if (rates[currency]) {
-            return `${cryptoToFiat(1, rates[currency]) || '⚠️'} ${currency}`;
-          }
+        if (!cryptoId) return '⚠️';
+        const rates = ractive.get('rates')[cryptoId] || {};
+        const currency = this.get('currency');
+        if (rates[currency]) {
+          return `${cryptoToFiat(1, rates[currency]) || '⚠️'} ${currency}`;
         }
-        return '⚠️';
+        return '...';
       },
       switchCrypto,
       removeCryptoToken,
@@ -54,12 +53,10 @@ export default function(el) {
 
   emitter.on('wallet-ready', () => {
     isEnabled = true;
-    ractive.set('rates', ticker.getAllRates());
   });
 
   emitter.on('wallet-error', () => {
     isEnabled = true;
-    ractive.set('rates', ticker.getAllRates());
   });
 
   emitter.on('currency-changed', (currency) => {

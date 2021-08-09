@@ -35,16 +35,11 @@ function init(crypto) {
   });
 }
 
-function getAllRates() {
-  return rates;
-}
-
 function getRates(cryptoId) {
   return rates[cryptoId] || {};
 }
 
 export default {
   init,
-  getAllRates,
   getRates,
 };
