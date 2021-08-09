@@ -26,6 +26,7 @@ const URLS = [
   process.env.API_DOGE_URL,
   process.env.API_DASH_URL,
   process.env.API_XMR_URL,
+  process.env.API_BSC_URL,
 ];
 
 axios.interceptors.request.use((config) => {
