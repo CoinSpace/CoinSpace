@@ -113,16 +113,6 @@ router.get('/csFee', (req, res) => {
   });
 });
 
-router.get('/ticker', (req, res) => {
-  const { crypto } = req.query;
-  if (!crypto) return res.status(400).json({ error: 'Bad request' });
-  tokens.getPriceBySymbol(crypto).then((data) => {
-    res.status(200).send(data);
-  }).catch((err) => {
-    res.status(400).send(err);
-  });
-});
-
 router.get('/ticker/applewatch', (req, res) => {
   tokens.getFromCacheForAppleWatch().then((data) => {
     res.status(200).send(data);

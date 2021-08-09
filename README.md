@@ -29,3 +29,4 @@ Supported coins:
 - Dogecoin
 - Dash
 - Monero
+- Binance Smart Chain and BEP20 tokens

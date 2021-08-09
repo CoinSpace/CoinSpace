@@ -155,7 +155,7 @@
       </div>
       {{/isEOS}}
 
-      {{#isEthereum}}
+      {{#hasGas}}
       <div class="csformgroup">
         <div class="csformgroup__input-group">
           <div class="csformgroup__input-group__header">
@@ -165,11 +165,11 @@
             </span>
           </div>
           <div class="csinput">
-            <input id="gas-limit" class="csinput__input" type="number" on-input="gas-limit" twoway="false" min="0" step="1" value="{{gasLimit}}" />
+            <input id="gas-limit" class="csinput__input" type="number" on-input="gas-limit" min="0" step="1" />
           </div>
         </div>
       </div>
-      {{/isEthereum}}
+      {{/hasGas}}
 
     </form>
   </div>

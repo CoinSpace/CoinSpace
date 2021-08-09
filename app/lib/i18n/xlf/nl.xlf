@@ -487,9 +487,9 @@
         <source>Gas limit</source>
         <target>Gaslimiet</target>
       </trans-unit>
-      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.">
-        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.</source>
-        <target>Het gaslimiet is de hoeveelheid gas die u kunt verzenden met uw transactie. Het laten toenemen van dit nummer zal er niet voor zorgen dat uw transactie sneller wordt bevestigd. Het verzenden van ETH is gelijk aan 21.000. Het verzenden van een token is gelijk aan 20.000.</target>
+      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending :symbol is equal 21000. Sending Tokens is equal around 200000.">
+        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending %(symbol)s is equal 21000. Sending Tokens is equal around 200000.</source>
+        <target>Het gaslimiet is de hoeveelheid gas die u kunt verzenden met uw transactie. Het laten toenemen van dit nummer zal er niet voor zorgen dat uw transactie sneller wordt bevestigd. Het verzenden van %(symbol)s is gelijk aan 21.000. Het verzenden van een token is gelijk aan 20.000.</target>
       </trans-unit>
       <trans-unit id="Contract address">
         <source>Contract address</source>
@@ -507,9 +507,9 @@
         <source>Please enter Gas Limit greater than zero</source>
         <target>Voer een gaslimiet groter dan nul in</target>
       </trans-unit>
-      <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
-        <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
-        <target>U hebt niet genoeg Ethereum-fondsen om de transactiekosten te kunnen betalen (%(ethereumRequired)s ETH).</target>
+      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
+        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
+        <target>U hebt niet genoeg om de transactiekosten te kunnen betalen (%(required)s).</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1050,6 +1050,10 @@ Het zal worden geconverteerd in %(toSymbol)s, en worden verzonden naar
       <trans-unit id="Invalid Transaction ID.">
         <source>Invalid Transaction ID.</source>
         <target>Ongeldige transactie-ID.</target>
+      </trans-unit>
+      <trans-unit id="Blockchain">
+        <source>Blockchain</source>
+        <target></target>
       </trans-unit>
     </body>
   </file>

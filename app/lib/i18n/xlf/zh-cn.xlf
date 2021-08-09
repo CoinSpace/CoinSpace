@@ -487,9 +487,9 @@
         <source>Gas limit</source>
         <target>Gas限制</target>
       </trans-unit>
-      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.">
-        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.</source>
-        <target>Gas限制是为你的交易发送的gas数量。提高此数值不会提高交易的确认速度。发送以太坊等于21000。发送代币约等于200000。</target>
+      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending :symbol is equal 21000. Sending Tokens is equal around 200000.">
+        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending %(symbol)s is equal 21000. Sending Tokens is equal around 200000.</source>
+        <target>Gas限制是为你的交易发送的gas数量。提高此数值不会提高交易的确认速度。发送 %(symbol)s 等于21000。发送代币约等于200000。</target>
       </trans-unit>
       <trans-unit id="Contract address">
         <source>Contract address</source>
@@ -507,9 +507,9 @@
         <source>Please enter Gas Limit greater than zero</source>
         <target>请输入大于0的Gas限制</target>
       </trans-unit>
-      <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
-        <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
-        <target>你没有足够的以太坊资金用于支付交易费（%(ethereumRequired)s以太坊）。</target>
+      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
+        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
+        <target>你没有足够的资金用于支付交易费（%(required)s）。</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1050,6 +1050,10 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Invalid Transaction ID.">
         <source>Invalid Transaction ID.</source>
         <target>无效的交易ID。</target>
+      </trans-unit>
+      <trans-unit id="Blockchain">
+        <source>Blockchain</source>
+        <target></target>
       </trans-unit>
     </body>
   </file>

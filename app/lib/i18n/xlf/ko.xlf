@@ -487,9 +487,9 @@
         <source>Gas limit</source>
         <target>가스 한도</target>
       </trans-unit>
-      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.">
-        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.</source>
-        <target>가스 한도는 거래와 함께 보내는 가스의 양입니다. 이 수치가 증가하면 거래가 빠르게 확인되지 않습니다. ETH 전송 시 가스 한도는 21,000입니다. 토큰 전송 시 가스 한도는 약 200,000입니다.</target>
+      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending :symbol is equal 21000. Sending Tokens is equal around 200000.">
+        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending %(symbol)s is equal 21000. Sending Tokens is equal around 200000.</source>
+        <target>가스 한도는 거래와 함께 보내는 가스의 양입니다. 이 수치가 증가하면 거래가 빠르게 확인되지 않습니다. %(symbol)s 전송 시 가스 한도는 21,000입니다. 토큰 전송 시 가스 한도는 약 200,000입니다.</target>
       </trans-unit>
       <trans-unit id="Contract address">
         <source>Contract address</source>
@@ -507,9 +507,9 @@
         <source>Please enter Gas Limit greater than zero</source>
         <target>가스 한도는 0보다 커야 합니다</target>
       </trans-unit>
-      <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
-        <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
-        <target>이더리움이 부족해 거래 수수료(%(ethereumRequired)s ETH)를 지급할 수 없습니다.</target>
+      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
+        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
+        <target>이 부족해 거래 수수료(%(required)s)를 지급할 수 없습니다.</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1050,6 +1050,10 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Invalid Transaction ID.">
         <source>Invalid Transaction ID.</source>
         <target>잘못된 거래 ID.</target>
+      </trans-unit>
+      <trans-unit id="Blockchain">
+        <source>Blockchain</source>
+        <target></target>
       </trans-unit>
     </body>
   </file>

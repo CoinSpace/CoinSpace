@@ -22,7 +22,7 @@
     {{/importTxOptions}}
 
     <div class="_info">{{to}}</div>
-    <div class="_info _info--bold">{{alias}}</div>
+    <div class="_info _info--bold">{{translate("Blockchain")}}: {{blockchain}}</div>
 
   </div>
 

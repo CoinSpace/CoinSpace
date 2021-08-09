@@ -487,9 +487,9 @@
         <source>Gas limit</source>
         <target>Giới hạn Gas</target>
       </trans-unit>
-      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.">
-        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.</source>
-        <target>Giới hạn Gas là lượng gas gửi với giao dịch của bạn. Tăng giá trị này sẽ không giúp giao dịch được xác nhận nhanh hơn. Gửi ETH bằng 21000. Gửi Token bằng khoảng 200000.</target>
+      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending :symbol is equal 21000. Sending Tokens is equal around 200000.">
+        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending %(symbol)s is equal 21000. Sending Tokens is equal around 200000.</source>
+        <target>Giới hạn Gas là lượng gas gửi với giao dịch của bạn. Tăng giá trị này sẽ không giúp giao dịch được xác nhận nhanh hơn. Gửi %(symbol)s bằng 21000. Gửi Token bằng khoảng 200000.</target>
       </trans-unit>
       <trans-unit id="Contract address">
         <source>Contract address</source>
@@ -507,9 +507,9 @@
         <source>Please enter Gas Limit greater than zero</source>
         <target>Hãy nhập Giới hạn gas lớn hơn 0</target>
       </trans-unit>
-      <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
-        <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
-        <target>Bạn không đủ tiền Ethereum để trả phí giao dịch (%(ethereumRequired)s ETH).</target>
+      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
+        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
+        <target>Bạn không đủ tiền để trả phí giao dịch (%(required)s).</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1050,6 +1050,10 @@ Sẽ chuyển đổi thành %(toSymbol)s, và gửi đến
       <trans-unit id="Invalid Transaction ID.">
         <source>Invalid Transaction ID.</source>
         <target>ID Giao dịch không hợp lệ.</target>
+      </trans-unit>
+      <trans-unit id="Blockchain">
+        <source>Blockchain</source>
+        <target></target>
       </trans-unit>
     </body>
   </file>

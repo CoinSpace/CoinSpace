@@ -1,13 +1,12 @@
 import Ractive from 'lib/ractive';
 import emitter from 'lib/emitter';
 import { toUnitString } from 'lib/convert';
-import { getWallet } from 'lib/wallet';
+import { getWallet, getWalletCoin } from 'lib/wallet';
 import strftime from 'strftime';
 import { showError } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
 import showTransactionDetail from 'widgets/modals/transaction-detail';
 import initEosSetup from 'widgets/eos/setup';
-import _ from 'lodash';
 import template from './index.ract';
 
 export default function(el) {
@@ -28,7 +27,7 @@ export default function(el) {
         return `${translate('confirmations:')} ${number}`;
       },
       getToAddress(tx) {
-        if (network === 'ethereum' || network === 'ripple' || network === 'eos') {
+        if (['ethereum', 'ripple', 'eos', 'binance-smart-chain'].includes(network)) {
           return tx.to;
         } else if (network === 'stellar') {
           return tx.operations[0] && tx.operations[0].destination;
@@ -46,7 +45,7 @@ export default function(el) {
         return tx.confirmations >= getWallet().minConf;
       },
       isFailed(tx) {
-        if (network === 'ethereum' || network === 'ripple') {
+        if (['ethereum', 'ripple', 'binance-smart-chain'].includes(network)) {
           return tx.status === false;
         // eslint-disable-next-line max-len
         } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash', 'stellar', 'monero'].includes(network)) {
@@ -134,7 +133,7 @@ export default function(el) {
       if (err.message === 'cs-node-error') {
         showError({
           message: translate('Network node error. Please try again later.', {
-            network: _.upperFirst(wallet.networkName),
+            network: getWalletCoin(wallet).name,
           }),
         });
       } else {

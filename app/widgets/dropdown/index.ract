@@ -1,8 +1,8 @@
-<div class='widget-dropdown'>
-  <span class="wd_value">{{getLabel(selectedOption)}}</span>
-  <select value="{{selectedOption}}" on-change="on-change">
+<div class='csdropdown'>
+  <span class="csdropdown__label">{{getLabel(value)}}</span>
+  <select id="{{id}}" class="csdropdown__dropdown" value="{{value}}" on-change="on-change">
     {{#each options}}
-    <option value="{{this.code}}">{{this.name}}</option>
+    <option value="{{this.value}}">{{this.name}}</option>
     {{/each}}
   </select>
 </div>

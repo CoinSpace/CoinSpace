@@ -487,9 +487,9 @@
         <source>Gas limit</source>
         <target>Limitasyon ng gas</target>
       </trans-unit>
-      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.">
-        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.</source>
-        <target>Ang limitasyon ng gas ay ang halaga ng gas na ipapadala sa transaksiyon mo. Ang pagdagdag ng numerong ito ay hindi magpapabilis sa pagkumpirma ng iyong transaksiyon. Ang pagpapadala ng ETH ay katumbas ng 21000. Ang pagpapadala ng Token ay katumbas ng bandang 200000.</target>
+      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending :symbol is equal 21000. Sending Tokens is equal around 200000.">
+        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending %(symbol)s is equal 21000. Sending Tokens is equal around 200000.</source>
+        <target>Ang limitasyon ng gas ay ang halaga ng gas na ipapadala sa transaksiyon mo. Ang pagdagdag ng numerong ito ay hindi magpapabilis sa pagkumpirma ng iyong transaksiyon. Ang pagpapadala ng %(symbol)s ay katumbas ng 21000. Ang pagpapadala ng Token ay katumbas ng bandang 200000.</target>
       </trans-unit>
       <trans-unit id="Contract address">
         <source>Contract address</source>
@@ -507,9 +507,9 @@
         <source>Please enter Gas Limit greater than zero</source>
         <target>Pakilagay ang Limitasyon ng Gas na mas malaki sa zero</target>
       </trans-unit>
-      <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
-        <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
-        <target>Hindi sapat ang iyong pondong Ethereum para pambayad ng bayad sa transaksiyon (%(ethereumRequired)s ETH).</target>
+      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
+        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
+        <target>Hindi sapat ang iyong pondong para pambayad ng bayad sa transaksiyon (%(required)s).</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1050,6 +1050,10 @@ Iko-convert ito sa %(toSymbol)s, at ipapadala sa
       <trans-unit id="Invalid Transaction ID.">
         <source>Invalid Transaction ID.</source>
         <target>Hindi balidong transaksiyon ID.</target>
+      </trans-unit>
+      <trans-unit id="Blockchain">
+        <source>Blockchain</source>
+        <target></target>
       </trans-unit>
     </body>
   </file>

@@ -25,6 +25,7 @@
 @import "core_css/atoms/_shapes";
 @import "core_css/atoms/_csformgroup";
 @import "core_css/atoms/_csinput";
+@import "core_css/atoms/_csdropdown";
 @import "core_css/atoms/_cscode";
 @import "core_css/atoms/_overlays";
 @import "core_css/_app";
@@ -37,7 +38,6 @@
 @import "widgets/header/_index";
 @import "widgets/tabs/_index";
 @import "widgets/birthdaypicker/_index";
-@import "widgets/dropdown/_index";
 @import "widgets/modals/base/_index";
 @import "widgets/modals/flash/_content";
 @import "widgets/modals/set-details/_content";

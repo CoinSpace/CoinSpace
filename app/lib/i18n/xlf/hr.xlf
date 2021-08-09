@@ -487,9 +487,9 @@
         <source>Gas limit</source>
         <target>Ograničenje plina</target>
       </trans-unit>
-      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.">
-        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.</source>
-        <target>Ograničenje plina je iznos plina koji šaljete uz transakciju. Ako povećate ovaj broj, vaša transakcija neće biti brže potvrđena. Slanje ETH vrijedi 21000. Slanje Žetona vrijedi oko 200000.</target>
+      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending :symbol is equal 21000. Sending Tokens is equal around 200000.">
+        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending %(symbol)s is equal 21000. Sending Tokens is equal around 200000.</source>
+        <target>Ograničenje plina je iznos plina koji šaljete uz transakciju. Ako povećate ovaj broj, vaša transakcija neće biti brže potvrđena. Slanje %(symbol)s vrijedi 21000. Slanje Žetona vrijedi oko 200000.</target>
       </trans-unit>
       <trans-unit id="Contract address">
         <source>Contract address</source>
@@ -507,9 +507,9 @@
         <source>Please enter Gas Limit greater than zero</source>
         <target>Unesite vrijednost Ograničenja plina veću od nule</target>
       </trans-unit>
-      <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
-        <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
-        <target>Nemate dovoljno Ethereum sredstava kojim biste platili proviziju na transakciju (%(ethereumRequired)s ETH).</target>
+      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
+        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
+        <target>Nemate dovoljno sredstava kojim biste platili proviziju na transakciju (%(required)s).</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1050,6 +1050,10 @@ Biće konvertiran u %(toSymbol)s i poslan na
       <trans-unit id="Invalid Transaction ID.">
         <source>Invalid Transaction ID.</source>
         <target>Navaljan ID transakcije.</target>
+      </trans-unit>
+      <trans-unit id="Blockchain">
+        <source>Blockchain</source>
+        <target></target>
       </trans-unit>
     </body>
   </file>

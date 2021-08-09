@@ -487,9 +487,9 @@
         <source>Gas limit</source>
         <target>จำนวนก๊าซสูงสุด</target>
       </trans-unit>
-      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.">
-        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.</source>
-        <target>จำนวนก๊าซสูงสุดคือจำนวนก๊าซที่จะส่งไปพร้อมกับธุรกรรมของคุณ การเพิ่มจำนวนตัวเลขนี้จะไม่ได้ส่งผลให้ธุรกรรมของคุณได้รับการยืนยันเร็วขึ้น การส่ง ETH มีค่าเท่ากับ 21000 การส่งโทเค็นมีค่าเท่ากับราว ๆ 200000</target>
+      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending :symbol is equal 21000. Sending Tokens is equal around 200000.">
+        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending %(symbol)s is equal 21000. Sending Tokens is equal around 200000.</source>
+        <target>จำนวนก๊าซสูงสุดคือจำนวนก๊าซที่จะส่งไปพร้อมกับธุรกรรมของคุณ การเพิ่มจำนวนตัวเลขนี้จะไม่ได้ส่งผลให้ธุรกรรมของคุณได้รับการยืนยันเร็วขึ้น การส่ง %(symbol)s มีค่าเท่ากับ 21000 การส่งโทเค็นมีค่าเท่ากับราว ๆ 200000</target>
       </trans-unit>
       <trans-unit id="Contract address">
         <source>Contract address</source>
@@ -507,9 +507,9 @@
         <source>Please enter Gas Limit greater than zero</source>
         <target>โปรดป้อนจำนวนก๊าซสูงสุดที่มีค่ามากกว่าศูนย์</target>
       </trans-unit>
-      <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
-        <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
-        <target>คุณไม่มีเงิน Ethereum เพียงพอที่จะชำระค่าธรรมเนียมธุรกรรม (%(ethereumRequired)s ETH)</target>
+      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
+        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
+        <target>คุณไม่มีเงิน เพียงพอที่จะชำระค่าธรรมเนียมธุรกรรม (%(required)s)</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1050,6 +1050,10 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Invalid Transaction ID.">
         <source>Invalid Transaction ID.</source>
         <target>ID การทำธุรกรรมไม่ถูกต้อง</target>
+      </trans-unit>
+      <trans-unit id="Blockchain">
+        <source>Blockchain</source>
+        <target></target>
       </trans-unit>
     </body>
   </file>

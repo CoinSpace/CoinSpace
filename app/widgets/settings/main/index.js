@@ -40,7 +40,7 @@ export default function(el) {
     const wallet = CS.getWallet();
     ractive.set('isEOS', wallet.networkName === 'eos');
     ractive.set('walletName', wallet.name);
-    if (wallet.networkName === 'ethereum' && wallet.token) {
+    if (['ethereum', 'binance-smart-chain'].includes(wallet.networkName) && wallet.token) {
       ractive.set('isEnabledImport', false);
       ractive.set('isEnabledExport', false);
     } else if (wallet.networkName === 'eos') {

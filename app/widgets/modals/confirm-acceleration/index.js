@@ -1,11 +1,10 @@
 import Ractive from 'widgets/modals/base';
 import emitter from 'lib/emitter';
-import { getWallet } from 'lib/wallet';
+import { getWallet, getWalletCoin } from 'lib/wallet';
 import { unlock, lock } from 'lib/wallet/security';
 import { showError, showSuccess } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
 import { toUnitString } from 'lib/convert';
-import _ from 'lodash';
 import content from './_content.ract';
 
 function open(data) {
@@ -61,7 +60,7 @@ function open(data) {
     let message;
     if (err.message === 'cs-node-error') {
       message = translate('Network node error. Please try again later.', {
-        network: _.upperFirst(wallet.networkName),
+        network: getWalletCoin(wallet).name,
       });
     } else {
       console.error(`not translated error: ${err.message}`);

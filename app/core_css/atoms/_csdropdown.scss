@@ -1,32 +1,35 @@
-.widget-dropdown {
-  margin-top: 5px;
-  @extend .generic_box;
-  @extend .jigsaw-light;
-  padding: 0;
-  border-radius: 2px;
-  height: 46px;
+.csdropdown {
+  $self: &;
   position: relative;
-  min-width: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid $grey;
+  background-color: $grey--light;
+  border-radius: 2px;
+  overflow: hidden;
+  height: 44px;
 
-  &:active, &:focus {
-    outline: 0;
+  &:focus-within {
     border: 1px solid #999;
   }
 
   @include breakpoint(portrait) {
-    height: 61px;
-    min-width: 100px;
-    font-size: $btn_font_size--portrait;
     border-radius: 3px;
+    height: 61px;
   }
 
-  .wd_value {
-    position: absolute;
+  &__label {
+    @extend .jigsaw-light;
+    @include ellipsis();
     pointer-events: none;
-    width: 100%;
-    top: 10px;
     padding-left: 10px;
     padding-right: 20px;
+
+    @include breakpoint(portrait) {
+      padding-right: 30px;
+    }
+
     &:after {
       content: "";
       height: 100%;
@@ -38,15 +41,15 @@
       background-image: url(data:image/png;base64,R0lGODlhDQAEAIAAAAAAAP8A/yH5BAEHAAEALAAAAAANAAQAAAILhA+hG5jMDpxvhgIAOw==);
       background-repeat: no-repeat;
       background-position: right center;
-    }
-    @include breakpoint(portrait) {
-      top: 11px;
-      &:after {
+      @include breakpoint(portrait) {
         right: 6px;
       }
     }
   }
-  select {
+
+  &__dropdown {
+    position: absolute;
+    top: 0;
     opacity: 0;
     font-size: $big_font_size;
     border: none;
@@ -55,11 +58,10 @@
     height: 100%;
     padding-left: 10px;
     padding-right: 20px;
-    &:focus {
-      outline: none;
-    }
+    outline: 0;
     @include breakpoint(portrait) {
       font-size: $big_font_size--portrait;
+      padding-right: 30px;
     }
   }
 }

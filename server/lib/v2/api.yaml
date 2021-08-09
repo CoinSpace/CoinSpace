@@ -911,8 +911,14 @@ components:
       name: network
       required: true
       description: Network issued tokens
+      style: form
+      explode: false
+      allowReserved: true
       schema:
-        type: string
+        type: array
+        items:
+          type: string
+          enum: [ethereum, binance-smart-chain]
     cryptoId:
       in: query
       name: crypto

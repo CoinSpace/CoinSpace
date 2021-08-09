@@ -62,54 +62,47 @@ export const walletCoins = [{
   name: 'Binance Smart Chain',
   txUrl: (txId) => `https://bscscan.com/tx/${txId}`,
 }];
-const DEFAULT_COIN = 'bitcoin';
+const DEFAULT_COIN = {
+  _id: walletCoins[0]._id,
+  network: walletCoins[0].network,
+};
 
 export function getCrypto() {
   let crypto = window.localStorage.getItem('_cs_token') || DEFAULT_COIN;
   const walletTokens = details.get('tokens');
-
   try {
     crypto = JSON.parse(crypto);
   // eslint-disable-next-line no-empty
   } catch (e) {}
 
   if (typeof crypto === 'object') {
-    const token = _.find(walletTokens, (item) => {
-      return _.isEqual(crypto, item);
-    });
-    if (token) {
-      return token;
-    }
-  } else {
     const coin = walletCoins.find((item) => {
-      return item._id === crypto;
+      return item._id === crypto._id;
     });
     if (coin) {
       return coin;
     }
     const token = walletTokens.find((item) => {
-      return item._id === crypto;
+      if (item._id) {
+        return item._id === crypto._id && item.network === crypto.network;
+      } else {
+        return _.isEqual(crypto, item);
+      }
     });
     if (token) {
       return token;
     }
   }
   setCrypto(DEFAULT_COIN);
-  return {
-    _id: DEFAULT_COIN,
-    network: DEFAULT_COIN,
-  };
+  return DEFAULT_COIN;
 }
 
 export function setCrypto(crypto) {
-  if (!crypto) {
-    window.localStorage.setItem('_cs_token', DEFAULT_COIN);
-  } else if (typeof crypto === 'string') {
-    window.localStorage.setItem('_cs_token', crypto);
-  } else if (crypto._id) {
-    window.localStorage.setItem('_cs_token', crypto._id);
+  const item = crypto || DEFAULT_COIN;
+  if (item._id) {
+    window.localStorage.setItem('_cs_token', JSON.stringify({ _id: item._id, network: item.network }));
   } else {
-    window.localStorage.setItem('_cs_token', JSON.stringify(crypto));
+    window.localStorage.setItem('_cs_token', JSON.stringify(item));
   }
 }
 

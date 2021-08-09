@@ -9,7 +9,7 @@ function open(data) {
   const network = data.wallet.networkName;
   if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(network) !== -1) {
     return btcBchLtc(data);
-  } else if (network === 'ethereum') {
+  } else if (['ethereum', 'binance-smart-chain'].includes(network)) {
     return ethereum(data);
   } else if (network === 'ripple') {
     return ripple(data);

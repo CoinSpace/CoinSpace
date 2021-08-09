@@ -8,6 +8,14 @@
     <div class="csformgroup">
       <div class="csformgroup__input-group">
         <div class="csformgroup__input-group__header">
+          <label for="blockchain">{{translate("Blockchain")}}</label>
+        </div>
+        <div id="js-blockchain"></div>
+      </div>
+    </div>
+    <div class="csformgroup">
+      <div class="csformgroup__input-group">
+        <div class="csformgroup__input-group__header">
           <label for="contract_address">{{translate("Contract address")}}</label>
         </div>
         <div class="csinput csinput--with-x">

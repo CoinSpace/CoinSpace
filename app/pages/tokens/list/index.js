@@ -40,9 +40,9 @@ export default function(el) {
         return '⚠️';
       },
       switchCrypto,
-      removeEthereumToken,
+      removeCryptoToken,
       coins: [],
-      ethereumTokens: [],
+      cryptoTokens: [],
     },
   });
 
@@ -73,7 +73,8 @@ export default function(el) {
   ractive.on('before-show', () => {
     ractive.set('coins', walletCoins);
     const walletTokens = details.get('tokens');
-    ractive.set('ethereumTokens', walletTokens.filter(item => item.network === 'ethereum'));
+    const cryptoTokens = walletTokens.filter((item) => ['ethereum', 'binance-smart-chain'].includes(item.network));
+    ractive.set('cryptoTokens', cryptoTokens);
     ractive.set('currentCrypto', getCrypto());
     ractive.set('currency', details.get('systemInfo').preferredCurrency);
     ticker.init([...walletCoins, ...walletTokens.filter((item) => item._id)]);
@@ -104,8 +105,8 @@ export default function(el) {
     }, 200);
   }
 
-  function removeEthereumToken(token) {
-    const rindex = ractive.get('ethereumTokens').findIndex((item) => _.isEqual(item, token));
+  function removeCryptoToken(token) {
+    const rindex = ractive.get('cryptoTokens').findIndex((item) => _.isEqual(item, token));
     const walletTokens = details.get('tokens');
     showRemoveConfirmation(token.name, (modal) => {
       const index = walletTokens.findIndex((item) => _.isEqual(item, token));
@@ -115,7 +116,7 @@ export default function(el) {
 
       details.set('tokens', walletTokens).then(() => {
         modal.set('onDismiss', () => {
-          ractive.splice('ethereumTokens', rindex, 1);
+          ractive.splice('cryptoTokens', rindex, 1);
         });
         modal.fire('cancel');
       }).catch((err) => {
@@ -126,7 +127,7 @@ export default function(el) {
     return false;
   }
 
-  ractive.on('addEthereumToken', (context) => {
+  ractive.on('addCryptoToken', (context) => {
     context.event.stopPropagation();
     emitter.emit('set-tokens', 'search');
   });

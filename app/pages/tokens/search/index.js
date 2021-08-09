@@ -13,22 +13,22 @@ export default function(el) {
     template,
     data: {
       searchQuery: null,
-      ethereumTokens: [],
+      cryptoTokens: [],
       show: PER_PAGE,
       addToken,
     },
   });
 
   function search() {
-    const walletTokenIds = details.get('tokens').map(item => item._id);
-    const ethereumTokens = tokens.search(ractive.get('searchQuery'))
-      .filter(item => !walletTokenIds.includes(item._id));
+    const walletTokens = details.get('tokens');
+    const cryptoTokens = tokens.search(ractive.get('searchQuery'))
+      .filter((item) => !walletTokens.find((token) => token._id === item._id && token.network === item.network));
     ractive.set('show', PER_PAGE);
-    ractive.set('ethereumTokens', ethereumTokens);
+    ractive.set('cryptoTokens', cryptoTokens);
   }
 
-  function addToken(id) {
-    const token = tokens.getTokenById(id);
+  function addToken(id, network) {
+    const token = tokens.getTokenById(id, network);
     const walletTokens = details.get('tokens');
 
     walletTokens.push(token);

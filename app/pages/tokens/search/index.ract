@@ -22,8 +22,8 @@
   </div>
 
   <div class="_coins">
-    {{#each ethereumTokens.slice(0, show)}}
-    <div class="_token _token--ethereum" on-click="addToken(_id)">
+    {{#each cryptoTokens.slice(0, show)}}
+    <div class="_token" on-click="addToken(_id, network)">
       <div class="_token__icon">
         {{#if this.icon}}
           <img src="{{this.icon}}"/>
@@ -31,10 +31,10 @@
           {{>svg_letter_t}}
         {{/if}}
       </div>
-      <div class="_token__name">{{name}}</div>
+      <div class="_token__name">{{name}} ({{network}})</div>
     </div>
     {{/each}}
-    <div class="_token _token--ethereum" on-click="addCustomToken">
+    <div class="_token" on-click="addCustomToken">
       <div class="_token__icon">
         {{>svg_settings}}
       </div>
@@ -42,7 +42,7 @@
     </div>
   </div>
 
-  {{#if ethereumTokens.length > show}}
+  {{#if cryptoTokens.length > show}}
     <div on-click="loadMore" class="csbtn">{{translate("Load more")}}</div>
   {{/if}}
 </div>

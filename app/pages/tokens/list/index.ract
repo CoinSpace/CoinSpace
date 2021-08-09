@@ -11,7 +11,7 @@
         <div class="_token__name">{{name}}</div>
         <div class="_token__price" title="{{translate('Current coin price')}}">{{getPrice(_id)}}</div>
       </div>
-      {{#if isCurrentCrypto(_id || this)}}
+      {{#if isCurrentCrypto(_id)}}
       <div class="_token__arrow">{{>svg_arrow}}</div>
       {{/if}}
     </div>
@@ -21,8 +21,8 @@
   <div class="_title">{{translate("Tokens")}}</div>
 
   <div class="_coins">
-    {{#each ethereumTokens}}
-    <div class="_token _token--ethereum" on-click="switchCrypto(this)">
+    {{#each cryptoTokens}}
+    <div class="_token" on-click="switchCrypto(this)">
       <div class="_token__icon">
         {{#if this.icon}}
           <img src="{{this.icon}}"/>
@@ -31,19 +31,19 @@
         {{/if}}
       </div>
       <div class="_token__details">
-        <div class="_token__name">{{name}}</div>
+        <div class="_token__name">{{name}} ({{network}})</div>
         <div class="_token__price" title="{{translate('Current coin price')}}">{{getPrice(this._id)}}</div>
       </div>
-      {{#if isCurrentCrypto(_id || this)}}
+      {{#if isCurrentCrypto(this)}}
       <div class="_token__arrow">{{>svg_arrow}}</div>
       {{else}}
-      <div class="_token__remove" on-click="removeEthereumToken(this)">{{> svg_close}}</div>
+      <div class="_token__remove" on-click="removeCryptoToken(this)">{{> svg_close}}</div>
       {{/if}}
     </div>
     {{/each}}
   </div>
 
-  <div on-click="addEthereumToken" class="csbtn">
+  <div on-click="addCryptoToken" class="csbtn">
     {{translate("Add Token")}}
   </div>
 </div>

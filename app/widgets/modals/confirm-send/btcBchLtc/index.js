@@ -3,8 +3,8 @@ import emitter from 'lib/emitter';
 import { toAtom, toUnitString } from 'lib/convert';
 import { showInfo, showError, showSuccess } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
-import _ from 'lodash';
 import { unlock, lock } from 'lib/wallet/security';
+import { getWalletCoin } from 'lib/wallet';
 import content from './_content.ract';
 
 function open(data) {
@@ -82,7 +82,7 @@ function open(data) {
     let message;
     if (err.message === 'cs-node-error') {
       message = translate('Network node error. Please try again later.', {
-        network: _.upperFirst(wallet.networkName),
+        network: getWalletCoin(wallet).name,
       });
     } else {
       console.error(`not translated error: ${err.message}`);

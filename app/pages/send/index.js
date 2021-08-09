@@ -58,12 +58,11 @@ export default function(el) {
         { value: '0', name: 'default', title: translate('default'), default: true },
         { value: '0', name: 'fastest', title: translate('fastest') },
       ],
-      isEthereum: false,
+      hasGas: false,
       isRipple: false,
       isStellar: false,
       isEOS: false,
       isLoading: false,
-      gasLimit: '',
       denomination: '',
       feeDenomination: '',
       factor: '',
@@ -162,7 +161,7 @@ export default function(el) {
         },
       };
 
-      if (wallet.networkName === 'ethereum') {
+      if (['ethereum', 'binance-smart-chain'].includes(wallet.networkName)) {
         wallet.gasLimit = ractive.find('#gas-limit').value;
       } else if (wallet.networkName === 'ripple') {
         options.tag = ractive.find('#destination-tag').value;
@@ -194,7 +193,7 @@ export default function(el) {
   emitter.on('wallet-ready', () => {
     const wallet = getWallet();
     isSyncing = false;
-    ractive.set('isEthereum', wallet.networkName === 'ethereum');
+    ractive.set('hasGas', ['ethereum', 'binance-smart-chain'].includes(wallet.networkName));
     ractive.set('isRipple', wallet.networkName === 'ripple');
     ractive.set('isStellar', wallet.networkName === 'stellar');
     ractive.set('isEOS', wallet.networkName === 'eos');
@@ -203,12 +202,9 @@ export default function(el) {
     ractive.set('factors', FACTORS[getCrypto()._id]);
     ractive.set('factor', wallet.denomination);
     setFees(true);
-    if (wallet.networkName === 'ethereum') {
-      ractive.set('feeDenomination', 'ETH');
-      if (ractive.find('#gas-limit')) {
-        ractive.find('#gas-limit').value = wallet.gasLimit;
-      }
-      ractive.set('gasLimit', wallet.gasLimit);
+    if (['ethereum', 'binance-smart-chain'].includes(wallet.networkName)) {
+      ractive.set('feeDenomination', wallet.baseDenomination);
+      ractive.find('#gas-limit').value = wallet.gasLimit;
     } else {
       ractive.set('feeDenomination', wallet.denomination);
     }
@@ -246,7 +242,7 @@ export default function(el) {
         maxAmount: toUnitString(wallet.maxAmount),
       }];
       ractive.set('feeName', 'default');
-    } else if (wallet.networkName === 'ethereum') {
+    } else if (['ethereum', 'binance-smart-chain'].includes(wallet.networkName)) {
       fees = [{
         name: 'default',
         estimate: toUnitString(wallet.defaultFee, 18),
@@ -305,9 +301,12 @@ export default function(el) {
   });
 
   ractive.on('help-gas-limit', () => {
+    const wallet = getWallet();
     showTooltip({
       // eslint-disable-next-line max-len
-      message: translate('Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.'),
+      message: translate('Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending :symbol is equal 21000. Sending Tokens is equal around 200000.', {
+        symbol: wallet.baseDenomination,
+      }),
     });
   });
 

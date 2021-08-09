@@ -487,9 +487,9 @@
         <source>Gas limit</source>
         <target>Limite de Gas</target>
       </trans-unit>
-      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.">
-        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.</source>
-        <target>La limite de Gas est la quantité de Gas à envoyer avec votre transaction. En augmentant ce chiffre, votre transaction ne sera pas confirmée plus rapidement. L'envoi d'ETH est égal à 21.000. L'envoi de jetons est égal à environ 200.000.</target>
+      <trans-unit id="Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending :symbol is equal 21000. Sending Tokens is equal around 200000.">
+        <source>Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending %(symbol)s is equal 21000. Sending Tokens is equal around 200000.</source>
+        <target>La limite de Gas est la quantité de Gas à envoyer avec votre transaction. En augmentant ce chiffre, votre transaction ne sera pas confirmée plus rapidement. L'envoi d'%(symbol)s est égal à 21.000. L'envoi de jetons est égal à environ 200.000.</target>
       </trans-unit>
       <trans-unit id="Contract address">
         <source>Contract address</source>
@@ -507,9 +507,9 @@
         <source>Please enter Gas Limit greater than zero</source>
         <target>Veuillez saisir une limite de Gas supérieure à zéro</target>
       </trans-unit>
-      <trans-unit id="You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).">
-        <source>You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).</source>
-        <target>Vous ne disposez pas de suffisamment de fonds Ethereum pour payer les frais de transaction (%(ethereumRequired)s ETH).</target>
+      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
+        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
+        <target>Vous ne disposez pas de suffisamment de fonds pour payer les frais de transaction (%(required)s).</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1050,6 +1050,10 @@ Le montant sera converti en %(toSymbol)s, et sera envoyé à
       <trans-unit id="Invalid Transaction ID.">
         <source>Invalid Transaction ID.</source>
         <target>Identifiant de transaction non valide.</target>
+      </trans-unit>
+      <trans-unit id="Blockchain">
+        <source>Blockchain</source>
+        <target></target>
       </trans-unit>
     </body>
   </file>

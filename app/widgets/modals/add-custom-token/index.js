@@ -5,6 +5,7 @@ import { translate } from 'lib/i18n';
 import qrcode from 'lib/qrcode';
 import details from 'lib/wallet/details';
 import tokens from 'lib/tokens';
+import initDropdown from 'widgets/dropdown';
 import content from './_content.ract';
 
 function open() {
@@ -18,6 +19,16 @@ function open() {
       address: '',
       isValidating: false,
     },
+  });
+
+  const blockchainDropdown = initDropdown({
+    el: ractive.find('#js-blockchain'),
+    options: [
+      { value: 'ethereum', name: 'Ethereum' },
+      { value: 'binance-smart-chain', name: 'Binance Smart' },
+    ],
+    value: 'ethereum',
+    id: 'blockchain',
   });
 
   ractive.on('clearAddress', () => {
@@ -36,10 +47,11 @@ function open() {
       return showError({ message: translate('Please fill out address.') });
     }
 
-    token = tokens.getTokenByAddress(address);
+    const network = blockchainDropdown.getValue();
+    token = tokens.getTokenByAddress(address, network);
 
     if (!token) {
-      token = await tokens.requestTokenByAddress(address).catch((err) => {
+      token = await tokens.requestTokenByAddress(address, network).catch((err) => {
         if (err.status === 400 || err.status === 404) {
           showError({
             message: translate('address is not a valid address.', {
@@ -56,8 +68,9 @@ function open() {
       return;
     }
 
-    if ((token._id && walletTokens.map(item => item._id).includes(token._id))
-        || walletTokens.map(item => item.address).includes(token.address)) {
+    const walletTokensSubset = walletTokens.filter((item) => item.network === network);
+    if ((token._id && walletTokensSubset.map(item => item._id).includes(token._id))
+        || walletTokensSubset.map(item => item.address).includes(token.address)) {
       ractive.set('isValidating', false);
       return showError({ message: translate('This Token has already been added.') });
     }

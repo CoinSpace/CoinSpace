@@ -71,8 +71,14 @@ const CRYPTOCURRENCIES = [
     id: 'monero',
     decimals: 12,
   },
+  // BNB
+  {
+    id: 'binancecoin',
+    decimals: 18,
+  },
 ];
 const PRIORITY_IDS = [...CRYPTOCURRENCIES.map((crypto) => crypto.id), 'tether'];
+const TOKEN_PLATFORMS = ['ethereum', 'binance-smart-chain'];
 
 const coingecko = axios.create({
   baseURL: 'https://api.coingecko.com/api/v3',
@@ -94,22 +100,32 @@ rateLimit(coingecko, {
   perMilliseconds: 60 * 1000,
 });
 
-const coinspace = axios.create({
-  baseURL: 'https://eth.coin.space/api/v1',
-  timeout: 30000,
-});
-
-axiosRetry(coinspace, {
-  retries: 3,
-  retryDelay: axiosRetry.exponentialDelay,
-  shouldResetTimeout: true,
-});
-
-rateLimit(coinspace, {
-  maxRequests: 300,
-  // per minute
-  perMilliseconds: 60 * 1000,
-});
+const coinspace = TOKEN_PLATFORMS.reduce((result, platform) => {
+  let baseURL;
+  if (platform === 'ethereum') {
+    baseURL = 'https://eth.coin.space/api/v1';
+  } else if (platform === 'binance-smart-chain') {
+    baseURL = 'https://bsc.coin.space/api/v1';
+  } else {
+    throw new Error('Unsupported network');
+  }
+  const client = axios.create({
+    baseURL,
+    timeout: 30000,
+  });
+  axiosRetry(client, {
+    retries: 3,
+    retryDelay: axiosRetry.exponentialDelay,
+    shouldResetTimeout: true,
+  });
+  rateLimit(client, {
+    maxRequests: 300,
+    // per minute
+    perMilliseconds: 60 * 1000,
+  });
+  result[platform] = client;
+  return result;
+}, {});
 
 async function syncTokens() {
   console.log('sync tokens: start');
@@ -158,7 +174,6 @@ async function syncTokens() {
         }, {
           $set: {
             name: token.name,
-            network: null,
             decimals: crypto.decimals,
             symbol: token.symbol.toUpperCase(),
             icon: token.image && token.image.large,
@@ -170,45 +185,52 @@ async function syncTokens() {
           upsert: true,
         });
         console.log(`updated coin: ${_id}`);
-      } else if (token.asset_platform_id === 'ethereum'
-                && token.contract_address
+      } else if (token.platforms
+                && (TOKEN_PLATFORMS.some(platform => Object.keys(token.platforms).includes(platform)))
                 && token.market_cap_rank) {
-        const address = token.contract_address.toLowerCase();
-        const { data: info } = await coinspace.get(`/token/${address}`)
-          .catch((err) => {
-            if (err.response && err.response.status === 400) {
-              // For check purposes
-              //throw new Error(`Incorrect address: ${address}`);
-              return {};
-            }
-            if (err.response && err.response.status === 404) {
-              // For check purposes
-              //throw new Error(`Token not found on address: ${address}`);
-              return {};
-            }
-            throw err;
-          });
-        if (!info) {
-          continue;
+
+        const platforms = {};
+        for (const platform of Object.keys(token.platforms)) {
+          if (!TOKEN_PLATFORMS.includes(platform)) continue;
+          const address = token.platforms[platform].toLowerCase();
+          const { data: info } = await coinspace[platform].get(`/token/${address}`)
+            .catch((err) => {
+              if (err.response && err.response.status === 400) {
+                // For check purposes
+                //throw new Error(`Incorrect address: ${address}`);
+                return {};
+              }
+              if (err.response && err.response.status === 404) {
+                // For check purposes
+                //throw new Error(`Token not found on address: ${address}`);
+                return {};
+              }
+              throw err;
+            });
+          if (!info) {
+            continue;
+          }
+          /*
+          // For check purposes
+          if (info.name.trim() !== token.name.trim()) {
+            console.log(`Different name: '${info.name}' !== '${token.name}'`);
+          }
+          if (info.symbol.toUpperCase() !== token.symbol.toUpperCase()) {
+            console.log(`Different symbol: '${info.symbol}' !== '${token.symbol}'`);
+          }
+          */
+          platforms[platform] = {
+            address,
+            decimals: parseInt(info.decimals),
+            symbol: info.symbol,
+          };
         }
-        /*
-        // For check purposes
-        if (info.name.trim() !== token.name.trim()) {
-          console.log(`Different name: '${info.name}' !== '${token.name}'`);
-        }
-        if (info.symbol.toUpperCase() !== token.symbol.toUpperCase()) {
-          console.log(`Different symbol: '${info.symbol}' !== '${token.symbol}'`);
-        }
-        */
         await db().collection(COLLECTION).updateOne({
           _id: token.id,
         }, {
           $set: {
+            platforms,
             name: token.name,
-            network: 'ethereum',
-            address,
-            decimals: parseInt(info.decimals),
-            symbol: info.symbol,
             icon: token.image && token.image.large,
             market_cap_rank: token.market_cap_rank || Number.MAX_SAFE_INTEGER,
             synchronized_at: new Date(),
@@ -217,7 +239,7 @@ async function syncTokens() {
         }, {
           upsert: true,
         });
-        console.log(`updated ethereum token: ${token.id}`);
+        console.log(`updated token: ${token.id}`);
       } else {
         // For check purposes
         // eslint-disable-next-line max-len
@@ -292,30 +314,45 @@ async function updatePrices() {
   console.timeEnd('update prices');
 }
 
-function getTokens(network, limit=0) {
+async function getTokens(networks, limit=0) {
   const query = {
     synchronized_at: { $gte: new Date(Date.now() - (7 * 24 * 60 * 60 * 1000)) },
+    $or: networks.map((network) => {
+      return { [`platforms.${network}`]: { $exists: true } };
+    }),
   };
-  if (network) {
-    query.network = network;
-  }
-  return db().collection(COLLECTION)
+  const tokens = await db().collection(COLLECTION)
     .find(query, {
       limit,
       sort: {
         market_cap_rank: 1,
       },
       projection: {
-        network: 1,
-        symbol: 1,
         name: 1,
-        address: 1,
-        decimals: 1,
+        platforms: 1,
         icon: 1,
         market_cap_rank: 1,
       },
     })
     .toArray();
+
+  const result = [];
+  tokens.forEach((token) => {
+    networks.forEach((platform) => {
+      if (!token.platforms[platform]) return;
+      result.push({
+        _id: token._id,
+        name: token.name,
+        symbol: token.platforms[platform].symbol,
+        address: token.platforms[platform].address,
+        decimals: token.platforms[platform].decimals,
+        icon: token.icon,
+        market_cap_rank: token.market_cap_rank,
+        network: platform,
+      });
+    });
+  });
+  return result;
 }
 
 function getTicker(id) {
@@ -363,21 +400,6 @@ function fixSatoshi(doc) {
 }
 
 // For backward compatibility
-async function getPriceBySymbol(symbol) {
-  const token = await db().collection(COLLECTION)
-    .findOne({ symbol }, { sort: { market_cap_rank: 1 } });
-  if (token) {
-    fixSatoshi(token);
-    return token.prices;
-  } else {
-    return CURRENCIES.reduce((obj, item) => {
-      obj[item] = 0;
-      return obj;
-    }, {});
-  }
-}
-
-// For backward compatibility
 async function getFromCacheForAppleWatch() {
   const tickers = {
     bitcoin: 'BTC',
@@ -404,6 +426,5 @@ module.exports = {
   getTicker,
   getTickers,
   // For backward compatibility
-  getPriceBySymbol,
   getFromCacheForAppleWatch,
 };

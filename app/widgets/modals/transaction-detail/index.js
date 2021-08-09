@@ -17,7 +17,7 @@ export default function(data) {
   data.networkName = networkName;
   data.showAllInputs = false;
   data.inputsPerPage = 10;
-  if (networkName === 'ethereum') {
+  if (['ethereum', 'binance-smart-chain'].includes(networkName)) {
     data.isPendingFee = data.transaction.fee === -1;
     content = contentEthereum;
   } else if (networkName === 'ripple') {

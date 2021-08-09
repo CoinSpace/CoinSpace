@@ -11,6 +11,7 @@ import { unlock, lock } from 'lib/wallet/security';
 
 import CsWallet from '@coinspace/cs-wallet';
 import EthereumWallet from '@coinspace/cs-ethereum-wallet';
+import BinanceSmartChainWallet from '@coinspace/cs-binance-smart-chain-wallet';
 import RippleWallet from '@coinspace/cs-ripple-wallet';
 import StellarWallet from '@coinspace/cs-stellar-wallet';
 import EOSWallet from '@coinspace/cs-eos-wallet';
@@ -22,7 +23,7 @@ const ec = new eddsa('ed25519');
 import touchId from 'lib/touch-id';
 import ticker from 'lib/ticker-api';
 import convert from 'lib/convert';
-import { getCrypto } from 'lib/crypto';
+import { getCrypto, walletCoins } from 'lib/crypto';
 import details from 'lib/wallet/details';
 import settings from 'lib/wallet/settings';
 import bchaddr from 'bchaddrjs';
@@ -43,6 +44,7 @@ const Wallet = {
   dogecoin: CsWallet,
   dash: CsWallet,
   monero: MoneroWallet,
+  'binance-smart-chain': BinanceSmartChainWallet,
 };
 
 function createWallet(passphrase) {
@@ -187,6 +189,13 @@ async function getExtraOptions(crypto) {
     options.minConf = 12;
     options.token = crypto._id !== 'ethereum' ? crypto : false;
     options.decimals = crypto.decimals !== undefined ? crypto.decimals : 18;
+  } else if (crypto.network === 'binance-smart-chain') {
+    options.name = crypto.name;
+    options.minConf = 12;
+    options.token = crypto._id !== 'binancecoin' ? crypto : false;
+    options.decimals = crypto.decimals !== undefined ? crypto.decimals : 18;
+    options.request = request;
+    options.apiNode = process.env.API_BSC_URL;
   } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].includes(crypto.network)) {
     const addressType = details.get(crypto.network + '.addressType');
     if (addressType) {
@@ -290,6 +299,12 @@ export function getWallet() {
   return state.wallet;
 }
 
+export function getWalletCoin(wallet) {
+  const networkName = wallet ? wallet.networkName : state.wallet.networkName;
+  const coin = walletCoins.find((coin) => coin.network === networkName);
+  return coin;
+}
+
 export function getDestinationInfo(to) {
   if (state.wallet.networkName === 'stellar') {
     return state.wallet.getDestinationInfo(to);
@@ -337,6 +352,7 @@ export default {
   removeAccount,
   setUsername,
   getWallet,
+  getWalletCoin,
   initWallet,
   updateWallet,
   addPublicKey,

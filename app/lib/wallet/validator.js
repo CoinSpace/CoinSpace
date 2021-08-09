@@ -1,7 +1,7 @@
 import { toAtom, toUnitString } from 'lib/convert';
 import { showInfo, showError } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
-import _ from 'lodash';
+import { getWalletCoin } from 'lib/wallet';
 
 export async function validateSend(options) {
   const amount = toAtom(options.amount);
@@ -13,7 +13,7 @@ export async function validateSend(options) {
   try {
     if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(wallet.networkName) !== -1) {
       tx = wallet.createTx(to, amount, fee);
-    } else if (wallet.networkName === 'ethereum') {
+    } else if (['ethereum', 'binance-smart-chain'].includes(wallet.networkName)) {
       tx = wallet.createTx(to, amount);
     } else if (wallet.networkName === 'ripple') {
       tx = await wallet.createTx(to, amount, options.tag, options.invoiceId);
@@ -94,6 +94,15 @@ export async function validateSend(options) {
         title: translate('Uh Oh...'),
         message: translate('Transaction too large'),
       });
+      // eslint-disable-next-line max-len
+    } else if (/Insufficient funds for token transaction/.test(err.message) && ['ethereum', 'binance-smart-chain'].includes(wallet.networkName)) {
+      // eslint-disable-next-line max-len
+      showError({
+        title: translate('Uh Oh...'),
+        message: translate('You do not have enough funds to pay transaction fee (:required).', {
+          required: `${toUnitString(err.required, 18)} ${wallet.baseDenomination}`,
+        }),
+      });
     } else if (/Insufficient funds/.test(err.message)) {
       if (/Additional funds confirmation pending/.test(err.details)) {
         showError({
@@ -101,7 +110,8 @@ export async function validateSend(options) {
           // eslint-disable-next-line max-len
           message: translate('Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.'),
         });
-      } else if (/Attempt to empty wallet/.test(err.details) && wallet.networkName === 'ethereum') {
+        // eslint-disable-next-line max-len
+      } else if (/Attempt to empty wallet/.test(err.details) && ['ethereum', 'binance-smart-chain'].includes(wallet.networkName)) {
         // eslint-disable-next-line max-len
         const message = translate('It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you', {
           sendableBalance: toUnitString(err.sendableBalance),
@@ -128,19 +138,11 @@ export async function validateSend(options) {
           message: translate('You do not have enough funds in your wallet (incl. fee)'),
         });
       }
-    } else if (/Insufficient ethereum funds for token transaction/.test(err.message)) {
-      // eslint-disable-next-line max-len
-      showError({
-        title: translate('Uh Oh...'),
-        message: translate('You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).', {
-          ethereumRequired: toUnitString(err.ethereumRequired, 18),
-        }),
-      });
     } else if (err.message === 'cs-node-error') {
       showError({
         title: translate('Uh Oh...'),
         message: translate('Network node error. Please try again later.', {
-          network: _.upperFirst(wallet.networkName),
+          network: getWalletCoin(wallet).name,
         }),
       });
     } else {

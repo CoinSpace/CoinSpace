@@ -120,12 +120,12 @@
   "Your wallet has no private keys with coins for export.": "Your wallet has no private keys with coins for export.",
   "Add Token": "Add Token",
   "Gas limit": "Gas limit",
-  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.": "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending ETH is equal 21000. Sending Tokens is equal around 200000.",
+  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending :symbol is equal 21000. Sending Tokens is equal around 200000.": "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending %(symbol)s is equal 21000. Sending Tokens is equal around 200000.",
   "Contract address": "Contract address",
   "Add": "Add",
   "Token": "Token",
   "Please enter Gas Limit greater than zero": "Please enter Gas Limit greater than zero",
-  "You do not have enough Ethereum funds to pay transaction fee (:ethereumRequired ETH).": "You do not have enough Ethereum funds to pay transaction fee (%(ethereumRequired)s ETH).",
+  "You do not have enough funds to pay transaction fee (:required).": "You do not have enough funds to pay transaction fee (%(required)s).",
   "Copy to Clipboard": "Copy to Clipboard",
   "Copied!": "Copied!",
   "Please enter an address other than your wallet address": "Please enter an address other than your wallet address",
@@ -259,5 +259,6 @@
   "In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.": "In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.",
   "Transaction fee is too low. Please click on refresh button.": "Transaction fee is too low. Please click on refresh button.",
   "Only transactions addressed to you can be accepted. The minimum number of confirmations is 10 (:url).": "Only transactions addressed to you can be accepted. The minimum number of confirmations is 10 (%(url)s).",
-  "Invalid Transaction ID.": "Invalid Transaction ID."
+  "Invalid Transaction ID.": "Invalid Transaction ID.",
+  "Blockchain": "Blockchain"
 }

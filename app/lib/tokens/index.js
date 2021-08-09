@@ -27,7 +27,7 @@ function init() {
     cache = request({
       url: `${process.env.SITE_URL}api/v2/tokens`,
       params: {
-        network: 'ethereum',
+        network: ['ethereum', 'binance-smart-chain'].join(','),
       },
       method: 'get',
       seed: 'public',
@@ -40,10 +40,10 @@ function init() {
       .then(() => {
         const walletTokens = (details.get('tokens') || []).map((walletToken) => {
           if (walletToken._id) {
-            const current = getTokenById(walletToken._id);
+            const current = getTokenById(walletToken._id, walletToken.network);
             return current || walletToken;
           } else {
-            const current = getTokenByAddress(walletToken.address);
+            const current = getTokenByAddress(walletToken.address, walletToken.network);
             return current || walletToken;
           }
         });
@@ -65,23 +65,28 @@ function getTokens() {
   return tokens;
 }
 
-function getTokenById(id) {
-  const token = tokens.find(item => item._id === id);
+function getTokenById(id, network = 'ethereum') {
+  const token = tokens.find(item => item._id === id && item.network === network);
   if (token) {
     return filter(token);
   }
 }
 
-function getTokenByAddress(address) {
-  const token = tokens.find(item => item.address === address);
+function getTokenByAddress(address, network = 'ethereum') {
+  const token = tokens.find(item => item.address === address && item.network === network);
   if (token) {
     return filter(token);
   }
 }
 
-function requestTokenByAddress(address) {
+function requestTokenByAddress(address, network = 'ethereum') {
+  const urls = {
+    ethereum: `${process.env.API_ETH_URL}token/${address}`,
+    'binance-smart-chain': `${process.env.API_BSC_URL}api/v1/token/${address}`,
+  };
+
   return request({
-    url: `${process.env.API_ETH_URL}token/${address}`,
+    url: urls[network],
     method: 'get',
   }).then((data) => {
     return {
@@ -89,7 +94,7 @@ function requestTokenByAddress(address) {
       symbol: data.symbol,
       name: data.name,
       decimals: data.decimals,
-      network: 'ethereum',
+      network,
     };
   });
 }
@@ -117,13 +122,13 @@ async function migrate() {
 
     let walletTokens = [];
 
-    const tetherToken = getTokenById('tether');
+    const tetherToken = getTokenById('tether', 'ethereum');
     if (tetherToken) {
       walletTokens.push(tetherToken);
     }
 
     const migratedTokens = oldTokens.map((oldToken) => {
-      const token = getTokenByAddress(oldToken.address);
+      const token = getTokenByAddress(oldToken.address, 'ethereum');
       if (token) {
         return token;
       } else {

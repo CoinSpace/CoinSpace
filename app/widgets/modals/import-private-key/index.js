@@ -3,10 +3,8 @@ import qrcode from 'lib/qrcode';
 import showConfirmation from 'widgets/modals/confirm-send';
 import { showInfo, showError } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
-import { getWallet } from 'lib/wallet';
-import { setToAlias } from 'lib/wallet';
+import { getWallet, setToAlias, getWalletCoin } from 'lib/wallet';
 import { toUnitString } from 'lib/convert';
-import _ from 'lodash';
 import content from './_content.ract';
 
 let ractive;
@@ -75,7 +73,7 @@ function open() {
     } else if (err.message === 'cs-node-error') {
       return showError({
         message: translate('Network node error. Please try again later.', {
-          network: _.upperFirst(getWallet().networkName),
+          network: getWalletCoin().name,
         }),
       });
     }
