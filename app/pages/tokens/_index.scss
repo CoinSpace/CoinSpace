@@ -28,6 +28,9 @@
       border-bottom: 0;
     }
 
+    &__icon_group {
+      position: relative;
+    }
     &__icon {
       border-radius: 50%;
       width: 50px;
@@ -46,8 +49,31 @@
         fill: #999;
       }
       @include breakpoint(portrait) {
+        margin-right: 40px;
         width: 80px;
         height: 80px;
+      }
+    }
+    &__network_icon {
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      margin-right: 20px;
+      position: absolute;
+      right: -10px;
+      bottom: 0;
+      background: black;
+      @include breakpoint(portrait) {
+        width: 40px;
+        height: 40px;
+        margin-right: 40px;
+        right: -16px;
+      }
+      &--ethereum {
+        background-color: $ethereum;
+      }
+      &--binance-smart-chain {
+        background-color: $binancecoin;
       }
     }
 
