@@ -9,6 +9,26 @@ function save(_id, data) {
   return collection.updateOne({ _id }, { $set: { data } }, { upsert: true });
 }
 
+const PREDEFINED_NETWORKS = {
+  // eslint-disable-next-line max-len
+  ethereum: ['aave', 'axs', 'band', 'bat', 'bora', 'cbc', 'chz', 'comp', 'cvc', 'dai', 'enj', 'eth', 'fun', 'keth', 'key', 'link', 'mana', 'matic', 'mkr', 'ocean', 'okb', 'om', 'omg', 'pax', 'paxg', 'rep', 'rfuel', 'rinketh', 'sand', 'snx', 'srm', 'stmx', 'tomo', 'tusd', 'uni', 'usdc', 'usdt', 'utk', 'wbtc', 'zrx'],
+  'binance-chain': ['ava', 'bnb', 'busd', 'rune'],
+  'binance-smart-chain': ['bnb_bsc', 'busd_bsc'],
+  eos: ['eos', 'eosdt'],
+  tron: ['btt', 'trx'],
+  polygon: ['eth_polygon', 'matic_polygon', 'usdc_polygon'],
+  ripple: ['xrp'],
+};
+
+function detectNetwork(item) {
+  for (const network in PREDEFINED_NETWORKS) {
+    if (PREDEFINED_NETWORKS[network].includes(item.code)) {
+      return network;
+    }
+  }
+  return item.name.toLowerCase().replace(/\s/g, '-');
+}
+
 function getCurrenciesFromAPI() {
   return axios.get('https://api.moonpay.com/v3/currencies', {
     params: {
@@ -22,15 +42,18 @@ function getCurrenciesFromAPI() {
     const coinsUSA = {};
     data.forEach((coin) => {
       if (coin.type === 'crypto') {
+        const network = detectNetwork(coin);
         coins[coin.id] = {
           symbol: coin.code.toUpperCase(),
           isSupported: !coin.isSuspended,
           isSellSupported: coin.isSellSupported && process.env.ENABLE_MOONPAY_SELL === 'true',
+          network,
         };
         coinsUSA[coin.id] = {
           symbol: coin.code.toUpperCase(),
           isSupported: !coin.isSuspended && coin.isSupportedInUS,
           isSellSupported: coin.isSellSupported && process.env.ENABLE_MOONPAY_SELL === 'true',
+          network,
         };
       }
     });
