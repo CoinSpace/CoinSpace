@@ -5,11 +5,21 @@ const crypto = require('crypto');
 const Big = require('big.js');
 
 const URL = 'https://api.changelly.com';
-const { CHANGELLY_API_SECRET } = process.env;
-const { CHANGELLY_API_KEY } = process.env;
+const {
+  CHANGELLY_API_SECRET,
+  CHANGELLY_API_KEY,
+} = process.env;
 
 const PRIORITY_SYMBOLS = ['BTC', 'BCH', 'BSV', 'ETH', 'LTC', 'XRP', 'XLM', 'EOS', 'DOGE', 'DASH', 'XMR', 'USDT'];
-const DEPRECATED_SYMBOLS = ['wtc', 'waxp'];
+const DEPRECATED_SYMBOLS = [
+  'wtc',
+  'waxp',
+  // incorrect networks
+  'nrg',
+  'arrr',
+  'ata',
+  'tlm',
+];
 
 function getCoins() {
   return request('getCurrenciesFull', {}).then((currencies) => {
@@ -20,6 +30,7 @@ function getCoins() {
       return {
         name: encodeName(currency.fullName),
         symbol: encodeSymbol(currency.name),
+        network: detectNetwork(currency),
       };
     }).sort((a, b) => {
       if (PRIORITY_SYMBOLS.indexOf(a.symbol) === -1 && PRIORITY_SYMBOLS.indexOf(b.symbol) === -1) {
@@ -160,6 +171,54 @@ function encodeName(name) {
   if (name === 'Tether ERC20') return 'Tether USD';
   if (name === 'Tether USD') return 'Tether Omni';
   return name;
+}
+
+const PREDEFINED_NETWORKS = {
+  xrp: 'ripple',
+  solo: 'ripple',
+  doge: 'dogecoin',
+  qtum: 'qtum',
+  iost: 'iost',
+  ignis: 'ardor',
+  eosdt: 'eos',
+  bet: 'eos',
+  nut: 'eos',
+  vet: 'vechainthor',
+  tomo: 'tomo',
+  hbar: 'hedera',
+  asp: 'gasp',
+  gasp: 'gasp',
+  ckb: 'nervos-ckb',
+  ton: 'ton',
+  occada: 'cardano',
+  tfuel: 'theta',
+  icp: 'icp',
+  fio: 'fio',
+};
+
+const EXPLORERS = {
+  'https://etherscan.io/': 'ethereum',
+  'https://ethplorer.io/': 'ethereum',
+  'https://bscscan.com/': 'binance-smart-chain',
+  'https://explorer.binance.org/': 'binance-chain',
+  'https://explorer.chiliz.com/': 'chiliz',
+  'https://tronscan.org/': 'tron',
+  'https://neotracker.io/': 'neo',
+  'https://omniexplorer.info/': 'omni-layer',
+};
+
+function detectNetwork(item) {
+  if (item.addressUrl) {
+    for (const explorer in EXPLORERS) {
+      if (item.addressUrl.startsWith(explorer)) {
+        return EXPLORERS[explorer];
+      }
+    }
+  }
+  if (PREDEFINED_NETWORKS[item.name]) {
+    return PREDEFINED_NETWORKS[item.name];
+  }
+  return item.fullName.toLowerCase().replace(/\s/g, '-');
 }
 
 function request(method, params) {
