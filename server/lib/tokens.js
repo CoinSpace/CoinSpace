@@ -185,7 +185,8 @@ async function syncTokens() {
           upsert: true,
         });
         console.log(`updated coin: ${_id}`);
-      } else if (token.platforms
+      }
+      if (token.platforms
                 && (TOKEN_PLATFORMS.some(platform => Object.keys(token.platforms).includes(platform)))
                 && token.market_cap_rank) {
 
