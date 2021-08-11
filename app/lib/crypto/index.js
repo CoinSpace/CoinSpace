@@ -5,61 +5,73 @@ export const walletCoins = [{
   _id: 'bitcoin',
   network: 'bitcoin',
   name: 'Bitcoin',
+  symbol: 'BTC',
   txUrl: (txId) => `https://blockchair.com/bitcoin/transaction/${txId}?from=coinwallet`,
 }, {
   _id: 'bitcoincash',
   network: 'bitcoincash',
   name: 'Bitcoin Cash',
+  symbol: 'BCH',
   txUrl: (txId) => `https://blockchair.com/bitcoin-cash/transaction/${txId}?from=coinwallet`,
 }, {
   _id: 'bitcoinsv',
   network: 'bitcoinsv',
   name: 'Bitcoin SV',
+  symbol: 'BSV',
   txUrl: (txId) => `https://blockchair.com/bitcoin-sv/transaction/${txId}?from=coinwallet`,
 }, {
   _id: 'ethereum',
   network: 'ethereum',
   name: 'Ethereum',
+  symbol: 'ETH',
   txUrl: (txId) => `https://blockchair.com/ethereum/transaction/${txId}?from=coinwallet`,
 }, {
   _id: 'litecoin',
   network: 'litecoin',
   name: 'Litecoin',
+  symbol: 'LTC',
   txUrl: (txId) => `https://blockchair.com/litecoin/transaction/${txId}?from=coinwallet`,
 }, {
   _id: 'ripple',
   network: 'ripple',
   name: 'Ripple',
+  symbol: 'XRP',
   txUrl: (txId) => `https://xrpcharts.ripple.com/#/transactions/${txId}`,
 }, {
   _id: 'stellar',
   network: 'stellar',
   name: 'Stellar',
+  symbol: 'XLM',
   txUrl: (txId) => `https://stellar.expert/explorer/public/tx/${txId}`,
 }, {
   _id: 'eos',
   network: 'eos',
   name: 'EOS',
+  symbol: 'EOS',
   txUrl: (txId) => `https://bloks.io/transaction/${txId}`,
 }, {
   _id: 'dogecoin',
   network: 'dogecoin',
   name: 'Dogecoin',
+  symbol: 'DOGE',
   txUrl: (txId) => `https://blockchair.com/dogecoin/transaction/${txId}?from=coinwallet`,
 }, {
   _id: 'dash',
   network: 'dash',
   name: 'Dash',
+  symbol: 'DASH',
   txUrl: (txId) => `https://blockchair.com/dash/transaction/${txId}?from=coinwallet`,
 }, {
   _id: 'monero',
   network: 'monero',
   name: 'Monero',
+  symbol: 'XMR',
   txUrl: (txId) => `https://blockchair.com/monero/transaction/${txId}?from=coinwallet`,
 }, {
   _id: 'binancecoin',
   network: 'binance-smart-chain',
   name: 'Binance Smart Chain',
+  symbol: 'BNB',
   txUrl: (txId) => `https://bscscan.com/tx/${txId}`,
 }];
 const DEFAULT_COIN = {
