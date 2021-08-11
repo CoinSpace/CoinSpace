@@ -15,7 +15,7 @@ import template from './index.ract';
 let isEnabled = false;
 
 function isCryptoEqual(a, b) {
-  return a && b && (a === b._id || _.isEqual(a, b));
+  return a && b && _.isEqual(a, b);
 }
 
 export default function(el) {

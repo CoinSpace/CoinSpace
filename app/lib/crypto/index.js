@@ -77,7 +77,7 @@ export function getCrypto() {
 
   if (typeof crypto === 'object') {
     const coin = walletCoins.find((item) => {
-      return item._id === crypto._id;
+      return item._id === crypto._id && item.network === crypto.network;
     });
     if (coin) {
       return coin;

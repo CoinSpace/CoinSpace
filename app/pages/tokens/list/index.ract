@@ -11,7 +11,7 @@
         <div class="_token__name">{{name}}</div>
         <div class="_token__price" title="{{translate('Current coin price')}}">{{getPrice(_id)}}</div>
       </div>
-      {{#if isCurrentCrypto(_id)}}
+      {{#if isCurrentCrypto(this)}}
       <div class="_token__arrow">{{>svg_arrow}}</div>
       {{/if}}
     </div>
