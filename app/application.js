@@ -111,8 +111,12 @@ window.initCSApp = async function() {
 
   function setupCrypto() {
     const { network, coin } = querystring.parse(window.location.href.split('?')[1]);
-    const crypto = coin || network;
-    if (crypto) window.localStorage.setItem('_cs_token', JSON.stringify({ _id: crypto, network }));
+    if (coin || network) {
+      window.localStorage.setItem('_cs_token', JSON.stringify({
+        _id: coin || network,
+        network: network || coin,
+      }));
+    }
   }
 
 };
