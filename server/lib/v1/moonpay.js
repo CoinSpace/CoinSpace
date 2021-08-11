@@ -47,12 +47,14 @@ function getCurrenciesFromAPI() {
         const network = detectNetwork(coin);
         const symbol = coin.code.split('_')[0].toUpperCase();
         coins[coin.id] = {
+          code: coin.code,
           symbol,
           isSupported: !coin.isSuspended,
           isSellSupported: coin.isSellSupported && process.env.ENABLE_MOONPAY_SELL === 'true',
           network,
         };
         coinsUSA[coin.id] = {
+          code: coin.code,
           symbol,
           isSupported: !coin.isSuspended && coin.isSupportedInUS,
           isSellSupported: coin.isSellSupported && process.env.ENABLE_MOONPAY_SELL === 'true',

@@ -74,10 +74,7 @@ export const walletCoins = [{
   symbol: 'BNB',
   txUrl: (txId) => `https://bscscan.com/tx/${txId}`,
 }];
-const DEFAULT_COIN = {
-  _id: walletCoins[0]._id,
-  network: walletCoins[0].network,
-};
+const DEFAULT_COIN = walletCoins[0];
 
 export function getCrypto() {
   let crypto = window.localStorage.getItem('_cs_token') || DEFAULT_COIN;
@@ -105,7 +102,7 @@ export function getCrypto() {
       return token;
     }
   }
-  setCrypto(DEFAULT_COIN);
+  setCrypto();
   return DEFAULT_COIN;
 }
 

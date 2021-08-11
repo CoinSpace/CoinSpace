@@ -31,18 +31,19 @@ async function init() {
   }
 }
 
-async function getWidgetUrls(symbol, address) {
+async function getWidgetUrls(crypto, address) {
   let buy;
   let sell;
   let urls = [];
+  const coin = getMoonpayCoin(crypto);
 
-  if (isBuySupported(symbol) && address) {
-    buy = getBuyUrl(symbol.toLowerCase(), address);
+  if (isBuyAllowed && coin && coin.isSupported && address) {
+    buy = getBuyUrl(coin.code, address);
     urls.push(buy);
     buy = urls.length - 1;
   }
-  if (isSellSupported(symbol) && address) {
-    sell = getSellUrl(symbol.toLowerCase(), address);
+  if (isSellAllowed && coin && coin.isSellSupported && address) {
+    sell = getSellUrl(coin.code, address);
     urls.push(sell);
     sell = urls.length - 1;
   }
@@ -59,18 +60,12 @@ async function getWidgetUrls(symbol, address) {
   };
 }
 
-function isBuySupported(symbol) {
-  if (!isBuyAllowed) return false;
-  return !!Object.keys(coins).find((key) => {
-    return coins[key].symbol === symbol && coins[key].isSupported;
-  });
-}
-
-function isSellSupported(symbol) {
-  if (!isSellAllowed) return false;
-  return !!Object.keys(coins).find((key) => {
-    return coins[key].symbol === symbol && coins[key].isSellSupported;
-  });
+function getMoonpayCoin(crypto) {
+  for (const key in coins) {
+    if (coins[key].symbol === crypto.symbol && coins[key].network === crypto.network) {
+      return coins[key];
+    }
+  }
 }
 
 function getBuyUrl(currencyCode, walletAddress) {

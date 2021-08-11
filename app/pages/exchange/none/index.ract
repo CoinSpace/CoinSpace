@@ -3,21 +3,21 @@
 {{else}}
   {{#if moonpayBuyUrl}}
   <div on-click="moonpay-buy" class="csbtn">
-    {{translate("Buy")}} {{crypto}}
+    {{translate("Buy")}} {{symbol}}
   </div>
   {{else}}
   <div class="csbtn csbtn--disabled">
-    {{translate("Buy")}} {{crypto}}
+    {{translate("Buy")}} {{symbol}}
   </div>
   {{/if}}
 
   {{#if moonpaySellUrl}}
   <div on-click="moonpay-sell" class="csbtn">
-    {{translate("Sell")}} {{crypto}}
+    {{translate("Sell")}} {{symbol}}
   </div>
   {{else}}
   <div class="csbtn csbtn--disabled">
-    {{translate("Sell")}} {{crypto}}
+    {{translate("Sell")}} {{symbol}}
   </div>
   {{/if}}
 
