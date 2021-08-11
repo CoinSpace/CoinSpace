@@ -18,6 +18,8 @@ const PREDEFINED_NETWORKS = {
   tron: ['btt', 'trx'],
   polygon: ['eth_polygon', 'matic_polygon', 'usdc_polygon'],
   ripple: ['xrp'],
+  bitcoincash: ['bch'],
+  bitcoinsv: ['bsv'],
 };
 
 function detectNetwork(item) {

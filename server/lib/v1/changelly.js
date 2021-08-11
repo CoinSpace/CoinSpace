@@ -174,6 +174,8 @@ function encodeName(name) {
 }
 
 const PREDEFINED_NETWORKS = {
+  bch: 'bitcoincash',
+  bsv: 'bitcoinsv',
   xrp: 'ripple',
   solo: 'ripple',
   doge: 'dogecoin',
