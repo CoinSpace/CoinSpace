@@ -45,14 +45,15 @@ function getCurrenciesFromAPI() {
     data.forEach((coin) => {
       if (coin.type === 'crypto') {
         const network = detectNetwork(coin);
+        const symbol = coin.code.split('_')[0].toUpperCase();
         coins[coin.id] = {
-          symbol: coin.code.toUpperCase(),
+          symbol,
           isSupported: !coin.isSuspended,
           isSellSupported: coin.isSellSupported && process.env.ENABLE_MOONPAY_SELL === 'true',
           network,
         };
         coinsUSA[coin.id] = {
-          symbol: coin.code.toUpperCase(),
+          symbol,
           isSupported: !coin.isSuspended && coin.isSupportedInUS,
           isSellSupported: coin.isSellSupported && process.env.ENABLE_MOONPAY_SELL === 'true',
           network,
