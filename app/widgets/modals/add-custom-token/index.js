@@ -25,7 +25,7 @@ function open() {
     el: ractive.find('#js-blockchain'),
     options: [
       { value: 'ethereum', name: 'Ethereum' },
-      { value: 'binance-smart-chain', name: 'Binance Smart' },
+      { value: 'binance-smart-chain', name: 'Binance Smart Chain' },
     ],
     value: 'ethereum',
     id: 'blockchain',
