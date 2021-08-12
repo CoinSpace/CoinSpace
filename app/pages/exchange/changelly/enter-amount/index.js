@@ -1,6 +1,6 @@
 import Ractive from 'lib/ractive';
 import emitter from 'lib/emitter';
-import CS from 'lib/wallet';
+import { getCrypto } from 'lib/crypto';
 import changelly from 'lib/changelly';
 import { showError } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
@@ -70,7 +70,9 @@ export default function(el) {
       ractive.set('coins', coins);
 
       fromSymbolObserver.silence();
-      ractive.set('fromSymbol', CS.getWallet().denomination);
+      const crypto = getCrypto();
+      const coin = coins.find((coin) => coin.symbol === crypto.symbol && coin.network === crypto.network);
+      ractive.set('fromSymbol', coin ? coin.symbol : getFirstSymbol(coins));
       fromSymbolObserver.resume();
 
       const fromSymbol = ractive.get('fromSymbol');
@@ -118,6 +120,7 @@ export default function(el) {
       fromAmount: ractive.find('#changelly_from_amount').value,
       toSymbol: ractive.get('toSymbol'),
       networkFee: ractive.get('networkFee'),
+      coins: ractive.get('coins'),
     };
 
     emitter.emit('change-changelly-step', 'create', data);

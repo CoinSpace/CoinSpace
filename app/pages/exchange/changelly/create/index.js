@@ -1,6 +1,7 @@
 import Ractive from 'lib/ractive';
 import emitter from 'lib/emitter';
 import { getWallet } from 'lib/wallet';
+import { getCrypto } from 'lib/crypto';
 import changelly from 'lib/changelly';
 import qrcode from 'lib/qrcode';
 import showTooltip from 'widgets/modals/tooltip';
@@ -37,9 +38,14 @@ export default function(el) {
     ractive.set('networkFee', context.networkFee);
 
     const wallet = getWallet();
+    const crypto = getCrypto();
+    const fromCoin = context.coins.find((coin) => context.fromSymbol === coin.symbol);
+    const toCoin = context.coins.find((coin) => context.toSymbol === coin.symbol);
     if (wallet) {
-      ractive.set('returnAddress', context.fromSymbol === wallet.denomination ? wallet.getNextAddress() : '');
-      ractive.set('toAddress', context.toSymbol === wallet.denomination ? wallet.getNextAddress() : '');
+      ractive.set('returnAddress',
+        fromCoin.symbol === crypto.symbol && fromCoin.network === crypto.network ? wallet.getNextAddress() : '');
+      ractive.set('toAddress',
+        toCoin.symbol === crypto.symbol && toCoin.network === crypto.network ? wallet.getNextAddress() : '');
     }
   });
 
