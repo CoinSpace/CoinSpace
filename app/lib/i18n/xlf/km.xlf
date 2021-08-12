@@ -357,7 +357,7 @@
         <source>%(amount)s %(toSymbol)s have been delivered to
  %(toAddress)s</source>
         <target>%(amount)s %(toSymbol)s ត្រូវបានបញ្ជូនទៅ
- %(toSymbol)s</target>
+ %(toAddress)s</target>
       </trans-unit>
       <trans-unit id="Back">
         <source>Back</source>
