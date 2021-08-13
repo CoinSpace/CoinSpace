@@ -15,6 +15,7 @@ function open(options, callback) {
     statusBarStyle = window.StatusBar.style;
     window.StatusBar.setStyle('default');
   }
+  let passphraseOld = '';
 
   const ractive = new Ractive({
     el: document.getElementById('general-purpose-overlay'),
@@ -31,6 +32,9 @@ function open(options, callback) {
       },
       suggestions() {
         const passphrase = this.get('passphrase').toLowerCase();
+        const passphraseDelta = Math.abs(passphrase.length - passphraseOld.length);
+        passphraseOld = passphrase;
+        if (passphraseDelta > 1) return [];
         const lastWord = passphrase.split(' ').slice(-1)[0];
         if (!lastWord) return [];
         const suggestions = DEFAULT_WORDLIST.filter((word) => word.startsWith(lastWord)).slice(0, 3);
