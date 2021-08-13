@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <div class="_min_amount">
+    <div>
       {{translate("Minimum amount:")}}
       {{#if isFirstEstimate}}
         ...

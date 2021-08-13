@@ -1,17 +1,10 @@
 .changelly_enter_amount {
   margin-bottom: 25px;
-
+  @include breakpoint(portrait) {
+    font-size: $base_font_size--portrait;
+  }
   ._title {
     @extend .jigsaw-medium;
-    @include breakpoint(portrait) {
-      font-size: $base_font_size--portrait;
-    }
-  }
-
-  ._min_amount {
-    @include breakpoint(portrait) {
-      font-size: $base_font_size--portrait;
-    }
   }
 
   .csformgroup {
@@ -22,9 +15,6 @@
 
   .exchange__rate {
     margin-bottom: 20px;
-    @include breakpoint(portrait) {
-      font-size: $base_font_size--portrait;
-    }
   }
 
   .swap__wrapper {

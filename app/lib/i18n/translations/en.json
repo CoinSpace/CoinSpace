@@ -174,7 +174,7 @@
   "address": "address",
   "Exchange error": "Exchange error",
   "Transaction not found": "Transaction not found",
-  "Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress": "Send %(depositAmount)s %(depositSymbol)s to deposit address.\nIt will be converted into %(toSymbol)s, and sent to\n %(toAddress)s",
+  "Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress (blokchain: :toBlockchain)": "Send %(depositAmount)s %(depositSymbol)s to deposit address.\nIt will be converted into %(toSymbol)s, and sent to\n %(toAddress)s (blockchain: %(toBlockchain)s)",
   "Network fee": "Network fee",
   "You have 36 hours to send funds otherwise the transaction will be cancelled automatically.": "You have 36 hours to send funds otherwise the transaction will be cancelled automatically.",
   "Extra Id": "Extra Id",
@@ -260,5 +260,6 @@
   "Transaction fee is too low. Please click on refresh button.": "Transaction fee is too low. Please click on refresh button.",
   "Only transactions addressed to you can be accepted. The minimum number of confirmations is 10 (:url).": "Only transactions addressed to you can be accepted. The minimum number of confirmations is 10 (%(url)s).",
   "Invalid Transaction ID.": "Invalid Transaction ID.",
-  "Blockchain": "Blockchain"
+  "Blockchain": "Blockchain",
+  "Hardware key is required to complete action.": "Hardware key is required to complete action."
 }

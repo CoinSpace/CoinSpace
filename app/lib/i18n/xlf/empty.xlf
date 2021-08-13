@@ -702,10 +702,10 @@
         <source>Transaction not found</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
+      <trans-unit id="Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress (blokchain: :toBlockchain)">
         <source>Send %(depositAmount)s %(depositSymbol)s to deposit address.
 It will be converted into %(toSymbol)s, and sent to
- %(toAddress)s</source>
+ %(toAddress)s (blockchain: %(toBlockchain)s)</source>
         <target></target>
       </trans-unit>
       <trans-unit id="Network fee">
@@ -1050,6 +1050,10 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Blockchain">
         <source>Blockchain</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Hardware key is required to complete action.">
+        <source>Hardware key is required to complete action.</source>
         <target></target>
       </trans-unit>
     </body>

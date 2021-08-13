@@ -22,8 +22,10 @@ export default function(el) {
       isValidating: false,
       fromSymbol: '',
       returnAddress: '',
+      depositBlockchain: '',
       toAddress: '',
       toSymbol: '',
+      toBlockchain: '',
     },
     partials: {
       loader,
@@ -41,6 +43,10 @@ export default function(el) {
     const crypto = getCrypto();
     const fromCoin = context.coins.find((coin) => context.fromSymbol === coin.symbol);
     const toCoin = context.coins.find((coin) => context.toSymbol === coin.symbol);
+
+    ractive.set('depositBlockchain', fromCoin.network.replace(/-/g, ' '));
+    ractive.set('toBlockchain', toCoin.network.replace(/-/g, ' '));
+
     if (wallet) {
       ractive.set('returnAddress',
         fromCoin.symbol === crypto.symbol && fromCoin.network === crypto.network ? wallet.getNextAddress() : '');
@@ -108,6 +114,8 @@ export default function(el) {
     return validateAddresses(options).then(() => {
       return changelly.createTransaction(options).then((data) => {
         data.networkFee = ractive.get('networkFee');
+        data.depositBlockchain = ractive.get('depositBlockchain');
+        data.toBlockchain = ractive.get('toBlockchain');
         details.set('changellyInfo', data).then(() => {
           ractive.set('isValidating', false);
           emitter.emit('change-changelly-step', 'awaitingDeposit', data);

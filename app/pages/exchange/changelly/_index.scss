@@ -5,6 +5,15 @@
       display: block;
     }
   }
+  .csformgroup--with-blockchain {
+    margin-bottom: 5px;
+  }
+  ._blockchain {
+    margin-bottom: 20px;
+    @include breakpoint(portrait) {
+      font-size: $base_font_size--portrait;
+    }
+  }
   ._powered_by {
     text-align: center;
     @include breakpoint(portrait) {

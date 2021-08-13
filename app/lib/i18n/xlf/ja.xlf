@@ -703,13 +703,13 @@
         <source>Transaction not found</source>
         <target>取引が見つかりません</target>
       </trans-unit>
-      <trans-unit id="Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress">
+      <trans-unit id="Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress (blokchain: :toBlockchain)">
         <source>Send %(depositAmount)s %(depositSymbol)s to deposit address.
 It will be converted into %(toSymbol)s, and sent to
- %(toAddress)s</source>
+ %(toAddress)s (blockchain: %(toBlockchain)s)</source>
         <target>%(depositAmount)s%(depositSymbol)sを入金アドレスに送ってください。
 は%(toSymbol)sに変換され、
-%(toAddress)sに送信されます</target>
+%(toAddress)s (ブロックチェーン: %(toBlockchain)s) に送信されます</target>
       </trans-unit>
       <trans-unit id="Network fee">
         <source>Network fee</source>
@@ -1053,6 +1053,10 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Blockchain">
         <source>Blockchain</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Hardware key is required to complete action.">
+        <source>Hardware key is required to complete action.</source>
         <target></target>
       </trans-unit>
     </body>

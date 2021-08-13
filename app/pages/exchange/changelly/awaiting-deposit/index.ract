@@ -10,15 +10,16 @@
   </div>
 
   <div class="_instructions">
-    {{translate("Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress", {
+    {{translate("Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress (blokchain: :toBlockchain)", {
       depositAmount: depositAmount,
       depositSymbol: depositSymbol,
       toSymbol: toSymbol,
-      toAddress: toAddress
+      toAddress: toAddress,
+      toBlockchain: toBlockchain
     })}}
   </div>
 
-  <div class="csformgroup csformgroup--readonly">
+  <div class="csformgroup csformgroup--readonly csformgroup--with-blockchain">
     <div class="csformgroup__input-group">
       <div class="csformgroup__input-group__header">
         <label>{{translate("Deposit address", {symbol: depositSymbol})}}</label>
@@ -40,6 +41,10 @@
       </span>
     </div>
     {{/if}}
+  </div>
+
+  <div class="_blockchain">
+    {{translate("Blockchain")}}: {{depositBlockchain}}
   </div>
 
   <div class="_qrcode" id="deposit_qr_canvas"></div>
