@@ -1057,7 +1057,7 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Hardware key is required to complete action.">
         <source>Hardware key is required to complete action.</source>
-        <target></target>
+        <target>Для выполнения действия необходим аппаратный ключ.</target>
       </trans-unit>
     </body>
   </file>

@@ -1053,11 +1053,11 @@ Zostanie przeliczony na %(toSymbol)s, i wysłany do
       </trans-unit>
       <trans-unit id="Blockchain">
         <source>Blockchain</source>
-        <target></target>
+        <target>Blockchain</target>
       </trans-unit>
       <trans-unit id="Hardware key is required to complete action.">
         <source>Hardware key is required to complete action.</source>
-        <target></target>
+        <target>Do ukończenia tej czynności konieczny jest klucz sprzętowy.</target>
       </trans-unit>
     </body>
   </file>
