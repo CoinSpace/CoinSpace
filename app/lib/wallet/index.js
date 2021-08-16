@@ -189,6 +189,8 @@ async function getExtraOptions(crypto) {
     options.minConf = 12;
     options.token = crypto._id !== 'ethereum' ? crypto : false;
     options.decimals = crypto.decimals !== undefined ? crypto.decimals : 18;
+    options.request = request;
+    options.apiNode = process.env.API_ETH_URL;
   } else if (crypto.network === 'binance-smart-chain') {
     options.name = crypto.name;
     options.minConf = 12;
