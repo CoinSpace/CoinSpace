@@ -6,10 +6,7 @@
 
   <div class="_content">
 
-    <div class="_amount">
-      <span class="_value">{{amount}}</span>
-      <span class="_currency">{{denomination}}</span>
-    </div>
+    <div class="_amount">{{amount}} {{denomination}}</div>
 
     <div class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</div>
 

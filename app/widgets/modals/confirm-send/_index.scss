@@ -2,19 +2,11 @@
   text-align: center;
   ._amount {
     @extend .jigsaw-light;
-    display: flex;
-    justify-content: center;
-    ._value {
-      font-size: $large_font_size;
-      @include breakpoint(portrait) {
-        font-size: $large_font_size--portrait;
-      }
-    }
-    ._currency {
-      padding-top: 5px;
-      margin-left: 3px;
-    }
     margin-bottom: 10px;
+    font-size: $header_font_size;
+    @include breakpoint(portrait) {
+      font-size: $header_font_size--portrait;
+    }
   }
   ._fee {
     font-size: $small_font_size;
