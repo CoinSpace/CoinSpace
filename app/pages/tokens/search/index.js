@@ -1,6 +1,8 @@
 import Ractive from 'lib/ractive';
 import emitter from 'lib/emitter';
 import details from 'lib/wallet/details';
+import { addPublicKey } from 'lib/wallet';
+import LS from 'lib/wallet/localStorage';
 import tokens from 'lib/tokens';
 import addCustomToken from 'widgets/modals/add-custom-token';
 import template from './index.ract';
@@ -27,8 +29,15 @@ export default function(el) {
     ractive.set('cryptoTokens', cryptoTokens);
   }
 
-  function addToken(id, network) {
+  async function addToken(id, network) {
     const token = tokens.getTokenById(id, network);
+    if (!LS.hasPublicKey(token.network)) {
+      try {
+        await addPublicKey(token);
+      } catch (err) {
+        return;
+      }
+    }
     const walletTokens = details.get('tokens');
 
     walletTokens.push(token);
