@@ -2,7 +2,7 @@ import Ractive from 'lib/ractive';
 import { translate } from 'lib/i18n';
 import { showError } from 'widgets/modals/flash';
 import template from './index.ract';
-const DEFAULT_WORDLIST = require('@coinspace/b39/wordlists/en.json');
+import DEFAULT_WORDLIST from '@coinspace/b39/wordlists/en.json';
 
 function open(options, callback) {
   const {

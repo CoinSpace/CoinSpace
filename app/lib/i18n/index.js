@@ -1,6 +1,5 @@
 import counterpart from 'counterpart';
-
-const languages = require('./list.json');
+import languages from './list.json';
 
 counterpart.setSeparator('*');
 
