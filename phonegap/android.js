@@ -44,12 +44,12 @@ async function run() {
   if (process.env.RELEASE) {
     cordova('build android --release');
     utils.shell(
-      'jarsigner -sigalg SHA1withRSA -digestalg SHA1 -keystore ../release.keystore \
-      -storepass coinspace platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk coinspace',
+      'zipalign -f 4 platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk \
+      ../deploy/coinspace-release.apk',
       { cwd: buildPath }
     );
     utils.shell(
-      'zipalign -f 4 platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk \
+      'apksigner sign --ks-pass=pass:coinspace -ks ../release.keystore \
       ../deploy/coinspace-release.apk',
       { cwd: buildPath }
     );
