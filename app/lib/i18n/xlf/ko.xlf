@@ -528,12 +528,12 @@
         <target>월렛 개인키 외 다른 개인키를 입력해주십시오</target>
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
-        <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(denomination)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
-        <target>월렛을 비우려고 하는 것 같습니다. 거래 수수료와 최소 준비금(%(minReserve)s %(denomination)s)을 감안하면 보낼 수 있는 최대 금액은 약 %(sendableBalance)s입니다. 금액란의 값은 저희가 수정했습니다.</target>
+        <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(symbol)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>월렛을 비우려고 하는 것 같습니다. 거래 수수료와 최소 준비금(%(minReserve)s %(symbol)s)을 감안하면 보낼 수 있는 최대 금액은 약 %(sendableBalance)s입니다. 금액란의 값은 저희가 수정했습니다.</target>
       </trans-unit>
-      <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :denomination) to your wallet address.">
-        <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(denomination)s) to your wallet address.</source>
-        <target>월렛이 활성화되지 않았습니다. 월렛을 활성화하려면 최소 준비금(%(minReserve)s %(denomination)s)보다 큰 금액을 월렛 주소로 보내주십시오.</target>
+      <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :symbol) to your wallet address.">
+        <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(symbol)s) to your wallet address.</source>
+        <target>월렛이 활성화되지 않았습니다. 월렛을 활성화하려면 최소 준비금(%(minReserve)s %(symbol)s)보다 큰 금액을 월렛 주소로 보내주십시오.</target>
       </trans-unit>
       <trans-unit id="Load more">
         <source>Load more</source>
@@ -543,9 +543,9 @@
         <source>more</source>
         <target>추가</target>
       </trans-unit>
-      <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
-        <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>수취인의 월렛이 활성화되지 않았습니다. %(minReserve)s %(denomination)s보다 큰 금액만 보낼 수 있습니다. </target>
+      <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :symbol.">
+        <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(symbol)s.</source>
+        <target>수취인의 월렛이 활성화되지 않았습니다. %(minReserve)s %(symbol)s보다 큰 금액만 보낼 수 있습니다. </target>
       </trans-unit>
       <trans-unit id="Destination tag">
         <source>Destination tag</source>
@@ -603,9 +603,9 @@
         <source>The memo contains optional extra information. A string up to 28-bytes long.</source>
         <target>메모에는 선택적인 추가 정보가 포함됩니다. 문자열 길이는 최장 28 바이트입니다.</target>
       </trans-unit>
-      <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :denomination.">
-        <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>월렛이 활성화되지 않았습니다. %(minReserve)s %(denomination)s보다 큰 금액만 수취할 수 있습니다.</target>
+      <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :symbol.">
+        <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(symbol)s.</source>
+        <target>월렛이 활성화되지 않았습니다. %(minReserve)s %(symbol)s보다 큰 금액만 수취할 수 있습니다.</target>
       </trans-unit>
       <trans-unit id="Privacy Policy">
         <source>Privacy Policy</source>

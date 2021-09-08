@@ -528,12 +528,12 @@
         <target>Bitte gib einen anderen privaten Schlüssel ein als den privaten Schlüssel Deiner Brieftasche.</target>
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
-        <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(denomination)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
-        <target>Möchtest du deine Brieftasche komplett leeren? Unter der Berücksichtigung von Transaktionsgebühren und der Mindestreserve (%(minReserve)s %(denomination)s) kannst du maximal einen Betrag von %(sendableBalance)s senden. Wir haben diesen Betrag für Dich in das Eingabefeld eingetragen.</target>
+        <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(symbol)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>Möchtest du deine Brieftasche komplett leeren? Unter der Berücksichtigung von Transaktionsgebühren und der Mindestreserve (%(minReserve)s %(symbol)s) kannst du maximal einen Betrag von %(sendableBalance)s senden. Wir haben diesen Betrag für Dich in das Eingabefeld eingetragen.</target>
       </trans-unit>
-      <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :denomination) to your wallet address.">
-        <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(denomination)s) to your wallet address.</source>
-        <target>Deine Brieftasche ist nicht aktiviert. Bitte sende eine höhere Mindestreserve (%(minReserve)s %(denomination)s) an die Adresse Deiner Brieftasche.</target>
+      <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :symbol) to your wallet address.">
+        <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(symbol)s) to your wallet address.</source>
+        <target>Deine Brieftasche ist nicht aktiviert. Bitte sende eine höhere Mindestreserve (%(minReserve)s %(symbol)s) an die Adresse Deiner Brieftasche.</target>
       </trans-unit>
       <trans-unit id="Load more">
         <source>Load more</source>
@@ -543,9 +543,9 @@
         <source>more</source>
         <target>mehr</target>
       </trans-unit>
-      <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
-        <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>Die Brieftasche des Empfängers ist nicht aktiviert. Du kannst nur einen Betrag senden, der größer ist als %(minReserve)s %(denomination)s.</target>
+      <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :symbol.">
+        <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(symbol)s.</source>
+        <target>Die Brieftasche des Empfängers ist nicht aktiviert. Du kannst nur einen Betrag senden, der größer ist als %(minReserve)s %(symbol)s.</target>
       </trans-unit>
       <trans-unit id="Destination tag">
         <source>Destination tag</source>
@@ -603,9 +603,9 @@
         <source>The memo contains optional extra information. A string up to 28-bytes long.</source>
         <target>Das Memo enthält optional zusätzliche Informationen. Bis zu 28 Bytes lange Zeichenkette.</target>
       </trans-unit>
-      <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :denomination.">
-        <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>Deine Brieftasche ist nicht aktiviert. Du kannst nur einen Betrag senden, der größer ist als %(minReserve)s %(denomination)s.</target>
+      <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :symbol.">
+        <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(symbol)s.</source>
+        <target>Deine Brieftasche ist nicht aktiviert. Du kannst nur einen Betrag senden, der größer ist als %(minReserve)s %(symbol)s.</target>
       </trans-unit>
       <trans-unit id="Privacy Policy">
         <source>Privacy Policy</source>

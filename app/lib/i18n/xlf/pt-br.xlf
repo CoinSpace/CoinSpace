@@ -528,12 +528,12 @@
         <target>Digite uma chave privativa diferente da chave da sua carteira</target>
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
-        <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(denomination)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
-        <target>Parece que você está tentando esvaziar sua carteira. Levando em conta a taxa da operação e a reserva mínima (%(minReserve)s %(denomination)s), estimamos que o valor máximo a ser enviado é de %(sendableBalance)s. Lançamos o valor no campo do montante para você.</target>
+        <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(symbol)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>Parece que você está tentando esvaziar sua carteira. Levando em conta a taxa da operação e a reserva mínima (%(minReserve)s %(symbol)s), estimamos que o valor máximo a ser enviado é de %(sendableBalance)s. Lançamos o valor no campo do montante para você.</target>
       </trans-unit>
-      <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :denomination) to your wallet address.">
-        <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(denomination)s) to your wallet address.</source>
-        <target>Sua carteira não está ativa. Para ativá-la, envie um valor maior do que a reserva mínima (%(minReserve)s %(denomination)s) para o endereço da sua carteira.</target>
+      <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :symbol) to your wallet address.">
+        <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(symbol)s) to your wallet address.</source>
+        <target>Sua carteira não está ativa. Para ativá-la, envie um valor maior do que a reserva mínima (%(minReserve)s %(symbol)s) para o endereço da sua carteira.</target>
       </trans-unit>
       <trans-unit id="Load more">
         <source>Load more</source>
@@ -543,9 +543,9 @@
         <source>more</source>
         <target>mais</target>
       </trans-unit>
-      <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
-        <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>A carteira do destinatário não está ativa. Só é possível enviar valores acima de %(minReserve)s %(denomination)s.</target>
+      <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :symbol.">
+        <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(symbol)s.</source>
+        <target>A carteira do destinatário não está ativa. Só é possível enviar valores acima de %(minReserve)s %(symbol)s.</target>
       </trans-unit>
       <trans-unit id="Destination tag">
         <source>Destination tag</source>
@@ -603,9 +603,9 @@
         <source>The memo contains optional extra information. A string up to 28-bytes long.</source>
         <target>O memorando contém informações extras opcionais. Sequência de até 28 bytes.</target>
       </trans-unit>
-      <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :denomination.">
-        <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>Sua carteira não está ativa. Apenas valores superiores a %(minReserve)s %(denomination)s podem ser recebidos.</target>
+      <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :symbol.">
+        <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(symbol)s.</source>
+        <target>Sua carteira não está ativa. Apenas valores superiores a %(minReserve)s %(symbol)s podem ser recebidos.</target>
       </trans-unit>
       <trans-unit id="Privacy Policy">
         <source>Privacy Policy</source>

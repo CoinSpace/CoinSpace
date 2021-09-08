@@ -528,12 +528,12 @@
         <target>Silahkan masukkan private key selain private key wallet anda</target>
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
-        <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(denomination)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
-        <target>Nampaknya anda sedang mengosongkan wallet. Dengan pertimbangan biaya transaksi dan cadangan minimum (%(minReserve)s %(denomination)s) akun anda, kami meperkirakan jumlah transaksi maksimum yang  bisa ditransfer adalah %(sendableBalance)s. Kami telah mengubah nilai di kolom tersebut untuk anda.</target>
+        <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(symbol)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>Nampaknya anda sedang mengosongkan wallet. Dengan pertimbangan biaya transaksi dan cadangan minimum (%(minReserve)s %(symbol)s) akun anda, kami meperkirakan jumlah transaksi maksimum yang  bisa ditransfer adalah %(sendableBalance)s. Kami telah mengubah nilai di kolom tersebut untuk anda.</target>
       </trans-unit>
-      <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :denomination) to your wallet address.">
-        <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(denomination)s) to your wallet address.</source>
-        <target>Wallet anda belum diaktifkan. Untuk mengaktifkannya silahkan kirim melebihi jumlah cadangan minimum (%(minReserve)s %(denomination)s) pada address wallet anda</target>
+      <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :symbol) to your wallet address.">
+        <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(symbol)s) to your wallet address.</source>
+        <target>Wallet anda belum diaktifkan. Untuk mengaktifkannya silahkan kirim melebihi jumlah cadangan minimum (%(minReserve)s %(symbol)s) pada address wallet anda</target>
       </trans-unit>
       <trans-unit id="Load more">
         <source>Load more</source>
@@ -543,9 +543,9 @@
         <source>more</source>
         <target>lebih</target>
       </trans-unit>
-      <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
-        <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>Wallet penerima belum aktif. Anda dapat mengirim jumlah yang lebih besar dari %(minReserve)s %(denomination)s.</target>
+      <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :symbol.">
+        <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(symbol)s.</source>
+        <target>Wallet penerima belum aktif. Anda dapat mengirim jumlah yang lebih besar dari %(minReserve)s %(symbol)s.</target>
       </trans-unit>
       <trans-unit id="Destination tag">
         <source>Destination tag</source>
@@ -603,9 +603,9 @@
         <source>The memo contains optional extra information. A string up to 28-bytes long.</source>
         <target>Memo berisi informasi tambahan lain. Sebuah string dengan panjang hingga 28-byte.</target>
       </trans-unit>
-      <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :denomination.">
-        <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>Wallet anda belum diaktifkan. Anda hanya bisa menerima jumlah lebih besar dari %(minReserve)s %(denomination)s.</target>
+      <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :symbol.">
+        <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(symbol)s.</source>
+        <target>Wallet anda belum diaktifkan. Anda hanya bisa menerima jumlah lebih besar dari %(minReserve)s %(symbol)s.</target>
       </trans-unit>
       <trans-unit id="Privacy Policy">
         <source>Privacy Policy</source>

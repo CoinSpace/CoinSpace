@@ -528,12 +528,12 @@
         <target>Unesite tajni ključ različit od vašeg tajnog ključa</target>
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
-        <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(denomination)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
-        <target>Izgleda da pokušavate isprazniti vaš novčanik. Uzimajući u obzir proviziju na transakciju i minimalnu rezervu %(minReserve)s %(denomination)s), procijenili smo da je maksimalni iznos koji možete poslati %(sendableBalance)s. Izmijenili smo za vas vrijednost u polju za iznos.</target>
+        <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(symbol)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>Izgleda da pokušavate isprazniti vaš novčanik. Uzimajući u obzir proviziju na transakciju i minimalnu rezervu %(minReserve)s %(symbol)s), procijenili smo da je maksimalni iznos koji možete poslati %(sendableBalance)s. Izmijenili smo za vas vrijednost u polju za iznos.</target>
       </trans-unit>
-      <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :denomination) to your wallet address.">
-        <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(denomination)s) to your wallet address.</source>
-        <target>Vaš novčanik nije aktiviran. Kako biste ga aktivirali molimo pošaljite iznos veći od minimalne rezerve (%(minReserve)s %(denomination)s) na adresu vašeg novčanika.</target>
+      <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :symbol) to your wallet address.">
+        <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(symbol)s) to your wallet address.</source>
+        <target>Vaš novčanik nije aktiviran. Kako biste ga aktivirali molimo pošaljite iznos veći od minimalne rezerve (%(minReserve)s %(symbol)s) na adresu vašeg novčanika.</target>
       </trans-unit>
       <trans-unit id="Load more">
         <source>Load more</source>
@@ -543,9 +543,9 @@
         <source>more</source>
         <target>više</target>
       </trans-unit>
-      <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
-        <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>Novčanik primatelja nije aktiviran. Možete poslati samo iznos veći od %(minReserve)s %(denomination)s.</target>
+      <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :symbol.">
+        <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(symbol)s.</source>
+        <target>Novčanik primatelja nije aktiviran. Možete poslati samo iznos veći od %(minReserve)s %(symbol)s.</target>
       </trans-unit>
       <trans-unit id="Destination tag">
         <source>Destination tag</source>
@@ -603,9 +603,9 @@
         <source>The memo contains optional extra information. A string up to 28-bytes long.</source>
         <target>Bilješka sadrži neobavezne dodatne informacije. Niz duljine do 28 bajtova.</target>
       </trans-unit>
-      <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :denomination.">
-        <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>Vaš novčanik nije aktiviran. Možete primiti samo iznos veći od %(minReserve)s %(denomination)s.</target>
+      <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :symbol.">
+        <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(symbol)s.</source>
+        <target>Vaš novčanik nije aktiviran. Možete primiti samo iznos veći od %(minReserve)s %(symbol)s.</target>
       </trans-unit>
       <trans-unit id="Privacy Policy">
         <source>Privacy Policy</source>

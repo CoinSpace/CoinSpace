@@ -528,12 +528,12 @@
         <target>โปรดป้อนคีย์ส่วนตัวอื่นนอกเหนือไปจากคีย์ส่วนตัวสำหรับกระเป๋าเงินของคุณ</target>
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
-        <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(denomination)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
-        <target>ดูเหมือนว่าคุณกำลังพยายามใช้เงินในกระเป๋าให้หมด เมื่อคำนึงถึงค่าธรรมเนียมธุรกรรมและเงินสำรองขั้นต่ำ (%(minReserve)s %(denomination)s) แล้ว เราได้ประเมินว่าจำนวนสูงสุดที่คุณสามารถส่งได้คือ %(sendableBalance)s เราได้แก้ไขค่าในช่องข้อมูลจำนวนเงินให้คุณเรียบร้อยแล้ว</target>
+        <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(symbol)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>ดูเหมือนว่าคุณกำลังพยายามใช้เงินในกระเป๋าให้หมด เมื่อคำนึงถึงค่าธรรมเนียมธุรกรรมและเงินสำรองขั้นต่ำ (%(minReserve)s %(symbol)s) แล้ว เราได้ประเมินว่าจำนวนสูงสุดที่คุณสามารถส่งได้คือ %(sendableBalance)s เราได้แก้ไขค่าในช่องข้อมูลจำนวนเงินให้คุณเรียบร้อยแล้ว</target>
       </trans-unit>
-      <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :denomination) to your wallet address.">
-        <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(denomination)s) to your wallet address.</source>
-        <target>กระเป๋าเงินของคุณยังไม่ได้เปิดใช้งาน หากต้องการเปิดใช้งาน โปรดส่งเงินที่เป็นจำนวนมากกว่าเงินสำรองขั้นต่ำ (%(minReserve)s %(denomination)s) ไปยังที่อยู่กระเป๋าเงิน</target>
+      <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :symbol) to your wallet address.">
+        <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(symbol)s) to your wallet address.</source>
+        <target>กระเป๋าเงินของคุณยังไม่ได้เปิดใช้งาน หากต้องการเปิดใช้งาน โปรดส่งเงินที่เป็นจำนวนมากกว่าเงินสำรองขั้นต่ำ (%(minReserve)s %(symbol)s) ไปยังที่อยู่กระเป๋าเงิน</target>
       </trans-unit>
       <trans-unit id="Load more">
         <source>Load more</source>
@@ -543,9 +543,9 @@
         <source>more</source>
         <target>เพิ่มเติม</target>
       </trans-unit>
-      <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
-        <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>กระเป๋าเงินของผู้รับยังไม่ได้เปิดใช้งาน คุณสามารถส่งเงินเป็นจำนวนมากกว่า %(minReserve)s %(denomination)sเพียงเท่านั้น</target>
+      <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :symbol.">
+        <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(symbol)s.</source>
+        <target>กระเป๋าเงินของผู้รับยังไม่ได้เปิดใช้งาน คุณสามารถส่งเงินเป็นจำนวนมากกว่า %(minReserve)s %(symbol)sเพียงเท่านั้น</target>
       </trans-unit>
       <trans-unit id="Destination tag">
         <source>Destination tag</source>
@@ -603,9 +603,9 @@
         <source>The memo contains optional extra information. A string up to 28-bytes long.</source>
         <target>บันทึกนี้จะบรรจุข้อมูลเพิ่มเติมที่จะมีหรือไม่มีก็ได้ โดยเป็นสตริงซึ่งมีความยาวสูงสุด 28 ไบต์</target>
       </trans-unit>
-      <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :denomination.">
-        <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>กระเป๋าเงินของคุณยังไม่ได้เปิดใช้งาน คุณสามารถรับเงินจำนวนมากกว่า %(minReserve)s %(denomination)sเท่านั้น</target>
+      <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :symbol.">
+        <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(symbol)s.</source>
+        <target>กระเป๋าเงินของคุณยังไม่ได้เปิดใช้งาน คุณสามารถรับเงินจำนวนมากกว่า %(minReserve)s %(symbol)sเท่านั้น</target>
       </trans-unit>
       <trans-unit id="Privacy Policy">
         <source>Privacy Policy</source>

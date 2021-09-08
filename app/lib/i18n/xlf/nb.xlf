@@ -528,12 +528,12 @@
         <target>Oppgi en priat nøkkel annen enn din private lommeboknøkkel</target>
       </trans-unit>
       <trans-unit id="It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you">
-        <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(denomination)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
-        <target>Det virker som du prøver å tømme din lommebok. Inkludert transaksjonsavgift og minstereserven (%(minReserve)s %(denomination)s), så har vi beregnet at det største beløpet du kan sende er %(sendableBalance)s. Vi har endret verdien i mengde-feltet for deg.</target>
+        <source>It seems like you are trying to empty your wallet. Taking transaction fee and minimum reserve (%(minReserve)s %(symbol)s) into account, we estimated that the max amount you can send is %(sendableBalance)s. We have amended the value in the amount field for you.</source>
+        <target>Det virker som du prøver å tømme din lommebok. Inkludert transaksjonsavgift og minstereserven (%(minReserve)s %(symbol)s), så har vi beregnet at det største beløpet du kan sende er %(sendableBalance)s. Vi har endret verdien i mengde-feltet for deg.</target>
       </trans-unit>
-      <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :denomination) to your wallet address.">
-        <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(denomination)s) to your wallet address.</source>
-        <target>Lommeboken din er ikke aktivert. Send mer enn minstereserven (%(minReserve)s %(denomination)s) til din lommeboksadresse for å aktivere den.</target>
+      <trans-unit id="Your wallet isn&apos;t activated. To activate it please send greater than minimum reserve (:minReserve :symbol) to your wallet address.">
+        <source>Your wallet isn't activated. To activate it please send greater than minimum reserve (%(minReserve)s %(symbol)s) to your wallet address.</source>
+        <target>Lommeboken din er ikke aktivert. Send mer enn minstereserven (%(minReserve)s %(symbol)s) til din lommeboksadresse for å aktivere den.</target>
       </trans-unit>
       <trans-unit id="Load more">
         <source>Load more</source>
@@ -543,9 +543,9 @@
         <source>more</source>
         <target>mer</target>
       </trans-unit>
-      <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :denomination.">
-        <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>Mottakerens lommebok er ikke aktivert. Du kan kun sende beløp høyere enn %(minReserve)s %(denomination)s.</target>
+      <trans-unit id="Recipient&apos;s wallet isn&apos;t activated. You can send only amount greater than :minReserve :symbol.">
+        <source>Recipient's wallet isn't activated. You can send only amount greater than %(minReserve)s %(symbol)s.</source>
+        <target>Mottakerens lommebok er ikke aktivert. Du kan kun sende beløp høyere enn %(minReserve)s %(symbol)s.</target>
       </trans-unit>
       <trans-unit id="Destination tag">
         <source>Destination tag</source>
@@ -603,9 +603,9 @@
         <source>The memo contains optional extra information. A string up to 28-bytes long.</source>
         <target>Notatet inneholder valgfri ekstra informasjon. En streng opptil 28-byte lang.</target>
       </trans-unit>
-      <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :denomination.">
-        <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(denomination)s.</source>
-        <target>Din lommebok er ikke aktivert. Du kan kun sende beløp høyere enn %(minReserve)s %(denomination)s.</target>
+      <trans-unit id="Your wallet isn&apos;t activated. You can receive only amount greater than :minReserve :symbol.">
+        <source>Your wallet isn't activated. You can receive only amount greater than %(minReserve)s %(symbol)s.</source>
+        <target>Din lommebok er ikke aktivert. Du kan kun sende beløp høyere enn %(minReserve)s %(symbol)s.</target>
       </trans-unit>
       <trans-unit id="Privacy Policy">
         <source>Privacy Policy</source>
