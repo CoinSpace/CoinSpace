@@ -208,6 +208,26 @@ async function getAll() {
         "platform": "binance-smart-chain"
       }
     },
+    {
+      "_id": "xrp@ripple",
+      "asset": "xrp",
+      "platform": "ripple",
+      "type": "coin",
+      "name": "XRP",
+      "symbol": "XRP",
+      "decimals": 6,
+      "logo": "xrp.svg",
+      "changelly": {
+        "ticker": "xrp"
+      },
+      "coingecko": {
+        "id": "ripple"
+      },
+      "moonpay": {
+        "id": "d64b5e09-3d1b-452d-ab28-478c4190de7d",
+        "code": "xrp"
+      }
+    },
   ];
 }
 

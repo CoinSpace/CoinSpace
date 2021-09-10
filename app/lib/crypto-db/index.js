@@ -174,6 +174,26 @@ const cryptoDb = [
       "code": "bnb_bsc"
     }
   },
+  {
+    "_id": "xrp@ripple",
+    "asset": "xrp",
+    "platform": "ripple",
+    "type": "coin",
+    "name": "XRP",
+    "symbol": "XRP",
+    "decimals": 6,
+    "logo": "xrp.svg",
+    "changelly": {
+      "ticker": "xrp"
+    },
+    "coingecko": {
+      "id": "ripple"
+    },
+    "moonpay": {
+      "id": "d64b5e09-3d1b-452d-ab28-478c4190de7d",
+      "code": "xrp"
+    }
+  },
 ];
 
 export default cryptoDb;
