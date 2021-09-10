@@ -194,6 +194,26 @@ const cryptoDb = [
       "code": "xrp"
     }
   },
+  {
+    "_id": "stellar@stellar",
+    "asset": "stellar",
+    "platform": "stellar",
+    "type": "coin",
+    "name": "Stellar",
+    "symbol": "XLM",
+    "decimals": 7,
+    "logo": "stellar.svg",
+    "changelly": {
+      "ticker": "xlm"
+    },
+    "coingecko": {
+      "id": "stellar"
+    },
+    "moonpay": {
+      "id": "c8b1ef20-3703-4a66-9ea1-c13ce0d893bf",
+      "code": "xlm"
+    }
+  },
 ];
 
 export default cryptoDb;
