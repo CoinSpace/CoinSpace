@@ -1,122 +1,108 @@
 import _ from 'lodash';
+import Fuse from 'fuse.js/dist/fuse.basic.common.js';
+import request from 'lib/request';
 import details from 'lib/wallet/details';
 
-export const walletCoins = [{
-  _id: 'bitcoin',
-  network: 'bitcoin',
-  name: 'Bitcoin',
-  symbol: 'BTC',
-  txUrl: (txId) => `https://blockchair.com/bitcoin/transaction/${txId}?from=coinwallet`,
-}, {
-  _id: 'bitcoincash',
-  network: 'bitcoincash',
-  name: 'Bitcoin Cash',
-  symbol: 'BCH',
-  txUrl: (txId) => `https://blockchair.com/bitcoin-cash/transaction/${txId}?from=coinwallet`,
-}, {
-  _id: 'bitcoinsv',
-  network: 'bitcoinsv',
-  name: 'Bitcoin SV',
-  symbol: 'BSV',
-  txUrl: (txId) => `https://blockchair.com/bitcoin-sv/transaction/${txId}?from=coinwallet`,
-}, {
-  _id: 'ethereum',
-  network: 'ethereum',
-  name: 'Ethereum',
-  symbol: 'ETH',
-  txUrl: (txId) => `https://blockchair.com/ethereum/transaction/${txId}?from=coinwallet`,
-}, {
-  _id: 'litecoin',
-  network: 'litecoin',
-  name: 'Litecoin',
-  symbol: 'LTC',
-  txUrl: (txId) => `https://blockchair.com/litecoin/transaction/${txId}?from=coinwallet`,
-}, {
-  _id: 'ripple',
-  network: 'ripple',
-  name: 'Ripple',
-  symbol: 'XRP',
-  txUrl: (txId) => `https://xrpcharts.ripple.com/#/transactions/${txId}`,
-}, {
-  _id: 'stellar',
-  network: 'stellar',
-  name: 'Stellar',
-  symbol: 'XLM',
-  txUrl: (txId) => `https://stellar.expert/explorer/public/tx/${txId}`,
-}, {
-  _id: 'eos',
-  network: 'eos',
-  name: 'EOS',
-  symbol: 'EOS',
-  txUrl: (txId) => `https://bloks.io/transaction/${txId}`,
-}, {
-  _id: 'dogecoin',
-  network: 'dogecoin',
-  name: 'Dogecoin',
-  symbol: 'DOGE',
-  txUrl: (txId) => `https://blockchair.com/dogecoin/transaction/${txId}?from=coinwallet`,
-}, {
-  _id: 'dash',
-  network: 'dash',
-  name: 'Dash',
-  symbol: 'DASH',
-  txUrl: (txId) => `https://blockchair.com/dash/transaction/${txId}?from=coinwallet`,
-}, {
-  _id: 'monero',
-  network: 'monero',
-  name: 'Monero',
-  symbol: 'XMR',
-  txUrl: (txId) => `https://blockchair.com/monero/transaction/${txId}?from=coinwallet`,
-}, {
-  _id: 'binancecoin',
-  network: 'binance-smart-chain',
-  name: 'Binance Smart Chain',
-  symbol: 'BNB',
-  txUrl: (txId) => `https://bscscan.com/tx/${txId}`,
-}];
-const DEFAULT_COIN = walletCoins[0];
+let cache;
+let all;
+let tokens;
+let index;
 
-export function getCrypto() {
-  let crypto = window.localStorage.getItem('_cs_token') || DEFAULT_COIN;
-  const walletTokens = details.get('tokens');
-  try {
-    crypto = JSON.parse(crypto);
-  // eslint-disable-next-line no-empty
-  } catch (e) {}
-
-  if (typeof crypto === 'object') {
-    const coin = walletCoins.find((item) => {
-      return item._id === crypto._id && item.network === crypto.network;
-    });
-    if (coin) {
-      return coin;
-    }
-    const token = walletTokens.find((item) => {
-      if (item._id) {
-        return item._id === crypto._id && item.network === crypto.network;
-      } else {
-        return _.isEqual(crypto, item);
-      }
-    });
-    if (token) {
-      return token;
-    }
+export function init() {
+  if (!cache) {
+    cache = request({
+      url: `${process.env.SITE_URL}api/v3/cryptos`,
+      method: 'get',
+      seed: 'public',
+    })
+      .then(data => {
+        all = data;
+        tokens = all.filter((item) => item.type === 'token'
+          && ['ethereum', 'binance-smart-chain'].includes(item.platform)
+        );
+      })
+      .then(cleanLegacy)
+      .then(() => {
+        const walletTokens = (details.get('tokens') || []).map((walletToken) => {
+          if (walletToken._id) {
+            const current = getTokenById(walletToken._id);
+            if (current) return current;
+          }
+          const platform = walletToken.platform || walletToken.network;
+          const current = getTokenByAddress(walletToken.address, platform);
+          if (current) return current;
+          return {
+            _id: `${walletToken.address}@${platform}`,
+            platform,
+            type: 'token',
+            name: walletToken.name,
+            symbol: walletToken.symbol,
+            address: walletToken.address,
+            decimals: walletToken.decimals,
+          };
+        });
+        if (!_.isEqual((details.get('tokens')), walletTokens)) {
+          return details.set('tokens', walletTokens);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
-  setCrypto();
-  return DEFAULT_COIN;
+  return cache;
 }
 
-export function setCrypto(crypto) {
-  const item = crypto || DEFAULT_COIN;
-  if (item._id) {
-    window.localStorage.setItem('_cs_token', JSON.stringify({ _id: item._id, network: item.network }));
-  } else {
-    window.localStorage.setItem('_cs_token', JSON.stringify(item));
+function getTokenById(id) {
+  return tokens.find(item => item._id === id);
+}
+
+function getTokenByAddress(address, platform) {
+  return tokens.find(item => item.address === address && item.platform === platform);
+}
+
+function requestTokenByAddress(address, platform) {
+  const urls = {
+    ethereum: `${process.env.API_ETH_URL}api/v1/token/${address}`,
+    'binance-smart-chain': `${process.env.API_BSC_URL}api/v1/token/${address}`,
+  };
+
+  return request({
+    url: urls[platform],
+    method: 'get',
+  }).then((data) => {
+    return {
+      _id: `${address}@${platform}`,
+      platform,
+      type: 'token',
+      name: data.name,
+      symbol: data.symbol,
+      address,
+      decimals: data.decimals,
+    };
+  });
+}
+
+function searchTokens(query) {
+  if (!query || !query.trim()) {
+    return tokens;
   }
+  if (!index) {
+    index = new Fuse(tokens, {
+      keys: ['name', 'symbol', 'address', '_id'],
+    });
+  }
+  return index.search(query.trim()).map(item => item.item);
+}
+
+function cleanLegacy() {
+  const oldTokens = details.get('walletTokens');
+  if (oldTokens) return details.set('walletTokens').catch(() => {});
 }
 
 export default {
-  walletCoins,
-  getCrypto,
-  setCrypto,
+  init,
+  getTokenById,
+  getTokenByAddress,
+  requestTokenByAddress,
+  searchTokens,
 };

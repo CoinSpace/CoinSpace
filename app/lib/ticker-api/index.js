@@ -3,21 +3,14 @@ import emitter from 'lib/emitter';
 
 let rates = {};
 
-function init(crypto) {
-  const cryptoIds = crypto.map((item) => {
-    if (typeof item === 'string') {
-      return item;
-    }
-    if (item._id) {
-      return item._id;
-    }
-  }).filter((item) => !!item);
+function init(cryptos) {
+  const cryptoIds = cryptos.filter((item) => !!item.coingecko).map((item) => item._id);
   if (!cryptoIds.length) {
     emitter.emit('rates-updated', rates);
     return;
   }
   return request({
-    url: `${process.env.SITE_URL}api/v2/tickers`,
+    url: `${process.env.SITE_URL}api/v3/tickers`,
     params: {
       crypto: cryptoIds.join(','),
     },

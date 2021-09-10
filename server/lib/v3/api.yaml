@@ -1,0 +1,131 @@
+openapi: '3.0.3'
+
+info:
+  version: 3.0.0
+  title: Coin Wallet API V3
+
+servers:
+  - url: /api/v3
+
+paths:
+  /cryptos:
+    get:
+      x-eov-operation-id: getCryptos
+      x-eov-operation-handler: handlers
+      description: Get all cryptos
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: List of cryptos
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/CryptoList'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /tickers:
+    get:
+      x-eov-operation-id: getTickers
+      x-eov-operation-handler: handlers
+      description: Get prices of one or more coins or tokens
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cryptoIds'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: List of tickers for coin or token
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/TickerList'
+        default:
+          $ref: '#/components/responses/GeneralError'
+
+components:
+  schemas:
+    Hex64String:
+      type: string
+      pattern: "^[a-f0-9]{64}$"
+    CryptoList:
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+          platform:
+            type: string
+          symbol:
+            type: string
+          name:
+            type: string
+          decimals:
+            type: number
+          logo:
+            type: string
+        required:
+          - _id
+          - platform
+          - symbol
+          - name
+          - decimals
+          - logo
+    Ticker:
+      type: object
+      properties:
+        _id:
+          type: string
+        prices:
+          type: object
+      required:
+        - _id
+        - prices
+    TickerList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Ticker'
+  parameters:
+    deviceId:
+      in: query
+      name: id
+      required: true
+      description: Device ID
+      schema:
+        $ref: '#/components/schemas/Hex64String'
+    cryptoIds:
+      in: query
+      name: crypto
+      required: true
+      description: List of Crypto IDs
+      style: form
+      explode: false
+      allowReserved: true
+      schema:
+        type: array
+        items:
+          type: string
+  responses:
+    GeneralError:
+      description: Unexpected error
+      content:
+        'application/json':
+          schema:
+            required:
+              - code
+              - error
+            properties:
+              code:
+                type: integer
+                format: int32
+              error:
+                type: string
+  securitySchemes:
+    deviceSignature:
+      type: apiKey
+      in: header
+      name: Signature

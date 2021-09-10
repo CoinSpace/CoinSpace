@@ -38,15 +38,15 @@ export default function(el) {
 
   ractive.on('before-show', () => {
     const wallet = CS.getWallet();
-    ractive.set('isEOS', wallet.networkName === 'eos');
-    ractive.set('walletName', wallet.name);
-    if (['ethereum', 'binance-smart-chain'].includes(wallet.networkName) && wallet.token) {
+    ractive.set('isEOS', wallet.crypto.platform === 'eos');
+    ractive.set('walletName', wallet.crypto.name);
+    if (['ethereum', 'binance-smart-chain'].includes(wallet.crypto.platform) && wallet.crypto.type === 'token') {
       ractive.set('isEnabledImport', false);
       ractive.set('isEnabledExport', false);
-    } else if (wallet.networkName === 'eos') {
+    } else if (wallet.crypto.platform === 'eos') {
       ractive.set('isEnabledImport', false);
       ractive.set('isEnabledExport', true);
-    } else if (wallet.networkName === 'monero') {
+    } else if (wallet.crypto.platform === 'monero') {
       ractive.set('isEnabledImport', false);
       ractive.set('isEnabledExport', true);
     } else {

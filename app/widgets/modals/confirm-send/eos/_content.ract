@@ -6,9 +6,9 @@
 
   <div class="_content">
 
-    <div class="_amount">{{amount}} {{denomination}}</div>
+    <div class="_amount">{{amount}} {{symbol}}</div>
 
-    <div class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</div>
+    <div class="_fee">{{feeSign}}{{fee}} {{symbol}} {{translate("transaction fee")}}</div>
 
     <div class="_arrow_down">
       {{>svg_sendto}}

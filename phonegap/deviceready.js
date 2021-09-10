@@ -59,10 +59,10 @@ async function onDeviceReady() {
 }
 
 window.onShortcutEvent = function(event) {
-  const network = event.data.split('.').pop();
-  if (!['bitcoin', 'bitcoincash', 'ethereum', 'litecoin'].includes(network)) return;
+  const platform = event.data.split('.').pop();
+  if (!['bitcoin', 'dogecoin', 'ethereum', 'litecoin'].includes(platform)) return;
   const baseUrl = window.location.href.split('?')[0];
-  return window.location = `${baseUrl}?coin=${network}`;
+  return window.location = `${baseUrl}?coin=${platform}`;
 };
 
 window.handleOpenURL = function(url) {

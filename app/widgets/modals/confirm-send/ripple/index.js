@@ -30,9 +30,9 @@ function open(data) {
           return showInfo({
             title: translate('Insufficient funds'),
             // eslint-disable-next-line max-len
-            message: translate("Your wallet isn't activated. You can receive only amount greater than :minReserve :denomination.", {
+            message: translate("Your wallet isn't activated. You can receive only amount greater than :minReserve :symbol.", {
               minReserve: toUnitString(wallet.minReserve),
-              denomination: wallet.denomination,
+              symbol: wallet.crypto.symbol,
             }),
           });
         }
@@ -82,9 +82,9 @@ function open(data) {
     let message;
     if (err.message === 'tecNO_DST_INSUF_XRP') {
       // eslint-disable-next-line max-len
-      message = translate("Recipient's wallet isn't activated. You can send only amount greater than :minReserve :denomination.", {
+      message = translate("Recipient's wallet isn't activated. You can send only amount greater than :minReserve :symbol.", {
         minReserve: toUnitString(wallet.minReserve),
-        denomination: wallet.denomination,
+        symbol: wallet.crypto.symbol,
       });
     } else if (err.message === 'tecDST_TAG_NEEDED') {
       message = translate("Recipient's wallet requires a destination tag.");

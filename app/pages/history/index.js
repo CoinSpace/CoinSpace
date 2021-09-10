@@ -1,7 +1,7 @@
 import Ractive from 'lib/ractive';
 import emitter from 'lib/emitter';
 import { toUnitString } from 'lib/convert';
-import { getWallet, getWalletCoin } from 'lib/wallet';
+import { getWallet } from 'lib/wallet';
 import strftime from 'strftime';
 import { showError } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
@@ -10,7 +10,7 @@ import initEosSetup from 'widgets/eos/setup';
 import template from './index.ract';
 
 export default function(el) {
-  let network = '';
+  let platform = '';
   const ractive = new Ractive({
     el,
     template,
@@ -21,34 +21,34 @@ export default function(el) {
         return strftime('%b %d %l:%M %p', date);
       },
       formatConfirmations(number) {
-        if (network === 'ripple') return '';
-        if (network === 'stellar') return '';
-        if (network === 'eos') return '';
+        if (platform === 'ripple') return '';
+        if (platform === 'stellar') return '';
+        if (platform === 'eos') return '';
         return `${translate('confirmations:')} ${number}`;
       },
       getToAddress(tx) {
-        if (['ethereum', 'ripple', 'eos', 'binance-smart-chain'].includes(network)) {
+        if (['ethereum', 'ripple', 'eos', 'binance-smart-chain'].includes(platform)) {
           return tx.to;
-        } else if (network === 'stellar') {
+        } else if (platform === 'stellar') {
           return tx.operations[0] && tx.operations[0].destination;
-        } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].includes(network)) {
+        } else if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'].includes(platform)) {
           return tx.outs[0].address;
-        } else if (network === 'monero') {
+        } else if (platform === 'monero') {
           return translate('Sent');
         }
       },
       isConfirmed(tx) {
-        if (network === 'ripple') return true;
-        if (network === 'stellar') return true;
-        if (network === 'eos') return true;
-        if (network === 'monero') return tx.confirmed;
+        if (platform === 'ripple') return true;
+        if (platform === 'stellar') return true;
+        if (platform === 'eos') return true;
+        if (platform === 'monero') return tx.confirmed;
         return tx.confirmations >= getWallet().minConf;
       },
       isFailed(tx) {
-        if (['ethereum', 'ripple', 'binance-smart-chain'].includes(network)) {
+        if (['ethereum', 'ripple', 'binance-smart-chain'].includes(platform)) {
           return tx.status === false;
         // eslint-disable-next-line max-len
-        } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash', 'stellar', 'monero'].includes(network)) {
+        } else if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash', 'stellar', 'monero'].includes(platform)) {
           return false;
         }
       },
@@ -71,8 +71,8 @@ export default function(el) {
   emitter.on('wallet-ready', () => {
     isSyncing = false;
     const wallet = getWallet();
-    network = wallet.networkName;
-    ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
+    ({ platform } = wallet.crypto);
+    ractive.set('needToSetupEos', wallet.crypto.platform === 'eos' && !wallet.isActive);
     if (ractive.el.classList.contains('current')) loadTxs();
   });
 
@@ -133,7 +133,7 @@ export default function(el) {
       if (err.message === 'cs-node-error') {
         showError({
           message: translate('Network node error. Please try again later.', {
-            network: getWalletCoin(wallet).name,
+            network: wallet.crypto.name,
           }),
         });
       } else {

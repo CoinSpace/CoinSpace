@@ -1,15 +1,15 @@
 <div class="tokens-list">
   <div class="_title">{{translate("Coins")}}</div>
 
-  <div class="_coins">
-    {{#each coins}}
-    <div class="_token _token--{{_id}}" on-click="switchCrypto(this)">
+  <div class="_crypto">
+    {{#each cryptoCoins}}
+    <div class="_token _token--{{platform}}" on-click="switchCrypto(this)">
       <div class="_token__icon">
-        {{>`svg_token_${_id}`}}
+        {{>`svg_token_${platform}`}}
       </div>
       <div class="_token__details">
         <div class="_token__name">{{name}}</div>
-        <div class="_token__price" title="{{translate('Current coin price')}}">{{getPrice(_id)}}</div>
+        <div class="_token__price" title="{{translate('Current coin price')}}">{{getPrice(this)}}</div>
       </div>
       {{#if isCurrentCrypto(this)}}
       <div class="_token__arrow">{{>svg_arrow}}</div>
@@ -20,7 +20,7 @@
 
   <div class="_title">{{translate("Tokens")}}</div>
 
-  <div class="_coins">
+  <div class="_crypto">
     {{#each cryptoTokens}}
     <div class="_token" on-click="switchCrypto(this)">
       <div class="_token__icon_group">
@@ -31,17 +31,17 @@
             {{>svg_letter_t}}
           {{/if}}
         </div>
-        <div class="_token__network_icon _token__network_icon--{{network}}">
-          {{#if network === 'ethereum' }}
+        <div class="_token__platform_icon _token__platform_icon--{{platform}}">
+          {{#if platform === 'ethereum' }}
             {{>svg_token_ethereum}}
-          {{elseif network === 'binance-smart-chain'}}
+          {{elseif platform === 'binance-smart-chain'}}
             {{>svg_token_binancecoin}}
           {{/if}}
         </div>
       </div>
       <div class="_token__details">
         <div class="_token__name">{{name}}</div>
-        <div class="_token__price" title="{{translate('Current coin price')}}">{{getPrice(this._id)}}</div>
+        <div class="_token__price" title="{{translate('Current coin price')}}">{{getPrice(this)}}</div>
       </div>
       {{#if isCurrentCrypto(this)}}
       <div class="_token__arrow">{{>svg_arrow}}</div>

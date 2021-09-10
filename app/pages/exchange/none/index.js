@@ -2,7 +2,6 @@ import Ractive from 'lib/ractive';
 import emitter from 'lib/emitter';
 import moonpay from 'lib/moonpay';
 import { getWallet } from 'lib/wallet';
-import { getCrypto } from 'lib/crypto';
 import template from './index.ract';
 import loader from 'partials/loader/loader.ract';
 
@@ -36,9 +35,8 @@ export default function(el) {
     try {
       await moonpay.init();
       const wallet = getWallet();
-      const crypto = getCrypto();
-      ractive.set('symbol', crypto.symbol);
-      const urls = await moonpay.getWidgetUrls(crypto, wallet.getNextAddress());
+      ractive.set('symbol', wallet.crypto.symbol);
+      const urls = await moonpay.getWidgetUrls(wallet.crypto, wallet.getNextAddress());
       ractive.set('moonpayBuyUrl', urls.buy);
       ractive.set('moonpaySellUrl', urls.sell);
     } catch (err) {

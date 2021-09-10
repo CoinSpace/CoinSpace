@@ -6,7 +6,7 @@
     }
   }
 
-  ._coins {
+  ._crypto {
     margin-bottom: 10px;
     @include breakpoint(portrait) {
       margin-bottom: 20px;
@@ -54,7 +54,7 @@
         height: 80px;
       }
     }
-    &__network_icon {
+    &__platform_icon {
       border-radius: 50%;
       width: 25px;
       height: 25px;
@@ -125,14 +125,14 @@
         background-color: $bitcoin;
       }
     }
-    &--bitcoincash {
+    &--bitcoin-cash {
       ._token__icon {
-        background-color: $bitcoincash;
+        background-color: $bitcoin-cash;
       }
     }
-    &--bitcoinsv {
+    &--bitcoin-sv {
       ._token__icon {
-        background-color: $bitcoinsv;
+        background-color: $bitcoin-sv;
       }
     }
     &--ethereum {

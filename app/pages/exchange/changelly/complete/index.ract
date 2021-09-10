@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  {{#if network === 'monero'}}
+  {{#if cryptoId === 'monero@monero'}}
   <div class="csformgroup csformgroup--readonly">
     <div class="csformgroup__input-group">
       {{translate("In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.")}}

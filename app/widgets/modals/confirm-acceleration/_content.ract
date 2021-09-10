@@ -6,7 +6,7 @@
     <div class="_percent">
       {{translate("Speed")}} {{replaceByFeePercent}}
     </div>
-    {{amount}} {{denomination}}
+    {{amount}} {{symbol}}
   </div>
 
   <div class="_footer">

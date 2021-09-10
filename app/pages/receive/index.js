@@ -54,33 +54,32 @@ export default function(el) {
 
   emitter.on('wallet-ready', () => {
     const wallet = getWallet();
-    ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
+    ractive.set('needToSetupEos', wallet.crypto.platform === 'eos' && !wallet.isActive);
 
     const addressTypes = (wallet.network && wallet.network.addressTypes) || wallet.addressTypes || [];
     ractive.set('addressTypes', addressTypes);
     ractive.set('addressType', wallet.addressType);
     ractive.set('addressTooltip', [
       'bitcoin',
-      'bitcoincash',
-      'bitcoinsv',
+      'bitcoin-cash',
+      'bitcoin-sv',
       'litecoin',
       'dogecoin',
       'dash',
-    ].indexOf(wallet.networkName) !== -1);
+    ].indexOf(wallet.crypto.platform) !== -1);
     showAddress();
   });
   emitter.on('tx-sent', showAddress);
   emitter.on('change-address-type', showAddress);
 
   ractive.on('before-show', () => {
-    const network = getWallet().networkName;
-    ractive.set('isMonero', network === 'monero');
+    ractive.set('isMonero', getWallet().crypto.platform === 'monero');
   });
 
   ractive.on('change-address-type', () => {
     const wallet = getWallet();
     const addressType = ractive.get('addressType');
-    details.set(wallet.networkName + '.addressType', addressType)
+    details.set(wallet.crypto.platform + '.addressType', addressType)
       .then(() => {
         wallet.addressType = addressType;
         emitter.emit('change-address-type');
@@ -221,7 +220,7 @@ export default function(el) {
     const address = getWallet().getNextAddress();
     ractive.set('address', address);
     const $canvas = ractive.find('#qr_canvas');
-    const qr = qrcode.encode(getWallet().networkName + ':' + address);
+    const qr = qrcode.encode(address);
     $canvas.innerHTML = qr;
   }
 

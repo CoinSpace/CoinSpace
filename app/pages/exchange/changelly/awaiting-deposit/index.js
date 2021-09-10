@@ -62,8 +62,7 @@ export default function(el) {
     });
 
     const canvas = ractive.find('#deposit_qr_canvas');
-    const name = ractive.get('depositSymbol').toLowerCase();
-    const qr = qrcode.encode(`${name}:${context.depositAddress}`);
+    const qr = qrcode.encode(context.depositAddress);
     canvas.innerHTML = qr;
   });
 

@@ -185,9 +185,9 @@
           <key>UIApplicationShortcutItemIconFile</key>
           <string></string>
           <key>UIApplicationShortcutItemTitle</key>
-          <string>Bitcoin Cash</string>
+          <string>Dogecoin</string>
           <key>UIApplicationShortcutItemType</key>
-          <string>com.coinspace.wallet.bitcoincash</string>
+          <string>com.coinspace.wallet.dogecoin</string>
         </dict>
         <dict>
           <key>UIApplicationShortcutItemIconFile</key>

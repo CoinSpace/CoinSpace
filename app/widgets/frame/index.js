@@ -9,8 +9,7 @@ import initHistory from 'pages/history';
 import initTokens from 'pages/tokens';
 import showSettings from 'widgets/settings';
 import { showError } from 'widgets/modals/flash';
-import { setCrypto } from 'lib/crypto';
-import { getWalletCoin } from 'lib/wallet';
+import { getWallet } from 'lib/wallet';
 import Hammer from 'hammerjs';
 import template from './index.ract';
 import { translate } from 'lib/i18n';
@@ -102,12 +101,11 @@ export default function(el) {
       document.getElementsByTagName('html')[0].classList.add('blocked');
       showError({
         message: translate("Can't connect to :network node. Please try again later or choose another token.", {
-          network: getWalletCoin().name,
+          network: getWallet().crypto.name,
         }),
       });
     } else {
       console.error(`not translated error: ${err.message}`);
-      setCrypto(); // fix wrong tokens
       showError({ message: err.message });
     }
   });

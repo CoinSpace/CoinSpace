@@ -5,13 +5,12 @@ import { getWallet } from 'lib/wallet';
 import { toUnitString, cryptoToFiat } from 'lib/convert';
 import details from 'lib/wallet/details';
 import ticker from 'lib/ticker-api';
-import { getCrypto } from 'lib/crypto';
 import template from './index.ract';
 
 export default function(el) {
 
   const state = {
-    rates: ticker.getRates(getCrypto()._id),
+    rates: {},
     currency: details.get('systemInfo').preferredCurrency,
     showFiat: false,
   };
@@ -37,7 +36,7 @@ export default function(el) {
       currency = state.currency;
     } else {
       amount = toUnitString(balance);
-      currency = getWallet().denomination;
+      currency = getWallet().crypto.symbol;
     }
     const size = amount.length > 12 ? 'medium' : 'large';
     ractive.set({
@@ -89,7 +88,8 @@ export default function(el) {
   });
 
   emitter.on('rates-updated', () => {
-    state.rates = ticker.getRates(getCrypto()._id);
+    const wallet = getWallet();
+    state.rates = ticker.getRates(wallet.crypto._id);
     updateBalance();
   });
 

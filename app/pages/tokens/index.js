@@ -2,9 +2,6 @@ import Ractive from 'lib/ractive';
 import emitter from 'lib/emitter';
 import initList from './list';
 import initSearch from './search';
-import tokens from 'lib/tokens';
-import { getCrypto, setCrypto } from 'lib/crypto';
-import { initWallet } from 'lib/wallet';
 import template from './index.ract';
 import loader from 'partials/loader/loader.ract';
 
@@ -28,7 +25,6 @@ export default function(el) {
   let currentPage = pages.list;
 
   ractive.on('before-show', async () => {
-    await tokens.init();
     ractive.set('isLoading', false);
     showPage(pages.list);
   });
@@ -41,15 +37,7 @@ export default function(el) {
     showPage(pages[page]);
   });
 
-  emitter.on('token-added', (crypto) => {
-    setCrypto(crypto);
-    ractive.set('currentCrypto', getCrypto());
-    emitter.emit('sync');
-
-    setTimeout(() => {
-      initWallet();
-    }, 200);
-  });
+  emitter.on('token-added', pages.list.get('switchCrypto'));
 
   function showPage(page) {
     setTimeout(() => {

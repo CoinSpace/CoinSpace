@@ -4,7 +4,6 @@ import { toUnitString } from 'lib/convert';
 import { showInfo, showError, showSuccess } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
 import { unlock, lock } from 'lib/wallet/security';
-import { getWalletCoin } from 'lib/wallet';
 import content from './_content.ract';
 
 function open(data) {
@@ -75,7 +74,7 @@ function open(data) {
 
   function handleTransactionError(err) {
     if (err.message === 'cs-node-error') {
-      err.message = translate('Network node error. Please try again later.', { network: getWalletCoin(wallet).name });
+      err.message = translate('Network node error. Please try again later.', { network: wallet.crypto.name });
     } else {
       console.error(err);
     }
@@ -94,8 +93,8 @@ function extendData(data) {
   const { wallet } = data;
   data.feeSign = data.importTxOptions ? '-' : '+';
   data.fee = toUnitString(wallet.defaultFee, 18);
-  data.feeDenomination = wallet.baseDenomination;
-  data.blockchain = getWalletCoin(wallet).name;
+  data.feeSymbol = wallet.platformCrypto.symbol;
+  data.blockchain = wallet.crypto.name;
   return data;
 }
 

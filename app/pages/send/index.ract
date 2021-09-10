@@ -34,8 +34,8 @@
             <div class="csformgroup__input-group__header">
               <div class="csformgroup__input-group__header__label">
                 <label for="crypto">{{translate("Amount")}}</label>
-                {{#if denomination}}
-                  <strong class="_max_btn" on-click="set-max-amount">({{translate("max.")}} {{maxAmount}} {{denomination}})</strong>
+                {{#if symbol}}
+                  <strong class="_max_btn" on-click="set-max-amount">({{translate("max.")}} {{maxAmount}} {{symbol}})</strong>
                 {{else}}
                   <strong>...</strong>
                 {{/if}}
@@ -53,7 +53,7 @@
                 </select>
               </span>
               {{else}}
-              <span class="_crypto">{{denomination}}</span>
+              <span class="_crypto">{{symbol}}</span>
               {{/if}}
             </div>
             <div class="csinput _fiat_input" class-_crypto_input--hidden="isCryptoInputHidden">
@@ -69,18 +69,18 @@
           <div class="csformgroup__input-group__header">
             <div class="csformgroup__input-group__header__label">
               <label>{{translate("Fee")}}</label>
-              {{#if feeDenomination}}
+              {{#if feeSymbol}}
                 {{#if fees.length > 1}}
                 <div class="csformgroup__select-container" class-qwe="fees.length > 1">
-                  +{{fee}} {{feeDenomination}}
+                  +{{fee}} {{feeSymbol}}
                   <select value="{{feeName}}" on-change="change-fee">
                     {{#each fees as fee}}
-                      <option value="{{fee.name}}">+{{fee.estimate}} {{feeDenomination}} - {{fee.title || translate(fee.name)}}</option>
+                      <option value="{{fee.name}}">+{{fee.estimate}} {{feeSymbol}} - {{fee.title || translate(fee.name)}}</option>
                     {{/each}}
                   </select>
                 </div>
                 {{else}}
-                <strong>+{{fee}} {{feeDenomination}}</strong>
+                <strong>+{{fee}} {{feeSymbol}}</strong>
                 {{/if}}
               {{else}}
                 <strong>...</strong>

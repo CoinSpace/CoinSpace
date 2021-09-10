@@ -7,15 +7,17 @@ import crypto from 'crypto';
 import encryption from 'lib/encryption';
 import request from 'lib/request';
 import Storage from 'lib/storage';
+import cryptoDb from 'lib/crypto-db';
+import { init as initCrypto } from 'lib/crypto';
 import { unlock, lock } from 'lib/wallet/security';
 
 import CsWallet from '@coinspace/cs-wallet';
 import EthereumWallet from '@coinspace/cs-ethereum-wallet';
-import BinanceSmartChainWallet from '@coinspace/cs-binance-smart-chain-wallet';
-import RippleWallet from '@coinspace/cs-ripple-wallet';
-import StellarWallet from '@coinspace/cs-stellar-wallet';
-import EOSWallet from '@coinspace/cs-eos-wallet';
-import MoneroWallet from '@coinspace/cs-monero-wallet';
+// import BinanceSmartChainWallet from '@coinspace/cs-binance-smart-chain-wallet';
+// import RippleWallet from '@coinspace/cs-ripple-wallet';
+// import StellarWallet from '@coinspace/cs-stellar-wallet';
+// import EOSWallet from '@coinspace/cs-eos-wallet';
+// import MoneroWallet from '@coinspace/cs-monero-wallet';
 
 import { eddsa } from 'elliptic';
 
@@ -23,7 +25,6 @@ const ec = new eddsa('ed25519');
 import touchId from 'lib/touch-id';
 import ticker from 'lib/ticker-api';
 import convert from 'lib/convert';
-import { getCrypto, walletCoins } from 'lib/crypto';
 import details from 'lib/wallet/details';
 import settings from 'lib/wallet/settings';
 import bchaddr from 'bchaddrjs';
@@ -31,20 +32,28 @@ import bchaddr from 'bchaddrjs';
 const state = {
   wallet: null,
 };
+export const walletCoins = [
+  'bitcoin@bitcoin',
+  'litecoin@litecoin',
+  'dash@dash',
+  'bitcoin-cash@bitcoin-cash',
+  'bitcoin-sv@bitcoin-sv',
+  'ethereum@ethereum',
+].map((id) => cryptoDb.find((item) => item._id === id));
 
 const Wallet = {
   bitcoin: CsWallet,
-  bitcoincash: CsWallet,
-  bitcoinsv: CsWallet,
+  'bitcoin-cash': CsWallet,
+  'bitcoin-sv': CsWallet,
   litecoin: CsWallet,
   ethereum: EthereumWallet,
-  ripple: RippleWallet,
-  stellar: StellarWallet,
-  eos: EOSWallet,
-  dogecoin: CsWallet,
+  // ripple: RippleWallet,
+  // stellar: StellarWallet,
+  // eos: EOSWallet,
+  // dogecoin: CsWallet,
   dash: CsWallet,
-  monero: MoneroWallet,
-  'binance-smart-chain': BinanceSmartChainWallet,
+  // monero: MoneroWallet,
+  // 'binance-smart-chain': BinanceSmartChainWallet,
 };
 
 function createWallet(passphrase) {
@@ -88,7 +97,7 @@ async function registerWallet(pin) {
   LS.setPinKey(pinKey);
   LS.setId(deviceId);
   LS.setDetailsKey(detailsKey);
-  await Promise.all([details.init(), settings.init()]);
+  await Promise.all([details.init(), settings.init()]).then(initCrypto);
   emitter.emit('auth-success', pin);
   await initWallet(walletSeed);
 }
@@ -107,7 +116,7 @@ async function loginWithPin(pin) {
     id: true,
   });
   seeds.unlock('public', publicToken);
-  await Promise.all([details.init(), settings.init()]);
+  await Promise.all([details.init(), settings.init()]).then(initCrypto);
   emitter.emit('auth-success');
   await initWallet();
 }
@@ -124,94 +133,98 @@ async function loginWithTouchId(widget) {
   } else {
     const { publicToken } = await touchId.publicToken(widget);
     seeds.unlock('public', publicToken);
-    await Promise.all([details.init(), settings.init()]);
+    await Promise.all([details.init(), settings.init()]).then(initCrypto);
     emitter.emit('auth-success');
     await initWallet();
   }
 }
 
 export async function initWallet(seed) {
-  const crypto = getCrypto();
+  LS.migratePublicKeys();
+  const walletTokens = details.get('tokens');
+  const all = [...walletCoins, ...walletTokens];
 
-  if (seed) {
-    for (const key of Object.keys(Wallet)) {
-      const wallet = new Wallet[key]({
-        seed,
-        networkName: key,
-        ...await getExtraOptions({ network: key }),
-      });
-      wallet.lock();
-      LS.setPublicKey(wallet, seeds.get('public'));
-    }
+  let defaultCryptoId = localStorage.getItem('_cs_crypto_id') || 'bitcoin@bitcoin';
+  if (!all.find((item) => item._id === defaultCryptoId)) {
+    defaultCryptoId = 'bitcoin@bitcoin';
+    localStorage.setItem('_cs_crypto_id', defaultCryptoId);
   }
 
-  const publicKey = LS.getPublicKey(crypto.network, seeds.get('public'));
-  state.wallet = new Wallet[crypto.network]({
-    publicKey,
-    networkName: crypto.network,
-    ...await getExtraOptions(crypto),
-  });
+  for (const crypto of all) {
+    let wallet;
+    if (seed) {
+      initWalletWithSeed(crypto, seed);
+      if (crypto._id !== defaultCryptoId) {
+        try {
+          await wallet.load();
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    } else {
+      if (!LS.hasPublicKey(crypto.platform)) continue;
+      initWalletWithPublicKey(crypto);
+    }
+  }
+  state.wallet = state[defaultCryptoId];
 
-  convert.setDecimals(state.wallet.decimals);
-
-  await ticker.init([crypto]);
+  convert.setDecimals(state.wallet.crypto.decimals);
+  await ticker.init([state.wallet.crypto]);
 
   try {
     await state.wallet.load();
-
     emitter.emit('wallet-ready');
   } catch (err) {
     emitter.emit('wallet-error', err);
   }
 }
 
-async function getExtraOptions(crypto) {
+// TODO: fix it
+function getExtraOptions(crypto) {
   const options = {
     useTestNetwork: process.env.COIN_NETWORK === 'regtest',
   };
 
-  if (crypto.network === 'bitcoin') {
+  if (crypto.platform === 'bitcoin') {
     options.apiNode = process.env.API_BTC_URL;
-  } else if (crypto.network === 'bitcoincash') {
+  } else if (crypto.platform === 'bitcoin-cash') {
     options.apiNode = process.env.API_BCH_URL;
-  } else if (crypto.network === 'bitcoinsv') {
+  } else if (crypto.platform === 'bitcoin-sv') {
     options.apiNode = process.env.API_BSV_URL;
-  } else if (crypto.network === 'litecoin') {
+  } else if (crypto.platform === 'litecoin') {
     options.apiNode = process.env.API_LTC_URL;
-  } else if (crypto.network === 'dogecoin') {
+  } else if (crypto.platform === 'dogecoin') {
     options.apiNode = process.env.API_DOGE_URL;
-  } else if (crypto.network === 'dash') {
+  } else if (crypto.platform === 'dash') {
     options.apiNode = process.env.API_DASH_URL;
   }
 
-  if (crypto.network === 'ethereum') {
-    options.name = crypto.name;
+  if (crypto.platform === 'ethereum') {
     options.minConf = 12;
-    options.token = crypto._id !== 'ethereum' ? crypto : false;
-    options.decimals = crypto.decimals !== undefined ? crypto.decimals : 18;
     options.request = request;
     options.apiNode = process.env.API_ETH_URL;
-  } else if (crypto.network === 'binance-smart-chain') {
+    options.platformCrypto = walletCoins.find((item) => item._id === 'ethereum@ethereum');
+  } else if (crypto.platform === 'binance-smart-chain') {
     options.name = crypto.name;
     options.minConf = 12;
     options.token = crypto._id !== 'binancecoin' ? crypto : false;
     options.decimals = crypto.decimals !== undefined ? crypto.decimals : 18;
     options.request = request;
     options.apiNode = process.env.API_BSC_URL;
-  } else if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].includes(crypto.network)) {
-    const addressType = details.get(crypto.network + '.addressType');
+  } else if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'].includes(crypto.platform)) {
+    const addressType = details.get(crypto.platform + '.addressType');
     if (addressType) {
       options.addressType = addressType;
     }
     options.minConf = 3;
-    if (crypto.network === 'bitcoincash') {
+    if (crypto.platform === 'bitcoin-cash') {
       options.minConf = 0;
     }
     options.getDynamicFees = () => {
       return request({
         url: `${process.env.SITE_URL}api/v2/fees`,
         params: {
-          crypto: crypto._id,
+          crypto: crypto.platform,
         },
         method: 'get',
         seed: 'public',
@@ -221,14 +234,14 @@ async function getExtraOptions(crypto) {
       return request({
         url: `${process.env.SITE_URL}api/v1/csFee`,
         // TODO move to _id
-        params: { network: crypto.network },
+        params: { network: crypto.platform },
         id: true,
       }).catch(console.error);
     };
-  } else if (crypto.network === 'eos') {
+  } else if (crypto.platform === 'eos') {
     options.accountName = details.get('eosAccountName') || '';
-  } else if (crypto.network === 'monero') {
-    const addressType = details.get(crypto.network + '.addressType');
+  } else if (crypto.platform === 'monero') {
+    const addressType = details.get(crypto.platform + '.addressType');
     if (addressType) {
       options.addressType = addressType;
     }
@@ -255,12 +268,7 @@ export async function updateWallet() {
 export async function addPublicKey(crypto) {
   try {
     await unlock();
-    const wallet = new Wallet[crypto.network]({
-      seed: seeds.get('private'),
-      networkName: crypto.network,
-      ...await getExtraOptions(crypto),
-    });
-    LS.setPublicKey(wallet, seeds.get('public'));
+    initWalletWithSeed(crypto, seeds.get('private'));
     lock();
   } catch (err) {
     lock();
@@ -301,14 +309,24 @@ export function getWallet() {
   return state.wallet;
 }
 
-export function getWalletCoin(wallet) {
-  const networkName = wallet ? wallet.networkName : state.wallet.networkName;
-  const coin = walletCoins.find((coin) => coin.network === networkName);
-  return coin;
+export function getWalletById(cryptoId) {
+  return state[cryptoId];
+}
+
+export function switchWallet(crypto) {
+  if (!state[crypto._id]) {
+    initWalletWithPublicKey(crypto);
+  }
+  localStorage.setItem('_cs_crypto_id', crypto._id);
+  state.wallet = state[crypto._id];
+}
+
+export function unsetWallet(crypto) {
+  delete state[crypto._id];
 }
 
 export function getDestinationInfo(to) {
-  if (state.wallet.networkName === 'stellar') {
+  if (state.wallet.crypto.platform === 'stellar') {
     return state.wallet.getDestinationInfo(to);
   } else {
     return Promise.resolve();
@@ -316,7 +334,7 @@ export function getDestinationInfo(to) {
 }
 
 export function setToAlias(data) {
-  if (state.wallet.networkName !== 'bitcoincash') return;
+  if (state.wallet.crypto.platform !== 'bitcoin-cash') return;
   try {
     const legacy = bchaddr.toLegacyAddress(data.to);
     if (legacy !== data.to) {
@@ -346,6 +364,27 @@ async function loginWithPinLegacy(pin) {
   seeds.set('private', encryption.decrypt(encryptedSeed, token));
 }
 
+function initWalletWithSeed(crypto, seed) {
+  const wallet = new Wallet[crypto.platform]({
+    seed,
+    crypto,
+    ...getExtraOptions(crypto),
+  });
+  LS.setPublicKey(wallet, seeds.get('public'));
+  wallet.lock();
+  state[crypto._id] = wallet;
+}
+
+function initWalletWithPublicKey(crypto) {
+  const publicKey = LS.getPublicKey(crypto.platform, seeds.get('public'));
+  const wallet = new Wallet[crypto.platform]({
+    publicKey,
+    crypto,
+    ...getExtraOptions(crypto),
+  });
+  state[crypto._id] = wallet;
+}
+
 export default {
   createWallet,
   registerWallet,
@@ -354,10 +393,13 @@ export default {
   removeAccount,
   setUsername,
   getWallet,
-  getWalletCoin,
+  getWalletById,
+  switchWallet,
+  unsetWallet,
   initWallet,
   updateWallet,
   addPublicKey,
   getDestinationInfo,
   setToAlias,
+  walletCoins,
 };

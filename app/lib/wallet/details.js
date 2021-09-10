@@ -4,6 +4,8 @@ import { randAvatarIndex } from 'lib/avatar';
 import request from 'lib/request';
 import LS from './localStorage';
 import seeds from './seeds';
+import cryptoDb from 'lib/crypto-db';
+const tetherToken = cryptoDb.find((item) => item._id === 'tether@ethereum');
 
 const state = {
   details: null,
@@ -53,14 +55,9 @@ async function _initDetails() {
       email: '',
       avatarIndex: randAvatarIndex(),
     },
-    tokens: [{
-      _id: 'tether',
-      name: 'Tether USD',
-      symbol: 'USDT',
-      address: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-      decimals: 6,
-      network: 'ethereum',
-    }],
+    tokens: [
+      tetherToken,
+    ],
   };
 
   if (LS.isRegisteredLegacy()) {

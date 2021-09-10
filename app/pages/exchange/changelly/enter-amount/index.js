@@ -1,6 +1,6 @@
 import Ractive from 'lib/ractive';
 import emitter from 'lib/emitter';
-import { getCrypto } from 'lib/crypto';
+import { getWallet } from 'lib/wallet';
 import changelly from 'lib/changelly';
 import { showError } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
@@ -70,8 +70,8 @@ export default function(el) {
       ractive.set('coins', coins);
 
       fromSymbolObserver.silence();
-      const crypto = getCrypto();
-      const coin = coins.find((coin) => coin.symbol === crypto.symbol && coin.network === crypto.network);
+      const { crypto } = getWallet();
+      const coin = coins.find((coin) => coin.symbol === crypto.symbol && coin.network === crypto.platform);
       ractive.set('fromSymbol', coin ? coin.symbol : getFirstSymbol(coins));
       fromSymbolObserver.resume();
 

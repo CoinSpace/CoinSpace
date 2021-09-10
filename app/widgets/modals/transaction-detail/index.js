@@ -2,7 +2,6 @@ import Ractive from 'widgets/modals/base';
 import showConfirmAcceleration from 'widgets/modals/confirm-acceleration';
 import { getWallet } from 'lib/wallet';
 import { showInfo } from 'widgets/modals/flash';
-import { walletCoins } from 'lib/crypto';
 import contentEthereum from './contentEthereum.ract';
 import contentRipple from './contentRipple.ract';
 import contentStellar from './contentStellar.ract';
@@ -12,21 +11,21 @@ import contentBtcBchLtc from './contentBtcBchLtc.ract';
 
 export default function(data) {
   let content;
-  const { networkName } = getWallet();
-  data.txUrl = walletCoins.find((coin) => coin.network === networkName).txUrl;
-  data.networkName = networkName;
+  const wallet = getWallet();
+  const { platform } = wallet.crypto;
+  data.txUrl = wallet.txUrl;
   data.showAllInputs = false;
   data.inputsPerPage = 10;
-  if (['ethereum', 'binance-smart-chain'].includes(networkName)) {
+  if (['ethereum', 'binance-smart-chain'].includes(platform)) {
     data.isPendingFee = data.transaction.fee === -1;
     content = contentEthereum;
-  } else if (networkName === 'ripple') {
+  } else if (platform === 'ripple') {
     content = contentRipple;
-  } else if (networkName === 'stellar') {
+  } else if (platform === 'stellar') {
     content = contentStellar;
-  } else if (networkName === 'eos') {
+  } else if (platform === 'eos') {
     content = contentEOS;
-  } else if (networkName === 'monero') {
+  } else if (platform === 'monero') {
     content = contentMonero;
   } else {
     content = contentBtcBchLtc;

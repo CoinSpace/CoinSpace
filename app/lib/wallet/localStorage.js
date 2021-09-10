@@ -39,17 +39,30 @@ function setDetailsKey(detailsKey) {
   localStorage.setItem('_cs_details_key', detailsKey);
 }
 
-function hasPublicKey(networkName) {
-  return !!localStorage.getItem(`_cs_public_key_${networkName}`);
+function hasPublicKey(platform) {
+  return !!localStorage.getItem(`_cs_public_key_${platform}`);
 }
 
-function getPublicKey(networkName, token) {
-  return encryption.decrypt(localStorage.getItem(`_cs_public_key_${networkName}`), token);
+function getPublicKey(platform, token) {
+  return encryption.decrypt(localStorage.getItem(`_cs_public_key_${platform}`), token);
 }
 
 function setPublicKey(wallet, token) {
   const publicKey = encryption.encrypt(wallet.publicKey(), token);
-  localStorage.setItem(`_cs_public_key_${wallet.networkName}`, publicKey);
+  localStorage.setItem(`_cs_public_key_${wallet.crypto.platform}`, publicKey);
+}
+
+function migratePublicKeys() {
+  [
+    ['bitcoincash', 'bitcoin-cash'],
+    ['bitcoinsv', 'bitcoin-sv'],
+  ].forEach(([from, to]) => {
+    const publicKey = localStorage.getItem(`_cs_public_key_${from}`);
+    if (publicKey) {
+      localStorage.setItem(`_cs_public_key_${to}`, publicKey);
+      localStorage.removeItem(`_cs_public_key_${from}`);
+    }
+  });
 }
 
 // DEPRECATED
@@ -121,4 +134,5 @@ export default {
   reset,
   isFidoTouchIdEnabled,
   setFidoTouchIdEnabled,
+  migratePublicKeys,
 };

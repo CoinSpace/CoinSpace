@@ -3,7 +3,7 @@ import qrcode from 'lib/qrcode';
 import showConfirmation from 'widgets/modals/confirm-send';
 import { showInfo, showError } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
-import { getWallet, setToAlias, getWalletCoin } from 'lib/wallet';
+import { getWallet, setToAlias } from 'lib/wallet';
 import { toUnitString } from 'lib/convert';
 import content from './_content.ract';
 
@@ -50,7 +50,7 @@ function open() {
         to: importTxOptions.to,
         alias: importTxOptions.alias,
         amount: toUnitString(importTxOptions.amount),
-        denomination: wallet.denomination,
+        symbol: wallet.crypto.symbol,
         fadeInDuration: 0,
         importTxOptions,
       });
@@ -73,7 +73,7 @@ function open() {
     } else if (err.message === 'cs-node-error') {
       return showError({
         message: translate('Network node error. Please try again later.', {
-          network: getWalletCoin().name,
+          network: getWallet().crypto.name,
         }),
       });
     }

@@ -6,21 +6,21 @@
 
   <div class="_content">
 
-    <div class="_amount">{{amount}} {{denomination}}</div>
+    <div class="_amount">{{amount}} {{symbol}}</div>
 
     {{#if showImportTxFees}}
     <div class="_import-tx-fee">
-      <div class="_fee" class-_multiple="(fees.length !== 1)">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</div>
+      <div class="_fee" class-_multiple="(fees.length !== 1)">{{feeSign}}{{fee}} {{symbol}} {{translate("transaction fee")}}</div>
       {{#if fees.length > 1}}
       <select value="{{feeName}}" on-change="change-fee">
         {{#each fees as fee: index}}
-          <option value="{{fee.name}}">{{feeSign}}{{fee.estimate}} {{denomination}} - {{translate(fee.name)}}</option>
+          <option value="{{fee.name}}">{{feeSign}}{{fee.estimate}} {{symbol}} - {{translate(fee.name)}}</option>
         {{/each}}
       </select>
       {{/if}}
     </div>
     {{else}}
-    <div class="_fee">{{feeSign}}{{fee}} {{denomination}} {{translate("transaction fee")}}</div>
+    <div class="_fee">{{feeSign}}{{fee}} {{symbol}} {{translate("transaction fee")}}</div>
     {{/if}}
 
     <div class="_arrow_down">

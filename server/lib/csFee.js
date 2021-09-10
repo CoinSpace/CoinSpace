@@ -7,8 +7,8 @@ const Big = require('big.js');
 
 const CRYPTO = [
   'bitcoin',
-  'bitcoincash',
-  'bitcoinsv',
+  'bitcoin-cash',
+  'bitcoin-sv',
   'litecoin',
   'dogecoin',
   'dash',

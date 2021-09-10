@@ -6,18 +6,18 @@ import eos from './eos';
 import monero from './monero';
 
 function open(data) {
-  const network = data.wallet.networkName;
-  if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash'].indexOf(network) !== -1) {
+  const { platform } = data.wallet.crypto;
+  if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'].indexOf(platform) !== -1) {
     return btcBchLtc(data);
-  } else if (['ethereum', 'binance-smart-chain'].includes(network)) {
+  } else if (['ethereum', 'binance-smart-chain'].includes(platform)) {
     return ethereum(data);
-  } else if (network === 'ripple') {
+  } else if (platform === 'ripple') {
     return ripple(data);
-  } else if (network === 'stellar') {
+  } else if (platform === 'stellar') {
     return stellar(data);
-  } else if (network === 'eos') {
+  } else if (platform === 'eos') {
     return eos(data);
-  } else if (network === 'monero') {
+  } else if (platform === 'monero') {
     return monero(data);
   }
 }

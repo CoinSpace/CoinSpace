@@ -105,7 +105,9 @@ router.get('/fees', (req, res) => {
 });
 
 router.get('/csFee', (req, res) => {
-  const network = req.query.network || 'bitcoin';
+  let network = req.query.network || 'bitcoin';
+  if (network === 'bitcoincash') network = 'bitcoin-cash';
+  if (network === 'bitcoinsv') network = 'bitcoin-sv';
   csFee.getCsFee(network).then((data) => {
     res.status(200).send(data);
   }).catch((err) => {

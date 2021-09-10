@@ -1,20 +1,20 @@
-const supportedProtocols = [
-  'bitcoin',
-  'bitcoincash',
-  'bitcoinsv',
-  'ethereum',
-  'litecoin',
-  'ripple',
-  'stellar',
-  'eos',
-  'dogecoin',
-  'dash',
-  'monero',
-];
+const platformSchemes = {
+  bitcoin: 'bitcoin',
+  'bitcoin-cash': 'bitcoincash',
+  'bitcoin-sv': 'bitcoinsv',
+  ethereum: 'ethereum',
+  litecoin: 'litecoin',
+  ripple: 'ripple',
+  stellar: 'stellar',
+  eos: 'eos',
+  dogecoin: 'dogecoin',
+  dash: 'dash',
+  monero: 'monero',
+};
 
 function isValidScheme(url) {
   if (!url) return false;
-  return supportedProtocols.some((network) => url.startsWith(`${network}:`));
+  return Object.values(platformSchemes).some((scheme) => url.startsWith(`${scheme}:`));
 }
 
 function decode(url) {
@@ -33,14 +33,14 @@ function decode(url) {
   return data;
 }
 
-function registerProtocolHandler(network) {
+function registerProtocolHandler(platform) {
   if (process.env.BUILD_PLATFORM !== 'web') return;
   if (!navigator.registerProtocolHandler) return;
-  if (!supportedProtocols.includes(network)) return;
+  if (!platformSchemes[platform]) return;
   try {
     navigator.registerProtocolHandler(
-      network,
-      `${process.env.SITE_URL}wallet/?coin=${network}&bip21=%s`, 'Coin Wallet'
+      platformSchemes[platform],
+      `${process.env.SITE_URL}wallet/?coin=${platformSchemes[platform]}&bip21=%s`, 'Coin Wallet'
     );
     // eslint-disable-next-line
   } catch (e) {}

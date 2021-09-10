@@ -357,6 +357,8 @@ async function getTokens(networks, limit=0) {
 }
 
 function getTicker(id) {
+  if (id === 'bitcoin-cash') id = 'bitcoincash';
+  if (id === 'bitcoin-sv') id = 'bitcoinsv';
   return db().collection(COLLECTION)
     .findOne({
       _id: id,
@@ -384,6 +386,31 @@ function getTickers(ids) {
       },
     })
     .toArray();
+}
+
+// TODO: remove from here
+async function getTickersV3(ids) {
+  const tickers = await db().collection(COLLECTION)
+    .find({
+      _id: { $in: ids.map((id) => {
+        const asset = id.split('@')[0];
+        if (asset === 'bitcoin-cash') return 'bitcoincash';
+        if (asset === 'bitcoin-sv') return 'bitcoinsv';
+        return asset;
+      }) },
+    }, {
+      projection: {
+        prices: 1,
+      },
+    })
+    .toArray();
+
+  return tickers.map((item) => {
+    if (item._id === 'bitcoincash') item._id = 'bitcoin-cash';
+    if (item._id === 'bitcoinsv') item._id = 'bitcoin-sv';
+    item._id = ids.find((id) => id.split('@')[0] === item._id);
+    return item;
+  });
 }
 
 // For backward compatibility
@@ -426,6 +453,7 @@ module.exports = {
   updatePrices,
   getTicker,
   getTickers,
+  getTickersV3,
   // For backward compatibility
   getFromCacheForAppleWatch,
 };

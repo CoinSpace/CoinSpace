@@ -1,6 +1,6 @@
 import Ractive from 'widgets/modals/base';
 import emitter from 'lib/emitter';
-import { getWallet, getWalletCoin } from 'lib/wallet';
+import { getWallet } from 'lib/wallet';
 import { unlock, lock } from 'lib/wallet/security';
 import { showError, showSuccess } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
@@ -20,7 +20,7 @@ function open(data) {
     data: Object.assign(data, {
       isLoading: false,
       replaceByFeePercent: `+${((wallet.replaceByFeeFactor - 1) * 100).toFixed(0)}%`,
-      denomination: wallet.denomination,
+      symbol: wallet.crypto.symbol,
       amount: toUnitString(tx.amount),
     }),
   });
@@ -60,7 +60,7 @@ function open(data) {
     let message;
     if (err.message === 'cs-node-error') {
       message = translate('Network node error. Please try again later.', {
-        network: getWalletCoin(wallet).name,
+        network: wallet.crypto.name,
       });
     } else {
       console.error(`not translated error: ${err.message}`);

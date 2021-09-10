@@ -16,7 +16,6 @@ import initEosSetup from 'widgets/eos/setup';
 import { toAtom, toUnitString, cryptoToFiat, fiatToCrypto, toDecimalString } from 'lib/convert';
 import { translate } from 'lib/i18n';
 import ticker from 'lib/ticker-api';
-import { getCrypto } from 'lib/crypto';
 import bip21 from 'lib/bip21';
 import template from './index.ract';
 
@@ -39,7 +38,7 @@ const FACTORS = {
 };
 
 export default function(el) {
-  const rates = ticker.getRates(getCrypto()._id);
+  const rates = {};
   const currency = details.get('systemInfo').preferredCurrency;
 
   const ractive = new Ractive({
@@ -63,8 +62,8 @@ export default function(el) {
       isStellar: false,
       isEOS: false,
       isLoading: false,
-      denomination: '',
-      feeDenomination: '',
+      symbol: '',
+      feeSymbol: '',
       factor: '',
       factors: false,
       isCryptoInputHidden: !rates[currency],
@@ -104,7 +103,8 @@ export default function(el) {
   });
 
   emitter.on('rates-updated', () => {
-    ractive.set('rates', ticker.getRates(getCrypto()._id));
+    const wallet = getWallet();
+    ractive.set('rates', ticker.getRates(wallet.crypto._id));
     ractive.set('isCryptoInputHidden', !ractive.get('rates')[ractive.get('currency')]);
     setFiatFromCrypto();
   });
@@ -124,7 +124,7 @@ export default function(el) {
     const wallet = getWallet();
 
     Promise.all([
-      resolveTo(wallet.networkName, to),
+      resolveTo(wallet.crypto.platform, to),
       getDestinationInfo(to),
       delay(100), // in order to activate loader
     ]).then((results) => {
@@ -142,16 +142,16 @@ export default function(el) {
         feeName: ractive.get('feeName'),
         destinationInfo,
         amount: normalizeCrypto(toDecimalString(ractive.find('#crypto').value)),
-        denomination: ractive.get('denomination'),
+        symbol: ractive.get('symbol'),
         onSuccessDismiss() {
           ractive.set({ to: '' });
           ractive.find('#crypto').value = '';
           ractive.find('#fiat').value = '';
           setFees();
-          if (wallet.networkName === 'ripple') {
+          if (wallet.crypto.platform === 'ripple') {
             ractive.find('#destination-tag').value = '';
             ractive.find('#invoice-id').value = '';
-          } else if (wallet.networkName === 'stellar' || wallet.networkName === 'eos') {
+          } else if (wallet.crypto.platform === 'stellar' || wallet.crypto.platform === 'eos') {
             ractive.find('#memo').value = '';
           }
           if (['ios', 'android-play'].includes(process.env.BUILD_PLATFORM)) {
@@ -161,14 +161,14 @@ export default function(el) {
         },
       };
 
-      if (['ethereum', 'binance-smart-chain'].includes(wallet.networkName)) {
+      if (['ethereum', 'binance-smart-chain'].includes(wallet.crypto.platform)) {
         wallet.gasLimit = ractive.find('#gas-limit').value;
-      } else if (wallet.networkName === 'ripple') {
+      } else if (wallet.crypto.platform === 'ripple') {
         options.tag = ractive.find('#destination-tag').value;
         options.invoiceId = ractive.find('#invoice-id').value;
-      } else if (wallet.networkName === 'stellar') {
+      } else if (wallet.crypto.platform === 'stellar') {
         options.memo = ractive.find('#memo').value;
-      } else if (wallet.networkName === 'eos') {
+      } else if (wallet.crypto.platform === 'eos') {
         options.memo = ractive.find('#memo').value;
       }
 
@@ -193,20 +193,20 @@ export default function(el) {
   emitter.on('wallet-ready', () => {
     const wallet = getWallet();
     isSyncing = false;
-    ractive.set('hasGas', ['ethereum', 'binance-smart-chain'].includes(wallet.networkName));
-    ractive.set('isRipple', wallet.networkName === 'ripple');
-    ractive.set('isStellar', wallet.networkName === 'stellar');
-    ractive.set('isEOS', wallet.networkName === 'eos');
-    ractive.set('needToSetupEos', wallet.networkName === 'eos' && !wallet.isActive);
-    ractive.set('denomination', wallet.denomination);
-    ractive.set('factors', FACTORS[getCrypto()._id]);
-    ractive.set('factor', wallet.denomination);
+    ractive.set('hasGas', ['ethereum', 'binance-smart-chain'].includes(wallet.crypto.platform));
+    ractive.set('isRipple', wallet.crypto.platform === 'ripple');
+    ractive.set('isStellar', wallet.crypto.platform === 'stellar');
+    ractive.set('isEOS', wallet.crypto.platform === 'eos');
+    ractive.set('needToSetupEos', wallet.crypto.platform === 'eos' && !wallet.isActive);
+    ractive.set('symbol', wallet.crypto.symbol);
+    ractive.set('factors', FACTORS[wallet.crypto.platform]);
+    ractive.set('factor', wallet.crypto.symbol);
     setFees(true);
-    if (['ethereum', 'binance-smart-chain'].includes(wallet.networkName)) {
-      ractive.set('feeDenomination', wallet.baseDenomination);
+    if (['ethereum', 'binance-smart-chain'].includes(wallet.crypto.platform)) {
+      ractive.set('feeSymbol', wallet.platformCrypto.symbol);
       ractive.find('#gas-limit').value = wallet.gasLimit;
     } else {
-      ractive.set('feeDenomination', wallet.denomination);
+      ractive.set('feeSymbol', wallet.crypto.symbol);
     }
     setFiatFromCrypto();
   });
@@ -221,8 +221,8 @@ export default function(el) {
     const value = toAtom(normalizeCrypto(ractive.find('#crypto').value) || 0);
     let fees = [];
 
-    if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash', 'monero']
-      .includes(wallet.networkName)) {
+    if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash', 'monero']
+      .includes(wallet.crypto.platform)) {
       fees = wallet.estimateFees(value).map((item) => {
         if (setDefaultFeeOption) {
           if (item.default === true) {
@@ -235,14 +235,14 @@ export default function(el) {
           maxAmount: toUnitString(item.maxAmount),
         };
       });
-    } else if (['ripple', 'stellar', 'eos'].includes(wallet.networkName)) {
+    } else if (['ripple', 'stellar', 'eos'].includes(wallet.crypto.platform)) {
       fees = [{
         name: 'default',
         estimate: toUnitString(wallet.defaultFee),
         maxAmount: toUnitString(wallet.maxAmount),
       }];
       ractive.set('feeName', 'default');
-    } else if (['ethereum', 'binance-smart-chain'].includes(wallet.networkName)) {
+    } else if (['ethereum', 'binance-smart-chain'].includes(wallet.crypto.platform)) {
       fees = [{
         name: 'default',
         estimate: toUnitString(wallet.defaultFee, 18),
@@ -305,7 +305,7 @@ export default function(el) {
     showTooltip({
       // eslint-disable-next-line max-len
       message: translate('Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending :symbol is equal 21000. Sending Tokens is equal around 200000.', {
-        symbol: wallet.baseDenomination,
+        symbol: wallet.platformCrypto.symbol,
       }),
     });
   });
@@ -326,9 +326,9 @@ export default function(el) {
   ractive.on('help-memo', () => {
     const wallet = getWallet();
     let message = '';
-    if (wallet.networkName === 'stellar') {
+    if (wallet.crypto.platform === 'stellar') {
       message = translate('The memo contains optional extra information. A string up to 28-bytes long.');
-    } else if (wallet.networkName === 'eos') {
+    } else if (wallet.crypto.platform === 'eos') {
       message = translate('The memo contains optional extra information. A string up to 256-bytes long.');
     }
     showTooltip({ message });

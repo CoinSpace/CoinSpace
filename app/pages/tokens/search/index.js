@@ -3,7 +3,7 @@ import emitter from 'lib/emitter';
 import details from 'lib/wallet/details';
 import { addPublicKey } from 'lib/wallet';
 import LS from 'lib/wallet/localStorage';
-import tokens from 'lib/tokens';
+import crypto from 'lib/crypto';
 import addCustomToken from 'widgets/modals/add-custom-token';
 import template from './index.ract';
 
@@ -23,15 +23,15 @@ export default function(el) {
 
   function search() {
     const walletTokens = details.get('tokens');
-    const cryptoTokens = tokens.search(ractive.get('searchQuery'))
-      .filter((item) => !walletTokens.find((token) => token._id === item._id && token.network === item.network));
+    const cryptoTokens = crypto.searchTokens(ractive.get('searchQuery'))
+      .filter((item) => !walletTokens.find((token) => token._id === item._id));
     ractive.set('show', PER_PAGE);
     ractive.set('cryptoTokens', cryptoTokens);
   }
 
-  async function addToken(id, network) {
-    const token = tokens.getTokenById(id, network);
-    if (!LS.hasPublicKey(token.network)) {
+  async function addToken(id) {
+    const token = crypto.getTokenById(id);
+    if (!LS.hasPublicKey(token.platform)) {
       try {
         await addPublicKey(token);
       } catch (err) {

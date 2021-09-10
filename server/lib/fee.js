@@ -6,16 +6,16 @@ const db = require('./v1/db');
 
 const CRYPTO = [
   'bitcoin',
-  'bitcoincash',
-  'bitcoinsv',
+  'bitcoin-cash',
+  'bitcoin-sv',
   'litecoin',
   'dogecoin',
   'dash',
 ];
 const API = {
   bitcoin: process.env.API_BTC_URL,
-  bitcoincash: process.env.API_BCH_URL,
-  bitcoinsv: process.env.API_BSV_URL,
+  'bitcoin-cash': process.env.API_BCH_URL,
+  'bitcoin-sv': process.env.API_BSV_URL,
   litecoin: process.env.API_LTC_URL,
   dogecoin: process.env.API_DOGE_URL,
   dash: process.env.API_DASH_URL,

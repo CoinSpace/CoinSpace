@@ -4,7 +4,7 @@ import { showError } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
 import qrcode from 'lib/qrcode';
 import details from 'lib/wallet/details';
-import tokens from 'lib/tokens';
+import crypto from 'lib/crypto';
 import initDropdown from 'widgets/dropdown';
 import content from './_content.ract';
 
@@ -47,11 +47,11 @@ function open() {
       return showError({ message: translate('Please fill out address.') });
     }
 
-    const network = blockchainDropdown.getValue();
-    token = tokens.getTokenByAddress(address, network);
+    const platform = blockchainDropdown.getValue();
+    token = crypto.getTokenByAddress(address, platform);
 
     if (!token) {
-      token = await tokens.requestTokenByAddress(address, network).catch((err) => {
+      token = await crypto.requestTokenByAddress(address, platform).catch((err) => {
         if (err.status === 400 || err.status === 404) {
           showError({
             message: translate('address is not a valid address.', {
@@ -68,9 +68,8 @@ function open() {
       return;
     }
 
-    const walletTokensSubset = walletTokens.filter((item) => item.network === network);
-    if ((token._id && walletTokensSubset.map(item => item._id).includes(token._id))
-        || walletTokensSubset.map(item => item.address).includes(token.address)) {
+    const walletTokensSubset = walletTokens.filter((item) => item.platform === platform);
+    if (walletTokensSubset.find(item => item._id === token._id)) {
       ractive.set('isValidating', false);
       return showError({ message: translate('This Token has already been added.') });
     }

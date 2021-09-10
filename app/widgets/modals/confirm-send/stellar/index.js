@@ -30,9 +30,9 @@ function open(data) {
           return showInfo({
             title: translate('Insufficient funds'),
             // eslint-disable-next-line max-len
-            message: translate("Your wallet isn't activated. You can receive only amount greater than :minReserve :denomination.", {
+            message: translate("Your wallet isn't activated. You can receive only amount greater than :minReserve :symbol.", {
               minReserve: toUnitString(wallet.minReserve),
-              denomination: wallet.denomination,
+              symbol: wallet.crypto.symbol,
             }),
           });
         }

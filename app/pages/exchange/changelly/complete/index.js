@@ -3,21 +3,21 @@ import emitter from 'lib/emitter';
 import details from 'lib/wallet/details';
 import template from './index.ract';
 import footer from '../footer.ract';
-import { walletCoins } from 'lib/crypto';
+import { getWalletById } from 'lib/wallet';
 
-const symbolToNetwork = {
-  BTC: 'bitcoin',
-  BCH: 'bitcoincash',
-  BSV: 'bitcoinsv',
-  LTC: 'litecoin',
-  ETH: 'ethereum',
-  XRP: 'ripple',
-  XLM: 'stellar',
-  EOS: 'eos',
-  DOGE: 'dogecoin',
-  DASH: 'dash',
-  XMR: 'monero',
-  USDT: 'ethereum',
+const symbolToCryptoId = {
+  BTC: 'bitcoin@bitcoin',
+  BCH: 'bitcoin-cash@bitcoin-cash',
+  BSV: 'bitcoin-sv@bitcoin-sv',
+  LTC: 'litecoin@litecoin',
+  ETH: 'ethereum@ethereum',
+  XRP: 'xrp@ripple',
+  XLM: 'stellar@stellar',
+  EOS: 'eos@eos',
+  DOGE: 'dogecoin@dogecoin',
+  DASH: 'dash@dash',
+  XMR: 'monero@monero',
+  USDT: 'ethereum@ethereum',
 };
 
 export default function(el) {
@@ -37,15 +37,15 @@ export default function(el) {
   });
 
   ractive.on('before-show', (context) => {
-    const network = symbolToNetwork[context.toSymbol];
-    const walletCoin = network && walletCoins.find((coin) => coin.network === network);
+    const cryptoId = symbolToCryptoId[context.toSymbol];
+    const wallet = cryptoId && getWalletById(cryptoId);
     ractive.set({
       toSymbol: context.toSymbol,
       toAddress: context.toAddress,
       amount: context.amount,
       payoutHash: context.payoutHash,
-      txUrl: walletCoin ? walletCoin.txUrl : () => context.payoutHashLink,
-      network,
+      txUrl: wallet ? wallet.txUrl : () => context.payoutHashLink,
+      cryptoId,
     });
   });
 
