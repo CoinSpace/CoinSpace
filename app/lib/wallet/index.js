@@ -157,9 +157,8 @@ export async function initWallet(seed) {
   }
 
   for (const crypto of all) {
-    let wallet;
     if (seed) {
-      initWalletWithSeed(crypto, seed);
+      const wallet = initWalletWithSeed(crypto, seed);
       if (crypto._id !== defaultCryptoId) {
         try {
           await wallet.load();
@@ -377,6 +376,7 @@ function initWalletWithSeed(crypto, seed) {
   LS.setPublicKey(wallet, seeds.get('public'));
   wallet.lock();
   state[crypto._id] = wallet;
+  return wallet;
 }
 
 function initWalletWithPublicKey(crypto) {
@@ -387,6 +387,7 @@ function initWalletWithPublicKey(crypto) {
     ...getExtraOptions(crypto),
   });
   state[crypto._id] = wallet;
+  return wallet;
 }
 
 export default {
