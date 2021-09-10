@@ -267,6 +267,22 @@ async function getAll() {
         "id": "9fdb4e4e-feda-4a81-8b26-1401b6c2f4de",
         "code": "eos"
       }
+    },
+    {
+      "_id": "monero@monero",
+      "asset": "monero",
+      "platform": "monero",
+      "type": "coin",
+      "name": "Monero",
+      "symbol": "XMR",
+      "decimals": 12,
+      "logo": "monero.svg",
+      "changelly": {
+        "ticker": "xmr"
+      },
+      "coingecko": {
+        "id": "monero"
+      }
     }
   ];
 }

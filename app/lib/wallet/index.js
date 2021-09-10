@@ -17,7 +17,7 @@ import BinanceSmartChainWallet from '@coinspace/cs-binance-smart-chain-wallet';
 import RippleWallet from '@coinspace/cs-ripple-wallet';
 import StellarWallet from '@coinspace/cs-stellar-wallet';
 import EOSWallet from '@coinspace/cs-eos-wallet';
-// import MoneroWallet from '@coinspace/cs-monero-wallet';
+import MoneroWallet from '@coinspace/cs-monero-wallet';
 
 import { eddsa } from 'elliptic';
 
@@ -43,6 +43,7 @@ export const walletCoins = [
   'eos@eos',
   'dogecoin@dogecoin',
   'dash@dash',
+  'monero@monero',
   'binance-smart-chain@binance-smart-chain',
 ].map((id) => cryptoDb.find((item) => item._id === id));
 
@@ -57,7 +58,7 @@ const Wallet = {
   eos: EOSWallet,
   dogecoin: CsWallet,
   dash: CsWallet,
-  // monero: MoneroWallet,
+  monero: MoneroWallet,
   'binance-smart-chain': BinanceSmartChainWallet,
 };
 

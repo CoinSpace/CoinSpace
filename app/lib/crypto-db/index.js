@@ -234,6 +234,22 @@ const cryptoDb = [
       "code": "eos"
     }
   },
+  {
+    "_id": "monero@monero",
+    "asset": "monero",
+    "platform": "monero",
+    "type": "coin",
+    "name": "Monero",
+    "symbol": "XMR",
+    "decimals": 12,
+    "logo": "monero.svg",
+    "changelly": {
+      "ticker": "xmr"
+    },
+    "coingecko": {
+      "id": "monero"
+    }
+  },
 ];
 
 export default cryptoDb;
