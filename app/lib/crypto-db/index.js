@@ -137,6 +137,26 @@ const cryptoDb = [
       "code": "usdt"
     }
   },
+  {
+    "_id": "dogecoin@dogecoin",
+    "asset": "dogecoin",
+    "platform": "dogecoin",
+    "type": "coin",
+    "name": "Dogecoin",
+    "symbol": "DOGE",
+    "decimals": 8,
+    "logo": "dogecoin.svg",
+    "changelly": {
+      "ticker": "doge"
+    },
+    "coingecko": {
+      "id": "dogecoin"
+    },
+    "moonpay": {
+      "id": "af950192-8e01-4a84-9807-27f16d88450e",
+      "code": "doge"
+    }
+  },
 ];
 
 export default cryptoDb;

@@ -34,11 +34,12 @@ const state = {
 };
 export const walletCoins = [
   'bitcoin@bitcoin',
-  'litecoin@litecoin',
-  'dash@dash',
   'bitcoin-cash@bitcoin-cash',
   'bitcoin-sv@bitcoin-sv',
+  'litecoin@litecoin',
   'ethereum@ethereum',
+  'dogecoin@dogecoin',
+  'dash@dash',
 ].map((id) => cryptoDb.find((item) => item._id === id));
 
 const Wallet = {
