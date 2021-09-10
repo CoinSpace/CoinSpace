@@ -31,6 +31,7 @@ import bchaddr from 'bchaddrjs';
 
 const state = {
   wallet: null,
+  wallets: {},
 };
 export const walletCoins = [
   'bitcoin@bitcoin',
@@ -151,32 +152,35 @@ export async function initWallet(seed) {
   const all = [...walletCoins, ...walletTokens];
 
   let defaultCryptoId = localStorage.getItem('_cs_crypto_id') || 'bitcoin@bitcoin';
-  if (!all.find((item) => item._id === defaultCryptoId)) {
+  if (!all.find((item) => item._id === defaultCryptoId && LS.hasPublicKey(item.platform))) {
     defaultCryptoId = 'bitcoin@bitcoin';
     localStorage.setItem('_cs_crypto_id', defaultCryptoId);
   }
 
   for (const crypto of all) {
     if (seed) {
-      const wallet = initWalletWithSeed(crypto, seed);
-      if (crypto._id !== defaultCryptoId) {
+      initWalletWithSeed(crypto, seed);
+    } else {
+      if (!LS.hasPublicKey(crypto.platform)) continue;
+      initWalletWithPublicKey(crypto);
+    }
+  }
+  state.wallet = state.wallets[defaultCryptoId];
+
+  convert.setDecimals(state.wallet.crypto.decimals);
+  await ticker.init([state.wallet.crypto]);
+
+  try {
+    if (seed) {
+      for (const wallet of Object.values(state.wallets)) {
+        if (wallet === state.wallet) continue;
         try {
           await wallet.load();
         } catch (err) {
           console.error(err);
         }
       }
-    } else {
-      if (!LS.hasPublicKey(crypto.platform)) continue;
-      initWalletWithPublicKey(crypto);
     }
-  }
-  state.wallet = state[defaultCryptoId];
-
-  convert.setDecimals(state.wallet.crypto.decimals);
-  await ticker.init([state.wallet.crypto]);
-
-  try {
     await state.wallet.load();
     emitter.emit('wallet-ready');
   } catch (err) {
@@ -313,19 +317,19 @@ export function getWallet() {
 }
 
 export function getWalletById(cryptoId) {
-  return state[cryptoId];
+  return state.wallets[cryptoId];
 }
 
 export function switchWallet(crypto) {
-  if (!state[crypto._id]) {
+  if (!state.wallets[crypto._id]) {
     initWalletWithPublicKey(crypto);
   }
   localStorage.setItem('_cs_crypto_id', crypto._id);
-  state.wallet = state[crypto._id];
+  state.wallet = state.wallets[crypto._id];
 }
 
 export function unsetWallet(crypto) {
-  delete state[crypto._id];
+  delete state.wallets[crypto._id];
 }
 
 export function getDestinationInfo(to) {
@@ -375,8 +379,7 @@ function initWalletWithSeed(crypto, seed) {
   });
   LS.setPublicKey(wallet, seeds.get('public'));
   wallet.lock();
-  state[crypto._id] = wallet;
-  return wallet;
+  state.wallets[crypto._id] = wallet;
 }
 
 function initWalletWithPublicKey(crypto) {
@@ -386,8 +389,7 @@ function initWalletWithPublicKey(crypto) {
     crypto,
     ...getExtraOptions(crypto),
   });
-  state[crypto._id] = wallet;
-  return wallet;
+  state.wallets[crypto._id] = wallet;
 }
 
 export default {
