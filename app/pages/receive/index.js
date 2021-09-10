@@ -56,7 +56,7 @@ export default function(el) {
     const wallet = getWallet();
     ractive.set('needToSetupEos', wallet.crypto.platform === 'eos' && !wallet.isActive);
 
-    const addressTypes = (wallet.network && wallet.network.addressTypes) || wallet.addressTypes || [];
+    const addressTypes = (wallet.addressTypes || []);
     ractive.set('addressTypes', addressTypes);
     ractive.set('addressType', wallet.addressType);
     ractive.set('addressTooltip', [
