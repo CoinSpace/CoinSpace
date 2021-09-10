@@ -73,7 +73,7 @@
         background-color: $ethereum;
       }
       &--binance-smart-chain {
-        background-color: $binancecoin;
+        background-color: $binance-smart-chain;
       }
     }
 
@@ -175,9 +175,9 @@
         background-color: $monero;
       }
     }
-    &--binancecoin {
+    &--binance-smart-chain {
       ._token__icon {
-        background-color: $binancecoin;
+        background-color: $binance-smart-chain;
       }
     }
   }

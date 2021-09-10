@@ -157,6 +157,23 @@ const cryptoDb = [
       "code": "doge"
     }
   },
+  {
+    "_id": "binance-smart-chain@binance-smart-chain",
+    "asset": "binance-smart-chain",
+    "platform": "binance-smart-chain",
+    "type": "coin",
+    "name": "Binance Smart Chain",
+    "symbol": "BNB",
+    "decimals": 18,
+    "logo": "binance-smart-chain.svg",
+    "coingecko": {
+      "id": "binancecoin"
+    },
+    "moonpay": {
+      "id": "7ddb22ce-792b-401d-a8ea-62260f59bc62",
+      "code": "bnb_bsc"
+    }
+  },
 ];
 
 export default cryptoDb;

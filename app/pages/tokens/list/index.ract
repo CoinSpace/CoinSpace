@@ -35,7 +35,7 @@
           {{#if platform === 'ethereum' }}
             {{>svg_token_ethereum}}
           {{elseif platform === 'binance-smart-chain'}}
-            {{>svg_token_binancecoin}}
+            {{>svg_token_binance-smart-chain}}
           {{/if}}
         </div>
       </div>

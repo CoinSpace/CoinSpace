@@ -13,7 +13,7 @@ import { unlock, lock } from 'lib/wallet/security';
 
 import CsWallet from '@coinspace/cs-wallet';
 import EthereumWallet from '@coinspace/cs-ethereum-wallet';
-// import BinanceSmartChainWallet from '@coinspace/cs-binance-smart-chain-wallet';
+import BinanceSmartChainWallet from '@coinspace/cs-binance-smart-chain-wallet';
 // import RippleWallet from '@coinspace/cs-ripple-wallet';
 // import StellarWallet from '@coinspace/cs-stellar-wallet';
 // import EOSWallet from '@coinspace/cs-eos-wallet';
@@ -40,6 +40,7 @@ export const walletCoins = [
   'ethereum@ethereum',
   'dogecoin@dogecoin',
   'dash@dash',
+  'binance-smart-chain@binance-smart-chain',
 ].map((id) => cryptoDb.find((item) => item._id === id));
 
 const Wallet = {
@@ -54,7 +55,7 @@ const Wallet = {
   // dogecoin: CsWallet,
   dash: CsWallet,
   // monero: MoneroWallet,
-  // 'binance-smart-chain': BinanceSmartChainWallet,
+  'binance-smart-chain': BinanceSmartChainWallet,
 };
 
 function createWallet(passphrase) {
@@ -206,12 +207,10 @@ function getExtraOptions(crypto) {
     options.apiNode = process.env.API_ETH_URL;
     options.platformCrypto = walletCoins.find((item) => item._id === 'ethereum@ethereum');
   } else if (crypto.platform === 'binance-smart-chain') {
-    options.name = crypto.name;
     options.minConf = 12;
-    options.token = crypto._id !== 'binancecoin' ? crypto : false;
-    options.decimals = crypto.decimals !== undefined ? crypto.decimals : 18;
     options.request = request;
     options.apiNode = process.env.API_BSC_URL;
+    options.platformCrypto = walletCoins.find((item) => item._id === 'binance-smart-chain@binance-smart-chain');
   } else if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'].includes(crypto.platform)) {
     const addressType = details.get(crypto.platform + '.addressType');
     if (addressType) {

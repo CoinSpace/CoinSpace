@@ -175,7 +175,39 @@ async function getAll() {
         "id": "af950192-8e01-4a84-9807-27f16d88450e",
         "code": "doge"
       }
-    }
+    },
+    {
+      "_id": "binance-smart-chain@binance-smart-chain",
+      "asset": "binance-smart-chain",
+      "platform": "binance-smart-chain",
+      "type": "coin",
+      "name": "Binance Smart Chain",
+      "symbol": "BNB",
+      "decimals": 18,
+      "logo": "binance-smart-chain.svg",
+      "coingecko": {
+        "id": "binancecoin"
+      },
+      "moonpay": {
+        "id": "7ddb22ce-792b-401d-a8ea-62260f59bc62",
+        "code": "bnb_bsc"
+      }
+    },
+    {
+      "_id": "atari@binance-smart-chain",
+      "asset": "atari",
+      "platform": "binance-smart-chain",
+      "type": "token",
+      "name": "Atari",
+      "symbol": "ATRI",
+      "address": "0xc0c6e4c6e70c6231b20979bda581a66f062a7967",
+      "decimals": 0,
+      "logo": "atari.png",
+      "coingecko": {
+        "id": "atari",
+        "platform": "binance-smart-chain"
+      }
+    },
   ];
 }
 
