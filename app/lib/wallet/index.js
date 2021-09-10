@@ -16,7 +16,7 @@ import EthereumWallet from '@coinspace/cs-ethereum-wallet';
 import BinanceSmartChainWallet from '@coinspace/cs-binance-smart-chain-wallet';
 import RippleWallet from '@coinspace/cs-ripple-wallet';
 import StellarWallet from '@coinspace/cs-stellar-wallet';
-// import EOSWallet from '@coinspace/cs-eos-wallet';
+import EOSWallet from '@coinspace/cs-eos-wallet';
 // import MoneroWallet from '@coinspace/cs-monero-wallet';
 
 import { eddsa } from 'elliptic';
@@ -40,6 +40,7 @@ export const walletCoins = [
   'ethereum@ethereum',
   'xrp@ripple',
   'stellar@stellar',
+  'eos@eos',
   'dogecoin@dogecoin',
   'dash@dash',
   'binance-smart-chain@binance-smart-chain',
@@ -53,8 +54,8 @@ const Wallet = {
   ethereum: EthereumWallet,
   ripple: RippleWallet,
   stellar: StellarWallet,
-  // eos: EOSWallet,
-  // dogecoin: CsWallet,
+  eos: EOSWallet,
+  dogecoin: CsWallet,
   dash: CsWallet,
   // monero: MoneroWallet,
   'binance-smart-chain': BinanceSmartChainWallet,

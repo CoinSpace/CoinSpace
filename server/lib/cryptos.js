@@ -248,6 +248,26 @@ async function getAll() {
         "code": "xlm"
       }
     },
+    {
+      "_id": "eos@eos",
+      "asset": "eos",
+      "platform": "eos",
+      "type": "coin",
+      "name": "EOS",
+      "symbol": "EOS",
+      "decimals": 4,
+      "logo": "eos.svg",
+      "changelly": {
+        "ticker": "eos"
+      },
+      "coingecko": {
+        "id": "eos"
+      },
+      "moonpay": {
+        "id": "9fdb4e4e-feda-4a81-8b26-1401b6c2f4de",
+        "code": "eos"
+      }
+    }
   ];
 }
 
