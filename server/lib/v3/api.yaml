@@ -66,6 +66,7 @@ components:
             type: string
           decimals:
             type: number
+            nullable: true
           logo:
             type: string
         required:
