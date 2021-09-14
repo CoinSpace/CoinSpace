@@ -1,28 +1,28 @@
-'use strict';
+import crypto from 'crypto';
+import createError from 'http-errors';
+import elliptic from 'elliptic';
+const EdDSA = elliptic.eddsa;
 
-const crypto = require('crypto');
-const createError = require('http-errors');
-const EdDSA = require('elliptic').eddsa;
 const ec = new EdDSA('ed25519');
 
-function generateChallenge() {
+export function generateChallenge() {
   return crypto.randomBytes(64);
 }
 
-function generateUser(id) {
+export function generateUser(id) {
   return crypto.createHash('sha1')
     .update(id)
     .digest('hex');
 }
 
-function asyncWrapper(fn) {
+export function asyncWrapper(fn) {
   return (res, req, next) => {
     Promise.resolve(fn(res, req, next))
       .catch(next);
   };
 }
 
-function verifyReq(key, req) {
+export function verifyReq(key, req) {
   try {
     const base = [
       req.method.toLowerCase(),
@@ -47,18 +47,10 @@ function verifyReq(key, req) {
   }
 }
 
-function mapAuthenticator(authenticator) {
+export function mapAuthenticator(authenticator) {
   return {
     id: authenticator.credentialID,
     type: 'public-key',
     transports: authenticator.transports || undefined,
   };
 }
-
-module.exports = {
-  generateChallenge,
-  generateUser,
-  asyncWrapper,
-  verifyReq,
-  mapAuthenticator,
-};

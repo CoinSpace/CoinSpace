@@ -37,6 +37,9 @@ module.exports = {
   externals: {
     electron: 'commonjs electron',
   },
+  experiments: {
+    topLevelAwait: true,
+  },
   resolve: {
     symlinks: false,
     alias: {

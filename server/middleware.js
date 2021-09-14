@@ -1,14 +1,12 @@
-'use strict';
-
-const bodyParser = require('body-parser');
-const compress = require('compression');
-const path = require('path');
-const helmet = require('helmet');
-const express = require('express');
-const cors = require('cors');
-const axios = require('axios');
-const querystring = require('querystring');
-const crypto = require('crypto');
+import bodyParser from 'body-parser';
+import compress from 'compression';
+import { fileURLToPath } from 'url';
+import helmet from 'helmet';
+import express from 'express';
+import cors from 'cors';
+import axios from 'axios';
+import querystring from 'querystring';
+import crypto from 'crypto';
 
 function init(app) {
 
@@ -37,7 +35,7 @@ function init(app) {
     const id = req.query.id || req.body.deviceId || req.body.id || req.body.wallet_id;
     if (!id) return next();
     const [, app, store, version] = req.get('X-Release') !== undefined ?
-      req.get('X-Release').match(/(.+)\.(.+)@(.+)/i) : [];
+      req.get('X-Release').match(/(.+)\.(.+)@(.+)/i) || [] : [];
     const screen = req.baseUrl + req.path + (req.query.crypto ? `/${req.query.crypto}` : '')
       + (req.query.network ? `/${req.query.network}` : '');
     const useragent = req.get('User-Agent');
@@ -58,7 +56,7 @@ function init(app) {
   });
 
   const cacheControl = isProduction() ? { maxAge: dayInMs, setHeaders: setCustomCacheControl } : null;
-  app.use(express.static(path.join(__dirname, '..', 'build'), cacheControl));
+  app.use(express.static(fileURLToPath(new URL('../build', import.meta.url), cacheControl)));
 }
 
 function setCustomCacheControl(res, path) {
@@ -83,6 +81,6 @@ function isOnionDomain(req) {
   return req.hostname === process.env.DOMAIN_ONION;
 }
 
-module.exports = {
+export default {
   init,
 };

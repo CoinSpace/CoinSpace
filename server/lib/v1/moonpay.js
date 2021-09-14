@@ -1,11 +1,10 @@
-'use strict';
+import axios from 'axios';
+import db from '../db.js';
 
-const axios = require('axios');
-const db = require('./db');
 const API_KEY = process.env.MOONPAY_API_KEY;
 
 function save(_id, data) {
-  const collection = db().collection('moonpay');
+  const collection = db.collection('moonpay');
   return collection.updateOne({ _id }, { $set: { data } }, { upsert: true });
 }
 
@@ -126,7 +125,7 @@ function getCountriesFromAPI() {
 }
 
 function getFromCache(id) {
-  const collection = db().collection('moonpay');
+  const collection = db.collection('moonpay');
   return collection
     .find({ _id: id })
     .limit(1)
@@ -137,7 +136,7 @@ function getFromCache(id) {
     });
 }
 
-module.exports = {
+export default {
   save,
   getCurrenciesFromAPI,
   getCountriesFromAPI,

@@ -1,6 +1,4 @@
-'use strict';
-
-const crypto = require('crypto');
+import crypto from 'crypto';
 
 function sign(urls) {
   return urls.map((url) => {
@@ -12,6 +10,6 @@ function sign(urls) {
   });
 }
 
-module.exports = {
+export default {
   sign,
 };

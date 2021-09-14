@@ -1,10 +1,8 @@
-'use strict';
-
-const db = require('./db');
-const crypto = require('crypto');
+import db from '../db.js';
+import crypto from 'crypto';
 
 function isExist(walletId) {
-  const collection = db().collection('users');
+  const collection = db.collection('users');
   return collection
     .find({ _id: walletId }, { projection: { _id: 1 } })
     .limit(1)
@@ -16,13 +14,13 @@ function isExist(walletId) {
 
 function remove(id) {
   return Promise.all([
-    db().collection('users').deleteOne({ _id: id }),
-    db().collection('details').deleteOne({ _id: id }),
+    db.collection('users').deleteOne({ _id: id }),
+    db.collection('details').deleteOne({ _id: id }),
   ]);
 }
 
 function getDetails(walletId) {
-  const collection = db().collection('details');
+  const collection = db.collection('details');
   return collection
     .find({ _id: walletId })
     .limit(1)
@@ -33,25 +31,26 @@ function getDetails(walletId) {
 }
 
 function saveDetails(walletId, data) {
-  const collection = db().collection('details');
-  return collection.updateOne({ _id: walletId }, { $set: { data } }, { upsert: true } ).then(() => {
+  const collection = db.collection('details');
+  return collection.updateOne({ _id: walletId }, { $set: { data } }, { upsert: true }).then(() => {
     return data;
   });
 }
 
 function setUsername(walletId, username) {
-  const collection = db().collection('users');
+  const collection = db.collection('users');
   return collection
     .find({ _id: walletId })
     .limit(1)
     .next().then((user) => {
-      if (!user) return Promise.reject({ error: 'error getting doc' });
-
+      if (!user) {
+        return Promise.reject({ error: 'error getting doc' });
+      }
       username = username.toLowerCase().replace(/[^a-z0-9-]/g, '').substr(0, 63);
       const usernameSha = crypto.createHash('sha1')
         .update(username + process.env.USERNAME_SALT)
         .digest('hex');
-      return db().collection('details').updateOne({ _id: user._id }, {
+      return db.collection('details').updateOne({ _id: user._id }, {
         $set: { username_sha: usernameSha },
       }, { upsert: true }).then(() => {
         return username;
@@ -64,7 +63,7 @@ function setUsername(walletId, username) {
     });
 }
 
-module.exports = {
+export default {
   isExist,
   remove,
   getDetails,

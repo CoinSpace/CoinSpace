@@ -1,10 +1,9 @@
-'use strict';
-
-const path = require('path');
-const express = require('express');
-const OpenApiValidator = require('express-openapi-validator');
-const { verifyReq, asyncWrapper } = require('./utils');
-const wallets = require('./wallets');
+import { fileURLToPath } from 'url';
+import express from 'express';
+import OpenApiValidator from 'express-openapi-validator';
+import { verifyReq, asyncWrapper } from '../utils.js';
+import wallets from '../wallets.js';
+import esmresolver from '../esmresolver.js';
 
 const router = express.Router();
 
@@ -16,10 +15,13 @@ router.use(asyncWrapper(async (req, res, next) => {
 }));
 
 router.use(OpenApiValidator.middleware({
-  apiSpec: path.join(__dirname, 'api.yaml'),
+  apiSpec: fileURLToPath(new URL('./api.yaml', import.meta.url)),
   // Validate responses only in dev environment
   validateResponses: process.env.NODE_ENV !== 'production',
-  operationHandlers: path.join(__dirname),
+  operationHandlers: {
+    basePath: fileURLToPath(new URL('.', import.meta.url)),
+    resolver: esmresolver,
+  },
   validateSecurity: {
     handlers: {
       walletSignature(req) {
@@ -38,4 +40,4 @@ router.use(OpenApiValidator.middleware({
   },
 }));
 
-module.exports = router;
+export default router;

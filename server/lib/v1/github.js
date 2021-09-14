@@ -1,11 +1,11 @@
-'use strict';
+import db from '../db.js';
+import semver from 'semver';
+import Axios from 'axios';
+import axiosRetry from 'axios-retry';
 
-const db = require('./db');
-const semver = require('semver');
-const axios = require('axios').create({
+const axios = Axios.create({
   timeout: 30000,
 });
-const axiosRetry = require('axios-retry');
 
 axiosRetry(axios, {
   retries: 3,
@@ -18,7 +18,6 @@ const { GH_TOKEN } = process.env;
 
 const TYPE_FILE = 'file';
 const TYPE_LINK = 'link';
-
 
 const platforms = [{
   // Web wallet
@@ -128,9 +127,8 @@ const platforms = [{
   };
 });
 
-
 function save(updates) {
-  const collection = db().collection('releases');
+  const collection = db.collection('releases');
   return Promise.all(updates.map((update) => {
     return collection.updateOne({
       distribution: update.distribution,
@@ -141,11 +139,11 @@ function save(updates) {
 }
 
 async function getUpdates() {
-  return db().collection('releases').find({}).toArray();
+  return db.collection('releases').find({}).toArray();
 }
 
 async function getUpdate(distribution, arch, app) {
-  return db().collection('releases').findOne({
+  return db.collection('releases').findOne({
     distribution,
     arch,
     app,
@@ -237,7 +235,7 @@ async function getReleasesContent(version) {
   });
 }
 
-module.exports = {
+export default {
   save,
   getLatest,
   getUpdate,

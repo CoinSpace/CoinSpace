@@ -1,8 +1,6 @@
-'use strict';
-
-const axios = require('axios');
-const createError = require('http-errors');
-const db = require('./v1/db');
+import axios from 'axios';
+import createError from 'http-errors';
+import db from './db.js';
 
 const CRYPTO = [
   'bitcoin',
@@ -41,7 +39,7 @@ async function estimatefee(cryptoId) {
 
 async function updateFees() {
   for (const id of CRYPTO) {
-    const item = await db().collection('fee')
+    const item = await db.collection('fee')
       .findOne({ _id: id });
     if (item && item.manual === true) {
       // Not update fee
@@ -50,7 +48,7 @@ async function updateFees() {
 
     const fee = await estimatefee(id);
     if (fee) {
-      await db().collection('fee')
+      await db.collection('fee')
         .updateOne({
           _id: id,
         }, {
@@ -67,7 +65,7 @@ async function getFees(cryptoId) {
   if (!CRYPTO.includes(cryptoId)) {
     throw createError(400, 'Coin fee is not supported');
   }
-  const fees = await db().collection('fee')
+  const fees = await db.collection('fee')
     .findOne({ _id: cryptoId });
   if (!fees) {
     throw createError(404, 'Coin fee was not found');
@@ -92,7 +90,7 @@ async function getFees(cryptoId) {
   return { items };
 }
 
-module.exports = {
+export default {
   updateFees,
   getFees,
 };

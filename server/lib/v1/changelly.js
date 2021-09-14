@@ -1,9 +1,6 @@
-'use strict';
-
-const axios = require('axios');
-const crypto = require('crypto');
-const Big = require('big.js');
-
+import axios from 'axios';
+import crypto from 'crypto';
+import Big from 'big.js';
 const URL = 'https://api.changelly.com';
 const {
   CHANGELLY_API_SECRET,
@@ -244,7 +241,7 @@ function request(method, params) {
   });
 }
 
-module.exports = {
+export default {
   getCoins,
   getMinAmount,
   getPairsParams,

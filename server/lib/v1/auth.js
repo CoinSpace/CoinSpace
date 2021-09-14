@@ -1,9 +1,6 @@
-'use strict';
-
-const db = require('./db');
-const account = require('./account');
-const crypto = require('crypto');
-
+import db from '../db.js';
+import account from './account.js';
+import crypto from 'crypto';
 function register(walletId, pin) {
   return account.isExist(walletId).then((userExist) => {
     if (!userExist) {
@@ -14,18 +11,20 @@ function register(walletId, pin) {
 }
 
 function login(walletId, pin) {
-  const collection = db().collection('users');
+  const collection = db.collection('users');
   return collection
     .find({ _id: walletId })
     .limit(1)
     .next().then((user) => {
-      if (!user) return Promise.reject({ error: 'user_deleted' });
+      if (!user) {
+        return Promise.reject({ error: 'user_deleted' });
+      }
       return verifyPin(user, pin);
     });
 }
 
 function createUser(walletId, pin) {
-  const collection = db().collection('users');
+  const collection = db.collection('users');
   const token = generateToken();
   const password = token + pin;
   const hashAndSalt = generatePasswordHash(password);
@@ -64,29 +63,31 @@ function verifyPin(user, pin) {
   }
 
   const counter = user.failed_attempts + 1;
-  if (counter >= 3) return deleteUser(user._id);
+  if (counter >= 3) {
+    return deleteUser(user._id);
+  }
   incrementFailCount(user._id);
   return Promise.reject({ error: 'auth_failed' });
 }
 
 function updateFailCount(id, counter) {
-  const collection = db().collection('users');
+  const collection = db.collection('users');
   return collection.updateOne({ _id: id }, { $set: { failed_attempts: counter } });
 }
 
 function incrementFailCount(id) {
-  const collection = db().collection('users');
+  const collection = db.collection('users');
   return collection.updateOne({ _id: id }, { $inc: { failed_attempts: 1 } });
 }
 
 function deleteUser(id) {
-  const collection = db().collection('users');
+  const collection = db.collection('users');
   return collection.deleteOne({ _id: id }).then(() => {
     return Promise.reject({ error: 'user_deleted' });
   });
 }
 
-module.exports = {
+export default {
   register,
   login,
 };

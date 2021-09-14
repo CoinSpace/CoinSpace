@@ -1,8 +1,6 @@
-'use strict';
-
-const createError = require('http-errors');
-const crypto = require('crypto');
-const db = require('../v1/db');
+import createError from 'http-errors';
+import crypto from 'crypto';
+import db from '../db.js';
 
 const SEARCH_RADIUS = 1000;
 const SEARCH_LIMIT = 15;
@@ -10,7 +8,7 @@ const COLLECTION = 'mecto';
 
 async function search(device, query) {
   const { lon, lat } = query;
-  const collection = db().collection(COLLECTION);
+  const collection = db.collection(COLLECTION);
 
   const docs = await collection.find({
     _id: { $ne: device._id },
@@ -44,7 +42,7 @@ async function save(device, body) {
     throw createError(400, 'Invalid username');
   }
 
-  await db().collection(COLLECTION).updateOne({ _id: device._id }, { $set: {
+  await db.collection(COLLECTION).updateOne({ _id: device._id }, { $set: {
     username,
     email,
     avatarIndex,
@@ -61,13 +59,13 @@ async function save(device, body) {
 }
 
 async function remove(device) {
-  const res = await db().collection(COLLECTION).deleteOne({ _id: device._id });
+  const res = await db.collection(COLLECTION).deleteOne({ _id: device._id });
   if (res.deletedCount !== 1) {
     throw createError(404, 'Unknown mecto');
   }
 }
 
-module.exports = {
+export default {
   search,
   save,
   remove,

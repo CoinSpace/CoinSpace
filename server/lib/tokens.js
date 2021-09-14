@@ -1,11 +1,9 @@
-'use strict';
-
-const db = require('./v1/db');
-const createError = require('http-errors');
-const axios = require('axios');
-const axiosRetry = require('axios-retry');
-const rateLimit = require('axios-rate-limit');
-const querystring = require('querystring');
+import db from './db.js';
+import createError from 'http-errors';
+import axios from 'axios';
+import axiosRetry from 'axios-retry';
+import rateLimit from 'axios-rate-limit';
+import querystring from 'querystring';
 
 const COLLECTION = 'tokens';
 const CURRENCIES = [
@@ -169,7 +167,7 @@ async function syncTokens() {
         if (_id === 'bitcoin-cash-sv') {
           _id = 'bitcoinsv';
         }
-        await db().collection(COLLECTION).updateOne({
+        await db.collection(COLLECTION).updateOne({
           _id,
         }, {
           $set: {
@@ -192,7 +190,9 @@ async function syncTokens() {
 
         const platforms = {};
         for (const platform of Object.keys(token.platforms)) {
-          if (!TOKEN_PLATFORMS.includes(platform)) continue;
+          if (!TOKEN_PLATFORMS.includes(platform)) {
+            continue;
+          }
           const address = token.platforms[platform].toLowerCase();
           const { data: info } = await coinspace[platform].get(`/token/${address}`)
             .catch((err) => {
@@ -226,7 +226,7 @@ async function syncTokens() {
             symbol: info.symbol,
           };
         }
-        await db().collection(COLLECTION).updateOne({
+        await db.collection(COLLECTION).updateOne({
           _id: token.id,
         }, {
           $set: {
@@ -260,7 +260,7 @@ async function updatePrices() {
   let page = 0;
   let tokens;
   do {
-    tokens = await db().collection(COLLECTION)
+    tokens = await db.collection(COLLECTION)
       .find({
         // 7 days ago
         synchronized_at: { $gte: new Date(Date.now() - (7 * 24 * 60 * 60 * 1000)) },
@@ -305,7 +305,7 @@ async function updatePrices() {
     }
 
     if (operations.length > 0) {
-      await db().collection(COLLECTION)
+      await db.collection(COLLECTION)
         .bulkWrite(operations, { ordered: false });
     }
 
@@ -315,14 +315,14 @@ async function updatePrices() {
   console.timeEnd('update prices');
 }
 
-async function getTokens(networks, limit=0) {
+async function getTokens(networks, limit = 0) {
   const query = {
     synchronized_at: { $gte: new Date(Date.now() - (7 * 24 * 60 * 60 * 1000)) },
     $or: networks.map((network) => {
       return { [`platforms.${network}`]: { $exists: true } };
     }),
   };
-  const tokens = await db().collection(COLLECTION)
+  const tokens = await db.collection(COLLECTION)
     .find(query, {
       limit,
       sort: {
@@ -340,7 +340,9 @@ async function getTokens(networks, limit=0) {
   const result = [];
   tokens.forEach((token) => {
     networks.forEach((platform) => {
-      if (!token.platforms[platform]) return;
+      if (!token.platforms[platform]) {
+        return;
+      }
       result.push({
         _id: token._id,
         name: token.name,
@@ -359,7 +361,7 @@ async function getTokens(networks, limit=0) {
 function getTicker(id) {
   if (id === 'bitcoin-cash') id = 'bitcoincash';
   if (id === 'bitcoin-sv') id = 'bitcoinsv';
-  return db().collection(COLLECTION)
+  return db.collection(COLLECTION)
     .findOne({
       _id: id,
     }, {
@@ -377,7 +379,7 @@ function getTicker(id) {
 }
 
 function getTickers(ids) {
-  return db().collection(COLLECTION)
+  return db.collection(COLLECTION)
     .find({
       _id: { $in: ids },
     }, {
@@ -390,7 +392,7 @@ function getTickers(ids) {
 
 // TODO: remove from here
 async function getTickersV3(ids) {
-  const tickers = await db().collection(COLLECTION)
+  const tickers = await db.collection(COLLECTION)
     .find({
       _id: { $in: ids.map((id) => {
         const asset = id.split('@')[0];
@@ -435,7 +437,7 @@ async function getFromCacheForAppleWatch() {
     litecoin: 'LTC',
     ethereum: 'ETH',
   };
-  return await db().collection(COLLECTION)
+  return await db.collection(COLLECTION)
     .find({ _id: { $in: Object.keys(tickers) } })
     .toArray()
     .then((docs) => {
@@ -447,7 +449,7 @@ async function getFromCacheForAppleWatch() {
     });
 }
 
-module.exports = {
+export default {
   syncTokens,
   getTokens,
   updatePrices,

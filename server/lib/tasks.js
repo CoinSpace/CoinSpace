@@ -1,11 +1,9 @@
-'use strict';
-
-const pForever = require('p-forever');
-const delay = require('delay');
-const fee = require('./fee');
-const moonpay = require('./v1//moonpay');
-const github = require('./v1//github');
-const tokens = require('./tokens');
+import pForever from 'p-forever';
+import delay from 'delay';
+import fee from './fee.js';
+import moonpay from './v1/moonpay.js';
+import github from './v1/github.js';
+import tokens from './tokens.js';
 
 function syncTokens(interval) {
   return pForever(async () => {
@@ -64,7 +62,7 @@ function cacheGithubReleases(interval) {
   }(), interval);
 }
 
-module.exports = {
+export default {
   syncTokens,
   updatePrices,
   cacheFees,

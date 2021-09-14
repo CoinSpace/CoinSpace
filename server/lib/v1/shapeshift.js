@@ -1,6 +1,5 @@
-'use strict';
+import axios from 'axios';
 
-const axios = require('axios');
 // eslint-disable-next-line max-len
 const Authorization = 'Basic ' + Buffer.from(process.env.SHAPESHIFT_CLIENT_ID + ':' + process.env.SHAPESHIFT_CLIENT_SECRET).toString('base64');
 
@@ -43,7 +42,7 @@ function getAccessToken(code) {
   });
 }
 
-module.exports = {
+export default {
   revokeToken,
   getAccessToken,
 };

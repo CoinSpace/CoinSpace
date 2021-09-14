@@ -1,19 +1,19 @@
-'use strict';
-
-const crypto = require('crypto');
-const createError = require('http-errors');
-const {
+import fs from 'fs/promises';
+import crypto from 'crypto';
+import createError from 'http-errors';
+import {
   generateAttestationOptions,
   verifyAttestationResponse,
   generateAssertionOptions,
   verifyAssertionResponse,
-} = require('@simplewebauthn/server');
-const db = require('../v1/db');
-const {
+} from '@simplewebauthn/server';
+import db from './db.js';
+import {
   generateChallenge,
   generateUser,
   mapAuthenticator,
-} = require('./utils');
+} from './utils.js';
+const pkg = JSON.parse(await fs.readFile(new URL('../../package.json', import.meta.url)));
 
 const COLLECTION = 'wallets';
 const MAX_FAILED_ATTEMPTS = 3;
@@ -22,7 +22,7 @@ const MAX_AUTHENTICATORS = 10;
 
 const url = new URL(process.env.SITE_URL);
 
-const RP_NAME = require('../../../package.json').description;
+const RP_NAME = pkg.description;
 const RP_ID = url.hostname;
 const ORIGIN = url.origin;
 
@@ -51,7 +51,7 @@ const fidoAlgorithmIDs = [
 
 
 async function register(walletId, deviceId, pinHash) {
-  const wallets = db().collection(COLLECTION);
+  const wallets = db.collection(COLLECTION);
 
   const publicToken = crypto.randomBytes(64).toString('hex');
   const privateToken = crypto.randomBytes(64).toString('hex');
@@ -102,7 +102,7 @@ async function pinVerify(device, pinHash, type) {
   if (device.pin_hash !== pinHash) {
     await _unsuccessfulAuth(device, type, 'pin');
   }
-  const wallets = db().collection(COLLECTION);
+  const wallets = db.collection(COLLECTION);
   await wallets.updateOne({
     'devices._id': device._id,
   }, {
@@ -140,7 +140,7 @@ async function platformVerify(device, body, type) {
   if (!verified) {
     await _unsuccessfulAuth(device, type, 'platform');
   }
-  const wallets = db().collection(COLLECTION);
+  const wallets = db.collection(COLLECTION);
   await wallets.updateOne({
     'devices._id': device._id,
   }, {
@@ -190,7 +190,7 @@ async function crossplatformVerify(device, body, type) {
   if (!verified) {
     await _unsuccessfulAuth(device, type, 'crossplatform');
   }
-  const wallets = db().collection(COLLECTION);
+  const wallets = db.collection(COLLECTION);
   await wallets.updateOne({
     'devices._id': device._id,
   }, {
@@ -243,7 +243,7 @@ async function platformAttestationVerify(device, body) {
   if (!verified) {
     throw createError(400, 'Attestation response not verified');
   }
-  const wallets = db().collection(COLLECTION);
+  const wallets = db.collection(COLLECTION);
   await wallets.updateOne({
     'devices._id': device._id,
   }, {
@@ -304,7 +304,7 @@ async function crossplatformAttestationVerify(device, body) {
   if (!verified) {
     throw createError(400, 'Attestation response not verified');
   }
-  const wallets = db().collection(COLLECTION);
+  const wallets = db.collection(COLLECTION);
   await wallets.updateOne({
     'devices._id': device._id,
   }, {
@@ -324,7 +324,7 @@ async function crossplatformAttestationVerify(device, body) {
 }
 
 async function removePlatformAuthenticator(device) {
-  const wallets = db().collection(COLLECTION);
+  const wallets = db.collection(COLLECTION);
   await wallets.updateOne({
     'devices._id': device._id,
   }, {
@@ -344,7 +344,7 @@ async function listCrossplatformAuthenticators(device) {
 }
 
 async function removeCrossplatformAuthenticator(device, credentialID) {
-  const wallets = db().collection(COLLECTION);
+  const wallets = db.collection(COLLECTION);
   await wallets.updateOne({
     'devices._id': device._id,
     'authenticators.credentialID': credentialID,
@@ -359,13 +359,13 @@ async function setSettings(device, data) {
     ...device.wallet.settings,
     ...data,
   };
-  await db().collection(COLLECTION)
+  await db.collection(COLLECTION)
     .updateOne({ _id: device.wallet._id }, { $set: { settings } });
   return settings;
 }
 
 async function setDetails(device, details) {
-  await db().collection(COLLECTION)
+  await db.collection(COLLECTION)
     .updateOne({ _id: device.wallet._id }, { $set: { details } });
   return details;
 }
@@ -376,7 +376,7 @@ async function setUsername(device, username) {
     .update(username + process.env.USERNAME_SALT)
     .digest('hex');
 
-  await db().collection(COLLECTION)
+  await db.collection(COLLECTION)
     .updateOne({ _id: device.wallet._id }, { $set: { username_sha: usernameSha } })
     .catch((err) => {
       if (err.name === 'MongoError' && err.code === 11000) {
@@ -388,7 +388,7 @@ async function setUsername(device, username) {
 }
 
 async function removeDevice(device) {
-  const wallets = db().collection(COLLECTION);
+  const wallets = db.collection(COLLECTION);
   const res = await wallets.updateOne({
     'devices._id': device._id,
   }, {
@@ -401,7 +401,7 @@ async function removeDevice(device) {
 }
 
 async function removeWallet(device) {
-  const wallets = db().collection(COLLECTION);
+  const wallets = db.collection(COLLECTION);
   const res = await wallets.removeOne({
     'devices._id': device._id,
   });
@@ -411,7 +411,7 @@ async function removeWallet(device) {
 }
 
 async function getDevice(deviceId) {
-  const wallets = db().collection(COLLECTION);
+  const wallets = db.collection(COLLECTION);
   const wallet = await wallets.findOne({
     'devices._id': deviceId,
   });
@@ -428,7 +428,7 @@ async function getDevice(deviceId) {
 // Internal
 
 async function _unsuccessfulAuth(device, tokenType, authType) {
-  const wallets = db().collection(COLLECTION);
+  const wallets = db.collection(COLLECTION);
   const attempt = (device.failed_attempts || {})[`${tokenType}_${authType}`] || 0;
 
   if (attempt + 1 >= MAX_FAILED_ATTEMPTS) {
@@ -448,9 +448,8 @@ async function _unsuccessfulAuth(device, tokenType, authType) {
     throw createError(401, 'Unauthorized device');
   }
 }
-
 async function _setChallenge(device, challenge, tokenType, authType) {
-  const wallets = db().collection(COLLECTION);
+  const wallets = db.collection(COLLECTION);
   await wallets.updateOne({
     'devices._id': device._id,
   }, {
@@ -458,7 +457,7 @@ async function _setChallenge(device, challenge, tokenType, authType) {
   });
 }
 
-module.exports = {
+export default {
   register,
   // PIN
   pinVerify,

@@ -1,11 +1,10 @@
-'use strict';
+import db from '../db.js';
+import crypto from 'crypto';
 
-const db = require('./db');
-const crypto = require('crypto');
 const SEARCH_RADIUS = 1000;
 
 function save(lat, lon, userInfo) {
-  return db().collection('details')
+  return db.collection('details')
     .find({ _id: userInfo.id }, { projection: { username_sha: 1 } })
     .limit(1)
     .next().then((details) => {
@@ -16,7 +15,7 @@ function save(lat, lon, userInfo) {
       if (hash !== details.username_sha) {
         return Promise.reject({ error: 'invalid_name' });
       }
-      return db().collection('mecto').updateOne({ _id: userInfo.id }, { $set: {
+      return db.collection('mecto').updateOne({ _id: userInfo.id }, { $set: {
         name: userInfo.name,
         email: userInfo.email,
         avatarIndex: userInfo.avatarIndex,
@@ -34,7 +33,7 @@ function save(lat, lon, userInfo) {
 
 function remove(id) {
   if (!id) return Promise.resolve();
-  const collection = db().collection('mecto');
+  const collection = db.collection('mecto');
   return collection.deleteOne({ _id: id });
 }
 
@@ -43,7 +42,7 @@ function search(lat, lon, userInfo) {
   if (['bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash', 'ethereum', 'ripple', 'stellar', 'eos', 'monero'].indexOf(userInfo.network) === -1) {
     return Promise.reject({ error: 'unsupported_network' });
   }
-  const collection = db().collection('mecto');
+  const collection = db.collection('mecto');
   return collection.find({
     _id: { $ne: userInfo.id },
     network: userInfo.network,
@@ -70,7 +69,7 @@ function search(lat, lon, userInfo) {
   });
 }
 
-module.exports = {
+export default {
   SEARCH_RADIUS,
   save,
   search,

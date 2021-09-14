@@ -1,7 +1,5 @@
-'use strict';
-
-const dns = require('dns');
-const retry = require('retry');
+import dns from 'dns';
+import retry from 'retry';
 
 function resolve(hostname, callback) {
   const prefix = 'btc';
@@ -39,6 +37,6 @@ function resolve(hostname, callback) {
   });
 }
 
-module.exports = {
+export default {
   resolve,
 };

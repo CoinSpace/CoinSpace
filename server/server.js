@@ -1,14 +1,13 @@
-'use strict';
+import express from 'express';
+import Sentry from '@sentry/node';
+import Integrations from '@sentry/integrations';
+import middleware from './middleware.js';
+import { isHttpError } from 'http-errors';
 
-const express = require('express');
-const Sentry = require('@sentry/node');
-const Integrations = require('@sentry/integrations');
-const middleware = require('./middleware');
-const { isHttpError } = require('http-errors');
+import apiV1 from './lib/v1/api.js';
+import apiV2 from './lib/v2/api.js';
+import apiV3 from './lib/v3/api.js';
 
-const apiV1 = require('./lib/v1/api');
-const apiV2 = require('./lib/v2/api');
-const apiV3 = require('./lib/v3/api');
 const app = express();
 
 Sentry.init({
@@ -22,8 +21,6 @@ Sentry.init({
   ],
 });
 app.use(Sentry.Handlers.requestHandler());
-
-const db = require('./lib/v1/db');
 
 middleware.init(app);
 
@@ -61,12 +58,8 @@ app.use((req, res, next) => {
   res.status(404).send({ error: 'Oops! page not found.' });
 });
 
-db().then(() => {
-  const port = process.env.PORT || 8080;
-  const server = app.listen(port, () => {
-    console.info('server listening on http://localhost:' + server.address().port);
-    server.timeout = 30000; // 30 sec
-  });
-}).catch((error) => {
-  console.error('error', error);
+const port = process.env.PORT || 8080;
+const server = app.listen(port, () => {
+  console.info('server listening on http://localhost:' + server.address().port);
+  server.timeout = 30000; // 30 sec
 });

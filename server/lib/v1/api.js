@@ -1,19 +1,16 @@
-'use strict';
-
-const express = require('express');
-
-const auth = require('./auth');
-const account = require('./account');
-const geo = require('./geo');
-const openalias = require('./openalias');
-const fee = require('../fee');
-const csFee = require('../csFee');
-const tokens = require('../tokens');
-const shapeshift = require('./shapeshift');
-const changelly = require('./changelly');
-const moonpay = require('./moonpay');
-const semver = require('semver');
-const github = require('./github');
+import express from 'express';
+import auth from './auth.js';
+import account from './account.js';
+import geo from './geo.js';
+import openalias from './openalias.js';
+import fee from '../fee.js';
+import csFee from '../csFee.js';
+import tokens from '../tokens.js';
+import shapeshift from './shapeshift.js';
+import changelly from './changelly.js';
+import moonpay from './moonpay.js';
+import semver from 'semver';
+import github from './github.js';
 
 const router = express.Router();
 
@@ -23,7 +20,9 @@ router.post('/register', validateAuthParams, (req, res) => {
     console.log('registered wallet %s', walletId);
     res.status(200).send(token);
   }).catch((err) => {
-    if (!['auth_failed', 'user_deleted'].includes(err.error)) console.error('error', err);
+    if (!['auth_failed', 'user_deleted'].includes(err.error)) {
+      console.error('error', err);
+    }
     return res.status(400).send(err);
   });
 });
@@ -34,14 +33,18 @@ router.post('/login', validateAuthParams, (req, res) => {
     console.log('authenticated wallet %s', walletId);
     res.status(200).send(token);
   }).catch((err) => {
-    if (!['auth_failed', 'user_deleted'].includes(err.error)) console.error('error', err);
+    if (!['auth_failed', 'user_deleted'].includes(err.error)) {
+      console.error('error', err);
+    }
     res.status(400).send(err);
   });
 });
 
 router.get('/exist', (req, res) => {
   const walletId = req.query.wallet_id;
-  if (!walletId) return res.status(400).json({ error: 'Bad request' });
+  if (!walletId) {
+    return res.status(400).json({ error: 'Bad request' });
+  }
   account.isExist(walletId).then((userExist) => {
     res.status(200).send(userExist);
   }).catch((err) => {
@@ -51,9 +54,13 @@ router.get('/exist', (req, res) => {
 
 router.get('/openalias', (req, res) => {
   const { hostname } = req.query;
-  if (!hostname) return res.status(400).json({ error: 'Bad request' });
+  if (!hostname) {
+    return res.status(400).json({ error: 'Bad request' });
+  }
   openalias.resolve(hostname, (err, address, name) => {
-    if (err) return res.status(400).send(err);
+    if (err) {
+      return res.status(400).send(err);
+    }
     res.status(200).send({ address, name });
   });
 });
@@ -61,7 +68,9 @@ router.get('/openalias', (req, res) => {
 router.put('/username', (req, res) => {
   const { id } = req.body;
   const { username } = req.body;
-  if (!username) return res.status(400).json({ error: 'Bad request' });
+  if (!username) {
+    return res.status(400).json({ error: 'Bad request' });
+  }
   account.setUsername(id, username).then((username) => {
     res.status(200).send({ username });
   }).catch((err) => {
@@ -78,7 +87,9 @@ router.get('/details', (req, res) => {
 });
 
 router.put('/details', (req, res) => {
-  if (!req.body.data) return res.status(400).json({ error: 'Bad request' });
+  if (!req.body.data) {
+    return res.status(400).json({ error: 'Bad request' });
+  }
   account.saveDetails(req.body.id, req.body.data).then((details) => {
     res.status(200).json(details);
   }).catch((err) => {
@@ -172,7 +183,9 @@ router.get('/changelly/getCoins', (req, res) => {
 router.get('/changelly/getMinAmount', (req, res) => {
   const from = req.query.from || '';
   const to = req.query.to || '';
-  if (!from || !to) return res.status(400).json({ error: 'Bad request' });
+  if (!from || !to) {
+    return res.status(400).json({ error: 'Bad request' });
+  }
   changelly.getMinAmount(from, to).then((data) => {
     res.status(200).send(data);
   }).catch((err) => {
@@ -183,7 +196,9 @@ router.get('/changelly/getMinAmount', (req, res) => {
 router.get('/changelly/getPairsParams', (req, res) => {
   const from = req.query.from || '';
   const to = req.query.to || '';
-  if (!from || !to) return res.status(400).json({ error: 'Bad request' });
+  if (!from || !to) {
+    return res.status(400).json({ error: 'Bad request' });
+  }
   changelly.getPairsParams(from, to).then((data) => {
     res.status(200).send(data);
   }).catch((err) => {
@@ -195,7 +210,9 @@ router.get('/changelly/estimate', (req, res) => {
   const from = req.query.from || '';
   const to = req.query.to || '';
   const amount = req.query.amount || 0;
-  if (!from || !to) return res.status(400).json({ error: 'Bad request' });
+  if (!from || !to) {
+    return res.status(400).json({ error: 'Bad request' });
+  }
   changelly.estimate(from, to, amount).then((data) => {
     res.status(200).send(data);
   }).catch((err) => {
@@ -217,7 +234,9 @@ router.post('/changelly/createTransaction', (req, res) => {
   const { amount } = req.body;
   const { address } = req.body;
   const { refundAddress } = req.body;
-  if (!from || !to || !amount || !address) return res.status(400).json({ error: 'Bad request' });
+  if (!from || !to || !amount || !address) {
+    return res.status(400).json({ error: 'Bad request' });
+  }
   changelly.createTransaction(from, to, amount, address, refundAddress).then((data) => {
     res.status(200).send(data);
   }).catch((err) => {
@@ -254,7 +273,9 @@ router.get('/moonpay/fiat', (req, res) => {
 });
 
 router.get('/moonpay/countries', (req, res) => {
-  if (!['document', 'allowed'].includes(req.query.type)) return res.status(400).json({ error: 'Bad request' });
+  if (!['document', 'allowed'].includes(req.query.type)) {
+    return res.status(400).json({ error: 'Bad request' });
+  }
   moonpay.getFromCache('countries_' + req.query.type).then((data) => {
     res.status(200).send(data);
   }).catch((err) => {
@@ -265,7 +286,9 @@ router.get('/moonpay/countries', (req, res) => {
 router.get('/moonpay/redirectURL', (req, res) => {
   const { buildType } = req.query;
   const transactionId = req.query.transactionId || '';
-  if (!['web', 'phonegap', 'electron'].includes(buildType)) return res.status(400).send('Bad request');
+  if (!['web', 'phonegap', 'electron'].includes(buildType)) {
+    return res.status(400).send('Bad request');
+  }
   res.render('moonpay', { transactionId, buildType });
 });
 
@@ -352,4 +375,4 @@ function validatePin(pin) {
   return pin != undefined && pin.match(/^\d{4}$/);
 }
 
-module.exports = router;
+export default router;

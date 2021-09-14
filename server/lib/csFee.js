@@ -1,9 +1,8 @@
-'use strict';
+import createError from 'http-errors';
+import db from './db.js';
+import tokens from './tokens.js';
+import Big from 'big.js';
 
-const createError = require('http-errors');
-const db = require('./v1/db');
-const tokens = require('./tokens');
-const Big = require('big.js');
 
 const CRYPTO = [
   'bitcoin',
@@ -21,7 +20,7 @@ async function getCsFee(cryptoId) {
   }
 
   const ticker = await tokens.getTicker(cryptoId);
-  const csFee = await db().collection('cs_fee')
+  const csFee = await db.collection('cs_fee')
     .findOne({ _id: cryptoId });
 
   if (!csFee) {
@@ -41,6 +40,6 @@ async function getCsFee(cryptoId) {
   };
 }
 
-module.exports = {
+export default {
   getCsFee,
 };
