@@ -25,12 +25,12 @@ const FACTORS = {
     mBTC: 1000,
     μBTC: 1000000,
   },
-  bitcoincash: {
+  'bitcoin-cash': {
     BCH: 1,
     mBCH: 1000,
     μBCH: 1000000,
   },
-  bitcoinsv: {
+  'bitcoin-sv': {
     BSV: 1,
     mBSV: 1000,
     μBSV: 1000000,
