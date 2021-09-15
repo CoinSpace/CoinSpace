@@ -40,7 +40,6 @@ import ticker from 'lib/ticker-api';
 import convert from 'lib/convert';
 import details from 'lib/wallet/details';
 import settings from 'lib/wallet/settings';
-import bchaddr from 'bchaddrjs';
 
 const state = {
   wallet: null,
@@ -348,14 +347,11 @@ export function getDestinationInfo(to) {
 
 export function setToAlias(data) {
   if (state.wallet.crypto.platform !== 'bitcoin-cash') return;
-  try {
-    const legacy = bchaddr.toLegacyAddress(data.to);
-    if (legacy !== data.to) {
-      data.alias = data.to;
-      data.to = legacy;
-    }
-  // eslint-disable-next-line
-  } catch (e) {}
+  const legacy = state.wallet.toLegacyAddress(data.to);
+  if (legacy && legacy !== data.to) {
+    data.alias = data.to;
+    data.to = legacy;
+  }
 }
 
 async function migrateLegacyWallet(pin) {
