@@ -7,10 +7,10 @@ import crypto from 'crypto';
 import encryption from 'lib/encryption';
 import request from 'lib/request';
 import Storage from 'lib/storage';
-import cryptoDb from 'lib/crypto-db';
 import { init as initCrypto } from 'lib/crypto';
 import { unlock, lock } from 'lib/wallet/security';
 
+import Cache from './cache';
 import CsWallet from '@coinspace/cs-wallet';
 import EthereumWallet from '@coinspace/cs-ethereum-wallet';
 import BinanceSmartChainWallet from '@coinspace/cs-binance-smart-chain-wallet';
@@ -18,6 +18,19 @@ import RippleWallet from '@coinspace/cs-ripple-wallet';
 import StellarWallet from '@coinspace/cs-stellar-wallet';
 import EOSWallet from '@coinspace/cs-eos-wallet';
 import MoneroWallet from '@coinspace/cs-monero-wallet';
+
+import bitcoin from '@coinspace/crypto-db/crypto/bitcoin@bitcoin.json';
+import litecoin from '@coinspace/crypto-db/crypto/litecoin@litecoin.json';
+import dash from '@coinspace/crypto-db/crypto/dash@dash.json';
+import bitcoinCash from '@coinspace/crypto-db/crypto/bitcoin-cash@bitcoin-cash.json';
+import bitcoinSv from '@coinspace/crypto-db/crypto/bitcoin-sv@bitcoin-sv.json';
+import ethereum from '@coinspace/crypto-db/crypto/ethereum@ethereum.json';
+import dogecoin from '@coinspace/crypto-db/crypto/dogecoin@dogecoin.json';
+import binanceSmartChain from '@coinspace/crypto-db/crypto/binance-smart-chain@binance-smart-chain.json';
+import xrp from '@coinspace/crypto-db/crypto/xrp@ripple.json';
+import stellar from '@coinspace/crypto-db/crypto/stellar@stellar.json';
+import eos from '@coinspace/crypto-db/crypto/eos@eos.json';
+import monero from '@coinspace/crypto-db/crypto/monero@monero.json';
 
 import { eddsa } from 'elliptic';
 
@@ -34,19 +47,19 @@ const state = {
   wallets: {},
 };
 export const walletCoins = [
-  'bitcoin@bitcoin',
-  'bitcoin-cash@bitcoin-cash',
-  'bitcoin-sv@bitcoin-sv',
-  'litecoin@litecoin',
-  'ethereum@ethereum',
-  'xrp@ripple',
-  'stellar@stellar',
-  'eos@eos',
-  'dogecoin@dogecoin',
-  'dash@dash',
-  'monero@monero',
-  'binance-smart-chain@binance-smart-chain',
-].map((id) => cryptoDb.find((item) => item._id === id));
+  bitcoin,
+  bitcoinCash,
+  bitcoinSv,
+  litecoin,
+  ethereum,
+  xrp,
+  stellar,
+  eos,
+  dogecoin,
+  dash,
+  monero,
+  binanceSmartChain,
+];
 
 const Wallet = {
   bitcoin: CsWallet,
@@ -188,10 +201,11 @@ export async function initWallet(seed) {
   }
 }
 
-// TODO: fix it
 function getExtraOptions(crypto) {
   const options = {
     useTestNetwork: process.env.COIN_NETWORK === 'regtest',
+    cache: new Cache(crypto),
+    crypto,
   };
 
   if (crypto.platform === 'bitcoin') {
@@ -219,10 +233,6 @@ function getExtraOptions(crypto) {
     options.apiNode = process.env.API_BSC_URL;
     options.platformCrypto = walletCoins.find((item) => item._id === 'binance-smart-chain@binance-smart-chain');
   } else if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'].includes(crypto.platform)) {
-    const addressType = details.get(crypto.platform + '.addressType');
-    if (addressType) {
-      options.addressType = addressType;
-    }
     options.minConf = 3;
     if (crypto.platform === 'bitcoin-cash') {
       options.minConf = 0;
@@ -248,10 +258,6 @@ function getExtraOptions(crypto) {
   } else if (crypto.platform === 'eos') {
     options.accountName = details.get('eosAccountName') || '';
   } else if (crypto.platform === 'monero') {
-    const addressType = details.get(crypto.platform + '.addressType');
-    if (addressType) {
-      options.addressType = addressType;
-    }
     if (process.env.BUILD_TYPE === 'phonegap') {
       options.wasm = (new URL('@coinspace/monero-core-js/build/MoneroCoreJS.wasm', import.meta.url)).href;
     } else {
@@ -374,7 +380,6 @@ async function loginWithPinLegacy(pin) {
 function initWalletWithSeed(crypto, seed) {
   const wallet = new Wallet[crypto.platform]({
     seed,
-    crypto,
     ...getExtraOptions(crypto),
   });
   LS.setPublicKey(wallet, seeds.get('public'));
@@ -386,7 +391,6 @@ function initWalletWithPublicKey(crypto) {
   const publicKey = LS.getPublicKey(crypto.platform, seeds.get('public'));
   const wallet = new Wallet[crypto.platform]({
     publicKey,
-    crypto,
     ...getExtraOptions(crypto),
   });
   state.wallets[crypto._id] = wallet;

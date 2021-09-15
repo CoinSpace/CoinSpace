@@ -39,6 +39,18 @@ function setDetailsKey(detailsKey) {
   localStorage.setItem('_cs_details_key', detailsKey);
 }
 
+function getCache(crypto, token) {
+  return JSON.parse(encryption.decrypt(localStorage.getItem(`_cs_cache_${crypto._id}`), token));
+}
+
+function hasCache(crypto) {
+  return !!localStorage.getItem(`_cs_cache_${crypto._id}`);
+}
+
+function setCache(crypto, cache, token) {
+  localStorage.setItem(`_cs_cache_${crypto._id}`, encryption.encrypt(JSON.stringify(cache), token));
+}
+
 function hasPublicKey(platform) {
   return !!localStorage.getItem(`_cs_public_key_${platform}`);
 }
@@ -134,5 +146,8 @@ export default {
   reset,
   isFidoTouchIdEnabled,
   setFidoTouchIdEnabled,
+  getCache,
+  setCache,
+  hasCache,
   migratePublicKeys,
 };

@@ -70,7 +70,6 @@ export default function(el) {
     showAddress();
   });
   emitter.on('tx-sent', showAddress);
-  emitter.on('change-address-type', showAddress);
 
   ractive.on('before-show', () => {
     ractive.set('isMonero', getWallet().crypto.platform === 'monero');
@@ -79,12 +78,8 @@ export default function(el) {
   ractive.on('change-address-type', () => {
     const wallet = getWallet();
     const addressType = ractive.get('addressType');
-    details.set(wallet.crypto.platform + '.addressType', addressType)
-      .then(() => {
-        wallet.addressType = addressType;
-        emitter.emit('change-address-type');
-      })
-      .catch(console.error);
+    wallet.addressType = addressType;
+    showAddress();
   });
 
   ractive.on('toggle-broadcast', () => {

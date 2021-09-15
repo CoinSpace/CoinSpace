@@ -4,8 +4,7 @@ import { randAvatarIndex } from 'lib/avatar';
 import request from 'lib/request';
 import LS from './localStorage';
 import seeds from './seeds';
-import cryptoDb from 'lib/crypto-db';
-const tetherToken = cryptoDb.find((item) => item._id === 'tether@ethereum');
+import tetherToken from '@coinspace/crypto-db/crypto/tether@ethereum.json';
 
 const state = {
   details: null,
