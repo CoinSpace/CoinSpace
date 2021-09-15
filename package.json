@@ -60,7 +60,6 @@
     "@sentry/browser": "^6.10.0",
     "@sentry/cli": "^1.67.2",
     "@simplewebauthn/browser": "^1.0.0",
-    "ajv": "^5.2.2",
     "assert": "^2.0.0",
     "autoprefixer": "^10.2.5",
     "babel-loader": "^8.2.2",
