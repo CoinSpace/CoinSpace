@@ -4,6 +4,18 @@ import fee from './fee.js';
 import moonpay from './v1/moonpay.js';
 import github from './v1/github.js';
 import tokens from './tokens.js';
+import cryptos from './cryptos.js';
+
+function cryptosSync() {
+  return cryptos.sync();
+}
+
+function cryptosUpdatePrices(interval) {
+  return pForever(async () => {
+    await cryptos.updatePrices().catch(console.error);
+    await delay(interval);
+  });
+}
 
 function syncTokens(interval) {
   return pForever(async () => {
@@ -63,6 +75,8 @@ function cacheGithubReleases(interval) {
 }
 
 export default {
+  cryptosSync,
+  cryptosUpdatePrices,
   syncTokens,
   updatePrices,
   cacheFees,
