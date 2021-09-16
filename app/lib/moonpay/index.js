@@ -73,6 +73,7 @@ function getBuyUrl(currencyCode, walletAddress) {
   const params = {
     currencyCode,
     walletAddress,
+    enableRecurringBuys: true,
     enabledPaymentMethods: [
       'credit_debit_card',
       'apple_pay',
