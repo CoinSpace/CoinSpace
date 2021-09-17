@@ -2,6 +2,7 @@ import _ from 'lodash';
 import Fuse from 'fuse.js/dist/fuse.basic.common.js';
 import request from 'lib/request';
 import details from 'lib/wallet/details';
+import LS from 'lib/wallet/localStorage';
 
 let cache;
 let all;
@@ -30,9 +31,16 @@ export function init() {
           }
           const platform = walletToken.platform || walletToken.network;
           const current = getTokenByAddress(walletToken.address, platform);
-          if (current) return current;
+          if (current) {
+            LS.renameTokenId(walletToken._id, current._id);
+            return current;
+          };
+          const _id = `${walletToken.address}@${platform}`;
+          if (walletToken._id !== _id) {
+            LS.renameTokenId(walletToken._id, _id);
+          }
           return {
-            _id: `${walletToken.address}@${platform}`,
+            _id,
             platform,
             type: 'token',
             name: walletToken.name,

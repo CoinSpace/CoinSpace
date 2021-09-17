@@ -114,6 +114,7 @@ export default function(el) {
         modal.set('onDismiss', () => {
           ractive.splice('cryptoTokens', rindex, 1);
           unsetWallet(token);
+          LS.unsetCache(token);
         });
         modal.fire('cancel');
       }).catch((err) => {

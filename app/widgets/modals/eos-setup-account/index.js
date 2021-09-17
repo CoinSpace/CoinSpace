@@ -1,7 +1,6 @@
 import Ractive from 'widgets/modals/base';
 import { getWallet } from 'lib/wallet';
 import { initWallet } from 'lib/wallet';
-import details from 'lib/wallet/details';
 import { showError, showSuccess } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
 import emitter from 'lib/emitter';
@@ -33,14 +32,12 @@ function open() {
         ractive.set('price', result.price + ' EOS');
         ractive.set('memo', result.memo);
       } else {
-        details.set('eosAccountName', accountName).then(() => {
-          showSuccess({
-            el: ractive.el,
-            message: translate('Account has been successfully set up'),
-            fadeInDuration: 0,
-          });
-          syncWallet();
+        showSuccess({
+          el: ractive.el,
+          message: translate('Account has been successfully set up'),
+          fadeInDuration: 0,
         });
+        syncWallet();
       }
     }).catch((err) => {
       ractive.set('isLoading', false);

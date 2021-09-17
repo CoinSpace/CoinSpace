@@ -163,10 +163,10 @@ export async function initWallet(seed) {
   const walletTokens = details.get('tokens');
   const all = [...walletCoins, ...walletTokens];
 
-  let defaultCryptoId = localStorage.getItem('_cs_crypto_id') || 'bitcoin@bitcoin';
+  let defaultCryptoId = LS.getCryptoId() || 'bitcoin@bitcoin';
   if (!all.find((item) => item._id === defaultCryptoId && LS.hasPublicKey(item.platform))) {
     defaultCryptoId = 'bitcoin@bitcoin';
-    localStorage.setItem('_cs_crypto_id', defaultCryptoId);
+    LS.setCryptoId(defaultCryptoId);
   }
 
   for (const crypto of all) {
@@ -174,6 +174,7 @@ export async function initWallet(seed) {
       initWalletWithSeed(crypto, seed);
     } else {
       if (!LS.hasPublicKey(crypto.platform)) continue;
+      if (state.wallets[crypto._id]) continue;
       initWalletWithPublicKey(crypto);
     }
   }
@@ -255,7 +256,7 @@ function getExtraOptions(crypto) {
       }).catch(console.error);
     };
   } else if (crypto.platform === 'eos') {
-    options.accountName = details.get('eosAccountName') || '';
+    options.storage = new Storage(process.env.SITE_URL, 'eos', LS.getDetailsKey());
   } else if (crypto.platform === 'monero') {
     if (process.env.BUILD_TYPE === 'phonegap') {
       options.wasm = (new URL('@coinspace/monero-core-js/build/MoneroCoreJS.wasm', import.meta.url)).href;
@@ -329,7 +330,7 @@ export function switchWallet(crypto) {
   if (!state.wallets[crypto._id]) {
     initWalletWithPublicKey(crypto);
   }
-  localStorage.setItem('_cs_crypto_id', crypto._id);
+  LS.setCryptoId(crypto._id);
   state.wallet = state.wallets[crypto._id];
 }
 

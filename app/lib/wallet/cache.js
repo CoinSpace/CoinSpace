@@ -3,19 +3,19 @@ import seeds from './seeds';
 
 export default class Cache {
   constructor(crypto) {
-    this.data = {};
+    this.cache = {};
     if (LS.hasCache(crypto)) {
-      this.data = LS.getCache(crypto, seeds.get('public'));
+      this.cache = LS.getCache(crypto, seeds.get('public'));
     } else {
-      LS.setCache(crypto, this.data, seeds.get('public'));
+      LS.setCache(crypto, this.cache, seeds.get('public'));
     }
     this.crypto = crypto;
   }
   get(key) {
-    return this.data[key];
+    return this.cache[key];
   }
   set(key, value) {
-    this.data[key] = value;
-    LS.setCache(this.crypto, this.data, seeds.get('public'));
+    this.cache[key] = value;
+    LS.setCache(this.crypto, this.cache, seeds.get('public'));
   }
 }

@@ -39,6 +39,14 @@ function setDetailsKey(detailsKey) {
   localStorage.setItem('_cs_details_key', detailsKey);
 }
 
+function getCryptoId() {
+  return localStorage.getItem('_cs_crypto_id');
+}
+
+function setCryptoId(cryptoId) {
+  localStorage.setItem('_cs_crypto_id', cryptoId);
+}
+
 function getCache(crypto, token) {
   return JSON.parse(encryption.decrypt(localStorage.getItem(`_cs_cache_${crypto._id}`), token));
 }
@@ -49,6 +57,10 @@ function hasCache(crypto) {
 
 function setCache(crypto, cache, token) {
   localStorage.setItem(`_cs_cache_${crypto._id}`, encryption.encrypt(JSON.stringify(cache), token));
+}
+
+function unsetCache(crypto) {
+  localStorage.removeItem(`_cs_cache_${crypto._id}`);
 }
 
 function hasPublicKey(platform) {
@@ -75,6 +87,18 @@ function migratePublicKeys() {
       localStorage.removeItem(`_cs_public_key_${from}`);
     }
   });
+}
+
+function renameTokenId(idFrom, idTo) {
+  if (!idFrom) return;
+  if (!!localStorage.getItem(`_cs_cache_${idFrom}`)) {
+    localStorage.setItem(`_cs_cache_${idTo}`, localStorage.getItem(`_cs_cache_${idFrom}`));
+    localStorage.removeItem(`_cs_cache_${idFrom}`);
+  }
+  const cryptoId = getCryptoId();
+  if (cryptoId && cryptoId === idFrom) {
+    setCryptoId(idTo);
+  }
 }
 
 // DEPRECATED
@@ -140,6 +164,8 @@ export default {
   setPinKey,
   getDetailsKey,
   setDetailsKey,
+  getCryptoId,
+  setCryptoId,
   hasPublicKey,
   getPublicKey,
   setPublicKey,
@@ -148,6 +174,8 @@ export default {
   setFidoTouchIdEnabled,
   getCache,
   setCache,
+  unsetCache,
   hasCache,
   migratePublicKeys,
+  renameTokenId,
 };
