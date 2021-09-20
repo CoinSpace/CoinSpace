@@ -64,19 +64,45 @@ paths:
                 $ref: '#/components/schemas/TickerList'
         default:
           $ref: '#/components/responses/GeneralError'
+  /fees:
+    get:
+      x-eov-operation-id: getFees
+      x-eov-operation-handler: handlers
+      description: Get transaction fees for coin
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cryptoId'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Fees for coin
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/FeeList'
+        default:
+          $ref: '#/components/responses/GeneralError'
 
 components:
   schemas:
     Hex64String:
       type: string
       pattern: "^[a-f0-9]{64}$"
+    CryptoId:
+      type: string
+      pattern: '^.+@.+$'
+    CryptoIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CryptoId'
     CryptoList:
       type: array
       items:
         type: object
         properties:
           _id:
-            type: string
+            $ref: '#/components/schemas/CryptoId'
           platform:
             type: string
           symbol:
@@ -109,13 +135,25 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Ticker'
-    CryptoId:
-      type: string
-      pattern: '^.+@.+$'
-    CryptoIdList:
-      type: array
-      items:
-        $ref: '#/components/schemas/CryptoId'
+    Fee:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: number
+      required:
+        - name
+        - value
+    FeeList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fee'
+      required:
+        - items
   parameters:
     deviceId:
       in: query

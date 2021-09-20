@@ -107,8 +107,10 @@ router.delete('/account', (req, res) => {
 });
 
 router.get('/fees', (req, res) => {
-  const network = req.query.network || 'bitcoin';
-  fee.getFees(network).then((fees) => {
+  let network = req.query.network || 'bitcoin';
+  if (network === 'bitcoincash') network = 'bitcoin-cash';
+  if (network === 'bitcoinsv') network = 'bitcoin-sv';
+  fee.getFees(`${network}@${network}`).then((fees) => {
     res.status(200).send(fees);
   }).catch((err) => {
     res.status(400).send(err);

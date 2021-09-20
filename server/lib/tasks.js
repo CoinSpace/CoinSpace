@@ -17,7 +17,6 @@ function cryptosUpdatePrices(interval) {
   });
 }
 
-
 function cryptosUpdateRank(interval) {
   return pForever(async () => {
     await cryptos.updateRank().catch(console.error);

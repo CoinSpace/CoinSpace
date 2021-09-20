@@ -1,5 +1,6 @@
 import createError from 'http-errors';
 import cryptos from '../cryptos.js';
+import fee from '../fee.js';
 
 export async function qwe(req, res) {
   return res.status(200).send('ok');
@@ -21,4 +22,9 @@ export async function getTicker(req, res) {
 export async function getTickers(req, res) {
   const tickers = await cryptos.getTickers(req.query.crypto);
   res.status(200).send(tickers);
+}
+
+export async function getFees(req, res) {
+  const fees = await fee.getFees(req.query.crypto);
+  res.status(200).send(fees);
 }

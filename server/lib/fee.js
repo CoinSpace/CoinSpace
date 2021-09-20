@@ -2,22 +2,15 @@ import axios from 'axios';
 import createError from 'http-errors';
 import db from './db.js';
 
-const CRYPTO = [
-  'bitcoin',
-  'bitcoin-cash',
-  'bitcoin-sv',
-  'litecoin',
-  'dogecoin',
-  'dash',
-];
 const API = {
-  bitcoin: process.env.API_BTC_URL,
-  'bitcoin-cash': process.env.API_BCH_URL,
-  'bitcoin-sv': process.env.API_BSV_URL,
-  litecoin: process.env.API_LTC_URL,
-  dogecoin: process.env.API_DOGE_URL,
-  dash: process.env.API_DASH_URL,
+  'bitcoin@bitcoin': process.env.API_BTC_URL,
+  'bitcoin-cash@bitcoin-cash': process.env.API_BCH_URL,
+  'bitcoin-sv@bitcoin-sv': process.env.API_BSV_URL,
+  'litecoin@litecoin': process.env.API_LTC_URL,
+  'dogecoin@dogecoin': process.env.API_DOGE_URL,
+  'dash@dash': process.env.API_DASH_URL,
 };
+const CRYPTO = Object.keys(API);
 
 function coinPerKilobyte2satPerByte(bitcoinPerKilobyte) {
   return Math.round(bitcoinPerKilobyte * 1e8 / 1e3);

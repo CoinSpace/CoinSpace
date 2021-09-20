@@ -241,7 +241,7 @@ export async function getTickers(req, res) {
 }
 
 export async function getFees(req, res) {
-  const fees = await fee.getFees(req.query.crypto);
+  const fees = await fee.getFees(`${req.query.crypto}@${req.query.crypto}`);
   res.status(200).send(fees);
 }
 
