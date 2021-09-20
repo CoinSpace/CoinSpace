@@ -1,16 +1,33 @@
+import bitcoin from '@coinspace/crypto-db/crypto/bitcoin@bitcoin.json';
+import litecoin from '@coinspace/crypto-db/crypto/litecoin@litecoin.json';
+import dash from '@coinspace/crypto-db/crypto/dash@dash.json';
+import bitcoinCash from '@coinspace/crypto-db/crypto/bitcoin-cash@bitcoin-cash.json';
+import bitcoinSv from '@coinspace/crypto-db/crypto/bitcoin-sv@bitcoin-sv.json';
+import ethereum from '@coinspace/crypto-db/crypto/ethereum@ethereum.json';
+import dogecoin from '@coinspace/crypto-db/crypto/dogecoin@dogecoin.json';
+import xrp from '@coinspace/crypto-db/crypto/xrp@ripple.json';
+import stellar from '@coinspace/crypto-db/crypto/stellar@stellar.json';
+import eos from '@coinspace/crypto-db/crypto/eos@eos.json';
+import monero from '@coinspace/crypto-db/crypto/monero@monero.json';
+
 const cryptoSchemes = [
-  { scheme: 'bitcoin', cryptoId: 'bitcoin@bitcoin' },
-  { scheme: 'bitcoincash', cryptoId: 'bitcoin-cash@bitcoin-cash' },
-  { scheme: 'bitcoinsv', cryptoId: 'bitcoin-sv@bitcoin-sv' },
-  { scheme: 'ethereum', cryptoId: 'ethereum@ethereum' },
-  { scheme: 'litecoin', cryptoId: 'litecoin@litecoin' },
-  { scheme: 'ripple', cryptoId: 'xrp@ripple' },
-  { scheme: 'stellar', cryptoId: 'stellar@stellar' },
-  { scheme: 'eos', cryptoId: 'eos@eos' },
-  { scheme: 'dogecoin', cryptoId: 'dogecoin@dogecoin' },
-  { scheme: 'dash', cryptoId: 'dash@dash' },
-  { scheme: 'monero', cryptoId: 'monero@monero' },
-];
+  bitcoin,
+  bitcoinCash,
+  bitcoinSv,
+  litecoin,
+  ethereum,
+  xrp,
+  stellar,
+  eos,
+  dogecoin,
+  dash,
+  monero,
+].map((item) => {
+  return {
+    scheme: item.scheme,
+    cryptoId: item._id,
+  };
+});
 
 function getSchemeCryptoId(url) {
   if (!url) return false;
