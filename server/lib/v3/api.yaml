@@ -26,11 +26,30 @@ paths:
                 $ref: '#/components/schemas/CryptoList'
         default:
           $ref: '#/components/responses/GeneralError'
+  /ticker:
+    get:
+      x-eov-operation-id: getTicker
+      x-eov-operation-handler: handlers
+      description: Get prices of single crypto
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cryptoId'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Ticker for crypro
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Ticker'
+        default:
+          $ref: '#/components/responses/GeneralError'
   /tickers:
     get:
       x-eov-operation-id: getTickers
       x-eov-operation-handler: handlers
-      description: Get prices of one or more coins or tokens
+      description: Get prices of one or more crypto
       parameters:
         - $ref: '#/components/parameters/deviceId'
         - $ref: '#/components/parameters/cryptoIds'
@@ -38,7 +57,7 @@ paths:
         - deviceSignature: []
       responses:
         '200':
-          description: List of tickers for coin or token
+          description: List of tickers for crypto
           content:
             'application/json':
               schema:
@@ -90,6 +109,13 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Ticker'
+    CryptoId:
+      type: string
+      pattern: '^.+@.+$'
+    CryptoIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CryptoId'
   parameters:
     deviceId:
       in: query
@@ -98,6 +124,14 @@ components:
       description: Device ID
       schema:
         $ref: '#/components/schemas/Hex64String'
+    cryptoId:
+      in: query
+      name: crypto
+      required: true
+      description: Crypto ID
+      allowReserved: true
+      schema:
+        $ref: '#/components/schemas/CryptoId'
     cryptoIds:
       in: query
       name: crypto
@@ -107,9 +141,7 @@ components:
       explode: false
       allowReserved: true
       schema:
-        type: array
-        items:
-          type: string
+        $ref: '#/components/schemas/CryptoIdList'
   responses:
     GeneralError:
       description: Unexpected error

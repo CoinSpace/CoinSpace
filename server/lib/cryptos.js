@@ -193,9 +193,38 @@ async function getAll(limit = 0) {
   return cryptos;
 }
 
+function getTicker(id) {
+  return db.collection(COLLECTION)
+    .findOne({
+      _id: id,
+      // 7 days ago
+      'updated_at.prices': { $gte: new Date(Date.now() - (7 * 24 * 60 * 60 * 1000)) },
+    }, {
+      projection: {
+        prices: 1,
+      },
+    });
+}
+
+function getTickers(ids) {
+  return db.collection(COLLECTION)
+    .find({
+      _id: { $in: ids },
+      // 7 days ago
+      'updated_at.prices': { $gte: new Date(Date.now() - (7 * 24 * 60 * 60 * 1000)) },
+    }, {
+      projection: {
+        prices: 1,
+      },
+    })
+    .toArray();
+}
+
 export default {
   sync,
   updatePrices,
   updateRank,
   getAll,
+  getTicker,
+  getTickers,
 };

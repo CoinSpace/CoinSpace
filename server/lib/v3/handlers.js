@@ -1,4 +1,4 @@
-import tokens from '../tokens.js';
+import createError from 'http-errors';
 import cryptos from '../cryptos.js';
 
 export async function qwe(req, res) {
@@ -10,8 +10,15 @@ export async function getCryptos(req, res) {
   res.status(200).send(list);
 }
 
+export async function getTicker(req, res) {
+  const ticker = await cryptos.getTicker(req.query.crypto);
+  if (!ticker) {
+    throw createError(404, 'Crypto not found');
+  }
+  res.status(200).send(ticker);
+}
+
 export async function getTickers(req, res) {
-  // TODO: move to crypto collection
-  const tickers = await tokens.getTickersV3(req.query.crypto);
+  const tickers = await cryptos.getTickers(req.query.crypto);
   res.status(200).send(tickers);
 }
