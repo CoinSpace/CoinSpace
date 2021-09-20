@@ -34,7 +34,7 @@ export function init() {
           if (current) {
             LS.renameTokenId(walletToken._id, current._id);
             return current;
-          };
+          }
           const _id = `${walletToken.address}@${platform}`;
           if (walletToken._id !== _id) {
             LS.renameTokenId(walletToken._id, _id);

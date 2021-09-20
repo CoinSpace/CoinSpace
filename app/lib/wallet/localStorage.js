@@ -91,7 +91,7 @@ function migratePublicKeys() {
 
 function renameTokenId(idFrom, idTo) {
   if (!idFrom) return;
-  if (!!localStorage.getItem(`_cs_cache_${idFrom}`)) {
+  if (localStorage.getItem(`_cs_cache_${idFrom}`)) {
     localStorage.setItem(`_cs_cache_${idTo}`, localStorage.getItem(`_cs_cache_${idFrom}`));
     localStorage.removeItem(`_cs_cache_${idFrom}`);
   }

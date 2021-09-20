@@ -6,7 +6,6 @@ import { showError, showSuccess } from 'widgets/modals/flash';
 import showSetDetails from 'widgets/modals/set-details';
 import qrcode from 'lib/qrcode';
 import initEosSetup from 'widgets/eos/setup';
-import details from 'lib/wallet/details';
 import clipboard from 'lib/clipboard';
 import { translate } from 'lib/i18n';
 import { getWallet } from 'lib/wallet';

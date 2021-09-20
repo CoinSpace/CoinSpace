@@ -1,20 +1,21 @@
-const platformSchemes = {
-  bitcoin: 'bitcoin',
-  'bitcoin-cash': 'bitcoincash',
-  'bitcoin-sv': 'bitcoinsv',
-  ethereum: 'ethereum',
-  litecoin: 'litecoin',
-  ripple: 'ripple',
-  stellar: 'stellar',
-  eos: 'eos',
-  dogecoin: 'dogecoin',
-  dash: 'dash',
-  monero: 'monero',
-};
+const cryptoSchemes = [
+  { scheme: 'bitcoin', cryptoId: 'bitcoin@bitcoin' },
+  { scheme: 'bitcoincash', cryptoId: 'bitcoin-cash@bitcoin-cash' },
+  { scheme: 'bitcoinsv', cryptoId: 'bitcoin-sv@bitcoin-sv' },
+  { scheme: 'ethereum', cryptoId: 'ethereum@ethereum' },
+  { scheme: 'litecoin', cryptoId: 'litecoin@litecoin' },
+  { scheme: 'ripple', cryptoId: 'xrp@ripple' },
+  { scheme: 'stellar', cryptoId: 'stellar@stellar' },
+  { scheme: 'eos', cryptoId: 'eos@eos' },
+  { scheme: 'dogecoin', cryptoId: 'dogecoin@dogecoin' },
+  { scheme: 'dash', cryptoId: 'dash@dash' },
+  { scheme: 'monero', cryptoId: 'monero@monero' },
+];
 
-function isValidScheme(url) {
+function getSchemeCryptoId(url) {
   if (!url) return false;
-  return Object.values(platformSchemes).some((scheme) => url.startsWith(`${scheme}:`));
+  const scheme = url.split(':')[0];
+  return cryptoSchemes.find((item) => item.scheme === scheme);
 }
 
 function decode(url) {
@@ -33,21 +34,22 @@ function decode(url) {
   return data;
 }
 
-function registerProtocolHandler(platform) {
+function registerProtocolHandler(crypto) {
   if (process.env.BUILD_PLATFORM !== 'web') return;
   if (!navigator.registerProtocolHandler) return;
-  if (!platformSchemes[platform]) return;
+  const scheme = cryptoSchemes.find((item) => item.cryptoId === crypto._id);
+  if (!scheme) return;
   try {
     navigator.registerProtocolHandler(
-      platformSchemes[platform],
-      `${process.env.SITE_URL}wallet/?coin=${platformSchemes[platform]}&bip21=%s`, 'Coin Wallet'
+      scheme,
+      `${process.env.SITE_URL}wallet/?crypto=${crypto._id}&bip21=%s`, 'Coin Wallet'
     );
     // eslint-disable-next-line
   } catch (e) {}
 }
 
 export default {
-  isValidScheme,
+  getSchemeCryptoId,
   decode,
   registerProtocolHandler,
 };

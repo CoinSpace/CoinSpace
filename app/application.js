@@ -105,17 +105,16 @@ window.initCSApp = async function() {
 
   function setupBip21() {
     const params = querystring.parse(window.location.href.split('?')[1]);
-    if (!bip21.isValidScheme(params.bip21)) return;
+    if (!bip21.getSchemeCryptoId(params.bip21)) return;
     window.localStorage.setItem('_cs_bip21', params.bip21);
   }
 
   function setupCrypto() {
-    const { network, coin } = querystring.parse(window.location.href.split('?')[1]);
-    if (coin || network) {
-      window.localStorage.setItem('_cs_token', JSON.stringify({
-        _id: coin || network,
-        network: network || coin,
-      }));
+    const { network, coin, crypto } = querystring.parse(window.location.href.split('?')[1]);
+    if (crypto) return LS.setCryptoId(crypto);
+    if (coin || network) { // legacy
+      const cryptoId = `${coin || network}@${coin || network}`;
+      return LS.setCryptoId(cryptoId);
     }
   }
 

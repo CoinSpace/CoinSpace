@@ -62,13 +62,14 @@ window.onShortcutEvent = function(event) {
   const platform = event.data.split('.').pop();
   if (!['bitcoin', 'dogecoin', 'ethereum', 'litecoin'].includes(platform)) return;
   const baseUrl = window.location.href.split('?')[0];
-  return window.location = `${baseUrl}?coin=${platform}`;
+  const cryptoId = `${platform}@${platform}`;
+  return window.location = `${baseUrl}?crypto=${cryptoId}`;
 };
 
 window.handleOpenURL = function(url) {
-  if (!bip21.isValidScheme(url)) return;
+  const cryptoId = bip21.getSchemeCryptoId(url);
+  if (!cryptoId) return;
   window.localStorage.setItem('_cs_bip21', url);
   const baseUrl = window.location.href.split('?')[0];
-  const network = url.split(':')[0];
-  window.location = `${baseUrl}?coin=${network}`;
+  window.location = `${baseUrl}?crypto=${cryptoId}`;
 };

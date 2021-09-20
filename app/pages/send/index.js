@@ -391,7 +391,7 @@ export default function(el) {
   }
 
   function bip21Handler(url) {
-    if (!bip21.isValidScheme(url)) return;
+    if (!bip21.getSchemeCryptoId(url)) return;
     setBip21Values(bip21.decode(url));
     window.localStorage.removeItem('_cs_bip21');
   }
