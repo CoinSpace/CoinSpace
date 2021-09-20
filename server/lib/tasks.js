@@ -17,6 +17,14 @@ function cryptosUpdatePrices(interval) {
   });
 }
 
+
+function cryptosUpdateRank(interval) {
+  return pForever(async () => {
+    await cryptos.updateRank().catch(console.error);
+    await delay(interval);
+  });
+}
+
 function syncTokens(interval) {
   return pForever(async () => {
     await tokens.syncTokens().catch(console.error);
@@ -77,6 +85,7 @@ function cacheGithubReleases(interval) {
 export default {
   cryptosSync,
   cryptosUpdatePrices,
+  cryptosUpdateRank,
   syncTokens,
   updatePrices,
   cacheFees,

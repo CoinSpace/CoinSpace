@@ -20,8 +20,9 @@ await Promise.all([
 
 await Promise.all([
   tasks.cryptosUpdatePrices(60 * 1000), // delay 1 minute
-  //tasks.syncTokens(12 * 60 * 60 * 1000), // delay 12 hours
-  //tasks.updatePrices(60 * 1000), // delay 1 minute
+  tasks.cryptosUpdateRank(12 * 60 * 60 * 1000), // delay 12 hours
+  tasks.syncTokens(12 * 60 * 60 * 1000), // delay 12 hours
+  tasks.updatePrices(60 * 1000), // delay 1 minute
   tasks.cacheFees(5 * 60 * 1000), // 5 minutes
   tasks.cacheMoonpayCurrencies(60 * 60 * 1000), // 1 hour
   tasks.cacheMoonpayCountries(60 * 60 * 1000), // 1 hour

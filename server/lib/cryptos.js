@@ -1,5 +1,6 @@
 import cryptoDB from '@coinspace/crypto-db';
 import coingecko from './coingecko.js';
+import coinmarketcap from './coinmarketcap.js';
 import db from './db.js';
 
 const COLLECTION = 'cryptos';
@@ -10,7 +11,7 @@ const CURRENCIES = [
   'RUB', 'SEK', 'SGD', 'TRY', 'UAH',
   'USD', 'ZAR',
 ];
-const CRYPTO_PROPS = ['coingecko', 'changelly', 'moonpay'];
+const CRYPTO_PROPS = ['coingecko', 'changelly', 'coinmarketcap', 'moonpay'];
 
 async function sync() {
   console.time('crypto sync');
@@ -91,7 +92,7 @@ async function updatePrices() {
           update: {
             $set: {
               prices,
-              updated_at: updatedAt,
+              'updated_at.prices': updatedAt,
             },
           },
         },
@@ -110,8 +111,69 @@ async function updatePrices() {
   console.timeEnd('crypto update prices');
 }
 
+async function updateRank() {
+  console.time('crypto update rank');
+
+  const PER_PAGE = 5000;
+  let page = 0;
+  let list;
+  let map = [];
+
+  do {
+    const res = await coinmarketcap.get('/v1/cryptocurrency/map', {
+      params: {
+        listing_status: 'active,inactive,untracked',
+        limit: PER_PAGE,
+        start: (page * PER_PAGE) + 1,
+      },
+    });
+    list = res.data.data;
+    page++;
+    map = map.concat(list);
+  } while (list.length === PER_PAGE);
+
+  const updatedAt = new Date();
+  const cursor = db.collection(COLLECTION)
+    .aggregate([{
+      $match: {
+        deprecated: false,
+      },
+    }, {
+      $group: {
+        _id: '$coinmarketcap.id',
+      },
+    }, {
+      $sort: {
+        _id: 1,
+      },
+    }]);
+  const operations = [];
+
+  for await (const cmc of cursor) {
+    const info = map.find((item) => item.id === cmc._id);
+    operations.push({
+      updateMany: {
+        filter: { 'coinmarketcap.id': cmc._id },
+        update: {
+          $set: {
+            rank: (info && info.rank) || Infinity,
+            'updated_at.rank': updatedAt,
+          },
+        },
+      },
+    });
+    console.log(`updated crypto prices coinmarketcap id: ${cmc._id}`);
+  }
+
+  if (operations.length > 0) {
+    await db.collection(COLLECTION)
+      .bulkWrite(operations, { ordered: false });
+  }
+
+  console.timeEnd('crypto update rank');
+}
+
 async function getAll(limit = 0) {
-  //return CRYPTOS;
   const cryptos = await db.collection(COLLECTION)
     .find({
       deprecated: false,
@@ -124,6 +186,7 @@ async function getAll(limit = 0) {
         synchronized_at: false,
         updated_at: false,
         deprecated: false,
+        prices: false,
       },
     })
     .toArray();
@@ -133,5 +196,6 @@ async function getAll(limit = 0) {
 export default {
   sync,
   updatePrices,
+  updateRank,
   getAll,
 };
