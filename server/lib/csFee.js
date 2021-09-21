@@ -42,7 +42,7 @@ async function getCsFee(cryptoId) {
     rbfFee: parseInt(Big(1).div(rate).times(csFee.rbf_usd || 0).times(Big(10).pow(ticker.decimals)), 10),
     skipMinFee: csFee.skipMinFee || false,
     addresses: csFee.addresses,
-    whitelist: csFee.whitelist,
+    whitelist: csFee.whitelist || [],
   };
 }
 
