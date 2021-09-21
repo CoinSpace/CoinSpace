@@ -83,6 +83,25 @@ paths:
                 $ref: '#/components/schemas/FeeList'
         default:
           $ref: '#/components/responses/GeneralError'
+  /csfee:
+    get:
+      x-eov-operation-id: getCsFee
+      x-eov-operation-handler: handlers
+      description: Get transaction cs fees for coin
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cryptoId'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Fees for coin
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/CsFee'
+        default:
+          $ref: '#/components/responses/GeneralError'
 
 components:
   schemas:
@@ -154,6 +173,32 @@ components:
             $ref: '#/components/schemas/Fee'
       required:
         - items
+    CsFee:
+      type: object
+      properties:
+        fee:
+          type: number
+        minFee:
+          type: number
+        maxFee:
+          type: number
+        rbfFee:
+          type: number
+        addresses:
+          type: array
+          items:
+            type: string
+        whitelist:
+          type: array
+          items:
+            type: string
+      required:
+        - fee
+        - minFee
+        - maxFee
+        - rbfFee
+        - addresses
+        - whitelist
   parameters:
     deviceId:
       in: query

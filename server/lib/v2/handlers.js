@@ -246,6 +246,6 @@ export async function getFees(req, res) {
 }
 
 export async function getCsFee(req, res) {
-  const fee = await csFee.getCsFee(req.query.crypto);
+  const fee = await csFee.getCsFee(`${req.query.crypto}@${req.query.crypto}`);
   res.status(200).send(fee);
 }

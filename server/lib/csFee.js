@@ -1,17 +1,15 @@
 import createError from 'http-errors';
 import db from './db.js';
-import tokens from './tokens.js';
 import Big from 'big.js';
 
-
 const CRYPTO = [
-  'bitcoin',
-  'bitcoin-cash',
-  'bitcoin-sv',
-  'litecoin',
-  'dogecoin',
-  'dash',
-  'monero',
+  'bitcoin@bitcoin',
+  'bitcoin-cash@bitcoin-cash',
+  'bitcoin-sv@bitcoin-sv',
+  'litecoin@litecoin',
+  'dogecoin@dogecoin',
+  'dash@dash',
+  'monero@monero',
 ];
 
 async function getCsFee(cryptoId) {
@@ -19,11 +17,19 @@ async function getCsFee(cryptoId) {
     throw createError(400, 'Currency cs fee is not supported');
   }
 
-  const ticker = await tokens.getTicker(cryptoId);
+  const ticker = await db.collection('cryptos')
+    .findOne({
+      _id: cryptoId,
+    }, {
+      projection: {
+        prices: 1,
+        decimals: 1,
+      },
+    });
   const csFee = await db.collection('cs_fee')
     .findOne({ _id: cryptoId });
 
-  if (!csFee) {
+  if (!csFee || !ticker) {
     throw createError(404, 'CS fee was not found');
   }
 
