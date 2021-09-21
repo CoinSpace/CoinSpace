@@ -1,13 +1,13 @@
-import db from '../db.js';
+import db from './db.js';
 import semver from 'semver';
-import Axios from 'axios';
+import axios from 'axios';
 import axiosRetry from 'axios-retry';
 
-const axios = Axios.create({
+const github = axios.create({
   timeout: 30000,
 });
 
-axiosRetry(axios, {
+axiosRetry(github, {
   retries: 3,
   retryDelay: axiosRetry.exponentialDelay,
   shouldResetTimeout: true,
@@ -127,15 +127,29 @@ const platforms = [{
   };
 });
 
-function save(updates) {
-  const collection = db.collection('releases');
-  return Promise.all(updates.map((update) => {
-    return collection.updateOne({
-      distribution: update.distribution,
-      arch: update.arch,
-      app: update.app,
-    }, { $set: update }, { upsert: true });
-  }));
+async function sync() {
+  console.time('github sync');
+  const updates = await getLatest();
+  if (!updates.length) {
+    return;
+  }
+  await db.collection('releases')
+    .bulkWrite(updates.map((update) => {
+      return {
+        updateOne: {
+          filter: {
+            distribution: update.distribution,
+            arch: update.arch,
+            app: update.app,
+          },
+          update: {
+            $set: update,
+          },
+          upsert: true,
+        },
+      };
+    }), { ordered: false });
+  console.timeEnd('github sync');
 }
 
 async function getUpdates() {
@@ -158,7 +172,7 @@ async function getLatest() {
     headers.Authorization = `token ${GH_TOKEN}`;
   }
 
-  const res = await axios.get(url, { headers });
+  const res = await github.get(url, { headers });
 
   if (res.status !== 200) {
     throw new Error(`GitHub API responded with ${res.status} for url ${url}`);
@@ -217,14 +231,14 @@ async function getLatest() {
     }
   }
 
-  return latest;
+  return Object.values(latest);
 }
 
 async function getReleasesContent(version) {
   const downloadBase = `https://github.com/${GH_ACCOUNT}/releases/download/${version}/`;
   const releasesUrl = `${downloadBase}RELEASES`;
 
-  const res = await axios.get(releasesUrl);
+  const res = await github.get(releasesUrl);
 
   if (res.status !== 200) {
     throw new Error(`GitHub responded with ${res.status} for url ${releasesUrl}`);
@@ -236,9 +250,7 @@ async function getReleasesContent(version) {
 }
 
 export default {
-  save,
-  getLatest,
+  sync,
   getUpdate,
   getUpdates,
-  account: GH_ACCOUNT,
 };

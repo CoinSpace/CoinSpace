@@ -2,7 +2,7 @@ import pForever from 'p-forever';
 import delay from 'delay';
 import fee from './fee.js';
 import moonpay from './v1/moonpay.js';
-import github from './v1/github.js';
+import github from './github.js';
 import tokens from './tokens.js';
 import cryptos from './cryptos.js';
 
@@ -73,12 +73,10 @@ function cacheMoonpayCountries(interval) {
 }
 
 function cacheGithubReleases(interval) {
-  setInterval(function intervalFunction() {
-    github.getLatest().then((updates) => {
-      return github.save(Object.values(updates));
-    }).catch(console.error);
-    return intervalFunction;
-  }(), interval);
+  return pForever(async () => {
+    await github.sync().catch(console.error);
+    await delay(interval);
+  });
 }
 
 export default {

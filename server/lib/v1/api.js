@@ -10,7 +10,7 @@ import shapeshift from './shapeshift.js';
 import changelly from './changelly.js';
 import moonpay from './moonpay.js';
 import semver from 'semver';
-import github from './github.js';
+import github from '../github.js';
 
 const router = express.Router();
 
