@@ -13,7 +13,7 @@ export default function(data) {
   let content;
   const wallet = getWallet();
   const { platform } = wallet.crypto;
-  data.txUrl = wallet.txUrl;
+  data.txUrl = wallet.txUrl.bind(wallet);
   data.showAllInputs = false;
   data.inputsPerPage = 10;
   if (['ethereum', 'binance-smart-chain'].includes(platform)) {
