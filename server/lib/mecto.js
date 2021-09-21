@@ -1,6 +1,6 @@
 import createError from 'http-errors';
 import crypto from 'crypto';
-import db from '../db.js';
+import db from './db.js';
 
 const SEARCH_RADIUS = 1000;
 const SEARCH_LIMIT = 15;

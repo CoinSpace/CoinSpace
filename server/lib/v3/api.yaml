@@ -102,6 +102,58 @@ paths:
                 $ref: '#/components/schemas/CsFee'
         default:
           $ref: '#/components/responses/GeneralError'
+  /mecto:
+    get:
+      x-eov-operation-id: searchMecto
+      x-eov-operation-handler: handlers
+      description: Find nearby mecto users
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/lat'
+        - $ref: '#/components/parameters/lon'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Nearby mecto users
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/MectoUsers'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    put:
+      x-eov-operation-id: saveMecto
+      x-eov-operation-handler: handlers
+      description: Save mecto
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - deviceSignature: []
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Mecto'
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    delete:
+      x-eov-operation-id: removeMecto
+      x-eov-operation-handler: handlers
+      description: Remove mecto
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
 
 components:
   schemas:
@@ -199,6 +251,46 @@ components:
         - rbfFee
         - addresses
         - whitelist
+    Mecto:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        avatarIndex:
+          type: integer
+        address:
+          type: string
+        lat:
+          type: number
+        lon:
+          type: number
+      required:
+        - username
+        - email
+        - avatarIndex
+        - address
+        - lat
+        - lon
+    MectoUsers:
+      type: array
+      items:
+        type: object
+        properties:
+          username:
+            type: string
+          email:
+            type: string
+          avatarIndex:
+            type: integer
+          address:
+            type: string
+        required:
+          - username
+          - email
+          - avatarIndex
+          - address
   parameters:
     deviceId:
       in: query
@@ -225,7 +317,32 @@ components:
       allowReserved: true
       schema:
         $ref: '#/components/schemas/CryptoIdList'
+    lat:
+      in: query
+      name: lat
+      required: true
+      description: Latitude
+      schema:
+        type: number
+    lon:
+      in: query
+      name: lon
+      required: true
+      description: Longitude
+      schema:
+        type: number
   responses:
+    SuccessResponse:
+      description: Success Response
+      content:
+        'application/json':
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+            required:
+              - success
     GeneralError:
       description: Unexpected error
       content:

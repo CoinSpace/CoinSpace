@@ -2,6 +2,7 @@ import createError from 'http-errors';
 import cryptos from '../cryptos.js';
 import fee from '../fee.js';
 import csFee from '../csFee.js';
+import mecto from '../mecto.js';
 
 export async function qwe(req, res) {
   return res.status(200).send('ok');
@@ -33,4 +34,19 @@ export async function getFees(req, res) {
 export async function getCsFee(req, res) {
   const fee = await csFee.getCsFee(req.query.crypto);
   res.status(200).send(fee);
+}
+
+export async function searchMecto(req, res) {
+  const results = await mecto.search(req.device, req.query);
+  res.status(200).send(results);
+}
+
+export async function saveMecto(req, res) {
+  await mecto.save(req.device, req.body);
+  res.status(200).send({ success: true });
+}
+
+export async function removeMecto(req, res) {
+  await mecto.remove(req.device);
+  res.status(200).send({ success: true });
 }
