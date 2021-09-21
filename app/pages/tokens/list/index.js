@@ -36,6 +36,9 @@ export default function(el) {
         }
         return '...';
       },
+      getLogoUrl(logo) {
+        return require(`@coinspace/crypto-db/logo/${logo}`);
+      },
       switchCrypto,
       removeCryptoToken,
       cryptoCoins: [],

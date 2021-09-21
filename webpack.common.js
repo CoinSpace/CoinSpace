@@ -1,5 +1,3 @@
-
-
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -66,7 +64,10 @@ module.exports = {
         type: 'asset/resource',
         generator: {
           filename: (pathData) => {
-            return `${path.dirname(pathData.filename).substr(4)}/[name].[hash:8][ext]`;
+            let base = path.dirname(pathData.filename);
+            base = base.replace(/^app\//, '');
+            base = base.replace(/^node_modules\/@coinspace\/crypto-db\/logo/, 'assets/img/crypto-db/logo');
+            return `${base}/[name].[hash:8][ext]`;
           },
         },
       },

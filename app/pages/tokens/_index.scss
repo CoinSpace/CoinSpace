@@ -32,7 +32,6 @@
       position: relative;
     }
     &__icon {
-      border-radius: 50%;
       width: 50px;
       height: 50px;
       flex-shrink: 0;
@@ -41,9 +40,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      svg {
-        width: 100%;
-        height: auto;
+      img {
+        max-height: 100%;
       }
       .svg-settings {
         fill: #999;
@@ -55,25 +53,17 @@
       }
     }
     &__platform_icon {
-      border-radius: 50%;
       width: 25px;
       height: 25px;
       margin-right: 20px;
       position: absolute;
       right: -10px;
       bottom: 0;
-      background: black;
       @include breakpoint(portrait) {
         width: 40px;
         height: 40px;
         margin-right: 40px;
         right: -16px;
-      }
-      &--ethereum {
-        background-color: $ethereum;
-      }
-      &--binance-smart-chain {
-        background-color: $binance-smart-chain;
       }
     }
 
@@ -117,67 +107,6 @@
         height: 80px;
         padding: 20px;
         margin-right: -20px;
-      }
-    }
-
-    &--bitcoin {
-      ._token__icon {
-        background-color: $bitcoin;
-      }
-    }
-    &--bitcoin-cash {
-      ._token__icon {
-        background-color: $bitcoin-cash;
-      }
-    }
-    &--bitcoin-sv {
-      ._token__icon {
-        background-color: $bitcoin-sv;
-      }
-    }
-    &--ethereum {
-      ._token__icon {
-        background-color: $ethereum;
-      }
-    }
-    &--litecoin {
-      ._token__icon {
-        background-color: $litecoin;
-      }
-    }
-    &--ripple {
-      ._token__icon {
-        background-color: $ripple;
-      }
-    }
-    &--stellar {
-      ._token__icon {
-        background-color: $stellar;
-      }
-    }
-    &--eos {
-      ._token__icon {
-        background-color: $eos;
-      }
-    }
-    &--dogecoin {
-      ._token__icon {
-        background-color: $dogecoin;
-      }
-    }
-    &--dash {
-      ._token__icon {
-        background-color: $dash;
-      }
-    }
-    &--monero {
-      ._token__icon {
-        background-color: $monero;
-      }
-    }
-    &--binance-smart-chain {
-      ._token__icon {
-        background-color: $binance-smart-chain;
       }
     }
   }

@@ -18,6 +18,9 @@ export default function(el) {
       cryptoTokens: [],
       show: PER_PAGE,
       addToken,
+      getLogoUrl(logo) {
+        return require(`@coinspace/crypto-db/logo/${logo}`);
+      },
     },
   });
 
