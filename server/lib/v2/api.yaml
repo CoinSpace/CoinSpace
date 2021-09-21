@@ -425,14 +425,7 @@ paths:
           content:
             'application/json':
               schema:
-                type: object
-                properties:
-                  data:
-                    description: Storage
-                    type: string
-                    nullable: true
-                required:
-                  - data
+                $ref: '#/components/schemas/Storage'
         default:
           $ref: '#/components/responses/GeneralError'
     put:
@@ -449,25 +442,14 @@ paths:
         content:
           'application/json':
             schema:
-              type: 'object'
-              properties:
-                data:
-                  description: Storage
-                  type: string
-              required:
-                - data
+              $ref: '#/components/schemas/Storage'
       responses:
         '200':
           description: Update storage result
           content:
             'application/json':
               schema:
-                type: object
-                properties:
-                  data:
-                    type: string
-                required:
-                  - data
+                $ref: '#/components/schemas/Storage'
         default:
           $ref: '#/components/responses/GeneralError'
   /username:
@@ -884,6 +866,15 @@ components:
         - rbfFee
         - addresses
         - whitelist
+    Storage:
+      type: object
+      properties:
+        data:
+          description: Storage
+          type: string
+          nullable: true
+      required:
+        - data
   parameters:
     deviceId:
       in: query

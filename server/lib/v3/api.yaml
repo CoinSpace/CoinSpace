@@ -154,6 +154,49 @@ paths:
           $ref: '#/components/responses/SuccessResponse'
         default:
           $ref: '#/components/responses/GeneralError'
+  /storage/{storageName}:
+    get:
+      x-eov-operation-id: getStorage
+      x-eov-operation-handler: handlers
+      description: Get storage
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/storageName'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Storage
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Storage'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    put:
+      x-eov-operation-id: setStorage
+      x-eov-operation-handler: handlers
+      description: Update storage
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/storageName'
+      security:
+        - deviceSignature: []
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Storage'
+      responses:
+        '200':
+          description: Update storage result
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Storage'
+        default:
+          $ref: '#/components/responses/GeneralError'
 
 components:
   schemas:
@@ -291,6 +334,15 @@ components:
           - email
           - avatarIndex
           - address
+    Storage:
+      type: object
+      properties:
+        data:
+          description: Storage
+          type: string
+          nullable: true
+      required:
+        - data
   parameters:
     deviceId:
       in: query
@@ -331,6 +383,13 @@ components:
       description: Longitude
       schema:
         type: number
+    storageName:
+      in: path
+      name: storageName
+      schema:
+        type: string
+      required: true
+      description: Storage name
   responses:
     SuccessResponse:
       description: Success Response
