@@ -4,6 +4,7 @@ import fee from '../fee.js';
 import csFee from '../csFee.js';
 import mecto from '../mecto.js';
 import storage from '../storage.js';
+import moonpay from '../moonpay.js';
 
 export async function qwe(req, res) {
   return res.status(200).send('ok');
@@ -60,4 +61,9 @@ export async function getStorage(req, res) {
 export async function setStorage(req, res) {
   const data = await storage.setStorage(req.device, req.params.storageName, req.body.data);
   res.status(200).send({ data });
+}
+
+export async function moonpaySign(req, res) {
+  const urls = moonpay.sign(req.body.urls);
+  res.status(200).send({ urls });
 }

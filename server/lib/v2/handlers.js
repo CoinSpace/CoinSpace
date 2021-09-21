@@ -2,7 +2,7 @@ import createError from 'http-errors';
 import wallets from '../wallets.js';
 import storage from '../storage.js';
 import mecto from '../mecto.js';
-import moonpay from './moonpay.js';
+import moonpay from '../moonpay.js';
 import tokens from '../tokens.js';
 import fee from '../fee.js';
 import csFee from '../csFee.js';

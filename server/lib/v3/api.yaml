@@ -197,6 +197,30 @@ paths:
                 $ref: '#/components/schemas/Storage'
         default:
           $ref: '#/components/responses/GeneralError'
+  /moonpay/sign:
+    post:
+      x-eov-operation-id: moonpaySign
+      x-eov-operation-handler: handlers
+      description: Sign moonpay urls
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - deviceSignature: []
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/MoonpayUrls'
+      responses:
+        '200':
+          description: Signed urls
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/MoonpayUrls'
+        default:
+          $ref: '#/components/responses/GeneralError'
 
 components:
   schemas:
@@ -343,6 +367,15 @@ components:
           nullable: true
       required:
         - data
+    MoonpayUrls:
+      type: object
+      properties:
+        urls:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          maxItems: 5
   parameters:
     deviceId:
       in: query
