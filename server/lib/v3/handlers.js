@@ -1,4 +1,5 @@
 import createError from 'http-errors';
+import semver from 'semver';
 import wallets from '../wallets.js';
 import cryptos from '../cryptos.js';
 import fee from '../fee.js';
@@ -7,6 +8,7 @@ import mecto from '../mecto.js';
 import storage from '../storage.js';
 import moonpay from '../moonpay.js';
 import openalias from '../openalias.js';
+import github from '../github.js';
 import { verifyReq } from '../utils.js';
 
 export async function register(req, res) {
@@ -253,4 +255,62 @@ export async function moonpaySign(req, res) {
 export async function resolveOpenalias(req, res) {
   const data = await openalias.resolve(req.query.hostname);
   res.status(200).send(data);
+}
+
+export async function getUpdates(req, res) {
+  const updates = await github.getUpdates();
+  res.status(200).send(updates.map((item) => {
+    return {
+      name: item.name,
+      version: item.version,
+      url: item.url,
+      distribution: item.distribution,
+      arch: item.arch,
+      app: item.app,
+    };
+  }));
+}
+
+export async function getUpdate(req, res) {
+  const app = req.get('User-Agent').includes('CoinSpace') ? 'electron' : 'app';
+  const { distribution, arch, version } = req.params;
+  if (!semver.valid(version)) {
+    throw createError(400, `Invalid SemVer: "${version}"`);
+  }
+  const update = await github.getUpdate(distribution, arch, app);
+  if (!update) {
+    throw createError(404, 'Unsupported platform');
+  } else if (semver.gt(update.version, version)) {
+    res.status(200).send({
+      name: update.name,
+      version: update.version,
+      url: update.url,
+    });
+  } else {
+    // send "no content" if version is equal or less
+    res.status(204).end();
+  }
+}
+
+export async function getWinReleases(req, res) {
+  const { version } = req.params;
+  if (!semver.valid(version)) {
+    throw createError(400, `Invalid SemVer: "${version}"`);
+  }
+  const update = await github.getUpdate('win', 'x64', 'electron');
+  if (!update) {
+    throw createError(404, 'Unsupported platform');
+  } else {
+    res.status(200).send(update.content);
+  }
+}
+
+export async function downloadApp(req, res) {
+  const { distribution, arch } = req.params;
+  const update = await github.getUpdate(distribution, arch, 'app');
+  if (!update) {
+    res.redirect(302, `https://github.com/${github.account}/releases/latest`);
+  } else {
+    res.redirect(302, update.url);
+  }
 }

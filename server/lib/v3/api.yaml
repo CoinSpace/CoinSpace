@@ -678,6 +678,69 @@ paths:
                   - name
         default:
           $ref: '#/components/responses/GeneralError'
+  /updates:
+    get:
+      x-eov-operation-id: getUpdates
+      x-eov-operation-handler: handlers
+      description: Get all releases
+      responses:
+        '200':
+          description: Releases
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  type: object
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /update/{distribution}/{arch}/{version}:
+    get:
+      x-eov-operation-id: getUpdate
+      x-eov-operation-handler: handlers
+      description: Get release
+      parameters:
+        - $ref: '#/components/parameters/distribution'
+        - $ref: '#/components/parameters/arch'
+        - $ref: '#/components/parameters/version'
+      responses:
+        '200':
+          description: Release
+          content:
+            'application/json':
+              schema:
+                type: object
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /update/win/x64/{version}/RELEASES:
+    get:
+      x-eov-operation-id: getWinReleases
+      x-eov-operation-handler: handlers
+      description: Get release
+      parameters:
+        - $ref: '#/components/parameters/version'
+      responses:
+        '200':
+          description: Release content
+          content:
+            'text/html':
+              schema:
+                type: string
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /download/{distribution}/{arch}:
+    get:
+      x-eov-operation-id: downloadApp
+      x-eov-operation-handler: handlers
+      description: Get release
+      parameters:
+        - $ref: '#/components/parameters/distribution'
+        - $ref: '#/components/parameters/arch'
+      responses:
+        '302':
+          description: Redirect to file
+        default:
+          $ref: '#/components/responses/GeneralError'
 
 components:
   schemas:
@@ -955,6 +1018,27 @@ components:
         type: string
       required: true
       description: Storage name
+    distribution:
+      in: path
+      name: distribution
+      schema:
+        type: string
+      required: true
+      description: App distribution
+    arch:
+      in: path
+      name: arch
+      schema:
+        type: string
+      required: true
+      description: App architecture
+    version:
+      in: path
+      name: version
+      schema:
+        type: string
+      required: true
+      description: App version
   responses:
     AttestationOptionsResponse:
       description: Attestation Options

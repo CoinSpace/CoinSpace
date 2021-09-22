@@ -250,6 +250,7 @@ async function getReleasesContent(version) {
 }
 
 export default {
+  account: GH_ACCOUNT,
   sync,
   getUpdate,
   getUpdates,
