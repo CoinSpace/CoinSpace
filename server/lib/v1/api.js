@@ -6,7 +6,6 @@ import openalias from '../openalias.js';
 import fee from '../fee.js';
 import csFee from '../csFee.js';
 import tokens from '../tokens.js';
-import shapeshift from './shapeshift.js';
 import changelly from './changelly.js';
 import moonpay from './moonpay.js';
 import semver from 'semver';
@@ -169,9 +168,7 @@ router.delete('/location', (req, res) => {
 });
 
 router.delete('/shapeShiftToken', (req, res) => {
-  const { token } = req.body;
-  shapeshift.revokeToken(token).catch(() => {});
-  res.status(200).send();
+  res.status(410).send({ error: 'Please upgrade the app!' });
 });
 
 router.get('/changelly/getCoins', (req, res) => {
