@@ -1,7 +1,6 @@
 import express from 'express';
 import auth from './auth.js';
 import account from './account.js';
-import geo from './geo.js';
 import openalias from '../openalias.js';
 import fee from '../fee.js';
 import csFee from '../csFee.js';
@@ -144,27 +143,8 @@ router.get('/ethereum/tokens', (req, res) => {
   });
 });
 
-router.post('/location', (req, res) => {
-  const data = req.body;
-  geo.save(data.lat, data.lon, data).then(() => {
-    res.status(201).send();
-  }).catch((err) => {
-    res.status(400).json(err);
-  });
-});
-
-router.put('/location', (req, res) => {
-  const data = req.body;
-  geo.search(data.lat, data.lon, data).then((results) => {
-    res.status(200).json(results);
-  }).catch((err) => {
-    res.status(400).json(err);
-  });
-});
-
-router.delete('/location', (req, res) => {
-  geo.remove(req.body.id).catch(console.error);
-  res.status(200).send();
+router.all('/location', (req, res) => {
+  res.status(410).send({ error: 'Please upgrade the app!' });
 });
 
 router.delete('/shapeShiftToken', (req, res) => {
