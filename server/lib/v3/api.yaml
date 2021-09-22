@@ -646,6 +646,38 @@ paths:
                 $ref: '#/components/schemas/MoonpayUrls'
         default:
           $ref: '#/components/responses/GeneralError'
+  /openalias:
+    get:
+      x-eov-operation-id: resolveOpenalias
+      x-eov-operation-handler: handlers
+      description: Resolve openalias domain
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - in: query
+          name: hostname
+          required: true
+          description: Openalias hostname
+          schema:
+            type: string
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Storage
+          content:
+            'application/json':
+              schema:
+                type: object
+                properties:
+                  address:
+                    type: string
+                  name:
+                    type: string
+                required:
+                  - address
+                  - name
+        default:
+          $ref: '#/components/responses/GeneralError'
 
 components:
   schemas:

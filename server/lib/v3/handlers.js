@@ -6,6 +6,7 @@ import csFee from '../csFee.js';
 import mecto from '../mecto.js';
 import storage from '../storage.js';
 import moonpay from '../moonpay.js';
+import openalias from '../openalias.js';
 import { verifyReq } from '../utils.js';
 
 export async function register(req, res) {
@@ -247,4 +248,9 @@ export async function setStorage(req, res) {
 export async function moonpaySign(req, res) {
   const urls = moonpay.sign(req.body.urls);
   res.status(200).send({ urls });
+}
+
+export async function resolveOpenalias(req, res) {
+  const data = await openalias.resolve(req.query.hostname);
+  res.status(200).send(data);
 }

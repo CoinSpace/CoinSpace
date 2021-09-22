@@ -2,7 +2,7 @@ import express from 'express';
 import auth from './auth.js';
 import account from './account.js';
 import geo from './geo.js';
-import openalias from './openalias.js';
+import openalias from '../openalias.js';
 import fee from '../fee.js';
 import csFee from '../csFee.js';
 import tokens from '../tokens.js';
@@ -57,12 +57,13 @@ router.get('/openalias', (req, res) => {
   if (!hostname) {
     return res.status(400).json({ error: 'Bad request' });
   }
-  openalias.resolve(hostname, (err, address, name) => {
-    if (err) {
-      return res.status(400).send(err);
-    }
-    res.status(200).send({ address, name });
-  });
+  openalias.resolve(hostname)
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((err) => {
+      return res.status(400).send({ error: err.message });
+    });
 });
 
 router.put('/username', (req, res) => {
