@@ -162,7 +162,7 @@ async function updateRank() {
         },
       },
     });
-    console.log(`updated crypto prices coinmarketcap id: ${cmc._id}`);
+    console.log(`updated crypto rank coinmarketcap id: ${cmc._id}`);
   }
 
   if (operations.length > 0) {

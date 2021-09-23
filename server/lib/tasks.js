@@ -3,7 +3,6 @@ import delay from 'delay';
 import fee from './fee.js';
 import moonpay from './v1/moonpay.js';
 import github from './github.js';
-import tokens from './tokens.js';
 import cryptos from './cryptos.js';
 
 function cryptosSync() {
@@ -20,20 +19,6 @@ function cryptosUpdatePrices(interval) {
 function cryptosUpdateRank(interval) {
   return pForever(async () => {
     await cryptos.updateRank().catch(console.error);
-    await delay(interval);
-  });
-}
-
-function syncTokens(interval) {
-  return pForever(async () => {
-    await tokens.syncTokens().catch(console.error);
-    await delay(interval);
-  });
-}
-
-function updatePrices(interval) {
-  return pForever(async () => {
-    await tokens.updatePrices().catch(console.error);
     await delay(interval);
   });
 }
@@ -83,8 +68,6 @@ export default {
   cryptosSync,
   cryptosUpdatePrices,
   cryptosUpdateRank,
-  syncTokens,
-  updatePrices,
   cacheFees,
   cacheMoonpayCurrencies,
   cacheMoonpayCountries,
