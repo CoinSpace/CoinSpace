@@ -19,7 +19,7 @@ export default function(el) {
       show: PER_PAGE,
       addToken,
       getLogoUrl(logo) {
-        return require(`@coinspace/crypto-db/logo/${logo}`);
+        return crypto.getLogoUrl(logo);
       },
     },
   });

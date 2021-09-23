@@ -96,6 +96,12 @@ module.exports = {
         chunks: ['fido'],
         template: 'app/fido/index.ejs',
         filename: 'fido/index.html',
+      }),
+      new CopyWebpackPlugin({
+        patterns: [{
+          from: 'node_modules/@coinspace/crypto-db/logo/',
+          to: './assets/crypto/',
+        }],
       })] : []
     ),
     new CopyWebpackPlugin({

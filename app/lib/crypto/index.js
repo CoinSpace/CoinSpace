@@ -107,10 +107,20 @@ function cleanLegacy() {
   if (oldTokens) return details.set('walletTokens').catch(() => {});
 }
 
+function getLogoUrl(logo) {
+  const filepath = `/assets/crypto/${logo}?v=${process.env.VERSION}`;
+  if (process.env.BUILD_TYPE === 'web') {
+    return filepath;
+  } else {
+    return new URL(filepath, process.env.SITE_URL);
+  }
+}
+
 export default {
   init,
   getTokenById,
   getTokenByAddress,
   requestTokenByAddress,
   searchTokens,
+  getLogoUrl,
 };

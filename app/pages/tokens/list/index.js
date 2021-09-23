@@ -9,6 +9,7 @@ import _ from 'lodash';
 import { cryptoToFiat } from 'lib/convert';
 import bip21 from 'lib/bip21';
 import template from './index.ract';
+import crypto from 'lib/crypto';
 
 let isEnabled = false;
 
@@ -37,7 +38,7 @@ export default function(el) {
         return '...';
       },
       getLogoUrl(logo) {
-        return require(`@coinspace/crypto-db/logo/${logo}`);
+        return crypto.getLogoUrl(logo);
       },
       switchCrypto,
       removeCryptoToken,
