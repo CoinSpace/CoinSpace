@@ -102,7 +102,7 @@ function getSellUrl(baseCurrencyCode, refundWalletAddress) {
 
 async function signUrls(urls) {
   const result = await request({
-    url: `${process.env.SITE_URL}api/v2/moonpay/sign`,
+    url: `${process.env.SITE_URL}api/v3/moonpay/sign`,
     method: 'post',
     data: {
       urls,

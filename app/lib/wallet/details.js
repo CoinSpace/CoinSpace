@@ -12,7 +12,7 @@ const state = {
 
 function init() {
   return request({
-    url: `${process.env.SITE_URL}api/v2/details`,
+    url: `${process.env.SITE_URL}api/v3/details`,
     method: 'get',
     seed: 'public',
   }).then((details) => {
@@ -77,7 +77,7 @@ async function _initDetails() {
 function _save(data) {
   const key = LS.getDetailsKey();
   return request({
-    url: `${process.env.SITE_URL}api/v2/details`,
+    url: `${process.env.SITE_URL}api/v3/details`,
     method: 'put',
     data: {
       data: encrypt(JSON.stringify(data), key),

@@ -3,7 +3,7 @@ import request from 'lib/request';
 
 class Storage {
   constructor(baseUrl, name, key) {
-    this.url = `${baseUrl}api/v2/storage/${name}`;
+    this.url = `${baseUrl}api/v3/storage/${name}`;
     this.key = key;
   }
   init() {

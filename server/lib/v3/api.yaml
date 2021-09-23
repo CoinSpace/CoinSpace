@@ -700,6 +700,7 @@ paths:
       x-eov-operation-handler: handlers
       description: Get release
       parameters:
+        - $ref: '#/components/parameters/anyId'
         - $ref: '#/components/parameters/distribution'
         - $ref: '#/components/parameters/arch'
         - $ref: '#/components/parameters/version'
@@ -972,6 +973,12 @@ components:
           schema:
             type: 'object'
   parameters:
+    anyId:
+      in: query
+      name: id
+      description: Device or Wallet ID, not required
+      schema:
+        $ref: '#/components/schemas/Hex64String'
     deviceId:
       in: query
       name: id

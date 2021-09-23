@@ -34,7 +34,7 @@ async function enable(pin) {
     LS.setPin(pin);
   } else {
     const options = await request({
-      url: `${process.env.SITE_URL}api/v2/platform/attestation`,
+      url: `${process.env.SITE_URL}api/v3/platform/attestation`,
       method: 'get',
       seed: 'private',
     });
@@ -46,7 +46,7 @@ async function enable(pin) {
       throw new Error('touch_id_error');
     }
     await request({
-      url: `${process.env.SITE_URL}api/v2/platform/attestation`,
+      url: `${process.env.SITE_URL}api/v3/platform/attestation`,
       method: 'post',
       data: attestation,
       seed: 'private',
@@ -60,7 +60,7 @@ async function disable() {
     LS.setPin(false);
   } else {
     await request({
-      url: `${process.env.SITE_URL}api/v2/platform`,
+      url: `${process.env.SITE_URL}api/v3/platform`,
       method: 'delete',
       seed: 'private',
     });
@@ -88,7 +88,7 @@ function phonegap() {
 
 async function publicToken(widget) {
   const options = await request({
-    url: `${process.env.SITE_URL}api/v2/token/public/platform`,
+    url: `${process.env.SITE_URL}api/v3/token/public/platform`,
     method: 'get',
     id: true,
   });
@@ -101,7 +101,7 @@ async function publicToken(widget) {
   }
   widget && widget.loading();
   const res = await request({
-    url: `${process.env.SITE_URL}api/v2/token/public/platform`,
+    url: `${process.env.SITE_URL}api/v3/token/public/platform`,
     method: 'post',
     data: assertion,
     id: true,
@@ -111,7 +111,7 @@ async function publicToken(widget) {
 
 async function privateToken() {
   const options = await request({
-    url: `${process.env.SITE_URL}api/v2/token/private/platform`,
+    url: `${process.env.SITE_URL}api/v3/token/private/platform`,
     method: 'get',
     seed: 'public',
   });
@@ -123,7 +123,7 @@ async function privateToken() {
     throw new Error('touch_id_error');
   }
   const res = await request({
-    url: `${process.env.SITE_URL}api/v2/token/private/platform`,
+    url: `${process.env.SITE_URL}api/v3/token/private/platform`,
     method: 'post',
     data: assertion,
     seed: 'public',

@@ -7,8 +7,11 @@ export function resolveTo(network, to) {
   const hostname = to.replace('@', '.');
   if (!hostname.match(/\./)) return Promise.resolve({ to });
   return request({
-    url: process.env.SITE_URL + 'api/v1/openalias?hostname=' + hostname,
-    id: true,
+    url: process.env.SITE_URL + 'api/v3/openalias',
+    params: {
+      hostname,
+    },
+    seed: 'public',
   }).then((data) => {
     return { to: data.address, alias: to };
   }).catch(() => {

@@ -18,8 +18,9 @@ async function checkUpdate() {
   const arch = (['win', 'mac'].includes(process.env.BUILD_PLATFORM) && window.process && window.process.arch) || 'any';
   try {
     update = await request({
-      url: `${process.env.SITE_URL}api/v1/update/${process.env.BUILD_PLATFORM}/${arch}/${process.env.VERSION}`,
+      url: `${process.env.SITE_URL}api/v3/update/${process.env.BUILD_PLATFORM}/${arch}/${process.env.VERSION}`,
       method: 'get',
+      id: true,
     });
     if (!update) return;
 

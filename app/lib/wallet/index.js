@@ -100,7 +100,7 @@ async function registerWallet(pin) {
   const pinHash = crypto.createHmac('sha256', Buffer.from(pinKey, 'hex')).update(pin).digest('hex');
   const detailsKey = crypto.createHmac('sha256', 'Coin Wallet').update(walletSeed).digest('hex');
   const { publicToken, privateToken } = await request({
-    url: `${process.env.SITE_URL}api/v2/register`,
+    url: `${process.env.SITE_URL}api/v3/register`,
     method: 'post',
     data: {
       walletId: wallet.getPublic('hex'),
@@ -127,7 +127,7 @@ async function loginWithPin(pin) {
   }
   const pinHash = crypto.createHmac('sha256', Buffer.from(LS.getPinKey(), 'hex')).update(pin).digest('hex');
   const { publicToken } = await request({
-    url: `${process.env.SITE_URL}api/v2/token/public/pin`,
+    url: `${process.env.SITE_URL}api/v3/token/public/pin`,
     method: 'post',
     data: {
       pinHash,
@@ -239,9 +239,9 @@ function getExtraOptions(crypto) {
     }
     options.getDynamicFees = () => {
       return request({
-        url: `${process.env.SITE_URL}api/v2/fees`,
+        url: `${process.env.SITE_URL}api/v3/fees`,
         params: {
-          crypto: crypto.platform,
+          crypto: crypto._id,
         },
         method: 'get',
         seed: 'public',
@@ -249,10 +249,12 @@ function getExtraOptions(crypto) {
     };
     options.getCsFee = () => {
       return request({
-        url: `${process.env.SITE_URL}api/v1/csFee`,
-        // TODO move to _id
-        params: { network: crypto.platform },
-        id: true,
+        url: `${process.env.SITE_URL}api/v3/csfee`,
+        params: {
+          crypto: crypto._id,
+        },
+        method: 'get',
+        seed: 'public',
       }).catch(console.error);
     };
   } else if (crypto.platform === 'eos') {
@@ -292,7 +294,7 @@ export async function addPublicKey(crypto) {
 
 async function removeAccount() {
   await request({
-    url: `${process.env.SITE_URL}api/v2/wallet`,
+    url: `${process.env.SITE_URL}api/v3/wallet`,
     method: 'delete',
     seed: 'private',
   });
@@ -307,7 +309,7 @@ function setUsername(username) {
     return Promise.resolve(userInfo.username);
   }
   return request({
-    url: `${process.env.SITE_URL}api/v2/username`,
+    url: `${process.env.SITE_URL}api/v3/username`,
     method: 'put',
     data: {
       username: newUsername,

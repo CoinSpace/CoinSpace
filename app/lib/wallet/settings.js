@@ -6,7 +6,7 @@ const state = {
 
 function init() {
   return request({
-    url: `${process.env.SITE_URL}api/v2/settings`,
+    url: `${process.env.SITE_URL}api/v3/settings`,
     method: 'get',
     seed: 'public',
   }).then((settings) => {
@@ -29,7 +29,7 @@ async function set(key, value, security) {
   try {
     await unlock();
     await request({
-      url: `${process.env.SITE_URL}api/v2/settings`,
+      url: `${process.env.SITE_URL}api/v3/settings`,
       method: 'patch',
       data,
       seed: 'private',

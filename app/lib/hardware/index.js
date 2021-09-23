@@ -15,7 +15,7 @@ const notSupportedError = () => {
 
 async function list() {
   const keys = await request({
-    url: `${process.env.SITE_URL}api/v2/crossplatform`,
+    url: `${process.env.SITE_URL}api/v3/crossplatform`,
     method: 'get',
     seed: 'public',
   });
@@ -24,7 +24,7 @@ async function list() {
 
 async function remove(key) {
   await request({
-    url: `${process.env.SITE_URL}api/v2/crossplatform`,
+    url: `${process.env.SITE_URL}api/v3/crossplatform`,
     method: 'delete',
     data: {
       credentialID: key.credentialID,
@@ -36,7 +36,7 @@ async function remove(key) {
 async function add() {
   validate();
   const options = await request({
-    url: `${process.env.SITE_URL}api/v2/crossplatform/attestation`,
+    url: `${process.env.SITE_URL}api/v3/crossplatform/attestation`,
     method: 'get',
     seed: 'private',
   });
@@ -63,7 +63,7 @@ async function add() {
   }
 
   await request({
-    url: `${process.env.SITE_URL}api/v2/crossplatform/attestation`,
+    url: `${process.env.SITE_URL}api/v3/crossplatform/attestation`,
     method: 'post',
     data: attestation,
     seed: 'private',
@@ -74,7 +74,7 @@ async function privateToken(options) {
   validate();
   if (!options) {
     options = await request({
-      url: `${process.env.SITE_URL}api/v2/token/private/crossplatform`,
+      url: `${process.env.SITE_URL}api/v3/token/private/crossplatform`,
       method: 'get',
       seed: 'public',
     });
@@ -102,7 +102,7 @@ async function privateToken(options) {
   }
 
   const res = await request({
-    url: `${process.env.SITE_URL}api/v2/token/private/crossplatform`,
+    url: `${process.env.SITE_URL}api/v3/token/private/crossplatform`,
     method: 'post',
     data: assertion,
     seed: 'public',

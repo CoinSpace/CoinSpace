@@ -87,7 +87,7 @@ async function getPin() {
         try {
           const pinHash = crypto.createHmac('sha256', Buffer.from(LS.getPinKey(), 'hex')).update(pin).digest('hex');
           await request({
-            url: `${process.env.SITE_URL}api/v2/token/public/pin`,
+            url: `${process.env.SITE_URL}api/v3/token/public/pin`,
             method: 'post',
             data: {
               pinHash,

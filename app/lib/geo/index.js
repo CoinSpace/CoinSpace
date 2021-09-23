@@ -6,6 +6,7 @@ async function save() {
   const { latitude, longitude } = await getLocation();
   const userInfo = details.get('userInfo');
   return request({
+    // TODO: migrate to v3
     url: `${process.env.SITE_URL}api/v2/mecto`,
     method: 'put',
     data: {
@@ -24,6 +25,7 @@ async function save() {
 async function search() {
   const { latitude, longitude } = await getLocation();
   const results = await request({
+    // TODO: migrate to v3
     url: `${process.env.SITE_URL}api/v2/mecto`,
     params: {
       lat: latitude,
@@ -38,6 +40,7 @@ async function search() {
 
 function remove() {
   return request({
+    // TODO: migrate to v3
     url: `${process.env.SITE_URL}api/v2/mecto`,
     method: 'delete',
     seed: 'public',
