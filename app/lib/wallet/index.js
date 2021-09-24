@@ -26,7 +26,7 @@ import bitcoinCash from '@coinspace/crypto-db/crypto/bitcoin-cash@bitcoin-cash.j
 import bitcoinSv from '@coinspace/crypto-db/crypto/bitcoin-sv@bitcoin-sv.json';
 import ethereum from '@coinspace/crypto-db/crypto/ethereum@ethereum.json';
 import dogecoin from '@coinspace/crypto-db/crypto/dogecoin@dogecoin.json';
-import binanceSmartChain from '@coinspace/crypto-db/crypto/binance-smart-chain@binance-smart-chain.json';
+import binanceSmartChain from '@coinspace/crypto-db/crypto/binance-coin@binance-smart-chain.json';
 import xrp from '@coinspace/crypto-db/crypto/xrp@ripple.json';
 import stellar from '@coinspace/crypto-db/crypto/stellar@stellar.json';
 import eos from '@coinspace/crypto-db/crypto/eos@eos.json';
@@ -231,7 +231,7 @@ function getExtraOptions(crypto) {
     options.minConf = 12;
     options.request = request;
     options.apiNode = process.env.API_BSC_URL;
-    options.platformCrypto = walletCoins.find((item) => item._id === 'binance-smart-chain@binance-smart-chain');
+    options.platformCrypto = walletCoins.find((item) => item._id === 'binance-coin@binance-smart-chain');
   } else if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'].includes(crypto.platform)) {
     options.minConf = 3;
     if (crypto.platform === 'bitcoin-cash') {
