@@ -68,7 +68,7 @@ module.exports = {
           filename: (pathData) => {
             let base = path.dirname(pathData.filename);
             base = base.replace(/^app\//, '');
-            base = base.replace(/^node_modules\/@coinspace\/crypto-db\/logo/, 'assets/img/crypto-db/logo');
+            base = base.replace(/^node_modules\/@coinspace\/crypto-db\/logo/, 'assets/crypto');
             return `${base}/[name].[hash:8][ext]`;
           },
         },

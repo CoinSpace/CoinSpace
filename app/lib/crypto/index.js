@@ -112,7 +112,36 @@ function getLogoUrl(logo) {
   if (process.env.BUILD_TYPE === 'web') {
     return filepath;
   } else {
-    return new URL(filepath, process.env.SITE_URL);
+    switch (logo) {
+      case 'bitcoin.svg':
+        return require('@coinspace/crypto-db/logo/bitcoin.svg');
+      case 'litecoin.svg':
+        return require('@coinspace/crypto-db/logo/litecoin.svg');
+      case 'dash.svg':
+        return require('@coinspace/crypto-db/logo/dash.svg');
+      case 'bitcoin-cash.svg':
+        return require('@coinspace/crypto-db/logo/bitcoin-cash.svg');
+      case 'bitcoin-sv.svg':
+        return require('@coinspace/crypto-db/logo/bitcoin-sv.svg');
+      case 'ethereum.svg':
+        return require('@coinspace/crypto-db/logo/ethereum.svg');
+      case 'dogecoin.svg':
+        return require('@coinspace/crypto-db/logo/dogecoin.svg');
+      case 'binance-smart-chain.svg':
+        return require('@coinspace/crypto-db/logo/binance-smart-chain.svg');
+      case 'xrp.svg':
+        return require('@coinspace/crypto-db/logo/xrp.svg');
+      case 'stellar.svg':
+        return require('@coinspace/crypto-db/logo/stellar.svg');
+      case 'eos.svg':
+        return require('@coinspace/crypto-db/logo/eos.svg');
+      case 'monero.svg':
+        return require('@coinspace/crypto-db/logo/monero.svg');
+      case 'tether.svg':
+        return require('@coinspace/crypto-db/logo/tether.svg');
+      default:
+        return new URL(filepath, process.env.SITE_URL);
+    }
   }
 }
 
