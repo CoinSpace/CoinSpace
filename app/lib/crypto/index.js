@@ -108,7 +108,7 @@ function cleanLegacy() {
 }
 
 function getLogoUrl(logo) {
-  const filepath = `/assets/crypto/${logo}?v=${process.env.VERSION}`;
+  const filepath = `/assets/crypto/${logo}?ver=${process.env.VERSION}`;
   if (process.env.BUILD_TYPE === 'web') {
     return filepath;
   } else {

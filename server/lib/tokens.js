@@ -43,7 +43,7 @@ async function getTokens(networks, limit = 0) {
       symbol: token.symbol,
       address: token.address,
       decimals: token.decimals,
-      icon: `${process.env.SITE_URL}/assets/crypto/${token.logo}?v=${process.env.npm_package_version}`,
+      icon: `${process.env.SITE_URL}/assets/crypto/${token.logo}?ver=${process.env.npm_package_version}`,
       market_cap_rank: token.rank,
       network: token.platform,
     };
