@@ -17,6 +17,7 @@ docker-compose.prod.yml
 electron/app
 electron/out
 electron/resources/appxmanifest.xml
+electron/lib/crypto
 *.provisionprofile
 *.pfx
 app/lib/i18n/list.json

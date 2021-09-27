@@ -62,9 +62,9 @@ const menu = Menu.buildFromTemplate(menuTemplate);
 Menu.setApplicationMenu(menu);
 
 schemes.forEach((item) => {
-  if (!app.isDefaultProtocolClient(item)) {
+  if (!app.isDefaultProtocolClient(item.scheme)) {
     // Define custom protocol handler. Deep linking works on packaged versions of the application!
-    app.setAsDefaultProtocolClient(item);
+    app.setAsDefaultProtocolClient(item.scheme);
   }
 });
 
@@ -83,7 +83,7 @@ app.on('will-finish-launching', () => {
 
 function extractUrlFromArgv(argv) {
   return argv.find(arg => {
-    return schemes.some((item) => arg.startsWith(`${item}:`));
+    return schemes.some((item) => arg.startsWith(`${item.scheme}:`));
   });
 }
 

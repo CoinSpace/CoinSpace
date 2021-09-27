@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs/promises');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
@@ -101,6 +102,18 @@ module.exports = {
         patterns: [{
           from: 'node_modules/@coinspace/crypto-db/logo/',
           to: './assets/crypto/',
+        }],
+      })] : []
+    ),
+    ...(process.env.BUILD_TYPE === 'electron' ?
+      [new CopyWebpackPlugin({
+        patterns: [{
+          from: 'node_modules/@coinspace/crypto-db/crypto/',
+          to: '../electron/lib/crypto/',
+          filter: async (resourcePath) => {
+            const data = JSON.parse(await fs.readFile(resourcePath, 'utf8'));
+            return !!data.scheme;
+          },
         }],
       })] : []
     ),

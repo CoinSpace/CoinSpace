@@ -2,9 +2,12 @@
 
 const setLanguages = require('electron-packager-languages');
 const pkg = require('./package.json');
-const schemes = require('./lib/schemes');
 const languages = require('../app/lib/i18n/list.json');
 const appxmanifest = require('./support/appxmanifest');
+const schemes = [
+  'coinspace',
+  ...require('./lib/schemes').map((item) => item.scheme),
+];
 
 const { BUILD_PLATFORM } = process.env;
 const BRANCH = process.env.GITHUB_REF && process.env.GITHUB_REF.replace('refs/heads/', '');

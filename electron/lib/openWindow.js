@@ -32,13 +32,13 @@ function openWindow(deeplink) {
       },
     });
 
-    if (deeplink && schemes.some((scheme) => deeplink.startsWith(`${scheme}:`))) {
-      const coin = schemes.find((scheme) => deeplink.startsWith(`${scheme}:`));
+    if (deeplink && schemes.some((item) => deeplink.startsWith(`${item.scheme}:`))) {
+      const crypto = schemes.find((item) => deeplink.startsWith(`${item.scheme}:`));
       mainWindow.loadURL(url.format({
         protocol: 'file',
         slashes: true,
         pathname: path.join(__dirname, '../app/index.html'),
-        search: `?coin=${coin}`,
+        search: `?crypto=${crypto._id}`,
       }));
     } else {
       mainWindow.loadURL(url.format({

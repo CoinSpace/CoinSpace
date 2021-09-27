@@ -1,16 +1,15 @@
 'use strict';
 
 module.exports = [
-  'coinspace',
-  'bitcoin',
-  'bitcoincash',
-  'bitcoinsv',
-  'ethereum',
-  'litecoin',
-  'ripple',
-  'stellar',
-  'eos',
-  'dogecoin',
-  'dash',
-  'monero',
+  require('./crypto/bitcoin@bitcoin.json'),
+  require('./crypto/bitcoin-cash@bitcoin-cash.json'),
+  require('./crypto/bitcoin-sv@bitcoin-sv.json'),
+  require('./crypto/ethereum@ethereum.json'),
+  require('./crypto/litecoin@litecoin.json'),
+  require('./crypto/xrp@ripple'),
+  require('./crypto/stellar@stellar.json'),
+  require('./crypto/eos@eos.json'),
+  require('./crypto/dogecoin@dogecoin.json'),
+  require('./crypto/dash@dash.json'),
+  require('./crypto/monero@monero.json'),
 ];
