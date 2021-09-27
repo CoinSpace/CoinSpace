@@ -21,31 +21,35 @@ export async function register(req, res) {
 // Public
 
 export async function tokenPublicPinVerify(req, res) {
-  await wallets.pinVerify(req.device, req.body.pinHash, 'public');
+  const device = await req.getDevice();
+  await wallets.pinVerify(device, req.body.pinHash, 'public');
   return res.status(200).send({
-    publicToken: req.device.public_token,
+    publicToken: device.public_token,
   });
 }
 
 export async function tokenPublicPlatformOptions(req, res) {
-  const options = await wallets.platformOptions(req.device, 'public');
+  const device = await req.getDevice();
+  const options = await wallets.platformOptions(device, 'public');
   return res.status(200).send(options);
 }
 
 export async function tokenPublicPlatformVerify(req, res) {
-  await wallets.platformVerify(req.device, req.body, 'public');
+  const device = await req.getDevice();
+  await wallets.platformVerify(device, req.body, 'public');
   return res.status(200).send({
-    publicToken: req.device.public_token,
+    publicToken: device.public_token,
   });
 }
 
 // Private
 
 export async function tokenPrivate(req, res) {
-  if (req.device.wallet.settings['1fa_private'] === false) {
-    if (req.device.wallet.authenticators.length === 0) {
+  const device = await req.getDevice();
+  if (device.wallet.settings['1fa_private'] === false) {
+    if (device.wallet.authenticators.length === 0) {
       return res.status(200).send({
-        privateToken: req.device.private_token,
+        privateToken: device.private_token,
       });
     }
   }
@@ -54,14 +58,15 @@ export async function tokenPrivate(req, res) {
 }
 
 export async function tokenPrivatePinVerify(req, res) {
-  if (req.device.wallet.settings['1fa_private'] !== false) {
-    await wallets.pinVerify(req.device, req.body.pinHash, 'private');
-    if (req.device.wallet.authenticators.length === 0) {
+  const device = await req.getDevice();
+  if (device.wallet.settings['1fa_private'] !== false) {
+    await wallets.pinVerify(device, req.body.pinHash, 'private');
+    if (device.wallet.authenticators.length === 0) {
       return res.status(200).send({
-        privateToken: req.device.private_token,
+        privateToken: device.private_token,
       });
     } else {
-      const options = await wallets.crossplatformOptions(req.device, 'private');
+      const options = await wallets.crossplatformOptions(device, 'private');
       return res.status(200).send(options);
     }
   }
@@ -70,8 +75,9 @@ export async function tokenPrivatePinVerify(req, res) {
 }
 
 export async function tokenPrivatePlatformOptions(req, res) {
-  if (req.device.wallet.settings['1fa_private'] !== false) {
-    const options = await wallets.platformOptions(req.device, 'private');
+  const device = await req.getDevice();
+  if (device.wallet.settings['1fa_private'] !== false) {
+    const options = await wallets.platformOptions(device, 'private');
     return res.status(200).send(options);
   }
 
@@ -79,14 +85,15 @@ export async function tokenPrivatePlatformOptions(req, res) {
 }
 
 export async function tokenPrivatePlatformVerify(req, res) {
-  if (req.device.wallet.settings['1fa_private'] !== false) {
-    await wallets.platformVerify(req.device, req.body, 'private');
-    if (req.device.wallet.authenticators.length === 0) {
+  const device = await req.getDevice();
+  if (device.wallet.settings['1fa_private'] !== false) {
+    await wallets.platformVerify(device, req.body, 'private');
+    if (device.wallet.authenticators.length === 0) {
       return res.status(200).send({
-        privateToken: req.device.private_token,
+        privateToken: device.private_token,
       });
     } else {
-      const options = await wallets.crossplatformOptions(req.device, 'private');
+      const options = await wallets.crossplatformOptions(device, 'private');
       return res.status(200).send(options);
     }
   }
@@ -95,8 +102,9 @@ export async function tokenPrivatePlatformVerify(req, res) {
 }
 
 export async function tokenPrivateCrossplatformOptions(req, res) {
-  if (req.device.wallet.settings['1fa_private'] === false) {
-    const options = await wallets.crossplatformOptions(req.device, 'private');
+  const device = await req.getDevice();
+  if (device.wallet.settings['1fa_private'] === false) {
+    const options = await wallets.crossplatformOptions(device, 'private');
     return res.status(200).send(options);
   }
 
@@ -104,93 +112,108 @@ export async function tokenPrivateCrossplatformOptions(req, res) {
 }
 
 export async function tokenPrivateCrossplatformVerify(req, res) {
-  await wallets.crossplatformVerify(req.device, req.body, 'private');
+  const device = await req.getDevice();
+  await wallets.crossplatformVerify(device, req.body, 'private');
   return res.status(200).send({
-    privateToken: req.device.private_token,
+    privateToken: device.private_token,
   });
 }
 
 // Attestation
 
 export async function platformAttestationOptions(req, res) {
-  const options = await wallets.platformAttestationOptions(req.device);
+  const device = await req.getDevice();
+  const options = await wallets.platformAttestationOptions(device);
   res.status(200).send(options);
 }
 
 export async function platformAttestationVerify(req, res) {
-  await wallets.platformAttestationVerify(req.device, req.body);
+  const device = await req.getDevice();
+  await wallets.platformAttestationVerify(device, req.body);
   res.status(200).send({ success: true });
 }
 
 export async function crossplatformAttestationOptions(req, res) {
-  const options = await wallets.crossplatformAttestationOptions(req.device);
+  const device = await req.getDevice();
+  const options = await wallets.crossplatformAttestationOptions(device);
   res.status(200).send(options);
 }
 
 export async function crossplatformAttestationVerify(req, res) {
-  await wallets.crossplatformAttestationVerify(req.device, req.body);
+  const device = await req.getDevice();
+  await wallets.crossplatformAttestationVerify(device, req.body);
   res.status(200).send({ success: true });
 }
 
 // API
 
 export async function removePlatformAuthenticator(req, res) {
-  await wallets.removePlatformAuthenticator(req.device);
+  const device = await req.getDevice();
+  await wallets.removePlatformAuthenticator(device);
   res.status(200).send({ success: true });
 }
 
 export async function listCrossplatformAuthenticators(req, res) {
-  const list = await wallets.listCrossplatformAuthenticators(req.device);
+  const device = await req.getDevice();
+  const list = await wallets.listCrossplatformAuthenticators(device);
   res.status(200).send(list);
 }
 
 export async function removeCrossplatformAuthenticator(req, res) {
-  await wallets.removeCrossplatformAuthenticator(req.device, req.body.credentialID);
+  const device = await req.getDevice();
+  await wallets.removeCrossplatformAuthenticator(device, req.body.credentialID);
   res.status(200).send({ success: true });
 }
 
 export async function getSettings(req, res) {
+  const device = await req.getDevice();
   res.status(200).send({
-    '1faPrivate': req.device.wallet.settings['1fa_private'],
-    hasAuthenticators: req.device.wallet.authenticators.length !== 0,
+    '1faPrivate': device.wallet.settings['1fa_private'],
+    hasAuthenticators: device.wallet.authenticators.length !== 0,
   });
 }
 
 export async function setSettings(req, res) {
+  const device = await req.getDevice();
   const data = {};
   if ('1faPrivate' in req.body) {
     data['1fa_private'] = req.body['1faPrivate'];
   }
-  const settings = await wallets.setSettings(req.device, data);
+  const settings = await wallets.setSettings(device, data);
   res.status(200).send({
     '1faPrivate': settings['1fa_private'],
-    hasAuthenticators: req.device.wallet.authenticators.length !== 0,
+    hasAuthenticators: device.wallet.authenticators.length !== 0,
   });
 }
 
 export async function getDetails(req, res) {
+  const device = await req.getDevice();
   res.status(200).send({
-    data: req.device.wallet.details,
+    data: device.wallet.details,
   });
 }
 
 export async function setDetails(req, res) {
-  const data = await wallets.setDetails(req.device, req.body.data);
+  const device = await req.getDevice();
+  const data = await wallets.setDetails(device, req.body.data);
   res.status(200).send({ data });
 }
 
 export async function setUsername(req, res) {
-  const username = await wallets.setUsername(req.device, req.body.username);
+  const device = await req.getDevice();
+  const username = await wallets.setUsername(device, req.body.username);
   res.status(200).send({ username });
 }
 
 export async function removeDevice(req, res) {
-  await wallets.removeDevice(req.device);
+  const device = await req.getDevice();
+  await wallets.removeDevice(device);
   res.status(200).send({ success: true });
 }
 
 export async function removeWallet(req, res) {
-  await wallets.removeWallet(req.device);
+  const device = await req.getDevice();
+  await wallets.removeWallet(device);
   res.status(200).send({ success: true });
 }
 
@@ -223,27 +246,32 @@ export async function getCsFee(req, res) {
 }
 
 export async function searchMecto(req, res) {
-  const results = await mecto.search(req.device, req.query);
+  const device = await req.getDevice();
+  const results = await mecto.search(device, req.query);
   res.status(200).send(results);
 }
 
 export async function saveMecto(req, res) {
-  await mecto.save(req.device, req.body);
+  const device = await req.getDevice();
+  await mecto.save(device, req.body);
   res.status(200).send({ success: true });
 }
 
 export async function removeMecto(req, res) {
-  await mecto.remove(req.device);
+  const device = await req.getDevice();
+  await mecto.remove(device);
   res.status(200).send({ success: true });
 }
 
 export async function getStorage(req, res) {
-  const data = await storage.getStorage(req.device, req.params.storageName);
+  const device = await req.getDevice();
+  const data = await storage.getStorage(device, req.params.storageName);
   res.status(200).send({ data });
 }
 
 export async function setStorage(req, res) {
-  const data = await storage.setStorage(req.device, req.params.storageName, req.body.data);
+  const device = await req.getDevice();
+  const data = await storage.setStorage(device, req.params.storageName, req.body.data);
   res.status(200).send({ data });
 }
 

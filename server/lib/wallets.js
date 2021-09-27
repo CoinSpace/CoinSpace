@@ -411,6 +411,9 @@ async function removeWallet(device) {
 }
 
 async function getDevice(deviceId) {
+  if (!deviceId) {
+    throw createError(400, 'Unknown wallet');
+  }
   const wallets = db.collection(COLLECTION);
   const wallet = await wallets.findOne({
     'devices._id': deviceId,

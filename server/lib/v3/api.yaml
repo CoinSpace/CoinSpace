@@ -698,9 +698,10 @@ paths:
     get:
       x-eov-operation-id: getUpdate
       x-eov-operation-handler: handlers
+      # for electron on windows
+      x-allow-unknown-query-parameters: true
       description: Get release
       parameters:
-        - $ref: '#/components/parameters/anyId'
         - $ref: '#/components/parameters/distribution'
         - $ref: '#/components/parameters/arch'
         - $ref: '#/components/parameters/version'
@@ -717,6 +718,8 @@ paths:
     get:
       x-eov-operation-id: getWinReleases
       x-eov-operation-handler: handlers
+      # for electron on windows
+      x-allow-unknown-query-parameters: true
       description: Get release
       parameters:
         - $ref: '#/components/parameters/version'
@@ -973,12 +976,6 @@ components:
           schema:
             type: 'object'
   parameters:
-    anyId:
-      in: query
-      name: id
-      description: Device or Wallet ID, not required
-      schema:
-        $ref: '#/components/schemas/Hex64String'
     deviceId:
       in: query
       name: id

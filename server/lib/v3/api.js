@@ -1,18 +1,21 @@
 import { fileURLToPath } from 'url';
 import express from 'express';
 import OpenApiValidator from 'express-openapi-validator';
-import { verifyReq, asyncWrapper } from '../utils.js';
+import { verifyReq } from '../utils.js';
 import wallets from '../wallets.js';
 import esmresolver from '../esmresolver.js';
 
 const router = express.Router();
 
-router.use(asyncWrapper(async (req, res, next) => {
-  if (req.query.id) {
-    req.device = await wallets.getDevice(req.query.id);
-  }
+router.use((req, res, next) => {
+  req.getDevice = () => {
+    if (!req._device) {
+      req._device = wallets.getDevice(req.query.id);
+    }
+    return req._device;
+  };
   next();
-}));
+});
 
 router.use(OpenApiValidator.middleware({
   apiSpec: fileURLToPath(new URL('./api.yaml', import.meta.url)),
@@ -24,17 +27,13 @@ router.use(OpenApiValidator.middleware({
   },
   validateSecurity: {
     handlers: {
-      walletSignature(req) {
-        if (req.device) {
-          return verifyReq(req.device.wallet._id, req);
-        }
-        return false;
+      async walletSignature(req) {
+        const device = await req.getDevice();
+        return verifyReq(device.wallet._id, req);
       },
-      deviceSignature(req) {
-        if (req.device) {
-          return verifyReq(req.device._id, req);
-        }
-        return false;
+      async deviceSignature(req) {
+        const device = await req.getDevice();
+        return verifyReq(device._id, req);
       },
     },
   },
