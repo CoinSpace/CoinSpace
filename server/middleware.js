@@ -33,7 +33,7 @@ function init(app) {
 
   app.use('/api/', (req, res, next) => {
     const id = req.query.id || req.body.deviceId || req.body.id || req.body.wallet_id;
-    if (!id) return next();
+    if (!id || !/^[a-f0-9]{64}$/.test(id)) return next();
     const [, app, store, version] = req.get('X-Release') !== undefined ?
       req.get('X-Release').match(/(.+)\.(.+)@(.+)/i) || [] : [];
     const screen = req.baseUrl + req.path + (req.query.crypto ? `/${req.query.crypto}` : '')
