@@ -11,7 +11,7 @@ async function init() {
   isInited = true;
   try {
     const data = await request({
-      url: 'https://api.moonpay.com/v3/ip_address',
+      url: 'https://api.moonpay.com/v4/ip_address',
       params: { apiKey },
       hideFlashError: true,
     });
@@ -74,16 +74,6 @@ function getBuyUrl(currencyCode, walletAddress) {
     currencyCode,
     walletAddress,
     enableRecurringBuys: true,
-    enabledPaymentMethods: [
-      'credit_debit_card',
-      'apple_pay',
-      'google_pay',
-      'samsung_pay',
-      'sepa_bank_transfer',
-      'gbp_bank_transfer',
-      'gbp_open_banking_payment',
-      'ach_bank_transfer',
-    ].join(','),
   };
 
   baseUrl += querystring.stringify(params);
