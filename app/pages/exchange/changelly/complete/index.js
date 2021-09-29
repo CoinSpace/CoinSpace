@@ -44,7 +44,7 @@ export default function(el) {
       toAddress: context.toAddress,
       amount: context.amount,
       payoutHash: context.payoutHash,
-      txUrl: wallet ? wallet.txUrl : () => context.payoutHashLink,
+      txUrl: wallet ? wallet.txUrl.bind(wallet) : () => context.payoutHashLink,
       cryptoId,
     });
   });
