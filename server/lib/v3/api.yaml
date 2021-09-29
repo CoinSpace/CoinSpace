@@ -527,6 +527,20 @@ paths:
                 $ref: '#/components/schemas/CsFee'
         default:
           $ref: '#/components/responses/GeneralError'
+  /wallet:
+    delete:
+      x-eov-operation-id: removeWallet
+      x-eov-operation-handler: handlers
+      description: Remove Wallet
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - walletSignature: []
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
   /mecto:
     get:
       x-eov-operation-id: searchMecto
