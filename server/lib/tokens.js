@@ -6,14 +6,16 @@ const COLLECTION = 'cryptos';
 function id2Asset(id) {
   if (id === 'bitcoincash') return 'bitcoin-cash';
   if (id === 'bitcoinsv') return 'bitcoin-sv';
-  if (id === 'binancecoin') return 'binance-smart-chain';
+  if (id === 'binancecoin') return 'binance-coin';
+  if (id === 'ripple') return 'xrp';
   return id;
 }
 
 function asset2Id(asset) {
   if (asset === 'bitcoin-cash') return 'bitcoincash';
   if (asset === 'bitcoin-sv') return 'bitcoinsv';
-  if (asset === 'binance-smart-chain') return 'binancecoin';
+  if (asset === 'binance-coin') return 'binancecoin';
+  if (asset === 'xrp') return 'ripple';
   return asset;
 }
 
@@ -43,7 +45,7 @@ async function getTokens(networks, limit = 0) {
       symbol: token.symbol,
       address: token.address,
       decimals: token.decimals,
-      icon: `${process.env.SITE_URL}/assets/crypto/${token.logo}?ver=${process.env.npm_package_version}`,
+      icon: `${process.env.SITE_URL}assets/crypto/${token.logo}?ver=${process.env.npm_package_version}`,
       market_cap_rank: token.rank,
       network: token.platform,
     };
