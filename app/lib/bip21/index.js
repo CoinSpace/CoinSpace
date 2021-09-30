@@ -32,7 +32,9 @@ const cryptoSchemes = [
 function getSchemeCryptoId(url) {
   if (!url) return false;
   const scheme = url.split(':')[0];
-  return cryptoSchemes.find((item) => item.scheme === scheme);
+  const item = cryptoSchemes.find((item) => item.scheme === scheme);
+  if (!item) return false;
+  return item.cryptoId;
 }
 
 function decode(url) {
@@ -54,8 +56,9 @@ function decode(url) {
 function registerProtocolHandler(crypto) {
   if (process.env.BUILD_PLATFORM !== 'web') return;
   if (!navigator.registerProtocolHandler) return;
-  const scheme = cryptoSchemes.find((item) => item.cryptoId === crypto._id);
-  if (!scheme) return;
+  const item = cryptoSchemes.find((item) => item.cryptoId === crypto._id);
+  if (!item) return;
+  const { scheme } = item;
   try {
     navigator.registerProtocolHandler(
       scheme,
