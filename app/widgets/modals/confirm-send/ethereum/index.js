@@ -94,7 +94,7 @@ function extendData(data) {
   data.feeSign = data.importTxOptions ? '-' : '+';
   data.fee = toUnitString(wallet.defaultFee, 18);
   data.feeSymbol = wallet.platformCrypto.symbol;
-  data.blockchain = wallet.crypto.name;
+  data.blockchain = wallet.platformCrypto.name;
   return data;
 }
 
