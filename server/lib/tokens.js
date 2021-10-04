@@ -2,6 +2,7 @@ import db from './db.js';
 import createError from 'http-errors';
 
 const COLLECTION = 'cryptos';
+const LEGACY_COLLECTION = 'tokens';
 
 function id2Asset(id) {
   if (id === 'bitcoincash') return 'bitcoin-cash';
@@ -38,14 +39,28 @@ async function getTokens(networks, limit = 0) {
     })
     .toArray();
 
+  const coingeckoIds = tokens.map((token) => token.coingecko.id);
+  const legacyTokens = await db.collection(LEGACY_COLLECTION)
+    .find({
+      coingecko_id: { $in: coingeckoIds },
+    }, {
+      projection: {
+        icon: true,
+        coingecko_id: true,
+      },
+    })
+    .toArray();
+
   return tokens.map((token) => {
+    const legacyToken = legacyTokens.find((legacyToken) => legacyToken.coingecko_id === token.coingecko.id);
+    const icon = `${process.env.SITE_URL}assets/crypto/${token.logo}?ver=${process.env.npm_package_version}`;
     return {
       _id: asset2Id(token.asset),
       name: token.name,
       symbol: token.symbol,
       address: token.address,
       decimals: token.decimals,
-      icon: `${process.env.SITE_URL}assets/crypto/${token.logo}?ver=${process.env.npm_package_version}`,
+      icon: legacyToken ? legacyToken.icon : icon,
       market_cap_rank: token.rank,
       network: token.platform,
     };
