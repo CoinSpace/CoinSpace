@@ -30,7 +30,7 @@
     <%= process.env.API_BSC_URL %>
     <%= process.env.SITE_URL %>;
     font-src 'self';
-    img-src 'self' data: https://www.gravatar.com;
+    img-src 'self' data: https://www.gravatar.com <%= process.env.SITE_URL %>;
     style-src 'self' 'unsafe-inline';
     script-src 'self' blob: 'unsafe-eval' 'unsafe-inline';">
   <% } %>
