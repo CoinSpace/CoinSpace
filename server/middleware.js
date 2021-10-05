@@ -22,8 +22,12 @@ function init(app) {
   app.use(cors());
 
   const dayInMs = 24 * 60 * 60 * 1000;
-  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.urlencoded({
+    limit: '2mb',
+    extended: true,
+  }));
   app.use(bodyParser.json({
+    limit: '2mb',
     verify(req, res, buf) {
       req.bodyHash = req.body ? crypto.createHash('sha256').update(buf).digest('hex') : '';
     },

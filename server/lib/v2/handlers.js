@@ -241,11 +241,17 @@ export async function getTickers(req, res) {
 }
 
 export async function getFees(req, res) {
-  const fees = await fee.getFees(`${req.query.crypto}@${req.query.crypto}`);
+  let { crypto } = req.query;
+  if (crypto === 'bitcoincash') crypto = 'bitcoin-cash';
+  if (crypto === 'bitcoinsv') crypto = 'bitcoin-sv';
+  const fees = await fee.getFees(`${crypto}@${crypto}`);
   res.status(200).send(fees);
 }
 
 export async function getCsFee(req, res) {
-  const fee = await csFee.getCsFee(`${req.query.crypto}@${req.query.crypto}`);
+  let { crypto } = req.query;
+  if (crypto === 'bitcoincash') crypto = 'bitcoin-cash';
+  if (crypto === 'bitcoinsv') crypto = 'bitcoin-sv';
+  const fee = await csFee.getCsFee(`${crypto}@${crypto}`);
   res.status(200).send(fee);
 }
