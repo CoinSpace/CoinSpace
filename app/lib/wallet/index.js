@@ -183,22 +183,19 @@ export async function initWallet(seed) {
   convert.setDecimals(state.wallet.crypto.decimals);
   await ticker.init([state.wallet.crypto]);
 
-  try {
-    if (seed) {
-      for (const wallet of Object.values(state.wallets)) {
-        if (wallet === state.wallet) continue;
-        try {
-          await wallet.load();
-        } catch (err) {
-          console.error(err);
-        }
-      }
-    }
-    await state.wallet.load();
-    emitter.emit('wallet-ready');
-  } catch (err) {
-    emitter.emit('wallet-error', err);
+  const promises = [];
+  if (seed) {
+    Object.values(state.wallets).forEach((wallet) => {
+      if (wallet === state.wallet) return;
+      promises.push(wallet.load().catch(console.error));
+    });
   }
+  promises.push(state.wallet.load().then(() => {
+    emitter.emit('wallet-ready');
+  }).catch((err) => {
+    emitter.emit('wallet-error', err);
+  }));
+  await Promise.all(promises);
 }
 
 function getExtraOptions(crypto) {
