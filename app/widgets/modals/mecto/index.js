@@ -1,5 +1,5 @@
 import Ractive from 'widgets/modals/base';
-import { getAvatar } from 'lib/avatar';
+import { getAvatarUrl } from 'lib/avatar';
 import geo from 'lib/geo';
 import { showError } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
@@ -14,7 +14,7 @@ function open(callback) {
       nearbys: [],
       searching: true,
       searchingAgain: false,
-      getAvatar,
+      getAvatarUrl,
       search_message: translate('Searching your area for other Coin users'),
     },
     oncomplete() {

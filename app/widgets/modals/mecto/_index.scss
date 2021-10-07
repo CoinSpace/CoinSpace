@@ -132,8 +132,9 @@
 
   ._avatar {
     @include icon(120px, 120px, block);
-    clip-path: circle(52px at center);
+    border-radius: 50%;
     margin: 0 auto;
+    background-color: white;
   }
 
   ._name {

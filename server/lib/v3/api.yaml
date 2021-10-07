@@ -936,10 +936,8 @@ components:
       properties:
         username:
           type: string
-        email:
+        avatarId:
           type: string
-        avatarIndex:
-          type: integer
         address:
           type: string
         lat:
@@ -948,8 +946,7 @@ components:
           type: number
       required:
         - username
-        - email
-        - avatarIndex
+        - avatarId
         - address
         - lat
         - lon
@@ -960,16 +957,13 @@ components:
         properties:
           username:
             type: string
-          email:
+          avatarId:
             type: string
-          avatarIndex:
-            type: integer
           address:
             type: string
         required:
           - username
-          - email
-          - avatarIndex
+          - avatarId
           - address
     Storage:
       type: object

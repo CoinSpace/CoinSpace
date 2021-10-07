@@ -1,18 +1,17 @@
 import request from 'lib/request';
 import details from 'lib/wallet/details';
 import { getWallet } from 'lib/wallet';
+import Avatar from 'lib/avatar';
 
 async function save() {
   const { latitude, longitude } = await getLocation();
   const userInfo = details.get('userInfo');
   return request({
-    // TODO: migrate to v3
-    url: `${process.env.SITE_URL}api/v2/mecto`,
+    url: `${process.env.SITE_URL}api/v3/mecto`,
     method: 'put',
     data: {
       username: userInfo.username,
-      email: userInfo.email,
-      avatarIndex: userInfo.avatarIndex,
+      avatarId: Avatar.getAvatar().id,
       address: getWallet().getNextAddress(),
       lat: latitude,
       lon: longitude,
@@ -25,8 +24,7 @@ async function save() {
 async function search() {
   const { latitude, longitude } = await getLocation();
   const results = await request({
-    // TODO: migrate to v3
-    url: `${process.env.SITE_URL}api/v2/mecto`,
+    url: `${process.env.SITE_URL}api/v3/mecto`,
     params: {
       lat: latitude,
       lon: longitude,
@@ -40,8 +38,7 @@ async function search() {
 
 function remove() {
   return request({
-    // TODO: migrate to v3
-    url: `${process.env.SITE_URL}api/v2/mecto`,
+    url: `${process.env.SITE_URL}api/v3/mecto`,
     method: 'delete',
     seed: 'public',
     hideFlashError: true,

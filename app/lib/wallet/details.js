@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import { encrypt, decrypt } from 'lib/encryption';
-import { randAvatarIndex } from 'lib/avatar';
 import request from 'lib/request';
 import LS from './localStorage';
 import seeds from './seeds';
@@ -52,7 +51,6 @@ async function _initDetails() {
     userInfo: {
       username: '',
       email: '',
-      avatarIndex: randAvatarIndex(),
     },
     tokens: [
       tetherToken,

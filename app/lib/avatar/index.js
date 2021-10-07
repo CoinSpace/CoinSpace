@@ -1,53 +1,35 @@
 import crypto from 'crypto';
-const avatars = [
-  require('../../assets/img/avatar_0.png'),
-  require('../../assets/img/avatar_1.png'),
-  require('../../assets/img/avatar_2.png'),
-  require('../../assets/img/avatar_3.png'),
-  require('../../assets/img/avatar_4.png'),
-  require('../../assets/img/avatar_5.png'),
-  require('../../assets/img/avatar_6.png'),
-  require('../../assets/img/avatar_7.png'),
-  require('../../assets/img/avatar_8.png'),
-  require('../../assets/img/avatar_9.png'),
-];
+import { toSvg } from 'jdenticon';
+import LS from 'lib/wallet/localStorage';
+import details from 'lib/wallet/details';
 
-function formatEmail(email) {
-  return email.trim().toLowerCase();
-}
-
-function emailToAvatar(email, size) {
-  email = formatEmail(email);
-
-  return [
-    'https://www.gravatar.com/avatar/',
-    crypto.createHash('md5').update(email).digest('hex'),
-    `?size=${size}`,
-  ].join('');
-}
-
-export function randAvatarIndex() {
-  return Math.floor(Math.random() * 10);
-}
-
-function getAvatarByIndex(index) {
-  return avatars[index];
-}
-
-export function getAvatar(email, avatarIndex, size) {
-  if (!blank(email)) {
-    return emailToAvatar(email, size);
+export function getAvatar(size = 64) {
+  const userInfo = details.get('userInfo');
+  const email = (userInfo.email || '').trim().toLowerCase();
+  let id;
+  if (email) {
+    const hash = crypto.createHash('md5').update(email).digest('hex');
+    id = `gravatar:${hash}`;
+  } else {
+    const hash = crypto.createHmac('sha256', 'Coin Wallet').update(LS.getDetailsKey()).digest('hex');
+    id = `identicon:${hash}`;
   }
-  return getAvatarByIndex(avatarIndex);
+  return {
+    id,
+    url: getAvatarUrl(id, size),
+  };
 }
 
-function blank(str) {
-  return (str == undefined || str.trim() === '');
+export function getAvatarUrl(id, size) {
+  const [type, hash] = id.split(':');
+  if (type === 'gravatar') {
+    return `https://www.gravatar.com/avatar/${hash}?size=${size}`;
+  } else if (type === 'identicon') {
+    return `data:image/svg+xml;base64,${Buffer.from(toSvg(hash, size, { padding: 0 })).toString('base64')}`;
+  }
 }
 
 export default {
-  emailToAvatar,
-  randAvatarIndex,
-  getAvatarByIndex,
   getAvatar,
+  getAvatarUrl,
 };

@@ -42,7 +42,7 @@
   <div class="geo__results">
     <div class="_item" on-click="select"
       data-wallet={{address}}>
-      <img class="_avatar" src="{{getAvatar(email, avatarIndex, 120)}}" />
+      <img class="_avatar" src="{{getAvatarUrl(avatarId, 120)}}" />
       <div class="_name">{{username}}</div>
     </div>
   </div>

@@ -68,8 +68,8 @@ export default function(el) {
 
   ractive.on('before-show', ({ userInfo }) => {
     if (userInfo) {
-      const avatar = Avatar.getAvatar(userInfo.email, userInfo.avatarIndex, 64);
-      ractive.set('avatar', `url('${avatar}')`);
+      const avatar = Avatar.getAvatar(64);
+      ractive.set('avatar', avatar.url);
       ractive.set('username', userInfo.username || translate('Your username'));
     }
   });

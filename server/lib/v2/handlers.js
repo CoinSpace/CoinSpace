@@ -202,12 +202,12 @@ export async function removeWallet(req, res) {
 }
 
 export async function searchMecto(req, res) {
-  const results = await mecto.search(req.device, req.query);
+  const results = await mecto.search(req.device, req.query, true);
   res.status(200).send(results);
 }
 
 export async function saveMecto(req, res) {
-  await mecto.save(req.device, req.body);
+  await mecto.save(req.device, req.body, true);
   res.status(200).send({ success: true });
 }
 
