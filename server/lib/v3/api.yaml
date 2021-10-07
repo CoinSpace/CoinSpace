@@ -489,6 +489,34 @@ paths:
                 $ref: '#/components/schemas/TickerList'
         default:
           $ref: '#/components/responses/GeneralError'
+  /tickers/public:
+    get:
+      x-eov-operation-id: getTickersPublic
+      x-eov-operation-handler: handlers
+      description: Get info and price of one or up to 5 crypto
+      parameters:
+        - in: query
+          name: crypto
+          required: true
+          description: List of Crypto IDs
+          style: form
+          explode: false
+          allowReserved: true
+          schema:
+            type: array
+            minItems: 1
+            maxItems: 5
+            items:
+              $ref: '#/components/schemas/CryptoId'
+      responses:
+        '200':
+          description: List of tickers for crypto
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/TickerList'
+        default:
+          $ref: '#/components/responses/GeneralError'
   /fees:
     get:
       x-eov-operation-id: getFees

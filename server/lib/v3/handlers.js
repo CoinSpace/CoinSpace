@@ -235,6 +235,11 @@ export async function getTickers(req, res) {
   res.status(200).send(tickers);
 }
 
+export async function getTickersPublic(req, res) {
+  const tickers = await cryptos.getTickersPublic(req.query.crypto);
+  res.status(200).send(tickers);
+}
+
 export async function getFees(req, res) {
   const fees = await fee.getFees(req.query.crypto);
   res.status(200).send(fees);

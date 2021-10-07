@@ -213,8 +213,43 @@ function getTickers(ids) {
       // 7 days ago
       'updated_at.prices': { $gte: new Date(Date.now() - (7 * 24 * 60 * 60 * 1000)) },
     }, {
+      sort: {
+        rank: 1,
+      },
       projection: {
         prices: 1,
+      },
+    })
+    .sort()
+    .toArray();
+}
+
+function getTickersPublic(ids) {
+  return db.collection(COLLECTION)
+    .find({
+      $or: ids.map((id) => {
+        const [asset, platform] = id.split('@');
+        if (/^0x[a-fA-F0-9]{40}$/.test(asset)) {
+          // ETH or BSC address
+          return {
+            address: asset.toLowerCase(),
+            platform,
+          };
+        } else {
+          return {
+            _id: id,
+          };
+        }
+      }),
+      // 7 days ago
+      'updated_at.prices': { $gte: new Date(Date.now() - (7 * 24 * 60 * 60 * 1000)) },
+    }, {
+      sort: {
+        rank: 1,
+      },
+      projection: {
+        prices: 1,
+        address: 1,
       },
     })
     .toArray();
@@ -227,4 +262,5 @@ export default {
   getAll,
   getTicker,
   getTickers,
+  getTickersPublic,
 };
