@@ -224,12 +224,13 @@ function getTickers(ids) {
     .toArray();
 }
 
-function getTickersPublic(ids) {
-  return db.collection(COLLECTION)
+async function getTickersPublic(ids) {
+  const tickers = await db.collection(COLLECTION)
     .find({
       $or: ids.map((id) => {
         const [asset, platform] = id.split('@');
-        if (/^0x[a-fA-F0-9]{40}$/.test(asset)) {
+        if (['ethereum', 'binance-smart-chain'].includes(platform)
+          && /^0x[a-fA-F0-9]{40}$/.test(asset)) {
           // ETH or BSC address
           return {
             address: asset.toLowerCase(),
@@ -244,15 +245,29 @@ function getTickersPublic(ids) {
       // 7 days ago
       'updated_at.prices': { $gte: new Date(Date.now() - (7 * 24 * 60 * 60 * 1000)) },
     }, {
-      sort: {
-        rank: 1,
-      },
       projection: {
         prices: 1,
         address: 1,
+        platform: 1,
       },
     })
     .toArray();
+
+  return ids.map((id) => {
+    for (const ticker of tickers) {
+      if (id === ticker._id) {
+        return {
+          _id: ticker._id,
+          prices: ticker.prices,
+        };
+      } else if (id === `${ticker.address}@${ticker.platform}`) {
+        return {
+          _id: `${ticker.address}@${ticker.platform}`,
+          prices: ticker.prices,
+        };
+      }
+    }
+  }).filter(Boolean);
 }
 
 export default {
