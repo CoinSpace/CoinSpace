@@ -234,25 +234,12 @@ function getExtraOptions(crypto) {
     if (crypto.platform === 'bitcoin-cash') {
       options.minConf = 0;
     }
-    options.getDynamicFees = () => {
-      return request({
-        url: `${process.env.SITE_URL}api/v3/fees`,
-        params: {
-          crypto: crypto._id,
-        },
-        method: 'get',
-        seed: 'public',
-      }).catch(console.error);
-    };
-    options.getCsFee = () => {
-      return request({
-        url: `${process.env.SITE_URL}api/v3/csfee`,
-        params: {
-          crypto: crypto._id,
-        },
-        method: 'get',
-        seed: 'public',
-      }).catch(console.error);
+    options.apiWeb = process.env.SITE_URL;
+    options.request = function(config = {}) {
+      if (!config.seed) {
+        config.seed = 'public';
+      }
+      return request(config);
     };
   } else if (crypto.platform === 'eos') {
     options.storage = new Storage(process.env.SITE_URL, 'eos', LS.getDetailsKey());
