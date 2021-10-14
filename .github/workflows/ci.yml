@@ -3,6 +3,19 @@ name: CoinSpace CI
 on: push
 
 jobs:
+  lint:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+          registry-url: https://npm.pkg.github.com/
+      - run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_READ_TOKEN}}
+      - run: npm run lint
+
   build:
     environment: ${{ github.ref == 'refs/heads/master' && 'production' || 'development' }}
     runs-on: ${{ matrix.os }}

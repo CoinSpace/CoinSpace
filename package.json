@@ -47,7 +47,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
-    "@babel/eslint-parser": "^7.15.4",
     "@babel/preset-env": "^7.15.6",
     "@coinspace/b39": "^2.1.4",
     "@coinspace/cs-binance-smart-chain-wallet": "^1.1.0",
@@ -77,8 +76,8 @@
     "dotenv": "^8.2.0",
     "dotenv-webpack": "^7.0.2",
     "ejs-loader": "^0.5.0",
-    "eslint": "^7.32.0",
-    "eslint-config-coinspace": "^1.1.6",
+    "eslint": "^8.0.1",
+    "eslint-config-coinspace": "^1.2.0",
     "events": "^3.3.0",
     "evp_bytestokey": "^1.0.3",
     "file-loader": "^6.2.0",
@@ -130,8 +129,8 @@
       "commonjs": true,
       "mocha": true
     },
-    "parser": "@babel/eslint-parser",
     "parserOptions": {
+      "ecmaVersion": 2022,
       "requireConfigFile": false,
       "sourceType": "module"
     },
