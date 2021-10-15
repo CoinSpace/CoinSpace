@@ -338,7 +338,7 @@ async function listCrossplatformAuthenticators(device) {
   return device.wallet.authenticators.map(item => {
     return {
       credentialID: item.credentialID,
-      date: item.date,
+      date: item.date.toISOString(),
     };
   });
 }

@@ -5,7 +5,7 @@ info:
   title: Coin Wallet API V3
 
 servers:
-  - url: /api/v3
+  - url: https://coin.space/api/v3
 
 paths:
   /register:
@@ -13,12 +13,14 @@ paths:
       x-eov-operation-id: register
       x-eov-operation-handler: handlers
       description: Register new device
+      security: []
       requestBody:
         required: true
         content:
           'application/json':
             schema:
-              type: 'object'
+              type: object
+              additionalProperties: false
               properties:
                 walletId:
                   description: Wallet ID
@@ -51,6 +53,7 @@ paths:
       description: Get public token
       parameters:
         - $ref: '#/components/parameters/deviceId'
+      security: []
       requestBody:
         $ref: '#/components/requestBodies/PIN'
       responses:
@@ -69,6 +72,7 @@ paths:
       description: Get Assertion Options
       parameters:
         - $ref: '#/components/parameters/deviceId'
+      security: []
       responses:
         '200':
           $ref: '#/components/responses/AssertionOptionsResponse'
@@ -80,6 +84,7 @@ paths:
       description: Verify Assertion
       parameters:
         - $ref: '#/components/parameters/deviceId'
+      security: []
       requestBody:
         $ref: '#/components/requestBodies/Assertion'
       responses:
@@ -283,6 +288,18 @@ paths:
             'application/json':
               schema:
                 type: array
+                maxItems: 10
+                items:
+                  type: object
+                  additionalProperties: false
+                  properties:
+                    credentialID:
+                      $ref: '#/components/schemas/Base64UrlString'
+                    date:
+                      $ref: '#/components/schemas/ISODateString'
+                  required:
+                    - credentialID
+                    - date
         default:
           $ref: '#/components/responses/GeneralError'
     delete:
@@ -298,10 +315,11 @@ paths:
         content:
           'application/json':
             schema:
-              type: 'object'
+              type: object
+              additionalProperties: false
               properties:
                 credentialID:
-                  type: string
+                  $ref: '#/components/schemas/Base64UrlString'
               required:
                 - credentialID
       responses:
@@ -366,11 +384,11 @@ paths:
             'application/json':
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
                     description: User details
-                    type: string
-                    nullable: true
+                    $ref: '#/components/schemas/Base64String'
                 required:
                   - data
         default:
@@ -388,11 +406,12 @@ paths:
         content:
           'application/json':
             schema:
-              type: 'object'
+              type: object
+              additionalProperties: false
               properties:
                 data:
                   description: User details
-                  type: string
+                  $ref: '#/components/schemas/Base64String'
               required:
                 - data
       responses:
@@ -402,9 +421,10 @@ paths:
             'application/json':
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   data:
-                    type: string
+                    $ref: '#/components/schemas/Base64String'
                 required:
                   - data
         default:
@@ -423,14 +443,14 @@ paths:
         content:
           'application/json':
             schema:
-              $ref: '#/components/schemas/Username'
+              $ref: '#/components/schemas/UsernameObject'
       responses:
         '200':
           description: Update username result
           content:
             'application/json':
               schema:
-                $ref: '#/components/schemas/Username'
+                $ref: '#/components/schemas/UsernameObject'
         default:
           $ref: '#/components/responses/GeneralError'
   /cryptos:
@@ -508,6 +528,7 @@ paths:
             maxItems: 5
             items:
               $ref: '#/components/schemas/CryptoId'
+      security: []
       responses:
         '200':
           description: List of tickers for crypto
@@ -701,6 +722,8 @@ paths:
           description: Openalias hostname
           schema:
             type: string
+            pattern: ^.+\..+$
+            maxLength: 256
       security:
         - deviceSignature: []
       responses:
@@ -710,11 +733,12 @@ paths:
             'application/json':
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   address:
-                    type: string
+                    $ref: '#/components/schemas/AnyCryptoAddress'
                   name:
-                    type: string
+                    $ref: '#/components/schemas/AnyString256'
                 required:
                   - address
                   - name
@@ -725,15 +749,14 @@ paths:
       x-eov-operation-id: getUpdates
       x-eov-operation-handler: handlers
       description: Get all releases
+      security: []
       responses:
         '200':
           description: Releases
           content:
             'application/json':
               schema:
-                type: array
-                items:
-                  type: object
+                $ref: '#/components/schemas/UpdateList'
         default:
           $ref: '#/components/responses/GeneralError'
   /update/{distribution}/{arch}/{version}:
@@ -747,13 +770,14 @@ paths:
         - $ref: '#/components/parameters/distribution'
         - $ref: '#/components/parameters/arch'
         - $ref: '#/components/parameters/version'
+      security: []
       responses:
         '200':
           description: Release
           content:
             'application/json':
               schema:
-                type: object
+                $ref: '#/components/schemas/Update'
         default:
           $ref: '#/components/responses/GeneralError'
   /update/win/x64/{version}/RELEASES:
@@ -765,6 +789,7 @@ paths:
       description: Get release
       parameters:
         - $ref: '#/components/parameters/version'
+      security: []
       responses:
         '200':
           description: Release content
@@ -772,6 +797,8 @@ paths:
             'text/html':
               schema:
                 type: string
+                pattern: ^.+ https:\/\/.+ \d+$
+                maxLength: 2048
         default:
           $ref: '#/components/responses/GeneralError'
   /download/{distribution}/{arch}:
@@ -782,9 +809,20 @@ paths:
       parameters:
         - $ref: '#/components/parameters/distribution'
         - $ref: '#/components/parameters/arch'
+      security: []
       responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
         '302':
           description: Redirect to file
+          content:
+            'text/plain':
+              schema:
+                $ref: '#/components/schemas/RedirectString'
+          headers:
+            Location:
+              schema:
+                $ref: '#/components/schemas/UrlString'
         default:
           $ref: '#/components/responses/GeneralError'
 
@@ -792,10 +830,78 @@ components:
   schemas:
     Hex64String:
       type: string
-      pattern: "^[a-f0-9]{64}$"
+      pattern: ^[a-f0-9]{64}$
+      maxLength: 64
     Hex128String:
       type: string
-      pattern: "^[a-f0-9]{128}$"
+      pattern: ^[a-f0-9]{128}$
+      maxLength: 128
+    Base64String:
+      type: string
+      pattern: ^(?:[A-Za-z\d+\/]{4})*?(?:[A-Za-z\d+\/]{2}(?:==)?|[A-Za-z\d+\/]{3}=?)?$
+      maxLength: 2097152 # 2mb
+      nullable: true
+    Base64UrlString:
+      type: string
+      pattern: ^[A-Za-z0-9_-]+$
+      maxLength: 2097152 # 2mb
+      nullable: true
+    UrlString:
+      type: string
+      pattern: ^(http|https):\/\/.+$
+      maxLength: 2048
+    RedirectString:
+      type: string
+      pattern: ^Found\. Redirecting to (http|https):\/\/.+$
+      maxLength: 2048
+    ISODateString:
+      type: string
+      pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$
+      maxLength: 24
+    UInt64:
+      type: integer
+      format: int64
+      minimum: 0
+      maximum: 9007199254740991
+    Latitude:
+      type: number
+      format: float
+      minimum: -90
+      maximum: 90
+    Longitude:
+      type: number
+      format: float
+      minimum: -180
+      maximum: 180
+    AvatarId:
+      type: string
+      pattern: ^(gravatar|identicon):.+$
+      maxLength: 256
+    AnyCryptoAddress:
+      type: string
+      pattern: ^.{1,256}$
+      maxLength: 256
+    AnyString256:
+      type: string
+      pattern: ^.{0,256}$
+      maxLength: 256
+    Distribution:
+      type: string
+      pattern: ^[a-z0-9-]+$
+      maxLength: 64
+    Arch:
+      type: string
+      pattern: ^(any|x64)$
+      maxLength: 64
+    Version:
+      type: string
+      pattern: ^v.+$
+      maxLength: 64
+    Price:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 9007199254740991
     PublicToken:
       type: object
       properties:
@@ -814,25 +920,51 @@ components:
       type: object
       properties:
         challenge:
-          type: string
+          $ref: '#/components/schemas/Base64UrlString'
       required:
         - challenge
     AssertionOptions:
       type: object
       properties:
         challenge:
-          type: string
+          $ref: '#/components/schemas/Base64UrlString'
       required:
         - challenge
-    Username:
+    AuthenticatorAssertionResponse:
       type: object
+      additionalProperties: false
+      properties:
+        authenticatorData:
+          $ref: '#/components/schemas/Base64UrlString'
+        clientDataJSON:
+          $ref: '#/components/schemas/Base64UrlString'
+        signature:
+          $ref: '#/components/schemas/Base64UrlString'
+        userHandle:
+          $ref: '#/components/schemas/Base64UrlString'
+      required:
+        - authenticatorData
+        - clientDataJSON
+        - signature
+    PublicKeyCredentialType:
+      type: string
+      pattern: ^public-key$
+      maxLength: 10
+    Username:
+      type: string
+      pattern: ^[a-z0-9-]+$
+      maxLength: 64
+    UsernameObject:
+      type: object
+      additionalProperties: false
       properties:
         username:
-          type: string
+          $ref: '#/components/schemas/Username'
       required:
         - username
     Settings:
       type: object
+      additionalProperties: false
       properties:
         1faPrivate:
           description: Authorization for private token
@@ -842,13 +974,16 @@ components:
           type: boolean
     CryptoId:
       type: string
-      pattern: '^.+@.+$'
+      pattern: ^.+@.+$
+      maxLength: 256
     CryptoIdList:
       type: array
+      maxItems: 1000
       items:
         $ref: '#/components/schemas/CryptoId'
     CryptoList:
       type: array
+      maxItems: 10000
       items:
         type: object
         properties:
@@ -856,15 +991,24 @@ components:
             $ref: '#/components/schemas/CryptoId'
           platform:
             type: string
+            pattern: ^[a-z-]+$
+            maxLength: 256
           symbol:
             type: string
+            pattern: ^[A-Z0-9]+$
+            maxLength: 256
           name:
-            type: string
+            $ref: '#/components/schemas/AnyString256'
           decimals:
             type: number
+            format: int32
+            minimum: 0
+            maximum: 100
             nullable: true
           logo:
             type: string
+            pattern: ^.+\.(svg|png|jpg)$
+            maxLength: 256
         required:
           - _id
           - platform
@@ -874,56 +1018,75 @@ components:
           - logo
     Ticker:
       type: object
+      additionalProperties: false
       properties:
         _id:
-          type: string
+          $ref: '#/components/schemas/CryptoId'
         prices:
           type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Price'
       required:
         - _id
         - prices
     TickerList:
       type: array
+      maxItems: 1000
       items:
         $ref: '#/components/schemas/Ticker'
     Fee:
       type: object
+      additionalProperties: false
       properties:
         name:
           type: string
+          pattern: ^(minimum|default|fastest)$
+          maxLength: 64
         value:
-          type: number
+          $ref: '#/components/schemas/UInt64'
+        default:
+          type: boolean
       required:
         - name
         - value
     FeeList:
       type: object
+      additionalProperties: false
       properties:
         items:
           type: array
+          maxItems: 5
           items:
             $ref: '#/components/schemas/Fee'
       required:
         - items
     CsFee:
       type: object
+      additionalProperties: false
       properties:
         fee:
           type: number
+          format: float
+          minimum: 0
+          maximum: 1
         minFee:
-          type: number
+          $ref: '#/components/schemas/UInt64'
         maxFee:
-          type: number
+          $ref: '#/components/schemas/UInt64'
         rbfFee:
-          type: number
+          $ref: '#/components/schemas/UInt64'
         addresses:
           type: array
+          maxItems: 128
           items:
-            type: string
+            $ref: '#/components/schemas/AnyCryptoAddress'
         whitelist:
           type: array
+          maxItems: 32
           items:
-            type: string
+            $ref: '#/components/schemas/AnyCryptoAddress'
+        skipMinFee:
+          type: boolean
       required:
         - fee
         - minFee
@@ -931,19 +1094,21 @@ components:
         - rbfFee
         - addresses
         - whitelist
+        - skipMinFee
     Mecto:
       type: object
+      additionalProperties: false
       properties:
         username:
-          type: string
+          $ref: '#/components/schemas/Username'
         avatarId:
-          type: string
+          $ref: '#/components/schemas/AvatarId'
         address:
-          type: string
+          $ref: '#/components/schemas/AnyCryptoAddress'
         lat:
-          type: number
+          $ref: '#/components/schemas/Latitude'
         lon:
-          type: number
+          $ref: '#/components/schemas/Longitude'
       required:
         - username
         - avatarId
@@ -952,37 +1117,67 @@ components:
         - lon
     MectoUsers:
       type: array
+      maxItems: 15
       items:
         type: object
+        additionalProperties: false
         properties:
           username:
-            type: string
+            $ref: '#/components/schemas/Username'
           avatarId:
-            type: string
+            $ref: '#/components/schemas/AvatarId'
           address:
-            type: string
+            $ref: '#/components/schemas/AnyCryptoAddress'
         required:
           - username
           - avatarId
           - address
     Storage:
       type: object
+      additionalProperties: false
       properties:
         data:
           description: Storage
-          type: string
-          nullable: true
+          $ref: '#/components/schemas/Base64String'
       required:
         - data
     MoonpayUrls:
       type: object
+      additionalProperties: false
       properties:
         urls:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/UrlString'
           minItems: 1
           maxItems: 5
+    Update:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          $ref: '#/components/schemas/Version'
+        version:
+          $ref: '#/components/schemas/Version'
+        url:
+          $ref: '#/components/schemas/UrlString'
+        distribution:
+          $ref: '#/components/schemas/Distribution'
+        arch:
+          $ref: '#/components/schemas/Arch'
+        app:
+          type: string
+          pattern: ^(app|electron)$
+          maxLength: 64
+      required:
+        - name
+        - version
+        - url
+    UpdateList:
+      type: array
+      maxItems: 20
+      items:
+        $ref: '#/components/schemas/Update'
   requestBodies:
     PIN:
       description: PIN Hash
@@ -990,7 +1185,8 @@ components:
       content:
         'application/json':
           schema:
-            type: 'object'
+            type: object
+            additionalProperties: false
             properties:
               pinHash:
                 description: PIN Hash
@@ -1003,14 +1199,34 @@ components:
       content:
         'application/json':
           schema:
-            type: 'object'
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/Base64UrlString'
+            required:
+              - id
     Assertion:
       description: Assertion Request
       required: true
       content:
         'application/json':
           schema:
-            type: 'object'
+            type: object
+            additionalProperties: false
+            properties:
+              id:
+                $ref: '#/components/schemas/Base64UrlString'
+              rawId:
+                $ref: '#/components/schemas/Base64UrlString'
+              response:
+                $ref: '#/components/schemas/AuthenticatorAssertionResponse'
+              type:
+                $ref: '#/components/schemas/PublicKeyCredentialType'
+            required:
+              - id
+              - rawId
+              - response
+              - type
   parameters:
     deviceId:
       in: query
@@ -1043,40 +1259,42 @@ components:
       required: true
       description: Latitude
       schema:
-        type: number
+        $ref: '#/components/schemas/Latitude'
     lon:
       in: query
       name: lon
       required: true
       description: Longitude
       schema:
-        type: number
+        $ref: '#/components/schemas/Longitude'
     storageName:
       in: path
       name: storageName
       schema:
         type: string
+        pattern: ^[a-z0-9-]+$
+        maxLength: 64
       required: true
       description: Storage name
     distribution:
       in: path
       name: distribution
       schema:
-        type: string
+        $ref: '#/components/schemas/Distribution'
       required: true
       description: App distribution
     arch:
       in: path
       name: arch
       schema:
-        type: string
+        $ref: '#/components/schemas/Arch'
       required: true
       description: App architecture
     version:
       in: path
       name: version
       schema:
-        type: string
+        $ref: '#/components/schemas/Version'
       required: true
       description: App version
   responses:
@@ -1098,6 +1316,7 @@ components:
         'application/json':
           schema:
             type: object
+            additionalProperties: false
             properties:
               success:
                 type: boolean
@@ -1108,13 +1327,14 @@ components:
       content:
         'application/json':
           schema:
-            type: object
+            $ref: '#/components/schemas/PublicToken'
     SuccessResponse:
       description: Success Response
       content:
         'application/json':
           schema:
             type: object
+            additionalProperties: false
             properties:
               success:
                 type: boolean
@@ -1125,6 +1345,8 @@ components:
       content:
         'application/json':
           schema:
+            type: object
+            additionalProperties: false
             required:
               - code
               - error
@@ -1132,8 +1354,12 @@ components:
               code:
                 type: integer
                 format: int32
+                minimum: 0
+                maximum: 1000
               error:
                 type: string
+                pattern: ^.{0,16384}$
+                maxLength: 16384
   securitySchemes:
     deviceSignature:
       type: apiKey
