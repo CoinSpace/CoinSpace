@@ -17,6 +17,7 @@ jobs:
       - run: npm run lint
 
   build:
+    needs: lint
     environment: ${{ github.ref == 'refs/heads/master' && 'production' || 'development' }}
     runs-on: ${{ matrix.os }}
     strategy:
