@@ -19,10 +19,10 @@
         <div class="csinput csinput--with-dropdown">
           <input id="changelly_from_amount" class="csinput__input" value="1" on-input="input-from-amount" type="number" min="0" step="any" placeholder="{{translate("Amount")}}" autocorrect="off" autocapitalize="off" />
           <span class="csinput__dropdown">
-            <span class="csinput__dropdown__label">{{fromSymbol}}</span>
-            <select class="js-from-symbol-select" value="{{fromSymbol}}" tabindex="-1">
+            <span class="csinput__dropdown__label">{{fromCrypto.symbol}}</span>
+            <select class="js-from-symbol-select" value="{{fromCryptoId}}" tabindex="-1">
               {{#coins}}
-                <option value="{{symbol}}">{{symbol}} - {{name}}</option>
+                <option value="{{_id}}">{{symbol}} - {{name}}{{#if type === 'token'}} ({{platformName}}){{/if}}</option>
               {{/coins}}
             </select>
           </span>
@@ -35,7 +35,7 @@
       {{#if isFirstEstimate}}
         ...
       {{else}}
-        {{minAmount}} {{fromSymbol}}
+        {{minAmount}} {{fromCrypto.symbol}}
       {{/if}}
     </div>
 
@@ -55,10 +55,10 @@
         <div class="csinput csinput--with-dropdown">
           <input id="changelly_to_amount" class="csinput__input" type="text" placeholder="{{translate("Amount")}}" autocorrect="off" autocapitalize="off" value="{{toAmount}}" readonly/>
           <span class="csinput__dropdown">
-            <span class="csinput__dropdown__label">{{toSymbol}}</span>
-            <select class="js-to-symbol-select" value="{{toSymbol}}" tabindex="-1">
+            <span class="csinput__dropdown__label">{{toCrypto.symbol}}</span>
+            <select class="js-to-symbol-select" value="{{toCryptoId}}" tabindex="-1">
               {{#coins}}
-                <option value="{{symbol}}">{{symbol}} - {{name}}</option>
+                <option value="{{_id}}">{{symbol}} - {{name}}{{#if type === 'token'}} ({{platformName}}){{/if}}</option>
               {{/coins}}
             </select>
           </span>
@@ -72,7 +72,7 @@
         {{translate("Loading...")}}
       {{else}}
         {{#if rate === '0'}} 0 {{else}} 1 {{/if}}
-        {{fromSymbol}} ≈ {{rate}} {{toSymbol}}
+        {{fromCrypto.symbol}} ≈ {{rate}} {{toCrypto.symbol}}
       {{/if}}
     </div>
 

@@ -11,47 +11,10 @@
     <div class="csformgroup csformgroup--with-blockchain">
       <div class="csformgroup__input-group">
         <div class="csformgroup__input-group__header">
-          <label for="changelly_return_address">{{fromSymbol}} {{translate("address")}}</label>
-          <span class="csformgroup__input-group__header__help" on-click="help">
-            {{>svg_help}}
-          </span>
+          <label for="changelly_to_address">{{translate("Destination address")}} </label>
         </div>
         <div class="csinput csinput--with-x">
-          <input id="changelly_return_address" class="csinput__input" type="text" placeholder="{{translate("Return address (optional)")}}" autocorrect="off" autocapitalize="off" value="{{returnAddress}}" />
-          {{#returnAddress}}
-            <div class="csinput__cross" on-click="clearAddress" data-context="changelly-return-address">
-              <span class="csinput__cross__icon">{{> svg_close}}</span>
-            </div>
-          {{/returnAddress}}
-        </div>
-      </div>
-
-      {{#qrScannerAvailable}}
-        <div class="csbtn" on-click="open-qr" data-context="changelly-return-address">
-          <span class="csbtn__icon">
-            {{>svg_qr}}
-          </span>
-        </div>
-      {{/qrScannerAvailable}}
-
-      <div class="csbtn" on-click="open-geo" data-context="changelly-return-address">
-        <span class="csbtn__icon">
-          {{>svg_mecto}}
-        </span>
-      </div>
-    </div>
-
-    <div class="_blockchain">
-      {{translate("Blockchain")}}: {{depositBlockchain}}
-    </div>
-
-    <div class="csformgroup csformgroup--with-blockchain">
-      <div class="csformgroup__input-group">
-        <div class="csformgroup__input-group__header">
-          <label for="changelly_to_address">{{toSymbol}} {{translate("address")}}</label>
-        </div>
-        <div class="csinput csinput--with-x">
-          <input id="changelly_to_address" class="csinput__input" type="text" placeholder="{{translate("Address")}}" autocorrect="off" autocapitalize="off" value="{{toAddress}}" />
+          <input id="changelly_to_address" class="csinput__input" type="text" placeholder="{{toCrypto.symbol}} {{translate("address")}}" autocorrect="off" autocapitalize="off" value="{{toAddress}}" />
           {{#toAddress}}
             <div class="csinput__cross" on-click="clearAddress" data-context="changelly-to-address">
               <span class="csinput__cross__icon">{{> svg_close}}</span>
@@ -77,6 +40,43 @@
 
     <div class="_blockchain">
       {{translate("Blockchain")}}: {{toBlockchain}}
+    </div>
+
+    <div class="csformgroup csformgroup--with-blockchain">
+      <div class="csformgroup__input-group">
+        <div class="csformgroup__input-group__header">
+          <label for="changelly_return_address">{{translate("Return address")}}</label>
+          <span class="csformgroup__input-group__header__help" on-click="help">
+            {{>svg_help}}
+          </span>
+        </div>
+        <div class="csinput csinput--with-x">
+          <input id="changelly_return_address" class="csinput__input" type="text" placeholder='{{fromCrypto.symbol}} {{translate("address")}} ({{translate("optional")}})' autocorrect="off" autocapitalize="off" value="{{returnAddress}}" />
+          {{#returnAddress}}
+            <div class="csinput__cross" on-click="clearAddress" data-context="changelly-return-address">
+              <span class="csinput__cross__icon">{{> svg_close}}</span>
+            </div>
+          {{/returnAddress}}
+        </div>
+      </div>
+
+      {{#qrScannerAvailable}}
+        <div class="csbtn" on-click="open-qr" data-context="changelly-return-address">
+          <span class="csbtn__icon">
+            {{>svg_qr}}
+          </span>
+        </div>
+      {{/qrScannerAvailable}}
+
+      <div class="csbtn" on-click="open-geo" data-context="changelly-return-address">
+        <span class="csbtn__icon">
+          {{>svg_mecto}}
+        </span>
+      </div>
+    </div>
+
+    <div class="_blockchain">
+      {{translate("Blockchain")}}: {{depositBlockchain}}
     </div>
 
   </form>

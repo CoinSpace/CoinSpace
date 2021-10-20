@@ -1,6 +1,7 @@
 import Ractive from 'lib/ractive';
 import emitter from 'lib/emitter';
 import { getWallet } from 'lib/wallet';
+import crypto from 'lib/crypto';
 import changelly from 'lib/changelly';
 import { showError } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
@@ -17,12 +18,24 @@ export default function(el) {
       isLoading: true,
       isLoadingEstimate: true,
       isFirstEstimate: true,
-      fromSymbol: '',
+      fromCryptoId: null,
       minAmount: '',
       toAmount: '',
-      toSymbol: '',
+      toCryptoId: null,
       rate: '',
       coins: [],
+    },
+    computed: {
+      fromCrypto: {
+        get() {
+          return this.get('coins').find((item) => item._id === this.get('fromCryptoId'));
+        },
+      },
+      toCrypto: {
+        get() {
+          return this.get('coins').find((item) => item._id === this.get('toCryptoId'));
+        },
+      },
     },
     partials: {
       loader,
@@ -33,18 +46,18 @@ export default function(el) {
   let _maxAmount;
   let _fromAmount = '1';
 
-  const fromSymbolObserver = ractive.observe('fromSymbol', (symbol, old) => {
+  const fromCryptoIdObserver = ractive.observe('fromCryptoId', (id, old) => {
     if (!old) return;
-    if (symbol === ractive.get('toSymbol')) {
-      return ractive.set('toSymbol', old);
+    if (id === ractive.get('toCryptoId')) {
+      return ractive.set('toCryptoId', old);
     }
     return estimate();
   });
 
-  ractive.observe('toSymbol', (symbol, old) => {
+  ractive.observe('toCryptoId', (id, old) => {
     if (!old) return;
-    if (symbol === ractive.get('fromSymbol')) {
-      return ractive.set('fromSymbol', old);
+    if (id === ractive.get('fromCryptoId')) {
+      return ractive.set('fromCryptoId', old);
     }
     return estimate();
   });
@@ -65,20 +78,20 @@ export default function(el) {
     ractive.set('isLoadingEstimate', true);
     ractive.set('isFirstEstimate', true);
 
-    changelly.getCoins().then((coins) => {
+    crypto.getCryptos().then((cryptos) => {
+      const coins = cryptos.filter((item) => item.changelly);
       ractive.set('isLoading', false);
       ractive.set('coins', coins);
 
-      fromSymbolObserver.silence();
+      fromCryptoIdObserver.silence();
       const { crypto } = getWallet();
-      const coin = coins.find((coin) => coin.symbol === crypto.symbol && coin.network === crypto.platform);
-      ractive.set('fromSymbol', coin ? coin.symbol : getFirstSymbol(coins));
-      fromSymbolObserver.resume();
+      const coin = coins.find((coin) => coin._id === crypto._id);
+      ractive.set('fromCryptoId', coin ? coin._id : getFirstCryptoId(coins));
+      fromCryptoIdObserver.resume();
 
-      const fromSymbol = ractive.get('fromSymbol');
-      if (fromSymbol === ractive.get('toSymbol')) {
-        const symbol = getFirstSymbol(coins, fromSymbol);
-        ractive.set('toSymbol', symbol);
+      const fromCryptoId = ractive.get('fromCryptoId');
+      if (!ractive.get('toCryptoId') || fromCryptoId === ractive.get('toCryptoId')) {
+        ractive.set('toCryptoId', getFirstCryptoId(coins, fromCryptoId));
       } else {
         return estimate();
       }
@@ -93,7 +106,7 @@ export default function(el) {
   });
 
   ractive.on('swap', () => {
-    ractive.set('fromSymbol', ractive.get('toSymbol'));
+    ractive.set('fromCryptoId', ractive.get('toCryptoId'));
   });
 
   ractive.on('confirm', () => {
@@ -104,21 +117,22 @@ export default function(el) {
     }
 
     const fromAmount = parseFloat(ractive.find('#changelly_from_amount').value) || -1;
-    const fromSymbol = ractive.get('fromSymbol');
+    const fromCrypto = ractive.get('fromCrypto');
+    const toCrypto = ractive.get('toCrypto');
     const minAmount = parseFloat(ractive.get('minAmount')) || 0;
     if (fromAmount < minAmount) {
-      const interpolations = { dust: `${ractive.get('minAmount') || 0} ${fromSymbol}` };
+      const interpolations = { dust: `${ractive.get('minAmount') || 0} ${fromCrypto.symbol}` };
       return showError({ message: translate('Please enter an amount above', interpolations) });
     }
     if (_maxAmount && fromAmount > _maxAmount) {
-      const interpolations = { max: `${_maxAmount} ${fromSymbol}` };
+      const interpolations = { max: `${_maxAmount} ${fromCrypto.symbol}` };
       return showError({ message: translate('Please enter an amount below', interpolations) });
     }
 
     const data = {
-      fromSymbol,
+      fromCrypto,
       fromAmount: ractive.find('#changelly_from_amount').value,
-      toSymbol: ractive.get('toSymbol'),
+      toCrypto,
       networkFee: ractive.get('networkFee'),
       coins: ractive.get('coins'),
     };
@@ -126,22 +140,19 @@ export default function(el) {
     emitter.emit('change-changelly-step', 'create', data);
   });
 
-  function getFirstSymbol(coins, ignoreSymbol) {
-    let nextCoin = null;
-    coins.some((coin) => {
-      if (coin.symbol !== ignoreSymbol) {
-        nextCoin = coin;
-        return true;
+  function getFirstCryptoId(coins, ignoreId) {
+    for (const coin of coins) {
+      if (coin._id !== ignoreId) {
+        return coin._id;
       }
-    });
-    return nextCoin ? nextCoin.symbol : nextCoin;
+    }
   }
 
   let _pair = '';
   function estimate() {
     ractive.set('isLoadingEstimate', true);
     ractive.set('toAmount', '...');
-    const pair = ractive.get('fromSymbol') + '_' + ractive.get('toSymbol');
+    const pair = ractive.get('fromCryptoId') + '_' + ractive.get('toCryptoId');
     if (pair !== _pair) {
       ractive.set('isFirstEstimate', true);
       _pair = pair;
@@ -152,9 +163,12 @@ export default function(el) {
   const debounceEstimate = _.debounce(async () => {
     if (!ractive.el.classList.contains('current')) return;
     try {
-      const fromSymbol = ractive.get('fromSymbol');
-      const toSymbol = ractive.get('toSymbol');
-      const { minAmount, maxAmount } = await changelly.getPairsParams(fromSymbol, toSymbol);
+      const fromCrypto = ractive.get('fromCrypto');
+      const toCrypto = ractive.get('toCrypto');
+      const { minAmount, maxAmount } = await changelly.getPairsParams(
+        fromCrypto.changelly.ticker,
+        toCrypto.changelly.ticker
+      );
       _maxAmount = parseFloat(maxAmount) || 0;
       const input = ractive.find('#changelly_from_amount');
       let fromAmount = input.value || -1;
@@ -164,7 +178,11 @@ export default function(el) {
         input.value = minAmount;
         _fromAmount = minAmount;
       }
-      const data = await changelly.estimate(fromSymbol, toSymbol, fromAmount);
+      const data = await changelly.estimate(
+        fromCrypto.changelly.ticker,
+        toCrypto.changelly.ticker,
+        fromAmount
+      );
       ractive.set('rate', data.rate);
       ractive.set('toAmount', data.result);
       ractive.set('networkFee', data.networkFee);

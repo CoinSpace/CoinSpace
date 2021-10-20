@@ -1,12 +1,5 @@
 import request from 'lib/request';
 
-function getCoins() {
-  return request({
-    url: process.env.SITE_URL + 'api/v1/changelly/getCoins',
-    id: true,
-  });
-}
-
 function getPairsParams(fromSymbol, toSymbol) {
   return request({
     url: process.env.SITE_URL + 'api/v1/changelly/getPairsParams',
@@ -67,7 +60,6 @@ function getTransaction(id) {
 }
 
 export default {
-  getCoins,
   getPairsParams,
   estimate,
   validateAddress,

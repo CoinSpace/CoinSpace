@@ -147,6 +147,10 @@ function getLogoUrl(logo) {
 
 export default {
   init,
+  async getCryptos() {
+    await init();
+    return all;
+  },
   getTokenById,
   getTokenByAddress,
   requestTokenByAddress,

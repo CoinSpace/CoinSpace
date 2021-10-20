@@ -1,6 +1,6 @@
 import Ractive from 'lib/ractive';
 import emitter from 'lib/emitter';
-import { getWallet } from 'lib/wallet';
+import { getWalletById } from 'lib/wallet';
 import changelly from 'lib/changelly';
 import qrcode from 'lib/qrcode';
 import showTooltip from 'widgets/modals/tooltip';
@@ -19,11 +19,11 @@ export default function(el) {
     data: {
       qrScannerAvailable: qrcode.isScanAvailable,
       isValidating: false,
-      fromSymbol: '',
+      fromCrypto: null,
       returnAddress: '',
       depositBlockchain: '',
       toAddress: '',
-      toSymbol: '',
+      toCrypto: null,
       toBlockchain: '',
     },
     partials: {
@@ -33,28 +33,25 @@ export default function(el) {
   });
 
   ractive.on('before-show', (context) => {
+    const { fromCrypto, toCrypto } = context;
     ractive.set('fromAmount', context.fromAmount);
-    ractive.set('fromSymbol', context.fromSymbol);
-    ractive.set('toSymbol', context.toSymbol);
+    ractive.set('fromCrypto', fromCrypto);
+    ractive.set('toCrypto', toCrypto);
     ractive.set('networkFee', context.networkFee);
 
-    const wallet = getWallet();
-    const fromCoin = context.coins.find((coin) => context.fromSymbol === coin.symbol);
-    const toCoin = context.coins.find((coin) => context.toSymbol === coin.symbol);
+    ractive.set('depositBlockchain', fromCrypto.platformName);
+    ractive.set('toBlockchain', toCrypto.platformName);
 
-    ractive.set('depositBlockchain', fromCoin.network.replace(/-/g, ' '));
-    ractive.set('toBlockchain', toCoin.network.replace(/-/g, ' '));
+    if (fromCrypto.supported && getWalletById(fromCrypto._id)) {
+      ractive.set('returnAddress', getWalletById(fromCrypto._id).getNextAddress());
+    } else {
+      ractive.set('returnAddress', '');
+    }
 
-    if (wallet) {
-      const { crypto } = wallet;
-      ractive.set(
-        'returnAddress',
-        fromCoin.symbol === crypto.symbol && fromCoin.network === crypto.platform ? wallet.getNextAddress() : ''
-      );
-      ractive.set(
-        'toAddress',
-        toCoin.symbol === crypto.symbol && toCoin.network === crypto.platform ? wallet.getNextAddress() : ''
-      );
+    if (toCrypto.supported && getWalletById(toCrypto._id)) {
+      ractive.set('toAddress', getWalletById(toCrypto._id).getNextAddress());
+    } else {
+      ractive.set('toAddress', '');
     }
   });
 
@@ -108,10 +105,10 @@ export default function(el) {
 
   ractive.on('confirm', () => {
     const options = {
-      fromSymbol: ractive.get('fromSymbol'),
+      fromSymbol: ractive.get('fromCrypto').changelly.ticker,
       returnAddress: ractive.get('returnAddress').trim(),
       toAddress: ractive.get('toAddress').trim(),
-      toSymbol: ractive.get('toSymbol'),
+      toSymbol: ractive.get('toCrypto').changelly.ticker,
       fromAmount: ractive.get('fromAmount'),
     };
     return validateAddresses(options).then(() => {
