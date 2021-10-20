@@ -13,12 +13,22 @@ const CURRENCIES = [
 ];
 const CRYPTO_PROPS = ['coingecko', 'changelly', 'coinmarketcap', 'moonpay'];
 
+function getPlatformName(crypto) {
+  return crypto.platformName || crypto.platform
+    .split('-')
+    .map((item) => {
+      return item.charAt(0).toUpperCase() + item.slice(1);
+    })
+    .join(' ');
+}
+
 async function sync() {
   console.time('crypto sync');
   for (const crypto of cryptoDB) {
     const update = {
       $set: {
         ...crypto,
+        platformName: getPlatformName(crypto),
         supported: crypto.supported !== false,
         deprecated: crypto.deprecated === true,
         synchronized_at: new Date(),

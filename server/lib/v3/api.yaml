@@ -993,6 +993,10 @@ components:
             type: string
             pattern: ^[a-z-]+$
             maxLength: 256
+          platformName:
+            type: string
+            pattern: ^[A-Za-z\s]+$
+            maxLength: 256
           symbol:
             type: string
             pattern: ^[A-Z0-9]+$
