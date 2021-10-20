@@ -23,6 +23,7 @@ export default function(el) {
       },
     },
   });
+  let isLoading = false;
 
   function search() {
     const walletTokens = details.get('tokens');
@@ -33,16 +34,17 @@ export default function(el) {
   }
 
   async function addToken(id) {
+    if (isLoading) return;
+    isLoading = true;
     const token = crypto.getTokenById(id);
     if (!LS.hasPublicKey(token.platform)) {
       try {
         await addPublicKey(token);
       } catch (err) {
-        return;
+        return isLoading = false;
       }
     }
     const walletTokens = details.get('tokens');
-
     walletTokens.push(token);
 
     details.set('tokens', walletTokens)
@@ -50,6 +52,7 @@ export default function(el) {
         console.error(err);
       })
       .finally(() => {
+        isLoading = false;
         emitter.emit('set-tokens', 'list');
         emitter.emit('token-added', token);
       });
@@ -57,6 +60,7 @@ export default function(el) {
 
   ractive.on('before-show', () => {
     ractive.set('searchQuery', null);
+    isLoading = false;
     search();
     window.scrollTo(0, 0);
   });
