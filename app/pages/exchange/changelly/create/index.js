@@ -20,11 +20,13 @@ export default function(el) {
       qrScannerAvailable: qrcode.isScanAvailable,
       isValidating: false,
       fromCrypto: null,
+      fromCryptoSupported: false,
       returnAddress: '',
-      depositBlockchain: '',
+      usedOwnReturnAddress: false,
       toAddress: '',
+      usedOwnToAddress: false,
       toCrypto: null,
-      toBlockchain: '',
+      toCryptoSupported: false,
     },
     partials: {
       loader,
@@ -36,22 +38,25 @@ export default function(el) {
     const { fromCrypto, toCrypto } = context;
     ractive.set('fromAmount', context.fromAmount);
     ractive.set('fromCrypto', fromCrypto);
+    ractive.set('fromCryptoSupported', fromCrypto.supported && !!getWalletById(fromCrypto._id));
     ractive.set('toCrypto', toCrypto);
+    ractive.set('toCryptoSupported', toCrypto.supported && !!getWalletById(toCrypto._id));
     ractive.set('networkFee', context.networkFee);
 
-    ractive.set('depositBlockchain', fromCrypto.platformName);
-    ractive.set('toBlockchain', toCrypto.platformName);
-
-    if (fromCrypto.supported && getWalletById(fromCrypto._id)) {
+    if (ractive.get('fromCryptoSupported')) {
       ractive.set('returnAddress', getWalletById(fromCrypto._id).getNextAddress());
+      ractive.set('usedOwnReturnAddress', true);
     } else {
       ractive.set('returnAddress', '');
+      ractive.set('usedOwnReturnAddress', false);
     }
 
-    if (toCrypto.supported && getWalletById(toCrypto._id)) {
+    if (ractive.get('toCryptoSupported')) {
       ractive.set('toAddress', getWalletById(toCrypto._id).getNextAddress());
+      ractive.set('usedOwnToAddress', true);
     } else {
       ractive.set('toAddress', '');
+      ractive.set('usedOwnToAddress', false);
     }
   });
 
@@ -96,6 +101,30 @@ export default function(el) {
     }
   });
 
+  ractive.on('use-own-to-address', () => {
+    if (ractive.get('toCryptoSupported')) {
+      ractive.set('toAddress', getWalletById(ractive.get('toCrypto')._id).getNextAddress());
+      ractive.set('usedOwnToAddress', true);
+    }
+  });
+
+  ractive.on('use-custom-to-address', () => {
+    ractive.set('toAddress', '');
+    ractive.set('usedOwnToAddress', false);
+  });
+
+  ractive.on('use-own-return-address', () => {
+    if (ractive.get('fromCryptoSupported')) {
+      ractive.set('returnAddress', getWalletById(ractive.get('fromCrypto')._id).getNextAddress());
+      ractive.set('usedOwnReturnAddress', true);
+    }
+  });
+
+  ractive.on('use-custom-return-address', () => {
+    ractive.set('returnAddress', '');
+    ractive.set('usedOwnReturnAddress', false);
+  });
+
   ractive.on('help', () => {
     showTooltip({
       // eslint-disable-next-line max-len
@@ -114,8 +143,9 @@ export default function(el) {
     return validateAddresses(options).then(() => {
       return changelly.createTransaction(options).then((data) => {
         data.networkFee = ractive.get('networkFee');
-        data.depositBlockchain = ractive.get('depositBlockchain');
-        data.toBlockchain = ractive.get('toBlockchain');
+        data.depositBlockchain = ractive.get('fromCrypto').platformName;
+        data.toBlockchain = ractive.get('toCrypto').platformName;
+
         details.set('changellyInfo', data).then(() => {
           ractive.set('isValidating', false);
           emitter.emit('change-changelly-step', 'awaitingDeposit', data);

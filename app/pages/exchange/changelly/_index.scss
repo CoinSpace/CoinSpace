@@ -5,14 +5,18 @@
       display: block;
     }
   }
-  .csformgroup--with-blockchain {
+  .csformgroup--with-controls {
     margin-bottom: 5px;
   }
-  ._blockchain {
+  ._controls {
     margin-bottom: 20px;
     @include breakpoint(portrait) {
       font-size: $base_font_size--portrait;
     }
+  }
+  .clickable {
+    text-decoration: underline;
+    cursor: pointer;
   }
   ._powered_by {
     text-align: center;

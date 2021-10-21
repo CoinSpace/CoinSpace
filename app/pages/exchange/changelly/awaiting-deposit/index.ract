@@ -19,7 +19,7 @@
     })}}
   </div>
 
-  <div class="csformgroup csformgroup--readonly csformgroup--with-blockchain">
+  <div class="csformgroup csformgroup--readonly csformgroup--with-controls">
     <div class="csformgroup__input-group">
       <div class="csformgroup__input-group__header">
         <label>{{translate("Deposit address", {symbol: depositSymbol})}}</label>
@@ -43,7 +43,7 @@
     {{/if}}
   </div>
 
-  <div class="_blockchain">
+  <div class="_controls">
     {{translate("Blockchain")}}: {{depositBlockchain}}
   </div>
 

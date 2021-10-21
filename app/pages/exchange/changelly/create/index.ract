@@ -8,21 +8,23 @@
 
   <form>
 
-    <div class="csformgroup csformgroup--with-blockchain">
+    <div class="csformgroup csformgroup--with-controls">
       <div class="csformgroup__input-group">
         <div class="csformgroup__input-group__header">
-          <label for="changelly_to_address">{{translate("Destination address")}} </label>
+          <label for="changelly_to_address">{{translate("Destination address")}} ({{toCrypto.symbol}})</label>
         </div>
+        {{#!usedOwnToAddress}}
         <div class="csinput csinput--with-x">
-          <input id="changelly_to_address" class="csinput__input" type="text" placeholder="{{toCrypto.symbol}} {{translate("address")}}" autocorrect="off" autocapitalize="off" value="{{toAddress}}" />
+          <input id="changelly_to_address" class="csinput__input" type="text" placeholder="{{toCrypto.name}} {{translate("address")}}" autocorrect="off" autocapitalize="off" value="{{toAddress}}" />
           {{#toAddress}}
             <div class="csinput__cross" on-click="clearAddress" data-context="changelly-to-address">
               <span class="csinput__cross__icon">{{> svg_close}}</span>
             </div>
           {{/toAddress}}
         </div>
+        {{/usedOwnToAddress}}
       </div>
-
+      {{#!usedOwnToAddress}}
       {{#qrScannerAvailable}}
         <div class="csbtn" on-click="open-qr" data-context="changelly-to-address">
           <span class="csbtn__icon">
@@ -36,30 +38,45 @@
           {{>svg_mecto}}
         </span>
       </div>
+      {{/usedOwnToAddress}}
     </div>
 
-    <div class="_blockchain">
-      {{translate("Blockchain")}}: {{toBlockchain}}
+    <div class="_controls">
+      <div class="_blockchain">
+        {{translate("Blockchain")}}: {{toCrypto.platformName}}
+      </div>
+      {{#toCryptoSupported}}
+      <div>
+        {{#if usedOwnToAddress}}
+          {{translate("Your :name wallet address is used", { name: toCrypto.name })}} <span class="clickable" on-click="use-custom-to-address">({{translate("change")}})</span>
+        {{else}}
+          <span class="clickable" on-click="use-own-to-address">{{translate("Use your :name wallet address", { name: toCrypto.name })}}</span>
+        {{/if}}
+      </div>
+      {{/toCryptoSupported}}
     </div>
 
-    <div class="csformgroup csformgroup--with-blockchain">
+    <div class="csformgroup csformgroup--with-controls">
       <div class="csformgroup__input-group">
         <div class="csformgroup__input-group__header">
-          <label for="changelly_return_address">{{translate("Return address")}}</label>
+          <label for="changelly_return_address">{{translate("Return address")}} ({{fromCrypto.symbol}})</label>
           <span class="csformgroup__input-group__header__help" on-click="help">
             {{>svg_help}}
           </span>
         </div>
+        {{#!usedOwnReturnAddress}}
         <div class="csinput csinput--with-x">
-          <input id="changelly_return_address" class="csinput__input" type="text" placeholder='{{fromCrypto.symbol}} {{translate("address")}} ({{translate("optional")}})' autocorrect="off" autocapitalize="off" value="{{returnAddress}}" />
+          <input id="changelly_return_address" class="csinput__input" type="text" placeholder='{{fromCrypto.name}} {{translate("address")}} ({{translate("optional")}})' autocorrect="off" autocapitalize="off" value="{{returnAddress}}" />
           {{#returnAddress}}
             <div class="csinput__cross" on-click="clearAddress" data-context="changelly-return-address">
               <span class="csinput__cross__icon">{{> svg_close}}</span>
             </div>
           {{/returnAddress}}
         </div>
+        {{/usedOwnReturnAddress}}
       </div>
 
+      {{#!usedOwnReturnAddress}}
       {{#qrScannerAvailable}}
         <div class="csbtn" on-click="open-qr" data-context="changelly-return-address">
           <span class="csbtn__icon">
@@ -73,12 +90,23 @@
           {{>svg_mecto}}
         </span>
       </div>
+      {{/usedOwnReturnAddress}}
     </div>
 
-    <div class="_blockchain">
-      {{translate("Blockchain")}}: {{depositBlockchain}}
+    <div class="_controls">
+      <div class="_blockchain">
+        {{translate("Blockchain")}}: {{fromCrypto.platformName}}
+      </div>
+      {{#fromCryptoSupported}}
+      <div>
+        {{#if usedOwnReturnAddress}}
+          {{translate("Your :name wallet address is used", { name: fromCrypto.name })}} <span class="clickable" on-click="use-custom-return-address">({{translate("change")}})</span>
+        {{else}}
+          <span class="clickable" on-click="use-own-return-address">{{translate("Use your :name wallet address", { name: fromCrypto.name })}}</span>
+        {{/if}}
+      </div>
+      {{/fromCryptoSupported}}
     </div>
-
   </form>
 
   <div class="confirm__buttons">
