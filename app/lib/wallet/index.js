@@ -324,23 +324,6 @@ export function unsetWallet(crypto) {
   delete state.wallets[crypto._id];
 }
 
-export function getDestinationInfo(to) {
-  if (state.wallet.crypto.platform === 'stellar') {
-    return state.wallet.getDestinationInfo(to);
-  } else {
-    return Promise.resolve();
-  }
-}
-
-export function setToAlias(data) {
-  if (state.wallet.crypto.platform !== 'bitcoin-cash') return;
-  const legacy = state.wallet.toLegacyAddress(data.to);
-  if (legacy && legacy !== data.to) {
-    data.alias = data.to;
-    data.to = legacy;
-  }
-}
-
 async function migrateLegacyWallet(pin) {
   await loginWithPinLegacy(pin);
   await registerWallet(pin);
@@ -393,7 +376,5 @@ export default {
   initWallet,
   updateWallet,
   addPublicKey,
-  getDestinationInfo,
-  setToAlias,
   walletCoins,
 };

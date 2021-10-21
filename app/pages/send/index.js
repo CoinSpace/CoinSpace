@@ -3,14 +3,12 @@ import Big from 'big.js';
 import emitter from 'lib/emitter';
 import details from 'lib/wallet/details';
 import { getWallet, updateWallet } from 'lib/wallet';
-import { setToAlias } from 'lib/wallet';
 import { showError } from 'widgets/modals/flash';
 import showConfirmation from 'widgets/modals/confirm-send';
 import showMecto from 'widgets/modals/mecto';
 import showTooltip from 'widgets/modals/tooltip';
 import { validateSend } from 'lib/wallet/validator';
-import { getDestinationInfo } from 'lib/wallet';
-import { resolveTo } from 'lib/openalias';
+import { resolveTo } from 'lib/resolver';
 import qrcode from 'lib/qrcode';
 import initEosSetup from 'widgets/eos/setup';
 import { toAtom, toUnitString, cryptoToFiat, fiatToCrypto, toDecimalString } from 'lib/convert';
@@ -111,29 +109,18 @@ export default function(el) {
 
   emitter.on('handleOpenURL', bip21Handler);
 
-  ractive.on('open-send', () => {
-    ractive.set('validating', true);
-
-    const to = ractive.get('to').trim();
-    const fee = ractive.get('fee');
-
-    const delay = function(n) {
-      return new Promise((resolve) => { setTimeout(resolve, n); });
-    };
-
-    const wallet = getWallet();
-
-    Promise.all([
-      resolveTo(wallet.crypto.platform, to),
-      getDestinationInfo(to),
-      delay(100), // in order to activate loader
-    ]).then((results) => {
-
-      const data = results[0];
-      setToAlias(data);
-
-      const destinationInfo = results[1];
-
+  ractive.on('open-send', async () => {
+    ractive.set('isLoading', true);
+    await new Promise((resolve) => { setTimeout(resolve, 100); }); // in order to activate loader
+    try {
+      const to = ractive.get('to').trim();
+      const fee = ractive.get('fee');
+      const wallet = getWallet();
+      const data = await resolveTo(wallet, to);
+      let destinationInfo;
+      if (wallet.crypto._id === 'stellar@stellar') {
+        destinationInfo = await wallet.getDestinationInfo(data.to);
+      }
       const options = {
         wallet,
         to: data.to,
@@ -160,7 +147,6 @@ export default function(el) {
           }
         },
       };
-
       if (['ethereum', 'binance-smart-chain'].includes(wallet.crypto.platform)) {
         wallet.gasLimit = ractive.find('#gas-limit').value;
       } else if (wallet.crypto.platform === 'ripple') {
@@ -171,23 +157,22 @@ export default function(el) {
       } else if (wallet.crypto.platform === 'eos') {
         options.memo = ractive.find('#memo').value;
       }
-
-      return validateAndShowConfirm(options);
-    }).catch((err) => {
-      ractive.set('validating', false);
+      await validateAndShowConfirm(options);
+    } catch (err) {
       if (/is not a valid address/.test(err.message)) {
-        return showError({
+        showError({
           title: translate('Uh Oh...'),
           message: translate('Please enter a valid address to send to'),
         });
       } else {
         console.error(`not translated error: ${err.message}`);
-        return showError({
+        showError({
           title: translate('Uh Oh...'),
           message: err.message,
         });
       }
-    });
+    }
+    ractive.set('isLoading', false);
   });
 
   emitter.on('wallet-ready', () => {
@@ -379,11 +364,9 @@ export default function(el) {
   async function validateAndShowConfirm(options) {
     try {
       await validateSend(options);
-      ractive.set('validating', false);
       showConfirmation(options);
     } catch (err) {
-      ractive.set('validating', false);
-      if (/Attempt to empty wallet/.test(err.message)) {
+      if (/Attempt to empty wallet/.test(err.details)) {
         ractive.find('#crypto').value = denormalizeCrypto(toUnitString(err.sendableBalance));
         ractive.fire('crypto-to-fiat');
       }

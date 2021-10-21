@@ -721,9 +721,7 @@ paths:
           required: true
           description: Openalias hostname
           schema:
-            type: string
-            pattern: ^.+\..+$
-            maxLength: 256
+            $ref: '#/components/schemas/Domain'
       security:
         - deviceSignature: []
       responses:
@@ -825,7 +823,37 @@ paths:
                 $ref: '#/components/schemas/UrlString'
         default:
           $ref: '#/components/responses/GeneralError'
-
+  /unstoppabledomains/resolution:
+    get:
+      x-eov-operation-id: unstoppabledomainsResolution
+      x-eov-operation-handler: handlers
+      description: Resolve domain crypto address
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cryptoId'
+        - in: query
+          name: domain
+          required: true
+          description: Crypto domain
+          schema:
+            $ref: '#/components/schemas/Domain'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Crypto address
+          content:
+            'application/json':
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  address:
+                    $ref: '#/components/schemas/AnyCryptoAddress'
+                required:
+                  - address
+        default:
+          $ref: '#/components/responses/GeneralError'
 components:
   schemas:
     Hex64String:
@@ -1182,6 +1210,10 @@ components:
       maxItems: 20
       items:
         $ref: '#/components/schemas/Update'
+    Domain:
+      type: string
+      pattern: ^.+\..+$
+      maxLength: 256
   requestBodies:
     PIN:
       description: PIN Hash

@@ -8,6 +8,7 @@ import mecto from '../mecto.js';
 import storage from '../storage.js';
 import moonpay from '../moonpay.js';
 import openalias from '../openalias.js';
+import unstoppabledomains from '../unstoppabledomains.js';
 import github from '../github.js';
 import { verifyReq } from '../utils.js';
 
@@ -286,7 +287,7 @@ export async function moonpaySign(req, res) {
 }
 
 export async function resolveOpenalias(req, res) {
-  const data = await openalias.resolve(req.query.hostname);
+  const data = await openalias.resolveTo(req.query.hostname);
   res.status(200).send(data);
 }
 
@@ -346,4 +347,9 @@ export async function downloadApp(req, res) {
   } else {
     res.redirect(302, update.url);
   }
+}
+
+export async function unstoppabledomainsResolution(req, res) {
+  const address = await unstoppabledomains.resolveTo(req.query.domain, req.query.crypto);
+  res.status(200).send({ address });
 }

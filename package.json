@@ -23,15 +23,19 @@
   },
   "dependencies": {
     "@coinspace/crypto-db": "^1.0.1",
+    "@ensdomains/address-encoder": "^0.2.9",
     "@sentry/integrations": "^6.10.0",
     "@sentry/node": "^6.10.0",
     "@simplewebauthn/server": "^1.0.0",
+    "@unstoppabledomains/resolution": "^5.0.2",
     "axios": "^0.21.4",
     "axios-rate-limit": "^1.3.0",
     "axios-retry": "^3.1.8",
     "big.js": "^3.1.3",
+    "bip44-constants": "^8.0.103",
     "body-parser": "^1.18.1",
     "compression": "^1.7.0",
+    "content-hash": "^2.5.2",
     "cors": "^2.8.5",
     "delay": "^5.0.0",
     "ejs": "^2.6.1",
@@ -42,7 +46,6 @@
     "http-errors": "^1.8.0",
     "mongodb": "^3.1.10",
     "p-forever": "^3.0.1",
-    "retry": "^0.10.1",
     "semver": "^7.3.2"
   },
   "devDependencies": {

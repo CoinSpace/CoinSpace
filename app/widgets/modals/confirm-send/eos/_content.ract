@@ -14,6 +14,7 @@
       {{>svg_sendto}}
     </div>
 
+    <div class="_info _info--bold">{{alias}}</div>
     <div class="_info">{{to}}</div>
     {{#if memo}}
     <div class="_info">{{translate("Memo")}}: {{memo}}</div>

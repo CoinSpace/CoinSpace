@@ -18,8 +18,11 @@
     <div class="_info _info--bold">{{translate("Your wallet address")}}</div>
     {{/importTxOptions}}
 
-    <div class="_info">{{to}}</div>
     <div class="_info _info--bold">{{alias}}</div>
+    <div class="_info">{{to}}</div>
+    {{#if memo}}
+    <div class="_info">{{translate("Memo")}}: {{memo}}</div>
+    {{/if}}
 
   </div>
 

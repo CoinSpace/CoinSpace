@@ -3,7 +3,7 @@ import qrcode from 'lib/qrcode';
 import showConfirmation from 'widgets/modals/confirm-send';
 import { showInfo, showError } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
-import { getWallet, setToAlias } from 'lib/wallet';
+import { getWallet } from 'lib/wallet';
 import { toUnitString } from 'lib/convert';
 import content from './_content.ract';
 
@@ -42,8 +42,12 @@ function open() {
         ractive.set('isLoading', false);
         return showInfo({ message: translate('This private key has no coins for transfer.') });
       }
-      importTxOptions.to = to;
-      setToAlias(importTxOptions);
+      if (wallet.crypto._id === 'bitcoin-cash@bitcoin-cash') {
+        importTxOptions.to = wallet.toLegacyAddress(to);
+        importTxOptions.alias = to;
+      } else {
+        importTxOptions.to = to;
+      }
 
       showConfirmation({
         wallet,

@@ -55,7 +55,7 @@ router.get('/openalias', (req, res) => {
   if (!hostname) {
     return res.status(400).json({ error: 'Bad request' });
   }
-  openalias.resolve(hostname)
+  openalias.resolveTo(hostname)
     .then((data) => {
       res.status(200).send(data);
     })
