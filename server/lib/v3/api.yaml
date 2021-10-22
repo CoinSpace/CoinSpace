@@ -823,9 +823,9 @@ paths:
                 $ref: '#/components/schemas/UrlString'
         default:
           $ref: '#/components/responses/GeneralError'
-  /unstoppabledomains/resolution:
+  /domain/address:
     get:
-      x-eov-operation-id: unstoppabledomainsResolution
+      x-eov-operation-id: getDomainAddress
       x-eov-operation-handler: handlers
       description: Resolve domain crypto address
       parameters:

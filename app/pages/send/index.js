@@ -8,7 +8,7 @@ import showConfirmation from 'widgets/modals/confirm-send';
 import showMecto from 'widgets/modals/mecto';
 import showTooltip from 'widgets/modals/tooltip';
 import { validateSend } from 'lib/wallet/validator';
-import { resolveTo } from 'lib/resolver';
+import { getAddressWithAlias } from 'lib/domain';
 import qrcode from 'lib/qrcode';
 import initEosSetup from 'widgets/eos/setup';
 import { toAtom, toUnitString, cryptoToFiat, fiatToCrypto, toDecimalString } from 'lib/convert';
@@ -116,15 +116,15 @@ export default function(el) {
       const to = ractive.get('to').trim();
       const fee = ractive.get('fee');
       const wallet = getWallet();
-      const data = await resolveTo(wallet, to);
+      const { address, alias } = await getAddressWithAlias(wallet, to);
       let destinationInfo;
       if (wallet.crypto._id === 'stellar@stellar') {
-        destinationInfo = await wallet.getDestinationInfo(data.to);
+        destinationInfo = await wallet.getDestinationInfo(address);
       }
       const options = {
         wallet,
-        to: data.to,
-        alias: data.alias,
+        to: address,
+        alias,
         fee,
         feeName: ractive.get('feeName'),
         destinationInfo,

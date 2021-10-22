@@ -8,7 +8,7 @@ import mecto from '../mecto.js';
 import storage from '../storage.js';
 import moonpay from '../moonpay.js';
 import openalias from '../openalias.js';
-import unstoppabledomains from '../unstoppabledomains.js';
+import domain from '../domain.js';
 import github from '../github.js';
 import { verifyReq } from '../utils.js';
 
@@ -349,7 +349,8 @@ export async function downloadApp(req, res) {
   }
 }
 
-export async function unstoppabledomainsResolution(req, res) {
-  const address = await unstoppabledomains.resolveTo(req.query.domain, req.query.crypto);
+export async function getDomainAddress(req, res) {
+  const address = await domain.getAddress(req.query.domain, req.query.crypto);
+  if (!address) throw createError(404, 'Address not found');
   res.status(200).send({ address });
 }
