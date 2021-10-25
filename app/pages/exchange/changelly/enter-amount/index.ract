@@ -76,6 +76,61 @@
       {{/if}}
     </div>
 
+    <div class="csformgroup csformgroup--with-controls">
+      <div class="csformgroup__input-group">
+        <div class="csformgroup__input-group__header">
+          <label for="changelly_to_address">{{translate("Destination address")}}</label>
+        </div>
+        {{#!usedOwnToAddress}}
+        <div class="csinput csinput--with-x">
+          <input id="changelly_to_address" class="csinput__input" type="text" placeholder="{{toCrypto.name}} {{translate("address")}}" autocorrect="off" autocapitalize="off" value="{{toAddress}}" />
+          {{#toAddress}}
+            <div class="csinput__cross" on-click="clearAddress" data-context="changelly-to-address">
+              <span class="csinput__cross__icon">{{> svg_close}}</span>
+            </div>
+          {{/toAddress}}
+        </div>
+        {{/usedOwnToAddress}}
+      </div>
+      {{#!usedOwnToAddress}}
+      {{#qrScannerAvailable}}
+        <div class="csbtn" on-click="open-qr" data-context="changelly-to-address">
+          <span class="csbtn__icon">
+            {{>svg_qr}}
+          </span>
+        </div>
+      {{/qrScannerAvailable}}
+
+      <div class="csbtn" on-click="open-geo" data-context="changelly-to-address">
+        <span class="csbtn__icon">
+          {{>svg_mecto}}
+        </span>
+      </div>
+      {{/usedOwnToAddress}}
+    </div>
+
+    <div class="_controls">
+      {{^usedOwnToAddress}}
+        <div class="_blockchain">
+          {{translate("Blockchain")}}: {{toCrypto.platformName}}
+        </div>
+      {{/usedOwnToAddress}}
+      {{#toCryptoSupported}}
+      <div>
+        {{#if usedOwnToAddress}}
+          {{#if toCrypto.type === 'coin'}}
+            {{translate("Your :name wallet address is used", { name: toCrypto.name })}}
+          {{else}}
+            {{translate("Your :name wallet address on :blockchain blockchain is used", { name: toCrypto.name, blockchain: toCrypto.platformName })}}
+          {{/if}}
+          <span class="clickable" on-click="use-custom-to-address">({{translate("change")}})</span>
+        {{else}}
+          <span class="clickable" on-click="use-own-to-address">{{translate("Use your :name wallet address", { name: toCrypto.name })}}</span>
+        {{/if}}
+      </div>
+      {{/toCryptoSupported}}
+    </div>
+
   </form>
 
   <div class="confirm__buttons">
@@ -86,7 +141,7 @@
         </span>
       </div>
     {{else}}
-      <div on-click="confirm" class="csbtn">{{translate("Next step")}}</div>
+      <div on-click="confirm" class="csbtn">{{translate("Confirm")}}</div>
     {{/if}}
   </div>
 

@@ -4,14 +4,14 @@ import { translate } from 'lib/i18n';
 
 export async function validateSend(options) {
   const amount = toAtom(options.amount);
-  const { wallet } = options;
-  const { to } = options;
   const fee = toAtom(options.fee);
+  const { wallet, to } = options;
+
   let tx = null;
 
   try {
     // eslint-disable-next-line max-len
-    if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'].indexOf(wallet.crypto.platform) !== -1) {
+    if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'].includes(wallet.crypto.platform)) {
       tx = wallet.createTx(to, amount, fee);
     } else if (['ethereum', 'binance-smart-chain'].includes(wallet.crypto.platform)) {
       tx = wallet.createTx(to, amount);
