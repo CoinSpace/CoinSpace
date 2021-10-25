@@ -677,7 +677,7 @@
       </trans-unit>
       <trans-unit id="Network node error. Please try again later.">
         <source>%(network)s node error. Please try again later.</source>
-        <target>Помилка вузла%(network)s. Спробуйте пізніше.</target>
+        <target>Помилка вузла %(network)s. Спробуйте пізніше.</target>
       </trans-unit>
       <trans-unit id="Choose exchange">
         <source>Choose exchange</source>
