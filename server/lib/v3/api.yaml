@@ -563,10 +563,11 @@ paths:
       x-eov-operation-handler: handlers
       description: Get transaction cs fees for coin
       parameters:
-        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/maybeDeviceId'
         - $ref: '#/components/parameters/cryptoId'
       security:
         - deviceSignature: []
+        - apiKey: []
       responses:
         '200':
           description: Fees for coin
@@ -1271,6 +1272,13 @@ components:
       description: Device ID
       schema:
         $ref: '#/components/schemas/Hex64String'
+    maybeDeviceId:
+      in: query
+      name: id
+      required: false
+      description: Optional Device ID
+      schema:
+        $ref: '#/components/schemas/Hex64String'
     cryptoId:
       in: query
       name: crypto
@@ -1405,3 +1413,7 @@ components:
       type: apiKey
       in: header
       name: Signature
+    apiKey:
+      type: apiKey
+      in: query
+      name: apikey

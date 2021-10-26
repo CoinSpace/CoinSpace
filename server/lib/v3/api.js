@@ -5,6 +5,8 @@ import { verifyReq } from '../utils.js';
 import wallets from '../wallets.js';
 import esmresolver from '../esmresolver.js';
 
+const { API_KEY } = process.env;
+
 const router = express.Router();
 
 router.use((req, res, next) => {
@@ -34,6 +36,9 @@ router.use(OpenApiValidator.middleware({
       async deviceSignature(req) {
         const device = await req.getDevice();
         return verifyReq(device._id, req);
+      },
+      apiKey(req) {
+        return req.query.apikey === API_KEY;
       },
     },
   },
