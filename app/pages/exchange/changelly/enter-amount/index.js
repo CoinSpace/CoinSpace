@@ -222,8 +222,7 @@ export default function(el) {
             amount: data.depositAmount,
             symbol: wallet.crypto.symbol,
             onSuccessDismiss() {
-              // TODO add tx id to data
-              emitter.emit('change-changelly-step', 'awaitingDeposit', data);
+              emitter.emit('change-changelly-step', 'awaiting', data);
             },
           };
           if (wallet.crypto.platform === 'ripple') {
