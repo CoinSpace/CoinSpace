@@ -38,7 +38,7 @@ export default function(el) {
   });
 
   ractive.on('before-show', (context) => {
-    const cryptoId = symbolToCryptoId[context.toSymbol];
+    const cryptoId = context.toCryptoId || symbolToCryptoId[context.toSymbol];
     const wallet = cryptoId && getWalletById(cryptoId);
     ractive.set({
       toSymbol: context.toSymbol,

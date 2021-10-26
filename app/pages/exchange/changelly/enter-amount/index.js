@@ -196,6 +196,7 @@ export default function(el) {
         data.networkFee = ractive.get('networkFee');
         data.depositBlockchain = ractive.get('fromCrypto').platformName;
         data.toBlockchain = ractive.get('toCrypto').platformName;
+        data.toCryptoId = ractive.get('toCryptoId');
 
         const wallet = getWallet();
         data.internalExchange = wallet.crypto._id === ractive.get('fromCrypto')._id;
