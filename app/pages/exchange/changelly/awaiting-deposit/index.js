@@ -32,6 +32,7 @@ export default function(el) {
       rate: '',
       changellyTransactionId: '',
       isPhonegap: process.env.BUILD_TYPE === 'phonegap',
+      ref: process.env.CHANGELLY_REF,
     },
     partials: {
       footer,

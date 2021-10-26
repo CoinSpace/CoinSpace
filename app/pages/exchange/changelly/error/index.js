@@ -11,6 +11,7 @@ export default function(el) {
     data: {
       message: '',
       showEmail: true,
+      ref: process.env.CHANGELLY_REF,
     },
     partials: {
       footer,

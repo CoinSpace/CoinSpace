@@ -30,6 +30,7 @@ export default function(el) {
       amount: '',
       payoutHash: '',
       txUrl: () => '',
+      ref: process.env.CHANGELLY_REF,
     },
     partials: {
       footer,

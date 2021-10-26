@@ -9,7 +9,9 @@ export default function(el) {
   const ractive = new Ractive({
     el,
     template,
-    data: {},
+    data: {
+      ref: process.env.CHANGELLY_REF,
+    },
     partials: {
       footer,
     },

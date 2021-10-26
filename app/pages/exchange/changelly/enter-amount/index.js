@@ -36,6 +36,7 @@ export default function(el) {
       rate: '',
       coins: [],
       qrScannerAvailable: qrcode.isScanAvailable,
+      ref: process.env.CHANGELLY_REF,
     },
     partials: {
       loader,
