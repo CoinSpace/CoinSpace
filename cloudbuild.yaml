@@ -16,6 +16,7 @@ steps:
     - 'SENTRY_DSN=${_SENTRY_DSN}'
     - 'SENTRY_ORG=${_SENTRY_ORG}'
     - 'SENTRY_AUTH_TOKEN=${_SENTRY_AUTH_TOKEN}'
+    - 'CHANGELLY_REF=${_CHANGELLY_REF}'
   entrypoint: 'sh'
   args:
     - '-c'
