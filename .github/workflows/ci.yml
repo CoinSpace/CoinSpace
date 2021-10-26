@@ -194,6 +194,7 @@ jobs:
           APPX_PUBLISHER: ${{ secrets.APPX_PUBLISHER }}
           APPX_PUBLISHER_DEV: ${{ secrets.APPX_PUBLISHER_DEV }}
           APPX_PUBLISHER_NAME: ${{ secrets.APPX_PUBLISHER_NAME }}
+          CHANGELLY_REF: ${{ secrets.CHANGELLY_REF }}
         shell: bash
         run: |
           node ./cli/i18n.js --json
