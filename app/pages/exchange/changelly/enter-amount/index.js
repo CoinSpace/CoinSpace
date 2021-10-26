@@ -57,7 +57,16 @@ export default function(el) {
 
   ractive.observe('toCryptoId', (id, old) => {
     if (!old) return;
-    ractive.set('toCrypto', ractive.get('coins').find((item) => item._id === id));
+    const toCrypto = ractive.get('coins').find((item) => item._id === id);
+    ractive.set('toCrypto', toCrypto);
+    ractive.set('toCryptoSupported', toCrypto.supported && !!getWalletById(toCrypto._id));
+    if (ractive.get('toCryptoSupported')) {
+      ractive.set('toAddress', getWalletById(toCrypto._id).getNextAddress());
+      ractive.set('usedOwnToAddress', true);
+    } else {
+      ractive.set('toAddress', '');
+      ractive.set('usedOwnToAddress', false);
+    }
     if (id === ractive.get('fromCryptoId')) {
       return ractive.set('fromCryptoId', old);
     }
