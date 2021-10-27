@@ -7,6 +7,10 @@ import esmresolver from '../esmresolver.js';
 
 const { API_KEY } = process.env;
 
+if (!API_KEY) {
+  throw new Error('API_KEY is required');
+}
+
 const router = express.Router();
 
 router.use((req, res, next) => {
