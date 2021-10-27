@@ -76,7 +76,8 @@ export default function(el) {
       } else if (tx.status === 'refunded') {
         showStep(steps.error, {
           message: translate('Exchange failed and coins were refunded to :address.', {
-            address: changellyInfo.returnAddress,
+            // TODO remove returnAddress
+            address: changellyInfo.refundAddress || changellyInfo.returnAddress,
           }),
         });
       } else if (tx.status === 'overdue') {

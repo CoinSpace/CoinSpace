@@ -182,20 +182,21 @@ export default function(el) {
       return showError({ message: translate('Please enter an amount below', interpolations) });
     }
 
+    const toAddress = ractive.get('toAddress').trim();
+    const refundAddress = (fromCrypto.supported && !!getWalletById(fromCrypto._id))
+      ? getWalletById(fromCrypto._id).getNextAddress()
+      : null;
     const options = {
-      toSymbol: toCrypto.changelly.ticker,
-      fromSymbol: fromCrypto.changelly.ticker,
-      toAddress: ractive.get('toAddress').trim(),
-      returnAddress: fromCrypto.supported
-        && !!getWalletById(fromCrypto._id)
-        && getWalletById(fromCrypto._id).getNextAddress(),
+      toCrypto,
+      fromCrypto,
+      toAddress,
+      refundAddress,
       fromAmount,
     };
     return validateAddresses(options).then(() => {
       return changelly.createTransaction(options).then(async (data) => {
-        data.networkFee = ractive.get('networkFee');
-        data.depositBlockchain = ractive.get('fromCrypto').platformName;
-        data.toBlockchain = ractive.get('toCrypto').platformName;
+        data.toAddress = toAddress;
+        data.fromCryptoId = ractive.get('fromCryptoId');
         data.toCryptoId = ractive.get('toCryptoId');
 
         const wallet = getWallet();
@@ -273,12 +274,12 @@ export default function(el) {
   function validateAddresses(options) {
     ractive.set('isValidating', true);
     const promises = [];
-    if (options.returnAddress) {
-      promises.push(changelly.validateAddress(options.returnAddress, options.fromSymbol));
+    if (options.refundAddress) {
+      promises.push(changelly.validateAddress(options.refundAddress, options.fromCrypto._id));
     } else {
       promises.push(Promise.resolve(true));
     }
-    promises.push(changelly.validateAddress(options.toAddress, options.toSymbol));
+    promises.push(changelly.validateAddress(options.toAddress, options.toCrypto._id));
 
     return Promise.all(promises).then((results) => {
       if (!results[0]) throw new Error('invalid_return_address');
@@ -311,13 +312,10 @@ export default function(el) {
     try {
       const fromCrypto = ractive.get('fromCrypto');
       const toCrypto = ractive.get('toCrypto');
-      const { minAmount, maxAmount } = await changelly.getPairsParams(
-        fromCrypto.changelly.ticker,
-        toCrypto.changelly.ticker
-      );
+      const { minAmount, maxAmount } = await changelly.getPairsParams(fromCrypto._id, toCrypto._id);
       _maxAmount = parseFloat(maxAmount) || 0;
       const input = ractive.find('#changelly_from_amount');
-      let fromAmount = input.value || -1;
+      let fromAmount = input.value || 0;
       ractive.set('minAmount', minAmount);
       if ((parseFloat(fromAmount) < parseFloat(minAmount)) && input !== document.activeElement) {
         fromAmount = minAmount;
@@ -325,20 +323,18 @@ export default function(el) {
         _fromAmount = minAmount;
       }
       const data = await changelly.estimate(
-        fromCrypto.changelly.ticker,
-        toCrypto.changelly.ticker,
+        fromCrypto._id,
+        toCrypto._id,
         fromAmount
       );
       ractive.set('rate', data.rate);
       ractive.set('toAmount', data.result);
-      ractive.set('networkFee', data.networkFee);
       ractive.set('isLoadingEstimate', false);
       ractive.set('isFirstEstimate', false);
     } catch (err) {
       ractive.set('rate', '?');
       ractive.set('toAmount', '?');
       ractive.set('minAmount', '?');
-      ractive.set('networkFee', '?');
       ractive.set('isLoadingEstimate', false);
       ractive.set('isFirstEstimate', false);
       console.error(err);

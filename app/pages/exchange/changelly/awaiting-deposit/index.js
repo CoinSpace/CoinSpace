@@ -1,5 +1,6 @@
 import Ractive from 'lib/ractive';
 import emitter from 'lib/emitter';
+import crypto from 'lib/crypto';
 import qrcode from 'lib/qrcode';
 import details from 'lib/wallet/details';
 import showTooltip from 'widgets/modals/tooltip';
@@ -39,21 +40,40 @@ export default function(el) {
   const delay = 60 * 1000; // 60 seconds
   let interval;
 
-  ractive.on('before-show', (context) => {
+  ractive.on('before-show', async (context) => {
     interval = setInterval(() => {
       emitter.emit('changelly');
     }, delay);
 
-    ractive.set({
-      depositAmount: context.depositAmount,
-      depositAddress: context.depositAddress,
-      depositBlockchain: context.depositBlockchain,
-      extraId: context.extraId,
-      extraIdLabel: translate(extraIdLabels[context.depositSymbol] || 'Extra Id'),
-      toAddress: context.toAddress,
-      toSymbol: context.toSymbol,
-      toBlockchain: context.toBlockchain,
-    });
+    if (context.fromCryptoId && context.toCryptoId) {
+      const cryptos = await crypto.getCryptos();
+      const fromCrypto = cryptos.find((item) => item._id === context.fromCryptoId);
+      const toCrypto = cryptos.find((item) => item._id === context.toCryptoId);
+      ractive.set({
+        depositAmount: context.depositAmount,
+        depositAddress: context.depositAddress,
+        depositSymbol: fromCrypto.symbol,
+        depositBlockchain: fromCrypto.platformName,
+        extraId: context.extraId,
+        extraIdLabel: translate(extraIdLabels[fromCrypto.symbol] || 'Extra Id'),
+        toAddress: context.toAddress,
+        toSymbol: toCrypto.symbol,
+        toBlockchain: toCrypto.platformName,
+      });
+    } else {
+      // TODO remove lagacy
+      ractive.set({
+        depositAmount: context.depositAmount,
+        depositAddress: context.depositAddress,
+        depositSymbol: context.depositSymbol,
+        depositBlockchain: context.depositBlockchain,
+        extraId: context.extraId,
+        extraIdLabel: translate(extraIdLabels[context.depositSymbol] || 'Extra Id'),
+        toAddress: context.toAddress,
+        toSymbol: context.toSymbol,
+        toBlockchain: context.toBlockchain,
+      });
+    }
 
     const canvas = ractive.find('#deposit_qr_canvas');
     const qr = qrcode.encode(context.depositAddress);

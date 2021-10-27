@@ -1,34 +1,41 @@
 import request from 'lib/request';
 
-function getPairsParams(fromSymbol, toSymbol) {
+function getPairsParams(from, to) {
   return request({
-    url: process.env.SITE_URL + 'api/v1/changelly/getPairsParams',
+    baseURL: process.env.SITE_URL,
+    url: 'api/v3/exchange/changelly/params',
     params: {
-      from: fromSymbol,
-      to: toSymbol,
+      from,
+      to,
     },
-    id: true,
+    seed: 'public',
   });
 }
 
-function estimate(fromSymbol, toSymbol, amount) {
+function estimate(from, to, amount) {
   return request({
-    url: process.env.SITE_URL + 'api/v1/changelly/estimate',
+    baseURL: process.env.SITE_URL,
+    url: 'api/v3/exchange/changelly/estimate',
     params: {
-      from: fromSymbol,
-      to: toSymbol,
+      from,
+      to,
       amount,
     },
-    id: true,
+    seed: 'public',
   });
 }
 
-function validateAddress(address, symbol) {
+function validateAddress(address, crypto) {
   if (!address) return Promise.resolve(false);
-  if (!symbol) return Promise.resolve(false);
+  if (!crypto) return Promise.resolve(false);
   return request({
-    url: process.env.SITE_URL + 'api/v1/changelly/validate/' + address + '/' + symbol,
-    id: true,
+    baseURL: process.env.SITE_URL,
+    url: 'api/v3/exchange/changelly/validate/',
+    params: {
+      address,
+      crypto,
+    },
+    seed: 'public',
   }).then((data) => {
     return !!data.isValid;
   });
@@ -36,16 +43,17 @@ function validateAddress(address, symbol) {
 
 function createTransaction(options) {
   return request({
-    url: process.env.SITE_URL + 'api/v1/changelly/createTransaction',
+    baseURL: process.env.SITE_URL,
+    url: 'api/v3/exchange/changelly/transaction',
     method: 'post',
     data: {
-      from: options.fromSymbol,
-      to: options.toSymbol,
+      from: options.fromCrypto._id,
+      to: options.toCrypto._id,
       amount: options.fromAmount,
       address: options.toAddress,
-      refundAddress: options.returnAddress,
+      refundAddress: options.refundAddress,
     },
-    id: true,
+    seed: 'public',
   }).then((data) => {
     if (!data) throw new Error('exchange_error');
     return data;
@@ -54,8 +62,9 @@ function createTransaction(options) {
 
 function getTransaction(id) {
   return request({
-    url: process.env.SITE_URL + 'api/v1/changelly/transaction/' + id,
-    id: true,
+    baseURL: process.env.SITE_URL,
+    url: `api/v3/exchange/changelly/transaction/${id}`,
+    seed: 'public',
   });
 }
 
