@@ -855,6 +855,178 @@ paths:
                   - address
         default:
           $ref: '#/components/responses/GeneralError'
+  /exchange/changelly/params:
+    get:
+      x-eov-operation-id: changellyParams
+      x-eov-operation-handler: handlers
+      description: Get Changelly pair parameters
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cryptoIdFrom'
+        - $ref: '#/components/parameters/cryptoIdTo'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Changelly pair parameters
+          content:
+            'application/json':
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  minAmount:
+                    $ref: '#/components/schemas/NumberString'
+                  maxAmount:
+                    $ref: '#/components/schemas/NumberString'
+                required:
+                  - minAmount
+                  - maxAmount
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /exchange/changelly/estimate:
+    get:
+      x-eov-operation-id: changellyEstimate
+      x-eov-operation-handler: handlers
+      description: Estimate Changelly rate
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cryptoIdFrom'
+        - $ref: '#/components/parameters/cryptoIdTo'
+        - $ref: '#/components/parameters/amount'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Changelly estimation
+          content:
+            'application/json':
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  rate:
+                    $ref: '#/components/schemas/NumberString'
+                  result:
+                    $ref: '#/components/schemas/NumberString'
+                required:
+                  - rate
+                  - result
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /exchange/changelly/validate:
+    get:
+      x-eov-operation-id: changellyValidateAddress
+      x-eov-operation-handler: handlers
+      description: Estimate Changelly rate
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cryptoId'
+        - $ref: '#/components/parameters/address'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Changelly address validation
+          content:
+            'application/json':
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  isValid:
+                    type: boolean
+                required:
+                  - isValid
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /exchange/changelly/transaction:
+    post:
+      x-eov-operation-id: changellyCreateTransaction
+      x-eov-operation-handler: handlers
+      description: Create Changelly transaction
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                from:
+                  $ref: '#/components/schemas/CryptoId'
+                to:
+                  $ref: '#/components/schemas/CryptoId'
+                amount:
+                  $ref: '#/components/schemas/CryptoAmount'
+                address:
+                  $ref: '#/components/schemas/AnyCryptoAddress'
+                refundAddress:
+                  $ref: '#/components/schemas/NullableCryptoAddress'
+              required:
+                - from
+                - to
+                - amount
+                - address
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Changelly transaction
+          content:
+            'application/json':
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  id:
+                    $ref: '#/components/schemas/AnyString256'
+                  depositAmount:
+                    $ref: '#/components/schemas/NumberString'
+                  depositAddress:
+                    $ref: '#/components/schemas/AnyCryptoAddress'
+                  extraId:
+                    $ref: '#/components/schemas/NullableString256'
+                required:
+                  - id
+                  - depositAmount
+                  - depositAddress
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /exchange/changelly/transaction/{transactionId}:
+    get:
+      x-eov-operation-id: changellyGetTransaction
+      x-eov-operation-handler: handlers
+      description: Get release
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/changellyTransactionId'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Changelly transaction
+          content:
+            'application/json':
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  status:
+                    $ref: '#/components/schemas/AnyString256'
+                  amountTo:
+                    $ref: '#/components/schemas/NumberString'
+                  payoutHashLink:
+                    $ref: '#/components/schemas/UrlString'
+                  payoutHash:
+                    $ref: '#/components/schemas/AnyString256'
+                required:
+                  - status
+                  - amountTo
+        default:
+          $ref: '#/components/responses/GeneralError'
 components:
   schemas:
     Hex64String:
@@ -910,10 +1082,20 @@ components:
       type: string
       pattern: ^.{1,256}$
       maxLength: 256
+    NullableCryptoAddress:
+      type: string
+      pattern: ^.{1,256}$
+      maxLength: 256
+      nullable: true
     AnyString256:
       type: string
       pattern: ^.{0,256}$
       maxLength: 256
+    NullableString256:
+      type: string
+      pattern: ^.{0,256}$
+      maxLength: 256
+      nullable: true
     Distribution:
       type: string
       pattern: ^[a-z0-9-]+$
@@ -927,6 +1109,15 @@ components:
       pattern: ^v.+$
       maxLength: 64
     Price:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 9007199254740991
+    NumberString:
+      type: string
+      pattern: ^[0-9]*(\.[0-9]+)?$
+      maxLength: 128
+    CryptoAmount:
       type: number
       format: float
       minimum: 0
@@ -1287,6 +1478,22 @@ components:
       allowReserved: true
       schema:
         $ref: '#/components/schemas/CryptoId'
+    cryptoIdFrom:
+      in: query
+      name: from
+      required: true
+      description: Crypto ID
+      allowReserved: true
+      schema:
+        $ref: '#/components/schemas/CryptoId'
+    cryptoIdTo:
+      in: query
+      name: to
+      required: true
+      description: Crypto ID
+      allowReserved: true
+      schema:
+        $ref: '#/components/schemas/CryptoId'
     cryptoIds:
       in: query
       name: crypto
@@ -1297,6 +1504,26 @@ components:
       allowReserved: true
       schema:
         $ref: '#/components/schemas/CryptoIdList'
+    amount:
+      in: query
+      name: amount
+      required: true
+      description: Amount of crypto
+      schema:
+        $ref: '#/components/schemas/CryptoAmount'
+    address:
+      in: query
+      name: address
+      required: true
+      description: Crypto address
+      schema:
+        $ref: '#/components/schemas/AnyCryptoAddress'
+    changellyTransactionId:
+      in: path
+      name: transactionId
+      required: true
+      schema:
+        $ref: '#/components/schemas/AnyString256'
     lat:
       in: query
       name: lat

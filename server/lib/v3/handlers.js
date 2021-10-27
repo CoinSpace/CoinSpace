@@ -10,6 +10,7 @@ import moonpay from '../moonpay.js';
 import openalias from '../openalias.js';
 import domain from '../domain.js';
 import github from '../github.js';
+import changelly from '../changelly.js';
 import { verifyReq } from '../utils.js';
 
 export async function register(req, res) {
@@ -353,4 +354,35 @@ export async function getDomainAddress(req, res) {
   const address = await domain.getAddress(req.query.domain, req.query.crypto);
   if (!address) throw createError(404, 'Address not found');
   res.status(200).send({ address });
+}
+
+export async function changellyParams(req, res) {
+  const data = await changelly.getPairsParams(req.query.from, req.query.to);
+  res.status(200).send(data);
+}
+
+export async function changellyEstimate(req, res) {
+  const data = await changelly.estimate(req.query.from, req.query.to, req.query.amount);
+  res.status(200).send(data);
+}
+
+export async function changellyValidateAddress(req, res) {
+  const data = await changelly.validateAddress(req.query.address, req.query.crypto);
+  res.status(200).send(data);
+}
+
+export async function changellyCreateTransaction(req, res) {
+  const data = await changelly.createTransaction(
+    req.body.from,
+    req.body.to,
+    req.body.amount,
+    req.body.address,
+    req.body.refundAddress
+  );
+  res.status(200).send(data);
+}
+
+export async function changellyGetTransaction(req, res) {
+  const data = await changelly.getTransaction(req.params.transactionId);
+  res.status(200).send(data);
 }
