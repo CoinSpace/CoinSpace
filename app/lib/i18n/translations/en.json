@@ -94,7 +94,6 @@
   "Exchange complete!": "Exchange complete!",
   "Done": "Done",
   "Please enter a valid return address": "Please enter a valid return address",
-  "Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.": "Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.",
   "Remove account": "Remove account",
   "Remove": "Remove",
   "Are you sure?": "Are you sure?",
@@ -168,13 +167,11 @@
   "Can't connect to :network node. Please try again later or choose another token.": "Can't connect to %(network)s node. Please try again later or choose another token.",
   "Network node error. Please try again later.": "%(network)s node error. Please try again later.",
   "Choose exchange": "Choose exchange",
-  "Next step": "Next step",
   "Minimum amount:": "Minimum amount:",
   "address": "address",
   "Exchange error": "Exchange error",
   "Transaction not found": "Transaction not found",
   "Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress (blokchain: :toBlockchain)": "Send %(depositAmount)s %(depositSymbol)s to deposit address.\nIt will be converted into %(toSymbol)s, and sent to\n %(toAddress)s (blockchain: %(toBlockchain)s)",
-  "Network fee": "Network fee",
   "You have 36 hours to send funds otherwise the transaction will be cancelled automatically.": "You have 36 hours to send funds otherwise the transaction will be cancelled automatically.",
   "Extra Id": "Extra Id",
   "Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).": "Property for addresses of currencies that use additional ID for transaction processing (e.g., destination tag, memo or message).",
@@ -265,7 +262,5 @@
   "Your :name wallet address is used": "Your %(name)s wallet address is used",
   "Your :name wallet address on :blockchain blockchain is used": "Your %(name)s wallet address on %(blockchain)s blockchain is used",
   "Destination address": "Destination address",
-  "change": "change",
-  "Return address": "Return address",
-  "optional": "optional"
+  "change": "change"
 }

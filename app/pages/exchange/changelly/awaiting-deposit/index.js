@@ -25,12 +25,9 @@ export default function(el) {
       depositBlockchain: '',
       extraId: '',
       extraIdLabel: translate('Extra Id'),
-      networkFee: '',
       toAddress: '',
       toSymbol: '',
       toBlockchain: '',
-      rate: '',
-      changellyTransactionId: '',
       isPhonegap: process.env.BUILD_TYPE === 'phonegap',
       ref: process.env.CHANGELLY_REF,
     },
@@ -49,17 +46,13 @@ export default function(el) {
 
     ractive.set({
       depositAmount: context.depositAmount,
-      depositSymbol: context.depositSymbol,
       depositAddress: context.depositAddress,
       depositBlockchain: context.depositBlockchain,
       extraId: context.extraId,
       extraIdLabel: translate(extraIdLabels[context.depositSymbol] || 'Extra Id'),
-      networkFee: context.networkFee,
       toAddress: context.toAddress,
       toSymbol: context.toSymbol,
       toBlockchain: context.toBlockchain,
-      rate: context.rate,
-      changellyTransactionId: context.id,
     });
 
     const canvas = ractive.find('#deposit_qr_canvas');

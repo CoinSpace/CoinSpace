@@ -60,38 +60,6 @@
     </div>
   </div>
 
-  <div class="csformgroup csformgroup--readonly">
-    <div class="csformgroup__input-group">
-      <div class="csformgroup__input-group__header">
-        <label>{{translate("Exchange rate")}}</label>
-      </div>
-      1 {{depositSymbol}} ≈ {{rate}} {{toSymbol}}
-    </div>
-  </div>
-
-  <div class="csformgroup csformgroup--readonly">
-    <div class="csformgroup__input-group">
-      <div class="csformgroup__input-group__header">
-        <label>{{translate("Network fee")}}</label>
-        <span class="csformgroup__input-group__header__help" on-click="help-network-fee">
-          {{>svg_help}}
-        </span>
-      </div>
-      {{networkFee}} {{toSymbol}}
-    </div>
-  </div>
-
-  <div class="csformgroup csformgroup--readonly">
-    <div class="csformgroup__input-group">
-      <div class="csformgroup__input-group__header">
-        <label>Changelly {{translate("Transaction ID")}}</label>
-      </div>
-      <div class="_tx-id">
-        {{changellyTransactionId}}
-      </div>
-    </div>
-  </div>
-
   <div class="_description">
     {{translate("You have 36 hours to send funds otherwise the transaction will be cancelled automatically.")}}
   </div>
