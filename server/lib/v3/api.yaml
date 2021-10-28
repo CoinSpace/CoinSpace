@@ -918,7 +918,7 @@ paths:
     get:
       x-eov-operation-id: changellyValidateAddress
       x-eov-operation-handler: handlers
-      description: Estimate Changelly rate
+      description: Validate crypto address
       parameters:
         - $ref: '#/components/parameters/deviceId'
         - $ref: '#/components/parameters/cryptoId'
@@ -999,7 +999,7 @@ paths:
     get:
       x-eov-operation-id: changellyGetTransaction
       x-eov-operation-handler: handlers
-      description: Get release
+      description: Get Changelly transaction
       parameters:
         - $ref: '#/components/parameters/deviceId'
         - $ref: '#/components/parameters/changellyTransactionId'
