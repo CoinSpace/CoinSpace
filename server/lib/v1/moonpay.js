@@ -10,7 +10,7 @@ function save(_id, data) {
 
 const PREDEFINED_NETWORKS = {
   // eslint-disable-next-line max-len
-  ethereum: ['aave', 'axs', 'band', 'bat', 'bora', 'cbc', 'chz', 'comp', 'cvc', 'dai', 'enj', 'eth', 'fun', 'keth', 'key', 'link', 'mana', 'matic', 'mkr', 'ocean', 'okb', 'om', 'omg', 'pax', 'paxg', 'rep', 'rfuel', 'rinketh', 'sand', 'snx', 'srm', 'stmx', 'tomo', 'tusd', 'uni', 'usdc', 'usdt', 'utk', 'wbtc', 'zrx'],
+  ethereum: ['aave', 'axs', 'band', 'bat', 'bora', 'cbc', 'chz', 'comp', 'cvc', 'dai', 'enj', 'eth', 'fun', 'keth', 'key', 'link', 'mana', 'matic', 'mkr', 'ocean', 'okb', 'om', 'omg', 'pax', 'paxg', 'rep', 'rfuel', 'rinketh', 'sand', 'snx', 'srm', 'stmx', 'tomo', 'tusd', 'uni', 'usdc', 'usdt', 'utk', 'wbtc', 'zrx', 'shib'],
   'binance-chain': ['ava', 'bnb', 'busd', 'rune'],
   'binance-smart-chain': ['bnb_bsc', 'busd_bsc'],
   eos: ['eos', 'eosdt'],
