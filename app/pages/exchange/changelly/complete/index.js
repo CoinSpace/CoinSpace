@@ -1,10 +1,12 @@
-import Ractive from 'lib/ractive';
+import Ractive from '../ractive';
 import emitter from 'lib/emitter';
 import details from 'lib/wallet/details';
 import template from './index.ract';
 import footer from '../footer.ract';
 import { getWalletById } from 'lib/wallet';
+import crypto from 'lib/crypto';
 
+// TODO: remove
 const symbolToCryptoId = {
   BTC: 'bitcoin@bitcoin',
   BCH: 'bitcoin-cash@bitcoin-cash',
@@ -30,29 +32,29 @@ export default function(el) {
       amount: '',
       payoutHash: '',
       txUrl: () => '',
-      ref: process.env.CHANGELLY_REF,
     },
     partials: {
       footer,
     },
   });
 
-  ractive.on('before-show', (context) => {
+  ractive.on('before-show', async (context) => {
+    const cryptos = await crypto.getCryptos();
     const cryptoId = context.toCryptoId || symbolToCryptoId[context.toSymbol];
-    const wallet = cryptoId && getWalletById(cryptoId);
+    const toCrypto = cryptos.find((item) => item._id === cryptoId);
+    const wallet = toCrypto && getWalletById(toCrypto._id);
     ractive.set({
-      toSymbol: context.toSymbol,
+      toCrypto,
       toAddress: context.toAddress,
       amount: context.amount,
       payoutHash: context.payoutHash,
       txUrl: wallet ? wallet.txUrl.bind(wallet) : () => context.payoutHashLink,
-      cryptoId,
     });
   });
 
   ractive.on('done', () => {
     details.set('changellyInfo', null).then(() => {
-      emitter.emit('change-changelly-step', 'enterAmount');
+      emitter.emit('change-changelly-step', 'create');
     }).catch((err) => {
       console.error(err);
     });

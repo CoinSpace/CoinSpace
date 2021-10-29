@@ -13,30 +13,22 @@
     {{>svg_success}}
   </div>
 
-  <div class="csformgroup csformgroup--readonly">
-    <div class="csformgroup__input-group">
-      {{translate("amount :toSymbol have been delivered to :toAddress", {
-        amount: amount,
-        toSymbol: toSymbol,
-        toAddress: toAddress
-      })}}
-    </div>
+  <div class="_text">
+    {{translate("amount :toSymbol have been delivered to :toAddress", {
+      amount: amount,
+      toSymbol: toCrypto.symbol,
+      toAddress: toAddress
+    })}}
   </div>
 
-  <div class="csformgroup csformgroup--readonly">
-    <div class="csformgroup__input-group">
-      <div class="csformgroup__input-group__header">
-        <label>{{translate("Transaction ID")}}</label>
-      </div>
-      <a href="" onclick="return window.safeOpen('{{txUrl(payoutHash)}}', '_blank');">{{payoutHash}}</a>
-    </div>
+  <div class="_title">{{translate("Transaction ID")}}</div>
+  <div class="_text">
+    <a href="" class="_link" onclick="return window.safeOpen('{{txUrl(payoutHash)}}', '_blank');">{{payoutHash}}</a>
   </div>
 
-  {{#if cryptoId === 'monero@monero'}}
-  <div class="csformgroup csformgroup--readonly">
-    <div class="csformgroup__input-group">
-      {{translate("In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.")}}
-    </div>
+  {{#if toCrypto._id === 'monero@monero'}}
+  <div class="_text">
+    {{translate("In order to receive funds please switch to Monero coin and accept above transaction on «Receive» tab.")}}
   </div>
   {{/if}}
 

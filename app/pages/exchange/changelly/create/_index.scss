@@ -1,20 +1,7 @@
-.changelly_enter_amount {
+.changelly_create {
   margin-bottom: 25px;
   @include breakpoint(portrait) {
     font-size: $base_font_size--portrait;
-  }
-  ._title {
-    @extend .jigsaw-medium;
-  }
-
-  .csformgroup {
-    &.from {
-      margin-bottom: 0;
-    }
-  }
-
-  .exchange__rate {
-    margin-bottom: 20px;
   }
 
   .swap__wrapper {
@@ -45,13 +32,6 @@
           height: 36px;
         }
       }
-    }
-  }
-
-  .confirm__buttons {
-    margin-top: 20px;
-    @include breakpoint(portrait) {
-      margin-top: 40px;
     }
   }
 }

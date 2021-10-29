@@ -1,7 +1,9 @@
 import axios from 'axios';
 import crypto from 'crypto';
 import createError from 'http-errors';
-import Big from 'big.js';
+import BigOrigin from 'big.js';
+const Big = BigOrigin();
+Big.NE = -32;
 const API_URL = 'https://api.changelly.com';
 import cryptoDB from '@coinspace/crypto-db';
 

@@ -168,7 +168,6 @@
   "Network node error. Please try again later.": "%(network)s node error. Please try again later.",
   "Choose exchange": "Choose exchange",
   "Minimum amount:": "Minimum amount:",
-  "address": "address",
   "Exchange error": "Exchange error",
   "Transaction not found": "Transaction not found",
   "Send :depositAmount :depositSymbol to deposit address. It will be converted into :toSymbol, and sent to :toAddress (blokchain: :toBlockchain)": "Send %(depositAmount)s %(depositSymbol)s to deposit address.\nIt will be converted into %(toSymbol)s, and sent to\n %(toAddress)s (blockchain: %(toBlockchain)s)",
@@ -258,9 +257,9 @@
   "Invalid Transaction ID.": "Invalid Transaction ID.",
   "Blockchain": "Blockchain",
   "Hardware key is required to complete action.": "Hardware key is required to complete action.",
-  "Use your :name wallet address": "Use your %(name)s wallet address",
-  "Your :name wallet address is used": "Your %(name)s wallet address is used",
-  "Your :name wallet address on :blockchain blockchain is used": "Your %(name)s wallet address on %(blockchain)s blockchain is used",
   "Destination address": "Destination address",
-  "change": "change"
+  "change": "change",
+  "Deposit blockchain": "Deposit blockchain",
+  "Destination blockchain": "Destination blockchain",
+  "Use your wallet address": "Use your wallet address"
 }

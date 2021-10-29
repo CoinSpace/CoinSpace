@@ -14,12 +14,8 @@
       }
     }
   }
-
-  .csformgroup {
+  ._text {
     @include wrapdat;
-    a {
-      text-decoration: underline;
-    }
   }
 
   ._complete_icon {

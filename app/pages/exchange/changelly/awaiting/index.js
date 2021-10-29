@@ -1,4 +1,4 @@
-import Ractive from 'lib/ractive';
+import Ractive from '../ractive';
 import emitter from 'lib/emitter';
 import { showInfo } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
@@ -9,9 +9,6 @@ export default function(el) {
   const ractive = new Ractive({
     el,
     template,
-    data: {
-      ref: process.env.CHANGELLY_REF,
-    },
     partials: {
       footer,
     },

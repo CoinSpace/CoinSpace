@@ -1,4 +1,4 @@
-import Ractive from 'lib/ractive';
+import Ractive from '../ractive';
 import emitter from 'lib/emitter';
 import details from 'lib/wallet/details';
 import template from './index.ract';
@@ -11,7 +11,6 @@ export default function(el) {
     data: {
       message: '',
       showEmail: true,
-      ref: process.env.CHANGELLY_REF,
     },
     partials: {
       footer,
@@ -25,7 +24,7 @@ export default function(el) {
 
   ractive.on('close', () => {
     details.set('changellyInfo', null).then(() => {
-      emitter.emit('change-changelly-step', 'enterAmount');
+      emitter.emit('change-changelly-step', 'create');
     }).catch((err) => {
       console.error(err);
     });

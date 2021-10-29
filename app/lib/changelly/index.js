@@ -25,9 +25,9 @@ function estimate(from, to, amount) {
   });
 }
 
-function validateAddress(address, crypto) {
-  if (!address) return Promise.resolve(false);
-  if (!crypto) return Promise.resolve(false);
+async function validateAddress(address, crypto) {
+  if (!address) return false;
+  if (!crypto) return false;
   return request({
     baseURL: process.env.SITE_URL,
     url: 'api/v3/exchange/changelly/validate/',
@@ -54,9 +54,8 @@ function createTransaction(options) {
       refundAddress: options.refundAddress,
     },
     seed: 'public',
-  }).then((data) => {
-    if (!data) throw new Error('exchange_error');
-    return data;
+  }).catch(() => {
+    throw new Error('exchange_error');
   });
 }
 

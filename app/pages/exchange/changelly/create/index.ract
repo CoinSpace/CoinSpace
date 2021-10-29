@@ -1,0 +1,129 @@
+<div class="changelly_create">
+
+  <div class="csheader-back">
+    <div class="csheader-back__btn" on-click="back">
+      <span class="csheader-back__btn__icon">{{>svg_arrow}}</span> {{translate("Back")}}
+    </div>
+  </div>
+
+  <form>
+
+    <div class="csformgroup _short">
+      <div class="csformgroup__input-group">
+        <div class="csformgroup__input-group__header">
+          <label for="changelly_from_amount">{{translate("From")}}</label>
+        </div>
+        <div class="csinput csinput--with-dropdown">
+          <input id="changelly_from_amount" class="csinput__input" value="1" on-input="input-from-amount" type="number" min="0" step="any" placeholder="{{translate('Amount')}}" autocorrect="off" autocapitalize="off" />
+          <span class="csinput__dropdown">
+            <span class="csinput__dropdown__label">{{fromCrypto.symbol}}</span>
+            <select value="{{fromCrypto}}" on-change="change-from" tabindex="-1">
+              {{#coins}}
+                <option value="{{this}}">{{symbol}} - {{name}}{{#if type === 'token'}} ({{platformName}}){{/if}}</option>
+              {{/coins}}
+            </select>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div>
+      {{translate("Minimum amount:")}}
+      {{#if isFirstEstimate}}
+        ...
+      {{else}}
+        {{minAmount}} {{fromCrypto.symbol}}
+      {{/if}}
+    </div>
+
+    <div class="swap__wrapper">
+      <div class="_btn" on-click="swap">
+        <span class="_icon">
+          {{>svg_exchange}}
+        </span>
+      </div>
+    </div>
+
+    <div class="csformgroup">
+      <div class="csformgroup__input-group">
+        <div class="csformgroup__input-group__header">
+          <label for="changelly_to_amount">{{translate("To")}}</label>
+        </div>
+        <div class="csinput csinput--with-dropdown">
+          <input id="changelly_to_amount" class="csinput__input" type="text" placeholder="{{translate('Amount')}}" autocorrect="off" autocapitalize="off" value="{{toAmount}}" readonly/>
+          <span class="csinput__dropdown">
+            <span class="csinput__dropdown__label">{{toCrypto.symbol}}</span>
+            <select value="{{toCrypto}}" on-change="change-to" tabindex="-1">
+              {{#coins}}
+                <option value="{{this}}">{{symbol}} - {{name}}{{#if type === 'token'}} ({{platformName}}){{/if}}</option>
+              {{/coins}}
+            </select>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="_title">{{translate("Exchange rate")}}</div>
+    <div class="_text">
+      {{#if isFirstEstimate}}
+        {{translate("Loading...")}}
+      {{else}}
+        {{#if rate === '0'}} 0 {{else}} 1 {{/if}}
+        {{fromCrypto.symbol}} ≈ {{rate}} {{toCrypto.symbol}}
+      {{/if}}
+    </div>
+
+    <div class="_title">{{translate("Destination blockchain")}}</div>
+    <div class="_text">{{toCrypto.platformName}}</div>
+
+    {{#if hasWalletAddress && useWalletAddress }}
+      <div class="_title">{{translate("Destination address")}}</div>
+      <div class="_text">{{translate("Your wallet address")}} <span class="_link" on-click="use-custom-address">({{translate("change")}})</span></div>
+    {{else}}
+      <div class="csformgroup _short">
+        <div class="csformgroup__input-group">
+          <div class="csformgroup__input-group__header">
+            <label for="changelly_to_address">{{translate("Destination address")}}</label>
+          </div>
+          <div class="csinput csinput--with-x">
+            <input id="changelly_to_address" class="csinput__input" type="text" autocorrect="off" autocapitalize="off" value="{{toAddress}}" />
+            {{#toAddress}}
+              <div class="csinput__cross" on-click="clear-to-address">
+                <span class="csinput__cross__icon">{{> svg_close}}</span>
+              </div>
+            {{/toAddress}}
+          </div>
+        </div>
+        {{#qrScannerAvailable}}
+          <div class="csbtn" on-click="open-qr">
+            <span class="csbtn__icon">
+              {{>svg_qr}}
+            </span>
+          </div>
+        {{/qrScannerAvailable}}
+        <div class="csbtn" on-click="open-geo">
+          <span class="csbtn__icon">
+            {{>svg_mecto}}
+          </span>
+        </div>
+      </div>
+      <div class="_text">
+      {{#if hasWalletAddress}}
+        <span class="_link" on-click="use-wallet-address">{{translate("Use your wallet address")}}</span>
+      {{/if}}
+      </div>
+    {{/if}}
+
+  </form>
+
+  {{#if (isLoading || isConfirming)}}
+    <div class="csbtn csbtn--loading">
+      <span class="csbtn__icon">
+        {{>svg_refresh}}
+      </span>
+    </div>
+  {{else}}
+    <div on-click="confirm" class="csbtn">{{translate("Confirm")}}</div>
+  {{/if}}
+
+</div>
+{{>footer}}

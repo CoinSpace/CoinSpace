@@ -1,6 +1,6 @@
 import Ractive from 'lib/ractive';
 import emitter from 'lib/emitter';
-import initEnterAmount from './enter-amount';
+import initCreate from './create';
 import initAwaitingDeposit from './awaiting-deposit';
 import initAwaiting from './awaiting';
 import initComplete from './complete';
@@ -25,13 +25,13 @@ export default function(el) {
   });
 
   const steps = {
-    enterAmount: initEnterAmount(ractive.find('#changelly_enter_amount')),
+    create: initCreate(ractive.find('#changelly_create')),
     awaitingDeposit: initAwaitingDeposit(ractive.find('#changelly_awaiting_deposit')),
     awaiting: initAwaiting(ractive.find('#changelly_awaiting')),
     complete: initComplete(ractive.find('#changelly_complete')),
     error: initError(ractive.find('#changelly_error')),
   };
-  let currentStep = steps.enterAmount;
+  let currentStep = steps.create;
 
   ractive.on('before-show', () => {
     emitter.emit('changelly');
@@ -46,7 +46,7 @@ export default function(el) {
     const changellyInfo = details.get('changellyInfo');
     if (!changellyInfo) {
       ractive.set('isLoading', false);
-      return showStep(steps.enterAmount);
+      return showStep(steps.create);
     }
 
     changelly.getTransaction(changellyInfo.id).then((tx) => {
