@@ -1,25 +1,24 @@
 import Ractive from 'widgets/modals/base';
 import emitter from 'lib/emitter';
 import { unlock, lock } from 'lib/wallet/security';
-import { showError, showSuccess } from 'widgets/modals/flash';
+import { showError } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
-import { toUnitString } from 'lib/convert';
 import content from './_content.ract';
 
-function open(data) {
+function open(options) {
 
   const ractive = new Ractive({
     partials: {
-      content,
+      content: options.content || content,
     },
-    data: extendData(data),
+    data: options.data,
   });
-  const { wallet } = data;
+  const { wallet } = options;
 
   ractive.on('send', () => {
-    ractive.set('sending', true);
+    ractive.set('isLoading', true);
     setTimeout(async () => {
-      let { tx } = data;
+      let { tx } = options;
 
       try {
         await unlock(wallet);
@@ -28,18 +27,12 @@ function open(data) {
       } catch (err) {
         lock(wallet);
         if (err.message !== 'cancelled') console.error(err);
-        return ractive.set('sending', false);
+        return ractive.set('isLoading', false);
       }
       try {
         await wallet.sendTx(tx);
 
-        if (data.onSuccessDismiss) data.onSuccessDismiss();
-        showSuccess({
-          el: ractive.el,
-          title: translate('Transaction Successful'),
-          message: translate('Your transaction will appear in your history tab shortly.'),
-          fadeInDuration: 0,
-        });
+        options.onSuccess(ractive);
 
         // update balance & tx history
         emitter.emit('tx-sent');
@@ -77,13 +70,6 @@ function open(data) {
   }
 
   return ractive;
-}
-
-function extendData(data) {
-  const { wallet } = data;
-  data.feeSign = '+';
-  data.fee = toUnitString(wallet.defaultFee);
-  return data;
 }
 
 export default open;

@@ -8,28 +8,28 @@
 
     <div class="_amount">{{amount}} {{symbol}}</div>
 
-    {{#if showImportTxFees}}
+    {{#if isImport}}
     <div class="_import-tx-fee">
-      <div class="_fee" class-_multiple="(fees.length !== 1)">{{feeSign}}{{fee}} {{symbol}} {{translate("transaction fee")}}</div>
+      <div class="_fee" class-_multiple="(fees.length !== 1)">{{feeSign}}{{fee}} {{feeSymbol}} {{translate("transaction fee")}}</div>
       {{#if fees.length > 1}}
       <select value="{{feeName}}" on-change="change-fee">
         {{#each fees as fee: index}}
-          <option value="{{fee.name}}">{{feeSign}}{{fee.estimate}} {{symbol}} - {{translate(fee.name)}}</option>
+          <option value="{{fee.name}}">{{feeSign}}{{fee.estimate}} {{feeSymbol}} - {{translate(fee.name)}}</option>
         {{/each}}
       </select>
       {{/if}}
     </div>
     {{else}}
-    <div class="_fee">{{feeSign}}{{fee}} {{symbol}} {{translate("transaction fee")}}</div>
+    <div class="_fee">{{feeSign}}{{fee}} {{feeSymbol}} {{translate("transaction fee")}}</div>
     {{/if}}
 
     <div class="_arrow_down">
       {{>svg_sendto}}
     </div>
 
-    {{#importTxOptions}}
+    {{#if isImport}}
     <div class="_info _info--bold">{{translate("Your wallet address")}}</div>
-    {{/importTxOptions}}
+    {{/if}}
 
     <div class="_info _info--bold">{{alias}}</div>
     <div class="_info">{{to}}</div>
@@ -38,7 +38,7 @@
 
   <div class="_footer">
     <div class="csbtn csbtn--white" on-click="close">{{translate("Cancel")}}</div>
-    {{#if sending}}
+    {{#if isLoading}}
       <div class="csbtn csbtn--loading">
         <span class="csbtn__icon">
           {{>svg_refresh}}

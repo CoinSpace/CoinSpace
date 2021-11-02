@@ -1,7 +1,7 @@
 <div class="modal modal-confirm-send">
 
   <div class="_header">
-    {{translate("Confirm transaction")}}
+    {{translate("Confirm exchange")}}
   </div>
 
   <div class="_content">
@@ -14,14 +14,7 @@
       {{>svg_sendto}}
     </div>
 
-    {{#if isImport}}
-    <div class="_info _info--bold">{{translate("Your wallet address")}}</div>
-    {{/if}}
-
-    <div class="_info _info--bold">{{alias}}</div>
-    <div class="_info">{{to}}</div>
-    <div class="_info">{{translate("Blockchain")}}: {{blockchain}}</div>
-
+    <div class="_info">{{exchangeTo}}</div>
   </div>
 
   <div class="_footer">
@@ -33,7 +26,7 @@
         </span>
       </div>
     {{else}}
-      <div class="csbtn" on-click="send">{{translate("Send")}}</div>
+      <div class="csbtn" on-click="send">{{translate("Confirm")}}</div>
     {{/if}}
   </div>
 

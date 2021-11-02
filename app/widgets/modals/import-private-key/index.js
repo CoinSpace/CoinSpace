@@ -1,7 +1,7 @@
 import Ractive from 'widgets/modals/base';
 import qrcode from 'lib/qrcode';
 import showConfirmation from 'widgets/modals/confirm-send';
-import { showInfo, showError } from 'widgets/modals/flash';
+import { showInfo, showError, showSuccess } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
 import { getWallet } from 'lib/wallet';
 import { toUnitString } from 'lib/convert';
@@ -49,14 +49,30 @@ function open() {
         importTxOptions.to = to;
       }
 
+      let fee;
+      if (['ripple', 'stellar', 'eos'].includes(wallet.crypto.platform)) {
+        fee = toUnitString(wallet.defaultFee);
+      } else if (['ethereum', 'binance-smart-chain'].includes(wallet.crypto.platform)) {
+        fee = toUnitString(wallet.defaultFee, 18);
+      }
+
       showConfirmation({
-        wallet,
+        type: 'import',
         to: importTxOptions.to,
         alias: importTxOptions.alias,
         amount: toUnitString(importTxOptions.amount),
-        symbol: wallet.crypto.symbol,
+        fee,
         fadeInDuration: 0,
+        wallet,
         importTxOptions,
+        onSuccess(modal) {
+          showSuccess({
+            el: modal.el,
+            title: translate('Transaction Successful'),
+            message: translate('Your transaction will appear in your history tab shortly.'),
+            fadeInDuration: 0,
+          });
+        },
       });
 
     }).catch(handleError);

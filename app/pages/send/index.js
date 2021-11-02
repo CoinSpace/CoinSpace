@@ -3,7 +3,7 @@ import Big from 'big.js';
 import emitter from 'lib/emitter';
 import details from 'lib/wallet/details';
 import { getWallet, updateWallet } from 'lib/wallet';
-import { showError } from 'widgets/modals/flash';
+import { showError, showSuccess } from 'widgets/modals/flash';
 import showConfirmation from 'widgets/modals/confirm-send';
 import showMecto from 'widgets/modals/mecto';
 import showTooltip from 'widgets/modals/tooltip';
@@ -122,30 +122,12 @@ export default function(el) {
         destinationInfo = await wallet.getDestinationInfo(address);
       }
       const options = {
-        wallet,
         to: address,
         alias,
         fee,
-        feeName: ractive.get('feeName'),
-        destinationInfo,
         amount: normalizeCrypto(toDecimalString(ractive.find('#crypto').value)),
-        symbol: ractive.get('symbol'),
-        onSuccessDismiss() {
-          ractive.set({ to: '' });
-          ractive.find('#crypto').value = '';
-          ractive.find('#fiat').value = '';
-          setFees();
-          if (wallet.crypto.platform === 'ripple') {
-            ractive.find('#destination-tag').value = '';
-            ractive.find('#invoice-id').value = '';
-          } else if (wallet.crypto.platform === 'stellar' || wallet.crypto.platform === 'eos') {
-            ractive.find('#memo').value = '';
-          }
-          if (['ios', 'android-play'].includes(process.env.BUILD_PLATFORM)) {
-            // eslint-disable-next-line no-undef
-            cordova.plugins.InAppReview.requestReviewDialog().catch(() => {});
-          }
-        },
+        wallet,
+        destinationInfo,
       };
       if (['ethereum', 'binance-smart-chain'].includes(wallet.crypto.platform)) {
         wallet.gasLimit = ractive.find('#gas-limit').value;
@@ -364,7 +346,33 @@ export default function(el) {
   async function validateAndShowConfirm(options) {
     try {
       await validateSend(options);
-      showConfirmation(options);
+      const { wallet } = options;
+      showConfirmation({
+        ...options,
+        type: 'send',
+        onSuccess(modal) {
+          showSuccess({
+            el: modal.el,
+            title: translate('Transaction Successful'),
+            message: translate('Your transaction will appear in your history tab shortly.'),
+            fadeInDuration: 0,
+          });
+          ractive.set({ to: '' });
+          ractive.find('#crypto').value = '';
+          ractive.find('#fiat').value = '';
+          setFees();
+          if (wallet.crypto.platform === 'ripple') {
+            ractive.find('#destination-tag').value = '';
+            ractive.find('#invoice-id').value = '';
+          } else if (wallet.crypto.platform === 'stellar' || wallet.crypto.platform === 'eos') {
+            ractive.find('#memo').value = '';
+          }
+          if (['ios', 'android-play'].includes(process.env.BUILD_PLATFORM)) {
+            // eslint-disable-next-line no-undef
+            cordova.plugins.InAppReview.requestReviewDialog().catch(() => {});
+          }
+        },
+      });
     } catch (err) {
       if (/Attempt to empty wallet/.test(err.details)) {
         ractive.find('#crypto').value = denormalizeCrypto(toUnitString(err.sendableBalance));

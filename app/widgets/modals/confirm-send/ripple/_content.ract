@@ -8,15 +8,15 @@
 
     <div class="_amount">{{amount}} {{symbol}}</div>
 
-    <div class="_fee">{{feeSign}}{{fee}} {{symbol}} {{translate("transaction fee")}}</div>
+    <div class="_fee">{{feeSign}}{{fee}} {{feeSymbol}} {{translate("transaction fee")}}</div>
 
     <div class="_arrow_down">
       {{>svg_sendto}}
     </div>
 
-    {{#importTxOptions}}
+    {{#if isImport}}
     <div class="_info _info--bold">{{translate("Your wallet address")}}</div>
-    {{/importTxOptions}}
+    {{/if}}
 
     <div class="_info _info--bold">{{alias}}</div>
     <div class="_info">{{to}}</div>
@@ -31,7 +31,7 @@
 
   <div class="_footer">
     <div class="csbtn csbtn--white" on-click="close">{{translate("Cancel")}}</div>
-    {{#if sending}}
+    {{#if isLoading}}
       <div class="csbtn csbtn--loading">
         <span class="csbtn__icon">
           {{>svg_refresh}}

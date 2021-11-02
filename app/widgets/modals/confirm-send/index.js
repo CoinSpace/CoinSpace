@@ -4,21 +4,53 @@ import ripple from './ripple';
 import stellar from './stellar';
 import eos from './eos';
 import monero from './monero';
+import exchange from './exchange.ract';
 
-function open(data) {
-  const { platform } = data.wallet.crypto;
+function open(options) {
+  const { wallet, type } = options;
+  const { platform, symbol } = options.wallet.crypto;
+  let blockchain, feeSymbol = symbol;
+  if (wallet.platformCrypto) {
+    feeSymbol = wallet.platformCrypto.symbol;
+    blockchain = wallet.platformCrypto.name;
+  }
+  const content = type === 'exchange' && exchange;
+  const cryptoOptions = {
+    wallet,
+    tx: options.tx,
+    importTxOptions: options.importTxOptions,
+    onSuccess: options.onSuccess,
+    content,
+    data: {
+      amount: options.amount,
+      symbol,
+      feeSymbol,
+      blockchain,
+      isImport: type === 'import',
+      alias: options.alias,
+      to: options.to,
+      fee: options.fee,
+      feeSign: type === 'import' ? '-' : '+',
+      memo: options.memo,
+      tag: options.tag,
+      invoiceId: options.invoiceId,
+      exchangeTo: options.exchangeTo,
+      fadeInDuration: options.fadeInDuration,
+    },
+  };
+
   if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'].indexOf(platform) !== -1) {
-    return btcBchLtc(data);
+    return btcBchLtc(cryptoOptions);
   } else if (['ethereum', 'binance-smart-chain'].includes(platform)) {
-    return ethereum(data);
+    return ethereum(cryptoOptions);
   } else if (platform === 'ripple') {
-    return ripple(data);
+    return ripple(cryptoOptions);
   } else if (platform === 'stellar') {
-    return stellar(data);
+    return stellar(cryptoOptions);
   } else if (platform === 'eos') {
-    return eos(data);
+    return eos(cryptoOptions);
   } else if (platform === 'monero') {
-    return monero(data);
+    return monero(cryptoOptions);
   }
 }
 

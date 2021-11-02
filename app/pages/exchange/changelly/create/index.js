@@ -218,29 +218,23 @@ export default function(el) {
     if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash', 'monero']
       .includes(wallet.crypto.platform)) {
       fee = toUnitString(wallet.estimateFees(toAtom(data.depositAmount)).find((item) => item.default).estimate);
-    } else if (['ripple', 'stellar', 'eos', 'ethereum', 'binance-smart-chain']
+    } else if (['ripple', 'stellar', 'eos']
       .includes(wallet.crypto.platform)) {
       fee = toUnitString(wallet.defaultFee);
+    } else if (['ethereum', 'binance-smart-chain']
+      .includes(wallet.crypto.platform)) {
+      fee = toUnitString(wallet.defaultFee, 18);
     }
     let destinationInfo;
     if (wallet.crypto._id === 'stellar@stellar') {
       destinationInfo = await wallet.getDestinationInfo(data.depositAddress);
     }
     const options = {
-      wallet,
       to: data.depositAddress,
       fee,
-      destinationInfo,
       amount: data.depositAmount,
-      symbol: wallet.crypto.symbol,
-      async onSuccessDismiss() {
-        try {
-          await details.set('changellyInfo', data);
-          emitter.emit('change-changelly-step', 'awaiting', data);
-        } catch (err) {
-          console.error(err);
-        }
-      },
+      destinationInfo,
+      wallet,
     };
     if (wallet.crypto.platform === 'ripple') {
       options.tag = data.extraId;
@@ -251,7 +245,22 @@ export default function(el) {
     }
     try {
       await validateSend(options);
-      showConfirmation(options);
+      const toCrypto = ractive.get('toCrypto');
+      const toAmount = ractive.get('toAmount');
+      showConfirmation({
+        ...options,
+        type: 'exchange',
+        async onSuccess(modal) {
+          try {
+            modal.fire('close');
+            await details.set('changellyInfo', data);
+            emitter.emit('change-changelly-step', 'awaiting', data);
+          } catch (err) {
+            console.error(err);
+          }
+        },
+        exchangeTo: `≈ ${toAmount} ${toCrypto.symbol}`,
+      });
     } catch (err) {
       if (/Attempt to empty wallet/.test(err.details)) {
         ractive.find('#changelly_from_amount').value = toUnitString(err.sendableBalance);

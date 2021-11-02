@@ -1,20 +1,37 @@
 import Ractive from 'widgets/modals/base';
 import emitter from 'lib/emitter';
 import { toAtom, toUnitString } from 'lib/convert';
-import { showInfo, showError, showSuccess } from 'widgets/modals/flash';
+import { showInfo, showError } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
 import { unlock, lock } from 'lib/wallet/security';
 import content from './_content.ract';
 
-function open(data) {
+function open(options) {
+
+  const { data, wallet, importTxOptions } = options;
+  const feesData = {};
+  if (importTxOptions) {
+    feesData.feeName = 'default';
+    const estimates = wallet.estimateFees(toAtom(data.amount), importTxOptions.unspents);
+    const fees = estimates.map((item) => {
+      return {
+        ...item,
+        estimate: toUnitString(item.estimate),
+      };
+    });
+    feesData.fees = fees;
+    feesData.fee = fees.find((item) => item.name === feesData.feeName).estimate;
+  }
 
   const ractive = new Ractive({
     partials: {
-      content,
+      content: options.content || content,
     },
-    data: extendData(data),
+    data: {
+      ...data,
+      ...feesData,
+    },
   });
-  const { wallet } = data;
 
   ractive.on('change-fee', () => {
     const feeName = ractive.get('feeName');
@@ -22,14 +39,14 @@ function open(data) {
   });
 
   ractive.on('send', () => {
-    ractive.set('sending', true);
+    ractive.set('isLoading', true);
     setTimeout(async () => {
       let tx;
 
       try {
         tx = createTx();
       } catch (err) {
-        ractive.set('sending', false);
+        ractive.set('isLoading', false);
         if (/Insufficient funds/.test(err.message)) return showInfo({ title: translate('Insufficient funds') });
         return handleTransactionError(err);
       }
@@ -41,19 +58,13 @@ function open(data) {
       } catch (err) {
         lock(wallet);
         if (err.message !== 'cancelled') console.error(err);
-        return ractive.set('sending', false);
+        return ractive.set('isLoading', false);
       }
 
       try {
         const historyTx = await wallet.sendTx(tx);
 
-        if (data.onSuccessDismiss) data.onSuccessDismiss();
-        showSuccess({
-          el: ractive.el,
-          title: translate('Transaction Successful'),
-          message: translate('Your transaction will appear in your history tab shortly.'),
-          fadeInDuration: 0,
-        });
+        options.onSuccess(ractive);
 
         // update balance & tx history
         emitter.emit('tx-sent');
@@ -66,13 +77,12 @@ function open(data) {
 
   function createTx() {
     let tx;
-    const fee = toAtom(ractive.get('fee'));
-    if (data.importTxOptions) {
-      data.importTxOptions.fee = fee;
-      tx = wallet.createImportTx(data.importTxOptions);
+    if (options.importTxOptions) {
+      options.importTxOptions.fee = toAtom(ractive.get('fee'));
+      tx = wallet.createImportTx(options.importTxOptions);
     } else {
       // eslint-disable-next-line prefer-destructuring
-      tx = data.tx;
+      tx = options.tx;
     }
     return tx;
   }
@@ -97,37 +107,6 @@ function open(data) {
   }
 
   return ractive;
-}
-
-function extendData(data) {
-
-  const { wallet } = data;
-
-  data.feeSign = data.importTxOptions ? '-' : '+';
-  data.isBitcoin = wallet.crypto.platform === 'bitcoin';
-
-  const unspents = data.importTxOptions ? data.importTxOptions.unspents : null;
-
-  if (data.importTxOptions) {
-    data.showImportTxFees = true;
-    data.feeName = 'default';
-
-    const estimates = wallet.estimateFees(toAtom(data.amount), unspents);
-    const fees = estimates.map((item) => {
-      if (item.default === true) {
-        data.feeName = item.name;
-      }
-      return {
-        ...item,
-        estimate: toUnitString(item.estimate),
-      };
-    });
-
-    data.fees = fees;
-    data.fee = fees.find((item) => item.name === data.feeName).estimate;
-  }
-
-  return data;
 }
 
 export default open;

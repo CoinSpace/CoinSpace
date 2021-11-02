@@ -1,31 +1,30 @@
 import Ractive from 'widgets/modals/base';
 import emitter from 'lib/emitter';
-import { toUnitString } from 'lib/convert';
-import { showInfo, showError, showSuccess } from 'widgets/modals/flash';
+import { showInfo, showError } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
 import { unlock, lock } from 'lib/wallet/security';
 import content from './_content.ract';
 
-function open(data) {
+function open(options) {
 
   const ractive = new Ractive({
     partials: {
-      content,
+      content: options.content || content,
     },
-    data: extendData(data),
+    data: options.data,
   });
 
-  const { wallet } = data;
+  const { wallet } = options;
 
   ractive.on('send', () => {
-    ractive.set('sending', true);
+    ractive.set('isLoading', true);
     setTimeout(async () => {
       let tx = null;
 
       try {
         tx = createTx();
       } catch (err) {
-        ractive.set('sending', false);
+        ractive.set('isLoading', false);
         if (/Insufficient funds/.test(err.message)) return showInfo({ title: translate('Insufficient funds') });
         return handleTransactionError(err);
       }
@@ -37,19 +36,12 @@ function open(data) {
       } catch (err) {
         lock(wallet);
         if (err.message !== 'cancelled') console.error(err);
-        return ractive.set('sending', false);
+        return ractive.set('isLoading', false);
       }
 
       try {
         const historyTx = await wallet.sendTx(tx);
-        if (data.onSuccessDismiss) data.onSuccessDismiss();
-        showSuccess({
-          el: ractive.el,
-          title: translate('Transaction Successful'),
-          message: translate('Your transaction will appear in your history tab shortly.'),
-          fadeInDuration: 0,
-        });
-
+        options.onSuccess(ractive);
         // update balance & tx history
         emitter.emit('tx-sent');
         if (historyTx) {
@@ -63,11 +55,11 @@ function open(data) {
 
   function createTx() {
     let tx;
-    if (data.importTxOptions) {
-      tx = wallet.createImportTx(data.importTxOptions);
+    if (options.importTxOptions) {
+      tx = wallet.createImportTx(options.importTxOptions);
     } else {
       // eslint-disable-next-line prefer-destructuring
-      tx = data.tx;
+      tx = options.tx;
     }
     return tx;
   }
@@ -87,15 +79,6 @@ function open(data) {
   }
 
   return ractive;
-}
-
-function extendData(data) {
-  const { wallet } = data;
-  data.feeSign = data.importTxOptions ? '-' : '+';
-  data.fee = toUnitString(wallet.defaultFee, 18);
-  data.feeSymbol = wallet.platformCrypto.symbol;
-  data.blockchain = wallet.platformCrypto.name;
-  return data;
 }
 
 export default open;
