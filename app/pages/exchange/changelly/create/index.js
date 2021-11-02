@@ -161,7 +161,7 @@ export default function(el) {
     try {
       ractive.set('isConfirming', true);
 
-      const { address } = await getAddressWithAlias(toWallet, toAddress);
+      const { address } = await getAddressWithAlias(toCrypto, toAddress);
       options.toAddress = address;
 
       await validateAddresses(options);

@@ -116,7 +116,7 @@ export default function(el) {
       const to = ractive.get('to').trim();
       const fee = ractive.get('fee');
       const wallet = getWallet();
-      const { address, alias } = await getAddressWithAlias(wallet, to);
+      const { address, alias } = await getAddressWithAlias(wallet.crypto, to);
       let destinationInfo;
       if (wallet.crypto._id === 'stellar@stellar') {
         destinationInfo = await wallet.getDestinationInfo(address);

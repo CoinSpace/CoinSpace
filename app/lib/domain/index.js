@@ -1,20 +1,21 @@
 import request from 'lib/request';
+import { getWalletById } from 'lib/wallet';
 
-export async function getAddressWithAlias(wallet, domain = '') {
-  const address = await getAddress(wallet, domain);
+export async function getAddressWithAlias(crypto, domain = '') {
+  const address = await getAddress(crypto, domain);
   const data = address ? { address, alias: domain } : { address: domain, alias: '' };
-  postProcess(wallet, data);
+  postProcess(crypto, data);
   return data;
 }
 
-async function getAddress(wallet, domain) {
+async function getAddress(crypto, domain) {
   domain = domain.replace('@', '.');
   if (!/\./.test(domain)) return;
   try {
     const { address } = await request({
       url: process.env.SITE_URL + 'api/v3/domain/address',
       params: {
-        crypto: wallet.crypto._id,
+        crypto: crypto._id,
         domain,
       },
       seed: 'public',
@@ -24,8 +25,9 @@ async function getAddress(wallet, domain) {
   } catch (err) {}
 }
 
-function postProcess(wallet, data) {
-  if (wallet.crypto._id !== 'bitcoin-cash@bitcoin-cash') return;
+function postProcess(crypto, data) {
+  if (crypto._id !== 'bitcoin-cash@bitcoin-cash') return;
+  const wallet = getWalletById('bitcoin-cash@bitcoin-cash');
   const legacy = wallet.toLegacyAddress(data.address);
   if (!legacy) return;
   if (legacy === data.address) return;
