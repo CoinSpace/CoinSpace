@@ -141,10 +141,15 @@ function getTransaction(id) {
   }).then((txs) => {
     const tx = txs && txs[0];
     if (!tx) return { error: 'Transaction not found' };
+    let { status } = tx;
+    const isGreater36hours = (new Date() - new Date(tx.createdAt * 1000)) > 36 * 60 * 60 * 1000;
+    if (status === 'waiting' && isGreater36hours) {
+      status = 'overdue';
+    }
     return {
       amountTo: tx.amountTo,
-      status: tx.status,
-      ...(tx.status === 'finished' ? {
+      status,
+      ...(status === 'finished' ? {
         payoutHashLink: tx.payoutHashLink,
         payoutHash: tx.payoutHash,
       } : {}),
