@@ -345,10 +345,6 @@
         <source>Address</source>
         <target>Адрес</target>
       </trans-unit>
-      <trans-unit id="Return address (optional)">
-        <source>Return address (optional)</source>
-        <target>Обратный адрес (необязательно)</target>
-      </trans-unit>
       <trans-unit id="Deposit address">
         <source>Deposit address (%(symbol)s)</source>
         <target>Депозитный адрес (%(symbol)s)</target>
@@ -386,10 +382,6 @@
       <trans-unit id="Please enter a valid return address">
         <source>Please enter a valid return address</source>
         <target>Пожалуйста, введите правильный адрес возврата</target>
-      </trans-unit>
-      <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
-        <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
-        <target>Обратный адрес должен принадлежать вам, чтобы в случае сбоя депозит был возвращен на этот адрес.</target>
       </trans-unit>
       <trans-unit id="Remove account">
         <source>Remove account</source>
@@ -683,17 +675,9 @@
         <source>Choose exchange</source>
         <target>Выберите обменник</target>
       </trans-unit>
-      <trans-unit id="Next step">
-        <source>Next step</source>
-        <target>Следующий шаг</target>
-      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Минимальная сумма:</target>
-      </trans-unit>
-      <trans-unit id="address">
-        <source>address</source>
-        <target>адрес</target>
       </trans-unit>
       <trans-unit id="Exchange error">
         <source>Exchange error</source>
@@ -710,10 +694,6 @@ It will be converted into %(toSymbol)s, and sent to
         <target>Отправьте %(depositAmount)s %(depositSymbol)s на депозитный адрес.
 Это будет конвертировано в %(toSymbol)s, и отправлено на
  %(toAddress)s (блокчейн: %(toBlockchain)s)</target>
-      </trans-unit>
-      <trans-unit id="Network fee">
-        <source>Network fee</source>
-        <target>Комиссия сети</target>
       </trans-unit>
       <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
         <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
@@ -1058,6 +1038,30 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Hardware key is required to complete action.">
         <source>Hardware key is required to complete action.</source>
         <target>Для выполнения действия необходим аппаратный ключ.</target>
+      </trans-unit>
+      <trans-unit id="Destination address">
+        <source>Destination address</source>
+        <target>Адрес назначения</target>
+      </trans-unit>
+      <trans-unit id="change">
+        <source>change</source>
+        <target>изменить</target>
+      </trans-unit>
+      <trans-unit id="Deposit blockchain">
+        <source>Deposit blockchain</source>
+        <target>Блокчейн депозита</target>
+      </trans-unit>
+      <trans-unit id="Destination blockchain">
+        <source>Destination blockchain</source>
+        <target>Блокчейн назначения</target>
+      </trans-unit>
+      <trans-unit id="Use your wallet address">
+        <source>Use your wallet address</source>
+        <target>Использовать адрес своего кошелька</target>
+      </trans-unit>
+      <trans-unit id="Confirm exchange">
+        <source>Confirm exchange</source>
+        <target>Подтвердить обмен</target>
       </trans-unit>
     </body>
   </file>
