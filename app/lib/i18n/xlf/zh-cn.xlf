@@ -345,10 +345,6 @@
         <source>Address</source>
         <target>地址</target>
       </trans-unit>
-      <trans-unit id="Return address (optional)">
-        <source>Return address (optional)</source>
-        <target>返回地址（可选）</target>
-      </trans-unit>
       <trans-unit id="Deposit address">
         <source>Deposit address (%(symbol)s)</source>
         <target>存款地址（%(symbol)s）</target>
@@ -386,10 +382,6 @@
       <trans-unit id="Please enter a valid return address">
         <source>Please enter a valid return address</source>
         <target>请输入一个有效的返回地址</target>
-      </trans-unit>
-      <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
-        <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
-        <target>返回地址应为一个你控制的地址，当交易失败时存款将返回至此地址。</target>
       </trans-unit>
       <trans-unit id="Remove account">
         <source>Remove account</source>
@@ -683,17 +675,9 @@
         <source>Choose exchange</source>
         <target>选择兑换</target>
       </trans-unit>
-      <trans-unit id="Next step">
-        <source>Next step</source>
-        <target>下一步</target>
-      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>最小数量：</target>
-      </trans-unit>
-      <trans-unit id="address">
-        <source>address</source>
-        <target>地址</target>
       </trans-unit>
       <trans-unit id="Exchange error">
         <source>Exchange error</source>
@@ -710,10 +694,6 @@ It will be converted into %(toSymbol)s, and sent to
         <target>发送%(depositAmount)s %(depositSymbol)s到存款地址。
 它将转换为%(toSymbol)s，并发送到
  %(toAddress)s (区块链: %(toBlockchain)s)</target>
-      </trans-unit>
-      <trans-unit id="Network fee">
-        <source>Network fee</source>
-        <target>网络费：</target>
       </trans-unit>
       <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
         <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
@@ -1058,6 +1038,30 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Hardware key is required to complete action.">
         <source>Hardware key is required to complete action.</source>
         <target>需要硬件密钥以完成操作。</target>
+      </trans-unit>
+      <trans-unit id="Destination address">
+        <source>Destination address</source>
+        <target>目标地址</target>
+      </trans-unit>
+      <trans-unit id="change">
+        <source>change</source>
+        <target>变动</target>
+      </trans-unit>
+      <trans-unit id="Deposit blockchain">
+        <source>Deposit blockchain</source>
+        <target>存款区块链</target>
+      </trans-unit>
+      <trans-unit id="Destination blockchain">
+        <source>Destination blockchain</source>
+        <target>目标区块链</target>
+      </trans-unit>
+      <trans-unit id="Use your wallet address">
+        <source>Use your wallet address</source>
+        <target>使用你的钱包地址</target>
+      </trans-unit>
+      <trans-unit id="Confirm exchange">
+        <source>Confirm exchange</source>
+        <target>确认兑换</target>
       </trans-unit>
     </body>
   </file>

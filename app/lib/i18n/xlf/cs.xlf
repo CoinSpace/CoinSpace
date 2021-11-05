@@ -345,10 +345,6 @@
         <source>Address</source>
         <target>Adresa</target>
       </trans-unit>
-      <trans-unit id="Return address (optional)">
-        <source>Return address (optional)</source>
-        <target>Adresa pro vrácení (nepovinná)</target>
-      </trans-unit>
       <trans-unit id="Deposit address">
         <source>Deposit address (%(symbol)s)</source>
         <target>Adresa pro uložení (%(symbol)s)</target>
@@ -386,10 +382,6 @@
       <trans-unit id="Please enter a valid return address">
         <source>Please enter a valid return address</source>
         <target>Zadejte prosím platnou adresu pro vrácení</target>
-      </trans-unit>
-      <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
-        <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
-        <target>Adresou pro návrat má být adresa, kterou máte ve své moci a kam bude Váš vklad vrácen v případě chybné transakce.</target>
       </trans-unit>
       <trans-unit id="Remove account">
         <source>Remove account</source>
@@ -683,17 +675,9 @@
         <source>Choose exchange</source>
         <target>Vyberte burzu</target>
       </trans-unit>
-      <trans-unit id="Next step">
-        <source>Next step</source>
-        <target>Další krok</target>
-      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Minimální množství:</target>
-      </trans-unit>
-      <trans-unit id="address">
-        <source>address</source>
-        <target>adresa</target>
       </trans-unit>
       <trans-unit id="Exchange error">
         <source>Exchange error</source>
@@ -710,10 +694,6 @@ It will be converted into %(toSymbol)s, and sent to
         <target>Pošlete %(depositAmount)s %(depositSymbol)s na adresu vkladu.
 Bude to převedeno na %(toSymbol)s, a zasláno
  %(toAddress)s (blockchain: %(toBlockchain)s)</target>
-      </trans-unit>
-      <trans-unit id="Network fee">
-        <source>Network fee</source>
-        <target>Poplatek sítě</target>
       </trans-unit>
       <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
         <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
@@ -1058,6 +1038,30 @@ Bude to převedeno na %(toSymbol)s, a zasláno
       <trans-unit id="Hardware key is required to complete action.">
         <source>Hardware key is required to complete action.</source>
         <target>K dokončení úkonu je potřeba hardwarový klíč.</target>
+      </trans-unit>
+      <trans-unit id="Destination address">
+        <source>Destination address</source>
+        <target>Cílová adresa</target>
+      </trans-unit>
+      <trans-unit id="change">
+        <source>change</source>
+        <target>změna</target>
+      </trans-unit>
+      <trans-unit id="Deposit blockchain">
+        <source>Deposit blockchain</source>
+        <target>Uložit bločenku</target>
+      </trans-unit>
+      <trans-unit id="Destination blockchain">
+        <source>Destination blockchain</source>
+        <target>Cílová bločenka</target>
+      </trans-unit>
+      <trans-unit id="Use your wallet address">
+        <source>Use your wallet address</source>
+        <target>Použijte adresu své peněženky</target>
+      </trans-unit>
+      <trans-unit id="Confirm exchange">
+        <source>Confirm exchange</source>
+        <target>Potvrdit směnu</target>
       </trans-unit>
     </body>
   </file>

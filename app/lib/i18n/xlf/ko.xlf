@@ -345,10 +345,6 @@
         <source>Address</source>
         <target>주소</target>
       </trans-unit>
-      <trans-unit id="Return address (optional)">
-        <source>Return address (optional)</source>
-        <target>반환 주소(선택사항)</target>
-      </trans-unit>
       <trans-unit id="Deposit address">
         <source>Deposit address (%(symbol)s)</source>
         <target>입금 주소 (%(symbol)s)</target>
@@ -386,10 +382,6 @@
       <trans-unit id="Please enter a valid return address">
         <source>Please enter a valid return address</source>
         <target>유효한 반환 주소를 입력해주십시오</target>
-      </trans-unit>
-      <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
-        <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
-        <target>반환 주소는 여러분이 관리하는 주소로 거래 실패 시 입금액이 반환되는 주소입니다.</target>
       </trans-unit>
       <trans-unit id="Remove account">
         <source>Remove account</source>
@@ -683,17 +675,9 @@
         <source>Choose exchange</source>
         <target>환전 선택</target>
       </trans-unit>
-      <trans-unit id="Next step">
-        <source>Next step</source>
-        <target>다음 단계</target>
-      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>최소 금액:</target>
-      </trans-unit>
-      <trans-unit id="address">
-        <source>address</source>
-        <target>주소</target>
       </trans-unit>
       <trans-unit id="Exchange error">
         <source>Exchange error</source>
@@ -710,10 +694,6 @@ It will be converted into %(toSymbol)s, and sent to
         <target>%(depositAmount)s %(depositSymbol)s 을/를 입금 주소로 보냅니다.
  %(toSymbol)s (으)로 환전해서
  %(toAddress)s (블록체인: %(toBlockchain)s) (으)로 보냅니다.</target>
-      </trans-unit>
-      <trans-unit id="Network fee">
-        <source>Network fee</source>
-        <target>네트워크 수수료</target>
       </trans-unit>
       <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
         <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
@@ -1058,6 +1038,30 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Hardware key is required to complete action.">
         <source>Hardware key is required to complete action.</source>
         <target>작업을 완료하려면 하드웨어 키가 필요합니다.</target>
+      </trans-unit>
+      <trans-unit id="Destination address">
+        <source>Destination address</source>
+        <target>목적지 주소</target>
+      </trans-unit>
+      <trans-unit id="change">
+        <source>change</source>
+        <target>변경</target>
+      </trans-unit>
+      <trans-unit id="Deposit blockchain">
+        <source>Deposit blockchain</source>
+        <target>예금 블록체인</target>
+      </trans-unit>
+      <trans-unit id="Destination blockchain">
+        <source>Destination blockchain</source>
+        <target>목적지 블록체인</target>
+      </trans-unit>
+      <trans-unit id="Use your wallet address">
+        <source>Use your wallet address</source>
+        <target>월렛 주소를 사용하십시오</target>
+      </trans-unit>
+      <trans-unit id="Confirm exchange">
+        <source>Confirm exchange</source>
+        <target>환전 확인</target>
       </trans-unit>
     </body>
   </file>

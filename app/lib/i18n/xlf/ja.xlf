@@ -345,10 +345,6 @@
         <source>Address</source>
         <target>アドレス</target>
       </trans-unit>
-      <trans-unit id="Return address (optional)">
-        <source>Return address (optional)</source>
-        <target>返送先住所（オプション）</target>
-      </trans-unit>
       <trans-unit id="Deposit address">
         <source>Deposit address (%(symbol)s)</source>
         <target>振込アドレス（%(symbol)s）</target>
@@ -386,10 +382,6 @@
       <trans-unit id="Please enter a valid return address">
         <source>Please enter a valid return address</source>
         <target>有効な返信先アドレスを入力してください</target>
-      </trans-unit>
-      <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
-        <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
-        <target>返信先アドレスは、取引が失敗した場合に入金が返却される、お客様が管理するアドレスである必要があります。</target>
       </trans-unit>
       <trans-unit id="Remove account">
         <source>Remove account</source>
@@ -683,17 +675,9 @@
         <source>Choose exchange</source>
         <target>取引所を選択</target>
       </trans-unit>
-      <trans-unit id="Next step">
-        <source>Next step</source>
-        <target>次のステップ</target>
-      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>最小額：</target>
-      </trans-unit>
-      <trans-unit id="address">
-        <source>address</source>
-        <target>アドレス</target>
       </trans-unit>
       <trans-unit id="Exchange error">
         <source>Exchange error</source>
@@ -710,10 +694,6 @@ It will be converted into %(toSymbol)s, and sent to
         <target>%(depositAmount)s%(depositSymbol)sを入金アドレスに送ってください。
 は%(toSymbol)sに変換され、
 %(toAddress)s (ブロックチェーン: %(toBlockchain)s) に送信されます</target>
-      </trans-unit>
-      <trans-unit id="Network fee">
-        <source>Network fee</source>
-        <target>ネットワーク料金</target>
       </trans-unit>
       <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
         <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
@@ -1058,6 +1038,30 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Hardware key is required to complete action.">
         <source>Hardware key is required to complete action.</source>
         <target>操作の完了にはハードウェアキーが必要です。</target>
+      </trans-unit>
+      <trans-unit id="Destination address">
+        <source>Destination address</source>
+        <target>宛先アドレス</target>
+      </trans-unit>
+      <trans-unit id="change">
+        <source>change</source>
+        <target>取引変更</target>
+      </trans-unit>
+      <trans-unit id="Deposit blockchain">
+        <source>Deposit blockchain</source>
+        <target>ブロックチェーンをデポジット</target>
+      </trans-unit>
+      <trans-unit id="Destination blockchain">
+        <source>Destination blockchain</source>
+        <target>ブロックチェーンの宛先</target>
+      </trans-unit>
+      <trans-unit id="Use your wallet address">
+        <source>Use your wallet address</source>
+        <target>あなたのウォレットアドレスを使用</target>
+      </trans-unit>
+      <trans-unit id="Confirm exchange">
+        <source>Confirm exchange</source>
+        <target>取引を確認</target>
       </trans-unit>
     </body>
   </file>

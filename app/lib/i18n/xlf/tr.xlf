@@ -345,10 +345,6 @@
         <source>Address</source>
         <target>Adres</target>
       </trans-unit>
-      <trans-unit id="Return address (optional)">
-        <source>Return address (optional)</source>
-        <target>İade adresi (isteğe bağlı)</target>
-      </trans-unit>
       <trans-unit id="Deposit address">
         <source>Deposit address (%(symbol)s)</source>
         <target>Mevduat adresi (%(symbol)s)</target>
@@ -386,10 +382,6 @@
       <trans-unit id="Please enter a valid return address">
         <source>Please enter a valid return address</source>
         <target>Lütfen geçerli bir iade adresi girin</target>
-      </trans-unit>
-      <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
-        <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
-        <target>İade adresi, sizin tarafınızdan kontrol edilen ve başarısız bir işlem olması durumunda mevduatın iade edileceği bir adres olmalıdır.</target>
       </trans-unit>
       <trans-unit id="Remove account">
         <source>Remove account</source>
@@ -683,17 +675,9 @@
         <source>Choose exchange</source>
         <target>Çevirmeyi seçin</target>
       </trans-unit>
-      <trans-unit id="Next step">
-        <source>Next step</source>
-        <target>Sonraki adım</target>
-      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Minimum tutar:</target>
-      </trans-unit>
-      <trans-unit id="address">
-        <source>address</source>
-        <target>adres</target>
       </trans-unit>
       <trans-unit id="Exchange error">
         <source>Exchange error</source>
@@ -710,10 +694,6 @@ It will be converted into %(toSymbol)s, and sent to
         <target>%(depositAmount)s %(depositSymbol)s tutarını mevduat adresine gönderin.
 %(toSymbol)s birimine çevrilecek ve şuraya gönderilecek:
  %(toAddress)s (blok zinciri: %(toBlockchain)s)</target>
-      </trans-unit>
-      <trans-unit id="Network fee">
-        <source>Network fee</source>
-        <target>Ağ ücreti</target>
       </trans-unit>
       <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
         <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
@@ -1058,6 +1038,30 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Hardware key is required to complete action.">
         <source>Hardware key is required to complete action.</source>
         <target>İşlemi tamamlamak için donanım anahtarı gerekli.</target>
+      </trans-unit>
+      <trans-unit id="Destination address">
+        <source>Destination address</source>
+        <target>Hedef adres</target>
+      </trans-unit>
+      <trans-unit id="change">
+        <source>change</source>
+        <target>değiştir</target>
+      </trans-unit>
+      <trans-unit id="Deposit blockchain">
+        <source>Deposit blockchain</source>
+        <target>Mevduat blok zinciri</target>
+      </trans-unit>
+      <trans-unit id="Destination blockchain">
+        <source>Destination blockchain</source>
+        <target>Hedef blok zinciri</target>
+      </trans-unit>
+      <trans-unit id="Use your wallet address">
+        <source>Use your wallet address</source>
+        <target>Cüzdan adresinizi kullanın</target>
+      </trans-unit>
+      <trans-unit id="Confirm exchange">
+        <source>Confirm exchange</source>
+        <target>Çevirmeyi onayla</target>
       </trans-unit>
     </body>
   </file>

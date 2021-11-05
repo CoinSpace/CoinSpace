@@ -345,10 +345,6 @@
         <source>Address</source>
         <target>Adresse</target>
       </trans-unit>
-      <trans-unit id="Return address (optional)">
-        <source>Return address (optional)</source>
-        <target>Absender (optional)</target>
-      </trans-unit>
       <trans-unit id="Deposit address">
         <source>Deposit address (%(symbol)s)</source>
         <target>Einzahlungsadresse (%(symbol)s)</target>
@@ -386,10 +382,6 @@
       <trans-unit id="Please enter a valid return address">
         <source>Please enter a valid return address</source>
         <target>Bitte gib einen gültigen Absender ein</target>
-      </trans-unit>
-      <trans-unit id="Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.">
-        <source>Return address should be an address controlled by you where deposit will be returned in the event of a failed transaction.</source>
-        <target>Der Absender muss eine von Dir kontrollierte Adresse sein, an die die Einzahlung im Fall einer fehlgeschlagenen Transaktion zurückgesandt wird.</target>
       </trans-unit>
       <trans-unit id="Remove account">
         <source>Remove account</source>
@@ -683,17 +675,9 @@
         <source>Choose exchange</source>
         <target>Umtausch auswählen</target>
       </trans-unit>
-      <trans-unit id="Next step">
-        <source>Next step</source>
-        <target>Nächster Schritt</target>
-      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Mindestbetrag</target>
-      </trans-unit>
-      <trans-unit id="address">
-        <source>address</source>
-        <target>Adresse</target>
       </trans-unit>
       <trans-unit id="Exchange error">
         <source>Exchange error</source>
@@ -710,10 +694,6 @@ It will be converted into %(toSymbol)s, and sent to
         <target>Sende %(depositAmount)s %(depositSymbol)s an die Einzahlungsadresse.
 Sie werden in %(toSymbol)s konvertiert und an
  %(toAddress)s (Blockchain: %(toBlockchain)s) gesendet.</target>
-      </trans-unit>
-      <trans-unit id="Network fee">
-        <source>Network fee</source>
-        <target>Netzwerkgebühr</target>
       </trans-unit>
       <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
         <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
@@ -1058,6 +1038,30 @@ Sie werden in %(toSymbol)s konvertiert und an
       <trans-unit id="Hardware key is required to complete action.">
         <source>Hardware key is required to complete action.</source>
         <target>Zum Abschließen dieses Vorgangs ist ein Hardware-Schlüssel erforderlich.</target>
+      </trans-unit>
+      <trans-unit id="Destination address">
+        <source>Destination address</source>
+        <target>Zieladresse</target>
+      </trans-unit>
+      <trans-unit id="change">
+        <source>change</source>
+        <target>ändern</target>
+      </trans-unit>
+      <trans-unit id="Deposit blockchain">
+        <source>Deposit blockchain</source>
+        <target>Einzahlungsblockchain</target>
+      </trans-unit>
+      <trans-unit id="Destination blockchain">
+        <source>Destination blockchain</source>
+        <target>Ziel-Blockchain</target>
+      </trans-unit>
+      <trans-unit id="Use your wallet address">
+        <source>Use your wallet address</source>
+        <target>Die Adresse Deiner Brieftasche verwenden</target>
+      </trans-unit>
+      <trans-unit id="Confirm exchange">
+        <source>Confirm exchange</source>
+        <target>Umtausch bestätigen</target>
       </trans-unit>
     </body>
   </file>
