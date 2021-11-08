@@ -39,7 +39,9 @@ async function getTokens(networks, limit = 0) {
     })
     .toArray();
 
-  const coingeckoIds = tokens.map((token) => token.coingecko.id);
+  const coingeckoIds = tokens.filter((token) => token.coingecko).map((token) => {
+    return token.coingecko.id;
+  });
   const legacyTokens = await db.collection(LEGACY_COLLECTION)
     .find({
       coingecko_id: { $in: coingeckoIds },
@@ -52,7 +54,10 @@ async function getTokens(networks, limit = 0) {
     .toArray();
 
   return tokens.map((token) => {
-    const legacyToken = legacyTokens.find((legacyToken) => legacyToken.coingecko_id === token.coingecko.id);
+    let legacyToken;
+    if (token.coingecko) {
+      legacyToken = legacyTokens.find((legacyToken) => legacyToken.coingecko_id === token.coingecko.id);
+    }
     const icon = `${process.env.SITE_URL}assets/crypto/${token.logo}?ver=${process.env.npm_package_version}`;
     return {
       _id: asset2Id(token.asset),
