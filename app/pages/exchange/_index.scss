@@ -1,3 +1,8 @@
+#exchange {
+  .hidden {
+    display: none;
+  }
+}
 #exchange_changelly, #exchange_none {
   display: none;
   &.current {

@@ -1,2 +1,6 @@
-<div id="exchange_none"></div>
-<div id="exchange_changelly"></div>
+<div class-hidden="needToSetupEos">
+  <div id="exchange_none"></div>
+  <div id="exchange_changelly"></div>
+</div>
+
+<div id="eos-setup" class-hidden="!needToSetupEos"></div>

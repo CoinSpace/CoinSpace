@@ -1084,7 +1084,7 @@ components:
       maxLength: 256
     NullableCryptoAddress:
       type: string
-      pattern: ^.{1,256}$
+      pattern: ^.{0,256}$
       maxLength: 256
       nullable: true
     AnyString256:

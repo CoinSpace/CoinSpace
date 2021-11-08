@@ -3,12 +3,19 @@ import emitter from 'lib/emitter';
 import initChangelly from './changelly';
 import initNone from './none';
 import template from './index.ract';
+import { getWallet } from 'lib/wallet';
+import initEosSetup from 'widgets/eos/setup';
 
 export default function(el) {
   const ractive = new Ractive({
     el,
     template,
+    data: {
+      needToSetupEos: false,
+    },
   });
+
+  initEosSetup(ractive.find('#eos-setup'));
 
   const exchanges = {
     changelly: initChangelly(ractive.find('#exchange_changelly')),
@@ -18,6 +25,9 @@ export default function(el) {
   let currentExchange = exchanges.none;
 
   ractive.on('before-show', () => {
+    const wallet = getWallet();
+    ractive.set('needToSetupEos', wallet.crypto.platform === 'eos' && !wallet.isActive);
+
     if (process.env.BUILD_PLATFORM === 'mas') return showExchange(exchanges.none);
 
     const preferredExchange = window.localStorage.getItem('_cs_preferred_exchange');

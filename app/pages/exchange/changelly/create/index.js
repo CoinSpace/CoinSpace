@@ -229,8 +229,12 @@ export default function(el) {
     if (wallet.crypto._id === 'stellar@stellar') {
       destinationInfo = await wallet.getDestinationInfo(data.depositAddress);
     }
+    let to = data.depositAddress;
+    if (wallet.crypto._id === 'bitcoin-cash@bitcoin-cash') {
+      to = wallet.toLegacyAddress(to);
+    }
     const options = {
-      to: data.depositAddress,
+      to,
       fee,
       amount: data.depositAmount,
       destinationInfo,
