@@ -109,7 +109,7 @@ function updatePlist(plistPath, update) {
 
 async function addWatchApp() {
   utils.shell('git clone https://github.com/CoinSpace/cs-watchapp-ios.git', { cwd: buildPath });
-  utils.shell('cd cs-watchapp-ios && git checkout eac7e7f743ccfad690e199b1fa41d7c1b691a9b5 -q', { cwd: buildPath });
+  utils.shell('cd cs-watchapp-ios && git checkout f015aacb347a7e08f35ceffdbcb2abaae16c5308 -q', { cwd: buildPath });
   utils.shell(`ln -s ${path.resolve(buildPath, 'cs-watchapp-ios/WatchApp')} ./platforms/ios/WatchApp`, { cwd: buildPath });
   utils.shell(`ln -s ${path.resolve(buildPath, 'cs-watchapp-ios/WatchAppExtension')} ./platforms/ios/WatchAppExtension`, { cwd: buildPath });
 
