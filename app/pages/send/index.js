@@ -261,7 +261,7 @@ export default function(el) {
     showTooltip({
       message: translate('Amount of coins that is charged from your balance for single transaction (:url).', {
         // eslint-disable-next-line max-len
-        url: "<a href=\"\" onclick=\"return window.safeOpen('https://coin.space/all-about-bitcoin-fees/', '_blank');\">" + translate('more info') + '</a>',
+        url: "<a href=\"\" onclick=\"return window.safeOpen('https://coin.space/all-about-fees/, '_blank');\">" + translate('more info') + '</a>',
       }),
       isHTML: true,
     });
