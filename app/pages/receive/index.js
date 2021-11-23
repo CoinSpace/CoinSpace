@@ -146,7 +146,7 @@ export default function(el) {
     // eslint-disable-next-line max-len
     const message = translate('Only transactions addressed to you can be accepted. The minimum number of confirmations is 10 (:url).', {
       // eslint-disable-next-line max-len
-      url: `<a href="" onclick="return window.safeOpen('https://coinapp.zendesk.com/hc/en-us/articles/4403046925204', '_blank');">${translate('more info')}</a>`,
+      url: `<a href="" onclick="return window.safeOpen('https://support.coin.space/hc/en-us/articles/4403046925204', '_blank');">${translate('more info')}</a>`,
     });
     showTooltip({
       message,
@@ -176,7 +176,7 @@ export default function(el) {
       });
     } catch (err) {
       const moreInfo = {
-        href: 'https://coinapp.zendesk.com/hc/en-us/articles/4403046925204',
+        href: 'https://support.coin.space/hc/en-us/articles/4403046925204',
         linkText: translate('more info'),
       };
       if (/Transaction already added/.test(err.message)) {

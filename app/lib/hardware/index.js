@@ -8,7 +8,7 @@ const { PublicKeyCredential } = window;
 const notSupportedError = () => {
   showError({
     message: translate('Hardware Keys are not supported by your device'),
-    href: 'https://coinapp.zendesk.com/hc/en-us/articles/360051635571',
+    href: 'https://support.coin.space/hc/en-us/articles/360051635571',
     linkText: translate('more info'),
   });
 };

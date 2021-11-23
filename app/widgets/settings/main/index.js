@@ -82,7 +82,7 @@ export default function(el) {
     if (process.env.BUILD_TYPE === 'phonegap') {
       window.Zendesk.showHelpCenter();
     } else {
-      window.safeOpen('https://coinapp.zendesk.com/hc/en-us/sections/115000511287-FAQ', '_blank');
+      window.safeOpen('https://support.coin.space/hc/en-us/sections/115000511287-FAQ', '_blank');
     }
   });
 

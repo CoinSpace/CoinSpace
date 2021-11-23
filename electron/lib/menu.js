@@ -36,13 +36,13 @@ const helpMenu = {
     {
       label: 'FAQ',
       click: async () => {
-        await shell.openExternal('https://coinapp.zendesk.com/hc/en-us/sections/115000511287-FAQ');
+        await shell.openExternal('https://support.coin.space/hc/en-us/sections/115000511287-FAQ');
       },
     },
     {
       label: 'Support',
       click: async () => {
-        await shell.openExternal('https://coinapp.zendesk.com/hc/en-us');
+        await shell.openExternal('https://support.coin.space/hc/en-us');
       },
     },
     ...(!isMac ? [
