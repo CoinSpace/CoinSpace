@@ -1011,20 +1011,32 @@ paths:
           content:
             'application/json':
               schema:
-                type: object
-                additionalProperties: false
-                properties:
-                  status:
-                    $ref: '#/components/schemas/AnyString256'
-                  amountTo:
-                    $ref: '#/components/schemas/NumberString'
-                  payoutHashLink:
-                    $ref: '#/components/schemas/UrlString'
-                  payoutHash:
-                    $ref: '#/components/schemas/AnyString256'
-                required:
-                  - status
-                  - amountTo
+                $ref: '#/components/schemas/ChangellyTransaction'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /exchange/changelly/transactions:
+    get:
+      x-eov-operation-id: changellyGetTransactions
+      x-eov-operation-handler: handlers
+      description: Get Changelly transactions
+      parameters:
+        - $ref: '#/components/parameters/maybeChangellyTransactionId'
+        - $ref: '#/components/parameters/maybeChangellyCurrency'
+        - $ref: '#/components/parameters/maybeChangellyAddress'
+        - $ref: '#/components/parameters/changellyLimit'
+        - $ref: '#/components/parameters/changellyOffset'
+      security:
+        - apiKey: []
+      responses:
+        '200':
+          description: Changelly transactions
+          content:
+            'application/json':
+              schema:
+                type: array
+                maxItems: 100
+                items:
+                  $ref: '#/components/schemas/ChangellyTransaction'
         default:
           $ref: '#/components/responses/GeneralError'
 components:
@@ -1406,6 +1418,43 @@ components:
       type: string
       pattern: ^.+\..+$
       maxLength: 256
+    ChangellyTransaction:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/AnyString256'
+        trackUrl:
+          $ref: '#/components/schemas/UrlString'
+        status:
+          $ref: '#/components/schemas/AnyString256'
+        amountTo:
+          $ref: '#/components/schemas/NumberString'
+        amountExpectedTo:
+          $ref: '#/components/schemas/NumberString'
+        amountFrom:
+          $ref: '#/components/schemas/NumberString'
+        amountExpectedFrom:
+          $ref: '#/components/schemas/NumberString'
+        currencyFrom:
+          $ref: '#/components/schemas/AnyString256'
+        currencyTo:
+          $ref: '#/components/schemas/AnyString256'
+        createdAt:
+          $ref: '#/components/schemas/ISODateString'
+        payinAddress:
+          $ref: '#/components/schemas/AnyCryptoAddress'
+        payinHash:
+          $ref: '#/components/schemas/AnyString256'
+        payoutAddress:
+          $ref: '#/components/schemas/AnyCryptoAddress'
+        payoutHashLink:
+          $ref: '#/components/schemas/UrlString'
+        payoutHash:
+          $ref: '#/components/schemas/AnyString256'
+      required:
+        - status
+        - amountTo
   requestBodies:
     PIN:
       description: PIN Hash
@@ -1524,6 +1573,41 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/AnyString256'
+    maybeChangellyTransactionId:
+      in: query
+      name: transaction
+      required: false
+      schema:
+        $ref: '#/components/schemas/AnyString256'
+    maybeChangellyCurrency:
+      in: query
+      name: currency
+      required: false
+      schema:
+        $ref: '#/components/schemas/AnyString256'
+    maybeChangellyAddress:
+      in: query
+      name: address
+      required: false
+      schema:
+        $ref: '#/components/schemas/AnyCryptoAddress'
+    changellyLimit:
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
+    changellyOffset:
+      in: query
+      name: offset
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
     lat:
       in: query
       name: lat

@@ -386,3 +386,14 @@ export async function changellyGetTransaction(req, res) {
   const data = await changelly.getTransaction(req.params.transactionId);
   res.status(200).send(data);
 }
+
+export async function changellyGetTransactions(req, res) {
+  const data = await changelly.getTransactions(
+    req.query.transaction,
+    req.query.currency,
+    req.query.address,
+    req.query.limit,
+    req.query.offset
+  );
+  res.status(200).send(data);
+}

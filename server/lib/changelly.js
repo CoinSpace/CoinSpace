@@ -32,6 +32,10 @@ async function request(method, params) {
   return response && response.data && response.data.result;
 }
 
+function isGreater36hours(tx) {
+  return (new Date() - new Date(tx.createdAt * 1000)) > 36 * 60 * 60 * 1000;
+}
+
 function getCrypto(id) {
   const item = cryptoDB.find((item) => item._id === id);
   if (!(item && item.changelly && item.changelly.ticker)) {
@@ -124,8 +128,7 @@ async function getTransaction(id) {
     throw createError(404, 'Transaction not found');
   }
   let { status } = tx;
-  const isGreater36hours = (new Date() - new Date(tx.createdAt * 1000)) > 36 * 60 * 60 * 1000;
-  if (status === 'waiting' && isGreater36hours) {
+  if (status === 'waiting' && isGreater36hours(tx)) {
     status = 'overdue';
   }
   return {
@@ -138,10 +141,45 @@ async function getTransaction(id) {
   };
 }
 
+async function getTransactions(id, currency, address, limit, offset) {
+  const txs = await request('getTransactions', {
+    id,
+    currency,
+    address,
+    limit,
+    offset,
+  });
+
+  return txs.map((tx) => {
+    let { status } = tx;
+    if (status === 'waiting' && isGreater36hours(tx)) {
+      status = 'overdue';
+    }
+    return {
+      id: tx.id,
+      trackUrl: tx.trackUrl,
+      status,
+      amountTo: tx.amountTo || '0',
+      amountExpectedTo: tx.amountExpectedTo || '0',
+      amountFrom: tx.amountFrom || '0',
+      amountExpectedFrom: tx.amountExpectedFrom || '0',
+      currencyFrom: tx.currencyFrom,
+      currencyTo: tx.currencyTo,
+      createdAt: new Date(tx.createdAt * 1000).toISOString(),
+      payinAddress: tx.payinAddress,
+      payinHash: tx.payinHash || undefined,
+      payoutAddress: tx.payoutAddress,
+      payoutHashLink: tx.payoutHashLink || undefined,
+      payoutHash: tx.payoutHash || undefined,
+    };
+  });
+}
+
 export default {
   getPairsParams,
   estimate,
   validateAddress,
   createTransaction,
   getTransaction,
+  getTransactions,
 };
