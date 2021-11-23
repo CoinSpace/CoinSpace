@@ -1,4 +1,4 @@
-# Coin Crypto Wallet
+# Coin Wallet
 
 [![Build](https://github.com/coinspace/coinspace/actions/workflows/ci.yml/badge.svg)](https://github.com/CoinSpace/CoinSpace/actions/workflows/ci.yml)
 [![Downloads](https://img.shields.io/github/downloads/coinspace/coinspace/total)](https://github.com/CoinSpace/CoinSpace/releases)
@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/github/license/CoinSpace/CoinSpace?color=blue)](https://github.com/CoinSpace/CoinSpace/blob/master/LICENSE)
 [![Twitter](https://img.shields.io/twitter/follow/CoinAppWallet?style=social)](https://twitter.com/intent/follow?screen_name=CoinAppWallet)
 
-Coin Crypto Wallet - A human-friendly digital currency wallet for multiple platforms.
+Coin Wallet is a non-custodial multicurrency wallet for multiple platforms.
 
 Supported platforms:
 - Web
