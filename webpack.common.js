@@ -120,7 +120,16 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         { from: 'app/security.txt', to: './' },
+        { from: 'app/assets/icons/android-chrome-192x192.png', to: './' },
+        { from: 'app/assets/icons/android-chrome-512x512.png', to: './' },
+        { from: 'app/assets/icons/apple-touch-icon.png', to: './' },
+        { from: 'app/assets/icons/browserconfig.xml', to: './' },
+        { from: 'app/assets/icons/favicon-16x16.png', to: './' },
+        { from: 'app/assets/icons/favicon-32x32.png', to: './' },
         { from: 'app/assets/icons/favicon.ico', to: './' },
+        { from: 'app/assets/icons/mstile-150x150.png', to: './' },
+        { from: 'app/assets/icons/safari-pinned-tab.svg', to: './' },
+        { from: 'app/assets/icons/site.webmanifest', to: './' },
       ],
     }),
     new CircularDependencyPlugin({
