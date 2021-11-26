@@ -1063,6 +1063,10 @@ Sie werden in %(toSymbol)s konvertiert und an
         <source>Confirm exchange</source>
         <target>Umtausch bestätigen</target>
       </trans-unit>
+      <trans-unit id="Please increase the gas limit">
+        <source>Please increase the gas limit</source>
+        <target>Bitte erhöhen Sie das Gas-Limit</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
