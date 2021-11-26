@@ -1,9 +1,7 @@
 import axios from 'axios';
 import crypto from 'crypto';
 import createError from 'http-errors';
-import BigOrigin from 'big.js';
-const Big = BigOrigin();
-Big.NE = -32;
+import Big from 'big.js';
 const API_URL = 'https://api.changelly.com';
 import cryptoDB from '@coinspace/crypto-db';
 
@@ -45,7 +43,7 @@ function getCrypto(id) {
 }
 
 function normalizeNumber(n, decimals) {
-  return new Big(n).round(decimals || 8).toString();
+  return new Big(n).round(decimals ?? 8).toFixed();
 }
 
 async function getPairsParams(from, to) {
@@ -82,7 +80,7 @@ async function estimate(from, to, value) {
   const amount = new Big(data[0].amount);
   const result = new Big(data[0].result);
   return {
-    rate: amount.eq(0) ? '0' : normalizeNumber(result.minus(networkFee).div(amount), fromCrypto.decimals),
+    rate: amount.eq(0) ? '0' : normalizeNumber(result.minus(networkFee).div(amount), toCrypto.decimals),
     result: normalizeNumber(result, toCrypto.decimals),
   };
 }

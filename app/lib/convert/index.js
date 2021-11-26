@@ -29,7 +29,7 @@ export function cryptoToFiat(unit, exchangeRate) {
     decimals = rateDecimals > 2 ? rateDecimals : 2;
   }
   // strip leading zeros
-  return Big(value.toFixed(decimals)).toFixed();
+  return value.round(decimals).toFixed();
 }
 
 export function fiatToCrypto(value, exchangeRate) {
