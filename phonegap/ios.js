@@ -23,6 +23,7 @@ async function run() {
   const config = ejs.render(fse.readFileSync('config.xml.template', 'utf-8'), {
     widget: {
       id: 'com.coinspace.wallet',
+      name: 'Coin',
       version: pkg.version,
       iosCFBundleVersion: BUILD_NUMBER,
     },
@@ -73,6 +74,8 @@ async function run() {
       },
     ],
     'CFBundleLocalizations': languages,
+    'CFBundleName': 'Coin Wallet',
+    'CFBundleDisplayName': 'Coin Wallet',
   };
   updatePlist(path.join(buildPath, 'platforms/ios/Coin/Coin-Info.plist'), update);
 

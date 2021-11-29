@@ -17,6 +17,7 @@ async function run() {
   const config = ejs.render(fse.readFileSync('config.xml.template', 'utf-8'), {
     widget: {
       id: 'com.coinspace.app',
+      name: 'Coin Wallet',
       version: pkg.version,
       androidVersionCode: BUILD_NUMBER,
     },
