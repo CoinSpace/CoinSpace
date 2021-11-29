@@ -11,7 +11,6 @@ const schemes = [
 
 const { BUILD_PLATFORM } = process.env;
 const BRANCH = process.env.GITHUB_REF && process.env.GITHUB_REF.replace('refs/heads/', '');
-const PACKAGE_NAME = 'coin';
 
 if (!['win', 'appx', 'appx-dev', 'mac', 'mas', 'mas-dev', 'snap'].includes(BUILD_PLATFORM)) {
   throw new Error(`Please specify valid distribution, provided: '${BUILD_PLATFORM}'`);
@@ -29,7 +28,7 @@ module.exports = {
     buildVersion,
     //asar: true,
     icon: 'resources/icon',
-    executableName: ['win', 'appx', 'appx-dev'].includes(BUILD_PLATFORM) ? pkg.productName : PACKAGE_NAME,
+    executableName: ['win', 'appx', 'appx-dev'].includes(BUILD_PLATFORM) ? pkg.productName : pkg.name,
     ignore: [
       /README.md/i,
       /HISTORY.md/i,
@@ -84,7 +83,7 @@ module.exports = {
       }))] : []),
       ...(['appx', 'appx-dev'].includes(BUILD_PLATFORM) ? [appxmanifest({
         packageVersion: `${pkg.version}.0`,
-        identityName: BUILD_PLATFORM === 'appx' ? process.env.APPX_IDENTITY : PACKAGE_NAME,
+        identityName: BUILD_PLATFORM === 'appx' ? process.env.APPX_IDENTITY : pkg.name,
         packageName: BUILD_PLATFORM === 'appx' ? 'CoinWallet' : 'CoinWalletDev',
         packageDescription: pkg.description,
         packageDisplayName: process.env.APPX_PACKAGE_NAME,
@@ -136,7 +135,7 @@ module.exports = {
       name: '@electron-forge/maker-appx',
       config: {
         packageName: 'CoinWalletDev',
-        identityName: PACKAGE_NAME,
+        identityName: pkg.name,
         publisher: process.env.APPX_PUBLISHER_DEV,
         devCert: 'resources/certificate.pfx',
         certPass: process.env.CERTIFICATE_WIN_PASSWORD,
