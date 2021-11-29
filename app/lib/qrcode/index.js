@@ -64,7 +64,7 @@ function scan(callback) {
       alert(
         'Access to the camera has been prohibited; please enable it in the Settings app to continue',
         () => {},
-        'Coin'
+        'Coin Wallet'
       );
     },
     {

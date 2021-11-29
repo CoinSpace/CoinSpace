@@ -1,12 +1,12 @@
 {
-  "name": "coin",
+  "name": "coinwallet",
   "version": "5.1.3",
-  "description": "Coin Digital Currency Wallet",
+  "description": "Coin Wallet",
   "bugs": {
     "url": "https://github.com/CoinSpace/CoinSpace/issues"
   },
   "license": "MIT",
-  "author": "Coin Crypto Wallet <support@coin.space> (https://coin.space/)",
+  "author": "Coin Wallet <support@coin.space> (https://coin.space/)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CoinSpace/CoinSpace.git"

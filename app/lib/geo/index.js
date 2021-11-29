@@ -63,7 +63,7 @@ async function getLocation() {
         alert(
           'Access to the geolocation has been prohibited; please enable it in the Settings app to continue',
           () => {},
-          'Coin'
+          'Coin Wallet'
         );
         reject(new Error('Unable to retrieve your location'));
       },

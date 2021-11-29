@@ -1,8 +1,8 @@
 {
-  "name": "coin",
+  "name": "coinwallet",
   "productName": "Coin Wallet",
   "version": "1.0.0",
-  "description": "Coin Digital Currency Wallet",
+  "description": "Coin Wallet",
   "license": "MIT",
   "author": {
     "name": "Coin Wallet",
