@@ -23,7 +23,7 @@ function getPlatformName(crypto) {
 }
 
 async function sync() {
-  console.time('crypto sync');
+  console.log('crypto sync - started');
   for (const crypto of cryptoDB) {
     const update = {
       $set: {
@@ -47,12 +47,11 @@ async function sync() {
     });
     console.log(`synced crypto: ${crypto._id}`);
   }
-  console.timeEnd('crypto sync');
+  console.log('crypto sync - finished');
 }
 
 async function updatePrices() {
-  console.time('crypto update prices');
-
+  console.log('crypto update prices - started');
   const PER_PAGE = 500;
   let page = 0;
   let cryptos;
@@ -83,7 +82,7 @@ async function updatePrices() {
 
     const { data } = await coingecko.get('/simple/price', {
       params: {
-        ids: cryptos.map(item => item._id).join(','),
+        ids: cryptos.map(item => item._id).filter(item => !!item).join(','),
         vs_currencies: CURRENCIES.join(','),
       },
     });
@@ -107,7 +106,7 @@ async function updatePrices() {
           },
         },
       });
-      console.log(`updated crypto prices coingecko id: ${coingeckoId}`);
+      //console.log(`updated crypto prices coingecko id: ${coingeckoId}`);
     }
 
     if (operations.length > 0) {
@@ -118,12 +117,11 @@ async function updatePrices() {
     page++;
   } while (cryptos.length === PER_PAGE);
 
-  console.timeEnd('crypto update prices');
+  console.log('crypto update prices - fineshed');
 }
 
 async function updateRank() {
-  console.time('crypto update rank');
-
+  console.log('crypto update rank - started');
   const PER_PAGE = 5000;
   let page = 0;
   let list;
@@ -172,7 +170,7 @@ async function updateRank() {
         },
       },
     });
-    console.log(`updated crypto rank coinmarketcap id: ${cmc._id}`);
+    //console.log(`updated crypto rank coinmarketcap id: ${cmc._id}`);
   }
 
   if (operations.length > 0) {
@@ -180,7 +178,7 @@ async function updateRank() {
       .bulkWrite(operations, { ordered: false });
   }
 
-  console.timeEnd('crypto update rank');
+  console.log('crypto update rank - finished');
 }
 
 async function getAll(limit = 0) {

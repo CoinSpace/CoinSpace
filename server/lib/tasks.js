@@ -5,20 +5,26 @@ import moonpay from './v1/moonpay.js';
 import github from './github.js';
 import cryptos from './cryptos.js';
 
-function cryptosSync() {
-  return cryptos.sync();
+async function cryptosSync() {
+  console.time('crypto sync');
+  await cryptos.sync();
+  console.timeEnd('crypto sync');
 }
 
 function cryptosUpdatePrices(interval) {
   return pForever(async () => {
+    console.time('crypto update prices');
     await cryptos.updatePrices().catch(console.error);
+    console.timeEnd('crypto update prices');
     await delay(interval);
   });
 }
 
 function cryptosUpdateRank(interval) {
   return pForever(async () => {
+    console.time('crypto update rank');
     await cryptos.updateRank().catch(console.error);
+    console.timeEnd('crypto update rank');
     await delay(interval);
   });
 }
