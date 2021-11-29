@@ -18,6 +18,7 @@ const languages = require('../app/lib/i18n/list.json').map((item) => {
 
 const BUILD_NUMBER = process.env.GITHUB_RUN_NUMBER || '1';
 const BRANCH = process.env.GITHUB_REF && process.env.GITHUB_REF.replace('refs/heads/', '');
+const CFBundleName = 'Coin Wallet';
 
 async function run() {
   const config = ejs.render(fse.readFileSync('config.xml.template', 'utf-8'), {
@@ -74,8 +75,8 @@ async function run() {
       },
     ],
     'CFBundleLocalizations': languages,
-    'CFBundleName': 'Coin Wallet',
-    'CFBundleDisplayName': 'Coin Wallet',
+    CFBundleName,
+    'CFBundleDisplayName': CFBundleName,
   };
   updatePlist(path.join(buildPath, 'platforms/ios/Coin/Coin-Info.plist'), update);
 
@@ -95,7 +96,7 @@ async function run() {
       { cwd: path.join(buildPath, 'platforms/ios') }
     );
     const destination = `${pkg.version}-${BRANCH || 'local'}/${pkg.name}-${pkg.version}.ipa`;
-    await storage.bucket(process.env.GOOGLE_CLOUD_BUCKET).upload('deploy/Coin.ipa', { destination });
+    await storage.bucket(process.env.GOOGLE_CLOUD_BUCKET).upload(`deploy/${CFBundleName}.ipa`, { destination });
   } else {
     utils.shell('open platforms/ios/Coin.xcworkspace', { cwd: buildPath });
   }
