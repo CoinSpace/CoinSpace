@@ -26,7 +26,7 @@ export default function(el) {
       securityPinLabel: getSecurityPinLabel(),
       walletName: '',
       currencies: [
-        'AUD', 'BRL', 'CAD', 'CHF', 'CNY',
+        'ARS', 'AUD', 'BRL', 'CAD', 'CHF', 'CNY',
         'DKK', 'EUR', 'GBP', 'IDR', 'ILS',
         'JPY', 'MXN', 'NOK', 'NZD', 'PLN',
         'RUB', 'SEK', 'SGD', 'TRY', 'UAH',
