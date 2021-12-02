@@ -43,7 +43,7 @@ function getCrypto(id) {
 }
 
 function normalizeNumber(n, decimals) {
-  return new Big(n).round(decimals ?? 8).toFixed();
+  return Big(n).round(decimals ?? 8).toFixed();
 }
 
 async function getPairsParams(from, to) {
@@ -76,11 +76,11 @@ async function estimate(from, to, value) {
       result: '0',
     };
   }
-  const networkFee = new Big(data[0].networkFee);
-  const amount = new Big(data[0].amount);
-  const result = new Big(data[0].result);
+  const networkFee = Big(data[0].networkFee);
+  const amount = Big(data[0].amount);
+  const result = Big(data[0].result).minus(networkFee);
   return {
-    rate: amount.eq(0) ? '0' : normalizeNumber(result.minus(networkFee).div(amount), toCrypto.decimals),
+    rate: amount.eq(0) ? '0' : normalizeNumber(result.div(amount), toCrypto.decimals),
     result: normalizeNumber(result, toCrypto.decimals),
   };
 }
