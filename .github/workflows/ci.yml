@@ -3,6 +3,46 @@ name: CoinSpace CI
 on: push
 
 jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: Set app version
+        run: echo "VERSION=$(node -p -e "require('./package.json').version")" >> $GITHUB_ENV
+      - uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: v${{ env.VERSION }}
+          name: v${{ env.VERSION }}
+          draft: true
+          allowUpdates: true
+          omitBodyDuringUpdate: true
+          omitNameDuringUpdate: true
+          body: |
+            * [Web Wallet](https://coin.space/wallet/)
+
+            * [Tor Wallet](http://coinspacezp5mmyuicbz2hoafbnduj4vzkttq3grn5mnwdue5t343zid.onion/)
+
+            * [iOS Application](https://apps.apple.com/us/app/coinspace-bitcoin-wallet/id980719434#?platform=iphone)
+
+            * [Android Application](https://play.google.com/store/apps/details?id=com.coinspace.app)
+
+            * [Galaxy Store](https://galaxy.store/coinapp)
+
+            * [Windows Installer: Coin.Wallet.Setup.exe](https://github.com/CoinSpace/CoinSpace/releases/download/v${{ env.VERSION }}/Coin.Wallet.Setup.exe)
+
+            * [macOS Installer: Coin.Wallet.dmg](https://github.com/CoinSpace/CoinSpace/releases/download/v${{ env.VERSION }}/Coin.Wallet.dmg)
+
+            * [Microsoft Store](https://www.microsoft.com/store/apps/9NBLGGH5PXJQ)
+
+            * [Mac App Store](https://apps.apple.com/us/app/coin-bitcoin-wallet/id980719434#?platform=mac)
+
+            * [Linux Snap](https://snapcraft.io/coin)
+
   lint:
     runs-on: ubuntu-20.04
     steps:
