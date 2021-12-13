@@ -79,8 +79,9 @@ export default function(el) {
   ractive.on('eos-setup-account', showEosSetupAccount);
 
   ractive.on('support', () => {
+    const version = `${process.env.VERSION}@${process.env.PLATFORM} (${process.env.COMMIT})`;
     if (process.env.BUILD_TYPE === 'phonegap') {
-      window.Zendesk.showHelpCenter();
+      window.Zendesk.showHelpCenter(null, null, null, version);
     } else {
       window.safeOpen('https://support.coin.space/hc/en-us/sections/115000511287-FAQ', '_blank');
     }

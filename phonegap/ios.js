@@ -42,7 +42,7 @@ async function run() {
   cordova('plugin add cordova-plugin-x-socialsharing@5.6.8 --variable PHOTO_LIBRARY_USAGE_DESCRIPTION="This app uses your photo library to upload photos." --variable PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION="This app saves images to your photo library."');
   cordova('plugin add cordova-plugin-touch-id@3.4.0 --variable FACEID_USAGE_DESCRIPTION="Used for easy authentication."');
   cordova('plugin add cordova-plugin-customurlscheme@5.0.1 --variable URL_SCHEME=coinspace');
-  cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#b9e98ce96df3ad21290186b959f861e04446ebdc');
+  cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#4bf28de7fcd6759450f5fd56f2ec28677bc882da');
   cordova('plugin add cordova-plugin-3dtouch-shortcutitems@1.0.2');
   cordova('plugin add cordova-plugin-safariviewcontroller@1.6.0');
   cordova('plugin add cordova-plugin-inapp-review@1.1.0');

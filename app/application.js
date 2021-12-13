@@ -70,6 +70,10 @@ window.initCSApp = async function() {
   });
 
   window.safeOpen = function(...args) {
+    if (args[0].startsWith('https://support.coin.space/')) {
+      const version = `${process.env.VERSION}@${process.env.PLATFORM} (${process.env.COMMIT})`;
+      args[0] = `${args[0]}?tf_24464158=${encodeURIComponent(version)}`;
+    }
     const win = window.open(...args);
     if (win) {
       win.opener = null;
