@@ -2,7 +2,7 @@
 
 const { app, shell } = require('electron');
 const openWindow = require('./openWindow');
-const { isDevelopment, isMac } = require('./constants');
+const { isDevelopment, isMac, version } = require('./constants');
 const updater = require('./updater');
 
 const updateMenu = {
@@ -30,19 +30,22 @@ const updateMenu = {
   },
 };
 
+const FAQ = `https://support.coin.space/hc/en-us/sections/115000511287-FAQ?tf_24464158=${encodeURIComponent(version)}`;
+const SUPPORT = `https://support.coin.space/hc/en-us?tf_24464158=${encodeURIComponent(version)}`;
+
 const helpMenu = {
   role: 'help',
   submenu: [
     {
       label: 'FAQ',
       click: async () => {
-        await shell.openExternal('https://support.coin.space/hc/en-us/sections/115000511287-FAQ');
+        await shell.openExternal(FAQ);
       },
     },
     {
       label: 'Support',
       click: async () => {
-        await shell.openExternal('https://support.coin.space/hc/en-us');
+        await shell.openExternal(SUPPORT);
       },
     },
     ...(!isMac ? [

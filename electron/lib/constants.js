@@ -7,4 +7,5 @@ module.exports = {
   isDevelopment: process.env.NODE_ENV === 'development',
   isMas: process.mas === true,
   isWindowsStore: process.windowsStore === true,
+  version: `${process.env.VERSION}@${process.env.PLATFORM} (${process.env.COMMIT})`,
 };
