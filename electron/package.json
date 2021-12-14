@@ -27,8 +27,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@sentry/electron": "^2.0.1",
-    "electron-log": "^4.2.2",
+    "@sentry/electron": "^2.5.4",
+    "electron-log": "^4.4.1",
     "electron-squirrel-startup": "^1.0.0"
   },
   "devDependencies": {
@@ -43,7 +43,7 @@
     "@mahnunchik/publisher-github": "6.0.0-beta.54",
     "app-builder-lib": "^22.9.1",
     "ejs": "^3.1.6",
-    "electron": "^12.0.2",
+    "electron": "^12.2.3",
     "electron-packager-languages": "^0.5.0"
   }
 }
