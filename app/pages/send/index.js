@@ -218,6 +218,10 @@ export default function(el) {
       ractive.set('feeName', 'default');
     }
 
+    const feeName = ractive.get('feeName');
+    const fee = fees.find((item) => item.name === feeName);
+    if (!fee) ractive.set('feeName', 'default');
+
     ractive.set('fees', fees);
     ractive.fire('change-fee');
   }
