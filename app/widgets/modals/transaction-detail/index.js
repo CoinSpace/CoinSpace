@@ -8,6 +8,7 @@ import contentStellar from './contentStellar.ract';
 import contentEOS from './contentEOS.ract';
 import contentMonero from './contentMonero.ract';
 import contentBtcBchLtc from './contentBtcBchLtc.ract';
+import { translate } from 'lib/i18n';
 
 export default function(data) {
   let content;
@@ -49,6 +50,7 @@ export default function(data) {
     try {
       tx = wallet.createReplacement(data.transaction);
     } catch (err) {
+      if (/Insufficient funds/.test(err.message)) return showInfo({ title: translate('Insufficient funds') });
       console.error(`not translated error: ${err.message}`);
       return showInfo({ title: err.message });
     }
