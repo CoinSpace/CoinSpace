@@ -23,6 +23,7 @@ export function unlock(wallet) {
             seeds.unlock('private', privateToken);
             if (wallet) wallet.unlock(seeds.get('private'));
             this.close();
+            await new Promise((resolve) => setTimeout(resolve, 200));
             resolve();
           } catch (err) {
             if (err.message === 'hardware_error') return;
@@ -65,6 +66,7 @@ export function unlock(wallet) {
             seeds.unlock('private', privateToken);
             if (wallet) wallet.unlock(seeds.get('private'));
             this.close();
+            await new Promise((resolve) => setTimeout(resolve, 200));
             resolve();
           } catch (err) {
             if (err.message === 'touch_id_error') return;
