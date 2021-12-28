@@ -109,9 +109,9 @@
         <source>You don't have enough funds in your wallet (incl. fee)</source>
         <target>អ្នកមិនមានទឹកប្រាក់គ្រប់គ្រាន់នៅក្នុងកាបូបរបស់អ្នកទេ (រួមទាំងកម្រៃសេវា)</target>
       </trans-unit>
-      <trans-unit id="A name is required to set your profile on Coin">
-        <source>A name is required to set your profile on Coin</source>
-        <target>ត្រូវការឈ្មោះដើម្បីកំណត់ប្រវត្តិរូបរបស់អ្នកនៅលើកាក់។</target>
+      <trans-unit id="A name is required to set your profile">
+        <source>A name is required to set your profile</source>
+        <target>ត្រូវការឈ្មោះដើម្បីកំណត់ប្រវត្តិរូបរ។</target>
       </trans-unit>
       <trans-unit id="Uh Oh...">
         <source>Uh Oh...</source>
@@ -237,9 +237,9 @@
         <source>Confirm</source>
         <target>បញ្ជាក់</target>
       </trans-unit>
-      <trans-unit id="No Coin users found nearby">
-        <source>No Coin users found nearby</source>
-        <target>រកមិនឃើញអ្នកប្រើប្រាស់កាក់នៅក្បែរៗនោះទេ</target>
+      <trans-unit id="No users found nearby">
+        <source>No users found nearby</source>
+        <target>រកមិនឃើញអ្នកប្រើប្រាស់នៅក្បែរៗនោះទេ</target>
       </trans-unit>
       <trans-unit id="Search Again">
         <source>Search Again</source>
@@ -249,9 +249,9 @@
         <source>Searching...</source>
         <target>កំពុងស្វែងរក...</target>
       </trans-unit>
-      <trans-unit id="Searching your area for other Coin users">
-        <source>Searching your area for other Coin users</source>
-        <target>កំពុងស្វែងរកតំបន់របស់អ្នកសម្រាប់អ្នកប្រើប្រាស់កាក់ផ្សេងទៀត</target>
+      <trans-unit id="Searching your area for other users">
+        <source>Searching your area for other users</source>
+        <target>កំពុងស្វែងរកតំបន់របស់អ្នកសម្រាប់អ្នកប្រើប្រាស់ផ្សេងទៀត</target>
       </trans-unit>
       <trans-unit id="Confirm transaction">
         <source>Confirm transaction</source>

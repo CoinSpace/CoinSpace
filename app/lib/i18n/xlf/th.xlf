@@ -109,9 +109,9 @@
         <source>You don't have enough funds in your wallet (incl. fee)</source>
         <target>คุณมีเงินในกระเป๋าไม่พอ (incl น ค่าจ้าง)</target>
       </trans-unit>
-      <trans-unit id="A name is required to set your profile on Coin">
-        <source>A name is required to set your profile on Coin</source>
-        <target>คุณจำเป็นต้องกรอกชื่อของคุณเพื่อตั้งค่าโปร์ไฟล์ Coin </target>
+      <trans-unit id="A name is required to set your profile">
+        <source>A name is required to set your profile</source>
+        <target>คุณจำเป็นต้องกรอกชื่อของคุณเพื่อตั้งค่าโปร์ไฟล์</target>
       </trans-unit>
       <trans-unit id="Uh Oh...">
         <source>Uh Oh...</source>
@@ -237,9 +237,9 @@
         <source>Confirm</source>
         <target>ยืนยัน</target>
       </trans-unit>
-      <trans-unit id="No Coin users found nearby">
-        <source>No Coin users found nearby</source>
-        <target>ไม่พบผู้ใช้งาน Coin ที่อยู่ใกล้คุณ</target>
+      <trans-unit id="No users found nearby">
+        <source>No users found nearby</source>
+        <target>ไม่พบผู้ใช้งาน ที่อยู่ใกล้คุณ</target>
       </trans-unit>
       <trans-unit id="Search Again">
         <source>Search Again</source>
@@ -249,9 +249,9 @@
         <source>Searching...</source>
         <target>กำลังค้นหา...</target>
       </trans-unit>
-      <trans-unit id="Searching your area for other Coin users">
-        <source>Searching your area for other Coin users</source>
-        <target>ค้นหาผู้ใช้งาน Coin ที่อยู่ใกล้คุณ</target>
+      <trans-unit id="Searching your area for other users">
+        <source>Searching your area for other users</source>
+        <target>ค้นหาผู้ใช้งาน ที่อยู่ใกล้คุณ</target>
       </trans-unit>
       <trans-unit id="Confirm transaction">
         <source>Confirm transaction</source>

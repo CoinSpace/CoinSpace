@@ -109,9 +109,9 @@
         <source>You don't have enough funds in your wallet (incl. fee)</source>
         <target>Nemáte dostatek prostředků ve Vaší peněžence (vč. poplatek).</target>
       </trans-unit>
-      <trans-unit id="A name is required to set your profile on Coin">
-        <source>A name is required to set your profile on Coin</source>
-        <target>Jméno je vyžadováno k založení profilu na Coin</target>
+      <trans-unit id="A name is required to set your profile">
+        <source>A name is required to set your profile</source>
+        <target>Jméno je vyžadováno k založení profilu</target>
       </trans-unit>
       <trans-unit id="Uh Oh...">
         <source>Uh Oh...</source>
@@ -237,9 +237,9 @@
         <source>Confirm</source>
         <target>Potvrdit</target>
       </trans-unit>
-      <trans-unit id="No Coin users found nearby">
-        <source>No Coin users found nearby</source>
-        <target>Žádní uživatelé Coin nejsou poblíž</target>
+      <trans-unit id="No users found nearby">
+        <source>No users found nearby</source>
+        <target>Žádní uživatelé nejsou poblíž</target>
       </trans-unit>
       <trans-unit id="Search Again">
         <source>Search Again</source>
@@ -249,9 +249,9 @@
         <source>Searching...</source>
         <target>Hledám...</target>
       </trans-unit>
-      <trans-unit id="Searching your area for other Coin users">
-        <source>Searching your area for other Coin users</source>
-        <target>Hledám uživatele Coin ve Vaší blízkosti</target>
+      <trans-unit id="Searching your area for other users">
+        <source>Searching your area for other users</source>
+        <target>Hledám uživatele ve Vaší blízkosti</target>
       </trans-unit>
       <trans-unit id="Confirm transaction">
         <source>Confirm transaction</source>

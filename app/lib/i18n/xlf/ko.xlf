@@ -109,9 +109,9 @@
         <source>You don't have enough funds in your wallet (incl. fee)</source>
         <target>월렛에 자금이 충분치 않습니다(수수료 포함)</target>
       </trans-unit>
-      <trans-unit id="A name is required to set your profile on Coin">
-        <source>A name is required to set your profile on Coin</source>
-        <target>코인에서 프로필을 설정하려면 이름이 필요합니다.</target>
+      <trans-unit id="A name is required to set your profile">
+        <source>A name is required to set your profile</source>
+        <target>프로필을 설정하려면 이름이 필요합니다</target>
       </trans-unit>
       <trans-unit id="Uh Oh...">
         <source>Uh Oh...</source>
@@ -237,9 +237,9 @@
         <source>Confirm</source>
         <target>확인</target>
       </trans-unit>
-      <trans-unit id="No Coin users found nearby">
-        <source>No Coin users found nearby</source>
-        <target>근처의 코인 사용자를 발견할 수 없습니다</target>
+      <trans-unit id="No users found nearby">
+        <source>No users found nearby</source>
+        <target>근처의 사용자를 발견할 수 없습니다</target>
       </trans-unit>
       <trans-unit id="Search Again">
         <source>Search Again</source>
@@ -249,9 +249,9 @@
         <source>Searching...</source>
         <target>검색 중...</target>
       </trans-unit>
-      <trans-unit id="Searching your area for other Coin users">
-        <source>Searching your area for other Coin users</source>
-        <target>내 지역의 다른 코인 사용자 검색</target>
+      <trans-unit id="Searching your area for other users">
+        <source>Searching your area for other users</source>
+        <target>내 지역의 다른 사용자 검색</target>
       </trans-unit>
       <trans-unit id="Confirm transaction">
         <source>Confirm transaction</source>

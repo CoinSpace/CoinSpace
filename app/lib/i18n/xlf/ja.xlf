@@ -109,9 +109,9 @@
         <source>You don't have enough funds in your wallet (incl. fee)</source>
         <target>残高不足です (incl. fee)</target>
       </trans-unit>
-      <trans-unit id="A name is required to set your profile on Coin">
-        <source>A name is required to set your profile on Coin</source>
-        <target>Coinのプロフィールを作るには名前の設定が必要です</target>
+      <trans-unit id="A name is required to set your profile">
+        <source>A name is required to set your profile</source>
+        <target>プロフィールを作るには名前の設定が必要です</target>
       </trans-unit>
       <trans-unit id="Uh Oh...">
         <source>Uh Oh...</source>
@@ -237,9 +237,9 @@
         <source>Confirm</source>
         <target>確認する</target>
       </trans-unit>
-      <trans-unit id="No Coin users found nearby">
-        <source>No Coin users found nearby</source>
-        <target>近くのCoinユーザーが見つけられませんでした</target>
+      <trans-unit id="No users found nearby">
+        <source>No users found nearby</source>
+        <target>近くのユーザーが見つけられませんでした</target>
       </trans-unit>
       <trans-unit id="Search Again">
         <source>Search Again</source>
@@ -249,9 +249,9 @@
         <source>Searching...</source>
         <target>検索中...</target>
       </trans-unit>
-      <trans-unit id="Searching your area for other Coin users">
-        <source>Searching your area for other Coin users</source>
-        <target>他のCoinウェブユーザーを検索中</target>
+      <trans-unit id="Searching your area for other users">
+        <source>Searching your area for other users</source>
+        <target>他ィブユーザーを検索中</target>
       </trans-unit>
       <trans-unit id="Confirm transaction">
         <source>Confirm transaction</source>

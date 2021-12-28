@@ -109,8 +109,8 @@
         <source>You don't have enough funds in your wallet (incl. fee)</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="A name is required to set your profile on Coin">
-        <source>A name is required to set your profile on Coin</source>
+      <trans-unit id="A name is required to set your profile">
+        <source>A name is required to set your profile</source>
         <target></target>
       </trans-unit>
       <trans-unit id="Uh Oh...">
@@ -237,8 +237,8 @@
         <source>Confirm</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="No Coin users found nearby">
-        <source>No Coin users found nearby</source>
+      <trans-unit id="No users found nearby">
+        <source>No users found nearby</source>
         <target></target>
       </trans-unit>
       <trans-unit id="Search Again">
@@ -249,8 +249,8 @@
         <source>Searching...</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="Searching your area for other Coin users">
-        <source>Searching your area for other Coin users</source>
+      <trans-unit id="Searching your area for other users">
+        <source>Searching your area for other users</source>
         <target></target>
       </trans-unit>
       <trans-unit id="Confirm transaction">

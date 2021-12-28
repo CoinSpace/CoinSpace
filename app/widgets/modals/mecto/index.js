@@ -15,7 +15,7 @@ function open(callback) {
       searching: true,
       searchingAgain: false,
       getAvatarUrl,
-      search_message: translate('Searching your area for other Coin users'),
+      search_message: translate('Searching your area for other users'),
     },
     oncomplete() {
       const pinEl = ractive.find('#geo-pin');

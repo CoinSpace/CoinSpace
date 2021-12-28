@@ -28,7 +28,7 @@ export default function(el) {
     const username = ractive.get('username').trim();
     const email = ractive.get('email').trim();
     if (!username) {
-      return showError({ message: translate('A name is required to set your profile on Coin') });
+      return showError({ message: translate('A name is required to set your profile') });
     }
     isLoading = true;
     try {
