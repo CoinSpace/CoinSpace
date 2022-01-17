@@ -52,10 +52,15 @@ async function sync() {
 
 async function updatePrices() {
   console.log('crypto update prices - started');
+  const logs = ['SLOW PRICES UPDATE'];
+  const timeout = setTimeout(() => {
+    console.error(logs.join('\n'));
+  }, 60 * 1000 /* 1 min */);
   const PER_PAGE = 500;
   let page = 0;
   let cryptos;
   do {
+    logs.push(`crypto update prices - load from db (chunk #${page}) - start`);
     cryptos = await db.collection(COLLECTION)
       .aggregate([{
         $match: {
@@ -75,17 +80,20 @@ async function updatePrices() {
         $limit: PER_PAGE,
       }])
       .toArray();
+    logs.push(`crypto update prices - load from db (chunk #${page}) - finish`);
 
     if (cryptos.length === 0) {
       break;
     }
 
+    logs.push(`crypto update prices - load prices from coingecko (chunk #${page}) - start`);
     const { data } = await coingecko.get('/simple/price', {
       params: {
         ids: cryptos.map(item => item._id).filter(item => !!item).join(','),
         vs_currencies: CURRENCIES.join(','),
       },
     });
+    logs.push(`crypto update prices - load prices from coingecko (chunk #${page}) - finish`);
 
     const operations = [];
     const updatedAt = new Date();
@@ -109,25 +117,33 @@ async function updatePrices() {
       //console.log(`updated crypto prices coingecko id: ${coingeckoId}`);
     }
 
+    logs.push(`crypto update prices - update db (chunk #${page}) - start`);
     if (operations.length > 0) {
       await db.collection(COLLECTION)
         .bulkWrite(operations, { ordered: false });
     }
+    logs.push(`crypto update prices - update db (chunk #${page}) - finish`);
 
     page++;
   } while (cryptos.length === PER_PAGE);
 
+  clearTimeout(timeout);
   console.log('crypto update prices - fineshed');
 }
 
 async function updateRank() {
   console.log('crypto update rank - started');
+  const logs = ['SLOW RANK UPDATE'];
+  const timeout = setTimeout(() => {
+    console.error(logs.join('\n'));
+  }, 60 * 1000 /* 1 min */);
   const PER_PAGE = 5000;
   let page = 0;
   let list;
   let map = [];
 
   do {
+    logs.push(`crypto update rank - load from coinmarketcap (chunk #${page}) - start`);
     const res = await coinmarketcap.get('/v1/cryptocurrency/map', {
       params: {
         listing_status: 'active,inactive,untracked',
@@ -135,11 +151,13 @@ async function updateRank() {
         start: (page * PER_PAGE) + 1,
       },
     });
+    logs.push(`crypto update rank - load from coinmarketcap (chunk #${page}) - finish`);
     list = res.data.data;
     page++;
     map = map.concat(list);
   } while (list.length === PER_PAGE);
 
+  logs.push('crypto update rank - load from db - start');
   const updatedAt = new Date();
   const cursor = db.collection(COLLECTION)
     .aggregate([{
@@ -172,12 +190,16 @@ async function updateRank() {
     });
     //console.log(`updated crypto rank coinmarketcap id: ${cmc._id}`);
   }
+  logs.push('crypto update rank - load from db - finish');
 
+  logs.push('crypto update rank - update db - start');
   if (operations.length > 0) {
     await db.collection(COLLECTION)
       .bulkWrite(operations, { ordered: false });
   }
+  logs.push('crypto update rank - update db - finish');
 
+  clearTimeout(timeout);
   console.log('crypto update rank - finished');
 }
 
