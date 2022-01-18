@@ -6,6 +6,7 @@ import { showError, showSuccess } from 'widgets/modals/flash';
 import showSetDetails from 'widgets/modals/set-details';
 import qrcode from 'lib/qrcode';
 import initEosSetup from 'widgets/eos/setup';
+import initDeletedCrypto from 'widgets/deleted-crypto';
 import clipboard from 'lib/clipboard';
 import { translate } from 'lib/i18n';
 import { getWallet } from 'lib/wallet';
@@ -48,12 +49,14 @@ export default function(el) {
   });
 
   initEosSetup(ractive.find('#eos-setup'));
+  initDeletedCrypto(ractive.find('#deleted-crypto'));
 
   clipboard(ractive, '.js-address-input', 'isCopiedAddress');
 
   emitter.on('wallet-ready', () => {
     const wallet = getWallet();
     ractive.set('needToSetupEos', wallet.crypto.platform === 'eos' && !wallet.isActive);
+    ractive.set('isDeletedCrypto', wallet.crypto.platform === 'bitcoin-sv');
 
     const addressTypes = (wallet.addressTypes || []);
     ractive.set('addressTypes', addressTypes);

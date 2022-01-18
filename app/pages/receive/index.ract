@@ -1,4 +1,4 @@
-<div class-hidden="needToSetupEos">
+<div class-hidden="(needToSetupEos || isDeletedCrypto)">
 
   <div class="csformgroup csformgroup--readonly">
     <div class="csformgroup__input-group">
@@ -82,3 +82,4 @@
 </div>
 
 <div id="eos-setup" class-hidden="!needToSetupEos"></div>
+<div id="deleted-crypto" class-hidden="!isDeletedCrypto"></div>

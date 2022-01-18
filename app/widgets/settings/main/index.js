@@ -49,6 +49,9 @@ export default function(el) {
     } else if (wallet.crypto.platform === 'monero') {
       ractive.set('isEnabledImport', false);
       ractive.set('isEnabledExport', true);
+    } else if (wallet.crypto.platform === 'bitcoin-sv') {
+      ractive.set('isEnabledImport', false);
+      ractive.set('isEnabledExport', true);
     } else {
       ractive.set('isEnabledImport', true);
       ractive.set('isEnabledExport', true);

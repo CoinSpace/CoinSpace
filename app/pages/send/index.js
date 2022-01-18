@@ -11,6 +11,7 @@ import { validateSend } from 'lib/wallet/validator';
 import { getAddressWithAlias } from 'lib/domain';
 import qrcode from 'lib/qrcode';
 import initEosSetup from 'widgets/eos/setup';
+import initDeletedCrypto from 'widgets/deleted-crypto';
 import { toAtom, toUnitString, cryptoToFiat, fiatToCrypto, toDecimalString } from 'lib/convert';
 import { translate } from 'lib/i18n';
 import ticker from 'lib/ticker-api';
@@ -71,6 +72,7 @@ export default function(el) {
   let isSyncing = true;
 
   initEosSetup(ractive.find('#eos-setup'));
+  initDeletedCrypto(ractive.find('#deleted-crypto'));
 
   ractive.on('before-show', () => {
     if (!isSyncing) {
@@ -165,6 +167,7 @@ export default function(el) {
     ractive.set('isStellar', wallet.crypto.platform === 'stellar');
     ractive.set('isEOS', wallet.crypto.platform === 'eos');
     ractive.set('needToSetupEos', wallet.crypto.platform === 'eos' && !wallet.isActive);
+    ractive.set('isDeletedCrypto', wallet.crypto.platform === 'bitcoin-sv');
     ractive.set('symbol', wallet.crypto.symbol);
     ractive.set('factors', FACTORS[wallet.crypto.platform]);
     ractive.set('factor', wallet.crypto.symbol);

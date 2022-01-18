@@ -1,0 +1,4 @@
+<div class='widget-deleted-crypto'>
+  <div on-click="export" class="csbtn">{{translate("Export private keys")}}</div>
+  <a href="" class="_link" on-click="info">{{translate("more info")}}</a>
+</div>

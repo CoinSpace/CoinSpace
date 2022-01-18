@@ -1,4 +1,4 @@
-<div class-hidden="needToSetupEos">
+<div class-hidden="(needToSetupEos || isDeletedCrypto)">
   <div class="send__form">
     <form>
 
@@ -188,3 +188,4 @@
 </div>
 
 <div id="eos-setup" class-hidden="!needToSetupEos"></div>
+<div id="deleted-crypto" class-hidden="!isDeletedCrypto"></div>
