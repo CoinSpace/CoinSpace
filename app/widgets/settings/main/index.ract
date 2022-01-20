@@ -21,14 +21,26 @@
 
   <div class="_section">
     <div class="_title">{{translate("General")}}</div>
-    <div class="_list_item" on-click="general-currency">
+    <div class="_list_item">
       <div class="_label">{{translate("Local currency")}}</div>
       <div class="_select" title="{{translate('Local currency')}}">
         <span class="_select_label">{{currency}}</span>
         <select value="{{currency}}" on-change="setPreferredCurrency">
-          {{#currencies}}
-            <option value="{{.}}">{{.}}</option>
-          {{/currencies}}
+          {{#each currencies}}
+            <option value="{{this}}">{{this}}</option>
+          {{/each}}
+        </select>
+        <div class="_arrow">{{>svg_arrow}}</div>
+      </div>
+    </div>
+    <div class="_list_item">
+      <div class="_label">{{translate("Language")}}</div>
+      <div class="_select" title="{{translate('Language')}}">
+        <span class="_select_label">{{getLanguageLabel(language)}}</span>
+        <select value="{{language}}" on-change="setLanguage">
+          {{#each languages}}
+            <option value="{{this.value}}">{{this.name}}</option>
+          {{/each}}
         </select>
         <div class="_arrow">{{>svg_arrow}}</div>
       </div>

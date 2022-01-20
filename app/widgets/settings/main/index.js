@@ -11,9 +11,40 @@ import os from 'lib/detect-os';
 import touchId from 'lib/touch-id';
 import emitter from 'lib/emitter';
 import template from './index.ract';
+import i18n from 'lib/i18n';
+
+// sorted by localeCompare
+const languages = [
+  { value: 'id', name: 'Bahasa Indonesia' },
+  { value: 'bs', name: 'Bosanski' },
+  { value: 'cs', name: 'Čeština' },
+  { value: 'de', name: 'Deutsch' },
+  { value: 'en', name: 'English' },
+  { value: 'es', name: 'Español' },
+  { value: 'fr', name: 'Français' },
+  { value: 'hr', name: 'Hrvatski' },
+  { value: 'it', name: 'Italiano' },
+  { value: 'hu', name: 'Magyar' },
+  { value: 'nl', name: 'Nederlands' },
+  { value: 'nb', name: 'Norsk bokmål' },
+  { value: 'pl', name: 'Polski' },
+  { value: 'pt-br', name: 'Português brasileiro' },
+  { value: 'vi', name: 'Tiếng Việt' },
+  { value: 'tr', name: 'Türkçe' },
+  { value: 'fil', name: 'Filipino' },
+  { value: 'ru', name: 'Русский' },
+  { value: 'sr', name: 'Српски' },
+  { value: 'uk', name: 'Українська' },
+  { value: 'th', name: 'ภาษาไทย' },
+  { value: 'km', name: 'ភាសាខ្មែរ' },
+  { value: 'ko', name: '한국어' },
+  { value: 'ja', name: '日本語' },
+  { value: 'zh-cn', name: '汉语' },
+];
 
 export default function(el) {
   const currency = details.get('systemInfo').preferredCurrency;
+  const language = i18n.getLanguage(details.get('systemInfo').language);
   const ractive = new Ractive({
     el,
     template,
@@ -33,6 +64,12 @@ export default function(el) {
         'USD', 'ZAR',
       ],
       currency,
+      languages,
+      language,
+      getLanguageLabel(language) {
+        const option = languages.find((item) => item.value === language);
+        return option ? option.name : '';
+      },
     },
   });
 
@@ -105,6 +142,18 @@ export default function(el) {
       preferredCurrency: currency,
     }).then(() => {
       emitter.emit('currency-changed', currency);
+    }, (err) => {
+      console.error(err);
+    });
+  });
+
+  ractive.on('setLanguage', () => {
+    const language = i18n.getLanguage(ractive.get('language'));
+    details.set('systemInfo', {
+      language,
+    }).then(() => {
+      localStorage.setItem('_cs_language', language);
+      return location.reload();
     }, (err) => {
       console.error(err);
     });

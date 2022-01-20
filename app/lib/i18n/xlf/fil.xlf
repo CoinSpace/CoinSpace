@@ -1067,6 +1067,10 @@ Iko-convert ito sa %(toSymbol)s, at ipapadala sa
         <source>Please increase the gas limit</source>
         <target>Taasan ang limitasyon ng gas</target>
       </trans-unit>
+      <trans-unit id="Language">
+        <source>Language</source>
+        <target>Wika</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

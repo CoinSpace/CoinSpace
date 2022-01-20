@@ -263,5 +263,6 @@
   "Destination blockchain": "Destination blockchain",
   "Use your wallet address": "Use your wallet address",
   "Confirm exchange": "Confirm exchange",
-  "Please increase the gas limit": "Please increase the gas limit"
+  "Please increase the gas limit": "Please increase the gas limit",
+  "Language": "Language"
 }

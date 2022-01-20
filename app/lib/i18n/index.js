@@ -8,8 +8,8 @@ counterpart.setMissingEntryGenerator((key) => {
   return key;
 });
 
-function loadTranslation() {
-  const language = getLanguage();
+function loadTranslation(language) {
+  language = getLanguage(language);
   return import(
     /* webpackChunkName: '[request]' */
     './translations/' + language
@@ -24,13 +24,14 @@ export function translate() {
   return counterpart.apply(null, arguments);
 }
 
-function getLanguage() {
-  const languageFull = navigator.language.toLowerCase() || 'en';
+function getLanguage(language) {
+  if (!language) language = window.localStorage && localStorage.getItem('_cs_language');
+  const languageFull = language || navigator.language.toLowerCase() || 'en';
   const languageShort = languageFull.split('-')[0];
-  return languages.filter((full) => {
+  return languages.find((full) => {
     const short = full.split('-')[0];
     return full === languageFull || short === languageShort;
-  })[0] || 'en';
+  }) || 'en';
 }
 
 export default {

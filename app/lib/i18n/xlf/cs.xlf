@@ -1067,6 +1067,10 @@ Bude to převedeno na %(toSymbol)s, a zasláno
         <source>Please increase the gas limit</source>
         <target>Zadejte prosím limit plynu</target>
       </trans-unit>
+      <trans-unit id="Language">
+        <source>Language</source>
+        <target>Jazyk</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

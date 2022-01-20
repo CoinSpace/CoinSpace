@@ -1067,6 +1067,10 @@ Sie werden in %(toSymbol)s konvertiert und an
         <source>Please increase the gas limit</source>
         <target>Bitte erhöhen Sie das Gas-Limit</target>
       </trans-unit>
+      <trans-unit id="Language">
+        <source>Language</source>
+        <target>Sprache</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

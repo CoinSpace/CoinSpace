@@ -67,7 +67,7 @@ export default function(el) {
     });
     ractive.pinWidget.on('back', () => {
       LS.reset();
-      emitter.emit('change-auth-step', 'choose');
+      location.reload();
     });
   };
 

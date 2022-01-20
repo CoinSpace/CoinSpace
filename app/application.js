@@ -9,6 +9,8 @@ import querystring from 'querystring';
 import { showError } from 'widgets/modals/flash';
 import showTouchIdSetup from 'widgets/touch-id-setup';
 import { fadeIn } from 'lib/transitions/fade.js';
+import details from 'lib/wallet/details';
+import i18n from 'lib/i18n';
 
 window.initCSApp = async function() {
 
@@ -53,9 +55,11 @@ window.initCSApp = async function() {
     return showError({ message: err.message });
   });
 
-  emitter.once('auth-success', (pin) => {
+  emitter.once('auth-success', async (pin) => {
     window.scrollTo(0, 0);
     if (process.env.BUILD_TYPE === 'phonegap') window.Zendesk.setAnonymousIdentity();
+    await setLanguage();
+
     const frame = initFrame(appEl);
     if (pin && touchId.isAvailable()) {
       const touchIdSetupWidget = showTouchIdSetup({ append: true, pin });
@@ -119,6 +123,14 @@ window.initCSApp = async function() {
     if (coin || network) { // legacy
       const cryptoId = `${coin || network}@${coin || network}`;
       return LS.setCryptoId(cryptoId);
+    }
+  }
+
+  async function setLanguage() {
+    const language = i18n.getLanguage(details.get('systemInfo').language);
+    if (language !== i18n.getLanguage()) {
+      await i18n.loadTranslation(language);
+      localStorage.setItem('_cs_language', language);
     }
   }
 

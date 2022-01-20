@@ -1067,6 +1067,10 @@ Biće konvertovano u %(toSymbol)s i poslato na
         <source>Please increase the gas limit</source>
         <target>Povećajte limit goriva za transakciju</target>
       </trans-unit>
+      <trans-unit id="Language">
+        <source>Language</source>
+        <target>Jezik</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
