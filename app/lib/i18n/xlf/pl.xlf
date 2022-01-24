@@ -439,10 +439,6 @@
         <source>This will transfer all coins from the paper wallet address to your wallet.</source>
         <target>Spowoduje to przeniesienie wszystkich monet z adresu portfela papierowego do twojego portfela.</target>
       </trans-unit>
-      <trans-unit id="This private key has no coins for transfer.">
-        <source>This private key has no coins for transfer.</source>
-        <target>Ten klucz prywatny nie ma żadnych coinów do transferu.</target>
-      </trans-unit>
       <trans-unit id="Invalid private key">
         <source>Invalid private key</source>
         <target>Nieprawidłowy klucz prywatny</target>
@@ -498,10 +494,6 @@
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
         <target>Wprowadź Limit gazu większy od zera</target>
-      </trans-unit>
-      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
-        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
-        <target>Nie masz wystarczającej ilości funduszy, aby zapłacić opłatę transakcyjną (%(required)s).</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1070,6 +1062,14 @@ Zostanie przeliczony na %(toSymbol)s, i wysłany do
       <trans-unit id="Language">
         <source>Language</source>
         <target>Język</target>
+      </trans-unit>
+      <trans-unit id="This private key has no funds for transfer.">
+        <source>This private key has no funds for transfer.</source>
+        <target>Ten klucz prywatny nie ma żadnych środków, które można przesłać.</target>
+      </trans-unit>
+      <trans-unit id="Not enough funds to pay transaction fee (:required).">
+        <source>Not enough funds to pay transaction fee (%(required)s).</source>
+        <target>Nie masz wystarczającej ilości środków, aby pokryć opłatę transakcyjną (%(required)s).</target>
       </trans-unit>
     </body>
   </file>

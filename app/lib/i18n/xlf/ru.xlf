@@ -439,10 +439,6 @@
         <source>This will transfer all coins from the paper wallet address to your wallet.</source>
         <target>Это переведет все монеты с бумажного кошелька на ваш кошелек.</target>
       </trans-unit>
-      <trans-unit id="This private key has no coins for transfer.">
-        <source>This private key has no coins for transfer.</source>
-        <target>У этого приватного ключа нет монет для передачи.</target>
-      </trans-unit>
       <trans-unit id="Invalid private key">
         <source>Invalid private key</source>
         <target>Неверный приватный ключ</target>
@@ -498,10 +494,6 @@
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
         <target>Пожалуйста, введите Лимит Газа больше нуля</target>
-      </trans-unit>
-      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
-        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
-        <target>У вас недостаточно средств для оплаты транзакции (%(required)s).</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1070,6 +1062,14 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Language">
         <source>Language</source>
         <target>Язык</target>
+      </trans-unit>
+      <trans-unit id="This private key has no funds for transfer.">
+        <source>This private key has no funds for transfer.</source>
+        <target>Этот закрытый ключ не имеет средств для перевода.</target>
+      </trans-unit>
+      <trans-unit id="Not enough funds to pay transaction fee (:required).">
+        <source>Not enough funds to pay transaction fee (%(required)s).</source>
+        <target>Недостаточно средств для оплаты комиссии транзакции (%(required)s).</target>
       </trans-unit>
     </body>
   </file>

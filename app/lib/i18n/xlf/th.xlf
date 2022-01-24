@@ -439,10 +439,6 @@
         <source>This will transfer all coins from the paper wallet address to your wallet.</source>
         <target>การดำเนินการนี้จะถ่ายโอนเหรียญทั้งหมดจากที่อยู่กระเป๋าเงินกระดาษไปยังกระเป๋าเงินของคุณ</target>
       </trans-unit>
-      <trans-unit id="This private key has no coins for transfer.">
-        <source>This private key has no coins for transfer.</source>
-        <target>คีย์ส่วนตัวนี้ไม่มีเหรียญสำหรับถ่ายโอน</target>
-      </trans-unit>
       <trans-unit id="Invalid private key">
         <source>Invalid private key</source>
         <target>คีย์ส่วนตัวไม่ถูกต้อง</target>
@@ -498,10 +494,6 @@
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
         <target>โปรดป้อนจำนวนก๊าซสูงสุดที่มีค่ามากกว่าศูนย์</target>
-      </trans-unit>
-      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
-        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
-        <target>คุณไม่มีเงิน เพียงพอที่จะชำระค่าธรรมเนียมธุรกรรม (%(required)s)</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1070,6 +1062,14 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Language">
         <source>Language</source>
         <target>ภาษา</target>
+      </trans-unit>
+      <trans-unit id="This private key has no funds for transfer.">
+        <source>This private key has no funds for transfer.</source>
+        <target>คีย์ส่วนตัวนี้ไม่มีเงินสำหรับถ่ายโอน</target>
+      </trans-unit>
+      <trans-unit id="Not enough funds to pay transaction fee (:required).">
+        <source>Not enough funds to pay transaction fee (%(required)s).</source>
+        <target>ไม่มีเงินเพียงพอที่จะชำระค่าธรรมเนียมธุรกรรม (%(required)s)</target>
       </trans-unit>
     </body>
   </file>

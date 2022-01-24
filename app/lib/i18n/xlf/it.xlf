@@ -439,10 +439,6 @@
         <source>This will transfer all coins from the paper wallet address to your wallet.</source>
         <target>Trasferirà tutti i coin dall'indirizzo del portafoglio carta al tuo portafoglio.</target>
       </trans-unit>
-      <trans-unit id="This private key has no coins for transfer.">
-        <source>This private key has no coins for transfer.</source>
-        <target>Questa chiave privata non ha coin da trasferire.</target>
-      </trans-unit>
       <trans-unit id="Invalid private key">
         <source>Invalid private key</source>
         <target>Chiave privata non valida</target>
@@ -498,10 +494,6 @@
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
         <target>Per favore, inserisci un limite di gas superiore a zero</target>
-      </trans-unit>
-      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
-        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
-        <target>Non hai abbastanza fondi per pagare i costi della transazione (%(required)s).</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1070,6 +1062,14 @@ Sarà convertito in %(toSymbol)s, e inviato a
       <trans-unit id="Language">
         <source>Language</source>
         <target>Lingua</target>
+      </trans-unit>
+      <trans-unit id="This private key has no funds for transfer.">
+        <source>This private key has no funds for transfer.</source>
+        <target>Questa chiave privata non ha fondi da trasferire.</target>
+      </trans-unit>
+      <trans-unit id="Not enough funds to pay transaction fee (:required).">
+        <source>Not enough funds to pay transaction fee (%(required)s).</source>
+        <target>I fondi non sono sufficienti per pagare i costi della transazione (%(required)s).</target>
       </trans-unit>
     </body>
   </file>

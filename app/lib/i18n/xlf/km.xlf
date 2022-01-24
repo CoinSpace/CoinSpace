@@ -439,10 +439,6 @@
         <source>This will transfer all coins from the paper wallet address to your wallet.</source>
         <target>ការណ៍នេះនឹងផ្ទេរកាក់ទាំងអស់ពីអាសយដ្ឋានកាបូបក្រដាសប្រាក់ទៅកាបូបរបស់អ្នក។</target>
       </trans-unit>
-      <trans-unit id="This private key has no coins for transfer.">
-        <source>This private key has no coins for transfer.</source>
-        <target>កូនសោឯកជននេះមិនមានកាក់សម្រាប់ផ្ទេរទេ។</target>
-      </trans-unit>
       <trans-unit id="Invalid private key">
         <source>Invalid private key</source>
         <target>កូនសោឯកជនមិនត្រឹមត្រូវ</target>
@@ -498,10 +494,6 @@
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
         <target>សូមបញ្ចូលកម្រិតហ្គាសធំជាងសូន្យ</target>
-      </trans-unit>
-      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
-        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
-        <target>អ្នកមិនមានទឹកប្រាក់ គ្រប់គ្រាន់ដើម្បីបង់ថ្លៃប្រតិបត្តិការទេ (%(required)s) ។</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1070,6 +1062,14 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Language">
         <source>Language</source>
         <target>ភាសា</target>
+      </trans-unit>
+      <trans-unit id="This private key has no funds for transfer.">
+        <source>This private key has no funds for transfer.</source>
+        <target>សោឯកជននេះមិនមានមូលនិធិសម្រាប់ផ្ទេរទេ។</target>
+      </trans-unit>
+      <trans-unit id="Not enough funds to pay transaction fee (:required).">
+        <source>Not enough funds to pay transaction fee (%(required)s).</source>
+        <target>មិនមានថវិកាគ្រប់គ្រាន់ដើម្បីបង់ថ្លៃប្រតិបត្តិការទេ (%(required)s)។</target>
       </trans-unit>
     </body>
   </file>

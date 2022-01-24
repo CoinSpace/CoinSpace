@@ -439,10 +439,6 @@
         <source>This will transfer all coins from the paper wallet address to your wallet.</source>
         <target>Dette vil overføre alle mynter fra papirlommebokadressen til lommeboken din.</target>
       </trans-unit>
-      <trans-unit id="This private key has no coins for transfer.">
-        <source>This private key has no coins for transfer.</source>
-        <target>Denne private nøkkelen har ingen mynter som kan overføres.</target>
-      </trans-unit>
       <trans-unit id="Invalid private key">
         <source>Invalid private key</source>
         <target>Ugyldig privat nøkkel</target>
@@ -498,10 +494,6 @@
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
         <target>Oppgi gassgrense høyere enn null</target>
-      </trans-unit>
-      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
-        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
-        <target>Du har ikke nok til å betale transaksjonsavgiften (%(required)s).</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1070,6 +1062,14 @@ Den konverteres til %(toSymbol)s og sendes til
       <trans-unit id="Language">
         <source>Language</source>
         <target>Språk</target>
+      </trans-unit>
+      <trans-unit id="This private key has no funds for transfer.">
+        <source>This private key has no funds for transfer.</source>
+        <target>Denne private nøkkelen har ingen penger som kan overføres.</target>
+      </trans-unit>
+      <trans-unit id="Not enough funds to pay transaction fee (:required).">
+        <source>Not enough funds to pay transaction fee (%(required)s).</source>
+        <target>Ikke nok penger til å betale transaksjonsgebyret (%(required)s).</target>
       </trans-unit>
     </body>
   </file>

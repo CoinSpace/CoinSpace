@@ -96,10 +96,9 @@ export async function validateSend(options) {
       });
       // eslint-disable-next-line max-len
     } else if (/Insufficient funds for token transaction/.test(err.message) && ['ethereum', 'binance-smart-chain'].includes(wallet.crypto.platform)) {
-      // eslint-disable-next-line max-len
       showError({
         title: translate('Uh Oh...'),
-        message: translate('You do not have enough funds to pay transaction fee (:required).', {
+        message: translate('Not enough funds to pay transaction fee (:required).', {
           required: `${toUnitString(err.required, wallet.platformCrypto.decimals)} ${wallet.platformCrypto.symbol}`,
         }),
       });

@@ -438,10 +438,6 @@
         <source>This will transfer all coins from the paper wallet address to your wallet.</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="This private key has no coins for transfer.">
-        <source>This private key has no coins for transfer.</source>
-        <target></target>
-      </trans-unit>
       <trans-unit id="Invalid private key">
         <source>Invalid private key</source>
         <target></target>
@@ -496,10 +492,6 @@
       </trans-unit>
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
-        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
         <target></target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
@@ -1066,6 +1058,14 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Language">
         <source>Language</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="This private key has no funds for transfer.">
+        <source>This private key has no funds for transfer.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Not enough funds to pay transaction fee (:required).">
+        <source>Not enough funds to pay transaction fee (%(required)s).</source>
         <target></target>
       </trans-unit>
     </body>

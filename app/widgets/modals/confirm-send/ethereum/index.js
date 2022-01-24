@@ -4,6 +4,7 @@ import { showInfo, showError } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
 import { unlock, lock } from 'lib/wallet/security';
 import content from './_content.ract';
+import { toUnitString } from 'lib/convert';
 
 function open(options) {
 
@@ -25,6 +26,14 @@ function open(options) {
         tx = createTx();
       } catch (err) {
         ractive.set('isLoading', false);
+        if (/Insufficient funds for token transaction/.test(err.message)) {
+          return showInfo({
+            title: translate('Insufficient funds'),
+            message: translate('Not enough funds to pay transaction fee (:required).', {
+              required: `${toUnitString(err.required, wallet.platformCrypto.decimals)} ${wallet.platformCrypto.symbol}`,
+            }),
+          });
+        }
         if (/Insufficient funds/.test(err.message)) return showInfo({ title: translate('Insufficient funds') });
         return handleTransactionError(err);
       }

@@ -77,10 +77,7 @@ export default function(el) {
     const wallet = CS.getWallet();
     ractive.set('isEOS', wallet.crypto.platform === 'eos');
     ractive.set('walletName', wallet.crypto.name);
-    if (['ethereum', 'binance-smart-chain'].includes(wallet.crypto.platform) && wallet.crypto.type === 'token') {
-      ractive.set('isEnabledImport', false);
-      ractive.set('isEnabledExport', false);
-    } else if (wallet.crypto.platform === 'eos') {
+    if (wallet.crypto.platform === 'eos') {
       ractive.set('isEnabledImport', false);
       ractive.set('isEnabledExport', true);
     } else if (wallet.crypto.platform === 'monero') {

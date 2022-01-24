@@ -40,7 +40,7 @@ function open() {
     wallet.getImportTxOptions(privateKey).then((importTxOptions) => {
       if (parseFloat(importTxOptions.amount) === 0) {
         ractive.set('isLoading', false);
-        return showInfo({ message: translate('This private key has no coins for transfer.') });
+        return showInfo({ message: translate('This private key has no funds for transfer.') });
       }
       if (wallet.crypto._id === 'bitcoin-cash@bitcoin-cash') {
         importTxOptions.to = wallet.toLegacyAddress(to);

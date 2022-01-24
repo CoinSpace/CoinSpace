@@ -439,10 +439,6 @@
         <source>This will transfer all coins from the paper wallet address to your wallet.</source>
         <target>Hierdoor worden alle munten overgebracht van het adres van de papieren portemonnee naar uw portemonnee.</target>
       </trans-unit>
-      <trans-unit id="This private key has no coins for transfer.">
-        <source>This private key has no coins for transfer.</source>
-        <target>Deze privé code heeft geen munten om over te brengen.</target>
-      </trans-unit>
       <trans-unit id="Invalid private key">
         <source>Invalid private key</source>
         <target>Ongeldige privé code</target>
@@ -498,10 +494,6 @@
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
         <target>Voer een gaslimiet groter dan nul in</target>
-      </trans-unit>
-      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
-        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
-        <target>U hebt niet genoeg om de transactiekosten te kunnen betalen (%(required)s).</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1070,6 +1062,14 @@ Het zal worden geconverteerd in %(toSymbol)s, en worden verzonden naar
       <trans-unit id="Language">
         <source>Language</source>
         <target>Taal</target>
+      </trans-unit>
+      <trans-unit id="This private key has no funds for transfer.">
+        <source>This private key has no funds for transfer.</source>
+        <target>De privé code heeft geen fondsen die moeten worden overgebracht.</target>
+      </trans-unit>
+      <trans-unit id="Not enough funds to pay transaction fee (:required).">
+        <source>Not enough funds to pay transaction fee (%(required)s).</source>
+        <target>U hebt niet genoeg fondsen om de transactiekosten te kunnen betalen (%(required)s).</target>
       </trans-unit>
     </body>
   </file>

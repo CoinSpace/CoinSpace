@@ -439,10 +439,6 @@
         <source>This will transfer all coins from the paper wallet address to your wallet.</source>
         <target>모든 코인을 종이 월렛 주소에서 여러분의 월렛으로 이체합니다. </target>
       </trans-unit>
-      <trans-unit id="This private key has no coins for transfer.">
-        <source>This private key has no coins for transfer.</source>
-        <target>이 개인키는 이체할 코인이 없습니다.</target>
-      </trans-unit>
       <trans-unit id="Invalid private key">
         <source>Invalid private key</source>
         <target>유효하지 않은 개인키</target>
@@ -498,10 +494,6 @@
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
         <target>가스 한도는 0보다 커야 합니다</target>
-      </trans-unit>
-      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
-        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
-        <target>이 부족해 거래 수수료(%(required)s)를 지급할 수 없습니다.</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1070,6 +1062,14 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Language">
         <source>Language</source>
         <target>언어</target>
+      </trans-unit>
+      <trans-unit id="This private key has no funds for transfer.">
+        <source>This private key has no funds for transfer.</source>
+        <target>이 개인키에는 이체할 자금이 없습니다.</target>
+      </trans-unit>
+      <trans-unit id="Not enough funds to pay transaction fee (:required).">
+        <source>Not enough funds to pay transaction fee (%(required)s).</source>
+        <target>거래 수수료(%(required)s)를 지급할 자금이 부족합니다.</target>
       </trans-unit>
     </body>
   </file>

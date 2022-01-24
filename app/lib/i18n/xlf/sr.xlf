@@ -439,10 +439,6 @@
         <source>This will transfer all coins from the paper wallet address to your wallet.</source>
         <target>Ovim će se svi novčići prebaciti sa adrese papirnog novčanika u Vaš novčanik.</target>
       </trans-unit>
-      <trans-unit id="This private key has no coins for transfer.">
-        <source>This private key has no coins for transfer.</source>
-        <target>Ovaj tajni ključ nema novčiće za transfer.</target>
-      </trans-unit>
       <trans-unit id="Invalid private key">
         <source>Invalid private key</source>
         <target>Nevažeći tajni ključ</target>
@@ -498,10 +494,6 @@
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
         <target>Molimo unesite vrednost Limita goriva veću od nule</target>
-      </trans-unit>
-      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
-        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
-        <target>Nemate dovoljno sredstava da biste platili proviziju na transakciju (%(required)s).</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1070,6 +1062,14 @@ Biće konvertovano u %(toSymbol)s i poslato na
       <trans-unit id="Language">
         <source>Language</source>
         <target>Jezik</target>
+      </trans-unit>
+      <trans-unit id="This private key has no funds for transfer.">
+        <source>This private key has no funds for transfer.</source>
+        <target>Ovaj privatni ključ nema na raspolaganju sredstva za prebacivanje.</target>
+      </trans-unit>
+      <trans-unit id="Not enough funds to pay transaction fee (:required).">
+        <source>Not enough funds to pay transaction fee (%(required)s).</source>
+        <target>Nema sredstava za plaćanje provizije za transakciju (%(required)s).</target>
       </trans-unit>
     </body>
   </file>

@@ -439,10 +439,6 @@
         <source>This will transfer all coins from the paper wallet address to your wallet.</source>
         <target>Bu işlem, tüm coin'leri kağıt cüzdan adresinizden cüzdanınıza aktaracak.</target>
       </trans-unit>
-      <trans-unit id="This private key has no coins for transfer.">
-        <source>This private key has no coins for transfer.</source>
-        <target>Bu özel anahtarda, aktarılacak coin yok.</target>
-      </trans-unit>
       <trans-unit id="Invalid private key">
         <source>Invalid private key</source>
         <target>Geçersiz özel anahtar</target>
@@ -498,10 +494,6 @@
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
         <target>Lütfen sıfırdan büyük bir Gas Limiti girin</target>
-      </trans-unit>
-      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
-        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
-        <target>İşlem ücretini (%(required)s) ödeyebilecek yeterli fonunuz yok.</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1070,6 +1062,14 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Language">
         <source>Language</source>
         <target>Dilim</target>
+      </trans-unit>
+      <trans-unit id="This private key has no funds for transfer.">
+        <source>This private key has no funds for transfer.</source>
+        <target>Bu özel anahtarda, aktarılacak fon yok.</target>
+      </trans-unit>
+      <trans-unit id="Not enough funds to pay transaction fee (:required).">
+        <source>Not enough funds to pay transaction fee (%(required)s).</source>
+        <target>İşlem ücretini (%(required)s) ödeyebilecek yeterli fon yok.</target>
       </trans-unit>
     </body>
   </file>

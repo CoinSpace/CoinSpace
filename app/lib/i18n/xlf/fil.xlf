@@ -439,10 +439,6 @@
         <source>This will transfer all coins from the paper wallet address to your wallet.</source>
         <target>Ililipat nito lahat ng mga coin mula sa address ng papel na wallet papunta sa wallet mo.</target>
       </trans-unit>
-      <trans-unit id="This private key has no coins for transfer.">
-        <source>This private key has no coins for transfer.</source>
-        <target>Ang pribadong key na ito ay walang coin na ililipat.</target>
-      </trans-unit>
       <trans-unit id="Invalid private key">
         <source>Invalid private key</source>
         <target>Hindi balidong pribadong key</target>
@@ -498,10 +494,6 @@
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
         <target>Pakilagay ang Limitasyon ng Gas na mas malaki sa zero</target>
-      </trans-unit>
-      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
-        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
-        <target>Hindi sapat ang iyong pondong para pambayad ng bayad sa transaksiyon (%(required)s).</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1070,6 +1062,14 @@ Iko-convert ito sa %(toSymbol)s, at ipapadala sa
       <trans-unit id="Language">
         <source>Language</source>
         <target>Wika</target>
+      </trans-unit>
+      <trans-unit id="This private key has no funds for transfer.">
+        <source>This private key has no funds for transfer.</source>
+        <target>Ang pribadong key na ito ay walang mga pondo para sa paglipat.</target>
+      </trans-unit>
+      <trans-unit id="Not enough funds to pay transaction fee (:required).">
+        <source>Not enough funds to pay transaction fee (%(required)s).</source>
+        <target>Walang sapat na pondo para bayaran ang bayarin ng transaksyon (%(required)s).</target>
       </trans-unit>
     </body>
   </file>

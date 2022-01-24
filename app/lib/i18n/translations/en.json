@@ -108,7 +108,6 @@
   "Transfer": "Transfer",
   "Private key": "Private key",
   "This will transfer all coins from the paper wallet address to your wallet.": "This will transfer all coins from the paper wallet address to your wallet.",
-  "This private key has no coins for transfer.": "This private key has no coins for transfer.",
   "Invalid private key": "Invalid private key",
   "Insufficient funds": "Insufficient funds",
   "Warning!": "Warning!",
@@ -123,7 +122,6 @@
   "Add": "Add",
   "Token": "Token",
   "Please enter Gas Limit greater than zero": "Please enter Gas Limit greater than zero",
-  "You do not have enough funds to pay transaction fee (:required).": "You do not have enough funds to pay transaction fee (%(required)s).",
   "Copy to Clipboard": "Copy to Clipboard",
   "Copied!": "Copied!",
   "Please enter an address other than your wallet address": "Please enter an address other than your wallet address",
@@ -264,5 +262,7 @@
   "Use your wallet address": "Use your wallet address",
   "Confirm exchange": "Confirm exchange",
   "Please increase the gas limit": "Please increase the gas limit",
-  "Language": "Language"
+  "Language": "Language",
+  "This private key has no funds for transfer.": "This private key has no funds for transfer.",
+  "Not enough funds to pay transaction fee (:required).": "Not enough funds to pay transaction fee (%(required)s)."
 }

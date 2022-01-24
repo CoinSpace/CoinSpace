@@ -439,10 +439,6 @@
         <source>This will transfer all coins from the paper wallet address to your wallet.</source>
         <target>Tímto převedete všechny mince z adresy papírové peněženky do své peněženky.</target>
       </trans-unit>
-      <trans-unit id="This private key has no coins for transfer.">
-        <source>This private key has no coins for transfer.</source>
-        <target>Tento privátní klíč nemá žádné mince, které by bylo možno převést.</target>
-      </trans-unit>
       <trans-unit id="Invalid private key">
         <source>Invalid private key</source>
         <target>Neplatný privátní klíč</target>
@@ -498,10 +494,6 @@
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
         <target>Zadejte prosím limit plynu vyšší než nula</target>
-      </trans-unit>
-      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
-        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
-        <target>Nemáte dostatek prostředků v měně na zaplacení transakčního poplatku (%(required)s).</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1070,6 +1062,14 @@ Bude to převedeno na %(toSymbol)s, a zasláno
       <trans-unit id="Language">
         <source>Language</source>
         <target>Jazyk</target>
+      </trans-unit>
+      <trans-unit id="This private key has no funds for transfer.">
+        <source>This private key has no funds for transfer.</source>
+        <target>Tento soukromý klíč nemá žádné prostředky k převedení.</target>
+      </trans-unit>
+      <trans-unit id="Not enough funds to pay transaction fee (:required).">
+        <source>Not enough funds to pay transaction fee (%(required)s).</source>
+        <target>Není dostatek prostředků na zaplacení poplatku za transakci (%(required)s).</target>
       </trans-unit>
     </body>
   </file>

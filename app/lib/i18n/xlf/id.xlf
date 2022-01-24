@@ -439,10 +439,6 @@
         <source>This will transfer all coins from the paper wallet address to your wallet.</source>
         <target>Ini akan mentransfer seluruh coin dari address paper wallet ke wallet anda.</target>
       </trans-unit>
-      <trans-unit id="This private key has no coins for transfer.">
-        <source>This private key has no coins for transfer.</source>
-        <target>Private key ini tidak memiliki coin untuk ditransfer</target>
-      </trans-unit>
       <trans-unit id="Invalid private key">
         <source>Invalid private key</source>
         <target>Private key tidak valid</target>
@@ -498,10 +494,6 @@
       <trans-unit id="Please enter Gas Limit greater than zero">
         <source>Please enter Gas Limit greater than zero</source>
         <target>Silahkan isi Limit Gas lebih dari nol</target>
-      </trans-unit>
-      <trans-unit id="You do not have enough funds to pay transaction fee (:required).">
-        <source>You do not have enough funds to pay transaction fee (%(required)s).</source>
-        <target>Dana anda tidak cukup untuk membayar biaya transaksi (%(required)s).</target>
       </trans-unit>
       <trans-unit id="Copy to Clipboard">
         <source>Copy to Clipboard</source>
@@ -1070,6 +1062,14 @@ itu akan dikonversi ke %(toSymbol)s, dan dikirim ke
       <trans-unit id="Language">
         <source>Language</source>
         <target>Bahasa</target>
+      </trans-unit>
+      <trans-unit id="This private key has no funds for transfer.">
+        <source>This private key has no funds for transfer.</source>
+        <target>Kunci pribadi ini tidak punya dana untuk transfer.</target>
+      </trans-unit>
+      <trans-unit id="Not enough funds to pay transaction fee (:required).">
+        <source>Not enough funds to pay transaction fee (%(required)s).</source>
+        <target>Tidak cukup dana untuk membayar biaya transaksi (%(required)s).</target>
       </trans-unit>
     </body>
   </file>
