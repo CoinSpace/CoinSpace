@@ -98,7 +98,7 @@ jobs:
             DISTRIBUTION: appx-dev
             BUILD_TYPE: electron
             SENTRY_KEY: SENTRY_DSN_WIN
-          - os: macos-10.15
+          - os: macos-11
             node: 14
             DISTRIBUTION: ios
             BUILD_TYPE: phonegap
