@@ -35,7 +35,7 @@ app.use(Sentry.Handlers.errorHandler());
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
-  console.error(err.stack || err.message || err);
+  console.log(err.stack || err.message || err);
   const status = err.status || 500;
 
   res.status(status);
