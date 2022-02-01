@@ -42,8 +42,7 @@ async function enable(pin) {
     try {
       attestation = await startAttestation(options);
     } catch (err) {
-      console.error(err);
-      throw new Error('touch_id_error');
+      handleError(err);
     }
     await request({
       url: `${process.env.SITE_URL}api/v3/platform/attestation`,
@@ -96,8 +95,7 @@ async function publicToken(widget) {
   try {
     assertion = await startAssertion(options);
   } catch (err) {
-    console.error(err);
-    throw new Error('touch_id_error');
+    handleError(err);
   }
   widget && widget.loading();
   const res = await request({
@@ -119,8 +117,7 @@ async function privateToken() {
   try {
     assertion = await startAssertion(options);
   } catch (err) {
-    console.error(err);
-    throw new Error('touch_id_error');
+    handleError(err);
   }
   const res = await request({
     url: `${process.env.SITE_URL}api/v3/token/private/platform`,
@@ -138,6 +135,13 @@ export function isEnabled() {
     return !!LS.getPin();
   }
   return !!LS.isFidoTouchIdEnabled();
+}
+
+function handleError(err) {
+  if (!err.message.startsWith('The operation either timed out or was not allowed.')) {
+    console.error(err);
+  }
+  throw new Error('touch_id_error');
 }
 
 export default {

@@ -121,7 +121,7 @@ function validate() {
 function handleError(err) {
   if (err.message === 'hardware_not_supported') {
     notSupportedError();
-  } else {
+  } else if (!err.message.startsWith('The operation either timed out or was not allowed.')) {
     console.error(err);
   }
   throw new Error('hardware_error');
