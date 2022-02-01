@@ -55,7 +55,7 @@ async function updatePrices() {
   const logs = ['SLOW PRICES UPDATE'];
   const timeout = setTimeout(() => {
     console.error(logs.join('\n'));
-  }, 60 * 1000 /* 1 min */);
+  }, 10 * 60 * 1000 /* 10 min */);
   const PER_PAGE = 500;
   let page = 0;
   let cryptos;
@@ -136,7 +136,7 @@ async function updateRank() {
   const logs = ['SLOW RANK UPDATE'];
   const timeout = setTimeout(() => {
     console.error(logs.join('\n'));
-  }, 60 * 1000 /* 1 min */);
+  }, 10 * 60 * 1000 /* 10 min */);
   const PER_PAGE = 5000;
   let page = 0;
   let list;
