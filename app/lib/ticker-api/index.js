@@ -16,14 +16,14 @@ function init(cryptos) {
     },
     method: 'get',
     seed: 'public',
-  }).catch((err) => {
-    console.error(err);
-    rates = {};
-    emitter.emit('rates-updated', rates);
   }).then((data) => {
     for (const item of data) {
       rates[item._id] = item.prices;
     }
+    emitter.emit('rates-updated', rates);
+  }, (err) => {
+    console.error(err);
+    rates = {};
     emitter.emit('rates-updated', rates);
   });
 }
