@@ -23,7 +23,7 @@ export default function(el) {
   });
 
   ractive.on('privacy', () => {
-    window.safeOpen('https://coin.space/coinprivacypolicy/', '_blank');
+    window.safeOpen('https://coin.space/privacy-policy/', '_blank');
   });
 
   ractive.on('confirmUpdate', updater.confirmUpdate);
