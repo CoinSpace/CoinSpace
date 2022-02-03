@@ -23,7 +23,7 @@ Supported coins:
 - Bitcoin SV. Removed at block 722524.
 - Ethereum and ERC20 tokens
 - Litecoin
-- Ripple
+- XRP
 - Stellar
 - EOS
 - Dogecoin
