@@ -12,7 +12,8 @@ function open(options) {
   const feesData = {};
   if (importTxOptions) {
     feesData.feeName = 'default';
-    const estimates = wallet.estimateFees(toAtom(data.amount), importTxOptions.unspents);
+    const { unspents, privateKey } = importTxOptions;
+    const estimates = wallet.estimateFees(toAtom(data.amount), { unspents, privateKey });
     const fees = estimates.map((item) => {
       return {
         ...item,
