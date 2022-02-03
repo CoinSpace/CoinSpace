@@ -2,7 +2,6 @@ import _ from 'lodash';
 import { encrypt, decrypt } from 'lib/encryption';
 import request from 'lib/request';
 import LS from './localStorage';
-import seeds from './seeds';
 import tetherToken from '@coinspace/crypto-db/crypto/tether@ethereum.json';
 
 const state = {
@@ -46,7 +45,7 @@ function set(key, value) {
 }
 
 async function _initDetails() {
-  let defaultValue = {
+  const defaultValue = {
     systemInfo: { preferredCurrency: 'USD' },
     userInfo: {
       username: '',
@@ -56,19 +55,6 @@ async function _initDetails() {
       tetherToken,
     ],
   };
-
-  if (LS.isRegisteredLegacy()) {
-    const legacy = await request({
-      url: `${process.env.SITE_URL}api/v1/details?id=${LS.getCredentials().id}`,
-    });
-    if (legacy) {
-      defaultValue = JSON.parse(decrypt(legacy, seeds.get('private')));
-      if (defaultValue.userInfo) {
-        delete defaultValue.userInfo.firstName;
-        delete defaultValue.userInfo.lastName;
-      }
-    }
-  }
   return _save(defaultValue);
 }
 

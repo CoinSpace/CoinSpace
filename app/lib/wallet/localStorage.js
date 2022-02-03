@@ -101,17 +101,6 @@ function renameTokenId(idFrom, idTo) {
   }
 }
 
-// DEPRECATED
-function getCredentials() {
-  const credentials = localStorage.getItem('_cs_credentials');
-  return credentials ? JSON.parse(encryption.decrypt(credentials, 'seedCoinspace')) : null;
-}
-
-// DEPRECATED
-function deleteCredentialsLegacy() {
-  localStorage.removeItem('_cs_credentials');
-}
-
 function getPin() {
   const pin = localStorage.getItem('_pin_cs');
   return pin ? encryption.decrypt(pin, 'pinCoinSpace') : null;
@@ -130,10 +119,6 @@ function isRegistered() {
     && !!localStorage.getItem('_cs_details_key');
 }
 
-function isRegisteredLegacy() {
-  return !!getCredentials();
-}
-
 function reset() {
   localStorage.clear();
 }
@@ -148,8 +133,6 @@ function setFidoTouchIdEnabled(value) {
 }
 
 export default {
-  getCredentials, // DEPRECATED
-  deleteCredentialsLegacy, // DEPRECATED
   getPin,
   setPin,
 
@@ -157,7 +140,6 @@ export default {
   setEncryptedSeed,
 
   isRegistered,
-  isRegisteredLegacy,
   getId,
   setId,
   getPinKey,

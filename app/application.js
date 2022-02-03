@@ -43,14 +43,9 @@ window.initCSApp = async function() {
       LS.reset();
       return location.reload();
     }
-    if (err.status === 401) return;
-    // Deprecated start
-    if (err.message === 'user_deleted') {
-      LS.reset();
-      return location.reload();
+    if (err.status === 401) {
+      return;
     }
-    if (err.message === 'auth_failed') return;
-    // Deprecated end
     console.error(`not translated error: ${err.message}`);
     return showError({ message: err.message });
   });

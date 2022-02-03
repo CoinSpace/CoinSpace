@@ -23,7 +23,7 @@ export default function(el) {
   let currentStep = steps.choose;
 
   ractive.on('before-show', () => {
-    if ((LS.isRegistered() || LS.isRegisteredLegacy())) {
+    if (LS.isRegistered()) {
       steps.choose.showPin();
     } else {
       showStep(steps.choose);

@@ -122,9 +122,6 @@ async function registerWallet(pin) {
 }
 
 async function loginWithPin(pin) {
-  if (LS.isRegisteredLegacy()) {
-    return migrateLegacyWallet(pin);
-  }
   const pinHash = crypto.createHmac('sha256', Buffer.from(LS.getPinKey(), 'hex')).update(pin).digest('hex');
   const { publicToken } = await request({
     url: `${process.env.SITE_URL}api/v3/token/public/pin`,
@@ -145,9 +142,6 @@ async function loginWithTouchId(widget) {
     await touchId.phonegap();
     widget && widget.loading();
     const pin = LS.getPin();
-    if (LS.isRegisteredLegacy()) {
-      return migrateLegacyWallet(pin);
-    }
     return loginWithPin(pin);
   } else {
     const { publicToken } = await touchId.publicToken(widget);
@@ -322,25 +316,6 @@ export function switchWallet(crypto) {
 
 export function unsetWallet(crypto) {
   delete state.wallets[crypto._id];
-}
-
-async function migrateLegacyWallet(pin) {
-  await loginWithPinLegacy(pin);
-  await registerWallet(pin);
-  LS.deleteCredentialsLegacy();
-}
-
-// DEPRECATED
-async function loginWithPinLegacy(pin) {
-  const credentials = LS.getCredentials();
-  const { id } = credentials;
-  const encryptedSeed = credentials.seed;
-  const token = await request({
-    url: `${process.env.SITE_URL}api/v1/login`,
-    method: 'post',
-    data: { wallet_id: id, pin },
-  });
-  seeds.set('private', encryption.decrypt(encryptedSeed, token));
 }
 
 function initWalletWithSeed(crypto, seed) {
