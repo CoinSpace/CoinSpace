@@ -9,6 +9,7 @@ import querystring from 'querystring';
 import { showError } from 'widgets/modals/flash';
 import showTouchIdSetup from 'widgets/touch-id-setup';
 import { fadeIn } from 'lib/transitions/fade.js';
+import { translate } from 'lib/i18n';
 import details from 'lib/wallet/details';
 import i18n from 'lib/i18n';
 
@@ -45,6 +46,9 @@ window.initCSApp = async function() {
     }
     if (err.status === 401) {
       return;
+    }
+    if ([406, 500, 503].includes(err.status)) {
+      return showError({ message: translate('Oops! something went wrong. Please try again later.') });
     }
     console.error(`not translated error: ${err.message}`);
     return showError({ message: err.message });
