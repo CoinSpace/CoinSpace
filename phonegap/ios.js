@@ -80,6 +80,7 @@ async function run() {
   };
   updatePlist(path.join(buildPath, 'platforms/ios/Coin/Coin-Info.plist'), update);
 
+  await setProvisionProfile();
   await addWatchApp();
 
   if (process.env.CI) {
@@ -111,15 +112,34 @@ function updatePlist(plistPath, update) {
   }), 'utf-8');
 }
 
+async function setProvisionProfile() {
+  const project = await getXcodeProject();
+  const pbxXCBuildConfigurationSection = project.pbxXCBuildConfigurationSection();
+  Object.keys(pbxXCBuildConfigurationSection).forEach((key) => {
+    const setting = pbxXCBuildConfigurationSection[key].buildSettings;
+    if (!setting) return;
+    if (!setting['PRODUCT_BUNDLE_IDENTIFIER']) return;
+    setting['CODE_SIGN_STYLE'] = 'Manual';
+    setting['DEVELOPMENT_TEAM'] = '3M4KWD4BUU';
+    const { name } = pbxXCBuildConfigurationSection[key];
+    if (setting['PRODUCT_BUNDLE_IDENTIFIER'] === 'com.coinspace.wallet') {
+      if (name === 'Release') {
+        setting['PROVISIONING_PROFILE_SPECIFIER'] = '"com.coinspace.wallet (production)"';
+      } else {
+        setting['PROVISIONING_PROFILE_SPECIFIER'] = 'com.coinspace.wallet';
+      }
+    }
+  });
+  fse.writeFileSync(project.filepath, project.writeSync());
+}
+
 async function addWatchApp() {
   utils.shell('git clone https://github.com/CoinSpace/cs-watchapp-ios.git', { cwd: buildPath });
   utils.shell('cd cs-watchapp-ios && git checkout a749e490e8ba615056240f831d8c8d1c48633e83 -q', { cwd: buildPath });
   utils.shell(`ln -s ${path.resolve(buildPath, 'cs-watchapp-ios/WatchApp')} ./platforms/ios/WatchApp`, { cwd: buildPath });
   utils.shell(`ln -s ${path.resolve(buildPath, 'cs-watchapp-ios/WatchAppExtension')} ./platforms/ios/WatchAppExtension`, { cwd: buildPath });
 
-  const projectPath = path.resolve(buildPath, 'platforms/ios/Coin.xcodeproj/project.pbxproj');
-  const project = xcode.project(projectPath);
-  await util.promisify(project.parse.bind(project))();
+  const project = await getXcodeProject();
 
   const WatchApp = addFolderToProject('WatchApp', path.join(buildPath, 'platforms/ios'), project);
   const WatchAppExtension = addFolderToProject('WatchAppExtension', path.join(buildPath, 'platforms/ios'), project);
@@ -158,37 +178,31 @@ async function addWatchApp() {
   const pbxXCBuildConfigurationSection = project.pbxXCBuildConfigurationSection();
   Object.keys(pbxXCBuildConfigurationSection).forEach((key) => {
     const setting = pbxXCBuildConfigurationSection[key].buildSettings;
-    if (!setting) return false;
-    if (!setting['PRODUCT_BUNDLE_IDENTIFIER']) return false;
+    if (!setting) return;
+    if (!setting['PRODUCT_BUNDLE_IDENTIFIER']) return;
+    if (!['"WatchApp"', '"WatchAppExtension"'].includes(setting['PRODUCT_NAME'])) return;
+
+    const { name } = pbxXCBuildConfigurationSection[key];
 
     setting['CODE_SIGN_STYLE'] = 'Manual';
     setting['DEVELOPMENT_TEAM'] = '3M4KWD4BUU';
+    setting['SDKROOT'] = 'watchos';
+    setting['MARKETING_VERSION'] = pkg.version;
+    setting['CURRENT_PROJECT_VERSION'] = BUILD_NUMBER;
+    setting['SWIFT_VERSION'] = '4.0';
+    setting['TARGETED_DEVICE_FAMILY'] = '4';
+    setting['WATCHOS_DEPLOYMENT_TARGET'] = '4.3';
+    setting['ENABLE_BITCODE'] = 'YES';
 
-    const { name } = pbxXCBuildConfigurationSection[key];
-    if (setting['PRODUCT_NAME'] === '"WatchApp"' || setting['PRODUCT_NAME'] === '"WatchAppExtension"') {
-      setting['SDKROOT'] = 'watchos';
-      setting['MARKETING_VERSION'] = pkg.version;
-      setting['CURRENT_PROJECT_VERSION'] = BUILD_NUMBER;
-      setting['SWIFT_VERSION'] = '4.0';
-      setting['TARGETED_DEVICE_FAMILY'] = '4';
-      setting['WATCHOS_DEPLOYMENT_TARGET'] = '4.3';
-      setting['ENABLE_BITCODE'] = 'YES';
-      if (name === 'Release') {
-        setting['SWIFT_OPTIMIZATION_LEVEL'] = '"-O"';
-        setting['SWIFT_COMPILATION_MODE'] = 'wholemodule';
-        setting['CODE_SIGN_IDENTITY'] = '"iPhone Distribution"';
-      } else {
-        setting['SWIFT_OPTIMIZATION_LEVEL'] = '"-Onone"';
-      }
+    if (name === 'Release') {
+      setting['SWIFT_OPTIMIZATION_LEVEL'] = '"-O"';
+      setting['SWIFT_COMPILATION_MODE'] = 'wholemodule';
+      setting['CODE_SIGN_IDENTITY'] = '"iPhone Distribution"';
+    } else {
+      setting['SWIFT_OPTIMIZATION_LEVEL'] = '"-Onone"';
     }
 
-    if (setting['PRODUCT_BUNDLE_IDENTIFIER'] === 'com.coinspace.wallet') {
-      if (name === 'Release') {
-        setting['PROVISIONING_PROFILE_SPECIFIER'] = '"com.coinspace.wallet (production)"';
-      } else {
-        setting['PROVISIONING_PROFILE_SPECIFIER'] = 'com.coinspace.wallet';
-      }
-    } else if (setting['PRODUCT_NAME'] === '"WatchApp"') {
+    if (setting['PRODUCT_NAME'] === '"WatchApp"') {
       setting['CODE_SIGN_ENTITLEMENTS'] = '"WatchApp/CoinSpace WatchApp.entitlements"';
       setting['ASSETCATALOG_COMPILER_APPICON_NAME'] = 'AppIcon';
       if (name === 'Release') {
@@ -224,13 +238,24 @@ async function addWatchApp() {
     WatchAppExtensionTarget.uuid
   );
 
-  fse.writeFileSync(projectPath, project.writeSync());
+  fse.writeFileSync(project.filepath, project.writeSync());
 
   // add pods
   const watchAppPodfile = fse.readFileSync(path.resolve(buildPath, 'cs-watchapp-ios/WatchAppExtension/Podfile'));
   fse.appendFileSync(path.resolve(buildPath, 'platforms/ios/Podfile'), watchAppPodfile);
   utils.shell('pod install', { cwd: path.join(buildPath, 'platforms/ios') });
   utils.shell('cat Podfile.lock', { cwd: path.join(buildPath, 'platforms/ios') });
+
+  // fix xcconfig
+  fse.writeFileSync(path.join(buildPath, 'platforms/ios/pods-debug.xcconfig'), '#include "Pods/Target Support Files/Pods-Coin/Pods-Coin.debug.xcconfig"');
+  fse.writeFileSync(path.join(buildPath, 'platforms/ios/pods-release.xcconfig'), '#include "Pods/Target Support Files/Pods-Coin/Pods-Coin.release.xcconfig"');
+}
+
+async function getXcodeProject() {
+  const projectPath = path.resolve(buildPath, 'platforms/ios/Coin.xcodeproj/project.pbxproj');
+  const project = xcode.project(projectPath);
+  await util.promisify(project.parse.bind(project))();
+  return project;
 }
 
 process.on('unhandledRejection', (err) => {
