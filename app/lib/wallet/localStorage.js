@@ -123,11 +123,11 @@ function reset() {
   localStorage.clear();
 }
 
-function isFidoTouchIdEnabled() {
+function isTouchIdEnabled() {
   return !!localStorage.getItem('_cs_touchid_enabled');
 }
 
-function setFidoTouchIdEnabled(value) {
+function setTouchIdEnabled(value) {
   if (!value) return localStorage.removeItem('_cs_touchid_enabled');
   return localStorage.setItem('_cs_touchid_enabled', value);
 }
@@ -152,8 +152,8 @@ export default {
   getPublicKey,
   setPublicKey,
   reset,
-  isFidoTouchIdEnabled,
-  setFidoTouchIdEnabled,
+  isTouchIdEnabled,
+  setTouchIdEnabled,
   getCache,
   setCache,
   unsetCache,

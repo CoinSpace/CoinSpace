@@ -139,9 +139,8 @@ async function loginWithPin(pin) {
 
 async function loginWithTouchId(widget) {
   if (process.env.BUILD_TYPE === 'phonegap') {
-    await touchId.phonegap();
+    const pin = await touchId.phonegap();
     widget && widget.loading();
-    const pin = LS.getPin();
     return loginWithPin(pin);
   } else {
     const { publicToken } = await touchId.publicToken(widget);

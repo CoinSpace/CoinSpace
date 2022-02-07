@@ -10,11 +10,7 @@ async function init() {
   try {
     if (process.env.BUILD_TYPE === 'phonegap') {
       isAvailable = await new Promise((resolve) => {
-        if (process.env.BUILD_PLATFORM === 'ios') {
-          window.plugins.touchid.isAvailable(() => resolve(true), () => resolve(false));
-        } else if (process.env.BUILD_PLATFORM.startsWith('android')) {
-          window.Fingerprint.isAvailable(() => resolve(true), () => resolve(false));
-        }
+        window.Fingerprint.isAvailable(() => resolve(true), () => resolve(false));
       });
     } else if (process.env.BUILD_TYPE === 'electron') {
       isAvailable = false;
@@ -30,8 +26,15 @@ async function init() {
 
 async function enable(pin) {
   if (process.env.BUILD_TYPE === 'phonegap') {
-    await phonegap();
-    LS.setPin(pin);
+    await new Promise((resolve, reject) => {
+      window.Fingerprint.registerBiometricSecret({
+        description: process.env.BUILD_PLATFORM === 'ios' ? translate('Scan your fingerprint please') : '',
+        secret: pin,
+        invalidateOnEnrollment: true,
+        fallbackButtonTitle: translate('Enter PIN'),
+        disableBackup: false,
+      }, resolve, reject);
+    });
   } else {
     const options = await request({
       url: `${process.env.SITE_URL}api/v3/platform/attestation`,
@@ -50,38 +53,29 @@ async function enable(pin) {
       data: attestation,
       seed: 'private',
     });
-    LS.setFidoTouchIdEnabled(true);
   }
+  LS.setTouchIdEnabled(true);
 }
 
 async function disable() {
-  if (process.env.BUILD_TYPE === 'phonegap') {
-    LS.setPin(false);
-  } else {
+  if (process.env.BUILD_TYPE !== 'phonegap') {
     await request({
       url: `${process.env.SITE_URL}api/v3/platform`,
       method: 'delete',
       seed: 'private',
     });
-    LS.setFidoTouchIdEnabled(false);
   }
+  LS.setTouchIdEnabled(false);
 }
 
 function phonegap() {
   return new Promise((resolve, reject) => {
     const error = new Error('touch_id_error');
-    if (process.env.BUILD_PLATFORM === 'ios') {
-      window.plugins.touchid.verifyFingerprintWithCustomPasswordFallbackAndEnterPasswordLabel(
-        translate('Scan your fingerprint please'),
-        translate('Enter PIN'),
-        () => resolve(),
-        () => reject(error)
-      );
-    } else if (process.env.BUILD_PLATFORM.startsWith('android')) {
-      window.Fingerprint.show({}, () => resolve(), () => reject(error));
-    } else {
-      reject(error);
-    }
+    window.Fingerprint.loadBiometricSecret({
+      description: process.env.BUILD_PLATFORM === 'ios' ? translate('Scan your fingerprint please') : '',
+      fallbackButtonTitle: translate('Enter PIN'),
+      disableBackup: false,
+    }, (secret) => resolve(secret), () => reject(error));
   });
 }
 
@@ -131,10 +125,7 @@ async function privateToken() {
 
 export function isEnabled() {
   if (!isAvailable) return false;
-  if (process.env.BUILD_TYPE === 'phonegap') {
-    return !!LS.getPin();
-  }
-  return !!LS.isFidoTouchIdEnabled();
+  return !!LS.isTouchIdEnabled();
 }
 
 function handleError(err) {

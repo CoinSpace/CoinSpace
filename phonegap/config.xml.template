@@ -50,9 +50,6 @@
       <uses-feature android:name="android.hardware.camera" android:required="false" />
       <uses-feature android:name="android.hardware.location.gps" android:required="false" />
     </custom-config-file>
-    <preference name="SplashMaintainAspectRatio" value="true" />
-    <preference name="AndroidLaunchMode" value="singleTask"/>
-    <preference name="CustomURLSchemePluginClearsAndroidIntent" value="true"/>
     <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
       <intent-filter>
         <action android:name="android.intent.action.VIEW" />
@@ -121,6 +118,12 @@
         <data android:scheme="monero"/>
       </intent-filter>
     </config-file>
+    <preference name="SplashMaintainAspectRatio" value="true" />
+    <preference name="AndroidLaunchMode" value="singleTask"/>
+    <preference name="AndroidXEnabled" value="true" />
+    <preference name="android-minSdkVersion" value="22" />
+    <preference name="android-targetSdkVersion" value="30" />
+    <preference name="CustomURLSchemePluginClearsAndroidIntent" value="true"/>
   </platform>
   <platform name="ios">
     <icon src="../images/ios/icons/icon-20.png" width="20" height="20" />
@@ -217,12 +220,11 @@
         <string>applinks:coin.space</string>
       </array>
     </edit-config>
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
+    <preference name="SwiftVersion" value="5.0" />
   </platform>
   <preference name="AutoHideSplashScreen" value="false" />
   <preference name="StatusBarBackgroundColor" value="#FFFFFF" />
-  <preference name="android-minSdkVersion" value="22" />
-  <preference name="android-targetSdkVersion" value="30" />
-  <preference name="KeyboardDisplayRequiresUserAction" value="false" />
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="scheme" value="app" />
   <preference name="hostname" value="localhost" />

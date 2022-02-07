@@ -25,8 +25,7 @@ async function run() {
   fse.writeFileSync(path.resolve(buildPath, 'config.xml'), config);
 
   /* eslint-disable max-len */
-  cordova('platform add android@8.1.0');
-  cordova('plugin add cordova-plugin-androidx@3.0.0');
+  cordova('platform add android@10.1.1');
   cordova('plugin add cordova-plugin-androidx-adapter@1.1.3');
   cordova('plugin add cordova-custom-config@5.1.0');
   cordova('plugin add cordova-plugin-geolocation@4.0.2');
@@ -34,16 +33,15 @@ async function run() {
   cordova('plugin add cordova-plugin-dialogs@2.0.2');
   cordova('plugin add cordova-plugin-inappbrowser@4.0.0');
   cordova('plugin add cordova-plugin-x-socialsharing@5.6.8');
-  cordova('plugin add cordova-plugin-fingerprint-aio@3.0.1');
+  cordova('plugin add cordova-plugin-fingerprint-aio@5.0.1');
   cordova('plugin add cordova-plugin-customurlscheme@5.0.1 --variable URL_SCHEME=coinspace');
   cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#4bf28de7fcd6759450f5fd56f2ec28677bc882da');
   cordova('plugin add cordova-plugin-splashscreen@5.0.4');
-  cordova('plugin add cordova-plugin-whitelist@1.3.4');
   cordova('plugin add cordova-plugin-safariviewcontroller@1.6.0');
   cordova('plugin add cordova-plugin-inapp-review@1.1.0 --variable PLAY_CORE_VERSION=1.8.0');
 
   if (process.env.RELEASE) {
-    cordova('build android --release');
+    cordova('build android --release -- --packageType=apk');
     utils.shell(
       'zipalign -f 4 platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk \
       ../deploy/coinspace-release.apk',

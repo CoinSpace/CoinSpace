@@ -35,8 +35,7 @@ export function unlock(wallet) {
           try {
             let privateToken;
             if (process.env.BUILD_TYPE === 'phonegap') {
-              await touchId.phonegap();
-              const pin = LS.getPin();
+              const pin = await touchId.phonegap();
               this.set('isLoading', true);
               privateToken = await _getPrivateTokenByPin(pin, this);
             } else {
