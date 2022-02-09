@@ -2,12 +2,15 @@ import { encrypt, decrypt } from 'lib/encryption';
 import request from 'lib/request';
 
 class Storage {
-  constructor(baseUrl, name, key) {
-    this.url = `${baseUrl}api/v3/storage/${name}`;
+  constructor(baseURL, name, key) {
+    this.name = name;
+    this.baseURL = baseURL;
+    this.url = `api/v3/storage/${name}`;
     this.key = key;
   }
   init() {
     this.pending = request({
+      baseURL: this.baseURL,
       url: this.url,
       method: 'get',
       seed: 'public',
@@ -34,6 +37,7 @@ class Storage {
           return;
         }
         const res = await request({
+          baseURL: this.baseURL,
           url: this.url,
           method: 'put',
           data: {

@@ -4,74 +4,81 @@ import request from 'lib/request';
 import LS from './localStorage';
 import tetherToken from '@coinspace/crypto-db/crypto/tether@ethereum.json';
 
-const state = {
-  details: null,
-};
-
-function init() {
-  return request({
-    url: `${process.env.SITE_URL}api/v3/details`,
-    method: 'get',
-    seed: 'public',
-  }).then((details) => {
-    if (!details.data) {
-      return _initDetails();
-    }
-    return JSON.parse(decrypt(details.data, LS.getDetailsKey()));
-  }).then((details) => {
-    state.details = details;
-  });
-}
-
-function get(key) {
-  if (state.details === null) throw new Error('details not ready');
-  if (!key) {
-    return state.details;
+class Details {
+  constructor(baseURL) {
+    this.baseURL = baseURL;
+    this.url = 'api/v3/details';
   }
-  return state.details[key];
-}
-
-function set(key, value) {
-  if (state.details === null) return Promise.reject(new Error('details not ready'));
-  if (state.details[key] && value && typeof value === 'object' && value.constructor === Object) {
-    _.merge(state.details[key], value);
-  } else {
-    state.details[key] = value;
+  get key() {
+    return LS.getDetailsKey();
   }
-  return _save(state.details)
-    .then((data) => {
-      state.details = data;
+  init() {
+    this.pending = request({
+      baseURL: this.baseURL,
+      url: this.url,
+      method: 'get',
+      seed: 'public',
+    }).then((res) => {
+      if (res.data) {
+        this.json = decrypt(res.data, this.key);
+        this.storage = JSON.parse(this.json);
+      } else {
+        // defaults
+        return this.#save(JSON.stringify({
+          systemInfo: { preferredCurrency: 'USD' },
+          userInfo: {
+            username: '',
+            email: '',
+          },
+          tokens: [
+            tetherToken,
+          ],
+        }));
+      }
     });
+    return this.pending;
+  }
+  // TODO make it async
+  get(key) {
+    // await this.pending;
+    if (!this.storage) {
+      throw new Error('details not ready');
+    }
+    if (!key) {
+      throw new TypeError('details key must be specified');
+    }
+    return this.storage[key];
+  }
+  async set(key, value) {
+    this.pending = this.pending
+      .then(() => {
+        if (this.storage[key] && _.isObject(value)) {
+          _.merge(this.storage[key], value);
+        } else {
+          this.storage[key] = value;
+        }
+        const json = JSON.stringify(this.storage);
+        if (json === this.json) {
+          return;
+        }
+        return this.#save(json);
+      });
+    return this.pending;
+  }
+
+  async #save(json) {
+    const res = await request({
+      baseURL: this.baseURL,
+      url: this.url,
+      method: 'put',
+      data: {
+        data: encrypt(json, this.key),
+      },
+      seed: 'public',
+    });
+    this.json = decrypt(res.data, this.key);
+    this.storage = JSON.parse(this.json);
+  }
 }
 
-async function _initDetails() {
-  const defaultValue = {
-    systemInfo: { preferredCurrency: 'USD' },
-    userInfo: {
-      username: '',
-      email: '',
-    },
-    tokens: [
-      tetherToken,
-    ],
-  };
-  return _save(defaultValue);
-}
-
-function _save(data) {
-  const key = LS.getDetailsKey();
-  return request({
-    url: `${process.env.SITE_URL}api/v3/details`,
-    method: 'put',
-    data: {
-      data: encrypt(JSON.stringify(data), key),
-    },
-    seed: 'public',
-  }).then((details) => JSON.parse(decrypt(details.data, key)));
-}
-
-export default {
-  get,
-  set,
-  init,
-};
+export default new Details(process.env.SITE_URL);
