@@ -58,7 +58,7 @@
     "@coinspace/cs-monero-wallet": "^1.2.1",
     "@coinspace/cs-ripple-wallet": "^1.6.1",
     "@coinspace/cs-stellar-wallet": "^1.4.0",
-    "@coinspace/cs-wallet": "^1.1.3",
+    "@coinspace/cs-wallet": "^1.2.0",
     "@sentry/browser": "^6.17.3",
     "@sentry/cli": "^1.72.1",
     "@simplewebauthn/browser": "^1.0.0",
