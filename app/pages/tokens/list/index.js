@@ -93,7 +93,7 @@ export default function(el) {
       }
     }
 
-    switchWallet(crypto);
+    await switchWallet(crypto);
     const currentCrypto = getWallet().crypto;
     ractive.set('currentCrypto', currentCrypto);
     bip21.registerProtocolHandler(currentCrypto);

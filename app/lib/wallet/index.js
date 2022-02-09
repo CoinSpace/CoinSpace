@@ -99,7 +99,7 @@ async function registerWallet(pin) {
   const deviceId = device.getPublic('hex');
   const pinHash = crypto.createHmac('sha256', Buffer.from(pinKey, 'hex')).update(pin).digest('hex');
   const detailsKey = crypto.createHmac('sha256', 'Coin Wallet').update(walletSeed).digest('hex');
-  const { publicToken, privateToken } = await request({
+  const { publicToken, privateToken, existed } = await request({
     url: `${process.env.SITE_URL}api/v3/register`,
     method: 'post',
     data: {
@@ -118,7 +118,7 @@ async function registerWallet(pin) {
   LS.setDetailsKey(detailsKey);
   await Promise.all([details.init(), settings.init()]).then(initCrypto);
   emitter.emit('auth-success', pin);
-  await initWallet(walletSeed);
+  await initWallet(walletSeed, existed);
 }
 
 async function loginWithPin(pin) {
@@ -151,7 +151,7 @@ async function loginWithTouchId(widget) {
   }
 }
 
-export async function initWallet(seed) {
+export async function initWallet(seed, existed) {
   LS.migratePublicKeys();
   const walletTokens = details.get('tokens');
   const all = [...walletCoins, ...walletTokens];
@@ -164,11 +164,11 @@ export async function initWallet(seed) {
 
   for (const crypto of all) {
     if (seed) {
-      initWalletWithSeed(crypto, seed);
+      await initWalletWithSeed(crypto, seed, existed);
     } else {
       if (!LS.hasPublicKey(crypto.platform)) continue;
       if (state.wallets[crypto._id]) continue;
-      initWalletWithPublicKey(crypto);
+      await initWalletWithPublicKey(crypto);
     }
   }
   state.wallet = state.wallets[defaultCryptoId];
@@ -191,7 +191,7 @@ export async function initWallet(seed) {
   await Promise.all(promises);
 }
 
-function getExtraOptions(crypto) {
+function getWalletOptions(crypto) {
   const options = {
     useTestNetwork: process.env.COIN_NETWORK === 'regtest',
     cache: new Cache(crypto),
@@ -223,6 +223,7 @@ function getExtraOptions(crypto) {
     options.apiNode = process.env.API_BSC_URL;
     options.platformCrypto = walletCoins.find((item) => item._id === 'binance-coin@binance-smart-chain');
   } else if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'].includes(crypto.platform)) {
+    options.settings = details.getSettings(crypto._id);
     options.minConf = 3;
     if (crypto.platform === 'bitcoin-cash') {
       options.minConf = 0;
@@ -260,7 +261,7 @@ export async function updateWallet() {
 export async function addPublicKey(crypto) {
   try {
     await unlock();
-    initWalletWithSeed(crypto, seeds.get('private'));
+    await initWalletWithSeed(crypto, seeds.get('private'), false /* existed */);
     lock();
   } catch (err) {
     lock();
@@ -305,9 +306,9 @@ export function getWalletById(cryptoId) {
   return state.wallets[cryptoId];
 }
 
-export function switchWallet(crypto) {
+export async function switchWallet(crypto) {
   if (!state.wallets[crypto._id]) {
-    initWalletWithPublicKey(crypto);
+    await initWalletWithPublicKey(crypto);
   }
   LS.setCryptoId(crypto._id);
   state.wallet = state.wallets[crypto._id];
@@ -317,22 +318,29 @@ export function unsetWallet(crypto) {
   delete state.wallets[crypto._id];
 }
 
-function initWalletWithSeed(crypto, seed) {
+async function initWalletWithSeed(crypto, seed, existed) {
   const wallet = new Wallet[crypto.platform]({
     seed,
-    ...getExtraOptions(crypto),
+    ...getWalletOptions(crypto),
+    fixbip44: !existed,
   });
+  if (wallet.settings) {
+    await details.setSettings(crypto._id, wallet.settings);
+  }
   LS.setPublicKey(wallet, seeds.get('public'));
   wallet.lock();
   state.wallets[crypto._id] = wallet;
 }
 
-function initWalletWithPublicKey(crypto) {
+async function initWalletWithPublicKey(crypto) {
   const publicKey = LS.getPublicKey(crypto.platform, seeds.get('public'));
   const wallet = new Wallet[crypto.platform]({
     publicKey,
-    ...getExtraOptions(crypto),
+    ...getWalletOptions(crypto),
   });
+  if (wallet.settings) {
+    await details.setSettings(crypto._id, wallet.settings);
+  }
   state.wallets[crypto._id] = wallet;
 }
 

@@ -66,6 +66,23 @@ class Details {
     return this.pending;
   }
 
+  getSettings(key) {
+    if (!key) {
+      throw new TypeError('settings key must be specified');
+    }
+    const settings = this.get('walletSettings') || {};
+    return settings[key] || {};
+  }
+
+  setSettings(key, value) {
+    if (!key) {
+      throw new TypeError('settings key must be specified');
+    }
+    return this.set('walletSettings', {
+      [key]: value,
+    });
+  }
+
   async #save(json) {
     const res = await request({
       baseURL: this.baseURL,
