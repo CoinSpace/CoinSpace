@@ -3,6 +3,7 @@ import { encrypt, decrypt } from 'lib/encryption';
 import request from 'lib/request';
 import LS from './localStorage';
 import tetherToken from '@coinspace/crypto-db/crypto/tether@ethereum.json';
+import CsWallet from '@coinspace/cs-wallet';
 
 class Details {
   constructor(baseURL) {
@@ -33,6 +34,30 @@ class Details {
           tokens: [
             tetherToken,
           ],
+          cryptoSettings: {
+            'bitcoin@bitcoin': {
+              bip44: CsWallet.networks.bitcoin.bip44,
+              bip49: CsWallet.networks.bitcoin.bip49,
+              bip84: CsWallet.networks.bitcoin.bip84,
+            },
+            'bitcoin-cash@bitcoin-cash': {
+              bip44: CsWallet.networks['bitcoin-cash'].bip44,
+            },
+            'bitcoin-sv@bitcoin-sv': {
+              bip44: CsWallet.networks['bitcoin-sv'].bip44,
+            },
+            'litecoin@litecoin': {
+              bip44: CsWallet.networks.litecoin.bip44,
+              bip49: CsWallet.networks.litecoin.bip49,
+              bip84: CsWallet.networks.litecoin.bip84,
+            },
+            'dogecoin@dogecoin': {
+              bip44: CsWallet.networks.dogecoin.bip44,
+            },
+            'dash@dash.json': {
+              bip44: CsWallet.networks.dash.bip44,
+            },
+          },
         }));
       }
     });
@@ -70,7 +95,7 @@ class Details {
     if (!key) {
       throw new TypeError('settings key must be specified');
     }
-    const settings = this.get('walletSettings') || {};
+    const settings = this.get('cryptoSettings') || {};
     return settings[key] || {};
   }
 
@@ -78,7 +103,7 @@ class Details {
     if (!key) {
       throw new TypeError('settings key must be specified');
     }
-    return this.set('walletSettings', {
+    return this.set('cryptoSettings', {
       [key]: value,
     });
   }
