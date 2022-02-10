@@ -56,7 +56,7 @@ async function register(walletId, deviceId, pinHash) {
   const publicToken = crypto.randomBytes(64).toString('hex');
   const privateToken = crypto.randomBytes(64).toString('hex');
 
-  const res = await wallets.updateOne({
+  await wallets.updateOne({
     _id: walletId,
     'devices._id': { $ne: deviceId },
   }, {
@@ -95,7 +95,6 @@ async function register(walletId, deviceId, pinHash) {
   return {
     publicToken,
     privateToken,
-    existed: !!res.modifiedCount,
   };
 }
 

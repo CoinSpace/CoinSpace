@@ -44,12 +44,6 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/PublicToken'
                   - $ref: '#/components/schemas/PrivateToken'
-                  - type: object
-                    properties:
-                      existed:
-                        type: boolean
-                    required:
-                      - existed
         default:
           $ref: '#/components/responses/GeneralError'
   /token/public/pin:
