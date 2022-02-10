@@ -54,7 +54,7 @@ class Details {
             'dogecoin@dogecoin': {
               bip44: CsWallet.networks.dogecoin.bip44,
             },
-            'dash@dash.json': {
+            'dash@dash': {
               bip44: CsWallet.networks.dash.bip44,
             },
           },
