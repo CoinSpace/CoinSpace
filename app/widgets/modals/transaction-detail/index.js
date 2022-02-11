@@ -9,16 +9,14 @@ import contentEOS from './contentEOS.ract';
 import contentMonero from './contentMonero.ract';
 import contentBtcBchLtc from './contentBtcBchLtc.ract';
 import { translate } from 'lib/i18n';
+import strftime from 'strftime';
+import { toUnitString } from 'lib/convert';
 
-export default function(data) {
+export default function({ transaction }) {
   let content;
   const wallet = getWallet();
   const { platform } = wallet.crypto;
-  data.txUrl = wallet.txUrl.bind(wallet);
-  data.showAllInputs = false;
-  data.inputsPerPage = 10;
   if (['ethereum', 'binance-smart-chain'].includes(platform)) {
-    data.isPendingFee = data.transaction.fee === -1;
     content = contentEthereum;
   } else if (platform === 'ripple') {
     content = contentRipple;
@@ -31,12 +29,20 @@ export default function(data) {
   } else {
     content = contentBtcBchLtc;
   }
-
   const ractive = new Ractive({
     partials: {
       content,
     },
-    data,
+    data: {
+      transaction,
+      txUrl: wallet.txUrl.bind(wallet),
+      showAllInputs: false,
+      inputsPerPage: 10,
+      formatTimestamp(timestamp) {
+        return strftime('%b %d, %Y %l:%M %p', new Date(timestamp));
+      },
+      toUnitString,
+    },
   });
 
   ractive.on('showMoreInputs', (context) => {
@@ -48,7 +54,7 @@ export default function(data) {
     const wallet = getWallet();
     let tx;
     try {
-      tx = wallet.createReplacement(data.transaction);
+      tx = wallet.createReplacement(transaction);
     } catch (err) {
       if (/Insufficient funds/.test(err.message)) return showInfo({ title: translate('Insufficient funds') });
       console.error(`not translated error: ${err.message}`);

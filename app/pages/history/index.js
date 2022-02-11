@@ -17,14 +17,7 @@ export default function(el) {
     data: {
       transactions: [],
       formatTimestamp(timestamp) {
-        const date = new Date(timestamp);
-        return strftime('%b %d %l:%M %p', date);
-      },
-      formatConfirmations(number) {
-        if (platform === 'ripple') return '';
-        if (platform === 'stellar') return '';
-        if (platform === 'eos') return '';
-        return `${translate('confirmations:')} ${number}`;
+        return strftime('%b %d, %Y %l:%M %p', new Date(timestamp));
       },
       getToAddress(tx) {
         if (['ethereum', 'ripple', 'eos', 'binance-smart-chain'].includes(platform)) {
@@ -35,21 +28,6 @@ export default function(el) {
           return tx.outs[0].address;
         } else if (platform === 'monero') {
           return translate('Sent');
-        }
-      },
-      isConfirmed(tx) {
-        if (platform === 'ripple') return true;
-        if (platform === 'stellar') return true;
-        if (platform === 'eos') return true;
-        if (platform === 'monero') return tx.confirmed;
-        return tx.confirmations >= getWallet().minConf;
-      },
-      isFailed(tx) {
-        if (['ethereum', 'ripple', 'binance-smart-chain'].includes(platform)) {
-          return tx.status === false;
-        // eslint-disable-next-line max-len
-        } else if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash', 'stellar', 'monero'].includes(platform)) {
-          return false;
         }
       },
       toUnitString,
@@ -104,14 +82,7 @@ export default function(el) {
 
   ractive.on('show-detail', (context) => {
     const index = context.node.getAttribute('data-index');
-    const data = {
-      transaction: ractive.get('transactions')[index],
-      formatTimestamp: ractive.get('formatTimestamp'),
-      formatConfirmations: ractive.get('formatConfirmations'),
-      isFailed: ractive.get('isFailed'),
-      isConfirmed: ractive.get('isConfirmed'),
-      toUnitString: ractive.get('toUnitString'),
-    };
+    const data = { transaction: ractive.get('transactions')[index] };
     showTransactionDetail(data);
   });
 

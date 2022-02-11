@@ -2,7 +2,7 @@
 <div class="modal-with-cross modal-transaction-detail">
 
   <div class="_header">
-    {{#if isFailed(this)}}
+    {{#if status === false}}
       <div class="_title">{{translate("Failed")}}</div>
     {{/if}}
     <div class="_title {{isIncoming ? 'green' : 'red'}}">

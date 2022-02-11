@@ -10,7 +10,7 @@
         {{#each transactions: index}}
         <div class="_transaction" title="{{id}}" data-index="{{index}}" on-click="show-detail">
 
-          {{#if isFailed(this)}}
+          {{#if status === false}}
             <div class="_address">{{translate("Failed")}}</div>
           {{else}}
             <div class="_address">{{isIncoming ? translate('Received') : getToAddress(this)}}</div>
@@ -20,13 +20,14 @@
             <div class="_amount {{isIncoming ? 'green' : 'red'}}">
               {{isIncoming ? '+' : ''}} {{toUnitString(amount)}}
             </div>
-            {{#if isConfirmed(transactions[index])}}
+            {{#if confirmed}}
               <div class='_status'>
                 <div>{{formatTimestamp(timestamp)}}</div>
-                <div>{{formatConfirmations(confirmations)}}</div>
               </div>
             {{else}}
-              <div class='_status'>{{translate("pending confirmation")}}</div>
+              <div class='_status'>{{translate("pending confirmation")}}
+                ({{confirmations}}/{{minConf}})
+              </div>
             {{/if}}
           </div>
 

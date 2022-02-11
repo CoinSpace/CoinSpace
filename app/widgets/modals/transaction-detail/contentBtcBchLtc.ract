@@ -6,13 +6,13 @@
       {{isIncoming ? '+' : ''}} {{toUnitString(amount)}}
     </div>
 
-    {{#if isConfirmed(transaction)}}
+    {{#if confirmed}}
       <div class="_status">
         <div>{{formatTimestamp(timestamp)}}</div>
-        <div>{{formatConfirmations(confirmations)}}</div>
+        <div>{{translate("confirmations:")}} {{confirmations}}</div>
       </div>
     {{else}}
-      <div class='_status'>{{translate("pending confirmation")}}</div>
+      <div class='_status'>{{translate("pending confirmation")}} ({{confirmations}}/{{minConf}})</div>
     {{/if}}
   </div>
 
