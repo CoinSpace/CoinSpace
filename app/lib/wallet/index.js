@@ -223,7 +223,7 @@ function getWalletOptions(crypto) {
     options.apiNode = process.env.API_BSC_URL;
     options.platformCrypto = walletCoins.find((item) => item._id === 'binance-coin@binance-smart-chain');
   } else if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'].includes(crypto.platform)) {
-    options.settings = details.getSettings(crypto._id);
+    options.settings = details.getCryptoSettings(crypto._id);
     options.minConf = 3;
     if (crypto.platform === 'bitcoin-cash') {
       options.minConf = 0;

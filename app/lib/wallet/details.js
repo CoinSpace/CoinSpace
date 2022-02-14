@@ -91,7 +91,7 @@ class Details {
     return this.pending;
   }
 
-  getSettings(key) {
+  getCryptoSettings(key) {
     if (!key) {
       throw new TypeError('settings key must be specified');
     }
@@ -99,7 +99,7 @@ class Details {
     return settings[key] || {};
   }
 
-  setSettings(key, value) {
+  seCryptotSettings(key, value) {
     if (!key) {
       throw new TypeError('settings key must be specified');
     }
