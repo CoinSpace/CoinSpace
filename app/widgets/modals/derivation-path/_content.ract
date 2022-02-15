@@ -1,0 +1,44 @@
+<div class="modal modal-derivation-path">
+
+  <div class="_header">
+    {{translate("Derivation path")}}
+  </div>
+
+  <div class="_content">
+    {{#each settings as setting}}
+      <div class="csformgroup">
+        <div class="csformgroup__input-group">
+          <div class="csformgroup__input-group__header">
+            <label for="setting-{{setting.type}}">{{getAddressTypeOption(setting.type)}}</label>
+          </div>
+          <div class="csinput csinput--with-x">
+            <input id="setting-{{setting.type}}" class="csinput__input" type="text" autocorrect="off" autocapitalize="off" value="{{setting.path}}" />
+            {{#setting.path}}
+              <div class="csinput__cross" on-click="clearSetting(setting.type)">
+                <span class="csinput__cross__icon">{{> svg_close}}</span>
+              </div>
+            {{/setting.path}}
+          </div>
+        </div>
+      </div>
+    {{/each}}
+
+    <div>
+      {{translate("Derivation path defines how to derive private keys from 12-word passphrase.")}}
+    </div>
+  </div>
+
+  <div class="_footer">
+    <div class="csbtn csbtn--white" on-click="close">{{translate("Cancel")}}</div>
+    {{#if isLoading}}
+      <div class="csbtn csbtn--loading">
+        <span class="csbtn__icon">
+          {{>svg_refresh}}
+        </span>
+      </div>
+    {{else}}
+      <div class="csbtn" on-click="save">{{translate("Save")}}</div>
+    {{/if}}
+  </div>
+
+</div>

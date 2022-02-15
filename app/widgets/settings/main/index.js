@@ -6,6 +6,7 @@ import details from 'lib/wallet/details';
 import importPrivateKey from 'widgets/modals/import-private-key';
 import exportPrivateKeys from 'widgets/modals/export-private-keys';
 import showEosSetupAccount from 'widgets/modals/eos-setup-account';
+import derivationPath from 'widgets/modals/derivation-path';
 import { translate } from 'lib/i18n';
 import os from 'lib/detect-os';
 import touchId from 'lib/touch-id';
@@ -42,6 +43,8 @@ const languages = [
   { value: 'zh-cn', name: '汉语' },
 ];
 
+const BITCOIN_FAMILY = ['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'];
+
 export default function(el) {
   const currency = details.get('systemInfo').preferredCurrency;
   const language = i18n.getLanguage(details.get('systemInfo').language);
@@ -53,6 +56,7 @@ export default function(el) {
       username: '',
       isEnabledImport: true,
       isEnabledExport: true,
+      isBitcoinFamily: false,
       isEOS: false,
       securityPinLabel: getSecurityPinLabel(),
       walletName: '',
@@ -76,6 +80,7 @@ export default function(el) {
   ractive.on('before-show', () => {
     const wallet = CS.getWallet();
     ractive.set('isEOS', wallet.crypto.platform === 'eos');
+    ractive.set('isBitcoinFamily', BITCOIN_FAMILY.includes(wallet.crypto.platform));
     ractive.set('walletName', wallet.crypto.name);
     if (wallet.crypto.platform === 'eos') {
       ractive.set('isEnabledImport', false);
@@ -114,6 +119,7 @@ export default function(el) {
   ractive.on('import-private-key', importPrivateKey);
   ractive.on('export-private-keys', exportPrivateKeys);
   ractive.on('eos-setup-account', showEosSetupAccount);
+  ractive.on('derivation-path', derivationPath);
 
   ractive.on('support', () => {
     const version = `${process.env.VERSION}@${process.env.PLATFORM} (${process.env.COMMIT})`;

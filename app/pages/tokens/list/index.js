@@ -1,13 +1,12 @@
 import Ractive from 'lib/ractive';
 import showRemoveConfirmation from 'widgets/modals/confirm-remove';
-import { initWallet, addPublicKey, walletCoins, getWallet, switchWallet, unsetWallet } from 'lib/wallet';
+import { walletCoins, getWallet, switchCrypto, unsetWallet } from 'lib/wallet';
 import LS from 'lib/wallet/localStorage';
 import emitter from 'lib/emitter';
 import details from 'lib/wallet/details';
 import ticker from 'lib/ticker-api';
 import _ from 'lodash';
 import { cryptoToFiat } from 'lib/convert';
-import bip21 from 'lib/bip21';
 import template from './index.ract';
 import crypto from 'lib/crypto';
 
@@ -40,7 +39,13 @@ export default function(el) {
       getLogoUrl(logo) {
         return crypto.getLogoUrl(logo);
       },
-      switchCrypto,
+      async switchCrypto(crypto) {
+        if (!isEnabled) {
+          return;
+        }
+        await switchCrypto(crypto);
+        ractive.set('currentCrypto', getWallet().crypto);
+      },
       removeCryptoToken,
       cryptoCoins: [],
       cryptoTokens: [],
@@ -79,31 +84,6 @@ export default function(el) {
       ...walletTokens,
     ]);
   });
-
-  async function switchCrypto(crypto) {
-    if (isCryptoEqual(crypto, ractive.get('currentCrypto'))) {
-      return;
-    }
-    if (!isEnabled) return;
-    if (!LS.hasPublicKey(crypto.platform)) {
-      try {
-        await addPublicKey(crypto);
-      } catch (err) {
-        return;
-      }
-    }
-
-    await switchWallet(crypto);
-    const currentCrypto = getWallet().crypto;
-    ractive.set('currentCrypto', currentCrypto);
-    bip21.registerProtocolHandler(currentCrypto);
-
-    emitter.emit('sync');
-
-    setTimeout(() => {
-      initWallet();
-    }, 200);
-  }
 
   function removeCryptoToken(token) {
     const rindex = ractive.get('cryptoTokens').findIndex((item) => _.isEqual(item, token));

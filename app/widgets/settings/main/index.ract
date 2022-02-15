@@ -59,9 +59,9 @@
     </div>
   </div>
 
-  {{#unless (!isEOS && !isEnabledImport && !isEnabledExport)}}
+  {{#if (isEOS || isEnabledImport || isEnabledExport || isBitcoinFamily)}}
   <div class="_section">
-    <div class="_title">{{translate("Tools")}} ({{walletName}})</div>
+    <div class="_title">{{walletName}}</div>
     {{#if isEOS}}
     <div class="_list_item _btn" on-click="eos-setup-account">
       <div class="_label">{{translate("Setup EOS account")}}</div>
@@ -80,8 +80,14 @@
       <div class="_arrow">{{>svg_arrow}}</div>
     </div>
     {{/if}}
+    {{#if isBitcoinFamily}}
+    <div class="_list_item _btn" on-click="derivation-path">
+      <div class="_label">{{translate("Derivation path")}}</div>
+      <div class="_arrow">{{>svg_arrow}}</div>
+    </div>
+    {{/if}}
   </div>
-  {{/unless}}
+  {{/if}}
 
   <div class="_section">
     <div class="_list_item _btn" on-click="support">

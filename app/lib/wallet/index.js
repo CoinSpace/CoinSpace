@@ -9,6 +9,8 @@ import request from 'lib/request';
 import Storage from 'lib/storage';
 import { init as initCrypto } from 'lib/crypto';
 import { unlock, lock } from 'lib/wallet/security';
+import bip21 from 'lib/bip21';
+import _ from 'lodash';
 
 import Cache from './cache';
 import CsWallet from '@coinspace/cs-wallet';
@@ -40,6 +42,10 @@ import ticker from 'lib/ticker-api';
 import convert from 'lib/convert';
 import details from 'lib/wallet/details';
 import settings from 'lib/wallet/settings';
+
+function isCryptoEqual(a, b) {
+  return a && b && _.isEqual(a, b);
+}
 
 const state = {
   wallet: null,
@@ -306,12 +312,30 @@ export function getWalletById(cryptoId) {
   return state.wallets[cryptoId];
 }
 
-export async function switchWallet(crypto) {
+export async function switchCrypto(crypto, force=false) {
+  if (isCryptoEqual(crypto, getWallet().crypto) && !force) {
+    return;
+  }
+  if (!LS.hasPublicKey(crypto.platform) || force) {
+    try {
+      await addPublicKey(crypto);
+    } catch (err) {
+      return;
+    }
+  }
+
   if (!state.wallets[crypto._id]) {
     await initWalletWithPublicKey(crypto);
   }
   LS.setCryptoId(crypto._id);
   state.wallet = state.wallets[crypto._id];
+  bip21.registerProtocolHandler(crypto);
+
+  emitter.emit('sync');
+
+  setTimeout(() => {
+    initWallet();
+  }, 200);
 }
 
 export function unsetWallet(crypto) {
@@ -346,7 +370,7 @@ export default {
   setUsername,
   getWallet,
   getWalletById,
-  switchWallet,
+  switchCrypto,
   unsetWallet,
   initWallet,
   updateWallet,
