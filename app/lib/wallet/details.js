@@ -99,7 +99,7 @@ class Details {
     return settings[key] || {};
   }
 
-  setCryptotSettings(key, value) {
+  setCryptoSettings(key, value) {
     if (!key) {
       throw new TypeError('settings key must be specified');
     }

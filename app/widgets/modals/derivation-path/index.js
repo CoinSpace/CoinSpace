@@ -60,7 +60,7 @@ export default function open() {
         }
         settings[setting.bip] = setting.path;
       }
-      await details.setCryptotSettings(wallet.crypto._id, settings);
+      await details.setCryptoSettings(wallet.crypto._id, settings);
       await switchCrypto(wallet.crypto, true);
     }
     ractive.fire('cancel');
