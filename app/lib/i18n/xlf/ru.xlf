@@ -1061,7 +1061,7 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="This private key has no funds for transfer.">
         <source>This private key has no funds for transfer.</source>
-        <target>Этот закрытый ключ не имеет средств для перевода.</target>
+        <target>Этот приватный ключ не имеет средств для перевода.</target>
       </trans-unit>
       <trans-unit id="Not enough funds to pay transaction fee (:required).">
         <source>Not enough funds to pay transaction fee (%(required)s).</source>
@@ -1073,11 +1073,11 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Derivation path">
         <source>Derivation path</source>
-        <target>Путь получения</target>
+        <target>Путь деривации</target>
       </trans-unit>
       <trans-unit id="Derivation path defines how to derive private keys from 12-word passphrase.">
         <source>Derivation path defines how to derive private keys from 12-word passphrase.</source>
-        <target>Путь получения определяет, как получить закрытые ключи из фразы-пароля из 12 слов.</target>
+        <target>Путь деривации определяет, как получить приватные ключи из фразы-пароля из 12 слов.</target>
       </trans-unit>
       <trans-unit id="Invalid path :path">
         <source>Invalid path %(path)s</source>
