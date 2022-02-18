@@ -843,10 +843,6 @@ Zostanie przeliczony na %(toSymbol)s, i wysłany do
         <source>Hardware Security</source>
         <target>Bezpieczeństwo sprzętu</target>
       </trans-unit>
-      <trans-unit id="Tools">
-        <source>Tools</source>
-        <target>Narzędzia</target>
-      </trans-unit>
       <trans-unit id="Use for:">
         <source>Use for:</source>
         <target>Używać do:</target>
@@ -1070,6 +1066,22 @@ Zostanie przeliczony na %(toSymbol)s, i wysłany do
       <trans-unit id="Not enough funds to pay transaction fee (:required).">
         <source>Not enough funds to pay transaction fee (%(required)s).</source>
         <target>Nie masz wystarczającej ilości środków, aby pokryć opłatę transakcyjną (%(required)s).</target>
+      </trans-unit>
+      <trans-unit id="Oops! something went wrong. Please try again later.">
+        <source>Oops! something went wrong. Please try again later.</source>
+        <target>Ups! Coś poszło nie tak. Spróbuj ponownie później.</target>
+      </trans-unit>
+      <trans-unit id="Derivation path">
+        <source>Derivation path</source>
+        <target>Ścieżka wyprowadzania</target>
+      </trans-unit>
+      <trans-unit id="Derivation path defines how to derive private keys from 12-word passphrase.">
+        <source>Derivation path defines how to derive private keys from 12-word passphrase.</source>
+        <target>Ścieżka wyprowadzania określa, jak pozyskać prywatny klucz na podstawie hasła składającego się z 12 słów.</target>
+      </trans-unit>
+      <trans-unit id="Invalid path :path">
+        <source>Invalid path %(path)s</source>
+        <target>Niewłaściwa ścieżka %(path)s</target>
       </trans-unit>
     </body>
   </file>

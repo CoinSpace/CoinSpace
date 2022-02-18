@@ -843,10 +843,6 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Hardware Security</source>
         <target>ความปลอดภัยของฮาร์ดแวร์</target>
       </trans-unit>
-      <trans-unit id="Tools">
-        <source>Tools</source>
-        <target>เครื่องมือ</target>
-      </trans-unit>
       <trans-unit id="Use for:">
         <source>Use for:</source>
         <target>ใช้สำหรับ:</target>
@@ -1070,6 +1066,22 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Not enough funds to pay transaction fee (:required).">
         <source>Not enough funds to pay transaction fee (%(required)s).</source>
         <target>ไม่มีเงินเพียงพอที่จะชำระค่าธรรมเนียมธุรกรรม (%(required)s)</target>
+      </trans-unit>
+      <trans-unit id="Oops! something went wrong. Please try again later.">
+        <source>Oops! something went wrong. Please try again later.</source>
+        <target>อุ๊ปส์! เกิดข้อผิดพลาด โปรดลองอีกครั้งภายหลัง</target>
+      </trans-unit>
+      <trans-unit id="Derivation path">
+        <source>Derivation path</source>
+        <target>แหล่งที่มา</target>
+      </trans-unit>
+      <trans-unit id="Derivation path defines how to derive private keys from 12-word passphrase.">
+        <source>Derivation path defines how to derive private keys from 12-word passphrase.</source>
+        <target>แหล่งที่มาเป็นตัวกำหนดวิธีการรับรหัสส่วนตัวจากวลีรหัสผ่านแบบ 12 คำ</target>
+      </trans-unit>
+      <trans-unit id="Invalid path :path">
+        <source>Invalid path %(path)s</source>
+        <target>เส้นทางไม่ถูกต้อง %(path)s</target>
       </trans-unit>
     </body>
   </file>

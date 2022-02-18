@@ -843,10 +843,6 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Hardware Security</source>
         <target>Hardver biztonsága</target>
       </trans-unit>
-      <trans-unit id="Tools">
-        <source>Tools</source>
-        <target>Eszközök</target>
-      </trans-unit>
       <trans-unit id="Use for:">
         <source>Use for:</source>
         <target>Használat:</target>
@@ -1070,6 +1066,22 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Not enough funds to pay transaction fee (:required).">
         <source>Not enough funds to pay transaction fee (%(required)s).</source>
         <target>Nincs elegendő fedezet a tranzakciós díj kifizetéséhez (%(required)s).</target>
+      </trans-unit>
+      <trans-unit id="Oops! something went wrong. Please try again later.">
+        <source>Oops! something went wrong. Please try again later.</source>
+        <target>Hoppá! Valami nem sikerült. Kérjük, később próbálja meg újra.</target>
+      </trans-unit>
+      <trans-unit id="Derivation path">
+        <source>Derivation path</source>
+        <target>Származtatási útvonal</target>
+      </trans-unit>
+      <trans-unit id="Derivation path defines how to derive private keys from 12-word passphrase.">
+        <source>Derivation path defines how to derive private keys from 12-word passphrase.</source>
+        <target>A származtatási útvonal meghatározza, hogy 12 szavas jelszavakból hogyan lehet privát kulcsokat származtatni.</target>
+      </trans-unit>
+      <trans-unit id="Invalid path :path">
+        <source>Invalid path %(path)s</source>
+        <target>Érvénytelen útvonal %(path)s</target>
       </trans-unit>
     </body>
   </file>

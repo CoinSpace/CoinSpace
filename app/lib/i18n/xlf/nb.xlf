@@ -843,10 +843,6 @@ Den konverteres til %(toSymbol)s og sendes til
         <source>Hardware Security</source>
         <target>Maskinvaresikkerhet</target>
       </trans-unit>
-      <trans-unit id="Tools">
-        <source>Tools</source>
-        <target>Verktøy</target>
-      </trans-unit>
       <trans-unit id="Use for:">
         <source>Use for:</source>
         <target>Bruk for:</target>
@@ -1070,6 +1066,22 @@ Den konverteres til %(toSymbol)s og sendes til
       <trans-unit id="Not enough funds to pay transaction fee (:required).">
         <source>Not enough funds to pay transaction fee (%(required)s).</source>
         <target>Ikke nok penger til å betale transaksjonsgebyret (%(required)s).</target>
+      </trans-unit>
+      <trans-unit id="Oops! something went wrong. Please try again later.">
+        <source>Oops! something went wrong. Please try again later.</source>
+        <target>Oj! Noe gikk galt. Prøv igjen senere.</target>
+      </trans-unit>
+      <trans-unit id="Derivation path">
+        <source>Derivation path</source>
+        <target>Avledningsbane</target>
+      </trans-unit>
+      <trans-unit id="Derivation path defines how to derive private keys from 12-word passphrase.">
+        <source>Derivation path defines how to derive private keys from 12-word passphrase.</source>
+        <target>Avledningsbanen definerer hvordan private nøkler skal utledes fra 12-ords passordfrasen.</target>
+      </trans-unit>
+      <trans-unit id="Invalid path :path">
+        <source>Invalid path %(path)s</source>
+        <target>Ugyldig bane %(path)s</target>
       </trans-unit>
     </body>
   </file>

@@ -843,10 +843,6 @@ Iko-convert ito sa %(toSymbol)s, at ipapadala sa
         <source>Hardware Security</source>
         <target>Seguridad ng Hardware</target>
       </trans-unit>
-      <trans-unit id="Tools">
-        <source>Tools</source>
-        <target>Mga Tool</target>
-      </trans-unit>
       <trans-unit id="Use for:">
         <source>Use for:</source>
         <target>Gamitin para sa:</target>
@@ -1070,6 +1066,22 @@ Iko-convert ito sa %(toSymbol)s, at ipapadala sa
       <trans-unit id="Not enough funds to pay transaction fee (:required).">
         <source>Not enough funds to pay transaction fee (%(required)s).</source>
         <target>Walang sapat na pondo para bayaran ang bayarin ng transaksyon (%(required)s).</target>
+      </trans-unit>
+      <trans-unit id="Oops! something went wrong. Please try again later.">
+        <source>Oops! something went wrong. Please try again later.</source>
+        <target>Oops! may nangyaring mali. Subukang muli mamaya.</target>
+      </trans-unit>
+      <trans-unit id="Derivation path">
+        <source>Derivation path</source>
+        <target>Derivation path</target>
+      </trans-unit>
+      <trans-unit id="Derivation path defines how to derive private keys from 12-word passphrase.">
+        <source>Derivation path defines how to derive private keys from 12-word passphrase.</source>
+        <target>Tinutukoy ng derivation path kung paano kunin ang mga pribadong key mula sa 12-salitang passphrase.</target>
+      </trans-unit>
+      <trans-unit id="Invalid path :path">
+        <source>Invalid path %(path)s</source>
+        <target>Di-wastong path %(path)s</target>
       </trans-unit>
     </body>
   </file>

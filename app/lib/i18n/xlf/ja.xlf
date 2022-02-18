@@ -843,10 +843,6 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Hardware Security</source>
         <target>ハードウェアのセキュリティ</target>
       </trans-unit>
-      <trans-unit id="Tools">
-        <source>Tools</source>
-        <target>ツール</target>
-      </trans-unit>
       <trans-unit id="Use for:">
         <source>Use for:</source>
         <target>使用先：</target>
@@ -1070,6 +1066,22 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Not enough funds to pay transaction fee (:required).">
         <source>Not enough funds to pay transaction fee (%(required)s).</source>
         <target>取引手数料（%(required)s）を支払うための十分な資金がありません。</target>
+      </trans-unit>
+      <trans-unit id="Oops! something went wrong. Please try again later.">
+        <source>Oops! something went wrong. Please try again later.</source>
+        <target>おっと！何か問題が発生しました。後でやり直してください。</target>
+      </trans-unit>
+      <trans-unit id="Derivation path">
+        <source>Derivation path</source>
+        <target>派生パス</target>
+      </trans-unit>
+      <trans-unit id="Derivation path defines how to derive private keys from 12-word passphrase.">
+        <source>Derivation path defines how to derive private keys from 12-word passphrase.</source>
+        <target>派生パスは12語のパスフレーズから秘密鍵を得る方法を定義します。</target>
+      </trans-unit>
+      <trans-unit id="Invalid path :path">
+        <source>Invalid path %(path)s</source>
+        <target>無効なパス %(path)s</target>
       </trans-unit>
     </body>
   </file>

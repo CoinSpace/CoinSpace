@@ -843,10 +843,6 @@ itu akan dikonversi ke %(toSymbol)s, dan dikirim ke
         <source>Hardware Security</source>
         <target>Keamanan Perangkat Keras</target>
       </trans-unit>
-      <trans-unit id="Tools">
-        <source>Tools</source>
-        <target>Alat</target>
-      </trans-unit>
       <trans-unit id="Use for:">
         <source>Use for:</source>
         <target>Penggunaan untuk:</target>
@@ -1070,6 +1066,22 @@ itu akan dikonversi ke %(toSymbol)s, dan dikirim ke
       <trans-unit id="Not enough funds to pay transaction fee (:required).">
         <source>Not enough funds to pay transaction fee (%(required)s).</source>
         <target>Tidak cukup dana untuk membayar biaya transaksi (%(required)s).</target>
+      </trans-unit>
+      <trans-unit id="Oops! something went wrong. Please try again later.">
+        <source>Oops! something went wrong. Please try again later.</source>
+        <target>Ups! ada yang tidak beres. Coba lagi nanti.</target>
+      </trans-unit>
+      <trans-unit id="Derivation path">
+        <source>Derivation path</source>
+        <target>Jalur derivasi</target>
+      </trans-unit>
+      <trans-unit id="Derivation path defines how to derive private keys from 12-word passphrase.">
+        <source>Derivation path defines how to derive private keys from 12-word passphrase.</source>
+        <target>Jalur derivasi menentukan cara mendapatkan kunci pribadi dari frasa sandi 12 kata.</target>
+      </trans-unit>
+      <trans-unit id="Invalid path :path">
+        <source>Invalid path %(path)s</source>
+        <target>Jalur tidak valid %(path)s</target>
       </trans-unit>
     </body>
   </file>

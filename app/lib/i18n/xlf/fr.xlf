@@ -843,10 +843,6 @@ Le montant sera converti en %(toSymbol)s, et sera envoyé à
         <source>Hardware Security</source>
         <target>Sécurité du matériel</target>
       </trans-unit>
-      <trans-unit id="Tools">
-        <source>Tools</source>
-        <target>Outils</target>
-      </trans-unit>
       <trans-unit id="Use for:">
         <source>Use for:</source>
         <target>Utiliser pour:</target>
@@ -1070,6 +1066,22 @@ Le montant sera converti en %(toSymbol)s, et sera envoyé à
       <trans-unit id="Not enough funds to pay transaction fee (:required).">
         <source>Not enough funds to pay transaction fee (%(required)s).</source>
         <target>Fonds insuffisants pour payer les frais de transaction (%(required)s).</target>
+      </trans-unit>
+      <trans-unit id="Oops! something went wrong. Please try again later.">
+        <source>Oops! something went wrong. Please try again later.</source>
+        <target>Oups ! Quelque chose s'est mal passé. Veuillez réessayer plus tard.</target>
+      </trans-unit>
+      <trans-unit id="Derivation path">
+        <source>Derivation path</source>
+        <target>Chemin de dérivation</target>
+      </trans-unit>
+      <trans-unit id="Derivation path defines how to derive private keys from 12-word passphrase.">
+        <source>Derivation path defines how to derive private keys from 12-word passphrase.</source>
+        <target>Le chemin de dérivation définit comment dériver les clés privées à partir de la phrase secrète de 12 mots.</target>
+      </trans-unit>
+      <trans-unit id="Invalid path :path">
+        <source>Invalid path %(path)s</source>
+        <target>Chemin non valide %(path)s</target>
       </trans-unit>
     </body>
   </file>

@@ -843,10 +843,6 @@ Biće konvertovano u %(toSymbol)s i poslato na
         <source>Hardware Security</source>
         <target>Hardverska sigurnost</target>
       </trans-unit>
-      <trans-unit id="Tools">
-        <source>Tools</source>
-        <target>Alati</target>
-      </trans-unit>
       <trans-unit id="Use for:">
         <source>Use for:</source>
         <target>Koristite za:</target>
@@ -1070,6 +1066,22 @@ Biće konvertovano u %(toSymbol)s i poslato na
       <trans-unit id="Not enough funds to pay transaction fee (:required).">
         <source>Not enough funds to pay transaction fee (%(required)s).</source>
         <target>Nema dovoljno sredstava za plaćanje provizije za transakciju (%(required)s).</target>
+      </trans-unit>
+      <trans-unit id="Oops! something went wrong. Please try again later.">
+        <source>Oops! something went wrong. Please try again later.</source>
+        <target>Ups! nešto je pošlo po zlu. Pokušajte ponovo kasnije.</target>
+      </trans-unit>
+      <trans-unit id="Derivation path">
+        <source>Derivation path</source>
+        <target>Putanja derivacije</target>
+      </trans-unit>
+      <trans-unit id="Derivation path defines how to derive private keys from 12-word passphrase.">
+        <source>Derivation path defines how to derive private keys from 12-word passphrase.</source>
+        <target>Putanja derivacije definiše kako izvesti privatne ključeve iz pristupne fraze od 12 riječi.</target>
+      </trans-unit>
+      <trans-unit id="Invalid path :path">
+        <source>Invalid path %(path)s</source>
+        <target>Nevažeći putanja %(path)s</target>
       </trans-unit>
     </body>
   </file>

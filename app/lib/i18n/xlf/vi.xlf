@@ -843,10 +843,6 @@ Sẽ chuyển đổi thành %(toSymbol)s, và gửi đến
         <source>Hardware Security</source>
         <target>Bảo mật Phần cứng</target>
       </trans-unit>
-      <trans-unit id="Tools">
-        <source>Tools</source>
-        <target>Công cụ</target>
-      </trans-unit>
       <trans-unit id="Use for:">
         <source>Use for:</source>
         <target>Sử dụng để:</target>
@@ -1070,6 +1066,22 @@ Sẽ chuyển đổi thành %(toSymbol)s, và gửi đến
       <trans-unit id="Not enough funds to pay transaction fee (:required).">
         <source>Not enough funds to pay transaction fee (%(required)s).</source>
         <target>Không đủ tiền để trả phí giao dịch (%(required)s).</target>
+      </trans-unit>
+      <trans-unit id="Oops! something went wrong. Please try again later.">
+        <source>Oops! something went wrong. Please try again later.</source>
+        <target>Ối! Đã xảy ra sự cố. Vui lòng thử lại sau.</target>
+      </trans-unit>
+      <trans-unit id="Derivation path">
+        <source>Derivation path</source>
+        <target>Đường dẫn dẫn xuất</target>
+      </trans-unit>
+      <trans-unit id="Derivation path defines how to derive private keys from 12-word passphrase.">
+        <source>Derivation path defines how to derive private keys from 12-word passphrase.</source>
+        <target>Đường dẫn dẫn xuất là cách lấy khóa riêng từ cụm mật khẩu 12 từ.</target>
+      </trans-unit>
+      <trans-unit id="Invalid path :path">
+        <source>Invalid path %(path)s</source>
+        <target>Đường dẫn không hợp lệ %(path)s</target>
       </trans-unit>
     </body>
   </file>

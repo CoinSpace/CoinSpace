@@ -843,10 +843,6 @@ Bude to převedeno na %(toSymbol)s, a zasláno
         <source>Hardware Security</source>
         <target>Hardwarové zabezpečení</target>
       </trans-unit>
-      <trans-unit id="Tools">
-        <source>Tools</source>
-        <target>Nástroje</target>
-      </trans-unit>
       <trans-unit id="Use for:">
         <source>Use for:</source>
         <target>Používat pro:</target>
@@ -1070,6 +1066,22 @@ Bude to převedeno na %(toSymbol)s, a zasláno
       <trans-unit id="Not enough funds to pay transaction fee (:required).">
         <source>Not enough funds to pay transaction fee (%(required)s).</source>
         <target>Není dostatek prostředků na zaplacení poplatku za transakci (%(required)s).</target>
+      </trans-unit>
+      <trans-unit id="Oops! something went wrong. Please try again later.">
+        <source>Oops! something went wrong. Please try again later.</source>
+        <target>Jejda! Něco je špatně. Zkuste to prosím později znovu.</target>
+      </trans-unit>
+      <trans-unit id="Derivation path">
+        <source>Derivation path</source>
+        <target>Derivační cesta</target>
+      </trans-unit>
+      <trans-unit id="Derivation path defines how to derive private keys from 12-word passphrase.">
+        <source>Derivation path defines how to derive private keys from 12-word passphrase.</source>
+        <target>Derivační cesta definuje, jak odvodit soukromé klíče z dvanáctislovní heslové fráze.</target>
+      </trans-unit>
+      <trans-unit id="Invalid path :path">
+        <source>Invalid path %(path)s</source>
+        <target>Neplatná cesta %(path)s</target>
       </trans-unit>
     </body>
   </file>

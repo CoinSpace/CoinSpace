@@ -843,10 +843,6 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Hardware Security</source>
         <target>សុវត្ថិភាពផ្នែករឹង</target>
       </trans-unit>
-      <trans-unit id="Tools">
-        <source>Tools</source>
-        <target>ឧបករណ៍</target>
-      </trans-unit>
       <trans-unit id="Use for:">
         <source>Use for:</source>
         <target>សម្រាប់ប្រើប្រាស់</target>
@@ -1070,6 +1066,22 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Not enough funds to pay transaction fee (:required).">
         <source>Not enough funds to pay transaction fee (%(required)s).</source>
         <target>មិនមានថវិកាគ្រប់គ្រាន់ដើម្បីបង់ថ្លៃប្រតិបត្តិការទេ (%(required)s)។</target>
+      </trans-unit>
+      <trans-unit id="Oops! something went wrong. Please try again later.">
+        <source>Oops! something went wrong. Please try again later.</source>
+        <target>ឱ! មាន​អ្វីមួយ​មិន​ប្រក្រតី។ សូម​ព្យាយាម​ម្តង​ទៀត​នៅ​ពេល​ក្រោយ។</target>
+      </trans-unit>
+      <trans-unit id="Derivation path">
+        <source>Derivation path</source>
+        <target>ផ្លូវ​ចម្លង</target>
+      </trans-unit>
+      <trans-unit id="Derivation path defines how to derive private keys from 12-word passphrase.">
+        <source>Derivation path defines how to derive private keys from 12-word passphrase.</source>
+        <target>ផ្លូវ​ចម្លង​បញ្ជាក់​ពី​របៀប​ដែល​ឃ្លា​សម្ងាត់ 12 ពាក្យ​អាច​ត្រូវ​បាន​ប្រើ​ដើម្បី​បង្កើត​សោឯកជន។</target>
+      </trans-unit>
+      <trans-unit id="Invalid path :path">
+        <source>Invalid path %(path)s</source>
+        <target> ផ្លូវមិនត្រឹមត្រូវ %(path)s</target>
       </trans-unit>
     </body>
   </file>

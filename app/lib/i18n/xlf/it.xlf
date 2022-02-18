@@ -843,10 +843,6 @@ Sarà convertito in %(toSymbol)s, e inviato a
         <source>Hardware Security</source>
         <target>Sicurezza hardware</target>
       </trans-unit>
-      <trans-unit id="Tools">
-        <source>Tools</source>
-        <target>Strumenti</target>
-      </trans-unit>
       <trans-unit id="Use for:">
         <source>Use for:</source>
         <target>Usa per:</target>
@@ -1070,6 +1066,22 @@ Sarà convertito in %(toSymbol)s, e inviato a
       <trans-unit id="Not enough funds to pay transaction fee (:required).">
         <source>Not enough funds to pay transaction fee (%(required)s).</source>
         <target>I fondi non sono sufficienti per pagare i costi della transazione (%(required)s).</target>
+      </trans-unit>
+      <trans-unit id="Oops! something went wrong. Please try again later.">
+        <source>Oops! something went wrong. Please try again later.</source>
+        <target>Ops! qualcosa è andato storto. Per favore riprova più tardi.</target>
+      </trans-unit>
+      <trans-unit id="Derivation path">
+        <source>Derivation path</source>
+        <target>Percorso di derivazione</target>
+      </trans-unit>
+      <trans-unit id="Derivation path defines how to derive private keys from 12-word passphrase.">
+        <source>Derivation path defines how to derive private keys from 12-word passphrase.</source>
+        <target>Il percorso di derivazione definisce come ottenere le chiavi private da una passphrase di 12 parole.</target>
+      </trans-unit>
+      <trans-unit id="Invalid path :path">
+        <source>Invalid path %(path)s</source>
+        <target>Percorso non valido %(path)s</target>
       </trans-unit>
     </body>
   </file>

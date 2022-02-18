@@ -843,10 +843,6 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Hardware Security</source>
         <target>Апаратна безпека</target>
       </trans-unit>
-      <trans-unit id="Tools">
-        <source>Tools</source>
-        <target>Інструменти</target>
-      </trans-unit>
       <trans-unit id="Use for:">
         <source>Use for:</source>
         <target>Використовувати для:</target>
@@ -1070,6 +1066,22 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Not enough funds to pay transaction fee (:required).">
         <source>Not enough funds to pay transaction fee (%(required)s).</source>
         <target>Не вистачає коштів, щоб сплатити комісію за транзакцію (%(required)s).</target>
+      </trans-unit>
+      <trans-unit id="Oops! something went wrong. Please try again later.">
+        <source>Oops! something went wrong. Please try again later.</source>
+        <target>Ой! Виникла проблема. Повторіть спробу пізніше.</target>
+      </trans-unit>
+      <trans-unit id="Derivation path">
+        <source>Derivation path</source>
+        <target>Шлях формування</target>
+      </trans-unit>
+      <trans-unit id="Derivation path defines how to derive private keys from 12-word passphrase.">
+        <source>Derivation path defines how to derive private keys from 12-word passphrase.</source>
+        <target>Шлях формування визначає, як отримати закриті ключі з парольної фрази з 12 слів.</target>
+      </trans-unit>
+      <trans-unit id="Invalid path :path">
+        <source>Invalid path %(path)s</source>
+        <target>Недійсний шлях %(path)s</target>
       </trans-unit>
     </body>
   </file>
