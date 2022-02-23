@@ -46,6 +46,20 @@ paths:
                   - $ref: '#/components/schemas/PrivateToken'
         default:
           $ref: '#/components/responses/GeneralError'
+  /logout/others:
+    post:
+      x-eov-operation-id: logoutOthers
+      x-eov-operation-handler: handlers
+      description: Logout from others devices
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
   /token/public/pin:
     post:
       x-eov-operation-id: tokenPublicPinVerify

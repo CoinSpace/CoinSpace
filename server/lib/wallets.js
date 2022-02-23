@@ -98,6 +98,15 @@ async function register(walletId, deviceId, pinHash) {
   };
 }
 
+async function logoutOthers(device) {
+  const wallets = db.collection(COLLECTION);
+  await wallets.updateOne({
+    'devices._id': device._id,
+  }, {
+    $pull: { devices: { _id: { $ne: device._id } } },
+  });
+}
+
 async function pinVerify(device, pinHash, type) {
   if (device.pin_hash !== pinHash) {
     await _unsuccessfulAuth(device, type, 'pin');
@@ -462,6 +471,7 @@ async function _setChallenge(device, challenge, tokenType, authType) {
 
 export default {
   register,
+  logoutOthers,
   // PIN
   pinVerify,
   // Platform

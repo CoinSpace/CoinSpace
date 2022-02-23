@@ -20,6 +20,12 @@ export async function register(req, res) {
   res.status(201).send(info);
 }
 
+export async function logoutOthers(req, res) {
+  const device = await req.getDevice();
+  await wallets.logoutOthers(device);
+  res.status(200).send({ success: true });
+}
+
 // Public
 
 export async function tokenPublicPinVerify(req, res) {
