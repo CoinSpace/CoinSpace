@@ -331,6 +331,15 @@ export async function switchCrypto(crypto, force=false) {
   state.wallet = state.wallets[crypto._id];
   bip21.registerProtocolHandler(crypto);
 
+  if (force === true) {
+    await request({
+      baseURL: process.env.SITE_URL,
+      url: 'api/v3/logout/others',
+      method: 'post',
+      seed: 'public',
+    }).catch(console.error);
+  }
+
   emitter.emit('sync');
 
   setTimeout(() => {
@@ -358,6 +367,7 @@ async function initWalletWithPublicKey(crypto) {
     publicKey,
     ...getWalletOptions(crypto),
   });
+  LS.setPublicKey(wallet, seeds.get('public'));
   state.wallets[crypto._id] = wallet;
 }
 
