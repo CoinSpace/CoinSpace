@@ -264,10 +264,10 @@ export async function updateWallet() {
   }
 }
 
-export async function addPublicKey(crypto) {
+export async function addPublicKey(crypto, settings) {
   try {
     await unlock();
-    await initWalletWithSeed(crypto, seeds.get('private'));
+    await initWalletWithSeed(crypto, seeds.get('private'), settings);
     lock();
   } catch (err) {
     lock();
@@ -312,11 +312,11 @@ export function getWalletById(cryptoId) {
   return state.wallets[cryptoId];
 }
 
-export async function switchCrypto(crypto, force=false) {
-  if (isCryptoEqual(crypto, getWallet().crypto) && !force) {
+export async function switchCrypto(crypto) {
+  if (isCryptoEqual(crypto, getWallet().crypto)) {
     return;
   }
-  if (!LS.hasPublicKey(crypto.platform) || force) {
+  if (!LS.hasPublicKey(crypto.platform)) {
     try {
       await addPublicKey(crypto);
     } catch (err) {
@@ -331,15 +331,6 @@ export async function switchCrypto(crypto, force=false) {
   state.wallet = state.wallets[crypto._id];
   bip21.registerProtocolHandler(crypto);
 
-  if (force === true) {
-    await request({
-      baseURL: process.env.SITE_URL,
-      url: 'api/v3/logout/others',
-      method: 'post',
-      seed: 'public',
-    }).catch(console.error);
-  }
-
   emitter.emit('sync');
 
   setTimeout(() => {
@@ -347,15 +338,34 @@ export async function switchCrypto(crypto, force=false) {
   }, 200);
 }
 
+export async function reloadCrypto(settings) {
+  const { crypto } = state.wallet;
+  await addPublicKey(crypto, settings);
+  state.wallet = state.wallets[crypto._id];
+
+  emitter.emit('sync');
+
+  await state.wallet.load().then(() => {
+    LS.setPublicKey(state.wallet, seeds.get('public'));
+    emitter.emit('wallet-ready');
+  }).catch((err) => {
+    emitter.emit('wallet-error', err);
+  });
+}
+
 export function unsetWallet(crypto) {
   delete state.wallets[crypto._id];
 }
 
-async function initWalletWithSeed(crypto, seed) {
-  const wallet = new Wallet[crypto.platform]({
+async function initWalletWithSeed(crypto, seed, settings) {
+  const options = {
     seed,
     ...getWalletOptions(crypto),
-  });
+  };
+  if (settings) {
+    options.settings = settings;
+  }
+  const wallet = new Wallet[crypto.platform](options);
   LS.setPublicKey(wallet, seeds.get('public'));
   wallet.lock();
   state.wallets[crypto._id] = wallet;
@@ -367,7 +377,6 @@ async function initWalletWithPublicKey(crypto) {
     publicKey,
     ...getWalletOptions(crypto),
   });
-  LS.setPublicKey(wallet, seeds.get('public'));
   state.wallets[crypto._id] = wallet;
 }
 
