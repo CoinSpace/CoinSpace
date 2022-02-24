@@ -346,7 +346,6 @@ export async function reloadCrypto(settings) {
   emitter.emit('sync');
 
   await state.wallet.load().then(() => {
-    LS.setPublicKey(state.wallet, seeds.get('public'));
     emitter.emit('wallet-ready');
   }).catch((err) => {
     emitter.emit('wallet-error', err);

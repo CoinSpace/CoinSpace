@@ -63,6 +63,14 @@ export default function open() {
       }
       try {
         await reloadCrypto(settings);
+      } catch (err) {
+        ractive.set('isLoading', false);
+        if (err.message !== 'cancelled') {
+          console.error(err);
+        }
+        return;
+      }
+      try {
         await details.setCryptoSettings(wallet.crypto._id, settings);
         await request({
           baseURL: process.env.SITE_URL,
@@ -71,9 +79,7 @@ export default function open() {
           seed: 'public',
         });
       } catch (err) {
-        if (err.message !== 'cancelled') {
-          console.error(err);
-        }
+        console.error(err);
       }
     }
     ractive.fire('cancel');
