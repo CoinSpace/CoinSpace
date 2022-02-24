@@ -2,7 +2,6 @@ import Ractive from 'widgets/modals/base';
 import { translate } from 'lib/i18n';
 import request from 'lib/request';
 import { getWallet, reloadCrypto } from 'lib/wallet';
-import details from 'lib/wallet/details';
 import { showError } from 'widgets/modals/flash';
 import content from './_content.ract';
 
@@ -70,17 +69,12 @@ export default function open() {
         }
         return;
       }
-      try {
-        await details.setCryptoSettings(wallet.crypto._id, settings);
-        await request({
-          baseURL: process.env.SITE_URL,
-          url: 'api/v3/logout/others',
-          method: 'post',
-          seed: 'public',
-        });
-      } catch (err) {
-        console.error(err);
-      }
+      await request({
+        baseURL: process.env.SITE_URL,
+        url: 'api/v3/logout/others',
+        method: 'post',
+        seed: 'public',
+      }).catch(console.error);
     }
     ractive.fire('cancel');
     ractive.set('isLoading', false);

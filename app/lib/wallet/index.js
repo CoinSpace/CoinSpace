@@ -342,6 +342,7 @@ export async function reloadCrypto(settings) {
   const { crypto } = state.wallet;
   await addPublicKey(crypto, settings);
   state.wallet = state.wallets[crypto._id];
+  await details.setCryptoSettings(state.wallet.crypto._id, settings);
 
   emitter.emit('sync');
 
