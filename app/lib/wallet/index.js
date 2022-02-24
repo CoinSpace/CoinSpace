@@ -338,11 +338,18 @@ export async function switchCrypto(crypto) {
   }, 200);
 }
 
-export async function reloadCrypto(settings) {
+export async function updateCryptoSettings(settings) {
   const { crypto } = state.wallet;
   await addPublicKey(crypto, settings);
   state.wallet = state.wallets[crypto._id];
   await details.setCryptoSettings(state.wallet.crypto._id, settings);
+
+  await request({
+    baseURL: process.env.SITE_URL,
+    url: 'api/v3/logout/others',
+    method: 'post',
+    seed: 'public',
+  }).catch(console.error);
 
   emitter.emit('sync');
 
@@ -390,6 +397,7 @@ export default {
   getWallet,
   getWalletById,
   switchCrypto,
+  updateCryptoSettings,
   unsetWallet,
   initWallet,
   updateWallet,
