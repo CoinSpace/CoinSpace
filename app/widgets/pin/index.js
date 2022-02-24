@@ -80,7 +80,9 @@ function open(options) {
     ractive.close();
   });
 
-  if (touchId) {
+  async function autoRunTouchId() {
+    if (!touchId) return;
+    await new Promise((resolve) => setTimeout(resolve, 300));
     if (process.env.BUILD_TYPE === 'web') {
       if (!isSafari) {
         ractive.fire('touch-id');
@@ -89,6 +91,8 @@ function open(options) {
       ractive.fire('touch-id');
     }
   }
+
+  autoRunTouchId();
 
   ractive.wrong = (error) => {
     ractive.set('isLoading', false);

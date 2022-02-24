@@ -31,8 +31,8 @@ async function enable(pin) {
         description: process.env.BUILD_PLATFORM === 'ios' ? translate('Scan your fingerprint please') : '',
         secret: pin,
         invalidateOnEnrollment: true,
-        fallbackButtonTitle: translate('Enter PIN'),
-        disableBackup: false,
+        fallbackButtonTitle: translate('Cancel'),
+        disableBackup: true,
       }, resolve, reject);
     });
   } else {
@@ -73,8 +73,8 @@ function phonegap() {
     const error = new Error('touch_id_error');
     window.Fingerprint.loadBiometricSecret({
       description: process.env.BUILD_PLATFORM === 'ios' ? translate('Scan your fingerprint please') : '',
-      fallbackButtonTitle: translate('Enter PIN'),
-      disableBackup: false,
+      fallbackButtonTitle: translate('Cancel'),
+      disableBackup: true,
     }, (secret) => resolve(secret), () => reject(error));
   });
 }
