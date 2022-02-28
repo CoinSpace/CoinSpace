@@ -61,10 +61,8 @@ async function getWidgetUrls(crypto, address) {
 }
 
 function getMoonpayCoin(crypto) {
-  for (const key in coins) {
-    if (coins[key].symbol === crypto.symbol && coins[key].network === crypto.platform) {
-      return coins[key];
-    }
+  if (crypto.moonpay) {
+    return coins[crypto.moonpay.id];
   }
 }
 
