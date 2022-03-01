@@ -305,10 +305,6 @@
         <source>Scan your fingerprint please</source>
         <target>지문을 스캔해주십시오</target>
       </trans-unit>
-      <trans-unit id="Enter PIN">
-        <source>Enter PIN</source>
-        <target>PIN 번호 입력</target>
-      </trans-unit>
       <trans-unit id="I Agree To The Terms &amp; Conditions">
         <source>I Agree To The Terms &amp; Conditions</source>
         <target>이용 약관에 동의합니다</target>
@@ -662,10 +658,6 @@
       <trans-unit id="Network node error. Please try again later.">
         <source>%(network)s node error. Please try again later.</source>
         <target>%(network)s 노드 오류. 나중에 다시 시도해주십시오.</target>
-      </trans-unit>
-      <trans-unit id="Choose exchange">
-        <source>Choose exchange</source>
-        <target>환전 선택</target>
       </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>

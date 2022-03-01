@@ -305,10 +305,6 @@
         <source>Scan your fingerprint please</source>
         <target>Silahkan scan sidik jari anda</target>
       </trans-unit>
-      <trans-unit id="Enter PIN">
-        <source>Enter PIN</source>
-        <target>Masukkan PIN</target>
-      </trans-unit>
       <trans-unit id="I Agree To The Terms &amp; Conditions">
         <source>I Agree To The Terms &amp; Conditions</source>
         <target>Saya menyetujui Syarat &amp; Ketentuan</target>
@@ -662,10 +658,6 @@
       <trans-unit id="Network node error. Please try again later.">
         <source>%(network)s node error. Please try again later.</source>
         <target>%(network)s node error. Silahkan coba kembali nanti.</target>
-      </trans-unit>
-      <trans-unit id="Choose exchange">
-        <source>Choose exchange</source>
-        <target>Pilih bursa</target>
       </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>

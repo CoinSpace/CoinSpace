@@ -305,10 +305,6 @@
         <source>Scan your fingerprint please</source>
         <target>Faça a leitura da sua impressão digital</target>
       </trans-unit>
-      <trans-unit id="Enter PIN">
-        <source>Enter PIN</source>
-        <target>Digite o código PIN</target>
-      </trans-unit>
       <trans-unit id="I Agree To The Terms &amp; Conditions">
         <source>I Agree To The Terms &amp; Conditions</source>
         <target>Concordo com os Termos e Condições</target>
@@ -662,10 +658,6 @@
       <trans-unit id="Network node error. Please try again later.">
         <source>%(network)s node error. Please try again later.</source>
         <target>Erro de nódulo %(network)s. Tente novamente mais tarde</target>
-      </trans-unit>
-      <trans-unit id="Choose exchange">
-        <source>Choose exchange</source>
-        <target>Escolher câmbio</target>
       </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>

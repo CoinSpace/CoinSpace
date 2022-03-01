@@ -3,15 +3,11 @@ import emitter from 'lib/emitter';
 import { showInfo } from 'widgets/modals/flash';
 import { translate } from 'lib/i18n';
 import template from './index.ract';
-import footer from '../footer.ract';
 
 export default function(el) {
   const ractive = new Ractive({
     el,
     template,
-    partials: {
-      footer,
-    },
   });
 
   const delay = 60 * 1000; // 60 seconds

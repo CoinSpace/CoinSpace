@@ -305,10 +305,6 @@
         <source>Scan your fingerprint please</source>
         <target>Skanne fingeravtrykket vennligst</target>
       </trans-unit>
-      <trans-unit id="Enter PIN">
-        <source>Enter PIN</source>
-        <target>skriv inn PIN</target>
-      </trans-unit>
       <trans-unit id="I Agree To The Terms &amp; Conditions">
         <source>I Agree To The Terms &amp; Conditions</source>
         <target>Jeg godtar vilkårene og betingelsene</target>
@@ -662,10 +658,6 @@
       <trans-unit id="Network node error. Please try again later.">
         <source>%(network)s node error. Please try again later.</source>
         <target>%(network)s nodefeil, forsøk igjen senere.</target>
-      </trans-unit>
-      <trans-unit id="Choose exchange">
-        <source>Choose exchange</source>
-        <target>Velg veksling</target>
       </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>

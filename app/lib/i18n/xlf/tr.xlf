@@ -305,10 +305,6 @@
         <source>Scan your fingerprint please</source>
         <target>Lütfen parmak izinizi tarayın</target>
       </trans-unit>
-      <trans-unit id="Enter PIN">
-        <source>Enter PIN</source>
-        <target>PIN girin</target>
-      </trans-unit>
       <trans-unit id="I Agree To The Terms &amp; Conditions">
         <source>I Agree To The Terms &amp; Conditions</source>
         <target>Hüküm ve Koşulları Kabul Ediyorum</target>
@@ -662,10 +658,6 @@
       <trans-unit id="Network node error. Please try again later.">
         <source>%(network)s node error. Please try again later.</source>
         <target>%(network)s düğüm hatası. Lütfen daha sonra tekrar deneyin.</target>
-      </trans-unit>
-      <trans-unit id="Choose exchange">
-        <source>Choose exchange</source>
-        <target>Çevirmeyi seçin</target>
       </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
