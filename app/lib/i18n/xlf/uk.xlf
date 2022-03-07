@@ -659,6 +659,10 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>Помилка вузла %(network)s. Спробуйте пізніше.</target>
       </trans-unit>
+      <trans-unit id="Choose exchange">
+        <source>Choose exchange</source>
+        <target>Вибрати операцію обміну</target>
+      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Мінімальна кількість:</target>

@@ -658,6 +658,10 @@
         <source>%(network)s node error. Please try again later.</source>
         <target></target>
       </trans-unit>
+      <trans-unit id="Choose exchange">
+        <source>Choose exchange</source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target></target>

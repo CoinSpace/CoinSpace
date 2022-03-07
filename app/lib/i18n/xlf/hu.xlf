@@ -659,6 +659,10 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>%(network)s csomópont hiba. Próbáld később.</target>
       </trans-unit>
+      <trans-unit id="Choose exchange">
+        <source>Choose exchange</source>
+        <target>Válassz váltót</target>
+      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Minimális összeg:</target>

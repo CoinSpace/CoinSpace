@@ -659,6 +659,10 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>Lỗi nút mạng %(network)s. Vui lòng thử lại sau.</target>
       </trans-unit>
+      <trans-unit id="Choose exchange">
+        <source>Choose exchange</source>
+        <target>Chọn giao dịch</target>
+      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Số tiền tối thiểu:</target>

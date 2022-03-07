@@ -15,6 +15,7 @@ import { toAtom, toUnitString } from 'lib/convert';
 import { translate } from 'lib/i18n';
 import _ from 'lodash';
 import template from './index.ract';
+import footer from '../footer.ract';
 import loader from 'partials/loader/loader.ract';
 
 export default function(el) {
@@ -38,6 +39,7 @@ export default function(el) {
     },
     partials: {
       loader,
+      footer,
     },
   });
 

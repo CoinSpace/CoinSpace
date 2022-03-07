@@ -659,6 +659,10 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>%(network)s ノードエラー。後でやり直してください。</target>
       </trans-unit>
+      <trans-unit id="Choose exchange">
+        <source>Choose exchange</source>
+        <target>取引所を選択</target>
+      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>最小額：</target>

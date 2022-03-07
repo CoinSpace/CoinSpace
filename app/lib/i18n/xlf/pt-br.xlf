@@ -659,6 +659,10 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>Erro de nódulo %(network)s. Tente novamente mais tarde</target>
       </trans-unit>
+      <trans-unit id="Choose exchange">
+        <source>Choose exchange</source>
+        <target>Escolher câmbio</target>
+      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Valor mínimo:</target>

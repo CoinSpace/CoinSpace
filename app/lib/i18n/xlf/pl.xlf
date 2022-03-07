@@ -659,6 +659,10 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>%(network)s błąd node'a. Prosimy spróbować później</target>
       </trans-unit>
+      <trans-unit id="Choose exchange">
+        <source>Choose exchange</source>
+        <target>Wybierz wymianę</target>
+      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Minimalna kwota:</target>

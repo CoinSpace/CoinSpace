@@ -659,6 +659,10 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>%(network)s düğüm hatası. Lütfen daha sonra tekrar deneyin.</target>
       </trans-unit>
+      <trans-unit id="Choose exchange">
+        <source>Choose exchange</source>
+        <target>Çevirmeyi seçin</target>
+      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Minimum tutar:</target>

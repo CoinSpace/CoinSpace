@@ -659,6 +659,10 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>Chyba uzlu %(network)s. Zkuste to prosím později znovu.</target>
       </trans-unit>
+      <trans-unit id="Choose exchange">
+        <source>Choose exchange</source>
+        <target>Vyberte burzu</target>
+      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Minimální množství:</target>

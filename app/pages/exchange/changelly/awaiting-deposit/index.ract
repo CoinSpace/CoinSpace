@@ -64,3 +64,4 @@
   </div>
 
 </div>
+{{>footer}}

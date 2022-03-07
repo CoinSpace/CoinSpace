@@ -659,6 +659,10 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>เกิดข้อผิดพลาดกับโนด%(network)s โปรดลองอีกครั้งในภายหลัง</target>
       </trans-unit>
+      <trans-unit id="Choose exchange">
+        <source>Choose exchange</source>
+        <target>เลือกการแลกเปลี่ยน</target>
+      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>จำนวนขั้นต่ำ:</target>

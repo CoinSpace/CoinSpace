@@ -7,6 +7,7 @@ import showTooltip from 'widgets/modals/tooltip';
 import { translate } from 'lib/i18n';
 import clipboard from 'lib/clipboard';
 import template from './index.ract';
+import footer from '../footer.ract';
 
 const extraIdLabels = {
   XLM: 'Memo',
@@ -29,6 +30,9 @@ export default function(el) {
       toSymbol: '',
       toBlockchain: '',
       isPhonegap: process.env.BUILD_TYPE === 'phonegap',
+    },
+    partials: {
+      footer,
     },
   });
 

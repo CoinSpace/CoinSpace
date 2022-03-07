@@ -2,6 +2,7 @@ import Ractive from '../ractive';
 import emitter from 'lib/emitter';
 import details from 'lib/wallet/details';
 import template from './index.ract';
+import footer from '../footer.ract';
 
 export default function(el) {
   const ractive = new Ractive({
@@ -10,6 +11,9 @@ export default function(el) {
     data: {
       message: '',
       showEmail: true,
+    },
+    partials: {
+      footer,
     },
   });
 

@@ -2,6 +2,7 @@ import Ractive from '../ractive';
 import emitter from 'lib/emitter';
 import details from 'lib/wallet/details';
 import template from './index.ract';
+import footer from '../footer.ract';
 import { getWalletById } from 'lib/wallet';
 import crypto from 'lib/crypto';
 
@@ -31,6 +32,9 @@ export default function(el) {
       amount: '',
       payoutHash: '',
       txUrl: () => '',
+    },
+    partials: {
+      footer,
     },
   });
 

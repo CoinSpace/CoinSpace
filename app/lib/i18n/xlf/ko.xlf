@@ -659,6 +659,10 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>%(network)s 노드 오류. 나중에 다시 시도해주십시오.</target>
       </trans-unit>
+      <trans-unit id="Choose exchange">
+        <source>Choose exchange</source>
+        <target>환전 선택</target>
+      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>최소 금액:</target>

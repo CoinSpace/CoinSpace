@@ -24,3 +24,4 @@
   {{/showEmail}}
 
 </div>
+{{>footer}}

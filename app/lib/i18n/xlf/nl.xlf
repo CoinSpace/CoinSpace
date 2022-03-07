@@ -659,6 +659,10 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>Fout bij nodus %(network)s. Probeer het later nog een keer.</target>
       </trans-unit>
+      <trans-unit id="Choose exchange">
+        <source>Choose exchange</source>
+        <target>Beurs kiezen</target>
+      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Minimum bedrag:</target>
