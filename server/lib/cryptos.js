@@ -7,7 +7,7 @@ const COLLECTION = 'cryptos';
 const CURRENCIES = [
   'ARS', 'AUD', 'BRL', 'CAD', 'CHF', 'CNY',
   'DKK', 'EUR', 'GBP', 'IDR', 'ILS',
-  'JPY', 'MXN', 'NOK', 'NZD', 'PLN',
+  'JPY', 'MXN', 'NOK', 'NZD', 'PHP', 'PLN',
   'RUB', 'SEK', 'SGD', 'TRY', 'UAH',
   'USD', 'ZAR',
 ];
