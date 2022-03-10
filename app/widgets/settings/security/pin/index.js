@@ -3,7 +3,7 @@ import emitter from 'lib/emitter';
 import { translate } from 'lib/i18n';
 import os from 'lib/detect-os';
 import settings from 'lib/wallet/settings';
-import touchId from 'lib/touch-id';
+import biometry from 'lib/biometry';
 import PinWidget from 'widgets/pin';
 import request from 'lib/request';
 import LS from 'lib/wallet/localStorage';
@@ -17,49 +17,49 @@ export default function(el) {
     template,
     data: {
       title: getTitle(),
-      touchIdLabel: getTouchIdLabel(),
-      isTouchIdAvailable: touchId.isAvailable(),
-      isTouchIdEnabled: touchId.isEnabled(),
+      biometryLabel: getBiometryLabel(),
+      isBiometryAvailable: biometry.isAvailable(),
+      isBiometryEnabled: biometry.isEnabled(),
       isOneFaPrivateEnabled: settings.get('1faPrivate'),
     },
   });
 
-  let isLoadingTouchId = false;
+  let isLoadingBiometry = false;
   let isLoadingOneFaPrivate = false;
 
   ractive.on('back', () => {
     ractive.fire('change-step', { step: 'main' });
   });
 
-  ractive.on('toggle-touchid', async () => {
-    if (isLoadingTouchId) return;
-    isLoadingTouchId = true;
+  ractive.on('toggle-biometry', async () => {
+    if (isLoadingBiometry) return;
+    isLoadingBiometry = true;
     const { unlock, lock } = security;
 
-    const isTouchIdEnabled = ractive.get('isTouchIdEnabled');
+    const isBiometryEnabled = ractive.get('isBiometryEnabled');
     try {
       if (process.env.BUILD_TYPE === 'phonegap') {
-        if (isTouchIdEnabled) {
-          await touchId.disable();
+        if (isBiometryEnabled) {
+          await biometry.disable();
         } else {
           const pin = await getPin();
-          await touchId.enable(pin);
+          await biometry.enable(pin);
         }
       } else {
         await unlock();
-        if (isTouchIdEnabled) {
-          await touchId.disable();
+        if (isBiometryEnabled) {
+          await biometry.disable();
         } else {
-          await touchId.enable();
+          await biometry.enable();
         }
         lock();
       }
-      ractive.set('isTouchIdEnabled', !isTouchIdEnabled);
+      ractive.set('isBiometryEnabled', !isBiometryEnabled);
     } catch (err) {
       lock();
-      if (err.message !== 'touch_id_error' && err.message !== 'cancelled') console.error(err);
+      if (err.message !== 'biometry_error' && err.message !== 'cancelled') console.error(err);
     }
-    isLoadingTouchId = false;
+    isLoadingBiometry = false;
   });
 
   ractive.on('toggle-1fa-private', async () => {
@@ -109,7 +109,7 @@ async function getPin() {
 }
 
 function getTitle() {
-  if (!touchId.isAvailable()) return translate('PIN');
+  if (!biometry.isAvailable()) return translate('PIN');
   if (os === 'ios' || os === 'macos') {
     return translate('PIN & Touch ID');
   } else if (os === 'android') {
@@ -119,7 +119,7 @@ function getTitle() {
   }
 }
 
-function getTouchIdLabel() {
+function getBiometryLabel() {
   if (os === 'ios' || os === 'macos') {
     return 'Touch&nbsp;ID';
   } else if (os === 'android') {

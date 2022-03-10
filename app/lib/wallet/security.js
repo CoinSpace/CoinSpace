@@ -5,7 +5,7 @@ import seeds from './seeds';
 import LS from './localStorage';
 import crypto from 'crypto';
 import emitter from 'lib/emitter';
-import touchId from 'lib/touch-id';
+import biometry from 'lib/biometry';
 import hardware from 'lib/hardware';
 import { isSafari } from 'lib/detect-os';
 import { translate } from 'lib/i18n';
@@ -15,7 +15,7 @@ export function unlock(wallet) {
   return new Promise((resolve, reject) => {
     if (settings.get('1faPrivate')) {
       const pinWidget = PinWidget({
-        touchId: true,
+        biometry: true,
         append: true,
         async onPin(pin) {
           try {
@@ -31,15 +31,15 @@ export function unlock(wallet) {
             emitter.emit('auth-error', err);
           }
         },
-        async onTouchId() {
+        async onBiometry() {
           try {
             let privateToken;
             if (process.env.BUILD_TYPE === 'phonegap') {
-              const pin = await touchId.phonegap();
+              const pin = await biometry.phonegap();
               this.set('isLoading', true);
               privateToken = await _getPrivateTokenByPin(pin, this);
             } else {
-              const res = await touchId.privateToken();
+              const res = await biometry.privateToken();
               if (res.privateToken) {
                 this.set('isLoading', true);
                 // eslint-disable-next-line prefer-destructuring
@@ -68,7 +68,7 @@ export function unlock(wallet) {
             await new Promise((resolve) => setTimeout(resolve, 200));
             resolve();
           } catch (err) {
-            if (err.message === 'touch_id_error') return;
+            if (err.message === 'biometry_error') return;
             if (err.message === 'hardware_error') return;
             this.wrong();
             emitter.emit('auth-error', err);

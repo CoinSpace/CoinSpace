@@ -8,11 +8,11 @@
     </div>
   </div>
 
-  {{#if isTouchIdAvailable}}
+  {{#if isBiometryAvailable}}
   <div class="_section">
     <div class="_list_item">
-      <div class="_label">{{{touchIdLabel}}}</div>
-      <div class="_radio_btn" class-_checked="isTouchIdEnabled" on-click="toggle-touchid"></div>
+      <div class="_label">{{{biometryLabel}}}</div>
+      <div class="_radio_btn" class-_checked="isBiometryEnabled" on-click="toggle-biometry"></div>
     </div>
   </div>
   {{/if}}

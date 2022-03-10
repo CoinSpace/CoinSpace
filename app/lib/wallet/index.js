@@ -37,7 +37,7 @@ import monero from '@coinspace/crypto-db/crypto/monero@monero.json';
 import { eddsa } from 'elliptic';
 
 const ec = new eddsa('ed25519');
-import touchId from 'lib/touch-id';
+import biometry from 'lib/biometry';
 import ticker from 'lib/ticker-api';
 import convert from 'lib/convert';
 import details from 'lib/wallet/details';
@@ -143,13 +143,13 @@ async function loginWithPin(pin) {
   await initWallet();
 }
 
-async function loginWithTouchId(widget) {
+async function loginWithBiometry(widget) {
   if (process.env.BUILD_TYPE === 'phonegap') {
-    const pin = await touchId.phonegap();
+    const pin = await biometry.phonegap();
     widget && widget.loading();
     return loginWithPin(pin);
   } else {
-    const { publicToken } = await touchId.publicToken(widget);
+    const { publicToken } = await biometry.publicToken(widget);
     seeds.unlock('public', publicToken);
     await Promise.all([details.init(), settings.init()]).then(initCrypto);
     emitter.emit('auth-success');
@@ -391,7 +391,7 @@ export default {
   createWallet,
   registerWallet,
   loginWithPin,
-  loginWithTouchId,
+  loginWithBiometry,
   removeAccount,
   setUsername,
   getWallet,

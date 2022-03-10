@@ -123,13 +123,13 @@ function reset() {
   localStorage.clear();
 }
 
-function isTouchIdEnabled() {
-  return !!localStorage.getItem('_cs_touchid_enabled');
+function isBiometryEnabled() {
+  return !!localStorage.getItem('_cs_biometry_enabled');
 }
 
-function setTouchIdEnabled(value) {
-  if (!value) return localStorage.removeItem('_cs_touchid_enabled');
-  return localStorage.setItem('_cs_touchid_enabled', value);
+function setBiometryEnabled(value) {
+  if (!value) return localStorage.removeItem('_cs_biometry_enabled');
+  return localStorage.setItem('_cs_biometry_enabled', value);
 }
 
 export default {
@@ -152,8 +152,8 @@ export default {
   getPublicKey,
   setPublicKey,
   reset,
-  isTouchIdEnabled,
-  setTouchIdEnabled,
+  isBiometryEnabled,
+  setBiometryEnabled,
   getCache,
   setCache,
   unsetCache,

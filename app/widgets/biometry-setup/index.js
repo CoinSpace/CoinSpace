@@ -1,7 +1,7 @@
 import Ractive from 'lib/ractive';
 import { translate } from 'lib/i18n';
 import os from 'lib/detect-os';
-import touchId from 'lib/touch-id';
+import biometry from 'lib/biometry';
 import template from './index.ract';
 
 function open(options) {
@@ -39,9 +39,9 @@ function open(options) {
 
   ractive.on('confirm', async () => {
     try {
-      await touchId.enable(pin);
+      await biometry.enable(pin);
     } catch (err) {
-      if (err.message === 'touch_id_error') return;
+      if (err.message === 'biometry_error') return;
       return console.error(err);
     }
     ractive.close();

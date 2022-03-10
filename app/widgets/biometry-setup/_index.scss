@@ -1,4 +1,4 @@
-.widget-touch-id-setup{
+.widget-biometry-setup{
   background-color: white;
   position: fixed;
   top: 0;
@@ -27,7 +27,7 @@
 
   ._title {
     @extend .jigsaw-medium;
-    padding: 10px;
+    margin: 10px;
     font-size: $header_font_size;
     @include breakpoint(portrait) {
       font-size: $header_font_size--portrait;
@@ -47,14 +47,14 @@
     padding: 20px;
 
     ._icon {
+      padding: 30px;
       svg {
         fill: darken($grey, 20%);
-        width: 120px;
-        height: 120px;
-        padding: 30px;
+        width: 60px;
+        height: 60px;
         @include breakpoint(portrait) {
-          width: 140px;
-          height: 140px;
+          width: 80px;
+          height: 80px;
         }
       }
     }

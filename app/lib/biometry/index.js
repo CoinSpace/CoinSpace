@@ -7,6 +7,13 @@ import { startAttestation, startAssertion } from '@simplewebauthn/browser';
 let isAvailable = false;
 
 async function init() {
+  // migrate touchid v5.1.7
+  const legacy = localStorage.getItem('_cs_touchid_enabled');
+  if (legacy) {
+    LS.setBiometryEnabled(legacy);
+    localStorage.removeItem('_cs_touchid_enabled');
+  }
+
   try {
     if (process.env.BUILD_TYPE === 'phonegap') {
       isAvailable = await new Promise((resolve) => {
@@ -54,7 +61,7 @@ async function enable(pin) {
       seed: 'private',
     });
   }
-  LS.setTouchIdEnabled(true);
+  LS.setBiometryEnabled(true);
 }
 
 async function disable() {
@@ -65,12 +72,12 @@ async function disable() {
       seed: 'private',
     });
   }
-  LS.setTouchIdEnabled(false);
+  LS.setBiometryEnabled(false);
 }
 
 function phonegap() {
   return new Promise((resolve, reject) => {
-    const error = new Error('touch_id_error');
+    const error = new Error('biometry_error');
     window.Fingerprint.loadBiometricSecret({
       description: process.env.BUILD_PLATFORM === 'ios' ? translate('Scan your fingerprint please') : '',
       fallbackButtonTitle: translate('Cancel'),
@@ -125,14 +132,14 @@ async function privateToken() {
 
 export function isEnabled() {
   if (!isAvailable) return false;
-  return !!LS.isTouchIdEnabled();
+  return !!LS.isBiometryEnabled();
 }
 
 function handleError(err) {
   if (!err.message.startsWith('The operation either timed out or was not allowed.')) {
     console.error(err);
   }
-  throw new Error('touch_id_error');
+  throw new Error('biometry_error');
 }
 
 export default {

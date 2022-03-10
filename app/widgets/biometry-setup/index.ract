@@ -1,9 +1,9 @@
-<div class="widget-touch-id-setup" class-_animated="animation" class-_open="isOpen">
+<div class="widget-biometry-setup" class-_animated="animation" class-_open="isOpen">
 
   <div class="_content">
 
     <div class="_icon">
-      {{>svg_touchid}}
+      {{>svg_fingerprint}}
     </div>
 
     <div class="_title">{{{header}}}</div>

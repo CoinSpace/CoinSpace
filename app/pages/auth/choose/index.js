@@ -46,7 +46,7 @@ export default function(el) {
   ractive.showPin = () => {
     ractive.pinWidget = PinWidget({
       backLabel: translate('Logout'),
-      touchId: true,
+      biometry: true,
       async onPin(pin) {
         try {
           await CS.loginWithPin(pin);
@@ -55,11 +55,11 @@ export default function(el) {
           emitter.emit('auth-error', err);
         }
       },
-      async onTouchId() {
+      async onBiometry() {
         try {
-          await CS.loginWithTouchId(this);
+          await CS.loginWithBiometry(this);
         } catch (err) {
-          if (err.message === 'touch_id_error') return;
+          if (err.message === 'biometry_error') return;
           this.wrong();
           emitter.emit('auth-error', err);
         }

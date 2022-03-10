@@ -3,11 +3,11 @@ import bip21 from 'lib/bip21';
 import LS from 'lib/wallet/localStorage';
 import initFrame from 'widgets/frame';
 import initAuth from 'pages/auth';
-import touchId from 'lib/touch-id';
+import biometry from 'lib/biometry';
 import updater from 'lib/updater';
 import querystring from 'querystring';
 import { showError } from 'widgets/modals/flash';
-import showTouchIdSetup from 'widgets/touch-id-setup';
+import showBiometrySetup from 'widgets/biometry-setup';
 import { fadeIn } from 'lib/transitions/fade.js';
 import { translate } from 'lib/i18n';
 import details from 'lib/wallet/details';
@@ -30,7 +30,7 @@ window.initCSApp = async function() {
   }
   if (process.env.BUILD_TYPE === 'phonegap') navigator.splashscreen.hide();
 
-  await touchId.init();
+  await biometry.init();
   updater.init();
 
   const auth = initAuth(document.getElementById('auth'));
@@ -60,9 +60,9 @@ window.initCSApp = async function() {
     await setLanguage();
 
     const frame = initFrame(appEl);
-    if (pin && touchId.isAvailable()) {
-      const touchIdSetupWidget = showTouchIdSetup({ append: true, pin });
-      touchIdSetupWidget.on('close', () => {
+    if (pin && biometry.isAvailable()) {
+      const biometrySetupWidget = showBiometrySetup({ append: true, pin });
+      biometrySetupWidget.on('close', () => {
         auth.hide();
         frame.show();
       });

@@ -1,6 +1,6 @@
 import Ractive from 'lib/ractive';
 import { translate } from 'lib/i18n';
-import { isEnabled } from 'lib/touch-id';
+import { isEnabled } from 'lib/biometry';
 import template from './index.ract';
 import { isSafari } from 'lib/detect-os';
 
@@ -10,8 +10,8 @@ function open(options) {
     headerLoading = translate('Verifying PIN'),
     backLabel = translate('Back'),
     onPin = () => {},
-    onTouchId = () => {},
-    touchId,
+    onBiometry = () => {},
+    biometry,
     append = false,
   } = options;
 
@@ -33,7 +33,7 @@ function open(options) {
       isOpen: false,
       description: '',
       pin: '',
-      touchId: touchId && isEnabled(),
+      biometry: biometry && isEnabled(),
       enter,
     },
     oncomplete() {
@@ -69,10 +69,10 @@ function open(options) {
     ractive.set('pin', pin.substr(0, pin.length - 1));
   });
 
-  ractive.on('touch-id', async () => {
+  ractive.on('biometry', async () => {
     if (!isEnabled()) return;
     if (ractive.get('isLoading')) return;
-    return onTouchId.bind(ractive)();
+    return onBiometry.bind(ractive)();
   });
 
   ractive.on('back', () => {
@@ -80,19 +80,19 @@ function open(options) {
     ractive.close();
   });
 
-  async function autoRunTouchId() {
-    if (!touchId) return;
+  async function autoRunBiometry() {
+    if (!biometry) return;
     await new Promise((resolve) => setTimeout(resolve, 300));
     if (process.env.BUILD_TYPE === 'web') {
       if (!isSafari) {
-        ractive.fire('touch-id');
+        ractive.fire('biometry');
       }
     } else {
-      ractive.fire('touch-id');
+      ractive.fire('biometry');
     }
   }
 
-  autoRunTouchId();
+  autoRunBiometry();
 
   ractive.wrong = (error) => {
     ractive.set('isLoading', false);

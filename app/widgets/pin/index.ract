@@ -50,8 +50,8 @@
           {{>svg_backspace}}
         </div>
         {{else}}
-        <div class="_btn" class-_disabled="!touchId" on-click="touch-id">
-          {{>svg_touchid}}
+        <div class="_btn" class-_disabled="!biometry" on-click="biometry">
+          {{>svg_fingerprint}}
         </div>
         {{/if}}
       </div>
