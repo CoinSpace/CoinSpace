@@ -1079,6 +1079,14 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Invalid path %(path)s</source>
         <target>Неверный путь %(path)s</target>
       </trans-unit>
+      <trans-unit id="Use Face ID in place of PIN.">
+        <source>Use Face ID in place of PIN.</source>
+        <target>Используйте Face ID вместо PIN-кода.</target>
+      </trans-unit>
+      <trans-unit id="PIN &amp; Face ID">
+        <source>PIN &amp; Face ID</source>
+        <target>ПИН и Face ID</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

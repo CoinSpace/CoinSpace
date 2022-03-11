@@ -1079,6 +1079,14 @@ Het zal worden geconverteerd in %(toSymbol)s, en worden verzonden naar
         <source>Invalid path %(path)s</source>
         <target>Ongeldig pad %(path)s</target>
       </trans-unit>
+      <trans-unit id="Use Face ID in place of PIN.">
+        <source>Use Face ID in place of PIN.</source>
+        <target>Gebruik Face ID in plaats van PIN.</target>
+      </trans-unit>
+      <trans-unit id="PIN &amp; Face ID">
+        <source>PIN &amp; Face ID</source>
+        <target>PIN en Face ID</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

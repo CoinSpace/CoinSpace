@@ -801,7 +801,7 @@ Sie werden in %(toSymbol)s konvertiert und an
       </trans-unit>
       <trans-unit id="Use Touch ID in place of PIN.">
         <source>Use Touch ID in place of PIN.</source>
-        <target>Touch-ID anstelle der PIN verwenden.</target>
+        <target>Touch ID anstelle der PIN verwenden.</target>
       </trans-unit>
       <trans-unit id="Use Fingerprint in place of PIN.">
         <source>Use Fingerprint in place of PIN.</source>
@@ -821,7 +821,7 @@ Sie werden in %(toSymbol)s konvertiert und an
       </trans-unit>
       <trans-unit id="PIN &amp; Touch ID">
         <source>PIN &amp; Touch ID</source>
-        <target>PIN und Touch-ID</target>
+        <target>PIN und Touch ID</target>
       </trans-unit>
       <trans-unit id="PIN &amp; Fingerprint">
         <source>PIN &amp; Fingerprint</source>
@@ -1078,6 +1078,14 @@ Sie werden in %(toSymbol)s konvertiert und an
       <trans-unit id="Invalid path :path">
         <source>Invalid path %(path)s</source>
         <target>Ungültiger Pfad %(path)s</target>
+      </trans-unit>
+      <trans-unit id="Use Face ID in place of PIN.">
+        <source>Use Face ID in place of PIN.</source>
+        <target>Face ID anstelle der PIN verwenden.</target>
+      </trans-unit>
+      <trans-unit id="PIN &amp; Face ID">
+        <source>PIN &amp; Face ID</source>
+        <target>PIN und Face ID</target>
       </trans-unit>
     </body>
   </file>

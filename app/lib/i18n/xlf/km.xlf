@@ -801,15 +801,15 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Use Touch ID in place of PIN.">
         <source>Use Touch ID in place of PIN.</source>
-        <target>  ប្រើក្រយៅដៃត្រង់លេខ PIN ។</target>
+        <target>ប្រើ Touch ID ជំនួស PIN ។</target>
       </trans-unit>
       <trans-unit id="Use Fingerprint in place of PIN.">
         <source>Use Fingerprint in place of PIN.</source>
-        <target>  ប្រើក្រយៅដៃត្រង់លេខ PIN ។</target>
+        <target>ប្រើក្រយៅដៃត្រង់លេខ PIN ។</target>
       </trans-unit>
       <trans-unit id="Use Biometrics in place of PIN.">
         <source>Use Biometrics in place of PIN.</source>
-        <target>  ប្រើជិវមាត្រវិទ្យាត្រង់លេខ PIN ។</target>
+        <target>ប្រើជិវមាត្រវិទ្យាត្រង់លេខ PIN ។</target>
       </trans-unit>
       <trans-unit id="Settings">
         <source>Settings</source>
@@ -821,7 +821,7 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="PIN &amp; Touch ID">
         <source>PIN &amp; Touch ID</source>
-        <target>PIN &amp; ក្រយៅដៃ</target>
+        <target>PIN &amp; Touch ID</target>
       </trans-unit>
       <trans-unit id="PIN &amp; Fingerprint">
         <source>PIN &amp; Fingerprint</source>
@@ -1078,6 +1078,14 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Invalid path :path">
         <source>Invalid path %(path)s</source>
         <target> ផ្លូវមិនត្រឹមត្រូវ %(path)s</target>
+      </trans-unit>
+      <trans-unit id="Use Face ID in place of PIN.">
+        <source>Use Face ID in place of PIN.</source>
+        <target>ប្រើ Face ID ជំនួស PIN ។</target>
+      </trans-unit>
+      <trans-unit id="PIN &amp; Face ID">
+        <source>PIN &amp; Face ID</source>
+        <target>PIN &amp; Face ID</target>
       </trans-unit>
     </body>
   </file>

@@ -1079,6 +1079,14 @@ Bude to převedeno na %(toSymbol)s, a zasláno
         <source>Invalid path %(path)s</source>
         <target>Neplatná cesta %(path)s</target>
       </trans-unit>
+      <trans-unit id="Use Face ID in place of PIN.">
+        <source>Use Face ID in place of PIN.</source>
+        <target>Používat Face ID namísto PIN.</target>
+      </trans-unit>
+      <trans-unit id="PIN &amp; Face ID">
+        <source>PIN &amp; Face ID</source>
+        <target>PIN a Face ID</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

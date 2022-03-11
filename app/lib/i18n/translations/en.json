@@ -266,5 +266,7 @@
   "Oops! something went wrong. Please try again later.": "Oops! something went wrong. Please try again later.",
   "Derivation path": "Derivation path",
   "Derivation path defines how to derive private keys from 12-word passphrase.": "Derivation path defines how to derive private keys from 12-word passphrase.",
-  "Invalid path :path": "Invalid path %(path)s"
+  "Invalid path :path": "Invalid path %(path)s",
+  "Use Face ID in place of PIN.": "Use Face ID in place of PIN.",
+  "PIN & Face ID": "PIN & Face ID"
 }

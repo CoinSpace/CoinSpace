@@ -801,7 +801,7 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Use Touch ID in place of PIN.">
         <source>Use Touch ID in place of PIN.</source>
-        <target>ใช้การสแกนนิ้วมือแทนการใช้รหัสพิน</target>
+        <target>ใช้การ Touch ID แทนการใช้รหัสพิน</target>
       </trans-unit>
       <trans-unit id="Use Fingerprint in place of PIN.">
         <source>Use Fingerprint in place of PIN.</source>
@@ -821,7 +821,7 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="PIN &amp; Touch ID">
         <source>PIN &amp; Touch ID</source>
-        <target>รหัสพิน &amp; สแกนนิ้วมือ</target>
+        <target>รหัสพิน &amp; Touch ID</target>
       </trans-unit>
       <trans-unit id="PIN &amp; Fingerprint">
         <source>PIN &amp; Fingerprint</source>
@@ -1078,6 +1078,14 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Invalid path :path">
         <source>Invalid path %(path)s</source>
         <target>เส้นทางไม่ถูกต้อง %(path)s</target>
+      </trans-unit>
+      <trans-unit id="Use Face ID in place of PIN.">
+        <source>Use Face ID in place of PIN.</source>
+        <target>ใช้การ Face ID แทนการใช้รหัสพิน</target>
+      </trans-unit>
+      <trans-unit id="PIN &amp; Face ID">
+        <source>PIN &amp; Face ID</source>
+        <target></target>
       </trans-unit>
     </body>
   </file>

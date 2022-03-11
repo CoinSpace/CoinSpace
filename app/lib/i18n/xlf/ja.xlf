@@ -1079,6 +1079,14 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Invalid path %(path)s</source>
         <target>無効なパス %(path)s</target>
       </trans-unit>
+      <trans-unit id="Use Face ID in place of PIN.">
+        <source>Use Face ID in place of PIN.</source>
+        <target>PINの代わりに Face IDを使用します。</target>
+      </trans-unit>
+      <trans-unit id="PIN &amp; Face ID">
+        <source>PIN &amp; Face ID</source>
+        <target>PIN &amp; Face ID</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
