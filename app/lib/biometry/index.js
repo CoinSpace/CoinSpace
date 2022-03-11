@@ -1,10 +1,19 @@
 import { translate } from 'lib/i18n';
 import request from 'lib/request';
 import LS from 'lib/wallet/localStorage';
+import os from 'lib/detect-os';
 const { PublicKeyCredential } = window;
 import { startAttestation, startAssertion } from '@simplewebauthn/browser';
 
 let isAvailable = false;
+let type;
+
+const TYPES = {
+  BIOMETRICS: 1,
+  FINGERPRINT: 2,
+  TOUCH_ID: 3,
+  FACE_ID: 4,
+};
 
 async function init() {
   // migrate touchid v5.1.7
@@ -16,9 +25,10 @@ async function init() {
 
   try {
     if (process.env.BUILD_TYPE === 'phonegap') {
-      isAvailable = await new Promise((resolve) => {
-        window.Fingerprint.isAvailable(() => resolve(true), () => resolve(false));
+      type = await new Promise((resolve) => {
+        window.Fingerprint.isAvailable((result) => resolve(result), () => resolve(false));
       });
+      isAvailable = !!type;
     } else if (process.env.BUILD_TYPE === 'electron') {
       isAvailable = false;
     } else {
@@ -28,6 +38,18 @@ async function init() {
     }
   } catch (err) {
     isAvailable = false;
+  }
+
+  if (isAvailable) {
+    if (os === 'ios') {
+      type = type === 'face' ? TYPES.FACE_ID : TYPES.TOUCH_ID;
+    } else if (os === 'macos') {
+      type = TYPES.TOUCH_ID;
+    } else if (os === 'android') {
+      type = TYPES.FINGERPRINT;
+    } else {
+      type = TYPES.BIOMETRICS;
+    }
   }
 }
 
@@ -151,4 +173,6 @@ export default {
   phonegap,
   isAvailable: () => isAvailable,
   isEnabled,
+  getType: () => type,
+  TYPES,
 };

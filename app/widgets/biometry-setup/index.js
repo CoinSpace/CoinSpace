@@ -1,15 +1,16 @@
 import Ractive from 'lib/ractive';
 import { translate } from 'lib/i18n';
-import os from 'lib/detect-os';
 import biometry from 'lib/biometry';
 import template from './index.ract';
 
 function open(options) {
+  const labels = getLabels();
   const {
     animation = true,
-    header = getHeader(),
-    description = getDescription(),
-    buttonLabel = getButtonLabel(),
+    icon = labels.icon,
+    header = labels.header,
+    description = labels.description,
+    buttonLabel = labels.buttonLabel,
     append = false,
     pin,
   } = options;
@@ -19,6 +20,7 @@ function open(options) {
     append,
     template,
     data: {
+      icon,
       header,
       description,
       buttonLabel,
@@ -58,34 +60,38 @@ function open(options) {
   return ractive;
 }
 
-function getHeader() {
-  if (os === 'ios' || os === 'macos') {
-    return 'Touch ID';
-  } else if (os === 'android') {
-    return translate('Fingerprint');
-  } else {
-    return translate('Biometrics');
-  }
-}
-
-function getDescription() {
-  if (os === 'ios' || os === 'macos') {
-    return translate('Use Touch ID in place of PIN.');
-  } else if (os === 'android') {
-    return translate('Use Fingerprint in place of PIN.');
-  } else {
-    return translate('Use Biometrics in place of PIN.');
-  }
-}
-
-function getButtonLabel() {
-  const message = translate('Enable') + ' ';
-  if (os === 'ios' || os === 'macos') {
-    return message + 'Touch ID';
-  } else if (os === 'android') {
-    return message + translate('Fingerprint');
-  } else {
-    return message + translate('Biometrics');
+function getLabels() {
+  const type = biometry.getType();
+  if (!type) return {};
+  const ENABLE = translate('Enable') + ' ';
+  if (type === biometry.TYPES.BIOMETRICS) {
+    return {
+      header: translate('Biometrics'),
+      description: translate('Use Biometrics in place of PIN.'),
+      buttonLabel: ENABLE + translate('Biometrics'),
+      icon: 'svg_fingerprint',
+    };
+  } else if (type === biometry.TYPES.FINGERPRINT) {
+    return {
+      header: translate('Fingerprint'),
+      description: translate('Use Fingerprint in place of PIN.'),
+      buttonLabel: ENABLE + translate('Fingerprint'),
+      icon: 'svg_fingerprint',
+    };
+  } else if (type === biometry.TYPES.TOUCH_ID) {
+    return {
+      header: 'Touch ID',
+      description: translate('Use Touch ID in place of PIN.'),
+      buttonLabel: ENABLE + 'Touch ID',
+      icon: 'svg_fingerprint',
+    };
+  } else if (type === biometry.TYPES.FACE_ID) {
+    return {
+      header: 'Face ID',
+      description: translate('Use Face ID in place of PIN.'),
+      buttonLabel: ENABLE + 'Face ID',
+      icon: 'svg_faceid',
+    };
   }
 }
 

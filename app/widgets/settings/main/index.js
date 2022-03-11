@@ -8,7 +8,6 @@ import exportPrivateKeys from 'widgets/modals/export-private-keys';
 import showEosSetupAccount from 'widgets/modals/eos-setup-account';
 import derivationPath from 'widgets/modals/derivation-path';
 import { translate } from 'lib/i18n';
-import os from 'lib/detect-os';
 import biometry from 'lib/biometry';
 import emitter from 'lib/emitter';
 import template from './index.ract';
@@ -166,12 +165,16 @@ export default function(el) {
 }
 
 function getSecurityPinLabel() {
-  if (!biometry.isAvailable()) return translate('PIN');
-  if (os === 'ios' || os === 'macos') {
-    return translate('PIN & Touch ID');
-  } else if (os === 'android') {
-    return translate('PIN & Fingerprint');
-  } else {
+  const type = biometry.getType();
+  if (type === biometry.TYPES.BIOMETRICS) {
     return translate('PIN & Biometrics');
+  } else if (type === biometry.TYPES.FINGERPRINT) {
+    return translate('PIN & Fingerprint');
+  } else if (type === biometry.TYPES.TOUCH_ID) {
+    return translate('PIN & Touch ID');
+  } else if (type === biometry.TYPES.FACE_ID) {
+    return translate('PIN & Face ID');
+  } else {
+    return translate('PIN');
   }
 }

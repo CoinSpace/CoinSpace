@@ -1,7 +1,6 @@
 import Ractive from 'lib/ractive';
 import emitter from 'lib/emitter';
 import { translate } from 'lib/i18n';
-import os from 'lib/detect-os';
 import settings from 'lib/wallet/settings';
 import biometry from 'lib/biometry';
 import PinWidget from 'widgets/pin';
@@ -12,12 +11,13 @@ import security from 'lib/wallet/security';
 import template from './index.ract';
 
 export default function(el) {
+  const labels = getLabels();
   const ractive = new Ractive({
     el,
     template,
     data: {
-      title: getTitle(),
-      biometryLabel: getBiometryLabel(),
+      title: labels.title,
+      biometryLabel: labels.biometryLabel,
       isBiometryAvailable: biometry.isAvailable(),
       isBiometryEnabled: biometry.isEnabled(),
       isOneFaPrivateEnabled: settings.get('1faPrivate'),
@@ -108,23 +108,28 @@ async function getPin() {
   });
 }
 
-function getTitle() {
-  if (!biometry.isAvailable()) return translate('PIN');
-  if (os === 'ios' || os === 'macos') {
-    return translate('PIN & Touch ID');
-  } else if (os === 'android') {
-    return translate('PIN & Fingerprint');
-  } else {
-    return translate('PIN & Biometrics');
-  }
-}
-
-function getBiometryLabel() {
-  if (os === 'ios' || os === 'macos') {
-    return 'Touch&nbsp;ID';
-  } else if (os === 'android') {
-    return translate('Fingerprint');
-  } else {
-    return translate('Biometrics');
+function getLabels() {
+  const type = biometry.getType();
+  if (!type) return {};
+  if (type === biometry.TYPES.BIOMETRICS) {
+    return {
+      title: translate('PIN & Biometrics'),
+      biometryLabel: translate('Biometrics'),
+    };
+  } else if (type === biometry.TYPES.FINGERPRINT) {
+    return {
+      title: translate('PIN & Fingerprint'),
+      biometryLabel: translate('Fingerprint'),
+    };
+  } else if (type === biometry.TYPES.TOUCH_ID) {
+    return {
+      title: translate('PIN & Touch ID'),
+      biometryLabel: 'Touch ID',
+    };
+  } else if (type === biometry.TYPES.FACE_ID) {
+    return {
+      title: translate('PIN & Face ID'),
+      biometryLabel: 'Face ID',
+    };
   }
 }

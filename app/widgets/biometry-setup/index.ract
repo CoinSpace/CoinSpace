@@ -3,7 +3,7 @@
   <div class="_content">
 
     <div class="_icon">
-      {{>svg_fingerprint}}
+      {{>`${icon}`}}
     </div>
 
     <div class="_title">{{{header}}}</div>

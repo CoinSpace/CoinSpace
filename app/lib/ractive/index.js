@@ -77,6 +77,7 @@ partials.svg_error = require('lib/svg/error.ract');
 partials.svg_changelly = require('lib/svg/changelly.ract');
 partials.svg_backspace = require('lib/svg/backspace.ract');
 partials.svg_fingerprint = require('lib/svg/fingerprint.ract');
+partials.svg_faceid = require('lib/svg/faceid.ract');
 partials.svg_trash = require('lib/svg/trash.ract');
 
 Ractive.prototype.hide = function(context) {

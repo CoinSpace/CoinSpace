@@ -51,7 +51,11 @@
         </div>
         {{else}}
         <div class="_btn" class-_disabled="!biometry" on-click="biometry">
-          {{>svg_fingerprint}}
+          {{#if biometryType === biometryTypes.FACE_ID}}
+            {{>svg_faceid}}
+          {{else}}
+            {{>svg_fingerprint}}
+          {{/if}}
         </div>
         {{/if}}
       </div>

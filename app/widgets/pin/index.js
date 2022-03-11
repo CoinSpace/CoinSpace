@@ -1,6 +1,6 @@
 import Ractive from 'lib/ractive';
 import { translate } from 'lib/i18n';
-import { isEnabled } from 'lib/biometry';
+import { default as Biometry } from 'lib/biometry';
 import template from './index.ract';
 import { isSafari } from 'lib/detect-os';
 
@@ -33,7 +33,9 @@ function open(options) {
       isOpen: false,
       description: '',
       pin: '',
-      biometry: biometry && isEnabled(),
+      biometry: biometry && Biometry.isEnabled(),
+      biometryType: Biometry.getType(),
+      biometryTypes: Biometry.TYPES,
       enter,
     },
     oncomplete() {
@@ -70,7 +72,7 @@ function open(options) {
   });
 
   ractive.on('biometry', async () => {
-    if (!isEnabled()) return;
+    if (!Biometry.isEnabled()) return;
     if (ractive.get('isLoading')) return;
     return onBiometry.bind(ractive)();
   });
