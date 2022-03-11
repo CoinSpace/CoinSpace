@@ -15,7 +15,6 @@ jobs:
         run: echo "VERSION=$(node -p -e "require('./package.json').version")" >> $GITHUB_ENV
       - uses: ncipollo/release-action@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           tag: v${{ env.VERSION }}
           name: v${{ env.VERSION }}
           draft: true
