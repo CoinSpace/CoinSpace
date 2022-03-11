@@ -41,14 +41,20 @@ async function init() {
   }
 
   if (isAvailable) {
-    if (os === 'ios') {
-      type = type === 'face' ? TYPES.FACE_ID : TYPES.TOUCH_ID;
-    } else if (os === 'macos') {
-      type = TYPES.TOUCH_ID;
-    } else if (os === 'android') {
-      type = TYPES.FINGERPRINT;
+    if (process.env.BUILD_TYPE === 'phonegap') {
+      if (type === 'face') {
+        type = TYPES.FACE_ID;
+      } else if (type === 'finger') {
+        type = TYPES.FINGERPRINT;
+      } else if (type === 'biometric') {
+        type = TYPES.BIOMETRICS;
+      }
     } else {
-      type = TYPES.BIOMETRICS;
+      if (os === 'macos') {
+        type = TYPES.TOUCH_ID;
+      } else {
+        type = TYPES.BIOMETRICS;
+      }
     }
   }
 }
