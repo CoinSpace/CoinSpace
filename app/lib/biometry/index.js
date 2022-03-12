@@ -45,7 +45,7 @@ async function init() {
       if (type === 'face') {
         type = TYPES.FACE_ID;
       } else if (type === 'finger') {
-        type = TYPES.FINGERPRINT;
+        type = process.env.BUILD_PLATFORM === 'ios' ? TYPES.TOUCH_ID : TYPES.FINGERPRINT;
       } else if (type === 'biometric') {
         type = TYPES.BIOMETRICS;
       }
