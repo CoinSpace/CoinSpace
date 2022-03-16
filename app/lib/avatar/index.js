@@ -11,7 +11,7 @@ export function getAvatar(size = 64) {
     const hash = crypto.createHash('md5').update(email).digest('hex');
     id = `gravatar:${hash}`;
   } else {
-    const hash = crypto.createHmac('sha256', 'Coin Wallet').update(LS.getDetailsKey()).digest('hex');
+    const hash = crypto.createHmac('sha256', 'Coin Wallet').update(LS.getDetailsKey() || '').digest('hex');
     id = `identicon:${hash}`;
   }
   return {
