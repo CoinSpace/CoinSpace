@@ -32,8 +32,6 @@ export default function(el) {
     ractive.set('needToSetupEos', wallet.crypto.platform === 'eos' && !wallet.isActive);
     ractive.set('isDeletedCrypto', wallet.crypto.platform === 'bitcoin-sv');
 
-    if (process.env.BUILD_PLATFORM === 'mas') return showExchange(exchanges.none);
-
     const preferredExchange = window.localStorage.getItem('_cs_preferred_exchange');
     if (exchanges[preferredExchange]) {
       showExchange(exchanges[preferredExchange]);

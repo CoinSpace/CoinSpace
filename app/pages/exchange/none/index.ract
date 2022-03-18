@@ -21,7 +21,6 @@
   </div>
   {{/if}}
 
-  {{#if BUILD_PLATFORM !== "mas"}}
   <div class="_title">{{translate("Choose exchange")}}</div>
   <div>
     <div on-click="choose('changelly')" class="csbtn">
@@ -29,5 +28,4 @@
       Changelly
     </div>
   </div>
-  {{/if}}
 {{/if}}
