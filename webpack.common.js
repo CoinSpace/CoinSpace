@@ -7,6 +7,7 @@ const webpack = require('webpack');
 const pkg = require('./package.json');
 const dotenv = require('dotenv');
 const polyfills = ['core-js/stable', 'regenerator-runtime/runtime'];
+const { RetryChunkLoadPlugin } = require('webpack-retry-chunk-load-plugin');
 
 dotenv.config({ path: '.env.defaults' });
 process.env.BUILD_TYPE = process.env.BUILD_TYPE || 'web';
@@ -144,6 +145,11 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.VERSION': JSON.stringify(`v${pkg.version}`),
       'process.env.COMMIT': JSON.stringify(COMMIT),
+    }),
+    new RetryChunkLoadPlugin({
+      cacheBust: 'function() { return Date.now(); }',
+      retryDelay: 1000,
+      maxRetries: 3,
     }),
   ],
   optimization: {
