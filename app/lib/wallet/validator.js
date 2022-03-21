@@ -23,6 +23,8 @@ export async function validateSend(options) {
       tx = wallet.createTx(to, amount, options.memo);
     } else if (wallet.crypto.platform === 'monero') {
       tx = await wallet.createTx(to, amount, fee);
+    } else if (wallet.crypto.platform === 'cardano') {
+      tx = await wallet.createTx(to, amount, fee);
     }
     options.tx = tx;
   } catch (err) {

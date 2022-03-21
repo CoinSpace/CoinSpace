@@ -20,6 +20,7 @@ import RippleWallet from '@coinspace/cs-ripple-wallet';
 import StellarWallet from '@coinspace/cs-stellar-wallet';
 import EOSWallet from '@coinspace/cs-eos-wallet';
 import MoneroWallet from '@coinspace/cs-monero-wallet';
+import CardanoWallet from '@coinspace/cs-cardano-wallet';
 
 import bitcoin from '@coinspace/crypto-db/crypto/bitcoin@bitcoin.json';
 import litecoin from '@coinspace/crypto-db/crypto/litecoin@litecoin.json';
@@ -33,6 +34,7 @@ import xrp from '@coinspace/crypto-db/crypto/xrp@ripple.json';
 import stellar from '@coinspace/crypto-db/crypto/stellar@stellar.json';
 import eos from '@coinspace/crypto-db/crypto/eos@eos.json';
 import monero from '@coinspace/crypto-db/crypto/monero@monero.json';
+import cardano from '@coinspace/crypto-db/crypto/cardano@cardano.json';
 
 import { eddsa } from 'elliptic';
 
@@ -63,6 +65,7 @@ export const walletCoins = [
   dogecoin,
   dash,
   monero,
+  cardano,
   binanceSmartChain,
 ];
 
@@ -79,6 +82,7 @@ const Wallet = {
   dash: CsWallet,
   monero: MoneroWallet,
   'binance-smart-chain': BinanceSmartChainWallet,
+  cardano: CardanoWallet,
 };
 
 function createWallet(passphrase) {
@@ -252,6 +256,10 @@ function getWalletOptions(crypto) {
     options.storage = new Storage(process.env.SITE_URL, 'monero', LS.getDetailsKey());
     options.request = request;
     options.apiNode = process.env.API_XMR_URL;
+    options.apiWeb = process.env.SITE_URL;
+  } else if (crypto.platform === 'cardano') {
+    options.request = request;
+    options.apiNode = process.env.API_ADA_URL;
     options.apiWeb = process.env.SITE_URL;
   }
   return options;

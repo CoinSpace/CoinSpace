@@ -35,7 +35,9 @@ export default function({ transaction }) {
     },
     data: {
       transaction,
-      txUrl: wallet.txUrl.bind(wallet),
+      txUrl(txId) {
+        return wallet.txUrl(txId);
+      },
       showAllInputs: false,
       inputsPerPage: 10,
       formatTimestamp(timestamp) {

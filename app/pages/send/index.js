@@ -191,7 +191,7 @@ export default function(el) {
     const value = toAtom(normalizeCrypto(ractive.find('#crypto').value) || 0);
     let fees = [];
 
-    if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash', 'monero']
+    if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash', 'monero', 'cardano']
       .includes(wallet.crypto.platform)) {
       fees = wallet.estimateFees(value).map((item) => {
         if (setDefaultFeeOption) {

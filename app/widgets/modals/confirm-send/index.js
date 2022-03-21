@@ -39,7 +39,7 @@ function open(options) {
     },
   };
 
-  if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'].indexOf(platform) !== -1) {
+  if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash', 'cardano'].indexOf(platform) !== -1) {
     return btcBchLtc(cryptoOptions);
   } else if (['ethereum', 'binance-smart-chain'].includes(platform)) {
     return ethereum(cryptoOptions);

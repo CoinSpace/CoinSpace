@@ -24,7 +24,8 @@ export default function(el) {
           return tx.to;
         } else if (platform === 'stellar') {
           return tx.operations[0] && tx.operations[0].destination;
-        } else if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'].includes(platform)) {
+        } else if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash', 'cardano']
+          .includes(platform)) {
           return tx.outs[0].address;
         } else if (platform === 'monero') {
           return translate('Sent');
