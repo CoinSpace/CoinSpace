@@ -33,12 +33,13 @@ module.exports = {
     chunkFilename: 'assets/js/[name].[fullhash:8].js',
     path: path.resolve(__dirname, 'build'),
     clean: true,
+    webassemblyModuleFilename: 'assets/wasm/[hash].module.wasm',
   },
   externals: {
     electron: 'commonjs electron',
   },
   experiments: {
-    topLevelAwait: true,
+    futureDefaults: true,
   },
   resolve: {
     symlinks: false,
@@ -76,7 +77,7 @@ module.exports = {
         },
       },
       {
-        test: /\.wasm$/i,
+        test: /MoneroCoreJS\.wasm$/i,
         type: 'asset/resource',
         generator: {
           filename: 'assets/wasm/[name].[hash:8][ext]',
