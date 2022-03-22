@@ -2,21 +2,7 @@ import createError from 'http-errors';
 import db from './db.js';
 import Big from 'big.js';
 
-const CRYPTO = [
-  'bitcoin@bitcoin',
-  'bitcoin-cash@bitcoin-cash',
-  'bitcoin-sv@bitcoin-sv',
-  'litecoin@litecoin',
-  'dogecoin@dogecoin',
-  'dash@dash',
-  'monero@monero',
-];
-
 async function getCsFee(cryptoId) {
-  if (!CRYPTO.includes(cryptoId)) {
-    throw createError(400, 'Currency cs fee is not supported');
-  }
-
   const ticker = await db.collection('cryptos')
     .findOne({
       _id: cryptoId,
