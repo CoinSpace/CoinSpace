@@ -4,6 +4,7 @@ const { merge } = require('webpack-merge');
 const autoprefixer = require('autoprefixer');
 const common = require('./webpack.common.js');
 const pkg = require('./package.json');
+const path = require('path');
 
 const dotEnv = new Dotenv({
   path: '.env.loc',
@@ -13,15 +14,17 @@ const dotEnv = new Dotenv({
 
 module.exports = merge(common, {
   mode: 'development',
-  cache: true, // set "false" cache while "npm link"
+  snapshot: {
+    managedPaths: [path.resolve(__dirname, '../node_modules')],
+  },
   target: 'web',
   output: {
     publicPath: '/',
   },
   devServer: {
     open: true,
-    disableHostCheck: true,
-    contentBase: false,
+    allowedHosts: 'all',
+    static: false,
     hot: true,
     host: 'localhost',
     port: 8000,
@@ -66,7 +69,6 @@ module.exports = merge(common, {
     ],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     dotEnv,
     new webpack.DefinePlugin({
       'process.env.BUILD_TYPE': JSON.stringify('web'),

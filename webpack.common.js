@@ -53,6 +53,7 @@ module.exports = {
       assert: require.resolve('assert/'),
       buffer: require.resolve('buffer/'),
       events: require.resolve('events/'),
+      url: require.resolve('url/'),
       querystring: require.resolve('querystring-es3'),
       stream: require.resolve('stream-browserify'),
       crypto: require.resolve('crypto-browserify'),
@@ -156,4 +157,12 @@ module.exports = {
   optimization: {
     splitChunks: false,
   },
+  node: {
+    global: true,
+    __filename: 'mock',
+    __dirname: 'mock',
+  },
+  ignoreWarnings: [
+    { module: /cardano_serialization_lib_bg.js/ },
+  ],
 };
