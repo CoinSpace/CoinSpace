@@ -12,4 +12,5 @@ module.exports = [
   require('./crypto/dogecoin@dogecoin.json'),
   require('./crypto/dash@dash.json'),
   require('./crypto/monero@monero.json'),
+  require('./crypto/cardano@cardano.json'),
 ];

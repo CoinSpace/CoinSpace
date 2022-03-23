@@ -139,6 +139,8 @@ function getLogoUrl(logo) {
         return require('@coinspace/crypto-db/logo/monero.svg');
       case 'tether.svg':
         return require('@coinspace/crypto-db/logo/tether.svg');
+      case 'cardano.svg':
+        return require('@coinspace/crypto-db/logo/cardano.svg');
       default:
         return new URL(filepath, process.env.SITE_URL);
     }

@@ -30,3 +30,4 @@ Supported coins:
 - Dash
 - Monero
 - Binance Smart Chain and BEP20 tokens
+- Cardano

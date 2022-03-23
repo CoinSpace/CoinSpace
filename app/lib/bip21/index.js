@@ -9,6 +9,7 @@ import xrp from '@coinspace/crypto-db/crypto/xrp@ripple.json';
 import stellar from '@coinspace/crypto-db/crypto/stellar@stellar.json';
 import eos from '@coinspace/crypto-db/crypto/eos@eos.json';
 import monero from '@coinspace/crypto-db/crypto/monero@monero.json';
+import cardano from '@coinspace/crypto-db/crypto/cardano@cardano.json';
 
 const cryptoSchemes = [
   bitcoin,
@@ -22,6 +23,7 @@ const cryptoSchemes = [
   dogecoin,
   dash,
   monero,
+  cardano,
 ].map((item) => {
   return {
     scheme: item.scheme,
