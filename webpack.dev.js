@@ -26,7 +26,6 @@ module.exports = merge(common, {
     allowedHosts: 'all',
     static: false,
     hot: true,
-    host: 'localhost',
     port: 8000,
     proxy: {
       '/api': {
