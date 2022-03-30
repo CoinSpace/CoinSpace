@@ -65,8 +65,8 @@ export const walletCoins = [
   dogecoin,
   dash,
   monero,
-  cardano,
   binanceSmartChain,
+  cardano,
 ];
 
 const Wallet = {
