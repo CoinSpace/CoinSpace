@@ -12,7 +12,7 @@
     "url": "git+https://github.com/CoinSpace/CoinSpace.git"
   },
   "scripts": {
-    "client": "webpack --config webpack.prod.js",
+    "client": "./cli/build.js web -e prod",
     "client:watch": "webpack serve --config webpack.dev.js",
     "server": "node --expose-gc ./server/server.js",
     "server:watch": "nodemon -e js,yaml -w ./server -x node -r dotenv/config ./server/server.js dotenv_config_path=./server/.env.loc",
@@ -53,7 +53,7 @@
     "@babel/preset-env": "^7.15.6",
     "@coinspace/b39": "^2.1.4",
     "@coinspace/cs-binance-smart-chain-wallet": "^1.1.4",
-    "@coinspace/cs-cardano-wallet": "0.0.1",
+    "@coinspace/cs-cardano-wallet": "0.0.2",
     "@coinspace/cs-eos-wallet": "^1.4.1",
     "@coinspace/cs-ethereum-wallet": "^1.6.3",
     "@coinspace/cs-monero-wallet": "^1.2.2",

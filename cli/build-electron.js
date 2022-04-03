@@ -49,11 +49,7 @@ webpackConfig.plugins.push(
 );
 
 webpack(webpackConfig, (error, stats) => {
-  if (error) throw error;
-  if (stats.hasErrors()) {
-    console.log(stats.toString({ colors: true }));
-    throw new Error('stats errors');
-  }
+  utils.webpackResultHandler(error, stats);
 
   fse.removeSync(electronBuildPath);
   fse.copySync('build', path.resolve(electronBuildPath), { filter: utils.filterMapFiles });

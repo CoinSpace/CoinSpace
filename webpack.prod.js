@@ -11,13 +11,18 @@ const path = require('path');
 const polyfills = ['core-js/stable', 'regenerator-runtime/runtime'];
 
 const envFile = process.env.ENV_FILE ? process.env.ENV_FILE : '.env.prod';
+const WASM_JS_REGEXP = [
+  /@emurgo\/cardano-serialization-lib-asmjs/,
+  /@emurgo\/cardano-serialization-lib-browser/,
+  /@coinspace\/monero-core-js-asm/,
+  /@coinspace\/monero-core-js-wasm/,
+];
 
 const config = merge(common, {
   mode: 'production',
   output: {
     publicPath: '/',
   },
-  devtool: 'hidden-source-map',
   module: {
     rules: [
       {
@@ -26,7 +31,7 @@ const config = merge(common, {
           path.resolve(__dirname, './node_modules/lodash/'),
           path.resolve(__dirname, './node_modules/core-js/'),
           path.resolve(__dirname, './node_modules/regenerator-runtime/'),
-          path.resolve(__dirname, './node_modules/@coinspace/monero-core-js/build/MoneroCoreJS.asm.js'),
+          /\.asm\.js$/,
         ],
         use: {
           loader: 'babel-loader',
@@ -46,7 +51,12 @@ const config = merge(common, {
         test: /\.(sass|scss)$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: false,
+            },
+          },
           {
             loader: 'postcss-loader',
             options: {
@@ -72,6 +82,10 @@ const config = merge(common, {
     new MiniCssExtractPlugin({
       filename: 'assets/css/all.[contenthash:8].css',
     }),
+    new webpack.SourceMapDevToolPlugin({
+      filename: 'assets/js/[name].[fullhash:8].js.map',
+      exclude: [...WASM_JS_REGEXP],
+    }),
   ],
   optimization: {
     minimize: true,
@@ -91,6 +105,7 @@ const config = merge(common, {
             ],
           },
         },
+        exclude: [...WASM_JS_REGEXP],
         extractComments: false,
       }),
     ],

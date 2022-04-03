@@ -33,7 +33,7 @@ module.exports = {
     chunkFilename: 'assets/js/[name].[fullhash:8].js',
     path: path.resolve(__dirname, 'build'),
     clean: true,
-    webassemblyModuleFilename: 'assets/wasm/[hash].module.wasm',
+    webassemblyModuleFilename: 'assets/wasm/[fullhash].module.wasm',
   },
   externals: {
     electron: 'commonjs electron',

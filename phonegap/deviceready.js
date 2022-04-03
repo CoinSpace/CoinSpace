@@ -6,7 +6,8 @@ const bip21 = require('lib/bip21');
 document.addEventListener('deviceready', onDeviceReady, false);
 async function onDeviceReady() {
 
-  WebAssembly.instantiateStreaming = false; // fix: force fallback (cordova doesn't set Content-Type: application/wasm)
+  // fix: force fallback (cordova doesn't set Content-Type: application/wasm)
+  if (window.WebAssembly) WebAssembly.instantiateStreaming = false;
 
   document.addEventListener('backbutton', (e) => {
     e.preventDefault();

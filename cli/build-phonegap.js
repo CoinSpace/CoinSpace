@@ -44,11 +44,7 @@ webpackConfig.plugins.push(
 );
 
 webpack(webpackConfig, (error, stats) => {
-  if (error) throw error;
-  if (stats.hasErrors()) {
-    console.log(stats.toString({ colors: true }));
-    throw new Error('stats errors');
-  }
+  utils.webpackResultHandler(error, stats);
 
   fse.removeSync(mobileBuildPath);
   fse.copySync('build', path.resolve(mobileBuildPath, 'www'), { filter: utils.filterMapFiles });

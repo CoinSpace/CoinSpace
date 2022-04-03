@@ -11,7 +11,7 @@ counterpart.setMissingEntryGenerator((key) => {
 function loadTranslation(language) {
   language = getLanguage(language);
   return import(
-    /* webpackChunkName: '[request]' */
+    /* webpackChunkName: 'i18n/[request]' */
     './translations/' + language
   ).then((translation) => {
     counterpart.registerTranslations(language, translation.default);

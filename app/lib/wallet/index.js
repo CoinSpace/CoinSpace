@@ -1,4 +1,4 @@
-const worker = new Worker(new URL('./worker.js', import.meta.url));
+const worker = new Worker(new URL('./worker.js', import.meta.url), { name: 'worker' });
 import LS from './localStorage';
 
 import seeds from './seeds';

@@ -28,9 +28,22 @@ function uploadSentrySourceMaps(project, release) {
   shell(`${sentryPath} releases -p ${project} files ${release} upload-sourcemaps --no-rewrite --url-prefix / ./build/assets/js`);
 }
 
+function webpackResultHandler(error, stats) {
+  if (error) {
+    console.error(error.stack || error);
+    if (error.details) {
+      console.error(error.details);
+    }
+    return process.exit(1);
+  }
+  console.log(stats.toString({ colors: true }));
+  if (stats.hasErrors()) process.exit(1);
+}
+
 module.exports = {
   shell,
   cordova,
   filterMapFiles,
   uploadSentrySourceMaps,
+  webpackResultHandler,
 };
