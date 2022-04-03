@@ -20,7 +20,8 @@ program
   .parse(process.argv);
 
 if (program.run && program.platform.startsWith('android')) {
-  return cordova('run android --noprepare');
+  cordova('run android --noprepare');
+  process.exit(0);
 }
 
 console.log('Start building (webpack)...');
