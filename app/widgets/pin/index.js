@@ -3,6 +3,7 @@ import { translate } from 'lib/i18n';
 import { default as Biometry } from 'lib/biometry';
 import template from './index.ract';
 import { isSafari } from 'lib/detect-os';
+import taptic from 'lib/taptic';
 
 function open(options) {
   const {
@@ -69,6 +70,7 @@ function open(options) {
     const pin = ractive.get('pin').trim();
     if (pin.length === 0 || pin.length === 4) return;
     ractive.set('pin', pin.substr(0, pin.length - 1));
+    taptic.tap();
   });
 
   ractive.on('biometry', async () => {
@@ -105,6 +107,7 @@ function open(options) {
     setTimeout(() => {
       ractive.set('isWrong', false);
     }, 700);
+    taptic.error();
   };
 
   ractive.reset = () => {
@@ -134,6 +137,7 @@ function open(options) {
     const pin = ractive.get('pin');
     if (pin.length === 4) return;
     ractive.set('pin', pin + number);
+    taptic.tap();
   }
 
   return ractive;

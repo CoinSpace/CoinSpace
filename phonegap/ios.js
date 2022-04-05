@@ -46,6 +46,7 @@ async function run() {
   cordova('plugin add cordova-plugin-3dtouch-shortcutitems@1.0.2');
   cordova('plugin add cordova-plugin-safariviewcontroller@1.6.0');
   cordova('plugin add cordova-plugin-inapp-review@1.1.0');
+  cordova('plugin add cordova-plugin-taptic-engine@2.2.0');
 
   const update = {
     'UISupportedInterfaceOrientations': [

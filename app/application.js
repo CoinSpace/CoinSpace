@@ -4,6 +4,7 @@ import LS from 'lib/wallet/localStorage';
 import initFrame from 'widgets/frame';
 import initAuth from 'pages/auth';
 import biometry from 'lib/biometry';
+import taptic from 'lib/taptic';
 import updater from 'lib/updater';
 import querystring from 'querystring';
 import { showError } from 'widgets/modals/flash';
@@ -31,6 +32,7 @@ window.initCSApp = async function() {
   if (process.env.BUILD_TYPE === 'phonegap') navigator.splashscreen.hide();
 
   await biometry.init();
+  await taptic.init();
   updater.init();
 
   const auth = initAuth(document.getElementById('auth'));

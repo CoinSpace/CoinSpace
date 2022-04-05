@@ -39,6 +39,7 @@ async function run() {
   cordova('plugin add cordova-plugin-splashscreen@5.0.4');
   cordova('plugin add cordova-plugin-safariviewcontroller@1.6.0');
   cordova('plugin add cordova-plugin-inapp-review@1.1.0 --variable PLAY_CORE_VERSION=1.8.0');
+  cordova('plugin add cordova-plugin-velda-devicefeedback@0.0.2');
 
   if (process.env.RELEASE) {
     cordova('build android --release -- --packageType=apk');

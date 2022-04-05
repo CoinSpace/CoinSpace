@@ -59,7 +59,7 @@
         opacity: 0;
       }
       &._shake {
-        animation: 0.7s shakeX;
+        animation: shakeX .7s;
       }
     }
     ._dot {
@@ -76,6 +76,7 @@
       }
       &._filled {
         background-color: #333;
+        animation: scaleDot .2s;
       }
     }
     ._spinner {
@@ -169,6 +170,11 @@
     60%,
     80% {
       transform: translateX(10px);
+    }
+  }
+  @keyframes scaleDot {
+    50% {
+      transform: scale(1.4);
     }
   }
 }
