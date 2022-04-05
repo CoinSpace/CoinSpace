@@ -35,7 +35,13 @@ import i18n from 'lib/i18n';
 
 function init() {
   i18n.loadTranslation().then(() => {
-    if (window.localStorage && window.Worker) {
+    let localStorageSupport = false;
+    try {
+      localStorageSupport = !!window.localStorage;
+    } catch (err) {
+      console.error(err);
+    }
+    if (localStorageSupport && window.Worker) {
       const containerEl = document.getElementById('loader');
       return import(
         /* webpackChunkName: 'application' */

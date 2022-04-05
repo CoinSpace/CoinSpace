@@ -25,7 +25,12 @@ export function translate() {
 }
 
 function getLanguage(language) {
-  if (!language) language = window.localStorage && localStorage.getItem('_cs_language');
+  if (!language) {
+    try {
+      language = window.localStorage && localStorage.getItem('_cs_language');
+    // eslint-disable-next-line no-empty
+    } catch (err) {}
+  }
   const languageFull = language || navigator.language.toLowerCase() || 'en';
   const languageShort = languageFull.split('-')[0];
   return languages.find((full) => {
