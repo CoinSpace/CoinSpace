@@ -680,8 +680,8 @@ It will be converted into %(toSymbol)s, and sent to
  %(toAddress)s (blockchain: %(toBlockchain)s)</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
-        <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
+      <trans-unit id="You have 3 hours to send funds otherwise the transaction will be cancelled automatically.">
+        <source>You have 3 hours to send funds otherwise the transaction will be cancelled automatically.</source>
         <target></target>
       </trans-unit>
       <trans-unit id="Extra Id">
@@ -712,8 +712,8 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Exchange failed and coins were refunded to %(address)s.</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="Payment wasn&apos;t received since 36 hours since the transaction was created.">
-        <source>Payment wasn't received since 36 hours since the transaction was created.</source>
+      <trans-unit id="Payment wasn&apos;t received since 3 hours since the transaction was created.">
+        <source>Payment wasn't received since 3 hours since the transaction was created.</source>
         <target></target>
       </trans-unit>
       <trans-unit id="max.">

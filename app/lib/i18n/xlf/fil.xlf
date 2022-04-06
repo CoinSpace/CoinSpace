@@ -683,9 +683,9 @@ It will be converted into %(toSymbol)s, and sent to
 Iko-convert ito sa %(toSymbol)s, at ipapadala sa
  %(toAddress)s (blockchain: %(toBlockchain)s)</target>
       </trans-unit>
-      <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
-        <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
-        <target>May 36 na oras ka para magpadala ng pondo, kung hindi, awtomatikong kakanselahin ang transaksiyon.</target>
+      <trans-unit id="You have 3 hours to send funds otherwise the transaction will be cancelled automatically.">
+        <source>You have 3 hours to send funds otherwise the transaction will be cancelled automatically.</source>
+        <target>May 3 oras ka para magpadala ng pondo, kung hindi, awtomatikong kakanselahin ang transaksiyon.</target>
       </trans-unit>
       <trans-unit id="Extra Id">
         <source>Extra Id</source>
@@ -715,9 +715,9 @@ Iko-convert ito sa %(toSymbol)s, at ipapadala sa
         <source>Exchange failed and coins were refunded to %(address)s.</source>
         <target>Nabigo ang palitan at sinauli ang mga coin sa %(address)s.</target>
       </trans-unit>
-      <trans-unit id="Payment wasn&apos;t received since 36 hours since the transaction was created.">
-        <source>Payment wasn't received since 36 hours since the transaction was created.</source>
-        <target>Hindi natanggap ang bayad mula 36 na oras mula sa paglikha ng transaksiyon.</target>
+      <trans-unit id="Payment wasn&apos;t received since 3 hours since the transaction was created.">
+        <source>Payment wasn't received since 3 hours since the transaction was created.</source>
+        <target>Hindi natanggap ang bayad mula 3 oras mula sa paglikha ng transaksiyon.</target>
       </trans-unit>
       <trans-unit id="max.">
         <source>max.</source>

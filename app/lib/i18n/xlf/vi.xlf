@@ -683,9 +683,9 @@ It will be converted into %(toSymbol)s, and sent to
 Sẽ chuyển đổi thành %(toSymbol)s, và gửi đến
  %(toAddress)s (blockchain: %(toBlockchain)s)</target>
       </trans-unit>
-      <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
-        <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
-        <target>Bạn có 36 giờ để gửi tiền nếu không giao dịch sẽ tự động bị hủy.</target>
+      <trans-unit id="You have 3 hours to send funds otherwise the transaction will be cancelled automatically.">
+        <source>You have 3 hours to send funds otherwise the transaction will be cancelled automatically.</source>
+        <target>Bạn có 3 giờ để gửi tiền nếu không giao dịch sẽ tự động bị hủy.</target>
       </trans-unit>
       <trans-unit id="Extra Id">
         <source>Extra Id</source>
@@ -715,9 +715,9 @@ Sẽ chuyển đổi thành %(toSymbol)s, và gửi đến
         <source>Exchange failed and coins were refunded to %(address)s.</source>
         <target>Giao dịch không thành công và coin được hoàn trả về %(address)s.</target>
       </trans-unit>
-      <trans-unit id="Payment wasn&apos;t received since 36 hours since the transaction was created.">
-        <source>Payment wasn't received since 36 hours since the transaction was created.</source>
-        <target>Không nhận được thanh toán sau 36 giờ kể từ khi giao dịch được tạo.</target>
+      <trans-unit id="Payment wasn&apos;t received since 3 hours since the transaction was created.">
+        <source>Payment wasn't received since 3 hours since the transaction was created.</source>
+        <target>Không nhận được thanh toán sau 3 giờ kể từ khi giao dịch được tạo.</target>
       </trans-unit>
       <trans-unit id="max.">
         <source>max.</source>

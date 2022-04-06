@@ -30,8 +30,8 @@ async function request(method, params) {
   return response && response.data && response.data.result;
 }
 
-function isGreater36hours(tx) {
-  return (new Date() - new Date(tx.createdAt * 1000)) > 36 * 60 * 60 * 1000;
+function isGreater3hours(tx) {
+  return (new Date() - new Date(tx.createdAt * 1000)) > 3 * 60 * 60 * 1000;
 }
 
 function getCrypto(id) {
@@ -126,7 +126,7 @@ async function getTransaction(id) {
     throw createError(404, 'Transaction not found');
   }
   let { status } = tx;
-  if (status === 'waiting' && isGreater36hours(tx)) {
+  if (status === 'waiting' && isGreater3hours(tx)) {
     status = 'overdue';
   }
   return {
@@ -150,7 +150,7 @@ async function getTransactions(id, currency, address, limit, offset) {
 
   return txs.map((tx) => {
     let { status } = tx;
-    if (status === 'waiting' && isGreater36hours(tx)) {
+    if (status === 'waiting' && isGreater3hours(tx)) {
       status = 'overdue';
     }
     return {

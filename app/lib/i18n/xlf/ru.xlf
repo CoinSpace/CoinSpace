@@ -683,9 +683,9 @@ It will be converted into %(toSymbol)s, and sent to
 Это будет конвертировано в %(toSymbol)s, и отправлено на
  %(toAddress)s (блокчейн: %(toBlockchain)s)</target>
       </trans-unit>
-      <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
-        <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
-        <target>У вас есть 36 часов на отправку депозита, в противном случае транзакция будет автоматически отменена.</target>
+      <trans-unit id="You have 3 hours to send funds otherwise the transaction will be cancelled automatically.">
+        <source>You have 3 hours to send funds otherwise the transaction will be cancelled automatically.</source>
+        <target>У вас есть 3 часа на отправку депозита, в противном случае транзакция будет автоматически отменена.</target>
       </trans-unit>
       <trans-unit id="Extra Id">
         <source>Extra Id</source>
@@ -715,9 +715,9 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Exchange failed and coins were refunded to %(address)s.</source>
         <target>Обмен не удался, и монеты были возвращены на %(address)s.</target>
       </trans-unit>
-      <trans-unit id="Payment wasn&apos;t received since 36 hours since the transaction was created.">
-        <source>Payment wasn't received since 36 hours since the transaction was created.</source>
-        <target>Платеж не поступал в течение 36 часов с момента создания транзакции.</target>
+      <trans-unit id="Payment wasn&apos;t received since 3 hours since the transaction was created.">
+        <source>Payment wasn't received since 3 hours since the transaction was created.</source>
+        <target>Платеж не поступал в течение 3 часов с момента создания транзакции.</target>
       </trans-unit>
       <trans-unit id="max.">
         <source>max.</source>

@@ -683,9 +683,9 @@ It will be converted into %(toSymbol)s, and sent to
 は%(toSymbol)sに変換され、
 %(toAddress)s (ブロックチェーン: %(toBlockchain)s) に送信されます</target>
       </trans-unit>
-      <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
-        <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
-        <target>36時間以内に送金しないと、取引は自動的に取り消されます。</target>
+      <trans-unit id="You have 3 hours to send funds otherwise the transaction will be cancelled automatically.">
+        <source>You have 3 hours to send funds otherwise the transaction will be cancelled automatically.</source>
+        <target>3時間以内に送金しないと、取引は自動的に取り消されます。</target>
       </trans-unit>
       <trans-unit id="Extra Id">
         <source>Extra Id</source>
@@ -715,9 +715,9 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Exchange failed and coins were refunded to %(address)s.</source>
         <target>交換は失敗し、コインは%(address)sに返金されました。</target>
       </trans-unit>
-      <trans-unit id="Payment wasn&apos;t received since 36 hours since the transaction was created.">
-        <source>Payment wasn't received since 36 hours since the transaction was created.</source>
-        <target>取引が制作されてから36時間経っても支払いが受け取られていません。</target>
+      <trans-unit id="Payment wasn&apos;t received since 3 hours since the transaction was created.">
+        <source>Payment wasn't received since 3 hours since the transaction was created.</source>
+        <target>取引が制作されてから3時間経っても支払いが受け取られていません。</target>
       </trans-unit>
       <trans-unit id="max.">
         <source>max.</source>

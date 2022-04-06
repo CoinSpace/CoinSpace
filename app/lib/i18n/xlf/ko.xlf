@@ -683,9 +683,9 @@ It will be converted into %(toSymbol)s, and sent to
  %(toSymbol)s (으)로 환전해서
  %(toAddress)s (블록체인: %(toBlockchain)s) (으)로 보냅니다.</target>
       </trans-unit>
-      <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
-        <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
-        <target>36시간 안에 자금을 보내주십시오. 그렇지 않으면 거래는 자동으로 취소됩니다.</target>
+      <trans-unit id="You have 3 hours to send funds otherwise the transaction will be cancelled automatically.">
+        <source>You have 3 hours to send funds otherwise the transaction will be cancelled automatically.</source>
+        <target>3시간 안에 자금을 보내주십시오. 그렇지 않으면 거래는 자동으로 취소됩니다.</target>
       </trans-unit>
       <trans-unit id="Extra Id">
         <source>Extra Id</source>
@@ -715,9 +715,9 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Exchange failed and coins were refunded to %(address)s.</source>
         <target>환전에 실패했습니다. 코인은 %(address)s(으)로 환불되었습니다.</target>
       </trans-unit>
-      <trans-unit id="Payment wasn&apos;t received since 36 hours since the transaction was created.">
-        <source>Payment wasn't received since 36 hours since the transaction was created.</source>
-        <target>거래가 생성된지 36시간이 지났지만 대금을 수취하지 못했습니다.</target>
+      <trans-unit id="Payment wasn&apos;t received since 3 hours since the transaction was created.">
+        <source>Payment wasn't received since 3 hours since the transaction was created.</source>
+        <target>거래가 생성된지 3시간이 지났지만 대금을 수취하지 못했습니다.</target>
       </trans-unit>
       <trans-unit id="max.">
         <source>max.</source>

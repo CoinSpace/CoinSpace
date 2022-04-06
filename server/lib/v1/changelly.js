@@ -142,8 +142,8 @@ function getTransaction(id) {
     const tx = txs && txs[0];
     if (!tx) return { error: 'Transaction not found' };
     let { status } = tx;
-    const isGreater36hours = (new Date() - new Date(tx.createdAt * 1000)) > 36 * 60 * 60 * 1000;
-    if (status === 'waiting' && isGreater36hours) {
+    const isGreater3hours = (new Date() - new Date(tx.createdAt * 1000)) > 3 * 60 * 60 * 1000;
+    if (status === 'waiting' && isGreater3hours) {
       status = 'overdue';
     }
     return {

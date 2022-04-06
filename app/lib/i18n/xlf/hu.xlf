@@ -683,9 +683,9 @@ It will be converted into %(toSymbol)s, and sent to
 Átváltjuk %(toSymbol)s coinra és elküldjük a
  %(toAddress)s (blokklánc: %(toBlockchain)s) címre</target>
       </trans-unit>
-      <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
-        <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
-        <target>36 órád van a letét elhelyezésére máskülönben a tranzakciót automatikusan töröljük.</target>
+      <trans-unit id="You have 3 hours to send funds otherwise the transaction will be cancelled automatically.">
+        <source>You have 3 hours to send funds otherwise the transaction will be cancelled automatically.</source>
+        <target>3 órád van a letét elhelyezésére máskülönben a tranzakciót automatikusan töröljük.</target>
       </trans-unit>
       <trans-unit id="Extra Id">
         <source>Extra Id</source>
@@ -715,9 +715,9 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Exchange failed and coins were refunded to %(address)s.</source>
         <target>Váltás sikertelen és a coinokat visszatérítettük a %(address)s címre.</target>
       </trans-unit>
-      <trans-unit id="Payment wasn&apos;t received since 36 hours since the transaction was created.">
-        <source>Payment wasn't received since 36 hours since the transaction was created.</source>
-        <target>Nem érkezett meg az utalás mióta 36 órával ezelőtt létrehozták a tranzakciót. </target>
+      <trans-unit id="Payment wasn&apos;t received since 3 hours since the transaction was created.">
+        <source>Payment wasn't received since 3 hours since the transaction was created.</source>
+        <target>Nem érkezett meg az utalás mióta 3 órával ezelőtt létrehozták a tranzakciót. </target>
       </trans-unit>
       <trans-unit id="max.">
         <source>max.</source>

@@ -82,7 +82,7 @@ export default function(el) {
         });
       } else if (tx.status === 'overdue') {
         showStep(steps.error, {
-          message: translate("Payment wasn't received since 36 hours since the transaction was created."),
+          message: translate("Payment wasn't received since 3 hours since the transaction was created."),
         });
       } else {
         let message;

@@ -683,9 +683,9 @@ It will be converted into %(toSymbol)s, and sent to
 វានឹងត្រូវបានបម្លែងទៅជា %(toSymbol)s, ហើយបានផ្ញើទៅ
  %(toAddress)s (blockchain: %(toBlockchain)s)</target>
       </trans-unit>
-      <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
-        <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
-        <target>អ្នកមានពេល 36 ម៉ោងដើម្បីផ្ញើប្រាក់បើមិនដូច្នេះទេប្រតិបត្តិការនឹងត្រូវលុបចោលដោយស្វ័យប្រវត្តិ។</target>
+      <trans-unit id="You have 3 hours to send funds otherwise the transaction will be cancelled automatically.">
+        <source>You have 3 hours to send funds otherwise the transaction will be cancelled automatically.</source>
+        <target>អ្នកមានពេល 3 ម៉ោងដើម្បីផ្ញើប្រាក់បើមិនដូច្នេះទេប្រតិបត្តិការនឹងត្រូវលុបចោលដោយស្វ័យប្រវត្តិ។</target>
       </trans-unit>
       <trans-unit id="Extra Id">
         <source>Extra Id</source>
@@ -715,9 +715,9 @@ It will be converted into %(toSymbol)s, and sent to
         <source>Exchange failed and coins were refunded to %(address)s.</source>
         <target>ការប្តូរប្រាក់បានបរាជ័យហើយកាក់ត្រូវបានសងប្រាក់វិញ។ %(address)s។</target>
       </trans-unit>
-      <trans-unit id="Payment wasn&apos;t received since 36 hours since the transaction was created.">
-        <source>Payment wasn't received since 36 hours since the transaction was created.</source>
-        <target>ការទូទាត់មិនត្រូវបានទទួលចាប់តាំងពី 36 ម៉ោងចាប់តាំងពីប្រតិបត្តិការត្រូវបានបង្កើត។</target>
+      <trans-unit id="Payment wasn&apos;t received since 3 hours since the transaction was created.">
+        <source>Payment wasn't received since 3 hours since the transaction was created.</source>
+        <target>ការទូទាត់មិនត្រូវបានទទួលចាប់តាំងពី 3 ម៉ោងចាប់តាំងពីប្រតិបត្តិការត្រូវបានបង្កើត។</target>
       </trans-unit>
       <trans-unit id="max.">
         <source>max.</source>

@@ -683,9 +683,9 @@ It will be converted into %(toSymbol)s, and sent to
 Biće konvertovano u %(toSymbol)s i poslato na
  %(toAddress)s (blockchain: %(toBlockchain)s)</target>
       </trans-unit>
-      <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
-        <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
-        <target>Imate 36 sati da pošaljete sredstva - u suprotnom, transakcija će biti automatski poništena.</target>
+      <trans-unit id="You have 3 hours to send funds otherwise the transaction will be cancelled automatically.">
+        <source>You have 3 hours to send funds otherwise the transaction will be cancelled automatically.</source>
+        <target>Imate 3 sata da pošaljete sredstva - u suprotnom, transakcija će biti automatski poništena.</target>
       </trans-unit>
       <trans-unit id="Extra Id">
         <source>Extra Id</source>
@@ -715,9 +715,9 @@ Biće konvertovano u %(toSymbol)s i poslato na
         <source>Exchange failed and coins were refunded to %(address)s.</source>
         <target>Konverzija nije uspela i novčići su refundirani na %(address)s</target>
       </trans-unit>
-      <trans-unit id="Payment wasn&apos;t received since 36 hours since the transaction was created.">
-        <source>Payment wasn't received since 36 hours since the transaction was created.</source>
-        <target>Uplata nije primljena 36 sati od kako je kreirana transakcija.</target>
+      <trans-unit id="Payment wasn&apos;t received since 3 hours since the transaction was created.">
+        <source>Payment wasn't received since 3 hours since the transaction was created.</source>
+        <target>Uplata nije primljena 3 sata od kako je kreirana transakcija.</target>
       </trans-unit>
       <trans-unit id="max.">
         <source>max.</source>

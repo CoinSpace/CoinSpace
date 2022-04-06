@@ -683,9 +683,9 @@ It will be converted into %(toSymbol)s, and sent to
 itu akan dikonversi ke %(toSymbol)s, dan dikirim ke
 %(toAddress)s (blockchain: %(toBlockchain)s)</target>
       </trans-unit>
-      <trans-unit id="You have 36 hours to send funds otherwise the transaction will be cancelled automatically.">
-        <source>You have 36 hours to send funds otherwise the transaction will be cancelled automatically.</source>
-        <target>Anda mempunyai waktu 36 jam untuk mengirim dana, jika tidak transaksi akan dibatalkan otomatis. </target>
+      <trans-unit id="You have 3 hours to send funds otherwise the transaction will be cancelled automatically.">
+        <source>You have 3 hours to send funds otherwise the transaction will be cancelled automatically.</source>
+        <target>Anda mempunyai waktu 3 jam untuk mengirim dana, jika tidak transaksi akan dibatalkan otomatis. </target>
       </trans-unit>
       <trans-unit id="Extra Id">
         <source>Extra Id</source>
@@ -715,9 +715,9 @@ itu akan dikonversi ke %(toSymbol)s, dan dikirim ke
         <source>Exchange failed and coins were refunded to %(address)s.</source>
         <target>Bursa gagal dan coin dikembalikan ke %(address)s.</target>
       </trans-unit>
-      <trans-unit id="Payment wasn&apos;t received since 36 hours since the transaction was created.">
-        <source>Payment wasn't received since 36 hours since the transaction was created.</source>
-        <target>Pembayaran tidak diterima dalam 36 jam sejak transaksi dibuat.</target>
+      <trans-unit id="Payment wasn&apos;t received since 3 hours since the transaction was created.">
+        <source>Payment wasn't received since 3 hours since the transaction was created.</source>
+        <target>Pembayaran tidak diterima dalam 3 jam sejak transaksi dibuat.</target>
       </trans-unit>
       <trans-unit id="max.">
         <source>max.</source>
