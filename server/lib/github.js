@@ -70,8 +70,8 @@ const platforms = [{
   arch: 'any',
   app: 'app',
   type: TYPE_LINK,
-  pattern: /id980719434\/?#\?platform=mac/ig,
-  link: 'https://apps.apple.com/us/app/coin-bitcoin-wallet/id980719434',
+  pattern: /id980719434\?platform=mac/ig,
+  link: 'https://apps.apple.com/app/coin-wallet-bitcoin-crypto/id980719434',
 }, {
   // Windows / Microsoft Store application
   distribution: 'appx',
@@ -86,8 +86,8 @@ const platforms = [{
   arch: 'any',
   app: 'app',
   type: TYPE_LINK,
-  pattern: /id980719434\/?#\?platform=(iphone|ipad|appleWatch)/ig,
-  link: 'https://apps.apple.com/us/app/coin-bitcoin-wallet/id980719434',
+  pattern: /id980719434\?platform=(iphone|ipad|appleWatch)/ig,
+  link: 'https://apps.apple.com/app/coin-wallet-bitcoin-crypto/id980719434',
 }, {
   // Android Play app (deprecated)
   distribution: 'android',
