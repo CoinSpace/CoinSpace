@@ -1,6 +1,6 @@
 name: CoinSpace CI
 
-on: push
+on: [push, workflow_dispatch]
 
 jobs:
   release:
