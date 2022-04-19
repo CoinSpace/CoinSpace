@@ -41,7 +41,7 @@ function open(options) {
 
   if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash', 'cardano'].indexOf(platform) !== -1) {
     return btcBchLtc(cryptoOptions);
-  } else if (['ethereum', 'binance-smart-chain'].includes(platform)) {
+  } else if (['ethereum', 'binance-smart-chain', 'ethereum-classic'].includes(platform)) {
     return ethereum(cryptoOptions);
   } else if (platform === 'ripple') {
     return ripple(cryptoOptions);

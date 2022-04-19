@@ -4,6 +4,8 @@ import request from 'lib/request';
 import LS from './localStorage';
 import tetherToken from '@coinspace/crypto-db/crypto/tether@ethereum.json';
 import CsWallet from '@coinspace/cs-wallet';
+import EthereumWallet from '@coinspace/cs-ethereum-wallet';
+import BinanceSmartChainWallet from '@coinspace/cs-binance-smart-chain-wallet';
 
 class Details {
   constructor(baseURL) {
@@ -56,6 +58,15 @@ class Details {
             },
             'dash@dash': {
               bip44: CsWallet.networks.dash.bip44,
+            },
+            'ethereum@ethereum': {
+              bip44: EthereumWallet.networks.ethereum.bip44,
+            },
+            'binance-coin@binance-smart-chain': {
+              bip44: BinanceSmartChainWallet.network.bip44,
+            },
+            'ethereum-classic@ethereum-classic': {
+              bip44: EthereumWallet.networks['ethereum-classic'].bip44,
             },
           },
         }));

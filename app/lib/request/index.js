@@ -28,6 +28,7 @@ const URLS = [
   process.env.API_XMR_URL,
   process.env.API_BSC_URL,
   process.env.API_ADA_URL,
+  process.env.API_ETC_URL,
 ];
 
 axios.interceptors.request.use((config) => {

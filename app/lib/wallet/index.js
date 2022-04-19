@@ -35,6 +35,7 @@ import stellar from '@coinspace/crypto-db/crypto/stellar@stellar.json';
 import eos from '@coinspace/crypto-db/crypto/eos@eos.json';
 import monero from '@coinspace/crypto-db/crypto/monero@monero.json';
 import cardano from '@coinspace/crypto-db/crypto/cardano@cardano.json';
+import ethereumClassic from '@coinspace/crypto-db/crypto/ethereum-classic@ethereum-classic.json';
 
 import { eddsa } from 'elliptic';
 
@@ -67,6 +68,7 @@ export const walletCoins = [
   monero,
   binanceSmartChain,
   cardano,
+  ethereumClassic,
 ];
 
 const Wallet = {
@@ -83,6 +85,7 @@ const Wallet = {
   monero: MoneroWallet,
   'binance-smart-chain': BinanceSmartChainWallet,
   cardano: CardanoWallet,
+  'ethereum-classic': EthereumWallet,
 };
 
 function createWallet(passphrase) {
@@ -227,11 +230,20 @@ function getWalletOptions(crypto) {
     options.request = request;
     options.apiNode = process.env.API_ETH_URL;
     options.platformCrypto = walletCoins.find((item) => item._id === 'ethereum@ethereum');
+    options.settings = details.getCryptoSettings(options.platformCrypto._id);
+  } else if (crypto.platform === 'ethereum-classic') {
+    options.chainId = 61;
+    options.minConf = 120;
+    options.request = request;
+    options.apiNode = process.env.API_ETC_URL;
+    options.platformCrypto = walletCoins.find((item) => item._id === 'ethereum-classic@ethereum-classic');
+    options.settings = details.getCryptoSettings(options.platformCrypto._id);
   } else if (crypto.platform === 'binance-smart-chain') {
     options.minConf = 12;
     options.request = request;
     options.apiNode = process.env.API_BSC_URL;
     options.platformCrypto = walletCoins.find((item) => item._id === 'binance-coin@binance-smart-chain');
+    options.settings = details.getCryptoSettings(options.platformCrypto._id);
   } else if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'].includes(crypto.platform)) {
     options.settings = details.getCryptoSettings(crypto._id);
     options.minConf = 3;

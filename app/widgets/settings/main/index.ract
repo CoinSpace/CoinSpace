@@ -59,7 +59,7 @@
     </div>
   </div>
 
-  {{#if (isEOS || isEnabledImport || isEnabledExport || isBitcoinFamily)}}
+  {{#if (isEOS || isEnabledImport || isEnabledExport || isEnabledDerivationPaths)}}
   <div class="_section">
     <div class="_title">{{walletName}}</div>
     {{#if isEOS}}
@@ -80,7 +80,7 @@
       <div class="_arrow">{{>svg_arrow}}</div>
     </div>
     {{/if}}
-    {{#if isBitcoinFamily}}
+    {{#if isEnabledDerivationPaths}}
     <div class="_list_item _btn" on-click="derivation-path">
       <div class="_label">{{translate("Derivation path")}}</div>
       <div class="_arrow">{{>svg_arrow}}</div>

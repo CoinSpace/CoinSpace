@@ -12,13 +12,22 @@ const BIPS = {
 
 export default function open() {
   const wallet = getWallet();
-  const settings = wallet.addressTypes.map((type) => {
-    return {
-      type,
-      bip: BIPS[type],
-      path: wallet.settings[BIPS[type]],
-    };
-  });
+  let settings;
+  if (wallet.addressTypes) {
+    settings = wallet.addressTypes.map((type) => {
+      return {
+        type,
+        bip: BIPS[type],
+        path: wallet.settings[BIPS[type]],
+      };
+    });
+  } else {
+    settings = [{
+      type: 'default',
+      bip: 'bip44',
+      path: wallet.settings.bip44,
+    }];
+  }
 
   const ractive = new Ractive({
     partials: {
@@ -31,6 +40,7 @@ export default function open() {
       if (type === 'p2pkh') return translate('P2PKH - Legacy');
       if (type === 'p2sh') return translate('P2SH - SegWit compatible');
       if (type === 'p2wpkh') return translate('Bech32 - SegWit native');
+      if (type === 'default') return translate('Derivation path');
     },
     clearSetting(type) {
       const settings = ractive.get('settings');
@@ -49,7 +59,7 @@ export default function open() {
     if (ractive.get('settings').some((item) => wallet.settings[item.bip] !== item.path)) {
       const settings = {};
       for (const setting of ractive.get('settings')) {
-        if (!/^m(\/\d+'?)+$/.test(setting.path)) {
+        if (!/^m(\/\d+'?)*$/.test(setting.path)) {
           ractive.set('isLoading', false);
           return showError({
             message: translate('Invalid path :path', {

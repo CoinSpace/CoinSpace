@@ -13,7 +13,7 @@ export async function validateSend(options) {
     // eslint-disable-next-line max-len
     if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'].includes(wallet.crypto.platform)) {
       tx = wallet.createTx(to, amount, fee);
-    } else if (['ethereum', 'binance-smart-chain'].includes(wallet.crypto.platform)) {
+    } else if (['ethereum', 'binance-smart-chain', 'ethereum-classic'].includes(wallet.crypto.platform)) {
       tx = wallet.createTx(to, amount);
     } else if (wallet.crypto.platform === 'ripple') {
       tx = await wallet.createTx(to, amount, options.tag, options.invoiceId);
@@ -97,7 +97,7 @@ export async function validateSend(options) {
         message: translate('Transaction too large'),
       });
       // eslint-disable-next-line max-len
-    } else if (/Insufficient funds for token transaction/.test(err.message) && ['ethereum', 'binance-smart-chain'].includes(wallet.crypto.platform)) {
+    } else if (/Insufficient funds for token transaction/.test(err.message) && ['ethereum', 'binance-smart-chain', 'ethereum-classic'].includes(wallet.crypto.platform)) {
       showError({
         title: translate('Uh Oh...'),
         message: translate('Not enough funds to pay transaction fee (:required).', {
@@ -112,7 +112,7 @@ export async function validateSend(options) {
           message: translate('Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first.'),
         });
         // eslint-disable-next-line max-len
-      } else if (/Attempt to empty wallet/.test(err.details) && ['ethereum', 'binance-smart-chain'].includes(wallet.crypto.platform)) {
+      } else if (/Attempt to empty wallet/.test(err.details) && ['ethereum', 'binance-smart-chain', 'ethereum-classic'].includes(wallet.crypto.platform)) {
         // eslint-disable-next-line max-len
         const message = translate('It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you', {
           sendableBalance: toUnitString(err.sendableBalance),

@@ -42,8 +42,6 @@ const languages = [
   { value: 'zh-cn', name: '汉语' },
 ];
 
-const BITCOIN_FAMILY = ['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'];
-
 export default function(el) {
   const currency = details.get('systemInfo').preferredCurrency;
   const language = i18n.getLanguage(details.get('systemInfo').language);
@@ -55,7 +53,7 @@ export default function(el) {
       username: '',
       isEnabledImport: true,
       isEnabledExport: true,
-      isBitcoinFamily: false,
+      isEnabledDerivationPaths: false,
       isEOS: false,
       securityPinLabel: getSecurityPinLabel(),
       walletName: '',
@@ -79,7 +77,12 @@ export default function(el) {
   ractive.on('before-show', () => {
     const wallet = CS.getWallet();
     ractive.set('isEOS', wallet.crypto.platform === 'eos');
-    ractive.set('isBitcoinFamily', BITCOIN_FAMILY.includes(wallet.crypto.platform));
+    ractive.set('isEnabledDerivationPaths',
+      [
+        'bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash',
+        'ethereum', 'binance-smart-chain', 'ethereum-classic',
+      ].includes(wallet.crypto.platform) && wallet.crypto.type === 'coin'
+    );
     ractive.set('walletName', wallet.crypto.name);
     if (wallet.crypto.platform === 'eos') {
       ractive.set('isEnabledImport', false);
