@@ -31,3 +31,4 @@ Supported coins:
 - Monero
 - Binance Smart Chain and BEP20 tokens
 - Cardano
+- Ethereum Classic
