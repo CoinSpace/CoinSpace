@@ -212,8 +212,6 @@ jobs:
           DISTRIBUTION: ${{ matrix.DISTRIBUTION }}
           BUILD_TYPE: ${{ matrix.BUILD_TYPE }}
           SENTRY_DSN: ${{ secrets[matrix.SENTRY_KEY] }}
-          SHAPESHIFT_API_KEY: ${{ secrets.SHAPESHIFT_API_KEY }}
-          SHAPESHIFT_CLIENT_ID: ${{ secrets.SHAPESHIFT_CLIENT_ID }}
           MOONPAY_API_KEY: ${{ secrets.MOONPAY_API_KEY }}
           MOONPAY_WIDGET_BUY_URL: ${{ secrets.MOONPAY_WIDGET_BUY_URL }}
           MOONPAY_WIDGET_SELL_URL: ${{ secrets.MOONPAY_WIDGET_SELL_URL }}

@@ -147,10 +147,6 @@ router.all('/location', (req, res) => {
   res.status(410).send({ error: 'Please upgrade the app!' });
 });
 
-router.delete('/shapeShiftToken', (req, res) => {
-  res.status(410).send({ error: 'Please upgrade the app!' });
-});
-
 router.get('/changelly/getCoins', (req, res) => {
   changelly.getCoins().then((coins) => {
     res.status(200).send(coins);
