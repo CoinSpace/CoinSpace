@@ -49,14 +49,14 @@ function getCurrenciesFromAPI() {
           code: coin.code,
           symbol,
           isSupported: !coin.isSuspended,
-          isSellSupported: coin.isSellSupported && process.env.ENABLE_MOONPAY_SELL === 'true',
+          isSellSupported: coin.isSellSupported,
           network,
         };
         coinsUSA[coin.id] = {
           code: coin.code,
           symbol,
           isSupported: !coin.isSuspended && coin.isSupportedInUS,
-          isSellSupported: coin.isSellSupported && process.env.ENABLE_MOONPAY_SELL === 'true',
+          isSellSupported: coin.isSellSupported,
           network,
         };
       }

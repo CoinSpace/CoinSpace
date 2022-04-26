@@ -12,7 +12,7 @@ const app = express();
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
-  environment: process.env.SENTRY_ENVIRONMENT,
+  environment: process.env.NODE_ENV,
   release: `coin.server@${process.env.npm_package_version}`,
   integrations: [
     new Integrations.CaptureConsole({

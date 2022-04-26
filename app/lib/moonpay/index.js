@@ -5,6 +5,9 @@ let coins = {};
 let isBuyAllowed = false;
 let isSellAllowed = false;
 let isInited = false;
+const envSuffix = `${process.env.NODE_ENV === 'production' ? '' : '-staging'}`;
+const MOONPAY_WIDGET_BUY_URL = `https://buy${envSuffix}.moonpay.com?apiKey=${apiKey}`;
+const MOONPAY_WIDGET_SELL_URL = `https://sell${envSuffix}.moonpay.com?apiKey=${apiKey}`;
 
 async function init() {
   if (isInited) return true;
@@ -67,7 +70,7 @@ function getMoonpayCoin(crypto) {
 }
 
 function getBuyUrl(currencyCode, walletAddress) {
-  let baseUrl = process.env.MOONPAY_WIDGET_BUY_URL + '&';
+  let baseUrl = MOONPAY_WIDGET_BUY_URL + '&';
   const params = {
     currencyCode,
     walletAddress,
@@ -79,7 +82,7 @@ function getBuyUrl(currencyCode, walletAddress) {
 }
 
 function getSellUrl(baseCurrencyCode, refundWalletAddress) {
-  let baseUrl = process.env.MOONPAY_WIDGET_SELL_URL + '&';
+  let baseUrl = MOONPAY_WIDGET_SELL_URL + '&';
   const params = {
     baseCurrencyCode,
     refundWalletAddress,

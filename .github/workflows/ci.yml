@@ -213,9 +213,6 @@ jobs:
           BUILD_TYPE: ${{ matrix.BUILD_TYPE }}
           SENTRY_DSN: ${{ secrets[matrix.SENTRY_KEY] }}
           MOONPAY_API_KEY: ${{ secrets.MOONPAY_API_KEY }}
-          MOONPAY_WIDGET_BUY_URL: ${{ secrets.MOONPAY_WIDGET_BUY_URL }}
-          MOONPAY_WIDGET_SELL_URL: ${{ secrets.MOONPAY_WIDGET_SELL_URL }}
-          SENTRY_ENVIRONMENT: ${{ secrets.SENTRY_ENVIRONMENT }}
           SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}

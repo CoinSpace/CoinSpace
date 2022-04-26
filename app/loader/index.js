@@ -6,7 +6,7 @@ const SENTRY_PATH_STRIP_RE = /^.*\/[^\.]+(\.app|CodePush|.*(?=\/))/;
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
   autoSessionTracking: process.env.BUILD_TYPE === 'electron',
-  environment: process.env.SENTRY_ENVIRONMENT,
+  environment: process.env.NODE_ENV,
   release: process.env.RELEASE,
   integrations: [
     new RewriteFrames({

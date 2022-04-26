@@ -53,7 +53,7 @@ if (!isMas && !lock) {
 // Init crashReporter
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
-  environment: process.env.SENTRY_ENVIRONMENT,
+  environment: process.env.NODE_ENV,
   release: process.env.RELEASE,
 });
 
