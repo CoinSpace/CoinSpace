@@ -5,7 +5,7 @@ let coins = {};
 let isBuyAllowed = false;
 let isSellAllowed = false;
 let isInited = false;
-const envSuffix = `${process.env.NODE_ENV === 'production' ? '' : '-staging'}`;
+const envSuffix = `${process.env.NODE_ENV === 'production' ? '' : '-sandbox'}`;
 const MOONPAY_WIDGET_BUY_URL = `https://buy${envSuffix}.moonpay.com?apiKey=${apiKey}`;
 const MOONPAY_WIDGET_SELL_URL = `https://sell${envSuffix}.moonpay.com?apiKey=${apiKey}`;
 
