@@ -21,6 +21,7 @@ import StellarWallet from '@coinspace/cs-stellar-wallet';
 import EOSWallet from '@coinspace/cs-eos-wallet';
 import MoneroWallet from '@coinspace/cs-monero-wallet';
 import CardanoWallet from '@coinspace/cs-cardano-wallet';
+import SolanaWallet from '@coinspace/cs-solana-wallet';
 
 import bitcoin from '@coinspace/crypto-db/crypto/bitcoin@bitcoin.json';
 import litecoin from '@coinspace/crypto-db/crypto/litecoin@litecoin.json';
@@ -36,6 +37,7 @@ import eos from '@coinspace/crypto-db/crypto/eos@eos.json';
 import monero from '@coinspace/crypto-db/crypto/monero@monero.json';
 import cardano from '@coinspace/crypto-db/crypto/cardano@cardano.json';
 import ethereumClassic from '@coinspace/crypto-db/crypto/ethereum-classic@ethereum-classic.json';
+import solana from '@coinspace/crypto-db/crypto/solana@solana.json';
 
 import { eddsa } from 'elliptic';
 
@@ -69,6 +71,7 @@ export const walletCoins = [
   binanceSmartChain,
   cardano,
   ethereumClassic,
+  solana,
 ];
 
 const Wallet = {
@@ -86,6 +89,7 @@ const Wallet = {
   'binance-smart-chain': BinanceSmartChainWallet,
   cardano: CardanoWallet,
   'ethereum-classic': EthereumWallet,
+  solana: SolanaWallet,
 };
 
 function createWallet(passphrase) {
@@ -272,6 +276,10 @@ function getWalletOptions(crypto) {
   } else if (crypto.platform === 'cardano') {
     options.request = request;
     options.apiNode = process.env.API_ADA_URL;
+    options.apiWeb = process.env.SITE_URL;
+  } else if (crypto.platform === 'solana') {
+    options.request = request;
+    options.apiNode = process.env.API_SOL_URL;
     options.apiWeb = process.env.SITE_URL;
   }
   return options;

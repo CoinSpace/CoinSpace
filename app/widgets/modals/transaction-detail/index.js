@@ -7,7 +7,8 @@ import contentRipple from './contentRipple.ract';
 import contentStellar from './contentStellar.ract';
 import contentEOS from './contentEOS.ract';
 import contentMonero from './contentMonero.ract';
-import contentBtcBchLtc from './contentBtcBchLtc.ract';
+import contentSolana from './contentSolana.ract';
+import contentDefault from './contentDefault.ract';
 import { translate } from 'lib/i18n';
 import strftime from 'strftime';
 import { toUnitString } from 'lib/convert';
@@ -26,8 +27,10 @@ export default function({ transaction }) {
     content = contentEOS;
   } else if (platform === 'monero') {
     content = contentMonero;
+  } else if (platform === 'solana') {
+    content = contentSolana;
   } else {
-    content = contentBtcBchLtc;
+    content = contentDefault;
   }
   const ractive = new Ractive({
     partials: {

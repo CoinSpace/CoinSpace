@@ -25,6 +25,8 @@ export async function validateSend(options) {
       tx = await wallet.createTx(to, amount, fee);
     } else if (wallet.crypto.platform === 'cardano') {
       tx = await wallet.createTx(to, amount, fee);
+    } else if (wallet.crypto.platform === 'solana') {
+      tx = await wallet.createTx(to, amount, fee);
     }
     options.tx = tx;
   } catch (err) {
