@@ -93,6 +93,9 @@ export default function(el) {
     } else if (wallet.crypto.platform === 'cardano') {
       ractive.set('isEnabledImport', false);
       ractive.set('isEnabledExport', true);
+    } else if (wallet.crypto.platform === 'solana') {
+      ractive.set('isEnabledImport', false);
+      ractive.set('isEnabledExport', true);
     } else if (wallet.crypto.platform === 'bitcoin-sv') {
       ractive.set('isEnabledImport', false);
       ractive.set('isEnabledExport', true);
