@@ -85,7 +85,7 @@ module.exports = {
         },
       },
       {
-        test:/\.ract$/,
+        test: /\.ract$/,
         use: ['ractive-loader'],
       },
     ],

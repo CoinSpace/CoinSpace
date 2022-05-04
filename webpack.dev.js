@@ -31,10 +31,10 @@ module.exports = merge(common, {
       '/api': {
         target: 'http://localhost:8080',
         pathRewrite: {
-          '^/api/v3' : '/api/v3',
-          '^/api/v2' : '/api/v2',
-          '^/api/v1' : '/api/v1',
-          '^/api' : '',
+          '^/api/v3': '/api/v3',
+          '^/api/v2': '/api/v2',
+          '^/api/v1': '/api/v1',
+          '^/api': '',
         },
       },
     },
