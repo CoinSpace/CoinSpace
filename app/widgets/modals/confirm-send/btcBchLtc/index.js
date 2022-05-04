@@ -94,6 +94,9 @@ function open(options) {
       message = translate('Network node error. Please try again later.', {
         network: wallet.crypto.name,
       });
+    } else if (/^Transaction leaves an account with a lower balance than rent-exempt minimum/.test(err.message)) {
+      // solana
+      message = translate('Transaction leaves the destination account with a lower balance than rent-exempt minimum.');
     } else {
       console.error(`not translated error: ${err.message}`);
       // eslint-disable-next-line prefer-destructuring

@@ -139,7 +139,6 @@
   "Please enter a valid destination tag": "Please enter a valid destination tag",
   "Exchange is currently unavailable for this pair": "Exchange is currently unavailable for this pair",
   "Payment operations:": "Payment operations:",
-  "Pay (:amount) XLM to :destination": "Pay %(amount)s XLM to %(destination)s",
   "Created Account :destination with balance :amount XLM": "Created Account %(destination)s with balance %(amount)s XLM",
   "Memo": "Memo",
   "Please enter a valid memo": "Please enter a valid memo",
@@ -268,5 +267,8 @@
   "Derivation path defines how to derive private keys from 12-word passphrase.": "Derivation path defines how to derive private keys from 12-word passphrase.",
   "Invalid path :path": "Invalid path %(path)s",
   "Use Face ID in place of PIN.": "Use Face ID in place of PIN.",
-  "PIN & Face ID": "PIN & Face ID"
+  "PIN & Face ID": "PIN & Face ID",
+  "Transfer :amount :symbol from :source to :destination": "Transfer %(amount)s %(symbol)s from %(source)s to %(destination)s",
+  "Instructions:": "Instructions:",
+  "Transaction leaves the destination account with a lower balance than rent-exempt minimum.": "Transaction leaves the destination account with a lower balance than rent-exempt minimum."
 }

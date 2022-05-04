@@ -30,7 +30,7 @@
     {{#if operations[0]}}
       {{#each operations}}
         {{#if type === 'payment'}}
-          <div>{{translate('Pay (:amount) XLM to :destination', {amount: toUnitString(amount), destination: destination})}}</div>
+          <div>{{translate('Transfer :amount :symbol from :source to :destination', { amount: toUnitString(amount), symbol: 'XLM', source: from, destination: destination })}}</div>
         {{elseif type === 'createAccount'}}
           <div>{{translate('Created Account :destination with balance :amount XLM', {amount: toUnitString(amount), destination: destination})}}</div>
         {{/if}}

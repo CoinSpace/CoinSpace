@@ -20,9 +20,7 @@
     <label>{{translate("Instructions:")}}</label>
     <code class="cscode">
       {{#each instructions}}
-        <span class="_address">{{source ? source : translate("Unparsed address")}}</span>
-        <span class="_address">{{destination ? destination : translate("Unparsed address")}}</span>
-        <span class="_number">{{toUnitString(amount)}}</span>
+        <div>{{translate('Transfer :amount :symbol from :source to :destination', { amount: toUnitString(amount), symbol: 'SOL', source: source, destination: destination })}}</div>
       {{/each}}
     </code>
   </div>
