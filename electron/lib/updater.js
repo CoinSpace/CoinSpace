@@ -24,7 +24,7 @@ class Updater {
       return this;
     }
 
-    const feedURL = `${SITE_URL}api/v1/update/${BUILD_PLATFORM}/${process.arch}/${app.getVersion()}`;
+    const feedURL = `${SITE_URL}api/v3/update/${BUILD_PLATFORM}/${process.arch}/v${app.getVersion()}`;
     const requestHeaders = {
       'User-Agent': `CoinSpace/${BUILD_PLATFORM}/${app.getVersion()} (${process.platform}: ${process.arch})`,
     };
