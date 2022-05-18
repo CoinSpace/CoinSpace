@@ -563,10 +563,6 @@
         <source>Payment operations:</source>
         <target>Платежные операции:</target>
       </trans-unit>
-      <trans-unit id="Pay (:amount) XLM to :destination">
-        <source>Pay %(amount)s XLM to %(destination)s</source>
-        <target>Оплата %(amount)s XLM на %(destination)s</target>
-      </trans-unit>
       <trans-unit id="Created Account :destination with balance :amount XLM">
         <source>Created Account %(destination)s with balance %(amount)s XLM</source>
         <target>Создание аккаунта %(destination)s с балансом %(amount)s XLM</target>
@@ -1086,6 +1082,18 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="PIN &amp; Face ID">
         <source>PIN &amp; Face ID</source>
         <target>ПИН и Face ID</target>
+      </trans-unit>
+      <trans-unit id="Transfer :amount :symbol from :source to :destination">
+        <source>Transfer %(amount)s %(symbol)s from %(source)s to %(destination)s</source>
+        <target>Перевод %(amount)s %(symbol)s с %(source)s на %(destination)s</target>
+      </trans-unit>
+      <trans-unit id="Instructions:">
+        <source>Instructions:</source>
+        <target>Инструкции:</target>
+      </trans-unit>
+      <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
+        <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
+        <target>Транзакция оставляет баланс на счете получателя меньше, чем не облагаемый арендной платой минимум.</target>
       </trans-unit>
     </body>
   </file>

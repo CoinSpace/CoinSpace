@@ -563,10 +563,6 @@
         <source>Payment operations:</source>
         <target>Pagpapatakbo ng bayad:</target>
       </trans-unit>
-      <trans-unit id="Pay (:amount) XLM to :destination">
-        <source>Pay %(amount)s XLM to %(destination)s</source>
-        <target>Magbayad ng %(amount)s XLM sa %(destination)s</target>
-      </trans-unit>
       <trans-unit id="Created Account :destination with balance :amount XLM">
         <source>Created Account %(destination)s with balance %(amount)s XLM</source>
         <target>Gumawa ng Account %(destination)s na may balanseng %(amount)s XLM</target>
@@ -1086,6 +1082,18 @@ Iko-convert ito sa %(toSymbol)s, at ipapadala sa
       <trans-unit id="PIN &amp; Face ID">
         <source>PIN &amp; Face ID</source>
         <target>PIN at Face ID</target>
+      </trans-unit>
+      <trans-unit id="Transfer :amount :symbol from :source to :destination">
+        <source>Transfer %(amount)s %(symbol)s from %(source)s to %(destination)s</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Instructions:">
+        <source>Instructions:</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
+        <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
+        <target></target>
       </trans-unit>
     </body>
   </file>
