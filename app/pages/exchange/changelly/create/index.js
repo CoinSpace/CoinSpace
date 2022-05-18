@@ -358,7 +358,6 @@ export default function(el) {
       ractive.set('minAmount', '?');
       ractive.set('isLoading', false);
       ractive.set('isFirstEstimate', false);
-      console.error(err);
     }
   }, 500);
 
