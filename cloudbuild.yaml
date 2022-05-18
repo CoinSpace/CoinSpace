@@ -1,6 +1,6 @@
 steps:
 
-- name: 'node:14.17.6'
+- name: 'node:16.15.0'
   id: 'build assets'
   env:
     - 'CI=true'

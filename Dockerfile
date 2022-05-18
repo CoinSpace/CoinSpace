@@ -1,4 +1,4 @@
-FROM node:14.17.6-alpine
+FROM node:16.15.0-alpine
 
 WORKDIR /coin
 COPY package*.json /coin/

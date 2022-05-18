@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
       - name: Set app version
         run: echo "VERSION=$(node -p -e "require('./package.json').version")" >> $GITHUB_ENV
       - uses: ncipollo/release-action@v1
@@ -49,7 +49,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
           registry-url: https://npm.pkg.github.com/
       - run: npm ci
         env:
@@ -64,52 +64,52 @@ jobs:
       matrix:
         include:
           - os: macos-10.15
-            node: 14
+            node: 16
             DISTRIBUTION: mac
             BUILD_TYPE: electron
             SENTRY_KEY: SENTRY_DSN_MAC
           - os: macos-10.15
-            node: 14
+            node: 16
             DISTRIBUTION: mas
             BUILD_TYPE: electron
             SENTRY_KEY: SENTRY_DSN_MAS
           - os: macos-10.15
-            node: 14
+            node: 16
             DISTRIBUTION: mas-dev
             BUILD_TYPE: electron
             SENTRY_KEY: SENTRY_DSN_MAS
           - os: ubuntu-20.04
-            node: 14
+            node: 16
             DISTRIBUTION: snap
             BUILD_TYPE: electron
             SENTRY_KEY: SENTRY_DSN_SNAP
           - os: windows-2019
-            node: 14
+            node: 16
             DISTRIBUTION: win
             BUILD_TYPE: electron
             SENTRY_KEY: SENTRY_DSN_WIN
           - os: windows-2019
-            node: 14
+            node: 16
             DISTRIBUTION: appx
             BUILD_TYPE: electron
             SENTRY_KEY: SENTRY_DSN_WIN
           - os: windows-2019
-            node: 14
+            node: 16
             DISTRIBUTION: appx-dev
             BUILD_TYPE: electron
             SENTRY_KEY: SENTRY_DSN_WIN
           - os: macos-11
-            node: 14
+            node: 16
             DISTRIBUTION: ios
             BUILD_TYPE: phonegap
             SENTRY_KEY: SENTRY_DSN_IOS
           - os: ubuntu-20.04
-            node: 14
+            node: 16
             DISTRIBUTION: android-play
             BUILD_TYPE: phonegap
             SENTRY_KEY: SENTRY_DSN_ANDROID
           - os: ubuntu-20.04
-            node: 14
+            node: 16
             DISTRIBUTION: android-galaxy
             BUILD_TYPE: phonegap
             SENTRY_KEY: SENTRY_DSN_ANDROID
