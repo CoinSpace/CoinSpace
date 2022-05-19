@@ -69,7 +69,9 @@ function open(options) {
 
         // update balance & tx history
         emitter.emit('tx-sent');
-        emitter.emit('append-transactions', [historyTx]);
+        if ('solana@solana' !== wallet.crypto._id) {
+          emitter.emit('append-transactions', [historyTx]);
+        }
       } catch (err) {
         return handleTransactionError(err);
       }
