@@ -1085,15 +1085,15 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Transfer :amount :symbol from :source to :destination">
         <source>Transfer %(amount)s %(symbol)s from %(source)s to %(destination)s</source>
-        <target></target>
+        <target>%(source)s kaynağından %(destination)s hedefine %(amount)s %(symbol)s aktar</target>
       </trans-unit>
       <trans-unit id="Instructions:">
         <source>Instructions:</source>
-        <target></target>
+        <target>Talimatlar:</target>
       </trans-unit>
       <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
         <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
-        <target></target>
+        <target>İşlem sonrasında hedef hesapta kiradan muaf minimumdan daha düşük bir bakiye kalır.</target>
       </trans-unit>
     </body>
   </file>

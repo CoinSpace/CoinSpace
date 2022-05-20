@@ -1085,15 +1085,15 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Transfer :amount :symbol from :source to :destination">
         <source>Transfer %(amount)s %(symbol)s from %(source)s to %(destination)s</source>
-        <target></target>
+        <target>%(source)sから%(destination)sへ%(amount)s %(symbol)sを送金</target>
       </trans-unit>
       <trans-unit id="Instructions:">
         <source>Instructions:</source>
-        <target></target>
+        <target>説明:</target>
       </trans-unit>
       <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
         <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
-        <target></target>
+        <target>送金では、残高が賃貸控除限度額を下回った残高で宛先アカウントを維持します。</target>
       </trans-unit>
     </body>
   </file>

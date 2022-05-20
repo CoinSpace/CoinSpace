@@ -1085,15 +1085,15 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Transfer :amount :symbol from :source to :destination">
         <source>Transfer %(amount)s %(symbol)s from %(source)s to %(destination)s</source>
-        <target></target>
+        <target>%(amount)s개의 %(symbol)s을(를) %(source)s에서 %(destination)s(으)로 이전하십시오</target>
       </trans-unit>
       <trans-unit id="Instructions:">
         <source>Instructions:</source>
-        <target></target>
+        <target>안내:</target>
       </trans-unit>
       <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
         <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
-        <target></target>
+        <target>거래를 하면 대상 계정에 임대 면제 최소액보다 적은 잔액이 남게 됩니다.</target>
       </trans-unit>
     </body>
   </file>

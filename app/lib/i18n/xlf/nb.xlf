@@ -1085,15 +1085,15 @@ Den konverteres til %(toSymbol)s og sendes til
       </trans-unit>
       <trans-unit id="Transfer :amount :symbol from :source to :destination">
         <source>Transfer %(amount)s %(symbol)s from %(source)s to %(destination)s</source>
-        <target></target>
+        <target>Overfør %(amount)s %(symbol)s fra %(source)s til %(destination)s</target>
       </trans-unit>
       <trans-unit id="Instructions:">
         <source>Instructions:</source>
-        <target></target>
+        <target>Instruksjoner:</target>
       </trans-unit>
       <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
         <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
-        <target></target>
+        <target>Transaksjonen etterlater destinasjonskontoen med en lavere saldo enn et leiefritt minimum.</target>
       </trans-unit>
     </body>
   </file>

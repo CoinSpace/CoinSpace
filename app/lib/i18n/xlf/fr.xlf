@@ -1085,15 +1085,15 @@ Le montant sera converti en %(toSymbol)s, et sera envoyé à
       </trans-unit>
       <trans-unit id="Transfer :amount :symbol from :source to :destination">
         <source>Transfer %(amount)s %(symbol)s from %(source)s to %(destination)s</source>
-        <target></target>
+        <target>Transférer de %(amount)s %(symbol)s de %(source)s à %(destination)s</target>
       </trans-unit>
       <trans-unit id="Instructions:">
         <source>Instructions:</source>
-        <target></target>
+        <target>Instructions :</target>
       </trans-unit>
       <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
         <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
-        <target></target>
+        <target>La transaction laisse le compte de destination avec un solde inférieur au minimum exonéré de loyer.</target>
       </trans-unit>
     </body>
   </file>

@@ -1085,15 +1085,15 @@ Sẽ chuyển đổi thành %(toSymbol)s, và gửi đến
       </trans-unit>
       <trans-unit id="Transfer :amount :symbol from :source to :destination">
         <source>Transfer %(amount)s %(symbol)s from %(source)s to %(destination)s</source>
-        <target></target>
+        <target>Chuyển khoản %(amount)s %(symbol)s từ %(source)s đến %(destination)s</target>
       </trans-unit>
       <trans-unit id="Instructions:">
         <source>Instructions:</source>
-        <target></target>
+        <target>Hướng dẫn:</target>
       </trans-unit>
       <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
         <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
-        <target></target>
+        <target>Giao dịch khiến tài khoản đích có số dư thấp hơn mức tối thiểu để được miễn tiền thuê.</target>
       </trans-unit>
     </body>
   </file>

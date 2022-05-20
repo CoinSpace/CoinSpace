@@ -1085,15 +1085,15 @@ Iko-convert ito sa %(toSymbol)s, at ipapadala sa
       </trans-unit>
       <trans-unit id="Transfer :amount :symbol from :source to :destination">
         <source>Transfer %(amount)s %(symbol)s from %(source)s to %(destination)s</source>
-        <target></target>
+        <target>Ilipat ang %(amount)s %(symbol)s mula sa %(source)s papunta sa %(destination)s</target>
       </trans-unit>
       <trans-unit id="Instructions:">
         <source>Instructions:</source>
-        <target></target>
+        <target>Mga Instruksiyon:</target>
       </trans-unit>
       <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
         <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
-        <target></target>
+        <target>Nagbibigay ang transaksiyon sa patutunguhang account ng mas mababang balanse kaysa sa rent-exempt na minimum.</target>
       </trans-unit>
     </body>
   </file>
