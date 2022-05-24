@@ -173,10 +173,11 @@ export async function initWallet(seed) {
   const walletTokens = details.get('tokens');
   const all = [...walletCoins, ...walletTokens];
 
-  let defaultCryptoId = LS.getCryptoId() || 'bitcoin@bitcoin';
-  if (!all.find((item) => item._id === defaultCryptoId && LS.hasPublicKey(item.platform))) {
-    defaultCryptoId = 'bitcoin@bitcoin';
-    LS.setCryptoId(defaultCryptoId);
+  const defaultCryptoId = LS.getCryptoId() || bitcoin._id;
+  let defaultCrypto = all.find((item) => item._id === defaultCryptoId);
+  if (!defaultCrypto || (!seed && !LS.hasPublicKey(defaultCrypto.platform))) {
+    defaultCrypto = bitcoin;
+    LS.setCryptoId(defaultCrypto._id);
   }
 
   for (const crypto of all) {
@@ -188,7 +189,7 @@ export async function initWallet(seed) {
       await initWalletWithPublicKey(crypto);
     }
   }
-  state.wallet = state.wallets[defaultCryptoId];
+  state.wallet = state.wallets[defaultCrypto._id];
 
   convert.setDecimals(state.wallet.crypto.decimals);
   await ticker.init([state.wallet.crypto]);
