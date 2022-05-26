@@ -1070,7 +1070,7 @@ components:
       nullable: true
     Base64UrlString:
       type: string
-      pattern: ^[A-Za-z0-9_-]+$
+      pattern: ^[A-Za-z0-9_-]*$
       maxLength: 2097152 # 2mb
       nullable: true
     UrlString:
