@@ -6,6 +6,7 @@ import tetherToken from '@coinspace/crypto-db/crypto/tether@ethereum.json';
 import CsWallet from '@coinspace/cs-wallet';
 import EthereumWallet from '@coinspace/cs-ethereum-wallet';
 import BinanceSmartChainWallet from '@coinspace/cs-binance-smart-chain-wallet';
+import AvalancheWallet from '@coinspace/cs-avalanche-wallet';
 
 class Details {
   constructor(baseURL) {
@@ -64,6 +65,9 @@ class Details {
             },
             'binance-coin@binance-smart-chain': {
               bip44: BinanceSmartChainWallet.network.bip44,
+            },
+            'avalanche@c-chain': {
+              bip44: AvalancheWallet.network.bip44,
             },
             'ethereum-classic@ethereum-classic': {
               bip44: EthereumWallet.networks['ethereum-classic'].bip44,

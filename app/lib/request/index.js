@@ -30,6 +30,7 @@ const URLS = [
   process.env.API_ADA_URL,
   process.env.API_ETC_URL,
   process.env.API_SOL_URL,
+  process.env.API_AVAX_URL,
 ];
 
 axios.interceptors.request.use((config) => {

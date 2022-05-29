@@ -20,7 +20,8 @@ export default function(el) {
         return strftime('%b %d, %Y %l:%M %p', new Date(timestamp));
       },
       getToAddress(tx) {
-        if (['ethereum', 'ripple', 'eos', 'binance-smart-chain', 'ethereum-classic', 'solana'].includes(platform)) {
+        // eslint-disable-next-line max-len
+        if (['ethereum', 'ripple', 'eos', 'binance-smart-chain', 'c-chain', 'ethereum-classic', 'solana'].includes(platform)) {
           return tx.to;
         } else if (platform === 'stellar') {
           return tx.operations[0] && tx.operations[0].destination;

@@ -259,9 +259,9 @@ async function getTickersPublic(ids) {
     .find({
       $or: ids.map((id) => {
         const [asset, platform] = id.split('@');
-        if (['ethereum', 'binance-smart-chain'].includes(platform)
+        if (['ethereum', 'binance-smart-chain', 'c-chain'].includes(platform)
           && /^0x[a-fA-F0-9]{40}$/.test(asset)) {
-          // ETH or BSC address
+          // ETH, BSC, AVAX address
           return {
             address: asset.toLowerCase(),
             platform,

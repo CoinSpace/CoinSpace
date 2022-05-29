@@ -52,6 +52,7 @@
     "@babel/core": "^7.18.0",
     "@babel/preset-env": "^7.18.0",
     "@coinspace/b39": "^2.1.4",
+    "@coinspace/cs-avalanche-wallet": "^0.0.1",
     "@coinspace/cs-binance-smart-chain-wallet": "^1.1.6",
     "@coinspace/cs-cardano-wallet": "^1.0.2",
     "@coinspace/cs-eos-wallet": "^1.4.1",

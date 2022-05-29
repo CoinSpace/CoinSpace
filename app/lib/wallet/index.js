@@ -22,6 +22,7 @@ import EOSWallet from '@coinspace/cs-eos-wallet';
 import MoneroWallet from '@coinspace/cs-monero-wallet';
 import CardanoWallet from '@coinspace/cs-cardano-wallet';
 import SolanaWallet from '@coinspace/cs-solana-wallet';
+import AvalancheWallet from '@coinspace/cs-avalanche-wallet';
 
 import bitcoin from '@coinspace/crypto-db/crypto/bitcoin@bitcoin.json';
 import litecoin from '@coinspace/crypto-db/crypto/litecoin@litecoin.json';
@@ -38,6 +39,7 @@ import monero from '@coinspace/crypto-db/crypto/monero@monero.json';
 import cardano from '@coinspace/crypto-db/crypto/cardano@cardano.json';
 import ethereumClassic from '@coinspace/crypto-db/crypto/ethereum-classic@ethereum-classic.json';
 import solana from '@coinspace/crypto-db/crypto/solana@solana.json';
+import avalanche from '@coinspace/crypto-db/crypto/avalanche@c-chain.json';
 
 import { eddsa } from 'elliptic';
 
@@ -72,6 +74,7 @@ export const walletCoins = [
   cardano,
   ethereumClassic,
   solana,
+  avalanche,
 ];
 
 const Wallet = {
@@ -90,6 +93,7 @@ const Wallet = {
   cardano: CardanoWallet,
   'ethereum-classic': EthereumWallet,
   solana: SolanaWallet,
+  'c-chain': AvalancheWallet,
 };
 
 function createWallet(passphrase) {
@@ -248,6 +252,12 @@ function getWalletOptions(crypto) {
     options.request = request;
     options.apiNode = process.env.API_BSC_URL;
     options.platformCrypto = walletCoins.find((item) => item._id === 'binance-coin@binance-smart-chain');
+    options.settings = details.getCryptoSettings(options.platformCrypto._id);
+  } else if (crypto.platform === 'c-chain') {
+    options.minConf = 12;
+    options.request = request;
+    options.apiNode = process.env.API_AVAX_URL;
+    options.platformCrypto = walletCoins.find((item) => item._id === 'avalanche@c-chain');
     options.settings = details.getCryptoSettings(options.platformCrypto._id);
   } else if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'].includes(crypto.platform)) {
     options.settings = details.getCryptoSettings(crypto._id);

@@ -39,7 +39,7 @@ function open(options) {
     },
   };
 
-  if (['ethereum', 'binance-smart-chain', 'ethereum-classic'].includes(platform)) {
+  if (['ethereum', 'binance-smart-chain', 'c-chain', 'ethereum-classic'].includes(platform)) {
     return ethereum(cryptoOptions);
   } else if (platform === 'ripple') {
     return ripple(cryptoOptions);

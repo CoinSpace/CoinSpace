@@ -7,6 +7,9 @@ import details from 'lib/wallet/details';
 import crypto from 'lib/crypto';
 import initDropdown from 'widgets/dropdown';
 import content from './_content.ract';
+import binanceSmartChain from '@coinspace/crypto-db/crypto/binance-coin@binance-smart-chain.json';
+import ethereum from '@coinspace/crypto-db/crypto/ethereum@ethereum.json';
+import avalanche from '@coinspace/crypto-db/crypto/avalanche@c-chain.json';
 
 function open() {
 
@@ -24,8 +27,9 @@ function open() {
   const blockchainDropdown = initDropdown({
     el: ractive.find('#js-blockchain'),
     options: [
-      { value: 'ethereum', name: 'Ethereum' },
-      { value: 'binance-smart-chain', name: 'Binance Smart Chain' },
+      { value: ethereum.platform, name: ethereum.name },
+      { value: binanceSmartChain.platform, name: binanceSmartChain.name },
+      { value: avalanche.platform, name: avalanche.name },
     ],
     value: 'ethereum',
     id: 'blockchain',

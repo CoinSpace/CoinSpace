@@ -75,7 +75,8 @@ export default function(el) {
   ractive.on('before-show', () => {
     ractive.set('cryptoCoins', walletCoins);
     const walletTokens = details.get('tokens');
-    const cryptoTokens = walletTokens.filter((item) => ['ethereum', 'binance-smart-chain'].includes(item.platform));
+    // eslint-disable-next-line max-len
+    const cryptoTokens = walletTokens.filter((item) => ['ethereum', 'binance-smart-chain', 'c-chain'].includes(item.platform));
     ractive.set('cryptoTokens', cryptoTokens);
     ractive.set('currentCrypto', getWallet().crypto);
     ractive.set('currency', details.get('systemInfo').preferredCurrency);

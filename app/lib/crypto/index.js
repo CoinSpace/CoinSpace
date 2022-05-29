@@ -19,7 +19,7 @@ export function init() {
       .then(data => {
         all = data;
         tokens = all.filter((item) => item.type === 'token'
-          && ['ethereum', 'binance-smart-chain'].includes(item.platform)
+          && ['ethereum', 'binance-smart-chain', 'c-chain'].includes(item.platform)
         );
       })
       .then(cleanLegacy)
@@ -72,6 +72,7 @@ function requestTokenByAddress(address, platform) {
   const urls = {
     ethereum: `${process.env.API_ETH_URL}api/v1/token/${address}`,
     'binance-smart-chain': `${process.env.API_BSC_URL}api/v1/token/${address}`,
+    'c-chain': `${process.env.API_AVAX_URL}api/v1/token/${address}`,
   };
 
   return request({
@@ -129,6 +130,8 @@ function getLogoUrl(logo) {
         return require('@coinspace/crypto-db/logo/dogecoin.svg');
       case 'binance-smart-chain.svg':
         return require('@coinspace/crypto-db/logo/binance-smart-chain.svg');
+      case 'c-chain.svg':
+        return require('@coinspace/crypto-db/logo/avalanche.svg');
       case 'xrp.svg':
         return require('@coinspace/crypto-db/logo/xrp.svg');
       case 'stellar.svg':
