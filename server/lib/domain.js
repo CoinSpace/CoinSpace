@@ -6,7 +6,7 @@ const resolution = new Resolution();
 const platformToChain = {
   ethereum: 'ERC20',
   'binance-smart-chain': 'BEP20',
-  'c-chain': 'ARC20',
+  'avalanche-c-chain': 'ARC20',
 };
 
 async function getAddress(domain, cryptoId) {

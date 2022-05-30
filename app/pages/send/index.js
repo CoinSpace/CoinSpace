@@ -131,7 +131,8 @@ export default function(el) {
         wallet,
         destinationInfo,
       };
-      if (['ethereum', 'binance-smart-chain', 'c-chain', 'ethereum-classic'].includes(wallet.crypto.platform)) {
+      // eslint-disable-next-line max-len
+      if (['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'ethereum-classic'].includes(wallet.crypto.platform)) {
         wallet.gasLimit = ractive.find('#gas-limit').value;
       } else if (wallet.crypto.platform === 'ripple') {
         options.tag = ractive.find('#destination-tag').value;
@@ -163,7 +164,7 @@ export default function(el) {
     const wallet = getWallet();
     isSyncing = false;
     // eslint-disable-next-line max-len
-    ractive.set('hasGas', ['ethereum', 'binance-smart-chain', 'c-chain', 'ethereum-classic'].includes(wallet.crypto.platform));
+    ractive.set('hasGas', ['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'ethereum-classic'].includes(wallet.crypto.platform));
     ractive.set('isRipple', wallet.crypto.platform === 'ripple');
     ractive.set('isStellar', wallet.crypto.platform === 'stellar');
     ractive.set('isEOS', wallet.crypto.platform === 'eos');
@@ -173,7 +174,7 @@ export default function(el) {
     ractive.set('factors', FACTORS[wallet.crypto.platform]);
     ractive.set('factor', wallet.crypto.symbol);
     setFees(true);
-    if (['ethereum', 'binance-smart-chain', 'c-chain', 'ethereum-classic'].includes(wallet.crypto.platform)) {
+    if (['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'ethereum-classic'].includes(wallet.crypto.platform)) {
       ractive.set('feeSymbol', wallet.platformCrypto.symbol);
       ractive.find('#gas-limit').value = wallet.gasLimit;
     } else {
@@ -213,7 +214,8 @@ export default function(el) {
         maxAmount: toUnitString(wallet.maxAmount),
       }];
       ractive.set('feeName', 'default');
-    } else if (['ethereum', 'binance-smart-chain', 'c-chain', 'ethereum-classic'].includes(wallet.crypto.platform)) {
+      // eslint-disable-next-line max-len
+    } else if (['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'ethereum-classic'].includes(wallet.crypto.platform)) {
       fees = [{
         name: 'default',
         estimate: toUnitString(wallet.defaultFee, 18),

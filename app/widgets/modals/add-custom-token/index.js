@@ -9,7 +9,7 @@ import initDropdown from 'widgets/dropdown';
 import content from './_content.ract';
 import binanceSmartChain from '@coinspace/crypto-db/crypto/binance-coin@binance-smart-chain.json';
 import ethereum from '@coinspace/crypto-db/crypto/ethereum@ethereum.json';
-import avalanche from '@coinspace/crypto-db/crypto/avalanche@c-chain.json';
+import avalanche from '@coinspace/crypto-db/crypto/avalanche@avalanche-c-chain.json';
 
 function open() {
 

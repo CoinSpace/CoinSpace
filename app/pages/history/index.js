@@ -21,7 +21,7 @@ export default function(el) {
       },
       getToAddress(tx) {
         // eslint-disable-next-line max-len
-        if (['ethereum', 'ripple', 'eos', 'binance-smart-chain', 'c-chain', 'ethereum-classic', 'solana'].includes(platform)) {
+        if (['ethereum', 'ripple', 'eos', 'binance-smart-chain', 'avalanche-c-chain', 'ethereum-classic', 'solana'].includes(platform)) {
           return tx.to;
         } else if (platform === 'stellar') {
           return tx.operations[0] && tx.operations[0].destination;

@@ -39,7 +39,7 @@ import monero from '@coinspace/crypto-db/crypto/monero@monero.json';
 import cardano from '@coinspace/crypto-db/crypto/cardano@cardano.json';
 import ethereumClassic from '@coinspace/crypto-db/crypto/ethereum-classic@ethereum-classic.json';
 import solana from '@coinspace/crypto-db/crypto/solana@solana.json';
-import avalanche from '@coinspace/crypto-db/crypto/avalanche@c-chain.json';
+import avalanche from '@coinspace/crypto-db/crypto/avalanche@avalanche-c-chain.json';
 
 import { eddsa } from 'elliptic';
 
@@ -93,7 +93,7 @@ const Wallet = {
   cardano: CardanoWallet,
   'ethereum-classic': EthereumWallet,
   solana: SolanaWallet,
-  'c-chain': AvalancheWallet,
+  'avalanche-c-chain': AvalancheWallet,
 };
 
 function createWallet(passphrase) {
@@ -253,11 +253,11 @@ function getWalletOptions(crypto) {
     options.apiNode = process.env.API_BSC_URL;
     options.platformCrypto = walletCoins.find((item) => item._id === 'binance-coin@binance-smart-chain');
     options.settings = details.getCryptoSettings(options.platformCrypto._id);
-  } else if (crypto.platform === 'c-chain') {
+  } else if (crypto.platform === 'avalanche-c-chain') {
     options.minConf = 12;
     options.request = request;
     options.apiNode = process.env.API_AVAX_URL;
-    options.platformCrypto = walletCoins.find((item) => item._id === 'avalanche@c-chain');
+    options.platformCrypto = walletCoins.find((item) => item._id === 'avalanche@avalanche-c-chain');
     options.settings = details.getCryptoSettings(options.platformCrypto._id);
   } else if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'].includes(crypto.platform)) {
     options.settings = details.getCryptoSettings(crypto._id);

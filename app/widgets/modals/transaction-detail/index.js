@@ -17,7 +17,7 @@ export default function({ transaction }) {
   let content;
   const wallet = getWallet();
   const { platform } = wallet.crypto;
-  if (['ethereum', 'binance-smart-chain', 'c-chain', 'ethereum-classic'].includes(platform)) {
+  if (['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'ethereum-classic'].includes(platform)) {
     content = contentEthereum;
   } else if (platform === 'ripple') {
     content = contentRipple;

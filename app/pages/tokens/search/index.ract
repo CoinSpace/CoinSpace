@@ -37,7 +37,7 @@
             <img src="{{getLogoUrl('ethereum.svg')}}">
           {{elseif platform === 'binance-smart-chain'}}
             <img src="{{getLogoUrl('binance-smart-chain.svg')}}">
-          {{elseif platform === 'c-chain'}}
+          {{elseif platform === 'avalanche-c-chain'}}
             <img src="{{getLogoUrl('avalanche.svg')}}">
           {{/if}}
         </div>

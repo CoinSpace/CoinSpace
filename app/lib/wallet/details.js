@@ -66,7 +66,7 @@ class Details {
             'binance-coin@binance-smart-chain': {
               bip44: BinanceSmartChainWallet.network.bip44,
             },
-            'avalanche@c-chain': {
+            'avalanche@avalanche-c-chain': {
               bip44: AvalancheWallet.network.bip44,
             },
             'ethereum-classic@ethereum-classic': {
