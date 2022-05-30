@@ -33,3 +33,4 @@ Supported coins:
 - Cardano
 - Ethereum Classic
 - Solana
+- Avalanche C-Chain and ARC20 tokens
