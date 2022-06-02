@@ -33,7 +33,7 @@ async function run() {
 
   /* eslint-disable max-len */
   /* eslint-disable quote-props */
-  cordova('platform add ios@6.2.0');
+  cordova('platform add ios@6.2.0 --save');
   cordova('plugin add cordova-plugin-fingerprint-aio@5.0.1 --variable FACEID_USAGE_DESCRIPTION="Used for easy authentication."');
   cordova('plugin add cordova-plugin-geolocation@4.0.2');
   cordova('plugin add phonegap-plugin-barcodescanner@8.1.0');
