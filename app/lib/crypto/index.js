@@ -73,6 +73,7 @@ function requestTokenByAddress(address, platform) {
     ethereum: `${process.env.API_ETH_URL}api/v1/token/${address}`,
     'binance-smart-chain': `${process.env.API_BSC_URL}api/v1/token/${address}`,
     'avalanche-c-chain': `${process.env.API_AVAX_URL}api/v1/token/${address}`,
+    tron: `${process.env.API_TRX_URL}api/v1/token/${address}`,
   };
 
   return request({
@@ -86,7 +87,7 @@ function requestTokenByAddress(address, platform) {
       name: data.name,
       symbol: data.symbol,
       address,
-      decimals: data.decimals,
+      decimals: parseInt(data.decimals, 10),
     };
   });
 }

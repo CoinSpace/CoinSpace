@@ -10,6 +10,7 @@ import content from './_content.ract';
 import binanceSmartChain from '@coinspace/crypto-db/crypto/binance-coin@binance-smart-chain.json';
 import ethereum from '@coinspace/crypto-db/crypto/ethereum@ethereum.json';
 import avalanche from '@coinspace/crypto-db/crypto/avalanche@avalanche-c-chain.json';
+import tron from '@coinspace/crypto-db/crypto/tron@tron.json';
 
 function open() {
 
@@ -30,6 +31,7 @@ function open() {
       { value: ethereum.platform, name: ethereum.name },
       { value: binanceSmartChain.platform, name: binanceSmartChain.name },
       { value: avalanche.platform, name: avalanche.name },
+      { value: tron.platform, name: tron.name },
     ],
     value: 'ethereum',
     id: 'blockchain',
@@ -43,7 +45,10 @@ function open() {
   ractive.on('addToken', async () => {
     ractive.set('isValidating', true);
     const walletTokens = details.get('tokens');
-    const address = ractive.get('address').trim().toLowerCase();
+    const platform = blockchainDropdown.getValue();
+    const address = platform !== 'tron'
+      ? ractive.get('address').trim().toLowerCase()
+      : ractive.get('address').trim();
     let token;
 
     if (!address) {
@@ -51,7 +56,6 @@ function open() {
       return showError({ message: translate('Please fill out address.') });
     }
 
-    const platform = blockchainDropdown.getValue();
     token = crypto.getTokenByAddress(address, platform);
 
     if (!token) {
