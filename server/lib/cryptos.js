@@ -266,6 +266,13 @@ async function getTickersPublic(ids) {
             address: asset.toLowerCase(),
             platform,
           };
+        } else if (['tron'].includes(platform)
+          && /^T[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{33}$/.test(asset)) {
+          // Tron address
+          return {
+            address: asset,
+            platform,
+          };
         } else {
           return {
             _id: id,
