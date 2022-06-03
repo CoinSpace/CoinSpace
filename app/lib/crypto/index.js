@@ -19,7 +19,7 @@ export function init() {
       .then(data => {
         all = data;
         tokens = all.filter((item) => item.type === 'token'
-          && ['ethereum', 'binance-smart-chain', 'avalanche-c-chain'].includes(item.platform)
+          && ['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'tron'].includes(item.platform)
         );
       })
       .then(cleanLegacy)
@@ -132,6 +132,8 @@ function getLogoUrl(logo) {
         return require('@coinspace/crypto-db/logo/binance-smart-chain.svg');
       case 'avalanche-c-chain.svg':
         return require('@coinspace/crypto-db/logo/avalanche.svg');
+      case 'tron.svg':
+        return require('@coinspace/crypto-db/logo/tron.svg');
       case 'xrp.svg':
         return require('@coinspace/crypto-db/logo/xrp.svg');
       case 'stellar.svg':

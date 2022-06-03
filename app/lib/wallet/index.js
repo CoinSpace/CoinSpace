@@ -23,6 +23,7 @@ import MoneroWallet from '@coinspace/cs-monero-wallet';
 import CardanoWallet from '@coinspace/cs-cardano-wallet';
 import SolanaWallet from '@coinspace/cs-solana-wallet';
 import AvalancheWallet from '@coinspace/cs-avalanche-wallet';
+import TronWallet from '@coinspace/cs-tron-wallet';
 
 import bitcoin from '@coinspace/crypto-db/crypto/bitcoin@bitcoin.json';
 import litecoin from '@coinspace/crypto-db/crypto/litecoin@litecoin.json';
@@ -40,6 +41,7 @@ import cardano from '@coinspace/crypto-db/crypto/cardano@cardano.json';
 import ethereumClassic from '@coinspace/crypto-db/crypto/ethereum-classic@ethereum-classic.json';
 import solana from '@coinspace/crypto-db/crypto/solana@solana.json';
 import avalanche from '@coinspace/crypto-db/crypto/avalanche@avalanche-c-chain.json';
+import tron from '@coinspace/crypto-db/crypto/tron@tron.json';
 
 import { eddsa } from 'elliptic';
 
@@ -75,6 +77,7 @@ export const walletCoins = [
   ethereumClassic,
   solana,
   avalanche,
+  tron,
 ];
 
 const Wallet = {
@@ -94,6 +97,7 @@ const Wallet = {
   'ethereum-classic': EthereumWallet,
   solana: SolanaWallet,
   'avalanche-c-chain': AvalancheWallet,
+  tron: TronWallet,
 };
 
 function createWallet(passphrase) {
@@ -292,6 +296,11 @@ function getWalletOptions(crypto) {
     options.request = request;
     options.apiNode = process.env.API_SOL_URL;
     options.apiWeb = process.env.SITE_URL;
+  } else if (crypto.platform === 'tron') {
+    options.request = request;
+    options.apiNode = process.env.API_TRX_URL;
+    options.apiWeb = process.env.SITE_URL;
+    options.platformCrypto = walletCoins.find((item) => item._id === 'tron@tron');
   }
   return options;
 }

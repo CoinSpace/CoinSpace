@@ -54,7 +54,7 @@ function open(options) {
 
       try {
         await unlock(wallet);
-        tx = tx.sign();
+        tx = await tx.sign();
         lock(wallet);
       } catch (err) {
         lock(wallet);
@@ -69,7 +69,7 @@ function open(options) {
 
         // update balance & tx history
         emitter.emit('tx-sent');
-        if ('solana@solana' !== wallet.crypto._id) {
+        if (!['solana', 'tron'].includes(wallet.crypto.platform)) {
           emitter.emit('append-transactions', [historyTx]);
         }
       } catch (err) {

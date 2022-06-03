@@ -177,6 +177,8 @@ export default function(el) {
     if (['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'ethereum-classic'].includes(wallet.crypto.platform)) {
       ractive.set('feeSymbol', wallet.platformCrypto.symbol);
       ractive.find('#gas-limit').value = wallet.gasLimit;
+    } else if (['tron'].includes(wallet.crypto.platform)) {
+      ractive.set('feeSymbol', wallet.platformCrypto.symbol);
     } else {
       ractive.set('feeSymbol', wallet.crypto.symbol);
     }
@@ -193,7 +195,7 @@ export default function(el) {
     const value = toAtom(normalizeCrypto(ractive.find('#crypto').value) || 0);
     let fees = [];
 
-    if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash', 'monero', 'cardano', 'solana']
+    if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash', 'monero', 'cardano', 'solana', 'tron']
       .includes(wallet.crypto.platform)) {
       fees = wallet.estimateFees(value).map((item) => {
         if (setDefaultFeeOption) {
