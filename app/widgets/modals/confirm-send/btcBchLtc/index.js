@@ -69,7 +69,7 @@ function open(options) {
 
         // update balance & tx history
         emitter.emit('tx-sent');
-        if (!['solana', 'tron'].includes(wallet.crypto.platform)) {
+        if (!['solana'].includes(wallet.crypto.platform)) {
           emitter.emit('append-transactions', [historyTx]);
         }
       } catch (err) {

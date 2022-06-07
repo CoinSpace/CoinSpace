@@ -40,7 +40,7 @@ function open(options) {
 
       try {
         await unlock(wallet);
-        tx = tx.sign();
+        tx = await tx.sign();
         lock(wallet);
       } catch (err) {
         lock(wallet);
@@ -54,7 +54,9 @@ function open(options) {
         // update balance & tx history
         emitter.emit('tx-sent');
         if (historyTx) {
-          emitter.emit('append-transactions', [historyTx]);
+          if (!['tron'].includes(wallet.crypto.platform)) {
+            emitter.emit('append-transactions', [historyTx]);
+          }
         }
       } catch (err) {
         return handleTransactionError(err);
