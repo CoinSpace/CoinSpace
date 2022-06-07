@@ -12,10 +12,14 @@
     {{#if confirmed}}
       <div class='_status'>
         <div>{{formatTimestamp(timestamp)}}</div>
+        {{#if confirmations !== undefined}}
         <div>{{translate("confirmations:")}} {{confirmations}}</div>
+        {{/if}}
       </div>
     {{else}}
+      {{#if confirmations !== undefined}}
       <div class='_status'>{{translate("pending confirmation")}} ({{confirmations}}/{{minConf}})</div>
+      {{/if}}
     {{/if}}
   </div>
 
