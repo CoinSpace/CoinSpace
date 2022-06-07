@@ -215,7 +215,7 @@ export default function(el) {
 
   async function internalExchange(wallet, data) {
     let fee;
-    if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash', 'monero', 'cardano', 'solana']
+    if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash', 'monero', 'cardano', 'solana', 'tron']
       .includes(wallet.crypto.platform)) {
       fee = toUnitString(wallet.estimateFees(toAtom(data.depositAmount)).find((item) => item.default).estimate);
     } else if (['ripple', 'stellar', 'eos']
