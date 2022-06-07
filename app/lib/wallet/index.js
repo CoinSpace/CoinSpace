@@ -301,6 +301,7 @@ function getWalletOptions(crypto) {
     options.apiNode = process.env.API_TRX_URL;
     options.apiWeb = process.env.SITE_URL;
     options.platformCrypto = walletCoins.find((item) => item._id === 'tron@tron');
+    options.settings = details.getCryptoSettings(options.platformCrypto._id);
   }
   return options;
 }

@@ -81,6 +81,7 @@ export default function(el) {
       [
         'bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash',
         'ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'ethereum-classic',
+        'tron',
       ].includes(wallet.crypto.platform) && wallet.crypto.type === 'coin'
     );
     ractive.set('walletName', wallet.crypto.name);
