@@ -61,6 +61,7 @@
     "@coinspace/cs-ripple-wallet": "^1.6.2",
     "@coinspace/cs-solana-wallet": "^1.0.1",
     "@coinspace/cs-stellar-wallet": "^1.4.2",
+    "@coinspace/cs-tron-wallet": "^1.0.0",
     "@coinspace/cs-wallet": "^1.2.3",
     "@sentry/browser": "^6.17.3",
     "@sentry/cli": "^2.1.0",
