@@ -34,3 +34,4 @@ Supported coins:
 - Ethereum Classic
 - Solana
 - Avalanche C-Chain and ARC20 tokens
+- TRON and TRC20 tokens
