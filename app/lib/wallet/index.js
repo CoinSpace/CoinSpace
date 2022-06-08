@@ -16,14 +16,23 @@ import Cache from './cache';
 import CsWallet from '@coinspace/cs-wallet';
 import EthereumWallet from '@coinspace/cs-ethereum-wallet';
 import BinanceSmartChainWallet from '@coinspace/cs-binance-smart-chain-wallet';
-import RippleWallet from '@coinspace/cs-ripple-wallet';
-import StellarWallet from '@coinspace/cs-stellar-wallet';
 import EOSWallet from '@coinspace/cs-eos-wallet';
 import MoneroWallet from '@coinspace/cs-monero-wallet';
 import CardanoWallet from '@coinspace/cs-cardano-wallet';
-import SolanaWallet from '@coinspace/cs-solana-wallet';
 import AvalancheWallet from '@coinspace/cs-avalanche-wallet';
-import TronWallet from '@coinspace/cs-tron-wallet';
+
+// preload top-4 heavy wallets
+const [
+  RippleWallet,
+  StellarWallet,
+  SolanaWallet,
+  TronWallet,
+] = (await Promise.all([
+  import(/* webpackChunkName: 'ripple', webpackPreload: true */ '@coinspace/cs-ripple-wallet'),
+  import(/* webpackChunkName: 'stellar', webpackPreload: true */ '@coinspace/cs-stellar-wallet'),
+  import(/* webpackChunkName: 'solana', webpackPreload: true */ '@coinspace/cs-solana-wallet'),
+  import(/* webpackChunkName: 'tron', webpackPreload: true */ '@coinspace/cs-tron-wallet'),
+])).map((item) => item.default);
 
 import bitcoin from '@coinspace/crypto-db/crypto/bitcoin@bitcoin.json';
 import litecoin from '@coinspace/crypto-db/crypto/litecoin@litecoin.json';
