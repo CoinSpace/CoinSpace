@@ -80,6 +80,10 @@ function open(options) {
       err.message = translate('Network node error. Please try again later.', { network: wallet.crypto.name });
     } else if (/Gas limit is too low/.test(err.message)) {
       err.message = translate('Please increase the gas limit');
+    } else if (err.message === 'Insufficient amount of TRX to pay fee.') {
+      err.message = translate('Not enough funds to pay transaction fee (:required).', {
+        required: `${toUnitString(err.required, wallet.platformCrypto.decimals)} ${wallet.platformCrypto.symbol}`,
+      });
     } else {
       console.error(err);
     }
