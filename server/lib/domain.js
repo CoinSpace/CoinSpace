@@ -7,6 +7,7 @@ const platformToChain = {
   ethereum: 'ERC20',
   'binance-smart-chain': 'BEP20',
   'avalanche-c-chain': 'ARC20',
+  tron: 'TRC20',
 };
 
 async function getAddress(domain, cryptoId) {
