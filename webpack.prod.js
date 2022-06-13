@@ -31,7 +31,6 @@ const config = merge(common, {
           path.resolve(__dirname, './node_modules/lodash/'),
           path.resolve(__dirname, './node_modules/core-js/'),
           path.resolve(__dirname, './node_modules/regenerator-runtime/'),
-          path.resolve(__dirname, './node_modules/regenerator-runtime/'),
           path.resolve(__dirname, './node_modules/@tronscan/client/src/protocol/core/Tron_pb.js'),
           /\.asm\.js$/,
         ],
