@@ -169,6 +169,7 @@ async function getTransactions(id, currency, address, limit, offset) {
       payoutAddress: tx.payoutAddress,
       payoutHashLink: tx.payoutHashLink || undefined,
       payoutHash: tx.payoutHash || undefined,
+      refundAddress: tx.refundAddress || undefined,
     };
   });
 }

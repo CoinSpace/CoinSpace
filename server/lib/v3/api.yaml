@@ -1466,6 +1466,8 @@ components:
           $ref: '#/components/schemas/UrlString'
         payoutHash:
           $ref: '#/components/schemas/AnyString256'
+        refundAddress:
+          $ref: '#/components/schemas/AnyCryptoAddress'
       required:
         - status
         - amountTo
