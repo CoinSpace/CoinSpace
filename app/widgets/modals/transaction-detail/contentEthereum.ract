@@ -49,7 +49,7 @@
   </div>
 
   <div class="_footer">
-    {{#if (isRBF && !isIncoming)}}
+    {{#if hasAcceleration}}
     <div class="csbtn" on-click="accelerate">{{translate("Accelerate")}}</div>
     {{/if}}
   </div>

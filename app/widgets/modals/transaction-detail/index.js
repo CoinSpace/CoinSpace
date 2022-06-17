@@ -12,11 +12,20 @@ import contentDefault from './contentDefault.ract';
 import { translate } from 'lib/i18n';
 import strftime from 'strftime';
 import { toUnitString } from 'lib/convert';
+import details from 'lib/wallet/details';
 
 export default function({ transaction }) {
   let content;
   const wallet = getWallet();
   const { platform } = wallet.crypto;
+
+  let hasAcceleration = transaction.isRBF && !transaction.isIncoming;
+  const { fromCryptoId, depositAddress } = details.get('changellyInfo') || {};
+  const address = transaction.outs ? transaction.outs[0].address : transaction.to;
+  if (fromCryptoId === wallet.crypto._id && depositAddress === address) {
+    hasAcceleration = false;
+  }
+
   if (['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'ethereum-classic', 'tron'].includes(platform)) {
     content = contentEthereum;
   } else if (platform === 'ripple') {
@@ -47,6 +56,7 @@ export default function({ transaction }) {
         return strftime('%b %d, %Y %l:%M %p', new Date(timestamp));
       },
       toUnitString,
+      hasAcceleration,
     },
   });
 
