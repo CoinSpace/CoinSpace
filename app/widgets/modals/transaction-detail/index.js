@@ -22,7 +22,7 @@ export default function({ transaction }) {
   let hasAcceleration = transaction.isRBF && !transaction.isIncoming;
   const { fromCryptoId, depositAddress } = details.get('changellyInfo') || {};
   const address = transaction.outs ? transaction.outs[0].address : transaction.to;
-  if (fromCryptoId === wallet.crypto._id && depositAddress === address) {
+  if (hasAcceleration && fromCryptoId === wallet.crypto._id && depositAddress === address) {
     hasAcceleration = false;
   }
 
