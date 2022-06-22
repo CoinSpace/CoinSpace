@@ -39,7 +39,8 @@ function open(options) {
     },
   };
 
-  if (['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'ethereum-classic', 'tron'].includes(platform)) {
+  if (['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'ethereum-classic', 'tron', 'solana']
+    .includes(platform)) {
     return ethereum(cryptoOptions);
   } else if (platform === 'ripple') {
     return ripple(cryptoOptions);
@@ -50,7 +51,7 @@ function open(options) {
   } else if (platform === 'monero') {
     return monero(cryptoOptions);
   } else {
-    // default 'bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash', 'cardano', 'solana' etc
+    // default 'bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash', 'cardano' etc
     return btcBchLtc(cryptoOptions);
   }
 }

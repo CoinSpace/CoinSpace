@@ -19,7 +19,7 @@
           <label for="contract_address">{{translate("Contract address")}}</label>
         </div>
         <div class="csinput csinput--with-x">
-          <input id="contract_address" class="csinput__input" type="text" maxlength="42" on-enter="addToken" autocorrect="off" autocapitalize="off" value="{{address}}" />
+          <input id="contract_address" class="csinput__input" type="text" on-enter="addToken" autocorrect="off" autocapitalize="off" value="{{address}}" />
           {{#address}}
             <div class="csinput__cross" on-click="clearAddress">
               <span class="csinput__cross__icon">{{> svg_close}}</span>

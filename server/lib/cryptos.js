@@ -273,6 +273,13 @@ async function getTickersPublic(ids) {
             address: asset,
             platform,
           };
+        } else if (['solana'].includes(platform)
+          && /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(asset)) {
+          // Solana address
+          return {
+            address: asset,
+            platform,
+          };
         } else {
           return {
             _id: id,

@@ -296,6 +296,7 @@ function getWalletOptions(crypto) {
     options.request = request;
     options.apiNode = process.env.API_SOL_URL;
     options.apiWeb = process.env.SITE_URL;
+    options.platformCrypto = walletCoins.find((item) => item._id === 'solana@solana');
   } else if (crypto.platform === 'tron') {
     options.request = request;
     options.apiNode = process.env.API_TRX_URL;

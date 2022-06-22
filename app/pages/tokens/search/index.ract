@@ -41,6 +41,8 @@
             <img src="{{getLogoUrl('avalanche.svg')}}">
           {{elseif platform === 'tron'}}
             <img src="{{getLogoUrl('tron.svg')}}">
+          {{elseif platform === 'solana'}}
+            <img src="{{getLogoUrl('solana.svg')}}">
           {{/if}}
         </div>
       </div>

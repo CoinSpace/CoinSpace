@@ -54,7 +54,7 @@ function open(options) {
         // update balance & tx history
         emitter.emit('tx-sent');
         if (historyTx) {
-          if (!['tron'].includes(wallet.crypto.platform)) {
+          if (!['tron', 'solana'].includes(wallet.crypto.platform)) {
             emitter.emit('append-transactions', [historyTx]);
           }
         }
@@ -84,6 +84,14 @@ function open(options) {
       err.message = translate('Not enough funds to pay transaction fee (:required).', {
         required: `${toUnitString(err.required, wallet.platformCrypto.decimals)} ${wallet.platformCrypto.symbol}`,
       });
+    } else if (/Insufficient funds for token transaction/.test(err.message)) {
+      err.message = translate('Not enough funds to pay transaction fee (:required).', {
+        required: `${toUnitString(err.required, wallet.platformCrypto.decimals)} ${wallet.platformCrypto.symbol}`,
+      });
+    } else if (/^Transaction leaves an account with a lower balance than rent-exempt minimum/.test(err.message)) {
+      // solana
+      // eslint-disable-next-line max-len
+      err.message = translate('Transaction leaves the destination account with a lower balance than rent-exempt minimum.');
     } else {
       console.error(err);
     }

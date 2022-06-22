@@ -57,6 +57,7 @@ export default function({ transaction }) {
       },
       toUnitString,
       hasAcceleration,
+      symbol: wallet.crypto.symbol,
     },
   });
 

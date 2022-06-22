@@ -76,7 +76,7 @@ export default function(el) {
     ractive.set('cryptoCoins', walletCoins);
     const walletTokens = details.get('tokens');
     const cryptoTokens = walletTokens
-      .filter((item) => ['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'tron'].includes(item.platform));
+      .filter((item) => crypto.TOKEN_PLATFORMS.includes(item.platform));
     ractive.set('cryptoTokens', cryptoTokens);
     ractive.set('currentCrypto', getWallet().crypto);
     ractive.set('currency', details.get('systemInfo').preferredCurrency);

@@ -11,6 +11,7 @@ import binanceSmartChain from '@coinspace/crypto-db/crypto/binance-coin@binance-
 import ethereum from '@coinspace/crypto-db/crypto/ethereum@ethereum.json';
 import avalanche from '@coinspace/crypto-db/crypto/avalanche@avalanche-c-chain.json';
 import tron from '@coinspace/crypto-db/crypto/tron@tron.json';
+import solana from '@coinspace/crypto-db/crypto/solana@solana.json';
 
 function open() {
 
@@ -32,6 +33,7 @@ function open() {
       { value: binanceSmartChain.platform, name: binanceSmartChain.name },
       { value: avalanche.platform, name: avalanche.name },
       { value: tron.platform, name: tron.name },
+      { value: solana.platform, name: solana.name },
     ],
     value: 'ethereum',
     id: 'blockchain',
@@ -46,9 +48,9 @@ function open() {
     ractive.set('isValidating', true);
     const walletTokens = details.get('tokens');
     const platform = blockchainDropdown.getValue();
-    const address = platform !== 'tron'
-      ? ractive.get('address').trim().toLowerCase()
-      : ractive.get('address').trim();
+    const address = ['tron', 'solana'].includes(platform)
+      ? ractive.get('address').trim()
+      : ractive.get('address').trim().toLowerCase();
     let token;
 
     if (!address) {

@@ -9,6 +9,8 @@ let all;
 let tokens;
 let index;
 
+const TOKEN_PLATFORMS = ['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'tron', 'solana'];
+
 export function init() {
   if (!cache) {
     cache = request({
@@ -18,9 +20,7 @@ export function init() {
     })
       .then(data => {
         all = data;
-        tokens = all.filter((item) => item.type === 'token'
-          && ['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'tron'].includes(item.platform)
-        );
+        tokens = all.filter((item) => item.type === 'token' && TOKEN_PLATFORMS.includes(item.platform));
       })
       .then(cleanLegacy)
       .then(() => {
@@ -74,6 +74,7 @@ function requestTokenByAddress(address, platform) {
     'binance-smart-chain': `${process.env.API_BSC_URL}api/v1/token/${address}`,
     'avalanche-c-chain': `${process.env.API_AVAX_URL}api/v1/token/${address}`,
     tron: `${process.env.API_TRX_URL}api/v1/token/${address}`,
+    solana: `${process.env.API_SOL_URL}api/v1/token/${address}`,
   };
 
   return request({
@@ -164,4 +165,5 @@ export default {
   requestTokenByAddress,
   searchTokens,
   getLogoUrl,
+  TOKEN_PLATFORMS,
 };

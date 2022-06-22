@@ -14,15 +14,19 @@
     <label>{{translate("Transaction ID")}}:</label>
     <a href="" onclick="return window.safeOpen('{{txUrl(id)}}', '_blank');" class="cscode">{{id}}</a>
 
+    {{#if fee}}
     <label>{{translate("Transaction Fee:")}}</label>
     <code class="cscode">{{toUnitString(fee)}}</code>
+    {{/if}}
 
+    {{#if instructions.length}}
     <label>{{translate("Instructions:")}}</label>
     <code class="cscode">
       {{#each instructions}}
-        <div>{{translate('Transfer :amount :symbol from :source to :destination', { amount: toUnitString(amount), symbol: 'SOL', source: source, destination: destination })}}</div>
+        <div>{{translate('Transfer :amount :symbol from :source to :destination', { amount: toUnitString(amount), symbol: symbol, source: source, destination: destination })}}</div>
       {{/each}}
     </code>
+    {{/if}}
   </div>
 
 </div>

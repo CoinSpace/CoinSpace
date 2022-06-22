@@ -27,7 +27,7 @@ export async function validateSend(options) {
     } else if (wallet.crypto.platform === 'cardano') {
       tx = await wallet.createTx(to, amount, fee);
     } else if (wallet.crypto.platform === 'solana') {
-      tx = await wallet.createTx(to, amount, fee);
+      tx = await wallet.createTx(to, amount);
     } else if (wallet.crypto.platform === 'tron') {
       tx = await wallet.createTx(to, amount, fee);
     }
@@ -102,12 +102,18 @@ export async function validateSend(options) {
         message: translate('Transaction too large'),
       });
       // eslint-disable-next-line max-len
-    } else if (/Insufficient funds for token transaction/.test(err.message) && ['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'ethereum-classic'].includes(wallet.crypto.platform)) {
+    } else if (/Insufficient funds for token transaction/.test(err.message) && ['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'ethereum-classic', 'solana'].includes(wallet.crypto.platform)) {
       showError({
         title: translate('Uh Oh...'),
         message: translate('Not enough funds to pay transaction fee (:required).', {
           required: `${toUnitString(err.required, wallet.platformCrypto.decimals)} ${wallet.platformCrypto.symbol}`,
         }),
+      });
+    } else if (/^Transaction leaves an account with a lower balance than rent-exempt minimum/.test(err.message)) {
+      // solana
+      showError({
+        title: translate('Uh Oh...'),
+        message: translate('Transaction leaves the destination account with a lower balance than rent-exempt minimum.'),
       });
     } else if (/Insufficient funds/.test(err.message)) {
       if (/Additional funds confirmation pending/.test(err.details)) {
