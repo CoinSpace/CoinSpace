@@ -102,7 +102,7 @@ export async function validateSend(options) {
         message: translate('Transaction too large'),
       });
       // eslint-disable-next-line max-len
-    } else if (/Insufficient funds for token transaction/.test(err.message) && ['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'ethereum-classic', 'solana'].includes(wallet.crypto.platform)) {
+    } else if (/Insufficient funds for token transaction/.test(err.message) && ['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'ethereum-classic', 'solana', 'tron'].includes(wallet.crypto.platform)) {
       showError({
         title: translate('Uh Oh...'),
         message: translate('Not enough funds to pay transaction fee (:required).', {
