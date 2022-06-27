@@ -287,7 +287,7 @@
       </trans-unit>
       <trans-unit id="Sorry, Coin Wallet did not load.">
         <source>Sorry, Coin Wallet didn't load.</source>
-        <target>Üzgünüz, Coin Cüzdanı yüklenmedi.</target>
+        <target>Üzgünüz, Coin Wallet Cüzdanı yüklenmedi.</target>
       </trans-unit>
       <trans-unit id="Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.">
         <source>Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.</source>
