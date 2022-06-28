@@ -100,7 +100,9 @@ function request(config = {}) {
         throw err;
       }
       if (err.response) {
-        const error = new Error(err.response.data.error || err.response.data.message || err.response.data);
+        const error = err.response.data
+          ? new Error(err.response.data.error || err.response.data.message || err.response.data)
+          : new Error('Network Error');
         error.status = err.response.status;
         error.url = err.config.url;
         error.method = err.config.method;
