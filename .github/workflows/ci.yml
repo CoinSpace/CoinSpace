@@ -132,8 +132,6 @@ jobs:
       - name: Install Snapcraft
         if: ${{ matrix.DISTRIBUTION == 'snap' }}
         uses: samuelmeuli/action-snapcraft@v1
-        with:
-          snapcraft_token: ${{ secrets.SNAP_TOKEN }}
       - name: Install JDK 1.8
         if: ${{ matrix.DISTRIBUTION == 'android-play' || matrix.DISTRIBUTION == 'android-galaxy' }}
         uses: actions/setup-java@v1
@@ -230,6 +228,7 @@ jobs:
           APPX_PUBLISHER_DEV: ${{ secrets.APPX_PUBLISHER_DEV }}
           APPX_PUBLISHER_NAME: ${{ secrets.APPX_PUBLISHER_NAME }}
           CHANGELLY_REF: ${{ secrets.CHANGELLY_REF }}
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAP_TOKEN }}
         shell: bash
         run: |
           node ./cli/i18n.js --json
