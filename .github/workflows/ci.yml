@@ -63,17 +63,17 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: macos-10.15
+          - os: macos-11
             node: 16
             DISTRIBUTION: mac
             BUILD_TYPE: electron
             SENTRY_KEY: SENTRY_DSN_MAC
-          - os: macos-10.15
+          - os: macos-11
             node: 16
             DISTRIBUTION: mas
             BUILD_TYPE: electron
             SENTRY_KEY: SENTRY_DSN_MAS
-          - os: macos-10.15
+          - os: macos-11
             node: 16
             DISTRIBUTION: mas-dev
             BUILD_TYPE: electron
