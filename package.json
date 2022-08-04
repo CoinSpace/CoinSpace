@@ -62,7 +62,7 @@
     "@coinspace/cs-solana-wallet": "^1.1.4",
     "@coinspace/cs-stellar-wallet": "^1.4.2",
     "@coinspace/cs-tron-wallet": "^1.1.2",
-    "@coinspace/cs-wallet": "^1.2.4",
+    "@coinspace/cs-wallet": "^1.2.5",
     "@sentry/browser": "^6.17.3",
     "@sentry/cli": "^2.1.0",
     "@simplewebauthn/browser": "^1.0.0",
