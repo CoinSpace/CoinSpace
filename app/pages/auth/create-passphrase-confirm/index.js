@@ -43,6 +43,8 @@ export default function(el) {
   });
 
   ractive.on('confirm', () => {
+    ractive.set('firstWord', '');
+    ractive.set('secondWord', '');
     ractive.pinWidget = PinWidget({
       header: translate('Set a PIN for quick access'),
       headerLoading: translate('Setting PIN'),

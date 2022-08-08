@@ -44,9 +44,11 @@ export default function(el) {
 
   ractive.on('confirm', () => {
     const randomIndexes = _.shuffle(_.range(12));
+    const passphrase = ractive.get('passphrase');
+    ractive.set('passphrase', '');
     emitter.emit('change-auth-step', 'createPassphraseConfirm', {
       randomIndexes,
-      passphrase: ractive.get('passphrase'),
+      passphrase,
     });
   });
 
