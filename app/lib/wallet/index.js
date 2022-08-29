@@ -245,7 +245,6 @@ function getWalletOptions(crypto) {
     options.platformCrypto = walletCoins.find((item) => item._id === 'ethereum@ethereum');
     options.settings = details.getCryptoSettings(options.platformCrypto._id);
   } else if (crypto.platform === 'ethereum-classic') {
-    options.chainId = 61;
     options.minConf = 120;
     options.request = request;
     options.apiNode = process.env.API_ETC_URL;
