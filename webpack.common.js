@@ -153,6 +153,10 @@ module.exports = {
       retryDelay: 1000,
       maxRetries: 3,
     }),
+    new webpack.IgnorePlugin({
+      resourceRegExp: /genesisStates\/[a-z]*\.json$/,
+      contextRegExp: /@ethereumjs\/common/,
+    }),
   ],
   optimization: {
     splitChunks: false,
