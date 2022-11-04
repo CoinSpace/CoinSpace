@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BTC Direct</title>
+  <link href="https://cdn.btcdirect.eu/fiat-to-coin/fiat-to-coin.css" rel="stylesheet" />
+  <script lang="js">
+    (function (btc, d, i, r, e, c, t) {
+        btc[r] = btc[r] || function () {
+            (btc[r].q = btc[r].q || []).push(arguments);
+        };
+        c = d.createElement(i);
+        c.id = r;
+        c.src = e;
+        c.async = true;
+        c.type = 'module';
+        c.dataset.btcdirect = '';
+        t = d.getElementsByTagName(i)[0];
+        t.parentNode.insertBefore(c, t);
+    })(window, document, 'script', 'btcdirect', 'https://cdn<%= envSuffix %>.btcdirect.eu/fiat-to-coin/fiat-to-coin.js');
+    btcdirect('init', { token: '<%= apiKey %>' });
+    btcdirect('include-dca', { include: true });
+    btcdirect('wallet-addresses', {"addresses":[{"address":"<%= address %>","currency":"<%= baseCurrency %>","name":"Coin Wallet"}]});
+    btcdirect('currencies', { crypto: '<%= baseCurrency %>', fiat: 'EUR' });
+    btcdirect('order', {
+      crypto: '<%= baseCurrency %>',
+      fiat: 'EUR',
+      amount: '<%= fiatAmount %>',
+      type: 'fiat',
+    });
+  </script>
+  <style lang="css">
+    *, *:before, *:after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      align-items: center;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <div class="btcdirect-widget"></div>
+</body>
+</html>

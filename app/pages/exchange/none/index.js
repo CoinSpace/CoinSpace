@@ -1,9 +1,12 @@
 import Ractive from 'lib/ractive';
 import emitter from 'lib/emitter';
 import moonpay from 'lib/moonpay';
+import ramps from 'lib/ramps';
 import { getWallet } from 'lib/wallet';
 import template from './index.ract';
 import loader from 'partials/loader/loader.ract';
+import CountryList from 'country-list';
+import initDropdown from 'widgets/dropdown';
 
 export default function(el) {
   const ractive = new Ractive({
@@ -16,34 +19,64 @@ export default function(el) {
       isLoading: false,
       choose,
       symbol: '',
-      moonpayBuyUrl: '',
-      moonpaySellUrl: '',
+      buyRamps: [],
+      sellRamps: [],
+      openRamp: (url) => {
+        window.safeOpen(url, '_blank');
+      },
     },
   });
 
-  ractive.on('moonpay-buy', () => {
-    window.safeOpen(ractive.get('moonpayBuyUrl'), '_blank');
+  const countryList = CountryList.getData().sort((a, b) => {
+    return a.name.localeCompare(b.name);
+  }).map((item) => {
+    return {
+      value: item.code,
+      name: item.name,
+    };
   });
 
-  ractive.on('moonpay-sell', () => {
-    window.safeOpen(ractive.get('moonpaySellUrl'), '_blank');
+  countryList.unshift({ value: '', name: '–' });
+  const countryOfResidence = initDropdown({
+    el: ractive.find('#js-country-of-residence'),
+    options: countryList,
+    value: '',
+    id: 'country-of-residence',
   });
 
   ractive.on('before-show', async () => {
     if (ractive.get('isLoading')) return;
     ractive.set('isLoading', true);
+    const wallet = getWallet();
+    ractive.set('symbol', wallet.crypto.symbol);
+    await moonpay.init();
+    await setDefaultCountryOfResidence();
+    await loadRamps();
+    ractive.set('isLoading', false);
+  });
+
+  countryOfResidence.on('on-change', async () => {
+    ractive.set('isLoading', true);
+    await loadRamps();
+    ractive.set('isLoading', false);
+  });
+
+  async function setDefaultCountryOfResidence() {
+    if (countryOfResidence.getValue() === '') {
+      countryOfResidence.set('value', moonpay.getCountryCode() || '');
+    }
+  }
+
+  async function loadRamps() {
+    const wallet = getWallet();
     try {
-      await moonpay.init();
-      const wallet = getWallet();
-      ractive.set('symbol', wallet.crypto.symbol);
-      const urls = await moonpay.getWidgetUrls(wallet.crypto, wallet.getNextAddress());
-      ractive.set('moonpayBuyUrl', urls.buy);
-      ractive.set('moonpaySellUrl', urls.sell);
+      const { buy, sell } = await ramps.load(countryOfResidence.getValue(), wallet.crypto, wallet.getNextAddress());
+      ractive.set('buyRamps', buy);
+      ractive.set('sellRamps', sell);
     } catch (err) {
       console.error(err);
     }
-    ractive.set('isLoading', false);
-  });
+  }
 
   function choose(exchangeName) {
     emitter.emit('set-exchange', exchangeName);

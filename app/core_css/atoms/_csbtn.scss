@@ -111,4 +111,13 @@
     color: darken($grey, 20%);
     pointer-events: none;
   }
+
+  &--small {
+    line-height: 17px;
+    font-size: $btn_font_size--small;
+    @include breakpoint(portrait) {
+      line-height: 30px;
+      font-size: $btn_font_size--small-portrait;
+    }
+  }
 }

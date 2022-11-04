@@ -1,31 +1,66 @@
+<div class="csformgroup">
+  <div class="csformgroup__input-group">
+    <div class="csformgroup__input-group__header">
+      <label for="country-of-residence">{{translate("Select your country of residence")}}</label>
+    </div>
+    <div id="js-country-of-residence"></div>
+  </div>
+</div>
+
 {{#if isLoading}}
   {{>loader}}
 {{else}}
-  {{#if moonpayBuyUrl}}
-  <div on-click="moonpay-buy" class="csbtn">
-    {{translate("Buy")}} {{symbol}}
-  </div>
-  {{else}}
-  <div class="csbtn csbtn--disabled">
-    {{translate("Buy")}} {{symbol}}
+
+  {{#if buyRamps.length}}
+  <div class="_title">{{translate("Buy")}} {{symbol}}</div>
+  <div class="_ramps">
+    {{#each buyRamps as ramp}}
+    <div class="_ramp">
+      <div class="_ramp__icon">
+        {{>`${ramp.svg}`}}
+      </div>
+      <div class="_ramp__details">
+        <div class="_ramp__name">{{ramp.name}}</div>
+      </div>
+      <div class="_ramp__btn">
+        <div class="csbtn csbtn--small" on-click="openRamp(ramp.url)">{{translate("Buy")}}</div>
+      </div>
+    </div>
+    {{/each}}
   </div>
   {{/if}}
 
-  {{#if moonpaySellUrl}}
-  <div on-click="moonpay-sell" class="csbtn">
-    {{translate("Sell")}} {{symbol}}
-  </div>
-  {{else}}
-  <div class="csbtn csbtn--disabled">
-    {{translate("Sell")}} {{symbol}}
+  {{#if sellRamps.length}}
+  <div class="_title">{{translate("Sell")}} {{symbol}}</div>
+  <div class="_ramps">
+    {{#each sellRamps as ramp}}
+    <div class="_ramp">
+      <div class="_ramp__icon">
+        {{>`${ramp.svg}`}}
+      </div>
+      <div class="_ramp__details">
+        <div class="_ramp__name">{{ramp.name}}</div>
+      </div>
+      <div class="_ramp__btn">
+        <div class="csbtn csbtn--red csbtn--small" on-click="openRamp(ramp.url)">{{translate("Sell")}}</div>
+      </div>
+    </div>
+    {{/each}}
   </div>
   {{/if}}
 
-  <div class="_title">{{translate("Choose exchange")}}</div>
-  <div>
-    <div on-click="choose('changelly')" class="csbtn">
-      <span class="_icon">{{>svg_changelly}}</span>
-      Changelly
+  <div class="_title">{{translate("Exchange")}} {{symbol}}</div>
+  <div class="_ramps">
+    <div class="_ramp">
+      <div class="_ramp__icon">
+        {{>svg_changelly}}
+      </div>
+      <div class="_ramp__details">
+        <div class="_ramp__name">Changelly</div>
+      </div>
+      <div class="_ramp__btn">
+        <div class="csbtn csbtn--small" on-click="choose('changelly')">{{translate("Exchange")}}</div>
+      </div>
     </div>
   </div>
 {{/if}}

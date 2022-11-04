@@ -162,7 +162,6 @@
   "The extra amount will be deposited to the created account.": "The extra amount will be deposited to the created account.",
   "Can't connect to :network node. Please try again later or choose another token.": "Can't connect to %(network)s node. Please try again later or choose another token.",
   "Network node error. Please try again later.": "%(network)s node error. Please try again later.",
-  "Choose exchange": "Choose exchange",
   "Minimum amount:": "Minimum amount:",
   "Exchange error": "Exchange error",
   "Transaction not found": "Transaction not found",
@@ -270,5 +269,6 @@
   "PIN & Face ID": "PIN & Face ID",
   "Transfer :amount :symbol from :source to :destination": "Transfer %(amount)s %(symbol)s from %(source)s to %(destination)s",
   "Instructions:": "Instructions:",
-  "Transaction leaves the destination account with a lower balance than rent-exempt minimum.": "Transaction leaves the destination account with a lower balance than rent-exempt minimum."
+  "Transaction leaves the destination account with a lower balance than rent-exempt minimum.": "Transaction leaves the destination account with a lower balance than rent-exempt minimum.",
+  "Select your country of residence": "Select your country of residence"
 }

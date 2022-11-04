@@ -11,6 +11,7 @@ import openalias from '../openalias.js';
 import domain from '../domain.js';
 import github from '../github.js';
 import changelly from '../changelly.js';
+import ramps from '../ramps/index.js';
 import { verifyReq } from '../utils.js';
 
 export async function register(req, res) {
@@ -402,4 +403,24 @@ export async function changellyGetTransactions(req, res) {
     req.query.offset
   );
   res.status(200).send(data);
+}
+
+export async function getRamps(req, res) {
+  const data = await ramps.getRamps(
+    req.query.countryCode,
+    req.query.crypto,
+    req.query.address
+  );
+  res.status(200).send(data);
+}
+
+export async function getBtcDirectBuyWidget(req, res) {
+  const envSuffix = `${process.env.NODE_ENV === 'production' ? '' : '-sandbox'}`;
+  res.render('btcdirectBuy', {
+    apiKey: process.env.BTCDIRECT_API_KEY,
+    envSuffix,
+    address: req.query.address,
+    baseCurrency: req.query.baseCurrency,
+    fiatAmount: 300,
+  });
 }

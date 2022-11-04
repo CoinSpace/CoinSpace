@@ -1053,6 +1053,54 @@ paths:
                   $ref: '#/components/schemas/ChangellyTransaction'
         default:
           $ref: '#/components/responses/GeneralError'
+  /ramps:
+    get:
+      x-eov-operation-id: getRamps
+      x-eov-operation-handler: handlers
+      description: Get ramps
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/countryCode'
+        - $ref: '#/components/parameters/cryptoId'
+        - $ref: '#/components/parameters/address'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Ramps
+          content:
+            'application/json':
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  buy:
+                    $ref: '#/components/schemas/RampList'
+                  sell:
+                    $ref: '#/components/schemas/RampList'
+                required:
+                  - buy
+                  - sell
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /btcdirect/buy:
+    get:
+      x-eov-operation-id: getBtcDirectBuyWidget
+      x-eov-operation-handler: handlers
+      description: Get BTC Direct buy widget
+      parameters:
+        - $ref: '#/components/parameters/address'
+        - $ref: '#/components/parameters/baseCurrency'
+      security: []
+      responses:
+        '200':
+          description: BTC Direct buy widget
+          content:
+            'text/html':
+              schema:
+                type: string
+        default:
+          $ref: '#/components/responses/GeneralError'
 components:
   schemas:
     Hex64String:
@@ -1471,6 +1519,25 @@ components:
       required:
         - status
         - amountTo
+    Ramp:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          $ref: '#/components/schemas/AnyString256'
+        svg:
+          $ref: '#/components/schemas/AnyString256'
+        url:
+          $ref: '#/components/schemas/UrlString'
+      required:
+        - name
+        - svg
+        - url
+    RampList:
+      type: array
+      maxItems: 50
+      items:
+        $ref: '#/components/schemas/Ramp'
   requestBodies:
     PIN:
       description: PIN Hash
@@ -1668,6 +1735,24 @@ components:
         $ref: '#/components/schemas/Version'
       required: true
       description: App version
+    countryCode:
+      in: query
+      name: countryCode
+      schema:
+        type: string
+        pattern: ^[A-Z]{2}$
+        minLength: 2
+        maxLength: 2
+      required: true
+      description: ISO 3166-1 alpha-2
+    baseCurrency:
+      in: query
+      name: baseCurrency
+      schema:
+        type: string
+        maxLength: 10
+      required: true
+      description: baseCurrency
   responses:
     AttestationOptionsResponse:
       description: Attestation Options
