@@ -9,6 +9,11 @@ const rampData = {
   svg: 'svg_moonpay',
 };
 const envSuffix = `${process.env.NODE_ENV === 'production' ? '' : '-sandbox'}`;
+const rampApi = axios.create({
+  baseURL: 'https://api.moonpay.com/',
+  timeout: 15000, // 15 secs
+  params: { apiKey: API_KEY },
+});
 const colorCode = '#3cc77a';
 
 async function getRamp(countryCode, crypto, walletAddress) {
@@ -57,17 +62,13 @@ async function getRamp(countryCode, crypto, walletAddress) {
 }
 
 const cachedCurrencies = pMemoize(async () => {
-  const result = await axios.get('https://api.moonpay.com/v3/currencies', {
-    params: { apiKey: API_KEY },
-  });
-  return result.data;
+  const { data } = await rampApi.get('/v3/currencies');
+  return data;
 }, { cache: new ExpiryMap(1 * 60 * 60 * 1000) }); // 1 hour
 
 const cachedCountries = pMemoize(async () => {
-  const result = await axios.get('https://api.moonpay.com/v3/countries', {
-    params: { apiKey: API_KEY },
-  });
-  return result.data;
+  const { data } = await rampApi.get('/v3/countries');
+  return data;
 }, { cache: new ExpiryMap(1 * 60 * 60 * 1000) }); // 1 hour
 
 function signUrl(url) {

@@ -7,6 +7,11 @@ const rampData = {
   name: 'Onramper',
   svg: 'svg_onramper',
 };
+const rampApi = axios.create({
+  baseURL: 'https://onramper.tech/',
+  timeout: 15000, // 15 secs
+  headers: { Authorization: `Basic ${API_KEY}` },
+});
 
 async function getRamp(countryCode, crypto, walletAddress) {
   const currencies = await cachedCurrencies(countryCode);
@@ -36,11 +41,10 @@ async function getRamp(countryCode, crypto, walletAddress) {
 }
 
 const cachedCurrencies = pMemoize(async (country = 'all') => {
-  const result = await axios.get('https://onramper.tech/gateways', {
+  const { data } = await rampApi.get('/gateways', {
     params: { country },
-    headers: { Authorization: `Basic ${API_KEY}` },
   });
-  const { gateways } = result.data;
+  const { gateways } = data;
   return gateways.map((gateway) => {
     return gateway.cryptoCurrencies;
   }).flat();

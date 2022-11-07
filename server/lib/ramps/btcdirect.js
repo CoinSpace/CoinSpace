@@ -7,7 +7,11 @@ const rampData = {
   name: 'BTC Direct',
   svg: 'svg_btcdirect',
 };
-const envSuffix = `${process.env.NODE_ENV === 'production' ? '' : '-sandbox'}`;
+const rampApi = axios.create({
+  baseURL: `https://api${process.env.NODE_ENV === 'production' ? '' : '-sandbox'}.btcdirect.eu/`,
+  timeout: 15000, // 15 secs
+  headers: { 'x-api-key': API_KEY },
+});
 
 async function getRamp(countryCode, crypto, walletAddress) {
   const countries = await cachedCountries();
@@ -37,18 +41,14 @@ async function getRamp(countryCode, crypto, walletAddress) {
 }
 
 const cachedCurrencies = pMemoize(async () => {
-  const result = await axios.get(`https://api${envSuffix}.btcdirect.eu/api/v1/system/currency-pairs`, {
-    headers: { 'x-api-key': API_KEY },
-  });
-  return result.data;
+  const { data } = await rampApi.get('/api/v1/system/currency-pairs');
+  return data;
 
 }, { cache: new ExpiryMap(1 * 60 * 60 * 1000) }); // 1 hour
 
 const cachedCountries = pMemoize(async () => {
-  const result = await axios.get(`https://api${envSuffix}.btcdirect.eu/api/v1/system/info`, {
-    headers: { 'x-api-key': API_KEY },
-  });
-  return result.data.nationalities;
+  const { data } = await rampApi.get('/api/v1/system/info');
+  return data.nationalities;
 }, { cache: new ExpiryMap(1 * 60 * 60 * 1000) }); // 1 hour
 
 export default getRamp;
