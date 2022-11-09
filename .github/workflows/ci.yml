@@ -121,6 +121,10 @@ jobs:
             SENTRY_KEY: SENTRY_DSN_ANDROID
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          # for @electron-forge/maker-dmg@6.0.0-beta.54
+          python-version: '3.10'
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
