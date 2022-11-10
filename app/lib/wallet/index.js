@@ -318,6 +318,12 @@ export async function addPublicKey(crypto, settings) {
     await unlock();
     await initWalletWithSeed(crypto, seeds.get('private'), settings);
     lock();
+    for (const id in state.wallets) {
+      const wallet = state.wallets[id];
+      if (wallet.crypto.type === 'token' && wallet.crypto.platform === crypto.platform) {
+        await initWalletWithPublicKey(wallet.crypto, settings);
+      }
+    }
   } catch (err) {
     lock();
     if (err.message !== 'cancelled') console.error(err);
@@ -427,12 +433,16 @@ async function initWalletWithSeed(crypto, seed, settings) {
   state.wallets[crypto._id] = wallet;
 }
 
-async function initWalletWithPublicKey(crypto) {
+async function initWalletWithPublicKey(crypto, settings) {
   const publicKey = LS.getPublicKey(crypto.platform, seeds.get('public'));
-  const wallet = new Wallet[crypto.platform]({
+  const options = {
     publicKey,
     ...getWalletOptions(crypto),
-  });
+  };
+  if (settings) {
+    options.settings = settings;
+  }
+  const wallet = new Wallet[crypto.platform](options);
   state.wallets[crypto._id] = wallet;
 }
 
