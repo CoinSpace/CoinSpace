@@ -318,10 +318,12 @@ export async function addPublicKey(crypto, settings) {
     await unlock();
     await initWalletWithSeed(crypto, seeds.get('private'), settings);
     lock();
-    for (const id in state.wallets) {
-      const wallet = state.wallets[id];
-      if (id !== crypto._id && wallet.crypto.platform === crypto.platform) {
-        await initWalletWithPublicKey(wallet.crypto, settings);
+    if (settings) {
+      for (const id in state.wallets) {
+        const wallet = state.wallets[id];
+        if (id !== crypto._id && wallet.crypto.platform === crypto.platform) {
+          await initWalletWithPublicKey(wallet.crypto, settings);
+        }
       }
     }
   } catch (err) {
