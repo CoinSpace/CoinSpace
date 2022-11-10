@@ -655,10 +655,6 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>%(network)s nodefeil, forsøk igjen senere.</target>
       </trans-unit>
-      <trans-unit id="Choose exchange">
-        <source>Choose exchange</source>
-        <target>Velg veksling</target>
-      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Minstebeløp:</target>
@@ -1094,6 +1090,10 @@ Den konverteres til %(toSymbol)s og sendes til
       <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
         <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
         <target>Transaksjonen etterlater destinasjonskontoen med en lavere saldo enn et leiefritt minimum.</target>
+      </trans-unit>
+      <trans-unit id="Select your country of residence">
+        <source>Select your country of residence</source>
+        <target>Velg ditt bostedsland</target>
       </trans-unit>
     </body>
   </file>

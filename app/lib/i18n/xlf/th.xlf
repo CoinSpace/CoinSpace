@@ -655,10 +655,6 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>เกิดข้อผิดพลาดกับโนด%(network)s โปรดลองอีกครั้งในภายหลัง</target>
       </trans-unit>
-      <trans-unit id="Choose exchange">
-        <source>Choose exchange</source>
-        <target>เลือกการแลกเปลี่ยน</target>
-      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>จำนวนขั้นต่ำ:</target>
@@ -1094,6 +1090,10 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
         <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
         <target>ทำธุรกรรมจากบัญชีปลายทางด้วยยอดคงเหลือต่ำกว่าจำนวนขั้นต่ำที่ได้รับยกเว้นค่าธรรมเนียม</target>
+      </trans-unit>
+      <trans-unit id="Select your country of residence">
+        <source>Select your country of residence</source>
+        <target>โปรดเลือกประเทศที่พำนักของคุณ</target>
       </trans-unit>
     </body>
   </file>

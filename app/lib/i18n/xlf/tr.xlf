@@ -655,10 +655,6 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>%(network)s düğüm hatası. Lütfen daha sonra tekrar deneyin.</target>
       </trans-unit>
-      <trans-unit id="Choose exchange">
-        <source>Choose exchange</source>
-        <target>Çevirmeyi seçin</target>
-      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Minimum tutar:</target>
@@ -1094,6 +1090,10 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
         <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
         <target>İşlem sonrasında hedef hesapta kiradan muaf minimumdan daha düşük bir bakiye kalır.</target>
+      </trans-unit>
+      <trans-unit id="Select your country of residence">
+        <source>Select your country of residence</source>
+        <target>İkamet ettiğiniz ülkeyi seçin</target>
       </trans-unit>
     </body>
   </file>

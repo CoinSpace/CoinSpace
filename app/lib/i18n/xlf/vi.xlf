@@ -655,10 +655,6 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>Lỗi nút mạng %(network)s. Vui lòng thử lại sau.</target>
       </trans-unit>
-      <trans-unit id="Choose exchange">
-        <source>Choose exchange</source>
-        <target>Chọn giao dịch</target>
-      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Số tiền tối thiểu:</target>
@@ -1094,6 +1090,10 @@ Sẽ chuyển đổi thành %(toSymbol)s, và gửi đến
       <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
         <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
         <target>Giao dịch khiến tài khoản đích có số dư thấp hơn mức tối thiểu để được miễn tiền thuê.</target>
+      </trans-unit>
+      <trans-unit id="Select your country of residence">
+        <source>Select your country of residence</source>
+        <target>Chọn quốc gia cư trú</target>
       </trans-unit>
     </body>
   </file>

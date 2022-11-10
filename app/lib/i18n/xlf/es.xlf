@@ -655,10 +655,6 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>Error del nodo %(network)s. Intenta de nuevo más tarde.</target>
       </trans-unit>
-      <trans-unit id="Choose exchange">
-        <source>Choose exchange</source>
-        <target>Elige el cambio</target>
-      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Importe mínimo:</target>
@@ -1094,6 +1090,10 @@ Esto se convertirá en %(toSymbol)s y se enviará a
       <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
         <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
         <target>La transacción deja la cuenta de destino con un saldo inferior al mínimo exento de renta.</target>
+      </trans-unit>
+      <trans-unit id="Select your country of residence">
+        <source>Select your country of residence</source>
+        <target>Seleccione su país de residencia</target>
       </trans-unit>
     </body>
   </file>

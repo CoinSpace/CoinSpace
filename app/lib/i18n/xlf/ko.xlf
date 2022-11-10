@@ -655,10 +655,6 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>%(network)s 노드 오류. 나중에 다시 시도해주십시오.</target>
       </trans-unit>
-      <trans-unit id="Choose exchange">
-        <source>Choose exchange</source>
-        <target>환전 선택</target>
-      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>최소 금액:</target>
@@ -1094,6 +1090,10 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
         <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
         <target>거래를 하면 대상 계정에 임대 면제 최소액보다 적은 잔액이 남게 됩니다.</target>
+      </trans-unit>
+      <trans-unit id="Select your country of residence">
+        <source>Select your country of residence</source>
+        <target>거주 국가를 선택하십시오</target>
       </trans-unit>
     </body>
   </file>

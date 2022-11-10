@@ -655,10 +655,6 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>%(network)s ノードエラー。後でやり直してください。</target>
       </trans-unit>
-      <trans-unit id="Choose exchange">
-        <source>Choose exchange</source>
-        <target>取引所を選択</target>
-      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>最小額：</target>
@@ -1094,6 +1090,10 @@ It will be converted into %(toSymbol)s, and sent to
       <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
         <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
         <target>送金では、残高が賃貸控除限度額を下回った残高で宛先アカウントを維持します。</target>
+      </trans-unit>
+      <trans-unit id="Select your country of residence">
+        <source>Select your country of residence</source>
+        <target>居住国を選択してください</target>
       </trans-unit>
     </body>
   </file>

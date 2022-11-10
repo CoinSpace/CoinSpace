@@ -655,10 +655,6 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>%(network)s erreur de nœud. Veuillez réessayer plus tard.</target>
       </trans-unit>
-      <trans-unit id="Choose exchange">
-        <source>Choose exchange</source>
-        <target>Choisir échange</target>
-      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Montant minimal :</target>
@@ -1094,6 +1090,10 @@ Le montant sera converti en %(toSymbol)s, et sera envoyé à
       <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
         <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
         <target>La transaction laisse le compte de destination avec un solde inférieur au minimum exonéré de loyer.</target>
+      </trans-unit>
+      <trans-unit id="Select your country of residence">
+        <source>Select your country of residence</source>
+        <target>Sélectionez votre pays de résidence</target>
       </trans-unit>
     </body>
   </file>

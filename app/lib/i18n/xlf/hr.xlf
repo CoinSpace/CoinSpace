@@ -655,10 +655,6 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>%(network)s greška čvora. Pokušajte ponovno kasnije.</target>
       </trans-unit>
-      <trans-unit id="Choose exchange">
-        <source>Choose exchange</source>
-        <target>Odaberi konverziju</target>
-      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Minimalni iznos:</target>
@@ -1094,6 +1090,10 @@ Biće konvertiran u %(toSymbol)s i poslan na
       <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
         <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
         <target>Transakcija ostavlja odredišni račun s nižim saldom od minimalnog iznosa bez najamnine.</target>
+      </trans-unit>
+      <trans-unit id="Select your country of residence">
+        <source>Select your country of residence</source>
+        <target>Odaberite svoju državu prebivališta</target>
       </trans-unit>
     </body>
   </file>

@@ -655,10 +655,6 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>Chyba uzlu %(network)s. Zkuste to prosím později znovu.</target>
       </trans-unit>
-      <trans-unit id="Choose exchange">
-        <source>Choose exchange</source>
-        <target>Vyberte burzu</target>
-      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Minimální množství:</target>
@@ -1094,6 +1090,10 @@ Bude to převedeno na %(toSymbol)s, a zasláno
       <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
         <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
         <target>Po transakci bude na cílovém účtu zůstatek nižší, než je minimum osvobozené od renty.</target>
+      </trans-unit>
+      <trans-unit id="Select your country of residence">
+        <source>Select your country of residence</source>
+        <target>Vyberte zemi svého bydliště</target>
       </trans-unit>
     </body>
   </file>

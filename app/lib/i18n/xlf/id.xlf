@@ -655,10 +655,6 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>%(network)s node error. Silahkan coba kembali nanti.</target>
       </trans-unit>
-      <trans-unit id="Choose exchange">
-        <source>Choose exchange</source>
-        <target>Pilih bursa</target>
-      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Jumlah minimum:</target>
@@ -1094,6 +1090,10 @@ itu akan dikonversi ke %(toSymbol)s, dan dikirim ke
       <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
         <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
         <target>Transaksi menyisakan rekening tujuan dengan saldo lebih rendah daripada minimum bebas sewa.</target>
+      </trans-unit>
+      <trans-unit id="Select your country of residence">
+        <source>Select your country of residence</source>
+        <target>Pilih negara tempat tinggal Anda</target>
       </trans-unit>
     </body>
   </file>

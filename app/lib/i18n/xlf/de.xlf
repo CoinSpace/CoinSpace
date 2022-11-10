@@ -655,10 +655,6 @@
         <source>%(network)s node error. Please try again later.</source>
         <target>Fehler %(network)s-Knoten. Bitte versuche es später erneut.</target>
       </trans-unit>
-      <trans-unit id="Choose exchange">
-        <source>Choose exchange</source>
-        <target>Umtausch auswählen</target>
-      </trans-unit>
       <trans-unit id="Minimum amount:">
         <source>Minimum amount:</source>
         <target>Mindestbetrag</target>
@@ -1094,6 +1090,10 @@ Sie werden in %(toSymbol)s konvertiert und an
       <trans-unit id="Transaction leaves the destination account with a lower balance than rent-exempt minimum.">
         <source>Transaction leaves the destination account with a lower balance than rent-exempt minimum.</source>
         <target>Nach der Transaktion beträgt Guthaben des Zielkontos weniger als das gebührenfreie Minimum.</target>
+      </trans-unit>
+      <trans-unit id="Select your country of residence">
+        <source>Select your country of residence</source>
+        <target>Wählen Sie Ihr Wohnsitzland</target>
       </trans-unit>
     </body>
   </file>
