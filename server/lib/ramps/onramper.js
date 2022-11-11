@@ -29,6 +29,7 @@ async function getRamp(countryCode, crypto, walletAddress) {
   url.searchParams.set('supportSwap', false);
   url.searchParams.set('supportSell', false);
   url.searchParams.set('country', countryCode);
+  url.searchParams.set('color', '346eeb');
   url.searchParams.set('defaultAmount', 300);
   url.searchParams.set('onlyCryptos', currency.id);
   url.searchParams.set('wallets', `${currency.id}:${walletAddress}`);

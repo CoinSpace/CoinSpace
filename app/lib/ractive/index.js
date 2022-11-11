@@ -82,6 +82,7 @@ partials.svg_trash = require('lib/svg/trash.ract');
 partials.svg_moonpay = require('lib/svg/moonpay.ract');
 partials.svg_btcdirect = require('lib/svg/btcdirect.ract');
 partials.svg_onramper = require('lib/svg/onramper.ract');
+partials.svg_guardarian = require('lib/svg/guardarian.ract');
 
 Ractive.prototype.hide = function(context) {
   this.fire('before-hide', context);
