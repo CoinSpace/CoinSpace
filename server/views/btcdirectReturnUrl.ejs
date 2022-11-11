@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <title>Coin Wallet × BTC Direct</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+  <style>
+    html {
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+    }
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-stretch: normal;
+      background-color: rgba(0, 0, 0, 0.5)
+    }
+    ._container {
+      max-width: 320px;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 20px;
+      border-radius: 3px;
+      background-color: #FDFDFD;
+      box-shadow: 0 2px 2px 1px rgb(0 0 0 / 20%);
+    }
+    ._message {
+      font-size: 17px;
+      padding: 40px 20px;
+      text-align: center;
+      width: 100%;
+      color: #333;
+      box-sizing: border-box;
+    }
+    ._btn {
+      font-weight: 500;
+      user-select: none;
+      cursor: pointer;
+      outline: none;
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      text-decoration: none;
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-top: 18px;
+      padding-bottom: 15px;
+      border-radius: 2px;
+      color: white;
+      text-align: center;
+      font-size: 17px;
+      line-height: 27px;
+      background-color: #ea6852;
+      box-shadow: 0 2px 0 0 #e44025;
+      margin: 0 auto;
+    }
+    ._btn:active {
+      transform: translate(0px, 3px);
+      box-shadow: 0 0px 0 0;
+    }
+    ._icon {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="_container">
+    <div id="message" class="_message">
+      Order ID: <%= orderId %>
+      <br>
+      <br>
+      Status: <%= status %>
+    </div>
+
+    <% if (status === 'success') { %>
+      <div class="_icon">
+        <svg version="1.1" x="0px" y="0px" width="85px" height="85px"
+          viewBox="0 0 85 85" enable-background="new 0 0 85 85">
+          <g class="svg-interface">
+            <g class="svg-success">
+              <circle class="svg-polyogn" fill="#3cc77a" cx="42.5" cy="42.544" r="29.878"/>
+              <path fill="#FFFFFF" d="M58.188,35.615L40.232,53.569c-0.161,0.114-0.31,0.172-0.447,0.172
+              s-0.287-0.058-0.447-0.172L28.813,43.045c-0.298-0.299-0.298-0.597,0-0.895l4.334-4.334c0.298-0.298,0.596-0.298,0.894,0
+              l5.744,5.779l13.174-13.208c0.298-0.298,0.596-0.298,0.895,0l4.334,4.333C58.485,35.019,58.485,35.316,58.188,35.615
+              L58.188,35.615z"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+    <% } %>
+    <% if (status === 'failed' || status === 'denied') { %>
+      <div class="_icon">
+        <svg version="1.1" x="0px" y="0px" width="85px" height="85px"
+          viewBox="0 0 85 85" enable-background="new 0 0 85 85">
+          <g class="interface">
+            <g class="error">
+              <ellipse fill="#FC8276" cx="42.878" cy="42.667" rx="29.5" ry="30"/>
+              <path fill="#FFFFFF" d="M56.246,50.711c0.121,0.168,0.182,0.325,0.182,0.47
+                c0,0.146-0.061,0.302-0.182,0.471l-4.595,4.595c-0.169,0.121-0.325,0.182-0.47,0.182c-0.146,0-0.303-0.061-0.471-0.182
+                l-7.997-7.996l-7.997,7.996c-0.169,0.121-0.326,0.182-0.471,0.182c-0.145,0-0.301-0.061-0.47-0.182l-4.595-4.595
+                C29.061,51.482,29,51.326,29,51.181c0-0.145,0.061-0.302,0.181-0.47l7.997-7.997l-7.997-7.997C29.061,34.548,29,34.392,29,34.247
+                c0-0.145,0.061-0.301,0.181-0.47l4.595-4.596c0.169-0.12,0.326-0.181,0.47-0.181c0.145,0,0.302,0.061,0.471,0.181l7.997,7.997
+                l7.997-7.997C50.879,29.061,51.036,29,51.182,29c0.145,0,0.301,0.061,0.47,0.181l4.595,4.596c0.121,0.169,0.182,0.326,0.182,0.47
+                c0,0.145-0.061,0.302-0.182,0.471l-7.996,7.997L56.246,50.711z"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+    <% } %>
+
+    <% if (status === 'failed' || status === 'denied') { %>
+      <a class="_btn" href="https://support.btcdirect.eu/hc/en-gb?client=coinspace" target="_blank">Contact support</a>
+    <% } %>
+  </div>
+</body>
+</html>

@@ -1101,6 +1101,27 @@ paths:
                 type: string
         default:
           $ref: '#/components/responses/GeneralError'
+  /btcdirect/returnUrl:
+    get:
+      x-eov-operation-id: getBtcDirectReturnUrl
+      x-eov-operation-handler: handlers
+      description: Get BTC Direct return url
+      parameters:
+        - in: query
+          name: query
+          schema:
+            type: object
+            additionalProperties: true
+      security: []
+      responses:
+        '200':
+          description: BTC Direct return url
+          content:
+            'text/html':
+              schema:
+                type: string
+        default:
+          $ref: '#/components/responses/GeneralError'
 components:
   schemas:
     Hex64String:

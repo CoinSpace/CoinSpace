@@ -20,7 +20,7 @@
         t = d.getElementsByTagName(i)[0];
         t.parentNode.insertBefore(c, t);
     })(window, document, 'script', 'btcdirect', 'https://cdn<%= envSuffix %>.btcdirect.eu/fiat-to-coin/fiat-to-coin.js');
-    btcdirect('init', { token: '<%= apiKey %>' });
+    btcdirect('init', { token: '<%= apiKey %>', returnUrl: '<%= returnUrl %>' });
     btcdirect('include-dca', { include: true });
     btcdirect('wallet-addresses', {"addresses":[{"address":"<%= address %>","currency":"<%= baseCurrency %>","name":"Coin Wallet"}]});
     btcdirect('currencies', { crypto: '<%= baseCurrency %>', fiat: 'EUR' });
