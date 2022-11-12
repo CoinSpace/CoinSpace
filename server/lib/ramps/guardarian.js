@@ -35,14 +35,9 @@ async function getRamp(countryCode, crypto) {
   url.searchParams.set('partner_api_token', API_KEY);
   url.searchParams.set('theme', 'blue');
   url.searchParams.set('type', 'narrow');
-  url.searchParams.set('default_fiat_amount', 300);
   url.searchParams.set('crypto_currencies_list', JSON.stringify([{
     ticker: crypto.guardarian.ticker,
     network: crypto.guardarian.network,
-  }]));
-  url.searchParams.set('fiat_currencies_list', JSON.stringify([{
-    ticker: 'USD',
-    network: 'USD',
   }]));
 
   return {
