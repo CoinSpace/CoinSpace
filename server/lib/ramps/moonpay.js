@@ -17,6 +17,8 @@ const rampApi = axios.create({
 const colorCode = '#3cc77a';
 
 async function getRamp(countryCode, crypto, walletAddress) {
+  if (!API_KEY) return {};
+  if (!crypto) return {};
   const result = {};
   const countries = await cachedCountries();
   const country = countries.find((item) => item.alpha2 === countryCode);
