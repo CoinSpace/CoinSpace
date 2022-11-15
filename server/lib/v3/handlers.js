@@ -416,21 +416,11 @@ export async function getRamps(req, res) {
 
 export async function getBtcDirectBuyWidget(req, res) {
   const envSuffix = `${process.env.NODE_ENV === 'production' ? '' : '-sandbox'}`;
-  const returnUrl = new URL('/api/v3/btcdirect/returnUrl', process.env.SITE_URL);
   res.render('btcdirectBuy', {
     apiKey: process.env.BTCDIRECT_API_KEY,
     envSuffix,
     address: req.query.address,
     baseCurrency: req.query.baseCurrency,
     fiatAmount: 300,
-    returnUrl: returnUrl.toString(),
-  });
-}
-
-export async function getBtcDirectReturnUrl(req, res) {
-  const { status, orderId } = req.query;
-  res.render('btcdirectReturnUrl', {
-    status,
-    orderId,
   });
 }
