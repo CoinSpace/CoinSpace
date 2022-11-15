@@ -1093,7 +1093,7 @@ It will be converted into %(toSymbol)s, and sent to
       </trans-unit>
       <trans-unit id="Select your country of residence">
         <source>Select your country of residence</source>
-        <target></target>
+        <target>Выберите страну вашего проживания</target>
       </trans-unit>
     </body>
   </file>
