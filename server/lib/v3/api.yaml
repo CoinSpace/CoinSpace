@@ -1089,8 +1089,11 @@ paths:
       x-eov-operation-handler: handlers
       description: Get BTC Direct buy widget
       parameters:
-        - $ref: '#/components/parameters/address'
-        - $ref: '#/components/parameters/baseCurrency'
+        - in: query
+          name: query
+          schema:
+            type: object
+            additionalProperties: true
       security: []
       responses:
         '200':
@@ -1745,14 +1748,6 @@ components:
         maxLength: 2
       required: true
       description: ISO 3166-1 alpha-2
-    baseCurrency:
-      in: query
-      name: baseCurrency
-      schema:
-        type: string
-        maxLength: 10
-      required: true
-      description: baseCurrency
   responses:
     AttestationOptionsResponse:
       description: Attestation Options
