@@ -394,7 +394,7 @@ export default function(el) {
           }
           if (['ios', 'android-play'].includes(process.env.BUILD_PLATFORM)) {
             // eslint-disable-next-line no-undef
-            cordova.plugins.InAppReview.requestReviewDialog().catch(() => {});
+            cordova.plugins.AppReview.requestReview().catch(() => {});
           }
         },
       });

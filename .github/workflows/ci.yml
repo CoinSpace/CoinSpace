@@ -145,11 +145,11 @@ jobs:
         with:
           snapcraft_token: ${{ secrets.SNAP_TOKEN }}
           channel: 6.x/stable
-      - name: Install JDK 1.8
+      - name: Install JDK 11
         if: ${{ matrix.DISTRIBUTION == 'android-play' || matrix.DISTRIBUTION == 'android-galaxy' }}
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: 11
       - name: Install certificates & prepare for build
         env:
           DISTRIBUTION: ${{ matrix.DISTRIBUTION }}
@@ -202,7 +202,7 @@ jobs:
             echo $PROVISIONING_IOS_WATCH_APP_EXTENSION | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.watchapp.extension.mobileprovision;
           elif [[ "$DISTRIBUTION" == "android-play" || "$DISTRIBUTION" == "android-galaxy" ]]; then
             echo $ANDROID_RELEASE_KEYSTORE | base64 --decode > phonegap/release.keystore;
-            echo "/usr/local/lib/android/sdk/build-tools/30.0.3" >> $GITHUB_PATH
+            echo "/usr/local/lib/android/sdk/build-tools/32.0.0" >> $GITHUB_PATH
           elif [[ "$DISTRIBUTION" == "win" || "$DISTRIBUTION" == "appx" || "$DISTRIBUTION" == "appx-dev" ]]; then
             echo $CERTIFICATE_WIN | base64 --decode > electron/resources/certificate.pfx
             if [[ "$DISTRIBUTION" == "appx" ]]; then
