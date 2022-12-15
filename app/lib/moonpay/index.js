@@ -22,7 +22,7 @@ async function init() {
 }
 
 function getCountryCode() {
-  return countryList.getName(state.ip.alpha2) && state.ip.alpha2;
+  return state.ip.alpha2 && countryList.getName(state.ip.alpha2) && state.ip.alpha2;
 }
 
 export default {
