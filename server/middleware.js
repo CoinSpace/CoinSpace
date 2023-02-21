@@ -12,13 +12,10 @@ function init(app) {
 
   app.use(requireHTTPS);
   app.set('trust proxy', true);
-
-  if (isProduction()) {
-    app.use(helmet.xssFilter());
-    app.use(helmet.noSniff());
-    app.use(helmet.frameguard({ action: 'sameorigin' }));
-  }
-
+  app.use(helmet.xssFilter());
+  app.use(helmet.noSniff());
+  app.use(helmet.hidePoweredBy());
+  app.use(helmet.frameguard({ action: 'deny' }));
   app.use(cors());
 
   const dayInMs = 24 * 60 * 60 * 1000;
@@ -70,8 +67,8 @@ function setCustomCacheControl(res, path) {
 }
 
 function requireHTTPS(req, res, next) {
-  const herokuForwardedFromHTTPS = req.headers['x-forwarded-proto'] === 'https';
-  if (!herokuForwardedFromHTTPS && !isOnionDomain(req) && isProduction()) {
+  const forwardedFromHTTPS = req.headers['x-forwarded-proto'] === 'https';
+  if (!forwardedFromHTTPS && !isOnionDomain(req) && isProduction()) {
     return res.redirect('https://' + req.get('host') + req.url);
   }
   next();
