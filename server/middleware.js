@@ -15,7 +15,6 @@ function init(app) {
   app.use(helmet.xssFilter());
   app.use(helmet.noSniff());
   app.use(helmet.hidePoweredBy());
-  app.use(helmet.frameguard({ action: 'deny' }));
   app.use(cors());
 
   const dayInMs = 24 * 60 * 60 * 1000;
