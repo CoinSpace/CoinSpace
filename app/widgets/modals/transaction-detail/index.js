@@ -26,7 +26,8 @@ export default function({ transaction }) {
     hasAcceleration = false;
   }
 
-  if (['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'ethereum-classic', 'tron'].includes(platform)) {
+  // eslint-disable-next-line max-len
+  if (['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'polygon', 'ethereum-classic', 'tron'].includes(platform)) {
     content = contentEthereum;
   } else if (platform === 'ripple') {
     content = contentRipple;

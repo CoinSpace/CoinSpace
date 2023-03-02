@@ -221,7 +221,7 @@ export default function(el) {
     } else if (['ripple', 'stellar', 'eos']
       .includes(wallet.crypto.platform)) {
       fee = toUnitString(wallet.defaultFee);
-    } else if (['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'ethereum-classic']
+    } else if (['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'polygon', 'ethereum-classic']
       .includes(wallet.crypto.platform)) {
       fee = toUnitString(wallet.defaultFee, 18);
     }

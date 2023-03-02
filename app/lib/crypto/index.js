@@ -9,7 +9,7 @@ let all;
 let tokens;
 let index;
 
-const TOKEN_PLATFORMS = ['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'tron', 'solana'];
+const TOKEN_PLATFORMS = ['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'polygon', 'tron', 'solana'];
 
 export function init() {
   if (!cache) {
@@ -73,6 +73,7 @@ function requestTokenByAddress(address, platform) {
     ethereum: `${process.env.API_ETH_URL}api/v1/token/${address}`,
     'binance-smart-chain': `${process.env.API_BSC_URL}api/v1/token/${address}`,
     'avalanche-c-chain': `${process.env.API_AVAX_URL}api/v1/token/${address}`,
+    polygon: `${process.env.API_POLYGON_URL}api/v1/token/${address}`,
     tron: `${process.env.API_TRX_URL}api/v1/token/${address}`,
     solana: `${process.env.API_SOL_URL}api/v1/token/${address}`,
   };
@@ -134,6 +135,8 @@ function getLogoUrl(logo) {
         return require('@coinspace/crypto-db/logo/binance-smart-chain.svg');
       case 'avalanche-c-chain.svg':
         return require('@coinspace/crypto-db/logo/avalanche.svg');
+      case 'polygon.svg':
+        return require('@coinspace/crypto-db/logo/polygon.svg');
       case 'tron.svg':
         return require('@coinspace/crypto-db/logo/tron.svg');
       case 'xrp.svg':

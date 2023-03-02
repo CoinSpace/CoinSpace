@@ -80,7 +80,7 @@ export default function(el) {
     ractive.set('isEnabledDerivationPaths',
       [
         'bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash',
-        'ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'ethereum-classic',
+        'ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'polygon', 'ethereum-classic',
         'tron',
       ].includes(wallet.crypto.platform) && wallet.crypto.type === 'coin'
     );

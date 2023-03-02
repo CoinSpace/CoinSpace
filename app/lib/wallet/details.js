@@ -7,6 +7,7 @@ import CsWallet from '@coinspace/cs-wallet';
 import EthereumWallet from '@coinspace/cs-ethereum-wallet';
 import BinanceSmartChainWallet from '@coinspace/cs-binance-smart-chain-wallet';
 import AvalancheWallet from '@coinspace/cs-avalanche-wallet';
+import PolygonWallet from '@coinspace/cs-polygon-wallet';
 
 class Details {
   constructor(baseURL) {
@@ -68,6 +69,9 @@ class Details {
             },
             'avalanche@avalanche-c-chain': {
               bip44: AvalancheWallet.network.bip44,
+            },
+            'polygon@polygon': {
+              bip44: PolygonWallet.network.bip44,
             },
             'ethereum-classic@ethereum-classic': {
               bip44: EthereumWallet.networks['ethereum-classic'].bip44,

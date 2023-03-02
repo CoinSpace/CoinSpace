@@ -38,6 +38,8 @@
             <img src="{{getLogoUrl('binance-smart-chain.svg')}}">
           {{elseif platform === 'avalanche-c-chain'}}
             <img src="{{getLogoUrl('avalanche.svg')}}">
+          {{elseif platform === 'polygon'}}
+            <img src="{{getLogoUrl('polygon.svg')}}">
           {{elseif platform === 'tron'}}
             <img src="{{getLogoUrl('tron.svg')}}">
           {{elseif platform === 'solana'}}

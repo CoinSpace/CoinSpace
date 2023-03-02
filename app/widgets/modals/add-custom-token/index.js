@@ -10,6 +10,7 @@ import content from './_content.ract';
 import binanceSmartChain from '@coinspace/crypto-db/crypto/binance-coin@binance-smart-chain.json';
 import ethereum from '@coinspace/crypto-db/crypto/ethereum@ethereum.json';
 import avalanche from '@coinspace/crypto-db/crypto/avalanche@avalanche-c-chain.json';
+import polygon from '@coinspace/crypto-db/crypto/polygon@polygon.json';
 import tron from '@coinspace/crypto-db/crypto/tron@tron.json';
 import solana from '@coinspace/crypto-db/crypto/solana@solana.json';
 
@@ -34,6 +35,7 @@ function open() {
       { value: avalanche.platform, name: avalanche.name },
       { value: tron.platform, name: tron.name },
       { value: solana.platform, name: solana.name },
+      { value: polygon.platform, name: polygon.name },
     ],
     value: 'ethereum',
     id: 'blockchain',

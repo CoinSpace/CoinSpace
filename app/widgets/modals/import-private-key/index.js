@@ -53,7 +53,7 @@ function open() {
       if (['ripple', 'stellar', 'eos'].includes(wallet.crypto.platform)) {
         fee = toUnitString(wallet.defaultFee);
         // eslint-disable-next-line max-len
-      } else if (['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'ethereum-classic'].includes(wallet.crypto.platform)) {
+      } else if (['ethereum', 'binance-smart-chain', 'avalanche-c-chain', 'polygon', 'ethereum-classic'].includes(wallet.crypto.platform)) {
         fee = toUnitString(wallet.defaultFee, 18);
       }
 

@@ -20,6 +20,7 @@ import EOSWallet from '@coinspace/cs-eos-wallet';
 import MoneroWallet from '@coinspace/cs-monero-wallet';
 import CardanoWallet from '@coinspace/cs-cardano-wallet';
 import AvalancheWallet from '@coinspace/cs-avalanche-wallet';
+import PolygonWallet from '@coinspace/cs-polygon-wallet';
 import RippleWallet from '@coinspace/cs-ripple-wallet';
 import StellarWallet from '@coinspace/cs-stellar-wallet';
 import SolanaWallet from '@coinspace/cs-solana-wallet';
@@ -41,6 +42,7 @@ import cardano from '@coinspace/crypto-db/crypto/cardano@cardano.json';
 import ethereumClassic from '@coinspace/crypto-db/crypto/ethereum-classic@ethereum-classic.json';
 import solana from '@coinspace/crypto-db/crypto/solana@solana.json';
 import avalanche from '@coinspace/crypto-db/crypto/avalanche@avalanche-c-chain.json';
+import polygon from '@coinspace/crypto-db/crypto/polygon@polygon.json';
 import tron from '@coinspace/crypto-db/crypto/tron@tron.json';
 
 import { eddsa } from 'elliptic';
@@ -77,6 +79,7 @@ export const walletCoins = [
   ethereumClassic,
   solana,
   avalanche,
+  polygon,
   tron,
 ];
 
@@ -97,6 +100,7 @@ const Wallet = {
   'ethereum-classic': EthereumWallet,
   solana: SolanaWallet,
   'avalanche-c-chain': AvalancheWallet,
+  polygon: PolygonWallet,
   tron: TronWallet,
 };
 
@@ -261,6 +265,12 @@ function getWalletOptions(crypto) {
     options.request = request;
     options.apiNode = process.env.API_AVAX_URL;
     options.platformCrypto = walletCoins.find((item) => item._id === 'avalanche@avalanche-c-chain');
+    options.settings = details.getCryptoSettings(options.platformCrypto._id);
+  } else if (crypto.platform === 'polygon') {
+    options.minConf = 12;
+    options.request = request;
+    options.apiNode = process.env.API_POLYGON_URL;
+    options.platformCrypto = walletCoins.find((item) => item._id === 'polygon@polygon');
     options.settings = details.getCryptoSettings(options.platformCrypto._id);
   } else if (['bitcoin', 'bitcoin-cash', 'bitcoin-sv', 'litecoin', 'dogecoin', 'dash'].includes(crypto.platform)) {
     options.settings = details.getCryptoSettings(crypto._id);
