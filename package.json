@@ -22,7 +22,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@coinspace/crypto-db": "^1.6.6",
+    "@coinspace/crypto-db": "^1.7.0",
     "@ensdomains/address-encoder": "^0.2.9",
     "@sentry/integrations": "^6.17.3",
     "@sentry/node": "^6.17.3",
