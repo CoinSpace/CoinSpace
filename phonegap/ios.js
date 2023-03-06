@@ -35,17 +35,17 @@ async function run() {
   /* eslint-disable quote-props */
   cordova('platform add ios@6.2.0 --save');
   cordova('plugin add cordova-plugin-fingerprint-aio@5.0.1 --save --variable FACEID_USAGE_DESCRIPTION="Used for easy authentication."');
-  cordova('plugin add cordova-plugin-geolocation@4.0.2 --save');
+  cordova('plugin add cordova-plugin-geolocation@4.1.0 --save');
   cordova('plugin add phonegap-plugin-barcodescanner@8.1.0 --save');
   cordova('plugin add cordova-plugin-dialogs@2.0.2 --save');
-  cordova('plugin add cordova-plugin-inappbrowser@4.0.0 --save');
+  cordova('plugin add cordova-plugin-inappbrowser@5.0.0 --save');
   cordova('plugin add cordova-plugin-statusbar@2.4.3 --save');
-  cordova('plugin add cordova-plugin-x-socialsharing@5.6.8 --save --variable PHOTO_LIBRARY_USAGE_DESCRIPTION="This app uses your photo library to upload photos." --variable PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION="This app saves images to your photo library."');
-  cordova('plugin add cordova-plugin-customurlscheme@5.0.1 --save --variable URL_SCHEME=coinspace');
+  cordova('plugin add cordova-plugin-x-socialsharing@6.0.4 --save --variable PHOTO_LIBRARY_USAGE_DESCRIPTION="This app uses your photo library to upload photos." --variable PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION="This app saves images to your photo library."');
+  cordova('plugin add cordova-plugin-customurlscheme@5.0.2 --save --variable URL_SCHEME=coinspace');
   cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#4bf28de7fcd6759450f5fd56f2ec28677bc882da --save');
   cordova('plugin add cordova-plugin-3dtouch-shortcutitems@1.0.2 --save');
-  cordova('plugin add cordova-plugin-safariviewcontroller@1.6.0 --save');
-  cordova('plugin add cordova-plugin-inapp-review@1.1.0 --save');
+  cordova('plugin add cordova-plugin-safariviewcontroller@2.0.0 --save');
+  cordova('plugin add cordova-plugin-inapp-review@3.1.0 --save');
   cordova('plugin add cordova-plugin-taptic-engine@2.2.0 --save');
 
   const update = {
