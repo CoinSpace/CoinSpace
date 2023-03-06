@@ -45,7 +45,7 @@ async function run() {
   cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#4bf28de7fcd6759450f5fd56f2ec28677bc882da --save');
   cordova('plugin add cordova-plugin-3dtouch-shortcutitems@1.0.2 --save');
   cordova('plugin add cordova-plugin-safariviewcontroller@2.0.0 --save');
-  cordova('plugin add cordova-plugin-inapp-review@3.1.0 --save');
+  cordova('plugin add cordova-plugin-app-review@3.1.0 --save');
   cordova('plugin add cordova-plugin-taptic-engine@2.2.0 --save');
 
   const update = {
