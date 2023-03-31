@@ -14,7 +14,7 @@ async function cryptosSync() {
 function cryptosUpdatePrices(interval) {
   return pForever(async () => {
     console.time('crypto update prices');
-    await cryptos.updatePrices().catch(console.error);
+    await cryptos.updatePrices().catch(error('cryptosUpdatePrices'));
     console.timeEnd('crypto update prices');
     await delay(interval);
   });
@@ -23,7 +23,7 @@ function cryptosUpdatePrices(interval) {
 function cryptosUpdateRank(interval) {
   return pForever(async () => {
     console.time('crypto update rank');
-    await cryptos.updateRank().catch(console.error);
+    await cryptos.updateRank().catch(error('cryptosUpdateRank'));
     console.timeEnd('crypto update rank');
     await delay(interval);
   });
@@ -31,7 +31,7 @@ function cryptosUpdateRank(interval) {
 
 function cacheFees(interval) {
   return pForever(async () => {
-    await fee.updateFees().catch(console.error);
+    await fee.updateFees().catch(error('cacheFees'));
     await delay(interval);
   });
 }
@@ -45,7 +45,7 @@ function cacheMoonpayCurrencies(interval) {
         moonpay.save('coins_usa', data.coins_usa),
         moonpay.save('fiat', data.fiat),
       ]);
-    }).catch(console.error);
+    }).catch(error('cacheMoonpayCurrencies'));
     return intervalFunction;
   }(), interval);
 }
@@ -58,16 +58,23 @@ function cacheMoonpayCountries(interval) {
         moonpay.save('countries_allowed', data.allowed),
         moonpay.save('countries_document', data.document),
       ]);
-    }).catch(console.error);
+    }).catch(error('cacheMoonpayCountries'));
     return intervalFunction;
   }(), interval);
 }
 
 function cacheGithubReleases(interval) {
   return pForever(async () => {
-    await github.sync().catch(console.error);
+    await github.sync().catch(error('cacheGithubReleases'));
     await delay(interval);
   });
+}
+
+function error(work) {
+  return (e) => {
+    e.message = `${work}: ${e.message}`;
+    console.error(e);
+  };
 }
 
 export default {
