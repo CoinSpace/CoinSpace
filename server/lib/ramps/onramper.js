@@ -24,13 +24,13 @@ async function getRamp(countryCode, crypto, walletAddress) {
   }
   if (!currency) return {};
 
-  const url = new URL('https://widget.onramper.com/');
+  const url = new URL('https://buy.onramper.com/');
   url.searchParams.set('apiKey', API_KEY);
   url.searchParams.set('defaultCrypto', currency.id);
   url.searchParams.set('supportSwap', false);
   url.searchParams.set('supportSell', false);
   url.searchParams.set('country', countryCode);
-  url.searchParams.set('color', '346eeb');
+  url.searchParams.set('themeName', 'light');
   url.searchParams.set('onlyCryptos', currency.id);
   url.searchParams.set('wallets', `${currency.id}:${walletAddress}`);
   return {
