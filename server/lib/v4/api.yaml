@@ -1,0 +1,205 @@
+openapi: '3.0.3'
+
+info:
+  version: 4.0.0
+  title: Coin Wallet API V4
+
+servers:
+  - url: https://coin.space/api/v4
+
+paths:
+  /csfee:
+    get:
+      x-eov-operation-id: getCsFee
+      x-eov-operation-handler: handlers
+      description: Get transaction cs fees for coin
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cryptoId'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Fees for coin
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/CsFee'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /csfee/addresses:
+    get:
+      x-eov-operation-id: getCsFeeAddresses
+      x-eov-operation-handler: handlers
+      description: Get all cs fees addresses for coin
+      parameters:
+        - $ref: '#/components/parameters/cryptoId'
+      security:
+        - apiKey: []
+      responses:
+        '200':
+          description: Cs fees addresses
+          content:
+            'application/json':
+              schema:
+                type: array
+                maxItems: 128
+                items:
+                  $ref: '#/components/schemas/AnyCryptoAddress'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /storage/{storageName}:
+    get:
+      x-eov-operation-id: getStorage
+      x-eov-operation-handler: handlers
+      description: Get storage
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/storageName'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Storage
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Storage'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    put:
+      x-eov-operation-id: setStorage
+      x-eov-operation-handler: handlers
+      description: Update storage
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/storageName'
+      security:
+        - deviceSignature: []
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Storage'
+      responses:
+        '200':
+          description: Update storage result
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Storage'
+        default:
+          $ref: '#/components/responses/GeneralError'
+
+components:
+  schemas:
+    Hex64String:
+      type: string
+      pattern: ^[a-f0-9]{64}$
+      maxLength: 64
+    Base64String:
+      type: string
+      pattern: ^(?:[A-Za-z\d+\/]{4})*?(?:[A-Za-z\d+\/]{2}(?:==)?|[A-Za-z\d+\/]{3}=?)?$
+      maxLength: 2097152 # 2mb
+      nullable: true
+    AnyCryptoAddress:
+      type: string
+      pattern: ^.{1,256}$
+      maxLength: 256
+    CryptoId:
+      type: string
+      pattern: ^[a-z0-9-]+@[a-z0-9-]+$
+      maxLength: 256
+    CsFee:
+      type: object
+      additionalProperties: false
+      properties:
+        fee:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+        minFee:
+          type: number
+        maxFee:
+          type: number
+        rbfFee:
+          type: number
+        address:
+          $ref: '#/components/schemas/AnyCryptoAddress'
+        skipMinFee:
+          type: boolean
+        feeAddition:
+          type: number
+      required:
+        - fee
+        - minFee
+        - maxFee
+        - address
+    Storage:
+      type: object
+      additionalProperties: false
+      properties:
+        data:
+          description: Storage
+          $ref: '#/components/schemas/Base64String'
+      required:
+        - data
+  parameters:
+    deviceId:
+      description: Device ID
+      in: query
+      name: id
+      required: true
+      schema:
+        $ref: '#/components/schemas/Hex64String'
+    cryptoId:
+      description: Crypto ID
+      in: query
+      name: crypto
+      required: true
+      allowReserved: true
+      schema:
+        $ref: '#/components/schemas/CryptoId'
+    storageName:
+      description: Storage name
+      in: path
+      name: storageName
+      schema:
+        $ref: '#/components/schemas/CryptoId'
+      required: true
+  responses:
+    GeneralError:
+      description: Unexpected error
+      content:
+        'application/json':
+          schema:
+            type: object
+            additionalProperties: false
+            required:
+              - code
+              - error
+            properties:
+              code:
+                type: integer
+                format: int32
+                minimum: 0
+                maximum: 1000
+              error:
+                type: string
+                pattern: ^.{0,16384}$
+                maxLength: 16384
+  securitySchemes:
+    deviceSignature:
+      type: apiKey
+      in: header
+      name: Signature
+    walletSignature:
+      type: apiKey
+      in: header
+      name: Signature
+    apiKey:
+      type: apiKey
+      in: query
+      name: apikey

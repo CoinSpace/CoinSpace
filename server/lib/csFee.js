@@ -32,6 +32,34 @@ async function getCsFee(cryptoId) {
   };
 }
 
+async function getCsFeeV4(cryptoId) {
+  const csFee = await db.collection('cs_fee')
+    .findOne({ _id: cryptoId });
+  if (!csFee) {
+    throw createError(404, 'CS fee was not found');
+  }
+  return {
+    fee: csFee.fee,
+    minFee: csFee.min_usd,
+    maxFee: csFee.max_usd,
+    rbfFee: csFee.rbf_usd,
+    address: csFee.addresses[0],
+    skipMinFee: csFee.skipMinFee || false,
+    feeAddition: csFee.fee_addition || 0,
+  };
+}
+
+async function getCsFeeAddressesV4(cryptoId) {
+  const csFee = await db.collection('cs_fee')
+    .findOne({ _id: cryptoId });
+  if (!csFee) {
+    throw createError(404, 'CS fee was not found');
+  }
+  return csFee.addresses;
+}
+
 export default {
   getCsFee,
+  getCsFeeV4,
+  getCsFeeAddressesV4,
 };

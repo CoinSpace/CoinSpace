@@ -7,6 +7,7 @@ import { isHttpError } from 'http-errors';
 import apiV1 from './lib/v1/api.js';
 import apiV2 from './lib/v2/api.js';
 import apiV3 from './lib/v3/api.js';
+import apiV4 from './lib/v4/api.js';
 
 const app = express();
 
@@ -28,6 +29,7 @@ middleware.init(app);
 app.use('/api/v1', apiV1);
 app.use('/api/v2', apiV2);
 app.use('/api/v3', apiV3);
+app.use('/api/v4', apiV4);
 app.set('views', './server/views');
 app.set('view engine', 'ejs');
 
