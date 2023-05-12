@@ -6,7 +6,7 @@ const rampData = {
 
 async function getRamp(_, crypto, walletAddress) {
   if (!API_KEY) return {};
-  if (crypto?.onramper?.id) return {};
+  if (!crypto?.onramper?.id) return {};
 
   const { id } = crypto.onramper;
 
