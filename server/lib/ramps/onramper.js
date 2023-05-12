@@ -1,38 +1,21 @@
-import pMemoize from 'p-memoize';
-import ExpiryMap from 'expiry-map';
-import axios from 'axios';
-
 const API_KEY = process.env.ONRAMPER_API_KEY;
 const rampData = {
   name: 'Onramper',
   svg: 'svg_onramper',
 };
-const rampApi = axios.create({
-  baseURL: 'https://onramper.tech/',
-  timeout: 15000, // 15 secs
-  headers: { Authorization: `Basic ${API_KEY}` },
-});
 
-async function getRamp(countryCode, crypto, walletAddress) {
+async function getRamp(_, crypto, walletAddress) {
   if (!API_KEY) return {};
-  if (!crypto) return {};
-  const currencies = await cachedCurrencies(countryCode);
+  if (crypto?.onramper?.id) return {};
 
-  let currency;
-  if (crypto.onramper) {
-    currency = currencies.find((item) => item.id === crypto.onramper.id);
-  }
-  if (!currency) return {};
+  const { id } = crypto.onramper;
 
   const url = new URL('https://buy.onramper.com/');
   url.searchParams.set('apiKey', API_KEY);
-  url.searchParams.set('defaultCrypto', currency.id);
-  url.searchParams.set('supportSwap', false);
-  url.searchParams.set('supportSell', false);
-  url.searchParams.set('country', countryCode);
+  url.searchParams.set('defaultCrypto', id);
   url.searchParams.set('themeName', 'light');
-  url.searchParams.set('onlyCryptos', currency.id);
-  url.searchParams.set('wallets', `${currency.id}:${walletAddress}`);
+  url.searchParams.set('onlyCryptos', id);
+  url.searchParams.set('wallets', `${id}:${walletAddress}`);
   return {
     buy: {
       ...rampData,
@@ -40,15 +23,5 @@ async function getRamp(countryCode, crypto, walletAddress) {
     },
   };
 }
-
-const cachedCurrencies = pMemoize(async (country = 'all') => {
-  const { data } = await rampApi.get('/gateways', {
-    params: { country },
-  });
-  const { gateways } = data;
-  return gateways.map((gateway) => {
-    return gateway.cryptoCurrencies;
-  }).flat();
-}, { cache: new ExpiryMap(1 * 60 * 60 * 1000) }); // 1 hour
 
 export default getRamp;
