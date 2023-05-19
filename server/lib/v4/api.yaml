@@ -128,8 +128,6 @@ components:
           type: number
         address:
           $ref: '#/components/schemas/AnyCryptoAddress'
-        skipMinFee:
-          type: boolean
         feeAddition:
           type: number
       required:

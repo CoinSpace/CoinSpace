@@ -44,7 +44,6 @@ async function getCsFeeV4(cryptoId) {
     maxFee: csFee.max_usd,
     rbfFee: csFee.rbf_usd,
     address: csFee.addresses[0],
-    skipMinFee: csFee.skipMinFee || false,
     feeAddition: csFee.fee_addition || 0,
   };
 }
