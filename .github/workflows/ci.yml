@@ -70,17 +70,17 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: macos-11
+          - os: macos-12
             node: 16
             DISTRIBUTION: mac
             BUILD_TYPE: electron
             SENTRY_KEY: SENTRY_DSN_MAC
-          - os: macos-11
+          - os: macos-12
             node: 16
             DISTRIBUTION: mas
             BUILD_TYPE: electron
             SENTRY_KEY: SENTRY_DSN_MAS
-          - os: macos-11
+          - os: macos-12
             node: 16
             DISTRIBUTION: mas-dev
             BUILD_TYPE: electron
@@ -105,7 +105,7 @@ jobs:
             DISTRIBUTION: appx-dev
             BUILD_TYPE: electron
             SENTRY_KEY: SENTRY_DSN_WIN
-          - os: macos-11
+          - os: macos-12
             node: 16
             DISTRIBUTION: ios
             BUILD_TYPE: phonegap
