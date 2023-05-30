@@ -206,7 +206,7 @@ jobs:
             echo "/usr/local/lib/android/sdk/build-tools/32.0.0" >> $GITHUB_PATH
           elif [[ "$DISTRIBUTION" == "win" || "$DISTRIBUTION" == "appx" || "$DISTRIBUTION" == "appx-dev" ]]; then
             echo $CERTIFICATE_WIN | base64 --decode > electron/resources/certificate.pfx
-            if [[ "$DISTRIBUTION" == "appx" ]]; then
+            if [[ "$DISTRIBUTION" == "appx" || "$DISTRIBUTION" == "appx-dev" ]]; then
               sed -i 's/function signAppx (program) {/function signAppx (program) { return;/' electron/node_modules/electron-windows-store/lib/sign.js
               sed -i 's/function makeCert (parametersOrPublisherName, certFilePath, program) {/function makeCert (parametersOrPublisherName, certFilePath, program) { return;/' electron/node_modules/electron-windows-store/lib/sign.js
             fi
