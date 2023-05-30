@@ -90,11 +90,11 @@ jobs:
             DISTRIBUTION: snap
             BUILD_TYPE: electron
             SENTRY_KEY: SENTRY_DSN_SNAP
-          - os: windows-2019
-            node: 16
-            DISTRIBUTION: win
-            BUILD_TYPE: electron
-            SENTRY_KEY: SENTRY_DSN_WIN
+          #- os: windows-2019
+          #  node: 16
+          #  DISTRIBUTION: win
+          #  BUILD_TYPE: electron
+          #  SENTRY_KEY: SENTRY_DSN_WIN
           - os: windows-2019
             node: 16
             DISTRIBUTION: appx
