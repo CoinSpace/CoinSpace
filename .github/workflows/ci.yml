@@ -166,6 +166,7 @@ jobs:
           GOOGLE_CLOUD_KEY: ${{ secrets.GOOGLE_CLOUD_KEY }}
           ANDROID_RELEASE_KEYSTORE: ${{ secrets.ANDROID_RELEASE_KEYSTORE }}
           CERTIFICATE_WIN: ${{ secrets.CERTIFICATE_WIN }}
+          CERTIFICATE_SELFSIGN_WIN: ${{ secrets.CERTIFICATE_SELFSIGN_WIN }}
         shell: bash
         run: |
           echo "GITHUB_RUN_NUMBER: $GITHUB_RUN_NUMBER";
@@ -239,6 +240,7 @@ jobs:
           ZENDESK_CLIENT_ID: ${{ secrets.ZENDESK_CLIENT_ID }}
           ZENDESK_URL: ${{ secrets.ZENDESK_URL }}
           CERTIFICATE_WIN_PASSWORD: ${{ secrets.CERTIFICATE_WIN_PASSWORD }}
+          CERTIFICATE_SELFSIGN_WIN_PASSWORD: ${{ secrets.CERTIFICATE_SELFSIGN_WIN_PASSWORD }}
           APPX_IDENTITY: ${{ secrets.APPX_IDENTITY }}
           APPX_PACKAGE_NAME: ${{ secrets.APPX_PACKAGE_NAME }}
           APPX_PUBLISHER: ${{ secrets.APPX_PUBLISHER }}
