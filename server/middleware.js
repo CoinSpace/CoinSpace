@@ -1,5 +1,4 @@
 import bodyParser from 'body-parser';
-import compress from 'compression';
 import { fileURLToPath } from 'url';
 import helmet from 'helmet';
 import express from 'express';
@@ -28,8 +27,6 @@ function init(app) {
       req.bodyHash = req.body ? crypto.createHash('sha256').update(buf).digest('hex') : '';
     },
   }));
-
-  app.use(compress());
 
   app.use('/api/', (req, res, next) => {
     const id = req.query.id || req.body.deviceId || req.body.id || req.body.wallet_id;

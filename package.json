@@ -34,7 +34,6 @@
     "big.js": "^6.2.1",
     "bip44-constants": "^8.0.103",
     "body-parser": "^1.18.1",
-    "compression": "^1.7.0",
     "content-hash": "^2.5.2",
     "cors": "^2.8.5",
     "delay": "^5.0.0",
