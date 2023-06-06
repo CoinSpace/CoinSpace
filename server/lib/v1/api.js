@@ -5,7 +5,6 @@ import openalias from '../openalias.js';
 import fee from '../fee.js';
 import csFee from '../csFee.js';
 import tokens from '../tokens.js';
-import changelly from './changelly.js';
 import moonpay from './moonpay.js';
 import semver from 'semver';
 import github from '../github.js';
@@ -145,87 +144,6 @@ router.get('/ethereum/tokens', (req, res) => {
 
 router.all('/location', (req, res) => {
   res.status(410).send({ error: 'Please upgrade the app!' });
-});
-
-router.get('/changelly/getCoins', (req, res) => {
-  changelly.getCoins().then((coins) => {
-    res.status(200).send(coins);
-  }).catch((err) => {
-    res.status(400).send({ error: err.message });
-  });
-});
-
-// deprecated since v3.0.8
-router.get('/changelly/getMinAmount', (req, res) => {
-  const from = req.query.from || '';
-  const to = req.query.to || '';
-  if (!from || !to) {
-    return res.status(400).json({ error: 'Bad request' });
-  }
-  changelly.getMinAmount(from, to).then((data) => {
-    res.status(200).send(data);
-  }).catch((err) => {
-    res.status(400).send({ error: err.message });
-  });
-});
-
-router.get('/changelly/getPairsParams', (req, res) => {
-  const from = req.query.from || '';
-  const to = req.query.to || '';
-  if (!from || !to) {
-    return res.status(400).json({ error: 'Bad request' });
-  }
-  changelly.getPairsParams(from, to).then((data) => {
-    res.status(200).send(data);
-  }).catch((err) => {
-    res.status(400).send({ error: err.message });
-  });
-});
-
-router.get('/changelly/estimate', (req, res) => {
-  const from = req.query.from || '';
-  const to = req.query.to || '';
-  const amount = req.query.amount || 0;
-  if (!from || !to) {
-    return res.status(400).json({ error: 'Bad request' });
-  }
-  changelly.estimate(from, to, amount).then((data) => {
-    res.status(200).send(data);
-  }).catch((err) => {
-    res.status(400).send({ error: err.message });
-  });
-});
-
-router.get('/changelly/validate/:address/:symbol', (req, res) => {
-  changelly.validateAddress(req.params.address, req.params.symbol).then((data) => {
-    res.status(200).send(data);
-  }).catch((err) => {
-    res.status(400).send({ error: err.message });
-  });
-});
-
-router.post('/changelly/createTransaction', (req, res) => {
-  const { from } = req.body;
-  const { to } = req.body;
-  const { amount } = req.body;
-  const { address } = req.body;
-  const { refundAddress } = req.body;
-  if (!from || !to || !amount || !address) {
-    return res.status(400).json({ error: 'Bad request' });
-  }
-  changelly.createTransaction(from, to, amount, address, refundAddress).then((data) => {
-    res.status(200).send(data);
-  }).catch((err) => {
-    res.status(400).send({ error: err.message });
-  });
-});
-
-router.get('/changelly/transaction/:id', (req, res) => {
-  changelly.getTransaction(req.params.id).then((data) => {
-    res.status(200).send(data);
-  }).catch((err) => {
-    res.status(400).send({ error: err.message });
-  });
 });
 
 router.get('/moonpay/coins', (req, res) => {

@@ -1684,8 +1684,8 @@ components:
       schema:
         type: integer
         minimum: 1
-        maximum: 100
-        default: 100
+        maximum: 20
+        default: 20
     changellyOffset:
       in: query
       name: offset
@@ -1693,6 +1693,7 @@ components:
       schema:
         type: integer
         minimum: 0
+        maximum: 100
         default: 0
     lat:
       in: query

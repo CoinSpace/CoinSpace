@@ -2,13 +2,22 @@ import axios from 'axios';
 import crypto from 'crypto';
 import createError from 'http-errors';
 import Big from 'big.js';
-const API_URL = 'https://api.changelly.com';
 import cryptoDB from '@coinspace/crypto-db';
 
-const {
-  CHANGELLY_API_SECRET,
-  CHANGELLY_API_KEY,
-} = process.env;
+const privateKey = crypto.createPrivateKey({
+  key: process.env.CHANGELLY_API_SECRET,
+  format: 'der',
+  type: 'pkcs8',
+  encoding: 'hex',
+});
+
+const publicKey = crypto.createPublicKey(privateKey).export({
+  type: 'pkcs1',
+  format: 'der',
+});
+
+const CHANGELLY_API_KEY = crypto.createHash('sha256').update(publicKey).digest('base64');
+const API_URL = 'https://api.changelly.com/v2';
 
 async function request(method, params) {
   const message = {
@@ -17,13 +26,18 @@ async function request(method, params) {
     method,
     params,
   };
-  const sign = crypto.createHmac('sha512', CHANGELLY_API_SECRET).update(JSON.stringify(message)).digest('hex');
+  const signature = crypto.sign('sha256', Buffer.from(JSON.stringify(message)), {
+    key: privateKey,
+    type: 'pkcs8',
+    format: 'der',
+  }).toString('base64');
+
   const response = await axios({
     method: 'post',
     url: API_URL,
     headers: {
-      'api-key': CHANGELLY_API_KEY,
-      sign,
+      'X-Api-Key': CHANGELLY_API_KEY,
+      'X-Api-Signature': signature,
     },
     data: message,
   });
@@ -31,7 +45,7 @@ async function request(method, params) {
 }
 
 function isGreater3hours(tx) {
-  return (new Date() - new Date(tx.createdAt * 1000)) > 3 * 60 * 60 * 1000;
+  return (new Date() - new Date(Math.round(tx.createdAt / 1000))) > 3 * 60 * 60 * 1000;
 }
 
 function getCrypto(id) {
@@ -68,7 +82,7 @@ async function estimate(from, to, value) {
   const data = await request('getExchangeAmount', [{
     from: fromCrypto.changelly.ticker,
     to: toCrypto.changelly.ticker,
-    amount: value,
+    amountFrom: value,
   }]);
   if (!data) {
     return {
@@ -77,8 +91,8 @@ async function estimate(from, to, value) {
     };
   }
   const networkFee = Big(data[0].networkFee);
-  const amount = Big(data[0].amount);
-  const result = Big(data[0].result).minus(networkFee);
+  const amount = Big(data[0].amountFrom);
+  const result = Big(data[0].amountTo).minus(networkFee);
   return {
     rate: amount.eq(0) ? '0' : normalizeNumber(result.div(amount), toCrypto.decimals),
     result: normalizeNumber(result, toCrypto.decimals),
@@ -96,13 +110,13 @@ async function validateAddress(address, id) {
   };
 }
 
-async function createTransaction(from, to, amount, address, refundAddress) {
+async function createTransaction(from, to, amountFrom, address, refundAddress) {
   const fromCrypto = getCrypto(from);
   const toCrypto = getCrypto(to);
   const data = await request('createTransaction', {
     from: fromCrypto.changelly.ticker,
     to: toCrypto.changelly.ticker,
-    amount,
+    amountFrom,
     address,
     refundAddress,
   });
@@ -163,7 +177,7 @@ async function getTransactions(id, currency, address, limit, offset) {
       amountExpectedFrom: tx.amountExpectedFrom || '0',
       currencyFrom: tx.currencyFrom,
       currencyTo: tx.currencyTo,
-      createdAt: new Date(tx.createdAt * 1000).toISOString(),
+      createdAt: new Date(Math.round(tx.createdAt / 1000)).toISOString(),
       payinAddress: tx.payinAddress,
       payinHash: tx.payinHash || undefined,
       payoutAddress: tx.payoutAddress,
