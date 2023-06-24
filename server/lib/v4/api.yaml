@@ -1,4 +1,4 @@
-openapi: '3.0.3'
+openapi: 3.0.3
 
 info:
   version: 4.0.0
@@ -22,7 +22,7 @@ paths:
         '200':
           description: Fees for coin
           content:
-            'application/json':
+            application/json:
               schema:
                 $ref: '#/components/schemas/CsFee'
         default:
@@ -40,12 +40,47 @@ paths:
         '200':
           description: Cs fees addresses
           content:
-            'application/json':
+            application/json:
               schema:
                 type: array
                 maxItems: 128
                 items:
                   $ref: '#/components/schemas/AnyCryptoAddress'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /register:
+    post:
+      x-eov-operation-id: register
+      x-eov-operation-handler: handlers
+      description: Register new device
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                walletId:
+                  $ref: '#/components/schemas/Hex64String'
+                deviceId:
+                  $ref: '#/components/schemas/Hex64String'
+                pinHash:
+                  $ref: '#/components/schemas/Hex64String'
+              required:
+                - walletId
+                - deviceId
+                - pinHash
+      responses:
+        '201':
+          description: Registration Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/DeviceToken'
+                  - $ref: '#/components/schemas/WalletToken'
         default:
           $ref: '#/components/responses/GeneralError'
   /storage/{storageName}:
@@ -62,7 +97,7 @@ paths:
         '200':
           description: Storage
           content:
-            'application/json':
+            application/json:
               schema:
                 $ref: '#/components/schemas/Storage'
         default:
@@ -79,34 +114,29 @@ paths:
       requestBody:
         required: true
         content:
-          'application/json':
+          application/json:
             schema:
               $ref: '#/components/schemas/Storage'
       responses:
         '200':
           description: Update storage result
           content:
-            'application/json':
+            application/json:
               schema:
                 $ref: '#/components/schemas/Storage'
         default:
           $ref: '#/components/responses/GeneralError'
-
 components:
   schemas:
-    Hex64String:
-      type: string
-      pattern: ^[a-f0-9]{64}$
-      maxLength: 64
-    Base64String:
-      type: string
-      pattern: ^(?:[A-Za-z\d+\/]{4})*?(?:[A-Za-z\d+\/]{2}(?:==)?|[A-Za-z\d+\/]{3}=?)?$
-      maxLength: 2097152 # 2mb
-      nullable: true
     AnyCryptoAddress:
       type: string
       pattern: ^.{1,256}$
       maxLength: 256
+    Base64String:
+      type: string
+      pattern: ^(?:[A-Za-z\d+\/]{4})*?(?:[A-Za-z\d+\/]{2}(?:==)?|[A-Za-z\d+\/]{3}=?)?$
+      maxLength: 2097152
+      nullable: true
     CryptoId:
       type: string
       pattern: ^[a-z0-9-]+@[a-z0-9-]+$
@@ -135,6 +165,21 @@ components:
         - minFee
         - maxFee
         - address
+    DeviceToken:
+      type: object
+      properties:
+        publicToken:
+          $ref: '#/components/schemas/Hex128String'
+      required:
+        - publicToken
+    Hex128String:
+      type: string
+      pattern: ^[a-f0-9]{128}$
+      maxLength: 128
+    Hex64String:
+      type: string
+      pattern: ^[a-f0-9]{64}$
+      maxLength: 64
     Storage:
       type: object
       additionalProperties: false
@@ -143,14 +188,14 @@ components:
           $ref: '#/components/schemas/Base64String'
       required:
         - data
+    WalletToken:
+      type: object
+      properties:
+        privateToken:
+          $ref: '#/components/schemas/Hex128String'
+      required:
+        - privateToken
   parameters:
-    deviceId:
-      description: Device ID
-      in: query
-      name: id
-      required: true
-      schema:
-        $ref: '#/components/schemas/Hex64String'
     cryptoId:
       description: Crypto ID
       in: query
@@ -159,6 +204,13 @@ components:
       allowReserved: true
       schema:
         $ref: '#/components/schemas/CryptoId'
+    deviceId:
+      description: Device ID
+      in: query
+      name: id
+      required: true
+      schema:
+        $ref: '#/components/schemas/Hex64String'
     storageName:
       description: Storage name
       in: path
@@ -170,7 +222,7 @@ components:
     GeneralError:
       description: Unexpected error
       content:
-        'application/json':
+        application/json:
           schema:
             type: object
             additionalProperties: false
@@ -188,6 +240,10 @@ components:
                 pattern: ^.{0,16384}$
                 maxLength: 16384
   securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: apikey
     deviceSignature:
       type: apiKey
       in: header
@@ -196,7 +252,3 @@ components:
       type: apiKey
       in: header
       name: Signature
-    apiKey:
-      type: apiKey
-      in: query
-      name: apikey

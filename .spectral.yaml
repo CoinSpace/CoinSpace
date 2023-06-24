@@ -23,3 +23,15 @@ rules:
     then:
       field: x-eov-operation-handler
       function: truthy
+  sort-alphabetical:
+    description: Sort keys alphabetical
+    severity: error
+    given:
+      - "$.paths"
+      - "$.components.schemas"
+      - "$.components.parameters"
+      - "$.components.responses"
+      - "$.components.requestBodies"
+      - "$.components.securitySchemes"
+    then:
+      function: alphabetical

@@ -1,4 +1,4 @@
-openapi: '3.0.3'
+openapi: 3.0.3
 
 info:
   version: 3.0.0
@@ -8,247 +8,78 @@ servers:
   - url: https://coin.space/api/v3
 
 paths:
-  /register:
-    post:
-      x-eov-operation-id: register
-      x-eov-operation-handler: handlers
-      description: Register new device
-      security: []
-      requestBody:
-        required: true
-        content:
-          'application/json':
-            schema:
-              type: object
-              additionalProperties: false
-              properties:
-                walletId:
-                  $ref: '#/components/schemas/Hex64String'
-                deviceId:
-                  $ref: '#/components/schemas/Hex64String'
-                pinHash:
-                  $ref: '#/components/schemas/Hex64String'
-              required:
-                - walletId
-                - deviceId
-                - pinHash
-      responses:
-        '201':
-          description: Registration Success
-          content:
-            'application/json':
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/PublicToken'
-                  - $ref: '#/components/schemas/PrivateToken'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /logout/others:
-    post:
-      x-eov-operation-id: logoutOthers
-      x-eov-operation-handler: handlers
-      description: Logout from others devices
-      security:
-        - deviceSignature: []
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-      responses:
-        '200':
-          $ref: '#/components/responses/SuccessResponse'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /token/public/pin:
-    post:
-      x-eov-operation-id: tokenPublicPinVerify
-      x-eov-operation-handler: handlers
-      description: Get public token
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-      security: []
-      requestBody:
-        $ref: '#/components/requestBodies/PIN'
-      responses:
-        '200':
-          description: Public Token
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/PublicToken'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /token/public/platform:
+  /btcdirect/buy:
     get:
-      x-eov-operation-id: tokenPublicPlatformOptions
+      x-eov-operation-id: getBtcDirectBuyWidget
       x-eov-operation-handler: handlers
-      description: Get Assertion Options
+      description: Get BTC Direct buy widget
       parameters:
-        - $ref: '#/components/parameters/deviceId'
+        - in: query
+          name: query
+          description: Any query params
+          schema:
+            type: object
+            additionalProperties: true
       security: []
       responses:
         '200':
-          $ref: '#/components/responses/AssertionOptionsResponse'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    post:
-      x-eov-operation-id: tokenPublicPlatformVerify
-      x-eov-operation-handler: handlers
-      description: Verify Assertion
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-      security: []
-      requestBody:
-        $ref: '#/components/requestBodies/Assertion'
-      responses:
-        '200':
-          $ref: '#/components/responses/AssertionResponse'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /token/private:
-    get:
-      x-eov-operation-id: tokenPrivate
-      x-eov-operation-handler: handlers
-      description: Get Private Token
-      security:
-        - deviceSignature: []
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-      responses:
-        '200':
-          description: Private Token
+          description: BTC Direct buy widget
           content:
-            'application/json':
+            text/html:
               schema:
-                $ref: '#/components/schemas/PrivateToken'
+                type: string
         default:
           $ref: '#/components/responses/GeneralError'
-  /token/private/pin:
-    post:
-      x-eov-operation-id: tokenPrivatePinVerify
-      x-eov-operation-handler: handlers
-      description: Get public token
-      security:
-        - deviceSignature: []
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-      requestBody:
-        $ref: '#/components/requestBodies/PIN'
-      responses:
-        '200':
-          description: Auth Result
-          content:
-            'application/json':
-              schema:
-                oneOf:
-                  - $ref: '#/components/schemas/PrivateToken'
-                  - $ref: '#/components/schemas/AssertionOptions'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /token/private/platform:
+  /crossplatform:
     get:
-      x-eov-operation-id: tokenPrivatePlatformOptions
+      x-eov-operation-id: listCrossplatformAuthenticators
       x-eov-operation-handler: handlers
-      description: Get Assertion Options
+      description: List Cross-Platform Authenticators
       security:
         - deviceSignature: []
       parameters:
         - $ref: '#/components/parameters/deviceId'
       responses:
         '200':
-          $ref: '#/components/responses/AssertionOptionsResponse'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    post:
-      x-eov-operation-id: tokenPrivatePlatformVerify
-      x-eov-operation-handler: handlers
-      description: Verify Assertion
-      security:
-        - deviceSignature: []
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-      requestBody:
-        $ref: '#/components/requestBodies/Assertion'
-      responses:
-        '200':
-          description: Auth Result
+          description: List of Authenticators
           content:
-            'application/json':
+            application/json:
               schema:
-                oneOf:
-                  - $ref: '#/components/schemas/PrivateToken'
-                  - $ref: '#/components/schemas/AssertionOptions'
+                type: array
+                maxItems: 10
+                items:
+                  type: object
+                  additionalProperties: false
+                  properties:
+                    credentialID:
+                      $ref: '#/components/schemas/Base64UrlString'
+                    date:
+                      $ref: '#/components/schemas/ISODateString'
+                  required:
+                    - credentialID
+                    - date
         default:
           $ref: '#/components/responses/GeneralError'
-  /token/private/crossplatform:
-    get:
-      x-eov-operation-id: tokenPrivateCrossplatformOptions
-      x-eov-operation-handler: handlers
-      description: Get Assertion Options
-      security:
-        - deviceSignature: []
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-      responses:
-        '200':
-          $ref: '#/components/responses/AssertionOptionsResponse'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    post:
-      x-eov-operation-id: tokenPrivateCrossplatformVerify
-      x-eov-operation-handler: handlers
-      description: Verify Assertion
-      security:
-        - deviceSignature: []
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-      requestBody:
-        $ref: '#/components/requestBodies/Assertion'
-      responses:
-        '200':
-          description: Private Token
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/PrivateToken'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /platform/attestation:
-    get:
-      x-eov-operation-id: platformAttestationOptions
-      x-eov-operation-handler: handlers
-      description: Get Attestation Options for Platform Authenticator
-      security:
-        - walletSignature: []
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-      responses:
-        '200':
-          $ref: '#/components/responses/AttestationOptionsResponse'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    post:
-      x-eov-operation-id: platformAttestationVerify
-      x-eov-operation-handler: handlers
-      description: Verify Attestation for Platform Authenticator
-      security:
-        - walletSignature: []
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-      requestBody:
-        $ref: '#/components/requestBodies/Attestation'
-      responses:
-        '200':
-          $ref: '#/components/responses/AttestationResponse'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /platform:
     delete:
-      x-eov-operation-id: removePlatformAuthenticator
+      x-eov-operation-id: removeCrossplatformAuthenticator
       x-eov-operation-handler: handlers
       description: Remove Authenticator
       parameters:
         - $ref: '#/components/parameters/deviceId'
       security:
         - walletSignature: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                credentialID:
+                  $ref: '#/components/schemas/Base64UrlString'
+              required:
+                - credentialID
       responses:
         '200':
           $ref: '#/components/responses/SuccessResponse'
@@ -283,100 +114,42 @@ paths:
           $ref: '#/components/responses/AttestationResponse'
         default:
           $ref: '#/components/responses/GeneralError'
-  /crossplatform:
+  /cryptos:
     get:
-      x-eov-operation-id: listCrossplatformAuthenticators
+      x-eov-operation-id: getCryptos
       x-eov-operation-handler: handlers
-      description: List Cross-Platform Authenticators
-      security:
-        - deviceSignature: []
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-      responses:
-        '200':
-          description: List of Authenticators
-          content:
-            'application/json':
-              schema:
-                type: array
-                maxItems: 10
-                items:
-                  type: object
-                  additionalProperties: false
-                  properties:
-                    credentialID:
-                      $ref: '#/components/schemas/Base64UrlString'
-                    date:
-                      $ref: '#/components/schemas/ISODateString'
-                  required:
-                    - credentialID
-                    - date
-        default:
-          $ref: '#/components/responses/GeneralError'
-    delete:
-      x-eov-operation-id: removeCrossplatformAuthenticator
-      x-eov-operation-handler: handlers
-      description: Remove Authenticator
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-      security:
-        - walletSignature: []
-      requestBody:
-        required: true
-        content:
-          'application/json':
-            schema:
-              type: object
-              additionalProperties: false
-              properties:
-                credentialID:
-                  $ref: '#/components/schemas/Base64UrlString'
-              required:
-                - credentialID
-      responses:
-        '200':
-          $ref: '#/components/responses/SuccessResponse'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /settings:
-    get:
-      x-eov-operation-id: getSettings
-      x-eov-operation-handler: handlers
-      description: Get user Settings
+      description: Get all cryptos
       parameters:
         - $ref: '#/components/parameters/deviceId'
       security:
         - deviceSignature: []
       responses:
         '200':
-          description: User Settings
+          description: List of cryptos
           content:
-            'application/json':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Settings'
+                $ref: '#/components/schemas/CryptoList'
         default:
           $ref: '#/components/responses/GeneralError'
-    patch:
-      x-eov-operation-id: setSettings
+  /csfee:
+    get:
+      x-eov-operation-id: getCsFee
       x-eov-operation-handler: handlers
-      description: Update user Settings
+      description: Get transaction cs fees for coin
       parameters:
-        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/maybeDeviceId'
+        - $ref: '#/components/parameters/cryptoId'
       security:
-        - walletSignature: []
-      requestBody:
-        required: true
-        content:
-          'application/json':
-            schema:
-              $ref: '#/components/schemas/Settings'
+        - deviceSignature: []
+        - apiKey: []
       responses:
         '200':
-          description: Update user Settings result
+          description: Fees for coin
           content:
-            'application/json':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Settings'
+                $ref: '#/components/schemas/CsFee'
         default:
           $ref: '#/components/responses/GeneralError'
   /details:
@@ -392,7 +165,7 @@ paths:
         '200':
           description: User datails
           content:
-            'application/json':
+            application/json:
               schema:
                 type: object
                 additionalProperties: false
@@ -414,7 +187,7 @@ paths:
       requestBody:
         required: true
         content:
-          'application/json':
+          application/json:
             schema:
               type: object
               additionalProperties: false
@@ -427,7 +200,7 @@ paths:
         '200':
           description: Update user details result
           content:
-            'application/json':
+            application/json:
               schema:
                 type: object
                 additionalProperties: false
@@ -436,401 +209,6 @@ paths:
                     $ref: '#/components/schemas/Base64String'
                 required:
                   - data
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /username:
-    put:
-      x-eov-operation-id: setUsername
-      x-eov-operation-handler: handlers
-      description: Update username
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-      security:
-        - deviceSignature: []
-      requestBody:
-        required: true
-        content:
-          'application/json':
-            schema:
-              $ref: '#/components/schemas/UsernameObject'
-      responses:
-        '200':
-          description: Update username result
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/UsernameObject'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /cryptos:
-    get:
-      x-eov-operation-id: getCryptos
-      x-eov-operation-handler: handlers
-      description: Get all cryptos
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-      security:
-        - deviceSignature: []
-      responses:
-        '200':
-          description: List of cryptos
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/CryptoList'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /ticker:
-    get:
-      x-eov-operation-id: getTicker
-      x-eov-operation-handler: handlers
-      description: Get prices of single crypto
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-        - $ref: '#/components/parameters/cryptoId'
-      security:
-        - deviceSignature: []
-      responses:
-        '200':
-          description: Ticker for crypro
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/Ticker'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /tickers:
-    get:
-      x-eov-operation-id: getTickers
-      x-eov-operation-handler: handlers
-      description: Get prices of one or more crypto
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-        - $ref: '#/components/parameters/cryptoIds'
-      security:
-        - deviceSignature: []
-      responses:
-        '200':
-          description: List of tickers for crypto
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/TickerList'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /tickers/public:
-    get:
-      x-eov-operation-id: getTickersPublic
-      x-eov-operation-handler: handlers
-      description: Get info and price of one or up to 5 crypto
-      parameters:
-        - in: query
-          name: crypto
-          required: true
-          description: List of Crypto IDs
-          style: form
-          explode: false
-          allowReserved: true
-          schema:
-            type: array
-            minItems: 1
-            maxItems: 5
-            items:
-              $ref: '#/components/schemas/CryptoId'
-      security: []
-      responses:
-        '200':
-          description: List of tickers for crypto
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/TickerList'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /fees:
-    get:
-      x-eov-operation-id: getFees
-      x-eov-operation-handler: handlers
-      description: Get transaction fees for coin
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-        - $ref: '#/components/parameters/cryptoId'
-      security:
-        - deviceSignature: []
-      responses:
-        '200':
-          description: Fees for coin
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/FeeList'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /csfee:
-    get:
-      x-eov-operation-id: getCsFee
-      x-eov-operation-handler: handlers
-      description: Get transaction cs fees for coin
-      parameters:
-        - $ref: '#/components/parameters/maybeDeviceId'
-        - $ref: '#/components/parameters/cryptoId'
-      security:
-        - deviceSignature: []
-        - apiKey: []
-      responses:
-        '200':
-          description: Fees for coin
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/CsFee'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /wallet:
-    delete:
-      x-eov-operation-id: removeWallet
-      x-eov-operation-handler: handlers
-      description: Remove Wallet
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-      security:
-        - walletSignature: []
-      responses:
-        '200':
-          $ref: '#/components/responses/SuccessResponse'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /mecto:
-    get:
-      x-eov-operation-id: searchMecto
-      x-eov-operation-handler: handlers
-      description: Find nearby mecto users
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-        - $ref: '#/components/parameters/lat'
-        - $ref: '#/components/parameters/lon'
-      security:
-        - deviceSignature: []
-      responses:
-        '200':
-          description: Nearby mecto users
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/MectoUsers'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    put:
-      x-eov-operation-id: saveMecto
-      x-eov-operation-handler: handlers
-      description: Save mecto
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-      security:
-        - deviceSignature: []
-      requestBody:
-        required: true
-        content:
-          'application/json':
-            schema:
-              $ref: '#/components/schemas/Mecto'
-      responses:
-        '200':
-          $ref: '#/components/responses/SuccessResponse'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    delete:
-      x-eov-operation-id: removeMecto
-      x-eov-operation-handler: handlers
-      description: Remove mecto
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-      security:
-        - deviceSignature: []
-      responses:
-        '200':
-          $ref: '#/components/responses/SuccessResponse'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /storage/{storageName}:
-    get:
-      x-eov-operation-id: getStorage
-      x-eov-operation-handler: handlers
-      description: Get storage
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-        - $ref: '#/components/parameters/storageName'
-      security:
-        - deviceSignature: []
-      responses:
-        '200':
-          description: Storage
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/Storage'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    put:
-      x-eov-operation-id: setStorage
-      x-eov-operation-handler: handlers
-      description: Update storage
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-        - $ref: '#/components/parameters/storageName'
-      security:
-        - deviceSignature: []
-      requestBody:
-        required: true
-        content:
-          'application/json':
-            schema:
-              $ref: '#/components/schemas/Storage'
-      responses:
-        '200':
-          description: Update storage result
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/Storage'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /moonpay/sign:
-    post:
-      x-eov-operation-id: moonpaySign
-      x-eov-operation-handler: handlers
-      description: Sign moonpay urls
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-      security:
-        - deviceSignature: []
-      requestBody:
-        required: true
-        content:
-          'application/json':
-            schema:
-              $ref: '#/components/schemas/MoonpayUrls'
-      responses:
-        '200':
-          description: Signed urls
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/MoonpayUrls'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /openalias:
-    get:
-      x-eov-operation-id: resolveOpenalias
-      x-eov-operation-handler: handlers
-      description: Resolve openalias domain
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-        - in: query
-          name: hostname
-          required: true
-          description: Openalias hostname
-          schema:
-            $ref: '#/components/schemas/Domain'
-      security:
-        - deviceSignature: []
-      responses:
-        '200':
-          description: Storage
-          content:
-            'application/json':
-              schema:
-                type: object
-                additionalProperties: false
-                properties:
-                  address:
-                    $ref: '#/components/schemas/AnyCryptoAddress'
-                  name:
-                    $ref: '#/components/schemas/AnyString256'
-                required:
-                  - address
-                  - name
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /updates:
-    get:
-      x-eov-operation-id: getUpdates
-      x-eov-operation-handler: handlers
-      description: Get all releases
-      security: []
-      responses:
-        '200':
-          description: Releases
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/UpdateList'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /update/{distribution}/{arch}/{version}:
-    get:
-      x-eov-operation-id: getUpdate
-      x-eov-operation-handler: handlers
-      # for electron on windows
-      x-allow-unknown-query-parameters: true
-      description: Get release
-      parameters:
-        - $ref: '#/components/parameters/distribution'
-        - $ref: '#/components/parameters/arch'
-        - $ref: '#/components/parameters/version'
-      security: []
-      responses:
-        '200':
-          description: Release
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/Update'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /update/win/x64/{version}/RELEASES:
-    get:
-      x-eov-operation-id: getWinReleases
-      x-eov-operation-handler: handlers
-      # for electron on windows
-      x-allow-unknown-query-parameters: true
-      description: Get release
-      parameters:
-        - $ref: '#/components/parameters/version'
-      security: []
-      responses:
-        '200':
-          description: Release content
-          content:
-            'text/html':
-              schema:
-                type: string
-                pattern: ^.+ https:\/\/.+ \d+$
-                maxLength: 2048
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /download/{distribution}/{arch}:
-    get:
-      x-eov-operation-id: downloadApp
-      x-eov-operation-handler: handlers
-      description: Get release
-      parameters:
-        - $ref: '#/components/parameters/distribution'
-        - $ref: '#/components/parameters/arch'
-      security: []
-      responses:
-        '200':
-          $ref: '#/components/responses/SuccessResponse'
-        '302':
-          description: Redirect to file
-          content:
-            'text/plain':
-              schema:
-                $ref: '#/components/schemas/RedirectString'
-          headers:
-            Location:
-              schema:
-                $ref: '#/components/schemas/UrlString'
         default:
           $ref: '#/components/responses/GeneralError'
   /domain/address:
@@ -853,7 +231,7 @@ paths:
         '200':
           description: Crypto address
           content:
-            'application/json':
+            application/json:
               schema:
                 type: object
                 additionalProperties: false
@@ -864,33 +242,28 @@ paths:
                   - address
         default:
           $ref: '#/components/responses/GeneralError'
-  /exchange/changelly/params:
+  /download/{distribution}/{arch}:
     get:
-      x-eov-operation-id: changellyParams
+      x-eov-operation-id: downloadApp
       x-eov-operation-handler: handlers
-      description: Get Changelly pair parameters
+      description: Get release
       parameters:
-        - $ref: '#/components/parameters/deviceId'
-        - $ref: '#/components/parameters/cryptoIdFrom'
-        - $ref: '#/components/parameters/cryptoIdTo'
-      security:
-        - deviceSignature: []
+        - $ref: '#/components/parameters/distribution'
+        - $ref: '#/components/parameters/arch'
+      security: []
       responses:
         '200':
-          description: Changelly pair parameters
+          $ref: '#/components/responses/SuccessResponse'
+        '302':
+          description: Redirect to file
           content:
-            'application/json':
+            text/plain:
               schema:
-                type: object
-                additionalProperties: false
-                properties:
-                  minAmount:
-                    $ref: '#/components/schemas/NumberString'
-                  maxAmount:
-                    $ref: '#/components/schemas/NumberString'
-                required:
-                  - minAmount
-                  - maxAmount
+                $ref: '#/components/schemas/RedirectString'
+          headers:
+            Location:
+              schema:
+                $ref: '#/components/schemas/UrlString'
         default:
           $ref: '#/components/responses/GeneralError'
   /exchange/changelly/estimate:
@@ -909,7 +282,7 @@ paths:
         '200':
           description: Changelly estimation
           content:
-            'application/json':
+            application/json:
               schema:
                 type: object
                 additionalProperties: false
@@ -923,30 +296,33 @@ paths:
                   - result
         default:
           $ref: '#/components/responses/GeneralError'
-  /exchange/changelly/validate:
+  /exchange/changelly/params:
     get:
-      x-eov-operation-id: changellyValidateAddress
+      x-eov-operation-id: changellyParams
       x-eov-operation-handler: handlers
-      description: Validate crypto address
+      description: Get Changelly pair parameters
       parameters:
         - $ref: '#/components/parameters/deviceId'
-        - $ref: '#/components/parameters/cryptoId'
-        - $ref: '#/components/parameters/address'
+        - $ref: '#/components/parameters/cryptoIdFrom'
+        - $ref: '#/components/parameters/cryptoIdTo'
       security:
         - deviceSignature: []
       responses:
         '200':
-          description: Changelly address validation
+          description: Changelly pair parameters
           content:
-            'application/json':
+            application/json:
               schema:
                 type: object
                 additionalProperties: false
                 properties:
-                  isValid:
-                    type: boolean
+                  minAmount:
+                    $ref: '#/components/schemas/NumberString'
+                  maxAmount:
+                    $ref: '#/components/schemas/NumberString'
                 required:
-                  - isValid
+                  - minAmount
+                  - maxAmount
         default:
           $ref: '#/components/responses/GeneralError'
   /exchange/changelly/transaction:
@@ -959,7 +335,7 @@ paths:
       requestBody:
         required: true
         content:
-          'application/json':
+          application/json:
             schema:
               type: object
               additionalProperties: false
@@ -985,7 +361,7 @@ paths:
         '200':
           description: Changelly transaction
           content:
-            'application/json':
+            application/json:
               schema:
                 type: object
                 additionalProperties: false
@@ -1018,7 +394,7 @@ paths:
         '200':
           description: Changelly transaction
           content:
-            'application/json':
+            application/json:
               schema:
                 $ref: '#/components/schemas/ChangellyTransaction'
         default:
@@ -1040,12 +416,223 @@ paths:
         '200':
           description: Changelly transactions
           content:
-            'application/json':
+            application/json:
               schema:
                 type: array
                 maxItems: 100
                 items:
                   $ref: '#/components/schemas/ChangellyTransaction'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /exchange/changelly/validate:
+    get:
+      x-eov-operation-id: changellyValidateAddress
+      x-eov-operation-handler: handlers
+      description: Validate crypto address
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cryptoId'
+        - $ref: '#/components/parameters/address'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Changelly address validation
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  isValid:
+                    type: boolean
+                required:
+                  - isValid
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /fees:
+    get:
+      x-eov-operation-id: getFees
+      x-eov-operation-handler: handlers
+      description: Get transaction fees for coin
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cryptoId'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Fees for coin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeeList'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /logout/others:
+    post:
+      x-eov-operation-id: logoutOthers
+      x-eov-operation-handler: handlers
+      description: Logout from others devices
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /mecto:
+    get:
+      x-eov-operation-id: searchMecto
+      x-eov-operation-handler: handlers
+      description: Find nearby mecto users
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/lat'
+        - $ref: '#/components/parameters/lon'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Nearby mecto users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MectoUsers'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    put:
+      x-eov-operation-id: saveMecto
+      x-eov-operation-handler: handlers
+      description: Save mecto
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - deviceSignature: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Mecto'
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    delete:
+      x-eov-operation-id: removeMecto
+      x-eov-operation-handler: handlers
+      description: Remove mecto
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /moonpay/sign:
+    post:
+      x-eov-operation-id: moonpaySign
+      x-eov-operation-handler: handlers
+      description: Sign moonpay urls
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - deviceSignature: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MoonpayUrls'
+      responses:
+        '200':
+          description: Signed urls
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoonpayUrls'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /openalias:
+    get:
+      x-eov-operation-id: resolveOpenalias
+      x-eov-operation-handler: handlers
+      description: Resolve openalias domain
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - in: query
+          name: hostname
+          required: true
+          description: Openalias hostname
+          schema:
+            $ref: '#/components/schemas/Domain'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Storage
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  address:
+                    $ref: '#/components/schemas/AnyCryptoAddress'
+                  name:
+                    $ref: '#/components/schemas/AnyString256'
+                required:
+                  - address
+                  - name
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /platform:
+    delete:
+      x-eov-operation-id: removePlatformAuthenticator
+      x-eov-operation-handler: handlers
+      description: Remove Authenticator
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - walletSignature: []
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /platform/attestation:
+    get:
+      x-eov-operation-id: platformAttestationOptions
+      x-eov-operation-handler: handlers
+      description: Get Attestation Options for Platform Authenticator
+      security:
+        - walletSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/AttestationOptionsResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    post:
+      x-eov-operation-id: platformAttestationVerify
+      x-eov-operation-handler: handlers
+      description: Verify Attestation for Platform Authenticator
+      security:
+        - walletSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      requestBody:
+        $ref: '#/components/requestBodies/Attestation'
+      responses:
+        '200':
+          $ref: '#/components/responses/AttestationResponse'
         default:
           $ref: '#/components/responses/GeneralError'
   /ramps:
@@ -1064,7 +651,7 @@ paths:
         '200':
           description: Ramps
           content:
-            'application/json':
+            application/json:
               schema:
                 type: object
                 additionalProperties: false
@@ -1078,145 +665,461 @@ paths:
                   - sell
         default:
           $ref: '#/components/responses/GeneralError'
-  /btcdirect/buy:
-    get:
-      x-eov-operation-id: getBtcDirectBuyWidget
+  /register:
+    post:
+      x-eov-operation-id: register
       x-eov-operation-handler: handlers
-      description: Get BTC Direct buy widget
+      description: Register new device
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                walletId:
+                  $ref: '#/components/schemas/Hex64String'
+                deviceId:
+                  $ref: '#/components/schemas/Hex64String'
+                pinHash:
+                  $ref: '#/components/schemas/Hex64String'
+              required:
+                - walletId
+                - deviceId
+                - pinHash
+      responses:
+        '201':
+          description: Registration Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/PublicToken'
+                  - $ref: '#/components/schemas/PrivateToken'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /settings:
+    get:
+      x-eov-operation-id: getSettings
+      x-eov-operation-handler: handlers
+      description: Get user Settings
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: User Settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    patch:
+      x-eov-operation-id: setSettings
+      x-eov-operation-handler: handlers
+      description: Update user Settings
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - walletSignature: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Settings'
+      responses:
+        '200':
+          description: Update user Settings result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /storage/{storageName}:
+    get:
+      x-eov-operation-id: getStorage
+      x-eov-operation-handler: handlers
+      description: Get storage
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/storageName'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Storage
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Storage'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    put:
+      x-eov-operation-id: setStorage
+      x-eov-operation-handler: handlers
+      description: Update storage
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/storageName'
+      security:
+        - deviceSignature: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Storage'
+      responses:
+        '200':
+          description: Update storage result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Storage'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /ticker:
+    get:
+      x-eov-operation-id: getTicker
+      x-eov-operation-handler: handlers
+      description: Get prices of single crypto
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cryptoId'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Ticker for crypro
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticker'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /tickers:
+    get:
+      x-eov-operation-id: getTickers
+      x-eov-operation-handler: handlers
+      description: Get prices of one or more crypto
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cryptoIds'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: List of tickers for crypto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TickerList'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /tickers/public:
+    get:
+      x-eov-operation-id: getTickersPublic
+      x-eov-operation-handler: handlers
+      description: Get info and price of one or up to 5 crypto
       parameters:
         - in: query
-          name: query
-          description: Any query params
+          name: crypto
+          required: true
+          description: List of Crypto IDs
+          style: form
+          explode: false
+          allowReserved: true
           schema:
-            type: object
-            additionalProperties: true
+            type: array
+            minItems: 1
+            maxItems: 5
+            items:
+              $ref: '#/components/schemas/CryptoId'
       security: []
       responses:
         '200':
-          description: BTC Direct buy widget
+          description: List of tickers for crypto
           content:
-            'text/html':
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TickerList'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /token/private:
+    get:
+      x-eov-operation-id: tokenPrivate
+      x-eov-operation-handler: handlers
+      description: Get Private Token
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      responses:
+        '200':
+          description: Private Token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrivateToken'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /token/private/crossplatform:
+    get:
+      x-eov-operation-id: tokenPrivateCrossplatformOptions
+      x-eov-operation-handler: handlers
+      description: Get Assertion Options
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/AssertionOptionsResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    post:
+      x-eov-operation-id: tokenPrivateCrossplatformVerify
+      x-eov-operation-handler: handlers
+      description: Verify Assertion
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      requestBody:
+        $ref: '#/components/requestBodies/Assertion'
+      responses:
+        '200':
+          description: Private Token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrivateToken'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /token/private/pin:
+    post:
+      x-eov-operation-id: tokenPrivatePinVerify
+      x-eov-operation-handler: handlers
+      description: Get public token
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      requestBody:
+        $ref: '#/components/requestBodies/PIN'
+      responses:
+        '200':
+          description: Auth Result
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/PrivateToken'
+                  - $ref: '#/components/schemas/AssertionOptions'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /token/private/platform:
+    get:
+      x-eov-operation-id: tokenPrivatePlatformOptions
+      x-eov-operation-handler: handlers
+      description: Get Assertion Options
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/AssertionOptionsResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    post:
+      x-eov-operation-id: tokenPrivatePlatformVerify
+      x-eov-operation-handler: handlers
+      description: Verify Assertion
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      requestBody:
+        $ref: '#/components/requestBodies/Assertion'
+      responses:
+        '200':
+          description: Auth Result
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/PrivateToken'
+                  - $ref: '#/components/schemas/AssertionOptions'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /token/public/pin:
+    post:
+      x-eov-operation-id: tokenPublicPinVerify
+      x-eov-operation-handler: handlers
+      description: Get public token
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security: []
+      requestBody:
+        $ref: '#/components/requestBodies/PIN'
+      responses:
+        '200':
+          description: Public Token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicToken'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /token/public/platform:
+    get:
+      x-eov-operation-id: tokenPublicPlatformOptions
+      x-eov-operation-handler: handlers
+      description: Get Assertion Options
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security: []
+      responses:
+        '200':
+          $ref: '#/components/responses/AssertionOptionsResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    post:
+      x-eov-operation-id: tokenPublicPlatformVerify
+      x-eov-operation-handler: handlers
+      description: Verify Assertion
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security: []
+      requestBody:
+        $ref: '#/components/requestBodies/Assertion'
+      responses:
+        '200':
+          $ref: '#/components/responses/AssertionResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /update/{distribution}/{arch}/{version}:
+    get:
+      x-eov-operation-id: getUpdate
+      x-eov-operation-handler: handlers
+      x-allow-unknown-query-parameters: true
+      description: Get release
+      parameters:
+        - $ref: '#/components/parameters/distribution'
+        - $ref: '#/components/parameters/arch'
+        - $ref: '#/components/parameters/version'
+      security: []
+      responses:
+        '200':
+          description: Release
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Update'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /update/win/x64/{version}/RELEASES:
+    get:
+      x-eov-operation-id: getWinReleases
+      x-eov-operation-handler: handlers
+      x-allow-unknown-query-parameters: true
+      description: Get release
+      parameters:
+        - $ref: '#/components/parameters/version'
+      security: []
+      responses:
+        '200':
+          description: Release content
+          content:
+            text/html:
               schema:
                 type: string
+                pattern: ^.+ https:\/\/.+ \d+$
+                maxLength: 2048
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /updates:
+    get:
+      x-eov-operation-id: getUpdates
+      x-eov-operation-handler: handlers
+      description: Get all releases
+      security: []
+      responses:
+        '200':
+          description: Releases
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateList'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /username:
+    put:
+      x-eov-operation-id: setUsername
+      x-eov-operation-handler: handlers
+      description: Update username
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - deviceSignature: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsernameObject'
+      responses:
+        '200':
+          description: Update username result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsernameObject'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /wallet:
+    delete:
+      x-eov-operation-id: removeWallet
+      x-eov-operation-handler: handlers
+      description: Remove Wallet
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - walletSignature: []
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
         default:
           $ref: '#/components/responses/GeneralError'
 components:
   schemas:
-    Hex64String:
-      type: string
-      pattern: ^[a-f0-9]{64}$
-      maxLength: 64
-    Hex128String:
-      type: string
-      pattern: ^[a-f0-9]{128}$
-      maxLength: 128
-    Base64String:
-      type: string
-      pattern: ^(?:[A-Za-z\d+\/]{4})*?(?:[A-Za-z\d+\/]{2}(?:==)?|[A-Za-z\d+\/]{3}=?)?$
-      maxLength: 2097152 # 2mb
-      nullable: true
-    Base64UrlString:
-      type: string
-      pattern: ^[A-Za-z0-9_-]*$
-      maxLength: 2097152 # 2mb
-      nullable: true
-    UrlString:
-      type: string
-      pattern: ^(http|https):\/\/.+$
-      maxLength: 2048
-    RedirectString:
-      type: string
-      pattern: ^Found\. Redirecting to (http|https):\/\/.+$
-      maxLength: 2048
-    ISODateString:
-      type: string
-      pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$
-      maxLength: 24
-    UInt64:
-      type: integer
-      format: int64
-      minimum: 0
-      maximum: 9007199254740991
-    Latitude:
-      type: number
-      format: float
-      minimum: -90
-      maximum: 90
-    Longitude:
-      type: number
-      format: float
-      minimum: -180
-      maximum: 180
-    AvatarId:
-      type: string
-      pattern: ^(gravatar|identicon):.+$
-      maxLength: 256
     AnyCryptoAddress:
       type: string
       pattern: ^.{1,256}$
       maxLength: 256
-    NullableCryptoAddress:
-      type: string
-      pattern: ^.{0,256}$
-      maxLength: 256
-      nullable: true
     AnyString256:
       type: string
       pattern: ^.{0,256}$
       maxLength: 256
-    NullableString256:
-      type: string
-      pattern: ^.{0,256}$
-      maxLength: 256
-      nullable: true
-    Distribution:
-      type: string
-      pattern: ^[a-z0-9-]+$
-      maxLength: 64
     Arch:
       type: string
       pattern: ^(any|x64)$
       maxLength: 64
-    Version:
-      type: string
-      pattern: ^v.+$
-      maxLength: 64
-    Price:
-      type: number
-      format: float
-      minimum: 0
-      maximum: 9007199254740991
-    NumberString:
-      type: string
-      pattern: ^[0-9]*(\.[0-9]+)?$
-      maxLength: 128
-    CryptoAmount:
-      type: number
-      format: float
-      minimum: 0
-      maximum: 9007199254740991
-    PublicToken:
-      type: object
-      properties:
-        publicToken:
-          $ref: '#/components/schemas/Hex128String'
-      required:
-        - publicToken
-    PrivateToken:
-      type: object
-      properties:
-        privateToken:
-          $ref: '#/components/schemas/Hex128String'
-      required:
-        - privateToken
-    AttestationOptions:
+    AssertionOptions:
       type: object
       properties:
         challenge:
           $ref: '#/components/schemas/Base64UrlString'
       required:
         - challenge
-    AssertionOptions:
+    AttestationOptions:
       type: object
       properties:
         challenge:
@@ -1239,32 +1142,64 @@ components:
         - authenticatorData
         - clientDataJSON
         - signature
-    PublicKeyCredentialType:
+    AvatarId:
       type: string
-      pattern: ^public-key$
-      maxLength: 10
-    Username:
+      pattern: ^(gravatar|identicon):.+$
+      maxLength: 256
+    Base64String:
       type: string
-      pattern: ^[a-z0-9-]+$
-      maxLength: 64
-    UsernameObject:
+      pattern: ^(?:[A-Za-z\d+\/]{4})*?(?:[A-Za-z\d+\/]{2}(?:==)?|[A-Za-z\d+\/]{3}=?)?$
+      maxLength: 2097152
+      nullable: true
+    Base64UrlString:
+      type: string
+      pattern: ^[A-Za-z0-9_-]*$
+      maxLength: 2097152
+      nullable: true
+    ChangellyTransaction:
       type: object
       additionalProperties: false
       properties:
-        username:
-          $ref: '#/components/schemas/Username'
+        id:
+          $ref: '#/components/schemas/AnyString256'
+        trackUrl:
+          $ref: '#/components/schemas/UrlString'
+        status:
+          $ref: '#/components/schemas/AnyString256'
+        amountTo:
+          $ref: '#/components/schemas/NumberString'
+        amountExpectedTo:
+          $ref: '#/components/schemas/NumberString'
+        amountFrom:
+          $ref: '#/components/schemas/NumberString'
+        amountExpectedFrom:
+          $ref: '#/components/schemas/NumberString'
+        currencyFrom:
+          $ref: '#/components/schemas/AnyString256'
+        currencyTo:
+          $ref: '#/components/schemas/AnyString256'
+        createdAt:
+          $ref: '#/components/schemas/ISODateString'
+        payinAddress:
+          $ref: '#/components/schemas/AnyCryptoAddress'
+        payinHash:
+          $ref: '#/components/schemas/AnyString256'
+        payoutAddress:
+          $ref: '#/components/schemas/AnyCryptoAddress'
+        payoutHashLink:
+          $ref: '#/components/schemas/UrlString'
+        payoutHash:
+          $ref: '#/components/schemas/AnyString256'
+        refundAddress:
+          $ref: '#/components/schemas/AnyCryptoAddress'
       required:
-        - username
-    Settings:
-      type: object
-      additionalProperties: false
-      properties:
-        1faPrivate:
-          description: Authorization for private token
-          type: boolean
-        hasAuthenticators:
-          description: Has Cross-Platform Authenticators
-          type: boolean
+        - status
+        - amountTo
+    CryptoAmount:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 9007199254740991
     CryptoId:
       type: string
       pattern: ^.+@.+$
@@ -1313,50 +1248,6 @@ components:
           - name
           - decimals
           - logo
-    Ticker:
-      type: object
-      additionalProperties: false
-      properties:
-        _id:
-          $ref: '#/components/schemas/CryptoId'
-        prices:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/Price'
-      required:
-        - _id
-        - prices
-    TickerList:
-      type: array
-      maxItems: 1000
-      items:
-        $ref: '#/components/schemas/Ticker'
-    Fee:
-      type: object
-      additionalProperties: false
-      properties:
-        name:
-          type: string
-          pattern: ^(minimum|default|fastest)$
-          maxLength: 64
-        value:
-          $ref: '#/components/schemas/UInt64'
-        default:
-          type: boolean
-      required:
-        - name
-        - value
-    FeeList:
-      type: object
-      additionalProperties: false
-      properties:
-        items:
-          type: array
-          maxItems: 5
-          items:
-            $ref: '#/components/schemas/Fee'
-      required:
-        - items
     CsFee:
       type: object
       additionalProperties: false
@@ -1392,6 +1283,62 @@ components:
         - addresses
         - whitelist
         - skipMinFee
+    Distribution:
+      type: string
+      pattern: ^[a-z0-9-]+$
+      maxLength: 64
+    Domain:
+      type: string
+      pattern: ^.+\..+$
+      maxLength: 256
+    Fee:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          pattern: ^(minimum|default|fastest)$
+          maxLength: 64
+        value:
+          $ref: '#/components/schemas/UInt64'
+        default:
+          type: boolean
+      required:
+        - name
+        - value
+    FeeList:
+      type: object
+      additionalProperties: false
+      properties:
+        items:
+          type: array
+          maxItems: 5
+          items:
+            $ref: '#/components/schemas/Fee'
+      required:
+        - items
+    Hex128String:
+      type: string
+      pattern: ^[a-f0-9]{128}$
+      maxLength: 128
+    Hex64String:
+      type: string
+      pattern: ^[a-f0-9]{64}$
+      maxLength: 64
+    ISODateString:
+      type: string
+      pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$
+      maxLength: 24
+    Latitude:
+      type: number
+      format: float
+      minimum: -90
+      maximum: 90
+    Longitude:
+      type: number
+      format: float
+      minimum: -180
+      maximum: 180
     Mecto:
       type: object
       additionalProperties: false
@@ -1429,14 +1376,6 @@ components:
           - username
           - avatarId
           - address
-    Storage:
-      type: object
-      additionalProperties: false
-      properties:
-        data:
-          $ref: '#/components/schemas/Base64String'
-      required:
-        - data
     MoonpayUrls:
       type: object
       additionalProperties: false
@@ -1447,6 +1386,107 @@ components:
             $ref: '#/components/schemas/UrlString'
           minItems: 1
           maxItems: 5
+    NullableCryptoAddress:
+      type: string
+      pattern: ^.{0,256}$
+      maxLength: 256
+      nullable: true
+    NullableString256:
+      type: string
+      pattern: ^.{0,256}$
+      maxLength: 256
+      nullable: true
+    NumberString:
+      type: string
+      pattern: ^[0-9]*(\.[0-9]+)?$
+      maxLength: 128
+    Price:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 9007199254740991
+    PrivateToken:
+      type: object
+      properties:
+        privateToken:
+          $ref: '#/components/schemas/Hex128String'
+      required:
+        - privateToken
+    PublicKeyCredentialType:
+      type: string
+      pattern: ^public-key$
+      maxLength: 10
+    PublicToken:
+      type: object
+      properties:
+        publicToken:
+          $ref: '#/components/schemas/Hex128String'
+      required:
+        - publicToken
+    Ramp:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          $ref: '#/components/schemas/AnyString256'
+        svg:
+          $ref: '#/components/schemas/AnyString256'
+        url:
+          $ref: '#/components/schemas/UrlString'
+      required:
+        - name
+        - svg
+        - url
+    RampList:
+      type: array
+      maxItems: 50
+      items:
+        $ref: '#/components/schemas/Ramp'
+    RedirectString:
+      type: string
+      pattern: ^Found\. Redirecting to (http|https):\/\/.+$
+      maxLength: 2048
+    Settings:
+      type: object
+      additionalProperties: false
+      properties:
+        1faPrivate:
+          description: Authorization for private token
+          type: boolean
+        hasAuthenticators:
+          description: Has Cross-Platform Authenticators
+          type: boolean
+    Storage:
+      type: object
+      additionalProperties: false
+      properties:
+        data:
+          $ref: '#/components/schemas/Base64String'
+      required:
+        - data
+    Ticker:
+      type: object
+      additionalProperties: false
+      properties:
+        _id:
+          $ref: '#/components/schemas/CryptoId'
+        prices:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Price'
+      required:
+        - _id
+        - prices
+    TickerList:
+      type: array
+      maxItems: 1000
+      items:
+        $ref: '#/components/schemas/Ticker'
+    UInt64:
+      type: integer
+      format: int64
+      minimum: 0
+      maximum: 9007199254740991
     Update:
       type: object
       additionalProperties: false
@@ -1474,99 +1514,32 @@ components:
       maxItems: 20
       items:
         $ref: '#/components/schemas/Update'
-    Domain:
+    UrlString:
       type: string
-      pattern: ^.+\..+$
-      maxLength: 256
-    ChangellyTransaction:
+      pattern: ^(http|https):\/\/.+$
+      maxLength: 2048
+    Username:
+      type: string
+      pattern: ^[a-z0-9-]+$
+      maxLength: 64
+    UsernameObject:
       type: object
       additionalProperties: false
       properties:
-        id:
-          $ref: '#/components/schemas/AnyString256'
-        trackUrl:
-          $ref: '#/components/schemas/UrlString'
-        status:
-          $ref: '#/components/schemas/AnyString256'
-        amountTo:
-          $ref: '#/components/schemas/NumberString'
-        amountExpectedTo:
-          $ref: '#/components/schemas/NumberString'
-        amountFrom:
-          $ref: '#/components/schemas/NumberString'
-        amountExpectedFrom:
-          $ref: '#/components/schemas/NumberString'
-        currencyFrom:
-          $ref: '#/components/schemas/AnyString256'
-        currencyTo:
-          $ref: '#/components/schemas/AnyString256'
-        createdAt:
-          $ref: '#/components/schemas/ISODateString'
-        payinAddress:
-          $ref: '#/components/schemas/AnyCryptoAddress'
-        payinHash:
-          $ref: '#/components/schemas/AnyString256'
-        payoutAddress:
-          $ref: '#/components/schemas/AnyCryptoAddress'
-        payoutHashLink:
-          $ref: '#/components/schemas/UrlString'
-        payoutHash:
-          $ref: '#/components/schemas/AnyString256'
-        refundAddress:
-          $ref: '#/components/schemas/AnyCryptoAddress'
+        username:
+          $ref: '#/components/schemas/Username'
       required:
-        - status
-        - amountTo
-    Ramp:
-      type: object
-      additionalProperties: false
-      properties:
-        name:
-          $ref: '#/components/schemas/AnyString256'
-        svg:
-          $ref: '#/components/schemas/AnyString256'
-        url:
-          $ref: '#/components/schemas/UrlString'
-      required:
-        - name
-        - svg
-        - url
-    RampList:
-      type: array
-      maxItems: 50
-      items:
-        $ref: '#/components/schemas/Ramp'
+        - username
+    Version:
+      type: string
+      pattern: ^v.+$
+      maxLength: 64
   requestBodies:
-    PIN:
-      description: PIN Hash
-      required: true
-      content:
-        'application/json':
-          schema:
-            type: object
-            additionalProperties: false
-            properties:
-              pinHash:
-                $ref: '#/components/schemas/Hex64String'
-            required:
-              - pinHash
-    Attestation:
-      description: Attestation Request
-      required: true
-      content:
-        'application/json':
-          schema:
-            type: object
-            properties:
-              id:
-                $ref: '#/components/schemas/Base64UrlString'
-            required:
-              - id
     Assertion:
       description: Assertion Request
       required: true
       content:
-        'application/json':
+        application/json:
           schema:
             type: object
             additionalProperties: false
@@ -1584,62 +1557,32 @@ components:
               - rawId
               - response
               - type
+    Attestation:
+      description: Attestation Request
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/Base64UrlString'
+            required:
+              - id
+    PIN:
+      description: PIN Hash
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: false
+            properties:
+              pinHash:
+                $ref: '#/components/schemas/Hex64String'
+            required:
+              - pinHash
   parameters:
-    deviceId:
-      in: query
-      name: id
-      required: true
-      description: Device ID
-      schema:
-        $ref: '#/components/schemas/Hex64String'
-    maybeDeviceId:
-      in: query
-      name: id
-      required: false
-      description: Optional Device ID
-      schema:
-        $ref: '#/components/schemas/Hex64String'
-    cryptoId:
-      in: query
-      name: crypto
-      required: true
-      description: Crypto ID
-      allowReserved: true
-      schema:
-        $ref: '#/components/schemas/CryptoId'
-    cryptoIdFrom:
-      in: query
-      name: from
-      required: true
-      description: Crypto ID
-      allowReserved: true
-      schema:
-        $ref: '#/components/schemas/CryptoId'
-    cryptoIdTo:
-      in: query
-      name: to
-      required: true
-      description: Crypto ID
-      allowReserved: true
-      schema:
-        $ref: '#/components/schemas/CryptoId'
-    cryptoIds:
-      in: query
-      name: crypto
-      required: true
-      description: List of Crypto IDs
-      style: form
-      explode: false
-      allowReserved: true
-      schema:
-        $ref: '#/components/schemas/CryptoIdList'
-    amount:
-      in: query
-      name: amount
-      required: true
-      description: Amount of crypto
-      schema:
-        $ref: '#/components/schemas/CryptoAmount'
     address:
       in: query
       name: address
@@ -1647,34 +1590,20 @@ components:
       description: Crypto address
       schema:
         $ref: '#/components/schemas/AnyCryptoAddress'
-    changellyTransactionId:
-      in: path
-      name: transactionId
-      description: Changelly transaction id
+    amount:
+      in: query
+      name: amount
       required: true
+      description: Amount of crypto
       schema:
-        $ref: '#/components/schemas/AnyString256'
-    maybeChangellyTransactionId:
-      in: query
-      name: transaction
-      description: Changelly transaction id (optional)
-      required: false
+        $ref: '#/components/schemas/CryptoAmount'
+    arch:
+      in: path
+      name: arch
       schema:
-        $ref: '#/components/schemas/AnyString256'
-    maybeChangellyCurrency:
-      in: query
-      name: currency
-      description: Changelly currency (optional)
-      required: false
-      schema:
-        $ref: '#/components/schemas/AnyString256'
-    maybeChangellyAddress:
-      in: query
-      name: address
-      description: Changelly address (optional)
-      required: false
-      schema:
-        $ref: '#/components/schemas/AnyCryptoAddress'
+        $ref: '#/components/schemas/Arch'
+      required: true
+      description: App architecture
     changellyLimit:
       in: query
       name: limit
@@ -1695,6 +1624,71 @@ components:
         minimum: 0
         maximum: 100
         default: 0
+    changellyTransactionId:
+      in: path
+      name: transactionId
+      description: Changelly transaction id
+      required: true
+      schema:
+        $ref: '#/components/schemas/AnyString256'
+    countryCode:
+      in: query
+      name: countryCode
+      schema:
+        type: string
+        pattern: ^[A-Z]{2}$
+        minLength: 2
+        maxLength: 2
+      required: true
+      description: ISO 3166-1 alpha-2
+    cryptoId:
+      in: query
+      name: crypto
+      required: true
+      description: Crypto ID
+      allowReserved: true
+      schema:
+        $ref: '#/components/schemas/CryptoId'
+    cryptoIdFrom:
+      in: query
+      name: from
+      required: true
+      description: Crypto ID
+      allowReserved: true
+      schema:
+        $ref: '#/components/schemas/CryptoId'
+    cryptoIds:
+      in: query
+      name: crypto
+      required: true
+      description: List of Crypto IDs
+      style: form
+      explode: false
+      allowReserved: true
+      schema:
+        $ref: '#/components/schemas/CryptoIdList'
+    cryptoIdTo:
+      in: query
+      name: to
+      required: true
+      description: Crypto ID
+      allowReserved: true
+      schema:
+        $ref: '#/components/schemas/CryptoId'
+    deviceId:
+      in: query
+      name: id
+      required: true
+      description: Device ID
+      schema:
+        $ref: '#/components/schemas/Hex64String'
+    distribution:
+      in: path
+      name: distribution
+      schema:
+        $ref: '#/components/schemas/Distribution'
+      required: true
+      description: App distribution
     lat:
       in: query
       name: lat
@@ -1709,6 +1703,34 @@ components:
       description: Longitude
       schema:
         $ref: '#/components/schemas/Longitude'
+    maybeChangellyAddress:
+      in: query
+      name: address
+      description: Changelly address (optional)
+      required: false
+      schema:
+        $ref: '#/components/schemas/AnyCryptoAddress'
+    maybeChangellyCurrency:
+      in: query
+      name: currency
+      description: Changelly currency (optional)
+      required: false
+      schema:
+        $ref: '#/components/schemas/AnyString256'
+    maybeChangellyTransactionId:
+      in: query
+      name: transaction
+      description: Changelly transaction id (optional)
+      required: false
+      schema:
+        $ref: '#/components/schemas/AnyString256'
+    maybeDeviceId:
+      in: query
+      name: id
+      required: false
+      description: Optional Device ID
+      schema:
+        $ref: '#/components/schemas/Hex64String'
     storageName:
       in: path
       name: storageName
@@ -1718,20 +1740,6 @@ components:
         maxLength: 64
       required: true
       description: Storage name
-    distribution:
-      in: path
-      name: distribution
-      schema:
-        $ref: '#/components/schemas/Distribution'
-      required: true
-      description: App distribution
-    arch:
-      in: path
-      name: arch
-      schema:
-        $ref: '#/components/schemas/Arch'
-      required: true
-      description: App architecture
     version:
       in: path
       name: version
@@ -1739,51 +1747,29 @@ components:
         $ref: '#/components/schemas/Version'
       required: true
       description: App version
-    countryCode:
-      in: query
-      name: countryCode
-      schema:
-        type: string
-        pattern: ^[A-Z]{2}$
-        minLength: 2
-        maxLength: 2
-      required: true
-      description: ISO 3166-1 alpha-2
   responses:
-    AttestationOptionsResponse:
-      description: Attestation Options
-      content:
-        'application/json':
-          schema:
-            $ref: '#/components/schemas/AttestationOptions'
     AssertionOptionsResponse:
       description: Assertion Options
       content:
-        'application/json':
+        application/json:
           schema:
             $ref: '#/components/schemas/AssertionOptions'
-    AttestationResponse:
-      description: Success Attestation Result
-      content:
-        'application/json':
-          schema:
-            type: object
-            additionalProperties: false
-            properties:
-              success:
-                type: boolean
-            required:
-              - success
     AssertionResponse:
       description: Success Assertion Result
       content:
-        'application/json':
+        application/json:
           schema:
             $ref: '#/components/schemas/PublicToken'
-    SuccessResponse:
-      description: Success Response
+    AttestationOptionsResponse:
+      description: Attestation Options
       content:
-        'application/json':
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AttestationOptions'
+    AttestationResponse:
+      description: Success Attestation Result
+      content:
+        application/json:
           schema:
             type: object
             additionalProperties: false
@@ -1795,7 +1781,7 @@ components:
     GeneralError:
       description: Unexpected error
       content:
-        'application/json':
+        application/json:
           schema:
             type: object
             additionalProperties: false
@@ -1812,7 +1798,23 @@ components:
                 type: string
                 pattern: ^.{0,16384}$
                 maxLength: 16384
+    SuccessResponse:
+      description: Success Response
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: false
+            properties:
+              success:
+                type: boolean
+            required:
+              - success
   securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: apikey
     deviceSignature:
       type: apiKey
       in: header
@@ -1821,7 +1823,3 @@ components:
       type: apiKey
       in: header
       name: Signature
-    apiKey:
-      type: apiKey
-      in: query
-      name: apikey
