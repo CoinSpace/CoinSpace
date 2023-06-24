@@ -1,6 +1,6 @@
 import createError from 'http-errors';
 import semver from 'semver';
-import wallets from '../wallets.js';
+import wallets from './wallets.js';
 import cryptos from '../cryptos.js';
 import fee from '../fee.js';
 import csFee from '../csFee.js';

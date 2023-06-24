@@ -21,13 +21,10 @@ paths:
               type: 'object'
               properties:
                 walletId:
-                  description: Wallet ID
                   $ref: '#/components/schemas/Hex64String'
                 deviceId:
-                  description: Device ID
                   $ref: '#/components/schemas/Hex64String'
                 pinHash:
-                  description: PIN Hash
                   $ref: '#/components/schemas/Hex64String'
               required:
                 - walletId
@@ -946,7 +943,6 @@ components:
             type: 'object'
             properties:
               pinHash:
-                description: PIN Hash
                 $ref: '#/components/schemas/Hex64String'
             required:
               - pinHash

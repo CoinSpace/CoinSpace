@@ -2,7 +2,7 @@ import { fileURLToPath } from 'url';
 import express from 'express';
 import OpenApiValidator from 'express-openapi-validator';
 import { verifyReq } from '../utils.js';
-import wallets from '../wallets.js';
+import wallets from '../v3/wallets.js';
 import esmresolver from '../esmresolver.js';
 
 const { API_KEY } = process.env;

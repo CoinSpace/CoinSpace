@@ -7,13 +7,13 @@ import {
   generateAssertionOptions,
   verifyAssertionResponse,
 } from '@simplewebauthn/server';
-import db from './db.js';
+import db from '../db.js';
 import {
   generateChallenge,
   generateUser,
   mapAuthenticator,
-} from './utils.js';
-const pkg = JSON.parse(await fs.readFile(new URL('../../package.json', import.meta.url)));
+} from '../utils.js';
+const pkg = JSON.parse(await fs.readFile(new URL('../../../package.json', import.meta.url)));
 
 const COLLECTION = 'wallets';
 const MAX_FAILED_ATTEMPTS = 3;

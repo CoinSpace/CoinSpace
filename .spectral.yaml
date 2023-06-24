@@ -1,0 +1,25 @@
+extends: [[spectral:oas, all]]
+rules:
+  operation-operationId: off
+  operation-tags: off
+  info-contact: off
+  info-description: off
+  info-license: off
+  license-url: off
+  openapi-tags: off
+  x-eov-operation-id:
+    description: x-eov-operation-id should be
+    message: Operation has missing "x-eov-operation-id" property
+    severity: error
+    given: $.paths.*.*
+    then:
+      field: x-eov-operation-id
+      function: truthy
+  x-eov-operation-handler:
+    description: x-eov-operation-handler should be
+    message: Operation has missing "x-eov-operation-handler" property
+    severity: error
+    given: $.paths.*.*
+    then:
+      field: x-eov-operation-handler
+      function: truthy

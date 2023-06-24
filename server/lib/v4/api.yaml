@@ -140,7 +140,6 @@ components:
       additionalProperties: false
       properties:
         data:
-          description: Storage
           $ref: '#/components/schemas/Base64String'
       required:
         - data

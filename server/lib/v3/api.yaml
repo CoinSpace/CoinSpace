@@ -23,13 +23,10 @@ paths:
               additionalProperties: false
               properties:
                 walletId:
-                  description: Wallet ID
                   $ref: '#/components/schemas/Hex64String'
                 deviceId:
-                  description: Device ID
                   $ref: '#/components/schemas/Hex64String'
                 pinHash:
-                  description: PIN Hash
                   $ref: '#/components/schemas/Hex64String'
               required:
                 - walletId
@@ -401,7 +398,6 @@ paths:
                 additionalProperties: false
                 properties:
                   data:
-                    description: User details
                     $ref: '#/components/schemas/Base64String'
                 required:
                   - data
@@ -424,7 +420,6 @@ paths:
               additionalProperties: false
               properties:
                 data:
-                  description: User details
                   $ref: '#/components/schemas/Base64String'
               required:
                 - data
@@ -1091,6 +1086,7 @@ paths:
       parameters:
         - in: query
           name: query
+          description: Any query params
           schema:
             type: object
             additionalProperties: true
@@ -1438,7 +1434,6 @@ components:
       additionalProperties: false
       properties:
         data:
-          description: Storage
           $ref: '#/components/schemas/Base64String'
       required:
         - data
@@ -1552,7 +1547,6 @@ components:
             additionalProperties: false
             properties:
               pinHash:
-                description: PIN Hash
                 $ref: '#/components/schemas/Hex64String'
             required:
               - pinHash
@@ -1656,30 +1650,35 @@ components:
     changellyTransactionId:
       in: path
       name: transactionId
+      description: Changelly transaction id
       required: true
       schema:
         $ref: '#/components/schemas/AnyString256'
     maybeChangellyTransactionId:
       in: query
       name: transaction
+      description: Changelly transaction id (optional)
       required: false
       schema:
         $ref: '#/components/schemas/AnyString256'
     maybeChangellyCurrency:
       in: query
       name: currency
+      description: Changelly currency (optional)
       required: false
       schema:
         $ref: '#/components/schemas/AnyString256'
     maybeChangellyAddress:
       in: query
       name: address
+      description: Changelly address (optional)
       required: false
       schema:
         $ref: '#/components/schemas/AnyCryptoAddress'
     changellyLimit:
       in: query
       name: limit
+      description: Changelly limit (optional)
       required: false
       schema:
         type: integer
@@ -1689,6 +1688,7 @@ components:
     changellyOffset:
       in: query
       name: offset
+      description: Changelly offset (optional)
       required: false
       schema:
         type: integer
