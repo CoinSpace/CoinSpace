@@ -2,17 +2,18 @@ import fs from 'fs/promises';
 import crypto from 'crypto';
 import createError from 'http-errors';
 import {
-  generateAttestationOptions,
-  verifyAttestationResponse,
-  generateAssertionOptions,
-  verifyAssertionResponse,
-} from '@simplewebauthn/server';
-import db from '../db.js';
+  generateRegistrationOptions,
+  verifyRegistrationResponse,
+  generateAuthenticationOptions,
+  verifyAuthenticationResponse,
+} from '@simplewebauthn/server-7.3.1';
+import db from './db.js';
 import {
   generateChallenge,
   generateUser,
-} from '../utils.js';
-const pkg = JSON.parse(await fs.readFile(new URL('../../../package.json', import.meta.url)));
+  mapAuthenticator,
+} from './utils.js';
+const pkg = JSON.parse(await fs.readFile(new URL('../../package.json', import.meta.url)));
 
 const COLLECTION = 'wallets';
 const MAX_FAILED_ATTEMPTS = 3;
@@ -48,12 +49,11 @@ const fidoAlgorithmIDs = [
   -259,
 ];
 
-
 async function register(walletId, deviceId, pinHash) {
   const wallets = db.collection(COLLECTION);
 
-  const publicToken = crypto.randomBytes(64).toString('hex');
-  const privateToken = crypto.randomBytes(64).toString('hex');
+  const deviceToken = crypto.randomBytes(64).toString('hex');
+  const walletToken = crypto.randomBytes(64).toString('hex');
 
   await wallets.updateOne({
     _id: walletId,
@@ -63,7 +63,7 @@ async function register(walletId, deviceId, pinHash) {
       authenticators: [],
       details: null,
       settings: {
-        '1fa_private': true,
+        '1fa_wallet': true,
       },
     },
     $push: {
@@ -72,8 +72,8 @@ async function register(walletId, deviceId, pinHash) {
           _id: deviceId,
           pin_hash: pinHash,
           authenticator: null,
-          public_token: publicToken,
-          private_token: privateToken,
+          device_token: deviceToken,
+          wallet_token: walletToken,
           failed_attempts: {},
           challenges: {},
           date: new Date(),
@@ -92,19 +92,19 @@ async function register(walletId, deviceId, pinHash) {
   });
 
   return {
-    publicToken,
-    privateToken,
+    deviceToken,
+    walletToken,
   };
 }
 
-async function logoutOthers(device) {
-  const wallets = db.collection(COLLECTION);
-  await wallets.updateOne({
-    'devices._id': device._id,
-  }, {
-    $pull: { devices: { _id: { $ne: device._id } } },
-  });
-}
+// async function logoutOthers(device) {
+//   const wallets = db.collection(COLLECTION);
+//   await wallets.updateOne({
+//     'devices._id': device._id,
+//   }, {
+//     $pull: { devices: { _id: { $ne: device._id } } },
+//   });
+// }
 
 async function pinVerify(device, pinHash, type) {
   if (device.pin_hash !== pinHash) {
@@ -124,12 +124,11 @@ async function pinVerify(device, pinHash, type) {
 
 async function platformOptions(device, type) {
   if (device.authenticator && device.authenticator.credentialID) {
-    const options = generateAssertionOptions({
+    const options = generateAuthenticationOptions({
       challenge: generateChallenge(),
-      allowCredentials: [_mapAuthenticator(device.authenticator)],
+      allowCredentials: [mapAuthenticator(device.authenticator)],
     });
     await _setChallenge(device, options.challenge, type, 'platform');
-
     return options;
   } else {
     throw createError(400, 'No authenticator');
@@ -137,17 +136,18 @@ async function platformOptions(device, type) {
 }
 
 async function platformVerify(device, body, type) {
-  const { verified, authenticatorInfo } = await verifyAssertionResponse({
-    credential: body,
+  const { verified, authenticationInfo } = await verifyAuthenticationResponse({
+    response: body,
+    requireUserVerification: false,
     expectedChallenge: device.challenges[`${type}_platform`],
     expectedOrigin: ORIGIN,
     expectedRPID: RP_ID,
     authenticator: {
       ...device.authenticator,
-      publicKey: device.authenticator.credentialPublicKey,
+      credentialPublicKey: Buffer.from(device.authenticator.credentialPublicKey, 'base64'),
+      credentialID: Buffer.from(device.authenticator.credentialID, 'base64'),
     },
   });
-
   if (!verified) {
     await _unsuccessfulAuth(device, type, 'platform');
   }
@@ -159,28 +159,28 @@ async function platformVerify(device, body, type) {
       [`devices.$.failed_attempts.${type}_pin`]: 0,
       [`devices.$.failed_attempts.${type}_platform`]: 0,
       [`devices.$.challenges.${type}_platform`]: null,
-      'devices.$.authenticator.counter': authenticatorInfo.counter,
+      'devices.$.authenticator.counter': authenticationInfo.counter,
       'devices.$.date': new Date(),
     },
   });
 }
 
+// TODO: need to test
 async function crossplatformOptions(device, type) {
   const { wallet } = device;
   if (wallet.authenticators && wallet.authenticators.length > 0) {
-    const options = generateAssertionOptions({
+    const options = generateAuthenticationOptions({
       challenge: generateChallenge(),
-      allowCredentials: wallet.authenticators.map(_mapAuthenticator),
+      allowCredentials: wallet.authenticators.map(mapAuthenticator),
     });
-
     await _setChallenge(device, options.challenge, type, 'crossplatform');
-
     return options;
   } else {
     throw createError(400, 'No authenticator');
   }
 }
 
+// TODO: need to test
 async function crossplatformVerify(device, body, type) {
   const { wallet } = device;
 
@@ -190,14 +190,16 @@ async function crossplatformVerify(device, body, type) {
   if (!authenticator) {
     throw createError(400, 'Incorrect authenticator');
   }
-  const { verified, authenticatorInfo } = await verifyAssertionResponse({
-    credential: body,
+  const { verified, authenticationInfo } = await verifyAuthenticationResponse({
+    response: body,
+    requireUserVerification: false, // ?
     expectedChallenge: device.challenges[`${type}_crossplatform`],
     expectedOrigin: ORIGIN,
     expectedRPID: RP_ID,
     authenticator: {
       ...device.authenticator,
-      publicKey: device.authenticator.credentialPublicKey,
+      credentialPublicKey: Buffer.from(device.authenticator.credentialPublicKey, 'base64'),
+      credentialID: Buffer.from(device.authenticator.credentialID, 'base64'),
     },
   });
 
@@ -216,19 +218,17 @@ async function crossplatformVerify(device, body, type) {
   });
   await wallets.updateOne({
     _id: device.wallet._id,
-    'authenticators.credentialID': authenticatorInfo.base64CredentialID,
+    'authenticators.credentialID': Buffer.from(authenticationInfo.credentialID).toString('base64'),
   }, {
     $set: {
-      'authenticators.$.counter': authenticatorInfo.counter,
+      'authenticators.$.counter': authenticationInfo.newCounter,
     },
   });
 }
 
-// Attestation
-
-async function platformAttestationOptions(device) {
+async function platformRegistrationOptions(device) {
   const user = generateUser(device._id);
-  const options = generateAttestationOptions({
+  const options = generateRegistrationOptions({
     challenge: generateChallenge(),
     rpID: RP_ID,
     rpName: RP_NAME,
@@ -241,48 +241,47 @@ async function platformAttestationOptions(device) {
       userVerification: 'discouraged',
     },
   });
-  await _setChallenge(device, options.challenge, 'attestation', 'platform');
+  await _setChallenge(device, options.challenge, 'registration', 'platform');
 
   return options;
 }
 
-async function platformAttestationVerify(device, body) {
-  const { verified, authenticatorInfo } = await verifyAttestationResponse({
-    credential: body,
-    expectedChallenge: device.challenges['attestation_platform'],
+async function platformRegistrationVerify(device, body) {
+  const { verified, registrationInfo } = await verifyRegistrationResponse({
+    response: body,
+    requireUserVerification: false,
+    expectedChallenge: device.challenges['registration_platform'],
     expectedOrigin: ORIGIN,
     expectedRPID: RP_ID,
   });
-
   if (!verified) {
-    throw createError(400, 'Attestation response not verified');
+    throw createError(400, 'Registration response not verified');
   }
   const wallets = db.collection(COLLECTION);
   await wallets.updateOne({
     'devices._id': device._id,
   }, {
     $set: {
-      'devices.$.challenges.attestation_platform': null,
+      'devices.$.challenges.registration_platform': null,
       'devices.$.authenticator': {
-        credentialID: authenticatorInfo.base64CredentialID,
-        credentialPublicKey: authenticatorInfo.base64PublicKey,
-        counter: authenticatorInfo.counter,
-        transports: body.transports,
+        credentialID: Buffer.from(registrationInfo.credentialID).toString('base64'),
+        credentialPublicKey: Buffer.from(registrationInfo.credentialPublicKey).toString('base64'),
+        counter: registrationInfo.counter,
+        transports: body.response.transports,
         date: new Date(),
       },
     },
   });
 }
 
-async function crossplatformAttestationOptions(device) {
+// TODO: need to test
+async function crossplatformRegistrationOptions(device) {
   const { wallet } = device;
   const user = generateUser(wallet._id);
-
   if (wallet.authenticators && wallet.authenticators.length >= MAX_AUTHENTICATORS) {
     throw createError(400, 'The number of authenticators has exceeded the maximum limit');
   }
-
-  const options = generateAttestationOptions({
+  const options = generateRegistrationOptions({
     challenge: generateChallenge(),
     rpID: RP_ID,
     rpName: RP_NAME,
@@ -294,49 +293,46 @@ async function crossplatformAttestationOptions(device) {
       authenticatorAttachment: 'cross-platform',
       userVerification: 'discouraged',
     },
-    excludeCredentials: wallet.authenticators ? wallet.authenticators.map(_mapAuthenticator) : undefined,
+    excludeCredentials: wallet.authenticators ? wallet.authenticators.map(mapAuthenticator) : undefined,
   });
-
-  await _setChallenge(device, options.challenge, 'attestation', 'crossplatform');
-
+  await _setChallenge(device, options.challenge, 'registration', 'crossplatform');
   return options;
 }
 
-async function crossplatformAttestationVerify(device, body) {
+// TODO: need to test
+async function crossplatformRegistrationVerify(device, body) {
   const { wallet } = device;
   if (wallet.authenticators && wallet.authenticators.length >= MAX_AUTHENTICATORS) {
     throw createError(400, 'The number of authenticators has exceeded the maximum limit');
   }
-
-  const { verified, authenticatorInfo } = await verifyAttestationResponse({
-    credential: body,
-    expectedChallenge: device.challenges['attestation_crossplatform'],
+  const { verified, registrationInfo } = await verifyRegistrationResponse({
+    response: body,
+    requireUserVerification: false, // ?
+    expectedChallenge: device.challenges['registration_crossplatform'],
     expectedOrigin: ORIGIN,
     expectedRPID: RP_ID,
   });
-
   if (!verified) {
-    throw createError(400, 'Attestation response not verified');
+    throw createError(400, 'Registration response not verified');
   }
   const wallets = db.collection(COLLECTION);
   await wallets.updateOne({
     'devices._id': device._id,
   }, {
     $set: {
-      'devices.$.challenges.attestation_crossplatform': null,
+      'devices.$.challenges.registration_crossplatform': null,
     },
     $push: {
       authenticators: {
-        credentialID: authenticatorInfo.base64CredentialID,
-        credentialPublicKey: authenticatorInfo.base64PublicKey,
-        counter: authenticatorInfo.counter,
+        credentialID: Buffer.from(registrationInfo.credentialID).toString('base64'),
+        credentialPublicKey: Buffer.from(registrationInfo.credentialPublicKey).toString('base64'),
+        counter: registrationInfo.counter,
         transports: body.transports,
         date: new Date(),
       },
     },
   });
 }
-
 async function removePlatformAuthenticator(device) {
   const wallets = db.collection(COLLECTION);
   await wallets.updateOne({
@@ -401,19 +397,6 @@ async function setUsername(device, username) {
   return username;
 }
 
-async function removeDevice(device) {
-  const wallets = db.collection(COLLECTION);
-  const res = await wallets.updateOne({
-    'devices._id': device._id,
-  }, {
-    // It doesn't works with dot notation =(
-    $pull: { devices: { _id: device._id } },
-  });
-  if (res.modifiedCount !== 1) {
-    throw createError(404, 'Unknown device');
-  }
-}
-
 async function removeWallet(device) {
   const wallets = db.collection(COLLECTION);
   const res = await wallets.removeOne({
@@ -441,8 +424,6 @@ async function getDevice(deviceId) {
   device.wallet = wallet;
   return device;
 }
-
-// Internal
 
 async function _unsuccessfulAuth(device, tokenType, authType) {
   const wallets = db.collection(COLLECTION);
@@ -474,17 +455,9 @@ async function _setChallenge(device, challenge, tokenType, authType) {
   });
 }
 
-function _mapAuthenticator(authenticator) {
-  return {
-    id: authenticator.credentialID,
-    type: 'public-key',
-    transports: authenticator.transports || undefined,
-  };
-}
-
 export default {
   register,
-  logoutOthers,
+  // logoutOthers, // will we use this?
   // PIN
   pinVerify,
   // Platform
@@ -493,11 +466,11 @@ export default {
   // Cross-platform
   crossplatformOptions,
   crossplatformVerify,
-  // Attestation
-  platformAttestationOptions,
-  platformAttestationVerify,
-  crossplatformAttestationOptions,
-  crossplatformAttestationVerify,
+  // Registration
+  platformRegistrationOptions,
+  platformRegistrationVerify,
+  crossplatformRegistrationOptions,
+  crossplatformRegistrationVerify,
   // API
   removePlatformAuthenticator,
   listCrossplatformAuthenticators,
@@ -505,7 +478,6 @@ export default {
   setSettings,
   setDetails,
   setUsername,
-  removeDevice,
   removeWallet,
   getDevice,
 };
