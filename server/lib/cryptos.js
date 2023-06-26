@@ -5,11 +5,15 @@ import db from './db.js';
 
 const COLLECTION = 'cryptos';
 const CURRENCIES = [
-  'ARS', 'AUD', 'BRL', 'CAD', 'CHF', 'CNY',
-  'DKK', 'EUR', 'GBP', 'IDR', 'ILS',
-  'JPY', 'MXN', 'NOK', 'NZD', 'PHP', 'PLN',
-  'RUB', 'SEK', 'SGD', 'TRY', 'UAH',
-  'USD', 'ZAR',
+  'AED', 'ARS', 'AUD', 'BDT', 'BHD',
+  'BMD', 'BRL', 'CAD', 'CHF', 'CLP',
+  'CNY', 'CZK', 'DKK', 'EUR', 'GBP',
+  'HKD', 'HUF', 'IDR', 'ILS', 'INR',
+  'JPY', 'KRW', 'KWD', 'LKR', 'MMK',
+  'MXN', 'MYR', 'NGN', 'NOK', 'NZD',
+  'PHP', 'PKR', 'PLN', 'RUB', 'SAR',
+  'SEK', 'SGD', 'THB', 'TRY', 'TWD',
+  'UAH', 'USD', 'VEF', 'VND', 'ZAR',
 ];
 const CRYPTO_PROPS = ['coingecko', 'changelly', 'coinmarketcap', 'moonpay'];
 
