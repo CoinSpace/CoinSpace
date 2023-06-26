@@ -197,9 +197,9 @@ async function crossplatformVerify(device, body, type) {
     expectedOrigin: ORIGIN,
     expectedRPID: RP_ID,
     authenticator: {
-      ...device.authenticator,
-      credentialPublicKey: Buffer.from(device.authenticator.credentialPublicKey, 'base64'),
-      credentialID: Buffer.from(device.authenticator.credentialID, 'base64'),
+      ...authenticator,
+      credentialPublicKey: Buffer.from(authenticator.credentialPublicKey, 'base64'),
+      credentialID: Buffer.from(authenticator.credentialID, 'base64'),
     },
   });
 

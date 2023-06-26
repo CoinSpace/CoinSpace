@@ -31,23 +31,23 @@ export async function logoutOthers(req, res) {
 
 export async function tokenPublicPinVerify(req, res) {
   const device = await req.getDevice();
-  await wallets.pinVerify(device, req.body.pinHash, 'public');
+  await wallets.pinVerify(device, req.body.pinHash, 'device');
   return res.status(200).send({
-    publicToken: device.public_token,
+    publicToken: device.device_token,
   });
 }
 
 export async function tokenPublicPlatformOptions(req, res) {
   const device = await req.getDevice();
-  const options = await wallets.platformOptions(device, 'public');
+  const options = await wallets.platformOptions(device, 'device');
   return res.status(200).send(options);
 }
 
 export async function tokenPublicPlatformVerify(req, res) {
   const device = await req.getDevice();
-  await wallets.platformVerify(device, req.body, 'public');
+  await wallets.platformVerify(device, req.body, 'device');
   return res.status(200).send({
-    publicToken: device.public_token,
+    publicToken: device.device_token,
   });
 }
 
@@ -55,10 +55,10 @@ export async function tokenPublicPlatformVerify(req, res) {
 
 export async function tokenPrivate(req, res) {
   const device = await req.getDevice();
-  if (device.wallet.settings['1fa_private'] === false) {
+  if (device.wallet.settings['1fa_wallet'] === false) {
     if (device.wallet.authenticators.length === 0) {
       return res.status(200).send({
-        privateToken: device.private_token,
+        privateToken: device.wallet_token,
       });
     }
   }
@@ -68,14 +68,14 @@ export async function tokenPrivate(req, res) {
 
 export async function tokenPrivatePinVerify(req, res) {
   const device = await req.getDevice();
-  if (device.wallet.settings['1fa_private'] !== false) {
-    await wallets.pinVerify(device, req.body.pinHash, 'private');
+  if (device.wallet.settings['1fa_wallet'] !== false) {
+    await wallets.pinVerify(device, req.body.pinHash, 'wallet');
     if (device.wallet.authenticators.length === 0) {
       return res.status(200).send({
-        privateToken: device.private_token,
+        privateToken: device.wallet_token,
       });
     } else {
-      const options = await wallets.crossplatformOptions(device, 'private');
+      const options = await wallets.crossplatformOptions(device, 'wallet');
       return res.status(200).send(options);
     }
   }
@@ -85,8 +85,8 @@ export async function tokenPrivatePinVerify(req, res) {
 
 export async function tokenPrivatePlatformOptions(req, res) {
   const device = await req.getDevice();
-  if (device.wallet.settings['1fa_private'] !== false) {
-    const options = await wallets.platformOptions(device, 'private');
+  if (device.wallet.settings['1fa_wallet'] !== false) {
+    const options = await wallets.platformOptions(device, 'wallet');
     return res.status(200).send(options);
   }
 
@@ -95,14 +95,14 @@ export async function tokenPrivatePlatformOptions(req, res) {
 
 export async function tokenPrivatePlatformVerify(req, res) {
   const device = await req.getDevice();
-  if (device.wallet.settings['1fa_private'] !== false) {
-    await wallets.platformVerify(device, req.body, 'private');
+  if (device.wallet.settings['1fa_wallet'] !== false) {
+    await wallets.platformVerify(device, req.body, 'wallet');
     if (device.wallet.authenticators.length === 0) {
       return res.status(200).send({
-        privateToken: device.private_token,
+        privateToken: device.wallet_token,
       });
     } else {
-      const options = await wallets.crossplatformOptions(device, 'private');
+      const options = await wallets.crossplatformOptions(device, 'wallet');
       return res.status(200).send(options);
     }
   }
@@ -112,8 +112,8 @@ export async function tokenPrivatePlatformVerify(req, res) {
 
 export async function tokenPrivateCrossplatformOptions(req, res) {
   const device = await req.getDevice();
-  if (device.wallet.settings['1fa_private'] === false) {
-    const options = await wallets.crossplatformOptions(device, 'private');
+  if (device.wallet.settings['1fa_wallet'] === false) {
+    const options = await wallets.crossplatformOptions(device, 'wallet');
     return res.status(200).send(options);
   }
 
@@ -122,9 +122,9 @@ export async function tokenPrivateCrossplatformOptions(req, res) {
 
 export async function tokenPrivateCrossplatformVerify(req, res) {
   const device = await req.getDevice();
-  await wallets.crossplatformVerify(device, req.body, 'private');
+  await wallets.crossplatformVerify(device, req.body, 'wallet');
   return res.status(200).send({
-    privateToken: device.private_token,
+    privateToken: device.wallet_token,
   });
 }
 
@@ -177,7 +177,7 @@ export async function removeCrossplatformAuthenticator(req, res) {
 export async function getSettings(req, res) {
   const device = await req.getDevice();
   res.status(200).send({
-    '1faPrivate': device.wallet.settings['1fa_private'],
+    '1faPrivate': device.wallet.settings['1fa_wallet'],
     hasAuthenticators: device.wallet.authenticators.length !== 0,
   });
 }
@@ -186,11 +186,11 @@ export async function setSettings(req, res) {
   const device = await req.getDevice();
   const data = {};
   if ('1faPrivate' in req.body) {
-    data['1fa_private'] = req.body['1faPrivate'];
+    data['1fa_wallet'] = req.body['1faPrivate'];
   }
   const settings = await wallets.setSettings(device, data);
   res.status(200).send({
-    '1faPrivate': settings['1fa_private'],
+    '1faPrivate': settings['1fa_wallet'],
     hasAuthenticators: device.wallet.authenticators.length !== 0,
   });
 }

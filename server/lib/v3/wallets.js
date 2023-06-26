@@ -63,7 +63,7 @@ async function register(walletId, deviceId, pinHash) {
       authenticators: [],
       details: null,
       settings: {
-        '1fa_private': true,
+        '1fa_wallet': true,
       },
     },
     $push: {
@@ -72,8 +72,8 @@ async function register(walletId, deviceId, pinHash) {
           _id: deviceId,
           pin_hash: pinHash,
           authenticator: null,
-          public_token: publicToken,
-          private_token: privateToken,
+          device_token: publicToken,
+          wallet_token: privateToken,
           failed_attempts: {},
           challenges: {},
           date: new Date(),
@@ -196,8 +196,8 @@ async function crossplatformVerify(device, body, type) {
     expectedOrigin: ORIGIN,
     expectedRPID: RP_ID,
     authenticator: {
-      ...device.authenticator,
-      publicKey: device.authenticator.credentialPublicKey,
+      ...authenticator,
+      publicKey: authenticator.credentialPublicKey,
     },
   });
 
@@ -253,7 +253,6 @@ async function platformAttestationVerify(device, body) {
     expectedOrigin: ORIGIN,
     expectedRPID: RP_ID,
   });
-
   if (!verified) {
     throw createError(400, 'Attestation response not verified');
   }
