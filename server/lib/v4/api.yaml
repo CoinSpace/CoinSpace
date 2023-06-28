@@ -575,6 +575,10 @@ components:
       type: string
       pattern: ^[a-z0-9-]+@[a-z0-9-]+$
       maxLength: 256
+    CryptoIdStorage:
+      type: string
+      pattern: ^[A-Za-z0-9-]+@[a-z0-9-]+$
+      maxLength: 256
     CryptoList:
       type: array
       maxItems: 10000
@@ -781,7 +785,7 @@ components:
       in: path
       name: storageName
       schema:
-        $ref: '#/components/schemas/CryptoId'
+        $ref: '#/components/schemas/CryptoIdStorage'
       required: true
   responses:
     AuthenticationOptionsResponse:
