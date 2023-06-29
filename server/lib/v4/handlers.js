@@ -119,6 +119,31 @@ export async function tokenWalletCrossplatformOptions(req, res) {
   throw createError(400, 'Incorrect authenticator');
 }
 
+export async function tokenWalletPlatformOptions(req, res) {
+  const device = await req.getDevice();
+  if (device.wallet.settings['1fa_wallet'] !== false) {
+    const options = await wallets.platformOptions(device, 'wallet');
+    return res.status(200).send(options);
+  }
+  throw createError(400, 'Incorrect authenticator');
+}
+
+export async function tokenWalletPlatformVerify(req, res) {
+  const device = await req.getDevice();
+  if (device.wallet.settings['1fa_wallet'] !== false) {
+    await wallets.platformVerify(device, req.body, 'wallet');
+    if (device.wallet.authenticators.length === 0) {
+      return res.status(200).send({
+        walletToken: device.wallet_token,
+      });
+    } else {
+      const options = await wallets.crossplatformOptions(device, 'wallet');
+      return res.status(200).send(options);
+    }
+  }
+  throw createError(400, 'Incorrect authenticator');
+}
+
 export async function tokenWalletCrossplatformVerify(req, res) {
   const device = await req.getDevice();
   await wallets.crossplatformVerify(device, req.body, 'wallet');

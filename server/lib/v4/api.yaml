@@ -490,6 +490,41 @@ paths:
                   - $ref: '#/components/schemas/AuthenticationOptions'
         default:
           $ref: '#/components/responses/GeneralError'
+  /token/wallet/platform:
+    get:
+      x-eov-operation-id: tokenWalletPlatformOptions
+      x-eov-operation-handler: handlers
+      description: Get authentication options
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/AuthenticationOptionsResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    post:
+      x-eov-operation-id: tokenWalletPlatformVerify
+      x-eov-operation-handler: handlers
+      description: Verify authentication
+      security:
+        - deviceSignature: []
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      requestBody:
+        $ref: '#/components/requestBodies/Authentication'
+      responses:
+        '200':
+          description: Auth result
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/WalletToken'
+                  - $ref: '#/components/schemas/AuthenticationOptions'
+        default:
+          $ref: '#/components/responses/GeneralError'
   /username:
     put:
       x-eov-operation-id: setUsername
