@@ -177,12 +177,12 @@ export async function setDetails(req, res) {
 }
 
 export async function getStorage(req, res) {
-  const data = await storage.getStorage(req.device, req.params.storageName);
+  const data = await storage.getStorage(req.device, storage.fixStorageName(req.params.storageName));
   res.status(200).send({ data });
 }
 
 export async function setStorage(req, res) {
-  const data = await storage.setStorage(req.device, req.params.storageName, req.body.data);
+  const data = await storage.setStorage(req.device, storage.fixStorageName(req.params.storageName), req.body.data);
   res.status(200).send({ data });
 }
 

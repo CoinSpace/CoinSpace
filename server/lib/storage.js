@@ -16,7 +16,14 @@ async function setStorage(device, storageName, storage) {
   return storage;
 }
 
+function fixStorageName(storageName) {
+  if (storageName === 'monero') return 'monero@monero';
+  if (storageName === 'eos') return 'eos@eos';
+  return storageName;
+}
+
 export default {
   getStorage,
   setStorage,
+  fixStorageName,
 };

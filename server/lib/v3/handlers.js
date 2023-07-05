@@ -279,13 +279,13 @@ export async function removeMecto(req, res) {
 
 export async function getStorage(req, res) {
   const device = await req.getDevice();
-  const data = await storage.getStorage(device, req.params.storageName);
+  const data = await storage.getStorage(device, storage.fixStorageName(req.params.storageName));
   res.status(200).send({ data });
 }
 
 export async function setStorage(req, res) {
   const device = await req.getDevice();
-  const data = await storage.setStorage(device, req.params.storageName, req.body.data);
+  const data = await storage.setStorage(device, storage.fixStorageName(req.params.storageName), req.body.data);
   res.status(200).send({ data });
 }
 
