@@ -34,7 +34,9 @@ async function migrateConfig({ from, to, regex }) {
     const ops = [];
     storages = await collection.find({ _id: { $regex: regex } }).limit(batchSize).toArray();
     storages.forEach((storage) => {
-      ops.push({ insertOne: { document: { ...storage, _id: storage._id.replace(from, to) } } });
+      const id = storage._id.replace(from, to);
+      ops.push({ deleteOne: { filter: { _id: id } } });
+      ops.push({ insertOne: { document: { ...storage, _id: id } } });
       ops.push({ deleteOne: { filter: { _id: storage._id } } });
     });
     if (ops.length) {
