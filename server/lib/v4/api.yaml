@@ -209,6 +209,25 @@ paths:
                   - data
         default:
           $ref: '#/components/responses/GeneralError'
+  /fees:
+    get:
+      x-eov-operation-id: getFees
+      x-eov-operation-handler: handlers
+      description: Get transaction fees for coin
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cryptoId'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Fees for coin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeeList'
+        default:
+          $ref: '#/components/responses/GeneralError'
   /platform:
     delete:
       x-eov-operation-id: removePlatformAuthenticator
@@ -684,6 +703,26 @@ components:
           $ref: '#/components/schemas/Hex128String'
       required:
         - deviceToken
+    Fee:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          pattern: ^(minimum|default|fastest)$
+          maxLength: 64
+        value:
+          $ref: '#/components/schemas/UInt64'
+        default:
+          type: boolean
+      required:
+        - name
+        - value
+    FeeList:
+      type: array
+      maxItems: 3
+      items:
+        $ref: '#/components/schemas/Fee'
     Hex128String:
       type: string
       pattern: ^[a-f0-9]{128}$
@@ -725,6 +764,11 @@ components:
           $ref: '#/components/schemas/Base64String'
       required:
         - data
+    UInt64:
+      type: integer
+      format: int64
+      minimum: 0
+      maximum: 9007199254740991
     Username:
       type: string
       pattern: ^[a-z0-9-]+$

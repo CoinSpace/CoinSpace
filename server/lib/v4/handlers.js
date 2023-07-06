@@ -1,4 +1,5 @@
 import csFee from '../csFee.js';
+import fee from '../fee.js';
 import storage from '../storage.js';
 import { verifyReq } from '../utils.js';
 import wallets from '../wallets.js';
@@ -8,6 +9,11 @@ import createError from 'http-errors';
 export async function getCryptos(_, res) {
   const list = await cryptos.getAll();
   res.status(200).send(list);
+}
+
+export async function getFees(req, res) {
+  const { items } = await fee.getFees(req.query.crypto);
+  res.status(200).send(items);
 }
 
 export async function getCsFee(req, res) {
