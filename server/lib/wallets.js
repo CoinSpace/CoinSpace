@@ -144,8 +144,8 @@ async function platformVerify(device, body, type) {
     expectedRPID: RP_ID,
     authenticator: {
       ...device.authenticator,
-      credentialPublicKey: Buffer.from(device.authenticator.credentialPublicKey, 'base64'),
-      credentialID: Buffer.from(device.authenticator.credentialID, 'base64'),
+      credentialPublicKey: Buffer.from(device.authenticator.credentialPublicKey, 'base64url'),
+      credentialID: Buffer.from(device.authenticator.credentialID, 'base64url'),
     },
   });
   if (!verified) {
@@ -198,8 +198,8 @@ async function crossplatformVerify(device, body, type) {
     expectedRPID: RP_ID,
     authenticator: {
       ...authenticator,
-      credentialPublicKey: Buffer.from(authenticator.credentialPublicKey, 'base64'),
-      credentialID: Buffer.from(authenticator.credentialID, 'base64'),
+      credentialPublicKey: Buffer.from(authenticator.credentialPublicKey, 'base64url'),
+      credentialID: Buffer.from(authenticator.credentialID, 'base64url'),
     },
   });
 
@@ -218,7 +218,7 @@ async function crossplatformVerify(device, body, type) {
   });
   await wallets.updateOne({
     _id: device.wallet._id,
-    'authenticators.credentialID': Buffer.from(authenticationInfo.credentialID).toString('base64'),
+    'authenticators.credentialID': Buffer.from(authenticationInfo.credentialID).toString('base64url'),
   }, {
     $set: {
       'authenticators.$.counter': authenticationInfo.newCounter,
@@ -264,8 +264,8 @@ async function platformRegistrationVerify(device, body) {
     $set: {
       'devices.$.challenges.registration_platform': null,
       'devices.$.authenticator': {
-        credentialID: Buffer.from(registrationInfo.credentialID).toString('base64'),
-        credentialPublicKey: Buffer.from(registrationInfo.credentialPublicKey).toString('base64'),
+        credentialID: Buffer.from(registrationInfo.credentialID).toString('base64url'),
+        credentialPublicKey: Buffer.from(registrationInfo.credentialPublicKey).toString('base64url'),
         counter: registrationInfo.counter,
         transports: body.response.transports,
         date: new Date(),
@@ -324,8 +324,8 @@ async function crossplatformRegistrationVerify(device, body) {
     },
     $push: {
       authenticators: {
-        credentialID: Buffer.from(registrationInfo.credentialID).toString('base64'),
-        credentialPublicKey: Buffer.from(registrationInfo.credentialPublicKey).toString('base64'),
+        credentialID: Buffer.from(registrationInfo.credentialID).toString('base64url'),
+        credentialPublicKey: Buffer.from(registrationInfo.credentialPublicKey).toString('base64url'),
         counter: registrationInfo.counter,
         transports: body.transports,
         date: new Date(),
