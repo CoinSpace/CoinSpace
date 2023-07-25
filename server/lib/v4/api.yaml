@@ -228,6 +228,58 @@ paths:
                 $ref: '#/components/schemas/FeeList'
         default:
           $ref: '#/components/responses/GeneralError'
+  /mecto:
+    get:
+      x-eov-operation-id: searchMecto
+      x-eov-operation-handler: handlers
+      description: Find nearby mecto users
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/lat'
+        - $ref: '#/components/parameters/lon'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Nearby mecto users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MectoUsers'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    put:
+      x-eov-operation-id: saveMecto
+      x-eov-operation-handler: handlers
+      description: Save mecto
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - deviceSignature: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Mecto'
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
+    delete:
+      x-eov-operation-id: removeMecto
+      x-eov-operation-handler: handlers
+      description: Remove mecto
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
   /platform:
     delete:
       x-eov-operation-id: removePlatformAuthenticator
@@ -615,6 +667,10 @@ components:
         - authenticatorData
         - clientDataJSON
         - signature
+    Avatar:
+      type: string
+      pattern: ^(gravatar|identicon):.+$
+      maxLength: 256
     Base64String:
       type: string
       pattern: ^(?:[A-Za-z\d+\/]{4})*?(?:[A-Za-z\d+\/]{2}(?:==)?|[A-Za-z\d+\/]{3}=?)?$
@@ -735,6 +791,53 @@ components:
       type: string
       pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$
       maxLength: 24
+    Latitude:
+      type: number
+      format: float
+      minimum: -90
+      maximum: 90
+    Longitude:
+      type: number
+      format: float
+      minimum: -180
+      maximum: 180
+    Mecto:
+      type: object
+      additionalProperties: false
+      properties:
+        username:
+          $ref: '#/components/schemas/Username'
+        avatar:
+          $ref: '#/components/schemas/Avatar'
+        address:
+          $ref: '#/components/schemas/AnyCryptoAddress'
+        lat:
+          $ref: '#/components/schemas/Latitude'
+        lon:
+          $ref: '#/components/schemas/Longitude'
+      required:
+        - username
+        - avatar
+        - address
+        - lat
+        - lon
+    MectoUsers:
+      type: array
+      maxItems: 15
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          username:
+            $ref: '#/components/schemas/Username'
+          avatar:
+            $ref: '#/components/schemas/Avatar'
+          address:
+            $ref: '#/components/schemas/AnyCryptoAddress'
+        required:
+          - username
+          - avatar
+          - address
     PublicKeyCredentialType:
       type: string
       pattern: ^public-key$
@@ -859,6 +962,20 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/Hex64String'
+    lat:
+      in: query
+      name: lat
+      required: true
+      description: Latitude
+      schema:
+        $ref: '#/components/schemas/Latitude'
+    lon:
+      in: query
+      name: lon
+      required: true
+      description: Longitude
+      schema:
+        $ref: '#/components/schemas/Longitude'
     storageName:
       description: Storage name
       in: path

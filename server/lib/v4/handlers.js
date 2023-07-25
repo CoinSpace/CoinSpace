@@ -4,6 +4,7 @@ import storage from '../storage.js';
 import { verifyReq } from '../utils.js';
 import wallets from '../wallets.js';
 import cryptos from '../cryptos.js';
+import mecto from '../mecto.js';
 import createError from 'http-errors';
 
 export async function getCryptos(_, res) {
@@ -224,4 +225,22 @@ export async function setUsername(req, res) {
   const device = await req.getDevice();
   const username = await wallets.setUsername(device, req.body.username);
   res.status(200).send({ username });
+}
+
+export async function searchMecto(req, res) {
+  const device = await req.getDevice();
+  const results = await mecto.searchV4(device, req.query);
+  res.status(200).send(results);
+}
+
+export async function saveMecto(req, res) {
+  const device = await req.getDevice();
+  await mecto.saveV4(device, req.body);
+  res.status(200).send({ success: true });
+}
+
+export async function removeMecto(req, res) {
+  const device = await req.getDevice();
+  await mecto.remove(device);
+  res.status(200).send({ success: true });
 }

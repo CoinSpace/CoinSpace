@@ -32,6 +32,29 @@ async function search(device, query, legacy = false) {
   });
 }
 
+async function searchV4(device, query) {
+  const { lon, lat } = query;
+  const collection = db.collection(COLLECTION);
+
+  const docs = await collection.find({
+    _id: { $ne: device._id },
+    geometry: {
+      $nearSphere: {
+        $geometry: {
+          type: 'Point',
+          coordinates: [lon, lat],
+        },
+        $minDistance: 0,
+        $maxDistance: SEARCH_RADIUS,
+      },
+    },
+  }).limit(SEARCH_LIMIT).toArray();
+
+  return docs.map(({ address, username, avatarId }) => {
+    return { address, username, avatar: avatarId };
+  });
+}
+
 async function save(device, body, legacy = false) {
   const { username, email, avatarIndex, address, lat, lon } = body;
   let { avatarId } = body;
@@ -62,6 +85,26 @@ async function save(device, body, legacy = false) {
   return true;
 }
 
+async function saveV4(device, body) {
+  const { username, avatar, address, lat, lon } = body;
+  const hash = crypto.createHash('sha1').update(username + process.env.USERNAME_SALT).digest('hex');
+  if (hash !== device.wallet.username_sha) {
+    throw createError(400, 'Invalid username');
+  }
+  await db.collection(COLLECTION).updateOne({ _id: device._id }, { $set: {
+    username,
+    avatarId: avatar,
+    address,
+    timestamp: new Date(),
+    geometry: {
+      type: 'Point',
+      coordinates: [lon, lat],
+    } },
+  }, { upsert: true });
+
+  return true;
+}
+
 async function remove(device) {
   const res = await db.collection(COLLECTION).deleteOne({ _id: device._id });
   if (res.deletedCount !== 1) {
@@ -71,6 +114,8 @@ async function remove(device) {
 
 export default {
   search,
+  searchV4,
   save,
+  saveV4,
   remove,
 };
