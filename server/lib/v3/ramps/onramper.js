@@ -1,13 +1,12 @@
 const API_KEY = process.env.ONRAMPER_API_KEY;
 const rampData = {
-  id: 'onramper',
   name: 'Onramper',
-  description: 'Onramper description',
+  svg: 'svg_onramper',
 };
 
-async function buy(_, crypto, walletAddress) {
-  if (!API_KEY) return;
-  if (!crypto?.onramper?.id) return;
+async function getRamp(_, crypto, walletAddress) {
+  if (!API_KEY) return {};
+  if (!crypto?.onramper?.id) return {};
 
   const { id } = crypto.onramper;
 
@@ -18,14 +17,11 @@ async function buy(_, crypto, walletAddress) {
   url.searchParams.set('onlyCryptos', id);
   url.searchParams.set('wallets', `${id}:${walletAddress}`);
   return {
-    ...rampData,
-    url: url.toString(),
+    buy: {
+      ...rampData,
+      url: url.toString(),
+    },
   };
 }
 
-async function sell() {}
-
-export default {
-  buy,
-  sell,
-};
+export default getRamp;

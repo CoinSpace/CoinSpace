@@ -5,6 +5,7 @@ import { verifyReq } from '../utils.js';
 import wallets from '../wallets.js';
 import cryptos from '../cryptos.js';
 import mecto from '../mecto.js';
+import ramps from '../ramps/index.js';
 import createError from 'http-errors';
 
 export async function getCryptos(_, res) {
@@ -243,4 +244,14 @@ export async function removeMecto(req, res) {
   const device = await req.getDevice();
   await mecto.remove(device);
   res.status(200).send({ success: true });
+}
+
+export async function getRampsBuy(req, res) {
+  const data = await ramps.buy(req.query);
+  res.status(200).send(data);
+}
+
+export async function getRampsSell(req, res) {
+  const data = await ramps.sell(req.query);
+  res.status(200).send(data);
 }

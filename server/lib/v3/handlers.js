@@ -11,7 +11,7 @@ import openalias from '../openalias.js';
 import domain from '../domain.js';
 import github from '../github.js';
 import changelly from '../changelly.js';
-import ramps from '../ramps/index.js';
+import ramps from './ramps/index.js';
 import { verifyReq } from '../utils.js';
 
 export async function register(req, res) {

@@ -4,9 +4,8 @@ import axios from 'axios';
 
 const API_KEY = process.env.GUARDARIAN_API_KEY;
 const rampData = {
-  id: 'guardarian',
   name: 'Guardarian',
-  description: 'Guardarian description',
+  svg: 'svg_guardarian',
 };
 const rampApi = axios.create({
   baseURL: 'https://api-payments.guardarian.com/',
@@ -14,12 +13,12 @@ const rampApi = axios.create({
   headers: { 'x-api-key': API_KEY },
 });
 
-async function buy(countryCode, crypto) {
-  if (!API_KEY) return;
-  if (!crypto) return;
+async function getRamp(countryCode, crypto) {
+  if (!API_KEY) return {};
+  if (!crypto) return {};
   const countries = await cachedCountries();
   const country = countries.find((item) => item.code_iso_alpha_2 === countryCode && item.supported);
-  if (!country) return;
+  if (!country) return {};
 
   const currencies = await cachedCurrencies();
   let currency;
@@ -32,7 +31,7 @@ async function buy(countryCode, crypto) {
       return !!network;
     });
   }
-  if (!currency) return;
+  if (!currency) return {};
 
   const url = new URL('https://guardarian.com/calculator/v1/');
   url.searchParams.set('partner_api_token', API_KEY);
@@ -44,12 +43,12 @@ async function buy(countryCode, crypto) {
   }]));
 
   return {
-    ...rampData,
-    url: url.toString(),
+    buy: {
+      ...rampData,
+      url: url.toString(),
+    },
   };
 }
-
-async function sell() {}
 
 const cachedCurrencies = pMemoize(async () => {
   const { data } = await rampApi.get('/v1/currencies/crypto');
@@ -61,7 +60,4 @@ const cachedCountries = pMemoize(async () => {
   return data;
 }, { cache: new ExpiryMap(1 * 60 * 60 * 1000) }); // 1 hour
 
-export default {
-  buy,
-  sell,
-};
+export default getRamp;
