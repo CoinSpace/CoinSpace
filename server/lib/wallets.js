@@ -6,7 +6,7 @@ import {
   verifyRegistrationResponse,
   generateAuthenticationOptions,
   verifyAuthenticationResponse,
-} from '@simplewebauthn/server-7.3.1';
+} from '@simplewebauthn/server';
 import db from './db.js';
 import {
   generateChallenge,
@@ -327,7 +327,7 @@ async function crossplatformRegistrationVerify(device, body) {
         credentialID: Buffer.from(registrationInfo.credentialID).toString('base64url'),
         credentialPublicKey: Buffer.from(registrationInfo.credentialPublicKey).toString('base64url'),
         counter: registrationInfo.counter,
-        transports: body.transports,
+        transports: body.response.transports,
         date: new Date(),
       },
     },

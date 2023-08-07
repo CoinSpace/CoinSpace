@@ -49,7 +49,7 @@ export function verifyReq(key, req) {
 
 export function mapAuthenticator(authenticator) {
   return {
-    id: Buffer.from(authenticator.credentialID, 'base64'),
+    id: Buffer.from(authenticator.credentialID, 'base64url'),
     type: 'public-key',
     transports: authenticator.transports || undefined,
   };

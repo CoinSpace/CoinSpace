@@ -6,7 +6,7 @@ import {
   verifyAttestationResponse,
   generateAssertionOptions,
   verifyAssertionResponse,
-} from '@simplewebauthn/server';
+} from '@simplewebauthn/server-1.0.0';
 import db from '../db.js';
 import {
   generateChallenge,
