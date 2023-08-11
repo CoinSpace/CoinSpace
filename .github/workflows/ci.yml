@@ -147,7 +147,7 @@ jobs:
         uses: samuelmeuli/action-snapcraft@v1
         with:
           snapcraft_token: ${{ secrets.SNAP_TOKEN }}
-          channel: 6.x/stable
+          #channel: 6.x/stable
       - name: Install JDK 11
         if: ${{ matrix.DISTRIBUTION == 'android-play' || matrix.DISTRIBUTION == 'android-galaxy' }}
         uses: actions/setup-java@v1
