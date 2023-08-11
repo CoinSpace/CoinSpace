@@ -29,7 +29,9 @@ middleware.init(app);
 app.use('/api/v1', apiV1);
 app.use('/api/v2', apiV2);
 app.use('/api/v3', apiV3);
-app.use('/api/v4', apiV4);
+if (process.env.NODE_ENV === 'development') {
+  app.use('/api/v4', apiV4);
+}
 app.set('views', './server/views');
 app.set('view engine', 'ejs');
 
