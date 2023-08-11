@@ -146,7 +146,7 @@ jobs:
         if: ${{ matrix.DISTRIBUTION == 'snap' }}
         uses: samuelmeuli/action-snapcraft@v2
         env:
-          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_TOKEN }}
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAP_TOKEN }}
       - name: Install JDK 11
         if: ${{ matrix.DISTRIBUTION == 'android-play' || matrix.DISTRIBUTION == 'android-galaxy' }}
         uses: actions/setup-java@v1
