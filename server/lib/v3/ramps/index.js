@@ -15,10 +15,10 @@ async function getRamps(countryCode, cryptoId, address) {
 
   return {
     buy: [
-      btcDirect?.buy,
-      onramper?.buy,
-      guardarian?.buy,
       moonpay?.buy,
+      onramper?.buy,
+      btcDirect?.buy,
+      guardarian?.buy,
     ].filter(Boolean),
     sell: [
       btcDirect?.sell,
