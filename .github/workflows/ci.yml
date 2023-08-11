@@ -144,10 +144,9 @@ jobs:
           (cd ${BUILD_TYPE} && npm ci)
       - name: Install Snapcraft
         if: ${{ matrix.DISTRIBUTION == 'snap' }}
-        uses: samuelmeuli/action-snapcraft@v1
-        with:
-          snapcraft_token: ${{ secrets.SNAP_TOKEN }}
-          #channel: 6.x/stable
+        uses: samuelmeuli/action-snapcraft@v2
+        env:
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_TOKEN }}
       - name: Install JDK 11
         if: ${{ matrix.DISTRIBUTION == 'android-play' || matrix.DISTRIBUTION == 'android-galaxy' }}
         uses: actions/setup-java@v1
