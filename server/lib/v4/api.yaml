@@ -642,6 +642,26 @@ paths:
                   - $ref: '#/components/schemas/AuthenticationOptions'
         default:
           $ref: '#/components/responses/GeneralError'
+  /update/{distribution}/{arch}/{version}:
+    get:
+      x-eov-operation-id: getUpdate
+      x-eov-operation-handler: handlers
+      x-allow-unknown-query-parameters: true
+      description: Get release
+      parameters:
+        - $ref: '#/components/parameters/distribution'
+        - $ref: '#/components/parameters/arch'
+        - $ref: '#/components/parameters/version'
+      security: []
+      responses:
+        '200':
+          description: Release
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Update'
+        default:
+          $ref: '#/components/responses/GeneralError'
   /username:
     put:
       x-eov-operation-id: setUsername
@@ -690,6 +710,10 @@ components:
       type: string
       pattern: ^.{0,256}$
       maxLength: 256
+    Arch:
+      type: string
+      pattern: ^(any|x64)$
+      maxLength: 64
     AuthenticationOptions:
       type: object
       properties:
@@ -805,6 +829,10 @@ components:
           $ref: '#/components/schemas/Hex128String'
       required:
         - deviceToken
+    Distribution:
+      type: string
+      pattern: ^[a-z0-9-]+$
+      maxLength: 64
     Fee:
       type: object
       additionalProperties: false
@@ -936,6 +964,28 @@ components:
       format: int64
       minimum: 0
       maximum: 9007199254740991
+    Update:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          $ref: '#/components/schemas/Version'
+        version:
+          $ref: '#/components/schemas/Version'
+        url:
+          $ref: '#/components/schemas/UrlString'
+        distribution:
+          $ref: '#/components/schemas/Distribution'
+        arch:
+          $ref: '#/components/schemas/Arch'
+        app:
+          type: string
+          pattern: ^(app|electron)$
+          maxLength: 64
+      required:
+        - name
+        - version
+        - url
     UrlString:
       type: string
       pattern: ^(http|https):\/\/.+$
@@ -952,6 +1002,10 @@ components:
           $ref: '#/components/schemas/Username'
       required:
         - username
+    Version:
+      type: string
+      pattern: ^v.+$
+      maxLength: 64
     WalletToken:
       type: object
       properties:
@@ -1022,6 +1076,13 @@ components:
       description: Crypto address
       schema:
         $ref: '#/components/schemas/AnyCryptoAddress'
+    arch:
+      in: path
+      name: arch
+      schema:
+        $ref: '#/components/schemas/Arch'
+      required: true
+      description: App architecture
     countryCode:
       in: query
       name: countryCode
@@ -1047,6 +1108,13 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/Hex64String'
+    distribution:
+      in: path
+      name: distribution
+      schema:
+        $ref: '#/components/schemas/Distribution'
+      required: true
+      description: App distribution
     lat:
       in: query
       name: lat
@@ -1068,6 +1136,13 @@ components:
       schema:
         $ref: '#/components/schemas/CryptoIdStorage'
       required: true
+    version:
+      in: path
+      name: version
+      schema:
+        $ref: '#/components/schemas/Version'
+      required: true
+      description: App version
   responses:
     AuthenticationOptionsResponse:
       description: Authentication options

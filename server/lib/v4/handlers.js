@@ -1,4 +1,8 @@
+import createError from 'http-errors';
+import semver from 'semver';
+
 import csFee from '../csFee.js';
+
 import fee from '../fee.js';
 import storage from '../storage.js';
 import { verifyReq } from '../utils.js';
@@ -6,7 +10,7 @@ import wallets from '../wallets.js';
 import cryptos from '../cryptos.js';
 import mecto from '../mecto.js';
 import ramps from '../ramps/index.js';
-import createError from 'http-errors';
+import github from '../github.js';
 
 export async function getCryptos(_, res) {
   const list = await cryptos.getAll();
@@ -254,4 +258,25 @@ export async function getRampsBuy(req, res) {
 export async function getRampsSell(req, res) {
   const data = await ramps.sell(req.query);
   res.status(200).send(data);
+}
+
+export async function getUpdate(req, res) {
+  const app = req.get('User-Agent').includes('CoinSpace') ? 'electron' : 'app';
+  const { distribution, arch, version } = req.params;
+  if (!semver.valid(version)) {
+    throw createError(400, `Invalid SemVer: "${version}"`);
+  }
+  const update = await github.getUpdate(distribution, arch, app);
+  if (!update) {
+    throw createError(404, 'Unsupported platform');
+  } else if (semver.gt(update.version, version)) {
+    res.status(200).send({
+      name: update.name,
+      version: update.version,
+      url: update.url,
+    });
+  } else {
+    // send "no content" if version is equal or less
+    res.status(204).end();
+  }
 }
