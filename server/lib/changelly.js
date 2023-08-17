@@ -41,7 +41,7 @@ async function request(method, params) {
     },
     data: message,
   });
-  return response && response.data && response.data.result;
+  return response && response.data;
 }
 
 function isGreater3hours(tx) {
@@ -63,7 +63,7 @@ function normalizeNumber(n, decimals) {
 async function getPairsParams(from, to) {
   const fromCrypto = getCrypto(from);
   const toCrypto = getCrypto(to);
-  const data = await request('getPairsParams', [{
+  const { result: data } = await request('getPairsParams', [{
     from: fromCrypto.changelly.ticker,
     to: toCrypto.changelly.ticker,
   }]);
@@ -79,7 +79,7 @@ async function getPairsParams(from, to) {
 async function estimate(from, to, value) {
   const fromCrypto = getCrypto(from);
   const toCrypto = getCrypto(to);
-  const data = await request('getExchangeAmount', [{
+  const { result: data } = await request('getExchangeAmount', [{
     from: fromCrypto.changelly.ticker,
     to: toCrypto.changelly.ticker,
     amountFrom: value,
@@ -99,9 +99,61 @@ async function estimate(from, to, value) {
   };
 }
 
+async function estimateV4(from, to, value) {
+  const fromCrypto = getCrypto(from);
+  const toCrypto = getCrypto(to);
+  const data = await request('getExchangeAmount', [{
+    from: fromCrypto.changelly.ticker,
+    to: toCrypto.changelly.ticker,
+    amountFrom: value,
+  }]);
+  if (data.error) {
+    if (data.error.code === -32600) {
+      if (/minimal amount/i.test(data.error.message)) {
+        const amount = data.error.message.match(/\d+(\.\d+)?/i)?.[0];
+        return {
+          error: 'SmallAmountError',
+          amount: amount && normalizeNumber(amount),
+        };
+      }
+      if (/maximum amount/i.test(data.error.message)) {
+        const amount = data.error.message.match(/\d+(\.\d+)?/i)?.[0];
+        return {
+          error: 'BigAmountError',
+          amount: amount && normalizeNumber(amount),
+        };
+      }
+    }
+    if (data.error.code === -32602) {
+      if (/invalid amount/i.test(data.error.message)) {
+        return {
+          error: 'AmountError',
+        };
+      }
+      if (/disabled/i.test(data.error.message)) {
+        return {
+          error: 'ExchangeDisabled',
+        };
+      }
+    }
+    if (data.error.code === -32603) {
+      throw createError(500, data.error.message);
+    }
+    throw createError(400, data.error.message);
+  }
+  const estimation = data.result[0];
+  const networkFee = Big(estimation.networkFee);
+  const amount = Big(estimation.amountFrom);
+  const result = Big(estimation.amountTo).minus(networkFee);
+  return {
+    rate: amount.eq(0) ? '0' : normalizeNumber(result.div(amount), toCrypto.decimals),
+    result: normalizeNumber(result, toCrypto.decimals),
+  };
+}
+
 async function validateAddress(address, id) {
   const item = getCrypto(id);
-  const data = await request('validateAddress', {
+  const { result: data } = await request('validateAddress', {
     address,
     currency: item.changelly.ticker,
   });
@@ -120,19 +172,19 @@ async function createTransaction(from, to, amountFrom, address, refundAddress) {
     address,
     refundAddress,
   });
-  if (!data) {
+  if (!data.result) {
     throw createError(500, 'Transaction not created');
   }
   return {
-    id: data.id,
-    depositAmount: normalizeNumber(data.amountExpectedFrom),
-    depositAddress: data.payinAddress,
-    extraId: data.payinExtraId,
+    id: data.result.id,
+    depositAmount: normalizeNumber(data.result.amountExpectedFrom),
+    depositAddress: data.result.payinAddress,
+    extraId: data.result.payinExtraId,
   };
 }
 
 async function getTransaction(id) {
-  const txs = await request('getTransactions', {
+  const { result: txs } = await request('getTransactions', {
     id,
   });
   const tx = txs && txs[0];
@@ -154,7 +206,7 @@ async function getTransaction(id) {
 }
 
 async function getTransactions(id, currency, address, limit, offset) {
-  const txs = await request('getTransactions', {
+  const { result: txs } = await request('getTransactions', {
     id,
     currency,
     address,
@@ -191,6 +243,7 @@ async function getTransactions(id, currency, address, limit, offset) {
 export default {
   getPairsParams,
   estimate,
+  estimateV4,
   validateAddress,
   createTransaction,
   getTransaction,

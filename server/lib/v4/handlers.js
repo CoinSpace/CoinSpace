@@ -8,6 +8,7 @@ import storage from '../storage.js';
 import { verifyReq } from '../utils.js';
 import wallets from '../wallets.js';
 import cryptos from '../cryptos.js';
+import changelly from '../changelly.js';
 import mecto from '../mecto.js';
 import ramps from '../ramps/index.js';
 import github from '../github.js';
@@ -279,4 +280,25 @@ export async function getUpdate(req, res) {
     // send "no content" if version is equal or less
     res.status(204).end();
   }
+}
+
+export async function changellyEstimate(req, res) {
+  const data = await changelly.estimateV4(req.query.from, req.query.to, req.query.amount);
+  res.status(200).send(data);
+}
+
+export async function changellyValidateAddress(req, res) {
+  const data = await changelly.validateAddress(req.query.address, req.query.crypto);
+  res.status(200).send(data);
+}
+
+export async function changellyCreateTransaction(req, res) {
+  const data = await changelly.createTransaction(
+    req.body.from,
+    req.body.to,
+    req.body.amount,
+    req.body.address,
+    req.body.refundAddress
+  );
+  res.status(200).send(data);
 }
