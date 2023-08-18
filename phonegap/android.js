@@ -25,7 +25,7 @@ async function run() {
   fse.writeFileSync(path.resolve(buildPath, 'config.xml'), config);
 
   /* eslint-disable max-len */
-  cordova('platform add android@11.0.0 --save');
+  cordova('platform add android@12.0.0 --save');
   cordova('plugin add cordova-plugin-androidx-adapter@1.1.3 --save');
   cordova('plugin add cordova-custom-config@5.1.1 --save');
   cordova('plugin add cordova-plugin-geolocation@4.1.0 --save');
