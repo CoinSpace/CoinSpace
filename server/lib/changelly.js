@@ -108,7 +108,7 @@ async function estimateV4(from, to, value) {
     amountFrom: value,
   }]);
   if (data.error) {
-    if (data.error.code === -32600) {
+    if (data.error.code === -32600 || data.error.code === -32602) {
       if (/minimal amount/i.test(data.error.message)) {
         const amount = data.error.message.match(/\d+(\.\d+)?/i)?.[0];
         return {
@@ -123,8 +123,6 @@ async function estimateV4(from, to, value) {
           amount: amount && normalizeNumber(amount),
         };
       }
-    }
-    if (data.error.code === -32602) {
       if (/invalid amount/i.test(data.error.message)) {
         return {
           error: 'AmountError',
