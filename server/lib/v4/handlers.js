@@ -302,3 +302,8 @@ export async function changellyCreateTransaction(req, res) {
   );
   res.status(200).send(data);
 }
+
+export async function changellyGetTransactions(req, res) {
+  const data = await changelly.getTransactionsV4(req.query.transactions);
+  res.status(200).send(data);
+}

@@ -56,6 +56,13 @@ function getCrypto(id) {
   return item;
 }
 
+function getCryptoByChangelly(id) {
+  const item = cryptoDB.find((item) => item?.changelly?.ticker === id);
+  return item;
+}
+
+
+
 function normalizeNumber(n, decimals) {
   return Big(n).round(decimals ?? 8).toFixed();
 }
@@ -238,6 +245,36 @@ async function getTransactions(id, currency, address, limit, offset) {
   });
 }
 
+async function getTransactionsV4(id) {
+  const { result: txs } = await request('getTransactions', {
+    id,
+    limit: 100,
+  });
+
+  return txs.map((tx) => {
+    return {
+      id: tx.id,
+      trackUrl: tx.trackUrl,
+      status: tx.status,
+      amountTo: tx.amountTo || '0',
+      amountExpectedTo: tx.amountExpectedTo || '0',
+      amountFrom: tx.amountFrom || '0',
+      amountExpectedFrom: tx.amountExpectedFrom || '0',
+      cryptoFrom: getCryptoByChangelly(tx.currencyFrom)._id,
+      cryptoTo: getCryptoByChangelly(tx.currencyTo)._id,
+      createdAt: new Date(Math.round(tx.createdAt / 1000)).toISOString(),
+      payinAddress: tx.payinAddress,
+      payinHash: tx.payinHash || undefined,
+      payoutAddress: tx.payoutAddress,
+      payoutHashLink: tx.payoutHashLink || undefined,
+      payoutHash: tx.payoutHash || undefined,
+      refundAddress: tx.refundAddress || undefined,
+      refundHash: tx.refundHash || undefined,
+      refundHashLink: tx.refundHashLink || undefined,
+    };
+  });
+}
+
 export default {
   getPairsParams,
   estimate,
@@ -246,4 +283,5 @@ export default {
   createTransaction,
   getTransaction,
   getTransactions,
+  getTransactionsV4,
 };

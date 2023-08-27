@@ -295,6 +295,28 @@ paths:
                   - depositAddress
         default:
           $ref: '#/components/responses/GeneralError'
+  /exchange/changelly/transactions:
+    get:
+      x-eov-operation-id: changellyGetTransactions
+      x-eov-operation-handler: handlers
+      description: Get Changelly transactions
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/changellyTransactionIds'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Changelly transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                maxItems: 100
+                items:
+                  $ref: '#/components/schemas/ChangellyTransaction'
+        default:
+          $ref: '#/components/responses/GeneralError'
   /exchange/changelly/validate:
     get:
       x-eov-operation-id: changellyValidateAddress
@@ -863,6 +885,49 @@ components:
       pattern: ^[A-Za-z0-9_-]*$
       maxLength: 2097152
       nullable: true
+    ChangellyTransaction:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/AnyString256'
+        trackUrl:
+          $ref: '#/components/schemas/UrlString'
+        status:
+          $ref: '#/components/schemas/AnyString256'
+        amountTo:
+          $ref: '#/components/schemas/NumberString'
+        amountExpectedTo:
+          $ref: '#/components/schemas/NumberString'
+        amountFrom:
+          $ref: '#/components/schemas/NumberString'
+        amountExpectedFrom:
+          $ref: '#/components/schemas/NumberString'
+        cryptoFrom:
+          $ref: '#/components/schemas/CryptoId'
+        cryptoTo:
+          $ref: '#/components/schemas/CryptoId'
+        createdAt:
+          $ref: '#/components/schemas/ISODateString'
+        payinAddress:
+          $ref: '#/components/schemas/AnyCryptoAddress'
+        payinHash:
+          $ref: '#/components/schemas/AnyString256'
+        payoutAddress:
+          $ref: '#/components/schemas/AnyCryptoAddress'
+        payoutHashLink:
+          $ref: '#/components/schemas/UrlString'
+        payoutHash:
+          $ref: '#/components/schemas/AnyString256'
+        refundAddress:
+          $ref: '#/components/schemas/AnyCryptoAddress'
+        refundHashLink:
+          $ref: '#/components/schemas/UrlString'
+        refundHash:
+          $ref: '#/components/schemas/AnyString256'
+      required:
+        - status
+        - amountTo
     CryptoAmount:
       type: number
       format: float
@@ -1221,6 +1286,19 @@ components:
         $ref: '#/components/schemas/Arch'
       required: true
       description: App architecture
+    changellyTransactionIds:
+      in: query
+      name: transactions
+      description: Changelly transaction ids
+      required: true
+      style: form
+      explode: false
+      allowReserved: true
+      schema:
+        type: array
+        maxItems: 100
+        items:
+          $ref: '#/components/schemas/AnyString256'
     countryCode:
       in: query
       name: countryCode
