@@ -146,6 +146,11 @@ async function estimateV4(from, to, value) {
     }
     throw createError(400, data.error.message);
   }
+  if (!data?.result?.[0]) {
+    return {
+      error: 'ExchangeDisabled',
+    };
+  }
   const estimation = data.result[0];
   const networkFee = Big(estimation.networkFee);
   const amount = Big(estimation.amountFrom);
