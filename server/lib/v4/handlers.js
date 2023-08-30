@@ -14,7 +14,7 @@ import ramps from '../ramps/index.js';
 import github from '../github.js';
 
 export async function getCryptos(_, res) {
-  const list = await cryptos.getAll();
+  const list = await cryptos.getAllV4();
   res.status(200).send(list);
 }
 

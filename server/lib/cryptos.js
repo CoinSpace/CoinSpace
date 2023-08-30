@@ -231,6 +231,23 @@ async function getAll(limit = 0) {
   return cryptos;
 }
 
+async function getAllV4(limit = 0) {
+  const cryptos = await db.collection(COLLECTION)
+    .find({}, {
+      limit,
+      sort: {
+        rank: 1,
+      },
+      projection: {
+        synchronized_at: false,
+        updated_at: false,
+        prices: false,
+      },
+    })
+    .toArray();
+  return cryptos;
+}
+
 function getTicker(id) {
   return db.collection(COLLECTION)
     .findOne({
@@ -327,6 +344,7 @@ export default {
   updatePrices,
   updateRank,
   getAll,
+  getAllV4,
   getTicker,
   getTickers,
   getTickersPublic,
