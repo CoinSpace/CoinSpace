@@ -257,10 +257,14 @@ async function getTransactionsV4(id) {
   });
 
   return txs.map((tx) => {
+    let { status } = tx;
+    if (status === 'waiting' && isGreater3hours(tx)) {
+      status = 'overdue';
+    }
     return {
       id: tx.id,
       trackUrl: tx.trackUrl,
-      status: tx.status,
+      status,
       amountTo: tx.amountTo || '0',
       amountExpectedTo: tx.amountExpectedTo || '0',
       amountFrom: tx.amountFrom || '0',
