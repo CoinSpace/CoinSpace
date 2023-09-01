@@ -165,7 +165,7 @@ export default function(el) {
   ractive.on('accept', async () => {
     ractive.set('isAccepting', true);
     const wallet = getWallet();
-    const txId = ractive.get('txId');
+    const txId = ractive.get('txId').trim();
     try {
       await unlock(wallet);
       const historyTx = await wallet.addTx(txId);
