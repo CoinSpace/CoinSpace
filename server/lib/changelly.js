@@ -251,12 +251,14 @@ async function getTransactions(id, currency, address, limit, offset) {
 }
 
 async function getTransactionsV4(id) {
-  const { result: txs } = await request('getTransactions', {
+  const data = await request('getTransactions', {
     id,
     limit: 100,
   });
-
-  return txs.map((tx) => {
+  if (!data.result) {
+    throw createError(500, data.error?.message || 'Exchange error');
+  }
+  return data.result.map((tx) => {
     let { status } = tx;
     if (status === 'waiting' && isGreater3hours(tx)) {
       status = 'overdue';
