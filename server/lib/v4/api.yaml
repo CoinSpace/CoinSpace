@@ -1295,7 +1295,7 @@ components:
       allowReserved: true
       schema:
         type: array
-        maxItems: 100
+        maxItems: 10
         items:
           $ref: '#/components/schemas/AnyString256'
     countryCode:
