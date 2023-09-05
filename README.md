@@ -32,7 +32,7 @@ Supported coins:
 - Binance Smart Chain and BEP20 tokens
 - Cardano
 - Ethereum Classic
-- Solana
+- Solana and SPL tokens
 - Avalanche C-Chain and ARC20 tokens
 - TRON and TRC20 tokens
 - Polygon and Polygon tokens
