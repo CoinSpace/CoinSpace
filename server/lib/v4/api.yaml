@@ -1236,7 +1236,6 @@ components:
               - rawId
               - response
               - type
-              - authenticatorAttachment
               - clientExtensionResults
     PIN:
       description: PIN Hash
