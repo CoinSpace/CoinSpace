@@ -2,7 +2,7 @@ import createError from 'http-errors';
 import semver from 'semver';
 
 import csFee from '../csFee.js';
-
+import domain from '../domain.js';
 import fee from '../fee.js';
 import storage from '../storage.js';
 import { verifyReq } from '../utils.js';
@@ -306,4 +306,10 @@ export async function changellyCreateTransaction(req, res) {
 export async function changellyGetTransactions(req, res) {
   const data = await changelly.getTransactionsV4(req.query.transactions);
   res.status(200).send(data);
+}
+
+export async function getDomainAddress(req, res) {
+  const address = await domain.getAddress(req.query.domain, req.query.crypto);
+  if (!address) throw createError(404, 'Address not found');
+  res.status(200).send({ address });
 }

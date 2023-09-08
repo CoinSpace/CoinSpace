@@ -209,6 +209,37 @@ paths:
                   - data
         default:
           $ref: '#/components/responses/GeneralError'
+  /domain/address:
+    get:
+      x-eov-operation-id: getDomainAddress
+      x-eov-operation-handler: handlers
+      description: Resolve domain crypto address
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cryptoId'
+        - in: query
+          name: domain
+          required: true
+          description: Crypto domain
+          schema:
+            $ref: '#/components/schemas/Domain'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Crypto address
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  address:
+                    $ref: '#/components/schemas/AnyCryptoAddress'
+                required:
+                  - address
+        default:
+          $ref: '#/components/responses/GeneralError'
   /exchange/changelly/estimate:
     get:
       x-eov-operation-id: changellyEstimate
@@ -1014,6 +1045,10 @@ components:
       type: string
       pattern: ^[a-z0-9-]+$
       maxLength: 64
+    Domain:
+      type: string
+      pattern: ^.+\..+$
+      maxLength: 256
     Fee:
       type: object
       additionalProperties: false
