@@ -2,7 +2,7 @@ const API_KEY = process.env.ONRAMPER_API_KEY;
 const rampData = {
   id: 'onramper',
   name: 'Onramper',
-  description: 'Onramper description',
+  description: 'Aggregator',
 };
 
 async function buy(_, crypto, walletAddress) {

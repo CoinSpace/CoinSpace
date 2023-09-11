@@ -7,7 +7,7 @@ const API_KEY = process.env.MOONPAY_API_KEY;
 const rampData = {
   id: 'moonpay',
   name: 'MoonPay',
-  description: 'MoonPay description',
+  description: 'Fast and simple',
 };
 const envSuffix = `${process.env.NODE_ENV === 'production' ? '' : '-sandbox'}`;
 const rampApi = axios.create({

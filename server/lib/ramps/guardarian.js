@@ -6,7 +6,7 @@ const API_KEY = process.env.GUARDARIAN_API_KEY;
 const rampData = {
   id: 'guardarian',
   name: 'Guardarian',
-  description: 'Guardarian description',
+  description: 'Licensed gateway',
 };
 const rampApi = axios.create({
   baseURL: 'https://api-payments.guardarian.com/',

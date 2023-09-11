@@ -8,10 +8,10 @@ import guardarian from './guardarian.js';
 async function buy({ countryCode, crypto: cryptoId, address }) {
   const crypto = cryptoDB.find((item) => item._id === cryptoId);
   const ramps = [
-    btcdirect,
-    onramper,
-    guardarian,
     moonpay,
+    onramper,
+    btcdirect,
+    guardarian,
   ];
   return (await Promise.all(ramps.map((ramp) => {
     return ramp.buy(countryCode, crypto, address).catch(console.error);
@@ -21,10 +21,10 @@ async function buy({ countryCode, crypto: cryptoId, address }) {
 async function sell({ countryCode, crypto: cryptoId, address }) {
   const crypto = cryptoDB.find((item) => item._id === cryptoId);
   const ramps = [
-    btcdirect,
-    onramper,
-    guardarian,
     moonpay,
+    onramper,
+    btcdirect,
+    guardarian,
   ];
   return (await Promise.all(ramps.map((ramp) => {
     return ramp.sell(countryCode, crypto, address).catch(console.error);
