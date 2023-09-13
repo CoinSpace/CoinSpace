@@ -1,0 +1,21 @@
+services:
+
+  web:
+    build:
+      context: .
+      args:
+        NODE_AUTH_TOKEN:
+    env_file: ./.env.local
+    environment:
+      PORT: 8000
+      DB_CONNECT: mongodb://mongo:27017/coinspace
+    ports:
+      - 8000:8000
+    links:
+      - mongo
+
+  mongo:
+    image: mongo:3.6
+    command: mongod -wiredTigerEngineConfigString="cache_size=250M"
+    ports:
+      - '27017:27017'
