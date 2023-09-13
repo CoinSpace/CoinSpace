@@ -1,0 +1,44 @@
+// typography
+@mixin text-bold { font-weight: $font-weight-bold; }
+@mixin text-xs { font-size: 0.75rem; letter-spacing: 0.03em; line-height: 1.5; }    // 12px
+@mixin text-sm { font-size: 0.875rem; letter-spacing: 0.02em; line-height: 1.5; }   // 14px
+@mixin text-md { font-size: 1.125rem; letter-spacing: 0.01em; line-height: 1.5; }   // 18px
+@mixin text-lg { font-size: 1.5rem; letter-spacing: 0; line-height: 1.2; }          // 24px
+@mixin text-xl { font-size: 1.75rem; letter-spacing: 0; line-height: 1.2; }         // 28px
+@mixin text-2xl { font-size: 2rem; letter-spacing: -0.01em; line-height: 1.2; }     // 32px
+@mixin text-3xl { font-size: 2.625rem; letter-spacing: -0.01em; line-height: 1.2; } // 42px
+
+// breakpoints (mobile first)
+$breakpoints: (
+  sm: 576px,  // Small devices (landscape phones, 576px and up)
+  md: 768px,  // Medium devices (tablets, 768px and up)
+  lg: 992px,  // Large devices (desktops, 992px and up)
+  xl: 1200px, // X-Large devices (large desktops, 1200px and up)
+);
+@mixin breakpoint($name) {
+  @if not map-has-key($breakpoints, $name) {
+    @warn "Warning: `#{$name}` is not a valid breakpoint name (sm, md, lg, xl).";
+  } @else {
+    @media (min-width: map-get($breakpoints, $name)) {
+      @content;
+    }
+  }
+}
+
+// truncate text if it runs over the width...
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin transparent-stretch {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}

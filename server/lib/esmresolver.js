@@ -2,7 +2,7 @@ import path from 'path';
 
 const handlersCache = {};
 
-export default function resolver(handlersPath, route, apiDoc) {
+export default function esmresolver(handlersPath, route, apiDoc) {
   const { basePath, expressRoute, openApiRoute, method } = route;
   const pathKey = openApiRoute.substring(basePath.length);
   const schema = apiDoc.paths[pathKey][method.toLowerCase()];

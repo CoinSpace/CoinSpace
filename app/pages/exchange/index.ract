@@ -1,7 +1,0 @@
-<div class-hidden="(needToSetupEos || isDeletedCrypto)">
-  <div id="exchange_none"></div>
-  <div id="exchange_changelly"></div>
-</div>
-
-<div id="eos-setup" class-hidden="!needToSetupEos"></div>
-<div id="deleted-crypto" class-hidden="!isDeletedCrypto"></div>

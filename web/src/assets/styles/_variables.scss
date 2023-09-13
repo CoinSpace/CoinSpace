@@ -1,0 +1,44 @@
+// colors
+$text-color: #222;
+$secondary: #616763;
+$secondary-light: #f6f8fa;
+$primary: #01842e;
+$primary-brand: #68c481;
+$primary-light: #f0f9f2;
+$danger: #dd230e;
+$danger-light: #fcf5ef;
+$divider: #f0f0f0;
+$background-color: #fff;
+$background-color-dark: #2c3832;
+$white: #fff;
+$black: #000;
+$gray: #d3d3d3;
+
+// typography
+$font-size-base: 16px;
+$font-weight-regular: 400;
+$font-weight-bold: 500;
+
+// spacing (padding, margin, gap, width, height, top, right, bottom, left)
+$spacing-3xs: 0.125rem; // 2px
+$spacing-2xs: 0.25rem;  // 4px
+$spacing-xs: 0.5rem;    // 8px
+$spacing-sm: 0.75rem;   // 12px
+$spacing-md: 1rem;      // 16px
+$spacing-lg: 1.25rem;   // 20px
+$spacing-xl: 1.5rem;    // 24px
+$spacing-2xl: 2rem;     // 32px
+$spacing-3xl: 2.5rem;   // 40px
+$spacing-4xl: 3rem;     // 48px
+$spacing-5xl: 4rem;     // 64px
+$spacing-6xl: 5rem;     // 80px
+$spacing-7xl: 6rem;     // 96px
+$spacing-8xl: 8rem;     // 128px
+$spacing-9xl: 10rem;    // 160px
+$desktop-max-width: 80rem; // 1280px
+
+// z-index
+$zindex-dropdown: 100;
+$zindex-modal: 300;
+$zindex-tooltip: 400;
+$zindex-toast: 500;

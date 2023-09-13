@@ -1,0 +1,95 @@
+{
+  "name": "Coin Wallet",
+  "short_name": "Coin Wallet",
+  "description": "Coin Wallet works with any ERC20 / BEP20 / ARC20 / TRC20 tokens and supports the most popular cryptocurrencies — Bitcoin, Bitcoin Cash, Ethereum, Litecoin, XRP, Stellar, EOS, Dogecoin, Dash, Monero, Cardano, Solana and Binance Smart Chain.",
+  "start_url": "https://coin.space/wallet/",
+  "icons": [
+    {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#2C3832",
+  "background_color": "#2C3832",
+  "display": "standalone",
+  "prefer_related_applications": true,
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.coinspace.app",
+      "id": "com.coinspace.app"
+    }, {
+      "platform": "itunes",
+      "url": "https://apps.apple.com/us/app/coinspace-bitcoin-wallet/id980719434"
+    }, {
+      "platform": "windows",
+      "url": "https://apps.microsoft.com/store/detail/coin-wallet/9NBLGGH5PXJQ"
+    }, {
+      "platform": "linux",
+      "url": "https://snapcraft.io/coin"
+    }, {
+      "platform": "macos",
+      "url": "https://apps.apple.com/us/app/coinspace-bitcoin-wallet/id980719434"
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+bitcoincash",
+      "url": "/wallet/bitcoin-cash@bitcoin-cash/bip21/%s"
+    },
+    {
+      "protocol": "bitcoin",
+      "url": "/wallet/bitcoin@bitcoin/bip21/%s"
+    },
+    {
+      "protocol": "web+bitcoin",
+      "url": "/wallet/bitcoin@bitcoin/bip21/%s"
+    },
+    {
+      "protocol": "web+cardano",
+      "url": "/wallet/cardano@cardano/bip21/%s"
+    },
+    {
+      "protocol": "web+dash",
+      "url": "/wallet/dash@dash/bip21/%s"
+    },
+    {
+      "protocol": "web+dogecoin",
+      "url": "/wallet/dogecoin@dogecoin/bip21/%s"
+    },
+    {
+      "protocol": "web+eos",
+      "url": "/wallet/eos@eos/bip21/%s"
+    },
+    {
+      "protocol": "ethereum",
+      "url": "/wallet/ethereum@ethereum/bip21/%s"
+    },
+    {
+      "protocol": "web+ethereum",
+      "url": "/wallet/ethereum@ethereum/bip21/%s"
+    },
+    {
+      "protocol": "web+litecoin",
+      "url": "/wallet/litecoin@litecoin/bip21/%s"
+    },
+    {
+      "protocol": "web+monero",
+      "url": "/wallet/monero@monero/bip21/%s"
+    },
+    {
+      "protocol": "web+stellar",
+      "url": "/wallet/stellar@stellar/bip21/%s"
+    },
+    {
+      "protocol": "web+ripple",
+      "url": "/wallet/xrp@ripple/bip21/%s"
+    }
+  ]
+}

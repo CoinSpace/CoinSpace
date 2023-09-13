@@ -1,0 +1,75 @@
+.error {
+  height: 100%;
+
+  &__container {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding:
+      $spacing-3xl
+      $spacing-xl;
+    padding:
+      $spacing-3xl
+      max($spacing-xl, env(safe-area-inset-right))
+      $spacing-3xl
+      max($spacing-xl, env(safe-area-inset-left));
+    background-color: $background-color-dark;
+    overflow-y: auto;
+  }
+
+  &__frame {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+    margin-bottom: $spacing-5xl;
+    @include breakpoint(lg) {
+      justify-content: center;
+    }
+  }
+
+  &__logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    margin-bottom: $spacing-5xl;
+    @include breakpoint(lg) {
+      flex-grow: 0;
+    }
+  }
+
+  &__logo {
+    width: 10rem;
+  }
+
+  &__error {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+    @include breakpoint(lg) {
+      width: auto;
+      width: 25rem;
+    }
+  }
+
+  &__title {
+    @include text-lg;
+    @include text-bold;
+    margin-bottom: $spacing-md;
+    color: $white;
+  }
+
+  &__message {
+    @include text-md;
+    color: $white;
+  }
+
+  &__copyright {
+    @include text-xs;
+    color: $white;
+  }
+}

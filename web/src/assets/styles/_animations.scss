@@ -1,0 +1,116 @@
+.instant {
+  &-leave-from {
+    opacity: 0;
+  }
+}
+
+.slide-right {
+  &-enter-active,
+  &-leave-active {
+    overflow: hidden;
+    transition-duration: 0.1s;
+  }
+
+  &-enter-active [data-transition] {
+    transition: all 0.1s ease-in;
+  }
+
+  &-enter-from [data-transition] {
+    opacity: 0;
+    transform: translateX(-2rem);
+  }
+
+  &-leave-active [data-transition] {
+    transition: all 0.1s ease-out;
+  }
+
+  &-leave-to [data-transition] {
+    opacity: 0;
+    transform: translateX(2rem);
+  }
+}
+
+.slide-left {
+  &-enter-active,
+  &-leave-active {
+    overflow: hidden;
+    transition-duration: 0.1s;
+  }
+
+  &-enter-active [data-transition] {
+    transition: all 0.1s ease-in;
+  }
+
+  &-enter-from [data-transition] {
+    opacity: 0;
+    transform: translateX(2rem);
+  }
+
+  &-leave-active [data-transition] {
+    transition: all 0.1s ease-out;
+  }
+
+  &-leave-to [data-transition] {
+    opacity: 0;
+    transform: translateX(-2rem);
+  }
+}
+
+@keyframes scale-dot {
+  50% {
+    transform: scale(1.4);
+  }
+}
+
+@keyframes pulse-3 {
+  50%,
+  100% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes pulse-4 {
+  33%,
+  100% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes shake-x {
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-0.625rem);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(0.625rem);
+  }
+}
+
+@keyframes rotation180 {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes mecto-icon {
+  from {
+    opacity: 1;
+    transform: scale(0.5);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-$spacing-xl * 3) scale(2);
+  }
+}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 13">
+  <g stroke="#01842E" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#arrowIncrease_svg__a)">
+    <path d="M9.143 9.071V3.382l-6.286.015m6.286-.014-6.857 6.75"/>
+  </g>
+  <defs>
+    <clipPath id="arrowIncrease_svg__a">
+      <path fill="#fff" d="M0 .5h12v12H0z"/>
+    </clipPath>
+  </defs>
+</svg>

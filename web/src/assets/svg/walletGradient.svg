@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 149 129">
+  <mask id="walletGradient_svg__a" width="149" height="129" x="0" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha">
+    <path stroke="#000" stroke-linecap="round" stroke-width="10" d="m121.712 11.556-1.97-.853c-4.66-2.019-6.99-3.028-9.405-3.739a41.001 41.001 0 0 0-6.558-1.36c-2.499-.308-5.038-.308-10.117-.308H40.2c-12.321 0-18.482 0-23.188 2.398a22 22 0 0 0-9.614 9.614C5 22.015 5 28.175 5 40.496v48.008c0 12.321 0 18.481 2.398 23.188a22 22 0 0 0 9.614 9.614c4.706 2.398 10.867 2.398 23.188 2.398h67.248c5.87 0 8.805 0 11.233-.557a21.998 21.998 0 0 0 16.525-16.526c.557-2.427.557-5.362.557-11.232v0"/>
+    <path stroke="#000" stroke-width="10" d="M8.604 15.593c3.41 2.841 5.115 4.262 6.946 5.41a31.998 31.998 0 0 0 12.693 4.595c2.14.29 4.36.29 8.8.29h69.376c6.83 0 10.245 0 13.046.753a22 22 0 0 1 15.546 15.546c.752 2.801.752 6.216.752 13.046M94.578 74.282c0-10.236 8.297-18.534 18.533-18.534H141a3 3 0 0 1 3 3v31.067a3 3 0 0 1-3 3h-27.889c-10.236 0-18.533-8.298-18.533-18.533Z"/>
+    <circle cx="112.081" cy="74.282" r="5.148" fill="#C4C4C4"/>
+  </mask>
+  <g mask="url(#walletGradient_svg__a)">
+    <ellipse cx="75.332" cy="65" fill="#47985D" rx="116.332" ry="116"/>
+    <g filter="url(#walletGradient_svg__b)">
+      <path fill="#60BB49" d="M227.308-111.283C140.334 39.36 43.195 146.104 10.341 127.136-22.513 108.167 21.36-29.33 108.334-179.973c86.974-150.643 184.113-257.387 216.967-238.419 32.854 18.968-11.019 156.465-97.993 307.109Z"/>
+    </g>
+    <g filter="url(#walletGradient_svg__c)">
+      <ellipse cx="45.137" cy="-127.113" fill="#FFA842" rx="56.886" ry="209.537" transform="rotate(30 45.137 -127.113)"/>
+    </g>
+    <g filter="url(#walletGradient_svg__d)">
+      <ellipse cx="127.378" cy="152.817" fill="#4CAB89" rx="52.852" ry="158.104" transform="rotate(30 127.378 152.817)"/>
+    </g>
+  </g>
+  <defs>
+    <filter id="walletGradient_svg__b" width="516.773" height="729.894" x="-90.566" y="-510.575" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur result="effect1_foregroundBlur_7_832" stdDeviation="45"/>
+    </filter>
+    <filter id="walletGradient_svg__c" width="411.601" height="547.413" x="-160.664" y="-400.819" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur result="effect1_foregroundBlur_7_832" stdDeviation="45"/>
+    </filter>
+    <filter id="walletGradient_svg__d" width="362.724" height="458.95" x="-53.984" y="-76.658" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur result="effect1_foregroundBlur_7_832" stdDeviation="45"/>
+    </filter>
+  </defs>
+</svg>

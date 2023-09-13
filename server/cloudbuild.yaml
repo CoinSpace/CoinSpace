@@ -1,0 +1,54 @@
+steps:
+
+- name: 'node:18.14.2'
+  id: 'build web'
+  env:
+    - 'VITE_COMMIT=${COMMIT_SHA}'
+    - 'VITE_SITE_URL=${_SITE_URL}'
+    - 'VITE_SENTRY_DSN=${_SENTRY_DSN}'
+    - 'VITE_SENTRY_ENVIRONMENT=${_SENTRY_ENVIRONMENT}'
+    - 'VITE_CHANGELLY_REF=${_CHANGELLY_REF}'
+    - 'VITE_MOONPAY_API_KEY=${_MOONPAY_API_KEY}'
+    - 'BASE_URL=${_BASE_URL}'
+  dir: web
+  entrypoint: 'sh'
+  args:
+    - '-c'
+    - |
+      npm config set @coinspace:registry https://npm.pkg.github.com \
+      && npm config set "//npm.pkg.github.com/:_authToken" ${_NPM_READ_TOKEN} \
+      && npm ci \
+      && npm run i18n:ci \
+      && npm run lint \
+      && npm run lint:style \
+      && npm run build \
+      && mv dist ../server/dist
+
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'build server'
+  dir: server
+  entrypoint: 'sh'
+  args:
+    - '-c'
+    - |
+      docker build --build-arg NODE_AUTH_TOKEN=${_NPM_READ_TOKEN} --tag "gcr.io/$PROJECT_ID/${_APP}:latest" . \
+      && docker push "gcr.io/$PROJECT_ID/${_APP}:latest"
+
+- name: 'gcr.io/cloud-builders/kubectl'
+  id: 'deploy'
+  args: ['delete', 'po', '-l', 'app=${_APP}']
+  env:
+    - 'CLOUDSDK_COMPUTE_ZONE=${_CLOUDSDK_COMPUTE_ZONE}'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLOUDSDK_CONTAINER_CLUSTER}'
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: 'purge cdn'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    if [[ "${_DISTRIBUTION}" == "web" ]]; then
+      gcloud compute url-maps invalidate-cdn-cache ${_CDN_URL_MAP_NAME} --host ${_CDN_HOST} --path "/*" --async
+    fi
+
+timeout: 900s

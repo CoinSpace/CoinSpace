@@ -1,9 +1,9 @@
 import cryptoDB from '@coinspace/crypto-db';
 
-import moonpay from './moonpay.js';
 import btcdirect from './btcdirect.js';
-import onramper from './onramper.js';
 import guardarian from './guardarian.js';
+import moonpay from './moonpay.js';
+import onramper from './onramper.js';
 
 async function buy({ countryCode, crypto: cryptoId, address }) {
   const crypto = cryptoDB.find((item) => item._id === cryptoId);

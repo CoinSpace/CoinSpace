@@ -1,17 +1,17 @@
 import createError from 'http-errors';
 import semver from 'semver';
 
+import changelly from '../changelly.js';
+import cryptos from '../cryptos.js';
 import csFee from '../csFee.js';
 import domain from '../domain.js';
 import fee from '../fee.js';
+import github from '../github.js';
+import mecto from '../mecto.js';
+import ramps from '../ramps/index.js';
 import storage from '../storage.js';
 import { verifyReq } from '../utils.js';
 import wallets from '../wallets.js';
-import cryptos from '../cryptos.js';
-import changelly from '../changelly.js';
-import mecto from '../mecto.js';
-import ramps from '../ramps/index.js';
-import github from '../github.js';
 
 export async function getCryptos(_, res) {
   const list = await cryptos.getAllV4();

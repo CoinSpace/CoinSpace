@@ -1,7 +1,7 @@
-import pMemoize from 'p-memoize';
 import ExpiryMap from 'expiry-map';
 import axios from 'axios';
 import crypto from 'crypto';
+import pMemoize from 'p-memoize';
 
 const API_KEY = process.env.MOONPAY_API_KEY;
 const rampData = {
@@ -16,7 +16,7 @@ const rampApi = axios.create({
 });
 const colorCode = '#3cc77a';
 
-async function getRamp(countryCode, crypto, walletAddress) {
+async function moonpay(countryCode, crypto, walletAddress) {
   if (!API_KEY) return {};
   if (!crypto) return {};
   const result = {};
@@ -81,4 +81,4 @@ function signUrl(url) {
   return `${url}&signature=${encodeURIComponent(signature)}`;
 }
 
-export default getRamp;
+export default moonpay;

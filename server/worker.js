@@ -1,5 +1,5 @@
-import Sentry from '@sentry/node';
 import Integrations from '@sentry/integrations';
+import Sentry from '@sentry/node';
 import tasks from './lib/tasks.js';
 
 Sentry.init({

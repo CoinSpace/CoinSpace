@@ -1,18 +1,18 @@
+import changelly from '../changelly.js';
 import createError from 'http-errors';
-import semver from 'semver';
-import wallets from './wallets.js';
 import cryptos from '../cryptos.js';
-import fee from '../fee.js';
 import csFee from '../csFee.js';
+import domain from '../domain.js';
+import fee from '../fee.js';
+import github from '../github.js';
 import mecto from '../mecto.js';
-import storage from '../storage.js';
 import moonpay from '../moonpay.js';
 import openalias from '../openalias.js';
-import domain from '../domain.js';
-import github from '../github.js';
-import changelly from '../changelly.js';
 import ramps from './ramps/index.js';
+import semver from 'semver';
+import storage from '../storage.js';
 import { verifyReq } from '../utils.js';
+import wallets from './wallets.js';
 
 export async function register(req, res) {
   await verifyReq(req.body.walletId, req);

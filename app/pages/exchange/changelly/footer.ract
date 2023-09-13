@@ -1,3 +1,0 @@
-<div class="_powered_by">
-    Powered by <a href="" onclick="return window.safeOpen('https://changelly.com/?ref_id={{ ref }}', '_blank');"><span class="_icon">{{>svg_changelly}}</span> Changelly</a>
-</div>

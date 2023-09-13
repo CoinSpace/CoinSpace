@@ -1,5 +1,5 @@
-import db from './db.js';
 import createError from 'http-errors';
+import db from './db.js';
 
 const COLLECTION = 'cryptos';
 const LEGACY_COLLECTION = 'tokens';

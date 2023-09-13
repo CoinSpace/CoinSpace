@@ -1,20 +1,20 @@
-import { fileURLToPath } from 'url';
-import express from 'express';
 import OpenApiValidator from 'express-openapi-validator';
-import { verifyReq, asyncWrapper } from '../utils.js';
-import wallets from '../v3/wallets.js';
 import esmresolver from '../esmresolver.js';
+import express from 'express';
+import { fileURLToPath } from 'url';
+import wallets from '../v3/wallets.js';
+import { asyncWrapper, verifyReq } from '../utils.js';
 
-const router = express.Router();
+const api = express.Router();
 
-router.use(asyncWrapper(async (req, res, next) => {
+api.use(asyncWrapper(async (req, res, next) => {
   if (req.query.id) {
     req.device = await wallets.getDevice(req.query.id);
   }
   next();
 }));
 
-router.use(OpenApiValidator.middleware({
+api.use(OpenApiValidator.middleware({
   apiSpec: fileURLToPath(new URL('./api.yaml', import.meta.url)),
   // Validate responses only in dev environment
   validateResponses: process.env.NODE_ENV !== 'production',
@@ -40,4 +40,4 @@ router.use(OpenApiValidator.middleware({
   },
 }));
 
-export default router;
+export default api;

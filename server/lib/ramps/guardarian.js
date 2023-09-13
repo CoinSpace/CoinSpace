@@ -1,6 +1,6 @@
-import pMemoize from 'p-memoize';
 import ExpiryMap from 'expiry-map';
 import axios from 'axios';
+import pMemoize from 'p-memoize';
 
 const API_KEY = process.env.GUARDARIAN_API_KEY;
 const rampData = {

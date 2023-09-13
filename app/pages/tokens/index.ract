@@ -1,7 +1,0 @@
-{{#isLoading}}
-  {{>loader}}
-{{/isLoading}}
-
-<div id="tokens-list" class="step"></div>
-<div id="tokens-search" class="step"></div>
-

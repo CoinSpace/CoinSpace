@@ -1,12 +1,12 @@
 import createError from 'http-errors';
-import wallets from '../v3/wallets.js';
-import storage from '../storage.js';
+import csFee from '../csFee.js';
+import fee from '../fee.js';
 import mecto from '../mecto.js';
 import moonpay from '../moonpay.js';
+import storage from '../storage.js';
 import tokens from '../tokens.js';
-import fee from '../fee.js';
-import csFee from '../csFee.js';
 import { verifyReq } from '../utils.js';
+import wallets from '../v3/wallets.js';
 
 export async function register(req, res) {
   await verifyReq(req.body.walletId, req);

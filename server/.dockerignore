@@ -1,0 +1,7 @@
+.DS_Store
+Dockerfile
+cloudbuild.yaml
+node_modules
+dist/**/*.map
+.env.*
+.spectral.yaml

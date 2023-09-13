@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 144 188">
+  <mask id="touchId_svg__a" width="144" height="188" x="0" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha">
+    <path fill="#2A2E3B" fill-rule="evenodd" d="M72 10.453c-9.669 0-18.75 2.449-26.674 6.757a4.833 4.833 0 1 1-4.617-8.493C50.014 3.658 60.679.786 71.999.786c20.546 0 41.297 8.447 53.511 23.936a4.834 4.834 0 0 1-7.591 5.985c-10.04-12.732-27.736-20.255-45.92-20.255ZM28.052 24.587a4.833 4.833 0 0 1-.163 6.833c-10.69 10.192-17.341 24.558-17.341 40.485v44.522c0 19.035 5.689 39.147 22.484 50.787a4.834 4.834 0 0 1-5.507 7.945C7 160.934.881 136.96.881 116.427V71.905c0-18.679 7.813-35.54 20.337-47.481a4.833 4.833 0 0 1 6.834.163Zm105.422 12.041a4.833 4.833 0 0 1 6.136 3.011 65.405 65.405 0 0 1 3.472 19.009h.037V94a4.833 4.833 0 1 1-9.667 0V60.866a55.92 55.92 0 0 0-2.989-18.101 4.832 4.832 0 0 1 3.011-6.137Zm4.812 74.965a4.833 4.833 0 0 1 4.833 4.834c0 15.786-3.594 33.488-14.526 47.342-11.094 14.06-29.18 23.445-56.593 23.445-8.72 0-16.513-.946-23.455-2.708a4.834 4.834 0 0 1 2.377-9.37c6.07 1.541 13.055 2.412 21.078 2.412 25.003 0 40.059-8.43 49.004-19.767 9.108-11.542 12.448-26.816 12.448-41.354a4.834 4.834 0 0 1 4.834-4.834Z" clip-rule="evenodd"/>
+    <path fill="#2A2E3B" fill-rule="evenodd" d="M72 32.548c-21.736 0-39.357 17.62-39.357 39.357v53.786c0 7.482 1.72 14.865 5.026 21.577a4.834 4.834 0 0 1-8.672 4.272 58.497 58.497 0 0 1-6.02-25.849V71.905C22.976 44.83 44.924 22.88 72 22.88c27.075 0 49.024 21.949 49.024 49.024v44.522a4.833 4.833 0 0 1-9.667 0V71.905c0-21.736-17.62-39.357-39.357-39.357Z" clip-rule="evenodd"/>
+    <path fill="#2A2E3B" fill-rule="evenodd" d="M72 54.643c-9.534 0-17.262 7.728-17.262 17.262v55.569c0 6.394 1.608 11.794 4.7 16.385 3.114 4.626 7.92 8.702 14.723 12.104a4.833 4.833 0 1 1-4.323 8.646c-7.927-3.964-14.168-9.038-18.419-15.35-4.273-6.346-6.348-13.669-6.348-21.785v-55.57c0-14.871 12.057-26.928 26.929-26.928 14.872 0 26.928 12.057 26.928 26.929v44.522c0 2.937.731 4.253 1.347 4.868.615.615 1.93 1.346 4.868 1.346 2.937 0 4.253-.731 4.868-1.346.615-.615 1.346-1.931 1.346-4.868a4.833 4.833 0 1 1 9.667 0c0 4.427-1.111 8.636-4.178 11.703s-7.276 4.178-11.703 4.178c-4.428 0-8.636-1.111-11.704-4.178-3.067-3.067-4.177-7.276-4.177-11.703V71.905c0-9.534-7.729-17.262-17.262-17.262Z" clip-rule="evenodd"/>
+    <path fill="#2A2E3B" fill-rule="evenodd" d="M72 67.071a4.833 4.833 0 0 1 4.833 4.834v44.522c0 10.179 2.566 16.929 6.853 21.173 4.296 4.254 11.142 6.805 21.457 6.805a4.833 4.833 0 0 1 0 9.666c-11.78 0-21.506-2.917-28.258-9.601-6.76-6.693-9.719-16.349-9.719-28.043V71.905A4.833 4.833 0 0 1 72 67.07Z" clip-rule="evenodd"/>
+  </mask>
+  <g mask="url(#touchId_svg__a)">
+    <ellipse cx="72.332" cy="94" fill="#47985D" rx="116.332" ry="116"/>
+    <g filter="url(#touchId_svg__b)">
+      <ellipse cx="164.821" cy="-116.628" fill="#60BB49" rx="68.69" ry="314.961" transform="rotate(30 164.821 -116.628)"/>
+    </g>
+    <g filter="url(#touchId_svg__c)">
+      <ellipse cx="42.137" cy="-98.113" fill="#FFA842" rx="56.886" ry="209.537" transform="rotate(30 42.137 -98.113)"/>
+    </g>
+    <g filter="url(#touchId_svg__d)">
+      <ellipse cx="124.378" cy="181.817" fill="#4CAB89" rx="52.852" ry="158.104" transform="rotate(30 124.378 181.817)"/>
+    </g>
+  </g>
+  <defs>
+    <filter id="touchId_svg__b" width="516.773" height="729.894" x="-93.566" y="-481.575" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur result="effect1_foregroundBlur_7_832" stdDeviation="45"/>
+    </filter>
+    <filter id="touchId_svg__c" width="411.602" height="547.413" x="-163.664" y="-371.819" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur result="effect1_foregroundBlur_7_832" stdDeviation="45"/>
+    </filter>
+    <filter id="touchId_svg__d" width="362.724" height="458.95" x="-56.984" y="-47.658" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur result="effect1_foregroundBlur_7_832" stdDeviation="45"/>
+    </filter>
+  </defs>
+</svg>

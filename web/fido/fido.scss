@@ -1,0 +1,47 @@
+@import "../src/assets/styles/common";
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xl;
+  background-color: $white;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  max-width: 320px;
+  flex-direction: column;
+  gap: $spacing-3xl;
+}
+
+.message {
+  @include text-md;
+  text-align: center;
+}
+
+.btn {
+  @include text-md;
+  @include text-bold;
+
+  display: flex;
+  overflow: hidden;
+  height: 3.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0 $spacing-lg;
+  border-radius: 0.625rem;
+  background-color: $primary-brand;
+  gap: $spacing-md;
+  line-height: 1.2;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+
+  &:hover {
+    background-color: darker($primary-brand, 10%);
+  }
+
+  &:active {
+    background-color: darker($primary-brand, 15%);
+  }
+}

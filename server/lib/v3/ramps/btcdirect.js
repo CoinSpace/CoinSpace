@@ -1,6 +1,6 @@
-import pMemoize from 'p-memoize';
 import ExpiryMap from 'expiry-map';
 import axios from 'axios';
+import pMemoize from 'p-memoize';
 
 const API_KEY = process.env.BTCDIRECT_API_KEY;
 const rampData = {
@@ -13,7 +13,7 @@ const rampApi = axios.create({
   headers: { 'x-api-key': API_KEY },
 });
 
-async function getRamp(countryCode, crypto, walletAddress) {
+async function btcdirect(countryCode, crypto, walletAddress) {
   if (!API_KEY) return {};
   if (!crypto) return {};
   const countries = await cachedCountries();
@@ -53,4 +53,4 @@ const cachedCountries = pMemoize(async () => {
   return data.nationalities;
 }, { cache: new ExpiryMap(1 * 60 * 60 * 1000) }); // 1 hour
 
-export default getRamp;
+export default btcdirect;

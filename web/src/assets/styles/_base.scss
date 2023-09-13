@@ -1,0 +1,73 @@
+html {
+  display: flex;
+  min-height: 100%;
+  box-sizing: border-box;
+  color: $text-color;
+  /* stylelint-disable-next-line max-line-length */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: $font-size-base;
+  font-weight: $font-weight-regular;
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+  text-size-adjust: none; // Prevent adjustments of font size after orientation changes in iOS.
+}
+
+body {
+  background-color: $background-color;
+  @include breakpoint(lg) {
+    background-color: $secondary-light;
+  }
+}
+
+html,
+body {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  outline: none;
+  -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
+}
+
+button,
+select,
+input {
+  display: block;
+  padding: 0;
+  border: none;
+  margin: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
+a {
+  color: $primary;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    color: darker($primary, 15%);
+  }
+
+  &:active {
+    color: darker($primary, 25%);
+  }
+}
+
+svg,
+img {
+  display: block;
+}

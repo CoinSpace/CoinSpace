@@ -1,19 +1,19 @@
-import fs from 'fs/promises';
-import crypto from 'crypto';
 import createError from 'http-errors';
-import {
-  generateRegistrationOptions,
-  verifyRegistrationResponse,
-  generateAuthenticationOptions,
-  verifyAuthenticationResponse,
-} from '@simplewebauthn/server';
+import crypto from 'crypto';
 import db from './db.js';
+import fs from 'fs/promises';
+import {
+  generateAuthenticationOptions,
+  generateRegistrationOptions,
+  verifyAuthenticationResponse,
+  verifyRegistrationResponse,
+} from '@simplewebauthn/server';
 import {
   generateChallenge,
   generateUser,
   mapAuthenticator,
 } from './utils.js';
-const pkg = JSON.parse(await fs.readFile(new URL('../../package.json', import.meta.url)));
+const pkg = JSON.parse(await fs.readFile(new URL('../package.json', import.meta.url)));
 
 const COLLECTION = 'wallets';
 const MAX_FAILED_ATTEMPTS = 3;

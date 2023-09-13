@@ -4,7 +4,7 @@ const rampData = {
   svg: 'svg_onramper',
 };
 
-async function getRamp(_, crypto, walletAddress) {
+async function onramper(_, crypto, walletAddress) {
   if (!API_KEY) return {};
   if (!crypto?.onramper?.id) return {};
 
@@ -24,4 +24,4 @@ async function getRamp(_, crypto, walletAddress) {
   };
 }
 
-export default getRamp;
+export default onramper;

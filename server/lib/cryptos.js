@@ -1,6 +1,6 @@
-import cryptoDB from '@coinspace/crypto-db';
 import coingecko from './coingecko.js';
 import coinmarketcap from './coinmarketcap.js';
+import cryptoDB from '@coinspace/crypto-db';
 import db from './db.js';
 
 const COLLECTION = 'cryptos';

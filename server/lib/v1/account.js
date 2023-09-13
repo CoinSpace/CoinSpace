@@ -1,5 +1,5 @@
-import db from '../db.js';
 import crypto from 'crypto';
+import db from '../db.js';
 
 function isExist(walletId) {
   const collection = db.collection('users');

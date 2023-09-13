@@ -1,0 +1,9 @@
+@use "sass:color";
+
+@function lighter($color, $weight) {
+  @return color.scale($color, $lightness: $weight);
+}
+
+@function darker($color, $weight) {
+  @return color.scale($color, $lightness: - $weight);
+}

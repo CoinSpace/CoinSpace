@@ -1,8 +1,0 @@
-<div class='csdropdown'>
-  <span class="csdropdown__label">{{getLabel(value)}}</span>
-  <select id="{{id}}" class="csdropdown__dropdown" value="{{value}}" on-change="on-change">
-    {{#each options}}
-    <option value="{{this.value}}">{{this.name}}</option>
-    {{/each}}
-  </select>
-</div>

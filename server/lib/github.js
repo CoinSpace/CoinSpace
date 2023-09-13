@@ -1,7 +1,7 @@
-import db from './db.js';
-import semver from 'semver';
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
+import db from './db.js';
+import semver from 'semver';
 
 const github = axios.create({
   timeout: 30000,

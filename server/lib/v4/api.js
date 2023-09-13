@@ -1,9 +1,9 @@
-import { fileURLToPath } from 'url';
-import express from 'express';
 import OpenApiValidator from 'express-openapi-validator';
+import esmresolver from '../esmresolver.js';
+import express from 'express';
+import { fileURLToPath } from 'url';
 import { verifyReq } from '../utils.js';
 import wallets from '../wallets.js';
-import esmresolver from '../esmresolver.js';
 
 const { API_KEY } = process.env;
 
@@ -11,9 +11,9 @@ if (!API_KEY) {
   throw new Error('API_KEY is required');
 }
 
-const router = express.Router();
+const api = express.Router();
 
-router.use((req, res, next) => {
+api.use((req, res, next) => {
   req.getDevice = () => {
     if (!req._device) {
       req._device = wallets.getDevice(req.query.id);
@@ -23,7 +23,7 @@ router.use((req, res, next) => {
   next();
 });
 
-router.use(OpenApiValidator.middleware({
+api.use(OpenApiValidator.middleware({
   apiSpec: fileURLToPath(new URL('./api.yaml', import.meta.url)),
   // Validate responses only in dev environment
   validateResponses: process.env.NODE_ENV !== 'production',
@@ -48,4 +48,4 @@ router.use(OpenApiValidator.middleware({
   },
 }));
 
-export default router;
+export default api;

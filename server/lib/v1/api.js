@@ -1,17 +1,17 @@
-import express from 'express';
-import auth from './auth.js';
 import account from './account.js';
-import openalias from '../openalias.js';
-import fee from '../fee.js';
+import auth from './auth.js';
 import csFee from '../csFee.js';
-import tokens from '../tokens.js';
-import moonpay from './moonpay.js';
-import semver from 'semver';
+import express from 'express';
+import fee from '../fee.js';
 import github from '../github.js';
+import moonpay from './moonpay.js';
+import openalias from '../openalias.js';
+import semver from 'semver';
+import tokens from '../tokens.js';
 
-const router = express.Router();
+const api = express.Router();
 
-router.post('/register', validateAuthParams, (req, res) => {
+api.post('/register', validateAuthParams, (req, res) => {
   const walletId = req.body.wallet_id;
   auth.register(walletId, req.body.pin).then((token) => {
     console.log('registered wallet %s', walletId);
@@ -24,7 +24,7 @@ router.post('/register', validateAuthParams, (req, res) => {
   });
 });
 
-router.post('/login', validateAuthParams, (req, res) => {
+api.post('/login', validateAuthParams, (req, res) => {
   const walletId = req.body.wallet_id;
   auth.login(walletId, req.body.pin).then((token) => {
     console.log('authenticated wallet %s', walletId);
@@ -37,7 +37,7 @@ router.post('/login', validateAuthParams, (req, res) => {
   });
 });
 
-router.get('/exist', (req, res) => {
+api.get('/exist', (req, res) => {
   const walletId = req.query.wallet_id;
   if (!walletId) {
     return res.status(400).json({ error: 'Bad request' });
@@ -49,7 +49,7 @@ router.get('/exist', (req, res) => {
   });
 });
 
-router.get('/openalias', (req, res) => {
+api.get('/openalias', (req, res) => {
   const { hostname } = req.query;
   if (!hostname) {
     return res.status(400).json({ error: 'Bad request' });
@@ -63,7 +63,7 @@ router.get('/openalias', (req, res) => {
     });
 });
 
-router.put('/username', (req, res) => {
+api.put('/username', (req, res) => {
   const { id } = req.body;
   const { username } = req.body;
   if (!username) {
@@ -76,7 +76,7 @@ router.put('/username', (req, res) => {
   });
 });
 
-router.get('/details', (req, res) => {
+api.get('/details', (req, res) => {
   account.getDetails(req.query.id).then((details) => {
     res.status(200).json(details);
   }).catch((err) => {
@@ -84,7 +84,7 @@ router.get('/details', (req, res) => {
   });
 });
 
-router.put('/details', (req, res) => {
+api.put('/details', (req, res) => {
   if (!req.body.data) {
     return res.status(400).json({ error: 'Bad request' });
   }
@@ -95,7 +95,7 @@ router.put('/details', (req, res) => {
   });
 });
 
-router.delete('/account', (req, res) => {
+api.delete('/account', (req, res) => {
   const { id } = req.body;
   account.remove(id).then(() => {
     res.status(200).send();
@@ -104,7 +104,7 @@ router.delete('/account', (req, res) => {
   });
 });
 
-router.get('/fees', (req, res) => {
+api.get('/fees', (req, res) => {
   let network = req.query.network || 'bitcoin';
   if (network === 'bitcoincash') network = 'bitcoin-cash';
   if (network === 'bitcoinsv') network = 'bitcoin-sv';
@@ -115,7 +115,7 @@ router.get('/fees', (req, res) => {
   });
 });
 
-router.get('/csFee', (req, res) => {
+api.get('/csFee', (req, res) => {
   let network = req.query.network || 'bitcoin';
   if (network === 'bitcoincash') network = 'bitcoin-cash';
   if (network === 'bitcoinsv') network = 'bitcoin-sv';
@@ -126,7 +126,7 @@ router.get('/csFee', (req, res) => {
   });
 });
 
-router.get('/ticker/applewatch', (req, res) => {
+api.get('/ticker/applewatch', (req, res) => {
   tokens.getFromCacheForAppleWatch().then((data) => {
     res.status(200).send(data);
   }).catch((err) => {
@@ -134,7 +134,7 @@ router.get('/ticker/applewatch', (req, res) => {
   });
 });
 
-router.get('/ethereum/tokens', (req, res) => {
+api.get('/ethereum/tokens', (req, res) => {
   tokens.getTokens('ethereum', 50).then((data) => {
     res.status(200).send(data);
   }).catch((err) => {
@@ -142,11 +142,11 @@ router.get('/ethereum/tokens', (req, res) => {
   });
 });
 
-router.all('/location', (req, res) => {
+api.all('/location', (req, res) => {
   res.status(410).send({ error: 'Please upgrade the app!' });
 });
 
-router.get('/moonpay/coins', (req, res) => {
+api.get('/moonpay/coins', (req, res) => {
   let id = 'coins';
   if (req.query.country === 'USA') {
     id += '_usa';
@@ -158,7 +158,7 @@ router.get('/moonpay/coins', (req, res) => {
   });
 });
 
-router.get('/moonpay/fiat', (req, res) => {
+api.get('/moonpay/fiat', (req, res) => {
   moonpay.getFromCache('fiat').then((data) => {
     res.status(200).send(data);
   }).catch((err) => {
@@ -166,7 +166,7 @@ router.get('/moonpay/fiat', (req, res) => {
   });
 });
 
-router.get('/moonpay/countries', (req, res) => {
+api.get('/moonpay/countries', (req, res) => {
   if (!['document', 'allowed'].includes(req.query.type)) {
     return res.status(400).json({ error: 'Bad request' });
   }
@@ -177,7 +177,7 @@ router.get('/moonpay/countries', (req, res) => {
   });
 });
 
-router.get('/moonpay/redirectURL', (req, res) => {
+api.get('/moonpay/redirectURL', (req, res) => {
   const { buildType } = req.query;
   const transactionId = req.query.transactionId || '';
   if (!['web', 'phonegap', 'electron'].includes(buildType)) {
@@ -188,7 +188,7 @@ router.get('/moonpay/redirectURL', (req, res) => {
 
 // for debug
 // returns all releases
-router.get('/updates', (req, res, next) => {
+api.get('/updates', (req, res, next) => {
   github.getUpdates()
     .then((updates) => {
       return updates.map((item) => {
@@ -208,7 +208,7 @@ router.get('/updates', (req, res, next) => {
     .catch(next);
 });
 
-router.get('/update/:distribution/:arch/:version', (req, res, next) => {
+api.get('/update/:distribution/:arch/:version', (req, res, next) => {
   const app = req.get('User-Agent').includes('CoinSpace') ? 'electron' : 'app';
   const { distribution, arch, version } = req.params;
   if (!semver.valid(version)) {
@@ -231,7 +231,7 @@ router.get('/update/:distribution/:arch/:version', (req, res, next) => {
     }).catch(next);
 });
 
-router.get('/update/win/x64/:version/RELEASES', (req, res, next) => {
+api.get('/update/win/x64/:version/RELEASES', (req, res, next) => {
   const { version } = req.params;
   if (!semver.valid(version)) {
     return res.status(400).send(`Invalid SemVer: "${version}"`);
@@ -246,7 +246,7 @@ router.get('/update/win/x64/:version/RELEASES', (req, res, next) => {
     }).catch(next);
 });
 
-router.get('/download/:distribution/:arch', (req, res, next) => {
+api.get('/download/:distribution/:arch', (req, res, next) => {
   const { distribution, arch } = req.params;
   github.getUpdate(distribution, arch, 'app')
     .then(update => {
@@ -269,4 +269,4 @@ function validatePin(pin) {
   return pin != undefined && pin.match(/^\d{4}$/);
 }
 
-export default router;
+export default api;

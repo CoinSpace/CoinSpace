@@ -1,6 +1,6 @@
-import db from '../db.js';
 import account from './account.js';
 import crypto from 'crypto';
+import db from '../db.js';
 function register(walletId, pin) {
   return account.isExist(walletId).then((userExist) => {
     if (!userExist) {

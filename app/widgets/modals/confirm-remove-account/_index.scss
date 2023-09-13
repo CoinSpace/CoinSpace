@@ -1,9 +1,0 @@
-.modal-remove-account {
-  ._content {
-    text-align: center;
-    font-size: $large_font_size;
-    @include breakpoint(portrait) {
-      font-size: $large_font_size--portrait;
-    }
-  }
-}

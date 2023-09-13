@@ -1,5 +1,5 @@
-import { promises as dns } from 'dns';
 import createError from 'http-errors';
+import { promises as dns } from 'dns';
 
 async function resolveTo(hostname) {
   const prefix = 'btc';

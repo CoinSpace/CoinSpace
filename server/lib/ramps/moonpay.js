@@ -1,7 +1,7 @@
-import pMemoize from 'p-memoize';
 import ExpiryMap from 'expiry-map';
 import axios from 'axios';
 import crypto from 'crypto';
+import pMemoize from 'p-memoize';
 
 const API_KEY = process.env.MOONPAY_API_KEY;
 const rampData = {

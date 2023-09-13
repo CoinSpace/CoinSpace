@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Coin Wallet</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-eval' 'unsafe-inline' data:;
+      style-src 'self' 'unsafe-inline';
+      connect-src
+        'self'
+        %VITE_SITE_URL%
+        %VITE_API_BTC_URL%
+        %VITE_API_BCH_URL%
+        %VITE_API_DASH_URL%
+        %VITE_API_DOGE_URL%
+        %VITE_API_LTC_URL%
+        %VITE_API_ETH_URL%
+        %VITE_API_ETC_URL%
+        %VITE_API_BSC_URL%
+        %VITE_API_POLYGON_URL%
+        %VITE_API_AVAX_URL%
+        %VITE_API_XRP_URL%
+        %VITE_API_XLM_URL%
+        %VITE_API_XMR_URL%
+        %VITE_API_EOS_URL%
+        %VITE_API_SOL_URL%
+        %VITE_API_TRX_URL%
+        %VITE_API_ADA_URL%
+        https://api.coingecko.com/
+        https://api.moonpay.com
+        https://*.sentry.io;
+      img-src
+        'self'
+        %VITE_SITE_URL%
+        https://www.gravatar.com/
+        data:;
+    "/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0, viewport-fit=cover">
+    <meta name="description" content="Coin Wallet works with any ERC20 / BEP20 / ARC20 / TRC20 tokens and supports the most popular cryptocurrencies — Bitcoin, Bitcoin Cash, Ethereum, Litecoin, XRP, Stellar, EOS, Dogecoin, Dash, Monero, Cardano, Solana and Binance Smart Chain.">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="address=no"/>
+    <meta name="apple-itunes-app" content="app-id=980719434"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000">
+    <meta name="msapplication-TileColor" content="#2C3832">
+    <meta name="theme-color" content="#2C3832">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Coin Wallet">
+    <style>
+      @import './src/assets/styles/common.scss';
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div id="error" class="error" style="display: none;">
+      <div class="error__container">
+        <div class="error__frame">
+          <div class="error__logo-wrapper">
+            <img class="error__logo" src="src/assets/svg/logo.svg">
+          </div>
+          <div class="error__error">
+            <div class="error__title">Error</div>
+            <div class="error__message">Update your browser or install Chrome on your device.</div>
+          </div>
+        </div>
+        <div class="error__copyright"> © 2023 CoinSpace </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+    <script>
+      try {
+        if (!Promise) throw new Error('Promise not supported');
+        if (!BigInt) throw new Error('BigInt not supported');
+        if (!Proxy) throw new Error('Proxy not supported');
+        if (!localStorage) throw new Error('localStorage not supported');
+        if (document.createElement('script').noModule === undefined) throw new Error('ES modules not supported');
+      } catch (err) {
+        console.error(err);
+        document.getElementById('app').remove();
+        document.getElementById('error').style.display = 'block';
+      }
+    </script>
+  </body>
+</html>

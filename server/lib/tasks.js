@@ -1,9 +1,9 @@
-import pForever from 'p-forever';
+import cryptos from './cryptos.js';
 import delay from 'delay';
 import fee from './fee.js';
-import moonpay from './v1/moonpay.js';
 import github from './github.js';
-import cryptos from './cryptos.js';
+import moonpay from './v1/moonpay.js';
+import pForever from 'p-forever';
 
 async function cryptosSync() {
   console.time('crypto sync');

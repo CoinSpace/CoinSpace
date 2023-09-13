@@ -1,6 +1,0 @@
-<div id="auth_frame">
-  <div id="auth_choose" class="step"></div>
-  <div id="auth_create" class="step"></div>
-  <div id="auth_create_passphrase" class="step"></div>
-  <div id="auth_create_passphrase_confirm" class="step"></div>
-</div>

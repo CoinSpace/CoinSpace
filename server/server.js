@@ -1,8 +1,8 @@
-import express from 'express';
-import Sentry from '@sentry/node';
 import Integrations from '@sentry/integrations';
-import middleware from './middleware.js';
+import Sentry from '@sentry/node';
+import express from 'express';
 import { isHttpError } from 'http-errors';
+import middleware from './middleware.js';
 
 import apiV1 from './lib/v1/api.js';
 import apiV2 from './lib/v2/api.js';

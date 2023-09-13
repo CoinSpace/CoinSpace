@@ -1,5 +1,5 @@
-import crypto from 'crypto';
 import createError from 'http-errors';
+import crypto from 'crypto';
 import elliptic from 'elliptic';
 const EdDSA = elliptic.eddsa;
 

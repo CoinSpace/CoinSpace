@@ -1,6 +1,6 @@
+import Big from 'big.js';
 import createError from 'http-errors';
 import db from './db.js';
-import Big from 'big.js';
 
 async function getCsFee(cryptoId) {
   const ticker = await db.collection('cryptos')
