@@ -175,7 +175,7 @@ export default class ChangellyExchange {
 
   async saveExchange({ from, to, exchangeId, transactionId, internal }) {
     if (!this.#exchanges) {
-      await this.loadTransactions();
+      await this.loadExchanges();
     }
     this.#exchanges.push({
       cryptoFrom: from,
