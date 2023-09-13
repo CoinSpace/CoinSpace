@@ -151,19 +151,26 @@ export default class ChangellyExchange {
   }
 
   async createExchange({ from, to, amount, address, refundAddress }) {
-    const exchange = await this.#request({
-      url: '/api/v4/exchange/changelly/transaction',
-      method: 'post',
-      data: {
-        from,
-        to,
-        amount: amount.toString(),
-        address,
-        refundAddress,
-      },
-      seed: 'device',
-    });
-    return exchange;
+    try {
+      const exchange = await this.#request({
+        url: '/api/v4/exchange/changelly/transaction',
+        method: 'post',
+        data: {
+          from,
+          to,
+          amount: amount.toString(),
+          address,
+          refundAddress,
+        },
+        seed: 'device',
+      });
+      return exchange;
+    } catch (err) {
+      if (err instanceof errors.NodeError) {
+        throw new InternalExchangeError('Unable to create exchange', { cause: err });
+      }
+      throw err;
+    }
   }
 
   async saveExchange({ from, to, exchangeId, transactionId, internal }) {

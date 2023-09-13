@@ -1,6 +1,7 @@
 <script>
 import CsStep from '../../../components/CsStep.vue';
 import CsTransactionConfirm from '../../../components/CsTransactionConfirm.vue';
+import { InternalExchangeError } from '../../../lib/account/ChangellyExchange.js';
 import MainLayout from '../../../layouts/MainLayout.vue';
 import { walletSeed } from '../../../lib/mixins.js';
 
@@ -63,7 +64,11 @@ export default {
           });
         } catch (err) {
           console.error(err);
-          this.updateStorage({ status: false });
+          if (err instanceof InternalExchangeError) {
+            this.updateStorage({ status: false, message: this.$t('Changelly error. Please try again later.') });
+          } else {
+            this.updateStorage({ status: false });
+          }
         }
         this.next('status');
       });

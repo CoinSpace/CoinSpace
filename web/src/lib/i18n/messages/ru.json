@@ -266,5 +266,6 @@
   "Exchange is currently unavailable for this pair": "",
   "Stealth address": "",
   "Crypto information will be displayed here.": "",
-  "Select a crypto from your wallet.": ""
+  "Select a crypto from your wallet.": "",
+  "Changelly error. Please try again later.": ""
 }
