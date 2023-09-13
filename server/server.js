@@ -33,6 +33,15 @@ app.use('/api/v4', apiV4);
 app.set('views', './server/views');
 app.set('view engine', 'ejs');
 
+app.get('*', (req, res, next) => {
+  if (isAssetsPath(req.path)) return next();
+  res.sendFile('index.html', { root: './dist/' });
+});
+
+function isAssetsPath(path) {
+  return path.match(/\/assets\//);
+}
+
 app.use(Sentry.Handlers.errorHandler());
 
 // eslint-disable-next-line no-unused-vars

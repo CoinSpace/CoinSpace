@@ -53,7 +53,7 @@ function init(app) {
   });
 
   const cacheControl = isProduction() ? { maxAge: dayInMs, setHeaders: setCustomCacheControl } : null;
-  app.use(express.static(fileURLToPath(new URL('../build', import.meta.url)), cacheControl));
+  app.use(express.static(fileURLToPath(new URL('dist', import.meta.url)), cacheControl));
 }
 
 function setCustomCacheControl(res, path) {
