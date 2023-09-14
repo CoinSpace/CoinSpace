@@ -25,8 +25,7 @@ steps:
       && npm run i18n:ci \
       && npm run lint \
       && npm run lint:style \
-      && npm run build \
-      && mv dist ../server/dist
+      && npm run build
 
 - name: 'gcr.io/cloud-builders/docker'
   id: 'build server'

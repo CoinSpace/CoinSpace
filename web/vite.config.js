@@ -154,6 +154,6 @@ function outDir(buildType) {
     case 'phonegap':
       return '../phonegap/dist';
     default:
-      return './dist';
+      return '../server/dist';
   }
 }
