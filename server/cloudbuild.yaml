@@ -11,6 +11,9 @@ steps:
     - 'VITE_CHANGELLY_REF=${_VITE_CHANGELLY_REF}'
     - 'VITE_MOONPAY_API_KEY=${_VITE_MOONPAY_API_KEY}'
     - 'BASE_URL=${_BASE_URL}'
+    - 'SENTRY_ORG=${_SENTRY_ORG}'
+    - 'SENTRY_PROJECT=${_SENTRY_PROJECT}'
+    - 'SENTRY_AUTH_TOKEN=${_SENTRY_AUTH_TOKEN}'
   dir: web
   entrypoint: 'sh'
   args:

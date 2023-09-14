@@ -2,6 +2,7 @@
 import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import { defineConfig } from 'vite';
 import path from 'path';
+import { sentryVitePlugin } from '@sentry/vite-plugin';
 import svgLoader from 'vite-svg-loader';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import vue from '@vitejs/plugin-vue';
@@ -38,6 +39,13 @@ export default defineConfig({
       ],
     }),
     ViteMinifyPlugin(),
+    sentryVitePlugin({
+      org: process.env.SENTRY_ORG,
+      project: process.env.SENTRY_PROJECT,
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+      telemetry: false,
+      disable: !process.env.SENTRY_AUTH_TOKEN,
+    }),
   ],
   build: {
     sourcemap: 'hidden',
