@@ -9,6 +9,7 @@ Sentry.init({
   autoSessionTracking: false,
   environment: import.meta.env.VITE_SENTRY_ENVIRONMENT,
   release,
+  normalizeDepth: 5,
   integrations: [new CaptureConsoleIntegration({ levels: ['error'] })],
 });
 
