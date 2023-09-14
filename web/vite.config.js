@@ -46,11 +46,15 @@ export default defineConfig(({ mode }) => {
         project: process.env.SENTRY_PROJECT,
         authToken: process.env.SENTRY_AUTH_TOKEN,
         telemetry: false,
+        sourcemaps: {
+          filesToDeleteAfterUpload: outDir(env.VITE_BUILD_TYPE) + '/**/*.map',
+        },
         disable: !process.env.SENTRY_AUTH_TOKEN,
       }),
     ],
     build: {
       outDir: outDir(env.VITE_BUILD_TYPE),
+      emptyOutDir: true,
       sourcemap: 'hidden',
       rollupOptions: {
         input: {
@@ -147,9 +151,9 @@ function outDir(buildType) {
   switch (buildType) {
     case 'electron':
       return '../electron/dist';
-    case 'phonagep':
+    case 'phonegap':
       return '../phonegap/dist';
     default:
-      'dist';
+      return './dist';
   }
 }
