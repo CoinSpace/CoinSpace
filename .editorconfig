@@ -18,6 +18,3 @@ insert_final_newline = true
 
 [*.md]
 trim_trailing_whitespace = false
-
-[web/src/lib/i18n/messages/*.json]
-insert_final_newline = false
