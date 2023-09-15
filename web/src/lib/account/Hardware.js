@@ -1,5 +1,5 @@
 import {
-  platformAuthenticatorIsAvailable,
+  browserSupportsWebAuthn,
   startAuthentication,
   startRegistration,
 } from '@simplewebauthn/browser';
@@ -21,7 +21,7 @@ export default class Hardware {
 
   async init() {
     try {
-      this.#isSupported = (await platformAuthenticatorIsAvailable());
+      this.#isSupported = browserSupportsWebAuthn();
     } catch (err) { /* empty */ }
   }
 
@@ -42,7 +42,7 @@ export default class Hardware {
         seed,
       });
       let registration;
-      if (import.meta.env.VITE_BUILD_TYPE === 'web') {
+      if (['web', 'electron'].includes(import.meta.env.VITE_BUILD_TYPE)) {
         if (!this.#isSupported) throw new Error('hardware_not_supported');
         registration = await startRegistration(options);
       } else {
@@ -99,7 +99,7 @@ export default class Hardware {
       });
 
       let authentication;
-      if (import.meta.env.VITE_BUILD_TYPE === 'web') {
+      if (['web', 'electron'].includes(import.meta.env.VITE_BUILD_TYPE)) {
         if (!this.#isSupported) throw new Error('hardware_not_supported');
         authentication = await startAuthentication(options);
       } else {

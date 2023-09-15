@@ -1,8 +1,13 @@
-import { createRouter, createWebHistory } from 'vue-router';
-// import { createRouter, createMemoryHistory } from 'vue-router' // for mobile apps
 import * as EOSSymbols from '@coinspace/cs-eos-wallet/symbols';
 import { CsWallet } from '@coinspace/cs-common';
 import { ref } from 'vue';
+import {
+  //createMemoryHistory,
+  createRouter,
+  createWebHashHistory,
+  createWebHistory,
+} from 'vue-router';
+
 
 import appRoutes from './routes/app.js';
 import authRoutes from './routes/auth.js';
@@ -14,8 +19,8 @@ import {
 } from '../lib/helpers.js';
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  // history: createMemoryHistory(import.meta.env.BASE_URL),
+  history: import.meta.env.VITE_BUILD_TYPE === 'web' ?
+    createWebHistory(import.meta.env.BASE_URL) : createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     ...appRoutes,
     ...authRoutes,
@@ -57,6 +62,12 @@ router.beforeEach((to, from) => {
     to.meta.transition = toDepth > fromDepth ? 'slide-left' : 'slide-right';
   }
 });
+
+if (import.meta.env.VITE_BUILD_TYPE === 'electron') {
+  window.electron?.navigate((event, url) => {
+    router.push(url);
+  });
+}
 
 function setWalletProps($app, wallet) {
   const { $account } = router;

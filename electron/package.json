@@ -1,0 +1,52 @@
+{
+  "name": "coin",
+  "productName": "Coin Wallet",
+  "version": "0.0.0",
+  "description": "Coin Wallet",
+  "license": "MIT",
+  "author": "Coin Wallet <support@coin.space> (https://coin.space/)",
+  "homepage": "https://coin.space/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CoinSpace/CoinSpace.git"
+  },
+  "type": "module",
+  "main": "electron.js",
+  "config": {
+    "forge": "forge.config.js"
+  },
+  "scripts": {
+    "-start": "electron-forge start",
+    "start": "electron .",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "eslint . --ext .js --report-unused-disable-directives",
+    "clean": "rm -rf ./dist && rm -rf ./out"
+  },
+  "devDependencies": {
+    "electron-nightly": "^28.0.0-nightly.20230913",
+    "eslint": "^8.49.0",
+    "eslint-config-coinspace": "^2.1.1"
+  },
+  "dependencies": {
+    "electron-log": "^4.4.8"
+  },
+  "eslintConfig": {
+    "root": true,
+    "ignorePatterns": [
+      "/dist"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "coinspace"
+    ],
+    "env": {
+      "node": true
+    },
+    "parserOptions": {
+      "requireConfigFile": false,
+      "sourceType": "module"
+    }
+  }
+}

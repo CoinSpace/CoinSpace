@@ -53,16 +53,20 @@ export default defineConfig(({ mode }) => {
       }),
     ],
     build: {
+      minify: false,
       outDir: outDir(env.VITE_BUILD_TYPE),
       emptyOutDir: true,
       sourcemap: 'hidden',
       rollupOptions: {
-        input: {
-          main: './index.html',
-          fido: './fido/index.html',
-        },
+        input: inputs(env.VITE_BUILD_TYPE),
+        preserveEntrySignatures: env.VITE_BUILD_TYPE === 'electron' ? 'exports-only' : undefined,
         output: {
-          entryFileNames: 'assets/js/[name]-[hash].js',
+          entryFileNames(info) {
+            if (info.name === 'variables') {
+              return 'variables.js';
+            }
+            return 'assets/js/[name]-[hash].js';
+          },
           chunkFileNames(info) {
             const defaultName = 'assets/js/[name]-[hash].js';
             if (/src\/lib\/i18n\/messages\/[a-z-]+\.json/.test(info.facadeModuleId)) {
@@ -81,6 +85,7 @@ export default defineConfig(({ mode }) => {
             let dir = '';
             if (/\.css$/.test(name)) dir = 'css/';
             if (/\.wasm$/.test(name)) dir = 'wasm/';
+            if (/\.svg$/.test(name)) dir = 'img/';
             return `assets/${dir}[name]-[hash][extname]`;
           },
         },
@@ -156,4 +161,17 @@ function outDir(buildType) {
     default:
       return '../server/dist';
   }
+}
+
+function inputs(buildType) {
+  const inputs = {
+    main: './index.html',
+  };
+  if (buildType === 'phonegap') {
+    inputs['fido'] = './fido/index.html';
+  }
+  if (buildType === 'electron') {
+    inputs['variables'] = './src/variables.js';
+  }
+  return inputs;
 }
