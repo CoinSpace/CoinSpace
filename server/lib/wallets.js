@@ -20,11 +20,16 @@ const MAX_FAILED_ATTEMPTS = 3;
 const MAX_DEVICES = 100;
 const MAX_AUTHENTICATORS = 10;
 
-const url = new URL(process.env.SITE_URL);
+const urlSite = new URL(process.env.SITE_URL);
+const urlApp = new URL(process.env.SITE_URL);
+urlApp.hostname = `app.${urlApp.hostname}`;
 
 const RP_NAME = pkg.description;
-const RP_ID = url.hostname;
-const ORIGIN = url.origin;
+const RP_ID = urlSite.hostname;
+const ORIGIN = [
+  urlSite.origin,
+  urlApp.origin,
+];
 
 const fidoAlgorithmIDs = [
   // ES256
