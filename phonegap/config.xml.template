@@ -1,0 +1,223 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="<%= widget.id %>" android-versionCode="<%= widget.androidVersionCode  %>" ios-CFBundleVersion="<%= widget.iosCFBundleVersion %>" version="<%= widget.version %>" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+  <name><%= widget.name %></name>
+  <description>
+    Coin Wallet
+  </description>
+  <author email="support@coin.space" href="https://coin.space">
+    Coin Wallet Team
+  </author>
+  <content src="index.html" />
+  <access origin="*" />
+  <allow-intent href="http://*/*" />
+  <allow-intent href="https://*/*" />
+  <allow-intent href="tel:*" />
+  <allow-intent href="sms:*" />
+  <allow-intent href="mailto:*" />
+  <allow-intent href="geo:*" />
+  <allow-navigation href="https://*/*" />
+  <platform name="android">
+    <allow-intent href="market:*" />
+    <resource-file src="../images/android/adaptiveicon/ic_launcher.xml" target="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" />
+    <resource-file src="../images/android/adaptiveicon/ic_launcher_foreground.xml" target="app/src/main/res/drawable/ic_launcher_foreground.xml" />
+    <resource-file src="../images/android/adaptiveicon/ic_launcher_background.xml" target="app/src/main/res/values/ic_launcher_background.xml" />
+    <icon src="../images/android/icons/36.png" density="ldpi"/>
+    <icon src="../images/android/icons/48.png" density="mdpi"/>
+    <icon src="../images/android/icons/72.png" density="hdpi"/>
+    <icon src="../images/android/icons/96.png" density="xhdpi"/>
+    <icon src="../images/android/icons/144.png" density="xxhdpi"/>
+    <icon src="../images/android/icons/192.png" density="xxxhdpi"/>
+    <custom-config-file target="AndroidManifest.xml" parent="/*" mode="replace">
+      <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+      <uses-feature android:name="android.hardware.camera" android:required="false" />
+      <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+    </custom-config-file>
+    <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="bitcoin"/>
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="bitcoincash"/>
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="bitcoinsv"/>
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="ethereum"/>
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="litecoin"/>
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="ripple"/>
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="stellar"/>
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="eos"/>
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="dogecoin"/>
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="dash"/>
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="monero"/>
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="cardano"/>
+      </intent-filter>
+    </config-file>
+    <preference name="AndroidLaunchMode" value="singleTask"/>
+    <preference name="AndroidXEnabled" value="true" />
+    <preference name="android-minSdkVersion" value="22" />
+    <preference name="android-targetSdkVersion" value="33" />
+    <preference name="CustomURLSchemePluginClearsAndroidIntent" value="true"/>
+    <preference name="AndroidWindowSplashScreenAnimatedIcon" value="../images/android/splashscreen.xml" />
+    <preference name="AndroidWindowSplashScreenBackground" value="#ffffff" />
+  </platform>
+  <platform name="ios">
+    <icon src="../images/ios/icons/icon-20.png" width="20" height="20" />
+    <icon src="../images/ios/icons/icon-20@2x.png" width="40" height="40" />
+    <icon src="../images/ios/icons/icon-20@3x.png" width="60" height="60" />
+    <icon src="../images/ios/icons/icon-40.png" width="40" height="40" />
+    <icon src="../images/ios/icons/icon-40@2x.png" width="80" height="80" />
+    <icon src="../images/ios/icons/icon-50.png" width="50" height="50" />
+    <icon src="../images/ios/icons/icon-50@2x.png" width="100" height="100" />
+    <icon src="../images/ios/icons/icon-60@2x.png" width="120" height="120" />
+    <icon src="../images/ios/icons/icon-60@3x.png" width="180" height="180" />
+    <icon src="../images/ios/icons/icon-72.png" width="72" height="72" />
+    <icon src="../images/ios/icons/icon-72@2x.png" width="144" height="144" />
+    <icon src="../images/ios/icons/icon-76.png" width="76" height="76" />
+    <icon src="../images/ios/icons/icon-76@2x.png" width="152" height="152" />
+    <icon src="../images/ios/icons/icon-83.5@2x.png" width="167" height="167" />
+    <icon src="../images/ios/icons/icon-1024.png" width="1024" height="1024" />
+    <icon src="../images/ios/icons/icon-29.png" width="29" height="29" />
+    <icon src="../images/ios/icons/icon-29@2x.png" width="58" height="58" />
+    <icon src="../images/ios/icons/icon-29@3x.png" width="87" height="87" />
+    <icon src="../images/ios/icons/icon.png" width="57" height="57" />
+    <icon src="../images/ios/icons/icon@2x.png" width="114" height="114" />
+    <icon src="../images/ios/icons/icon-24@2x.png" width="48" height="48" />
+    <icon src="../images/ios/icons/icon-27.5@2x.png" width="55" height="55" />
+    <icon src="../images/ios/icons/icon-44@2x.png" width="88" height="88" />
+    <icon src="../images/ios/icons/icon-86@2x.png" width="172" height="172" />
+    <icon src="../images/ios/icons/icon-98@2x.png" width="196" height="196" />
+    <splash src="../images/ios/screens/Default@2x~iphone~anyany.png" />
+    <splash src="../images/ios/screens/Default@2x~iphone~comany.png" />
+    <splash src="../images/ios/screens/Default@2x~iphone~comcom.png" />
+    <splash src="../images/ios/screens/Default@3x~iphone~anyany.png" />
+    <splash src="../images/ios/screens/Default@3x~iphone~anycom.png" />
+    <splash src="../images/ios/screens/Default@3x~iphone~comany.png" />
+    <splash src="../images/ios/screens/Default@2x~ipad~anyany.png" />
+    <splash src="../images/ios/screens/Default@2x~ipad~comany.png" />
+    <edit-config target="NSLocationWhenInUseUsageDescription" file="Coin/Coin-Info.plist" mode="merge">
+      <string>Turn on location services to send or receive coins with people around you.</string>
+    </edit-config>
+    <edit-config target="NSLocationAlwaysAndWhenInUseUsageDescription" file="Coin/Coin-Info.plist" mode="merge">
+      <string>Turn on location services to send or receive coins with people around you.</string>
+    </edit-config>
+    <edit-config target="NSCameraUsageDescription" file="Coin/Coin-Info.plist" mode="merge">
+      <string>This app uses the camera to scan barcodes and take pictures.</string>
+    </edit-config>
+    <edit-config target="UIStatusBarHidden" file="Coin/Coin-Info.plist" mode="overwrite">
+      <true/>
+    </edit-config>
+    <edit-config target="ITSAppUsesNonExemptEncryption" file="Coin/Coin-Info.plist" mode="overwrite">
+      <false/>
+    </edit-config>
+    <edit-config target="UIViewControllerBasedStatusBarAppearance" file="Coin/Coin-Info.plist" mode="overwrite">
+      <false/>
+    </edit-config>
+    <edit-config target="UIApplicationShortcutItems" file="Coin/Coin-Info.plist" mode="merge">
+      <array>
+        <dict>
+          <key>UIApplicationShortcutItemIconFile</key>
+          <string></string>
+          <key>UIApplicationShortcutItemTitle</key>
+          <string>Bitcoin</string>
+          <key>UIApplicationShortcutItemType</key>
+          <string>com.coinspace.wallet.bitcoin</string>
+        </dict>
+        <dict>
+          <key>UIApplicationShortcutItemIconFile</key>
+          <string></string>
+          <key>UIApplicationShortcutItemTitle</key>
+          <string>Dogecoin</string>
+          <key>UIApplicationShortcutItemType</key>
+          <string>com.coinspace.wallet.dogecoin</string>
+        </dict>
+        <dict>
+          <key>UIApplicationShortcutItemIconFile</key>
+          <string></string>
+          <key>UIApplicationShortcutItemTitle</key>
+          <string>Ethereum</string>
+          <key>UIApplicationShortcutItemType</key>
+          <string>com.coinspace.wallet.ethereum</string>
+        </dict>
+        <dict>
+          <key>UIApplicationShortcutItemIconFile</key>
+          <string></string>
+          <key>UIApplicationShortcutItemTitle</key>
+          <string>Litecoin</string>
+          <key>UIApplicationShortcutItemType</key>
+          <string>com.coinspace.wallet.litecoin</string>
+        </dict>
+      </array>
+    </edit-config>
+    <edit-config target="com.apple.developer.associated-domains" file="Coin/Entitlements-Debug.plist" mode="merge">
+      <array>
+        <string>applinks:coin.space</string>
+      </array>
+    </edit-config>
+    <edit-config target="com.apple.developer.associated-domains" file="Coin/Entitlements-Release.plist" mode="merge">
+      <array>
+        <string>applinks:coin.space</string>
+      </array>
+    </edit-config>
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
+    <preference name="SwiftVersion" value="5.0" />
+  </platform>
+  <preference name="AutoHideSplashScreen" value="false" />
+  <preference name="StatusBarBackgroundColor" value="#FFFFFF" />
+  <preference name="DisallowOverscroll" value="true"/>
+  <preference name="scheme" value="app" />
+  <preference name="hostname" value="localhost" />
+</widget>

@@ -71,6 +71,7 @@
     "stylelint-config-coinspace": "^0.0.1",
     "svgo": "^3.0.2",
     "vite": "^4.0.0",
+    "vite-plugin-ejs": "^1.6.4",
     "vite-plugin-minify": "^1.5.2",
     "vite-plugin-node-polyfills": "^0.9.0",
     "vite-plugin-static-copy": "^0.17.0",

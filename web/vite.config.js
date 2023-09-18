@@ -1,4 +1,5 @@
 /* eslint-env node */
+import { ViteEjsPlugin } from 'vite-plugin-ejs';
 import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import path from 'path';
 import { sentryVitePlugin } from '@sentry/vite-plugin';
@@ -40,6 +41,7 @@ export default defineConfig(({ mode }) => {
           },
         ],
       }),
+      ViteEjsPlugin(() => ({ env })),
       ViteMinifyPlugin(),
       sentryVitePlugin({
         org: process.env.SENTRY_ORG,
@@ -157,7 +159,7 @@ function outDir(buildType) {
     case 'electron':
       return '../electron/dist';
     case 'phonegap':
-      return '../phonegap/dist';
+      return '../phonegap/build/www';
     default:
       return '../server/dist';
   }

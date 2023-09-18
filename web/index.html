@@ -85,5 +85,8 @@
         document.getElementById('error').style.display = 'block';
       }
     </script>
+    <% if (env.VITE_BUILD_TYPE === 'phonegap') { %>
+      <script src="cordova.js"></script>
+    <% } %>
   </body>
 </html>

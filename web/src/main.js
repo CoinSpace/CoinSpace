@@ -8,6 +8,10 @@ import router from './router/router.js';
 import i18n, { setLanguage } from './lib/i18n/i18n.js';
 
 async function main() {
+  if (import.meta.env.VITE_BUILD_TYPE === 'phonegap') {
+    await import('../../phonegap/deviceready.js');
+  }
+
   const app = createApp({ App, router });
   await createAccount({ app, router });
   await setLanguage();

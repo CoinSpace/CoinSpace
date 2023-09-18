@@ -62,6 +62,9 @@
   },
   "eslintConfig": {
     "root": true,
+    "ignorePatterns": [
+      "/dist"
+    ],
     "extends": [
       "coinspace"
     ],

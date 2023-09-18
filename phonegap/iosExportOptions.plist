@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>method</key>
+	<string>app-store</string>
+	<key>teamID</key>
+	<string>3M4KWD4BUU</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>com.coinspace.wallet</key>
+		<string>com.coinspace.wallet (production)</string>
+		<key>com.coinspace.wallet.watchapp</key>
+		<string>com.coinspace.wallet.watchapp (production)</string>
+		<key>com.coinspace.wallet.watchapp.extension</key>
+		<string>com.coinspace.wallet.watchapp.extension (prod)</string>
+	</dict>
+</dict>
+</plist>
