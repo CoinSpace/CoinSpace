@@ -17,12 +17,7 @@ export default class Hardware {
     }
     this.#request = request;
     this.#account = account;
-  }
-
-  async init() {
-    try {
-      this.#isSupported = browserSupportsWebAuthn();
-    } catch (err) { /* empty */ }
+    this.#isSupported = browserSupportsWebAuthn();
   }
 
   async list() {
