@@ -1,7 +1,20 @@
-<script setup>
+<script>
 import CsErrorHardwareNotSupported from './components/CsErrorHardwareNotSupported.vue';
 import CsUpdater from './components/CsUpdater.vue';
 import { RouterView } from 'vue-router';
+
+export default {
+  components: {
+    RouterView,
+    CsErrorHardwareNotSupported,
+    CsUpdater,
+  },
+  mounted() {
+    if (this.env.VITE_BUILD_TYPE === 'phonegap') {
+      window.navigator.splashscreen.hide();
+    }
+  },
+};
 </script>
 
 <template>

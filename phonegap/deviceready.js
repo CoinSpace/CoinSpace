@@ -1,7 +1,10 @@
 /* eslint-disable no-undef */
-document.addEventListener('deviceready', onDeviceReady, false);
 
-async function onDeviceReady() {
+export default async function deviceready() {
+  await new Promise((resolve) => {
+    document.addEventListener('deviceready', resolve, false);
+  });
+
   // fix: force fallback (cordova doesn't set Content-Type: application/wasm)
   if (window.WebAssembly) WebAssembly.instantiateStreaming = false;
 
@@ -68,7 +71,6 @@ async function onDeviceReady() {
     window.StatusBar.overlaysWebView(false);
     window.StatusBar.overlaysWebView(true);
   }
-  navigator.splashscreen.hide();
 }
 
 // TODO

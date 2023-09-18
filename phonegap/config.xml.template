@@ -112,7 +112,7 @@
     <preference name="android-targetSdkVersion" value="33" />
     <preference name="CustomURLSchemePluginClearsAndroidIntent" value="true"/>
     <preference name="AndroidWindowSplashScreenAnimatedIcon" value="../images/android/splashscreen.xml" />
-    <preference name="AndroidWindowSplashScreenBackground" value="#ffffff" />
+    <preference name="AndroidWindowSplashScreenBackground" value="#2C3832" />
   </platform>
   <platform name="ios">
     <icon src="../images/ios/icons/icon-20.png" width="20" height="20" />
