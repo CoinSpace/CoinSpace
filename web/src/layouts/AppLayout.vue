@@ -34,12 +34,13 @@ export default {
   .#{ $filename } {
     display: flex;
     height: 100%;
+    padding-top: env(safe-area-inset-top);
     gap: $spacing-md;
 
     @include breakpoint(lg) {
       max-width: $desktop-max-width;
       padding:
-        $spacing-md
+        max($spacing-md, env(safe-area-inset-top))
         max($spacing-md, env(safe-area-inset-right))
         $spacing-md
         max($spacing-md, env(safe-area-inset-left));

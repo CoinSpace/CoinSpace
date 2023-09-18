@@ -88,10 +88,11 @@ export default {
     height: 100%;
     flex-direction: column;
     align-items: center;
+    padding-top: env(safe-area-inset-top);
 
     @include breakpoint(lg) {
       padding:
-        $spacing-md
+        max($spacing-md, env(safe-area-inset-top))
         max($spacing-md, env(safe-area-inset-right))
         $spacing-md
         max($spacing-md, env(safe-area-inset-left));
