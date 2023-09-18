@@ -169,7 +169,7 @@ function inputs(buildType) {
   const inputs = {
     main: './index.html',
   };
-  if (buildType === 'phonegap') {
+  if (buildType === 'web') {
     inputs['fido'] = './fido/index.html';
   }
   if (buildType === 'electron') {
