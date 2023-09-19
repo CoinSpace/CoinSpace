@@ -1,4 +1,4 @@
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'node:url';
 import log from 'electron-log';
 import { BrowserWindow, shell } from 'electron';
 

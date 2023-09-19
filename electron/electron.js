@@ -1,7 +1,7 @@
 import log from 'electron-log';
+import { pathToFileURL } from 'node:url';
 import { Menu, app, net, protocol } from 'electron';
 
-import { join } from 'path';
 import menu from './lib/menu.js';
 import openWindow from './lib/openWindow.js';
 import {
@@ -25,7 +25,7 @@ log.info('versions', process.versions);
 
 if (isWindows) {
   app.setAboutPanelOptions({
-    iconPath: join(__dirname, 'resources/64x64.png'),
+    iconPath: pathToFileURL('.resources/64x64.png'),
   });
 }
 
@@ -34,7 +34,7 @@ if (isLinux) {
     applicationName: app.name,
     applicationVersion: app.getVersion(),
     website: VITE_SITE_URL,
-    iconPath: join(__dirname, 'resources/64x64.png'),
+    iconPath: pathToFileURL('./resources/64x64.png'),
   });
 }
 

@@ -7,7 +7,7 @@ import {
   isDevelopment,
 } from './constants.js';
 
-const supportedDistribution = ['mac', 'win'];
+const supportedDistribution = ['mac'];
 
 class Updater {
   constructor() {
