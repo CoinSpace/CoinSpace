@@ -129,8 +129,9 @@ export default {
     },
     async share() {
       if (this.env.VITE_BUILD_TYPE === 'phonegap') {
-        // TODO implement
-        return;
+        return window.plugins.socialsharing.shareWithOptions({
+          message: this.address,
+        });
       }
       try {
         if (navigator.share) {
@@ -142,9 +143,7 @@ export default {
           const body = encodeURIComponent(`${this.address}\n\nSent from Coin Wallet\nhttps://coin.space`);
           this.$safeOpen(`mailto:?body=${body}`);
         }
-      } catch (err) {
-        // Silence Is Golden
-      }
+      } catch (err) { /* empty */ }
     },
   },
 };
