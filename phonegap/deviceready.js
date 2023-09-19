@@ -21,6 +21,30 @@ export default async function deviceready() {
   );
   window.Zendesk.setAnonymousIdentity();
 
+  window.qrScan = function(callback) {
+    window.backButtonOff = true;
+    cordova.plugins.barcodeScanner.scan(
+      (result) => {
+        setTimeout(() => { window.backButtonOff = false; }, 1000);
+        if (result.text) {
+          const address = result.text.split('?')[0].split(':').pop();
+          callback(address);
+        }
+      },
+      () => {
+        setTimeout(() => { window.backButtonOff = false; }, 1000);
+        navigator.notification.alert(
+          'Access to the camera has been prohibited; please enable it in the Settings app to continue',
+          () => {},
+          'Coin Wallet'
+        );
+      },
+      {
+        showTorchButton: true,
+      }
+    );
+  },
+
   // TODO
   // ThreeDeeTouch.onHomeIconPressed = function({ type }) {
   //   const platform = type.split('.').pop();

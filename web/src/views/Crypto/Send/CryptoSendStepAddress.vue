@@ -118,12 +118,12 @@ export default {
       navigator.clipboard.readText()
         .then((text) => {
           this.addressOrAlias = text;
-        }, () => {
-          // Silence Is Golden
-        });
+        }, () => {});
     },
     async scan() {
-      // TODO implement
+      window.qrScan((address) => {
+        this.addressOrAlias = address;
+      });
     },
   },
 };
