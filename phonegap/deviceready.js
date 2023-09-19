@@ -19,6 +19,7 @@ export default async function deviceready() {
     import.meta.env.VITE_ZENDESK_CLIENT_ID,
     import.meta.env.VITE_ZENDESK_URL
   );
+  window.Zendesk.setAnonymousIdentity();
 
   // TODO
   // ThreeDeeTouch.onHomeIconPressed = function({ type }) {
