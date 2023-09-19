@@ -9,7 +9,7 @@ import i18n, { setLanguage } from './lib/i18n/i18n.js';
 
 async function main() {
   if (import.meta.env.VITE_BUILD_TYPE === 'phonegap') {
-    await (await import('../../phonegap/deviceready.js')).default();
+    await (await import('../../phonegap/lib/deviceready.js')).default();
   }
 
   const app = createApp({ App, router });

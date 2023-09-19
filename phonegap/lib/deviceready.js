@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+import Taptic from './Taptic.js';
 
 export default async function deviceready() {
   await new Promise((resolve) => {
@@ -20,6 +21,10 @@ export default async function deviceready() {
     import.meta.env.VITE_ZENDESK_URL
   );
   window.Zendesk.setAnonymousIdentity();
+
+  const taptic = new Taptic();
+  await taptic.init();
+  window.taptic = taptic;
 
   window.qrScan = function(callback) {
     window.backButtonOff = true;

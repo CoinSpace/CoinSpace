@@ -62,10 +62,12 @@ export default {
       if (this.value.length === 4) return;
       this.value += number;
       this.error = undefined;
+      window.taptic?.tap();
     },
     backspace() {
       if (this.isLoading) return;
       this.value = this.value.slice(0, -1);
+      window.taptic?.tap();
     },
     keydown({ key }) {
       if (/\d/.test(key)) {
@@ -161,6 +163,7 @@ export default {
           setTimeout(() => {
             this.isWrong = false;
           }, 700);
+          window.taptic?.error();
           break;
         default:
           this.error = this.$t('Error! Please try again later.');
