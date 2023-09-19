@@ -4,7 +4,6 @@ export default function handleOpenURL(account) {
     window.handleOpenURL = function(url) {
       const { SafariViewController } = window;
       SafariViewController.hide();
-      if (import.meta.env.VITE_PLATFORM === 'ios') window.StatusBar.setStyle(SafariViewController.statusBarStyle);
       setTimeout(() => {
         account.emit('handleOpenURL', url);
       }, 1);

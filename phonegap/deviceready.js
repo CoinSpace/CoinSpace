@@ -28,15 +28,6 @@ export default async function deviceready() {
   //   const cryptoId = `${platform}@${platform}`;
   //   return window.location = `${baseUrl}?crypto=${cryptoId}`;
   // };
-
-  if (import.meta.env.VITE_PLATFORM === 'ios') {
-    window.StatusBar.setStyle = (style) => {
-      window.StatusBar.style = style;
-      if (style === 'default') return window.StatusBar.styleDefault();
-      if (style === 'lightContent') return window.StatusBar.styleLightContent();
-    };
-  }
-
   window.open = (url, target, options) => {
     return cordova.InAppBrowser.open(url, '_system', options);
   };
@@ -44,29 +35,12 @@ export default async function deviceready() {
   SafariViewController.isAvailable((available) => {
     if (!available) return;
     window.open = (url) => {
-      if (import.meta.env.VITE_PLATFORM === 'ios') {
-        SafariViewController.statusBarStyle = window.StatusBar.style;
-      }
-      SafariViewController.show(
-        { url },
-        (result) => {
-          if (import.meta.env.VITE_PLATFORM === 'ios') {
-            if (result.event === 'opened') return window.StatusBar.setStyle('default');
-            if (result.event === 'closed') {
-              return window.StatusBar.setStyle(SafariViewController.statusBarStyle);
-            }
-          }
-        },
-        () => {
-          return window.StatusBar.setStyle(SafariViewController.statusBarStyle);
-        }
-      );
-      return {};
+      SafariViewController.show({ url });
     };
   });
 
   if (import.meta.env.VITE_PLATFORM === 'ios') {
-    window.StatusBar.setStyle('default');
+    window.StatusBar.styleDefault();
     window.StatusBar.show();
     window.StatusBar.overlaysWebView(false);
     window.StatusBar.overlaysWebView(true);
