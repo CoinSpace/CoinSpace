@@ -29,7 +29,7 @@
   "Amount": "Amount",
   "An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.": "An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.",
   "Are you sure you want to remove {name} from the wallet?": "Are you sure you want to remove {name} from the wallet?",
-  "Are you sure you wish to remove your account? You cannot undo this action.": "Are you sure you wish to remove your account? You cannot undo this action.",
+  "Are you sure you want to remove your account? You cannot undo this action.": "Are you sure you want to remove your account? You cannot undo this action.",
   "Awaiting transaction confirmation.": "Awaiting transaction confirmation.",
   "Back": "Back",
   "Balance": "Balance",

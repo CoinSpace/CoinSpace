@@ -37,7 +37,7 @@ export default {
       class="&__container"
     >
       <div class="&__note">
-        {{ $t('Are you sure you wish to remove your account? You cannot undo this action.') }}
+        {{ $t('Are you sure you want to remove your account? You cannot undo this action.') }}
       </div>
     </div>
     <CsButton
