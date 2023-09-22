@@ -173,7 +173,7 @@ jobs:
         env:
           VITE_BUILD_TYPE: ${{ matrix.VITE_BUILD_TYPE }}
         shell: bash
-        run: npm --prefix ${VITE_BUILD_TYPE} version $(node -p -e "require('./web/package.json').version") --no-git-tag-version
+        run: npm --prefix ${VITE_BUILD_TYPE} version $(node -p -e "require('./web/package.json').version") --no-git-tag-version --allow-same-version
       - name: Build app
         env:
           NODE_ENV: ${{ github.ref == 'refs/heads/master' && 'production' || 'development' }}
