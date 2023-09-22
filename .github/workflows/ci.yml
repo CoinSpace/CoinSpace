@@ -90,6 +90,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
+          registry-url: https://npm.pkg.github.com/
       - name: Install Node.js dependencies
         env:
           NODE_ENV: ci
