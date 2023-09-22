@@ -1,0 +1,33 @@
+name: CoinSpace CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '**'
+
+jobs:
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: https://npm.pkg.github.com/
+      - env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_READ_TOKEN}}
+        run: |
+          npm --prefix web ci
+          npm --prefix server ci
+          npm --prefix electron install
+          npm --prefix phonegap ci
+      - run: |
+          npm run --prefix web lint
+          npm run --prefix web lint:style
+          npm run --prefix server lint
+          npm run --prefix server lint:api
+          npm run --prefix electron lint
+          npm run --prefix phonegap lint

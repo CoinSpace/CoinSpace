@@ -23,13 +23,19 @@ if (BUILD_PLATFORM === 'mas' && process.env.GITHUB_RUN_NUMBER) {
   buildVersion = `1.1.${process.env.GITHUB_RUN_NUMBER}`;
 }
 
+const protocols = {
+  name: pkg.productName,
+  schemes,
+};
+const appxPackageName = BUILD_PLATFORM === 'appx' ? 'CoinWallet' : 'CoinWalletDev';
+
 export default {
   packagerConfig: {
     appVersion: pkg.version,
     buildVersion,
     //asar: true,
     icon: 'resources/icon',
-    executableName: ['win', 'appx', 'appx-dev'].includes(BUILD_PLATFORM) ? pkg.productName : pkg.name,
+    executableName: ['win', 'appx', 'appx-dev'].includes(BUILD_PLATFORM) ? pkg.productName : pkg.executableName,
     ignore: [
       /README.md/i,
       /HISTORY.md/i,
@@ -74,18 +80,15 @@ export default {
       appleId: process.env.APPLE_ID,
       appleIdPassword: process.env.APPLE_PASSWORD,
     } : undefined,
-    protocols: {
-      name: 'Coin Wallet',
-      schemes,
-    },
+    protocols,
     afterCopy: [
       ...(['mac', 'mas', 'mas-dev'].includes(BUILD_PLATFORM) ? [setLanguages(languages.map((item) => {
         return item.replace('-', '_').replace(/_[a-z]+/, s => s.toUpperCase());
       }))] : []),
       ...(['appx', 'appx-dev'].includes(BUILD_PLATFORM) ? [appxmanifest({
         packageVersion: `${pkg.version}.0`,
-        identityName: BUILD_PLATFORM === 'appx' ? process.env.APPX_IDENTITY : pkg.name,
-        packageName: BUILD_PLATFORM === 'appx' ? 'CoinWallet' : 'CoinWalletDev',
+        identityName: BUILD_PLATFORM === 'appx' ? process.env.APPX_IDENTITY : pkg.executableName,
+        packageName: appxPackageName,
         packageDescription: pkg.description,
         //packageDisplayName: process.env.APPX_PACKAGE_NAME,
         packageDisplayName: pkg.productName,
@@ -101,10 +104,7 @@ export default {
               return lang;
           }
         }),
-        protocols: {
-          name: 'Coin Wallet',
-          schemes,
-        },
+        protocols,
       })] : []),
     ],
   },
@@ -112,7 +112,7 @@ export default {
     BUILD_PLATFORM === 'appx' && {
       name: '@electron-forge/maker-appx',
       config: {
-        packageName: 'CoinWallet',
+        packageName: appxPackageName,
         identityName: process.env.APPX_IDENTITY,
         publisher: process.env.APPX_PUBLISHER,
         assets: 'resources/appx',
@@ -123,7 +123,7 @@ export default {
     BUILD_PLATFORM === 'appx-dev' && {
       name: '@electron-forge/maker-appx',
       config: {
-        packageName: 'CoinWalletDev',
+        packageName: appxPackageName,
         identityName: pkg.name,
         publisher: process.env.APPX_PUBLISHER_DEV,
         devCert: 'resources/certificate.pfx',
@@ -194,10 +194,7 @@ export default {
           },
           plugs: ['default', 'u2f-devices'],
         },
-        protocols: {
-          name: 'Coin Wallet',
-          schemes,
-        },
+        protocols,
         publish: BRANCH === 'master' ? 'always' : 'never',
       },
     },*/
