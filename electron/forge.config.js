@@ -10,16 +10,16 @@ const schemes = [
 const languages = ['en', 'ru'];
 const pkg = JSON.parse(await fs.readFile('./package.json'));
 
-const { BUILD_PLATFORM } = process.env;
-//const BRANCH = process.env.GITHUB_REF && process.env.GITHUB_REF.replace('refs/heads/', '');
+const { VITE_DISTRIBUTION } = process.env;
+const BRANCH = process.env.GITHUB_REF && process.env.GITHUB_REF.replace('refs/heads/', '');
 
-if (!['win', 'appx', 'appx-dev', 'mac', 'mas', 'mas-dev', 'snap'].includes(BUILD_PLATFORM)) {
-  throw new Error(`Please specify valid distribution, provided: '${BUILD_PLATFORM}'`);
+if (!['appx', 'appx-dev', 'mac', 'mas', 'mas-dev', 'snap'].includes(VITE_DISTRIBUTION)) {
+  throw new Error(`Unsupported distribution: '${VITE_DISTRIBUTION}'`);
 }
 
 let buildVersion = pkg.version;
 
-if (BUILD_PLATFORM === 'mas' && process.env.GITHUB_RUN_NUMBER) {
+if (VITE_DISTRIBUTION === 'mas' && process.env.GITHUB_RUN_NUMBER) {
   buildVersion = `1.1.${process.env.GITHUB_RUN_NUMBER}`;
 }
 
@@ -27,7 +27,7 @@ const protocols = {
   name: pkg.productName,
   schemes,
 };
-const appxPackageName = BUILD_PLATFORM === 'appx' ? 'CoinWallet' : 'CoinWalletDev';
+const appxPackageName = VITE_DISTRIBUTION === 'appx' ? 'CoinWallet' : 'CoinWalletDev';
 
 export default {
   packagerConfig: {
@@ -35,13 +35,13 @@ export default {
     buildVersion,
     //asar: true,
     icon: 'resources/icon',
-    executableName: ['win', 'appx', 'appx-dev'].includes(BUILD_PLATFORM) ? pkg.productName : pkg.executableName,
+    executableName: ['appx', 'appx-dev'].includes(VITE_DISTRIBUTION) ? pkg.productName : pkg.executableName,
     ignore: [
       /README.md/i,
       /HISTORY.md/i,
       /CHANGELOG.md/i,
       '^/(?!electron.js|package.json|lib|dist|resources|node_modules)',
-      ['win', 'appx', 'appx-dev', 'snap'].includes(BUILD_PLATFORM) ? '^/resources/(?!64x64.png)' : '^/resources',
+      ['appx', 'appx-dev', 'snap'].includes(VITE_DISTRIBUTION) ? '^/resources/(?!64x64.png)' : '^/resources',
       'Makefile',
       '.editorconfig',
       '.gitignore',
@@ -63,36 +63,36 @@ export default {
     osxSign: {
       'gatekeeper-assess': false,
       identity: process.env.APPLE_IDENTITY,
-      type: BUILD_PLATFORM === 'mas-dev' ? 'development' : 'distribution',
-      ...(BUILD_PLATFORM === 'mac'? {
+      type: VITE_DISTRIBUTION === 'mas-dev' ? 'development' : 'distribution',
+      ...(VITE_DISTRIBUTION === 'mac'? {
         'hardened-runtime': true,
         entitlements: 'resources/entitlements.mac.plist',
         'entitlements-inherit': 'resources/entitlements.mac.plist',
       } : {}),
-      ...(['mas', 'mas-dev'].includes(BUILD_PLATFORM) ? {
+      ...(['mas', 'mas-dev'].includes(VITE_DISTRIBUTION) ? {
         'hardened-runtime': false,
         entitlements: 'resources/entitlements.mas.plist',
         'entitlements-inherit': 'resources/entitlements.mas.inherit.plist',
       } : {}),
     },
-    osxNotarize: (BUILD_PLATFORM === 'mac' && process.env.APPLE_ID && process.env.APPLE_PASSWORD) ? {
+    osxNotarize: (VITE_DISTRIBUTION === 'mac' && process.env.APPLE_ID && process.env.APPLE_PASSWORD) ? {
       appBundleId: 'com.coinspace.wallet',
       appleId: process.env.APPLE_ID,
       appleIdPassword: process.env.APPLE_PASSWORD,
     } : undefined,
     protocols,
     afterCopy: [
-      ...(['mac', 'mas', 'mas-dev'].includes(BUILD_PLATFORM) ? [setLanguages(languages.map((item) => {
+      ...(['mac', 'mas', 'mas-dev'].includes(VITE_DISTRIBUTION) ? [setLanguages(languages.map((item) => {
         return item.replace('-', '_').replace(/_[a-z]+/, s => s.toUpperCase());
       }))] : []),
-      ...(['appx', 'appx-dev'].includes(BUILD_PLATFORM) ? [appxmanifest({
+      ...(['appx', 'appx-dev'].includes(VITE_DISTRIBUTION) ? [appxmanifest({
         packageVersion: `${pkg.version}.0`,
-        identityName: BUILD_PLATFORM === 'appx' ? process.env.APPX_IDENTITY : pkg.executableName,
+        identityName: VITE_DISTRIBUTION === 'appx' ? process.env.APPX_IDENTITY : pkg.executableName,
         packageName: appxPackageName,
         packageDescription: pkg.description,
         //packageDisplayName: process.env.APPX_PACKAGE_NAME,
         packageDisplayName: pkg.productName,
-        publisherName: BUILD_PLATFORM === 'appx' ? process.env.APPX_PUBLISHER : process.env.APPX_PUBLISHER_DEV,
+        publisherName: VITE_DISTRIBUTION === 'appx' ? process.env.APPX_PUBLISHER : process.env.APPX_PUBLISHER_DEV,
         publisherDisplayName: process.env.APPX_PUBLISHER_NAME,
         packageExecutable: `app\\${pkg.productName}.exe`,
         languages: languages.map((lang) => {
@@ -109,7 +109,7 @@ export default {
     ],
   },
   makers: [
-    BUILD_PLATFORM === 'appx' && {
+    VITE_DISTRIBUTION === 'appx' && {
       name: '@electron-forge/maker-appx',
       config: {
         packageName: appxPackageName,
@@ -120,7 +120,7 @@ export default {
         makePri: true,
       },
     },
-    BUILD_PLATFORM === 'appx-dev' && {
+    VITE_DISTRIBUTION === 'appx-dev' && {
       name: '@electron-forge/maker-appx',
       config: {
         packageName: appxPackageName,
@@ -176,7 +176,7 @@ export default {
         'mas',
       ],
       config: {
-        name: `${pkg.productName}-${pkg.version}${BUILD_PLATFORM === 'mas-dev' ? '-dev': ''}.pkg`,
+        name: `${pkg.productName}-${pkg.version}${VITE_DISTRIBUTION === 'mas-dev' ? '-dev': ''}`,
       },
     },
     /*{
@@ -199,9 +199,8 @@ export default {
       },
     },*/
   ].filter(item => !!item),
-  /*
   publishers: [
-    ['mac', 'win'].includes(BUILD_PLATFORM) && BRANCH === 'master' && {
+    ['mac'].includes(VITE_DISTRIBUTION) && BRANCH === 'master' && {
       name: '@mahnunchik/publisher-github',
       config: {
         repository: {
@@ -221,5 +220,4 @@ export default {
       },
     },
   ].filter(item => !!item),
-  */
 };

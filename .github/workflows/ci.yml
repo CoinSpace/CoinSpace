@@ -22,7 +22,7 @@ jobs:
         run: |
           npm --prefix web ci
           npm --prefix server ci
-          npm --prefix electron install
+          npm --prefix electron ci
           npm --prefix phonegap ci
       - run: |
           npm run --prefix web lint
@@ -31,3 +31,179 @@ jobs:
           npm run --prefix server lint:api
           npm run --prefix electron lint
           npm run --prefix phonegap lint
+
+  build:
+    needs: lint
+    environment: ${{ github.ref == 'refs/heads/master' && 'production' || 'development' }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-12
+            node: 18
+            VITE_BUILD_TYPE: electron
+            VITE_DISTRIBUTION: mac
+            SENTRY_KEY: SENTRY_DSN_MAC
+          - os: macos-12
+            node: 18
+            VITE_BUILD_TYPE: electron
+            VITE_DISTRIBUTION: mas
+            SENTRY_KEY: SENTRY_DSN_MAS
+          - os: macos-12
+            node: 18
+            VITE_BUILD_TYPE: electron
+            VITE_DISTRIBUTION: mas-dev
+            SENTRY_KEY: SENTRY_DSN_MAS
+          #- os: ubuntu-22.04
+          #  node: 18
+          #  VITE_BUILD_TYPE: electron
+          #  VITE_DISTRIBUTION: snap
+          #  SENTRY_KEY: SENTRY_DSN_SNAP
+          - os: windows-2019
+            node: 18
+            VITE_BUILD_TYPE: electron
+            VITE_DISTRIBUTION: appx
+            SENTRY_KEY: SENTRY_DSN_WIN
+          - os: windows-2019
+            node: 18
+            VITE_BUILD_TYPE: electron
+            VITE_DISTRIBUTION: appx-dev
+            SENTRY_KEY: SENTRY_DSN_WIN
+          #- os: macos-12
+          #  node: 18
+          #  VITE_BUILD_TYPE: phonegap
+          #  VITE_DISTRIBUTION: ios
+          #  SENTRY_KEY: SENTRY_DSN_IOS
+          #- os: ubuntu-20.04
+          #  node: 18
+          #  VITE_BUILD_TYPE: phonegap
+          #  VITE_DISTRIBUTION: android-play
+          #  SENTRY_KEY: SENTRY_DSN_ANDROID
+          #- os: ubuntu-20.04
+          #  node: 18
+          #  VITE_BUILD_TYPE: phonegap
+          #  VITE_DISTRIBUTION: android-galaxy
+          #  SENTRY_KEY: SENTRY_DSN_ANDROID
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install Node.js dependencies
+        env:
+          NODE_ENV: ci
+          BUILD_TYPE: ${{ matrix.VITE_BUILD_TYPE }}
+          NPM_READ_TOKEN: ${{ secrets.NPM_READ_TOKEN }}
+        shell: bash
+        run: |
+          npm --prefix web ci
+          npm --prefix ${VITE_BUILD_TYPE} ci
+      - name: Install Snapcraft
+        if: ${{ matrix.VITE_DISTRIBUTION == 'snap' }}
+        uses: samuelmeuli/action-snapcraft@v2
+        env:
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAP_TOKEN }}
+      - name: Install JDK 11
+        if: ${{ matrix.VITE_DISTRIBUTION == 'android-play' || matrix.VITE_DISTRIBUTION == 'android-galaxy' }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Install certificates & prepare for build
+        env:
+          VITE_DISTRIBUTION: ${{ matrix.VITE_DISTRIBUTION }}
+          CERTIFICATE_MAC: ${{ secrets.CERTIFICATE_MAC }}
+          CERTIFICATE_MAC_PASSWORD: ${{ secrets.CERTIFICATE_MAC_PASSWORD }}
+          CERTIFICATE_DISTRIBUTION: ${{ secrets.CERTIFICATE_DISTRIBUTION }}
+          CERTIFICATE_DISTRIBUTION_PASSWORD: ${{ secrets.CERTIFICATE_DISTRIBUTION_PASSWORD }}
+          PROVISIONING_DISTRIBUTION: ${{ secrets.PROVISIONING_DISTRIBUTION }}
+          PROVISIONING_DEVELOPMENT: ${{ secrets.PROVISIONING_DEVELOPMENT }}
+          PROVISIONING_IOS: ${{ secrets.PROVISIONING_IOS }}
+          PROVISIONING_IOS_WATCH_APP: ${{ secrets.PROVISIONING_IOS_WATCH_APP }}
+          PROVISIONING_IOS_WATCH_APP_EXTENSION: ${{ secrets.PROVISIONING_IOS_WATCH_APP_EXTENSION }}
+          GOOGLE_CLOUD_KEY: ${{ secrets.GOOGLE_CLOUD_KEY }}
+          ANDROID_RELEASE_KEYSTORE: ${{ secrets.ANDROID_RELEASE_KEYSTORE }}
+          CERTIFICATE_SELFSIGN_WIN: ${{ secrets.CERTIFICATE_SELFSIGN_WIN }}
+        shell: bash
+        run: |
+          echo "GITHUB_RUN_NUMBER: $GITHUB_RUN_NUMBER";
+          echo $GOOGLE_CLOUD_KEY | base64 --decode > gcloud.key.json;
+
+          if [[ "$VITE_DISTRIBUTION" == "mac" || "$VITE_DISTRIBUTION" == "mas" || "$VITE_DISTRIBUTION" == "mas-dev" ]]; then
+            echo $CERTIFICATE_MAC | base64 --decode > certificate.p12;
+            security create-keychain -p coinspace build.keychain;
+            security default-keychain -s build.keychain;
+            security unlock-keychain -p coinspace build.keychain;
+            security set-keychain-settings build.keychain;
+            security list-keychains -d user -s build.keychain;
+            security import certificate.p12 -k build.keychain -P $CERTIFICATE_MAC_PASSWORD -T /usr/bin/codesign -T /usr/bin/productbuild 2>&1 >/dev/null;
+            security set-key-partition-list -S apple-tool:,apple: -s -k coinspace build.keychain 2>&1 >/dev/null;
+            rm certificate.p12;
+            if [[ "$VITE_DISTRIBUTION" == "mas" ]]; then
+              echo $PROVISIONING_DISTRIBUTION | base64 --decode > electron/embedded.provisionprofile;
+            fi
+            if [[ "$VITE_DISTRIBUTION" == "mas-dev" ]]; then
+              echo $PROVISIONING_DEVELOPMENT | base64 --decode > electron/embedded.provisionprofile;
+            fi
+          elif [[ "$VITE_DISTRIBUTION" == "ios" ]]; then
+            echo $CERTIFICATE_DISTRIBUTION | base64 --decode > certificate.p12;
+            security create-keychain -p coinspace build.keychain;
+            security default-keychain -s build.keychain;
+            security unlock-keychain -p coinspace build.keychain;
+            security set-keychain-settings build.keychain;
+            security list-keychains -d user -s build.keychain;
+            security import certificate.p12 -k build.keychain -P $CERTIFICATE_DISTRIBUTION_PASSWORD -T /usr/bin/codesign -T /usr/bin/productbuild 2>&1 >/dev/null;
+            security set-key-partition-list -S apple-tool:,apple: -s -k coinspace build.keychain 2>&1 >/dev/null;
+            rm certificate.p12;
+            mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles/
+            echo $PROVISIONING_IOS | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.mobileprovision;
+            echo $PROVISIONING_IOS_WATCH_APP | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.watchapp.mobileprovision;
+            echo $PROVISIONING_IOS_WATCH_APP_EXTENSION | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.watchapp.extension.mobileprovision;
+          elif [[ "$VITE_DISTRIBUTION" == "android-play" || "$VITE_DISTRIBUTION" == "android-galaxy" ]]; then
+            echo $ANDROID_RELEASE_KEYSTORE | base64 --decode > phonegap/release.keystore;
+            echo "/usr/local/lib/android/sdk/build-tools/33.0.2" >> $GITHUB_PATH
+          elif [[ "$VITE_DISTRIBUTION" == "appx-dev" ]]; then
+            echo $CERTIFICATE_SELFSIGN_WIN | base64 --decode > electron/resources/certificate.pfx
+          elif [[ "$VITE_DISTRIBUTION" == "appx" ]]; then
+            sed -i 's/function signAppx (program) {/function signAppx (program) { return;/' electron/node_modules/electron-windows-store/lib/sign.js
+            sed -i 's/function makeCert (parametersOrPublisherName, certFilePath, program) {/function makeCert (parametersOrPublisherName, certFilePath, program) { return;/' electron/node_modules/electron-windows-store/lib/sign.js
+          fi
+      - name: Set app version
+        env:
+          VITE_BUILD_TYPE: ${{ matrix.VITE_BUILD_TYPE }}
+        shell: bash
+        run: npm --prefix ${VITE_BUILD_TYPE} version $(node -p -e "require('./web/package.json').version") --no-git-tag-version
+      - name: Build app
+        env:
+          NODE_ENV: ${{ github.ref == 'refs/heads/master' && 'production' || 'development' }}
+          VITE_COMMIT: ${{ github.sha }}
+          VITE_BUILD_TYPE: ${{ matrix.VITE_BUILD_TYPE }}
+          VITE_DISTRIBUTION: ${{ matrix.VITE_DISTRIBUTION }}
+          VITE_SITE_URL: ${{ secrets.SITE_URL }}
+          VITE_SENTRY_DSN: ${{ secrets[matrix.SENTRY_KEY] }}
+          VITE_SENTRY_ENVIRONMENT: ${{ secrets.SENTRY_ENVIRONMENT }}
+          VITE_CHANGELLY_REF: ${{ secrets.CHANGELLY_REF }}
+          VITE_MOONPAY_API_KEY: ${{ secrets.MOONPAY_API_KEY }}
+          VITE_ZENDESK_APP_ID: ${{ secrets.ZENDESK_APP_ID }}
+          VITE_ZENDESK_CLIENT_ID: ${{ secrets.ZENDESK_CLIENT_ID }}
+          VITE_ZENDESK_URL: ${{ secrets.ZENDESK_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/gcloud.key.json
+          GOOGLE_CLOUD_BUCKET: ${{ secrets.GOOGLE_CLOUD_BUCKET }}
+          CERTIFICATE_SELFSIGN_WIN_PASSWORD: ${{ secrets.CERTIFICATE_SELFSIGN_WIN_PASSWORD }}
+          APPX_IDENTITY: ${{ secrets.APPX_IDENTITY }}
+          #APPX_PACKAGE_NAME: ${{ secrets.APPX_PACKAGE_NAME }}
+          APPX_PUBLISHER: ${{ secrets.APPX_PUBLISHER }}
+          APPX_PUBLISHER_DEV: ${{ secrets.APPX_PUBLISHER_DEV }}
+          APPX_PUBLISHER_NAME: ${{ secrets.APPX_PUBLISHER_NAME }}
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAP_TOKEN }}
+        shell: bash
+        run: |
+          npm --prefix web run i18n:ci
+          npm --prefix web run build
+          npm --prefix ${VITE_BUILD_TYPE} run build
