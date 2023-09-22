@@ -215,7 +215,9 @@ export default {
       name: '@mahnunchik/publisher-gcs',
       config: {
         bucket: process.env.GOOGLE_CLOUD_BUCKET,
-        folder: `${pkg.version}-${BRANCH || 'local'}`,
+        keyResolver(fileName/*, platform, arch*/) {
+          return `${pkg.version}-${BRANCH || 'local'}/${fileName}`;
+        },
         public: false,
       },
     },
