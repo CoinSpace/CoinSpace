@@ -14,6 +14,7 @@ steps:
     - 'SENTRY_ORG=${_SENTRY_ORG}'
     - 'SENTRY_PROJECT=${_SENTRY_PROJECT}'
     - 'SENTRY_AUTH_TOKEN=${_SENTRY_AUTH_TOKEN}'
+    - 'NODE_OPTIONS="--max-old-space-size=3575"'
   dir: web
   entrypoint: 'sh'
   args:
