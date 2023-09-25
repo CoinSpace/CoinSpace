@@ -41,6 +41,7 @@
     "eslint-config-coinspace": "^2.1.1"
   },
   "dependencies": {
+    "@sentry/electron": "^4.11.0",
     "electron-log": "^4.4.8"
   },
   "eslintConfig": {

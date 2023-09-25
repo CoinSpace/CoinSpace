@@ -1,21 +1,24 @@
+//import { init } from '@sentry/electron';
 import log from 'electron-log';
 import { pathToFileURL } from 'node:url';
 import { Menu, app, net, protocol } from 'electron';
 
 import menu from './lib/menu.js';
 import openWindow from './lib/openWindow.js';
+import schemes from './lib/schemes.js';
+import updater from './lib/updater.js';
 import {
   APP_HOSTNAME,
+  //VITE_SENTRY_DSN,
+  //VITE_SENTRY_ENVIRONMENT,
   VITE_SITE_URL,
   isDevelopment,
   isLinux,
   isMac,
   isMas,
   isWindows,
+  //release,
 } from './lib/constants.js';
-//import { init } from '@sentry/electron';
-import schemes from './lib/schemes.js';
-import updater from './lib/updater.js';
 
 if (!isDevelopment) {
   log.transports.file.level = false;
@@ -25,7 +28,7 @@ log.info('versions', process.versions);
 
 if (isWindows) {
   app.setAboutPanelOptions({
-    iconPath: pathToFileURL('.resources/64x64.png'),
+    iconPath: pathToFileURL('./resources/64x64.png'),
   });
 }
 
@@ -49,15 +52,15 @@ if (!isMas && !lock) {
 
 // Init crashReporter
 //init({
-//  dsn: process.env.SENTRY_DSN,
-//  environment: process.env.NODE_ENV,
-//  release: process.env.RELEASE,
+//  dsn: VITE_SENTRY_DSN,
+//  environment: VITE_SENTRY_ENVIRONMENT,
+//  release,
 //});
 
 // Set up Application Menu
 Menu.setApplicationMenu(menu);
 
-schemes.forEach((item) => {
+[...schemes, { scheme: 'coinspace' }].forEach((item) => {
   if (!app.isDefaultProtocolClient(item.scheme)) {
     // Define custom protocol handler.
     // Deep linking works on packaged versions of the application!
@@ -120,13 +123,6 @@ app.whenReady().then(() => {
     return net.fetch(req, { bypassCustomProtocolHandlers: true });
   });
 
-  //protocol.registerStringProtocol('coinspace', (request/*, cb*/) => {
-  //  openWindow(request.url);
-  // no calback due to bug
-  // https://github.com/electron/electron/issues/28407
-  // https://github.com/electron/electron/issues/28579
-  //cb('ok');
-  //});
   if (isMac) {
     openWindow(startupUrl);
   } else {
