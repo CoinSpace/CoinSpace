@@ -13,6 +13,9 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills';
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, './');
+  // https://github.com/vitejs/vite/issues/14372
+  // eslint-disable-next-line max-len
+  console.log(`process.env.NODE_ENV is '${process.env.NODE_ENV}', env.NODE_ENV is '${env.NODE_ENV}', mode is '${mode}'`);
   return {
     server: {
       open: true,
