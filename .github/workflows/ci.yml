@@ -176,7 +176,8 @@ jobs:
         run: npm --prefix ${VITE_BUILD_TYPE} version $(node -p -e "require('./web/package.json').version") --no-git-tag-version --allow-same-version
       - name: Build app
         env:
-          NODE_ENV: ${{ github.ref == 'refs/heads/master' && 'production' || 'development' }}
+          #NODE_ENV: ${{ github.ref == 'refs/heads/master' && 'production' || 'development' }}
+          NODE_ENV: production
           VITE_COMMIT: ${{ github.sha }}
           VITE_BUILD_TYPE: ${{ matrix.VITE_BUILD_TYPE }}
           VITE_DISTRIBUTION: ${{ matrix.VITE_DISTRIBUTION }}
