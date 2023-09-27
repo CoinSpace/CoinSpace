@@ -200,6 +200,7 @@ export default {
       config: {
         linux: {
           icon: 'resources/icon.icns',
+          executableName: pkg.executableName,
         },
         snap: {
           artifactName: `${pkg.executableName}-${pkg.version}.snap`,
