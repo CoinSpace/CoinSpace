@@ -195,13 +195,14 @@ export default {
         name: `${pkg.productName}-${pkg.version}${VITE_DISTRIBUTION === 'mas-dev' ? '-dev': ''}`,
       },
     },
-    /*{
-      name: './support/snap',
+    {
+      name: './support/snap.cjs',
       config: {
         linux: {
           icon: 'resources/icon.icns',
         },
         snap: {
+          artifactName: `${pkg.executableName}-${pkg.version}.snap`,
           summary: pkg.description,
           category: 'Office;Finance',
           publish: {
@@ -213,7 +214,7 @@ export default {
         protocols,
         publish: BRANCH === 'master' ? 'always' : 'never',
       },
-    },*/
+    },
   ].filter(item => !!item),
   publishers: [
     ['mac'].includes(VITE_DISTRIBUTION) && BRANCH === 'master' && {
