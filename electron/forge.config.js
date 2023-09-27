@@ -61,19 +61,33 @@ export default {
     appBundleId: 'com.coinspace.wallet',
     appCategoryType: 'public.app-category.finance',
     osxSign: {
-      'gatekeeper-assess': false,
-      identity: process.env.APPLE_IDENTITY,
       type: VITE_DISTRIBUTION === 'mas-dev' ? 'development' : 'distribution',
-      ...(VITE_DISTRIBUTION === 'mac'? {
-        'hardened-runtime': true,
-        entitlements: 'resources/entitlements.mac.plist',
-        'entitlements-inherit': 'resources/entitlements.mac.plist',
-      } : {}),
-      ...(['mas', 'mas-dev'].includes(VITE_DISTRIBUTION) ? {
-        'hardened-runtime': false,
-        entitlements: 'resources/entitlements.mas.plist',
-        'entitlements-inherit': 'resources/entitlements.mas.inherit.plist',
-      } : {}),
+      provisioningProfile: 'embedded.provisionprofile',
+      optionsForFile(filePath) {
+        if (VITE_DISTRIBUTION === 'mac') {
+          let entitlements = 'resources/entitlements.mac.plist';
+          if (filePath.includes('(Plugin).app')) {
+            entitlements = 'resources/entitlements.mac.plugin.plist';
+          } else if (filePath.includes('(GPU).app')) {
+            entitlements = 'resources/entitlements.mac.gpu.plist';
+          } else if (filePath.includes('(Renderer).app')) {
+            entitlements = 'resources/entitlements.mac.renderer.plist';
+          }
+          return {
+            hardenedRuntime: true,
+            entitlements,
+          };
+        }
+        if (['mas', 'mas-dev'].includes(VITE_DISTRIBUTION)) {
+          const entitlements = filePath.includes('.app/')
+            ? 'resources/entitlements.mas.inherit.plist'
+            : 'resources/entitlements.mas.plist';
+          return {
+            hardenedRuntime: false,
+            entitlements,
+          };
+        }
+      },
     },
     osxNotarize: (VITE_DISTRIBUTION === 'mac' && process.env.APPLE_ID && process.env.APPLE_PASSWORD) ? {
       appBundleId: 'com.coinspace.wallet',
