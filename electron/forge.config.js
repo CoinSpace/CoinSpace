@@ -62,7 +62,7 @@ export default {
     appCategoryType: 'public.app-category.finance',
     osxSign: {
       type: VITE_DISTRIBUTION === 'mas-dev' ? 'development' : 'distribution',
-      provisioningProfile: 'embedded.provisionprofile',
+      provisioningProfile: ['mas', 'mas-dev'].includes(VITE_DISTRIBUTION) ? 'embedded.provisionprofile' : undefined,
       optionsForFile(filePath) {
         if (VITE_DISTRIBUTION === 'mac') {
           let entitlements = 'resources/entitlements.mac.plist';
@@ -90,9 +90,11 @@ export default {
       },
     },
     osxNotarize: (VITE_DISTRIBUTION === 'mac' && process.env.APPLE_ID && process.env.APPLE_PASSWORD) ? {
+      tool: 'notarytool',
       appBundleId: 'com.coinspace.wallet',
       appleId: process.env.APPLE_ID,
       appleIdPassword: process.env.APPLE_PASSWORD,
+      teamId: process.env.APPLE_TEAM_ID,
     } : undefined,
     protocols,
     afterCopy: [

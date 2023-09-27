@@ -202,6 +202,7 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
           GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/gcloud.key.json
           GOOGLE_CLOUD_BUCKET: ${{ secrets.GOOGLE_CLOUD_BUCKET }}
           CERTIFICATE_SELFSIGN_WIN_PASSWORD: ${{ secrets.CERTIFICATE_SELFSIGN_WIN_PASSWORD }}
