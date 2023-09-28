@@ -4,6 +4,7 @@ import CsListItem from '../../../components/CsListItem.vue';
 import CsListItems from '../../../components/CsListItems.vue';
 import CsLoader from '../../../components/CsLoader.vue';
 import CsStep from '../../../components/CsStep.vue';
+import CsUseKeyModal from '../../../components/CsUseKeyModal.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 import { walletSeed } from '../../../lib/mixins.js';
 
@@ -16,6 +17,7 @@ export default {
     CsListItem,
     CsListItems,
     CsLoader,
+    CsUseKeyModal,
     DeleteIcon,
   },
   extends: CsStep,
@@ -26,6 +28,7 @@ export default {
       isLoading: true,
       isAdding: false,
       keys: [],
+      useKeyModal: false,
     };
   },
   async mounted() {
@@ -35,7 +38,9 @@ export default {
     async add() {
       this.isAdding = true;
       await this.walletSeed(async (walletSeed) => {
+        this.useKeyModal = ['mac', 'linux'].includes(this.env.VITE_PLATFORM);
         const result = await this.$account.hardware.add(walletSeed);
+        this.useKeyModal = false;
         if (result) await this.loadKeys();
       }, { keepStep: true });
       this.isAdding = false;
@@ -88,5 +93,9 @@ export default {
         {{ $t('Add hardware key') }}
       </CsButton>
     </template>
+    <CsUseKeyModal
+      :show="useKeyModal"
+      @close="useKeyModal = false"
+    />
   </MainLayout>
 </template>

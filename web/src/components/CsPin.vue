@@ -2,6 +2,7 @@
 import { hex } from '@scure/base';
 
 import CsButton from '../components/CsButton.vue';
+import CsUseKeyModal from './CsUseKeyModal.vue';
 import { TYPES } from '../lib/account/Biometry.js';
 import { onShowOnHide } from '../lib/mixins.js';
 
@@ -11,6 +12,7 @@ import TouchIdSolidIcon from '../assets/svg/touchIdSolid.svg';
 export default {
   components: {
     CsButton,
+    CsUseKeyModal,
     FaceIdSolidIcon,
     TouchIdSolidIcon,
   },
@@ -38,6 +40,7 @@ export default {
       error: undefined,
       biometryIsEnabled: isEnabled && this.mode !== 'setup',
       biometryIcon: type === TYPES.FACE_ID ? 'FaceIdSolidIcon' : 'TouchIdSolidIcon',
+      useKeyModal: false,
     };
   },
   watch: {
@@ -110,7 +113,12 @@ export default {
               },
               seed: 'device',
             });
-            const walletToken = res.walletToken || await this.$account.hardware.walletToken(res);
+            if (res.walletToken) {
+              return await this.onSuccess(this.$account.getSeed('wallet', hex.decode(res.walletToken)), pin);
+            }
+            this.useKeyModal = ['mac', 'linux'].includes(this.env.VITE_PLATFORM);
+            const walletToken = await this.$account.hardware.walletToken(res);
+            this.useKeyModal = false;
             if (!walletToken) return this.value = '';
             return await this.onSuccess(this.$account.getSeed('wallet', hex.decode(walletToken)), pin);
           }
@@ -118,6 +126,7 @@ export default {
       } catch (err) {
         this._errorHandler(err);
       } finally {
+        this.useKeyModal = false;
         this.isLoading = false;
       }
     },
@@ -140,7 +149,12 @@ export default {
           case 'walletSeed': {
             const res = await this.$account.biometry.walletToken();
             if (!res) return;
-            const walletToken = res.walletToken || await this.$account.hardware.walletToken(res);
+            if (res.walletToken) {
+              return await this.onSuccess(this.$account.getSeed('wallet', hex.decode(res.walletToken)));
+            }
+            this.useKeyModal = ['mac', 'linux'].includes(this.env.VITE_PLATFORM);
+            const walletToken = await this.$account.hardware.walletToken(res);
+            this.useKeyModal = false;
             if (!walletToken) return;
             return await this.onSuccess(this.$account.getSeed('wallet', hex.decode(walletToken)));
           }
@@ -148,6 +162,7 @@ export default {
       } catch (err) {
         this._errorHandler(err);
       } finally {
+        this.useKeyModal = false;
         this.isLoading = false;
       }
     },
@@ -285,6 +300,10 @@ export default {
       />
     </div>
   </div>
+  <CsUseKeyModal
+    :show="useKeyModal"
+    @close="useKeyModal = false"
+  />
 </template>
 
 <style lang="scss">
