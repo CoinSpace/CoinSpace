@@ -57,7 +57,6 @@ const helpMenu = {
       {
         role: 'about',
         click: async () => {
-          // TODO set icon
           await app.showAboutPanel();
         },
       },

@@ -1,7 +1,11 @@
-//import { init } from '@sentry/electron';
 import log from 'electron-log';
 import { pathToFileURL } from 'node:url';
 import { Menu, app, net, protocol } from 'electron';
+
+//import { init } from '@sentry/electron';
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const { init } = require('@sentry/electron');
 
 import menu from './lib/menu.js';
 import openWindow from './lib/openWindow.js';
@@ -9,15 +13,15 @@ import schemes from './lib/schemes.js';
 import updater from './lib/updater.js';
 import {
   APP_HOSTNAME,
-  //VITE_SENTRY_DSN,
-  //VITE_SENTRY_ENVIRONMENT,
+  VITE_SENTRY_DSN,
+  VITE_SENTRY_ENVIRONMENT,
   VITE_SITE_URL,
   isDevelopment,
   isLinux,
   isMac,
   isMas,
   isWindows,
-  //release,
+  release,
 } from './lib/constants.js';
 
 if (!isDevelopment) {
@@ -51,11 +55,11 @@ if (!isMas && !lock) {
 }
 
 // Init crashReporter
-//init({
-//  dsn: VITE_SENTRY_DSN,
-//  environment: VITE_SENTRY_ENVIRONMENT,
-//  release,
-//});
+init({
+  dsn: VITE_SENTRY_DSN,
+  environment: VITE_SENTRY_ENVIRONMENT,
+  release,
+});
 
 // Set up Application Menu
 Menu.setApplicationMenu(menu);
