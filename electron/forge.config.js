@@ -5,9 +5,7 @@ const schemes = [
   'coinspace',
   ...(await import('./lib/schemes.js')).default.map((item) => item.scheme),
 ];
-
-// TODO load from app
-const languages = ['en', 'ru'];
+import { languages } from '../web/src/lib/i18n/i18n.js';
 const pkg = JSON.parse(await fs.readFile('./package.json'));
 
 const { VITE_DISTRIBUTION } = process.env;
@@ -98,8 +96,8 @@ export default {
     } : undefined,
     protocols,
     afterCopy: [
-      ...(['mac', 'mas', 'mas-dev'].includes(VITE_DISTRIBUTION) ? [setLanguages(languages.map((item) => {
-        return item.replace('-', '_').replace(/_[a-z]+/, s => s.toUpperCase());
+      ...(['mac', 'mas', 'mas-dev'].includes(VITE_DISTRIBUTION) ? [setLanguages(languages.map((lang) => {
+        return lang.value.replace('-', '_').replace(/_[a-z]+/, s => s.toUpperCase());
       }))] : []),
       ...(['appx', 'appx-dev'].includes(VITE_DISTRIBUTION) ? [appxmanifest({
         packageVersion: `${pkg.version}.0`,
@@ -113,11 +111,11 @@ export default {
         packageExecutable: `app\\${pkg.productName}.exe`,
         languages: languages.map((lang) => {
           // https://docs.microsoft.com/en-us/windows/uwp/publish/supported-languages
-          switch (lang) {
+          switch (lang.value) {
             case 'sr':
               return 'sr-Latn';
             default:
-              return lang;
+              return lang.value;
           }
         }),
         protocols,
