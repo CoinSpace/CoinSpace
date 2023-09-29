@@ -34,42 +34,11 @@ function getWindow(path) {
     });
     mainWindow.loadURL(`https://${APP_HOSTNAME}/#/${path}`);
 
-    // Catch all attempts to open new window and open them in default browser
-    mainWindow.webContents.on('new-window', (event, url/*, frameName, disposition, options*/) => {
-      event.preventDefault();
-      /*
-      if (frameName === '_modal') {
-        const [mainWindowWidth, mainWindowHeight] = mainWindow.getSize();
-        Object.assign(options, {
-          webPreferences: {
-            sandbox: true,
-          },
-        });
-        const modal = new BrowserView(options);
-        // https://github.com/electron/electron/issues/24833
-        //event.newGuest = modal;
-        mainWindow.setBrowserView(modal);
-        // fix options in constructor
-        modal.setBounds({
-          x: 0,
-          y: 0,
-          width: mainWindowWidth,
-          height: mainWindowHeight,
-        });
-        modal.setAutoResize({
-          width: true,
-          height: true,
-          horizontal: true,
-          vertical: true,
-        });
-        // fix transparent background
-        modal.setBackgroundColor('#fff');
-        modal.webContents.loadURL(url);
-        return;
-      }
-      */
+    mainWindow.webContents.setWindowOpenHandler(({ url }) => {
       shell.openExternal(url);
+      return { action: 'deny' };
     });
+
     return mainWindow;
   } else {
     const mainWindow = BrowserWindow.getAllWindows()[0];
