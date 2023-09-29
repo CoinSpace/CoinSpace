@@ -45,52 +45,58 @@ jobs:
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: mac
             VITE_DISTRIBUTION: mac
-            SENTRY_KEY: SENTRY_DSN_MAC
+            SENTRY_DSN_KEY: SENTRY_DSN_MAC
+            SENTRY_PROJECT: mac
           - os: macos-12
             node: 18
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: mac
             VITE_DISTRIBUTION: mas
-            SENTRY_KEY: SENTRY_DSN_MAS
+            SENTRY_DSN_KEY: SENTRY_DSN_MAS
+            SENTRY_PROJECT: mas
           - os: macos-12
             node: 18
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: mac
             VITE_DISTRIBUTION: mas-dev
-            SENTRY_KEY: SENTRY_DSN_MAS
+            SENTRY_DSN_KEY: SENTRY_DSN_MAS
+            SENTRY_PROJECT: mas
           - os: ubuntu-22.04
             node: 18
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: linux
             VITE_DISTRIBUTION: snap
-            SENTRY_KEY: SENTRY_DSN_SNAP
+            SENTRY_DSN_KEY: SENTRY_DSN_SNAP
+            SENTRY_PROJECT: linux
           - os: windows-2019
             node: 18
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: win
             VITE_DISTRIBUTION: appx
-            SENTRY_KEY: SENTRY_DSN_WIN
+            SENTRY_DSN_KEY: SENTRY_DSN_WIN
+            SENTRY_PROJECT: win
           - os: windows-2019
             node: 18
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: win
             VITE_DISTRIBUTION: appx-dev
-            SENTRY_KEY: SENTRY_DSN_WIN
+            SENTRY_DSN_KEY: SENTRY_DSN_WIN
+            SENTRY_PROJECT: win
           #- os: macos-12
           #  node: 18
           #  VITE_BUILD_TYPE: phonegap
           #  VITE_DISTRIBUTION: ios
-          #  SENTRY_KEY: SENTRY_DSN_IOS
+          #  SENTRY_DSN_KEY: SENTRY_DSN_IOS
           #- os: ubuntu-20.04
           #  node: 18
           #  VITE_BUILD_TYPE: phonegap
           #  VITE_DISTRIBUTION: android-play
-          #  SENTRY_KEY: SENTRY_DSN_ANDROID
+          #  SENTRY_DSN_KEY: SENTRY_DSN_ANDROID
           #- os: ubuntu-20.04
           #  node: 18
           #  VITE_BUILD_TYPE: phonegap
           #  VITE_DISTRIBUTION: android-galaxy
-          #  SENTRY_KEY: SENTRY_DSN_ANDROID
+          #  SENTRY_DSN_KEY: SENTRY_DSN_ANDROID
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -188,7 +194,7 @@ jobs:
           VITE_PLATFORM: ${{ matrix.VITE_PLATFORM }}
           VITE_DISTRIBUTION: ${{ matrix.VITE_DISTRIBUTION }}
           VITE_SITE_URL: ${{ secrets.SITE_URL }}
-          VITE_SENTRY_DSN: ${{ secrets[matrix.SENTRY_KEY] }}
+          VITE_SENTRY_DSN: ${{ secrets[matrix.SENTRY_DSN_KEY] }}
           VITE_SENTRY_ENVIRONMENT: ${{ secrets.SENTRY_ENVIRONMENT }}
           VITE_CHANGELLY_REF: ${{ secrets.CHANGELLY_REF }}
           VITE_MOONPAY_API_KEY: ${{ secrets.MOONPAY_API_KEY }}
@@ -197,7 +203,7 @@ jobs:
           VITE_ZENDESK_URL: ${{ secrets.ZENDESK_URL }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+          SENTRY_PROJECT: ${{ matrix.SENTRY_PROJECT }}
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
