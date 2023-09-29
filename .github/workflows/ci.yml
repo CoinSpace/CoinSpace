@@ -182,7 +182,6 @@ jobs:
         run: npm --prefix ${VITE_BUILD_TYPE} version $(node -p -e "require('./web/package.json').version") --no-git-tag-version --allow-same-version
       - name: Build app
         env:
-          #NODE_ENV: ${{ github.ref == 'refs/heads/master' && 'production' || 'development' }}
           NODE_ENV: production
           VITE_COMMIT: ${{ github.sha }}
           VITE_BUILD_TYPE: ${{ matrix.VITE_BUILD_TYPE }}
@@ -208,7 +207,6 @@ jobs:
           GOOGLE_CLOUD_BUCKET: ${{ secrets.GOOGLE_CLOUD_BUCKET }}
           CERTIFICATE_SELFSIGN_WIN_PASSWORD: ${{ secrets.CERTIFICATE_SELFSIGN_WIN_PASSWORD }}
           APPX_IDENTITY: ${{ secrets.APPX_IDENTITY }}
-          #APPX_PACKAGE_NAME: ${{ secrets.APPX_PACKAGE_NAME }}
           APPX_PUBLISHER: ${{ secrets.APPX_PUBLISHER }}
           APPX_PUBLISHER_DEV: ${{ secrets.APPX_PUBLISHER_DEV }}
           APPX_PUBLISHER_NAME: ${{ secrets.APPX_PUBLISHER_NAME }}
