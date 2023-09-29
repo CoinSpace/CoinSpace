@@ -17,12 +17,4 @@ export default function handleOpenURL(account) {
       }, 1);
     };
   }
-
-  if (import.meta.env.VITE_BUILD_TYPE === 'electron') {
-    // TODO
-    // const { ipcRenderer } = require('electron');
-    // ipcRenderer.on('handleOpenURL', (event, url) => {
-    //   account.emit('handleOpenURL', url);
-    // });
-  }
 }
