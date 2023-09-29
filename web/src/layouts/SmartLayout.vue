@@ -128,9 +128,13 @@ export default {
     },
     handleTouchMove(e) {
       if (this.touchStartY == undefined) return;
+      const touchDistanceOld = this.touchDistance;
       const touchDistance = e.touches.item(0).pageY - this.touchStartY;
       if (touchDistance >= 0) {
         this.touchDistance = touchDistance / 3;
+      }
+      if (touchDistanceOld <= this.refreshOffset && this.touchDistance >= this.refreshOffset) {
+        window.taptic?.tap();
       }
     },
     handleTouchEnd() {
