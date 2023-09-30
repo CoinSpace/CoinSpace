@@ -27,11 +27,6 @@
     <icon src="../images/android/icons/96.png" density="xhdpi"/>
     <icon src="../images/android/icons/144.png" density="xxhdpi"/>
     <icon src="../images/android/icons/192.png" density="xxxhdpi"/>
-    <custom-config-file target="AndroidManifest.xml" parent="/*" mode="replace">
-      <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
-      <uses-feature android:name="android.hardware.camera" android:required="false" />
-      <uses-feature android:name="android.hardware.location.gps" android:required="false" />
-    </custom-config-file>
     <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
       <intent-filter>
         <action android:name="android.intent.action.VIEW" />
