@@ -30,13 +30,13 @@ export default {
   },
   onShow() {
     if (this.env.VITE_BUILD_TYPE === 'phonegap') {
-      document.addEventListener('backbutton', this.back);
+      window.backButton = () => this.back();
     }
     this.$refs.container.scrollTop = this.scrollTop;
   },
   onHide() {
     if (this.env.VITE_BUILD_TYPE === 'phonegap') {
-      document.removeEventListener('backbutton', this.back);
+      delete window.backButton;
     }
     this.scrollTop = this.$refs.container.scrollTop;
   },

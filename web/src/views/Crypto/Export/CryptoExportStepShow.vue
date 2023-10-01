@@ -24,7 +24,7 @@ export default {
         setTimeout(() => {
           this.isCopied = false;
         }, 1000);
-      });
+      }, () => {});
     },
   },
 };

@@ -12,6 +12,8 @@ export default async function deviceready() {
   document.addEventListener('backbutton', (e) => {
     e.preventDefault();
     if (window.backButtonOff) return;
+    if (window.backButtonModal) return window.backButtonModal();
+    if (window.backButton) return window.backButton();
     window.navigator.app.exitApp();
   }, false);
 
@@ -26,7 +28,7 @@ export default async function deviceready() {
   await taptic.init();
   window.taptic = taptic;
 
-  window.qrScan = function(callback) {
+  window.qrScan = (callback) => {
     window.backButtonOff = true;
     cordova.plugins.barcodeScanner.scan(
       (result) => {
@@ -50,8 +52,18 @@ export default async function deviceready() {
     );
   },
 
+  navigator.clipboard.writeText = (text) => {
+    cordova.plugins.clipboard.copy(text);
+    return Promise.resolve();
+  };
+  navigator.clipboard.readText = () => {
+    return new Promise((resolve) => {
+      cordova.plugins.clipboard.paste(resolve);
+    });
+  };
+
   // TODO
-  // ThreeDeeTouch.onHomeIconPressed = function({ type }) {
+  // ThreeDeeTouch.onHomeIconPressed = ({ type }) => {
   //   const platform = type.split('.').pop();
   //   if (!['bitcoin', 'dogecoin', 'ethereum', 'litecoin'].includes(platform)) return;
   //   const baseUrl = window.location.href.split('?')[0];
@@ -78,7 +90,7 @@ export default async function deviceready() {
 }
 
 // TODO
-// window.handleOpenURL = function(url) {
+// window.handleOpenURL = (url) => {
 //   const cryptoId = bip21.getSchemeCryptoId(url);
 //   if (!cryptoId) return;
 //   window.localStorage.setItem('_cs_bip21', url);

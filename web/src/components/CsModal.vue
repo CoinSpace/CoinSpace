@@ -1,12 +1,10 @@
 <script>
 import CloseIcon from '../assets/svg/close.svg';
-import { onShowOnHide } from '../lib/mixins.js';
 
 export default {
   components: {
     CloseIcon,
   },
-  mixins: [onShowOnHide],
   props: {
     show: Boolean,
     title: {
@@ -15,11 +13,23 @@ export default {
     },
   },
   emits: ['close'],
-  onShow() {
-    window.addEventListener('keydown', this.keydown);
-  },
-  onHide() {
-    window.removeEventListener('keydown', this.keydown);
+  watch: {
+    show: {
+      handler(show, oldShow) {
+        if (show) {
+          window.addEventListener('keydown', this.keydown);
+          if (this.env.VITE_BUILD_TYPE === 'phonegap') {
+            window.backButtonModal = () => this.$emit('close');
+          }
+        } else if (oldShow) {
+          window.removeEventListener('keydown', this.keydown);
+          if (this.env.VITE_BUILD_TYPE === 'phonegap') {
+            delete window.backButtonModal;
+          }
+        }
+      },
+      immediate: true,
+    },
   },
   methods: {
     keydown({ key }) {

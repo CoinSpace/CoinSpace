@@ -77,7 +77,7 @@ export default {
       this.$refs.container.addEventListener('touchcancel', this.handleTouchCancel, { passive: true });
     }
     if (this.env.VITE_BUILD_TYPE === 'phonegap') {
-      document.addEventListener('backbutton', this.back);
+      window.backButton = () => this.back();
     }
     this.$refs.container.scrollTop = this.scrollTop;
   },
@@ -89,7 +89,7 @@ export default {
     this.$refs.container.removeEventListener('touchend', this.handleTouchEnd);
     this.$refs.container.removeEventListener('touchcancel', this.handleTouchCancel);
     if (this.env.VITE_BUILD_TYPE === 'phonegap') {
-      document.removeEventListener('backbutton', this.back);
+      delete window.backButton;
     }
     this.scrollTop = this.$refs.container.scrollTop;
   },

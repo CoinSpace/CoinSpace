@@ -35,14 +35,14 @@ export default {
     };
   },
   onShow() {
-    if (this.env.VITE_BUILD_TYPE === 'phonegap') {
-      document.addEventListener('backbutton', this.back);
+    if (this.env.VITE_BUILD_TYPE === 'phonegap' && this.showBack) {
+      window.backButton = () => this.back();
     }
     this.$refs.content.scrollTop = this.scrollTop;
   },
   onHide() {
-    if (this.env.VITE_BUILD_TYPE === 'phonegap') {
-      document.removeEventListener('backbutton', this.back);
+    if (this.env.VITE_BUILD_TYPE === 'phonegap' && this.showBack) {
+      delete window.backButton;
     }
     this.scrollTop = this.$refs.content.scrollTop;
   },

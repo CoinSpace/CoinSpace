@@ -53,6 +53,7 @@ async function run() {
   cordova('plugin add cordova-plugin-safariviewcontroller@2.0.0 --save');
   cordova('plugin add cordova-plugin-app-review@3.1.0 --save');
   cordova('plugin add cordova-plugin-taptic-engine@2.2.0 --save');
+  cordova('plugin add cordova-clipboard@1.3.0 --save');
 
   const update = {
     'UISupportedInterfaceOrientations': [

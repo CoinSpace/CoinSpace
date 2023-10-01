@@ -97,7 +97,7 @@ export default {
         setTimeout(() => {
           this.isCopied = false;
         }, 1000);
-      });
+      }, () => {});
     },
     async enableMecto() {
       if (this.isMectoLoading) return;
