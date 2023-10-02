@@ -10,7 +10,7 @@ export default function handleOpenURL(account) {
     };
   }
 
-  if (import.meta.env.VITE_BUILD_TYPE === 'web') {
+  if (import.meta.env.VITE_BUILD_TYPE === 'web' && import.meta.env.DEV) {
     window.handleOpenURL = function(url) {
       setTimeout(() => {
         account.emit('handleOpenURL', url);
