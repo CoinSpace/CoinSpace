@@ -56,6 +56,22 @@
   }
 }
 
+.modal {
+  &-transition-enter-active {
+    transition: all 0.2s ease-in;
+  }
+
+  &-transition-enter-from,
+  &-transition-leave-to {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+
+  &-transition-leave-active {
+    transition: all 0.1s ease-out;
+  }
+}
+
 @keyframes scale-dot {
   50% {
     transform: scale(1.4);

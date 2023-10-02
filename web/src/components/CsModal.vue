@@ -43,7 +43,7 @@ export default {
 
 <template>
   <Teleport to="body">
-    <Transition name="cs-modal-transition">
+    <Transition name="modal">
       <div
         v-if="show"
         class="&__overlay"
@@ -83,31 +83,8 @@ export default {
   .#{ $filename } {
     $self: &;
 
-    &-transition-enter-active {
-      transition: all 0.2s ease-in;
-    }
-
-    &-transition-enter-from,
-    &-transition-leave-to {
-      opacity: 0;
-      transform: scale(1.1);
-    }
-
-    &-transition-leave-active {
-      transition: all 0.1s ease-out;
-    }
-
     &__overlay {
-      position: fixed;
-      z-index: $zindex-modal;
-      top: -1px; // disable navbar hiding on mobile devices
-      right: 0;
-      bottom: 0;
-      left: 0;
-      display: flex;
-      padding: $spacing-xl;
-      background-color: rgb(0 0 0 / 30%);
-      overflow-y: auto;
+      @include overlay;
     }
 
     &__container {

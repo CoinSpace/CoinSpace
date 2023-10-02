@@ -42,3 +42,16 @@ $breakpoints: (
   height: 100%;
   opacity: 0;
 }
+
+@mixin overlay {
+  position: fixed;
+  z-index: $zindex-modal;
+  top: -1px; // disable navbar hiding on mobile devices
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  padding: $spacing-xl;
+  background-color: rgb(0 0 0 / 30%);
+  overflow-y: auto;
+}

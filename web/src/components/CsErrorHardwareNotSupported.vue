@@ -3,6 +3,8 @@ import CsButton from './CsButton.vue';
 import CsButtonGroup from './CsButtonGroup.vue';
 import CsModal from './CsModal.vue';
 
+import eventBus from '../lib/eventBus.js';
+
 export default {
   components: {
     CsButton,
@@ -15,7 +17,7 @@ export default {
     };
   },
   mounted() {
-    this.$account.on('CsErrorHardwareNotSupported', () => this.show = true);
+    eventBus.on('CsErrorHardwareNotSupported', () => this.show = true);
   },
 };
 </script>

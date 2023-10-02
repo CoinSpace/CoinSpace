@@ -4,6 +4,7 @@ import {
   startRegistration,
 } from '@simplewebauthn/browser';
 
+import eventBus from '../eventBus.js';
 import windowExtra from '../windowExtra.js';
 
 export default class Hardware {
@@ -39,7 +40,7 @@ export default class Hardware {
       let registration;
       if (['web', 'electron'].includes(import.meta.env.VITE_BUILD_TYPE)) {
         if (!this.#isSupported) throw new Error('hardware_not_supported');
-        registration = await startRegistration(options);
+        registration = await this.#systemWebAuthn(() => startRegistration(options));
       } else {
         const params = {
           action: 'registration',
@@ -60,7 +61,7 @@ export default class Hardware {
       return true;
     } catch (err) {
       if (err.message === 'hardware_not_supported') {
-        this.#account.emit('CsErrorHardwareNotSupported');
+        eventBus.emit('CsErrorHardwareNotSupported');
       } else {
         console.error(err);
       }
@@ -96,7 +97,7 @@ export default class Hardware {
       let authentication;
       if (['web', 'electron'].includes(import.meta.env.VITE_BUILD_TYPE)) {
         if (!this.#isSupported) throw new Error('hardware_not_supported');
-        authentication = await startAuthentication(options);
+        authentication = await this.#systemWebAuthn(() => startAuthentication(options));
       } else {
         const params = {
           action: 'authentication',
@@ -117,11 +118,29 @@ export default class Hardware {
       return res.walletToken;
     } catch (err) {
       if (err.message === 'hardware_not_supported') {
-        this.#account.emit('CsErrorHardwareNotSupported');
+        eventBus.emit('CsErrorHardwareNotSupported');
       } else {
         console.error(err);
       }
       return false;
+    }
+  }
+
+  async #systemWebAuthn(action) {
+    try {
+      const options = { show: true };
+      eventBus.emit('CsModalUseHardwareKey', options);
+      const result = await Promise.race([
+        action(),
+        new Promise((_, reject) => {
+          const error = new Error('The operation either timed out or was not allowed.');
+          error.name = 'NotAllowedError';
+          options.cancel = () => { reject(error); };
+        }),
+      ]);
+      return result;
+    } finally {
+      eventBus.emit('CsModalUseHardwareKey', { show: false });
     }
   }
 }
