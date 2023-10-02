@@ -136,6 +136,7 @@ const app = [
               params: {
                 cryptoId: to.params.cryptoId,
               },
+              force: true,
             };
           },
         },

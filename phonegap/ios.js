@@ -70,7 +70,6 @@ async function run() {
           'coinspace',
           'bitcoin',
           'bitcoincash',
-          'bitcoinsv',
           'ethereum',
           'litecoin',
           'ripple',

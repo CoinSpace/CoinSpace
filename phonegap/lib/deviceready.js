@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import Taptic from './Taptic.js';
+import schemes from './schemes.js';
 
 export default async function deviceready() {
   await new Promise((resolve) => {
@@ -62,14 +63,14 @@ export default async function deviceready() {
     });
   };
 
-  // TODO
-  // ThreeDeeTouch.onHomeIconPressed = ({ type }) => {
-  //   const platform = type.split('.').pop();
-  //   if (!['bitcoin', 'dogecoin', 'ethereum', 'litecoin'].includes(platform)) return;
-  //   const baseUrl = window.location.href.split('?')[0];
-  //   const cryptoId = `${platform}@${platform}`;
-  //   return window.location = `${baseUrl}?crypto=${cryptoId}`;
-  // };
+  ThreeDeeTouch.onHomeIconPressed = ({ type }) => {
+    const scheme = type.split('.').pop();
+    const cryptoId = schemes[scheme];
+    if (!cryptoId) return;
+    const baseUrl = window.location.href.split('#')[0];
+    window.location = `${baseUrl}#/${cryptoId}`;
+  };
+
   window.open = (url, target, options) => {
     return cordova.InAppBrowser.open(url, '_system', options);
   };
@@ -89,11 +90,10 @@ export default async function deviceready() {
   }
 }
 
-// TODO
-// window.handleOpenURL = (url) => {
-//   const cryptoId = bip21.getSchemeCryptoId(url);
-//   if (!cryptoId) return;
-//   window.localStorage.setItem('_cs_bip21', url);
-//   const baseUrl = window.location.href.split('?')[0];
-//   window.location = `${baseUrl}?crypto=${cryptoId}`;
-// };
+window.handleOpenBip21 = (url = '') => {
+  const scheme = url.split(':')[0];
+  const cryptoId = schemes[scheme];
+  if (!cryptoId) return;
+  const baseUrl = window.location.href.split('#')[0];
+  window.location = `${baseUrl}#/${cryptoId}/bip21/${encodeURIComponent(url)}`;
+};

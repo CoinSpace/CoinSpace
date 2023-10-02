@@ -2,7 +2,6 @@ import * as EOSSymbols from '@coinspace/cs-eos-wallet/symbols';
 import { CsWallet } from '@coinspace/cs-common';
 import { ref } from 'vue';
 import {
-  //createMemoryHistory,
   createRouter,
   createWebHashHistory,
   createWebHistory,
@@ -41,7 +40,7 @@ router.beforeEach((to, from) => {
     return { name: 'auth', replace: true };
   }
   if (to.meta.requiresAuth && $account.isLocked) {
-    return { name: 'unlock', replace: true };
+    return { name: 'unlock', replace: true, force: true };
   }
   if (to.meta.crypto) {
     const wallet = $account.wallet(to.params.cryptoId);

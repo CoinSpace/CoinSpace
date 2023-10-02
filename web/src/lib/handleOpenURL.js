@@ -1,9 +1,8 @@
-
 export default function handleOpenURL(account) {
   if (import.meta.env.VITE_BUILD_TYPE === 'phonegap') {
     window.handleOpenURL = function(url) {
-      const { SafariViewController } = window;
-      SafariViewController.hide();
+      if (!url.startsWith('coinspace://')) return window.handleOpenBip21(url);
+      window.SafariViewController.hide();
       setTimeout(() => {
         account.emit('handleOpenURL', url);
       }, 1);

@@ -1,8 +1,6 @@
 const windows = {};
 
-function handleOpenURL(url) {
-  url = url || '';
-  if (!url.startsWith('coinspace://')) return;
+function handleOpenURL(url = '') {
   const params = new URLSearchParams(url.split('?')[1]);
   const window = params.get('window');
   const error = params.get('error');
