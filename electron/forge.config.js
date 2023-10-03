@@ -21,6 +21,8 @@ if (VITE_DISTRIBUTION === 'mas' && process.env.GITHUB_RUN_NUMBER) {
   buildVersion = `1.1.${process.env.GITHUB_RUN_NUMBER}`;
 }
 
+const appxVersion = `${pkg.version}.${process.env.GITHUB_RUN_NUMBER || '0'}`;
+
 const protocols = {
   name: pkg.productName,
   schemes,
@@ -100,7 +102,7 @@ export default {
         return lang.value.replace('-', '_').replace(/_[a-z]+/, s => s.toUpperCase());
       }))] : []),
       ...(['appx', 'appx-dev'].includes(VITE_DISTRIBUTION) ? [appxmanifest({
-        packageVersion: `${pkg.version}.0`,
+        packageVersion: appxVersion,
         identityName: VITE_DISTRIBUTION === 'appx' ? process.env.APPX_IDENTITY : pkg.executableName,
         packageName: appxPackageName,
         packageDescription: pkg.description,
@@ -127,6 +129,7 @@ export default {
       name: '@electron-forge/maker-appx',
       config: {
         packageName: appxPackageName,
+        packageVersion: appxVersion,
         identityName: process.env.APPX_IDENTITY,
         publisher: process.env.APPX_PUBLISHER,
         assets: 'resources/appx',
@@ -138,6 +141,7 @@ export default {
       name: '@electron-forge/maker-appx',
       config: {
         packageName: appxPackageName,
+        packageVersion: appxVersion,
         identityName: pkg.name,
         publisher: process.env.APPX_PUBLISHER_DEV,
         devCert: 'resources/certificate.pfx',
