@@ -14,6 +14,7 @@
   },
   "type": "module",
   "scripts": {
+    "build": "node ./build.js",
     "android": "node ./android.js",
     "ios": "node ./ios.js",
     "cordova": "cordova",

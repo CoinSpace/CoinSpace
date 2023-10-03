@@ -85,18 +85,21 @@ jobs:
           - os: macos-12
             node: 18
             VITE_BUILD_TYPE: phonegap
+            VITE_PLATFORM: ios
             VITE_DISTRIBUTION: ios
             SENTRY_DSN_KEY: SENTRY_DSN_IOS
             SENTRY_PROJECT: ios
           - os: ubuntu-20.04
             node: 18
             VITE_BUILD_TYPE: phonegap
+            VITE_PLATFORM: android
             VITE_DISTRIBUTION: android-play
             SENTRY_DSN_KEY: SENTRY_DSN_ANDROID
             SENTRY_PROJECT: android
           - os: ubuntu-20.04
             node: 18
             VITE_BUILD_TYPE: phonegap
+            VITE_PLATFORM: android
             VITE_DISTRIBUTION: android-galaxy
             SENTRY_DSN_KEY: SENTRY_DSN_ANDROID
             SENTRY_PROJECT: android
