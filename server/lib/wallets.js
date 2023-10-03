@@ -129,7 +129,7 @@ async function pinVerify(device, pinHash, type) {
 
 async function platformOptions(device, type) {
   if (device.authenticator && device.authenticator.credentialID) {
-    const options = generateAuthenticationOptions({
+    const options = await generateAuthenticationOptions({
       challenge: generateChallenge(),
       allowCredentials: [mapAuthenticator(device.authenticator)],
     });
@@ -174,7 +174,7 @@ async function platformVerify(device, body, type) {
 async function crossplatformOptions(device, type) {
   const { wallet } = device;
   if (wallet.authenticators && wallet.authenticators.length > 0) {
-    const options = generateAuthenticationOptions({
+    const options = await generateAuthenticationOptions({
       challenge: generateChallenge(),
       allowCredentials: wallet.authenticators.map(mapAuthenticator),
     });
@@ -233,7 +233,7 @@ async function crossplatformVerify(device, body, type) {
 
 async function platformRegistrationOptions(device) {
   const user = generateUser(device._id);
-  const options = generateRegistrationOptions({
+  const options = await generateRegistrationOptions({
     challenge: generateChallenge(),
     rpID: RP_ID,
     rpName: RP_NAME,
@@ -286,7 +286,7 @@ async function crossplatformRegistrationOptions(device) {
   if (wallet.authenticators && wallet.authenticators.length >= MAX_AUTHENTICATORS) {
     throw createError(400, 'The number of authenticators has exceeded the maximum limit');
   }
-  const options = generateRegistrationOptions({
+  const options = await generateRegistrationOptions({
     challenge: generateChallenge(),
     rpID: RP_ID,
     rpName: RP_NAME,

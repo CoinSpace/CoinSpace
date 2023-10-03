@@ -1,4 +1,5 @@
 import {
+  WebAuthnAbortService,
   browserSupportsWebAuthn,
   startAuthentication,
   startRegistration,
@@ -135,7 +136,10 @@ export default class Hardware {
         new Promise((_, reject) => {
           const error = new Error('The operation either timed out or was not allowed.');
           error.name = 'NotAllowedError';
-          options.cancel = () => { reject(error); };
+          options.cancel = () => {
+            reject(error);
+            WebAuthnAbortService.cancelCeremony();
+          };
         }),
       ]);
       return result;
