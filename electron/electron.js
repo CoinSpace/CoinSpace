@@ -1,11 +1,7 @@
+import { init } from '@sentry/electron';
 import log from 'electron-log';
 import { pathToFileURL } from 'node:url';
 import { Menu, app, net, protocol } from 'electron';
-
-//import { init } from '@sentry/electron';
-import { createRequire } from 'node:module';
-const require = createRequire(import.meta.url);
-const { init } = require('@sentry/electron');
 
 import menu from './lib/menu.js';
 import openWindow from './lib/openWindow.js';
