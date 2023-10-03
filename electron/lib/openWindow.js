@@ -11,9 +11,9 @@ import {
 function makePath(deeplink) {
   if (deeplink && schemes.some((item) => deeplink.startsWith(`${item.scheme}:`))) {
     const crypto = schemes.find((item) => deeplink.startsWith(`${item.scheme}:`));
-    return `${crypto._id}/bip21/${encodeURIComponent(deeplink)}`;
+    return `/${crypto._id}/bip21/${encodeURIComponent(deeplink)}`;
   } else {
-    return '';
+    return '/';
   }
 }
 
