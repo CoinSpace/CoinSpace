@@ -63,14 +63,6 @@ export default async function deviceready() {
     });
   };
 
-  ThreeDeeTouch.onHomeIconPressed = ({ type }) => {
-    const scheme = type.split('.').pop();
-    const cryptoId = schemes[scheme];
-    if (!cryptoId) return;
-    const baseUrl = window.location.href.split('#')[0];
-    window.location = `${baseUrl}#/${cryptoId}`;
-  };
-
   window.open = (url, target, options) => {
     return cordova.InAppBrowser.open(url, '_system', options);
   };
@@ -83,6 +75,13 @@ export default async function deviceready() {
   });
 
   if (import.meta.env.VITE_PLATFORM === 'ios') {
+    ThreeDeeTouch.onHomeIconPressed = ({ type }) => {
+      const scheme = type.split('.').pop();
+      const cryptoId = schemes[scheme];
+      if (!cryptoId) return;
+      const baseUrl = window.location.href.split('#')[0];
+      window.location = `${baseUrl}#/${cryptoId}`;
+    };
     window.StatusBar.styleDefault();
     window.StatusBar.show();
     window.StatusBar.overlaysWebView(false);
