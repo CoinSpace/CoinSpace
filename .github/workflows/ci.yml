@@ -82,21 +82,24 @@ jobs:
             VITE_DISTRIBUTION: appx-dev
             SENTRY_DSN_KEY: SENTRY_DSN_WIN
             SENTRY_PROJECT: win
-          #- os: macos-12
-          #  node: 18
-          #  VITE_BUILD_TYPE: phonegap
-          #  VITE_DISTRIBUTION: ios
-          #  SENTRY_DSN_KEY: SENTRY_DSN_IOS
-          #- os: ubuntu-20.04
-          #  node: 18
-          #  VITE_BUILD_TYPE: phonegap
-          #  VITE_DISTRIBUTION: android-play
-          #  SENTRY_DSN_KEY: SENTRY_DSN_ANDROID
-          #- os: ubuntu-20.04
-          #  node: 18
-          #  VITE_BUILD_TYPE: phonegap
-          #  VITE_DISTRIBUTION: android-galaxy
-          #  SENTRY_DSN_KEY: SENTRY_DSN_ANDROID
+          - os: macos-12
+            node: 18
+            VITE_BUILD_TYPE: phonegap
+            VITE_DISTRIBUTION: ios
+            SENTRY_DSN_KEY: SENTRY_DSN_IOS
+            SENTRY_PROJECT: ios
+          - os: ubuntu-20.04
+            node: 18
+            VITE_BUILD_TYPE: phonegap
+            VITE_DISTRIBUTION: android-play
+            SENTRY_DSN_KEY: SENTRY_DSN_ANDROID
+            SENTRY_PROJECT: android
+          - os: ubuntu-20.04
+            node: 18
+            VITE_BUILD_TYPE: phonegap
+            VITE_DISTRIBUTION: android-galaxy
+            SENTRY_DSN_KEY: SENTRY_DSN_ANDROID
+            SENTRY_PROJECT: android
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
