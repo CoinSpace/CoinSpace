@@ -131,6 +131,8 @@ async function setProvisionProfile() {
     setting['DEVELOPMENT_TEAM'] = '3M4KWD4BUU';
     const { name } = pbxXCBuildConfigurationSection[key];
     if (setting['PRODUCT_BUNDLE_IDENTIFIER'] === 'com.coinspace.wallet') {
+      setting['SUPPORTS_MACCATALYST'] = 'NO';
+      setting['SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD'] = 'NO';
       if (name === 'Release') {
         setting['PROVISIONING_PROFILE_SPECIFIER'] = '"com.coinspace.wallet (production)"';
       } else {

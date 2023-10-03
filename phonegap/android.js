@@ -63,7 +63,7 @@ async function run() {
       ../deploy/coinspace-release.apk',
       { cwd: buildPath }
     );
-    const destination = `${VERSION}-${BRANCH || 'local'}/${NAME}-${VERSION}`;
+    const destination = `${VERSION}-${BRANCH || 'local'}/${NAME}-${process.env.VITE_DISTRIBUTION}-${VERSION}`;
     await storage.bucket(process.env.GOOGLE_CLOUD_BUCKET).upload('deploy/coinspace-release.apk', { destination: `${destination}.apk` });
 
     cordova('compile android --release -- --packageType=bundle');
