@@ -4,7 +4,6 @@ import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import path from 'path';
 import { sentryVitePlugin } from '@sentry/vite-plugin';
 import svgLoader from 'vite-svg-loader';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
 import vue from '@vitejs/plugin-vue';
 import { defineConfig, loadEnv } from 'vite';
 
@@ -18,6 +17,7 @@ export default defineConfig(({ mode }) => {
       strictPort: true,
       proxy: {
         '/api': { target: 'http://localhost:8080' },
+        '/assets/crypto': { target: 'http://localhost:8080' },
       },
     },
     base: process.env.BASE_URL || '/',
@@ -32,14 +32,6 @@ export default defineConfig(({ mode }) => {
       }),
       svgLoader({ svgo: false }),
       sfcAutoName(),
-      viteStaticCopy({
-        targets: [
-          {
-            src: 'node_modules/@coinspace/crypto-db/logo/*',
-            dest: 'assets/crypto/',
-          },
-        ],
-      }),
       ViteEjsPlugin(() => ({ env })),
       ViteMinifyPlugin(),
       sentryVitePlugin({

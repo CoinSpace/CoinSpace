@@ -25,7 +25,7 @@
     "lint:style": "stylelint '**/*.{vue,scss}'"
   },
   "dependencies": {
-    "@coinspace/crypto-db": "^1.7.11",
+    "@coinspace/crypto-db": "^1.7.12",
     "@coinspace/cs-bitcoin-wallet": "github:CoinSpace/cs-bitcoin-wallet#master",
     "@coinspace/cs-cardano-wallet": "github:CoinSpace/cs-cardano-wallet#next",
     "@coinspace/cs-common": "^1.1.0",
@@ -76,7 +76,6 @@
     "vite-plugin-ejs": "^1.6.4",
     "vite-plugin-minify": "^1.5.2",
     "vite-plugin-node-polyfills": "^0.9.0",
-    "vite-plugin-static-copy": "^0.17.0",
     "vite-svg-loader": "^4.0.0",
     "vue-i18n-extract": "^2.0.7"
   },

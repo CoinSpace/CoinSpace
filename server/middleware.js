@@ -54,6 +54,8 @@ function init(app) {
 
   const cacheControl = isProduction() ? { maxAge: dayInMs, setHeaders: setCustomCacheControl } : null;
   app.use(express.static(fileURLToPath(new URL('dist', import.meta.url)), cacheControl));
+  app.use('/assets/crypto/',
+    express.static(fileURLToPath(new URL('node_modules/@coinspace/crypto-db/logo', import.meta.url)), cacheControl));
 }
 
 function setCustomCacheControl(res, path) {
