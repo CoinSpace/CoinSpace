@@ -254,7 +254,7 @@ export default {
         class="&__key &__key--named"
         @click="logout"
       >
-        {{ $t('Logout') }}
+        {{ $t('Log out') }}
       </CsButton>
       <div
         v-else

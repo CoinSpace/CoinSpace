@@ -233,7 +233,7 @@ export default {
         <template #circle>
           <LocationIcon />
         </template>
-        {{ $t('Enable Mecto') }}
+        {{ $t('Enable') + ' Mecto' }}
       </CsButton>
       <CsButton
         v-if="isMectoEnabled"
@@ -245,7 +245,7 @@ export default {
           <LocationFillIcon />
           <LocationFillIcon class="&__location" />
         </template>
-        {{ $t('Disable Mecto') }}
+        {{ $t('Disable') + ' Mecto' }}
       </CsButton>
       <CsButton
         type="circle"
