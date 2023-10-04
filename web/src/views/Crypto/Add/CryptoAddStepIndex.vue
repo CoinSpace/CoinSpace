@@ -137,7 +137,7 @@ export default {
         <CsFormInput
           v-model="query"
           class="&__action-input"
-          placeholder="Search"
+          :placeholder="$t('Search')"
           small
           clear
         >
