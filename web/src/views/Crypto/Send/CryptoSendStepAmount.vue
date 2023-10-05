@@ -43,14 +43,19 @@ export default {
   methods: {
     async setMaxAmount() {
       this.isLoadingMaxAmount = true;
-      this.amountValue = await this.$wallet.estimateMaxAmount({
-        address: this.storage.address,
-        feeRate: this.storage.feeRate,
-        gasLimit: this.storage.gasLimit,
-        meta: this.storage.meta,
-        price: this.storage.priceUSD,
-      });
-      this.isLoadingMaxAmount = false;
+      try {
+        this.amountValue = await this.$wallet.estimateMaxAmount({
+          address: this.storage.address,
+          feeRate: this.storage.feeRate,
+          gasLimit: this.storage.gasLimit,
+          meta: this.storage.meta,
+          price: this.storage.priceUSD,
+        });
+      } catch (err) {
+        this.handleError(err);
+      } finally {
+        this.isLoadingMaxAmount = false;
+      }
     },
     async confirm() {
       this.isLoading = true;
@@ -79,46 +84,49 @@ export default {
         this.error = undefined;
         this.next('confirm');
       } catch (err) {
-        if (err instanceof errors.SmallAmountError) {
-          this.error = this.$t('Value is too small, minimum {amount} {symbol}', {
-            amount: err.amount,
-            symbol: this.$wallet.crypto.symbol,
-          });
-          return;
-        }
-        if (err instanceof errors.BigAmountError) {
-          this.error = this.$t('Value is too big, maximum {amount} {symbol}', {
-            amount: err.amount,
-            symbol: this.$wallet.crypto.symbol,
-          });
-          return;
-        }
-        if (err instanceof errors.MinimumReserveDestinationError) {
-          this.error = this.$t('Value is too small for this destination address, minimum {amount} {symbol}', {
-            amount: err.amount,
-            symbol: this.$wallet.crypto.symbol,
-          });
-          return;
-        }
-        if (err instanceof errors.BigAmountConfirmationPendingError) {
-          // eslint-disable-next-line max-len
-          this.error = this.$t('Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first. Available {amount} {symbol}', {
-            amount: err.amount,
-            symbol: this.$wallet.crypto.symbol,
-          });
-          return;
-        }
-        if (err instanceof errors.InsufficientCoinForTokenTransactionError) {
-          this.error = this.$t('Insufficient funds for token transaction. Required {amount} {symbol}', {
-            amount: err.amount,
-            symbol: this.$wallet.platform.symbol,
-          });
-          return;
-        }
-        console.error(err);
+        this.handleError(err);
       } finally {
         this.isLoading = false;
       }
+    },
+    handleError(err) {
+      if (err instanceof errors.SmallAmountError) {
+        this.error = this.$t('Value is too small, minimum {amount} {symbol}', {
+          amount: err.amount,
+          symbol: this.$wallet.crypto.symbol,
+        });
+        return;
+      }
+      if (err instanceof errors.BigAmountError) {
+        this.error = this.$t('Value is too big, maximum {amount} {symbol}', {
+          amount: err.amount,
+          symbol: this.$wallet.crypto.symbol,
+        });
+        return;
+      }
+      if (err instanceof errors.MinimumReserveDestinationError) {
+        this.error = this.$t('Value is too small for this destination address, minimum {amount} {symbol}', {
+          amount: err.amount,
+          symbol: this.$wallet.crypto.symbol,
+        });
+        return;
+      }
+      if (err instanceof errors.BigAmountConfirmationPendingError) {
+        // eslint-disable-next-line max-len
+        this.error = this.$t('Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first. Available {amount} {symbol}', {
+          amount: err.amount,
+          symbol: this.$wallet.crypto.symbol,
+        });
+        return;
+      }
+      if (err instanceof errors.InsufficientCoinForTokenTransactionError) {
+        this.error = this.$t('Insufficient funds for token transaction. Required {amount} {symbol}', {
+          amount: err.amount,
+          symbol: this.$wallet.platform.symbol,
+        });
+        return;
+      }
+      console.error(err);
     },
   },
 };
