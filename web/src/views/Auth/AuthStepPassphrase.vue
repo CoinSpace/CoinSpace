@@ -135,7 +135,7 @@ export default {
     }
 
     &__warning {
-      @include text-md;
+      @include text-sm;
       display: flex;
       align-items: flex-start;
       color: $danger;
@@ -148,7 +148,7 @@ export default {
     }
 
     &__agreement {
-      @include text-md;
+      @include text-sm;
       position: relative;
       display: flex;
       align-items: flex-start;
