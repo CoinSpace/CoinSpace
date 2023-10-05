@@ -9,6 +9,44 @@ on:
       - '**'
 
 jobs:
+  release:
+    runs-on: ubuntu-22.04
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Set app version
+        run: echo "VERSION=$(node -p -e "require('./package.json').version")" >> $GITHUB_ENV
+      - uses: ncipollo/release-action@v1
+        with:
+          tag: v${{ env.VERSION }}
+          name: v${{ env.VERSION }}
+          draft: true
+          allowUpdates: true
+          omitBodyDuringUpdate: true
+          omitNameDuringUpdate: true
+          omitDraftDuringUpdate: true
+          body: |
+            * [Web Wallet](https://coin.space/wallet/)
+
+            * [Tor Wallet](http://coinspacezp5mmyuicbz2hoafbnduj4vzkttq3grn5mnwdue5t343zid.onion/)
+
+            * [iOS Application](https://apps.apple.com/app/coin-wallet-bitcoin-crypto/id980719434?platform=iphone)
+
+            * [Android Application](https://play.google.com/store/apps/details?id=com.coinspace.app)
+
+            * [Galaxy Store](https://galaxy.store/coinapp)
+
+            * [macOS Installer: Coin.Wallet.dmg](https://github.com/CoinSpace/CoinSpace/releases/download/v${{ env.VERSION }}/Coin.Wallet.dmg)
+
+            * [Microsoft Store](https://apps.microsoft.com/store/detail/9NBLGGH5PXJQ)
+
+            * [Mac App Store](https://apps.apple.com/app/coin-wallet-bitcoin-crypto/id980719434?platform=mac)
+
+            * [Linux Snap](https://snapcraft.io/coin)
+
   lint:
     runs-on: ubuntu-22.04
     steps:

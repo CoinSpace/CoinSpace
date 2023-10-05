@@ -78,8 +78,8 @@ const platforms = [{
   arch: 'any',
   app: 'app',
   type: TYPE_LINK,
-  pattern: /apps\/9NBLGGH5PXJQ/ig,
-  link: 'https://www.microsoft.com/store/apps/9NBLGGH5PXJQ',
+  pattern: /9NBLGGH5PXJQ/ig,
+  link: 'https://apps.microsoft.com/store/detail/9NBLGGH5PXJQ',
 }, {
   // Common for iPhone, iPad, and Apple Watch
   distribution: 'ios',
