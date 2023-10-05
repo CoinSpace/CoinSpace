@@ -102,6 +102,7 @@ export default {
       }
       this.isLoading = true;
       try {
+        if (!this.$wallet.crypto.changelly) throw new ExchangeDisabledError();
         if (this.$wallet.isFeeRatesSupported) await this.$wallet.loadFeeRates();
         await this.$wallet.validateAmount({
           address: this.$wallet.dummyExchangeDepositAddress,
@@ -135,6 +136,7 @@ export default {
       const amount = this.amount || new Amount(0, this.$wallet.crypto.decimals);
       this.isLoading = true;
       try {
+        if (!this.$wallet.crypto.changelly) throw new ExchangeDisabledError();
         if (this.$wallet.isFeeRatesSupported) await this.$wallet.loadFeeRates();
         await this.$wallet.validateAmount({
           address: this.$wallet.dummyExchangeDepositAddress,
