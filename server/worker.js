@@ -4,7 +4,7 @@ import tasks from './lib/tasks.js';
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
-  environment: process.env.NODE_ENV,
+  environment: process.env.SENTRY_ENVIRONMENT,
   release: `coin.worker@${process.env.npm_package_version}`,
   integrations: [
     new Integrations.CaptureConsole({
