@@ -40,20 +40,23 @@ export default {
     },
   },
   watch: {
-    async $cryptos() {
-      let portfolioBalance = 0;
-      let portfolioBalanceChange = 0;
-      for (const item of this.$cryptos) {
-        if (item.market?.price) {
-          const { change } = item.market;
-          const changePercent = change[this.changePeriod] / 100;
-          portfolioBalance += item.balanceFiat;
-          portfolioBalanceChange += item.balanceFiat * changePercent;
+    $cryptos: {
+      async handler() {
+        let portfolioBalance = 0;
+        let portfolioBalanceChange = 0;
+        for (const item of this.$cryptos) {
+          if (item.market?.price) {
+            const { change } = item.market;
+            const changePercent = change[this.changePeriod] / 100;
+            portfolioBalance += item.balanceFiat;
+            portfolioBalanceChange += item.balanceFiat * changePercent;
+          }
         }
-      }
-      this.portfolioBalance = portfolioBalance;
-      this.portfolioBalanceChange = portfolioBalanceChange;
-      this.portfolioBalanceChangePercent = portfolioBalance ? portfolioBalanceChange / portfolioBalance : 0;
+        this.portfolioBalance = portfolioBalance;
+        this.portfolioBalanceChange = portfolioBalanceChange;
+        this.portfolioBalanceChangePercent = portfolioBalance ? portfolioBalanceChange / portfolioBalance : 0;
+      },
+      immediate: true,
     },
   },
 };
