@@ -19,6 +19,7 @@ import LocationIcon from '../../../assets/svg/location.svg';
 import ShareIcon from '../../../assets/svg/share.svg';
 
 import { cryptoSubtitle } from '../../../lib/helpers.js';
+import { onShowOnHide } from '../../../lib/mixins.js';
 
 export default {
   components: {
@@ -35,6 +36,7 @@ export default {
     ShareIcon,
   },
   extends: CsStep,
+  mixins: [onShowOnHide],
   data() {
     return {
       subtitle: cryptoSubtitle(this.$wallet),
@@ -47,6 +49,9 @@ export default {
       isMectoLoading: false,
       isCopied: false,
     };
+  },
+  onHide() {
+    this.disableMecto();
   },
   computed: {
     qr() {
@@ -117,6 +122,7 @@ export default {
     },
     async disableMecto() {
       if (this.isMectoLoading) return;
+      if (!this.isMectoEnabled) return;
       this.isMectoLoading = true;
       try {
         await this.$account.mecto.disable();
