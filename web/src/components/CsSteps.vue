@@ -72,10 +72,7 @@ export default {
 
 <template>
   <div class="&">
-    <Transition
-      :name="transition"
-      mode="out-in"
-    >
+    <Transition :name="transition">
       <KeepAlive :exclude="exclude">
         <component
           :is="steps[currentStep]"

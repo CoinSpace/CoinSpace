@@ -1,23 +1,21 @@
-.instant {
-  &-leave-from {
-    opacity: 0;
-  }
-}
-
 .slide-right {
-  &-enter-active,
   &-leave-active {
     overflow: hidden;
     transition-duration: 0.1s;
   }
 
-  &-enter-active [data-transition] {
-    transition: all 0.1s ease-in;
+  &-enter-active {
+    overflow: hidden;
+    transition-duration: 0.2s;
   }
 
   &-enter-from [data-transition] {
     opacity: 0;
     transform: translateX(-2rem);
+  }
+
+  &-enter-active [data-transition] {
+    transition: all 0.1s ease-in 0.1s;
   }
 
   &-leave-active [data-transition] {
@@ -31,19 +29,23 @@
 }
 
 .slide-left {
-  &-enter-active,
   &-leave-active {
     overflow: hidden;
     transition-duration: 0.1s;
   }
 
-  &-enter-active [data-transition] {
-    transition: all 0.1s ease-in;
+  &-enter-active {
+    overflow: hidden;
+    transition-duration: 0.2s;
   }
 
   &-enter-from [data-transition] {
     opacity: 0;
     transform: translateX(2rem);
+  }
+
+  &-enter-active [data-transition] {
+    transition: all 0.1s ease-in 0.1s;
   }
 
   &-leave-active [data-transition] {

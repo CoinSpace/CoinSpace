@@ -55,9 +55,7 @@ router.beforeEach((to, from) => {
   }
   const toDepth = to.path.split('/').length;
   const fromDepth = from.path.split('/').length;
-  if (toDepth === fromDepth) {
-    to.meta.transition = 'instant';
-  } else {
+  if (toDepth !== fromDepth) {
     to.meta.transition = toDepth > fromDepth ? 'slide-left' : 'slide-right';
   }
 });

@@ -63,7 +63,7 @@ export default {
     }
 
     &.slide-right-enter-active {
-      transition: opacity 0.1s ease-in;
+      transition: opacity 0.1s ease-in 0.1s;
     }
 
     &.slide-left-leave-to,
