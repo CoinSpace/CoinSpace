@@ -75,7 +75,10 @@ export default {
 <template>
   <MainLayout :title="$t('Transfer private key')">
     <div class="&__info">
-      {{ $t('This will transfer all coins from the private key address to your wallet.') }}
+      {{ $wallet.crypto.type === 'coin' ?
+        $t('This will transfer all coins from the private key address to your wallet.') :
+        $t('This will transfer all tokens from the private key address to your wallet.')
+      }}
     </div>
     <CsFormGroup class="&__container">
       <CsFormInput

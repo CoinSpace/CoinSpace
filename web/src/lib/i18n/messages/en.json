@@ -215,6 +215,7 @@
   "There are currently no providers available.": "There are currently no providers available.",
   "This allows you to open your wallet on multiple devices and keeps it secure.": "This allows you to open your wallet on multiple devices and keeps it secure.",
   "This will transfer all coins from the private key address to your wallet.": "This will transfer all coins from the private key address to your wallet.",
+  "This will transfer all tokens from the private key address to your wallet.": "This will transfer all tokens from the private key address to your wallet.",
   "To": "To",
   "To create a new account you need to make an EOS transfer (amount greater than {price} EOS) with the following data from an exchange or other EOS wallet.": "To create a new account you need to make an EOS transfer (amount greater than {price} EOS) with the following data from an exchange or other EOS wallet.",
   "Token info": "Token info",

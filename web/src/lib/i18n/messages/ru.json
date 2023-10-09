@@ -215,6 +215,7 @@
   "There are currently no providers available.": "На данный момент нет доступных провайдеров.",
   "This allows you to open your wallet on multiple devices and keeps it secure.": "Это позволяет вам открывать свой кошелек на нескольких устройствах и обеспечивает его безопасность.",
   "This will transfer all coins from the private key address to your wallet.": "Это отправит все монеты с адреса закрытого ключа на ваш кошелек.",
+  "This will transfer all tokens from the private key address to your wallet.": "Это отправит все токены с адреса закрытого ключа на ваш кошелек.",
   "To": "Куда",
   "To create a new account you need to make an EOS transfer (amount greater than {price} EOS) with the following data from an exchange or other EOS wallet.": "Для создания нового аккаунта необходимо отправить EOS (более {price}) с биржи или другого EOS кошелька на указанный ниже адрес с заданным мемо.",
   "Token info": "Информация о токене",
