@@ -50,7 +50,8 @@ export default {
       isCopied: false,
     };
   },
-  onHide() {
+  async onHide() {
+    await this.__mecto;
     this.disableMecto();
   },
   computed: {
@@ -112,7 +113,8 @@ export default {
       }
       this.isMectoLoading = true;
       try {
-        await this.$account.mecto.enable(this.$wallet.address);
+        this.__mecto = this.$account.mecto.enable(this.$wallet.address);
+        await this.__mecto;
         this.isMectoEnabled = true;
       } catch (err) {
         console.error(err);
