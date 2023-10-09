@@ -51,7 +51,7 @@ export default {
     };
   },
   async onHide() {
-    await this.__mecto;
+    await this.$options.mecto;
     this.disableMecto();
   },
   computed: {
@@ -113,8 +113,8 @@ export default {
       }
       this.isMectoLoading = true;
       try {
-        this.__mecto = this.$account.mecto.enable(this.$wallet.address);
-        await this.__mecto;
+        this.$options.mecto = this.$account.mecto.enable(this.$wallet.address);
+        await this.$options.mecto;
         this.isMectoEnabled = true;
       } catch (err) {
         console.error(err);
