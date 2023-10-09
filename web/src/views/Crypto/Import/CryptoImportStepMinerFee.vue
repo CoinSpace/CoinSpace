@@ -28,7 +28,6 @@ export default {
           await this.$account.market.getPrice(this.$wallet.crypto._id, 'USD') : undefined,
       });
       this.replace('privateKey');
-      this.isLoading = false;
     }
   },
   methods: {
