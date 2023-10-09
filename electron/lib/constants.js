@@ -1,5 +1,5 @@
 import * as variables from '../dist/variables.js';
-
+process.env.GOOGLE_API_KEY = variables.VITE_GOOGLE_API_KEY;
 const mode = process.env.NODE_ENV || variables.MODE;
 export const isMac = process.platform === 'darwin';
 export const isLinux = process.platform === 'linux';

@@ -245,11 +245,11 @@ jobs:
           VITE_ZENDESK_APP_ID: ${{ secrets.ZENDESK_APP_ID }}
           VITE_ZENDESK_CLIENT_ID: ${{ secrets.ZENDESK_CLIENT_ID }}
           VITE_ZENDESK_URL: ${{ secrets.ZENDESK_URL }}
+          VITE_GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
           SENTRY_PROJECT: ${{ matrix.SENTRY_PROJECT }}
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
