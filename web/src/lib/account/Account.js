@@ -686,7 +686,9 @@ export default class Account extends EventEmitter {
       this.#needToMigrateV5Balance = true;
       const cryptos = [
         ...defaultCryptos,
-        ...tokens.filter((crypto) => !defaultCryptos.find((token) => token._id === crypto._id)),
+        ...tokens.filter((crypto) => {
+          return crypto?._id?.includes('@') && !defaultCryptos.find((token) => token._id === crypto._id);
+        }),
       ];
       this.#details.set('cryptos', cryptos);
       this.#details.delete('tokens');
