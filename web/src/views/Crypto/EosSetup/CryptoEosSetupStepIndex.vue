@@ -6,6 +6,8 @@ import CsFormInput from '../../../components/CsForm/CsFormInput.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 
+import * as EOSErrors from '@coinspace/cs-eos-wallet/errors';
+
 export default {
   components: {
     CsButton,
@@ -34,9 +36,9 @@ export default {
   methods: {
     async confirm() {
       this.isLoading = true;
-      if (this.$wallet.validateAccountName(this.account)) {
-        this.error = false;
+      try {
         const data = await this.$wallet.setupAccount(this.account);
+        this.error = false;
         if (data.needToCreateAccount === false) {
           this.isLoading = false;
           this.$router.up();
@@ -46,12 +48,19 @@ export default {
             memo: data.memo,
             price: data.price,
           });
-          this.isLoading = false;
           this.next('confirm');
         }
-      } else {
+      } catch (err) {
+        if (err instanceof EOSErrors.InvalidAccountNameError) {
+          return this.error = this.$t('Invalid account name');
+        }
+        if (err instanceof EOSErrors.AccountNameUnavailableError) {
+          return this.error = this.$t('This account name is already taken, please choose another one.');
+        }
+        this.error = this.$t('Error! Please try again later.');
+        console.error(err);
+      } finally {
         this.isLoading = false;
-        this.error = this.$t('Invalid account name');
       }
     },
   },

@@ -5,6 +5,8 @@ import { InternalExchangeError } from '../../../lib/account/ChangellyExchange.js
 import MainLayout from '../../../layouts/MainLayout.vue';
 import { walletSeed } from '../../../lib/mixins.js';
 
+import * as EOSErrors from '@coinspace/cs-eos-wallet/errors';
+
 export default {
   components: {
     MainLayout,
@@ -63,14 +65,39 @@ export default {
             internal: this.storage.address === 'your wallet',
           });
         } catch (err) {
-          console.error(err);
           if (err instanceof InternalExchangeError) {
             this.updateStorage({ status: false, message: this.$t('Changelly error. Please try again later.') });
-          } else {
-            this.updateStorage({ status: false });
+            return;
           }
+          if (err instanceof EOSErrors.DestinationAcountError) {
+            this.updateStorage({ status: false, message: this.$t("Destination account doesn't exist.") });
+            return;
+          }
+          if (err instanceof EOSErrors.ExpiredTransactionError) {
+            this.updateStorage({ status: false, message: this.$t('Transaction has been expired. Please try again.') });
+            return;
+          }
+          if (err instanceof EOSErrors.CPUExceededError) {
+            this.updateStorage({
+              status: false,
+              // eslint-disable-next-line max-len
+              message: this.$t('Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.'),
+            });
+            return;
+          }
+          if (err instanceof EOSErrors.NETExceededError) {
+            this.updateStorage({
+              status: false,
+              // eslint-disable-next-line max-len
+              message: this.$t('Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.'),
+            });
+            return;
+          }
+          this.updateStorage({ status: false });
+          console.error(err);
+        } finally {
+          this.next('status');
         }
-        this.next('status');
       });
       this.isLoading = false;
     },

@@ -7,6 +7,8 @@ import CsFormTextareaReadonly from '../../../components/CsForm/CsFormTextareaRea
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 
+import * as EOSErrors from '@coinspace/cs-eos-wallet/errors';
+
 export default {
   components: {
     CsButton,
@@ -26,14 +28,26 @@ export default {
   methods: {
     async confirm() {
       this.isLoading = true;
-      const data = await this.$wallet.setupAccount(this.storage.account);
-      if (data.needToCreateAccount === false) {
-        this.error = undefined;
-        this.$router.up();
-      } else {
-        this.error = this.$t('Transfer not found');
+      try {
+        const data = await this.$wallet.setupAccount(this.storage.account);
+        if (data.needToCreateAccount === false) {
+          this.error = undefined;
+          this.$router.up();
+        } else {
+          this.error = this.$t('Transfer not found');
+        }
+      } catch (err) {
+        if (err instanceof EOSErrors.InvalidAccountNameError) {
+          return this.error = this.$t('Invalid account name');
+        }
+        if (err instanceof EOSErrors.AccountNameUnavailableError) {
+          return this.error = this.$t('This account name is already taken, please choose another one.');
+        }
+        this.error = this.$t('Error! Please try again later.');
+        console.error(err);
+      } finally {
+        this.isLoading = false;
       }
-      this.isLoading = false;
     },
   },
 };
