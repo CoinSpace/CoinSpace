@@ -24,6 +24,7 @@ export default {
           feeRate: this.storage.feeRate,
           price: this.storage.priceUSD,
         });
+        this.$account.emit('update');
         this.updateStorage({ status: true });
       } catch (err) {
         console.error(err);
