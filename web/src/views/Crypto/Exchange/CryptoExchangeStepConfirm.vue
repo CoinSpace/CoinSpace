@@ -69,7 +69,7 @@ export default {
             this.updateStorage({ status: false, message: this.$t('Changelly error. Please try again later.') });
             return;
           }
-          if (err instanceof EOSErrors.DestinationAcountError) {
+          if (err instanceof EOSErrors.DestinationAccountError) {
             this.updateStorage({ status: false, message: this.$t("Destination account doesn't exist.") });
             return;
           }
