@@ -117,14 +117,14 @@ async function estimateV4(from, to, value) {
   if (data.error) {
     if (data.error.code === -32600 || data.error.code === -32602) {
       if (/minimal amount/i.test(data.error.message)) {
-        const amount = data.error.message.match(/\d+(\.\d+)?/i)?.[0];
+        const amount = data.error.message.match(/\s(\d+(?:\.\d+)?)\s/i)?.[1];
         return {
           error: 'SmallAmountError',
           amount: amount && normalizeNumber(amount),
         };
       }
       if (/maximum amount/i.test(data.error.message)) {
-        const amount = data.error.message.match(/\d+(\.\d+)?/i)?.[0];
+        const amount = data.error.message.match(/\s(\d+(?:\.\d+)?)\s/i)?.[1];
         return {
           error: 'BigAmountError',
           amount: amount && normalizeNumber(amount),
