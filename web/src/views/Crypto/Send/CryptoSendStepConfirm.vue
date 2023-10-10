@@ -40,7 +40,7 @@ export default {
             this.updateStorage({ status: false, message: this.$t("Recipient's wallet requires a destination tag.") });
             return;
           }
-          if (err instanceof EOSErrors.DestinationAcountError) {
+          if (err instanceof EOSErrors.DestinationAccountError) {
             this.updateStorage({ status: false, message: this.$t("Destination account doesn't exist.") });
             return;
           }
