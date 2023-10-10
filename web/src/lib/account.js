@@ -39,6 +39,12 @@ export async function createAccount({ app, router }) {
         break;
       default: {
         const result = [];
+        cryptos.value.forEach(({ crypto, balance }) => {
+          const wallet = account.wallet(crypto._id);
+          if (wallet.balance.value !== balance.value) {
+            account.setPlatformWalletsStateInitialized(wallet.crypto.platform, wallet);
+          }
+        });
         for (const wallet of account.wallets()) {
           const market = await account.market.getMarket(wallet.crypto._id, currency.value);
           result.push({
