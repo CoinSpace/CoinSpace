@@ -103,13 +103,6 @@ export default {
           ChangellyExchange.STATUS_REFUNDED,
           ChangellyExchange.STATUS_HOLD,
         ].includes(status),
-        hasContactButton: [
-          ChangellyExchange.STATUS_PENDING,
-          ChangellyExchange.STATUS_EXCHANGING,
-          ChangellyExchange.STATUS_HOLD,
-          ChangellyExchange.STATUS_REFUNDED,
-          ChangellyExchange.STATUS_FAILED,
-        ].includes(status),
         hasAcceptButton: status === ChangellyExchange.STATUS_REQUIRED_TO_ACCEPT,
       };
     },
@@ -240,7 +233,6 @@ export default {
       <template v-if="exchange">
         <CsPoweredBy powered="changelly" />
         <CsButton
-          v-if="exchange.hasContactButton"
           type="primary-light"
           @click="$safeOpen(transaction.exchange.trackUrl)"
         >
