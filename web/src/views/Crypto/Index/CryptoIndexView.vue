@@ -62,6 +62,7 @@ export default {
   mounted() {
     if (this.$walletState === this.$STATE_LOADED) {
       this.$wallet.cleanup();
+      this.$account.emit('update');
     }
     this.loadPriceChart();
   },
