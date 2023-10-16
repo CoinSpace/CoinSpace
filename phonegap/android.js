@@ -66,7 +66,7 @@ async function run() {
     const destination = `${VERSION}-${BRANCH || 'local'}/${NAME}-${process.env.VITE_DISTRIBUTION}-${VERSION}`;
     await storage.bucket(process.env.GOOGLE_CLOUD_BUCKET).upload('deploy/coinspace-release.apk', { destination: `${destination}.apk` });
 
-    cordova('compile android --release -- --packageType=bundle');
+    cordova('compile android --release -- --packageType=bundle --keystore=../release.keystore --alias=upload --storePassword=coinspace --password=coinspace');
     await storage.bucket(process.env.GOOGLE_CLOUD_BUCKET).upload('build/platforms/android/app/build/outputs/bundle/release/app-release.aab', { destination: `${destination}.aab` });
   } else {
     cordova('compile android');
