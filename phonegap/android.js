@@ -52,25 +52,33 @@ async function run() {
   fixAndroidManifest();
 
   if (process.env.CI) {
-    cordova('compile android --release -- --packageType=apk');
-    shell(
-      'zipalign -f 4 platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk \
-      ../deploy/coinspace-release.apk',
-      { cwd: buildPath }
-    );
-    shell(
-      'apksigner sign --ks-pass=pass:coinspace -ks ../release.keystore \
-      ../deploy/coinspace-release.apk',
-      { cwd: buildPath }
-    );
-    const destination = `${VERSION}-${BRANCH || 'local'}/${NAME}-${process.env.VITE_DISTRIBUTION}-${VERSION}`;
-    await storage.bucket(process.env.GOOGLE_CLOUD_BUCKET).upload('deploy/coinspace-release.apk', { destination: `${destination}.apk` });
-
-    cordova('compile android --release -- --packageType=bundle --keystore=../release.keystore --alias=upload --storePassword=coinspace --password=coinspace');
-    await storage.bucket(process.env.GOOGLE_CLOUD_BUCKET).upload('build/platforms/android/app/build/outputs/bundle/release/app-release.aab', { destination: `${destination}.aab` });
+    if (process.env.VITE_DISTRIBUTION === 'android-play') await releaseAAB();
+    if (process.env.VITE_DISTRIBUTION === 'android-galaxy') await releaseAPK();
   } else {
     cordova('compile android');
   }
+}
+
+async function releaseAPK() {
+  cordova('compile android --release -- --packageType=apk');
+  shell(
+    'zipalign -f 4 platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk \
+    ../deploy/coinspace-release.apk',
+    { cwd: buildPath }
+  );
+  shell(
+    'apksigner sign --ks-pass=pass:coinspace -ks ../release.keystore \
+    ../deploy/coinspace-release.apk',
+    { cwd: buildPath }
+  );
+  const destination = `${VERSION}-${BRANCH || 'local'}/${NAME}-${process.env.VITE_DISTRIBUTION}-${VERSION}`;
+  await storage.bucket(process.env.GOOGLE_CLOUD_BUCKET).upload('deploy/coinspace-release.apk', { destination: `${destination}.apk` });
+}
+
+async function releaseAAB() {
+  const destination = `${VERSION}-${BRANCH || 'local'}/${NAME}-${process.env.VITE_DISTRIBUTION}-${VERSION}`;
+  cordova('compile android --release -- --packageType=bundle --keystore=../release.keystore --alias=upload --storePassword=coinspace --password=coinspace');
+  await storage.bucket(process.env.GOOGLE_CLOUD_BUCKET).upload('build/platforms/android/app/build/outputs/bundle/release/app-release.aab', { destination: `${destination}.aab` });
 }
 
 function fixAndroidManifest() {
