@@ -678,6 +678,29 @@ export default class Account extends EventEmitter {
         if (crypto) result[crypto.platform] = cryptoSettings[id];
         return result;
       }, {});
+      const legacy = {
+        'ethereum@ethereum': { bip44: 'm' },
+        'binance-coin@binance-smart-chain': { bip44: "m/44'/714'/0'" },
+        'bitcoin@bitcoin': {
+          bip84: "m/84'/0'/0'",
+          bip49: "m/49'/0'/0'",
+          bip44: "m/0'",
+        },
+        'litecoin@litecoin': {
+          bip84: "m/84'/2'/0'",
+          bip49: "m/49'/2'/0'",
+          bip44: "m/0'",
+        },
+        'bitcoin-cash@bitcoin-cash': { bip44: "m/0'" },
+        'dogecoin@dogecoin': { bip44: "m/0'" },
+        'dash@dash': { bip44: "m/0'" },
+      };
+      Object.keys(legacy).forEach((id) => {
+        const crypto = this.#cryptoDB.get(id);
+        if (crypto && !platformSettings[crypto.platform]) {
+          platformSettings[crypto.platform] = legacy[id];
+        }
+      });
       this.#details.set('platformSettings', platformSettings);
       this.#details.delete('cryptoSettings');
     }
