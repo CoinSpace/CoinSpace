@@ -1,6 +1,5 @@
 import { init } from '@sentry/electron';
 import log from 'electron-log';
-import { pathToFileURL } from 'node:url';
 import { Menu, app, net, protocol } from 'electron';
 
 import menu from './lib/menu.js';
@@ -28,7 +27,7 @@ log.info('versions', process.versions);
 
 if (isWindows) {
   app.setAboutPanelOptions({
-    iconPath: pathToFileURL('./resources/64x64.png'),
+    iconPath: './resources/64x64.png',
   });
 }
 
@@ -37,7 +36,7 @@ if (isLinux) {
     applicationName: app.name,
     applicationVersion: app.getVersion(),
     website: VITE_SITE_URL,
-    iconPath: pathToFileURL('./resources/64x64.png'),
+    iconPath: './resources/64x64.png',
   });
 }
 
