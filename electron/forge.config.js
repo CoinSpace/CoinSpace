@@ -21,7 +21,7 @@ if (VITE_DISTRIBUTION === 'mas' && process.env.GITHUB_RUN_NUMBER) {
   buildVersion = `1.1.${process.env.GITHUB_RUN_NUMBER}`;
 }
 
-const appxVersion = `${pkg.version}.${process.env.GITHUB_RUN_NUMBER || '0'}`;
+const appxVersion = `${pkg.version}.${VITE_DISTRIBUTION === 'appx' ? '0' : (process.env.GITHUB_RUN_NUMBER || '0')}`;
 
 const protocols = {
   name: pkg.productName,
