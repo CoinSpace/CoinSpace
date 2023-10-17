@@ -5,7 +5,7 @@ const schemes = [
   'coinspace',
   ...(await import('./lib/schemes.js')).default.map((item) => item.scheme),
 ];
-import { languages } from '../web/src/lib/i18n/i18n.js';
+import { languages } from '../web/src/lib/i18n/languages.js';
 const pkg = JSON.parse(await fs.readFile('./package.json'));
 
 const { VITE_DISTRIBUTION } = process.env;

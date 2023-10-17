@@ -9,7 +9,7 @@ import plist from 'plist';
 import util from 'util';
 import xcode from 'xcode';
 
-import { languages } from '../web/src/lib/i18n/i18n.js';
+import { languages } from '../web/src/lib/i18n/languages.js';
 import { cordova as Cordova, shell } from './utils.js';
 
 const buildPath = 'build';
