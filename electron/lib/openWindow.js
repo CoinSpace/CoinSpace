@@ -17,7 +17,9 @@ function makePath(deeplink) {
   }
 }
 
-function getWindow(path) {
+export default function openWindow(deeplink) {
+  const path = makePath(deeplink);
+  log.info(`open deeplink: '${deeplink}' path: '${path}'`);
   if (BrowserWindow.getAllWindows().length === 0) {
     // Create the browser window.
     const mainWindow = new BrowserWindow({
@@ -32,7 +34,7 @@ function getWindow(path) {
         preload: fileURLToPath(new URL('preload.js', import.meta.url)),
       },
     });
-    mainWindow.loadURL(`https://${APP_HOSTNAME}/#/${path}`);
+    mainWindow.loadURL(`https://${APP_HOSTNAME}/#${path}`);
 
     mainWindow.webContents.setWindowOpenHandler(({ url }) => {
       shell.openExternal(url);
@@ -46,16 +48,7 @@ function getWindow(path) {
       mainWindow.restore();
     }
     mainWindow.show();
-    return mainWindow;
-  }
-}
-
-export default function openWindow(deeplink) {
-  log.info(`open deeplink: '${deeplink}'`);
-  const path = makePath(deeplink);
-  log.info(`open path: '${path}'`);
-  const mainWindow = getWindow(path);
-  if (deeplink) {
     mainWindow.webContents.send('navigate', path);
+    return mainWindow;
   }
 }
