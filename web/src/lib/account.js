@@ -111,4 +111,17 @@ export async function createAccount({ app, router }) {
   account.on('logout', async () => {
     await createAccount({ app, router });
   });
+
+  if (import.meta.env.DEV) {
+    window.setBalance = function(cryptoId, str) {
+      const wallet = account.wallet(cryptoId);
+      Object.defineProperty(wallet, 'balance', {
+        configurable: true,
+        get() {
+          return Amount.fromString(str, wallet.crypto.decimals);
+        },
+      });
+      account.emit('update');
+    };
+  }
 }
