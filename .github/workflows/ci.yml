@@ -227,11 +227,6 @@ jobs:
             sed -i 's/function signAppx (program) {/function signAppx (program) { return;/' electron/node_modules/electron-windows-store/lib/sign.js
             sed -i 's/function makeCert (parametersOrPublisherName, certFilePath, program) {/function makeCert (parametersOrPublisherName, certFilePath, program) { return;/' electron/node_modules/electron-windows-store/lib/sign.js
           fi
-      - name: Set app version
-        env:
-          VITE_BUILD_TYPE: ${{ matrix.VITE_BUILD_TYPE }}
-        shell: bash
-        run: npm --prefix ${VITE_BUILD_TYPE} version $(node -p -e "require('./web/package.json').version") --no-git-tag-version --allow-same-version
       - name: Build app
         env:
           NODE_ENV: production
