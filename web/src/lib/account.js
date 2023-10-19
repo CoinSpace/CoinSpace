@@ -1,5 +1,7 @@
-import Account from './account/Account.js';
+import { Amount } from '@coinspace/cs-common';
 import { ref } from 'vue';
+
+import Account from './account/Account.js';
 import { release } from './version.js';
 import { setLanguage } from './i18n/i18n.js';
 import { cryptoSubtitle, cryptoToFiat, defineAppProperty, roundCrypto } from './helpers.js';
@@ -80,4 +82,17 @@ export async function createAccount({ app, router }) {
   account.on('logout', async () => {
     await createAccount({ app, router });
   });
+
+  if (import.meta.env.DEV) {
+    window.setBalance = function(cryptoId, str) {
+      const wallet = account.wallet(cryptoId);
+      Object.defineProperty(wallet, 'balance', {
+        configurable: true,
+        get() {
+          return Amount.fromString(str, wallet.crypto.decimals);
+        },
+      });
+      account.emit('update');
+    };
+  }
 }
