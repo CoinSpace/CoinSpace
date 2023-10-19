@@ -22,6 +22,8 @@ import SettingsHardwareView from '../../views/Settings/Hardware/SettingsHardware
 import SettingsPinView from '../../views/Settings/Pin/SettingsPinView.vue';
 import SettingsView from '../../views/Settings/SettingsView.vue';
 
+import NotFound from '../../views/NotFound.vue';
+
 const app = [
   {
     path: '/',
@@ -143,6 +145,11 @@ const app = [
       ],
     }],
     meta: { requiresAuth: true },
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'notfound',
+    component: NotFound,
   },
 ];
 
