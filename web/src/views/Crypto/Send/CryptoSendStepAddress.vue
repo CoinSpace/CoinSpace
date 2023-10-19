@@ -83,6 +83,12 @@ export default {
   methods: {
     async confirm() {
       this.isLoading = true;
+
+      if (import.meta.env.DEV && this.address === 'success') {
+        this.updateStorage({ status: true });
+        return this.next('status');
+      }
+
       try {
         await this.$wallet.validateAddress({ address: this.address || '' });
         if (this.$wallet.isFeeRatesSupported) await this.$wallet.loadFeeRates();
