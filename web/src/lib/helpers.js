@@ -82,10 +82,11 @@ export function isValidUsername(username) {
   return /^[a-z0-9-]{1,63}$/.test(username);
 }
 
-export function registerProtocolHandler(crypto) {
+export function registerProtocolHandler(crypto, account) {
   if (import.meta.env.VITE_PLATFORM !== 'web') return;
   if (!navigator.registerProtocolHandler) return;
-  if (crypto.scheme) {
+  if (crypto.scheme && !account.clientStorage.hasProtocolHandler(crypto.scheme)) {
+    account.clientStorage.setProtocolHandler(crypto.scheme);
     const handler = new URL(`${import.meta.env.BASE_URL}${crypto._id}/bip21/%s`, import.meta.env.VITE_SITE_URL);
     try {
       navigator.registerProtocolHandler(crypto.scheme, handler, 'Coin Wallet');

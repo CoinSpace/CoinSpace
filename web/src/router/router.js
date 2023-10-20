@@ -46,7 +46,7 @@ router.beforeEach((to, from) => {
     const wallet = $account.wallet(to.params.cryptoId);
     if (wallet) {
       setWalletProps($app, wallet);
-      registerProtocolHandler(wallet.crypto);
+      registerProtocolHandler(wallet.crypto, $account);
     } else if ($account.cryptoDB.get(to.params.cryptoId)) {
       return { name: 'crypto.add', replace: true, params: { cryptoId: to.params.cryptoId } };
     } else {

@@ -152,6 +152,10 @@ export default class ClientStorage {
     this.#setItem('_cs_biometry_enabled', value);
   }
 
+  /**
+   * Update
+   */
+
   getUpdateShown() {
     return this.#getItem('_cs_update_shown');
   }
@@ -159,6 +163,22 @@ export default class ClientStorage {
   setUpdateShown(value) {
     this.#setItem('_cs_update_shown', value);
   }
+
+  /**
+   * Protocol handler flag
+   */
+
+  hasProtocolHandler(scheme) {
+    return this.#hasItem(`_cs_protocol_handler_${scheme}`);
+  }
+
+  setProtocolHandler(scheme) {
+    this.#setItem(`_cs_protocol_handler_${scheme}`, 'registered');
+  }
+
+  /**
+   * Clean All!
+   */
 
   clear() {
     this.#localStorage.clear();
