@@ -25,7 +25,7 @@ export default {
     :description="subtitle"
   >
     <CsQrScan
-      @back="(args) => back(args)"
+      @back="back"
     />
   </MainLayout>
 </template>
