@@ -35,12 +35,10 @@ export default {
   mixins: [onShowOnHide],
   async onShow() {
     this.qr = await isQrScanAvailable();
-    if (this.addressOrAlias === '') {
-      if (this.args?.address) {
-        this.addressOrAlias = this.args.address;
-      } else if (this.$route.query?.address) {
-        this.addressOrAlias = this.$route.query?.address;
-      }
+    if (this.args?.address) {
+      this.addressOrAlias = this.args.address;
+    } else if (this.addressOrAlias === '' && this.$route.query?.address) {
+      this.addressOrAlias = this.$route.query?.address;
     }
   },
   data() {

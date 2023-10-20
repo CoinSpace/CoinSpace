@@ -1,10 +1,13 @@
 <script>
-import { cryptoSubtitle } from '../../../lib/helpers.js';
 import { errors } from '@coinspace/cs-common';
 import {
   ExchangeDisabledError,
   InternalExchangeError,
 } from '../../../lib/account/ChangellyExchange.js';
+import {
+  cryptoSubtitle,
+  isQrScanAvailable,
+} from '../../../lib/helpers.js';
 
 import CsButton from '../../../components/CsButton.vue';
 import CsButtonGroup from '../../../components/CsButtonGroup.vue';
@@ -43,7 +46,8 @@ export default {
   },
   extends: CsStep,
   mixins: [onShowOnHide],
-  onShow() {
+  async onShow() {
+    this.qr = await isQrScanAvailable();
     if (this.args?.address) {
       this.addressOrAlias = this.args.address;
     }
@@ -55,7 +59,7 @@ export default {
       addressOrAlias: '',
       address: this.storage.address,
       alias: undefined,
-      qr: this.env.VITE_BUILD_TYPE === 'phonegap',
+      qr: false,
       ownWallet: this.storage.address === 'your wallet',
       subtitle: cryptoSubtitle(this.$wallet),
       error: undefined,
@@ -135,9 +139,13 @@ export default {
         }, () => {});
     },
     async scan() {
-      window.qrScan((address) => {
-        this.addressOrAlias = address;
-      });
+      if (this.env.VITE_BUILD_TYPE === 'phonegap') {
+        window.qrScan((address) => {
+          this.addressOrAlias = address;
+        });
+      } else {
+        this.next('qr');
+      }
     },
   },
 };

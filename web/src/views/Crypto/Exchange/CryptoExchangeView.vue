@@ -6,6 +6,7 @@ import CryptoExchangeStepAddress from './CryptoExchangeStepAddress.vue';
 import CryptoExchangeStepConfirm from './CryptoExchangeStepConfirm.vue';
 import CryptoExchangeStepIndex from './CryptoExchangeStepIndex.vue';
 import CryptoExchangeStepMecto from './CryptoExchangeStepMecto.vue';
+import CryptoExchangeStepQr from './CryptoExchangeStepQr.vue';
 import CryptoExchangeStepStatus from './CryptoExchangeStepStatus.vue';
 import CryptoExchangeStepTarget from './CryptoExchangeStepTarget.vue';
 
@@ -21,6 +22,7 @@ export default {
     status: CryptoExchangeStepStatus,
     mecto: CryptoExchangeStepMecto,
     pin: CsPinStep,
+    qr: CryptoExchangeStepQr,
   },
 };
 </script>
