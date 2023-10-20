@@ -47,7 +47,7 @@ export default {
   extends: CsStep,
   mixins: [onShowOnHide],
   async onShow() {
-    this.qr = await isQrScanAvailable();
+    this.isQrScanAvailable = await isQrScanAvailable();
     if (this.args?.address) {
       this.addressOrAlias = this.args.address;
     }
@@ -59,7 +59,8 @@ export default {
       addressOrAlias: '',
       address: this.storage.address,
       alias: undefined,
-      qr: false,
+      isQrScanAvailable: false,
+      isPasteAvailable: typeof navigator.clipboard?.readText === 'function',
       ownWallet: this.storage.address === 'your wallet',
       subtitle: cryptoSubtitle(this.$wallet),
       error: undefined,
@@ -206,6 +207,7 @@ export default {
           {{ $t('Your wallet') }}
         </CsButton>
         <CsButton
+          v-if="isPasteAvailable"
           type="circle"
           @click="paste"
         >
@@ -225,7 +227,7 @@ export default {
           {{ $t('Mecto') }}
         </CsButton>
         <CsButton
-          v-if="qr"
+          v-if="isQrScanAvailable"
           type="circle"
           @click="scan"
         >
