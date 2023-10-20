@@ -1,12 +1,17 @@
 <script>
 import { onShowOnHide } from '../lib/mixins.js';
 
+import CsLoader from './CsLoader.vue';
+
 export default {
+  components: {
+    CsLoader,
+  },
   mixins: [onShowOnHide],
   emits: ['back'],
   data() {
     return {
-      visible: false,
+      isLoading: true,
     };
   },
   async onShow() {
@@ -30,7 +35,7 @@ export default {
         await this.$refs.video.play();
         this.$options.barcodeDetector = new window.BarcodeDetector({ formats: ['qr_code'] });
         this.$options.scanInterval = window.setInterval(this.scan, 1000);
-        this.visible = true;
+        this.isLoading = false;
       } catch (err) {
         // TODO handle errors
         // https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia#exceptions
@@ -39,7 +44,6 @@ export default {
       }
     },
     async stop() {
-      this.visible = false;
       try {
         clearInterval(this.$options.scanInterval);
         await this.$refs.video.pause();
@@ -73,9 +77,9 @@ export default {
 </script>
 
 <template>
-  <div>
+  <CsLoader v-if="isLoading" />
+  <div v-show="!isLoading">
     <video
-      v-show="visible"
       ref="video"
       class="&__video"
     />
