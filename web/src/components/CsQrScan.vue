@@ -42,7 +42,7 @@ export default {
         await this.$refs.video.pause();
         const tracks = this.$options.stream.getTracks();
         tracks.forEach((track) => {
-          if (track.readyState == 'live') {
+          if (track.readyState === 'live') {
             track.stop();
           }
         });
