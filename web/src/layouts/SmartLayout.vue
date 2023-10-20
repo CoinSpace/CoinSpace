@@ -127,7 +127,7 @@ export default {
       this.touchStartY = e.touches.item(0).pageY;
     },
     handleTouchMove(e) {
-      if (this.touchStartY == undefined) return;
+      if (this.touchStartY === undefined) return;
       const touchDistanceOld = this.touchDistance;
       const touchDistance = e.touches.item(0).pageY - this.touchStartY;
       if (touchDistance >= 0) {

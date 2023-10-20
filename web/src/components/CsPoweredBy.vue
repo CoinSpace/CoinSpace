@@ -13,17 +13,17 @@ export default {
   },
   computed: {
     url() {
-      if (this.powered == 'changelly') {
+      if (this.powered === 'changelly') {
         return `https://changelly.com/?ref_id=${this.env.VITE_CHANGELLY_REF}`;
       }
     },
     title() {
-      if (this.powered == 'changelly') {
+      if (this.powered === 'changelly') {
         return 'Changelly';
       }
     },
     logo() {
-      if (this.powered == 'changelly') {
+      if (this.powered === 'changelly') {
         return 'ChangellyIcon';
       }
     },
