@@ -112,3 +112,24 @@ export function deepFreeze(object) {
 export function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
+
+export async function isQrScanAvailable() {
+  if (import.meta.env.VITE_BUILD_TYPE === 'phonegap') {
+    return true;
+  }
+  if (!navigator.mediaDevices?.enumerateDevices) {
+    return false;
+  }
+  if (!window.BarcodeDetector?.getSupportedFormats) {
+    return false;
+  }
+  const devices = await navigator.mediaDevices.enumerateDevices();
+  if (devices.every((device) => device.kind !== 'videoinput')) {
+    return false;
+  }
+  const formats = await window.BarcodeDetector.getSupportedFormats();
+  if (!formats.includes('qr_code')) {
+    return false;
+  }
+  return true;
+}

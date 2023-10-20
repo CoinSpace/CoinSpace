@@ -9,6 +9,7 @@ import CryptoSendStepGas from './CryptoSendStepGas.vue';
 import CryptoSendStepMecto from './CryptoSendStepMecto.vue';
 import CryptoSendStepMeta from './CryptoSendStepMeta.vue';
 import CryptoSendStepMinerFee from './CryptoSendStepMinerFee.vue';
+import CryptoSendStepQr from './CryptoSendStepQr.vue';
 import CryptoSendStepStatus from './CryptoSendStepStatus.vue';
 
 export default {
@@ -25,6 +26,7 @@ export default {
     status: CryptoSendStepStatus,
     mecto: CryptoSendStepMecto,
     pin: CsPinStep,
+    qr: CryptoSendStepQr,
   },
 };
 </script>

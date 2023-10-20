@@ -12,8 +12,11 @@ import LocationIcon from '../../../assets/svg/location.svg';
 import PasteIcon from '../../../assets/svg/paste.svg';
 import QrIcon from '../../../assets/svg/qr.svg';
 
-import { cryptoSubtitle } from '../../../lib/helpers.js';
 import { onShowOnHide } from '../../../lib/mixins.js';
+import {
+  cryptoSubtitle,
+  isQrScanAvailable,
+} from '../../../lib/helpers.js';
 
 import debounce from 'p-debounce';
 
@@ -30,7 +33,8 @@ export default {
   },
   extends: CsStep,
   mixins: [onShowOnHide],
-  onShow() {
+  async onShow() {
+    this.qr = await isQrScanAvailable();
     if (this.addressOrAlias === '') {
       if (this.args?.address) {
         this.addressOrAlias = this.args.address;
@@ -47,7 +51,7 @@ export default {
       addressOrAlias: '',
       address: '',
       alias: '',
-      qr: this.env.VITE_BUILD_TYPE === 'phonegap',
+      qr: false,
       error: undefined,
     };
   },
@@ -121,9 +125,13 @@ export default {
         }, () => {});
     },
     async scan() {
-      window.qrScan((address) => {
-        this.addressOrAlias = address;
-      });
+      if (this.env.VITE_BUILD_TYPE === 'phonegap') {
+        window.qrScan((address) => {
+          this.addressOrAlias = address;
+        });
+      } else {
+        this.next('qr');
+      }
     },
   },
 };
