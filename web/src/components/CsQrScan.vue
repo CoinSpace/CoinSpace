@@ -60,9 +60,7 @@ export default {
         const barcodes = await this.$options.barcodeDetector.detect(this.$refs.video);
         if (barcodes.length <= 0) return;
         this.stop();
-        setTimeout(() => {
-          this.$emit('back', { address: barcodes[0].rawValue });
-        }, 500);
+        this.$emit('back', { address: barcodes[0].rawValue });
       } catch (err) {
         // TODO handle errors
         console.error(err);
