@@ -46,7 +46,7 @@ export default defineConfig(({ mode }) => {
       }),
     ],
     build: {
-      minify: false,
+      minify: true,
       outDir: outDir(env.VITE_BUILD_TYPE),
       emptyOutDir: true,
       sourcemap: 'hidden',

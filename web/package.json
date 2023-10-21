@@ -64,6 +64,7 @@
     "@sentry/vite-plugin": "^2.7.1",
     "@vitejs/plugin-vue": "^4.0.0",
     "autoprefixer": "^10.4.14",
+    "core-js": "^3.33.1",
     "eslint": "^8.51.0",
     "eslint-config-coinspace": "^2.1.2",
     "eslint-plugin-vue": "^9.0.0",
