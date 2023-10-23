@@ -37,8 +37,8 @@ export default {
     this.isQrScanAvailable = await isQrScanAvailable();
     if (this.args?.address) {
       this.addressOrAlias = this.args.address;
-    } else if (this.addressOrAlias === '' && this.$route.query?.address) {
-      this.addressOrAlias = this.$route.query?.address;
+    } else if (this.addressOrAlias === '' && this.$route.query.address) {
+      this.addressOrAlias = this.$route.query.address;
     }
   },
   data() {

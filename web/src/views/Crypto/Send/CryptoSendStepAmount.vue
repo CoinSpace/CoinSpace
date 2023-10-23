@@ -23,7 +23,7 @@ export default {
   extends: CsStep,
   mixins: [onShowOnHide],
   onShow() {
-    if (this.amountValue === undefined && this.$route.query?.amount) {
+    if (this.amountValue === undefined && this.$route.query.amount) {
       try {
         this.amountValue = Amount.fromString(this.$route.query.amount, this.$wallet.crypto.decimals);
       } catch (err) {

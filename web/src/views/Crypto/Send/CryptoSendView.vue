@@ -28,6 +28,11 @@ export default {
     pin: CsPinStep,
     qr: CryptoSendStepQr,
   },
+  beforeRouteUpdate() {
+    if (import.meta.env.VITE_BUILD_TYPE !== 'web') {
+      this.$router.go(0); // fixes bip21 for WebHashHistory
+    }
+  },
 };
 </script>
 
