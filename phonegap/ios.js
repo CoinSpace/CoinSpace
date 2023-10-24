@@ -48,7 +48,7 @@ async function run() {
   cordova('plugin add cordova-plugin-statusbar@3.0.0 --save');
   cordova('plugin add cordova-plugin-x-socialsharing@6.0.4 --save --variable PHOTO_LIBRARY_USAGE_DESCRIPTION="This app uses your photo library to upload photos." --variable PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION="This app saves images to your photo library."');
   cordova('plugin add cordova-plugin-customurlscheme@5.0.2 --save --variable URL_SCHEME=coinspace');
-  cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#4bf28de7fcd6759450f5fd56f2ec28677bc882da --save');
+  cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#eff6e88efaf382c2c48c8fe154b44581eab722b5 --save');
   cordova('plugin add cordova-plugin-3dtouch@1.3.8 --save');
   cordova('plugin add cordova-plugin-safariviewcontroller@2.0.0 --save');
   cordova('plugin add cordova-plugin-app-review@3.1.0 --save');
@@ -145,7 +145,7 @@ async function setProvisionProfile() {
 
 async function addWatchApp() {
   shell('git clone https://github.com/CoinSpace/cs-watchapp-ios.git', { cwd: buildPath });
-  shell('cd cs-watchapp-ios && git checkout a749e490e8ba615056240f831d8c8d1c48633e83 -q', { cwd: buildPath });
+  shell('cd cs-watchapp-ios && git checkout 968e62865458001d21933932725ff80aea1ec3bb -q', { cwd: buildPath });
   shell(`ln -s ${path.resolve(buildPath, 'cs-watchapp-ios/WatchApp')} ./platforms/ios/WatchApp`, { cwd: buildPath });
   shell(`ln -s ${path.resolve(buildPath, 'cs-watchapp-ios/WatchAppExtension')} ./platforms/ios/WatchAppExtension`, { cwd: buildPath });
 
@@ -189,6 +189,7 @@ async function addWatchApp() {
   Object.keys(pbxXCBuildConfigurationSection).forEach((key) => {
     const setting = pbxXCBuildConfigurationSection[key].buildSettings;
     if (!setting) return;
+    delete setting['MERGED_BINARY_TYPE'];
     if (!setting['PRODUCT_BUNDLE_IDENTIFIER']) return;
     if (!['"WatchApp"', '"WatchAppExtension"'].includes(setting['PRODUCT_NAME'])) return;
 
@@ -201,7 +202,7 @@ async function addWatchApp() {
     setting['CURRENT_PROJECT_VERSION'] = BUILD_NUMBER;
     setting['SWIFT_VERSION'] = '4.0';
     setting['TARGETED_DEVICE_FAMILY'] = '4';
-    setting['WATCHOS_DEPLOYMENT_TARGET'] = '4.3';
+    setting['WATCHOS_DEPLOYMENT_TARGET'] = '5.0';
     setting['ENABLE_BITCODE'] = 'NO';
 
     if (name === 'Release') {
