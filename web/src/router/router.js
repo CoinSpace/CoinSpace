@@ -61,9 +61,21 @@ router.beforeEach((to, from) => {
 });
 
 if (import.meta.env.VITE_BUILD_TYPE === 'electron') {
-  window.electron?.navigate((event, url) => {
-    router.push(url);
+  window.electron?.navigate((path) => {
+    router.push({
+      path,
+      force: true,
+    });
   });
+}
+
+if (import.meta.env.DEV) {
+  window.navigate = function(path) {
+    router.push({
+      path,
+      force: true,
+    });
+  };
 }
 
 function setWalletProps($app, wallet) {
