@@ -16,6 +16,14 @@ export default {
   components: {
     CsSteps,
   },
+  beforeRouteUpdate() {
+    this.stepsKey++;
+  },
+  data() {
+    return {
+      stepsKey: 0,
+    };
+  },
   steps: {
     index: CryptoSendStepAddress,
     meta: CryptoSendStepMeta,
@@ -28,15 +36,12 @@ export default {
     pin: CsPinStep,
     qr: CryptoSendStepQr,
   },
-  beforeRouteUpdate() {
-    this.$refs.steps.clear();
-  },
 };
 </script>
 
 <template>
   <CsSteps
-    ref="steps"
+    :key="stepsKey"
     :steps="$options.steps"
   />
 </template>

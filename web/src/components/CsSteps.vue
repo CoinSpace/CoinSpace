@@ -55,18 +55,6 @@ export default {
       this.args = args;
       this.transition = 'slide-left';
     },
-    clear() {
-      this.storage = {};
-      this.prevSteps = new Map();
-      this.args = {};
-      // clear KeepAlive cache
-      this.exclude = /.+/;
-      this.currentStep = undefined;
-      this.$nextTick(() => {
-        this.exclude = undefined;
-        this.currentStep = this.step;
-      });
-    },
     slicePinStep() {
       if (this.currentStep === 'pin') {
         const prevStep = this.prevSteps.get(this.currentStep);
