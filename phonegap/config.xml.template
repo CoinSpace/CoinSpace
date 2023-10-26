@@ -163,7 +163,7 @@
           <key>UIApplicationShortcutItemTitle</key>
           <string>Bitcoin</string>
           <key>UIApplicationShortcutItemType</key>
-          <string>com.coinspace.wallet.bitcoin</string>
+          <string>com.coinspace.wallet.bitcoin@bitcoin</string>
         </dict>
         <dict>
           <key>UIApplicationShortcutItemIconFile</key>
@@ -171,7 +171,7 @@
           <key>UIApplicationShortcutItemTitle</key>
           <string>Dogecoin</string>
           <key>UIApplicationShortcutItemType</key>
-          <string>com.coinspace.wallet.dogecoin</string>
+          <string>com.coinspace.wallet.dogecoin@dogecoin</string>
         </dict>
         <dict>
           <key>UIApplicationShortcutItemIconFile</key>
@@ -179,7 +179,7 @@
           <key>UIApplicationShortcutItemTitle</key>
           <string>Ethereum</string>
           <key>UIApplicationShortcutItemType</key>
-          <string>com.coinspace.wallet.ethereum</string>
+          <string>com.coinspace.wallet.ethereum@ethereum</string>
         </dict>
         <dict>
           <key>UIApplicationShortcutItemIconFile</key>
@@ -187,7 +187,7 @@
           <key>UIApplicationShortcutItemTitle</key>
           <string>Litecoin</string>
           <key>UIApplicationShortcutItemType</key>
-          <string>com.coinspace.wallet.litecoin</string>
+          <string>com.coinspace.wallet.litecoin@litecoin</string>
         </dict>
       </array>
     </edit-config>

@@ -86,9 +86,8 @@ export default async function deviceready() {
 
   if (import.meta.env.VITE_PLATFORM === 'ios') {
     ThreeDeeTouch.onHomeIconPressed = ({ type }) => {
-      const scheme = type.split('.').pop();
-      const url = `${scheme}:`;
-      window.navigateHandler(`/bip21/${encodeURIComponent(url)}`);
+      const cryptoId = type.split('.').pop();
+      window.navigateHandler(`/${cryptoId}`);
     };
     window.StatusBar.styleDefault();
     window.StatusBar.show();
