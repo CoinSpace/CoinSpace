@@ -3,7 +3,7 @@ import { cryptoSubtitleWithSymbol } from '../../lib/helpers.js';
 
 import CsButton from '../../components/CsButton.vue';
 import CsFormGroup from '../../components/CsForm/CsFormGroup.vue';
-import CsFormInputReadonly from '../../components/CsForm/CsFormInputReadonly.vue';
+import CsFormTextareaReadonly from '../../components/CsForm/CsFormTextareaReadonly.vue';
 import CsTokenInfo from '../../components/CsTokenInfo.vue';
 import MainLayout from '../../layouts/MainLayout.vue';
 
@@ -12,7 +12,7 @@ export default {
     MainLayout,
     CsButton,
     CsFormGroup,
-    CsFormInputReadonly,
+    CsFormTextareaReadonly,
     CsTokenInfo,
   },
   data() {
@@ -34,7 +34,7 @@ export default {
       :subtitles="[subtitleWithSymbol, $t('{decimals} decimals', { decimals: $wallet.crypto.decimals })]"
     />
     <CsFormGroup>
-      <CsFormInputReadonly
+      <CsFormTextareaReadonly
         :label="$t('Contract address')"
         :value="$wallet.crypto.address"
       />

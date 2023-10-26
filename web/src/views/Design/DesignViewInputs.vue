@@ -6,7 +6,6 @@ import CsFormAmountInput from '../../components/CsForm/CsFormAmountInput.vue';
 import CsFormBigIntInput from '../../components/CsForm/CsFormBigIntInput.vue';
 import CsFormDropdown from '../../components/CsForm/CsFormDropdown.vue';
 import CsFormInput from '../../components/CsForm/CsFormInput.vue';
-import CsFormInputReadonly from '../../components/CsForm/CsFormInputReadonly.vue';
 import CsFormSelect from '../../components/CsForm/CsFormSelect.vue';
 import CsFormTextarea from '../../components/CsForm/CsFormTextarea.vue';
 import CsFormTextareaReadonly from '../../components/CsForm/CsFormTextareaReadonly.vue';
@@ -21,7 +20,6 @@ export default {
     CsFormBigIntInput,
     CsFormDropdown,
     CsFormInput,
-    CsFormInputReadonly,
     CsFormSelect,
     CsSwitch,
     CsFormTextarea,
@@ -86,11 +84,6 @@ export default {
         error="Error message"
       />
 
-      <CsFormInputReadonly
-        label="Readonly"
-        value="value"
-      />
-
       <CsFormDropdown
         label="Dropdown"
         value="dropdown"
@@ -104,12 +97,6 @@ export default {
 
       <CsFormInput
         label="Info button"
-        info="note"
-      />
-
-      <CsFormInputReadonly
-        label="Info button (readonly)"
-        value="some long text here, some long text here, some long text here"
         info="note"
       />
 
@@ -147,7 +134,8 @@ export default {
 
       <CsFormTextareaReadonly
         label="Readonly"
-        value="some text here readonly"
+        value="some text here readonly some text here readonly"
+        info="note"
       />
     </div>
 

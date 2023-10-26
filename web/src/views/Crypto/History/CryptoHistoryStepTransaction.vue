@@ -9,7 +9,7 @@ import { onShowOnHide } from '../../../lib/mixins.js';
 import CsButton from '../../../components/CsButton.vue';
 import CsButtonGroup from '../../../components/CsButtonGroup.vue';
 import CsFormGroup from '../../../components/CsForm/CsFormGroup.vue';
-import CsFormInputReadonly from '../../../components/CsForm/CsFormInputReadonly.vue';
+import CsFormTextareaReadonly from '../../../components/CsForm/CsFormTextareaReadonly.vue';
 import CsPoweredBy from '../../../components/CsPoweredBy.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
@@ -23,7 +23,7 @@ export default {
     CsButton,
     CsButtonGroup,
     CsFormGroup,
-    CsFormInputReadonly,
+    CsFormTextareaReadonly,
     CsPoweredBy,
     ArrowDownIcon,
     CoinsIcon,
@@ -202,23 +202,23 @@ export default {
     </div>
 
     <CsFormGroup class="&__info">
-      <CsFormInputReadonly
+      <CsFormTextareaReadonly
         v-if="!transaction.incoming && to !== 'your wallet'"
         :label="$t('Recipient')"
         :value="to"
       />
-      <CsFormInputReadonly
+      <CsFormTextareaReadonly
         v-if="transaction.incoming && transaction.from && !exchange"
         :label="$t('From')"
         :value="from"
       />
-      <CsFormInputReadonly
+      <CsFormTextareaReadonly
         v-if="!transaction.incoming && transaction.fee !== undefined"
         :label="$t('Fee')"
         :value="`${transaction.fee} ${$wallet.crypto.type === 'coin'
           ? $wallet.crypto.symbol : $wallet.platform.symbol}`"
       />
-      <CsFormInputReadonly
+      <CsFormTextareaReadonly
         :label="$t('Transaction ID')"
         :value="transaction.id"
       />

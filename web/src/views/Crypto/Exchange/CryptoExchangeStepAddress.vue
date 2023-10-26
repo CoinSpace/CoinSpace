@@ -14,7 +14,7 @@ import CsButtonGroup from '../../../components/CsButtonGroup.vue';
 import CsCryptoLogo from '../../../components/CsCryptoLogo.vue';
 import CsFormGroup from '../../../components/CsForm/CsFormGroup.vue';
 import CsFormInput from '../../../components/CsForm/CsFormInput.vue';
-import CsFormInputReadonly from '../../../components/CsForm/CsFormInputReadonly.vue';
+import CsFormTextareaReadonly from '../../../components/CsForm/CsFormTextareaReadonly.vue';
 import CsPoweredBy from '../../../components/CsPoweredBy.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
@@ -36,7 +36,7 @@ export default {
     CsCryptoLogo,
     CsFormGroup,
     CsFormInput,
-    CsFormInputReadonly,
+    CsFormTextareaReadonly,
     CsPoweredBy,
     EditIcon,
     LocationIcon,
@@ -158,7 +158,7 @@ export default {
     :description="subtitle"
   >
     <CsFormGroup class="&__container">
-      <CsFormInputReadonly
+      <CsFormTextareaReadonly
         :label="$t('Destination blockchain')"
         :value="storage.to.platform.name"
       >
@@ -167,8 +167,8 @@ export default {
             :crypto="storage.to.platform"
           />
         </template>
-      </CsFormInputReadonly>
-      <CsFormInputReadonly
+      </CsFormTextareaReadonly>
+      <CsFormTextareaReadonly
         v-if="address === 'your wallet'"
         :label="$t('Wallet address')"
         :value="$t('Your wallet')"
@@ -182,7 +182,7 @@ export default {
             @click="switchWallet"
           />
         </template>
-      </CsFormInputReadonly>
+      </CsFormTextareaReadonly>
       <CsFormInput
         v-if="!ownWallet"
         v-model="addressOrAlias"

@@ -4,7 +4,7 @@ import { cryptoToFiat } from '../lib/helpers.js';
 import CsButton from '../components/CsButton.vue';
 import CsButtonGroup from './CsButtonGroup.vue';
 import CsFormGroup from '../components/CsForm/CsFormGroup.vue';
-import CsFormInputReadonly from '../components/CsForm/CsFormInputReadonly.vue';
+import CsFormTextareaReadonly from '../components/CsForm/CsFormTextareaReadonly.vue';
 import CsPoweredBy from '../components/CsPoweredBy.vue';
 import CsTokenInfo from '../components/CsTokenInfo.vue';
 
@@ -16,7 +16,7 @@ export default {
     CsButton,
     CsButtonGroup,
     CsFormGroup,
-    CsFormInputReadonly,
+    CsFormTextareaReadonly,
     CsPoweredBy,
     CsTokenInfo,
     ArrowDownIcon,
@@ -124,42 +124,39 @@ export default {
 
   <CsFormGroup class="&__content">
     <template v-if="transaction.exchange !== true && transaction.address === 'your wallet'">
-      <CsFormInputReadonly
+      <CsFormTextareaReadonly
         :value="$t('Your wallet')"
         :label="$t('Wallet address')"
       >
         <template #before>
           <WalletSmallIcon />
         </template>
-      </CsFormInputReadonly>
+      </CsFormTextareaReadonly>
     </template>
     <template v-if="transaction.address !== 'your wallet'">
-      <CsFormInputReadonly
+      <CsFormTextareaReadonly
         v-if="transaction.alias"
         :value="transaction.alias"
         :label="$t('Alias')"
       />
-      <CsFormInputReadonly
+      <CsFormTextareaReadonly
         :value="transaction.address"
         :label="$t('Wallet address')"
       />
-      <CsFormInputReadonly
-        v-if="transaction.destinationTag"
-        :value="transaction.destinationTag"
+      <CsFormTextareaReadonly
+        v-if="transaction.meta?.destinationTag"
+        :value="transaction.meta?.destinationTag"
         :label="$t('Destination tag')"
-        info
       />
-      <CsFormInputReadonly
-        v-if="transaction.invoiceID"
-        :value="transaction.invoiceID"
+      <CsFormTextareaReadonly
+        v-if="transaction.meta?.invoiceID"
+        :value="transaction.meta?.invoiceID"
         :label="$t('Invoice ID')"
-        info
       />
-      <CsFormInputReadonly
-        v-if="transaction.memo"
-        :value="transaction.memo"
+      <CsFormTextareaReadonly
+        v-if="transaction.meta?.memo"
+        :value="transaction.meta?.memo"
         :label="$t('Memo')"
-        info
       />
     </template>
   </CsFormGroup>

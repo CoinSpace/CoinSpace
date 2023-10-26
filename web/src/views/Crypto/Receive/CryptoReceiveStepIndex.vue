@@ -6,7 +6,7 @@ import * as MoneroSymbols from '@coinspace/cs-monero-wallet/symbols';
 
 import CsButton from '../../../components/CsButton.vue';
 import CsButtonGroup from '../../../components/CsButtonGroup.vue';
-import CsFormInputReadonly from '../../../components/CsForm/CsFormInputReadonly.vue';
+import CsFormTextareaReadonly from '../../../components/CsForm/CsFormTextareaReadonly.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 
@@ -26,7 +26,7 @@ export default {
     MainLayout,
     CsButton,
     CsButtonGroup,
-    CsFormInputReadonly,
+    CsFormTextareaReadonly,
     ChevronLeftIcon,
     ChevronRightIcon,
     CoinsIcon,
@@ -191,7 +191,7 @@ export default {
     </div>
 
     <div class="&__input-wrapper">
-      <CsFormInputReadonly
+      <CsFormTextareaReadonly
         :value="address"
         :label="$t('Your wallet address') + (isAddressTypesSupported ? ` (${addressTypeLabel})` : '')"
         :info="(isAddressTypesSupported || isAddressChangeSupported) ? $t('Your wallet address') : false"
@@ -206,17 +206,7 @@ export default {
             {{ $t('Not all address types are fully compatible on all platforms, so it is important to use a compatible address.') }}
           </div>
         </template>
-        <template #infoFooter>
-          <CsButtonGroup>
-            <CsButton
-              type="primary-link"
-              @click="$safeOpen('https://support.coin.space/hc/en-us/articles/360046106453')"
-            >
-              {{ $t('Read more') }}
-            </CsButton>
-          </CsButtonGroup>
-        </template>
-      </CsFormInputReadonly>
+      </CsFormTextareaReadonly>
     </div>
 
     <CsButtonGroup

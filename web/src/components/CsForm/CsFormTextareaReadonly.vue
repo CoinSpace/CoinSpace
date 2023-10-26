@@ -15,7 +15,7 @@ export default {
       default: '',
     },
     info: {
-      type: Boolean,
+      type: [Boolean, String],
       default: false,
     },
     writable: {
@@ -46,6 +46,15 @@ export default {
     >
       <slot name="after" />
     </div>
+    <template #info>
+      <slot name="info" />
+    </template>
+    <template
+      v-if="$slots.infoFooter"
+      #infoFooter
+    >
+      <slot name="infoFooter" />
+    </template>
   </CsFormElement>
 </template>
 

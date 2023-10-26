@@ -2,7 +2,6 @@
 import CsButton from '../../../components/CsButton.vue';
 import CsButtonGroup from '../../../components/CsButtonGroup.vue';
 import CsFormGroup from '../../../components/CsForm/CsFormGroup.vue';
-import CsFormInputReadonly from '../../../components/CsForm/CsFormInputReadonly.vue';
 import CsFormTextareaReadonly from '../../../components/CsForm/CsFormTextareaReadonly.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
@@ -14,7 +13,6 @@ export default {
     CsButton,
     CsButtonGroup,
     CsFormGroup,
-    CsFormInputReadonly,
     CsFormTextareaReadonly,
     MainLayout,
   },
@@ -64,7 +62,7 @@ export default {
           price: storage.price,
         }) }}
       </div>
-      <CsFormInputReadonly
+      <CsFormTextareaReadonly
         value="coinappsetup"
         :label="$t('Account')"
       />
