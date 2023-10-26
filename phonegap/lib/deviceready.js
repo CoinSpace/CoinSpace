@@ -74,14 +74,14 @@ export default async function deviceready() {
   });
 
   window.handleOpenURL = function(url) {
-    if (url.startsWith('coinspace://')) {
-      window.SafariViewController.hide();
-      setTimeout(() => {
+    setTimeout(() => {
+      if (url.startsWith('coinspace://')) {
+        window.SafariViewController.hide();
         window.closeWindowExtra(url);
-      }, 1);
-      return;
-    }
-    window.navigateHandler(`/bip21/${encodeURIComponent(url)}`);
+        return;
+      }
+      window.navigateHandler(`/bip21/${encodeURIComponent(url)}`);
+    }, 1);
   };
 
   if (import.meta.env.VITE_PLATFORM === 'ios') {
