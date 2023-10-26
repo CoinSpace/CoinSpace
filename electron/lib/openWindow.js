@@ -2,19 +2,13 @@ import { fileURLToPath } from 'node:url';
 import log from 'electron-log';
 import { BrowserWindow, shell } from 'electron';
 
-import schemes from './schemes.js';
 import {
   APP_HOSTNAME,
   isDevelopment,
 } from './constants.js';
 
 function makePath(deeplink) {
-  if (deeplink && schemes.some((item) => deeplink.startsWith(`${item.scheme}:`))) {
-    const crypto = schemes.find((item) => deeplink.startsWith(`${item.scheme}:`));
-    return `/${crypto._id}/bip21/${encodeURIComponent(deeplink)}`;
-  } else {
-    return '/';
-  }
+  return `/bip21/${encodeURIComponent(deeplink)}`;
 }
 
 export default function openWindow(deeplink) {

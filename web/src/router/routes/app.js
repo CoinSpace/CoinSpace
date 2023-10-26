@@ -24,6 +24,8 @@ import SettingsView from '../../views/Settings/SettingsView.vue';
 
 import NotFound from '../../views/NotFound.vue';
 
+import schemes from '../../lib/schemes.js';
+
 const app = [
   {
     path: '/',
@@ -119,30 +121,41 @@ const app = [
           name: 'crypto.eossetup',
           component: CryptoEosSetupView,
         },
-        {
-          path: 'bip21/:data',
-          redirect(to) {
-            let query;
-            try {
-              const data = new URL(to.params.data);
-              query = {
-                address: data.pathname,
-                amount: data.searchParams.has('amount') ? data.searchParams.get('amount') : undefined,
-              };
-            } catch (err) {
-              console.error(err);
-            }
-            return {
-              name: 'crypto.send',
-              query,
-              params: {
-                cryptoId: to.params.cryptoId,
-              },
-              force: true,
-            };
-          },
-        },
       ],
+    }, {
+      //path: 'bip21/:data',
+      path: ':cryptoId([a-z0-9-]+@[a-z0-9-]+)?/bip21/:data',
+      redirect(to) {
+        let query;
+        let crypto;
+        try {
+          const data = new URL(to.params.data);
+          crypto = schemes.find((item) => `${item.scheme}:` === data.protocol);
+          if (crypto) {
+            query = {
+              address: data.pathname,
+              amount: data.searchParams.has('amount') ? data.searchParams.get('amount') : undefined,
+            };
+          }
+        } catch (err) {
+          console.error(err);
+        }
+        if (crypto) {
+          return {
+            name: 'crypto.send',
+            query,
+            params: {
+              cryptoId: crypto._id,
+            },
+            force: true,
+          };
+        } else {
+          return {
+            name: 'home',
+            force: true,
+          };
+        }
+      },
     }],
     meta: { requiresAuth: true },
   },

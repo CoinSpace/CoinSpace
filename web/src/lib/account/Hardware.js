@@ -6,7 +6,7 @@ import {
 } from '@simplewebauthn/browser';
 
 import eventBus from '../eventBus.js';
-import windowExtra from '../windowExtra.js';
+import { openWindowExtra } from '../windowExtra.js';
 
 export default class Hardware {
   #request;
@@ -48,7 +48,7 @@ export default class Hardware {
           options: JSON.stringify(options),
           platform: import.meta.env.VITE_PLATFORM,
         };
-        registration = await windowExtra.open({
+        registration = await openWindowExtra({
           url: `${import.meta.env.VITE_SITE_URL}fido/?${new URLSearchParams(params)}`,
           name: 'fido',
         });
@@ -105,7 +105,7 @@ export default class Hardware {
           options: JSON.stringify(options),
           platform: import.meta.env.VITE_PLATFORM,
         };
-        authentication = await windowExtra.open({
+        authentication = await openWindowExtra({
           url: `${import.meta.env.VITE_SITE_URL}fido/?${new URLSearchParams(params)}`,
           name: 'fido',
         });

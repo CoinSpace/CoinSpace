@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import Taptic from './Taptic.js';
-import schemes from './schemes.js';
 
 export default async function deviceready() {
   await new Promise((resolve) => {
@@ -74,13 +73,22 @@ export default async function deviceready() {
     };
   });
 
+  window.handleOpenURL = function(url) {
+    if (!url.startsWith('coinspace://')) {
+      window.navigateHandler(`/bip21/${encodeURIComponent(url)}`);
+      return;
+    }
+    window.SafariViewController.hide();
+    setTimeout(() => {
+      window.closeWindowExtra(url);
+    }, 1);
+  };
+
   if (import.meta.env.VITE_PLATFORM === 'ios') {
     ThreeDeeTouch.onHomeIconPressed = ({ type }) => {
       const scheme = type.split('.').pop();
-      const cryptoId = schemes[scheme];
-      if (!cryptoId) return;
-      const baseUrl = window.location.href.split('#')[0];
-      window.location = `${baseUrl}#/${cryptoId}`;
+      const url = `${scheme}:`;
+      window.navigateHandler(`/bip21/${encodeURIComponent(url)}`);
     };
     window.StatusBar.styleDefault();
     window.StatusBar.show();
@@ -88,11 +96,3 @@ export default async function deviceready() {
     window.StatusBar.overlaysWebView(true);
   }
 }
-
-window.handleOpenBip21 = (url = '') => {
-  const scheme = url.split(':')[0];
-  const cryptoId = schemes[scheme];
-  if (!cryptoId) return;
-  const baseUrl = window.location.href.split('#')[0];
-  window.location = `${baseUrl}#/${cryptoId}/bip21/${encodeURIComponent(url)}`;
-};

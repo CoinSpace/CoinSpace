@@ -22,8 +22,6 @@ import Seeds from './Seeds.js';
 import Settings from './Settings.js';
 import WalletStorage from './WalletStorage.js';
 import defaultCryptos from './defaultCryptos.js';
-import handleOpenURL from '../handleOpenURL.js';
-import windowExtra from '../windowExtra.js';
 
 async function loadWalletModule(platform) {
   if (['bitcoin', 'bitcoin-cash', 'litecoin', 'dash', 'dogecoin'].includes(platform)) {
@@ -252,9 +250,6 @@ export default class Account extends EventEmitter {
     this.#ramps = new Ramps({
       request: this.request,
     });
-
-    handleOpenURL(this);
-    this.on('handleOpenURL', windowExtra.handleOpenURL);
   }
 
   async init() {

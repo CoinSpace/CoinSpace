@@ -87,7 +87,7 @@ export function registerProtocolHandler(crypto, account) {
   if (!navigator.registerProtocolHandler) return;
   if (crypto.scheme && !account.clientStorage.hasProtocolHandler(crypto.scheme)) {
     account.clientStorage.setProtocolHandler(crypto.scheme);
-    const handler = new URL(`${import.meta.env.BASE_URL}${crypto._id}/bip21/%s`, import.meta.env.VITE_SITE_URL);
+    const handler = new URL(`${import.meta.env.BASE_URL}bip21/%s`, import.meta.env.VITE_SITE_URL);
     try {
       navigator.registerProtocolHandler(crypto.scheme, handler, 'Coin Wallet');
     } catch (e) {

@@ -76,7 +76,7 @@ function close(url) {
   $btn.onclick = () => {
     window.location = url;
     // debug (web)
-    // window.opener.handleOpenURL(url);
+    // window.opener.closeWindowExtra(url);
     // window.close();
     return false;
   };

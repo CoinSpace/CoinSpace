@@ -58,6 +58,9 @@ export default defineConfig(({ mode }) => {
             if (info.name === 'variables') {
               return 'variables.js';
             }
+            if (info.name === 'schemes') {
+              return 'schemes.js';
+            }
             return 'assets/js/[name]-[hash].js';
           },
           chunkFileNames(info) {
@@ -165,6 +168,7 @@ function inputs(buildType) {
   }
   if (buildType === 'electron') {
     inputs['variables'] = './src/variables.js';
+    inputs['schemes'] = './src/lib/schemes.js';
   }
   return inputs;
 }

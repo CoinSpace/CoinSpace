@@ -61,7 +61,7 @@ router.beforeEach((to, from) => {
 });
 
 if (import.meta.env.VITE_BUILD_TYPE === 'electron') {
-  window.electron?.navigate((path) => {
+  window.electron?.registerNavigateHandler((path) => {
     router.push({
       path,
       force: true,
@@ -69,8 +69,9 @@ if (import.meta.env.VITE_BUILD_TYPE === 'electron') {
   });
 }
 
-if (import.meta.env.DEV) {
-  window.navigate = function(path) {
+if (import.meta.env.VITE_BUILD_TYPE === 'phonegap' ||
+  (import.meta.env.VITE_BUILD_TYPE === 'web' && import.meta.env.DEV)) {
+  window.navigateHandler = function(path) {
     router.push({
       path,
       force: true,

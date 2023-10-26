@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 import setLanguages from 'electron-packager-languages';
 const schemes = [
   'coinspace',
-  ...(await import('./lib/schemes.js')).default.map((item) => item.scheme),
+  ...(await import('./dist/schemes.js')).default.map((item) => item.scheme),
 ];
 import { languages } from '../web/src/lib/i18n/languages.js';
 const pkg = JSON.parse(await fs.readFile('./package.json'));

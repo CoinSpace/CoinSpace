@@ -5,7 +5,7 @@ import { Menu, app, net, protocol } from 'electron';
 
 import menu from './lib/menu.js';
 import openWindow from './lib/openWindow.js';
-import schemes from './lib/schemes.js';
+import schemes from './dist/schemes.js';
 import updater from './lib/updater.js';
 import {
   APP_HOSTNAME,
