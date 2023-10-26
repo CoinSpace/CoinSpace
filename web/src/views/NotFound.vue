@@ -85,8 +85,8 @@ export default {
       display: flex;
       flex-grow: 1;
       align-items: center;
-      text-align: center;
       justify-content: center;
+      text-align: center;
     }
   }
 </style>
