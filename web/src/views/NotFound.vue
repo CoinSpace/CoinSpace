@@ -5,13 +5,6 @@ export default {
   components: {
     CsButton,
   },
-  methods: {
-    back() {
-      this.$router.replace({
-        name: 'home',
-      });
-    },
-  },
 };
 </script>
 
@@ -27,7 +20,7 @@ export default {
           </div>
           <CsButton
             type="primary"
-            @click="back"
+            @click="$router.replace({ name: 'home' })"
           >
             {{ $t('Back') }}
           </CsButton>
