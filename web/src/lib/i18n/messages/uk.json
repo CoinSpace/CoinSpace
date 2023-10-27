@@ -134,6 +134,7 @@
   "Mecto": "Mecto",
   "Memo": "Мемо",
   "New wallet": "Новий гаманець",
+  "No funds. Buy or receive {symbol} to continue.": "",
   "No users found nearby.": "Інших користувачів не знайдено.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Не всі типи адрес є повністю сумісними для всіх платформ, тому важливо використовувати сумісну адресу.",
   "Not enough funds for acceleration.": "Недостатньо коштів для прискорення.",

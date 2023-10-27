@@ -134,6 +134,7 @@
   "Mecto": "Mecto",
   "Memo": "Memo",
   "New wallet": "Nowy portfel",
+  "No funds. Buy or receive {symbol} to continue.": "",
   "No users found nearby.": "Nie wykryto żadnych użytkowników w twojej okolicy.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Nie wszystkie typy adresów są w pełni kompatybilne na wszystkich platformach, dlatego ważne jest, aby używać zgodnego adresu.",
   "Not enough funds for acceleration.": "Niewystarczająca liczba środków wymaganych do przyspieszenia.",

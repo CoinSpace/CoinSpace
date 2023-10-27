@@ -134,6 +134,7 @@
   "Mecto": "Mecto",
   "Memo": "Memo",
   "New wallet": "Bagong wallet",
+  "No funds. Buy or receive {symbol} to continue.": "",
   "No users found nearby.": "Walang mga user na mahanap na malapit.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Hindi lahat ng mga uri ng address ay ganap na compatible sa lahat ng mga plataporma, kaya mahalaga na gumamit ng isang compatible na address.",
   "Not enough funds for acceleration.": "Walang sapat na pondo sa pagpapabilis.",

@@ -134,6 +134,7 @@
   "Mecto": "Mecto",
   "Memo": "Memo",
   "New wallet": "Ví mới",
+  "No funds. Buy or receive {symbol} to continue.": "",
   "No users found nearby.": "Không tìm thấy người dùng gần đây.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Không phải kiểu địa chỉ nào cũng tương thích hoàn toàn với tất cả các nền tảng, do đó bạn phải sử dụng địa chỉ tương thích.",
   "Not enough funds for acceleration.": "Không đủ tiền để tăng tốc.",

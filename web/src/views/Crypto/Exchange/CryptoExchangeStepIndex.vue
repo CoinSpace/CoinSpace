@@ -54,6 +54,10 @@ export default {
     };
   },
   async onShow() {
+    if (this.$wallet.balance?.value === 0n) {
+      this.replace('poor');
+      return;
+    }
     this.updateStorage({
       // cache price for all steps
       price: await this.$account.market.getPrice(this.$wallet.crypto._id, this.$currency),

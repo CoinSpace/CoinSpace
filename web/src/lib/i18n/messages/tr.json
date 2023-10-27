@@ -134,6 +134,7 @@
   "Mecto": "Mecto",
   "Memo": "Hatırlatma Notu",
   "New wallet": "Yeni cüzdan",
+  "No funds. Buy or receive {symbol} to continue.": "",
   "No users found nearby.": "Yakınlarda kullanıcısı bulunamadı.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Tüm adres türleri tüm platformlarla tam uyumlu değildir; bu nedenle uyumlu bir adres kullanmak önemlidir.",
   "Not enough funds for acceleration.": "Hızlandırma için yeterli fon yok",

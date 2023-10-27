@@ -134,6 +134,7 @@
   "Mecto": "멕토(Mecto)",
   "Memo": "메모",
   "New wallet": "새 월렛",
+  "No funds. Buy or receive {symbol} to continue.": "",
   "No users found nearby.": "근처의 사용자를 발견할 수 없습니다.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "모든 주소 유형이 모든 플랫폼과 완전히 호환되지는 않습니다. 그러므로, 호환되는 주소(%(url)s)를 사용해야 합니다.",
   "Not enough funds for acceleration.": "가속을 위한 자금 불충분.",

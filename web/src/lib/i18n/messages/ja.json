@@ -134,6 +134,7 @@
   "Mecto": "場所",
   "Memo": "メモ",
   "New wallet": "ニューウォレット",
+  "No funds. Buy or receive {symbol} to continue.": "",
   "No users found nearby.": "近くのユーザーが見つけられませんでした.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "全てのアドレスタイプが全部のプラットフォームにおいて完全に互換性があるのではない為、互換性アドレスを使用する事が重要です(%(url)s)。",
   "Not enough funds for acceleration.": "アクセラレーションには十分な資金がありません。",

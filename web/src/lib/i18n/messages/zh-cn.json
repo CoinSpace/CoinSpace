@@ -134,6 +134,7 @@
   "Mecto": "地方",
   "Memo": "备忘录",
   "New wallet": "新钱包",
+  "No funds. Buy or receive {symbol} to continue.": "",
   "No users found nearby.": "附近没有用户.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "并非所有的地址类型在所有平台上都完全兼容，因此使用兼容的地址 非常重要。",
   "Not enough funds for acceleration.": "没有足够的资金来加速。",

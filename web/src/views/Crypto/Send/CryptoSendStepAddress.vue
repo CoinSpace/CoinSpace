@@ -34,6 +34,10 @@ export default {
   extends: CsStep,
   mixins: [onShowOnHide],
   async onShow() {
+    if (this.$wallet.balance?.value === 0n) {
+      this.replace('poor');
+      return;
+    }
     this.isQrScanAvailable = await isQrScanAvailable();
     if (this.args?.address) {
       this.addressOrAlias = this.args.address;

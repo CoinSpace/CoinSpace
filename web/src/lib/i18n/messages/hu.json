@@ -134,6 +134,7 @@
   "Mecto": "Mecto",
   "Memo": "Memó",
   "New wallet": "Új pénztárca",
+  "No funds. Buy or receive {symbol} to continue.": "",
   "No users found nearby.": "Nem található felhasználó a közelben.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Nem minden címtípus kompatibilis minden platformon, ezért fontos kompatibilis címet használni.",
   "Not enough funds for acceleration.": "Nincs elég forrás a meggyorsításhoz.",
