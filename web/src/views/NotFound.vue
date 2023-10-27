@@ -5,16 +5,6 @@ export default {
   components: {
     CsButton,
   },
-  mounted() {
-    if (this.env.VITE_BUILD_TYPE === 'phonegap') {
-      window.backButton = () => this.back();
-    }
-  },
-  beforeUnmount() {
-    if (this.env.VITE_BUILD_TYPE === 'phonegap') {
-      delete window.backButton;
-    }
-  },
   methods: {
     back() {
       this.$router.replace({
@@ -27,19 +17,21 @@ export default {
 
 <template>
   <div class="&">
-    <div class="&__container">
-      <div class="&__content">
-        <div class="&__text">
-          <div>
-            {{ $t('Error 404 😞') }}
+    <div class="&__frame">
+      <div class="&__container">
+        <div class="&__content">
+          <div class="&__text">
+            <div>
+              {{ $t('Error') + ' 404 😞' }}
+            </div>
           </div>
+          <CsButton
+            type="primary"
+            @click="back"
+          >
+            {{ $t('Back') }}
+          </CsButton>
         </div>
-        <CsButton
-          type="primary"
-          @click="back"
-        >
-          {{ $t('Back') }}
-        </CsButton>
       </div>
     </div>
   </div>
@@ -48,23 +40,52 @@ export default {
 <style lang="scss">
   .#{ $filename } {
     display: flex;
-    width: 100%;
     height: 100%;
     flex-direction: column;
-    background-color: $white;
+    align-items: center;
+    padding-top: env(safe-area-inset-top);
+
+    @include breakpoint(lg) {
+      padding:
+        max($spacing-md, env(safe-area-inset-top))
+        max($spacing-md, env(safe-area-inset-right))
+        $spacing-md
+        max($spacing-md, env(safe-area-inset-left));
+      overflow-y: auto;
+    }
+
+    &__frame {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      flex-direction: column;
+      flex-grow: 1;
+      align-items: center;
+      background-color: $background-color;
+
+      @include breakpoint(lg) {
+        max-width: $desktop-max-width;
+        height: auto;
+        padding-top: $spacing-6xl;
+        border-radius: 0.625rem;
+      }
+    }
 
     &__container {
       display: flex;
+      width: 100%;
       height: 100%;
       flex-direction: column;
-      align-items: center;
-      overflow-y: auto;
+      @include breakpoint(lg) {
+        width: 25rem;
+        max-height: 45rem;
+      }
     }
 
     &__content {
       display: flex;
       width: 100%;
-      flex-basis: 100%;
+      height: 100%;
       flex-direction: column;
       padding:
         $spacing-3xl
@@ -72,10 +93,9 @@ export default {
         $spacing-3xl
         max($spacing-xl, env(safe-area-inset-left));
       gap: $spacing-3xl;
+      overflow-y: auto;
+
       @include breakpoint(lg) {
-        // ~ max-height limited by 720px
-        width: 25rem;
-        flex-basis: 45rem;
         padding: $spacing-3xl $spacing-xl;
       }
     }
@@ -86,7 +106,6 @@ export default {
       flex-grow: 1;
       align-items: center;
       justify-content: center;
-      text-align: center;
     }
   }
 </style>
