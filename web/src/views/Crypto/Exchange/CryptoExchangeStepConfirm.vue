@@ -33,9 +33,13 @@ export default {
               : this.storage.address,
             refundAddress: this.$wallet.address,
           });
-
+          let { depositAddress } = exchange;
+          if (this.$wallet.isUnaliasSupported) {
+            const data = await this.$wallet.unalias(depositAddress);
+            if (data) depositAddress = data.address;
+          }
           const options = {
-            address: exchange.depositAddress,
+            address: depositAddress,
             amount: this.storage.amount,
             price: this.storage.priceUSD,
           };
