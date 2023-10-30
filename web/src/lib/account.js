@@ -20,7 +20,7 @@ export async function createAccount({ app, router }) {
     username: '',
     email: '',
   });
-  const cryptos = ref([]);
+  const cryptos = ref(false);
 
   defineAppProperty(app, '$currency', currency);
   defineAppProperty(app, '$user', user);
@@ -39,7 +39,7 @@ export async function createAccount({ app, router }) {
         break;
       default: {
         const result = [];
-        cryptos.value.forEach(({ crypto, balance }) => {
+        cryptos.value.forEach?.(({ crypto, balance }) => {
           const wallet = account.wallet(crypto._id);
           if (wallet && wallet.balance.value !== balance.value) {
             account.setPlatformWalletsStateInitialized(wallet.crypto.platform, wallet);
