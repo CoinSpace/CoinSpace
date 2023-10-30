@@ -288,7 +288,7 @@ export default class Account extends EventEmitter {
 
     await this.#market.init({
       cryptos,
-      cryptoDB: this.#cryptoDB,
+      currency: this.#details.get('systemInfo').preferredCurrency,
     });
     this.#exchange = new ChangellyExchange({
       request: this.request,

@@ -1,37 +1,29 @@
 <script>
-import CsLoader from '../components/CsLoader.vue';
 import CsSidebar from '../components/CsSidebar.vue';
 
 export default {
   components: {
     CsSidebar,
-    CsLoader,
   },
 };
 </script>
 
 <template>
   <div class="&">
-    <CsLoader
-      v-if="$cryptos === false"
-      class="&__loader"
-    />
-    <template v-else>
-      <CsSidebar :active="$route.name === 'home'" />
-      <div
-        class="&__content"
-        :class="{ '&__content--active': $route.name !== 'home' }"
-      >
-        <RouterView v-slot="{ Component, route }">
-          <transition :name="route.meta.transition">
-            <component
-              :is="Component"
-              :key="route.path"
-            />
-          </transition>
-        </RouterView>
-      </div>
-    </template>
+    <CsSidebar :active="$route.name === 'home'" />
+    <div
+      class="&__content"
+      :class="{ '&__content--active': $route.name !== 'home' }"
+    >
+      <RouterView v-slot="{ Component, route }">
+        <transition :name="route.meta.transition">
+          <component
+            :is="Component"
+            :key="route.path"
+          />
+        </transition>
+      </RouterView>
+    </div>
   </div>
 </template>
 
@@ -64,10 +56,6 @@ export default {
       &--active {
         display: block;
       }
-    }
-
-    &__loader {
-      margin: auto;
     }
   }
 </style>

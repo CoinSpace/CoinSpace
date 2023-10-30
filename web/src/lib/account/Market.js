@@ -25,11 +25,13 @@ export default class Market {
     this.#coingeckoAPI = new CoingeckoAPI();
   }
 
-  async init({ cryptos }) {
+  async init({ cryptos, currency }) {
     this.#coingeckoIDs = [...new Set(cryptos
       .map((crypto) => crypto.coingecko?.id)
       .filter((crypto) => !!crypto)
     )];
+    // cache market
+    await this.#coingeckoAPI.market(this.#coingeckoIDs, currency);
   }
 
   async getPrice(id, currency) {
