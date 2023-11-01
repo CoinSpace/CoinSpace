@@ -35,7 +35,6 @@ router.up = async () => {
 router.beforeEach((to, from) => {
   if (import.meta.env.DEV && to.meta.dev) return;
   const { $account, $app } = router;
-  unsetWalletProps($app);
   if (to.meta.requiresAuth && !$account.isCreated) {
     return { name: 'auth', replace: true };
   }
@@ -58,6 +57,14 @@ router.beforeEach((to, from) => {
   if (toDepth !== fromDepth) {
     to.meta.transition = toDepth > fromDepth ? 'slide-left' : 'slide-right';
   }
+});
+
+router.afterEach((to) => {
+  const { $account, $app } = router;
+  if (to.meta.crypto && $account.wallet(to.params.cryptoId)) {
+    return;
+  }
+  unsetWalletProps($app);
 });
 
 if (import.meta.env.VITE_BUILD_TYPE === 'electron') {
