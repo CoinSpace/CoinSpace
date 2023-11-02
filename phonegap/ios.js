@@ -42,7 +42,7 @@ async function run() {
 
   cordova('plugin add cordova-plugin-fingerprint-aio@5.0.1 --save --variable FACEID_USAGE_DESCRIPTION="Used for easy authentication."');
   cordova('plugin add cordova-plugin-geolocation@5.0.0 --save');
-  cordova('plugin add phonegap-plugin-barcodescanner@8.1.0 --save');
+  cordova('plugin add cordova-plugin-qrscanner-11@3.0.5 --save');
   cordova('plugin add cordova-plugin-dialogs@2.0.2 --save');
   cordova('plugin add cordova-plugin-inappbrowser@5.0.0 --save');
   cordova('plugin add cordova-plugin-statusbar@3.0.0 --save');
@@ -85,6 +85,7 @@ async function run() {
     CFBundleLocalizations: languages.map((item) => item.value),
     CFBundleName,
     'CFBundleDisplayName': CFBundleName,
+    NSCameraUsageDescription: 'This app uses the camera to scan QR codes and take pictures.',
   };
   updatePlist(path.join(buildPath, 'platforms/ios/Coin/Coin-Info.plist'), update);
 

@@ -1,3 +1,5 @@
+import i18n from '../i18n/i18n.js';
+
 export class GeolocationNotSupported extends Error {
   name = 'GeolocationNotSupported';
 }
@@ -69,15 +71,15 @@ export default class Mecto {
         enableHighAccuracy: true,
       } : {};
 
-      const alert = navigator.notification ? navigator.notification.alert : window.alert;
+      const alert = window.permissionDenied || window.alert;
 
       window.navigator.geolocation.getCurrentPosition(
         (position) => { resolve(position.coords); },
         (err) => {
           alert(
-            'Access to the geolocation has been prohibited; please enable it in the Settings app to continue',
-            () => {},
-            'Coin Wallet'
+            i18n.global.t('Please enable geolocation access in Settings to continue.'),
+            i18n.global.t('OK'),
+            [i18n.global.t('Cancel'), i18n.global.t('Settings')]
           );
           reject(new GeolocationError('Unable to retrieve your location', {
             cause: err,

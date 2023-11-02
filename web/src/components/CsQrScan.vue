@@ -64,7 +64,6 @@ export default {
       try {
         const barcodes = await this.$options.barcodeDetector.detect(this.$refs.video);
         if (barcodes.length <= 0) return;
-        this.stop();
         this.$emit('back', { address: barcodes[0].rawValue });
       } catch (err) {
         // TODO handle errors
@@ -93,9 +92,12 @@ export default {
     &__video {
       display: block;
       width: 100%;
+      max-width: 20rem;
       height: 100%;
+      max-height: 20rem;
       border: 1px solid $gray;
-      border-radius: $spacing-lg;
+      border-radius: 0.625rem;
+      margin: 0 auto;
     }
   }
 </style>

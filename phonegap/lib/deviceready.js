@@ -11,7 +11,6 @@ export default async function deviceready() {
 
   document.addEventListener('backbutton', (e) => {
     e.preventDefault();
-    if (window.backButtonOff) return;
     if (window.backButtonModal) return window.backButtonModal();
     if (window.backButton) return window.backButton();
     window.navigator.app.exitApp();
@@ -28,29 +27,30 @@ export default async function deviceready() {
   await taptic.init();
   window.taptic = taptic;
 
-  window.qrScan = (callback) => {
-    window.backButtonOff = true;
-    cordova.plugins.barcodeScanner.scan(
-      (result) => {
-        setTimeout(() => { window.backButtonOff = false; }, 1000);
-        if (result.text) {
-          const address = result.text.split('?')[0].split(':').pop();
-          callback(address);
-        }
-      },
-      () => {
-        setTimeout(() => { window.backButtonOff = false; }, 1000);
-        navigator.notification.alert(
-          'Access to the camera has been prohibited; please enable it in the Settings app to continue',
-          () => {},
-          'Coin Wallet'
+  window.permissionDenied = async (message, buttonLabel, buttonLabels) => {
+    const { canOpenSettings } = await new Promise((resolve) => window.QRScanner.getStatus(resolve));
+    await new Promise((resolve) => {
+      const title = 'Coin Wallet';
+      if (canOpenSettings) {
+        navigator.notification.confirm(
+          message,
+          (buttonIndex) => {
+            if (buttonIndex === 2) window.QRScanner.openSettings();
+            resolve();
+          },
+          title,
+          buttonLabels
         );
-      },
-      {
-        showTorchButton: true,
+      } else {
+        navigator.notification.alert(
+          message,
+          resolve,
+          title,
+          buttonLabel
+        );
       }
-    );
-  },
+    });
+  };
 
   navigator.clipboard.writeText = (text) => {
     cordova.plugins.clipboard.copy(text);

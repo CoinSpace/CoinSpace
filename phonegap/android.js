@@ -36,7 +36,7 @@ async function run() {
 
   cordova('plugin add cordova-plugin-androidx-adapter@1.1.3 --save');
   cordova('plugin add cordova-plugin-geolocation@5.0.0 --save');
-  cordova('plugin add https://github.com/js-soft/phonegap-plugin-barcodescanner#57830dc1133e131f6094d6bb9a63175af508ab5c --save --variable ANDROID_SUPPORT_V4_VERSION=28.0.0');
+  cordova('plugin add cordova-plugin-qrscanner-11@3.0.5 --save');
   cordova('plugin add cordova-plugin-dialogs@2.0.2 --save');
   cordova('plugin add cordova-plugin-inappbrowser@5.0.0 --save');
   cordova('plugin add cordova-plugin-x-socialsharing@6.0.4 --save');

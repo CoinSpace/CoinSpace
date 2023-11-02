@@ -289,7 +289,7 @@ export default {
       flex-shrink: 0;
       padding: $spacing-md;
       border: 1px solid $gray;
-      border-radius: $spacing-lg;
+      border-radius: 0.625rem;
     }
 
     &__address-type-button {

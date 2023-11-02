@@ -139,15 +139,6 @@ export default {
           this.addressOrAlias = text;
         }, () => {});
     },
-    async scan() {
-      if (this.env.VITE_BUILD_TYPE === 'phonegap') {
-        window.qrScan((address) => {
-          this.addressOrAlias = address;
-        });
-      } else {
-        this.next('qr');
-      }
-    },
   },
 };
 </script>
@@ -229,7 +220,7 @@ export default {
         <CsButton
           v-if="isQrScanAvailable"
           type="circle"
-          @click="scan"
+          @click="next('qr')"
         >
           <template #circle>
             <QrIcon />
