@@ -8,7 +8,11 @@ import {
 } from './constants.js';
 
 function makePath(deeplink) {
-  return `/bip21/${deeplink ? encodeURIComponent(deeplink) : ''}`;
+  if (deeplink) {
+    return `/bip21/${encodeURIComponent(deeplink)}`;
+  } else {
+    return '/';
+  }
 }
 
 export default function openWindow(deeplink) {
@@ -23,8 +27,6 @@ export default function openWindow(deeplink) {
       minHeight: 700,
       webPreferences: {
         devTools: isDevelopment,
-        //nodeIntegration: true,
-        //contextIsolation: false,
         preload: fileURLToPath(new URL('preload.js', import.meta.url)),
       },
     });
@@ -42,7 +44,10 @@ export default function openWindow(deeplink) {
       mainWindow.restore();
     }
     mainWindow.show();
-    mainWindow.webContents.send('navigate', path);
+    if (deeplink) {
+      log.info(`navigate: '${path}'`);
+      mainWindow.webContents.send('navigate', path);
+    }
     return mainWindow;
   }
 }
