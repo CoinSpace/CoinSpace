@@ -20,10 +20,10 @@ import {
   release,
 } from './lib/constants.js';
 
+log.initialize({ spyRendererConsole: true });
 if (!isDevelopment) {
   log.transports.file.level = false;
 }
-
 log.info('versions', process.versions);
 
 if (isWindows) {

@@ -124,21 +124,23 @@ const app = [
       ],
     }, {
       //path: 'bip21/:data',
-      path: ':cryptoId([a-z0-9-]+@[a-z0-9-]+)?/bip21/:data',
+      path: ':cryptoId([a-z0-9-]+@[a-z0-9-]+)?/bip21/:data?',
       redirect(to) {
         let query;
         let crypto;
-        try {
-          const data = new URL(to.params.data);
-          crypto = schemes.find((item) => `${item.scheme}:` === data.protocol);
-          if (crypto) {
-            query = {
-              address: data.pathname,
-              amount: data.searchParams.has('amount') ? data.searchParams.get('amount') : undefined,
-            };
+        if (to.params.data) {
+          try {
+            const data = new URL(to.params.data);
+            crypto = schemes.find((item) => `${item.scheme}:` === data.protocol);
+            if (crypto) {
+              query = {
+                address: data.pathname,
+                amount: data.searchParams.has('amount') ? data.searchParams.get('amount') : undefined,
+              };
+            }
+          } catch (err) {
+            console.error(err);
           }
-        } catch (err) {
-          console.error(err);
         }
         if (crypto) {
           return {

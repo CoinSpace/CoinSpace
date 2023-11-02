@@ -8,7 +8,7 @@ import {
 } from './constants.js';
 
 function makePath(deeplink) {
-  return `/bip21/${encodeURIComponent(deeplink)}`;
+  return `/bip21/${deeplink ? encodeURIComponent(deeplink) : ''}`;
 }
 
 export default function openWindow(deeplink) {
