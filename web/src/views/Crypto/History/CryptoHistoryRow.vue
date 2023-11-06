@@ -117,7 +117,10 @@ export default {
     border-radius: 0.625rem;
     cursor: pointer;
 
-    &:hover,
+    @include hover {
+      background-color: $secondary-light;
+    }
+
     &:active {
       background-color: $secondary-light;
     }

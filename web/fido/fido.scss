@@ -37,7 +37,7 @@ body {
   line-height: 1.2;
   transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
 
-  &:hover {
+  @include hover {
     background-color: darker($primary-brand, 10%);
   }
 

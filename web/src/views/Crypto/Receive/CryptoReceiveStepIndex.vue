@@ -323,7 +323,7 @@ export default {
       .cs-button__circle {
         background-color: $primary-brand;
 
-        &:hover {
+        @include hover {
           background-color: darker($primary-brand, 5%);
         }
 

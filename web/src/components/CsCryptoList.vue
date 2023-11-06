@@ -140,7 +140,10 @@ export default {
       gap: $spacing-sm;
       overflow-x: hidden;
 
-      &:hover,
+      @include hover {
+        background-color: $secondary-light;
+      }
+
       &:active {
         background-color: $secondary-light;
       }

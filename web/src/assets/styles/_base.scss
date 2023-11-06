@@ -58,7 +58,7 @@ a {
   cursor: pointer;
   text-decoration: none;
 
-  &:hover {
+  @include hover {
     color: darker($primary, 15%);
   }
 

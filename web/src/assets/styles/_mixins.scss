@@ -25,6 +25,14 @@ $breakpoints: (
   }
 }
 
+@mixin hover() {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
 // truncate text if it runs over the width...
 @mixin ellipsis {
   overflow: hidden;

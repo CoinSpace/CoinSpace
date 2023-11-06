@@ -101,7 +101,7 @@ export default {
       border-radius: 50%;
       background-color: $secondary-light;
 
-      &:hover {
+      @include hover {
         background-color: darker($secondary-light, 5%);
       }
 
@@ -118,7 +118,7 @@ export default {
       @extend %base-button;
       background-color: $primary-brand;
 
-      &:hover {
+      @include hover {
         background-color: darker($primary-brand, 10%);
       }
 
@@ -131,7 +131,7 @@ export default {
       @extend %base-button;
       background-color: $secondary-light;
 
-      &:hover {
+      @include hover {
         background-color: darker($secondary-light, 5%);
       }
 
@@ -145,7 +145,7 @@ export default {
       background-color: $primary-light;
       color: $primary;
 
-      &:hover {
+      @include hover {
         background-color: darker($primary-light, 5%);
       }
 
@@ -159,7 +159,7 @@ export default {
       background-color: $danger-light;
       color: $danger;
 
-      &:hover {
+      @include hover {
         background-color: darker($danger-light, 5%);
       }
 
@@ -173,7 +173,7 @@ export default {
       background-color: transparent;
       color: $primary;
 
-      &:hover {
+      @include hover {
         color: darker($primary, 10%);
       }
 
@@ -187,7 +187,7 @@ export default {
       background-color: transparent;
       color: $white;
 
-      &:hover {
+      @include hover {
         color: darker($white, 10%);
       }
 
@@ -201,7 +201,7 @@ export default {
       background-color: transparent;
       color: $danger;
 
-      &:hover {
+      @include hover {
         color: darker($danger, 10%);
       }
 
