@@ -143,6 +143,11 @@ jobs:
             SENTRY_PROJECT: android
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        # https://github.com/electron/forge/issues/2807
+        if: matrix.VITE_DISTRIBUTION == 'mac'
+        with:
+          python-version: '3.10'
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
