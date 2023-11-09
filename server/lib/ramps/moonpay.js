@@ -58,7 +58,10 @@ async function getCountryAndCurrency(countryCode, crypto) {
   if (!API_KEY) return;
   if (!crypto) return;
   const countries = await cachedCountries();
-  const country = countries.find((item) => item.alpha2 === countryCode);
+  const country = countryCode ? countries.find((item) => item.alpha2 === countryCode) : {
+    isBuyAllowed: true,
+    isSellAllowed: true,
+  };
   if (!country) return;
 
   const currencies = await cachedCurrencies();

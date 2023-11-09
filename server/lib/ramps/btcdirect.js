@@ -19,7 +19,7 @@ async function buy(countryCode, crypto, walletAddress) {
   if (!crypto) return;
   const countries = await cachedCountries();
   const country = countries.find((item) => item.code === countryCode);
-  if (!country) return;
+  if (countryCode && !country) return;
 
   const currencies = await cachedCurrencies();
 

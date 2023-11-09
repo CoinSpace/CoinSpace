@@ -56,7 +56,7 @@ export default {
     />
 
     <CsLoader v-if="isLoading" />
-    <div v-else-if="countryCode">
+    <div>
       <CsProviderList
         v-if="providers.length"
         :items="providers"
