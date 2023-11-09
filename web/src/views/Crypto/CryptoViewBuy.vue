@@ -56,7 +56,7 @@ export default {
     />
 
     <CsLoader v-if="isLoading" />
-    <div>
+    <div v-else>
       <CsProviderList
         v-if="providers.length"
         :items="providers"
