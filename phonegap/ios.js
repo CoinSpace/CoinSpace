@@ -205,6 +205,7 @@ async function addWatchApp() {
     setting['TARGETED_DEVICE_FAMILY'] = '4';
     setting['WATCHOS_DEPLOYMENT_TARGET'] = '5.0';
     setting['ENABLE_BITCODE'] = 'NO';
+    setting['ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES'] = 'NO';
 
     if (name === 'Release') {
       setting['SWIFT_OPTIMIZATION_LEVEL'] = '"-O"';
