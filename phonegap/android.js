@@ -42,7 +42,7 @@ async function run() {
   cordova('plugin add cordova-plugin-x-socialsharing@6.0.4 --save');
   cordova('plugin add cordova-plugin-fingerprint-aio@5.0.1 --save');
   cordova('plugin add cordova-plugin-customurlscheme@5.0.2 --save --variable URL_SCHEME=coinspace');
-  cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#4bf28de7fcd6759450f5fd56f2ec28677bc882da --save');
+  cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#99324f1f80796672d3b2a0d66d99a0c0a29f7d36 --save');
   cordova('plugin add cordova-plugin-safariviewcontroller@2.0.0 --save');
   cordova('plugin add cordova-plugin-app-review@3.1.0 --save');
   cordova('plugin add cordova-plugin-velda-devicefeedback@0.0.2 --save');
