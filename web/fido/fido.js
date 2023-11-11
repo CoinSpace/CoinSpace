@@ -8,6 +8,8 @@ let $btn;
 let $message;
 
 async function init() {
+  document.addEventListener('touchstart', () => {}, false); // fix safari :active css bug
+
   $btn = document.getElementById('btn');
   $btn.innerHTML = 'OK';
   $message = document.getElementById('message');
