@@ -1,36 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 152 152">
-  <mask id="faceId_svg__a" width="152" height="152" x="0" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha">
-    <path stroke="#181818" stroke-linecap="round" stroke-width="10" d="M147 34.045V20c0-8.284-6.716-15-15-15h-14.045M5 34.045V20c0-8.284 6.716-15 15-15h14.045M147 117.955V132c0 8.284-6.716 15-15 15h-14.045M5 117.955V132c0 8.284 6.716 15 15 15h14.045"/>
-    <path stroke="#181818" stroke-linecap="round" stroke-linejoin="round" stroke-width="10" d="M47.6 57.846V48.03m56.37 9.816V48.03"/>
-    <path stroke="#181818" stroke-linecap="round" stroke-width="10" d="m105.476 102.679-.588 1.059a13 13 0 0 1-11.364 6.686H58.987a13 13 0 0 1-10.924-5.952l-.463-.717m20.977-19.579.811-.588A16 16 0 0 0 76 70.632V48.03"/>
-  </mask>
-  <g mask="url(#faceId_svg__a)">
-    <ellipse cx="76.332" cy="76" fill="#47985D" rx="116.332" ry="116"/>
-    <g filter="url(#faceId_svg__b)">
-      <ellipse cx="168.821" cy="-134.628" fill="#60BB49" rx="68.69" ry="314.961" transform="rotate(30 168.821 -134.628)"/>
-    </g>
-    <g filter="url(#faceId_svg__c)">
-      <ellipse cx="46.137" cy="-116.113" fill="#FFA842" rx="56.886" ry="209.537" transform="rotate(30 46.137 -116.113)"/>
-    </g>
-    <g filter="url(#faceId_svg__d)">
-      <ellipse cx="128.378" cy="163.817" fill="#4CAB89" rx="52.852" ry="158.104" transform="rotate(30 128.378 163.817)"/>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 128 128">
+  <g clip-path="url(#faceId_svg__a)">
+    <path stroke="url(#faceId_svg__b)" stroke-linecap="round" stroke-width="8.421" d="M123.789 28.67V16.841c0-6.976-5.655-12.632-12.631-12.632H99.33M4.21 28.67V16.841C4.21 9.866 9.867 4.21 16.843 4.21H28.67m95.119 95.12v11.828c0 6.976-5.655 12.631-12.631 12.631H99.33M4.21 99.33v11.828c0 6.976 5.656 12.631 12.632 12.631H28.67m11.414-75.077v-8.266m47.47 8.266v-8.266m1.268 46.02-.495.892a10.947 10.947 0 0 1-9.57 5.63H49.673a10.948 10.948 0 0 1-9.199-5.012l-.39-.603M57.75 70.885l.683-.495A13.475 13.475 0 0 0 64 59.48V40.446"/>
   </g>
   <defs>
-    <filter id="faceId_svg__b" width="516.773" height="729.894" x="-89.566" y="-499.575" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-      <feGaussianBlur result="effect1_foregroundBlur_7_832" stdDeviation="45"/>
-    </filter>
-    <filter id="faceId_svg__c" width="411.602" height="547.413" x="-159.664" y="-389.819" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-      <feGaussianBlur result="effect1_foregroundBlur_7_832" stdDeviation="45"/>
-    </filter>
-    <filter id="faceId_svg__d" width="362.724" height="458.95" x="-52.984" y="-65.658" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-      <feGaussianBlur result="effect1_foregroundBlur_7_832" stdDeviation="45"/>
-    </filter>
+    <linearGradient id="faceId_svg__b" x1="-16" x2="124" y1="-18" y2="142.5" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFA842"/>
+      <stop offset=".35" stop-color="#60BB49"/>
+      <stop offset="1" stop-color="#4CAB89"/>
+    </linearGradient>
+    <clipPath id="faceId_svg__a">
+      <path fill="#fff" d="M0 0h128v128H0z"/>
+    </clipPath>
   </defs>
 </svg>
