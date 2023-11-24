@@ -3,6 +3,8 @@ import CsButton from '../components/CsButton.vue';
 import CsButtonGroup from '../components/CsButtonGroup.vue';
 import CsModal from '../components/CsModal.vue';
 
+const supportedDistribution = ['mac'];
+
 export default {
   components: {
     CsButton,
@@ -18,17 +20,17 @@ export default {
   async mounted() {
     setTimeout(() => {
       this.checkUpdate();
-    }, ['win', 'mac'].includes(this.env.VITE_PLATFORM) ? 5 * 60 * 1000 : 1000);
+    }, supportedDistribution.includes(this.env.VITE_DISTRIBUTION) ? 5 * 60 * 1000 : 1000);
     setInterval(() => {
       this.checkUpdate();
     }, 12 * 60 * 60 * 1000);
   },
   methods: {
     async checkUpdate() {
-      const arch = (['win', 'mac'].includes(this.env.VITE_PLATFORM) && window.process && window.process.arch) || 'any';
+      const arch = (supportedDistribution.includes(this.env.VITE_DISTRIBUTION) && window.process?.arch) || 'any';
       try {
         this.updateInfo = await this.$account.request({
-          url: `api/v4/update/${this.env.VITE_PLATFORM}/${arch}/v${this.env.VITE_VERSION}`,
+          url: `api/v4/update/${this.env.VITE_DISTRIBUTION}/${arch}/v${this.env.VITE_VERSION}`,
           method: 'get',
           id: true,
         });

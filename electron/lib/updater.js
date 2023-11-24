@@ -2,7 +2,7 @@ import log from 'electron-log';
 import { app, autoUpdater, dialog } from 'electron';
 
 import {
-  VITE_PLATFORM,
+  VITE_DISTRIBUTION,
   VITE_SITE_URL,
   isDevelopment,
 } from './constants.js';
@@ -14,8 +14,8 @@ class Updater {
     this.state = 'update-not-available';
     this.supported = false;
 
-    if (!supportedDistribution.includes(VITE_PLATFORM)) {
-      log.info(`Electron's auto updater does not support the '${VITE_PLATFORM}' distribution`);
+    if (!supportedDistribution.includes(VITE_DISTRIBUTION)) {
+      log.info(`Electron's auto updater does not support the '${VITE_DISTRIBUTION}' distribution`);
       return this;
     }
 
@@ -24,9 +24,9 @@ class Updater {
       return this;
     }
 
-    const feedURL = `${VITE_SITE_URL}api/v4/update/${VITE_PLATFORM}/${process.arch}/v${app.getVersion()}`;
+    const feedURL = `${VITE_SITE_URL}api/v4/update/${VITE_DISTRIBUTION}/${process.arch}/v${app.getVersion()}`;
     const requestHeaders = {
-      'User-Agent': `CoinSpace/${VITE_PLATFORM}/${app.getVersion()} (${process.platform}: ${process.arch})`,
+      'User-Agent': `CoinSpace/${VITE_DISTRIBUTION}/${app.getVersion()} (${process.platform}: ${process.arch})`,
     };
 
     log.info('feedURL:', feedURL);
