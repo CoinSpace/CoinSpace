@@ -36,7 +36,7 @@ export default {
       isLoading: false,
       isLoadingMaxAmount: false,
       subtitle: cryptoSubtitle(this.$wallet),
-      amountValue: undefined,
+      amountValue: this.storage.amount,
       error: undefined,
     };
   },

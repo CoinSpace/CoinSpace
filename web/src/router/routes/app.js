@@ -24,6 +24,7 @@ import SettingsView from '../../views/Settings/SettingsView.vue';
 
 import NotFound from '../../views/NotFound.vue';
 
+import { parseCryptoURI } from '../../lib/cryptoURI.js';
 import schemes from '../../lib/schemes.js';
 
 const app = [
@@ -127,14 +128,14 @@ const app = [
       path: ':cryptoId([a-z0-9-]+@[a-z0-9-]+)?/bip21/:data',
       redirect(to) {
         try {
-          const data = new URL(to.params.data);
-          const crypto = schemes.find((item) => `${item.scheme}:` === data.protocol);
+          const parsed = parseCryptoURI(to.params.data);
+          const crypto = schemes.find((item) => item.scheme === parsed.scheme);
           if (crypto) {
             return {
               name: 'crypto.send',
               query: {
-                address: data.pathname,
-                amount: data.searchParams.has('amount') ? data.searchParams.get('amount') : undefined,
+                address: parsed.address,
+                amount: parsed.amount,
               },
               params: {
                 cryptoId: crypto._id,

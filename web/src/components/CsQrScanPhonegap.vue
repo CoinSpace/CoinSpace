@@ -24,7 +24,7 @@ export default {
           console.error(err);
           return this.$emit('back');
         }
-        this.$emit('back', { address: contents });
+        this.$emit('back', { uri: contents });
       });
       window.QRScanner.show();
       window.StatusBar?.styleLightContent();

@@ -1,5 +1,8 @@
 <script>
-import { errors } from '@coinspace/cs-common';
+import {
+  Amount,
+  errors,
+} from '@coinspace/cs-common';
 
 import CsButton from '../../../components/CsButton.vue';
 import CsButtonGroup from '../../../components/CsButtonGroup.vue';
@@ -13,6 +16,7 @@ import PasteIcon from '../../../assets/svg/paste.svg';
 import QrIcon from '../../../assets/svg/qr.svg';
 
 import { onShowOnHide } from '../../../lib/mixins.js';
+import { parseCryptoURI } from '../../../lib/cryptoURI.js';
 import {
   cryptoSubtitle,
   isQrScanAvailable,
@@ -38,12 +42,27 @@ export default {
       this.replace('poor');
       return;
     }
-    this.isQrScanAvailable = await isQrScanAvailable();
-    if (this.args?.address) {
-      this.addressOrAlias = this.args.address;
+    if (this.args?.uri) {
+      try {
+        const parsed = parseCryptoURI(this.args.uri);
+        this.addressOrAlias = parsed.address;
+        if (parsed.amount) {
+          try {
+            this.updateStorage({
+              amount: Amount.fromString(parsed.amount, this.$wallet.crypto.decimals),
+            });
+          } catch (err) {
+            console.error(err);
+          }
+        }
+      } catch (err) {
+        console.error(err);
+        this.error = this.$t('Invalid address');
+      }
     } else if (this.addressOrAlias === '' && this.$route.query.address) {
       this.addressOrAlias = this.$route.query.address;
     }
+    this.isQrScanAvailable = await isQrScanAvailable();
   },
   data() {
     return {

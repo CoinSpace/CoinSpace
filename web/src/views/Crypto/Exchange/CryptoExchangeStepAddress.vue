@@ -4,10 +4,6 @@ import {
   ExchangeDisabledError,
   InternalExchangeError,
 } from '../../../lib/account/ChangellyExchange.js';
-import {
-  cryptoSubtitle,
-  isQrScanAvailable,
-} from '../../../lib/helpers.js';
 
 import CsButton from '../../../components/CsButton.vue';
 import CsButtonGroup from '../../../components/CsButtonGroup.vue';
@@ -18,13 +14,19 @@ import CsFormTextareaReadonly from '../../../components/CsForm/CsFormTextareaRea
 import CsPoweredBy from '../../../components/CsPoweredBy.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
-import { onShowOnHide } from '../../../lib/mixins.js';
 
 import EditIcon from '../../../assets/svg/edit.svg';
 import LocationIcon from '../../../assets/svg/location.svg';
 import PasteIcon from '../../../assets/svg/paste.svg';
 import QrIcon from '../../../assets/svg/qr.svg';
 import WalletSmallIcon from '../../../assets/svg/walletSmall.svg';
+
+import { onShowOnHide } from '../../../lib/mixins.js';
+import { parseCryptoURI } from '../../../lib/cryptoURI.js';
+import {
+  cryptoSubtitle,
+  isQrScanAvailable,
+} from '../../../lib/helpers.js';
 
 import debounce from 'p-debounce';
 
@@ -47,10 +49,16 @@ export default {
   extends: CsStep,
   mixins: [onShowOnHide],
   async onShow() {
-    this.isQrScanAvailable = await isQrScanAvailable();
-    if (this.args?.address) {
-      this.addressOrAlias = this.args.address;
+    if (this.args?.uri) {
+      try {
+        const parsed = parseCryptoURI(this.args.uri);
+        this.addressOrAlias = parsed.address;
+      } catch (err) {
+        console.error(err);
+        this.error = this.$t('Invalid address');
+      }
     }
+    this.isQrScanAvailable = await isQrScanAvailable();
   },
   data() {
     return {
