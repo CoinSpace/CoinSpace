@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import ExpiryMap from 'expiry-map';
 import axiosRetry from 'axios-retry';
+import rateLimit from 'axios-rate-limit';
 import pMemoize, { pMemoizeClear } from 'p-memoize';
 
 const MARKET_PER_PAGE = 250;
@@ -37,6 +38,10 @@ export default class CoingeckoAPI {
         return axiosRetry.isNetworkOrIdempotentRequestError(err) || (err.response && err.response.status === 429);
       },
       shouldResetTimeout: true,
+    });
+    rateLimit(axios, {
+      maxRequests: 10,
+      perMilliseconds: 60 * 1000,
     });
     this.#axios = axios;
     this.#request = pMemoize(async (config) => {
