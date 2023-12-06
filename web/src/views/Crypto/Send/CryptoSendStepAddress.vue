@@ -55,6 +55,13 @@ export default {
             console.error(err);
           }
         }
+        if (parsed.destinationTag && this.$wallet.crypto._id === 'xrp@ripple') {
+          this.updateStorage({
+            meta: {
+              destinationTag: parsed.destinationTag,
+            },
+          });
+        }
       } catch (err) {
         console.error(err);
         this.error = this.$t('Invalid address');

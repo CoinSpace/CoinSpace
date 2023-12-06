@@ -22,7 +22,7 @@ export default {
   data() {
     const meta = {};
     for (const name of this.$wallet.metaNames) {
-      meta[name] = undefined;
+      meta[name] = this.storage.meta?.[name] || undefined;
     }
     return {
       isLoading: false,

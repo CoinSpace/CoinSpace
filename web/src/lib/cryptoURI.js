@@ -6,25 +6,28 @@ export function parseCryptoURI(uri) {
       uri = `crypto:${uri}`;
     }
     const parsed = new URL(uri);
-    const scheme = parsed.protocol === 'crypto:' ? undefined
-      : parsed.protocol.replace(/:$/, '').replace(/^web\+/, '');
+    const data = {};
+    if (parsed.protocol !== 'crypto:') {
+      data.scheme = parsed.protocol.replace(/:$/, '').replace(/^web\+/, '');
+    }
     if (parsed.searchParams.has('address')) {
       // ERC 681
       // https://github.com/ethereum/ercs/blob/master/ERCS/erc-681.md
-      return {
-        scheme,
-        address: parsed.searchParams.get('address'),
-        token: parsed.pathname,
-        amount: undefined,
-      };
+      data.address = parsed.searchParams.get('address');
+      data.token = parsed.pathname;
+    } else {
+      // BIP 21 etc
+      // https://github.com/bitcoin/bips/blob/master/bip-0021.mediawiki
+      data.address = parsed.pathname;
+      if (parsed.searchParams.has('amount')) {
+        data.amount = parsed.searchParams.get('amount');
+      }
+      if (parsed.searchParams.has('dt')) {
+        // https://github.com/XRPLF/XRPL-Standards/tree/master/XLS-0002d-destination-information
+        data.destinationTag = parsed.searchParams.get('dt');
+      }
     }
-    // BIP 21
-    // https://github.com/bitcoin/bips/blob/master/bip-0021.mediawiki
-    return {
-      scheme,
-      address: parsed.pathname,
-      amount: parsed.searchParams.get('amount') || undefined,
-    };
+    return data;
   } catch (err) {
     throw new errors.AddressError(`Invalid URI: "${uri}"`, { cause: err });
   }
