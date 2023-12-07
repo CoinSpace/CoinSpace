@@ -49,14 +49,13 @@ export default {
   extends: CsStep,
   mixins: [onShowOnHide],
   async onShow() {
-    if (this.args?.uri) {
-      try {
-        const parsed = parseCryptoURI(this.args.uri);
-        this.addressOrAlias = parsed.address;
-      } catch (err) {
-        console.error(err);
-        this.error = this.$t('Invalid address');
-      }
+    if (this.args?.error) {
+      console.error(this.args.error);
+      this.error = this.$t('Invalid address');
+    }
+    if (this.storage.initial?.address) {
+      this.addressOrAlias = this.storage.initial.address;
+      this.storage.initial.address = undefined;
     }
     this.isQrScanAvailable = await isQrScanAvailable();
   },

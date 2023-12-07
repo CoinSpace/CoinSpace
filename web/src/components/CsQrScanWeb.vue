@@ -8,7 +8,7 @@ export default {
     CsLoader,
   },
   mixins: [onShowOnHide],
-  emits: ['back'],
+  emits: ['back', 'scan'],
   data() {
     return {
       isLoading: true,
@@ -64,7 +64,7 @@ export default {
       try {
         const barcodes = await this.$options.barcodeDetector.detect(this.$refs.video);
         if (barcodes.length <= 0) return;
-        this.$emit('back', { uri: barcodes[0].rawValue });
+        this.$emit('scan', { uri: barcodes[0].rawValue });
       } catch (err) {
         // TODO handle errors
         console.error(err);

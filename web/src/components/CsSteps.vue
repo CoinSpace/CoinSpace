@@ -9,12 +9,18 @@ export default {
       type: String,
       default: 'index',
     },
+    initialStorage: {
+      type: Object,
+      default() {
+        return {};
+      },
+    },
   },
   data() {
     return {
       currentStep: this.step,
       exclude: undefined,
-      storage: {},
+      storage: this.initialStorage,
       prevSteps: new Map(),
       args: {},
       transition: 'slide-left',

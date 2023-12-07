@@ -8,7 +8,7 @@ export default {
     CsButton,
   },
   mixins: [onShowOnHide],
-  emits: ['back'],
+  emits: ['back', 'scan'],
   async onShow() {
     this.start();
   },
@@ -24,7 +24,7 @@ export default {
           console.error(err);
           return this.$emit('back');
         }
-        this.$emit('back', { uri: contents });
+        this.$emit('scan', { uri: contents });
       });
       window.QRScanner.show();
       window.StatusBar?.styleLightContent();

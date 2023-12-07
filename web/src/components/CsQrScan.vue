@@ -6,13 +6,14 @@ export default {
     CsQrScanPhonegap,
     CsQrScanWeb,
   },
-  emits: ['back'],
+  emits: ['back', 'scan'],
 };
 </script>
 
 <template>
   <component
     :is="env.VITE_BUILD_TYPE === 'phonegap' ? 'CsQrScanPhonegap' : 'CsQrScanWeb'"
-    @back="(args) => $emit('back', args)"
+    @back="$emit('back')"
+    @scan="(args) => $emit('scan', args)"
   />
 </template>

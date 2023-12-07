@@ -136,6 +136,7 @@ const app = [
               query: {
                 address: parsed.address,
                 amount: parsed.amount,
+                destinationTag: crypto._id === 'xrp@ripple' ? parsed.destinationTag : undefined,
               },
               params: {
                 cryptoId: crypto._id,

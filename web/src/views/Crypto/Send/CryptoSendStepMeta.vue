@@ -10,6 +10,7 @@ import * as RippleErrors from '@coinspace/cs-ripple-wallet/errors';
 import * as StellarErrors from '@coinspace/cs-stellar-wallet/errors';
 
 import { cryptoSubtitle } from '../../../lib/helpers.js';
+import { onShowOnHide } from '../../../lib/mixins.js';
 
 export default {
   components: {
@@ -19,10 +20,17 @@ export default {
     CsFormInput,
   },
   extends: CsStep,
+  mixins: [onShowOnHide],
+  onShow() {
+    if (this.storage.initial?.meta?.destinationTag) {
+      this.meta.destinationTag = this.storage.initial.meta.destinationTag;
+      this.storage.initial.meta.destinationTag = undefined;
+    }
+  },
   data() {
     const meta = {};
     for (const name of this.$wallet.metaNames) {
-      meta[name] = this.storage.meta?.[name] || undefined;
+      meta[name] = undefined;
     }
     return {
       isLoading: false,

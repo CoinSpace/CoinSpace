@@ -1,4 +1,6 @@
 <script>
+import { Amount } from '@coinspace/cs-common';
+
 import CsPinStep from '../../../components/CsPinStep.vue';
 import CsSteps from '../../../components/CsSteps.vue';
 
@@ -21,7 +23,24 @@ export default {
     this.stepsKey++;
   },
   data() {
+    const initial = {};
+    if (this.$route.query.address) {
+      initial.address = this.$route.query.address;
+    }
+    if (this.$route.query.amount) {
+      try {
+        initial.amount = Amount.fromString(this.$route.query.amount, this.$wallet.crypto.decimals);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    if (this.$route.query.destinationTag && this.$wallet.crypto._id === 'xrp@ripple') {
+      initial.meta = {
+        destinationTag: this.$route.query.destinationTag,
+      };
+    }
     return {
+      storage: { initial },
       stepsKey: 0,
     };
   },
@@ -45,5 +64,6 @@ export default {
   <CsSteps
     :key="stepsKey"
     :steps="$options.steps"
+    :initialStorage="storage"
   />
 </template>

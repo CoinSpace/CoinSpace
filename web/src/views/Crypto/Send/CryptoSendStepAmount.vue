@@ -23,12 +23,9 @@ export default {
   extends: CsStep,
   mixins: [onShowOnHide],
   onShow() {
-    if (this.amountValue === undefined && this.$route.query.amount) {
-      try {
-        this.amountValue = Amount.fromString(this.$route.query.amount, this.$wallet.crypto.decimals);
-      } catch (err) {
-        console.error(err);
-      }
+    if (this.storage.initial?.amount) {
+      this.amountValue = this.storage.initial.amount;
+      this.storage.initial.amount = undefined;
     }
   },
   data() {
@@ -36,7 +33,7 @@ export default {
       isLoading: false,
       isLoadingMaxAmount: false,
       subtitle: cryptoSubtitle(this.$wallet),
-      amountValue: this.storage.amount,
+      amountValue: undefined,
       error: undefined,
     };
   },

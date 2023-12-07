@@ -1,8 +1,5 @@
 <script>
-import {
-  Amount,
-  errors,
-} from '@coinspace/cs-common';
+import { errors } from '@coinspace/cs-common';
 
 import CsButton from '../../../components/CsButton.vue';
 import CsButtonGroup from '../../../components/CsButtonGroup.vue';
@@ -16,7 +13,6 @@ import PasteIcon from '../../../assets/svg/paste.svg';
 import QrIcon from '../../../assets/svg/qr.svg';
 
 import { onShowOnHide } from '../../../lib/mixins.js';
-import { parseCryptoURI } from '../../../lib/cryptoURI.js';
 import {
   cryptoSubtitle,
   isQrScanAvailable,
@@ -42,32 +38,13 @@ export default {
       this.replace('poor');
       return;
     }
-    if (this.args?.uri) {
-      try {
-        const parsed = parseCryptoURI(this.args.uri);
-        this.addressOrAlias = parsed.address;
-        if (parsed.amount) {
-          try {
-            this.updateStorage({
-              amount: Amount.fromString(parsed.amount, this.$wallet.crypto.decimals),
-            });
-          } catch (err) {
-            console.error(err);
-          }
-        }
-        if (parsed.destinationTag && this.$wallet.crypto._id === 'xrp@ripple') {
-          this.updateStorage({
-            meta: {
-              destinationTag: parsed.destinationTag,
-            },
-          });
-        }
-      } catch (err) {
-        console.error(err);
-        this.error = this.$t('Invalid address');
-      }
-    } else if (this.addressOrAlias === '' && this.$route.query.address) {
-      this.addressOrAlias = this.$route.query.address;
+    if (this.args?.error) {
+      console.error(this.args.error);
+      this.error = this.$t('Invalid address');
+    }
+    if (this.storage.initial?.address) {
+      this.addressOrAlias = this.storage.initial.address;
+      this.storage.initial.address = undefined;
     }
     this.isQrScanAvailable = await isQrScanAvailable();
   },
