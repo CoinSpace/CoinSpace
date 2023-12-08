@@ -19,28 +19,13 @@ export default {
   components: {
     CsSteps,
   },
-  beforeRouteUpdate() {
+  beforeRouteUpdate(to) {
+    this.storage.temp = this.parseQuery(to);
     this.stepsKey++;
   },
   data() {
-    const temp = {};
-    if (this.$route.query.address) {
-      temp.address = this.$route.query.address;
-    }
-    if (this.$route.query.amount) {
-      try {
-        temp.amount = Amount.fromString(this.$route.query.amount, this.$wallet.crypto.decimals);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    if (this.$route.query.destinationTag && this.$wallet.crypto._id === 'xrp@ripple') {
-      temp.meta = {
-        destinationTag: this.$route.query.destinationTag,
-      };
-    }
     return {
-      storage: { temp },
+      storage: { temp: this.parseQuery(this.$route) },
       stepsKey: 0,
     };
   },
@@ -56,6 +41,27 @@ export default {
     pin: CsPinStep,
     qr: CryptoSendStepQr,
     poor: CryptoSendStepPoor,
+  },
+  methods: {
+    parseQuery(route) {
+      const temp = {};
+      if (route.query.address) {
+        temp.address = route.query.address;
+      }
+      if (route.query.amount) {
+        try {
+          temp.amount = Amount.fromString(route.query.amount, this.$wallet.crypto.decimals);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      if (route.query.destinationTag && this.$wallet.crypto._id === 'xrp@ripple') {
+        temp.meta = {
+          destinationTag: route.query.destinationTag,
+        };
+      }
+      return temp;
+    },
   },
 };
 </script>
