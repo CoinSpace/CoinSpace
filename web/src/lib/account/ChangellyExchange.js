@@ -199,7 +199,7 @@ export default class ChangellyExchange {
       params: {
         crypto: to,
         address: encodeURIComponent(address),
-        extra: extraId,
+        extra: extraId || undefined,
       },
       seed: 'device',
     });
