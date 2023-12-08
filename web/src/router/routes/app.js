@@ -24,6 +24,7 @@ import SettingsView from '../../views/Settings/SettingsView.vue';
 
 import NotFound from '../../views/NotFound.vue';
 
+import ChangellyExchange from '../../lib/account/ChangellyExchange.js';
 import { parseCryptoURI } from '../../lib/cryptoURI.js';
 import schemes from '../../lib/schemes.js';
 
@@ -136,7 +137,7 @@ const app = [
               query: {
                 address: parsed.address,
                 amount: parsed.amount,
-                destinationTag: crypto._id === 'xrp@ripple' ? parsed.destinationTag : undefined,
+                destinationTag: ChangellyExchange.EXTRA_ID.includes(crypto._id) ? parsed.destinationTag : undefined,
               },
               params: {
                 cryptoId: crypto._id,

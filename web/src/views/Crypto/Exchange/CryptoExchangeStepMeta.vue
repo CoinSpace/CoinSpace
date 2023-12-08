@@ -75,7 +75,6 @@ export default {
         v-model="extraId"
         :label="$t('Extra ID')"
         :placeholder="$t('(optional)')"
-        :info="$t('Extra ID')"
         :error="error"
       />
     </CsFormGroup>

@@ -1,6 +1,6 @@
 <script>
 import { errors } from '@coinspace/cs-common';
-import {
+import ChangellyExchange, {
   ExchangeDisabledError,
   InternalExchangeError,
 } from '../../../lib/account/ChangellyExchange.js';
@@ -115,7 +115,7 @@ export default {
             address: this.address,
             alias: this.alias,
           });
-          if (this.storage.to.crypto._id === 'xrp@ripple') {
+          if (ChangellyExchange.EXTRA_ID.includes(this.storage.to.crypto._id)) {
             this.next('meta');
           } else {
             this.next('confirm');

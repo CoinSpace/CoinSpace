@@ -38,6 +38,18 @@ export default class ChangellyExchange {
   static STATUS_REFUNDED = Symbol('REFUNDED');
   static STATUS_HOLD = Symbol('HOLD');
 
+  static EXTRA_ID = [
+    'xrp@ripple',
+    'stellar@stellar',
+    'eos@eos',
+    'binance-coin@binance-chain',
+    'monero@monero',
+    'ardor@ardor',
+    'nem@nem',
+    'stacks@stacks',
+    'iost@iost',
+  ];
+
   constructor({ request, account }) {
     if (!request) throw new TypeError('request is required');
     if (!account) throw new TypeError('account is required');

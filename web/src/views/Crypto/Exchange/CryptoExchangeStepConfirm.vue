@@ -1,9 +1,12 @@
 <script>
 import CsStep from '../../../components/CsStep.vue';
 import CsTransactionConfirm from '../../../components/CsTransactionConfirm.vue';
-import { InternalExchangeError } from '../../../lib/account/ChangellyExchange.js';
 import MainLayout from '../../../layouts/MainLayout.vue';
+
 import { walletSeed } from '../../../lib/mixins.js';
+import ChangellyExchange, {
+  InternalExchangeError,
+} from '../../../lib/account/ChangellyExchange.js';
 
 import * as EOSErrors from '@coinspace/cs-eos-wallet/errors';
 
@@ -31,8 +34,9 @@ export default {
             address: this.storage.address === 'your wallet'
               ? this.$account.wallet(this.storage.to.crypto._id).address
               : this.storage.address,
-            extraId: (this.storage.address !== 'your wallet' && this.storage.to.crypto._id === 'xrp@ripple') ?
-              this.storage.extraId : undefined,
+            extraId: (this.storage.address !== 'your wallet'
+              && ChangellyExchange.EXTRA_ID.includes(this.storage.to.crypto._id))
+              ? this.storage.extraId : undefined,
             refundAddress: this.$wallet.address,
           });
           let { depositAddress } = exchange;
