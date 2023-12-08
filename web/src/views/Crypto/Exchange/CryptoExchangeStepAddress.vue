@@ -22,7 +22,6 @@ import QrIcon from '../../../assets/svg/qr.svg';
 import WalletSmallIcon from '../../../assets/svg/walletSmall.svg';
 
 import { onShowOnHide } from '../../../lib/mixins.js';
-import { parseCryptoURI } from '../../../lib/cryptoURI.js';
 import {
   cryptoSubtitle,
   isQrScanAvailable,
@@ -53,9 +52,9 @@ export default {
       console.error(this.args.error);
       this.error = this.$t('Invalid address');
     }
-    if (this.storage.initial?.address) {
-      this.addressOrAlias = this.storage.initial.address;
-      this.storage.initial.address = undefined;
+    if (this.storage.temp?.address) {
+      this.addressOrAlias = this.storage.temp.address;
+      this.storage.temp.address = undefined;
     }
     this.isQrScanAvailable = await isQrScanAvailable();
   },
@@ -116,7 +115,11 @@ export default {
             address: this.address,
             alias: this.alias,
           });
-          this.next('confirm');
+          if (this.storage.to.crypto._id === 'xrp@ripple') {
+            this.next('meta');
+          } else {
+            this.next('confirm');
+          }
         } catch (err) {
           if (err instanceof errors.EmptyAddressError) {
             this.error = this.$t('Address should not be empty');

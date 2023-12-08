@@ -161,10 +161,11 @@ async function estimateV4(from, to, value) {
   };
 }
 
-async function validateAddress(address, id) {
+async function validateAddress(address, id, extraId) {
   const item = getCrypto(id);
   const { result: data } = await request('validateAddress', {
     address,
+    extraId,
     currency: item.changelly.ticker,
   });
   return {
@@ -172,7 +173,7 @@ async function validateAddress(address, id) {
   };
 }
 
-async function createTransaction(from, to, amountFrom, address, refundAddress) {
+async function createTransaction(from, to, amountFrom, address, refundAddress, extraId) {
   const fromCrypto = getCrypto(from);
   const toCrypto = getCrypto(to);
   const data = await request('createTransaction', {
@@ -180,6 +181,7 @@ async function createTransaction(from, to, amountFrom, address, refundAddress) {
     to: toCrypto.changelly.ticker,
     amountFrom,
     address,
+    extraId,
     refundAddress,
   });
   if (!data.result) {

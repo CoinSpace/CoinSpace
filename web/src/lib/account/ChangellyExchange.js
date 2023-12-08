@@ -150,7 +150,7 @@ export default class ChangellyExchange {
     };
   }
 
-  async createExchange({ from, to, amount, address, refundAddress }) {
+  async createExchange({ from, to, amount, address, extraId, refundAddress }) {
     try {
       const exchange = await this.#request({
         url: '/api/v4/exchange/changelly/transaction',
@@ -160,6 +160,7 @@ export default class ChangellyExchange {
           to,
           amount: amount.toString(),
           address,
+          extraId,
           refundAddress,
         },
         seed: 'device',
@@ -188,7 +189,7 @@ export default class ChangellyExchange {
     await this.#storage.save();
   }
 
-  async validateAddress({ to, address }) {
+  async validateAddress({ to, address, extraId }) {
     if (!address) {
       throw new errors.EmptyAddressError();
     }
@@ -198,6 +199,7 @@ export default class ChangellyExchange {
       params: {
         crypto: to,
         address: encodeURIComponent(address),
+        extra: extraId,
       },
       seed: 'device',
     });

@@ -17,22 +17,22 @@ export default {
     scan({ uri }) {
       try {
         const parsed = parseCryptoURI(uri);
-        const initial = {
+        const temp = {
           address: parsed.address,
         };
         if (parsed.amount) {
           try {
-            initial.amount = Amount.fromString(parsed.amount, this.$wallet.crypto.decimals);
+            temp.amount = Amount.fromString(parsed.amount, this.$wallet.crypto.decimals);
           } catch (err) {
             console.error(err);
           }
         }
         if (parsed.destinationTag && this.$wallet.crypto._id === 'xrp@ripple') {
-          initial.meta = {
+          temp.meta = {
             destinationTag: parsed.destinationTag,
           };
         }
-        this.updateStorage({ initial });
+        this.updateStorage({ temp });
         this.back();
       } catch (error) {
         this.back({ error });

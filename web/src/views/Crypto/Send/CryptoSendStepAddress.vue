@@ -42,9 +42,9 @@ export default {
       console.error(this.args.error);
       this.error = this.$t('Invalid address');
     }
-    if (this.storage.initial?.address) {
-      this.addressOrAlias = this.storage.initial.address;
-      this.storage.initial.address = undefined;
+    if (this.storage.temp?.address) {
+      this.addressOrAlias = this.storage.temp.address;
+      this.storage.temp.address = undefined;
     }
     this.isQrScanAvailable = await isQrScanAvailable();
   },

@@ -294,6 +294,8 @@ paths:
                   $ref: '#/components/schemas/NumberString'
                 address:
                   $ref: '#/components/schemas/AnyCryptoAddress'
+                extraId:
+                  $ref: '#/components/schemas/NullableString256'
                 refundAddress:
                   $ref: '#/components/schemas/NullableCryptoAddress'
               required:
@@ -357,6 +359,7 @@ paths:
         - $ref: '#/components/parameters/deviceId'
         - $ref: '#/components/parameters/cryptoId'
         - $ref: '#/components/parameters/address'
+        - $ref: '#/components/parameters/changellyExtraId'
       security:
         - deviceSignature: []
       responses:
@@ -1319,6 +1322,13 @@ components:
         $ref: '#/components/schemas/Arch'
       required: true
       description: App architecture
+    changellyExtraId:
+      in: query
+      name: extra
+      required: false
+      description: Changelly extraId
+      schema:
+        $ref: '#/components/schemas/NullableString256'
     changellyTransactionIds:
       in: query
       name: transactions

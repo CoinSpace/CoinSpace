@@ -158,6 +158,11 @@ export default {
         :value="transaction.meta?.memo"
         :label="$t('Memo')"
       />
+      <CsFormTextareaReadonly
+        v-if="transaction.extraId"
+        :value="transaction.extraId"
+        :label="$t('Extra ID')"
+      />
     </template>
   </CsFormGroup>
 

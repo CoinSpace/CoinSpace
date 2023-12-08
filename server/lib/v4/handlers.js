@@ -288,7 +288,7 @@ export async function changellyEstimate(req, res) {
 }
 
 export async function changellyValidateAddress(req, res) {
-  const data = await changelly.validateAddress(req.query.address, req.query.crypto);
+  const data = await changelly.validateAddress(req.query.address, req.query.crypto, req.query.extra);
   res.status(200).send(data);
 }
 
@@ -298,7 +298,8 @@ export async function changellyCreateTransaction(req, res) {
     req.body.to,
     req.body.amount,
     req.body.address,
-    req.body.refundAddress
+    req.body.refundAddress,
+    req.body.extraId
   );
   res.status(200).send(data);
 }

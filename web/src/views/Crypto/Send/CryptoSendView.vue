@@ -23,24 +23,24 @@ export default {
     this.stepsKey++;
   },
   data() {
-    const initial = {};
+    const temp = {};
     if (this.$route.query.address) {
-      initial.address = this.$route.query.address;
+      temp.address = this.$route.query.address;
     }
     if (this.$route.query.amount) {
       try {
-        initial.amount = Amount.fromString(this.$route.query.amount, this.$wallet.crypto.decimals);
+        temp.amount = Amount.fromString(this.$route.query.amount, this.$wallet.crypto.decimals);
       } catch (err) {
         console.error(err);
       }
     }
     if (this.$route.query.destinationTag && this.$wallet.crypto._id === 'xrp@ripple') {
-      initial.meta = {
+      temp.meta = {
         destinationTag: this.$route.query.destinationTag,
       };
     }
     return {
-      storage: { initial },
+      storage: { temp },
       stepsKey: 0,
     };
   },

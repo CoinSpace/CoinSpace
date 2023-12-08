@@ -23,9 +23,9 @@ export default {
   extends: CsStep,
   mixins: [onShowOnHide],
   onShow() {
-    if (this.storage.initial?.amount) {
-      this.amountValue = this.storage.initial.amount;
-      this.storage.initial.amount = undefined;
+    if (this.storage.temp?.amount) {
+      this.amountValue = this.storage.temp.amount;
+      this.storage.temp.amount = undefined;
     }
   },
   data() {

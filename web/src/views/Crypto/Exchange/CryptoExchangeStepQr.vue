@@ -15,15 +15,15 @@ export default {
     scan({ uri }) {
       try {
         const parsed = parseCryptoURI(uri);
-        const initial = {
+        const temp = {
           address: parsed.address,
         };
         if (parsed.destinationTag) {
-          initial.meta = {
+          temp.meta = {
             destinationTag: parsed.destinationTag,
           };
         }
-        this.updateStorage({ initial });
+        this.updateStorage({ temp });
         this.back();
       } catch (error) {
         this.back({ error });

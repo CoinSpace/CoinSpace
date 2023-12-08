@@ -22,9 +22,9 @@ export default {
   extends: CsStep,
   mixins: [onShowOnHide],
   onShow() {
-    if (this.storage.initial?.meta?.destinationTag) {
-      this.meta.destinationTag = this.storage.initial.meta.destinationTag;
-      this.storage.initial.meta.destinationTag = undefined;
+    if (this.storage.temp?.meta?.destinationTag) {
+      this.meta.destinationTag = this.storage.temp.meta.destinationTag;
+      this.storage.temp.meta.destinationTag = undefined;
     }
   },
   data() {

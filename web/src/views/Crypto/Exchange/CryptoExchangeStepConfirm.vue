@@ -31,6 +31,8 @@ export default {
             address: this.storage.address === 'your wallet'
               ? this.$account.wallet(this.storage.to.crypto._id).address
               : this.storage.address,
+            extraId: (this.storage.address !== 'your wallet' && this.storage.to.crypto._id === 'xrp@ripple') ?
+              this.storage.extraId : undefined,
             refundAddress: this.$wallet.address,
           });
           let { depositAddress } = exchange;
