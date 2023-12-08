@@ -129,16 +129,24 @@ export default class ChangellyExchange {
     if (amount.value <= 0n) {
       throw new errors.AmountError('Invalid amount');
     }
-    const estimation = await this.#request({
-      url: '/api/v4/exchange/changelly/estimate',
-      method: 'get',
-      params: {
-        from,
-        to,
-        amount: amount.toString(),
-      },
-      seed: 'device',
-    });
+    let estimation;
+    try {
+      estimation = await this.#request({
+        url: '/api/v4/exchange/changelly/estimate',
+        method: 'get',
+        params: {
+          from,
+          to,
+          amount: amount.toString(),
+        },
+        seed: 'device',
+      });
+    } catch (err) {
+      if (err instanceof errors.NodeError) {
+        throw new InternalExchangeError('Unable to estimate', { cause: err });
+      }
+      throw err;
+    }
     const cryptoFrom = this.#account.cryptoDB.get(from);
     if (estimation.error) {
       if (estimation.error === 'AmountError') {
