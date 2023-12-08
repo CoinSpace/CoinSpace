@@ -42,6 +42,7 @@ export default {
           address: this.storage.address,
           extraId: this.extraId,
         });
+        this.error = undefined;
         this.updateStorage({
           extraId: this.extraId,
         });
