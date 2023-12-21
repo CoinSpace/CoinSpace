@@ -18,6 +18,11 @@ export async function getCryptos(_, res) {
   res.status(200).send(list);
 }
 
+export async function getMarket(req, res) {
+  const data = await cryptos.getMarket(req.query.ids, req.query.currency);
+  res.status(200).send(data);
+}
+
 export async function getFees(req, res) {
   const { items } = await fee.getFees(req.query.crypto);
   res.status(200).send(items);

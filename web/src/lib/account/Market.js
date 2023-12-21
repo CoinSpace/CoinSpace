@@ -17,12 +17,12 @@ export default class Market {
   #coingeckoAPI;
   #coingeckoIDs = [];
 
-  constructor({ cryptoDB }) {
+  constructor({ cryptoDB, request }) {
     if (!cryptoDB) {
       throw new TypeError('cryptoDB is required');
     }
     this.#cryptoDB = cryptoDB;
-    this.#coingeckoAPI = new CoingeckoAPI();
+    this.#coingeckoAPI = new CoingeckoAPI({ request });
   }
 
   async init({ cryptos, currency }) {

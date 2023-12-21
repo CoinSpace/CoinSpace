@@ -96,6 +96,7 @@ async function updatePrices() {
         params: {
           ids: cryptos.map(item => item._id).filter(item => !!item).join(','),
           vs_currencies: CURRENCIES.join(','),
+          include_24hr_change: true,
         },
       });
       logs.push(`crypto update prices - load prices from coingecko (chunk #${page}) - finish`);
@@ -105,8 +106,11 @@ async function updatePrices() {
 
       for (const coingeckoId in data) {
         const prices = {};
-        for (const currency in data[coingeckoId]) {
-          prices[currency.toUpperCase()] = data[coingeckoId][currency];
+        const change = {};
+        for (const currency of CURRENCIES) {
+          const key = currency.toLowerCase();
+          prices[currency] = data[coingeckoId][key];
+          change[currency] = data[coingeckoId][`${key}_24h_change`];
         }
         operations.push({
           updateMany: {
@@ -114,6 +118,7 @@ async function updatePrices() {
             update: {
               $set: {
                 prices,
+                change,
                 'updated_at.prices': updatedAt,
               },
             },
@@ -339,6 +344,32 @@ async function getTickersPublic(ids) {
   }).filter(Boolean);
 }
 
+async function getMarket(coingeckoIds, currency) {
+  const data = await db.collection(COLLECTION)
+    .aggregate([{
+      $match: {
+        'coingecko.id': { $in: coingeckoIds },
+        // 7 days ago
+        'updated_at.prices': { $gte: new Date(Date.now() - (7 * 24 * 60 * 60 * 1000)) },
+      },
+    }, {
+      $sort: { 'updated_at.prices': -1 },
+    }, {
+      $group: {
+        _id: '$coingecko.id',
+        prices: { $first: '$prices' },
+        change: { $first: '$change' },
+      },
+    }]).toArray();
+  return data.map((item) => {
+    return {
+      id: item._id,
+      current_price: item.prices[currency],
+      price_change_percentage_24h_in_currency: item.change[currency],
+    };
+  });
+}
+
 export default {
   sync,
   updatePrices,
@@ -348,4 +379,5 @@ export default {
   getTicker,
   getTickers,
   getTickersPublic,
+  getMarket,
 };

@@ -396,6 +396,26 @@ paths:
                 $ref: '#/components/schemas/FeeList'
         default:
           $ref: '#/components/responses/GeneralError'
+  /market:
+    get:
+      x-eov-operation-id: getMarket
+      x-eov-operation-handler: handlers
+      description: Get market data
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/changellyIds'
+        - $ref: '#/components/parameters/changellyCurrency'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Market data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Market'
+        default:
+          $ref: '#/components/responses/GeneralError'
   /mecto:
     get:
       x-eov-operation-id: searchMecto
@@ -1094,6 +1114,21 @@ components:
       format: float
       minimum: -180
       maximum: 180
+    Market:
+      type: array
+      maxItems: 250
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          id:
+            $ref: '#/components/schemas/AnyString256'
+          current_price:
+            type: number
+          price_change_percentage_24h_in_currency:
+            type: number
+        required:
+          - id
     Mecto:
       type: object
       additionalProperties: false
@@ -1322,6 +1357,13 @@ components:
         $ref: '#/components/schemas/Arch'
       required: true
       description: App architecture
+    changellyCurrency:
+      in: query
+      name: currency
+      description: Changelly currency
+      required: true
+      schema:
+        $ref: '#/components/schemas/AnyString256'
     changellyExtraId:
       in: query
       name: extra
@@ -1329,6 +1371,19 @@ components:
       description: Changelly extraId
       schema:
         $ref: '#/components/schemas/NullableString256'
+    changellyIds:
+      in: query
+      name: ids
+      description: Changelly crypto ids
+      required: true
+      style: form
+      explode: false
+      allowReserved: true
+      schema:
+        type: array
+        maxItems: 250
+        items:
+          $ref: '#/components/schemas/AnyString256'
     changellyTransactionIds:
       in: query
       name: transactions

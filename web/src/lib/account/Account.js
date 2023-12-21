@@ -234,6 +234,7 @@ export default class Account extends EventEmitter {
     });
     this.#market = new Market({
       cryptoDB: this.#cryptoDB,
+      request: this.request,
     });
     this.#mecto = new Mecto({
       request: this.request,
