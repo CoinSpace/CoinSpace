@@ -47,23 +47,6 @@ export default class CoingeckoAPI {
     });
   }
 
-  async price(ids, currencies) {
-    let data = {};
-    for (let i = 0; i < Math.ceil(ids.length / PRICE_PER_PAGE); i++) {
-      data = {
-        ...data,
-        ...await this.#api({
-          url: 'simple/price',
-          params: {
-            ids: ids.slice(PRICE_PER_PAGE * i, PRICE_PER_PAGE * (i + 1)).join(','),
-            vs_currencies: currencies.join(','),
-          },
-        }),
-      };
-    }
-    return data;
-  }
-
   async #market(ids, currency) {
     try {
       return await this.#api({
