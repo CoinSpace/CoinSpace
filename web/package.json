@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@coinspace/crypto-db": "^1.7.14",
-    "@coinspace/cs-bitcoin-wallet": "^1.0.3",
+    "@coinspace/cs-bitcoin-wallet": "^1.1.0",
     "@coinspace/cs-cardano-wallet": "^2.0.0",
     "@coinspace/cs-common": "^1.1.1",
     "@coinspace/cs-eos-wallet": "^2.0.2",
@@ -39,7 +39,7 @@
     "@coinspace/cs-tron-wallet": "^2.0.0",
     "@coinspace/ed25519": "^0.0.1",
     "@noble/hashes": "^1.3.0",
-    "@scure/base": "^1.1.1",
+    "@scure/base": "^1.1.5",
     "@scure/bip39": "^1.2.0",
     "@sentry/browser": "^7.56.0",
     "@sentry/integrations": "^7.56.0",
