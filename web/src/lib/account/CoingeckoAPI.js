@@ -4,7 +4,6 @@ import axiosRetry from 'axios-retry';
 import pMemoize, { pMemoizeClear } from 'p-memoize';
 
 const MARKET_PER_PAGE = 250;
-const PRICE_PER_PAGE = 500;
 
 export default class CoingeckoAPI {
   #axios;
