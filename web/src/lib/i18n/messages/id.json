@@ -250,7 +250,7 @@
   "Use Touch ID instead of PIN.": "Gunakan Touch ID alih-alih PIN.",
   "Use your hardware key.": "Gunakan kunci perangkat keras Anda.",
   "Username already taken": "Nama pengguna sudah dipakai",
-  "Value is too big, maximum {amount} {symbol}": "Nilai terlalu besar, maksimal {amount} {symbol}",
+  "Value is too big, maximum {amount} {symbol} (incl. fee)": "Nilai terlalu besar, maksimal {amount} {symbol} (termasuk. biaya)",
   "Value is too small for this destination address, minimum {amount} {symbol}": "Nilai terlalu kecil untuk alamat tujuan ini, minimal {amount} {symbol}",
   "Value is too small, minimum {amount} {symbol}": "Nilai terlalu kecil, minimal {amount} {symbol}",
   "View Terms of Service": "Lihat Ketentuan Layanan",

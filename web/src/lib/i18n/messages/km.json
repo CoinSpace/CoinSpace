@@ -250,7 +250,7 @@
   "Use Touch ID instead of PIN.": "ប្រើ Touch ID ជំនួសឱ្យកូដ PIN ។",
   "Use your hardware key.": "ប្រើសោផ្នែករឹងរបស់អ្នក។",
   "Username already taken": "ឈ្មោះអ្នកប្រើត្រូវបានយករួចហើយ",
-  "Value is too big, maximum {amount} {symbol}": "តម្លៃធំពេក អតិបរមា {amount} {symbol}",
+  "Value is too big, maximum {amount} {symbol} (incl. fee)": "តម្លៃធំពេក អតិបរមា {amount} {symbol} (រួមទាំងកម្រៃសេវា)",
   "Value is too small for this destination address, minimum {amount} {symbol}": "តម្លៃតូចពេកសម្រាប់អាសយដ្ឋានគោលដៅនេះ អប្បបរមា {amount} {symbol}",
   "Value is too small, minimum {amount} {symbol}": "តម្លៃតូចពេក អប្បបរមា {amount} {symbol}",
   "View Terms of Service": "មើលលក្ខខណ្ឌនៃសេវាកម្ម",

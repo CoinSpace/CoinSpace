@@ -250,7 +250,7 @@
   "Use Touch ID instead of PIN.": "Используйте Touch ID вместо ПИН-кода.",
   "Use your hardware key.": "Используйте свой аппаратный ключ.",
   "Username already taken": "Имя пользователя уже занято",
-  "Value is too big, maximum {amount} {symbol}": "Значение слишком велико, максимум {amount} {symbol}",
+  "Value is too big, maximum {amount} {symbol} (incl. fee)": "Значение слишком велико, максимум {amount} {symbol} (вкл. комиссию)",
   "Value is too small for this destination address, minimum {amount} {symbol}": "Значение слишком мало для этого адреса назначения, минимум {amount} {symbol}",
   "Value is too small, minimum {amount} {symbol}": "Значение слишком мало, минимум {amount} {symbol}",
   "View Terms of Service": "Смотреть Условия обслуживания",

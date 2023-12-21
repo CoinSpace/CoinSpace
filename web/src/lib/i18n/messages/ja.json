@@ -250,7 +250,7 @@
   "Use Touch ID instead of PIN.": "PINの代わりにタッチ IDを使用してください。",
   "Use your hardware key.": "ハードウェアキーを使用してください。",
   "Username already taken": "ユーザー名はすでに使用されています",
-  "Value is too big, maximum {amount} {symbol}": "値が大きすぎる、最大値は {amount} {symbol}",
+  "Value is too big, maximum {amount} {symbol} (incl. fee)": "値が大きすぎる、最大値は {amount} {symbol} (手数料を含む)",
   "Value is too small for this destination address, minimum {amount} {symbol}": "値がこの宛先アドレスに対して小さすぎる、最小値は {amount} {symbol}",
   "Value is too small, minimum {amount} {symbol}": "値が小さすぎる、最小値 {amount} {symbol}",
   "View Terms of Service": "利用規約を見る",

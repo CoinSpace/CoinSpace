@@ -250,7 +250,7 @@
   "Use Touch ID instead of PIN.": "PIN yerine Dokunma Kimliği kullanın.",
   "Use your hardware key.": "Donanım anahtarınızı kullanın.",
   "Username already taken": "Kullanıcı adı daha önce alınmış",
-  "Value is too big, maximum {amount} {symbol}": "Değer çok büyük, maksimum {amount} {symbol}",
+  "Value is too big, maximum {amount} {symbol} (incl. fee)": "Değer çok büyük, maksimum {amount} {symbol} (işlem ücreti dahil)",
   "Value is too small for this destination address, minimum {amount} {symbol}": "Değer, bu hedef adres için çok küçük, minimum {amount} {symbol}",
   "Value is too small, minimum {amount} {symbol}": "Değer çok küçük, minimum {amount} {symbol}",
   "View Terms of Service": "Kullanım Koşulları'nı görüntüle",

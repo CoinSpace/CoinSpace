@@ -250,7 +250,7 @@
   "Use Touch ID instead of PIN.": "Bruk berørings-ID fremfor PIN.",
   "Use your hardware key.": "Bruk din maskinvarenøkkel.",
   "Username already taken": "Brukernavnet allerede tatt",
-  "Value is too big, maximum {amount} {symbol}": "Verdien er for høy, maksimalt {amount} {symbol}",
+  "Value is too big, maximum {amount} {symbol} (incl. fee)": "Verdien er for høy, maksimalt {amount} {symbol} (inkl. gebyr)",
   "Value is too small for this destination address, minimum {amount} {symbol}": "Verdien er for liten for denne destinasjonsadressen, minimum {amount} {symbol}",
   "Value is too small, minimum {amount} {symbol}": "Verdien er for liten, minimum {amount} {symbol}",
   "View Terms of Service": "Vis tjenestevilkår",

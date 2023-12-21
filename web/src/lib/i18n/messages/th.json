@@ -250,7 +250,7 @@
   "Use Touch ID instead of PIN.": "ใช้ Touch ID แทนรหัสผ่าน",
   "Use your hardware key.": "ใช้คีย์ฮาร์ดแวร์",
   "Username already taken": "ชื่อผู้ใช้นี้ถูกใช้ไปแล้ว",
-  "Value is too big, maximum {amount} {symbol}": "มูลค่ามากเกินไป สูงสุด {amount} {symbol}",
+  "Value is too big, maximum {amount} {symbol} (incl. fee)": "มูลค่ามากเกินไป สูงสุด {amount} {symbol} (รวมค่าธรรมเนียม)",
   "Value is too small for this destination address, minimum {amount} {symbol}": "มูลค่าน้อยเกินไปสำหรับที่อยู่ปลายทาง ขั้นต่ำ {amount} {symbol}",
   "Value is too small, minimum {amount} {symbol}": "มูลค่าน้อยเกินไป ขั้นต่ำ {amount} {symbol}",
   "View Terms of Service": "ดูข้อกำหนดในการให้บริการ",

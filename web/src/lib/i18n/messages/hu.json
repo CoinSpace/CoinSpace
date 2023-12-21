@@ -250,7 +250,7 @@
   "Use Touch ID instead of PIN.": "PIN helyett használja a Touch ID-t.",
   "Use your hardware key.": "Használja a hardver kulcsát.",
   "Username already taken": "A felhasználónév már foglalt",
-  "Value is too big, maximum {amount} {symbol}": "Az érték túl nagy, maximum {amount} {symbol}",
+  "Value is too big, maximum {amount} {symbol} (incl. fee)": "Az érték túl nagy, maximum {amount} {symbol} (díjjal együtt)",
   "Value is too small for this destination address, minimum {amount} {symbol}": "Az érték túl kicsi ehhez a desztinációs címhez, minimum {amount} {symbol}",
   "Value is too small, minimum {amount} {symbol}": "Az érték túl kicsi, minimum {amount} {symbol}",
   "View Terms of Service": "Felhasználási Feltételek megtekintése",

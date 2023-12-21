@@ -250,7 +250,7 @@
   "Use Touch ID instead of PIN.": "Скористайтесь Touch ID замість PIN-коду.",
   "Use your hardware key.": "Скористайтесь своїм апаратним ключем.",
   "Username already taken": "Це ім'я користувача вже зайнято",
-  "Value is too big, maximum {amount} {symbol}": "Значення завелике. Максимум {amount} {symbol}",
+  "Value is too big, maximum {amount} {symbol} (incl. fee)": "Значення завелике. Максимум {amount} {symbol} (включаючи комісію)",
   "Value is too small for this destination address, minimum {amount} {symbol}": "Значення замале для цієї адреси пункту призначення. Мінімум {amount} {symbol}",
   "Value is too small, minimum {amount} {symbol}": "Значення замале. Мінімум {amount} {symbol}",
   "View Terms of Service": "Переглянути Умови надання послуг",

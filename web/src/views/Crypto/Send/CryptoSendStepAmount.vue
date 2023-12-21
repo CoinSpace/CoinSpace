@@ -95,7 +95,7 @@ export default {
         return;
       }
       if (err instanceof errors.BigAmountError) {
-        this.error = this.$t('Value is too big, maximum {amount} {symbol}', {
+        this.error = this.$t('Value is too big, maximum {amount} {symbol} (incl. fee)', {
           amount: err.amount,
           symbol: this.$wallet.crypto.symbol,
         });

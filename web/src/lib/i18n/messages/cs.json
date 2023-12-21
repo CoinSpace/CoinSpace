@@ -250,7 +250,7 @@
   "Use Touch ID instead of PIN.": "Namísto PIN použijte dotykové ID.",
   "Use your hardware key.": "Použijte svůj hardwarový klíč",
   "Username already taken": "Toto uživatelské jméno je již využíváno",
-  "Value is too big, maximum {amount} {symbol}": "Hodnota je příliš velká, maximum je {amount} {symbol}",
+  "Value is too big, maximum {amount} {symbol} (incl. fee)": "Hodnota je příliš velká, maximum je {amount} {symbol} (vč. poplatek)",
   "Value is too small for this destination address, minimum {amount} {symbol}": "Hodnota je pro tuto cílovou adresu příliš malá, minimum je {amount} {symbol}",
   "Value is too small, minimum {amount} {symbol}": "Hodnota je příliš malá, minimum je {amount} {symbol}",
   "View Terms of Service": "Zobrazit podmínky služby",

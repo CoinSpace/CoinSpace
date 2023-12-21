@@ -250,7 +250,7 @@
   "Use Touch ID instead of PIN.": "Utilizați Touch ID în locul codului PIN.",
   "Use your hardware key.": "Utilizați codul hardware.",
   "Username already taken": "Acest nume de utilizator este utilizat deja",
-  "Value is too big, maximum {amount} {symbol}": "Valoarea este prea mare, maximum {amount} {symbol}",
+  "Value is too big, maximum {amount} {symbol} (incl. fee)": "Valoarea este prea mare, maximum {amount} {symbol} (inclusiv taxa)",
   "Value is too small for this destination address, minimum {amount} {symbol}": "Valoarea este prea mică pentru această adresă de destinație, minimum {amount} {symbol}",
   "Value is too small, minimum {amount} {symbol}": "Valoarea este prea mică, minimum {amount} {symbol}",
   "View Terms of Service": "Consultați Condițiile de utilizare",

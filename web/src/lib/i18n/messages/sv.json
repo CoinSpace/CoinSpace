@@ -250,7 +250,7 @@
   "Use Touch ID instead of PIN.": "Använd TouchID istället för PIN.",
   "Use your hardware key.": "Använd din hårdvarunyckel.",
   "Username already taken": "Användarnamn redan taget",
-  "Value is too big, maximum {amount} {symbol}": "Värdet är för stort, maximalt {amount} {symbol}",
+  "Value is too big, maximum {amount} {symbol} (incl. fee)": "Värdet är för stort, maximalt {amount} {symbol} (inkl. avgift)",
   "Value is too small for this destination address, minimum {amount} {symbol}": "Värdet är för litet för denna destinationsadress, minsta {amount} {symbol}",
   "Value is too small, minimum {amount} {symbol}": "Värdet är för litet, minsta {amount} {symbol}",
   "View Terms of Service": "Se Användarvillkoren",

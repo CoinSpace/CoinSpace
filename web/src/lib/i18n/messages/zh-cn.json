@@ -250,7 +250,7 @@
   "Use Touch ID instead of PIN.": "使用触控ID而不是PIN码。",
   "Use your hardware key.": "使用您的硬件密钥。",
   "Username already taken": "用户名已被占用",
-  "Value is too big, maximum {amount} {symbol}": "值太大，最大值 {amount} {symbol}",
+  "Value is too big, maximum {amount} {symbol} (incl. fee)": "值太大，最大值 {amount} {symbol}（含费用）",
   "Value is too small for this destination address, minimum {amount} {symbol}": "值对于目目标地址太小，最小值 {amount} {symbol}",
   "Value is too small, minimum {amount} {symbol}": "值太小，最小值 {amount} {symbol}",
   "View Terms of Service": "查看服务条款",

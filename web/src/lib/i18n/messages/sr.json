@@ -250,7 +250,7 @@
   "Use Touch ID instead of PIN.": "Koristite Touch ID umesto PIN-a.",
   "Use your hardware key.": "Koristite svoj hardverski ključ.",
   "Username already taken": "Korisničko ime je već uzeto",
-  "Value is too big, maximum {amount} {symbol}": "Vrednost je prevelika, maksimalno{amount} {symbol}",
+  "Value is too big, maximum {amount} {symbol} (incl. fee)": "Vrednost je prevelika, maksimalno{amount} {symbol} (uključujući proviziju)",
   "Value is too small for this destination address, minimum {amount} {symbol}": "Vrednost je premala za ovu odredišnu adresu, minimalno{amount} {symbol}",
   "Value is too small, minimum {amount} {symbol}": "Vrednost je premala, minimalno{amount} {symbol}",
   "View Terms of Service": "Pogledaj Pravilnik",

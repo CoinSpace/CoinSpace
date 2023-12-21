@@ -250,7 +250,7 @@
   "Use Touch ID instead of PIN.": "Gamitin ang Touch ID sa halip na PIN.",
   "Use your hardware key.": "Gamitin ang hardware key mo.",
   "Username already taken": "Nakuha na ang username",
-  "Value is too big, maximum {amount} {symbol}": "Masyadong malaki ang halaga, pinakamataas {amount} {symbol}",
+  "Value is too big, maximum {amount} {symbol} (incl. fee)": "Masyadong malaki ang halaga, pinakamataas {amount} {symbol} (incl. fee)",
   "Value is too small for this destination address, minimum {amount} {symbol}": "Masyadong maliit ang halaga para sa patutunguhang address na ito, pinakamababa {amount} {symbol}",
   "Value is too small, minimum {amount} {symbol}": "Masyadong maliit ang value, pinakamababa {amount} {symbol}",
   "View Terms of Service": "Tingnan ang Mga Tuntunin ng Serbisyo",

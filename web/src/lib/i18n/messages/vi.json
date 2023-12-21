@@ -250,7 +250,7 @@
   "Use Touch ID instead of PIN.": "Sử dụng Touch ID thay vì dùng mã PIN.",
   "Use your hardware key.": "Dùng khóa phần cứng.",
   "Username already taken": "Tên đăng nhập đã có người dùng",
-  "Value is too big, maximum {amount} {symbol}": "Giá trị quá lớn, giá trị tối đa {amount} {symbol}",
+  "Value is too big, maximum {amount} {symbol} (incl. fee)": "Giá trị quá lớn, giá trị tối đa {amount} {symbol} (tính cả phí)",
   "Value is too small for this destination address, minimum {amount} {symbol}": "Giá trị quá nhỏ đối với địa chỉ nhận này, giá trị tối thiểu {amount} {symbol}",
   "Value is too small, minimum {amount} {symbol}": "Giá trị quá nhỏ, giá trị tối thiểu {amount} {symbol}",
   "View Terms of Service": "Xem Điều khoản dịch vụ",

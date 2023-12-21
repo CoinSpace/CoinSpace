@@ -250,7 +250,7 @@
   "Use Touch ID instead of PIN.": "Verwenden Sie Touch ID statt PIN.",
   "Use your hardware key.": "Verwenden Sie Ihren Hardware-Schlüssel.",
   "Username already taken": "Benutzername bereits vergeben",
-  "Value is too big, maximum {amount} {symbol}": "Wert ist zu groß, maximal {amount} {symbol}",
+  "Value is too big, maximum {amount} {symbol} (incl. fee)": "Wert ist zu groß, maximal {amount} {symbol} (inkl. Gebühr)",
   "Value is too small for this destination address, minimum {amount} {symbol}": "Wert ist zu klein für diese Zieladresse, mindestens {amount} {symbol}",
   "Value is too small, minimum {amount} {symbol}": "Wert ist zu klein, mindestens {amount} {symbol}",
   "View Terms of Service": "Nutzungsbedingungen ansehen",

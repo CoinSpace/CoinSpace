@@ -250,7 +250,7 @@
   "Use Touch ID instead of PIN.": "Gebruik Touch-ID in plaats van pincode.",
   "Use your hardware key.": "Gebruik uw hardwaresleutel.",
   "Username already taken": "Gebruikersnaam al in gebruik",
-  "Value is too big, maximum {amount} {symbol}": "Waarde is te hoog, maximaal {amount} {symbol}",
+  "Value is too big, maximum {amount} {symbol} (incl. fee)": "Waarde is te hoog, maximaal {amount} {symbol} (incl. kosten)",
   "Value is too small for this destination address, minimum {amount} {symbol}": "Waarde is te laag voor dit bestemmingsadres, minimaal {amount} {symbol}",
   "Value is too small, minimum {amount} {symbol}": "Waarde is te laag, minimaal {amount} {symbol}",
   "View Terms of Service": "Bekijk gebruiksvoorwaarden",
