@@ -275,10 +275,10 @@
   "for quick access": "för snabb åtkomst",
   "max": "max",
   "slow": "långsam",
-  "{crypto} is based on {platform}, which isn't in your wallet yet, so it will also be added.": "{crypto} är baserad på {plattform}, som inte finns i din plånbok ännu, så den kommer också att läggas till.",
+  "{crypto} is based on {platform}, which isn't in your wallet yet, so it will also be added.": "{crypto} är baserad på {platform}, som inte finns i din plånbok ännu, så den kommer också att läggas till.",
   "{decimals} decimals": "{decimals} decimaler",
   "{name} node error. Please try again later.": "{name} nodfel. Var vänlig prova igen senare.",
-  "{sign}{fee} {symbol} fee": "{tecken}{avgift} {symbol} avgift",
+  "{sign}{fee} {symbol} fee": "{sign}{fee} {symbol} avgift",
   "{token} already added.": "{token} har redan lagts till.",
-  "~{time} min": "~{tid} min"
+  "~{time} min": "~{time} min"
 }
