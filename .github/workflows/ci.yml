@@ -241,7 +241,7 @@ jobs:
           VITE_DISTRIBUTION: ${{ matrix.VITE_DISTRIBUTION }}
           VITE_SITE_URL: ${{ secrets.SITE_URL }}
           VITE_SENTRY_DSN: ${{ secrets[matrix.SENTRY_DSN_KEY] }}
-          VITE_SENTRY_ENVIRONMENT: ${{ secrets.SENTRY_ENVIRONMENT }}
+          VITE_SENTRY_ENVIRONMENT: ${{ github.ref == 'refs/heads/master' && 'production' || 'development' }}
           VITE_CHANGELLY_REF: ${{ secrets.CHANGELLY_REF }}
           VITE_MOONPAY_API_KEY: ${{ secrets.MOONPAY_API_KEY }}
           VITE_ZENDESK_APP_ID: ${{ secrets.ZENDESK_APP_ID }}
