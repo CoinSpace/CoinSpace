@@ -9,6 +9,7 @@ export default [
   { _id: 'ethereum@ethereum', scheme: 'ethereum' },
   { _id: 'litecoin@litecoin', scheme: 'litecoin' },
   { _id: 'monero@monero', scheme: 'monero' },
+  { _id: 'solana@solana', scheme: 'solana' },
   { _id: 'stellar@stellar', scheme: 'stellar' },
   { _id: 'xrp@ripple', scheme: 'ripple' }
 ];
