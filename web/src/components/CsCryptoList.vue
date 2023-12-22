@@ -1,6 +1,8 @@
 <script>
 import CsCryptoLogo from './CsCryptoLogo.vue';
 
+import debounce from 'p-debounce';
+
 export default {
   components: {
     CsCryptoLogo,
@@ -31,6 +33,11 @@ export default {
   data() {
     return {};
   },
+  methods: {
+    select: debounce(async function(id) {
+      this.$emit('select', id);
+    }, 300),
+  },
 };
 </script>
 
@@ -54,7 +61,7 @@ export default {
           '&__item--selected': selected === item.crypto._id,
           '&__item--columns': columns === true,
         }"
-        @click="$emit('select', item.crypto._id)"
+        @click="select(item.crypto._id)"
       >
         <CsCryptoLogo
           class="&__logo"
