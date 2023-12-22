@@ -26,7 +26,7 @@
     "lint:style": "stylelint '**/*.{vue,scss}'"
   },
   "dependencies": {
-    "@coinspace/crypto-db": "^1.7.14",
+    "@coinspace/crypto-db": "^1.7.15",
     "@coinspace/cs-bitcoin-wallet": "^1.1.0",
     "@coinspace/cs-cardano-wallet": "^2.0.0",
     "@coinspace/cs-common": "^1.1.1",
