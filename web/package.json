@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@coinspace/crypto-db": "^1.7.15",
-    "@coinspace/cs-bitcoin-wallet": "^1.1.0",
+    "@coinspace/cs-bitcoin-wallet": "^1.1.1",
     "@coinspace/cs-cardano-wallet": "^2.0.0",
     "@coinspace/cs-common": "^1.1.1",
     "@coinspace/cs-eos-wallet": "^2.0.2",
