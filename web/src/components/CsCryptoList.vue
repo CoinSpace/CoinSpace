@@ -36,7 +36,7 @@ export default {
   methods: {
     select: debounce(async function(id) {
       this.$emit('select', id);
-    }, 300),
+    }, 300, { before: true }),
   },
 };
 </script>
