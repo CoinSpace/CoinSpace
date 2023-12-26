@@ -403,8 +403,8 @@ paths:
       description: Get market data
       parameters:
         - $ref: '#/components/parameters/deviceId'
-        - $ref: '#/components/parameters/changellyIds'
-        - $ref: '#/components/parameters/changellyCurrency'
+        - $ref: '#/components/parameters/coingeckoIds'
+        - $ref: '#/components/parameters/coingeckoCurrency'
       security:
         - deviceSignature: []
       responses:
@@ -1357,13 +1357,6 @@ components:
         $ref: '#/components/schemas/Arch'
       required: true
       description: App architecture
-    changellyCurrency:
-      in: query
-      name: currency
-      description: Changelly currency
-      required: true
-      schema:
-        $ref: '#/components/schemas/AnyString256'
     changellyExtraId:
       in: query
       name: extra
@@ -1371,19 +1364,6 @@ components:
       description: Changelly extraId
       schema:
         $ref: '#/components/schemas/NullableString256'
-    changellyIds:
-      in: query
-      name: ids
-      description: Changelly crypto ids
-      required: true
-      style: form
-      explode: false
-      allowReserved: true
-      schema:
-        type: array
-        maxItems: 250
-        items:
-          $ref: '#/components/schemas/AnyString256'
     changellyTransactionIds:
       in: query
       name: transactions
@@ -1395,6 +1375,26 @@ components:
       schema:
         type: array
         maxItems: 10
+        items:
+          $ref: '#/components/schemas/AnyString256'
+    coingeckoCurrency:
+      in: query
+      name: currency
+      description: Coingecko currency
+      required: true
+      schema:
+        $ref: '#/components/schemas/AnyString256'
+    coingeckoIds:
+      in: query
+      name: ids
+      description: Coingecko crypto ids
+      required: true
+      style: form
+      explode: false
+      allowReserved: true
+      schema:
+        type: array
+        maxItems: 250
         items:
           $ref: '#/components/schemas/AnyString256'
     countryCode:
