@@ -12,6 +12,11 @@ export default {
     LogoIcon,
   },
   extends: CsStep,
+  computed: {
+    copyright() {
+      return `© ${new Date().getFullYear()} CoinSpace`;
+    },
+  },
 };
 </script>
 
@@ -36,9 +41,8 @@ export default {
         </CsButton>
       </CsButtonGroup>
     </div>
-    <!-- eslint-disable-next-line @intlify/vue-i18n/no-raw-text -->
     <div class="&__copyright">
-      © 2023 CoinSpace
+      {{ copyright }}
     </div>
   </div>
 </template>
