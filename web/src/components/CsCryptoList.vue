@@ -74,7 +74,7 @@ export default {
               {{ item.title }}
             </div>
             <div
-              v-if="item.balanceRound !== undefined"
+              v-if="!$hidden && item.balanceRound !== undefined"
               class="&__title"
               :title="item.balanceRound"
             >
@@ -89,7 +89,7 @@ export default {
               {{ item.subtitle }}
             </div>
             <div
-              v-if="item.balanceFiat"
+              v-if="!$hidden && item.balanceFiat"
               class="&__subtitle"
             >
               {{ $n(item.balanceFiat, 'currency', {

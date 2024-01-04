@@ -115,7 +115,8 @@
       "@intlify/vue-i18n/no-raw-text": [
         "error",
         {
-          "ignorePattern": "^[+-0-9()]$"
+          "ignorePattern": "^[+-0-9()]$",
+          "ignoreText": ["*****"]
         }
       ]
     },

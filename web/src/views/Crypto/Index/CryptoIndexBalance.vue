@@ -37,19 +37,22 @@ export default {
       {{ $t('Balance') }}
     </div>
 
-    <div class="&__balance">
+    <div
+      class="&__balance"
+      @click="$account.toggleHiddenBalance()"
+    >
       <div
         class="&__amount"
         :title="amount"
       >
-        {{ amount }}
+        {{ $hidden ? '*****' : amount }}
       </div>
       <div
         v-if="$wallet.crypto.coingecko"
         class="&__fiat"
         :title="fiat"
       >
-        {{ fiat }}
+        {{ $hidden ? '*****' : fiat }}
       </div>
     </div>
   </div>
@@ -72,6 +75,7 @@ export default {
       align-items: baseline;
       justify-content: space-between;
       column-gap: $spacing-md;
+      cursor: pointer;
     }
 
     &__amount {

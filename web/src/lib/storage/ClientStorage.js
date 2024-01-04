@@ -177,6 +177,18 @@ export default class ClientStorage {
   }
 
   /**
+   * Hide/show balance
+   */
+
+  getHiddenBalance() {
+    return this.#getItem('_cs_hidden_balance', { type: OBJECT });
+  }
+
+  toggleHiddenBalance() {
+    this.#setItem('_cs_hidden_balance', !this.getHiddenBalance(), { type: OBJECT });
+  }
+
+  /**
    * Clean All!
    */
 

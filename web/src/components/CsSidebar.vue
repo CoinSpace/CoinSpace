@@ -80,8 +80,9 @@ export default {
       <div
         class="&__portfolio-amount"
         :class="`&__portfolio-amount--${portfolioBalanceSize}`"
+        @click="$account.toggleHiddenBalance()"
       >
-        {{ $n(portfolioBalance, 'currency', {
+        {{ $hidden ? '*****' : $n(portfolioBalance, 'currency', {
           currency: $currency,
         }) }}
       </div>
@@ -91,13 +92,18 @@ export default {
       <div
         class="&__portfolio-change"
         :class="{
-          '&__portfolio-change--positive': portfolioBalanceChange > 0,
-          '&__portfolio-change--negative': portfolioBalanceChange < 0
+          '&__portfolio-change--positive': !$hidden && portfolioBalanceChange > 0,
+          '&__portfolio-change--negative': !$hidden && portfolioBalanceChange < 0
         }"
       >
-        {{ $n(portfolioBalanceChange, 'currency', {
-          currency: $currency,
-        }) }} ({{ $n(portfolioBalanceChangePercent, 'percent') }}) {{ $t('24h') }}
+        <template v-if="!$hidden">
+          {{ $n(portfolioBalanceChange, 'currency', {
+            currency: $currency,
+          }) }} ({{ $n(portfolioBalanceChangePercent, 'percent') }}) {{ $t('24h') }}
+        </template>
+        <template v-else>
+          *****
+        </template>
       </div>
     </div>
 
@@ -159,6 +165,7 @@ export default {
     &__portfolio-amount {
       @include ellipsis;
       margin-bottom: $spacing-2xs;
+      cursor: pointer;
       text-align: center;
       &--large { @include text-lg; }
       &--normal { @include text-3xl; }
@@ -173,9 +180,12 @@ export default {
 
     &__portfolio-change {
       @include text-sm;
-      color: $primary;
       overflow-wrap: break-word;
       text-align: center;
+
+      &--positive {
+        color: $primary;
+      }
 
       &--negative {
         color: $danger;

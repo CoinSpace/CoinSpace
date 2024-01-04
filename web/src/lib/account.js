@@ -21,10 +21,12 @@ export async function createAccount({ app, router }) {
     email: '',
   });
   const cryptos = ref([]);
+  const hidden = ref(false);
 
   defineAppProperty(app, '$currency', currency);
   defineAppProperty(app, '$user', user);
   defineAppProperty(app, '$cryptos', cryptos);
+  defineAppProperty(app, '$hidden', hidden);
 
   account.on('update', async (context) => {
     switch (context) {
@@ -36,6 +38,9 @@ export async function createAccount({ app, router }) {
         break;
       case 'user':
         user.value = account.user;
+        break;
+      case 'hidden':
+        hidden.value = account.hidden;
         break;
       default: {
         const result = [];
