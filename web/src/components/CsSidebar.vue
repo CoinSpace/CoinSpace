@@ -30,6 +30,7 @@ export default {
   },
   computed: {
     portfolioBalanceSize() {
+      if (this.$isHiddenBalance) return 'normal';
       const str = this.$n(this.portfolioBalance, 'currency', {
         currency: this.$currency,
       });
