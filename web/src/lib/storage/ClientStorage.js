@@ -180,12 +180,12 @@ export default class ClientStorage {
    * Hide/show balance
    */
 
-  getHiddenBalance() {
-    return this.#getItem('_cs_hidden_balance', { type: OBJECT });
+  isHiddenBalance() {
+    return !!this.#getItem('_cs_hidden_balance', { type: OBJECT });
   }
 
   toggleHiddenBalance() {
-    this.#setItem('_cs_hidden_balance', !this.getHiddenBalance(), { type: OBJECT });
+    this.#setItem('_cs_hidden_balance', !this.isHiddenBalance(), { type: OBJECT });
   }
 
   /**

@@ -208,8 +208,8 @@ export default class Account extends EventEmitter {
     return {};
   }
 
-  get hidden() {
-    return this.#clientStorage.getHiddenBalance() || false;
+  get isHiddenBalance() {
+    return this.#clientStorage.isHiddenBalance();
   }
 
   constructor({ siteURL, localStorage, release }) {
@@ -268,7 +268,7 @@ export default class Account extends EventEmitter {
     this.emit('update', 'user');
     this.emit('update', 'language');
     this.emit('update', 'currency');
-    this.emit('update', 'hidden');
+    this.emit('update', 'isHiddenBalance');
 
     this.#migrateV5Details();
 
@@ -730,6 +730,6 @@ export default class Account extends EventEmitter {
 
   toggleHiddenBalance() {
     this.#clientStorage.toggleHiddenBalance();
-    this.emit('update', 'hidden');
+    this.emit('update', 'isHiddenBalance');
   }
 }

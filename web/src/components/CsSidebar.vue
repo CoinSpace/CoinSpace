@@ -82,7 +82,7 @@ export default {
         :class="`&__portfolio-amount--${portfolioBalanceSize}`"
         @click="$account.toggleHiddenBalance()"
       >
-        {{ $hidden ? '*****' : $n(portfolioBalance, 'currency', {
+        {{ $isHiddenBalance ? '*****' : $n(portfolioBalance, 'currency', {
           currency: $currency,
         }) }}
       </div>
@@ -92,11 +92,11 @@ export default {
       <div
         class="&__portfolio-change"
         :class="{
-          '&__portfolio-change--positive': !$hidden && portfolioBalanceChange > 0,
-          '&__portfolio-change--negative': !$hidden && portfolioBalanceChange < 0
+          '&__portfolio-change--positive': !$isHiddenBalance && portfolioBalanceChange > 0,
+          '&__portfolio-change--negative': !$isHiddenBalance && portfolioBalanceChange < 0
         }"
       >
-        <template v-if="!$hidden">
+        <template v-if="!$isHiddenBalance">
           {{ $n(portfolioBalanceChange, 'currency', {
             currency: $currency,
           }) }} ({{ $n(portfolioBalanceChangePercent, 'percent') }}) {{ $t('24h') }}

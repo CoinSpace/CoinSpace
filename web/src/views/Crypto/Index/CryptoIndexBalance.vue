@@ -45,14 +45,14 @@ export default {
         class="&__amount"
         :title="amount"
       >
-        {{ $hidden ? '*****' : amount }}
+        {{ $isHiddenBalance ? '*****' : amount }}
       </div>
       <div
         v-if="$wallet.crypto.coingecko"
         class="&__fiat"
         :title="fiat"
       >
-        {{ $hidden ? '*****' : fiat }}
+        {{ $isHiddenBalance ? '*****' : fiat }}
       </div>
     </div>
   </div>
