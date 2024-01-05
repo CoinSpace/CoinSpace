@@ -96,7 +96,7 @@ export default {
       ref="passphrase"
       v-model="passphrase"
       class="&__passphrase"
-      :label="$t('Passphrase ({words}/12 words)', { words: words.length })"
+      :label="$t('Passphrase')"
       :error="error"
     />
     <div

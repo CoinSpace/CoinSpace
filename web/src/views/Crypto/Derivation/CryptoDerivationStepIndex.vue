@@ -69,7 +69,7 @@ export default {
 <template>
   <MainLayout :title="$t('Derivation path')">
     <div class="&__note">
-      {{ $t('Derivation path defines how to derive private keys from 12-word passphrase.') }}
+      {{ $t('Derivation path defines how to derive private keys from passphrase.') }}
     </div>
     <CsFormGroup class="&__form">
       <template v-if="isAddressTypesSupported">
