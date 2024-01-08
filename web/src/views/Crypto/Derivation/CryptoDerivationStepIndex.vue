@@ -8,10 +8,6 @@ import MainLayout from '../../../layouts/MainLayout.vue';
 import { objectsIsEqual } from '../../../lib/helpers.js';
 import { walletSeed } from '../../../lib/mixins.js';
 
-function isValidPath(path) {
-  return /^m(\/\d+'?)*$/.test(path);
-}
-
 export default {
   components: {
     MainLayout,
@@ -39,7 +35,7 @@ export default {
     settings: {
       handler(value) {
         for (const key in value) {
-          this.errors[key] = isValidPath(value[key]) ? false : this.$t('Invalid path');
+          this.errors[key] = this.$wallet.validateDerivationPath(value[key]) ? false : this.$t('Invalid path');
         }
       },
       deep: true,
@@ -49,7 +45,7 @@ export default {
     async save() {
       this.isLoading = true;
       for (const key in this.settings) {
-        if (!isValidPath(this.settings[key])) {
+        if (!this.$wallet.validateDerivationPath(this.settings[key])) {
           this.errors[key] = this.$t('Invalid path');
           return this.isLoading = false;
         }
@@ -57,9 +53,16 @@ export default {
       if (objectsIsEqual(this.settings, this.$wallet.settings)) return this.$router.up();
 
       await this.walletSeed(async (walletSeed) => {
-        await this.$account.updatePlatformSettings(this.$wallet.crypto, this.settings, walletSeed);
-        this.$router.up();
-      });
+        try {
+          await this.$account.updatePlatformSettings(this.$wallet.crypto, this.settings, walletSeed);
+          this.$router.up();
+        } catch (err) {
+          console.error(err);
+          for (const key in this.settings) {
+            this.errors[key] = this.$t('Invalid path');
+          }
+        }
+      }, { keepStep: true });
       this.isLoading = false;
     },
   },
