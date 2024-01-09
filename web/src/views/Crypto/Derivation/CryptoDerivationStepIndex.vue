@@ -58,9 +58,6 @@ export default {
           this.$router.up();
         } catch (err) {
           console.error(err);
-          for (const key in this.settings) {
-            this.errors[key] = this.$t('Invalid path');
-          }
         }
       }, { keepStep: true });
       this.isLoading = false;
