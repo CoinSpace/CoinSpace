@@ -23,8 +23,25 @@ import Settings from './Settings.js';
 import WalletStorage from './WalletStorage.js';
 import defaultCryptos from './defaultCryptos.js';
 
+const BITCOIN_FAMILY = [
+  'bitcoin',
+  'bitcoin-cash',
+  'litecoin',
+  'dash',
+  'dogecoin',
+];
+
+const EVM_FAMILY = [
+  'ethereum',
+  'ethereum-classic',
+  'polygon',
+  'avalanche-c-chain',
+  'binance-smart-chain',
+  'arbitrum',
+];
+
 async function loadWalletModule(platform) {
-  if (['bitcoin', 'bitcoin-cash', 'litecoin', 'dash', 'dogecoin'].includes(platform)) {
+  if (BITCOIN_FAMILY.includes(platform)) {
     return (await import('@coinspace/cs-bitcoin-wallet')).default;
   }
   if (['solana'].includes(platform)) {
@@ -48,7 +65,7 @@ async function loadWalletModule(platform) {
   if (['eos'].includes(platform)) {
     return (await import('@coinspace/cs-eos-wallet')).default;
   }
-  if (['ethereum', 'ethereum-classic', 'polygon', 'avalanche-c-chain', 'binance-smart-chain'].includes(platform)) {
+  if (EVM_FAMILY.includes(platform)) {
     return (await import('@coinspace/cs-evm-wallet')).default;
   }
   // fallback
@@ -58,7 +75,7 @@ async function loadWalletModule(platform) {
 export class CryptoAlreadyAddedError extends TypeError {
   name = 'CryptoAlreadyAddedError';
   constructor(id, options) {
-    super(`Crypto '${id} already added'`, options);
+    super(`Crypto '${id}' already added'`, options);
   }
 }
 
@@ -357,6 +374,8 @@ export default class Account extends EventEmitter {
         return import.meta.env.VITE_API_POLYGON_URL;
       case 'avalanche-c-chain':
         return import.meta.env.VITE_API_AVAX_URL;
+      case 'arbitrum':
+        return import.meta.env.VITE_API_ARB_URL;
       // Ripple-like
       case 'ripple':
         return import.meta.env.VITE_API_XRP_URL;
@@ -407,7 +426,7 @@ export default class Account extends EventEmitter {
   }
 
   async getCustomTokenInfo(platform, address = '') {
-    if (['ethereum', 'ethereum-classic', 'polygon', 'avalanche-c-chain', 'binance-smart-chain'].includes(platform)) {
+    if (EVM_FAMILY.includes(platform)) {
       address = address.toLowerCase();
     }
     const token = this.#cryptoDB.getTokenByAddress(platform, address);
