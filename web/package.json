@@ -1,7 +1,7 @@
 {
   "name": "coinwallet",
   "private": true,
-  "version": "6.0.3",
+  "version": "6.1.0",
   "description": "Coin Wallet",
   "bugs": {
     "url": "https://github.com/CoinSpace/CoinSpace/issues"
