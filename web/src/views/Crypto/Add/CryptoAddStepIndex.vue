@@ -71,6 +71,7 @@ export default {
       query: '',
       showModal,
       selected,
+      loading: '',
       alreadyAdded,
       coinsList,
       tokensList,
@@ -109,6 +110,7 @@ export default {
     },
     async add(crypto) {
       this.showModal = false;
+      this.loading = crypto._id;
       try {
         await this.$account.addWallet(crypto);
         this.$router.replace({ name: 'crypto', replace: true, params: { cryptoId: crypto._id } });
@@ -122,6 +124,7 @@ export default {
           console.error(err);
         }
       }
+      this.loading = '';
     },
   },
 };
@@ -161,6 +164,7 @@ export default {
       :header="$t('Coins')"
       class="&__list"
       :items="coins"
+      :loading="loading"
       columns
       @select="select"
     />
@@ -168,6 +172,7 @@ export default {
       :header="$t('Tokens')"
       class="&__list &__list--last"
       :items="tokens"
+      :loading="loading"
       columns
       @select="select"
     />
