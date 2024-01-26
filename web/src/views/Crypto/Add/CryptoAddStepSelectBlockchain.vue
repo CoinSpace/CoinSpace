@@ -18,6 +18,7 @@ export default {
         'polygon@polygon',
         'solana@solana',
         'tron@tron',
+        'ethereum@arbitrum',
       ],
     };
   },
