@@ -297,7 +297,7 @@ export default {
       height: 3.5rem;
 
       &--disabled {
-        opacity: 0.3;
+        opacity: 0.4;
         pointer-events: none;
       }
 
