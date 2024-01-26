@@ -96,7 +96,7 @@
   "Fingerprint": "지문",
   "From": "From",
   "Gas limit": "가스 한도",
-  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending {symbol} is equal 21000. Sending Tokens is equal around 200000.": "가스 한도는 거래와 함께 보내는 가스의 양입니다. 이 수치가 증가하면 거래가 빠르게 확인되지 않습니다. {symbol} 전송 시 가스 한도는 21,000입니다. 토큰 전송 시 가스 한도는 약 200,000입니다.",
+  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster.": "가스 한도는 거래와 함께 보내는 가스의 양입니다. 이 수치가 증가하면 거래가 빠르게 확인되지 않습니다.",
   "General": "일반",
   "Generate passphrase": "암호 생성",
   "Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.": "그라바타(Gravatar, 세계적으로 인식되는 아바타)는 이메일을 지정하여 웹사이트와 앱에서 동일한 아바타를 사용할 수 있는 서비스입니다.",

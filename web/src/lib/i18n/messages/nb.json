@@ -96,7 +96,7 @@
   "Fingerprint": "Fingeravtrykk",
   "From": "Fra",
   "Gas limit": "Gassgrense",
-  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending {symbol} is equal 21000. Sending Tokens is equal around 200000.": "Gassgrensen er mengden gass som kan sendes med transaksjonen din. Økning av dette tallet fører ikke til at transaksjonen bekreftes raskere. Sending av {symbol} tilsvarer 21 000. Sending av polletter er tilsvarer omtrent 200 000.",
+  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster.": "Gassgrensen er mengden gass som kan sendes med transaksjonen din. Økning av dette tallet fører ikke til at transaksjonen bekreftes raskere.",
   "General": "Generelt",
   "Generate passphrase": "Generer passordfrase",
   "Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.": "Gravatar (globalt gjenkjent avatar) er en tjeneste som lar deg bruke den samme avataren på tvers av nettsider og applikasjoner ved å spesifisere din epost-adresse.",

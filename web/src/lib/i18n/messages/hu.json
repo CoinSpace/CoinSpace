@@ -96,7 +96,7 @@
   "Fingerprint": "Ujjlenyomat",
   "From": "Küldő",
   "Gas limit": "Gas korlát",
-  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending {symbol} is equal 21000. Sending Tokens is equal around 200000.": "A Gas korlát az a gas összeg, amit a tranzakciójával együtt küld. Az összeg emelése nem erősíti meg gyorsabban az utalását. {symbol} küldése 21000-el egyenlő. Tokenek küldése körülbelül 200 000-el egyenértékű.",
+  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster.": "A Gas korlát az a gas összeg, amit a tranzakciójával együtt küld. Az összeg emelése nem erősíti meg gyorsabban az utalását.",
   "General": "Általános",
   "Generate passphrase": "Jelszóként használt kifejezés generálása",
   "Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.": "A Gravatar (globálisan felismert avatár) egy szolgáltatás, amivel ugyanazt az avatárt használhatja weboldalakon és alkalmazásokban.",

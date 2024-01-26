@@ -96,7 +96,7 @@
   "Fingerprint": "Відбиток пальця",
   "From": "З",
   "Gas limit": "Ліміт газу",
-  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending {symbol} is equal 21000. Sending Tokens is equal around 200000.": "Ліміт газу – це кількість газу, який потрібно відправити разом із транзакцією. Збільшення цієї кількості не приведе до більш швидкого підтвердження вашої транзакції. Відправлення {symbol} дорівнює 21000. Відправлення токенів дорівнює приблизно 200000.",
+  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster.": "Ліміт газу – це кількість газу, який потрібно відправити разом із транзакцією. Збільшення цієї кількості не приведе до більш швидкого підтвердження вашої транзакції.",
   "General": "Загальне",
   "Generate passphrase": "Згенерувати парольну фразу",
   "Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.": "«Граватар» (аватар, що розпізнається на глобальному рівні) – це сервіс, який дозволяє використовувати одну й ту ж аватарку на кількох сайтах чи у кількох застосунках, вказавши адресу електронної пошти.",

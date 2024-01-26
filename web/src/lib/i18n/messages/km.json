@@ -96,7 +96,7 @@
   "Fingerprint": "ក្រយៅដៃ",
   "From": "ពី",
   "Gas limit": "កម្រិតស៊ាំង",
-  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending {symbol} is equal 21000. Sending Tokens is equal around 200000.": "កម្រិតស៊ាំងគឺជាចំនួនស៊ាំងដែលត្រូវផ្ញើជាមួយប្រតិបត្តិការរបស់អ្នក។ ការបង្កើនចំនួននេះនឹងមិនបញ្ជាក់ប្រតិបត្តិការរបស់អ្នកបានលឿនទេ។ ការផ្ញើ {symbol} គឺស្មើនឹង 21000 ។ ការផ្ញើកាសគឺស្មើប្រហែល 200000 ។",
+  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster.": "កម្រិតស៊ាំងគឺជាចំនួនស៊ាំងដែលត្រូវផ្ញើជាមួយប្រតិបត្តិការរបស់អ្នក។ ការបង្កើនចំនួននេះនឹងមិនបញ្ជាក់ប្រតិបត្តិការរបស់អ្នកបានលឿនទេ។",
   "General": "ទូទៅ",
   "Generate passphrase": "បង្កើតឃ្លាសម្ងាត់",
   "Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.": "Gravatar (ត្រូវបានស្គាល់ជាសកលថាជា អាវតា) គឺជាសេវាកម្មមួយដែលអនុញ្ញាតឲ្យអ្នកប្រើអាវតាដដែលឡើងវិញនៅលើវ៉ិបសាយថ៍និងកម្មវិធីទូរស័ព្ទដោយបញ្ជាក់អាសយដ្ឋានអ៊ីមែល។",

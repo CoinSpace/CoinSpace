@@ -96,7 +96,7 @@
   "Fingerprint": "Impronta digitale",
   "From": "Da",
   "Gas limit": "Limite di gas",
-  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending {symbol} is equal 21000. Sending Tokens is equal around 200000.": "Il limite di gas è l'importo di gas da inviare con le tue transazioni. Se aumenti questo numero, le tue transazioni saranno confermate più rapidamente. Inviare {symbol} equivale a 21000. Inviare Token equivale a circa 200000.",
+  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster.": "Il limite di gas è l'importo di gas da inviare con le tue transazioni. Se aumenti questo numero, le tue transazioni saranno confermate più rapidamente.",
   "General": "Generale",
   "Generate passphrase": "Genera passphrase",
   "Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.": "Gravatar (globally recognised avatar) è un servizio che ti permette di utilizzare lo stesso avatar in più siti internet, specificando un particolare indirizzo email.",

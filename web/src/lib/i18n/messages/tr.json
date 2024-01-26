@@ -96,7 +96,7 @@
   "Fingerprint": "Parmak izi",
   "From": "Kaynak",
   "Gas limit": "Gas limiti",
-  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending {symbol} is equal 21000. Sending Tokens is equal around 200000.": "Gas limiti, işleminizle birlikte göndereceğiniz gas miktarıdır. Bu sayıyı artırmak işleminizin daha hızlı onaylanmasını sağlamaz. {symbol} göndermek 21000'e eşittir. Token göndermek 200000 civarındadır.",
+  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster.": "Gas limiti, işleminizle birlikte göndereceğiniz gas miktarıdır. Bu sayıyı artırmak işleminizin daha hızlı onaylanmasını sağlamaz.",
   "General": "Genel",
   "Generate passphrase": "Parola üret",
   "Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.": "Gravatar (dünyada tanınan avatar), bir e-posta adresi belirterek farklı web sitelerinde ve uygulamalarda aynı avatarı kullanmanızı sağlayan bir hizmettir.",

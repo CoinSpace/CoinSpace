@@ -96,7 +96,7 @@
   "Fingerprint": "Otisak prsta",
   "From": "Iz",
   "Gas limit": "Ograničenje plina",
-  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending {symbol} is equal 21000. Sending Tokens is equal around 200000.": "Ograničenje plina je iznos plina koji šaljete uz transakciju. Ako povećate ovaj broj, vaša transakcija neće biti brže potvrđena. Slanje {symbol} vrijedi 21000. Slanje Žetona vrijedi oko 200000.",
+  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster.": "Ograničenje plina je iznos plina koji šaljete uz transakciju. Ako povećate ovaj broj, vaša transakcija neće biti brže potvrđena.",
   "General": "Opće informacije",
   "Generate passphrase": "Generiraj zaporku",
   "Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.": "Gravatar (globalno prepoznati avatar) je usluga koja vam omogućuje koristiti istog avatara na različitim web-mjestima i aplikacijama navođenjem adrese e-pošte.",

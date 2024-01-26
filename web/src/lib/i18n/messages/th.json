@@ -96,7 +96,7 @@
   "Fingerprint": "ลายนิ้วมือ",
   "From": "จาก",
   "Gas limit": "จำนวนก๊าซสูงสุด",
-  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending {symbol} is equal 21000. Sending Tokens is equal around 200000.": "จำนวนก๊าซสูงสุดคือจำนวนก๊าซที่จะส่งไปพร้อมกับธุรกรรมของคุณ การเพิ่มจำนวนตัวเลขนี้จะไม่ได้ส่งผลให้ธุรกรรมของคุณได้รับการยืนยันเร็วขึ้น การส่ง {symbol} มีค่าเท่ากับ 21000 การส่งโทเค็นมีค่าเท่ากับราว ๆ 200000",
+  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster.": "จำนวนก๊าซสูงสุดคือจำนวนก๊าซที่จะส่งไปพร้อมกับธุรกรรมของคุณ การเพิ่มจำนวนตัวเลขนี้จะไม่ได้ส่งผลให้ธุรกรรมของคุณได้รับการยืนยันเร็วขึ้น",
   "General": "ทั่วไป",
   "Generate passphrase": "สร้างวลีรหัสผ่าน",
   "Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.": "กราวาตาร์ (อวาตาร์ที่เป็นที่รู้จักกันทั่วโลก) คือโปรแกรมที่ทำให้คุณสามารถใช้อวาตาร์ตัวเดิมข้ามเว็บไซด์และแอพต่างๆได้โดยการระบุอีเมลล์แอดเดรส",

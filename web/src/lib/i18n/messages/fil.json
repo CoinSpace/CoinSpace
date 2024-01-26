@@ -96,7 +96,7 @@
   "Fingerprint": "Fingerprint",
   "From": "Mula",
   "Gas limit": "Limitasyon ng gas",
-  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending {symbol} is equal 21000. Sending Tokens is equal around 200000.": "Ang limitasyon ng gas ay ang halaga ng gas na ipapadala sa transaksiyon mo. Ang pagdagdag ng numerong ito ay hindi magpapabilis sa pagkumpirma ng iyong transaksiyon. Ang pagpapadala ng {symbol} ay katumbas ng 21000. Ang pagpapadala ng Token ay katumbas ng bandang 200000.",
+  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster.": "Ang limitasyon ng gas ay ang halaga ng gas na ipapadala sa transaksiyon mo. Ang pagdagdag ng numerong ito ay hindi magpapabilis sa pagkumpirma ng iyong transaksiyon.",
   "General": "Pangkalahatan",
   "Generate passphrase": "Bumuo ng passphrase",
   "Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.": "Ang Gravatar (globally recognised avatar) ay isang serbisyo na naglalayong gamitin uli ang parehas na avatar sa mga website at app sa pamamagitan ng pagtukoy ng email address.",

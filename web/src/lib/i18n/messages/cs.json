@@ -96,7 +96,7 @@
   "Fingerprint": "Otisk prstu",
   "From": "Odesílatel",
   "Gas limit": "Limit na plyn",
-  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending {symbol} is equal 21000. Sending Tokens is equal around 200000.": "Limit na plyn je množství plynu, které pošlete se svou transakcí. Zvýšením tohoto čísla nebude Vaše transakce potvrzena o nic rychleji. Poslat {symbol} je rovno 21000. Poslat žetony je rovno přibližně 200000.",
+  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster.": "Limit na plyn je množství plynu, které pošlete se svou transakcí. Zvýšením tohoto čísla nebude Vaše transakce potvrzena o nic rychleji.",
   "General": "Obecné",
   "Generate passphrase": "Vytvořit heslo",
   "Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.": "Gravatar (globálně používaný avatar) je služba, která Vám umožňuje zadáním e-mailové adresy znovu použít stejného avatara napříč různými webovými stránkami a aplikacemi.",

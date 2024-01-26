@@ -96,7 +96,7 @@
   "Fingerprint": "指纹",
   "From": "来自",
   "Gas limit": "Gas限制",
-  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending {symbol} is equal 21000. Sending Tokens is equal around 200000.": "Gas限制是为你的交易发送的gas数量。提高此数值不会提高交易的确认速度。发送 {symbol} 等于21000。发送代币约等于200000。",
+  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster.": "Gas限制是为你的交易发送的gas数量。提高此数值不会提高交易的确认速度。",
   "General": "常规",
   "Generate passphrase": "生成密码短语",
   "Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.": "Gravatar(全球公认的头像)是一个让您将头像和邮件地址关联的服务。",

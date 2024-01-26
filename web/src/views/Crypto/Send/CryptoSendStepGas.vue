@@ -62,9 +62,7 @@ export default {
         <template #info>
           <div>
             <!-- eslint-disable-next-line max-len -->
-            {{ $t('Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending {symbol} is equal 21000. Sending Tokens is equal around 200000.', {
-              symbol: $wallet.crypto.symbol,
-            }) }}
+            {{ $t('Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster.') }}
           </div>
         </template>
       </CsFormBigIntInput>

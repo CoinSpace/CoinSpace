@@ -96,7 +96,7 @@
   "Fingerprint": "Dấu vân tay",
   "From": "Từ",
   "Gas limit": "Giới hạn Gas",
-  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending {symbol} is equal 21000. Sending Tokens is equal around 200000.": "Giới hạn Gas là lượng gas gửi với giao dịch của bạn. Tăng giá trị này sẽ không giúp giao dịch được xác nhận nhanh hơn. Gửi {symbol} bằng 21000. Gửi Token bằng khoảng 200000.",
+  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster.": "Giới hạn Gas là lượng gas gửi với giao dịch của bạn. Tăng giá trị này sẽ không giúp giao dịch được xác nhận nhanh hơn.",
   "General": "Chung",
   "Generate passphrase": "Tạo cụm mật khẩu",
   "Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.": "Gravatar (globally recognised avatar - hình ảnh đại diện được công nhận toàn cầu) là một dịch vụ cho phép bạn sử dụng lại hình ảnh đại diện trên các trang web và ứng dụng bằng cách chỉ định một địa chỉ email.",

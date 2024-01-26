@@ -96,7 +96,7 @@
   "Fingerprint": "指紋認証",
   "From": "差出",
   "Gas limit": "ガスリミット",
-  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending {symbol} is equal 21000. Sending Tokens is equal around 200000.": "ガスリミットはあなたの取引で送るべきガスの量です。この数を増やしても、取引の確認が早くなるわけではありません。 {symbol}送信は、21000です。トークン送信は、200000前後です。",
+  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster.": "ガスリミットはあなたの取引で送るべきガスの量です。この数を増やしても、取引の確認が早くなるわけではありません。",
   "General": "一般",
   "Generate passphrase": "パスフレーズを作成",
   "Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.": "グラバターとはメールアドレスの登録で同じアバターがインターネット上どこでも使用できるサービスです。",

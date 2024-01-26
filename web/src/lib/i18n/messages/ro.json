@@ -96,7 +96,7 @@
   "Fingerprint": "Amprentă digitală",
   "From": "De la",
   "Gas limit": "Limită combustibil",
-  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster. Sending {symbol} is equal 21000. Sending Tokens is equal around 200000.": "Limita de combustibil este cantitatea de combustibil care trebuie să fie trimisă împreună cu tranzacția dvs. Chiar dacă măriți acest număr, tranzacția dvs. nu va fi confirmată mai rapid. Trimiterea a {symbol} este egală cu 21000. Trimiterea de tokenuri este egală cu aproximativ 200000.",
+  "Gas limit is the amount of gas to send with your transaction. Increasing this number will not get your transaction confirmed faster.": "Limita de combustibil este cantitatea de combustibil care trebuie să fie trimisă împreună cu tranzacția dvs. Chiar dacă măriți acest număr, tranzacția dvs. nu va fi confirmată mai rapid.",
   "General": "Informații generale",
   "Generate passphrase": "Generați o frază de acces",
   "Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.": "Gravatar (avatarul recunoscut la nivel global) este un serviciu care vă permite să reutilizați același avatar pe site-uri web și aplicații, specificând o adresă de e-mail.",
