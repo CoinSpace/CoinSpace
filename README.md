@@ -36,4 +36,4 @@ Supported coins:
 - Avalanche C-Chain and ARC20 tokens
 - TRON and TRC20 tokens
 - Polygon and Polygon tokens
-- Arbitrum One and Arbitrum One tokens
+- Arbitrum One and Arbitrum tokens
