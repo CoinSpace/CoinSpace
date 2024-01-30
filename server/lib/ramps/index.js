@@ -1,5 +1,6 @@
 import cryptoDB from '@coinspace/crypto-db';
 
+import bitnovo from './bitnovo.js';
 import btcdirect from './btcdirect.js';
 import guardarian from './guardarian.js';
 import moonpay from './moonpay.js';
@@ -12,6 +13,7 @@ async function buy({ countryCode, crypto: cryptoId, address }) {
     onramper,
     btcdirect,
     guardarian,
+    bitnovo,
   ];
   return (await Promise.all(ramps.map((ramp) => {
     return ramp.buy(countryCode, crypto, address).catch(console.error);
