@@ -2,7 +2,7 @@ const API_KEY = process.env.BITNOVO_API_KEY;
 const rampData = {
   id: 'bitnovo',
   name: 'Bitnovo',
-  description: 'Bitnovo',
+  description: 'Get more crypto!',
 };
 
 async function buy(_, crypto, walletAddress) {
