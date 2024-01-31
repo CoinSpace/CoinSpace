@@ -13,6 +13,7 @@ async function buy(_, crypto, walletAddress) {
 
   const url = new URL('https://ramp.bitnovo.com/');
   url.searchParams.set('apiKey', API_KEY);
+  url.searchParams.set('config', 'buy-only');
   url.searchParams.set('defaultCrypto', id);
   url.searchParams.set('onlyCryptos', id);
   url.searchParams.set('wallets', `${id}:${walletAddress}`);
