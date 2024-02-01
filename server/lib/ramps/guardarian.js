@@ -14,7 +14,7 @@ const rampApi = axios.create({
   headers: { 'x-api-key': API_KEY },
 });
 
-async function buy(countryCode, crypto) {
+async function buy(countryCode, crypto, walletAddress) {
   if (!API_KEY) return;
   if (!crypto) return;
   const countries = await cachedCountries();
@@ -42,6 +42,7 @@ async function buy(countryCode, crypto) {
     ticker: crypto.guardarian.ticker,
     network: crypto.guardarian.network,
   }]));
+  url.searchParams.set('payout_address', walletAddress);
 
   return {
     ...rampData,
