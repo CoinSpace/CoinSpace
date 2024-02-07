@@ -7,7 +7,7 @@ import onramper from './onramper.js';
 
 async function buy({ countryCode, crypto: cryptoId, address }) {
   const crypto = cryptoDB.find((item) => item._id === cryptoId);
-  const ramps = [
+  const ramps = countryCode === 'GB' ? [moonpay] : [
     moonpay,
     onramper,
     btcdirect,
