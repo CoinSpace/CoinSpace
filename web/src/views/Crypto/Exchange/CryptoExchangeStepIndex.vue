@@ -61,6 +61,7 @@ export default {
     this.updateStorage({
       // cache price for all steps
       price: await this.$account.market.getPrice(this.$wallet.crypto._id, this.$currency),
+      pricePlatform: await this.$account.market.getPrice(this.$wallet.platform._id, this.$currency),
       priceUSD: this.$wallet.isCsFeeSupported ?
         await this.$account.market.getPrice(this.$wallet.crypto._id, 'USD') : undefined,
     });

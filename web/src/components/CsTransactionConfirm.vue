@@ -42,60 +42,35 @@ export default {
   data() {
     return {
       fiatMode: false,
-      isFiatModeSupported: this.transaction.price !== undefined,
     };
   },
   computed: {
-    amountFiat() {
-      if (this.isFiatModeSupported) {
-        return cryptoToFiat(this.transaction.amount, this.transaction.price);
-      }
-    },
-    feeFiat() {
-      if (this.isFiatModeSupported && this.transaction.fee) {
-        return cryptoToFiat(this.transaction.fee, this.transaction.price);
-      }
-    },
     amount() {
-      if (!this.fiatMode) {
-        return `${this.transaction.amount}  ${this.$wallet.crypto.symbol}`;
+      if (this.fiatMode && this.transaction.price !== undefined) {
+        return this.$c(cryptoToFiat(this.transaction.amount, this.transaction.price));
       } else {
-        return this.$c(this.amountFiat);
+        return `${this.transaction.amount} ${this.$wallet.crypto.symbol}`;
       }
     },
     fee() {
       if (!this.transaction.fee) return undefined;
-      if (!this.fiatMode) {
+      if (this.fiatMode && this.transaction.pricePlatform !== undefined) {
+        return this.$t('+{fee} fee', {
+          fee: this.$c(cryptoToFiat(this.transaction.fee, this.transaction.pricePlatform)),
+        });
+      } else {
         return this.$t('{sign}{fee} {symbol} fee', {
           sign: '+',
           fee: this.transaction.fee,
           symbol: this.$wallet.platform.symbol,
         });
-      } else {
-        return this.$t('+{fee} fee', {
-          fee: this.$c(this.feeFiat),
-        });
-      }
-    },
-    amountToFiat() {
-      if (this.isFiatModeSupported && this.transaction.priceTo) {
-        return cryptoToFiat(this.transaction.amountTo, this.transaction.priceTo);
       }
     },
     amountTo() {
-      if (!this.fiatMode) {
-        return `≈ ${this.transaction.amountTo}  ${this.transaction.to.crypto.symbol}`;
+      if (this.fiatMode && this.transaction.priceTo !== undefined) {
+        return `≈ ${this.$c(cryptoToFiat(this.transaction.amountTo, this.transaction.priceTo))}`;
       } else {
-        if (this.amountToFiat) {
-          return `≈ ${this.$c(this.amountToFiat)}`;
-        }
-      }
-    },
-  },
-  methods: {
-    switchMode() {
-      if (this.isFiatModeSupported) {
-        this.fiatMode = !this.fiatMode;
+        return `≈ ${this.transaction.amountTo} ${this.transaction.to.crypto.symbol}`;
       }
     },
   },
@@ -109,7 +84,7 @@ export default {
     :platform="$wallet.platform"
     :title="amount"
     :subtitles="fee && [fee]"
-    @click="switchMode"
+    @click="fiatMode = !fiatMode"
   />
   <ArrowDownIcon class="&__arrow" />
 
@@ -119,7 +94,7 @@ export default {
     :crypto="transaction.to.crypto"
     :platform="transaction.to.platform"
     :title="amountTo"
-    @click="switchMode"
+    @click="fiatMode = !fiatMode"
   />
 
   <CsFormGroup class="&__content">
