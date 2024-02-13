@@ -16,7 +16,7 @@ steps:
     - 'SENTRY_AUTH_TOKEN=${_SENTRY_AUTH_TOKEN}'
     - 'NODE_OPTIONS="--max-old-space-size=3575"'
   dir: web
-  entrypoint: 'sh'
+  entrypoint: 'bash'
   args:
     - '-c'
     - |
