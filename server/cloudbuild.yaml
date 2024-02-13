@@ -10,8 +10,6 @@ steps:
     - 'VITE_SENTRY_ENVIRONMENT=${_VITE_SENTRY_ENVIRONMENT}'
     - 'VITE_CHANGELLY_REF=${_VITE_CHANGELLY_REF}'
     - 'VITE_MOONPAY_API_KEY=${_VITE_MOONPAY_API_KEY}'
-    - 'VITE_API_BSC_URL=${_VITE_API_BSC_URL}'
-    - 'VITE_API_POLYGON_URL=${_VITE_API_POLYGON_URL}'
     - 'BASE_URL=${_BASE_URL}'
     - 'SENTRY_ORG=${_SENTRY_ORG}'
     - 'SENTRY_PROJECT=${_SENTRY_PROJECT}'
@@ -28,6 +26,8 @@ steps:
       && npm run i18n:ci \
       && npm run lint \
       && npm run lint:style \
+      && if [[ $_VITE_API_BSC_URL ]]; then export VITE_API_BSC_URL=${_VITE_API_BSC_URL}; fi \
+      && if [[ $_VITE_API_POLYGON_URL ]]; then export VITE_API_POLYGON_URL=${_VITE_API_POLYGON_URL}; fi \
       && npm run build
 
 - name: 'gcr.io/cloud-builders/docker'
