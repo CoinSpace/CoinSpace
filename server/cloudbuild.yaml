@@ -26,8 +26,24 @@ steps:
       && npm run i18n:ci \
       && npm run lint \
       && npm run lint:style \
+      && if [[ "${_VITE_API_BTC_URL}" ]]; then export VITE_API_BTC_URL=${_VITE_API_BTC_URL}; fi \
+      && if [[ "${_VITE_API_BCH_URL}" ]]; then export VITE_API_BCH_URL=${_VITE_API_BCH_URL}; fi \
+      && if [[ "${_VITE_API_DASH_URL}" ]]; then export VITE_API_DASH_URL=${_VITE_API_DASH_URL}; fi \
+      && if [[ "${_VITE_API_DOGE_URL}" ]]; then export VITE_API_DOGE_URL=${_VITE_API_DOGE_URL}; fi \
+      && if [[ "${_VITE_API_LTC_URL}" ]]; then export VITE_API_LTC_URL=${_VITE_API_LTC_URL}; fi \
+      && if [[ "${_VITE_API_ETH_URL}" ]]; then export VITE_API_ETH_URL=${_VITE_API_ETH_URL}; fi \
+      && if [[ "${_VITE_API_ETC_URL}" ]]; then export VITE_API_ETC_URL=${_VITE_API_ETC_URL}; fi \
       && if [[ "${_VITE_API_BSC_URL}" ]]; then export VITE_API_BSC_URL=${_VITE_API_BSC_URL}; fi \
       && if [[ "${_VITE_API_POLYGON_URL}" ]]; then export VITE_API_POLYGON_URL=${_VITE_API_POLYGON_URL}; fi \
+      && if [[ "${_VITE_API_AVAX_URL}" ]]; then export VITE_API_AVAX_URL=${_VITE_API_AVAX_URL}; fi \
+      && if [[ "${_VITE_API_ARB_URL}" ]]; then export VITE_API_ARB_URL=${_VITE_API_ARB_URL}; fi \
+      && if [[ "${_VITE_API_XRP_URL}" ]]; then export VITE_API_XRP_URL=${_VITE_API_XRP_URL}; fi \
+      && if [[ "${_VITE_API_XLM_URL}" ]]; then export VITE_API_XLM_URL=${_VITE_API_XLM_URL}; fi \
+      && if [[ "${_VITE_API_XMR_URL}" ]]; then export VITE_API_XMR_URL=${_VITE_API_XMR_URL}; fi \
+      && if [[ "${_VITE_API_EOS_URL}" ]]; then export VITE_API_EOS_URL=${_VITE_API_EOS_URL}; fi \
+      && if [[ "${_VITE_API_SOL_URL}" ]]; then export VITE_API_SOL_URL=${_VITE_API_SOL_URL}; fi \
+      && if [[ "${_VITE_API_TRX_URL}" ]]; then export VITE_API_TRX_URL=${_VITE_API_TRX_URL}; fi \
+      && if [[ "${_VITE_API_ADA_URL}" ]]; then export VITE_API_ADA_URL=${_VITE_API_ADA_URL}; fi \
       && npm run build
 
 - name: 'gcr.io/cloud-builders/docker'
