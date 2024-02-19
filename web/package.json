@@ -32,7 +32,7 @@
     "@coinspace/cs-common": "^1.1.2",
     "@coinspace/cs-eos-wallet": "^2.0.2",
     "@coinspace/cs-evm-wallet": "^1.1.0",
-    "@coinspace/cs-monero-wallet": "^2.0.1",
+    "@coinspace/cs-monero-wallet": "^2.0.2",
     "@coinspace/cs-ripple-wallet": "^2.1.1",
     "@coinspace/cs-solana-wallet": "^2.0.1",
     "@coinspace/cs-stellar-wallet": "^2.0.1",
