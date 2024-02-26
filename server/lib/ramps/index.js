@@ -5,6 +5,7 @@ import btcdirect from './btcdirect.js';
 import guardarian from './guardarian.js';
 import moonpay from './moonpay.js';
 import onramper from './onramper.js';
+import paybis from './paybis.js';
 
 async function buy({ countryCode, crypto: cryptoId, address }) {
   const crypto = cryptoDB.find((item) => item._id === cryptoId);
@@ -14,6 +15,7 @@ async function buy({ countryCode, crypto: cryptoId, address }) {
     btcdirect,
     guardarian,
     bitnovo,
+    paybis,
   ];
   return (await Promise.all(ramps.map((ramp) => {
     return ramp.buy(countryCode, crypto, address).catch(console.error);
