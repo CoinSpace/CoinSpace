@@ -5,7 +5,7 @@ const API_KEY = process.env.PAYBIS_API_KEY;
 const rampData = {
   id: 'paybis',
   name: 'Paybis',
-  description: 'Paybis',
+  description: 'No KYC, low fees',
 };
 
 const baseURL = process.env.NODE_ENV === 'production'
