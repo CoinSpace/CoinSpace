@@ -11,7 +11,10 @@ export default {
 </script>
 
 <template>
-  <CsButtonGroup type="horizontal">
+  <CsButtonGroup
+    v-if="$showRampsAndExchange"
+    type="horizontal"
+  >
     <CsButton
       v-if="$walletState === $STATE_LOADED || $walletState === $STATE_LOADING"
       type="primary-light"

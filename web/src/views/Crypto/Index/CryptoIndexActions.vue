@@ -46,6 +46,7 @@ export default {
       {{ $t('Receive') }}
     </CsButton>
     <CsButton
+      v-if="$showRampsAndExchange"
       type="circle"
       :disabled="$walletState === $STATE_LOADING"
       @click="$router.push({ name: 'crypto.exchange', params: { cryptoId: $wallet.crypto._id }})"
