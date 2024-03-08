@@ -38,6 +38,8 @@ async function buy(countryCode, crypto, walletAddress) {
   url.searchParams.set('partner_api_token', API_KEY);
   url.searchParams.set('theme', 'blue');
   url.searchParams.set('type', 'narrow');
+  url.searchParams.set('default_side', 'buy_crypto');
+  url.searchParams.set('side_toggle_disabled', 'true');
   url.searchParams.set('crypto_currencies_list', JSON.stringify([{
     ticker: crypto.guardarian.ticker,
     network: crypto.guardarian.network,
