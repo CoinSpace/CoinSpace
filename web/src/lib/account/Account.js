@@ -68,6 +68,9 @@ async function loadWalletModule(platform) {
   if (EVM_FAMILY.includes(platform)) {
     return (await import('@coinspace/cs-evm-wallet')).default;
   }
+  if (['toncoin'].includes(platform)) {
+    return (await import('@coinspace/cs-ton-wallet')).default;
+  }
   // fallback
   return CsWallet;
 }
@@ -392,6 +395,8 @@ export default class Account extends EventEmitter {
         return import.meta.env.VITE_API_TRX_URL;
       case 'cardano':
         return import.meta.env.VITE_API_ADA_URL;
+      case 'toncoin':
+        return import.meta.env.VITE_API_TON_URL;
       default:
         throw new errors.InternalWalletError(`Unsupported platform "${platform}"`);
     }
