@@ -12,6 +12,8 @@ import LocationIcon from '../../../assets/svg/location.svg';
 import PasteIcon from '../../../assets/svg/paste.svg';
 import QrIcon from '../../../assets/svg/qr.svg';
 
+import * as TONErrors from '@coinspace/cs-ton-wallet/errors';
+
 import { onShowOnHide } from '../../../lib/mixins.js';
 import {
   cryptoSubtitle,
@@ -113,6 +115,10 @@ export default {
           return;
         }
         if (err instanceof errors.InvalidAddressError) {
+          this.error = this.$t('Invalid address');
+          return;
+        }
+        if (err instanceof TONErrors.InvalidNetworkAddressError) {
           this.error = this.$t('Invalid address');
           return;
         }

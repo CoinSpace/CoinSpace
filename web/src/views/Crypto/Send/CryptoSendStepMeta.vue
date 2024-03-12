@@ -8,6 +8,7 @@ import MainLayout from '../../../layouts/MainLayout.vue';
 import * as EOSErrors from '@coinspace/cs-eos-wallet/errors';
 import * as RippleErrors from '@coinspace/cs-ripple-wallet/errors';
 import * as StellarErrors from '@coinspace/cs-stellar-wallet/errors';
+import * as TONErrors from '@coinspace/cs-ton-wallet/errors';
 
 import { cryptoSubtitle } from '../../../lib/helpers.js';
 import { onShowOnHide } from '../../../lib/mixins.js';
@@ -64,6 +65,10 @@ export default {
           return;
         }
         if (err instanceof StellarErrors.InvalidMemoError) {
+          this.errors['memo'] = this.$t('Invalid Memo');
+          return;
+        }
+        if (err instanceof TONErrors.InvalidMemoError) {
           this.errors['memo'] = this.$t('Invalid Memo');
           return;
         }
