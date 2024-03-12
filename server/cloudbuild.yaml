@@ -1,6 +1,6 @@
 steps:
 
-- name: 'node:18.14.2'
+- name: 'node:20.11.1'
   id: 'build web'
   env:
     - 'VITE_DISTRIBUTION=${_VITE_DISTRIBUTION}'

@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-22.04
     if: github.ref == 'refs/heads/master'
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
       - name: Set app version
         run: echo "VERSION=$(node -p -e "require('./web/package.json').version")" >> $GITHUB_ENV
       - uses: ncipollo/release-action@v1
@@ -50,10 +50,10 @@ jobs:
   lint:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           registry-url: https://npm.pkg.github.com/
       - env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_READ_TOKEN }}
@@ -79,76 +79,76 @@ jobs:
       matrix:
         include:
           - os: macos-12
-            node: 18
+            node: 20
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: mac
             VITE_DISTRIBUTION: mac
             SENTRY_DSN_KEY: SENTRY_DSN_MAC
             SENTRY_PROJECT: mac
           - os: macos-12
-            node: 18
+            node: 20
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: mac
             VITE_DISTRIBUTION: mas
             SENTRY_DSN_KEY: SENTRY_DSN_MAS
             SENTRY_PROJECT: mas
           - os: macos-12
-            node: 18
+            node: 20
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: mac
             VITE_DISTRIBUTION: mas-dev
             SENTRY_DSN_KEY: SENTRY_DSN_MAS
             SENTRY_PROJECT: mas
           - os: ubuntu-22.04
-            node: 18
+            node: 20
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: linux
             VITE_DISTRIBUTION: snap
             SENTRY_DSN_KEY: SENTRY_DSN_SNAP
             SENTRY_PROJECT: linux
           - os: windows-2019
-            node: 18
+            node: 20
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: win
             VITE_DISTRIBUTION: appx
             SENTRY_DSN_KEY: SENTRY_DSN_WIN
             SENTRY_PROJECT: win
           - os: windows-2019
-            node: 18
+            node: 20
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: win
             VITE_DISTRIBUTION: appx-dev
             SENTRY_DSN_KEY: SENTRY_DSN_WIN
             SENTRY_PROJECT: win
           - os: macos-12
-            node: 18
+            node: 20
             VITE_BUILD_TYPE: phonegap
             VITE_PLATFORM: ios
             VITE_DISTRIBUTION: ios
             SENTRY_DSN_KEY: SENTRY_DSN_IOS
             SENTRY_PROJECT: ios
           - os: ubuntu-20.04
-            node: 18
+            node: 20
             VITE_BUILD_TYPE: phonegap
             VITE_PLATFORM: android
             VITE_DISTRIBUTION: android-play
             SENTRY_DSN_KEY: SENTRY_DSN_ANDROID
             SENTRY_PROJECT: android
           - os: ubuntu-20.04
-            node: 18
+            node: 20
             VITE_BUILD_TYPE: phonegap
             VITE_PLATFORM: android
             VITE_DISTRIBUTION: android-galaxy
             SENTRY_DSN_KEY: SENTRY_DSN_ANDROID
             SENTRY_PROJECT: android
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
         # https://github.com/electron/forge/issues/2807
         if: matrix.VITE_DISTRIBUTION == 'mac'
         with:
           python-version: '3.10'
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
           registry-url: https://npm.pkg.github.com/

@@ -1,4 +1,4 @@
-FROM node:18.14.2-alpine
+FROM node:20.11.1-alpine
 
 WORKDIR /server
 COPY package*.json /server/
