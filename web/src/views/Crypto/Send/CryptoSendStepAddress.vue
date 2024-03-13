@@ -12,7 +12,7 @@ import LocationIcon from '../../../assets/svg/location.svg';
 import PasteIcon from '../../../assets/svg/paste.svg';
 import QrIcon from '../../../assets/svg/qr.svg';
 
-import * as TONErrors from '@coinspace/cs-ton-wallet/errors';
+import * as TONErrors from '@coinspace/cs-toncoin-wallet/errors';
 
 import { onShowOnHide } from '../../../lib/mixins.js';
 import {

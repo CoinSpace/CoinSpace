@@ -8,7 +8,7 @@ import MainLayout from '../../../layouts/MainLayout.vue';
 import * as EOSErrors from '@coinspace/cs-eos-wallet/errors';
 import * as RippleErrors from '@coinspace/cs-ripple-wallet/errors';
 import * as StellarErrors from '@coinspace/cs-stellar-wallet/errors';
-import * as TONErrors from '@coinspace/cs-ton-wallet/errors';
+import * as TONErrors from '@coinspace/cs-toncoin-wallet/errors';
 
 import { cryptoSubtitle } from '../../../lib/helpers.js';
 import { onShowOnHide } from '../../../lib/mixins.js';

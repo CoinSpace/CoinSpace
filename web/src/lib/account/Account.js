@@ -69,7 +69,7 @@ async function loadWalletModule(platform) {
     return (await import('@coinspace/cs-evm-wallet')).default;
   }
   if (['toncoin'].includes(platform)) {
-    return (await import('@coinspace/cs-ton-wallet')).default;
+    return (await import('@coinspace/cs-toncoin-wallet')).default;
   }
   // fallback
   return CsWallet;
