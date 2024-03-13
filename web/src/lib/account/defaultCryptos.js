@@ -15,10 +15,12 @@ import polygon from '@coinspace/crypto-db/crypto/polygon@polygon.json';
 import solana from '@coinspace/crypto-db/crypto/solana@solana.json';
 import stellar from '@coinspace/crypto-db/crypto/stellar@stellar.json';
 import tether from '@coinspace/crypto-db/crypto/tether@ethereum.json';
+import toncoin from '@coinspace/crypto-db/crypto/toncoin@toncoin.json';
 import tron from '@coinspace/crypto-db/crypto/tron@tron.json';
 import xrp from '@coinspace/crypto-db/crypto/xrp@ripple.json';
 
 export default [
+  arbitrum,
   avalanche,
   binanceSmartChain,
   bitcoin,
@@ -35,7 +37,7 @@ export default [
   solana,
   stellar,
   tether,
+  toncoin,
   tron,
   xrp,
-  arbitrum,
 ];
