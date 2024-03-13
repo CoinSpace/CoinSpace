@@ -37,3 +37,4 @@ Supported coins:
 - TRON and TRC20 tokens
 - Polygon and Polygon tokens
 - Arbitrum One and Arbitrum tokens
+- Toncoin
