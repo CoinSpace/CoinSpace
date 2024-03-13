@@ -2,22 +2,42 @@
 import { errors } from '@coinspace/cs-common';
 
 import CsButton from '../../../components/CsButton.vue';
+import CsButtonGroup from '../../../components/CsButtonGroup.vue';
 import CsFormGroup from '../../../components/CsForm/CsFormGroup.vue';
 import CsFormInput from '../../../components/CsForm/CsFormInput.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 
+import PasteIcon from '../../../assets/svg/paste.svg';
+import QrIcon from '../../../assets/svg/qr.svg';
+
+import { isQrScanAvailable } from '../../../lib/helpers.js';
+import { onShowOnHide } from '../../../lib/mixins.js';
+
 export default {
   components: {
     MainLayout,
     CsButton,
+    CsButtonGroup,
     CsFormGroup,
     CsFormInput,
+    PasteIcon,
+    QrIcon,
   },
   extends: CsStep,
+  mixins: [onShowOnHide],
+  async onShow() {
+    if (this.storage.temp) {
+      this.privateKey = this.storage.temp;
+      this.storage.temp = undefined;
+    }
+    this.isQrScanAvailable = await isQrScanAvailable();
+  },
   data() {
     return {
       isLoading: false,
+      isPasteAvailable: typeof navigator.clipboard?.readText === 'function',
+      isQrScanAvailable: false,
       privateKey: '',
       error: undefined,
     };
@@ -68,6 +88,12 @@ export default {
         this.isLoading = false;
       }
     },
+    paste() {
+      navigator.clipboard.readText()
+        .then((text) => {
+          this.privateKey = text;
+        }, () => {});
+    },
   },
 };
 </script>
@@ -87,6 +113,32 @@ export default {
         :clear="true"
         :error="error"
       />
+
+      <CsButtonGroup
+        class="&__actions"
+        type="circle"
+      >
+        <CsButton
+          v-if="isPasteAvailable"
+          type="circle"
+          @click="paste"
+        >
+          <template #circle>
+            <PasteIcon />
+          </template>
+          {{ $t('Paste') }}
+        </CsButton>
+        <CsButton
+          v-if="isQrScanAvailable"
+          type="circle"
+          @click="next('qr')"
+        >
+          <template #circle>
+            <QrIcon />
+          </template>
+          {{ $t('Scan QR') }}
+        </CsButton>
+      </CsButtonGroup>
     </CsFormGroup>
 
     <CsButton

@@ -3,8 +3,6 @@ import CsQrScan from '../../../components/CsQrScan.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 
-import { parseCryptoURI } from '../../../lib/cryptoURI.js';
-
 export default {
   components: {
     CsQrScan,
@@ -13,21 +11,8 @@ export default {
   extends: CsStep,
   methods: {
     scan({ data }) {
-      try {
-        const parsed = parseCryptoURI(data);
-        const temp = {
-          address: parsed.address,
-        };
-        if (parsed.destinationTag) {
-          temp.meta = {
-            destinationTag: parsed.destinationTag,
-          };
-        }
-        this.updateStorage({ temp });
-        this.back();
-      } catch (error) {
-        this.back({ error });
-      }
+      this.updateStorage({ temp: data });
+      this.back();
     },
   },
 };

@@ -64,7 +64,7 @@ export default {
       try {
         const barcodes = await this.$options.barcodeDetector.detect(this.$refs.video);
         if (barcodes.length <= 0) return;
-        this.$emit('scan', { uri: barcodes[0].rawValue });
+        this.$emit('scan', { data: barcodes[0].rawValue });
       } catch (err) {
         // TODO handle errors
         console.error(err);

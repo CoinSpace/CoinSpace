@@ -14,9 +14,9 @@ export default {
   },
   extends: CsStep,
   methods: {
-    scan({ uri }) {
+    scan({ data }) {
       try {
-        const parsed = parseCryptoURI(uri);
+        const parsed = parseCryptoURI(data);
         const temp = {
           address: parsed.address,
         };
