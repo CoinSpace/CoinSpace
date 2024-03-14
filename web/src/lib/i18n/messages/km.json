@@ -219,6 +219,7 @@
   "The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.": "ឈ្មោះគណនី EOS ត្រូវតែមានប្រវែង 12 តួអក្សរយ៉ាងពិតប្រាកដនិងមានអក្សរតូចនិងលេខពីលេខ 1 ដល់លេខ 5 ។",
   "The extra amount will be deposited to the created account.": "ចំនួនទឹកប្រាក់បន្ថែមនឹងត្រូវបញ្ចូលទៅក្នុងគណនីដែលបានបង្កើត។",
   "The higher the speed, the faster transaction is processed by the network.": "ល្បឿនកាន់តែខ្ពស់ ប្រតិបត្តិការកាន់តែលឿនត្រូវបានដំណើរការដោយបណ្តាញ។",
+  "The memo contains optional extra information.": "កំណត់ហេតុនេះមានព័ត៌មានបន្ថែមសម្រាប់ជាជម្រើស។",
   "The memo contains optional extra information. A string up to 256-bytes long.": "កំណត់ហេតុនេះមានព័ត៌មានបន្ថែមសម្រាប់ជាជម្រើស។ ចំនួនខ្សែមានប្រវែងរហូតដល់ 256 បៃ។",
   "The memo contains optional extra information. A string up to 28-bytes long.": "កំណត់ហេតុនេះមានព័ត៌មានបន្ថែមសម្រាប់ជាជម្រើស។ ចំនួនខ្សែមានប្រវែងរហូតដល់ 28 បៃ។",
   "There are currently no providers available.": "បច្ចុប្បន្នមិនមានអ្នកផ្តល់សេវាទេ។",

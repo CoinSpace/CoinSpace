@@ -219,6 +219,7 @@
   "The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.": "EOS korisničko ime mora imati točno 12 znakova i sastojati se od malih slova i znamenki od 1 do 5.",
   "The extra amount will be deposited to the created account.": "Dodatni iznos će biti uložen na izrađeni korisnički račun.",
   "The higher the speed, the faster transaction is processed by the network.": "Što je veća brzina, tim će internetska mreža brže obrađivati prijenose.",
+  "The memo contains optional extra information.": "Bilješka sadrži neobavezne dodatne informacije.",
   "The memo contains optional extra information. A string up to 256-bytes long.": "Bilješka sadrži neobavezne dodatne informacije. Niz dug do 256 bajtova.",
   "The memo contains optional extra information. A string up to 28-bytes long.": "Bilješka sadrži neobavezne dodatne informacije. Niz duljine do 28 bajtova.",
   "There are currently no providers available.": "Zasada su nedostupni pružatelji usluga.",

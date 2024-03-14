@@ -219,6 +219,7 @@
   "The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.": "EOS-kontonavnet må være på nøyaktig 12-tegn, og bestå av små bokstaver og tall fra 1 til 5.",
   "The extra amount will be deposited to the created account.": "Ekstrabeløpet settes inn på kontoen som er laget.",
   "The higher the speed, the faster transaction is processed by the network.": "Jo høyere hastighet, desto raskere behandles transaksjonen av nettverket.",
+  "The memo contains optional extra information.": "Notatet inneholder valgfri ekstra informasjon.",
   "The memo contains optional extra information. A string up to 256-bytes long.": "Notatet inneholder valgfri ekstra informasjon. En streng opptil 256-byte lang.",
   "The memo contains optional extra information. A string up to 28-bytes long.": "Notatet inneholder valgfri ekstra informasjon. En streng opptil 28-byte lang.",
   "There are currently no providers available.": "Det er for øyeblikket ingen tilgjengelige leverandører.",

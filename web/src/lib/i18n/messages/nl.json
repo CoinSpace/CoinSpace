@@ -219,6 +219,7 @@
   "The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.": "De naam van het EOS-account moet precies 12 karakters lang zijn en uit kleine letters en de cijfers 1 tot en met 5 bestaan.",
   "The extra amount will be deposited to the created account.": "Het aanvullende bedrag zal worden gestort op het gecreëerde account.",
   "The higher the speed, the faster transaction is processed by the network.": "Hoe hoger de snelheid, des te sneller de transactie door het netwerk wordt verwerkt.",
+  "The memo contains optional extra information.": "De memo bevat optionele aanvullende informatie.",
   "The memo contains optional extra information. A string up to 256-bytes long.": "De memo bevat optionele aanvullende informatie. Een string van maximaal 256 bytes lang.",
   "The memo contains optional extra information. A string up to 28-bytes long.": "De memo bevat optionele aanvullende informatie. Een string van maximaal 28 bytes lang.",
   "There are currently no providers available.": "Er zijn momenteel geen providers beschikbaar.",

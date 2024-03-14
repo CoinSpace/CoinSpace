@@ -219,6 +219,7 @@
   "The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.": "EOSアカウント名は12文字以内で、1~5の英小文字と数字で構成されます。",
   "The extra amount will be deposited to the created account.": "余分な額は作成したアカウントに入金されます。",
   "The higher the speed, the faster transaction is processed by the network.": "ネットワークの速度が速いほど、取引の迅速に処理されます。",
+  "The memo contains optional extra information.": "メモにはオプションの追加情報が含まれます。",
   "The memo contains optional extra information. A string up to 256-bytes long.": "メモには、オプションで最大256バイトの文字列の追加情報が含まれます。",
   "The memo contains optional extra information. A string up to 28-bytes long.": "メモには、オプションで最大28バイトの文字列の追加情報が含まれます。",
   "There are currently no providers available.": "現在、利用可能なプロバイダーはありません。",

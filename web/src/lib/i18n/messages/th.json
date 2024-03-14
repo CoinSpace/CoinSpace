@@ -219,6 +219,7 @@
   "The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.": "ชื่อบัญชี EOS จะต้องมีความยาว 12 ตัวอักษรเท่านั้น รวมถึงประกอบไปด้วยตัวพิมพ์เล็กและตัวเลขตั้งแต่ 1 ถึง 5",
   "The extra amount will be deposited to the created account.": "ระบบจะฝากจำนวนที่เกินไปยังบัญชีที่สร้างขึ้น",
   "The higher the speed, the faster transaction is processed by the network.": "อินเทอร์เน็ตยิ่งเร็วมากเท่าไร การทำธุรกรรมก็ฉับไวมากเท่านั้น",
+  "The memo contains optional extra information.": "บันทึกนี้จะบรรจุข้อมูลเพิ่มเติมที่จะมีหรือไม่มีก็ได้",
   "The memo contains optional extra information. A string up to 256-bytes long.": "บันทึกนี้จะบรรจุข้อมูลเพิ่มเติมที่จะมีหรือไม่มีก็ได้ โดยเป็นสตริงซึ่งมีความยาวสูงสุด 256 ไบต์",
   "The memo contains optional extra information. A string up to 28-bytes long.": "บันทึกนี้จะบรรจุข้อมูลเพิ่มเติมที่จะมีหรือไม่มีก็ได้ โดยเป็นสตริงซึ่งมีความยาวสูงสุด 28 ไบต์",
   "There are currently no providers available.": "ไม่มีผู้ขายในขณะนี้",

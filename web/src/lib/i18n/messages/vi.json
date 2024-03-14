@@ -219,6 +219,7 @@
   "The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.": "Tên tài khoản EOS phải dài đúng 12 ký tự và bao gồm chữ cái viết thường và số từ 1 đến 5.",
   "The extra amount will be deposited to the created account.": "Số tiền bổ sung sẽ được gửi vào tài khoản đã tạo.",
   "The higher the speed, the faster transaction is processed by the network.": "Tốc độ càng cao thì giao dịch được mạng xử lý càng nhanh.",
+  "The memo contains optional extra information.": "Memo chứa thông tin bổ sung tùy chọn.",
   "The memo contains optional extra information. A string up to 256-bytes long.": "Memo chứa thông tin bổ sung tùy chọn. Một chuỗi dài tới 256 byte.",
   "The memo contains optional extra information. A string up to 28-bytes long.": "Memo chứa thông tin bổ sung tùy chọn. Một chuỗi dài tới 28 byte.",
   "There are currently no providers available.": "Hiện không có nhà cung cấp nào.",

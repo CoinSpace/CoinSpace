@@ -219,6 +219,7 @@
   "The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.": "EOS帐户名长度必须精确为12个字符，由小写字母和1到5之间的数字组成。",
   "The extra amount will be deposited to the created account.": "额外的金额将存入创建的账户。",
   "The higher the speed, the faster transaction is processed by the network.": "速度越高，网络处理交易的速度就越快。",
+  "The memo contains optional extra information.": "备忘录包含可选的额外信息。",
   "The memo contains optional extra information. A string up to 256-bytes long.": "备忘录包含可选的额外信息。一个长度最多256字节的字符串。",
   "The memo contains optional extra information. A string up to 28-bytes long.": "备忘录包含可选的额外信息。一个长度最多28字节的字符串。",
   "There are currently no providers available.": "目前没有可用的提供者。",

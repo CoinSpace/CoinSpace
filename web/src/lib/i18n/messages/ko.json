@@ -219,6 +219,7 @@
   "The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.": "EOS 계정명은 정확히 12자이고 소문자와 1에서 5사이의 숫자로 구성됩니다.",
   "The extra amount will be deposited to the created account.": "추가 금액은 생성된 계정에 예치될 것입니다.",
   "The higher the speed, the faster transaction is processed by the network.": "속도가 빠를수록, 네트워크에서 거래가 더 빨리 처리됩니다.",
+  "The memo contains optional extra information.": "메모에는 선택적인 추가 정보가 포함됩니다.",
   "The memo contains optional extra information. A string up to 256-bytes long.": "메모에는 선택적인 추가 정보가 포함됩니다. 문자열 길이는 최장 256 바이트입니다.",
   "The memo contains optional extra information. A string up to 28-bytes long.": "메모에는 선택적인 추가 정보가 포함됩니다. 문자열 길이는 최장 28 바이트입니다.",
   "There are currently no providers available.": "현재 이용 가능한 제공자가 없습니다.",

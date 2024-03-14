@@ -219,6 +219,7 @@
   "The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.": "O nome da conta EOS deve ter exatamente 12 caracteres e conter letras minúsculas e dígitos de 1 a 5.",
   "The extra amount will be deposited to the created account.": "O valor adicional será depositado na conta criada.",
   "The higher the speed, the faster transaction is processed by the network.": "Quanto maior a velocidade, mais rapidamente a operação será processada pela rede.",
+  "The memo contains optional extra information.": "O memorando contém informações extras opcionais.",
   "The memo contains optional extra information. A string up to 256-bytes long.": "O memorando contém informações extras opcionais. Sequência de até 256 bytes.",
   "The memo contains optional extra information. A string up to 28-bytes long.": "O memorando contém informações extras opcionais. Sequência de até 28 bytes.",
   "There are currently no providers available.": "Não há provedores disponíveis no momento.",

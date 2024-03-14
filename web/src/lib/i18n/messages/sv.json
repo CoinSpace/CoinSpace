@@ -219,6 +219,7 @@
   "The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.": "EOS-kontonamnet måste vara exakt 12 tecken långt och bestå av små bokstäver och siffror från 1 till 5.",
   "The extra amount will be deposited to the created account.": "Det extra beloppet sätts in på det skapade kontot.",
   "The higher the speed, the faster transaction is processed by the network.": "Ju högre hastighet, desto snabbare bearbetas transaktionen av nätverket.",
+  "The memo contains optional extra information.": "Memot innehåller valfri extra information.",
   "The memo contains optional extra information. A string up to 256-bytes long.": "Memot innehåller valfri extra information. En sträng på upp till 256 byte lång.",
   "The memo contains optional extra information. A string up to 28-bytes long.": "Memot innehåller valfri extra information. En sträng på upp till 28 byte lång.",
   "There are currently no providers available.": "Det finns för närvarande inga tillgängliga leverantörer.",

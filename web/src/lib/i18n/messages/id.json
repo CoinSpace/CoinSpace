@@ -219,6 +219,7 @@
   "The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.": "Nama akun EOS harus terdiri dari 12 huruf dan terdiri dari huruf kecil dan angka dari 1 sampai 5.",
   "The extra amount will be deposited to the created account.": "Jumlah tambahan akan didepositkan pada pembuatan akun.",
   "The higher the speed, the faster transaction is processed by the network.": "Makin tinggi kecepatannya, makin cepat transaksi diproses oleh jaringan.",
+  "The memo contains optional extra information.": "Memo berisi informasi tambahan lain.",
   "The memo contains optional extra information. A string up to 256-bytes long.": "Memo berisi informasi tambahan lain. Sebuah string dengan panjang hingga 256-byte.",
   "The memo contains optional extra information. A string up to 28-bytes long.": "Memo berisi informasi tambahan lain. Sebuah string dengan panjang hingga 28-byte.",
   "There are currently no providers available.": "Saat ini tidak ada penyedia layanan yang tersedia.",

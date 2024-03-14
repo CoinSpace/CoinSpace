@@ -219,6 +219,7 @@
   "The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.": "EOS hesap adı tam olarak 12 karakter uzunluğunda olmalı ve küçük harflerden ve 1'den 5'e kadar rakamlardan oluşmalıdır.",
   "The extra amount will be deposited to the created account.": "Fazla tutar, oluşturulmuş olan hesaba aktarılacak.",
   "The higher the speed, the faster transaction is processed by the network.": "Hız ne kadar yüksek olursa ağın işlem hızı da o kadar hızlı olur.",
+  "The memo contains optional extra information.": "Hatırlatma notu isteğe bağlı ek bilgiler içerir.",
   "The memo contains optional extra information. A string up to 256-bytes long.": "Hatırlatma notu isteğe bağlı ek bilgiler içerir. 256 bayt uzunluğa kadar bir dizidir.",
   "The memo contains optional extra information. A string up to 28-bytes long.": "Hatırlatma notu isteğe bağlı ek bilgiler içerir. 28 bayt uzunluğa kadar bir dizidir.",
   "There are currently no providers available.": "Şu anda müsait sağlayıcı yok.",

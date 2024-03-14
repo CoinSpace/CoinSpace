@@ -41,6 +41,17 @@ export default {
       meta,
     };
   },
+  computed: {
+    memoTitle() {
+      if (this.$wallet.crypto.platform === 'stellar') {
+        return this.$t('The memo contains optional extra information. A string up to 28-bytes long.');
+      }
+      if (this.$wallet.crypto.platform === 'eos') {
+        return this.$t('The memo contains optional extra information. A string up to 256-bytes long.');
+      }
+      return this.$t('The memo contains optional extra information.');
+    },
+  },
   methods: {
     async confirm() {
       this.isLoading = true;
@@ -135,10 +146,7 @@ export default {
       >
         <template #info>
           <div>
-            <!-- eslint-disable-next-line max-len -->
-            {{ $wallet.crypto.platform === 'stellar' && $t('The memo contains optional extra information. A string up to 28-bytes long.') }}
-            <!-- eslint-disable-next-line max-len -->
-            {{ $wallet.crypto.platform === 'eos' && $t('The memo contains optional extra information. A string up to 256-bytes long.') }}
+            {{ memoTitle }}
           </div>
         </template>
       </CsFormInput>

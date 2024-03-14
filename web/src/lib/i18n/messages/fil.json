@@ -219,6 +219,7 @@
   "The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.": "Ang pangalan ng EOS account ay dapat eksaktong 12-character ang haba at binubuo ng mga maliliit na letra at digit mula 1 hanggang 5.",
   "The extra amount will be deposited to the created account.": "Ang ekstrang halaga ay idedeposito sa nilikhang account.",
   "The higher the speed, the faster transaction is processed by the network.": "Kung mas mataas ang bilis, mas mabilis ang pagproseso ng transaksiyon sa network.",
+  "The memo contains optional extra information.": "Ang memo ay naglalaman ng opsyonal na ekstrang impormasyon.",
   "The memo contains optional extra information. A string up to 256-bytes long.": "Ang memo ay naglalaman ng opsyonal na ekstrang impormasyon. Isang string na hanggang 256-bytes ang haba.",
   "The memo contains optional extra information. A string up to 28-bytes long.": "Ang memo ay naglalaman ng opsyonal na ekstrang impormasyon. Isang string na hanggang 28-bytes ang haba.",
   "There are currently no providers available.": "Kasalukuyang walang available na mga provider.",

@@ -219,6 +219,7 @@
   "The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.": "Numele contului EOS trebuie să conțină exact 12 caractere și să fie format din litere mici și cifre de la 1 la 5.",
   "The extra amount will be deposited to the created account.": "Suma suplimentară va fi depusă în contul creat.",
   "The higher the speed, the faster transaction is processed by the network.": "Cu cât viteza este mai mare, cu atât tranzacția este procesată mai rapid de rețea.",
+  "The memo contains optional extra information.": "Nota conține informații suplimentare opționale.",
   "The memo contains optional extra information. A string up to 256-bytes long.": "Nota conține informații suplimentare opționale. Un șir de până la 256 de octeți.",
   "The memo contains optional extra information. A string up to 28-bytes long.": "Nota conține informații suplimentare opționale. Un șir de maximum 28 de octeți.",
   "There are currently no providers available.": "În prezent, nu există furnizori disponibili.",
