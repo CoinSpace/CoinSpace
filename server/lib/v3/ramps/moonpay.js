@@ -3,7 +3,6 @@ import axios from 'axios';
 import crypto from 'crypto';
 import pMemoize from 'p-memoize';
 
-const API_KEY = process.env.MOONPAY_API_KEY;
 const rampData = {
   name: 'MoonPay',
   svg: 'svg_moonpay',
@@ -12,12 +11,10 @@ const envSuffix = `${process.env.NODE_ENV === 'production' ? '' : '-sandbox'}`;
 const rampApi = axios.create({
   baseURL: 'https://api.moonpay.com/',
   timeout: 15000, // 15 secs
-  params: { apiKey: API_KEY },
 });
 const colorCode = '#3cc77a';
 
 async function moonpay(countryCode, crypto, walletAddress) {
-  if (!API_KEY) return {};
   if (!crypto) return {};
   const result = {};
   const countries = await cachedCountries();
