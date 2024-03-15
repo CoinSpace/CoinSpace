@@ -256,6 +256,16 @@ export default class ChangellyExchange {
     const exchange = this.#exchanges
       .filter((item) => item.cryptoFrom === crypto._id || item.cryptoTo === crypto._id)
       .find((item) => {
+        if (crypto._id === 'toncoin@toncoin') {
+          if (item.cryptoFrom === 'toncoin@toncoin') {
+            return transaction.to?.toLowerCase() === item.payinAddress?.toLowerCase();
+          }
+          if (item.cryptoTo === 'toncoin@toncoin') {
+            const amountTo = item.amountTo !== '0' ? item.amountTo : item.amountExpectedTo;
+            return transaction.to?.toLowerCase() === item.payoutAddress?.toLowerCase()
+              && transaction.amount.value === Amount.fromString(amountTo, crypto.decimals).value;
+          }
+        }
         return item?.payinHash?.toLowerCase() === transaction.id.toLowerCase()
             || item?.payoutHash?.toLowerCase() === transaction.id.toLowerCase();
       });
