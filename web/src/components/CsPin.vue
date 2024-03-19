@@ -126,6 +126,7 @@ export default {
     },
 
     async biometry() {
+      if (this.isLoading) return;
       this.isLoading = true;
       this.error = undefined;
       try {
