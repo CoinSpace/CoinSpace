@@ -4,6 +4,8 @@ import {
   errors,
 } from '@coinspace/cs-common';
 
+import { areAddressesEqual as areTonAddressesEqual } from '@coinspace/cs-toncoin-wallet/helpers';
+
 export class ExchangeDisabledError extends Error {
   name = 'ExchangeDisabledError';
 }
@@ -258,11 +260,11 @@ export default class ChangellyExchange {
       .find((item) => {
         if (crypto._id === 'toncoin@toncoin') {
           if (item.cryptoFrom === 'toncoin@toncoin') {
-            return transaction.to?.toLowerCase() === item.payinAddress?.toLowerCase();
+            return areTonAddressesEqual(transaction.to, item.payinAddress);
           }
           if (item.cryptoTo === 'toncoin@toncoin') {
             const amountTo = item.amountTo !== '0' ? item.amountTo : item.amountExpectedTo;
-            return transaction.to?.toLowerCase() === item.payoutAddress?.toLowerCase()
+            return areTonAddressesEqual(transaction.to, item.payoutAddress)
               && transaction.amount.value === Amount.fromString(amountTo, crypto.decimals).value;
           }
         }
