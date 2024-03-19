@@ -80,6 +80,7 @@ export default {
       } else {
         this.next('pin', {
           mode: 'deviceSeed',
+          layout: 'MainLayout',
           success: async (_, pin) => {
             await this.$account.biometry.enable(pin);
             this.isBiometryEnabled = this.$account.biometry.isEnabled;
