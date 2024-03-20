@@ -19,8 +19,8 @@ export default {
       default: '',
     },
     loading: {
-      type: String,
-      default: '',
+      type: Boolean,
+      default: false,
     },
     columns: {
       type: Boolean,
@@ -56,10 +56,10 @@ export default {
         class="&__item"
         :class="{
           '&__item--selected': selected === item.crypto._id,
-          '&__item--loading': loading === item.crypto._id,
+          '&__item--loading': loading,
           '&__item--columns': columns === true,
         }"
-        @click="loading !== item.crypto._id && $emit('select', item.crypto._id)"
+        @click="!loading && $emit('select', item.crypto._id)"
       >
         <CsCryptoLogo
           class="&__logo"
