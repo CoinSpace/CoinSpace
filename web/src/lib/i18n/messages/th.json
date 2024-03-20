@@ -261,6 +261,7 @@
   "Wallet address": "ที่อยู่ของกระเป่าเงิน",
   "Warning!": "คำเตือน!",
   "We are about to generate your very own passphrase": "เรากำลังจะสร้างวลีรหัสผ่านของคุณ",
+  "What is a passphrase?": "",
   "Word #{index}": "คำ #{index}",
   "You do not have any transactions yet.": "คุณยังไม่มีการทำธุรกรรมในตอนนี้.",
   "Your passphrase": "วลีรหัสผ่านของคุณ",

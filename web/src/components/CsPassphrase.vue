@@ -5,12 +5,14 @@ import { sha256 } from '@noble/hashes/sha256';
 import { wordlist } from '@scure/bip39/wordlists/english';
 import { mnemonicToSeed, validateMnemonic } from '@scure/bip39';
 
-import CsButton from '../components/CsButton.vue';
-import CsFormTextarea from '../components/CsForm/CsFormTextarea.vue';
+import CsButton from './CsButton.vue';
+import CsButtonGroup from './CsButtonGroup.vue';
+import CsFormTextarea from './CsForm/CsFormTextarea.vue';
 
 export default {
   components: {
     CsButton,
+    CsButtonGroup,
     CsFormTextarea,
   },
   props: {
@@ -113,14 +115,22 @@ export default {
       </CsButton>
     </div>
   </div>
-  <CsButton
-    type="primary"
-    class="&__confirm"
-    :isLoading="isLoading"
-    @click="confirm"
-  >
-    {{ $t('Confirm') }}
-  </CsButton>
+
+  <CsButtonGroup class="&__buttons">
+    <CsButton
+      type="primary"
+      :isLoading="isLoading"
+      @click="confirm"
+    >
+      {{ $t('Confirm') }}
+    </CsButton>
+    <CsButton
+      type="primary-link"
+      @click="$safeOpen('https://support.coin.space/hc/en-us/articles/115001633527')"
+    >
+      {{ $t('What is a passphrase?') }}
+    </CsButton>
+  </CsButtonGroup>
 </template>
 
 <style lang="scss">
@@ -145,7 +155,7 @@ export default {
       box-shadow: 0 0.75rem 2.5rem rgb(0 0 0 / 7%);
     }
 
-    &__confirm {
+    &__buttons {
       flex-shrink: 0;
     }
   }
