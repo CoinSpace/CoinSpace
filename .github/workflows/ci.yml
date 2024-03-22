@@ -235,6 +235,7 @@ jobs:
       - name: Build app
         env:
           NODE_ENV: production
+          NODE_OPTIONS: --max-old-space-size=3575
           VITE_COMMIT: ${{ github.sha }}
           VITE_BUILD_TYPE: ${{ matrix.VITE_BUILD_TYPE }}
           VITE_PLATFORM: ${{ matrix.VITE_PLATFORM }}
