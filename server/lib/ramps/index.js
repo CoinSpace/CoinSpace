@@ -9,7 +9,7 @@ import paybis from './paybis.js';
 
 async function buy({ countryCode, crypto: cryptoId, address }) {
   const crypto = cryptoDB.find((item) => item._id === cryptoId);
-  const ramps = countryCode === 'GB' ? [moonpay] : [
+  const ramps = [
     moonpay,
     onramper,
     btcdirect,
