@@ -216,7 +216,8 @@ export default {
         v-if="!transaction.incoming && transaction.fee !== undefined"
         :label="$t('Fee')"
         :value="`${transaction.fee} ${$wallet.crypto.type === 'coin'
-          ? $wallet.crypto.symbol : $wallet.platform.symbol}`"
+          ? $wallet.crypto.symbol : $wallet.platform.symbol}`
+          + `${$wallet.platform._id === 'ethereum@optimism' ? ' + L1' : ''}`"
       />
       <CsFormTextareaReadonly
         :label="$t('Transaction ID')"
