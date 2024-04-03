@@ -38,6 +38,7 @@ const EVM_FAMILY = [
   'avalanche-c-chain',
   'binance-smart-chain',
   'arbitrum',
+  'optimism',
 ];
 
 async function loadWalletModule(platform) {
@@ -397,6 +398,8 @@ export default class Account extends EventEmitter {
         return import.meta.env.VITE_API_ADA_URL;
       case 'toncoin':
         return import.meta.env.VITE_API_TON_URL;
+      case 'optimism':
+        return import.meta.env.VITE_API_OPTIMISM_URL;
       default:
         throw new errors.InternalWalletError(`Unsupported platform "${platform}"`);
     }
