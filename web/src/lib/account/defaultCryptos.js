@@ -11,6 +11,7 @@ import ethereum from '@coinspace/crypto-db/crypto/ethereum@ethereum.json';
 import ethereumClassic from '@coinspace/crypto-db/crypto/ethereum-classic@ethereum-classic.json';
 import litecoin from '@coinspace/crypto-db/crypto/litecoin@litecoin.json';
 import monero from '@coinspace/crypto-db/crypto/monero@monero.json';
+import optimism from '@coinspace/crypto-db/crypto/ethereum@optimism.json';
 import polygon from '@coinspace/crypto-db/crypto/polygon@polygon.json';
 import solana from '@coinspace/crypto-db/crypto/solana@solana.json';
 import stellar from '@coinspace/crypto-db/crypto/stellar@stellar.json';
@@ -33,6 +34,7 @@ export default [
   ethereumClassic,
   litecoin,
   monero,
+  optimism,
   polygon,
   solana,
   stellar,
