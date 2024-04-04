@@ -399,7 +399,7 @@ export default class Account extends EventEmitter {
       case 'toncoin':
         return import.meta.env.VITE_API_TON_URL;
       case 'optimism':
-        return import.meta.env.VITE_API_OPTIMISM_URL;
+        return import.meta.env.VITE_API_OP_URL;
       default:
         throw new errors.InternalWalletError(`Unsupported platform "${platform}"`);
     }
