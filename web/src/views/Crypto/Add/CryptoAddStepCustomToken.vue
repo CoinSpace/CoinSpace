@@ -67,6 +67,7 @@ export default {
         this.error = undefined;
         return;
       }
+      if (this.isLoading) return;
       try {
         this.isLoading = true;
         const token = await this.$account.getCustomTokenInfo(this.platform.platform, address);
@@ -98,6 +99,7 @@ export default {
     },
     async add() {
       this.showModal = false;
+      this.isLoading = true;
       try {
         await this.$account.addWallet(this.token);
         this.$router.replace({ name: 'crypto', params: { cryptoId: this.token._id } });
@@ -114,6 +116,8 @@ export default {
         } else {
           console.error(err);
         }
+      } finally {
+        this.isLoading = false;
       }
     },
   },
