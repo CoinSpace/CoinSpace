@@ -18,7 +18,7 @@ export default {
       type: String,
       default: '',
     },
-    loading: {
+    isLoading: {
       type: Boolean,
       default: false,
     },
@@ -49,17 +49,21 @@ export default {
     >
       {{ header }}
     </div>
-    <div class="&__list">
+    <div
+      class="&__list"
+      :class="{
+        '&__list--loading': isLoading,
+      }"
+    >
       <div
         v-for="item in items"
         :key="item.crypto._id"
         class="&__item"
         :class="{
           '&__item--selected': selected === item.crypto._id,
-          '&__item--loading': loading,
           '&__item--columns': columns === true,
         }"
-        @click="!loading && $emit('select', item.crypto._id)"
+        @click="!isLoading && $emit('select', item.crypto._id)"
       >
         <CsCryptoLogo
           class="&__logo"
@@ -132,6 +136,11 @@ export default {
       justify-content: flex-start;
       margin-right: -$spacing-sm;
       margin-left: -$spacing-sm;
+
+      &--loading {
+        opacity: 0.4;
+        pointer-events: none;
+      }
     }
 
     &__item {
@@ -155,11 +164,6 @@ export default {
 
       &--selected {
         background-color: $secondary-light;
-      }
-
-      &--loading {
-        opacity: 0.4;
-        pointer-events: none;
       }
 
       &--columns {
