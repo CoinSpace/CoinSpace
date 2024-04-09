@@ -38,3 +38,4 @@ Supported coins:
 - Polygon and Polygon tokens
 - Arbitrum One and Arbitrum tokens
 - Toncoin
+- Optimism and Optimism tokens
