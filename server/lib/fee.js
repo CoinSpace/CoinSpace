@@ -13,7 +13,7 @@ const API = {
 const CRYPTO = Object.keys(API);
 
 function coinPerKilobyte2satPerByte(bitcoinPerKilobyte) {
-  return Math.min(Math.round(bitcoinPerKilobyte * 1e8 / 1e3), 1);
+  return Math.max(Math.round(bitcoinPerKilobyte * 1e8 / 1e3), 1);
 }
 
 async function estimatefee(cryptoId) {
