@@ -12,13 +12,14 @@ export default {
   data() {
     return {
       platforms: [
-        'ethereum@ethereum',
+        'ethereum@arbitrum',
         'avalanche@avalanche-c-chain',
         'binance-coin@binance-smart-chain',
+        'ethereum@ethereum',
+        'ethereum@optimism',
         'polygon@polygon',
         'solana@solana',
         'tron@tron',
-        'ethereum@arbitrum',
       ],
     };
   },
