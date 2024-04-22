@@ -18,24 +18,23 @@ Supported platforms:
 - Tor
 
 Supported coins:
-- Bitcoin
-- Bitcoin Cash
-- Bitcoin SV. Removed at block 722524.
-- Ethereum and ERC20 tokens
-- Litecoin
-- XRP
-- Stellar
-- EOS
-- Dogecoin
-- Dash
-- Monero
-- Binance Smart Chain and BEP20 tokens
-- Cardano
-- Ethereum Classic
-- Solana and SPL tokens
-- Avalanche C-Chain and ARC20 tokens
-- TRON and TRC20 tokens
-- Polygon and Polygon tokens
-- Arbitrum One and Arbitrum tokens
-- Toncoin
-- Optimism and Optimism tokens
+- Arbitrum One (ARB) and Arbitrum tokens
+- Avalanche C-Chain (AVAX) and ARC20 tokens
+- Binance Smart Chain (BSC) and BEP20 tokens
+- Bitcoin (BTC)
+- Bitcoin Cash (BCH)
+- Cardano (ADA)
+- Dash (DASH)
+- Dogecoin (DOGE)
+- EOS (EOS)
+- Ethereum (ETH) and ERC20 tokens
+- Ethereum Classic (ETC)
+- Litecoin (LTC)
+- Monero (XMR)
+- Optimism (OP) and Optimism tokens
+- Polygon (MATIC) and Polygon tokens
+- Solana (SOL) and SPL tokens
+- Stellar (XLM)
+- TRON (TRX) and TRC20 tokens
+- Toncoin (TON)
+- XRP (XRP)
