@@ -29,6 +29,7 @@ Supported coins:
 - EOS (EOS)
 - Ethereum (ETH) and ERC20 tokens
 - Ethereum Classic (ETC)
+- Fantom (FTM) and Fantom tokens
 - Litecoin (LTC)
 - Monero (XMR)
 - Optimism (OP) and Optimism tokens
