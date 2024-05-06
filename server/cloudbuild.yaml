@@ -46,6 +46,7 @@ steps:
       && if [[ "${_VITE_API_ADA_URL}" ]]; then export VITE_API_ADA_URL=${_VITE_API_ADA_URL}; fi \
       && if [[ "${_VITE_API_TON_URL}" ]]; then export VITE_API_TON_URL=${_VITE_API_TON_URL}; fi \
       && if [[ "${_VITE_API_OP_URL}" ]]; then export VITE_API_OP_URL=${_VITE_API_OP_URL}; fi \
+      && if [[ "${_VITE_API_FTM_URL}" ]]; then export VITE_API_FTM_URL=${_VITE_API_FTM_URL}; fi \
       && npm run build
 
 - name: 'gcr.io/cloud-builders/docker'

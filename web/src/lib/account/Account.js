@@ -39,6 +39,7 @@ const EVM_FAMILY = [
   'binance-smart-chain',
   'arbitrum',
   'optimism',
+  'fantom',
 ];
 
 async function loadWalletModule(platform) {
@@ -380,6 +381,10 @@ export default class Account extends EventEmitter {
         return import.meta.env.VITE_API_AVAX_URL;
       case 'arbitrum':
         return import.meta.env.VITE_API_ARB_URL;
+      case 'optimism':
+        return import.meta.env.VITE_API_OP_URL;
+      case 'fantom':
+        return import.meta.env.VITE_API_FTM_URL;
       // Ripple-like
       case 'ripple':
         return import.meta.env.VITE_API_XRP_URL;
@@ -398,8 +403,6 @@ export default class Account extends EventEmitter {
         return import.meta.env.VITE_API_ADA_URL;
       case 'toncoin':
         return import.meta.env.VITE_API_TON_URL;
-      case 'optimism':
-        return import.meta.env.VITE_API_OP_URL;
       default:
         throw new errors.InternalWalletError(`Unsupported platform "${platform}"`);
     }

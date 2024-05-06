@@ -20,6 +20,7 @@ export default {
         'polygon@polygon',
         'solana@solana',
         'tron@tron',
+        'fantom@fantom',
       ],
     };
   },
