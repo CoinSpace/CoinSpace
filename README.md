@@ -39,3 +39,5 @@ Supported coins:
 - TRON (TRX) and TRC20 tokens
 - Toncoin (TON)
 - XRP (XRP)
+
+This project is tested with BrowserStack
