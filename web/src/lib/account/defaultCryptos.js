@@ -9,6 +9,7 @@ import dogecoin from '@coinspace/crypto-db/crypto/dogecoin@dogecoin.json';
 import eos from '@coinspace/crypto-db/crypto/eos@eos.json';
 import ethereum from '@coinspace/crypto-db/crypto/ethereum@ethereum.json';
 import ethereumClassic from '@coinspace/crypto-db/crypto/ethereum-classic@ethereum-classic.json';
+import fantom from '@coinspace/crypto-db/crypto/fantom@fantom.json';
 import litecoin from '@coinspace/crypto-db/crypto/litecoin@litecoin.json';
 import monero from '@coinspace/crypto-db/crypto/monero@monero.json';
 import optimism from '@coinspace/crypto-db/crypto/ethereum@optimism.json';
@@ -32,6 +33,7 @@ export default [
   eos,
   ethereum,
   ethereumClassic,
+  fantom,
   litecoin,
   monero,
   optimism,
