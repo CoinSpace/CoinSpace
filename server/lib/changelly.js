@@ -109,6 +109,29 @@ async function estimate(from, to, value) {
 async function estimateV4(from, to, value) {
   const fromCrypto = getCrypto(from);
   const toCrypto = getCrypto(to);
+
+  const { result: params } = await request('getPairsParams', [{
+    from: fromCrypto.changelly.ticker,
+    to: toCrypto.changelly.ticker,
+  }]);
+  if (!params || !params[0]) {
+    return {
+      error: 'ExchangeDisabled',
+    };
+  }
+  if (Big(value).lt(params[0].minAmountFloat)) {
+    return {
+      error: 'SmallAmountError',
+      amount: normalizeNumber(params[0].minAmountFloat, fromCrypto.decimals),
+    };
+  }
+  if (Big(value).gt(params[0].maxAmountFloat)) {
+    return {
+      error: 'BigAmountError',
+      amount: normalizeNumber(params[0].maxAmountFloat, fromCrypto.decimals),
+    };
+  }
+
   const data = await request('getExchangeAmount', [{
     from: fromCrypto.changelly.ticker,
     to: toCrypto.changelly.ticker,
