@@ -404,7 +404,8 @@ export default class Account extends EventEmitter {
       case 'toncoin':
         return import.meta.env.VITE_API_TON_URL;
       default:
-        throw new errors.InternalWalletError(`Unsupported platform "${platform}"`);
+        // fallback
+        return 'https://unsupported.coin.space/';
     }
   }
 
