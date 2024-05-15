@@ -1516,7 +1516,7 @@ components:
         $ref: '#/components/schemas/Update'
     UrlString:
       type: string
-      pattern: ^(http|https):\/\/.+$
+      pattern: ^(mailto:|(http|https):\/\/).+$
       maxLength: 2048
     Username:
       type: string

@@ -256,7 +256,7 @@ async function getTransactions(id, currency, address, limit, offset) {
     }
     return {
       id: tx.id,
-      trackUrl: tx.trackUrl,
+      trackUrl: `mailto:support@changelly.com?subject=Changelly transaction ${tx.id}`,
       status,
       amountTo: tx.amountTo || '0',
       amountExpectedTo: tx.amountExpectedTo || '0',
@@ -290,7 +290,7 @@ async function getTransactionsV4(id) {
     }
     return {
       id: tx.id,
-      trackUrl: tx.trackUrl,
+      trackUrl: `mailto:support@changelly.com?subject=Changelly transaction ${tx.id}`,
       status,
       amountTo: tx.amountTo || '0',
       amountExpectedTo: tx.amountExpectedTo || '0',
