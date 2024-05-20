@@ -15,6 +15,14 @@ const rampApi = axios.create({
 });
 
 async function buy(countryCode, crypto, walletAddress) {
+  return ramp('buy', countryCode, crypto, walletAddress);
+}
+
+async function sell(countryCode, crypto) {
+  return ramp('sell', countryCode, crypto);
+}
+
+async function ramp(type, countryCode, crypto, walletAddress) {
   if (!API_KEY) return;
   if (!crypto) return;
   const countries = await cachedCountries();
@@ -38,21 +46,22 @@ async function buy(countryCode, crypto, walletAddress) {
   url.searchParams.set('partner_api_token', API_KEY);
   url.searchParams.set('theme', 'blue');
   url.searchParams.set('type', 'narrow');
-  url.searchParams.set('default_side', 'buy_crypto');
+  url.searchParams.set('default_side', `${type}_crypto`);
   url.searchParams.set('side_toggle_disabled', 'true');
   url.searchParams.set('crypto_currencies_list', JSON.stringify([{
     ticker: crypto.guardarian.ticker,
     network: crypto.guardarian.network,
   }]));
-  url.searchParams.set('payout_address', walletAddress);
+
+  if (type === 'buy') {
+    url.searchParams.set('payout_address', walletAddress);
+  }
 
   return {
     ...rampData,
     url: url.toString(),
   };
 }
-
-async function sell() {}
 
 const cachedCurrencies = pMemoize(async () => {
   const { data } = await rampApi.get('/v1/currencies/crypto');
