@@ -32,8 +32,16 @@
         %VITE_API_OP_URL%
         %VITE_API_FTM_URL%
         https://api.coingecko.com/
-        https://api.moonpay.com
+        https://api.moonpay.com/
+        wss://*.walletconnect.org/
+        wss://*.walletconnect.com/
+        https://*.walletconnect.org/
+        https://*.walletconnect.com/
         https://*.sentry.io;
+      frame-src
+        'self'
+        https://*.walletconnect.org/
+        https://*.walletconnect.com/;
       img-src
         'self'
         %VITE_SITE_URL%

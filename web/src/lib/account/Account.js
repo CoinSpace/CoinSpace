@@ -158,6 +158,7 @@ export default class Account extends EventEmitter {
   #ramps;
   #exchange;
   #needToMigrateV5Balance = false;
+  #walletConnect;
 
   get clientStorage() {
     return this.#clientStorage;
@@ -762,5 +763,14 @@ export default class Account extends EventEmitter {
   toggleHiddenBalance() {
     this.#clientStorage.toggleHiddenBalance();
     this.emit('update', 'isHiddenBalance');
+  }
+
+  async walletConnect() {
+    if (!this.#walletConnect) {
+      this.#walletConnect = import('./WalletConnect.js').then(({ WalletConnect }) => {
+        return new WalletConnect({ account: this }).init();
+      });
+    }
+    return this.#walletConnect;
   }
 }

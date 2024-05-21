@@ -1,0 +1,150 @@
+<script>
+import CsButton from '../../../components/CsButton.vue';
+import CsButtonGroup from '../../../components/CsButtonGroup.vue';
+import CsFormGroup from '../../../components/CsForm/CsFormGroup.vue';
+import CsFormInput from '../../../components/CsForm/CsFormInput.vue';
+import CsStep from '../../../components/CsStep.vue';
+import MainLayout from '../../../layouts/MainLayout.vue';
+
+import PasteIcon from '../../../assets/svg/paste.svg';
+import QrIcon from '../../../assets/svg/qr.svg';
+
+import { isQrScanAvailable } from '../../../lib/helpers.js';
+import { onShowOnHide } from '../../../lib/mixins.js';
+
+import debounce from 'p-debounce';
+
+export default {
+  components: {
+    MainLayout,
+    CsButton,
+    CsButtonGroup,
+    CsFormGroup,
+    CsFormInput,
+    PasteIcon,
+    QrIcon,
+  },
+  extends: CsStep,
+  mixins: [onShowOnHide],
+  async onShow() {
+    this.isQrScanAvailable = await isQrScanAvailable();
+  },
+  data() {
+    return {
+      isLoading: false,
+      isPasteAvailable: typeof navigator.clipboard?.readText === 'function',
+      isQrScanAvailable: false,
+      uri: '',
+      error: undefined,
+    };
+  },
+  watch: {
+    uri: debounce(async function(/*value*/) {
+      this.error = undefined;
+    }, 300),
+  },
+  methods: {
+    async connect() {
+      this.isLoading = true;
+      try {
+        const walletConnect = await this.$account.walletConnect();
+        const proposal = await walletConnect.pair(this.uri);
+        this.error = undefined;
+        this.updateStorage({ proposal });
+        this.next('proposal');
+      } catch (err) {
+        if (err.message?.startsWith('Missing or invalid. pair() uri')) {
+          this.error = this.$t('Invalid WalletConnect URI');
+          return;
+        }
+        // TODO errors
+        console.error(err);
+      } finally {
+        this.isLoading = false;
+      }
+    },
+    paste() {
+      navigator.clipboard.readText()
+        .then((text) => {
+          this.uri = text;
+        }, () => {});
+    },
+  },
+};
+</script>
+
+<template>
+  <MainLayout
+    :title="$t('WalletConnect')"
+  >
+    <CsFormGroup class="&__container">
+      <CsFormInput
+        v-model="uri"
+        :label="$t('WalletConnect URI')"
+        :error="error"
+        :clear="true"
+      />
+
+      <CsButtonGroup
+        class="&__actions"
+        type="circle"
+      >
+        <CsButton
+          v-if="isPasteAvailable"
+          type="circle"
+          @click="paste"
+        >
+          <template #circle>
+            <PasteIcon />
+          </template>
+          {{ $t('Paste') }}
+        </CsButton>
+        <CsButton
+          v-if="isQrScanAvailable"
+          type="circle"
+          @click="next('qr')"
+        >
+          <template #circle>
+            <QrIcon />
+          </template>
+          {{ $t('Scan QR') }}
+        </CsButton>
+      </CsButtonGroup>
+    </CsFormGroup>
+    <CsButtonGroup class="&__buttons">
+      <CsButton
+        type="primary"
+        :isLoading="isLoading"
+        @click="connect"
+      >
+        {{ $t('Connect') }}
+      </CsButton>
+      <CsButton
+        type="primary-link"
+        @click="$safeOpen('https://support.coin.space/hc/en-us/articles/115001633527')"
+      >
+        {{ $t('What is WalletConnect?') }}
+      </CsButton>
+    </CsButtonGroup>
+  </MainLayout>
+</template>
+
+<style lang="scss">
+  .#{ $filename } {
+    $self: &;
+
+    &__container {
+      flex-grow: 1;
+    }
+
+    &__actions {
+      width: 100%;
+      max-width: 25rem;
+      align-self: center;
+    }
+
+    &__buttons {
+      flex-shrink: 0;
+    }
+  }
+</style>

@@ -21,6 +21,7 @@ import SettingsAccountView from '../../views/Settings/Account/SettingsAccountVie
 import SettingsHardwareView from '../../views/Settings/Hardware/SettingsHardwareView.vue';
 import SettingsPinView from '../../views/Settings/Pin/SettingsPinView.vue';
 import SettingsView from '../../views/Settings/SettingsView.vue';
+import SettingsWalletConnectView from '../../views/Settings/SettingsWalletConnect/SettingsWalletConnectView.vue';
 
 import NotFound from '../../views/NotFound.vue';
 
@@ -54,6 +55,10 @@ const app = [
         path: 'pin',
         name: 'settings.pin',
         component: SettingsPinView,
+      }, {
+        path: 'walletconnect',
+        name: 'settings.walletconnect',
+        component: SettingsWalletConnectView,
       }],
     }, {
       path: 'add/:cryptoId([a-z0-9-]+@[a-z0-9-]+)?',
