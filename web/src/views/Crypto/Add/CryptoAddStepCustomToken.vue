@@ -61,6 +61,12 @@ export default {
     },
   },
   watch: {
+    'storage.platform'(newPlatform, oldPlatform) {
+      if (newPlatform !== oldPlatform) {
+        this.token = undefined;
+        this.address = '';
+      }
+    },
     address: debounce(async function(address) {
       if (!this.platform || !address) {
         this.token = undefined;
