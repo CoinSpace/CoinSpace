@@ -60,6 +60,7 @@ export default {
       addressOrAlias: '',
       address: '',
       alias: '',
+      destinationTag: undefined,
       error: undefined,
     };
   },
@@ -71,9 +72,15 @@ export default {
         if (data) {
           this.address = data.address;
           this.alias = data.alias;
+          if (this.$wallet.crypto.platform === 'ripple') {
+            this.destinationTag = data.destinationTag;
+          }
         } else {
           this.address = value;
           this.alias = undefined;
+          if (this.$wallet.crypto.platform === 'ripple') {
+            this.destinationTag = undefined;
+          }
         }
         this.isLoading = false;
       } else {
@@ -99,6 +106,8 @@ export default {
           alias: this.alias,
           feeRate: (this.$wallet.isFeeRatesSupported && this.$wallet.feeRates.length === 1)
             ? this.$wallet.feeRates[0] : undefined,
+          temp: (this.$wallet.crypto.platform === 'ripple' && this.alias)
+            ? { meta: { destinationTag: this.destinationTag, readonlyDestinationTag: true } } : undefined,
         });
         if (this.$wallet.isMetaSupported) {
           this.next('meta');

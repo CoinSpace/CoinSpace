@@ -2,6 +2,7 @@
 import CsButton from '../../../components/CsButton.vue';
 import CsFormGroup from '../../../components/CsForm/CsFormGroup.vue';
 import CsFormInput from '../../../components/CsForm/CsFormInput.vue';
+import CsFormTextareaReadonly from '../../../components/CsForm/CsFormTextareaReadonly.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 
@@ -19,6 +20,7 @@ export default {
     CsButton,
     CsFormGroup,
     CsFormInput,
+    CsFormTextareaReadonly,
   },
   extends: CsStep,
   mixins: [onShowOnHide],
@@ -26,6 +28,10 @@ export default {
     if (this.storage.temp?.meta?.destinationTag) {
       this.meta.destinationTag = this.storage.temp.meta.destinationTag;
       this.storage.temp.meta.destinationTag = undefined;
+    }
+    if (this.storage.temp?.meta?.readonlyDestinationTag) {
+      this.readonlyDestinationTag = this.storage.temp.meta.readonlyDestinationTag;
+      this.storage.temp.meta.readonlyDestinationTag = undefined;
     }
   },
   data() {
@@ -39,6 +45,7 @@ export default {
       errors: {},
       metaNames: this.$wallet.metaNames,
       meta,
+      readonlyDestinationTag: false,
     };
   },
   computed: {
@@ -107,7 +114,7 @@ export default {
   >
     <CsFormGroup class="&__container">
       <CsFormInput
-        v-if="metaNames.includes('destinationTag')"
+        v-if="metaNames.includes('destinationTag') && !readonlyDestinationTag"
         v-model="meta.destinationTag"
         :label="$t('Destination tag')"
         :placeholder="$t('(optional)')"
@@ -121,6 +128,19 @@ export default {
           </div>
         </template>
       </CsFormInput>
+      <CsFormTextareaReadonly
+        v-if="metaNames.includes('destinationTag') && readonlyDestinationTag"
+        :value="meta.destinationTag"
+        :label="$t('Destination tag')"
+        :info="$t('Destination tag')"
+      >
+        <template #info>
+          <div>
+            <!-- eslint-disable-next-line max-len -->
+            {{ $t('An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.') }}
+          </div>
+        </template>
+      </CsFormTextareaReadonly>
       <CsFormInput
         v-if="metaNames.includes('invoiceId')"
         v-model="meta.invoiceId"

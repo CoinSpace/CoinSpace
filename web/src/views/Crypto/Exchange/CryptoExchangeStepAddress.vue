@@ -65,6 +65,7 @@ export default {
       addressOrAlias: '',
       address: this.storage.address,
       alias: undefined,
+      extraId: undefined,
       isQrScanAvailable: false,
       isPasteAvailable: typeof navigator.clipboard?.readText === 'function',
       ownWallet: this.storage.address === 'your wallet',
@@ -80,9 +81,15 @@ export default {
         if (data) {
           this.address = data.address;
           this.alias = data.alias;
+          if (this.storage.to.crypto.platform === 'ripple') {
+            this.extraId = data.destinationTag;
+          }
         } else {
           this.address = value;
           this.alias = undefined;
+          if (this.storage.to.crypto.platform === 'ripple') {
+            this.extraId = undefined;
+          }
         }
         this.isLoading = false;
       } else {
@@ -110,12 +117,14 @@ export default {
           await this.$account.exchange.validateAddress({
             to: this.storage.to.crypto._id,
             address: this.address,
+            extraId: this.extraId,
           });
           this.updateStorage({
             address: this.address,
             alias: this.alias,
+            extraId: this.extraId,
           });
-          if (ChangellyExchange.EXTRA_ID.includes(this.storage.to.crypto._id)) {
+          if (ChangellyExchange.EXTRA_ID.includes(this.storage.to.crypto._id) && this.extraId === undefined) {
             this.next('meta');
           } else {
             this.next('confirm');
