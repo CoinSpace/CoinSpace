@@ -86,11 +86,11 @@ async function getPairsParams(from, to) {
 async function estimate(from, to, value) {
   const fromCrypto = getCrypto(from);
   const toCrypto = getCrypto(to);
-  const { result: data } = await request('getExchangeAmount', [{
+  const { result: data } = await request('getExchangeAmount', {
     from: fromCrypto.changelly.ticker,
     to: toCrypto.changelly.ticker,
     amountFrom: value,
-  }]);
+  });
   if (!data) {
     return {
       rate: '0',
@@ -110,33 +110,11 @@ async function estimateV4(from, to, value) {
   const fromCrypto = getCrypto(from);
   const toCrypto = getCrypto(to);
 
-  const { result: params } = await request('getPairsParams', [{
-    from: fromCrypto.changelly.ticker,
-    to: toCrypto.changelly.ticker,
-  }]);
-  if (!params || !params[0]) {
-    return {
-      error: 'ExchangeDisabled',
-    };
-  }
-  if (Big(value).lt(params[0].minAmountFloat)) {
-    return {
-      error: 'SmallAmountError',
-      amount: normalizeNumber(params[0].minAmountFloat, fromCrypto.decimals),
-    };
-  }
-  if (Big(value).gt(params[0].maxAmountFloat)) {
-    return {
-      error: 'BigAmountError',
-      amount: normalizeNumber(params[0].maxAmountFloat, fromCrypto.decimals),
-    };
-  }
-
-  const data = await request('getExchangeAmount', [{
+  const data = await request('getExchangeAmount', {
     from: fromCrypto.changelly.ticker,
     to: toCrypto.changelly.ticker,
     amountFrom: value,
-  }]);
+  });
   if (data.error) {
     if (data.error.code === -32600 || data.error.code === -32602) {
       if (/minimal amount/i.test(data.error.message)) {
