@@ -123,5 +123,6 @@ export async function createAccount({ app, router }) {
       });
       account.emit('update');
     };
+    window.setLanguage = setLanguage;
   }
 }
