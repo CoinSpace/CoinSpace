@@ -45,10 +45,10 @@ export default {
     },
     buttonLabel() {
       if (this.type === 'buy') {
-        return 'Buy';
+        return this.$t('Buy');
       }
       if (this.type === 'sell') {
-        return 'Sell';
+        return this.$t('Sell');
       }
       return '';
     },
