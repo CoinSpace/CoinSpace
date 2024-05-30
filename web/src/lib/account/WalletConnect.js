@@ -2,6 +2,7 @@ import { Core } from '@walletconnect/core';
 import { EventEmitter } from 'events';
 import { Web3Wallet } from '@walletconnect/web3wallet';
 import { buildApprovedNamespaces, getSdkError } from '@walletconnect/utils';
+import { formatJsonRpcError, formatJsonRpcResult } from '@walletconnect/jsonrpc-utils';
 
 export class WalletConnect extends EventEmitter {
   #account;
@@ -66,7 +67,7 @@ export class WalletConnect extends EventEmitter {
           eip155: {
             chains,
             accounts,
-            methods: ['eth_sendTransaction'],
+            methods: ['eth_sendTransaction', 'personal_sign'],
             events: ['accountsChanged', 'chainChanged', 'message', 'disconnect', 'connect'],
           },
         },
@@ -77,7 +78,6 @@ export class WalletConnect extends EventEmitter {
       });
       return this.#session;
     } catch (err) {
-      console.error('error', err);
       await this.#web3wallet.rejectSession({
         id: proposal.id,
         reason: getSdkError('USER_REJECTED'),
@@ -93,14 +93,19 @@ export class WalletConnect extends EventEmitter {
   }
 
   async disconnectSession() {
-    await this.#web3wallet.disconnectSession({
-      topic: this.#session.topic,
-      reason: getSdkError('USER_DISCONNECTED'),
-    });
+    if (this.#session) {
+      await this.#web3wallet.disconnectSession({
+        topic: this.#session.topic,
+        reason: getSdkError('USER_DISCONNECTED'),
+      });
+    }
   }
 
   #onSessionRequest(request) {
     if (this.#session.topic === request.topic) {
+      if (request.params.request.method === 'eth_sendTransaction') {
+        this.emit('eth_sendTransaction', request);
+      }
       // TODO
     }
   }
@@ -109,5 +114,18 @@ export class WalletConnect extends EventEmitter {
     if (this.#session.topic === session.topic) {
       // TODO show error message?
     }
+  }
+
+  async resolveSessionRequest(request, result) {
+    await this.#web3wallet.respondSessionRequest({
+      topic: this.#session.topic,
+      response: formatJsonRpcResult(request.id, result),
+    });
+  }
+  async rejectSessionRequest(request, err) {
+    await this.#web3wallet.respondSessionRequest({
+      topic: this.#session.topic,
+      response: formatJsonRpcError(request.id, err),
+    });
   }
 }

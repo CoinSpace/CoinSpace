@@ -45,19 +45,25 @@ export default {
   },
   methods: {
     async connect() {
+      this.error = undefined;
       this.isLoading = true;
       try {
         const walletConnect = await this.$account.walletConnect();
         const proposal = await walletConnect.pair(this.uri);
-        this.error = undefined;
-        this.updateStorage({ proposal });
-        this.next('proposal');
+        const session = await walletConnect.approveSession(proposal);
+        this.updateStorage({ session });
+        this.next('main');
       } catch (err) {
         if (err.message?.startsWith('Missing or invalid. pair() uri')) {
-          this.error = this.$t('Invalid WalletConnect URI');
+          this.error = this.$t('Invalid URI');
+          return;
+        }
+        if (err.message?.contains('Please try again with a new connection URI')) {
+          this.error = this.$t('Please try again with a new connection URI');
           return;
         }
         // TODO errors
+        this.error = this.$t('Error! Please try again later.');
         console.error(err);
       } finally {
         this.isLoading = false;

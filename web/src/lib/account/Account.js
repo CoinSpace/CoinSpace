@@ -114,6 +114,15 @@ class WalletManager {
     this.#wallets.delete(id);
   }
 
+  getByChainId(chainId) {
+    return [...this.#wallets.values()].find((wallet) => {
+      if (wallet.isWalletConnectSupported && wallet.chainId === chainId) {
+        return true;
+      }
+      return false;
+    });
+  }
+
   filterByPlatform(platform) {
     return [...this.#wallets.values()].filter((wallet) => {
       return wallet.crypto.platform === platform;
@@ -474,6 +483,10 @@ export default class Account extends EventEmitter {
 
   tokensByPlatform(platform) {
     return this.#wallets.tokensByPlatform(platform);
+  }
+
+  walletByChainId(chainId) {
+    return this.#wallets.getByChainId(chainId);
   }
 
   async create(walletSeed, pin) {
