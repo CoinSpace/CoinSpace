@@ -45,11 +45,17 @@ export default {
     };
   },
   computed: {
+    crypto() {
+      return this.transaction.crypto || this.$wallet.crypto;
+    },
+    platform() {
+      return this.transaction.platform || this.$wallet.platform;
+    },
     amount() {
       if (this.fiatMode && this.transaction.price !== undefined) {
         return this.$c(cryptoToFiat(this.transaction.amount, this.transaction.price));
       } else {
-        return `${this.transaction.amount} ${this.$wallet.crypto.symbol}`;
+        return `${this.transaction.amount} ${this.crypto.symbol}`;
       }
     },
     fee() {
@@ -62,7 +68,7 @@ export default {
         return this.$t('{sign}{fee} {symbol} fee', {
           sign: '+',
           fee: this.transaction.fee,
-          symbol: this.$wallet.platform.symbol,
+          symbol: this.platform.symbol,
         });
       }
     },
@@ -80,8 +86,8 @@ export default {
 <template>
   <CsTokenInfo
     class="&__info"
-    :crypto="$wallet.crypto"
-    :platform="$wallet.platform"
+    :crypto="crypto"
+    :platform="platform"
     :title="amount"
     :subtitles="fee && [fee]"
     @click="fiatMode = !fiatMode"

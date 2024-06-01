@@ -1,8 +1,6 @@
 <script>
-import CsButton from '../../../components/CsButton.vue';
-import CsFormGroup from '../../../components/CsForm/CsFormGroup.vue';
-import CsFormTextareaReadonly from '../../../components/CsForm/CsFormTextareaReadonly.vue';
 import CsStep from '../../../components/CsStep.vue';
+import CsTransactionConfirm from '../../../components/CsTransactionConfirm.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 
 import { walletSeed } from '../../../lib/mixins.js';
@@ -10,9 +8,7 @@ import { walletSeed } from '../../../lib/mixins.js';
 export default {
   components: {
     MainLayout,
-    CsButton,
-    CsFormGroup,
-    CsFormTextareaReadonly,
+    CsTransactionConfirm,
   },
   extends: CsStep,
   mixins: [walletSeed],
@@ -52,39 +48,11 @@ export default {
 </script>
 
 <template>
-  <MainLayout
-    :title="$t('WalletConnect')"
-  >
-    <CsFormGroup class="&__container">
-      <CsFormTextareaReadonly
-        :value="params.to"
-        :label="$t('Wallet address')"
-      />
-      <CsFormTextareaReadonly
-        :value="params.data"
-        :label="$t('Data')"
-      />
-      <CsFormTextareaReadonly
-        :value="params.value"
-        :label="$t('Value')"
-      />
-    </CsFormGroup>
-    <CsButton
-      type="primary"
+  <MainLayout :title="$t('Confirm transaction')">
+    <CsTransactionConfirm
+      :transaction="storage.transaction"
       :isLoading="isLoading"
-      @click="confirm"
-    >
-      {{ $t('Confirm') }}
-    </CsButton>
+      @confirm="confirm"
+    />
   </MainLayout>
 </template>
-
-<style lang="scss">
-  .#{ $filename } {
-    $self: &;
-
-    &__container {
-      flex-grow: 1;
-    }
-  }
-</style>

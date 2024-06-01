@@ -68,7 +68,7 @@ export class WalletConnect extends EventEmitter {
             chains,
             accounts,
             methods: ['eth_sendTransaction', 'personal_sign'],
-            events: ['accountsChanged', 'chainChanged', 'message', 'disconnect', 'connect'],
+            events: ['accountsChanged', 'chainChanged'],
           },
         },
       });
@@ -98,6 +98,7 @@ export class WalletConnect extends EventEmitter {
         topic: this.#session.topic,
         reason: getSdkError('USER_DISCONNECTED'),
       });
+      this.#session = undefined;
     }
   }
 
@@ -112,7 +113,7 @@ export class WalletConnect extends EventEmitter {
 
   #onSessionDelete(session) {
     if (this.#session.topic === session.topic) {
-      // TODO show error message?
+      this.emit('disconnect');
     }
   }
 
@@ -122,6 +123,7 @@ export class WalletConnect extends EventEmitter {
       response: formatJsonRpcResult(request.id, result),
     });
   }
+
   async rejectSessionRequest(request, err) {
     await this.#web3wallet.respondSessionRequest({
       topic: this.#session.topic,

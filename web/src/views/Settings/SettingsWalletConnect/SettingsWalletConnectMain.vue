@@ -6,6 +6,7 @@ import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 
 import { onShowOnHide } from '../../../lib/mixins.js';
+import { Amount, CsWallet } from '@coinspace/cs-common';
 
 export default {
   components: {
@@ -44,9 +45,37 @@ export default {
         this.isLoading = false;
       }
     },
-    send(request) {
-      this.updateStorage({ request });
-      this.next('confirm');
+    async send(request) {
+      this.isLoading = true;
+      try {
+        const params = request.params.request.params[0];
+        const wallet = this.$account.walletByChainId(request.params?.chainId);
+        if (![CsWallet.STATE_LOADED, CsWallet.STATE_LOADING].includes(wallet.state)) {
+          await wallet.cleanup();
+          await wallet.load();
+        }
+        const amount = new Amount(params.value, wallet.crypto.decimals);
+        const gasLimit = params.gas ? BigInt(params.gas) : wallet.gasLimitSmartContract;
+        const fee = await wallet.estimateTransactionFee({ amount, address: params.to, gasLimit });
+        this.updateStorage({
+          request,
+          transaction: {
+            price: await this.$account.market.getPrice(wallet.crypto._id, this.$currency),
+            pricePlatform: await this.$account.market.getPrice(wallet.platform._id, this.$currency),
+            amount,
+            address: params.to,
+            fee,
+            crypto: wallet.crypto,
+            platform: wallet.platform,
+          },
+        });
+        this.next('confirm');
+      } catch (err) {
+        // TODO errors
+        console.error(err);
+      } finally {
+        this.isLoading = false;
+      }
     },
   },
 };
