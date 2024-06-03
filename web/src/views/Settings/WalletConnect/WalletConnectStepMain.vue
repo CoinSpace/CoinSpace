@@ -28,7 +28,6 @@ export default {
   data() {
     return {
       isLoading: false,
-      error: undefined,
     };
   },
   methods: {
@@ -37,12 +36,11 @@ export default {
       try {
         const walletConnect = await this.$account.walletConnect();
         await walletConnect.disconnectSession();
-        this.$router.up();
       } catch (err) {
-        // TODO errors
         console.error(err);
       } finally {
         this.isLoading = false;
+        this.$router.up();
       }
     },
     async send(request) {
@@ -71,7 +69,6 @@ export default {
         });
         this.next('confirm');
       } catch (err) {
-        // TODO errors
         console.error(err);
       } finally {
         this.isLoading = false;

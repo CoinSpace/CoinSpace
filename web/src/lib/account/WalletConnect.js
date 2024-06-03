@@ -107,7 +107,6 @@ export class WalletConnect extends EventEmitter {
       if (request.params.request.method === 'eth_sendTransaction') {
         this.emit('eth_sendTransaction', request);
       }
-      // TODO
     }
   }
 

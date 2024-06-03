@@ -7,12 +7,19 @@ export default {
     CsTransactionStatus,
   },
   extends: CsStep,
+  methods: {
+    done() {
+      this.back();
+    },
+  },
 };
 </script>
 
 <template>
   <CsTransactionStatus
+    :transaction="storage.transaction"
     :status="storage.status"
     :message="storage.message"
+    @done="done"
   />
 </template>

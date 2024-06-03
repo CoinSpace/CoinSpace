@@ -66,7 +66,6 @@ export default {
           this.error = this.$t('Please try again with a new connection URI');
           return;
         }
-        // TODO errors
         this.error = this.$t('Error! Please try again later.');
         console.error(err);
       } finally {

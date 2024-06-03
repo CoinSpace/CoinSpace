@@ -35,8 +35,8 @@ export default {
           this.updateStorage({ status: true });
         } catch (err) {
           await walletConnect.rejectSessionRequest(this.storage.request, err);
-          this.updateStorage({ status: false });
           // TODO errors
+          this.updateStorage({ status: false });
           console.error(err);
         } finally {
           this.replace('status');
