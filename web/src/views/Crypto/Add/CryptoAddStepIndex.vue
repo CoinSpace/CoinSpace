@@ -113,12 +113,12 @@ export default {
       this.isLoading = true;
       try {
         await this.$account.addWallet(crypto);
-        this.$router.replace({ name: 'crypto', replace: true, params: { cryptoId: crypto._id } });
+        this.$router.replace({ name: 'crypto', params: { cryptoId: crypto._id } });
       } catch (err) {
         if (err instanceof SeedRequiredError) {
           await this.walletSeed(async (walletSeed) => {
             await this.$account.addWallet(crypto, walletSeed);
-            this.$router.replace({ name: 'crypto', replace: true, params: { cryptoId: crypto._id } });
+            this.$router.replace({ name: 'crypto', params: { cryptoId: crypto._id } });
           });
         } else {
           console.error(err);
