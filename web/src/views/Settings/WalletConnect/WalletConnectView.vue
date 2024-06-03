@@ -5,6 +5,7 @@ import CsSteps from '../../../components/CsSteps.vue';
 import WalletConnectStepConfirm from './WalletConnectStepConfirm.vue';
 import WalletConnectStepIndex from './WalletConnectStepIndex.vue';
 import WalletConnectStepMain from './WalletConnectStepMain.vue';
+import WalletConnectStepQr from './WalletConnectStepQr.vue';
 import WalletConnectStepStatus from './WalletConnectStepStatus.vue';
 
 import { onShowOnHide } from '../../../lib/mixins.js';
@@ -37,6 +38,7 @@ export default {
     confirm: WalletConnectStepConfirm,
     pin: CsPinStep,
     status: WalletConnectStepStatus,
+    qr: WalletConnectStepQr,
   },
   methods: {
     disconnect() {

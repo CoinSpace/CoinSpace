@@ -27,6 +27,10 @@ export default {
   extends: CsStep,
   mixins: [onShowOnHide],
   async onShow() {
+    if (this.storage.uri) {
+      this.uri = this.storage.uri;
+      this.storage.uri = undefined;
+    }
     this.isQrScanAvailable = await isQrScanAvailable();
   },
   data() {
