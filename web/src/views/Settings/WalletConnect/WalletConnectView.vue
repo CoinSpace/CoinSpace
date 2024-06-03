@@ -2,9 +2,9 @@
 import CsPinStep from '../../../components/CsPinStep.vue';
 import CsSteps from '../../../components/CsSteps.vue';
 
-import SettingsWalletConnectConfirm from './SettingsWalletConnectConfirm.vue';
-import SettingsWalletConnectIndex from './SettingsWalletConnectIndex.vue';
-import SettingsWalletConnectMain from './SettingsWalletConnectMain.vue';
+import WalletConnectConfirm from './WalletConnectConfirm.vue';
+import WalletConnectIndex from './WalletConnectIndex.vue';
+import WalletConnectMain from './WalletConnectMain.vue';
 
 import { onShowOnHide } from '../../../lib/mixins.js';
 
@@ -18,9 +18,9 @@ export default {
     await walletConnect.disconnectSession();
   },
   steps: {
-    index: SettingsWalletConnectIndex,
-    main: SettingsWalletConnectMain,
-    confirm: SettingsWalletConnectConfirm,
+    index: WalletConnectIndex,
+    main: WalletConnectMain,
+    confirm: WalletConnectConfirm,
     pin: CsPinStep,
   },
 };

@@ -21,7 +21,7 @@ import SettingsAccountView from '../../views/Settings/Account/SettingsAccountVie
 import SettingsHardwareView from '../../views/Settings/Hardware/SettingsHardwareView.vue';
 import SettingsPinView from '../../views/Settings/Pin/SettingsPinView.vue';
 import SettingsView from '../../views/Settings/SettingsView.vue';
-import SettingsWalletConnectView from '../../views/Settings/SettingsWalletConnect/SettingsWalletConnectView.vue';
+import SettingsWalletConnectView from '../../views/Settings/WalletConnect/WalletConnectView.vue';
 
 import NotFound from '../../views/NotFound.vue';
 

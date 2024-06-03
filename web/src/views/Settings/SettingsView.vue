@@ -133,9 +133,9 @@ export default {
       </CsListItem>
     </CsListItems>
 
-    <CsListItems :title="$t('Web3 & DApps')">
+    <CsListItems :title="$t('Connections')">
       <CsListItem
-        :title="$t('Wallet Connect')"
+        :title="$t('WalletConnect')"
         @click="$router.push({ name: 'settings.walletconnect' })"
       />
     </CsListItems>
