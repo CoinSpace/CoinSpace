@@ -32,16 +32,16 @@ export default {
           const id = await wallet.eth_sendTransaction(this.params, walletSeed);
           await walletConnect.resolveSessionRequest(this.storage.request, id);
           this.$account.emit('update');
-          //this.updateStorage({ status: true });
+          this.updateStorage({ status: true });
         } catch (err) {
           await walletConnect.rejectSessionRequest(this.storage.request, err);
+          this.updateStorage({ status: false });
           // TODO errors
-          //this.updateStorage({ status: false });
           console.error(err);
         } finally {
-          this.back();
+          this.replace('status');
         }
-      }, { keepStep: true });
+      });
     },
   },
 };

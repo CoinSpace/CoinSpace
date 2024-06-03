@@ -113,6 +113,7 @@ export class WalletConnect extends EventEmitter {
 
   #onSessionDelete(session) {
     if (this.#session.topic === session.topic) {
+      this.#session = undefined;
       this.emit('disconnect');
     }
   }
