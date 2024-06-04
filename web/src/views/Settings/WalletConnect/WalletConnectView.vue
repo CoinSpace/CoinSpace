@@ -29,8 +29,8 @@ export default {
   },
   async onHide() {
     const walletConnect = await this.$account.walletConnect();
-    await walletConnect.disconnectSession();
     walletConnect.off('disconnect', this.disconnect);
+    await walletConnect.disconnectSession();
   },
   steps: {
     index: WalletConnectStepIndex,

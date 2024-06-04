@@ -94,11 +94,15 @@ export class WalletConnect extends EventEmitter {
 
   async disconnectSession() {
     if (this.#session) {
-      await this.#web3wallet.disconnectSession({
-        topic: this.#session.topic,
-        reason: getSdkError('USER_DISCONNECTED'),
-      });
-      this.#session = undefined;
+      try {
+        await this.#web3wallet.disconnectSession({
+          topic: this.#session.topic,
+          reason: getSdkError('USER_DISCONNECTED'),
+        });
+        this.#session = undefined;
+      } catch (err) {
+        console.error(err);
+      }
     }
   }
 
@@ -118,16 +122,24 @@ export class WalletConnect extends EventEmitter {
   }
 
   async resolveSessionRequest(request, result) {
-    await this.#web3wallet.respondSessionRequest({
-      topic: this.#session.topic,
-      response: formatJsonRpcResult(request.id, result),
-    });
+    try {
+      await this.#web3wallet.respondSessionRequest({
+        topic: this.#session.topic,
+        response: formatJsonRpcResult(request.id, result),
+      });
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   async rejectSessionRequest(request, err) {
-    await this.#web3wallet.respondSessionRequest({
-      topic: this.#session.topic,
-      response: formatJsonRpcError(request.id, err),
-    });
+    try {
+      await this.#web3wallet.respondSessionRequest({
+        topic: this.#session.topic,
+        response: formatJsonRpcError(request.id, err),
+      });
+    } catch (err) {
+      console.error(err);
+    }
   }
 }
