@@ -20,6 +20,7 @@ export default {
   async onShow() {
     const walletConnect = await this.$account.walletConnect();
     walletConnect.once('eth_sendTransaction', this.send);
+    await walletConnect.getPendingSessionRequests();
   },
   async onHide() {
     const walletConnect = await this.$account.walletConnect();
@@ -28,10 +29,12 @@ export default {
   data() {
     return {
       isLoading: false,
+      error: undefined,
     };
   },
   methods: {
     async disconnect() {
+      this.error = undefined;
       this.isLoading = true;
       try {
         const walletConnect = await this.$account.walletConnect();
@@ -40,10 +43,11 @@ export default {
         console.error(err);
       } finally {
         this.isLoading = false;
-        this.$router.up();
+        this.$router.replace({ name: 'settings.walletconnect', force: true });
       }
     },
     async send(request) {
+      this.error = undefined;
       this.isLoading = true;
       try {
         const params = request.params.request.params[0];
@@ -52,7 +56,7 @@ export default {
           await wallet.cleanup();
           await wallet.load();
         }
-        const amount = new Amount(params.value, wallet.crypto.decimals);
+        const amount = new Amount(params.value || 0, wallet.crypto.decimals);
         const gasLimit = params.gas ? BigInt(params.gas) : wallet.gasLimitSmartContract;
         const fee = await wallet.estimateTransactionFee({ amount, address: params.to, gasLimit });
         this.updateStorage({
@@ -69,6 +73,7 @@ export default {
         });
         this.next('confirm');
       } catch (err) {
+        this.error = this.$t('Error! Please try again later.');
         console.error(err);
       } finally {
         this.isLoading = false;
@@ -89,6 +94,12 @@ export default {
         :label="$t('URL')"
       />
     </CsFormGroup>
+    <div
+      v-if="error"
+      class="&__error"
+    >
+      {{ error }}
+    </div>
     <CsButton
       type="primary"
       :isLoading="isLoading"
@@ -105,6 +116,11 @@ export default {
 
     &__container {
       flex-grow: 1;
+    }
+
+    &__error {
+      @include text-md;
+      color: $danger;
     }
   }
 </style>

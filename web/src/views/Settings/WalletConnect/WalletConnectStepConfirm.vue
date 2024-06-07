@@ -39,16 +39,32 @@ export default {
           this.updateStorage({ status: false });
           console.error(err);
         } finally {
+          this.isLoading = false;
           this.replace('status');
         }
       });
+    },
+    async reject() {
+      this.isLoading = true;
+      try {
+        const walletConnect = await this.$account.walletConnect();
+        await walletConnect.rejectSessionRequest(this.storage.request);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        this.isLoading = false;
+        this.back();
+      }
     },
   },
 };
 </script>
 
 <template>
-  <MainLayout :title="$t('Confirm transaction')">
+  <MainLayout
+    :title="$t('Confirm transaction')"
+    @back="reject"
+  >
     <CsTransactionConfirm
       :transaction="storage.transaction"
       :isLoading="isLoading"

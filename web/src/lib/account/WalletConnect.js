@@ -22,7 +22,7 @@ export class WalletConnect extends EventEmitter {
       metadata: {
         name: 'Coin Wallet',
         description: 'Coin Wallet is the most popular and secure non-custodial multicurrency wallet',
-        //url: 'www.walletconnect.com',
+        url: 'https://coin.space/',
         icons: [],
       },
     });
@@ -106,10 +106,31 @@ export class WalletConnect extends EventEmitter {
     }
   }
 
+  async getPendingSessionRequests() {
+    if (this.#session) {
+      try {
+        const requests = await this.#web3wallet.getPendingSessionRequests();
+        for (const request of requests) {
+          this.#onSessionRequest(request);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  }
+
   #onSessionRequest(request) {
-    if (this.#session.topic === request.topic) {
-      if (request.params.request.method === 'eth_sendTransaction') {
-        this.emit('eth_sendTransaction', request);
+    if (this.#session) {
+      if (this.#session.topic === request.topic && request.params.request.expiryTimestamp * 1000 > Date.now()) {
+        if (request.params.request.method === 'eth_sendTransaction') {
+          this.emit('eth_sendTransaction', request);
+          return;
+        }
+        console.error(`Unsupported SessionRequest '${request?.params?.request?.method}': ${JSON.stringify(request)}`);
+        this.#web3wallet.respondSessionRequest({
+          topic: this.#session.topic,
+          response: formatJsonRpcError(request.id, getSdkError('UNSUPPORTED_METHODS')),
+        }).catch(console.error);
       }
     }
   }
@@ -132,11 +153,11 @@ export class WalletConnect extends EventEmitter {
     }
   }
 
-  async rejectSessionRequest(request, err) {
+  async rejectSessionRequest(request, error) {
     try {
       await this.#web3wallet.respondSessionRequest({
         topic: this.#session.topic,
-        response: formatJsonRpcError(request.id, err),
+        response: formatJsonRpcError(request.id, error || getSdkError('USER_REJECTED_METHODS')),
       });
     } catch (err) {
       console.error(err);

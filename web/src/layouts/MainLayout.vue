@@ -22,6 +22,10 @@ export default {
       type: String,
       default: '',
     },
+    onBack: {
+      type: Function,
+      default: undefined,
+    },
   },
   data() {
     return {
@@ -42,7 +46,9 @@ export default {
   },
   methods: {
     back() {
-      if (this.$parent.$options.extends?.name === 'CsStep') {
+      if (this.onBack) {
+        this.onBack();
+      } else if (this.$parent.$options.extends?.name === 'CsStep') {
         this.$parent.back();
       } else {
         this.$router.up();

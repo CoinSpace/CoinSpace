@@ -43,7 +43,7 @@ export default {
     };
   },
   watch: {
-    uri: debounce(async function(/*value*/) {
+    uri: debounce(async function() {
       this.error = undefined;
     }, 300),
   },
@@ -58,11 +58,11 @@ export default {
         this.updateStorage({ session });
         this.next('main');
       } catch (err) {
-        if (err.message?.startsWith('Missing or invalid. pair() uri')) {
+        if (err.message?.startsWith?.('Missing or invalid. pair() uri')) {
           this.error = this.$t('Invalid URI');
           return;
         }
-        if (err.message?.contains('Please try again with a new connection URI')) {
+        if (err.message?.contains?.('Please try again with a new connection URI')) {
           this.error = this.$t('Please try again with a new connection URI');
           return;
         }
