@@ -39,10 +39,10 @@ export default {
           this.updateStorage({ status: false });
           console.error(err);
         } finally {
-          this.isLoading = false;
           this.replace('status');
         }
       });
+      this.isLoading = false;
     },
     async reject() {
       this.isLoading = true;
