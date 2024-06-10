@@ -97,7 +97,6 @@ export default {
     <CsFormTextarea
       ref="passphrase"
       v-model="passphrase"
-      class="&__passphrase"
       :label="$t('Passphrase')"
       :error="error"
     />
