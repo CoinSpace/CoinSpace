@@ -157,7 +157,7 @@ export class WalletConnect extends EventEmitter {
     try {
       await this.#web3wallet.respondSessionRequest({
         topic: this.#session.topic,
-        response: formatJsonRpcError(request.id, error || getSdkError('USER_REJECTED_METHODS')),
+        response: formatJsonRpcError(request.id, error || getSdkError('USER_REJECTED')),
       });
     } catch (err) {
       console.error(err);
