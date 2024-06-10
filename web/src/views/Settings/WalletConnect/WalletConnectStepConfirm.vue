@@ -14,7 +14,6 @@ export default {
   mixins: [walletSeed],
   data() {
     return {
-      params: this.storage.request.params.request.params[0],
       isLoading: false,
       error: undefined,
     };
@@ -25,11 +24,12 @@ export default {
       const walletConnect = await this.$account.walletConnect();
       await this.walletSeed(async (walletSeed) => {
         try {
-          const wallet = this.$account.walletByChainId(this.storage.request.params?.chainId);
+          const { params } = this.storage.request;
+          const wallet = this.$account.walletByChainId(params?.chainId);
           if (!wallet) {
-            throw new Error(`Unknown wallet chainId: ${this.storage.request.params?.chainId}`);
+            throw new Error(`Unknown wallet chainId: ${params?.chainId}`);
           }
-          const id = await wallet.eth_sendTransaction(this.params, walletSeed);
+          const id = await wallet.eth_sendTransaction(params.request.params[0], walletSeed);
           await walletConnect.resolveSessionRequest(this.storage.request, id);
           this.$account.emit('update');
           this.updateStorage({ status: true });
