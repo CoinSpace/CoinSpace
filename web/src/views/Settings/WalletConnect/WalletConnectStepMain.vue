@@ -20,11 +20,13 @@ export default {
   async onShow() {
     const walletConnect = await this.$account.walletConnect();
     walletConnect.once('eth_sendTransaction', this.send);
+    walletConnect.once('eth_signTypedData', this.sign);
     await walletConnect.getPendingSessionRequests();
   },
   async onHide() {
     const walletConnect = await this.$account.walletConnect();
     walletConnect.off('eth_sendTransaction', this.send);
+    walletConnect.off('eth_signTypedData', this.sign);
   },
   data() {
     return {
@@ -72,6 +74,28 @@ export default {
           },
         });
         this.next('confirm');
+      } catch (err) {
+        this.error = this.$t('Error! Please try again later.');
+        console.error(err);
+      } finally {
+        this.isLoading = false;
+      }
+    },
+    async sign(request) {
+      this.error = undefined;
+      this.isLoading = true;
+      try {
+        const wallet = this.$account.walletByChainId(request.params?.chainId);
+        if (![CsWallet.STATE_LOADED, CsWallet.STATE_LOADING].includes(wallet.state)) {
+          await wallet.cleanup();
+          await wallet.load();
+        }
+        const data = JSON.parse(request.params.request.params[1]);
+        this.updateStorage({
+          request,
+          data,
+        });
+        this.next('sign');
       } catch (err) {
         this.error = this.$t('Error! Please try again later.');
         console.error(err);

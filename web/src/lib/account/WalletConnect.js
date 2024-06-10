@@ -67,7 +67,12 @@ export class WalletConnect extends EventEmitter {
           eip155: {
             chains,
             accounts,
-            methods: ['eth_sendTransaction', 'personal_sign'],
+            methods: [
+              'eth_sendTransaction',
+              'personal_sign',
+              'eth_signTypedData',
+              'eth_signTypedData_v4',
+            ],
             events: ['accountsChanged', 'chainChanged'],
           },
         },
@@ -124,6 +129,11 @@ export class WalletConnect extends EventEmitter {
       if (this.#session.topic === request.topic && request.params.request.expiryTimestamp * 1000 > Date.now()) {
         if (request.params.request.method === 'eth_sendTransaction') {
           this.emit('eth_sendTransaction', request);
+          return;
+        }
+        if (request.params.request.method === 'eth_signTypedData'
+          || request.params.request.method === 'eth_signTypedData_v4') {
+          this.emit('eth_signTypedData', request);
           return;
         }
         console.error(`Unsupported SessionRequest '${request?.params?.request?.method}': ${JSON.stringify(request)}`);

@@ -46,7 +46,7 @@ export default {
   },
   computed: {
     crypto() {
-      return this.transaction.crypto || this.$wallet.crypto;
+      return this.transaction?.crypto || this.$wallet?.crypto;
     },
     internalTitle() {
       return this.title || this.$t('Confirm transaction');

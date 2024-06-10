@@ -19,6 +19,8 @@ export default {
   <CsTransactionStatus
     :transaction="storage.transaction"
     :status="storage.status"
+    :title="storage.title"
+    :header="storage.header"
     :message="storage.message"
     @done="done"
   />

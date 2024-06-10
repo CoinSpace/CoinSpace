@@ -6,6 +6,7 @@ import WalletConnectStepConfirm from './WalletConnectStepConfirm.vue';
 import WalletConnectStepIndex from './WalletConnectStepIndex.vue';
 import WalletConnectStepMain from './WalletConnectStepMain.vue';
 import WalletConnectStepQr from './WalletConnectStepQr.vue';
+import WalletConnectStepSign from './WalletConnectStepSign.vue';
 import WalletConnectStepStatus from './WalletConnectStepStatus.vue';
 
 import { onShowOnHide } from '../../../lib/mixins.js';
@@ -36,6 +37,7 @@ export default {
     index: WalletConnectStepIndex,
     main: WalletConnectStepMain,
     confirm: WalletConnectStepConfirm,
+    sign: WalletConnectStepSign,
     pin: CsPinStep,
     status: WalletConnectStepStatus,
     qr: WalletConnectStepQr,
