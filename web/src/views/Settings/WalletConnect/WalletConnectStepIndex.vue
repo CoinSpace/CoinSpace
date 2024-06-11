@@ -42,8 +42,8 @@ export default {
   },
   methods: {
     async connect() {
-      this.error = undefined;
       this.isLoading = true;
+      this.error = undefined;
       try {
         const walletConnect = await this.$account.walletConnect();
         const proposal = await walletConnect.pair(this.uri);

@@ -39,8 +39,8 @@ export default {
   },
   methods: {
     async disconnect() {
-      this.error = undefined;
       this.isLoading = true;
+      this.error = undefined;
       try {
         const walletConnect = await this.$account.walletConnect();
         await walletConnect.disconnectSession();
@@ -52,8 +52,8 @@ export default {
       }
     },
     async send(request) {
-      this.error = undefined;
       this.isLoading = true;
+      this.error = undefined;
       try {
         const params = request.params.request.params[0];
         const wallet = this.$account.walletByChainId(request.params?.chainId);
@@ -86,8 +86,8 @@ export default {
       }
     },
     async signTypedData(request) {
-      this.error = undefined;
       this.isLoading = true;
+      this.error = undefined;
       try {
         const wallet = this.$account.walletByChainId(request.params?.chainId);
         if (![CsWallet.STATE_LOADED, CsWallet.STATE_LOADING].includes(wallet.state)) {
@@ -109,8 +109,8 @@ export default {
       }
     },
     async signMessage(request) {
-      this.error = undefined;
       this.isLoading = true;
+      this.error = undefined;
       try {
         const wallet = this.$account.walletByChainId(request.params?.chainId);
         if (![CsWallet.STATE_LOADED, CsWallet.STATE_LOADING].includes(wallet.state)) {

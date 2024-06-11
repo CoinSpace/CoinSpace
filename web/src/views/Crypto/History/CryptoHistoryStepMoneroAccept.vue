@@ -24,7 +24,6 @@ export default {
       }
       const txId = this.storage.payoutHash;
       await wallet.validateTransaction(txId);
-      this.error = false;
       await this.walletSeed(async (walletSeed) => {
         try {
           await wallet.addTransaction(txId, walletSeed);

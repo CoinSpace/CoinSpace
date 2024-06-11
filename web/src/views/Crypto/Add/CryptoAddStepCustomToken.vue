@@ -71,11 +71,11 @@ export default {
     address: debounce(async function(address) {
       if (!this.platform || !address) return;
       if (this.isLoading) return;
+      this.isLoading = true;
+      this.error = undefined;
       try {
-        this.isLoading = true;
         const token = await this.$account.getCustomTokenInfo(this.platform.platform, address);
         this.token = token;
-        this.error = undefined;
       } catch (err) {
         this.token = undefined;
         if (err instanceof AddressError || err instanceof RequestError) {

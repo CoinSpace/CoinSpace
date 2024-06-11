@@ -26,6 +26,7 @@ export default {
   methods: {
     async confirm() {
       this.isLoading = true;
+      this.error = undefined;
       try {
         const data = await this.$wallet.setupAccount(this.storage.account);
         if (data.needToCreateAccount === false) {

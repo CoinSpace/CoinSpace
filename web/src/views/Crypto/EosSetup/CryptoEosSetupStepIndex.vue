@@ -21,13 +21,13 @@ export default {
     return {
       isLoading: false,
       account: '',
-      error: false,
+      error: undefined,
     };
   },
   watch: {
     account(value) {
       if (!value || this.$wallet.validateAccountName(value)) {
-        this.error = false;
+        this.error = undefined;
       } else {
         this.error = this.$t('Invalid account name');
       }
@@ -36,9 +36,9 @@ export default {
   methods: {
     async confirm() {
       this.isLoading = true;
+      this.error = undefined;
       try {
         const data = await this.$wallet.setupAccount(this.account);
-        this.error = false;
         if (data.needToCreateAccount === false) {
           this.isLoading = false;
           this.$router.up();
