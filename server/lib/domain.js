@@ -2,7 +2,7 @@ import { Resolution } from '@unstoppabledomains/resolution';
 import db from './db.js';
 import { promises as dns } from 'dns';
 
-const resolution = new Resolution();
+const resolution = Resolution.infura(process.env.INFURA_API_KEY);
 const platformToChain = {
   ethereum: 'ERC20',
   'binance-smart-chain': 'BEP20',
