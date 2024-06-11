@@ -1,9 +1,6 @@
 <script>
+import ChangellyExchange from '../../../lib/account/ChangellyExchange.js';
 import { errors } from '@coinspace/cs-common';
-import ChangellyExchange, {
-  ExchangeDisabledError,
-  InternalExchangeError,
-} from '../../../lib/account/ChangellyExchange.js';
 
 import CsButton from '../../../components/CsButton.vue';
 import CsButtonGroup from '../../../components/CsButtonGroup.vue';
@@ -95,7 +92,6 @@ export default {
       } else {
         this.address = value;
       }
-      this.error = undefined;
     }, 300),
   },
   methods: {
@@ -113,6 +109,7 @@ export default {
         this.next('confirm');
       } else {
         this.isLoading = true;
+        this.error = undefined;
         try {
           await this.$account.exchange.validateAddress({
             to: this.storage.to.crypto._id,
@@ -136,14 +133,6 @@ export default {
           }
           if (err instanceof errors.InvalidAddressError) {
             this.error = this.$t('Invalid address');
-            return;
-          }
-          if (err instanceof ExchangeDisabledError) {
-            this.error = this.$t('Exchange is currently unavailable for this pair');
-            return;
-          }
-          if (err instanceof InternalExchangeError) {
-            this.error = this.$t('Exchange is unavailable');
             return;
           }
           console.error(err);
@@ -199,6 +188,7 @@ export default {
         :label="$t('Wallet address')"
         :error="error"
         :clear="true"
+        @update:modelValue="error = undefined"
       />
 
       <CsButtonGroup

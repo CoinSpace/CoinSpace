@@ -36,13 +36,13 @@ export default {
   methods: {
     async confirm() {
       this.isLoading = true;
+      this.error = undefined;
       try {
         await this.$account.exchange.validateAddress({
           to: this.storage.to.crypto._id,
           address: this.storage.address,
           extraId: this.extraId,
         });
-        this.error = undefined;
         this.updateStorage({
           extraId: this.extraId,
         });
@@ -76,6 +76,7 @@ export default {
         :label="$t('Extra ID')"
         :placeholder="$t('(optional)')"
         :error="error"
+        @update:modelValue="error = undefined"
       />
     </CsFormGroup>
     <CsButton

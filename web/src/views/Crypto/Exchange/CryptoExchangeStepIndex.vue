@@ -106,6 +106,7 @@ export default {
         return;
       }
       this.isLoading = true;
+      this.errors = {};
       try {
         if (!this.$wallet.crypto.changelly) throw new ExchangeDisabledError();
         if (this.$wallet.isFeeRatesSupported) await this.$wallet.loadFeeRates();
@@ -123,7 +124,6 @@ export default {
           to: this.storage.to.crypto._id,
           amount: this.amount,
         });
-        this.errors = {};
         this.rate = estimation.rate;
         this.result = estimation.result;
       } catch (err) {
@@ -140,6 +140,7 @@ export default {
       }
       const amount = this.amount || new Amount(0, this.$wallet.crypto.decimals);
       this.isLoading = true;
+      this.errors = {};
       try {
         if (!this.$wallet.crypto.changelly) throw new ExchangeDisabledError();
         if (this.$wallet.isFeeRatesSupported) await this.$wallet.loadFeeRates();
@@ -280,6 +281,7 @@ export default {
         :factors="$wallet.isFactorsSupported ? $wallet.factors : []"
         :price="storage.price"
         :currency="$currency"
+        @update:modelValue="errors['amount'] = undefined"
       />
       <CsButton
         type="secondary"

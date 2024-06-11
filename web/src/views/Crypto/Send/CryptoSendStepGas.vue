@@ -28,9 +28,9 @@ export default {
   methods: {
     async confirm() {
       this.isLoading = true;
+      this.error = undefined;
       try {
         await this.$wallet.validateGasLimit({ gasLimit: this.gasLimit });
-        this.error = undefined;
         this.updateStorage({ gasLimit: this.gasLimit });
         this.next('amount');
       } catch (err) {
@@ -58,6 +58,7 @@ export default {
         :label="$t('Gas limit')"
         :error="error"
         :info="$t('Gas limit')"
+        @update:modelValue="error = undefined"
       >
         <template #info>
           <div>

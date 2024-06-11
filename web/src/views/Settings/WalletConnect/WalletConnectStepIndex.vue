@@ -12,8 +12,6 @@ import QrIcon from '../../../assets/svg/qr.svg';
 import { isQrScanAvailable } from '../../../lib/helpers.js';
 import { onShowOnHide } from '../../../lib/mixins.js';
 
-import debounce from 'p-debounce';
-
 export default {
   components: {
     MainLayout,
@@ -41,11 +39,6 @@ export default {
       uri: '',
       error: undefined,
     };
-  },
-  watch: {
-    uri: debounce(async function() {
-      this.error = undefined;
-    }, 300),
   },
   methods: {
     async connect() {
@@ -92,6 +85,7 @@ export default {
         :label="$t('WalletConnect URI')"
         :error="error"
         :clear="true"
+        @update:modelValue="error = undefined"
       />
 
       <CsButtonGroup

@@ -45,6 +45,7 @@ export default {
   methods: {
     async confirm() {
       this.isLoading = true;
+      this.error = undefined;
       const price = await this.$account.market.getPrice(this.$wallet.crypto._id, this.$currency);
       this.updateStorage({
         price,
@@ -112,6 +113,7 @@ export default {
         :label="$t('Private key')"
         :clear="true"
         :error="error"
+        @update:modelValue="error = undefined"
       />
 
       <CsButtonGroup

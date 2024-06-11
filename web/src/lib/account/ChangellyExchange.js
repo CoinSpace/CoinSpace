@@ -215,20 +215,25 @@ export default class ChangellyExchange {
     if (!address) {
       throw new errors.EmptyAddressError();
     }
-    const data = await this.#request({
-      url: '/api/v4/exchange/changelly/validate',
-      method: 'get',
-      params: {
-        crypto: to,
-        address: encodeURIComponent(address),
-        extra: extraId ? encodeURIComponent(extraId) : undefined,
-      },
-      seed: 'device',
-    });
-    if (data.isValid) {
-      return true;
+    try {
+      const data = await this.#request({
+        url: '/api/v4/exchange/changelly/validate',
+        method: 'get',
+        params: {
+          crypto: to,
+          address: encodeURIComponent(address),
+          extra: extraId ? encodeURIComponent(extraId) : undefined,
+        },
+        seed: 'device',
+      });
+      if (data.isValid) {
+        return true;
+      } else {
+        throw new errors.InvalidAddressError(address);
+      }
+    } catch (err) {
+      throw new errors.InvalidAddressError(address);
     }
-    throw new errors.InvalidAddressError(address);
   }
 
   #assignExchange(transaction, exchange) {

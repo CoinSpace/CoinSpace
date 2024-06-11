@@ -23,15 +23,15 @@ export default {
     return {
       isLoading: false,
       txId: '',
-      error: false,
+      error: undefined,
     };
   },
   methods: {
     async confirm() {
       this.isLoading = true;
+      this.error = undefined;
       try {
         await this.$wallet.validateTransaction(this.txId);
-        this.error = false;
         await this.walletSeed(async (walletSeed) => {
           try {
             await this.$wallet.addTransaction(this.txId, walletSeed);
@@ -72,6 +72,7 @@ export default {
         :error="error"
         clear
         :info="$t('Accept transaction')"
+        @update:modelValue="error = undefined"
       >
         <template #info>
           <div>

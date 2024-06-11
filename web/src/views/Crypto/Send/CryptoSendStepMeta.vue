@@ -62,6 +62,7 @@ export default {
   methods: {
     async confirm() {
       this.isLoading = true;
+      this.errors = {};
       try {
         const meta = {};
         for (const metaName of this.metaNames) {
@@ -69,7 +70,6 @@ export default {
             meta[metaName] = this.meta[metaName];
           }
         }
-        this.errors = {};
         await this.$wallet.validateMeta({ address: this.storage.address, meta });
         this.updateStorage({ meta: this.meta });
         if (this.$wallet.isFeeRatesSupported) {
@@ -120,6 +120,7 @@ export default {
         :placeholder="$t('(optional)')"
         :info="$t('Destination tag')"
         :error="errors.destinationTag"
+        @update:modelValue="errors.destinationTag = undefined"
       >
         <template #info>
           <div>
@@ -148,6 +149,7 @@ export default {
         :placeholder="$t('(optional)')"
         :info="$t('Invoice ID')"
         :error="errors.invoiceId"
+        @update:modelValue="errors.invoiceId = undefined"
       >
         <template #info>
           <div>
@@ -163,6 +165,7 @@ export default {
         :placeholder="$t('(optional)')"
         :info="$t('Memo')"
         :error="errors.memo"
+        @update:modelValue="errors.memo = undefined"
       >
         <template #info>
           <div>

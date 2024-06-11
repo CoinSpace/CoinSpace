@@ -63,16 +63,13 @@ export default {
   watch: {
     'storage.platform'(newPlatform, oldPlatform) {
       if (newPlatform !== oldPlatform) {
+        this.error = undefined;
         this.token = undefined;
         this.address = '';
       }
     },
     address: debounce(async function(address) {
-      if (!this.platform || !address) {
-        this.token = undefined;
-        this.error = undefined;
-        return;
-      }
+      if (!this.platform || !address) return;
       if (this.isLoading) return;
       try {
         this.isLoading = true;
@@ -106,6 +103,7 @@ export default {
     async add() {
       this.showModal = false;
       this.isLoading = true;
+      this.error = undefined;
       try {
         await this.$account.addWallet(this.token);
         this.$router.replace({ name: 'crypto', params: { cryptoId: this.token._id } });
@@ -147,6 +145,7 @@ export default {
         :label="$t('Contract address')"
         clear
         :error="error"
+        @update:modelValue="error = undefined; token = undefined"
       />
     </CsFormGroup>
     <CsTokenInfo

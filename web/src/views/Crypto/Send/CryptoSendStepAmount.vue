@@ -56,6 +56,7 @@ export default {
     },
     async confirm() {
       this.isLoading = true;
+      this.error = undefined;
       let fee;
       try {
         await this.$wallet.validateAmount({
@@ -78,7 +79,6 @@ export default {
           amount: this.amountValue,
           fee,
         });
-        this.error = undefined;
         this.next('confirm');
       } catch (err) {
         this.handleError(err);
@@ -144,6 +144,7 @@ export default {
         :factors="$wallet.isFactorsSupported ? $wallet.factors : []"
         :price="storage.price"
         :currency="$currency"
+        @update:modelValue="error = undefined"
       />
       <CsButton
         type="secondary"

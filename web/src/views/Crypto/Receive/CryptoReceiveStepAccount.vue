@@ -39,9 +39,9 @@ export default {
         return;
       }
       this.isLoading = true;
+      this.errors = {};
       try {
         this.username = await this.$account.updateUsername(this.username);
-        this.errors = {};
         this.$account.details.set('userInfo', {
           username: this.username,
           email: this.$user.email,

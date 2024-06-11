@@ -66,6 +66,7 @@ export default {
   methods: {
     async confirm() {
       const passphrase = this.words.join(' ');
+      this.error = undefined;
       try {
         if (!validateMnemonic(passphrase, wordlist)) throw new Error();
         const seed = await mnemonicToSeed(passphrase);
@@ -75,13 +76,13 @@ export default {
             throw new Error();
           }
         }
-        this.error = undefined;
         this.$emit('confirm', seed);
       } catch (err) {
         this.error = this.$t('Invalid passphrase');
       }
     },
     acceptSuggestion(suggestion) {
+      this.error = undefined;
       this.passphrase = [
         ...this.words.slice(0, -1),
         suggestion + ' ',
@@ -99,6 +100,7 @@ export default {
       v-model="passphrase"
       :label="$t('Passphrase')"
       :error="error"
+      @update:modelValue="error = undefined"
     />
     <div
       v-if="suggestions.length"

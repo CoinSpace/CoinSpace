@@ -59,12 +59,14 @@ export default {
         :label="$t('Word #{index}', { index: firstIndex + 1 })"
         :error="firstError"
         clear
+        @update:modelValue="firstError = undefined"
       />
       <CsFormInput
         v-model="secondWord"
         :label="$t('Word #{index}', { index: secondIndex + 1 })"
         :error="secondError"
         clear
+        @update:modelValue="secondError = undefined"
       />
     </CsFormGroup>
     <CsButtonGroup>
