@@ -21,6 +21,13 @@ export default {
       isLoading: false,
     };
   },
+  computed: {
+    message() {
+      return ['eth_signTypedData', 'eth_signTypedData_v4'].includes(this.storage.method)
+        ? JSON.stringify(this.storage.data)
+        : this.storage.data;
+    },
+  },
   methods: {
     async confirm() {
       this.isLoading = true;
@@ -32,7 +39,12 @@ export default {
           if (!wallet) {
             throw new Error(`Unknown wallet chainId: ${params?.chainId}`);
           }
-          const sign = await wallet.eth_signTypedData(this.storage.data, walletSeed);
+          const data = this.storage.method === 'personal_sign'
+            ? params.request.params[0]
+            : params.request.params[1];
+          const sign = ['eth_signTypedData', 'eth_signTypedData_v4'].includes(this.storage.method)
+            ? await wallet.eth_signTypedData(data, walletSeed)
+            : await wallet.eth_sign(data, walletSeed);
           await walletConnect.resolveSessionRequest(this.storage.request, sign);
           this.$account.emit('update');
           this.updateStorage({ status: true });
@@ -70,7 +82,7 @@ export default {
     <CsFormGroup class="&__container">
       <div>{{ $t('Sign this message only if you completely understand it.') }}</div>
       <CsFormTextareaReadonly
-        :value="JSON.stringify(storage.data)"
+        :value="message"
         :label="$t('Message')"
       />
     </CsFormGroup>

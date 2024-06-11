@@ -5,6 +5,7 @@ import CsFormTextareaReadonly from '../../../components/CsForm/CsFormTextareaRea
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 
+import { hexToBytes } from '@noble/hashes/utils';
 import { onShowOnHide } from '../../../lib/mixins.js';
 import { Amount, CsWallet } from '@coinspace/cs-common';
 
@@ -20,13 +21,15 @@ export default {
   async onShow() {
     const walletConnect = await this.$account.walletConnect();
     walletConnect.once('eth_sendTransaction', this.send);
-    walletConnect.once('eth_signTypedData', this.sign);
+    walletConnect.once('eth_signTypedData', this.signTypedData);
+    walletConnect.once('eth_sign', this.signMessage);
     await walletConnect.getPendingSessionRequests();
   },
   async onHide() {
     const walletConnect = await this.$account.walletConnect();
     walletConnect.off('eth_sendTransaction', this.send);
-    walletConnect.off('eth_signTypedData', this.sign);
+    walletConnect.off('eth_signTypedData', this.signTypedData);
+    walletConnect.off('eth_sign', this.signMessage);
   },
   data() {
     return {
@@ -62,7 +65,7 @@ export default {
         const gasLimit = params.gas ? BigInt(params.gas) : wallet.gasLimitSmartContract;
         const fee = await wallet.estimateTransactionFee({ amount, address: params.to, gasLimit });
         this.updateStorage({
-          type: 'send',
+          method: request.params.request.method,
           request,
           transaction: {
             price: await this.$account.market.getPrice(wallet.crypto._id, this.$currency),
@@ -82,7 +85,7 @@ export default {
         this.isLoading = false;
       }
     },
-    async sign(request) {
+    async signTypedData(request) {
       this.error = undefined;
       this.isLoading = true;
       try {
@@ -93,9 +96,35 @@ export default {
         }
         const data = JSON.parse(request.params.request.params[1]);
         this.updateStorage({
-          type: 'sign',
           request,
           data,
+          method: request.params.request.method,
+        });
+        this.next('sign');
+      } catch (err) {
+        this.error = this.$t('Error! Please try again later.');
+        console.error(err);
+      } finally {
+        this.isLoading = false;
+      }
+    },
+    async signMessage(request) {
+      this.error = undefined;
+      this.isLoading = true;
+      try {
+        const wallet = this.$account.walletByChainId(request.params?.chainId);
+        if (![CsWallet.STATE_LOADED, CsWallet.STATE_LOADING].includes(wallet.state)) {
+          await wallet.cleanup();
+          await wallet.load();
+        }
+        const raw = request.params.request.method === 'personal_sign'
+          ? request.params.request.params[0]
+          : request.params.request.params[1];
+        const data = new TextDecoder().decode(hexToBytes(raw.replace(/^0x/i, '')));
+        this.updateStorage({
+          request,
+          data,
+          method: request.params.request.method,
         });
         this.next('sign');
       } catch (err) {

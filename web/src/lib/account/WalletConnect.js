@@ -70,6 +70,7 @@ export class WalletConnect extends EventEmitter {
             methods: [
               'eth_sendTransaction',
               'personal_sign',
+              'eth_sign',
               'eth_signTypedData',
               'eth_signTypedData_v4',
             ],
@@ -116,7 +117,9 @@ export class WalletConnect extends EventEmitter {
       try {
         const requests = await this.#web3wallet.getPendingSessionRequests();
         for (const request of requests) {
-          this.#onSessionRequest(request);
+          if (this.#onSessionRequest(request)) {
+            break;
+          }
         }
       } catch (err) {
         console.error(err);
@@ -129,12 +132,17 @@ export class WalletConnect extends EventEmitter {
       if (this.#session.topic === request.topic && request.params.request.expiryTimestamp * 1000 > Date.now()) {
         if (request.params.request.method === 'eth_sendTransaction') {
           this.emit('eth_sendTransaction', request);
-          return;
+          return true;
         }
         if (request.params.request.method === 'eth_signTypedData'
           || request.params.request.method === 'eth_signTypedData_v4') {
           this.emit('eth_signTypedData', request);
-          return;
+          return true;
+        }
+        if (request.params.request.method === 'eth_sign'
+          || request.params.request.method === 'personal_sign') {
+          this.emit('eth_sign', request);
+          return true;
         }
         console.error(`Unsupported SessionRequest '${request?.params?.request?.method}': ${JSON.stringify(request)}`);
         this.#web3wallet.respondSessionRequest({
@@ -142,6 +150,7 @@ export class WalletConnect extends EventEmitter {
           response: formatJsonRpcError(request.id, getSdkError('UNSUPPORTED_METHODS')),
         }).catch(console.error);
       }
+      return false;
     }
   }
 

@@ -2,6 +2,13 @@
 import CsStep from '../../../components/CsStep.vue';
 import CsTransactionStatus from '../../../components/CsTransactionStatus.vue';
 
+const SIGN_REQUESTS = [
+  'eth_signTypedData',
+  'eth_signTypedData_v4',
+  'eth_sign',
+  'personal_sign',
+];
+
 export default {
   components: {
     CsTransactionStatus,
@@ -9,12 +16,12 @@ export default {
   extends: CsStep,
   computed: {
     title() {
-      if (this.storage.type === 'sign') {
+      if (SIGN_REQUESTS.includes(this.storage.method)) {
         return this.$t('Signature request');
       }
     },
     header() {
-      if (this.storage.type === 'sign') {
+      if (SIGN_REQUESTS.includes(this.storage.method)) {
         if (this.storage.status) {
           return this.$t('Signing successful');
         } else {
@@ -23,7 +30,7 @@ export default {
       }
     },
     message() {
-      if (this.storage.type === 'sign') {
+      if (SIGN_REQUESTS.includes(this.storage.method)) {
         if (this.storage.status) {
           return this.$t('Message has been signed.');
         } else {
