@@ -95,3 +95,13 @@ export default {
     </CsButton>
   </MainLayout>
 </template>
+
+<style lang="scss">
+  .#{ $filename } {
+    $self: &;
+
+    &__container {
+      flex-grow: 1;
+    }
+  }
+</style>
