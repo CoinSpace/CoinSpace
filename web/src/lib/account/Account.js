@@ -116,10 +116,7 @@ class WalletManager {
 
   getByChainId(chainId) {
     return [...this.#wallets.values()].find((wallet) => {
-      if (wallet.isWalletConnectSupported && wallet.chainId === chainId) {
-        return true;
-      }
-      return false;
+      return wallet.isWalletConnectSupported && wallet.chainId === chainId;
     });
   }
 

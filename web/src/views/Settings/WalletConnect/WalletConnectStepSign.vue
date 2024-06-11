@@ -35,20 +35,10 @@ export default {
           const sign = await wallet.eth_signTypedData(this.storage.data, walletSeed);
           await walletConnect.resolveSessionRequest(this.storage.request, sign);
           this.$account.emit('update');
-          this.updateStorage({
-            status: true,
-            title: this.$t('Signature request'),
-            header: this.$t('Signing successful'),
-            message: this.$t('Message has been signed.'),
-          });
+          this.updateStorage({ status: true });
         } catch (err) {
           await walletConnect.rejectSessionRequest(this.storage.request, err);
-          this.updateStorage({
-            status: false,
-            title: this.$t('Signature request'),
-            header: this.$t('Signing failed'),
-            message: this.$t('Please try again later.'),
-          });
+          this.updateStorage({ status: false });
           console.error(err);
         } finally {
           this.replace('status');

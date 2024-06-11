@@ -62,6 +62,7 @@ export default {
         const gasLimit = params.gas ? BigInt(params.gas) : wallet.gasLimitSmartContract;
         const fee = await wallet.estimateTransactionFee({ amount, address: params.to, gasLimit });
         this.updateStorage({
+          type: 'send',
           request,
           transaction: {
             price: await this.$account.market.getPrice(wallet.crypto._id, this.$currency),
@@ -92,6 +93,7 @@ export default {
         }
         const data = JSON.parse(request.params.request.params[1]);
         this.updateStorage({
+          type: 'sign',
           request,
           data,
         });
