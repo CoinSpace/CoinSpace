@@ -26,6 +26,7 @@ export default {
   mixins: [onShowOnHide],
   async onShow() {
     if (this.storage.uri) {
+      this.error = undefined;
       this.uri = this.storage.uri;
       this.storage.uri = undefined;
     }
@@ -68,6 +69,7 @@ export default {
     paste() {
       navigator.clipboard.readText()
         .then((text) => {
+          this.error = undefined;
           this.uri = text;
         }, () => {});
     },

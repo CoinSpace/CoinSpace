@@ -45,6 +45,7 @@ export default {
       this.error = this.$t('Invalid address');
     }
     if (this.storage.temp?.address) {
+      this.error = undefined;
       this.addressOrAlias = this.storage.temp.address;
       this.storage.temp.address = undefined;
     }
@@ -142,6 +143,7 @@ export default {
     paste() {
       navigator.clipboard.readText()
         .then((text) => {
+          this.error = undefined;
           this.addressOrAlias = text;
         }, () => {});
     },

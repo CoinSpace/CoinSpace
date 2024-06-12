@@ -28,6 +28,7 @@ export default {
   mixins: [onShowOnHide],
   async onShow() {
     if (this.storage.temp) {
+      this.error = undefined;
       this.privateKey = this.storage.temp;
       this.storage.temp = undefined;
     }
@@ -92,6 +93,7 @@ export default {
     paste() {
       navigator.clipboard.readText()
         .then((text) => {
+          this.error = undefined;
           this.privateKey = text;
         }, () => {});
     },

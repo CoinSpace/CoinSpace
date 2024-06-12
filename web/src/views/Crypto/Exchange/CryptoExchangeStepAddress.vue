@@ -50,6 +50,7 @@ export default {
       this.error = this.$t('Invalid address');
     }
     if (this.storage.temp?.address) {
+      this.error = undefined;
       this.addressOrAlias = this.storage.temp.address;
       this.storage.temp.address = undefined;
     }
@@ -99,6 +100,8 @@ export default {
       if (this.ownWallet) {
         this.ownWallet = false;
         this.address = undefined;
+        this.error = undefined;
+        this.addressOrAlias = '';
       } else {
         this.ownWallet = true;
         this.address = 'your wallet';
@@ -144,6 +147,7 @@ export default {
     paste() {
       navigator.clipboard.readText()
         .then((text) => {
+          this.error = undefined;
           this.addressOrAlias = text;
         }, () => {});
     },
