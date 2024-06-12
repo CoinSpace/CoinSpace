@@ -73,6 +73,7 @@ export default {
       if (this.isLoading) return;
       this.isLoading = true;
       this.error = undefined;
+      this.token = undefined;
       try {
         const token = await this.$account.getCustomTokenInfo(this.platform.platform, address);
         this.token = token;
@@ -145,7 +146,7 @@ export default {
         :label="$t('Contract address')"
         clear
         :error="error"
-        @update:modelValue="error = undefined; token = undefined"
+        @update:modelValue="error = undefined"
       />
     </CsFormGroup>
     <CsTokenInfo
