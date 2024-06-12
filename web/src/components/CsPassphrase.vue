@@ -47,6 +47,7 @@ export default {
   },
   watch: {
     passphrase(passphrase, passphraseOld) {
+      this.error = undefined;
       const passphraseDelta = Math.abs(passphrase.length - passphraseOld.length);
       if (passphraseDelta > 1) return this.suggestions = [];
 
@@ -100,7 +101,6 @@ export default {
       v-model="passphrase"
       :label="$t('Passphrase')"
       :error="error"
-      @update:modelValue="error = undefined"
     />
     <div
       v-if="suggestions.length"
