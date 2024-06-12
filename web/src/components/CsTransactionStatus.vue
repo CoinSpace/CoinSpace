@@ -97,7 +97,10 @@ export default {
 </script>
 
 <template>
-  <MainLayout :title="internalTitle">
+  <MainLayout
+    :title="internalTitle"
+    @back="onDone"
+  >
     <div
       class="&__icon"
       :class="{ '&__icon--success': status, '&__icon--failed': !status, }"
