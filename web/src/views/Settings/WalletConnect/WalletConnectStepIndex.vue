@@ -56,8 +56,12 @@ export default {
           this.error = this.$t('Invalid URI');
           return;
         }
-        if (err.message?.contains?.('Please try again with a new connection URI')) {
+        if (err.message?.includes?.('Please try again with a new connection URI')) {
           this.error = this.$t('Please try again with a new connection URI');
+          return;
+        }
+        if (err.message?.includes?.('Non conforming namespaces')) {
+          this.error = this.$t('Non conforming namespaces');
           return;
         }
         this.error = this.$t('Error! Please try again later.');

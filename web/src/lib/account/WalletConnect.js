@@ -60,8 +60,9 @@ export class WalletConnect extends EventEmitter {
         accounts.push(wallet.accountId);
       }
     }
+    let namespaces;
     try {
-      const namespaces = buildApprovedNamespaces({
+      namespaces = buildApprovedNamespaces({
         proposal: proposal.params,
         supportedNamespaces: {
           eip155: {
@@ -78,17 +79,19 @@ export class WalletConnect extends EventEmitter {
           },
         },
       });
-      this.#session = await this.#web3wallet.approveSession({
-        id: proposal.id,
-        namespaces,
-      });
-      return this.#session;
     } catch (err) {
+      console.error(err);
       await this.#web3wallet.rejectSession({
         id: proposal.id,
         reason: getSdkError('USER_REJECTED'),
       });
+      throw err;
     }
+    this.#session = await this.#web3wallet.approveSession({
+      id: proposal.id,
+      namespaces,
+    });
+    return this.#session;
   }
 
   async rejectSession(proposal) {
