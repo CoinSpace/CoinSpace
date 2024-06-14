@@ -141,9 +141,10 @@ export default {
 <template>
   <MainLayout
     :title="$t('WalletConnect')"
+    @back="disconnect"
   >
     <CsFormGroup class="&__container">
-      <div>{{ $t('Your wallet is connected to {name}', { name: storage.session?.peer.metadata.name}) }}</div>
+      <div>{{ $t('Your wallet is connected to {name}.', { name: storage.session?.peer.metadata.name}) }}</div>
       <CsFormTextareaReadonly
         :value="storage.session?.peer.metadata.url"
         :label="$t('URL')"

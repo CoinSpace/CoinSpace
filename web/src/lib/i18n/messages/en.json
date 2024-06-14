@@ -281,7 +281,7 @@
   "Your wallet": "Your wallet",
   "Your wallet address": "Your wallet address",
   "Your wallet has no private keys with coins for export.": "Your wallet has no private keys with coins for export.",
-  "Your wallet is connected to {name}": "Your wallet is connected to {name}",
+  "Your wallet is connected to {name}.": "Your wallet is connected to {name}.",
   "default": "default",
   "fast": "fast",
   "for quick access": "for quick access",

@@ -281,7 +281,7 @@
   "Your wallet": "Ваш кошелек",
   "Your wallet address": "Ваш адрес кошелька",
   "Your wallet has no private keys with coins for export.": "У вашего кошелька нет приватных ключей с монетами для экспорта.",
-  "Your wallet is connected to {name}": "Ваш кошелек подключен к {name}",
+  "Your wallet is connected to {name}.": "Ваш кошелек подключен к {name}.",
   "default": "по умолчанию",
   "fast": "быстро",
   "for quick access": "для быстрого доступа",

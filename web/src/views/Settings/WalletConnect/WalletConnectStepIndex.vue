@@ -61,7 +61,7 @@ export default {
           return;
         }
         if (err.message?.includes?.('Non conforming namespaces')) {
-          this.error = this.$t('Non conforming namespaces');
+          this.error = this.$t('Not supported');
           return;
         }
         this.error = this.$t('Error! Please try again later.');

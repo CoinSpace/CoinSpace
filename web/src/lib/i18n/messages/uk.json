@@ -281,7 +281,7 @@
   "Your wallet": "Ваш гаманець",
   "Your wallet address": "Адреса вашого гаманця",
   "Your wallet has no private keys with coins for export.": "У вашому гаманці немає приватних ключів з монетами для експорту.",
-  "Your wallet is connected to {name}": "Ваш гаманець підключено до {name}",
+  "Your wallet is connected to {name}.": "Ваш гаманець підключено до {name}.",
   "default": "за замовчуванням",
   "fast": "швидко",
   "for quick access": "для швидкого доступу",

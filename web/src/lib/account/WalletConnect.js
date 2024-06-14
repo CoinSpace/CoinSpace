@@ -28,7 +28,6 @@ export class WalletConnect extends EventEmitter {
     });
     this.#web3wallet.on('session_request', (args) => this.#onSessionRequest(args));
     this.#web3wallet.on('session_delete', (args) => this.#onSessionDelete(args));
-    // TODO session_update ?
     try {
       const sessions = await this.#web3wallet.getActiveSessions();
       for (const topic in sessions) {
