@@ -21,7 +21,7 @@ export class WalletConnect extends EventEmitter {
       }),
       metadata: {
         name: 'Coin Wallet',
-        description: 'Coin Wallet is the most popular and secure non-custodial multicurrency wallet',
+        description: 'Coin Wallet is a non-custodial multicurrency wallet for multiple platforms.',
         url: 'https://coin.space/',
         icons: [],
       },
