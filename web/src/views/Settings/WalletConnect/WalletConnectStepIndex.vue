@@ -64,6 +64,10 @@ export default {
           this.error = this.$t('Not supported');
           return;
         }
+        if (err.message?.includes?.('Not supported')) {
+          this.error = this.$t('Not supported');
+          return;
+        }
         this.error = this.$t('Error! Please try again later.');
         console.error(err);
       } finally {

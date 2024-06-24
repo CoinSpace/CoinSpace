@@ -43,8 +43,12 @@ export class WalletConnect extends EventEmitter {
   }
 
   async pair(uri) {
-    const onSessionProposal = new Promise((resolve) => {
+    const onSessionProposal = new Promise((resolve, reject) => {
       this.#web3wallet.once('session_proposal', resolve);
+      this.#web3wallet.once('auth_request', (request) => {
+        console.error(`Unsupported AuthRequest: ${JSON.stringify(request)}`);
+        reject(new Error('Not supported'));
+      });
     });
     await this.#web3wallet.pair({ uri });
     return onSessionProposal;
