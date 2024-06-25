@@ -221,7 +221,7 @@ export default {
   ].filter(item => !!item),
   publishers: [
     ['mac'].includes(VITE_DISTRIBUTION) && BRANCH === 'master' && {
-      name: '@mahnunchik/publisher-github',
+      name: '@electron-forge/publisher-github',
       config: {
         repository: {
           owner: 'CoinSpace',
@@ -232,7 +232,7 @@ export default {
       },
     },
     {
-      name: '@mahnunchik/publisher-gcs',
+      name: '@electron-forge/publisher-gcs',
       config: {
         bucket: process.env.GOOGLE_CLOUD_BUCKET,
         keyResolver(fileName/*, platform, arch*/) {
