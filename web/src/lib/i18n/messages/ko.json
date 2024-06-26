@@ -218,7 +218,7 @@
   "Show": "보기",
   "Sign this message only if you completely understand it.": "이 메시지를 완전히 이해한 경우에만 서명하세요.",
   "Signature request": "서명 요청",
-  "Signing failed": "서명 실패.",
+  "Signing failed": "서명 실패",
   "Signing successful": "서명 성공",
   "Skip": "건너뛰기",
   "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first. Available {amount} {symbol}": "일부 자금은 일시적으로 이용할 수 없습니다. 이 거래를 전송하려면 먼저 보류 중인 거래가 확인되기를 기다려야 합니다. 이용 가능한 {amount} {symbol}",

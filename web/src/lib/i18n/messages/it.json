@@ -218,7 +218,7 @@
   "Show": "Mostra",
   "Sign this message only if you completely understand it.": "Firma questo messaggio solo se l’hai compreso completamente.",
   "Signature request": "Richiesta di firma",
-  "Signing failed": "Firma non riuscita.",
+  "Signing failed": "Firma non riuscita",
   "Signing successful": "Firma riuscita",
   "Skip": "Salta",
   "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first. Available {amount} {symbol}": "Alcuni fondi non sono temporaneamente disponibili. Per inviare questa transazione, dovrai aspettare che le tue transazioni pendenti siano prima confermate. Disponibile {amount} {symbol}",

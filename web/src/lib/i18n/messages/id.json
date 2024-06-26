@@ -114,7 +114,7 @@
   "I have written down or otherwise securely stored my passphrase": "Saya telah menulis atau telah menyimpan frasa sandi saya dengan aman",
   "Insufficient funds for token transaction. Required {amount} {symbol}": "Dana yang tidak mencukupi untuk tansaksi token. Diperlukan {amount} {symbol}",
   "Invalid Memo": "Memo tidak valid",
-  "Invalid URI": "URI Tidak Valid",
+  "Invalid URI": "URI tidak valid",
   "Invalid account name": "Nama akun salah",
   "Invalid address": "Alamat tidak valid",
   "Invalid destination tag": "Tag tujuan tidak valid",
