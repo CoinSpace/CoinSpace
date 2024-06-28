@@ -26,6 +26,8 @@ export class WalletConnect extends EventEmitter {
         icons: [],
       },
     });
+    this.#web3wallet.on('session_proposal', (args) => this.#onSessionProposal(args));
+    this.#web3wallet.on('auth_request', (args) => this.#onAuthRequest(args));
     this.#web3wallet.on('session_request', (args) => this.#onSessionRequest(args));
     this.#web3wallet.on('session_delete', (args) => this.#onSessionDelete(args));
     try {
@@ -43,15 +45,20 @@ export class WalletConnect extends EventEmitter {
   }
 
   async pair(uri) {
-    const onSessionProposal = new Promise((resolve, reject) => {
-      this.#web3wallet.once('session_proposal', resolve);
-      this.#web3wallet.once('auth_request', (request) => {
+    const proposalPromise = new Promise((resolve, reject) => {
+      this.once('session_proposal', resolve);
+      this.once('auth_request', (request) => {
         console.error(`Unsupported AuthRequest: ${JSON.stringify(request)}`);
         reject(new Error('Not supported'));
       });
     });
-    await this.#web3wallet.pair({ uri });
-    return onSessionProposal;
+    try {
+      await this.#web3wallet.pair({ uri });
+      return await proposalPromise;
+    } finally {
+      this.removeAllListeners('session_proposal');
+      this.removeAllListeners('auth_request');
+    }
   }
 
   async approveSession(proposal) {
@@ -131,6 +138,14 @@ export class WalletConnect extends EventEmitter {
         console.error(err);
       }
     }
+  }
+
+  #onSessionProposal(proposal) {
+    this.emit('session_proposal', proposal);
+  }
+
+  #onAuthRequest(request) {
+    this.emit('auth_request', request);
   }
 
   #onSessionRequest(request) {
