@@ -16,11 +16,12 @@ export default {
         'avalanche@avalanche-c-chain',
         'binance-coin@binance-smart-chain',
         'ethereum@ethereum',
+        'fantom@fantom',
         'ethereum@optimism',
         'polygon@polygon',
         'solana@solana',
+        'toncoin@toncoin',
         'tron@tron',
-        'fantom@fantom',
       ],
     };
   },
