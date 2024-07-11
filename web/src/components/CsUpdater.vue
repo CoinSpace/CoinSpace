@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     async checkUpdate() {
-      const arch = (supportedDistribution.includes(this.env.VITE_DISTRIBUTION) && window.process?.arch) || 'any';
+      const arch = (supportedDistribution.includes(this.env.VITE_DISTRIBUTION) && window.electron?.arch) || 'any';
       try {
         this.updateInfo = await this.$account.request({
           url: `api/v4/update/${this.env.VITE_DISTRIBUTION}/${arch}/v${this.env.VITE_VERSION}`,
