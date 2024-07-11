@@ -65,6 +65,13 @@ const platforms = [{
   type: TYPE_FILE,
   pattern: /\.dmg$/i,
 }, {
+  // macOS application, update from app (wrong arch)
+  distribution: 'mac',
+  arch: 'any',
+  app: 'app',
+  type: TYPE_FILE,
+  pattern: /\.dmg$/i,
+}, {
   // Mac App Store application
   distribution: 'mas',
   arch: 'any',
