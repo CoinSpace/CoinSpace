@@ -307,8 +307,10 @@ export default class Account extends EventEmitter {
         return remote;
       } else if (local.type === 'token') {
         const token = this.#cryptoDB.getTokenByAddress(local.platform, local.address);
+        local.custom = true;
         return token ? token : local;
       } else {
+        local.custom = true;
         return local;
       }
     });
@@ -463,6 +465,7 @@ export default class Account extends EventEmitter {
         symbol: info.symbol,
         address,
         decimals: parseInt(info.decimals, 10),
+        custom: true,
       };
     } else {
       throw new errors.AddressError(`Invalid token address ${address}`);

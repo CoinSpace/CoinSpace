@@ -55,6 +55,9 @@ export default class Ramps {
   }
 
   async buy(countryCode, wallet) {
+    if (wallet.crypto.custom) {
+      return [];
+    }
     const ramps = await this.#request({
       url: 'api/v4/ramps/buy',
       params: {
@@ -69,6 +72,9 @@ export default class Ramps {
   }
 
   async sell(countryCode, wallet) {
+    if (wallet.crypto.custom) {
+      return [];
+    }
     const ramps = await this.#request({
       url: 'api/v4/ramps/sell',
       params: {
