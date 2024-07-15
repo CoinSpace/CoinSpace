@@ -61,11 +61,11 @@ const app = [
         component: SettingsWalletConnectView,
       }],
     }, {
-      path: 'add/:cryptoId([a-z0-9-]+@[a-z0-9-]+)?',
+      path: 'add/:cryptoId([a-z0-9-_]+@[a-z0-9-]+)?',
       name: 'crypto.add',
       component: CryptoAddView,
     }, {
-      path: ':cryptoId([a-z0-9-]+@[a-z0-9-]+)',
+      path: ':cryptoId([a-z0-9-_]+@[a-z0-9-]+)',
       meta: { crypto: true },
       children: [
         {
@@ -131,7 +131,7 @@ const app = [
       ],
     }, {
       //path: 'bip21/:data',
-      path: ':cryptoId([a-z0-9-]+@[a-z0-9-]+)?/bip21/:data',
+      path: ':cryptoId([a-z0-9-_]+@[a-z0-9-]+)?/bip21/:data',
       redirect(to) {
         try {
           const parsed = parseCryptoURI(to.params.data);
