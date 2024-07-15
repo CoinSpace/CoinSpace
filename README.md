@@ -37,7 +37,7 @@ Supported coins:
 - Solana (SOL) and SPL tokens
 - Stellar (XLM)
 - TRON (TRX) and TRC20 tokens
-- Toncoin (TON)
+- Toncoin (TON) and Jettons
 - XRP (XRP)
 
 This project is tested with BrowserStack
