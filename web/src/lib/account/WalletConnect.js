@@ -18,6 +18,7 @@ export class WalletConnect extends EventEmitter {
     this.#web3wallet = await Web3Wallet.init({
       core: new Core({
         projectId: import.meta.env.VITE_WALLETCONNECT_ID,
+        logger: 'fatal',
       }),
       metadata: {
         name: 'Coin Wallet',
