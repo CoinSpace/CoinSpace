@@ -228,7 +228,7 @@ export default {
           name: 'CoinSpace',
         },
         draft: true,
-        override: true,
+        force: true,
       },
     },
     {
