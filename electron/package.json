@@ -3,7 +3,7 @@
   "private": true,
   "productName": "Coin Wallet",
   "executableName": "coin",
-  "version": "6.5.0",
+  "version": "6.5.1",
   "description": "Coin Wallet",
   "license": "MIT",
   "author": "Coin Wallet <support@coin.space> (https://coin.space/)",
