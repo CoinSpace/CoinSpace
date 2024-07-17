@@ -68,10 +68,6 @@ export default {
           this.error = this.$t('Not supported');
           return;
         }
-        if (err.message?.includes?.('Scam')) {
-          this.error = this.$t('This domain is flagged as malicious and potentially harmful.');
-          return;
-        }
         this.error = this.$t('Error! Please try again later.');
         console.error(err);
       } finally {

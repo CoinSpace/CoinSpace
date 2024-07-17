@@ -35,6 +35,7 @@ export default {
     return {
       isLoading: false,
       error: undefined,
+      isScam: this.storage.session.isScam,
     };
   },
   methods: {
@@ -148,6 +149,7 @@ export default {
       <CsFormTextareaReadonly
         :value="storage.session?.peer.metadata.url"
         :label="$t('URL')"
+        :error="isScam ? $t('This domain is flagged as malicious and potentially harmful.') : false"
       />
     </CsFormGroup>
     <div
