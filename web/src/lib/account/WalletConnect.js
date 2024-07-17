@@ -63,6 +63,13 @@ export class WalletConnect extends EventEmitter {
   }
 
   async approveSession(proposal) {
+    if (proposal.verifyContext?.verified?.isScam === true) {
+      await this.#web3wallet.rejectSession({
+        id: proposal.id,
+        reason: getSdkError('USER_REJECTED'),
+      });
+      throw new Error('Scam');
+    }
     const chains = [];
     const accounts = [];
     for (const wallet of this.#account.wallets()) {
