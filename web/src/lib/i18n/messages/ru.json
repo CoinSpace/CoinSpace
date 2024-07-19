@@ -69,7 +69,7 @@
   "Derivation path defines how to derive private keys from passphrase.": "Путь деривации определяет, как получить приватные ключи из парольной фразы.",
   "Derivation path was updated.": "Путь деривации был обновлен.",
   "Destination account doesn't exist.": "Аккаунт назначения не существует.",
-  "Destination address should not be equal source address": "Адрес назначения не должен совпадать с исходным адресом.",
+  "Destination address should not be equal source address": "Адрес назначения не должен совпадать с исходным адресом",
   "Destination blockchain": "Блокчейн назначения",
   "Destination tag": "Тег назначения",
   "Disable": "Отключить",

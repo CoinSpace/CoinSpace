@@ -38,7 +38,7 @@
   "Balance of private key is too small for transfer. Minimum is {amount} {symbol}": "Баланс приватного ключа замалий для виконання транзакції. Мінімум: {amount} {symbol}",
   "Bech32": "Bech32",
   "Bech32 - SegWit native": "Bech32 - формат, нативний для SegWit",
-  "Before you start using Mecto, you need to enter a name that will help others identify you.": "Перед тим як почати використовувати Mecto, потрібно ввести Ваше ім'я, за яким інші зможуть вас ідентифікувати",
+  "Before you start using Mecto, you need to enter a name that will help others identify you.": "Перед тим як почати використовувати Mecto, потрібно ввести Ваше ім'я, за яким інші зможуть вас ідентифікувати.",
   "Biometrics": "Біометрія",
   "Blockchain": "Блокчейн",
   "Blockchains": "Блокчейни",
