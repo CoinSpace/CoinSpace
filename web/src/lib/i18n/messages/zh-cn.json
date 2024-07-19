@@ -238,6 +238,7 @@
   "There are currently no providers available.": "目前没有可用的提供者。",
   "This account name is already taken, please choose another one.": "此账户名称已被使用，请选择其他名称。",
   "This allows you to open your wallet on multiple devices and keeps it secure.": "这可以让您在多个设备上打开钱包，并保证钱包安全。",
+  "This domain is flagged as malicious and potentially harmful.": "该域名被标记为恶意和潜在有害。",
   "This will transfer all coins from the private key address to your wallet.": "这将把所有的货币从私钥地址转移到您的钱包。",
   "This will transfer all tokens from the private key address to your wallet.": "这将把所有的代币从私钥地址转移到您的钱包。",
   "To": "到",

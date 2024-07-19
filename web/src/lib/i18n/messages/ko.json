@@ -238,6 +238,7 @@
   "There are currently no providers available.": "현재 이용 가능한 제공자가 없습니다.",
   "This account name is already taken, please choose another one.": "이미 사용 중인 계정명입니다. 다른 계정명을 사용해주십시오.",
   "This allows you to open your wallet on multiple devices and keeps it secure.": "이를 통해 다수의 장치에서 월렛을 열고 보안을 유지할 수 있습니다.",
+  "This domain is flagged as malicious and potentially harmful.": "이 도메인은 악성 및 잠재적으로 유해한 것으로 플래그가 지정되었습니다.",
   "This will transfer all coins from the private key address to your wallet.": "개인키 주소의 모든 코인을 월렛으로 이체합니다.",
   "This will transfer all tokens from the private key address to your wallet.": "개인키 주소의 모든 토큰을 월렛으로 이체합니다.",
   "To": "To",

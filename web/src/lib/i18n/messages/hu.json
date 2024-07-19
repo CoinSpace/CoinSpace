@@ -238,6 +238,7 @@
   "There are currently no providers available.": "Jelenleg nincsenek elérhető szolgáltatók.",
   "This account name is already taken, please choose another one.": "A fióknév foglalt, kérjük, válassz másikat.",
   "This allows you to open your wallet on multiple devices and keeps it secure.": "Ez lehetővé teszi, hogy a pénztárcád biztonságban legyen, és több eszközön is megnyithasd azt.",
+  "This domain is flagged as malicious and potentially harmful.": "Ez a tartomány rosszindulatúként és potenciálisan károsként van megjelölve.",
   "This will transfer all coins from the private key address to your wallet.": "Ez minden kriptopénzt a pénztárcádba fog utalni a privátkulcs-címről.",
   "This will transfer all tokens from the private key address to your wallet.": "Ez minden tokent a pénztárcádba fog utalni a privátkulcs-címről.",
   "To": "Címzett",

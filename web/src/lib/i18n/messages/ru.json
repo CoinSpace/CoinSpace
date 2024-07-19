@@ -238,6 +238,7 @@
   "There are currently no providers available.": "На данный момент нет доступных провайдеров.",
   "This account name is already taken, please choose another one.": "Это имя учетной записи уже занято, пожалуйста, выберите другое.",
   "This allows you to open your wallet on multiple devices and keeps it secure.": "Это позволяет вам открывать свой кошелек на нескольких устройствах и обеспечивает его безопасность.",
+  "This domain is flagged as malicious and potentially harmful.": "Этот домен помечен как вредоносный и потенциально опасный.",
   "This will transfer all coins from the private key address to your wallet.": "Это отправит все монеты с адреса закрытого ключа на ваш кошелек.",
   "This will transfer all tokens from the private key address to your wallet.": "Это отправит все токены с адреса закрытого ключа на ваш кошелек.",
   "To": "Куда",

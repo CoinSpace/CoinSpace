@@ -238,6 +238,7 @@
   "There are currently no providers available.": "ไม่มีผู้ขายในขณะนี้",
   "This account name is already taken, please choose another one.": "มีผู้ใช้ชื่อบัญชีนี้แล้ว โปรดเลือกชื่อบัญชีอื่น",
   "This allows you to open your wallet on multiple devices and keeps it secure.": "สิ่งนี้จะทำให้คุณสามารถเปิดใช้งานวอลเล็ตได้ในหลายอุปกรณ์อย่างปลอดภัย",
+  "This domain is flagged as malicious and potentially harmful.": "โดเมนนี้ถูกตั้งค่าสถานะว่าเป็นอันตรายและอาจเป็นอันตรายได้",
   "This will transfer all coins from the private key address to your wallet.": "สิ่งนี้จะโอนคอยน์จากที่อยู่คีย์ส่วนตัวไปยังวอลเล็ทของคุณ",
   "This will transfer all tokens from the private key address to your wallet.": "วิธีนี้จะโอนโทเค็นทั้งหมดจากที่อยู่คีย์ส่วนตัวไปยังวอลเล็ทของคุณ",
   "To": "ไปยัง",

@@ -238,6 +238,7 @@
   "There are currently no providers available.": "Det finns för närvarande inga tillgängliga leverantörer.",
   "This account name is already taken, please choose another one.": "Detta kontonamn har redan tagits, välj ett annat.",
   "This allows you to open your wallet on multiple devices and keeps it secure.": "Detta gör att du kan öppna din plånbok på flera enheter och håller den säker.",
+  "This domain is flagged as malicious and potentially harmful.": "Denna domän är flaggad som skadlig och potentiellt farlig.",
   "This will transfer all coins from the private key address to your wallet.": "Detta kommer att överföra alla mynt från den privata nyckeladressen till din plånbok.",
   "This will transfer all tokens from the private key address to your wallet.": "Detta kommer att överföra alla tokens från den privata nyckeladressen till din plånbok.",
   "To": "Till",

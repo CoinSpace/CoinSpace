@@ -238,6 +238,7 @@
   "There are currently no providers available.": "V současnosti nejsou k dispozici žádní poskytovatelé.",
   "This account name is already taken, please choose another one.": "Tento název účtu byl už vzat. Vyberte prosím jiný.",
   "This allows you to open your wallet on multiple devices and keeps it secure.": "To Vám umožňuje otevřít svou peněženku na více zařízeních tak, že přitom zůstane v bezpečí.",
+  "This domain is flagged as malicious and potentially harmful.": "Tato doména je označena jako škodlivá a potenciálně nebezpečná.",
   "This will transfer all coins from the private key address to your wallet.": "Tak budou všechny mince převedeny z adresy privátního klíče do Vaší peněženky.",
   "This will transfer all tokens from the private key address to your wallet.": "Tak budou všechny tokeny převedeny z adresy privátního klíče do Vaší peněženky.",
   "To": "Adresát",

@@ -238,6 +238,7 @@
   "There are currently no providers available.": "Hiện không có nhà cung cấp nào.",
   "This account name is already taken, please choose another one.": "Tên tài khoản này đã được sử dụng, vui lòng chọn tên khác.",
   "This allows you to open your wallet on multiple devices and keeps it secure.": "Điều này cho phép bạn mở ví trên nhiều thiết bị và bảo mật ví.",
+  "This domain is flagged as malicious and potentially harmful.": "Tên miền này bị gắn cờ là độc hại và có thể gây hại.",
   "This will transfer all coins from the private key address to your wallet.": "Thao tác này sẽ chuyển tất cả coin từ địa chỉ khóa riêng sang ví của bạn.",
   "This will transfer all tokens from the private key address to your wallet.": "Thao tác này sẽ chuyển tất cả token từ địa chỉ khóa riêng sang ví của bạn.",
   "To": "Sang",

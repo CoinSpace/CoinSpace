@@ -238,6 +238,7 @@
   "There are currently no providers available.": "現在、利用可能なプロバイダーはありません。",
   "This account name is already taken, please choose another one.": "このアカウント名は既に使用されています。別のアカウントを選択してください。",
   "This allows you to open your wallet on multiple devices and keeps it secure.": "これにより、複数のデバイスでウォレットを開くことができ、ウォレットを安全に保つことができます。",
+  "This domain is flagged as malicious and potentially harmful.": "このドメインは悪意があり、潜在的に有害であるとフラグが立てられています。",
   "This will transfer all coins from the private key address to your wallet.": "これにより、プライベートキーアドレスからすべてのコインがあなたのウォレットに移動されます。",
   "This will transfer all tokens from the private key address to your wallet.": "これにより、プライベートキーアドレスからすべてのトークンがあなたのウォレットに移動されます。",
   "To": "宛先",

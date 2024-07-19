@@ -238,6 +238,7 @@
   "There are currently no providers available.": "Наразі немає доступних провайдерів.",
   "This account name is already taken, please choose another one.": "Ця назва аккаунта вже зайнята, виберіть іншу назву.",
   "This allows you to open your wallet on multiple devices and keeps it secure.": "Це дозволяє відкривати гаманець на кількох пристроях і забезпечує його безпеку.",
+  "This domain is flagged as malicious and potentially harmful.": "Цей домен позначений як шкідливий та потенційно небезпечний.",
   "This will transfer all coins from the private key address to your wallet.": "Це приведе до переміщення всіх монет з адреси приватного ключа до вашого гаманця.",
   "This will transfer all tokens from the private key address to your wallet.": "Це приведе до переміщення всіх токенів з адреси приватного ключа до вашого гаманця.",
   "To": "У",
