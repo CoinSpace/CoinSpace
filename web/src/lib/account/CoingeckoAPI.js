@@ -54,6 +54,7 @@ export default class CoingeckoAPI {
           ids,
           vs_currency: currency,
           price_change_percentage: '24h,7d,14d,30d,1y',
+          per_page: MARKET_PER_PAGE,
         },
       });
     } catch (err) {
