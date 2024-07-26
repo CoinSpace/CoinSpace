@@ -199,7 +199,7 @@ export default {
         <template #info>
           <div v-if="isAddressChangeSupported">
             <!-- eslint-disable-next-line max-len -->
-            {{ $t('Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use fresh address for each receiving transaction to enhance your privacy.') }}
+            {{ $t('Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use a fresh address for each receiving transaction to enhance your privacy.') }}
           </div>
           <div v-if="isAddressTypesSupported">
             <!-- eslint-disable-next-line max-len -->

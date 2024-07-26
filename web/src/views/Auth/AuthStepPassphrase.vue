@@ -59,7 +59,7 @@ export default {
       <div class="&__warning">
         <DangerTriangleIcon class="&__danger_triangle" />
         <!-- eslint-disable-next-line max-len -->
-        {{ $t('Your passphrase will not be shown again. You will loose access to your wallet without the passphrase.') }}
+        {{ $t('Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.') }}
       </div>
 
       <label class="&__agreement">

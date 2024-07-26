@@ -80,7 +80,7 @@ export default {
       />
       <div class="&__note">
         <!-- eslint-disable-next-line max-len -->
-        {{ $t('The EOS account name must be exactly 12-character long and consist of lower case letters and digits from 1 to 5.') }}
+        {{ $t('The EOS account name must be exactly 12 characters long and consist of lowercase letters and digits from 1 to 5.') }}
       </div>
     </CsFormGroup>
     <CsButtonGroup>
