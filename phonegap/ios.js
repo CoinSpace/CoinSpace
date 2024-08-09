@@ -147,7 +147,7 @@ async function setProvisionProfile() {
 
 async function addWatchApp() {
   shell('git clone https://github.com/CoinSpace/cs-watchapp-ios.git', { cwd: buildPath });
-  shell('cd cs-watchapp-ios && git checkout 968e62865458001d21933932725ff80aea1ec3bb -q', { cwd: buildPath });
+  shell('cd cs-watchapp-ios && git checkout c3c626819e1e307739e6d335dafc9a16bdc43af5 -q', { cwd: buildPath });
   shell(`ln -s ${path.resolve(buildPath, 'cs-watchapp-ios/WatchApp')} ./platforms/ios/WatchApp`, { cwd: buildPath });
   shell(`ln -s ${path.resolve(buildPath, 'cs-watchapp-ios/WatchAppExtension')} ./platforms/ios/WatchAppExtension`, { cwd: buildPath });
 
