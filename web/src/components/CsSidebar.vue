@@ -25,7 +25,7 @@ export default {
       portfolioBalance: 0,
       portfolioBalanceChange: 0,
       portfolioBalanceChangePercent: 0,
-      changePeriod: '1d',
+      changePeriod: '1D',
     };
   },
   computed: {

@@ -1,5 +1,5 @@
 <script>
-import { cryptoSubtitleWithSymbol, periodToDays } from '../../../lib/helpers.js';
+import { cryptoSubtitleWithSymbol } from '../../../lib/helpers.js';
 
 import CsNavbar from '../../../components/CsNavbar.vue';
 import CsNavbarButton from '../../../components/CsNavbarButton.vue';
@@ -51,7 +51,7 @@ export default {
       return this.market?.price || 0;
     },
     change() {
-      return this.market?.change[periodToDays[this.period]] / 100 || 0;
+      return this.market?.change[this.period] / 100 || 0;
     },
     market() {
       return this.$cryptos.find((item) => {

@@ -5,8 +5,6 @@ import ChartCanvas from './CsPriceChartCanvas.vue';
 import CsLoader from '../CsLoader.vue';
 import Periods from './CsPriceChartPeriods.vue';
 
-import { periodToDays } from '../../lib/helpers.js';
-
 export default {
   components: {
     AxisY,
@@ -49,7 +47,7 @@ export default {
         await this.$nextTick(); // wait period props
         this.prices = await this.$account.market.getChartData(
           this.crypto._id,
-          periodToDays[this.period],
+          this.period,
           this.$currency
         );
       } catch (err) {

@@ -54,14 +54,6 @@ export function measureText(text) {
   return ctx.measureText(text);
 }
 
-export const periodToDays = {
-  '1D': '1d',
-  '7D': '7d',
-  '14D': '14d',
-  '1M': '30d',
-  '1Y': '365d',
-};
-
 export function defineAppProperty(app, property, value) {
   Object.defineProperty(app.config.globalProperties, property, {
     enumerable: true,

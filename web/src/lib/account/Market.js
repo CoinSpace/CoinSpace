@@ -1,4 +1,4 @@
-import CoingeckoAPI from './CoingeckoAPI.js';
+import PriceAPI from './PriceAPI.js';
 
 export const currencies = [
   'AED', 'ARS', 'AUD', 'BDT', 'BHD',
@@ -14,24 +14,24 @@ export const currencies = [
 
 export default class Market {
   #cryptoDB;
-  #coingeckoAPI;
-  #coingeckoIDs = [];
+  #priceAPI;
+  #cryptoIds = [];
 
   constructor({ cryptoDB, request }) {
     if (!cryptoDB) {
       throw new TypeError('cryptoDB is required');
     }
     this.#cryptoDB = cryptoDB;
-    this.#coingeckoAPI = new CoingeckoAPI({ request });
+    this.#priceAPI = new PriceAPI({ request });
   }
 
   async init({ cryptos, currency }) {
-    this.#coingeckoIDs = [...new Set(cryptos
-      .map((crypto) => crypto.coingecko?.id)
-      .filter((crypto) => !!crypto)
+    this.#cryptoIds = [...new Set(cryptos
+      .filter((crypto) => crypto.coingecko?.id)
+      .map((crypto) => crypto._id)
     )];
     // cache market
-    await this.#coingeckoAPI.market(this.#coingeckoIDs, currency);
+    await this.#priceAPI.market(this.#cryptoIds, currency);
   }
 
   async getPrice(id, currency) {
@@ -45,37 +45,30 @@ export default class Market {
     const crypto = this.#cryptoDB.get(id);
     if (!crypto || !crypto.coingecko?.id) return;
     if (!currencies.includes(currency)) return;
-    if (!this.#coingeckoIDs.includes(crypto.coingecko.id)) {
-      this.#coingeckoIDs.push(crypto.coingecko.id);
+    if (!this.#cryptoIds.includes(crypto._id)) {
+      this.#cryptoIds.push(crypto._id);
     }
-    const data = await this.#coingeckoAPI.market(this.#coingeckoIDs, currency);
-    const item = data.find((item) => item.id === crypto.coingecko.id);
+    const data = await this.#priceAPI.market(this.#cryptoIds, currency);
+    const item = data.find((item) => item.cryptoId === crypto._id);
     if (!item) return;
     return {
-      price: item.current_price,
+      price: item.price,
       change: {
-        '1d': item.price_change_percentage_24h_in_currency,
-        '7d': item.price_change_percentage_7d_in_currency,
-        '14d': item.price_change_percentage_14d_in_currency,
-        '30d': item.price_change_percentage_30d_in_currency,
-        '365d': item.price_change_percentage_1y_in_currency,
+        '1D': item.price_change_1d,
+        '7D': item.price_change_7d,
+        '14D': item.price_change_14d,
+        '1M': item.price_change_1m,
+        '1Y': item.price_change_1y,
       },
     };
   }
 
-  async getChartData(id, days, currency) {
+  async getChartData(id, period, currency) {
     const crypto = this.#cryptoDB.get(id);
     if (!crypto || !crypto.coingecko?.id) {
       return [];
     }
-    const data = await this.#coingeckoAPI.chart(crypto.coingecko.id, days, currency);
-    if (!data?.prices) {
-      return [];
-    }
-    return data.prices.map(([, price]) => price);
-  }
-
-  clearCache() {
-    this.#coingeckoAPI.clearCache();
+    const data = await this.#priceAPI.chart(crypto._id, period, currency);
+    return data.map((item) => item.price).reverse();
   }
 }
