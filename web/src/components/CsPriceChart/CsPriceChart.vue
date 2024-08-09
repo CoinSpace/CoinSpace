@@ -50,6 +50,9 @@ export default {
           this.period,
           this.$currency
         );
+        if (this.prices.length === 0) {
+          throw Error(`Empty chart: ${this.crypto._id}, ${this.period}, ${this.$currency}`);
+        }
       } catch (err) {
         console.error(err);
         this.error = true;
