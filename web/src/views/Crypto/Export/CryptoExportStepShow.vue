@@ -146,7 +146,7 @@ export default {
             class="&__item"
           >
             <div class="&__item-title">
-              {{ $t('Secret view key') }}
+              {{ $t('Private view key') }}
             </div>
             <div class="&__item-subtitle">
               {{ item.secretviewkey }}
@@ -168,7 +168,7 @@ export default {
             class="&__item"
           >
             <div class="&__item-title">
-              {{ $t('Secret spend key') }}
+              {{ $t('Private spend key') }}
             </div>
             <div class="&__item-subtitle">
               {{ item.secretspendkey }}
