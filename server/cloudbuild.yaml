@@ -27,6 +27,7 @@ steps:
       && npm run i18n:ci \
       && npm run lint \
       && npm run lint:style \
+      && if [[ "${_VITE_PRICE_API_URL}" ]]; then export VITE_PRICE_API_URL=${_VITE_PRICE_API_URL}; fi \
       && if [[ "${_VITE_API_BTC_URL}" ]]; then export VITE_API_BTC_URL=${_VITE_API_BTC_URL}; fi \
       && if [[ "${_VITE_API_BCH_URL}" ]]; then export VITE_API_BCH_URL=${_VITE_API_BCH_URL}; fi \
       && if [[ "${_VITE_API_DASH_URL}" ]]; then export VITE_API_DASH_URL=${_VITE_API_DASH_URL}; fi \
