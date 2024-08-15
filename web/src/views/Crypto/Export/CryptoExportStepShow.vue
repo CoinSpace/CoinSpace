@@ -142,14 +142,14 @@ export default {
             </div>
           </div>
           <div
-            v-if="item.secretviewkey"
+            v-if="item.privateviewkey"
             class="&__item"
           >
             <div class="&__item-title">
               {{ $t('Private view key') }}
             </div>
             <div class="&__item-subtitle">
-              {{ item.secretviewkey }}
+              {{ item.privateviewkey }}
             </div>
           </div>
           <div
@@ -164,14 +164,14 @@ export default {
             </div>
           </div>
           <div
-            v-if="item.secretspendkey"
+            v-if="item.privatespendkey"
             class="&__item"
           >
             <div class="&__item-title">
               {{ $t('Private spend key') }}
             </div>
             <div class="&__item-subtitle">
-              {{ item.secretspendkey }}
+              {{ item.privatespendkey }}
             </div>
           </div>
         </div>
