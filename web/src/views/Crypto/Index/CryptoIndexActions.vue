@@ -73,7 +73,6 @@ export default {
   .#{ $filename } {
     width: 100%;
     max-width: 25rem;
-    align-self: center;
     @include breakpoint(lg) {
       align-self: flex-start;
     }
