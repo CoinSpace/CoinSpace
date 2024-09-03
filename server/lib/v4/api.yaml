@@ -676,6 +676,25 @@ paths:
                 $ref: '#/components/schemas/Storage'
         default:
           $ref: '#/components/responses/GeneralError'
+  /storages/{storageNames}:
+    get:
+      x-eov-operation-id: getStorages
+      x-eov-operation-handler: handlers
+      description: Get storages
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/storageNames'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Storages
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StorageList'
+        default:
+          $ref: '#/components/responses/GeneralError'
   /token/device/pin:
     post:
       x-eov-operation-id: tokenDevicePinVerify
@@ -1227,6 +1246,20 @@ components:
           $ref: '#/components/schemas/Base64String'
       required:
         - data
+    StorageList:
+      type: array
+      maxItems: 25
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          _id:
+            $ref: '#/components/schemas/CryptoIdStorage'
+          data:
+            $ref: '#/components/schemas/Base64String'
+        required:
+          - _id
+          - data
     UInt64:
       type: integer
       format: int64
@@ -1466,6 +1499,19 @@ components:
       schema:
         $ref: '#/components/schemas/CryptoIdStorage'
       required: true
+    storageNames:
+      in: path
+      name: storageNames
+      description: storageNames
+      required: true
+      style: simple
+      explode: false
+      allowReserved: true
+      schema:
+        type: array
+        maxItems: 25
+        items:
+          $ref: '#/components/schemas/CryptoIdStorage'
     version:
       in: path
       name: version

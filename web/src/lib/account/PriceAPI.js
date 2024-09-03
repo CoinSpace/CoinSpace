@@ -1,4 +1,5 @@
 import ExpiryMap from 'expiry-map';
+import { chunks } from '../helpers.js';
 import pMemoize from 'p-memoize';
 
 const periodToDays = {
@@ -28,13 +29,16 @@ export default class PriceAPI {
   }
 
   async market(ids, currency) {
-    return await this.#request({
-      url: 'prices',
-      params: {
-        cryptoIds: ids.join(),
-        fiat: currency,
-      },
-    });
+    if (ids.length === 0) return [];
+    return (await Promise.all(chunks(ids, 50).map((chunk) => {
+      return this.#request({
+        url: 'prices',
+        params: {
+          cryptoIds: chunk.join(),
+          fiat: currency,
+        },
+      });
+    }))).flat();
   }
 
   async chart(id, period, currency) {

@@ -85,6 +85,12 @@ export async function getStorage(req, res) {
   res.status(200).send({ data });
 }
 
+export async function getStorages(req, res) {
+  const device = await req.getDevice();
+  const data = await storage.getStorages(device, req.params.storageNames);
+  res.status(200).send(data);
+}
+
 export async function setStorage(req, res) {
   const device = await req.getDevice();
   const data = await storage.setStorage(device, req.params.storageName, req.body.data);

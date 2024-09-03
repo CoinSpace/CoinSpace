@@ -339,10 +339,10 @@ export default class Account extends EventEmitter {
    * 2. Enter by passphare
    * 3. Add new crypto
    */
-  async #createWallet(crypto, walletSeed, settings) {
+  async #createWallet(crypto, walletSeed, walletStorage, settings = undefined) {
     const Wallet = await loadWalletModule(crypto.platform);
     const platform = this.#cryptoDB.platform(crypto.platform);
-    const options = await this.#getWalletOptions(crypto, platform, settings);
+    const options = this.#getWalletOptions(crypto, platform, walletStorage, settings);
     const wallet = new Wallet(options);
     await wallet.create(walletSeed);
     return wallet;
@@ -351,10 +351,10 @@ export default class Account extends EventEmitter {
   /**
    * 1. Enter by pin
    */
-  async #openWallet(crypto, settings) {
+  async #openWallet(crypto, walletStorage, settings = undefined) {
     const Wallet = await loadWalletModule(crypto.platform);
     const platform = this.#cryptoDB.platform(crypto.platform);
-    const options = await this.#getWalletOptions(crypto, platform, settings);
+    const options = this.#getWalletOptions(crypto, platform, walletStorage, settings);
     const wallet = new Wallet(options);
     if (this.#clientStorage.hasPublicKey(crypto.platform)) {
       await wallet.open(this.#clientStorage.getPublicKey(crypto.platform, this.#deviceSeed));
@@ -418,18 +418,12 @@ export default class Account extends EventEmitter {
     }
   }
 
-  async #getWalletOptions(crypto, platform, settings) {
+  #getWalletOptions(crypto, platform, storage, settings) {
     const cache = new Cache({
       crypto,
       clientStorage: this.#clientStorage,
       deviceSeed: this.#deviceSeed,
     });
-    const storage = new WalletStorage({
-      request: this.request,
-      name: crypto._id,
-      key: this.#clientStorage.getDetailsKey(),
-    });
-    await storage.init();
     const options = {
       crypto,
       platform,
@@ -525,8 +519,9 @@ export default class Account extends EventEmitter {
 
     await this.init();
 
+    const walletStorages = await WalletStorage.initMany(this, this.#details.get('cryptos'));
     const wallets = await Promise.all(this.#details.get('cryptos').map(async (crypto) => {
-      const wallet = await this.#createWallet(crypto, walletSeed);
+      const wallet = await this.#createWallet(crypto, walletSeed, walletStorages[crypto._id]);
       // save public key only for coins
       if (crypto.type === 'coin') {
         this.#clientStorage.setPublicKey(crypto.platform, wallet.getPublicKey(), deviceSeed);
@@ -543,8 +538,9 @@ export default class Account extends EventEmitter {
   async open(deviceSeed) {
     this.#deviceSeed = deviceSeed;
     await this.init();
+    const walletStorages = await WalletStorage.initMany(this, this.#details.get('cryptos'));
     const wallets = await Promise.all(this.#details.get('cryptos').map(async (crypto) => {
-      const wallet = await this.#openWallet(crypto);
+      const wallet = await this.#openWallet(crypto, walletStorages[crypto._id]);
       if (crypto.type === 'coin') {
         this.#details.setPlatformSettings(crypto.platform, wallet.settings);
       }
@@ -578,21 +574,24 @@ export default class Account extends EventEmitter {
       throw new CryptoAlreadyAddedError(crypto._id);
     }
     if (this.#clientStorage.hasPublicKey(crypto.platform)) {
-      this.#wallets.set(await this.#openWallet(crypto));
+      const walletStorage = await WalletStorage.initOne(this, crypto);
+      this.#wallets.set(await this.#openWallet(crypto, walletStorage));
     } else if (walletSeed) {
       if (crypto.type === 'coin') {
-        const wallet = await this.#createWallet(crypto, walletSeed);
+        const walletStorage = await WalletStorage.initOne(this, crypto);
+        const wallet = await this.#createWallet(crypto, walletSeed, walletStorage);
         this.#wallets.set(wallet);
         this.#details.setPlatformSettings(crypto.platform, wallet.settings);
         this.#clientStorage.setPublicKey(wallet.crypto.platform, wallet.getPublicKey(), this.#deviceSeed);
       }
       if (crypto.type === 'token') {
         const platform = this.#cryptoDB.platform(crypto.platform);
-        const wallet = await this.#createWallet(platform, walletSeed);
+        const walletStorages = await WalletStorage.initMany(this, [crypto, platform]);
+        const wallet = await this.#createWallet(platform, walletSeed, walletStorages[platform._id]);
         this.#wallets.set(wallet);
         this.#details.setPlatformSettings(crypto.platform, wallet.settings);
         this.#clientStorage.setPublicKey(wallet.crypto.platform, wallet.getPublicKey(), this.#deviceSeed);
-        this.#wallets.set(await this.#openWallet(crypto));
+        this.#wallets.set(await this.#openWallet(crypto, walletStorages[crypto._id]));
       }
     } else {
       throw new SeedRequiredError();
@@ -641,14 +640,14 @@ export default class Account extends EventEmitter {
     const { platform } = crypto;
     const platformWallets = this.#wallets.filterByPlatform(platform);
     platformWallets.forEach((item) => item.cleanup());
-
-    const wallet = await this.#createWallet(crypto, walletSeed, settings);
+    const walletStorages = await WalletStorage.initMany(this, platformWallets.map((item) => item.crypto));
+    const wallet = await this.#createWallet(crypto, walletSeed, walletStorages[crypto._id], settings);
     this.#wallets.set(wallet);
     this.#clientStorage.setPublicKey(platform, wallet.getPublicKey(), this.#deviceSeed);
-
-    for (const item of platformWallets) {
-      if (item !== wallet) {
-        this.#wallets.set(await this.#openWallet(item.crypto, settings));
+    for (const platformWallet of platformWallets) {
+      if (wallet.crypto._id !== platformWallet.crypto._id) {
+        const walletStorage = walletStorages[platformWallet.crypto._id];
+        this.#wallets.set(await this.#openWallet(platformWallet.crypto, walletStorage, settings));
       }
     }
     this.#details.setPlatformSettings(platform, settings);
