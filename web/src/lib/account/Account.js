@@ -640,14 +640,12 @@ export default class Account extends EventEmitter {
     const { platform } = crypto;
     const platformWallets = this.#wallets.filterByPlatform(platform);
     platformWallets.forEach((item) => item.cleanup());
-    const walletStorages = await WalletStorage.initMany(this, platformWallets.map((item) => item.crypto));
-    const wallet = await this.#createWallet(crypto, walletSeed, walletStorages[crypto._id], settings);
+    const wallet = await this.#createWallet(crypto, walletSeed, this.#wallets.get(crypto._id).storage, settings);
     this.#wallets.set(wallet);
     this.#clientStorage.setPublicKey(platform, wallet.getPublicKey(), this.#deviceSeed);
     for (const platformWallet of platformWallets) {
       if (wallet.crypto._id !== platformWallet.crypto._id) {
-        const walletStorage = walletStorages[platformWallet.crypto._id];
-        this.#wallets.set(await this.#openWallet(platformWallet.crypto, walletStorage, settings));
+        this.#wallets.set(await this.#openWallet(platformWallet.crypto, platformWallet.storage, settings));
       }
     }
     this.#details.setPlatformSettings(platform, settings);
