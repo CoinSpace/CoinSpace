@@ -706,10 +706,10 @@ export default class Account extends EventEmitter {
     return this.getSeed('wallet', hex.decode(walletToken));
   }
 
-  setPlatformWalletsStateInitialized(platform, excludeWallets) {
+  setPlatformWalletsStateInitialized(platform, excludeWallet) {
     const wallets = this.#wallets.filterByPlatform(platform);
     for (const wallet of wallets) {
-      if (wallet.state === CsWallet.STATE_LOADED && !excludeWallets.includes(wallet)) {
+      if (wallet.state === CsWallet.STATE_LOADED && wallet !== excludeWallet) {
         wallet.state = CsWallet.STATE_INITIALIZED;
       }
     }

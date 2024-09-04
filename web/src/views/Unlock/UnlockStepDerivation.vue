@@ -30,6 +30,7 @@ export default {
             await this.$account.initWallet(wallet, walletSeed);
           }
         }
+        this.$account.emit('update');
         this.args.redirect();
       }, { layout: 'AuthStepLayout' });
       this.isLoading = false;
