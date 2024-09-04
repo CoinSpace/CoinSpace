@@ -47,7 +47,8 @@ export async function createAccount({ app, router }) {
         cryptos.value.forEach(({ crypto, balance }) => {
           const wallet = account.wallet(crypto._id);
           if (wallet && wallet.balance.value !== balance.value) {
-            account.setPlatformWalletsStateInitialized(wallet.crypto.platform, wallet);
+            const excludeWallets = [app.config.globalProperties.$wallet, wallet];
+            account.setPlatformWalletsStateInitialized(wallet.crypto.platform, excludeWallets);
           }
         });
         for (const wallet of account.wallets()) {
