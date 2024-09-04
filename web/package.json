@@ -29,7 +29,7 @@
     "@coinspace/crypto-db": "^1.11.2",
     "@coinspace/cs-bitcoin-wallet": "^1.1.4",
     "@coinspace/cs-cardano-wallet": "^2.0.1",
-    "@coinspace/cs-common": "^1.1.2",
+    "@coinspace/cs-common": "^1.1.3",
     "@coinspace/cs-eos-wallet": "^2.0.3",
     "@coinspace/cs-evm-wallet": "^1.4.3",
     "@coinspace/cs-monero-wallet": "^2.0.4",

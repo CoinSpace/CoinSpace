@@ -54,7 +54,7 @@ export default {
 
       await this.walletSeed(async (walletSeed) => {
         try {
-          await this.$account.updatePlatformSettings(this.$wallet.crypto, this.settings, walletSeed);
+          await this.$account.updatePlatformSettings(this.$wallet, this.settings, walletSeed);
           this.$router.up();
         } catch (err) {
           console.error(err);

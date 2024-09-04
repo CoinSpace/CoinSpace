@@ -636,16 +636,18 @@ export default class Account extends EventEmitter {
     this.#clientStorage.setPublicKey(wallet.crypto.platform, publicKey, this.#deviceSeed);
   }
 
-  async updatePlatformSettings(crypto, settings, walletSeed) {
-    const { platform } = crypto;
+  async updatePlatformSettings(wallet, settings, walletSeed) {
+    const { platform } = wallet.crypto;
     const platformWallets = this.#wallets.filterByPlatform(platform);
     platformWallets.forEach((item) => item.cleanup());
-    const wallet = await this.#createWallet(crypto, walletSeed, this.#wallets.get(crypto._id).storage, settings);
-    this.#wallets.set(wallet);
-    this.#clientStorage.setPublicKey(platform, wallet.getPublicKey(), this.#deviceSeed);
+    wallet.settings = settings;
+    await wallet.create(walletSeed);
+    const publicKey = wallet.getPublicKey();
+    this.#clientStorage.setPublicKey(platform, publicKey, this.#deviceSeed);
     for (const platformWallet of platformWallets) {
-      if (wallet.crypto._id !== platformWallet.crypto._id) {
-        this.#wallets.set(await this.#openWallet(platformWallet.crypto, platformWallet.storage, settings));
+      if (wallet !== platformWallet) {
+        platformWallet.settings = settings;
+        await platformWallet.open(publicKey);
       }
     }
     this.#details.setPlatformSettings(platform, settings);
