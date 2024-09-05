@@ -159,7 +159,7 @@ export default {
       {{ error }}
     </div>
     <CsButton
-      type="primary"
+      type="danger-light"
       :isLoading="isLoading"
       @click="disconnect"
     >
