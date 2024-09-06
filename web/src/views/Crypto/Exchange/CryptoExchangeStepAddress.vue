@@ -243,7 +243,6 @@ export default {
       </CsButtonGroup>
     </CsFormGroup>
     <CsButtonGroup>
-      <CsPoweredBy powered="changelly" />
       <CsButton
         type="primary"
         :isLoading="isLoading"
@@ -251,6 +250,7 @@ export default {
       >
         {{ $t('Continue') }}
       </CsButton>
+      <CsPoweredBy powered="changelly" />
     </CsButtonGroup>
   </MainLayout>
 </template>

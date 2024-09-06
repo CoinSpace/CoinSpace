@@ -232,13 +232,13 @@ export default {
     </CsFormGroup>
     <CsButtonGroup>
       <template v-if="exchange">
-        <CsPoweredBy powered="changelly" />
         <CsButton
           type="primary-light"
           @click="$safeOpen(transaction.exchange.trackUrl)"
         >
           {{ $t('Contact Changelly') }}
         </CsButton>
+        <CsPoweredBy powered="changelly" />
       </template>
       <CsButton
         v-else-if="transaction.rbf"

@@ -148,10 +148,6 @@ export default {
   </CsFormGroup>
 
   <CsButtonGroup>
-    <CsPoweredBy
-      v-if="powered"
-      :powered="powered"
-    />
     <CsButton
       type="primary"
       :isLoading="isLoading"
@@ -159,6 +155,10 @@ export default {
     >
       {{ $t('Confirm') }}
     </CsButton>
+    <CsPoweredBy
+      v-if="powered"
+      :powered="powered"
+    />
   </CsButtonGroup>
 </template>
 

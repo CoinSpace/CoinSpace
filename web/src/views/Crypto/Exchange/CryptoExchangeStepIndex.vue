@@ -316,15 +316,15 @@ export default {
           {{ $c(amountConverted) }}
         </div>
       </div>
+      <div
+        v-if="to && rate"
+        class="&__info"
+      >
+        1 {{ $wallet.crypto.symbol }} ≈ {{ rate }} {{ to.crypto.symbol }}
+      </div>
     </CsFormGroup>
 
     <CsButtonGroup>
-      <div class="&__powered">
-        <div v-if="to && rate">
-          1 {{ $wallet.crypto.symbol }} ≈ {{ rate }} {{ to.crypto.symbol }}
-        </div>
-        <CsPoweredBy powered="changelly" />
-      </div>
       <CsButton
         type="primary"
         :isLoading="isLoading"
@@ -332,6 +332,7 @@ export default {
       >
         {{ $t('Continue') }}
       </CsButton>
+      <CsPoweredBy powered="changelly" />
     </CsButtonGroup>
   </MainLayout>
 </template>
@@ -346,15 +347,6 @@ export default {
 
     &__info {
       @include text-md;
-    }
-
-    &__powered {
-      @include text-xs;
-      display: flex;
-      flex-direction: column;
-      color: $secondary;
-      gap: $spacing-2xs;
-      text-align: center;
     }
   }
 </style>
