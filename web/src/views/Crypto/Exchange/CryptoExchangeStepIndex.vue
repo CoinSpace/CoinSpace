@@ -58,6 +58,7 @@ export default {
       this.replace('poor');
       return;
     }
+    this.isLoading = true;
     this.updateStorage({
       // cache price for all steps
       price: await this.$account.market.getPrice(this.$wallet.crypto._id, this.$currency),
@@ -65,6 +66,7 @@ export default {
       priceUSD: this.$wallet.isCsFeeSupported ?
         await this.$account.market.getPrice(this.$wallet.crypto._id, 'USD') : undefined,
     });
+    this.isLoading = false;
   },
   computed: {
     to() {
