@@ -84,7 +84,10 @@ export default {
         <template v-if="'$wallet' in this && $wallet">
           <CsLoader v-if="$walletState === $STATE_LOADING" />
           <slot v-if="[$STATE_LOADED, $STATE_NEED_ACTIVATION].includes($walletState)" />
-          <div v-if="$walletState === $STATE_ERROR">
+          <div
+            v-if="$walletState === $STATE_ERROR"
+            class="&__error"
+          >
             {{ $t('Error! Please try again later.') }}
           </div>
         </template>
@@ -137,6 +140,10 @@ export default {
       @include breakpoint(lg) {
         border-bottom: 1px solid $divider;
       }
+    }
+
+    &__error {
+      @include text-md;
     }
   }
 </style>
