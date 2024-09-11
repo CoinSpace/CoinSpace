@@ -251,8 +251,8 @@ export default {
         });
         return;
       }
-      if (err instanceof errors.InsufficientCoinForTokenTransactionError) {
-        this.errors['amount'] = this.$t('Insufficient funds for token transaction. Required {amount} {symbol}', {
+      if (err instanceof errors.InsufficientCoinForTransactionFeeError) {
+        this.errors['amount'] = this.$t('Insufficient funds to pay the transaction fee. Required {amount} {symbol}', {
           amount: err.amount,
           symbol: this.$wallet.platform.symbol,
         });
