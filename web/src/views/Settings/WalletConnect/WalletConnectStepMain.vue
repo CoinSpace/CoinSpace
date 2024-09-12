@@ -58,8 +58,8 @@ export default {
       try {
         const params = request.params.request.params[0];
         const wallet = this.$account.walletByChainId(request.params?.chainId);
+        await wallet.cleanup();
         if (![CsWallet.STATE_LOADED, CsWallet.STATE_LOADING].includes(wallet.state)) {
-          await wallet.cleanup();
           await wallet.load();
         }
         const amount = new Amount(params.value || 0, wallet.crypto.decimals);
@@ -91,8 +91,8 @@ export default {
       this.error = undefined;
       try {
         const wallet = this.$account.walletByChainId(request.params?.chainId);
+        await wallet.cleanup();
         if (![CsWallet.STATE_LOADED, CsWallet.STATE_LOADING].includes(wallet.state)) {
-          await wallet.cleanup();
           await wallet.load();
         }
         const data = JSON.parse(request.params.request.params[1]);
@@ -114,8 +114,8 @@ export default {
       this.error = undefined;
       try {
         const wallet = this.$account.walletByChainId(request.params?.chainId);
+        await wallet.cleanup();
         if (![CsWallet.STATE_LOADED, CsWallet.STATE_LOADING].includes(wallet.state)) {
-          await wallet.cleanup();
           await wallet.load();
         }
         const raw = request.params.request.method === 'personal_sign'
