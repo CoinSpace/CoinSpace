@@ -16,6 +16,7 @@ import CryptoImportView from '../../views/Crypto/Import/CryptoImportView.vue';
 import CryptoIndexView from '../../views/Crypto/Index/CryptoIndexView.vue';
 import CryptoReceiveView from '../../views/Crypto/Receive/CryptoReceiveView.vue';
 import CryptoSendView from '../../views/Crypto/Send/CryptoSendView.vue';
+import CryptoStakingView from '../../views/Crypto/Staking/CryptoStakingView.vue';
 
 import SettingsAccountView from '../../views/Settings/Account/SettingsAccountView.vue';
 import SettingsHardwareView from '../../views/Settings/Hardware/SettingsHardwareView.vue';
@@ -127,6 +128,11 @@ const app = [
           path: 'eossetup',
           name: 'crypto.eossetup',
           component: CryptoEosSetupView,
+        },
+        {
+          path: 'staking',
+          name: 'crypto.staking',
+          component: CryptoStakingView,
         },
       ],
     }, {

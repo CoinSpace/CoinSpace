@@ -10,6 +10,7 @@ import ExportIcon from '../../../assets/svg/export.svg';
 import ImportIcon from '../../../assets/svg/import.svg';
 import InfoIcon from '../../../assets/svg/info.svg';
 import KebabIcon from '../../../assets/svg/kebab.svg';
+import StakingIcon from '../../../assets/svg/staking.svg';
 
 export default {
   components: {
@@ -23,6 +24,7 @@ export default {
     DerivationIcon,
     InfoIcon,
     DeleteIcon,
+    StakingIcon,
   },
   emits: ['remove'],
   data() {
@@ -30,6 +32,7 @@ export default {
       isExportSupported: this.$wallet.isExportSupported,
       isImportSupported: this.$wallet.isImportSupported,
       isSettingsSupported: this.$wallet.isSettingsSupported,
+      isStakingSupported: this.$wallet.isStakingSupported,
     };
   },
 };
@@ -45,6 +48,16 @@ export default {
     <template #content>
       <CsListItems class="&__list">
         <template v-if="$walletState === $STATE_LOADED || $walletState === $STATE_LOADING">
+          <CsListItem
+            v-if="isStakingSupported"
+            :disabled="$walletState === $STATE_LOADING"
+            :title="$t('Staking')"
+            @click="$router.push({ name: 'crypto.staking', params: { cryptoId: $wallet.crypto._id }})"
+          >
+            <template #before>
+              <StakingIcon />
+            </template>
+          </CsListItem>
           <CsListItem
             v-if="isImportSupported"
             :disabled="$walletState === $STATE_LOADING"
