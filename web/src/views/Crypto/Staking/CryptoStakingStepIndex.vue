@@ -30,7 +30,6 @@ export default {
   },
   extends: CsStep,
   mixins: [onShowOnHide],
-
   data() {
     return {
       isLoading: true,
@@ -39,6 +38,13 @@ export default {
       apr: undefined,
       error: undefined,
     };
+  },
+  computed: {
+    supportUrl() {
+      if (this.$wallet.crypto._id === 'ethereum@ethereum') {
+        return 'https://support.coin.space/hc/en-us/articles/30344399125780';
+      }
+    },
   },
   async onShow() {
     this.isLoading = true;
@@ -96,7 +102,7 @@ export default {
         />
         <CsButton
           type="primary-link"
-          @click="$safeOpen('https://support.coin.space/hc/en-us/')"
+          @click="$safeOpen(supportUrl)"
         >
           {{ $t('How it works?') }}
         </CsButton>
