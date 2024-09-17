@@ -33,7 +33,7 @@ Supported coins:
 - Litecoin (LTC)
 - Monero (XMR)
 - Optimism (OP) and Optimism tokens
-- Polygon (MATIC) and Polygon tokens
+- Polygon (POL) and Polygon tokens
 - Solana (SOL) and SPL tokens
 - Stellar (XLM)
 - TRON (TRX) and TRC20 tokens
