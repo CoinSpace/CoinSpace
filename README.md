@@ -20,7 +20,7 @@ Supported platforms:
 Supported coins:
 - Arbitrum One (ARB) and Arbitrum tokens
 - Avalanche C-Chain (AVAX) and ARC20 tokens
-- Binance Smart Chain (BSC) and BEP20 tokens
+- Binance Smart Chain (BNB) and BEP20 tokens
 - Bitcoin (BTC)
 - Bitcoin Cash (BCH)
 - Cardano (ADA)
