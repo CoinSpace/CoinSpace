@@ -1,16 +1,29 @@
 import { Resolution } from '@unstoppabledomains/resolution';
-import db from './db.js';
+import cryptoDB from '@coinspace/crypto-db';
 import { promises as dns } from 'dns';
 
-const resolution = Resolution.infura(process.env.INFURA_API_KEY);
-const platformToChain = {
-  ethereum: 'ERC20',
-  'binance-smart-chain': 'BEP20',
-  'avalanche-c-chain': 'ARC20',
-  tron: 'TRC20',
+const resolution = new Resolution({
+  apiKey: process.env.UNSTOPPABLE_DOMAINS_API_KEY,
+  sourceConfig: {
+    zns: {
+      url: 'https://api.zilliqa.com',
+      network: 'mainnet',
+    },
+  },
+});
+
+// https://github.com/unstoppabledomains/uns/blob/38ead47f53601ab9e62a289f55e97e9deb0d0605/scripts/blockchain_families.csv
+const platformToNetwork = {
+  'binance-smart-chain': 'BSC',
+  eos: 'EOSIO',
+  polygon: 'MATIC',
+};
+const symbolToSymbol = {
+  POL: 'MATIC',
 };
 
 async function getAddress(domain, cryptoId) {
+  domain = (domain || '').toLowerCase();
   const resolvers = [openalias, unstoppabledomains];
   for (const resolver of resolvers) {
     const address = await resolver(domain, cryptoId);
@@ -39,25 +52,16 @@ async function openalias(domain, cryptoId) {
 }
 
 async function unstoppabledomains(domain, cryptoId) {
-  const crypto = await db.collection('cryptos')
-    .findOne({
-      _id: cryptoId,
-    }, {
-      projection: {
-        prices: false,
-      },
-    });
+  const crypto = cryptoDB.find((item) => item._id === cryptoId);
   if (!crypto) return false;
   try {
-    let address;
-    if (crypto.type === 'coin') {
-      address = await resolution.addr(domain, crypto.symbol);
-    } else if (crypto.type === 'token') {
-      const chain = platformToChain[crypto.platform];
-      if (!chain) return false;
-      address = await resolution.multiChainAddr(domain, crypto.symbol, chain);
+    if (domain.endsWith('.eth')) {
+      return resolution.addr(domain, 'ETH');
     }
-    return address;
+    const symbol = symbolToSymbol[crypto.symbol] || crypto.symbol;
+    const platform = cryptoDB.find((item) => item.platform === crypto.platform && item.type === 'coin');
+    const network = platformToNetwork[crypto.platform] || platform.symbol;
+    return resolution.getAddress(domain, network, symbol);
   } catch (err) {
     return false;
   }
