@@ -39,6 +39,8 @@ export default {
       />
       <CsNavbarButton
         v-else-if="showBack"
+        :title="$t('Back')"
+        :aria-label="$t('Back')"
         @click="$emit('back')"
       >
         <ArrowLeftIcon />

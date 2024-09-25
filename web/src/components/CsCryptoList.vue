@@ -49,13 +49,13 @@ export default {
     >
       {{ header }}
     </div>
-    <div
+    <ul
       class="&__list"
       :class="{
         '&__list--loading': isLoading,
       }"
     >
-      <div
+      <li
         v-for="item in items"
         :key="item.crypto._id"
         class="&__item"
@@ -117,8 +117,8 @@ export default {
             </span>
           </div>
         </div>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -134,8 +134,9 @@ export default {
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-start;
-      margin-right: -$spacing-sm;
-      margin-left: -$spacing-sm;
+      padding: 0;
+      margin: 0 (-$spacing-sm);
+      list-style: none;
 
       &--loading {
         opacity: 0.4;

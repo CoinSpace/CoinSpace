@@ -94,6 +94,7 @@ export default {
         class="&__header-avatar"
         :avatar="$user.avatar"
         :size="80"
+        :alt="$t('Account')"
       />
       <div
         v-if="$user.username"

@@ -76,6 +76,7 @@ export default {
           class="&__avatar"
           :avatar="$user.avatar"
           :size="48"
+          :alt="$t('Settings')"
         />
       </CsButton>
       <div

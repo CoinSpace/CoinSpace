@@ -142,6 +142,7 @@ export default {
           v-model="query"
           class="&__action-input"
           :placeholder="$t('Search')"
+          :ariaLabel="$t('Search')"
           small
           clear
         >

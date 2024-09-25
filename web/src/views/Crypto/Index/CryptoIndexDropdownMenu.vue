@@ -41,7 +41,10 @@ export default {
 <template>
   <CsDropdownMenu class="&">
     <template #button>
-      <CsNavbarButton>
+      <CsNavbarButton
+        :title="$t('Menu')"
+        :aria-label="$t('Menu')"
+      >
         <KebabIcon />
       </CsNavbarButton>
     </template>
