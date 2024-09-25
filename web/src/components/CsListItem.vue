@@ -32,7 +32,7 @@ export default {
 </script>
 
 <template>
-  <div
+  <li
     class="&"
     :class="{
       '&--clickable': !$slots.after,
@@ -74,7 +74,7 @@ export default {
       />
       <ChevronRightIcon v-else />
     </div>
-  </div>
+  </li>
 </template>
 
 <style lang="scss">

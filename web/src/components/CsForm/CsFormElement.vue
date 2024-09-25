@@ -15,6 +15,10 @@ export default {
       type: String,
       default: undefined,
     },
+    ariaLabel: {
+      type: String,
+      default: undefined,
+    },
     error: {
       type: [Boolean, String],
       default: false,
@@ -50,7 +54,10 @@ export default {
     }"
   >
     <div class="&__container">
-      <label class="&__control">
+      <label
+        class="&__control"
+        :aria-label="ariaLabel"
+      >
         <div
           v-if="label"
           class="&__label"

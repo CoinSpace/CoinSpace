@@ -42,6 +42,8 @@ export default {
 <template>
   <CsNavbarButton
     class="&"
+    :title="$t('Refresh')"
+    :aria-label="$t('Refresh')"
     @click="click"
   >
     <RefreshIcon

@@ -33,6 +33,7 @@ export default {
       loading="lazy"
       class="&__crypto"
       :src="`${baseUrl}assets/crypto/${crypto.logo}?ver=${version}`"
+      :alt="crypto.name"
       @error="cryptoLogoError = true"
     >
     <TokenIcon
@@ -45,6 +46,7 @@ export default {
         loading="lazy"
         class="&__platform"
         :src="`${baseUrl}assets/crypto/${platform.logo}?ver=${version}`"
+        :alt="platform.name"
         @error="platformLogoError = true"
       >
       <TokenIcon

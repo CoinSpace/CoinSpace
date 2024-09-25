@@ -19,7 +19,9 @@ export default {
         {{ title }}
       </div>
     </div>
-    <slot />
+    <ul class="&__list">
+      <slot />
+    </ul>
   </div>
 </template>
 
@@ -48,6 +50,12 @@ export default {
       @include text-sm;
       padding: $spacing-2xs 0;
       border-bottom: 1px solid $divider;
+    }
+
+    &__list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
     }
   }
 </style>
