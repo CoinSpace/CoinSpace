@@ -254,7 +254,7 @@
   "This will transfer all coins from the private key address to your wallet.": "Dette overfører alle mynter fra den private nøkkeladressen til lommeboken din.",
   "This will transfer all tokens from the private key address to your wallet.": "Dette overfører alle polletter fra den private nøkkeladressen til lommeboken din.",
   "To": "Til",
-  "To create a new account you need to make an EOS transfer (amount greater than {price} EOS) with the following data from an exchange or other EOS wallet.": "For å lage en ny konto må du gjøre en EOS-overføring (et beløp høyere enn {price}EOS) med følgende data fra en veksling eller en annen EOS-lommebok.",
+  "To create a new account you need to make an EOS transfer (amount greater than {price} EOS) with the following data from an exchange or other EOS wallet.": "For å lage en ny konto må du gjøre en EOS-overføring (et beløp høyere enn {price} EOS) med følgende data fra en veksling eller en annen EOS-lommebok.",
   "Token info": "Sjetonginfo",
   "Tokens": "Sjetong",
   "Touch ID": "Touch-ID",

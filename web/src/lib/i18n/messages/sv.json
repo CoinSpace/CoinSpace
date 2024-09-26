@@ -44,7 +44,7 @@
   "Blockchain": "Blockchain",
   "Blockchains": "Blockchains",
   "Buy": "Köp",
-  "Buy {symbol}": "Köp{symbol}",
+  "Buy {symbol}": "Köp {symbol}",
   "Cancel": "Annullera",
   "Changelly error. Please try again later.": "Ändringsfel. Var vänlig prova igen senare.",
   "Choose a blockchain": "Välj en Blockchain",
