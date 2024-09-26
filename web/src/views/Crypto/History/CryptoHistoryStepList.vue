@@ -95,6 +95,8 @@ export default {
       >
         <template #left>
           <CsNavbarButton
+            :title="$t('Back')"
+            :aria-label="$t('Back')"
             @click="back"
           >
             <ArrowLeftIcon />
