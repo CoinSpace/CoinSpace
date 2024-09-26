@@ -56,12 +56,12 @@ async function unstoppabledomains(domain, cryptoId) {
   if (!crypto) return false;
   try {
     if (domain.endsWith('.eth')) {
-      return resolution.addr(domain, 'ETH');
+      return await resolution.addr(domain, 'ETH');
     }
     const symbol = symbolToSymbol[crypto.symbol] || crypto.symbol;
     const platform = cryptoDB.find((item) => item.platform === crypto.platform && item.type === 'coin');
     const network = platformToNetwork[crypto.platform] || platform.symbol;
-    return resolution.getAddress(domain, network, symbol);
+    return await resolution.getAddress(domain, network, symbol);
   } catch (err) {
     return false;
   }
