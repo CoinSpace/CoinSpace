@@ -74,6 +74,9 @@ export default {
     <div
       v-if="clear && modelValue"
       class="&__icon-after"
+      role="button"
+      :title="$t('Clear')"
+      :aria-label="$t('Clear')"
       @click="$emit('update:modelValue', '')"
     >
       <CloseIcon />
