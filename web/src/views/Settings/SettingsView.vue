@@ -119,6 +119,7 @@ export default {
           <CsListItemDropdown
             v-model="currency"
             :options="currencies"
+            :aria-label="$t('Local currency')"
           />
         </template>
       </CsListItem>
@@ -129,6 +130,7 @@ export default {
           <CsListItemDropdown
             v-model="language"
             :options="languages"
+            :aria-label="$t('Language')"
           />
         </template>
       </CsListItem>
