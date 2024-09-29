@@ -80,6 +80,8 @@ export default {
         v-if="info"
         type="base"
         class="&__info"
+        :title="$t('Info')"
+        :aria-label="$t('Info')"
         @click="showInfo = true"
       >
         <InfoIcon />
