@@ -177,7 +177,10 @@ export default {
 
     <div class="&__group">
       <div>Switch Value: "{{ switchValue }}" {{ typeof switchValue }}</div>
-      <CsSwitch v-model="switchValue" />
+      <CsSwitch
+        :checked="switchValue"
+        @click="switchValue = !switchValue"
+      />
     </div>
 
     <div class="&__group">

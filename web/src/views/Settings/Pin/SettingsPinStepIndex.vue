@@ -117,6 +117,7 @@ export default {
           <CsSwitch
             :checked="isBiometryEnabled"
             :isLoading="isLoading"
+            :aria-label="labels.biometry"
             @click="toggleBiometry"
           />
         </template>
@@ -130,6 +131,7 @@ export default {
           <CsSwitch
             :checked="isHighSecurityEnabled"
             :isLoading="isLoading"
+            :aria-label="labels.biometry"
             @click="toggleHighSecurity"
           />
         </template>

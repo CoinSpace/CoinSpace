@@ -11,17 +11,32 @@ export default {
     },
   },
   emits: ['click'],
+  methods: {
+    click() {
+      // https://github.com/vuejs/core/issues/12070
+      setTimeout(() => {
+        if (!this.isLoading) {
+          this.$emit('click');
+        }
+      }, 1);
+    },
+  },
 };
 </script>
 
 <template>
-  <div
+  <label
     class="&"
-    :class="{ '&--checked': checked }"
-    @click="!isLoading && $emit('click')"
   >
-    <span class="&__slider" />
-  </div>
+    <input
+      ref="input"
+      :checked="checked"
+      type="checkbox"
+      role="switch"
+      class="&__slider"
+      @click.prevent="click"
+    >
+  </label>
 </template>
 
 <style lang="scss">
@@ -40,7 +55,11 @@ export default {
       right: 0;
       bottom: 0;
       left: 0;
+      width: 100%;
+      height: 100%;
       border-radius: $spacing-lg;
+      margin: 0;
+      appearance: none;
       background-color: $gray;
       transition: all 0.1s ease-out;
 
@@ -57,12 +76,10 @@ export default {
       }
     }
 
-    &--checked {
-      #{ $self }__slider {
-        background-color: $primary-brand;
-      }
+    &__slider:checked {
+      background-color: $primary-brand;
 
-      #{ $self }__slider::before {
+      &::before {
         transform: translateX($spacing-sm);
       }
     }
