@@ -182,6 +182,7 @@ jobs:
       - name: Install certificates & prepare for build
         env:
           VITE_DISTRIBUTION: ${{ matrix.VITE_DISTRIBUTION }}
+          VITE_PLATFORM: ${{ matrix.VITE_PLATFORM }}
           CERTIFICATE_MAC: ${{ secrets.CERTIFICATE_MAC }}
           CERTIFICATE_MAC_PASSWORD: ${{ secrets.CERTIFICATE_MAC_PASSWORD }}
           CERTIFICATE_DISTRIBUTION: ${{ secrets.CERTIFICATE_DISTRIBUTION }}
