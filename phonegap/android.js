@@ -55,6 +55,7 @@ async function run() {
     if (process.env.VITE_DISTRIBUTION === 'android-play') await releaseAAB('release.keystore');
     if (process.env.VITE_DISTRIBUTION === 'android-huawei') await releaseAAB('release.huawei.keystore');
     if (process.env.VITE_DISTRIBUTION === 'android-galaxy') await releaseAPK('release.galaxy.keystore');
+    if (process.env.VITE_DISTRIBUTION === 'android-uptodown') await releaseAPK('release.uptodown.keystore');
   } else {
     cordova('compile android');
   }
