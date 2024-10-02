@@ -141,6 +141,13 @@ jobs:
             VITE_DISTRIBUTION: android-galaxy
             SENTRY_DSN_KEY: SENTRY_DSN_ANDROID
             SENTRY_PROJECT: android
+          - os: ubuntu-20.04
+            node: 20
+            VITE_BUILD_TYPE: phonegap
+            VITE_PLATFORM: android
+            VITE_DISTRIBUTION: android-huawei
+            SENTRY_DSN_KEY: SENTRY_DSN_ANDROID
+            SENTRY_PROJECT: android
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -167,7 +174,7 @@ jobs:
         env:
           SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAP_TOKEN }}
       - name: Install JDK 11
-        if: ${{ matrix.VITE_DISTRIBUTION == 'android-play' || matrix.VITE_DISTRIBUTION == 'android-galaxy' }}
+        if: ${{ matrix.VITE_DISTRIBUTION == 'android-play' || matrix.VITE_DISTRIBUTION == 'android-galaxy' || matrix.VITE_DISTRIBUTION == 'android-huawei' }}
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
@@ -187,13 +194,16 @@ jobs:
           GOOGLE_CLOUD_KEY: ${{ secrets.GOOGLE_CLOUD_KEY }}
           ANDROID_RELEASE_KEYSTORE: ${{ secrets.ANDROID_RELEASE_KEYSTORE }}
           ANDROID_GALAXY_RELEASE_KEYSTORE: ${{ secrets.ANDROID_GALAXY_RELEASE_KEYSTORE }}
+          ANDROID_HUAWEI_RELEASE_KEYSTORE: ${{ secrets.ANDROID_HUAWEI_RELEASE_KEYSTORE }}
           CERTIFICATE_SELFSIGN_WIN: ${{ secrets.CERTIFICATE_SELFSIGN_WIN }}
         shell: bash
         run: |
           echo "GITHUB_RUN_NUMBER: $GITHUB_RUN_NUMBER";
           echo $GOOGLE_CLOUD_KEY | base64 --decode > gcloud.key.json;
 
-          if [[ "$VITE_DISTRIBUTION" == "mac" || "$VITE_DISTRIBUTION" == "mas" || "$VITE_DISTRIBUTION" == "mas-dev" ]]; then
+          if [[ "$VITE_PLATFORM" == "android" ]]; then
+            echo "/usr/local/lib/android/sdk/build-tools/33.0.2" >> $GITHUB_PATH
+          elif [[ "$VITE_PLATFORM" == "mac" ]]; then
             echo $CERTIFICATE_MAC | base64 --decode > certificate.p12;
             security create-keychain -p coinspace build.keychain;
             security default-keychain -s build.keychain;
@@ -203,12 +213,12 @@ jobs:
             security import certificate.p12 -k build.keychain -P $CERTIFICATE_MAC_PASSWORD -T /usr/bin/codesign -T /usr/bin/productbuild 2>&1 >/dev/null;
             security set-key-partition-list -S apple-tool:,apple: -s -k coinspace build.keychain 2>&1 >/dev/null;
             rm certificate.p12;
-            if [[ "$VITE_DISTRIBUTION" == "mas" ]]; then
-              echo $PROVISIONING_DISTRIBUTION | base64 --decode > electron/embedded.provisionprofile;
-            fi
-            if [[ "$VITE_DISTRIBUTION" == "mas-dev" ]]; then
-              echo $PROVISIONING_DEVELOPMENT | base64 --decode > electron/embedded.provisionprofile;
-            fi
+          fi
+
+          if [[ "$VITE_DISTRIBUTION" == "mas" ]]; then
+            echo $PROVISIONING_DISTRIBUTION | base64 --decode > electron/embedded.provisionprofile;
+          elif [[ "$VITE_DISTRIBUTION" == "mas-dev" ]]; then
+            echo $PROVISIONING_DEVELOPMENT | base64 --decode > electron/embedded.provisionprofile;
           elif [[ "$VITE_DISTRIBUTION" == "ios" ]]; then
             echo $CERTIFICATE_DISTRIBUTION | base64 --decode > certificate.p12;
             security create-keychain -p coinspace build.keychain;
@@ -223,10 +233,12 @@ jobs:
             echo $PROVISIONING_IOS | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.mobileprovision;
             echo $PROVISIONING_IOS_WATCH_APP | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.watchapp.mobileprovision;
             echo $PROVISIONING_IOS_WATCH_APP_EXTENSION | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.watchapp.extension.mobileprovision;
-          elif [[ "$VITE_DISTRIBUTION" == "android-play" || "$VITE_DISTRIBUTION" == "android-galaxy" ]]; then
+          elif [[ "$VITE_DISTRIBUTION" == "android-play" ]]; then
             echo $ANDROID_RELEASE_KEYSTORE | base64 --decode > phonegap/release.keystore;
+          elif [[ "$VITE_DISTRIBUTION" == "android-galaxy" ]]; then
             echo $ANDROID_GALAXY_RELEASE_KEYSTORE | base64 --decode > phonegap/release.galaxy.keystore;
-            echo "/usr/local/lib/android/sdk/build-tools/33.0.2" >> $GITHUB_PATH
+          elif [[ "$VITE_DISTRIBUTION" == "android-huawei" ]]; then
+            echo $ANDROID_HUAWEI_RELEASE_KEYSTORE | base64 --decode > phonegap/release.huawei.keystore;
           elif [[ "$VITE_DISTRIBUTION" == "appx-dev" ]]; then
             echo $CERTIFICATE_SELFSIGN_WIN | base64 --decode > electron/resources/certificate.pfx
           elif [[ "$VITE_DISTRIBUTION" == "appx" ]]; then
