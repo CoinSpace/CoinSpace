@@ -212,7 +212,7 @@
   "Security": "សន្ដិសុខ",
   "Select a crypto from your wallet.": "ជ្រើសរើសcrypto ពីកាបូបរបស់អ្នក។",
   "Select target crypto": "ជ្រើសរើស crypto គោលដៅ",
-  "Select your country of residence": "ជ្រើសរើសប្រទេសដែលជាលំនៅឋានរបស់អ្នក",
+  "Select your country/region of residence": "ជ្រើសរើសប្រទេស/តំបន់ដែលអ្នកកំពុងរស់នៅ",
   "Sell": "លក់",
   "Sell {symbol}": "លក់ {symbol}",
   "Send": "ផ្ញើ",

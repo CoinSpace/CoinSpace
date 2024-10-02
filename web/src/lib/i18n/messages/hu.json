@@ -212,7 +212,7 @@
   "Security": "Biztonság",
   "Select a crypto from your wallet.": "Válassz egy kriptopénzt a pénztárcádból.",
   "Select target crypto": "Válassz célkriptopénzt",
-  "Select your country of residence": "Válaszd ki, melyik országban élsz",
+  "Select your country/region of residence": "Válassza ki lakóhelye országát/régióját",
   "Sell": "Eladás",
   "Sell {symbol}": "{symbol} eladása",
   "Send": "Küldés",

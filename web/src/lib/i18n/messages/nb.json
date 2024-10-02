@@ -212,7 +212,7 @@
   "Security": "Sikkerhet",
   "Select a crypto from your wallet.": "Velg en krypto fra lommeboken din.",
   "Select target crypto": "Velg målkrypto",
-  "Select your country of residence": "Velg ditt bostedsland",
+  "Select your country/region of residence": "Velg bostedsland/-region",
   "Sell": "Selg",
   "Sell {symbol}": "Selg {symbol}",
   "Send": "Send",

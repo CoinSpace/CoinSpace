@@ -50,7 +50,7 @@ export default {
   >
     <CsFormSelect
       v-model="countryCode"
-      :label="$t('Select your country of residence')"
+      :label="$t('Select your country/region of residence')"
       :options="countries"
       @update:modelValue="load"
     />

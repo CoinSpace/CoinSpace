@@ -212,7 +212,7 @@
   "Security": "セキュリティ",
   "Select a crypto from your wallet.": "ウォレットから暗号通貨を選択してください。",
   "Select target crypto": "ターゲット暗号通貨を選択してください",
-  "Select your country of residence": "居住国を選択してください",
+  "Select your country/region of residence": "居住国/地域を選択してください",
   "Sell": "売る",
   "Sell {symbol}": "売る {symbol}",
   "Send": "送る",
