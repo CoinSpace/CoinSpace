@@ -120,6 +120,22 @@ const platforms = [{
   pattern: /galaxy\.store\/coinapp/ig,
   link: 'https://galaxy.store/coinapp',
 }, {
+  // Android AppGallery app
+  distribution: 'android-huawei',
+  arch: 'any',
+  app: 'app',
+  type: TYPE_LINK,
+  pattern: /appgallery\.huawei\.com\/app\/C112183767/ig,
+  link: 'https://appgallery.huawei.com/app/C112183767',
+}, {
+  // Android Uptodown app
+  distribution: 'android-uptodown',
+  arch: 'any',
+  app: 'app',
+  type: TYPE_LINK,
+  pattern: /coin-wallet\.en\.uptodown\.com\/android/ig,
+  link: 'https://coin-wallet.en.uptodown.com/android',
+}, {
   // Linux snap
   distribution: 'snap',
   arch: 'any',

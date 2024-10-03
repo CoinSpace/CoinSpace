@@ -39,6 +39,10 @@ jobs:
 
             * [Galaxy Store](https://galaxy.store/coinapp)
 
+            * [AppGallery](https://appgallery.huawei.com/app/C112183767)
+
+            * [Uptodown](https://coin-wallet.en.uptodown.com/android)
+
             * [macOS Installer: Coin.Wallet.dmg](https://github.com/CoinSpace/CoinSpace/releases/download/v${{ env.VERSION }}/Coin.Wallet.dmg)
 
             * [Microsoft Store](https://apps.microsoft.com/store/detail/9NBLGGH5PXJQ)
