@@ -165,6 +165,7 @@ export default class Account extends EventEmitter {
   #exchange;
   #needToMigrateV5Balance = false;
   #walletConnect;
+  #dummy = false;
 
   get clientStorage() {
     return this.#clientStorage;
@@ -239,6 +240,10 @@ export default class Account extends EventEmitter {
 
   get isHiddenBalance() {
     return this.#clientStorage.isHiddenBalance();
+  }
+
+  get isDummy() {
+    return this.#dummy;
   }
 
   constructor({ siteURL, localStorage, release }) {
@@ -332,6 +337,8 @@ export default class Account extends EventEmitter {
       account: this,
     });
     await this.#exchange.init();
+    this.#dummy = hex.encode(this.#clientStorage.getDetailsKey())
+      === import.meta.env.VITE_DUMMY_ACCOUNT;
   }
 
   /**

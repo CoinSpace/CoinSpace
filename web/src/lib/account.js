@@ -1,4 +1,5 @@
 import Account from './account/Account.js';
+import { Amount } from '@coinspace/cs-common';
 import { ref } from 'vue';
 import { release } from './version.js';
 import { setLanguage } from './i18n/i18n.js';
@@ -28,6 +29,19 @@ export async function createAccount({ app, router }) {
   defineAppProperty(app, '$cryptos', cryptos);
   defineAppProperty(app, '$isHiddenBalance', isHiddenBalance);
 
+  const dummyBalances = {
+    'bitcoin@bitcoin': '0.5',
+    'ethereum@ethereum': '0.5',
+    'tether@ethereum': '100',
+    'xrp@ripple': '2300',
+    'monero@monero': '69',
+    'dogecoin@dogecoin': '400',
+    'cardano@cardano': '220',
+    'litecoin@litecoin': '50',
+    'dash@dash': '1',
+    'toncoin@toncoin': '900',
+  };
+
   account.on('update', async (context) => {
     switch (context) {
       case 'currency':
@@ -52,6 +66,15 @@ export async function createAccount({ app, router }) {
         });
         for (const wallet of account.wallets()) {
           const market = await account.market.getMarket(wallet.crypto._id, currency.value);
+          if (account.isDummy && dummyBalances[wallet.crypto._id]) {
+            Object.defineProperty(wallet, 'balance', {
+              get() {
+                return Amount.fromString(dummyBalances[wallet.crypto._id], wallet.crypto.decimals);
+              },
+              enumerable: true,
+              configurable: true,
+            });
+          }
           result.push({
             crypto: wallet.crypto,
             platform: wallet.platform,
