@@ -155,6 +155,13 @@ jobs:
             VITE_DISTRIBUTION: android-uptodown
             SENTRY_DSN_KEY: SENTRY_DSN_ANDROID
             SENTRY_PROJECT: android
+          - os: ubuntu-20.04
+            node: 20
+            VITE_BUILD_TYPE: phonegap
+            VITE_PLATFORM: android
+            VITE_DISTRIBUTION: android-cafebazaar
+            SENTRY_DSN_KEY: SENTRY_DSN_ANDROID
+            SENTRY_PROJECT: android
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -204,6 +211,7 @@ jobs:
           ANDROID_GALAXY_RELEASE_KEYSTORE: ${{ secrets.ANDROID_GALAXY_RELEASE_KEYSTORE }}
           ANDROID_HUAWEI_RELEASE_KEYSTORE: ${{ secrets.ANDROID_HUAWEI_RELEASE_KEYSTORE }}
           ANDROID_UPTODOWN_RELEASE_KEYSTORE: ${{ secrets.ANDROID_UPTODOWN_RELEASE_KEYSTORE }}
+          ANDROID_CAFEBAZAAR_RELEASE_KEYSTORE: ${{ secrets.ANDROID_CAFEBAZAAR_RELEASE_KEYSTORE }}
           CERTIFICATE_SELFSIGN_WIN: ${{ secrets.CERTIFICATE_SELFSIGN_WIN }}
         shell: bash
         run: |
@@ -250,6 +258,8 @@ jobs:
             echo $ANDROID_HUAWEI_RELEASE_KEYSTORE | base64 --decode > phonegap/release.huawei.keystore;
           elif [[ "$VITE_DISTRIBUTION" == "android-uptodown" ]]; then
             echo $ANDROID_UPTODOWN_RELEASE_KEYSTORE | base64 --decode > phonegap/release.uptodown.keystore;
+          elif [[ "$VITE_DISTRIBUTION" == "android-cafebazaar" ]]; then
+            echo $ANDROID_CAFEBAZAAR_RELEASE_KEYSTORE | base64 --decode > phonegap/release.cafebazaar.keystore;
           elif [[ "$VITE_DISTRIBUTION" == "appx-dev" ]]; then
             echo $CERTIFICATE_SELFSIGN_WIN | base64 --decode > electron/resources/certificate.pfx
           elif [[ "$VITE_DISTRIBUTION" == "appx" ]]; then
