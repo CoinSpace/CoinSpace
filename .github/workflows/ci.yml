@@ -200,7 +200,7 @@ jobs:
           PROVISIONING_IOS_WATCH_APP: ${{ secrets.PROVISIONING_IOS_WATCH_APP }}
           PROVISIONING_IOS_WATCH_APP_EXTENSION: ${{ secrets.PROVISIONING_IOS_WATCH_APP_EXTENSION }}
           GOOGLE_CLOUD_KEY: ${{ secrets.GOOGLE_CLOUD_KEY }}
-          ANDROID_RELEASE_KEYSTORE: ${{ secrets.ANDROID_RELEASE_KEYSTORE }}
+          ANDROID_PLAY_RELEASE_KEYSTORE: ${{ secrets.ANDROID_PLAY_RELEASE_KEYSTORE }}
           ANDROID_GALAXY_RELEASE_KEYSTORE: ${{ secrets.ANDROID_GALAXY_RELEASE_KEYSTORE }}
           ANDROID_HUAWEI_RELEASE_KEYSTORE: ${{ secrets.ANDROID_HUAWEI_RELEASE_KEYSTORE }}
           ANDROID_UPTODOWN_RELEASE_KEYSTORE: ${{ secrets.ANDROID_UPTODOWN_RELEASE_KEYSTORE }}
@@ -243,7 +243,7 @@ jobs:
             echo $PROVISIONING_IOS_WATCH_APP | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.watchapp.mobileprovision;
             echo $PROVISIONING_IOS_WATCH_APP_EXTENSION | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.watchapp.extension.mobileprovision;
           elif [[ "$VITE_DISTRIBUTION" == "android-play" ]]; then
-            echo $ANDROID_RELEASE_KEYSTORE | base64 --decode > phonegap/release.keystore;
+            echo $ANDROID_PLAY_RELEASE_KEYSTORE | base64 --decode > phonegap/release.play.keystore;
           elif [[ "$VITE_DISTRIBUTION" == "android-galaxy" ]]; then
             echo $ANDROID_GALAXY_RELEASE_KEYSTORE | base64 --decode > phonegap/release.galaxy.keystore;
           elif [[ "$VITE_DISTRIBUTION" == "android-huawei" ]]; then
