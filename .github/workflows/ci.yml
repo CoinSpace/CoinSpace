@@ -74,6 +74,7 @@ jobs:
     needs: lint
     environment: ${{ github.ref == 'refs/heads/master' && 'production' || 'development' }}
     runs-on: ${{ matrix.os }}
+    name: ${{ matrix.VITE_DISTRIBUTION }}
     strategy:
       fail-fast: false
       matrix:
