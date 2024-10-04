@@ -29,27 +29,28 @@ jobs:
           omitNameDuringUpdate: true
           omitDraftDuringUpdate: true
           body: |
+            ### 🌐 Web
+
             * [Web Wallet](https://coin.space/wallet/)
 
-            * [Tor Wallet](http://coinspacezp5mmyuicbz2hoafbnduj4vzkttq3grn5mnwdue5t343zid.onion/)
+            <!-- ### 📱 Mobile -->
 
-            * [iOS Application](https://apps.apple.com/app/coin-wallet-bitcoin-crypto/id980719434?platform=iphone)
+            <!-- * [App Store](https://apps.apple.com/app/coin-wallet-bitcoin-crypto/id980719434?platform=iphone) (iOS) -->
+            <!-- * [Google Play](https://play.google.com/store/apps/details?id=com.coinspace.app) (Android) -->
+            <!-- * [Galaxy Store](https://galaxy.store/coinapp) (Android) -->
+            <!-- * [Huawei AppGallery](https://appgallery.huawei.com/app/C112183767) (Android) -->
+            <!-- * [Uptodown](https://coin-wallet.en.uptodown.com/android) (Android) -->
 
-            * [Android Application](https://play.google.com/store/apps/details?id=com.coinspace.app)
+            <!-- ### 🖥️ Desktop -->
 
-            * [Galaxy Store](https://galaxy.store/coinapp)
+            <!-- * [Microsoft Store](https://www.microsoft.com/store/apps/9NBLGGH5PXJQ) (Windows) -->
+            <!-- * [App Store](https://apps.apple.com/app/coin-wallet-bitcoin-crypto/id980719434?platform=mac) (macOS) -->
+            <!-- * [Coin.Wallet.dmg](https://github.com/CoinSpace/CoinSpace/releases/download/v${{ env.VERSION }}/Coin.Wallet.dmg) (macOS) -->
+            <!-- * [Snap Store](https://snapcraft.io/coin) (Linux) -->
 
-            * [AppGallery](https://appgallery.huawei.com/app/C112183767)
+            ### 🕵️ Tor
 
-            * [Uptodown](https://coin-wallet.en.uptodown.com/android)
-
-            * [macOS Installer: Coin.Wallet.dmg](https://github.com/CoinSpace/CoinSpace/releases/download/v${{ env.VERSION }}/Coin.Wallet.dmg)
-
-            * [Microsoft Store](https://apps.microsoft.com/store/detail/9NBLGGH5PXJQ)
-
-            * [Mac App Store](https://apps.apple.com/app/coin-wallet-bitcoin-crypto/id980719434?platform=mac)
-
-            * [Linux Snap](https://snapcraft.io/coin)
+            * [Tor Wallet (.onion)](http://coinspacezp5mmyuicbz2hoafbnduj4vzkttq3grn5mnwdue5t343zid.onion/)
 
   lint:
     runs-on: ubuntu-22.04

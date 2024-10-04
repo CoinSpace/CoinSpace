@@ -235,7 +235,7 @@ async function getLatest() {
           }
         }
       } else if (platform.type === TYPE_LINK) {
-        if (release.body.search(platform.pattern) !== -1) {
+        if (release.body.replace(/<!--.+-->/ig, '').search(platform.pattern) !== -1) {
           latest[platform.key] = {
             distribution: platform.distribution,
             arch: platform.arch,
