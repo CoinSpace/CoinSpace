@@ -265,7 +265,7 @@ jobs:
             echo $ANDROID_HUAWEI_RELEASE_KEYSTORE | base64 --decode > phonegap/release.huawei.keystore;
           elif [[ "$VITE_DISTRIBUTION" == "android-uptodown" ]]; then
             echo $ANDROID_UPTODOWN_RELEASE_KEYSTORE | base64 --decode > phonegap/release.uptodown.keystore;
-          elif [[ "$VITE_DISTRIBUTION" == "android-apk]" ]]; then
+          elif [[ "$VITE_DISTRIBUTION" == "android-apk" ]]; then
             echo $ANDROID_APK_RELEASE_KEYSTORE | base64 --decode > phonegap/release.apk.keystore;
           elif [[ "$VITE_DISTRIBUTION" == "appx-dev" ]]; then
             echo $CERTIFICATE_SELFSIGN_WIN | base64 --decode > electron/resources/certificate.pfx
