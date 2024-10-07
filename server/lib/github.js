@@ -136,6 +136,13 @@ const platforms = [{
   pattern: /coin-wallet\.en\.uptodown\.com\/android/ig,
   link: 'https://coin-wallet.en.uptodown.com/android',
 }, {
+  // Android APK app
+  distribution: 'android-apk',
+  arch: 'any',
+  app: 'app',
+  type: TYPE_FILE,
+  pattern: /\.apk$/i,
+}, {
   // Linux snap
   distribution: 'snap',
   arch: 'any',

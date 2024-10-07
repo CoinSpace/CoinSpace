@@ -56,6 +56,7 @@ async function run() {
     if (process.env.VITE_DISTRIBUTION === 'android-huawei') await releaseAAB('release.huawei.keystore');
     if (process.env.VITE_DISTRIBUTION === 'android-galaxy') await releaseAPK('release.galaxy.keystore');
     if (process.env.VITE_DISTRIBUTION === 'android-uptodown') await releaseAPK('release.uptodown.keystore');
+    if (process.env.VITE_DISTRIBUTION === 'android-apk') await releaseAPK('release.apk.keystore');
   } else {
     cordova('compile android');
   }
@@ -75,6 +76,10 @@ async function releaseAPK(keystore) {
   );
   const destination = `${VERSION}-${BRANCH || 'local'}/${NAME}-${process.env.VITE_DISTRIBUTION}-${VERSION}`;
   await storage.bucket(process.env.GOOGLE_CLOUD_BUCKET).upload('deploy/coinspace-release.apk', { destination: `${destination}.apk` });
+  if (BRANCH === 'master') {
+    shell('mv deploy/coinspace-release.apk deploy/Coin.Wallet.apk');
+    shell(`gh release upload v${VERSION} deploy/Coin.Wallet.apk --clobber --repo CoinSpace/CoinSpace`);
+  }
 }
 
 async function releaseAAB(keystore) {
