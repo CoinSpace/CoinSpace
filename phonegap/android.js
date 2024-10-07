@@ -76,7 +76,7 @@ async function releaseAPK(keystore) {
   );
   const destination = `${VERSION}-${BRANCH || 'local'}/${NAME}-${process.env.VITE_DISTRIBUTION}-${VERSION}`;
   await storage.bucket(process.env.GOOGLE_CLOUD_BUCKET).upload('deploy/coinspace-release.apk', { destination: `${destination}.apk` });
-  if (BRANCH === 'master') {
+  if (process.env.VITE_DISTRIBUTION === 'android-apk' && BRANCH === 'master') {
     shell('mv deploy/coinspace-release.apk deploy/Coin.Wallet.apk');
     shell(`gh release upload v${VERSION} deploy/Coin.Wallet.apk --clobber --repo CoinSpace/CoinSpace`);
   }
