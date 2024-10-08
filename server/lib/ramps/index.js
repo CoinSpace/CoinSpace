@@ -7,31 +7,26 @@ import moonpay from './moonpay.js';
 import onramper from './onramper.js';
 import paybis from './paybis.js';
 
-async function buy({ countryCode, crypto: cryptoId, address }) {
+const ramps = [
+  moonpay,
+  onramper,
+  btcdirect,
+  guardarian,
+  bitnovo,
+  paybis,
+];
+
+async function buy(walletId, { countryCode, crypto: cryptoId, address }) {
   const crypto = cryptoDB.find((item) => item._id === cryptoId);
-  const ramps = [
-    moonpay,
-    onramper,
-    btcdirect,
-    guardarian,
-    bitnovo,
-    paybis,
-  ];
   return (await Promise.all(ramps.map((ramp) => {
-    return ramp.buy(countryCode, crypto, address).catch(console.error);
+    return ramp.buy({ walletId, countryCode, crypto, address }).catch(console.error);
   }))).filter(Boolean);
 }
 
-async function sell({ countryCode, crypto: cryptoId, address }) {
+async function sell(walletId, { countryCode, crypto: cryptoId, address }) {
   const crypto = cryptoDB.find((item) => item._id === cryptoId);
-  const ramps = [
-    moonpay,
-    onramper,
-    btcdirect,
-    guardarian,
-  ];
   return (await Promise.all(ramps.map((ramp) => {
-    return ramp.sell(countryCode, crypto, address).catch(console.error);
+    return ramp.sell({ walletId, countryCode, crypto, address }).catch(console.error);
   }))).filter(Boolean);
 }
 

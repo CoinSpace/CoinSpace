@@ -15,7 +15,7 @@ const rampApi = axios.create({
 });
 const colorCode = '#3cc77a';
 
-async function buy(countryCode, crypto, walletAddress) {
+async function buy({ countryCode, crypto, address }) {
   const result = await getCountryAndCurrency(countryCode, crypto);
   if (!result) return;
   const { country, currency } = result;
@@ -23,7 +23,7 @@ async function buy(countryCode, crypto, walletAddress) {
     const params = new URLSearchParams({
       apiKey: process.env.MOONPAY_API_KEY,
       currencyCode: currency.code,
-      walletAddress,
+      walletAddress: address,
       colorCode,
       enableRecurringBuys: true,
     });
@@ -34,7 +34,7 @@ async function buy(countryCode, crypto, walletAddress) {
   }
 }
 
-async function sell(countryCode, crypto, walletAddress) {
+async function sell({ countryCode, crypto, address }) {
   const result = await getCountryAndCurrency(countryCode, crypto);
   if (!result) return;
   const { country, currency } = result;
@@ -42,7 +42,7 @@ async function sell(countryCode, crypto, walletAddress) {
     const params = new URLSearchParams({
       apiKey: process.env.MOONPAY_API_KEY,
       baseCurrencyCode: currency.code,
-      refundWalletAddress: walletAddress,
+      refundWalletAddress: address,
       colorCode,
     });
     return {

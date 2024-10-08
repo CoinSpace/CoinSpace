@@ -263,12 +263,14 @@ export async function removeMecto(req, res) {
 }
 
 export async function getRampsBuy(req, res) {
-  const data = await ramps.buy(req.query);
+  const device = await req.getDevice();
+  const data = await ramps.buy(device.wallet._id, req.query);
   res.status(200).send(data);
 }
 
 export async function getRampsSell(req, res) {
-  const data = await ramps.sell(req.query);
+  const device = await req.getDevice();
+  const data = await ramps.sell(device.wallet._id, req.query);
   res.status(200).send(data);
 }
 

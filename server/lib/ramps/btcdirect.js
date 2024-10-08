@@ -14,7 +14,7 @@ const rampApi = axios.create({
   headers: { 'x-api-key': API_KEY },
 });
 
-async function buy(countryCode, crypto, walletAddress) {
+async function buy({ countryCode, crypto, address }) {
   if (!API_KEY) return;
   if (!crypto) return;
   const countries = await cachedCountries();
@@ -31,7 +31,7 @@ async function buy(countryCode, crypto, walletAddress) {
 
   if (currency.buy && currency.buy.status === 'enabled') {
     const url = new URL('/api/v3/btcdirect/buy', process.env.SITE_URL);
-    url.searchParams.set('address', walletAddress);
+    url.searchParams.set('address', address);
     url.searchParams.set('baseCurrency', currency.baseCurrency.code);
     return {
       ...rampData,

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { randomBytes } from 'crypto';
+import { createHmac } from 'crypto';
 
 const API_KEY = process.env.PAYBIS_API_KEY;
 const rampData = {
@@ -23,9 +23,13 @@ const rampApi = axios.create({
   },
 });
 
-async function buy(_, crypto, walletAddress) {
+async function buy({ walletId, crypto, address }) {
   if (!API_KEY) return;
   if (!crypto?.paybis?.id) return;
+
+  const partnerUserId = createHmac('sha256', 'Paybis')
+    .update(walletId)
+    .digest('hex');
 
   const { data } = await rampApi({
     url: '/v2/request',
@@ -33,9 +37,9 @@ async function buy(_, crypto, walletAddress) {
     data: {
       cryptoWalletAddress: {
         currencyCode: crypto.paybis.id,
-        address: walletAddress,
+        address,
       },
-      partnerUserId: randomBytes(32).toString('hex'),
+      partnerUserId,
       flow: 'buyCrypto',
       locale: 'en',
     },

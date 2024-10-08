@@ -5,7 +5,7 @@ const rampData = {
   description: 'Get more crypto!',
 };
 
-async function buy(_, crypto, walletAddress) {
+async function buy({ crypto, address }) {
   if (!API_KEY) return;
   if (!crypto?.bitnovo?.id) return;
 
@@ -16,7 +16,7 @@ async function buy(_, crypto, walletAddress) {
   url.searchParams.set('config', 'buy-only');
   url.searchParams.set('defaultCrypto', id);
   url.searchParams.set('onlyCryptos', id);
-  url.searchParams.set('wallets', `${id}:${walletAddress}`);
+  url.searchParams.set('wallets', `${id}:${address}`);
   return {
     ...rampData,
     url: url.toString(),

@@ -14,15 +14,15 @@ const rampApi = axios.create({
   headers: { 'x-api-key': API_KEY },
 });
 
-async function buy(countryCode, crypto, walletAddress) {
-  return ramp('buy', countryCode, crypto, walletAddress);
+async function buy({ countryCode, crypto, address }) {
+  return ramp('buy', countryCode, crypto, address);
 }
 
-async function sell(countryCode, crypto) {
+async function sell({ countryCode, crypto }) {
   return ramp('sell', countryCode, crypto);
 }
 
-async function ramp(type, countryCode, crypto, walletAddress) {
+async function ramp(type, countryCode, crypto, address) {
   if (!API_KEY) return;
   if (!crypto) return;
   const countries = await cachedCountries();
@@ -54,7 +54,7 @@ async function ramp(type, countryCode, crypto, walletAddress) {
   }]));
 
   if (type === 'buy') {
-    url.searchParams.set('payout_address', walletAddress);
+    url.searchParams.set('payout_address', address);
   }
 
   return {

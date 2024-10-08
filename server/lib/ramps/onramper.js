@@ -5,7 +5,7 @@ const rampData = {
   description: 'Aggregator',
 };
 
-async function buy(_, crypto, walletAddress) {
+async function buy({ crypto, address }) {
   if (!API_KEY) return;
   if (!crypto?.onramper?.id) return;
 
@@ -16,7 +16,7 @@ async function buy(_, crypto, walletAddress) {
   url.searchParams.set('defaultCrypto', id);
   url.searchParams.set('themeName', 'light');
   url.searchParams.set('onlyCryptos', id);
-  url.searchParams.set('wallets', `${id}:${walletAddress}`);
+  url.searchParams.set('wallets', `${id}:${address}`);
   return {
     ...rampData,
     url: url.toString(),
