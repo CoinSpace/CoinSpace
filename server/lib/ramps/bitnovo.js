@@ -5,7 +5,7 @@ const rampData = {
   description: 'Get more crypto!',
 };
 
-async function buy({ crypto, address }) {
+function ramp(type, { crypto, address }) {
   if (!API_KEY) return;
   if (!crypto?.bitnovo?.id) return;
 
@@ -13,17 +13,27 @@ async function buy({ crypto, address }) {
 
   const url = new URL('https://ramp.bitnovo.com/');
   url.searchParams.set('apiKey', API_KEY);
-  url.searchParams.set('config', 'buy-only');
   url.searchParams.set('defaultCrypto', id);
   url.searchParams.set('onlyCryptos', id);
-  url.searchParams.set('wallets', `${id}:${address}`);
+  if (type === 'buy') {
+    url.searchParams.set('config', 'buy-only');
+    url.searchParams.set('wallets', `${id}:${address}`);
+  } else {
+    url.searchParams.set('config', 'sell-only');
+  }
   return {
     ...rampData,
     url: url.toString(),
   };
 }
 
-async function sell() {}
+async function buy({ crypto, address }) {
+  return ramp('buy', { crypto, address });
+}
+
+async function sell({ crypto }) {
+  return ramp('sell', { crypto });
+}
 
 export default {
   buy,
