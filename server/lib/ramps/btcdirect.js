@@ -6,7 +6,7 @@ const API_KEY = process.env.BTCDIRECT_API_KEY;
 const rampData = {
   id: 'btcdirect',
   name: 'BTC Direct',
-  description: 'Crypto broker since 2013',
+  description: 'Most payment options',
 };
 const rampApi = axios.create({
   baseURL: `https://api${process.env.NODE_ENV === 'production' ? '' : '-sandbox'}.btcdirect.eu/`,
