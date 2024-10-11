@@ -31,7 +31,17 @@ export default {
         if (this.transaction.incoming) {
           return this.$t('Received');
         } else {
-          return this.$t('Sent');
+          if (this.transaction.action === Transaction.ACTION_TRANSFER) {
+            return this.$t('Sent');
+          } else if (this.transaction.action === Transaction.ACTION_TOKEN_TRANSFER) {
+            return this.$t('Token transfer');
+          } else if (this.transaction.action === Transaction.ACTION_STAKING) {
+            return this.$t('Staking');
+          } else if (this.transaction.action === Transaction.ACTION_UNSTAKING) {
+            return this.$t('Unstaking');
+          } else if (this.transaction.action === Transaction.ACTION_SMART_CONTRACT_CALL) {
+            return this.$t('Smart contract call');
+          }
         }
       }
     },
