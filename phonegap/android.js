@@ -32,7 +32,7 @@ async function run() {
     },
   });
   fs.writeFileSync(path.resolve(buildPath, 'config.xml'), config);
-  cordova('platform add android@12.0.1 --save');
+  cordova('platform add android@13.0.0 --save');
 
   cordova('plugin add cordova-plugin-androidx-adapter@1.1.3 --save');
   cordova('plugin add cordova-plugin-geolocation@5.0.0 --save');
@@ -42,7 +42,7 @@ async function run() {
   cordova('plugin add cordova-plugin-x-socialsharing@6.0.4 --save');
   cordova('plugin add cordova-plugin-fingerprint-aio@5.0.1 --save');
   cordova('plugin add cordova-plugin-customurlscheme@5.0.2 --save --variable URL_SCHEME=coinspace');
-  cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#9311c3cecd82ba250a6a0541b9417629cc7d1392 --save');
+  cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#e455d38adccb65af7c519a13feb295814464d834 --save');
   cordova('plugin add cordova-plugin-safariviewcontroller@2.0.0 --save');
   cordova('plugin add cordova-plugin-app-review@3.1.0 --save');
   cordova('plugin add cordova-plugin-velda-devicefeedback@0.0.2 --save');

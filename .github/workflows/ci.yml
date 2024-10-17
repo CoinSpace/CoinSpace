@@ -194,12 +194,12 @@ jobs:
         uses: samuelmeuli/action-snapcraft@v2
         env:
           SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAP_TOKEN }}
-      - name: Install JDK 11
+      - name: Install JDK
         if: ${{ matrix.VITE_PLATFORM == 'android' }}
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 11
+          java-version: 17
       - name: Install certificates & prepare for build
         env:
           VITE_DISTRIBUTION: ${{ matrix.VITE_DISTRIBUTION }}
