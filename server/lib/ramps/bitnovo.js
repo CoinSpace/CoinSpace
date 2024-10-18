@@ -11,7 +11,7 @@ function ramp(type, { crypto, address }) {
 
   const { id } = crypto.bitnovo;
 
-  const url = new URL('https://ramp.bitnovo.com/');
+  const url = new URL('https://ramp.bitnovo.com/ramp/en');
   url.searchParams.set('apiKey', API_KEY);
   url.searchParams.set('defaultCrypto', id);
   url.searchParams.set('onlyCryptos', id);
