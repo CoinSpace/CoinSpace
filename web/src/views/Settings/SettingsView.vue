@@ -164,11 +164,11 @@ export default {
     <CsListItems :title="$t('About')">
       <CsListItem
         :title="$t('Terms of Service')"
-        @click="$safeOpen('https://coin.space/terms-of-service/')"
+        @click="$safeOpen(`${env.VITE_SITE_URL}terms-of-service/`)"
       />
       <CsListItem
         :title="$t('Privacy Policy')"
-        @click="$safeOpen('https://coin.space/privacy-policy/')"
+        @click="$safeOpen(`${env.VITE_SITE_URL}privacy-policy/`)"
       />
     </CsListItems>
 
