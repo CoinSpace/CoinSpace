@@ -1,6 +1,5 @@
-import ExpiryMap from 'expiry-map';
 import axios from 'axios';
-import pMemoize from 'p-memoize';
+import { dbMemoize } from '../db.js';
 
 const API_KEY = process.env.GUARDARIAN_API_KEY;
 const rampData = {
@@ -63,15 +62,15 @@ async function ramp(type, countryCode, crypto, address) {
   };
 }
 
-const cachedCurrencies = pMemoize(async () => {
+const cachedCurrencies = dbMemoize(async () => {
   const { data } = await rampApi.get('/v1/currencies/crypto');
   return data.filter((item) => item.enabled);
-}, { cache: new ExpiryMap(1 * 60 * 60 * 1000) }); // 1 hour
+}, { key: 'guardarian-currencies-crypto', ttl: 1 * 60 * 60 }); // 1 hour
 
-const cachedCountries = pMemoize(async () => {
+const cachedCountries = dbMemoize(async () => {
   const { data } = await rampApi.get('/v1/countries');
   return data;
-}, { cache: new ExpiryMap(1 * 60 * 60 * 1000) }); // 1 hour
+}, { key: 'guardarian-countries', ttl: 1 * 60 * 60 }); // 1 hour
 
 export default {
   buy,

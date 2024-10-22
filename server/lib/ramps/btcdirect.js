@@ -1,6 +1,5 @@
-import ExpiryMap from 'expiry-map';
 import axios from 'axios';
-import pMemoize from 'p-memoize';
+import { dbMemoize } from '../db.js';
 
 const API_KEY = process.env.BTCDIRECT_API_KEY;
 const rampData = {
@@ -43,16 +42,15 @@ async function buy({ countryCode, crypto, address }) {
 
 async function sell() {}
 
-const cachedCurrencies = pMemoize(async () => {
+const cachedCurrencies = dbMemoize(async () => {
   const { data } = await rampApi.get('/api/v1/system/currency-pairs');
   return data;
+}, { key: 'btcdirect-currency-pairs', ttl: 1 * 60 * 60 }); // 1 hour
 
-}, { cache: new ExpiryMap(1 * 60 * 60 * 1000) }); // 1 hour
-
-const cachedCountries = pMemoize(async () => {
+const cachedCountries = dbMemoize(async () => {
   const { data } = await rampApi.get('/api/v1/system/info');
   return data.nationalities;
-}, { cache: new ExpiryMap(1 * 60 * 60 * 1000) }); // 1 hour
+}, { key: 'btcdirect-info', ttl: 1 * 60 * 60 }); // 1 hour
 
 export default {
   buy,

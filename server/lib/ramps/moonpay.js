@@ -1,7 +1,6 @@
-import ExpiryMap from 'expiry-map';
 import axios from 'axios';
 import crypto from 'crypto';
-import pMemoize from 'p-memoize';
+import { dbMemoize } from '../db.js';
 
 const rampData = {
   id: 'moonpay',
@@ -72,15 +71,15 @@ async function getCountryAndCurrency(countryCode, crypto) {
   return { country, currency };
 }
 
-const cachedCurrencies = pMemoize(async () => {
+const cachedCurrencies = dbMemoize(async () => {
   const { data } = await rampApi.get('/v3/currencies');
   return data;
-}, { cache: new ExpiryMap(1 * 60 * 60 * 1000) }); // 1 hour
+}, { key: 'moonpay-currencies', ttl: 1 * 60 * 60 }); // 1 hour
 
-const cachedCountries = pMemoize(async () => {
+const cachedCountries = dbMemoize(async () => {
   const { data } = await rampApi.get('/v3/countries');
   return data;
-}, { cache: new ExpiryMap(1 * 60 * 60 * 1000) }); // 1 hour
+}, { key: 'moonpay-countries', ttl: 1 * 60 * 60 }); // 1 hour
 
 function signUrl(url) {
   const signature = crypto
