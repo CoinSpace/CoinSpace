@@ -59,12 +59,12 @@ steps:
   args:
     - '-c'
     - |
-      docker build --build-arg NODE_AUTH_TOKEN=${_NPM_READ_TOKEN} --tag "gcr.io/$PROJECT_ID/${_APP}:latest" . \
-      && docker push "gcr.io/$PROJECT_ID/${_APP}:latest"
+      docker build --build-arg NODE_AUTH_TOKEN=${_NPM_READ_TOKEN} --tag "gcr.io/$PROJECT_ID/${_NAMESPACE}/${_APP}:latest" . \
+      && docker push "gcr.io/$PROJECT_ID/${_NAMESPACE}/${_APP}:latest"
 
 - name: 'gcr.io/cloud-builders/kubectl'
   id: 'deploy'
-  args: ['delete', 'po', '-l', 'app=${_APP}']
+  args: ['delete', 'po', '-l', 'app=${_APP}', '--namespace', '${_NAMESPACE}']
   env:
     - 'CLOUDSDK_COMPUTE_ZONE=${_CLOUDSDK_COMPUTE_ZONE}'
     - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLOUDSDK_CONTAINER_CLUSTER}'
