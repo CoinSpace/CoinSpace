@@ -51,7 +51,7 @@ jobs:
 
             ### 🕵️ Tor
 
-            * [Tor Wallet (.onion)](http://coinspacezp5mmyuicbz2hoafbnduj4vzkttq3grn5mnwdue5t343zid.onion/)
+            * [Tor Wallet (.onion)](http://coinspacezp5mmyuicbz2hoafbnduj4vzkttq3grn5mnwdue5t343zid.onion/wallet/)
 
   lint:
     runs-on: ubuntu-22.04
