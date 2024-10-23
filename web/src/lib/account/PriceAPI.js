@@ -18,7 +18,7 @@ export default class PriceAPI {
       return await request({
         seed: 'device',
         ...config,
-        baseURL: import.meta.env.VITE_PRICE_API_URL + 'api/v1/',
+        baseURL: import.meta.env.VITE_API_PRICE_URL + 'api/v1/',
       });
     }, {
       cache: new ExpiryMap(1 * 60 * 1000),

@@ -11,6 +11,17 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, './');
+  const DOMAIN = (new URL(env.VITE_SITE_URL)).hostname.split('.').slice(-2).join('.');
+  if (/\.onion/.test(DOMAIN)) {
+    Object.keys(env).forEach((key) => {
+      if (key.startsWith('VITE_API')) {
+        const url = new URL(env[key]);
+        url.hostname = url.hostname.replace('coin.space', DOMAIN);
+        url.protocol = 'http';
+        process.env[key] = url.toString();
+      }
+    });
+  }
   return {
     server: {
       open: true,
