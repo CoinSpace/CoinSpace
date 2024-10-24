@@ -326,8 +326,6 @@ export default class Account extends EventEmitter {
       }
     });
     this.#details.set('cryptos', cryptos);
-    await this.#details.save();
-
     await this.#market.init({
       cryptos,
       currency: this.#details.get('systemInfo').preferredCurrency,

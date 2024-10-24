@@ -247,6 +247,7 @@ async function getAllV4(limit = 0) {
         synchronized_at: false,
         updated_at: false,
         prices: false,
+        change: false,
       },
     })
     .toArray();
