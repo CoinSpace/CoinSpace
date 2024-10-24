@@ -53,7 +53,7 @@ steps:
   args:
   - '-c'
   - |
-    if [[ "${_DISTRIBUTION}" == "web" ]]; then
+    if [[ -n "${_CDN_URL_MAP_NAME}" ]]; then
       gcloud compute url-maps invalidate-cdn-cache ${_CDN_URL_MAP_NAME} --host ${_CDN_HOST} --path "/*" --async
     fi
 
