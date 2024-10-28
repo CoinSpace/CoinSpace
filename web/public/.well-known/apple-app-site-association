@@ -1,0 +1,19 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "3M4KWD4BUU.com.coinspace.wallet"
+        ],
+        "components": [
+            { "/": "/wallet/*" }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "3M4KWD4BUU.com.coinspace.wallet"
+    ]
+  }
+}
