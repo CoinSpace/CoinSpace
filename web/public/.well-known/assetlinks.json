@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.coinspace.app",
+      "sha256_cert_fingerprints":
+        ["3F:78:A0:82:32:2C:FC:7C:96:E5:B6:AA:29:BE:2F:86:20:CA:7E:0D:63:F5:62:A7:26:DE:BD:81:EF:B7:51:F0"]
+    }
+  }
+]
