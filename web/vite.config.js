@@ -17,7 +17,6 @@ export default defineConfig(({ mode }) => {
       if (key.startsWith('VITE_API')) {
         const url = new URL(env[key]);
         url.hostname = url.hostname.replace('coin.space', DOMAIN);
-        url.protocol = 'http';
         process.env[key] = url.toString();
       }
     });
