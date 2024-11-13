@@ -3,6 +3,7 @@ import axios from 'axios';
 import createError from 'http-errors';
 import crypto from 'crypto';
 import cryptoDB from '@coinspace/crypto-db';
+import { normalizeNumber } from './utils.js';
 
 const privateKey = crypto.createPrivateKey({
   key: process.env.CHANGELLY_API_SECRET,
@@ -61,12 +62,6 @@ function getCryptoByChangelly(id) {
   return item;
 }
 
-
-
-function normalizeNumber(n, decimals) {
-  return Big(n).round(decimals ?? 8).toFixed();
-}
-
 async function getPairsParams(from, to) {
   const fromCrypto = getCrypto(from);
   const toCrypto = getCrypto(to);
@@ -121,14 +116,14 @@ async function estimateV4(from, to, value) {
         const amount = data.error.message.match(/\s(\d+(?:\.\d+)?)\s/i)?.[1];
         return {
           error: 'SmallAmountError',
-          amount: amount && normalizeNumber(amount),
+          amount: amount && normalizeNumber(amount, fromCrypto.decimals),
         };
       }
       if (/maximum amount/i.test(data.error.message)) {
         const amount = data.error.message.match(/\s(\d+(?:\.\d+)?)\s/i)?.[1];
         return {
           error: 'BigAmountError',
-          amount: amount && normalizeNumber(amount),
+          amount: amount && normalizeNumber(amount, fromCrypto.decimals),
         };
       }
       if (/invalid amount/i.test(data.error.message)) {

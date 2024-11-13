@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { createHmac } from 'crypto';
+import { getUserId } from '../utils.js';
 
 const API_KEY = process.env.PAYBIS_API_KEY;
 const rampData = {
@@ -27,12 +27,8 @@ async function ramp(type, { walletId, crypto, address }) {
   if (!API_KEY) return;
   if (!crypto?.paybis?.id) return;
 
-  const partnerUserId = createHmac('sha256', 'Paybis')
-    .update(walletId)
-    .digest('hex');
-
   const params = {
-    partnerUserId,
+    partnerUserId: getUserId(walletId, 'Paybis'),
     locale: 'en',
   };
 

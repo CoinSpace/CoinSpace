@@ -1,6 +1,7 @@
 import createError from 'http-errors';
 import semver from 'semver';
 
+import * as changenow from '../changenow.js';
 import changelly from '../changelly.js';
 import cryptos from '../cryptos.js';
 import csFee from '../csFee.js';
@@ -319,6 +320,45 @@ export async function changellyCreateTransaction(req, res) {
 
 export async function changellyGetTransactions(req, res) {
   const data = await changelly.getTransactionsV4(req.query.transactions);
+  res.status(200).send(data);
+}
+
+export async function changenowEstimate(req, res) {
+  const data = await changenow.estimate({
+    from: req.query.from,
+    to: req.query.to,
+    amount: req.query.amount,
+  });
+  res.status(200).send(data);
+}
+
+export async function changenowValidateAddress(req, res) {
+  const data = await changenow.validateAddress({
+    cryptoId: req.query.crypto,
+    address: req.query.address,
+    extraId: req.query.extra,
+  });
+  res.status(200).send(data);
+}
+
+export async function changenowCreateTransaction(req, res) {
+  const device = await req.getDevice();
+  const data = await changenow.createTransaction({
+    walletId: device.wallet._id,
+    from: req.body.from,
+    to: req.body.to,
+    amount: req.body.amount,
+    address: req.body.address,
+    extraId: req.body.extraId,
+    refundAddress: req.body.refundAddress,
+  });
+  res.status(200).send(data);
+}
+
+export async function changenowGetTransactions(req, res) {
+  const data = await changenow.getTransactions({
+    ids: req.query.transactions,
+  });
   res.status(200).send(data);
 }
 
