@@ -45,6 +45,7 @@ export default {
     return {
       isLoading: false,
       isLoadingMaxAmount: false,
+      isEstimating: false,
       subtitle: cryptoSubtitle(this.$wallet),
       amount: undefined,
       errors: {},
@@ -107,7 +108,7 @@ export default {
         this.clean();
         return;
       }
-      this.isLoading = true;
+      this.isEstimating = true;
       this.errors = {};
       try {
         if (!this.$wallet.crypto.changelly) throw new ExchangeDisabledError();
@@ -132,7 +133,7 @@ export default {
         this.clean();
         this.handleError(err);
       } finally {
-        this.isLoading = false;
+        this.isEstimating = false;
       }
     },
     async confirm() {
@@ -329,7 +330,7 @@ export default {
     <CsButtonGroup>
       <CsButton
         type="primary"
-        :isLoading="isLoading"
+        :isLoading="isLoading || isEstimating"
         @click="confirm"
       >
         {{ $t('Continue') }}
