@@ -168,6 +168,15 @@ const app = [
     meta: { requiresAuth: true },
   },
   {
+    path: '/wc',
+    redirect() {
+      return {
+        name: 'settings.walletconnect',
+        force: true,
+      };
+    },
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'notfound',
     component: NotFound,
