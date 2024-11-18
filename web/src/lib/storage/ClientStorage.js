@@ -189,6 +189,19 @@ export default class ClientStorage {
   }
 
   /**
+   * Tor
+   */
+
+  isOnion() {
+    return !!this.#getItem('_cs_onion', { type: OBJECT });
+  }
+
+  toggleOnion() {
+    this.#setItem('_cs_onion', !this.isOnion(), { type: OBJECT });
+  }
+
+
+  /**
    * Clean All!
    */
 

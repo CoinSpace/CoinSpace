@@ -20,16 +20,11 @@ const MAX_FAILED_ATTEMPTS = 3;
 const MAX_DEVICES = 100;
 const MAX_AUTHENTICATORS = 10;
 
-const urlSite = new URL(process.env.SITE_URL);
-const urlApp = new URL(process.env.SITE_URL);
-urlApp.hostname = `app.${urlApp.hostname}`;
-
 const RP_NAME = pkg.description;
-const RP_ID = urlSite.hostname;
-const ORIGIN = [
-  urlSite.origin,
-  urlApp.origin,
-];
+const RP_ID = new URL(process.env.SITE_URL).hostname;
+const EXPECTED_ORIGINS = process.env.IS_TOR === 'true'
+  ? [new URL(process.env.SITE_URL_TOR).origin, new URL(process.env.SITE_URL).origin]
+  : [new URL(process.env.SITE_URL).origin];
 
 const fidoAlgorithmIDs = [
   // ES256
@@ -145,7 +140,7 @@ async function platformVerify(device, body, type) {
     response: body,
     requireUserVerification: false,
     expectedChallenge: device.challenges[`${type}_platform`],
-    expectedOrigin: ORIGIN,
+    expectedOrigin: EXPECTED_ORIGINS,
     expectedRPID: RP_ID,
     authenticator: {
       ...device.authenticator,
@@ -199,7 +194,7 @@ async function crossplatformVerify(device, body, type) {
     response: body,
     requireUserVerification: false, // ?
     expectedChallenge: device.challenges[`${type}_crossplatform`],
-    expectedOrigin: ORIGIN,
+    expectedOrigin: EXPECTED_ORIGINS,
     expectedRPID: RP_ID,
     authenticator: {
       ...authenticator,
@@ -256,7 +251,7 @@ async function platformRegistrationVerify(device, body) {
     response: body,
     requireUserVerification: false,
     expectedChallenge: device.challenges['registration_platform'],
-    expectedOrigin: ORIGIN,
+    expectedOrigin: EXPECTED_ORIGINS,
     expectedRPID: RP_ID,
   });
   if (!verified) {
@@ -314,7 +309,7 @@ async function crossplatformRegistrationVerify(device, body) {
     response: body,
     requireUserVerification: false, // ?
     expectedChallenge: device.challenges['registration_crossplatform'],
-    expectedOrigin: ORIGIN,
+    expectedOrigin: EXPECTED_ORIGINS,
     expectedRPID: RP_ID,
   });
   if (!verified) {

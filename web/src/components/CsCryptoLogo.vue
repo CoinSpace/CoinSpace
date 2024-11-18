@@ -17,7 +17,7 @@ export default {
   },
   data() {
     return {
-      baseUrl: this.env.VITE_SITE_URL,
+      baseUrl: this.$account.siteUrl,
       version: this.env.VITE_VERSION,
       cryptoLogoError: false,
       platformLogoError: false,

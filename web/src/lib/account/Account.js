@@ -149,7 +149,6 @@ class WalletManager {
 
 export default class Account extends EventEmitter {
   #clientStorage;
-  #siteURL;
   #seeds;
   #request;
   #settings;
@@ -166,6 +165,10 @@ export default class Account extends EventEmitter {
   #needToMigrateV5Balance = false;
   #walletConnect;
   #dummy = false;
+
+  get siteUrl() {
+    return this.isOnion ? import.meta.env.VITE_SITE_URL_TOR : import.meta.env.VITE_SITE_URL;
+  }
 
   get clientStorage() {
     return this.#clientStorage;
@@ -219,6 +222,10 @@ export default class Account extends EventEmitter {
     return !this.#deviceSeed;
   }
 
+  get isOnion() {
+    return this.#clientStorage.isOnion();
+  }
+
   get user() {
     if (this.#details) {
       const user = this.#details.get('userInfo');
@@ -246,17 +253,13 @@ export default class Account extends EventEmitter {
     return this.#dummy;
   }
 
-  constructor({ siteURL, localStorage, release }) {
+  constructor({ localStorage, release }) {
     super();
-    if (!siteURL) {
-      throw new TypeError('siteURL is required');
-    }
     if (!localStorage) {
       throw new TypeError('localStorage is required');
     }
 
     this.#clientStorage = new ClientStorage({ localStorage });
-    this.#siteURL = siteURL;
     this.#seeds = new Seeds({
       clientStorage: this.#clientStorage,
     });
@@ -273,6 +276,7 @@ export default class Account extends EventEmitter {
     this.#market = new Market({
       cryptoDB: this.#cryptoDB,
       request: this.request,
+      account: this,
     });
     this.#mecto = new Mecto({
       request: this.request,
@@ -373,50 +377,50 @@ export default class Account extends EventEmitter {
     switch (platform) {
       // Bitcoin-like
       case 'bitcoin':
-        return import.meta.env.VITE_API_BTC_URL;
+        return this.isOnion ? import.meta.env.VITE_API_BTC_URL_TOR : import.meta.env.VITE_API_BTC_URL;
       case 'bitcoin-cash':
-        return import.meta.env.VITE_API_BCH_URL;
+        return this.isOnion ? import.meta.env.VITE_API_BCH_URL_TOR : import.meta.env.VITE_API_BCH_URL;
       case 'dash':
-        return import.meta.env.VITE_API_DASH_URL;
+        return this.isOnion ? import.meta.env.VITE_API_DASH_URL_TOR : import.meta.env.VITE_API_DASH_URL;
       case 'dogecoin':
-        return import.meta.env.VITE_API_DOGE_URL;
+        return this.isOnion ? import.meta.env.VITE_API_DOGE_URL_TOR : import.meta.env.VITE_API_DOGE_URL;
       case 'litecoin':
-        return import.meta.env.VITE_API_LTC_URL;
+        return this.isOnion ? import.meta.env.VITE_API_LTC_URL_TOR : import.meta.env.VITE_API_LTC_URL;
       // Ethereum-like
       case 'ethereum':
-        return import.meta.env.VITE_API_ETH_URL;
+        return this.isOnion ? import.meta.env.VITE_API_ETH_URL_TOR : import.meta.env.VITE_API_ETH_URL;
       case 'ethereum-classic':
-        return import.meta.env.VITE_API_ETC_URL;
+        return this.isOnion ? import.meta.env.VITE_API_ETC_URL_TOR : import.meta.env.VITE_API_ETC_URL;
       case 'binance-smart-chain':
-        return import.meta.env.VITE_API_BSC_URL;
+        return this.isOnion ? import.meta.env.VITE_API_BSC_URL_TOR : import.meta.env.VITE_API_BSC_URL;
       case 'polygon':
-        return import.meta.env.VITE_API_POLYGON_URL;
+        return this.isOnion ? import.meta.env.VITE_API_POLYGON_URL_TOR : import.meta.env.VITE_API_POLYGON_URL;
       case 'avalanche-c-chain':
-        return import.meta.env.VITE_API_AVAX_URL;
+        return this.isOnion ? import.meta.env.VITE_API_AVAX_URL_TOR : import.meta.env.VITE_API_AVAX_URL;
       case 'arbitrum':
-        return import.meta.env.VITE_API_ARB_URL;
+        return this.isOnion ? import.meta.env.VITE_API_ARB_URL_TOR : import.meta.env.VITE_API_ARB_URL;
       case 'optimism':
-        return import.meta.env.VITE_API_OP_URL;
+        return this.isOnion ? import.meta.env.VITE_API_OP_URL_TOR : import.meta.env.VITE_API_OP_URL;
       case 'fantom':
-        return import.meta.env.VITE_API_FTM_URL;
+        return this.isOnion ? import.meta.env.VITE_API_FTM_URL_TOR : import.meta.env.VITE_API_FTM_URL;
       // Ripple-like
       case 'ripple':
-        return import.meta.env.VITE_API_XRP_URL;
+        return this.isOnion ? import.meta.env.VITE_API_XRP_URL_TOR : import.meta.env.VITE_API_XRP_URL;
       case 'stellar':
-        return import.meta.env.VITE_API_XLM_URL;
+        return this.isOnion ? import.meta.env.VITE_API_XLM_URL_TOR : import.meta.env.VITE_API_XLM_URL;
       // Others
       case 'monero':
-        return import.meta.env.VITE_API_XMR_URL;
+        return this.isOnion ? import.meta.env.VITE_API_XMR_URL_TOR : import.meta.env.VITE_API_XMR_URL;
       case 'eos':
-        return import.meta.env.VITE_API_EOS_URL;
+        return this.isOnion ? import.meta.env.VITE_API_EOS_URL_TOR : import.meta.env.VITE_API_EOS_URL;
       case 'solana':
-        return import.meta.env.VITE_API_SOL_URL;
+        return this.isOnion ? import.meta.env.VITE_API_SOL_URL_TOR : import.meta.env.VITE_API_SOL_URL;
       case 'tron':
-        return import.meta.env.VITE_API_TRX_URL;
+        return this.isOnion ? import.meta.env.VITE_API_TRX_URL_TOR : import.meta.env.VITE_API_TRX_URL;
       case 'cardano':
-        return import.meta.env.VITE_API_ADA_URL;
+        return this.isOnion ? import.meta.env.VITE_API_ADA_URL_TOR : import.meta.env.VITE_API_ADA_URL;
       case 'toncoin':
-        return import.meta.env.VITE_API_TON_URL;
+        return this.isOnion ? import.meta.env.VITE_API_TON_URL_TOR : import.meta.env.VITE_API_TON_URL;
       default:
         // fallback
         return 'https://unsupported.coin.space/';
@@ -556,6 +560,15 @@ export default class Account extends EventEmitter {
     this.emit('update');
   }
 
+  async reopen() {
+    const wallets = await Promise.all(this.#details.get('cryptos').map(async (crypto) => {
+      return this.#openWallet(crypto, this.#wallets.get(crypto._id).storage);
+    }));
+    this.#wallets.setMany(wallets);
+    await this.#details.save();
+    this.emit('update');
+  }
+
   logout() {
     this.#clientStorage.clear();
     this.emit('logout');
@@ -683,7 +696,7 @@ export default class Account extends EventEmitter {
       config.seed = this.#deviceSeed;
     }
     return this.#request.request({
-      baseURL: this.#siteURL,
+      baseURL: this.siteUrl,
       ...config,
     });
   };

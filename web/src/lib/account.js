@@ -8,7 +8,6 @@ import { cryptoSubtitle, cryptoToFiat, defineAppProperty, roundCrypto } from './
 export async function createAccount({ app, router }) {
   const account = new Account({
     localStorage: window.localStorage,
-    siteURL: import.meta.env.VITE_SITE_URL,
     release,
   });
   await account.biometry.init();

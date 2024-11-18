@@ -17,12 +17,12 @@ export default class Market {
   #priceAPI;
   #cryptoIds = [];
 
-  constructor({ cryptoDB, request }) {
+  constructor({ cryptoDB, request, account }) {
     if (!cryptoDB) {
       throw new TypeError('cryptoDB is required');
     }
     this.#cryptoDB = cryptoDB;
-    this.#priceAPI = new PriceAPI({ request });
+    this.#priceAPI = new PriceAPI({ request, account });
   }
 
   async init({ cryptos, currency }) {

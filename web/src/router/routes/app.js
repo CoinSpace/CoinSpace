@@ -21,6 +21,7 @@ import CryptoStakingView from '../../views/Crypto/Staking/CryptoStakingView.vue'
 import SettingsAccountView from '../../views/Settings/Account/SettingsAccountView.vue';
 import SettingsHardwareView from '../../views/Settings/Hardware/SettingsHardwareView.vue';
 import SettingsPinView from '../../views/Settings/Pin/SettingsPinView.vue';
+import SettingsTorView from '../../views/Settings/Tor/SettingsTorView.vue';
 import SettingsView from '../../views/Settings/SettingsView.vue';
 import SettingsWalletConnectView from '../../views/Settings/WalletConnect/WalletConnectView.vue';
 
@@ -56,6 +57,10 @@ const app = [
         path: 'pin',
         name: 'settings.pin',
         component: SettingsPinView,
+      }, {
+        path: 'tor',
+        name: 'settings.tor',
+        component: SettingsTorView,
       }, {
         path: 'walletconnect',
         name: 'settings.walletconnect',

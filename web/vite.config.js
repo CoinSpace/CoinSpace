@@ -11,16 +11,6 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, './');
-  const DOMAIN = (new URL(env.VITE_SITE_URL)).hostname.split('.').slice(-2).join('.');
-  if (/\.onion/.test(DOMAIN)) {
-    Object.keys(env).forEach((key) => {
-      if (key.startsWith('VITE_API')) {
-        const url = new URL(env[key]);
-        url.hostname = url.hostname.replace('coin.space', DOMAIN);
-        process.env[key] = url.toString();
-      }
-    });
-  }
   return {
     server: {
       open: true,
@@ -42,7 +32,7 @@ export default defineConfig(({ mode }) => {
       }),
       svgLoader({ svgo: false }),
       sfcAutoName(),
-      ViteEjsPlugin(() => ({ env })),
+      ViteEjsPlugin({ env }),
       ViteMinifyPlugin(),
       sentryVitePlugin({
         org: process.env.SENTRY_ORG,

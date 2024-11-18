@@ -49,7 +49,7 @@ export default class Hardware {
           platform: import.meta.env.VITE_PLATFORM,
         };
         registration = await openWindowExtra({
-          url: `${import.meta.env.VITE_SITE_URL}fido/?${new URLSearchParams(params)}`,
+          url: `${this.#account.siteUrl}fido/?${new URLSearchParams(params)}`,
           name: 'fido',
         });
       }
@@ -106,7 +106,7 @@ export default class Hardware {
           platform: import.meta.env.VITE_PLATFORM,
         };
         authentication = await openWindowExtra({
-          url: `${import.meta.env.VITE_SITE_URL}fido/?${new URLSearchParams(params)}`,
+          url: `${this.#account.siteUrl}fido/?${new URLSearchParams(params)}`,
           name: 'fido',
         });
       }

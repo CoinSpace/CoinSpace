@@ -13,12 +13,14 @@ const periodToDays = {
 export default class PriceAPI {
   #request;
 
-  constructor({ request }) {
+  constructor({ request, account }) {
     this.#request = pMemoize(async (config) => {
       return await request({
         seed: 'device',
         ...config,
-        baseURL: import.meta.env.VITE_API_PRICE_URL + 'api/v1/',
+        baseURL: (account.isOnion
+          ? import.meta.env.VITE_API_PRICE_URL_TOR
+          : import.meta.env.VITE_API_PRICE_URL) + 'api/v1/',
       });
     }, {
       cache: new ExpiryMap(1 * 60 * 1000),

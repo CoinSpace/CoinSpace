@@ -40,7 +40,7 @@ function setCustomCacheControl(res, path) {
 
 function requireHTTPS(req, res, next) {
   const forwardedFromHTTPS = req.headers['x-forwarded-proto'] === 'https';
-  if (!forwardedFromHTTPS && !isOnionDomain(req) && isProduction()) {
+  if (!forwardedFromHTTPS && isProduction()) {
     return res.redirect('https://' + req.get('host') + req.url);
   }
   next();
@@ -48,10 +48,6 @@ function requireHTTPS(req, res, next) {
 
 function isProduction() {
   return process.env.NODE_ENV === 'production';
-}
-
-function isOnionDomain(req) {
-  return req.hostname === process.env.DOMAIN_ONION;
 }
 
 export default {

@@ -154,6 +154,15 @@ export default {
       />
     </CsListItems>
 
+    <CsListItems
+      :title="$t('Privacy')"
+    >
+      <CsListItem
+        :title="$t('Tor')"
+        @click="$router.push({ name: 'settings.tor' })"
+      />
+    </CsListItems>
+
     <CsListItems :title="$t('Support')">
       <CsListItem
         :title="$t('Support (English)')"
@@ -164,11 +173,11 @@ export default {
     <CsListItems :title="$t('About')">
       <CsListItem
         :title="$t('Terms of Service')"
-        @click="$safeOpen(`${env.VITE_SITE_URL}terms-of-service/`)"
+        @click="$safeOpen(`${$account.siteUrl}terms-of-service/`)"
       />
       <CsListItem
         :title="$t('Privacy Policy')"
-        @click="$safeOpen(`${env.VITE_SITE_URL}privacy-policy/`)"
+        @click="$safeOpen(`${$account.siteUrl}privacy-policy/`)"
       />
     </CsListItems>
 
