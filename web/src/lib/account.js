@@ -2,6 +2,7 @@ import Account from './account/Account.js';
 import { Amount } from '@coinspace/cs-common';
 import { ref } from 'vue';
 import { release } from './version.js';
+import { init as sentryInit } from './sentry.js';
 import { setLanguage } from './i18n/i18n.js';
 import { cryptoSubtitle, cryptoToFiat, defineAppProperty, roundCrypto } from './helpers.js';
 
@@ -67,6 +68,7 @@ export async function createAccount({ app, router }) {
         break;
       case 'isOnion':
         isOnion.value = account.isOnion;
+        sentryInit(account.isOnion);
         break;
       default: {
         const result = [];
