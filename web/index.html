@@ -9,59 +9,17 @@
       style-src 'self' 'unsafe-inline';
       connect-src
         'self'
+        <% if (NODE_ENV === 'development') { %>http://localhost:*/<% } %>
         <%= env.VITE_SITE_URL %>
-        <%= env.VITE_API_PRICE_URL %>
-        <%= env.VITE_API_BTC_URL %>
-        <%= env.VITE_API_BCH_URL %>
-        <%= env.VITE_API_DASH_URL %>
-        <%= env.VITE_API_DOGE_URL %>
-        <%= env.VITE_API_LTC_URL %>
-        <%= env.VITE_API_ETH_URL %>
-        <%= env.VITE_API_ETC_URL %>
-        <%= env.VITE_API_BSC_URL %>
-        <%= env.VITE_API_POLYGON_URL %>
-        <%= env.VITE_API_AVAX_URL %>
-        <%= env.VITE_API_XRP_URL %>
-        <%= env.VITE_API_XLM_URL %>
-        <%= env.VITE_API_XMR_URL %>
-        <%= env.VITE_API_EOS_URL %>
-        <%= env.VITE_API_SOL_URL %>
-        <%= env.VITE_API_TRX_URL %>
-        <%= env.VITE_API_ADA_URL %>
-        <%= env.VITE_API_ARB_URL %>
-        <%= env.VITE_API_TON_URL %>
-        <%= env.VITE_API_OP_URL %>
-        <%= env.VITE_API_FTM_URL %>
         <%= env.VITE_SITE_URL_TOR %>
-        <%= env.VITE_API_PRICE_URL_TOR %>
-        <%= env.VITE_API_BTC_URL_TOR %>
-        <%= env.VITE_API_BCH_URL_TOR %>
-        <%= env.VITE_API_DASH_URL_TOR %>
-        <%= env.VITE_API_DOGE_URL_TOR %>
-        <%= env.VITE_API_LTC_URL_TOR %>
-        <%= env.VITE_API_ETH_URL_TOR %>
-        <%= env.VITE_API_ETC_URL_TOR %>
-        <%= env.VITE_API_BSC_URL_TOR %>
-        <%= env.VITE_API_POLYGON_URL_TOR %>
-        <%= env.VITE_API_AVAX_URL_TOR %>
-        <%= env.VITE_API_XRP_URL_TOR %>
-        <%= env.VITE_API_XLM_URL_TOR %>
-        <%= env.VITE_API_XMR_URL_TOR %>
-        <%= env.VITE_API_EOS_URL_TOR %>
-        <%= env.VITE_API_SOL_URL_TOR %>
-        <%= env.VITE_API_TRX_URL_TOR %>
-        <%= env.VITE_API_ADA_URL_TOR %>
-        <%= env.VITE_API_ARB_URL_TOR %>
-        <%= env.VITE_API_TON_URL_TOR %>
-        <%= env.VITE_API_OP_URL_TOR %>
-        <%= env.VITE_API_FTM_URL_TOR %>
+        <%= env.VITE_API_CSP %>
+        <%= env.VITE_API_CSP_TOR %>
         https://api.moonpay.com/
         wss://*.walletconnect.org/
         wss://*.walletconnect.com/
         https://*.walletconnect.org/
         https://*.walletconnect.com/
-        https://*.sentry.io
-        https://sentry.coinspacezp5mmyuicbz2hoafbnduj4vzkttq3grn5mnwdue5t343zid.onion;
+        https://*.sentry.io;
       frame-src
         'self'
         https://*.walletconnect.org/
