@@ -165,8 +165,8 @@ export default {
       margin-bottom: $spacing-3xl;
 
       &--tor {
-        border: 2px solid #8a2be2;
         box-shadow: 0 $spacing-md $spacing-xl rgb(138 43 226 / 8%);
+        outline: 2px solid #8a2be2;
       }
     }
 
