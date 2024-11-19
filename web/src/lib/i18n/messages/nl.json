@@ -87,6 +87,7 @@
   "Enter passphrase": "Wachtwoord invoeren",
   "Enter your PIN": "Uw PIN invoeren",
   "Error": "Fout",
+  "Error! Please ensure that your Tor VPN is active.": "Fout! Zorg ervoor dat uw Tor VPN actief is.",
   "Error! Please try again later.": "Fout! Probeer het opnieuw.",
   "Exchange": "Uitwisselen",
   "Exchange failed and funds were refunded to your wallet.": "Uitwisseling mislukt en betalingen zijn geretourneerd naar uw wallet.",

@@ -87,6 +87,7 @@
   "Enter passphrase": "パスフレーズを入力",
   "Enter your PIN": "PINを入力",
   "Error": "エラー",
+  "Error! Please ensure that your Tor VPN is active.": "エラー！お使いのTor VPNがアクティブであることを確認してください。",
   "Error! Please try again later.": "エラー！後でもう一度お試しください。",
   "Exchange": "取引",
   "Exchange failed and funds were refunded to your wallet.": "取引所でのエラーが発生し、資金はウォレットに返金されました。",

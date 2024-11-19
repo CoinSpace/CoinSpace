@@ -87,6 +87,7 @@
   "Enter passphrase": "Введите парольную фразу",
   "Enter your PIN": "Введите свой ПИН-код",
   "Error": "Ошибка",
+  "Error! Please ensure that your Tor VPN is active.": "Ошибка! Убедитесь, что ваш Tor VPN активен.",
   "Error! Please try again later.": "Ошибка! Пожалуйста, попробуйте позже.",
   "Exchange": "Обменять",
   "Exchange failed and funds were refunded to your wallet.": "Обмен не удался и средства были возвращены в кошелек.",

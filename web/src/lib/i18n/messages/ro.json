@@ -87,6 +87,7 @@
   "Enter passphrase": "Introduceți fraza de acces",
   "Enter your PIN": "Introduceți codul PIN",
   "Error": "Eroare",
+  "Error! Please ensure that your Tor VPN is active.": "Eroare! Vă rugăm să vă asigurați că VPN-ul dvs. Tor este activ.",
   "Error! Please try again later.": "Eroare! Încercați din nou mai târziu.",
   "Exchange": "Schimbați",
   "Exchange failed and funds were refunded to your wallet.": "Schimbul a eșuat și fondurile au fost rambursate în portofel.",

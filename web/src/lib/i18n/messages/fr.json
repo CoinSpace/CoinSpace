@@ -87,6 +87,7 @@
   "Enter passphrase": "Saisissez la phrase secrète",
   "Enter your PIN": "Entrez votre code PIN",
   "Error": "Erreur",
+  "Error! Please ensure that your Tor VPN is active.": "Erreur ! Veuillez vous assurer que votre VPN Tor est actif.",
   "Error! Please try again later.": "Erreur ! Veuillez réessayer plus tard.",
   "Exchange": "Échange",
   "Exchange failed and funds were refunded to your wallet.": "Échec de l'échange, les fonds ont été remboursés dans votre portefeuille.",

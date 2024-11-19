@@ -87,6 +87,7 @@
   "Enter passphrase": "I-enter ang Passphrase",
   "Enter your PIN": "I-enter and iyong PIN",
   "Error": "Error",
+  "Error! Please ensure that your Tor VPN is active.": "Error! Pakitiyak na ang iyong Tor VPN ay aktibo.",
   "Error! Please try again later.": "Error! Subukang muli mamaya.",
   "Exchange": "Palitan",
   "Exchange failed and funds were refunded to your wallet.": "Nabigo ang palitan at na-refund ang mga pondo sa wallet mo.",

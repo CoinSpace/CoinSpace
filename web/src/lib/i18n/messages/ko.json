@@ -87,6 +87,7 @@
   "Enter passphrase": "암호 입력",
   "Enter your PIN": "PIN 입력",
   "Error": "오류",
+  "Error! Please ensure that your Tor VPN is active.": "오류! 귀하의 Tor VPN이 활성 상태인지 확인하십시오.",
   "Error! Please try again later.": "오류! 나중에 다시 시도해주십시오.",
   "Exchange": "환전",
   "Exchange failed and funds were refunded to your wallet.": "환전은 실패하였으며 자금이 귀하의 월렛으로 환불되었습니다.",

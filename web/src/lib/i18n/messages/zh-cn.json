@@ -87,6 +87,7 @@
   "Enter passphrase": "输入密码短语",
   "Enter your PIN": "输入PIN码",
   "Error": "错误",
+  "Error! Please ensure that your Tor VPN is active.": "错误！请确保您的Tor VPN已激活。",
   "Error! Please try again later.": "错误！请稍后再试。",
   "Exchange": "兑换",
   "Exchange failed and funds were refunded to your wallet.": "兑换失败，资金已退回您的钱包。",
