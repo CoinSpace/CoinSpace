@@ -25,13 +25,11 @@ export async function createAccount({ app, router }) {
   const isOnion = ref(account.isOnion);
   const onLine = ref(navigator.onLine);
 
-  window.addEventListener('offline', () => {
+  function onLineHandler() {
     onLine.value = navigator.onLine;
-  });
-
-  window.addEventListener('online', () => {
-    onLine.value = navigator.onLine;
-  });
+  }
+  window.addEventListener('offline', onLineHandler);
+  window.addEventListener('online', onLineHandler);
 
   defineAppProperty(app, '$currency', currency);
   defineAppProperty(app, '$user', user);
@@ -115,6 +113,9 @@ export async function createAccount({ app, router }) {
     }
   });
   account.on('logout', async () => {
+    window.removeEventListener('offline', onLineHandler);
+    window.removeEventListener('online', onLineHandler);
+
     await createAccount({ app, router });
   });
 }
