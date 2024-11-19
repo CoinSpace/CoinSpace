@@ -560,11 +560,12 @@ export default class Account extends EventEmitter {
     this.emit('update');
   }
 
-  async toggleOnion() {
+  toggleOnion() {
     this.#clientStorage.toggleOnion();
     for (const wallet of this.#wallets.list()) {
       wallet.apiNode = this.#getApiNode(wallet.crypto.platform);
     }
+    this.emit('update', 'isOnion');
   }
 
   logout() {

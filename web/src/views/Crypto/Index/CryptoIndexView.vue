@@ -150,7 +150,7 @@ export default {
       v-if="$walletState === $STATE_ERROR"
       class="&__error"
     >
-      {{ $account?.isOnion
+      {{ ($isOnion && $onLine)
         ? $t('Error! Please ensure that your Tor VPN is active.')
         : $t('Error! Please try again later.') }}
     </div>

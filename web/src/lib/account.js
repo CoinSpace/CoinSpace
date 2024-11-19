@@ -22,11 +22,23 @@ export async function createAccount({ app, router }) {
   });
   const cryptos = ref([]);
   const isHiddenBalance = ref(false);
+  const isOnion = ref(account.isOnion);
+  const onLine = ref(navigator.onLine);
+
+  window.addEventListener('offline', () => {
+    onLine.value = navigator.onLine;
+  });
+
+  window.addEventListener('online', () => {
+    onLine.value = navigator.onLine;
+  });
 
   defineAppProperty(app, '$currency', currency);
   defineAppProperty(app, '$user', user);
   defineAppProperty(app, '$cryptos', cryptos);
   defineAppProperty(app, '$isHiddenBalance', isHiddenBalance);
+  defineAppProperty(app, '$isOnion', isOnion);
+  defineAppProperty(app, '$onLine', onLine);
 
   const dummyBalances = {
     'bitcoin@bitcoin': '0.5',
@@ -54,6 +66,9 @@ export async function createAccount({ app, router }) {
         break;
       case 'isHiddenBalance':
         isHiddenBalance.value = account.isHiddenBalance;
+        break;
+      case 'isOnion':
+        isOnion.value = account.isOnion;
         break;
       default: {
         const result = [];

@@ -15,16 +15,14 @@ export default {
   extends: CsStep,
   data() {
     return {
-      isOnion: this.$account.isOnion,
       isLoading: false,
     };
   },
   methods: {
-    async toggleOnion() {
+    toggleOnion() {
       this.isLoading = true;
       try {
-        await this.$account.toggleOnion();
-        this.isOnion = this.$account.isOnion;
+        this.$account.toggleOnion();
       } finally {
         this.isLoading = false;
       }
@@ -45,7 +43,7 @@ export default {
       >
         <template #after>
           <CsSwitch
-            :checked="isOnion"
+            :checked="$isOnion"
             :isLoading="isLoading"
             :aria-label="$t('Route traffic through Tor network. Ensure that your Tor VPN is active.')"
             @click="toggleOnion"
