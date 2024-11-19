@@ -23,8 +23,7 @@ export default {
     async toggleOnion() {
       this.isLoading = true;
       try {
-        this.$account.clientStorage.toggleOnion();
-        await this.$account.reopen();
+        await this.$account.toggleOnion();
         this.isOnion = this.$account.isOnion;
       } finally {
         this.isLoading = false;

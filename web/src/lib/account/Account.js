@@ -560,13 +560,11 @@ export default class Account extends EventEmitter {
     this.emit('update');
   }
 
-  async reopen() {
-    const wallets = await Promise.all(this.#details.get('cryptos').map(async (crypto) => {
-      return this.#openWallet(crypto, this.#wallets.get(crypto._id).storage);
-    }));
-    this.#wallets.setMany(wallets);
-    await this.#details.save();
-    this.emit('update');
+  async toggleOnion() {
+    this.#clientStorage.toggleOnion();
+    for (const wallet of this.#wallets.list()) {
+      wallet.apiNode = this.#getApiNode(wallet.crypto.platform);
+    }
   }
 
   logout() {
