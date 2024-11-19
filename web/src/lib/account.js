@@ -68,7 +68,7 @@ export async function createAccount({ app, router }) {
         break;
       case 'isOnion':
         isOnion.value = account.isOnion;
-        sentryInit(account.isOnion);
+        sentryInit();
         break;
       default: {
         const result = [];
