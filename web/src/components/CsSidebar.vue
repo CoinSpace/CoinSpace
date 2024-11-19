@@ -166,7 +166,7 @@ export default {
 
       &--tor {
         border: 2px solid #8a2be2;
-        box-shadow: 0 16px 24px 0 #8a2be214;
+        box-shadow: 0 $spacing-md $spacing-xl rgb(138 43 226 / 8%);
       }
     }
 
