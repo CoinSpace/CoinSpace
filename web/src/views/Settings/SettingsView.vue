@@ -156,6 +156,7 @@ export default {
     </CsListItems>
 
     <CsListItems
+      v-if="['phonegap', 'electron'].includes(env.VITE_BUILD_TYPE)"
       :title="$t('Privacy')"
     >
       <CsListItem
