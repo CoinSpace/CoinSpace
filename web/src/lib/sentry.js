@@ -18,7 +18,8 @@ Sentry.addGlobalEventProcessor((event, { originalException: error }) => {
 export async function init() {
   await Sentry.close().catch(console.error);
 
-  const dsn = localStorage?.getItem('_cs_onion') === 'true'
+  const isOnion = localStorage?.getItem('_cs_onion') === 'true';
+  const dsn = isOnion
     ? import.meta.env.VITE_SENTRY_DSN_TOR
     : import.meta.env.VITE_SENTRY_DSN;
   Sentry.init({
@@ -29,6 +30,7 @@ export async function init() {
     normalizeDepth: 5,
     integrations: [new CaptureConsoleIntegration({ levels: ['error'] })],
   });
+  Sentry.setTag('connection', isOnion ? 'tor' : 'web');
 }
 
 init();
