@@ -1,11 +1,10 @@
 import createError from 'http-errors';
 import semver from 'semver';
 
-import * as changenow from '../changenow.js';
-import changelly from '../changelly.js';
 import cryptos from '../cryptos.js';
 import csFee from '../csFee.js';
 import domain from '../domain.js';
+import exchanges from '../exchanges/index.js';
 import fee from '../fee.js';
 import github from '../github.js';
 import mecto from '../mecto.js';
@@ -296,35 +295,9 @@ export async function getUpdate(req, res) {
   }
 }
 
-export async function changellyEstimate(req, res) {
-  const data = await changelly.estimateV4(req.query.from, req.query.to, req.query.amount);
-  res.status(200).send(data);
-}
-
-export async function changellyValidateAddress(req, res) {
-  const data = await changelly.validateAddress(req.query.address, req.query.crypto, req.query.extra);
-  res.status(200).send(data);
-}
-
-export async function changellyCreateTransaction(req, res) {
-  const data = await changelly.createTransaction(
-    req.body.from,
-    req.body.to,
-    req.body.amount,
-    req.body.address,
-    req.body.refundAddress,
-    req.body.extraId
-  );
-  res.status(200).send(data);
-}
-
-export async function changellyGetTransactions(req, res) {
-  const data = await changelly.getTransactionsV4(req.query.transactions);
-  res.status(200).send(data);
-}
-
-export async function changenowEstimate(req, res) {
-  const data = await changenow.estimate({
+export async function exchangeEstimate(req, res) {
+  if (!exchanges[req.params.exchangeName]) throw createError(400, 'Unknown exchange');
+  const data = await exchanges[req.params.exchangeName].estimate({
     from: req.query.from,
     to: req.query.to,
     amount: req.query.amount,
@@ -332,8 +305,9 @@ export async function changenowEstimate(req, res) {
   res.status(200).send(data);
 }
 
-export async function changenowValidateAddress(req, res) {
-  const data = await changenow.validateAddress({
+export async function exchangeValidateAddress(req, res) {
+  if (!exchanges[req.params.exchangeName]) throw createError(400, 'Unknown exchange');
+  const data = await exchanges[req.params.exchangeName].validateAddress({
     cryptoId: req.query.crypto,
     address: req.query.address,
     extraId: req.query.extra,
@@ -341,9 +315,10 @@ export async function changenowValidateAddress(req, res) {
   res.status(200).send(data);
 }
 
-export async function changenowCreateTransaction(req, res) {
+export async function exchangeCreateTransaction(req, res) {
+  if (!exchanges[req.params.exchangeName]) throw createError(400, 'Unknown exchange');
   const device = await req.getDevice();
-  const data = await changenow.createTransaction({
+  const data = await exchanges[req.params.exchangeName].createTransaction({
     walletId: device.wallet._id,
     from: req.body.from,
     to: req.body.to,
@@ -355,8 +330,9 @@ export async function changenowCreateTransaction(req, res) {
   res.status(200).send(data);
 }
 
-export async function changenowGetTransactions(req, res) {
-  const data = await changenow.getTransactions({
+export async function exchangeGetTransactions(req, res) {
+  if (!exchanges[req.params.exchangeName]) throw createError(400, 'Unknown exchange');
+  const data = await exchanges[req.params.exchangeName].getTransactions({
     ids: req.query.transactions,
   });
   res.status(200).send(data);

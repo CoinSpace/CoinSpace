@@ -1,4 +1,4 @@
-import changelly from '../changelly.js';
+import changelly from '../exchanges/changelly.js';
 import createError from 'http-errors';
 import cryptos from '../cryptos.js';
 import csFee from '../csFee.js';
@@ -364,22 +364,22 @@ export async function getDomainAddress(req, res) {
 }
 
 export async function changellyParams(req, res) {
-  const data = await changelly.getPairsParams(req.query.from, req.query.to);
+  const data = await changelly.getPairsParamsV3(req.query.from, req.query.to);
   res.status(200).send(data);
 }
 
 export async function changellyEstimate(req, res) {
-  const data = await changelly.estimate(req.query.from, req.query.to, req.query.amount);
+  const data = await changelly.estimateV3(req.query.from, req.query.to, req.query.amount);
   res.status(200).send(data);
 }
 
 export async function changellyValidateAddress(req, res) {
-  const data = await changelly.validateAddress(req.query.address, req.query.crypto);
+  const data = await changelly.validateAddressV3(req.query.address, req.query.crypto);
   res.status(200).send(data);
 }
 
 export async function changellyCreateTransaction(req, res) {
-  const data = await changelly.createTransaction(
+  const data = await changelly.createTransactionV3(
     req.body.from,
     req.body.to,
     req.body.amount,
@@ -390,12 +390,12 @@ export async function changellyCreateTransaction(req, res) {
 }
 
 export async function changellyGetTransaction(req, res) {
-  const data = await changelly.getTransaction(req.params.transactionId);
+  const data = await changelly.getTransactionV3(req.params.transactionId);
   res.status(200).send(data);
 }
 
 export async function changellyGetTransactions(req, res) {
-  const data = await changelly.getTransactions(
+  const data = await changelly.getTransactionsV3(
     req.query.transaction,
     req.query.currency,
     req.query.address,

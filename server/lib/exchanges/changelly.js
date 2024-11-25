@@ -3,7 +3,7 @@ import axios from 'axios';
 import createError from 'http-errors';
 import crypto from 'crypto';
 import cryptoDB from '@coinspace/crypto-db';
-import { normalizeNumber } from './utils.js';
+import { normalizeNumber } from '../utils.js';
 
 const privateKey = crypto.createPrivateKey({
   key: process.env.CHANGELLY_API_SECRET,
@@ -62,7 +62,7 @@ function getCryptoByChangelly(id) {
   return item;
 }
 
-async function getPairsParams(from, to) {
+async function getPairsParamsV3(from, to) {
   const fromCrypto = getCrypto(from);
   const toCrypto = getCrypto(to);
   const { result: data } = await request('getPairsParams', [{
@@ -78,7 +78,7 @@ async function getPairsParams(from, to) {
   };
 }
 
-async function estimate(from, to, value) {
+async function estimateV3(from, to, value) {
   const fromCrypto = getCrypto(from);
   const toCrypto = getCrypto(to);
   const { result: data } = await request('getExchangeAmount', {
@@ -101,14 +101,14 @@ async function estimate(from, to, value) {
   };
 }
 
-async function estimateV4(from, to, value) {
+async function estimate({ from, to, amount }) {
   const fromCrypto = getCrypto(from);
   const toCrypto = getCrypto(to);
 
   const data = await request('getExchangeAmount', {
     from: fromCrypto.changelly.ticker,
     to: toCrypto.changelly.ticker,
-    amountFrom: value,
+    amountFrom: amount,
   });
   if (data.error) {
     if (data.error.code === -32600 || data.error.code === -32602) {
@@ -149,15 +149,15 @@ async function estimateV4(from, to, value) {
   }
   const estimation = data.result[0];
   const networkFee = Big(estimation.networkFee);
-  const amount = Big(estimation.amountFrom);
+  const amountFrom = Big(estimation.amountFrom);
   const result = Big(estimation.amountTo).minus(networkFee);
   return {
-    rate: amount.eq(0) ? '0' : normalizeNumber(result.div(amount), toCrypto.decimals),
+    rate: amountFrom.eq(0) ? '0' : normalizeNumber(result.div(amountFrom), toCrypto.decimals),
     result: normalizeNumber(result, toCrypto.decimals),
   };
 }
 
-async function validateAddress(address, id, extraId) {
+async function validateAddressV3(address, id, extraId) {
   const item = getCrypto(id);
   const { result: data } = await request('validateAddress', {
     address,
@@ -169,7 +169,19 @@ async function validateAddress(address, id, extraId) {
   };
 }
 
-async function createTransaction(from, to, amountFrom, address, refundAddress, extraId) {
+async function validateAddress({ cryptoId, address, extraId }) {
+  const item = getCrypto(cryptoId);
+  const { result: data } = await request('validateAddress', {
+    address,
+    extraId,
+    currency: item.changelly.ticker,
+  });
+  return {
+    isValid: data ? data.result : false,
+  };
+}
+
+async function createTransactionV3(from, to, amountFrom, address, refundAddress, extraId) {
   const fromCrypto = getCrypto(from);
   const toCrypto = getCrypto(to);
   const data = await request('createTransaction', {
@@ -191,7 +203,29 @@ async function createTransaction(from, to, amountFrom, address, refundAddress, e
   };
 }
 
-async function getTransaction(id) {
+async function createTransaction({ from, to, amount, address, extraId, refundAddress }) {
+  const fromCrypto = getCrypto(from);
+  const toCrypto = getCrypto(to);
+  const data = await request('createTransaction', {
+    from: fromCrypto.changelly.ticker,
+    to: toCrypto.changelly.ticker,
+    amountFrom: amount,
+    address,
+    extraId,
+    refundAddress,
+  });
+  if (!data.result) {
+    throw createError(500, 'Transaction not created');
+  }
+  return {
+    id: data.result.id,
+    depositAmount: normalizeNumber(data.result.amountExpectedFrom),
+    depositAddress: data.result.payinAddress,
+    extraId: data.result.payinExtraId,
+  };
+}
+
+async function getTransactionV3(id) {
   const { result: txs } = await request('getTransactions', {
     id,
   });
@@ -213,7 +247,7 @@ async function getTransaction(id) {
   };
 }
 
-async function getTransactions(id, currency, address, limit, offset) {
+async function getTransactionsV3(id, currency, address, limit, offset) {
   const { result: txs } = await request('getTransactions', {
     id,
     currency,
@@ -248,9 +282,9 @@ async function getTransactions(id, currency, address, limit, offset) {
   });
 }
 
-async function getTransactionsV4(id) {
+async function getTransactions({ ids }) {
   const data = await request('getTransactions', {
-    id,
+    id: ids,
     limit: 100,
   });
   if (!data.result) {
@@ -285,12 +319,14 @@ async function getTransactionsV4(id) {
 }
 
 export default {
-  getPairsParams,
+  getPairsParamsV3,
+  estimateV3,
   estimate,
-  estimateV4,
+  validateAddressV3,
   validateAddress,
+  createTransactionV3,
   createTransaction,
-  getTransaction,
+  getTransactionV3,
+  getTransactionsV3,
   getTransactions,
-  getTransactionsV4,
 };

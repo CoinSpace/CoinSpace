@@ -5,7 +5,7 @@ import cryptoDB from '@coinspace/crypto-db';
 import {
   getUserId,
   normalizeNumber,
-} from './utils.js';
+} from '../utils.js';
 
 const { CHANGENOW_API_KEY } = process.env;
 

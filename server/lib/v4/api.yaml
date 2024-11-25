@@ -240,21 +240,22 @@ paths:
                   - address
         default:
           $ref: '#/components/responses/GeneralError'
-  /exchange/changelly/estimate:
+  /exchange/{exchangeName}/estimate:
     get:
-      x-eov-operation-id: changellyEstimate
+      x-eov-operation-id: exchangeEstimate
       x-eov-operation-handler: handlers
-      description: Estimate Changelly rate
+      description: Estimate exchange rate
       parameters:
         - $ref: '#/components/parameters/deviceId'
         - $ref: '#/components/parameters/cryptoIdFrom'
         - $ref: '#/components/parameters/cryptoIdTo'
         - $ref: '#/components/parameters/amount'
+        - $ref: '#/components/parameters/exchangeName'
       security:
         - deviceSignature: []
       responses:
         '200':
-          description: Changelly estimation
+          description: Exchange estimation
           content:
             application/json:
               schema:
@@ -271,13 +272,14 @@ paths:
                     type: string
         default:
           $ref: '#/components/responses/GeneralError'
-  /exchange/changelly/transaction:
+  /exchange/{exchangeName}/transaction:
     post:
-      x-eov-operation-id: changellyCreateTransaction
+      x-eov-operation-id: exchangeCreateTransaction
       x-eov-operation-handler: handlers
-      description: Create Changelly transaction
+      description: Create exchange transaction
       parameters:
         - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/exchangeName'
       requestBody:
         required: true
         content:
@@ -307,7 +309,7 @@ paths:
         - deviceSignature: []
       responses:
         '200':
-          description: Changelly transaction
+          description: Exchange transaction
           content:
             application/json:
               schema:
@@ -328,19 +330,20 @@ paths:
                   - depositAddress
         default:
           $ref: '#/components/responses/GeneralError'
-  /exchange/changelly/transactions:
+  /exchange/{exchangeName}/transactions:
     get:
-      x-eov-operation-id: changellyGetTransactions
+      x-eov-operation-id: exchangeGetTransactions
       x-eov-operation-handler: handlers
-      description: Get Changelly transactions
+      description: Get exchange transactions
       parameters:
         - $ref: '#/components/parameters/deviceId'
         - $ref: '#/components/parameters/transactionIds'
+        - $ref: '#/components/parameters/exchangeName'
       security:
         - deviceSignature: []
       responses:
         '200':
-          description: Changelly transactions
+          description: Exchange transactions
           content:
             application/json:
               schema:
@@ -350,9 +353,9 @@ paths:
                   $ref: '#/components/schemas/ExchangeTransaction'
         default:
           $ref: '#/components/responses/GeneralError'
-  /exchange/changelly/validate:
+  /exchange/{exchangeName}/validate:
     get:
-      x-eov-operation-id: changellyValidateAddress
+      x-eov-operation-id: exchangeValidateAddress
       x-eov-operation-handler: handlers
       description: Validate crypto address
       parameters:
@@ -360,148 +363,12 @@ paths:
         - $ref: '#/components/parameters/cryptoId'
         - $ref: '#/components/parameters/address'
         - $ref: '#/components/parameters/extraId'
+        - $ref: '#/components/parameters/exchangeName'
       security:
         - deviceSignature: []
       responses:
         '200':
-          description: Changelly address validation
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: false
-                properties:
-                  isValid:
-                    type: boolean
-                required:
-                  - isValid
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /exchange/changenow/estimate:
-    get:
-      x-eov-operation-id: changenowEstimate
-      x-eov-operation-handler: handlers
-      description: Estimate ChangeNOW rate
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-        - $ref: '#/components/parameters/cryptoIdFrom'
-        - $ref: '#/components/parameters/cryptoIdTo'
-        - $ref: '#/components/parameters/amount'
-      security:
-        - deviceSignature: []
-      responses:
-        '200':
-          description: ChangeNOW estimation
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: false
-                properties:
-                  rate:
-                    $ref: '#/components/schemas/NumberString'
-                  result:
-                    $ref: '#/components/schemas/NumberString'
-                  amount:
-                    $ref: '#/components/schemas/NumberString'
-                  error:
-                    type: string
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /exchange/changenow/transaction:
-    post:
-      x-eov-operation-id: changenowCreateTransaction
-      x-eov-operation-handler: handlers
-      description: Create ChangeNOW transaction
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              additionalProperties: false
-              properties:
-                from:
-                  $ref: '#/components/schemas/CryptoId'
-                to:
-                  $ref: '#/components/schemas/CryptoId'
-                amount:
-                  $ref: '#/components/schemas/NumberString'
-                address:
-                  $ref: '#/components/schemas/AnyCryptoAddress'
-                extraId:
-                  $ref: '#/components/schemas/NullableString256'
-                refundAddress:
-                  $ref: '#/components/schemas/NullableCryptoAddress'
-              required:
-                - from
-                - to
-                - amount
-                - address
-      security:
-        - deviceSignature: []
-      responses:
-        '200':
-          description: ChangeNOW transaction
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: false
-                properties:
-                  id:
-                    $ref: '#/components/schemas/AnyString256'
-                  depositAmount:
-                    $ref: '#/components/schemas/NumberString'
-                  depositAddress:
-                    $ref: '#/components/schemas/AnyCryptoAddress'
-                  extraId:
-                    $ref: '#/components/schemas/NullableString256'
-                required:
-                  - id
-                  - depositAmount
-                  - depositAddress
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /exchange/changenow/transactions:
-    get:
-      x-eov-operation-id: changenowGetTransactions
-      x-eov-operation-handler: handlers
-      description: Get ChangeNOW transactions
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-        - $ref: '#/components/parameters/transactionIds'
-      security:
-        - deviceSignature: []
-      responses:
-        '200':
-          description: ChangeNOW transactions
-          content:
-            application/json:
-              schema:
-                type: array
-                maxItems: 100
-                items:
-                  $ref: '#/components/schemas/ExchangeTransaction'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /exchange/changenow/validate:
-    get:
-      x-eov-operation-id: changenowValidateAddress
-      x-eov-operation-handler: handlers
-      description: Validate crypto address
-      parameters:
-        - $ref: '#/components/parameters/deviceId'
-        - $ref: '#/components/parameters/cryptoId'
-        - $ref: '#/components/parameters/address'
-        - $ref: '#/components/parameters/extraId'
-      security:
-        - deviceSignature: []
-      responses:
-        '200':
-          description: ChangeNOW address validation
+          description: Exchange address validation
           content:
             application/json:
               schema:
@@ -1185,6 +1052,10 @@ components:
       type: string
       pattern: ^.+\..+$
       maxLength: 256
+    ExchangeName:
+      type: string
+      pattern: ^[a-z0-9-]+$
+      maxLength: 64
     ExchangeTransaction:
       type: object
       additionalProperties: false
@@ -1595,6 +1466,13 @@ components:
         $ref: '#/components/schemas/Distribution'
       required: true
       description: App distribution
+    exchangeName:
+      description: Exchange name
+      in: path
+      name: exchangeName
+      schema:
+        $ref: '#/components/schemas/ExchangeName'
+      required: true
     extraId:
       in: query
       name: extra
