@@ -89,7 +89,7 @@ export default class Exchanges {
     if (filtered.some((item) => item.reason instanceof ExchangeBigAmountError)) {
       throw filtered
         .filter((item) => item.reason instanceof ExchangeBigAmountError)
-        .reduce((prev, curr) => prev?.reason?.amount?.value < curr?.reason?.amount?.value ? prev : curr).reason;
+        .reduce((prev, curr) => prev?.reason?.amount?.value > curr?.reason?.amount?.value ? prev : curr).reason;
     }
     if (filtered.some((item) => item.reason instanceof ExchangeAmountError)) {
       throw new ExchangeAmountError();
