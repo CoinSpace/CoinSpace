@@ -16,9 +16,17 @@ export default {
       type: String,
       default: '',
     },
+    error: {
+      type: [Boolean, String],
+      default: false,
+    },
     info: {
       type: Boolean,
       default: false,
+    },
+    writable: {
+      type: Boolean,
+      default: true,
     },
   },
 };
@@ -39,11 +47,17 @@ export default {
       {{ value }}
       <input
         class="&__input"
+        :class="{
+          '&__input--writable': writable,
+        }"
         type="text"
         readonly
       >
     </div>
-    <div class="&__icon-after">
+    <div
+      v-if="writable"
+      class="&__icon-after"
+    >
       <TrailingIcon />
     </div>
   </CsFormElement>
@@ -58,6 +72,11 @@ export default {
 
     &__input {
       @include transparent-stretch;
+      cursor: default;
+
+      &--writable {
+        cursor: pointer;
+      }
     }
 
     &__icon-before,

@@ -4,9 +4,9 @@ import CsTransactionConfirm from '../../../components/CsTransactionConfirm.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 
 import { walletSeed } from '../../../lib/mixins.js';
-import ChangellyExchange, {
+import BaseExchange, {
   InternalExchangeError,
-} from '../../../lib/account/ChangellyExchange.js';
+} from '../../../lib/exchanges/BaseExchange.js';
 
 import * as EOSErrors from '@coinspace/cs-eos-wallet/errors';
 
@@ -27,7 +27,8 @@ export default {
       this.isLoading = true;
       await this.walletSeed(async (walletSeed) => {
         try {
-          const exchange = await this.$account.exchange.createExchange({
+          const exchange = await this.$account.exchanges.createExchange({
+            provider: this.storage.provider,
             from: this.$wallet.crypto._id,
             to: this.storage.to.crypto._id,
             amount: this.storage.amount,
@@ -35,7 +36,7 @@ export default {
               ? this.$account.wallet(this.storage.to.crypto._id).address
               : this.storage.address,
             extraId: (this.storage.address !== 'your wallet'
-              && ChangellyExchange.EXTRA_ID.includes(this.storage.to.crypto._id))
+              && BaseExchange.EXTRA_ID.includes(this.storage.to.crypto._id))
               ? this.storage.extraId : undefined,
             refundAddress: this.$wallet.address,
           });
@@ -67,7 +68,8 @@ export default {
           const id = await this.$wallet.createTransaction(options, walletSeed);
           this.$account.emit('update');
           this.updateStorage({ status: true });
-          await this.$account.exchange.saveExchange({
+          await this.$account.exchanges.saveExchange({
+            provider: this.storage.provider,
             from: this.$wallet.crypto._id,
             to: this.storage.to.crypto._id,
             transactionId: id,
@@ -119,7 +121,7 @@ export default {
   <MainLayout :title="$t('Confirm exchange')">
     <CsTransactionConfirm
       :transaction="storage"
-      powered="changelly"
+      :powered="storage.provider"
       :isLoading="isLoading"
       @confirm="confirm"
     />

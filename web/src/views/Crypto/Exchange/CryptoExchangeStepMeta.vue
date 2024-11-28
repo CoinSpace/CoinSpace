@@ -38,7 +38,7 @@ export default {
       this.isLoading = true;
       this.error = undefined;
       try {
-        await this.$account.exchange.validateAddress({
+        await this.$account.exchanges.validateAddress({
           to: this.storage.to.crypto._id,
           address: this.storage.address,
           extraId: this.extraId,

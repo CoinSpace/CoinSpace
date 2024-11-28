@@ -2,7 +2,7 @@
 import * as MoneroSymbols from '@coinspace/cs-monero-wallet/symbols';
 import { Transaction, errors } from '@coinspace/cs-common';
 
-import ChangellyExchange from '../../../lib/account/ChangellyExchange.js';
+import BaseExchange from '../../../lib/exchanges/BaseExchange.js';
 import { cryptoToFiat } from '../../../lib/helpers.js';
 import { onShowOnHide } from '../../../lib/mixins.js';
 
@@ -33,7 +33,7 @@ export default {
   async onShow() {
     if (this.transaction.exchange) {
       try {
-        this.transaction = await this.$account.exchange.reexchangifyTransaction(this.transaction);
+        this.transaction = await this.$account.exchanges.reexchangifyTransaction(this.transaction);
       } catch (err) {
         console.error(err);
       }
@@ -80,17 +80,17 @@ export default {
       if (!this.transaction.exchange) return;
       const { status } = this.transaction.exchange;
       let text;
-      if (status === ChangellyExchange.STATUS_PENDING) {
+      if (status === BaseExchange.STATUS_PENDING) {
         text = this.$t('Awaiting transaction confirmation.');
-      } else if (status === ChangellyExchange.STATUS_EXCHANGING) {
+      } else if (status === BaseExchange.STATUS_EXCHANGING) {
         text = this.$t('Deposit has been received. Awaiting exchange.');
-      } else if (status === ChangellyExchange.STATUS_REQUIRED_TO_ACCEPT) {
+      } else if (status === BaseExchange.STATUS_REQUIRED_TO_ACCEPT) {
         text = this.$t('Please accept transaction to receive funds.');
-      } else if (status === ChangellyExchange.STATUS_HOLD) {
+      } else if (status === BaseExchange.STATUS_HOLD) {
         text = this.$t('Please contact Changelly to pass KYC.');
-      } else if (status === ChangellyExchange.STATUS_REFUNDED) {
+      } else if (status === BaseExchange.STATUS_REFUNDED) {
         text = this.$t('Exchange failed and funds were refunded to your wallet.');
-      } else if (status === ChangellyExchange.STATUS_FAILED) {
+      } else if (status === BaseExchange.STATUS_FAILED) {
         text = this.$t('Exchange failed. Please contact Changelly.');
       }
       return {
@@ -99,11 +99,11 @@ export default {
           `${this.transaction.exchange.amountTo} ${this.transaction.exchange.cryptoTo.symbol}`,
         status: text,
         isStatusDanger: [
-          ChangellyExchange.STATUS_FAILED,
-          ChangellyExchange.STATUS_REFUNDED,
-          ChangellyExchange.STATUS_HOLD,
+          BaseExchange.STATUS_FAILED,
+          BaseExchange.STATUS_REFUNDED,
+          BaseExchange.STATUS_HOLD,
         ].includes(status),
-        hasAcceptButton: status === ChangellyExchange.STATUS_REQUIRED_TO_ACCEPT,
+        hasAcceptButton: status === BaseExchange.STATUS_REQUIRED_TO_ACCEPT,
       };
     },
   },
@@ -238,7 +238,7 @@ export default {
         >
           {{ $t('Contact Changelly') }}
         </CsButton>
-        <CsPoweredBy powered="changelly" />
+        <CsPoweredBy :powered="transaction.exchange.provider" />
       </template>
       <CsButton
         v-else-if="transaction.rbf"

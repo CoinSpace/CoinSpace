@@ -1,4 +1,4 @@
-import ExchangeStorage from './ExchangeStorage.js';
+import ExchangeStorage from '../storage/ExchangeStorage.js';
 import {
   Amount,
   errors,
@@ -8,25 +8,47 @@ import { areAddressesEqual as areTonAddressesEqual } from '@coinspace/cs-toncoin
 
 export class ExchangeDisabledError extends Error {
   name = 'ExchangeDisabledError';
+  constructor(message, options) {
+    super(message, options);
+    this.provider = options?.provider;
+  }
 }
 
 export class InternalExchangeError extends Error {
   name = 'InternalExchangeError';
+  constructor(message, options) {
+    super(message, options);
+    this.provider = options?.provider;
+  }
 }
 
 export class ExchangeAmountError extends errors.AmountError {
   name = 'ExchangeAmountError';
+  constructor(message, options) {
+    super(message, options);
+    this.provider = options?.provider;
+  }
 }
 
 export class ExchangeSmallAmountError extends errors.SmallAmountError {
   name = 'ExchangeSmallAmountError';
+  constructor(message, options) {
+    super(message, options);
+    this.provider = options?.provider;
+  }
 }
 
 export class ExchangeBigAmountError extends errors.BigAmountError {
   name = 'ExchangeBigAmountError';
+  constructor(message, options) {
+    super(message, options);
+    this.provider = options?.provider;
+  }
 }
 
-export default class ChangellyExchange {
+export default class BaseExchange {
+  #id;
+  #name;
   #request;
   #account;
   #storage;
@@ -52,14 +74,27 @@ export default class ChangellyExchange {
     'iost@iost',
   ];
 
-  constructor({ request, account }) {
+
+  get id() {
+    return this.#id;
+  }
+
+  get name() {
+    return this.#name;
+  }
+
+  constructor({ request, account, id, name }) {
     if (!request) throw new TypeError('request is required');
     if (!account) throw new TypeError('account is required');
+    if (!id) throw new TypeError('id is required');
+    if (!name) throw new TypeError('name is required');
+    this.#id = id;
+    this.#name = name;
     this.#request = request;
     this.#account = account;
     this.#storage = new ExchangeStorage({
       request,
-      name: 'changelly',
+      name: this.#id,
       key: account.clientStorage.getDetailsKey(),
     });
   }
@@ -69,6 +104,14 @@ export default class ChangellyExchange {
   }
 
   async loadExchanges() {
+    try {
+      return this.#loadExchanges();
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async #loadExchanges() {
     this.#exchanges = this.#storage.get('exchanges');
     const ids = this.#exchanges
       .filter((exchange) => {
@@ -85,7 +128,7 @@ export default class ChangellyExchange {
       .map((exchange) => exchange.id);
     if (ids.length) {
       const updates = await this.#request({
-        url: '/api/v4/exchange/changelly/transactions',
+        url: `/api/v4/exchange/${this.#id}/transactions`,
         method: 'get',
         params: {
           transactions: ids.join(','),
@@ -109,7 +152,7 @@ export default class ChangellyExchange {
 
   async loadExchange(id) {
     const [update] = await this.#request({
-      url: '/api/v4/exchange/changelly/transactions',
+      url: `/api/v4/exchange/${this.#id}/transactions`,
       method: 'get',
       params: {
         transactions: id,
@@ -129,12 +172,12 @@ export default class ChangellyExchange {
 
   async estimateExchange({ from, to, amount }) {
     if (amount.value <= 0n) {
-      throw new errors.AmountError('Invalid amount');
+      throw new ExchangeAmountError('Invalid amount', { provider: this.#id });
     }
     let estimation;
     try {
       estimation = await this.#request({
-        url: '/api/v4/exchange/changelly/estimate',
+        url: `/api/v4/exchange/${this.#id}/estimate`,
         method: 'get',
         params: {
           from,
@@ -145,28 +188,31 @@ export default class ChangellyExchange {
       });
     } catch (err) {
       if (err instanceof errors.NodeError) {
-        throw new InternalExchangeError('Unable to estimate', { cause: err });
+        throw new InternalExchangeError('Unable to estimate', { cause: err, provider: this.#id });
       }
       throw err;
     }
     const cryptoFrom = this.#account.cryptoDB.get(from);
     if (estimation.error) {
       if (estimation.error === 'AmountError') {
-        throw new ExchangeAmountError('Invalid amount');
+        throw new ExchangeAmountError('Invalid amount', { provider: this.#id });
       }
       if (estimation.error === 'SmallAmountError') {
-        throw new ExchangeSmallAmountError(Amount.fromString(estimation.amount || '0', cryptoFrom.decimals));
+        throw new ExchangeSmallAmountError(
+          Amount.fromString(estimation.amount || '0', cryptoFrom.decimals), { provider: this.#id });
       }
       if (estimation.error === 'BigAmountError') {
-        throw new ExchangeBigAmountError(Amount.fromString(estimation.amount || '0', cryptoFrom.decimals));
+        throw new ExchangeBigAmountError(
+          Amount.fromString(estimation.amount || '0', cryptoFrom.decimals), { provider: this.#id });
       }
       if (estimation.error === 'ExchangeDisabled') {
-        throw new ExchangeDisabledError();
+        throw new ExchangeDisabledError('Exchange disabled', { provider: this.#id });
       }
-      throw new InternalExchangeError(estimation.error);
+      throw new InternalExchangeError(estimation.error, { provider: this.#id });
     }
     const cryptoTo = this.#account.cryptoDB.get(to);
     return {
+      provider: this.#id,
       rate: Amount.fromString(estimation.rate, cryptoTo.decimals),
       result: Amount.fromString(estimation.result, cryptoTo.decimals),
     };
@@ -175,7 +221,7 @@ export default class ChangellyExchange {
   async createExchange({ from, to, amount, address, extraId, refundAddress }) {
     try {
       const exchange = await this.#request({
-        url: '/api/v4/exchange/changelly/transaction',
+        url: `/api/v4/exchange/${this.#id}/transaction`,
         method: 'post',
         data: {
           from,
@@ -190,7 +236,7 @@ export default class ChangellyExchange {
       return exchange;
     } catch (err) {
       if (err instanceof errors.NodeError) {
-        throw new InternalExchangeError('Unable to create exchange', { cause: err });
+        throw new InternalExchangeError('Unable to create exchange', { cause: err, provider: this.#id });
       }
       throw err;
     }
@@ -217,7 +263,7 @@ export default class ChangellyExchange {
     }
     try {
       const data = await this.#request({
-        url: '/api/v4/exchange/changelly/validate',
+        url: `/api/v4/exchange/${this.#id}/validate`,
         method: 'get',
         params: {
           crypto: to,
@@ -244,6 +290,7 @@ export default class ChangellyExchange {
       originalStatus: exchange.status,
       to: exchange.internal === true ? 'your wallet' : exchange.payoutAddress,
       payoutHash: exchange?.payoutHash?.toLowerCase(),
+      provider: this.#id,
     };
     if (transaction.incoming) {
       const cryptoFrom = this.#account.cryptoDB.get(exchange.cryptoFrom);
@@ -299,26 +346,26 @@ export default class ChangellyExchange {
     switch (exchange.status) {
       case 'waiting':
       case 'confirming':
-        return ChangellyExchange.STATUS_PENDING;
+        return BaseExchange.STATUS_PENDING;
       case 'exchanging':
       case 'sending':
-        return ChangellyExchange.STATUS_EXCHANGING;
+        return BaseExchange.STATUS_EXCHANGING;
       case 'finished':
         if (this.#isRequiredToAccept(exchange)) {
-          return ChangellyExchange.STATUS_REQUIRED_TO_ACCEPT;
+          return BaseExchange.STATUS_REQUIRED_TO_ACCEPT;
         } else {
-          return ChangellyExchange.STATUS_SUCCESS;
+          return BaseExchange.STATUS_SUCCESS;
         }
       case 'failed':
       case 'overdue':
       case 'expired':
-        return ChangellyExchange.STATUS_FAILED;
+        return BaseExchange.STATUS_FAILED;
       case 'refunded':
-        return ChangellyExchange.STATUS_REFUNDED;
+        return BaseExchange.STATUS_REFUNDED;
       case 'hold':
-        return ChangellyExchange.STATUS_HOLD;
+        return BaseExchange.STATUS_HOLD;
       default:
-        return ChangellyExchange.STATUS_FAILED;
+        return BaseExchange.STATUS_FAILED;
     }
   }
 

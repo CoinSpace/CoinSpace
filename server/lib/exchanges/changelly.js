@@ -101,7 +101,7 @@ async function estimateV3(from, to, value) {
   };
 }
 
-async function estimate({ from, to, amount }) {
+export async function estimate({ from, to, amount }) {
   const fromCrypto = getCrypto(from);
   const toCrypto = getCrypto(to);
 
@@ -169,7 +169,7 @@ async function validateAddressV3(address, id, extraId) {
   };
 }
 
-async function validateAddress({ cryptoId, address, extraId }) {
+export async function validateAddress({ cryptoId, address, extraId }) {
   const item = getCrypto(cryptoId);
   const { result: data } = await request('validateAddress', {
     address,
@@ -203,7 +203,7 @@ async function createTransactionV3(from, to, amountFrom, address, refundAddress,
   };
 }
 
-async function createTransaction({ from, to, amount, address, extraId, refundAddress }) {
+export async function createTransaction({ from, to, amount, address, extraId, refundAddress }) {
   const fromCrypto = getCrypto(from);
   const toCrypto = getCrypto(to);
   const data = await request('createTransaction', {
@@ -282,7 +282,7 @@ async function getTransactionsV3(id, currency, address, limit, offset) {
   });
 }
 
-async function getTransactions({ ids }) {
+export async function getTransactions({ ids }) {
   const data = await request('getTransactions', {
     id: ids,
     limit: 100,
@@ -321,12 +321,8 @@ async function getTransactions({ ids }) {
 export default {
   getPairsParamsV3,
   estimateV3,
-  estimate,
   validateAddressV3,
-  validateAddress,
   createTransactionV3,
-  createTransaction,
   getTransactionV3,
   getTransactionsV3,
-  getTransactions,
 };

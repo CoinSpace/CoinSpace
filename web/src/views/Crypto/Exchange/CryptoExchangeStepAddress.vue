@@ -1,5 +1,5 @@
 <script>
-import ChangellyExchange from '../../../lib/account/ChangellyExchange.js';
+import BaseExchange from '../../../lib/exchanges/BaseExchange.js';
 import { errors } from '@coinspace/cs-common';
 
 import CsButton from '../../../components/CsButton.vue';
@@ -114,17 +114,18 @@ export default {
         this.isLoading = true;
         this.error = undefined;
         try {
-          await this.$account.exchange.validateAddress({
+          await this.$account.exchanges.validateAddress({
             to: this.storage.to.crypto._id,
             address: this.address,
             extraId: this.extraId,
+            provider: this.storage.provider,
           });
           this.updateStorage({
             address: this.address,
             alias: this.alias,
             extraId: this.extraId,
           });
-          if (ChangellyExchange.EXTRA_ID.includes(this.storage.to.crypto._id) && this.extraId === undefined) {
+          if (BaseExchange.EXTRA_ID.includes(this.storage.to.crypto._id) && this.extraId === undefined) {
             this.next('meta');
           } else {
             this.next('confirm');
@@ -250,7 +251,7 @@ export default {
       >
         {{ $t('Continue') }}
       </CsButton>
-      <CsPoweredBy powered="changelly" />
+      <CsPoweredBy :powered="storage.provider" />
     </CsButtonGroup>
   </MainLayout>
 </template>

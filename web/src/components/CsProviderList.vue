@@ -3,6 +3,8 @@ import CsButton from './CsButton.vue';
 
 import BTCDirectIcon from '../assets/svg/btcDirect.svg';
 import BitnovoIcon from '../assets/svg/bitnovo.svg';
+import ChangeNowIcon from '../assets/svg/changenow.svg';
+import ChangellyIcon from '../assets/svg/changelly.svg';
 import GuardarianIcon from '../assets/svg/guardarian.svg';
 import MoonpayIcon from '../assets/svg/moonpay.svg';
 import OnramperIcon from '../assets/svg/onramper.svg';
@@ -11,6 +13,8 @@ import PaybisIcon from '../assets/svg/paybis.svg';
 export default {
   components: {
     CsButton,
+    changenow: ChangeNowIcon,
+    changelly: ChangellyIcon,
     btcdirect: BTCDirectIcon,
     bitnovo: BitnovoIcon,
     guardarian: GuardarianIcon,
@@ -24,15 +28,12 @@ export default {
       required: true,
     },
     type: {
-      // buy or sell
+      // buy, sell, or select
       type: String,
       required: true,
     },
   },
-  data() {
-    return {
-    };
-  },
+  emits: ['click'],
   computed: {
     buttonType() {
       if (this.type === 'buy') {
@@ -40,6 +41,9 @@ export default {
       }
       if (this.type === 'sell') {
         return 'danger-light';
+      }
+      if (this.type === 'select') {
+        return 'primary-light';
       }
       return '';
     },
@@ -49,6 +53,9 @@ export default {
       }
       if (this.type === 'sell') {
         return this.$t('Sell');
+      }
+      if (this.type === 'select') {
+        return this.$t('Select');
       }
       return '';
     },
@@ -85,7 +92,7 @@ export default {
         :type="buttonType"
         class="&__action"
         small
-        @click="$safeOpen(item.url)"
+        @click="() => $emit('click', item)"
       >
         {{ buttonLabel }}
       </CsButton>

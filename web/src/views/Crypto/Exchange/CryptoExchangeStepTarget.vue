@@ -47,7 +47,7 @@ export default {
     const cryptos = this.$account.cryptoDB.all
       .filter((item) => {
         return item.deprecated !== true
-          && item.changelly?.ticker
+          && this.$account.exchanges.isSupported(this.$wallet.crypto, item)
           && item._id !== this.$wallet.crypto._id;
       })
       .map((crypto) => {

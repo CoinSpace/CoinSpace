@@ -1,8 +1,10 @@
 <script>
+import ChangeNowIcon from '../assets/svg/changenow.svg';
 import ChangellyIcon from '../assets/svg/changelly.svg';
 
 export default {
   components: {
+    ChangeNowIcon,
     ChangellyIcon,
   },
   props: {
@@ -21,10 +23,16 @@ export default {
       if (this.powered === 'changelly') {
         return 'Changelly';
       }
+      if (this.powered === 'changenow') {
+        return 'ChangeNOW';
+      }
     },
     logo() {
       if (this.powered === 'changelly') {
         return 'ChangellyIcon';
+      }
+      if (this.powered === 'changenow') {
+        return 'ChangeNowIcon';
       }
     },
   },

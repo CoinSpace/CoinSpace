@@ -9,7 +9,7 @@ import {
   ExchangeDisabledError,
   ExchangeSmallAmountError,
   InternalExchangeError,
-} from '../../../lib/account/ChangellyExchange.js';
+} from '../../../lib/exchanges/BaseExchange.js';
 import {
   cryptoSubtitle,
   cryptoToFiat,
@@ -21,10 +21,12 @@ import CsCryptoLogo from '../../../components/CsCryptoLogo.vue';
 import CsFormAmountInput from '../../../components/CsForm/CsFormAmountInput.vue';
 import CsFormDropdown from '../../../components/CsForm/CsFormDropdown.vue';
 import CsFormGroup from '../../../components/CsForm/CsFormGroup.vue';
-import CsPoweredBy from '../../../components/CsPoweredBy.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 import { onShowOnHide } from '../../../lib/mixins';
+
+import ChangeNowIcon from '../../../assets/svg/changenow.svg';
+import ChangellyIcon from '../../../assets/svg/changelly.svg';
 
 import debounce from 'p-debounce';
 
@@ -37,7 +39,8 @@ export default {
     CsCryptoLogo,
     CsFormDropdown,
     CsFormGroup,
-    CsPoweredBy,
+    changenow: ChangeNowIcon,
+    changelly: ChangellyIcon,
   },
   extends: CsStep,
   mixins: [onShowOnHide],
@@ -49,8 +52,6 @@ export default {
       subtitle: cryptoSubtitle(this.$wallet),
       amount: undefined,
       errors: {},
-      rate: undefined,
-      result: undefined,
       priceTo: undefined,
     };
   },
@@ -66,6 +67,7 @@ export default {
       pricePlatform: await this.$account.market.getPrice(this.$wallet.platform._id, this.$currency),
       priceUSD: this.$wallet.isCsFeeSupported ?
         await this.$account.market.getPrice(this.$wallet.crypto._id, 'USD') : undefined,
+      provider: this.storage.provider || 'changelly',
     });
     this.isLoading = false;
   },
@@ -77,10 +79,20 @@ export default {
       if (this.priceTo === undefined) {
         return;
       }
-      if (this.result === undefined) {
+      if (this.estimation?.result === undefined) {
         return '0';
       }
-      return cryptoToFiat(this.result, this.priceTo);
+      return cryptoToFiat(this.estimation.result, this.priceTo);
+    },
+    providerName() {
+      return this.storage.provider
+        ? this.$account.exchanges.getProviderName(this.storage.provider)
+        : '–';
+    },
+    estimation() {
+      if (this.storage.provider && this.storage.estimations) {
+        return this.storage.estimations.find((item) => item.provider === this.storage.provider);
+      }
     },
   },
   watch: {
@@ -99,8 +111,10 @@ export default {
   },
   methods: {
     clean() {
-      this.rate = undefined;
-      this.result = undefined;
+      this.updateStorage({
+        estimations: [],
+        provider: 'changelly',
+      });
       this.errors = {};
     },
     async estimate() {
@@ -111,7 +125,7 @@ export default {
       this.isEstimating = true;
       this.errors = {};
       try {
-        if (!this.$wallet.crypto.changelly) throw new ExchangeDisabledError();
+        if (!this.$account.exchanges.isSupported(this.$wallet.crypto)) throw new ExchangeDisabledError();
         if (this.$wallet.isFeeRatesSupported) await this.$wallet.loadFeeRates();
         await this.$wallet.validateAmount({
           address: this.$wallet.dummyExchangeDepositAddress,
@@ -122,13 +136,15 @@ export default {
           amount: this.amount,
           price: this.storage.priceUSD,
         });
-        const estimation = await this.$account.exchange.estimateExchange({
+        const estimations = await this.$account.exchanges.estimateExchange({
           from: this.$wallet.crypto._id,
           to: this.storage.to.crypto._id,
           amount: this.amount,
         });
-        this.rate = estimation.rate;
-        this.result = estimation.result;
+        this.updateStorage({
+          estimations,
+          provider: estimations[0].provider,
+        });
       } catch (err) {
         this.clean();
         this.handleError(err);
@@ -145,7 +161,9 @@ export default {
       this.isLoading = true;
       this.errors = {};
       try {
-        if (!this.$wallet.crypto.changelly) throw new ExchangeDisabledError();
+        if (!this.$account.exchanges.isSupported(this.$wallet.crypto, this.to.crypto)) {
+          throw new ExchangeDisabledError();
+        }
         if (this.$wallet.isFeeRatesSupported) await this.$wallet.loadFeeRates();
         await this.$wallet.validateAmount({
           address: this.$wallet.dummyExchangeDepositAddress,
@@ -156,7 +174,8 @@ export default {
           amount,
           price: this.storage.priceUSD,
         });
-        const estimation = await this.$account.exchange.estimateExchange({
+        const estimation = await this.$account.exchanges.estimateExchange({
+          provider: this.storage.provider,
           from: this.$wallet.crypto._id,
           to: this.storage.to.crypto._id,
           amount,
@@ -230,11 +249,13 @@ export default {
         return;
       }
       if (err instanceof ExchangeDisabledError) {
-        this.errors['amount'] = this.$t('Exchange is currently unavailable for this pair');
+        this.updateStorage({ provider: null });
+        this.errors['provider'] = this.$t('There are currently no providers available');
         return;
       }
       if (err instanceof InternalExchangeError) {
-        this.errors['amount'] = this.$t('Exchange is unavailable');
+        this.updateStorage({ provider: null });
+        this.errors['provider'] = this.$t('There are currently no providers available');
         return;
       }
       if (err instanceof errors.MinimumReserveDestinationError) {
@@ -310,20 +331,34 @@ export default {
           />
         </template>
       </CsFormDropdown>
+      <CsFormDropdown
+        :label="$t('Provider')"
+        :error="errors['provider']"
+        :value="providerName"
+        :writable="storage.estimations?.length > 1"
+        @click="(storage.estimations?.length > 1 && next('provider'))"
+      >
+        <template
+          v-if="storage.provider"
+          #before
+        >
+          <Component :is="storage.provider" />
+        </template>
+      </CsFormDropdown>
       <div
-        v-if="to && result"
+        v-if="to && estimation"
         class="&__info"
       >
-        <div>{{ result }} {{ to.crypto.symbol }}</div>
+        <div>{{ estimation.result }} {{ to.crypto.symbol }}</div>
         <div v-if="amountConverted">
           {{ $c(amountConverted) }}
         </div>
       </div>
       <div
-        v-if="to && rate"
+        v-if="to && estimation"
         class="&__info"
       >
-        1 {{ $wallet.crypto.symbol }} ≈ {{ rate }} {{ to.crypto.symbol }}
+        1 {{ $wallet.crypto.symbol }} ≈ {{ estimation.rate }} {{ to.crypto.symbol }}
       </div>
     </CsFormGroup>
 
@@ -335,7 +370,6 @@ export default {
       >
         {{ $t('Continue') }}
       </CsButton>
-      <CsPoweredBy powered="changelly" />
     </CsButtonGroup>
   </MainLayout>
 </template>

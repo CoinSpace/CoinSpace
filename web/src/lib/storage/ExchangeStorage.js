@@ -1,4 +1,4 @@
-import ServerStorage from '../storage/ServerStorage.js';
+import ServerStorage from './ServerStorage.js';
 
 export default class ExchangeStorage extends ServerStorage {
   get defaults() {

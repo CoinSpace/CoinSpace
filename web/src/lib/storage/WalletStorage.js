@@ -1,4 +1,4 @@
-import ServerStorage from '../storage/ServerStorage.js';
+import ServerStorage from './ServerStorage.js';
 import { chunks } from '../helpers.js';
 
 export default class WalletStorage extends ServerStorage {

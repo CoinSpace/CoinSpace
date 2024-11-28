@@ -27,7 +27,7 @@ import SettingsWalletConnectView from '../../views/Settings/WalletConnect/Wallet
 
 import NotFound from '../../views/NotFound.vue';
 
-import ChangellyExchange from '../../lib/account/ChangellyExchange.js';
+import BaseExchange from '../../lib/exchanges/BaseExchange.js';
 import { parseCryptoURI } from '../../lib/cryptoURI.js';
 import schemes from '../../lib/schemes.js';
 
@@ -153,7 +153,7 @@ const app = [
               query: {
                 address: parsed.address,
                 amount: parsed.amount,
-                destinationTag: ChangellyExchange.EXTRA_ID.includes(crypto._id) ? parsed.destinationTag : undefined,
+                destinationTag: BaseExchange.EXTRA_ID.includes(crypto._id) ? parsed.destinationTag : undefined,
               },
               params: {
                 cryptoId: crypto._id,

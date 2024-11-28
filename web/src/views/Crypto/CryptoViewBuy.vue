@@ -61,6 +61,7 @@ export default {
         v-if="providers.length"
         :items="providers"
         type="buy"
+        @click="(item) => $safeOpen(item.url)"
       />
       <div
         v-else

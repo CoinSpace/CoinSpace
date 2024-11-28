@@ -1,5 +1,5 @@
-import ServerStorage from '../storage/ServerStorage.js';
-import defaultCryptos from './defaultCryptos.js';
+import ServerStorage from './ServerStorage.js';
+import defaultCryptos from '../defaultCryptos.js';
 
 export default class Details extends ServerStorage {
   constructor({ request, key }) {

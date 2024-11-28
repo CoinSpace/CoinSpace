@@ -9,10 +9,10 @@ import { CsWallet, errors } from '@coinspace/cs-common';
 
 import Biometry from './Biometry.js';
 import Cache from './Cache.js';
-import ChangellyExchange from './ChangellyExchange.js';
 import ClientStorage from '../storage/ClientStorage.js';
 import CryptoDB from './CryptoDB.js';
-import Details from './Details.js';
+import Details from '../storage/Details.js';
+import Exchanges from '../exchanges/Exchanges.js';
 import Hardware from './Hardware.js';
 import Market from './Market.js';
 import Mecto from './Mecto.js';
@@ -20,8 +20,8 @@ import Ramps from './Ramps.js';
 import Request from './Request.js';
 import Seeds from './Seeds.js';
 import Settings from './Settings.js';
-import WalletStorage from './WalletStorage.js';
-import defaultCryptos from './defaultCryptos.js';
+import WalletStorage from '../storage/WalletStorage.js';
+import defaultCryptos from '../defaultCryptos.js';
 
 const BITCOIN_FAMILY = [
   'bitcoin',
@@ -161,7 +161,7 @@ export default class Account extends EventEmitter {
   #biometry;
   #hardware;
   #ramps;
-  #exchange;
+  #exchanges;
   #needToMigrateV5Balance = false;
   #walletConnect;
   #dummy = false;
@@ -206,8 +206,8 @@ export default class Account extends EventEmitter {
     return this.#ramps;
   }
 
-  get exchange() {
-    return this.#exchange;
+  get exchanges() {
+    return this.#exchanges;
   }
 
   get isCreated() {
@@ -334,11 +334,11 @@ export default class Account extends EventEmitter {
       cryptos,
       currency: this.#details.get('systemInfo').preferredCurrency,
     });
-    this.#exchange = new ChangellyExchange({
+    this.#exchanges = new Exchanges({
       request: this.request,
       account: this,
     });
-    await this.#exchange.init();
+    await this.#exchanges.init();
     this.#dummy = hex.encode(this.#clientStorage.getDetailsKey())
       === import.meta.env.VITE_DUMMY_ACCOUNT;
   }

@@ -43,26 +43,24 @@ function mapStatus(status) {
 export async function estimate({ from, to, amount }) {
   const fromCrypto = getCrypto(from);
   const toCrypto = getCrypto(to);
-
-  const { data: { minAmount } } = await changenow({
-    method: 'get',
-    url: 'exchange/min-amount',
-    params: {
-      fromCurrency: fromCrypto.changenow.ticker,
-      fromNetwork: fromCrypto.changenow.network,
-      toCurrency: toCrypto.changenow.ticker,
-      toNetwork: toCrypto.changenow.network,
-      flow: 'standard',
-    },
-  });
-  if (parseFloat(minAmount) > parseFloat(amount)) {
-    return {
-      error: 'SmallAmountError',
-      amount: normalizeNumber(minAmount, fromCrypto.decimals),
-    };
-  }
-
   try {
+    const { data: { minAmount } } = await changenow({
+      method: 'get',
+      url: 'exchange/min-amount',
+      params: {
+        fromCurrency: fromCrypto.changenow.ticker,
+        fromNetwork: fromCrypto.changenow.network,
+        toCurrency: toCrypto.changenow.ticker,
+        toNetwork: toCrypto.changenow.network,
+        flow: 'standard',
+      },
+    });
+    if (parseFloat(minAmount) > parseFloat(amount)) {
+      return {
+        error: 'SmallAmountError',
+        amount: normalizeNumber(minAmount, fromCrypto.decimals),
+      };
+    }
     const { data } = await changenow({
       method: 'get',
       url: 'exchange/estimated-amount',
@@ -87,6 +85,11 @@ export async function estimate({ from, to, amount }) {
         return {
           error: 'SmallAmountError',
           amount: normalizeNumber(err.response.data.payload.range.minAmount, fromCrypto.decimals),
+        };
+      }
+      if (err.response?.data?.error === 'pair_is_inactive') {
+        return {
+          error: 'ExchangeDisabled',
         };
       }
       throw createError(400, err.response?.data?.message);

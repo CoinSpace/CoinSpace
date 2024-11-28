@@ -61,14 +61,14 @@ export default {
       this.historyState = this.$STATE_LOADING;
       try {
         if (this.cursor === undefined) {
-          await this.$account.exchange.loadExchanges();
+          await this.$account.exchanges.loadExchanges();
         }
         const data = await this.$wallet.loadTransactions({ cursor: this.cursor });
         this.cursor = data.cursor;
         this.hasMore = data.hasMore;
         if (data.transactions && data.transactions.length) {
           this.transactions.push(
-            ...(await this.$account.exchange.exchangifyTransactions(data.transactions, this.$wallet.crypto))
+            ...(await this.$account.exchanges.exchangifyTransactions(data.transactions, this.$wallet.crypto))
           );
         }
         this.historyState = this.$STATE_LOADED;
