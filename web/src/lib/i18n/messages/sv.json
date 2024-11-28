@@ -324,7 +324,7 @@
   "slow": "långsam",
   "{crypto} is based on {platform}, which isn't in your wallet yet, so it will also be added.": "{crypto} är baserad på {platform}, som inte finns i din plånbok ännu, så den kommer också att läggas till.",
   "{decimals} decimals": "{decimals} decimaler",
-  "{exchange} error. Please try again later.": "Ändringsfel. Var vänlig prova igen senare.",
+  "{exchange} error. Please try again later.": "{exchange}-fel. Var vänlig prova igen senare.",
   "{name} node error. Please try again later.": "{name} nodfel. Var vänlig prova igen senare.",
   "{sign}{fee} {symbol} fee": "{sign}{fee} {symbol} avgift",
   "{token} already added.": "{token} har redan lagts till.",
