@@ -87,11 +87,15 @@ export default {
       } else if (status === BaseExchange.STATUS_REQUIRED_TO_ACCEPT) {
         text = this.$t('Please accept transaction to receive funds.');
       } else if (status === BaseExchange.STATUS_HOLD) {
-        text = this.$t('Please contact Changelly to pass KYC.');
+        text = this.$t('Please contact {exchange} to pass KYC.', {
+          exchange: this.$account.exchanges.getProviderName(this.transaction.exchange.provider),
+        });
       } else if (status === BaseExchange.STATUS_REFUNDED) {
         text = this.$t('Exchange failed and funds were refunded to your wallet.');
       } else if (status === BaseExchange.STATUS_FAILED) {
-        text = this.$t('Exchange failed. Please contact Changelly.');
+        text = this.$t('Exchange failed. Please contact {exchange}.', {
+          exchange: this.$account.exchanges.getProviderName(this.transaction.exchange.provider),
+        });
       }
       return {
         amount: this.transaction.incoming ?
@@ -236,7 +240,9 @@ export default {
           type="primary-light"
           @click="$safeOpen(transaction.exchange.trackUrl)"
         >
-          {{ $t('Contact Changelly') }}
+          {{ $t('Contact {exchange}', {
+            exchange: $account.exchanges.getProviderName(transaction.exchange.provider),
+          }) }}
         </CsButton>
         <CsPoweredBy :powered="transaction.exchange.provider" />
       </template>

@@ -78,7 +78,9 @@ export default {
           });
         } catch (err) {
           if (err instanceof InternalExchangeError) {
-            this.updateStorage({ status: false, message: this.$t('Changelly error. Please try again later.') });
+            this.updateStorage({ status: false, message: this.$t('{exchange} error. Please try again later.', {
+              exchange: this.$account.exchanges.getProviderName(this.storage.provider),
+            }) });
             return;
           }
           if (err instanceof EOSErrors.DestinationAccountError) {
