@@ -18,6 +18,9 @@ export default {
       if (this.powered === 'changelly') {
         return `https://changelly.com/?ref_id=${this.env.VITE_CHANGELLY_REF}`;
       }
+      if (this.powered === 'changenow') {
+        return `https://changenow.app.link/referral?link_id=${this.env.VITE_CHANGENOW_REF}`;
+      }
     },
     title() {
       if (this.powered === 'changelly') {
