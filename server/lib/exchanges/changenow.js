@@ -73,10 +73,8 @@ export async function estimate({ from, to, amount }) {
         flow: 'standard',
       },
     });
-    const fromAmount = Big(data.fromAmount);
     const toAmount = Big(data.toAmount);
     return {
-      rate: fromAmount.eq(0) ? '0' : normalizeNumber(toAmount.div(fromAmount), toCrypto.decimals),
       result: normalizeNumber(toAmount, toCrypto.decimals),
     };
   } catch (err) {

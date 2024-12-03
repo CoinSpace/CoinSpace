@@ -62,10 +62,13 @@ export default class Exchanges {
       .allSettled(exchanges.map((exchange) => exchange.estimateExchange({ from, to, amount })));
 
     if (estimations.some((item) => item.status === 'fulfilled')) {
-      return estimations
-        .filter((item) => item.status === 'fulfilled')
-        .map((item) => item.value)
-        .toSorted((a, b) => b.rate - a.rate);
+      const values = estimations.filter((item) => item.status === 'fulfilled').map((item) => item.value);
+      values.sort((a, b) => {
+        if (a.result.value > b.result.value) return -1;
+        if (a.result.value < b.result.value) return 1;
+        return 0;
+      });
+      return values;
     }
 
     if (estimations.every((item) => item.reason instanceof InternalExchangeError)) {

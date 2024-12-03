@@ -262,7 +262,7 @@ paths:
                 type: object
                 additionalProperties: false
                 properties:
-                  rate:
+                  rate: # remove in v5
                     $ref: '#/components/schemas/NumberString'
                   result:
                     $ref: '#/components/schemas/NumberString'

@@ -354,12 +354,6 @@ export default {
           {{ $c(amountConverted) }}
         </div>
       </div>
-      <div
-        v-if="to && estimation"
-        class="&__info"
-      >
-        1 {{ $wallet.crypto.symbol }} ≈ {{ estimation.rate }} {{ to.crypto.symbol }}
-      </div>
     </CsFormGroup>
 
     <CsButtonGroup>

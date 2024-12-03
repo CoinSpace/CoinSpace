@@ -213,7 +213,6 @@ export default class BaseExchange {
     const cryptoTo = this.#account.cryptoDB.get(to);
     return {
       provider: this.#id,
-      rate: Amount.fromString(estimation.rate, cryptoTo.decimals),
       result: Amount.fromString(estimation.result, cryptoTo.decimals),
     };
   }
