@@ -1,5 +1,6 @@
 import ChangeNOWExchange from './ChangeNOWExchange.js';
 import ChangellyExchange from './ChangellyExchange.js';
+import ExchangeStorage from '../storage/ExchangeStorage.js';
 
 import {
   ExchangeAmountError,
@@ -33,8 +34,10 @@ export default class Exchanges {
   }
 
   async init() {
-    return Promise
-      .all(this.#exchanges.map((exchange) => exchange.init()));
+    const exchangeStorages = await ExchangeStorage.initMany(this.#account, this.#exchanges);
+    for (const exchange of this.#exchanges) {
+      exchange.init(exchangeStorages[exchange.id]);
+    }
   }
 
   #getExchange(provider) {

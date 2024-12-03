@@ -1,4 +1,3 @@
-import ExchangeStorage from '../storage/ExchangeStorage.js';
 import {
   Amount,
   errors,
@@ -92,15 +91,10 @@ export default class BaseExchange {
     this.#name = name;
     this.#request = request;
     this.#account = account;
-    this.#storage = new ExchangeStorage({
-      request,
-      name: this.#id,
-      key: account.clientStorage.getDetailsKey(),
-    });
   }
 
-  async init() {
-    await this.#storage.init();
+  init(storage) {
+    this.#storage = storage;
   }
 
   async loadExchanges() {
