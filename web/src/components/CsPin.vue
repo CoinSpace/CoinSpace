@@ -173,9 +173,7 @@ export default {
           window.taptic?.error();
           break;
         default:
-          this.error = (this.$isOnion && this.$onLine)
-            ? this.$t('Error! Please ensure that your Tor VPN is active.')
-            : this.$t('Error! Please try again later.');
+          this.error = this.$account.unknownError();
           this.value = '';
           console.error(error);
       }

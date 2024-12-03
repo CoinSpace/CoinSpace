@@ -57,7 +57,7 @@ export default {
         if (err instanceof EOSErrors.AccountNameUnavailableError) {
           return this.error = this.$t('This account name is already taken, please choose another one.');
         }
-        this.error = this.$t('Error! Please try again later.');
+        this.error = this.$account.unknownError();
         console.error(err);
       } finally {
         this.isLoading = false;

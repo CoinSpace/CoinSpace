@@ -69,7 +69,7 @@ export default {
         this.$wallet.crypto.decimals
       );
     } catch (err) {
-      this.error = this.$t('Error! Please try again later.');
+      this.error = this.$account.unknownError();
       console.error(err);
     } finally {
       this.isLoading = false;

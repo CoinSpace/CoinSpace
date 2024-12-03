@@ -80,7 +80,7 @@ export default {
         });
         this.next('confirm');
       } catch (err) {
-        this.error = this.$t('Error! Please try again later.');
+        this.error = this.$account.unknownError();
         console.error(err);
       } finally {
         this.isLoading = false;
@@ -103,7 +103,7 @@ export default {
         });
         this.next('sign');
       } catch (err) {
-        this.error = this.$t('Error! Please try again later.');
+        this.error = this.$account.unknownError();
         console.error(err);
       } finally {
         this.isLoading = false;
@@ -129,7 +129,7 @@ export default {
         });
         this.next('sign');
       } catch (err) {
-        this.error = this.$t('Error! Please try again later.');
+        this.error = this.$account.unknownError();
         console.error(err);
       } finally {
         this.isLoading = false;

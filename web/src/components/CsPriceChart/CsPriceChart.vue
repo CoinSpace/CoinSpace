@@ -78,7 +78,7 @@ export default {
       v-else-if="error"
       class="&__error"
     >
-      {{ $t('Error! Please try again later.') }}
+      {{ $account.unknownError() }}
     </div>
     <div
       v-else

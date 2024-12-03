@@ -22,6 +22,7 @@ import Seeds from './Seeds.js';
 import Settings from './Settings.js';
 import WalletStorage from '../storage/WalletStorage.js';
 import defaultCryptos from '../defaultCryptos.js';
+import i18n from '../i18n/i18n.js';
 
 const BITCOIN_FAMILY = [
   'bitcoin',
@@ -801,5 +802,10 @@ export default class Account extends EventEmitter {
       });
     }
     return this.#walletConnect;
+  }
+
+  unknownError() {
+    if (this.isOnion && navigator.onLine) return i18n.global.t('Error! Please ensure that your Tor VPN is active.');
+    return i18n.global.t('Error! Please try again later.');
   }
 }

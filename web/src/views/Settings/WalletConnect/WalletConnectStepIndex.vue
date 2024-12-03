@@ -68,7 +68,7 @@ export default {
           this.error = this.$t('Not supported');
           return;
         }
-        this.error = this.$t('Error! Please try again later.');
+        this.error = this.$account.unknownError();
         console.error(err);
       } finally {
         this.isLoading = false;

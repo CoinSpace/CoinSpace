@@ -29,7 +29,7 @@ export default {
       this.unstaking = unstaking;
       this.readyForClaim = readyForClaim;
     } catch (err) {
-      this.error = this.$t('Error! Please try again later.');
+      this.error = this.$account.unknownError();
       console.error(err);
     } finally {
       this.isLoading = false;
