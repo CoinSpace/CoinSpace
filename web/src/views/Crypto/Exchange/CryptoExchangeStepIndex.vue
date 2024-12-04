@@ -102,8 +102,8 @@ export default {
     async to() {
       this.clean();
       this.estimate();
-      if (this.storage.to) {
-        this.priceTo = await this.$account.market.getPrice(this.storage.to.crypto._id, this.$currency);
+      if (this.to) {
+        this.priceTo = await this.$account.market.getPrice(this.to.crypto._id, this.$currency);
       } else {
         this.priceTo = undefined;
       }
@@ -125,7 +125,9 @@ export default {
       this.isEstimating = true;
       this.errors = {};
       try {
-        if (!this.$account.exchanges.isSupported(this.$wallet.crypto)) throw new ExchangeDisabledError();
+        if (!this.$account.exchanges.isSupported(this.$wallet.crypto, this.to.crypto)) {
+          throw new ExchangeDisabledError();
+        }
         if (this.$wallet.isFeeRatesSupported) await this.$wallet.loadFeeRates();
         await this.$wallet.validateAmount({
           address: this.$wallet.dummyExchangeDepositAddress,
@@ -138,7 +140,7 @@ export default {
         });
         const estimations = await this.$account.exchanges.estimateExchange({
           from: this.$wallet.crypto._id,
-          to: this.storage.to.crypto._id,
+          to: this.to.crypto._id,
           amount: this.amount,
         });
         this.updateStorage({
@@ -177,7 +179,7 @@ export default {
         const estimation = await this.$account.exchanges.estimateExchange({
           provider: this.storage.provider,
           from: this.$wallet.crypto._id,
-          to: this.storage.to.crypto._id,
+          to: this.to.crypto._id,
           amount,
         });
         const fee = await this.$wallet.estimateTransactionFee({

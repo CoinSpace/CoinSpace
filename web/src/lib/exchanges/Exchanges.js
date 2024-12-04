@@ -22,11 +22,7 @@ export default class Exchanges {
   }
 
   isSupported(from, to) {
-    if (to) {
-      return !!((from.changelly && to.changelly) || (from.changenow && to.changenow));
-    } else {
-      return !!(from.changelly || from.changenow);
-    }
+    return this.#exchanges.some((exchange) => from[exchange.id] && to[exchange.id]);
   }
 
   getProviderName(id) {
