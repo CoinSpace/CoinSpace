@@ -35,6 +35,8 @@ function mapStatus(status) {
     case 'new':
     case 'waiting':
       return 'waiting';
+    case 'verifying':
+      return 'hold';
     default:
       return status;
   }
