@@ -163,6 +163,8 @@ export default {
       width: $spacing-4xl;
       height: $spacing-4xl;
       margin-bottom: $spacing-3xl;
+      outline: 2px solid transparent;
+      transition: all 0.1s ease-out;
 
       &--tor {
         box-shadow: 0 $spacing-md $spacing-xl rgb(138 43 226 / 8%);
