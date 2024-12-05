@@ -68,7 +68,7 @@ export default {
         this.hasMore = data.hasMore;
         if (data.transactions && data.transactions.length) {
           this.transactions.push(
-            ...(await this.$account.exchanges.exchangifyTransactions(data.transactions, this.$wallet.crypto))
+            ...this.$account.exchanges.exchangifyTransactions(data.transactions, this.$wallet.crypto)
           );
         }
         this.historyState = this.$STATE_LOADED;

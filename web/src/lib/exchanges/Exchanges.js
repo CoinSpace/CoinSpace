@@ -112,15 +112,9 @@ export default class Exchanges {
     return this.#getExchange(provider).validateAddress(opts);
   }
 
-  async exchangifyTransaction(transaction, crypto) {
+  exchangifyTransactions(transactions, crypto) {
     for (const exchange of this.#exchanges) {
-      await exchange.exchangifyTransaction(transaction, crypto);
-    }
-  }
-
-  async exchangifyTransactions(transactions, crypto) {
-    for (const exchange of this.#exchanges) {
-      await exchange.exchangifyTransactions(transactions, crypto);
+      exchange.exchangifyTransactions(transactions, crypto);
     }
     return transactions;
   }

@@ -275,31 +275,20 @@ export default class BaseExchange {
     }
   }
 
-  #assignExchange(transaction, exchange) {
-    transaction.exchange = {
-      id: exchange.id,
-      trackUrl: exchange.trackUrl,
-      status: this.#mapExchangeStatus(exchange),
-      originalStatus: exchange.status,
-      to: exchange.internal === true ? 'your wallet' : exchange.payoutAddress,
-      payoutHash: exchange?.payoutHash?.toLowerCase(),
-      provider: this.#id,
-    };
-    if (transaction.incoming) {
-      const cryptoFrom = this.#account.cryptoDB.get(exchange.cryptoFrom);
-      const amountFrom = exchange.amountFrom !== '0' ? exchange.amountFrom : exchange.amountExpectedFrom;
-      transaction.exchange.cryptoFrom = cryptoFrom;
-      transaction.exchange.amountFrom = Amount.fromString(amountFrom, cryptoFrom.decimals);
-    } else {
-      const cryptoTo = this.#account.cryptoDB.get(exchange.cryptoTo);
-      const amountTo = exchange.amountTo !== '0' ? exchange.amountTo : exchange.amountExpectedTo;
-      transaction.exchange.cryptoTo = cryptoTo;
-      transaction.exchange.amountTo = Amount.fromString(amountTo, cryptoTo.decimals);
-    }
-    return transaction;
+  exchangifyTransactions(transactions, crypto) {
+    return transactions.map((transaction) => this.#exchangifyTransaction(transaction, crypto));
   }
 
-  async exchangifyTransaction(transaction, crypto) {
+  async reexchangifyTransaction(transaction) {
+    if (['finished', 'failed', 'refunded', 'overdue', 'expired'].includes(transaction.exchange.originalStatus)) {
+      const exchange = await this.loadExchange(transaction.exchange.id);
+      return this.#assignExchange(transaction, exchange);
+    } else {
+      return transaction;
+    }
+  }
+
+  #exchangifyTransaction(transaction, crypto) {
     const exchange = this.#exchanges
       .filter((item) => item.cryptoFrom === crypto._id || item.cryptoTo === crypto._id)
       .find((item) => {
@@ -322,17 +311,28 @@ export default class BaseExchange {
     return this.#assignExchange(transaction, exchange);
   }
 
-  async exchangifyTransactions(transactions, crypto) {
-    return Promise.all(transactions.map((transaction) => this.exchangifyTransaction(transaction, crypto)));
-  }
-
-  async reexchangifyTransaction(transaction) {
-    if (['finished', 'failed', 'refunded', 'overdue', 'expired'].includes(transaction.exchange.originalStatus)) {
-      const exchange = await this.loadExchange(transaction.exchange.id);
-      return this.#assignExchange(transaction, exchange);
+  #assignExchange(transaction, exchange) {
+    transaction.exchange = {
+      id: exchange.id,
+      trackUrl: exchange.trackUrl,
+      status: this.#mapExchangeStatus(exchange),
+      originalStatus: exchange.status,
+      to: exchange.internal === true ? 'your wallet' : exchange.payoutAddress,
+      payoutHash: exchange?.payoutHash?.toLowerCase(),
+      provider: this.#id,
+    };
+    if (transaction.incoming) {
+      const cryptoFrom = this.#account.cryptoDB.get(exchange.cryptoFrom);
+      const amountFrom = exchange.amountFrom !== '0' ? exchange.amountFrom : exchange.amountExpectedFrom;
+      transaction.exchange.cryptoFrom = cryptoFrom;
+      transaction.exchange.amountFrom = Amount.fromString(amountFrom, cryptoFrom.decimals);
     } else {
-      return transaction;
+      const cryptoTo = this.#account.cryptoDB.get(exchange.cryptoTo);
+      const amountTo = exchange.amountTo !== '0' ? exchange.amountTo : exchange.amountExpectedTo;
+      transaction.exchange.cryptoTo = cryptoTo;
+      transaction.exchange.amountTo = Amount.fromString(amountTo, cryptoTo.decimals);
     }
+    return transaction;
   }
 
   #mapExchangeStatus(exchange) {
