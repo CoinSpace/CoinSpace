@@ -16,7 +16,7 @@ export default {
   </div>
   <CsButtonGroup>
     <CsButton
-      v-if="$showRampsAndExchange"
+      v-if="$showRampsAndExchangeAndStaking"
       type="primary-light"
       @click="$router.push({ name: 'crypto.buy', params: { cryptoId: $wallet.crypto._id }})"
     >

@@ -12,7 +12,7 @@ export default {
 
 <template>
   <CsButtonGroup
-    v-if="$showRampsAndExchange"
+    v-if="$showRampsAndExchangeAndStaking"
     type="horizontal"
   >
     <CsButton

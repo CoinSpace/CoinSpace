@@ -36,7 +36,7 @@ export default {
   <CsListItems class="&">
     <template v-if="$walletState === $STATE_LOADED || $walletState === $STATE_LOADING">
       <CsListItem
-        v-if="isStakingSupported"
+        v-if="$showRampsAndExchangeAndStaking && isStakingSupported"
         :disabled="$walletState === $STATE_LOADING"
         :title="$t('Staking')"
         @click="$router.push({ name: 'crypto.staking', params: { cryptoId: $wallet.crypto._id }})"
