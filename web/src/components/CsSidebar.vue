@@ -75,7 +75,7 @@ export default {
         <CsAvatar
           class="&__avatar"
           :avatar="$user.avatar"
-          :class="{ '&__avatar--tor': $isOnion }"
+          own
           :size="48"
           :alt="$t('Settings')"
         />
@@ -163,13 +163,6 @@ export default {
       width: $spacing-4xl;
       height: $spacing-4xl;
       margin-bottom: $spacing-3xl;
-      outline: 2px solid transparent;
-      transition: all 0.1s ease-out;
-
-      &--tor {
-        box-shadow: 0 $spacing-md $spacing-xl rgb(138 43 226 / 8%);
-        outline: 2px solid #8a2be2;
-      }
     }
 
     &__portfolio-amount {

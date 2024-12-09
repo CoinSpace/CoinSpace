@@ -93,6 +93,7 @@ export default {
       <CsAvatar
         class="&__header-avatar"
         :avatar="$user.avatar"
+        own
         :class="{ '&__header-avatar--tor': $isOnion }"
         :size="80"
         :alt="$t('Account')"
@@ -211,11 +212,6 @@ export default {
     &__header-avatar {
       width: $spacing-6xl;
       height: $spacing-6xl;
-
-      &--tor {
-        box-shadow: 0 $spacing-md $spacing-xl rgb(138 43 226 / 8%);
-        outline: 2px solid #8a2be2;
-      }
     }
 
     &__header-username {
