@@ -85,21 +85,21 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: macos-14-large
+          - os: macos-14
             node: 20
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: mac
             VITE_DISTRIBUTION: mac
             SENTRY_DSN_KEY: SENTRY_DSN_MAC
             SENTRY_PROJECT: mac
-          - os: macos-14-large
+          - os: macos-14
             node: 20
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: mac
             VITE_DISTRIBUTION: mas
             SENTRY_DSN_KEY: SENTRY_DSN_MAS
             SENTRY_PROJECT: mas
-          - os: macos-14-large
+          - os: macos-14
             node: 20
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: mac

@@ -25,7 +25,7 @@ function forgePlatform(distribution) {
 }
 
 console.log(`Start build (electron:${VITE_DISTRIBUTION})...`);
-execSync(`npm run publish -- --platform=${forgePlatform(VITE_DISTRIBUTION)}`, {
+execSync(`npm run publish -- --platform=${forgePlatform(VITE_DISTRIBUTION)} --arch=x64`, {
   stdio: [0, 1, 2],
 });
 console.log(`Done build  (electron:${VITE_DISTRIBUTION})`);
