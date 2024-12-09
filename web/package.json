@@ -68,6 +68,7 @@
   "devDependencies": {
     "@intlify/eslint-plugin-vue-i18n": "^2.0.0",
     "@sentry/vite-plugin": "^2.7.1",
+    "@vitejs/plugin-basic-ssl": "^1.2.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "autoprefixer": "^10.4.14",
     "core-js": "^3.33.1",

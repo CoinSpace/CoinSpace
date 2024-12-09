@@ -1,6 +1,7 @@
 /* eslint-env node */
 import { ViteEjsPlugin } from 'vite-plugin-ejs';
 import { ViteMinifyPlugin } from 'vite-plugin-minify';
+import basicSsl from '@vitejs/plugin-basic-ssl';
 import path from 'path';
 import { sentryVitePlugin } from '@sentry/vite-plugin';
 import svgLoader from 'vite-svg-loader';
@@ -10,13 +11,14 @@ import { defineConfig, loadEnv } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 export default defineConfig(({ mode }) => {
+  const isHttps = process.argv.includes('--https');
   const env = loadEnv(mode, './');
   return {
     server: {
       open: true,
       strictPort: true,
       proxy: {
-        '/api': { target: 'http://localhost:8080' },
+        '/api': { target: 'http://localhost:8080', headers: isHttps ? { 'X-Forwarded-Proto': 'https' } : {} },
         '/assets/crypto': { target: 'http://localhost:8080' },
       },
     },
@@ -44,6 +46,7 @@ export default defineConfig(({ mode }) => {
         },
         disable: !process.env.SENTRY_AUTH_TOKEN,
       }),
+      ...(isHttps ? [basicSsl()] : []),
     ],
     build: {
       minify: true,
