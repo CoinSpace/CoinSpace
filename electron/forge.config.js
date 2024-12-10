@@ -60,6 +60,9 @@ export default {
     ],
     appBundleId: 'com.coinspace.wallet',
     appCategoryType: 'public.app-category.finance',
+    extendInfo: {
+      LSMinimumSystemVersion: '11.0',
+    },
     osxSign: {
       type: VITE_DISTRIBUTION === 'mas-dev' ? 'development' : 'distribution',
       provisioningProfile: ['mas', 'mas-dev'].includes(VITE_DISTRIBUTION) ? 'embedded.provisionprofile' : undefined,
