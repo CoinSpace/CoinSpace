@@ -37,7 +37,7 @@ jobs:
 
             <!-- * [App Store](https://apps.apple.com/app/coin-wallet-bitcoin-crypto/id980719434?platform=iphone) (iOS) -->
             <!-- * [Google Play](https://play.google.com/store/apps/details?id=com.coinspace.app) (Android) -->
-            <!-- * [Galaxy Store](https://galaxy.store/coinapp) (Android) -->
+            <!-- * [Galaxy Store](https://galaxystore.samsung.com/detail/com.coinspace.app) (Android) -->
             <!-- * [Huawei AppGallery](https://appgallery.huawei.com/app/C112183767) (Android) -->
             <!-- * [Uptodown](https://coin-wallet.en.uptodown.com/android) (Android) -->
             * [Coin.Wallet.apk](https://github.com/CoinSpace/CoinSpace/releases/download/v${{ env.VERSION }}/Coin.Wallet.apk) (Android)
