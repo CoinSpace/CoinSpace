@@ -129,6 +129,12 @@ export default {
         </CsFormInput>
       </div>
     </div>
+    <div
+      v-if="coins.length === 0 && tokens.length === 0"
+      class="&__message"
+    >
+      {{ $t('No coins or tokens found.') }}
+    </div>
     <CsCryptoList
       :header="$t('Coins')"
       class="&__list"
@@ -199,6 +205,10 @@ export default {
         flex-basis: 50%;
         margin-bottom: 0;
       }
+    }
+
+    &__message {
+      @include text-md;
     }
   }
 </style>
