@@ -148,6 +148,7 @@
   "Message": "Mesaj",
   "Message has been signed.": "Mesaj imzalanmıştır.",
   "New wallet": "Yeni cüzdan",
+  "No coins or tokens found.": "Hiç coin veya token bulunamadı.",
   "No funds. Buy or receive {symbol} to continue.": "Fon yok. Devam etmek için {symbol} alın veya satın alın.",
   "No users found nearby.": "Yakınlarda kullanıcısı bulunamadı.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Tüm adres türleri tüm platformlarla tam uyumlu değildir; bu nedenle uyumlu bir adres kullanmak önemlidir.",

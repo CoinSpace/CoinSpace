@@ -148,6 +148,7 @@
   "Message": "Сообщение",
   "Message has been signed.": "Сообщение подписано.",
   "New wallet": "Новый кошелек",
+  "No coins or tokens found.": "Монеты или токены не найдены.",
   "No funds. Buy or receive {symbol} to continue.": "Нет средств. Для продолжения купите или получите {symbol}.",
   "No users found nearby.": "Поблизости нет пользователей.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Не все типы адресов полностью совместимы с различными платформами, поэтому важно использовать правильный адрес.",

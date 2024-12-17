@@ -148,6 +148,7 @@
   "Message": "Meddelande",
   "Message has been signed.": "Meddelandet är undertecknat.",
   "New wallet": "Ny plånbok",
+  "No coins or tokens found.": "Inga mynt eller tokens hittades.",
   "No funds. Buy or receive {symbol} to continue.": "Inga medel. Köp eller ta emot {symbol} för att fortsätta.",
   "No users found nearby.": "Inga användare funna i närheten.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Alla adresstyper är inte helt kompatibla på alla plattformar, så det är viktigt att använda en kompatibel adress.",

@@ -148,6 +148,7 @@
   "Message": "Wiadomość",
   "Message has been signed.": "Wiadomość została podpisana.",
   "New wallet": "Nowy portfel",
+  "No coins or tokens found.": "Nie znaleziono monet ani tokenów.",
   "No funds. Buy or receive {symbol} to continue.": "Brak środków. Kup lub otrzymaj {symbol}, aby kontynuować.",
   "No users found nearby.": "Nie wykryto żadnych użytkowników w twojej okolicy.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Nie wszystkie typy adresów są w pełni kompatybilne na wszystkich platformach, dlatego ważne jest, aby używać zgodnego adresu.",

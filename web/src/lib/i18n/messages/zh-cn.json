@@ -148,6 +148,7 @@
   "Message": "信息",
   "Message has been signed.": "信息已签署。",
   "New wallet": "新钱包",
+  "No coins or tokens found.": "未找到币或代币。",
   "No funds. Buy or receive {symbol} to continue.": "没有资金。购买或接收{symbol}以继续。",
   "No users found nearby.": "没有找到附近用户。",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "并非所有的地址类型在所有平台上都完全兼容，因此使用兼容的地址非常重要。",

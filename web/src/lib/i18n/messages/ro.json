@@ -148,6 +148,7 @@
   "Message": "Mesaj",
   "Message has been signed.": "Mesajul a fost semnat.",
   "New wallet": "Portofel nou",
+  "No coins or tokens found.": "Nu au fost găsite monede sau tokenuri.",
   "No funds. Buy or receive {symbol} to continue.": "Nu există fonduri. Cumpărați sau primiți {symbol} pentru a continua.",
   "No users found nearby.": "Nu s-au găsit utilizatori în apropiere.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Nu toate tipurile de adrese sunt compatibile pe deplin cu toate platformele, prin urmare este important să folosiți o adresă compatibilă.",

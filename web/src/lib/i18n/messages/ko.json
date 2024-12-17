@@ -148,6 +148,7 @@
   "Message": "메시지",
   "Message has been signed.": "메시지에 서명했습니다.",
   "New wallet": "새 월렛",
+  "No coins or tokens found.": "코인 또는 토큰을 찾을 수 없습니다.",
   "No funds. Buy or receive {symbol} to continue.": "자금 없음. {symbol} 을(를) 구매하거나 수령하고 계속하세요.",
   "No users found nearby.": "근처의 사용자를 발견할 수 없습니다.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "모든 주소 유형이 모든 플랫폼과 완전히 호환되지는 않습니다. 그러므로, 호환되는 주소를 사용해야 합니다.",

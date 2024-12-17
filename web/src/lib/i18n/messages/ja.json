@@ -148,6 +148,7 @@
   "Message": "メッセージ",
   "Message has been signed.": "メッセージが署名されました。",
   "New wallet": "ニューウォレット",
+  "No coins or tokens found.": "コインやトークンが見つかりません。",
   "No funds. Buy or receive {symbol} to continue.": "資金はない。続行するには {symbol} 買うか受け取ってください。",
   "No users found nearby.": "近くのユーザーが見つけられませんでした.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "全てのアドレスタイプが全部のプラットフォームにおいて完全に互換性があるのではない為、互換性アドレスを使用する事が重要です(%(url)s)。",

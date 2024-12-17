@@ -148,6 +148,7 @@
   "Message": "Message",
   "Message has been signed.": "Message has been signed.",
   "New wallet": "New wallet",
+  "No coins or tokens found.": "No coins or tokens found.",
   "No funds. Buy or receive {symbol} to continue.": "No funds. Buy or receive {symbol} to continue.",
   "No users found nearby.": "No users found nearby.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.",

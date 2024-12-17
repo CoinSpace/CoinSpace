@@ -148,6 +148,7 @@
   "Message": "ข้อความ",
   "Message has been signed.": "ข้อความได้รับการลงนามแล้ว",
   "New wallet": "วอลเล็ทใหม่",
+  "No coins or tokens found.": "ไม่พบคอยน์หรือโทเคน.",
   "No funds. Buy or receive {symbol} to continue.": "ไม่มีเงิน ซื้อหรือรับ {symbol} เพื่อดำเนินการต่อ",
   "No users found nearby.": "ไม่พบผู้ใช้งาน ที่อยู่ใกล้คุณ",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "ประเภทที่อยู่บางประเภทอาจไม่สามารถเข้ากันได้กับทุกแพลตฟอร์ม ดังนั้นการใช้ที่อยู่ที่เข้ากันได้จึงเป็นสิ่งสำคัญ",

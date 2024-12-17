@@ -148,6 +148,7 @@
   "Message": "Zpráva",
   "Message has been signed.": "Zpráva byla podepsána.",
   "New wallet": "Nová peněženka",
+  "No coins or tokens found.": "Nebyly nalezeny žádné mince ani tokeny.",
   "No funds. Buy or receive {symbol} to continue.": "Žádné prostředky. Abyste mohli pokračovat, nakupte nebo dostaňte {symbol}.",
   "No users found nearby.": "Žádní uživatelé nejsou poblíž.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Ne všechny typy adres jsou plně kompatibilní na všech platformách, takže je důležité používat kompatibilní adresu.",

@@ -148,6 +148,7 @@
   "Message": "Pesan",
   "Message has been signed.": "Pesan telah ditandatangani.",
   "New wallet": "Wallet baru",
+  "No coins or tokens found.": "Tidak ada koin atau token ditemukan.",
   "No funds. Buy or receive {symbol} to continue.": "Tidak ada dana. Beli atau terima {symbol} untuk melanjutkan.",
   "No users found nearby.": "Tidak menemukan pengguna di lokasi terdekat.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Tidak semua jenis alamat kompatibel sepenuhnya pada semua platform, karena itu penting untuk menggunakan alamat yang kompatibel.",

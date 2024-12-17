@@ -148,6 +148,7 @@
   "Message": "Bericht",
   "Message has been signed.": "Bericht is ondertekend.",
   "New wallet": "Nieuwe wallet",
+  "No coins or tokens found.": "Geen munten of tokens gevonden.",
   "No funds. Buy or receive {symbol} to continue.": "Geen betalingen. Koop of ontvang {symbol} om door te gaan.",
   "No users found nearby.": "Geen gebruikers in de buurt gevonden.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Niet alle adrestypen zijn volledig compatibel op alle systemen. Het is dus belangrijk een adres te gebruiken dat compatibel is.",

@@ -148,6 +148,7 @@
   "Message": "Üzenet",
   "Message has been signed.": "Üzenet aláírva.",
   "New wallet": "Új pénztárca",
+  "No coins or tokens found.": "Nem találhatóak érmék vagy tokenek.",
   "No funds. Buy or receive {symbol} to continue.": "Nincs pénzed. A folytatáshoz {symbol} megvétele vagy beszerzése szükséges.",
   "No users found nearby.": "Nem található felhasználó a közelben.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Nem minden címtípus kompatibilis minden platformon, ezért fontos kompatibilis címet használni.",

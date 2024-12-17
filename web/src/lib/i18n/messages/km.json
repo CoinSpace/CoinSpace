@@ -148,6 +148,7 @@
   "Message": "សារ",
   "Message has been signed.": "សារត្រូវបានចុះហត្ថលេខា។",
   "New wallet": "កាបូបថ្មី",
+  "No coins or tokens found.": "រកមិនបានកាក់ ឬ និមិត្តសញ្ញា។",
   "No funds. Buy or receive {symbol} to continue.": "គ្មានថវិកា។ ទិញ ឬទទួល {symbol} ដើម្បីបន្ត។",
   "No users found nearby.": "រកមិនឃើញអ្នកប្រើប្រាស់នៅក្បែរៗទេ។",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "មិនមែនប្រភេទអាសយដ្ឋានទាំងអស់សុទ្ធតែអាចប្រើជាមួយផ្លែតហ្វមបានទេ ដូច្នេះវាមានសារៈសំខាន់ណាស់ត្រូវប្រើអាសយដ្ឋានដែលអាចប្រើជាមួយគ្នាបាន។",

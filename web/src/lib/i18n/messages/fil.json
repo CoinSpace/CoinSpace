@@ -148,6 +148,7 @@
   "Message": "Mensahe",
   "Message has been signed.": "Ang mensahe ay nilagdaan na.",
   "New wallet": "Bagong wallet",
+  "No coins or tokens found.": "Walang coin o token na natagpuan.",
   "No funds. Buy or receive {symbol} to continue.": "Walang pondo. Bumili o tumanggap ng {symbol} upang magpatuloy.",
   "No users found nearby.": "Walang mga user na mahanap na malapit.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Hindi lahat ng mga uri ng address ay ganap na tugma sa lahat ng mga plataporma, kaya mahalaga na gumamit ng isang tugmang address.",

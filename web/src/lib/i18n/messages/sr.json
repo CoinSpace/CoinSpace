@@ -148,6 +148,7 @@
   "Message": "Poruka",
   "Message has been signed.": "Poruka je potpisana.",
   "New wallet": "Novi novčanik",
+  "No coins or tokens found.": "Nema novčića ni tokena.",
   "No funds. Buy or receive {symbol} to continue.": "Nema sredstava. Kupite ili primite {symbol} da biste nastavili.",
   "No users found nearby.": "Nije pronađen nijedan korisnik u blizini.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Nisu sve vrste adresa u potpunosti kompatibilne na svim platformama, zato je važno da se koristi kompatibilna adresa.",

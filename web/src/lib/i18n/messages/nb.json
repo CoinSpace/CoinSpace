@@ -148,6 +148,7 @@
   "Message": "Melding",
   "Message has been signed.": "Meldingen har blitt signert.",
   "New wallet": "Ny lommebok",
+  "No coins or tokens found.": "Ingen mynter eller tokens funnet.",
   "No funds. Buy or receive {symbol} to continue.": "Ingen midler. Kjøp eller motta {symbol} for å fortsette.",
   "No users found nearby.": "Ingen brukere funnet i nærheten.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Ikke alle adressetyper er fullt forenbare på alle plattformer. Derfor er det viktig å bruke en kompatibel adresse.",

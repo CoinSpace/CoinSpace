@@ -148,6 +148,7 @@
   "Message": "Повідомлення",
   "Message has been signed.": "Повідомлення підписано.",
   "New wallet": "Новий гаманець",
+  "No coins or tokens found.": "Монети або токени не знайдено.",
   "No funds. Buy or receive {symbol} to continue.": "Немає коштів. Щоб продовжити, купіть або отримайте {symbol}.",
   "No users found nearby.": "Інших користувачів не знайдено.",
   "Not all address types are fully compatible on all platforms, so it is important to use a compatible address.": "Не всі типи адрес є повністю сумісними для всіх платформ, тому важливо використовувати сумісну адресу.",
