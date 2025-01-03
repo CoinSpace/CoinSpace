@@ -65,10 +65,6 @@ export default class BaseExchange {
     'xrp@ripple',
     'stellar@stellar',
     'eos@eos',
-    'binance-coin@binance-chain',
-    'monero@monero',
-    'ardor@ardor',
-    'nem@nem',
     'stacks@stacks',
     'iost@iost',
   ];
