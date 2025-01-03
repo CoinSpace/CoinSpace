@@ -42,6 +42,7 @@ export default {
           to: this.storage.to.crypto._id,
           address: this.storage.address,
           extraId: this.extraId,
+          provider: this.storage.provider,
         });
         this.updateStorage({
           extraId: this.extraId,
