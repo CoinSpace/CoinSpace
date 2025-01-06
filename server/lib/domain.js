@@ -32,15 +32,17 @@ async function getAddress(domain, cryptoId) {
 }
 
 async function openalias(domain, cryptoId) {
-  if (cryptoId !== 'bitcoin@bitcoin') return false;
-  const prefix = 'btc';
+  const prefixes = {
+    'bitcoin@bitcoin': 'btc',
+    'monero@monero': 'xmr',
+  };
+  const prefix = prefixes[cryptoId];
+  if (!prefix) return false;
   try {
     const addresses = await dns.resolveTxt(domain);
     for (let i = 0; i < addresses.length; i++) {
       const data = addresses[i][0];
-
-      if (!data.match('^oa1:' + prefix)) continue;
-
+      if (!data.match(`^oa1:${prefix}`)) continue;
       const match = data.match('recipient_address=([A-Za-z0-9]+)');
       if (!match) continue;
       const address = match[1];
