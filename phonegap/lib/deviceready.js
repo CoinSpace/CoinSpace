@@ -91,7 +91,5 @@ export default async function deviceready() {
     };
     window.StatusBar.styleDefault();
     window.StatusBar.show();
-    window.StatusBar.overlaysWebView(false);
-    window.StatusBar.overlaysWebView(true);
   }
 }

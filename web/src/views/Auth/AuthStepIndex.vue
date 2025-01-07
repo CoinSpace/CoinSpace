@@ -2,6 +2,7 @@
 import CsButton from '../../components/CsButton.vue';
 import CsButtonGroup from '../../components/CsButtonGroup.vue';
 import CsStep from '../../components/CsStep.vue';
+import { onShowOnHide } from '../../lib/mixins.js';
 
 import LogoIcon from '../../assets/svg/logo.svg';
 
@@ -12,10 +13,17 @@ export default {
     LogoIcon,
   },
   extends: CsStep,
+  mixins: [onShowOnHide],
   computed: {
     copyright() {
       return `© ${new Date().getFullYear()} CoinSpace`;
     },
+  },
+  async onShow() {
+    window.StatusBar?.styleLightContent();
+  },
+  async onHide() {
+    window.StatusBar?.styleDefault();
   },
 };
 </script>
