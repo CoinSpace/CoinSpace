@@ -203,6 +203,7 @@ export default {
 <style lang="scss">
   .#{ $filename } {
     &__header {
+      z-index: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -210,6 +211,7 @@ export default {
     }
 
     &__header-avatar {
+      z-index: -1;
       width: $spacing-6xl;
       height: $spacing-6xl;
     }
