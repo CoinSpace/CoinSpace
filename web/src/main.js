@@ -1,6 +1,7 @@
 // polyfills
 import 'core-js/es/string/replace-all';
 import 'core-js/es/array/at';
+import 'core-js/es/array/to-sorted';
 
 import './assets/styles/app.scss';
 import './lib/sentry.js';

@@ -74,6 +74,9 @@ async function loadWalletModule(platform) {
   if (['toncoin'].includes(platform)) {
     return (await import('@coinspace/cs-toncoin-wallet')).default;
   }
+  if (['sui'].includes(platform)) {
+    return (await import('@coinspace/cs-sui-wallet')).default;
+  }
   // fallback
   return CsWallet;
 }
@@ -422,6 +425,8 @@ export default class Account extends EventEmitter {
         return this.isOnion ? import.meta.env.VITE_API_ADA_URL_TOR : import.meta.env.VITE_API_ADA_URL;
       case 'toncoin':
         return this.isOnion ? import.meta.env.VITE_API_TON_URL_TOR : import.meta.env.VITE_API_TON_URL;
+      case 'sui':
+        return this.isOnion ? import.meta.env.VITE_API_SUI_URL_TOR : import.meta.env.VITE_API_SUI_URL;
       default:
         // fallback
         return 'https://unsupported.coin.space/';
