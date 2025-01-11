@@ -62,6 +62,7 @@ export default {
     appCategoryType: 'public.app-category.finance',
     extendInfo: {
       LSMinimumSystemVersion: '11.0',
+      NSCameraUsageDescription: 'This app uses the camera to scan QR codes.',
     },
     osxSign: {
       type: VITE_DISTRIBUTION === 'mas-dev' ? 'development' : 'distribution',
