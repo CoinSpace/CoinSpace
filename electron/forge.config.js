@@ -63,6 +63,7 @@ export default {
     extendInfo: {
       LSMinimumSystemVersion: '11.0',
       NSCameraUsageDescription: 'This app uses the camera to scan QR codes.',
+      NSLocationUsageDescription: 'Turn on location services to send or receive coins with people around you.',
     },
     osxSign: {
       type: VITE_DISTRIBUTION === 'mas-dev' ? 'development' : 'distribution',
