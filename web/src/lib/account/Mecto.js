@@ -67,9 +67,9 @@ export default class Mecto {
         return reject(new GeolocationNotSupported('Your browser does not support geolocation'));
       }
 
-      const options = import.meta.env.VITE_BUILD_TYPE === 'electron' ? {
-        enableHighAccuracy: true,
-      } : {};
+      const options = {
+        timeout: 30 * 1000,
+      };
 
       const alert = window.permissionDenied || window.alert;
 
