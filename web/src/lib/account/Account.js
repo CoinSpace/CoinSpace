@@ -23,63 +23,11 @@ import Settings from './Settings.js';
 import WalletStorage from '../storage/WalletStorage.js';
 import defaultCryptos from '../defaultCryptos.js';
 import i18n from '../i18n/i18n.js';
-
-const BITCOIN_FAMILY = [
-  'bitcoin',
-  'bitcoin-cash',
-  'litecoin',
-  'dash',
-  'dogecoin',
-];
-
-const EVM_FAMILY = [
-  'ethereum',
-  'ethereum-classic',
-  'polygon',
-  'avalanche-c-chain',
-  'binance-smart-chain',
-  'arbitrum',
-  'optimism',
-  'fantom',
-];
-
-async function loadWalletModule(platform) {
-  if (BITCOIN_FAMILY.includes(platform)) {
-    return (await import('@coinspace/cs-bitcoin-wallet')).default;
-  }
-  if (['solana'].includes(platform)) {
-    return (await import('@coinspace/cs-solana-wallet')).default;
-  }
-  if (['monero'].includes(platform)) {
-    return (await import('@coinspace/cs-monero-wallet')).default;
-  }
-  if (['tron'].includes(platform)) {
-    return (await import('@coinspace/cs-tron-wallet')).default;
-  }
-  if (['cardano'].includes(platform)) {
-    return (await import('@coinspace/cs-cardano-wallet')).default;
-  }
-  if (['ripple'].includes(platform)) {
-    return (await import('@coinspace/cs-ripple-wallet')).default;
-  }
-  if (['stellar'].includes(platform)) {
-    return (await import('@coinspace/cs-stellar-wallet')).default;
-  }
-  if (['eos'].includes(platform)) {
-    return (await import('@coinspace/cs-eos-wallet')).default;
-  }
-  if (EVM_FAMILY.includes(platform)) {
-    return (await import('@coinspace/cs-evm-wallet')).default;
-  }
-  if (['toncoin'].includes(platform)) {
-    return (await import('@coinspace/cs-toncoin-wallet')).default;
-  }
-  if (['sui'].includes(platform)) {
-    return (await import('@coinspace/cs-sui-wallet')).default;
-  }
-  // fallback
-  return CsWallet;
-}
+import {
+  EVM_FAMILY,
+  getApiNode,
+  loadWalletModule,
+} from '../constants.js';
 
 export class CryptoAlreadyAddedError extends TypeError {
   name = 'CryptoAlreadyAddedError';
@@ -378,59 +326,7 @@ export default class Account extends EventEmitter {
   }
 
   #getApiNode(platform) {
-    switch (platform) {
-      // Bitcoin-like
-      case 'bitcoin':
-        return this.isOnion ? import.meta.env.VITE_API_BTC_URL_TOR : import.meta.env.VITE_API_BTC_URL;
-      case 'bitcoin-cash':
-        return this.isOnion ? import.meta.env.VITE_API_BCH_URL_TOR : import.meta.env.VITE_API_BCH_URL;
-      case 'dash':
-        return this.isOnion ? import.meta.env.VITE_API_DASH_URL_TOR : import.meta.env.VITE_API_DASH_URL;
-      case 'dogecoin':
-        return this.isOnion ? import.meta.env.VITE_API_DOGE_URL_TOR : import.meta.env.VITE_API_DOGE_URL;
-      case 'litecoin':
-        return this.isOnion ? import.meta.env.VITE_API_LTC_URL_TOR : import.meta.env.VITE_API_LTC_URL;
-      // Ethereum-like
-      case 'ethereum':
-        return this.isOnion ? import.meta.env.VITE_API_ETH_URL_TOR : import.meta.env.VITE_API_ETH_URL;
-      case 'ethereum-classic':
-        return this.isOnion ? import.meta.env.VITE_API_ETC_URL_TOR : import.meta.env.VITE_API_ETC_URL;
-      case 'binance-smart-chain':
-        return this.isOnion ? import.meta.env.VITE_API_BSC_URL_TOR : import.meta.env.VITE_API_BSC_URL;
-      case 'polygon':
-        return this.isOnion ? import.meta.env.VITE_API_POLYGON_URL_TOR : import.meta.env.VITE_API_POLYGON_URL;
-      case 'avalanche-c-chain':
-        return this.isOnion ? import.meta.env.VITE_API_AVAX_URL_TOR : import.meta.env.VITE_API_AVAX_URL;
-      case 'arbitrum':
-        return this.isOnion ? import.meta.env.VITE_API_ARB_URL_TOR : import.meta.env.VITE_API_ARB_URL;
-      case 'optimism':
-        return this.isOnion ? import.meta.env.VITE_API_OP_URL_TOR : import.meta.env.VITE_API_OP_URL;
-      case 'fantom':
-        return this.isOnion ? import.meta.env.VITE_API_FTM_URL_TOR : import.meta.env.VITE_API_FTM_URL;
-      // Ripple-like
-      case 'ripple':
-        return this.isOnion ? import.meta.env.VITE_API_XRP_URL_TOR : import.meta.env.VITE_API_XRP_URL;
-      case 'stellar':
-        return this.isOnion ? import.meta.env.VITE_API_XLM_URL_TOR : import.meta.env.VITE_API_XLM_URL;
-      // Others
-      case 'monero':
-        return this.isOnion ? import.meta.env.VITE_API_XMR_URL_TOR : import.meta.env.VITE_API_XMR_URL;
-      case 'eos':
-        return this.isOnion ? import.meta.env.VITE_API_EOS_URL_TOR : import.meta.env.VITE_API_EOS_URL;
-      case 'solana':
-        return this.isOnion ? import.meta.env.VITE_API_SOL_URL_TOR : import.meta.env.VITE_API_SOL_URL;
-      case 'tron':
-        return this.isOnion ? import.meta.env.VITE_API_TRX_URL_TOR : import.meta.env.VITE_API_TRX_URL;
-      case 'cardano':
-        return this.isOnion ? import.meta.env.VITE_API_ADA_URL_TOR : import.meta.env.VITE_API_ADA_URL;
-      case 'toncoin':
-        return this.isOnion ? import.meta.env.VITE_API_TON_URL_TOR : import.meta.env.VITE_API_TON_URL;
-      case 'sui':
-        return this.isOnion ? import.meta.env.VITE_API_SUI_URL_TOR : import.meta.env.VITE_API_SUI_URL;
-      default:
-        // fallback
-        return 'https://unsupported.coin.space/';
-    }
+    return getApiNode(platform, this.isOnion);
   }
 
   #getWalletOptions(crypto, platform, storage, settings) {

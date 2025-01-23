@@ -1,3 +1,4 @@
+import { SUPPORTED_PLATFORMS } from '../constants.js';
 import { deepFreeze } from '../helpers.js';
 
 export default class CryptoDB {
@@ -31,6 +32,7 @@ export default class CryptoDB {
       seed: 'device',
     });
     for (const item of this.#db) {
+      item.supported = SUPPORTED_PLATFORMS.includes(item.platform);
       deepFreeze(item);
     }
   }
@@ -41,6 +43,10 @@ export default class CryptoDB {
 
   platform(platform) {
     return this.#db.find((item) => item.type === 'coin' && item.platform === platform);
+  }
+
+  platforms(platforms) {
+    return this.#db.filter((item) => item.type === 'coin' && platforms.includes(item.platform));
   }
 
   getTokenByAddress(platform, address) {

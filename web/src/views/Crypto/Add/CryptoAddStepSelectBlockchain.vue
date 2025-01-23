@@ -3,39 +3,25 @@ import CsCryptoList from '../../../components/CsCryptoList.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 
+import { TOKEN_PLATFORMS } from '../../../lib/constants.js';
+
 export default {
   components: {
     MainLayout,
     CsCryptoList,
   },
   extends: CsStep,
-  data() {
-    return {
-      platforms: [
-        'ethereum@arbitrum',
-        'avalanche@avalanche-c-chain',
-        'binance-coin@binance-smart-chain',
-        'ethereum@ethereum',
-        'fantom@fantom',
-        'ethereum@optimism',
-        'polygon@polygon',
-        'solana@solana',
-        'toncoin@toncoin',
-        'tron@tron',
-        'sui@sui',
-      ],
-    };
-  },
   computed: {
     items() {
-      return this.platforms.map((platform) => {
-        const crypto = this.$account.cryptoDB.get(platform);
-        return {
-          crypto,
-          title: crypto.name,
-          subtitle: crypto.symbol,
-        };
-      });
+      return this.$account.cryptoDB
+        .platforms(TOKEN_PLATFORMS)
+        .map((crypto) => {
+          return {
+            crypto,
+            title: crypto.name,
+            subtitle: crypto.symbol,
+          };
+        });
     },
   },
   methods: {
