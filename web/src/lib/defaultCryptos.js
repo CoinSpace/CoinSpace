@@ -16,6 +16,7 @@ import optimism from '@coinspace/crypto-db/crypto/ethereum@optimism.json';
 import polygon from '@coinspace/crypto-db/crypto/polygon@polygon.json';
 import solana from '@coinspace/crypto-db/crypto/solana@solana.json';
 import stellar from '@coinspace/crypto-db/crypto/stellar@stellar.json';
+import sui from '@coinspace/crypto-db/crypto/sui@sui.json';
 import tether from '@coinspace/crypto-db/crypto/tether@ethereum.json';
 import toncoin from '@coinspace/crypto-db/crypto/toncoin@toncoin.json';
 import tron from '@coinspace/crypto-db/crypto/tron@tron.json';
@@ -40,6 +41,7 @@ export default [
   polygon,
   solana,
   stellar,
+  sui,
   tether,
   toncoin,
   tron,

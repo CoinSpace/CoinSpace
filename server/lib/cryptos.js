@@ -251,13 +251,6 @@ async function getAllV4(limit = 0) {
       },
     })
     .toArray();
-  // TODO: remove in v6.7.0
-  cryptos.forEach((item) => {
-    if (item.platform === 'sui') {
-      item.supported = false;
-    }
-  });
-  //
   return cryptos;
 }
 

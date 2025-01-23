@@ -22,6 +22,7 @@ export default {
         'solana@solana',
         'toncoin@toncoin',
         'tron@tron',
+        'sui@sui',
       ],
     };
   },
