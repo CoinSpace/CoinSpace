@@ -241,6 +241,7 @@ async function getAllV4(limit = 0) {
     .find({}, {
       limit,
       sort: {
+        deprecated: 1,
         rank: 1,
       },
       projection: {
