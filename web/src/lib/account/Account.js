@@ -265,6 +265,12 @@ export default class Account extends EventEmitter {
     const cryptos = (this.#details.get('cryptos') || []).map((local) => {
       const remote = this.#cryptoDB.get(local._id);
       if (remote) {
+        if (remote.supported === false) {
+          if (remote.type === 'coin') {
+            this.#clientStorage.unsetPublicKey(remote.platform);
+          }
+          return undefined;
+        }
         return remote;
       } else if (local.type === 'token') {
         const token = this.#cryptoDB.getTokenByAddress(local.platform, local.address);
@@ -274,7 +280,7 @@ export default class Account extends EventEmitter {
         local.custom = true;
         return local;
       }
-    });
+    }).filter((item) => !!item);
     cryptos.forEach((crypto) => {
       if (crypto.type === 'token') {
         const platform = cryptos.find((item) => item.type === 'coin' && item.platform === crypto.platform);

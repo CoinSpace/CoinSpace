@@ -46,10 +46,13 @@ router.beforeEach((to, from) => {
     if (wallet) {
       setWalletProps($app, wallet);
       registerProtocolHandler(wallet.crypto, $account);
-    } else if ($account.cryptoDB.get(to.params.cryptoId)) {
-      return { name: 'crypto.add', replace: true, params: { cryptoId: to.params.cryptoId } };
     } else {
-      return { name: 'home', replace: true };
+      const crypto = $account.cryptoDB.get(to.params.cryptoId);
+      if (crypto?.supported === true && crypto?.deprecated !== true) {
+        return { name: 'crypto.add', replace: true, params: { cryptoId: to.params.cryptoId } };
+      } else {
+        return { name: 'home', replace: true };
+      }
     }
   }
   const toDepth = to.path.split('/').length;

@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 import util from 'node:util';
 
 const schemes = cryptoDB
-  .filter((item) => item.scheme && item.deprecated !== true)
+  .filter((item) => item.scheme && item.supported !== false)
   .map((item) => {
     return {
       _id: item._id,

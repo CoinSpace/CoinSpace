@@ -32,7 +32,7 @@ export default class CryptoDB {
       seed: 'device',
     });
     for (const item of this.#db) {
-      item.supported = SUPPORTED_PLATFORMS.includes(item.platform);
+      item.supported = item.supported === false ? false : SUPPORTED_PLATFORMS.includes(item.platform);
       deepFreeze(item);
     }
   }
