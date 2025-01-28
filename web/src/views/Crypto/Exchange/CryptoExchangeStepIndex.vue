@@ -1,6 +1,7 @@
 <script>
 import {
   Amount,
+  CsWallet,
   errors,
 } from '@coinspace/cs-common';
 import {
@@ -132,7 +133,7 @@ export default {
         await this.$wallet.validateAmount({
           address: this.$wallet.dummyExchangeDepositAddress,
           // use default fee rate
-          feeRate: this.$wallet.isFeeRatesSupported ? this.$wallet.feeRates[0] : undefined,
+          feeRate: this.$wallet.isFeeRatesSupported ? CsWallet.FEE_RATE_DEFAULT : undefined,
           // use default gas limit
           gasLimit: this.$wallet.isGasLimitSupported ? this.$wallet.gasLimit : undefined,
           amount: this.amount,
@@ -170,7 +171,7 @@ export default {
         await this.$wallet.validateAmount({
           address: this.$wallet.dummyExchangeDepositAddress,
           // use default fee rate
-          feeRate: this.$wallet.isFeeRatesSupported ? this.$wallet.feeRates[0] : undefined,
+          feeRate: this.$wallet.isFeeRatesSupported ? CsWallet.FEE_RATE_DEFAULT : undefined,
           // use default gas limit
           gasLimit: this.$wallet.isGasLimitSupported ? this.$wallet.gasLimit : undefined,
           amount,
@@ -184,7 +185,7 @@ export default {
         });
         const fee = await this.$wallet.estimateTransactionFee({
           address: this.$wallet.dummyExchangeDepositAddress,
-          feeRate: this.$wallet.isFeeRatesSupported ? this.$wallet.feeRates[0] : undefined,
+          feeRate: this.$wallet.isFeeRatesSupported ? CsWallet.FEE_RATE_DEFAULT : undefined,
           gasLimit: this.$wallet.isGasLimitSupported ? this.$wallet.gasLimit : undefined,
           amount,
           price: this.storage.priceUSD,
@@ -211,7 +212,7 @@ export default {
         if (this.$wallet.isFeeRatesSupported) await this.$wallet.loadFeeRates();
         this.amount = await this.$wallet.estimateMaxAmount({
           address: this.$wallet.dummyExchangeDepositAddress,
-          feeRate: this.$wallet.isFeeRatesSupported ? this.$wallet.feeRates[0] : undefined,
+          feeRate: this.$wallet.isFeeRatesSupported ? CsWallet.FEE_RATE_DEFAULT : undefined,
           gasLimit: this.$wallet.gasLimit,
           price: this.storage.priceUSD,
         });

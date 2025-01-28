@@ -1,4 +1,6 @@
 <script>
+import { CsWallet } from '@coinspace/cs-common';
+
 import CsStep from '../../../components/CsStep.vue';
 import CsTransactionConfirm from '../../../components/CsTransactionConfirm.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
@@ -51,7 +53,7 @@ export default {
             price: this.storage.priceUSD,
           };
           if (this.$wallet.isFeeRatesSupported) {
-            options.feeRate = this.$wallet.feeRates[0];
+            options.feeRate = CsWallet.FEE_RATE_DEFAULT;
           }
           if (this.$wallet.isGasLimitSupported) {
             options.gasLimit = this.$wallet.gasLimit;
