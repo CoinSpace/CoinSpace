@@ -42,7 +42,7 @@ export const TOKEN_PLATFORMS = [
   'optimism',
   'polygon',
   'solana',
-  //'sui',
+  'sui',
   'toncoin',
   'tron',
 ];
