@@ -100,6 +100,8 @@ export async function createAccount({ app, router }) {
           if (a.balance.value < b.balance.value) return 1;
           if (a.rank < b.rank) return -1;
           if (a.rank > b.rank) return 1;
+          if (a.crypto.original && !b.crypto.original) return -1;
+          if (!a.crypto.original && b.crypto.original) return 1;
           return a.crypto.symbol.localeCompare(b.crypto.symbol);
         });
         cryptos.value = result;
