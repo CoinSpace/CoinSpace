@@ -243,6 +243,8 @@ async function getAllV4(limit = 0) {
       sort: {
         deprecated: 1,
         rank: 1,
+        original: -1,
+        _id: 1,
       },
       projection: {
         synchronized_at: false,
