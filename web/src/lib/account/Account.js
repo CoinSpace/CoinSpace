@@ -93,10 +93,6 @@ class WalletManager {
   list() {
     return [...this.#wallets.values()];
   }
-
-  cryptos() {
-    return [...this.#wallets.values()].map((item) => item.crypto);
-  }
 }
 
 export default class Account extends EventEmitter {
@@ -262,34 +258,25 @@ export default class Account extends EventEmitter {
 
     this.#migrateV5Details();
 
-    const cryptos = (this.#details.get('cryptos') || []).map((local) => {
-      const remote = this.#cryptoDB.get(local._id);
-      if (remote) {
-        if (remote.supported === false) {
-          if (remote.type === 'coin') {
-            this.#clientStorage.unsetPublicKey(remote.platform);
-          }
-          return undefined;
-        }
-        return remote;
-      } else if (local.type === 'token') {
-        const token = this.#cryptoDB.getTokenByAddress(local.platform, local.address);
-        local.custom = true;
-        return token ? token : local;
-      } else {
-        local.custom = true;
-        return local;
-      }
-    }).filter((item) => !!item);
+    const cryptos = this.#details.getCryptos().map((local) => {
+      const remote = this.#cryptoDB.get(local._id)
+        || (local.type === 'token' ? this.#cryptoDB.getTokenByAddress(local.platform, local.address) : undefined);
+      if (remote) return remote;
+      local.custom = true;
+      local.supported = local.type === 'token'
+        ? (this.#cryptoDB.platform(local.platform)?.supported === true)
+        : false;
+      return local;
+    });
     cryptos.forEach((crypto) => {
-      if (crypto.type === 'token') {
+      if (crypto.type === 'token' && crypto.supported === true) {
         const platform = cryptos.find((item) => item.type === 'coin' && item.platform === crypto.platform);
         if (!platform) cryptos.push(this.#cryptoDB.platform(crypto.platform));
       }
     });
-    this.#details.set('cryptos', cryptos);
+    this.#details.setCryptos(cryptos);
     await this.#market.init({
-      cryptos,
+      cryptos: this.#details.getSupportedCryptos(),
       currency: this.#details.get('systemInfo').preferredCurrency,
     });
     this.#exchanges = new Exchanges({
@@ -436,8 +423,8 @@ export default class Account extends EventEmitter {
 
     await this.init();
 
-    const walletStorages = await WalletStorage.initMany(this, this.#details.get('cryptos'));
-    const wallets = await Promise.all(this.#details.get('cryptos').map(async (crypto) => {
+    const walletStorages = await WalletStorage.initMany(this, this.#details.getSupportedCryptos());
+    const wallets = await Promise.all(this.#details.getSupportedCryptos().map(async (crypto) => {
       const wallet = await this.#createWallet(crypto, walletSeed, walletStorages[crypto._id]);
       // save public key only for coins
       if (crypto.type === 'coin') {
@@ -455,8 +442,8 @@ export default class Account extends EventEmitter {
   async open(deviceSeed) {
     this.#deviceSeed = deviceSeed;
     await this.init();
-    const walletStorages = await WalletStorage.initMany(this, this.#details.get('cryptos'));
-    const wallets = await Promise.all(this.#details.get('cryptos').map(async (crypto) => {
+    const walletStorages = await WalletStorage.initMany(this, this.#details.getSupportedCryptos());
+    const wallets = await Promise.all(this.#details.getSupportedCryptos().map(async (crypto) => {
       const wallet = await this.#openWallet(crypto, walletStorages[crypto._id]);
       if (crypto.type === 'coin') {
         this.#details.setPlatformSettings(crypto.platform, wallet.settings);
@@ -501,6 +488,7 @@ export default class Account extends EventEmitter {
     if (this.#clientStorage.hasPublicKey(crypto.platform)) {
       const walletStorage = await WalletStorage.initOne(this, crypto);
       this.#wallets.set(await this.#openWallet(crypto, walletStorage));
+      this.#details.addCrypto(crypto);
     } else if (walletSeed) {
       if (crypto.type === 'coin') {
         const walletStorage = await WalletStorage.initOne(this, crypto);
@@ -508,6 +496,7 @@ export default class Account extends EventEmitter {
         this.#wallets.set(wallet);
         this.#details.setPlatformSettings(crypto.platform, wallet.settings);
         this.#clientStorage.setPublicKey(wallet.crypto.platform, wallet.getPublicKey(), this.#deviceSeed);
+        this.#details.addCrypto(crypto);
       }
       if (crypto.type === 'token') {
         const platform = this.#cryptoDB.platform(crypto.platform);
@@ -517,12 +506,13 @@ export default class Account extends EventEmitter {
         this.#details.setPlatformSettings(crypto.platform, wallet.settings);
         this.#clientStorage.setPublicKey(wallet.crypto.platform, wallet.getPublicKey(), this.#deviceSeed);
         this.#wallets.set(await this.#openWallet(crypto, walletStorages[crypto._id]));
+        this.#details.addCrypto(platform);
+        this.#details.addCrypto(crypto);
       }
     } else {
       throw new SeedRequiredError();
     }
 
-    this.#details.set('cryptos', this.#wallets.cryptos());
     await this.#details.save();
     this.emit('update');
   }
@@ -532,13 +522,14 @@ export default class Account extends EventEmitter {
       const wallets = this.#wallets.filterByPlatform(crypto.platform);
       for (const wallet of wallets) {
         this.#wallets.delete(wallet.crypto._id);
+        this.#details.removeCrypto(wallet.crypto);
       }
       this.#clientStorage.unsetPublicKey(crypto.platform);
     } else if (crypto.type === 'token') {
       this.#wallets.delete(crypto._id);
+      this.#details.removeCrypto(crypto);
     }
 
-    this.#details.set('cryptos', this.#wallets.cryptos());
     await this.#details.save();
     this.emit('update');
   }
@@ -683,7 +674,7 @@ export default class Account extends EventEmitter {
           return crypto?._id?.includes('@') && !defaultCryptos.find((token) => token._id === crypto._id);
         }),
       ];
-      this.#details.set('cryptos', cryptos);
+      this.#details.setCryptos(cryptos);
       this.#details.delete('tokens');
     }
   }

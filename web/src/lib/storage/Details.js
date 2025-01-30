@@ -39,4 +39,28 @@ export default class Details extends ServerStorage {
       [key]: value,
     });
   }
+
+  getCryptos() {
+    return this.get('cryptos') || [];
+  }
+
+  setCryptos(cryptos) {
+    this.set('cryptos', cryptos);
+  }
+
+  getSupportedCryptos() {
+    return this.get('cryptos').filter((item) => item.supported);
+  }
+
+  addCrypto(crypto) {
+    const cryptos = this.get('cryptos');
+    if (cryptos.every((item) => item._id !== crypto._id)) {
+      cryptos.push(crypto);
+    }
+    this.set('cryptos', cryptos);
+  }
+
+  removeCrypto(crypto) {
+    this.set('cryptos', this.get('cryptos').filter((item) => item._id !== crypto._id));
+  }
 }
