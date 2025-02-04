@@ -22,7 +22,7 @@
     "lint:api": "spectral lint ./lib/v*/*.yaml"
   },
   "dependencies": {
-    "@coinspace/crypto-db": "^1.13.4",
+    "@coinspace/crypto-db": "^1.13.5",
     "@ensdomains/address-encoder": "^0.2.9",
     "@sentry/integrations": "^6.17.3",
     "@sentry/node": "^6.17.3",
