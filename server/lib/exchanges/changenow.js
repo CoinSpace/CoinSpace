@@ -100,18 +100,28 @@ export async function estimate({ from, to, amount }) {
 
 export async function validateAddress({ cryptoId, address, extraId }) {
   const item = getCrypto(cryptoId);
-  const { data } = await changenow({
-    method: 'get',
-    url: 'validate/address',
-    params: {
-      currency: item.changenow.network,
-      address,
-      extraId,
-    },
-  });
-  return {
-    isValid: data?.result || false,
-  };
+  try {
+    const { data } = await changenow({
+      method: 'get',
+      url: 'validate/address',
+      params: {
+        currency: item.changenow.network,
+        address,
+        extraId,
+      },
+    });
+    return {
+      isValid: data?.result || false,
+    };
+  } catch (err) {
+    if (err.status === 400
+      && err.response?.data?.message === 'This currency is unavailable now for address validation') {
+      return {
+        isValid: true,
+      };
+    }
+    throw err;
+  }
 }
 
 export async function createTransaction({ walletId, from, to, amount, address, extraId, refundAddress }) {
