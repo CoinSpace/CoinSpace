@@ -11,7 +11,7 @@ const pkg = JSON.parse(await fs.readFile('./package.json'));
 const { VITE_DISTRIBUTION } = process.env;
 const BRANCH = process.env.GITHUB_REF && process.env.GITHUB_REF.replace('refs/heads/', '');
 
-if (!['appx', 'appx-dev', 'mac', 'mas', 'mas-dev', 'snap'].includes(VITE_DISTRIBUTION)) {
+if (!['appx', 'appx-dev', 'mac', 'mas', 'mas-dev', 'snap', 'flatpak'].includes(VITE_DISTRIBUTION)) {
   throw new Error(`Unsupported distribution: '${VITE_DISTRIBUTION}'`);
 }
 
@@ -204,7 +204,7 @@ export default {
         name: `${pkg.productName}-${pkg.version}${VITE_DISTRIBUTION === 'mas-dev' ? '-dev': ''}`,
       },
     },
-    {
+    VITE_DISTRIBUTION === 'snap' && {
       name: './support/snap.cjs',
       config: {
         linux: {
@@ -223,6 +223,20 @@ export default {
         },
         protocols,
         publish: BRANCH === 'master' ? 'always' : 'never',
+      },
+    },
+    VITE_DISTRIBUTION === 'flatpak' && {
+      name: '@electron-forge/maker-flatpak',
+      config: {
+        options: {
+          id: 'com.coinspace.wallet',
+          bin: pkg.executableName,
+          productName: pkg.productName,
+          genericName: 'Wallet',
+          description: pkg.description,
+          categories: ['Office', 'Finance'],
+          icon: 'resources/icon.png',
+        },
       },
     },
   ].filter(item => !!item),
