@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/github/license/CoinSpace/CoinSpace?color=blue)](https://github.com/CoinSpace/CoinSpace/blob/master/LICENSE)
 [![Twitter](https://img.shields.io/twitter/follow/CoinAppWallet?style=social)](https://twitter.com/intent/follow?screen_name=CoinAppWallet)
 
-Coin Wallet is a non-custodial multicurrency wallet for multiple platforms.
+Coin Wallet is a self-custodial multicurrency wallet for multiple platforms.
 
 Supported platforms:
 - Web
@@ -36,6 +36,7 @@ Supported coins:
 - Polygon (POL) and Polygon tokens
 - Solana (SOL) and SPL tokens
 - Stellar (XLM)
+- Sui (SUI)
 - TRON (TRX) and TRC20 tokens
 - Toncoin (TON) and Jettons
 - XRP (XRP)
