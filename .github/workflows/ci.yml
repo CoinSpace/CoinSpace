@@ -113,6 +113,13 @@ jobs:
             VITE_DISTRIBUTION: snap
             SENTRY_DSN_KEY: SENTRY_DSN_SNAP
             SENTRY_PROJECT: linux
+          - os: ubuntu-22.04
+            node: 20
+            VITE_BUILD_TYPE: electron
+            VITE_PLATFORM: linux
+            VITE_DISTRIBUTION: flatpak
+            SENTRY_DSN_KEY: SENTRY_DSN_SNAP
+            SENTRY_PROJECT: linux
           - os: windows-2019
             node: 20
             VITE_BUILD_TYPE: electron
@@ -194,6 +201,10 @@ jobs:
         uses: samuelmeuli/action-snapcraft@v2
         env:
           SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAP_TOKEN }}
+      - name: Install Flatpak
+        if: ${{ matrix.VITE_DISTRIBUTION == 'flatpak' }}
+        run: |
+          sudo apt install -y elfutils flatpak flatpak-builder
       - name: Install JDK
         if: ${{ matrix.VITE_PLATFORM == 'android' }}
         uses: actions/setup-java@v4

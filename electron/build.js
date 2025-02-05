@@ -2,7 +2,7 @@ import { execSync } from 'node:child_process';
 
 const { VITE_DISTRIBUTION } = process.env;
 
-if (!['appx', 'appx-dev', 'mac', 'mas', 'mas-dev', 'snap'].includes(VITE_DISTRIBUTION)) {
+if (!['appx', 'appx-dev', 'mac', 'mas', 'mas-dev', 'snap', 'flatpak'].includes(VITE_DISTRIBUTION)) {
   console.error(`Unsupported distribution: ${VITE_DISTRIBUTION}`);
   process.exit(1);
 }
@@ -18,6 +18,7 @@ function forgePlatform(distribution) {
     case 'appx-dev':
       return 'win32';
     case 'snap':
+    case 'flatpak':
       return 'linux';
     default:
       return distribution;
