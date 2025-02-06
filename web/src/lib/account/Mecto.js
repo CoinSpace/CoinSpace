@@ -21,6 +21,9 @@ export default class Mecto {
     if (!account) throw new TypeError('account is required');
     this.#request = request;
     this.#account = account;
+    if (window.navigator.geolocation && ['mas', 'mas-dev'].includes(import.meta.env.VITE_DISTRIBUTION)) {
+      window.navigator.geolocation.getCurrentPosition = window.electron.getCurrentPosition;
+    }
   }
 
   async enable(address) {

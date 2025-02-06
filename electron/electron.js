@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'node:url';
 import { init } from '@sentry/electron';
 import log from 'electron-log';
-import { Menu, app, net, protocol } from 'electron';
+import { Menu, app, ipcMain, net, protocol } from 'electron';
 
 import menu from './lib/menu.js';
 import openWindow from './lib/openWindow.js';
@@ -9,6 +9,7 @@ import schemes from './dist/schemes.js';
 import updater from './lib/updater.js';
 import {
   APP_HOSTNAME,
+  VITE_GOOGLE_API_KEY,
   VITE_SENTRY_DSN,
   VITE_SENTRY_ENVIRONMENT,
   VITE_SITE_URL,
@@ -112,6 +113,25 @@ app.on('window-all-closed', () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   log.info('app ready');
+
+  ipcMain.handle('geolocation', async (event, options) => {
+    const res = await fetch(`https://www.googleapis.com/geolocation/v1/geolocate?key=${VITE_GOOGLE_API_KEY}`, {
+      method: 'post',
+      signal: AbortSignal.timeout(options?.timeout || 30 * 1000),
+    });
+    const data = await res.json();
+    if (data?.location?.lat !== undefined && data?.location?.lng !== undefined) {
+      return {
+        coords: {
+          latitude: data.location.lat,
+          longitude: data.location.lng,
+          accuracy: data.accuracy,
+        },
+      };
+    } else {
+      throw new Error(`Wrong location data: ${data}`);
+    }
+  });
 
   // handle local files
   protocol.handle('https', (req) => {
