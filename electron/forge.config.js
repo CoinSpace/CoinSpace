@@ -288,7 +288,11 @@ export default {
       config: {
         bucket: process.env.GOOGLE_CLOUD_BUCKET,
         keyResolver(fileName/*, platform, arch*/) {
-          return `${pkg.version}-${BRANCH || 'local'}/${fileName}`;
+          const dir = `${pkg.version}-${BRANCH || 'local'}`;
+          if (fileName.endsWith('.flatpak')) {
+            return `${dir}/${pkg.executableName}-${pkg.version}.flatpak`;
+          }
+          return `${dir}/${fileName}`;
         },
         public: false,
       },
