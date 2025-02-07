@@ -235,7 +235,38 @@ export default {
           genericName: 'Wallet',
           description: pkg.description,
           categories: ['Office', 'Finance'],
-          icon: 'resources/icon.png',
+          icon: {
+            scalable: 'resources/icon.svg',
+          },
+          runtimeVersion: '24.08',
+          // Available versions: https://github.com/flathub/org.electronjs.Electron2.BaseApp/
+          baseVersion: '24.08',
+          modules: [{
+            name: 'zypak',
+            sources: [{
+              type: 'git',
+              url: 'https://github.com/refi64/zypak',
+              tag: 'v2024.01.17',
+            }],
+          }],
+          finishArgs: [
+            // X Rendering
+            '--socket=x11', '--socket=wayland', '--share=ipc',
+            // OpenGL
+            '--device=dri',
+            // Audio output
+            '--socket=pulseaudio',
+            // Read/write home directory access
+            '--filesystem=home',
+            // Chromium uses a socket in tmp for its singleton check
+            '--env=TMPDIR=/var/tmp',
+            // Allow communication with network
+            '--share=network',
+            // System notifications with libnotify
+            '--talk-name=org.freedesktop.Notifications',
+            // USB and webcam
+            '--device=all',
+          ],
         },
       },
     },
