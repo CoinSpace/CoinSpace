@@ -205,6 +205,10 @@ jobs:
         if: ${{ matrix.VITE_DISTRIBUTION == 'flatpak' }}
         run: |
           sudo apt install -y elfutils flatpak flatpak-builder
+          flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          flatpak update
+          # some flatpak deps need git protocol.file.allow
+          git config --global protocol.file.allow always
       - name: Install JDK
         if: ${{ matrix.VITE_PLATFORM == 'android' }}
         uses: actions/setup-java@v4
