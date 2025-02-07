@@ -21,7 +21,8 @@ export default class Mecto {
     if (!account) throw new TypeError('account is required');
     this.#request = request;
     this.#account = account;
-    if (window.navigator.geolocation && ['mas', 'mas-dev'].includes(import.meta.env.VITE_DISTRIBUTION)) {
+    if (['mas', 'mas-dev'].includes(import.meta.env.VITE_DISTRIBUTION)) {
+      if (!window.navigator.geolocation) window.navigator.geolocation = {};
       window.navigator.geolocation.getCurrentPosition = window.electron.getCurrentPosition;
     }
   }
@@ -79,11 +80,15 @@ export default class Mecto {
       window.navigator.geolocation.getCurrentPosition(
         (position) => { resolve(position.coords); },
         (err) => {
-          alert(
-            i18n.global.t('Please enable geolocation access in Settings to continue.'),
-            i18n.global.t('OK'),
-            [i18n.global.t('Cancel'), i18n.global.t('Settings')]
-          );
+          if (['mas', 'mas-dev'].includes(import.meta.env.VITE_DISTRIBUTION)) {
+            alert(i18n.global.t('Error! Please try again later.'));
+          } else {
+            alert(
+              i18n.global.t('Please enable geolocation access in Settings to continue.'),
+              i18n.global.t('OK'),
+              [i18n.global.t('Cancel'), i18n.global.t('Settings')]
+            );
+          }
           reject(new GeolocationError('Unable to retrieve your location', {
             cause: err,
           }));
