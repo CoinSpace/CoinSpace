@@ -41,7 +41,7 @@ export default {
       /HISTORY.md/i,
       /CHANGELOG.md/i,
       '^/(?!electron.js|package.json|lib|dist|resources|node_modules)',
-      ['appx', 'appx-dev', 'snap'].includes(VITE_DISTRIBUTION) ? '^/resources/(?!64x64.png)' : '^/resources',
+      ['appx', 'appx-dev', 'snap', 'flatpak'].includes(VITE_DISTRIBUTION) ? '^/resources/(?!64x64.png)' : '^/resources',
       'Makefile',
       '.editorconfig',
       '.gitignore',
@@ -267,6 +267,7 @@ export default {
             // USB and webcam
             '--device=all',
           ],
+          mimeType: schemes.map((scheme) => `x-scheme-handler/${scheme}`),
         },
       },
     },
