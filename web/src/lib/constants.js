@@ -17,6 +17,7 @@ export const EVM_FAMILY = [
   'arbitrum',
   'optimism',
   'fantom',
+  'base',
 ];
 
 export const SUPPORTED_PLATFORMS = [
@@ -36,6 +37,7 @@ export const SUPPORTED_PLATFORMS = [
 export const TOKEN_PLATFORMS = [
   'arbitrum',
   'avalanche-c-chain',
+  'base',
   'binance-smart-chain',
   'ethereum',
   'fantom',
@@ -115,6 +117,8 @@ export function getApiNode(platform, isOnion) {
       return isOnion ? import.meta.env.VITE_API_OP_URL_TOR : import.meta.env.VITE_API_OP_URL;
     case 'fantom':
       return isOnion ? import.meta.env.VITE_API_FTM_URL_TOR : import.meta.env.VITE_API_FTM_URL;
+    case 'base':
+      return isOnion ? import.meta.env.VITE_API_BASE_URL_TOR : import.meta.env.VITE_API_BASE_URL;
     // Ripple-like
     case 'ripple':
       return isOnion ? import.meta.env.VITE_API_XRP_URL_TOR : import.meta.env.VITE_API_XRP_URL;

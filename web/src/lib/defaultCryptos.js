@@ -1,5 +1,6 @@
 import arbitrum from '@coinspace/crypto-db/crypto/ethereum@arbitrum.json';
 import avalanche from '@coinspace/crypto-db/crypto/avalanche@avalanche-c-chain.json';
+import base from '@coinspace/crypto-db/crypto/ethereum@base.json';
 import binanceSmartChain from '@coinspace/crypto-db/crypto/binance-coin@binance-smart-chain.json';
 import bitcoin from '@coinspace/crypto-db/crypto/bitcoin@bitcoin.json';
 import bitcoinCash from '@coinspace/crypto-db/crypto/bitcoin-cash@bitcoin-cash.json';
@@ -25,6 +26,7 @@ import xrp from '@coinspace/crypto-db/crypto/xrp@ripple.json';
 export default [
   arbitrum,
   avalanche,
+  base,
   binanceSmartChain,
   bitcoin,
   bitcoinCash,

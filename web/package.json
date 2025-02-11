@@ -26,12 +26,12 @@
     "lint:style": "stylelint '**/*.{vue,scss}'"
   },
   "dependencies": {
-    "@coinspace/crypto-db": "^1.13.5",
+    "@coinspace/crypto-db": "^1.14.0",
     "@coinspace/cs-bitcoin-wallet": "^1.2.2",
     "@coinspace/cs-cardano-wallet": "^2.0.1",
     "@coinspace/cs-common": "^1.1.9",
     "@coinspace/cs-eos-wallet": "^2.0.4",
-    "@coinspace/cs-evm-wallet": "^1.6.2",
+    "@coinspace/cs-evm-wallet": "^1.7.0",
     "@coinspace/cs-monero-wallet": "^2.0.5",
     "@coinspace/cs-ripple-wallet": "^2.2.2",
     "@coinspace/cs-solana-wallet": "^2.2.0",

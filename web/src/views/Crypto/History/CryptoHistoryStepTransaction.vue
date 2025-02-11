@@ -221,7 +221,7 @@ export default {
         :label="$t('Fee')"
         :value="`${transaction.fee} ${$wallet.crypto.type === 'coin'
           ? $wallet.crypto.symbol : $wallet.platform.symbol}`
-          + `${$wallet.platform._id === 'ethereum@optimism' ? ' + L1' : ''}`"
+          + `${['ethereum@optimism', 'ethereum@base'].includes($wallet.platform._id) ? ' + L1' : ''}`"
       />
       <CsFormTextareaReadonly
         :label="$t('Transaction ID')"
