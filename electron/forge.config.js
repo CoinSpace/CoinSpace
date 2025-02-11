@@ -229,7 +229,7 @@ export default {
       name: '@electron-forge/maker-flatpak',
       config: {
         options: {
-          id: 'com.coinspace.wallet',
+          id: 'space.coin.wallet',
           bin: pkg.executableName,
           productName: pkg.productName,
           genericName: 'Wallet',
