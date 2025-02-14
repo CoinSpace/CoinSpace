@@ -16,7 +16,14 @@ export default {
       :class="{ '&__content--active': $route.name !== 'home' }"
     >
       <RouterView v-slot="{ Component, route }">
-        <transition :name="route.meta.transition">
+        <component
+          :is="Component"
+          v-if="route.path === '/'"
+        />
+        <transition
+          v-else
+          :name="route.meta.transition"
+        >
           <component
             :is="Component"
             :key="route.path"
