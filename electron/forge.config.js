@@ -273,7 +273,7 @@ export default {
     },
   ].filter(item => !!item),
   publishers: [
-    ['mac'].includes(VITE_DISTRIBUTION) && BRANCH === 'master' && {
+    ['mac', 'flatpak'].includes(VITE_DISTRIBUTION) && BRANCH === 'master' && {
       name: '@electron-forge/publisher-github',
       config: {
         repository: {

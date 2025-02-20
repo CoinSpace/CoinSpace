@@ -1,0 +1,13 @@
+diff --git a/node_modules/@malept/electron-installer-flatpak/src/installer.js b/node_modules/@malept/electron-installer-flatpak/src/installer.js
+index a2c4278..050c8ff 100644
+--- a/node_modules/@malept/electron-installer-flatpak/src/installer.js
++++ b/node_modules/@malept/electron-installer-flatpak/src/installer.js
+@@ -141,7 +141,7 @@ class FlatpakInstaller extends common.ElectronInstaller {
+    * Bundle everything using `flatpak-bundler`.
+    */
+   async createBundle () {
+-    const name = `${this.appIdentifier}_${this.options.branch}_${this.options.arch}.flatpak`
++    const name = `${this.appIdentifier}.flatpak`
+     const dest = this.options.rename(this.options.dest, name)
+     this.options.logger(`Creating package at ${dest}`)
+     const extraExports = []

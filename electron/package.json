@@ -18,6 +18,7 @@
     "forge": "forge.config.js"
   },
   "scripts": {
+    "postinstall": "patch-package",
     "start": "electron-forge start",
     "build": "node build.js",
     "package": "electron-forge package",
@@ -42,7 +43,8 @@
     "electron": "^34.0.2",
     "electron-packager-languages": "^0.6.0",
     "eslint": "^8.49.0",
-    "eslint-config-coinspace": "^2.1.1"
+    "eslint-config-coinspace": "^2.1.1",
+    "patch-package": "^8.0.0"
   },
   "dependencies": {
     "@sentry/electron": "^4.11.0",
