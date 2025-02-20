@@ -20,6 +20,7 @@ Supported platforms:
 Supported coins:
 - Arbitrum One (ARB) and Arbitrum tokens
 - Avalanche C-Chain (AVAX) and ARC20 tokens
+- Base (ETH) and Base tokens
 - Binance Smart Chain (BNB) and BEP20 tokens
 - Bitcoin (BTC)
 - Bitcoin Cash (BCH)
@@ -36,9 +37,9 @@ Supported coins:
 - Polygon (POL) and Polygon tokens
 - Solana (SOL) and SPL tokens
 - Stellar (XLM)
-- Sui (SUI)
-- TRON (TRX) and TRC20 tokens
+- Sui (SUI) and Sui tokens
 - Toncoin (TON) and Jettons
+- TRON (TRX) and TRC20 tokens
 - XRP (XRP)
 
 This project is tested with BrowserStack
