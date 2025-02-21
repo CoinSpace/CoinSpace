@@ -206,6 +206,7 @@ jobs:
       - name: Install Flatpak
         if: ${{ matrix.VITE_DISTRIBUTION == 'flatpak' }}
         run: |
+          sudo apt update
           sudo apt install -y elfutils flatpak flatpak-builder
           flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
           flatpak update
