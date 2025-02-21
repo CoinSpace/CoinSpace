@@ -18,7 +18,7 @@
     "forge": "forge.config.js"
   },
   "scripts": {
-    "postinstall": "patch-package",
+    "postinstall": "patch-package --error-on-fail=false",
     "start": "electron-forge start",
     "build": "node build.js",
     "package": "electron-forge package",
