@@ -1,5 +1,6 @@
 import appxmanifest from './support/appxmanifest.js';
 import fs from 'node:fs/promises';
+import path from 'node:path';
 import setLanguages from 'electron-packager-languages';
 const schemes = [
   'coinspace',
@@ -269,6 +270,9 @@ export default {
           ],
           mimeType: schemes.map((scheme) => `x-scheme-handler/${scheme}`),
         },
+        rename(dest/*, src*/) {
+          return path.join(dest, `${pkg.productName}.flatpak`);
+        },
       },
     },
   ].filter(item => !!item),
@@ -290,9 +294,6 @@ export default {
         bucket: process.env.GOOGLE_CLOUD_BUCKET,
         keyResolver(fileName/*, platform, arch*/) {
           const dir = `${pkg.version}-${BRANCH || 'local'}`;
-          if (fileName.endsWith('.flatpak')) {
-            return `${dir}/${pkg.executableName}-${pkg.version}.flatpak`;
-          }
           return `${dir}/${fileName}`;
         },
         public: false,

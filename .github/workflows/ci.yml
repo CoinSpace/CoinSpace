@@ -193,8 +193,6 @@ jobs:
           NODE_ENV: ci
           VITE_BUILD_TYPE: ${{ matrix.VITE_BUILD_TYPE }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_READ_TOKEN }}
-          # https://github.com/ds300/patch-package/blob/v8.0.0/src/index.ts#L110-L114
-          PATCH_PACKAGE_INTEGRATION_TEST: true
         shell: bash
         run: |
           npm --prefix web ci
