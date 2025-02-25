@@ -48,7 +48,7 @@ jobs:
             <!-- * [App Store](https://apps.apple.com/app/coin-wallet-bitcoin-crypto/id980719434?platform=mac) (macOS) -->
             * [Coin.Wallet.dmg](https://github.com/CoinSpace/CoinSpace/releases/download/v${{ env.VERSION }}/Coin.Wallet.dmg) (macOS)
             <!-- * [Snap Store](https://snapcraft.io/coin) (Linux) -->
-            * [Flatpak](https://github.com/CoinSpace/CoinSpace/releases/download/v${{ env.VERSION }}/space.coin.wallet.flatpak) (Linux)
+            * [Flatpak](https://github.com/CoinSpace/CoinSpace/releases/download/v${{ env.VERSION }}/Coin.Wallet.flatpak) (Linux)
 
             ### 🕵️ Tor
 
