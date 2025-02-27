@@ -26,6 +26,7 @@ const rampApi = axios.create({
 async function ramp(type, { walletId, crypto, address }) {
   if (!API_KEY) return;
   if (!crypto?.paybis?.id) return;
+  if (type === 'sell' && crypto.paybis.sell !== true) return;
 
   const params = {
     partnerUserId: getUserId(walletId, 'Paybis'),
