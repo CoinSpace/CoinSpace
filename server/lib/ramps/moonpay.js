@@ -52,7 +52,7 @@ async function sell({ countryCode, crypto, address }) {
 }
 
 async function getCountryAndCurrency(countryCode, crypto) {
-  if (!crypto) return;
+  if (!crypto?.moonpay) return;
   const countries = await cachedCountries();
   const country = countryCode ? countries.find((item) => item.alpha2 === countryCode) : {
     isBuyAllowed: true,
@@ -61,13 +61,10 @@ async function getCountryAndCurrency(countryCode, crypto) {
   if (!country) return;
 
   const currencies = await cachedCurrencies();
-  let currency;
-  if (crypto.moonpay) {
-    currency = currencies.find((item) => item.id === crypto.moonpay.id);
-  }
+  const currency = currencies.find((item) => item.id === crypto.moonpay.id);
   if (!currency) return;
   if (currency.isSuspended) return;
-  if (country.alpha2 === 'US' && !currency.isSupportedInUS) return;
+  if (currency.notAllowedCountries && currency.notAllowedCountries.includes(country.alpha2)) return;
   return { country, currency };
 }
 
