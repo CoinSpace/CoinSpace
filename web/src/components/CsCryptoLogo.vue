@@ -1,8 +1,10 @@
 <script>
+import BlockchainIcon from '../assets/svg/blockchain.svg';
 import TokenIcon from '../assets/svg/token.svg';
 
 export default {
   components: {
+    BlockchainIcon,
     TokenIcon,
   },
   props: {
@@ -36,6 +38,10 @@ export default {
       :alt="crypto.name"
       @error="cryptoLogoError = true"
     >
+    <BlockchainIcon
+      v-else-if="crypto.type === 'custom'"
+      class="&__crypto"
+    />
     <TokenIcon
       v-else
       class="&__crypto"

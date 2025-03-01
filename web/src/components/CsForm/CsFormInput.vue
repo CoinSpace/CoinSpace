@@ -90,6 +90,12 @@ export default {
     >
       <slot name="infoFooter" />
     </template>
+    <template
+      v-if="$slots.button"
+      #button
+    >
+      <slot name="button" />
+    </template>
   </CsFormElement>
 </template>
 

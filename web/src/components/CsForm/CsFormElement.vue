@@ -53,7 +53,12 @@ export default {
       '&--has-error': error,
     }"
   >
-    <div class="&__container">
+    <div
+      class="&__container"
+      :class="{
+        '&__container--with-button': $slots.button,
+      }"
+    >
       <label
         class="&__control"
         :aria-label="ariaLabel"
@@ -86,6 +91,7 @@ export default {
       >
         <InfoIcon />
       </CsButton>
+      <slot name="button" />
     </div>
     <div
       v-if="error"
@@ -120,6 +126,10 @@ export default {
     &__container {
       display: flex;
       align-items: flex-end;
+
+      &--with-button {
+        gap: $spacing-lg;
+      }
     }
 
     &__control {
@@ -179,7 +189,7 @@ export default {
 
     &--small {
       #{ $self }__box {
-        min-height: 2.5rem;
+        min-height: 2.75rem;
       }
     }
 

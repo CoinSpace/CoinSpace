@@ -83,6 +83,10 @@ export default {
       width: $spacing-xl;
       height: $spacing-xl;
       flex-shrink: 0;
+
+      * {
+        stroke: $text-color;
+      }
     }
   }
   .#{ $filename } {
@@ -152,6 +156,12 @@ export default {
       &:active {
         background-color: darker($primary-light, 7%);
       }
+
+      svg {
+        * {
+          stroke: $primary;
+        }
+      }
     }
 
     &--danger-light {
@@ -165,6 +175,12 @@ export default {
 
       &:active {
         background-color: darker($danger-light, 7%);
+      }
+
+      svg {
+        * {
+          stroke: $danger;
+        }
       }
     }
 
@@ -180,6 +196,12 @@ export default {
       &:active {
         color: darker($primary, 15%);
       }
+
+      svg {
+        * {
+          stroke: $primary;
+        }
+      }
     }
 
     &--white-link {
@@ -194,6 +216,12 @@ export default {
       &:active {
         color: darker($white, 15%);
       }
+
+      svg {
+        * {
+          stroke: $white;
+        }
+      }
     }
 
     &--danger-link {
@@ -207,6 +235,12 @@ export default {
 
       &:active {
         color: darker($danger, 15%);
+      }
+
+      svg {
+        * {
+          stroke: $danger;
+        }
       }
     }
 

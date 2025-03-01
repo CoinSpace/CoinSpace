@@ -235,9 +235,5 @@ export default {
       @include text-sm;
       word-break: break-all;
     }
-
-    &__copy-icon * {
-      stroke: $primary;
-    }
   }
 </style>
