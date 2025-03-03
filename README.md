@@ -36,6 +36,7 @@ Supported coins:
 - Optimism (OP) and Optimism tokens
 - Polygon (POL) and Polygon tokens
 - Solana (SOL) and SPL tokens
+- Sonic (S) and Sonic tokens
 - Stellar (XLM)
 - Sui (SUI) and Sui tokens
 - Toncoin (TON) and Jettons

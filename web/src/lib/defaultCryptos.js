@@ -10,12 +10,12 @@ import dogecoin from '@coinspace/crypto-db/crypto/dogecoin@dogecoin.json';
 import eos from '@coinspace/crypto-db/crypto/eos@eos.json';
 import ethereum from '@coinspace/crypto-db/crypto/ethereum@ethereum.json';
 import ethereumClassic from '@coinspace/crypto-db/crypto/ethereum-classic@ethereum-classic.json';
-import fantom from '@coinspace/crypto-db/crypto/fantom@fantom.json';
 import litecoin from '@coinspace/crypto-db/crypto/litecoin@litecoin.json';
 import monero from '@coinspace/crypto-db/crypto/monero@monero.json';
 import optimism from '@coinspace/crypto-db/crypto/ethereum@optimism.json';
 import polygon from '@coinspace/crypto-db/crypto/polygon@polygon.json';
 import solana from '@coinspace/crypto-db/crypto/solana@solana.json';
+import sonic from '@coinspace/crypto-db/crypto/sonic@sonic.json';
 import stellar from '@coinspace/crypto-db/crypto/stellar@stellar.json';
 import sui from '@coinspace/crypto-db/crypto/sui@sui.json';
 import tether from '@coinspace/crypto-db/crypto/tether@ethereum.json';
@@ -36,12 +36,12 @@ export default [
   eos,
   ethereum,
   ethereumClassic,
-  fantom,
   litecoin,
   monero,
   optimism,
   polygon,
   solana,
+  sonic,
   stellar,
   sui,
   tether,
