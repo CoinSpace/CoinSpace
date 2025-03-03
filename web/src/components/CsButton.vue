@@ -83,10 +83,6 @@ export default {
       width: $spacing-xl;
       height: $spacing-xl;
       flex-shrink: 0;
-
-      * {
-        stroke: $text-color;
-      }
     }
   }
   .#{ $filename } {
