@@ -3,7 +3,7 @@ import CsCryptoList from '../../../components/CsCryptoList.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 
-import { TOKEN_PLATFORMS } from '../../../lib/constants.js';
+import { SUPPORTED_PLATFORMS } from '../../../lib/constants.js';
 
 export default {
   components: {
@@ -18,7 +18,7 @@ export default {
         title: 'All blockchains',
         subtitle: 'Reset filter',
       }, ...this.$account.cryptoDB
-        .platforms(TOKEN_PLATFORMS)
+        .platforms(SUPPORTED_PLATFORMS)
         .map((crypto) => {
           return {
             crypto,
