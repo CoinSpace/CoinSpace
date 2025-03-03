@@ -24,5 +24,6 @@ export default {
 <template>
   <CsSteps
     :steps="$options.steps"
+    :initialStorage="{ platform: 'ethereum@ethereum' }"
   />
 </template>

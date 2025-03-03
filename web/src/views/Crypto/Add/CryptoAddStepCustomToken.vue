@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     platform() {
-      return this.$account.cryptoDB.get(this.storage.platform || 'ethereum@ethereum');
+      return this.$account.cryptoDB.get(this.storage.platform);
     },
     crypto() {
       return this.token;

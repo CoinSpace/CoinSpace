@@ -42,6 +42,7 @@ export default {
       :header="$t('Blockchains')"
       class="&__list"
       :items="items"
+      :selected="storage.platform"
       columns
       @select="select"
     />
