@@ -387,6 +387,10 @@ export default class Account extends EventEmitter {
     return this.#wallets.getByChainId(chainId);
   }
 
+  hasWallet(id) {
+    return this.#wallets.has(id);
+  }
+
   async create(walletSeed, pin) {
     if (!(walletSeed instanceof Uint8Array)) {
       throw new TypeError('walletSeed must be Uint8Array or Buffer');

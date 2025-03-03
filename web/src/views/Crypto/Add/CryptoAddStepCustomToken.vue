@@ -1,6 +1,6 @@
 <script>
-import { cryptoSubtitleWithSymbol } from '../../../lib/helpers.js';
-import { walletSeed } from '../../../lib/mixins.js';
+import { isQrScanAvailable } from '../../../lib/helpers.js';
+import { onShowOnHide, walletSeed } from '../../../lib/mixins.js';
 
 import { AddressError } from '@coinspace/cs-common/errors';
 import CsButton from '../../../components/CsButton.vue';
@@ -9,17 +9,12 @@ import CsCryptoLogo from '../../../components/CsCryptoLogo.vue';
 import CsFormDropdown from '../../../components/CsForm/CsFormDropdown.vue';
 import CsFormGroup from '../../../components/CsForm/CsFormGroup.vue';
 import CsFormInput from '../../../components/CsForm/CsFormInput.vue';
-import CsModal from '../../../components/CsModal.vue';
 import CsStep from '../../../components/CsStep.vue';
-import CsTokenInfo from '../../../components/CsTokenInfo.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 import { RequestError } from '../../../lib/account/Request.js';
-import {
-  CryptoAlreadyAddedError,
-  SeedRequiredError,
-} from '../../../lib/account/Account.js';
 
-import debounce from 'p-debounce';
+import PasteIcon from '../../../assets/svg/paste.svg';
+import QrIcon from '../../../assets/svg/qr.svg';
 
 export default {
   components: {
@@ -30,55 +25,67 @@ export default {
     CsFormDropdown,
     CsFormGroup,
     CsFormInput,
-    CsModal,
-    CsTokenInfo,
+    PasteIcon,
+    QrIcon,
   },
   extends: CsStep,
-  mixins: [walletSeed],
+  mixins: [walletSeed, onShowOnHide],
+  async onShow() {
+    if (this.args?.error) {
+      console.error(this.args.error);
+      this.error = this.$t('Invalid token address');
+    }
+    if (this.storage.temp?.address) {
+      this.error = undefined;
+      this.address = this.storage.temp.address;
+      this.storage.temp.address = undefined;
+    }
+    this.isQrScanAvailable = await isQrScanAvailable();
+  },
   data() {
-    const alreadyAdded = this.$account.wallets().map((item) => item.crypto._id);
     return {
       isLoading: false,
       showModal: false,
       address: '',
       error: undefined,
-      token: undefined,
-      alreadyAdded,
+      isPasteAvailable: typeof navigator.clipboard?.readText === 'function',
+      isQrScanAvailable: false,
     };
   },
   computed: {
     platform() {
       return this.$account.cryptoDB.get(this.storage.platform);
     },
-    crypto() {
-      return this.token;
-    },
-    description() {
-      return [
-        cryptoSubtitleWithSymbol({ crypto: this.crypto, platform: this.platform }),
-        this.$t('{decimals} decimals', { decimals: this.crypto.decimals }),
-      ];
-    },
   },
   watch: {
     'storage.platform'(newPlatform, oldPlatform) {
       if (newPlatform !== oldPlatform) {
         this.error = undefined;
-        this.token = undefined;
         this.address = '';
+        this.updateStorage({ token: undefined });
       }
     },
-    address: debounce(async function(address) {
-      if (!this.platform || !address) return;
+  },
+  methods: {
+    async confirm() {
+      if (!this.address) return;
       if (this.isLoading) return;
       this.isLoading = true;
       this.error = undefined;
-      this.token = undefined;
+      this.updateStorage({ token: undefined });
+
       try {
-        const token = await this.$account.getCustomTokenInfo(this.platform.platform, address);
+        const token = await this.$account.getCustomTokenInfo(this.platform.platform, this.address);
+        if (this.$account.hasWallet(token._id)) {
+          this.error = this.$t('{token} already added.', {
+            token: token.name,
+          });
+          return;
+        }
         this.token = token;
+        this.updateStorage({ token });
+        this.next('tokenInfo');
       } catch (err) {
-        this.token = undefined;
         if (err instanceof AddressError || err instanceof RequestError) {
           this.error = this.$t('Invalid token address');
           return;
@@ -87,43 +94,13 @@ export default {
       } finally {
         this.isLoading = false;
       }
-    }, 300),
-  },
-  methods: {
-    async confirm() {
-      if (!this.token) {
-        return;
-      }
-      const platform = this.$account.cryptoDB.platform(this.token.platform);
-      if (this.alreadyAdded.includes(platform._id)) {
-        await this.add();
-      } else {
-        this.showModal = true;
-      }
     },
-    async add() {
-      this.showModal = false;
-      this.isLoading = true;
-      this.error = undefined;
-      try {
-        await this.$account.addWallet(this.token);
-        this.$router.replace({ name: 'crypto', params: { cryptoId: this.token._id } });
-      } catch (err) {
-        if (err instanceof SeedRequiredError) {
-          await this.walletSeed(async (walletSeed) => {
-            await this.$account.addWallet(this.token, walletSeed);
-            this.$router.replace({ name: 'crypto', params: { cryptoId: this.token._id } });
-          });
-        } else if (err instanceof CryptoAlreadyAddedError) {
-          this.error = this.$t('{token} already added.', {
-            token: this.token.name,
-          });
-        } else {
-          console.error(err);
-        }
-      } finally {
-        this.isLoading = false;
-      }
+    paste() {
+      navigator.clipboard.readText()
+        .then((text) => {
+          this.error = undefined;
+          this.address = text;
+        }, () => {});
     },
   },
 };
@@ -131,7 +108,7 @@ export default {
 
 <template>
   <MainLayout :title="$t('Add custom token')">
-    <CsFormGroup :class="{'&__container': !crypto }">
+    <CsFormGroup class="&__container">
       <CsFormDropdown
         :value="platform.name"
         :label="$t('Blockchain')"
@@ -148,50 +125,41 @@ export default {
         :error="error"
         @update:modelValue="error = undefined"
       />
+      <CsButtonGroup
+        class="&__actions"
+        type="circle"
+      >
+        <CsButton
+          v-if="isPasteAvailable"
+          type="circle"
+          @click="paste"
+        >
+          <template #circle>
+            <PasteIcon />
+          </template>
+          {{ $t('Paste') }}
+        </CsButton>
+        <CsButton
+          v-if="isQrScanAvailable"
+          type="circle"
+          @click="next('qr')"
+        >
+          <template #circle>
+            <QrIcon />
+          </template>
+          {{ $t('Scan QR') }}
+        </CsButton>
+      </CsButtonGroup>
     </CsFormGroup>
-    <CsTokenInfo
-      v-if="crypto"
-      class="&__container"
-      :crypto="crypto"
-      :platform="platform"
-      :title="crypto.name"
-      :subtitles="description"
-    />
     <CsButtonGroup>
       <CsButton
         type="primary"
         :isLoading="isLoading"
         @click="confirm"
       >
-        {{ $t('Add token') }}
+        {{ $t('Continue') }}
       </CsButton>
     </CsButtonGroup>
-    <CsModal
-      :show="showModal"
-      :title="$t('Add token')"
-      @close="showModal = false"
-    >
-      {{ $t("{crypto} is based on {platform}, which isn't in your wallet yet, so it will also be added.", {
-        platform: platform.name,
-        crypto: $t('Custom token')
-      }) }}
-      <template #footer>
-        <CsButtonGroup>
-          <CsButton
-            type="primary"
-            @click="add(token)"
-          >
-            {{ $t('Add') }}
-          </CsButton>
-          <CsButton
-            type="primary-link"
-            @click="showModal = false"
-          >
-            {{ $t('Cancel') }}
-          </CsButton>
-        </CsButtonGroup>
-      </template>
-    </CsModal>
   </MainLayout>
 </template>
 
