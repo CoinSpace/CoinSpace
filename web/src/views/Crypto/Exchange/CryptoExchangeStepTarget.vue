@@ -12,6 +12,7 @@ import CsModal from '../../../components/CsModal.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 
+import FilterIcon from '../../../assets/svg/filter.svg';
 import SearchIcon from '../../../assets/svg/search.svg';
 
 export default {
@@ -22,6 +23,7 @@ export default {
     CsCryptoList,
     CsFormInput,
     CsModal,
+    FilterIcon,
     SearchIcon,
   },
   extends: CsStep,
@@ -35,12 +37,18 @@ export default {
   },
   computed: {
     coins() {
-      if (!this.query) return this.coinsList;
-      return this.coinsIndex.search(this.query).map(item => item.item);
+      const coins = this.query ? this.coinsIndex.search(this.query).map(item => item.item) : this.coinsList;
+      if (this.storage.filterPlatform) {
+        return coins.filter((item) => item.platform._id === this.storage.filterPlatform);
+      }
+      return coins;
     },
     tokens() {
-      if (!this.query) return this.tokensList;
-      return this.tokensIndex.search(this.query).map(item => item.item);
+      const tokens = this.query ? this.tokensIndex.search(this.query).map(item => item.item) : this.tokensList;
+      if (this.storage.filterPlatform) {
+        return tokens.filter((item) => item.platform._id === this.storage.filterPlatform);
+      }
+      return tokens;
     },
   },
   beforeCreate() {
@@ -125,6 +133,15 @@ export default {
         >
           <template #before>
             <SearchIcon />
+          </template>
+          <template #button>
+            <CsButton
+              small
+              :type="storage.filterPlatform ? 'primary-light' : 'secondary'"
+              @click="next('filterBlockchain')"
+            >
+              <FilterIcon />
+            </CsButton>
           </template>
         </CsFormInput>
       </div>

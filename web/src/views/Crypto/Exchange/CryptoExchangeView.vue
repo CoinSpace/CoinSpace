@@ -4,6 +4,7 @@ import CsSteps from '../../../components/CsSteps.vue';
 
 import CryptoExchangeStepAddress from './CryptoExchangeStepAddress.vue';
 import CryptoExchangeStepConfirm from './CryptoExchangeStepConfirm.vue';
+import CryptoExchangeStepFilterBlockchain from './CryptoExchangeStepFilterBlockchain.vue';
 import CryptoExchangeStepIndex from './CryptoExchangeStepIndex.vue';
 import CryptoExchangeStepMecto from './CryptoExchangeStepMecto.vue';
 import CryptoExchangeStepMeta from './CryptoExchangeStepMeta.vue';
@@ -29,6 +30,7 @@ export default {
     pin: CsPinStep,
     qr: CryptoExchangeStepQr,
     poor: CryptoExchangeStepPoor,
+    filterBlockchain: CryptoExchangeStepFilterBlockchain,
   },
 };
 </script>
