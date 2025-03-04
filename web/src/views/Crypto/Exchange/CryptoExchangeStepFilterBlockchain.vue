@@ -15,8 +15,8 @@ export default {
     items() {
       return [{
         crypto: { _id: 'reset', type: 'custom' },
-        title: 'All blockchains',
-        subtitle: 'Reset filter',
+        title: this.$t('All blockchains'),
+        subtitle: this.$t('Reset filter'),
       }, ...this.$account.cryptoDB
         .platforms(SUPPORTED_PLATFORMS)
         .map((crypto) => {
