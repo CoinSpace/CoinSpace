@@ -18,8 +18,8 @@ Supported platforms:
 - Tor
 
 Supported coins:
-- Arbitrum One (ARB) and Arbitrum tokens
-- Avalanche C-Chain (AVAX) and ARC20 tokens
+- Arbitrum (ARB) and Arbitrum tokens
+- Avalanche (AVAX) and ARC20 tokens
 - Base (ETH) and Base tokens
 - Binance Smart Chain (BNB) and BEP20 tokens
 - Bitcoin (BTC)
