@@ -366,7 +366,7 @@ export default class Account extends EventEmitter {
         custom: true,
       };
     } else {
-      throw new errors.AddressError(`Invalid token address ${address}`);
+      throw new errors.AddressError(`Invalid contract address ${address}`);
     }
   }
 

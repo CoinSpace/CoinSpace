@@ -41,7 +41,6 @@ export default {
       return;
     }
     if (this.args?.error) {
-      console.error(this.args.error);
       this.error = this.$t('Invalid address');
     }
     if (this.storage.temp?.address) {

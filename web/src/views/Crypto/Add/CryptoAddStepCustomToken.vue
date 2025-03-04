@@ -32,8 +32,7 @@ export default {
   mixins: [walletSeed, onShowOnHide],
   async onShow() {
     if (this.args?.error) {
-      console.error(this.args.error);
-      this.error = this.$t('Invalid token address');
+      this.error = this.$t('Invalid contract address');
     }
     if (this.storage.temp?.address) {
       this.error = undefined;
@@ -68,8 +67,11 @@ export default {
   },
   methods: {
     async confirm() {
-      if (!this.address) return;
       if (this.isLoading) return;
+      if (!this.address) {
+        this.error = this.$t('Invalid contract address');
+        return;
+      }
       this.isLoading = true;
       this.error = undefined;
       this.updateStorage({ token: undefined });
@@ -87,7 +89,7 @@ export default {
         this.next('tokenInfo');
       } catch (err) {
         if (err instanceof AddressError || err instanceof RequestError) {
-          this.error = this.$t('Invalid token address');
+          this.error = this.$t('Invalid contract address');
           return;
         }
         console.error(err);
