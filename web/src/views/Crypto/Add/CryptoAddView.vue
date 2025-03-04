@@ -13,6 +13,14 @@ export default {
   components: {
     CsSteps,
   },
+  beforeRouteUpdate() {
+    this.stepsKey++;
+  },
+  data() {
+    return {
+      stepsKey: 0,
+    };
+  },
   steps: {
     index: CryptoAddStepIndex,
     customToken: CryptoAddStepCustomToken,
@@ -27,6 +35,7 @@ export default {
 
 <template>
   <CsSteps
+    :key="stepsKey"
     :steps="$options.steps"
     :initialStorage="{ platform: 'ethereum@ethereum' }"
   />

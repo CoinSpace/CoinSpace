@@ -122,7 +122,7 @@ export default {
       <CsButton
         type="primary-link"
         class="&__add-crypto"
-        @click="$router.push({ name: 'crypto.add' })"
+        @click="$router.push({ name: 'crypto.add', force: true })"
       >
         <PlusIcon />
         {{ $t('Add crypto') }}
