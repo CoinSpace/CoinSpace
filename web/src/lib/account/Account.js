@@ -354,7 +354,7 @@ export default class Account extends EventEmitter {
       baseURL: this.#getApiNode(platform),
       url: `api/v1/token/${address}`,
     });
-    if (info?.name && info?.symbol && info?.decimals) {
+    if (info?.name && info?.symbol && info?.decimals !== undefined) {
       return {
         _id: `${address}@${platform}`,
         platform,
