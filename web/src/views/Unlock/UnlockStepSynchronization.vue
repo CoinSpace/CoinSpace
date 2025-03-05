@@ -40,9 +40,9 @@ export default {
 </script>
 
 <template>
-  <AuthStepLayout :title="$t('Derivation path')">
+  <AuthStepLayout :title="$t('Synchronization')">
     <div class="&__description">
-      <div>{{ $t('Derivation path was updated.') }}</div>
+      <div>{{ $t('Wallet settings have been updated.') }}</div>
       <div>{{ $t('Please confirm synchronization with this device.') }}</div>
     </div>
 

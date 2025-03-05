@@ -28,10 +28,10 @@ export default {
         }
       };
 
-      const derivation = this.$account.wallets('coin').some((wallet) => {
+      const needSynchronization = this.$account.wallets('coin').some((wallet) => {
         return wallet.state === CsWallet.STATE_NEED_INITIALIZATION;
       });
-      if (derivation) return this.next('derivation', { redirect });
+      if (needSynchronization) return this.next('synchronization', { redirect });
       redirect();
     },
   },

@@ -2,8 +2,8 @@
 import CsPinStep from '../../components/CsPinStep.vue';
 import CsSteps from '../../components/CsSteps.vue';
 
-import UnlockStepDerivation from './UnlockStepDerivation.vue';
 import UnlockStepIndex from './UnlockStepIndex.vue';
+import UnlockStepSynchronization from './UnlockStepSynchronization.vue';
 
 export default {
   components: {
@@ -11,7 +11,7 @@ export default {
   },
   steps: {
     index: UnlockStepIndex,
-    derivation: UnlockStepDerivation,
+    synchronization: UnlockStepSynchronization,
     pin: CsPinStep,
   },
 };
