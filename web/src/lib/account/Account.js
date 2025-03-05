@@ -370,6 +370,15 @@ export default class Account extends EventEmitter {
     }
   }
 
+  async getTokenUrl(platform, address) {
+    try {
+      const Wallet = await loadWalletModule(platform);
+      return Wallet.tokenUrl(platform, address, import.meta.env.DEV);
+    } catch {
+      return undefined;
+    }
+  }
+
   wallet(id) {
     return this.#wallets.get(id);
   }

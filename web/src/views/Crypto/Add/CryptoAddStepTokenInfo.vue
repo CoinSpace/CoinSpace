@@ -39,7 +39,7 @@ export default {
       return this.storage.token;
     },
     url() {
-      // TODO
+      return this.storage.url;
     },
     description() {
       return [

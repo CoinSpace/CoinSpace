@@ -84,8 +84,8 @@ export default {
           });
           return;
         }
-        this.token = token;
-        this.updateStorage({ token });
+        const url = await this.$account.getTokenUrl(this.platform.platform, this.address);
+        this.updateStorage({ token, url });
         this.next('tokenInfo');
       } catch (err) {
         if (err instanceof AddressError || err instanceof RequestError) {
