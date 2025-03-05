@@ -37,7 +37,6 @@ export default {
   },
   data() {
     return {
-      marketState: undefined, // $STATE_LOADING, $STATE_LOADED, $STATE_ERROR
       period: '1D',
       showConfirmRemove: false,
       subtitleWithSymbol: cryptoSubtitleWithSymbol(this.$wallet),
@@ -45,7 +44,7 @@ export default {
   },
   computed: {
     isLoading() {
-      return this.$walletState === this.$STATE_LOADING || this.marketState === this.$STATE_LOADING;
+      return this.$walletState === this.$STATE_LOADING;
     },
     price() {
       return this.market?.price || 0;
@@ -74,13 +73,10 @@ export default {
       ]);
     },
     async loadPriceChart() {
-      this.marketState = this.$STATE_LOADING;
       try {
         await this.$refs.priceChart?.load();
-        this.marketState = this.$STATE_LOADED;
       } catch (err) {
         console.error(err);
-        this.marketState = this.$STATE_ERROR;
       }
     },
     async remove() {
@@ -128,7 +124,6 @@ export default {
         <CryptoIndexPrice
           :price="price"
           :change="change"
-          :marketState="marketState"
         />
         <CryptoIndexBuySell />
       </div>
@@ -140,10 +135,7 @@ export default {
         :crypto="$wallet.crypto"
       />
     </div>
-    <CryptoIndexBalance
-      :price="price"
-      :marketState="marketState"
-    />
+    <CryptoIndexBalance :price="price" />
     <CryptoIndexActions />
 
     <div

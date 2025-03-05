@@ -19,27 +19,21 @@ export default {
       type: Number,
       default: 0,
     },
-    marketState: {
-      type: Symbol,
-      default: undefined,
-    },
   },
   computed: {
     fiat() {
-      if (this.marketState === this.$STATE_LOADING) return '...';
-      if (this.marketState === this.$STATE_ERROR) return '⚠️';
+      if (!this.price) return '';
       return this.$c(this.price);
     },
     changePercent() {
-      if (this.marketState === this.$STATE_LOADING) return '...';
-      if (this.marketState === this.$STATE_ERROR) return '⚠️';
+      if (!this.change) return '';
       return this.$n(this.change, 'percent');
     },
     positive() {
-      return this.marketState === this.$STATE_LOADED && this.change > 0;
+      return this.change > 0;
     },
     negative() {
-      return this.marketState === this.$STATE_LOADED && this.change < 0;
+      return this.change < 0;
     },
   },
 };

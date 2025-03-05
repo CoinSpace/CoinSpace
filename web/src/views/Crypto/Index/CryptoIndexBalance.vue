@@ -7,10 +7,6 @@ export default {
       type: Number,
       default: 0,
     },
-    marketState: {
-      type: Symbol,
-      default: undefined,
-    },
   },
   computed: {
     amount() {
@@ -19,8 +15,8 @@ export default {
       return `${this.$wallet.balance} ${this.$wallet.crypto.symbol}`;
     },
     fiat() {
-      if (this.$walletState === this.$STATE_LOADING || this.marketState === this.$STATE_LOADING) return '...';
-      if (this.$walletState === this.$STATE_ERROR || this.marketState === this.$STATE_ERROR) return '⚠️';
+      if (this.$walletState === this.$STATE_LOADING) return '...';
+      if (this.$walletState === this.$STATE_ERROR) return '⚠️';
       const fiat = cryptoToFiat(this.$wallet.balance, this.price);
       return this.$c(fiat);
     },
