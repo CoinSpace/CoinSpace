@@ -83,6 +83,14 @@ export default {
       width: $spacing-xl;
       height: $spacing-xl;
       flex-shrink: 0;
+
+      [stroke] {
+        stroke: $text-color;
+      }
+
+      [fill] {
+        fill: $text-color;
+      }
     }
   }
   .#{ $filename } {
@@ -154,8 +162,12 @@ export default {
       }
 
       svg {
-        * {
+        [stroke] {
           stroke: $primary;
+        }
+
+        [fill] {
+          fill: $primary;
         }
       }
     }
@@ -174,8 +186,12 @@ export default {
       }
 
       svg {
-        * {
+        [stroke] {
           stroke: $danger;
+        }
+
+        [fill] {
+          fill: $danger;
         }
       }
     }
@@ -194,8 +210,12 @@ export default {
       }
 
       svg {
-        * {
+        [stroke] {
           stroke: $primary;
+        }
+
+        [fill] {
+          fill: $primary;
         }
       }
     }
@@ -214,8 +234,12 @@ export default {
       }
 
       svg {
-        * {
+        [stroke] {
           stroke: $white;
+        }
+
+        [fill] {
+          fill: $white;
         }
       }
     }
@@ -234,8 +258,12 @@ export default {
       }
 
       svg {
-        * {
+        [stroke] {
           stroke: $danger;
+        }
+
+        [fill] {
+          fill: $danger;
         }
       }
     }

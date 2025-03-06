@@ -137,22 +137,10 @@ export default {
 
       &--success {
         background-color: $primary-light;
-
-        svg {
-          * {
-            stroke: $primary;
-          }
-        }
       }
 
       &--failed {
         background-color: $danger-light;
-
-        svg {
-          * {
-            stroke: $danger;
-          }
-        }
       }
     }
 
