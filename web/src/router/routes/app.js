@@ -124,6 +124,14 @@ const app = [
         {
           path: 'exchange',
           name: 'crypto.exchange',
+          redirect: {
+            name: 'crypto.swap',
+            force: true,
+          },
+        },
+        {
+          path: 'swap',
+          name: 'crypto.swap',
           component: CryptoExchangeView,
         },
         {

@@ -49,7 +49,7 @@ export default {
       v-if="$showRampsAndExchangeAndStaking"
       type="circle"
       :disabled="$walletState === $STATE_LOADING"
-      @click="$router.push({ name: 'crypto.exchange', params: { cryptoId: $wallet.crypto._id }})"
+      @click="$router.push({ name: 'crypto.swap', params: { cryptoId: $wallet.crypto._id }})"
     >
       <template #circle>
         <SwapIcon />
