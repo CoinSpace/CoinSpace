@@ -23,9 +23,9 @@ export default {
     description() {
       if (this.transaction.exchange) {
         if (this.transaction.incoming) {
-          return this.$t('Exchanged from {symbol}', { symbol: this.transaction.exchange.cryptoFrom.symbol });
+          return this.$t('Swapped from {symbol}', { symbol: this.transaction.exchange.cryptoFrom.symbol });
         } else {
-          return this.$t('Exchanged to {symbol}', { symbol: this.transaction.exchange.cryptoTo.symbol });
+          return this.$t('Swapped to {symbol}', { symbol: this.transaction.exchange.cryptoTo.symbol });
         }
       } else {
         if (this.transaction.incoming) {

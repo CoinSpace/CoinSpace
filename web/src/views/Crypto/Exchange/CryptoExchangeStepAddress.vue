@@ -157,7 +157,7 @@ export default {
 
 <template>
   <MainLayout
-    :title="$t('Exchange {symbol}', { symbol: $wallet.crypto.symbol })"
+    :title="$t('Swap {symbol}', { symbol: $wallet.crypto.symbol })"
     :description="subtitle"
   >
     <CsFormGroup class="&__container">

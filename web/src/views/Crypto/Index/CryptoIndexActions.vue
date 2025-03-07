@@ -2,19 +2,19 @@
 import CsButton from '../../../components/CsButton.vue';
 import CsButtonGroup from '../../../components/CsButtonGroup.vue';
 
-import ExchangeIcon from '../../../assets/svg/exchange.svg';
 import HistoryIcon from '../../../assets/svg/history.svg';
 import ReceiveIcon from '../../../assets/svg/receive.svg';
 import SendIcon from '../../../assets/svg/send.svg';
+import SwapIcon from '../../../assets/svg/swap.svg';
 
 export default {
   components: {
     CsButton,
     CsButtonGroup,
-    SendIcon,
-    ReceiveIcon,
-    ExchangeIcon,
     HistoryIcon,
+    ReceiveIcon,
+    SendIcon,
+    SwapIcon,
   },
 };
 </script>
@@ -52,9 +52,9 @@ export default {
       @click="$router.push({ name: 'crypto.exchange', params: { cryptoId: $wallet.crypto._id }})"
     >
       <template #circle>
-        <ExchangeIcon />
+        <SwapIcon />
       </template>
-      {{ $t('Exchange') }}
+      {{ $t('Swap') }}
     </CsButton>
     <CsButton
       type="circle"

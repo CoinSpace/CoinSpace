@@ -122,7 +122,7 @@ export default {
 </script>
 
 <template>
-  <MainLayout :title="$t('Confirm exchange')">
+  <MainLayout :title="$t('Confirm swap')">
     <CsTransactionConfirm
       :transaction="storage"
       :powered="storage.provider"

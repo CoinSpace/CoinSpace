@@ -12,7 +12,7 @@ export default {
 
 <template>
   <CsTransactionStatus
-    :title="$t('Confirm exchange')"
+    :title="$t('Confirm swap')"
     :status="storage.status"
     :message="storage.message"
   />

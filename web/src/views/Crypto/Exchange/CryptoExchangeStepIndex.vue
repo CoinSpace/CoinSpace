@@ -157,7 +157,7 @@ export default {
     },
     async confirm() {
       if (!this.to) {
-        this.errors['to'] = this.$t('Please select a crypto to exchange');
+        this.errors['to'] = this.$t('Please select a crypto to swap');
         return;
       }
       const amount = this.amount || new Amount(0, this.$wallet.crypto.decimals);
@@ -295,7 +295,7 @@ export default {
 
 <template>
   <MainLayout
-    :title="$t('Exchange {symbol}', { symbol: $wallet.crypto.symbol })"
+    :title="$t('Swap {symbol}', { symbol: $wallet.crypto.symbol })"
     :description="subtitle"
   >
     <CsFormGroup>

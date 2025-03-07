@@ -83,7 +83,7 @@ export default {
       if (status === BaseExchange.STATUS_PENDING) {
         text = this.$t('Awaiting transaction confirmation.');
       } else if (status === BaseExchange.STATUS_EXCHANGING) {
-        text = this.$t('Deposit has been received. Awaiting exchange.');
+        text = this.$t('Deposit has been received. Awaiting swap.');
       } else if (status === BaseExchange.STATUS_REQUIRED_TO_ACCEPT) {
         text = this.$t('Please accept transaction to receive funds.');
       } else if (status === BaseExchange.STATUS_HOLD) {
@@ -91,9 +91,9 @@ export default {
           exchange: this.$account.exchanges.getProviderName(this.transaction.exchange.provider),
         });
       } else if (status === BaseExchange.STATUS_REFUNDED) {
-        text = this.$t('Exchange failed and funds were refunded to your wallet.');
+        text = this.$t('Swap failed and funds were refunded to your wallet.');
       } else if (status === BaseExchange.STATUS_FAILED) {
-        text = this.$t('Exchange failed. Please contact {exchange}.', {
+        text = this.$t('Swap failed. Please contact {exchange}.', {
           exchange: this.$account.exchanges.getProviderName(this.transaction.exchange.provider),
         });
       }
