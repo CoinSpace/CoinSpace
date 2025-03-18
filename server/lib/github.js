@@ -150,6 +150,12 @@ const platforms = [{
   type: TYPE_LINK,
   pattern: /snapcraft\.io\/coin/ig,
   link: 'https://snapcraft.io/coin',
+}, {
+  distribution: 'flatpak',
+  arch: 'any',
+  app: 'app',
+  type: TYPE_FILE,
+  pattern: /\.flatpak$/i,
 }].map(item => {
   return {
     ...item,
