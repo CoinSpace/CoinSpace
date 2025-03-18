@@ -2,7 +2,6 @@ import * as ed25519 from '@coinspace/ed25519';
 import { EventEmitter } from 'events';
 import { hex } from '@scure/base';
 import { hmac } from '@noble/hashes/hmac';
-import md5 from 'crypto-js/md5.js';
 import { randomBytes } from '@noble/hashes/utils';
 import { sha256 } from '@noble/hashes/sha256';
 import { CsWallet, errors } from '@coinspace/cs-common';
@@ -179,7 +178,7 @@ export default class Account extends EventEmitter {
       const user = this.#details.get('userInfo');
       let avatar;
       if (user.email) {
-        const hash = md5(user.email).toString();
+        const hash = hex.encode(sha256(user.email.trim().toLowerCase()));
         avatar = `gravatar:${hash}`;
       } else {
         const hash = hex.encode(hmac(sha256, 'Coin Wallet', hex.encode(this.#clientStorage.getDetailsKey())));
