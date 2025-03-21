@@ -17,6 +17,7 @@ export default {
     const lastPrice = this.chartSeries[this.chartSeries.length - 1][1];
     const color = firstPrice <= lastPrice ? '#68C481' : '#DD230E';
     return {
+      dataPointIndex: -1,
       chartOptions: {
         chart: {
           type: 'area',
@@ -62,10 +63,14 @@ export default {
     };
   },
   methods: {
-    mouseMove(_, __, opts) {
+    mouseMove(_, __, { dataPointIndex }) {
       if (!this.chartOptions.tooltip.enabled) this.updateTooltip(true);
-      if (opts.dataPointIndex === -1) return;
-      this.$emit('crosshair', this.series[0].data[opts.dataPointIndex]);
+      if (dataPointIndex === -1) return;
+      if (this.dataPointIndex !== dataPointIndex) {
+        this.dataPointIndex = dataPointIndex;
+        this.$emit('crosshair', this.series[0].data[dataPointIndex]);
+        if (this.env.VITE_PLATFORM === 'ios') window.taptic.tap();
+      }
     },
     mouseLeave() {
       this.$emit('crosshair');
@@ -95,6 +100,7 @@ export default {
       this.updateTooltip(false);
     },
     updateTooltip(enabled) {
+      if (!enabled) this.dataPointIndex = -1;
       this.chartOptions = { ...this.chartOptions, ...{ tooltip: { enabled } } };
     },
   },
