@@ -1,19 +1,18 @@
 <script>
 
 import AxisY from './CsPriceChartAxisY.vue';
-import ChartCanvas from './CsPriceChartCanvas.vue';
 import CsLoader from '../CsLoader.vue';
 import Periods from './CsPriceChartPeriods.vue';
 
 export default {
   components: {
     AxisY,
-    ChartCanvas,
     CsLoader,
     Periods,
+    Apex: {},
   },
   props: {
-    crypto: {
+    chartSeries: {
       type: Object,
       required: true,
     },
@@ -21,49 +20,29 @@ export default {
       type: String,
       required: true,
     },
+    isLoading: {
+      type: Boolean,
+      default: true,
+    },
+    error: {
+      type: Boolean,
+      default: false,
+    },
   },
-  emits: ['update:period'],
-  data() {
-    return {
-      isLoading: true,
-      error: false,
-      prices: [], // plain array with prices (minimum 2 items)
-    };
-  },
+  emits: ['changePeriod', 'crosshair'],
   computed: {
-    maxPrice() {
-      return Math.max(...this.prices);
-    },
-    minPrice() {
-      return Math.min(...this.prices);
+    priceRange() {
+      let max = this.chartSeries[0][1];
+      let min = max;
+      for (const item of this.chartSeries) {
+        max = item[1] > max ? item[1] : max;
+        min = item[1] < min ? item[1] : min;
+      }
+      return { min, max };
     },
   },
-  methods: {
-    async load() {
-      this.isLoading = true;
-      this.error = false;
-
-      try {
-        await this.$nextTick(); // wait period props
-        this.prices = await this.$account.market.getChartData(
-          this.crypto._id,
-          this.period,
-          this.$currency
-        );
-        if (this.prices.length === 0) {
-          throw Error(`Empty chart: ${this.crypto._id}, ${this.period}, ${this.$currency}`);
-        }
-      } catch (err) {
-        console.error(err);
-        this.error = true;
-      } finally {
-        this.isLoading = false;
-      }
-    },
-    async changePeriod(period) {
-      this.$emit('update:period', period);
-      await this.load();
-    },
+  async loadApex() {
+    this.components.Apex = (await import('./CsPriceChartApex.vue')).default;
   },
 };
 </script>
@@ -75,7 +54,7 @@ export default {
       class="&__loader"
     />
     <div
-      v-else-if="error"
+      v-else-if="error || !chartSeries.length"
       class="&__error"
     >
       {{ $account.unknownError() }}
@@ -84,18 +63,24 @@ export default {
       v-else
       class="&__wrapper"
     >
-      <ChartCanvas :prices="prices" />
-      <AxisY v-bind="{ maxPrice, minPrice }" />
+      <Apex
+        :chartSeries="chartSeries"
+        @crosshair="(chartPoint) => $emit('crosshair', chartPoint)"
+      />
+      <AxisY :priceRange="priceRange" />
     </div>
     <Periods
       :period="period"
-      @change="changePeriod"
+      @change="(period) => $emit('changePeriod', period)"
     />
   </div>
 </template>
 
 <style lang="scss">
   .#{ $filename } {
+
+    user-select: none;
+
     &__wrapper {
       position: relative;
       padding: $spacing-md 0;

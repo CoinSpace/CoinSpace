@@ -1,12 +1,8 @@
 <script>
 export default {
   props: {
-    maxPrice: {
-      type: Number,
-      required: true,
-    },
-    minPrice: {
-      type: Number,
+    priceRange: {
+      type: Object,
       required: true,
     },
   },
@@ -15,11 +11,11 @@ export default {
 
 <template>
   <div class="&">
-    <div v-if="maxPrice !== minPrice">
-      {{ $c(maxPrice) }}
+    <div v-if="priceRange.max !== priceRange.min">
+      {{ $c(priceRange.max) }}
     </div>
     <div>
-      {{ $c(minPrice) }}
+      {{ $c(priceRange.min) }}
     </div>
   </div>
 </template>
@@ -27,9 +23,9 @@ export default {
 <style lang="scss">
   .#{ $filename } {
     position: absolute;
-    z-index: 1;
+    z-index: -1;
     top: 0;
-    right: max($spacing-xl, env(safe-area-inset-right));
+    right: 0;
     bottom: 0;
     display: flex;
     flex-direction: column;

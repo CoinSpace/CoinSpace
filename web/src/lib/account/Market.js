@@ -69,6 +69,6 @@ export default class Market {
       return [];
     }
     const data = await this.#priceAPI.chart(crypto._id, period, currency);
-    return data.map((item) => item.price).reverse();
+    return data.map((item) => [(new Date(item.bucket)).getTime(), item.price]).reverse();
   }
 }

@@ -122,6 +122,7 @@ export default {
     handleTouchStart(e) {
       if (this.isLoading) return;
       if (this.hasTransition) return;
+      if (e.target.hasAttribute('data-prevent-scroll')) return;
       const { top } = this.getContentPosition();
       if (top < 0) return;
       this.touchStartY = e.touches.item(0).pageY;

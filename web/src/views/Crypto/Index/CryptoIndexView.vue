@@ -38,6 +38,10 @@ export default {
   data() {
     return {
       period: '1D',
+      chartPoint: undefined,
+      chartSeries: [],
+      isLoadingChart: true,
+      chartError: false,
       showConfirmRemove: false,
       subtitleWithSymbol: cryptoSubtitleWithSymbol(this.$wallet),
     };
@@ -72,11 +76,35 @@ export default {
         this.loadPriceChart(),
       ]);
     },
-    async loadPriceChart() {
+    async loadPriceChart(period = this.period) {
+      this.isLoadingChart = true;
+      this.chartError = false;
       try {
-        await this.$refs.priceChart?.load();
+        await CsPriceChart.loadApex();
+        this.period = period;
+        const prices = await this.$account.market.getChartData(
+          this.$wallet.crypto._id,
+          period,
+          this.$currency
+        );
+        this.chartSeries = prices;
       } catch (err) {
         console.error(err);
+        this.chartError = true;
+      } finally {
+        this.isLoadingChart = false;
+      }
+    },
+    setChartPoint(chartPoint) {
+      if (chartPoint) {
+        const timestamp = new Date(chartPoint[0]);
+        const isCurrentYear = timestamp.getFullYear() === (new Date()).getFullYear();
+        this.chartPoint = {
+          timestamp: this.$d(chartPoint[0], isCurrentYear ? 'shortCurrentYear': 'short'),
+          price: chartPoint[1],
+        };
+      } else {
+        this.chartPoint = undefined;
       }
     },
     async remove() {
@@ -124,15 +152,18 @@ export default {
         <CryptoIndexPrice
           :price="price"
           :change="change"
+          :chartPoint="chartPoint"
         />
         <CryptoIndexBuySell />
       </div>
       <CsPriceChart
         v-if="$wallet.crypto.coingecko"
-        ref="priceChart"
-        v-model:period="period"
-        class="&__price-chart"
-        :crypto="$wallet.crypto"
+        :chartSeries="chartSeries"
+        :period="period"
+        :isLoading="isLoadingChart"
+        :error="chartError"
+        @changePeriod="loadPriceChart"
+        @crosshair="setChartPoint"
       />
     </div>
     <CryptoIndexBalance :price="price" />
@@ -173,11 +204,6 @@ export default {
       align-items: flex-start;
       justify-content: space-between;
       gap: $spacing-lg;
-    }
-
-    &__price-chart {
-      margin-right: calc(-1 * max($spacing-xl, env(safe-area-inset-right)));
-      margin-left: calc(-1 * max($spacing-xl, env(safe-area-inset-left)));
     }
 
     &__error {

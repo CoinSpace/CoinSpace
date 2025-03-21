@@ -19,11 +19,16 @@ export default {
       type: Number,
       default: 0,
     },
+    chartPoint: {
+      type: Object,
+      default: undefined,
+    },
   },
   computed: {
     fiat() {
-      if (!this.price) return '';
-      return this.$c(this.price);
+      const price = this.chartPoint ? this.chartPoint.price : this.price;
+      if (!price) return '';
+      return this.$c(price);
     },
     changePercent() {
       if (!this.change) return '';
@@ -46,10 +51,7 @@ export default {
       :crypto="$wallet.crypto"
       :platform="$wallet.platform"
     />
-    <div
-      v-if="$wallet.crypto.coingecko"
-      class="&__price-info"
-    >
+    <div v-if="$wallet.crypto.coingecko">
       <div
         class="&__price"
         :title="fiat"
@@ -57,6 +59,13 @@ export default {
         {{ fiat }}
       </div>
       <div
+        v-if="chartPoint"
+        class="&__timestamp"
+      >
+        {{ chartPoint.timestamp }}
+      </div>
+      <div
+        v-else
         class="&__change"
         :class="{
           '&__change--positive': positive,
@@ -80,18 +89,22 @@ export default {
 <style lang="scss">
   .#{ $filename } {
     display: flex;
-    flex-basis: 50%;
+    flex-basis: 100%;
     gap: $spacing-md;
+
+    @include breakpoint(md) {
+      flex-basis: auto;
+    }
 
     &__crypto-logo {
       width: $spacing-3xl;
       height: $spacing-3xl;
+      flex-shrink: 0;
     }
 
     &__price {
       @include text-md;
       @include text-bold;
-      @include ellipsis;
     }
 
     &__change {
@@ -112,6 +125,11 @@ export default {
     &__change_arrow {
       width: $spacing-sm;
       height: $spacing-sm;
+    }
+
+    &__timestamp {
+      @include text-sm;
+      color: $secondary;
     }
   }
 </style>
