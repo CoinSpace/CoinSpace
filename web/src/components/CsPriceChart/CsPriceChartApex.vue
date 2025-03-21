@@ -23,7 +23,7 @@ export default {
           type: 'area',
           sparkline: { enabled: true },
         },
-        tooltip: { enabled: false },
+        tooltip: { enabled: true },
         colors: [color],
         fill: {
           type: 'gradient',
@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     mouseMove(_, __, { dataPointIndex }) {
-      if (!this.chartOptions.tooltip.enabled) this.updateTooltip(true);
+      this.updateTooltip(true);
       if (dataPointIndex === -1) return;
       if (this.dataPointIndex !== dataPointIndex) {
         this.dataPointIndex = dataPointIndex;
@@ -100,6 +100,7 @@ export default {
       this.updateTooltip(false);
     },
     updateTooltip(enabled) {
+      if (enabled === this.chartOptions.tooltip.enabled) return;
       if (!enabled) this.dataPointIndex = -1;
       this.chartOptions = { ...this.chartOptions, ...{ tooltip: { enabled } } };
     },
