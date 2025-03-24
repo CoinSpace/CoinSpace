@@ -99,8 +99,9 @@ export default {
       if (chartPoint) {
         const timestamp = new Date(chartPoint[0]);
         const isCurrentYear = timestamp.getFullYear() === (new Date()).getFullYear();
+        const format = this.period === '1Y' ? 'chart1Y' : (isCurrentYear ? 'shortCurrentYear': 'short');
         this.chartPoint = {
-          timestamp: this.$d(chartPoint[0], isCurrentYear ? 'shortCurrentYear': 'short'),
+          timestamp: this.$d(chartPoint[0], format),
           price: chartPoint[1],
         };
       } else {

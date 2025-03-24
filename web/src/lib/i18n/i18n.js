@@ -19,6 +19,9 @@ const i18n = createI18n({
   },
   datetimeFormats: {
     en: {
+      chart1Y: {
+        year: 'numeric', month: 'short', day: 'numeric',
+      },
       short: {
         year: 'numeric', month: 'short', day: 'numeric',
         hour: 'numeric', minute: 'numeric',

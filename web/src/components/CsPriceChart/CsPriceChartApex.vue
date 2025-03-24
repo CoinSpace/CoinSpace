@@ -85,7 +85,7 @@ export default {
       const hoverArea = this.$refs.apex.chart.w.globals.dom.Paper.node;
       const bounds = hoverArea.getBoundingClientRect();
       const mouseEvent = new MouseEvent('mousemove', {
-        clientX: e.touches[0].clientX,
+        clientX: Math.min(Math.max(e.touches[0].clientX, bounds.left + 1), bounds.right),
         clientY: bounds.top + bounds.height / 2,
         bubbles: true,
       });
