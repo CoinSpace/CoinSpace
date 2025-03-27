@@ -83,6 +83,7 @@ export default {
       }
     },
     acceptSuggestion(suggestion) {
+      window.taptic?.tap();
       this.error = undefined;
       this.passphrase = [
         ...this.words.slice(0, -1),
