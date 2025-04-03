@@ -1,8 +1,8 @@
 {
   "(optional)": "(neobavezno)",
   "+{fee} fee": "+{fee} naknada",
+  "1 day": "1 dan",
   "12 words": "12 riječi",
-  "24h": "24h",
   "A 256-bit hash that can be used to identify a particular payment.": "256-bitni hash koji se može koristiti za identifikaciju određene uplate.",
   "A new version of Coin Wallet is available. Would you like to update it now?": "Dostupna je nova verzija Coin Wallet. Želite li je ažurirati sada?",
   "APR": "APR",

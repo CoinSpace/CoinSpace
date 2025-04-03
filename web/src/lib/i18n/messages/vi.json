@@ -1,8 +1,8 @@
 {
   "(optional)": "(tùy chọn)",
   "+{fee} fee": "+{fee} phí",
+  "1 day": "1 ngày",
   "12 words": "12 từ",
-  "24h": "24h",
   "A 256-bit hash that can be used to identify a particular payment.": "Giá trị băm 256 bit có thể sử dụng để xác định một thanh toán cụ thể.",
   "A new version of Coin Wallet is available. Would you like to update it now?": "Đã có phiên bản mới của Coin Wallet. Bạn có muốn cập nhật không?",
   "APR": "APR",

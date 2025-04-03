@@ -1,8 +1,8 @@
 {
   "(optional)": "(Facoltativo)",
   "+{fee} fee": "+{fee} di tasse",
+  "1 day": "1 giorno",
   "12 words": "12 parole",
-  "24h": "24h",
   "A 256-bit hash that can be used to identify a particular payment.": "Un cancelletto da 256 bit che può essere usato per identificare un pagamento particolare.",
   "A new version of Coin Wallet is available. Would you like to update it now?": "È disponibile una nuova versione di Coin Wallet. Vorresti eseguire adesso l'aggiornamento?",
   "APR": "APR",

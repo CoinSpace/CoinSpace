@@ -1,8 +1,8 @@
 {
   "(optional)": "(за бажанням)",
   "+{fee} fee": "+ комісія {fee}",
+  "1 day": "1 день",
   "12 words": "12 слів",
-  "24h": "24 год.",
   "A 256-bit hash that can be used to identify a particular payment.": "256-бітний хеш, який можна використовувати для ідентифікації конкретного платежу.",
   "A new version of Coin Wallet is available. Would you like to update it now?": "Доступна нова версія Coin Wallet. Бажаєте оновити її зараз?",
   "APR": "APR",

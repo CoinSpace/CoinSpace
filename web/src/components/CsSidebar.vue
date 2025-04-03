@@ -23,7 +23,6 @@ export default {
   data() {
     return {
       portfolioBalance: 0,
-      portfolioBalanceChange: 0,
       portfolioBalanceChangePercent: 0,
       changePeriod: '1D',
     };
@@ -54,7 +53,6 @@ export default {
           }
         }
         this.portfolioBalance = portfolioBalance;
-        this.portfolioBalanceChange = portfolioBalanceChange;
         this.portfolioBalanceChangePercent = portfolioBalance ? portfolioBalanceChange / portfolioBalance : 0;
       },
       immediate: true,
@@ -95,14 +93,12 @@ export default {
       <div
         class="&__portfolio-change"
         :class="{
-          '&__portfolio-change--positive': !$isHiddenBalance && portfolioBalanceChange > 0,
-          '&__portfolio-change--negative': !$isHiddenBalance && portfolioBalanceChange < 0
+          '&__portfolio-change--positive': !$isHiddenBalance && portfolioBalanceChangePercent > 0,
+          '&__portfolio-change--negative': !$isHiddenBalance && portfolioBalanceChangePercent < 0
         }"
       >
         <template v-if="!$isHiddenBalance">
-          {{ $n(portfolioBalanceChange, 'currency', {
-            currency: $currency,
-          }) }} ({{ $n(portfolioBalanceChangePercent, 'percent') }}) {{ $t('24h') }}
+          {{ $n(portfolioBalanceChangePercent, 'percent') }} ({{ $t('1 day') }})
         </template>
         <template v-else>
           *****

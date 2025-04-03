@@ -1,8 +1,8 @@
 {
   "(optional)": "(választható)",
   "+{fee} fee": "+ {fee} díj",
+  "1 day": "1 nap",
   "12 words": "12 szó",
-  "24h": "24 óra",
   "A 256-bit hash that can be used to identify a particular payment.": "Egy 256 bites hash, amely felhasználható egy adott fizetés azonosítására.",
   "A new version of Coin Wallet is available. Would you like to update it now?": "Elérhető a Coin Wallet új verziója. Szeretnéd most frissíteni?",
   "APR": "APR",

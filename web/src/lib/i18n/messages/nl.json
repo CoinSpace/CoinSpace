@@ -1,8 +1,8 @@
 {
   "(optional)": "(optioneel)",
   "+{fee} fee": "+{fee} tarief",
+  "1 day": "1 dag",
   "12 words": "12 woorden",
-  "24h": "24 u",
   "A 256-bit hash that can be used to identify a particular payment.": "Een 256-bit hash die kan worden gebruikt om een bepaalde betaling te identificeren.",
   "A new version of Coin Wallet is available. Would you like to update it now?": "Er is een nieuwe versie van Coin Wallet beschikbaar. Wilt u nu bijwerken?",
   "APR": "APR",
