@@ -16,6 +16,7 @@ export default {
       // https://github.com/vuejs/core/issues/12070
       setTimeout(() => {
         if (!this.isLoading) {
+          window.taptic?.tap();
           this.$emit('click');
         }
       }, 1);
