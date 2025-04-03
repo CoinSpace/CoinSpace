@@ -1,8 +1,8 @@
 {
   "(optional)": "（可选）",
   "+{fee} fee": "+{fee}费用",
+  "1 day": "1天",
   "12 words": "12词",
-  "24h": "24小时",
   "A 256-bit hash that can be used to identify a particular payment.": "一个256位的哈希，可用于标识特定的支付。",
   "A new version of Coin Wallet is available. Would you like to update it now?": "Coin Wallet有可用的新版本。您想现在更新吗？",
   "APR": "APR",

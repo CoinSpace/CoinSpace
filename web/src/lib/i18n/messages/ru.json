@@ -1,8 +1,8 @@
 {
   "(optional)": "(необязательно)",
   "+{fee} fee": "+{fee} комиссия",
+  "1 day": "1 день",
   "12 words": "12 слов",
-  "24h": "24ч",
   "A 256-bit hash that can be used to identify a particular payment.": "256-битный хеш, который может использоваться для идентификации конкретного платежа.",
   "A new version of Coin Wallet is available. Would you like to update it now?": "Доступна новая версия Coin Wallet. Хотите обновить сейчас?",
   "APR": "APR",

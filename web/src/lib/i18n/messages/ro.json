@@ -1,8 +1,8 @@
 {
   "(optional)": "(opțional)",
   "+{fee} fee": "+ taxă {fee}",
+  "1 day": "1 zi",
   "12 words": "12 cuvinte",
-  "24h": "24 h",
   "A 256-bit hash that can be used to identify a particular payment.": "O funcție hash de 256 de octeți care poate fi utilizată pentru a identifica o anumită plată.",
   "A new version of Coin Wallet is available. Would you like to update it now?": "Este disponibilă o nouă versiune a Coin Wallet. Doriți să o actualizați acum?",
   "APR": "APR",

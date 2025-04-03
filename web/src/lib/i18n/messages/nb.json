@@ -1,8 +1,8 @@
 {
   "(optional)": "(valgfritt)",
   "+{fee} fee": "+{fee} gebyr",
+  "1 day": "1 dag",
   "12 words": "12 ord",
-  "24h": "24 t",
   "A 256-bit hash that can be used to identify a particular payment.": "En 256-bit hash som kan benyttes til å identifisere en bestemt betaling.",
   "A new version of Coin Wallet is available. Would you like to update it now?": "En ny versjon av Coin Wallet er tilgjengelig. Ønsker du å oppdatere den nå?",
   "APR": "APR",

@@ -1,8 +1,8 @@
 {
   "(optional)": "(isteğe bağlı)",
   "+{fee} fee": "+{fee} ücret",
+  "1 day": "1 gün",
   "12 words": "12 kelime",
-  "24h": "24 sa",
   "A 256-bit hash that can be used to identify a particular payment.": "Belirli bir ödemeyi tanımlamak için kullanılabilecek 256 bitlik bir karma.",
   "A new version of Coin Wallet is available. Would you like to update it now?": "Coin Wallet yeni bir sürümü mevcut. Şimdi güncellemek ister misiniz?",
   "APR": "APR",

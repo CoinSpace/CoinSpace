@@ -1,8 +1,8 @@
 {
   "(optional)": "(オプション)",
   "+{fee} fee": "+{fee} 料金",
+  "1 day": "1日",
   "12 words": "12単語",
-  "24h": "24時間",
   "A 256-bit hash that can be used to identify a particular payment.": "特定の支払の識別に使用できる256ビットのハッシュ。",
   "A new version of Coin Wallet is available. Would you like to update it now?": "Coin Walletの新規バージョンがあります。今すぐ更新しますか？",
   "APR": "APR",

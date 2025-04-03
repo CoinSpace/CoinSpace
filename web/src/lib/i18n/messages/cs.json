@@ -1,8 +1,8 @@
 {
   "(optional)": "(volitelné)",
   "+{fee} fee": "+{fee} poplatek",
+  "1 day": "1 den",
   "12 words": "12 slov",
-  "24h": "24 h",
   "A 256-bit hash that can be used to identify a particular payment.": "256 bitový hash, který lze použít k identifikaci konkrétní platby.",
   "A new version of Coin Wallet is available. Would you like to update it now?": "Je k dispozici nová verze Coin Wallet. Chcete ji hned aktualizovat?",
   "APR": "APR",
