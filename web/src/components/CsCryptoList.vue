@@ -136,6 +136,7 @@ export default {
       justify-content: flex-start;
       padding: 0;
       margin: 0 (-$spacing-sm);
+      gap: $spacing-2xs;
       list-style: none;
 
       &--loading {
@@ -169,10 +170,10 @@ export default {
 
       &--columns {
         @include breakpoint(lg) {
-          flex-basis: 50%;
+          flex-basis: calc(50% - $spacing-2xs / 2);
         }
         @include breakpoint(xl) {
-          flex-basis: calc(100% / 3);
+          flex-basis: calc((100% - 2 * $spacing-2xs) / 3);
         }
       }
     }
