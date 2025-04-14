@@ -8,6 +8,7 @@ import AuthStepPassphrase from './AuthStepPassphrase.vue';
 import AuthStepPassphraseConfirmation from './AuthStepPassphraseConfirmation.vue';
 import AuthStepPassphraseGeneration from './AuthStepPassphraseGeneration.vue';
 import AuthStepPin from './AuthStepPin.vue';
+import AuthStepSelectCryptos from './AuthStepSelectCryptos.vue';
 
 export default {
   components: {
@@ -21,6 +22,7 @@ export default {
     login: AuthStepLogin,
     pin: AuthStepPin,
     biometry: AuthStepBiometry,
+    select: AuthStepSelectCryptos,
   },
 };
 </script>

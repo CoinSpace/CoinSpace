@@ -16,6 +16,9 @@ export default {
         this.updateStorage({ pin });
         return this.next('biometry');
       }
+      if (this.$account.isNewWallet) {
+        return this.next('select');
+      }
       this.$router.replace({ name: 'home' });
     },
   },

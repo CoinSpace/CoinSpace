@@ -63,6 +63,9 @@ export default {
       this.redirect();
     },
     redirect() {
+      if (this.$account.isNewWallet) {
+        return this.next('select');
+      }
       this.$router.replace({ name: 'home' });
     },
   },

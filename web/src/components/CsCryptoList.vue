@@ -1,9 +1,11 @@
 <script>
 import CsCryptoLogo from './CsCryptoLogo.vue';
+import TickIcon from '../assets/svg/tick.svg';
 
 export default {
   components: {
     CsCryptoLogo,
+    TickIcon,
   },
   props: {
     header: {
@@ -15,8 +17,12 @@ export default {
       required: true,
     },
     selected: {
-      type: String,
+      type: [String, Array],
       default: '',
+    },
+    multiple: {
+      type: Boolean,
+      default: false,
     },
     isLoading: {
       type: Boolean,
@@ -34,6 +40,15 @@ export default {
   emits: ['select'],
   data() {
     return {};
+  },
+  methods: {
+    isSelected(id) {
+      if (this.multiple) {
+        return this.selected.includes(id);
+      } else {
+        return this.selected === id;
+      }
+    },
   },
 };
 </script>
@@ -60,7 +75,7 @@ export default {
         :key="item.crypto._id"
         class="&__item"
         :class="{
-          '&__item--selected': selected === item.crypto._id,
+          '&__item--selected': isSelected(item.crypto._id),
           '&__item--columns': columns === true,
         }"
         @click="!isLoading && $emit('select', item.crypto._id)"
@@ -116,6 +131,12 @@ export default {
               {{ $n(item.market.change[changePeriod] / 100, 'percent') }}
             </span>
           </div>
+        </div>
+        <div
+          v-if="multiple && isSelected(item.crypto._id)"
+          class="&__multiple"
+        >
+          <TickIcon class="&__tick" />
         </div>
       </li>
     </ul>
@@ -247,6 +268,15 @@ export default {
       &--negative {
         color: $danger;
       }
+    }
+
+    &__multiple {
+      align-self: center;
+    }
+
+    &__tick {
+      width: $spacing-xl;
+      height: $spacing-xl;
     }
   }
 </style>

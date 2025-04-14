@@ -1,11 +1,36 @@
 <script>
 
-import binancecoinATbinancesmartchain from '@coinspace/crypto-db/crypto/binance-coin@binance-smart-chain.json';
-import bitcoinATbitcoin from '@coinspace/crypto-db/crypto/bitcoin@bitcoin.json';
-import ethereumATethereum from '@coinspace/crypto-db/crypto/ethereum@ethereum.json';
-import ethereumClassicATethereumClassic from '@coinspace/crypto-db/crypto/ethereum-classic@ethereum-classic.json';
-import tetherATethereum from '@coinspace/crypto-db/crypto/tether@ethereum.json';
-import usdcoinATbinancesmartchain from '@coinspace/crypto-db/crypto/usd-coin@binance-smart-chain.json';
+const bitcoinATbitcoin = {
+  _id: 'bitcoin@bitcoin',
+  asset: 'bitcoin',
+  platform: 'bitcoin',
+  type: 'coin',
+  name: 'Bitcoin',
+  symbol: 'BTC',
+  decimals: 8,
+  logo: 'bitcoin.svg',
+};
+const ethereumATethereum = {
+  _id: 'ethereum@ethereum',
+  asset: 'ethereum',
+  platform: 'ethereum',
+  type: 'coin',
+  name: 'Ethereum',
+  symbol: 'ETH',
+  decimals: 18,
+  logo: 'ethereum.svg',
+};
+const tetherATethereum = {
+  _id: 'tether@ethereum',
+  asset: 'tether',
+  platform: 'ethereum',
+  type: 'token',
+  name: 'Tether',
+  symbol: 'USDT',
+  address: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+  decimals: 6,
+  logo: 'tether.svg',
+};
 
 import CsCryptoLogo from '../../components/CsCryptoLogo.vue';
 
@@ -18,9 +43,7 @@ export default {
       items: [
         { ...bitcoinATbitcoin },
         { ...ethereumATethereum },
-        { ...ethereumClassicATethereumClassic },
         { ...tetherATethereum, platform: ethereumATethereum },
-        { ...usdcoinATbinancesmartchain, platform: binancecoinATbinancesmartchain },
       ],
     };
   },

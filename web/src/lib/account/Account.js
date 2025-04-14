@@ -20,7 +20,6 @@ import Request from './Request.js';
 import Seeds from './Seeds.js';
 import Settings from './Settings.js';
 import WalletStorage from '../storage/WalletStorage.js';
-import defaultCryptos from '../defaultCryptos.js';
 import i18n from '../i18n/i18n.js';
 import {
   EVM_FAMILY,
@@ -200,6 +199,10 @@ export default class Account extends EventEmitter {
     return this.#dummy;
   }
 
+  get isNewWallet() {
+    return this.#details.isNewWallet;
+  }
+
   constructor({ localStorage, release }) {
     super();
     if (!localStorage) {
@@ -242,40 +245,83 @@ export default class Account extends EventEmitter {
     });
   }
 
-  async init() {
-    await this.#settings.init();
-    this.#details = new Details({
-      request: this.request,
-      key: this.#clientStorage.getDetailsKey(),
-    });
-    await this.#details.init();
-    await this.#cryptoDB.init();
-    this.emit('update', 'user');
-    this.emit('update', 'language');
-    this.emit('update', 'currency');
-    this.emit('update', 'isHiddenBalance');
+  async create(walletSeed, pin) {
+    if (!(walletSeed instanceof Uint8Array)) {
+      throw new TypeError('walletSeed must be Uint8Array or Buffer');
+    }
+    if (walletSeed.length !== 64) {
+      throw new TypeError('walletSeed must be 64 bytes');
+    }
+    this.#clientStorage.clear();
 
-    this.#migrateV5Details();
+    const walletId = hex.encode(await ed25519.getPublicKeyAsync(walletSeed, false));
+    const deviceSeed = randomBytes(32);
+    const deviceId = hex.encode(await ed25519.getPublicKeyAsync(deviceSeed));
+    const detailsKey = hmac(sha256, 'Coin Wallet', hex.encode(walletSeed));
+    const pinKey = randomBytes(32);
+    const pinHash = this.pinHash(pin, pinKey);
+    this.#deviceSeed = deviceSeed;
 
-    const cryptos = this.#details.getCryptos().map((local) => {
-      const remote = this.#cryptoDB.get(local._id)
-        || (local.type === 'token' ? this.#cryptoDB.getTokenByAddress(local.platform, local.address) : undefined);
-      if (remote) return remote;
-      local.custom = true;
-      local.supported = local.type === 'token'
-        ? (this.#cryptoDB.platform(local.platform)?.supported === true)
-        : false;
-      return local;
+    const { deviceToken, walletToken } = await this.request({
+      url: '/api/v4/register',
+      method: 'post',
+      data: {
+        walletId,
+        deviceId,
+        pinHash,
+      },
+      seed: walletSeed,
+      id: false,
     });
+    this.#seeds.set('device', deviceSeed, hex.decode(deviceToken));
+    this.#seeds.set('wallet', walletSeed, hex.decode(walletToken));
+    this.#clientStorage.setPinKey(pinKey);
+    this.#clientStorage.setId(deviceId);
+    this.#clientStorage.setDetailsKey(detailsKey);
+
+    await this.#init();
+    if (!this.isNewWallet) {
+      await this.#loadWallets(walletSeed);
+    }
+  }
+
+  async open(deviceSeed) {
+    this.#deviceSeed = deviceSeed;
+    await this.#init();
+    await this.#loadWallets();
+  }
+
+  async loadWallets(cryptos, walletSeed) {
     cryptos.forEach((crypto) => {
-      if (crypto.type === 'token' && crypto.supported === true) {
+      if (crypto.type === 'token') {
         const platform = cryptos.find((item) => item.type === 'coin' && item.platform === crypto.platform);
         if (!platform) cryptos.push(this.#cryptoDB.platform(crypto.platform));
       }
     });
     this.#details.setCryptos(cryptos);
+    await this.#loadWallets(walletSeed);
+  }
+
+  async #init() {
+    await this.#settings.init();
+    await this.#cryptoDB.init();
+    this.#details = new Details({
+      request: this.request,
+      key: this.#clientStorage.getDetailsKey(),
+      cryptoDB: this.#cryptoDB,
+    });
+    await this.#details.init();
+    this.emit('update', 'user');
+    this.emit('update', 'language');
+    this.emit('update', 'currency');
+    this.emit('update', 'isHiddenBalance');
+  }
+
+  async #loadWallets(walletSeed = undefined) {
+    const cryptos = this.#details.getSupportedCryptos();
+
     await this.#market.init({
-      cryptos: this.#details.getSupportedCryptos(),
+      cryptos,
       currency: this.#details.get('systemInfo').preferredCurrency,
     });
     this.#exchanges = new Exchanges({
@@ -285,31 +331,36 @@ export default class Account extends EventEmitter {
     await this.#exchanges.init();
     this.#dummy = hex.encode(this.#clientStorage.getDetailsKey())
       === import.meta.env.VITE_DUMMY_ACCOUNT;
+
+    const walletStorages = await WalletStorage.initMany(this, cryptos);
+    const wallets = await Promise.all(cryptos.map(async (crypto) => {
+      const wallet = await this.#createWallet({
+        crypto,
+        walletStorage: walletStorages[crypto._id],
+      }, walletSeed);
+      // save public key only for coins
+      if (crypto.type === 'coin') {
+        this.#clientStorage.setPublicKey(crypto.platform, wallet.getPublicKey(), this.#deviceSeed);
+        this.#details.setPlatformSettings(crypto.platform, wallet.settings);
+      }
+      if (this.#details.needToMigrateV5Balance) {
+        await this.#migrateV5Balance(wallet);
+      }
+      return wallet;
+    }));
+    this.#wallets.setMany(wallets);
+    await this.#details.save();
+    this.emit('update');
   }
 
-  /**
-   * 1. Initial launch by passphrase
-   * 2. Enter by passphare
-   * 3. Add new crypto
-   */
-  async #createWallet(crypto, walletSeed, walletStorage, settings = undefined) {
+  async #createWallet({ crypto, walletStorage, settings }, walletSeed) {
     const Wallet = await loadWalletModule(crypto.platform);
     const platform = this.#cryptoDB.platform(crypto.platform);
     const options = this.#getWalletOptions(crypto, platform, walletStorage, settings);
     const wallet = new Wallet(options);
-    await wallet.create(walletSeed);
-    return wallet;
-  }
-
-  /**
-   * 1. Enter by pin
-   */
-  async #openWallet(crypto, walletStorage, settings = undefined) {
-    const Wallet = await loadWalletModule(crypto.platform);
-    const platform = this.#cryptoDB.platform(crypto.platform);
-    const options = this.#getWalletOptions(crypto, platform, walletStorage, settings);
-    const wallet = new Wallet(options);
-    if (this.#clientStorage.hasPublicKey(crypto.platform)) {
+    if (walletSeed) {
+      await wallet.create(walletSeed);
+    } else if (this.#clientStorage.hasPublicKey(crypto.platform)) {
       await wallet.open(this.#clientStorage.getPublicKey(crypto.platform, this.#deviceSeed));
     } else {
       wallet.state = CsWallet.STATE_NEED_INITIALIZATION;
@@ -399,74 +450,6 @@ export default class Account extends EventEmitter {
     return this.#wallets.has(id);
   }
 
-  async create(walletSeed, pin) {
-    if (!(walletSeed instanceof Uint8Array)) {
-      throw new TypeError('walletSeed must be Uint8Array or Buffer');
-    }
-    if (walletSeed.length !== 64) {
-      throw new TypeError('walletSeed must be 64 bytes');
-    }
-    this.#clientStorage.clear();
-
-    const walletId = hex.encode(await ed25519.getPublicKeyAsync(walletSeed, false));
-    const deviceSeed = randomBytes(32);
-    const deviceId = hex.encode(await ed25519.getPublicKeyAsync(deviceSeed));
-    const detailsKey = hmac(sha256, 'Coin Wallet', hex.encode(walletSeed));
-    const pinKey = randomBytes(32);
-    const pinHash = this.pinHash(pin, pinKey);
-    this.#deviceSeed = deviceSeed;
-
-    const { deviceToken, walletToken } = await this.request({
-      url: '/api/v4/register',
-      method: 'post',
-      data: {
-        walletId,
-        deviceId,
-        pinHash,
-      },
-      seed: walletSeed,
-      id: false,
-    });
-    this.#seeds.set('device', deviceSeed, hex.decode(deviceToken));
-    this.#seeds.set('wallet', walletSeed, hex.decode(walletToken));
-    this.#clientStorage.setPinKey(pinKey);
-    this.#clientStorage.setId(deviceId);
-    this.#clientStorage.setDetailsKey(detailsKey);
-
-    await this.init();
-
-    const walletStorages = await WalletStorage.initMany(this, this.#details.getSupportedCryptos());
-    const wallets = await Promise.all(this.#details.getSupportedCryptos().map(async (crypto) => {
-      const wallet = await this.#createWallet(crypto, walletSeed, walletStorages[crypto._id]);
-      // save public key only for coins
-      if (crypto.type === 'coin') {
-        this.#clientStorage.setPublicKey(crypto.platform, wallet.getPublicKey(), deviceSeed);
-        this.#details.setPlatformSettings(crypto.platform, wallet.settings);
-      }
-      await this.#migrateV5Balance(wallet);
-      return wallet;
-    }));
-    this.#wallets.setMany(wallets);
-    await this.#details.save();
-    this.emit('update');
-  }
-
-  async open(deviceSeed) {
-    this.#deviceSeed = deviceSeed;
-    await this.init();
-    const walletStorages = await WalletStorage.initMany(this, this.#details.getSupportedCryptos());
-    const wallets = await Promise.all(this.#details.getSupportedCryptos().map(async (crypto) => {
-      const wallet = await this.#openWallet(crypto, walletStorages[crypto._id]);
-      if (crypto.type === 'coin') {
-        this.#details.setPlatformSettings(crypto.platform, wallet.settings);
-      }
-      return wallet;
-    }));
-    this.#wallets.setMany(wallets);
-    await this.#details.save();
-    this.emit('update');
-  }
-
   toggleOnion() {
     this.#clientStorage.toggleOnion();
     for (const wallet of this.#wallets.list()) {
@@ -494,17 +477,20 @@ export default class Account extends EventEmitter {
    * If there is a public key, then unlocking the private seed is not requested.
    */
   async addWallet(crypto, walletSeed) {
-    if (this.#wallets.has(crypto._id)) {
+    if (this.#details.hasCrypto(crypto)) {
       throw new CryptoAlreadyAddedError(crypto._id);
     }
     if (this.#clientStorage.hasPublicKey(crypto.platform)) {
       const walletStorage = await WalletStorage.initOne(this, crypto);
-      this.#wallets.set(await this.#openWallet(crypto, walletStorage));
+      this.#wallets.set(await this.#createWallet({ crypto, walletStorage }));
       this.#details.addCrypto(crypto);
     } else if (walletSeed) {
       if (crypto.type === 'coin') {
         const walletStorage = await WalletStorage.initOne(this, crypto);
-        const wallet = await this.#createWallet(crypto, walletSeed, walletStorage);
+        const wallet = await this.#createWallet({
+          crypto,
+          walletStorage,
+        }, walletSeed);
         this.#wallets.set(wallet);
         this.#details.setPlatformSettings(crypto.platform, wallet.settings);
         this.#clientStorage.setPublicKey(wallet.crypto.platform, wallet.getPublicKey(), this.#deviceSeed);
@@ -513,11 +499,17 @@ export default class Account extends EventEmitter {
       if (crypto.type === 'token') {
         const platform = this.#cryptoDB.platform(crypto.platform);
         const walletStorages = await WalletStorage.initMany(this, [crypto, platform]);
-        const wallet = await this.#createWallet(platform, walletSeed, walletStorages[platform._id]);
+        const wallet = await this.#createWallet({
+          crypto: platform,
+          walletStorage: walletStorages[platform._id],
+        }, walletSeed);
         this.#wallets.set(wallet);
         this.#details.setPlatformSettings(crypto.platform, wallet.settings);
         this.#clientStorage.setPublicKey(wallet.crypto.platform, wallet.getPublicKey(), this.#deviceSeed);
-        this.#wallets.set(await this.#openWallet(crypto, walletStorages[crypto._id]));
+        this.#wallets.set(await this.#createWallet({
+          crypto,
+          walletStorage: walletStorages[crypto._id],
+        }));
         this.#details.addCrypto(platform);
         this.#details.addCrypto(crypto);
       }
@@ -643,53 +635,6 @@ export default class Account extends EventEmitter {
     }
   }
 
-  #migrateV5Details() {
-    const cryptoSettings = this.#details.get('cryptoSettings');
-    if (cryptoSettings) {
-      const platformSettings = Object.keys(cryptoSettings).reduce((result, id) => {
-        const crypto = this.#cryptoDB.get(id);
-        if (crypto) result[crypto.platform] = cryptoSettings[id];
-        return result;
-      }, {});
-      const legacy = {
-        'ethereum@ethereum': { bip44: 'm' },
-        'binance-coin@binance-smart-chain': { bip44: "m/44'/714'/0'" },
-        'bitcoin@bitcoin': {
-          bip84: "m/84'/0'/0'",
-          bip49: "m/49'/0'/0'",
-          bip44: "m/0'",
-        },
-        'litecoin@litecoin': {
-          bip84: "m/84'/2'/0'",
-          bip49: "m/49'/2'/0'",
-          bip44: "m/0'",
-        },
-        'bitcoin-cash@bitcoin-cash': { bip44: "m/0'" },
-        'dogecoin@dogecoin': { bip44: "m/0'" },
-        'dash@dash': { bip44: "m/0'" },
-      };
-      Object.keys(legacy).forEach((id) => {
-        const crypto = this.#cryptoDB.get(id);
-        if (crypto && !platformSettings[crypto.platform]) {
-          platformSettings[crypto.platform] = legacy[id];
-        }
-      });
-      this.#details.set('platformSettings', platformSettings);
-      this.#details.delete('cryptoSettings');
-    }
-    const tokens = this.#details.get('tokens');
-    if (tokens) {
-      this.#needToMigrateV5Balance = true;
-      const cryptos = [
-        ...defaultCryptos,
-        ...tokens.filter((crypto) => {
-          return crypto?._id?.includes('@') && !defaultCryptos.find((token) => token._id === crypto._id);
-        }),
-      ];
-      this.#details.setCryptos(cryptos);
-      this.#details.delete('tokens');
-    }
-  }
 
   async #migrateV5Balance(wallet) {
     if (!this.#needToMigrateV5Balance) return;
