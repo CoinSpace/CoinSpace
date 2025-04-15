@@ -230,6 +230,7 @@ jobs:
           PROVISIONING_IOS: ${{ secrets.PROVISIONING_IOS }}
           PROVISIONING_IOS_WATCH_APP: ${{ secrets.PROVISIONING_IOS_WATCH_APP }}
           PROVISIONING_IOS_WATCH_APP_EXTENSION: ${{ secrets.PROVISIONING_IOS_WATCH_APP_EXTENSION }}
+          PROVISIONING_IOS_WIDGET: ${{ secrets.PROVISIONING_IOS_WIDGET }}
           GOOGLE_CLOUD_KEY: ${{ secrets.GOOGLE_CLOUD_KEY }}
           ANDROID_PLAY_RELEASE_KEYSTORE: ${{ secrets.ANDROID_PLAY_RELEASE_KEYSTORE }}
           ANDROID_GALAXY_RELEASE_KEYSTORE: ${{ secrets.ANDROID_GALAXY_RELEASE_KEYSTORE }}
@@ -274,6 +275,7 @@ jobs:
             echo $PROVISIONING_IOS | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.mobileprovision;
             echo $PROVISIONING_IOS_WATCH_APP | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.watchapp.mobileprovision;
             echo $PROVISIONING_IOS_WATCH_APP_EXTENSION | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.watchapp.extension.mobileprovision;
+            echo $PROVISIONING_IOS_WIDGET | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.widget.mobileprovision;
           elif [[ "$VITE_DISTRIBUTION" == "android-play" ]]; then
             echo $ANDROID_PLAY_RELEASE_KEYSTORE | base64 --decode > phonegap/release.play.keystore;
           elif [[ "$VITE_DISTRIBUTION" == "android-galaxy" ]]; then
