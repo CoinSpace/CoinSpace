@@ -45,6 +45,7 @@
     "@sentry/browser": "^7.56.0",
     "@sentry/integrations": "^7.56.0",
     "@simplewebauthn/browser": "^8.3.1",
+    "@suchipi/femver": "^1.0.0",
     "@walletconnect/core": "^2.13.0",
     "@walletconnect/jsonrpc-utils": "^1.0.8",
     "@walletconnect/utils": "^2.13.0",

@@ -111,6 +111,7 @@ export default class Account extends EventEmitter {
   #needToMigrateV5Balance = false;
   #walletConnect;
   #dummy = false;
+  #newCryptosToShow = [];
 
   get siteUrl() {
     return this.isOnion ? import.meta.env.VITE_SITE_URL_TOR : import.meta.env.VITE_SITE_URL;
@@ -203,6 +204,16 @@ export default class Account extends EventEmitter {
     return this.#details.isNewWallet;
   }
 
+  get newCryptosToShow() {
+    return this.#newCryptosToShow;
+  }
+
+  get walletsNeedSynchronization() {
+    return this.wallets('coin').filter((wallet) => {
+      return wallet.state === CsWallet.STATE_NEED_INITIALIZATION;
+    });
+  }
+
   constructor({ localStorage, release }) {
     super();
     if (!localStorage) {
@@ -222,6 +233,7 @@ export default class Account extends EventEmitter {
     });
     this.#cryptoDB = new CryptoDB({
       request: this.request,
+      account: this,
     });
     this.#market = new Market({
       cryptoDB: this.#cryptoDB,
@@ -340,7 +352,9 @@ export default class Account extends EventEmitter {
       }, walletSeed);
       // save public key only for coins
       if (crypto.type === 'coin') {
-        this.#clientStorage.setPublicKey(crypto.platform, wallet.getPublicKey(), this.#deviceSeed);
+        if (wallet.state === CsWallet.STATE_INITIALIZED) {
+          this.#clientStorage.setPublicKey(crypto.platform, wallet.getPublicKey(), this.#deviceSeed);
+        }
         this.#details.setPlatformSettings(crypto.platform, wallet.settings);
       }
       if (this.#details.needToMigrateV5Balance) {
@@ -349,6 +363,8 @@ export default class Account extends EventEmitter {
       return wallet;
     }));
     this.#wallets.setMany(wallets);
+
+    this.#newCryptosToShow = await this.#details.getNewCryptos();
     await this.#details.save();
     this.emit('update');
   }
@@ -472,14 +488,29 @@ export default class Account extends EventEmitter {
     this.logout();
   }
 
-  /**
-   * Adding a new wallet to the account.
-   * If there is a public key, then unlocking the private seed is not requested.
-   */
   async addWallet(crypto, walletSeed) {
     if (this.#details.hasCrypto(crypto)) {
       throw new CryptoAlreadyAddedError(crypto._id);
     }
+    await this.#addWallet(crypto, walletSeed);
+    await this.#details.save();
+    this.emit('update');
+  }
+
+  async addWallets(cryptos, walletSeed) {
+    for (const crypto of cryptos) {
+      if (this.#details.hasCrypto(crypto)) continue;
+      await this.#addWallet(crypto, walletSeed);
+    }
+    await this.#details.save();
+    this.emit('update');
+  }
+
+  /**
+   * Adding a new wallet to the account.
+   * If there is a public key, then unlocking the private seed is not requested.
+   */
+  async #addWallet(crypto, walletSeed) {
     if (this.#clientStorage.hasPublicKey(crypto.platform)) {
       const walletStorage = await WalletStorage.initOne(this, crypto);
       this.#wallets.set(await this.#createWallet({ crypto, walletStorage }));
@@ -516,9 +547,6 @@ export default class Account extends EventEmitter {
     } else {
       throw new SeedRequiredError();
     }
-
-    await this.#details.save();
-    this.emit('update');
   }
 
   async removeWallet(crypto) {
@@ -554,6 +582,13 @@ export default class Account extends EventEmitter {
       }
     }
     this.#clientStorage.setPublicKey(wallet.crypto.platform, publicKey, this.#deviceSeed);
+  }
+
+  async initWallets(wallets, walletSeed) {
+    for (const wallet of wallets) {
+      await this.initWallet(wallet, walletSeed);
+    }
+    this.emit('update');
   }
 
   async updatePlatformSettings(wallet, settings, walletSeed) {

@@ -12,14 +12,17 @@ export default {
   methods: {
     async setup(pin) {
       await this.$account.create(this.storage.seed, pin);
+
       if (this.$account.biometry.isAvailable) {
         this.updateStorage({ pin });
-        return this.next('biometry');
+        this.next('biometry');
+      } else if (this.$account.isNewWallet) {
+        this.next('select');
+      } else if (this.$account.newCryptosToShow.length) {
+        this.next('new');
+      } else {
+        this.$router.replace({ name: 'home' });
       }
-      if (this.$account.isNewWallet) {
-        return this.next('select');
-      }
-      this.$router.replace({ name: 'home' });
     },
   },
 };

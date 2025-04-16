@@ -3,6 +3,7 @@ import CsPinStep from '../../components/CsPinStep.vue';
 import CsSteps from '../../components/CsSteps.vue';
 
 import UnlockStepIndex from './UnlockStepIndex.vue';
+import UnlockStepNewCryptos from './UnlockStepNewCryptos.vue';
 import UnlockStepSynchronization from './UnlockStepSynchronization.vue';
 
 export default {
@@ -12,6 +13,7 @@ export default {
   steps: {
     index: UnlockStepIndex,
     synchronization: UnlockStepSynchronization,
+    new: UnlockStepNewCryptos,
     pin: CsPinStep,
   },
 };

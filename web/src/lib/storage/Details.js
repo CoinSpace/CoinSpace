@@ -22,6 +22,7 @@ export default class Details extends ServerStorage {
         email: '',
       },
       cryptos: undefined,
+      shownNewCryptoIds: [],
     };
   }
 
@@ -174,5 +175,29 @@ export default class Details extends ServerStorage {
 
   removeCrypto(crypto) {
     this.set('cryptos', this.getCryptos().filter((item) => item._id !== crypto._id));
+  }
+
+  async getNewCryptos() {
+    const addedCryptoIds = new Set((this.get('cryptos') || []).map(({ _id }) => _id));
+    const shownNewCryptoIds = new Set(this.get('shownNewCryptoIds') || []);
+    const newCryptoIds = new Set(await this.#cryptoDB.getNewCryptoIds());
+    const cryptosToShow = [];
+    for (const id of newCryptoIds) {
+      const crypto = this.#cryptoDB.get(id);
+      if (crypto.deprecated !== true && crypto.supported !== false) {
+        if (!addedCryptoIds.has(id) && !shownNewCryptoIds.has(id)) {
+          cryptosToShow.push(crypto);
+        }
+        shownNewCryptoIds.add(id);
+      }
+    }
+    // cleanup shown crypto ids list
+    for (const id of shownNewCryptoIds) {
+      if (!newCryptoIds.has(id)) {
+        shownNewCryptoIds.delete(id);
+      }
+    }
+    this.set('shownNewCryptoIds', [...shownNewCryptoIds]);
+    return cryptosToShow;
   }
 }

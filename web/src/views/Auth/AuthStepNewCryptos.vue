@@ -16,8 +16,7 @@ export default {
   },
   extends: CsStep,
   data() {
-    const cryptos = this.$account.cryptoDB.all
-      .filter((item) => item.deprecated !== true && item.supported !== false)
+    const cryptos = this.$account.newCryptosToShow
       .map((crypto) => {
         const platform = this.$account.cryptoDB.platform(crypto.platform);
         return {
@@ -31,7 +30,7 @@ export default {
       isLoading: false,
       coins: cryptos.filter((item) => item.crypto.type === 'coin'),
       tokens: cryptos.filter((item) => item.crypto.type === 'token'),
-      selected: new Set(['bitcoin@bitcoin']),
+      selected: new Set(),
     };
   },
   methods: {
@@ -46,16 +45,9 @@ export default {
       if (this.isLoading) return;
       this.isLoading = true;
       const cryptos = [...this.selected].map((id) => this.$account.cryptoDB.get(id));
-      await this.$account.loadWallets(cryptos, this.storage.seed);
-      this.isLoading = false;
+      await this.$account.addWallets(cryptos, this.storage.seed);
       this.done();
-    },
-    async skip() {
-      if (this.isLoading) return;
-      this.isLoading = true;
-      await this.$account.loadWallets([], this.storage.seed);
       this.isLoading = false;
-      this.done();
     },
     done() {
       this.$router.replace({ name: 'home' });
@@ -66,11 +58,11 @@ export default {
 
 <template>
   <AuthStepLayout
-    :title="$t('Select your cryptos')"
-    @back="skip"
+    :title="$t('New cryptos')"
+    @back="done"
   >
     <div class="&__message">
-      {{ $t('Select which ones you want to add to your wallet.') }}
+      {{ $t('Select new cryptos you want to add to your wallet.') }}
     </div>
     <div class="&__content">
       <CsCryptoList
@@ -105,7 +97,7 @@ export default {
         v-if="!selected.size"
         type="primary-link"
         :isLoading="isLoading"
-        @click="skip"
+        @click="done"
       >
         {{ $t('Skip') }}
       </CsButton>

@@ -1,6 +1,6 @@
 <script>
 import Fuse from 'fuse.js/dist/fuse.basic.esm.js';
-import { SeedRequiredError } from '../../../lib/account/Account';
+import { SeedRequiredError } from '../../../lib/account/Account.js';
 import { cryptoSubtitleWithSymbol } from '../../../lib/helpers.js';
 import { walletSeed } from '../../../lib/mixins.js';
 

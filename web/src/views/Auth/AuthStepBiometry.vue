@@ -57,16 +57,16 @@ export default {
     async setup() {
       const result = await this.$account.biometry.enable(this.storage.pin, this.storage.seed);
       if (!result) return;
-      this.redirect();
+      this.done();
     },
-    skip() {
-      this.redirect();
-    },
-    redirect() {
+    done() {
       if (this.$account.isNewWallet) {
-        return this.next('select');
+        this.next('select');
+      } else if (this.$account.newCryptosToShow.length) {
+        this.next('new');
+      } else {
+        this.$router.replace({ name: 'home' });
       }
-      this.$router.replace({ name: 'home' });
     },
   },
 };
@@ -75,7 +75,7 @@ export default {
 <template>
   <AuthStepLayout
     :title="title"
-    @back="skip"
+    @back="done"
   >
     <div class="&__icon-wrapper">
       <component
@@ -95,7 +95,7 @@ export default {
       </CsButton>
       <CsButton
         type="primary-link"
-        @click="skip"
+        @click="done"
       >
         {{ $t('Skip') }}
       </CsButton>

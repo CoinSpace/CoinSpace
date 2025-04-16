@@ -1,6 +1,4 @@
 <script>
-import { CsWallet } from '@coinspace/cs-common';
-
 import AuthStepLayout from '../../layouts/AuthStepLayout.vue';
 import CsButton from '../../components/CsButton.vue';
 import CsButtonGroup from '../../components/CsButtonGroup.vue';
@@ -25,15 +23,20 @@ export default {
     async confirm() {
       this.isLoading = true;
       await this.walletSeed(async (walletSeed) => {
-        for (const wallet of this.$account.wallets('coin')) {
-          if (wallet.state === CsWallet.STATE_NEED_INITIALIZATION) {
-            await this.$account.initWallet(wallet, walletSeed);
-          }
-        }
-        this.$account.emit('update');
-        this.args.redirect();
+        await this.$account.initWallets(this.$account.walletsNeedSynchronization, walletSeed);
+
+        this.done();
       }, { layout: 'AuthStepLayout' });
       this.isLoading = false;
+    },
+    done() {
+      if (this.$account.newCryptosToShow.length) {
+        this.next('new');
+      } else if (this.$route.redirectedFrom?.name !== 'home') {
+        this.$router.push(this.$route.redirectedFrom);
+      } else {
+        this.$router.replace({ name: 'home' });
+      }
     },
   },
 };
