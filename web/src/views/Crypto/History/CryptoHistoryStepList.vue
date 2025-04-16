@@ -165,8 +165,11 @@ export default {
     }
 
     &__transactions {
+      display: flex;
+      flex-direction: column;
       margin-right: -$spacing-sm;
       margin-left: -$spacing-sm;
+      gap: $spacing-2xs;
     }
   }
 </style>
