@@ -92,7 +92,7 @@ async function run() {
 
   await setProvisionProfile();
   await addWatchApp('https://github.com/CoinSpace/cs-watchapp-ios.git#c3c626819e1e307739e6d335dafc9a16bdc43af5');
-  await addWidget('https://github.com/CoinSpace/cs-widget-ios.git#31207c8883fe3015ac3011c6e9c5fcb77fd1eb4c');
+  await addWidget('https://github.com/CoinSpace/cs-widget-ios.git#97b97006f003b26efc7482455b2deec91ee3c834');
   await addPods();
 
   if (process.env.CI) {
@@ -148,12 +148,12 @@ async function setProvisionProfile() {
 }
 
 async function addWatchApp(repo) {
-  cloneRepoAndLinkDirs(repo, ['WatchApp', 'WatchAppExtension']);
+  cloneRepo(repo);
 
   const project = await getXcodeProject();
 
-  const WatchApp = addFolderToProject('WatchApp', path.join(buildPath, 'platforms/ios'), project);
-  const WatchAppExtension = addFolderToProject('WatchAppExtension', path.join(buildPath, 'platforms/ios'), project);
+  const WatchApp = addFolderToProject('WatchApp', path.join(buildPath, 'platforms/ios/cs-watchapp-ios'), project);
+  const WatchAppExtension = addFolderToProject('WatchAppExtension', path.join(buildPath, 'platforms/ios/cs-watchapp-ios'), project);
 
   // add new targets
   const WatchAppTarget = project.addTarget('WatchApp', 'watch2_app', 'WatchApp', 'com.coinspace.wallet.watchapp');
@@ -190,7 +190,8 @@ async function addWatchApp(repo) {
     }
 
     if (setting['PRODUCT_NAME'] === '"WatchApp"') {
-      setting['CODE_SIGN_ENTITLEMENTS'] = '"WatchApp/CoinSpace WatchApp.entitlements"';
+      setting['CODE_SIGN_ENTITLEMENTS'] = '"cs-watchapp-ios/WatchApp/CoinSpace WatchApp.entitlements"';
+      setting['INFOPLIST_FILE'] = 'cs-watchapp-ios/WatchApp/WatchApp-Info.plist';
       setting['ASSETCATALOG_COMPILER_APPICON_NAME'] = 'AppIcon';
       if (name === 'Release') {
         setting['PROVISIONING_PROFILE_SPECIFIER'] = '"com.coinspace.wallet.watchapp (production)"';
@@ -199,7 +200,8 @@ async function addWatchApp(repo) {
       }
     } else if (setting['PRODUCT_NAME'] === '"WatchAppExtension"') {
       setting['SWIFT_OBJC_BRIDGING_HEADER'] = '""';
-      setting['CODE_SIGN_ENTITLEMENTS'] = '"WatchAppExtension/CoinSpace WatchApp Extension.entitlements"';
+      setting['CODE_SIGN_ENTITLEMENTS'] = '"cs-watchapp-ios/WatchAppExtension/CoinSpace WatchApp Extension.entitlements"';
+      setting['INFOPLIST_FILE'] = 'cs-watchapp-ios/WatchAppExtension/WatchAppExtension-Info.plist';
       setting['ASSETCATALOG_COMPILER_COMPLICATION_NAME'] = 'Complication';
       if (name === 'Release') {
         setting['PROVISIONING_PROFILE_SPECIFIER'] = '"com.coinspace.wallet.watchapp.extension (prod)"';
@@ -229,10 +231,10 @@ async function addWatchApp(repo) {
 }
 
 async function addWidget(repo) {
-  cloneRepoAndLinkDirs(repo, ['WidgetExtension']);
+  cloneRepo(repo);
 
   const project = await getXcodeProject();
-  const WidgetExtension = addFolderToProject('WidgetExtension', path.join(buildPath, 'platforms/ios'), project);
+  const WidgetExtension = addFolderToProject('WidgetExtension', path.join(buildPath, 'platforms/ios/cs-widget-ios'), project);
 
   // add new target
   const WidgetExtensionTarget = project.addTarget('WidgetExtension', 'app_extension', 'WidgetExtension', 'com.coinspace.wallet.widget');
@@ -254,7 +256,7 @@ async function addWidget(repo) {
     setting['SWIFT_VERSION'] = '5.0';
     setting['IPHONEOS_DEPLOYMENT_TARGET'] = '17.0';
     setting['GENERATE_INFOPLIST_FILE'] = 'YES';
-    setting['INFOPLIST_FILE'] = 'WidgetExtension/Info.plist';
+    setting['INFOPLIST_FILE'] = 'cs-widget-ios/WidgetExtension/Info.plist';
     setting['TARGETED_DEVICE_FAMILY'] = '"1,2"';
     setting['ENABLE_BITCODE'] = 'NO';
     setting['ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES'] = 'NO';
@@ -288,8 +290,10 @@ async function addWidget(repo) {
 
 async function addPods() {
   // add pods
-  const watchAppPodfile = fs.readFileSync(path.resolve(buildPath, 'cs-watchapp-ios/WatchAppExtension/Podfile'));
+  const watchAppPodfile = fs.readFileSync(path.resolve(buildPath, 'platforms/ios/cs-watchapp-ios/WatchAppExtension/Podfile'));
   fs.appendFileSync(path.resolve(buildPath, 'platforms/ios/Podfile'), watchAppPodfile);
+  const widgetPodfile = fs.readFileSync(path.resolve(buildPath, 'platforms/ios/cs-widget-ios/WidgetExtension/Podfile'));
+  fs.appendFileSync(path.resolve(buildPath, 'platforms/ios/Podfile'), widgetPodfile);
 
   const postInstall = `
     post_install do |installer|
@@ -328,14 +332,14 @@ async function getXcodeProject() {
 
 function addFolderToProject(folderPath, basePath, project, isChild) {
   const folder = path.basename(folderPath);
-  const watchAppPaths = fs.readdirSync(path.resolve(basePath, folderPath));
+  const paths = fs.readdirSync(path.resolve(basePath, folderPath));
   let files = [];
   const childs = [];
-  watchAppPaths.forEach((f) => {
+  paths.forEach((f) => {
     if (f.startsWith('.')) return;
     const s = fs.statSync(path.resolve(basePath, folderPath, f));
     if (s.isFile() || path.extname(f) === '.xcassets') {
-      files.push(path.join(folderPath, f));
+      files.push(path.resolve(basePath, folderPath, f));
     } else {
       childs.push(addFolderToProject(path.join(folderPath, f), basePath, project, true));
     }
@@ -352,15 +356,12 @@ function addFolderToProject(folderPath, basePath, project, isChild) {
   return { group, files };
 }
 
-function cloneRepoAndLinkDirs(repo, linkDirs) {
+function cloneRepo(repo) {
   const [repoUrl, commit] = repo.split('#');
-  shell(`git clone ${repoUrl}`, { cwd: buildPath });
+  const cwd = path.join(buildPath, 'platforms/ios');
+  shell(`git clone ${repoUrl}`, { cwd });
   const name = path.basename(repoUrl, '.git');
-  shell(`cd ${name} && git checkout ${commit} -q`, { cwd: buildPath });
-  for (const dir of linkDirs) {
-    const source = path.resolve(buildPath, `${name}/${dir}`);
-    shell(`ln -s ${source} ./platforms/ios/${dir}`, { cwd: buildPath });
-  }
+  shell(`cd ${name} && git checkout ${commit} -q`, { cwd });
 }
 
 process.on('unhandledRejection', (err) => {
