@@ -20,6 +20,8 @@ export default {
         this.next('select');
       } else if (this.$account.newCryptosToShow.length) {
         this.next('new');
+      } else if (this.$route.redirectedFrom?.name !== 'home') {
+        this.$router.push(this.$route.redirectedFrom);
       } else {
         this.$router.replace({ name: 'home' });
       }
