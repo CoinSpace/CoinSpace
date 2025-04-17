@@ -28,7 +28,7 @@ export default {
         };
       });
     const selected = new Set(['bitcoin@bitcoin']);
-    if (this.$route.redirectedFrom?.name === 'crypto' && this.$route.redirectedFrom?.params?.cryptoId) {
+    if (this.$route.redirectedFrom?.name === 'crypto' && this.$route.redirectedFrom.params?.cryptoId) {
       const crypto = this.$account.cryptoDB.get(this.$route.redirectedFrom.params.cryptoId);
       if (crypto && crypto.deprecated !== true && crypto.supported !== false) {
         selected.add(crypto._id);
@@ -65,7 +65,7 @@ export default {
       this.done();
     },
     done() {
-      if (this.$route.redirectedFrom?.name !== 'home') {
+      if (this.$route.redirectedFrom && this.$route.redirectedFrom.name !== 'home') {
         this.$router.push(this.$route.redirectedFrom);
       } else {
         this.$router.replace({ name: 'home' });

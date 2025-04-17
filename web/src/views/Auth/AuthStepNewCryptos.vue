@@ -50,7 +50,7 @@ export default {
       this.isLoading = false;
     },
     done() {
-      if (this.$route.redirectedFrom?.name !== 'home') {
+      if (this.$route.redirectedFrom && this.$route.redirectedFrom.name !== 'home') {
         this.$router.push(this.$route.redirectedFrom);
       } else {
         this.$router.replace({ name: 'home' });
