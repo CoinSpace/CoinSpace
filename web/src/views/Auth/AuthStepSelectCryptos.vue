@@ -81,7 +81,7 @@ export default {
       :coins="coins"
       :tokens="tokens"
       :isLoading="isLoading"
-      :selected="[...selected]"
+      :selected="selected"
       @select="select"
       @save="save"
       @skip="skip"

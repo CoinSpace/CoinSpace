@@ -17,7 +17,7 @@ export default {
       required: true,
     },
     selected: {
-      type: [String, Array],
+      type: [String, Set],
       default: '',
     },
     multiple: {
@@ -44,7 +44,7 @@ export default {
   methods: {
     isSelected(id) {
       if (this.multiple) {
-        return this.selected.includes(id);
+        return this.selected.has(id);
       } else {
         return this.selected === id;
       }

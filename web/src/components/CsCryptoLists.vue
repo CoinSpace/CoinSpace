@@ -23,9 +23,9 @@ export default {
       required: true,
     },
     selected: {
-      type: Array,
+      type: Set,
       default() {
-        return [];
+        return new Set();
       },
     },
     isLoading: {
@@ -66,15 +66,15 @@ export default {
   </div>
   <CsButtonGroup>
     <CsButton
-      v-if="selected.length"
+      v-if="selected.size"
       type="primary"
       :isLoading="isLoading"
       @click="$emit('save')"
     >
-      {{ $t('Save ({count})', { count: selected.length }) }}
+      {{ $t('Save ({count})', { count: selected.size }) }}
     </CsButton>
     <CsButton
-      v-if="!selected.length"
+      v-if="!selected.size"
       type="primary-link"
       :isLoading="isLoading"
       @click="$emit('skip')"
