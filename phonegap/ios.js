@@ -92,7 +92,7 @@ async function run() {
 
   await setProvisionProfile();
   await addWatchApp('https://github.com/CoinSpace/cs-watchapp-ios.git#c3c626819e1e307739e6d335dafc9a16bdc43af5');
-  await addWidget('https://github.com/CoinSpace/cs-widget-ios.git#97b97006f003b26efc7482455b2deec91ee3c834');
+  await addWidget('https://github.com/CoinSpace/cs-widget-ios.git#4a8821d201dd25be9db2764f0d5d9ad254a08219');
   await addPods();
 
   if (process.env.CI) {
