@@ -58,6 +58,7 @@ export default {
       v-for="item in items"
       :key="item._id"
       :crypto="item"
+      :platform="item.platform"
       class="&__medium"
     />
 
@@ -67,6 +68,7 @@ export default {
       v-for="item in items"
       :key="item._id"
       :crypto="item"
+      :platform="item.platform"
       class="&__custom"
     />
   </div>
