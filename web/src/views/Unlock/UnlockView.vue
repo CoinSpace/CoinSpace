@@ -13,7 +13,7 @@ export default {
   steps: {
     index: UnlockStepIndex,
     synchronization: UnlockStepSynchronization,
-    new: UnlockStepNewCryptos,
+    newCryptos: UnlockStepNewCryptos,
     pin: CsPinStep,
   },
 };

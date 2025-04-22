@@ -31,7 +31,7 @@ export default {
     },
     done() {
       if (this.$account.newCryptosToShow.length) {
-        this.next('new');
+        this.next('newCryptos');
       } else if (this.$route.redirectedFrom && this.$route.redirectedFrom.name !== 'home') {
         this.$router.push(this.$route.redirectedFrom);
       } else {

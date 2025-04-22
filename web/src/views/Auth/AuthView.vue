@@ -23,8 +23,8 @@ export default {
     login: AuthStepLogin,
     pin: AuthStepPin,
     biometry: AuthStepBiometry,
-    select: AuthStepSelectCryptos,
-    new: AuthStepNewCryptos,
+    selectCryptos: AuthStepSelectCryptos,
+    newCryptos: AuthStepNewCryptos,
   },
 };
 </script>
