@@ -191,7 +191,7 @@ export default {
 
       &--columns {
         @include breakpoint(lg) {
-          flex-basis: calc(50% - $spacing-2xs / 2);
+          flex-basis: calc((100% - $spacing-2xs) / 2);
         }
         @include breakpoint(xl) {
           flex-basis: calc((100% - 2 * $spacing-2xs) / 3);
