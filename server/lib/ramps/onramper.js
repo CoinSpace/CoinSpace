@@ -32,7 +32,7 @@ function ramp(type, { crypto, address }) {
   if (!API_KEY) return;
   if (!crypto?.onramper?.id) return;
 
-  const { id } = crypto.onramper;
+  const id = crypto.onramper.id.toLowerCase();
 
   const url = new URL('https://buy.onramper.com/');
   url.searchParams.set('mode', type);
