@@ -92,7 +92,7 @@ async function run() {
 
   await setProvisionProfile();
   await addWatchApp('https://github.com/CoinSpace/cs-watchapp-ios.git#c3c626819e1e307739e6d335dafc9a16bdc43af5');
-  await addWidget('https://github.com/CoinSpace/cs-widget-ios.git#63d6fce95c62d141d889e92960f2fda0ba8de042');
+  await addWidget('https://github.com/CoinSpace/cs-widget-ios.git#1c63be97fea1317987f05d1d3a5e35791108f83b');
   await addPods();
 
   if (process.env.CI) {
@@ -279,7 +279,7 @@ async function addWidget(repo) {
   project.addBuildPhase(WidgetExtension.files.filter((f) => /\.swift$/.test(f)), 'PBXSourcesBuildPhase', 'Sources', WidgetExtensionTarget.uuid);
 
   project.addBuildPhase(
-    WidgetExtension.files.filter((f) => /(\.xcassets)$/.test(f)),
+    WidgetExtension.files.filter((f) => /(\.xcassets|\.xcstrings)$/.test(f)),
     'PBXResourcesBuildPhase',
     'Resources',
     WidgetExtensionTarget.uuid
