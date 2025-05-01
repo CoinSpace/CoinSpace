@@ -120,6 +120,11 @@ export default {
       &--negative {
         color: $danger;
       }
+
+      &::after {
+        content: ".";
+        visibility: hidden;
+      }
     }
 
     &__change_arrow {

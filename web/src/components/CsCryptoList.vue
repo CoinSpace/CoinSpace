@@ -122,6 +122,7 @@ export default {
               {{ $c(item.market.price) }}
             </span>
             <span
+              v-if="item.market.change[changePeriod]"
               class="&__change"
               :class="{
                 '&__change--positive': item.market.change[changePeriod] > 0,
