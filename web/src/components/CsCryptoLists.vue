@@ -71,7 +71,7 @@ export default {
       :isLoading="isLoading"
       @click="$emit('save')"
     >
-      {{ $t('Save ({count})', { count: selected.size }) }}
+      {{ $t('Add ({count})', { count: selected.size }) }}
     </CsButton>
     <CsButton
       v-if="!selected.size"
