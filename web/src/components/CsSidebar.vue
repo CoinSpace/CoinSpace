@@ -115,14 +115,15 @@ export default {
         :changePeriod="changePeriod"
         @select="(id) => $router.push({ name: 'crypto', params: { cryptoId: id }})"
       />
-      <CsButton
-        type="primary-link"
-        class="&__add-crypto"
-        @click="$router.push({ name: 'crypto.add', force: true })"
-      >
-        <PlusIcon />
-        {{ $t('Add crypto') }}
-      </CsButton>
+      <div class="&__add-crypto">
+        <CsButton
+          type="primary-link"
+          @click="$router.push({ name: 'crypto.add', force: true })"
+        >
+          <PlusIcon />
+          {{ $t('Add crypto') }}
+        </CsButton>
+      </div>
     </div>
   </div>
 </template>
@@ -211,7 +212,10 @@ export default {
     }
 
     &__add-crypto {
-      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: flex-end;
     }
   }
 </style>
