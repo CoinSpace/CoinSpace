@@ -18,12 +18,12 @@ export default class CryptoDB {
     return this.#db.filter((item) => item.type === 'token');
   }
 
-  get newCryptos() {
-    return this.#db.filter((item) => item.meta.new);
+  get new() {
+    return this.#db.filter((item) => item.meta.new).toSorted((a, b) => a.meta.new - b.meta.new);
   }
 
-  get popularCryptos() {
-    return this.#db.filter((item) => item.meta.popular);
+  get popular() {
+    return this.#db.filter((item) => item.meta.popular).toSorted((a, b) => a.meta.popular - b.meta.popular);
   }
 
   #isSupported(crypto) {

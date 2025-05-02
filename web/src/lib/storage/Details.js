@@ -180,7 +180,7 @@ export default class Details extends ServerStorage {
   async getNewCryptos() {
     const addedCryptoIds = new Set((this.get('cryptos') || []).map(({ _id }) => _id));
     const shownNewCryptoIds = new Set(this.get('shownNewCryptoIds') || []);
-    const { newCryptos } = this.#cryptoDB;
+    const newCryptos = this.#cryptoDB.new;
     const cryptosToShow = [];
     for (const crypto of newCryptos) {
       if (crypto.deprecated !== true && crypto.supported !== false) {
