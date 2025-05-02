@@ -364,7 +364,7 @@ export default class Account extends EventEmitter {
     }));
     this.#wallets.setMany(wallets);
 
-    this.#newCryptosToShow = await this.#details.getNewCryptos();
+    this.#newCryptosToShow = this.#details.getNewCryptos();
     await this.#details.save();
     this.emit('update');
   }

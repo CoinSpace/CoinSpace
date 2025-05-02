@@ -177,7 +177,7 @@ export default class Details extends ServerStorage {
     this.set('cryptos', this.getCryptos().filter((item) => item._id !== crypto._id));
   }
 
-  async getNewCryptos() {
+  getNewCryptos() {
     const addedCryptoIds = new Set((this.get('cryptos') || []).map(({ _id }) => _id));
     const shownNewCryptoIds = new Set(this.get('shownNewCryptoIds') || []);
     const newCryptos = this.#cryptoDB.new;
