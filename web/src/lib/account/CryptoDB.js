@@ -18,6 +18,14 @@ export default class CryptoDB {
     return this.#db.filter((item) => item.type === 'token');
   }
 
+  get newCryptos() {
+    return this.#db.filter((item) => item.meta.new);
+  }
+
+  get popularCryptos() {
+    return this.#db.filter((item) => item.meta.popular);
+  }
+
   #isSupported(crypto) {
     if (crypto.supported === false) {
       return false;
@@ -70,12 +78,5 @@ export default class CryptoDB {
   getTokenByAddress(platform, address) {
     return this.#db
       .find((item) => item.type === 'token' && item.platform === platform && item.address === address);
-  }
-
-  getNewCryptoIds() {
-    return this.#request({
-      url: 'cryptos/new',
-      method: 'get',
-    });
   }
 }

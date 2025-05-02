@@ -180,20 +180,19 @@ export default class Details extends ServerStorage {
   async getNewCryptos() {
     const addedCryptoIds = new Set((this.get('cryptos') || []).map(({ _id }) => _id));
     const shownNewCryptoIds = new Set(this.get('shownNewCryptoIds') || []);
-    const newCryptoIds = new Set(await this.#cryptoDB.getNewCryptoIds());
+    const { newCryptos } = this.#cryptoDB;
     const cryptosToShow = [];
-    for (const id of newCryptoIds) {
-      const crypto = this.#cryptoDB.get(id);
+    for (const crypto of newCryptos) {
       if (crypto.deprecated !== true && crypto.supported !== false) {
-        if (!addedCryptoIds.has(id) && !shownNewCryptoIds.has(id)) {
+        if (!addedCryptoIds.has(crypto._id) && !shownNewCryptoIds.has(crypto._id)) {
           cryptosToShow.push(crypto);
         }
-        shownNewCryptoIds.add(id);
+        shownNewCryptoIds.add(crypto._id);
       }
     }
     // cleanup shown crypto ids list
     for (const id of shownNewCryptoIds) {
-      if (!newCryptoIds.has(id)) {
+      if (!newCryptos.find((item) => item._id === id)) {
         shownNewCryptoIds.delete(id);
       }
     }
