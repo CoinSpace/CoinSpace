@@ -292,18 +292,16 @@ export default class Account extends EventEmitter {
     this.#clientStorage.setDetailsKey(detailsKey);
 
     await this.#init();
-    if (!this.isNewWallet) {
-      await this.#loadWallets(walletSeed);
-    }
+    if (!this.isNewWallet) await this.#initWalletsFromDetails(walletSeed);
   }
 
   async open(deviceSeed) {
     this.#deviceSeed = deviceSeed;
     await this.#init();
-    await this.#loadWallets();
+    await this.#initWalletsFromDetails();
   }
 
-  async loadWallets(cryptos, walletSeed) {
+  async completeCreation(cryptos, walletSeed) {
     cryptos.forEach((crypto) => {
       if (crypto.type === 'token') {
         const platform = cryptos.find((item) => item.type === 'coin' && item.platform === crypto.platform);
@@ -311,7 +309,7 @@ export default class Account extends EventEmitter {
       }
     });
     this.#details.setCryptos(cryptos);
-    await this.#loadWallets(walletSeed);
+    await this.#initWalletsFromDetails(walletSeed);
   }
 
   async #init() {
@@ -329,7 +327,7 @@ export default class Account extends EventEmitter {
     this.emit('update', 'isHiddenBalance');
   }
 
-  async #loadWallets(walletSeed = undefined) {
+  async #initWalletsFromDetails(walletSeed = undefined) {
     const cryptos = this.#details.getSupportedCryptos();
 
     await this.#market.init({
