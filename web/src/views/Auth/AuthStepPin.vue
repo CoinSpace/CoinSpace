@@ -3,12 +3,15 @@ import AuthStepLayout from '../../layouts/AuthStepLayout.vue';
 import CsPin from '../../components/CsPin.vue';
 import CsStep from '../../components/CsStep.vue';
 
+import { redirectToApp } from '../../lib/mixins.js';
+
 export default {
   components: {
     AuthStepLayout,
     CsPin,
   },
   extends: CsStep,
+  mixins: [redirectToApp],
   methods: {
     async setup(pin) {
       await this.$account.create(this.storage.seed, pin);
@@ -18,10 +21,8 @@ export default {
         this.next('biometry');
       } else if (this.$account.cryptosToSelect) {
         this.next('selectCryptos');
-      } else if (this.$route.redirectedFrom && this.$route.redirectedFrom.name !== 'home') {
-        this.$router.push(this.$route.redirectedFrom);
       } else {
-        this.$router.replace({ name: 'home' });
+        this.redirectToApp();
       }
     },
   },

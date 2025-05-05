@@ -40,3 +40,15 @@ export const walletSeed = {
     },
   },
 };
+
+export const redirectToApp = {
+  methods: {
+    redirectToApp() {
+      if (this.$route.redirectedFrom && this.$route.redirectedFrom.name !== 'home') {
+        this.$router.push(this.$route.redirectedFrom);
+      } else {
+        this.$router.replace({ name: 'home' });
+      }
+    },
+  },
+};

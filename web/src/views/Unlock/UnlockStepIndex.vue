@@ -2,7 +2,7 @@
 import AuthStepLayout from '../../layouts/AuthStepLayout.vue';
 import CsPin from '../../components/CsPin.vue';
 import CsStep from '../../components/CsStep.vue';
-import { onShowOnHide } from '../../lib/mixins.js';
+import { onShowOnHide, redirectToApp } from '../../lib/mixins.js';
 
 export default {
   components: {
@@ -10,7 +10,7 @@ export default {
     CsPin,
   },
   extends: CsStep,
-  mixins: [onShowOnHide],
+  mixins: [onShowOnHide, redirectToApp],
   onShow() {
     this.$refs.pin.value = '';
   },
@@ -24,10 +24,8 @@ export default {
         this.next('synchronization');
       } else if (this.$account.cryptosToSelect) {
         this.next('selectCryptos');
-      } else if (this.$route.redirectedFrom && this.$route.redirectedFrom.name !== 'home') {
-        this.$router.push(this.$route.redirectedFrom);
       } else {
-        this.$router.replace({ name: 'home' });
+        this.redirectToApp();
       }
     },
   },

@@ -8,7 +8,7 @@ import CsButtonGroup from './CsButtonGroup.vue';
 import CsCryptoList from './CsCryptoList.vue';
 import CsStep from './CsStep.vue';
 
-import { walletSeed } from '../lib/mixins.js';
+import { redirectToApp, walletSeed } from '../lib/mixins.js';
 
 export default {
   components: {
@@ -18,7 +18,7 @@ export default {
     CsCryptoList,
   },
   extends: CsStep,
-  mixins: [walletSeed],
+  mixins: [redirectToApp, walletSeed],
   data() {
     const { type, cryptos } = this.$account.cryptosToSelect;
     const selected = new Set();
@@ -62,12 +62,12 @@ export default {
       try {
         this.$account.details.setShownNewCryptoIds();
         await this.$account.addWallets(cryptos, this.storage.seed);
-        this.done();
+        this.redirectToApp();
       } catch (err) {
         if (err instanceof SeedRequiredError) {
           await this.walletSeed(async (walletSeed) => {
             await this.$account.addWallets(cryptos, walletSeed);
-            this.done();
+            this.redirectToApp();
           }, { layout: 'AuthStepLayout' });
         } else {
           console.error(err);
@@ -85,18 +85,11 @@ export default {
         }
         this.$account.details.setShownNewCryptoIds();
         await this.$account.details.save();
-        this.done();
+        this.redirectToApp();
       } catch (err) {
         console.error(err);
       } finally {
         this.isLoading = false;
-      }
-    },
-    done() {
-      if (this.$route.redirectedFrom && this.$route.redirectedFrom.name !== 'home') {
-        this.$router.push(this.$route.redirectedFrom);
-      } else {
-        this.$router.replace({ name: 'home' });
       }
     },
   },

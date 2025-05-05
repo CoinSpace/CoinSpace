@@ -4,7 +4,7 @@ import CsButton from '../../components/CsButton.vue';
 import CsButtonGroup from '../../components/CsButtonGroup.vue';
 import CsStep from '../../components/CsStep.vue';
 
-import { walletSeed } from '../../lib/mixins.js';
+import { redirectToApp, walletSeed } from '../../lib/mixins.js';
 
 export default {
   components: {
@@ -13,7 +13,7 @@ export default {
     CsButtonGroup,
   },
   extends: CsStep,
-  mixins: [walletSeed],
+  mixins: [redirectToApp, walletSeed],
   data() {
     return {
       isLoading: false,
@@ -32,10 +32,8 @@ export default {
     done() {
       if (this.$account.cryptosToSelect) {
         this.next('selectCryptos');
-      } else if (this.$route.redirectedFrom && this.$route.redirectedFrom.name !== 'home') {
-        this.$router.push(this.$route.redirectedFrom);
       } else {
-        this.$router.replace({ name: 'home' });
+        this.redirectToApp();
       }
     },
   },

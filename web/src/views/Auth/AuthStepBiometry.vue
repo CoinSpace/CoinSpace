@@ -8,6 +8,7 @@ import FaceIdIcon from '../../assets/svg/faceId.svg';
 import TouchIdIcon from '../../assets/svg/touchId.svg';
 
 import { TYPES } from '../../lib/account/Biometry.js';
+import { redirectToApp } from '../../lib/mixins.js';
 
 export default {
   components: {
@@ -18,6 +19,7 @@ export default {
     FaceIdIcon,
   },
   extends: CsStep,
+  mixins: [redirectToApp],
   data() {
     const { type } = this.$account.biometry;
     const { $t } = this;
@@ -62,10 +64,8 @@ export default {
     done() {
       if (this.$account.cryptosToSelect) {
         this.next('selectCryptos');
-      } else if (this.$route.redirectedFrom && this.$route.redirectedFrom.name !== 'home') {
-        this.$router.push(this.$route.redirectedFrom);
       } else {
-        this.$router.replace({ name: 'home' });
+        this.redirectToApp();
       }
     },
   },
