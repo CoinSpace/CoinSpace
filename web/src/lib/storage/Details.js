@@ -105,10 +105,6 @@ export default class Details extends ServerStorage {
     this.#fixAddTokenPlatforms();
   }
 
-  get isNewWallet() {
-    return this.get('cryptos') === undefined;
-  }
-
   getPlatformSettings(key) {
     if (!key) {
       throw new TypeError('settings key must be specified');
@@ -135,7 +131,7 @@ export default class Details extends ServerStorage {
         ...crypto,
         custom: true,
         supported: crypto.type === 'token'
-          ? (this.#cryptoDB.platform(crypto.platform)?.supported === true)
+          ? (this.#cryptoDB.platform(crypto.platform)?.supported)
           : false,
       });
     });
@@ -178,25 +174,33 @@ export default class Details extends ServerStorage {
   }
 
   getNewCryptos() {
-    const addedCryptoIds = new Set((this.get('cryptos') || []).map(({ _id }) => _id));
+    const cryptoIds = new Set((this.get('cryptos') || []).map(({ _id }) => _id));
     const shownNewCryptoIds = new Set(this.get('shownNewCryptoIds') || []);
     const newCryptos = this.#cryptoDB.new;
     const cryptosToShow = [];
     for (const crypto of newCryptos) {
-      if (crypto.deprecated !== true && crypto.supported !== false) {
-        if (!addedCryptoIds.has(crypto._id) && !shownNewCryptoIds.has(crypto._id)) {
+      if (crypto.supported && !crypto.deprecated) {
+        if (!cryptoIds.has(crypto._id) && !shownNewCryptoIds.has(crypto._id)) {
           cryptosToShow.push(crypto);
         }
+      }
+    }
+    return cryptosToShow;
+  }
+
+  setShownNewCryptoIds() {
+    const shownNewCryptoIds = new Set(this.get('shownNewCryptoIds') || []);
+    const newCryptos = this.#cryptoDB.new;
+    for (const crypto of newCryptos) {
+      if (crypto.supported && !crypto.deprecated) {
         shownNewCryptoIds.add(crypto._id);
       }
     }
-    // cleanup shown crypto ids list
     for (const id of shownNewCryptoIds) {
       if (!newCryptos.find((item) => item._id === id)) {
         shownNewCryptoIds.delete(id);
       }
     }
     this.set('shownNewCryptoIds', [...shownNewCryptoIds]);
-    return cryptosToShow;
   }
 }

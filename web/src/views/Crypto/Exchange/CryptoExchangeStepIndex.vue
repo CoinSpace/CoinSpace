@@ -194,7 +194,7 @@ export default {
           exchange: true,
           amount,
           amountTo: estimation.result,
-          address: (this.to.crypto.supported !== false && this.$account.wallet(this.to.crypto._id))
+          address: (this.to.crypto.supported && this.$account.wallet(this.to.crypto._id))
             ? 'your wallet' : undefined,
           priceTo: this.priceTo,
           fee,

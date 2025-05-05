@@ -111,7 +111,7 @@ export default class Account extends EventEmitter {
   #needToMigrateV5Balance = false;
   #walletConnect;
   #dummy = false;
-  #newCryptosToShow = [];
+  #cryptosToSelect = undefined;
 
   get siteUrl() {
     return this.isOnion ? import.meta.env.VITE_SITE_URL_TOR : import.meta.env.VITE_SITE_URL;
@@ -200,12 +200,8 @@ export default class Account extends EventEmitter {
     return this.#dummy;
   }
 
-  get isNewWallet() {
-    return this.#details.isNewWallet;
-  }
-
-  get newCryptosToShow() {
-    return this.#newCryptosToShow;
+  get cryptosToSelect() {
+    return this.#cryptosToSelect;
   }
 
   get walletsNeedSynchronization() {
@@ -292,24 +288,13 @@ export default class Account extends EventEmitter {
     this.#clientStorage.setDetailsKey(detailsKey);
 
     await this.#init();
-    if (!this.isNewWallet) await this.#initWalletsFromDetails(walletSeed);
+    await this.#initWalletsFromDetails(walletSeed);
   }
 
   async open(deviceSeed) {
     this.#deviceSeed = deviceSeed;
     await this.#init();
     await this.#initWalletsFromDetails();
-  }
-
-  async completeCreation(cryptos, walletSeed) {
-    cryptos.forEach((crypto) => {
-      if (crypto.type === 'token') {
-        const platform = cryptos.find((item) => item.type === 'coin' && item.platform === crypto.platform);
-        if (!platform) cryptos.push(this.#cryptoDB.platform(crypto.platform));
-      }
-    });
-    this.#details.setCryptos(cryptos);
-    await this.#initWalletsFromDetails(walletSeed);
   }
 
   async #init() {
@@ -325,15 +310,8 @@ export default class Account extends EventEmitter {
     this.emit('update', 'language');
     this.emit('update', 'currency');
     this.emit('update', 'isHiddenBalance');
-  }
 
-  async #initWalletsFromDetails(walletSeed = undefined) {
-    const cryptos = this.#details.getSupportedCryptos();
-
-    await this.#market.init({
-      cryptos,
-      currency: this.#details.get('systemInfo').preferredCurrency,
-    });
+    await this.#initMarket();
     this.#exchanges = new Exchanges({
       request: this.request,
       account: this,
@@ -342,6 +320,26 @@ export default class Account extends EventEmitter {
     this.#dummy = hex.encode(this.#clientStorage.getDetailsKey())
       === import.meta.env.VITE_DUMMY_ACCOUNT;
 
+    this.#initCryptosToSelect();
+  }
+
+  #initCryptosToSelect() {
+    let cryptos = [];
+    let type;
+    if (this.#details.get('cryptos') === undefined) {
+      type = 'popular';
+      cryptos = this.#cryptoDB.popular.filter((item) => item.supported && !item.deprecated);
+    } else {
+      type = 'new';
+      cryptos = this.#details.getNewCryptos();
+    }
+    if (cryptos.length) {
+      this.#cryptosToSelect = { type, cryptos };
+    }
+  }
+
+  async #initWalletsFromDetails(walletSeed = undefined) {
+    const cryptos = this.#details.getSupportedCryptos();
     const walletStorages = await WalletStorage.initMany(this, cryptos);
     const wallets = await Promise.all(cryptos.map(async (crypto) => {
       const wallet = await this.#createWallet({
@@ -362,7 +360,6 @@ export default class Account extends EventEmitter {
     }));
     this.#wallets.setMany(wallets);
 
-    this.#newCryptosToShow = this.#details.getNewCryptos();
     await this.#details.save();
     this.emit('update');
   }
@@ -400,7 +397,7 @@ export default class Account extends EventEmitter {
       cache,
       storage,
       settings: settings || this.#details.getPlatformSettings(crypto.platform),
-      development: import.meta.env.DEV,
+      // development: import.meta.env.DEV, // TODO
     };
     if (crypto._id === 'monero@monero') {
       options.wasm = (new URL('@coinspace/monero-core-js/build/MoneroCoreJS.wasm', import.meta.url)).href;
@@ -491,6 +488,7 @@ export default class Account extends EventEmitter {
       throw new CryptoAlreadyAddedError(crypto._id);
     }
     await this.#addWallet(crypto, walletSeed);
+    await this.#initMarket();
     await this.#details.save();
     this.emit('update');
   }
@@ -500,6 +498,7 @@ export default class Account extends EventEmitter {
       if (this.#details.hasCrypto(crypto)) continue;
       await this.#addWallet(crypto, walletSeed);
     }
+    await this.#initMarket();
     await this.#details.save();
     this.emit('update');
   }
@@ -545,6 +544,13 @@ export default class Account extends EventEmitter {
     } else {
       throw new SeedRequiredError();
     }
+  }
+
+  async #initMarket() {
+    await this.#market.init({
+      cryptos: this.#details.getSupportedCryptos(),
+      currency: this.#details.get('systemInfo').preferredCurrency,
+    });
   }
 
   async removeWallet(crypto) {

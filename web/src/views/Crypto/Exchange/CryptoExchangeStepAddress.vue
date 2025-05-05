@@ -221,7 +221,7 @@ export default {
           {{ $t('Paste') }}
         </CsButton>
         <CsButton
-          v-if="storage.to.crypto.supported !== false"
+          v-if="storage.to.crypto.supported"
           type="circle"
           @click="next('mecto')"
         >

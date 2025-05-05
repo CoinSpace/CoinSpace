@@ -60,10 +60,8 @@ export default {
       this.done();
     },
     done() {
-      if (this.$account.isNewWallet) {
+      if (this.$account.cryptosToSelect) {
         this.next('selectCryptos');
-      } else if (this.$account.newCryptosToShow.length) {
-        this.next('newCryptos');
       } else if (this.$route.redirectedFrom && this.$route.redirectedFrom.name !== 'home') {
         this.$router.push(this.$route.redirectedFrom);
       } else {

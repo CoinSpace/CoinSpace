@@ -4,12 +4,11 @@ import CsSteps from '../../components/CsSteps.vue';
 import AuthStepBiometry from './AuthStepBiometry.vue';
 import AuthStepIndex from './AuthStepIndex.vue';
 import AuthStepLogin from './AuthStepLogin.vue';
-import AuthStepNewCryptos from './AuthStepNewCryptos.vue';
 import AuthStepPassphrase from './AuthStepPassphrase.vue';
 import AuthStepPassphraseConfirmation from './AuthStepPassphraseConfirmation.vue';
 import AuthStepPassphraseGeneration from './AuthStepPassphraseGeneration.vue';
 import AuthStepPin from './AuthStepPin.vue';
-import AuthStepSelectCryptos from './AuthStepSelectCryptos.vue';
+import CsSelectCryptosStep from '../../components/CsSelectCryptosStep.vue';
 
 export default {
   components: {
@@ -23,8 +22,7 @@ export default {
     login: AuthStepLogin,
     pin: AuthStepPin,
     biometry: AuthStepBiometry,
-    selectCryptos: AuthStepSelectCryptos,
-    newCryptos: AuthStepNewCryptos,
+    selectCryptos: CsSelectCryptosStep,
   },
 };
 </script>

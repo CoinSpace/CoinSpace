@@ -54,7 +54,7 @@ export default {
   beforeCreate() {
     const cryptos = this.$account.cryptoDB.all
       .filter((item) => {
-        return item.deprecated !== true
+        return !item.deprecated
           && this.$account.exchanges.isSupported(this.$wallet.crypto, item)
           && item._id !== this.$wallet.crypto._id;
       })
@@ -87,7 +87,7 @@ export default {
       this.updateStorage({
         to: { crypto, platform },
       });
-      if (crypto.supported === false || this.$account.wallet(crypto._id)) {
+      if (!crypto.supported || this.$account.wallet(crypto._id)) {
         this.back();
       } else {
         this.showModal = true;

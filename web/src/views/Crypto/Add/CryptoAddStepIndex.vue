@@ -35,7 +35,7 @@ export default {
     let selected = undefined;
     const alreadyAdded = this.$account.wallets().map((item) => item.crypto._id);
     const cryptos = this.$account.cryptoDB.all
-      .filter((item) => item.deprecated !== true && item.supported !== false)
+      .filter((item) => item.supported && !item.deprecated)
       .filter((item) => !alreadyAdded.includes(item._id))
       .map((crypto) => {
         const platform = this.$account.cryptoDB.platform(crypto.platform);

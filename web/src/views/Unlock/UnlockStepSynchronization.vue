@@ -30,8 +30,8 @@ export default {
       this.isLoading = false;
     },
     done() {
-      if (this.$account.newCryptosToShow.length) {
-        this.next('newCryptos');
+      if (this.$account.cryptosToSelect) {
+        this.next('selectCryptos');
       } else if (this.$route.redirectedFrom && this.$route.redirectedFrom.name !== 'home') {
         this.$router.push(this.$route.redirectedFrom);
       } else {
