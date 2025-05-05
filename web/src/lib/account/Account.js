@@ -397,7 +397,7 @@ export default class Account extends EventEmitter {
       cache,
       storage,
       settings: settings || this.#details.getPlatformSettings(crypto.platform),
-      // development: import.meta.env.DEV, // TODO
+      development: import.meta.env.DEV,
     };
     if (crypto._id === 'monero@monero') {
       options.wasm = (new URL('@coinspace/monero-core-js/build/MoneroCoreJS.wasm', import.meta.url)).href;
