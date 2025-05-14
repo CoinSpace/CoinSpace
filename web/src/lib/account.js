@@ -87,7 +87,7 @@ export async function createAccount({ app, router }) {
             balance: wallet.balance,
             balanceRound: market?.price ? roundCrypto(wallet.balance, market.price) : wallet.balance,
             balanceFiat: market?.price ? Number(cryptoToFiat(wallet.balance, market.price)) : 0,
-            rank: wallet.crypto.meta.rank || Infinity,
+            rank: wallet.crypto.meta?.rank || Infinity,
             title: wallet.crypto.symbol,
             subtitle: cryptoSubtitle(wallet),
             market,
