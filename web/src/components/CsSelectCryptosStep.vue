@@ -107,17 +107,15 @@ export default {
         $t('Select new cryptos you want to add to your wallet.')
       }}
     </div>
-    <div class="&__content">
-      <CsCryptoList
-        :header="type === 'popular' ? $t('Popular cryptos') : $t('New cryptos')"
-        class="&__list"
-        :items="cryptos"
-        :isLoading="isLoading"
-        :selected="selected"
-        multiple
-        @select="select"
-      />
-    </div>
+    <CsCryptoList
+      :header="type === 'popular' ? $t('Popular cryptos') : $t('New cryptos')"
+      class="&__list"
+      :items="cryptos"
+      :isLoading="isLoading"
+      :selected="selected"
+      multiple
+      @select="select"
+    />
     <CsButtonGroup>
       <CsButton
         v-if="selected.size"
@@ -146,16 +144,8 @@ export default {
     @include text-md;
   }
 
-  &__content {
-    display: flex;
-    flex: 1 1 100%;
-    flex-direction: column;
-    padding-right: max($spacing-xl, env(safe-area-inset-right));
-    padding-left: max($spacing-xl, env(safe-area-inset-left));
-    margin-right: calc(-1 * max($spacing-xl, env(safe-area-inset-right)));
-    margin-left: calc(-1 * max($spacing-xl, env(safe-area-inset-left)));
-    gap: $spacing-3xl;
-    overflow-y: auto;
+  &__list {
+    flex-grow: 1;
   }
 }
 </style>

@@ -228,6 +228,7 @@ export default {
       flex-direction: column;
       align-items: center;
       overflow-y: auto;
+      scrollbar-width: thin;
 
       &--pulling {
         overflow-y: hidden;

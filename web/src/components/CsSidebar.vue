@@ -204,6 +204,7 @@ export default {
       gap: $spacing-2xs;
       @include breakpoint(lg) {
         overflow-y: auto;
+        scrollbar-width: thin;
       }
     }
 
