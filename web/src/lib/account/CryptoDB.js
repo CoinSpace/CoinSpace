@@ -5,25 +5,20 @@ import femver from '@suchipi/femver';
 export default class CryptoDB {
   #request;
   #db;
+  #platforms = new Map();
+  #new = [];
+  #popular = [];
 
   get all() {
     return this.#db;
   }
 
-  get coins() {
-    return this.#db.filter((item) => item.type === 'coin');
-  }
-
-  get tokens() {
-    return this.#db.filter((item) => item.type === 'token');
-  }
-
   get new() {
-    return this.#db.filter((item) => item.meta.new).toSorted((a, b) => a.meta.new - b.meta.new);
+    return this.#new;
   }
 
   get popular() {
-    return this.#db.filter((item) => item.meta.popular).toSorted((a, b) => a.meta.popular - b.meta.popular);
+    return this.#popular;
   }
 
   #isSupported(crypto) {
@@ -60,7 +55,18 @@ export default class CryptoDB {
     for (const item of this.#db) {
       item.supported = this.#isSupported(item);
       deepFreeze(item);
+      if (item.type === 'coin') {
+        this.#platforms.set(item.platform, item);
+      }
+      if (item.meta.new) {
+        this.#new.push(item);
+      }
+      if (item.meta.popular) {
+        this.#popular.push(item);
+      }
     }
+    this.#new.sort((a, b) => a.meta.new - b.meta.new);
+    this.#popular.sort((a, b) => a.meta.popular - b.meta.popular);
   }
 
   get(id) {
@@ -68,11 +74,17 @@ export default class CryptoDB {
   }
 
   platform(platform) {
-    return this.#db.find((item) => item.type === 'coin' && item.platform === platform);
+    return this.#platforms.get(platform);
   }
 
   platforms(platforms) {
-    return this.#db.filter((item) => item.type === 'coin' && platforms.includes(item.platform));
+    const result = [];
+    for (const item of this.#platforms.values()) {
+      if (platforms.includes(item.platform)) {
+        result.push(item);
+      }
+    }
+    return result;
   }
 
   getTokenByAddress(platform, address) {
