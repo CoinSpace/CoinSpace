@@ -44,7 +44,7 @@ steps:
 
 - name: 'gcr.io/cloud-builders/kubectl'
   id: 'deploy'
-  args: ['delete', 'po', '-l', 'app=${_APP}', '--namespace', '${_NAMESPACE}']
+  args: ['rollout', 'restart', 'deploy', '-l', 'app=${_APP}', '--namespace', '${_NAMESPACE}']
   env:
     - 'CLOUDSDK_COMPUTE_ZONE=${_CLOUDSDK_COMPUTE_ZONE}'
     - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLOUDSDK_CONTAINER_CLUSTER}'
