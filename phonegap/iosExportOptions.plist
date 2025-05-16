@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>method</key>
-	<string>app-store</string>
+	<string>app-store-connect</string>
 	<key>teamID</key>
 	<string>3M4KWD4BUU</string>
 	<key>provisioningProfiles</key>
@@ -14,6 +14,8 @@
 		<string>com.coinspace.wallet.watchapp (production)</string>
 		<key>com.coinspace.wallet.watchapp.extension</key>
 		<string>com.coinspace.wallet.watchapp.extension (prod)</string>
+		<key>com.coinspace.wallet.widget</key>
+		<string>com.coinspace.wallet.widget (production)</string>
 	</dict>
 </dict>
 </plist>
