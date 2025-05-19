@@ -103,7 +103,7 @@ export default {
   >
     <div class="&__message">
       {{ type === 'popular' ?
-        $t('Select which ones you want to add to your wallet.') :
+        $t('Start with a few cryptos, others will be available after login.') :
         $t('Select new cryptos you want to add to your wallet.')
       }}
     </div>
