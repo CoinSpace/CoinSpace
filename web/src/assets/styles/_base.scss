@@ -39,6 +39,13 @@ body {
   -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
 }
 
+* {
+  scrollbar-width: thin;
+  @include breakpoint(lg) {
+    scrollbar-width: auto;
+  }
+}
+
 button,
 select,
 input {
