@@ -77,7 +77,7 @@
   "Destination account doesn't exist.": "Račun odredišta ne postoji.",
   "Destination address should not be equal source address": "Odredišna adresa ne smije biti jednaka izvornoj adresi",
   "Destination blockchain": "Blockchain odredišta",
-  "Destination tag": "Oznaka odredišta",
+  "Destination tag / memo": "",
   "Disable": "Onemogući",
   "Disconnect": "Prekini vezu",
   "Do you want to add {crypto} to your wallet?": "Da li želite dodati {crypto} u svoj novčanik?",

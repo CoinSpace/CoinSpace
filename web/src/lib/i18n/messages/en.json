@@ -77,7 +77,7 @@
   "Destination account doesn't exist.": "Destination account doesn't exist.",
   "Destination address should not be equal source address": "Destination address should not be equal source address",
   "Destination blockchain": "Destination blockchain",
-  "Destination tag": "Destination tag",
+  "Destination tag / memo": "Destination tag / memo",
   "Disable": "Disable",
   "Disconnect": "Disconnect",
   "Do you want to add {crypto} to your wallet?": "Do you want to add {crypto} to your wallet?",
