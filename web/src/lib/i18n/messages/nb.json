@@ -77,7 +77,7 @@
   "Destination account doesn't exist.": "Destinasjonskontoen eksisterer ikke.",
   "Destination address should not be equal source address": "Destinasjonsadressen kan ikke være lik kildeadresse",
   "Destination blockchain": "Destinasjonsblokkjede",
-  "Destination tag": "Destinasjonstagg",
+  "Destination tag / memo": "",
   "Disable": "Deaktiver",
   "Disconnect": "Frakoble",
   "Do you want to add {crypto} to your wallet?": "Vil du legge til {crypto} i lommeboken?",

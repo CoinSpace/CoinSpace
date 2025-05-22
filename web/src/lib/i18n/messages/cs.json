@@ -77,7 +77,7 @@
   "Destination account doesn't exist.": "Cílový účet neexistuje.",
   "Destination address should not be equal source address": "Cílová adresa nesmí být totožná se zdrojovou adresou",
   "Destination blockchain": "Cílová blockchain",
-  "Destination tag": "Cílový štítek",
+  "Destination tag / memo": "",
   "Disable": "Zakázat",
   "Disconnect": "Odpojit se",
   "Do you want to add {crypto} to your wallet?": "Opravu chcete přidat {crypto} do své peněženky?",

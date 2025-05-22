@@ -127,7 +127,7 @@ export default {
       <CsFormTextareaReadonly
         v-if="transaction.meta?.destinationTag"
         :value="transaction.meta?.destinationTag"
-        :label="$t('Destination tag')"
+        :label="$t('Destination tag / memo')"
       />
       <CsFormTextareaReadonly
         v-if="transaction.meta?.invoiceID"

@@ -77,7 +77,7 @@
   "Destination account doesn't exist.": "ไม่พบบัญชีปลายทาง",
   "Destination address should not be equal source address": "ที่อยู่ปลายทางต้องไม่เหมือนกับที่อยู่ต้นทาง",
   "Destination blockchain": "บล็อกเชนปลายทาง",
-  "Destination tag": "แท็กปลายทาง",
+  "Destination tag / memo": "",
   "Disable": "ปิดใช้งาน",
   "Disconnect": "ตัดการเชื่อมต่อ",
   "Do you want to add {crypto} to your wallet?": "ต้องการเพิ่ม {crypto} ในวอลเล็ทใช่ไหม?",

@@ -77,7 +77,7 @@
   "Destination account doesn't exist.": "Аккаунт назначения не существует.",
   "Destination address should not be equal source address": "Адрес назначения не должен совпадать с исходным адресом",
   "Destination blockchain": "Блокчейн назначения",
-  "Destination tag": "Тег назначения",
+  "Destination tag / memo": "Тег назначения / мемо",
   "Disable": "Отключить",
   "Disconnect": "Отключить",
   "Do you want to add {crypto} to your wallet?": "Хотите добавить {crypto} в свой кошелек?",

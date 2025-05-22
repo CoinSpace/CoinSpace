@@ -77,7 +77,7 @@
   "Destination account doesn't exist.": "Wala ang destinasyong account.",
   "Destination address should not be equal source address": "Ang address ng destinasyon ay hindi dapat maging katumbas ng address ng pinagmulan",
   "Destination blockchain": "Destinasyong blockchain",
-  "Destination tag": "Tag ng destinasyon",
+  "Destination tag / memo": "",
   "Disable": "I-disable",
   "Disconnect": "Idiskonekta",
   "Do you want to add {crypto} to your wallet?": "Gusto mo bang magdagdag ng {crypto} sa wallet mo?",

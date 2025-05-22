@@ -116,9 +116,9 @@ export default {
       <CsFormInput
         v-if="metaNames.includes('destinationTag') && !readonlyDestinationTag"
         v-model="meta.destinationTag"
-        :label="$t('Destination tag')"
+        :label="$t('Destination tag / memo')"
         :placeholder="$t('(optional)')"
-        :info="$t('Destination tag')"
+        :info="$t('Destination tag / memo')"
         :error="errors.destinationTag"
         @update:modelValue="errors.destinationTag = undefined"
       >
@@ -132,8 +132,8 @@ export default {
       <CsFormTextareaReadonly
         v-if="metaNames.includes('destinationTag') && readonlyDestinationTag"
         :value="meta.destinationTag"
-        :label="$t('Destination tag')"
-        :info="$t('Destination tag')"
+        :label="$t('Destination tag / memo')"
+        :info="$t('Destination tag / memo')"
       >
         <template #info>
           <div>

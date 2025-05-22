@@ -77,7 +77,7 @@
   "Destination account doesn't exist.": "Contul de destinație nu există.",
   "Destination address should not be equal source address": "Adresa de destinație nu trebuie să coincidă cu adresa sursă",
   "Destination blockchain": "Blockchain de destinație",
-  "Destination tag": "Etichetă de destinație",
+  "Destination tag / memo": "",
   "Disable": "Dezactivați",
   "Disconnect": "Deconectare",
   "Do you want to add {crypto} to your wallet?": "Doriți să adăugați {crypto} în portofelul dvs.?",

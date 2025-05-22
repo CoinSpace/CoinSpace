@@ -77,7 +77,7 @@
   "Destination account doesn't exist.": "មិនមានគណនីគោលដៅទេ។",
   "Destination address should not be equal source address": "អាសយដ្ឋានគោលដៅមិនគួរស្មើគ្នាជាមួយអាសយដ្ឋានប្រភពទេ។",
   "Destination blockchain": "ទិសដៅblockchain",
-  "Destination tag": "ស្លាកទិសដៅ",
+  "Destination tag / memo": "",
   "Disable": "បិទ",
   "Disconnect": "ផ្តាច់",
   "Do you want to add {crypto} to your wallet?": "តើអ្នកចង់បន្ថែម {crypto} ទៅកាបូបរបស់អ្នកទេ?",
