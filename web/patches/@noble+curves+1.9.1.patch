@@ -1,0 +1,45 @@
+diff --git a/node_modules/@noble/curves/esm/abstract/edwards.js b/node_modules/@noble/curves/esm/abstract/edwards.js
+index ba26bc5..21e02fa 100644
+--- a/node_modules/@noble/curves/esm/abstract/edwards.js
++++ b/node_modules/@noble/curves/esm/abstract/edwards.js
+@@ -343,9 +343,9 @@ export function twistedEdwards(curveDef) {
+         return modN(bytesToNumberLE(hash));
+     }
+     // Get the hashed private scalar per RFC8032 5.1.5
+-    function getPrivateScalar(key) {
++    function getPrivateScalar(key, privLengthCheck) {
+         const len = Fp.BYTES;
+-        key = ensureBytes('private key', key, len);
++        key = ensureBytes('private key', key, privLengthCheck !== false ? len : undefined);
+         // Hash private key with curve's hash function to produce uniformingly random input
+         // Check byte lengths: ensure(64, h(ensure(32, key)))
+         const hashed = ensureBytes('hashed private key', cHash(key), 2 * len);
+@@ -355,15 +355,15 @@ export function twistedEdwards(curveDef) {
+         return { head, prefix, scalar };
+     }
+     // Convenience method that creates public key from scalar. RFC8032 5.1.5
+-    function getExtendedPublicKey(key) {
+-        const { head, prefix, scalar } = getPrivateScalar(key);
++    function getExtendedPublicKey(key, privLengthCheck) {
++        const { head, prefix, scalar } = getPrivateScalar(key, privLengthCheck);
+         const point = G.multiply(scalar); // Point on Edwards curve aka public key
+         const pointBytes = point.toRawBytes(); // Uint8Array representation
+         return { head, prefix, scalar, point, pointBytes };
+     }
+     // Calculates EdDSA pub key. RFC8032 5.1.5. Privkey is hashed. Use first half with 3 bits cleared
+-    function getPublicKey(privKey) {
+-        return getExtendedPublicKey(privKey).pointBytes;
++    function getPublicKey(privKey, privLengthCheck) {
++        return getExtendedPublicKey(privKey, privLengthCheck).pointBytes;
+     }
+     // int('LE', SHA512(dom2(F, C) || msgs)) mod N
+     function hashDomainToScalar(context = Uint8Array.of(), ...msgs) {
+@@ -375,7 +375,7 @@ export function twistedEdwards(curveDef) {
+         msg = ensureBytes('message', msg);
+         if (prehash)
+             msg = prehash(msg); // for ed25519ph etc.
+-        const { prefix, scalar, pointBytes } = getExtendedPublicKey(privKey);
++        const { prefix, scalar, pointBytes } = getExtendedPublicKey(privKey, options.privLengthCheck);
+         const r = hashDomainToScalar(options.context, prefix, msg); // r = dom2(F, C) || prefix || PH(M)
+         const R = G.multiply(r).toRawBytes(); // R = rG
+         const k = hashDomainToScalar(options.context, R, pointBytes, msg); // R || A || PH(M)

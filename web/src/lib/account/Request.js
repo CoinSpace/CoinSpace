@@ -4,7 +4,7 @@ import buildURL from 'axios/unsafe/helpers/buildURL.js';
 import combineURLs from 'axios/unsafe/helpers/combineURLs.js';
 import { errors } from '@coinspace/cs-common';
 
-import * as ed25519 from '@coinspace/ed25519';
+import { ed25519 } from '@noble/curves/ed25519';
 import { hex } from '@scure/base';
 import { sha256 } from '@noble/hashes/sha256';
 
@@ -96,7 +96,9 @@ export default class Request {
         base.push(hex.encode(sha256(body)));
       }
 
-      const signature = await ed25519.signAsync(new TextEncoder().encode(base.join(' ')), config.seed, false);
+      const signature = await ed25519.sign(new TextEncoder().encode(base.join(' ')), config.seed, {
+        privLengthCheck: false,
+      });
       config.headers['Signature'] = hex.encode(signature);
     }
 
