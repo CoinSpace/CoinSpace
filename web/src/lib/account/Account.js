@@ -411,9 +411,10 @@ export default class Account extends EventEmitter {
     }
     const token = this.#cryptoDB.getTokenByAddress(platform, address);
     if (token) return token;
+    const Wallet = await loadWalletModule(platform);
     const info = await this.request({
       baseURL: this.#getApiNode(platform),
-      url: `api/v1/token/${address}`,
+      url: Wallet.tokenApiUrl(address),
     });
     if (info?.name && info?.symbol && info?.decimals !== undefined) {
       return {
