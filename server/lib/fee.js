@@ -5,7 +5,6 @@ import db from './db.js';
 const API = {
   'bitcoin@bitcoin': process.env.API_BTC_URL,
   'bitcoin-cash@bitcoin-cash': process.env.API_BCH_URL,
-  'bitcoin-sv@bitcoin-sv': process.env.API_BSV_URL,
   'litecoin@litecoin': process.env.API_LTC_URL,
   'dogecoin@dogecoin': process.env.API_DOGE_URL,
   'dash@dash': process.env.API_DASH_URL,
