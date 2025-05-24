@@ -1,5 +1,5 @@
-import * as ed25519 from '@coinspace/ed25519';
 import { EventEmitter } from 'events';
+import { ed25519 } from '@noble/curves/ed25519';
 import { hex } from '@scure/base';
 import { hmac } from '@noble/hashes/hmac';
 import { randomBytes } from '@noble/hashes/utils';
@@ -262,9 +262,9 @@ export default class Account extends EventEmitter {
     }
     this.#clientStorage.clear();
 
-    const walletId = hex.encode(await ed25519.getPublicKeyAsync(walletSeed, false));
+    const walletId = hex.encode(await ed25519.getPublicKey(walletSeed, false));
     const deviceSeed = randomBytes(32);
-    const deviceId = hex.encode(await ed25519.getPublicKeyAsync(deviceSeed));
+    const deviceId = hex.encode(await ed25519.getPublicKey(deviceSeed));
     const detailsKey = hmac(sha256, 'Coin Wallet', hex.encode(walletSeed));
     const pinKey = randomBytes(32);
     const pinHash = this.pinHash(pin, pinKey);
