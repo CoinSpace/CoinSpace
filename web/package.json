@@ -31,7 +31,7 @@
     "@coinspace/cs-cardano-wallet": "^2.0.1",
     "@coinspace/cs-common": "^1.1.11",
     "@coinspace/cs-eos-wallet": "^2.1.0",
-    "@coinspace/cs-evm-wallet": "^1.9.0",
+    "@coinspace/cs-evm-wallet": "^1.9.1",
     "@coinspace/cs-monero-wallet": "^2.0.5",
     "@coinspace/cs-ripple-wallet": "^2.3.0",
     "@coinspace/cs-solana-wallet": "^2.3.0",
