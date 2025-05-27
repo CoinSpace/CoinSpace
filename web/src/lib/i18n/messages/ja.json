@@ -77,7 +77,7 @@
   "Destination account doesn't exist.": "宛先アカウントが存在しません。",
   "Destination address should not be equal source address": "宛先アドレスは送信元アドレスと同じであってはならない",
   "Destination blockchain": "ブロックチェーンの宛先",
-  "Destination tag / memo": "",
+  "Destination tag / memo": "宛先タグ / メモ",
   "Disable": "無効",
   "Disconnect": "切断する",
   "Do you want to add {crypto} to your wallet?": "ウォレットに {crypto} を追加しますか？",

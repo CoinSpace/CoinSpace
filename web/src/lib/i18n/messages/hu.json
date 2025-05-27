@@ -77,7 +77,7 @@
   "Destination account doesn't exist.": "A fogadó számla nem létezik.",
   "Destination address should not be equal source address": "A fogadó cím nem lehet ugyanaz, mint a forráscím",
   "Destination blockchain": "Fogadóblokklánc",
-  "Destination tag / memo": "",
+  "Destination tag / memo": "Célcímke / memó",
   "Disable": "Letiltás",
   "Disconnect": "Szétkapcsolódás",
   "Do you want to add {crypto} to your wallet?": "Szeretnéd, hogy {crypto} kerüljön a pénztárcádba?",

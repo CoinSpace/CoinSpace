@@ -77,7 +77,7 @@
   "Destination account doesn't exist.": "Hedef hesap mevcut değil.",
   "Destination address should not be equal source address": "Hedef adres alanı, kaynak adres alanı ile aynı olamaz",
   "Destination blockchain": "Hedef blokzinciri",
-  "Destination tag / memo": "",
+  "Destination tag / memo": "Hedef etiketi / hatırlatma notu",
   "Disable": "Devre dışı bırak",
   "Disconnect": "Bağlantıyı Kes",
   "Do you want to add {crypto} to your wallet?": "Cüzdanınıza {crypto} eklemek ister misiniz?",

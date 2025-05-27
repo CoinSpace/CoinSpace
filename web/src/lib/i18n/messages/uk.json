@@ -77,7 +77,7 @@
   "Destination account doesn't exist.": "Цільовий акаунт не існує.",
   "Destination address should not be equal source address": "Адреса пункту призначення не може збігатися з висхідною адресою",
   "Destination blockchain": "Блокчейн пункту призначення",
-  "Destination tag / memo": "",
+  "Destination tag / memo": "Тег призначення / мемо",
   "Disable": "Вимкнути",
   "Disconnect": "Відключити",
   "Do you want to add {crypto} to your wallet?": "Бажаєте додати {crypto} до свого гаманця?",

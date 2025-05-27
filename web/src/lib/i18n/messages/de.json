@@ -77,7 +77,7 @@
   "Destination account doesn't exist.": "Das Zielkonto existiert nicht.",
   "Destination address should not be equal source address": "Zieladresse darf nicht gleich Quelladresse sein",
   "Destination blockchain": "Ziel-Blockchain",
-  "Destination tag / memo": "",
+  "Destination tag / memo": "Ziel-Tag / Memo",
   "Disable": "Deaktivieren",
   "Disconnect": "Trennen",
   "Do you want to add {crypto} to your wallet?": "Möchten Sie {crypto} zu Ihrer Brieftasche hinzufügen?",

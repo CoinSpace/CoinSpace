@@ -77,7 +77,7 @@
   "Destination account doesn't exist.": "Destinationskontot finns inte.",
   "Destination address should not be equal source address": "Destinationsadressen bör inte vara samma källadress",
   "Destination blockchain": "Destination blockchain",
-  "Destination tag / memo": "",
+  "Destination tag / memo": "Destinationstagg / memo",
   "Disable": "Inaktivera",
   "Disconnect": "Koppla bort",
   "Do you want to add {crypto} to your wallet?": "Vill du lägga till {crypto} i din plånbok?",
