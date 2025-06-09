@@ -54,6 +54,7 @@ export default async function deviceready() {
 
   navigator.clipboard.writeText = (text) => {
     cordova.plugins.clipboard.copy(text);
+    taptic.tap();
     return Promise.resolve();
   };
   navigator.clipboard.readText = () => {
