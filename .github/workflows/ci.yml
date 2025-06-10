@@ -121,14 +121,14 @@ jobs:
             VITE_DISTRIBUTION: flatpak
             SENTRY_DSN_KEY: SENTRY_DSN_SNAP
             SENTRY_PROJECT: linux
-          - os: windows-2019
+          - os: windows-2022
             node: 20
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: win
             VITE_DISTRIBUTION: appx
             SENTRY_DSN_KEY: SENTRY_DSN_WIN
             SENTRY_PROJECT: win
-          - os: windows-2019
+          - os: windows-2022
             node: 20
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: win
