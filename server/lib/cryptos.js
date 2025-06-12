@@ -33,7 +33,7 @@ async function sync() {
       $set: {
         ...crypto,
         platformName: getPlatformName(crypto),
-        supported: crypto.supported !== false,
+        supported: typeof crypto.supported === 'string' ? false : crypto.supported !== false,
         deprecated: crypto.deprecated === true,
         synchronized_at: new Date(),
       },
