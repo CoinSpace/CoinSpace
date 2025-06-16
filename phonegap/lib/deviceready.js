@@ -90,6 +90,32 @@ export default async function deviceready() {
       const cryptoId = type.split('.').pop();
       window.navigateHandler(`/${cryptoId}`);
     };
+    window.saveCryptosForWidget = (cryptos) => {
+      const value = cryptos ? JSON.stringify(cryptos
+        .filter((crypto) => crypto.market && crypto.balance.value)
+        .map((crypto) => {
+          return {
+            _id: crypto.crypto._id,
+            balance: crypto.balance.toString(),
+          };
+        })
+      ) : '';
+      window.UserDefaults.save(
+        {
+          suite: 'group.com.coinspace.shared',
+          key: 'portfolioCryptos',
+          value,
+        },
+        () => {
+          WidgetCenter.reloadTimelines(
+            'PortfolioExtension',
+            () => {},
+            () => console.error('reloadTimelines')
+          );
+        },
+        () => console.error('saveCryptosForWidget')
+      );
+    };
     window.StatusBar.styleDefault();
     window.StatusBar.show();
   }

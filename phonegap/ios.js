@@ -54,6 +54,8 @@ async function run() {
   cordova('plugin add cordova-plugin-app-review@3.1.0 --save');
   cordova('plugin add cordova-plugin-taptic-engine@2.2.0 --save');
   cordova('plugin add cordova-clipboard@1.3.0 --save');
+  cordova('plugin add cordova-ios-plugin-userdefaults@1.0.0 --save');
+  cordova('plugin add https://github.com/CoinSpace/corodva-plugin-widget-center#bd96a918400a050813c3395f87c73243837e7920 --save');
 
   const update = {
     'UISupportedInterfaceOrientations': [
@@ -92,7 +94,7 @@ async function run() {
 
   await setProvisionProfile();
   await addWatchApp('https://github.com/CoinSpace/cs-watchapp-ios.git#c3c626819e1e307739e6d335dafc9a16bdc43af5');
-  await addWidget('https://github.com/CoinSpace/cs-widget-ios.git#b9bb988309b5a82e474db9731936a02ae5dcbb0c');
+  await addWidget('https://github.com/CoinSpace/cs-widget-ios.git#b57c3bdf6f6b2be9cdabe8b51627ea21e36b7fb4');
   await addPods();
 
   if (process.env.CI) {

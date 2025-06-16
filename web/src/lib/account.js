@@ -112,10 +112,17 @@ export async function createAccount({ app, router }) {
           return a.crypto.symbol.localeCompare(b.crypto.symbol);
         });
         cryptos.value = result;
+
+        if (import.meta.env.VITE_PLATFORM === 'ios') {
+          window.saveCryptosForWidget(result);
+        }
       }
     }
   });
   account.on('logout', async () => {
+    if (import.meta.env.VITE_PLATFORM === 'ios') {
+      window.saveCryptosForWidget();
+    }
     await createAccount({ app, router });
   });
 }

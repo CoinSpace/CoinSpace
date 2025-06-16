@@ -199,9 +199,19 @@
         <string>applinks:coin.space</string>
       </array>
     </edit-config>
+    <edit-config target="com.apple.security.application-groups" file="Coin/Entitlements-Debug.plist" mode="merge">
+      <array>
+        <string>group.com.coinspace.shared</string>
+      </array>
+    </edit-config>
     <edit-config target="com.apple.developer.associated-domains" file="Coin/Entitlements-Release.plist" mode="merge">
       <array>
         <string>applinks:coin.space</string>
+      </array>
+    </edit-config>
+    <edit-config target="com.apple.security.application-groups" file="Coin/Entitlements-Release.plist" mode="merge">
+      <array>
+        <string>group.com.coinspace.shared</string>
       </array>
     </edit-config>
     <preference name="KeyboardDisplayRequiresUserAction" value="false" />
