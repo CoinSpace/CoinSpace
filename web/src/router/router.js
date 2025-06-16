@@ -1,4 +1,3 @@
-import * as EOSSymbols from '@coinspace/cs-eos-wallet/symbols';
 import { CsWallet } from '@coinspace/cs-common';
 import { ref } from 'vue';
 import {
@@ -89,10 +88,12 @@ if (import.meta.env.VITE_BUILD_TYPE === 'phonegap' ||
   };
 }
 
+const walletState = ref(undefined);
+
 function setWalletProps($app, wallet) {
   const { $account } = router;
   defineAppProperty($app, '$wallet', wallet);
-  const walletState = ref(wallet.state);
+  walletState.value = wallet.state;
   defineAppProperty($app, '$walletState', walletState);
 
   const $loadWallet = async () => {
@@ -112,20 +113,12 @@ function setWalletProps($app, wallet) {
   if (wallet.state !== CsWallet.STATE_LOADED) {
     $loadWallet();
   }
-  defineAppProperty($app, '$STATE_LOADING', CsWallet.STATE_LOADING);
-  defineAppProperty($app, '$STATE_LOADED', CsWallet.STATE_LOADED);
-  defineAppProperty($app, '$STATE_NEED_ACTIVATION', EOSSymbols.STATE_NEED_ACTIVATION);
-  defineAppProperty($app, '$STATE_ERROR', CsWallet.STATE_ERROR);
 }
 
 function unsetWalletProps($app) {
-  delete $app.config.globalProperties.$wallet;
-  delete $app.config.globalProperties.$walletState;
-  delete $app.config.globalProperties.$loadWallet;
-  delete $app.config.globalProperties.$STATE_LOADING;
-  delete $app.config.globalProperties.$STATE_LOADED;
-  delete $app.config.globalProperties.$STATE_NEED_ACTIVATION;
-  delete $app.config.globalProperties.$STATE_ERROR;
+  defineAppProperty($app, '$wallet', undefined);
+  defineAppProperty($app, '$loadWallet', undefined);
+  walletState.value = undefined;
 }
 
 export default router;

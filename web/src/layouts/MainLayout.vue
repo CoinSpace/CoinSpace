@@ -81,7 +81,7 @@ export default {
         class="&__content"
         :class="{ '&__content--narrow': !wide }"
       >
-        <template v-if="'$wallet' in this && $wallet">
+        <template v-if="$wallet">
           <CsLoader v-if="$walletState === $STATE_LOADING" />
           <slot v-if="[$STATE_LOADED, $STATE_NEED_ACTIVATION].includes($walletState)" />
           <div

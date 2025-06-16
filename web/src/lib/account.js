@@ -1,9 +1,10 @@
+import * as EOSSymbols from '@coinspace/cs-eos-wallet/symbols';
 import Account from './account/Account.js';
-import { Amount } from '@coinspace/cs-common';
 import { ref } from 'vue';
 import { release } from './version.js';
 import { init as sentryInit } from './sentry.js';
 import { setLanguage } from './i18n/i18n.js';
+import { Amount, CsWallet } from '@coinspace/cs-common';
 import { cryptoSubtitle, cryptoToFiat, defineAppProperty, roundCrypto } from './helpers.js';
 
 export async function createAccount({ app, router }) {
@@ -25,6 +26,12 @@ export async function createAccount({ app, router }) {
   const isHiddenBalance = ref(false);
   const isOnion = ref(account.isOnion);
 
+  defineAppProperty(app, '$wallet', undefined);
+  defineAppProperty(app, '$walletState', undefined);
+  defineAppProperty(app, '$STATE_LOADING', CsWallet.STATE_LOADING);
+  defineAppProperty(app, '$STATE_LOADED', CsWallet.STATE_LOADED);
+  defineAppProperty(app, '$STATE_NEED_ACTIVATION', EOSSymbols.STATE_NEED_ACTIVATION);
+  defineAppProperty(app, '$STATE_ERROR', CsWallet.STATE_ERROR);
   defineAppProperty(app, '$currency', currency);
   defineAppProperty(app, '$user', user);
   defineAppProperty(app, '$cryptos', cryptos);
