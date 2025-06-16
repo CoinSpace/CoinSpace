@@ -82,6 +82,7 @@ export default {
       try {
         await CsPriceChart.loadApex();
         this.period = period;
+        if (!this.$wallet) return;
         const prices = await this.$account.market.getChartData(
           this.$wallet.crypto._id,
           period,
