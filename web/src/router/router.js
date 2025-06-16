@@ -106,7 +106,7 @@ function setWalletProps($app, wallet) {
     } catch (err) {
       console.error(err);
     }
-    walletState.value = wallet.state;
+    walletState.value = $app.config.globalProperties.$wallet?.state;
   };
   defineAppProperty($app, '$loadWallet', $loadWallet);
 
