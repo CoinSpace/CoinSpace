@@ -1,10 +1,6 @@
 import Big from 'big.js';
 import createError from 'http-errors';
-import crypto from 'crypto';
-import elliptic from 'elliptic';
-const EdDSA = elliptic.eddsa;
-
-const ec = new EdDSA('ed25519');
+import crypto from 'node:crypto';
 
 export function generateChallenge() {
   return crypto.randomBytes(64);
@@ -23,7 +19,7 @@ export function asyncWrapper(fn) {
   };
 }
 
-export function verifyReq(key, req) {
+export async function verifyReq(key, req) {
   try {
     const base = [
       req.method.toLowerCase(),
@@ -37,8 +33,11 @@ export function verifyReq(key, req) {
       base.push(req.bodyHash);
     }
 
-    const buf = Buffer.from(base.join(' '), 'utf8');
-    if (ec.keyFromPublic(key).verify(buf, req.get('Signature'))) {
+    const pubKey = await crypto.webcrypto.subtle
+      .importKey('raw', Buffer.from(key, 'hex'), { name: 'Ed25519' }, false, ['verify']);
+    const data = Buffer.from(base.join(' '), 'utf8');
+    const signature = Buffer.from(req.get('Signature'), 'hex');
+    if (crypto.verify(null, data, pubKey, signature)) {
       return true;
     } else {
       return Promise.reject(createError(401, 'Invalid signature'));
