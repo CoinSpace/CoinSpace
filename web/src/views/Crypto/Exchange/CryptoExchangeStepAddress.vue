@@ -250,7 +250,7 @@ export default {
       >
         {{ $t('Continue') }}
       </CsButton>
-      <CsPoweredBy :powered="storage.provider" />
+      <CsPoweredBy :powered="$account.exchanges.getProviderInfo(storage.provider)" />
     </CsButtonGroup>
   </MainLayout>
 </template>

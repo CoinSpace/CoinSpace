@@ -47,11 +47,11 @@ export class ExchangeBigAmountError extends errors.BigAmountError {
 
 export default class BaseExchange {
   #id;
-  #name;
   #request;
   #account;
   #storage;
   #exchanges;
+  #info;
 
   static STATUS_PENDING = Symbol('PENDING');
   static STATUS_EXCHANGING = Symbol('EXCHANGING');
@@ -69,28 +69,34 @@ export default class BaseExchange {
     'iost@iost',
   ];
 
-
   get id() {
     return this.#id;
   }
 
-  get name() {
-    return this.#name;
+  get info() {
+    return {
+      ...this.#info,
+      logo: new URL(
+        `/logo/${this.#info.logo}?ver=${import.meta.env.VITE_VERSION}`,
+        this.#account.isOnion
+          ? import.meta.env.VITE_API_SWAP_URL_TOR
+          : import.meta.env.VITE_API_SWAP_URL
+      ).toString(),
+    };
   }
 
-  constructor({ request, account, id, name }) {
+  constructor({ request, account, id }) {
     if (!request) throw new TypeError('request is required');
     if (!account) throw new TypeError('account is required');
     if (!id) throw new TypeError('id is required');
-    if (!name) throw new TypeError('name is required');
     this.#id = id;
-    this.#name = name;
     this.#request = request;
     this.#account = account;
   }
 
-  init(storage) {
+  init({ storage, info }) {
     this.#storage = storage;
+    this.#info = info;
   }
 
   async loadExchanges() {
@@ -118,7 +124,7 @@ export default class BaseExchange {
       .map((exchange) => exchange.id);
     if (ids.length) {
       const updates = await this.#request({
-        url: `/api/v4/exchange/${this.#id}/transactions`,
+        url: `transactions/${this.#id}`,
         method: 'get',
         params: {
           transactions: ids.join(','),
@@ -140,9 +146,9 @@ export default class BaseExchange {
     }
   }
 
-  async loadExchange(id) {
+  async #loadExchange(id) {
     const [update] = await this.#request({
-      url: `/api/v4/exchange/${this.#id}/transactions`,
+      url: `transactions/${this.#id}/`,
       method: 'get',
       params: {
         transactions: id,
@@ -160,57 +166,10 @@ export default class BaseExchange {
     return this.#exchanges[index];
   }
 
-  async estimateExchange({ from, to, amount }) {
-    if (amount.value <= 0n) {
-      throw new ExchangeAmountError('Invalid amount', { provider: this.#id });
-    }
-    let estimation;
-    try {
-      estimation = await this.#request({
-        url: `/api/v4/exchange/${this.#id}/estimate`,
-        method: 'get',
-        params: {
-          from,
-          to,
-          amount: amount.toString(),
-        },
-        seed: 'device',
-      });
-    } catch (err) {
-      if (err instanceof errors.NodeError) {
-        throw new InternalExchangeError('Unable to estimate', { cause: err, provider: this.#id });
-      }
-      throw err;
-    }
-    const cryptoFrom = this.#account.cryptoDB.get(from);
-    if (estimation.error) {
-      if (estimation.error === 'AmountError') {
-        throw new ExchangeAmountError('Invalid amount', { provider: this.#id });
-      }
-      if (estimation.error === 'SmallAmountError') {
-        throw new ExchangeSmallAmountError(
-          Amount.fromString(estimation.amount || '0', cryptoFrom.decimals), { provider: this.#id });
-      }
-      if (estimation.error === 'BigAmountError') {
-        throw new ExchangeBigAmountError(
-          Amount.fromString(estimation.amount || '0', cryptoFrom.decimals), { provider: this.#id });
-      }
-      if (estimation.error === 'ExchangeDisabled') {
-        throw new ExchangeDisabledError('Exchange disabled', { provider: this.#id });
-      }
-      throw new InternalExchangeError(estimation.error, { provider: this.#id });
-    }
-    const cryptoTo = this.#account.cryptoDB.get(to);
-    return {
-      provider: this.#id,
-      result: Amount.fromString(estimation.result, cryptoTo.decimals),
-    };
-  }
-
   async createExchange({ from, to, amount, address, extraId, refundAddress }) {
     try {
       const exchange = await this.#request({
-        url: `/api/v4/exchange/${this.#id}/transaction`,
+        url: `transaction/${this.#id}`,
         method: 'post',
         data: {
           from,
@@ -252,12 +211,12 @@ export default class BaseExchange {
     }
     try {
       const data = await this.#request({
-        url: `/api/v4/exchange/${this.#id}/validate`,
+        url: `validate/${this.#id}`,
         method: 'get',
         params: {
-          crypto: to,
+          cryptoId: to,
           address: encodeURIComponent(address),
-          extra: extraId ? encodeURIComponent(extraId) : undefined,
+          extraId: extraId ? encodeURIComponent(extraId) : undefined,
         },
         seed: 'device',
       });
@@ -277,7 +236,7 @@ export default class BaseExchange {
 
   async reexchangifyTransaction(transaction) {
     if (['finished', 'failed', 'refunded', 'overdue', 'expired'].includes(transaction.exchange.originalStatus)) {
-      const exchange = await this.loadExchange(transaction.exchange.id);
+      const exchange = await this.#loadExchange(transaction.exchange.id);
       return this.#assignExchange(transaction, exchange);
     } else {
       return transaction;
@@ -315,7 +274,7 @@ export default class BaseExchange {
       originalStatus: exchange.status,
       to: exchange.internal === true ? 'your wallet' : exchange.payoutAddress,
       payoutHash: exchange?.payoutHash?.toLowerCase(),
-      provider: this.#id,
+      providerInfo: this.info,
     };
     if (transaction.incoming) {
       const cryptoFrom = this.#account.cryptoDB.get(exchange.cryptoFrom);

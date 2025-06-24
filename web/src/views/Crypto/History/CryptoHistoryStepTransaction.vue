@@ -88,13 +88,13 @@ export default {
         text = this.$t('Please accept transaction to receive funds.');
       } else if (status === BaseExchange.STATUS_HOLD) {
         text = this.$t('Please contact {exchange} to pass KYC.', {
-          exchange: this.$account.exchanges.getProviderName(this.transaction.exchange.provider),
+          exchange: this.transaction.exchange.providerInfo.name,
         });
       } else if (status === BaseExchange.STATUS_REFUNDED) {
         text = this.$t('Swap failed and funds were refunded to your wallet.');
       } else if (status === BaseExchange.STATUS_FAILED) {
         text = this.$t('Swap failed. Please contact {exchange}.', {
-          exchange: this.$account.exchanges.getProviderName(this.transaction.exchange.provider),
+          exchange: this.transaction.exchange.providerInfo.name,
         });
       }
       return {
@@ -241,10 +241,10 @@ export default {
           @click="$safeOpen(transaction.exchange.trackUrl)"
         >
           {{ $t('Contact {exchange}', {
-            exchange: $account.exchanges.getProviderName(transaction.exchange.provider),
+            exchange: transaction.exchange.providerInfo.name,
           }) }}
         </CsButton>
-        <CsPoweredBy :powered="transaction.exchange.provider" />
+        <CsPoweredBy :powered="transaction.exchange.providerInfo" />
       </template>
       <CsButton
         v-else-if="transaction.rbf"

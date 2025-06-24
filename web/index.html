@@ -31,9 +31,12 @@
         https://*.walletconnect.com/;
       img-src
         'self'
+        <% if (NODE_ENV === 'development') { %>http://localhost:*/<% } %>
         <%= env.VITE_SITE_URL %>
+        <%= env.VITE_API_CSP %>
         <% if (['phonegap', 'electron'].includes(env.VITE_BUILD_TYPE)) { %>
         <%= env.VITE_SITE_URL_TOR %>
+        <%= env.VITE_API_CSP_TOR %>
         <% } %>
         https://www.gravatar.com/
         data:;

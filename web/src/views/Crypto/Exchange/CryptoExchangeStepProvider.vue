@@ -14,12 +14,12 @@ export default {
     };
   },
   computed: {
-    providers() {
-      return this.storage.estimations.map((estimation) => {
+    items() {
+      return this.storage.estimations.map(({ provider, result }) => {
+        const info = this.$account.exchanges.getProviderInfo(provider);
         return {
-          id: estimation.provider,
-          name: this.$account.exchanges.getProviderName(estimation.provider),
-          description: `${estimation.result} ${this.storage.to.crypto.symbol}`,
+          ...info,
+          description: `${result} ${this.storage.to.crypto.symbol}`,
         };
       });
     },
@@ -40,7 +40,7 @@ export default {
     :title="$t('Select provider')"
   >
     <CsProviderList
-      :items="providers"
+      :items="items"
       type="select"
       @click="select"
     />

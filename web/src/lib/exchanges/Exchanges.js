@@ -3,6 +3,11 @@ import ChangellyExchange from './ChangellyExchange.js';
 import ExchangeStorage from '../storage/ExchangeStorage.js';
 
 import {
+  Amount,
+  errors,
+} from '@coinspace/cs-common';
+
+import {
   ExchangeAmountError,
   ExchangeBigAmountError,
   ExchangeDisabledError,
@@ -13,31 +18,45 @@ import {
 export default class Exchanges {
   #account;
   #exchanges = [];
+  #request;
 
   constructor({ request, account }) {
     this.#account = account;
+    this.#request = (config) => request({
+      ...config,
+      baseURL: this.#account.isOnion
+        ? import.meta.env.VITE_API_SWAP_URL_TOR
+        : import.meta.env.VITE_API_SWAP_URL + 'api/v1/',
+    });
     for (const Exchange of [ChangellyExchange, ChangeNOWExchange]) {
-      this.#exchanges.push(new Exchange({ request, account }));
+      this.#exchanges.push(new Exchange({ request: this.#request, account }));
     }
   }
 
   isSupported(from, to) {
-    return this.#exchanges.some((exchange) => from[exchange.id] && to[exchange.id]);
-  }
-
-  getProviderName(id) {
-    return this.#exchanges.find((item) => item.id === id).name;
+    return !from.custom && !to.custom;
   }
 
   async init() {
     const exchangeStorages = await ExchangeStorage.initMany(this.#account, this.#exchanges);
+    const infos = await this.#request({
+      url: 'providers',
+      method: 'get',
+      seed: 'device',
+    });
     for (const exchange of this.#exchanges) {
-      exchange.init(exchangeStorages[exchange.id]);
+      const storage = exchangeStorages[exchange.id];
+      const info = infos.find((info) => info.id === exchange.id);
+      exchange.init({ storage, info });
     }
   }
 
   #getExchange(provider) {
     return this.#exchanges.find((item) => item.id === provider);
+  }
+
+  getProviderInfo(id) {
+    return this.#getExchange(id)?.info;
   }
 
   async loadExchanges() {
@@ -46,58 +65,51 @@ export default class Exchanges {
     }
   }
 
-  async estimateExchange({ from, to, amount, provider }) {
-    if (provider) {
-      return this.#getExchange(provider).estimateExchange({ from, to, amount });
+  async estimateExchange({ from, to, amount }) {
+    if (amount.value <= 0n) {
+      throw new ExchangeAmountError('Invalid amount');
+    }
+    let estimations;
+    try {
+      estimations = await this.#request({
+        url: 'estimate',
+        method: 'get',
+        params: {
+          from,
+          to,
+          amount: amount.toString(),
+        },
+        seed: 'device',
+      });
+    } catch (err) {
+      if (err instanceof errors.NodeError) {
+        throw new InternalExchangeError('Unable to estimate', { cause: err });
+      }
+      throw err;
     }
     const cryptoFrom = this.#account.cryptoDB.get(from);
+    if (estimations.error) {
+      if (estimations.error === 'AmountError') {
+        throw new ExchangeAmountError('Invalid amount');
+      }
+      if (estimations.error === 'SmallAmountError') {
+        throw new ExchangeSmallAmountError(
+          Amount.fromString(estimations.amount || '0', cryptoFrom.decimals));
+      }
+      if (estimations.error === 'BigAmountError') {
+        throw new ExchangeBigAmountError(
+          Amount.fromString(estimations.amount || '0', cryptoFrom.decimals));
+      }
+      throw new InternalExchangeError(estimations.error);
+    }
+    if (!estimations.length) {
+      throw new ExchangeDisabledError('Exchange disabled');
+    }
     const cryptoTo = this.#account.cryptoDB.get(to);
-    const exchanges = this.#exchanges.filter((exchange) => {
-      return cryptoFrom[exchange.id] && cryptoTo[exchange.id];
+    return estimations.map((estimate) => {
+      estimate.result = Amount.fromString(estimate.result, cryptoTo.decimals);
+      return estimate;
     });
-    if (!exchanges.length) throw new ExchangeDisabledError();
-
-    const estimations = await Promise
-      .allSettled(exchanges.map((exchange) => exchange.estimateExchange({ from, to, amount })));
-
-    if (estimations.some((item) => item.status === 'fulfilled')) {
-      const values = estimations.filter((item) => item.status === 'fulfilled').map((item) => item.value);
-      values.sort((a, b) => {
-        if (a.result.value > b.result.value) return -1;
-        if (a.result.value < b.result.value) return 1;
-        return 0;
-      });
-      return values;
-    }
-
-    if (estimations.every((item) => item.reason instanceof InternalExchangeError)) {
-      throw new InternalExchangeError();
-    }
-    if (estimations.every((item) => item.reason instanceof ExchangeDisabledError)) {
-      throw new ExchangeDisabledError();
-    }
-
-    const filtered = estimations.filter((item) => {
-      if (item.reason instanceof InternalExchangeError) return false;
-      if (item.reason instanceof ExchangeDisabledError) return false;
-      return true;
-    });
-
-    if (filtered.some((item) => item.reason instanceof ExchangeSmallAmountError)) {
-      throw filtered
-        .filter((item) => item.reason instanceof ExchangeSmallAmountError)
-        .reduce((prev, curr) => prev?.reason?.amount?.value < curr?.reason?.amount?.value ? prev : curr).reason;
-    }
-    if (filtered.some((item) => item.reason instanceof ExchangeBigAmountError)) {
-      throw filtered
-        .filter((item) => item.reason instanceof ExchangeBigAmountError)
-        .reduce((prev, curr) => prev?.reason?.amount?.value > curr?.reason?.amount?.value ? prev : curr).reason;
-    }
-    if (filtered.some((item) => item.reason instanceof ExchangeAmountError)) {
-      throw new ExchangeAmountError();
-    }
-
-    throw new InternalExchangeError('Unusual behavior');
   }
 
   createExchange({ provider, ...opts }) {
@@ -120,6 +132,6 @@ export default class Exchanges {
   }
 
   async reexchangifyTransaction(transaction) {
-    return this.#getExchange(transaction.exchange.provider).reexchangifyTransaction(transaction);
+    return this.#getExchange(transaction.exchange.providerInfo.id).reexchangifyTransaction(transaction);
   }
 }

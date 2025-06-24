@@ -1,47 +1,15 @@
 <script>
-import ChangeNowIcon from '../assets/svg/changenow.svg';
-import ChangellyIcon from '../assets/svg/changelly.svg';
 
 export default {
-  components: {
-    ChangeNowIcon,
-    ChangellyIcon,
-  },
   props: {
     powered: {
-      type: String,
+      type: Object,
       required: true,
-    },
-  },
-  computed: {
-    url() {
-      if (this.powered === 'changelly') {
-        return `https://changelly.com/?ref_id=${this.env.VITE_CHANGELLY_REF}`;
-      }
-      if (this.powered === 'changenow') {
-        return `https://changenow.app.link/referral?link_id=${this.env.VITE_CHANGENOW_REF}`;
-      }
-    },
-    title() {
-      if (this.powered === 'changelly') {
-        return 'Changelly';
-      }
-      if (this.powered === 'changenow') {
-        return 'ChangeNOW';
-      }
-    },
-    logo() {
-      if (this.powered === 'changelly') {
-        return 'ChangellyIcon';
-      }
-      if (this.powered === 'changenow') {
-        return 'ChangeNowIcon';
-      }
     },
   },
   methods: {
     open() {
-      return this.$safeOpen(this.url);
+      return this.$safeOpen(this.powered.url);
     },
   },
 };
@@ -52,7 +20,13 @@ export default {
     class="&"
     @click="open"
   >
-    {{ $t('Powered by') }} <Component :is="logo" /> {{ title }}
+    {{ $t('Powered by') }}
+    <img
+      loading="lazy"
+      :src="powered.logo"
+      :alt="powered.name"
+    >
+    {{ powered.name }}
   </div>
 </template>
 
@@ -63,7 +37,7 @@ export default {
     cursor: pointer;
     text-align: center;
 
-    svg {
+    img {
       display: inline-block;
       width: $spacing-lg;
       vertical-align: middle;

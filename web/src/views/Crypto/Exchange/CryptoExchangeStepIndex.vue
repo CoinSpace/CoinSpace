@@ -26,9 +26,6 @@ import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 import { onShowOnHide } from '../../../lib/mixins';
 
-import ChangeNowIcon from '../../../assets/svg/changenow.svg';
-import ChangellyIcon from '../../../assets/svg/changelly.svg';
-
 import debounce from 'p-debounce';
 
 export default {
@@ -40,8 +37,6 @@ export default {
     CsCryptoLogo,
     CsFormDropdown,
     CsFormGroup,
-    changenow: ChangeNowIcon,
-    changelly: ChangellyIcon,
   },
   extends: CsStep,
   mixins: [onShowOnHide],
@@ -85,10 +80,10 @@ export default {
       }
       return cryptoToFiat(this.estimation.result, this.priceTo);
     },
-    providerName() {
+    providerInfo() {
       return this.storage.provider
-        ? this.$account.exchanges.getProviderName(this.storage.provider)
-        : '–';
+        ? this.$account.exchanges.getProviderInfo(this.storage.provider)
+        : {};
     },
     estimation() {
       if (this.storage.provider && this.storage.estimations) {
@@ -177,12 +172,6 @@ export default {
           amount,
           price: this.storage.priceUSD,
         });
-        const estimation = await this.$account.exchanges.estimateExchange({
-          provider: this.storage.provider,
-          from: this.$wallet.crypto._id,
-          to: this.to.crypto._id,
-          amount,
-        });
         const fee = await this.$wallet.estimateTransactionFee({
           address: this.$wallet.dummyExchangeDepositAddress,
           feeRate: this.$wallet.isFeeRatesSupported ? CsWallet.FEE_RATE_DEFAULT : undefined,
@@ -193,7 +182,7 @@ export default {
         this.updateStorage({
           exchange: true,
           amount,
-          amountTo: estimation.result,
+          amountTo: this.estimation.result,
           address: (this.to.crypto.supported && this.$account.wallet(this.to.crypto._id))
             ? 'your wallet' : undefined,
           priceTo: this.priceTo,
@@ -337,15 +326,16 @@ export default {
       <CsFormDropdown
         :label="$t('Provider')"
         :error="errors['provider']"
-        :value="providerName"
+        :value="providerInfo.name"
         :writable="storage.estimations?.length > 1"
         @click="(storage.estimations?.length > 1 && next('provider'))"
       >
-        <template
-          v-if="storage.provider"
-          #before
-        >
-          <Component :is="storage.provider" />
+        <template #before>
+          <img
+            loading="lazy"
+            :src="providerInfo.logo"
+            :alt="providerInfo.name"
+          >
         </template>
       </CsFormDropdown>
       <div

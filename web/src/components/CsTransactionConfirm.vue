@@ -30,7 +30,7 @@ export default {
       },
     },
     powered: {
-      type: String,
+      type: Object,
       default: undefined,
     },
     isLoading: {

@@ -81,7 +81,7 @@ export default {
         } catch (err) {
           if (err instanceof InternalExchangeError) {
             this.updateStorage({ status: false, message: this.$t('{exchange} error. Please try again later.', {
-              exchange: this.$account.exchanges.getProviderName(this.storage.provider),
+              exchange: this.$account.exchanges.getProviderInfo(this.storage.provider).name,
             }) });
             return;
           }
@@ -125,7 +125,7 @@ export default {
   <MainLayout :title="$t('Confirm swap')">
     <CsTransactionConfirm
       :transaction="storage"
-      :powered="storage.provider"
+      :powered="$account.exchanges.getProviderInfo(storage.provider)"
       :isLoading="isLoading"
       @confirm="confirm"
     />
