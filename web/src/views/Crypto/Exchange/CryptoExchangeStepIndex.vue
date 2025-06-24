@@ -155,23 +155,17 @@ export default {
         this.errors['to'] = this.$t('Please select a crypto to swap');
         return;
       }
+      if (!this.amount?.value) {
+        this.errors['amount'] = this.$t('Invalid value');
+        return;
+      }
+      if (Object.keys(this.errors).length) return;
+      if (!this.estimation) return;
+
       const amount = this.amount || new Amount(0, this.$wallet.crypto.decimals);
       this.isLoading = true;
       this.errors = {};
       try {
-        if (!this.$account.exchanges.isSupported(this.$wallet.crypto, this.to.crypto)) {
-          throw new ExchangeDisabledError();
-        }
-        if (this.$wallet.isFeeRatesSupported) await this.$wallet.loadFeeRates();
-        await this.$wallet.validateAmount({
-          address: this.$wallet.dummyExchangeDepositAddress,
-          // use default fee rate
-          feeRate: this.$wallet.isFeeRatesSupported ? CsWallet.FEE_RATE_DEFAULT : undefined,
-          // use default gas limit
-          gasLimit: this.$wallet.isGasLimitSupported ? this.$wallet.gasLimit : undefined,
-          amount,
-          price: this.storage.priceUSD,
-        });
         const fee = await this.$wallet.estimateTransactionFee({
           address: this.$wallet.dummyExchangeDepositAddress,
           feeRate: this.$wallet.isFeeRatesSupported ? CsWallet.FEE_RATE_DEFAULT : undefined,
