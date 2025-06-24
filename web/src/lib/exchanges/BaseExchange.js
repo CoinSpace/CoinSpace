@@ -267,6 +267,8 @@ export default class BaseExchange {
   }
 
   #assignExchange(transaction, exchange) {
+    if (!exchange.cryptoFrom) return;
+    if (!exchange.cryptoTo) return;
     transaction.exchange = {
       id: exchange.id,
       trackUrl: exchange.trackUrl,
