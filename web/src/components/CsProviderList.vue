@@ -1,22 +1,9 @@
 <script>
 import CsButton from './CsButton.vue';
 
-// import BTCDirectIcon from '../assets/svg/btcDirect.svg';
-// import BitnovoIcon from '../assets/svg/bitnovo.svg';
-// import GuardarianIcon from '../assets/svg/guardarian.svg';
-// import MoonpayIcon from '../assets/svg/moonpay.svg';
-// import OnramperIcon from '../assets/svg/onramper.svg';
-// import PaybisIcon from '../assets/svg/paybis.svg';
-
 export default {
   components: {
     CsButton,
-    // btcdirect: BTCDirectIcon,
-    // bitnovo: BitnovoIcon,
-    // guardarian: GuardarianIcon,
-    // moonpay: MoonpayIcon,
-    // onramper: OnramperIcon,
-    // paybis: PaybisIcon,
   },
   props: {
     items: {

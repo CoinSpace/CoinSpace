@@ -250,6 +250,7 @@ export default class Account extends EventEmitter {
     });
     this.#ramps = new Ramps({
       request: this.request,
+      account: this,
     });
   }
 

@@ -343,3 +343,7 @@ export async function getDomainAddress(req, res) {
   if (!address) throw createError(404, 'Address not found');
   res.status(200).send({ address });
 }
+
+export async function getCountry(req, res) {
+  res.status(200).send({ country: req.get('X-Appengine-Country') || 'ZZ' });
+}

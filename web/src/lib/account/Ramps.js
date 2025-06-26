@@ -1,34 +1,28 @@
-import Axios from 'axios';
 import CountryList from 'country-list';
-import axiosRetry from 'axios-retry';
 
 export default class Ramps {
-  #moonpay;
   #countries = [];
+  #account;
   #request;
+  #rampRequest;
   #countryCode;
 
   get countries() {
     return this.#countries;
   }
 
-  constructor({ request }) {
+  constructor({ request, account }) {
     if (!request) {
       throw new TypeError('request is required');
     }
+    this.#account = account;
     this.#request = request;
-
-    const moonpay = Axios.create({
-      timeout: 30000,
-      baseURL: 'https://api.moonpay.com/',
-      params: { apiKey: import.meta.env.VITE_MOONPAY_API_KEY },
+    this.#rampRequest = (config) => request({
+      ...config,
+      baseURL: this.#account.isOnion
+        ? import.meta.env.VITE_API_RAMP_URL_TOR
+        : import.meta.env.VITE_API_RAMP_URL + 'api/v1/',
     });
-    axiosRetry(moonpay, {
-      retries: 3,
-      retryDelay: axiosRetry.exponentialDelay,
-      shouldResetTimeout: true,
-    });
-    this.#moonpay = moonpay;
 
     this.#countries = [{ value: '', name: '–' }, ...CountryList.getData().sort((a, b) => {
       return a.name.localeCompare(b.name);
@@ -41,50 +35,70 @@ export default class Ramps {
   }
 
   async getCountryCode() {
-    if (this.#countryCode !== undefined) return this.#countryCode;
-    try {
-      const { data: ip } = await this.#moonpay.request({ url: 'v4/ip_address' });
-      return CountryList.getName(ip.alpha2 || '') && ip.alpha2;
-    } catch (err) {
-      console.error(err);
+    if (!this.#countryCode) {
+      try {
+        const { country } = await this.#request({
+          url: 'api/v4/country',
+          method: 'get',
+          seed: 'device',
+        });
+        if (CountryList.getName(country)) this.#countryCode = country;
+      } catch (err) {
+        console.error(err);
+      }
     }
+    return this.#countryCode;
   }
 
   setCountryCode(value) {
     this.#countryCode = value;
   }
 
+  #mapProviders(items) {
+    return items.map((info) => {
+      return {
+        ...info,
+        logo: new URL(
+          `/logo/${info.logo}?ver=${import.meta.env.VITE_VERSION}`,
+          this.#account.isOnion
+            ? import.meta.env.VITE_API_RAMP_URL_TOR
+            : import.meta.env.VITE_API_RAMP_URL
+        ).toString(),
+      };
+    });
+  }
+
   async buy(countryCode, wallet) {
     if (wallet.crypto.custom) {
       return [];
     }
-    const ramps = await this.#request({
-      url: 'api/v4/ramps/buy',
+    const ramps = await this.#rampRequest({
+      url: 'buy',
       params: {
-        countryCode: countryCode || null,
+        country: countryCode || null,
         crypto: wallet.crypto._id,
         address: wallet.address,
       },
       method: 'get',
       seed: 'device',
     });
-    return ramps;
+    return this.#mapProviders(ramps);
   }
 
   async sell(countryCode, wallet) {
     if (wallet.crypto.custom) {
       return [];
     }
-    const ramps = await this.#request({
-      url: 'api/v4/ramps/sell',
+    const ramps = await this.#rampRequest({
+      url: 'sell',
       params: {
-        countryCode: countryCode || null,
+        country: countryCode || null,
         crypto: wallet.crypto._id,
         address: wallet.address,
       },
       method: 'get',
       seed: 'device',
     });
-    return ramps;
+    return this.#mapProviders(ramps);
   }
 }

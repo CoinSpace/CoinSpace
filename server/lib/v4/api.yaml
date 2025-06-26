@@ -8,6 +8,30 @@ servers:
   - url: https://coin.space/api/v4
 
 paths:
+  /country:
+    get:
+      x-eov-operation-id: getCountry
+      x-eov-operation-handler: handlers
+      description: Get country code
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Country code
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  country:
+                    $ref: '#/components/schemas/CountryCode'
+                required:
+                  - country
+        default:
+          $ref: '#/components/responses/GeneralError'
   /crossplatform:
     get:
       x-eov-operation-id: listCrossplatformAuthenticators
@@ -962,6 +986,13 @@ components:
       pattern: ^[A-Za-z0-9_-]*$
       maxLength: 2097152
       nullable: true
+    CountryCode:
+      description: ISO 3166-1 alpha-2
+      type: string
+      pattern: ^[A-Z]{2}$
+      minLength: 2
+      maxLength: 2
+      nullable: true
     CryptoAmount:
       type: number
       format: float
@@ -1421,13 +1452,9 @@ components:
     countryCode:
       in: query
       name: countryCode
-      schema:
-        type: string
-        pattern: ^[A-Z]{2}$
-        minLength: 2
-        maxLength: 2
-        nullable: true
       description: ISO 3166-1 alpha-2
+      schema:
+        $ref: '#/components/schemas/CountryCode'
     cryptoId:
       description: Crypto ID
       in: query
