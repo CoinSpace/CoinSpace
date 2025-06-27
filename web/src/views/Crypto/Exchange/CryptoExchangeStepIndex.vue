@@ -151,12 +151,12 @@ export default {
       }
     },
     async confirm() {
-      if (!this.to) {
-        this.errors['to'] = this.$t('Please select a crypto to swap');
-        return;
-      }
       if (!this.amount?.value) {
         this.errors['amount'] = this.$t('Invalid value');
+        return;
+      }
+      if (!this.to) {
+        this.errors['to'] = this.$t('Please select a crypto to swap');
         return;
       }
       if (Object.keys(this.errors).length) return;
