@@ -78,9 +78,7 @@ export default class BaseExchange {
       ...this.#info,
       logo: new URL(
         `/logo/${this.#info.logo}?ver=${import.meta.env.VITE_VERSION}`,
-        this.#account.isOnion
-          ? import.meta.env.VITE_API_SWAP_URL_TOR
-          : import.meta.env.VITE_API_SWAP_URL
+        this.#account.getBaseURL('swap')
       ).toString(),
     };
   }
@@ -124,7 +122,7 @@ export default class BaseExchange {
       .map((exchange) => exchange.id);
     if (ids.length) {
       const updates = await this.#request({
-        url: `transactions/${this.#id}`,
+        url: `api/v1/transactions/${this.#id}`,
         method: 'get',
         params: {
           transactions: ids.join(','),
@@ -148,7 +146,7 @@ export default class BaseExchange {
 
   async #loadExchange(id) {
     const [update] = await this.#request({
-      url: `transactions/${this.#id}/`,
+      url: `api/v1/transactions/${this.#id}/`,
       method: 'get',
       params: {
         transactions: id,
@@ -169,7 +167,7 @@ export default class BaseExchange {
   async createExchange({ from, to, amount, address, extraId, refundAddress }) {
     try {
       const exchange = await this.#request({
-        url: `transaction/${this.#id}`,
+        url: `api/v1/transaction/${this.#id}`,
         method: 'post',
         data: {
           from,
@@ -211,7 +209,7 @@ export default class BaseExchange {
     }
     try {
       const data = await this.#request({
-        url: `validate/${this.#id}`,
+        url: `api/v1/validate/${this.#id}`,
         method: 'get',
         params: {
           cryptoId: to,

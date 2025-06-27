@@ -24,6 +24,7 @@ import i18n from '../i18n/i18n.js';
 import {
   EVM_FAMILY,
   getApiNode,
+  getBaseURL,
   loadWalletModule,
 } from '../constants.js';
 
@@ -382,6 +383,10 @@ export default class Account extends EventEmitter {
 
   #getApiNode(platform) {
     return getApiNode(platform, this.isOnion);
+  }
+
+  getBaseURL(service) {
+    return getBaseURL(service, this.isOnion);
   }
 
   #getWalletOptions(crypto, platform, storage, settings) {

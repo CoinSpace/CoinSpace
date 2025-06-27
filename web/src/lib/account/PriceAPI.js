@@ -18,9 +18,7 @@ export default class PriceAPI {
       return await request({
         seed: 'device',
         ...config,
-        baseURL: (account.isOnion
-          ? import.meta.env.VITE_API_PRICE_URL_TOR
-          : import.meta.env.VITE_API_PRICE_URL) + 'api/v1/',
+        baseURL: account.getBaseURL('price'),
       });
     }, {
       cache: new ExpiryMap(1 * 60 * 1000),
@@ -34,7 +32,7 @@ export default class PriceAPI {
     if (ids.length === 0) return [];
     return (await Promise.all(chunks(ids, 50).map((chunk) => {
       return this.#request({
-        url: 'prices',
+        url: 'api/v1/prices',
         params: {
           cryptoIds: chunk.join(),
           fiat: currency,
@@ -45,7 +43,7 @@ export default class PriceAPI {
 
   async chart(id, period, currency) {
     return await this.#request({
-      url: `chart/${id}`,
+      url: `api/v1/chart/${id}`,
       params: {
         fiat: currency,
         days: periodToDays[period],

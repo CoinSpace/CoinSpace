@@ -148,3 +148,16 @@ export function getApiNode(platform, isOnion) {
       return 'https://unsupported.coin.space/';
   }
 }
+
+export function getBaseURL(service, isOnion) {
+  switch (service) {
+    case 'price':
+      return isOnion ? import.meta.env.VITE_API_PRICE_URL_TOR : import.meta.env.VITE_API_PRICE_URL;
+    case 'ramp':
+      return isOnion ? import.meta.env.VITE_API_RAMP_URL_TOR : import.meta.env.VITE_API_RAMP_URL;
+    case 'swap':
+      return isOnion ? import.meta.env.VITE_API_SWAP_URL_TOR : import.meta.env.VITE_API_SWAP_URL;
+    default:
+      return 'https://unsupported.coin.space/';
+  }
+}

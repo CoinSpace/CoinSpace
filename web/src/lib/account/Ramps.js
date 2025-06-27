@@ -19,9 +19,7 @@ export default class Ramps {
     this.#request = request;
     this.#rampRequest = (config) => request({
       ...config,
-      baseURL: this.#account.isOnion
-        ? import.meta.env.VITE_API_RAMP_URL_TOR
-        : import.meta.env.VITE_API_RAMP_URL + 'api/v1/',
+      baseURL: this.#account.getBaseURL('ramp'),
     });
 
     this.#countries = [{ value: '', name: '–' }, ...CountryList.getData().sort((a, b) => {
@@ -60,9 +58,7 @@ export default class Ramps {
         ...info,
         logo: new URL(
           `/logo/${info.logo}?ver=${import.meta.env.VITE_VERSION}`,
-          this.#account.isOnion
-            ? import.meta.env.VITE_API_RAMP_URL_TOR
-            : import.meta.env.VITE_API_RAMP_URL
+          this.#account.getBaseURL('ramp')
         ).toString(),
       };
     });
@@ -73,7 +69,7 @@ export default class Ramps {
       return [];
     }
     const ramps = await this.#rampRequest({
-      url: 'buy',
+      url: 'api/v1/buy',
       params: {
         country: countryCode || null,
         crypto: wallet.crypto._id,
@@ -90,7 +86,7 @@ export default class Ramps {
       return [];
     }
     const ramps = await this.#rampRequest({
-      url: 'sell',
+      url: 'api/v1/sell',
       params: {
         country: countryCode || null,
         crypto: wallet.crypto._id,

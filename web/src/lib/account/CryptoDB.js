@@ -40,16 +40,14 @@ export default class CryptoDB {
       return request({
         seed: 'device',
         ...config,
-        baseURL: (account.isOnion
-          ? import.meta.env.VITE_API_PRICE_URL_TOR
-          : import.meta.env.VITE_API_PRICE_URL) + 'api/v1/',
+        baseURL: account.getBaseURL('price'),
       });
     };
   }
 
   async init() {
     this.#db = await this.#request({
-      url: 'cryptos',
+      url: 'api/v1/cryptos',
       method: 'get',
     });
     for (const item of this.#db) {

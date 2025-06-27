@@ -24,9 +24,7 @@ export default class Exchanges {
     this.#account = account;
     this.#request = (config) => request({
       ...config,
-      baseURL: this.#account.isOnion
-        ? import.meta.env.VITE_API_SWAP_URL_TOR
-        : import.meta.env.VITE_API_SWAP_URL + 'api/v1/',
+      baseURL: this.#account.getBaseURL('swap'),
     });
     for (const Exchange of [ChangellyExchange, ChangeNOWExchange]) {
       this.#exchanges.push(new Exchange({ request: this.#request, account }));
@@ -40,7 +38,7 @@ export default class Exchanges {
   async init() {
     const exchangeStorages = await ExchangeStorage.initMany(this.#account, this.#exchanges);
     const infos = await this.#request({
-      url: 'providers',
+      url: 'api/v1/providers',
       method: 'get',
       seed: 'device',
     });
@@ -72,7 +70,7 @@ export default class Exchanges {
     let estimations;
     try {
       estimations = await this.#request({
-        url: 'estimate',
+        url: 'api/v1/estimate',
         method: 'get',
         params: {
           from,
