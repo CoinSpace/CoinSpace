@@ -345,5 +345,5 @@ export async function getDomainAddress(req, res) {
 }
 
 export async function getCountry(req, res) {
-  res.status(200).send({ country: req.get('X-Appengine-Country') || 'ZZ' });
+  res.status(200).send({ country: req.get('x-client-country') || 'ZZ' });
 }
