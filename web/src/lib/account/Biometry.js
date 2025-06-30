@@ -50,7 +50,11 @@ export default class Biometry {
     try {
       if (import.meta.env.VITE_BUILD_TYPE === 'phonegap') {
         type = await new Promise((resolve) => {
-          window.Fingerprint.isAvailable((result) => resolve(result), () => resolve(false));
+          window.Fingerprint.isAvailable(
+            (result) => resolve(result),
+            () => resolve(false),
+            { requireStrongBiometrics: true }
+          );
         });
         isAvailable = !!type;
       } else if (import.meta.env.VITE_BUILD_TYPE === 'electron') {

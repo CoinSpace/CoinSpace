@@ -40,7 +40,7 @@ async function run() {
   fs.writeFileSync(path.resolve(buildPath, 'config.xml'), config);
   cordova('platform add ios@7.0.1 --save');
 
-  cordova('plugin add cordova-plugin-fingerprint-aio@5.0.1 --save --variable FACEID_USAGE_DESCRIPTION="Used for easy authentication."');
+  cordova('plugin add cordova-plugin-fingerprint-aio@6.0.1 --save --variable FACEID_USAGE_DESCRIPTION="Used for easy authentication."');
   cordova('plugin add cordova-plugin-geolocation@5.0.0 --save');
   cordova('plugin add cordova-plugin-qrscanner-11@3.0.5 --save');
   cordova('plugin add cordova-plugin-dialogs@2.0.2 --save');
