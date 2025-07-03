@@ -32,7 +32,7 @@ async function run() {
     },
   });
   fs.writeFileSync(path.resolve(buildPath, 'config.xml'), config);
-  cordova('platform add android@13.0.0 --save');
+  cordova('platform add android@14.0.1 --save');
 
   cordova('plugin add cordova-plugin-androidx-adapter@1.1.3 --save');
   cordova('plugin add cordova-plugin-geolocation@5.0.0 --save');

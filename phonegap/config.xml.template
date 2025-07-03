@@ -104,7 +104,7 @@
     <preference name="AndroidLaunchMode" value="singleTask"/>
     <preference name="AndroidXEnabled" value="true" />
     <preference name="android-minSdkVersion" value="22" />
-    <preference name="android-targetSdkVersion" value="34" />
+    <preference name="android-targetSdkVersion" value="35" />
     <preference name="CustomURLSchemePluginClearsAndroidIntent" value="true"/>
     <preference name="AndroidWindowSplashScreenAnimatedIcon" value="../images/android/splashscreen.xml" />
     <preference name="AndroidWindowSplashScreenBackground" value="#2C3832" />
