@@ -129,7 +129,7 @@ export default {
   .#{ $filename } {
     * {
       transition: none !important;
-      @media (hover: none) {
+      @media (pointer: coarse) {
         pointer-events: none;
       }
     }

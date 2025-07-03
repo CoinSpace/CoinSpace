@@ -62,7 +62,7 @@ export default {
       display: flex;
     }
 
-    @media (any-hover: hover) {
+    @media (pointer: fine) {
       display: flex;
     }
 
