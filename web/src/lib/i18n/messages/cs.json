@@ -1,6 +1,5 @@
 {
   "(optional)": "(volitelné)",
-  "+{fee} fee": "+{fee} poplatek",
   "1 day": "1 den",
   "12 words": "12 slov",
   "A 256-bit hash that can be used to identify a particular payment.": "256 bitový hash, který lze použít k identifikaci konkrétní platby.",
@@ -336,6 +335,7 @@
   "{decimals} decimals": "{decimals} desetinných míst",
   "{exchange} error. Please try again later.": "Chyba {exchange}. Zkuste to prosím později znovu.",
   "{name} node error. Please try again later.": "Chyba uzlu {name}. Zkuste to prosím později znovu.",
+  "{sign}{fee} fee": "{sign}{fee} poplatek",
   "{sign}{fee} {symbol} fee": "{sign}{fee} {symbol} poplatek",
   "{token} already added.": "{token} již přidán.",
   "~{time} min": "~{time} min."

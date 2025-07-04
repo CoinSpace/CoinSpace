@@ -61,8 +61,9 @@ export default {
     fee() {
       if (!this.transaction.fee) return undefined;
       if (this.fiatMode && this.transaction.pricePlatform !== undefined) {
-        return this.$t('+{fee} fee', {
+        return this.$t('{sign}{fee} fee', {
           fee: this.$c(cryptoToFiat(this.transaction.fee, this.transaction.pricePlatform)),
+          sign: '+',
         });
       } else {
         return this.$t('{sign}{fee} {symbol} fee', {

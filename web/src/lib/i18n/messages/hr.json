@@ -1,6 +1,5 @@
 {
   "(optional)": "(neobavezno)",
-  "+{fee} fee": "+{fee} naknada",
   "1 day": "1 dan",
   "12 words": "12 riječi",
   "A 256-bit hash that can be used to identify a particular payment.": "256-bitni hash koji se može koristiti za identifikaciju određene uplate.",
@@ -336,6 +335,7 @@
   "{decimals} decimals": "{decimals} decimale",
   "{exchange} error. Please try again later.": "{exchange} greška. Pokušajte ponovo kasnije.",
   "{name} node error. Please try again later.": "{name} greška čvora. Pokušajte ponovo kasnije.",
+  "{sign}{fee} fee": "{sign}{fee} naknada",
   "{sign}{fee} {symbol} fee": "{sign}{fee} {symbol} naknada",
   "{token} already added.": "{token} je već dodan.",
   "~{time} min": "~{time} najmanje"

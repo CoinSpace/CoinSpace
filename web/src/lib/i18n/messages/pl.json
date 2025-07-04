@@ -1,6 +1,5 @@
 {
   "(optional)": "(opcjonalne)",
-  "+{fee} fee": "+{fee} opłaty",
   "1 day": "1 dzień",
   "12 words": "12 słów",
   "A 256-bit hash that can be used to identify a particular payment.": "256-bitowy hash, który można wykorzystać do identyfikacji konkretnej płatności.",
@@ -336,6 +335,7 @@
   "{decimals} decimals": "{decimals} dziesiętnych",
   "{exchange} error. Please try again later.": "Błąd {exchange}. Spróbuj ponownie później.",
   "{name} node error. Please try again later.": "{name} błąd node'a. Spróbuj ponownie później.",
+  "{sign}{fee} fee": "{sign}{fee} opłaty",
   "{sign}{fee} {symbol} fee": "{sign}{fee} {symbol} opłaty",
   "{token} already added.": "{token} zostały już dodane.",
   "~{time} min": "~{time} min"

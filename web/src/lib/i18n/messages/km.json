@@ -1,6 +1,5 @@
 {
   "(optional)": "(ជម្រើស)",
-  "+{fee} fee": "+{fee} តម្លៃសេវា",
   "1 day": "1 ថ្ងៃ",
   "12 words": "12 ពាក្យ",
   "A 256-bit hash that can be used to identify a particular payment.": "ហាស 256-bit ដែលអាចត្រូវបានប្រើដើម្បីកំណត់ការទូទាត់ជាក់លាក់។",
@@ -336,6 +335,7 @@
   "{decimals} decimals": "{decimals} ទសភាគ",
   "{exchange} error. Please try again later.": "កំហុសពី {exchange}។ សូមព្យាយាមម្តងទៀតនៅពេលក្រោយ។",
   "{name} node error. Please try again later.": "ថ្នាំង {name} មានកំហុស។  សូម​ព្យាយាម​ម្តង​ទៀត​នៅ​ពេល​ក្រោយ។",
+  "{sign}{fee} fee": "{sign}{fee} តម្លៃសេវា",
   "{sign}{fee} {symbol} fee": "{sign}{fee} {symbol} ថ្លៃសេវា",
   "{token} already added.": "{token} បានបន្ថែមរួចហើយ។",
   "~{time} min": "~{time} នាទី"

@@ -1,6 +1,5 @@
 {
   "(optional)": "(opsyonal)",
-  "+{fee} fee": "+{fee} fee",
   "1 day": "1 araw",
   "12 words": "12 na mga salita",
   "A 256-bit hash that can be used to identify a particular payment.": "Isang 256-bit hash na magagamit para kilalanin ang partikular na bayad.",
@@ -336,6 +335,7 @@
   "{decimals} decimals": "{decimals} mga decimal",
   "{exchange} error. Please try again later.": "Error sa {exchange}. Subukang muli mamaya.",
   "{name} node error. Please try again later.": "{name} node error. Subukang muli mamaya.",
+  "{sign}{fee} fee": "{sign}{fee} fee",
   "{sign}{fee} {symbol} fee": "{sign}{fee} {symbol} fee",
   "{token} already added.": "{token} naidagdag na.",
   "~{time} min": "~{time} min"

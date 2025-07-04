@@ -1,6 +1,5 @@
 {
   "(optional)": "(необязательно)",
-  "+{fee} fee": "+{fee} комиссия",
   "1 day": "1 день",
   "12 words": "12 слов",
   "A 256-bit hash that can be used to identify a particular payment.": "256-битный хеш, который может использоваться для идентификации конкретного платежа.",
@@ -336,6 +335,7 @@
   "{decimals} decimals": "{decimals} десятичных знаков",
   "{exchange} error. Please try again later.": "Ошибка {exchange}. Пожалуйста, попробуйте позже.",
   "{name} node error. Please try again later.": "Ошибка {name} сервера. Пожалуйста, попробуйте позже.",
+  "{sign}{fee} fee": "{sign}{fee} комиссия",
   "{sign}{fee} {symbol} fee": "{sign}{fee} {symbol} комиссия",
   "{token} already added.": "{token} уже добавлен.",
   "~{time} min": "~{time} мин"

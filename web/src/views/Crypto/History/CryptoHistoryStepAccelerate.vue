@@ -2,6 +2,7 @@
 import CsButton from '../../../components/CsButton.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
+import { cryptoToFiat } from '../../../lib/helpers.js';
 import { walletSeed } from '../../../lib/mixins.js';
 
 import AccelerateIcon from '../../../assets/svg/accelerate.svg';
@@ -16,16 +17,24 @@ export default {
   mixins: [walletSeed],
   data() {
     return {
+      fiatMode: false,
       isLoading: false,
     };
   },
   computed: {
     fee() {
-      return this.$t('{sign}{fee} {symbol} fee', {
-        sign: '-',
-        fee: this.storage.replacement.fee,
-        symbol: this.$wallet.platform.symbol,
-      });
+      if (this.fiatMode && this.storage.pricePlatform !== undefined) {
+        return this.$t('{sign}{fee} fee', {
+          fee: this.$c(cryptoToFiat(this.storage.replacement.fee, this.storage.pricePlatform)),
+          sign: '-',
+        });
+      } else {
+        return this.$t('{sign}{fee} {symbol} fee', {
+          sign: '-',
+          fee: this.storage.replacement.fee,
+          symbol: this.$wallet.platform.symbol,
+        });
+      }
     },
   },
   methods: {
@@ -54,7 +63,10 @@ export default {
       class="&__container"
     >
       <AccelerateIcon class="&__icon" />
-      <div class="&__info">
+      <div
+        class="&__info"
+        @click="fiatMode = !fiatMode"
+      >
         <div class="&__title">
           {{ $t('Speed {percent}', {
             percent: $n(storage.replacement.percent, 'percent', {
@@ -98,6 +110,7 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
+      cursor: pointer;
       gap: $spacing-2xs;
     }
 

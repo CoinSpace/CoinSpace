@@ -1,6 +1,5 @@
 {
   "(optional)": "(ไม่จำเป็น)",
-  "+{fee} fee": "+{fee} ค่าธรรมเนียม",
   "1 day": "1 วัน",
   "12 words": "12 คำ",
   "A 256-bit hash that can be used to identify a particular payment.": "แฮชแบบ 256 บิตที่สามารถใช้เพื่อระบุการชำระเงินที่เฉพาะเจาะจงได้",
@@ -336,6 +335,7 @@
   "{decimals} decimals": "{decimals} ทศนิยม",
   "{exchange} error. Please try again later.": "{exchange} ขัดข้อง กรุณาลองใหม่อีกครั้งในภายหลัง",
   "{name} node error. Please try again later.": "{name} โหนดขัดข้อง กรุณาลองใหม่อีกครั้งในภายหลัง",
+  "{sign}{fee} fee": "{sign}{fee} ค่าธรรมเนียม",
   "{sign}{fee} {symbol} fee": "{sign}{fee} {symbol} ค่าธรรมเนียม",
   "{token} already added.": "{token} เพิ่มเรียบร้อยแล้ว",
   "~{time} min": "~{time} นาที"

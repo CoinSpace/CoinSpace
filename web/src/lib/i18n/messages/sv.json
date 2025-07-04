@@ -1,6 +1,5 @@
 {
   "(optional)": "(frivilligt)",
-  "+{fee} fee": "+{fee} avgift",
   "1 day": "1 dag",
   "12 words": "12 ord",
   "A 256-bit hash that can be used to identify a particular payment.": "En 256-bitars hash som kan användas för att identifiera en viss betalning.",
@@ -336,6 +335,7 @@
   "{decimals} decimals": "{decimals} decimaler",
   "{exchange} error. Please try again later.": "{exchange}-fel. Var vänlig prova igen senare.",
   "{name} node error. Please try again later.": "{name} nodfel. Var vänlig prova igen senare.",
+  "{sign}{fee} fee": "{sign}{fee} avgift",
   "{sign}{fee} {symbol} fee": "{sign}{fee} {symbol} avgift",
   "{token} already added.": "{token} har redan lagts till.",
   "~{time} min": "~{time} min"

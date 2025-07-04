@@ -1,6 +1,5 @@
 {
   "(optional)": "(opțional)",
-  "+{fee} fee": "+ taxă {fee}",
   "1 day": "1 zi",
   "12 words": "12 cuvinte",
   "A 256-bit hash that can be used to identify a particular payment.": "O funcție hash de 256 de octeți care poate fi utilizată pentru a identifica o anumită plată.",
@@ -336,6 +335,7 @@
   "{decimals} decimals": "{decimals} zecimale",
   "{exchange} error. Please try again later.": "Eroare {exchange}. Încercați din nou mai târziu.",
   "{name} node error. Please try again later.": "Eroare de nod {name}. Încercați din nou mai târziu.",
+  "{sign}{fee} fee": "{sign} taxă {fee}",
   "{sign}{fee} {symbol} fee": "Comision {sign}{fee} {symbol}",
   "{token} already added.": "{token} este utilizat deja.",
   "~{time} min": "~{time} minute"

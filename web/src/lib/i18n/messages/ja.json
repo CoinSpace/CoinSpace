@@ -1,6 +1,5 @@
 {
   "(optional)": "(オプション)",
-  "+{fee} fee": "+{fee} 料金",
   "1 day": "1日",
   "12 words": "12単語",
   "A 256-bit hash that can be used to identify a particular payment.": "特定の支払の識別に使用できる256ビットのハッシュ。",
@@ -336,6 +335,7 @@
   "{decimals} decimals": "{decimals} 小数",
   "{exchange} error. Please try again later.": "{exchange}エラー。後でもう一度お試しください。",
   "{name} node error. Please try again later.": "{name} ノードエラー。後でもう一度お試しください。",
+  "{sign}{fee} fee": "{sign}{fee} 料金",
   "{sign}{fee} {symbol} fee": "{sign}{fee} {symbol}　料金",
   "{token} already added.": "{token} はすでに追加されています。",
   "~{time} min": "~{time} 分"

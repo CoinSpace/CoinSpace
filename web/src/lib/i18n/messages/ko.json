@@ -1,6 +1,5 @@
 {
   "(optional)": "(선택사항)",
-  "+{fee} fee": "+{fee} 수수료",
   "1 day": "1일",
   "12 words": "12 단어",
   "A 256-bit hash that can be used to identify a particular payment.": "특정 지급을 식별하기 위해 사용될 수 있는 256 비트 해시.",
@@ -336,6 +335,7 @@
   "{decimals} decimals": "{decimals} 소수",
   "{exchange} error. Please try again later.": "{exchange} 오류. 나중에 다시 시도해주십시오.",
   "{name} node error. Please try again later.": "{name} 노드 오류. 나중에 다시 시도해주십시오.",
+  "{sign}{fee} fee": "{sign}{fee} 수수료",
   "{sign}{fee} {symbol} fee": "{sign}{fee} {symbol} 수수료",
   "{token} already added.": "{token}이(가) 이미 추가되었습니다.",
   "~{time} min": "~{time} 분"

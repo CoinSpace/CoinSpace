@@ -1,6 +1,5 @@
 {
   "(optional)": "(tùy chọn)",
-  "+{fee} fee": "+{fee} phí",
   "1 day": "1 ngày",
   "12 words": "12 từ",
   "A 256-bit hash that can be used to identify a particular payment.": "Giá trị băm 256 bit có thể sử dụng để xác định một thanh toán cụ thể.",
@@ -336,6 +335,7 @@
   "{decimals} decimals": "{decimals} số thập phân",
   "{exchange} error. Please try again later.": "Lỗi {exchange}. Đã xảy ra sự cố. Vui lòng thử lại sau.",
   "{name} node error. Please try again later.": "Lỗi nút mạng {name}. Đã xảy ra sự cố. Vui lòng thử lại sau.",
+  "{sign}{fee} fee": "{sign}{fee} phí",
   "{sign}{fee} {symbol} fee": "{sign}{fee} {symbol} phí",
   "{token} already added.": "{token} đã thêm vào trước đó.",
   "~{time} min": "~{time} phút"

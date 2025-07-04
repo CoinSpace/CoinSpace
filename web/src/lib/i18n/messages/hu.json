@@ -1,6 +1,5 @@
 {
   "(optional)": "(választható)",
-  "+{fee} fee": "+ {fee} díj",
   "1 day": "1 nap",
   "12 words": "12 szó",
   "A 256-bit hash that can be used to identify a particular payment.": "Egy 256 bites hash, amely felhasználható egy adott fizetés azonosítására.",
@@ -336,6 +335,7 @@
   "{decimals} decimals": "{decimals} tizedesjegyek",
   "{exchange} error. Please try again later.": "{exchange}-hiba. Kérjük, próbáld újra később.",
   "{name} node error. Please try again later.": "{name} csomóponthiba. Kérjük, próbáld újra később.",
+  "{sign}{fee} fee": "{sign} {fee} díj",
   "{sign}{fee} {symbol} fee": "{sign}{fee} {symbol} díj",
   "{token} already added.": "{token} már hozzáadva.",
   "~{time} min": "~{time} min"

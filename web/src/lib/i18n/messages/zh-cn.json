@@ -1,6 +1,5 @@
 {
   "(optional)": "（可选）",
-  "+{fee} fee": "+{fee}费用",
   "1 day": "1天",
   "12 words": "12词",
   "A 256-bit hash that can be used to identify a particular payment.": "一个256位的哈希，可用于标识特定的支付。",
@@ -336,6 +335,7 @@
   "{decimals} decimals": "{decimals}位小数",
   "{exchange} error. Please try again later.": "{exchange}错误。请稍后再试。",
   "{name} node error. Please try again later.": "{name}节点错误。请稍后再试。",
+  "{sign}{fee} fee": "{sign}{fee}费用",
   "{sign}{fee} {symbol} fee": "{sign}{fee}{symbol}费用",
   "{token} already added.": "{token}已添加",
   "~{time} min": "~ {time}分钟"

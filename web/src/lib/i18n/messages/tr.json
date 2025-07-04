@@ -1,6 +1,5 @@
 {
   "(optional)": "(isteğe bağlı)",
-  "+{fee} fee": "+{fee} ücret",
   "1 day": "1 gün",
   "12 words": "12 kelime",
   "A 256-bit hash that can be used to identify a particular payment.": "Belirli bir ödemeyi tanımlamak için kullanılabilecek 256 bitlik bir karma.",
@@ -336,6 +335,7 @@
   "{decimals} decimals": "{decimals} ondalık",
   "{exchange} error. Please try again later.": "{exchange} hatası. Lütfen daha sonra tekrar deneyin.",
   "{name} node error. Please try again later.": "{name} düğüm hatası. Lütfen daha sonra tekrar deneyin.",
+  "{sign}{fee} fee": "{sign}{fee} ücret",
   "{sign}{fee} {symbol} fee": "{sign}{fee} {symbol} ücret",
   "{token} already added.": "{token} daha önce eklenmiş.",
   "~{time} min": "~{time} dk"

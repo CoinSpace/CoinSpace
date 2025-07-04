@@ -1,6 +1,5 @@
 {
   "(optional)": "(за бажанням)",
-  "+{fee} fee": "+ комісія {fee}",
   "1 day": "1 день",
   "12 words": "12 слів",
   "A 256-bit hash that can be used to identify a particular payment.": "256-бітний хеш, який можна використовувати для ідентифікації конкретного платежу.",
@@ -336,6 +335,7 @@
   "{decimals} decimals": "{decimals} десяткових знаків",
   "{exchange} error. Please try again later.": "Помилка {exchange} Спробуйте пізніше.",
   "{name} node error. Please try again later.": "Помилка вузла {name}. Спробуйте пізніше.",
+  "{sign}{fee} fee": "{sign} комісія {fee}",
   "{sign}{fee} {symbol} fee": "Комісія {sign}{fee} {symbol}",
   "{token} already added.": "{token} вже додано.",
   "~{time} min": "~{time} хв."

@@ -1,6 +1,5 @@
 {
   "(optional)": "(Facoltativo)",
-  "+{fee} fee": "+{fee} di tasse",
   "1 day": "1 giorno",
   "12 words": "12 parole",
   "A 256-bit hash that can be used to identify a particular payment.": "Un cancelletto da 256 bit che può essere usato per identificare un pagamento particolare.",
@@ -336,6 +335,7 @@
   "{decimals} decimals": "{decimals} decimali",
   "{exchange} error. Please try again later.": "Errore {exchange}. Riprova più tardi.",
   "{name} node error. Please try again later.": "Errore nodo {name}. Riprova più tardi.",
+  "{sign}{fee} fee": "{sign}{fee} di tasse",
   "{sign}{fee} {symbol} fee": "{sign}{fee} {symbol} di asse",
   "{token} already added.": "{token} è già stato aggiunto.",
   "~{time} min": "~{time} min"

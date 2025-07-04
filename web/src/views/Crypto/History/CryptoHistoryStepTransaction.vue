@@ -116,7 +116,8 @@ export default {
       this.isLoading = true;
       try {
         const replacement = await this.$wallet.estimateReplacement(this.transaction);
-        this.updateStorage({ replacement, transaction: this.transaction });
+        const pricePlatform = await this.$account.market.getPrice(this.$wallet.platform._id, this.$currency);
+        this.updateStorage({ replacement, pricePlatform, transaction: this.transaction });
         this.next('accelerate');
       } catch (err) {
         if (err instanceof errors.BigAmountError) {
