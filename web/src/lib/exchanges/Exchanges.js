@@ -2,6 +2,7 @@ import ChangeHeroExchange from './ChangeHeroExchange.js';
 import ChangeNOWExchange from './ChangeNOWExchange.js';
 import ChangellyExchange from './ChangellyExchange.js';
 import ExchangeStorage from '../storage/ExchangeStorage.js';
+import LetsExchange from './LetsExchange.js';
 
 import {
   Amount,
@@ -27,7 +28,7 @@ export default class Exchanges {
       ...config,
       baseURL: this.#account.getBaseURL('swap'),
     });
-    for (const Exchange of [ChangellyExchange, ChangeNOWExchange, ChangeHeroExchange]) {
+    for (const Exchange of [ChangellyExchange, ChangeNOWExchange, ChangeHeroExchange, LetsExchange]) {
       this.#exchanges.push(new Exchange({ request: this.#request, account }));
     }
   }
@@ -79,7 +80,10 @@ export default class Exchanges {
           amount: amount.toString(),
         },
         seed: 'device',
-      })).filter(({ provider }) => this.#exchanges.find((exchange) => exchange.id === provider));
+      }));
+      if (Array.isArray(estimations)) {
+        estimations = estimations.filter(({ provider }) => this.#exchanges.find((item) => item.id === provider));
+      }
     } catch (err) {
       if (err instanceof errors.NodeError) {
         throw new InternalExchangeError('Unable to estimate', { cause: err });
