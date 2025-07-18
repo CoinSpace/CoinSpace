@@ -3,6 +3,7 @@ import CsPinStep from '../../../components/CsPinStep.vue';
 import CsSteps from '../../../components/CsSteps.vue';
 
 import WalletConnectStepConfirm from './WalletConnectStepConfirm.vue';
+import WalletConnectStepGas from './WalletConnectStepGas.vue';
 import WalletConnectStepIndex from './WalletConnectStepIndex.vue';
 import WalletConnectStepMain from './WalletConnectStepMain.vue';
 import WalletConnectStepQr from './WalletConnectStepQr.vue';
@@ -43,6 +44,7 @@ export default {
     pin: CsPinStep,
     status: WalletConnectStepStatus,
     qr: WalletConnectStepQr,
+    gas: WalletConnectStepGas,
   },
   methods: {
     disconnect() {

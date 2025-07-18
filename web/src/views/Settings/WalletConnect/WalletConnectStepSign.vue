@@ -53,7 +53,7 @@ export default {
           this.updateStorage({ status: false });
           console.error(err);
         } finally {
-          this.replace('status');
+          this.next('status');
         }
       });
       this.isLoading = false;

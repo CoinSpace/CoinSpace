@@ -39,6 +39,22 @@ export default {
       this.prevSteps.delete(currentStep);
       this.transition = 'slide-right';
     },
+    backTo(step, args) {
+      if (!this.prevSteps.get(step)) return;
+      const prevStepsReversed = Array.from(this.prevSteps.entries()).reverse();
+      const exclude = [];
+      for (const [currentStep] of prevStepsReversed) {
+        if (step === currentStep) {
+          this.currentStep = currentStep;
+          break;
+        }
+        this.prevSteps.delete(currentStep);
+        exclude.push(this.steps[currentStep].name);
+      }
+      this.exclude = exclude;
+      this.args = args;
+      this.transition = 'slide-right';
+    },
     next(value, args) {
       if (this.currentStep === value) return;
       const [currentStep, exclude] = this.slicePinStep();
@@ -57,7 +73,7 @@ export default {
         this.prevSteps.set(value, prevStep);
       }
       this.currentStep = value;
-      this.exclude = exclude;
+      this.exclude = [this.steps[currentStep].name, exclude];
       this.args = args;
       this.transition = 'slide-left';
     },
@@ -85,6 +101,7 @@ export default {
           :storage="storage"
           :args="args"
           @back="back"
+          @backTo="backTo"
           @next="next"
           @replace="replace"
           @updateStorage="updateStorage"

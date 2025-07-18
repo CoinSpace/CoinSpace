@@ -10,10 +10,13 @@ export default {
       default: undefined,
     },
   },
-  emits: ['back', 'next', 'replace', 'updateStorage'],
+  emits: ['back', 'backTo', 'next', 'replace', 'updateStorage'],
   methods: {
     back(args) {
       this.$emit('back', args);
+    },
+    backTo(step, args) {
+      this.$emit('backTo', step, args);
     },
     next(step, args) {
       this.$emit('next', step, args);

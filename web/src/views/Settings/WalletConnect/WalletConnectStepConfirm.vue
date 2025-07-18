@@ -28,7 +28,10 @@ export default {
           if (!wallet) {
             throw new Error(`Unknown wallet chainId: ${params?.chainId}`);
           }
-          const id = await wallet.eth_sendTransaction(params.request.params[0], walletSeed);
+          const id = await wallet.eth_sendTransaction({
+            ...params.request.params[0],
+            gas: this.storage.gasLimit,
+          }, walletSeed);
           await walletConnect.resolveSessionRequest(this.storage.request, id);
           this.$account.emit('update');
           this.updateStorage({ status: true });
@@ -37,22 +40,10 @@ export default {
           this.updateStorage({ status: false });
           console.error(err);
         } finally {
-          this.replace('status');
+          this.next('status');
         }
       });
       this.isLoading = false;
-    },
-    async reject() {
-      this.isLoading = true;
-      try {
-        const walletConnect = await this.$account.walletConnect();
-        await walletConnect.rejectSessionRequest(this.storage.request);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        this.isLoading = false;
-        this.back();
-      }
     },
   },
 };
@@ -61,7 +52,6 @@ export default {
 <template>
   <MainLayout
     :title="$t('Confirm transaction')"
-    @back="reject"
   >
     <CsTransactionConfirm
       :transaction="storage.transaction"

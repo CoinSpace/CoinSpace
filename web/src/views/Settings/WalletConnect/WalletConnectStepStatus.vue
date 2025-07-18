@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     done() {
-      this.back();
+      this.backTo('main');
     },
   },
 };

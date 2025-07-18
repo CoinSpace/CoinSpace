@@ -64,21 +64,20 @@ export default {
         }
         const amount = new Amount(params.value || 0, wallet.crypto.decimals);
         const gasLimit = params.gas ? BigInt(params.gas) : wallet.gasLimitSmartContract;
-        const fee = await wallet.estimateTransactionFee({ amount, address: params.to, gasLimit });
         this.updateStorage({
           method: request.params.request.method,
           request,
+          gasLimit,
           transaction: {
             price: await this.$account.market.getPrice(wallet.crypto._id, this.$currency),
             pricePlatform: await this.$account.market.getPrice(wallet.platform._id, this.$currency),
             amount,
             address: params.to,
-            fee,
             crypto: wallet.crypto,
             platform: wallet.platform,
           },
         });
-        this.next('confirm');
+        this.next('gas');
       } catch (err) {
         this.error = this.$account.unknownError();
         console.error(err);
