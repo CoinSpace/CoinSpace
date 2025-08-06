@@ -19,7 +19,6 @@ export default defineConfig(({ mode }) => {
       strictPort: true,
       proxy: {
         '/api': { target: 'http://localhost:8080', headers: isHttps ? { 'X-Forwarded-Proto': 'https' } : {} },
-        '/assets/crypto': { target: 'http://localhost:8080' },
       },
     },
     base: process.env.BASE_URL || '/',

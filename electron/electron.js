@@ -90,7 +90,6 @@ function extractUrlFromArgv(argv) {
 
 function shouldHandlePathname(pathname) {
   if (pathname.startsWith('/api/')) return false;
-  if (pathname.startsWith('/assets/crypto/')) return false;
   return true;
 }
 
