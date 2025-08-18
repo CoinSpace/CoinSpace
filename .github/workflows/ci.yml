@@ -262,6 +262,7 @@ jobs:
           elif [[ "$VITE_DISTRIBUTION" == "mas-dev" ]]; then
             echo $PROVISIONING_DEVELOPMENT | base64 --decode > electron/embedded.provisionprofile;
           elif [[ "$VITE_DISTRIBUTION" == "ios" ]]; then
+            sudo xcode-select -s /Applications/Xcode_16.4.app
             echo $CERTIFICATE_DISTRIBUTION | base64 --decode > certificate.p12;
             security create-keychain -p coinspace build.keychain;
             security default-keychain -s build.keychain;
