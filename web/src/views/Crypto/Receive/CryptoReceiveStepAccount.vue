@@ -6,7 +6,7 @@ import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 import { isValidUsername } from '../../../lib/helpers.js';
 
-import { RequestError } from '../../../lib/account/Request.js';
+import { RequestError } from '@coinspace/cs-common/errors';
 
 export default {
   components: {

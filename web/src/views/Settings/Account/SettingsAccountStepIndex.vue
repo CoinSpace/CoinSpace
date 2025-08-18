@@ -5,11 +5,12 @@ import CsFormGroup from '../../../components/CsForm/CsFormGroup.vue';
 import CsFormInput from '../../../components/CsForm/CsFormInput.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
-import { RequestError } from '../../../lib/account/Request.js';
 import {
   isValidEmail,
   isValidUsername,
 } from '../../../lib/helpers.js';
+
+import { RequestError } from '@coinspace/cs-common/errors';
 
 export default {
   components: {

@@ -2,7 +2,6 @@
 import { isQrScanAvailable } from '../../../lib/helpers.js';
 import { onShowOnHide, walletSeed } from '../../../lib/mixins.js';
 
-import { AddressError } from '@coinspace/cs-common/errors';
 import CsButton from '../../../components/CsButton.vue';
 import CsButtonGroup from '../../../components/CsButtonGroup.vue';
 import CsCryptoLogo from '../../../components/CsCryptoLogo.vue';
@@ -11,7 +10,8 @@ import CsFormGroup from '../../../components/CsForm/CsFormGroup.vue';
 import CsFormInput from '../../../components/CsForm/CsFormInput.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
-import { RequestError } from '../../../lib/account/Request.js';
+
+import { AddressError, RequestError } from '@coinspace/cs-common/errors';
 
 import PasteIcon from '../../../assets/svg/paste.svg';
 import QrIcon from '../../../assets/svg/qr.svg';

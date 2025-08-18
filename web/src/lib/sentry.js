@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/browser';
 import { CaptureConsole as CaptureConsoleIntegration } from '@sentry/integrations';
 
-import { NetworkError } from './account/Request.js';
+import { NetworkError } from '@coinspace/cs-common/errors';
 import { release } from './version.js';
 
 Sentry.addGlobalEventProcessor((event, { originalException: error }) => {

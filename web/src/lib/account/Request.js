@@ -8,31 +8,6 @@ import { ed25519 } from '@noble/curves/ed25519';
 import { hex } from '@scure/base';
 import { sha256 } from '@noble/hashes/sha256';
 
-export class NetworkError extends Error {
-  name = 'NetworkError';
-  constructor(err, options) {
-    super(err.message, {
-      ...options,
-      cause: err,
-    });
-  }
-}
-
-export class RequestError extends Error {
-  name = 'RequestError';
-  constructor(err, options) {
-    const message = err.response.data?.error || err.response.data?.message || err.response.data;
-    super(message, {
-      ...options,
-      cause: err,
-    });
-    this.response = err.response.data;
-    this.status = err.response.status;
-    this.url = err.config?.url;
-    this.method = err.config?.method;
-  }
-}
-
 export default class Request {
   #clientStorage;
   #release;
@@ -107,17 +82,11 @@ export default class Request {
       return data;
     } catch (err) {
       if (err.response?.status === 500) {
-        const nerr = new errors.NodeError(err.response.data?.error || err.response.data?.message || err.response.data, {
-          cause: err,
-        });
-        nerr.response = err.response.data;
-        nerr.url = err.config?.url;
-        nerr.method = err.config?.method;
-        throw nerr;
+        throw new errors.NodeError(err);
       } else if (err.response?.data) {
-        throw new RequestError(err);
+        throw new errors.RequestError(err);
       } else if (err.request) {
-        throw new NetworkError(err);
+        throw new errors.NetworkError(err);
       }
       throw err;
     }
