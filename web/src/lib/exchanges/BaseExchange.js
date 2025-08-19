@@ -245,11 +245,11 @@ export default class BaseExchange {
     const exchange = this.#exchanges
       .filter((item) => item.cryptoFrom === crypto._id || item.cryptoTo === crypto._id)
       .find((item) => {
-        if (crypto._id === 'toncoin@toncoin') {
-          if (item.cryptoFrom === 'toncoin@toncoin') {
+        if (crypto.platform === 'toncoin') {
+          if (item.cryptoFrom.endsWith('@toncoin')) {
             return areTonAddressesEqual(transaction.to, item.payinAddress);
           }
-          if (item.cryptoTo === 'toncoin@toncoin') {
+          if (item.cryptoTo.endsWith('@toncoin')) {
             const amountTo = item.amountTo !== '0' ? item.amountTo : item.amountExpectedTo;
             return areTonAddressesEqual(transaction.to, item.payoutAddress)
               && transaction.amount.value === Amount.fromString(amountTo, crypto.decimals).value;
