@@ -3,12 +3,20 @@ import * as Sentry from '@sentry/vue';
 import { NetworkError } from '@coinspace/cs-common/errors';
 import { release } from './version.js';
 
-export function setSentryConnection(isOnion) {
-  Sentry.setTag('connection', isOnion ? 'tor' : 'web');
+function getConnectionType() {
+  return window.localStorage?.getItem?.('_cs_onion') === 'true' ? 'tor' : 'web';
 }
 
-export function setSentryUser(id) {
-  Sentry.setUser({ id });
+function getUserId() {
+  return window.localStorage?.getItem?.('_cs_id') || null;
+}
+
+export function setSentryConnection() {
+  Sentry.setTag('connection', getConnectionType());
+}
+
+export function setSentryUser() {
+  Sentry.setUser({ id: getUserId() });
 }
 
 export function addSentryVueIntegration(app) {
@@ -19,11 +27,15 @@ Sentry.init({
   debug: import.meta.env.DEV === true,
   dsn: import.meta.env.VITE_SENTRY_DSN,
   transport: Sentry.makeMultiplexedTransport(Sentry.makeFetchTransport, () => {
-    if (localStorage?.getItem('_cs_onion') === 'true') {
+    if (getConnectionType() === 'tor') {
       return [{ dsn: import.meta.env.VITE_SENTRY_DSN_TOR }];
     }
     return [{ dsn: import.meta.env.VITE_SENTRY_DSN }];
   }),
+  initialScope: {
+    tags: { connection: getConnectionType() },
+    user: { id: getUserId() },
+  },
   environment: import.meta.env.VITE_SENTRY_ENVIRONMENT,
   release,
   normalizeDepth: 5,
@@ -54,5 +66,3 @@ Sentry.init({
     return event;
   },
 });
-
-setSentryConnection(localStorage?.getItem('_cs_onion') === 'true');

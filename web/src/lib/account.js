@@ -51,8 +51,6 @@ export async function createAccount({ app, router }) {
     'toncoin@toncoin': '900',
   };
 
-  setSentryUser(account.clientStorage.getId());
-
   account.on('update', async (context) => {
     switch (context) {
       case 'currency':
@@ -69,7 +67,7 @@ export async function createAccount({ app, router }) {
         break;
       case 'isOnion':
         isOnion.value = account.isOnion;
-        setSentryConnection(account.isOnion);
+        setSentryConnection();
         break;
       default: {
         const result = [];
@@ -118,7 +116,7 @@ export async function createAccount({ app, router }) {
         if (import.meta.env.VITE_PLATFORM === 'ios') {
           window.saveCryptosForWidget(result);
         }
-        setSentryUser(account.clientStorage.getId());
+        setSentryUser();
       }
     }
   });
@@ -126,6 +124,7 @@ export async function createAccount({ app, router }) {
     if (import.meta.env.VITE_PLATFORM === 'ios') {
       window.saveCryptosForWidget();
     }
+    setSentryUser();
     await createAccount({ app, router });
   });
 }
