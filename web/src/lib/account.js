@@ -118,6 +118,7 @@ export async function createAccount({ app, router }) {
         if (import.meta.env.VITE_PLATFORM === 'ios') {
           window.saveCryptosForWidget(result);
         }
+        setSentryUser(account.clientStorage.getId());
       }
     }
   });
