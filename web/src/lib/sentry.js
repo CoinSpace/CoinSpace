@@ -45,7 +45,9 @@ Sentry.init({
   beforeSend(event, { originalException: error }) {
     if (error instanceof NetworkError) return null;
     if (error?.name === 'NotAllowedError') return null;
-    if (error?.message?.includes('Failed to fetch dynamically imported module')) {
+    if (error?.message?.includes('Failed to fetch dynamically imported module')
+      || error?.message?.includes('error loading dynamically imported module')
+    ) {
       location.reload();
       return null;
     }
