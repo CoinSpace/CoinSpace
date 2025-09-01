@@ -4,7 +4,8 @@ import 'core-js/es/array/at';
 import 'core-js/es/array/to-sorted';
 
 import './assets/styles/app.scss';
-import './lib/sentry.js';
+
+import { addSentryVueIntegration } from './lib/sentry.js';
 
 import App from './App.vue';
 import { createAccount } from './lib/account.js';
@@ -19,6 +20,7 @@ async function main() {
   }
 
   const app = createApp({ App, router });
+  addSentryVueIntegration(app);
   await createAccount({ app, router });
   await setLanguage();
   app.use(i18n);

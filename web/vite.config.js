@@ -43,6 +43,7 @@ export default defineConfig(({ mode }) => {
         sourcemaps: {
           filesToDeleteAfterUpload: outDir(env.VITE_BUILD_TYPE) + '/**/*.map',
         },
+        applicationKey: 'coinwallet',
         disable: !process.env.SENTRY_AUTH_TOKEN,
       }),
       ...(isHttps ? [basicSsl()] : []),

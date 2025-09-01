@@ -134,8 +134,7 @@ export default class Hardware {
       const result = await Promise.race([
         action(),
         new Promise((_, reject) => {
-          const error = new Error('The operation either timed out or was not allowed.');
-          error.name = 'NotAllowedError';
+          const error = new DOMException('The operation either timed out or was not allowed.', 'NotAllowedError');
           options.cancel = () => {
             reject(error);
             WebAuthnAbortService.cancelCeremony();

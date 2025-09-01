@@ -44,8 +44,7 @@
     "@noble/hashes": "^1.8.0",
     "@scure/base": "^1.2.5",
     "@scure/bip39": "^1.6.0",
-    "@sentry/browser": "^7.56.0",
-    "@sentry/integrations": "^7.56.0",
+    "@sentry/vue": "^10.8.0",
     "@simplewebauthn/browser": "^8.3.1",
     "@suchipi/femver": "^1.0.0",
     "@walletconnect/core": "^2.13.0",
@@ -72,7 +71,7 @@
   },
   "devDependencies": {
     "@intlify/eslint-plugin-vue-i18n": "^2.0.0",
-    "@sentry/vite-plugin": "^2.7.1",
+    "@sentry/vite-plugin": "^4.2.0",
     "@vitejs/plugin-basic-ssl": "^1.2.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "autoprefixer": "^10.4.14",

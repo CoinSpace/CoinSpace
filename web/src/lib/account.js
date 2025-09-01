@@ -2,10 +2,10 @@ import * as EOSSymbols from '@coinspace/cs-eos-wallet/symbols';
 import Account from './account/Account.js';
 import { ref } from 'vue';
 import { release } from './version.js';
-import { init as sentryInit } from './sentry.js';
 import { setLanguage } from './i18n/i18n.js';
 import { Amount, CsWallet } from '@coinspace/cs-common';
 import { cryptoSubtitle, cryptoToFiat, defineAppProperty, roundCrypto } from './helpers.js';
+import { setSentryConnection, setSentryUser } from './sentry.js';
 
 export async function createAccount({ app, router }) {
   const account = new Account({
@@ -51,6 +51,8 @@ export async function createAccount({ app, router }) {
     'toncoin@toncoin': '900',
   };
 
+  setSentryUser(account.clientStorage.getId());
+
   account.on('update', async (context) => {
     switch (context) {
       case 'currency':
@@ -67,7 +69,7 @@ export async function createAccount({ app, router }) {
         break;
       case 'isOnion':
         isOnion.value = account.isOnion;
-        sentryInit();
+        setSentryConnection(account.isOnion);
         break;
       default: {
         const result = [];
