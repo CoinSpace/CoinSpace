@@ -90,7 +90,8 @@ export default async function deviceready() {
       const cryptoId = type.split('.').pop();
       window.navigateHandler(`/${cryptoId}`);
     };
-    window.saveCryptosForWidget = (cryptos) => {
+    window.Watch.initialize(() => {}, (err) => console.error(err));
+    window.saveCryptosForExtensions = (cryptos) => {
       const value = cryptos ? JSON.stringify(cryptos
         .filter((crypto) => crypto.market && crypto.balance.value)
         .map((crypto) => {
@@ -110,10 +111,15 @@ export default async function deviceready() {
           WidgetCenter.reloadTimelines(
             'PortfolioExtension',
             () => {},
-            () => console.error('reloadTimelines')
+            (err) => console.error(err)
           );
         },
-        () => console.error('saveCryptosForWidget')
+        (err) => console.error(err)
+      );
+      window.Watch.updateAppContext(
+        { data: value, ts: Date.now() },
+        () => {},
+        (err) => console.error(err)
       );
     };
     window.StatusBar.styleDefault();

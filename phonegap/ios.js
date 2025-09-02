@@ -56,6 +56,7 @@ async function run() {
   cordova('plugin add cordova-clipboard@1.3.0 --save');
   cordova('plugin add cordova-ios-plugin-userdefaults@1.0.0 --save');
   cordova('plugin add https://github.com/CoinSpace/corodva-plugin-widget-center#bd96a918400a050813c3395f87c73243837e7920 --save');
+  cordova('plugin add cordova-plugin-watch-connectivity@1.0.0 --save');
 
   const update = {
     'UISupportedInterfaceOrientations': [
@@ -93,8 +94,8 @@ async function run() {
   updatePlist(path.join(buildPath, 'platforms/ios/Coin/Coin-Info.plist'), update);
 
   await setProvisionProfile();
-  await addWatchApp('https://github.com/CoinSpace/cs-watchapp-ios.git#c3c626819e1e307739e6d335dafc9a16bdc43af5');
-  await addWidget('https://github.com/CoinSpace/cs-widget-ios.git#b57c3bdf6f6b2be9cdabe8b51627ea21e36b7fb4');
+  await addWatchApp('https://github.com/CoinSpace/cs-watchapp-ios.git#d8a389dfb7e7f44d9b5e759f0bb8029a0cd0f9f7');
+  await addWidget('https://github.com/CoinSpace/cs-widget-ios.git#28fc820981b223828b3bf9de0b8fbbefff25702b');
   await addPods();
 
   if (process.env.CI) {
@@ -156,10 +157,13 @@ async function addWatchApp(repo) {
 
   const WatchApp = addFolderToProject('WatchApp', path.join(buildPath, 'platforms/ios/cs-watchapp-ios'), project);
   const WatchAppExtension = addFolderToProject('WatchAppExtension', path.join(buildPath, 'platforms/ios/cs-watchapp-ios'), project);
+  const WatchAppShared = addFolderToProject('WatchAppShared', path.join(buildPath, 'platforms/ios/cs-watchapp-ios'), project);
 
   // add new targets
   const WatchAppTarget = project.addTarget('WatchApp', 'watch2_app', 'WatchApp', 'com.coinspace.wallet.watchapp');
   const WatchAppExtensionTarget = project.addTarget('WatchAppExtension', 'watch2_extension', 'WatchAppExtension', 'com.coinspace.wallet.watchapp.extension');
+  project.getTarget('com.apple.product-type.application.watchapp2').target['productType'] = '"com.apple.product-type.application"';
+  project.getTarget('com.apple.product-type.watchkit2-extension').target['productType'] = '"com.apple.product-type.app-extension"';
 
   // edit XCBuildConfiguration
   const pbxXCBuildConfigurationSection = project.pbxXCBuildConfigurationSection();
@@ -177,11 +181,10 @@ async function addWatchApp(repo) {
     setting['SDKROOT'] = 'watchos';
     setting['MARKETING_VERSION'] = VERSION;
     setting['CURRENT_PROJECT_VERSION'] = BUILD_NUMBER;
-    setting['SWIFT_VERSION'] = '4.0';
-    setting['TARGETED_DEVICE_FAMILY'] = '4';
-    setting['WATCHOS_DEPLOYMENT_TARGET'] = '5.0';
-    setting['ENABLE_BITCODE'] = 'NO';
+    setting['SWIFT_VERSION'] = '5.0';
+    setting['WATCHOS_DEPLOYMENT_TARGET'] = '11.0';
     setting['ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES'] = 'NO';
+    setting['CODE_SIGN_ENTITLEMENTS'] = '"$(PROJECT_DIR)/cs-watchapp-ios/Entitlements-$(CONFIGURATION).plist"';
 
     if (name === 'Release') {
       setting['SWIFT_OPTIMIZATION_LEVEL'] = '"-O"';
@@ -192,8 +195,11 @@ async function addWatchApp(repo) {
     }
 
     if (setting['PRODUCT_NAME'] === '"WatchApp"') {
-      setting['CODE_SIGN_ENTITLEMENTS'] = '"cs-watchapp-ios/WatchApp/CoinSpace WatchApp.entitlements"';
-      setting['INFOPLIST_FILE'] = 'cs-watchapp-ios/WatchApp/WatchApp-Info.plist';
+      setting['SWIFT_OBJC_BRIDGING_HEADER'] = '""';
+      setting['GENERATE_INFOPLIST_FILE'] = 'YES';
+      setting['INFOPLIST_FILE'] = '""';
+      setting['INFOPLIST_FILE'] = 'cs-watchapp-ios/WatchApp/Info.plist';
+
       setting['ASSETCATALOG_COMPILER_APPICON_NAME'] = 'AppIcon';
       if (name === 'Release') {
         setting['PROVISIONING_PROFILE_SPECIFIER'] = '"com.coinspace.wallet.watchapp (production)"';
@@ -202,9 +208,8 @@ async function addWatchApp(repo) {
       }
     } else if (setting['PRODUCT_NAME'] === '"WatchAppExtension"') {
       setting['SWIFT_OBJC_BRIDGING_HEADER'] = '""';
-      setting['CODE_SIGN_ENTITLEMENTS'] = '"cs-watchapp-ios/WatchAppExtension/CoinSpace WatchApp Extension.entitlements"';
-      setting['INFOPLIST_FILE'] = 'cs-watchapp-ios/WatchAppExtension/WatchAppExtension-Info.plist';
-      setting['ASSETCATALOG_COMPILER_COMPLICATION_NAME'] = 'Complication';
+      setting['GENERATE_INFOPLIST_FILE'] = 'YES';
+      setting['INFOPLIST_FILE'] = 'cs-watchapp-ios/WatchAppExtension/Info.plist';
       if (name === 'Release') {
         setting['PROVISIONING_PROFILE_SPECIFIER'] = '"com.coinspace.wallet.watchapp.extension (prod)"';
       } else {
@@ -213,15 +218,15 @@ async function addWatchApp(repo) {
     }
   });
 
+  project.addBuildPhase(WatchApp.files.filter((f) => /\.swift$/.test(f)), 'PBXSourcesBuildPhase', 'Sources', WatchAppTarget.uuid);
   project.addBuildPhase(
-    WatchApp.files.filter((f) => /(\.xcassets|\.storyboard)$/.test(f)),
+    WatchApp.files.filter((f) => /(\.xcassets)$/.test(f)),
     'PBXResourcesBuildPhase',
     'Resources',
     WatchAppTarget.uuid
   );
 
   project.addBuildPhase(WatchAppExtension.files.filter((f) => /\.swift$/.test(f)), 'PBXSourcesBuildPhase', 'Sources', WatchAppExtensionTarget.uuid);
-
   project.addBuildPhase(
     WatchAppExtension.files.filter((f) => /(\.xcassets)$/.test(f)),
     'PBXResourcesBuildPhase',
@@ -229,6 +234,24 @@ async function addWatchApp(repo) {
     WatchAppExtensionTarget.uuid
   );
 
+  WatchAppShared.files.forEach((item) => {
+    const file = project.hasFile(item);
+    const section = project.pbxFileReferenceSection();
+    for (const key in section) {
+      if (section[key].path !== file.path) continue;
+      file.fileRef = key;
+      [WatchAppExtensionTarget.uuid, WatchAppTarget.uuid].forEach((uuid) => {
+        file.target = uuid;
+        file.uuid = project.generateUuid();
+        project.addToPbxBuildFileSection(file);
+        if (/(\.xcstrings)$/.test(item)) {
+          project.addToPbxResourcesBuildPhase(file);
+        } else {
+          project.addToPbxSourcesBuildPhase(file);
+        }
+      });
+    }
+  });
   fs.writeFileSync(project.filepath, project.writeSync());
 }
 
@@ -292,8 +315,10 @@ async function addWidget(repo) {
 
 async function addPods() {
   // add pods
-  const watchAppPodfile = fs.readFileSync(path.resolve(buildPath, 'platforms/ios/cs-watchapp-ios/WatchAppExtension/Podfile'));
+  const watchAppPodfile = fs.readFileSync(path.resolve(buildPath, 'platforms/ios/cs-watchapp-ios/WatchApp/Podfile'));
   fs.appendFileSync(path.resolve(buildPath, 'platforms/ios/Podfile'), watchAppPodfile);
+  const watchAppExtensionPodfile = fs.readFileSync(path.resolve(buildPath, 'platforms/ios/cs-watchapp-ios/WatchAppExtension/Podfile'));
+  fs.appendFileSync(path.resolve(buildPath, 'platforms/ios/Podfile'), watchAppExtensionPodfile);
   const widgetPodfile = fs.readFileSync(path.resolve(buildPath, 'platforms/ios/cs-widget-ios/WidgetExtension/Podfile'));
   fs.appendFileSync(path.resolve(buildPath, 'platforms/ios/Podfile'), widgetPodfile);
 

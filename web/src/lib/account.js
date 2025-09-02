@@ -114,7 +114,7 @@ export async function createAccount({ app, router }) {
         cryptos.value = result;
 
         if (import.meta.env.VITE_PLATFORM === 'ios') {
-          window.saveCryptosForWidget(result);
+          window.saveCryptosForExtensions(result);
         }
         setSentryUser();
       }
@@ -122,7 +122,7 @@ export async function createAccount({ app, router }) {
   });
   account.on('logout', async () => {
     if (import.meta.env.VITE_PLATFORM === 'ios') {
-      window.saveCryptosForWidget();
+      window.saveCryptosForExtensions();
     }
     setSentryUser();
     await createAccount({ app, router });
