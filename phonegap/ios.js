@@ -94,7 +94,7 @@ async function run() {
   updatePlist(path.join(buildPath, 'platforms/ios/Coin/Coin-Info.plist'), update);
 
   await setProvisionProfile();
-  await addWatchApp('https://github.com/CoinSpace/cs-watchapp-ios.git#87670dd74057ad6b70a9b6a7d079da591b6fd0d5');
+  await addWatchApp('https://github.com/CoinSpace/cs-watchapp-ios.git#f59a021634138f22b4062114dbbe85ec6138c264');
   await addWidget('https://github.com/CoinSpace/cs-widget-ios.git#28fc820981b223828b3bf9de0b8fbbefff25702b');
   await addPods();
 
