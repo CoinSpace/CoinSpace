@@ -4,8 +4,8 @@ import CsButton from '../../components/CsButton.vue';
 import CsButtonGroup from '../../components/CsButtonGroup.vue';
 import CsFormTextareaReadonly from '../../components/CsForm/CsFormTextareaReadonly.vue';
 import CsStep from '../../components/CsStep.vue';
+import CsWarning from '../../components/CsWarning.vue';
 
-import DangerTriangleIcon from '../../assets/svg/dangerTriangle.svg';
 import TickIcon from '../../assets/svg/tick.svg';
 
 export default {
@@ -14,7 +14,7 @@ export default {
     CsButton,
     CsButtonGroup,
     CsFormTextareaReadonly,
-    DangerTriangleIcon,
+    CsWarning,
     TickIcon,
   },
   extends: CsStep,
@@ -56,11 +56,10 @@ export default {
     </div>
 
     <div class="&__container">
-      <div class="&__warning">
-        <DangerTriangleIcon class="&__danger_triangle" />
+      <CsWarning>
         <!-- eslint-disable-next-line max-len -->
         {{ $t('Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.') }}
-      </div>
+      </CsWarning>
 
       <label class="&__agreement">
         <input

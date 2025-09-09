@@ -9,6 +9,7 @@ import CsFormTextareaReadonly from '../../../components/CsForm/CsFormTextareaRea
 import CsModal from '../../../components/CsModal.vue';
 import CsStep from '../../../components/CsStep.vue';
 import CsTokenInfo from '../../../components/CsTokenInfo.vue';
+import CsWarning from '../../../components/CsWarning.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 
 import { SeedRequiredError } from '../../../lib/account/Account.js';
@@ -21,6 +22,7 @@ export default {
     CsFormTextareaReadonly,
     CsModal,
     CsTokenInfo,
+    CsWarning,
     MainLayout,
   },
   extends: CsStep,
@@ -91,6 +93,12 @@ export default {
         :label="$t('Contract address')"
         :value="token.address"
       />
+      <CsWarning
+        class="&__warning"
+        @click="$safeOpen('https://support.coin.space/hc/en-us/articles/37103058738708')"
+      >
+        {{ $t('Adding unknown tokens can be risky, so only add tokens you trust. Learn more.') }}
+      </CsWarning>
       <CsButton
         v-if="url"
         type="primary-link"
@@ -142,6 +150,10 @@ export default {
   .#{ $filename } {
     &__container {
       flex-grow: 1;
+    }
+
+    &__warning {
+      cursor: pointer;
     }
   }
 </style>
