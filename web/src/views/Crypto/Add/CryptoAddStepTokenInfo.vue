@@ -94,6 +94,7 @@ export default {
         :value="token.address"
       />
       <CsWarning
+        v-if="token.custom === true"
         class="&__warning"
         @click="$safeOpen('https://support.coin.space/hc/en-us/articles/37103058738708')"
       >
