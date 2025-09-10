@@ -24,6 +24,7 @@
   "Add custom token": "Aangepast token toevoegen",
   "Add hardware key": "Hardware-key toevoegen",
   "Add token": "Token toevoegen",
+  "Adding unknown tokens can be risky, so only add tokens you trust. Learn more.": "Het toevoegen van onbekende tokens kan riskant zijn, dus voeg alleen tokens toe die u vertrouwt. Meer informatie.",
   "Address should not be empty": "Adres kan niet leeg zijn",
   "Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use a fresh address for each receiving transaction to enhance your privacy.": "Na het ontvangen van de fondsen wordt het adres veranderd. Alle eerder gebruikte adressen blijven geldig en kunnen nog steeds worden gebruikt om meerdere keren betalingen te ontvangen. Gebruik een nieuw adres voor elke ontvangen transactie om uw privacy te verbeteren.",
   "Alias": "Alias",

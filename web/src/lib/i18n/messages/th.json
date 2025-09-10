@@ -24,6 +24,7 @@
   "Add custom token": "เพิ่มโทเค็นแบบกำหนดเอง",
   "Add hardware key": "เพิ่มคีย์ฮาร์ดแวร์",
   "Add token": "เพิ่มโทเค็น",
+  "Adding unknown tokens can be risky, so only add tokens you trust. Learn more.": "การเพิ่มโทเคนที่ไม่รู้จักอาจมีความเสี่ยง ดังนั้นเพิ่มเฉพาะโทเคนที่คุณเชื่อถือเท่านั้น เรียนรู้เพิ่มเติม.",
   "Address should not be empty": "ที่อยู่ไม่สามารถเว้นว่างได้",
   "Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use a fresh address for each receiving transaction to enhance your privacy.": "ที่อยู่จะมีการเปลี่ยนแปลงหลังจากได้รับเงินแล้ว ที่อยู่ที่ใช้ก่อนหน้านี้ทั้งหมดจะยังใช้ได้ และยังสามารถใช้รับเงินได้หลายครั้ง โปรดใช้ที่อยู่ใหม่สำหรับการทำธุรกรรมรับเงินแต่ละครั้งเพื่อเพิ่มความเป็นส่วนตัวของคุณ",
   "Alias": "นามแฝง",

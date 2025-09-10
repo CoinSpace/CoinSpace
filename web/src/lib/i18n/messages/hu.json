@@ -24,6 +24,7 @@
   "Add custom token": "Egyedi token hozzáadása",
   "Add hardware key": "Hardverkulcs hozzáadása",
   "Add token": "Token hozzáadása",
+  "Adding unknown tokens can be risky, so only add tokens you trust. Learn more.": "Ismeretlen tokenek hozzáadása kockázatos lehet, ezért csak megbízható tokeneket adjon hozzá. További információ.",
   "Address should not be empty": "A cím nem lehet üres",
   "Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use a fresh address for each receiving transaction to enhance your privacy.": "A pénz megérkezése után a cím megváltozik. A korábbi címek továbbra is érvényben maradnak, többször is fel lehet őket használni pénzek fogadására. Kérjük, hogy adataid fokozott védelme érdekében használj minden tranzakció esetében új címet.",
   "Alias": "Álnév",

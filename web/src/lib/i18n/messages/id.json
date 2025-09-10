@@ -24,6 +24,7 @@
   "Add custom token": "Tambahkan Token Kustom",
   "Add hardware key": "Tambahkan Kunci Perangkat Keras",
   "Add token": "Tambah Token",
+  "Adding unknown tokens can be risky, so only add tokens you trust. Learn more.": "Menambahkan token tidak dikenal bisa berisiko, jadi hanya tambahkan token yang Anda percayai. Pelajari lebih lanjut.",
   "Address should not be empty": "Alamat tidak boleh kosong",
   "Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use a fresh address for each receiving transaction to enhance your privacy.": "Alamat akan diubah setelah menerima dana. Semua alamat sebelumnya yang digunakan tetap valid dan masih dapat digunakan untuk menerima dana beberapa kali. Harap gunakan alamat baru setiap melakukan transaksi penerimaan dana untuk meningkatkan privasi Anda.",
   "Alias": "Alias",

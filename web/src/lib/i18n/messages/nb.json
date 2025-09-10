@@ -24,6 +24,7 @@
   "Add custom token": "Legg til egendefinert sjetonger",
   "Add hardware key": "Legg til maskinvaretast",
   "Add token": "Legg til sjetonger",
+  "Adding unknown tokens can be risky, so only add tokens you trust. Learn more.": "Å legge til ukjente tokens kan være risikabelt, så legg bare til tokens du stoler på. Lær mer.",
   "Address should not be empty": "Adresse kan ikke være tom",
   "Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use a fresh address for each receiving transaction to enhance your privacy.": "Adressen forandres etter mottak av penger. Alle tidligere benyttede adresser forblir gyldige, og kan fremdeles benyttes til å motta penger flere ganger. For å øke personvernet ditt, benytter du en ny adresse for hver mottatte transaksjon.",
   "Alias": "Alias",

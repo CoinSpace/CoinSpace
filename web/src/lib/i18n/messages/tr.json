@@ -24,6 +24,7 @@
   "Add custom token": "Özel Token Ekle",
   "Add hardware key": "Donanım Anahtarı Ekle",
   "Add token": "Token Ekle",
+  "Adding unknown tokens can be risky, so only add tokens you trust. Learn more.": "Bilinmeyen tokenleri eklemek riskli olabilir, bu nedenle yalnızca güvendiğiniz tokenleri ekleyin. Daha fazla bilgi edinin.",
   "Address should not be empty": "Adres alanı boş olamaz",
   "Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use a fresh address for each receiving transaction to enhance your privacy.": "Para alındıktan sonra adres değiştirilecektir. Daha önce kullanılan tüm adresler geçerli kalır ve birden çok kez fon almak için kullanılmaya devam edilebilir. Gizliliğinizi artırmak için lütfen her alım işleminde yeni adres kullanın.",
   "Alias": "Takma ad",

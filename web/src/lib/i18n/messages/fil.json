@@ -24,6 +24,7 @@
   "Add custom token": "Magdagdag ng custom token",
   "Add hardware key": "Magdagdag ng key ng hardware",
   "Add token": "Magdagdag ng token",
+  "Adding unknown tokens can be risky, so only add tokens you trust. Learn more.": "Ang pagdaragdag ng hindi kilalang mga token ay maaaring mapanganib, kaya magdagdag lamang ng mga token na pinagkakatiwalaan mo. Matuto pa.",
   "Address should not be empty": "Hindi pwedeng walang laman ang address",
   "Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use a fresh address for each receiving transaction to enhance your privacy.": "Babaguhin ang address pagkatapos tanggapin ang mga pondo. Lahat ng mga dating ginamit na address ay nanatiling balido at maaari pa ring gamitin upang tumanggap ng mga pondo ng maraming beses. Gamitin ang bagong address para sa bawat transaksiyon na tinatanggap upang pahusayin ang privacy.",
   "Alias": "Alyas",

@@ -24,6 +24,7 @@
   "Add custom token": "Adicionar Token Personalizado",
   "Add hardware key": "Adicionar a Chave de Hardware",
   "Add token": "Adicionar token",
+  "Adding unknown tokens can be risky, so only add tokens you trust. Learn more.": "Adicionar tokens desconhecidos pode ser arriscado, então adicione apenas tokens em que você confia. Saiba mais.",
   "Address should not be empty": "O endereço não pode estar vazio",
   "Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use a fresh address for each receiving transaction to enhance your privacy.": "O endereço será alterado após o recebimento dos fundos. Todos os endereços anteriores permanecem válidos e ainda podem ser usados por diversas vezes para receber os fundos. Por favor, utilize um novo endereço para cada operação de recebimento e melhore a sua privacidade.",
   "Alias": "Alias",

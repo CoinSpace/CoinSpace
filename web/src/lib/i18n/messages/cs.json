@@ -24,6 +24,7 @@
   "Add custom token": "Přidat vlastní token",
   "Add hardware key": "Přidat hardwarový klíč",
   "Add token": "Přidat token",
+  "Adding unknown tokens can be risky, so only add tokens you trust. Learn more.": "Přidávání neznámých tokenů může být riskantní, proto přidávejte pouze tokeny, kterým důvěřujete. Další informace.",
   "Address should not be empty": "Adresa nesmí být prázdná",
   "Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use a fresh address for each receiving transaction to enhance your privacy.": "Po přijetí finančních prostředků bude adresa změněna. Všechny dříve použité adresy zůstávají v platnosti a bude je možno nadále opakovaně používat k příjmu finančních prostředků. Pro lepší zabezpečení používejte prosím čerstvou adresu pro každou příjmovou transakci.",
   "Alias": "Alias",

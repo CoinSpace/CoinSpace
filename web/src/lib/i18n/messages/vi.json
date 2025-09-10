@@ -24,6 +24,7 @@
   "Add custom token": "Thêm Token tùy chỉnh",
   "Add hardware key": "Thêm Khóa phần cứng",
   "Add token": "Thêm Token",
+  "Adding unknown tokens can be risky, so only add tokens you trust. Learn more.": "Việc thêm token không rõ nguồn gốc có thể rủi ro, vì vậy chỉ thêm token mà bạn tin tưởng. Tìm hiểu thêm.",
   "Address should not be empty": "Không được để trống địa chỉ",
   "Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use a fresh address for each receiving transaction to enhance your privacy.": "Địa chỉ sẽ thay đổi sau khi nhận tiền. Tất cả các địa chỉ được sử dụng trước đây còn hợp lệ và vẫn có thể sử dụng để nhận tiền nhiều lần. Vui lòng sử dụng địa chỉ mới cho mỗi giao dịch nhận tiền để tăng cường tính riêng tư của bạn.",
   "Alias": "Bí danh",

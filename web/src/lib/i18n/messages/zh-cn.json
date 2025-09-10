@@ -24,6 +24,7 @@
   "Add custom token": "添加自定义代币",
   "Add hardware key": "添加硬件密钥",
   "Add token": "添加代币",
+  "Adding unknown tokens can be risky, so only add tokens you trust. Learn more.": "添加未知代币可能有风险，因此仅添加您信任的代币。了解更多。",
   "Address should not be empty": "地址不能为空",
   "Address will be changed after receiving funds. All previously used addresses remain valid and still can be used to receive funds multiple times. Please use a fresh address for each receiving transaction to enhance your privacy.": "地址将在收到资金后出现变动。所有以前使用的地址保持有效，仍可多次用于接收资金。请为每个收到的交易使用新的地址，以加强您的隐私。",
   "Alias": "别名",
