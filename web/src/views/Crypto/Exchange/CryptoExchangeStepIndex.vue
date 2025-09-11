@@ -326,6 +326,7 @@ export default {
       >
         <template #before>
           <img
+            v-if="providerInfo.logo"
             loading="lazy"
             :src="providerInfo.logo"
             :alt="providerInfo.name"
