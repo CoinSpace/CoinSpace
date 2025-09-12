@@ -206,6 +206,10 @@ export default class ClientStorage {
    */
 
   clear() {
-    this.#localStorage.clear();
+    for (const key in this.#localStorage) {
+      if (key && key.startsWith('_cs_')) {
+        this.#localStorage.removeItem(key);
+      }
+    }
   }
 }
