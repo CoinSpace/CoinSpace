@@ -24,6 +24,11 @@ export default {
       agreements: [],
     };
   },
+  computed: {
+    agreementLinkTexts() {
+      return this.$tBrackets(this.$t('I agree to the {terms}[Terms of Service]'));
+    },
+  },
   methods: {
     copyToClipboard() {
       navigator.clipboard.writeText(this.storage.passphrase).then(() => {
@@ -84,7 +89,16 @@ export default {
         <div class="&__checkbox">
           <TickIcon class="&__check" />
         </div>
-        {{ $t('I agree to the Terms of Service') }}
+        <i18n-t
+          :keypath.camel="`[template] I agree to the {terms}[Terms of Service]`"
+          tag="span"
+        >
+          <template #terms>
+            <a @click.prevent="$safeOpen(`${$account.siteUrl}terms-of-service/`)">
+              {{ agreementLinkTexts?.at(0) }}
+            </a>
+          </template>
+        </i18n-t>
       </label>
     </div>
 
@@ -95,12 +109,6 @@ export default {
         @click="next('passphraseConfirmation')"
       >
         {{ $t('Confirm') }}
-      </CsButton>
-      <CsButton
-        type="primary-link"
-        @click="$safeOpen(`${$account.siteUrl}terms-of-service/`)"
-      >
-        {{ $t('View Terms of Service') }}
       </CsButton>
     </CsButtonGroup>
   </AuthStepLayout>
