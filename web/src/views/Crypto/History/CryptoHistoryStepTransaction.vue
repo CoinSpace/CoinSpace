@@ -207,6 +207,18 @@ export default {
     </div>
 
     <CsFormGroup class="&__info">
+      <template v-if="exchange && !transaction.incoming">
+        <CsFormTextareaReadonly
+          v-if="transaction.exchange.payoutHash"
+          :label="$t('Output transaction ID')"
+          :value="transaction.exchange.payoutHash"
+        />
+        <CsFormTextareaReadonly
+          v-if="transaction.exchange.refundHash"
+          :label="$t('Refund transaction ID')"
+          :value="transaction.exchange.refundHash"
+        />
+      </template>
       <CsFormTextareaReadonly
         v-if="!transaction.incoming && to !== 'your wallet'"
         :label="$t('Recipient')"

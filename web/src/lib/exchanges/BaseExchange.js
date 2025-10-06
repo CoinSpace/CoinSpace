@@ -274,6 +274,7 @@ export default class BaseExchange {
       originalStatus: exchange.status,
       to: exchange.internal === true ? 'your wallet' : exchange.payoutAddress,
       payoutHash: exchange?.payoutHash?.toLowerCase(),
+      refundHash: exchange?.refundHash?.toLowerCase(),
       providerInfo: this.info,
     };
     if (transaction.incoming) {
