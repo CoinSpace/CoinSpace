@@ -75,9 +75,9 @@ export default {
     },
     amountTo() {
       if (this.fiatMode && this.transaction.priceTo !== undefined) {
-        return `≈ ${this.$c(cryptoToFiat(this.transaction.amountTo, this.transaction.priceTo))}`;
+        return `≈\xa0${this.$c(cryptoToFiat(this.transaction.amountTo, this.transaction.priceTo))}`;
       } else {
-        return `≈ ${this.transaction.amountTo} ${this.transaction.to.crypto.symbol}`;
+        return `≈\xa0${this.transaction.amountTo} ${this.transaction.to.crypto.symbol}`;
       }
     },
   },
