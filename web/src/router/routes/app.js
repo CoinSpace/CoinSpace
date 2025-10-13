@@ -184,7 +184,11 @@ const app = [
   },
   {
     path: '/wc',
-    redirect() {
+    redirect(to) {
+      if (!to.query.uri) {
+        window.close();
+        return 'notfound';
+      }
       return {
         name: 'settings.walletconnect',
         force: true,
