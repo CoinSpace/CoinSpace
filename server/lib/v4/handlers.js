@@ -275,7 +275,7 @@ export async function getRampsSell(req, res) {
 }
 
 export async function getUpdate(req, res) {
-  const app = req.get('User-Agent').includes('CoinSpace') ? 'electron' : 'app';
+  const app = req.get('User-Agent')?.includes('CoinSpace') ? 'electron' : 'app';
   const { distribution, arch, version } = req.params;
   if (!semver.valid(version)) {
     throw createError(400, `Invalid SemVer: "${version}"`);

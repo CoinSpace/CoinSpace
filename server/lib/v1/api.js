@@ -209,7 +209,7 @@ api.get('/updates', (req, res, next) => {
 });
 
 api.get('/update/:distribution/:arch/:version', (req, res, next) => {
-  const app = req.get('User-Agent').includes('CoinSpace') ? 'electron' : 'app';
+  const app = req.get('User-Agent')?.includes('CoinSpace') ? 'electron' : 'app';
   const { distribution, arch, version } = req.params;
   if (!semver.valid(version)) {
     return res.status(400).send({ error: `Invalid SemVer: "${version}"` });
