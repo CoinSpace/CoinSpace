@@ -110,7 +110,7 @@
   "High security": "ความปลอดภัยขั้นสูง",
   "History": "ประวัติ",
   "How it works?": "มันทำงานอย่างไร?",
-  "I agree to the {terms}[Terms of Service]": "ฉันยอมรับ {terms}[ข้อกำหนดในการให้บริการ]",
+  "I agree to the {terms}((Terms of Service))": "ฉันยอมรับ {terms}((ข้อกำหนดในการให้บริการ))",
   "I have written down or otherwise securely stored my passphrase": "ฉันจดหรือเก็บวลีรหัสผ่านของฉันไว้แล้ว",
   "Info": "ข้อมูล",
   "Insufficient funds to pay the transaction fee. Required {amount} {symbol}": "เงินไม่พอที่จะจ่ายค่าธรรมเนียมการทำธุรกรรม ต้องใช้ {amount} {symbol}",

@@ -110,7 +110,7 @@
   "High security": "Yüksek Güvenlik",
   "History": "Geçmiş",
   "How it works?": "Nasıl çalışır?",
-  "I agree to the {terms}[Terms of Service]": "{terms}[Kullanım Koşulları]'nı Kabul Ediyorum",
+  "I agree to the {terms}((Terms of Service))": "{terms}((Kullanım Koşulları))'nı Kabul Ediyorum",
   "I have written down or otherwise securely stored my passphrase": "Parolamı not ettim veya başka şekilde güvenli bir yerde saklıyorum",
   "Info": "Bilgi",
   "Insufficient funds to pay the transaction fee. Required {amount} {symbol}": "İşlem ücretini ödemek için yetersiz bakiye. Gerekli {amount} {symbol}",

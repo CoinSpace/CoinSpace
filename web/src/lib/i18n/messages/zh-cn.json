@@ -110,7 +110,7 @@
   "High security": "高安全性",
   "History": "历史",
   "How it works?": "这如何运作？",
-  "I agree to the {terms}[Terms of Service]": "我同意 {terms}[服务条款]",
+  "I agree to the {terms}((Terms of Service))": "我同意 {terms}((服务条款))",
   "I have written down or otherwise securely stored my passphrase": "我已经将密码短语写下来或以其它方式安全的妥善存储",
   "Info": "信息",
   "Insufficient funds to pay the transaction fee. Required {amount} {symbol}": "资金不足以支付交易手续费。需要 {amount} {symbol}",

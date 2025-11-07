@@ -110,7 +110,7 @@
   "High security": "Securitate de nivel înalt",
   "History": "Istoric",
   "How it works?": "Cum funcționează?",
-  "I agree to the {terms}[Terms of Service]": "Sunt de acord cu {terms}[Condițiile de utilizare]",
+  "I agree to the {terms}((Terms of Service))": "Sunt de acord cu {terms}((Condițiile de utilizare))",
   "I have written down or otherwise securely stored my passphrase": "Mi-am notat sau am păstrat expresia de acces într-un loc sigur",
   "Info": "Info",
   "Insufficient funds to pay the transaction fee. Required {amount} {symbol}": "Fonduri insuficiente pentru a plăti taxa de tranzacție. Necesar {amount} {symbol}",

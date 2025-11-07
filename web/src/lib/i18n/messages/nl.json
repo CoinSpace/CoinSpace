@@ -110,7 +110,7 @@
   "High security": "Hoge veiligheid",
   "History": "Geschiedenis",
   "How it works?": "Hoe werkt het?",
-  "I agree to the {terms}[Terms of Service]": "Ik ga akkoord met de {terms}[Servicevoorwaarden]",
+  "I agree to the {terms}((Terms of Service))": "Ik ga akkoord met de {terms}((Servicevoorwaarden))",
   "I have written down or otherwise securely stored my passphrase": "Ik heb mijn wachtwoord opgeschreven of anderszins veilig opgeslagen",
   "Info": "Info",
   "Insufficient funds to pay the transaction fee. Required {amount} {symbol}": "Onvoldoende saldo om de transactiekosten te betalen. Vereist {amount} {symbol}",

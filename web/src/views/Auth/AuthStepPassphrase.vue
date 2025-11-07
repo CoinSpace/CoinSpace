@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     agreementLinkTexts() {
-      return this.$tBrackets(this.$t('I agree to the {terms}[Terms of Service]'));
+      return this.$tBrackets(this.$t('I agree to the {terms}((Terms of Service))'));
     },
   },
   methods: {
@@ -90,7 +90,7 @@ export default {
           <TickIcon class="&__check" />
         </div>
         <i18n-t
-          :keypath.camel="`[template] I agree to the {terms}[Terms of Service]`"
+          :keypath.camel="`[template] I agree to the {terms}((Terms of Service))`"
           tag="span"
         >
           <template #terms>

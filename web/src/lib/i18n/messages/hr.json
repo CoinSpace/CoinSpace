@@ -110,7 +110,7 @@
   "High security": "Visoka sigurnost",
   "History": "Povijest",
   "How it works?": "Kako to funkcionira?",
-  "I agree to the {terms}[Terms of Service]": "Slažem se s {terms}[Uvjetima pružanja usluga]",
+  "I agree to the {terms}((Terms of Service))": "Slažem se s {terms}((Uvjetima pružanja usluga))",
   "I have written down or otherwise securely stored my passphrase": "Zabilježio/la sam ili na drugi način sigurno pohranio/la svoju frazu lozinke",
   "Info": "Info",
   "Insufficient funds to pay the transaction fee. Required {amount} {symbol}": "Nedovoljno sredstava za plaćanje naknade za transakciju. Potrebno {amount} {symbol}",

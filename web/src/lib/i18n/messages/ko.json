@@ -110,7 +110,7 @@
   "High security": "높은 보안",
   "History": "내역",
   "How it works?": "어떻게 작동하나요?",
-  "I agree to the {terms}[Terms of Service]": "{terms}[서비스 약관]에 동의합니다",
+  "I agree to the {terms}((Terms of Service))": "{terms}((서비스 약관))에 동의합니다",
   "I have written down or otherwise securely stored my passphrase": "나는 내 암호를 적어두거나 다른 방법으로 안전하게 저장해두었습니다",
   "Info": "정보",
   "Insufficient funds to pay the transaction fee. Required {amount} {symbol}": "거래 수수료를 지불하기에 자금이 부족합니다. 필요한 금액 {amount} {symbol}",

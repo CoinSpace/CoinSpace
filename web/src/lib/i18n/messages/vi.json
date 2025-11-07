@@ -110,7 +110,7 @@
   "High security": "Bảo mật cao",
   "History": "Lịch sử",
   "How it works?": "Nó hoạt động như thế nào?",
-  "I agree to the {terms}[Terms of Service]": "Tôi đồng ý với {terms}[Điều khoản Dịch vụ]",
+  "I agree to the {terms}((Terms of Service))": "Tôi đồng ý với {terms}((Điều khoản Dịch vụ))",
   "I have written down or otherwise securely stored my passphrase": "Tôi đã ghi lại hoặc lưu trữ bảo mật cụm mật khẩu của mình",
   "Info": "Thông tin",
   "Insufficient funds to pay the transaction fee. Required {amount} {symbol}": "Không đủ tiền để trả phí giao dịch. Cần {amount} {symbol}",

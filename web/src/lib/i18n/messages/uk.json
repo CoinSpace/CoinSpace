@@ -110,7 +110,7 @@
   "High security": "Високий рівень безпеки",
   "History": "Історія",
   "How it works?": "Як це працює?",
-  "I agree to the {terms}[Terms of Service]": "Я погоджуюся з {terms}[Умовами надання послуг]",
+  "I agree to the {terms}((Terms of Service))": "Я погоджуюся з {terms}((Умовами надання послуг))",
   "I have written down or otherwise securely stored my passphrase": "Моя парольна фраза записана або збережена якимось іншим безпечним чином",
   "Info": "Інфо",
   "Insufficient funds to pay the transaction fee. Required {amount} {symbol}": "Недостатньо коштів для сплати комісії за транзакцію. Потрібно {amount} {symbol}",

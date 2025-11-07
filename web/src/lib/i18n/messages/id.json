@@ -110,7 +110,7 @@
   "High security": "Keamanan Tinggi",
   "History": "Riwayat",
   "How it works?": "Bagaimana cara kerjanya?",
-  "I agree to the {terms}[Terms of Service]": "Saya menyetujui {terms}[Ketentuan Layanan] ini",
+  "I agree to the {terms}((Terms of Service))": "Saya menyetujui {terms}((Ketentuan Layanan)) ini",
   "I have written down or otherwise securely stored my passphrase": "Saya telah menulis atau telah menyimpan frasa sandi saya dengan aman",
   "Info": "Info",
   "Insufficient funds to pay the transaction fee. Required {amount} {symbol}": "Dana tidak mencukupi untuk membayar biaya transaksi. Diperlukan {amount} {symbol}",

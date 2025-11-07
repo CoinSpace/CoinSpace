@@ -110,7 +110,7 @@
   "High security": "Высокая безопасность",
   "History": "История",
   "How it works?": "Как это работает?",
-  "I agree to the {terms}[Terms of Service]": "Я согласен с {terms}[Условиями обслуживания]",
+  "I agree to the {terms}((Terms of Service))": "Я согласен с {terms}((Условиями обслуживания))",
   "I have written down or otherwise securely stored my passphrase": "Я записал, или как-то сохранил свою парольную фразу",
   "Info": "Инфо",
   "Insufficient funds to pay the transaction fee. Required {amount} {symbol}": "Недостаточно средств для оплаты комиссии за транзакцию. Требуется {amount} {symbol}",

@@ -40,7 +40,7 @@ const i18n = createI18n({
   messageResolver(obj, path) {
     let msg = obj[path];
     if (path.startsWith('[template] ')) {
-      msg = obj[path.replace('[template] ', '')]?.replace(/\[.+?]/g, '');
+      msg = obj[path.replace('[template] ', '')]?.replace(/\(\(.+?\)\)/g, '');
     }
     return msg ? msg : null;
   },

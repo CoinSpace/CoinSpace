@@ -110,7 +110,7 @@
   "High security": "高度なセキュリティ",
   "History": "履歴",
   "How it works?": "どうやって動作しますか？",
-  "I agree to the {terms}[Terms of Service]": "{terms}[利用規約]に同意します",
+  "I agree to the {terms}((Terms of Service))": "{terms}((利用規約))に同意します",
   "I have written down or otherwise securely stored my passphrase": "パスフレーズを書き留めるなどして、安全な方法で保管したことを約束します",
   "Info": "情報",
   "Insufficient funds to pay the transaction fee. Required {amount} {symbol}": "取引手数料を支払うのに十分な資金がありません。必要な額 {amount} {symbol}",

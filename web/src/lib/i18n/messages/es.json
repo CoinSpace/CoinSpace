@@ -110,7 +110,7 @@
   "High security": "Alta seguridad",
   "History": "Historial",
   "How it works?": "¿Cómo funciona?",
-  "I agree to the {terms}[Terms of Service]": "Acepto los {terms}[términos de servicio]",
+  "I agree to the {terms}((Terms of Service))": "Acepto los {terms}((términos de servicio))",
   "I have written down or otherwise securely stored my passphrase": "He anotado o guardado de manera segura mi frase de contraseña",
   "Info": "Info",
   "Insufficient funds to pay the transaction fee. Required {amount} {symbol}": "Fondos insuficientes para pagar la tarifa de transacción. Requerido {amount} {symbol}",

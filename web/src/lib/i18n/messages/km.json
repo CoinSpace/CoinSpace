@@ -110,7 +110,7 @@
   "High security": "សុវត្ថិភាពខ្ពស់",
   "History": "ប្រវត្តិ​",
   "How it works?": "វាដំណើរការយ៉ាងដូចម្តេច?",
-  "I agree to the {terms}[Terms of Service]": "ខ្ញុំយល់ព្រម {terms}[នីតិវិធីនៃសេវាកម្ម]",
+  "I agree to the {terms}((Terms of Service))": "ខ្ញុំយល់ព្រម {terms}((នីតិវិធីនៃសេវាកម្ម))",
   "I have written down or otherwise securely stored my passphrase": "ខ្ញុំបានសរសេរវារួចហើយឬបើមិនដូច្នោះទេទុកដាក់ឃ្លាសម្ងាត់របស់ខ្ញុំដោយសុវត្ថិភាព។",
   "Info": "ព័ត៌មាន",
   "Insufficient funds to pay the transaction fee. Required {amount} {symbol}": "មូលនិធិមិនគ្រប់គ្រាន់ដើម្បីបង់កម្រៃប្រតិបត្តិការ។ ត្រូវការ {amount} {symbol}",

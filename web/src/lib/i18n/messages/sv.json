@@ -110,7 +110,7 @@
   "High security": "Hög säkerhet",
   "History": "Historia",
   "How it works?": "Hur fungerar det?",
-  "I agree to the {terms}[Terms of Service]": "Jag godkänner {terms}[användarvillkoren]",
+  "I agree to the {terms}((Terms of Service))": "Jag godkänner {terms}((användarvillkoren))",
   "I have written down or otherwise securely stored my passphrase": "Jag har skrivit ner eller på annat sätt lagrat min lösenordsfras",
   "Info": "Info",
   "Insufficient funds to pay the transaction fee. Required {amount} {symbol}": "Otillräckliga medel för att betala transaktionsavgiften. Krävs {amount} {symbol}",

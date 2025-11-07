@@ -11,7 +11,7 @@ export function createApp({ App, router }) {
   defineAppProperty(app, '$showRampsAndExchangeAndStaking', import.meta.env.VITE_DISTRIBUTION !== 'android-huawei');
   defineAppProperty(app, '$safeOpen', safeOpen);
   defineAppProperty(app, '$tBrackets', (str) => {
-    return str.match(/\[(.+?)\]/g)?.map(s => s.slice(1, -1));
+    return str.match(/\(\((.+?)\)\)/g)?.map(s => s.slice(2, -2));
   });
   defineAppProperty(app, '$c', function(value, style = 'currency', options = {}) {
     if (!value) {

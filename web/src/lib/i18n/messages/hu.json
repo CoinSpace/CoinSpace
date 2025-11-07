@@ -110,7 +110,7 @@
   "High security": "Szigorú biztonság",
   "History": "Előzmények",
   "How it works?": "Hogyan működik?",
-  "I agree to the {terms}[Terms of Service]": "A {terms}[Felhasználási Feltételekkel] egyetértek",
+  "I agree to the {terms}((Terms of Service))": "A {terms}((Felhasználási Feltételekkel)) egyetértek",
   "I have written down or otherwise securely stored my passphrase": "Leírtam vagy más módon biztonságosan elmentettem a jelszóként használt kifejezésem",
   "Info": "Info",
   "Insufficient funds to pay the transaction fee. Required {amount} {symbol}": "Nincs elegendő fedezet a tranzakciós díj kifizetéséhez. Szükséges {amount} {symbol}",
