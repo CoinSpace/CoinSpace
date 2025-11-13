@@ -58,8 +58,8 @@ export default {
       keys: ['crypto.name', 'crypto.symbol', 'crypto.address', 'crypto._id'],
       threshold: 0.5,
     });
-    if (this.$route.params.cryptoId && !alreadyAdded.includes(this.$route.params.cryptoId)) {
-      const crypto = this.$account.cryptoDB.get(this.$route.params.cryptoId);
+    if (this.$route.query.cryptoId && !alreadyAdded.includes(this.$route.query.cryptoId)) {
+      const crypto = this.$account.cryptoDB.get(this.$route.query.cryptoId);
       if (crypto) {
         const platform = this.$account.cryptoDB.platform(crypto.platform);
         showModal = true;
@@ -206,7 +206,7 @@ export default {
       :title="selected?.crypto?.type === 'coin' ? $t('Add coin') : $t('Add token')"
       @close="showModal = false"
     >
-      <div v-if="$route.params.cryptoId">
+      <div v-if="$route.query.cryptoId">
         {{ $t('Do you want to add {crypto} to your wallet?', {
           crypto: selected.crypto.name,
         }) }}

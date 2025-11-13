@@ -69,7 +69,17 @@ const app = [
         component: SettingsWalletConnectView,
       }],
     }, {
-      path: `add/${CRYPTO_ID}?`,
+      path: `add/${CRYPTO_ID}`,
+      redirect(to) {
+        return {
+          name: 'crypto.add',
+          params: {},
+          query: { cryptoId: to.params.cryptoId },
+          force: true,
+        };
+      },
+    }, {
+      path: 'add',
       name: 'crypto.add',
       component: CryptoAddView,
     }, {
