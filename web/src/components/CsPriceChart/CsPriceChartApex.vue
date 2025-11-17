@@ -62,6 +62,10 @@ export default {
       ],
     };
   },
+  beforeUnmount() {
+    // prevent destroy for smooth leave animation
+    this.$refs.apex.chart = null;
+  },
   methods: {
     mouseMove(_, __, { dataPointIndex }) {
       this.updateTooltip(true);

@@ -53,6 +53,7 @@ export default {
 
     &__content {
       display: none;
+      overflow: hidden;
       width: 100%;
       background-color: $background-color;
       @include breakpoint(lg) {
