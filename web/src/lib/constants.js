@@ -33,6 +33,7 @@ export const SUPPORTED_PLATFORMS = [
   'cardano',
   'toncoin',
   'sui',
+  'kaspa',
 ];
 
 export const TOKEN_PLATFORMS = [
@@ -84,6 +85,9 @@ export async function loadWalletModule(platform) {
   }
   if (['sui'].includes(platform)) {
     return (await import('@coinspace/cs-sui-wallet')).default;
+  }
+  if (['kaspa'].includes(platform)) {
+    return (await import('@coinspace/cs-kaspa-wallet')).default;
   }
   // fallback
   return CsWallet;
@@ -143,6 +147,8 @@ export function getApiNode(platform, isOnion) {
       return isOnion ? import.meta.env.VITE_API_TON_URL_TOR : import.meta.env.VITE_API_TON_URL;
     case 'sui':
       return isOnion ? import.meta.env.VITE_API_SUI_URL_TOR : import.meta.env.VITE_API_SUI_URL;
+    case 'kaspa':
+      return isOnion ? import.meta.env.VITE_API_KAS_URL_TOR : import.meta.env.VITE_API_KAS_URL;
     default:
       // fallback
       return 'https://unsupported.coin.space/';
