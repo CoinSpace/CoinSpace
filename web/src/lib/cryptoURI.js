@@ -18,7 +18,7 @@ export function parseCryptoURI(uri) {
     } else {
       // BIP 21 etc
       // https://github.com/bitcoin/bips/blob/master/bip-0021.mediawiki
-      data.address = parsed.pathname;
+      data.address = data.scheme === 'kaspa' ? `${data.scheme}:${parsed.pathname}` : parsed.pathname;
       if (parsed.searchParams.has('amount')) {
         data.amount = parsed.searchParams.get('amount');
       }
