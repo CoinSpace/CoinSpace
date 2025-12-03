@@ -213,8 +213,8 @@ export default class BaseExchange {
         method: 'get',
         params: {
           cryptoId: to,
-          address: encodeURIComponent(address),
-          extraId: extraId ? encodeURIComponent(extraId) : undefined,
+          address,
+          extraId,
         },
         seed: 'device',
       });
