@@ -11,7 +11,8 @@ export default {
   extends: CsStep,
   methods: {
     select(address) {
-      this.back({ address });
+      this.updateStorage({ temp: { address } });
+      this.back();
     },
   },
 };
