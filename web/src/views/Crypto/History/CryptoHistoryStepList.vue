@@ -36,7 +36,7 @@ export default {
     },
   },
   async mounted() {
-    this.price = await this.$account.market.getPrice(this.$wallet.crypto._id, this.$currency);
+    this.$account.market.getPrice(this.$wallet.crypto._id, this.$currency).then((price) => this.price = price);
     await this.$loadWallet();
     this.loadMore();
   },
