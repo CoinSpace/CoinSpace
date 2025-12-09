@@ -30,13 +30,13 @@ export default {
           .replace(/[^0-9.]+/g, '')
           .split('.');
         if (fraction === undefined) {
-          this.internalValue = integer;
-        } else if (fraction.length === 0) {
-          this.internalValue = `${integer}.`;
-        } else if (fraction.length <= this.decimals) {
-          this.internalValue = `${integer}.${fraction}`;
+          if (integer === '') {
+            this.internalValue = '';
+          } else {
+            this.internalValue = BigInt(integer || '0').toString(10);
+          }
         } else {
-          this.internalValue = `${integer}.${fraction.slice(0, this.decimals)}`;
+          this.internalValue = `${BigInt(integer || '0').toString(10)}.${fraction.slice(0, this.decimals)}`;
         }
         if (value !== this.internalValue) {
           this.$forceUpdate();
@@ -55,8 +55,7 @@ export default {
       if (!modelValue) {
         this.internalValue = '0';
       } else {
-        const amount = Amount.fromString(this.internalValue, this.decimals);
-        if ((modelValue.value !== amount.value) || this.internalValue === '') {
+        if ((modelValue.value !== Amount.fromString(this.internalValue, this.decimals).value)) {
           this.internalValue = modelValue.toString();
         }
       }
