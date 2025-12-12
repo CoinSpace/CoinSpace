@@ -18,7 +18,12 @@ export default {
         return this.internalValue;
       },
       set(value) {
-        this.internalValue = value.replace(/[^0-9]+/g, '');
+        const integer = value.replace(/[^0-9]+/g, '');
+        if (integer === '') {
+          this.internalValue = '';
+        } else {
+          this.internalValue = BigInt(integer || '0').toString(10);
+        }
         if (value !== this.internalValue) {
           this.$forceUpdate();
         }
@@ -33,11 +38,10 @@ export default {
       }
     },
     modelValue(modelValue) {
-      if (!modelValue) {
+      if (modelValue === undefined) {
         this.internalValue = '0';
       } else {
-        const value = BigInt(this.internalValue);
-        if (modelValue !== value) {
+        if (modelValue !== BigInt(this.internalValue)) {
           this.internalValue = modelValue.toString();
         }
       }

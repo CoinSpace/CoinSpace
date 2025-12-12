@@ -59,7 +59,6 @@ export default {
           this.internalValue = modelValue.toString();
         }
       }
-
     },
   },
 };
