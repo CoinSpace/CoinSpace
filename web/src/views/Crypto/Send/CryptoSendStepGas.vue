@@ -34,8 +34,16 @@ export default {
         this.updateStorage({ gasLimit: this.gasLimit });
         this.next('amount');
       } catch (err) {
-        if (err instanceof EvmErrors.GasLimitError) {
-          this.error = this.$t('Invalid gas limit');
+        if (err instanceof EvmErrors.SmallGasLimitError) {
+          this.error = this.$t('Value is too small, minimum {value}', {
+            value: err.value,
+          });
+          return;
+        }
+        if (err instanceof EvmErrors.BigGasLimitError) {
+          this.error = this.$t('Value is too big, maximum {value}', {
+            value: err.value,
+          });
           return;
         }
         console.error(err);
