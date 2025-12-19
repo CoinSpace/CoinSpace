@@ -32,6 +32,7 @@ function forgeArch(distribution) {
       return 'universal';
     default:
       return 'x64';
+  }
 }
 
 console.log(`Start build (electron:${VITE_DISTRIBUTION})...`);

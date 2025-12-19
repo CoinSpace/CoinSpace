@@ -10,13 +10,13 @@ on:
 
 jobs:
   release:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
       - name: Set app version
         run: echo "VERSION=$(node -p -e "require('./web/package.json').version")" >> $GITHUB_ENV
       - uses: ncipollo/release-action@v1
@@ -55,12 +55,12 @@ jobs:
             * [Tor Wallet (.onion)](https://coinspacezp5mmyuicbz2hoafbnduj4vzkttq3grn5mnwdue5t343zid.onion/wallet/)
 
   lint:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           registry-url: https://npm.pkg.github.com/
       - env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_READ_TOKEN }}
