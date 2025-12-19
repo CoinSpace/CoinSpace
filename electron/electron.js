@@ -1,5 +1,5 @@
+import * as Sentry from '@sentry/electron/main';
 import { fileURLToPath } from 'node:url';
-import { init } from '@sentry/electron';
 import log from 'electron-log';
 import { Menu, app, ipcMain, net, protocol } from 'electron';
 
@@ -52,7 +52,7 @@ if (!isMas && !lock) {
 }
 
 // Init crashReporter
-init({
+Sentry.init({
   dsn: VITE_SENTRY_DSN,
   environment: VITE_SENTRY_ENVIRONMENT,
   release,

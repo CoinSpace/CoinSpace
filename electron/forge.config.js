@@ -202,11 +202,11 @@ export default {
         'mas',
       ],
       config: {
-        name: `${pkg.productName}-${pkg.version}${VITE_DISTRIBUTION === 'mas-dev' ? '-dev': ''}`,
+        name: `${pkg.productName}-${pkg.version}${VITE_DISTRIBUTION === 'mas-dev' ? '-dev' : ''}`,
       },
     },
     VITE_DISTRIBUTION === 'snap' && {
-      name: './support/snap.cjs',
+      name: './support/snap.js',
       config: {
         linux: {
           icon: 'resources/icon.icns',

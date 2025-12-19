@@ -25,8 +25,17 @@ function forgePlatform(distribution) {
   }
 }
 
+function forgeArch(distribution) {
+  switch (distribution) {
+    case 'mas':
+    case 'mas-dev':
+      return 'universal';
+    default:
+      return 'x64';
+}
+
 console.log(`Start build (electron:${VITE_DISTRIBUTION})...`);
-execSync(`npm run publish -- --platform=${forgePlatform(VITE_DISTRIBUTION)} --arch=x64`, {
+execSync(`npm run publish -- --platform=${forgePlatform(VITE_DISTRIBUTION)} --arch=${forgeArch(VITE_DISTRIBUTION)}`, {
   stdio: [0, 1, 2],
 });
 console.log(`Done build  (electron:${VITE_DISTRIBUTION})`);

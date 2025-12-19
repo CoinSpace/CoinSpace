@@ -86,50 +86,50 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: macos-14
-            node: 20
+          - os: macos-15
+            node: 22
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: mac
             VITE_DISTRIBUTION: mac
             SENTRY_DSN_KEY: SENTRY_DSN_MAC
             SENTRY_PROJECT: mac
-          - os: macos-14
-            node: 20
+          - os: macos-15
+            node: 22
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: mac
             VITE_DISTRIBUTION: mas
             SENTRY_DSN_KEY: SENTRY_DSN_MAS
             SENTRY_PROJECT: mas
-          - os: macos-14
-            node: 20
+          - os: macos-15
+            node: 22
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: mac
             VITE_DISTRIBUTION: mas-dev
             SENTRY_DSN_KEY: SENTRY_DSN_MAS
             SENTRY_PROJECT: mas
-          - os: ubuntu-22.04
-            node: 20
+          - os: ubuntu-24.04
+            node: 22
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: linux
             VITE_DISTRIBUTION: snap
             SENTRY_DSN_KEY: SENTRY_DSN_SNAP
             SENTRY_PROJECT: linux
-          - os: ubuntu-22.04
-            node: 20
+          - os: ubuntu-24.04
+            node: 22
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: linux
             VITE_DISTRIBUTION: flatpak
             SENTRY_DSN_KEY: SENTRY_DSN_SNAP
             SENTRY_PROJECT: linux
           - os: windows-2022
-            node: 20
+            node: 22
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: win
             VITE_DISTRIBUTION: appx
             SENTRY_DSN_KEY: SENTRY_DSN_WIN
             SENTRY_PROJECT: win
           - os: windows-2022
-            node: 20
+            node: 22
             VITE_BUILD_TYPE: electron
             VITE_PLATFORM: win
             VITE_DISTRIBUTION: appx-dev

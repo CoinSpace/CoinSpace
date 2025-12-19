@@ -23,46 +23,28 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint . --ext .js --report-unused-disable-directives",
+    "lint": "eslint --report-unused-disable-directives .",
     "clean": "rm -rf ./dist && rm -rf ./out"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^7.6.1",
-    "@electron-forge/maker-appx": "^7.6.1",
-    "@electron-forge/maker-base": "^7.6.1",
-    "@electron-forge/maker-dmg": "^7.6.1",
-    "@electron-forge/maker-flatpak": "^7.6.1",
-    "@electron-forge/maker-pkg": "^7.6.1",
-    "@electron-forge/maker-zip": "^7.6.1",
-    "@electron-forge/publisher-gcs": "^7.6.1",
-    "@electron-forge/publisher-github": "^7.6.1",
-    "@electron/osx-sign": "^1.3.0",
-    "app-builder-lib": "^25.1.8",
+    "@electron-forge/cli": "^7.10.2",
+    "@electron-forge/maker-appx": "^7.10.2",
+    "@electron-forge/maker-base": "^7.10.2",
+    "@electron-forge/maker-dmg": "^7.10.2",
+    "@electron-forge/maker-flatpak": "^7.10.2",
+    "@electron-forge/maker-pkg": "^7.10.2",
+    "@electron-forge/maker-zip": "^7.10.2",
+    "@electron-forge/publisher-gcs": "^7.10.2",
+    "@electron-forge/publisher-github": "^7.10.2",
+    "app-builder-lib": "^26.0.12",
     "ejs": "^3.1.9",
-    "electron": "^34.0.2",
+    "electron": "^38.7.2",
     "electron-packager-languages": "^0.6.0",
-    "eslint": "^8.49.0",
-    "eslint-config-coinspace": "^2.1.1"
+    "eslint": "^9.39.2",
+    "eslint-config-coinspace": "^3.0.1"
   },
   "dependencies": {
-    "@sentry/electron": "^4.11.0",
+    "@sentry/electron": "^7.5.0",
     "electron-log": "^5.0.0"
-  },
-  "eslintConfig": {
-    "root": true,
-    "ignorePatterns": [
-      "/dist"
-    ],
-    "extends": [
-      "eslint:recommended",
-      "coinspace"
-    ],
-    "env": {
-      "node": true
-    },
-    "parserOptions": {
-      "requireConfigFile": false,
-      "sourceType": "module"
-    }
   }
 }

@@ -1,11 +1,7 @@
-/* eslint-disable filenames/match-exported */
-/* eslint-disable strict */
-'use strict';
+import { MakerBase } from '@electron-forge/maker-base';
+import path from 'path';
 
-const path = require('path');
-const { MakerBase } = require('@electron-forge/maker-base');
-
-class MakerSnap extends MakerBase {
+export default class MakerSnap extends MakerBase {
   constructor(...args) {
     super(...args);
 
@@ -19,7 +15,7 @@ class MakerSnap extends MakerBase {
   }
 
   async make({ dir, makeDir, targetArch }) {
-    const { build } = require('app-builder-lib');
+    const { build } = await import('app-builder-lib');
 
     const outPath = path.resolve(makeDir, 'snap', targetArch);
 
@@ -38,5 +34,3 @@ class MakerSnap extends MakerBase {
     });
   }
 }
-
-module.exports = MakerSnap;
