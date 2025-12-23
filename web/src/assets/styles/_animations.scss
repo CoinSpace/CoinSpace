@@ -59,17 +59,17 @@
 }
 
 .modal {
-  &-transition-enter-active {
+  &-enter-active {
     transition: all 0.2s ease-in;
   }
 
-  &-transition-enter-from,
-  &-transition-leave-to {
+  &-enter-from,
+  &-leave-to {
     opacity: 0;
     transform: scale(1.1);
   }
 
-  &-transition-leave-active {
+  &-leave-active {
     transition: all 0.1s ease-out;
   }
 }
