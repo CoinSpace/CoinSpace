@@ -50,9 +50,9 @@ export default {
           console.error(err);
         }
       }
-      if (route.query.dt && this.$wallet.crypto._id === 'xrp@ripple') {
+      if (route.query.destinationTag && this.$wallet.crypto._id === 'xrp@ripple') {
         temp.meta = {
-          destinationTag: route.query.dt,
+          destinationTag: route.query.destinationTag,
         };
       }
       return temp;
