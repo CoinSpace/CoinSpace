@@ -38,7 +38,7 @@ router.beforeEach((to, from) => {
     return { name: 'auth', replace: true };
   }
   if (to.meta.requiresAuth && $account.isLocked) {
-    return { name: 'unlock', replace: true, force: true };
+    return { name: 'unlock', replace: true };
   }
   if (to.meta.crypto) {
     const wallet = $account.wallet(to.params.cryptoId);
@@ -48,7 +48,7 @@ router.beforeEach((to, from) => {
     } else {
       const crypto = $account.cryptoDB.get(to.params.cryptoId);
       if (crypto?.supported && !crypto?.deprecated) {
-        return { name: 'crypto.add', replace: true, params: { cryptoId: to.params.cryptoId } };
+        return { name: 'crypto.add', replace: true, query: { cryptoId: to.params.cryptoId } };
       } else {
         return { name: 'home', replace: true };
       }
@@ -58,6 +58,9 @@ router.beforeEach((to, from) => {
   const fromDepth = from.path.split('/').length;
   if (toDepth !== fromDepth) {
     to.meta.transition = toDepth > fromDepth ? 'slide-left' : 'slide-right';
+  }
+  if (to.name === from.name) {
+    to.meta.ts = Date.now();
   }
 });
 

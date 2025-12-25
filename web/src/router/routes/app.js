@@ -75,7 +75,6 @@ const app = [
           name: 'crypto.add',
           params: {},
           query: { cryptoId: to.params.cryptoId },
-          force: true,
         };
       },
     }, {
@@ -134,10 +133,7 @@ const app = [
         {
           path: 'exchange',
           name: 'crypto.exchange',
-          redirect: {
-            name: 'crypto.swap',
-            force: true,
-          },
+          redirect: { name: 'crypto.swap' },
         },
         {
           path: 'swap',
@@ -178,16 +174,12 @@ const app = [
               params: {
                 cryptoId: crypto._id,
               },
-              force: true,
             };
           }
         } catch (err) {
           console.error(err);
         }
-        return {
-          name: 'home',
-          force: true,
-        };
+        return { name: 'home' };
       },
     }],
     meta: { requiresAuth: true },
@@ -199,10 +191,7 @@ const app = [
         window.close();
         return 'notfound';
       }
-      return {
-        name: 'settings.walletconnect',
-        force: true,
-      };
+      return { name: 'settings.walletconnect' };
     },
   },
   {

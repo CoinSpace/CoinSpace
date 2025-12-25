@@ -17,14 +17,9 @@ export default {
     CsSteps,
   },
   mixins: [onShowOnHide],
-  beforeRouteUpdate(to) {
-    this.storage.uri = to.query.uri;
-    this.stepsKey++;
-  },
   data() {
     return {
       storage: { uri: this.$route.query.uri },
-      stepsKey: 0,
     };
   },
   async onShow() {
@@ -56,7 +51,6 @@ export default {
 
 <template>
   <CsSteps
-    :key="stepsKey"
     :steps="$options.steps"
     :initialStorage="storage"
   />

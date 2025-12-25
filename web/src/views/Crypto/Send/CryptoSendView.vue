@@ -19,14 +19,9 @@ export default {
   components: {
     CsSteps,
   },
-  beforeRouteUpdate(to) {
-    this.storage.temp = this.parseQuery(to);
-    this.stepsKey++;
-  },
   data() {
     return {
       storage: { temp: this.parseQuery(this.$route) },
-      stepsKey: 0,
     };
   },
   steps: {
@@ -68,7 +63,6 @@ export default {
 
 <template>
   <CsSteps
-    :key="stepsKey"
     :steps="$options.steps"
     :initialStorage="storage"
   />

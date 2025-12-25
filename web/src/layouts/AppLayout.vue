@@ -26,7 +26,7 @@ export default {
         >
           <component
             :is="Component"
-            :key="route.path"
+            :key="route.path + route.meta.ts"
           />
         </transition>
       </RouterView>
