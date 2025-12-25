@@ -24,8 +24,6 @@ import {
   isQrScanAvailable,
 } from '../../../lib/helpers.js';
 
-import debounce from 'p-debounce';
-
 export default {
   components: {
     MainLayout,
@@ -50,7 +48,7 @@ export default {
     }
     if (this.storage.temp?.address) {
       this.error = undefined;
-      this.addressOrAlias = this.storage.temp.address;
+      this.address = this.storage.temp.address;
       this.storage.temp.address = undefined;
     }
     this.isQrScanAvailable = await isQrScanAvailable();
@@ -59,10 +57,7 @@ export default {
     return {
       isLoading: false,
       isUnaliasSupported: this.$account.wallet(this.storage.to.crypto._id)?.isUnaliasSupported,
-      addressOrAlias: '',
       address: this.storage.address,
-      alias: undefined,
-      extraId: undefined,
       isQrScanAvailable: false,
       isPasteAvailable: typeof navigator.clipboard?.readText === 'function',
       ownWallet: this.storage.address === 'your wallet',
@@ -70,37 +65,12 @@ export default {
       error: undefined,
     };
   },
-  watch: {
-    addressOrAlias: debounce(async function(value) {
-      if (this.isUnaliasSupported) {
-        this.isLoading = true;
-        const data = await this.$account.wallet(this.storage.to.crypto._id).unalias(value);
-        if (data) {
-          this.address = data.address;
-          this.alias = data.alias;
-          if (this.storage.to.crypto.platform === 'ripple') {
-            this.extraId = data.destinationTag;
-          }
-        } else {
-          this.address = value;
-          this.alias = undefined;
-          if (this.storage.to.crypto.platform === 'ripple') {
-            this.extraId = undefined;
-          }
-        }
-        this.isLoading = false;
-      } else {
-        this.address = value;
-      }
-    }, 300),
-  },
   methods: {
     switchWallet() {
       if (this.ownWallet) {
         this.ownWallet = false;
         this.address = undefined;
         this.error = undefined;
-        this.addressOrAlias = '';
       } else {
         this.ownWallet = true;
         this.address = 'your wallet';
@@ -112,19 +82,33 @@ export default {
       } else {
         this.isLoading = true;
         this.error = undefined;
+        let { address } = this;
+        let alias;
+        let extraId;
         try {
+          if (this.isUnaliasSupported) {
+            const data = await this.$account.wallet(this.storage.to.crypto._id).unalias(address);
+            if (data) {
+              ({ address } = data);
+              ({ alias } = data);
+              if (this.storage.to.crypto.platform === 'ripple') {
+                extraId = data.destinationTag;
+              }
+            }
+          }
+
           await this.$account.exchanges.validateAddress({
             to: this.storage.to.crypto._id,
-            address: this.address,
-            extraId: this.extraId,
+            address,
+            extraId,
             provider: this.storage.provider,
           });
           this.updateStorage({
-            address: this.address,
-            alias: this.alias,
-            extraId: this.extraId,
+            address,
+            alias,
+            extraId,
           });
-          if (BaseExchange.EXTRA_ID.includes(this.storage.to.crypto._id) && this.extraId === undefined) {
+          if (BaseExchange.EXTRA_ID.includes(this.storage.to.crypto._id) && extraId === undefined) {
             this.next('meta');
           } else {
             this.next('confirm');
@@ -148,7 +132,7 @@ export default {
       navigator.clipboard.readText()
         .then((text) => {
           this.error = undefined;
-          this.addressOrAlias = text;
+          this.address = text;
         }, () => {});
     },
   },
@@ -188,7 +172,7 @@ export default {
       </CsFormTextareaReadonly>
       <CsFormInput
         v-if="!ownWallet"
-        v-model="addressOrAlias"
+        v-model="address"
         :label="$t('Wallet address')"
         :error="error"
         :clear="true"
