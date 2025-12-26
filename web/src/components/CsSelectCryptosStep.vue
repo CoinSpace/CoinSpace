@@ -32,17 +32,20 @@ export default {
         }
       }
     }
+    const ids = new Set();
     return {
       isLoading: false,
-      cryptos: cryptos.map((crypto) => {
-        const platform = this.$account.cryptoDB.platform(crypto.platform);
-        return {
-          title: crypto.name,
-          subtitle: cryptoSubtitleWithSymbol({ crypto, platform }),
-          crypto,
-          platform,
-        };
-      }),
+      cryptos: cryptos
+        .filter((crypto) => ids.has(crypto._id) ? false : !!ids.add(crypto._id))
+        .map((crypto) => {
+          const platform = this.$account.cryptoDB.platform(crypto.platform);
+          return {
+            title: crypto.name,
+            subtitle: cryptoSubtitleWithSymbol({ crypto, platform }),
+            crypto,
+            platform,
+          };
+        }),
       selected,
       type,
     };
