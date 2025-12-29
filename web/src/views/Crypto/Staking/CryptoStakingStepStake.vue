@@ -98,6 +98,13 @@ export default {
         });
         return;
       }
+      if (err instanceof errors.InsufficientCoinForTransactionFeeError) {
+        this.error = this.$t('Insufficient funds to pay the transaction fee. Required {amount} {symbol}', {
+          amount: err.amount,
+          symbol: this.$wallet.platform.symbol,
+        });
+        return;
+      }
       console.error(err);
     },
   },
