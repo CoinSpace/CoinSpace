@@ -80,6 +80,9 @@ export default {
       threshold: 0.5,
     });
   },
+  beforeUnmount() {
+    this.updateStorage({ filterPlatform: undefined });
+  },
   methods: {
     select(id) {
       const crypto = this.$account.cryptoDB.get(id);
