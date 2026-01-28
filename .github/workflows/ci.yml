@@ -244,7 +244,7 @@ jobs:
           echo $GOOGLE_CLOUD_KEY | base64 --decode > gcloud.key.json;
 
           if [[ "$VITE_PLATFORM" == "android" ]]; then
-            echo "/usr/local/lib/android/sdk/build-tools/33.0.2" >> $GITHUB_PATH
+            echo "/usr/local/lib/android/sdk/build-tools/36.1.0" >> $GITHUB_PATH
           elif [[ "$VITE_PLATFORM" == "mac" ]]; then
             echo $CERTIFICATE_MAC | base64 --decode > certificate.p12;
             security create-keychain -p coinspace build.keychain;
