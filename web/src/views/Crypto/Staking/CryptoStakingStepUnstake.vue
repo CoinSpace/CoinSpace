@@ -8,6 +8,7 @@ import {
 import CsButton from '../../../components/CsButton.vue';
 import CsFormAmountInput from '../../../components/CsForm/CsFormAmountInput.vue';
 import CsFormGroup from '../../../components/CsForm/CsFormGroup.vue';
+import CsFormTextareaReadonly from '../../../components/CsForm/CsFormTextareaReadonly.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 
@@ -17,6 +18,7 @@ export default {
     CsFormAmountInput,
     CsButton,
     CsFormGroup,
+    CsFormTextareaReadonly,
   },
   extends: CsStep,
   data() {
@@ -118,6 +120,17 @@ export default {
       >
         {{ $t('max') }}
       </CsButton>
+      <CsFormTextareaReadonly
+        :label="$t('Unstaking period')"
+        :info="$t('Unstaking period')"
+        :value="`~${$duration($wallet.unstakingPeriod)}`"
+      >
+        <template #info>
+          <div>
+            {{ $t('Approximate time before your funds become available for claim.') }}
+          </div>
+        </template>
+      </CsFormTextareaReadonly>
     </CsFormGroup>
 
     <CsButton

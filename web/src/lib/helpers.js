@@ -134,3 +134,28 @@ export function chunks(array, chunkSize) {
   }
   return chunks;
 }
+
+export function formatDuration(seconds, locale, style) {
+  if (seconds <= 0) seconds = 1;
+  const duration = {};
+  const units = [
+    ['days', 86400],
+    ['hours', 3600],
+    ['minutes', 60],
+    ['seconds', 1],
+  ];
+  for (const [unit, size] of units) {
+    const value = Math.floor(seconds / size);
+    if (value || Object.keys(duration).length) {
+      duration[unit] = value;
+    }
+    seconds %= size;
+    if (Object.keys(duration).length === 2) break;
+  }
+  if (Intl.DurationFormat) {
+    return new Intl.DurationFormat(locale, { style }).format(duration);
+  }
+  return Object.entries(duration)
+    .map(([unit, value]) => value + unit[0])
+    .join(' ');
+}

@@ -1,7 +1,7 @@
 import { createApp as createVueApp } from 'vue';
 import { utils } from '@coinspace/cs-common';
 
-import { defineAppProperty, safeOpen } from './helpers.js';
+import { defineAppProperty, formatDuration, safeOpen } from './helpers.js';
 
 export function createApp({ App, router }) {
   const app = createVueApp(App);
@@ -23,6 +23,9 @@ export function createApp({ App, router }) {
       currency: this.$currency,
       ...options,
     });
+  });
+  defineAppProperty(app, '$duration', function(seconds, style = 'long') {
+    return formatDuration(seconds, this.$i18n.locale, style);
   });
 
   return app;

@@ -8,6 +8,7 @@ import {
 import CsButton from '../../../components/CsButton.vue';
 import CsFormAmountInput from '../../../components/CsForm/CsFormAmountInput.vue';
 import CsFormGroup from '../../../components/CsForm/CsFormGroup.vue';
+import CsFormTextareaReadonly from '../../../components/CsForm/CsFormTextareaReadonly.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 
@@ -19,6 +20,7 @@ export default {
     CsFormAmountInput,
     CsButton,
     CsFormGroup,
+    CsFormTextareaReadonly,
   },
   extends: CsStep,
   mixins: [onShowOnHide],
@@ -135,6 +137,17 @@ export default {
       >
         {{ $t('max') }}
       </CsButton>
+      <CsFormTextareaReadonly
+        :label="$t('Activation period')"
+        :info="$t('Activation period')"
+        :value="`~${$duration($wallet.activationPeriod)}`"
+      >
+        <template #info>
+          <div>
+            {{ $t('Approximate time required for your stake to become active and start earning rewards.') }}
+          </div>
+        </template>
+      </CsFormTextareaReadonly>
     </CsFormGroup>
 
     <CsButton
