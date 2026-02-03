@@ -10,9 +10,6 @@ export default {
   extends: CsStep,
   mixins: [onShowOnHide],
   onShow() {
-    if (this.storage.status && ['ios', 'android-play'].includes(this.env.VITE_DISTRIBUTION)) {
-      window.cordova.plugins.AppReview.requestReview().catch(() => {});
-    }
     if (this.storage.status === false) {
       this.$wallet.state = this.$STATE_ERROR;
     }

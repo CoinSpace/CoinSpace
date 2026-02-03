@@ -40,6 +40,9 @@ await Promise.all([
   db.collection('cache').createIndexes([
     { key: { expire: 1 }, background: true, expireAfterSeconds: 0 },
   ]),
+  db.collection('invitations').createIndexes([
+    { key: { timestamp: 1 }, background: true, expireAfterSeconds: 60 * 60 * 24 * 365 }, // 1 month
+  ]),
 ]);
 
 export function dbMemoize(target, { key, ttl }) {

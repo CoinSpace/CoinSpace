@@ -681,7 +681,6 @@ export default class Account extends EventEmitter {
     }
   }
 
-
   async #migrateV5Balance(wallet) {
     if (!this.#needToMigrateV5Balance) return;
     try {
@@ -703,6 +702,23 @@ export default class Account extends EventEmitter {
       });
     }
     return this.#walletConnect;
+  }
+
+  async getInvitationStatus() {
+    return this.request({
+      url: '/api/v4/invitation',
+      method: 'get',
+      seed: this.#deviceSeed,
+    });
+  }
+
+  async sendInvitation(email) {
+    return this.request({
+      url: '/api/v4/invitation',
+      method: 'post',
+      seed: this.#deviceSeed,
+      data: { email },
+    });
   }
 
   unknownError() {

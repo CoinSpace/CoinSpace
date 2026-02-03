@@ -7,6 +7,7 @@ import domain from '../domain.js';
 import exchanges from '../exchanges/index.js';
 import fee from '../fee.js';
 import github from '../github.js';
+import invitations from '../invitations.js';
 import mecto from '../mecto.js';
 import ramps from '../ramps/index.js';
 import storage from '../storage.js';
@@ -346,4 +347,14 @@ export async function getDomainAddress(req, res) {
 
 export async function getCountry(req, res) {
   res.status(200).send({ country: req.get('x-client-country') || 'ZZ' });
+}
+
+export async function getInvitationStatus(req, res) {
+  const status = await invitations.status();
+  res.status(200).send(status);
+}
+
+export async function sendInvitation(req, res) {
+  await invitations.send(req.body.email);
+  res.status(200).send({ success: true });
 }

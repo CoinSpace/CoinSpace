@@ -424,6 +424,49 @@ paths:
                 $ref: '#/components/schemas/FeeList'
         default:
           $ref: '#/components/responses/GeneralError'
+  /invitation:
+    get:
+      x-eov-operation-id: getInvitationStatus
+      x-eov-operation-handler: handlers
+      description: Get invitation status
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Status
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  enabled:
+                    type: boolean
+                required:
+                  - enabled
+        default:
+          $ref: '#/components/responses/GeneralError'
+    post:
+      x-eov-operation-id: sendInvitation
+      x-eov-operation-handler: handlers
+      description: Send invitation
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      security:
+        - deviceSignature: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailObject'
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
+        default:
+          $ref: '#/components/responses/GeneralError'
   /market:
     get:
       x-eov-operation-id: getMarket
@@ -1083,6 +1126,17 @@ components:
       type: string
       pattern: ^.+\..+$
       maxLength: 256
+    Email:
+      type: string
+      format: email
+    EmailObject:
+      type: object
+      additionalProperties: false
+      properties:
+        email:
+          $ref: '#/components/schemas/Email'
+      required:
+        - email
     ExchangeName:
       type: string
       pattern: ^[a-z0-9-]+$

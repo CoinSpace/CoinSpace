@@ -45,6 +45,7 @@
     "helmet": "^3.21.0",
     "http-errors": "^2.0.0",
     "mongodb": "^3.1.10",
+    "nodemailer": "^7.0.13",
     "p-forever": "^3.0.1",
     "p-memoize": "^7.1.1",
     "semver": "^7.3.2"
