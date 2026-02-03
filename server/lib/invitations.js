@@ -1,5 +1,4 @@
 import crypto from 'node:crypto';
-import fs from 'node:fs';
 import nodemailer from 'nodemailer';
 
 import db from './db.js';
@@ -10,7 +9,7 @@ const LIMIT = parseInt(process.env.INVITATIONS_LIMIT) || 300;
 const { GOOGLE_APPLICATION_CREDENTIALS, TRUSTPILOT_AFS_EMAIL } = process.env;
 let transporter;
 if (GOOGLE_APPLICATION_CREDENTIALS && TRUSTPILOT_AFS_EMAIL) {
-  const key = JSON.parse(fs.readFileSync(GOOGLE_APPLICATION_CREDENTIALS));
+  const key = JSON.parse(GOOGLE_APPLICATION_CREDENTIALS);
   transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
