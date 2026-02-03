@@ -29,22 +29,6 @@ export default {
       errors: {},
     };
   },
-  watch: {
-    username(username) {
-      if (username === undefined || isValidUsername(username)) {
-        this.errors.username = undefined;
-      } else {
-        this.errors.username = this.$t('Invalid username');
-      }
-    },
-    email(email) {
-      if (!email || isValidEmail(email)) {
-        this.errors.email = undefined;
-      } else {
-        this.errors.email = this.$t('Invalid email');
-      }
-    },
-  },
   methods: {
     async save() {
       if (!isValidUsername(this.username)) {
@@ -89,11 +73,15 @@ export default {
         v-model="username"
         :error="errors.username"
         :label="$t('Your username')"
+        :clear="true"
+        @update:modelValue="errors.username = undefined"
       />
       <CsFormInput
         v-model="email"
         :error="errors.email"
         :label="$t('Gravatar email')"
+        :clear="true"
+        @update:modelValue="errors.email = undefined"
       />
       <div class="&__note">
         <!-- eslint-disable-next-line max-len -->

@@ -23,15 +23,6 @@ export default {
       errors: {},
     };
   },
-  watch: {
-    username(username) {
-      if (username === undefined || isValidUsername(username)) {
-        this.errors.username = undefined;
-      } else {
-        this.errors.username = this.$t('Invalid username');
-      }
-    },
-  },
   methods: {
     async save() {
       if (!isValidUsername(this.username)) {
@@ -74,6 +65,7 @@ export default {
         :label="$t('Your username')"
         :error="errors.username"
         :clear="true"
+        @update:modelValue="errors.username = undefined"
       />
     </CsFormGroup>
     <CsButton
