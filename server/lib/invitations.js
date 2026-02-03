@@ -6,10 +6,10 @@ import db from './db.js';
 const COLLECTION = 'invitations';
 const LIMIT = parseInt(process.env.INVITATIONS_LIMIT) || 300;
 
-const { GOOGLE_APPLICATION_CREDENTIALS, TRUSTPILOT_AFS_EMAIL } = process.env;
+const { GMAIL_CREDENTIALS, TRUSTPILOT_AFS_EMAIL } = process.env;
 let transporter;
-if (GOOGLE_APPLICATION_CREDENTIALS && TRUSTPILOT_AFS_EMAIL) {
-  const key = JSON.parse(GOOGLE_APPLICATION_CREDENTIALS);
+if (GMAIL_CREDENTIALS && TRUSTPILOT_AFS_EMAIL) {
+  const key = JSON.parse(GMAIL_CREDENTIALS);
   transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
