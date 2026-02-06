@@ -117,7 +117,7 @@ const platforms = [{
   arch: 'any',
   app: 'app',
   type: TYPE_LINK,
-  pattern: /galaxy\.store\/coinapp/ig,
+  pattern: /galaxystore\.samsung\.com\/detail\/com\.coinspace\.app/ig,
   link: 'https://galaxy.store/coinapp',
 }, {
   // Android AppGallery app
