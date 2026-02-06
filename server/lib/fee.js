@@ -11,18 +11,10 @@ const API = {
 };
 const CRYPTO = Object.keys(API);
 
-function coinPerKilobyte2satPerByte(bitcoinPerKilobyte) {
-  return Math.max(Math.round(bitcoinPerKilobyte * 1e8 / 1e3), 1);
-}
-
 async function estimatefee(cryptoId) {
   const api = API[cryptoId];
   try {
-    return {
-      minimum: coinPerKilobyte2satPerByte((await axios.get(`${api}estimatefee?target=12`)).data),
-      default: coinPerKilobyte2satPerByte((await axios.get(`${api}estimatefee?target=6`)).data),
-      fastest: coinPerKilobyte2satPerByte((await axios.get(`${api}estimatefee?target=2`)).data),
-    };
+    return (await axios.get(`${api}fees`)).data;
   } catch (err) {
     console.log(`${cryptoId} estimatefee:`, err.message);
     return null;
@@ -62,24 +54,7 @@ async function getFees(cryptoId) {
   if (!fees) {
     throw createError(404, 'Coin fee was not found');
   }
-  const items = [{
-    name: 'default',
-    value: fees.fee.default,
-    default: true,
-  }];
-  if (fees.fee.minimum !== fees.fee.default) {
-    items.unshift({
-      name: 'minimum',
-      value: fees.fee.minimum,
-    });
-  }
-  if (fees.fee.fastest !== fees.fee.default) {
-    items.push({
-      name: 'fastest',
-      value: fees.fee.fastest,
-    });
-  }
-  return { items };
+  return { items: fees.fee };
 }
 
 export default {

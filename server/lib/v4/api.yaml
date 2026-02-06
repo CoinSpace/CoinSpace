@@ -1194,8 +1194,6 @@ components:
           maxLength: 64
         value:
           $ref: '#/components/schemas/UInt64'
-        default:
-          type: boolean
       required:
         - name
         - value
