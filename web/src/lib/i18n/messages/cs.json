@@ -289,7 +289,7 @@
   "Transaction failed": "Transakce selhala",
   "Transaction has already been accepted": "Tato transakce už byla přijata",
   "Transaction has been expired. Please try again.": "Vypršela doba na tuto transakci. Zkuste to prosím znovu.",
-  "Transaction key": "",
+  "Transaction key": "Klíč transakce",
   "Transaction not found or has less than 10 confirmations. Please wait 20 minutes and try again.": "Transakce nebyla nalezena nebo má méně než 10 potvrzení. Počkejte prosím 20 minut a zkuste to znovu.",
   "Transaction speed": "Rychlost transakce",
   "Transaction successful": "Transakce byla úspěšná",

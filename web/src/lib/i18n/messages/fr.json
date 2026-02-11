@@ -289,7 +289,7 @@
   "Transaction failed": "Échec de la transaction",
   "Transaction has already been accepted": "La transaction a déjà été acceptée",
   "Transaction has been expired. Please try again.": "La transaction a expiré. Veuillez réessayer.",
-  "Transaction key": "",
+  "Transaction key": "Clé de transaction",
   "Transaction not found or has less than 10 confirmations. Please wait 20 minutes and try again.": "Transaction introuvable ou ayant moins de 10 confirmations. Veuillez attendre 20 minutes et réessayer.",
   "Transaction speed": "Vitesse de transaction",
   "Transaction successful": "La transaction a réussi",

@@ -289,7 +289,7 @@
   "Transaction failed": "Transactie mislukt",
   "Transaction has already been accepted": "Transactie is al geaccepteerd",
   "Transaction has been expired. Please try again.": "De transactie is verlopen. Probeer het opnieuw.",
-  "Transaction key": "",
+  "Transaction key": "Transactiesleutel",
   "Transaction not found or has less than 10 confirmations. Please wait 20 minutes and try again.": "Transactie niet gevonden of heeft minder dan 10 bevestigingen. Wacht 20 minuten en probeer het opnieuw.",
   "Transaction speed": "Transactiesnelheid",
   "Transaction successful": "Transactie is gelukt",

@@ -289,7 +289,7 @@
   "Transaction failed": "Транзакція не пройшла",
   "Transaction has already been accepted": "Транзакцію вже прийнято.",
   "Transaction has been expired. Please try again.": "Час відведений на транзакцію вичерпано, спробуйте ще раз.",
-  "Transaction key": "",
+  "Transaction key": "Ключ транзакції",
   "Transaction not found or has less than 10 confirmations. Please wait 20 minutes and try again.": "Трансакцію не знайдена, або вона має менше 10 підтверджень. Зачекайте 20 хвилин і повторіть спробу.",
   "Transaction speed": "Швидкість транзакції",
   "Transaction successful": "Транзакція пройшла успішно",
