@@ -289,6 +289,7 @@
   "Transaction failed": "การทำธุรกรรมผิดพลาด",
   "Transaction has already been accepted": "การทำธุรกรรมนี้ได้รับการยอมรับแล้ว",
   "Transaction has been expired. Please try again.": "การทำธุรกรรมหมดอายุแล้ว โปรดลองอีกครั้ง",
+  "Transaction key": "",
   "Transaction not found or has less than 10 confirmations. Please wait 20 minutes and try again.": "ไม่พบการทำธุรกรรมหรือได้รับการยืนยันต่ำกว่า 10 ครั้ง โปรดรอ 20 นาทีแล้วลองอีกครั้ง",
   "Transaction speed": "ความเร็วในการทำธุรกรรม",
   "Transaction successful": "การทำธุรกรรมเรียบร้อยแล้ว",

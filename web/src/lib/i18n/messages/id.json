@@ -289,6 +289,7 @@
   "Transaction failed": "Transaksi gagal",
   "Transaction has already been accepted": "Transaksi sudah diterima",
   "Transaction has been expired. Please try again.": "Transaksi telah melebihi batas waktu. Silahkan coba lagi.",
+  "Transaction key": "",
   "Transaction not found or has less than 10 confirmations. Please wait 20 minutes and try again.": "Transaksi tidak ditemukan atau memiliki kurang dari 10 konfirmasi. Silakan tunggu 20 menit dan coba lagi.",
   "Transaction speed": "Kecepatan transaksi",
   "Transaction successful": "Transaksi Berhasil",

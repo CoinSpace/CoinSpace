@@ -237,6 +237,11 @@ export default {
           + `${['ethereum@optimism', 'ethereum@base'].includes($wallet.platform._id) ? ' + L1' : ''}`"
       />
       <CsFormTextareaReadonly
+        v-if="transaction.meta?.txKey"
+        :label="$t('Transaction key')"
+        :value="transaction.meta.txKey"
+      />
+      <CsFormTextareaReadonly
         :label="$t('Transaction ID')"
         :value="transaction.id"
       />

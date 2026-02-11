@@ -289,6 +289,7 @@
   "Transaction failed": "Transakcija nije uspjela",
   "Transaction has already been accepted": "Transakcija je već prihvaćena",
   "Transaction has been expired. Please try again.": "Transakcija je istekla. Molimo pokušajte ponovo kasnije.",
+  "Transaction key": "",
   "Transaction not found or has less than 10 confirmations. Please wait 20 minutes and try again.": "Transakcija nije pronađena ili ima manje od 10 potvrda. Molimo Vas da pričekate 20 minuta i pokušate ponovno.",
   "Transaction speed": "Brzina transakcije",
   "Transaction successful": "Uspješna transakcija",

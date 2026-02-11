@@ -289,6 +289,7 @@
   "Transaction failed": "Nabigo ang transaksiyon",
   "Transaction has already been accepted": "Tinanggap na ang transaksiyon",
   "Transaction has been expired. Please try again.": "Napaso na ang transaksiyon. Pakisubukan muli.",
+  "Transaction key": "",
   "Transaction not found or has less than 10 confirmations. Please wait 20 minutes and try again.": "Hindi nakita ang transaksiyon o wala pang 10 na kumpirmasyon. Maghintay ng 20 minuto at subukang muli.",
   "Transaction speed": "Bilis ng transaksiyon",
   "Transaction successful": "Matagumpay ang transaksiyon",

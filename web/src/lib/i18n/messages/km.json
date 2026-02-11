@@ -289,6 +289,7 @@
   "Transaction failed": "ប្រតិបត្តិការបានបរាជ័យ",
   "Transaction has already been accepted": "ប្រតិបត្តិការត្រូវបានទទួល",
   "Transaction has been expired. Please try again.": "ប្រតិបត្តិការត្រូវបានផុតកំណត់។  សូមព្យាយាមម្តងទៀត។",
+  "Transaction key": "",
   "Transaction not found or has less than 10 confirmations. Please wait 20 minutes and try again.": "រកមិនឃើញប្រតិបត្តិការ ឬមានការបញ្ជាក់តិចជាង 10 ដង។ សូមរង់ចាំ 20 នាទី ហើយព្យាយាមម្តងទៀត។",
   "Transaction speed": "ល្បឿនប្រតិបត្តិការ",
   "Transaction successful": "ប្រតិបត្តិការជោគជ័យ",

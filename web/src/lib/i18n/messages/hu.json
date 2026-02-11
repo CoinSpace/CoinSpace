@@ -289,6 +289,7 @@
   "Transaction failed": "Tranzakcióhiba",
   "Transaction has already been accepted": "A tranzakció már elfogadásra került",
   "Transaction has been expired. Please try again.": "A tranzakció lejárt. Próbáld újra.",
+  "Transaction key": "",
   "Transaction not found or has less than 10 confirmations. Please wait 20 minutes and try again.": "A tranzakció nem található vagy kevesebb mint 10 megerősítése van. Kérjük, várj 20 percet, és próbáld újra.",
   "Transaction speed": "Tranzakció sebessége",
   "Transaction successful": "Sikeres tranzakció",

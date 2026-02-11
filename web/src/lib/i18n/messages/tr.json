@@ -289,6 +289,7 @@
   "Transaction failed": "İşlem Başarısız",
   "Transaction has already been accepted": "İşlem daha önce kabul edilmiş",
   "Transaction has been expired. Please try again.": "İşlem zaman aşımına uğradı. Lütfen tekrar deneyin.",
+  "Transaction key": "",
   "Transaction not found or has less than 10 confirmations. Please wait 20 minutes and try again.": "İşlem bulunamadı veya 10'dan az onayı var. Lütfen 20 dakika bekleyip tekrar deneyin.",
   "Transaction speed": "İşlem hızı",
   "Transaction successful": "İşlem Başarılı",

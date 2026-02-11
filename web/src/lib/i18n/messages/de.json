@@ -289,6 +289,7 @@
   "Transaction failed": "Die Transaktion ist fehlgeschlagen",
   "Transaction has already been accepted": "Transaktion wurde bereits akzeptiert",
   "Transaction has been expired. Please try again.": "Die Transaktion ist abgelaufen. Bitte versuche es erneut.",
+  "Transaction key": "",
   "Transaction not found or has less than 10 confirmations. Please wait 20 minutes and try again.": "Transaktion nicht gefunden oder hat weniger als 10 Bestätigungen. Bitte warten Sie 20 Minuten und versuchen Sie es erneut.",
   "Transaction speed": "Transaktionsgeschwindigkeit",
   "Transaction successful": "Die Transaktion ist erfolgreich verlaufen",

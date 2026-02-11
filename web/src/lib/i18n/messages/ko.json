@@ -289,6 +289,7 @@
   "Transaction failed": "거래 실패",
   "Transaction has already been accepted": "이미 거래가 수락되었습니다",
   "Transaction has been expired. Please try again.": "거래가 만료되었습니다. 다시 시도해주십시오.",
+  "Transaction key": "",
   "Transaction not found or has less than 10 confirmations. Please wait 20 minutes and try again.": "거래가 없거나 10개 미만의 확인이 있습니다. 20분 후에 다시 시도하십시오.",
   "Transaction speed": "거래 속도",
   "Transaction successful": "거래 성공",

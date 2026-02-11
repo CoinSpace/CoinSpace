@@ -289,6 +289,7 @@
   "Transaction failed": "Transaksjon feilet",
   "Transaction has already been accepted": "Transaksjonen har allerede blitt akseptert",
   "Transaction has been expired. Please try again.": "Transaksjonen har utløpt. Forsøk igjen.",
+  "Transaction key": "",
   "Transaction not found or has less than 10 confirmations. Please wait 20 minutes and try again.": "Transaksjonen ble ikke funnet eller har mindre enn 10 bekreftelser. Vent i 20 minutter og prøv igjen.",
   "Transaction speed": "Transaksjonshastighet",
   "Transaction successful": "Transaksjon gjennomført",

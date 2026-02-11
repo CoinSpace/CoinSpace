@@ -289,6 +289,7 @@
   "Transaction failed": "Giao dịch không thành công",
   "Transaction has already been accepted": "Giao dịch đã được chấp nhận trước đó",
   "Transaction has been expired. Please try again.": "Giao dịch đã hết hạn. Vui lòng thử lại.",
+  "Transaction key": "",
   "Transaction not found or has less than 10 confirmations. Please wait 20 minutes and try again.": "Không tìm thấy giao dịch hoặc có ít hơn 10 xác nhận. Vui lòng đợi 20 phút rồi thử lại.",
   "Transaction speed": "Tốc độ giao dịch",
   "Transaction successful": "Giao dịch thành công",
