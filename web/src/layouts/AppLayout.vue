@@ -46,7 +46,7 @@ export default {
       padding:
         max($spacing-md, env(safe-area-inset-top))
         max($spacing-md, env(safe-area-inset-right))
-        $spacing-md
+        max($spacing-md, env(safe-area-inset-bottom))
         max($spacing-md, env(safe-area-inset-left));
       margin: 0 auto;
     }

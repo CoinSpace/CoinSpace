@@ -11,7 +11,20 @@ export default {
   },
   extends: CsStep,
   mixins: [onShowOnHide, redirectToApp],
+  data() {
+    return {
+      isReady: this.env.VITE_PLATFORM !== 'android',
+    };
+  },
   onShow() {
+    if (this.env.VITE_PLATFORM === 'android') {
+      setTimeout(() => {
+        this.isReady = true;
+        window.systemBars.setStyle('light');
+      }, 500);
+    }
+  },
+  onHide() {
     this.$refs.pin.value = '';
   },
   methods: {
@@ -39,6 +52,7 @@ export default {
     :centered="true"
   >
     <CsPin
+      v-if="isReady"
       ref="pin"
       mode="deviceSeed"
       logoutButton

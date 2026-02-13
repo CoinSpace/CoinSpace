@@ -94,7 +94,7 @@ export default {
       padding:
         max($spacing-md, env(safe-area-inset-top))
         max($spacing-md, env(safe-area-inset-right))
-        $spacing-md
+        max($spacing-md, env(safe-area-inset-bottom))
         max($spacing-md, env(safe-area-inset-left));
       overflow-y: auto;
     }
@@ -135,7 +135,7 @@ export default {
       padding:
         $spacing-3xl
         max($spacing-xl, env(safe-area-inset-right))
-        $spacing-3xl
+        max($spacing-3xl, env(safe-area-inset-bottom))
         max($spacing-xl, env(safe-area-inset-left));
       gap: $spacing-3xl;
       overflow-y: auto;

@@ -121,7 +121,7 @@ export default {
       padding:
         $spacing-3xl
         max($spacing-xl, env(safe-area-inset-right))
-        $spacing-3xl
+        max($spacing-3xl, env(safe-area-inset-bottom))
         max($spacing-xl, env(safe-area-inset-left));
       gap: $spacing-3xl;
       @include breakpoint(lg) {

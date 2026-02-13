@@ -85,6 +85,18 @@ export default async function deviceready() {
     }, 1);
   };
 
+  window.systemBars = {
+    setStyle(style = 'light') {
+      if (style === 'light') {
+        window.StatusBar.styleDefault();
+        window.NavigationBar?.backgroundColorByHexString('#00000000', true);
+      } else {
+        window.StatusBar.styleLightContent();
+        window.NavigationBar?.backgroundColorByHexString('#00000000', false);
+      }
+    },
+  };
+
   if (import.meta.env.VITE_PLATFORM === 'ios') {
     ThreeDeeTouch.onHomeIconPressed = ({ type }) => {
       const cryptoId = type.split('.').pop();

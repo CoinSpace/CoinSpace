@@ -20,10 +20,10 @@ export default {
     },
   },
   async onShow() {
-    window.StatusBar?.styleLightContent();
+    window.systemBars?.setStyle('dark');
   },
   async onHide() {
-    window.StatusBar?.styleDefault();
+    window.systemBars?.setStyle('light');
   },
 };
 </script>
@@ -64,7 +64,7 @@ export default {
     padding:
       $spacing-3xl
       max($spacing-xl, env(safe-area-inset-right))
-      $spacing-3xl
+      max($spacing-3xl, env(safe-area-inset-bottom))
       max($spacing-xl, env(safe-area-inset-left));
     background-color: $background-color-dark;
     gap: $spacing-5xl;

@@ -12,7 +12,7 @@
     padding:
       $spacing-3xl
       max($spacing-xl, env(safe-area-inset-right))
-      $spacing-3xl
+      max($spacing-3xl, env(safe-area-inset-bottom))
       max($spacing-xl, env(safe-area-inset-left));
     background-color: $background-color-dark;
     overflow-y: auto;

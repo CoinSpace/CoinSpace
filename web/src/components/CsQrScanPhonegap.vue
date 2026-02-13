@@ -27,12 +27,12 @@ export default {
         this.$emit('scan', { data: contents });
       });
       window.QRScanner.show();
-      window.StatusBar?.styleLightContent();
+      window.systemBars?.setStyle('dark');
       document.documentElement.classList.add('qr-scanning');
     },
     stop() {
       window.QRScanner.destroy();
-      window.StatusBar?.styleDefault();
+      window.systemBars?.setStyle('light');
       document.documentElement.classList.remove('qr-scanning');
     },
     async prepare() {
@@ -99,7 +99,11 @@ export default {
     height: 100%;
     flex-direction: column;
     align-items: center;
-    padding: $spacing-3xl $spacing-xl;
+    padding:
+      $spacing-xl
+      max($spacing-xl, env(safe-area-inset-right))
+      max($spacing-3xl, env(safe-area-inset-bottom))
+      max($spacing-xl, env(safe-area-inset-left));
     gap: $spacing-3xl;
 
     &__box-wrapper {

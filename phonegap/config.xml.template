@@ -21,6 +21,7 @@
     <resource-file src="../images/android/adaptiveicon/ic_launcher.xml" target="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" />
     <resource-file src="../images/android/adaptiveicon/ic_launcher_foreground.xml" target="app/src/main/res/drawable/ic_launcher_foreground.xml" />
     <resource-file src="../images/android/adaptiveicon/ic_launcher_background.xml" target="app/src/main/res/values/ic_launcher_background.xml" />
+    <resource-file src="../android_styles.xml" target="app/src/main/res/values/android_styles.xml" />
     <icon src="../images/android/icons/36.png" density="ldpi"/>
     <icon src="../images/android/icons/48.png" density="mdpi"/>
     <icon src="../images/android/icons/72.png" density="hdpi"/>
@@ -103,11 +104,12 @@
     </config-file>
     <preference name="AndroidLaunchMode" value="singleTask"/>
     <preference name="AndroidXEnabled" value="true" />
-    <preference name="android-minSdkVersion" value="22" />
+    <preference name="android-minSdkVersion" value="26" />
     <preference name="android-targetSdkVersion" value="35" />
     <preference name="CustomURLSchemePluginClearsAndroidIntent" value="true"/>
     <preference name="AndroidWindowSplashScreenAnimatedIcon" value="../images/android/splashscreen.xml" />
     <preference name="AndroidWindowSplashScreenBackground" value="#2C3832" />
+    <preference name="AndroidPostSplashScreenTheme" value="@style/Theme.PostSplashScreen"/>
   </platform>
   <platform name="ios">
     <icon src="../images/ios/icons/icon-20.png" width="20" height="20" />
@@ -218,6 +220,7 @@
     <preference name="SwiftVersion" value="5.0" />
   </platform>
   <preference name="AutoHideSplashScreen" value="false" />
+  <preference name="FadeSplashScreenDuration" value="250"/>
   <preference name="StatusBarBackgroundColor" value="#FFFFFF" />
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="scheme" value="app" />
