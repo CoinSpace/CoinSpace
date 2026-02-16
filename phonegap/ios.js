@@ -45,7 +45,7 @@ async function run() {
   cordova('plugin add cordova-plugin-qrscanner-11@3.0.5 --save');
   cordova('plugin add cordova-plugin-dialogs@2.0.2 --save');
   cordova('plugin add cordova-plugin-inappbrowser@5.0.0 --save');
-  cordova('plugin add cordova-plugin-statusbar@3.0.0 --save');
+  cordova('plugin add cordova-plugin-statusbar@4.0.0 --save');
   cordova('plugin add cordova-plugin-x-socialsharing@6.0.4 --save --variable PHOTO_LIBRARY_USAGE_DESCRIPTION="This app uses your photo library to upload photos." --variable PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION="This app saves images to your photo library."');
   cordova('plugin add cordova-plugin-customurlscheme@5.0.2 --save --variable URL_SCHEME=coinspace');
   cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#d586e04e93aaadbd6c89f77a89961599a2275577 --save');
@@ -94,8 +94,8 @@ async function run() {
   updatePlist(path.join(buildPath, 'platforms/ios/Coin/Coin-Info.plist'), update);
 
   await setProvisionProfile();
-  await addWatchApp('https://github.com/CoinSpace/cs-watchapp-ios.git#1b9de68dfd98eeac81733a6fe41cfb64b153eb13');
-  await addWidget('https://github.com/CoinSpace/cs-widget-ios.git#6099a36e30fadc34d73ffb7e021084eb2979e05f');
+  await addWatchApp('https://github.com/CoinSpace/cs-watchapp-ios.git#092cd0639792a3f8b1af1d9b966fe610749f2a62');
+  await addWidget('https://github.com/CoinSpace/cs-widget-ios.git#6b0fbfc6aa3e48ded635ac3ef61ba69119e65982');
   await addPods();
 
   if (process.env.CI) {
