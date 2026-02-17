@@ -37,7 +37,6 @@ export default {
     } catch (err) {
       this.updateStorage({ status: false, error: err });
       this.next('moneroStatus');
-      console.error(err);
     } finally {
       this.isLoading = false;
     }
