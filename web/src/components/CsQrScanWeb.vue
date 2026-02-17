@@ -31,6 +31,7 @@ export default {
           },
           audio: false,
         });
+        if (!this.$refs.video) return; // if already unmounted
         this.$refs.video.srcObject = this.$options.stream;
         await this.$refs.video.play();
         this.$options.barcodeDetector = new window.BarcodeDetector({ formats: ['qr_code'] });
