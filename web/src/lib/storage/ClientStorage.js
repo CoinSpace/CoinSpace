@@ -112,22 +112,69 @@ export default class ClientStorage {
   /**
    * Cache
    */
+  getCacheByKey(cacheKey, token) {
+    return this.#getItem(`_cs_cache_${cacheKey}`, { type: OBJECT, token });
+  }
+  hasCacheByKey(cacheKey) {
+    return this.#hasItem(`_cs_cache_${cacheKey}`);
+  }
+  setCacheByKey(cacheKey, cache, token) {
+    this.#setItem(`_cs_cache_${cacheKey}`, cache, { type: OBJECT, token });
+  }
+  unsetCacheByKey(cacheKey) {
+    this.#unsetItem(`_cs_cache_${cacheKey}`);
+  }
+
   getCache(crypto, token) {
-    return this.#getItem(`_cs_cache_${crypto._id}`, { type: OBJECT, token });
+    return this.getCacheByKey(crypto._id, token);
   }
   hasCache(crypto) {
-    return this.#hasItem(`_cs_cache_${crypto._id}`);
+    return this.hasCacheByKey(crypto._id);
   }
   setCache(crypto, cache, token) {
-    this.#setItem(`_cs_cache_${crypto._id}`, cache, { type: OBJECT, token });
+    this.setCacheByKey(crypto._id, cache, token);
   }
   unsetCache(crypto) {
-    this.#unsetItem(`_cs_cache_${crypto._id}`);
+    this.unsetCacheByKey(crypto._id);
   }
 
   /**
    * Public key
    */
+  #publicKeyKey(platform, index) {
+    if (index === undefined || index === null) {
+      return `_cs_public_key_${platform}`;
+    }
+    return `_cs_public_key_${platform}_${index}`;
+  }
+
+  getPublicKeyForInstance(platform, index, token) {
+    // backward compatibility: instance 0 falls back to legacy per-platform key
+    if (parseInt(index, 10) === 0 && !this.hasPublicKeyForInstance(platform, 0)) {
+      return this.getPublicKey(platform, token);
+    }
+    return this.#getItem(this.#publicKeyKey(platform, index), { type: OBJECT, token });
+  }
+  hasPublicKeyForInstance(platform, index) {
+    if (parseInt(index, 10) === 0) {
+      return this.#hasItem(this.#publicKeyKey(platform, 0)) || this.hasPublicKey(platform);
+    }
+    return this.#hasItem(this.#publicKeyKey(platform, index));
+  }
+  setPublicKeyForInstance(platform, index, publicKey, token) {
+    this.#setItem(this.#publicKeyKey(platform, index), publicKey, { type: OBJECT, token });
+    // keep legacy key in sync for instance 0
+    if (parseInt(index, 10) === 0) {
+      this.setPublicKey(platform, publicKey, token);
+    }
+  }
+  unsetPublicKeyForInstance(platform, index) {
+    this.#unsetItem(this.#publicKeyKey(platform, index));
+    if (parseInt(index, 10) === 0) {
+      this.unsetPublicKey(platform);
+    }
+  }
+
   getPublicKey(platform, token) {
     return this.#getItem(`_cs_public_key_${platform}`, { type: OBJECT, token });
   }

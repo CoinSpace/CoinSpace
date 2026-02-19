@@ -1,12 +1,14 @@
 <script>
 import CsLoader from '../components/CsLoader.vue';
 import CsNavbar from '../components/CsNavbar.vue';
+import TronAccountSelector from '../components/TronAccountSelector.vue';
 import { onShowOnHide } from '../lib/mixins.js';
 
 export default {
   components: {
     CsLoader,
     CsNavbar,
+    TronAccountSelector,
   },
   mixins: [onShowOnHide],
   props: {
@@ -82,6 +84,7 @@ export default {
         :class="{ '&__content--narrow': !wide }"
       >
         <template v-if="$wallet">
+          <TronAccountSelector />
           <CsLoader v-if="$walletState === $STATE_LOADING" />
           <slot v-if="[$STATE_LOADED, $STATE_NEED_ACTIVATION].includes($walletState)" />
           <div

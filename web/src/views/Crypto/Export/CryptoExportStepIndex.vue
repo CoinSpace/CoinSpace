@@ -3,6 +3,7 @@ import CsButton from '../../../components/CsButton.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 import { walletSeed } from '../../../lib/mixins.js';
+import { deriveTronKeypair } from '../../../lib/tronInstances.js';
 
 import DangerTriangleIcon from '../../../assets/svg/dangerTriangle.svg';
 
@@ -23,7 +24,47 @@ export default {
     async show() {
       this.isLoading = true;
       await this.walletSeed(async (walletSeed) => {
-        const data = await this.$wallet.getPrivateKey(walletSeed);
+        let data;
+        if (this.$wallet.crypto?.platform === 'tron') {
+          const scope = this.$route.query.scope === 'all' ? 'all' : 'current';
+          if (scope === 'all') {
+            const instances = this.$account.details.getPlatformInstances('tron');
+            const items = (instances.items || []).length
+              ? instances.items
+              : [{ index: 0, bip44: this.$wallet.settings.bip44, label: 'Account 1' }];
+            data = items.map((item) => {
+              const { address, privateKey } = deriveTronKeypair({
+                seed: walletSeed,
+                bip44Path: item.bip44,
+              });
+              return {
+                index: item.index,
+                label: item.label || `Account ${item.index + 1}`,
+                bip44: item.bip44,
+                address,
+                privatekey: privateKey,
+              };
+            });
+          } else {
+            const index = this.$route.query.account !== undefined
+              ? parseInt(this.$route.query.account, 10)
+              : (Number.isInteger(this.$wallet.instanceIndex) ? this.$wallet.instanceIndex : this.$account.details.getSelectedPlatformInstanceIndex('tron'));
+            const instances = this.$account.details.getPlatformInstances('tron');
+            const item = (instances.items || []).find((i) => i.index === index)
+              || { index, bip44: this.$wallet.settings.bip44, label: `Account ${index + 1}` };
+            const base = await this.$wallet.getPrivateKey(walletSeed);
+            data = (base || []).map((row) => {
+              return {
+                ...row,
+                index: item.index,
+                label: item.label || `Account ${item.index + 1}`,
+                bip44: item.bip44,
+              };
+            });
+          }
+        } else {
+          data = await this.$wallet.getPrivateKey(walletSeed);
+        }
         this.updateStorage({ data });
         this.next('show');
       });

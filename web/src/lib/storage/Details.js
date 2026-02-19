@@ -22,8 +22,30 @@ export default class Details extends ServerStorage {
         email: '',
       },
       cryptos: undefined,
+      platformInstances: {},
       shownNewCryptoIds: [],
     };
+  }
+
+  #migratePlatformInstances() {
+    const platformInstances = this.get('platformInstances') || {};
+    if (!platformInstances.tron) {
+      const tronSettings = this.getPlatformSettings('tron');
+      const bip44 = tronSettings?.bip44;
+      // create default tron instance only if tron is in wallet or tron settings exist
+      const hasTron = (this.get('cryptos') || []).some((c) => c?._id === 'tron@tron');
+      if (hasTron || bip44) {
+        platformInstances.tron = {
+          selectedIndex: 0,
+          items: [{
+            index: 0,
+            label: 'Account 1',
+            bip44: bip44 || "m/44'/195'/0'",
+          }],
+        };
+      }
+    }
+    this.set('platformInstances', platformInstances);
   }
 
   #migrateV5Details() {
@@ -103,6 +125,64 @@ export default class Details extends ServerStorage {
     this.#migrateV5Details();
     this.#updateExistedCryptosAndMigrateCustomTokens();
     this.#fixAddTokenPlatforms();
+    this.#migratePlatformInstances();
+  }
+
+  getPlatformInstances(platform) {
+    const instances = (this.get('platformInstances') || {})[platform];
+    if (!instances || !Array.isArray(instances.items) || instances.items.length === 0) {
+      return { selectedIndex: 0, items: [] };
+    }
+    return instances;
+  }
+
+  getSelectedPlatformInstanceIndex(platform) {
+    const { selectedIndex, items } = this.getPlatformInstances(platform);
+    if (!items.length) return 0;
+    const safe = Number.isInteger(selectedIndex) ? selectedIndex : 0;
+    return Math.min(Math.max(safe, 0), items.length - 1);
+  }
+
+  setSelectedPlatformInstanceIndex(platform, index) {
+    const platformInstances = this.get('platformInstances') || {};
+    const instances = platformInstances[platform] || { selectedIndex: 0, items: [] };
+    const safeIndex = Math.max(0, Math.min(parseInt(index, 10) || 0, Math.max(0, instances.items.length - 1)));
+    platformInstances[platform] = {
+      ...instances,
+      selectedIndex: safeIndex,
+    };
+    this.set('platformInstances', platformInstances);
+  }
+
+  ensurePlatformInstances(platform, count, { bip44Factory, labelFactory } = {}) {
+    const platformInstances = this.get('platformInstances') || {};
+    const instances = platformInstances[platform] || { selectedIndex: 0, items: [] };
+    const items = Array.isArray(instances.items) ? [...instances.items] : [];
+
+    const target = Math.max(0, parseInt(count, 10) || 0);
+    if (items.length === 0 && target > 0) {
+      // seed first item from platform settings if possible
+      const base = this.getPlatformSettings(platform);
+      items.push({
+        index: 0,
+        label: labelFactory ? labelFactory(0) : 'Account 1',
+        bip44: base?.bip44 || (bip44Factory ? bip44Factory(0) : undefined),
+      });
+    }
+
+    for (let i = items.length; i < target; i++) {
+      items.push({
+        index: i,
+        label: labelFactory ? labelFactory(i) : `Account ${i + 1}`,
+        bip44: bip44Factory ? bip44Factory(i) : undefined,
+      });
+    }
+
+    platformInstances[platform] = {
+      selectedIndex: Number.isInteger(instances.selectedIndex) ? instances.selectedIndex : 0,
+      items,
+    };
+    this.set('platformInstances', platformInstances);
   }
 
   getPlatformSettings(key) {
