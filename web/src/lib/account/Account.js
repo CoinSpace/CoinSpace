@@ -22,6 +22,12 @@ import Settings from './Settings.js';
 import WalletStorage from '../storage/WalletStorage.js';
 import i18n from '../i18n/i18n.js';
 import {
+  deriveTronKeypair,
+  instanceCacheKey,
+  instanceStorageName,
+  tronBip44,
+} from '../tronInstances.js';
+import {
   EVM_FAMILY,
   getApiNode,
   getBaseURL,
@@ -45,12 +51,12 @@ class WalletManager {
     this.#wallets = new Map();
   }
 
-  set(wallet) {
-    this.#wallets.set(wallet.crypto._id, wallet);
+  set(wallet, walletId = wallet.crypto._id) {
+    this.#wallets.set(walletId, wallet);
   }
 
   setMany(wallets = []) {
-    wallets.forEach((wallet) => this.set(wallet));
+    wallets.forEach(({ wallet, walletId }) => this.set(wallet, walletId));
   }
 
   get(id) {
@@ -342,23 +348,60 @@ export default class Account extends EventEmitter {
 
   async #initWalletsFromDetails(walletSeed = undefined) {
     const cryptos = this.#details.getSupportedCryptos();
-    const walletStorages = await WalletStorage.initMany(this, cryptos);
-    const wallets = await Promise.all(cryptos.map(async (crypto) => {
+    const selectedTronIndex = this.#details.getSelectedPlatformInstanceIndex('tron');
+
+    // If we have the wallet seed (fresh restore), materialize public keys for all Tron instances.
+    // This keeps multi-account Tron consistent across browsers/devices without storing keys on server.
+    if (walletSeed) {
+      const tronInstances = this.#details.getPlatformInstances('tron');
+      for (const item of tronInstances.items || []) {
+        const index = item.index;
+        if (!Number.isInteger(index)) continue;
+        if (this.#clientStorage.hasPublicKeyForInstance('tron', index)) continue;
+        const bip44 = item.bip44 || tronBip44(index);
+        const { publicKey } = deriveTronKeypair({ seed: walletSeed, bip44Path: bip44 });
+        this.#clientStorage.setPublicKeyForInstance('tron', index, {
+          settings: { bip44 },
+          data: publicKey,
+        }, this.#deviceSeed);
+      }
+    }
+
+    // only initialize selected tron instance to avoid exploding wallet objects (e.g., 100 instances)
+    const initList = cryptos.map((crypto) => {
+      if (crypto.platform === 'tron') {
+        return { crypto, instanceIndex: selectedTronIndex };
+      }
+      return { crypto, instanceIndex: undefined };
+    });
+
+    const storageNames = initList.map(({ crypto, instanceIndex }) => {
+      return this.#storageNameFor(crypto, instanceIndex);
+    });
+    const walletStorages = await WalletStorage.initManyByNames(this, storageNames);
+
+    const wallets = await Promise.all(initList.map(async ({ crypto, instanceIndex }) => {
+      const storageName = this.#storageNameFor(crypto, instanceIndex);
       const wallet = await this.#createWallet({
         crypto,
-        walletStorage: walletStorages[crypto._id],
+        walletStorage: walletStorages[storageName],
+        instanceIndex,
       }, walletSeed);
-      // save public key only for coins
+
       if (crypto.type === 'coin') {
         if (wallet.state === CsWallet.STATE_INITIALIZED) {
-          this.#clientStorage.setPublicKey(crypto.platform, wallet.getPublicKey(), this.#deviceSeed);
+          if (crypto.platform === 'tron' && Number.isInteger(instanceIndex)) {
+            this.#clientStorage.setPublicKeyForInstance(crypto.platform, instanceIndex, wallet.getPublicKey(), this.#deviceSeed);
+          } else {
+            this.#clientStorage.setPublicKey(crypto.platform, wallet.getPublicKey(), this.#deviceSeed);
+          }
         }
         this.#details.setPlatformSettings(crypto.platform, wallet.settings);
       }
       if (this.#details.needToMigrateV5Balance) {
         await this.#migrateV5Balance(wallet);
       }
-      return wallet;
+      return { wallet, walletId: this.#walletIdFor(crypto, instanceIndex) };
     }));
     this.#wallets.setMany(wallets);
 
@@ -366,13 +409,53 @@ export default class Account extends EventEmitter {
     this.emit('update');
   }
 
-  async #createWallet({ crypto, walletStorage, settings }, walletSeed) {
+  #walletIdFor(crypto, instanceIndex) {
+    if (crypto.platform === 'tron' && Number.isInteger(instanceIndex)) {
+      return `${crypto._id}#${instanceIndex}`;
+    }
+    return crypto._id;
+  }
+
+  #storageNameFor(crypto, instanceIndex) {
+    if (crypto.platform === 'tron' && Number.isInteger(instanceIndex)) {
+      return instanceStorageName(crypto._id, instanceIndex);
+    }
+    return crypto._id;
+  }
+
+  #cacheKeyFor(crypto, instanceIndex) {
+    if (crypto.platform === 'tron' && Number.isInteger(instanceIndex)) {
+      return instanceCacheKey(crypto._id, instanceIndex);
+    }
+    return crypto._id;
+  }
+
+  #settingsFor(crypto, settings, instanceIndex) {
+    const base = settings || this.#details.getPlatformSettings(crypto.platform);
+    if (crypto.platform !== 'tron' || !Number.isInteger(instanceIndex)) {
+      return base;
+    }
+    const tronInstances = this.#details.getPlatformInstances('tron');
+    const item = tronInstances.items?.find((it) => it.index === instanceIndex);
+    const bip44 = item?.bip44 || tronBip44(instanceIndex);
+    return {
+      ...base,
+      bip44,
+    };
+  }
+
+  async #createWallet({ crypto, walletStorage, settings, instanceIndex }, walletSeed) {
     const Wallet = await loadWalletModule(crypto.platform);
     const platform = this.#cryptoDB.platform(crypto.platform);
-    const options = this.#getWalletOptions(crypto, platform, walletStorage, settings);
+    const options = this.#getWalletOptions(crypto, platform, walletStorage, settings, instanceIndex);
     const wallet = new Wallet(options);
+    if (crypto.platform === 'tron' && Number.isInteger(instanceIndex)) {
+      wallet.instanceIndex = instanceIndex;
+    }
     if (walletSeed) {
       await wallet.create(walletSeed);
+    } else if (crypto.platform === 'tron' && Number.isInteger(instanceIndex) && this.#clientStorage.hasPublicKeyForInstance(crypto.platform, instanceIndex)) {
+      await wallet.open(this.#clientStorage.getPublicKeyForInstance(crypto.platform, instanceIndex, this.#deviceSeed));
     } else if (this.#clientStorage.hasPublicKey(crypto.platform)) {
       await wallet.open(this.#clientStorage.getPublicKey(crypto.platform, this.#deviceSeed));
     } else {
@@ -389,9 +472,10 @@ export default class Account extends EventEmitter {
     return getBaseURL(service, this.isOnion);
   }
 
-  #getWalletOptions(crypto, platform, storage, settings) {
+  #getWalletOptions(crypto, platform, storage, settings, instanceIndex) {
     const cache = new Cache({
       crypto,
+      cacheKey: this.#cacheKeyFor(crypto, instanceIndex),
       clientStorage: this.#clientStorage,
       deviceSeed: this.#deviceSeed,
     });
@@ -402,7 +486,7 @@ export default class Account extends EventEmitter {
       apiNode: this.#getApiNode(crypto.platform),
       cache,
       storage,
-      settings: settings || this.#details.getPlatformSettings(crypto.platform),
+      settings: this.#settingsFor(crypto, settings, instanceIndex),
       development: import.meta.env.DEV,
     };
     if (crypto._id === 'monero@monero') {
@@ -448,16 +532,116 @@ export default class Account extends EventEmitter {
   }
 
   wallet(id) {
+    const crypto = this.#cryptoDB.get(id);
+    if (crypto?.platform === 'tron') {
+      const index = this.#details.getSelectedPlatformInstanceIndex('tron');
+      return this.#wallets.get(this.#walletIdFor(crypto, index));
+    }
     return this.#wallets.get(id);
   }
 
+  walletInstance(id, instanceIndex) {
+    const crypto = this.#cryptoDB.get(id);
+    if (!crypto) return undefined;
+    if (crypto.platform !== 'tron' || !Number.isInteger(parseInt(instanceIndex, 10))) {
+      return this.#wallets.get(id);
+    }
+    return this.#wallets.get(this.#walletIdFor(crypto, parseInt(instanceIndex, 10)));
+  }
+
+  async getOrCreateWalletInstance(id, instanceIndex) {
+    const crypto = this.#cryptoDB.get(id);
+    if (!crypto) return undefined;
+    if (crypto.platform !== 'tron') {
+      return this.wallet(id);
+    }
+    const index = Number.isInteger(parseInt(instanceIndex, 10))
+      ? parseInt(instanceIndex, 10)
+      : this.#details.getSelectedPlatformInstanceIndex('tron');
+
+    const walletId = this.#walletIdFor(crypto, index);
+    if (this.#wallets.has(walletId)) {
+      return this.#wallets.get(walletId);
+    }
+
+    const storageName = this.#storageNameFor(crypto, index);
+    const walletStorage = await WalletStorage.initOneByName(this, storageName);
+    const wallet = await this.#createWallet({
+      crypto,
+      walletStorage,
+      instanceIndex: index,
+    });
+    this.#wallets.set(wallet, walletId);
+    return wallet;
+  }
+
+  async ensureTronInstances(count, walletSeed) {
+    const target = Math.max(0, parseInt(count, 10) || 0);
+    if (target <= 0) return;
+
+    const tronCrypto = this.#cryptoDB.get('tron@tron');
+    if (!tronCrypto) {
+      throw new Error('tron@tron crypto not found');
+    }
+
+    // ensure asset is present in wallet
+    if (!this.#details.hasCrypto(tronCrypto)) {
+      this.#details.addCrypto(tronCrypto);
+    }
+
+    const instances = this.#details.getPlatformInstances('tron');
+    const current = instances.items?.length || 0;
+    if (current >= target) return;
+
+    if (!walletSeed) {
+      throw new SeedRequiredError();
+    }
+
+    // make sure instances list exists with correct bip44 paths
+    this.#details.ensurePlatformInstances('tron', target, {
+      bip44Factory: tronBip44,
+      labelFactory: (i) => `Account ${i + 1}`,
+    });
+
+    const updated = this.#details.getPlatformInstances('tron');
+    for (const item of updated.items) {
+      if (!item?.bip44) continue;
+      if (this.#clientStorage.hasPublicKeyForInstance('tron', item.index)) continue;
+
+      const { publicKey } = deriveTronKeypair({ seed: walletSeed, bip44Path: item.bip44 });
+      this.#clientStorage.setPublicKeyForInstance('tron', item.index, {
+        settings: { bip44: item.bip44 },
+        data: publicKey,
+      }, this.#deviceSeed);
+    }
+
+    await this.#details.save();
+    this.emit('update');
+  }
+
   wallets(type = '') {
+    // Visible wallets list: one item per crypto._id.
+    // For Tron multi-instances we expose only the currently selected instance.
+    const cryptos = this.#details?.getSupportedCryptos?.() || [];
+    const result = [];
+    for (const crypto of cryptos) {
+      const wallet = this.wallet(crypto._id);
+      if (!wallet) continue;
+      if (type && wallet.crypto.type !== type) continue;
+      result.push(wallet);
+    }
+    return result;
+  }
+
+  walletsAll(type = '') {
     if (type) return this.#wallets.filterByType(type);
     return this.#wallets.list();
   }
 
   tokensByPlatform(platform) {
-    return this.#wallets.tokensByPlatform(platform);
+    return this.wallets().filter((wallet) => {
+      return wallet.crypto.platform === platform && wallet.crypto.type === 'token';
+    });
   }
 
   walletByChainId(chainId) {
@@ -517,7 +701,8 @@ export default class Account extends EventEmitter {
   async #addWallet(crypto, walletSeed) {
     if (this.#clientStorage.hasPublicKey(crypto.platform)) {
       const walletStorage = await WalletStorage.initOne(this, crypto);
-      this.#wallets.set(await this.#createWallet({ crypto, walletStorage }));
+      const wallet = await this.#createWallet({ crypto, walletStorage });
+      this.#wallets.set(wallet, this.#walletIdFor(crypto));
       this.#details.addCrypto(crypto);
     } else if (walletSeed) {
       if (crypto.type === 'coin') {
@@ -526,7 +711,7 @@ export default class Account extends EventEmitter {
           crypto,
           walletStorage,
         }, walletSeed);
-        this.#wallets.set(wallet);
+        this.#wallets.set(wallet, this.#walletIdFor(crypto));
         this.#details.setPlatformSettings(crypto.platform, wallet.settings);
         this.#clientStorage.setPublicKey(wallet.crypto.platform, wallet.getPublicKey(), this.#deviceSeed);
         this.#details.addCrypto(crypto);
@@ -538,13 +723,14 @@ export default class Account extends EventEmitter {
           crypto: platform,
           walletStorage: walletStorages[platform._id],
         }, walletSeed);
-        this.#wallets.set(wallet);
+        this.#wallets.set(wallet, this.#walletIdFor(platform));
         this.#details.setPlatformSettings(crypto.platform, wallet.settings);
         this.#clientStorage.setPublicKey(wallet.crypto.platform, wallet.getPublicKey(), this.#deviceSeed);
-        this.#wallets.set(await this.#createWallet({
+        const tokenWallet = await this.#createWallet({
           crypto,
           walletStorage: walletStorages[crypto._id],
-        }));
+        });
+        this.#wallets.set(tokenWallet, this.#walletIdFor(crypto));
         this.#details.addCrypto(platform);
         this.#details.addCrypto(crypto);
       }
@@ -563,13 +749,35 @@ export default class Account extends EventEmitter {
   async removeWallet(crypto) {
     if (crypto.type === 'coin') {
       const wallets = this.#wallets.filterByPlatform(crypto.platform);
+      const instanceIndexes = new Set();
       for (const wallet of wallets) {
-        this.#wallets.delete(wallet.crypto._id);
+        this.#wallets.delete(this.#walletIdFor(wallet.crypto, wallet.instanceIndex));
         this.#details.removeCrypto(wallet.crypto);
+        if (crypto.platform === 'tron' && Number.isInteger(wallet.instanceIndex)) {
+          instanceIndexes.add(wallet.instanceIndex);
+        }
       }
-      this.#clientStorage.unsetPublicKey(crypto.platform);
+      if (crypto.platform === 'tron') {
+        const tronInstances = this.#details.getPlatformInstances('tron');
+        const allIndexes = (tronInstances.items || []).map((i) => i.index);
+        for (const index of new Set([...allIndexes, ...instanceIndexes])) {
+          this.#clientStorage.unsetPublicKeyForInstance('tron', index);
+        }
+        const platformInstances = this.#details.get('platformInstances') || {};
+        delete platformInstances.tron;
+        this.#details.set('platformInstances', platformInstances);
+      } else {
+        this.#clientStorage.unsetPublicKey(crypto.platform);
+      }
     } else if (crypto.type === 'token') {
-      this.#wallets.delete(crypto._id);
+      if (crypto.platform === 'tron') {
+        const wallets = this.#wallets.list().filter((w) => w.crypto._id === crypto._id);
+        for (const wallet of wallets) {
+          this.#wallets.delete(this.#walletIdFor(wallet.crypto, wallet.instanceIndex));
+        }
+      } else {
+        this.#wallets.delete(crypto._id);
+      }
       this.#details.removeCrypto(crypto);
     }
 
@@ -589,10 +797,20 @@ export default class Account extends EventEmitter {
     for (const item of wallets) {
       // wallet already initialized
       if (item !== wallet) {
+        if (wallet.crypto.platform === 'tron') {
+          // Each Tron instance has its own bip44/public key.
+          if (Number.isInteger(wallet.instanceIndex) && item.instanceIndex !== wallet.instanceIndex) {
+            continue;
+          }
+        }
         await item.open(publicKey);
       }
     }
-    this.#clientStorage.setPublicKey(wallet.crypto.platform, publicKey, this.#deviceSeed);
+    if (wallet.crypto.platform === 'tron' && Number.isInteger(wallet.instanceIndex)) {
+      this.#clientStorage.setPublicKeyForInstance('tron', wallet.instanceIndex, publicKey, this.#deviceSeed);
+    } else {
+      this.#clientStorage.setPublicKey(wallet.crypto.platform, publicKey, this.#deviceSeed);
+    }
   }
 
   async initWallets(wallets, walletSeed) {
@@ -609,9 +827,18 @@ export default class Account extends EventEmitter {
     wallet.settings = settings;
     await wallet.create(walletSeed);
     const publicKey = wallet.getPublicKey();
-    this.#clientStorage.setPublicKey(platform, publicKey, this.#deviceSeed);
+    if (platform === 'tron' && Number.isInteger(wallet.instanceIndex)) {
+      this.#clientStorage.setPublicKeyForInstance('tron', wallet.instanceIndex, publicKey, this.#deviceSeed);
+    } else {
+      this.#clientStorage.setPublicKey(platform, publicKey, this.#deviceSeed);
+    }
     for (const platformWallet of platformWallets) {
       if (wallet !== platformWallet) {
+        if (platform === 'tron') {
+          if (Number.isInteger(wallet.instanceIndex) && platformWallet.instanceIndex !== wallet.instanceIndex) {
+            continue;
+          }
+        }
         platformWallet.settings = settings;
         await platformWallet.open(publicKey);
       }

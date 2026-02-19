@@ -36,7 +36,8 @@ export default {
     const alreadyAdded = this.$account.wallets().map((item) => item.crypto._id);
     const cryptos = this.$account.cryptoDB.all
       .filter((item) => item.supported && !item.deprecated)
-      .filter((item) => !alreadyAdded.includes(item._id))
+      // Tron is special: allow selecting TRON assets again to extend the number of accounts.
+      .filter((item) => !alreadyAdded.includes(item._id) || item.platform === 'tron')
       .map((crypto) => {
         const platform = this.$account.cryptoDB.platform(crypto.platform);
         return {
@@ -58,9 +59,9 @@ export default {
       keys: ['crypto.name', 'crypto.symbol', 'crypto.address', 'crypto._id'],
       threshold: 0.5,
     });
-    if (this.$route.query.cryptoId && !alreadyAdded.includes(this.$route.query.cryptoId)) {
+    if (this.$route.query.cryptoId) {
       const crypto = this.$account.cryptoDB.get(this.$route.query.cryptoId);
-      if (crypto) {
+      if (crypto && (!alreadyAdded.includes(crypto._id) || crypto.platform === 'tron')) {
         const platform = this.$account.cryptoDB.platform(crypto.platform);
         showModal = true;
         selected = {
@@ -74,6 +75,7 @@ export default {
       showModal,
       selected,
       isLoading: false,
+      tronCount: '1',
       alreadyAdded,
       coinsList,
       tokensList,
@@ -100,6 +102,15 @@ export default {
   methods: {
     async select(id) {
       const crypto = this.$account.cryptoDB.get(id);
+      if (crypto.platform === 'tron') {
+        const platform = this.$account.cryptoDB.platform(crypto.platform);
+        this.selected = {
+          crypto,
+          platform,
+        };
+        this.showModal = true;
+        return;
+      }
       if (crypto.type === 'coin') {
         await this.add(crypto);
       }
@@ -119,14 +130,44 @@ export default {
     async add(crypto) {
       this.showModal = false;
       this.isLoading = true;
+      const tronCount = Math.max(1, parseInt(this.tronCount, 10) || 1);
       try {
+        if (crypto.platform === 'tron') {
+          const existing = (this.$account.details.getPlatformInstances('tron').items || []).length;
+          const targetTotal = existing > 0 ? existing + tronCount : tronCount;
+          await this.$account.ensureTronInstances(targetTotal);
+        }
+        if (crypto.type === 'coin' && crypto.platform === 'tron') {
+          this.$router.replace({ name: 'crypto', params: { cryptoId: crypto._id }, query: { account: 0 } });
+          return;
+        }
+
+        // If a TRON token is already added, treat this as a no-op add (possibly after extending accounts).
+        if (crypto.platform === 'tron' && this.$account.details.hasCrypto(crypto)) {
+          this.$router.replace({ name: 'crypto', params: { cryptoId: crypto._id }, query: { account: 0 } });
+          return;
+        }
         await this.$account.addWallet(crypto);
-        this.$router.replace({ name: 'crypto', params: { cryptoId: crypto._id } });
+        this.$router.replace({ name: 'crypto', params: { cryptoId: crypto._id }, query: crypto.platform === 'tron' ? { account: 0 } : {} });
       } catch (err) {
         if (err instanceof SeedRequiredError) {
           await this.walletSeed(async (walletSeed) => {
+            if (crypto.platform === 'tron') {
+              const existing = (this.$account.details.getPlatformInstances('tron').items || []).length;
+              const targetTotal = existing > 0 ? existing + tronCount : tronCount;
+              await this.$account.ensureTronInstances(targetTotal, walletSeed);
+            }
+            if (crypto.type === 'coin' && crypto.platform === 'tron') {
+              this.$router.replace({ name: 'crypto', params: { cryptoId: crypto._id }, query: { account: 0 } });
+              return;
+            }
+
+            if (crypto.platform === 'tron' && this.$account.details.hasCrypto(crypto)) {
+              this.$router.replace({ name: 'crypto', params: { cryptoId: crypto._id }, query: { account: 0 } });
+              return;
+            }
             await this.$account.addWallet(crypto, walletSeed);
-            this.$router.replace({ name: 'crypto', params: { cryptoId: crypto._id } });
+            this.$router.replace({ name: 'crypto', params: { cryptoId: crypto._id }, query: crypto.platform === 'tron' ? { account: 0 } : {} });
           });
         } else {
           console.error(err);
@@ -217,6 +258,14 @@ export default {
           crypto: selected.crypto.name,
         }) }}
       </div>
+      <div v-if="selected.crypto.platform === 'tron'" class="&__tron-count">
+        <CsFormInput
+          v-model="tronCount"
+          :label="$t('Number of accounts')"
+          :placeholder="$t('e.g. 100')"
+          small
+        />
+      </div>
       <template #footer>
         <CsButtonGroup>
           <CsButton
@@ -268,6 +317,9 @@ export default {
       @include breakpoint(lg) {
         flex-basis: 50%;
       }
+    }
+    &__tron-count {
+      margin-top: $spacing-xl;
     }
   }
 </style>

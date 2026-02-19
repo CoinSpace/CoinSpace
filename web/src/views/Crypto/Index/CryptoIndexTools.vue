@@ -23,7 +23,7 @@ export default {
   emits: ['remove'],
   data() {
     return {
-      isExportSupported: this.$wallet.isExportSupported,
+      isExportSupported: this.$wallet.isExportSupported || this.$wallet.crypto?.platform === 'tron',
       isImportSupported: this.$wallet.isImportSupported,
       isSettingsSupported: this.$wallet.isSettingsSupported,
       isStakingSupported: this.$wallet.isStakingSupported,
@@ -56,7 +56,7 @@ export default {
         </template>
       </CsListItem>
       <CsListItem
-        v-if="isExportSupported"
+        v-if="isExportSupported && $wallet.crypto?.platform !== 'tron'"
         :disabled="$walletState === $STATE_LOADING"
         :title="$t('Export private keys')"
         @click="$router.push({ name: 'crypto.export', params: { cryptoId: $wallet.crypto._id }})"
@@ -65,6 +65,37 @@ export default {
           <ExportIcon />
         </template>
       </CsListItem>
+
+      <template v-if="isExportSupported && $wallet.crypto?.platform === 'tron'">
+        <CsListItem
+          :disabled="$walletState === $STATE_LOADING"
+          :title="$t('Export private keys')"
+          :description="$t('Selected account')"
+          @click="$router.push({
+            name: 'crypto.export',
+            params: { cryptoId: $wallet.crypto._id },
+            query: { ...$route.query, scope: 'current' },
+          })"
+        >
+          <template #before>
+            <ExportIcon />
+          </template>
+        </CsListItem>
+        <CsListItem
+          :disabled="$walletState === $STATE_LOADING"
+          :title="$t('Export private keys')"
+          :description="$t('All accounts')"
+          @click="$router.push({
+            name: 'crypto.export',
+            params: { cryptoId: $wallet.crypto._id },
+            query: { ...$route.query, scope: 'all' },
+          })"
+        >
+          <template #before>
+            <ExportIcon />
+          </template>
+        </CsListItem>
+      </template>
       <CsListItem
         v-if="isSettingsSupported"
         :disabled="$walletState === $STATE_LOADING"

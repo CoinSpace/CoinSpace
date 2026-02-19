@@ -1,5 +1,6 @@
 <script>
 import CsNavbar from '../components/CsNavbar.vue';
+import TronAccountSelector from '../components/TronAccountSelector.vue';
 import { onShowOnHide } from '../lib/mixins.js';
 
 import ArrowDownIcon from '../assets/svg/arrowDown.svg';
@@ -7,6 +8,7 @@ import ArrowDownIcon from '../assets/svg/arrowDown.svg';
 export default {
   components: {
     CsNavbar,
+    TronAccountSelector,
     ArrowDownIcon,
   },
   mixins: [onShowOnHide],
@@ -210,6 +212,7 @@ export default {
         :style="{ transform: `translateY(${touchDistance}px)` }"
         @transitionend.self="transitionEnd"
       >
+        <TronAccountSelector />
         <slot />
       </div>
     </div>

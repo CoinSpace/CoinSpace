@@ -1,12 +1,13 @@
 export default class Cache {
   #crypto;
+  #cacheKey;
   #clientStorage;
   #deviceSeed;
   #cache;
 
-  constructor({ crypto, clientStorage, deviceSeed }) {
-    if (!crypto) {
-      throw new TypeError('crypto is required');
+  constructor({ crypto, cacheKey, clientStorage, deviceSeed }) {
+    if (!crypto && !cacheKey) {
+      throw new TypeError('crypto or cacheKey is required');
     }
     if (!clientStorage) {
       throw new TypeError('clientStorage is required');
@@ -16,13 +17,14 @@ export default class Cache {
     }
 
     this.#crypto = crypto;
+    this.#cacheKey = cacheKey || crypto._id;
     this.#clientStorage = clientStorage;
     this.#cache = {};
 
     this.#deviceSeed = deviceSeed;
 
-    if (this.#clientStorage.hasCache(this.#crypto)) {
-      this.#cache = this.#clientStorage.getCache(this.#crypto, this.#deviceSeed);
+    if (this.#clientStorage.hasCacheByKey(this.#cacheKey)) {
+      this.#cache = this.#clientStorage.getCacheByKey(this.#cacheKey, this.#deviceSeed);
     }
   }
   get(key) {
@@ -30,6 +32,6 @@ export default class Cache {
   }
   set(key, value) {
     this.#cache[key] = value;
-    this.#clientStorage.setCache(this.#crypto, this.#cache, this.#deviceSeed);
+    this.#clientStorage.setCacheByKey(this.#cacheKey, this.#cache, this.#deviceSeed);
   }
 }

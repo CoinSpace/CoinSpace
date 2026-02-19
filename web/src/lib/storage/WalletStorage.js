@@ -10,22 +10,21 @@ export default class WalletStorage extends ServerStorage {
     });
   }
 
-  static async initOne(account, crypto) {
+  static async initOneByName(account, name) {
     const storage = new WalletStorage({
       request: account.request,
-      name: crypto._id,
+      name,
       key: account.clientStorage.getDetailsKey(),
     });
     await storage.init();
     return storage;
   }
 
-  static async initMany(account, cryptos = []) {
+  static async initManyByNames(account, names = []) {
     const result = {};
-    if (cryptos.length === 0) return result;
+    if (names.length === 0) return result;
 
-    const cryptoIds = cryptos.map((crypto) => crypto._id);
-    const walletStorages = (await Promise.all(chunks(cryptoIds, 25).map((chunk) => {
+    const walletStorages = (await Promise.all(chunks(names, 25).map((chunk) => {
       return account.request({
         url: `api/v4/storages/${chunk.join()}`,
         method: 'get',
@@ -33,16 +32,27 @@ export default class WalletStorage extends ServerStorage {
       });
     }))).flat();
 
-    for (const cryptoId of cryptoIds) {
+    for (const name of names) {
       const storage = new WalletStorage({
         request: account.request,
-        name: cryptoId,
+        name,
         key: account.clientStorage.getDetailsKey(),
       });
-      const data = walletStorages.find((storage) => storage._id === cryptoId)?.data || null;
+      const data = walletStorages.find((storage) => storage._id === name)?.data || null;
       await storage.init(data);
-      result[cryptoId] = storage;
+      result[name] = storage;
     }
     return result;
+  }
+
+  static async initOne(account, crypto) {
+    return this.initOneByName(account, crypto._id);
+  }
+
+  static async initMany(account, cryptos = []) {
+    const result = {};
+    if (cryptos.length === 0) return result;
+
+    return this.initManyByNames(account, cryptos.map((crypto) => crypto._id));
   }
 }

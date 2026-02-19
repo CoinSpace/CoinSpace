@@ -31,7 +31,7 @@ router.up = async () => {
   await router.replace(parent);
 };
 
-router.beforeEach((to, from) => {
+router.beforeEach(async (to, from) => {
   if (import.meta.env.DEV && to.meta.dev) return;
   const { $account, $app } = router;
   if (to.meta.requiresAuth && !$account.isCreated) {
@@ -41,7 +41,8 @@ router.beforeEach((to, from) => {
     return { name: 'unlock', replace: true };
   }
   if (to.meta.crypto) {
-    const wallet = $account.wallet(to.params.cryptoId);
+    const accountIndex = to.query.account !== undefined ? parseInt(to.query.account, 10) : undefined;
+    const wallet = await $account.getOrCreateWalletInstance(to.params.cryptoId, accountIndex);
     if (wallet) {
       setWalletProps($app, wallet);
       registerProtocolHandler(wallet.crypto, $account);
@@ -66,7 +67,7 @@ router.beforeEach((to, from) => {
 
 router.afterEach((to) => {
   const { $account, $app } = router;
-  if (to.meta.crypto && $account.wallet(to.params.cryptoId)) {
+  if (to.meta.crypto && $app.config.globalProperties.$wallet) {
     return;
   }
   unsetWalletProps($app);
