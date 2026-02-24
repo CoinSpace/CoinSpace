@@ -98,7 +98,7 @@ export default class Biometry {
             invalidateOnEnrollment: true,
             fallbackButtonTitle: i18n.global.t('Cancel'),
             disableBackup: true,
-          }, resolve, reject);
+          }, resolve, () => reject(new Error('fingerprint_error')));
         });
       } else {
         const options = await this.#request({
@@ -117,6 +117,7 @@ export default class Biometry {
       this.#clientStorage.setBiometryEnabled(true);
       return true;
     } catch (err) {
+      if (err?.message === 'fingerprint_error') return false;
       console.error(err);
       return false;
     }
