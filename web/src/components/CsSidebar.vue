@@ -7,6 +7,8 @@ import CsCryptoList from '../components/CsCryptoList.vue';
 
 import PlusIcon from '../assets/svg/plus.svg';
 
+const CHANGE_PERIODS = ['1D', '7D', '14D', '1M', '1Y'];
+
 export default {
   components: {
     CsAvatar,
@@ -22,15 +24,36 @@ export default {
   },
   data() {
     return {
-      portfolioBalance: 0,
-      portfolioBalanceChangePercent: 0,
-      changePeriod: '1D',
+      changePeriodIndex: 0,
     };
   },
   computed: {
+    portfolioData() {
+      let totalBalance = 0;
+      const changeAccumulator = CHANGE_PERIODS.reduce((result, key) => { result[key] = 0; return result; }, {});
+      for (const item of this.$cryptos) {
+        if (!item.market?.price || !item.balanceFiat) continue;
+        const balance = item.balanceFiat;
+        totalBalance += balance;
+        const change = item.market.change || {};
+        for (const period of CHANGE_PERIODS) {
+          const percent = (change[period] || 0) / 100;
+          changeAccumulator[period] += balance * percent;
+        }
+      }
+      if (totalBalance > 0) {
+        for (const period of CHANGE_PERIODS) {
+          changeAccumulator[period] /= totalBalance;
+        }
+      }
+      return {
+        balance: totalBalance,
+        changePercent: changeAccumulator,
+      };
+    },
     portfolioBalanceSize() {
       if (this.$isHiddenBalance) return 'normal';
-      const str = this.$n(this.portfolioBalance, 'currency', {
+      const str = this.$n(this.portfolioData.balance, 'currency', {
         currency: this.$currency,
       });
       const { width } = measureText(str);
@@ -38,24 +61,28 @@ export default {
       if (width < 200) return 'large';
       return '';
     },
+    changePeriod() {
+      return CHANGE_PERIODS[this.changePeriodIndex];
+    },
+    changePeriodLabel() {
+      switch (this.changePeriod) {
+        case '1D':
+          return this.$t('1 day');
+        case '7D':
+          return this.$t('7 days');
+        case '14D':
+          return this.$t('14 days');
+        case '1M':
+          return this.$t('1 month');
+        case '1Y':
+          return this.$t('1 year');
+      }
+    },
   },
-  watch: {
-    $cryptos: {
-      async handler() {
-        let portfolioBalance = 0;
-        let portfolioBalanceChange = 0;
-        for (const item of this.$cryptos) {
-          if (item.market?.price) {
-            const { change } = item.market;
-            const changePercent = change[this.changePeriod] / 100;
-            portfolioBalance += item.balanceFiat;
-            portfolioBalanceChange += item.balanceFiat * changePercent;
-          }
-        }
-        this.portfolioBalance = portfolioBalance;
-        this.portfolioBalanceChangePercent = portfolioBalance ? portfolioBalanceChange / portfolioBalance : 0;
-      },
-      immediate: true,
+  methods: {
+    nextChangePeriod() {
+      if (this.$isHiddenBalance) return this.$account.toggleHiddenBalance();
+      this.changePeriodIndex = (this.changePeriodIndex + 1) % CHANGE_PERIODS.length;
     },
   },
 };
@@ -83,7 +110,7 @@ export default {
         :class="`&__portfolio-amount--${portfolioBalanceSize}`"
         @click="$account.toggleHiddenBalance()"
       >
-        {{ $isHiddenBalance ? '*****' : $n(portfolioBalance, 'currency', {
+        {{ $isHiddenBalance ? '*****' : $n(portfolioData.balance, 'currency', {
           currency: $currency,
         }) }}
       </div>
@@ -93,12 +120,13 @@ export default {
       <div
         class="&__portfolio-change"
         :class="{
-          '&__portfolio-change--positive': !$isHiddenBalance && portfolioBalanceChangePercent > 0,
-          '&__portfolio-change--negative': !$isHiddenBalance && portfolioBalanceChangePercent < 0
+          '&__portfolio-change--positive': !$isHiddenBalance && portfolioData.changePercent[changePeriod] > 0,
+          '&__portfolio-change--negative': !$isHiddenBalance && portfolioData.changePercent[changePeriod] < 0,
         }"
+        @click="nextChangePeriod"
       >
         <template v-if="!$isHiddenBalance">
-          {{ $n(portfolioBalanceChangePercent, 'percent') }} ({{ $t('1 day') }})
+          {{ $n(portfolioData.changePercent[changePeriod], 'percent') }} ({{ changePeriodLabel }})
         </template>
         <template v-else>
           *****
@@ -180,6 +208,7 @@ export default {
 
     &__portfolio-change {
       @include text-sm;
+      cursor: pointer;
       overflow-wrap: break-word;
       text-align: center;
 

@@ -1,7 +1,11 @@
 {
   "(optional)": "(valgfritt)",
   "1 day": "1 dag",
+  "1 month": "",
+  "1 year": "",
   "12 words": "12 ord",
+  "14 days": "",
+  "7 days": "",
   "A 256-bit hash that can be used to identify a particular payment.": "En 256-bit hash som kan benyttes til å identifisere en bestemt betaling.",
   "A link to the review form will be sent to your email.": "En lenke til vurderingsskjemaet vil bli sendt til din e-post.",
   "A new version of Coin Wallet is available. Would you like to update it now?": "En ny versjon av Coin Wallet er tilgjengelig. Ønsker du å oppdatere den nå?",

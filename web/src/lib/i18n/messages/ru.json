@@ -1,7 +1,11 @@
 {
   "(optional)": "(необязательно)",
   "1 day": "1 день",
+  "1 month": "1 месяц",
+  "1 year": "1 год",
   "12 words": "12 слов",
+  "14 days": "14 дней",
+  "7 days": "7 дней",
   "A 256-bit hash that can be used to identify a particular payment.": "256-битный хеш, который может использоваться для идентификации конкретного платежа.",
   "A link to the review form will be sent to your email.": "Ссылка на форму для отзывов будет отправлена ​​на вашу электронную почту.",
   "A new version of Coin Wallet is available. Would you like to update it now?": "Доступна новая версия Coin Wallet. Хотите обновить сейчас?",

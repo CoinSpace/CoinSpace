@@ -1,7 +1,11 @@
 {
   "(optional)": "(tùy chọn)",
   "1 day": "1 ngày",
+  "1 month": "",
+  "1 year": "",
   "12 words": "12 từ",
+  "14 days": "",
+  "7 days": "",
   "A 256-bit hash that can be used to identify a particular payment.": "Giá trị băm 256 bit có thể sử dụng để xác định một thanh toán cụ thể.",
   "A link to the review form will be sent to your email.": "Liên kết đến biểu mẫu đánh giá sẽ được gửi đến email của bạn.",
   "A new version of Coin Wallet is available. Would you like to update it now?": "Đã có phiên bản mới của Coin Wallet. Bạn có muốn cập nhật không?",
