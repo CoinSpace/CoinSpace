@@ -6,7 +6,6 @@ import CsFormTextareaReadonly from '../../../components/CsForm/CsFormTextareaRea
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
 
-import * as EOSErrors from '@coinspace/cs-eos-wallet/errors';
 import * as RippleErrors from '@coinspace/cs-ripple-wallet/errors';
 import * as StellarErrors from '@coinspace/cs-stellar-wallet/errors';
 import * as TONErrors from '@coinspace/cs-toncoin-wallet/errors';
@@ -53,9 +52,6 @@ export default {
       if (this.$wallet.crypto.platform === 'stellar') {
         return this.$t('The memo contains optional extra information. A string up to 28-bytes long.');
       }
-      if (this.$wallet.crypto.platform === 'eos') {
-        return this.$t('The memo contains optional extra information. A string up to 256-bytes long.');
-      }
       return this.$t('The memo contains optional extra information.');
     },
   },
@@ -78,10 +74,6 @@ export default {
           this.next('amount');
         }
       } catch (err) {
-        if (err instanceof EOSErrors.InvalidMemoError) {
-          this.errors['memo'] = this.$t('Invalid Memo');
-          return;
-        }
         if (err instanceof StellarErrors.InvalidMemoError) {
           this.errors['memo'] = this.$t('Invalid Memo');
           return;

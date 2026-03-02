@@ -7,6 +7,12 @@ export default {
     CsButton,
     CsButtonGroup,
   },
+  computed: {
+    disabled() {
+      if (this.$wallet.crypto._id === 'eos@eos') return true;
+      return this.$walletState === this.$STATE_LOADING;
+    },
+  },
 };
 </script>
 
@@ -19,7 +25,7 @@ export default {
       v-if="$walletState === $STATE_LOADED || $walletState === $STATE_LOADING"
       type="primary-light"
       small
-      :disabled="$walletState === $STATE_LOADING"
+      :disabled="disabled"
       @click="$router.push({ name: 'crypto.buy', params: { cryptoId: $wallet.crypto._id }})"
     >
       {{ $t('Buy') }}
@@ -28,7 +34,7 @@ export default {
       v-if="$walletState === $STATE_LOADED || $walletState === $STATE_LOADING"
       type="danger-light"
       small
-      :disabled="$walletState === $STATE_LOADING"
+      :disabled="disabled"
       @click="$router.push({ name: 'crypto.sell', params: { cryptoId: $wallet.crypto._id }})"
     >
       {{ $t('Sell') }}

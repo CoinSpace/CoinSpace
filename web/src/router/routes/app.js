@@ -8,7 +8,6 @@ import CryptoViewSell from '../../views/Crypto/CryptoViewSell.vue';
 
 import CryptoAddView from '../../views/Crypto/Add/CryptoAddView.vue';
 import CryptoDerivationView from '../../views/Crypto/Derivation/CryptoDerivationView.vue';
-import CryptoEosSetupView from '../../views/Crypto/EosSetup/CryptoEosSetupView.vue';
 import CryptoExchangeView from '../../views/Crypto/Exchange/CryptoExchangeView.vue';
 import CryptoExportView from '../../views/Crypto/Export/CryptoExportView.vue';
 import CryptoHistoryView from '../../views/Crypto/History/CryptoHistoryView.vue';
@@ -144,11 +143,6 @@ const app = [
           path: 'import',
           name: 'crypto.import',
           component: CryptoImportView,
-        },
-        {
-          path: 'eossetup',
-          name: 'crypto.eossetup',
-          component: CryptoEosSetupView,
         },
         {
           path: 'staking',

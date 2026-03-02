@@ -64,7 +64,6 @@ export default class BaseExchange {
   static EXTRA_ID = [
     'xrp@ripple',
     'stellar@stellar',
-    'eos@eos',
     'stacks@stacks',
     'iost@iost',
   ];

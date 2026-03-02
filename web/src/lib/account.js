@@ -1,4 +1,3 @@
-import * as EOSSymbols from '@coinspace/cs-eos-wallet/symbols';
 import Account from './account/Account.js';
 import { ref } from 'vue';
 import { release } from './version.js';
@@ -30,7 +29,6 @@ export async function createAccount({ app, router }) {
   defineAppProperty(app, '$walletState', undefined);
   defineAppProperty(app, '$STATE_LOADING', CsWallet.STATE_LOADING);
   defineAppProperty(app, '$STATE_LOADED', CsWallet.STATE_LOADED);
-  defineAppProperty(app, '$STATE_NEED_ACTIVATION', EOSSymbols.STATE_NEED_ACTIVATION);
   defineAppProperty(app, '$STATE_ERROR', CsWallet.STATE_ERROR);
   defineAppProperty(app, '$currency', currency);
   defineAppProperty(app, '$user', user);

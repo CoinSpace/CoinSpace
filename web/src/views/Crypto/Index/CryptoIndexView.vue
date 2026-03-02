@@ -13,7 +13,6 @@ import CryptoIndexBuySell from './CryptoIndexBuySell.vue';
 import CryptoIndexConfirmRemove from './CryptoIndexConfirmRemove.vue';
 import CryptoIndexDropdownMenu from './CryptoIndexDropdownMenu.vue';
 import CryptoIndexPrice from './CryptoIndexPrice.vue';
-import CryptoIndexSetupEOS from './CryptoIndexSetupEOS.vue';
 import CryptoIndexTools from './CryptoIndexTools.vue';
 
 import ArrowLeftIcon from '../../../assets/svg/arrowLeft.svg';
@@ -26,7 +25,6 @@ export default {
     CryptoIndexConfirmRemove,
     CryptoIndexDropdownMenu,
     CryptoIndexPrice,
-    CryptoIndexSetupEOS,
     CryptoIndexTools,
     SmartLayout,
     CsPriceChart,
@@ -177,7 +175,6 @@ export default {
     >
       {{ $account.unknownError() }}
     </div>
-    <CryptoIndexSetupEOS />
 
     <CryptoIndexTools
       @remove="showConfirmRemove = true"

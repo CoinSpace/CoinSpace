@@ -83,7 +83,7 @@ export default {
       >
         <template v-if="$wallet">
           <CsLoader v-if="$walletState === $STATE_LOADING" />
-          <slot v-if="[$STATE_LOADED, $STATE_NEED_ACTIVATION].includes($walletState)" />
+          <slot v-if="$walletState === $STATE_LOADED" />
           <div
             v-if="$walletState === $STATE_ERROR"
             class="&__error"

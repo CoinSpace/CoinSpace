@@ -5,7 +5,6 @@ export default [
   { _id: 'cardano@cardano', scheme: 'cardano' },
   { _id: 'dash@dash', scheme: 'dash' },
   { _id: 'dogecoin@dogecoin', scheme: 'dogecoin' },
-  { _id: 'eos@eos', scheme: 'eos' },
   { _id: 'ethereum@ethereum', scheme: 'ethereum' },
   { _id: 'litecoin@litecoin', scheme: 'litecoin' },
   { _id: 'monero@monero', scheme: 'monero' },

@@ -15,7 +15,6 @@ const resolution = new Resolution({
 // https://github.com/unstoppabledomains/uns/blob/38ead47f53601ab9e62a289f55e97e9deb0d0605/scripts/blockchain_families.csv
 const platformToNetwork = {
   'binance-smart-chain': 'BSC',
-  eos: 'EOSIO',
   polygon: 'MATIC',
 };
 const symbolToSymbol = {

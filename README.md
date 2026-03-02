@@ -27,7 +27,6 @@ Supported coins:
 - Cardano (ADA)
 - Dash (DASH)
 - Dogecoin (DOGE)
-- EOS (EOS)
 - Ethereum (ETH) and ERC20 tokens
 - Ethereum Classic (ETC)
 - Fantom (FTM) and Fantom tokens

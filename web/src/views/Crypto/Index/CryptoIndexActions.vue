@@ -16,6 +16,12 @@ export default {
     SendIcon,
     SwapIcon,
   },
+  computed: {
+    disabled() {
+      if (this.$wallet.crypto._id === 'eos@eos') return true;
+      return this.$walletState === this.$STATE_LOADING;
+    },
+  },
 };
 </script>
 
@@ -27,7 +33,7 @@ export default {
   >
     <CsButton
       type="circle"
-      :disabled="$walletState === $STATE_LOADING"
+      :disabled="disabled"
       @click="$router.push({ name: 'crypto.send', params: { cryptoId: $wallet.crypto._id }})"
     >
       <template #circle>
@@ -37,7 +43,7 @@ export default {
     </CsButton>
     <CsButton
       type="circle"
-      :disabled="$walletState === $STATE_LOADING"
+      :disabled="disabled"
       @click="$router.push({ name: 'crypto.receive', params: { cryptoId: $wallet.crypto._id }})"
     >
       <template #circle>
@@ -48,7 +54,7 @@ export default {
     <CsButton
       v-if="$showRampsAndExchangeAndStaking"
       type="circle"
-      :disabled="$walletState === $STATE_LOADING"
+      :disabled="disabled"
       @click="$router.push({ name: 'crypto.swap', params: { cryptoId: $wallet.crypto._id }})"
     >
       <template #circle>
@@ -58,7 +64,7 @@ export default {
     </CsButton>
     <CsButton
       type="circle"
-      :disabled="$walletState === $STATE_LOADING"
+      :disabled="disabled"
       @click="$router.push({ name: 'crypto.history', params: { cryptoId: $wallet.crypto._id }})"
     >
       <template #circle>

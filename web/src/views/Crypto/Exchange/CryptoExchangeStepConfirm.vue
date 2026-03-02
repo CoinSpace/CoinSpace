@@ -10,8 +10,6 @@ import BaseExchange, {
   InternalExchangeError,
 } from '../../../lib/exchanges/BaseExchange.js';
 
-import * as EOSErrors from '@coinspace/cs-eos-wallet/errors';
-
 export default {
   components: {
     MainLayout,
@@ -64,9 +62,6 @@ export default {
           if (this.$wallet.crypto._id === 'stellar@stellar') {
             options.meta = { memo: exchange.extraId };
           }
-          if (this.$wallet.crypto._id === 'eos@eos') {
-            options.meta = { memo: exchange.extraId };
-          }
           const id = await this.$wallet.createTransaction(options, walletSeed);
           this.$account.emit('update');
           this.updateStorage({ status: true });
@@ -83,30 +78,6 @@ export default {
             this.updateStorage({ status: false, message: this.$t('{exchange} error. Please try again later.', {
               exchange: this.$account.exchanges.getProviderInfo(this.storage.provider).name,
             }) });
-            return;
-          }
-          if (err instanceof EOSErrors.DestinationAccountError) {
-            this.updateStorage({ status: false, message: this.$t("Destination account doesn't exist.") });
-            return;
-          }
-          if (err instanceof EOSErrors.ExpiredTransactionError) {
-            this.updateStorage({ status: false, message: this.$t('Transaction has been expired. Please try again.') });
-            return;
-          }
-          if (err instanceof EOSErrors.CPUExceededError) {
-            this.updateStorage({
-              status: false,
-              // eslint-disable-next-line max-len
-              message: this.$t('Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.'),
-            });
-            return;
-          }
-          if (err instanceof EOSErrors.NETExceededError) {
-            this.updateStorage({
-              status: false,
-              // eslint-disable-next-line max-len
-              message: this.$t('Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.'),
-            });
             return;
           }
           this.updateStorage({ status: false });

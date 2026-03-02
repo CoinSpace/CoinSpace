@@ -5,7 +5,6 @@ import MainLayout from '../../../layouts/MainLayout.vue';
 import { errors } from '@coinspace/cs-common';
 import { walletSeed } from '../../../lib/mixins.js';
 
-import * as EOSErrors from '@coinspace/cs-eos-wallet/errors';
 import * as RippleErrors from '@coinspace/cs-ripple-wallet/errors';
 
 export default {
@@ -38,30 +37,6 @@ export default {
         } catch (err) {
           if (err instanceof RippleErrors.DestinationTagNeededError) {
             this.updateStorage({ status: false, message: this.$t("Recipient's wallet requires a destination tag.") });
-            return;
-          }
-          if (err instanceof EOSErrors.DestinationAccountError) {
-            this.updateStorage({ status: false, message: this.$t("Destination account doesn't exist.") });
-            return;
-          }
-          if (err instanceof EOSErrors.ExpiredTransactionError) {
-            this.updateStorage({ status: false, message: this.$t('Transaction has been expired. Please try again.') });
-            return;
-          }
-          if (err instanceof EOSErrors.CPUExceededError) {
-            this.updateStorage({
-              status: false,
-              // eslint-disable-next-line max-len
-              message: this.$t('Account CPU usage has been exceeded. Please try again later or ask someone to stake you more CPU.'),
-            });
-            return;
-          }
-          if (err instanceof EOSErrors.NETExceededError) {
-            this.updateStorage({
-              status: false,
-              // eslint-disable-next-line max-len
-              message: this.$t('Account NET usage has been exceeded. Please try again later or ask someone to stake you more NET.'),
-            });
             return;
           }
           if (err instanceof errors.MinimumReserveDestinationError) {

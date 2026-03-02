@@ -76,7 +76,6 @@ async function run() {
           'cardano',
           'dash',
           'dogecoin',
-          'eos',
           'ethereum',
           'litecoin',
           'monero',
