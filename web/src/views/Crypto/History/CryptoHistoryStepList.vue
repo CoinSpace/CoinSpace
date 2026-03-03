@@ -58,17 +58,18 @@ export default {
     },
     async load() {
       if (this.$walletState !== this.$STATE_LOADED) return;
+      const { crypto } = this.$wallet;
       this.historyState = this.$STATE_LOADING;
       try {
-        if (this.cursor === undefined) {
-          await this.$account.exchanges.loadExchanges();
-        }
-        const data = await this.$wallet.loadTransactions({ cursor: this.cursor });
+        const [data] = await Promise.all([
+          this.$wallet.loadTransactions({ cursor: this.cursor }),
+          this.cursor === undefined && this.$account.exchanges.loadExchanges(),
+        ]);
         this.cursor = data.cursor;
         this.hasMore = data.hasMore;
         if (data.transactions && data.transactions.length) {
           this.transactions.push(
-            ...this.$account.exchanges.exchangifyTransactions(data.transactions, this.$wallet.crypto)
+            ...this.$account.exchanges.exchangifyTransactions(data.transactions, crypto)
           );
         }
         this.historyState = this.$STATE_LOADED;
