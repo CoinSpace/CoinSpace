@@ -3,8 +3,8 @@ import CsAvatar from '../components/CsAvatar.vue';
 import CsButton from '../components/CsButton.vue';
 import CsLoader from '../components/CsLoader.vue';
 
-import { onShowOnHide } from '../lib/mixins.js';
 import { GeolocationError } from '../lib/account/Mecto.js';
+import { onShowOnHide } from '../lib/mixins.js';
 
 export default {
   components: {

@@ -86,7 +86,7 @@ export default class Mecto {
               [i18n.global.t('Cancel'), i18n.global.t('Settings')]
             );
           }
-          if (err instanceof GeolocationPositionError) {
+          if (err instanceof window.GeolocationPositionError) {
             reject(new GeolocationError('Unable to retrieve your location'));
           } else {
             reject(err);

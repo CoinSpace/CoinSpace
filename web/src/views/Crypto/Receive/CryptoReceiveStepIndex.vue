@@ -18,9 +18,9 @@ import LocationFillIcon from '../../../assets/svg/locationFill.svg';
 import LocationIcon from '../../../assets/svg/location.svg';
 import ShareIcon from '../../../assets/svg/share.svg';
 
+import { GeolocationError } from '../../../lib/account/Mecto.js';
 import { cryptoSubtitle } from '../../../lib/helpers.js';
 import { onShowOnHide } from '../../../lib/mixins.js';
-import { GeolocationError } from '../../../lib/account/Mecto.js';
 
 export default {
   components: {
