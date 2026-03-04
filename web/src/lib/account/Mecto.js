@@ -1,9 +1,5 @@
 import i18n from '../i18n/i18n.js';
 
-export class GeolocationNotSupported extends Error {
-  name = 'GeolocationNotSupported';
-}
-
 export class GeolocationError extends Error {
   name = 'GeolocationError';
 }
@@ -68,11 +64,12 @@ export default class Mecto {
   async #getLocation() {
     return new Promise((resolve, reject) => {
       if (!window.navigator.geolocation) {
-        return reject(new GeolocationNotSupported('Your browser does not support geolocation'));
+        return reject(new GeolocationError('Your browser does not support geolocation'));
       }
 
       const options = {
         timeout: 30 * 1000,
+        enableHighAccuracy: import.meta.env.VITE_BUILD_TYPE !== 'electron',
       };
 
       const alert = window.permissionDenied || window.alert;
@@ -89,9 +86,11 @@ export default class Mecto {
               [i18n.global.t('Cancel'), i18n.global.t('Settings')]
             );
           }
-          reject(new GeolocationError('Unable to retrieve your location', {
-            cause: err,
-          }));
+          if (err instanceof GeolocationPositionError) {
+            reject(new GeolocationError('Unable to retrieve your location'));
+          } else {
+            reject(err);
+          }
         },
         options
       );

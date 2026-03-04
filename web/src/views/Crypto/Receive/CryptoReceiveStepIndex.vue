@@ -20,6 +20,7 @@ import ShareIcon from '../../../assets/svg/share.svg';
 
 import { cryptoSubtitle } from '../../../lib/helpers.js';
 import { onShowOnHide } from '../../../lib/mixins.js';
+import { GeolocationError } from '../../../lib/account/Mecto.js';
 
 export default {
   components: {
@@ -117,6 +118,7 @@ export default {
         await this.$options.mecto;
         this.isMectoEnabled = true;
       } catch (err) {
+        if (err instanceof GeolocationError) return;
         console.error(err);
       } finally {
         this.isMectoLoading = false;

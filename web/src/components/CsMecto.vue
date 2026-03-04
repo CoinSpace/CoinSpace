@@ -4,6 +4,7 @@ import CsButton from '../components/CsButton.vue';
 import CsLoader from '../components/CsLoader.vue';
 
 import { onShowOnHide } from '../lib/mixins.js';
+import { GeolocationError } from '../lib/account/Mecto.js';
 
 export default {
   components: {
@@ -29,6 +30,7 @@ export default {
       try {
         this.users = await this.$account.mecto.search();
       } catch (err) {
+        if (err instanceof GeolocationError) return;
         console.error(err);
       } finally {
         this.isLoading = false;
