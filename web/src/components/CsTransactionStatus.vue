@@ -1,6 +1,5 @@
 <script>
 import CsButton from './CsButton.vue';
-import CsModalInvitation from './CsModalInvitation.vue';
 import MainLayout from '../layouts/MainLayout.vue';
 
 import FailCrossIcon from '../assets/svg/failCross.svg';
@@ -10,7 +9,6 @@ export default {
   components: {
     MainLayout,
     CsButton,
-    CsModalInvitation,
     FailCrossIcon,
     SuccessTickIcon,
   },
@@ -45,11 +43,6 @@ export default {
       type: Function,
       default: undefined,
     },
-  },
-  data() {
-    return {
-      showModalInvitation: false,
-    };
   },
   computed: {
     crypto() {
@@ -96,14 +89,6 @@ export default {
     if (['ios', 'android-play'].includes(this.env.VITE_DISTRIBUTION)) {
       await new Promise((r) => setTimeout(r, 400));
       window.cordova.plugins.AppReview.requestReview().catch(() => {});
-    } else if (!this.$account.details.get('isInvitationShown')) {
-      await new Promise((r) => setTimeout(r, 200));
-      const { enabled } = await this.$account.getInvitationStatus();
-      if (enabled) {
-        this.showModalInvitation = true;
-        this.$account.details.set('isInvitationShown', true);
-        await this.$account.details.save();
-      }
     }
   },
   methods: {
@@ -144,10 +129,6 @@ export default {
     >
       {{ internalAction }}
     </CsButton>
-    <CsModalInvitation
-      :show="showModalInvitation"
-      @close="showModalInvitation = false"
-    />
   </MainLayout>
 </template>
 

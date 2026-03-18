@@ -446,6 +446,7 @@ paths:
           $ref: '#/components/responses/GeneralError'
   /invitation:
     get:
+      deprecated: true
       x-eov-operation-id: getInvitationStatus
       x-eov-operation-handler: handlers
       description: Get invitation status
@@ -469,6 +470,7 @@ paths:
         default:
           $ref: '#/components/responses/GeneralError'
     post:
+      deprecated: true
       x-eov-operation-id: sendInvitation
       x-eov-operation-handler: handlers
       description: Send invitation
