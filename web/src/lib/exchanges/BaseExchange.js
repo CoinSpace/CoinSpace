@@ -320,7 +320,6 @@ export default class BaseExchange {
   #isRequiredToAccept({ internal, cryptoTo, payoutHash = '' }) {
     if (cryptoTo !== 'monero@monero') return false;
     if (!internal) return false;
-    const txsIds = this.#account.wallet('monero@monero')?.storage?.get('txIds') || [];
-    return !txsIds.includes(payoutHash.toLowerCase());
+    return !this.#account.wallet('monero@monero')?.hasTransaction(payoutHash);
   }
 }
