@@ -407,6 +407,7 @@ paths:
           $ref: '#/components/responses/GeneralError'
   /fees:
     get:
+      deprecated: true
       x-eov-operation-id: getFees
       x-eov-operation-handler: handlers
       description: Get transaction fees for coin
@@ -422,6 +423,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FeeList'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /fees/float:
+    get:
+      x-eov-operation-id: getFloatFees
+      x-eov-operation-handler: handlers
+      description: Get transaction float fees for coin
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+        - $ref: '#/components/parameters/cryptoId'
+      security:
+        - deviceSignature: []
+      responses:
+        '200':
+          description: Fees for coin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FloatFeeList'
         default:
           $ref: '#/components/responses/GeneralError'
   /invitation:
@@ -1202,6 +1222,26 @@ components:
       maxItems: 3
       items:
         $ref: '#/components/schemas/Fee'
+    FloatFee:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          pattern: ^(minimum|default|fastest)$
+          maxLength: 64
+        value:
+          type: number
+          format: double
+          minimum: 0
+      required:
+        - name
+        - value
+    FloatFeeList:
+      type: array
+      maxItems: 3
+      items:
+        $ref: '#/components/schemas/FloatFee'
     Hex128String:
       type: string
       pattern: ^[a-f0-9]{128}$

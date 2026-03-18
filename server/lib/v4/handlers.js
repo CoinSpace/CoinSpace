@@ -24,7 +24,16 @@ export async function getMarket(req, res) {
   res.status(200).send(data);
 }
 
+/* deprecated */
 export async function getFees(req, res) {
+  const { items } = await fee.getFees(req.query.crypto);
+  res.status(200).send(items.map((item) => {
+    item.value = Math.ceil(item.value);
+    return item;
+  }));
+}
+
+export async function getFloatFees(req, res) {
   const { items } = await fee.getFees(req.query.crypto);
   res.status(200).send(items);
 }
