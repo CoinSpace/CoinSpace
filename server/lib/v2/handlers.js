@@ -244,7 +244,7 @@ export async function getFees(req, res) {
   let { crypto } = req.query;
   if (crypto === 'bitcoincash') crypto = 'bitcoin-cash';
   if (crypto === 'bitcoinsv') crypto = 'bitcoin-sv';
-  const fees = await fee.getFees(`${crypto}@${crypto}`);
+  const fees = await fee.getFeesDeprecated(`${crypto}@${crypto}`);
   res.status(200).send(fees);
 }
 

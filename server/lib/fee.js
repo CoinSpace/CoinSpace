@@ -57,7 +57,18 @@ async function getFees(cryptoId) {
   return { items: fees.fee };
 }
 
+async function getFeesDeprecated(cryptoId) {
+  const { items } = await getFees(cryptoId);
+  return {
+    items: items.map((item) => {
+      item.value = Math.ceil(item.value);
+      return item;
+    }),
+  };
+}
+
 export default {
   updateFees,
   getFees,
+  getFeesDeprecated,
 };

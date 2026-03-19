@@ -250,7 +250,7 @@ export async function getTickersPublic(req, res) {
 }
 
 export async function getFees(req, res) {
-  const fees = await fee.getFees(req.query.crypto);
+  const fees = await fee.getFeesDeprecated(req.query.crypto);
   res.status(200).send(fees);
 }
 

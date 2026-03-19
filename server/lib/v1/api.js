@@ -108,7 +108,7 @@ api.get('/fees', (req, res) => {
   let network = req.query.network || 'bitcoin';
   if (network === 'bitcoincash') network = 'bitcoin-cash';
   if (network === 'bitcoinsv') network = 'bitcoin-sv';
-  fee.getFees(`${network}@${network}`).then((fees) => {
+  fee.getFeesDeprecated(`${network}@${network}`).then((fees) => {
     res.status(200).send(fees);
   }).catch((err) => {
     res.status(400).send(err);
