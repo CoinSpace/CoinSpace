@@ -23,42 +23,42 @@ export default {
   data() {
     const { type } = this.$account.biometry;
     const { $t } = this;
-    const ENABLE = $t('Enable') + ' ';
-    switch (type) {
-      case TYPES.BIOMETRICS:
-        return {
-          title: $t('Biometrics'),
-          text: $t('Use Biometrics instead of PIN.'),
-          buttonLabel: ENABLE + $t('Biometrics'),
-          icon: 'TouchIdIcon',
-        };
-      case TYPES.FINGERPRINT:
-        return {
-          title: $t('Fingerprint'),
-          text: $t('Use Fingerprint instead of PIN.'),
-          buttonLabel: ENABLE + $t('Fingerprint'),
-          icon: 'TouchIdIcon',
-        };
-      case TYPES.TOUCH_ID:
-        return {
-          title: 'Touch ID',
-          text: $t('Use Touch ID instead of PIN.'),
-          buttonLabel: ENABLE + 'Touch ID',
-          icon: 'TouchIdIcon',
-        };
-      case TYPES.FACE_ID:
-        return {
-          title: 'Face ID',
-          text: $t('Use Face ID instead of PIN.'),
-          buttonLabel: ENABLE + 'Face ID',
-          icon: 'FaceIdIcon',
-        };
-    }
+    const CONFIG = {
+      [TYPES.BIOMETRICS]: {
+        title: $t('Biometrics'),
+        text: $t('Use Biometrics instead of PIN.'),
+        icon: 'TouchIdIcon',
+      },
+      [TYPES.FINGERPRINT]: {
+        title: $t('Fingerprint'),
+        text: $t('Use Fingerprint instead of PIN.'),
+        icon: 'TouchIdIcon',
+      },
+      [TYPES.TOUCH_ID]: {
+        title: 'Touch ID',
+        text: $t('Use Touch ID instead of PIN.'),
+        icon: 'TouchIdIcon',
+      },
+      [TYPES.FACE_ID]: {
+        title: 'Face ID',
+        text: $t('Use Face ID instead of PIN.'),
+        icon: 'FaceIdIcon',
+      },
+    };
+    const { title, text, icon } = CONFIG[type];
+    return {
+      isLoading: false,
+      title,
+      text,
+      icon,
+      buttonLabel: $t('Enable') + ' ' + title,
+    };
   },
   methods: {
     async setup() {
+      this.isLoading = true;
       const result = await this.$account.biometry.enable(this.storage.pin, this.storage.seed);
-      if (!result) return;
+      if (!result) return this.isLoading = false;
       this.done();
     },
     done() {
@@ -89,6 +89,7 @@ export default {
     <CsButtonGroup>
       <CsButton
         type="primary"
+        :isLoading="isLoading"
         @click="setup"
       >
         {{ buttonLabel }}
