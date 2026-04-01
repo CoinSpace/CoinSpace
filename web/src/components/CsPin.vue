@@ -78,6 +78,7 @@ export default {
       }
     },
     logout() {
+      if (this.isLoading) return;
       this.$account.logout();
       this.$router.replace({ name: 'auth' });
     },
