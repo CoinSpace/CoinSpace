@@ -64,15 +64,19 @@ export default class ServerStorage {
       return;
     }
     this.#status = 'saving';
-    const { data } = await this.#request({
-      url: this.#url,
-      method: 'put',
-      data: {
-        data: encrypt(json, this.#key),
-      },
-      seed: 'device',
-    });
-    this.#json = decrypt(data, this.#key);
+    try {
+      await this.#request({
+        url: this.#url,
+        method: 'put',
+        data: {
+          data: encrypt(json, this.#key),
+        },
+        seed: 'device',
+      });
+    } catch (err) {
+      console.error(err);
+    }
+    this.#json = json;
     this.#storage = JSON.parse(this.#json);
     this.#status = 'ready';
   }
