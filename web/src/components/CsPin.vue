@@ -164,7 +164,8 @@ export default {
       switch (error.status) {
         case 404:
         case 410:
-          return this.logout();
+          this.$account.logout();
+          return this.$router.replace({ name: 'auth' });
         case 401:
           this.isWrong = true;
           this.value = '';
