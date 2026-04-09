@@ -94,7 +94,9 @@ export default {
           :value="`${staked} ${$wallet.crypto.symbol}`"
         />
         <div>
-          {{ $c(fiat) }}
+          <span dir="ltr">
+            {{ $c(fiat) }}
+          </span>
         </div>
         <CsFormTextareaReadonly
           :label="$t('APR')"

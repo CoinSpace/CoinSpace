@@ -132,7 +132,7 @@ export default {
             :aria-label="$t('Back')"
             @click="back"
           >
-            <ArrowLeftIcon />
+            <ArrowLeftIcon class="rtl-mirror" />
           </CsNavbarButton>
         </template>
         <template #right>

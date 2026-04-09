@@ -1,5 +1,5 @@
 import { createI18n } from 'vue-i18n';
-import { languages } from './languages.js';
+import { defaultLanguage, languages } from './languages.js';
 
 const i18n = createI18n({
   locale: 'en',
@@ -46,28 +46,31 @@ const i18n = createI18n({
   },
 });
 
-export async function setLanguage(language = defaultLanguage()) {
-  language = language.split('-', 2).join('-').toLowerCase();
+export async function setLanguage(languageCode = defaultLanguageCode()) {
+  languageCode = languageCode.split('-', 2).join('-').toLowerCase();
 
-  const hasLanguage = !!languages.find((item) => item.value === language);
-  if (!hasLanguage) {
-    const short = language.split('-')[0];
-    language = languages.find((item) => item.value === short)?.value || 'en';
+  let language = languages.find((item) => item.value === languageCode);
+  if (!language) {
+    const shortCode = languageCode.split('-')[0];
+    language = languages.find((item) => item.value === shortCode) || defaultLanguage;
   }
 
-  if (!Object.keys(i18n.global.messages[language] || {}).length) {
-    const messages = await import(`./messages/${language}.json`);
-    i18n.global.setLocaleMessage(language, messages.default);
-    i18n.global.setNumberFormat(language, i18n.global.numberFormats.en);
-    i18n.global.setDateTimeFormat(language, i18n.global.datetimeFormats.en);
+  if (!Object.keys(i18n.global.messages[language.value] || {}).length) {
+    const messages = await import(`./messages/${language.value}.json`);
+    i18n.global.setLocaleMessage(language.value, messages.default);
+    i18n.global.setNumberFormat(language.value, i18n.global.numberFormats.en);
+    i18n.global.setDateTimeFormat(language.value, i18n.global.datetimeFormats.en);
   }
-  i18n.global.locale = language;
-  localStorage.setItem('_cs_language', language);
+  i18n.global.locale = language.value;
+
+  document.documentElement.setAttribute('dir', language.dir || 'ltr');
+  document.documentElement.setAttribute('lang', language.value);
+  localStorage.setItem('_cs_language', language.value);
 }
 
-function defaultLanguage() {
+function defaultLanguageCode() {
   if (import.meta.env.DEV) return 'en';
-  return localStorage.getItem('_cs_language') || navigator.language || 'en';
+  return localStorage.getItem('_cs_language') || navigator.language || defaultLanguage.value;
 }
 
 export default i18n;

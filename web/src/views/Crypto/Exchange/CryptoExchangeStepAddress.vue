@@ -159,6 +159,7 @@ export default {
         v-if="address === 'your wallet'"
         :label="$t('Wallet address')"
         :value="$t('Your wallet')"
+        rtl
       >
         <template #before>
           <WalletSmallIcon />

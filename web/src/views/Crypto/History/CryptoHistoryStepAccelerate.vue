@@ -74,7 +74,10 @@ export default {
             }),
           }) }}
         </div>
-        <div class="&__subtitle">
+        <div
+          class="&__subtitle"
+          dir="ltr"
+        >
           {{ fee }}
         </div>
       </div>

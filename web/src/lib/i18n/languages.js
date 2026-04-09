@@ -21,9 +21,12 @@ export const languages = [
   { value: 'tr', name: 'Türkçe' },
   { value: 'ru', name: 'Русский' },
   { value: 'uk', name: 'Українська' },
+  { value: 'ar', name: 'العربية', dir: 'rtl' },
   { value: 'th', name: 'ภาษาไทย' },
   { value: 'km', name: 'ភាសាខ្មែរ' },
   { value: 'ko', name: '한국어' },
   { value: 'ja', name: '日本語' },
   { value: 'zh-cn', name: '汉语' },
 ];
+
+export const defaultLanguage = languages.find((language) => language.value === 'en' );

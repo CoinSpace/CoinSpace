@@ -1,4 +1,4 @@
-.slide-right {
+@mixin slide($enter-x, $leave-x) {
   &-leave-active {
     overflow: hidden;
     transition-duration: 0.1s;
@@ -11,7 +11,7 @@
 
   &-enter-from [data-transition] {
     opacity: 0;
-    transform: translateX(-2rem);
+    transform: translateX($enter-x);
   }
 
   &-enter-active [data-transition] {
@@ -24,38 +24,21 @@
 
   &-leave-to [data-transition] {
     opacity: 0;
-    transform: translateX(2rem);
+    transform: translateX($leave-x);
   }
 }
 
+.slide-right {
+  @include slide(-2rem, 2rem);
+}
+
 .slide-left {
-  &-leave-active {
-    overflow: hidden;
-    transition-duration: 0.1s;
-  }
+  @include slide(2rem, -2rem);
+}
 
-  &-enter-active {
-    overflow: hidden;
-    transition-duration: 0.2s;
-  }
-
-  &-enter-from [data-transition] {
-    opacity: 0;
-    transform: translateX(2rem);
-  }
-
-  &-enter-active [data-transition] {
-    transition: all 0.1s ease-in 0.1s;
-  }
-
-  &-leave-active [data-transition] {
-    transition: all 0.1s ease-out;
-  }
-
-  &-leave-to [data-transition] {
-    opacity: 0;
-    transform: translateX(-2rem);
-  }
+[dir="rtl"] {
+  .slide-right { @include slide(2rem, -2rem); }
+  .slide-left { @include slide(-2rem, 2rem); }
 }
 
 .modal {

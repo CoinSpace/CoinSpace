@@ -156,12 +156,14 @@ export default {
           '&__amount-crypto--positive': transaction.incoming,
           '&__amount-crypto--negative': !transaction.incoming,
         }"
+        dir="ltr"
       >
         {{ amount }}
       </div>
       <div
         v-if="price"
         class="&__amount-fiat"
+        dir="ltr"
       >
         {{ amountConverted }}
       </div>
@@ -178,6 +180,7 @@ export default {
         />
         <div
           class="&__amount-crypto"
+          dir="ltr"
         >
           {{ exchange.amount }}
         </div>

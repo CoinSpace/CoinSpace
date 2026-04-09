@@ -62,6 +62,7 @@ export default {
       display: none;
       margin-top: -$spacing-md;
       filter: drop-shadow(0 0 $spacing-3xl rgb(0 0 0 / 10%));
+      transform: translateZ(0); // fix safari
 
       #{ $self }__triangle {
         display: block;
@@ -74,8 +75,8 @@ export default {
     &__content {
       width: 22.5rem;
       border-radius: 0.625rem;
-      margin-left: calc(100% - 22.5rem - $spacing-xs);
       background-color: $background-color;
+      margin-inline-start: calc(100% - 22.5rem - $spacing-xs);
     }
   }
 </style>

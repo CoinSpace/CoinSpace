@@ -218,7 +218,10 @@ export default {
     </template>
   </div>
   <div class="&__keyboard">
-    <div class="&__row">
+    <div
+      class="&__row"
+      dir="ltr"
+    >
       <CsButton
         v-for="(number) in [1, 2, 3]"
         :key="number"
@@ -229,7 +232,10 @@ export default {
         {{ number }}
       </CsButton>
     </div>
-    <div class="&__row">
+    <div
+      class="&__row"
+      dir="ltr"
+    >
       <CsButton
         v-for="(number) in [4, 5, 6]"
         :key="number"
@@ -240,7 +246,10 @@ export default {
         {{ number }}
       </CsButton>
     </div>
-    <div class="&__row">
+    <div
+      class="&__row"
+      dir="ltr"
+    >
       <CsButton
         v-for="(number) in [7, 8, 9]"
         :key="number"

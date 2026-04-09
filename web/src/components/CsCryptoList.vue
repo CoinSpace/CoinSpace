@@ -108,6 +108,7 @@ export default {
             <div
               v-if="!$isHiddenBalance && item.balanceFiat"
               class="&__subtitle"
+              dir="ltr"
             >
               {{ $n(item.balanceFiat, 'currency', {
                 currency: $currency,
@@ -118,7 +119,7 @@ export default {
             v-if="item.market && changePeriod"
             class="&__subtitle"
           >
-            <span>
+            <span dir="ltr">
               {{ $c(item.market.price) }}
             </span>
             <span
@@ -233,7 +234,7 @@ export default {
       }
 
       &:nth-child(2) {
-        text-align: right;
+        text-align: end;
       }
     }
 
@@ -255,12 +256,12 @@ export default {
 
       &:nth-child(2) {
         flex: 0 0 auto;
-        text-align: right;
+        text-align: end;
       }
     }
 
     &__change {
-      padding-left: $spacing-xs;
+      padding-inline-start: $spacing-xs;
 
       &--positive {
         color: $primary;

@@ -39,6 +39,8 @@ export default {
   >
     <textarea
       ref="input"
+      dir="ltr"
+      lang="en"
       :value="modelValue"
       class="&__textarea"
       :rows="rows"
@@ -63,6 +65,10 @@ export default {
       font-family: inherit;
       line-height: inherit;
       resize: none;
+
+      [dir="rtl"] & {
+        text-align: end;
+      }
     }
   }
 </style>

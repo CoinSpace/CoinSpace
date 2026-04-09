@@ -59,6 +59,7 @@ export default {
     autocapitalize="off"
     autocomplete="off"
     spellcheck="false"
+    dir="ltr"
     lang="en"
     class="&"
   >
@@ -68,5 +69,9 @@ export default {
   .#{ $filename } {
     width: 100%;
     border: none;
+
+    [dir="rtl"] & {
+      text-align: end;
+    }
   }
 </style>

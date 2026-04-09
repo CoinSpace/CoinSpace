@@ -70,7 +70,9 @@ export default {
           class="&__subtitle"
           :title="item.description"
         >
-          {{ item.description }}
+          <span dir="ltr">
+            {{ item.description }}
+          </span>
         </div>
       </div>
       <CsButton

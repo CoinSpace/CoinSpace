@@ -55,6 +55,7 @@ export default {
       <div
         class="&__price"
         :title="fiat"
+        dir="ltr"
       >
         {{ fiat }}
       </div>

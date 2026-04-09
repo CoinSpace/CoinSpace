@@ -124,6 +124,7 @@ export default {
         :label="$t('Unstaking period')"
         :info="$t('Unstaking period')"
         :value="`~${$duration($wallet.unstakingPeriod)}`"
+        rtl
       >
         <template #info>
           <div>

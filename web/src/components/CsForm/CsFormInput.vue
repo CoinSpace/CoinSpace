@@ -56,6 +56,7 @@ export default {
     <input
       :value="modelValue"
       type="text"
+      dir="ltr"
       lang="en"
       class="&__input"
       autocorrect="off"
@@ -108,6 +109,10 @@ export default {
 
       &::placeholder {
         color: $secondary;
+      }
+
+      [dir="rtl"] & {
+        text-align: end;
       }
     }
 

@@ -74,6 +74,10 @@ export default {
         background-color: $white;
         content: "";
         transition: all 0.1s ease-out;
+
+        [dir="rtl"] & {
+          transform: translateX($spacing-sm);
+        }
       }
     }
 
@@ -82,6 +86,10 @@ export default {
 
       &::before {
         transform: translateX($spacing-sm);
+
+        [dir="rtl"] & {
+          transform: translateX(0);
+        }
       }
     }
   }

@@ -72,7 +72,10 @@ export default {
         v-if="$slots.after"
         name="after"
       />
-      <ChevronRightIcon v-else />
+      <ChevronRightIcon
+        v-else
+        class="rtl-mirror"
+      />
     </div>
   </li>
 </template>

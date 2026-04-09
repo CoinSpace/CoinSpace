@@ -43,7 +43,7 @@ export default {
         :aria-label="$t('Back')"
         @click="$emit('back')"
       >
-        <ArrowLeftIcon />
+        <ArrowLeftIcon class="rtl-mirror" />
       </CsNavbarButton>
     </div>
     <div
@@ -85,7 +85,7 @@ export default {
       flex-grow: 1;
       text-align: center;
       @include breakpoint(lg) {
-        text-align: left;
+        text-align: start;
       }
 
       &--centered {

@@ -2,6 +2,7 @@
 import { Amount } from '@coinspace/cs-common';
 
 import CsAmountInput from '../../components/CsAmountInput.vue';
+import { languages } from '../../lib/i18n/languages.js';
 
 export default {
   components: {
@@ -11,33 +12,7 @@ export default {
     return {
       fiat: new Amount(251230n, 2),
       crypto: new Amount(1251230777n, 8),
-      languages: [
-        'en',
-        'ru',
-        'bs',
-        'cs',
-        'de',
-        'es',
-        'fil',
-        'fr',
-        'hr',
-        'hu',
-        'id',
-        'it',
-        'ja',
-        'km',
-        'ko',
-        'nb',
-        'nl',
-        'pl',
-        'pt-br',
-        'sr',
-        'th',
-        'tr',
-        'uk',
-        'vi',
-        'zh-cn',
-      ],
+      languages: languages.map((language) => language.value ),
       currencies: [
         'USD',
         'ARS', 'AUD', 'BRL', 'CAD', 'CHF', 'CNY',
@@ -84,32 +59,44 @@ export default {
       >
         <div>{{ currency }}</div>
         <div>
-          {{ new Intl.NumberFormat(language, {
-            style: 'currency',
-            currency,
-            currencyDisplay: 'symbol',
-          }).format(fiat.toString()) }} - symbol
+          <span dir="ltr">
+            {{ new Intl.NumberFormat(language, {
+              style: 'currency',
+              currency,
+              currencyDisplay: 'symbol',
+            }).format(fiat.toString()) }}
+          </span>
+          - symbol
         </div>
         <div>
-          {{ new Intl.NumberFormat(language, {
-            style: 'currency',
-            currency,
-            currencyDisplay: 'narrowSymbol',
-          }).format(fiat.toString()) }} - narrowSymbol
+          <span dir="ltr">
+            {{ new Intl.NumberFormat(language, {
+              style: 'currency',
+              currency,
+              currencyDisplay: 'narrowSymbol',
+            }).format(fiat.toString()) }}
+          </span>
+          - narrowSymbol
         </div>
         <div>
-          {{ new Intl.NumberFormat(language, {
-            style: 'currency',
-            currency,
-            currencyDisplay: 'code',
-          }).format(fiat.toString()) }} - code
+          <span dir="ltr">
+            {{ new Intl.NumberFormat(language, {
+              style: 'currency',
+              currency,
+              currencyDisplay: 'code',
+            }).format(fiat.toString()) }}
+          </span>
+          - code
         </div>
         <div>
-          {{ new Intl.NumberFormat(language, {
-            style: 'currency',
-            currency,
-            currencyDisplay: 'name',
-          }).format(fiat.toString()) }} - name
+          <span dir="ltr">
+            {{ new Intl.NumberFormat(language, {
+              style: 'currency',
+              currency,
+              currencyDisplay: 'name',
+            }).format(fiat.toString()) }}
+          </span>
+          - name
         </div>
       </div>
       <div>
@@ -117,13 +104,8 @@ export default {
       </div>
       <div class="&__currency">
         <div>
-          {{ new Intl.NumberFormat(language, {
-            style: 'currency',
-            currency: 'BTC',
-            currencyDisplay: 'code',
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 8,
-          }).format(crypto.toString()) }} - currency {{ language }}
+          <span dir="ltr">{{ crypto.toString() }} BTC</span>
+          - currency {{ language }}
         </div>
         <div>
           {{ new Intl.NumberFormat(language, {

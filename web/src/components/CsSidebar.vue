@@ -106,6 +106,7 @@ export default {
         />
       </CsButton>
       <div
+        dir="ltr"
         class="&__portfolio-amount"
         :class="`&__portfolio-amount--${portfolioBalanceSize}`"
         @click="$account.toggleHiddenBalance()"

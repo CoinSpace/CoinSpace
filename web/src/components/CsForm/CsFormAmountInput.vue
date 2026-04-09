@@ -172,7 +172,9 @@ export default {
     v-if="price !== undefined"
     class="&__info"
   >
-    {{ option.fiat ? `${amountConverted} ${symbol}` : $c(amountConverted) }}
+    <span dir="ltr">
+      {{ option.fiat ? `${amountConverted} ${symbol}` : $c(amountConverted) }}
+    </span>
   </div>
 </template>
 

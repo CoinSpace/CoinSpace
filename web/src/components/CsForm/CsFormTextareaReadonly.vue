@@ -22,6 +22,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    rtl: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
@@ -37,7 +41,11 @@ export default {
     >
       <slot name="before" />
     </div>
-    <div class="&__textarea">
+    <div
+      class="&__textarea"
+      :dir="rtl ? 'rtl' : 'ltr'"
+      lang="en"
+    >
       {{ value }}
     </div>
     <div

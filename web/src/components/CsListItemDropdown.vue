@@ -36,7 +36,7 @@ export default {
     <div class="&__label">
       {{ label }}
     </div>
-    <ChevronRightIcon />
+    <ChevronRightIcon class="rtl-mirror" />
     <select
       class="&__select"
       :value="modelValue"

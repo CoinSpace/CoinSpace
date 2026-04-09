@@ -106,6 +106,7 @@ export default {
     <div
       v-if="suggestions.length"
       class="&__suggestions"
+      lang="en"
     >
       <CsButton
         v-for="suggestion of suggestions"

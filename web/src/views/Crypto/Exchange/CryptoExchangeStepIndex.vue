@@ -337,9 +337,13 @@ export default {
         v-if="to && estimation"
         class="&__info"
       >
-        <div>{{ estimation.result }} {{ to.crypto.symbol }}</div>
+        <div>
+          <span dir="ltr">{{ estimation.result }} {{ to.crypto.symbol }}</span>
+        </div>
         <div v-if="amountConverted">
-          {{ $c(amountConverted) }}
+          <span dir="ltr">
+            {{ $c(amountConverted) }}
+          </span>
         </div>
       </div>
     </CsFormGroup>

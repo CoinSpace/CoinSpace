@@ -174,7 +174,7 @@ export default {
         }"
         @click="prevAddressType"
       >
-        <ChevronLeftIcon />
+        <ChevronLeftIcon class="rtl-mirror" />
       </CsButton>
       <div
         class="&__qr"
@@ -188,7 +188,7 @@ export default {
         }"
         @click="nextAddressType"
       >
-        <ChevronRightIcon />
+        <ChevronRightIcon class="rtl-mirror" />
       </CsButton>
     </div>
 

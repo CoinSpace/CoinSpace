@@ -53,127 +53,37 @@ export default {
           :key="index"
           class="&__data"
         >
-          <div
-            v-if="item.address"
-            class="&__item"
+          <template
+            v-for="[key, label] in [
+              ['address', $t('Public address')],
+              ['privatekey', $t('Private key')],
+              ['ownerPublicKey', $t('Owner public key')],
+              ['ownerPrivateKey', $t('Owner private key')],
+              ['activePublicKey', $t('Active public key')],
+              ['activePrivateKey', $t('Active private key')],
+              ['secret', $t('Secret')],
+              ['publicviewkey', $t('Public view key')],
+              ['privateviewkey', $t('Private view key')],
+              ['publicspendkey', $t('Public spend key')],
+              ['privatespendkey', $t('Private spend key')],
+            ]"
+            :key="key"
           >
-            <div class="&__item-title">
-              {{ $t('Public address') }}
+            <div
+              v-if="item[key]"
+              class="&__item"
+            >
+              <div class="&__item-title">
+                {{ label }}
+              </div>
+              <div
+                class="&__item-subtitle"
+                dir="ltr"
+              >
+                {{ item[key] }}
+              </div>
             </div>
-            <div class="&__item-subtitle">
-              {{ item.address }}
-            </div>
-          </div>
-          <div
-            v-if="item.privatekey"
-            class="&__item"
-          >
-            <div class="&__item-title">
-              {{ $t('Private key') }}
-            </div>
-            <div class="&__item-subtitle">
-              {{ item.privatekey }}
-            </div>
-          </div>
-          <div
-            v-if="item.ownerPublicKey"
-            class="&__item"
-          >
-            <div class="&__item-title">
-              {{ $t('Owner public key') }}
-            </div>
-            <div class="&__item-subtitle">
-              {{ item.ownerPublicKey }}
-            </div>
-          </div>
-          <div
-            v-if="item.ownerPrivateKey"
-            class="&__item"
-          >
-            <div class="&__item-title">
-              {{ $t('Owner private key') }}
-            </div>
-            <div class="&__item-subtitle">
-              {{ item.ownerPrivateKey }}
-            </div>
-          </div>
-          <div
-            v-if="item.activePublicKey"
-            class="&__item"
-          >
-            <div class="&__item-title">
-              {{ $t('Active public key') }}
-            </div>
-            <div class="&__item-subtitle">
-              {{ item.activePublicKey }}
-            </div>
-          </div>
-          <div
-            v-if="item.activePrivateKey"
-            class="&__item"
-          >
-            <div class="&__item-title">
-              {{ $t('Active private key') }}
-            </div>
-            <div class="&__item-subtitle">
-              {{ item.activePrivateKey }}
-            </div>
-          </div>
-          <div
-            v-if="item.secret"
-            class="&__item"
-          >
-            <div class="&__item-title">
-              {{ $t('Secret') }}
-            </div>
-            <div class="&__item-subtitle">
-              {{ item.secret }}
-            </div>
-          </div>
-          <div
-            v-if="item.publicviewkey"
-            class="&__item"
-          >
-            <div class="&__item-title">
-              {{ $t('Public view key') }}
-            </div>
-            <div class="&__item-subtitle">
-              {{ item.publicviewkey }}
-            </div>
-          </div>
-          <div
-            v-if="item.privateviewkey"
-            class="&__item"
-          >
-            <div class="&__item-title">
-              {{ $t('Private view key') }}
-            </div>
-            <div class="&__item-subtitle">
-              {{ item.privateviewkey }}
-            </div>
-          </div>
-          <div
-            v-if="item.publicspendkey"
-            class="&__item"
-          >
-            <div class="&__item-title">
-              {{ $t('Public spend key') }}
-            </div>
-            <div class="&__item-subtitle">
-              {{ item.publicspendkey }}
-            </div>
-          </div>
-          <div
-            v-if="item.privatespendkey"
-            class="&__item"
-          >
-            <div class="&__item-title">
-              {{ $t('Private spend key') }}
-            </div>
-            <div class="&__item-subtitle">
-              {{ item.privatespendkey }}
-            </div>
-          </div>
+          </template>
         </div>
       </div>
       <CsButton

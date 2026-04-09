@@ -11,10 +11,13 @@ export default {
 
 <template>
   <div class="&">
-    <div v-if="priceRange.max !== priceRange.min">
+    <div
+      v-if="priceRange.max !== priceRange.min"
+      dir="ltr"
+    >
       {{ $c(priceRange.max) }}
     </div>
-    <div>
+    <div dir="ltr">
       {{ $c(priceRange.min) }}
     </div>
   </div>
@@ -31,7 +34,7 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     color: $secondary;
-    text-align: right;
+    text-align: end;
     @include text-xs;
   }
 </style>

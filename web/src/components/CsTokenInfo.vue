@@ -35,13 +35,17 @@ export default {
       :crypto="crypto"
       :platform="platform"
     />
-    <div class="&__title">
+    <div
+      class="&__title"
+      dir="ltr"
+    >
       {{ title }}
     </div>
     <div
       v-for="subtitle in subtitles"
       :key="subtitle"
       class="&__subtitle"
+      dir="ltr"
     >
       {{ subtitle }}
     </div>

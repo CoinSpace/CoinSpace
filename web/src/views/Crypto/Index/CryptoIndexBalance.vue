@@ -40,6 +40,7 @@ export default {
       <div
         class="&__amount"
         :title="amount"
+        dir="ltr"
       >
         {{ $isHiddenBalance ? '*****' : amount }}
         <a
@@ -53,6 +54,7 @@ export default {
         v-if="$wallet.crypto.coingecko"
         class="&__fiat"
         :title="fiat"
+        dir="ltr"
       >
         {{ $isHiddenBalance ? '*****' : fiat }}
       </div>

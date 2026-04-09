@@ -109,6 +109,7 @@ export default {
       <CsFormTextareaReadonly
         :value="$t('Your wallet')"
         :label="$t('Wallet address')"
+        rtl
       >
         <template #before>
           <WalletSmallIcon />
