@@ -304,7 +304,7 @@
   "Value is too small, minimum {amount} {symbol}": "القيمة صغيرة جدًا، الحد الأدنى {amount} {symbol}",
   "Value is too small, minimum {value}": "القيمة صغيرة جدًا، الحد الأدنى {value}",
   "View in Block Explorer": "عرض في مستعرض الكتل",
-  "View passphrase again": "فتح في مستكشف البلوك تشين",
+  "View passphrase again": "عرض عبارة المرور مرة أخرى",
   "Wallet": "المحفظة",
   "Wallet address": "عنوان المحفظة",
   "Wallet settings have been updated.": "تم تحديث إعدادات المحفظة.",
