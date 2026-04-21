@@ -117,10 +117,9 @@ export default {
         if (![CsWallet.STATE_LOADED, CsWallet.STATE_LOADING].includes(wallet.state)) {
           await wallet.load();
         }
-        const raw = request.params.request.method === 'personal_sign'
-          ? request.params.request.params[0]
-          : request.params.request.params[1];
-        const data = new TextDecoder().decode(hexToBytes(raw.replace(/^0x/i, '')));
+        const raw = request.params.request.params[request.params.request.method === 'personal_sign' ? 0 : 1];
+        const hex = raw.replace(/^0x/i, '');
+        const data = new TextDecoder().decode(hexToBytes(hex.length % 2 === 0 ? hex : '0' + hex));
         this.updateStorage({
           request,
           data,
