@@ -66,6 +66,12 @@ export default {
       this.error = undefined;
       let { address } = this;
       let alias;
+
+      if (import.meta.env.DEV && address === 'success') {
+        this.updateStorage({ status: true });
+        return this.next('status');
+      }
+
       try {
         if (this.isUnaliasSupported) {
           const data = await this.$wallet.unalias(address);
