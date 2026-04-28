@@ -55,7 +55,7 @@ export default {
       threshold: 0.4,
     });
     const tokensIndex = new Fuse(tokensList, {
-      keys: ['crypto.name', 'crypto.symbol', 'crypto.address', 'crypto._id'],
+      keys: ['crypto.name', 'crypto.symbol', 'crypto._id'],
       threshold: 0.5,
     });
     if (this.$route.query.cryptoId && !alreadyAdded.includes(this.$route.query.cryptoId)) {
@@ -90,7 +90,17 @@ export default {
       return coins;
     },
     tokens() {
-      const tokens = this.query ? this.tokensIndex.search(this.query).map(item => item.item) : this.tokensList;
+      let tokens = this.tokensList;
+      if (this.query) {
+        const exactByAddress = this.tokensList.filter(
+          token => token.crypto.address?.toLowerCase() === this.query.toLowerCase()
+        );
+        const exactIds = new Set(exactByAddress.map(t => t.crypto._id));
+        const fuzzy = this.tokensIndex.search(this.query)
+          .map(item => item.item)
+          .filter(item => !exactIds.has(item.crypto._id));
+        tokens = [...exactByAddress, ...fuzzy];
+      }
       if (this.storage.filterPlatform) {
         return tokens.filter((item) => item.platform._id === this.storage.filterPlatform);
       }
