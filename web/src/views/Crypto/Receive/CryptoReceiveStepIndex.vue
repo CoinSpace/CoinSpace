@@ -290,7 +290,7 @@ export default {
       height: 12rem;
       flex-shrink: 0;
       padding: $spacing-md;
-      border: 1px solid $gray;
+      border: 1px solid $neutral;
       border-radius: 0.625rem;
     }
 

@@ -61,7 +61,7 @@ export default {
       border-radius: $spacing-lg;
       margin: 0;
       appearance: none;
-      background-color: $gray;
+      background-color: $neutral;
       transition: all 0.1s ease-out;
 
       &::before {

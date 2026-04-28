@@ -183,7 +183,7 @@ export default {
       flex-shrink: 0;
       align-items: center;
       justify-content: center;
-      border: 1px solid $gray;
+      border: 1px solid $neutral;
       border-radius: 0.25rem;
       margin-top: $spacing-2xs;
     }

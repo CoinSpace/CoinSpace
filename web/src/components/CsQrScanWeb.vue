@@ -96,7 +96,7 @@ export default {
       max-width: 20rem;
       height: 100%;
       max-height: 20rem;
-      border: 1px solid $gray;
+      border: 1px solid $divider;
       border-radius: 0.625rem;
       margin: 0 auto;
     }

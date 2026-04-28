@@ -349,7 +349,7 @@ export default {
       width: $spacing-md;
       height: $spacing-md;
       border-radius: 50%;
-      background-color: $gray;
+      background-color: $neutral;
 
       &--active {
         animation: scale-dot 0.2s;
