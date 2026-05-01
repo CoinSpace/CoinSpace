@@ -70,6 +70,9 @@ export default async function deviceready() {
   SafariViewController.isAvailable((available) => {
     if (!available) return;
     window.open = (url) => {
+      if (/^mailto:/.test(url)) {
+        return cordova.InAppBrowser.open(url, '_system');
+      }
       SafariViewController.show({ url });
     };
   });

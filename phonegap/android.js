@@ -38,7 +38,7 @@ async function run() {
   cordova('plugin add cordova-plugin-geolocation@5.0.0 --save');
   cordova('plugin add cordova-plugin-qrscanner-11@3.0.5 --save');
   cordova('plugin add cordova-plugin-dialogs@2.0.2 --save');
-  cordova('plugin add cordova-plugin-inappbrowser@5.0.0 --save');
+  cordova('plugin add cordova-plugin-inappbrowser@6.0.0 --save');
   cordova('plugin add cordova-plugin-statusbar@4.0.0 --save');
   cordova('plugin add cordova-plugin-x-socialsharing@6.0.4 --save');
   cordova('plugin add cordova-plugin-fingerprint-aio@6.0.1 --save');
