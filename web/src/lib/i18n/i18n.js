@@ -1,15 +1,20 @@
 import { createI18n } from 'vue-i18n';
 import { defaultLanguage, languages } from './languages.js';
 
+const numberFormatDefaults = { numberingSystem: 'latn' };
+const datetimeFormatDefaults = { calendar: 'gregory', numberingSystem: 'latn' };
+
 const i18n = createI18n({
   locale: 'en',
   fallbackLocale: 'en',
   numberFormats: {
     en: {
       currency: {
+        ...numberFormatDefaults,
         style: 'currency',
       },
       percent: {
+        ...numberFormatDefaults,
         style: 'percent',
         signDisplay: 'exceptZero',
         minimumFractionDigits: 2,
@@ -20,17 +25,21 @@ const i18n = createI18n({
   datetimeFormats: {
     en: {
       chart1Y: {
+        ...datetimeFormatDefaults,
         year: 'numeric', month: 'short', day: 'numeric',
       },
       short: {
+        ...datetimeFormatDefaults,
         year: 'numeric', month: 'short', day: 'numeric',
         hour: 'numeric', minute: 'numeric',
       },
       shortCurrentYear: {
+        ...datetimeFormatDefaults,
         month: 'short', day: 'numeric',
         hour: 'numeric', minute: 'numeric',
       },
       hardware: {
+        ...datetimeFormatDefaults,
         hour12: false,
         year: 'numeric', month: '2-digit', day: '2-digit',
         hour: '2-digit', minute: '2-digit', second: '2-digit',
