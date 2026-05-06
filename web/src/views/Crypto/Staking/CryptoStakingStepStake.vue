@@ -141,7 +141,7 @@ export default {
         :label="$t('Activation period')"
         :info="$t('Activation period')"
         :value="`~${$duration($wallet.activationPeriod)}`"
-        rtl
+        inheritDir
       >
         <template #info>
           <div>

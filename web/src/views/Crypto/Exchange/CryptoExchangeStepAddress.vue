@@ -148,6 +148,7 @@ export default {
       <CsFormTextareaReadonly
         :label="$t('Destination blockchain')"
         :value="storage.to.platform.name"
+        inheritDir
       >
         <template #before>
           <CsCryptoLogo
@@ -159,7 +160,7 @@ export default {
         v-if="address === 'your wallet'"
         :label="$t('Wallet address')"
         :value="$t('Your wallet')"
-        rtl
+        inheritDir
       >
         <template #before>
           <WalletSmallIcon />

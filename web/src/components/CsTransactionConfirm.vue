@@ -109,7 +109,7 @@ export default {
       <CsFormTextareaReadonly
         :value="$t('Your wallet')"
         :label="$t('Wallet address')"
-        rtl
+        inheritDir
       >
         <template #before>
           <WalletSmallIcon />

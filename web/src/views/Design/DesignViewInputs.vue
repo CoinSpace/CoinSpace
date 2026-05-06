@@ -11,7 +11,9 @@ import CsFormTextarea from '../../components/CsForm/CsFormTextarea.vue';
 import CsFormTextareaReadonly from '../../components/CsForm/CsFormTextareaReadonly.vue';
 import CsSwitch from '../../components/CsSwitch.vue';
 
+import EditIcon from '../../assets/svg/edit.svg';
 import SearchIcon from '../../assets/svg/search.svg';
+import WalletSmallIcon from '../../assets/svg/walletSmall.svg';
 
 export default {
   components: {
@@ -24,7 +26,9 @@ export default {
     CsSwitch,
     CsFormTextarea,
     CsFormTextareaReadonly,
+    EditIcon,
     SearchIcon,
+    WalletSmallIcon,
   },
   data() {
     return {
@@ -137,6 +141,37 @@ export default {
         value="some text here readonly some text here readonly"
         info="note"
       />
+      <CsFormTextareaReadonly
+        label="Readonly + icon"
+        value="Your wallet"
+        info="note"
+      >
+        <template #before>
+          <WalletSmallIcon />
+        </template>
+        <template #after>
+          <EditIcon />
+        </template>
+      </CsFormTextareaReadonly>
+      <CsFormTextareaReadonly
+        label="Readonly (inheritDir)"
+        value="some text here readonly some text here readonly"
+        info="note"
+        inheritDir
+      />
+      <CsFormTextareaReadonly
+        label="Readonly + icon (inheritDir)"
+        value="You wallet"
+        info="note"
+        inheritDir
+      >
+        <template #before>
+          <WalletSmallIcon />
+        </template>
+        <template #after>
+          <EditIcon />
+        </template>
+      </CsFormTextareaReadonly>
     </div>
 
 

@@ -22,7 +22,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    rtl: {
+    inheritDir: {
       type: Boolean,
       default: false,
     },
@@ -43,7 +43,6 @@ export default {
     </div>
     <div
       class="&__textarea"
-      :dir="rtl ? 'rtl' : 'ltr'"
       lang="en"
     >
       {{ value }}

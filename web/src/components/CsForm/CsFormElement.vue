@@ -35,6 +35,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    inheritDir: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -70,7 +74,10 @@ export default {
           {{ label }}
         </div>
         <div class="&__wrapper">
-          <div class="&__box">
+          <div
+            class="&__box"
+            :dir="inheritDir ? undefined : 'ltr'"
+          >
             <slot />
           </div>
           <label
