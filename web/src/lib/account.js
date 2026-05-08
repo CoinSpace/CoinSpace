@@ -14,6 +14,7 @@ export async function createAccount({ app, router }) {
   await account.biometry.init();
 
   defineAppProperty(app, '$account', account);
+  state.isOnion.value = account.isOnion;
   router.$account = account;
 
   const dummyBalances = {
