@@ -207,7 +207,7 @@ export default class ClientStorage {
 
   clear() {
     for (const key in this.#localStorage) {
-      if (key && key.startsWith('_cs_')) {
+      if (key && key.startsWith('_cs_') && key !== '_cs_language') {
         this.#localStorage.removeItem(key);
       }
     }

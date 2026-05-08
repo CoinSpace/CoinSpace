@@ -109,6 +109,5 @@ export async function createAccount({ app, router }) {
     setSentryUser();
     state.reset();
     await createAccount({ app, router });
-    await setLanguage();
   });
 }
