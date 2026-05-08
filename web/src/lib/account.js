@@ -1,8 +1,8 @@
+import * as state from './state.js';
 import Account from './account/Account.js';
-import { ref } from 'vue';
+import { Amount } from '@coinspace/cs-common';
 import { release } from './version.js';
 import { setLanguage } from './i18n/i18n.js';
-import { Amount, CsWallet } from '@coinspace/cs-common';
 import { cryptoSubtitle, cryptoToFiat, defineAppProperty, roundCrypto } from './helpers.js';
 import { setSentryConnection, setSentryUser } from './sentry.js';
 
@@ -15,26 +15,6 @@ export async function createAccount({ app, router }) {
 
   defineAppProperty(app, '$account', account);
   router.$account = account;
-
-  const currency = ref('USD');
-  const user = ref({
-    username: '',
-    email: '',
-  });
-  const cryptos = ref([]);
-  const isHiddenBalance = ref(false);
-  const isOnion = ref(account.isOnion);
-
-  defineAppProperty(app, '$wallet', undefined);
-  defineAppProperty(app, '$walletState', undefined);
-  defineAppProperty(app, '$STATE_LOADING', CsWallet.STATE_LOADING);
-  defineAppProperty(app, '$STATE_LOADED', CsWallet.STATE_LOADED);
-  defineAppProperty(app, '$STATE_ERROR', CsWallet.STATE_ERROR);
-  defineAppProperty(app, '$currency', currency);
-  defineAppProperty(app, '$user', user);
-  defineAppProperty(app, '$cryptos', cryptos);
-  defineAppProperty(app, '$isHiddenBalance', isHiddenBalance);
-  defineAppProperty(app, '$isOnion', isOnion);
 
   const dummyBalances = {
     'bitcoin@bitcoin': '0.5',
@@ -52,31 +32,34 @@ export async function createAccount({ app, router }) {
   account.on('update', async (context) => {
     switch (context) {
       case 'currency':
-        currency.value = account.details.get('systemInfo').preferredCurrency;
+        state.currency.value = account.details.get('systemInfo').preferredCurrency;
         break;
       case 'language':
         await setLanguage(account.details.get('systemInfo').language);
         break;
       case 'user':
-        user.value = account.user;
+        state.user.value = account.user;
         break;
       case 'isHiddenBalance':
-        isHiddenBalance.value = account.isHiddenBalance;
+        state.isHiddenBalance.value = account.isHiddenBalance;
+        break;
+      case 'theme':
+        state.theme.value = account.details.theme;
         break;
       case 'isOnion':
-        isOnion.value = account.isOnion;
+        state.isOnion.value = account.isOnion;
         setSentryConnection();
         break;
       default: {
         const result = [];
-        cryptos.value.forEach(({ crypto, balance }) => {
+        state.cryptos.value.forEach(({ crypto, balance }) => {
           const wallet = account.wallet(crypto._id);
           if (wallet && wallet.balance.value !== balance.value) {
             account.setPlatformWalletsStateInitialized(wallet.crypto.platform, wallet);
           }
         });
         for (const wallet of account.wallets()) {
-          const market = await account.market.getMarket(wallet.crypto._id, currency.value);
+          const market = await account.market.getMarket(wallet.crypto._id, state.currency.value);
           if (account.isDummy && dummyBalances[wallet.crypto._id]) {
             Object.defineProperty(wallet, 'balance', {
               get() {
@@ -109,7 +92,7 @@ export async function createAccount({ app, router }) {
           if (!a.crypto.original && b.crypto.original) return 1;
           return a.crypto.symbol.localeCompare(b.crypto.symbol);
         });
-        cryptos.value = result;
+        state.cryptos.value = result;
 
         if (import.meta.env.VITE_PLATFORM === 'ios') {
           window.saveCryptosForExtensions(result);
@@ -123,6 +106,8 @@ export async function createAccount({ app, router }) {
       window.saveCryptosForExtensions();
     }
     setSentryUser();
+    state.reset();
     await createAccount({ app, router });
+    await setLanguage();
   });
 }

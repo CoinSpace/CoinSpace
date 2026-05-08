@@ -26,6 +26,10 @@ export default class Details extends ServerStorage {
     };
   }
 
+  get theme() {
+    return this.get('systemInfo').theme || 'system';
+  }
+
   #migrateV5Details() {
     const cryptoSettings = this.get('cryptoSettings');
     if (cryptoSettings) {

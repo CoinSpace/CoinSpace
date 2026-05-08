@@ -1,11 +1,10 @@
+import * as state from '../lib/state.js';
 import { CsWallet } from '@coinspace/cs-common';
-import { ref } from 'vue';
 import {
   createRouter,
   createWebHashHistory,
   createWebHistory,
 } from 'vue-router';
-
 
 import appRoutes from './routes/app.js';
 import authRoutes from './routes/auth.js';
@@ -91,17 +90,14 @@ if (import.meta.env.VITE_BUILD_TYPE === 'phonegap' ||
   };
 }
 
-const walletState = ref(undefined);
-
 function setWalletProps($app, wallet) {
   const { $account } = router;
   defineAppProperty($app, '$wallet', wallet);
-  walletState.value = wallet.state;
-  defineAppProperty($app, '$walletState', walletState);
+  state.walletState.value = wallet.state;
 
   const $loadWallet = async () => {
-    if (walletState.value === CsWallet.STATE_LOADING) return;
-    walletState.value = CsWallet.STATE_LOADING;
+    if (state.walletState.value === CsWallet.STATE_LOADING) return;
+    state.walletState.value = CsWallet.STATE_LOADING;
     try {
       await wallet.cleanup();
       await wallet.load();
@@ -109,7 +105,7 @@ function setWalletProps($app, wallet) {
     } catch (err) {
       console.error(err);
     }
-    walletState.value = $app.config.globalProperties.$wallet?.state;
+    state.walletState.value = $app.config.globalProperties.$wallet?.state;
   };
   defineAppProperty($app, '$loadWallet', $loadWallet);
 
@@ -121,7 +117,7 @@ function setWalletProps($app, wallet) {
 function unsetWalletProps($app) {
   defineAppProperty($app, '$wallet', undefined);
   defineAppProperty($app, '$loadWallet', undefined);
-  walletState.value = undefined;
+  state.walletState.value = undefined;
 }
 
 export default router;

@@ -1,5 +1,6 @@
+import * as state from './state.js';
 import { createApp as createVueApp } from 'vue';
-import { utils } from '@coinspace/cs-common';
+import { CsWallet, utils } from '@coinspace/cs-common';
 
 import { defineAppProperty, formatDuration, safeOpen } from './helpers.js';
 
@@ -27,6 +28,18 @@ export function createApp({ App, router }) {
   defineAppProperty(app, '$duration', function(seconds, style = 'long') {
     return formatDuration(seconds, this.$i18n.locale, style);
   });
+
+  defineAppProperty(app, '$currency', state.currency);
+  defineAppProperty(app, '$user', state.user);
+  defineAppProperty(app, '$cryptos', state.cryptos);
+  defineAppProperty(app, '$isHiddenBalance', state.isHiddenBalance);
+  defineAppProperty(app, '$isOnion', state.isOnion);
+  defineAppProperty(app, '$theme', state.theme);
+  defineAppProperty(app, '$walletState', state.walletState);
+
+  defineAppProperty(app, '$STATE_LOADING', CsWallet.STATE_LOADING);
+  defineAppProperty(app, '$STATE_LOADED', CsWallet.STATE_LOADED);
+  defineAppProperty(app, '$STATE_ERROR', CsWallet.STATE_ERROR);
 
   return app;
 }

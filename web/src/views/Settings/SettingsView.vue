@@ -27,9 +27,17 @@ export default {
       currencies: currencies.map((currency) => ({ value: currency, name: currency })),
       language: this.$i18n.locale,
       languages,
+      theme: this.$theme,
     };
   },
   computed: {
+    themes() {
+      return [
+        { name: this.$t('System'), value: 'system' },
+        { name: this.$t('Light'), value: 'light' },
+        { name: this.$t('Dark'), value: 'dark' },
+      ];
+    },
     securityPinTitle() {
       const { $t } = this;
       switch (this.$account.biometry.type) {
@@ -69,6 +77,17 @@ export default {
       });
       await this.$account.details.save();
       this.$account.emit('update', 'language');
+    },
+    async theme(value, oldValue) {
+      if (value === oldValue) {
+        return;
+      }
+      this.$account.details.set('systemInfo', {
+        ...this.$account.details.get('systemInfo'),
+        theme: value,
+      });
+      await this.$account.details.save();
+      this.$account.emit('update', 'theme');
     },
   },
   methods: {
@@ -133,6 +152,17 @@ export default {
             v-model="language"
             :options="languages"
             :aria-label="$t('Language')"
+          />
+        </template>
+      </CsListItem>
+      <CsListItem
+        :title="$t('Theme')"
+      >
+        <template #after>
+          <CsListItemDropdown
+            v-model="theme"
+            :options="themes"
+            :aria-label="$t('Theme')"
           />
         </template>
       </CsListItem>

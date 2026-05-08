@@ -311,6 +311,7 @@ export default class Account extends EventEmitter {
     this.emit('update', 'user');
     this.emit('update', 'language');
     this.emit('update', 'currency');
+    this.emit('update', 'theme');
     this.emit('update', 'isHiddenBalance');
 
     await this.#initMarket();
