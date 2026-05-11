@@ -87,9 +87,9 @@ export default {
     min-height: 3.5rem;
     flex-direction: row;
     align-items: center;
-    padding-right: max($spacing-xl, env(safe-area-inset-right));
-    padding-left: max($spacing-xl, env(safe-area-inset-left));
-    gap: $spacing-xs;
+    padding-right: max(var(--spacing-xl), env(safe-area-inset-right));
+    padding-left: max(var(--spacing-xl), env(safe-area-inset-left));
+    gap: var(--spacing-xs);
 
     @include breakpoint(lg) {
       padding-right: 0;
@@ -99,8 +99,8 @@ export default {
     &__content {
       min-width: 20%;
       flex-grow: 1;
-      padding-top: $spacing-sm;
-      padding-bottom: $spacing-sm;
+      padding-top: var(--spacing-sm);
+      padding-bottom: var(--spacing-sm);
     }
 
     &__title {
@@ -110,19 +110,19 @@ export default {
 
     &__description {
       @include text-sm;
-      color: $secondary;
+      color: var(--color-secondary);
     }
 
     &__before,
     &__after {
       button {
-        width: $spacing-xl;
-        height: $spacing-xl;
+        width: var(--spacing-xl);
+        height: var(--spacing-xl);
       }
 
       svg {
-        width: $spacing-xl;
-        height: $spacing-xl;
+        width: var(--spacing-xl);
+        height: var(--spacing-xl);
       }
     }
 
@@ -136,7 +136,7 @@ export default {
     }
 
     &--danger {
-      color: $danger;
+      color: var(--color-danger);
     }
   }
 </style>

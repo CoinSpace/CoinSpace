@@ -96,23 +96,23 @@ export default {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      column-gap: $spacing-xs;
-      row-gap: $spacing-3xl;
+      column-gap: var(--spacing-xs);
+      row-gap: var(--spacing-3xl);
     }
 
     &__user {
       display: flex;
-      min-width: $spacing-6xl;
-      flex: 0 0 calc(50% - $spacing-2xs);
+      min-width: var(--spacing-6xl);
+      flex: 0 0 calc(50% - var(--spacing-2xs));
       flex-direction: column;
       align-items: center;
       cursor: pointer;
-      gap: $spacing-lg;
+      gap: var(--spacing-lg);
     }
 
     &__avatar {
-      width: $spacing-6xl;
-      height: $spacing-6xl;
+      width: var(--spacing-6xl);
+      height: var(--spacing-6xl);
     }
 
     &__username {

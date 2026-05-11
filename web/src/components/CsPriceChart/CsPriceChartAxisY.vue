@@ -33,7 +33,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    color: $secondary;
+    color: var(--color-secondary);
     text-align: end;
     @include text-xs;
   }

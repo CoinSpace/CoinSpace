@@ -65,16 +65,16 @@ export default {
     }
 
     &__wallet-icon {
-      width: $spacing-8xl;
+      width: var(--spacing-8xl);
       @include breakpoint(lg) {
-        width: $spacing-4xl;
+        width: var(--spacing-4xl);
       }
     }
 
     &__container {
       display: flex;
       flex-direction: column;
-      gap: $spacing-md;
+      gap: var(--spacing-md);
       @include breakpoint(lg) {
         flex-grow: 1;
       }

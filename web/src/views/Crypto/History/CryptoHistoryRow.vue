@@ -125,31 +125,31 @@ export default {
 <style lang="scss">
   .#{ $filename } {
     $self: &;
-    padding: $spacing-md $spacing-sm;
+    padding: var(--spacing-md) var(--spacing-sm);
     border-radius: 0.625rem;
     cursor: pointer;
 
     @include hover {
-      background-color: $secondary-light;
+      background-color: var(--color-secondary-light);
     }
 
     &:active {
-      background-color: $secondary-light;
+      background-color: var(--color-secondary-light);
     }
 
     &__title {
       @include text-md;
       display: flex;
       justify-content: space-between;
-      gap: $spacing-sm;
+      gap: var(--spacing-sm);
     }
 
     &__subtitle {
       @include text-sm;
       display: flex;
       justify-content: space-between;
-      color: $secondary;
-      gap: $spacing-sm;
+      color: var(--color-secondary);
+      gap: var(--spacing-sm);
     }
 
     &__description {
@@ -161,11 +161,11 @@ export default {
       @include ellipsis;
 
       &--positive {
-        color: $primary;
+        color: var(--color-primary);
       }
 
       &--negative {
-        color: $danger;
+        color: var(--color-danger);
       }
     }
 

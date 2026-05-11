@@ -289,8 +289,8 @@ export default {
       width: 12rem;
       height: 12rem;
       flex-shrink: 0;
-      padding: $spacing-md;
-      border: 1px solid $neutral;
+      padding: var(--spacing-md);
+      border: 1px solid var(--color-neutral);
       border-radius: 0.625rem;
     }
 
@@ -304,8 +304,8 @@ export default {
       }
 
       svg {
-        width: $spacing-xl;
-        height: $spacing-xl;
+        width: var(--spacing-xl);
+        height: var(--spacing-xl);
         margin: 0 auto;
       }
     }
@@ -323,14 +323,14 @@ export default {
 
     &__mecto {
       .cs-button__circle {
-        background-color: $primary-brand;
+        background-color: var(--color-primary-brand);
 
         @include hover {
-          background-color: darker($primary-brand, 5%);
+          background-color: var(--color-primary-brand-d-5);
         }
 
         &:active {
-          background-color: darker($primary-brand, 10%);
+          background-color: var(--color-primary-brand-d-10);
         }
       }
     }

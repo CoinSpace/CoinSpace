@@ -83,18 +83,18 @@ export default {
 
     &__wrapper {
       position: relative;
-      padding: $spacing-md 0;
-      margin-bottom: $spacing-md;
+      padding: var(--spacing-md) 0;
+      margin-bottom: var(--spacing-md);
       @include breakpoint(lg) {
-        padding: $spacing-lg 0;
+        padding: var(--spacing-lg) 0;
       }
     }
 
     &__loader,
     &__error {
-      height: 10rem + 3 * $spacing-md;
+      height: calc(10rem + 3 * var(--spacing-md));
       @include breakpoint(lg) {
-        height: 10rem + 2 * $spacing-lg + $spacing-md;
+        height: calc(10rem + 2 * var(--spacing-lg) + var(--spacing-md));
       }
     }
 

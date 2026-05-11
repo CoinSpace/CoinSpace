@@ -137,8 +137,8 @@ export default {
     $self: &;
 
     &__icon {
-      width: $spacing-8xl;
-      height: $spacing-8xl;
+      width: var(--spacing-8xl);
+      height: var(--spacing-8xl);
       align-self: center;
       border-radius: 50%;
       animation: status-icon 0.2s ease-in 0.1s forwards;
@@ -151,7 +151,7 @@ export default {
       }
 
       &--success {
-        background-color: $primary-light;
+        background-color: var(--color-primary-light);
 
         path {
           animation: status-success-path 0.3s ease-in 0.15s forwards;
@@ -159,7 +159,7 @@ export default {
       }
 
       &--failed {
-        background-color: $danger-light;
+        background-color: var(--color-danger-light);
 
         path {
           animation: status-failed-path 0.3s ease-in 0.15s forwards;
@@ -171,7 +171,7 @@ export default {
       display: flex;
       flex-direction: column;
       flex-grow: 1;
-      gap: $spacing-md;
+      gap: var(--spacing-md);
     }
 
     &__info-header {

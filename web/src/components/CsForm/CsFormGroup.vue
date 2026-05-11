@@ -8,6 +8,6 @@
   .#{ $filename } {
     display: flex;
     flex-direction: column;
-    gap: $spacing-lg;
+    gap: var(--spacing-lg);
   }
 </style>

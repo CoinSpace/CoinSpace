@@ -66,11 +66,11 @@ export default {
   .#{ $filename } {
     display: flex;
     flex-direction: column;
-    gap: $spacing-2xs;
+    gap: var(--spacing-2xs);
 
     &__header {
       @include text-sm;
-      color: $secondary;
+      color: var(--color-secondary);
     }
 
     &__balance {
@@ -78,7 +78,7 @@ export default {
       flex-wrap: wrap;
       align-items: baseline;
       justify-content: space-between;
-      column-gap: $spacing-md;
+      column-gap: var(--spacing-md);
       cursor: pointer;
     }
 
@@ -88,7 +88,7 @@ export default {
       @include ellipsis;
 
       display: flex;
-      gap: $spacing-xs;
+      gap: var(--spacing-xs);
     }
 
     &__fiat {

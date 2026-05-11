@@ -4,7 +4,7 @@
   height: 100%;
   flex-direction: column;
   justify-content: center;
-  gap: $spacing-md;
+  gap: var(--spacing-md);
   text-align: center;
 
   &__title {

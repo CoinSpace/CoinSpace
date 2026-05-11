@@ -285,7 +285,7 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: $spacing-2xs;
+      gap: var(--spacing-2xs);
       text-align: center;
     }
 
@@ -295,11 +295,11 @@ export default {
       width: 100%;
 
       &--positive {
-        color: $primary;
+        color: var(--color-primary);
       }
 
       &--negative {
-        color: $danger;
+        color: var(--color-danger);
       }
     }
 
@@ -307,21 +307,21 @@ export default {
       @include text-sm;
       @include ellipsis;
       width: 100%;
-      color: $secondary;
+      color: var(--color-secondary);
     }
 
     &__status {
       @include text-sm;
-      color: $secondary;
+      color: var(--color-secondary);
 
       &--danger {
-        color: $danger;
+        color: var(--color-danger);
       }
     }
 
     &__arrow {
-      width: $spacing-xl;
-      height: $spacing-xl;
+      width: var(--spacing-xl);
+      height: var(--spacing-xl);
 
       &--up {
         transform: rotate(180deg);

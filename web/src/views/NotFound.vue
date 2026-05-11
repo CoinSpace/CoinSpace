@@ -40,10 +40,10 @@ export default {
 
     @include breakpoint(lg) {
       padding:
-        max($spacing-md, env(safe-area-inset-top))
-        max($spacing-md, env(safe-area-inset-right))
-        max($spacing-md, env(safe-area-inset-bottom))
-        max($spacing-md, env(safe-area-inset-left));
+        max(var(--spacing-md), env(safe-area-inset-top))
+        max(var(--spacing-md), env(safe-area-inset-right))
+        max(var(--spacing-md), env(safe-area-inset-bottom))
+        max(var(--spacing-md), env(safe-area-inset-left));
       overflow-y: auto;
     }
 
@@ -54,12 +54,12 @@ export default {
       flex-direction: column;
       flex-grow: 1;
       align-items: center;
-      background-color: $background-color;
+      background-color: var(--color-background);
 
       @include breakpoint(lg) {
-        max-width: $desktop-max-width;
+        max-width: var(--desktop-max-width);
         height: auto;
-        padding-top: $spacing-6xl;
+        padding-top: var(--spacing-6xl);
         border-radius: 0.625rem;
       }
     }
@@ -81,15 +81,15 @@ export default {
       height: 100%;
       flex-direction: column;
       padding:
-        $spacing-3xl
-        max($spacing-xl, env(safe-area-inset-right))
-        max($spacing-3xl, env(safe-area-inset-bottom))
-        max($spacing-xl, env(safe-area-inset-left));
-      gap: $spacing-3xl;
+        var(--spacing-3xl)
+        max(var(--spacing-xl), env(safe-area-inset-right))
+        max(var(--spacing-3xl), env(safe-area-inset-bottom))
+        max(var(--spacing-xl), env(safe-area-inset-left));
+      gap: var(--spacing-3xl);
       overflow-y: auto;
 
       @include breakpoint(lg) {
-        padding: $spacing-3xl $spacing-xl;
+        padding: var(--spacing-3xl) var(--spacing-xl);
       }
     }
 

@@ -7,14 +7,14 @@
     flex-direction: column;
     align-items: center;
     padding:
-      $spacing-3xl
-      $spacing-xl;
+      var(--spacing-3xl)
+      var(--spacing-xl);
     padding:
-      $spacing-3xl
-      max($spacing-xl, env(safe-area-inset-right))
-      max($spacing-3xl, env(safe-area-inset-bottom))
-      max($spacing-xl, env(safe-area-inset-left));
-    background-color: $background-color-dark;
+      var(--spacing-3xl)
+      max(var(--spacing-xl), env(safe-area-inset-right))
+      max(var(--spacing-3xl), env(safe-area-inset-bottom))
+      max(var(--spacing-xl), env(safe-area-inset-left));
+    background-color: var(--color-background-brand);
     overflow-y: auto;
   }
 
@@ -24,7 +24,7 @@
     flex-direction: column;
     flex-grow: 1;
     align-items: center;
-    margin-bottom: $spacing-5xl;
+    margin-bottom: var(--spacing-5xl);
     @include breakpoint(lg) {
       justify-content: center;
     }
@@ -35,7 +35,7 @@
     flex-direction: column;
     flex-grow: 1;
     justify-content: center;
-    margin-bottom: $spacing-5xl;
+    margin-bottom: var(--spacing-5xl);
     @include breakpoint(lg) {
       flex-grow: 0;
     }
@@ -59,17 +59,17 @@
   &__title {
     @include text-lg;
     @include text-bold;
-    margin-bottom: $spacing-md;
-    color: $white;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-white);
   }
 
   &__message {
     @include text-md;
-    color: $white;
+    color: var(--color-white);
   }
 
   &__copyright {
     @include text-xs;
-    color: $white;
+    color: var(--color-white);
   }
 }

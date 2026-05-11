@@ -105,7 +105,7 @@ export default {
       display: flex;
       flex-direction: column;
       flex-grow: 1;
-      gap: $spacing-3xl;
+      gap: var(--spacing-3xl);
     }
 
     &__group {
@@ -121,19 +121,19 @@ export default {
     &__keys {
       display: flex;
       flex-direction: column;
-      gap: $spacing-3xl;
+      gap: var(--spacing-3xl);
     }
 
     &__data {
       display: flex;
       flex-direction: column;
-      gap: $spacing-lg;
+      gap: var(--spacing-lg);
     }
 
     &__item {
       display: flex;
       flex-direction: column;
-      gap: $spacing-2xs;
+      gap: var(--spacing-2xs);
     }
 
     &__item-title {

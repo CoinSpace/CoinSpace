@@ -28,6 +28,6 @@
   .#{ $filename } {
     display: flex;
     flex-direction: column;
-    gap: $spacing-xs;
+    gap: var(--spacing-xs);
   }
 </style>

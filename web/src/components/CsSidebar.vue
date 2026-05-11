@@ -163,7 +163,7 @@ export default {
     width: 100%;
     height: 100%;
     flex-direction: column;
-    background-color: $background-color;
+    background-color: var(--color-background);
     overflow-y: auto;
 
     @include breakpoint(lg) {
@@ -179,21 +179,21 @@ export default {
 
     &__navbar {
       padding:
-        $spacing-3xl
-        max($spacing-xl, env(safe-area-inset-right))
-        $spacing-xl
-        max($spacing-xl, env(safe-area-inset-left));
+        var(--spacing-3xl)
+        max(var(--spacing-xl), env(safe-area-inset-right))
+        var(--spacing-xl)
+        max(var(--spacing-xl), env(safe-area-inset-left));
     }
 
     &__avatar {
-      width: $spacing-4xl;
-      height: $spacing-4xl;
-      margin-bottom: $spacing-3xl;
+      width: var(--spacing-4xl);
+      height: var(--spacing-4xl);
+      margin-bottom: var(--spacing-3xl);
     }
 
     &__portfolio-amount {
       @include ellipsis;
-      margin-bottom: $spacing-2xs;
+      margin-bottom: var(--spacing-2xs);
       cursor: pointer;
       text-align: center;
       &--large { @include text-lg; }
@@ -202,8 +202,8 @@ export default {
 
     &__portfolio-label {
       @include text-sm;
-      margin-bottom: $spacing-2xs;
-      color: $secondary;
+      margin-bottom: var(--spacing-2xs);
+      color: var(--color-secondary);
       text-align: center;
     }
 
@@ -214,11 +214,11 @@ export default {
       text-align: center;
 
       &--positive {
-        color: $primary;
+        color: var(--color-primary);
       }
 
       &--negative {
-        color: $danger;
+        color: var(--color-danger);
       }
     }
 
@@ -227,11 +227,11 @@ export default {
       flex: 1 1 100%;
       flex-direction: column;
       padding:
-        $spacing-xl
-        max($spacing-xl, env(safe-area-inset-right))
-        max($spacing-3xl, env(safe-area-inset-bottom))
-        max($spacing-xl, env(safe-area-inset-left));
-      gap: $spacing-2xs;
+        var(--spacing-xl)
+        max(var(--spacing-xl), env(safe-area-inset-right))
+        max(var(--spacing-3xl), env(safe-area-inset-bottom))
+        max(var(--spacing-xl), env(safe-area-inset-left));
+      gap: var(--spacing-2xs);
       @include breakpoint(lg) {
         overflow-y: auto;
         scrollbar-width: thin;

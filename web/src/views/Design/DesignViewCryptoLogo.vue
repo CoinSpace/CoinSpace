@@ -78,16 +78,16 @@ export default {
   .#{ $filename } {
     display: flex;
     flex-direction: column;
-    gap: $spacing-xl;
+    gap: var(--spacing-xl);
 
     &__medium {
-      width: $spacing-2xl;
-      height: $spacing-2xl;
+      width: var(--spacing-2xl);
+      height: var(--spacing-2xl);
     }
 
     &__custom {
-      width: $spacing-5xl;
-      height: $spacing-5xl;
+      width: var(--spacing-5xl);
+      height: var(--spacing-5xl);
     }
   }
 </style>

@@ -24,7 +24,7 @@ export default {
   .#{ $filename } {
     display: flex;
     flex-direction: column;
-    gap: $spacing-md;
+    gap: var(--spacing-md);
 
     &--horizontal {
       flex-direction: row;
@@ -33,7 +33,7 @@ export default {
     &--circle {
       flex-direction: row;
       justify-content: space-around;
-      gap: $spacing-2xs;
+      gap: var(--spacing-2xs);
     }
   }
 </style>

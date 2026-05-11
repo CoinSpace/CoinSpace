@@ -124,19 +124,19 @@ export default {
   .#{ $filename } {
     &__header {
       @include text-2xl;
-      margin-bottom: $spacing-xl;
+      margin-bottom: var(--spacing-xl);
     }
 
     &__inputs {
-      margin-bottom: $spacing-2xl;
+      margin-bottom: var(--spacing-2xl);
     }
 
     &__currency {
-      margin-bottom: $spacing-md;
+      margin-bottom: var(--spacing-md);
     }
 
     hr {
-      margin-bottom: $spacing-2xl;
+      margin-bottom: var(--spacing-2xl);
     }
   }
 </style>

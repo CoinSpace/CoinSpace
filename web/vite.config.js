@@ -96,9 +96,7 @@ export default defineConfig(({ mode }) => {
           additionalData: (content, filename) => {
             const kebab = kebabanize(filename);
             const str = `
-              @import "./src/assets/styles/variables";
               @import "./src/assets/styles/mixins";
-              @import "./src/assets/styles/functions";
               $filename: "${kebab}";
             `;
             return str + content;

@@ -194,7 +194,7 @@ export default {
     &__header-container {
       display: flex;
       flex-direction: column;
-      gap: $spacing-lg;
+      gap: var(--spacing-lg);
     }
 
     &__header {
@@ -202,7 +202,7 @@ export default {
       flex-wrap: wrap;
       align-items: flex-start;
       justify-content: space-between;
-      gap: $spacing-lg;
+      gap: var(--spacing-lg);
     }
 
     &__error {

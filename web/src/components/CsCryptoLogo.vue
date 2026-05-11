@@ -82,7 +82,7 @@ export default {
       width: 50%;
       height: 50%;
       border-radius: 50%;
-      box-shadow: 0 0 0 1px $white;
+      box-shadow: 0 0 0 1px var(--color-white);
     }
   }
 </style>

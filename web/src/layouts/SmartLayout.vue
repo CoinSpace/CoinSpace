@@ -243,15 +243,15 @@ export default {
       flex-basis: 100%;
       flex-direction: column;
       padding:
-        $spacing-3xl
-        max($spacing-xl, env(safe-area-inset-right))
-        max($spacing-3xl, env(safe-area-inset-bottom))
-        max($spacing-xl, env(safe-area-inset-left));
-      gap: $spacing-3xl;
+        var(--spacing-3xl)
+        max(var(--spacing-xl), env(safe-area-inset-right))
+        max(var(--spacing-3xl), env(safe-area-inset-bottom))
+        max(var(--spacing-xl), env(safe-area-inset-left));
+      gap: var(--spacing-3xl);
       @include breakpoint(lg) {
         // ~ max-height limited by 720px
         flex-basis: 45rem;
-        padding: $spacing-3xl $spacing-xl;
+        padding: var(--spacing-3xl) var(--spacing-xl);
       }
 
       &--narrow {
@@ -267,7 +267,7 @@ export default {
 
     &__navbar {
       @include breakpoint(lg) {
-        border-bottom: 1px solid $divider;
+        border-bottom: 1px solid var(--color-divider);
       }
     }
 
@@ -282,8 +282,8 @@ export default {
       }
 
       svg {
-        width: $spacing-xl;
-        height: $spacing-xl;
+        width: var(--spacing-xl);
+        height: var(--spacing-xl);
       }
     }
 

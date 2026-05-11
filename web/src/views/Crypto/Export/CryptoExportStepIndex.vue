@@ -68,7 +68,7 @@ export default {
       display: flex;
       flex-direction: column;
       flex-grow: 1;
-      gap: $spacing-3xl;
+      gap: var(--spacing-3xl);
     }
 
     &__group {
@@ -80,7 +80,7 @@ export default {
     &__warning {
       display: flex;
       flex-direction: column;
-      gap: $spacing-md;
+      gap: var(--spacing-md);
     }
 
     &__warning-title {
@@ -88,18 +88,18 @@ export default {
       @include text-bold;
       display: flex;
       align-items: flex-start;
-      color: $danger;
-      gap: $spacing-xs;
+      color: var(--color-danger);
+      gap: var(--spacing-xs);
     }
 
     &__danger_triangle {
-      width: $spacing-xl;
+      width: var(--spacing-xl);
       flex-shrink: 0;
     }
 
     &__warning-info {
       @include text-md;
-      color: $danger;
+      color: var(--color-danger);
     }
   }
 </style>

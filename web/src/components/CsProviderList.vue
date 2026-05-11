@@ -92,12 +92,12 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: $spacing-3xl;
+    gap: var(--spacing-3xl);
 
     &__item {
       display: flex;
       align-items: center;
-      gap: $spacing-sm;
+      gap: var(--spacing-sm);
       overflow-x: hidden;
     }
 
@@ -121,7 +121,7 @@ export default {
     &__subtitle {
       @include text-xs;
       @include ellipsis;
-      color: $secondary;
+      color: var(--color-secondary);
     }
   }
 </style>

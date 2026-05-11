@@ -92,18 +92,18 @@ export default {
       width: 100%;
       flex: 0 1 25rem;
       flex-direction: column;
-      padding: $spacing-xl;
+      padding: var(--spacing-xl);
       border-radius: 0.625rem;
       margin: auto;
-      background-color: $white;
-      gap: $spacing-xl;
+      background-color: var(--color-modal-background);
+      gap: var(--spacing-xl);
     }
 
     &__header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: $spacing-xl;
+      gap: var(--spacing-xl);
     }
 
     &__title {
@@ -112,8 +112,8 @@ export default {
     }
 
     &__close {
-      width: $spacing-xl;
-      height: $spacing-xl;
+      width: var(--spacing-xl);
+      height: var(--spacing-xl);
       flex-grow: 0;
       flex-shrink: 0;
       cursor: pointer;
@@ -123,7 +123,7 @@ export default {
       @include text-md;
       display: flex;
       flex-direction: column;
-      gap: $spacing-md;
+      gap: var(--spacing-md);
     }
   }
 </style>

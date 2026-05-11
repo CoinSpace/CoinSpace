@@ -28,13 +28,13 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: $spacing-xs;
+    gap: var(--spacing-xs);
 
     &__dot {
-      width: $spacing-xs;
-      height: $spacing-xs;
+      width: var(--spacing-xs);
+      height: var(--spacing-xs);
       border-radius: 50%;
-      background-color: $secondary;
+      background-color: var(--color-secondary);
 
       &:nth-child(1) {
         animation: pulse-3 0.4s ease-in-out alternate infinite;
@@ -51,19 +51,19 @@ export default {
 
     &--primary {
       #{ $self }__dot {
-        background-color: $text-color;
+        background-color: var(--color-text);
       }
     }
 
     &--primary-light {
       #{ $self }__dot {
-        background-color: $primary;
+        background-color: var(--color-primary);
       }
     }
 
     &--danger-light {
       #{ $self }__dot {
-        background-color: $danger;
+        background-color: var(--color-danger);
       }
     }
   }

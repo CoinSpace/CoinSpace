@@ -33,8 +33,8 @@ export default {
   .#{ $filename } {
     $self: &;
     position: relative;
-    z-index: $zindex-dropdown;
-    width: $spacing-5xl;
+    z-index: var(--zindex-dropdown);
+    width: var(--spacing-5xl);
     height: 100%;
 
     &:focus-within {
@@ -60,13 +60,13 @@ export default {
 
     &__wrapper {
       display: none;
-      margin-top: -$spacing-md;
-      filter: drop-shadow(0 0 $spacing-3xl rgb(0 0 0 / 10%));
+      margin-top: calc(-1 * var(--spacing-md));
+      filter: drop-shadow(0 0 var(--spacing-3xl) rgb(0 0 0 / 10%));
       transform: translateZ(0); // fix safari
 
       #{ $self }__triangle {
         display: block;
-        width: $spacing-xl;
+        width: var(--spacing-xl);
         height: 0.625rem;
         margin: 0 auto;
       }
@@ -75,8 +75,8 @@ export default {
     &__content {
       width: 22.5rem;
       border-radius: 0.625rem;
-      background-color: $background-color;
-      margin-inline-start: calc(100% - 22.5rem - $spacing-xs);
+      background-color: var(--color-background);
+      margin-inline-start: calc(100% - 22.5rem - var(--spacing-xs));
     }
   }
 </style>

@@ -67,14 +67,14 @@ export default {
   .#{ $filename } {
     display: flex;
     width: 100%;
-    height: $spacing-5xl;
+    height: var(--spacing-5xl);
     flex-direction: row;
     align-items: center;
 
     &__action {
       display: flex;
       height: 100%;
-      flex-basis: $spacing-5xl;
+      flex-basis: var(--spacing-5xl);
       flex-shrink: 0;
       align-items: center;
       justify-content: center;

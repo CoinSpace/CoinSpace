@@ -128,14 +128,14 @@ export default {
     $self: &;
     display: flex;
     flex-direction: column;
-    gap: $spacing-2xs;
+    gap: var(--spacing-2xs);
 
     &__container {
       display: flex;
       align-items: flex-end;
 
       &--with-button {
-        gap: $spacing-lg;
+        gap: var(--spacing-lg);
       }
     }
 
@@ -146,13 +146,13 @@ export default {
 
     &__label {
       @include text-sm;
-      margin-bottom: $spacing-2xs;
-      color: $secondary;
+      margin-bottom: var(--spacing-2xs);
+      color: var(--color-secondary);
     }
 
     &__wrapper {
       display: flex;
-      gap: $spacing-xs;
+      gap: var(--spacing-xs);
     }
 
     &__box {
@@ -163,10 +163,10 @@ export default {
       min-height: 3.5rem;
       flex: 1 1 100%;
       align-items: center;
-      padding: 0 $spacing-sm;
-      border: 1px solid $secondary-light;
+      padding: 0 var(--spacing-sm);
+      border: 1px solid var(--color-secondary-light);
       border-radius: 0.625rem;
-      background-color: $secondary-light;
+      background-color: var(--color-secondary-light);
       gap: 0.625rem;
       transition: background-color 0.15s ease-in-out, border 0.15s ease-in-out;
 
@@ -177,19 +177,19 @@ export default {
 
     &__info {
       flex-shrink: 0;
-      padding: 0 $spacing-md;
+      padding: 0 var(--spacing-md);
     }
 
     &__error {
       @include text-sm;
-      color: $danger;
+      color: var(--color-danger);
     }
 
     &--has-error {
       #{ $self }__container {
         div#{ $self }__box {
-          border: 1px solid $danger;
-          background-color: $danger-light;
+          border: 1px solid var(--color-danger);
+          background-color: var(--color-danger-light);
         }
       }
     }
@@ -209,8 +209,8 @@ export default {
 
         &:focus-within,
         &:active {
-          border: 1px solid $primary-brand;
-          background-color: $white;
+          border: 1px solid var(--color-primary-brand);
+          background-color: var(--color-white);
         }
       }
     }

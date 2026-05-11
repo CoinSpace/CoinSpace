@@ -100,11 +100,11 @@ export default {
     flex-direction: column;
     align-items: center;
     padding:
-      $spacing-xl
-      max($spacing-xl, env(safe-area-inset-right))
-      max($spacing-3xl, env(safe-area-inset-bottom))
-      max($spacing-xl, env(safe-area-inset-left));
-    gap: $spacing-3xl;
+      var(--spacing-xl)
+      max(var(--spacing-xl), env(safe-area-inset-right))
+      max(var(--spacing-3xl), env(safe-area-inset-bottom))
+      max(var(--spacing-xl), env(safe-area-inset-left));
+    gap: var(--spacing-3xl);
 
     &__box-wrapper {
       display: flex;

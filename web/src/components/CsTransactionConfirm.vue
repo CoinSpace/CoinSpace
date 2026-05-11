@@ -177,8 +177,8 @@ export default {
     }
 
     &__arrow {
-      width: $spacing-xl;
-      height: $spacing-xl;
+      width: var(--spacing-xl);
+      height: var(--spacing-xl);
       align-self: center;
     }
   }

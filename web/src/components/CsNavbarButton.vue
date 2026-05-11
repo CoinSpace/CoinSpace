@@ -19,9 +19,9 @@ export default {
 
 <style lang="scss">
   .#{ $filename } {
-    width: $spacing-5xl;
+    width: var(--spacing-5xl);
     height: 100%;
     flex-shrink: 0;
-    padding: $spacing-lg;
+    padding: var(--spacing-lg);
   }
 </style>

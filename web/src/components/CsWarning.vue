@@ -22,11 +22,11 @@ export default {
     @include text-sm;
     display: flex;
     align-items: flex-start;
-    color: $danger;
-    gap: $spacing-xs;
+    color: var(--color-danger);
+    gap: var(--spacing-xs);
 
     &__triangle {
-      width: $spacing-xl;
+      width: var(--spacing-xl);
       flex-shrink: 0;
     }
   }

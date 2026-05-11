@@ -158,7 +158,7 @@ export default {
   .#{ $filename } {
     display: flex;
     flex-direction: column;
-    gap: $spacing-md;
+    gap: var(--spacing-md);
 
     &__empty,
     &__error {
@@ -168,9 +168,9 @@ export default {
     &__transactions {
       display: flex;
       flex-direction: column;
-      margin-right: -$spacing-sm;
-      margin-left: -$spacing-sm;
-      gap: $spacing-2xs;
+      margin-right: calc(-1 * var(--spacing-sm));
+      margin-left: calc(-1 * var(--spacing-sm));
+      gap: var(--spacing-2xs);
     }
   }
 </style>

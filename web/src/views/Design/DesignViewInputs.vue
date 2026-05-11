@@ -244,12 +244,12 @@ export default {
   .#{ $filename } {
     display: flex;
     flex-direction: column;
-    gap: $spacing-4xl;
+    gap: var(--spacing-4xl);
 
     &__group {
       display: flex;
       flex-direction: column;
-      gap: $spacing-xl;
+      gap: var(--spacing-xl);
     }
   }
 </style>

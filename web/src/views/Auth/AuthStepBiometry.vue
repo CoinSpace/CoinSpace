@@ -113,7 +113,7 @@ export default {
     }
 
     &__icon {
-      width: $spacing-8xl;
+      width: var(--spacing-8xl);
     }
 
     &__text {

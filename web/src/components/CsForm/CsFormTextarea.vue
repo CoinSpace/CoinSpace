@@ -58,10 +58,10 @@ export default {
     &__textarea {
       @include text-md;
       flex-grow: 1;
-      padding: $spacing-sm 0;
+      padding: var(--spacing-sm) 0;
       border: none;
       background-color: transparent;
-      color: $text-color;
+      color: var(--color-text);
       font-family: inherit;
       line-height: inherit;
       resize: none;

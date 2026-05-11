@@ -46,8 +46,8 @@ export default {
 
     position: relative;
     display: block;
-    width: $spacing-2xl;
-    height: $spacing-lg;
+    width: var(--spacing-2xl);
+    height: var(--spacing-lg);
     cursor: pointer;
 
     &__slider {
@@ -58,34 +58,34 @@ export default {
       left: 0;
       width: 100%;
       height: 100%;
-      border-radius: $spacing-lg;
+      border-radius: var(--spacing-lg);
       margin: 0;
       appearance: none;
-      background-color: $neutral;
+      background-color: var(--color-neutral);
       transition: all 0.1s ease-out;
 
       &::before {
         position: absolute;
-        bottom: $spacing-3xs;
-        left: $spacing-3xs;
-        width: $spacing-md;
-        height: $spacing-md;
+        bottom: var(--spacing-3xs);
+        left: var(--spacing-3xs);
+        width: var(--spacing-md);
+        height: var(--spacing-md);
         border-radius: 50%;
-        background-color: $white;
+        background-color: var(--color-white);
         content: "";
         transition: all 0.1s ease-out;
 
         [dir="rtl"] & {
-          transform: translateX($spacing-sm);
+          transform: translateX(var(--spacing-sm));
         }
       }
     }
 
     &__slider:checked {
-      background-color: $primary-brand;
+      background-color: var(--color-primary-brand);
 
       &::before {
-        transform: translateX($spacing-sm);
+        transform: translateX(var(--spacing-sm));
 
         [dir="rtl"] & {
           transform: translateX(0);

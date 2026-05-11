@@ -1,0 +1,68 @@
+:root {
+  /* colors */
+  --color-primary-brand: #68c481;
+  --color-primary-brand-d-5: #5dc078;
+  --color-primary-brand-d-10: #52bc6f;
+  --color-primary-brand-d-15: #48b766;
+  --color-primary-button-text: #222;
+  --color-background-brand: #2c3832;
+  --color-white: #fff;
+  --color-white-d-10: #e6e6e6;
+  --color-white-d-15: #d9d9d9;
+  --color-black: #000;
+
+  /* colors (light theme) */
+  --color-primary: #01842e;
+  --color-primary-d-10: #017729;
+  --color-primary-d-15: #017027;
+  --color-primary-d-25: #016323;
+  --color-primary-light: #f0f9f2;
+  --color-primary-light-d-5: #dff2e3;
+  --color-primary-light-d-7: #d8efdd;
+  --color-secondary: #616763;
+  --color-secondary-light: #f6f8fa;
+  --color-secondary-light-d-5: #e6ecf1;
+  --color-secondary-light-d-7: #e0e7ee;
+  --color-secondary-light-d-10: #d6dfe8;
+  --color-danger: #dd230e;
+  --color-danger-d-10: #c7200d;
+  --color-danger-d-15: #bc1e0c;
+  --color-danger-light: #fcf5ef;
+  --color-danger-light-d-5: #f8e8da;
+  --color-danger-light-d-7: #f7e3d2;
+  --color-neutral: #d3d3d3;
+  --color-text: #222;
+  --color-background: #fff;
+  --color-divider: #f0f0f0;
+  --color-modal-background: #fff;
+  --color-modal-overlay: rgb(0 0 0 / 30%);
+
+  /* typography */
+  --font-size-base: 16px;
+  --font-weight-regular: 400;
+  --font-weight-bold: 500;
+
+  /* spacing (padding, margin, gap, width, height, top, right, bottom, left) */
+  --spacing-3xs: 0.125rem;    /* 2px */
+  --spacing-2xs: 0.25rem;     /* 4px */
+  --spacing-xs: 0.5rem;       /* 8px */
+  --spacing-sm: 0.75rem;      /* 12px */
+  --spacing-md: 1rem;         /* 16px */
+  --spacing-lg: 1.25rem;      /* 20px */
+  --spacing-xl: 1.5rem;       /* 24px */
+  --spacing-2xl: 2rem;        /* 32px */
+  --spacing-3xl: 2.5rem;      /* 40px */
+  --spacing-4xl: 3rem;        /* 48px */
+  --spacing-5xl: 4rem;        /* 64px */
+  --spacing-6xl: 5rem;        /* 80px */
+  --spacing-7xl: 6rem;        /* 96px */
+  --spacing-8xl: 8rem;        /* 128px */
+  --spacing-9xl: 10rem;       /* 160px */
+  --desktop-max-width: 80rem; /* 1280px */
+
+  /* z-index */
+  --zindex-dropdown: 100;
+  --zindex-modal: 300;
+  --zindex-tooltip: 400;
+  --zindex-toast: 500;
+}

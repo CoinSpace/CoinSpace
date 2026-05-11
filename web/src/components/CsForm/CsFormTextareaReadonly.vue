@@ -71,10 +71,10 @@ export default {
       @include text-md;
       overflow: hidden;
       flex-grow: 1;
-      padding: $spacing-sm 0;
+      padding: var(--spacing-sm) 0;
       border: none;
       background-color: transparent;
-      color: $text-color;
+      color: var(--color-text);
       cursor: auto;
       font-family: inherit;
       line-height: inherit;
@@ -83,8 +83,8 @@ export default {
 
     &__icon-before,
     &__icon-after {
-      width: $spacing-xl;
-      height: $spacing-xl;
+      width: var(--spacing-xl);
+      height: var(--spacing-xl);
       flex-shrink: 0;
     }
   }

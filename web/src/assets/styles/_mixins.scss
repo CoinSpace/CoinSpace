@@ -1,5 +1,5 @@
 // typography
-@mixin text-bold { font-weight: $font-weight-bold; }
+@mixin text-bold { font-weight: var(--font-weight-bold); }
 @mixin text-xs { font-size: 0.75rem; letter-spacing: 0.03em; line-height: 1.5; }    // 12px
 @mixin text-sm { font-size: 0.875rem; letter-spacing: 0.02em; line-height: 1.5; }   // 14px
 @mixin text-md { font-size: 1.125rem; letter-spacing: 0.01em; line-height: 1.5; }   // 18px
@@ -53,13 +53,13 @@ $breakpoints: (
 
 @mixin overlay {
   position: fixed;
-  z-index: $zindex-modal;
+  z-index: var(--zindex-modal);
   top: -1px; // disable navbar hiding on mobile devices
   right: 0;
   bottom: 0;
   left: 0;
   display: flex;
-  padding: $spacing-xl;
-  background-color: rgb(0 0 0 / 30%);
+  padding: var(--spacing-xl);
+  background-color: var(--color-modal-overlay);
   overflow-y: auto;
 }

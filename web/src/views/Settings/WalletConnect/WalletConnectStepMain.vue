@@ -176,7 +176,7 @@ export default {
 
     &__error {
       @include text-md;
-      color: $danger;
+      color: var(--color-danger);
     }
   }
 </style>

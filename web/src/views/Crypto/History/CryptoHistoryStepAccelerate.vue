@@ -105,8 +105,8 @@ export default {
     }
 
     &__icon {
-      width: $spacing-9xl;
-      height: $spacing-9xl;
+      width: var(--spacing-9xl);
+      height: var(--spacing-9xl);
     }
 
     &__info {
@@ -114,7 +114,7 @@ export default {
       flex-direction: column;
       align-items: center;
       cursor: pointer;
-      gap: $spacing-2xs;
+      gap: var(--spacing-2xs);
     }
 
     &__title {

@@ -58,13 +58,13 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: $spacing-2xs;
+    gap: var(--spacing-2xs);
     text-align: center;
 
     &__icon {
-      width: $spacing-5xl;
-      height: $spacing-5xl;
-      margin-bottom: $spacing-sm;
+      width: var(--spacing-5xl);
+      height: var(--spacing-5xl);
+      margin-bottom: var(--spacing-sm);
     }
 
     &__title {

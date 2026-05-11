@@ -23,13 +23,13 @@ export default {
 <style lang="scss">
   .#{ $filename} {
     height: 100%;
-    padding: $spacing-xl;
-    background-color: $background-color;
+    padding: var(--spacing-xl);
+    background-color: var(--color-background);
     overflow-y: auto;
 
     &__back {
       display: block;
-      margin-bottom: $spacing-lg;
+      margin-bottom: var(--spacing-lg);
     }
   }
 </style>

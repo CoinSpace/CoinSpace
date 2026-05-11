@@ -33,13 +33,13 @@ export default {
 <style lang="scss">
   .#{ $filename } {
     @include text-xs;
-    color: $secondary;
+    color: var(--color-secondary);
     cursor: pointer;
     text-align: center;
 
     img {
       display: inline-block;
-      width: $spacing-lg;
+      width: var(--spacing-lg);
       vertical-align: middle;
     }
   }

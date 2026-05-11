@@ -142,18 +142,18 @@ export default {
       display: flex;
       flex-direction: column;
       flex-grow: 1;
-      gap: $spacing-xl;
+      gap: var(--spacing-xl);
     }
 
     &__suggestions {
       display: flex;
       flex-wrap: wrap;
-      gap: $spacing-xs;
+      gap: var(--spacing-xs);
     }
 
     &__suggestion {
       @include text-md;
-      padding: $spacing-xs $spacing-lg;
+      padding: var(--spacing-xs) var(--spacing-lg);
       border-radius: 0.75rem;
       box-shadow: 0 0.75rem 2.5rem rgb(0 0 0 / 7%);
     }

@@ -91,15 +91,15 @@ export default {
   .#{ $filename } {
     display: flex;
     flex-basis: 100%;
-    gap: $spacing-md;
+    gap: var(--spacing-md);
 
     @include breakpoint(md) {
       flex-basis: auto;
     }
 
     &__crypto-logo {
-      width: $spacing-3xl;
-      height: $spacing-3xl;
+      width: var(--spacing-3xl);
+      height: var(--spacing-3xl);
       flex-shrink: 0;
     }
 
@@ -112,14 +112,14 @@ export default {
       @include text-sm;
       display: flex;
       align-items: center;
-      gap: $spacing-2xs;
+      gap: var(--spacing-2xs);
 
       &--positive {
-        color: $primary;
+        color: var(--color-primary);
       }
 
       &--negative {
-        color: $danger;
+        color: var(--color-danger);
       }
 
       &::after {
@@ -129,13 +129,13 @@ export default {
     }
 
     &__change_arrow {
-      width: $spacing-sm;
-      height: $spacing-sm;
+      width: var(--spacing-sm);
+      height: var(--spacing-sm);
     }
 
     &__timestamp {
       @include text-sm;
-      color: $secondary;
+      color: var(--color-secondary);
     }
   }
 </style>

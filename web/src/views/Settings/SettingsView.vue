@@ -237,13 +237,13 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: $spacing-lg;
+      gap: var(--spacing-lg);
     }
 
     &__header-avatar {
       z-index: -1;
-      width: $spacing-6xl;
-      height: $spacing-6xl;
+      width: var(--spacing-6xl);
+      height: var(--spacing-6xl);
     }
 
     &__header-username {
@@ -254,7 +254,7 @@ export default {
 
     &__version {
       @include text-sm;
-      color: $secondary;
+      color: var(--color-secondary);
       text-align: center;
     }
   }

@@ -42,7 +42,7 @@ export default {
     $self: &;
     position: relative;
     display: flex;
-    padding: 0 $spacing-xl;
+    padding: 0 var(--spacing-xl);
 
     @include breakpoint(lg) {
       max-width: 30rem;
@@ -62,14 +62,14 @@ export default {
       opacity: 0;
       pointer-events: none;
       &:checked ~ #{ $self }__button {
-        background-color: $secondary-light;
+        background-color: var(--color-secondary-light);
       }
     }
 
     &__button {
       @include text-sm;
       display: flex;
-      height: $spacing-2xl;
+      height: var(--spacing-2xl);
       align-items: center;
       justify-content: center;
       border-radius: 0.5rem;

@@ -260,7 +260,7 @@ export default {
 
     &__action-search {
       flex-basis: 100%;
-      margin-bottom: $spacing-3xl;
+      margin-bottom: var(--spacing-3xl);
       @include breakpoint(lg) {
         flex-basis: 50%;
         margin-bottom: 0;

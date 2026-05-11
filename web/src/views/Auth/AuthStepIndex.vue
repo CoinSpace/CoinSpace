@@ -62,12 +62,12 @@ export default {
     flex-direction: column;
     align-items: center;
     padding:
-      $spacing-3xl
-      max($spacing-xl, env(safe-area-inset-right))
-      max($spacing-3xl, env(safe-area-inset-bottom))
-      max($spacing-xl, env(safe-area-inset-left));
-    background-color: $background-color-dark;
-    gap: $spacing-5xl;
+      var(--spacing-3xl)
+      max(var(--spacing-xl), env(safe-area-inset-right))
+      max(var(--spacing-3xl), env(safe-area-inset-bottom))
+      max(var(--spacing-xl), env(safe-area-inset-left));
+    background-color: var(--color-background-brand);
+    gap: var(--spacing-5xl);
     overflow-y: auto;
 
     &.slide-left-leave-active {
@@ -89,7 +89,7 @@ export default {
       flex-direction: column;
       flex-grow: 1;
       align-items: center;
-      gap: $spacing-5xl;
+      gap: var(--spacing-5xl);
       @include breakpoint(lg) {
         justify-content: center;
       }
@@ -118,7 +118,7 @@ export default {
 
     &__copyright {
       @include text-xs;
-      color: $white;
+      color: var(--color-white);
     }
   }
 </style>

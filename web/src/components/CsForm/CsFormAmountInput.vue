@@ -196,8 +196,8 @@ export default {
     }
 
     &__icon-after {
-      width: $spacing-xl;
-      height: $spacing-xl;
+      width: var(--spacing-xl);
+      height: var(--spacing-xl);
       flex-shrink: 0;
     }
 

@@ -39,15 +39,15 @@ export default {
     display: flex;
     height: 100%;
     padding-top: env(safe-area-inset-top);
-    gap: $spacing-md;
+    gap: var(--spacing-md);
 
     @include breakpoint(lg) {
-      max-width: $desktop-max-width;
+      max-width: var(--desktop-max-width);
       padding:
-        max($spacing-md, env(safe-area-inset-top))
-        max($spacing-md, env(safe-area-inset-right))
-        max($spacing-md, env(safe-area-inset-bottom))
-        max($spacing-md, env(safe-area-inset-left));
+        max(var(--spacing-md), env(safe-area-inset-top))
+        max(var(--spacing-md), env(safe-area-inset-right))
+        max(var(--spacing-md), env(safe-area-inset-bottom))
+        max(var(--spacing-md), env(safe-area-inset-left));
       margin: 0 auto;
     }
 
@@ -55,7 +55,7 @@ export default {
       display: none;
       overflow: hidden;
       width: 100%;
-      background-color: $background-color;
+      background-color: var(--color-background);
       @include breakpoint(lg) {
         display: block;
         border-radius: 0.625rem;

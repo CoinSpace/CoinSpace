@@ -320,7 +320,7 @@ export default {
       flex-grow: 1;
       align-items: center;
       justify-content: center;
-      gap: $spacing-lg;
+      gap: var(--spacing-lg);
 
       &--wrong {
         animation: shake-x 0.7s;
@@ -328,7 +328,7 @@ export default {
 
       &--loading {
         #{ $self }__dot {
-          background-color: $primary-brand;
+          background-color: var(--color-primary-brand);
         }
         #{ $self }__dot:nth-child(1) {
           animation: pulse-4 0.6s ease-in-out alternate infinite;
@@ -346,14 +346,14 @@ export default {
     }
 
     &__dot {
-      width: $spacing-md;
-      height: $spacing-md;
+      width: var(--spacing-md);
+      height: var(--spacing-md);
       border-radius: 50%;
-      background-color: $neutral;
+      background-color: var(--color-neutral);
 
       &--active {
         animation: scale-dot 0.2s;
-        background-color: $primary-brand;
+        background-color: var(--color-primary-brand);
         opacity: 1;
       }
     }
@@ -361,21 +361,21 @@ export default {
     &__keyboard {
       display: flex;
       flex-direction: column;
-      gap: $spacing-sm;
+      gap: var(--spacing-sm);
     }
 
     &__row {
       display: flex;
       justify-content: center;
-      gap: $spacing-lg;
+      gap: var(--spacing-lg);
     }
 
     &__key {
       @include text-xl;
-      width: $spacing-6xl;
-      height: $spacing-6xl;
+      width: var(--spacing-6xl);
+      height: var(--spacing-6xl);
       border-radius: 50%;
-      font-weight: $font-weight-regular;
+      font-weight: var(--font-weight-regular);
 
       &--disabled {
         background-color: transparent;
@@ -388,7 +388,7 @@ export default {
     }
 
     &__biometry {
-      height: $spacing-2xl;
+      height: var(--spacing-2xl);
       margin: 0 auto;
     }
 

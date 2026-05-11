@@ -112,7 +112,7 @@
 
   to {
     opacity: 0;
-    transform: translateY(-$spacing-xl * 3) scale(2);
+    transform: translateY(calc(-3 * var(--spacing-xl))) scale(2);
   }
 }
 

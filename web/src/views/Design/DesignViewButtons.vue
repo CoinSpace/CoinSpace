@@ -181,7 +181,7 @@ export default {
 <style lang="scss">
   .#{ $filename } {
     .cs-button {
-      margin-bottom: $spacing-xl;
+      margin-bottom: var(--spacing-xl);
     }
 
     &__custom-button {

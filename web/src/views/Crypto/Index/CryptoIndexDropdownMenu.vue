@@ -127,7 +127,7 @@ export default {
     }
 
     &__list {
-      padding: $spacing-xl;
+      padding: var(--spacing-xl);
     }
   }
 </style>

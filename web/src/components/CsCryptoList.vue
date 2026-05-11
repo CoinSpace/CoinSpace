@@ -149,8 +149,8 @@ export default {
   .#{ $filename } {
     &__header {
       @include text-sm;
-      margin-bottom: $spacing-2xs;
-      color: $secondary;
+      margin-bottom: var(--spacing-2xs);
+      color: var(--color-secondary);
     }
 
     &__list {
@@ -158,8 +158,8 @@ export default {
       flex-wrap: wrap;
       justify-content: flex-start;
       padding: 0;
-      margin: 0 (-$spacing-sm);
-      gap: $spacing-2xs;
+      margin: 0 calc(-1 * var(--spacing-sm));
+      gap: var(--spacing-2xs);
       list-style: none;
 
       &--loading {
@@ -172,40 +172,40 @@ export default {
       display: flex;
       flex: 0 0 100%;
       align-items: flex-start;
-      padding: $spacing-sm;
+      padding: var(--spacing-sm);
 
       border-radius: 0.625rem;
       cursor: pointer;
-      gap: $spacing-sm;
+      gap: var(--spacing-sm);
       overflow-x: hidden;
 
       @include hover {
-        background-color: $secondary-light;
+        background-color: var(--color-secondary-light);
       }
 
       &:active {
-        background-color: $secondary-light;
+        background-color: var(--color-secondary-light);
       }
 
       &--selected {
-        background-color: $secondary-light;
+        background-color: var(--color-secondary-light);
       }
 
       &--columns {
         @include breakpoint(lg) {
-          flex-basis: calc((100% - $spacing-2xs) / 2);
+          flex-basis: calc((100% - var(--spacing-2xs)) / 2);
         }
         @include breakpoint(xl) {
-          flex-basis: calc((100% - 2 * $spacing-2xs) / 3);
+          flex-basis: calc((100% - 2 * var(--spacing-2xs)) / 3);
         }
       }
     }
 
     &__logo {
-      width: $spacing-3xl;
-      height: $spacing-3xl;
+      width: var(--spacing-3xl);
+      height: var(--spacing-3xl);
       flex: 0 0 auto;
-      margin: $spacing-2xs 0;
+      margin: var(--spacing-2xs) 0;
     }
 
     &__content {
@@ -217,7 +217,7 @@ export default {
       display: flex;
       flex: 0 0 100%;
       justify-content: space-between;
-      gap: $spacing-md;
+      gap: var(--spacing-md);
     }
 
     &__title {
@@ -242,11 +242,11 @@ export default {
       display: flex;
       flex: 0 0 100%;
       justify-content: space-between;
-      gap: $spacing-md;
+      gap: var(--spacing-md);
     }
 
     &__subtitle {
-      color: $secondary;
+      color: var(--color-secondary);
       @include text-xs;
       @include ellipsis;
 
@@ -261,14 +261,14 @@ export default {
     }
 
     &__change {
-      padding-inline-start: $spacing-xs;
+      padding-inline-start: var(--spacing-xs);
 
       &--positive {
-        color: $primary;
+        color: var(--color-primary);
       }
 
       &--negative {
-        color: $danger;
+        color: var(--color-danger);
       }
     }
 
@@ -277,8 +277,8 @@ export default {
     }
 
     &__tick {
-      width: $spacing-xl;
-      height: $spacing-xl;
+      width: var(--spacing-xl);
+      height: var(--spacing-xl);
     }
   }
 </style>

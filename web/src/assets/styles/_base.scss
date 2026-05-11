@@ -2,11 +2,11 @@ html {
   display: flex;
   min-height: 100%;
   box-sizing: border-box;
-  color: $text-color;
+  color: var(--color-text);
   /* stylelint-disable-next-line max-line-length */
   font-family: system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  font-size: $font-size-base;
-  font-weight: $font-weight-regular;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
   letter-spacing: 0.01em;
   line-height: 1.5;
   text-size-adjust: none; // Prevent adjustments of font size after orientation changes in iOS.
@@ -16,9 +16,9 @@ html {
 }
 
 body {
-  background-color: $background-color;
+  background-color: var(--color-background);
   @include breakpoint(lg) {
-    background-color: $secondary-light;
+    background-color: var(--color-secondary-light);
   }
 }
 
@@ -64,16 +64,16 @@ input {
 }
 
 a {
-  color: $primary;
+  color: var(--color-primary);
   cursor: pointer;
   text-decoration: none;
 
   @include hover {
-    color: darker($primary, 15%);
+    color: var(--color-primary-d-15);
   }
 
   &:active {
-    color: darker($primary, 25%);
+    color: var(--color-primary-d-25);
   }
 }
 

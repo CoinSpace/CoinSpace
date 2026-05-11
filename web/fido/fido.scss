@@ -4,8 +4,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: $spacing-xl;
-  background-color: $white;
+  padding: var(--spacing-xl);
+  background-color: var(--color-white);
 }
 
 .container {
@@ -13,7 +13,7 @@ body {
   width: 100%;
   max-width: 320px;
   flex-direction: column;
-  gap: $spacing-3xl;
+  gap: var(--spacing-3xl);
 }
 
 .message {
@@ -30,18 +30,18 @@ body {
   height: 3.5rem;
   align-items: center;
   justify-content: center;
-  padding: 0 $spacing-lg;
+  padding: 0 var(--spacing-lg);
   border-radius: 0.625rem;
-  background-color: $primary-brand;
-  gap: $spacing-md;
+  background-color: var(--color-primary-brand);
+  gap: var(--spacing-md);
   line-height: 1.2;
   transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
 
   @include hover {
-    background-color: darker($primary-brand, 10%);
+    background-color: var(--color-primary-brand-d-10);
   }
 
   &:active {
-    background-color: darker($primary-brand, 15%);
+    background-color: var(--color-primary-brand-d-15);
   }
 }

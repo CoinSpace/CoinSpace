@@ -66,9 +66,9 @@ export default {
     height: 3.5rem;
     align-items: center;
     justify-content: center;
-    padding: 0 $spacing-lg;
+    padding: 0 var(--spacing-lg);
     border-radius: 0.625rem;
-    gap: $spacing-md;
+    gap: var(--spacing-md);
     line-height: 1.2;
     transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
 
@@ -80,16 +80,16 @@ export default {
     }
 
     svg {
-      width: $spacing-xl;
-      height: $spacing-xl;
+      width: var(--spacing-xl);
+      height: var(--spacing-xl);
       flex-shrink: 0;
 
       [stroke] {
-        stroke: $text-color;
+        stroke: var(--color-text);
       }
 
       [fill] {
-        fill: $text-color;
+        fill: var(--color-text);
       }
     }
   }
@@ -107,14 +107,14 @@ export default {
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      background-color: $secondary-light;
+      background-color: var(--color-secondary-light);
 
       @include hover {
-        background-color: darker($secondary-light, 5%);
+        background-color: var(--color-secondary-light-d-5);
       }
 
       &:active {
-        background-color: darker($secondary-light, 10%);
+        background-color: var(--color-secondary-light-d-10);
       }
     }
 
@@ -124,74 +124,75 @@ export default {
 
     &--primary {
       @extend %base-button;
-      background-color: $primary-brand;
+      background-color: var(--color-primary-brand);
+      color: var(--color-primary-button-text);
 
       @include hover {
-        background-color: darker($primary-brand, 10%);
+        background-color: var(--color-primary-brand-d-10);
       }
 
       &:active {
-        background-color: darker($primary-brand, 15%);
+        background-color: var(--color-primary-brand-d-15);
       }
     }
 
     &--secondary {
       @extend %base-button;
-      background-color: $secondary-light;
+      background-color: var(--color-secondary-light);
 
       @include hover {
-        background-color: darker($secondary-light, 5%);
+        background-color: var(--color-secondary-light-d-5);
       }
 
       &:active {
-        background-color: darker($secondary-light, 7%);
+        background-color: var(--color-secondary-light-d-7);
       }
     }
 
     &--primary-light {
       @extend %base-button;
-      background-color: $primary-light;
-      color: $primary;
+      background-color: var(--color-primary-light);
+      color: var(--color-primary);
 
       @include hover {
-        background-color: darker($primary-light, 5%);
+        background-color: var(--color-primary-light-d-5);
       }
 
       &:active {
-        background-color: darker($primary-light, 7%);
+        background-color: var(--color-primary-light-d-7);
       }
 
       svg {
         [stroke] {
-          stroke: $primary;
+          stroke: var(--color-primary);
         }
 
         [fill] {
-          fill: $primary;
+          fill: var(--color-primary);
         }
       }
     }
 
     &--danger-light {
       @extend %base-button;
-      background-color: $danger-light;
-      color: $danger;
+      background-color: var(--color-danger-light);
+      color: var(--color-danger);
 
       @include hover {
-        background-color: darker($danger-light, 5%);
+        background-color: var(--color-danger-light-d-5);
       }
 
       &:active {
-        background-color: darker($danger-light, 7%);
+        background-color: var(--color-danger-light-d-7);
       }
 
       svg {
         [stroke] {
-          stroke: $danger;
+          stroke: var(--color-danger);
         }
 
         [fill] {
-          fill: $danger;
+          fill: var(--color-danger);
         }
       }
     }
@@ -199,23 +200,23 @@ export default {
     &--primary-link {
       @extend %base-button;
       background-color: transparent;
-      color: $primary;
+      color: var(--color-primary);
 
       @include hover {
-        color: darker($primary, 10%);
+        color: var(--color-primary-d-10);
       }
 
       &:active {
-        color: darker($primary, 15%);
+        color: var(--color-primary-d-15);
       }
 
       svg {
         [stroke] {
-          stroke: $primary;
+          stroke: var(--color-primary);
         }
 
         [fill] {
-          fill: $primary;
+          fill: var(--color-primary);
         }
       }
     }
@@ -223,23 +224,23 @@ export default {
     &--white-link {
       @extend %base-button;
       background-color: transparent;
-      color: $white;
+      color: var(--color-white);
 
       @include hover {
-        color: darker($white, 10%);
+        color: var(--color-white-d-10);
       }
 
       &:active {
-        color: darker($white, 15%);
+        color: var(--color-white-d-15);
       }
 
       svg {
         [stroke] {
-          stroke: $white;
+          stroke: var(--color-white);
         }
 
         [fill] {
-          fill: $white;
+          fill: var(--color-white);
         }
       }
     }
@@ -247,23 +248,23 @@ export default {
     &--danger-link {
       @extend %base-button;
       background-color: transparent;
-      color: $danger;
+      color: var(--color-danger);
 
       @include hover {
-        color: darker($danger, 10%);
+        color: var(--color-danger-d-10);
       }
 
       &:active {
-        color: darker($danger, 15%);
+        color: var(--color-danger-d-15);
       }
 
       svg {
         [stroke] {
-          stroke: $danger;
+          stroke: var(--color-danger);
         }
 
         [fill] {
-          fill: $danger;
+          fill: var(--color-danger);
         }
       }
     }
@@ -271,12 +272,12 @@ export default {
     &--circle {
       @extend %base-button;
       height: auto;
-      flex: 1 0 $spacing-5xl;
+      flex: 1 0 var(--spacing-5xl);
       flex-direction: column;
       justify-content: flex-start;
       padding: 0;
-      font-weight: $font-weight-regular;
-      gap: $spacing-xs;
+      font-weight: var(--font-weight-regular);
+      gap: var(--spacing-xs);
       overflow-wrap: anywhere;
 
       @include text-sm;

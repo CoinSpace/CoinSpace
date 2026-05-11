@@ -122,7 +122,7 @@ export default {
       display: flex;
       flex-direction: column;
       flex-grow: 1;
-      gap: $spacing-xs;
+      gap: var(--spacing-xs);
     }
 
     &__passphrase {
@@ -132,25 +132,25 @@ export default {
     &__copy {
       @include text-xs;
       justify-content: center;
-      color: $secondary;
+      color: var(--color-secondary);
     }
 
     &__container {
       display: flex;
       flex-direction: column;
-      gap: $spacing-md;
+      gap: var(--spacing-md);
     }
 
     &__warning {
       @include text-sm;
       display: flex;
       align-items: flex-start;
-      color: $danger;
-      gap: $spacing-xs;
+      color: var(--color-danger);
+      gap: var(--spacing-xs);
     }
 
     &__danger_triangle {
-      width: $spacing-xl;
+      width: var(--spacing-xl);
       flex-shrink: 0;
     }
 
@@ -160,7 +160,7 @@ export default {
       display: flex;
       align-items: flex-start;
       cursor: pointer;
-      gap: $spacing-md;
+      gap: var(--spacing-md);
     }
 
     &__default-checkbox {
@@ -169,7 +169,7 @@ export default {
       pointer-events: none;
       &:checked ~ #{ $self }__checkbox {
         border: none;
-        background-color: $primary-brand;
+        background-color: var(--color-primary-brand);
         #{ $self }__check {
           display: block;
         }
@@ -178,20 +178,20 @@ export default {
 
     &__checkbox {
       display: flex;
-      width: $spacing-md;
-      height: $spacing-md;
+      width: var(--spacing-md);
+      height: var(--spacing-md);
       flex-shrink: 0;
       align-items: center;
       justify-content: center;
-      border: 1px solid $neutral;
+      border: 1px solid var(--color-neutral);
       border-radius: 0.25rem;
-      margin-top: $spacing-2xs;
+      margin-top: var(--spacing-2xs);
     }
 
     &__check {
       display: none;
-      width: $spacing-md;
-      height: $spacing-md;
+      width: var(--spacing-md);
+      height: var(--spacing-md);
     }
   }
 </style>
