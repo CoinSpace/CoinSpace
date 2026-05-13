@@ -292,6 +292,7 @@ export default {
       padding: var(--spacing-md);
       border: 1px solid var(--color-neutral);
       border-radius: 0.625rem;
+      background-color: var(--color-white);
     }
 
     &__address-type-button {
