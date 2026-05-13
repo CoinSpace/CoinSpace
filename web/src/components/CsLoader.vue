@@ -51,7 +51,7 @@ export default {
 
     &--primary {
       #{ $self }__dot {
-        background-color: var(--color-text);
+        background-color: var(--color-primary-button-text);
       }
     }
 

@@ -326,9 +326,9 @@ export default {
       >
         <template #before>
           <img
-            v-if="providerInfo.logo"
+            v-if="providerInfo.logo?.[$resolvedTheme]"
             loading="lazy"
-            :src="providerInfo.logo"
+            :src="providerInfo.logo[$resolvedTheme]"
             :alt="providerInfo.name"
           >
         </template>

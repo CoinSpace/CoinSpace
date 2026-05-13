@@ -34,7 +34,7 @@ export function createApp({ App, router }) {
   defineAppProperty(app, '$cryptos', state.cryptos);
   defineAppProperty(app, '$isHiddenBalance', state.isHiddenBalance);
   defineAppProperty(app, '$isOnion', state.isOnion);
-  defineAppProperty(app, '$theme', state.theme);
+  defineAppProperty(app, '$resolvedTheme', state.resolvedTheme);
   defineAppProperty(app, '$walletState', state.walletState);
 
   defineAppProperty(app, '$STATE_LOADING', CsWallet.STATE_LOADING);

@@ -27,7 +27,10 @@ export default {
 </script>
 
 <template>
-  <AuthStepLayout :title="$t('New wallet')">
+  <AuthStepLayout
+    :title="$t('New wallet')"
+    faded
+  >
     <div class="&__wallet">
       <WalletGradientIcon class="&__wallet-icon" />
     </div>

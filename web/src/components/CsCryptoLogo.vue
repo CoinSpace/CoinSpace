@@ -34,7 +34,7 @@ export default {
       v-if="crypto.logo && !cryptoLogoError"
       loading="lazy"
       class="&__crypto"
-      :src="`${baseUrl}logo/${crypto.logo}?ver=${version}`"
+      :src="`${baseUrl}logo${$resolvedTheme === 'dark' ? '-dark' : ''}/${crypto.logo}?ver=${version}`"
       :alt="crypto.name"
       @error="cryptoLogoError = true"
     >
@@ -51,7 +51,7 @@ export default {
         v-if="platform?.logo && !platformLogoError"
         loading="lazy"
         class="&__platform"
-        :src="`${baseUrl}logo/${platform.logo}?ver=${version}`"
+        :src="`${baseUrl}logo${$resolvedTheme === 'dark' ? '-dark' : ''}/${platform.logo}?ver=${version}`"
         :alt="platform.name"
         @error="platformLogoError = true"
       >
@@ -82,7 +82,7 @@ export default {
       width: 50%;
       height: 50%;
       border-radius: 50%;
-      box-shadow: 0 0 0 1px var(--color-white);
+      box-shadow: 0 0 0 1px var(--color-background);
     }
   }
 </style>

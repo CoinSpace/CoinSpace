@@ -53,13 +53,14 @@ export default class Ramps {
   }
 
   #mapProviders(items) {
+    const logoBaseUrl = this.#account.getBaseURL('ramp');
     return items.map((info) => {
       return {
         ...info,
-        logo: new URL(
-          `/logo/${info.logo}?ver=${import.meta.env.VITE_VERSION}`,
-          this.#account.getBaseURL('ramp')
-        ).toString(),
+        logo: {
+          light: new URL(`/logo/${info.logo}?ver=${import.meta.env.VITE_VERSION}`, logoBaseUrl).toString(),
+          dark: new URL(`/logo-dark/${info.logo}?ver=${import.meta.env.VITE_VERSION}`, logoBaseUrl).toString(),
+        },
       };
     });
   }

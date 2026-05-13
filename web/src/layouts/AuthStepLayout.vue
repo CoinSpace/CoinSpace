@@ -28,6 +28,10 @@ export default {
       type: Function,
       default: undefined,
     },
+    faded: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -60,7 +64,12 @@ export default {
 </script>
 
 <template>
-  <div class="&">
+  <div
+    class="&"
+    :class="{
+      ['&--faded']: faded,
+    }"
+  >
     <div class="&__frame">
       <div class="&__container">
         <CsNavbar
@@ -113,6 +122,21 @@ export default {
         height: auto;
         padding-top: var(--spacing-6xl);
         border-radius: 0.625rem;
+      }
+    }
+
+    &--faded {
+      &.slide-left-enter-active {
+        transition: opacity 0.1s ease-in 0.1s;
+      }
+
+      &.slide-right-leave-active {
+        transition: opacity 0.1s ease-out;
+      }
+
+      &.slide-left-enter-from,
+      &.slide-right-leave-to {
+        opacity: 0;
       }
     }
 

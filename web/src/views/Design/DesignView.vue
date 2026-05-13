@@ -18,6 +18,9 @@
     <router-link :to="{ name: 'design.crypto-logo' }">
       Crypto Logo
     </router-link>
+    <router-link :to="{ name: 'design.icons' }">
+      Icons
+    </router-link>
     <router-link :to="{ name: 'design.pull-list' }">
       Pull List
     </router-link>

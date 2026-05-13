@@ -3,9 +3,7 @@
   <head>
     <title>Coin Wallet</title>
     <meta charset="UTF-8" />
-    <% if (env.VITE_PLATFORM === 'android') { %>
-      <meta name="color-scheme" content="light dark"/>
-    <% } %>
+    <meta name="color-scheme" content="light dark"/>
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
       script-src 'self' 'unsafe-eval' 'unsafe-inline' data:;
@@ -55,6 +53,17 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Coin Wallet">
+    <script>
+      try {
+        const cached = localStorage.getItem('_cs_theme');
+        const theme = ['system', 'light', 'dark'].includes(cached) ? cached : 'system';
+        if (theme !== cached) localStorage.setItem('_cs_theme', theme);
+        const resolvedTheme = theme === 'system'
+          ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+          : theme;
+        document.documentElement.dataset.theme = resolvedTheme;
+      } catch {}
+    </script>
     <style>
       @import '/src/assets/styles/common.scss';
     </style>

@@ -2,6 +2,7 @@ import DesignLayout from '../../layouts/DesignLayout.vue';
 import DesignView from '../../views/Design/DesignView.vue';
 import DesignViewButtons from '../../views/Design/DesignViewButtons.vue';
 import DesignViewCryptoLogo from '../../views/Design/DesignViewCryptoLogo.vue';
+import DesignViewIcons from '../../views/Design/DesignViewIcons.vue';
 import DesignViewInputs from '../../views/Design/DesignViewInputs.vue';
 import DesignViewListItems from '../../views/Design/DesignViewListItems.vue';
 import DesignViewNumbers from '../../views/Design/DesignViewNumbers.vue';
@@ -41,6 +42,10 @@ const design = [
       path: 'crypto-logo',
       name: 'design.crypto-logo',
       component: DesignViewCryptoLogo,
+    }, {
+      path: 'icons',
+      name: 'design.icons',
+      component: DesignViewIcons,
     }, {
       path: 'pull-list',
       name: 'design.pull-list',

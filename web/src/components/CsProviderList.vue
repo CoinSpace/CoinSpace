@@ -55,7 +55,7 @@ export default {
     >
       <img
         loading="lazy"
-        :src="item.logo"
+        :src="item.logo[$resolvedTheme]"
         :alt="item.name"
         class="&__logo"
       >

@@ -24,7 +24,10 @@ export default {
 </script>
 
 <template>
-  <AuthStepLayout :title="$t('Enter passphrase')">
+  <AuthStepLayout
+    :title="$t('Enter passphrase')"
+    faded
+  >
     <CsPassphrase
       v-model="passphrase"
       @confirm="confirm"

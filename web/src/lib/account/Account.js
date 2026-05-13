@@ -193,6 +193,11 @@ export default class Account extends EventEmitter {
     return {};
   }
 
+  get theme() {
+    const theme = this.details.get('systemInfo').theme || this.#clientStorage.getTheme();
+    return ['system', 'light', 'dark'].includes(theme) ? theme : 'system';
+  }
+
   get isHiddenBalance() {
     return this.#clientStorage.isHiddenBalance();
   }
@@ -475,6 +480,15 @@ export default class Account extends EventEmitter {
       wallet.apiNode = this.#getApiNode(wallet.crypto.platform);
     }
     this.emit('update', 'isOnion');
+  }
+
+  applyTheme() {
+    this.#clientStorage.setTheme(this.theme);
+    const resolvedTheme = this.theme === 'system'
+      ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      : this.theme;
+    document.documentElement.dataset.theme = resolvedTheme;
+    return resolvedTheme;
   }
 
   logout() {

@@ -155,6 +155,7 @@ export default {
       @include text-md;
       padding: var(--spacing-xs) var(--spacing-lg);
       border-radius: 0.75rem;
+      background-color: var(--color-modal-background);
       box-shadow: 0 0.75rem 2.5rem rgb(0 0 0 / 7%);
     }
 

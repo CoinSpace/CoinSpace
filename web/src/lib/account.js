@@ -45,7 +45,7 @@ export async function createAccount({ app, router }) {
         state.isHiddenBalance.value = account.isHiddenBalance;
         break;
       case 'theme':
-        state.theme.value = account.details.theme;
+        state.resolvedTheme.value = account.applyTheme();
         break;
       case 'isOnion':
         state.isOnion.value = account.isOnion;

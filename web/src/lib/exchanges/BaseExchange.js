@@ -73,12 +73,13 @@ export default class BaseExchange {
   }
 
   get info() {
+    const logoBaseUrl = this.#account.getBaseURL('swap');
     return {
       ...this.#info,
-      logo: new URL(
-        `/logo/${this.#info.logo}?ver=${import.meta.env.VITE_VERSION}`,
-        this.#account.getBaseURL('swap')
-      ).toString(),
+      logo: {
+        light: new URL(`/logo/${this.#info.logo}?ver=${import.meta.env.VITE_VERSION}`, logoBaseUrl).toString(),
+        dark: new URL(`/logo-dark/${this.#info.logo}?ver=${import.meta.env.VITE_VERSION}`, logoBaseUrl).toString(),
+      },
     };
   }
 

@@ -192,6 +192,10 @@ export default {
       display: none;
       width: var(--spacing-md);
       height: var(--spacing-md);
+
+      [stroke] {
+        stroke: var(--color-primary-button-text);
+      }
     }
   }
 </style>

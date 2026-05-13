@@ -200,6 +200,18 @@ export default class ClientStorage {
     this.#setItem('_cs_onion', !this.isOnion(), { type: OBJECT });
   }
 
+  /**
+   * Theme
+   */
+
+  getTheme() {
+    return this.#getItem('_cs_theme');
+  }
+
+  setTheme(theme) {
+    this.#setItem('_cs_theme', theme);
+  }
+
 
   /**
    * Clean All!
@@ -207,7 +219,7 @@ export default class ClientStorage {
 
   clear() {
     for (const key in this.#localStorage) {
-      if (key && key.startsWith('_cs_') && key !== '_cs_language') {
+      if (key && key.startsWith('_cs_') && !['_cs_language', '_cs_theme'].includes(key)) {
         this.#localStorage.removeItem(key);
       }
     }

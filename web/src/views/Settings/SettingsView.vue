@@ -27,7 +27,7 @@ export default {
       currencies: currencies.map((currency) => ({ value: currency, name: currency })),
       language: this.$i18n.locale,
       languages,
-      theme: this.$theme,
+      theme: this.$account.theme,
     };
   },
   computed: {

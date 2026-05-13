@@ -20,10 +20,10 @@ export default {
     },
   },
   async onShow() {
-    window.systemBars?.setStyle('dark');
+    window.systemBars?.setStyle(this.$resolvedTheme === 'light' ? 'dark' : 'light');
   },
   async onHide() {
-    window.systemBars?.setStyle('light');
+    window.systemBars?.setStyle(this.$resolvedTheme === 'light' ? 'light' : 'dark');
   },
 };
 </script>

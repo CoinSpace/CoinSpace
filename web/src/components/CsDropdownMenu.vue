@@ -75,7 +75,7 @@ export default {
     &__content {
       width: 22.5rem;
       border-radius: 0.625rem;
-      background-color: var(--color-background);
+      background-color: var(--color-modal-background);
       margin-inline-start: calc(100% - 22.5rem - var(--spacing-xs));
     }
   }

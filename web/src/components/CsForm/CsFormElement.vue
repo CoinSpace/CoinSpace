@@ -210,7 +210,7 @@ export default {
         &:focus-within,
         &:active {
           border: 1px solid var(--color-primary-brand);
-          background-color: var(--color-white);
+          background-color: var(--color-background);
         }
       }
     }

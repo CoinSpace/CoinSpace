@@ -41,8 +41,8 @@ export default {
   data() {
     return {
       items: [
-        { ...bitcoinATbitcoin },
-        { ...ethereumATethereum },
+        { ...bitcoinATbitcoin, platform: bitcoinATbitcoin },
+        { ...ethereumATethereum, platform: ethereumATethereum },
         { ...tetherATethereum, platform: ethereumATethereum },
       ],
     };

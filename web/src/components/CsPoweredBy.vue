@@ -23,7 +23,7 @@ export default {
     {{ $t('Powered by') }}
     <img
       loading="lazy"
-      :src="powered.logo"
+      :src="powered.logo[$resolvedTheme]"
       :alt="powered.name"
     >
     {{ powered.name }}

@@ -20,7 +20,7 @@ export default {
     if (this.env.VITE_PLATFORM === 'android') {
       setTimeout(() => {
         this.isReady = true;
-        window.systemBars.setStyle('light');
+        window.systemBars.setStyle(this.$resolvedTheme === 'light' ? 'light' : 'dark');
       }, 500);
     }
   },

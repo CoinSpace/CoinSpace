@@ -15,7 +15,7 @@ export default {
   data() {
     const firstPrice = this.chartSeries[0][1];
     const lastPrice = this.chartSeries[this.chartSeries.length - 1][1];
-    const color = firstPrice <= lastPrice ? '#68C481' : '#DD230E';
+    const color = firstPrice <= lastPrice ? 'var(--color-primary-brand)' : 'var(--color-danger)';
     return {
       dataPointIndex: -1,
       chartOptions: {
@@ -28,15 +28,18 @@ export default {
         fill: {
           type: 'gradient',
           gradient: {
-            shadeIntensity: 1,
-            opacityFrom: 0.33,
+            shadeIntensity: 0,
+            opacityFrom: 0.2,
+            opacityTo: 0,
             gradientFromColors: [color],
+            gradientToColors: [color],
           },
         },
         stroke: {
           width: 1,
         },
         markers: {
+          strokeColors: 'var(--color-background)',
           strokeWidth: 1,
           strokeOpacity: 1,
           hover: {

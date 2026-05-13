@@ -27,12 +27,12 @@ export default {
         this.$emit('scan', { data: contents });
       });
       window.QRScanner.show();
-      window.systemBars?.setStyle('dark');
+      window.systemBars?.setStyle(this.$resolvedTheme === 'light' ? 'dark' : 'light');
       document.documentElement.classList.add('qr-scanning');
     },
     stop() {
       window.QRScanner.destroy();
-      window.systemBars?.setStyle('light');
+      window.systemBars?.setStyle(this.$resolvedTheme === 'light' ? 'light' : 'dark');
       document.documentElement.classList.remove('qr-scanning');
     },
     async prepare() {
