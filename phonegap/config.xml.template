@@ -145,13 +145,7 @@
     <edit-config target="NSLocationAlwaysAndWhenInUseUsageDescription" file="Coin/Coin-Info.plist" mode="merge">
       <string>Turn on location services to send or receive coins with people around you.</string>
     </edit-config>
-    <edit-config target="UIStatusBarHidden" file="Coin/Coin-Info.plist" mode="overwrite">
-      <true/>
-    </edit-config>
     <edit-config target="ITSAppUsesNonExemptEncryption" file="Coin/Coin-Info.plist" mode="overwrite">
-      <false/>
-    </edit-config>
-    <edit-config target="UIViewControllerBasedStatusBarAppearance" file="Coin/Coin-Info.plist" mode="overwrite">
       <false/>
     </edit-config>
     <edit-config target="UIApplicationShortcutItems" file="Coin/Coin-Info.plist" mode="merge">

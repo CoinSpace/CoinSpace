@@ -113,6 +113,12 @@ export default class Account extends EventEmitter {
   #walletConnect;
   #dummy = false;
   #cryptosToSelect = undefined;
+  #systemThemeMediaQuery;
+  #handleSystemThemeChange = () => {
+    if (this.theme === 'system') {
+      this.emit('update', 'theme');
+    }
+  };
 
   get siteUrl() {
     return this.isOnion ? import.meta.env.VITE_SITE_URL_TOR : import.meta.env.VITE_SITE_URL;
@@ -194,7 +200,7 @@ export default class Account extends EventEmitter {
   }
 
   get theme() {
-    const theme = this.details.get('systemInfo').theme || this.#clientStorage.getTheme();
+    const theme = this.details?.get('systemInfo').theme || this.#clientStorage.getTheme();
     return ['system', 'light', 'dark'].includes(theme) ? theme : 'system';
   }
 
@@ -258,6 +264,9 @@ export default class Account extends EventEmitter {
       request: this.request,
       account: this,
     });
+
+    this.#systemThemeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    this.#systemThemeMediaQuery.addEventListener('change', this.#handleSystemThemeChange);
   }
 
   async create(walletSeed, pin) {
@@ -484,15 +493,20 @@ export default class Account extends EventEmitter {
 
   applyTheme() {
     this.#clientStorage.setTheme(this.theme);
+    window.cordova?.plugins?.Theme?.setStyle(this.theme);
     const resolvedTheme = this.theme === 'system'
       ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
       : this.theme;
     document.documentElement.dataset.theme = resolvedTheme;
+    if (document.documentElement.dataset.statusbarStyle !== 'locked') {
+      window.systemBars?.setStyle(resolvedTheme);
+    }
     return resolvedTheme;
   }
 
   logout() {
     this.#clientStorage.clear();
+    this.#systemThemeMediaQuery.removeEventListener('change', this.#handleSystemThemeChange);
     this.emit('logout');
   }
 

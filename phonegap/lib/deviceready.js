@@ -141,7 +141,6 @@ export default async function deviceready() {
         );
       }
     };
-    window.StatusBar.styleDefault();
-    window.StatusBar.show();
+    if (document.documentElement.dataset.theme === 'light') window.StatusBar.styleDefault();
   }
 }

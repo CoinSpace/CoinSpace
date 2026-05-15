@@ -27,12 +27,14 @@ export default {
         this.$emit('scan', { data: contents });
       });
       window.QRScanner.show();
-      window.systemBars?.setStyle(this.$resolvedTheme === 'light' ? 'dark' : 'light');
+      if (this.$resolvedTheme === 'light') window.systemBars?.setStyle('dark');
+      document.documentElement.dataset.statusbarStyle = 'locked';
       document.documentElement.classList.add('qr-scanning');
     },
     stop() {
       window.QRScanner.destroy();
-      window.systemBars?.setStyle(this.$resolvedTheme === 'light' ? 'light' : 'dark');
+      window.systemBars?.setStyle(this.$resolvedTheme);
+      delete document.documentElement.dataset.statusbarStyle;
       document.documentElement.classList.remove('qr-scanning');
     },
     async prepare() {

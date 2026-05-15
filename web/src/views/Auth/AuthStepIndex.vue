@@ -20,10 +20,12 @@ export default {
     },
   },
   async onShow() {
-    window.systemBars?.setStyle(this.$resolvedTheme === 'light' ? 'dark' : 'light');
+    window.systemBars?.setStyle('dark');
+    document.documentElement.dataset.statusbarStyle = 'locked';
   },
   async onHide() {
-    window.systemBars?.setStyle(this.$resolvedTheme === 'light' ? 'light' : 'dark');
+    window.systemBars?.setStyle(this.$resolvedTheme);
+    delete document.documentElement.dataset.statusbarStyle;
   },
 };
 </script>
