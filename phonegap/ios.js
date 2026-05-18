@@ -313,13 +313,12 @@ async function addWidget(repo) {
 }
 
 async function addPods() {
-  // add pods
-  const watchAppPodfile = fs.readFileSync(path.resolve(buildPath, 'platforms/ios/cs-watchapp-ios/WatchApp/Podfile'));
-  fs.appendFileSync(path.resolve(buildPath, 'platforms/ios/Podfile'), watchAppPodfile);
-  const watchAppExtensionPodfile = fs.readFileSync(path.resolve(buildPath, 'platforms/ios/cs-watchapp-ios/WatchAppExtension/Podfile'));
-  fs.appendFileSync(path.resolve(buildPath, 'platforms/ios/Podfile'), watchAppExtensionPodfile);
-  const widgetPodfile = fs.readFileSync(path.resolve(buildPath, 'platforms/ios/cs-widget-ios/WidgetExtension/Podfile'));
-  fs.appendFileSync(path.resolve(buildPath, 'platforms/ios/Podfile'), widgetPodfile);
+  const podfilePath = path.resolve(buildPath, 'platforms/ios/Podfile');
+  let podfile = fs.readFileSync(podfilePath, 'utf-8');
+  podfile = podfile.replace("target 'Coin' do", "use_frameworks!\ntarget 'Coin' do");
+  podfile += fs.readFileSync(path.resolve(buildPath, 'platforms/ios/cs-watchapp-ios/WatchApp/Podfile'), 'utf-8');
+  podfile += fs.readFileSync(path.resolve(buildPath, 'platforms/ios/cs-watchapp-ios/WatchAppExtension/Podfile'), 'utf-8');
+  podfile += fs.readFileSync(path.resolve(buildPath, 'platforms/ios/cs-widget-ios/WidgetExtension/Podfile'), 'utf-8');
 
   const postInstall = `
     post_install do |installer|
@@ -338,8 +337,8 @@ async function addPods() {
         end
       end
     end\n`.replace(/^ {4}/gm, '');
-
-  fs.appendFileSync(path.resolve(buildPath, 'platforms/ios/Podfile'), postInstall);
+  podfile += postInstall;
+  fs.writeFileSync(podfilePath, podfile);
 
   shell('pod install', { cwd: path.join(buildPath, 'platforms/ios') });
   shell('cat Podfile.lock', { cwd: path.join(buildPath, 'platforms/ios') });
