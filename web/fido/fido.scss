@@ -5,7 +5,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: var(--spacing-xl);
-  background-color: var(--color-white);
+  background-color: var(--color-background);
 }
 
 .container {
@@ -33,6 +33,7 @@ body {
   padding: 0 var(--spacing-lg);
   border-radius: 0.625rem;
   background-color: var(--color-primary-brand);
+  color: var(--color-primary-button-text);
   gap: var(--spacing-md);
   line-height: 1.2;
   transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;

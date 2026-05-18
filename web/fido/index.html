@@ -3,10 +3,22 @@
 <head>
   <title>Coin Wallet</title>
   <meta charset="UTF-8" />
+  <meta name="color-scheme" content="light dark"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0, viewport-fit=cover">
   <style>
     @import './fido.scss';
   </style>
+  <script>
+    try {
+      const cached = localStorage.getItem('_cs_theme');
+      const theme = ['system', 'light', 'dark'].includes(cached) ? cached : 'system';
+      if (theme !== cached) localStorage.setItem('_cs_theme', theme);
+      const resolvedTheme = theme === 'system'
+        ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+        : theme;
+      document.documentElement.dataset.theme = resolvedTheme;
+    } catch {}
+  </script>
 </head>
 <body>
   <div class="container">
