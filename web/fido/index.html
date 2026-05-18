@@ -15,7 +15,7 @@
         document.documentElement.dataset.theme = dark ? 'dark' : 'light';
       }
       mediaQuery.addEventListener('change', (query) => applyTheme(query.matches) );
-      applyTheme();
+      applyTheme(mediaQuery.matches);
     } catch {}
   </script>
 </head>
