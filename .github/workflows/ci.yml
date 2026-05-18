@@ -311,9 +311,6 @@ jobs:
           VITE_CHANGELLY_REF: ${{ secrets.CHANGELLY_REF }}
           VITE_CHANGENOW_REF: ${{ secrets.CHANGENOW_REF }}
           VITE_MOONPAY_API_KEY: ${{ secrets.MOONPAY_API_KEY }}
-          VITE_ZENDESK_APP_ID: ${{ secrets.ZENDESK_APP_ID }}
-          VITE_ZENDESK_CLIENT_ID: ${{ secrets.ZENDESK_CLIENT_ID }}
-          VITE_ZENDESK_URL: ${{ secrets.ZENDESK_URL }}
           VITE_GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           VITE_WALLETCONNECT_ID: ${{ secrets.WALLETCONNECT_ID }}
           VITE_DUMMY_ACCOUNT: ${{ secrets.DUMMY_ACCOUNT }}

@@ -16,13 +16,6 @@ export default async function deviceready() {
     window.navigator.app.exitApp();
   }, false);
 
-  window.Zendesk.initialize(
-    import.meta.env.VITE_ZENDESK_APP_ID,
-    import.meta.env.VITE_ZENDESK_CLIENT_ID,
-    import.meta.env.VITE_ZENDESK_URL
-  );
-  window.Zendesk.setAnonymousIdentity();
-
   const taptic = new Taptic();
   await taptic.init();
   window.taptic = taptic;
