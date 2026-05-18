@@ -10,13 +10,10 @@
   </style>
   <script>
     try {
-      const cached = localStorage.getItem('_cs_theme');
-      const theme = ['system', 'light', 'dark'].includes(cached) ? cached : 'system';
-      if (theme !== cached) localStorage.setItem('_cs_theme', theme);
-      const resolvedTheme = theme === 'system'
-        ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-        : theme;
-      document.documentElement.dataset.theme = resolvedTheme;
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      mediaQuery.addEventListener('change', (query) => {
+        document.documentElement.dataset.theme = query.matches ? 'dark' : 'light';
+      });
     } catch {}
   </script>
 </head>
