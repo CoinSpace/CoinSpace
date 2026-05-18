@@ -7,4 +7,7 @@ contextBridge.exposeInMainWorld('electron', {
   getCurrentPosition(success, error, options) {
     ipcRenderer.invoke('geolocation', options).then(success, error);
   },
+  setTheme(theme) {
+    ipcRenderer.invoke('setTheme', theme);
+  },
 });

@@ -494,6 +494,7 @@ export default class Account extends EventEmitter {
   applyTheme() {
     this.#clientStorage.setTheme(this.theme);
     window.cordova?.plugins?.Theme?.setStyle(this.theme);
+    window.electron?.setTheme(this.theme);
     const resolvedTheme = this.theme === 'system'
       ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
       : this.theme;

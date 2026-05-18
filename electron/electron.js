@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/electron/main';
 import { fileURLToPath } from 'node:url';
 import log from 'electron-log';
-import { Menu, app, ipcMain, net, protocol } from 'electron';
+import { Menu, app, ipcMain, nativeTheme, net, protocol } from 'electron';
 
 import menu from './lib/menu.js';
 import openWindow from './lib/openWindow.js';
@@ -130,6 +130,13 @@ app.whenReady().then(() => {
     } else {
       throw new Error(`Wrong location data: ${data}`);
     }
+  });
+
+  ipcMain.handle('setTheme', (event, theme) => {
+    if (!['system', 'light', 'dark'].includes(theme)) {
+      throw new Error(`Invalid theme source: ${theme}`);
+    }
+    nativeTheme.themeSource = theme;
   });
 
   // handle local files
