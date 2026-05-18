@@ -45,7 +45,7 @@ async function run() {
   cordova('plugin add cordova-plugin-customurlscheme@5.0.2 --save --variable URL_SCHEME=coinspace');
   cordova('plugin add https://github.com/CoinSpace/cordova-plugin-zendesk#e4d65551b7b12213d59c62106b1e971592c087b6 --save');
   cordova('plugin add https://github.com/CoinSpace/cordova-plugin-theme#de431abd34ab3ed899c8108656228d6bdf7a4b55 --save');
-  cordova('plugin add cordova-plugin-safariviewcontroller@2.0.0 --save');
+  cordova('plugin add https://github.com/CoinSpace/cordova-plugin-safariviewcontroller#8e1918600e4730381da734b72d968d3bb91e1064 --save');
   cordova('plugin add https://github.com/fquirin/cordova-plugin-navigationbar#334c9454f56545132245348b1288a9c90e9d45d6 --save');
   cordova('plugin add cordova-plugin-app-review@3.1.0 --save');
   cordova('plugin add cordova-plugin-velda-devicefeedback@0.0.2 --save');
