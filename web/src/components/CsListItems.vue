@@ -27,8 +27,8 @@ export default {
 
 <style lang="scss">
   .#{ $filename } {
-    margin-right: calc(-1 * max(var(--spacing-xl), env(safe-area-inset-right)));
-    margin-left: calc(-1 * max(var(--spacing-xl), env(safe-area-inset-left)));
+    margin-right: calc(-1 * var(--spacing-xl));
+    margin-left: calc(-1 * var(--spacing-xl));
     @include breakpoint(lg) {
       margin-right: 0;
       margin-left: 0;
@@ -37,9 +37,9 @@ export default {
     &__title-wrapper {
       padding:
         0
-        max(var(--spacing-xl), env(safe-area-inset-right))
+        var(--spacing-xl)
         0
-        max(var(--spacing-xl), env(safe-area-inset-left));
+        var(--spacing-xl);
       color: var(--color-secondary);
       @include breakpoint(lg) {
         padding: 0;

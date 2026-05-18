@@ -87,8 +87,8 @@ export default {
     min-height: 3.5rem;
     flex-direction: row;
     align-items: center;
-    padding-right: max(var(--spacing-xl), env(safe-area-inset-right));
-    padding-left: max(var(--spacing-xl), env(safe-area-inset-left));
+    padding-right: var(--spacing-xl);
+    padding-left: var(--spacing-xl);
     gap: var(--spacing-xs);
 
     @include breakpoint(lg) {

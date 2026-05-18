@@ -120,9 +120,9 @@ export default {
       flex-direction: column;
       padding:
         var(--spacing-3xl)
-        max(var(--spacing-xl), env(safe-area-inset-right))
+        var(--spacing-xl)
         max(var(--spacing-3xl), env(safe-area-inset-bottom))
-        max(var(--spacing-xl), env(safe-area-inset-left));
+        var(--spacing-xl);
       gap: var(--spacing-3xl);
       @include breakpoint(lg) {
         // ~ max-height limited by 720px

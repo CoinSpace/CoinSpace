@@ -102,7 +102,7 @@ export default {
     flex-direction: column;
     align-items: center;
     padding:
-      var(--spacing-xl)
+      max(var(--spacing-xl), env(safe-area-inset-top))
       max(var(--spacing-xl), env(safe-area-inset-right))
       max(var(--spacing-3xl), env(safe-area-inset-bottom))
       max(var(--spacing-xl), env(safe-area-inset-left));

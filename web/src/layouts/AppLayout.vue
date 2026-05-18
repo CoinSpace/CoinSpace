@@ -38,7 +38,11 @@ export default {
   .#{ $filename } {
     display: flex;
     height: 100%;
-    padding-top: env(safe-area-inset-top);
+    padding:
+      env(safe-area-inset-top)
+      env(safe-area-inset-right)
+      0
+      env(safe-area-inset-left);
     gap: var(--spacing-md);
 
     @include breakpoint(lg) {

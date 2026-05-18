@@ -64,10 +64,10 @@ export default {
     flex-direction: column;
     align-items: center;
     padding:
-      var(--spacing-3xl)
-      max(var(--spacing-xl), env(safe-area-inset-right))
+      calc(var(--spacing-3xl) + env(safe-area-inset-top))
+      calc(var(--spacing-xl) + env(safe-area-inset-right))
       max(var(--spacing-3xl), env(safe-area-inset-bottom))
-      max(var(--spacing-xl), env(safe-area-inset-left));
+      calc(var(--spacing-xl) + env(safe-area-inset-left));
     background-color: var(--color-background-brand);
     gap: var(--spacing-5xl);
     overflow-y: auto;

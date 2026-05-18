@@ -180,9 +180,9 @@ export default {
     &__navbar {
       padding:
         var(--spacing-3xl)
-        max(var(--spacing-xl), env(safe-area-inset-right))
         var(--spacing-xl)
-        max(var(--spacing-xl), env(safe-area-inset-left));
+        var(--spacing-xl)
+        var(--spacing-xl);
     }
 
     &__avatar {
@@ -228,9 +228,9 @@ export default {
       flex-direction: column;
       padding:
         var(--spacing-xl)
-        max(var(--spacing-xl), env(safe-area-inset-right))
+        var(--spacing-xl)
         max(var(--spacing-3xl), env(safe-area-inset-bottom))
-        max(var(--spacing-xl), env(safe-area-inset-left));
+        var(--spacing-xl);
       gap: var(--spacing-2xs);
       @include breakpoint(lg) {
         overflow-y: auto;

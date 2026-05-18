@@ -36,7 +36,11 @@ export default {
     height: 100%;
     flex-direction: column;
     align-items: center;
-    padding-top: env(safe-area-inset-top);
+    padding:
+      env(safe-area-inset-top)
+      env(safe-area-inset-right)
+      0
+      env(safe-area-inset-left);
 
     @include breakpoint(lg) {
       padding:
@@ -82,9 +86,9 @@ export default {
       flex-direction: column;
       padding:
         var(--spacing-3xl)
-        max(var(--spacing-xl), env(safe-area-inset-right))
+        var(--spacing-xl)
         max(var(--spacing-3xl), env(safe-area-inset-bottom))
-        max(var(--spacing-xl), env(safe-area-inset-left));
+        var(--spacing-xl);
       gap: var(--spacing-3xl);
       overflow-y: auto;
 
