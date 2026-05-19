@@ -64,6 +64,10 @@ input {
   line-height: inherit;
 }
 
+option {
+  background-color: var(--color-background);
+}
+
 a {
   color: var(--color-primary);
   cursor: pointer;
