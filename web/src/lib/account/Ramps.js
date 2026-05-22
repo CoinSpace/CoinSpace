@@ -65,7 +65,7 @@ export default class Ramps {
     });
   }
 
-  async buy(countryCode, wallet) {
+  async buy(countryCode, wallet, theme) {
     if (wallet.crypto.custom) {
       return [];
     }
@@ -75,6 +75,7 @@ export default class Ramps {
         country: countryCode || null,
         crypto: wallet.crypto._id,
         address: wallet.address,
+        theme,
       },
       method: 'get',
       seed: 'device',
@@ -82,7 +83,7 @@ export default class Ramps {
     return this.#mapProviders(ramps);
   }
 
-  async sell(countryCode, wallet) {
+  async sell(countryCode, wallet, theme) {
     if (wallet.crypto.custom) {
       return [];
     }
@@ -92,6 +93,7 @@ export default class Ramps {
         country: countryCode || null,
         crypto: wallet.crypto._id,
         address: wallet.address,
+        theme,
       },
       method: 'get',
       seed: 'device',

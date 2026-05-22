@@ -31,7 +31,7 @@ export default {
       this.isLoading = true;
       try {
         this.$account.ramps.setCountryCode(this.countryCode);
-        this.providers = await this.$account.ramps.sell(this.countryCode, this.$wallet);
+        this.providers = await this.$account.ramps.sell(this.countryCode, this.$wallet, this.$resolvedTheme);
       } catch (err) {
         this.providers = [];
         console.error(err);
