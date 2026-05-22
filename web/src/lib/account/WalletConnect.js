@@ -85,6 +85,8 @@ export class WalletConnect extends EventEmitter {
               'eth_sign',
               'eth_signTypedData',
               'eth_signTypedData_v4',
+              'wallet_switchEthereumChain',
+              'eth_requestAccounts',
             ],
             events: ['accountsChanged', 'chainChanged'],
           },
