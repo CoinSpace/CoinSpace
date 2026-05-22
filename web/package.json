@@ -1,7 +1,7 @@
 {
   "name": "coinwallet",
   "private": true,
-  "version": "6.27.0",
+  "version": "6.28.0",
   "description": "Coin Wallet",
   "bugs": {
     "url": "https://github.com/CoinSpace/CoinSpace/issues"
@@ -160,9 +160,12 @@
       "stylelint-value-no-unknown-custom-properties"
     ],
     "rules": {
-      "csstools/value-no-unknown-custom-properties": [true, {
-        "importFrom": "./src/assets/styles/variables.css"
-      }]
+      "csstools/value-no-unknown-custom-properties": [
+        true,
+        {
+          "importFrom": "./src/assets/styles/variables.css"
+        }
+      ]
     }
   }
 }
