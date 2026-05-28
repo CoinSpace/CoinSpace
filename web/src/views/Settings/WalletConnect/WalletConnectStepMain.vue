@@ -20,9 +20,9 @@ export default {
   mixins: [onShowOnHide],
   async onShow() {
     const walletConnect = await this.$account.walletConnect();
-    walletConnect.once('eth_sendTransaction', this.send);
-    walletConnect.once('eth_signTypedData', this.signTypedData);
-    walletConnect.once('eth_sign', this.signMessage);
+    walletConnect.on('eth_sendTransaction', this.send);
+    walletConnect.on('eth_signTypedData', this.signTypedData);
+    walletConnect.on('eth_sign', this.signMessage);
     await walletConnect.getPendingSessionRequests();
   },
   async onHide() {
@@ -81,6 +81,8 @@ export default {
       } catch (err) {
         this.error = this.$account.unknownError();
         console.error(err);
+        const walletConnect = await this.$account.walletConnect();
+        await walletConnect.rejectSessionRequest(request, err.message);
       } finally {
         this.isLoading = false;
       }
@@ -104,6 +106,8 @@ export default {
       } catch (err) {
         this.error = this.$account.unknownError();
         console.error(err);
+        const walletConnect = await this.$account.walletConnect();
+        await walletConnect.rejectSessionRequest(request, err.message);
       } finally {
         this.isLoading = false;
       }
@@ -112,13 +116,16 @@ export default {
       this.isLoading = true;
       this.error = undefined;
       try {
+        const raw = request.params.request.params[request.params.request.method === 'personal_sign' ? 0 : 1];
+        const hex = raw.replace(/^0x/i, '');
+        if (!/^[0-9a-fA-F]*$/.test(hex)) {
+          throw new Error(`Invalid message hex to sign: ${hex}`);
+        }
         const wallet = this.$account.walletByChainId(request.params?.chainId);
         await wallet.cleanup();
         if (![CsWallet.STATE_LOADED, CsWallet.STATE_LOADING].includes(wallet.state)) {
           await wallet.load();
         }
-        const raw = request.params.request.params[request.params.request.method === 'personal_sign' ? 0 : 1];
-        const hex = raw.replace(/^0x/i, '');
         const data = new TextDecoder().decode(hexToBytes(hex.length % 2 === 0 ? hex : '0' + hex));
         this.updateStorage({
           request,
@@ -129,6 +136,8 @@ export default {
       } catch (err) {
         this.error = this.$account.unknownError();
         console.error(err);
+        const walletConnect = await this.$account.walletConnect();
+        await walletConnect.rejectSessionRequest(request, err.message);
       } finally {
         this.isLoading = false;
       }

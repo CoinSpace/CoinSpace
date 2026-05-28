@@ -60,6 +60,10 @@ export default {
           this.error = this.$t('Please try again with a new connection URI');
           return;
         }
+        if (err.message?.includes?.('Non conforming namespaces. approve() namespaces chains')) {
+          this.error = this.$t('Please add missing coins to your wallet and try again');
+          return;
+        }
         if (err.message?.includes?.('Non conforming namespaces')) {
           this.error = this.$t('Not supported');
           return;

@@ -49,7 +49,7 @@ export default {
           this.$account.emit('update');
           this.updateStorage({ status: true });
         } catch (err) {
-          await walletConnect.rejectSessionRequest(this.storage.request, err);
+          await walletConnect.rejectSessionRequest(this.storage.request, err.message);
           this.updateStorage({ status: false });
           console.error(err);
         } finally {

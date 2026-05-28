@@ -1,12 +1,12 @@
 import { Core } from '@walletconnect/core';
 import { EventEmitter } from 'events';
-import { Web3Wallet } from '@walletconnect/web3wallet';
+import { WalletKit } from '@reown/walletkit';
 import { buildApprovedNamespaces, getSdkError } from '@walletconnect/utils';
 import { formatJsonRpcError, formatJsonRpcResult } from '@walletconnect/jsonrpc-utils';
 
 export class WalletConnect extends EventEmitter {
   #account;
-  #web3wallet;
+  #walletKit;
   #session;
 
   constructor({ account }) {
@@ -15,7 +15,7 @@ export class WalletConnect extends EventEmitter {
   }
 
   async init() {
-    this.#web3wallet = await Web3Wallet.init({
+    this.#walletKit = await WalletKit.init({
       core: new Core({
         projectId: import.meta.env.VITE_WALLETCONNECT_ID,
         logger: 'fatal',
@@ -27,14 +27,14 @@ export class WalletConnect extends EventEmitter {
         icons: [],
       },
     });
-    this.#web3wallet.on('session_proposal', (args) => this.#onSessionProposal(args));
-    this.#web3wallet.on('auth_request', (args) => this.#onAuthRequest(args));
-    this.#web3wallet.on('session_request', (args) => this.#onSessionRequest(args));
-    this.#web3wallet.on('session_delete', (args) => this.#onSessionDelete(args));
+    this.#walletKit.on('session_proposal', (args) => this.#onSessionProposal(args));
+    this.#walletKit.on('auth_request', (args) => this.#onAuthRequest(args));
+    this.#walletKit.on('session_request', (args) => this.#onSessionRequest(args));
+    this.#walletKit.on('session_delete', (args) => this.#onSessionDelete(args));
     try {
-      const sessions = await this.#web3wallet.getActiveSessions();
+      const sessions = await this.#walletKit.getActiveSessions();
       for (const topic in sessions) {
-        await this.#web3wallet.disconnectSession({
+        await this.#walletKit.disconnectSession({
           topic,
           reason: getSdkError('USER_DISCONNECTED'),
         });
@@ -54,7 +54,7 @@ export class WalletConnect extends EventEmitter {
       });
     });
     try {
-      await this.#web3wallet.pair({ uri });
+      await this.#walletKit.pair({ uri });
       return await proposalPromise;
     } finally {
       this.removeAllListeners('session_proposal');
@@ -94,13 +94,16 @@ export class WalletConnect extends EventEmitter {
       });
     } catch (err) {
       console.error(err);
-      await this.#web3wallet.rejectSession({
+      await this.#walletKit.rejectSession({
         id: proposal.id,
         reason: getSdkError('USER_REJECTED'),
       });
       throw err;
     }
-    this.#session = await this.#web3wallet.approveSession({
+    if (Object.keys(namespaces).length === 0) {
+      throw new Error('Non conforming namespaces. approve() namespaces chains');
+    }
+    this.#session = await this.#walletKit.approveSession({
       id: proposal.id,
       namespaces,
     });
@@ -109,7 +112,7 @@ export class WalletConnect extends EventEmitter {
   }
 
   async rejectSession(proposal) {
-    await this.#web3wallet.rejectSession({
+    await this.#walletKit.rejectSession({
       id: proposal.id,
       reason: getSdkError('USER_REJECTED'),
     });
@@ -118,7 +121,7 @@ export class WalletConnect extends EventEmitter {
   async disconnectSession() {
     if (this.#session) {
       try {
-        await this.#web3wallet.disconnectSession({
+        await this.#walletKit.disconnectSession({
           topic: this.#session.topic,
           reason: getSdkError('USER_DISCONNECTED'),
         });
@@ -132,7 +135,7 @@ export class WalletConnect extends EventEmitter {
   async getPendingSessionRequests() {
     if (this.#session) {
       try {
-        const requests = await this.#web3wallet.getPendingSessionRequests();
+        const requests = await this.#walletKit.getPendingSessionRequests();
         for (const request of requests) {
           if (this.#onSessionRequest(request)) {
             break;
@@ -169,8 +172,12 @@ export class WalletConnect extends EventEmitter {
           this.emit('eth_sign', request);
           return true;
         }
+        if (request.params.request.method === 'wallet_switchEthereumChain') {
+          this.rejectSessionRequest(request, 'Unknown wallet chainId');
+          return true;
+        }
         console.error(`Unsupported SessionRequest '${request?.params?.request?.method}': ${JSON.stringify(request)}`);
-        this.#web3wallet.respondSessionRequest({
+        this.#walletKit.respondSessionRequest({
           topic: this.#session.topic,
           response: formatJsonRpcError(request.id, getSdkError('UNSUPPORTED_METHODS')),
         }).catch(console.error);
@@ -188,7 +195,7 @@ export class WalletConnect extends EventEmitter {
 
   async resolveSessionRequest(request, result) {
     try {
-      await this.#web3wallet.respondSessionRequest({
+      await this.#walletKit.respondSessionRequest({
         topic: this.#session.topic,
         response: formatJsonRpcResult(request.id, result),
       });
@@ -199,7 +206,7 @@ export class WalletConnect extends EventEmitter {
 
   async rejectSessionRequest(request, error) {
     try {
-      await this.#web3wallet.respondSessionRequest({
+      await this.#walletKit.respondSessionRequest({
         topic: this.#session.topic,
         response: formatJsonRpcError(request.id, error || getSdkError('USER_REJECTED')),
       });
