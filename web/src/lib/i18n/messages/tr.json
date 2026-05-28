@@ -177,6 +177,7 @@
   "Pending requests": "Bekleyen istekler",
   "Pending {confirmations}": "{confirmations} bekleniyor",
   "Please accept transaction to receive funds.": "Fon almak için lütfen işlemi kabul edin.",
+  "Please add missing coins to your wallet and try again": "",
   "Please confirm synchronization with this device.": "Lütfen bu cihazda senkronizasyonu onaylayın.",
   "Please contact {exchange} to pass KYC.": "KYC'yi geçmek için lütfen {exchange} ile iletişime geçin.",
   "Please enable camera access in Settings to continue.": "Devam etmek için lütfen Ayarlar'da kamera erişimini etkinleştirin.",

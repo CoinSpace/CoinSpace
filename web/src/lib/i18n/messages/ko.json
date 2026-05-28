@@ -177,6 +177,7 @@
   "Pending requests": "보류 중인 요청",
   "Pending {confirmations}": "{confirmations} 보류 중",
   "Please accept transaction to receive funds.": "자금을 수령하려면 거래를 수락하세요.",
+  "Please add missing coins to your wallet and try again": "",
   "Please confirm synchronization with this device.": "이 장치와의 동기화를 확인하여 주십시오.",
   "Please contact {exchange} to pass KYC.": "KYC를 패스하려면 {exchange}에 연락하십시오.",
   "Please enable camera access in Settings to continue.": "설정에서 카메라 액세스를 활성화하고 계속하세요.",

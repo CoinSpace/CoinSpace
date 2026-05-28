@@ -177,6 +177,7 @@
   "Pending requests": "សំណើររង់ចាំ",
   "Pending {confirmations}": "កំពុងរង់ចាំ {confirmations}",
   "Please accept transaction to receive funds.": "សូមទទួលយកប្រតិបត្តិការ ដើម្បីទទួលបានមូលនិធិ។",
+  "Please add missing coins to your wallet and try again": "",
   "Please confirm synchronization with this device.": "សូមបញ្ជាក់ការធ្វើសមកាលកម្មជាមួយឧបករណ៍នេះ។",
   "Please contact {exchange} to pass KYC.": "សូមទាក់ទង {exchange} ដើម្បីបញ្ចប់ KYC។",
   "Please enable camera access in Settings to continue.": "សូមបើកការចូលប្រើកាមេរ៉ានៅក្នុង Settings ដើម្បីបន្ត។",

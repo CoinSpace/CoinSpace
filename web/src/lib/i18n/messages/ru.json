@@ -177,6 +177,7 @@
   "Pending requests": "Ожидающие запросы",
   "Pending {confirmations}": "В ожидании {confirmations}",
   "Please accept transaction to receive funds.": "Пожалуйста, примите транзакцию для получения средств.",
+  "Please add missing coins to your wallet and try again": "Пожалуйста, добавьте недостающие монеты в свой кошелек и попробуйте снова",
   "Please confirm synchronization with this device.": "Пожалуйста, подтвердите синхронизацию с этим устройством.",
   "Please contact {exchange} to pass KYC.": "Пожалуйста, свяжитесь с {exchange}, чтобы пройти KYC.",
   "Please enable camera access in Settings to continue.": "Пожалуйста, разрешите доступ к камере в настройках, чтобы продолжить.",

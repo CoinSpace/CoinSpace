@@ -177,6 +177,7 @@
   "Pending requests": "Függőben lévő kérések",
   "Pending {confirmations}": "{confirmations} folyamatban",
   "Please accept transaction to receive funds.": "Kérjük, fogadd el a tranzakciót a pénz fogadásához.",
+  "Please add missing coins to your wallet and try again": "",
   "Please confirm synchronization with this device.": "Kérjük, erősítsd meg az ezzel az eszközzel való szinkronizációt.",
   "Please contact {exchange} to pass KYC.": "Kérjük, lépj kapcsolatba a {exchange}vel a KYC-engedélyezésért.",
   "Please enable camera access in Settings to continue.": "Kérjük, a folytatáshoz engedélyezd a kamerához való hozzáférést a Beállításokban.",

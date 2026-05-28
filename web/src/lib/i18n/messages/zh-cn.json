@@ -177,6 +177,7 @@
   "Pending requests": "待处理请求",
   "Pending {confirmations}": "待处理{confirmations}",
   "Please accept transaction to receive funds.": "请接受交易以接收资金。",
+  "Please add missing coins to your wallet and try again": "",
   "Please confirm synchronization with this device.": "请确认与该设备的同步。",
   "Please contact {exchange} to pass KYC.": "请联系{exchange}以通过KYC。",
   "Please enable camera access in Settings to continue.": "请在设置中启用相机访问权限以继续。",

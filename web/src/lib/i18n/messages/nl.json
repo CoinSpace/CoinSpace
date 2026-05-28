@@ -177,6 +177,7 @@
   "Pending requests": "In behandeling zijnde verzoeken",
   "Pending {confirmations}": "In afwachting van {confirmations}",
   "Please accept transaction to receive funds.": "Accepteer de transactie om geld te ontvangen.",
+  "Please add missing coins to your wallet and try again": "",
   "Please confirm synchronization with this device.": "Bevestig synchronisatie met dit apparaat.",
   "Please contact {exchange} to pass KYC.": "Neem contact op met {exchange} voor KYC verificatie.",
   "Please enable camera access in Settings to continue.": "Schakel cameratoegang in via Instellingen om door te gaan.",

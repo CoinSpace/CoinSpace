@@ -177,6 +177,7 @@
   "Pending requests": "Cereri în așteptare",
   "Pending {confirmations}": "În așteptarea ({confirmations})",
   "Please accept transaction to receive funds.": "Acceptați tranzacția pentru a primi fonduri.",
+  "Please add missing coins to your wallet and try again": "",
   "Please confirm synchronization with this device.": "Confirmați sincronizarea cu acest dispozitiv.",
   "Please contact {exchange} to pass KYC.": "Contactați {exchange} pentru a efectua KYC.",
   "Please enable camera access in Settings to continue.": "Vă rugăm să permiteți accesul camerei din Setări pentru a continua.",

@@ -177,6 +177,7 @@
   "Pending requests": "Nakahilerang mga kahilingan",
   "Pending {confirmations}": "Nakabinbin {confirmations}",
   "Please accept transaction to receive funds.": "Tanggapin ang transaksiyon upang makatanggap ng mga pondo.",
+  "Please add missing coins to your wallet and try again": "",
   "Please confirm synchronization with this device.": "Kumpirmahin ang pag-synchronize sa device na ito.",
   "Please contact {exchange} to pass KYC.": "Makipag-ugnayan kay {exchange} upang pumasa sa KYC.",
   "Please enable camera access in Settings to continue.": "Paganahin ang access sa camera sa Mga Setting upang magpatuloy.",

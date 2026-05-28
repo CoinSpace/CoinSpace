@@ -177,6 +177,7 @@
   "Pending requests": "בקשות ממתינות",
   "Pending {confirmations}": "ממתין {confirmations}",
   "Please accept transaction to receive funds.": "אנא קבל את העסקה כדי לקבל את הכספים.",
+  "Please add missing coins to your wallet and try again": "",
   "Please confirm synchronization with this device.": "אנא אשר את הסנכרון עם מכשיר זה.",
   "Please contact {exchange} to pass KYC.": "אנא צור קשר עם {exchange} כדי לעבור KYC.",
   "Please enable camera access in Settings to continue.": "אנא אפשר גישה למצלמה בהגדרות כדי להמשיך.",
