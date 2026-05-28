@@ -177,7 +177,7 @@
   "Pending requests": "Ventende forespørsler",
   "Pending {confirmations}": "Venter {confirmations}",
   "Please accept transaction to receive funds.": "Godta transaksjonen for å motta penger.",
-  "Please add missing coins to your wallet and try again": "",
+  "Please add missing coins to your wallet and try again": "Vennligst legg til manglende mynter i lommeboken din og prøv igjen",
   "Please confirm synchronization with this device.": "Bekreft synkronisering med denne enheten.",
   "Please contact {exchange} to pass KYC.": "Kontakt {exchange} for å bestå KYC.",
   "Please enable camera access in Settings to continue.": "Aktiver kameratilgang under Innstillinger for å fortsette.",

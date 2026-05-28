@@ -177,7 +177,7 @@
   "Pending requests": "Solicitações pendentes",
   "Pending {confirmations}": "Pendente {confirmations}",
   "Please accept transaction to receive funds.": "Aceite a operação para receber fundos.",
-  "Please add missing coins to your wallet and try again": "",
+  "Please add missing coins to your wallet and try again": "Por favor, adicione as moedas que faltam à sua carteira e tente novamente",
   "Please confirm synchronization with this device.": "Confirme a sincronização com esse dispositivo.",
   "Please contact {exchange} to pass KYC.": "Entre em contato com a {exchange} para passar um KYC.",
   "Please enable camera access in Settings to continue.": "Habilite o acesso à câmera nas configurações para continuar.",

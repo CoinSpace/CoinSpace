@@ -177,7 +177,7 @@
   "Pending requests": "Yêu cầu đang chờ xử lý",
   "Pending {confirmations}": "Chờ xử lý {confirmations}",
   "Please accept transaction to receive funds.": "Xin hãy chấp nhận giao dịch để nhận tiền.",
-  "Please add missing coins to your wallet and try again": "",
+  "Please add missing coins to your wallet and try again": "Vui lòng thêm các Coin còn thiếu vào Ví của bạn và thử lại",
   "Please confirm synchronization with this device.": "Vui lòng xác nhận đồng bộ với thiết bị này.",
   "Please contact {exchange} to pass KYC.": "Xin hãy liên hệ với {exchange} để xác minh KYC.",
   "Please enable camera access in Settings to continue.": "Vui lòng bật quyền truy cập camera trong Cài đặt để tiếp tục.",

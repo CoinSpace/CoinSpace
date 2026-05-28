@@ -177,7 +177,7 @@
   "Pending requests": "طلبات معلّقة",
   "Pending {confirmations}": "قيد الانتظار {confirmations}",
   "Please accept transaction to receive funds.": "يرجى قبول المعاملة لاستلام الأموال.",
-  "Please add missing coins to your wallet and try again": "",
+  "Please add missing coins to your wallet and try again": "يرجى إضافة العملات المفقودة إلى محفظتك والمحاولة مرة أخرى",
   "Please confirm synchronization with this device.": "يرجى تأكيد المزامنة مع هذا الجهاز.",
   "Please contact {exchange} to pass KYC.": "يرجى التواصل مع {exchange} لإكمال إجراءات التحقق من الهوية.",
   "Please enable camera access in Settings to continue.": "يرجى تمكين الوصول إلى الكاميرا في الإعدادات للمتابعة.",

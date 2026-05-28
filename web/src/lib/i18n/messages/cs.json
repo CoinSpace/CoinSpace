@@ -177,7 +177,7 @@
   "Pending requests": "Čekající žádosti",
   "Pending {confirmations}": "Nezpracované {confirmations}",
   "Please accept transaction to receive funds.": "Chcete-li přijmout prostředky, přijměte prosím transakci.",
-  "Please add missing coins to your wallet and try again": "",
+  "Please add missing coins to your wallet and try again": "Přidejte prosím chybějící mince do své peněženky a zkuste to znovu",
   "Please confirm synchronization with this device.": "Potvrďte prosím synchronizaci s tímto zařízením.",
   "Please contact {exchange} to pass KYC.": "Chcete-li obejít proces KYC („know your customer“ — „znej svého zákazníka“), kontaktujte prosím společnost {exchange}.",
   "Please enable camera access in Settings to continue.": "Abyste mohli pokračovat, povolte prosím v Nastaveních přístup ke kameře/fotoaparátu.",

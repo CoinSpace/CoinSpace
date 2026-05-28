@@ -177,7 +177,7 @@
   "Pending requests": "Richieste in sospeso",
   "Pending {confirmations}": "In sospeso {confirmations}",
   "Please accept transaction to receive funds.": "Accetta la transazione per ricevere i fondi.",
-  "Please add missing coins to your wallet and try again": "",
+  "Please add missing coins to your wallet and try again": "Si prega di aggiungere le monete mancanti al proprio Wallet e riprovare",
   "Please confirm synchronization with this device.": "Conferma la sincronizzazione con questo dispositivo.",
   "Please contact {exchange} to pass KYC.": "Contatta {exchange} per superare la procedura KYC.",
   "Please enable camera access in Settings to continue.": "Attiva l’accesso alla fotocamera in Impostazioni per continuare.",

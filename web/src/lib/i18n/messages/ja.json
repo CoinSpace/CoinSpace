@@ -177,7 +177,7 @@
   "Pending requests": "保留中のリクエスト",
   "Pending {confirmations}": "確認中 {confirmations}",
   "Please accept transaction to receive funds.": "資金を受け取るために、取引を承認してください。",
-  "Please add missing coins to your wallet and try again": "",
+  "Please add missing coins to your wallet and try again": "不足しているコインをWalletに追加して、もう一度お試しください",
   "Please confirm synchronization with this device.": "このデバイスとの同期を確認してください。",
   "Please contact {exchange} to pass KYC.": "KYCを通過するには{exchange}にご連絡ください。",
   "Please enable camera access in Settings to continue.": "続行するには、設定でカメラアクセスを有効にしてください。",

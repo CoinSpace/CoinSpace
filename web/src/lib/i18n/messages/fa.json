@@ -177,7 +177,7 @@
   "Pending requests": "درخواست‌های در انتظار",
   "Pending {confirmations}": "در انتظار {confirmations}",
   "Please accept transaction to receive funds.": "لطفاً برای دریافت وجوه، تراکنش را بپذیرید.",
-  "Please add missing coins to your wallet and try again": "",
+  "Please add missing coins to your wallet and try again": "لطفاً کوین‌های گمشده را به کیف پول خود اضافه کنید و دوباره تلاش کنید",
   "Please confirm synchronization with this device.": "لطفاً همگام‌سازی با این دستگاه را تأیید کنید.",
   "Please contact {exchange} to pass KYC.": "لطفاً برای گذراندن KYC با {exchange} تماس بگیرید.",
   "Please enable camera access in Settings to continue.": "لطفاً برای ادامه، دسترسی به دوربین را در تنظیمات فعال کنید.",

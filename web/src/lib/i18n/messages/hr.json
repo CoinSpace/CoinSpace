@@ -177,7 +177,7 @@
   "Pending requests": "Zahtjevi na čekanju",
   "Pending {confirmations}": "U obradi {confirmations}",
   "Please accept transaction to receive funds.": "Molimo prihvatite transakciju kako biste primili sredstva.",
-  "Please add missing coins to your wallet and try again": "",
+  "Please add missing coins to your wallet and try again": "Molimo dodajte nedostajuće novčiće u svoj novčanik i pokušajte ponovno",
   "Please confirm synchronization with this device.": "Molimo potvrdite sinkronizaciju s ovim uređajem.",
   "Please contact {exchange} to pass KYC.": "Molimo obratite se {exchange} kako biste prošli KYC.",
   "Please enable camera access in Settings to continue.": "Za nastavak omogućite pristup kameri u postavkama.",
