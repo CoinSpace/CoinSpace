@@ -63,6 +63,13 @@ export class WalletConnect extends EventEmitter {
   }
 
   async approveSession(proposal) {
+    if (!this.#isSupportedProposal(proposal)) {
+      await this.#walletKit.rejectSession({
+        id: proposal.id,
+        reason: getSdkError('USER_REJECTED'),
+      });
+      throw new Error('Not supported');
+    }
     const chains = [];
     const accounts = [];
     for (const wallet of this.#account.wallets()) {
@@ -213,5 +220,31 @@ export class WalletConnect extends EventEmitter {
     } catch (err) {
       console.error(err);
     }
+  }
+
+  #isSupportedProposal(proposal) {
+    const eip155ChainIds = [1, 61, 56, 137, 43114, 42161, 10, 250, 8453, 146];
+    try {
+      const namespaces = buildApprovedNamespaces({
+        proposal: proposal.params,
+        supportedNamespaces: {
+          eip155: {
+            chains: eip155ChainIds.map((item) => `eip155:${item}`),
+            accounts: eip155ChainIds.map((item) => `eip155:${item}:0x0000000000000000000000000000000000000000`),
+            methods: [
+              'eth_sendTransaction',
+              'personal_sign',
+              'eth_sign',
+              'eth_signTypedData',
+              'eth_signTypedData_v4',
+              'wallet_switchEthereumChain',
+              'eth_requestAccounts',
+            ],
+            events: ['accountsChanged', 'chainChanged'],
+          },
+        },
+      });
+      return Object.keys(namespaces).length !== 0;
+    } catch { /* empty */ }
   }
 }
