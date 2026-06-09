@@ -9,6 +9,23 @@ export class WalletConnect extends EventEmitter {
   #walletKit;
   #session;
 
+  #SUPPORTED_NAMESPACES = {
+    eip155: {
+      methods: [
+        'eth_sendTransaction',
+        'personal_sign',
+        'eth_sign',
+        'eth_signTypedData',
+        'eth_signTypedData_v4',
+        'wallet_switchEthereumChain',
+        'eth_requestAccounts',
+      ],
+      events: [
+        'accountsChanged', 'chainChanged',
+      ],
+    },
+  };
+
   constructor({ account }) {
     super();
     this.#account = account;
@@ -84,23 +101,13 @@ export class WalletConnect extends EventEmitter {
         proposal: proposal.params,
         supportedNamespaces: {
           eip155: {
+            ...this.#SUPPORTED_NAMESPACES.eip155,
             chains,
             accounts,
-            methods: [
-              'eth_sendTransaction',
-              'personal_sign',
-              'eth_sign',
-              'eth_signTypedData',
-              'eth_signTypedData_v4',
-              'wallet_switchEthereumChain',
-              'eth_requestAccounts',
-            ],
-            events: ['accountsChanged', 'chainChanged'],
           },
         },
       });
     } catch (err) {
-      console.error(err);
       await this.#walletKit.rejectSession({
         id: proposal.id,
         reason: getSdkError('USER_REJECTED'),
@@ -229,18 +236,9 @@ export class WalletConnect extends EventEmitter {
         proposal: proposal.params,
         supportedNamespaces: {
           eip155: {
+            ...this.#SUPPORTED_NAMESPACES.eip155,
             chains: eip155ChainIds.map((item) => `eip155:${item}`),
             accounts: eip155ChainIds.map((item) => `eip155:${item}:0x0000000000000000000000000000000000000000`),
-            methods: [
-              'eth_sendTransaction',
-              'personal_sign',
-              'eth_sign',
-              'eth_signTypedData',
-              'eth_signTypedData_v4',
-              'wallet_switchEthereumChain',
-              'eth_requestAccounts',
-            ],
-            events: ['accountsChanged', 'chainChanged'],
           },
         },
       });
