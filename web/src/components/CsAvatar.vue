@@ -58,6 +58,7 @@ export default {
     &--own-tor {
       box-shadow: 0 var(--spacing-md) var(--spacing-xl) rgb(138 43 226 / 8%);
       outline: 2px solid #8a2be2;
+      outline-offset: -2px;
     }
 
     @keyframes fix-ios {
