@@ -86,7 +86,7 @@ export default {
       </div>
       <CsButton
         v-if="keys.length < MAX_AUTHENTICATORS"
-        type="primary-light"
+        type="primary"
         :isLoading="isAdding"
         @click="add"
       >
