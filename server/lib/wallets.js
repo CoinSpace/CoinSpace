@@ -238,7 +238,7 @@ async function platformRegistrationOptions(device) {
     supportedAlgorithmIDs: fidoAlgorithmIDs,
     authenticatorSelection: {
       authenticatorAttachment: 'platform',
-      userVerification: 'discouraged',
+      userVerification: 'preferred',
     },
   });
   await _setChallenge(device, options.challenge, 'registration', 'platform');
@@ -291,7 +291,7 @@ async function crossplatformRegistrationOptions(device) {
     supportedAlgorithmIDs: fidoAlgorithmIDs,
     authenticatorSelection: {
       authenticatorAttachment: 'cross-platform',
-      userVerification: 'discouraged',
+      userVerification: 'preferred',
     },
     excludeCredentials: wallet.authenticators ? wallet.authenticators.map(mapAuthenticator) : undefined,
   });
