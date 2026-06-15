@@ -320,6 +320,7 @@
   "What is WalletConnect?": "Ce este WalletConnect?",
   "What is a passphrase?": "Ce este o frază de acces?",
   "Word #{index}": "Număr cuvinte {index}",
+  "You do not have any hardware keys yet.": "",
   "You do not have any transactions yet.": "Încă nu aveți nicio tranzacție.",
   "Your passphrase": "Fraza dvs. de acces",
   "Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.": "Fraza dvs. de acces nu va fi afișată din nou. Fără fraza de acces veți pierde accesul la portofel.",

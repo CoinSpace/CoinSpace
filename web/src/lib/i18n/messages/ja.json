@@ -320,6 +320,7 @@
   "What is WalletConnect?": "WalletConnect とは?",
   "What is a passphrase?": "パスフレーズとは何ですか？",
   "Word #{index}": "単語#{index}",
+  "You do not have any hardware keys yet.": "",
   "You do not have any transactions yet.": "まだ取引がありません.",
   "Your passphrase": "あなたのパスフレーズ",
   "Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.": "このパスフレーズは今後表示されることはありません。パスフレーズがないと、ウォレットにアクセスできなくなります。",

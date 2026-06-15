@@ -320,6 +320,7 @@
   "What is WalletConnect?": "Що таке WalletConnect?",
   "What is a passphrase?": "Що таке парольна фраза?",
   "Word #{index}": "Слово #{index}",
+  "You do not have any hardware keys yet.": "",
   "You do not have any transactions yet.": "У Вас ще немає транзакцій.",
   "Your passphrase": "Ваша парольна фраза",
   "Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.": "Це останній раз коли ваша парольна фраза буде показана. Без паролю ви втратите доступ до свого гаманця.",

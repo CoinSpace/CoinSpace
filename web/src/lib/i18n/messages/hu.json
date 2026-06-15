@@ -320,6 +320,7 @@
   "What is WalletConnect?": "Mi az a WalletConnect?",
   "What is a passphrase?": "Mi az a jelszóként használt kifejezés?",
   "Word #{index}": "Szó #{index}",
+  "You do not have any hardware keys yet.": "",
   "You do not have any transactions yet.": "Még nincsenek tranzakcióid.",
   "Your passphrase": "A jelszóként használt kifejezésed",
   "Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.": "A jelszóként használt kifejezésed többé nem fog megjelenni. A jelszóként használt kifejezésed nélkül nem tudsz hozzáférni a pénztárcádhoz.",

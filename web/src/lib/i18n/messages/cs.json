@@ -320,6 +320,7 @@
   "What is WalletConnect?": "Co je to WalletConnect?",
   "What is a passphrase?": "Co je heslo?",
   "Word #{index}": "Slovo č.{index}",
+  "You do not have any hardware keys yet.": "",
   "You do not have any transactions yet.": "Zatím nebyly uskutečněny žádné transakce.",
   "Your passphrase": "Vaše heslová fráze",
   "Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.": "Vaše heslová fráze už nebude zobrazována. Bez heslové fráze přijdete o přístup ke své peněžence.",

@@ -320,6 +320,7 @@
   "What is WalletConnect?": "WalletConnect nedir?",
   "What is a passphrase?": "Parola nedir?",
   "Word #{index}": "Kelime #{index}",
+  "You do not have any hardware keys yet.": "",
   "You do not have any transactions yet.": "Henüz hiç işleminiz yok.",
   "Your passphrase": "Parolanız",
   "Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.": "Parolanız bir daha gösterilmeyecek. Parola olmadan cüzdanınıza erişemeyeceksiniz.",

@@ -320,6 +320,7 @@
   "What is WalletConnect?": "WalletConnect란 무엇인가요?",
   "What is a passphrase?": "암호란 무엇인가요?",
   "Word #{index}": "단어 #{index}",
+  "You do not have any hardware keys yet.": "",
   "You do not have any transactions yet.": "아직 거래가 없습니다.",
   "Your passphrase": "귀하의 암호",
   "Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.": "암호는 다시 보여드리지 않습니다. 암호가 없으면 월렛에 액세스할 수 없습니다.",

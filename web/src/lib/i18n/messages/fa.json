@@ -320,6 +320,7 @@
   "What is WalletConnect?": "WalletConnect چیست؟",
   "What is a passphrase?": "عبارت عبور چیست؟",
   "Word #{index}": "کلمه #{index}",
+  "You do not have any hardware keys yet.": "",
   "You do not have any transactions yet.": "هنوز هیچ تراکنشی ندارید.",
   "Your passphrase": "عبارت عبور شما",
   "Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.": "عبارت عبور شما دیگر نمایش داده نخواهد شد. بدون عبارت عبور، دسترسی به کیف پول خود را از دست خواهید داد.",

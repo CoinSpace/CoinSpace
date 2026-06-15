@@ -1,7 +1,5 @@
 <script>
 import CsButton from '../../../components/CsButton.vue';
-import CsListItem from '../../../components/CsListItem.vue';
-import CsListItems from '../../../components/CsListItems.vue';
 import CsLoader from '../../../components/CsLoader.vue';
 import CsStep from '../../../components/CsStep.vue';
 import MainLayout from '../../../layouts/MainLayout.vue';
@@ -13,8 +11,6 @@ export default {
   components: {
     MainLayout,
     CsButton,
-    CsListItem,
-    CsListItems,
     CsLoader,
     DeleteIcon,
   },
@@ -62,23 +58,32 @@ export default {
   <MainLayout :title="$t('Hardware security')">
     <CsLoader v-if="isLoading" />
     <template v-else>
-      <CsListItems
-        v-if="keys.length"
-        :title="$t('Hardware keys')"
-      >
-        <CsListItem
-          v-for="item in keys"
-          :key="item.credentialID"
-          :title="item.name"
-          :arrow="false"
-        >
-          <template #after>
-            <CsButton @click="remove(item.credentialID)">
-              <DeleteIcon />
-            </CsButton>
-          </template>
-        </CsListItem>
-      </CsListItems>
+      <div class="&__hardware-keys">
+        <div v-if="keys.length">
+          <div class="&__header">
+            {{ $t('Hardware keys') }}
+          </div>
+          <div class="&__list">
+            <div
+              v-for="item in keys"
+              :key="item.credentialID"
+              :title="item.name"
+              class="&__row"
+            >
+              {{ item.name }}
+              <CsButton
+                class="&__delete"
+                @click="remove(item.credentialID)"
+              >
+                <DeleteIcon />
+              </CsButton>
+            </div>
+          </div>
+        </div>
+        <div v-else>
+          {{ $t('You do not have any hardware keys yet.') }}
+        </div>
+      </div>
       <CsButton
         v-if="keys.length < MAX_AUTHENTICATORS"
         type="primary-light"
@@ -90,3 +95,36 @@ export default {
     </template>
   </MainLayout>
 </template>
+
+<style lang="scss">
+  .#{ $filename } {
+    &__hardware-keys {
+      @include text-md;
+      flex-grow: 1;
+    }
+
+    &__header {
+      @include text-sm;
+      margin-bottom: var(--spacing-2xs);
+      color: var(--color-secondary);
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-2xs);
+    }
+
+    &__row {
+      display: flex;
+      height: 3.5rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &__delete {
+      width: var(--spacing-xl);
+      height: var(--spacing-xl);
+    }
+  }
+</style>

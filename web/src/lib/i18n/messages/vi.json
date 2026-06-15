@@ -320,6 +320,7 @@
   "What is WalletConnect?": "WalletConnect là gì?",
   "What is a passphrase?": "Cụm mật khẩu là gì?",
   "Word #{index}": "Số từ {index}",
+  "You do not have any hardware keys yet.": "",
   "You do not have any transactions yet.": "Bạn chưa có bất kỳ giao dịch nào.",
   "Your passphrase": "Cụm mật khẩu",
   "Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.": "Cụm mật khẩu sẽ không hiển thị lại. Bạn sẽ mất quyền truy cập ví nếu không có cụm mật khẩu.",

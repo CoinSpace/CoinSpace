@@ -320,6 +320,7 @@
   "What is WalletConnect?": "מהו WalletConnect?",
   "What is a passphrase?": "מהו ביטוי סיסמה?",
   "Word #{index}": "מילה #{index}",
+  "You do not have any hardware keys yet.": "",
   "You do not have any transactions yet.": "אין לך עסקאות עדיין.",
   "Your passphrase": "ביטוי הסיסמה שלך",
   "Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.": "ביטוי הסיסמה שלך לא יוצג שוב. תאבד גישה לארנק שלך ללא ביטוי הסיסמה.",

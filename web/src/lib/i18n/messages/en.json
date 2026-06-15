@@ -320,6 +320,7 @@
   "What is WalletConnect?": "What is WalletConnect?",
   "What is a passphrase?": "What is a passphrase?",
   "Word #{index}": "Word #{index}",
+  "You do not have any hardware keys yet.": "",
   "You do not have any transactions yet.": "You do not have any transactions yet.",
   "Your passphrase": "Your passphrase",
   "Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.": "Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.",

@@ -320,6 +320,7 @@
   "What is WalletConnect?": "Ano ang WalletConnect?",
   "What is a passphrase?": "Ano ang isang passphrase?",
   "Word #{index}": "Salita #{index}",
+  "You do not have any hardware keys yet.": "",
   "You do not have any transactions yet.": "Wala ka pang mga transaksiyon.",
   "Your passphrase": "Passphrase mo",
   "Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.": "Hindi na muling ipapakita ang passphrase mo. Mawawala ang access mo sa wallet mo kung wala ang passphrase.",
