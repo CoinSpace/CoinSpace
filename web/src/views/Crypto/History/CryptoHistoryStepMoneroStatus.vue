@@ -29,6 +29,15 @@ export default {
         return this.$account.unknownError();
       }
     },
+    action() {
+      if (this.storage.status === false) {
+        if (this.storage.error instanceof MoneroErrors.NotYourTransactionError
+          || this.storage.error instanceof MoneroErrors.InvalidTransactionIDError
+          || this.storage.error instanceof MoneroErrors.TransactionAlreadyAddedError) {
+          return this.$t('Back');
+        }
+      }
+    },
   },
 };
 </script>
@@ -39,5 +48,6 @@ export default {
     :header="storage.status ? $t('Transaction accepted') : $t('Failed')"
     :status="storage.status"
     :message="message"
+    :action="action"
   />
 </template>
