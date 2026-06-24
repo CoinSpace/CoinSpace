@@ -89,6 +89,7 @@ export default {
       this.touchmove(e);
     },
     touchmove(e) {
+      if (!this.$refs.apex?.chart) return;
       const hoverArea = this.$refs.apex.chart.w.globals.dom.Paper.node;
       const bounds = hoverArea.getBoundingClientRect();
       const mouseEvent = new MouseEvent('mousemove', {
