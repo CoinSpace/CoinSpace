@@ -207,6 +207,7 @@ export default {
 
     &__error {
       @include text-md;
+      flex-grow: 1;
     }
   }
 </style>

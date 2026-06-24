@@ -26,61 +26,65 @@ export default {
 </script>
 
 <template>
-  <CsButtonGroup
+  <div
     v-if="$walletState === $STATE_LOADED || $walletState === $STATE_LOADING"
     class="&"
-    type="circle"
   >
-    <CsButton
+    <CsButtonGroup
+      class="&__group"
       type="circle"
-      :disabled="disabled"
-      @click="$router.push({ name: 'crypto.send', params: { cryptoId: $wallet.crypto._id }})"
     >
-      <template #circle>
-        <SendIcon />
-      </template>
-      {{ $t('Send') }}
-    </CsButton>
-    <CsButton
-      type="circle"
-      :disabled="disabled"
-      @click="$router.push({ name: 'crypto.receive', params: { cryptoId: $wallet.crypto._id }})"
-    >
-      <template #circle>
-        <ReceiveIcon />
-      </template>
-      {{ $t('Receive') }}
-    </CsButton>
-    <CsButton
-      v-if="$showRampsAndExchangeAndStaking"
-      type="circle"
-      :disabled="disabled"
-      @click="$router.push({ name: 'crypto.swap', params: { cryptoId: $wallet.crypto._id }})"
-    >
-      <template #circle>
-        <SwapIcon />
-      </template>
-      {{ $t('Swap') }}
-    </CsButton>
-    <CsButton
-      type="circle"
-      :disabled="disabled"
-      @click="$router.push({ name: 'crypto.history', params: { cryptoId: $wallet.crypto._id }})"
-    >
-      <template #circle>
-        <HistoryIcon />
-      </template>
-      {{ $t('History') }}
-    </CsButton>
-  </CsButtonGroup>
+      <CsButton
+        type="circle"
+        :disabled="disabled"
+        @click="$router.push({ name: 'crypto.send', params: { cryptoId: $wallet.crypto._id }})"
+      >
+        <template #circle>
+          <SendIcon />
+        </template>
+        {{ $t('Send') }}
+      </CsButton>
+      <CsButton
+        type="circle"
+        :disabled="disabled"
+        @click="$router.push({ name: 'crypto.receive', params: { cryptoId: $wallet.crypto._id }})"
+      >
+        <template #circle>
+          <ReceiveIcon />
+        </template>
+        {{ $t('Receive') }}
+      </CsButton>
+      <CsButton
+        v-if="$showRampsAndExchangeAndStaking"
+        type="circle"
+        :disabled="disabled"
+        @click="$router.push({ name: 'crypto.swap', params: { cryptoId: $wallet.crypto._id }})"
+      >
+        <template #circle>
+          <SwapIcon />
+        </template>
+        {{ $t('Swap') }}
+      </CsButton>
+      <CsButton
+        type="circle"
+        :disabled="disabled"
+        @click="$router.push({ name: 'crypto.history', params: { cryptoId: $wallet.crypto._id }})"
+      >
+        <template #circle>
+          <HistoryIcon />
+        </template>
+        {{ $t('History') }}
+      </CsButton>
+    </CsButtonGroup>
+  </div>
 </template>
 
 <style lang="scss">
   .#{ $filename } {
-    width: 100%;
-    max-width: 25rem;
-    @include breakpoint(lg) {
-      align-self: flex-start;
+    flex-grow: 1;
+
+    &__group {
+      max-width: 25rem;
     }
   }
 </style>
