@@ -46,15 +46,13 @@ Sentry.init({
       }),
       Sentry.captureConsoleIntegration({
         levels: ['error'],
-      }),
-      Sentry.thirdPartyErrorFilterIntegration({
-        filterKeys: ['coinwallet'],
-        behaviour: 'drop-error-if-exclusively-contains-third-party-frames',
       })
     );
     return integrations.filter((integration) => !['BrowserSession', 'Vue'].includes(integration.name));
   },
   beforeSend(event, { originalException: error }) {
+    const filename = event.exception?.values?.[0]?.stacktrace?.frames?.at(-1)?.filename;
+    if (filename?.startsWith('chrome-extension://')) return null;
     if (error instanceof NetworkError) return null;
     if (error?.name === 'NotAllowedError') return null;
     if (error?.message?.includes('invoking post')) return null;
