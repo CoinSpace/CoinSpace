@@ -320,7 +320,7 @@
   "What is WalletConnect?": "O que é o WalletConnect?",
   "What is a passphrase?": "O que é uma frase secreta?",
   "Word #{index}": "Palavra #{index}",
-  "You do not have any hardware keys yet.": "",
+  "You do not have any hardware keys yet.": "Você ainda não tem chaves de hardware.",
   "You do not have any transactions yet.": "Você ainda não tem operações.",
   "Your passphrase": "Sua frase secreta",
   "Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.": "Sua frase secreta não será exibida novamente. Você perderá o acesso à sua carteira sem a frase secreta.",

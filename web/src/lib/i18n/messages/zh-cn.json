@@ -320,7 +320,7 @@
   "What is WalletConnect?": "什么是WalletConnect？",
   "What is a passphrase?": "什么是密码短语？",
   "Word #{index}": "词 #{index}",
-  "You do not have any hardware keys yet.": "",
+  "You do not have any hardware keys yet.": "您还没有任何硬件密钥。",
   "You do not have any transactions yet.": "您还没有任何交易。",
   "Your passphrase": "您的密码短语",
   "Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.": "您的密码短语将不再显示。如果没有密码短语，您将无法访问您的钱包。",

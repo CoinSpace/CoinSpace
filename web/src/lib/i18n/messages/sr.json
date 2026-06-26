@@ -320,7 +320,7 @@
   "What is WalletConnect?": "Šta je to WalletConnect?",
   "What is a passphrase?": "Šta je lozinka fraza?",
   "Word #{index}": "Riječ #{index}",
-  "You do not have any hardware keys yet.": "",
+  "You do not have any hardware keys yet.": "Još nemate hardverskih ključeva.",
   "You do not have any transactions yet.": "Nemate nijednu transakciju još uvek.",
   "Your passphrase": "Vaša lozinka fraza",
   "Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.": "Vaša fraza lozinke neće biti ponovo prikazana. Izgubićete pristup svom novčaniku bez fraze lozinke.",

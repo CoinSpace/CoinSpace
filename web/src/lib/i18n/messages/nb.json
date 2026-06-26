@@ -320,7 +320,7 @@
   "What is WalletConnect?": "Hva er WalletConnect?",
   "What is a passphrase?": "Hva er en passordfrase?",
   "Word #{index}": "Ord #{index}",
-  "You do not have any hardware keys yet.": "",
+  "You do not have any hardware keys yet.": "Du har ingen maskinvarenøkler ennå.",
   "You do not have any transactions yet.": "Du har ingen transaksjoner ennå.",
   "Your passphrase": "Din passordfrase",
   "Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.": "Din passordfrase vil ikke bli vist igjen. Du vil miste tilgangen til lommeboken uten passordfrasen.",

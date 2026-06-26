@@ -320,7 +320,7 @@
   "What is WalletConnect?": "WalletConnect คืออะไร?",
   "What is a passphrase?": "วลีรหัสผ่านคืออะไร?",
   "Word #{index}": "คำ #{index}",
-  "You do not have any hardware keys yet.": "",
+  "You do not have any hardware keys yet.": "คุณยังไม่มีคีย์ฮาร์ดแวร์",
   "You do not have any transactions yet.": "คุณยังไม่มีการทำธุรกรรมในตอนนี้",
   "Your passphrase": "วลีรหัสผ่านของคุณ",
   "Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.": "วลีรหัสผ่านของคุณจะไม่แสดงอีก ถ้าไม่มีสิ่งนี้ คุณจะไม่สามารถเข้าใช้งานวอลเล็ทได้",

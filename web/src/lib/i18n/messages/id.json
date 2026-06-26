@@ -320,7 +320,7 @@
   "What is WalletConnect?": "Apa itu WalletConnect?",
   "What is a passphrase?": "Apa itu frase sandi?",
   "Word #{index}": "Kata #{index}",
-  "You do not have any hardware keys yet.": "",
+  "You do not have any hardware keys yet.": "Anda belum memiliki kunci keamanan apa pun.",
   "You do not have any transactions yet.": "Anda belum melakukan transaksi apa pun.",
   "Your passphrase": "Frasa sandi Anda",
   "Your passphrase will not be shown again. You will lose access to your wallet without the passphrase.": "Frasa sandi Anda tidak akan diperlihatkan lagi. Anda akan kehilangan akses ke wallet Anda tanpa frasa sandi.",
