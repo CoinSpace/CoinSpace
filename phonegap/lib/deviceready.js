@@ -84,10 +84,18 @@ export default async function deviceready() {
   window.systemBars = {
     setStyle(style = 'light') {
       if (style === 'light') {
-        window.StatusBar.styleDefault();
+        if (import.meta.env.VITE_PLATFORM === 'ios') {
+          window.StatusBar.styleDefault();
+        } else {
+          window.statusbar.setBackgroundColor('#FFFFFF');
+        }
         window.NavigationBar?.backgroundColorByHexString('#00000000', true);
       } else {
-        window.StatusBar.styleLightContent();
+        if (import.meta.env.VITE_PLATFORM === 'ios') {
+          window.StatusBar.styleLightContent();
+        } else {
+          window.statusbar.setBackgroundColor('#000000');
+        }
         window.NavigationBar?.backgroundColorByHexString('#00000000', false);
       }
     },
