@@ -4,7 +4,6 @@ import express from 'express';
 import { isHttpError } from 'http-errors';
 import middleware from './middleware.js';
 
-import apiV1 from './lib/v1/api.js';
 import apiV2 from './lib/v2/api.js';
 import apiV3 from './lib/v3/api.js';
 import apiV4 from './lib/v4/api.js';
@@ -26,7 +25,6 @@ app.use(Sentry.Handlers.requestHandler());
 middleware.init(app);
 
 // API routes
-app.use('/api/v1', apiV1);
 app.use('/api/v2', apiV2);
 app.use('/api/v3', apiV3);
 app.use('/api/v4', apiV4);
