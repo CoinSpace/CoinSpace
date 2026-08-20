@@ -11,7 +11,7 @@ export default class Seeds {
   // public -> device
   // private -> wallet
   get(type, token) {
-    if (!['device', 'wallet'].includes(type)) {
+    if (!['device', 'wallet', 'cardholder'].includes(type)) {
       throw new TypeError(`Wrong seed type '${type}'`);
     }
     return this.#clientStorage.getSeed(type, token);
@@ -21,7 +21,7 @@ export default class Seeds {
     if (!(seed instanceof Uint8Array)) {
       throw new TypeError('seed must be Uint8Array or Buffer');
     }
-    if (!['device', 'wallet'].includes(type)) {
+    if (!['device', 'wallet', 'cardholder'].includes(type)) {
       throw new TypeError(`Wrong seed type '${type}'`);
     }
     return this.#clientStorage.setSeed(type, seed, token);

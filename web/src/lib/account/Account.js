@@ -8,6 +8,7 @@ import { CsWallet, errors } from '@coinspace/cs-common';
 
 import Biometry from './Biometry.js';
 import Cache from './Cache.js';
+import Cards from './Cards.js';
 import ClientStorage from '../storage/ClientStorage.js';
 import CryptoDB from './CryptoDB.js';
 import Details from '../storage/Details.js';
@@ -108,6 +109,7 @@ export default class Account extends EventEmitter {
   #biometry;
   #hardware;
   #ramps;
+  #cards;
   #exchanges;
   #needToMigrateV5Balance = false;
   #walletConnect;
@@ -158,6 +160,10 @@ export default class Account extends EventEmitter {
 
   get ramps() {
     return this.#ramps;
+  }
+
+  get cards() {
+    return this.#cards;
   }
 
   get exchanges() {
@@ -264,6 +270,11 @@ export default class Account extends EventEmitter {
       request: this.request,
       account: this,
     });
+    this.#cards = new Cards({
+      cryptoDB: this.#cryptoDB,
+      request: this.request,
+      account: this,
+    });
 
     this.#systemThemeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     this.#systemThemeMediaQuery.addEventListener('change', this.#handleSystemThemeChange);
@@ -285,6 +296,7 @@ export default class Account extends EventEmitter {
     const pinKey = randomBytes(32);
     const pinHash = this.pinHash(pin, pinKey);
     this.#deviceSeed = deviceSeed;
+    await this.setCardsSeed(walletSeed);
 
     const { deviceToken, walletToken } = await this.request({
       url: '/api/v4/register',
@@ -309,6 +321,9 @@ export default class Account extends EventEmitter {
 
   async open(deviceSeed) {
     this.#deviceSeed = deviceSeed;
+    if (this.#clientStorage.hasSeed('cardholder')) {
+      this.#cards.seed = this.getSeed('cardholder', deviceSeed);
+    }
     await this.#init();
     await this.#initWalletsFromDetails();
   }
@@ -334,6 +349,7 @@ export default class Account extends EventEmitter {
       account: this,
     });
     await this.#exchanges.init();
+    await this.#cards.init();
     this.#dummy = hex.encode(this.#clientStorage.getDetailsKey())
       === import.meta.env.VITE_DUMMY_ACCOUNT;
 
@@ -658,7 +674,7 @@ export default class Account extends EventEmitter {
       data: {
         username,
       },
-      seed: this.#deviceSeed,
+      seed: 'device',
     });
     return data.username;
   }
@@ -672,6 +688,10 @@ export default class Account extends EventEmitter {
   request = (config) => {
     if (config?.seed === 'device') {
       config.seed = this.#deviceSeed;
+    }
+    if (config?.seed === 'cardholder') {
+      config.seed = this.#cards.seed;
+      config.id = this.#clientStorage.getCardholderId();
     }
     return this.#request.request({
       baseURL: this.siteUrl,
@@ -738,7 +758,7 @@ export default class Account extends EventEmitter {
     return this.request({
       url: '/api/v4/invitation',
       method: 'get',
-      seed: this.#deviceSeed,
+      seed: 'device',
     });
   }
 
@@ -746,9 +766,17 @@ export default class Account extends EventEmitter {
     return this.request({
       url: '/api/v4/invitation',
       method: 'post',
-      seed: this.#deviceSeed,
+      seed: 'device',
       data: { email },
     });
+  }
+
+  async setCardsSeed(walletSeed) {
+    const cardholderSeed = hmac(sha256, 'Cards', hex.encode(walletSeed));
+    const cardholderId = hex.encode(await ed25519.getPublicKey(cardholderSeed));
+    this.#cards.seed = cardholderSeed;
+    this.#seeds.set('cardholder', cardholderSeed, this.#deviceSeed);
+    this.#clientStorage.setCardholderId(cardholderId);
   }
 
   unknownError() {

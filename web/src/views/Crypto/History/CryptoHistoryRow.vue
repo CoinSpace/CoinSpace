@@ -41,6 +41,8 @@ export default {
             return this.$t('Unstaking');
           } else if (this.transaction.action === Transaction.ACTION_SMART_CONTRACT_CALL) {
             return this.$t('Smart contract call');
+          } else if (this.transaction.action === Transaction.ACTION_CARD_DEPOSIT) {
+            return this.$t('Card deposit');
           }
         }
       }
@@ -78,7 +80,7 @@ export default {
       }
     },
     amountConverted() {
-      return this.$c(cryptoToFiat(this.transaction.amount, this.price));
+      return this.$fiat(cryptoToFiat(this.transaction.amount, this.price));
     },
   },
   methods: {

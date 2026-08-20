@@ -159,3 +159,9 @@ export function formatDuration(seconds, locale, style) {
     .map(([unit, value]) => value + unit[0])
     .join(' ');
 }
+
+export function dataUrlSize(dataUrl = '') {
+  const base64 = dataUrl.slice(dataUrl.indexOf(',') + 1);
+  const padding = base64.endsWith('==') ? 2 : base64.endsWith('=') ? 1 : 0;
+  return Math.floor((base64.length * 3) / 4) - padding;
+}

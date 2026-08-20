@@ -4,7 +4,9 @@ import { Amount } from '@coinspace/cs-common';
 import CsAmountInput from '../../components/CsAmountInput.vue';
 import CsFormAmountInput from '../../components/CsForm/CsFormAmountInput.vue';
 import CsFormBigIntInput from '../../components/CsForm/CsFormBigIntInput.vue';
+import CsFormDatepicker from '../../components/CsForm/CsFormDatepicker.vue';
 import CsFormDropdown from '../../components/CsForm/CsFormDropdown.vue';
+import CsFormFilepicker from '../../components/CsForm/CsFormFilepicker.vue';
 import CsFormInput from '../../components/CsForm/CsFormInput.vue';
 import CsFormSelect from '../../components/CsForm/CsFormSelect.vue';
 import CsFormTextarea from '../../components/CsForm/CsFormTextarea.vue';
@@ -15,11 +17,15 @@ import EditIcon from '../../assets/svg/edit.svg';
 import SearchIcon from '../../assets/svg/search.svg';
 import WalletSmallIcon from '../../assets/svg/walletSmall.svg';
 
+import { dataUrlSize } from '../../lib/helpers.js';
+
 export default {
   components: {
     CsAmountInput,
     CsFormAmountInput,
     CsFormBigIntInput,
+    CsFormDatepicker,
+    CsFormFilepicker,
     CsFormDropdown,
     CsFormInput,
     CsFormSelect,
@@ -33,6 +39,22 @@ export default {
   data() {
     return {
       amountValue: new Amount(123000n, 8),
+      secondAmountValue: undefined,
+      crypto: {
+        symbol: 'BTC',
+        decimals: 8,
+        price: 100000,
+        factors: [{
+          name: 'BTC',
+          decimals: 8,
+        }, {
+          name: 'mBTC',
+          decimals: 5,
+        }, {
+          name: 'μBTC',
+          decimals: 2,
+        }],
+      },
       decimals: 8,
       price: 25678,
       amount: 1230n,
@@ -49,6 +71,8 @@ export default {
       switchValue: true,
       inputValue: '',
       selectValue: undefined,
+      datepickerValue: undefined,
+      filepickerValue: undefined,
       options: [{
         name: 'USA',
         value: 'us',
@@ -62,6 +86,12 @@ export default {
       number: 21000n,
     };
   },
+  methods: {
+    setAmount(amount, decimals) {
+      this.secondAmountValue = amount === undefined ? undefined : new Amount(amount, decimals);
+    },
+    dataUrlSize,
+  },
 };
 </script>
 
@@ -73,6 +103,18 @@ export default {
       <CsFormInput
         v-model="inputValue"
         placeholder="Placeholder"
+      />
+
+      <CsFormInput
+        v-model="inputValue"
+        inputmode="numeric"
+        placeholder="input mode = numeric"
+      />
+
+      <CsFormInput
+        v-model="inputValue"
+        inputmode="email"
+        placeholder="input mode = email"
       />
 
       <CsFormInput
@@ -142,6 +184,12 @@ export default {
         info="note"
       />
       <CsFormTextareaReadonly
+        label="Readonly + copy"
+        value="some text here readonly some text here readonly"
+        copy
+        info="note"
+      />
+      <CsFormTextareaReadonly
         label="Readonly + icon"
         value="Your wallet"
         info="note"
@@ -173,7 +221,6 @@ export default {
         </template>
       </CsFormTextareaReadonly>
     </div>
-
 
     <div class="&__group">
       <div>
@@ -207,8 +254,36 @@ export default {
         :decimals="decimals"
         symbol="BTC"
       />
+      <CsFormAmountInput
+        v-model="secondAmountValue"
+        label="Amount (set amount / crypto)"
+        :decimals="crypto.decimals"
+        :symbol="crypto.symbol"
+        :price="crypto.price"
+        :factors="crypto.factors ? crypto.factors : []"
+        currency="USD"
+      />
+      <a @click="setAmount(1005000n, crypto.decimals)">Set amount (100500)</a>
+      <a @click="setAmount(0n, crypto.decimals)">Set amount (0)</a>
+      <a @click="setAmount(undefined, crypto.decimals)">Set amount (undefined)</a>
+      <a @click="crypto = { symbol: 'XMR', decimals: 12, price: 2000 }">Set crypto (XMR)</a>
+      <a
+        @click="crypto = {
+          symbol: 'BTC',
+          decimals: 8,
+          price: 100000,
+          factors: [{
+            name: 'BTC',
+            decimals: 8,
+          }, {
+            name: 'mBTC',
+            decimals: 5,
+          }, {
+            name: 'μBTC',
+            decimals: 2,
+          }]}"
+      >Set crypto (BTC)</a>
     </div>
-
 
     <div class="&__group">
       <div>Switch Value: "{{ switchValue }}" {{ typeof switchValue }}</div>
@@ -224,6 +299,24 @@ export default {
         v-model="selectValue"
         label="Select"
         :options="options"
+      />
+    </div>
+
+    <div class="&__group">
+      <div>Datepicker Value: "{{ datepickerValue }}"</div>
+      <CsFormDatepicker
+        v-model="datepickerValue"
+        label="Date of birth"
+      />
+    </div>
+
+    <div class="&__group">
+      <div>Filepicker Value: "{{ filepickerValue?.substring(0, 32) }}, {{ dataUrlSize(filepickerValue) }} bytes"</div>
+      <CsFormFilepicker
+        v-model="filepickerValue"
+        label="Document"
+        placeholder="Select file..."
+        :clear="true"
       />
     </div>
 
@@ -250,6 +343,10 @@ export default {
       display: flex;
       flex-direction: column;
       gap: var(--spacing-xl);
+    }
+
+    &__btn {
+      max-width: 20rem;
     }
   }
 </style>

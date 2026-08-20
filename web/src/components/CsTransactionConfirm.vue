@@ -3,6 +3,7 @@ import { cryptoToFiat } from '../lib/helpers.js';
 
 import CsButton from '../components/CsButton.vue';
 import CsButtonGroup from './CsButtonGroup.vue';
+import CsCard from '../components/CsCard.vue';
 import CsFormGroup from '../components/CsForm/CsFormGroup.vue';
 import CsFormTextareaReadonly from '../components/CsForm/CsFormTextareaReadonly.vue';
 import CsPoweredBy from '../components/CsPoweredBy.vue';
@@ -15,6 +16,7 @@ export default {
   components: {
     CsButton,
     CsButtonGroup,
+    CsCard,
     CsFormGroup,
     CsFormTextareaReadonly,
     CsPoweredBy,
@@ -53,7 +55,7 @@ export default {
     },
     amount() {
       if (this.fiatMode && this.transaction.price !== undefined) {
-        return this.$c(cryptoToFiat(this.transaction.amount, this.transaction.price));
+        return this.$fiatPrecise(cryptoToFiat(this.transaction.amount, this.transaction.price));
       } else {
         return `${this.transaction.amount} ${this.crypto.symbol}`;
       }
@@ -62,7 +64,7 @@ export default {
       if (!this.transaction.fee) return undefined;
       if (this.fiatMode && this.transaction.pricePlatform !== undefined) {
         return this.$t('{sign}{fee} fee', {
-          fee: this.$c(cryptoToFiat(this.transaction.fee, this.transaction.pricePlatform)),
+          fee: this.$fiatPrecise(cryptoToFiat(this.transaction.fee, this.transaction.pricePlatform)),
           sign: '+',
         });
       } else {
@@ -75,9 +77,20 @@ export default {
     },
     amountTo() {
       if (this.fiatMode && this.transaction.priceTo !== undefined) {
-        return `≈\xa0${this.$c(cryptoToFiat(this.transaction.amountTo, this.transaction.priceTo))}`;
+        return `≈\xa0${this.$fiatPrecise(cryptoToFiat(this.transaction.amountTo, this.transaction.priceTo))}`;
       } else {
         return `≈\xa0${this.transaction.amountTo} ${this.transaction.to.crypto.symbol}`;
+      }
+    },
+    cardTitle() {
+      if (this.transaction.cardAction === 'topup') {
+        if (this.fiatMode && this.transaction.price !== undefined) {
+          return `${this.$fiatPrecise(cryptoToFiat(this.transaction.topup, this.transaction.price))}`;
+        } else {
+          return `${this.transaction.topup} ${this.transaction.card.symbol}`;
+        }
+      } else {
+        return this.transaction.product.name;
       }
     },
   },
@@ -104,6 +117,21 @@ export default {
     @click="fiatMode = !fiatMode"
   />
 
+  <div
+    v-if="['topup', 'buy'].includes(transaction.cardAction)"
+    class="&__card"
+    @click="fiatMode = !fiatMode"
+  >
+    <CsCard
+      :productId="transaction.cardAction === 'topup' ? transaction.card.product.id : transaction.product.id"
+      size="medium"
+      :lastFourDigits="transaction.card?.lastFourDigits"
+    />
+    <div class="&__card-title">
+      {{ cardTitle }}
+    </div>
+  </div>
+
   <CsFormGroup class="&__content">
     <template v-if="transaction.exchange !== true && transaction.address === 'your wallet'">
       <CsFormTextareaReadonly
@@ -116,7 +144,7 @@ export default {
         </template>
       </CsFormTextareaReadonly>
     </template>
-    <template v-if="transaction.address !== 'your wallet'">
+    <template v-if="transaction.address !== 'your wallet' && !transaction.cardAction">
       <CsFormTextareaReadonly
         v-if="transaction.alias"
         :value="transaction.alias"
@@ -180,6 +208,19 @@ export default {
       width: var(--spacing-xl);
       height: var(--spacing-xl);
       align-self: center;
+    }
+
+    &__card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      gap: var(--spacing-md);
+    }
+
+    &__card-title {
+      @include text-md;
+      @include text-bold;
     }
   }
 </style>

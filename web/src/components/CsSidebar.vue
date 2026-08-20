@@ -5,12 +5,14 @@ import CsAvatar from './CsAvatar.vue';
 import CsButton from '../components/CsButton.vue';
 import CsCryptoList from '../components/CsCryptoList.vue';
 
+import BankCardIcon from '../assets/svg/bankCard.svg';
 import PlusIcon from '../assets/svg/plus.svg';
 
 const CHANGE_PERIODS = ['1D', '7D', '14D', '1M', '1Y'];
 
 export default {
   components: {
+    BankCardIcon,
     CsAvatar,
     CsButton,
     CsCryptoList,
@@ -53,9 +55,7 @@ export default {
     },
     portfolioBalanceSize() {
       if (this.$isHiddenBalance) return 'normal';
-      const str = this.$n(this.portfolioData.balance, 'currency', {
-        currency: this.$currency,
-      });
+      const str = this.$fiat(this.portfolioData.balance);
       const { width } = measureText(str);
       if (width < 120) return 'normal';
       if (width < 200) return 'large';
@@ -94,26 +94,36 @@ export default {
     :class="{ '&--active': active }"
   >
     <div class="&__navbar">
-      <CsButton
-        @click="$router.push({ name: 'settings' })"
-      >
-        <CsAvatar
-          class="&__avatar"
-          :avatar="$user.avatar"
-          own
-          :size="48"
-          :alt="$t('Settings')"
-        />
-      </CsButton>
+      <div class="&__row">
+        <CsButton
+          @click="$router.push({ name: 'settings' })"
+        >
+          <CsAvatar
+            class="&__avatar"
+            :avatar="$user.avatar"
+            own
+            :size="48"
+            :alt="$t('Settings')"
+          />
+        </CsButton>
+        <CsButton
+          v-if="$account.cards.isEnabled"
+          class="&__cards"
+          type="circle"
+          @click="$router.push({ name: 'cards', force: true })"
+        >
+          <template #circle>
+            <BankCardIcon />
+          </template>
+        </CsButton>
+      </div>
       <div
         dir="ltr"
         class="&__portfolio-amount"
         :class="`&__portfolio-amount--${portfolioBalanceSize}`"
         @click="$account.toggleHiddenBalance()"
       >
-        {{ $isHiddenBalance ? '*****' : $n(portfolioData.balance, 'currency', {
-          currency: $currency,
-        }) }}
+        {{ $isHiddenBalance ? '*****' : $fiat(portfolioData.balance) }}
       </div>
       <div class="&__portfolio-label">
         {{ $t('Portfolio value') }}
@@ -188,7 +198,26 @@ export default {
     &__avatar {
       width: var(--spacing-4xl);
       height: var(--spacing-4xl);
+    }
+
+    &__row {
+      display: flex;
+      justify-content: space-between;
       margin-bottom: var(--spacing-3xl);
+    }
+
+    &__cards {
+      flex: 0 0 var(--spacing-4xl);
+
+      .cs-button__circle {
+        width: var(--spacing-4xl);
+        height: var(--spacing-4xl);
+      }
+
+      svg {
+        width: var(--spacing-lg);
+        height: var(--spacing-lg);
+      }
     }
 
     &__portfolio-amount {

@@ -84,7 +84,6 @@ export default {
 
 <template>
   <SmartLayout
-    ref="layout"
     :isLoading="isLoading"
     :isLoadedAll="!hasMore"
     @loadMore="loadMore"

@@ -110,9 +110,7 @@ export default {
               class="&__subtitle"
               dir="ltr"
             >
-              {{ $n(item.balanceFiat, 'currency', {
-                currency: $currency,
-              }) }}
+              {{ $fiat(item.balanceFiat) }}
             </div>
           </div>
           <div
@@ -120,7 +118,7 @@ export default {
             class="&__subtitle"
           >
             <span dir="ltr">
-              {{ $c(item.market.price) }}
+              {{ $fiatPrecise(item.market.price) }}
             </span>
             <span
               v-if="item.market.change[changePeriod]"

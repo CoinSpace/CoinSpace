@@ -40,17 +40,16 @@ export default {
       this.transition = 'slide-right';
     },
     backTo(step, args) {
-      if (!this.prevSteps.get(step)) return;
-      const prevStepsReversed = Array.from(this.prevSteps.entries()).reverse();
+      if (step === this.currentStep) return;
+      const reachable = this.prevSteps.has(step) || [...this.prevSteps.values()].includes(step);
+      if (!reachable) return;
       const exclude = [];
-      for (const [currentStep] of prevStepsReversed) {
-        if (step === currentStep) {
-          this.currentStep = currentStep;
-          break;
-        }
-        this.prevSteps.delete(currentStep);
-        exclude.push(this.steps[currentStep].name);
+      for (const [dest, source] of [...this.prevSteps.entries()].reverse()) {
+        this.prevSteps.delete(dest);
+        exclude.push(this.steps[dest].name);
+        if (source === step) break;
       }
+      this.currentStep = step;
       this.exclude = exclude;
       this.args = args;
       this.transition = 'slide-right';

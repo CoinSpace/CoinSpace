@@ -342,7 +342,7 @@ export default {
         </div>
         <div v-if="amountConverted">
           <span dir="ltr">
-            {{ $c(amountConverted) }}
+            {{ $fiatPrecise(amountConverted) }}
           </span>
         </div>
       </div>

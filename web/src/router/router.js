@@ -53,6 +53,9 @@ router.beforeEach((to, from) => {
       }
     }
   }
+  if (to.meta.requiresCards && !$account.cards.isEnabled) {
+    return { name: 'home', replace: true };
+  }
   const toDepth = to.path.split('/').length;
   const fromDepth = from.path.split('/').length;
   if (toDepth !== fromDepth) {

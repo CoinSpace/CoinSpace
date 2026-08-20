@@ -59,7 +59,7 @@ export default {
   emits: ['update:modelValue'],
   data() {
     return {
-      optionValue: this.symbol,
+      selectedName: this.symbol,
     };
   },
   computed: {
@@ -83,7 +83,7 @@ export default {
       return options;
     },
     option() {
-      return this.options.find((item) => item.name === this.optionValue);
+      return this.options.find((item) => item.name === this.selectedName) || this.options[0];
     },
     inputValue: {
       get() {
@@ -98,11 +98,22 @@ export default {
         }
       },
       set(amount) {
+        if (amount === undefined) {
+          return this.$emit('update:modelValue', undefined);
+        }
         if (this.option.fiat) {
           this.$emit('update:modelValue', fiatToCrypto(amount.toString(), this.price, this.decimals));
         } else {
           this.$emit('update:modelValue', new Amount(amount.value, this.decimals));
         }
+      },
+    },
+    optionValue: {
+      get() {
+        return this.option.name;
+      },
+      set(name) {
+        this.selectedName = name;
       },
     },
     amountConverted() {
@@ -117,6 +128,20 @@ export default {
       } else {
         return cryptoToFiat(this.modelValue, this.price, this.decimals);
       }
+    },
+  },
+  watch: {
+    decimals(decimals) {
+      if (this.option.fiat) return;
+      if (this.modelValue !== undefined) {
+        this.$emit('update:modelValue', Amount.fromString(this.modelValue.toString(), decimals));
+      }
+    },
+    price(price, oldPrice) {
+      if (!this.option.fiat) return;
+      if (this.modelValue === undefined || oldPrice === undefined || price === undefined) return;
+      const fiat = cryptoToFiat(this.modelValue, oldPrice);
+      this.$emit('update:modelValue', fiatToCrypto(fiat, price, this.decimals));
     },
   },
 };
@@ -173,7 +198,7 @@ export default {
     class="&__info"
   >
     <span dir="ltr">
-      {{ option.fiat ? `${amountConverted} ${symbol}` : $c(amountConverted) }}
+      {{ option.fiat ? `${amountConverted} ${symbol}` : $fiatPrecise(amountConverted) }}
     </span>
   </div>
 </template>

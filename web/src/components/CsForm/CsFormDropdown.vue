@@ -52,6 +52,9 @@ export default {
         }"
         type="text"
         readonly
+        @keydown.enter.prevent="$event.target.click()"
+        @keydown.space.prevent
+        @keyup.space="$event.target.click()"
       >
     </div>
     <div
