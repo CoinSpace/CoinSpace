@@ -16,7 +16,8 @@ export default {
   data() {
     return {
       // initial value from modelValue
-      internalValue: this.modelValue ? this.modelValue.toString() : '',
+      internalValue: this.modelValue?.toString(),
+      lastEmittedValue: this.modelValue?.value,
     };
   },
   computed: {
@@ -31,7 +32,7 @@ export default {
           .split('.');
         if (fraction === undefined) {
           if (integer === '') {
-            this.internalValue = '';
+            this.internalValue = undefined;
           } else {
             this.internalValue = BigInt(integer || '0').toString(10);
           }
@@ -46,19 +47,17 @@ export default {
   },
   watch: {
     internalValue(internalValue) {
-      const amount = Amount.fromString(internalValue, this.decimals);
-      if (!this.modelValue || this.modelValue.value !== amount.value) {
+      const amount = internalValue !== undefined ? Amount.fromString(internalValue, this.decimals) : undefined;
+      if (this.modelValue?.value !== amount?.value) {
+        this.lastEmittedValue = amount?.value;
         this.$emit('update:modelValue', amount);
       }
     },
     modelValue(modelValue) {
-      if (!modelValue) {
-        this.internalValue = '0';
-      } else {
-        if ((modelValue.value !== Amount.fromString(this.internalValue, this.decimals).value)) {
-          this.internalValue = modelValue.toString();
-        }
-      }
+      const incoming = modelValue?.value;
+      if (incoming === this.lastEmittedValue) return;
+      this.lastEmittedValue = incoming;
+      this.internalValue = modelValue?.toString();
     },
   },
 };

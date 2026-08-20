@@ -15,10 +15,10 @@ export default {
       v-if="priceRange.max !== priceRange.min"
       dir="ltr"
     >
-      {{ $c(priceRange.max) }}
+      {{ $fiatPrecise(priceRange.max) }}
     </div>
     <div dir="ltr">
-      {{ $c(priceRange.min) }}
+      {{ $fiatPrecise(priceRange.min) }}
     </div>
   </div>
 </template>

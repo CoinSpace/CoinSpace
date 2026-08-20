@@ -75,6 +75,14 @@ export default {
         </div>
         <div class="&__wrapper">
           <div
+            v-if="$slots.boxes"
+            :dir="inheritDir ? undefined : 'ltr'"
+            class="&__boxes"
+          >
+            <slot name="boxes" />
+          </div>
+          <div
+            v-else
             class="&__box"
             :dir="inheritDir ? undefined : 'ltr'"
           >
@@ -175,6 +183,28 @@ export default {
       }
     }
 
+    &__boxes {
+      display: flex;
+      width: 100%;
+      gap: var(--spacing-2xs);
+
+      & > div {
+        @include text-md;
+        position: relative;
+        display: flex;
+        min-width: 0;
+        min-height: 3.5rem;
+        flex: 1 1 100%;
+        align-items: center;
+        padding: 0 var(--spacing-sm);
+        border: 1px solid var(--color-secondary-light);
+        border-radius: 0.625rem;
+        background-color: var(--color-secondary-light);
+        gap: 0.625rem;
+        transition: background-color 0.15s ease-in-out, border 0.15s ease-in-out;
+      }
+    }
+
     &__info {
       flex-shrink: 0;
       padding: 0 var(--spacing-md);
@@ -191,6 +221,10 @@ export default {
           border: 1px solid var(--color-danger);
           background-color: var(--color-danger-light);
         }
+        div#{ $self }__boxes > div {
+          border: 1px solid var(--color-danger);
+          background-color: var(--color-danger-light);
+        }
       }
     }
 
@@ -204,7 +238,8 @@ export default {
       #{ $self }__label {
         cursor: pointer;
       }
-      #{ $self }__box {
+      #{ $self }__box,
+      #{ $self }__boxes > div {
         cursor: pointer;
 
         &:focus-within,

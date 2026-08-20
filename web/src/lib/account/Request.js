@@ -39,12 +39,8 @@ export default class Request {
     } else {
       config.method = config.method.toLowerCase();
     }
-    if ((config.seed && config.id !== false) || config.id === true) {
-      config.params = {
-        ...config.params,
-        id: this.#clientStorage.getId(),
-      };
-    }
+    const id = this.#resolveId(config);
+    if (id) config.params = { ...config.params, id };
     if (config.params) {
       config.url = buildURL(config.url, config.params);
       delete config.params;
@@ -90,5 +86,12 @@ export default class Request {
       }
       throw err;
     }
+  }
+
+  #resolveId(config) {
+    if (config.id === false) return;
+    if (config.id === true) return this.#clientStorage.getId();
+    if (config.id !== undefined) return config.id;
+    if (config.seed) return this.#clientStorage.getId();
   }
 }

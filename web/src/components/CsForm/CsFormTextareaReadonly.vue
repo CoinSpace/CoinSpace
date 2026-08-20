@@ -1,14 +1,27 @@
 <script>
 import CsFormElement from './CsFormElement.vue';
 
+import CopyIcon from '../../assets/svg/copy.svg';
+import TickIcon from '../../assets/svg/tick.svg';
+
 export default {
   components: {
     CsFormElement,
+    CopyIcon,
+    TickIcon,
   },
   props: {
     value: {
       type: String,
       default: '',
+    },
+    copyValue: {
+      type: String,
+      default: undefined,
+    },
+    copy: {
+      type: Boolean,
+      default: false,
     },
     label: {
       type: String,
@@ -25,6 +38,21 @@ export default {
     inheritDir: {
       type: Boolean,
       default: false,
+    },
+  },
+  data() {
+    return {
+      isCopied: false,
+    };
+  },
+  methods: {
+    onCopy() {
+      navigator.clipboard.writeText(this.copyValue || this.value).then(() => {
+        this.isCopied = true;
+        setTimeout(() => {
+          this.isCopied = false;
+        }, 1000);
+      }, () => {});
     },
   },
 };
@@ -48,11 +76,26 @@ export default {
       {{ value }}
     </div>
     <div
-      v-if="$slots.after"
+      v-if="$slots.after && copy === false"
       class="&__icon-after"
     >
       <slot name="after" />
     </div>
+    <div
+      v-else-if="copy"
+      class="&__icon-after"
+    >
+      <TickIcon
+        v-if="isCopied"
+        class="&__success"
+      />
+      <CopyIcon
+        v-else
+        class="&__copy"
+        @click="onCopy"
+      />
+    </div>
+
     <template #info>
       <slot name="info" />
     </template>
@@ -86,6 +129,19 @@ export default {
       width: var(--spacing-xl);
       height: var(--spacing-xl);
       flex-shrink: 0;
+      align-self: start;
+      margin: calc(1rem - 1px) 0;
+      margin: calc(--spacing-md - 1px) 0;
+    }
+
+    &__copy {
+      cursor: pointer;
+    }
+
+    &__success {
+      [stroke] {
+        stroke: var(--color-primary);
+      }
     }
   }
 </style>

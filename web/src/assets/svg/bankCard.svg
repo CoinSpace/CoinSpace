@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+  <path stroke="var(--color-text)" stroke-linecap="square" stroke-width="1.5" d="M17.592 18.749a3 3 0 0 0 3-3V8.25a3 3 0 0 0-3-3H5.832a3 3 0 0 0-3 3v7.498a3 3 0 0 0 3 3h11.76ZM2.898 9.872h17.694"/>
+  <path stroke="var(--color-text)" stroke-linecap="round" stroke-width="1.5" d="M14.45 15.208h3.336m-7.393 0h.717"/>
+</svg>

@@ -71,6 +71,19 @@ export default class ClientStorage {
   }
 
   /**
+   * Cardholder ID
+   */
+  getCardholderId() {
+    return this.#getItem('_cs_cardholder_id');
+  }
+  hasCardholderId() {
+    return this.#hasItem('_cs_cardholder_id');
+  }
+  setCardholderId(id) {
+    this.#setItem('_cs_cardholder_id', id);
+  }
+
+  /**
    * PIN key
    */
   getPinKey() {

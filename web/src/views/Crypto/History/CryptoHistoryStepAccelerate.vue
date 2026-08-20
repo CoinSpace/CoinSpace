@@ -25,7 +25,7 @@ export default {
     fee() {
       if (this.fiatMode && this.storage.pricePlatform !== undefined) {
         return this.$t('{sign}{fee} fee', {
-          fee: this.$c(cryptoToFiat(this.storage.replacement.fee, this.storage.pricePlatform)),
+          fee: this.$fiatPrecise(cryptoToFiat(this.storage.replacement.fee, this.storage.pricePlatform)),
           sign: '-',
         });
       } else {

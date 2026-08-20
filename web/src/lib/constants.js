@@ -163,6 +163,8 @@ export function getBaseURL(service, isOnion) {
       return isOnion ? import.meta.env.VITE_API_RAMP_URL_TOR : import.meta.env.VITE_API_RAMP_URL;
     case 'swap':
       return isOnion ? import.meta.env.VITE_API_SWAP_URL_TOR : import.meta.env.VITE_API_SWAP_URL;
+    case 'card':
+      return isOnion ? import.meta.env.VITE_API_CARD_URL_TOR : import.meta.env.VITE_API_CARD_URL;
     default:
       return 'https://unsupported.coin.space/';
   }

@@ -18,7 +18,7 @@ export default {
       if (this.$walletState === this.$STATE_LOADING) return '...';
       if (this.$walletState === this.$STATE_ERROR) return '⚠️';
       const fiat = cryptoToFiat(this.$wallet.balance, this.price);
-      return this.$c(fiat);
+      return this.$fiat(fiat);
     },
   },
 };

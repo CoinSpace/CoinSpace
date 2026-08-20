@@ -37,6 +37,10 @@ export default {
       type: [Boolean, String],
       default: false,
     },
+    inputmode: {
+      type: String,
+      default: 'text',
+    },
   },
   emits: ['update:modelValue'],
 };
@@ -56,6 +60,7 @@ export default {
     <input
       :value="modelValue"
       type="text"
+      :inputmode="inputmode"
       dir="ltr"
       lang="en"
       class="&__input"

@@ -28,7 +28,7 @@ export default {
     fiat() {
       const price = this.chartPoint ? this.chartPoint.price : this.price;
       if (!price) return '';
-      return this.$c(price);
+      return this.$fiatPrecise(price);
     },
     changePercent() {
       if (!this.change) return '';

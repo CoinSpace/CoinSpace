@@ -1,6 +1,7 @@
 import DesignLayout from '../../layouts/DesignLayout.vue';
 import DesignView from '../../views/Design/DesignView.vue';
 import DesignViewButtons from '../../views/Design/DesignViewButtons.vue';
+import DesignViewCards from '../../views/Design/DesignViewCards.vue';
 import DesignViewCryptoLogo from '../../views/Design/DesignViewCryptoLogo.vue';
 import DesignViewIcons from '../../views/Design/DesignViewIcons.vue';
 import DesignViewInputs from '../../views/Design/DesignViewInputs.vue';
@@ -19,25 +20,13 @@ const design = [
       name: 'design',
       component: DesignView,
     }, {
-      path: 'typography',
-      name: 'design.typography',
-      component: DesignViewTypography,
-    }, {
       path: 'buttons',
       name: 'design.buttons',
       component: DesignViewButtons,
     }, {
-      path: 'inputs',
-      name: 'design.inputs',
-      component: DesignViewInputs,
-    }, {
-      path: 'numbers',
-      name: 'design.numbers',
-      component: DesignViewNumbers,
-    }, {
-      path: 'list-items',
-      name: 'design.list-items',
-      component: DesignViewListItems,
+      path: 'cards',
+      name: 'design.cards',
+      component: DesignViewCards,
     }, {
       path: 'crypto-logo',
       name: 'design.crypto-logo',
@@ -47,9 +36,25 @@ const design = [
       name: 'design.icons',
       component: DesignViewIcons,
     }, {
+      path: 'inputs',
+      name: 'design.inputs',
+      component: DesignViewInputs,
+    }, {
+      path: 'list-items',
+      name: 'design.list-items',
+      component: DesignViewListItems,
+    }, {
+      path: 'numbers',
+      name: 'design.numbers',
+      component: DesignViewNumbers,
+    }, {
       path: 'pull-list',
       name: 'design.pull-list',
       component: DesignViewPullList,
+    }, {
+      path: 'typography',
+      name: 'design.typography',
+      component: DesignViewTypography,
     }],
   },
 ];

@@ -95,7 +95,7 @@ export default {
         />
         <div>
           <span dir="ltr">
-            {{ $c(fiat) }}
+            {{ $fiatPrecise(fiat) }}
           </span>
         </div>
         <CsFormTextareaReadonly

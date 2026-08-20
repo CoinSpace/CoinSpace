@@ -38,6 +38,10 @@ const i18n = createI18n({
         month: 'short', day: 'numeric',
         hour: 'numeric', minute: 'numeric',
       },
+      monthOnly: {
+        ...datetimeFormatDefaults,
+        month: 'long',
+      },
       hardware: {
         ...datetimeFormatDefaults,
         hour12: false,

@@ -14,10 +14,13 @@ export function createApp({ App, router }) {
   defineAppProperty(app, '$tBrackets', (str) => {
     return str.match(/\(\((.+?)\)\)/g)?.map(s => s.slice(2, -2));
   });
-  defineAppProperty(app, '$c', function(value, style = 'currency', options = {}) {
-    if (!value) {
-      return '';
-    }
+  defineAppProperty(app, '$fiat', function(value = 0, style = 'currency', options = {}) {
+    return this.$n(Number(value), style, {
+      currency: this.$currency,
+      ...options,
+    });
+  });
+  defineAppProperty(app, '$fiatPrecise', function(value = 0, style = 'currency', options = {}) {
     const maximumFractionDigits = utils.getPrecision(value);
     return this.$n(Number(value), style, {
       maximumFractionDigits,
@@ -25,6 +28,7 @@ export function createApp({ App, router }) {
       ...options,
     });
   });
+
   defineAppProperty(app, '$duration', function(seconds, style = 'long') {
     return formatDuration(seconds, this.$i18n.locale, style);
   });

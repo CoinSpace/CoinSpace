@@ -62,7 +62,7 @@ export default {
       return `${this.transaction.incoming ? '+' : '-'}${this.transaction.amount} ${this.$wallet.crypto.symbol}`;
     },
     amountConverted() {
-      return this.$c(cryptoToFiat(this.transaction.amount, this.price));
+      return this.$fiat(cryptoToFiat(this.transaction.amount, this.price));
     },
     status() {
       const { status, confirmations, minConfirmations, timestamp } = this.transaction;

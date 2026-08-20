@@ -24,6 +24,8 @@ import SettingsTorView from '../../views/Settings/Tor/SettingsTorView.vue';
 import SettingsView from '../../views/Settings/SettingsView.vue';
 import SettingsWalletConnectView from '../../views/Settings/WalletConnect/WalletConnectView.vue';
 
+import CardsView from '../../views/Cards/CardsView.vue';
+
 import NotFound from '../../views/NotFound.vue';
 
 import BaseExchange from '../../lib/exchanges/BaseExchange.js';
@@ -175,6 +177,12 @@ const app = [
         }
         return { name: 'home' };
       },
+    },
+    {
+      path: 'cards',
+      name: 'cards',
+      component: CardsView,
+      meta: { requiresCards: true },
     }],
     meta: { requiresAuth: true },
   },
