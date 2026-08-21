@@ -202,7 +202,15 @@ export default class Cards {
     const { topupFee } = this.#config.products.find((item) => item.id === product.id);
     const scale = 1000n;
     const scaledPercent = BigInt(Math.round(topupFee * Number(scale)));
-    return new Amount(amount.value * (100n * scale - scaledPercent) / (100n * scale), amount.decimals);
+    const numerator = amount.value * (100n * scale - scaledPercent);
+    const denominator = 100n * scale;
+    let value = numerator / denominator;
+    const roundingDigits = amount.decimals - 2;
+    if (roundingDigits > 0) {
+      const factor = 10n ** BigInt(roundingDigits);
+      value = ((value + factor / 2n) / factor) * factor;
+    }
+    return new Amount(value, amount.decimals);
   }
 
   async loadTransactions(card, cursor = 1) {
