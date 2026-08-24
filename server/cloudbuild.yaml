@@ -24,6 +24,9 @@ steps:
   args:
     - '-c'
     - |
+      if [[ -n "${_VITE_API_CARD_URL}" ]]; then
+        export VITE_API_CARD_URL="${_VITE_API_CARD_URL}"
+      fi
       npm config set @coinspace:registry https://npm.pkg.github.com \
       && npm config set "//npm.pkg.github.com/:_authToken" ${_NPM_READ_TOKEN} \
       && npm ci \
