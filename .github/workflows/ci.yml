@@ -37,8 +37,6 @@ jobs:
 
             <!-- * [App Store](https://apps.apple.com/app/coin-wallet-bitcoin-crypto/id980719434?platform=iphone) (iOS) -->
             <!-- * [Google Play](https://play.google.com/store/apps/details?id=com.coinspace.app) (Android) -->
-            <!-- * [Galaxy Store](https://galaxystore.samsung.com/detail/com.coinspace.app) (Android) -->
-            <!-- * [Huawei AppGallery](https://appgallery.huawei.com/app/C112183767) (Android) -->
             <!-- * [Uptodown](https://coin-wallet.en.uptodown.com/android) (Android) -->
             * [Coin.Wallet.apk](https://github.com/CoinSpace/CoinSpace/releases/download/v${{ env.VERSION }}/Coin.Wallet.apk) (Android)
 
@@ -153,20 +151,6 @@ jobs:
             node: 20
             VITE_BUILD_TYPE: phonegap
             VITE_PLATFORM: android
-            VITE_DISTRIBUTION: android-galaxy
-            SENTRY_DSN_KEY: SENTRY_DSN_ANDROID
-            SENTRY_PROJECT: android
-          - os: ubuntu-22.04
-            node: 20
-            VITE_BUILD_TYPE: phonegap
-            VITE_PLATFORM: android
-            VITE_DISTRIBUTION: android-huawei
-            SENTRY_DSN_KEY: SENTRY_DSN_ANDROID
-            SENTRY_PROJECT: android
-          - os: ubuntu-22.04
-            node: 20
-            VITE_BUILD_TYPE: phonegap
-            VITE_PLATFORM: android
             VITE_DISTRIBUTION: android-uptodown
             SENTRY_DSN_KEY: SENTRY_DSN_ANDROID
             SENTRY_PROJECT: android
@@ -233,8 +217,6 @@ jobs:
           PROVISIONING_IOS_WIDGET: ${{ secrets.PROVISIONING_IOS_WIDGET }}
           GOOGLE_CLOUD_KEY: ${{ secrets.GOOGLE_CLOUD_KEY }}
           ANDROID_PLAY_RELEASE_KEYSTORE: ${{ secrets.ANDROID_PLAY_RELEASE_KEYSTORE }}
-          ANDROID_GALAXY_RELEASE_KEYSTORE: ${{ secrets.ANDROID_GALAXY_RELEASE_KEYSTORE }}
-          ANDROID_HUAWEI_RELEASE_KEYSTORE: ${{ secrets.ANDROID_HUAWEI_RELEASE_KEYSTORE }}
           ANDROID_UPTODOWN_RELEASE_KEYSTORE: ${{ secrets.ANDROID_UPTODOWN_RELEASE_KEYSTORE }}
           ANDROID_APK_RELEASE_KEYSTORE: ${{ secrets.ANDROID_APK_RELEASE_KEYSTORE }}
           CERTIFICATE_SELFSIGN_WIN: ${{ secrets.CERTIFICATE_SELFSIGN_WIN }}
@@ -279,10 +261,6 @@ jobs:
             echo $PROVISIONING_IOS_WIDGET | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/com.coinspace.wallet.widget.mobileprovision;
           elif [[ "$VITE_DISTRIBUTION" == "android-play" ]]; then
             echo $ANDROID_PLAY_RELEASE_KEYSTORE | base64 --decode > phonegap/release.play.keystore;
-          elif [[ "$VITE_DISTRIBUTION" == "android-galaxy" ]]; then
-            echo $ANDROID_GALAXY_RELEASE_KEYSTORE | base64 --decode > phonegap/release.galaxy.keystore;
-          elif [[ "$VITE_DISTRIBUTION" == "android-huawei" ]]; then
-            echo $ANDROID_HUAWEI_RELEASE_KEYSTORE | base64 --decode > phonegap/release.huawei.keystore;
           elif [[ "$VITE_DISTRIBUTION" == "android-uptodown" ]]; then
             echo $ANDROID_UPTODOWN_RELEASE_KEYSTORE | base64 --decode > phonegap/release.uptodown.keystore;
           elif [[ "$VITE_DISTRIBUTION" == "android-apk" ]]; then

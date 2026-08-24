@@ -9,7 +9,7 @@ export function createApp({ App, router }) {
   router.$app = app;
 
   defineAppProperty(app, 'env', import.meta.env);
-  defineAppProperty(app, '$showRampsAndExchangeAndStaking', import.meta.env.VITE_DISTRIBUTION !== 'android-huawei');
+  defineAppProperty(app, '$showRampsAndExchangeAndStaking', true);
   defineAppProperty(app, '$safeOpen', safeOpen);
   defineAppProperty(app, '$tBrackets', (str) => {
     return str.match(/\(\((.+?)\)\)/g)?.map(s => s.slice(2, -2));
