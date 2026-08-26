@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     async start() {
-      const isReady = await this.prepare();
+      const isReady = await window.prepareCamera(this);
       if (!isReady) return this.$emit('back');
       window.QRScanner.scan((err, contents) => {
         if (err) {
@@ -36,29 +36,6 @@ export default {
       window.systemBars?.setStyle(this.$resolvedTheme);
       delete document.documentElement.dataset.statusbarStyle;
       document.documentElement.classList.remove('qr-scanning');
-    },
-    async prepare() {
-      try {
-        const result = await new Promise((resolve, reject) => {
-          window.QRScanner.prepare((err, status) => {
-            if (err) return reject(err);
-            if (status.authorized) return resolve(true);
-            resolve(false);
-          });
-        });
-        return result;
-      } catch (err) {
-        if (err.name === 'CAMERA_ACCESS_DENIED') {
-          await window.permissionDenied(
-            this.$t('Please enable camera access in Settings to continue.'),
-            this.$t('OK'),
-            [this.$t('Cancel'), this.$t('Settings')]
-          );
-        } else {
-          console.error(err);
-        }
-      }
-      return false;
     },
   },
 };

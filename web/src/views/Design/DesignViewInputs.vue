@@ -311,11 +311,16 @@ export default {
     </div>
 
     <div class="&__group">
-      <div>Filepicker Value: "{{ filepickerValue?.substring(0, 32) }}, {{ dataUrlSize(filepickerValue) }} bytes"</div>
+      <div>
+        Filepicker Value: "
+        {{ filepickerValue?.dataUrl?.substring(0, 32) }},
+        {{ dataUrlSize(filepickerValue?.dataUrl) }} bytes"
+      </div>
       <CsFormFilepicker
         v-model="filepickerValue"
         label="Document"
         placeholder="Select file..."
+        capture
         :clear="true"
       />
     </div>

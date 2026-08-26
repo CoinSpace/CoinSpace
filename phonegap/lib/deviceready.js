@@ -45,6 +45,30 @@ export default async function deviceready() {
     });
   };
 
+  window.prepareCamera = async ({ $t }) => {
+    try {
+      const result = await new Promise((resolve, reject) => {
+        window.QRScanner.prepare((err, status) => {
+          if (err) return reject(err);
+          if (status.authorized) return resolve(true);
+          resolve(false);
+        });
+      });
+      return result;
+    } catch (err) {
+      if (err.name === 'CAMERA_ACCESS_DENIED') {
+        await window.permissionDenied(
+          $t('Please enable camera access in Settings to continue.'),
+          $t('OK'),
+          [$t('Cancel'), $t('Settings')]
+        );
+      } else {
+        console.error(err);
+      }
+    }
+    return false;
+  };
+
   navigator.clipboard.writeText = (text) => {
     cordova.plugins.clipboard.copy(text);
     taptic.tap();

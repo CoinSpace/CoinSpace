@@ -34,6 +34,10 @@ export default {
       type: String,
       default: 'image/png, image/jpeg',
     },
+    capture: {
+      type: String,
+      default: undefined, // 'user', 'environment'
+    },
     fileMaxSize: {
       type: Number,
       default: 1 * 1024 * 1024,
@@ -49,11 +53,27 @@ export default {
   },
   emits: ['update:modelValue'],
   data() {
+    let internalCapture = this.capture;
+    if (this.env.VITE_PLATFORM === 'android' && this.fileType === 'photo' && this.capture === undefined) {
+      internalCapture = 'environment'; // add camera https://github.com/apache/cordova-android/pull/1609
+    }
     return {
       filename: '',
+      internalCapture,
     };
   },
   methods: {
+    async click(event) {
+      if (this.env.VITE_BUILD_TYPE !== 'phonegap') return;
+      if (this.fileType !== 'photo') return;
+      if (event.target !== this.$refs.input) return;
+      if (event.isTrusted) {
+        event.preventDefault();
+        const isReady = await window.prepareCamera(this);
+        window.QRScanner.destroy();
+        if (isReady) event.target.click();
+      }
+    },
     async change(event) {
       const input = event.target;
       const file = input.files && input.files[0];
@@ -89,22 +109,6 @@ export default {
         reader.onload = () => resolve({ dataUrl: reader.result, size: dataUrlSize(reader.result) });
         reader.onerror = () => reject(reader.error);
         reader.readAsDataURL(file);
-      });
-    },
-
-    loadImage(file) {
-      return new Promise((resolve, reject) => {
-        const url = URL.createObjectURL(file);
-        const img = new Image();
-        img.onload = () => {
-          URL.revokeObjectURL(url);
-          resolve(img);
-        };
-        img.onerror = (err) => {
-          URL.revokeObjectURL(url);
-          reject(err);
-        };
-        img.src = url;
       });
     },
 
@@ -147,6 +151,22 @@ export default {
 
       return { dataUrl, size: dataUrlSize(dataUrl), photoMinEdge: Math.min(width, height) };
     },
+
+    loadImage(file) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => {
+          URL.revokeObjectURL(url);
+          resolve(img);
+        };
+        img.onerror = (err) => {
+          URL.revokeObjectURL(url);
+          reject(err);
+        };
+        img.src = url;
+      });
+    },
   },
 };
 </script>
@@ -155,6 +175,7 @@ export default {
   <CsFormElement
     class="&"
     v-bind="$props"
+    @click="click"
   >
     <div
       class="&__filename"
@@ -164,10 +185,12 @@ export default {
     </div>
 
     <input
+      ref="input"
       type="file"
       class="&__input"
       :placeholder="placeholder"
       :accept="fileAccept"
+      :capture="internalCapture"
       @change="change"
     >
     <div

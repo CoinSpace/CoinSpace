@@ -75,6 +75,7 @@ export default {
         :photoMinEdge="photoMinEdge"
         :error="errors.selfie"
         :clear="true"
+        capture="user"
         @update:modelValue="errors.selfie = undefined"
       />
     </CsFormGroup>
