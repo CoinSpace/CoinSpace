@@ -30,6 +30,7 @@ export default {
       pending_kyc: $t('Pending KYC'),
       issuing: $t('Issuing'),
       failed_kyc: $t('Failed KYC'),
+      failed: $t('Failed'),
       locked: $t('Locked'),
     };
     return {
