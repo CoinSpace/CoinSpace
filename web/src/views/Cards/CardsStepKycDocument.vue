@@ -25,14 +25,17 @@ export default {
       errors: {},
       documentType: this.storage.kyc.documentType,
       documentTypes: [{
-        name: $t('National ID'),
-        value: '1',
-      }, {
         name: $t('Passport'),
-        value: '2',
+        value: 'passport',
+      }, {
+        name: $t('ID Card'),
+        value: 'id_card',
+      }, {
+        name: $t("Driver's License"),
+        value: 'drivers_license',
       }, {
         name: $t('Residence Permit'),
-        value: '3',
+        value: 'residence_permit',
       }],
       documentNumber: this.storage.kyc.documentNumber,
       countries: this.$account.cards.countries,
