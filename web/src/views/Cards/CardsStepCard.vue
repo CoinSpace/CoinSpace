@@ -273,6 +273,7 @@ export default {
         type="danger"
         :arrow="false"
         :disabled="isLoading"
+        @click="next('remove')"
       >
         <template #before>
           <DeleteIcon />
