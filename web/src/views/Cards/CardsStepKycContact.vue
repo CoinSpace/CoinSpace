@@ -5,6 +5,7 @@ import CsFormInput from '../../components/CsForm/CsFormInput.vue';
 import CsStep from '../../components/CsStep.vue';
 import MainLayout from '../../layouts/MainLayout.vue';
 import { isValidEmail } from '../../lib/helpers.js';
+import { onShowOnHide } from '../../lib/mixins.js';
 
 export default {
   components: {
@@ -14,6 +15,12 @@ export default {
     CsFormInput,
   },
   extends: CsStep,
+  mixins: [onShowOnHide],
+  async onShow() {
+    if (this.args?.errors) {
+      this.errors = this.args?.errors;
+    }
+  },
   data() {
     return {
       isLoading: false,
@@ -26,6 +33,7 @@ export default {
     async confirm() {
       this.isLoading = true;
       try {
+        if (this.errors.email) return;
         if (!isValidEmail(this.email)) {
           return this.errors.email = this.$t('Invalid email');
         }

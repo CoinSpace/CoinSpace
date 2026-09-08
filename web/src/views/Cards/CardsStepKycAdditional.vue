@@ -50,10 +50,12 @@ export default {
           await this.$account.cards.submitKyc(this.storage.kyc);
           this.updateStorage({ status: true });
         } catch (err) {
+          if (err?.message === 'Email already exist') {
+            return this.backTo('kycContact', { errors: { email: this.$t('Email address is already in use') } });
+          }
           this.updateStorage({ status: false, error: err });
-        } finally {
-          this.next('status');
         }
+        this.next('status');
       });
       this.isLoading = false;
     },
