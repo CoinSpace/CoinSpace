@@ -186,6 +186,16 @@ jobs:
         uses: samuelmeuli/action-snapcraft@v2
         env:
           SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAP_TOKEN }}
+      - name: Install LXD
+        if: ${{ matrix.VITE_DISTRIBUTION == 'snap' }}
+        run: |
+          sudo snap install lxd
+          sudo lxd waitready --timeout=60
+          sudo lxd init --auto
+          # docker sets FORWARD to DROP
+          sudo iptables -P FORWARD ACCEPT
+          # group membership needs a re-login
+          sudo chmod 0666 /var/snap/lxd/common/lxd/unix.socket
       - name: Install Flatpak
         if: ${{ matrix.VITE_DISTRIBUTION == 'flatpak' }}
         run: |

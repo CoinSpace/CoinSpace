@@ -212,15 +212,20 @@ export default {
           icon: 'resources/icon.icns',
           executableName: pkg.executableName,
         },
-        snap: {
+        snapcraft: {
+          base: 'core24',
           artifactName: `${pkg.executableName}-${pkg.version}.snap`,
-          summary: pkg.description,
-          category: 'Office;Finance',
           publish: {
             provider: 'snapStore',
             channels: ['edge'],
           },
-          plugs: ['default', 'u2f-devices'],
+          core24: {
+            summary: pkg.description,
+            category: 'Office;Finance',
+            plugs: ['default', 'browser-support', 'u2f-devices'],
+            stagePackages: ['default'],
+            useLXD: true,
+          },
         },
         protocols,
         publish: BRANCH === 'master' ? 'always' : 'never',
