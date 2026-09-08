@@ -58,7 +58,7 @@ export default {
       internalCapture = 'environment'; // add camera https://github.com/apache/cordova-android/pull/1609
     }
     return {
-      filename: '',
+      filename: this.modelValue?.filename || '',
       internalCapture,
     };
   },
@@ -88,7 +88,7 @@ export default {
         } else {
           value = await this.readAsDataUrl(file);
         }
-        this.$emit('update:modelValue', value);
+        this.$emit('update:modelValue', { filename: this.filename, ...value });
       } catch (err) {
         console.error('Failed to read file', err);
         this.filename = '';
