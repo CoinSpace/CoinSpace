@@ -146,7 +146,7 @@ export default {
                     v-if="card.status === 'active'"
                     dir="ltr"
                   >
-                    {{ `${card.balance} ${card.symbol}` }}
+                    {{ $isHiddenBalance ? '*****' : `${card.balance} ${card.symbol}` }}
                   </span>
                   <span v-else>
                     {{ statusLabel[card.status] }}
