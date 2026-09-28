@@ -207,6 +207,7 @@
     </edit-config>
     <preference name="KeyboardDisplayRequiresUserAction" value="false" />
     <preference name="SwiftVersion" value="5.0" />
+    <preference name="deployment-target" value="13.0" />
   </platform>
   <preference name="AutoHideSplashScreen" value="false" />
   <preference name="FadeSplashScreenDuration" value="250"/>
