@@ -184,6 +184,9 @@ jobs:
       - name: Install Snapcraft
         if: ${{ matrix.VITE_DISTRIBUTION == 'snap' }}
         uses: samuelmeuli/action-snapcraft@v2
+        with:
+          # snapcraft 9.1 resolves apps.*.desktop relative to snap/, breaking electron-builder core24
+          channel: 8.x/stable
         env:
           SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAP_TOKEN }}
       - name: Install LXD
