@@ -224,6 +224,8 @@ export default {
             category: 'Office;Finance',
             plugs: ['default', 'browser-support', 'u2f-devices'],
             stagePackages: ['default'],
+            // mesa-2404 GPU rendering is broken on Ubuntu 26.04
+            executableArgs: ['--disable-gpu'],
             useLXD: true,
           },
         },
