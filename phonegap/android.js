@@ -45,6 +45,7 @@ async function run() {
   cordova('plugin add https://github.com/CoinSpace/cordova-plugin-theme#de431abd34ab3ed899c8108656228d6bdf7a4b55 --save');
   cordova('plugin add https://github.com/CoinSpace/cordova-plugin-safariviewcontroller#23d28038e1b46d3fec338a45bb1085895268e79f --save');
   cordova('plugin add https://github.com/CoinSpace/cordova-plugin-navigationbar#5dd64b280bb502482176dff49986b76c121687d0 --save');
+  cordova('plugin add https://github.com/CoinSpace/cordova-plugin-accessibility-data-sensitive#a7dd9a63a91b5cfad8eedc4e1144ea417f125a9e --save');
   cordova('plugin add cordova-plugin-app-review@3.1.0 --save');
   cordova('plugin add cordova-plugin-velda-devicefeedback@0.0.2 --save');
   cordova('plugin add cordova-clipboard@1.3.0 --save');
