@@ -120,6 +120,7 @@
   "Enter passphrase": "Unesite frazu lozinke",
   "Enter your PIN": "Unesite Vaš PIN",
   "Error": "Pogreška",
+  "Error! Please check your internet connection and try again.": "",
   "Error! Please ensure that your Tor VPN is active.": "Greška! Molimo provjerite da je vaš Tor VPN aktivan.",
   "Error! Please try again later.": "Greška! Molimo pokušajte ponovo kasnije.",
   "Exchanging": "Konverzija u tijeku",

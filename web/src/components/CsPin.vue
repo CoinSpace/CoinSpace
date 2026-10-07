@@ -394,6 +394,7 @@ export default {
 
     &__error {
       @include text-md;
+      text-align: center;
     }
   }
 </style>

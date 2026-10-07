@@ -120,6 +120,7 @@
   "Enter passphrase": "ใส่วลีรหัสผ่าน",
   "Enter your PIN": "ใส่ PIN",
   "Error": "ขัดข้อง",
+  "Error! Please check your internet connection and try again.": "",
   "Error! Please ensure that your Tor VPN is active.": "ข้อผิดพลาด! โปรดตรวจสอบว่า Tor VPN ของคุณเปิดใช้งานอยู่",
   "Error! Please try again later.": "ข้อผิดพลาด! โปรดลองอีกครั้งในภายหลัง",
   "Exchanging": "กำลังแลกเปลี่ยน",

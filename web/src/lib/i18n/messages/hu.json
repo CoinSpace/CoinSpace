@@ -120,6 +120,7 @@
   "Enter passphrase": "Jelszóként használt kifejezés megadása",
   "Enter your PIN": "PIN-kód megadása",
   "Error": "Hiba",
+  "Error! Please check your internet connection and try again.": "",
   "Error! Please ensure that your Tor VPN is active.": "Hiba! Kérjük, győződjön meg róla, hogy a Tor VPN-je aktív.",
   "Error! Please try again later.": "Hiba! Kérjük, próbáld újra később.",
   "Exchanging": "Váltás",

@@ -120,6 +120,7 @@
   "Enter passphrase": "Digite a frase secreta",
   "Enter your PIN": "Digite seu código PIN",
   "Error": "Erro",
+  "Error! Please check your internet connection and try again.": "",
   "Error! Please ensure that your Tor VPN is active.": "Erro! Por favor, certifique-se de que seu Tor VPN está ativo.",
   "Error! Please try again later.": "Erro! Tente novamente mais tarde.",
   "Exchanging": "Trocando",

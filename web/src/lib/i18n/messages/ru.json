@@ -120,6 +120,7 @@
   "Enter passphrase": "Введите парольную фразу",
   "Enter your PIN": "Введите свой ПИН-код",
   "Error": "Ошибка",
+  "Error! Please check your internet connection and try again.": "Ошибка! Пожалуйста, проверьте подключение к интернету и попробуйте снова.",
   "Error! Please ensure that your Tor VPN is active.": "Ошибка! Убедитесь, что ваш Tor VPN активен.",
   "Error! Please try again later.": "Ошибка! Пожалуйста, попробуйте позже.",
   "Exchanging": "Идет обмен",

@@ -120,6 +120,7 @@
   "Enter passphrase": "Nhập cụm mật khẩu",
   "Enter your PIN": "Nhập PIN",
   "Error": "Lỗi",
+  "Error! Please check your internet connection and try again.": "",
   "Error! Please ensure that your Tor VPN is active.": "Lỗi! Vui lòng đảm bảo rằng Tor VPN của bạn đang hoạt động.",
   "Error! Please try again later.": "Lỗi! Đã xảy ra sự cố. Vui lòng thử lại sau.",
   "Exchanging": "Đang giao dịch",

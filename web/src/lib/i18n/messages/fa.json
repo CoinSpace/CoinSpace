@@ -120,6 +120,7 @@
   "Enter passphrase": "عبارت عبور را وارد کنید",
   "Enter your PIN": "PIN خود را وارد کنید",
   "Error": "خطا",
+  "Error! Please check your internet connection and try again.": "",
   "Error! Please ensure that your Tor VPN is active.": "خطا! لطفاً مطمئن شوید که Tor VPN شما فعال است.",
   "Error! Please try again later.": "خطا! لطفاً بعداً دوباره تلاش کنید.",
   "Exchanging": "در حال مبادله",

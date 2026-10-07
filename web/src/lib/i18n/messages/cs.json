@@ -120,6 +120,7 @@
   "Enter passphrase": "Zadejte heslovou frázi",
   "Enter your PIN": "Zadejte svůj PIN",
   "Error": "Chyba",
+  "Error! Please check your internet connection and try again.": "",
   "Error! Please ensure that your Tor VPN is active.": "Chyba! Ujistěte se, že váš Tor VPN je aktivní.",
   "Error! Please try again later.": "Chyba! Zkuste to prosím později znovu.",
   "Exchanging": "Směňuji",

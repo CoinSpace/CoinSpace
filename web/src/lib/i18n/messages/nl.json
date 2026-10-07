@@ -120,6 +120,7 @@
   "Enter passphrase": "Wachtwoord invoeren",
   "Enter your PIN": "Uw PIN invoeren",
   "Error": "Fout",
+  "Error! Please check your internet connection and try again.": "",
   "Error! Please ensure that your Tor VPN is active.": "Fout! Zorg ervoor dat uw Tor VPN actief is.",
   "Error! Please try again later.": "Fout! Probeer het opnieuw.",
   "Exchanging": "Uitwisselen",

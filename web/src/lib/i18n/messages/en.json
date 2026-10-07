@@ -120,6 +120,7 @@
   "Enter passphrase": "Enter passphrase",
   "Enter your PIN": "Enter your PIN",
   "Error": "Error",
+  "Error! Please check your internet connection and try again.": "Error! Please check your internet connection and try again.",
   "Error! Please ensure that your Tor VPN is active.": "Error! Please ensure that your Tor VPN is active.",
   "Error! Please try again later.": "Error! Please try again later.",
   "Exchanging": "Exchanging",
