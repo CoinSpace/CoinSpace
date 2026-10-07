@@ -120,7 +120,7 @@
   "Enter passphrase": "أدخل عبارة المرور",
   "Enter your PIN": "أدخل رقم PIN الخاص بك",
   "Error": "خطأ",
-  "Error! Please check your internet connection and try again.": "",
+  "Error! Please check your internet connection and try again.": "خطأ! يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.",
   "Error! Please ensure that your Tor VPN is active.": "خطأ! يُرجى التأكد من أن تور مفعّل.",
   "Error! Please try again later.": "خطأ! يرجى المحاولة لاحقًا.",
   "Exchanging": "جارٍ المبادلة",

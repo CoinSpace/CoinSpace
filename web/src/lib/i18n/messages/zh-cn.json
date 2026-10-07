@@ -120,7 +120,7 @@
   "Enter passphrase": "输入密码短语",
   "Enter your PIN": "输入PIN码",
   "Error": "错误",
-  "Error! Please check your internet connection and try again.": "",
+  "Error! Please check your internet connection and try again.": "错误！请检查您的网络连接，然后重试。",
   "Error! Please ensure that your Tor VPN is active.": "错误！请确保您的Tor VPN已激活。",
   "Error! Please try again later.": "错误！请稍后再试。",
   "Exchanging": "正在兑换",

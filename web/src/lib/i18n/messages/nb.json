@@ -120,7 +120,7 @@
   "Enter passphrase": "Oppgi passordfrase",
   "Enter your PIN": "Oppgi din PIN",
   "Error": "Feil",
-  "Error! Please check your internet connection and try again.": "",
+  "Error! Please check your internet connection and try again.": "Feil! Sjekk internettforbindelsen og forsøk igjen.",
   "Error! Please ensure that your Tor VPN is active.": "Feil! Vennligst sørg for at din Tor VPN er aktiv.",
   "Error! Please try again later.": "Feil! Forsøk igjen senere.",
   "Exchanging": "Veksler",

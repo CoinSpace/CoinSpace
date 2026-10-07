@@ -120,7 +120,7 @@
   "Enter passphrase": "パスフレーズを入力",
   "Enter your PIN": "PINを入力",
   "Error": "エラー",
-  "Error! Please check your internet connection and try again.": "",
+  "Error! Please check your internet connection and try again.": "エラー！インターネット接続を確認して、もう一度お試しください。",
   "Error! Please ensure that your Tor VPN is active.": "エラー！お使いのTor VPNがアクティブであることを確認してください。",
   "Error! Please try again later.": "エラー！後でもう一度お試しください。",
   "Exchanging": "交換実Ž{中",

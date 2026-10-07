@@ -120,7 +120,7 @@
   "Enter passphrase": "הזן ביטוי סיסמה",
   "Enter your PIN": "הזן את ה-PIN שלך",
   "Error": "שגיאה",
-  "Error! Please check your internet connection and try again.": "",
+  "Error! Please check your internet connection and try again.": "שגיאה! אנא בדוק את החיבור לאינטרנט ונסה שוב.",
   "Error! Please ensure that your Tor VPN is active.": "שגיאה! ודא שה-Tor VPN שלך פעיל.",
   "Error! Please try again later.": "שגיאה! אנא נסה שוב מאוחר יותר.",
   "Exchanging": "מתבצעת החלפה",

@@ -120,7 +120,7 @@
   "Enter passphrase": "Parolayı Gir",
   "Enter your PIN": "PIN'inizi girin",
   "Error": "Hata",
-  "Error! Please check your internet connection and try again.": "",
+  "Error! Please check your internet connection and try again.": "Hata! Lütfen internet bağlantınızı kontrol edip tekrar deneyin.",
   "Error! Please ensure that your Tor VPN is active.": "Hata! Lütfen Tor VPN'inizin aktif olduğundan emin olun.",
   "Error! Please try again later.": "Hata! Lütfen daha sonra tekrar deneyin.",
   "Exchanging": "Çevriliyor",

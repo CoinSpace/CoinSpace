@@ -120,7 +120,7 @@
   "Enter passphrase": "Skriv in lösenordsfras",
   "Enter your PIN": "Skriv in din PIN",
   "Error": "Fel",
-  "Error! Please check your internet connection and try again.": "",
+  "Error! Please check your internet connection and try again.": "Fel! Kontrollera din internetanslutning och försök igen.",
   "Error! Please ensure that your Tor VPN is active.": "Fel! Var god se till att din Tor-VPN är aktiv.",
   "Error! Please try again later.": "Fel! Var vänlig prova igen senare.",
   "Exchanging": "Byte",

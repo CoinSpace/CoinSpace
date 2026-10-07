@@ -120,7 +120,7 @@
   "Enter passphrase": "Gib Deine Passphrase ein",
   "Enter your PIN": "Gib Deinen PIN ein",
   "Error": "Fehler",
-  "Error! Please check your internet connection and try again.": "",
+  "Error! Please check your internet connection and try again.": "Fehler! Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.",
   "Error! Please ensure that your Tor VPN is active.": "Fehler! Bitte stellen Sie sicher, dass Ihr Tor-VPN aktiv ist.",
   "Error! Please try again later.": "Fehler! Bitte versuchen Sie es später erneut.",
   "Exchanging": "Tauschen",
