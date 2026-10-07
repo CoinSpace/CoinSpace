@@ -122,7 +122,7 @@ export default {
         v-if="error"
         class="&__error"
       >
-        {{ $account.unknownError() }}
+        {{ $account.unknownError(error) }}
       </div>
 
       <CsLoader v-if="isLoading" />

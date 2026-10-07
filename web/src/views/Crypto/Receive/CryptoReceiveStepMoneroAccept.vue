@@ -53,7 +53,7 @@ export default {
           // eslint-disable-next-line max-len
           return this.error = this.$t('Transaction not found or has less than 10 confirmations. Please wait 20 minutes and try again.');
         }
-        this.error = this.$account.unknownError();
+        this.error = this.$account.unknownError(err);
         console.error(err);
       } finally {
         this.isLoading = false;

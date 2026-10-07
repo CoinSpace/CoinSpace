@@ -779,8 +779,11 @@ export default class Account extends EventEmitter {
     this.#clientStorage.setCardholderId(cardholderId);
   }
 
-  unknownError() {
+  unknownError(error) {
     if (this.isOnion && navigator.onLine) return i18n.global.t('Error! Please ensure that your Tor VPN is active.');
+    if (error instanceof errors.NetworkError) {
+      return i18n.global.t('Error! Please check your internet connection and try again.');
+    }
     return i18n.global.t('Error! Please try again later.');
   }
 }

@@ -40,7 +40,7 @@ export default {
           return this.$t('Card issuance has been temporarily suspended.');
         }
         console.error(this.storage.error);
-        return this.$account.unknownError();
+        return this.$account.unknownError(this.storage.error);
       }
     },
     action() {

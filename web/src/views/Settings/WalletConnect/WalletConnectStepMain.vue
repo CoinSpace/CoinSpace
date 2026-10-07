@@ -79,7 +79,7 @@ export default {
         });
         this.next('gas');
       } catch (err) {
-        this.error = this.$account.unknownError();
+        this.error = this.$account.unknownError(err);
         console.error(err);
         const walletConnect = await this.$account.walletConnect();
         await walletConnect.rejectSessionRequest(request, err.message);
@@ -104,7 +104,7 @@ export default {
         });
         this.next('sign');
       } catch (err) {
-        this.error = this.$account.unknownError();
+        this.error = this.$account.unknownError(err);
         console.error(err);
         const walletConnect = await this.$account.walletConnect();
         await walletConnect.rejectSessionRequest(request, err.message);
@@ -134,7 +134,7 @@ export default {
         });
         this.next('sign');
       } catch (err) {
-        this.error = this.$account.unknownError();
+        this.error = this.$account.unknownError(err);
         console.error(err);
         const walletConnect = await this.$account.walletConnect();
         await walletConnect.rejectSessionRequest(request, err.message);

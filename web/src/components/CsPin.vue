@@ -181,7 +181,7 @@ export default {
           window.taptic?.error();
           break;
         default:
-          this.error = this.$account.unknownError();
+          this.error = this.$account.unknownError(error);
           this.value = '';
           console.error(error);
       }

@@ -72,7 +72,11 @@ export default {
           this.error = this.$t('Not supported');
           return;
         }
-        this.error = this.$account.unknownError();
+        if (err.message?.includes?.('No internet connection detected')) {
+          this.error = this.$t('Error! Please check your internet connection and try again.');
+          return;
+        }
+        this.error = this.$account.unknownError(err);
         console.error(err);
       } finally {
         this.isLoading = false;

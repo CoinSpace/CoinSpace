@@ -81,7 +81,7 @@ export default {
           priceCard: await this.$account.market.getPrice('tether@ethereum', this.$currency),
         });
       } catch (err) {
-        this.error = this.$account.unknownError();
+        this.error = this.$account.unknownError(err);
         console.error(err);
       } finally {
         this.isLoading = false;
