@@ -3,6 +3,7 @@ import ChangeNOWExchange from './ChangeNOWExchange.js';
 import ChangellyExchange from './ChangellyExchange.js';
 import ExchangeStorage from '../storage/ExchangeStorage.js';
 import LetsExchange from './LetsExchange.js';
+import WhyNot from './WhyNot.js';
 
 import {
   Amount,
@@ -28,7 +29,7 @@ export default class Exchanges {
       ...config,
       baseURL: this.#account.getBaseURL('swap'),
     });
-    for (const Exchange of [ChangellyExchange, ChangeNOWExchange, ChangeHeroExchange, LetsExchange]) {
+    for (const Exchange of [ChangellyExchange, ChangeNOWExchange, ChangeHeroExchange, LetsExchange, WhyNot]) {
       this.#exchanges.push(new Exchange({ request: this.#request, account }));
     }
   }
