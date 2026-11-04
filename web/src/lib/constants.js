@@ -6,6 +6,7 @@ export const BITCOIN_FAMILY = [
   'litecoin',
   'dash',
   'dogecoin',
+  'zcash',
 ];
 
 export const EVM_FAMILY = [
@@ -106,6 +107,8 @@ export function getApiNode(platform, isOnion) {
       return isOnion ? import.meta.env.VITE_API_DOGE_URL_TOR : import.meta.env.VITE_API_DOGE_URL;
     case 'litecoin':
       return isOnion ? import.meta.env.VITE_API_LTC_URL_TOR : import.meta.env.VITE_API_LTC_URL;
+    case 'zcash':
+      return isOnion ? import.meta.env.VITE_API_ZEC_URL_TOR : import.meta.env.VITE_API_ZEC_URL;
     // Ethereum-like
     case 'ethereum':
       return isOnion ? import.meta.env.VITE_API_ETH_URL_TOR : import.meta.env.VITE_API_ETH_URL;
