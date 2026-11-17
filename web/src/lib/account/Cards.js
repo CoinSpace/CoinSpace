@@ -51,6 +51,7 @@ export default class Cards {
     'binance-smart-chain',
     'polygon',
     'tron',
+    'solana',
     // make sure that wallet supports "buildTransaction" method
   ];
 

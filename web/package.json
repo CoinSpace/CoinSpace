@@ -35,7 +35,7 @@
     "@coinspace/cs-kaspa-wallet": "^0.0.5",
     "@coinspace/cs-monero-wallet": "^3.0.2",
     "@coinspace/cs-ripple-wallet": "^2.3.0",
-    "@coinspace/cs-solana-wallet": "^2.4.0",
+    "@coinspace/cs-solana-wallet": "^2.4.2",
     "@coinspace/cs-stellar-wallet": "^2.2.0",
     "@coinspace/cs-sui-wallet": "^1.2.0",
     "@coinspace/cs-toncoin-wallet": "^1.4.0",
