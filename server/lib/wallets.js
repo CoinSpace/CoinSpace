@@ -111,8 +111,14 @@ async function pinVerify(device, pinHash, type) {
     await _unsuccessfulAuth(device, type, 'pin');
   }
   const wallets = db.collection(COLLECTION);
-  await wallets.updateOne({
-    'devices._id': device._id,
+  const { matchedCount } = await wallets.updateOne({
+    devices: {
+      $elemMatch: {
+        _id: device._id,
+        [`failed_attempts.${type}_pin`]: { $not: { $gte: MAX_FAILED_ATTEMPTS } },
+        [`failed_attempts.${type}_platform`]: { $not: { $gte: MAX_FAILED_ATTEMPTS } },
+      },
+    },
   }, {
     $set: {
       [`devices.$.failed_attempts.${type}_pin`]: 0,
@@ -120,6 +126,9 @@ async function pinVerify(device, pinHash, type) {
       'devices.$.date': new Date(),
     },
   });
+  if (matchedCount === 0) {
+    throw createError(410, 'Removed by max failed attempts');
+  }
 }
 
 async function platformOptions(device, type) {
@@ -152,17 +161,26 @@ async function platformVerify(device, body, type) {
     await _unsuccessfulAuth(device, type, 'platform');
   }
   const wallets = db.collection(COLLECTION);
-  await wallets.updateOne({
-    'devices._id': device._id,
+  const { matchedCount } = await wallets.updateOne({
+    devices: {
+      $elemMatch: {
+        _id: device._id,
+        [`failed_attempts.${type}_pin`]: { $not: { $gte: MAX_FAILED_ATTEMPTS } },
+        [`failed_attempts.${type}_platform`]: { $not: { $gte: MAX_FAILED_ATTEMPTS } },
+      },
+    },
   }, {
     $set: {
       [`devices.$.failed_attempts.${type}_pin`]: 0,
       [`devices.$.failed_attempts.${type}_platform`]: 0,
       [`devices.$.challenges.${type}_platform`]: null,
-      'devices.$.authenticator.counter': authenticationInfo.counter,
+      'devices.$.authenticator.counter': authenticationInfo.newCounter,
       'devices.$.date': new Date(),
     },
   });
+  if (matchedCount === 0) {
+    throw createError(410, 'Removed by max failed attempts');
+  }
 }
 
 // TODO: need to test
@@ -207,8 +225,13 @@ async function crossplatformVerify(device, body, type) {
     await _unsuccessfulAuth(device, type, 'crossplatform');
   }
   const wallets = db.collection(COLLECTION);
-  await wallets.updateOne({
-    'devices._id': device._id,
+  const { matchedCount } = await wallets.updateOne({
+    devices: {
+      $elemMatch: {
+        _id: device._id,
+        [`failed_attempts.${type}_crossplatform`]: { $not: { $gte: MAX_FAILED_ATTEMPTS } },
+      },
+    },
   }, {
     $set: {
       [`devices.$.failed_attempts.${type}_crossplatform`]: 0,
@@ -216,6 +239,9 @@ async function crossplatformVerify(device, body, type) {
       'devices.$.date': new Date(),
     },
   });
+  if (matchedCount === 0) {
+    throw createError(410, 'Removed by max failed attempts');
+  }
   await wallets.updateOne({
     _id: device.wallet._id,
     'authenticators.credentialID': Buffer.from(authenticationInfo.credentialID).toString('base64url'),
@@ -427,9 +453,19 @@ async function getDevice(deviceId) {
 
 async function _unsuccessfulAuth(device, tokenType, authType) {
   const wallets = db.collection(COLLECTION);
-  const attempt = (device.failed_attempts || {})[`${tokenType}_${authType}`] || 0;
+  const { value: wallet } = await wallets.findOneAndUpdate({
+    'devices._id': device._id,
+  }, {
+    $inc: { [`devices.$.failed_attempts.${tokenType}_${authType}`]: 1 },
+  }, {
+    returnDocument: 'after',
+  });
+  const current = wallet && wallet.devices.find(item => item._id === device._id);
 
-  if (attempt + 1 >= MAX_FAILED_ATTEMPTS) {
+  if (!current) {
+    throw createError(410, 'Removed by max failed attempts');
+  }
+  if (current.failed_attempts[`${tokenType}_${authType}`] >= MAX_FAILED_ATTEMPTS) {
     await wallets.updateOne({
       'devices._id': device._id,
     }, {
@@ -437,15 +473,10 @@ async function _unsuccessfulAuth(device, tokenType, authType) {
       $pull: { devices: { _id: device._id } },
     });
     throw createError(410, 'Removed by max failed attempts');
-  } else {
-    await wallets.updateOne({
-      'devices._id': device._id,
-    }, {
-      $inc: { [`devices.$.failed_attempts.${tokenType}_${authType}`]: 1 },
-    });
-    throw createError(401, 'Unauthorized device');
   }
+  throw createError(401, 'Unauthorized device');
 }
+
 async function _setChallenge(device, challenge, tokenType, authType) {
   const wallets = db.collection(COLLECTION);
   await wallets.updateOne({
