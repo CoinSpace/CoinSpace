@@ -41,5 +41,6 @@ Supported coins:
 - Toncoin (TON) and Jettons
 - TRON (TRX) and TRC20 tokens
 - XRP (XRP)
+- Zcash (ZEC)
 
 This project is tested with BrowserStack
