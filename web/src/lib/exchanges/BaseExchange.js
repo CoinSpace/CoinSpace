@@ -99,7 +99,7 @@ export default class BaseExchange {
 
   async loadExchanges() {
     try {
-      return this.#loadExchanges();
+      await this.#loadExchanges();
     } catch (err) {
       console.error(err);
     }
@@ -146,7 +146,7 @@ export default class BaseExchange {
 
   async #loadExchange(id) {
     const [update] = await this.#request({
-      url: `api/v1/transactions/${this.#id}/`,
+      url: `api/v1/transactions/${this.#id}`,
       method: 'get',
       params: {
         transactions: id,
@@ -159,6 +159,7 @@ export default class BaseExchange {
         ...this.#exchanges[index],
         ...update,
       };
+      this.#storage.set('exchanges', this.#exchanges);
       await this.#storage.save();
     }
     return this.#exchanges[index];
@@ -265,8 +266,8 @@ export default class BaseExchange {
   }
 
   #assignExchange(transaction, exchange) {
-    if (!exchange.cryptoFrom) return;
-    if (!exchange.cryptoTo) return;
+    if (!exchange.cryptoFrom) return transaction;
+    if (!exchange.cryptoTo) return transaction;
     transaction.exchange = {
       id: exchange.id,
       trackUrl: exchange.trackUrl,
